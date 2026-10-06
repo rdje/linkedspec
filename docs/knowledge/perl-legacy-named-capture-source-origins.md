@@ -14,7 +14,7 @@ tags: [perl, actionir, legacy, capture, marks, source-provenance]
 evidence: "All17 named capture regex producers preserve symbolic mark/start-end order, original spelling, scalar bounds and actual event/argument identities. 4415 immutable originals/three overlays/eight accepted commands retain112 contracts/115 cases/227 events under three seeds; private origins71→105. Original RED17/GREEN67; eleven suites1245 groups including Phase01035 and152 evidence RED pass. Book58 inputs/seven examples/three chapters/15 RED and30-hash historical freeze pass. Four initial commands retain the strictly rejected wrapper warning; replay is unfiltered, startup .7 remains its owner. Public compiler/callback channels and original grammar stay exact."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t t/complete_named_mark_contract.t"
-  - "The .1.4.3 review is historical at d0b40ade098e1c2e8e7fc983ee2d9f3980205e46; current mark .1.4.4 recurrence preserves all named origins."
+  - "The .1.4.3 review is historical at d0b40ade098e1c2e8e7fc983ee2d9f3980205e46; current cursor/input .1.4.5 recurrence preserves all named origins."
 ---
 
 # Keep marks and source coordinates at their original producer

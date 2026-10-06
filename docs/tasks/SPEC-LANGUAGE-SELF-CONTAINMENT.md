@@ -3027,10 +3027,32 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Next: Activate cursor/input provenance .1.4.5 from clean committed HEAD; retain all15 original producers, balanced input_slice arguments, exact own coordinates and public channels. Entry/match, quoted/comment membership, replacement and audits stay owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5`
-  Status: `pending`
+  Status: `done`
   Goal: Retain original source origins for15 cursor/input dispatcher contracts.
   Dependencies: `.1.4.4`.
   Acceptance: Zero-argument cursor/input/control producers and balanced input_slice expression preserve original recognizers/args/raw, exact repeated source intervals/actual objects and public compiler channels; source-location/cursor consumers and original slash/quote contexts stay unchanged.
+  Activation: Clean 907934281c4422baba6ef6580bd4080663c87e9e after mark-control source hooks; Git clean/brief0 and no required jobs. Retrieved canonical source-family and mark-source facts, all15 original cursor/input bodies, Contracts lowerers, literal source fixture and relevant source-location/mental-model book. Original input_slice scanner retains the balanced raw expression and empty args; the separate public compiler lower callback is unchanged.
+  Owned paths: LegacyRules.pm only15 original snapshots/wrappers; standard helper-source fixture; own unchanged115-case literal/probe/oracle/immutable before-after inputs/full streams/source inverse/reviewer/book/freeze/claim; cursor/input fact and current/history source-family routes, derived map; task/index/roadmaps/live/resume/bounded history. Scratch .linkedspec-data/scratch/legacy-cursor-source. Freeze prior mark claim30 bindings at activation before source/fixture/book/card mutation; all earlier artifact bytes retained.
+  Verification tier: `focused`
+  Focused checks: All112 contracts/115 cases/three seeds, original empty arguments and balanced input_slice raw expression, repeated Unicode-CRLF scalar intervals and actual event/constructor/argument identities; all public callback/compiler channels unchanged. Original RED/repaired GREEN helper-source fixture and eleven boundary/typed/source/AST/order/nested/trace/named/Phase0 suites; whole-file inverse restricted to15 hooks; strict complete Git/overlay/producer/stream/exit/ordered TAP guards and actual reason-specific corruption RED. Rendered book/freeze/claim/Knowledge/memory/bounded histories/diff and all normal doctrines.
+  Canonical trigger: none; private origins preserve original public/runtime/grammar behavior. Full-family .1.4.7, scheduled rollover infrastructure and push remain canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5.json`
+  Known limits: Executable quoted/comment membership, replacement, entry/match and other backends remain separate. Wrapper startup .7 owns establishment/liveness; preserve and reject actual warned captures, replay unfiltered and keep recovery/purge prohibited. Existing named-mark clearing-observation repair stays with CONFORMANCE-SOURCE-READING.2.7.
+  Verification: All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned. Whole-file inverse removes only15 snapshots/wrappers to restore clean907934. All input/producer/channel/exit/ordered TAP identities pass; required jobs complete.
+  Workflow correction: Copied freeze instrument initially selected the already historical .1.4.3 claim and stopped on its live-mode assertion without changing that claim. Corrected to the intended .1.4.4; retain exact activation Git inputs and overwrite the mistaken unpublished before-mark capsule. Fixture preparation preceded successful freeze, so frozen validation uses all original committed Git bytes, not mutable working-tree inputs.
+  Book instrument correction: Initial actual render succeeded, but the new argument-authority corruption matched a contiguous sentence absent from raw HTML because Markdown preserved a newline before empty. It changed zero bytes, so strict review correctly stopped with accepted corruption. Retained complete initial book producer/report/manifest/capsule; inspected exact HTML bytes, narrowed mutation to the actual contiguous phrase and rerender final instrument. No book/runtime semantic change or verification waiver.
+  Runtime history: Completed command was bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5-capture.py after. At 2026-10-06 05:27 UTC, actual capture PID16040 owned the prove/Phase0 ancestry rooted in .linkedspec-data/scratch/legacy-cursor-source/legacy-after-u42o3wwe; a Phase0 child was CPU-active. IDs are dated observations, never kill/liveness authority. Inspect complete after-observations.json and verify exact commands/tree before resuming; do not start a duplicate while this required capture is active.
+  Handoff preparation: Owned scratch finalize-docs.py is syntax-checked and refuses completion without verification.json/149 observed controls/1274 groups and final book19 controls. The claim producer rechecks initial retained render and final accepted proof; no final claim is published until the runtime reviewer passes.
+  Runtime reviewer correction: Strict positive compatibility/source/streams passed, but the source-regex corruption initially targeted literal backslash-b input_slice instead of the actual recursive named expr group. Exact source inspection proved zero replacement bytes; reviewer stopped with accepted corruption and published no verification. Retain initial-review.py, correct to the actual unique recursive prefix and require every final mutation to change its input before reason-specific RED. Reuse unchanged complete runtime inputs/channels; final reviewer is rerun and retains the actual correction proof.
+  Acceptance Checklist:
+  - [x] All15 original raw/empty args and all112 public/compiler/callback channels preserved.
+  - [x] Original Unicode-CRLF repeated scalar intervals and actual returned/constructor/argument references verified.
+  - [x] Strict original RED15/GREEN96, eleven suites1274 groups and149 reason-specific controls observed.
+  - [x] Stable-ID cursor/input/entry guards and balanced-raw/regex/snapshot controls distinguish false acceptance.
+  - [x] Book58/11/3/19,30-hash freeze, claim/Knowledge/live/roadmap/resume/bounded histories synchronized.
+  - [x] Memory/doctrines/diff and normal per-leaf landing; brief0 and clean HEAD required before next activation.
+  Next: Activate entry/match provenance .1.4.6 from clean committed HEAD; retain all32 original producers, index/name/alias arguments, exact own coordinates and public channels. Scheduled rollover repair precedes complete-family canonical acceptance; quoted/comment membership, replacement and audits stay owned.
+  Staging correction: First path list mistakenly applied the source-origins suffix to the partition fact-card basename; Git rejected that nonexistent path. Corrected to the existing explicit partition-card path before staging/commit; no source, fixture or proof input changed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6`
   Status: `pending`
@@ -3350,7 +3372,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.3.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` | `done` | Private argument frames verified;138 original occurrences/RED10-GREEN15. |
 | 43.4.2.0.1.3.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` | `done` | Recursive Flow verified;147 origins/RED6-GREEN7/1180 groups. |
 | 43.4.2.0.1.3.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` | `done` | Immutable4233/no overlays;16 contracts/837 groups; canonical receipt gates acceptance. |
-| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `active` | Original diagnosis, call/anonymous/named/mark origins and boundary lexical repairs verified; cursor/input next. |
+| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `active` | Original diagnosis, call/anonymous/named/mark/cursor-input origins and boundary lexical repairs verified; entry/match next. |
 | 43.4.2.0.1.4.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` | `done` | Original112-contract diagnosis/115 cases/103 groups/123 RED; Granted finite note admission; exact canonical landing. |
 | 43.4.2.0.1.4.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` | `pending` | P2 rollover EOF; after .1.4.6 before .1.4.7, exact source/whitespace canonical repair. |
 | 43.4.2.0.1.4.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` | `done` | Seven hooks/eight contracts; final RED9/GREEN23,2→18 origins,1147 consumers/140 RED and byte-exact original source reconstruction. |
@@ -3359,7 +3381,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` | `done` | Anonymous26 hooks; RED27/GREEN50/1225 groups/159 RED,18→71 origins; named capture next. |
 | 43.4.2.0.1.4.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` | `done` | Named17 hooks;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial wrapper warning retained, mark controls next. |
 | 43.4.2.0.1.4.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` | `done` | Mark14 hooks;105→133 origins/RED14-GREEN81/1259 groups/148 RED; cursor/input next. |
-| 43.4.2.0.1.4.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` | `pending` | Cursor/input15 producers after mark controls. |
+| 43.4.2.0.1.4.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` | `done` | Cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED; entry/match next. |
 | 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `pending` | Entry/match32 producers after cursor/input. |
 | 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `pending` | Fresh full-family canonical acceptance after all producers and rollover EOF repair. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
@@ -3405,6 +3427,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+- `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned.
 
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — All14 mark-control regex producers preserve original symbolic mark/target-source order, physical bounds and actual event/argument identities. 4438 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins105→133. Original RED14/GREEN81; eleven suites1259 groups including Phase01035 and148 evidence RED pass. Book58 inputs/nine examples/three chapters/17 RED and33-hash historical freeze pass. Public compiler/callback channels and original grammar remain exact; missing-source clearing observation .2.7 and wrapper startup .7 remain separately owned.
 
@@ -3480,6 +3504,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5 - retain cursor/input source origins` — original15 snapshots and full focused source compatibility; Git owns identity.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4 - retain mark-control source origins` — original14 snapshots and full focused source compatibility; Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3 - retain named capture source origins` — original17 source hooks and strict focused acceptance with retained initial wrapper rejection; Git owns identity.
@@ -3537,6 +3563,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-06`: `.1.4.5` verifies original15 cursor/input origins, balanced raw and empty args; entry/match32 `.1.4.6` next. Rollover .1.4.0.1.1.1 precedes family .1.4.7.
 
 - `2026-10-06`: `.1.4.4` verifies original14 mark-control origins and exact target/source order; cursor/input15 `.1.4.5` next. Existing clearing-observation and wrapper repairs remain owned.
 

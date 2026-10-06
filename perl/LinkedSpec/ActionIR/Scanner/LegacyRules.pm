@@ -1015,7 +1015,11 @@ sub _scan_contract_cursor_pos {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_pos\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1024,7 +1028,11 @@ sub _scan_contract_cursor_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_line\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1033,7 +1041,11 @@ sub _scan_contract_cursor_col {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_col\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1042,7 +1054,11 @@ sub _scan_contract_cursor_rest {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_rest\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1051,7 +1067,11 @@ sub _scan_contract_cursor_rest_len {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcursor_rest_len\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1060,7 +1080,11 @@ sub _scan_contract_input_text {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_text\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1069,7 +1093,11 @@ sub _scan_contract_input_slice {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>input_slice\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- push @events, {raw => $+{expr}, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1078,7 +1106,11 @@ sub _scan_contract_input_len {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_len\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1087,7 +1119,11 @@ sub _scan_contract_input_end_pos {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_end_pos\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1096,7 +1132,11 @@ sub _scan_contract_input_end_line {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_end_line\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1105,7 +1145,11 @@ sub _scan_contract_input_end_col {
  my ($code) = @_;
  my @events;
 while ($code =~ /\binput_end_col\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1402,7 +1446,11 @@ sub _scan_contract_save_cursor {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bsave_cursor\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1411,7 +1459,11 @@ sub _scan_contract_restore_cursor {
  my ($code) = @_;
  my @events;
 while ($code =~ /\brestore_cursor\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1420,7 +1472,11 @@ sub _scan_contract_rewind_entry_start {
  my ($code) = @_;
  my @events;
 while ($code =~ /\brewind_entry_start\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -1429,7 +1485,11 @@ sub _scan_contract_rewind_match_start {
  my ($code) = @_;
  my @events;
 while ($code =~ /\brewind_match_start\s*\(\s*\)/g) {
- push @events, {raw => $&, args => {}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }

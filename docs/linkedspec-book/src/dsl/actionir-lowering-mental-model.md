@@ -472,7 +472,29 @@ mark_copy(first, second); mark_copy(first, second)
 Position, line, column, existence and clearing calls retain the same symbolic
 mark names and public compiler output. This source work changes no runtime mark
 storage, missing-source clearing semantics or executable quoted/comment membership.
-Cursor/input and entry/match origins remain subsequent work.
+Cursor/input producers also retain their original physical occurrences. Each of
+these15 producers saves its match bounds before constructing the event. Position,
+line, column, rest, input, save/restore and rewind calls keep their original raw
+spelling and empty argument object. Equal calls retain distinct scalar frames:
+
+```text
+cursor_pos(); cursor_pos()
+# original scalar intervals: [0, 12), [14, 26)
+```
+
+The balanced `input_slice` recognizer keeps the complete nested expression,
+including quoted commas, as its original raw event. Its scanner arguments remain
+empty; the separate compiler lowerer interprets the expression as before. Source
+provenance adds no argument parser or new grammar:
+
+```text
+input_slice(1, nested("a,b")); input_slice(1, nested("a,b"))
+# empty scanner args; scalar intervals: [0, 29), [31, 60)
+```
+
+These private frames change no cursor movement, runtime source projections,
+public event schema or executable quoted/comment membership. Entry/match origins
+remain subsequent work.
 
 ### Original method argument boundaries
 

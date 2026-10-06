@@ -13,7 +13,7 @@ tags: [perl, actionir, legacy, marks, source-provenance]
 evidence: "All14 mark-control regex producers preserve original symbolic mark/target-source order, physical bounds and actual event/argument identities. 4438 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins105→133. Original RED14/GREEN81; eleven suites1259 groups including Phase01035 and148 evidence RED pass. Book58 inputs/nine examples/three chapters/17 RED and33-hash historical freeze pass. Public compiler/callback channels and original grammar remain exact; missing-source clearing observation .2.7 and wrapper startup .7 remain separately owned."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t t/complete_named_mark_contract.t"
-  - "Replay .1.4.4-review.py at its accepted input boundary; later producer hooks require their own proof."
+  - "The .1.4.4 review is historical at907934281c4422baba6ef6580bd4080663c87e9e; current cursor/input .1.4.5 recurrence preserves all mark origins."
 ---
 
 # Original mark arguments and private physical source have distinct roles
@@ -45,7 +45,8 @@ separately distinguished by its retained seeded control. See the mark-copy
 section of [[conformance-perl-consumer-reading]]. This source acceptance cannot
 close that unrelated fixture gap.
 
-Cursor/input and entry/match producers, executable quoted/comment membership,
+Cursor/input origins now belong to [[perl-legacy-cursor-input-source-origins]].
+Entry/match producers, executable quoted/comment membership,
 source-based replacement and other backends remain separately owned. Wrapper
 startup .7 still owns group-establishment/denied-liveness repair; recovery/purge
 remain prohibited and provenance tests admit no lifecycle guarantee.

@@ -1,0 +1,774 @@
+{
+  "complete": true,
+  "revision": "907934281c4422baba6ef6580bd4080663c87e9e",
+  "regular_inputs": 4459,
+  "overlays": 3,
+  "fixture_replacement": "t/actionir_helper_source_provenance.t",
+  "production_delta": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+  "contracts": 112,
+  "cases": 115,
+  "commands": 8,
+  "seeds": 3,
+  "before_origins": 133,
+  "after_origins": 163,
+  "events_per_seed": 227,
+  "before_red_groups": 15,
+  "after_green_groups": 96,
+  "fixture_suites": 11,
+  "fixture_groups": 1274,
+  "compiler_cases_per_seed": 11,
+  "controls": [
+    {
+      "name": "call omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "push_single_arg omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "push_indexed_arg omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "push_target_arg omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "push_target_indexed_arg omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "push_scope_target_arg omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "return_general omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "return omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_macro omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_if omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_if_macro omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_until_cursor omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_until_cursor_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_until_boundary omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_until_cursor omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_until_cursor_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_length omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "start_capture_slice omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "start_capture_slice_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_slice_here omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_rest omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_rest_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_rest_length omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_rest omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_rest_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_slice omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_slice_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_from_rule_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_len_from_rule_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_rest_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_rest_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_rest_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_rest_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_until_cursor_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_until_cursor_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_until_cursor_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_until_cursor_len_from_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_between_marks omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_len_between_marks omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_between_marks omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "capture_take_between_len_marks omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_input_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_input_end omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_here omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_entry_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_entry_end omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_match_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_match_end omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_copy omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_capture_slice omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "clear_mark omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_exists omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mark_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_rest omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_rest_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_slice omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_text omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_end_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_end_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "input_end_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_text omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_group omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_groups omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_named omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_has omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_map omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_named_map omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_start_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_start_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_start_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_end_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_end_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "entry_end_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_text omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_group omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_groups omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_named omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_has omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_map omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_named_map omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_len omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_start_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_end_pos omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_end_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_end_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_start_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_line omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_start_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "match_col omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "save_cursor omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "restore_cursor omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "rewind_entry_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "rewind_match_start omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "cursor_pos missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "cursor_line missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "cursor_col missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "cursor_rest missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "cursor_rest_len missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_slice missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_text missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_len missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_end_pos missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_end_line missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "input_end_col missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "save_cursor missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "restore_cursor missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "rewind_entry_start missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "rewind_match_start missing source origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "forged origin_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "forged constructed_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "forged constructed_args",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "wrong repeated source interval",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "lost callback effects",
+      "observed": "RED",
+      "reason": "exact default callback sequence and results"
+    },
+    {
+      "name": "changed compiler dump",
+      "observed": "RED",
+      "reason": "all original public callback compiler channels unchanged"
+    },
+    {
+      "name": "lost command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "lost guard",
+      "observed": "RED",
+      "reason": "complete runtime guards"
+    },
+    {
+      "name": "forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "forged producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique original Git population"
+    },
+    {
+      "name": "lost overlay",
+      "observed": "RED",
+      "reason": "exact overlay population"
+    },
+    {
+      "name": "forged successful fixture exit",
+      "observed": "RED",
+      "reason": "complete runtime guards"
+    },
+    {
+      "name": "lost ordered TAP reach",
+      "observed": "RED",
+      "reason": "complete ordered positive fixture reach"
+    },
+    {
+      "name": "hidden nested failure",
+      "observed": "RED",
+      "reason": "all nested fixture assertions pass"
+    },
+    {
+      "name": "call-recognition-exclusions invented excluded origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "push-literal-target-exclusions invented excluded origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "invented original cursor origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "changed balanced input-slice raw",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "invented uninstrumented entry origin",
+      "observed": "RED",
+      "reason": "exact original source origin population"
+    },
+    {
+      "name": "changed original input-slice regex",
+      "observed": "RED",
+      "reason": "only15 source snapshots and original event wrappers change"
+    },
+    {
+      "name": "lost producer coordinate snapshot",
+      "observed": "RED",
+      "reason": "one source snapshot per producer"
+    }
+  ],
+  "instrument_correction": {
+    "initial_producer_sha256": "6727d1b6359c643414f9a0f202f1bafe6b0b2d435c225537b5df1494fcf61838",
+    "initial_mutation_changed_bytes": false,
+    "actual_recursive_target_count": 1,
+    "all_final_mutations_change_input": true
+  },
+  "instrument_sha256": "0d341fbd70883b9cc9708d6e76ee64f575a4026de34b10686dd1b373cdcf42fa"
+}
