@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: complete dedicated annotation family independently accepted; all-producer composition next. Canonical receipt gates this milestone; executable membership/replacement and separately owned runtime defects remain open.
+Full PNT: focused original producer composition verified and committed per slice; fresh immutable canonical .1.6.1 remains next. Private provenance parent stays active; executable quoted/comment membership/replacement and separately owned runtime defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` — Immutable37401 supplies4708 regular committed inputs plus exactly two authored observation inputs per tree;26 original-population commands and three corrected nested commands retain174 disjoint selected contract IDs/436 events and origins per seed,46 MethodExpr/CSV frames and complete previous compiler/callback/origin channels under seeds0/1/42. Seven representatives verify49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed;29 unchanged suites pass1440 ordered groups. Independent320 evidence RED, three actual rejected initial probe channels,111-hash mode/revision-only freeze, three stale-route guard rejections/seven supplemental RED and book58/31/four chapters/61 RED are retained. No production/spec/test changes; private parent remains active for canonical .1.6.1.
 
 ## Next Action
 
-Activate independent all-producer provenance composition .1.6 from clean committed HEAD. Retrieve each accepted family and original oracle; compose selected event/source/reference/callback/error/order channels and direct consumers with source-bound proof before closing private provenance .0.1. Executable quoted/comment membership, precise replacement and separately owned runtime defects remain next owners.
+Activate .1.6.1 from the clean committed composition boundary. Reconstruct all regular committed inputs with no overlays, recur complete original/corrected nested channels and direct consumers, retain independent controls/publication/freeze evidence and require exact staged canonical CI before closing .1.6/private provenance .0.1. Executable quoted/comment membership .0.2 and selected replacement .0.3 remain next.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — recognitionRED18/GREEN191;42 origins/1671 groups/200 RED; complete earlier channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` — progressiveRED5/GREEN148;16 combined origins/1608 groups/153 RED; exact actual-root mode repair.
@@ -29,7 +30,6 @@ Activate independent all-producer provenance composition .1.6 from clean committ
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
-- `REPO-HYGIENE.10` — due retained parent/Rust census, zero removals and original Legacy claim freeze.
 
 ## History
 

@@ -12,7 +12,8 @@ status: immutable complete-family proof verified; exact canonical receipt gates 
 tags: [perl, actionir, legacy, source-provenance, acceptance]
 evidence: "Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes."
 reverify:
-  - "Replay .1.4.7-review.py only at its accepted immutable/current input boundary; use a new owned recurrence after production changes."
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: Replay .1.4.7-review.py only at its accepted immutable/current input boundary; use a new owned recurrence after production changes."
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t t/generated_source_contract.t"
 ---
 
@@ -53,3 +54,8 @@ mark-copy clearing-observation gap remains CONFORMANCE-SOURCE-READING.2.7-owned.
 Wrapper startup .7 adds no establishment/liveness guarantee; recovery/purge stay
 prohibited. No other backend, arbitrary host syntax/callback or global historical
 audit admission follows from this bounded recurrence.
+
+Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+The old source guards remain historical and unchanged; current verification uses
+the composed retained proof, with executable membership/replacement and canonical
+private parent closeout still separate.

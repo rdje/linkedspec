@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0 - compose all scanner source producers
+
+Immutable37401 supplies4708 regular committed inputs plus exactly two authored observation inputs per tree;26 original-population commands and three corrected nested commands retain174 disjoint selected contract IDs/436 events and origins per seed,46 MethodExpr/CSV frames and complete previous compiler/callback/origin channels under seeds0/1/42. Seven representatives verify49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed;29 unchanged suites pass1440 ordered groups. Independent320 evidence RED, three actual rejected initial probe channels,111-hash mode/revision-only freeze, three stale-route guard rejections/seven supplemental RED and book58/31/four chapters/61 RED are retained. No production/spec/test changes; private parent remains active for canonical .1.6.1. Next: immutable canonical .1.6.1 before private provenance closeout.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family
 
 Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes. Next: .1.6 after exact canonical landing.

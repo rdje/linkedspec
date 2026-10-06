@@ -13,6 +13,7 @@ status: current
 tags: [architecture, scanner, actionir, lowering]
 evidence: "SESSION-STARTUP-READING.3.2.30 re-reads Scanner and FlowRules plus the ScannerCore registry/dependency/dispatch implementation. The callable registry census returns seven ordered packages; the Scanner directory contains five modules. The managed pipeline trace suite passes five tests. This supersedes the June 12 four-family/six-file inventory; retained internal scanner IDs do not restore retired authoring spellings."
 reverify:
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec::ActionIR::ScannerCore -E 'say for LinkedSpec::ActionIR::ScannerCore::_scanner_rule_family_packages()'"
   - "rg --files perl/LinkedSpec/ActionIR/Scanner"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_pipeline.t"
@@ -47,3 +48,7 @@ orchestration with OwnerDispatch error preservation and event-producing trace re
 New rules need an explicit contract owner and must preserve this ordered ownership
 boundary. Related: [[actionir-lowering-stack]], [[trace-actionir-pipeline-decisions]],
 and [[perl-progressive-span-dispatch-carriers]].
+
+[[perl-all-producer-source-composition]] independently verifies current seven-family
+representative nesting and complete original selected source channels. This does
+not authorize quoted/comment rewriting or close separately owned runtime defects.

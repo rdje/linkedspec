@@ -1,0 +1,322 @@
+{
+  "packages": [
+    "LinkedSpec::ActionIR::StagedParseJob",
+    "LinkedSpec::ActionIR::ProgressiveSpanDispatch",
+    "LinkedSpec::ActionIR::Scanner::RecognitionTransactionRules",
+    "LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules",
+    "LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules",
+    "LinkedSpec::ActionIR::Scanner::FlowRules",
+    "LinkedSpec::ActionIR::Scanner::LegacyRules"
+  ],
+  "cases": [
+    {
+      "package": "LinkedSpec::ActionIR::StagedParseJob",
+      "contract": "staged_parse_job",
+      "source": "note(\"雪😀\");\r\njob = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));\r\n",
+      "events": [
+        {
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+          "args": {
+            "target": "job",
+            "argument_count": 2,
+            "text_operand": "entry_text()",
+            "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+            "validation": {
+              "ok": 1,
+              "options": {
+                "node_kind": "expression",
+                "payload_kind": "text",
+                "spec": "expr-v1",
+                "result_policy": "replace_marker",
+                "on_error": "fail",
+                "required_capabilities": []
+              },
+              "text_plan": {
+                "kind": "direct_span",
+                "source": "entry_text"
+              }
+            },
+            "text_plan": {
+              "kind": "direct_span",
+              "source": "entry_text"
+            },
+            "options": {
+              "node_kind": "expression",
+              "payload_kind": "text",
+              "spec": "expr-v1",
+              "result_policy": "replace_marker",
+              "on_error": "fail",
+              "required_capabilities": []
+            }
+          },
+          "source_span": {
+            "start": 13,
+            "end": 164
+          }
+        },
+        {
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+          "args": {
+            "target": "job",
+            "argument_count": 2,
+            "text_operand": "entry_text()",
+            "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+            "validation": {
+              "ok": 1,
+              "options": {
+                "node_kind": "expression",
+                "payload_kind": "text",
+                "spec": "expr-v1",
+                "result_policy": "replace_marker",
+                "on_error": "fail",
+                "required_capabilities": []
+              },
+              "text_plan": {
+                "kind": "direct_span",
+                "source": "entry_text"
+              }
+            },
+            "text_plan": {
+              "kind": "direct_span",
+              "source": "entry_text"
+            },
+            "options": {
+              "node_kind": "expression",
+              "payload_kind": "text",
+              "spec": "expr-v1",
+              "result_policy": "replace_marker",
+              "on_error": "fail",
+              "required_capabilities": []
+            }
+          },
+          "source_span": {
+            "start": 167,
+            "end": 318
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0-cases.json",
+        "case": "staged_parse_job",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::ProgressiveSpanDispatch",
+      "contract": "progressive_span_dispatch",
+      "source": "note(\"雪😀\");\r\nchild = dispatch_span(\"expr-v1\", \"Expr\", span);  child = dispatch_span(\"expr-v1\", \"Expr\", span);\r\n",
+      "events": [
+        {
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+          "args": {
+            "result": "child",
+            "argument_count": 3,
+            "parser_operand": "\"expr-v1\"",
+            "top_rule_operand": "\"Expr\"",
+            "span_operand": "span",
+            "parser_id": "expr-v1",
+            "top_rule": "Expr",
+            "span_binding": "span"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 59
+          }
+        },
+        {
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+          "args": {
+            "result": "child",
+            "argument_count": 3,
+            "parser_operand": "\"expr-v1\"",
+            "top_rule_operand": "\"Expr\"",
+            "span_operand": "span",
+            "parser_id": "expr-v1",
+            "top_rule": "Expr",
+            "span_binding": "span"
+          },
+          "source_span": {
+            "start": 62,
+            "end": 108
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0-cases.json",
+        "case": "progressive_span_dispatch",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::RecognitionTransactionRules",
+      "contract": "recognition_checkpoint",
+      "source": "note(\"雪😀\");\r\nscope = recognition_checkpoint();  scope = recognition_checkpoint();\r\n",
+      "events": [
+        {
+          "raw": "scope = recognition_checkpoint()",
+          "args": {
+            "token": "scope"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 45
+          }
+        },
+        {
+          "raw": "scope = recognition_checkpoint()",
+          "args": {
+            "token": "scope"
+          },
+          "source_span": {
+            "start": 48,
+            "end": 80
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0-cases.json",
+        "case": "recognition_checkpoint",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules",
+      "contract": "my_declare_bare",
+      "source": "note(\"雪😀\");\r\nmy $dx;  my $dx;\r\n",
+      "events": [
+        {
+          "raw": "my $dx",
+          "args": {
+            "declaration_type": "scalar",
+            "names": [
+              "dx"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "raw": "my $dx",
+          "args": {
+            "declaration_type": "scalar",
+            "names": [
+              "dx"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0-cases.json",
+        "case": "my_declare_bare",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules",
+      "contract": "scalar_assignment_operator",
+      "source": "note(\"雪😀\");\r\nvalue = '雪';  value = '雪';\r\n",
+      "events": [
+        {
+          "raw": "value = '雪'",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 24
+          }
+        },
+        {
+          "raw": "value = '雪'",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 27,
+            "end": 38
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-cases.json",
+        "case": "scalar_assignment_operator",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::FlowRules",
+      "contract": "if_flow",
+      "source": "note(\"雪😀\");\r\nif(true) { say(\"a\") };  if(true) { say(\"a\") };\r\n",
+      "events": [
+        {
+          "raw": "if(true) { say(\"a\") }",
+          "args": {
+            "condition": "true"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 34
+          }
+        },
+        {
+          "raw": "if(true) { say(\"a\") }",
+          "args": {
+            "condition": "true"
+          },
+          "source_span": {
+            "start": 37,
+            "end": 58
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0-cases.json",
+        "case": "if_flow",
+        "event": 0
+      }
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::LegacyRules",
+      "contract": "return_general",
+      "source": "note(\"雪😀\");\r\nreturn( length(/a\\)b\\(/i) );  return( length(/a\\)b\\(/i) );\r\n",
+      "events": [
+        {
+          "raw": "return( length(/a\\)b\\(/i) )",
+          "args": {
+            "payload": "length(/a\\)b\\(/i)"
+          },
+          "source_span": {
+            "start": 13,
+            "end": 40
+          }
+        },
+        {
+          "raw": "return( length(/a\\)b\\(/i) )",
+          "args": {
+            "payload": "length(/a\\)b\\(/i)"
+          },
+          "source_span": {
+            "start": 43,
+            "end": 70
+          }
+        }
+      ],
+      "original": {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6-cases.json",
+        "case": "return_general",
+        "event": 0
+      }
+    }
+  ],
+  "scope": "Seven original representative contracts, repeated literal statements with authored scalar intervals; all ordered nested pairs. Syntactic provenance, not executable membership or arbitrary callback admission."
+}

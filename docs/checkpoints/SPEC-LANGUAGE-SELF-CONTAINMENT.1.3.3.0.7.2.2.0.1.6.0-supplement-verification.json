@@ -1,0 +1,46 @@
+{
+  "complete": true,
+  "revision": "37401f576c517a91f49942893c41af020bcbfda4",
+  "historical_bound_inputs": 111,
+  "historical_current_route_rejections": 3,
+  "retained_render_rejections": 2,
+  "controls": [
+    {
+      "name": "rewritten historical statement",
+      "observed": "RED",
+      "reason": "mode revision only historical freeze"
+    },
+    {
+      "name": "forged prior binding",
+      "observed": "RED",
+      "reason": "exact original dedicated claim bytes"
+    },
+    {
+      "name": "lost freeze population",
+      "observed": "RED",
+      "reason": "complete actual dedicated freeze report"
+    },
+    {
+      "name": "forged freeze producer",
+      "observed": "RED",
+      "reason": "actual historical freeze instrument"
+    },
+    {
+      "name": "lost historical route",
+      "observed": "RED",
+      "reason": "complete three historical route population"
+    },
+    {
+      "name": "forged historical route exit",
+      "observed": "RED",
+      "reason": "actual historical guard rejection"
+    },
+    {
+      "name": "forged historical route producer",
+      "observed": "RED",
+      "reason": "unchanged historical reviewer producer"
+    }
+  ],
+  "instrument_sha256": "567fc245c378fcdf1709fc5980afeb8eb6247e90ea238bea4b877416bee61a5f",
+  "scope": "Original hashes and statements preserved; only historical mode/revision changes. Current Knowledge routes repaired without refreshing old producers. Initial CRLF display and vacuous mutation are independently retained/rejected; actual corrected full book evidence is reviewed separately."
+}

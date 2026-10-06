@@ -1,0 +1,8 @@
+{
+  "observed": "RED",
+  "reason": "composition literal representative example",
+  "original_instrument_sha256": "e61b496cf889735a524041f5a9224f43551dee0ccd0242206bf8efa03ddf56ff",
+  "root_cause": "Markdown renderer normalizes literal CRLF in the displayed text block to LF. Runtime oracle/source remains literal CRLF and is independently validated. Initial full render was successful but exact rendered example assertion used runtime line endings.",
+  "repair": "Normalize only CRLF to LF in the display example comparison, retaining every other Unicode/code byte. No runtime source or producer changed. Original instrument/capsule/render remain retained.",
+  "scope": "Rendered teaching display, not an additional runtime source or execution claim."
+}

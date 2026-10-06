@@ -7,12 +7,13 @@ answers:
   - "why is the original pipeline probe origin_event comparison limited"
   - "how does an equal-valued returned event copy distinguish reference identity"
   - "what source authority do copied or foreign pipeline splitter results have"
-date: 2026-10-05
+date: 2026-10-06
 status: immutable nineteen-contract family independently verified; canonical receipt gates landing
 tags: [perl, actionir, scanner, pipeline, source-provenance, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 owns eight statement loops/ten constructors, literal source/argument/interval oracle, complete before/after boundaries, corrected returned-array probe and actual copied-return control."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
 ---
 
 PrimitivePipelineRules reuses ScannerCore's canonical statement frame bridge for
@@ -59,3 +60,8 @@ compiler channels. Fourteen direct suites pass803 groups and24 evidence controls
 observe RED; complete58-input book/ten examples/three chapters/14 controls passes.
 Exact staged canonical receipt is mandatory before family landing; remaining Flow,
 legacy/staged, membership/comments/replacement and global audit keep separate owners.
+
+Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+The old source guards remain historical and unchanged; current verification uses
+the composed retained proof, with executable membership/replacement and canonical
+private parent closeout still separate.

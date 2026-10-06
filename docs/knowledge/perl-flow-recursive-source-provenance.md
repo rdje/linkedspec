@@ -7,15 +7,16 @@ answers:
   - "why must inline switch arguments have original occurrence frames"
   - "does a quoted case payload produce a Flow scanner event"
   - "what owns recursive Flow source provenance"
-date: 2026-10-05
+date: 2026-10-06
 status: all sixteen Flow source contracts independently accepted through exact canonical landing
 tags: [perl, actionir, flow, scanner, source-provenance, traversal]
 evidence: "Fresh .1.3.3 verifies4233-input/no-overlay recurrence,16 contracts/147 origins/138 frames/837 groups/48 pairs/31 controls plus58-input book19 examples/three chapters/19 controls; exact canonical receipt gates landing. Recursive .1.3.2.1 verifies4197-input before/after plus sole Flow/exact consumer deltas, RED6-GREEN7/1180 groups/147 origins/48 pairs/29 evidence controls and19 book examples. Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
 reverify:
-  - "Current family: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3-review.py"
-  - "At frozen1d450522afb79aa87e579db148224ad6ed2c11e0 replay recursive .1.3.2.1-review.py; do not refresh its current-source boundary after later producer changes."
-  - "Original recursive acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-review.py"
-  - "At frozen6ce479842be85219990be889914f354f1a4aaa44 replay direct .1.3.1-review.py; do not refresh its original recursive boundary after consumption changes."
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: Current family: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: At frozen1d450522afb79aa87e579db148224ad6ed2c11e0 replay recursive .1.3.2.1-review.py; do not refresh its current-source boundary after later producer changes."
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: Original recursive acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: At frozen6ce479842be85219990be889914f354f1a4aaa44 replay direct .1.3.1-review.py; do not refresh its original recursive boundary after consumption changes."
   - "At frozen f3f87ce110db89fca0e3db4debd4d9948df0b8df replay the original .1.3.0 diagnosis/control; its current-source guard must not be refreshed after producer changes."
 ---
 
@@ -91,3 +92,8 @@ and MethodExpr channels remain byte-identical;837 selected compatibility
 groups and separate authority fixtures pass.31 reason-specific evidence
 controls reject corruptions. Exact staged canonical receipt gates family
 landing; executable membership and other producer families remain separate.
+
+Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+The old source guards remain historical and unchanged; current verification uses
+the composed retained proof, with executable membership/replacement and canonical
+private parent closeout still separate.

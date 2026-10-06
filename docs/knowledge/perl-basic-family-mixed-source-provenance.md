@@ -6,12 +6,13 @@ answers:
   - "does mixed regex and statement scanning preserve original argument objects"
   - "how many occurrences and frames are in the mixed BasicRules oracle"
   - "where is the combined BasicRules canonical closeout owned"
-date: 2026-10-05
+date: 2026-10-06
 status: independent immutable family recurrence verified; exact canonical receipt gates BasicRules parent closeout
 tags: [perl, actionir, scanner, source-provenance, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0 authors one literal mixed input:43 statements/49 selected event occurrences per seed, all20 BasicRules contracts. Three seeds retain147 origins/129 frames and exact original event/argument references. Eight unchanged suites pass144 groups; twenty reason-specific evidence corruptions observe RED."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py"
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py"
 ---
 
 The literal oracle puts all nine regex forms inside one quoted assignment, then all
@@ -45,3 +46,8 @@ retains the exact prior complete Toolbox streams and independently passes all tw
 controls and144 original groups. All38 earlier claim inputs freeze historically at77444c.
 Exact staged canonical CI receipt gates BasicRules parent closeout before landing; remaining scanner
 families and executable membership/comment/replacement repairs retain their own leaves.
+
+Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+The old source guards remain historical and unchanged; current verification uses
+the composed retained proof, with executable membership/replacement and canonical
+private parent closeout still separate.

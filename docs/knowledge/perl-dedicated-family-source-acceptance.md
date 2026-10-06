@@ -13,8 +13,9 @@ status: immutable dedicated-family proof verified; exact canonical receipt gates
 tags: [perl, actionir, staged, progressive, recognition, observation, source-provenance, acceptance]
 evidence: "Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-book.py --review"
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-review.py"
+  - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-book.py --review"
 ---
 
 The original seven contracts are staged_parse_job, progressive_span_dispatch,
@@ -59,3 +60,8 @@ recovery/purge remain prohibited. No new helper/event/policy/runtime/carrier/
 admission/backend/CI/storage/dependency or global historical audit follows from
 this bounded recurrence. All project data is repository-local; necessary OS and
 toolchain prerequisites are read-only external inputs.
+
+Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+The old source guards remain historical and unchanged; current verification uses
+the composed retained proof, with executable membership/replacement and canonical
+private parent closeout still separate.

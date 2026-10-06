@@ -1,0 +1,73 @@
+{
+  "complete": true,
+  "runs": [
+    {
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py",
+      "producer_sha256": "43f65b01b504dcc6403c9548da235e32d182375f33fb0d5f99e7a92ae377e8a7",
+      "command": [
+        "bash",
+        "tools/run_python_project_data.sh",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 805,
+        "sha256": "f7e7f33313fe613a1e9ddbba83aa91efc7bfc032030bccc574ed89aa70e823bc",
+        "data": "H4sIAAAAAAAC/81STWsCMRC9+ysGL66wn1aQSi0sukrBrqW77XElZqduMJssSVbx4m9v3EPxUGiPvjlkApN5700mV4TijtADOLXUBhRSFAYo4Rw40WY47QEsGUfoB5+StzXqIMsWwUJSmwujgz0zVbsLOBMHLHWDNCgl1QGtkB4aya4l2Vsy99ZxuvqIV4mXJeulN9+kefySviZp7kf+g43Qn/gjG6G9R/aMPIVHhie/OfddsO0RRuGjC0zAUy3LluOzlQZQEyacYZdeLIrijgRH40kn+KqxU6hw33KiXJBHVJycNcygI94y0bRGOzUR7Avt3F0Iuxe/4XKD4gd35Hsy7mzfOuvMEK1R2SUjJ5jNwHnfbHIIoCGmGvoKSbndnQ1qx5oftIJWROyxBNoqdd3JRtlfp4ZJAUSUYAuNHtzOqPgLvbjjtx0SpaSawv9Iet/Abn8RJQMAAA=="
+      }
+    },
+    {
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py",
+      "producer_sha256": "0634ce9e691f9f8da27927642289bf54ee8913e5379b07650018b668a4ceea84",
+      "command": [
+        "bash",
+        "tools/run_python_project_data.sh",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 799,
+        "sha256": "35ef9c180a2dfcdadbf2b3cb6dc47175d63f4601d6e652b2da857d93cb35030a",
+        "data": "H4sIAAAAAAAC/81STWvCQBC9+ysGL0ZIsn4UbKUWgkYpWC1N2mNk3UzN4mY37G4UL/72rikUD4X26JvLDMzOe292Uk0Zbinbg1cqY0EjQ2mBUSFAUGO74xbAnAuENvlQoi7RkCSZkZliLpfWkB23Rb0lgss95qZCRnLFDGEFsn2l+KUleY2nwTJaLd6jRRwk8XIeTNerNHpevcSrNOyHQxe9cBQOXPRcPQiHgcYDx2NYndo+uOEI/fsHH7iEx1LltcAnJwygpFx63SY9O2TZ7cjtf8u9KGz0adzVgmof1AG1oCcDE2hoN1xWtTVeSSX/RLdzH3rNi99wvkL2g5txPbprTF/7aqxQY1C786JHmEzAe1uvUyBQUVt0Q40032xPFo3nrHdqyQoqd5gDq7W+XGOl3Y8zy5UEKnNwjdZ0rjeU/YVW1PC7CbHWSo/hfyStL7E9n10fAwAA"
+      }
+    },
+    {
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3-review.py",
+      "producer_sha256": "5f9e4d3d346a0aa7edf486eb1d54f67460253253ad398da1fc4a78e28669526c",
+      "command": [
+        "bash",
+        "tools/run_python_project_data.sh",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 826,
+        "sha256": "48cd409e8742e6e115096cd8e496b4a72f8a43ff46816d05f3defce5e7938a54",
+        "data": "H4sIAAAAAAAC/81Sy27CMBC85ytWXJJI5AEtqkSbSggCqkShKrRHLOMsYJHYke0Ucem31wkCcWnVI7OH9WPsndHuUlGGa8r24BVSG1DIUBhgNM8hp9r4fQdgzHOEVvQp86pAHS0Wo2gkmV0Lo6MtN7tqHeVc7DHTJbIok0xHbIdsX0peUxZv6TCYDmaTj8EkDRbpdBwM57Pl4GX2ms6WYSe8sxGHD2HXRnzaBwq/OB7C8thqg/0codPrtoELeCpkVuX4bIUB8A0QImiBhCSJS0hBuSDE7dfZ8xvKb/i2WK1ux14cN/Zq5Y3upgThoqyM9goq+AZtPx5PxwpLqYx3Su3LrXM2dsbqgpsxet9rfF7ba2RTrVHZCaSHJPHe5/NlVFKz80OFNCPro0Ht+W1wK8F2VGwxA1YpVQ9rqexAMMOlACoysESj3evWr/6CM2jq2tepUlL14X8FnB/7dQzrOgMAAA=="
+      }
+    }
+  ],
+  "instrument_sha256": "ff018075fd7c1ccc1a45b629d4376655b468244a2889aa9a809351cbea72534a",
+  "scope": "Historical accepted current-root guards reject after the shared fixture evolved; this is not a product regression. Preserve historical bytes/adjudication and route current Knowledge verification to independently reviewed all-producer recurrence."
+}

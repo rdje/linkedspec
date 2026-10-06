@@ -1,0 +1,9 @@
+{
+  "observed": "RED",
+  "reason": "effective book corruption",
+  "name": "hidden rejected probe",
+  "producer_sha256": "47bb62089528c089ba412e9e2cb72eaa9d0307aa7ee5ad9ecab607d0ee36f5d4",
+  "root_cause": "Rendered HTML retains a line break between channels and remain; initial literal replacement spanning that break changed no bytes. Effectiveness assertion rejected the vacuous mutation.",
+  "repair": "Use exact rendered needle original rejected channels. Keep the same independent teaching assertion and require effective changed bytes plus its named RED reason.",
+  "scope": "Mutation instrumentation only; no teaching/runtime change."
+}

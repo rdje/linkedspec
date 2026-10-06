@@ -3302,10 +3302,46 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/29/four/54,120 original-hash historical freeze, source-bound claim/Knowledge/task/index/roadmaps/live/resume and bounded histories agree. Only dedicated parent .1.5 closes; all-producer .1.6 and membership/replacement/runtime owners remain.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6`
-  Status: `pending`
+  Status: `active`
   Goal: Independently compose all producer provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.5`
   Acceptance: Verify every selected producer/source frame, public-event equality, opaque/error/order invariants and source-bound recurrence before closing this private parent.
+  Children: `.1.3.3.0.7.2.2.0.1.6.0`, `.1.3.3.0.7.2.2.0.1.6.1`
+  Safe-slice split: Establish the original selected population and cross-family composition with focused source-bound evidence first; then replay its committed producers without overlays and require exact canonical receipt before closing .1.6 and private provenance .0.1. Membership/replacement remain separate.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0`
+  Status: `done`
+  Goal: Compose the accepted original producer populations and verify real cross-family recording isolation.
+  Dependencies: `.1.5.4`
+  Activation: Clean37401f576c517a91f49942893c41af020bcbfda4; dedicated-family canonical CI PASS, both CLI environments66/66, Phase01035, all ten hooks/post-commit pointer PASS, exact committed receipt, brief0 and no required jobs. Original Basic/pipeline/Flow/Legacy/dedicated Knowledge and accepted oracle/reviewer/probe pointers, ScannerCore seven-family order/five dependencies/private source and error interfaces, affected source/reference/authority/order fixtures, current roadmap and relevant ActionIR book sections reviewed. Per-family measurements use different seed granularity; rederive each grain before composing a table.
+  Owned paths: Leaf-prefixed checkpoint producers/input/channel/reviewer/control/book/freeze evidence and claim; hash-verified .1.5.4 claim historical freeze before changing bound teaching/cards; all-producer and relevant prior-family Knowledge/derived map; task/frontier/index/roadmaps/live/resume/change/notes and ActionIR book. No production/spec/standard-test/CI/hook/storage/dependency/submodule or other-repository changes planned.
+  Verification tier: `focused`
+  Focused checks: Complete immutable regular committed input census with exact authored probe/oracle overlays only; unchanged accepted family probes and independent original event/argument/scalar oracles under three seeds, complete previous channel equality at declared boundaries, actual seven-family dispatch order and original references/callbacks. Real nested cross-family scans, opaque/empty/exception/caller-error and occurrence/order isolation; effective reason-specific observed RED controls, complete direct-consumer TAP and source/byte/mode/member/channel guards. Full book input/render/control proof, original-hash historical freeze, claim/Knowledge/memory/history/diff and all doctrines.
+  Canonical trigger: None for bounded private evidence/teaching without production or public-contract changes; .1.6.1 independently owns immutable recurrence, exact canonical acceptance and parent closeout. Escalate here if focused proof exposes cross-cutting uncertainty.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json`
+  Owned defect — composition probe fatal visitor contamination (2026-10-06): the initial independent semantic review rejects all three seeds at exact first-defined dispatcher order. The fatal inner scan reused the outer wrapper, appending three inner undefined visits; the product recorder changed/restored and threw the intended callback sentinel. Reproduce with retained initial-review.py/cross-family channels. Repair scheduled in this leaf now: separately retained retry-probe.pl isolates the inner dispatcher builder; corrected three-seed capture and full independent review PASS; defect closed in this leaf. Initial producer, bytes and RED reason remain retained; no production/test change.
+  Owned evidence correction — rendered CRLF display: successful original full render was independently rejected at composition literal representative example because Markdown normalizes CRLF to LF. Preserve initial instrument/capsule/render and observed RED; compare only normalized display line endings, retaining actual runtime CRLF oracle unchanged. Full re-render/review PASS; evidence correction closed.
+  Owned documentation defect — stale current Knowledge routing: Basic/pipeline/Flow current reverify pointers execute historical source guards and all three actually reject evolved shared fixtures. Retain historical producer/channel/hash adjudications and observed exact guard reasons; repair current routes to independently measured composition in this leaf. Legacy/dedicated and architecture/sidecar cards link current composition while preserving prior scope.
+  Owned book-control defect: hidden rejected probe initially changed no bytes across a rendered line break; effectiveness assertion rejected it. Retain initial producer/render, repair only exact literal needle, and require named teaching RED.
+  Acceptance: Retain all original family oracles and historical observations. Establish selected contract/family and per-seed counts from actual complete channels, preserving original aggregation rather than guessing totals. Cross-family instrumentation must observe real producers and returned objects, with independent literal intervals; no inferred raw pairing, global lexical sort, fabricated provenance or arbitrary callback/admission claim. Every actual mismatch is diagnosed with LinkedSpec tools and owned before proceeding. .0.1 stays active until .1.6.1 lands.
+
+  Verified result: Immutable37401 supplies4708 regular committed inputs plus exactly two authored observation inputs per tree;26 original-population commands and three corrected nested commands retain174 disjoint selected contract IDs/436 events and origins per seed,46 MethodExpr/CSV frames and complete previous compiler/callback/origin channels under seeds0/1/42. Seven representatives verify49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed;29 unchanged suites pass1440 ordered groups. Independent320 evidence RED, three actual rejected initial probe channels,111-hash mode/revision-only freeze, three stale-route guard rejections/seven supplemental RED and book58/31/four chapters/61 RED are retained. No production/spec/test changes; private parent remains active for canonical .1.6.1.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0 - compose all scanner source producers` (identity from Git after landing).
+  Next: Activate .1.6.1 from the clean committed composition boundary. Reconstruct all regular committed inputs with no overlays, recur complete original/corrected nested channels and direct consumers, retain independent controls/publication/freeze evidence and require exact staged canonical CI before closing .1.6/private provenance .0.1. Executable quoted/comment membership .0.2 and selected replacement .0.3 remain next.
+
+- [x] **REPRODUCE / ISSUE** — Retained original family sources/oracles and all previous full channels recur; initial fatal visitor, historical routing and book instrument failures remain exact.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Actual producer coordinates and returned references preserve identity; fatal probe wrapper reused outer visitor log and was independently rejected.
+- [x] **FIX** — Separate corrected probe isolates only nested fatal dispatcher instrumentation; current Knowledge routes preserve historical guards; displayed CRLF/control needle corrections leave runtime source unchanged.
+- [x] **ADDRESSED (verified)** — 174 distinct selected IDs/436 original origins per seed; all49 ordered representative nested pairs and seven fatal routes pass under three seeds,320 effective named RED.
+- [x] **NO REGRESSION** — 29 unchanged consumers pass1440 complete ordered groups; all original complete compiler/callback/origin channels recur byte-for-byte. Phase0 reserved for following canonical boundary.
+- [x] **LOCKSTEP** — Book58/31/four/61,111 verified historical hashes, three exact stale-route rejections/seven supplemental RED, Knowledge/task/index/roadmaps/live/resume and bounded histories align. Private parent remains active.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1`
+  Status: `pending`
+  Goal: Independently accept immutable all-producer composition and close private provenance.
+  Dependencies: `.1.6.0`
+  Planned verification: Fresh committed regular inputs without runtime overlays, complete original and cross-family channels/references/callbacks/order/error boundaries and direct consumers, independent evidence/render controls and source-bound retention; exact staged canonical CI and normal hooks before parent closeout.
+  Acceptance: Close only .1.6 and private provenance .0.1 after the independently reviewed committed recurrence and canonical receipt land. Executable quoted/comment membership .0.2, precise replacement .0.3, recurring registration .0.4 and separately owned runtime/diagnostic defects retain their owners.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2`
   Status: `pending`
@@ -3618,7 +3654,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.5.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` | `done` | OriginalRED5/GREEN148;16 combined origins/1608 groups/153 RED and exact actual-root mode repair. |
 | 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `done` | OriginalRED18/GREEN191;42 dedicated origins/1671 groups/200 RED; canonical acceptance next. |
 | 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `done` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
-| 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
+| 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `in_progress` | Complete independent producer composition source provenance before membership. |
+| 43.4.2.0.1.6.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` | `done` | Original174 IDs/436 origins,49 representative pairs/seven fatal routes/1440 groups verified; canonical .1.6.1 next. |
+| 43.4.2.0.1.6.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` | `pending` | Independently accept immutable all-producer recurrence and private parent through canonical CI. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
@@ -3900,3 +3938,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 - `2026-10-06`: .1.5.3 retains five recognition/observation origins; RED18/GREEN191/42 total/1671 groups/200 RED. Canonical .1.5.4 follows clean landing.
 
 - `2026-10-06`: .1.5.4 fresh immutable dedicated recurrence4692/no overlays/42 origins/636 groups/184 RED; exact canonical receipt gates dedicated parent closure before .1.6.
+
+- `2026-10-06`: .1.6.0 composes174 IDs/436 origins per seed,49 representative pairs/seven fatal routes,1440 groups/320 RED; retained actual instrument rejections repaired. Private canonical .1.6.1 follows clean landing.

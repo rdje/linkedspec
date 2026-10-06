@@ -1,0 +1,12 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0",
+  "observed": "RED",
+  "reason": "exact first-defined dispatcher order",
+  "original_probe_sha256": "ec012bf593d54f6c5ce6db3170eab54d268a788b851c4c7fd78e84f892b2e964",
+  "original_review_sha256": "da3e14b64e7a55d9054763a28e6e7dd1dd661bacdbfcbb209d2cfee07539e5f6",
+  "root_cause": "Fatal nested scan used the outer observation dispatcher wrapper. Three undefined inner visits were appended to the outer visitor channel before its selected dispatcher returned. The actual nested recorder changed/restored and callback threw the literal sentinel; outer-only order assertion correctly rejected contaminated instrumentation. Normal observe recursion installed its own wrapper; fatal branch did not.",
+  "reproduce": "Load retained initial-review.py and call check_cross on each initial cross-family channel; exact first-defined dispatcher order rejects all three seeds.",
+  "repair": "retry-probe.pl locally uses saved original dispatcher builder for the caught fatal inner scan; retain original instrument/channels and verify the corrected complete cross-family runs independently. Production/fixtures unchanged.",
+  "impact": "Initial fatal route visitor channel cannot substantiate outer-only ordering. No product defect inferred from this instrument failure.",
+  "status": "closed: separately retained corrected three-seed capture and complete independent semantic/original-channel review PASS; no production change"
+}

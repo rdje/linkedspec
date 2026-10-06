@@ -110,7 +110,7 @@ source rule paragraph text
 
 ### Scanner
 
-`ActionIR::Scanner` discovers which helper contracts are present in a rule's action text. It uses a registry of scanner rule families (`PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules`, `LegacyRules`) to match helper syntax patterns and classify them into contract families. `ScannerCore` is the single source of truth for the scanner dependency contract — the mapping between recognized helper patterns and their lowering handlers.
+`ActionIR::Scanner` discovers which helper contracts are present in a rule's action text. Its ordered registry contains `StagedParseJob`, `ProgressiveSpanDispatch`, `RecognitionTransactionRules`, `PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules` and `LegacyRules`. The first dispatcher that returns a defined result selects the contract result, including an empty or opaque result. `ScannerCore` is the single source of truth for the scanner dependency contract — the mapping between recognized helper patterns and their lowering handlers.
 
 The pipeline family has a separately retained nineteen-contract diagnosis. Eleven contracts
 scan the original full input, while eight select original statements; nested hash assignment
@@ -174,8 +174,9 @@ references, all five callback effects, and the exact earlier complete compiler c
 The normalized split and equal-valued copied-return controls also recur unchanged.
 Fourteen direct suites check the composed pipeline and existing source-frame consumers.
 Canonical acceptance additionally requires the exact staged local CI receipt before family
-closure. This closes private pipeline provenance; Flow, legacy and staged producers,
-executable membership, comments and replacement remain separate work.
+closure. This closes private pipeline provenance. The other producer proofs are retained
+separately and composed below; executable membership, comments and replacement
+remain separate work.
 
 The split scanner now reports the normalized source expression from its successful planner:
 
@@ -682,6 +683,70 @@ bash tools/project_data_run.sh prove -v -Iperl \
   t/recognition_transaction_perl_contract.t \
   t/recursive_observation_perl_contract.t
 ```
+
+### Composition across the seven scanner families
+
+The independent composition check replays the retained literal oracles for all
+174 selected contract IDs. The populations remain separate authored inputs;
+these numbers are measured **per seed**, rather than adding earlier three-seed totals:
+
+| Retained corpus | Selected contract IDs | Selected events and private origins per seed |
+| --- | ---: | ---: |
+| Basic | 20 | 49 |
+| Pipeline | 19 | 69 |
+| Flow | 16 | 49 |
+| Legacy | 112 | 227 |
+| Staged, progressive and recognition | 7 | 42 |
+| Total | 174 | 436 |
+
+All complete prior compiler, callback and origin channels recur unchanged under
+seeds 0, 1 and 42. Physical statement frames count the authored source statements;
+they are a different population from selected events. The separate method-expression
+and CSV probe retains 46 argument frames per seed. These counts describe the
+selected syntactic corpus, not every possible program or callback.
+
+A second probe uses one retained contract from each actual dispatcher family.
+Each representative repeats equal statement text after Unicode and CRLF. For example:
+
+```text
+note("雪😀");
+my $dx;  my $dx;
+# my_declare_bare: two equal statements, distinct authored scalar intervals
+```
+
+The display uses LF line endings; the probe input keeps its actual CRLF bytes.
+
+Its 49 ordered nested pairs include both directions for every pair of families
+and seven same-family pairs. The inner scan starts while the outer producer
+records its first event. Both scans retain their own original source, event and
+argument objects. Complete inner observations equal their unnested baselines;
+the outer scan preserves its callback log, selected dispatcher and occurrence order.
+Seven further routes throw inside an inner trim callback, catch the exception,
+and then finish the outer scan. The outer recorder and caller error state are restored.
+
+The composition probe covers seven representatives; it does not execute nested
+scans for all 174 contracts. The original family probes supply the full selected
+population independently. An empty first-defined result stops dispatch, and an
+opaque result preserves its identity. Neither invents origins from earlier
+unselected records. Public scanner events remain `raw` and `args`.
+
+The independent reviewer rejected the initial exception probe because its inner
+visits contaminated the outer dispatcher log. The retained corrected instrument
+isolates that log without changing product code. The original rejected channels
+remain part of the evidence; successful process exits alone do not establish order.
+
+```sh
+bash tools/run_python_project_data.sh \
+  docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py
+```
+
+This command reviews retained observations and their exact input identities;
+it does not launch additional runtime scans. Fresh no-overlay committed replay
+and canonical CI are required at the following private provenance closeout.
+A syntactic source origin still does not authorize quoted/comment membership or
+replacement. Identical literal twins must remain data until the separate membership
+and selected-occurrence repair is verified. No arbitrary callback, new helper,
+static-policy relaxation or runtime-defect closure follows from this composition.
 
 ### Original method argument boundaries
 
