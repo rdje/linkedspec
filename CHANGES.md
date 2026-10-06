@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Original Legacy call/return/push source hooks (.1.4.1)
+
+Seven new regex hooks preserve return_general and all original exclusions.4318 original Git inputs/one standard-fixture replacement/three overlays per epoch and one after Legacy owner replacement support eight guarded commands.112 contracts/115 cases/227 events per seed retain all original public callback/compiler channels; private origins grow2→18 across three seeds. Actual RED9/GREEN23 and seven suites1147 groups including Phase01034 pass;140 evidence controls RED. Complete book58 inputs/22 examples/three chapters/21 controls and prior21-hash hygiene freeze pass. Removing only the seven snapshot/wrapper additions reconstructs the complete original Legacy file byte-exactly. Other source families and quoted token repair remain owned.
+
 ## 2026-10-06 — Due retained artifact review (REPO-HYGIENE.10)
 
 Retain the dated parent/Rust metadata census, actual producer exits and full channels. Independent per-file metadata and corruption/exclusion controls verify the snapshot; zero files removed. Preserve proof/cache data and all repository boundaries. Freeze the two prior Legacy claims at clean f3a49dd after verifying224 original bindings/112 unique hashes; render the complete58-input book before returning to Legacy .1.4.1.

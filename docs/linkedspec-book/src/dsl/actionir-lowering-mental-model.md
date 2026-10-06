@@ -359,6 +359,38 @@ origins at that boundary. These internal compatibility names do not establish ne
 public helper spellings. Each family must retain its original arguments and
 compiler behavior before executable source membership can use its coordinates.
 
+The call/return/push family now retains its selected original scalar occurrences
+through the private recorder. Seven hooks complement the existing `return_general`
+hook: internal `call`, the five push variants, and the two-argument `return`.
+They snapshot regex bounds before prefix exclusions or trim callbacks and return
+the same event and argument objects. Repeated equal text keeps distinct origins:
+
+```text
+call(Done); call(Done)
+# original scalar intervals: [0, 10), [12, 22)
+```
+
+Exclusions still belong to the original recognizer. A nested `call` in
+`recognize_once` or `observe_recognition` gains no independent call origin; the
+following standalone call does:
+
+```text
+recognize_once(scope, call(Hidden)); call(Done)
+# the selected original occurrence is call(Done)
+```
+
+Likewise the target-push scanner still excludes its primitive literal targets:
+
+```text
+push(items, true); push(items, target)
+# the target-push contract selects only push(items, target)
+```
+
+The public event fields, callback effects, substitution, descriptors and parser
+source remain unchanged. These internal compatibility IDs admit no new helper
+spelling. Anonymous/named capture, mark, cursor/input and entry/match origins are
+subsequent work; the quoted boundary-token repair remains separately owned.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Legacy selected source origins (.1.4.1)
+
+Call/return/push producers retain their own regex bounds before prefix checks or callbacks; their original event and argument objects pass through the private recorder. Preserve the existing return_general helper-pattern view and both recognition/literal exclusions. Internal dispatcher IDs do not admit new public spellings. Read docs/knowledge/perl-legacy-call-source-origins.md for the owned boundary; other Legacy families and quoted token repair remain separate.
+
 ## 2026-10-06 — Daily metadata review (.10)
 
 A new daily census is a dated observation, not authorization to delete logs or caches. Preserve prior proof bytes, freeze bound live claims at their clean Git boundary, and retain actual producer exits/full channels. REPO-HYGIENE.10 repeats the unchanged inclusion/exclusion and independent per-file metadata checks; no resource-reclamation or process-liveness claim follows.

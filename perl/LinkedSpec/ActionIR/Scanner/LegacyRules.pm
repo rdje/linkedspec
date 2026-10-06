@@ -152,10 +152,14 @@ sub _scan_contract_call {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $prefix = substr($code, 0, $-[0]);
  next if $prefix =~ /recognize_once\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*,\s*\z/o;
  next if $prefix =~ /observe_recognition\s*\(\s*[^,]+\s*,\s*\z/o;
- push @events, {raw => $&, args => {callee => $+{callee}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {callee => $+{callee}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -164,7 +168,11 @@ sub _scan_contract_push_single_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {source => $+{source}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {source => $+{source}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -173,8 +181,12 @@ sub _scan_contract_push_target_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  next if _is_primitive_literal_token($+{target});
- push @events, {raw => $&, args => {source => $+{source}, target => $+{target}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {source => $+{source}, target => $+{target}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -183,7 +195,11 @@ sub _scan_contract_push_indexed_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
- push @events, {raw => $&, args => {source => $+{source}, index => $+{index}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {source => $+{source}, index => $+{index}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -192,7 +208,11 @@ sub _scan_contract_push_target_indexed_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
- push @events, {raw => $&, args => {source => $+{source}, target => $+{target}, index => $+{index}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {source => $+{source}, target => $+{target}, index => $+{index}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -201,7 +221,11 @@ sub _scan_contract_push_scope_target_arg {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s*\(\s*(?<scope>\w+)\s*,\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {scope => $+{scope}, source => $+{source}, target => $+{target}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {scope => $+{scope}, source => $+{source}, target => $+{target}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -229,7 +253,11 @@ sub _scan_contract_return {
  my ($code) = @_;
  my @events;
 while ($code =~ /\breturn\s*\(\s*(?<label>\w+)\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }

@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f3a49dd82794c494625e33fe83ccf6cf01b4df8e` — clean daily artifact-review activation.
-- latest_completed_leaf: `REPO-HYGIENE.10 - retain daily artifact census`.
-- active_work_unit: `REPO-HYGIENE.10` (done) — dated parent/Rust metadata review, zero removals and retained evidence/cache.
-- next_action: Activate Legacy .1.4.1 from clean committed HEAD; preserve existing return_general and verify original source/reference/callback behavior for eight call/return/push contracts.
+- activation_commit: `0083dc7af44fe64f329339da6b764d0806cf1717` — clean Legacy call/return/push activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1 - retain Legacy call source origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` (done) — seven Legacy source hooks, original exclusions and complete final-byte focused recurrence verified.
+- next_action: Activate quoted-boundary .1.4.0.1 from clean committed HEAD; verify existing public label contract and repair scanner/lowering comma and escape tokenization before anonymous capture .1.4.2.
 - in_flight_uncommitted: none — intended clean focused landing; no required job remains after commit.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
