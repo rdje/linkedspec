@@ -14,7 +14,7 @@ tags: [perl, actionir, legacy, cursor, input, source-provenance]
 evidence: "All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t t/typed_source_location_perl_contract.t"
-  - "Replay .1.4.5-review.py at its accepted input boundary; later producer hooks require their own proof."
+  - "The .1.4.5 review is historical at7113d085b4b7ec0ef11e2f009395d9f2b6e71f21; current entry/match .1.4.6 recurrence preserves all cursor/input origins."
 ---
 
 # Balanced raw expressions have original physical coordinates
@@ -43,7 +43,8 @@ entry controls; asserted families prevent ordinal label drift.
 This source work changes no runtime cursor movement, source projections, public
 event schema, scanner ordering or callback/compiler channels. Previously verified
 call/anonymous/named/mark origins and boundary lexical repairs recur in the same
-all112-contract probe. Entry/match, executable quoted/comment membership,
+all112-contract probe. Entry/match origins now belong to [[perl-legacy-entry-match-source-origins]].
+Executable quoted/comment membership,
 source-based replacement and other backends remain separately owned. The existing
 mark-copy deletion-observation gap remains CONFORMANCE-SOURCE-READING.2.7-owned.
 Wrapper startup .7 still owns establishment/liveness; recovery/purge remain

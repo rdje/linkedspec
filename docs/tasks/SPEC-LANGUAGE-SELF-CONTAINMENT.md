@@ -3055,10 +3055,28 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Staging correction: First path list mistakenly applied the source-origins suffix to the partition fact-card basename; Git rejected that nonexistent path. Corrected to the existing explicit partition-card path before staging/commit; no source, fixture or proof input changed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6`
-  Status: `pending`
+  Status: `done`
   Goal: Retain original source origins for32 entry/match dispatcher contracts.
   Dependencies: `.1.4.5`.
   Acceptance: Preserve original zero-argument/index/name/alias producers and their raw/args/actual references/scalar occurrence bounds, original event ordering/public compiler channels and focused entry/match/source projections.
+  Activation: Clean7113d085b4b7ec0ef11e2f009395d9f2b6e71f21 after cursor/input hooks; all10 doctrines/post-commit pointer PASS, brief0/Git clean/no required jobs. Retrieved source-family/cursor facts and absent-entry canonical repair, all32 original producer bodies, their Contracts public lowerers, original115 literal cases/index-string/name arguments/alias spelling, source fixture and entry/match/source mental-model book. All32 scanners construct raw and captured/empty args directly without callbacks.
+  Owned paths: LegacyRules.pm only32 original snapshots/wrappers; standard helper-source fixture; leaf-prefixed unchanged literals/probe/oracle/immutable before-after inputs/full streams/source inverse/review/book/freeze/claim; new entry/match fact and current/history source routes, derived map; task/index/roadmaps/live/resume/bounded history. Scratch .linkedspec-data/scratch/legacy-entry-source. Freeze prior cursor claim35 bindings at activation before fixture/source/book/card mutation. Earlier artifacts remain exact.
+  Verification tier: `focused`
+  Focused checks: All112 contracts/115 cases/three seeds, original index-string/name/empty args and alias raw spelling, independent repeated Unicode-CRLF scalar bounds and actual event/constructor/args references; complete original public compiler/callback channels. Expanded original RED/repaired GREEN and twelve source/boundary/typed/AST/order/nested/trace/named/generated-entry/Phase0 suites; whole-file inverse restricted to32 hooks. Strict Git/overlay/producer/stream/exit/ordered TAP guards and effective reason-specific corruptions including index/name/alias/regex/snapshot changes. Book/claim/freeze/Knowledge/memory/histories/diff and all doctrines.
+  Canonical trigger: none; private origins preserve public/runtime/grammar behavior. Scheduled rollover infrastructure .1.4.0.1.1.1 and fresh complete-family .1.4.7 require canonical before parent closure; push remains canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6.json`
+  Known limits: No new executable quoted/comment membership, replacement, public helper admission or other backend claims. Source work changes no absent/empty/zero-text entry semantics. Existing clearing-observation .2.7 and wrapper startup .7 remain owned; preserve/reject actual warned captures unfiltered, no recovery/purge.
+  Verification: All32 original entry/match producers preserve index-string/name/empty arguments, actual alias spelling, physical bounds and event/argument identities. 4485 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins163→227. Original RED32/GREEN128; twelve suites1318 groups including generated-source12/Phase01035 and168 evidence RED pass. Book58 inputs/14 examples/three chapters/21 RED and35-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; rollover infrastructure repair precedes fresh complete-family canonical acceptance. Whole-file inverse removes only32 snapshots/wrappers to restore clean7113d. All input/producer/channel/exit/ordered TAP identities pass; required jobs complete.
+  Runtime history: Completed command was bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6-capture.py after; immutable current tree .linkedspec-data/scratch/legacy-entry-source/legacy-after-4q2iaqhv. Inspect complete after-observations.json and actual command/tree before resuming; do not duplicate an active capture, recover or purge.
+  Handoff preparation: Owned scratch finalize-docs.py is syntax-checked and requires accepted verification.json/168 controls/1318 groups plus final book21 controls before completion. Claim producer requires the actual captured producers and all prior35 hash bindings; no claim is published until strict runtime acceptance.
+  Acceptance Checklist:
+  - [x] All32 original raw/index/name/empty args and all112 public/compiler/callback channels preserved.
+  - [x] Original Unicode-CRLF repeated scalar intervals and actual returned/constructor/argument references verified.
+  - [x] Strict original RED32/GREEN128, twelve suites1318 groups and168 reason-specific controls observed.
+  - [x] Stable-ID entry/index/name/alias guards and actual-regex/snapshot controls distinguish false acceptance.
+  - [x] Book58/14/3/21,35-hash freeze, claim/Knowledge/live/roadmap/resume/bounded histories synchronized.
+  - [x] Memory/doctrines/diff and normal per-leaf landing; brief0 and clean HEAD required before next activation.
+  Next: Activate rollover EOF repair .1.4.0.1.1.1 from clean committed HEAD; preserve complete history reconstruction and remove invalid generated terminal whitespace, with exact staged canonical proof. Then run fresh all112-contract family acceptance .1.4.7 before parent closure. Quoted/comment membership, replacement and audits remain owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7`
   Status: `pending`
@@ -3382,7 +3400,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` | `done` | Named17 hooks;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial wrapper warning retained, mark controls next. |
 | 43.4.2.0.1.4.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` | `done` | Mark14 hooks;105→133 origins/RED14-GREEN81/1259 groups/148 RED; cursor/input next. |
 | 43.4.2.0.1.4.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` | `done` | Cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED; entry/match next. |
-| 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `pending` | Entry/match32 producers after cursor/input. |
+| 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `done` | Entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED; rollover next. |
 | 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `pending` | Fresh full-family canonical acceptance after all producers and rollover EOF repair. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
@@ -3427,6 +3445,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+- `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — All32 original entry/match producers preserve index-string/name/empty arguments, actual alias spelling, physical bounds and event/argument identities. 4485 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins163→227. Original RED32/GREEN128; twelve suites1318 groups including generated-source12/Phase01035 and168 evidence RED pass. Book58 inputs/14 examples/three chapters/21 RED and35-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; rollover infrastructure repair precedes fresh complete-family canonical acceptance.
 
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned.
 
@@ -3504,6 +3524,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6 - retain entry/match source origins` — original32 snapshots and full focused source compatibility; Git owns identity.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5 - retain cursor/input source origins` — original15 snapshots and full focused source compatibility; Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4 - retain mark-control source origins` — original14 snapshots and full focused source compatibility; Git owns identity.
@@ -3563,6 +3585,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-06`: `.1.4.6` verifies original32 entry/match origins and preserved index/name/alias contracts; rollover .1.4.0.1.1.1 precedes fresh canonical family .1.4.7.
 
 - `2026-10-06`: `.1.4.5` verifies original15 cursor/input origins, balanced raw and empty args; entry/match32 `.1.4.6` next. Rollover .1.4.0.1.1.1 precedes family .1.4.7.
 

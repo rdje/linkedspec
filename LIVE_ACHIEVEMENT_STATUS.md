@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: call/anonymous/named/mark/cursor-input source origins and boundary repairs verified; entry/match next. Rollover/family acceptance and quoted membership remain owned.
+Full PNT: all original Legacy source families and boundary repairs verified; governed rollover repair then fresh complete-family canonical acceptance. Quoted membership and other owned repairs remain separate.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — All32 original entry/match producers preserve index-string/name/empty arguments, actual alias spelling, physical bounds and event/argument identities. 4485 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins163→227. Original RED32/GREEN128; twelve suites1318 groups including generated-source12/Phase01035 and168 evidence RED pass. Book58 inputs/14 examples/three chapters/21 RED and35-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; rollover infrastructure repair precedes fresh complete-family canonical acceptance.
 
 ## Next Action
 
-Activate entry/match provenance .1.4.6 from clean committed HEAD; retain all32 original producers, index/name/alias arguments, exact own coordinates and public channels. Scheduled rollover repair precedes complete-family canonical acceptance; quoted/comment membership, replacement and audits stay owned.
+Activate rollover EOF repair .1.4.0.1.1.1 from clean committed HEAD; preserve complete history reconstruction and remove invalid generated terminal whitespace, with exact staged canonical proof. Then run fresh all112-contract family acceptance .1.4.7 before parent closure. Quoted/comment membership, replacement and audits remain owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — mark14;105→133 origins/RED14-GREEN81/1259 groups/148 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
@@ -29,7 +30,6 @@ Activate entry/match provenance .1.4.6 from clean committed HEAD; retain all32 o
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — original argument/callback authority diagnosis;124 groups/23 literal arguments and RED evidence controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` — fourteen direct Flow hooks; RED16/GREEN21/1158 groups/87 origins and unchanged compiler pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` — original Flow recursive source diagnosis and safe repair owners; original quoted observation retained.
-- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` accepts4050 immutable inputs/all19 pipeline contracts/207 origins/803 groups behind exact canonical landing.
 
 ## History
 

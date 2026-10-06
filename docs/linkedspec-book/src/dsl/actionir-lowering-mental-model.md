@@ -493,8 +493,37 @@ input_slice(1, nested("a,b")); input_slice(1, nested("a,b"))
 ```
 
 These private frames change no cursor movement, runtime source projections,
-public event schema or executable quoted/comment membership. Entry/match origins
-remain subsequent work.
+public event schema or executable quoted/comment membership.
+
+Entry/match producers retain their original raw spelling and argument objects.
+All32 regex producers save their own physical bounds before creating the event.
+Group indices and symbolic names remain their original scanner arguments;
+zero-argument readers keep empty arguments. The index is the captured source
+string, while the existing compiler still applies its original group semantics:
+
+```text
+entry_group(2); entry_group(2)
+# index argument: "2"; scalar intervals: [0, 14), [16, 30)
+```
+
+```text
+match_named(part); match_named(part)
+# name argument: part; scalar intervals: [0, 17), [19, 36)
+```
+
+Compatibility aliases keep the spelling actually present in each occurrence,
+even when they project the same runtime boundary:
+
+```text
+entry_start_line(); entry_line()
+# distinct spellings; scalar intervals: [0, 18), [20, 32)
+```
+
+All original Legacy producer families now retain syntactic source origins. This
+changes no entry/local-match capture values, absent/empty distinctions, cursor
+movement, public event schema or compiler channels. Complete-family acceptance
+requires its own fresh recurrence; executable quoted/comment membership and
+source-based replacement remain separate work.
 
 ### Original method argument boundaries
 

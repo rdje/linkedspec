@@ -12,7 +12,7 @@ tags: [perl, actionir, legacy, source-provenance, callbacks, event-identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1 owns seven original regex source hooks and preserves return_general. The standard helper-source fixture reuses independently authored original diagnosis intervals/arguments and tests selected constructor/returned/argument identities, callback effects, Unicode/CRLF repeats and two exclusion controls."
 reverify:
   - "bash tools/project_data_run.sh prove -Iperl t/actionir_helper_source_provenance.t"
-  - "Full .1.4.1 review is historical at da5c8d1f66732f0989cecca745557005fe44e7c1; current .1.4.5 cursor/input recurrence preserves this call-source family."
+  - "Full .1.4.1 review is historical at da5c8d1f66732f0989cecca745557005fe44e7c1; current .1.4.6 entry/match recurrence preserves this call-source family."
 ---
 
 # Selected original Legacy call/return/push occurrences

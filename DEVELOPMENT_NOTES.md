@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Entry index strings, names and actual alias source (.1.4.6)
+
+Save all32 original regex bounds before constructing the same event/argument object. Positional group indices remain captured strings, named readers retain symbolic names, and aliases keep their original spelling. Every effective corruption changes its input before exact RED; the source-regex control requires the actual unique entry_group prefix. Unchanged generated-source12 exercises native and warning-enabled fresh emitted entry cases alongside Phase01035. Read docs/knowledge/perl-legacy-entry-match-source-origins.md.
+
 ## 2026-10-06 — Balanced raw cursor/input source authority (.1.4.5)
 
 Save all15 original regex bounds before constructing the same event/empty argument object. input_slice retains its complete balanced raw expression, has no scanner parser/trim callback, and leaves the separate compiler lowerer unchanged. Stable cursor/input/entry IDs select actual corruption scope; whole-file inversion restores every original recognizer. Book control originally crossed an HTML newline and changed zero bytes; initial producer/render/manifest/capsule remain retained, corrected final19 controls pass. The initial source-regex corruption omitted the recursive named expr group and changed zero bytes; original reviewer is retained, exact zero-byte identity and unique actual target are rechecked, and every final mutation must change its input before reason-specific RED. Read docs/knowledge/perl-legacy-cursor-input-source-origins.md.

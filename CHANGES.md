@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Original entry/match source hooks (.1.4.6)
+
+All32 original entry/match producers preserve index-string/name/empty arguments, actual alias spelling, physical bounds and event/argument identities. 4485 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins163→227. Original RED32/GREEN128; twelve suites1318 groups including generated-source12/Phase01035 and168 evidence RED pass. Book58 inputs/14 examples/three chapters/21 RED and35-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; rollover infrastructure repair precedes fresh complete-family canonical acceptance. Whole-file inversion restores all original recognizers/raw/argument expressions. No runtime entry/local-match semantics, argument coercion or alias normalization changes. Complete-family acceptance stays separately canonical.
+
 ## 2026-10-06 — Original cursor/input source hooks (.1.4.5)
 
 All15 original cursor/input producers preserve balanced raw/empty scanner arguments, physical bounds and actual event/argument identities. 4459 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins133→163. Original RED15/GREEN96; eleven suites1274 groups including Phase01035 and149 evidence RED pass. Book58 inputs/11 examples/three chapters/19 RED and30-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; entry/match32 next. Clearing-observation .2.7 and wrapper startup .7 remain separately owned. Whole-file inverse restores the committed original. No public schema, cursor semantics or executable-membership admission changes; canonical remains at infrastructure/family/push boundaries.

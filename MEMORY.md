@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `907934281c4422baba6ef6580bd4080663c87e9e` — clean cursor/input source activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5 - retain cursor/input source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` (pending activation) — original32 entry/match producers.
-- next_action: Activate entry/match provenance .1.4.6 from clean committed HEAD; retain all32 original producers, index/name/alias arguments, exact own coordinates and public channels. Scheduled rollover repair precedes complete-family canonical acceptance; quoted/comment membership, replacement and audits stay owned.
+- activation_commit: `7113d085b4b7ec0ef11e2f009395d9f2b6e71f21` — clean entry/match source activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6 - retain entry/match source origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` (pending activation) — governed rollover EOF repair before family acceptance.
+- next_action: Activate rollover EOF repair .1.4.0.1.1.1 from clean committed HEAD; preserve complete history reconstruction and remove invalid generated terminal whitespace, with exact staged canonical proof. Then run fresh all112-contract family acceptance .1.4.7 before parent closure. Quoted/comment membership, replacement and audits remain owned.
 - in_flight_uncommitted: None; original/repaired capture, source review/book/claim and clean handoff complete. No required job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.

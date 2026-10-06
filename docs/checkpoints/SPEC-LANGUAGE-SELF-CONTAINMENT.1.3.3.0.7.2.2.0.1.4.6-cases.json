@@ -1,0 +1,3549 @@
+[
+  {
+    "id": "call",
+    "family": "call-return-push",
+    "contracts": [
+      "call"
+    ],
+    "action": "λ\r\ncall(Done); note(); call(Done);",
+    "expected_events": [
+      {
+        "raw": "call(Done)",
+        "args": {
+          "callee": "Done"
+        }
+      },
+      {
+        "raw": "call(Done)",
+        "args": {
+          "callee": "Done"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        13
+      ],
+      [
+        23,
+        33
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "push_single_arg",
+    "family": "call-return-push",
+    "contracts": [
+      "push_single_arg"
+    ],
+    "action": "λ\r\npush(items); note(); push(items);",
+    "expected_events": [
+      {
+        "raw": "push(items)",
+        "args": {
+          "source": "items"
+        }
+      },
+      {
+        "raw": "push(items)",
+        "args": {
+          "source": "items"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "push_indexed_arg",
+    "family": "call-return-push",
+    "contracts": [
+      "push_indexed_arg"
+    ],
+    "action": "λ\r\npush(items, 2); note(); push(items, 2);",
+    "expected_events": [
+      {
+        "raw": "push(items, 2)",
+        "args": {
+          "source": "items",
+          "index": "2"
+        }
+      },
+      {
+        "raw": "push(items, 2)",
+        "args": {
+          "source": "items",
+          "index": "2"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "push_target_arg",
+    "family": "call-return-push",
+    "contracts": [
+      "push_target_arg"
+    ],
+    "action": "λ\r\npush(items, target); note(); push(items, target);",
+    "expected_events": [
+      {
+        "raw": "push(items, target)",
+        "args": {
+          "source": "items",
+          "target": "target"
+        }
+      },
+      {
+        "raw": "push(items, target)",
+        "args": {
+          "source": "items",
+          "target": "target"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        22
+      ],
+      [
+        32,
+        51
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "push_target_indexed_arg",
+    "family": "call-return-push",
+    "contracts": [
+      "push_target_indexed_arg"
+    ],
+    "action": "λ\r\npush(items, target, 2); note(); push(items, target, 2);",
+    "expected_events": [
+      {
+        "raw": "push(items, target, 2)",
+        "args": {
+          "source": "items",
+          "target": "target",
+          "index": "2"
+        }
+      },
+      {
+        "raw": "push(items, target, 2)",
+        "args": {
+          "source": "items",
+          "target": "target",
+          "index": "2"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "push_scope_target_arg",
+    "family": "call-return-push",
+    "contracts": [
+      "push_scope_target_arg"
+    ],
+    "action": "λ\r\npush(scope, items, target); note(); push(scope, items, target);",
+    "expected_events": [
+      {
+        "raw": "push(scope, items, target)",
+        "args": {
+          "scope": "scope",
+          "source": "items",
+          "target": "target"
+        }
+      },
+      {
+        "raw": "push(scope, items, target)",
+        "args": {
+          "scope": "scope",
+          "source": "items",
+          "target": "target"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        29
+      ],
+      [
+        39,
+        65
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "return_general",
+    "family": "call-return-push",
+    "contracts": [
+      "return_general"
+    ],
+    "action": "λ\r\nreturn( length(/a\\)b\\(/i) ); note(); return( length(/a\\)b\\(/i) );",
+    "expected_events": [
+      {
+        "raw": "return( length(/a\\)b\\(/i) )",
+        "args": {
+          "payload": "length(/a\\)b\\(/i)"
+        }
+      },
+      {
+        "raw": "return( length(/a\\)b\\(/i) )",
+        "args": {
+          "payload": "length(/a\\)b\\(/i)"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        30
+      ],
+      [
+        40,
+        67
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "return",
+    "family": "call-return-push",
+    "contracts": [
+      "return"
+    ],
+    "action": "λ\r\nreturn(Done,  nested(1) ); note(); return(Done,  nested(1) );",
+    "expected_events": [
+      {
+        "raw": "return(Done,  nested(1) )",
+        "args": {
+          "label": "Done",
+          "arg": "nested(1)"
+        }
+      },
+      {
+        "raw": "return(Done,  nested(1) )",
+        "args": {
+          "label": "Done",
+          "arg": "nested(1)"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        28
+      ],
+      [
+        38,
+        63
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "capture_macro",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_macro"
+    ],
+    "action": "λ\r\n$CAPTURE; note(); $CAPTURE;",
+    "expected_events": [
+      {
+        "raw": "$CAPTURE",
+        "args": {}
+      },
+      {
+        "raw": "$CAPTURE",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        11
+      ],
+      [
+        21,
+        29
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "capture",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture"
+    ],
+    "action": "λ\r\ncapture(Done); note(); capture(Done);",
+    "expected_events": [
+      {
+        "raw": "capture(Done)",
+        "args": {
+          "label": "Done"
+        }
+      },
+      {
+        "raw": "capture(Done)",
+        "args": {
+          "label": "Done"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        16
+      ],
+      [
+        26,
+        39
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_if",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_if"
+    ],
+    "action": "λ\r\ncapture_if(Done); note(); capture_if(Done);",
+    "expected_events": [
+      {
+        "raw": "capture_if(Done)",
+        "args": {
+          "label": "Done"
+        }
+      },
+      {
+        "raw": "capture_if(Done)",
+        "args": {
+          "label": "Done"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_if_macro",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_if_macro"
+    ],
+    "action": "λ\r\nCAPTURE_IF(); note(); CAPTURE_IF();",
+    "expected_events": [
+      {
+        "raw": "CAPTURE_IF()",
+        "args": {}
+      },
+      {
+        "raw": "CAPTURE_IF()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice"
+    ],
+    "action": "λ\r\ncapture_slice(); note(); capture_slice();",
+    "expected_events": [
+      {
+        "raw": "capture_slice()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_len"
+    ],
+    "action": "λ\r\ncapture_slice_len(); note(); capture_slice_len();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        22
+      ],
+      [
+        32,
+        51
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_until_cursor",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_until_cursor"
+    ],
+    "action": "λ\r\ncapture_slice_until_cursor(); note(); capture_slice_until_cursor();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_until_cursor()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_until_cursor()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        31
+      ],
+      [
+        41,
+        69
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_until_cursor_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_until_cursor_len"
+    ],
+    "action": "λ\r\ncapture_slice_until_cursor_len(); note(); capture_slice_until_cursor_len();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_until_cursor_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_until_cursor_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        35
+      ],
+      [
+        45,
+        77
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_until_boundary",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_until_boundary"
+    ],
+    "action": "λ\r\ncapture_until_boundary(\"stop\", end); note(); capture_until_boundary(\"stop\", end);",
+    "expected_events": [
+      {
+        "raw": "capture_until_boundary(\"stop\", end)",
+        "args": {
+          "boundaries": [
+            "stop",
+            "end"
+          ]
+        }
+      },
+      {
+        "raw": "capture_until_boundary(\"stop\", end)",
+        "args": {
+          "boundaries": [
+            "stop",
+            "end"
+          ]
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        38
+      ],
+      [
+        48,
+        83
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "capture_take_until_cursor",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_until_cursor"
+    ],
+    "action": "λ\r\ncapture_take_until_cursor(); note(); capture_take_until_cursor();",
+    "expected_events": [
+      {
+        "raw": "capture_take_until_cursor()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take_until_cursor()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        30
+      ],
+      [
+        40,
+        67
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_until_cursor_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_until_cursor_len"
+    ],
+    "action": "λ\r\ncapture_take_until_cursor_len(); note(); capture_take_until_cursor_len();",
+    "expected_events": [
+      {
+        "raw": "capture_take_until_cursor_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take_until_cursor_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        34
+      ],
+      [
+        44,
+        75
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_pos",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_pos"
+    ],
+    "action": "λ\r\ncapture_slice_pos(); note(); capture_slice_pos();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_pos()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        22
+      ],
+      [
+        32,
+        51
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_line",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_line"
+    ],
+    "action": "λ\r\ncapture_slice_line(); note(); capture_slice_line();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_line()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_col",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_col"
+    ],
+    "action": "λ\r\ncapture_slice_col(); note(); capture_slice_col();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_col()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        22
+      ],
+      [
+        32,
+        51
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_length",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_length"
+    ],
+    "action": "λ\r\ncapture_slice_length(); note(); capture_slice_length();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_length()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_length()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "start_capture_slice",
+    "family": "anonymous-capture",
+    "contracts": [
+      "start_capture_slice"
+    ],
+    "action": "λ\r\nstart_capture_slice(); note(); start_capture_slice();",
+    "expected_events": [
+      {
+        "raw": "start_capture_slice()",
+        "args": {}
+      },
+      {
+        "raw": "start_capture_slice()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        24
+      ],
+      [
+        34,
+        55
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "start_capture_slice_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "start_capture_slice_from_mark"
+    ],
+    "action": "λ\r\nstart_capture_slice_from(edge); note(); start_capture_slice_from(edge);",
+    "expected_events": [
+      {
+        "raw": "start_capture_slice_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "start_capture_slice_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        33
+      ],
+      [
+        43,
+        73
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_slice_here",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_slice_here"
+    ],
+    "action": "λ\r\ncapture_slice_here(); note(); capture_slice_here();",
+    "expected_events": [
+      {
+        "raw": "capture_slice_here()",
+        "args": {}
+      },
+      {
+        "raw": "capture_slice_here()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_rest",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_rest"
+    ],
+    "action": "λ\r\ncapture_rest(); note(); capture_rest();",
+    "expected_events": [
+      {
+        "raw": "capture_rest()",
+        "args": {}
+      },
+      {
+        "raw": "capture_rest()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_rest_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_rest_len"
+    ],
+    "action": "λ\r\ncapture_rest_len(); note(); capture_rest_len();",
+    "expected_events": [
+      {
+        "raw": "capture_rest_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_rest_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_rest_length",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_rest_length"
+    ],
+    "action": "λ\r\ncapture_rest_length(); note(); capture_rest_length();",
+    "expected_events": [
+      {
+        "raw": "capture_rest_length()",
+        "args": {}
+      },
+      {
+        "raw": "capture_rest_length()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        24
+      ],
+      [
+        34,
+        55
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_rest",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_rest"
+    ],
+    "action": "λ\r\ncapture_take_rest(); note(); capture_take_rest();",
+    "expected_events": [
+      {
+        "raw": "capture_take_rest()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take_rest()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        22
+      ],
+      [
+        32,
+        51
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_rest_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_rest_len"
+    ],
+    "action": "λ\r\ncapture_take_rest_len(); note(); capture_take_rest_len();",
+    "expected_events": [
+      {
+        "raw": "capture_take_rest_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take_rest_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        26
+      ],
+      [
+        36,
+        59
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_slice",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_slice"
+    ],
+    "action": "λ\r\ncapture_take(); note(); capture_take();",
+    "expected_events": [
+      {
+        "raw": "capture_take()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_slice_len",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_take_slice_len"
+    ],
+    "action": "λ\r\ncapture_take_len(); note(); capture_take_len();",
+    "expected_events": [
+      {
+        "raw": "capture_take_len()",
+        "args": {}
+      },
+      {
+        "raw": "capture_take_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_from_rule_start",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_from_rule_start"
+    ],
+    "action": "λ\r\ncapture_from_rule_start(); note(); capture_from_rule_start();",
+    "expected_events": [
+      {
+        "raw": "capture_from_rule_start()",
+        "args": {}
+      },
+      {
+        "raw": "capture_from_rule_start()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        28
+      ],
+      [
+        38,
+        63
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_len_from_rule_start",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_len_from_rule_start"
+    ],
+    "action": "λ\r\ncapture_len_from_rule_start(); note(); capture_len_from_rule_start();",
+    "expected_events": [
+      {
+        "raw": "capture_len_from_rule_start()",
+        "args": {}
+      },
+      {
+        "raw": "capture_len_from_rule_start()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        32
+      ],
+      [
+        42,
+        71
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_from_mark"
+    ],
+    "action": "λ\r\ncapture_from(edge); note(); capture_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "capture_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_len_from(edge); note(); capture_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_from_mark"
+    ],
+    "action": "λ\r\ncapture_take(edge); note(); capture_take(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_take_len_from(edge); note(); capture_take_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        30
+      ],
+      [
+        40,
+        67
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_rest_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_rest_from_mark"
+    ],
+    "action": "λ\r\ncapture_rest_from(edge); note(); capture_rest_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_rest_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_rest_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        26
+      ],
+      [
+        36,
+        59
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_rest_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_rest_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_rest_len_from(edge); note(); capture_rest_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_rest_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_rest_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        30
+      ],
+      [
+        40,
+        67
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_rest_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_rest_from_mark"
+    ],
+    "action": "λ\r\ncapture_take_rest_from(edge); note(); capture_take_rest_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take_rest_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take_rest_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        31
+      ],
+      [
+        41,
+        69
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_rest_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_rest_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_take_rest_len_from(edge); note(); capture_take_rest_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take_rest_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take_rest_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        35
+      ],
+      [
+        45,
+        77
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_until_cursor_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_until_cursor_from_mark"
+    ],
+    "action": "λ\r\ncapture_until_cursor_from(edge); note(); capture_until_cursor_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_until_cursor_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_until_cursor_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        34
+      ],
+      [
+        44,
+        75
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_until_cursor_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_until_cursor_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_until_cursor_len_from(edge); note(); capture_until_cursor_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_until_cursor_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_until_cursor_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        38
+      ],
+      [
+        48,
+        83
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_until_cursor_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_until_cursor_from_mark"
+    ],
+    "action": "λ\r\ncapture_take_until_cursor_from(edge); note(); capture_take_until_cursor_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take_until_cursor_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take_until_cursor_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        39
+      ],
+      [
+        49,
+        85
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_until_cursor_len_from_mark",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_until_cursor_len_from_mark"
+    ],
+    "action": "λ\r\ncapture_take_until_cursor_len_from(edge); note(); capture_take_until_cursor_len_from(edge);",
+    "expected_events": [
+      {
+        "raw": "capture_take_until_cursor_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "capture_take_until_cursor_len_from(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        43
+      ],
+      [
+        53,
+        93
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_between_marks",
+    "family": "named-capture",
+    "contracts": [
+      "capture_between_marks"
+    ],
+    "action": "λ\r\ncapture_between(first, second); note(); capture_between(first, second);",
+    "expected_events": [
+      {
+        "raw": "capture_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      },
+      {
+        "raw": "capture_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        33
+      ],
+      [
+        43,
+        73
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_len_between_marks",
+    "family": "named-capture",
+    "contracts": [
+      "capture_len_between_marks"
+    ],
+    "action": "λ\r\ncapture_len_between(first, second); note(); capture_len_between(first, second);",
+    "expected_events": [
+      {
+        "raw": "capture_len_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      },
+      {
+        "raw": "capture_len_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        37
+      ],
+      [
+        47,
+        81
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_between_marks",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_between_marks"
+    ],
+    "action": "λ\r\ncapture_take_between(first, second); note(); capture_take_between(first, second);",
+    "expected_events": [
+      {
+        "raw": "capture_take_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      },
+      {
+        "raw": "capture_take_between(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        38
+      ],
+      [
+        48,
+        83
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "capture_take_between_len_marks",
+    "family": "named-capture",
+    "contracts": [
+      "capture_take_between_len_marks"
+    ],
+    "action": "λ\r\ncapture_take_between_len(first, second); note(); capture_take_between_len(first, second);",
+    "expected_events": [
+      {
+        "raw": "capture_take_between_len(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      },
+      {
+        "raw": "capture_take_between_len(first, second)",
+        "args": {
+          "start": "first",
+          "end": "second"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        42
+      ],
+      [
+        52,
+        91
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_input_start",
+    "family": "mark-control",
+    "contracts": [
+      "mark_input_start"
+    ],
+    "action": "λ\r\nmark_input_start(edge); note(); mark_input_start(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_input_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_input_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_input_end",
+    "family": "mark-control",
+    "contracts": [
+      "mark_input_end"
+    ],
+    "action": "λ\r\nmark_input_end(edge); note(); mark_input_end(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_input_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_input_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_here",
+    "family": "mark-control",
+    "contracts": [
+      "mark_here"
+    ],
+    "action": "λ\r\nmark_here(edge); note(); mark_here(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_here(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_here(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_entry_start",
+    "family": "mark-control",
+    "contracts": [
+      "mark_entry_start"
+    ],
+    "action": "λ\r\nmark_entry_start(edge); note(); mark_entry_start(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_entry_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_entry_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_entry_end",
+    "family": "mark-control",
+    "contracts": [
+      "mark_entry_end"
+    ],
+    "action": "λ\r\nmark_entry_end(edge); note(); mark_entry_end(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_entry_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_entry_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_match_start",
+    "family": "mark-control",
+    "contracts": [
+      "mark_match_start"
+    ],
+    "action": "λ\r\nmark_match_start(edge); note(); mark_match_start(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_match_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_match_start(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        25
+      ],
+      [
+        35,
+        57
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_match_end",
+    "family": "mark-control",
+    "contracts": [
+      "mark_match_end"
+    ],
+    "action": "λ\r\nmark_match_end(edge); note(); mark_match_end(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_match_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_match_end(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_copy",
+    "family": "mark-control",
+    "contracts": [
+      "mark_copy"
+    ],
+    "action": "λ\r\nmark_copy(first, second); note(); mark_copy(first, second);",
+    "expected_events": [
+      {
+        "raw": "mark_copy(first, second)",
+        "args": {
+          "target": "first",
+          "source": "second"
+        }
+      },
+      {
+        "raw": "mark_copy(first, second)",
+        "args": {
+          "target": "first",
+          "source": "second"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        27
+      ],
+      [
+        37,
+        61
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "mark_capture_slice",
+    "family": "mark-control",
+    "contracts": [
+      "mark_capture_slice"
+    ],
+    "action": "λ\r\nmark_capture_slice(edge); note(); mark_capture_slice(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_capture_slice(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_capture_slice(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        27
+      ],
+      [
+        37,
+        61
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "clear_mark",
+    "family": "mark-control",
+    "contracts": [
+      "clear_mark"
+    ],
+    "action": "λ\r\nclear_mark(edge); note(); clear_mark(edge);",
+    "expected_events": [
+      {
+        "raw": "clear_mark(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "clear_mark(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_exists",
+    "family": "mark-control",
+    "contracts": [
+      "mark_exists"
+    ],
+    "action": "λ\r\nmark_exists(edge); note(); mark_exists(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_exists(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_exists(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_pos",
+    "family": "mark-control",
+    "contracts": [
+      "mark_pos"
+    ],
+    "action": "λ\r\nmark_pos(edge); note(); mark_pos(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_pos(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_pos(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_line",
+    "family": "mark-control",
+    "contracts": [
+      "mark_line"
+    ],
+    "action": "λ\r\nmark_line(edge); note(); mark_line(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_line(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_line(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "mark_col",
+    "family": "mark-control",
+    "contracts": [
+      "mark_col"
+    ],
+    "action": "λ\r\nmark_col(edge); note(); mark_col(edge);",
+    "expected_events": [
+      {
+        "raw": "mark_col(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      },
+      {
+        "raw": "mark_col(edge)",
+        "args": {
+          "mark": "edge"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "cursor_pos",
+    "family": "cursor-input",
+    "contracts": [
+      "cursor_pos"
+    ],
+    "action": "λ\r\ncursor_pos(); note(); cursor_pos();",
+    "expected_events": [
+      {
+        "raw": "cursor_pos()",
+        "args": {}
+      },
+      {
+        "raw": "cursor_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "cursor_line",
+    "family": "cursor-input",
+    "contracts": [
+      "cursor_line"
+    ],
+    "action": "λ\r\ncursor_line(); note(); cursor_line();",
+    "expected_events": [
+      {
+        "raw": "cursor_line()",
+        "args": {}
+      },
+      {
+        "raw": "cursor_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        16
+      ],
+      [
+        26,
+        39
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "cursor_col",
+    "family": "cursor-input",
+    "contracts": [
+      "cursor_col"
+    ],
+    "action": "λ\r\ncursor_col(); note(); cursor_col();",
+    "expected_events": [
+      {
+        "raw": "cursor_col()",
+        "args": {}
+      },
+      {
+        "raw": "cursor_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "cursor_rest",
+    "family": "cursor-input",
+    "contracts": [
+      "cursor_rest"
+    ],
+    "action": "λ\r\ncursor_rest(); note(); cursor_rest();",
+    "expected_events": [
+      {
+        "raw": "cursor_rest()",
+        "args": {}
+      },
+      {
+        "raw": "cursor_rest()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        16
+      ],
+      [
+        26,
+        39
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "cursor_rest_len",
+    "family": "cursor-input",
+    "contracts": [
+      "cursor_rest_len"
+    ],
+    "action": "λ\r\ncursor_rest_len(); note(); cursor_rest_len();",
+    "expected_events": [
+      {
+        "raw": "cursor_rest_len()",
+        "args": {}
+      },
+      {
+        "raw": "cursor_rest_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "input_slice",
+    "family": "cursor-input",
+    "contracts": [
+      "input_slice"
+    ],
+    "action": "λ\r\ninput_slice(1, nested(\"a,b\")); note(); input_slice(1, nested(\"a,b\"));",
+    "expected_events": [
+      {
+        "raw": "input_slice(1, nested(\"a,b\"))",
+        "args": {}
+      },
+      {
+        "raw": "input_slice(1, nested(\"a,b\"))",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        32
+      ],
+      [
+        42,
+        71
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "input_text",
+    "family": "cursor-input",
+    "contracts": [
+      "input_text"
+    ],
+    "action": "λ\r\ninput_text(); note(); input_text();",
+    "expected_events": [
+      {
+        "raw": "input_text()",
+        "args": {}
+      },
+      {
+        "raw": "input_text()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "input_len",
+    "family": "cursor-input",
+    "contracts": [
+      "input_len"
+    ],
+    "action": "λ\r\ninput_len(); note(); input_len();",
+    "expected_events": [
+      {
+        "raw": "input_len()",
+        "args": {}
+      },
+      {
+        "raw": "input_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "input_end_pos",
+    "family": "cursor-input",
+    "contracts": [
+      "input_end_pos"
+    ],
+    "action": "λ\r\ninput_end_pos(); note(); input_end_pos();",
+    "expected_events": [
+      {
+        "raw": "input_end_pos()",
+        "args": {}
+      },
+      {
+        "raw": "input_end_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "input_end_line",
+    "family": "cursor-input",
+    "contracts": [
+      "input_end_line"
+    ],
+    "action": "λ\r\ninput_end_line(); note(); input_end_line();",
+    "expected_events": [
+      {
+        "raw": "input_end_line()",
+        "args": {}
+      },
+      {
+        "raw": "input_end_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "input_end_col",
+    "family": "cursor-input",
+    "contracts": [
+      "input_end_col"
+    ],
+    "action": "λ\r\ninput_end_col(); note(); input_end_col();",
+    "expected_events": [
+      {
+        "raw": "input_end_col()",
+        "args": {}
+      },
+      {
+        "raw": "input_end_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_text",
+    "family": "entry-match",
+    "contracts": [
+      "entry_text"
+    ],
+    "action": "λ\r\nentry_text(); note(); entry_text();",
+    "expected_events": [
+      {
+        "raw": "entry_text()",
+        "args": {}
+      },
+      {
+        "raw": "entry_text()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_group",
+    "family": "entry-match",
+    "contracts": [
+      "entry_group"
+    ],
+    "action": "λ\r\nentry_group(2); note(); entry_group(2);",
+    "expected_events": [
+      {
+        "raw": "entry_group(2)",
+        "args": {
+          "index": "2"
+        }
+      },
+      {
+        "raw": "entry_group(2)",
+        "args": {
+          "index": "2"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_groups",
+    "family": "entry-match",
+    "contracts": [
+      "entry_groups"
+    ],
+    "action": "λ\r\nentry_groups(); note(); entry_groups();",
+    "expected_events": [
+      {
+        "raw": "entry_groups()",
+        "args": {}
+      },
+      {
+        "raw": "entry_groups()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_named",
+    "family": "entry-match",
+    "contracts": [
+      "entry_named"
+    ],
+    "action": "λ\r\nentry_named(named); note(); entry_named(named);",
+    "expected_events": [
+      {
+        "raw": "entry_named(named)",
+        "args": {
+          "name": "named"
+        }
+      },
+      {
+        "raw": "entry_named(named)",
+        "args": {
+          "name": "named"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "entry_has",
+    "family": "entry-match",
+    "contracts": [
+      "entry_has"
+    ],
+    "action": "λ\r\nentry_has(named); note(); entry_has(named);",
+    "expected_events": [
+      {
+        "raw": "entry_has(named)",
+        "args": {
+          "name": "named"
+        }
+      },
+      {
+        "raw": "entry_has(named)",
+        "args": {
+          "name": "named"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_map",
+    "family": "entry-match",
+    "contracts": [
+      "entry_map"
+    ],
+    "action": "λ\r\nentry_map(); note(); entry_map();",
+    "expected_events": [
+      {
+        "raw": "entry_map()",
+        "args": {}
+      },
+      {
+        "raw": "entry_map()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_named_map",
+    "family": "entry-match",
+    "contracts": [
+      "entry_named_map"
+    ],
+    "action": "λ\r\nentry_named_map(); note(); entry_named_map();",
+    "expected_events": [
+      {
+        "raw": "entry_named_map()",
+        "args": {}
+      },
+      {
+        "raw": "entry_named_map()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_line",
+    "family": "entry-match",
+    "contracts": [
+      "entry_line"
+    ],
+    "action": "λ\r\nentry_line(); note(); entry_line();",
+    "expected_events": [
+      {
+        "raw": "entry_line()",
+        "args": {}
+      },
+      {
+        "raw": "entry_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_start_line",
+    "family": "entry-match",
+    "contracts": [
+      "entry_start_line"
+    ],
+    "action": "λ\r\nentry_start_line(); note(); entry_start_line();",
+    "expected_events": [
+      {
+        "raw": "entry_start_line()",
+        "args": {}
+      },
+      {
+        "raw": "entry_start_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_col",
+    "family": "entry-match",
+    "contracts": [
+      "entry_col"
+    ],
+    "action": "λ\r\nentry_col(); note(); entry_col();",
+    "expected_events": [
+      {
+        "raw": "entry_col()",
+        "args": {}
+      },
+      {
+        "raw": "entry_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_start_col",
+    "family": "entry-match",
+    "contracts": [
+      "entry_start_col"
+    ],
+    "action": "λ\r\nentry_start_col(); note(); entry_start_col();",
+    "expected_events": [
+      {
+        "raw": "entry_start_col()",
+        "args": {}
+      },
+      {
+        "raw": "entry_start_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_len",
+    "family": "entry-match",
+    "contracts": [
+      "entry_len"
+    ],
+    "action": "λ\r\nentry_len(); note(); entry_len();",
+    "expected_events": [
+      {
+        "raw": "entry_len()",
+        "args": {}
+      },
+      {
+        "raw": "entry_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_start_pos",
+    "family": "entry-match",
+    "contracts": [
+      "entry_start_pos"
+    ],
+    "action": "λ\r\nentry_start_pos(); note(); entry_start_pos();",
+    "expected_events": [
+      {
+        "raw": "entry_start_pos()",
+        "args": {}
+      },
+      {
+        "raw": "entry_start_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_end_pos",
+    "family": "entry-match",
+    "contracts": [
+      "entry_end_pos"
+    ],
+    "action": "λ\r\nentry_end_pos(); note(); entry_end_pos();",
+    "expected_events": [
+      {
+        "raw": "entry_end_pos()",
+        "args": {}
+      },
+      {
+        "raw": "entry_end_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_end_line",
+    "family": "entry-match",
+    "contracts": [
+      "entry_end_line"
+    ],
+    "action": "λ\r\nentry_end_line(); note(); entry_end_line();",
+    "expected_events": [
+      {
+        "raw": "entry_end_line()",
+        "args": {}
+      },
+      {
+        "raw": "entry_end_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "entry_end_col",
+    "family": "entry-match",
+    "contracts": [
+      "entry_end_col"
+    ],
+    "action": "λ\r\nentry_end_col(); note(); entry_end_col();",
+    "expected_events": [
+      {
+        "raw": "entry_end_col()",
+        "args": {}
+      },
+      {
+        "raw": "entry_end_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_text",
+    "family": "entry-match",
+    "contracts": [
+      "match_text"
+    ],
+    "action": "λ\r\nmatch_text(); note(); match_text();",
+    "expected_events": [
+      {
+        "raw": "match_text()",
+        "args": {}
+      },
+      {
+        "raw": "match_text()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_group",
+    "family": "entry-match",
+    "contracts": [
+      "match_group"
+    ],
+    "action": "λ\r\nmatch_group(2); note(); match_group(2);",
+    "expected_events": [
+      {
+        "raw": "match_group(2)",
+        "args": {
+          "index": "2"
+        }
+      },
+      {
+        "raw": "match_group(2)",
+        "args": {
+          "index": "2"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": true
+  },
+  {
+    "id": "match_groups",
+    "family": "entry-match",
+    "contracts": [
+      "match_groups"
+    ],
+    "action": "λ\r\nmatch_groups(); note(); match_groups();",
+    "expected_events": [
+      {
+        "raw": "match_groups()",
+        "args": {}
+      },
+      {
+        "raw": "match_groups()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        17
+      ],
+      [
+        27,
+        41
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_named",
+    "family": "entry-match",
+    "contracts": [
+      "match_named"
+    ],
+    "action": "λ\r\nmatch_named(named); note(); match_named(named);",
+    "expected_events": [
+      {
+        "raw": "match_named(named)",
+        "args": {
+          "name": "named"
+        }
+      },
+      {
+        "raw": "match_named(named)",
+        "args": {
+          "name": "named"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_has",
+    "family": "entry-match",
+    "contracts": [
+      "match_has"
+    ],
+    "action": "λ\r\nmatch_has(named); note(); match_has(named);",
+    "expected_events": [
+      {
+        "raw": "match_has(named)",
+        "args": {
+          "name": "named"
+        }
+      },
+      {
+        "raw": "match_has(named)",
+        "args": {
+          "name": "named"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_map",
+    "family": "entry-match",
+    "contracts": [
+      "match_map"
+    ],
+    "action": "λ\r\nmatch_map(); note(); match_map();",
+    "expected_events": [
+      {
+        "raw": "match_map()",
+        "args": {}
+      },
+      {
+        "raw": "match_map()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_named_map",
+    "family": "entry-match",
+    "contracts": [
+      "match_named_map"
+    ],
+    "action": "λ\r\nmatch_named_map(); note(); match_named_map();",
+    "expected_events": [
+      {
+        "raw": "match_named_map()",
+        "args": {}
+      },
+      {
+        "raw": "match_named_map()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_len",
+    "family": "entry-match",
+    "contracts": [
+      "match_len"
+    ],
+    "action": "λ\r\nmatch_len(); note(); match_len();",
+    "expected_events": [
+      {
+        "raw": "match_len()",
+        "args": {}
+      },
+      {
+        "raw": "match_len()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_start_pos",
+    "family": "entry-match",
+    "contracts": [
+      "match_start_pos"
+    ],
+    "action": "λ\r\nmatch_start_pos(); note(); match_start_pos();",
+    "expected_events": [
+      {
+        "raw": "match_start_pos()",
+        "args": {}
+      },
+      {
+        "raw": "match_start_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_end_pos",
+    "family": "entry-match",
+    "contracts": [
+      "match_end_pos"
+    ],
+    "action": "λ\r\nmatch_end_pos(); note(); match_end_pos();",
+    "expected_events": [
+      {
+        "raw": "match_end_pos()",
+        "args": {}
+      },
+      {
+        "raw": "match_end_pos()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_end_line",
+    "family": "entry-match",
+    "contracts": [
+      "match_end_line"
+    ],
+    "action": "λ\r\nmatch_end_line(); note(); match_end_line();",
+    "expected_events": [
+      {
+        "raw": "match_end_line()",
+        "args": {}
+      },
+      {
+        "raw": "match_end_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_end_col",
+    "family": "entry-match",
+    "contracts": [
+      "match_end_col"
+    ],
+    "action": "λ\r\nmatch_end_col(); note(); match_end_col();",
+    "expected_events": [
+      {
+        "raw": "match_end_col()",
+        "args": {}
+      },
+      {
+        "raw": "match_end_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        18
+      ],
+      [
+        28,
+        43
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_start_line",
+    "family": "entry-match",
+    "contracts": [
+      "match_start_line"
+    ],
+    "action": "λ\r\nmatch_start_line(); note(); match_start_line();",
+    "expected_events": [
+      {
+        "raw": "match_start_line()",
+        "args": {}
+      },
+      {
+        "raw": "match_start_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        21
+      ],
+      [
+        31,
+        49
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_line",
+    "family": "entry-match",
+    "contracts": [
+      "match_line"
+    ],
+    "action": "λ\r\nmatch_line(); note(); match_line();",
+    "expected_events": [
+      {
+        "raw": "match_line()",
+        "args": {}
+      },
+      {
+        "raw": "match_line()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        15
+      ],
+      [
+        25,
+        37
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_start_col",
+    "family": "entry-match",
+    "contracts": [
+      "match_start_col"
+    ],
+    "action": "λ\r\nmatch_start_col(); note(); match_start_col();",
+    "expected_events": [
+      {
+        "raw": "match_start_col()",
+        "args": {}
+      },
+      {
+        "raw": "match_start_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        20
+      ],
+      [
+        30,
+        47
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "match_col",
+    "family": "entry-match",
+    "contracts": [
+      "match_col"
+    ],
+    "action": "λ\r\nmatch_col(); note(); match_col();",
+    "expected_events": [
+      {
+        "raw": "match_col()",
+        "args": {}
+      },
+      {
+        "raw": "match_col()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        14
+      ],
+      [
+        24,
+        35
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "save_cursor",
+    "family": "cursor-input",
+    "contracts": [
+      "save_cursor"
+    ],
+    "action": "λ\r\nsave_cursor(); note(); save_cursor();",
+    "expected_events": [
+      {
+        "raw": "save_cursor()",
+        "args": {}
+      },
+      {
+        "raw": "save_cursor()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        16
+      ],
+      [
+        26,
+        39
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "restore_cursor",
+    "family": "cursor-input",
+    "contracts": [
+      "restore_cursor"
+    ],
+    "action": "λ\r\nrestore_cursor(); note(); restore_cursor();",
+    "expected_events": [
+      {
+        "raw": "restore_cursor()",
+        "args": {}
+      },
+      {
+        "raw": "restore_cursor()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        19
+      ],
+      [
+        29,
+        45
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "rewind_entry_start",
+    "family": "cursor-input",
+    "contracts": [
+      "rewind_entry_start"
+    ],
+    "action": "λ\r\nrewind_entry_start(); note(); rewind_entry_start();",
+    "expected_events": [
+      {
+        "raw": "rewind_entry_start()",
+        "args": {}
+      },
+      {
+        "raw": "rewind_entry_start()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "rewind_match_start",
+    "family": "cursor-input",
+    "contracts": [
+      "rewind_match_start"
+    ],
+    "action": "λ\r\nrewind_match_start(); note(); rewind_match_start();",
+    "expected_events": [
+      {
+        "raw": "rewind_match_start()",
+        "args": {}
+      },
+      {
+        "raw": "rewind_match_start()",
+        "args": {}
+      }
+    ],
+    "original_spans": [
+      [
+        3,
+        23
+      ],
+      [
+        33,
+        53
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "call-recognition-exclusions",
+    "family": "call-return-push",
+    "contracts": [
+      "call"
+    ],
+    "action": "recognize_once(scope, call(Hidden)); observe_recognition(scope, call(Other)); call(Done)",
+    "expected_events": [
+      {
+        "raw": "call(Done)",
+        "args": {
+          "callee": "Done"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        78,
+        88
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "push-literal-target-exclusions",
+    "family": "call-return-push",
+    "contracts": [
+      "push_target_arg"
+    ],
+    "action": "push(items, true); push(items, false); push(items, undef); push(items, target)",
+    "expected_events": [
+      {
+        "raw": "push(items, target)",
+        "args": {
+          "source": "items",
+          "target": "target"
+        }
+      }
+    ],
+    "original_spans": [
+      [
+        59,
+        78
+      ]
+    ],
+    "toolbox": false
+  },
+  {
+    "id": "boundary-quoted-comma-original",
+    "family": "anonymous-capture",
+    "contracts": [
+      "capture_until_boundary"
+    ],
+    "action": "capture_until_boundary(\"a,b\", end)",
+    "expected_events": [
+      {
+        "raw": "capture_until_boundary(\"a,b\", end)",
+        "args": {
+          "boundaries": [
+            "a,b",
+            "end"
+          ]
+        }
+      }
+    ],
+    "intended_boundaries": [
+      "a,b",
+      "end"
+    ],
+    "original_spans": [
+      [
+        0,
+        34
+      ]
+    ],
+    "toolbox": true
+  }
+]
