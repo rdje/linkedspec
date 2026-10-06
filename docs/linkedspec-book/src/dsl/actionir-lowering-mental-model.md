@@ -359,6 +359,17 @@ origins at that boundary. These internal compatibility names do not establish ne
 public helper spellings. Each family must retain its original arguments and
 compiler behavior before executable source membership can use its coordinates.
 
+The Perl boundary scanner and lowerer now decode the same recognized quoted-or-word
+atoms. A comma inside a quoted atom stays part of its label, so an unresolved
+`"a,b,c"` cannot create a false `b` boundary. Their outer recognizer grammar,
+raw helper occurrence and quote/backslash decoding stay unchanged; this repair
+does not yet add boundary source sidecars. A separate nested unknown-escape
+failure remains owned: assignment normalization can change `"a\,b"` to a spelling
+that a later equal-text helper rewrite cannot find. Scoped trace reports
+`source_span_missing` for that helper, and the generated parser still calls it
+unresolved. The [boundary reference](source-boundary-helper-reference.md)
+distinguishes the working quoted-label examples from that runtime limitation.
+
 The call/return/push family now retains its selected original scalar occurrences
 through the private recorder. Seven hooks complement the existing `return_general`
 hook: internal `call`, the five push variants, and the two-argument `return`.

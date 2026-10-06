@@ -1,0 +1,54 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 2,
+  "rendered_sections": 3,
+  "controls": [
+    {
+      "name": "failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "missing guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forged instrument",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forged channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "missing examples",
+      "rejected": true,
+      "reason": "original rendered boundary examples"
+    },
+    {
+      "name": "missing label teaching",
+      "rejected": true,
+      "reason": "whole quoted label teaching"
+    },
+    {
+      "name": "hidden runtime limit",
+      "rejected": true,
+      "reason": "explicit unknown-escape runtime limit"
+    },
+    {
+      "name": "missing catalog contract",
+      "rejected": true,
+      "reason": "public catalog quoted-label contract"
+    },
+    {
+      "name": "missing mechanism",
+      "rejected": true,
+      "reason": "independent source-span failure teaching"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "f900742617f6519809f632037be375abeeb6e9df13fae105d296440ac0f7607f"
+}

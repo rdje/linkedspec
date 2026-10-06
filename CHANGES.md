@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Whole quoted boundary-label atoms (.1.4.0.1)
+
+Replace raw comma splitting in both Perl producers with one private recognized-atom decoder. Preserve recognizers, raw calls, quote/backslash decoding, empty labels and schemas; unresolved quoted words cannot become phantom boundaries. Actual RED9/GREEN18 and nine suites1169 groups/Phase01034 pass, with36 evidence RED and complete book58/2/3/9. Freeze37 prior hashes. Nested unknown-escape assignment normalization remains explicit P1 .1.4.0.1.1, with retained source_span_missing/undefined-helper evidence, two skipped runtime assertions and immediate recurring Phase0 coverage ownership.
+
 ## 2026-10-06 — Original Legacy call/return/push source hooks (.1.4.1)
 
 Seven new regex hooks preserve return_general and all original exclusions.4318 original Git inputs/one standard-fixture replacement/three overlays per epoch and one after Legacy owner replacement support eight guarded commands.112 contracts/115 cases/227 events per seed retain all original public callback/compiler channels; private origins grow2→18 across three seeds. Actual RED9/GREEN23 and seven suites1147 groups including Phase01034 pass;140 evidence controls RED. Complete book58 inputs/22 examples/three chapters/21 controls and prior21-hash hygiene freeze pass. Removing only the seven snapshot/wrapper additions reconstructs the complete original Legacy file byte-exactly. Other source families and quoted token repair remain owned.

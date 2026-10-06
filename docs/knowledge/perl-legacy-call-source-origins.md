@@ -10,7 +10,9 @@ date: 2026-10-06
 status: verified private source hooks; other Legacy families remain active
 tags: [perl, actionir, legacy, source-provenance, callbacks, event-identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1 owns seven original regex source hooks and preserves return_general. The standard helper-source fixture reuses independently authored original diagnosis intervals/arguments and tests selected constructor/returned/argument identities, callback effects, Unicode/CRLF repeats and two exclusion controls."
-reverify: "bash tools/project_data_run.sh prove -Iperl t/actionir_helper_source_provenance.t; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1-review.py"
+reverify:
+  - "bash tools/project_data_run.sh prove -Iperl t/actionir_helper_source_provenance.t"
+  - "Full .1.4.1 review is historical at da5c8d1f66732f0989cecca745557005fe44e7c1; current quoted repair recurrence includes the unchanged call-source consumer under .1.4.0.1-review.py."
 ---
 
 # Selected original Legacy call/return/push occurrences
@@ -45,3 +47,8 @@ only the seven new snapshots/wrappers reconstructs the complete original
 Legacy file byte-exactly. The complete58-input book renders22 examples across
 three chapters with21 rejection controls. See the owned retained claim for
 scope, producer/input/channel identities and exact replay boundaries.
+
+The later quoted-label repair changes only the boundary token decoder/imports;
+call/return/push hooks and callbacks remain exact. The complete original
+112-contract recurrence above is frozen at da5c8d; current quoted labels and the
+separate nested unknown-escape owner are in [[perl-quoted-boundary-labels]].

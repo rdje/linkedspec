@@ -1,0 +1,199 @@
+{
+  "complete": true,
+  "revision": "da5c8d1f66732f0989cecca745557005fe44e7c1",
+  "regular_inputs": 4346,
+  "cases": 18,
+  "compiler_cases": 14,
+  "runtime_successes": 13,
+  "events_per_seed": 28,
+  "seeds": 3,
+  "commands": 8,
+  "before_red_groups": 9,
+  "after_green_groups": 18,
+  "fixture_suites": 9,
+  "fixture_groups": 1169,
+  "runtime_exclusion": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1",
+  "controls": [
+    {
+      "name": "omit case",
+      "observed": "RED",
+      "reason": "complete literal case order"
+    },
+    {
+      "name": "forge producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "erase command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "promote failed exit",
+      "observed": "RED",
+      "reason": "complete actual exit and guards"
+    },
+    {
+      "name": "erase guard",
+      "observed": "RED",
+      "reason": "complete actual exit and guards"
+    },
+    {
+      "name": "forge channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "drop positive reach",
+      "observed": "RED",
+      "reason": "complete ordered positive fixture reach"
+    },
+    {
+      "name": "hide nested failure",
+      "observed": "RED",
+      "reason": "all selected nested assertions pass"
+    },
+    {
+      "name": "fragment bare",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment double",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment single",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment comma",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment phantom",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment single-phantom",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment escaped-quote",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment escaped-slash",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment escaped-comma",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment empty-mixed",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment only-empty",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment only-unresolved",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment quoted-spaces",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "fragment unicode-crlf",
+      "observed": "RED",
+      "reason": "literal whole-label event population"
+    },
+    {
+      "name": "restore phantom runtime phantom",
+      "observed": "RED",
+      "reason": "literal public runtime cursor and value"
+    },
+    {
+      "name": "restore phantom runtime single-phantom",
+      "observed": "RED",
+      "reason": "literal public runtime cursor and value"
+    },
+    {
+      "name": "restore phantom runtime only-unresolved",
+      "observed": "RED",
+      "reason": "literal public runtime cursor and value"
+    },
+    {
+      "name": "hide nested source root",
+      "observed": "RED",
+      "reason": "actual source-span-missing mechanism"
+    },
+    {
+      "name": "forge public emission",
+      "observed": "RED",
+      "reason": "exact public label emission"
+    },
+    {
+      "name": "forge compiler tail",
+      "observed": "RED",
+      "reason": "only diagnosed label and phantom-runtime effects change"
+    },
+    {
+      "name": "forge helper descriptor",
+      "observed": "RED",
+      "reason": "literal public helper descriptor boundary"
+    },
+    {
+      "name": "omit original input",
+      "observed": "RED",
+      "reason": "complete unique original inputs"
+    },
+    {
+      "name": "erase module overlay",
+      "observed": "RED",
+      "reason": "exact new overlays"
+    },
+    {
+      "name": "forge Git content",
+      "observed": "RED",
+      "reason": "original content identity"
+    },
+    {
+      "name": "forge overlay bytes",
+      "observed": "RED",
+      "reason": "overlay byte identity"
+    },
+    {
+      "name": "alter metadata exclusions",
+      "observed": "RED",
+      "reason": "black-box metadata exclusions"
+    },
+    {
+      "name": "alter owner perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+      "observed": "RED",
+      "reason": "only shared tokenizer imports and exact original decode loops change"
+    },
+    {
+      "name": "alter owner perl/LinkedSpec/ActionIR/Contracts.pm",
+      "observed": "RED",
+      "reason": "only shared tokenizer imports and exact original decode loops change"
+    }
+  ],
+  "instrument_sha256": "68b73f0812c50cacb8ccd815f9f9327e4fb879ccdec2044dc58efb43506deae3"
+}

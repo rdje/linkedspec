@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `0083dc7af44fe64f329339da6b764d0806cf1717` — clean Legacy call/return/push activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1 - retain Legacy call source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` (done) — seven Legacy source hooks, original exclusions and complete final-byte focused recurrence verified.
-- next_action: Activate quoted-boundary .1.4.0.1 from clean committed HEAD; verify existing public label contract and repair scanner/lowering comma and escape tokenization before anonymous capture .1.4.2.
-- in_flight_uncommitted: none — intended clean focused landing; no required job remains after commit.
+- activation_commit: `da5c8d1f66732f0989cecca745557005fe44e7c1` — clean quoted-boundary activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1 - preserve quoted boundary label atoms`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` (done) — atomic labels verified; nested unknown escape remains explicitly owned.
+- next_action: Activate P1 .1.4.0.1.1 from clean committed HEAD; diagnose/repair nested unknown-escape original-to-rewritten source ownership and recurring Phase0 coverage before .1.4.2.
+- in_flight_uncommitted: none — intended clean focused landing; all required runtime/review/book jobs completed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -641,6 +641,36 @@ valid but no later boundary is found, it captures through end-of-input and moves
 the cursor to end-of-input. If none of the requested boundary rules can be
 resolved, it returns `undef` and leaves the cursor unchanged.
 
+In Perl, a quoted argument is one boundary label even when it contains commas.
+Quotation does not make an unknown label usable. This example defines only `b`
+and `end`; the label `a,b,c` stays unresolved and never selects the `b` rule:
+
+```text
+Top::
+ I { body = capture_until_boundary("a,b,c", end); return(hash("body", body, "cursor", cursor_pos(), "rest", cursor_rest())) }
+b: /b/
+end: /END/
+```
+
+For input `body b rest`, Perl returns
+`{"body":"body b rest","cursor":11,"rest":""}`: `end` is usable but absent,
+so the helper captures through EOF. With only `capture_until_boundary("a,b,c")`,
+it returns `undef` and leaves the cursor at zero. A matching boundary still remains
+unconsumed:
+
+```text
+capture_until_boundary("end", 'b')  # input: xx b END; body: "xx "; cursor: 3
+capture_until_boundary("", '', end) # empty labels omitted; input: xx END; cursor: 3
+```
+
+Perl decodes escaped quotes and backslashes inside a recognized label before
+lookup; surrounding spaces inside quotes remain label data. Commas need no
+backslash escape. An unknown escape such as `\,` currently has a separate Perl
+limitation when nested in an assignment: string normalization can prevent the
+later helper rewrite, producing an undefined-helper runtime error. Use a literal
+comma in the quoted label. This limitation is tracked independently of the fixed
+label tokenization; it is not a claim about the other backends' escape handling.
+
 The Julia interpreter implements this full cursor-control and structural-boundary
 contract as of `JULIA-BACKEND-PARITY.4.4`, including character-based public
 offsets over its internal UTF-8 code-unit cursor and consume-mode continuation

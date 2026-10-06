@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: Legacy call/return/push source hooks and exact final oracle-byte recurrence are verified. P1 quoted-boundary argument repair follows from a clean committed activation before anonymous capture origins.
+Full PNT: atomic quoted boundary labels are verified; the independently reproduced nested unknown-escape failure is the immediate P1 successor before anonymous capture origins.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — Seven new regex hooks preserve return_general and all original exclusions.4318 original Git inputs/one standard-fixture replacement/three overlays per epoch and one after Legacy owner replacement support eight guarded commands.112 contracts/115 cases/227 events per seed retain all original public callback/compiler channels; private origins grow2→18 across three seeds. Actual RED9/GREEN23 and seven suites1147 groups including Phase01034 pass;140 evidence controls RED. Complete book58 inputs/22 examples/three chapters/21 controls and prior21-hash hygiene freeze pass. Initial extra-EOF source/proofs remain retained separately; accepted final manifests/channels and reviewer bind the exact committed oracle bytes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — Perl boundary scanner/lowerer share atomic quoted-label decoding.4346 originals/eight guarded commands retain18 cases/28 events/14 compiler cases across three seeds; RED9/GREEN18/nine suites1169 groups/Phase01034/36 RED pass. Complete book58/2/3/9 and37-hash historical freeze pass.13 runtimes succeed; nested unknown-escape P1 .1.4.0.1.1 remains explicit, with two skipped runtime assertions and actual source_span_missing/undefined-helper evidence.
 
 ## Next Action
 
-Activate quoted-boundary .1.4.0.1 from clean committed HEAD. Verify the existing public label contract and both scanner/lowering tokenization paths; repair accepted comma/escape boundaries before anonymous capture .1.4.2. Other producers/membership/comments/replacement and audits remain owned.
+Activate .1.4.0.1.1 from clean committed HEAD. Diagnose/repair original-to-rewritten source ownership for the nested escaped-comma helper and add recurring Phase0 public regression. Finish its per-leaf proof/commit before anonymous capture .1.4.2; remaining work stays owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
 - `REPO-HYGIENE.10` — due retained parent/Rust census, zero removals and original Legacy claim freeze.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — original112-contract/115-case diagnosis; Granted three-scalar note rollover.
@@ -29,7 +30,6 @@ Activate quoted-boundary .1.4.0.1 from clean committed HEAD. Verify the existing
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` retains ten pipeline regex hooks/RED10-GREEN13/1748 groups/99 origins.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` retains original19-contract pipeline diagnosis/701 groups and owns split-source repair.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` accepts3921-input immutable20-contract recurrence/144 groups behind exact canonical family landing.
-- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` verifies20 mixed contracts/147 origins/129 frames and144 consumer groups with27 proof/render controls.
 
 ## History
 

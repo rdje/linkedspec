@@ -15,6 +15,7 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::ActionIR::MethodExpr ();
+use LinkedSpec::ActionIR::BoundaryLabels ();
 use LinkedSpec::ActionIR::ScannerCore ();
 
 sub _is_primitive_literal_token {
@@ -338,15 +339,8 @@ sub _scan_contract_capture_until_boundary {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)/g) {
- my @boundaries;
- for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
-  if ($boundary =~ /\A(["'])(.*)\1\z/s) {
-   $boundary = $2;
-   $boundary =~ s/\\(["'\\])/$1/g;
-  }
-  push @boundaries, $boundary if length($boundary);
- }
- push @events, {raw => $&, args => {boundaries => \@boundaries}};
+ my $boundaries = LinkedSpec::ActionIR::BoundaryLabels::_decode_recognized_labels($+{boundaries});
+ push @events, {raw => $&, args => {boundaries => $boundaries}};
 }
  return \@events
 }

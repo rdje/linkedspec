@@ -5,14 +5,14 @@ answers:
   - "how many original LegacyRules dispatcher contracts need source provenance"
   - "how is LegacyRules source provenance split into safe families"
   - "which LegacyRules contract already records source origins"
-  - "does capture_until_boundary preserve a quoted comma argument"
+  - "did capture_until_boundary preserve quoted commas at the original Legacy diagnosis"
   - "which capacity increase publishes the original Legacy source diagnosis"
 date: 2026-10-05
-status: original diagnosis verified; director-granted finite note admission requires canonical landing
+status: historical original diagnosis/canonical admission verified; current quoted labels have a repair owner
 tags: [perl, actionir, legacy, scanner, source-provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0 retains4252 immutable regular Git inputs/three exact overlays/four guarded commands,112 contracts/115 cases/227 original events and two return origins per seed,103 compatibility groups and123 reason-specific RED controls. Eleven full Toolbox compiler cases recur under three seeds."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-review.py"
+  - "Original .1.4.0 review is historical at f3a49dd82794c494625e33fe83ccf6cf01b4df8e; do not replay its unchanged-producer guard against later hooks/token repairs. Current quoted labels: .1.4.0.1-review.py."
 ---
 
 Original LegacyRules owns112 dispatcher IDs. Source-bound textual inventory and
@@ -55,3 +55,8 @@ The copied initial book manifest named an obsolete direct-Flow boundary. Origina
 producer/report/manifest/verification are retained as initial-book artifacts; the
 corrected actual producer rerenders the same58 inputs/19 examples/three chapters
 with20 RED controls against the separate da3d Legacy diagnosis boundary.
+
+Current quoted-label behavior belongs to [[perl-quoted-boundary-labels]]. Atomic
+label repair `.1.4.0.1` preserves commas; the separately reproduced nested
+unknown-escape runtime failure is owned by its immediate P1 child `.1.4.0.1.1`.
+The original split-label observation above remains historical, not current truth.

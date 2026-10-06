@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Boundary atoms and distinct rewrite ownership (.1.4.0.1)
+
+Consume already recognized quoted-or-word atoms before existing unquote/unescape/filter logic. General MethodExpr CSV parsing would introduce unrelated callbacks/grammar. Function-local match scope preserves the original raw call. Scoped public substitution proves unknown-escape normalization changes assignment text, after which RewritePipeline reports source_span_missing and runtime calls an undefined helper. Immediate P1 .1.4.0.1.1 owns source-preserving repair and recurring Phase0 coverage; tokenization acceptance explicitly excludes that runtime. Current/historical Knowledge routes are distinct.
+
 ## 2026-10-06 — Legacy selected source origins (.1.4.1)
 
 Call/return/push producers retain their own regex bounds before prefix checks or callbacks; their original event and argument objects pass through the private recorder. Preserve the existing return_general helper-pattern view and both recognition/literal exclusions. Internal dispatcher IDs do not admit new public spellings. Read docs/knowledge/perl-legacy-call-source-origins.md for the owned boundary; other Legacy families and quoted token repair remain separate.

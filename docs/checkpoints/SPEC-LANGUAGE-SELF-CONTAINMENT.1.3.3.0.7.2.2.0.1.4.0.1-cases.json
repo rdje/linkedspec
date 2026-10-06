@@ -1,0 +1,388 @@
+[
+  {
+    "id": "bare",
+    "payload": "end, b",
+    "labels": [
+      "end",
+      "b"
+    ],
+    "input": "xx b END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "b END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(end, b); capture_until_boundary(end, b)",
+    "raw": "capture_until_boundary(end, b)",
+    "intervals": [
+      [
+        8,
+        38
+      ],
+      [
+        40,
+        70
+      ]
+    ]
+  },
+  {
+    "id": "double",
+    "payload": "\"end\"",
+    "labels": [
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"end\"); capture_until_boundary(\"end\")",
+    "raw": "capture_until_boundary(\"end\")",
+    "intervals": [
+      [
+        8,
+        37
+      ],
+      [
+        39,
+        68
+      ]
+    ]
+  },
+  {
+    "id": "single",
+    "payload": "'end'",
+    "labels": [
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary('end'); capture_until_boundary('end')",
+    "raw": "capture_until_boundary('end')",
+    "intervals": [
+      [
+        8,
+        37
+      ],
+      [
+        39,
+        68
+      ]
+    ]
+  },
+  {
+    "id": "comma",
+    "payload": "\"a,b\", end",
+    "labels": [
+      "a,b",
+      "end"
+    ],
+    "input": "body b rest",
+    "expected": {
+      "body": "body b rest",
+      "cursor": 11,
+      "rest": ""
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a,b\", end); capture_until_boundary(\"a,b\", end)",
+    "raw": "capture_until_boundary(\"a,b\", end)",
+    "intervals": [
+      [
+        8,
+        42
+      ],
+      [
+        44,
+        78
+      ]
+    ]
+  },
+  {
+    "id": "phantom",
+    "payload": "\"a,b,c\", end",
+    "labels": [
+      "a,b,c",
+      "end"
+    ],
+    "input": "body b rest",
+    "expected": {
+      "body": "body b rest",
+      "cursor": 11,
+      "rest": ""
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a,b,c\", end); capture_until_boundary(\"a,b,c\", end)",
+    "raw": "capture_until_boundary(\"a,b,c\", end)",
+    "intervals": [
+      [
+        8,
+        44
+      ],
+      [
+        46,
+        82
+      ]
+    ]
+  },
+  {
+    "id": "single-phantom",
+    "payload": "'a,b,c', end",
+    "labels": [
+      "a,b,c",
+      "end"
+    ],
+    "input": "body b rest",
+    "expected": {
+      "body": "body b rest",
+      "cursor": 11,
+      "rest": ""
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary('a,b,c', end); capture_until_boundary('a,b,c', end)",
+    "raw": "capture_until_boundary('a,b,c', end)",
+    "intervals": [
+      [
+        8,
+        44
+      ],
+      [
+        46,
+        82
+      ]
+    ]
+  },
+  {
+    "id": "escaped-quote",
+    "payload": "\"a\\\"b,c\", 'x\\'y,z', end",
+    "labels": [
+      "a\"b,c",
+      "x'y,z",
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a\\\"b,c\", 'x\\'y,z', end); capture_until_boundary(\"a\\\"b,c\", 'x\\'y,z', end)",
+    "raw": "capture_until_boundary(\"a\\\"b,c\", 'x\\'y,z', end)",
+    "intervals": [
+      [
+        8,
+        55
+      ],
+      [
+        57,
+        104
+      ]
+    ]
+  },
+  {
+    "id": "escaped-slash",
+    "payload": "\"a\\\\b,c\", end",
+    "labels": [
+      "a\\b,c",
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a\\\\b,c\", end); capture_until_boundary(\"a\\\\b,c\", end)",
+    "raw": "capture_until_boundary(\"a\\\\b,c\", end)",
+    "intervals": [
+      [
+        8,
+        45
+      ],
+      [
+        47,
+        84
+      ]
+    ]
+  },
+  {
+    "id": "escaped-comma",
+    "payload": "\"a\\,b\", end",
+    "labels": [
+      "a\\,b",
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a\\,b\", end); capture_until_boundary(\"a\\,b\", end)",
+    "raw": "capture_until_boundary(\"a\\,b\", end)",
+    "intervals": [
+      [
+        8,
+        43
+      ],
+      [
+        45,
+        80
+      ]
+    ]
+  },
+  {
+    "id": "empty-mixed",
+    "payload": "\"\", '', end",
+    "labels": [
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"\", '', end); capture_until_boundary(\"\", '', end)",
+    "raw": "capture_until_boundary(\"\", '', end)",
+    "intervals": [
+      [
+        8,
+        43
+      ],
+      [
+        45,
+        80
+      ]
+    ]
+  },
+  {
+    "id": "only-empty",
+    "payload": "\"\", ''",
+    "labels": [],
+    "input": "xx END",
+    "expected": {
+      "body": null,
+      "cursor": 0,
+      "rest": "xx END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"\", ''); capture_until_boundary(\"\", '')",
+    "raw": "capture_until_boundary(\"\", '')",
+    "intervals": [
+      [
+        8,
+        38
+      ],
+      [
+        40,
+        70
+      ]
+    ]
+  },
+  {
+    "id": "only-unresolved",
+    "payload": "\"a,b,c\"",
+    "labels": [
+      "a,b,c"
+    ],
+    "input": "body b rest",
+    "expected": {
+      "body": null,
+      "cursor": 0,
+      "rest": "body b rest"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"a,b,c\"); capture_until_boundary(\"a,b,c\")",
+    "raw": "capture_until_boundary(\"a,b,c\")",
+    "intervals": [
+      [
+        8,
+        39
+      ],
+      [
+        41,
+        72
+      ]
+    ]
+  },
+  {
+    "id": "quoted-spaces",
+    "payload": "\" a, b \", end",
+    "labels": [
+      " a, b ",
+      "end"
+    ],
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\" a, b \", end); capture_until_boundary(\" a, b \", end)",
+    "raw": "capture_until_boundary(\" a, b \", end)",
+    "intervals": [
+      [
+        8,
+        45
+      ],
+      [
+        47,
+        84
+      ]
+    ]
+  },
+  {
+    "id": "unicode-crlf",
+    "payload": "\"λ,界\",\r\n end",
+    "labels": [
+      "λ,界",
+      "end"
+    ],
+    "input": "λ界 END",
+    "expected": {
+      "body": "λ界 ",
+      "cursor": 3,
+      "rest": "END"
+    },
+    "action": "/*λ*/;\r\ncapture_until_boundary(\"λ,界\",\r\n end); capture_until_boundary(\"λ,界\",\r\n end)",
+    "raw": "capture_until_boundary(\"λ,界\",\r\n end)",
+    "intervals": [
+      [
+        8,
+        44
+      ],
+      [
+        46,
+        82
+      ]
+    ]
+  },
+  {
+    "id": "zero",
+    "payload": "",
+    "labels": null,
+    "action": "capture_until_boundary()",
+    "intervals": []
+  },
+  {
+    "id": "expression",
+    "payload": "end + b",
+    "labels": null,
+    "action": "capture_until_boundary(end + b)",
+    "intervals": []
+  },
+  {
+    "id": "trailing",
+    "payload": "end,",
+    "labels": null,
+    "action": "capture_until_boundary(end,)",
+    "intervals": []
+  },
+  {
+    "id": "unterminated",
+    "payload": "\"end",
+    "labels": null,
+    "action": "capture_until_boundary(\"end)",
+    "intervals": []
+  }
+]

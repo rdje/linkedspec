@@ -1558,6 +1558,16 @@ new start for `right`, and the closing-bracket action records the final right ed
   lookahead. The signature requires at least one rule; zero-argument behavior is not portable and is owned by
   `FUTURE-PARITY-BACKLOG.5`.
 
+- **Perl quoted labels**: `capture_until_boundary("a,b,c", end)` requests two labels,
+  `a,b,c` and `end`; it never expands the first into `a`, `b`, and `c`. Empty
+  quoted labels are omitted. Escaped quotes and backslashes are decoded; spaces
+  inside quotes remain significant. A quoted unresolved label follows the same
+  no-usable-rule behavior as a bare unresolved label. See the
+  [boundary reference](../dsl/source-boundary-helper-reference.md)
+  for executable examples and the separately tracked Perl nested unknown-escape
+  limitation. These escape examples do not establish new rule-definition syntax
+  or cross-backend escape parity.
+
 ### `capture_take()`
 - **Signature**: `capture_take()`
 - **Returns**: scalar or undef

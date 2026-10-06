@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::ActionIR::BoundaryLabels ();
 use LinkedSpec::ActionIR::ProgressiveSpanDispatch ();
 use LinkedSpec::ActionIR::StagedParseJob ();
 
@@ -750,11 +751,7 @@ sub _build_capture_and_cursor_contracts {
      \bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)
     }{
      my @boundary_labels;
-     for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
-      if ($boundary =~ /\A(["'])(.*)\1\z/s) {
-       $boundary = $2;
-       $boundary =~ s/\\(["'\\])/$1/g;
-      }
+     for my $boundary (@{LinkedSpec::ActionIR::BoundaryLabels::_decode_recognized_labels($+{boundaries})}) {
       $boundary =~ s/\\/\\\\/g;
       $boundary =~ s/'/\\'/g;
       push @boundary_labels, "'$boundary'" if length($boundary);
