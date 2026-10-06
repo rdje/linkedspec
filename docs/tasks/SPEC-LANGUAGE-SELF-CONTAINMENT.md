@@ -2869,13 +2869,55 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/2/3/9,37-hash historical freeze, strict claim, current/historical Knowledge routing, task/frontier/index/roadmaps/live/resume/history agree. Memory/history/diff/normal doctrines govern landing; remaining work stays owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1`
-  Status: `pending`
+  Status: `done`
   Priority: P1 — quoted helper escape normalization loses its later rewrite occurrence.
   Goal: Repair the independently reproduced nested escaped-comma helper failure after atomic label tokenization lands cleanly.
   Reproduce: Top I assigns body = capture_until_boundary("a\,b", end), then returns body/cursor/rest; end: /END/, input xx END. Direct public substitution recognizes the helper, but compiled parser retains it after scalar assignment normalizes the unknown escape to two backslashes. Runtime reports Undefined subroutine capture_until_boundary.
   Impact: Accepted quoted labels work through direct scanner/substitution but this nested canonical lowering route remains unresolved, even after the token delimiter repair. Source-preserving rewrite must not depend on equal raw spelling after an earlier normalization.
   Dependencies: `.1.4.0.1` clean commit; use its actual public descriptor/dump/runtime and scoped trace evidence.
   Acceptance: Toolbox exact source-span-missing mechanism; literal unknown-escape plus quote/backslash/bare/Unicode/repeated nested contexts; independently retained RED/GREEN and immutable before/after inputs; fix original source/rewritten occurrence ownership without broad equal-text guessing or new grammar; selected nested/canonical/source consumers/Phase0, recurring Phase0 public quoted-label and unknown-escape regression (the current new focused fixture is not individually invoked by canonical CI), book/Knowledge/claim and per-leaf commit before .1.4.2. Decide bounded implementation only after scoped diagnosis.
+
+  Activation: Clean b2156813fffed53622e640583a46a4ca94186a08; empty brief, all prior required jobs complete. Read AST value/aggregate/call diagnostic canonical cards, scoped MethodLowering assignment/value-source/call priority, AST string unescape contract, Contracts emitter and relevant boundary/ActionIR book sections.
+  Owned paths: MethodLowering source serializer and shared recognized boundary atom/call decoder; Contracts only if direct-output preservation needs it; existing quoted-boundary fixture and Phase0 recurring coverage plus focused new regression; leaf-prefixed actual producers/literal probes/full channels/manifests/review/book/freeze/claim; current/historical boundary Knowledge routes and map; this tree/index, both roadmaps and bounded live/resume/history. Scratch .linkedspec-data/scratch/nested-boundary. Prior proof bytes remain immutable; verify all bound inputs before historical claim freeze.
+  Verification tier: `focused`
+  Focused checks: Original actual Toolbox public assignment/return/hash/block/standalone/repeated Unicode-CRLF boundary observations and typed AST fake-source/label-slot controls; literal grammar/escape/leading-zero/keyword/bare-label expectations; original RED/repaired GREEN, exact unaffected scanner/substitution and source serializer/decoder reconstruction. Existing AST/helper-source/source-frame/order/nested/typed consumers and Phase0 with recurring new public cases; all current quoted runtime assertions enabled. Full input/channel/exit/TAP guards, distinguishing evidence controls, book/render/claims/Knowledge/memory/history/doctrines/diff.
+  Canonical trigger: none; restore existing recognized helper behavior through existing typed value lowering without new grammar, node schema/capability/backend/callback/CI/storage/dependency admission. Canonical remains required at family .1.4.7 and before push.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json`
+  Design boundary: The initial new typed helper-emitter route is superseded: generic AST CSV drops empty slots, so that route could admit excluded source grammar. Preserve a recognized original boundary-call lexical spelling at the existing source serializer only when its complete atom count/decoded values agree with typed label fields; otherwise retain original semantic reconstruction. Use no coordinate authority or broad equal-text occurrence searches. Preserve all existing call dispatch/callback priority, ordinary string/number serialization and unsupported grammar. Establish literal before controls for dropped slots and foreign/fake/inconsistent call sources before repair.
+  In flight: none; all required actual runtime/reviewer/book jobs completed before focused landing.
+  Encountered defect / repair owner: Quoted marker body = "capture_until_boundary(end)"; return(body), input xx END, is rewritten inside the string and fails generated-handler compilation (runtime_handler/rule_handler_compile). This is P1 executable quoted-source membership, owned and scheduled under .7.2.2 after producer provenance prerequisites, before quoted-source closeout .7.2.3. Retain its actual before/after failure here; it is never an accepted runtime positive or a hidden waiver.
+
+  Callback/dispatch scope: Canonical terse-user-function-registry-seam rejects builtin helper-name definitions; perl-callable-codeblock-dynamic-invocation gives static helpers precedence over same-named codeblocks. The original dispatcher is reconstructed byte-exactly outside the source serializer, so this repair admits no callback collision or new dispatch path.
+
+  Evidence review boundary: Raw channels are retained losslessly and hash-checked. Actual recursive seed diff locates only clock headers in existing NONE-level runtime failure stdout (and the scoped debug trace); seed/unchanged-channel comparisons normalize only exact timestamp headers, retaining all diagnostic content. The original RED11 and full source whitelist already pass. Initial reviewer escape generation was corrected before proof publication; no runtime/test producer or captured bytes changed.
+
+  Scoped source conclusion: AST Parser and BoundaryLabels unescape exactly the same quote/backslash characters. _actionir_ast_value_source_expr always re-quotes string nodes, while the later helper event retains original spelling. Existing AST string value lowering already has a lexical-source preference; the bounded fix must apply only to recognized boundary-call serialization with structural label agreement, not all strings or a new typed admission. Actual original-to-rewritten positions/sidecars remain unchanged; no origin is inferred from matching values.
+
+  Verification: PASS — Boundary lexical serialization validates complete decoded atoms against typed args. 4368 originals/three overlays/four exact deltas retain28 cases (17 public/11 AST), seven runtime repairs and three seeds/eight guarded commands. RED11/GREEN28; ten suites1198 groups/Phase01035 and39 evidence RED pass. Book58 inputs/three examples/three chapters/11 RED and33-hash historical freeze pass. Five grammar exclusions and quoted-source membership P1 .7.2.2 remain explicit. Full source reconstruction preserves all bytes outside the decoder helpers, one serializer import/branch, removed runtime skips and added Phase0 subtest. No callback dispatch, grammar, AST schema or origin sidecar changes.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1 - preserve nested boundary call spelling`.
+  Completed runtime locator: .linkedspec-data/scratch/nested-boundary/boundary-after-dg5_lxu2; exact retained complete channels/exits/guards, no required job remains.
+  History rollover: Required59193-byte pressure archives the clean b215 CHANGES suffix144–371 as segment4966 (228 lines/28487 bytes). All44 old immutable manifest rows and exact old root reconstruction pass, with six independent history RED controls. Manifest46 lines/26255 bytes uses the last ADR0122 reserve; no capacity scalar changes. The first ad-hoc inspection incorrectly expected append-only manifest bytes; the governed reverse-chronological insertion plus count-header increment is verified exactly. No history loss/corruption occurred.
+  Hot-root EOF: git diff --check reports the generated terminal blank line. tools/roll_document_history.pl:94 retains complete records via join_prefix, carrying the last retained record separator to EOF. Retain the complete generated30706-byte root as history-rolled-root.json, remove exactly one terminal LF only from mutable CHANGES, then independently reconstruct the full old root with that recorded separator. No archive/manifest bytes change. P2 child .1.4.0.1.1.1 owns durable rollover/whitespace compatibility and canonical tests, scheduled after .1.4.6 before family .1.4.7.
+  Wrapper recurrence: Final Knowledge generation warns child setpgid73980 Operation not permitted, then exits0 and produces1272 facts/9902 keys. The canonical project-data-liveness-permission-denial card already owns group-establishment verification under SESSION-STARTUP-READING.7. Original warned PGID is not measured; no group-failure or lifecycle-safety claim follows, no recovery/purge runs, and existing repair scheduling remains unchanged.
+  Next: Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain all26 original contracts/public channels and exact own coordinates before callbacks. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Retain original RED11, seven nested undefined-helper routes and four lexical controls; direct/standalone/block/keyword/empty positives distinguish the bounded failure.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Actual scoped substitution trace observes source_span_missing after string re-quoting; parsed and boundary-decoded unknown escapes agree. Generic CSV empty-slot loss rules out new typed emitter admission.
+- [x] **FIX** — Keep only fully recognized original boundary call spelling when all decoded atoms/count agree with typed fields; preserve empty slots for comparison, original runtime empty filtering and call dispatch.
+- [x] **ADDRESSED (verified)** — Actual public assignment/return/hash/spaced/repeated/single-quote/Unicode-CRLF repairs pass; fake/inconsistent/dropped-slot/zero/ordinary string/call AST controls remain exact and nodes immutable.
+- [x] **NO REGRESSION** — Ten suites1198 groups/Phase01035 pass. Both quoted runtime skips removed; four public recurring Phase0 cases added. Complete unaffected public channels remain exact except retained clock headers; five grammar exclusions and quoted compile failure remain explicit.
+- [x] **LOCKSTEP** — Book58/3/3/11,33-input historical freeze, current claim/Knowledge/task/index/roadmaps/live/resume/history agree. Memory/Knowledge/history/diff/all normal doctrines gate landing; canonical remains family/push boundary.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1`
+  Status: `pending`
+  Priority: P2 — governed rollover produces a hot-root EOF whitespace rejection.
+  Goal: Resolve rollover/whitespace compatibility without losing immutable source bytes or weakening Git checks.
+  Reproduce: Prepend the .1.4.0.1.1 record to clean b215 CHANGES (59193 bytes), run governed --apply. It archives exact suffix144–371, but retained147-line/30706-byte root ends in two LF; git diff --check rejects new blank line at EOF. Exact current normalization removes one LF and retains the original generated root/restore recipe.
+  Impact: Normal required rollover cannot directly pass the ordinary whitespace gate; ad-hoc cleanup risks losing record-boundary byte evidence.
+  Dependencies: `.1.4.6`; complete before Legacy family `.1.4.7` closeout.
+  Acceptance: Toolbox existing history read/roll tools first; retain original RED and supported change/note boundaries, complete source/suffix/manifest rows and pending/orphan recovery; final live roots pass ordinary whitespace checks without weakening immutable byte guarantees or collection bounds. Declare exact owning paths/claim and canonical tier before infrastructure edits. No history-part edits, capacity increases or gate bypass.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1`
   Status: `done`
@@ -2941,7 +2983,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7`
   Status: `pending`
   Goal: Independently accept the complete Legacy source family.
-  Dependencies: `.1.4.6`, `.1.4.0.1` and `.1.4.0.1.1`.
+  Dependencies: `.1.4.6`, `.1.4.0.1`, `.1.4.0.1.1` and rollover repair `.1.4.0.1.1.1`.
   Acceptance: Fresh immutable all112-contract recurrence from committed producers, original independent literal scalar/args/reference/callback/compiler oracles and precise separately verified boundary correction; complete changed-surface/direct consumers/book/claims/live docs and exact staged canonical receipt before parent closure.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
@@ -3252,9 +3294,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.3.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` | `done` | Immutable4233/no overlays;16 contracts/837 groups; canonical receipt gates acceptance. |
 | 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `active` | Original112-contract diagnosis verified; finite note capacity decision gates publication. |
 | 43.4.2.0.1.4.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` | `done` | Original112-contract diagnosis/115 cases/103 groups/123 RED; Granted finite note admission; exact canonical landing. |
+| 43.4.2.0.1.4.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` | `pending` | P2 rollover EOF; after .1.4.6 before .1.4.7, exact source/whitespace canonical repair. |
 | 43.4.2.0.1.4.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` | `done` | Seven hooks/eight contracts; final RED9/GREEN23,2→18 origins,1147 consumers/140 RED and byte-exact original source reconstruction. |
 | 43.4.2.0.1.4.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` | `done` | Atomic quote decoding; RED9/GREEN18/1169 groups/36 RED; nested unknown-escape P1 child is next. |
-| 43.4.2.0.1.4.0.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` | `pending` | P1 nested unknown-escape source ownership: actual normalization/source_span_missing and undefined runtime helper; next after atomic label commit, before anonymous capture. |
+| 43.4.2.0.1.4.0.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` | `done` | Checked lexical calls; RED11/GREEN28/1198 groups/39 RED; anonymous origins next, quoted membership owned. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
@@ -3298,6 +3341,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+- `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — Boundary lexical serialization validates complete decoded atoms against typed args. 4368 originals/three overlays/four exact deltas retain28 cases (17 public/11 AST), seven runtime repairs and three seeds/eight guarded commands. RED11/GREEN28; ten suites1198 groups/Phase01035 and39 evidence RED pass. Book58 inputs/three examples/three chapters/11 RED and33-hash historical freeze pass. Five grammar exclusions and quoted-source membership P1 .7.2.2 remain explicit.
+
 
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — Perl boundary scanner/lowerer share atomic quoted-label decoding.4346 originals/eight guarded commands retain18 cases/28 events/14 compiler cases across three seeds; RED9/GREEN18/nine suites1169 groups/Phase01034/36 RED pass. Complete book58/2/3/9 and37-hash historical freeze pass.13 runtimes succeed; nested unknown-escape P1 .1.4.0.1.1 remains explicit, with two skipped runtime assertions and actual source_span_missing/undefined-helper evidence.
 
@@ -3364,6 +3410,9 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1 - preserve nested boundary call spelling` — bounded serializer compatibility; Git owns commit identity.
+
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1 - preserve quoted boundary label atoms` — shared tokenizer, exact compatibility and explicit immediate runtime repair child; Git owns identity.
 
 
@@ -3412,6 +3461,9 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-06`: `.1.4.0.1.1` repairs nested unknown escapes with checked lexical spelling and recurring Phase0; anonymous .1.4.2 next. Quoted-marker compile failure remains owned by .7.2.2.
+
 
 - `2026-10-06`: `.1.4.0.1` fixes atomic quoted labels; nested unknown-escape `.1.4.0.1.1` is the immediate P1 successor before anonymous capture.
 

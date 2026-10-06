@@ -1,6 +1,6 @@
 ---
 id: perl-quoted-boundary-labels
-title: Quoted boundary atoms stay whole; nested unknown escapes have a separate rewrite gap
+title: Quoted boundary atoms stay whole through nested lexical serialization
 answers:
   - "does capture_until_boundary preserve a quoted comma argument"
   - "why did a quoted comma label create a false Perl boundary"
@@ -9,11 +9,11 @@ answers:
   - "why does an escaped comma boundary remain an undefined helper inside assignment"
   - "does the quoted boundary repair publish source sidecars"
 date: 2026-10-06
-status: atomic-label repair verified; nested unknown-escape child pending
+status: atomic-label and nested lexical repair verified by separate retained epochs
 tags: [perl, actionir, boundary, quoted, tokenization, source-ownership]
-evidence: "Owning .1.4.0.1 verifies4346 originals/eight commands;18 cases/28 events/14 compiler cases/three seeds, RED9-GREEN18/1169 groups/36 RED.13 runtimes succeed; one nested unknown-escape P1 exclusion remains. Book58/2/3/9 and37-hash historical freeze pass."
+evidence: "Historical .1.4.0.1 at b215 verifies4346 originals/eight commands;18 cases/28 events/14 compiler cases/three seeds, RED9-GREEN18/1169 groups/36 RED.13 runtimes succeed; one nested unknown-escape P1 exclusion remains. Book58/2/3/9 and37-hash historical freeze pass."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-review.py"
   - "bash tools/project_data_run.sh prove -v -Iperl t/capture_boundary_quoted_labels.t"
 ---
 
@@ -34,20 +34,17 @@ complete original helper match; repeated raw occurrences and Unicode/CRLF scalar
 intervals remain exact. The scanner/lowerer public schema is unchanged. Boundary
 source sidecars remain owned by the subsequent anonymous-capture leaf.
 
-The independently observed `body = capture_until_boundary("a\,b", end)` gap is
-not repaired by atomic label parsing. The direct scanner and substitution now
-retain its whole label, but assignment lowering normalizes the unknown escape
-to two backslashes. The later helper event still has the original spelling;
-RewritePipeline reports `source_span_missing` for capture_until_boundary and the
-generated parser retains an unresolved call. Runtime records an undefined-helper
-error. P1 child `.1.4.0.1.1` is scheduled immediately after this clean commit,
-before `.1.4.2`; its fix requires original-to-rewritten occurrence ownership.
-The standard fixture explicitly excludes its two runtime assertions while actual
-before/after public probes retain and verify the failure. No unknown-escape or
-cross-backend escape acceptance is claimed.
+The original `body = capture_until_boundary("a\,b", end)` gap was not repaired
+by atomic label parsing. Assignment serialization doubled the unknown backslash,
+then the original helper event could not find its spelling: actual scoped trace
+reported source_span_missing and runtime called an undefined helper. Parent
+.1.4.0.1 preserves that failure and two skipped runtime assertions historically at
+b2156813fffed53622e640583a46a4ca94186a08; its original evidence stays immutable.
 
-The new quoted-label fixture is selected in this focused proof. Canonical CI
-currently invokes Phase0 and selected explicit ActionIR suites rather than every
-new t/ file. The immediate repair child also owns recurring Phase0 public
-quoted-label/unknown-escape coverage; this leaf does not claim that the new
-standalone fixture has separate canonical registration.
+Successor .1.4.0.1.1 restores this existing Perl behavior by preserving only a
+fully recognized call spelling whose decoded atoms and count agree with typed
+arguments. Read [the serializer fact](perl-boundary-call-lexical-serialization.md).
+The standard quoted fixture enables both runtime assertions, and recurring Phase0
+includes public comma/assignment/return/hash controls. Neither leaf adds boundary
+source sidecars or admits quoted executable membership; .7.2.2 still owns that
+separate failure and .1.4.2 owns anonymous-capture provenance.

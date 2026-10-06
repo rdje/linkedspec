@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `da5c8d1f66732f0989cecca745557005fe44e7c1` — clean quoted-boundary activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1 - preserve quoted boundary label atoms`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` (done) — atomic labels verified; nested unknown escape remains explicitly owned.
-- next_action: Activate P1 .1.4.0.1.1 from clean committed HEAD; diagnose/repair nested unknown-escape original-to-rewritten source ownership and recurring Phase0 coverage before .1.4.2.
+- activation_commit: `b2156813fffed53622e640583a46a4ca94186a08` — clean nested unknown-escape activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1 - preserve nested boundary call spelling`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` (done) — nested boundary lexical repair verified; anonymous origins next.
+- next_action: Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain all26 original contracts/public channels and exact own coordinates before callbacks. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
 - in_flight_uncommitted: none — intended clean focused landing; all required runtime/review/book jobs completed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
@@ -52,8 +52,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: Granted ADR0127 admits44 files /43 manifest lines /26021 bytes; resulting manifest43 lines/26021 bytes is exact.
   Legacy segment4964 preserves201 lines/27233 bytes from clean da3d; all prior immutable rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits47 files /46 manifest lines /26255 bytes; latest manifest45 lines/25679 bytes remains bounded.
-  Diagnosis rollover segment4967 preserves212 lines/21636 bytes from clean012038a637; prior immutable rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits47 files /46 manifest lines /26255 bytes; latest manifest46 lines/26255 bytes is exact; the admitted archive reserve is consumed.
+  Nested repair rollover segment4966 preserves228 lines/28487 bytes from cleanb2156813; all44 prior immutable rows/bytes remain exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

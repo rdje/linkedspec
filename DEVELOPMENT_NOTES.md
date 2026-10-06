@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Lexical spelling versus source authority (.1.4.0.1.1)
+
+AST and boundary atoms retain unknown escapes, but value-source string reconstruction doubles backslashes before the later compatibility helper lookup. Preserve lexical call spelling only with recognized grammar and complete typed atom agreement, including empty quoted slots. A new typed emitter would admit dropped generic CSV slots, so it was rejected before implementation. No coordinate authority is inferred; callbacks and ordinary strings retain their existing paths. Quoted-marker data still fails generated compilation and is owned by executable membership .7.2.2. Read docs/knowledge/perl-boundary-call-lexical-serialization.md and the retained three-seed/RED11/GREEN28 proof.
+
 ## 2026-10-06 — Boundary atoms and distinct rewrite ownership (.1.4.0.1)
 
 Consume already recognized quoted-or-word atoms before existing unquote/unescape/filter logic. General MethodExpr CSV parsing would introduce unrelated callbacks/grammar. Function-local match scope preserves the original raw call. Scoped public substitution proves unknown-escape normalization changes assignment text, after which RewritePipeline reports source_span_missing and runtime calls an undefined helper. Immediate P1 .1.4.0.1.1 owns source-preserving repair and recurring Phase0 coverage; tokenization acceptance explicitly excludes that runtime. Current/historical Knowledge routes are distinct.

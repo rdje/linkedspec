@@ -14315,6 +14315,24 @@ SPEC
     like($rewrite, qr/Boundary/, 'capture_until_boundary lowering keeps the second boundary label');
     like($rewrite, qr/cursor_state_write_compatibility\(\$info, \$STRING, \$__ls_boundary_start/, 'capture_until_boundary lowers the chosen boundary cursor write through a typed position projection');
 };
+subtest 'quoted_boundary_atoms_survive_nested_value_serialization' => sub {
+    # Keep public comma/unknown-escape coverage on the recurring Phase0 route.
+    my @cases = (
+        ['body = capture_until_boundary("a,b,c", end); return(body)', 'body b rest', 'body b rest'],
+        ['body = capture_until_boundary("a\,b", end); return(body)', 'xx END', 'xx '],
+        ['return(capture_until_boundary("a\,b", end))', 'xx END', 'xx '],
+        ['return(hash("body", capture_until_boundary("a\,b", end), "cursor", cursor_pos()))', 'xx END', {body => 'xx ', cursor => 3}],
+    );
+    for my $case (@cases) {
+        my ($action, $text, $expected) = @$case;
+        my $spec = "Top::\n I { $action }\nb: /b/\nend: /END/\n";
+        my %ctx;
+        my $parser = LinkedSpec::Get(\$spec, runtime_ctx_ref => \%ctx);
+        is(ref($parser), 'CODE', 'quoted boundary parser builds');
+        is_deeply($parser->(\$text), $expected, 'whole label and nested unknown escape select the real boundary');
+        ok(!defined($ctx{last_error}), 'quoted boundary execution has no runtime error');
+    }
+};
 subtest 'anonymous_capture_take_until_cursor_helper_reads_and_advances_through_current_parser_position' => sub {
     plan tests => 5;
 

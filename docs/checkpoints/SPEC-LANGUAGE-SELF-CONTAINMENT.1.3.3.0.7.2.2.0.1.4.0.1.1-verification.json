@@ -1,0 +1,219 @@
+{
+  "complete": true,
+  "revision": "b2156813fffed53622e640583a46a4ca94186a08",
+  "regular_inputs": 4368,
+  "overlays": 3,
+  "owner_replacements": 4,
+  "cases": 28,
+  "public_cases": 17,
+  "serializer_cases": 11,
+  "runtime_successes": 11,
+  "repaired_runtime_routes": 7,
+  "grammar_exclusions": 5,
+  "quoted_source_defect": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2",
+  "before_red_groups": 11,
+  "after_green_groups": 28,
+  "fixture_suites": 10,
+  "fixture_groups": 1198,
+  "phase0": 1035,
+  "seeds": 3,
+  "commands": 8,
+  "controls": [
+    {
+      "name": "restore original failure assignment",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure return-hash",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure return-direct",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure spaced",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure repeated",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure single-unknown",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "restore original failure unicode-crlf",
+      "observed": "RED",
+      "reason": "literal successful boundary effects"
+    },
+    {
+      "name": "borrow rejected lexical source fake-call-source",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "borrow rejected lexical source inconsistent-source",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "borrow rejected lexical source dropped-slot-node",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "borrow rejected lexical source zero-borrows-empty",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "borrow rejected lexical source ordinary-string",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "borrow rejected lexical source ordinary-call",
+      "observed": "RED",
+      "reason": "structural lexical authority"
+    },
+    {
+      "name": "lose emitted labels assignment",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels return-hash",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels return-direct",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels spaced",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels repeated",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels single-unknown",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels unicode-crlf",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels standalone",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels block",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels keyword-number",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose emitted labels empty-quotes",
+      "observed": "RED",
+      "reason": "actual emitted whole labels"
+    },
+    {
+      "name": "lose original case",
+      "observed": "RED",
+      "reason": "complete literal case order"
+    },
+    {
+      "name": "hide grammar failure",
+      "observed": "RED",
+      "reason": "explicit exclusions and quoted-source owner"
+    },
+    {
+      "name": "hide quoted marker debt",
+      "observed": "RED",
+      "reason": "explicit exclusions and quoted-source owner"
+    },
+    {
+      "name": "mutate typed node",
+      "observed": "RED",
+      "reason": "immutable typed node"
+    },
+    {
+      "name": "restore missing source span",
+      "observed": "RED",
+      "reason": "actual normalization source-span mechanism"
+    },
+    {
+      "name": "missing command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "missing guard",
+      "observed": "RED",
+      "reason": "actual exits and complete guards"
+    },
+    {
+      "name": "failed green command",
+      "observed": "RED",
+      "reason": "actual exits and complete guards"
+    },
+    {
+      "name": "forged producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "lost TAP reach",
+      "observed": "RED",
+      "reason": "complete focused TAP reach"
+    },
+    {
+      "name": "lost input",
+      "observed": "RED",
+      "reason": "complete unique original inputs"
+    },
+    {
+      "name": "forged input hash",
+      "observed": "RED",
+      "reason": "original content identity"
+    },
+    {
+      "name": "lost overlay",
+      "observed": "RED",
+      "reason": "exact overlays"
+    },
+    {
+      "name": "unrelated serializer drift",
+      "observed": "RED",
+      "reason": "unchanged dispatcher and ordinary serialization"
+    }
+  ],
+  "instrument_sha256": "488010eee51932b8401ea19f2fc44af2c0d6aff96a758aa2ecf2349d19a8f68c"
+}

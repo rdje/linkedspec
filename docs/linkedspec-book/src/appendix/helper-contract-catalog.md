@@ -1564,9 +1564,11 @@ new start for `right`, and the closing-bracket action records the final right ed
   inside quotes remain significant. A quoted unresolved label follows the same
   no-usable-rule behavior as a bare unresolved label. See the
   [boundary reference](../dsl/source-boundary-helper-reference.md)
-  for executable examples and the separately tracked Perl nested unknown-escape
-  limitation. These escape examples do not establish new rule-definition syntax
-  or cross-backend escape parity.
+  for executable examples, including nested Perl unknown escapes. The boundary
+  serializer preserves only recognized lexical calls whose complete decoded
+  atoms agree with the typed arguments; this adds no grammar or source sidecars.
+  These escape examples do not establish new rule-definition syntax or
+  cross-backend escape parity.
 
 ### `capture_take()`
 - **Signature**: `capture_take()`

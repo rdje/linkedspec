@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: atomic quoted boundary labels are verified; the independently reproduced nested unknown-escape failure is the immediate P1 successor before anonymous capture origins.
+Full PNT: atomic quoted labels and nested boundary lexical serialization are verified; anonymous capture source origins follow. Quoted executable membership remains owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — Perl boundary scanner/lowerer share atomic quoted-label decoding.4346 originals/eight guarded commands retain18 cases/28 events/14 compiler cases across three seeds; RED9/GREEN18/nine suites1169 groups/Phase01034/36 RED pass. Complete book58/2/3/9 and37-hash historical freeze pass.13 runtimes succeed; nested unknown-escape P1 .1.4.0.1.1 remains explicit, with two skipped runtime assertions and actual source_span_missing/undefined-helper evidence.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — Boundary lexical serialization validates complete decoded atoms against typed args. 4368 originals/three overlays/four exact deltas retain28 cases (17 public/11 AST), seven runtime repairs and three seeds/eight guarded commands. RED11/GREEN28; ten suites1198 groups/Phase01035 and39 evidence RED pass. Book58 inputs/three examples/three chapters/11 RED and33-hash historical freeze pass. Five grammar exclusions and quoted-source membership P1 .7.2.2 remain explicit.
 
 ## Next Action
 
-Activate .1.4.0.1.1 from clean committed HEAD. Diagnose/repair original-to-rewritten source ownership for the nested escaped-comma helper and add recurring Phase0 public regression. Finish its per-leaf proof/commit before anonymous capture .1.4.2; remaining work stays owned.
+Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain all26 original contracts/public channels and exact own coordinates before callbacks. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
 - `REPO-HYGIENE.10` — due retained parent/Rust census, zero removals and original Legacy claim freeze.
@@ -29,7 +30,6 @@ Activate .1.4.0.1.1 from clean committed HEAD. Diagnose/repair original-to-rewri
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` corrects normalized split metadata/RED5-GREEN8/722 guards behind exact canonical landing.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` retains ten pipeline regex hooks/RED10-GREEN13/1748 groups/99 origins.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` retains original19-contract pipeline diagnosis/701 groups and owns split-source repair.
-- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` accepts3921-input immutable20-contract recurrence/144 groups behind exact canonical family landing.
 
 ## History
 

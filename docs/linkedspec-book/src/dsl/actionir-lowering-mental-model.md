@@ -363,12 +363,18 @@ The Perl boundary scanner and lowerer now decode the same recognized quoted-or-w
 atoms. A comma inside a quoted atom stays part of its label, so an unresolved
 `"a,b,c"` cannot create a false `b` boundary. Their outer recognizer grammar,
 raw helper occurrence and quote/backslash decoding stay unchanged; this repair
-does not yet add boundary source sidecars. A separate nested unknown-escape
-failure remains owned: assignment normalization can change `"a\,b"` to a spelling
-that a later equal-text helper rewrite cannot find. Scoped trace reports
-`source_span_missing` for that helper, and the generated parser still calls it
-unresolved. The [boundary reference](source-boundary-helper-reference.md)
-distinguishes the working quoted-label examples from that runtime limitation.
+does not yet add boundary source sidecars. Nested boundary-call serialization
+now preserves the original recognized lexical spelling when every decoded atom
+agrees with the typed arguments, including empty quoted slots and their complete
+count. This prevents assignment or return normalization of `"a\,b"` from losing
+the later compatibility rewrite. Fake or inconsistent call sources, discarded
+CSV slots and zero arguments retain ordinary AST reconstruction. Ordinary strings
+and other calls keep their existing serializer; callback dispatch is unchanged.
+This lexical check supplies no source-coordinate authority or occurrence mapping.
+The [boundary reference](source-boundary-helper-reference.md) gives executable
+quoted-label and unknown-escape examples. Executable quoted-source membership
+remains subsequent work: helper-looking literal data can still be rewritten as
+code and produce a generated-handler compile failure.
 
 The call/return/push family now retains its selected original scalar occurrences
 through the private recorder. Seven hooks complement the existing `return_general`

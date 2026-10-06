@@ -37,12 +37,8 @@ for my $case (@$cases) {
         my $parser = LinkedSpec::Get(\$spec, runtime_ctx_ref => \%runtime_ctx);
         ok(ref($parser) eq 'CODE', 'public parser builds with existing rule definitions');
         my $input = $case->{input};
-        SKIP: {
-        skip 'nested unknown-escape normalization is owned by .1.4.0.1.1; scanner/direct lowering covered here', 2
-            if $case->{id} eq 'escaped-comma';
         is_deeply($parser->(\$input), $case->{expected}, 'whole labels preserve boundary selection, EOF/no-usable behavior and cursor');
         ok(!defined($runtime_ctx{last_error}), 'runtime has no error');
-        }
     };
 }
 

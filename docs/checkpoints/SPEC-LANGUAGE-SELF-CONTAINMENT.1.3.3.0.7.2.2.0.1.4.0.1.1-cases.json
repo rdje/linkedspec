@@ -1,0 +1,380 @@
+[
+  {
+    "id": "assignment",
+    "action": "body = capture_until_boundary(\"a\\,b\", end); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "return-hash",
+    "action": "return(hash(\"body\", capture_until_boundary(\"a\\,b\", end), \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "return-direct",
+    "action": "return(capture_until_boundary(\"a\\,b\", end))",
+    "input": "xx END",
+    "expected": "xx "
+  },
+  {
+    "id": "standalone",
+    "action": "capture_until_boundary(\"a\\,b\", end); return(hash(\"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "block",
+    "action": "body = { return(capture_until_boundary(\"a\\,b\", end)) }; return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "spaced",
+    "action": "body = capture_until_boundary  ( \"a\\,b\" , end ); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "repeated",
+    "action": "one = capture_until_boundary(\"a\\,b\", end); two = capture_until_boundary(\"a\\,b\", end); return(hash(\"one\", one, \"two\", two, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "one": "xx ",
+      "two": "",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "keyword-number",
+    "action": "body = capture_until_boundary(true, false, undef, 007, end); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "quoted-marker",
+    "action": "body = \"capture_until_boundary(end)\"; return(body)",
+    "input": "xx END",
+    "expected": "capture_until_boundary(end)",
+    "known_defect": "quoted-source membership .7.2.2",
+    "failure_stage": "rule_handler_compile"
+  },
+  {
+    "id": "dropped-slot",
+    "action": "body = capture_until_boundary(end,,b); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "excluded": true,
+    "failure_stage": "rule_handler_eval"
+  },
+  {
+    "id": "trailing-slot",
+    "action": "body = capture_until_boundary(end,); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "excluded": true,
+    "failure_stage": "rule_handler_eval"
+  },
+  {
+    "id": "leading-slot",
+    "action": "body = capture_until_boundary(,end); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "excluded": true,
+    "failure_stage": "rule_handler_eval"
+  },
+  {
+    "id": "zero",
+    "action": "body = capture_until_boundary(); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "excluded": true,
+    "failure_stage": "rule_handler_eval"
+  },
+  {
+    "id": "expression",
+    "action": "body = capture_until_boundary(end + b); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "excluded": true,
+    "failure_stage": "rule_handler_eval"
+  },
+  {
+    "id": "single-unknown",
+    "action": "body = capture_until_boundary('a\\,b', end); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "unicode-crlf",
+    "action": "marker = \"λ\";\r\n one = capture_until_boundary(\"界\\,b\", end);\r\n two = capture_until_boundary(\"界\\,b\", end); return(hash(\"marker\", marker, \"one\", one, \"two\", two, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "marker": "λ",
+      "one": "xx ",
+      "two": "",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "empty-quotes",
+    "action": "body = capture_until_boundary(\"\", '', end); return(hash(\"body\", body, \"cursor\", cursor_pos(), \"rest\", cursor_rest()))",
+    "input": "xx END",
+    "expected": {
+      "body": "xx ",
+      "cursor": 3,
+      "rest": "END"
+    }
+  },
+  {
+    "id": "native-node",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary(\"a\\,b\", end)",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(\"a\\,b\", end)",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "spaced-node",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary  ( \"a\\,b\" , end )",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary  ( \"a\\,b\" , end )",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "fake-call-source",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "__bad_source__()",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(\"a\\\\,b\", end)",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "inconsistent-source",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary(\"wrong\", end)",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(\"a\\\\,b\", end)",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "foreign-escape-source",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary(\"a\\\\,b\", end)",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(\"a\\\\,b\", end)",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "dropped-slot-node",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary(end,,b)",
+      "args": [
+        {
+          "kind": "variable",
+          "name": "end"
+        },
+        {
+          "kind": "variable",
+          "name": "b"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(end, b)",
+    "before_source": "capture_until_boundary(end, b)"
+  },
+  {
+    "id": "zero-borrows-empty",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary(\"\")",
+      "args": []
+    },
+    "expected_source": "capture_until_boundary()",
+    "before_source": "capture_until_boundary()"
+  },
+  {
+    "id": "ordinary-string",
+    "node": {
+      "kind": "string",
+      "value": "a\\,b",
+      "quote": "\"",
+      "source": "\"a\\,b\""
+    },
+    "expected_source": "\"a\\\\,b\"",
+    "before_source": "\"a\\\\,b\""
+  },
+  {
+    "id": "ordinary-call",
+    "node": {
+      "kind": "call",
+      "name": "other",
+      "source": "__bad__()",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "other(\"a\\\\,b\", end)",
+    "before_source": "other(\"a\\\\,b\", end)"
+  },
+  {
+    "id": "empty-atom-node",
+    "node": {
+      "kind": "call",
+      "name": "capture_until_boundary",
+      "source": "capture_until_boundary  ( \"\" , end )",
+      "args": [
+        {
+          "kind": "string",
+          "value": "",
+          "quote": "\"",
+          "source": "\"\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary  ( \"\" , end )",
+    "before_source": "capture_until_boundary(\"\", end)"
+  },
+  {
+    "id": "source-method-node",
+    "node": {
+      "kind": "call",
+      "name": "other",
+      "source_method": "capture_until_boundary",
+      "source": "capture_until_boundary(\"a\\,b\", end)",
+      "args": [
+        {
+          "kind": "string",
+          "value": "a\\,b",
+          "quote": "\"",
+          "source": "\"a\\,b\""
+        },
+        {
+          "kind": "variable",
+          "name": "end",
+          "source": "end"
+        }
+      ]
+    },
+    "expected_source": "capture_until_boundary(\"a\\,b\", end)",
+    "before_source": "capture_until_boundary(\"a\\\\,b\", end)"
+  }
+]

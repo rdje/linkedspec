@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1",
+  "claims": [
+    {
+      "name": "nested-boundary-lexical-repair",
+      "statement": "Existing Perl boundary calls preserve lexical spelling only when their recognized complete decoded atoms/count agree with typed arguments. 4368 original regular Git inputs, three exact overlays and four declared replacements support eight guarded commands under three seeds.28 literal cases include17 public/11 AST controls; seven original failing runtime routes become successful,11 accepted runtimes pass, five unsupported grammar failures and the separate quoted-source compile defect remain explicit. Original RED11 becomes GREEN28; ten focused suites pass1198 groups including Phase01035 with four new public recurring routes and both prior skipped runtime assertions enabled.39 reason-specific evidence controls observe RED. Complete58-input book renders three original examples/three chapters with11 RED;33 prior bound hashes verify before historical freeze. Governed history rollover verifies the exact clean228-line/28487-byte suffix, all44 prior immutable rows and full original root reconstruction with a retained one-LF hot-root separator normalization, with six observed history RED controls; the46-line/26255-byte manifest consumes only the approved ADR0122 reserve.",
+      "scope": "Existing Perl quoted-or-word helper contract from clean b2156813fffed53622e640583a46a4ca94186a08. Independent literal runtime values/cursors and typed lexical expectations test assignment/return/hash/spaced/repeated/single-quote/Unicode-CRLF routes. Complete original regular Git snapshots conservatively retain every parent blob; this is not a minimal observed-IO inventory. Black-box Gitlink/nonregular metadata exclude payload reads. Four replacements are MethodLowering, BoundaryLabels, the prior quoted fixture and Phase0; three overlays are new cases/probe/test. Full source reconstruction restores the original owners outside one serializer helper/import/branch, decoder helpers, two removed runtime skips and one recurring Phase0 subtest. No callback dispatch, AST schema, helper discovery/Contracts/runtime emitter, ordinary string/number semantics, source-coordinate authority, broad equal-text mapping, new grammar/backend/capability/CI/toolchain/dependency/storage changes. All raw streams are retained losslessly/hash-bound; comparisons normalize only exact clock headers in existing NONE-level failure traces and separately retain the scoped debug trace. All other unchanged public channels are exact. P1 SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2 owns quoted-marker generated-handler compile failure after source-producer prerequisites before quoted closeout; five excluded grammar cases remain unresolved, not accepted features. Anonymous provenance and other families, executable/comment membership, zero-argument portability, other backend escape handling and global history audit remain separately owned. Actual source_span_missing disappears on the bounded repaired route. Focused proof is not canonical CI; family .1.4.7 and final clean push require canonical proof. Read-only OS/Perl/prove/Python/mdBook are host prerequisites; owned inputs/outputs and workspaces remain on repository volume.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-capture.py before; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-capture.py after; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-review.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-freeze.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book.py --review; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-history.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-claim.py",
+        "granularity": "4368 original blobs/28 cases/17 public/11 AST/seven repaired routes/11 accepted runtimes/three seeds/eight commands/1198 fixture groups/58 book inputs/33 previous hashes",
+        "result": "Existing Perl boundary calls preserve lexical spelling only when their recognized complete decoded atoms/count agree with typed arguments. 4368 original regular Git inputs, three exact overlays and four declared replacements support eight guarded commands under three seeds.28 literal cases include17 public/11 AST controls; seven original failing runtime routes become successful,11 accepted runtimes pass, five unsupported grammar failures and the separate quoted-source compile defect remain explicit. Original RED11 becomes GREEN28; ten focused suites pass1198 groups including Phase01035 with four new public recurring routes and both prior skipped runtime assertions enabled.39 reason-specific evidence controls observe RED. Complete58-input book renders three original examples/three chapters with11 RED;33 prior bound hashes verify before historical freeze. Governed history rollover verifies the exact clean228-line/28487-byte suffix, all44 prior immutable rows and full original root reconstruction with a retained one-LF hot-root separator normalization, with six observed history RED controls; the46-line/26255-byte manifest consumes only the approved ADR0122 reserve."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Normalizing unknown escapes could leave helpers unresolved; blindly borrowing source or dropping CSV slots could admit excluded grammar; missing output/input/test reach could falsely pass.",
+        "oracle": "Independently authored full public values/cursors, literal before/after lexical source, unchanged typed nodes, five actual grammar exclusions and quoted-source failure; actual scoped normalization trace; complete source reconstruction and original Git identities; full actual emitted labels, input/channel/exit/TAP guards and unaffected public channels.",
+        "red_control": "Actual original RED11/repaired GREEN28.39 reason-specific controls restore each seven runtime failures, corrupt all11 emitted label populations, borrow six rejected lexical sources, hide case/grammar/quoted failure or trace, mutate AST, omit command/guard/input/overlay, forge producer/channel/exit or TAP reach and alter unrelated source.11 rendered-book and six exact history controls plus the actual original whitespace rejection observe RED; normalized live root observes GREEN."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "CHANGES.md",
+            "sha256": "81bf59977fae27ac86f91f2914f09741f45f1afd5ce3a1dca54a55dbbd58d7e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+            "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-after-inputs.json",
+            "sha256": "0e436262246c9a86b20e5271092dacfca00a3256c74e2c0e4b81f92c1cf8bdfd",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-after-observations.json",
+            "sha256": "d8b4deeeb9eb8c2941523a6975d34b09ec293178bf5dc1288e41f015f7294b4a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-before-inputs.json",
+            "sha256": "5a392a796d05c8891c3a88a423b90c3b16d307f23009117181794258335add61",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-before-observations.json",
+            "sha256": "42527e0158ffaf521605ef765bc2945c51dce54ec1fec1762e72f30d9fa82235",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-before-quoted-claim.json",
+            "sha256": "971cc5bf24de02b94f0d1c44fa1d5fce716f97f865db7cfe65feaed7429b56c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book-inputs.json",
+            "sha256": "89245e06ffc826b52bfda482abbbce545f65a6de63cc5de97910046ad0a01f96",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book-inputs.tar.gz",
+            "sha256": "80e2ce325a2eb283b1630642f4f0fc1b1f5c7dea30e14abf73bd46c1d3701172",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book-verification.json",
+            "sha256": "852af63977e8c869e19ca80c95f68eb9fac8709d1187655e7185769c5afc7554",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book.json",
+            "sha256": "c0d09673d08a584d43276afb9446b050b69747ecda754f3ae0cee859fd96ceba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-book.py",
+            "sha256": "3fd4a88e56c29ad7329d5655c16c140fb1369f2f21186e4bab715d6145dd0ce9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-capture.py",
+            "sha256": "3e9e2a1feea6037c380d894515b01b26d50d028b3321586c8c10e23a9001d947",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-cases.json",
+            "sha256": "b82c22ea90bdac631d0e6de2ee90e91c3e8eb608d070b3bcbe9528b7140aa752",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-claim.py",
+            "sha256": "8c6ac0e860e42ceec6a0a4a2293f22917a014dfdc50dee16487ec3bfc0d7f88d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-freeze.json",
+            "sha256": "b992682a9109db1c474273f4182efffe8d6b43d1b756bf8da6ba668c5a4b6d5f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-freeze.py",
+            "sha256": "f555f504d36b22522ce853c035f565ef55a9dcc512e62b915fe59e55757c5019",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-history-rolled-root.json",
+            "sha256": "7f231e7881a2a1b56553b7cbe7f8f7fa7f064c73e2676c3813fe253a532e446e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-history.json",
+            "sha256": "51f8238c38b4e8bba506f3cc247db62d0f154f00c0b4a153240c8a4eb6fc928f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-history.py",
+            "sha256": "299f92f37ca11b4281f3f72208fee05782adbec1477a7fd27669cc64c73d1b3c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-probe.pl",
+            "sha256": "21ed2b8f3f56264df74f6878d9b958ffc76b92c593002c3bacfb99e40b76f39d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-review.py",
+            "sha256": "488010eee51932b8401ea19f2fc44af2c0d6aff96a758aa2ecf2349d19a8f68c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-verification.json",
+            "sha256": "e1007ce549518a7cf671d5643ca1614ffee521602b6813075ab032165537e044",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/manifest.jsonl",
+            "sha256": "2132f7b661e16bf88883cf8fd8196c7dc84ef792f2a295b7407ce2973acec731",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4966-48d6c2400b1f.md",
+            "sha256": "48d6c2400b1f9bebe228e1f4b14647f28bd0a0d65c18e47feee4f87447b9af4b",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/document-history-rollover-eof-separator.md",
+            "sha256": "9d6bed3a930e03aafe76cc2663900c5edb6fa4828536a5445ae2f7986246e4bb",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-boundary-call-lexical-serialization.md",
+            "sha256": "e0573b5bd5e8232ae03d7b40c29720809b9fecfb30342205bc0e4f7904055b6e",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-quoted-boundary-labels.md",
+            "sha256": "ad2996f6714b25e76d461406665835e0ee25c46238b2f26c4b0de4acc35c087f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "sha256": "6d0f3df7130a07ae7003746ed8cbb9829c0c4a81b189eca0a200a993d035fdc1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "d5a27c9ec63586c0a036e489dccc22abf1dda40cfaac894581c061306e890076",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "d1cfd40958802d9a1af151e70e243e3cd640667188662f5629ac2476f578701f",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/BoundaryLabels.pm",
+            "sha256": "72957750deeb88a06ba0689015d46d5f8be30812c7a5be35b47c17e31063a87b",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "8dd3d8f5c9821167866064e46d967d398d0286c0cc35890c84e8aee1086521c4",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "395f3591ca8416cb445949fb4b4deabf631f395da58cf91c8eb29e4805b75dfa",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "2c6e8c3841bfe204c3b330c37c500ad6cb31e03dcaf7aa0f5f4789e50941b3a5",
+            "role": "input"
+          },
+          {
+            "path": "t/capture_boundary_quoted_labels.t",
+            "sha256": "9f980ae2582dba6e126092a42cf24084e06db7991ba0c4cb5b3c0ca57b489694",
+            "role": "input"
+          },
+          {
+            "path": "t/nested_boundary_quoted_labels.t",
+            "sha256": "8b1325bfb3b604377407d7cfbf00e71b032ffdf6d488581b0165a6be5781c8a4",
+            "role": "input"
+          },
+          {
+            "path": "t/phase0_regression.t",
+            "sha256": "88a111fded1b5e3b8ed28ba22f9aa6d69ffe3c4ad1fd8af1c01ebccbdaa0c30e",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "3ac1dbb83f69272b870a6ab953e0fcafddf289e1aa6591a040c698f7e3b87521",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

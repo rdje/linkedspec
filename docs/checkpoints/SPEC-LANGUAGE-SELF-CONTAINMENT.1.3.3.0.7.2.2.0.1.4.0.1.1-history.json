@@ -1,0 +1,116 @@
+{
+  "complete": true,
+  "base": "b2156813fffed53622e640583a46a4ca94186a08",
+  "segment_id": "4966",
+  "archive_lines": 228,
+  "archive_bytes": 28487,
+  "manifest_lines": 46,
+  "manifest_bytes": 26255,
+  "prior_rows": 44,
+  "root_terminal_lf_removed": 1,
+  "generated_root_bytes": 30706,
+  "source_start_line": 144,
+  "source_end_line": 371,
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1-history-rolled-root.json",
+      "sha256": "7f231e7881a2a1b56553b7cbe7f8f7fa7f064c73e2676c3813fe253a532e446e"
+    },
+    {
+      "path": "CHANGES.md",
+      "sha256": "81bf59977fae27ac86f91f2914f09741f45f1afd5ce3a1dca54a55dbbd58d7e2"
+    },
+    {
+      "path": "docs/history/changes/manifest.jsonl",
+      "sha256": "2132f7b661e16bf88883cf8fd8196c7dc84ef792f2a295b7407ce2973acec731"
+    },
+    {
+      "path": "docs/history/changes/segment-4966-48d6c2400b1f.md",
+      "sha256": "48d6c2400b1f9bebe228e1f4b14647f28bd0a0d65c18e47feee4f87447b9af4b"
+    },
+    {
+      "path": "tools/roll_document_history.pl",
+      "sha256": "3ac1dbb83f69272b870a6ab953e0fcafddf289e1aa6591a040c698f7e3b87521"
+    }
+  ],
+  "instrument_sha256": "299f92f37ca11b4281f3f72208fee05782adbec1477a7fd27669cc64c73d1b3c",
+  "controls": [
+    {
+      "name": "changed prior row",
+      "observed": "RED",
+      "reason": "prior immutable rows preserved"
+    },
+    {
+      "name": "changed source boundary",
+      "observed": "RED",
+      "reason": "clean source boundary"
+    },
+    {
+      "name": "lost clean suffix",
+      "observed": "RED",
+      "reason": "exact clean source suffix"
+    },
+    {
+      "name": "forged hash",
+      "observed": "RED",
+      "reason": "archive bytes counts and hash"
+    },
+    {
+      "name": "lost new record",
+      "observed": "RED",
+      "reason": "new owned record retained"
+    },
+    {
+      "name": "changed retained old root",
+      "observed": "RED",
+      "reason": "only terminal separator normalization"
+    }
+  ],
+  "whitespace_runs": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--no-index",
+        "--check",
+        "/dev/null",
+        ".linkedspec-data/scratch/nested-boundary/history-eof-zbqwl4yw/rolled.md"
+      ],
+      "exit": 3,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 100,
+        "sha256": "4d05c39869f76b419075ba6324882ebee8eb3a0f5d29e82830ad01f040d8bd8d",
+        "data": "H4sIAAAAAAAC/w3MUQrDIAwA0P+eIhdQGRQK/q+/PUM0GS3N4qYp4k7fvQM8L4eeTO3D2REahpYrWt6DcjMml8qlhHWE/WhW6nBcXu6Xvl3m0UMtIkz+TfExLxGUOyRBPeG/MqDBc1v9dAPB3BKEZAAAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "CHANGES.md"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    }
+  ]
+}

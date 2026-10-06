@@ -10,6 +10,7 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::ActionIR::BoundaryLabels ();
 use LinkedSpec::Numeric ();
 use LinkedSpec::UnicodeCaseMapping ();
 
@@ -940,6 +941,41 @@ sub _actionir_ast_plain_data_expr {
  return 'do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack("H*", "'.$hex.'")) }'
 }
 
+# A later compatibility rewrite still selects the original boundary-call spelling.
+# Keep that spelling only when every recognized atom agrees with the typed args;
+# this is lexical serialization, not source-coordinate or occurrence authority.
+sub _actionir_ast_boundary_call_source {
+ my ($node) = @_;
+ my $labels = LinkedSpec::ActionIR::BoundaryLabels::_recognized_call_label_atoms($node->{source});
+ return undef unless defined($labels) && ref($node->{args}) eq 'ARRAY';
+ return undef unless @$labels == @{$node->{args}};
+ for my $index (0 .. $#$labels) {
+  my $arg = $node->{args}[$index];
+  return undef unless ref($arg) eq 'HASH';
+  my $kind = $arg->{kind} // '';
+  my $label;
+  if ($kind eq 'string') {
+   $label = $arg->{value};
+  } elsif ($kind eq 'variable') {
+   $label = $arg->{name};
+  } elsif ($kind eq 'boolean') {
+   $label = $arg->{value} ? 'true' : 'false';
+  } elsif ($kind eq 'undef') {
+   $label = 'undef';
+  } elsif ($kind eq 'number') {
+   $label = _actionir_ast_value_source_expr($arg);
+  } elsif ($kind eq 'raw_perl') {
+   $label = $arg->{source};
+  } else {
+   return undef;
+  }
+  return undef unless defined($label) && !ref($label);
+  return undef if $kind ne 'string' && $label !~ /\A\w+\z/;
+  return undef unless $label eq $labels->[$index];
+ }
+ return $node->{source}
+}
+
 sub _actionir_ast_value_source_expr {
  my ($node) = @_;
  return undef unless ref($node) eq 'HASH';
@@ -1023,6 +1059,10 @@ sub _actionir_ast_value_source_expr {
   $name = $node->{source_method}
    if defined($node->{source_method}) && $node->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  if ($name eq 'capture_until_boundary') {
+   my $source = _actionir_ast_boundary_call_source($node);
+   return $source if defined($source);
+  }
   my @args;
   foreach my $arg (@{$node->{args} || []}) {
    my $arg_expr = _actionir_ast_value_source_expr($arg);

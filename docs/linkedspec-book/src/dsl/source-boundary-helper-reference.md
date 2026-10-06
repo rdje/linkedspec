@@ -665,11 +665,20 @@ capture_until_boundary("", '', end) # empty labels omitted; input: xx END; curso
 
 Perl decodes escaped quotes and backslashes inside a recognized label before
 lookup; surrounding spaces inside quotes remain label data. Commas need no
-backslash escape. An unknown escape such as `\,` currently has a separate Perl
-limitation when nested in an assignment: string normalization can prevent the
-later helper rewrite, producing an undefined-helper runtime error. Use a literal
-comma in the quoted label. This limitation is tracked independently of the fixed
-label tokenization; it is not a claim about the other backends' escape handling.
+backslash escape. An unknown escape such as `\,` retains its backslash as label
+data. It also works inside assignments, returns and hash values:
+
+```text
+Top::
+ I { body = capture_until_boundary("a\,b", end); return(hash("body", body, "cursor", cursor_pos(), "rest", cursor_rest())) }
+end: /END/
+```
+
+With input `xx END`, Perl returns `{"body":"xx ","cursor":3,"rest":"END"}`.
+Only `end` resolves; the whole `a\,b` label stays unresolved. The same input with
+`return(capture_until_boundary('a\,b', end))` returns `"xx "`. Repeated calls at
+that cursor return an empty capture and keep `END` unconsumed. These observations
+cover the Perl route; they do not establish the other backends' escape handling.
 
 The Julia interpreter implements this full cursor-control and structural-boundary
 contract as of `JULIA-BACKEND-PARITY.4.4`, including character-based public
