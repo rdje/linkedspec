@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `ef2dd019bae121674a6e37a2b14d223bf6c7088c` — clean progressive annotation source-origin activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` (pending activation) — recognition/observation producer origins.
-- next_action: Activate recognition/observation statement origins .1.5.3 from clean committed HEAD. Reuse the original seven-contract cases and complete staged/progressive channels; change only its five recognition-family producers while preserving token/result/callee/malformed operand fields, objects/callbacks and compiler channels. Canonical family acceptance, composition, membership/replacement and separate runtime defects retain their owners.
-- in_flight_uncommitted: None; progressive/staged channels, consumers/Phase0/component/mode-repair/book/freeze proof is complete; focused publication checks and normal hooks enforce this post-landing handoff.
+- activation_commit: `34f687c09e197cf0798ed01c3c760e63a0203513` — clean recognition/observation source-origin activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` (pending activation) — canonical dedicated-family acceptance.
+- next_action: Activate canonical dedicated-family acceptance .1.5.4 from clean committed HEAD. Replay all seven original producers through fresh immutable committed inputs without overlays; retain complete three-seed channels, constructor/callback/consumer and book proof, then exact staged canonical receipt and normal hooks before closing .1.5. All-producer composition, quoted/comment membership, precise replacement and separate runtime defects retain their owners.
+- in_flight_uncommitted: None; recognition and preserved staged/progressive channels, consumers/Phase0/component/book/freeze proof are complete; focused publication checks and normal hooks enforce this post-landing handoff.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

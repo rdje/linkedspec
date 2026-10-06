@@ -3241,11 +3241,37 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58 inputs/26 examples/four chapters/47 RED,111 original-hash historical freeze, actual-root4638-input/five-delta recovery, both actual capture producer versions, formal claim/Knowledge/current task/index/roadmaps/live/resume and bounded histories agree on the progressive-only scope.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Retain original recognition and recursive-observation statement origins.
   Dependencies: `.1.5.2`
   Scope: RecognitionTransactionRules' five producers and their private original statement proof/teaching; no token-order/effect/restoration/boolean-kind/observation policy change.
   Acceptance: Original RED/GREEN covers checkpoint/attempt/commit/rollback/observation and exact repeated scalar intervals. Preserve token/result/unevaluated callee and malformed observation arity/operand fields, returned event/argument objects, public callback sequence and generic-call/assignment exclusions. Canonical frames authorize only unchanged original raw; custom callbacks gain no invented source. Re-run complete original diagnosis and direct consumers plus required Phase0, preserve all separate defect owners, commit before canonical .1.5.4.
+
+  Activation: Clean34f687c09e197cf0798ed01c3c760e63a0203513 after progressive repair; ten hooks/post-commit pointer PASS, brief0 and no required jobs. Recognition scanner, original seven-contract cases, canonical recognition/observation cards and source-origin teaching reviewed; current staged/progressive origins and complete channels remain the baseline.
+  Owned paths: RecognitionTransactionRules.pm and recurring provenance fixture; leaf-prefixed immutable before/after/component/book/review/freeze producers and evidence/formal claim; hash-verified progressive claim historical freeze; dedicated/staged/progressive/recognition Knowledge and derived map; task/index/roadmaps/live/resume/change/notes/book. No runtime/policy/carrier/admission or dependency change.
+  Verification tier: `focused`
+  Focused checks: Original recognition/observation recurring fixture RED/GREEN; all seven dedicated contracts and complete prior staged/progressive channels under original seeds0/1/42; actual constructor/argument references, callbacks, copied/foreign/transformed/fatal/nested cases; direct recognition/observation/authority/generated consumers and source-frame/order/AST consumers plus required Phase0 and syntax; actual-root recognition component gate; independent effective evidence controls, full rendered book and claim/Knowledge/memory/history/doctrines/diff hygiene.
+  Canonical trigger: none for private recognition-family source-origin hooks; dedicated acceptance .1.5.4 remains canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json`
+  Teaching precondition: A proposed observation example end50 failed the pre-write scalar-length assertion; no book bytes were changed. Exact literal length52 gives intervals0–52/54–106. Corrected those unpublished draft coordinates before rendering; the accidental dependent missing-script invocation exited64 and was not a render or project defect.
+  Original proof: Four before commands complete from4668 immutable regular34f687 inputs with one declared fixture replacement and no runtime overlays. Independent review confirms exactly18 RED groups in the191-group fixture, all other173 groups PASS including the prior148; complete seven-contract channels under seeds0/1/42 preserve16 preceding staged/progressive origins.122 original progressive claim hashes verify before mode/revision-only freeze.
+  Implementation: Five scanners obtain canonical original statement frames only during private recording, index every returned occurrence before trim/operand parsing and record actual constructor objects for unchanged original raw. A shared private input helper retains the original list snapshot; static regexes/arguments/exclusive ownership/policies/runtimes/lowering are untouched.
+  Completed publication evidence: Book58 complete inputs/29 examples/four chapters/53 effective RED passes. Published recognition component gate passes read-only in actual tracked Git context with4668 guarded parent inputs/five completely retained byte deltas and separate filesystem/Git modes. Broad consumer/Phase0 and independent full comparison now pass; original producers/channels remain retained.
+  Verification: PASS; Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change.
+  Historical reverify reconciliation: Preserve the prior mode-instrument correction as dated history; route its card through the122-hash frozen original claim and current component-input comparison rather than invoking an old current-source checker against changed recognition bytes. Final card review also catches the staged card still calling progressive the latest comparison after recognition lands; qualify it as preceding and remove duplicate diagnosis routing prose here. The exact three-seed comparison owns current verification; old measurement bodies remain unchanged.
+  Pre-landing continuation: If HEAD is34f687 and this verified candidate is dirty, finish focused publication checks and all normal hooks/commit before canonical .1.5.4. Runtime/component/book/freeze proofs are complete.
+  Focused publication checks: Actual publisher binds120 inputs; memory/handoff PASS59 lines, Knowledge1284 facts/9974 keys and whitespace PASS. Change/notes pressure PASS191 lines/40673 bytes and204 lines/44703 bytes inside unchanged caps. New record/task acceptance admission is enforced after staging by normal doctrine hooks.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins`.
+  Next: Activate canonical dedicated-family acceptance .1.5.4 from clean committed HEAD. Replay all seven original producers through fresh immutable committed inputs without overlays; retain complete three-seed channels, constructor/callback/consumer and book proof, then exact staged canonical receipt and normal hooks before closing .1.5. All-producer composition, quoted/comment membership, precise replacement and separate runtime defects retain their owners.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Actual191-group fixture observes exactly18 original recognition/nested RED; all preceding148 and other25 groups pass. Original seven-contract Toolbox/callback channels are complete.
+- [x] **ROOT CAUSE (WHY + WHERE)** — RecognitionTransactionRules loses canonical physical statement frames at its ordinary list splitter; five constructors have no private origin hook. Independent original scalar intervals distinguish repeated equal statements.
+- [x] **FIX** — Obtain frames only during recording, retain original list snapshot/index before callbacks and record unchanged raw through actual constructor objects. No original argument/regex/policy/runtime/lowering change.
+- [x] **ADDRESSED (verified)** — GREEN191,26 new recognition/observation plus16 retained staged/progressive origins per seed; actual constructors/callbacks/nesting/errors and200 effective evidence RED pass.
+- [x] **NO REGRESSION** — Thirteen direct/authority/generated/source/order consumers pass1671 groups including Phase01035; both syntax channels and complete preceding three-seed channels remain exact. Actual-root published recognition component gate passes4668 guarded inputs/five byte deltas.
+- [x] **LOCKSTEP** — Book58/29/four/53,122 original-hash mode/revision-only freeze, historical mode reverify/current source cards, derived Knowledge/task/index/roadmaps/live/resume and bounded histories agree. Canonical family/composition/membership/replacement and runtime defects retain owners.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4`
   Status: `pending`
@@ -3568,7 +3594,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.5.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` | `done` | Original7-contract/22-case/42-event/63-frame diagnosis,544 groups/108 RED and safe three-family partition. |
 | 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `done` | OriginalRED5/GREEN138; eight staged origins/1589 consumer groups/130 RED with complete original channels. |
 | 43.4.2.0.1.5.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` | `done` | OriginalRED5/GREEN148;16 combined origins/1608 groups/153 RED and exact actual-root mode repair. |
-| 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `pending` | Retain five recognition/observation producer origins with original operands and full prior channels. |
+| 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `done` | OriginalRED18/GREEN191;42 dedicated origins/1671 groups/200 RED; canonical acceptance next. |
 | 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `pending` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
@@ -3612,6 +3638,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October6 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3`: Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change.
 
 October6 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0`: Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled.
 
@@ -3696,9 +3724,10 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins` — original/repaired recognition proof plus retained staged/progressive channels; normal focused hooks govern landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers` — original dedicated diagnosis and safe repair partition; normal focused hooks govern landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins` — committedef2dd019b; all ten doctrines and first-parent pointer PASS.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins` — original/repaired progressive proof plus retained staged channels; normal focused hooks govern landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins` — committed34f687c09; all ten doctrines and first-parent pointer PASS.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1 - preserve rollover EOF and pending recovery` — bounded writer and actual registered regression; exact canonical receipt gates landing; Git owns identity.
 
@@ -3842,3 +3871,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 - `2026-10-06`: .1.5.1 retains staged statement origins and closes originalRED5/GREEN138/1589 groups/130 evidence controls; progressive .1.5.2 follows clean landing.
 
 - `2026-10-06`: .1.5.2 retains progressive origins alongside staged proof; RED5/GREEN148/1608 groups/153 RED and exact actual-root mode repair; recognition .1.5.3 follows clean landing.
+
+- `2026-10-06`: .1.5.3 retains five recognition/observation origins; RED18/GREEN191/42 total/1671 groups/200 RED. Canonical .1.5.4 follows clean landing.

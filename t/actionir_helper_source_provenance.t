@@ -735,4 +735,105 @@ subtest 'Progressive nested real scans restore their source recorders' => sub {
     }
 };
 
+
+my @recognition_contracts = qw(observe_recognition recognition_checkpoint recognize_once recognition_commit recognition_rollback);
+my %recognition_contract = map { $_ => 1 } @recognition_contracts;
+my %recognition_raw;
+for my $case (@{$dedicated_cases->{cases}}) {
+    for my $row (grep { $recognition_contract{$_->{contract}} } @{$case->{rows}}) {
+        my $contract_id = $row->{contract};
+        $recognition_raw{$contract_id} ||= $row->{expected_events}[0]{raw} if @{$row->{expected_events}};
+        subtest 'Recognition original producer: '.$contract_id.' '.$case->{id} => sub {
+            my ($public, $private, $constructed) = dedicated_observed_scan($contract_id, $case->{action});
+            is_deeply($public, $row->{expected_events}, 'original token, result, unevaluated operand and malformed arity fields');
+            my @expected = map {
+                my $index = $_;
+                {event => $row->{expected_events}[$index], source => $case->{action},
+                 source_span => {start => $row->{original_spans}[$index][0], end => $row->{original_spans}[$index][1]}}
+            } 0 .. $#{$row->{expected_events}};
+            is_deeply($private->{source_origins}, \@expected, 'each selected original statement has its literal scalar frame');
+            is(scalar(@$constructed), scalar(@expected), 'one actual constructor event per selected occurrence');
+            for my $index (0 .. $#{$private->{source_origins}}) {
+                my $event = $private->{events}[$index];
+                is(refaddr($private->{source_origins}[$index]{event}), refaddr($event), 'origin retains actual returned event');
+                is(refaddr($constructed->[$index][0]), refaddr($event), 'original constructor event survives');
+                is(refaddr($constructed->[$index][1]), refaddr($event->{args}), 'original argument object survives');
+            }
+        };
+    }
+}
+
+for my $contract_id (@recognition_contracts) {
+    my $raw = $recognition_raw{$contract_id};
+    subtest 'Recognition copied statement array: '.$contract_id => sub {
+        my ($public, $private) = dedicated_observed_scan($contract_id, $raw, {
+            split_action_ir_statements => sub { return [@{$deps->{split_action_ir_statements}->(@_)}] },
+        });
+        is(scalar(@$public), 1, 'copied callback preserves original event');
+        is_deeply($private->{source_origins}, [], 'equal copied statements gain no invented origin');
+    };
+    subtest 'Recognition foreign source: '.$contract_id => sub {
+        my ($public, $private) = dedicated_observed_scan($contract_id, 'note()', {
+            split_action_ir_statements => sub { return $deps->{split_action_ir_statements}->($raw) },
+        });
+        is(scalar(@$public), 1, 'foreign callback preserves original event behavior');
+        is_deeply($private->{source_origins}, [], 'foreign source gains no invented origin');
+    };
+    subtest 'Recognition transformed raw: '.$contract_id => sub {
+        my $changed = $raw;
+        if ($contract_id eq 'recognition_rollback') {
+            $changed =~ s/(\(\s*)([A-Za-z_][A-Za-z0-9_]*)/$1changed_$2/;
+        } else {
+            $changed =~ s/\A([A-Za-z_][A-Za-z0-9_]*)/changed_$1/;
+        }
+        isnt($changed, $raw, 'control changes an authored binding or token');
+        my ($public, $private) = dedicated_observed_scan($contract_id, $raw, {
+            trim_action_ir_value => sub {
+                my $value = $deps->{trim_action_ir_value}->(@_);
+                return defined($value) && $value eq $raw ? $changed : $value;
+            },
+        });
+        is($public->[0]{raw}, $changed, 'transformed callback preserves its original scanner behavior');
+        is_deeply($private->{source_origins}, [], 'changed raw gains no invented original interval');
+    };
+    subtest 'Recognition fatal callback: '.$contract_id => sub {
+        my %broken = (%$deps, trim_action_ir_value => sub { die "recognition callback sentinel\n" });
+        my @errors;
+        for my $private (0,1) {
+            my $ok = eval {
+                $private
+                    ? LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+                        {id => $contract_id}, $raw, \%broken)
+                    : LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+                        {id => $contract_id}, $raw, \%broken);
+                1;
+            };
+            ok(!$ok, 'actual fatal callback propagates');
+            push @errors, $@;
+        }
+        is_deeply(\@errors, ["recognition callback sentinel\n", "recognition callback sentinel\n"], 'complete fatal errors are exact');
+    };
+    subtest 'Recognition nested real scans: '.$contract_id => sub {
+        my $outer_action = $raw.'; '.$raw;
+        my @inners;
+        my ($public, $private) = dedicated_observed_scan($contract_id, $outer_action, {
+            split_action_ir_statements => sub {
+                push @inners, private_scan({id => $contract_id}, $raw);
+                return $deps->{split_action_ir_statements}->(@_);
+            },
+        });
+        is_deeply([map { $_->{source_span} } @{$private->{source_origins}}],
+            [{start => 0, end => length($raw)},
+             {start => length($raw)+2, end => 2*length($raw)+2}], 'outer repeated origins stay independent');
+        is(scalar(@inners), 2, 'one real inner scan per public/private callback');
+        for my $inner (@inners) {
+            is(scalar(@{$inner->{source_origins}}), 1, 'inner invocation has its own origin');
+            if (@{$inner->{source_origins}}) {
+                is($inner->{source_origins}[0]{source}, $raw, 'inner source stays independent');
+                is(refaddr($inner->{source_origins}[0]{event}), refaddr($inner->{events}[0]), 'inner returned event identity survives');
+            }
+        }
+    };
+}
+
 done_testing();

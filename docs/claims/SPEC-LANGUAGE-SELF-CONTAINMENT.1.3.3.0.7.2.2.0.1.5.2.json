@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/progressive_span_dispatch_contract.json",
@@ -632,7 +632,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "34f687c09e197cf0798ed01c3c760e63a0203513"
       }
     }
   ]

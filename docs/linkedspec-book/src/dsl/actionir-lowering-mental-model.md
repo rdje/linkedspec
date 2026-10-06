@@ -545,9 +545,10 @@ helper-looking data as executable code.
 
 The staged producer now retains a private source origin for each unchanged
 original annotation. The progressive producer now retains a private source origin
-for its unchanged whole statement too. Recognition scanners still return their
-events without a private event-source origin. Their canonical statement splitter
-already supplies physical statement frames. A dedicated annotation owns its
+for its unchanged whole statement too. All five recognition/observation scanners now retain their
+selected private whole-statement origins. Their canonical statement splitter supplies
+physical frames before trim or operand parsing; each scanner keeps the original
+list snapshot and matches frames by occurrence. A dedicated annotation owns its
 whole statement, including its original target and operands:
 
 ```text
@@ -607,7 +608,7 @@ progressive coordinates; nested scans restore independent recorder contexts.
 Host registry authority, capability restrictions and separately tracked resource
 ceiling enforcement retain their existing contracts.
 
-Recognition statement provenance must preserve the token and unevaluated static
+Recognition statement provenance preserves the token and unevaluated static
 callee. A transaction selects one terminal operation:
 
 ```text
@@ -617,6 +618,43 @@ payload = recognition_commit(scope)
 # Alternative terminal: recognition_rollback(scope)
 ```
 
+
+Each checkpoint, attempt, commit, rollback and observation origin retains the
+same returned event and argument objects. The selected statement includes its
+original result or token slot and unevaluated callee. Repeated equal checkpoints
+keep distinct scalar intervals:
+
+```text
+scope = recognition_checkpoint(); scope = recognition_checkpoint()
+# original scalar intervals: [0, 32), [34, 66)
+```
+
+Recursive observation also owns its whole annotation; the nested static `call`
+is not a second generic call or assignment event:
+
+```text
+value = observe_recognition(observation, call(Done)); value = observe_recognition(observation, call(Done))
+# original scalar intervals: [0, 52), [54, 106)
+```
+
+Malformed operands and arity retain their original scanner fields for static
+policy to reject:
+
+```text
+matched = recognize_once(scope, Done)
+value = observe_recognition(observation)
+value = observe_recognition(observation, call(Done), extra)
+# rejected: static call operand, missing observation operand, extra observation operand
+```
+
+The bare attempt operand gains no invented callee. Missing observation operands
+keep `operand_kind=missing` and `argument_count=1`; an extra operand keeps
+`argument_count=3`. These syntactic events remain available to validation.
+Copied, foreign or transformed recognition callback data gains no invented
+coordinates. Fatal callbacks preserve their error; real nested scans restore
+independent recorder contexts. Source origins do not repair token order,
+restoration, boolean payload kind or other separately tracked runtime defects.
+
 The original diagnosis checks all seven dedicated contracts: one staged annotation,
 one progressive annotation, four transaction forms and recursive observation.
 Independent original intervals distinguish repeated equal statements; actual
@@ -624,8 +662,9 @@ dispatcher references and complete callback/compiler channels preserve the origi
 behavior. Invalid annotations retain their original event arguments so validation
 can reject them; attaching provenance must preserve that path.
 This diagnosis changes no static policy, recognition behavior or public event fields.
-The staged and progressive repairs preserve those boundaries and complete public
-compiler channels; recognition source-origin implementation remains pending.
+The staged, progressive and recognition repairs preserve those boundaries and
+complete public compiler channels. Independent canonical family acceptance
+remains a separate checkpoint.
 Executable membership, precise replacement and separately owned runtime defects
 remain subsequent work.
 

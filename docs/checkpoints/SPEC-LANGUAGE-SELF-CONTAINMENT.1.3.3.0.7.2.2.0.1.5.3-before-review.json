@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "epoch": "before",
+  "regular_inputs": 4668,
+  "commands": 4,
+  "original_red_groups": [
+    149,
+    151,
+    153,
+    155,
+    157,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    171,
+    176,
+    181,
+    186,
+    191
+  ],
+  "dedicated_seeds": 3,
+  "review_producer_sha256": "b14c7463e43a1ad25cda3dc8163caa02cd2d2dcd4dd4b5cba297d620acfe801a",
+  "instrument_sha256": "eb17c9b265a1c30fb7da8e3553d6e586a0368702b3cbe549ca902a28f02dc277",
+  "scope": "Independent preflight of complete immutable original supply, actual eighteen-group fixture RED, all other original groups passing and three full original dedicated channels. Final before/after proof remains pending."
+}

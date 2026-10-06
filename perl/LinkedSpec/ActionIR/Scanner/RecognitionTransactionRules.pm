@@ -25,7 +25,10 @@ sub try_scan_contract_ir_events {
 sub _scan_observation {
  my ($code) = @_;
  my @events;
- for my $statement (_statements($code)) {
+ my $scan = _statement_scan_input($code);
+ my $statement_index = 0;
+ for my $statement (@{$scan->{statements}}) {
+  my $frame = $scan->{source_frames}[$statement_index++];
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw)
    && $raw =~ /\A(?<result>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?<source>observe_recognition\s*\(.*\))\z/so;
@@ -43,7 +46,7 @@ sub _scan_observation {
    : $operand =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o ? 'bare_value'
    : $operand =~ /\Acall\s*\(/o ? 'call_expression'
    : 'value_expression';
-  push @events, {
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({
    raw => $raw,
    args => {
     result => $result,
@@ -54,7 +57,7 @@ sub _scan_observation {
     (!defined($callee) ? (operand_kind => $operand_kind) : ()),
     (defined($callee) ? (callee => $callee) : ()),
    },
-  };
+  }, $frame);
  }
  return \@events
 }
@@ -64,13 +67,29 @@ sub _statements {
  return @{_split_action_ir_statements($code)}
 }
 
+sub _statement_scan_input {
+ my ($code) = @_;
+ return {statements => [_statements($code)], source_frames => []}
+  unless ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE';
+ my $framed = LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(
+  \&_split_action_ir_statements, $code,
+ );
+ # Preserve the original list snapshot before any trim/operand callback runs.
+ return {statements => [@{$framed->{statements}}], source_frames => $framed->{source_frames}}
+}
+
 sub _scan_checkpoint {
  my ($code) = @_;
  my @events;
- for my $statement (_statements($code)) {
+ my $scan = _statement_scan_input($code);
+ my $statement_index = 0;
+ for my $statement (@{$scan->{statements}}) {
+  my $frame = $scan->{source_frames}[$statement_index++];
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw) && $raw =~ /\A(?<token>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*recognition_checkpoint\s*\(\s*\)\z/o;
-  push @events, {raw => $raw, args => {token => $+{token}}};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event(
+   {raw => $raw, args => {token => $+{token}}}, $frame,
+  );
  }
  return \@events
 }
@@ -78,7 +97,10 @@ sub _scan_checkpoint {
 sub _scan_attempt {
  my ($code) = @_;
  my @events;
- for my $statement (_statements($code)) {
+ my $scan = _statement_scan_input($code);
+ my $statement_index = 0;
+ for my $statement (@{$scan->{statements}}) {
+  my $frame = $scan->{source_frames}[$statement_index++];
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw) && $raw =~ /\A(?<matched>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*recognize_once\s*\(\s*(?<token>[A-Za-z_][A-Za-z0-9_]*)\s*,\s*(?<operand>.+)\s*\)\z/so;
   my ($matched, $token, $raw_operand) = ($+{matched}, $+{token}, $+{operand});
@@ -86,7 +108,7 @@ sub _scan_attempt {
   my $callee = defined($operand) && $operand =~ /\Acall\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o
    ? $1
    : undef;
-  push @events, {
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({
    raw => $raw,
    args => {
     matched => $matched,
@@ -94,7 +116,7 @@ sub _scan_attempt {
     operand => $operand,
     (defined($callee) ? (callee => $callee) : ()),
    },
-  };
+  }, $frame);
  }
  return \@events
 }
@@ -102,10 +124,15 @@ sub _scan_attempt {
 sub _scan_commit {
  my ($code) = @_;
  my @events;
- for my $statement (_statements($code)) {
+ my $scan = _statement_scan_input($code);
+ my $statement_index = 0;
+ for my $statement (@{$scan->{statements}}) {
+  my $frame = $scan->{source_frames}[$statement_index++];
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw) && $raw =~ /\A(?<payload>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*recognition_commit\s*\(\s*(?<token>[A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o;
-  push @events, {raw => $raw, args => {payload => $+{payload}, token => $+{token}}};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event(
+   {raw => $raw, args => {payload => $+{payload}, token => $+{token}}}, $frame,
+  );
  }
  return \@events
 }
@@ -113,10 +140,15 @@ sub _scan_commit {
 sub _scan_rollback {
  my ($code) = @_;
  my @events;
- for my $statement (_statements($code)) {
+ my $scan = _statement_scan_input($code);
+ my $statement_index = 0;
+ for my $statement (@{$scan->{statements}}) {
+  my $frame = $scan->{source_frames}[$statement_index++];
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw) && $raw =~ /\Arecognition_rollback\s*\(\s*(?<token>[A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o;
-  push @events, {raw => $raw, args => {token => $+{token}}};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event(
+   {raw => $raw, args => {token => $+{token}}}, $frame,
+  );
  }
  return \@events
 }

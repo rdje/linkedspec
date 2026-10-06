@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: staged and progressive annotation source origins verified; recognition/observation origins next. Canonical dedicated-family acceptance, executable membership and separately owned runtime defects remain open.
+Full PNT: all three dedicated annotation source-origin implementation families verified; canonical family acceptance next. Composition, executable membership/replacement and separately owned runtime defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` — Immutableef2dd019b supplies4638 regular inputs, one declared fixture replacement per epoch/one progressive owner delta after and ten guarded runtime commands. OriginalRED5 becomes GREEN148. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain eight staged plus eight new progressive origins; full prior staged/callback/compiler channels remain exact under three seeds. Eleven suites pass1608 groups including Phase01035;153 effective evidence controls RED. Actual-root component PASS4638 guarded inputs/five retained byte deltas; original mode-instrument RED1/36 dated differences/zero executable drift and exact repair/four evidence controls are retained. Book58/26/four chapters/47 RED and111-hash mode/revision-only staged freeze pass. No authority/static-policy/public event/carrier/admission change.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change.
 
 ## Next Action
 
-Activate recognition/observation statement origins .1.5.3 from clean committed HEAD. Reuse the original seven-contract cases and complete staged/progressive channels; change only its five recognition-family producers while preserving token/result/callee/malformed operand fields, objects/callbacks and compiler channels. Canonical family acceptance, composition, membership/replacement and separate runtime defects retain their owners.
+Activate canonical dedicated-family acceptance .1.5.4 from clean committed HEAD. Replay all seven original producers through fresh immutable committed inputs without overlays; retain complete three-seed channels, constructor/callback/consumer and book proof, then exact staged canonical receipt and normal hooks before closing .1.5. All-producer composition, quoted/comment membership, precise replacement and separate runtime defects retain their owners.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — recognitionRED18/GREEN191;42 origins/1671 groups/200 RED; complete earlier channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` — progressiveRED5/GREEN148;16 combined origins/1608 groups/153 RED; exact actual-root mode repair.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` — stagedRED5/GREEN138; eight origins/1589 groups/130 RED and full original compiler/callback channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — original7 contracts/42 events/63 frames/zero origins,544 groups/108 RED; three-family repair partition.
@@ -29,7 +30,6 @@ Activate recognition/observation statement origins .1.5.3 from clean committed H
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
 - `REPO-HYGIENE.10` — due retained parent/Rust census, zero removals and original Legacy claim freeze.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — original112-contract/115-case diagnosis; Granted three-scalar note rollover.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 
 ## History
 
