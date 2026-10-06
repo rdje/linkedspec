@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `224d5443af794d4e5ade6e80bd8f09145ee7b5b3` — clean rollover EOF repair activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1 - preserve rollover EOF and pending recovery`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` (pending activation) — fresh complete-family canonical acceptance.
-- next_action: Activate fresh complete-family acceptance .1.4.7 from clean committed HEAD; recur all112 original Legacy contracts, producer families and repaired boundary routes with fresh retained proof and exact staged canonical acceptance before parent closure. Quoted/comment membership, replacement and other owned repairs remain separate.
-- in_flight_uncommitted: None; fresh guarded rollover/audit/book/claim are complete; exact corrected-candidate canonical receipt and normal hooks enforce this post-landing handoff.
+- activation_commit: `65304aded7d1a096c701b768b076b29c4eb893b2` — clean Legacy-family acceptance activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7 - accept complete Legacy source family`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` (pending activation) — staged/progressive/recognition producer diagnosis.
+- next_action: Activate staged/progressive/recognition producer diagnosis .1.5 from clean committed HEAD; derive safe children from its actual source/argument/callback inventory before production edits. Quoted/comment membership, precise replacement, mark-copy observation and wrapper lifecycle repairs retain their separate owners.
+- in_flight_uncommitted: None; fresh family runtime/consumer/book/freeze/claim proof is complete; exact staged canonical receipt and normal hooks enforce this post-landing handoff.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

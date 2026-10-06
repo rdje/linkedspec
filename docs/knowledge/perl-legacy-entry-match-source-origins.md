@@ -42,7 +42,8 @@ source-regex control requires the unique actual entry_group target.
 The complete original112-contract recurrence preserves prior call/anonymous/
 named/mark/cursor origins and boundary lexical repairs. Its population is original
 syntactic events, including helper-looking data, not executable membership.
-Complete-family fresh acceptance remains .1.4.7-owned after rollover repair.
+Fresh complete-family acceptance is independently verified by
+[[perl-legacy-family-source-acceptance]] after committed rollover repair.
 Quoted/comment membership, replacement and other backends remain separately owned.
 
 No entry/local-match runtime values, absent/empty/zero-text distinctions or

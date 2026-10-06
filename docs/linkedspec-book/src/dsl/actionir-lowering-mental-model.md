@@ -521,9 +521,25 @@ entry_start_line(); entry_line()
 
 All original Legacy producer families now retain syntactic source origins. This
 changes no entry/local-match capture values, absent/empty distinctions, cursor
-movement, public event schema or compiler channels. Complete-family acceptance
-requires its own fresh recurrence; executable quoted/comment membership and
-source-based replacement remain separate work.
+movement, public event schema or compiler channels. Complete-family validation
+replays all112 original internal contracts through115 literal cases, including
+the original recognition, primitive-target and quoted-boundary controls. Its six
+families are call/return/push, anonymous capture, named capture, mark control,
+cursor/input and entry/match. Independent authored scalar intervals and actual
+event/argument references distinguish repeated equal text from its occurrences.
+Fresh immutable inputs, three hash seeds and complete callback/compiler channels
+check each family against its original behavior.
+
+The focused compatibility fixtures can be run with:
+
+```sh
+bash tools/project_data_run.sh prove -v -Iperl \
+  t/actionir_helper_source_provenance.t t/generated_source_contract.t
+```
+
+Executable quoted/comment membership and source-based replacement remain
+separate work; a syntactic source origin alone does not authorize rewriting
+helper-looking data as executable code.
 
 ### Original method argument boundaries
 

@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/inter_match_gap_capture_contract.json",
@@ -2307,7 +2307,8 @@
             "sha256": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "65304aded7d1a096c701b768b076b29c4eb893b2"
       }
     }
   ]

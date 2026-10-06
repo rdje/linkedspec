@@ -68,3 +68,7 @@ The14 mark-control producers belong to [[perl-legacy-mark-control-source-origins
 The15 cursor/input producers belong to [[perl-legacy-cursor-input-source-origins]].
 
 The32 entry/match producers belong to [[perl-legacy-entry-match-source-origins]].
+
+Fresh complete-family acceptance belongs to [[perl-legacy-family-source-acceptance]].
+Its immutable65304aded recurrence preserves all112 original contracts and full
+prior channels; the original diagnosis above remains historical.

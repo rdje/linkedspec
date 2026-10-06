@@ -2791,7 +2791,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete58-input book19 examples/three chapters/19 controls and51-hash freeze pass. Knowledge/task/frontier/index/roadmaps/live/resume/change history/claim align; other producers and membership/global audit remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4`
-  Status: `active`
+  Status: `done`
   Goal: Complete remaining LegacyRules source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.3`
   Acceptance: Split the large measured producer inventory into safe coherent families before any implementation; preserve legacy ownership and accepted slash patterns.
@@ -3113,10 +3113,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Next: Activate rollover EOF repair .1.4.0.1.1.1 from clean committed HEAD; preserve complete history reconstruction and remove invalid generated terminal whitespace, with exact staged canonical proof. Then run fresh all112-contract family acceptance .1.4.7 before parent closure. Quoted/comment membership, replacement and audits remain owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7`
-  Status: `pending`
+  Status: `done`
   Goal: Independently accept the complete Legacy source family.
   Dependencies: `.1.4.6`, `.1.4.0.1`, `.1.4.0.1.1` and rollover repair `.1.4.0.1.1.1`.
   Acceptance: Fresh immutable all112-contract recurrence from committed producers, original independent literal scalar/args/reference/callback/compiler oracles and precise separately verified boundary correction; complete changed-surface/direct consumers/book/claims/live docs and exact staged canonical receipt before parent closure.
+  Activation: Clean65304aded7d1a096c701b768b076b29c4eb893b2; rollover/audit infrastructure is committed with all ten doctrines, post-commit pointer and promoted canonical receipt PASS, brief0 and no required jobs. Relevant original six-family inventory, entry/match literal oracle and full producer/callback/compiler proof, Toolbox facade/source probes, roadmap and book source-origin teaching reviewed. No production change is planned.
+  Owned paths: Leaf-prefixed immutable capture/reviewer/controls/freeze/book/claim instruments and artifacts; previous rollover claim mode/revision-only freeze; complete-family Knowledge, task/frontier/index/roadmaps/live/resume/change/notes and relevant book teaching. Production/spec/standard tests/CI/storage/dependency/other-repository bytes stay committed-exact.
+  Verification tier: `canonical`
+  Focused checks: Fresh complete regular committed Git input superset without overlays; original115-case/112-contract independent literal source/args/scalar oracle and actual reference identity, complete callback/compiler channels under three seeds, all twelve direct consumers with exact ordered positive TAP and nested-failure rejection. Effective evidence RED controls; complete book render/capsule, historical hash freeze, current claims/Knowledge/memory/bounded histories/diff/all doctrines.
+  Canonical trigger: Complete Legacy-family milestone and parent closeout; exact staged canonical receipt required before landing, then normal hooks, brief0 and clean handoff before staged/progressive/recognition diagnosis.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json`
+  Verification: PASS; Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes.
+  Pre-landing continuation: If HEAD is65304aded and this candidate is dirty, finish exact staged canonical CI and all normal hooks/commit before activating .1.5. Current runtime/consumer/book/freeze proofs are complete; a canonical result is never inferred from them.
+  Focused publication checks: Memory architecture/handoff PASS59 lines; current book review PASS58 inputs/18 examples/four chapters/31 RED; claim checker PASS57 records/60 claims/zero disclosed leg gaps and3 positive/16 rejected self-controls. Hot change/notes pressure175 lines/36855 bytes and188 lines/40478 bytes is within unchanged bounds; staged whitespace and input completeness PASS. The pre-admission cadence probe refuses the previous65304aded receipt for this new29-path candidate, as required; actual new canonical CI must supply its own receipt before normal landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7 - accept complete Legacy source family`.
+  Next: Activate staged/progressive/recognition producer diagnosis .1.5 from clean committed HEAD; derive safe children from its actual source/argument/callback inventory before production edits. Quoted/comment membership, precise replacement, mark-copy observation and wrapper lifecycle repairs retain their separate owners.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Fresh immutable LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source and actual public/private scanner channels cover all112 original contracts/115 literal cases under three seeds.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Original six-family inventory and authored scalar/argument oracle distinguish actual regex occurrences and references; committed producer hooks preserve physical bounds before callbacks and construction.
+- [x] **FIX** — No production/spec/standard-test changes or runtime overlays; retain complete committed inputs, actual instruments, full channels and independent original oracles.
+- [x] **ADDRESSED (verified)** — PASS227 origins/events per seed and33 complete Toolbox compiler pairs;269 effective reason-specific evidence corruptions observe RED.
+- [x] **NO REGRESSION** — Twelve unchanged suites reach all1318 ordered groups including Phase01035, no nested failures and exact prior full compiler/callback/origin recurrence; exact canonical receipt is required for landing.
+- [x] **LOCKSTEP** — Book58/18/four chapters/31 RED and457-hash historical freeze, formal claim/Knowledge/task/frontier/roadmaps/live/resume and bounded histories name the same private scope. Further producers/membership/replacement and owned observations stay separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
   Status: `pending`
@@ -3435,7 +3455,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` | `done` | Mark14 hooks;105→133 origins/RED14-GREEN81/1259 groups/148 RED; cursor/input next. |
 | 43.4.2.0.1.4.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` | `done` | Cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED; entry/match next. |
 | 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `done` | Entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED; rollover next. |
-| 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `pending` | Fresh full-family canonical acceptance after all producers and rollover EOF repair. |
+| 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `done` | Fresh complete Legacy-family immutable recurrence; exact canonical landing gates closure. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
@@ -3480,6 +3500,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 
 ## Verification Log
 
+- `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes.
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` — Rollover preserves exact history source/suffix/rows while normalizing mutable EOF separators and restoring string generation identity. Both formats retain91 inputs/36 public commands per epoch, original RED12/final GREEN41 and153 evidence denials. The historical audit recovers only committed Contracts/Phase0 boundary deltas, preserving24 checkpoints/257 historical references/149 selected sources and134 archived inputs/84613241 bytes. Complete conservative source/fixture guards, 22 recovery/56 evolution/20 audit-evidence denials and46 fresh boundary groups pass. Book58/17/four chapters/28 denials and31-hash freeze pass. Both failed canonical candidates and all narrower/corrected preflights are retained. Exact new staged canonical receipt remains required before landing; history bytes, capacities and original runtime claims are unchanged.
 
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — All32 original entry/match producers preserve index-string/name/empty arguments, actual alias spelling, physical bounds and event/argument identities. 4485 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins163→227. Original RED32/GREEN128; twelve suites1318 groups including generated-source12/Phase01035 and168 evidence RED pass. Book58 inputs/14 examples/three chapters/21 RED and35-hash historical freeze pass. Complete public compiler/callback channels and original grammar remain exact; rollover infrastructure repair precedes fresh complete-family canonical acceptance.

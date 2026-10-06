@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Complete Legacy source-family acceptance (.1.4.7)
+
+Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes.
+
 ## 2026-10-06 — Rollover EOF and pending generation recovery (.1.4.0.1.1.1)
 
 Rollover preserves exact history source/suffix/rows while normalizing mutable EOF separators and restoring string generation identity. Both formats retain91 inputs/36 public commands per epoch, original RED12/final GREEN41 and153 evidence denials. The historical audit recovers only committed Contracts/Phase0 boundary deltas, preserving24 checkpoints/257 historical references/149 selected sources and134 archived inputs/84613241 bytes. Complete conservative source/fixture guards, 22 recovery/56 evolution/20 audit-evidence denials and46 fresh boundary groups pass. Book58/17/four chapters/28 denials and31-hash freeze pass. Both failed canonical candidates and all narrower/corrected preflights are retained. Exact new staged canonical receipt remains required before landing; history bytes, capacities and original runtime claims are unchanged.
