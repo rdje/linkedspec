@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: complete Legacy private source family accepted; staged/progressive/recognition producer diagnosis next. Executable membership and other owned defects remain open.
+Full PNT: original dedicated producer diagnosis complete; staged annotation source origins next. Legacy family is committed and canonical; executable membership and separate runtime defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled.
 
 ## Next Action
 
-Activate staged/progressive/recognition producer diagnosis .1.5 from clean committed HEAD; derive safe children from its actual source/argument/callback inventory before production edits. Quoted/comment membership, precise replacement, mark-copy observation and wrapper lifecycle repairs retain their separate owners.
+Activate staged annotation origins .1.5.1 from clean committed HEAD. Reuse the original seven-contract diagnosis and implement only its one staged producer; preserve text/options policy, original objects/callbacks and full compiler channels. Progressive and recognition families, all-producer composition, membership/replacement and separately owned runtime defects retain their next leaves.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — original7 contracts/42 events/63 frames/zero origins,544 groups/108 RED; three-family repair partition.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — all112 contracts/227 origins/1318 groups/269 RED; fresh immutable family acceptance.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` — EOF/recovery/audit; RED12-GREEN41/153 + audit20 evidence denials.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED.
@@ -29,7 +30,6 @@ Activate staged/progressive/recognition producer diagnosis .1.5 from clean commi
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — recursive Flow origins; RED6/GREEN7/1180 groups/147 origins/48 unchanged pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — private method argument frames; RED10/GREEN15/1173 groups/138 exact frames.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — original argument/callback authority diagnosis;124 groups/23 literal arguments and RED evidence controls.
 
 ## History
 

@@ -3139,10 +3139,68 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/18/four chapters/31 RED and457-hash historical freeze, formal claim/Knowledge/task/frontier/roadmaps/live/resume and bounded histories name the same private scope. Further producers/membership/replacement and owned observations stay separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
-  Status: `pending`
+  Status: `active`
   Goal: Complete staged/progressive/recognition source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.4`
+  Children: `.1.5.0`, `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`; diagnosis preserves the original seven-contract partition before production edits.
   Acceptance: Use published LinkedSpec contracts and exact option/token/transaction sources; only this repository is writable and RGX/PGEN stay black boxes.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0`
+  Status: `done`
+  Goal: Diagnose and partition the staged/progressive/recognition source producers before implementation.
+  Activation: Clean3482a5d220bd7063a910c09de883faa903d24135 after canonical Legacy-family acceptance; all ten doctrines and post-commit pointer PASS, exact committed receipt matches HEAD, brief0 and no required jobs. Retrieved canonical marker, progressive carrier, recognition integration, recursive observation and private statement-frame records; reviewed roadmap ownership and source-origin book teaching.
+  Scope: Inventory exact current contracts and actual producer boundaries, original event/argument reference identities, callback order, policy/exclusion paths and direct consumers. Use LinkedSpec Toolbox probes before classifying behavior; retain immutable parent inputs, actual instruments/channels and independent authored source/argument intervals. No production/spec/standard-test/CI/dependency or public admission change.
+  Owned paths: Leaf-prefixed diagnosis producers/cases/capture/reviewer/evidence/book/claim artifacts, hash-verified mode/revision-only historical freeze of the preceding Legacy-family claim, diagnostic Knowledge card and task/frontier/index/roadmaps/live/resume/change/notes plus relevant source-origin teaching. Existing token-order/resource/restoration and marker-identity defects retain their separate recorded owners; do not infer their repair from passing provenance evidence.
+  Verification tier: `focused`
+  Focused checks: Exact committed input/source census; actual private scanner and public Get/return_descriptor/call_spec_handler_subst/dump_parser_source observations under selected deterministic seeds; original source/argument/reference/callback oracle and effective reason-specific evidence controls; unchanged direct consumers; book render, claim/Knowledge/memory/history/doctrines/diff hygiene.
+  Canonical trigger: none for bounded evidence and task partition without production, contract, format, admission or infrastructure change; complete family acceptance remains a separate canonical child.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json`
+  Acceptance: Preserve exact originals and observed producer mechanisms, identify every remaining syntactic origin gap, and schedule safe independently verifiable implementation children. Limits and rejected/interrupted evidence remain explicit. Commit the diagnosis before selecting an implementation child.
+  Routing defect owned here: The committed frontier's .1.4 container row still says active/entry-match next despite its node and .1.4.7 being done. Reproduce by comparing the current frontier row with those committed nodes; this can misroute resumes. Correct that stale row while activating the exact diagnosis leaf, then verify the index/live/roadmap/resume pointers agree.
+  Verification: PASS; Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled.
+  Pre-landing continuation: If HEAD is3482a5d22 and this diagnosis candidate is dirty, finish focused publication checks and normal hooks/commit before activating .1.5.1. Runtime/reviewer/book/freeze proofs are complete; no canonical CI is required for this bounded evidence-only leaf.
+  Routing correction: The stale .1.4 active/entry-match frontier row is now done at committed3482a5d22; .1.5 has explicit .0-.4 children and the exact next .1.5.1 leaf is synchronized across current pointers.
+  Publication repair owned here: Initial change-history check observed RED255 because the new record insertion selected an inline heading example in the preamble. Restore the exact prior root first, then insert at the first line-anchored real heading; prior bytes remain exact. Re-run history and memory gates before landing.
+  Focused publication checks: Memory architecture/handoff PASS59 lines; corrected change history PASS179 lines/37767 bytes and engineering notes PASS192 lines/41256 bytes within unchanged caps. Claim checker PASS58 records/61 claims/zero disclosed leg gaps; self-controls3 positive/16 rejected. Staged cadence PASS focused/canonical-path requirement0; task acceptance PASS no governed production/spec/test/tooling change; exact32-path candidate has no unstaged or untracked nonignored inputs and whitespace PASS. Normal all-doctrine hooks govern landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers`.
+  Next: Activate staged annotation origins .1.5.1 from clean committed HEAD. Reuse the original seven-contract diagnosis and implement only its one staged producer; preserve text/options policy, original objects/callbacks and full compiler channels. Progressive and recognition families, all-producer composition, membership/replacement and separately owned runtime defects retain their next leaves.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Original seven dedicated scanner contracts produce42 literal events/63 statement frames but zero private event-source origins; actual Toolbox build/substitution/descriptor/source channels retain their original constructors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — StagedParseJob, ProgressiveSpanDispatch and RecognitionTransactionRules use the ordinary split callback without private recorder hooks. Payload source provenance does not establish authored action-event provenance; the canonical splitter already exposes exact original physical frames.
+- [x] **FIX** — Retain original immutable inputs, independently authored events/arguments/intervals, actual dispatcher references and full callback/compiler channels; partition staged, progressive, recognition/observation and canonical acceptance before production changes. Correct the stale completed Legacy frontier row.
+- [x] **ADDRESSED (verified)** — All22 cases/seven contracts agree across three seeds, including mixed repeated statements/quoted-only controls and invalid operands.108 effective reason-specific evidence corruptions observe RED; four Toolbox examples build but are not executed by this probe.
+- [x] **NO REGRESSION** — Nine unchanged direct consumers pass544 ordered groups with nested-failure rejection; production/spec/standard-test bytes match the immutable parent. Focused publication checks and all normal doctrine hooks govern landing.
+- [x] **LOCKSTEP** — Book58 inputs/22 examples/four chapters/37 controls,103-hash prior claim freeze, formal101-binding claim, Knowledge, current task/index/roadmaps/live/resume and bounded histories agree on this diagnostic scope and the exact next staged leaf. Separate defects and executable membership remain owned.
+
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1`
+  Status: `pending`
+  Goal: Retain original staged annotation statement origins.
+  Dependencies: `.1.5.0`
+  Scope: StagedParseJob's one dedicated producer, recurring private provenance fixture, retained original before/after evidence and source-origin teaching/continuity. No payload-provenance/static-option/policy/format/admission change.
+  Acceptance: Observe RED on the unchanged original dedicated oracle; privately acquire canonical original statement frames only during recording, capture the same returned event/argument objects and decline transformed/copied/foreign source. Preserve valid direct/derived text plans, literal normalized options, invalid-event validation, exclusive ownership, callback order and all complete public Toolbox channels under the original seeds. Run changed-surface/direct consumers and required action-rewriter Phase0; freeze prior live claims before mutable publication changes; commit before progressive .1.5.2.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2`
+  Status: `pending`
+  Goal: Retain original progressive annotation statement origins.
+  Dependencies: `.1.5.1`
+  Scope: ProgressiveSpanDispatch's one dedicated producer and exact private provenance proof/teaching. Existing authority/resource ceilings, static operands and public exclusion retain their owners.
+  Acceptance: Original RED/GREEN distinguishes repeated annotations and actual statement intervals/returned references; preserve original parser/top/span operands, invalid/dynamic/arity events, callback order, exclusive assignment ownership and complete Toolbox channels. Decline unsupported callback coordinates, re-run original diagnosis and changed-surface/direct consumers plus required Phase0, then commit before recognition .1.5.3.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3`
+  Status: `pending`
+  Goal: Retain original recognition and recursive-observation statement origins.
+  Dependencies: `.1.5.2`
+  Scope: RecognitionTransactionRules' five producers and their private original statement proof/teaching; no token-order/effect/restoration/boolean-kind/observation policy change.
+  Acceptance: Original RED/GREEN covers checkpoint/attempt/commit/rollback/observation and exact repeated scalar intervals. Preserve token/result/unevaluated callee and malformed observation arity/operand fields, returned event/argument objects, public callback sequence and generic-call/assignment exclusions. Canonical frames authorize only unchanged original raw; custom callbacks gain no invented source. Re-run complete original diagnosis and direct consumers plus required Phase0, preserve all separate defect owners, commit before canonical .1.5.4.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4`
+  Status: `pending`
+  Goal: Independently accept complete dedicated annotation source provenance.
+  Dependencies: `.1.5.3`
+  Acceptance: Fresh immutable committed producer recurrence without overlays; all seven original contracts/cases/events/statement intervals, actual references and complete callback/Toolbox channels under the original seeds. Independently effective evidence controls, all changed-surface/direct consumers, full rendered book and source-bound claims/Knowledge/continuity; exact staged canonical receipt and normal commit hooks before closing .1.5. All-producer composition .1.6, executable membership/replacement and separate runtime defects remain owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6`
   Status: `pending`
@@ -3444,7 +3502,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.3.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` | `done` | Private argument frames verified;138 original occurrences/RED10-GREEN15. |
 | 43.4.2.0.1.3.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` | `done` | Recursive Flow verified;147 origins/RED6-GREEN7/1180 groups. |
 | 43.4.2.0.1.3.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` | `done` | Immutable4233/no overlays;16 contracts/837 groups; canonical receipt gates acceptance. |
-| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `active` | Original diagnosis, call/anonymous/named/mark/cursor-input origins and boundary lexical repairs verified; entry/match next. |
+| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `done` | Complete Legacy-family acceptance committed at3482a5d22 with exact canonical receipt and all ten doctrines. |
 | 43.4.2.0.1.4.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` | `done` | Original112-contract diagnosis/115 cases/103 groups/123 RED; Granted finite note admission; exact canonical landing. |
 | 43.4.2.0.1.4.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` | `done` | EOF/recovery/report paths; RED12-GREEN41/153 RED; exact canonical retry before family. |
 | 43.4.2.0.1.4.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` | `done` | Seven hooks/eight contracts; final RED9/GREEN23,2→18 origins,1147 consumers/140 RED and byte-exact original source reconstruction. |
@@ -3456,7 +3514,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` | `done` | Cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED; entry/match next. |
 | 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `done` | Entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED; rollover next. |
 | 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `done` | Fresh complete Legacy-family immutable recurrence; exact canonical landing gates closure. |
-| 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
+| 43.4.2.0.1.5.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` | `done` | Original7-contract/22-case/42-event/63-frame diagnosis,544 groups/108 RED and safe three-family partition. |
+| 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `pending` | Retain only the staged annotation producer origins with original text/options/callback behavior. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
@@ -3499,6 +3558,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October6 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0`: Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled.
 
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — Fresh immutable65304aded supplies4577 committed regular Git inputs/no overlays/four guarded commands. All112 Legacy contracts in six original families preserve115 literal cases/227 origins per seed, actual event/argument identities and33 complete Toolbox compiler pairs under three seeds. Every full callback/compiler/origin channel equals the prior committed proof. Twelve unchanged suites pass1318 ordered groups including Phase01035;269 effective evidence controls observe RED. Book58/18/four chapters/31 RED and457-hash mode/revision-only freeze pass. Exact staged canonical receipt gates parent closeout; no production/spec/test/grammar/API/backend changes.
 - `2026-10-06` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` — Rollover preserves exact history source/suffix/rows while normalizing mutable EOF separators and restoring string generation identity. Both formats retain91 inputs/36 public commands per epoch, original RED12/final GREEN41 and153 evidence denials. The historical audit recovers only committed Contracts/Phase0 boundary deltas, preserving24 checkpoints/257 historical references/149 selected sources and134 archived inputs/84613241 bytes. Complete conservative source/fixture guards, 22 recovery/56 evolution/20 audit-evidence denials and46 fresh boundary groups pass. Book58/17/four chapters/28 denials and31-hash freeze pass. Both failed canonical candidates and all narrower/corrected preflights are retained. Exact new staged canonical receipt remains required before landing; history bytes, capacities and original runtime claims are unchanged.
@@ -3581,6 +3642,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers` — original dedicated diagnosis and safe repair partition; normal focused hooks govern landing.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1 - preserve rollover EOF and pending recovery` — bounded writer and actual registered regression; exact canonical receipt gates landing; Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6 - retain entry/match source origins` — original32 snapshots and full focused source compatibility; Git owns identity.
@@ -3644,6 +3707,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-06`: .1.5.0 retains original seven-contract source diagnosis and partitions .1-.4; correct stale completed Legacy frontier. Staged .1.5.1 follows clean landing.
 
 - `2026-10-06`: `.1.4.0.1.1.1` repairs EOF/P1 pending recovery with exact original byte evidence; fresh canonical family .1.4.7 follows.
 

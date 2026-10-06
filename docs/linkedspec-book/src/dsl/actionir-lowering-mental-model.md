@@ -541,6 +541,55 @@ Executable quoted/comment membership and source-based replacement remain
 separate work; a syntactic source origin alone does not authorize rewriting
 helper-looking data as executable code.
 
+### Dedicated annotation source provenance
+
+The staged, progressive and recognition scanners still return their original
+events without a private event-source origin. Their canonical statement splitter
+already supplies physical statement frames. A dedicated annotation owns its
+whole statement, including its original target and operands:
+
+```text
+job = parse_job(entry_text(), hash("node_kind","expression","payload_kind","text","spec","expr-v1","result_policy","replace_marker","on_error","fail"))
+```
+
+Staged text plans and options keep their existing validation. Progressive dispatch
+also keeps the distinction between a literal parser identity and a dynamic operand:
+
+```text
+child = dispatch_span("expr-v1", "Expr", span)
+child = dispatch_span(parser, "Expr", span)  # rejected: parser identity must be literal
+```
+
+Recognition statement provenance must preserve the token and unevaluated static
+callee. A transaction selects one terminal operation:
+
+```text
+scope = recognition_checkpoint()
+matched = recognize_once(scope, call(Done))
+payload = recognition_commit(scope)
+# Alternative terminal: recognition_rollback(scope)
+```
+
+The current diagnosis checks all seven dedicated contracts: one staged annotation,
+one progressive annotation, four transaction forms and recursive observation.
+Independent original intervals distinguish repeated equal statements; actual
+dispatcher references and complete callback/compiler channels preserve the original
+behavior. Invalid annotations retain their original event arguments so validation
+can reject them; attaching provenance must preserve that path.
+This diagnosis changes no static policy, recognition behavior or public event fields.
+Executable membership, precise replacement and separately owned runtime defects
+remain subsequent work.
+
+The existing behavior consumers can be run with:
+
+```sh
+bash tools/project_data_run.sh prove -v -Iperl \
+  t/staged_ast_enrichment_perl_contract.t \
+  t/progressive_span_dispatch_perl_contract.t \
+  t/recognition_transaction_perl_contract.t \
+  t/recursive_observation_perl_contract.t
+```
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

@@ -1,0 +1,1619 @@
+{
+  "contracts": [
+    "staged_parse_job",
+    "progressive_span_dispatch",
+    "observe_recognition",
+    "recognition_checkpoint",
+    "recognize_once",
+    "recognition_commit",
+    "recognition_rollback"
+  ],
+  "cases": [
+    {
+      "id": "staged_parse_job",
+      "action": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\"))\";  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 185
+          },
+          "raw": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\"))\""
+        },
+        {
+          "source_span": {
+            "start": 188,
+            "end": 339
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))"
+        },
+        {
+          "source_span": {
+            "start": 342,
+            "end": 493
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "staged_parse_job",
+          "expected_events": [
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "replace_marker",
+                    "on_error": "fail",
+                    "required_capabilities": []
+                  },
+                  "text_plan": {
+                    "kind": "direct_span",
+                    "source": "entry_text"
+                  }
+                },
+                "text_plan": {
+                  "kind": "direct_span",
+                  "source": "entry_text"
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "replace_marker",
+                  "on_error": "fail",
+                  "required_capabilities": []
+                }
+              }
+            },
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "replace_marker",
+                    "on_error": "fail",
+                    "required_capabilities": []
+                  },
+                  "text_plan": {
+                    "kind": "direct_span",
+                    "source": "entry_text"
+                  }
+                },
+                "text_plan": {
+                  "kind": "direct_span",
+                  "source": "entry_text"
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "replace_marker",
+                  "on_error": "fail",
+                  "required_capabilities": []
+                }
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              188,
+              339
+            ],
+            [
+              342,
+              493
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staged_parse_job-quoted-only",
+      "action": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\"))\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 185
+          },
+          "raw": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\"))\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "staged_parse_job",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "progressive_span_dispatch",
+      "action": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span)\";  child = dispatch_span(\"expr-v1\", \"Expr\", span);  child = dispatch_span(\"expr-v1\", \"Expr\", span)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 64
+          },
+          "raw": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span)\""
+        },
+        {
+          "source_span": {
+            "start": 67,
+            "end": 113
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)"
+        },
+        {
+          "source_span": {
+            "start": 116,
+            "end": 162
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "progressive_span_dispatch",
+          "expected_events": [
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span",
+                "parser_id": "expr-v1",
+                "top_rule": "Expr",
+                "span_binding": "span"
+              }
+            },
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span",
+                "parser_id": "expr-v1",
+                "top_rule": "Expr",
+                "span_binding": "span"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              67,
+              113
+            ],
+            [
+              116,
+              162
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "progressive_span_dispatch-quoted-only",
+      "action": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span)\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 64
+          },
+          "raw": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span)\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "progressive_span_dispatch",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "observe_recognition",
+      "action": "literal = \"雪 value = observe_recognition(observation, call(Done))\";  value = observe_recognition(observation, call(Done));  value = observe_recognition(observation, call(Done))\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 66
+          },
+          "raw": "literal = \"雪 value = observe_recognition(observation, call(Done))\""
+        },
+        {
+          "source_span": {
+            "start": 69,
+            "end": 121
+          },
+          "raw": "value = observe_recognition(observation, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 124,
+            "end": 176
+          },
+          "raw": "value = observe_recognition(observation, call(Done))"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "observe_recognition",
+          "expected_events": [
+            {
+              "raw": "value = observe_recognition(observation, call(Done))",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            },
+            {
+              "raw": "value = observe_recognition(observation, call(Done))",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              69,
+              121
+            ],
+            [
+              124,
+              176
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "observe_recognition-quoted-only",
+      "action": "literal = \"雪 value = observe_recognition(observation, call(Done))\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 66
+          },
+          "raw": "literal = \"雪 value = observe_recognition(observation, call(Done))\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "observe_recognition",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "recognition_checkpoint",
+      "action": "literal = \"雪 scope = recognition_checkpoint()\";  scope = recognition_checkpoint();  scope = recognition_checkpoint()\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 46
+          },
+          "raw": "literal = \"雪 scope = recognition_checkpoint()\""
+        },
+        {
+          "source_span": {
+            "start": 49,
+            "end": 81
+          },
+          "raw": "scope = recognition_checkpoint()"
+        },
+        {
+          "source_span": {
+            "start": 84,
+            "end": 116
+          },
+          "raw": "scope = recognition_checkpoint()"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_checkpoint",
+          "expected_events": [
+            {
+              "raw": "scope = recognition_checkpoint()",
+              "args": {
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "scope = recognition_checkpoint()",
+              "args": {
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              49,
+              81
+            ],
+            [
+              84,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recognition_checkpoint-quoted-only",
+      "action": "literal = \"雪 scope = recognition_checkpoint()\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 46
+          },
+          "raw": "literal = \"雪 scope = recognition_checkpoint()\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_checkpoint",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "recognize_once",
+      "action": "literal = \"雪 matched = recognize_once(scope, call(Done))\";  matched = recognize_once(scope, call(Done));  matched = recognize_once(scope, call(Done))\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 57
+          },
+          "raw": "literal = \"雪 matched = recognize_once(scope, call(Done))\""
+        },
+        {
+          "source_span": {
+            "start": 60,
+            "end": 103
+          },
+          "raw": "matched = recognize_once(scope, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 106,
+            "end": 149
+          },
+          "raw": "matched = recognize_once(scope, call(Done))"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognize_once",
+          "expected_events": [
+            {
+              "raw": "matched = recognize_once(scope, call(Done))",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            },
+            {
+              "raw": "matched = recognize_once(scope, call(Done))",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              60,
+              103
+            ],
+            [
+              106,
+              149
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recognize_once-quoted-only",
+      "action": "literal = \"雪 matched = recognize_once(scope, call(Done))\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 57
+          },
+          "raw": "literal = \"雪 matched = recognize_once(scope, call(Done))\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognize_once",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "recognition_commit",
+      "action": "literal = \"雪 payload = recognition_commit(scope)\";  payload = recognition_commit(scope);  payload = recognition_commit(scope)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 49
+          },
+          "raw": "literal = \"雪 payload = recognition_commit(scope)\""
+        },
+        {
+          "source_span": {
+            "start": 52,
+            "end": 87
+          },
+          "raw": "payload = recognition_commit(scope)"
+        },
+        {
+          "source_span": {
+            "start": 90,
+            "end": 125
+          },
+          "raw": "payload = recognition_commit(scope)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_commit",
+          "expected_events": [
+            {
+              "raw": "payload = recognition_commit(scope)",
+              "args": {
+                "payload": "payload",
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "payload = recognition_commit(scope)",
+              "args": {
+                "payload": "payload",
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              52,
+              87
+            ],
+            [
+              90,
+              125
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recognition_commit-quoted-only",
+      "action": "literal = \"雪 payload = recognition_commit(scope)\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 49
+          },
+          "raw": "literal = \"雪 payload = recognition_commit(scope)\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_commit",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "recognition_rollback",
+      "action": "literal = \"雪 recognition_rollback(scope)\";  recognition_rollback(scope);  recognition_rollback(scope)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 41
+          },
+          "raw": "literal = \"雪 recognition_rollback(scope)\""
+        },
+        {
+          "source_span": {
+            "start": 44,
+            "end": 71
+          },
+          "raw": "recognition_rollback(scope)"
+        },
+        {
+          "source_span": {
+            "start": 74,
+            "end": 101
+          },
+          "raw": "recognition_rollback(scope)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_rollback",
+          "expected_events": [
+            {
+              "raw": "recognition_rollback(scope)",
+              "args": {
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "recognition_rollback(scope)",
+              "args": {
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              44,
+              71
+            ],
+            [
+              74,
+              101
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recognition_rollback-quoted-only",
+      "action": "literal = \"雪 recognition_rollback(scope)\"\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 41
+          },
+          "raw": "literal = \"雪 recognition_rollback(scope)\""
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognition_rollback",
+          "expected_events": [],
+          "original_spans": []
+        }
+      ]
+    },
+    {
+      "id": "staged-derived-options",
+      "action": "literal = \"雪 job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"append_child\\\",\\\"on_error\\\",\\\"keep_text\\\",\\\"top\\\",\\\"Expr\\\",\\\"into\\\",\\\"children\\\",\\\"required_capabilities\\\",array(\\\"z.cap\\\",\\\"a.cap\\\")))\";  job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")));  job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")))\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 320
+          },
+          "raw": "literal = \"雪 job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"append_child\\\",\\\"on_error\\\",\\\"keep_text\\\",\\\"top\\\",\\\"Expr\\\",\\\"into\\\",\\\"children\\\",\\\"required_capabilities\\\",array(\\\"z.cap\\\",\\\"a.cap\\\")))\""
+        },
+        {
+          "source_span": {
+            "start": 323,
+            "end": 595
+          },
+          "raw": "job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")))"
+        },
+        {
+          "source_span": {
+            "start": 598,
+            "end": 870
+          },
+          "raw": "job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")))"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "staged_parse_job",
+          "expected_events": [
+            {
+              "raw": "job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "cat(entry_group(1), cat(match_text(), entry_text()))",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\"))",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "append_child",
+                    "on_error": "keep_text",
+                    "top": "Expr",
+                    "into": "children",
+                    "required_capabilities": [
+                      "a.cap",
+                      "z.cap"
+                    ]
+                  },
+                  "text_plan": {
+                    "kind": "derived_text",
+                    "policy": "concatenate_in_order",
+                    "segments": [
+                      {
+                        "kind": "direct_span",
+                        "source": "entry_group",
+                        "index": 1
+                      },
+                      {
+                        "kind": "direct_span",
+                        "source": "match_text"
+                      },
+                      {
+                        "kind": "direct_span",
+                        "source": "entry_text"
+                      }
+                    ]
+                  }
+                },
+                "text_plan": {
+                  "kind": "derived_text",
+                  "policy": "concatenate_in_order",
+                  "segments": [
+                    {
+                      "kind": "direct_span",
+                      "source": "entry_group",
+                      "index": 1
+                    },
+                    {
+                      "kind": "direct_span",
+                      "source": "match_text"
+                    },
+                    {
+                      "kind": "direct_span",
+                      "source": "entry_text"
+                    }
+                  ]
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "append_child",
+                  "on_error": "keep_text",
+                  "top": "Expr",
+                  "into": "children",
+                  "required_capabilities": [
+                    "a.cap",
+                    "z.cap"
+                  ]
+                }
+              }
+            },
+            {
+              "raw": "job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\")))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "cat(entry_group(1), cat(match_text(), entry_text()))",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"append_child\",\"on_error\",\"keep_text\",\"top\",\"Expr\",\"into\",\"children\",\"required_capabilities\",array(\"z.cap\",\"a.cap\"))",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "append_child",
+                    "on_error": "keep_text",
+                    "top": "Expr",
+                    "into": "children",
+                    "required_capabilities": [
+                      "a.cap",
+                      "z.cap"
+                    ]
+                  },
+                  "text_plan": {
+                    "kind": "derived_text",
+                    "policy": "concatenate_in_order",
+                    "segments": [
+                      {
+                        "kind": "direct_span",
+                        "source": "entry_group",
+                        "index": 1
+                      },
+                      {
+                        "kind": "direct_span",
+                        "source": "match_text"
+                      },
+                      {
+                        "kind": "direct_span",
+                        "source": "entry_text"
+                      }
+                    ]
+                  }
+                },
+                "text_plan": {
+                  "kind": "derived_text",
+                  "policy": "concatenate_in_order",
+                  "segments": [
+                    {
+                      "kind": "direct_span",
+                      "source": "entry_group",
+                      "index": 1
+                    },
+                    {
+                      "kind": "direct_span",
+                      "source": "match_text"
+                    },
+                    {
+                      "kind": "direct_span",
+                      "source": "entry_text"
+                    }
+                  ]
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "append_child",
+                  "on_error": "keep_text",
+                  "top": "Expr",
+                  "into": "children",
+                  "required_capabilities": [
+                    "a.cap",
+                    "z.cap"
+                  ]
+                }
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              323,
+              595
+            ],
+            [
+              598,
+              870
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staged-unknown-option",
+      "action": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\",\\\"unknown\\\",\\\"value\\\"))\";  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"));  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"))\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 207
+          },
+          "raw": "literal = \"雪 job = parse_job(entry_text(), hash(\\\"node_kind\\\",\\\"expression\\\",\\\"payload_kind\\\",\\\"text\\\",\\\"spec\\\",\\\"expr-v1\\\",\\\"result_policy\\\",\\\"replace_marker\\\",\\\"on_error\\\",\\\"fail\\\",\\\"unknown\\\",\\\"value\\\"))\""
+        },
+        {
+          "source_span": {
+            "start": 210,
+            "end": 379
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"))"
+        },
+        {
+          "source_span": {
+            "start": 382,
+            "end": 551
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"))"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "staged_parse_job",
+          "expected_events": [
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\")",
+                "validation": {
+                  "ok": 0,
+                  "code": "staged_parse_job_option_unknown",
+                  "option": "unknown"
+                }
+              }
+            },
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\",\"unknown\",\"value\")",
+                "validation": {
+                  "ok": 0,
+                  "code": "staged_parse_job_option_unknown",
+                  "option": "unknown"
+                }
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              210,
+              379
+            ],
+            [
+              382,
+              551
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "progressive-dynamic-parser",
+      "action": "literal = \"雪 child = dispatch_span(parser, \\\"Expr\\\", span)\";  child = dispatch_span(parser, \"Expr\", span);  child = dispatch_span(parser, \"Expr\", span)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 59
+          },
+          "raw": "literal = \"雪 child = dispatch_span(parser, \\\"Expr\\\", span)\""
+        },
+        {
+          "source_span": {
+            "start": 62,
+            "end": 105
+          },
+          "raw": "child = dispatch_span(parser, \"Expr\", span)"
+        },
+        {
+          "source_span": {
+            "start": 108,
+            "end": 151
+          },
+          "raw": "child = dispatch_span(parser, \"Expr\", span)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "progressive_span_dispatch",
+          "expected_events": [
+            {
+              "raw": "child = dispatch_span(parser, \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "parser",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span"
+              }
+            },
+            {
+              "raw": "child = dispatch_span(parser, \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "parser",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              62,
+              105
+            ],
+            [
+              108,
+              151
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "progressive-extra-argument",
+      "action": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span, other)\";  child = dispatch_span(\"expr-v1\", \"Expr\", span, other);  child = dispatch_span(\"expr-v1\", \"Expr\", span, other)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 71
+          },
+          "raw": "literal = \"雪 child = dispatch_span(\\\"expr-v1\\\", \\\"Expr\\\", span, other)\""
+        },
+        {
+          "source_span": {
+            "start": 74,
+            "end": 127
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span, other)"
+        },
+        {
+          "source_span": {
+            "start": 130,
+            "end": 183
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span, other)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "progressive_span_dispatch",
+          "expected_events": [
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span, other)",
+              "args": {
+                "result": "child",
+                "argument_count": 4,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span"
+              }
+            },
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span, other)",
+              "args": {
+                "result": "child",
+                "argument_count": 4,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              74,
+              127
+            ],
+            [
+              130,
+              183
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recognition-value-operand",
+      "action": "literal = \"雪 matched = recognize_once(scope, value)\";  matched = recognize_once(scope, value);  matched = recognize_once(scope, value)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 52
+          },
+          "raw": "literal = \"雪 matched = recognize_once(scope, value)\""
+        },
+        {
+          "source_span": {
+            "start": 55,
+            "end": 93
+          },
+          "raw": "matched = recognize_once(scope, value)"
+        },
+        {
+          "source_span": {
+            "start": 96,
+            "end": 134
+          },
+          "raw": "matched = recognize_once(scope, value)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "recognize_once",
+          "expected_events": [
+            {
+              "raw": "matched = recognize_once(scope, value)",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "value"
+              }
+            },
+            {
+              "raw": "matched = recognize_once(scope, value)",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "value"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              55,
+              93
+            ],
+            [
+              96,
+              134
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "observation-missing-operand",
+      "action": "literal = \"雪 value = observe_recognition(observation)\";  value = observe_recognition(observation);  value = observe_recognition(observation)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 54
+          },
+          "raw": "literal = \"雪 value = observe_recognition(observation)\""
+        },
+        {
+          "source_span": {
+            "start": 57,
+            "end": 97
+          },
+          "raw": "value = observe_recognition(observation)"
+        },
+        {
+          "source_span": {
+            "start": 100,
+            "end": 140
+          },
+          "raw": "value = observe_recognition(observation)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "observe_recognition",
+          "expected_events": [
+            {
+              "raw": "value = observe_recognition(observation)",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "",
+                "argument_count": 1,
+                "operand_kind": "missing"
+              }
+            },
+            {
+              "raw": "value = observe_recognition(observation)",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "",
+                "argument_count": 1,
+                "operand_kind": "missing"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              57,
+              97
+            ],
+            [
+              100,
+              140
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "observation-extra-argument",
+      "action": "literal = \"雪 value = observe_recognition(observation, call(Done), extra)\";  value = observe_recognition(observation, call(Done), extra);  value = observe_recognition(observation, call(Done), extra)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 73
+          },
+          "raw": "literal = \"雪 value = observe_recognition(observation, call(Done), extra)\""
+        },
+        {
+          "source_span": {
+            "start": 76,
+            "end": 135
+          },
+          "raw": "value = observe_recognition(observation, call(Done), extra)"
+        },
+        {
+          "source_span": {
+            "start": 138,
+            "end": 197
+          },
+          "raw": "value = observe_recognition(observation, call(Done), extra)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "observe_recognition",
+          "expected_events": [
+            {
+              "raw": "value = observe_recognition(observation, call(Done), extra)",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "argument_count": 3,
+                "callee": "Done"
+              }
+            },
+            {
+              "raw": "value = observe_recognition(observation, call(Done), extra)",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "argument_count": 3,
+                "callee": "Done"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              76,
+              135
+            ],
+            [
+              138,
+              197
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mixed-repeated-dedicated-producers",
+      "action": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));  child = dispatch_span(\"expr-v1\", \"Expr\", span);  value = observe_recognition(observation, call(Done));  scope = recognition_checkpoint();  matched = recognize_once(scope, call(Done));  payload = recognition_commit(scope);  recognition_rollback(scope);  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));  child = dispatch_span(\"expr-v1\", \"Expr\", span);  value = observe_recognition(observation, call(Done));  scope = recognition_checkpoint();  matched = recognize_once(scope, call(Done));  payload = recognition_commit(scope);  recognition_rollback(scope)\r\n",
+      "statements": [
+        {
+          "source_span": {
+            "start": 0,
+            "end": 151
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))"
+        },
+        {
+          "source_span": {
+            "start": 154,
+            "end": 200
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)"
+        },
+        {
+          "source_span": {
+            "start": 203,
+            "end": 255
+          },
+          "raw": "value = observe_recognition(observation, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 258,
+            "end": 290
+          },
+          "raw": "scope = recognition_checkpoint()"
+        },
+        {
+          "source_span": {
+            "start": 293,
+            "end": 336
+          },
+          "raw": "matched = recognize_once(scope, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 339,
+            "end": 374
+          },
+          "raw": "payload = recognition_commit(scope)"
+        },
+        {
+          "source_span": {
+            "start": 377,
+            "end": 404
+          },
+          "raw": "recognition_rollback(scope)"
+        },
+        {
+          "source_span": {
+            "start": 407,
+            "end": 558
+          },
+          "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))"
+        },
+        {
+          "source_span": {
+            "start": 561,
+            "end": 607
+          },
+          "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)"
+        },
+        {
+          "source_span": {
+            "start": 610,
+            "end": 662
+          },
+          "raw": "value = observe_recognition(observation, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 665,
+            "end": 697
+          },
+          "raw": "scope = recognition_checkpoint()"
+        },
+        {
+          "source_span": {
+            "start": 700,
+            "end": 743
+          },
+          "raw": "matched = recognize_once(scope, call(Done))"
+        },
+        {
+          "source_span": {
+            "start": 746,
+            "end": 781
+          },
+          "raw": "payload = recognition_commit(scope)"
+        },
+        {
+          "source_span": {
+            "start": 784,
+            "end": 811
+          },
+          "raw": "recognition_rollback(scope)"
+        }
+      ],
+      "rows": [
+        {
+          "contract": "staged_parse_job",
+          "expected_events": [
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "replace_marker",
+                    "on_error": "fail",
+                    "required_capabilities": []
+                  },
+                  "text_plan": {
+                    "kind": "direct_span",
+                    "source": "entry_text"
+                  }
+                },
+                "text_plan": {
+                  "kind": "direct_span",
+                  "source": "entry_text"
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "replace_marker",
+                  "on_error": "fail",
+                  "required_capabilities": []
+                }
+              }
+            },
+            {
+              "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+              "args": {
+                "target": "job",
+                "argument_count": 2,
+                "text_operand": "entry_text()",
+                "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+                "validation": {
+                  "ok": 1,
+                  "options": {
+                    "node_kind": "expression",
+                    "payload_kind": "text",
+                    "spec": "expr-v1",
+                    "result_policy": "replace_marker",
+                    "on_error": "fail",
+                    "required_capabilities": []
+                  },
+                  "text_plan": {
+                    "kind": "direct_span",
+                    "source": "entry_text"
+                  }
+                },
+                "text_plan": {
+                  "kind": "direct_span",
+                  "source": "entry_text"
+                },
+                "options": {
+                  "node_kind": "expression",
+                  "payload_kind": "text",
+                  "spec": "expr-v1",
+                  "result_policy": "replace_marker",
+                  "on_error": "fail",
+                  "required_capabilities": []
+                }
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              0,
+              151
+            ],
+            [
+              407,
+              558
+            ]
+          ]
+        },
+        {
+          "contract": "progressive_span_dispatch",
+          "expected_events": [
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span",
+                "parser_id": "expr-v1",
+                "top_rule": "Expr",
+                "span_binding": "span"
+              }
+            },
+            {
+              "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+              "args": {
+                "result": "child",
+                "argument_count": 3,
+                "parser_operand": "\"expr-v1\"",
+                "top_rule_operand": "\"Expr\"",
+                "span_operand": "span",
+                "parser_id": "expr-v1",
+                "top_rule": "Expr",
+                "span_binding": "span"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              154,
+              200
+            ],
+            [
+              561,
+              607
+            ]
+          ]
+        },
+        {
+          "contract": "observe_recognition",
+          "expected_events": [
+            {
+              "raw": "value = observe_recognition(observation, call(Done))",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            },
+            {
+              "raw": "value = observe_recognition(observation, call(Done))",
+              "args": {
+                "result": "value",
+                "target": "observation",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              203,
+              255
+            ],
+            [
+              610,
+              662
+            ]
+          ]
+        },
+        {
+          "contract": "recognition_checkpoint",
+          "expected_events": [
+            {
+              "raw": "scope = recognition_checkpoint()",
+              "args": {
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "scope = recognition_checkpoint()",
+              "args": {
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              258,
+              290
+            ],
+            [
+              665,
+              697
+            ]
+          ]
+        },
+        {
+          "contract": "recognize_once",
+          "expected_events": [
+            {
+              "raw": "matched = recognize_once(scope, call(Done))",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            },
+            {
+              "raw": "matched = recognize_once(scope, call(Done))",
+              "args": {
+                "matched": "matched",
+                "token": "scope",
+                "operand": "call(Done)",
+                "callee": "Done"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              293,
+              336
+            ],
+            [
+              700,
+              743
+            ]
+          ]
+        },
+        {
+          "contract": "recognition_commit",
+          "expected_events": [
+            {
+              "raw": "payload = recognition_commit(scope)",
+              "args": {
+                "payload": "payload",
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "payload = recognition_commit(scope)",
+              "args": {
+                "payload": "payload",
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              339,
+              374
+            ],
+            [
+              746,
+              781
+            ]
+          ]
+        },
+        {
+          "contract": "recognition_rollback",
+          "expected_events": [
+            {
+              "raw": "recognition_rollback(scope)",
+              "args": {
+                "token": "scope"
+              }
+            },
+            {
+              "raw": "recognition_rollback(scope)",
+              "args": {
+                "token": "scope"
+              }
+            }
+          ],
+          "original_spans": [
+            [
+              377,
+              404
+            ],
+            [
+              784,
+              811
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "toolbox": [
+    {
+      "id": "staged",
+      "action": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")); return(job)"
+    },
+    {
+      "id": "progressive",
+      "action": "span = entry_span(); child = dispatch_span(\"expr-v1\", \"Expr\", span); return(child)"
+    },
+    {
+      "id": "recognition",
+      "action": "scope = recognition_checkpoint(); matched = recognize_once(scope, call(Done)); payload = recognition_commit(scope); return(payload)"
+    },
+    {
+      "id": "observation",
+      "action": "value = observe_recognition(observation, call(Done)); return(value)"
+    }
+  ],
+  "scope": "Independent literal event/argument and scalar-interval diagnosis; no implementation change."
+}

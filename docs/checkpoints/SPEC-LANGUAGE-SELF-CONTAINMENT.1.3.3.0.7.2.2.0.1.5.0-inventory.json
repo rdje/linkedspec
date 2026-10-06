@@ -1,0 +1,69 @@
+{
+  "owners": [
+    {
+      "family": "staged",
+      "path": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+      "bytes": 13167,
+      "sha256": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+      "contracts": [
+        {
+          "id": "staged_parse_job",
+          "handler": "try_scan_contract_ir_events"
+        }
+      ],
+      "private_source_recorder_calls": 0
+    },
+    {
+      "family": "progressive",
+      "path": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+      "bytes": 5359,
+      "sha256": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+      "contracts": [
+        {
+          "id": "progressive_span_dispatch",
+          "handler": "try_scan_contract_ir_events"
+        }
+      ],
+      "private_source_recorder_calls": 0
+    },
+    {
+      "family": "recognition",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm",
+      "bytes": 4196,
+      "sha256": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+      "contracts": [
+        {
+          "id": "observe_recognition",
+          "handler": "_scan_observation"
+        },
+        {
+          "id": "recognition_checkpoint",
+          "handler": "_scan_checkpoint"
+        },
+        {
+          "id": "recognize_once",
+          "handler": "_scan_attempt"
+        },
+        {
+          "id": "recognition_commit",
+          "handler": "_scan_commit"
+        },
+        {
+          "id": "recognition_rollback",
+          "handler": "_scan_rollback"
+        }
+      ],
+      "private_source_recorder_calls": 0
+    }
+  ],
+  "contracts": [
+    "staged_parse_job",
+    "progressive_span_dispatch",
+    "observe_recognition",
+    "recognition_checkpoint",
+    "recognize_once",
+    "recognition_commit",
+    "recognition_rollback"
+  ],
+  "scope": "Exact dedicated scanner dispatch population; no helper or runtime admission."
+}

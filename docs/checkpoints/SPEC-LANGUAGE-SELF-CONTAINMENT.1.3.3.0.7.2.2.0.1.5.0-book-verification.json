@@ -1,0 +1,194 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 22,
+  "rendered_sections": 4,
+  "controls": [
+    {
+      "name": "failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "missing guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forged instrument",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forged channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "missing examples",
+      "rejected": true,
+      "reason": "original rendered boundary examples"
+    },
+    {
+      "name": "missing label teaching",
+      "rejected": true,
+      "reason": "whole quoted label teaching"
+    },
+    {
+      "name": "hidden nested behavior",
+      "rejected": true,
+      "reason": "nested unknown-escape teaching"
+    },
+    {
+      "name": "hidden backend scope",
+      "rejected": true,
+      "reason": "explicit cross-backend scope"
+    },
+    {
+      "name": "missing catalog contract",
+      "rejected": true,
+      "reason": "public catalog quoted-label contract"
+    },
+    {
+      "name": "missing mechanism",
+      "rejected": true,
+      "reason": "structural lexical authority teaching"
+    },
+    {
+      "name": "hidden quoted source debt",
+      "rejected": true,
+      "reason": "explicit quoted-source repair owner"
+    },
+    {
+      "name": "missing anonymous examples",
+      "rejected": true,
+      "reason": "original anonymous source examples"
+    },
+    {
+      "name": "missing anonymous producer authority",
+      "rejected": true,
+      "reason": "anonymous original producer authority"
+    },
+    {
+      "name": "missing named examples",
+      "rejected": true,
+      "reason": "original named source examples"
+    },
+    {
+      "name": "missing named producer authority",
+      "rejected": true,
+      "reason": "named original producer authority"
+    },
+    {
+      "name": "missing mark examples",
+      "rejected": true,
+      "reason": "original mark source examples"
+    },
+    {
+      "name": "missing mark producer authority",
+      "rejected": true,
+      "reason": "mark original producer authority"
+    },
+    {
+      "name": "missing cursor/input examples",
+      "rejected": true,
+      "reason": "original cursor/input source examples"
+    },
+    {
+      "name": "missing cursor/input argument authority",
+      "rejected": true,
+      "reason": "cursor/input original argument authority"
+    },
+    {
+      "name": "missing entry/match examples",
+      "rejected": true,
+      "reason": "original entry/match source examples"
+    },
+    {
+      "name": "missing entry/match producer authority",
+      "rejected": true,
+      "reason": "entry/match original producer authority"
+    },
+    {
+      "name": "missing family fixture example",
+      "rejected": true,
+      "reason": "complete-family fixture example"
+    },
+    {
+      "name": "missing family validation scope",
+      "rejected": true,
+      "reason": "complete-family validation scope"
+    },
+    {
+      "name": "missing executable-membership boundary",
+      "rejected": true,
+      "reason": "explicit executable-membership boundary"
+    },
+    {
+      "name": "missing staged annotation example",
+      "rejected": true,
+      "reason": "dedicated annotation examples"
+    },
+    {
+      "name": "missing progressive annotation example",
+      "rejected": true,
+      "reason": "dedicated annotation examples"
+    },
+    {
+      "name": "missing recognition annotation example",
+      "rejected": true,
+      "reason": "dedicated annotation examples"
+    },
+    {
+      "name": "missing dedicated fixture command",
+      "rejected": true,
+      "reason": "dedicated behavior fixture example"
+    },
+    {
+      "name": "hidden dedicated origin gap",
+      "rejected": true,
+      "reason": "dedicated current origin gap"
+    },
+    {
+      "name": "hidden dedicated policy scope",
+      "rejected": true,
+      "reason": "dedicated policy preservation"
+    },
+    {
+      "name": "missing history examples",
+      "rejected": true,
+      "reason": "original rendered history examples"
+    },
+    {
+      "name": "missing terminal separator teaching",
+      "rejected": true,
+      "reason": "hot-root terminal separator teaching"
+    },
+    {
+      "name": "missing pending string identity",
+      "rejected": true,
+      "reason": "pending metadata string identity teaching"
+    },
+    {
+      "name": "missing archive-only scope",
+      "rejected": true,
+      "reason": "explicit archive-only query scope"
+    },
+    {
+      "name": "missing audit replay example",
+      "rejected": true,
+      "reason": "original rendered history examples"
+    },
+    {
+      "name": "missing historical hash preservation",
+      "rejected": true,
+      "reason": "historical audit identity preservation"
+    },
+    {
+      "name": "missing historical runtime scope",
+      "rejected": true,
+      "reason": "historical runtime scope"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "2b89f67644b6ad36b4c726e3e9c7c24e955fb14f4103246affced6767c5fd750"
+}

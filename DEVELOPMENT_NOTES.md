@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0: dedicated statement ownership
+
+Staged payload provenance is distinct from authored action-event provenance. The original three scanner owners have seven dedicated contracts and no private recorder calls; existing canonical physical frames can authorize their unchanged whole statements. Preserve malformed operands/options for policy rejection, actual dispatcher-returned references and full callback/compiler channels. The retained diagnosis owns .1 staged, .2 progressive, .3 recognition/observation and .4 canonical acceptance; no production change or existing runtime-defect closure. Runtime4593+3/22/42/63/0 and544 groups/108 RED; book58/22/four/37; prior Legacy103 hashes freeze mode/revision only.
+
 ## 2026-10-06 — Immutable family acceptance preserves original channel authority (.1.4.7)
 
 The fresh committed Git snapshot contains no fixture or runtime overlays. Compare the original literal source/argument/scalar oracle and actual references before comparing complete earlier compiler/callback/origin channels; never infer acceptance from final event totals alone. Each of the112 original contracts has an omitted-event RED, all115 cases have an omitted-origin RED, and all six families have three reference denials plus an incorrect repeated interval. Complete ordered TAP and nested-failure checks preserve actual reach. The prior rollover claim freezes only after457 original Git hashes verify. See docs/knowledge/perl-legacy-family-source-acceptance.md; the canonical receipt independently gates exact milestone landing.
