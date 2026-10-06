@@ -9,3 +9,4 @@ cd "$ROOT"
 
 perl scripts/check_document_history.pl --self-test
 perl scripts/check_document_history.pl
+bash tools/run_python_project_data.sh tools/test_document_history_rollover.py

@@ -1,0 +1,779 @@
+{
+  "complete": true,
+  "revision": "224d5443af794d4e5ade6e80bd8f09145ee7b5b3",
+  "fixture_revision": "b2156813fffed53622e640583a46a4ca94186a08",
+  "immutable_inputs": 91,
+  "commands_per_epoch": 36,
+  "groups": 41,
+  "original_red_groups": 12,
+  "repaired_green_groups": 41,
+  "surfaces": 2,
+  "controls": [
+    {
+      "name": "false exit 0",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 1",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 2",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 3",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 4",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 5",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 6",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 7",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 8",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 9",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 10",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 11",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 12",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 13",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 14",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 15",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 16",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 17",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 18",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 19",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 20",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 21",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 22",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 23",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 24",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 25",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 26",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 27",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 28",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 29",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 30",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 31",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 32",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 33",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 34",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "false exit 35",
+      "reason": "exact actual public exit",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 0",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 1",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 2",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 3",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 4",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 5",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 6",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 7",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 8",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 9",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 10",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 11",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 12",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 13",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 14",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 15",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 16",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 17",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 18",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 19",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 20",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 21",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 22",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 23",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 24",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 25",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 26",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 27",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 28",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 29",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 30",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 31",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 32",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 33",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 34",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 35",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 36",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 37",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 38",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 39",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 40",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 41",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 42",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 43",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 44",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 45",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 46",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 47",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 48",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 49",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 50",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 51",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 52",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 53",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 54",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 55",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 56",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 57",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 58",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 59",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 60",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 61",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 62",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 63",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 64",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 65",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 66",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 67",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 68",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 69",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 70",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 71",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 72",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 73",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 74",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 75",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 76",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 77",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 78",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 79",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 80",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 81",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 82",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 83",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 84",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 85",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 86",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 87",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 88",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 89",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "missing immutable input 90",
+      "reason": "complete immutable fixture population",
+      "observed": "RED"
+    },
+    {
+      "name": "lost separator 0",
+      "reason": "exact retained terminal separator",
+      "observed": "RED"
+    },
+    {
+      "name": "false source suffix 0",
+      "reason": "exact complete clean-source suffix",
+      "observed": "RED"
+    },
+    {
+      "name": "forged prior row 0",
+      "reason": "exact prior manifest rows/count",
+      "observed": "RED"
+    },
+    {
+      "name": "lost separator 1",
+      "reason": "exact retained terminal separator",
+      "observed": "RED"
+    },
+    {
+      "name": "false source suffix 1",
+      "reason": "exact complete clean-source suffix",
+      "observed": "RED"
+    },
+    {
+      "name": "forged prior row 1",
+      "reason": "exact prior manifest rows/count",
+      "observed": "RED"
+    },
+    {
+      "name": "missing command",
+      "reason": "complete command/result population",
+      "observed": "RED"
+    },
+    {
+      "name": "forged instrument",
+      "reason": "actual regression producer",
+      "observed": "RED"
+    },
+    {
+      "name": "invented final failure",
+      "reason": "original RED/final GREEN groups",
+      "observed": "RED"
+    },
+    {
+      "name": "lost outer diagnostic",
+      "reason": "actual unfiltered outer exit/diagnostics",
+      "observed": "RED"
+    },
+    {
+      "name": "missing TAP tail",
+      "reason": "complete ordered outer TAP",
+      "observed": "RED"
+    },
+    {
+      "name": "lost filesystem guard",
+      "reason": "complete exact command inputs",
+      "observed": "RED"
+    },
+    {
+      "name": "false rejection writes",
+      "reason": "exact publication/no-write guard",
+      "observed": "RED"
+    },
+    {
+      "name": "false pending stdout",
+      "reason": "actual pending recovery channel",
+      "observed": "RED"
+    },
+    {
+      "name": "forged rollover producer",
+      "reason": "exact actual rollover producer",
+      "observed": "RED"
+    },
+    {
+      "name": "changed public command",
+      "reason": "actual public command identity",
+      "observed": "RED"
+    },
+    {
+      "name": "numeric segment ID",
+      "reason": "exact complete segment schema/string identity",
+      "observed": "RED"
+    },
+    {
+      "name": "false original GREEN",
+      "reason": "original RED/final GREEN groups",
+      "observed": "RED"
+    },
+    {
+      "name": "false report-path result 0",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "false report-path result 1",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "false report-path result 2",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "false report-path result 3",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "false report-path result 4",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "missing report-path probe",
+      "reason": "actual report destination guards",
+      "observed": "RED"
+    },
+    {
+      "name": "false prior report witness lexical_accepts",
+      "reason": "actual prior lexical report-guard witness",
+      "observed": "RED"
+    },
+    {
+      "name": "false prior report witness resolved_inside",
+      "reason": "actual prior lexical report-guard witness",
+      "observed": "RED"
+    }
+  ],
+  "instrument_sha256": "d1780ab24a7ab2280a14f9803bb7ddad60ab845314e2f4696aa39d181f9ec26d"
+}

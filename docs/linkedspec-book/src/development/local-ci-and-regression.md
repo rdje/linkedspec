@@ -115,7 +115,7 @@ Current collection ceilings are in `doctrine/readme_stability/routes.jsonl`; ear
 including engineering-notes segment 4992, remain recorded in ADRs `0081` and `0083`.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
-pressure checks on every accepted slice. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
+pressure checks on every accepted slice. See [history rollover and byte reconstruction](documentation-workflow.md#history-rollover-and-byte-reconstruction) for EOF and generation recovery. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
 with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
 
 Use the bounded query that matches the question:

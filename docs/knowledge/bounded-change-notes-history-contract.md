@@ -206,3 +206,7 @@ assert source.endswith(segment)
 print('PASS exact clean source suffix, immutable segment identity and all31 older manifest records.')
 CONFORMANCE_BINDING_NOTES_ROLLOVER
 ```
+
+## October 6 actual rollover and pending-recovery verification
+
+The original pending-recovery assertion above is historical and was contradicted by actual interrupted-publication commands: numeric eligibility changed the local ID JSON type, causing duplicate archive publication. The current source repair, ordinary EOF behavior, full separator reconstruction and gated public regression are documented in [[document-history-rollover-eof-separator]]. No archive schema or collection ceiling changes.

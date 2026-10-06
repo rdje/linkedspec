@@ -1,0 +1,42 @@
+{
+  "complete": true,
+  "epoch": "before",
+  "base": "224d5443af794d4e5ade6e80bd8f09145ee7b5b3",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/test_document_history_rollover.py",
+    "--original",
+    "--report",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1-before.json"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 2487,
+    "sha256": "d625e4e6547fa618b3f33940eb02c292bfcb30a094b8fca9cf90fffa98ae46d2",
+    "data": "H4sIAAAAAAAC/7VUyXLiMBC98xWq4kyCpUDI3DNznE9IyXIba7AlR0uI/37axCwhLZMqyIWiqLfQrX7PbljGZkxV0qzhpdI+WNf9YvAuVWDeRqfg3sey1O/3jTS6BB8mxgZmN4wTPOsKbaTr2PPf32xb6QC+lQomU7YGA04GKFiFdGfxo4k+sFZ6f6T90eGEhvKgNn6CZoIwk05V+g1m1tQde43guh75QCAd+FgHbdasxa8+OuiRCwKZQ223sz2KGTuzbY9dksO2+AuKK/s2mD+mYco6F1scHf6BCtqaHr9K433X5LbW6oQwLP6JILVgin6+w5+ZDm+oTYCdMRSzNuYoKHutI3AQzeYjqo32/kN9/1emOI8pUW231SDdGvaj4RPnUFrcnjQdO/E8WGUjVl/XdJUVH7EiNnyVlxjbIARZyCDPvYKTBboh9gAdkvLxSIPzVofKxsCK2O5sYX/8u3Bk9M1vHQbp871lCxKJ+QN3hqQuHnMhm7w+F6WuPhplm0aH/u7yLsAxU5+5qwvcWpsktw8CmDUiwOHmXvAhwH+zvOY098cKjGe0IV1inNNousi4oNGpMuMPqeG/FBpfjELJUuPLUU662PgjTby63PhqXPi2/cafxt1uW3FiPu5245YT2YVV/mTRiWQsiK4TIgUm6k4kIkE3nkik4pulJ5aX6aney+7uxHLyH9KVYwi3CQAA"
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "inputs_before": {
+    "tools/test_document_history_rollover.py": "8f1722236080b5f3bd20da12b6222077059d79282f90f997b5ae41ff17240b40",
+    "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "inputs_after": {
+    "tools/test_document_history_rollover.py": "8f1722236080b5f3bd20da12b6222077059d79282f90f997b5ae41ff17240b40",
+    "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "instrument_sha256": "b66d1b35cc37365021e3ca9045c5708766a7fc6db1f2b2cfad7ead9d77d8a5ff",
+  "result_sha256": "383be6afd45c10071f8b48276afb8d6c8f3d22ff46b216a288e5775fc0465cd1"
+}

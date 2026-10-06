@@ -23,6 +23,19 @@ SIGNATURE_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1"
 SIGNATURE_BEFORE = "67af62f7aa6dff39b6c3fd64b15fb5139f691a0a"
 SIGNATURE_AFTER = "446fb65fadca2e1bd31fec93bb9de779eb2134d1"
 OCCURRENCE_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1"
+BOUNDARY_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1"
+BOUNDARY_BEFORE = "da5c8d1f66732f0989cecca745557005fe44e7c1"
+BOUNDARY_AFTER = "b2156813fffed53622e640583a46a4ca94186a08"
+BOUNDARY_RECURRENCE_OWNER = BOUNDARY_REPAIR_OWNER + ".1"
+BOUNDARY_RECURRENCE_AFTER = "d52add3e5e070b243eb3a2a532d061b51994a36a"
+BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
+BOUNDARY_LOOP_BEFORE = br'''     for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
+      if ($boundary =~ /\A(["'])(.*)\1\z/s) {
+       $boundary = $2;
+       $boundary =~ s/\\(["'\\])/$1/g;
+      }
+'''
+BOUNDARY_LOOP_AFTER = b"     for my $boundary (@{LinkedSpec::ActionIR::BoundaryLabels::_decode_recognized_labels($+{boundaries})}) {\n"
 OCCURRENCE_ANCHOR = b"subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {\n"
 OCCURRENCE_INSERTION = (
     b"subtest 'actionir_residual_occurrence_order_regression' => sub {\n"
@@ -215,10 +228,33 @@ def restore_raw_readiness_oracles(contents):
     return contents
 
 
+def boundary_recurrence(contents):
+    marker = b"subtest 'quoted_boundary_atoms_survive_nested_value_serialization' => sub {\n"
+    anchor = b"subtest 'anonymous_capture_take_until_cursor_helper_reads_and_advances_through_current_parser_position' => sub {\n"
+    require(contents.count(marker) == contents.count(anchor) == 1,
+            "boundary recurrence marker mismatch: t/phase0_regression.t")
+    start = contents.index(marker)
+    end = contents.index(anchor, start)
+    return contents[start:end]
+
+
+def restore_boundary_recurrence(source, contents):
+    before = git("show", f"{BOUNDARY_AFTER}:{source}")
+    after = git("show", f"{BOUNDARY_RECURRENCE_AFTER}:{source}")
+    insertion = boundary_recurrence(after)
+    require(after.replace(insertion, b"", 1) == before,
+            f"unreviewed boundary recurrence history: {source}")
+    require(contents.count(insertion) == 1,
+            f"boundary recurrence registration mismatch: {source}")
+    return contents.replace(insertion, b"", 1)
+
+
 def verify_signature_regression_evolution(source, contents, historical_hash):
     require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
+    current_hash = digest(contents)
+    contents = restore_boundary_recurrence(source, contents)
     require(contents.count(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR) == 1,
             f"occurrence regression registration mismatch: {source}")
     prior = restore_raw_readiness_oracles(contents).replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
@@ -228,12 +264,15 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     normalized = prior.replace(signature_subtest(after), signature_subtest(before), 1)
     require(normalized == before and digest(normalized) == historical_hash,
             f"unreviewed signature-regression history: {source}")
-    return {"path": source, "historical": historical_hash, "current": digest(contents),
+    return {"path": source, "historical": historical_hash, "current": current_hash,
             "owner": SIGNATURE_REPAIR_OWNER, "reconciliation_owner": NORMALIZATION_CORRECTION_OWNER,
             "occurrence_repair_owner": OCCURRENCE_REPAIR_OWNER,
             "raw_readiness_owner": RAW_READINESS_OWNER,
+            "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
+            "boundary_recurrence_before_revision": BOUNDARY_AFTER,
+            "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
+            "scope": "exact committed nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -249,6 +288,26 @@ def verify_perl_storage_evolution(source, contents, historical_hash):
     return {"path": source, "historical": historical_hash,
             "current": digest(contents), "owner": PUSH_REPAIR_OWNER,
             "scope": "exact 27-to-28 census and new allocator membership; original bytes preserved"}
+
+
+def verify_boundary_contract_evolution(source, contents, historical_hash):
+    require(source == "perl/LinkedSpec/ActionIR/Contracts.pm",
+            f"unapproved boundary contract source: {source}")
+    before = git("show", f"{BOUNDARY_BEFORE}:{source}")
+    after = git("show", f"{BOUNDARY_AFTER}:{source}")
+    require(digest(before) == historical_hash,
+            f"unreviewed boundary contract history: {source}")
+    require(contents.count(BOUNDARY_IMPORT) == 1 and
+            contents.count(BOUNDARY_LOOP_AFTER) == 1,
+            f"boundary contract registration mismatch: {source}")
+    normalized = contents.replace(BOUNDARY_IMPORT, b"", 1).replace(
+        BOUNDARY_LOOP_AFTER, BOUNDARY_LOOP_BEFORE, 1)
+    require(normalized == before and contents == after,
+            f"unreviewed boundary contract drift: {source}")
+    return {"path": source, "historical": historical_hash, "current": digest(contents),
+            "owner": BOUNDARY_REPAIR_OWNER,
+            "before_revision": BOUNDARY_BEFORE, "after_revision": BOUNDARY_AFTER,
+            "scope": "exact decoder import and quoted-boundary loop replacement; original historical bytes recovered; no fresh objective execution"}
 
 
 def audit_evidence(read=read_relative):
@@ -320,6 +379,10 @@ def audit_evidence(read=read_relative):
                 continue
             if source == "t/phase0_regression.t":
                 governance_updates.append(verify_signature_regression_evolution(
+                    source, read(source), row["sha256"]))
+                continue
+            if source == "perl/LinkedSpec/ActionIR/Contracts.pm":
+                governance_updates.append(verify_boundary_contract_evolution(
                     source, read(source), row["sha256"]))
                 continue
             require(source.startswith("docs/") and source.endswith(".md"),
@@ -487,9 +550,31 @@ def falsify(report):
             altered += tuple(current.replace(row["assertions"][0]["after"].encode(),
                                              row["assertions"][0]["before"].encode(), 1)
                              for row in table["subtests"])
+            insertion = boundary_recurrence(current)
+            altered += (
+                current.replace(insertion, b"", 1),
+                current.replace(insertion, insertion * 2, 1),
+                current.replace(insertion, insertion.replace(b"my @cases", b"my @other_cases", 1), 1),
+                current.replace(insertion, insertion.replace(b"is_deeply", b"ok", 1), 1),
+                current.replace(insertion, insertion.replace(b'"a,b,c"', b'"a"', 1), 1),
+                current.replace(insertion, insertion.replace(b"runtime_ctx_ref =>", b"other_ctx_ref =>", 1), 1),
+            )
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
-                       "unreviewed signature-regression history:", "signature regression marker mismatch:")
+                       "unreviewed signature-regression history:", "signature regression marker mismatch:",
+                       "boundary recurrence registration mismatch:")
+        elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
+            altered = (
+                current + b"# unreviewed boundary contract edit\n",
+                current.replace(BOUNDARY_IMPORT, b"", 1),
+                current.replace(BOUNDARY_IMPORT, BOUNDARY_IMPORT * 2, 1),
+                current.replace(BOUNDARY_LOOP_AFTER, BOUNDARY_LOOP_BEFORE, 1),
+                current.replace(BOUNDARY_LOOP_AFTER, BOUNDARY_LOOP_AFTER * 2, 1),
+                current.replace(BOUNDARY_LOOP_AFTER,
+                                BOUNDARY_LOOP_AFTER.replace(b"_decode_recognized_labels", b"_other_decoder"), 1),
+            )
+            verify = verify_boundary_contract_evolution
+            reasons = ("boundary contract registration mismatch:", "unreviewed boundary contract drift:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")
         require(all(candidate != current for candidate in altered),

@@ -8,7 +8,7 @@ answers:
   - "which task owns the 134 objective audit artifact inputs"
   - "why did normalization mode proof need an ignored audit report"
   - "what is the exact historical audit artifact population and recovery format"
-date: 2026-10-03
+date: 2026-10-06
 status: Selected134-log recovery committed under0075a5b; bridge reconciliation preserves the historical capture
 tags: [claims, durability, artifacts, historical-audit, input-coverage]
 evidence: "The .0.4.1 author review follows verify_objectives.py's actual read(log) hash loop. Its134 local artifact inputs total84,613,241 bytes; the selected24 checkpoints total214,367 bytes. Concrete context-lua-storage.log is501 bytes, has no Git path history and its actual TAP timing line is absent from those selected checkpoints. The new audit capture records hashes without complete byte recovery. This is a new-claim coverage gap, not blanket classification of all earlier proof. The normalization-only public review consumes no legacy log and writes no tracked file. .0.4.2 must verify selected recovery before bridge parent closure."
@@ -83,3 +83,10 @@ at that committed revision; normalization remains historical at0f15. No earlier
 measurement or input identity is refreshed. Its selected audit replay again checks
 restored bytes under original-log denial; that integrity proof does not re-execute
 the historical runtime producers.
+
+October6 current compatibility follows [[three-objective-language-readiness]]:
+only the committed Contracts decoder import/loop and Phase0 nested-boundary
+insertion are normalized in addition to earlier admitted evolution. The current
+producer observes22 recovery controls,56 evolution denials and the same134
+inputs/84,613,241 bytes. Original milestone captures and all source/log hashes
+remain unchanged. Complete earlier counts above retain their dated boundary.

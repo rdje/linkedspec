@@ -1,0 +1,41 @@
+{
+  "complete": true,
+  "epoch": "after",
+  "base": "224d5443af794d4e5ade6e80bd8f09145ee7b5b3",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/test_document_history_rollover.py",
+    "--report",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1-after.json"
+  ],
+  "exit": 0,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 1773,
+    "sha256": "0191174ff469675757c7dc9bcf8996f3a40bc3fb77ca97a79bf80e2dba0daa54",
+    "data": "H4sIAAAAAAAC/42T23aCMBBF3/sV+QHUJIra9/a1n+AKYZRUSGguKn/f0Muq0kn0jcXaO0w4c8yRUFIQ2Qh9gF2jnDd2eCZwEdITZ4KVMHdhv1eXeSe02oPzT+ZIGOIYWyst7EBe3l7JuVEeXC8kjDhHcGFlo05QGN0O5COAHUZyiZAWXGi90gfSx0cX7NeZK4SsoDXn4pci2hSmH9kSHbePb+Lh0px+Pr5OY9JYG3of8XeQXhk98ps074auMq2St8IWEXrQ9Xi360HoIgN2yrlv4epkSjMGOjxlGQMfn/LcWOBFLbyYKHigZxvXY0KuUDJuFdgJicUZQxdd1U4PxSINWpquU95DXVSDh7+FuXU3d9xW6aQ7Jg36EAmw8e/stIl1eKBXC9zLdItRXMH7xRhO4x1jHKdTPWPL1Pj/usZWWRRdWVZmHXxp2RqXsN6xTZ5Fq8e2eQm9Cl/kJfwunN6ZD+0gT2aO1JDzFIw0kSfyxsvIE5E/2Ede3tdTlaSzGS+fPgHNUZgJ7QYAAA=="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "inputs_before": {
+    "tools/test_document_history_rollover.py": "8f1722236080b5f3bd20da12b6222077059d79282f90f997b5ae41ff17240b40",
+    "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "inputs_after": {
+    "tools/test_document_history_rollover.py": "8f1722236080b5f3bd20da12b6222077059d79282f90f997b5ae41ff17240b40",
+    "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "instrument_sha256": "b66d1b35cc37365021e3ca9045c5708766a7fc6db1f2b2cfad7ead9d77d8a5ff",
+  "result_sha256": "9dcf8ebd9dc63d58ea4e428021f96e5ff243bebb80e66482fd539ef3665831fe"
+}

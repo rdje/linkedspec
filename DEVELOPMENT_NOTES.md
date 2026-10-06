@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Numeric pending IDs break canonical JSON identity (.1.4.0.1.1.1)
+
+Numeric eligibility changes a decoded Perl string scalar to JSON number flags. sprintf restores the four-character string before pending-row comparison; a same-HEAD contradiction now rejects instead of duplicating archives. Normalize only mutable EOF LF after selecting the original suffix. Recover its separator through bound source commit/blob, preserve every immutable row/target, and exercise actual orphan/pending commands. See docs/knowledge/document-history-rollover-eof-separator.md. Validate optional report destinations by resolved containment and device, not lexical Path.is_relative_to alone. Move growing detail to its existing natural book chapter before raising limits; the diagnostics cap remains unchanged. Historical evidence integrity permits only exact committed evolution whose inverse recovers original bytes, never a refreshed runtime hash. The decoder import/loop and nested-boundary recurrence now have six effective denials each. Fresh runtime fixture proof must bind its new decoder and literal inputs in addition to the historical audit set; final conservative guards cover all regular parent Perl/test/spec files and reject missing actual dependencies.
+
 ## 2026-10-06 — Entry index strings, names and actual alias source (.1.4.6)
 
 Save all32 original regex bounds before constructing the same event/argument object. Positional group indices remain captured strings, named readers retain symbolic names, and aliases keep their original spelling. Every effective corruption changes its input before exact RED; the source-regex control requires the actual unique entry_group prefix. Unchanged generated-source12 exercises native and warning-enabled fresh emitted entry cases alongside Phase01035. Read docs/knowledge/perl-legacy-entry-match-source-origins.md.

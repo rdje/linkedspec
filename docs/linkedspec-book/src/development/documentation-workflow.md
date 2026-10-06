@@ -126,6 +126,66 @@ Continuity docs answer different questions:
 
 They are optimized for execution continuity, not public onboarding.
 
+## History rollover and byte reconstruction
+
+Rollover removes terminal LF separators from the mutable hot root, leaving one
+final LF. Immutable archive bytes remain exact clean-source slices. The manifest's
+source commit and blob preserve the original prefix, including its separator;
+use those identities when reconstructing historical bytes rather than assuming
+that the current hot root concatenated with its archive equals an older source.
+`--all` returns archive bytes only, without the current hot root.
+
+Both history formats exercise actual rollover, ordinary Git whitespace checks,
+exact source reconstruction, orphan and pending recovery, and rejection before
+publication. A pending segment ID remains a four-character JSON string after its
+numeric eligibility check. Otherwise its comparison with the published row would
+fail and a rerun could archive the same suffix twice. Contradictory same-HEAD
+pending metadata is rejected before any new publication.
+
+Check both current author surfaces before committing:
+
+```sh
+perl tools/roll_document_history.pl --surface change_history --check
+perl tools/roll_document_history.pl --surface engineering_notes --check
+```
+
+For exact historical reconstruction, verify the newest archive against its bound
+Git source. This example includes the original separator without changing any
+archive or normalizing historical bytes:
+
+```sh
+bash tools/project_data_run.sh python3 - <<'HISTORY_SOURCE'
+from pathlib import Path
+import json, subprocess
+rows = Path('docs/history/changes/manifest.jsonl').read_text().splitlines()
+row = json.loads(rows[1])
+source = subprocess.check_output(['git', 'show', row['source_commit'] + ':' + row['source_path']])
+archive = Path(row['target_path']).read_bytes()
+assert source.endswith(archive)
+original_prefix = source[:-len(archive)]
+assert original_prefix + archive == source
+print(row['source_commit'])
+HISTORY_SOURCE
+```
+
+### Replaying historical evidence after a repair
+
+Historical recovery keeps the original hashes. A later accepted repair can evolve
+an executable input only through an explicit source-bound compatibility check.
+The quoted-boundary decoder import and loop replacement recover the original
+`Contracts.pm` bytes when reversed. Removing the exact committed nested-boundary
+subtest recovers the earlier Phase0 source before its existing compatibility checks.
+Missing, duplicated or changed additions and unrelated edits fail the audit.
+
+Run the isolated recovery proof to check the archived inputs and current audit:
+
+```sh
+bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py
+```
+
+It does not re-execute historical runtime producers. Their runtime results remain
+bound to the original checkpoints; fresh behavior checks belong to each repair.
+
 ## Commit identity and the resume pointer
 
 A tracked file cannot contain the literal hash of the Git commit that contains it: changing that literal changes

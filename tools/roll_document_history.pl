@@ -92,6 +92,10 @@ die "$surface cannot reach the <=50% rollover target without archiving uncommitt
 die "$surface rollover would leave no current record\n" if $keep == 0;
 
 my $retained = $preamble . join_prefix($records, $keep);
+# A separator belongs between records, not at the hot root's EOF. Keep archive
+# bytes exact; the bound clean source commit/blob retains the omitted LF bytes
+# when reconstructing the original prefix and its complete source suffix.
+$retained =~ s/\n{2,}\z/\n/;
 die "$surface rollover did not reach the <=50% target\n"
     if threshold_exceeded(line_count($retained), length($retained), $TARGET_PERCENT);
 my $archived = join('', @$records[$keep .. $#$records]);
@@ -117,6 +121,9 @@ my $digest = sha256_hex($archived);
 my $pending = $manifest_records->[0];
 my $pending_id = $pending->{segment_id} // '';
 if ($pending_id =~ /\A[0-9]{4}\z/ && 0 + $pending_id < 5_000) {
+    # The numeric eligibility check gives this local scalar a numeric flag.
+    # Restore its string identity before canonical JSON comparison with the row.
+    $pending_id = sprintf('%04d', $pending_id);
     my $pending_target = "docs/history/$config->{family}/segment-$pending_id-"
         . substr($digest, 0, 12) . '.md';
     my $expected_pending = segment_record(
@@ -131,6 +138,8 @@ if ($pending_id =~ /\A[0-9]{4}\z/ && 0 + $pending_id < 5_000) {
             . "/$MAX_BYTES bytes\n";
         exit 0;
     }
+    die "$surface pending rollover metadata conflicts with clean HEAD\n"
+        if ($pending->{source_commit} // '') eq $source_commit;
 }
 
 my $first_id = $manifest_records->[0]{segment_id} // '';

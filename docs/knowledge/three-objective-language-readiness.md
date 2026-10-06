@@ -11,7 +11,9 @@ answers:
   - "which CI evolution is permitted by the historical objective audit"
   - "why does the historical objective audit reject a new Phase0 regression"
   - "which exact Phase0 recurrence evolution preserves historical objective proof"
-date: 2026-10-01
+  - "why does the historical objective audit reject the quoted boundary decoder"
+  - "how does the historical audit admit the nested boundary recurrence"
+date: 2026-10-06
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 reconciles the nesting/context/lossless milestones without promoting a new objective. The tracked audit verifies producing checkpoint/source/log identities, latest executable inputs and independently authored scalar spans. Retained parser recovery remains distinct from per-call isolation; lossless extraction is distinct from strict validation. Existing repair owners remain open."
@@ -61,3 +63,18 @@ Six Phase0 corruption controls reject prior signature/plan drift, unrelated edit
 missing/duplicated/changed recurrence. The new before snapshot reproduces the old rejection;
 isolated recovery reruns the historical audit without reading original logs or writing
 tracked evidence. No original checkpoint, capture or runtime objective is rewritten.
+
+The October6 rollover canonical candidate exposes two omitted compatibility routes.
+Contracts.pm's committed quoted-boundary repair imports BoundaryLabels and replaces
+one decode loop. Exact reversal reconstructs its original historical bytes; six
+effective controls reject missing, duplicate, altered or unrelated source edits.
+Phase0's committed18-line nested-boundary subtest is removed before applying the
+existing raw-readiness, occurrence and signature inverses. Six new recurrence
+controls preserve the original source hashes and all earlier denials.
+
+The isolated recovery producer observes22 recovery controls and56 evolution
+denials (Contracts6, Phase017, CI27, storage6), with134 original inputs and zero
+healthy forbidden read/write attempts. These are current historical-integrity
+checks, not fresh executions of the old runtime producers. The rollover leaf
+owns complete failed-candidate capture and fresh guarded proof; broader Legacy
+family acceptance remains .1.4.7-owned.
