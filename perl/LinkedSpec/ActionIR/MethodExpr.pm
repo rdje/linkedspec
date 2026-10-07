@@ -220,14 +220,28 @@ sub _helper_pattern_tail {
 }
 
 sub _helper_pattern_ranges {
- my ($text) = @_;
+ my ($text, $callable_signatures) = @_;
  my @ranges;
  return \@ranges if index($text, '/') < 0
   || $text !~ /\b(?:matches|split|(?:__array_value_)?(?:split_each|filter_match)|regex_subst|substr)\s*\(/o;
  my @scopes;
  my $len = length($text);
+ my $in_callable_signature = 0;
  for (my $pos = 0; $pos < $len; ++$pos) {
   my $char = substr($text, $pos, 1);
+  # Compiler membership opts in to the splitter's exact unquoted {| pipes.
+  # Genuine host quotes consume their payload before either pipe is reached.
+  # Keep the default structural/operand query's lexical policy unchanged.
+  if ($callable_signatures && $char eq '|') {
+   if ($in_callable_signature) {
+    $in_callable_signature = 0;
+    next;
+   }
+   if ($pos > 0 && substr($text, $pos - 1, 1) eq '{') {
+    $in_callable_signature = 1;
+    next;
+   }
+  }
   my $host_end = _host_quote_end($text, $pos);
   if (defined($host_end)) { $pos = $host_end - 1; next }
   if ($char eq '"' || $char eq "'" || $char eq '`') {

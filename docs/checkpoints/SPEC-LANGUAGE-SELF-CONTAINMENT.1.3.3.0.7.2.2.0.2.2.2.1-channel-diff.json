@@ -1,0 +1,1177 @@
+{
+  "complete": true,
+  "source_seed_pairs": 18,
+  "deltas": [
+    {
+      "seed": 0,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 0,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 0,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 0,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 0,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 0,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 1,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)).*x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [
+        "literal_ranges",
+        "metadata",
+        "source_origins"
+      ],
+      "metadata_deltas": [
+        {
+          "path": "/canonical_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/canonical_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "kind": "ASSIGN",
+              "raw": "set(counter,1)",
+              "source": "unmatched_helper_scan_event"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "kind": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))",
+              "source": "helper_contract"
+            },
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "kind": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))",
+              "source": "unmatched_helper_scan_event"
+            }
+          ]
+        },
+        {
+          "path": "/canonical_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "/helper_action_ir_count",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "path": "/helper_action_ir_events",
+          "before": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            },
+            {
+              "args": {
+                "source": "1",
+                "target": "counter"
+              },
+              "contract_id": "set_value",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "set(counter,1)"
+            }
+          ],
+          "after": [
+            {
+              "args": {
+                "payload": "matches(\"setcounter,1,x\", /(set(counter,1)),x/)"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(matches(\"setcounter,1,x\", /(set(counter,1)),x/))"
+            },
+            {
+              "args": {
+                "payload": "cb(\"ok\",\"unused\")"
+              },
+              "contract_id": "return_general",
+              "exclusive_statement": 0,
+              "ir_node": "RETURN",
+              "raw": "return(cb(\"ok\",\"unused\"))"
+            },
+            {
+              "args": {
+                "source": "{|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }",
+                "target": "cb"
+              },
+              "contract_id": "scalar_assignment_operator",
+              "exclusive_statement": 0,
+              "ir_node": "ASSIGN",
+              "raw": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }"
+            }
+          ]
+        },
+        {
+          "path": "/helper_action_ir_hits/ASSIGN",
+          "before": 2,
+          "after": 1
+        }
+      ],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,z",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)).*x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    },
+    {
+      "seed": 42,
+      "params": "x,...y",
+      "pattern": "/(set(counter,1)),x/",
+      "changed_fields": [],
+      "metadata_deltas": [],
+      "text_deltas": {}
+    }
+  ],
+  "instrument_sha256": "ed33c889f7b95454e8c1d45e35f29a452cf8df59937d667766051c6418aba9af"
+}

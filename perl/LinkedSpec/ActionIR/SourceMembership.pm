@@ -13,7 +13,7 @@ use LinkedSpec::ActionIR::MethodExpr ();
 sub _literal_source_ranges {
     my ($source) = @_;
     my %helper_patterns = map { $_->[0] => $_->[1] }
-        @{LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source)};
+        @{LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source, 1)};
     my @ranges;
     my $length = length($source);
     my $in_callable_signature = 0;

@@ -185,4 +185,56 @@ subtest 'callable signature delimiters preserve original executable return origi
     }
 };
 
+
+subtest 'callable helper roles preserve grouped-pattern occurrence ownership' => sub {
+    my $path = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1-cases.json';
+    open my $file, '<:raw', $path or die $!;
+    my $rows = JSON::PP->new->utf8->decode(do { local $/; <$file> });
+    close $file or die $!;
+    for my $row (@$rows) {
+        my $source = $row->{source};
+        my $default = LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source);
+        is_deeply(LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source, 0), $default,
+            "$row->{id} retains the explicit default query");
+        is_deeply(LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source, 1), $row->{helper_ranges},
+            "$row->{id} retains independently authored compiler helper roles");
+        my $contract = {id => 'set_value'};
+        my $syntactic = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events($contract, $source, $deps);
+        my $snapshot = JSON::PP->new->canonical->encode($syntactic);
+        my ($produced, $selected);
+        my $original = \&LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance;
+        {
+            no warnings 'redefine';
+            local *LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance = sub {
+                $produced = $original->(@_); return $produced;
+            };
+            $@ = 'grouped caller error';
+            $selected = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events($contract, $source);
+            my $error = $@;
+            is($error, 'grouped caller error', "$row->{id} preserves caller error");
+        }
+        is_deeply([map { {raw => $_->{raw}, args => $_->{args}} } @$selected],
+            [map { {raw => $_->{raw}, args => $_->{args}} } @{$row->{events}}],
+            "$row->{id} excludes actual pattern data and preserves genuine calls in order");
+        is(JSON::PP->new->canonical->encode($syntactic), $snapshot,
+            "$row->{id} leaves ordinary syntactic events untouched");
+        is_deeply(LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source), $default,
+            "$row->{id} leaves the default query unchanged after compiler selection");
+        is($source, $row->{source}, "$row->{id} leaves original source unchanged");
+        my %selected = map { refaddr($_) => 1 } @$selected;
+        my @origins = grep { $selected{refaddr($_->{event})} } @{$produced->{source_origins}};
+        is_deeply([map { {raw => $_->{event}{raw}, args => $_->{event}{args},
+                         source_span => $_->{source_span}} } @origins], $row->{events},
+            "$row->{id} retains independently authored scalar occurrence authority");
+        for my $event (@$selected) {
+            ok(grep({ refaddr($_) == refaddr($event) } @{$produced->{events}}),
+                "$row->{id} retains the actual producer event reference");
+            ok(grep({ refaddr($_->{args}) == refaddr($event->{args}) } @{$produced->{events}}),
+                "$row->{id} retains the actual argument reference");
+            ok(!exists($event->{source_span}) && !exists($event->{source_origins}),
+                "$row->{id} retains the public event schema");
+        }
+    }
+};
+
 done_testing();

@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "controls": [
+    {
+      "seed": 0,
+      "observed_original_rejection": "only false assignment/canonical event counters corrected"
+    },
+    {
+      "seed": 1,
+      "observed_original_rejection": "only false assignment/canonical event counters corrected"
+    },
+    {
+      "seed": 42,
+      "observed_original_rejection": "only false assignment/canonical event counters corrected"
+    }
+  ],
+  "original_reviewer_sha256": "a1c8c8d949ea1ea2f4d76d1e0e36cf197f177bd1c4043ead007b86b0e96ebad7",
+  "original_rejection_bytes": 1218,
+  "original_rejection_sha256": "19f0167d6a1fccbc170a0d24d342ae8856a7b4062952041c702e7f206b9635af",
+  "original_rejection_archive_sha256": "84a3431a718014a081dca90bae2754f9a178610bd172a40f26adce91a9cf2d9a",
+  "corrected_reviewer_sha256": "655177c973f946c4719ca9733c5a673c137d0f7d6df6c2659ee6fab1275612a4",
+  "instrument_sha256": "1cc221d6eb41de629b58e1963b4e66e147b8fa1cf1ecfcbba8a61d1111a50262",
+  "correction": "Exclude only the actual false set_value event from helper/canonical event arrays and adjust both ASSIGN hits/counts. Every other metadata/public channel, including substitution/emitted/dump/fresh, remains exact."
+}

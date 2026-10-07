@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "original_observed_rejection": "AssertionError: effective control",
+  "corrected_effective_controls": 9,
+  "book_inputs": 58,
+  "exact_examples": 5,
+  "original_capture_sha256": "7c6aea58e07ddce42dcf5995bc8d522f0875969409e7d6813633e6e403bd69a8",
+  "corrected_instrument_sha256": "a9794c2931253cd915fbb1618fe0a6ab8852fb4a2a81ec0c99da91754110aaa7",
+  "instrument_sha256": "253958e1260b25dcfd7d9106f32a893fde1bb63d3e345e36d15a0d5bfe16e821"
+}

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `0f31461d696186775585e19355a0bc5c41849dfb` — clean corrected committed membership acceptance activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0 - retain grouped-pattern membership diagnosis`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` (done) — bounded committed recurrence/grouped-pattern diagnosis.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1 from clean committed HEAD. Author grouped-pattern/source/origin/metadata/default-query controls before correcting the compiler helper-role query. Preserve original RED, source/AST/arguments/references and numeric/host/indexed/caller-error contracts; run unchanged consumers/full Phase0 and commit focused repair. Fresh committed canonical SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 must pass before membership parents close. Replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
-- in_flight_uncommitted: None; intended clean focused post-landing handoff. All retained proof/consumer/publication checks complete. Grouped-pattern repair starts after this commit; membership parents remain open.
+- activation_commit: `78012b1e78bb114a41f54873f30ca63c421568c8` — clean grouped-pattern checkpoint activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1 - preserve callable grouped-pattern membership`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` (done) — bounded compiler callable/grouped-role correction.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 from clean corrected HEAD. Independently recur original membership/public/value channels, callable and grouped-pattern source/metadata/default-query oracles from committed inputs without production overlays; verify unchanged consumers and exact staged canonical CI/normal hooks before closing membership parents. Then precise selected replacement .0.3; recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned. Preserve historical hashes.
+- in_flight_uncommitted: None; intended clean focused post-landing handoff. Original RED/corrected GREEN/default/public/full consumer/book/claim checks complete. Fresh committed canonical acceptance starts after this commit; membership parents remain open.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

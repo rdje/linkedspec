@@ -826,13 +826,23 @@ Top:: I { cb={|x,y| return(x) }; return(cb("ok","unused")) }
 The original typed signature, inert body and real return origins are preserved
 on native and independently emitted routes. This corrects the undefined `cb`
 failure caused by the private membership range scan. The earlier
-statement-splitter signature repair still holds. Compiler membership acceptance
-remains open: a fixed final parameter named `y` can still hide grouped helper
-pattern roles from the selector's separate role query. Helper-looking text such
-as `set(counter,1)` inside a grouped regex can consequently remain selected as
-executable. The existing return-family and native value checks do not detect
-this primitive-event gap; its grouped-pattern repair and fresh canonical
-acceptance are separately owned before membership closes.
+statement-splitter signature repair still holds. The compiler selector also
+requests that exact delimiter ownership in its helper-pattern role query.
+Grouped helper patterns inside callable bodies therefore retain their data
+interiors, including dot/comma punctuation that otherwise resembles a numeric
+slash call. The ordinary scanner and default operand query retain their existing
+policy. For example:
+
+```spec
+Top:: I { cb={|x,y| return(matches("setcounter,1,x", /(set(counter,1)).*x/)) }; return(cb("ok","unused")) }
+# result: 1
+```
+
+The regex's `set(counter,1)` is data. Its primitive event is excluded from
+compiler membership and the helper/canonical metadata event lists; genuine
+assignments and returns retain their source authority and order. A correct
+return value alone would not reveal an extra metadata event. Compiler membership
+acceptance remains open until fresh committed canonical verification completes.
 This checkpoint does not close exact selected-occurrence replacement, source
 comments or compiler-marker diagnostic origin. Mixed equal literal/executable
 spellings still need the replacement repair. The private fixture covers 36

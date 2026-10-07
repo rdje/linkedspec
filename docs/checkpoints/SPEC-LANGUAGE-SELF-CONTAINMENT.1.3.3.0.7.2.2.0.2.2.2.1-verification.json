@@ -1,0 +1,152 @@
+{
+  "complete": true,
+  "revision": "78012b1e78bb114a41f54873f30ca63c421568c8",
+  "controlled_seeds": [
+    0,
+    1,
+    42
+  ],
+  "epochs": {
+    "before": {
+      "commands": 7,
+      "supplied_inputs": 4982,
+      "compiler": {
+        "groups": 41,
+        "source_rows": 72,
+        "assertions": 903,
+        "failed_assertions": 114
+      },
+      "default_query_sources": 72
+    },
+    "after": {
+      "commands": 8,
+      "supplied_inputs": 4982,
+      "compiler": {
+        "groups": 41,
+        "source_rows": 72,
+        "assertions": 789,
+        "failed_assertions": 0
+      },
+      "default_query_sources": 72,
+      "consumers": {
+        "groups": 1644,
+        "plans": [
+          41,
+          191,
+          23,
+          15,
+          13,
+          16,
+          28,
+          15,
+          20,
+          4,
+          16,
+          6,
+          27,
+          12,
+          11,
+          1035,
+          14,
+          5,
+          125,
+          12,
+          3,
+          12
+        ]
+      }
+    }
+  },
+  "public_sources": 6,
+  "public_source_seed_pairs": 18,
+  "successful_native_fresh_values": 36,
+  "original40_groups_unchanged": true,
+  "default_query_sources": 72,
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "observed_red": "complete actual epoch capture"
+    },
+    {
+      "name": "missing default command",
+      "observed_red": "complete ordered actual command population"
+    },
+    {
+      "name": "reordered commands",
+      "observed_red": "complete ordered actual command population"
+    },
+    {
+      "name": "lost full input guard",
+      "observed_red": "unchanged complete supplied inputs"
+    },
+    {
+      "name": "forged producer",
+      "observed_red": "actual capture producer"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "failed corrected command",
+      "observed_red": "actual compiler RED/GREEN exit"
+    },
+    {
+      "name": "lost original compiler assertion",
+      "observed_red": "complete original nested assertion reach"
+    },
+    {
+      "name": "lost authored grouped assertion",
+      "observed_red": "complete authored assertion reach"
+    },
+    {
+      "name": "nested grouped failure",
+      "observed_red": "all original and authored nested assertions pass"
+    },
+    {
+      "name": "lost actual origins",
+      "observed_red": "original real origins with only pattern-data exclusion"
+    },
+    {
+      "name": "changed typed AST",
+      "observed_red": "unchanged original public channel: ast"
+    },
+    {
+      "name": "retained false assignment counter",
+      "observed_red": "only false primitive event and its aggregate counters removed"
+    },
+    {
+      "name": "invented native failure",
+      "observed_red": "unchanged original public channel: native"
+    },
+    {
+      "name": "invented fresh failure",
+      "observed_red": "unchanged original public channel: fresh"
+    },
+    {
+      "name": "lost default query source",
+      "observed_red": "complete original default-query source population"
+    },
+    {
+      "name": "changed default structural view",
+      "observed_red": "every original default query/view/numeric/syntactic channel unchanged"
+    },
+    {
+      "name": "truncated Phase0 reach",
+      "observed_red": "complete consumer plan reach"
+    },
+    {
+      "name": "missing supplied input",
+      "observed_red": "exact complete supplied input population"
+    },
+    {
+      "name": "forged production input",
+      "observed_red": "exact complete supplied input population"
+    },
+    {
+      "name": "lost declared overlay",
+      "observed_red": "sole declared overlays/exclusions"
+    }
+  ],
+  "instrument_sha256": "655177c973f946c4719ca9733c5a673c137d0f7d6df6c2659ee6fab1275612a4"
+}

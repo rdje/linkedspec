@@ -1,0 +1,1596 @@
+[
+  {
+    "id": "x,y:0",
+    "source": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,y:1",
+    "source": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        63
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 96,
+          "end": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...y:0",
+    "source": "cb={|x,...y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...y:1",
+    "source": "cb={|x,...y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,tr:0",
+    "source": "cb={|x,tr| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,tr:1",
+    "source": "cb={|x,tr| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...tr:0",
+    "source": "cb={|x,...tr| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        68
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 101,
+          "end": 115
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...tr:1",
+    "source": "cb={|x,...tr| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,s:0",
+    "source": "cb={|x,s| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,s:1",
+    "source": "cb={|x,s| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        63
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 96,
+          "end": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...s:0",
+    "source": "cb={|x,...s| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...s:1",
+    "source": "cb={|x,...s| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,q:0",
+    "source": "cb={|x,q| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,q:1",
+    "source": "cb={|x,q| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        63
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 96,
+          "end": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...q:0",
+    "source": "cb={|x,...q| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...q:1",
+    "source": "cb={|x,...q| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qq:0",
+    "source": "cb={|x,qq| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qq:1",
+    "source": "cb={|x,qq| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qq:0",
+    "source": "cb={|x,...qq| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        68
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 101,
+          "end": 115
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qq:1",
+    "source": "cb={|x,...qq| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qx:0",
+    "source": "cb={|x,qx| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qx:1",
+    "source": "cb={|x,qx| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qx:0",
+    "source": "cb={|x,...qx| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        68
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 101,
+          "end": 115
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qx:1",
+    "source": "cb={|x,...qx| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qr:0",
+    "source": "cb={|x,qr| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,qr:1",
+    "source": "cb={|x,qr| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qr:0",
+    "source": "cb={|x,...qr| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        68
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 101,
+          "end": 115
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...qr:1",
+    "source": "cb={|x,...qr| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,m:0",
+    "source": "cb={|x,m| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,m:1",
+    "source": "cb={|x,m| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        63
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 96,
+          "end": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...m:0",
+    "source": "cb={|x,...m| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...m:1",
+    "source": "cb={|x,...m| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,z:0",
+    "source": "cb={|x,z| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,z:1",
+    "source": "cb={|x,z| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        63
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 96,
+          "end": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...z:0",
+    "source": "cb={|x,...z| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 100,
+          "end": 114
+        }
+      }
+    ]
+  },
+  {
+    "id": "x,...z:1",
+    "source": "cb={|x,...z| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "zero:0",
+    "source": "cb={|| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb()); set(counter,2)",
+    "helper_ranges": [
+      [
+        40,
+        61
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 81,
+          "end": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "nested:0",
+    "source": "cb={|x,y| inner={|a,q| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(inner(x,y)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        56,
+        77
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 132,
+          "end": 146
+        }
+      }
+    ]
+  },
+  {
+    "id": "line:'\\n':0",
+    "source": "cb={|x,y|\n return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "line:'\\r\\n':0",
+    "source": "cb={|x,y|\r\n return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        45,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 99,
+          "end": 113
+        }
+      }
+    ]
+  },
+  {
+    "id": "quoted-header-prefix:0",
+    "source": "payload=\"{|x,y| set(counter,99)}\"; cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        78,
+        99
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 132,
+          "end": 146
+        }
+      }
+    ]
+  },
+  {
+    "id": "flags:0",
+    "source": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/i)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 71,
+          "end": 85
+        }
+      }
+    ]
+  },
+  {
+    "id": "zero:1",
+    "source": "cb={|| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb()); set(counter,2)",
+    "helper_ranges": [
+      [
+        40,
+        60
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 80,
+          "end": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "nested:1",
+    "source": "cb={|x,y| inner={|a,q| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(inner(x,y)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        56,
+        76
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 131,
+          "end": 145
+        }
+      }
+    ]
+  },
+  {
+    "id": "line:'\\n':1",
+    "source": "cb={|x,y|\n return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        44,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 97,
+          "end": 111
+        }
+      }
+    ]
+  },
+  {
+    "id": "line:'\\r\\n':1",
+    "source": "cb={|x,y|\r\n return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        45,
+        65
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 98,
+          "end": 112
+        }
+      }
+    ]
+  },
+  {
+    "id": "quoted-header-prefix:1",
+    "source": "payload=\"{|x,y| set(counter,99)}\"; cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/)) }; return(cb(\"ok\",\"unused\")); set(counter,2)",
+    "helper_ranges": [
+      [
+        78,
+        98
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 131,
+          "end": 145
+        }
+      }
+    ]
+  },
+  {
+    "id": "flags:1",
+    "source": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)),x/i)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 70,
+          "end": 84
+        }
+      }
+    ]
+  },
+  {
+    "id": "split:0",
+    "source": "cb={|x,y| return(split(\"setcounter,1,x\", /(set(counter,1)).*x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        41,
+        62
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 68,
+          "end": 82
+        }
+      }
+    ]
+  },
+  {
+    "id": "split:1",
+    "source": "cb={|x,y| return(split(\"setcounter,1,x\", /(set(counter,1)),x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        41,
+        61
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 67,
+          "end": 81
+        }
+      }
+    ]
+  },
+  {
+    "id": "receiver-filter:0",
+    "source": "cb={|x,y| return([\"setcounter,1,x\"].filter_match(/(set(counter,1)).*x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        49,
+        70
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 76,
+          "end": 90
+        }
+      }
+    ]
+  },
+  {
+    "id": "receiver-filter:1",
+    "source": "cb={|x,y| return([\"setcounter,1,x\"].filter_match(/(set(counter,1)),x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        49,
+        69
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 75,
+          "end": 89
+        }
+      }
+    ]
+  },
+  {
+    "id": "receiver-split-each:0",
+    "source": "cb={|x,y| return([\"setcounter,1,x\"].split_each(/(set(counter,1)).*x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        68
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 74,
+          "end": 88
+        }
+      }
+    ]
+  },
+  {
+    "id": "receiver-split-each:1",
+    "source": "cb={|x,y| return([\"setcounter,1,x\"].split_each(/(set(counter,1)),x/)) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        47,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 73,
+          "end": 87
+        }
+      }
+    ]
+  },
+  {
+    "id": "regex-subst:0",
+    "source": "cb={|x,y| regex_subst(text, /(set(counter,1)).*x/, \"ok\", g); return(text) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        28,
+        49
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 77,
+          "end": 91
+        }
+      }
+    ]
+  },
+  {
+    "id": "regex-subst:1",
+    "source": "cb={|x,y| regex_subst(text, /(set(counter,1)),x/, \"ok\", g); return(text) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        28,
+        48
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 76,
+          "end": 90
+        }
+      }
+    ]
+  },
+  {
+    "id": "substr:0",
+    "source": "cb={|x,y| substr(text, /(set(counter,1)).*x/, \"ok\", g); return(text) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        23,
+        44
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 72,
+          "end": 86
+        }
+      }
+    ]
+  },
+  {
+    "id": "substr:1",
+    "source": "cb={|x,y| substr(text, /(set(counter,1)),x/, \"ok\", g); return(text) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        23,
+        43
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 71,
+          "end": 85
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed-q",
+    "source": "cb={|x,y| return(q[matches(\"setcounter,1,x\", /(set(counter,1)).*x/)]) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        45,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 73,
+          "end": 87
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed-m",
+    "source": "cb={|x,y| return(m[matches(\"setcounter,1,x\", /(set(counter,1)).*x/)]) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        45,
+        66
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 73,
+          "end": 87
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed-qr",
+    "source": "cb={|x,y| return(qr[matches(\"setcounter,1,x\", /(set(counter,1)).*x/)]) }; set(counter,2)",
+    "helper_ranges": [
+      [
+        46,
+        67
+      ]
+    ],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 74,
+          "end": 88
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:\"{|x,y| set(counter,1)}\"",
+    "source": "\"{|x,y| set(counter,1)}\"; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 26,
+          "end": 40
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:'{|x,y| set(counter,1)}'",
+    "source": "'{|x,y| set(counter,1)}'; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 26,
+          "end": 40
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:q{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}",
+    "source": "q{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 59,
+          "end": 73
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:qq{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}",
+    "source": "qq{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 60,
+          "end": 74
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:qr{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}",
+    "source": "qr{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 60,
+          "end": 74
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:m{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}",
+    "source": "m{|x,y| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 59,
+          "end": 73
+        }
+      }
+    ]
+  },
+  {
+    "id": "host:q|{\\|x,y\\| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}|",
+    "source": "q|{\\|x,y\\| matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}|; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 63,
+          "end": 77
+        }
+      }
+    ]
+  },
+  {
+    "id": "body-host-quote",
+    "source": "cb={|x,y| rx=q{matches(\"setcounter,1,x\", /(set(counter,1)).*x/)}; return(x) }; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 79,
+          "end": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "numeric-call",
+    "source": "cb={|x,y| return(array(/(14,2), 14/cos)) }; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 44,
+          "end": 58
+        }
+      }
+    ]
+  },
+  {
+    "id": "numeric-quoted-follower",
+    "source": "cb={|x,y| return(array(/(14,2), \"a/)\")) }; set(counter,2)",
+    "helper_ranges": [],
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 43,
+          "end": 57
+        }
+      }
+    ]
+  },
+  {
+    "id": "all-pattern-data",
+    "source": "cb={|x,y| return(matches(\"setcounter,1,x\", /(set(counter,1)).*x/)) }",
+    "helper_ranges": [
+      [
+        43,
+        64
+      ]
+    ],
+    "events": []
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "complete_subpopulation": true,
+  "consumers_pending": true,
+  "reviewer_sha256": "655177c973f946c4719ca9733c5a673c137d0f7d6df6c2659ee6fab1275612a4",
+  "instrument_sha256": "eafa42c28fff716a59c7eb14473f94118d33b5590c956fecc47a00f8f404485e",
+  "before": {
+    "commands": 7,
+    "supplied_inputs": 4982,
+    "compiler": {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 903,
+      "failed_assertions": 114
+    },
+    "default_query_sources": 72
+  },
+  "after_compiler": [
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 789,
+      "failed_assertions": 0,
+      "seed": 0
+    },
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 789,
+      "failed_assertions": 0,
+      "seed": 1
+    },
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 789,
+      "failed_assertions": 0,
+      "seed": 42
+    }
+  ],
+  "actual_completed_commands": 14,
+  "default_query_sources": 72,
+  "successful_corrected_native_fresh_values": 36
+}
