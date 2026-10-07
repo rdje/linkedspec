@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Crash recovery checkpoint: private executable source selector verified; stop after its focused commit. Compiler integration .2.1 remains pending for the next session. Public quoted-source replacement, comments and other owned defects remain open.
+Full PNT: compiler source membership integration is verified. Due daily artifact review follows the clean focused commit, then independent canonical membership acceptance.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — Private SourceMembership selects47 of68 original syntactic events per seed across36 authored sources. Complete baseline20 RED groups become41 GREEN groups; eight unchanged consumers pass321 groups. Original event/argument/origin references, source, order, numeric slash/literal receiver authority and caller errors persist. Seventeen evidence controls/four actual bad producers/five supplemental controls reject; 141 prior hashes freeze mode/revision only with five RED. Book58 inputs/35 examples/four chapters/68 RED. Initial setpgid warning and actual reviewer rejection retained; unchanged host remeasurement accepted. Compiler discovery, existing scanners/spec/tests/CI and public substitution remain unchanged.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — Compiler membership passes39 groups under seeds0/1/42 against original38 RED. Original22 public sources/ASTs remain exact; five native/fresh value repairs match all20 authored expected values, with unsupported_nested/raw_operand explicitly unassessed. Fifteen direct consumers pass1462 groups including Phase01035 after the retained two-failure replay, bounded numeric slash/newline correction and exact mock-entry update. Seven evidence/five historical/five publication controls reject; original116 hashes freeze mode/revision only. Book58 inputs/three examples passes. Diagnostic origin, precise replacement and canonical membership acceptance remain open.
 
 ## Next Action
 
-Activate compiler membership integration .0.2.1 from clean committed HEAD. Read original Toolbox quote/mapping records and EmitContext/Diagnostics consumers; connect actual source-bound selection without changing original arguments or family order. Reproduce public native/fresh improvements and retain exact replacement .0.3, comments .7.3 and other runtime/startup owners. Canonical .2.2 accepts membership afterward.
+Complete the due REPO-HYGIENE review from this clean committed handoff, then activate immutable canonical membership acceptance .0.2.2. Exact selected residual replacement .0.3, diagnostic origin .7.2.2.1 and source comments .7.3 stay separate.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
@@ -29,7 +30,6 @@ Activate compiler membership integration .0.2.1 from clean committed HEAD. Read 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — mark14;105→133 origins/RED14-GREEN81/1259 groups/148 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 
 ## History
 

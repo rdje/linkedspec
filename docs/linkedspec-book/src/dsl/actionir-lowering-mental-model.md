@@ -373,9 +373,10 @@ CSV slots and zero arguments retain ordinary AST reconstruction. Ordinary string
 and other calls keep their existing serializer; callback dispatch is unchanged.
 This lexical check supplies no source-coordinate authority or occurrence mapping.
 The [boundary reference](source-boundary-helper-reference.md) gives executable
-quoted-label and unknown-escape examples. Executable quoted-source membership
-remains subsequent work: helper-looking literal data can still be rewritten as
-code and produce a generated-handler compile failure.
+quoted-label and unknown-escape examples. Compiler selection now excludes the
+covered quoted helper occurrences. Precise residual replacement still has its
+own acceptance boundary; helper-looking literal data can still be rewritten as
+code on routes not covered by the compiler-membership repair.
 
 The call/return/push family now retains its selected original scalar occurrences
 through the private recorder. Seven hooks complement the existing `return_general`
@@ -755,13 +756,13 @@ bash tools/run_python_project_data.sh \
   docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py
 ```
 
-Private source provenance is now independently composed; compiler integration of
-executable lexical membership is the next repair. A syntactic source origin still does not authorize quoted/comment membership or
-replacement. Identical literal twins must remain data until the separate membership
-and selected-occurrence repair is verified. No arbitrary callback, new helper,
+Private source provenance is now independently composed, and the compiler bridge
+uses it to select executable lexical membership. A syntactic source origin alone
+still does not authorize replacement. Identical literal twins remain a separate
+selected-occurrence replacement concern. No arbitrary callback, new helper,
 static-policy relaxation or runtime-defect closure follows from this composition.
 
-### Private executable source selection
+### Compiler executable source selection
 
 The private selector now distinguishes quoted or pattern data from executable
 occurrences using the original scanner's event references and scalar intervals.
@@ -786,15 +787,59 @@ foreign or copied event origins grant no inferred source authority; malformed
 matching-source intervals fail explicitly. Selection preserves producer order
 and the caller's error state.
 
-This component is not yet connected to compiler discovery. Public lowering can
-still rewrite helper-looking literal data. Compiler integration, exact
-selected-occurrence replacement and source-comment classification retain their
-separate repair owners. The private fixture covers 36 authored sources and five
-authority/error guards; its scanner cases do not admit new executable syntax.
+The compiler's EmitContext callback now uses this selector before Diagnostics
+collects helper events. The ordinary scanner API still returns all syntactic
+observations. Compiler selection uses actual producer origins and preserves the
+original event and argument objects, family order, dependencies and errors.
+
+For example, these Perl lifecycle actions preserve the quoted payload and lower
+their real enclosing helpers on native and independently emitted routes:
+
+```spec
+Top:: I { return("set(counter, 2)") }
+# result: "set(counter, 2)"
+```
+
+```spec
+Top:: I { return(cat("set(counter, 2)","; if(true); return(inner)")) }
+# result: "set(counter, 2); if(true); return(inner)"
+```
+
+```spec
+Top:: I { return(matches("if(true)", /if\(true\)/)) }
+# result: 1
+```
+
+This integration does not close exact selected-occurrence replacement, source
+comments or compiler-marker diagnostic origin. Mixed equal literal/executable
+spellings still need the replacement repair. The private fixture covers 36
+authored sources and five authority/error guards; its scanner cases do not admit
+new executable syntax or establish another backend's behavior.
+
+Unresolved-helper text scans can still count the preserved helper spelling in a
+literal. A correct returned value therefore does not establish ActionIR readiness.
+For example, the repaired `set(counter, 2)` literal retains an unresolved-helper
+count until the separate diagnostic-origin repair distinguishes data from blockers.
+
+Numeric slash calls keep the action splitter's existing newline boundary. The
+selector applies the existing call discriminator to the original source through
+that boundary, so a following host quote cannot supply a phantom pattern end:
+
+```text
+out = /(14,2)
+rx = q/;/; return(out)
+# existing isolated Perl compatibility lowering returns 7
+```
+
+The same compatibility control retains `qr/}/`, `q|/;|` and `s/a;b/c;d/` after
+LF or CRLF. Recognized helper pattern roles still take precedence. This preserves
+the existing Perl compatibility route; it does not admit host quotes as portable
+DSL syntax or change assignment/regex precedence.
 
 ```sh
 bash tools/project_data_run.sh prove -v -Iperl \
-  t/actionir_executable_source_membership.t
+  t/actionir_executable_source_membership.t \
+  t/actionir_compiler_source_membership.t
 ```
 
 ### Original method argument boundaries
@@ -1183,25 +1228,25 @@ independent closeout are tracked separately, including the earlier quoted primit
 observations. Accepted quote syntax and genuine unsupported operands elsewhere in the action
 retain their existing contracts while that work proceeds.
 
-The current quote diagnosis also exposes a value defect:
+The historical quote diagnosis exposed this value defect:
 
 ```spec
 Top:: I { return("set(counter, 2)") }
 ```
 
-The intended result is the literal `set(counter, 2)`. The current primitive scan
-creates a false `ASSIGN`, and residual lowering changes the literal contents to
-`$counter = 2` before generated Perl evaluates the string. This case remains a
-known defect. A mixed action must retain genuine executable assignments while
+The intended result is the literal `set(counter, 2)`. Before compiler membership
+selection, the primitive scan created a false `ASSIGN`, and residual lowering
+changed the literal contents to `$counter = 2`. Compiler selection now excludes
+that data occurrence and preserves the intended value. A mixed action must retain genuine executable assignments while
 leaving an identical spelling inside data untouched.
 
-For the quoted `if(true)` example above, the current lowering trace reaches the
-phantom replacement, then detects an unbalanced flow stack and returns the original
-action text. That fallback explains the healthy literal value; it does not validate
-the false compiler events or readiness classification.
-For the measured nested `cat` and `matches` controls, this fallback also leaves
-unlowered host calls and causes execution errors in both native and fresh emitted
-Perl. Those failures are owned by the same source-occurrence repair.
+For the quoted `if(true)` example above, the prior lowering trace reached a phantom
+replacement, detected an unbalanced flow stack and returned the original action
+text. That fallback explained the healthy literal value. Compiler selection now
+excludes the false helper occurrence. The original nested `cat` and `matches`
+controls also execute correctly on native and fresh emitted Perl; their earlier
+fallback left unlowered host calls and failed both routes. Exact mixed-occurrence
+replacement remains independently owned.
 
 Unsupported-helper diagnostics also need source ownership:
 

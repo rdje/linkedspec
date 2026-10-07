@@ -2124,7 +2124,7 @@ subtest 'emit_context_scanner_deps_route_through_owner_default_map' => sub {
             build_array_pipeline_plan_from_expr => sub { return { owner => "scanner_for_$pkg" } },
         };
     };
-    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {
+    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {
         my ($contract, $code, $deps) = @_;
         return { owner_pkg => $deps->{build_array_pipeline_plan_from_expr}->('filter_nonempty(items)')->{owner} };
     };

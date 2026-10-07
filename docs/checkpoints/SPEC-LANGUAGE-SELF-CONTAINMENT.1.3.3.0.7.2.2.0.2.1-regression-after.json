@@ -1,0 +1,670 @@
+[
+   {
+      "compile_error" : "",
+      "lowered" : "$out = do { my $__ls_num_div_lhs = 14; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) };\n$rx = q/;/; return $out",
+      "numeric_slash" : 0,
+      "ranges" : [
+         [
+            20,
+            23
+         ]
+      ],
+      "scans" : [
+         {
+            "contract" : "return_general",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 36,
+                        "start" : 25
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 36,
+                        "start" : 25
+                     }
+                  }
+               ]
+            }
+         },
+         {
+            "contract" : "scalar_assignment_operator",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "q/;/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = q/;/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "q/;/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = q/;/"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 23,
+                        "start" : 14
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "q/;/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = q/;/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "q/;/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = q/;/"
+                     },
+                     "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+                     "source_span" : {
+                        "end" : 23,
+                        "start" : 14
+                     }
+                  }
+               ]
+            }
+         }
+      ],
+      "source" : "out = /(14,2)\nrx = q/;/; return(out)",
+      "value" : 7
+   },
+   {
+      "compile_error" : "",
+      "lowered" : "$out = do { my $__ls_num_div_lhs = 14; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) };\n$rx = qr/}/; return $out",
+      "numeric_slash" : 0,
+      "ranges" : [
+         [
+            21,
+            24
+         ]
+      ],
+      "scans" : [
+         {
+            "contract" : "return_general",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 37,
+                        "start" : 26
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 37,
+                        "start" : 26
+                     }
+                  }
+               ]
+            }
+         },
+         {
+            "contract" : "scalar_assignment_operator",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "qr/}/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = qr/}/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "qr/}/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = qr/}/"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 24,
+                        "start" : 14
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "qr/}/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = qr/}/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "qr/}/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = qr/}/"
+                     },
+                     "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+                     "source_span" : {
+                        "end" : 24,
+                        "start" : 14
+                     }
+                  }
+               ]
+            }
+         }
+      ],
+      "source" : "out = /(14,2)\nrx = qr/}/; return(out)",
+      "value" : 7
+   },
+   {
+      "compile_error" : "",
+      "lowered" : "$out = do { my $__ls_num_div_lhs = 14; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) };\n$rx = q|/;|; return $out",
+      "numeric_slash" : 0,
+      "ranges" : [
+         [
+            20,
+            24
+         ]
+      ],
+      "scans" : [
+         {
+            "contract" : "return_general",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 37,
+                        "start" : 26
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 37,
+                        "start" : 26
+                     }
+                  }
+               ]
+            }
+         },
+         {
+            "contract" : "scalar_assignment_operator",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "q|/;|",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = q|/;|"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "q|/;|",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = q|/;|"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 24,
+                        "start" : 14
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "q|/;|",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = q|/;|"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "q|/;|",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = q|/;|"
+                     },
+                     "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+                     "source_span" : {
+                        "end" : 24,
+                        "start" : 14
+                     }
+                  }
+               ]
+            }
+         }
+      ],
+      "source" : "out = /(14,2)\nrx = q|/;|; return(out)",
+      "value" : 7
+   },
+   {
+      "compile_error" : "",
+      "lowered" : "$out = do { my $__ls_num_div_lhs = 14; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) };\n$rx = s/a;b/c;d/; return $out",
+      "numeric_slash" : 0,
+      "ranges" : [
+         [
+            20,
+            29
+         ]
+      ],
+      "scans" : [
+         {
+            "contract" : "return_general",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 31
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "payload" : "out"
+                     },
+                     "raw" : "return(out)"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "payload" : "out"
+                        },
+                        "raw" : "return(out)"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 31
+                     }
+                  }
+               ]
+            }
+         },
+         {
+            "contract" : "scalar_assignment_operator",
+            "original" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "s/a;b/c;d/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = s/a;b/c;d/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "s/a;b/c;d/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = s/a;b/c;d/"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 29,
+                        "start" : 14
+                     }
+                  }
+               ]
+            },
+            "selected" : {
+               "events" : [
+                  {
+                     "args" : {
+                        "source" : "/(14,2)",
+                        "target" : "out"
+                     },
+                     "raw" : "out = /(14,2)"
+                  },
+                  {
+                     "args" : {
+                        "source" : "s/a;b/c;d/",
+                        "target" : "rx"
+                     },
+                     "raw" : "rx = s/a;b/c;d/"
+                  }
+               ],
+               "source_origins" : [
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "/(14,2)",
+                           "target" : "out"
+                        },
+                        "raw" : "out = /(14,2)"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 0
+                     }
+                  },
+                  {
+                     "event" : {
+                        "args" : {
+                           "source" : "s/a;b/c;d/",
+                           "target" : "rx"
+                        },
+                        "raw" : "rx = s/a;b/c;d/"
+                     },
+                     "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+                     "source_span" : {
+                        "end" : 29,
+                        "start" : 14
+                     }
+                  }
+               ]
+            }
+         }
+      ],
+      "source" : "out = /(14,2)\nrx = s/a;b/c;d/; return(out)",
+      "value" : 7
+   }
+]

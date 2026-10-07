@@ -1,0 +1,115 @@
+{
+  "public_cases": 22,
+  "repaired_native_fresh": [
+    "quoted_set",
+    "nested_data",
+    "mixed_set",
+    "repeated_set",
+    "regex_data"
+  ],
+  "remaining_value_or_error": [],
+  "no_original_value_oracle": [
+    "unsupported_nested",
+    "raw_operand"
+  ],
+  "authored_value_oracles": 20,
+  "compiler_groups": 39,
+  "original_red_groups": 38,
+  "controlled_seeds": [
+    0,
+    1,
+    42
+  ],
+  "direct_consumers": {
+    "groups": 1462,
+    "plans": [
+      41,
+      191,
+      23,
+      15,
+      13,
+      16,
+      28,
+      15,
+      20,
+      4,
+      16,
+      6,
+      27,
+      12,
+      1035
+    ]
+  },
+  "original_phase0": {
+    "groups": 1462,
+    "plans": [
+      41,
+      191,
+      23,
+      15,
+      13,
+      16,
+      28,
+      15,
+      20,
+      4,
+      16,
+      6,
+      27,
+      12,
+      1035
+    ]
+  },
+  "retained_failed_after": {
+    "groups": 1462,
+    "plans": [
+      41,
+      191,
+      23,
+      15,
+      13,
+      16,
+      28,
+      15,
+      20,
+      4,
+      16,
+      6,
+      27,
+      12,
+      1035
+    ]
+  },
+  "regular_git_inputs": 4817,
+  "evidence_controls": [
+    {
+      "name": "incomplete-capture",
+      "observed_red": "complete actual capture"
+    },
+    {
+      "name": "missing-command",
+      "observed_red": "complete ordered commands"
+    },
+    {
+      "name": "reordered-command",
+      "observed_red": "complete ordered commands"
+    },
+    {
+      "name": "wrong-exit",
+      "observed_red": "actual distinguishing compiler exit"
+    },
+    {
+      "name": "lost-input-guard",
+      "observed_red": "complete unchanged input guards"
+    },
+    {
+      "name": "changed-channel-hash",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "changed-instrument",
+      "observed_red": "actual instrument identity"
+    }
+  ],
+  "instrument_sha256": "17f34dce2746d589a14bd26f81e3d91e478d79c360709f760dea541f5bc77240"
+}

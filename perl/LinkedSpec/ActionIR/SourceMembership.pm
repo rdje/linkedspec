@@ -38,8 +38,19 @@ sub _literal_source_ranges {
             $end = $helper_patterns{$pos};
             if (!defined($end)) {
                 my $prefix = substr($source, 0, $pos);
+                my $numeric_call = LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($source, $pos, 1);
+                # The expression discriminator examines the full tail. A
+                # statement-ending newline is also a boundary in the existing
+                # action splitter: following host quotes must not supply a
+                # phantom closing slash for this numeric call.
+                if (!$numeric_call) {
+                    my $call_end = LinkedSpec::ActionIR::MethodExpr::_slash_symbol_call_end_at($source, $pos);
+                    my $newline = defined($call_end) ? index($source, "\n", $call_end) : -1;
+                    $numeric_call = LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at(
+                        substr($source, 0, $newline), $pos, 1) if $newline >= 0;
+                }
                 if ($prefix =~ /(?:\A\s*|[\(\[,=~!]\s*)\z/o
-                    && !LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($source, $pos, 1)) {
+                    && !$numeric_call) {
                     $end = LinkedSpec::ActionIR::MethodExpr::_slash_literal_end($source, $pos);
                 }
             }
@@ -71,7 +82,7 @@ sub _origin_is_literal_data {
     return 0;
 }
 
-# Unused by compiler discovery until its separately verified integration slice.
+# Used by the compiler scanner bridge; ordinary syntactic discovery stays intact.
 # Events without real, reference-bound origins stay opaque to this selector.
 # Actual event order and event/argument/origin references are retained.
 sub _select_executable_source_events {

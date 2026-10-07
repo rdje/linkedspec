@@ -1,0 +1,35 @@
+{
+  "original_hashes": 116,
+  "historical_controls": [
+    {
+      "name": "changed original statement",
+      "observed_red": "only original mode/revision changed"
+    },
+    {
+      "name": "changed original input hash",
+      "observed_red": "only original mode/revision changed"
+    },
+    {
+      "name": "missing original input",
+      "observed_red": "only original mode/revision changed"
+    },
+    {
+      "name": "wrong historical revision",
+      "observed_red": "only original mode/revision changed"
+    },
+    {
+      "name": "live after compiler change",
+      "observed_red": "only original mode/revision changed"
+    }
+  ],
+  "initial_root_failed_group": "native and independently loaded generated parsers preserve quoted data",
+  "original_book_observed_red": "repair teaching: another backend's behavior",
+  "phase0_update": "exact one-line private compiler mock entry",
+  "numeric_newline_root_cases": 4,
+  "numeric_newline_scope": "Auxiliary Toolbox root-cause channels preserve original scanner events and whole-tail numeric policy; source-bound full Phase0 and eight LF/CRLF fixture cases establish regression acceptance.",
+  "initial_public_review_observed_red": "KeyError: 'expected'; unsupported_nested and raw_operand have no original successful-value oracle",
+  "initial_claim_schema_observed_red": "durability: expected keys ['status', 'mode', 'inputs']",
+  "claim_schema_sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+  "scope": "Preserves original claims/results/input hashes. Only durability mode/revision change; failed test and display instruments are corrected, not product semantics.",
+  "instrument_sha256": "675e8e8c55db6a5050fa83fac7c353eb158a2c519a4939353375c0327edaee52"
+}

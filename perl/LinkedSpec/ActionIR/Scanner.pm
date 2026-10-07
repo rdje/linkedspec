@@ -45,7 +45,17 @@ sub default_deps_for_package {
 # Returns : arrayref of event hashes
 #------------------------------------------------------------------------------
 sub scan_contract_ir_events {
- my @args = @_;
+ return _scan_contract_ir_events(0, @_)
+}
+
+# Compiler-only selection. The ordinary syntactic scanner remains available to
+# callers that need every original observation, including quoted data.
+sub _scan_executable_contract_ir_events {
+ return _scan_contract_ir_events(1, @_)
+}
+
+sub _scan_contract_ir_events {
+ my ($executable, @args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my ($contract, $code) = @args;
   my $id = (ref($contract) eq 'HASH') ? ($contract->{id} // '') : '';
@@ -60,7 +70,16 @@ sub scan_contract_ir_events {
    },
   );
   _require_scanner_core_pkg();
-  my $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args);
+  my $events;
+  if ($executable) {
+   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::SourceMembership');
+   my $scan = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(@args);
+   my $selected = LinkedSpec::ActionIR::SourceMembership::_select_executable_source_events($code, $scan);
+   $events = $selected->{events};
+  }
+  else {
+   $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args);
+  }
   my $event_count = ref($events) eq 'ARRAY' ? scalar(@$events) : 0;
   if ($event_count) {
    LinkedSpec::ActionIR::Trace::decision(

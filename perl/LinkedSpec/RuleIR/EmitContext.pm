@@ -1238,7 +1238,7 @@ sub _build_action_lowering_contracts {
 
 sub _scan_contract_ir_events {
  my @args = @_;
- return _call_actionir_owner_with_deps('scanner', 'scan_contract_ir_events', @args)
+ return _call_actionir_owner_with_deps('scanner', '_scan_executable_contract_ir_events', @args)
 }
 
 sub _find_unresolved_action_helpers {

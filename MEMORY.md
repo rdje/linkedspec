@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `5f700625ef4bce962285ece583b088c457f2dd63` — clean canonical private-membership activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0 - select private executable source occurrences`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` (pending activation) — compiler source membership integration.
-- next_action: On the next session, activate compiler membership integration .0.2.1 from clean committed HEAD; this session stops at the recovered .2.0 handoff. Read original Toolbox quote/mapping records and EmitContext/Diagnostics consumers; connect actual source-bound selection without changing original arguments or family order. Reproduce public native/fresh improvements and retain exact replacement .0.3, comments .7.3 and other runtime/startup owners. Canonical .2.2 accepts membership afterward.
-- in_flight_uncommitted: none after focused .2.0 landing; private selector remains unused by compiler discovery. Original warning/rejection and approved host remeasurement are retained; startup .7 remains open, recovery/purge prohibited.
+- activation_commit: `31395e440a38acec7a6712d470a90a90a6567863` — clean compiler-membership activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 - connect compiler source membership`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` (done) — focused compiler membership verified; canonical acceptance remains pending.
+- next_action: Complete the due REPO-HYGIENE review from this clean committed handoff, then activate immutable canonical membership acceptance .0.2.2. Exact selected residual replacement .0.3, diagnostic origin .7.2.2.1 and source comments .7.3 stay separate.
+- in_flight_uncommitted: None; intended clean post-landing handoff. Completed proof/docs are committed through normal hooks; no required background job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

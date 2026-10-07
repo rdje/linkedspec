@@ -1,0 +1,27 @@
+{
+  "book_inputs": 58,
+  "exact_examples": 3,
+  "controls": [
+    {
+      "name": "failed render",
+      "observed_red": "actual render completion"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "publication input guards"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "lost exact examples",
+      "observed_red": "original runtime examples"
+    },
+    {
+      "name": "hidden diagnostic owner",
+      "observed_red": "repair teaching: compiler-marker diagnostic origin"
+    }
+  ],
+  "instrument_sha256": "cd7381df943cfe0924f57b93e651e6c2e4d3d561d904fac526522a477fb73661"
+}
