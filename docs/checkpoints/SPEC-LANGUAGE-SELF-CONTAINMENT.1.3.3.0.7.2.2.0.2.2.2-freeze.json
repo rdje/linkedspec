@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+  "bound_inputs": 202,
+  "controls": [
+    {
+      "name": "refreshed hash",
+      "observed_red": "exact mode/revision-only checkpoint freeze"
+    },
+    {
+      "name": "lost input",
+      "observed_red": "exact mode/revision-only checkpoint freeze"
+    },
+    {
+      "name": "changed statement",
+      "observed_red": "exact mode/revision-only checkpoint freeze"
+    },
+    {
+      "name": "wrong boundary",
+      "observed_red": "exact mode/revision-only checkpoint freeze"
+    },
+    {
+      "name": "refreshed live",
+      "observed_red": "exact mode/revision-only checkpoint freeze"
+    }
+  ],
+  "claim_sha256": "256b373f8a59970554fac7b9ce22d26157c24f9bd7ff7b49b04012b7fa6770ff",
+  "instrument_sha256": "00519a8bd6684e276ed8ac1335a6deb63000e7cab0c59b59a2799161afae8d0a"
+}

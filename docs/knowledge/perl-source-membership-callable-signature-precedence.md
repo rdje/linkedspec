@@ -6,13 +6,15 @@ answers:
   - "why does SourceMembership mask the return after a callable signature"
   - "is the callable signature pipe regression in the splitter or source membership"
   - "which task owns callable signature membership precedence repair"
-date: 2026-10-07
-status: Focused repair verified; fresh committed canonical acceptance .0.2.2.2 remains open
+date: 2026-10-08
+status: Bounded committed recurrence verified; grouped-pattern repair and canonical membership acceptance remain open
 tags: [perl, actionir, source-membership, callable, signature, regression]
-evidence: "Exact 484fe128f regular Git input snapshots plus declared common fixture/probe overlays supply 4920 inputs before and 4920 after; only the after tree replaces SourceMembership. Fourteen complete guarded commands retain original compiler RED and corrected GREEN under seeds0/1/42. All original39 compiler groups stay intact; the new27-row signature group fails ten authored assertions before and passes225 after, reaching40 total groups per seed. Original x,y fails native/fresh before; all three original public sources return ok on both routes under all three seeds (18 values), with identical source/typed AST and all healthy x,z/rest-y channels unchanged. The unchanged callable fixture loads generated source before its original execution abort, then passes all11 groups after. Sixteen unchanged consumers pass1473 ordered groups including full Phase01035. Twenty-one effective evidence controls/five historical controls/seven publication controls reject; all318 prior checkpoint hashes freeze mode/revision only. Full book58-input render preserves four exact examples. The new reviewer's relative-runpy prefix rejection and original bytes are retained, followed by absolute-prefix correction. MethodExpr, StatementSplit, original callable fixture, public schema/dependencies/CI/hooks remain unchanged. Focused repair is complete; fresh committed canonical .0.2.2.2 remains required before membership closure. Replacement, diagnostic origin and comments retain their owners."
+evidence: "Immutable0f31461d6 supplies4941 regular inputs/no overlays for73 guarded commands. Compiler40/new225 signature assertions per seed0/1/42, original66 public channels/120 authored route values, plain callable18 values and unchanged16-consumer1473 groups/Phase01035 pass; original38 and signature10 RED recur. Two original unassessed value cases remain explicit. Twenty-two evidence controls reject. Nine supplemental commands retain18 primitive and18 return-family observations plus18 full public pairs/36 native-fresh values. Fixed x,y selects6 pattern-data origins; x,z/rest-y exclude12. Its helper-role query consumes the signature closer as y|; public ASSIGN2 versus1 distinguishes the defect despite all values1 and readiness1. Twelve diagnostic controls reject. Exact202 historical hashes freeze mode/revision only; five controls reject. Book58/four examples/eight controls and initial publication retention/five controls pass. Exact initial18718-byte grouped report/source survive the portable metadata correction with identical channels. Original report guard accepts3 corruptions; corrected guard rejects all3 with exact source retained. Production/tests/contracts/dependencies/CI unchanged. This checkpoint closes no membership parent; grouped-role repair .0.2.2.2.1 and fresh committed canonical .0.2.2.2.2 remain required."
 reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-review.py"
+  - "These measurements use exact committed0f31461d6; preserve historical producers and hashes after any repair."
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_compiler_source_membership.t t/callable_codeblock_literal_contract.t"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1-review.py"
   - "Original diagnosis is historical at484fe128f; preserve its before channels and hashes. New capture is a different measurement."
 ---
 
@@ -23,9 +25,9 @@ Its existing operator suffix rule recognizes `y|` as a two-segment host quote;
 the unterminated quote range reaches the end of this action. Both real return
 origins are consequently filtered, while the assignment origin remains selected.
 
-Public substitution still serializes the inert codeblock correctly but leaves
-the final `return(cb(...))` as host Perl. Native execution reports undefined
-`LinkedSpec::SpecEntry::cb`; independently emitted execution reports the same
+At the original484fe128f boundary, public substitution serialized the inert codeblock correctly but left
+the final `return(cb(...))` as host Perl. Native execution reported undefined
+`LinkedSpec::SpecEntry::cb`; independently emitted execution reported the same
 undefined call through its own structured generated error. This differs from the
 older splitter defect in [[perl-callable-signature-pipe-splitting]], whose repair
 still holds. `x,z` and rest `x,...y` distinguish the lexical suffix trigger.
@@ -51,3 +53,5 @@ canonical acceptance `.0.2.2.2` must pass before membership closes. Original
 immutable membership results cover their stated fixture/consumer population;
 they do not establish this missing callable compatibility. No readiness waiver,
 new grammar or another-backend conclusion follows.
+
+The independently observed grouped-pattern interaction remains open; retrieve [[perl-callable-grouped-pattern-membership]]. The delimiter-loop repair alone does not protect its separate helper-role query. The bounded .0.2.2.2.0 checkpoint preserves complete successful original populations without promoting them to parent acceptance.

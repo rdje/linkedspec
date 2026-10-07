@@ -3514,10 +3514,55 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58 inputs/four exact examples/seven RED, exact318-hash historical freeze/five RED, claim/Knowledge/task/index/roadmaps/live/resume and bounded histories align. Reviewer relative-runpy failure retains original source and channels; corrected prefix accepts both invocation methods.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Independently accept corrected committed compiler membership through exact canonical proof.
   Dependencies: `.1.3.3.0.7.2.2.0.2.2.1`
   Acceptance: Fresh immutable committed inputs without production overlays; original membership/literal/public-channel/value/source authority plus callable signature regression and unchanged direct consumers. Effective evidence controls, source retention, teaching and exact staged canonical receipt/normal hooks close .0.2.2 and membership .0.2 only. Precise replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain separate.
+
+  Activation: Clean0f31461d6 observed with empty brief and no required jobs. Focused callable repair .1 passed complete immutable before/after proof, all1473 direct groups/Phase01035 and normal ten-doctrine hooks. Current task/roadmap/book, original literal/source/value/consumer authority, Knowledge causes and canonical ADR0073/0126 boundaries are reviewed.
+  Owned paths: New leaf-prefixed immutable capture/reviewer/claim/publication/history artifacts and this claim; prior202-input .1 record mode/revision-only freeze; current Knowledge/book/task/index/roadmaps/live/resume/change/notes. Production, all original tests, contracts, CI/hooks and dependencies stay unchanged.
+  Source boundary: Independently compose the original literal/scanner/reference/caller-error and current signature authority. Preserve original checkpoint318/current202 hashes and all failed historical canonical candidates. Original no-value-oracle unsupported_nested/raw_operand remain explicit; successful values do not establish readiness. Replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain open.
+  Supplemental diagnostic owner: Before signoff, test the existing grouped-helper-pattern role inside fixed/rest/operator-named callable signatures. Knowledge perl-grouped-regex-operand-boundaries preserves dot/comma pattern punctuation ahead of numeric slash discrimination. Use actual compiler/provenance/literal ranges and public AST/substitution/native/fresh channels; retain exact new producer/inputs/oracles. This is an interaction re-verification, not an assumed defect or new grammar admission. Current committed source/tests remain unchanged.
+
+  Owned grouped-pattern defect: On exact corrected0f31461d6, fixed x,y causes MethodExpr::_helper_pattern_ranges to interpret the signature closer at8 as a host quote, skipping real grouped pattern roles at43..64/43..63. SourceMembership already protects its own two signature delimiters, but its precomputed helper-role query does not. The grouped slash fallback retains numeric-call precedence, so actual set_value origin45..59 inside regex data stays selected. x,z/rest-y retain their pattern roles and exclude the same raw event. All native values return1; return_general-only checks also pass and are insufficient. Preserve exact source/real origins/producer channels; no source-span, value, fixture or diagnostic waiver.
+  Safe decomposition: .0 commits completed bounded immutable73-command proof, exact202-hash history freeze and supplemental diagnosis without closure. .1 owns the compiler-specific callable/helper-pattern precedence repair while preserving ordinary scanner/default MethodExpr/numeric/host-quote contracts. .2 independently accepts the corrected committed source with grouped-pattern oracles and exact staged canonical receipt. This parent and membership .0.2 stay open.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0`
+  Status: `done`
+  Goal: Retain bounded corrected membership recurrence and own the grouped-pattern defect.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.2.1`
+  Activation: Same clean0f31461d696186775585e19355a0bc5c41849dfb acceptance boundary; no production/test change or task-tree pivot. Transfer the already owned in-flight acceptance evidence after a tool-proved interaction gap.
+  Owned paths: Existing .0.2.2.2-prefixed immutable capture/review/book/history/grouped diagnosis and retention instruments/artifacts; this child claim; prior .1 record mode/revision-only freeze; new grouped-pattern Knowledge and current book/task/index/roadmaps/live/resume/change/notes. Production/tests/contracts/CI/hooks/dependencies remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Complete immutable73-command compiler40/original22-public/callable3/direct16-suite proof and retained original RED/effective controls; actual grouped primitive/return-family diagnostics with complete committed inputs and separately declared observer programs, source/real origin/native/fresh channels and distinguishing controls. Exact202-hash historical freeze, full book render/claim/Knowledge/memory/history/diff and normal hooks.
+  Canonical trigger: None for this bounded proof checkpoint and diagnosis; no production or parent/admission closure. Grouped-pattern correction .1 and fresh committed canonical .2 remain mandatory before membership closes.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json`
+  Acceptance: Preserve completed original bounded recurrence without promoting successful values to full membership acceptance. Record exact new defect/reproduction/impact/repair owner and original instrument retention, commit the bounded proof, then activate repair .1 from clean HEAD.
+
+  Verified focused result: Immutable0f31461d6 supplies4941 regular inputs/no overlays for73 guarded commands. Compiler40/new225 signature assertions per seed0/1/42, original66 public channels/120 authored route values, plain callable18 values and unchanged16-consumer1473 groups/Phase01035 pass; original38 and signature10 RED recur. Two original unassessed value cases remain explicit. Twenty-two evidence controls reject. Nine supplemental commands retain18 primitive and18 return-family observations plus18 full public pairs/36 native-fresh values. Fixed x,y selects6 pattern-data origins; x,z/rest-y exclude12. Its helper-role query consumes the signature closer as y|; public ASSIGN2 versus1 distinguishes the defect despite all values1 and readiness1. Twelve diagnostic controls reject. Exact202 historical hashes freeze mode/revision only; five controls reject. Book58/four examples/eight controls and initial publication retention/five controls pass. Exact initial18718-byte grouped report/source survive the portable metadata correction with identical channels. Original report guard accepts3 corruptions; corrected guard rejects all3 with exact source retained. Production/tests/contracts/dependencies/CI unchanged. This checkpoint closes no membership parent; grouped-role repair .0.2.2.2.1 and fresh committed canonical .0.2.2.2.2 remain required.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0 - retain grouped-pattern membership diagnosis` (Git owns identity).
+  Next: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1 from clean committed HEAD. Author grouped-pattern/source/origin/metadata/default-query controls before correcting the compiler helper-role query. Preserve original RED, source/AST/arguments/references and numeric/host/indexed/caller-error contracts; run unchanged consumers/full Phase0 and commit focused repair. Fresh committed canonical SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 must pass before membership parents close. Replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
+
+- [x] **REPRODUCE / ISSUE** — Exact six authored grouped dot/comma sources and three seeds distinguish fixed x,y from x,z/rest-y; actual primitive regex-data origin45..59 remains selected and public ASSIGN rises2 instead of1.
+- [x] **ROOT CAUSE (WHY + WHERE)** — MethodExpr::_helper_pattern_ranges probes the unquoted signature closer8 as y| before discovering body patterns; SourceMembership protects only its own later loop. Numeric grouped-call fallback correctly retains existing precedence.
+- [x] **FIX** — This checkpoint retains the complete bounded evidence and concrete repair ownership; product correction remains .0.2.2.2.1-owned and is not claimed here.
+- [x] **ADDRESSED (verified)** — Immutable73-command original bounded recurrence, real source/AST/event/origin/native/fresh/metadata channels, original RED and effective evidence/diagnostic controls are retained. Production is unchanged.
+- [x] **REPAIR OWNERSHIP** — Correction .0.2.2.2.1 and fresh committed canonical .0.2.2.2.2 remain open. Passing return-family controls, values1 and readiness1 do not authorize membership closure.
+- [x] **NO REGRESSION** — Unchanged16 consumers retain1473 exact ordered groups/Phase01035; complete original public channels and plain callable oracles remain exact. No new grammar or default scanner behavior follows.
+- [x] **LOCKSTEP** — Exact202-hash freeze, current/initial publication capsules, original metadata-bearing report and producer, claims/Knowledge/book/task/index/roadmaps/live/resume and bounded histories align; no historical hashes refresh. Original report-retention checker accepts three actual population/producer/input-guard corruptions; exact original source/results survive while corrected complete guards reject all three.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1`
+  Status: `pending`
+  Goal: Preserve grouped helper-pattern roles in compiler membership inside callable signatures.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.2.2.0`
+  Candidate owners: SourceMembership helper-role query and narrowly opt-in MethodExpr helper-pattern traversal; retain original ordinary scanner/default query, host/numeric/grouped/indexed roles and event/argument/origin/schema/caller-error contracts. Select exact shared delimiter ownership after original Toolbox source/packet diagnosis; no masked source or inferred equal-raw pairing.
+  Acceptance: Author grouped dot/comma and genuine/numeric/host/indexed/body/nested/operator/fixed/rest controls before production; retain original source-bound RED and exact GREEN, original public/native/fresh/metadata/channel authority, all unchanged direct consumers/full Phase0, book/claims/Knowledge and normal hooks. Parent remains open for .2.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2`
+  Status: `pending`
+  Goal: Independently accept committed membership including callable grouped patterns.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.2.2.1`
+  Acceptance: Fresh immutable corrected committed inputs without production overlays; original membership/signature/grouped-pattern/source/argument/reference/value/error/metadata oracles and unchanged complete consumers. Effective evidence/retention/render controls and exact staged canonical receipt/normal hooks before closing this acceptance parent, .0.2.2 and membership .0.2 only. Replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3`
   Status: `pending`
@@ -3835,7 +3880,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2` | `active` | Original bounded proof retained; callable correction and fresh canonical acceptance remain. |
 | 43.4.2.0.2.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` | `done` | Immutable proof/historical inverse/callable RED retained. |
 | 43.4.2.0.2.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` | `done` | Exact callable signature precedence; original RED/corrected GREEN and unchanged consumers. |
-| 43.4.2.0.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2` | `pending` | Independently accept corrected committed membership. |
+| 43.4.2.0.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2` | `active` | Bounded recurrence exposes grouped-pattern signature gap; corrective children own acceptance. |
+| 43.4.2.0.2.2.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` | `done` | Immutable recurrence and grouped-pattern cause retained; repair next. |
+| 43.4.2.0.2.2.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` | `pending` | Correct compiler callable/grouped-helper pattern precedence. |
+| 43.4.2.0.2.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` | `pending` | Independently accept complete corrected committed membership. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
@@ -3876,6 +3924,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October8 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0`: Immutable0f31461d6 supplies4941 regular inputs/no overlays for73 guarded commands. Compiler40/new225 signature assertions per seed0/1/42, original66 public channels/120 authored route values, plain callable18 values and unchanged16-consumer1473 groups/Phase01035 pass; original38 and signature10 RED recur. Two original unassessed value cases remain explicit. Twenty-two evidence controls reject. Nine supplemental commands retain18 primitive and18 return-family observations plus18 full public pairs/36 native-fresh values. Fixed x,y selects6 pattern-data origins; x,z/rest-y exclude12. Its helper-role query consumes the signature closer as y|; public ASSIGN2 versus1 distinguishes the defect despite all values1 and readiness1. Twelve diagnostic controls reject. Exact202 historical hashes freeze mode/revision only; five controls reject. Book58/four examples/eight controls and initial publication retention/five controls pass. Exact initial18718-byte grouped report/source survive the portable metadata correction with identical channels. Original report guard accepts3 corruptions; corrected guard rejects all3 with exact source retained. Production/tests/contracts/dependencies/CI unchanged. This checkpoint closes no membership parent; grouped-role repair .0.2.2.2.1 and fresh committed canonical .0.2.2.2.2 remain required.
 
 October7 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1`: Exact 484fe128f regular Git input snapshots plus declared common fixture/probe overlays supply 4920 inputs before and 4920 after; only the after tree replaces SourceMembership. Fourteen complete guarded commands retain original compiler RED and corrected GREEN under seeds0/1/42. All original39 compiler groups stay intact; the new27-row signature group fails ten authored assertions before and passes225 after, reaching40 total groups per seed. Original x,y fails native/fresh before; all three original public sources return ok on both routes under all three seeds (18 values), with identical source/typed AST and all healthy x,z/rest-y channels unchanged. The unchanged callable fixture loads generated source before its original execution abort, then passes all11 groups after. Sixteen unchanged consumers pass1473 ordered groups including full Phase01035. Twenty-one effective evidence controls/five historical controls/seven publication controls reject; all318 prior checkpoint hashes freeze mode/revision only. Full book58-input render preserves four exact examples. The new reviewer's relative-runpy prefix rejection and original bytes are retained, followed by absolute-prefix correction. MethodExpr, StatementSplit, original callable fixture, public schema/dependencies/CI/hooks remain unchanged. Focused repair is complete; fresh committed canonical .0.2.2.2 remains required before membership closure. Replacement, diagnostic origin and comments retain their owners.
 
@@ -3970,6 +4020,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0 - retain grouped-pattern membership diagnosis` — bounded checkpoint; grouped-role repair/canonical membership acceptance remain open. Git owns identity.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 - preserve callable signature membership` — focused repair; fresh committed canonical acceptance remains open. Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0 - retain bounded membership proof` — bounded focused proof checkpoint; original parent stays open. Git owns identity.
@@ -4045,6 +4097,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-08`: .0.2.2.2.0 retains original bounded recurrence and owns the actual grouped-pattern primitive membership defect; repair .1 and canonical .2 precede parent closure.
 
 - `2026-10-07`: .0.2.2.1 corrects callable signature delimiter precedence with original RED and unchanged full consumer proof; .0.2.2.2 requires fresh committed canonical acceptance before membership closes.
 

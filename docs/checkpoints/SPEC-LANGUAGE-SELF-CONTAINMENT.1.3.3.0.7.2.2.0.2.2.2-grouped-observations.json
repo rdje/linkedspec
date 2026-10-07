@@ -1,0 +1,227 @@
+{
+  "complete": true,
+  "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+  "input_tree": ".linkedspec-data/scratch/corrected-membership-acceptance/committed-gf04jjh8",
+  "input_manifest_sha256": "a358e45c39d27abba8fe795b16aadb26e5d895b3eb85640199ef42b49cde6546",
+  "instrument_sha256": "7945018c3f87c6f4af490dddc1637317a956667f23853e22fed2032a9390d2ce",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+  "runs": [
+    {
+      "kind": "return-grouped-probe.pl",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 193,
+        "sha256": "9b2ec318083a7c54fb2ec3d930619fcbc562abae6d88aaefde348a89efdebab0",
+        "data": "H4sIAAAAAAAC/zWOTQuCQBiE/0p4bvc1O3QWNRFsC7QuEaG7L2puu8t+/P+0iIGZB2YOc4/6zo3RdhN5raUDY/ULuX+KzndPGxT9lQatXJNUf4KbluGNDpomh1zzhZV3MEx+DD3ISc0onEEOQnMHfEQ+Gz2tk+ZSZKROWXlNy4I0RX0k2Zm1acVOBWvpju4XxfRAk0Xx1xNi0QeryGB1MCjIcrNHamT0+AAaTEX4wQAAAA=="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl",
+      "producer_sha256": "8dfa0443ca60289c8f0dece4e0f046580261233e471c2b80fc81fe1e4d219fa2",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 22443,
+        "sha256": "8a7aec1c65efd922de9ceffa4e3fe035d4a22d706d60585cc13dfb01807c4392",
+        "data": "H4sIAAAAAAAC/+2bW2+jOBSA3+dXIDQPyYh2wIANqdqXfdiLVrOj6b41VQXG7ERJSZZAN22n/32PzSUJgZTSNpNEbqUK2+f4XGJsfzrN1QdFUR75H/hRPZqMppGqDBSV+uePPxba/Q8lZkkaR71bL6Hf2bw3VLOO0BszbTFUNeVzLxfhXf3+6afF535feTorNKkPStMxiA7VNErnLBiq/b6qFVbpNErYIrlhcTyNufEonUzKUbaYMZqw4Cabbc4FrvJBPt7NvdL6yhQNfuaC15se3XmTlHF/jHLsO5vMWHwz85KEFc4uNScj6PUmN7EX/cOqkaw8wg+ytbW26S6b11qTFsHrWo7eRssxKlqrtjbCn/pzFt/t0wcy82LvVvihwopVV/rFpyAGaowuBeepP09GSVqu/o/UV86VYKo8wiL+Nx3FTPnj8q8vg8HXr2fl08lFxP47uUiT0OkZ/ZOLgNFpwHozj47B798+8ViHKvERwgiH2CKuHWKDmMRCyPREv49dzLBoQ8vAMAY9IWYgiTCFJxODHKIIEROHxCYIeuxMHunQsoklehlycACzWzDuQK+JHJtrrUhgDBZ80KZEjMGsOgqRU5mlkHLhlyGPOCDDn/VNP+wQotFBnpUR2UU8Jjb1TB58MggieS8JVnotkA+4Dtg3+bjti1ksmD8kOjHBAveHEjuL2jS4NvjrwCgqrcL8mKzNsNmzlmtuHyR4D8njMsBGyD3KJESGGjL/bGZflinTxDWZQibKc7WWgWbLSMiLuTGsHaOIv/CnkgHuAeGZzL3V+efB4xfrINN7fm00rc126+plebJNUpMn03RIQAI72IwRZoTMYZrHz6AVFB5W3paGON71naqJnvsH9hy+X7Tz85mMOTUZM0yrS8bWYmrI1053pFb52+71M9lza7JHeO5qMre2ewudgGvsZ566RW0XkZfn2b6cSqsedTuRNt4DmA90y1MY1hbFbr4/GsUbAvG7sIsysXfyEbvhbM/fK/jLZxSfwKam8IPnyxE3BcTtETc7DfIxV9wNasYgajFnsQa5PbCiC1l4i4uzECSLXRu0sz1A5BqysirPpeFctsVukJ1C4KXwOsyyaxrFWd76RmDU5F+vncUSZ3zxDvuEn2+UuITuen2Bd6g5fn4hXaLO+o3xz1E0ZsElwMJg8AvcDP3JlI6/pVEyumVnW0cHg1F0Nx2zHtxDNeUqvwQry1vwtaY8DoHRhqpyfqEMh0JuqC7K9oI378vm/RNvc3lNSaOAhaCvBGxO49EsmcZc6qNoasoomqWJ6Lj8+9vvX37VFHGTvxlF4VR034qnJwh7eYFekhDvedLeniq1vYZK7ZiZsqJFWmk5eoUpnV0ypfYTkFKTRNlib6WdebL+XiJ58lh4knamSdqJJfERsCTdIUmSIyNJukOOdA6WI2lninT2nCJpJ4bcegpJhtwBQ+oHwZBUEuR7EuSDrEu+miGb0M2qlAOxvg3d3p0/t7ojK6HN2PogK6GyEirJVVZCZSVUVkJlJVRWQmUltIlivYOrhHqyEvoCjn0omw8Hz7GyEtqJYm13ryjWlrXXN4RYWXuVtVdJsLL2KmuvsvYqa6+y9iqpdT9rr56svR4+s56ensqvhb4juFqVeqf5VuDqrE9soVbgus2dZnB1KwjaSsup2HLRAZdf+WsiK7D7UoE1a04uV/JrDb+6tfxqywpsi7uQxW8VsgL7gpqHUXCJrMA+kz1Umz39yGuwW+M++CrsllNpv3l2lSwbqNZ4OdVup9nsv43fjGWt17EsfOrwK7+Rehz/T9yNaWUpthvRov0i2lZapGLLaaXlmBWiNQ63FNsaaGU19n2rsfV3Ikmzx0Kzu67GukdAsnSHHKsfGcfSHVKsccAUSzszrLH3DEs7EiySBPvTCNY8IIKV34d9Fb9+uP7wP982HoOrVwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "kind": "return-grouped-probe.pl",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 193,
+        "sha256": "9b2ec318083a7c54fb2ec3d930619fcbc562abae6d88aaefde348a89efdebab0",
+        "data": "H4sIAAAAAAAC/zWOTQuCQBiE/0p4bvc1O3QWNRFsC7QuEaG7L2puu8t+/P+0iIGZB2YOc4/6zo3RdhN5raUDY/ULuX+KzndPGxT9lQatXJNUf4KbluGNDpomh1zzhZV3MEx+DD3ISc0onEEOQnMHfEQ+Gz2tk+ZSZKROWXlNy4I0RX0k2Zm1acVOBWvpju4XxfRAk0Xx1xNi0QeryGB1MCjIcrNHamT0+AAaTEX4wQAAAA=="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl",
+      "producer_sha256": "8dfa0443ca60289c8f0dece4e0f046580261233e471c2b80fc81fe1e4d219fa2",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 22443,
+        "sha256": "8a7aec1c65efd922de9ceffa4e3fe035d4a22d706d60585cc13dfb01807c4392",
+        "data": "H4sIAAAAAAAC/+2bW2+jOBSA3+dXIDQPyYh2wIANqdqXfdiLVrOj6b41VQXG7ERJSZZAN22n/32PzSUJgZTSNpNEbqUK2+f4XGJsfzrN1QdFUR75H/hRPZqMppGqDBSV+uePPxba/Q8lZkkaR71bL6Hf2bw3VLOO0BszbTFUNeVzLxfhXf3+6afF535feTorNKkPStMxiA7VNErnLBiq/b6qFVbpNErYIrlhcTyNufEonUzKUbaYMZqw4Cabbc4FrvJBPt7NvdL6yhQNfuaC15se3XmTlHF/jHLsO5vMWHwz85KEFc4uNScj6PUmN7EX/cOqkaw8wg+ytbW26S6b11qTFsHrWo7eRssxKlqrtjbCn/pzFt/t0wcy82LvVvihwopVV/rFpyAGaowuBeepP09GSVqu/o/UV86VYKo8wiL+Nx3FTPnj8q8vg8HXr2fl08lFxP47uUiT0OkZ/ZOLgNFpwHozj47B798+8ViHKvERwgiH2CKuHWKDmMRCyPREv49dzLBoQ8vAMAY9IWYgiTCFJxODHKIIEROHxCYIeuxMHunQsoklehlycACzWzDuQK+JHJtrrUhgDBZ80KZEjMGsOgqRU5mlkHLhlyGPOCDDn/VNP+wQotFBnpUR2UU8Jjb1TB58MggieS8JVnotkA+4Dtg3+bjti1ksmD8kOjHBAveHEjuL2jS4NvjrwCgqrcL8mKzNsNmzlmtuHyR4D8njMsBGyD3KJESGGjL/bGZflinTxDWZQibKc7WWgWbLSMiLuTGsHaOIv/CnkgHuAeGZzL3V+efB4xfrINN7fm00rc126+plebJNUpMn03RIQAI72IwRZoTMYZrHz6AVFB5W3paGON71naqJnvsH9hy+X7Tz85mMOTUZM0yrS8bWYmrI1053pFb52+71M9lza7JHeO5qMre2ewudgGvsZ566RW0XkZfn2b6cSqsedTuRNt4DmA90y1MY1hbFbr4/GsUbAvG7sIsysXfyEbvhbM/fK/jLZxSfwKam8IPnyxE3BcTtETc7DfIxV9wNasYgajFnsQa5PbCiC1l4i4uzECSLXRu0sz1A5BqysirPpeFctsVukJ1C4KXwOsyyaxrFWd76RmDU5F+vncUSZ3zxDvuEn2+UuITuen2Bd6g5fn4hXaLO+o3xz1E0ZsElwMJg8AvcDP3JlI6/pVEyumVnW0cHg1F0Nx2zHtxDNeUqvwQry1vwtaY8DoHRhqpyfqEMh0JuqC7K9oI378vm/RNvc3lNSaOAhaCvBGxO49EsmcZc6qNoasoomqWJ6Lj8+9vvX37VFHGTvxlF4VR034qnJwh7eYFekhDvedLeniq1vYZK7ZiZsqJFWmk5eoUpnV0ypfYTkFKTRNlib6WdebL+XiJ58lh4knamSdqJJfERsCTdIUmSIyNJukOOdA6WI2lninT2nCJpJ4bcegpJhtwBQ+oHwZBUEuR7EuSDrEu+miGb0M2qlAOxvg3d3p0/t7ojK6HN2PogK6GyEirJVVZCZSVUVkJlJVRWQmUltIlivYOrhHqyEvoCjn0omw8Hz7GyEtqJYm13ryjWlrXXN4RYWXuVtVdJsLL2KmuvsvYqa6+y9iqpdT9rr56svR4+s56ensqvhb4juFqVeqf5VuDqrE9soVbgus2dZnB1KwjaSsup2HLRAZdf+WsiK7D7UoE1a04uV/JrDb+6tfxqywpsi7uQxW8VsgL7gpqHUXCJrMA+kz1Umz39yGuwW+M++CrsllNpv3l2lSwbqNZ4OdVup9nsv43fjGWt17EsfOrwK7+Rehz/T9yNaWUpthvRov0i2lZapGLLaaXlmBWiNQ63FNsaaGU19n2rsfV3Ikmzx0Kzu67GukdAsnSHHKsfGcfSHVKsccAUSzszrLH3DEs7EiySBPvTCNY8IIKV34d9Fb9+uP7wP982HoOrVwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "kind": "return-grouped-probe.pl",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 193,
+        "sha256": "9b2ec318083a7c54fb2ec3d930619fcbc562abae6d88aaefde348a89efdebab0",
+        "data": "H4sIAAAAAAAC/zWOTQuCQBiE/0p4bvc1O3QWNRFsC7QuEaG7L2puu8t+/P+0iIGZB2YOc4/6zo3RdhN5raUDY/ULuX+KzndPGxT9lQatXJNUf4KbluGNDpomh1zzhZV3MEx+DD3ISc0onEEOQnMHfEQ+Gz2tk+ZSZKROWXlNy4I0RX0k2Zm1acVOBWvpju4XxfRAk0Xx1xNi0QeryGB1MCjIcrNHamT0+AAaTEX4wQAAAA=="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-return-grouped-probe.pl",
+      "producer_sha256": "8dfa0443ca60289c8f0dece4e0f046580261233e471c2b80fc81fe1e4d219fa2",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 22443,
+        "sha256": "8a7aec1c65efd922de9ceffa4e3fe035d4a22d706d60585cc13dfb01807c4392",
+        "data": "H4sIAAAAAAAC/+2bW2+jOBSA3+dXIDQPyYh2wIANqdqXfdiLVrOj6b41VQXG7ERJSZZAN22n/32PzSUJgZTSNpNEbqUK2+f4XGJsfzrN1QdFUR75H/hRPZqMppGqDBSV+uePPxba/Q8lZkkaR71bL6Hf2bw3VLOO0BszbTFUNeVzLxfhXf3+6afF535feTorNKkPStMxiA7VNErnLBiq/b6qFVbpNErYIrlhcTyNufEonUzKUbaYMZqw4Cabbc4FrvJBPt7NvdL6yhQNfuaC15se3XmTlHF/jHLsO5vMWHwz85KEFc4uNScj6PUmN7EX/cOqkaw8wg+ytbW26S6b11qTFsHrWo7eRssxKlqrtjbCn/pzFt/t0wcy82LvVvihwopVV/rFpyAGaowuBeepP09GSVqu/o/UV86VYKo8wiL+Nx3FTPnj8q8vg8HXr2fl08lFxP47uUiT0OkZ/ZOLgNFpwHozj47B798+8ViHKvERwgiH2CKuHWKDmMRCyPREv49dzLBoQ8vAMAY9IWYgiTCFJxODHKIIEROHxCYIeuxMHunQsoklehlycACzWzDuQK+JHJtrrUhgDBZ80KZEjMGsOgqRU5mlkHLhlyGPOCDDn/VNP+wQotFBnpUR2UU8Jjb1TB58MggieS8JVnotkA+4Dtg3+bjti1ksmD8kOjHBAveHEjuL2jS4NvjrwCgqrcL8mKzNsNmzlmtuHyR4D8njMsBGyD3KJESGGjL/bGZflinTxDWZQibKc7WWgWbLSMiLuTGsHaOIv/CnkgHuAeGZzL3V+efB4xfrINN7fm00rc126+plebJNUpMn03RIQAI72IwRZoTMYZrHz6AVFB5W3paGON71naqJnvsH9hy+X7Tz85mMOTUZM0yrS8bWYmrI1053pFb52+71M9lza7JHeO5qMre2ewudgGvsZ566RW0XkZfn2b6cSqsedTuRNt4DmA90y1MY1hbFbr4/GsUbAvG7sIsysXfyEbvhbM/fK/jLZxSfwKam8IPnyxE3BcTtETc7DfIxV9wNasYgajFnsQa5PbCiC1l4i4uzECSLXRu0sz1A5BqysirPpeFctsVukJ1C4KXwOsyyaxrFWd76RmDU5F+vncUSZ3zxDvuEn2+UuITuen2Bd6g5fn4hXaLO+o3xz1E0ZsElwMJg8AvcDP3JlI6/pVEyumVnW0cHg1F0Nx2zHtxDNeUqvwQry1vwtaY8DoHRhqpyfqEMh0JuqC7K9oI378vm/RNvc3lNSaOAhaCvBGxO49EsmcZc6qNoasoomqWJ6Lj8+9vvX37VFHGTvxlF4VR034qnJwh7eYFekhDvedLeniq1vYZK7ZiZsqJFWmk5eoUpnV0ypfYTkFKTRNlib6WdebL+XiJ58lh4knamSdqJJfERsCTdIUmSIyNJukOOdA6WI2lninT2nCJpJ4bcegpJhtwBQ+oHwZBUEuR7EuSDrEu+miGb0M2qlAOxvg3d3p0/t7ojK6HN2PogK6GyEirJVVZCZSVUVkJlJVRWQmUltIlivYOrhHqyEvoCjn0omw8Hz7GyEtqJYm13ryjWlrXXN4RYWXuVtVdJsLL2KmuvsvYqa6+y9iqpdT9rr56svR4+s56ensqvhb4juFqVeqf5VuDqrE9soVbgus2dZnB1KwjaSsup2HLRAZdf+WsiK7D7UoE1a04uV/JrDb+6tfxqywpsi7uQxW8VsgL7gpqHUXCJrMA+kz1Umz39yGuwW+M++CrsllNpv3l2lSwbqNZ4OdVup9nsv43fjGWt17EsfOrwK7+Rehz/T9yNaWUpthvRov0i2lZapGLLaaXlmBWiNQ63FNsaaGU19n2rsfV3Ikmzx0Kzu67GukdAsnSHHKsfGcfSHVKsccAUSzszrLH3DEs7EiySBPvTCNY8IIKV34d9Fb9+uP7wP982HoOrVwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "kind": "grouped-probe.pl",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 186,
+        "sha256": "9794d18aac59b3a189fb6768902da28ea7a4d20a569d4c1333ba526af0efed51",
+        "data": "H4sIAAAAAAAC/zWO3wuCMBzE/5XYc9vMHnoWNRFsBbNeIkK3L2ouN/bj/28WcXD3gbuHu6O+cyPabpDXWjlqrH6B8E/Z+e5pw0J+pQGr1sT1n+hNq/AGRzkvaKFF5MU7Okx+DD1V0zKDdAYElVo4KkYQs9HTOuGXMsdNxqprVpWYl80R52fWZjU7lawlO7KPSsiBpFHJ11M8WB0MSBz/9UCMQo8PQ0hWDLoAAAA="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl",
+      "producer_sha256": "a2a0272027936817cd2e4f7ef8e0e2835aedce8ad8d08cee5fe26f0fa1e186dc",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 23043,
+        "sha256": "259fa4ca146465f1f0cf866cbe1b2d7940494f384e822b75817ef2b4ad56956e",
+        "data": "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"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "kind": "grouped-probe.pl",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 186,
+        "sha256": "9794d18aac59b3a189fb6768902da28ea7a4d20a569d4c1333ba526af0efed51",
+        "data": "H4sIAAAAAAAC/zWO3wuCMBzE/5XYc9vMHnoWNRFsBbNeIkK3L2ouN/bj/28WcXD3gbuHu6O+cyPabpDXWjlqrH6B8E/Z+e5pw0J+pQGr1sT1n+hNq/AGRzkvaKFF5MU7Okx+DD1V0zKDdAYElVo4KkYQs9HTOuGXMsdNxqprVpWYl80R52fWZjU7lawlO7KPSsiBpFHJ11M8WB0MSBz/9UCMQo8PQ0hWDLoAAAA="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl",
+      "producer_sha256": "a2a0272027936817cd2e4f7ef8e0e2835aedce8ad8d08cee5fe26f0fa1e186dc",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 23043,
+        "sha256": "259fa4ca146465f1f0cf866cbe1b2d7940494f384e822b75817ef2b4ad56956e",
+        "data": "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"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    },
+    {
+      "kind": "grouped-probe.pl",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        {
+          "read_only_program_from_repository_root": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl"
+        }
+      ],
+      "actual_command": {
+        "encoding": "gzip-base64",
+        "bytes": 186,
+        "sha256": "9794d18aac59b3a189fb6768902da28ea7a4d20a569d4c1333ba526af0efed51",
+        "data": "H4sIAAAAAAAC/zWO3wuCMBzE/5XYc9vMHnoWNRFsBbNeIkK3L2ouN/bj/28WcXD3gbuHu6O+cyPabpDXWjlqrH6B8E/Z+e5pw0J+pQGr1sT1n+hNq/AGRzkvaKFF5MU7Okx+DD1V0zKDdAYElVo4KkYQs9HTOuGXMsdNxqprVpWYl80R52fWZjU7lawlO7KPSsiBpFHJ11M8WB0MSBz/9UCMQo8PQ0hWDLoAAAA="
+      },
+      "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2-grouped-probe.pl",
+      "producer_sha256": "a2a0272027936817cd2e4f7ef8e0e2835aedce8ad8d08cee5fe26f0fa1e186dc",
+      "inputs_before": 4941,
+      "inputs_after": 4941,
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 23043,
+        "sha256": "259fa4ca146465f1f0cf866cbe1b2d7940494f384e822b75817ef2b4ad56956e",
+        "data": "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"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      }
+    }
+  ],
+  "scope": "Exact complete committed regular input superset; one explicitly supplied external read-only observer per command. No production/test overlays; all project data stays repository-local/same-volume. Separate from the main73-command population."
+}

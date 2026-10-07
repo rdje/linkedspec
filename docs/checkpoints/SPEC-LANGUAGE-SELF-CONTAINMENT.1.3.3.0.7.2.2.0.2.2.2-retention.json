@@ -1,0 +1,33 @@
+{
+  "publication_inputs": 58,
+  "exact_examples": 4,
+  "initial_publication_controls": 7,
+  "later_teaching_changes": [
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md"
+  ],
+  "initial_capsule_sha256": "9b55e5c15783ddea6a3db814fc1a7eada0f58c5eb12bb294da1bbee6e0407f68",
+  "complete": true,
+  "controls": [
+    {
+      "name": "forged initial capsule",
+      "observed_red": "exact retained initial capsule"
+    },
+    {
+      "name": "missing initial member",
+      "observed_red": "complete historical publication population"
+    },
+    {
+      "name": "refreshed initial member hash",
+      "observed_red": "exact historical publication member"
+    },
+    {
+      "name": "forged original instrument",
+      "observed_red": "actual instrument"
+    },
+    {
+      "name": "lost initial observed denial",
+      "observed_red": "initial observed publication denials"
+    }
+  ],
+  "instrument_sha256": "4c0ca708c079a987645fae519f0620d906b06454648bc174038e2964041049c6"
+}

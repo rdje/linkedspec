@@ -1,0 +1,85 @@
+{
+  "complete": true,
+  "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+  "supplied_committed_inputs": 4941,
+  "supplemental_commands": 9,
+  "primitive_source_seed_observations": 18,
+  "selected_pattern_data_origins": 6,
+  "excluded_control_origins": 12,
+  "passing_return_family_observations": 18,
+  "public_source_seed_pairs": 18,
+  "successful_native_fresh_values": 36,
+  "public_assignment_counts": {
+    "x,y": 2,
+    "x,z": 1,
+    "x,...y": 1
+  },
+  "membership_closed": false,
+  "controls": [
+    {
+      "name": "incomplete public capture",
+      "observed_red": "complete committed supplemental capture"
+    },
+    {
+      "name": "missing public command",
+      "observed_red": "complete ordered supplemental commands"
+    },
+    {
+      "name": "lost full input guard",
+      "observed_red": "unchanged complete committed inputs"
+    },
+    {
+      "name": "forged producer",
+      "observed_red": "actual supplemental capture producer"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "lost source authority",
+      "observed_red": "original public source"
+    },
+    {
+      "name": "lost actual origins",
+      "observed_red": "complete real public compiler origin population"
+    },
+    {
+      "name": "invented healthy assignment count",
+      "observed_red": "extra public assignment counter"
+    },
+    {
+      "name": "invented helper-pattern role",
+      "observed_red": "actual missing helper-pattern role"
+    },
+    {
+      "name": "changed host-quote cause",
+      "observed_red": "actual host quote suffix consumes the action tail"
+    },
+    {
+      "name": "invented native failure",
+      "observed_red": "authored native/fresh value counterexample"
+    },
+    {
+      "name": "invented fresh failure",
+      "observed_red": "authored native/fresh value counterexample"
+    }
+  ],
+  "retention_controls": [
+    {
+      "name": "truncated original command population",
+      "observed_red": "complete original supplemental command population"
+    },
+    {
+      "name": "changed original producer identity",
+      "observed_red": "original command/input/producer identity: producer_sha256"
+    },
+    {
+      "name": "lost original full input guard",
+      "observed_red": "original command/input/producer identity: inputs_after"
+    }
+  ],
+  "retained_original_bytes": 18718,
+  "retained_original_sha256": "bb141888ca4a86226ce7dcfd1362f979f30a3ca7f3d75883b900f6ce6b806167",
+  "instrument_sha256": "957432a6eac41ba85d6735199a061bf54205cbe02f192f8f376069f7e8372e00"
+}
