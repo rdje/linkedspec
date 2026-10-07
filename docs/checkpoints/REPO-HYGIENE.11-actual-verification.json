@@ -1,0 +1,26 @@
+{
+  "controls": [
+    {
+      "name": "promote incomplete capture",
+      "rejected": true,
+      "reason": "complete actual capture"
+    },
+    {
+      "name": "forge capture producer",
+      "rejected": true,
+      "reason": "actual producer/input identity"
+    },
+    {
+      "name": "promote failed review",
+      "rejected": true,
+      "reason": "actual successful exit"
+    },
+    {
+      "name": "forge census stdout",
+      "rejected": true,
+      "reason": "actual channel bytes"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "36610c1d08e9a760e571516bdf18bdaab56bb298e3625923d6172f6be9076bd1"
+}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: compiler source membership integration is verified. Due daily artifact review follows the clean focused commit, then independent canonical membership acceptance.
+Full PNT: daily artifact review is verified; immutable canonical compiler-membership acceptance follows the clean maintenance commit.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — Compiler membership passes39 groups under seeds0/1/42 against original38 RED. Original22 public sources/ASTs remain exact; five native/fresh value repairs match all20 authored expected values, with unsupported_nested/raw_operand explicitly unassessed. Fifteen direct consumers pass1462 groups including Phase01035 after the retained two-failure replay, bounded numeric slash/newline correction and exact mock-entry update. Seven evidence/five historical/five publication controls reject; original116 hashes freeze mode/revision only. Book58 inputs/three examples passes. Diagnostic origin, precise replacement and canonical membership acceptance remain open.
+`REPO-HYGIENE.11` — Dated 2026-10-07T13:28:24.094691+00:00 census retains10838 parent candidates/13805895079 bytes and excludes9 nested repositories. Rust release is absent, deps has0 log/bin rows, incremental retains483 rows/2390808595 bytes. Fresh scoped metadata and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; evidence/caches retained. Book58 inputs/one review example passes; original133 compiler claim hashes freeze mode/revision only at clean af5d19971. Both stale maintenance pointers are corrected; canonical membership .0.2.2 follows.
 
 ## Next Action
 
-Complete the due REPO-HYGIENE review from this clean committed handoff, then activate immutable canonical membership acceptance .0.2.2. Exact selected residual replacement .0.3, diagnostic origin .7.2.2.1 and source comments .7.3 stay separate.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
@@ -29,7 +30,6 @@ Complete the due REPO-HYGIENE review from this clean committed handoff, then act
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — mark14;105→133 origins/RED14-GREEN81/1259 groups/148 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
 
 ## History
 

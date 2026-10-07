@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `31395e440a38acec7a6712d470a90a90a6567863` — clean compiler-membership activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 - connect compiler source membership`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` (done) — focused compiler membership verified; canonical acceptance remains pending.
-- next_action: Complete the due REPO-HYGIENE review from this clean committed handoff, then activate immutable canonical membership acceptance .0.2.2. Exact selected residual replacement .0.3, diagnostic origin .7.2.2.1 and source comments .7.3 stay separate.
-- in_flight_uncommitted: None; intended clean post-landing handoff. Completed proof/docs are committed through normal hooks; no required background job remains.
+- activation_commit: `af5d19971a1682f6895901fb769ff41b69842672` — clean due-hygiene activation.
+- latest_completed_leaf: `REPO-HYGIENE.11 - retain daily artifact census`.
+- active_work_unit: `REPO-HYGIENE.11` (done) — due artifact review verified; compiler membership remains committed at af5d19971.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
+- in_flight_uncommitted: None; intended clean post-landing handoff. Hygiene proof/docs are complete and no required background job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

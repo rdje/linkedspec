@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.11",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review",
+      "statement": "At 2026-10-07T13:28:24.094691+00:00, the parent metadata census retains 10838 candidates/13805895079 bytes, excludes 9 nested repositories and inspects three explicit Rust locations separately. Fresh census and independent per-file lstat agree. Aggregate inflation and balanced wrong sizes reject, and inclusion/exclusion fixtures pass. Actual census/review exit0 and both full channels are retained with producer/input guards and four reason-sensitive channel controls. Zero files are removed. One retained-review example renders from all 58 book inputs with five controls. The prior compiler membership claim freezes at the exact activation after all133 original input hashes verify.",
+      "scope": "Dated metadata snapshot and direct OS metadata check; not content-hash ownership, disposability, resource reclamation, runtime behavior, process liveness/recovery/purge or global audit closure. Parent traversal excludes submodules/other repositories before traversal, symlinks, other volumes, managed runs, retained caches and generated Dart/book/Rust outputs; only Rust release/incremental/deps log-bin metadata is separately inspected. All artifacts and package/build caches remain retained. The default reviewer checks retained totals and hashes; --live measures current state and can reject after changing metadata, so it is not a timeless replay claim. The exact dated rows, submodule exclusions, producers and actual full channels are recoverable. Necessary external OS/Python standard library/Git/mdBook prerequisites are read-only; render executable SHA identity is separately observed, with no cross-host identical-output claim. All project-owned scratch/output stays on the repository volume.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-capture.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-review.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-freeze.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-book.py --review; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-claim.py",
+        "granularity": "Each dated candidate path/suffix/size and explicit Rust row; full scoped fresh metadata comparison and independent lstat, aggregate/balanced-size controls and inclusion/exclusion fixtures; actual commands, producers/guards/exits/full channels; all book input bytes/modes and one rendered original example; 133 original compiler claim/input identities at immutable Git activation. New capture is a new dated observation.",
+        "result": "At 2026-10-07T13:28:24.094691+00:00, the parent metadata census retains 10838 candidates/13805895079 bytes, excludes 9 nested repositories and inspects three explicit Rust locations separately. Fresh census and independent per-file lstat agree. Aggregate inflation and balanced wrong sizes reject, and inclusion/exclusion fixtures pass. Actual census/review exit0 and both full channels are retained with producer/input guards and four reason-sensitive channel controls. Zero files are removed. One retained-review example renders from all 58 book inputs with five controls. The prior compiler membership claim freezes at the exact activation after all133 original input hashes verify."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Aggregate counts may conceal incorrect per-file sizes or excluded repository traversal; unretained or failed actual producers and incomplete publication may falsely support cleanup acceptance.",
+        "oracle": "Independent per-path lstat and fresh scoped census; fixed included/excluded artifact fixture with nested Git marker and mock submodule; original actual full channels/producer identities/input guards; complete book capsule and original literal example in actual HTML.",
+        "red_control": "Inflated aggregate count rejects; balanced +1/-1 log sizes keep aggregate totals green but reject against per-file OS metadata. Scope fixture retains exactly log/bin/Finder metadata and excludes ordinary files/.git/.agents/mock submodule/nested Git. Four reason-checked corruptions reject incomplete capture, forged producer, failed actual review and forged census stdout. Five render corruptions reject failed render, absent guard, forged producer/channel and absent original example."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-actual-verification.json",
+            "sha256": "d28532b5adaed7839c52c5837401dae9bd85e04be0f56b16143ff5b591329673",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-actual.json",
+            "sha256": "be3160d50790eacc5f59edca11f538476c0bc444c37fe436946bc3fb17b710ec",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-artifact-review.json",
+            "sha256": "8278ee5369ee1c83d6e3e6c6c318ed584dd4acbfbed6bee7b20cf67e5210fcbd",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-before-compiler-claim.json",
+            "sha256": "28f87f18c605959c7597310451c63eeff47367fab5beeff2bb0690fe73a65708",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-book-inputs.json",
+            "sha256": "f856df5ed5810d65b03712ebe676cb26a22205cb2d6d8ff7ffa21d23bd9dc612",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-book-inputs.tar.gz",
+            "sha256": "b85069836231075f749204770b4943879219468db6f829d17f8f9f6a5aa9546c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-book-verification.json",
+            "sha256": "d0d67b4f12d6548e4d69fa24695a34cbba6346b8582eb0d6b227a487a8fb7742",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-book.json",
+            "sha256": "f995ce8a0427e2f0e52a726aa93261038c91f3f0873984d7e714fa6f6c4c9d0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-book.py",
+            "sha256": "9bc9823ef087118283ce7c4b7983868640b4b226f9c44cefcba575b1d7ae2dba",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-capture.py",
+            "sha256": "acedd48b020a3f551006375f669b9d426a40b9329add8e900037e0852bc710b8",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-census.py",
+            "sha256": "c847b73bddc9de7f19b7862e399c438288bfc97f3c6092a5e059e1d23517f1c5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-claim.py",
+            "sha256": "36610c1d08e9a760e571516bdf18bdaab56bb298e3625923d6172f6be9076bd1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-freeze.json",
+            "sha256": "35e003fd3fb4891254b4c95611b9787e0fbf79d8441b16bfa32322c9fd0e7f30",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-freeze.py",
+            "sha256": "06604531df8576fd1f2cd9908f66b5f20af81fb878c5af3a830b264c83e4a42a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-review.py",
+            "sha256": "8d7a9ff8aa20044f5b9c03642a4e8654db19dfd9b49c93d48dc7d8efb24734b0",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.11-verification.json",
+            "sha256": "706c4bb3a2dfe272b0e9ac0d41bd8bf73f446c15623e9defa631b8d6378b6b7f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "74cc4d3b1bf7064720765a95f84d490ea5f7a96efa61455296ab168e171d7c02",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

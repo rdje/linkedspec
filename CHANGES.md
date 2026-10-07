@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-07 — REPO-HYGIENE.11 - retain daily artifact census
+
+Dated 2026-10-07T13:28:24.094691+00:00 census retains10838 parent candidates/13805895079 bytes and excludes9 nested repositories. Rust release is absent, deps has0 log/bin rows, incremental retains483 rows/2390808595 bytes. Fresh scoped metadata and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; evidence/caches retained. Book58 inputs/one review example passes; original133 compiler claim hashes freeze mode/revision only at clean af5d19971. Both stale maintenance pointers are corrected; canonical membership .0.2.2 follows.
+
 ## 2026-10-07 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 - connect compiler source membership
 
 EmitContext now uses the private compiler scanner entry, selecting actual original executable occurrences while the ordinary syntactic scanner stays intact. Original literal interval/argument/order oracles, event references, real dependencies and caller errors survive. The final compiler fixture passes39 groups under seeds0/1/42; original unintegrated owners fail38. Original native/fresh quoted set, nested cat and regex values improve. A complete first consumer replay exposed exactly two Phase0 failures: the former scanner mock and a numeric slash/newline range that swallowed the following host quote. The bounded selector correction and exactly one mock-entry line preserve existing MethodExpr/statement policy; four host tails with LF/CRLF return7. All original failing channels and rejected test/book instruments remain retained. Historical116 selector hashes freeze mode/revision only; five controls reject. Complete book58 inputs/three exact examples/five controls pass. Final source-bound direct consumers pass1462 groups including Phase01035; seven effective evidence controls reject; canonical membership acceptance .2.2, exact residual replacement .0.3 and diagnostic origin .7.2.2.1 remain open.

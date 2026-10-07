@@ -106,7 +106,7 @@ output channels before advancing the latest date. A successful review may remove
 For example, the retained daily snapshot can be checked without recapturing changing state:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.10-review.py
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-review.py
 ```
 
 All other Git repositories and submodules are excluded before traversal. A project task or
