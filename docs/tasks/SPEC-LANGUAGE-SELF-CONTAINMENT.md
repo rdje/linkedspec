@@ -3367,10 +3367,49 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/32/four/63,151 original hashes/five supplemental RED, claim/Knowledge/task/index/roadmaps/live/resume/history align; membership/replacement/runtime owners remain.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2`
-  Status: `pending`
+  Status: `active`
   Goal: Exclude authored quoted/pattern data using exact producer occurrence provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1`
+  Children: `.1.3.3.0.7.2.2.0.2.0`, `.1.3.3.0.7.2.2.0.2.1`, `.1.3.3.0.7.2.2.0.2.2`
+  Safe-slice split: Establish a private source-membership selector against actual producer origins first; separately connect the compiler collector and independently accept its public behavior. Keep original syntactic scans, literal arguments, callback bindings and family order. Exact residual replacement remains .0.3; actual source-comment classification remains .7.3.
   Acceptance: Reuse existing quote/host-quote/helper-pattern/slash-call contracts, retain original arguments, genuine literal receivers and true dependencies; no globally masked parsing or inferred raw-key pairing. Replay exact quoted/repeated/order guards and direct consumers before committing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0`
+  Status: `done`
+  Goal: Implement private executable source membership without changing compiler discovery.
+  Dependencies: `.1.3.3.0.7.2.2.0.1`
+  Activation: Clean5f700625ef4bce962285ece583b088c457f2dd63; exact canonical receipt, all ten normal hooks and post-commit pointer PASS, brief0 and no required jobs. Relevant roadmap/parent/original quote and mapper records, private producer coordinates, existing MethodExpr helper-pattern/host-quote/slash-call contracts, ScannerCore dependency/identity/error interfaces and ActionIR book reviewed. Compiler callback binding is RuleIR::EmitContext; integration remains .2.1. Cleanup younger than24h.
+  Owned paths: New perl/LinkedSpec/ActionIR/SourceMembership.pm and t/actionir_executable_source_membership.t; leaf-prefixed authored literal oracles, actual baseline/after probes and complete channels/input closure, independent review/falsifiers, historical claim freeze and rendered book proof under docs/checkpoints/. Own docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json plus current task/index/resume/live/roadmaps/Knowledge/book/change/notes. Existing production/spec/tests/CI/hooks/dependencies and other repositories remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Actual original private scans distinguish quoted/interleaved occurrences before selector implementation; unchanged independently authored scalar/event/reference/argument oracles and complete TAP RED/GREEN. Exercise quoted openers used by genuine literal receivers, escapes/Unicode/CRLF, existing host quotes and helper patterns/numeric slash calls, comments as separately owned compatibility, exact family occurrence order, missing/foreign provenance, empty/opaque returns and caller errors. Run unchanged selected source/AST/canonical/regex/direct consumers, source-bound independent evidence controls, actual book render, claim/Knowledge/memory/history/diff and all doctrines.
+  Canonical trigger: None for this bounded unused private selector; public compiler collector changes belong to .2.1 and independent canonical acceptance .2.2. Escalate if focused proof finds cross-cutting uncertainty.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json`
+  Acceptance: Select only from actual event-reference-bound original intervals, without searching equal raw strings, globally sorting, parsing masked arguments or adding public event fields. Preserve untouched event/argument/origin objects and opaque/empty identity. Existing quote-value/readiness/replacement/marker/comment defects stay open until their actual repair leaves land. Commit this private unit before activating compiler integration.
+  Initial runner rejection / existing defect ownership: Closed captures provide4764 committed inputs plus six/seven authored assets and11 commands per phase. Independent review rejects83 stderr bytes from before membership-probe seed1: tools/project_data_run.sh child setpgid Operation not permitted, although the command exits0 and input guards complete. This is the already owned SESSION-STARTUP-READING.7 startup/containment defect, not accepted quiet proof. Preserve complete initial before/after manifests/channels and the actual reviewer rejection; use approved host remeasurement through an unchanged capture producer before acceptance. Startup .7 remains open and scheduled with its existing owner; no recovery/purge or containment bypass.
+
+  Verified focused result: Private SourceMembership selects47 of68 original syntactic events per seed across36 authored sources. Complete baseline20 RED groups become41 GREEN groups; eight unchanged consumers pass321 groups. Original event/argument/origin references, source, order, numeric slash/literal receiver authority and caller errors persist. Seventeen evidence controls/four actual bad producers/five supplemental controls reject; 141 prior hashes freeze mode/revision only with five RED. Book58 inputs/35 examples/four chapters/68 RED. Initial setpgid warning and actual reviewer rejection retained; unchanged host remeasurement accepted. Compiler discovery, existing scanners/spec/tests/CI and public substitution remain unchanged.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0 - select private executable source occurrences` (derive identity from Git after landing).
+  Next: Activate compiler membership integration .0.2.1 from clean committed HEAD. Read original Toolbox quote/mapping records and EmitContext/Diagnostics consumers; connect actual source-bound selection without changing original arguments or family order. Reproduce public native/fresh improvements and retain exact replacement .0.3, comments .7.3 and other runtime/startup owners. Canonical .2.2 accepts membership afterward.
+  Crash recovery checkpoint (2026-10-07): Recovered the staged slice at its unchanged activation HEAD after the director reported a machine/session crash. Focused selector/direct-consumer suites and retained membership, historical-freeze, actual-producer-control and rendered-book reviews passed again without changing their evidence bytes. Syntax and both bounded-history pressure checks passed. Land through normal focused hooks, then stop; .2.1 remains pending for the next session. No compiler integration or cache recovery/purge was attempted.
+
+- [x] **REPRODUCE / ISSUE** — Actual unfiltered syntactic baseline has20 failed groups from complete original producer channels.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Producer spans are syntactic; quote interiors need original reference-bound membership, while literal receiver openers remain eligible.
+- [x] **FIX** — New unused private selector reuses existing lexical contracts and retains original source, event/argument/origin objects and producer order.
+- [x] **ADDRESSED (verified)** — 36 authored sources/41 groups,47 selected of68 original events per seed; seventeen evidence RED/four actual producer RED; no compiler/public fix claimed.
+- [x] **NO REGRESSION** — Eight unchanged direct consumers reach321 ordered groups; complete original producer/private/public intake channels and source inputs recur under seeds0/1/42.
+- [x] **LOCKSTEP** — Book58/35/four/68; original141 hashes/five freeze RED and warning/rejection preserved; claim/Knowledge/task/index/roadmaps/live/resume/history agree.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1`
+  Status: `pending`
+  Goal: Connect private membership to compiler helper collection while retaining original dependencies and source authority.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.0`
+  Acceptance: Reproduce original public quote/mapping guards, use real producer origins, preserve original argument/reference/order/error channels and legitimate literal receivers; prove actual native/fresh improvement and retain still-open replacement/diagnostic/comment boundaries. Declare exact affected compiler owners and verification tier before changes.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2`
+  Status: `pending`
+  Goal: Independently accept committed executable membership through exact canonical proof.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.1`
+  Acceptance: Fresh immutable membership recurrence, original literal/occurrence/slash/receiver/raw/control oracles and direct consumers, effective evidence/publication controls and source retention, exact staged canonical receipt and normal hooks before closing membership .0.2. Selected replacement .0.3 and recurring parent acceptance .0.4 remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3`
   Status: `pending`
@@ -3680,7 +3719,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `done` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.1.6.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` | `done` | Original174 IDs/436 origins,49 representative pairs/seven fatal routes/1440 groups verified; canonical .1.6.1 next. |
 | 43.4.2.0.1.6.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` | `done` | Independently accept immutable all-producer recurrence and private parent through canonical CI. |
-| 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
+| 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `active` | Private membership, compiler integration and independent canonical acceptance. |
+| 43.4.2.0.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` | `done` | Private selector with original intervals, arguments and receiver/slash guards. |
+| 43.4.2.0.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` | `pending` | Compiler membership integration without inferred occurrence identity. |
+| 43.4.2.0.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2` | `pending` | Immutable membership recurrence and exact canonical acceptance. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
@@ -3965,3 +4007,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 - `2026-10-06`: .1.6.0 composes174 IDs/436 origins per seed,49 representative pairs/seven fatal routes,1440 groups/320 RED; retained actual instrument rejections repaired. Private canonical .1.6.1 follows clean landing.
 
 - `2026-10-06`: .1.6.1 immutable4745/no-overlay recurrence174 IDs/436 origins,49 representative pairs/seven fatal routes/1440 groups/320 RED; exact canonical receipt gates private .1.6/.0.1 closeout. Executable membership .0.2 follows clean landing.
+
+- `2026-10-06`: .0.2.0 private selector47/68 events per seed; RED20/GREEN41,321 direct groups and four actual producer RED. Compiler integration .2.1 follows clean landing.

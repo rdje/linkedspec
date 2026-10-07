@@ -15,7 +15,7 @@ evidence: "Fresh immutable56c8f38 supplies4745 regular committed inputs/no overl
 reverify:
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-supplement-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-book.py --review"
+  - "At frozen5f700625ef4bce962285ece583b088c457f2dd63 run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-book.py --review; subsequent membership teaching requires historical replay."
 ---
 
 The original selected ID partitions remain disjoint across five independently

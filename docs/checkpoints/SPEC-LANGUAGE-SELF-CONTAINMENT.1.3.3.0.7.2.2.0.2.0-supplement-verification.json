@@ -1,0 +1,64 @@
+{
+  "complete": true,
+  "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+  "bound_inputs": 141,
+  "controls": [
+    {
+      "name": "rewritten original statement",
+      "observed": "RED",
+      "reason": "mode revision only composition freeze"
+    },
+    {
+      "name": "rewritten original binding",
+      "observed": "RED",
+      "reason": "exact original composition claim"
+    },
+    {
+      "name": "lost original population",
+      "observed": "RED",
+      "reason": "complete actual composition freeze"
+    },
+    {
+      "name": "forged original producer",
+      "observed": "RED",
+      "reason": "actual composition freeze instrument"
+    },
+    {
+      "name": "forged original channel",
+      "observed": "RED",
+      "reason": "actual freeze channel identities"
+    }
+  ],
+  "instrument_sha256": "e4c2c1073a0d66baa1ac86de26f7ec65a57c29fc85045fa05f8eedaefd44936a",
+  "scope": "Every original composition hash, statement, rejected instrument/channel, historical adjudication and input binding stays exact at the committed revision. Only durability mode/revision changes. Current source/publication changes require new evidence; no refresh of old observations.",
+  "initial_warning_retained": true,
+  "unchanged_host_remeasurement": true,
+  "actual_producer_red_controls": 4,
+  "runtime_controls": [
+    {
+      "name": "hidden bad producer",
+      "observed": "RED",
+      "reason": "actual mutant producer"
+    },
+    {
+      "name": "omitted bad producer",
+      "observed": "RED",
+      "reason": "complete producer control population"
+    },
+    {
+      "name": "lost mutant guards",
+      "observed": "RED",
+      "reason": "actual producer input guards"
+    },
+    {
+      "name": "hidden actual RED",
+      "observed": "RED",
+      "reason": "actual producer RED exit"
+    },
+    {
+      "name": "wrong distinguishing oracle",
+      "observed": "RED",
+      "reason": "distinguishing actual producer RED"
+    }
+  ]
+}

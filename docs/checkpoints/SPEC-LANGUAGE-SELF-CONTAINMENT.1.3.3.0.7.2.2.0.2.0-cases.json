@@ -1,0 +1,825 @@
+[
+  {
+    "id": "interleaved_original_mapper",
+    "contract": "set_value",
+    "source": "text=\"set(counter,1)\"; set(counter,2); set(counter,1); return(counter)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 23,
+          "end": 37
+        }
+      },
+      {
+        "raw": "set(counter,1)",
+        "args": {
+          "target": "counter",
+          "source": "1"
+        },
+        "source_span": {
+          "start": 39,
+          "end": 53
+        }
+      }
+    ]
+  },
+  {
+    "id": "suppressed_original_return",
+    "contract": "return_general",
+    "source": "return('return(\"x\")'); return(\"x\")",
+    "events": [
+      {
+        "raw": "return('return(\"x\")')",
+        "args": {
+          "payload": "'return(\"x\")'"
+        },
+        "source_span": {
+          "start": 0,
+          "end": 21
+        }
+      },
+      {
+        "raw": "return(\"x\")",
+        "args": {
+          "payload": "\"x\""
+        },
+        "source_span": {
+          "start": 23,
+          "end": 34
+        }
+      }
+    ]
+  },
+  {
+    "id": "double_quote",
+    "contract": "set_value",
+    "source": "\"set(counter,1)\"; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 18,
+          "end": 32
+        }
+      }
+    ]
+  },
+  {
+    "id": "single_quote",
+    "contract": "set_value",
+    "source": "'set(counter,1)'; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 18,
+          "end": 32
+        }
+      }
+    ]
+  },
+  {
+    "id": "escaped_double_quote",
+    "contract": "set_value",
+    "source": "\"quote\\\"; set(counter,1); slash\\\\\"; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 36,
+          "end": 50
+        }
+      }
+    ]
+  },
+  {
+    "id": "escaped_single_quote",
+    "contract": "set_value",
+    "source": "'quote\\'; set(counter,1); slash\\\\'; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 36,
+          "end": 50
+        }
+      }
+    ]
+  },
+  {
+    "id": "unicode_scalar_crlf",
+    "contract": "set_value",
+    "source": "note(\"雪😀 set(counter,1)\");\r\n set(counter,2); set(counter,1)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 29,
+          "end": 43
+        }
+      },
+      {
+        "raw": "set(counter,1)",
+        "args": {
+          "target": "counter",
+          "source": "1"
+        },
+        "source_span": {
+          "start": 45,
+          "end": 59
+        }
+      }
+    ]
+  },
+  {
+    "id": "quoted_comment_data",
+    "contract": "if_flow",
+    "source": "\"# if(true)\"; if(false)",
+    "events": [
+      {
+        "raw": "if(false)",
+        "args": {
+          "condition": "false"
+        },
+        "source_span": {
+          "start": 14,
+          "end": 23
+        }
+      }
+    ]
+  },
+  {
+    "id": "backtick_payload_only_scanned",
+    "contract": "set_value",
+    "source": "`set(counter,1)`; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 18,
+          "end": 32
+        }
+      }
+    ]
+  },
+  {
+    "id": "q_pipe",
+    "contract": "set_value",
+    "source": "q|set(counter,1)|; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 19,
+          "end": 33
+        }
+      }
+    ]
+  },
+  {
+    "id": "qq_pipe",
+    "contract": "set_value",
+    "source": "qq|set(counter,1)|; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 20,
+          "end": 34
+        }
+      }
+    ]
+  },
+  {
+    "id": "q_braces",
+    "contract": "set_value",
+    "source": "q{set(counter,1)}; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 19,
+          "end": 33
+        }
+      }
+    ]
+  },
+  {
+    "id": "qr_slash",
+    "contract": "set_value",
+    "source": "qr/set(counter,1)/; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 20,
+          "end": 34
+        }
+      }
+    ]
+  },
+  {
+    "id": "m_slash",
+    "contract": "set_value",
+    "source": "m/set(counter,1)/; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 19,
+          "end": 33
+        }
+      }
+    ]
+  },
+  {
+    "id": "q_angle",
+    "contract": "set_value",
+    "source": "q<set(counter,1)>; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 19,
+          "end": 33
+        }
+      }
+    ]
+  },
+  {
+    "id": "host_substitution_segments",
+    "contract": "set_value",
+    "source": "s{set(counter,1)}{set(counter,3)}; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 35,
+          "end": 49
+        }
+      }
+    ]
+  },
+  {
+    "id": "host_translation_segments",
+    "contract": "set_value",
+    "source": "tr/set(counter,1)/set(counter,3)/; set(counter,2)",
+    "events": [
+      {
+        "raw": "set(counter,2)",
+        "args": {
+          "target": "counter",
+          "source": "2"
+        },
+        "source_span": {
+          "start": 35,
+          "end": 49
+        }
+      }
+    ]
+  },
+  {
+    "id": "literal_receiver",
+    "contract": "value_drop_statement",
+    "source": "' 雪 '.trim()",
+    "events": [
+      {
+        "raw": "' 雪 '.trim()",
+        "args": {
+          "expr": "' 雪 '.trim()"
+        },
+        "source_span": {
+          "start": 0,
+          "end": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": "literal_helper_argument",
+    "contract": "value_drop_statement",
+    "source": "trim(' 雪 ')",
+    "events": [
+      {
+        "raw": "trim(' 雪 ')",
+        "args": {
+          "expr": "trim(' 雪 ')"
+        },
+        "source_span": {
+          "start": 0,
+          "end": 11
+        }
+      }
+    ]
+  },
+  {
+    "id": "quoted_flow_condition",
+    "contract": "if_flow",
+    "source": "if(\"if(true)\")",
+    "events": [
+      {
+        "raw": "if(\"if(true)\")",
+        "args": {
+          "condition": "\"if(true)\""
+        },
+        "source_span": {
+          "start": 0,
+          "end": 14
+        }
+      }
+    ]
+  },
+  {
+    "id": "helper_pattern",
+    "contract": "if_flow",
+    "source": "return(matches(\"ifXtrue\", /if(true)/)); if(false)",
+    "events": [
+      {
+        "raw": "if(false)",
+        "args": {
+          "condition": "false"
+        },
+        "source_span": {
+          "start": 40,
+          "end": 49
+        }
+      }
+    ]
+  },
+  {
+    "id": "grouped_helper_pattern",
+    "contract": "if_flow",
+    "source": "return(matches(\"x\", /(if(true)).*x/)); if(false)",
+    "events": [
+      {
+        "raw": "if(false)",
+        "args": {
+          "condition": "false"
+        },
+        "source_span": {
+          "start": 39,
+          "end": 48
+        }
+      }
+    ]
+  },
+  {
+    "id": "bare_regex_operand",
+    "contract": "if_flow",
+    "source": "return(/if(true)/); if(false)",
+    "events": [
+      {
+        "raw": "if(false)",
+        "args": {
+          "condition": "false"
+        },
+        "source_span": {
+          "start": 20,
+          "end": 29
+        }
+      }
+    ]
+  },
+  {
+    "id": "numeric_slash_call_code_interval",
+    "contract": "if_flow",
+    "source": "/(14,2); if(true); 14/cos",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 9,
+          "end": 17
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed_q_code_interval",
+    "contract": "if_flow",
+    "source": "q[if(true)]",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 2,
+          "end": 10
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed_m_code_interval",
+    "contract": "if_flow",
+    "source": "m[if(true)]",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 2,
+          "end": 10
+        }
+      }
+    ]
+  },
+  {
+    "id": "indexed_qr_code_interval",
+    "contract": "if_flow",
+    "source": "qr[if(true)]",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 3,
+          "end": 11
+        }
+      }
+    ]
+  },
+  {
+    "id": "comment_unclosed_quote_keeps_next_line",
+    "contract": "if_flow",
+    "source": "# \"\nif(true)",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 4,
+          "end": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": "comment_membership_still_deferred",
+    "contract": "if_flow",
+    "source": "# if(true)\nif(false)",
+    "events": [
+      {
+        "raw": "if(true)",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 2,
+          "end": 10
+        }
+      },
+      {
+        "raw": "if(false)",
+        "args": {
+          "condition": "false"
+        },
+        "source_span": {
+          "start": 11,
+          "end": 20
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_staged_parse_job",
+    "contract": "staged_parse_job",
+    "source": "note(\"雪😀\");\r\njob = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));  job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"));\r\n",
+    "events": [
+      {
+        "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+        "args": {
+          "target": "job",
+          "argument_count": 2,
+          "text_operand": "entry_text()",
+          "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+          "validation": {
+            "ok": 1,
+            "options": {
+              "node_kind": "expression",
+              "payload_kind": "text",
+              "spec": "expr-v1",
+              "result_policy": "replace_marker",
+              "on_error": "fail",
+              "required_capabilities": []
+            },
+            "text_plan": {
+              "kind": "direct_span",
+              "source": "entry_text"
+            }
+          },
+          "text_plan": {
+            "kind": "direct_span",
+            "source": "entry_text"
+          },
+          "options": {
+            "node_kind": "expression",
+            "payload_kind": "text",
+            "spec": "expr-v1",
+            "result_policy": "replace_marker",
+            "on_error": "fail",
+            "required_capabilities": []
+          }
+        },
+        "source_span": {
+          "start": 13,
+          "end": 164
+        }
+      },
+      {
+        "raw": "job = parse_job(entry_text(), hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\"))",
+        "args": {
+          "target": "job",
+          "argument_count": 2,
+          "text_operand": "entry_text()",
+          "options_operand": "hash(\"node_kind\",\"expression\",\"payload_kind\",\"text\",\"spec\",\"expr-v1\",\"result_policy\",\"replace_marker\",\"on_error\",\"fail\")",
+          "validation": {
+            "ok": 1,
+            "options": {
+              "node_kind": "expression",
+              "payload_kind": "text",
+              "spec": "expr-v1",
+              "result_policy": "replace_marker",
+              "on_error": "fail",
+              "required_capabilities": []
+            },
+            "text_plan": {
+              "kind": "direct_span",
+              "source": "entry_text"
+            }
+          },
+          "text_plan": {
+            "kind": "direct_span",
+            "source": "entry_text"
+          },
+          "options": {
+            "node_kind": "expression",
+            "payload_kind": "text",
+            "spec": "expr-v1",
+            "result_policy": "replace_marker",
+            "on_error": "fail",
+            "required_capabilities": []
+          }
+        },
+        "source_span": {
+          "start": 167,
+          "end": 318
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_progressive_span_dispatch",
+    "contract": "progressive_span_dispatch",
+    "source": "note(\"雪😀\");\r\nchild = dispatch_span(\"expr-v1\", \"Expr\", span);  child = dispatch_span(\"expr-v1\", \"Expr\", span);\r\n",
+    "events": [
+      {
+        "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+        "args": {
+          "result": "child",
+          "argument_count": 3,
+          "parser_operand": "\"expr-v1\"",
+          "top_rule_operand": "\"Expr\"",
+          "span_operand": "span",
+          "parser_id": "expr-v1",
+          "top_rule": "Expr",
+          "span_binding": "span"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 59
+        }
+      },
+      {
+        "raw": "child = dispatch_span(\"expr-v1\", \"Expr\", span)",
+        "args": {
+          "result": "child",
+          "argument_count": 3,
+          "parser_operand": "\"expr-v1\"",
+          "top_rule_operand": "\"Expr\"",
+          "span_operand": "span",
+          "parser_id": "expr-v1",
+          "top_rule": "Expr",
+          "span_binding": "span"
+        },
+        "source_span": {
+          "start": 62,
+          "end": 108
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_recognition_checkpoint",
+    "contract": "recognition_checkpoint",
+    "source": "note(\"雪😀\");\r\nscope = recognition_checkpoint();  scope = recognition_checkpoint();\r\n",
+    "events": [
+      {
+        "raw": "scope = recognition_checkpoint()",
+        "args": {
+          "token": "scope"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 45
+        }
+      },
+      {
+        "raw": "scope = recognition_checkpoint()",
+        "args": {
+          "token": "scope"
+        },
+        "source_span": {
+          "start": 48,
+          "end": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_my_declare_bare",
+    "contract": "my_declare_bare",
+    "source": "note(\"雪😀\");\r\nmy $dx;  my $dx;\r\n",
+    "events": [
+      {
+        "raw": "my $dx",
+        "args": {
+          "declaration_type": "scalar",
+          "names": [
+            "dx"
+          ],
+          "scope": "my"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 19
+        }
+      },
+      {
+        "raw": "my $dx",
+        "args": {
+          "declaration_type": "scalar",
+          "names": [
+            "dx"
+          ],
+          "scope": "my"
+        },
+        "source_span": {
+          "start": 22,
+          "end": 28
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_scalar_assignment_operator",
+    "contract": "scalar_assignment_operator",
+    "source": "note(\"雪😀\");\r\nvalue = '雪';  value = '雪';\r\n",
+    "events": [
+      {
+        "raw": "value = '雪'",
+        "args": {
+          "target": "value",
+          "source": "'雪'"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 24
+        }
+      },
+      {
+        "raw": "value = '雪'",
+        "args": {
+          "target": "value",
+          "source": "'雪'"
+        },
+        "source_span": {
+          "start": 27,
+          "end": 38
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_if_flow",
+    "contract": "if_flow",
+    "source": "note(\"雪😀\");\r\nif(true) { say(\"a\") };  if(true) { say(\"a\") };\r\n",
+    "events": [
+      {
+        "raw": "if(true) { say(\"a\") }",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 34
+        }
+      },
+      {
+        "raw": "if(true) { say(\"a\") }",
+        "args": {
+          "condition": "true"
+        },
+        "source_span": {
+          "start": 37,
+          "end": 58
+        }
+      }
+    ]
+  },
+  {
+    "id": "original_return_general",
+    "contract": "return_general",
+    "source": "note(\"雪😀\");\r\nreturn( length(/a\\)b\\(/i) );  return( length(/a\\)b\\(/i) );\r\n",
+    "events": [
+      {
+        "raw": "return( length(/a\\)b\\(/i) )",
+        "args": {
+          "payload": "length(/a\\)b\\(/i)"
+        },
+        "source_span": {
+          "start": 13,
+          "end": 40
+        }
+      },
+      {
+        "raw": "return( length(/a\\)b\\(/i) )",
+        "args": {
+          "payload": "length(/a\\)b\\(/i)"
+        },
+        "source_span": {
+          "start": 43,
+          "end": 70
+        }
+      }
+    ]
+  }
+]

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: immutable all-producer provenance independently verified; exact canonical receipt/normal hooks gate private parent closeout. Executable quoted/pattern membership .0.2 is next; replacement and separately owned runtime defects remain open.
+Crash recovery checkpoint: private executable source selector verified; stop after its focused commit. Compiler integration .2.1 remains pending for the next session. Public quoted-source replacement, comments and other owned defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — Fresh immutable56c8f38 supplies4745 regular committed inputs/no overlays and26 guarded commands. All174 disjoint selected IDs retain436 events/origins and46 MethodExpr/CSV frames per seed with exact complete previous compiler/callback/origin channels. Seven representatives retain49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed. All29 unchanged suites pass1440 ordered groups;320 effective evidence RED. Original151 hashes freeze mode/revision only with five supplemental RED; book58/32/four chapters/63 RED. Exact staged canonical receipt and normal hooks gate .1.6/private .0.1 closeout; no production/spec/test/policy change.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — Private SourceMembership selects47 of68 original syntactic events per seed across36 authored sources. Complete baseline20 RED groups become41 GREEN groups; eight unchanged consumers pass321 groups. Original event/argument/origin references, source, order, numeric slash/literal receiver authority and caller errors persist. Seventeen evidence controls/four actual bad producers/five supplemental controls reject; 141 prior hashes freeze mode/revision only with five RED. Book58 inputs/35 examples/four chapters/68 RED. Initial setpgid warning and actual reviewer rejection retained; unchanged host remeasurement accepted. Compiler discovery, existing scanners/spec/tests/CI and public substitution remain unchanged.
 
 ## Next Action
 
-Activate executable quoted/pattern membership .0.2 from the clean canonical committed boundary. Retrieve original quote/mapping counterexamples and exact private producer spans; diagnose/implement only a safely bounded membership slice preserving original arguments, literal receivers, real dependencies and family order. Selected replacement .0.3 and recurring executable repair acceptance .0.4 remain separate; retain other runtime/diagnostic defect owners.
+Activate compiler membership integration .0.2.1 from clean committed HEAD. Read original Toolbox quote/mapping records and EmitContext/Diagnostics consumers; connect actual source-bound selection without changing original arguments or family order. Reproduce public native/fresh improvements and retain exact replacement .0.3, comments .7.3 and other runtime/startup owners. Canonical .2.2 accepts membership afterward.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
@@ -29,7 +30,6 @@ Activate executable quoted/pattern membership .0.2 from the clean canonical comm
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
 
 ## History
 

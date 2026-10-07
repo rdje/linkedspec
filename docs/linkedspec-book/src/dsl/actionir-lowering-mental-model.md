@@ -755,11 +755,47 @@ bash tools/run_python_project_data.sh \
   docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py
 ```
 
-Private source provenance is now independently composed; executable lexical
-membership is the next repair. A syntactic source origin still does not authorize quoted/comment membership or
+Private source provenance is now independently composed; compiler integration of
+executable lexical membership is the next repair. A syntactic source origin still does not authorize quoted/comment membership or
 replacement. Identical literal twins must remain data until the separate membership
 and selected-occurrence repair is verified. No arbitrary callback, new helper,
 static-policy relaxation or runtime-defect closure follows from this composition.
+
+### Private executable source selection
+
+The private selector now distinguishes quoted or pattern data from executable
+occurrences using the original scanner's event references and scalar intervals.
+It leaves the source and argument objects untouched. For example:
+
+```text
+note("set(counter,1)"); set(counter,2); set(counter,1)
+# selected original occurrences: set(counter,2), then set(counter,1)
+# the quoted first twin remains data
+```
+
+A quote opener remains eligible as the start of a real literal receiver:
+
+```text
+' 雪 '.trim()
+# selected original occurrence: the entire literal-receiver expression
+```
+
+Host quote forms, escaped payloads and helper patterns use the existing lexical
+contracts. Numeric slash calls keep their existing interpretation. Missing,
+foreign or copied event origins grant no inferred source authority; malformed
+matching-source intervals fail explicitly. Selection preserves producer order
+and the caller's error state.
+
+This component is not yet connected to compiler discovery. Public lowering can
+still rewrite helper-looking literal data. Compiler integration, exact
+selected-occurrence replacement and source-comment classification retain their
+separate repair owners. The private fixture covers 36 authored sources and five
+authority/error guards; its scanner cases do not admit new executable syntax.
+
+```sh
+bash tools/project_data_run.sh prove -v -Iperl \
+  t/actionir_executable_source_membership.t
+```
 
 ### Original method argument boundaries
 

@@ -1,0 +1,100 @@
+{
+  "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+  "complete": true,
+  "metrics": {
+    "cases": 36,
+    "original_events_per_seed": 68,
+    "selected_events_per_seed": 47,
+    "membership_groups": 41,
+    "original_red_groups": 20,
+    "direct_consumer_groups": 321
+  },
+  "evidence_controls": [
+    {
+      "control": "hidden_exit",
+      "expected_reason": "complete declared actual exit",
+      "observed": "RED"
+    },
+    {
+      "control": "lost_guard",
+      "expected_reason": "complete runtime input guards",
+      "observed": "RED"
+    },
+    {
+      "control": "wrong_command",
+      "expected_reason": "exact declared actual command",
+      "observed": "RED"
+    },
+    {
+      "control": "omitted_command",
+      "expected_reason": "complete actual command population",
+      "observed": "RED"
+    },
+    {
+      "control": "stale_producer",
+      "expected_reason": "actual capture producer identity",
+      "observed": "RED"
+    },
+    {
+      "control": "changed_source",
+      "expected_reason": "exact authored source",
+      "observed": "RED"
+    },
+    {
+      "control": "hidden_side_effect",
+      "expected_reason": "original source and scan untouched",
+      "observed": "RED"
+    },
+    {
+      "control": "lost_selected_reference",
+      "expected_reason": "actual selected original event references",
+      "observed": "RED"
+    },
+    {
+      "control": "copied_arguments",
+      "expected_reason": "actual original event and argument references",
+      "observed": "RED"
+    },
+    {
+      "control": "copied_unchanged_result",
+      "expected_reason": "unchanged result identity",
+      "observed": "RED"
+    },
+    {
+      "control": "changed_argument",
+      "expected_reason": "independent selected interval argument and order oracle",
+      "observed": "RED"
+    },
+    {
+      "control": "omitted_input",
+      "expected_reason": "complete unique supplied inputs",
+      "observed": "RED"
+    },
+    {
+      "control": "wrong_object",
+      "expected_reason": "immutable input object and mode",
+      "observed": "RED"
+    },
+    {
+      "control": "wrong_mode",
+      "expected_reason": "immutable input object and mode",
+      "observed": "RED"
+    },
+    {
+      "control": "changed_input_bytes",
+      "expected_reason": "immutable input content",
+      "observed": "RED"
+    },
+    {
+      "control": "lost_overlay",
+      "expected_reason": "exact declared authored overlays",
+      "observed": "RED"
+    },
+    {
+      "control": "hidden_authored_delta",
+      "expected_reason": "exact new authored input bytes",
+      "observed": "RED"
+    }
+  ],
+  "measured_scope": "Private selector only; original source/scanner/facade substitution unchanged. No compiler integration, runtime execution, grammar/backend admission or quoted/comment/marker parent closeout."
+}

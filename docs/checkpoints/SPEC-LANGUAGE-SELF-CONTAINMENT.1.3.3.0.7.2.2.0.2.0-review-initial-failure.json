@@ -1,0 +1,23 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0-review.py"
+  ],
+  "exit": 1,
+  "producer_sha256": "c6633aadc3a12ee1ccfd1786b13e91f4e29d280228d19c6fa5f2f2e300f19cab",
+  "reviewer_sha256": "e97fac32ab055d6211fbaf0004ad8cb408c74d33b94fa74d173b5fcb0353e9dd",
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 692,
+    "sha256": "78f8d2ce5c4b8ac6d3534ad1f739bd10e9a57b93c4cfd4f2bedd5b707e3ac349",
+    "data": "H4sIAAAAAAAC/82PwU/CMBTG7/wVL1w2km0FhGCIM1lgEBOcJkOPmNI9paFrl7bTcPFvp6sc9OKZ99L0O3z9+vu2mjLcU3aEsFbGgkaG0gKjQoCgxg7mPYAVFwh98qpEW6MhZbkkS8WcltaQD24P7Z4ILo9YmQYZqRQzhB2QHRvFO0v5nC/iTVasX7J1Hpf5ZhUvnopt9lA85sU2GSU3bofJLBm7HXYn1vjJ8StpTv0IXDTCeDKJgEu4q1XVCrx3WAA15TIcePntZre7EtjR7czDdnw/oGg1ZwZS8F+9aWyUtia83JFzSv6OppO0tQelsRpcS5np1Jf5Q+5bUWNQW0CtlYY0hX0QRBBg3dgTUGZbKoCp2lWrwNjK2QL/7DK7X9PLfBRXMu/C5vBPSO8M63/7KbQCAAA="
+  },
+  "scope": "Actual preserved initial reviewer rejection. Original before/after records and supplied inputs remain byte-exact in initial-* snapshots. One baseline seed1 command emitted the known startup .7 setpgid warning; no warning was removed or accepted."
+}

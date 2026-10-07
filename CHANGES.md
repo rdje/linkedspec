@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0 - select private executable source occurrences
+
+Private SourceMembership selects47 of68 original syntactic events per seed across36 authored sources. Complete baseline20 RED groups become41 GREEN groups; eight unchanged consumers pass321 groups. Original event/argument/origin references, source, order, numeric slash/literal receiver authority and caller errors persist. Seventeen evidence controls/four actual bad producers/five supplemental controls reject; 141 prior hashes freeze mode/revision only with five RED. Book58 inputs/35 examples/four chapters/68 RED. Initial setpgid warning and actual reviewer rejection retained; unchanged host remeasurement accepted. Compiler discovery, existing scanners/spec/tests/CI and public substitution remain unchanged. Next: compiler integration .2.1.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1 - accept all producer source provenance
 
 Fresh immutable56c8f38 supplies4745 regular committed inputs/no overlays and26 guarded commands. All174 disjoint selected IDs retain436 events/origins and46 MethodExpr/CSV frames per seed with exact complete previous compiler/callback/origin channels. Seven representatives retain49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed. All29 unchanged suites pass1440 ordered groups;320 effective evidence RED. Original151 hashes freeze mode/revision only with five supplemental RED; book58/32/four chapters/63 RED. Exact staged canonical receipt and normal hooks gate .1.6/private .0.1 closeout; no production/spec/test/policy change. Next: executable membership .0.2 after exact canonical landing.

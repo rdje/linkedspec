@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc` — clean immutable all-producer acceptance activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1 - accept all producer source provenance`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` (pending activation) — executable quoted/pattern membership.
-- next_action: Activate executable quoted/pattern membership .0.2 from the clean canonical committed boundary. Retrieve original quote/mapping counterexamples and exact private producer spans; diagnose/implement only a safely bounded membership slice preserving original arguments, literal receivers, real dependencies and family order. Selected replacement .0.3 and recurring executable repair acceptance .0.4 remain separate; retain other runtime/diagnostic defect owners.
-- in_flight_uncommitted: none after canonical .1.6.1 landing; immutable runtime/book/freeze/claim proof and exact staged canonical receipt/normal hooks enforce intended private parent closeout. Derive current commit from Git; activate .0.2 only from clean committed HEAD.
+- activation_commit: `5f700625ef4bce962285ece583b088c457f2dd63` — clean canonical private-membership activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0 - select private executable source occurrences`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` (pending activation) — compiler source membership integration.
+- next_action: On the next session, activate compiler membership integration .0.2.1 from clean committed HEAD; this session stops at the recovered .2.0 handoff. Read original Toolbox quote/mapping records and EmitContext/Diagnostics consumers; connect actual source-bound selection without changing original arguments or family order. Reproduce public native/fresh improvements and retain exact replacement .0.3, comments .7.3 and other runtime/startup owners. Canonical .2.2 accepts membership afterward.
+- in_flight_uncommitted: none after focused .2.0 landing; private selector remains unused by compiler discovery. Original warning/rejection and approved host remeasurement are retained; startup .7 remains open, recovery/purge prohibited.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

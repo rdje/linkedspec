@@ -1,0 +1,314 @@
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '3'
+    #     expected: '2'
+    # Looks like you failed 2 tests of 18.
+
+#   Failed test 'interleaved_original_mapper'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'double_quote'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'single_quote'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'escaped_double_quote'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'escaped_single_quote'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{raw} = 'set(counter,1)'
+    #     $expected->[0]{raw} = 'set(counter,2)'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '3'
+    #     expected: '2'
+    # Looks like you failed 2 tests of 18.
+
+#   Failed test 'unicode_scalar_crlf'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{condition} = 'true'
+    #     $expected->[0]{args}{condition} = 'false'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'quoted_comment_data'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'backtick_payload_only_scanned'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '16'
+    #     $expected->[0]{source_span}{end} = '33'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'q_pipe'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '17'
+    #     $expected->[0]{source_span}{end} = '34'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'qq_pipe'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'q_braces'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '17'
+    #     $expected->[0]{source_span}{end} = '34'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'qr_slash'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '16'
+    #     $expected->[0]{source_span}{end} = '33'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'm_slash'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{start} = '2'
+    #     $expected->[0]{source_span}{start} = '19'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'q_angle'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{source} = '1'
+    #     $expected->[0]{args}{source} = '2'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '3'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 18.
+
+#   Failed test 'host_substitution_segments'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '17'
+    #     $expected->[0]{source_span}{end} = '49'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '3'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 18.
+
+#   Failed test 'host_translation_segments'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{source_span}{end} = '35'
+    #     $expected->[0]{source_span}{end} = '49'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'helper_pattern'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{args}{condition} = 'true'
+    #     $expected->[0]{args}{condition} = 'false'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'grouped_helper_pattern'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'independent original intervals, arguments and occurrence order'
+    #   at t/actionir_executable_source_membership.t line 38.
+    #     Structures begin differing at:
+    #          $got->[0]{raw} = 'if(true)'
+    #     $expected->[0]{raw} = 'if(false)'
+
+    #   Failed test 'exact selected event population'
+    #   at t/actionir_executable_source_membership.t line 39.
+    #          got: '2'
+    #     expected: '1'
+    # Looks like you failed 2 tests of 14.
+
+#   Failed test 'bare_regex_operand'
+#   at t/actionir_executable_source_membership.t line 51.
+
+    #   Failed test 'invalid authoritative span rejected'
+    #   at t/actionir_executable_source_membership.t line 92.
+
+    #   Failed test 'exact private authority rejection'
+    #   at t/actionir_executable_source_membership.t line 93.
+    #                   ''
+    #     doesn't match '(?^:invalid source authority)'
+
+    #   Failed test 'invalid authoritative span rejected'
+    #   at t/actionir_executable_source_membership.t line 92.
+
+    #   Failed test 'exact private authority rejection'
+    #   at t/actionir_executable_source_membership.t line 93.
+    #                   ''
+    #     doesn't match '(?^:invalid source authority)'
+
+    #   Failed test 'invalid authoritative span rejected'
+    #   at t/actionir_executable_source_membership.t line 92.
+
+    #   Failed test 'exact private authority rejection'
+    #   at t/actionir_executable_source_membership.t line 93.
+    #                   ''
+    #     doesn't match '(?^:invalid source authority)'
+    # Looks like you failed 6 tests of 6.
+
+#   Failed test 'malformed matching-source authority rejects'
+#   at t/actionir_executable_source_membership.t line 95.
+# Looks like you failed 20 tests of 39.
