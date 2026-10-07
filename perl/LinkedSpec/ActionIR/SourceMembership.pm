@@ -16,6 +16,7 @@ sub _literal_source_ranges {
         @{LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($source)};
     my @ranges;
     my $length = length($source);
+    my $in_callable_signature = 0;
     for (my $pos = 0; $pos < $length; ++$pos) {
         my $char = substr($source, $pos, 1);
         # Comment membership has a separate owner. Ignore its quote delimiters
@@ -23,6 +24,19 @@ sub _literal_source_ranges {
         if ($char eq '#') {
             ++$pos while $pos < $length && substr($source, $pos, 1) ne "\n";
             next;
+        }
+        # Match the splitter's exact unquoted {| signature delimiters. Host
+        # quotes already consume their payload before either pipe is reached.
+        # A final parameter named y, q, etc. must not claim the closing pipe.
+        if ($char eq '|') {
+            if ($in_callable_signature) {
+                $in_callable_signature = 0;
+                next;
+            }
+            if ($pos > 0 && substr($source, $pos - 1, 1) eq '{') {
+                $in_callable_signature = 1;
+                next;
+            }
         }
         my $end = LinkedSpec::ActionIR::MethodExpr::_host_quote_end($source, $pos);
         if (!defined($end) && ($char eq '"' || $char eq "'" || $char eq chr(96))) {

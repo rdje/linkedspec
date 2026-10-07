@@ -130,4 +130,59 @@ subtest 'native and independently loaded generated parsers preserve quoted data'
     }
 };
 
+subtest 'callable signature delimiters preserve original executable return origins' => sub {
+    my @rows;
+    for my $name (qw(y tr s q qq qx qr m)) {
+        for my $params ("x,$name", "x,...$name") {
+            push @rows, [$params,
+                'cb={|' . $params . '| return(x) }; return(cb("ok","unused"))',
+                ['return(x)', 'return(cb("ok","unused"))']];
+        }
+    }
+    push @rows,
+        ['zero header', 'cb={|| return("ok") }; return(cb())',
+            ['return("ok")', 'return(cb())']],
+        ['nested header', 'cb={|x,y| inner={|| return(x) }; return(inner()) }; return(cb("ok","unused"))',
+            ['return(x)', 'return(inner())', 'return(cb("ok","unused"))']],
+        ['quoted body data', 'cb={|x,y| return("return(fake); {|q| 雪 }") }; return(cb("ok","unused"))',
+            ['return("return(fake); {|q| 雪 }")', 'return(cb("ok","unused"))']],
+        ['pattern body data', 'cb={|x,y| return(matches("returnfake", /return(fake)/)) }; return(cb("ok","unused"))',
+            ['return(matches("returnfake", /return(fake)/))', 'return(cb("ok","unused"))']];
+    for my $quoted ('"{|x,y| return(fake)}"', "'{|x,y| return(fake)}'",
+                    'q{|x,y| return(fake)}', 'qq{|x,y| return(fake)}',
+                    'qr{|x,y| return(fake)}', 'm{|x,y| return(fake)}',
+                    'q|{\\|x,y\\| return(fake)}|') {
+        push @rows, [$quoted, $quoted . '; return("ok")', ['return("ok")']];
+    }
+    for my $row (@rows) {
+        my ($name, $source, $expected) = @$row;
+        my $contract = {id => 'return_general'};
+        my $syntactic = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events($contract, $source, $deps);
+        my $snapshot = JSON::PP->new->canonical->encode($syntactic);
+        my ($produced, $selected);
+        my $original = \&LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance;
+        {
+            no warnings 'redefine';
+            local *LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance = sub {
+                $produced = $original->(@_);
+                return $produced;
+            };
+            $selected = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events($contract, $source);
+        }
+        is_deeply([map { $_->{raw} } @$selected], $expected,
+            "$name preserves authored executable returns and excludes literal interiors");
+        is(JSON::PP->new->canonical->encode($syntactic), $snapshot,
+            "$name leaves the ordinary syntactic scan unchanged");
+        is($source, $row->[1], "$name retains original source");
+        for my $event (@$selected) {
+            ok(grep({ refaddr($_) == refaddr($event) } @{$produced->{events}}),
+                "$name retains the actual producer event reference");
+            ok(grep({ refaddr($_->{args}) == refaddr($event->{args}) } @{$produced->{events}}),
+                "$name retains the original argument reference");
+            ok(!exists($event->{source_span}) && !exists($event->{source_origins}),
+                "$name keeps the public event schema unchanged");
+        }
+    }
+};
+
 done_testing();

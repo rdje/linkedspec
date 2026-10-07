@@ -1,0 +1,26 @@
+{
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "python3",
+    "-c",
+    "import pathlib,json; p='docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1-'; m={\"__file__\":p+\"review.py\",\"__name__\":\"retained_original_reviewer\"}; raw=pathlib.Path(p+\"initial-review.py\").read_bytes(); exec(compile(raw,p+\"review.py\",\"exec\"),m); manifest=json.loads(pathlib.Path(p+\"before-inputs.json\").read_bytes()); m[\"check_inputs\"](manifest,\"before\",m[\"original_population\"]())"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 1488,
+    "sha256": "b089e1e1de79231bfdfb2bbda4be7316fbb814adfbd35e9d2219ff4f6a313236",
+    "data": "H4sIAAAAAAAC/+1UUU/bMBB+76/w/JJES2060BAtRUNQ0CTWVqPjZWKWk1yoV8e2bIcWIfbb54RSqkrTNInHnaXE8X3+7s65zzPLc8h4vkBxpZ1HFnJQHuVcSiS580m/g9CFkIDwsfNWqLsTnCIpFKBeioRCx5UuagknAYaQqIy2Hhnu51Jk6U+n1QCZYVTo3NF8DvnCaKG8o9fT0Vn36nR8+e30ctS9Hl1ddM8m49np5/GX0XhGemQ/jD1ySD6Esdc+e91ogKrhI2asDPkwhvvmPbZwL2BJzANOg0PxqnWEZc9DjgXTVtwJxSV7BoLFTwNk+XK4zpFMwzsOREIJL7jsvhImxAIvWPbgwcXJAMEK8jjXlQnR40CR7oRv/DhJqwCtuBIlOD9sToBIzQsX7wbMoNQWukKZ2jvSAHciNjzfcXtq7BmFb+MX5nS9H6cBsynSaFNL7kXgug0E7T/5b29rv3btxz/ZRk5vo4mtBnxW5dHHVpbbbdO2QeRqY6QAG/XRelqEdmu65R6Y1/HXyWSWEO5CEzmxipOnzl8r3xS/KYpq4+lcV5BZWNIzkJJbah78XKtP+6R3QJsHOaQXNih1qe3C0WnrJeXLCr0B60IHuxZLg2TWBO3nWkWUsUawjG1VfnC015a+VVRbguXCAbrhsoaRtdrGJX4MV1nsQJbJO/uEhENK+2arn0M4nKwJgnSJWpgOi7bB4aTzStJHb3SplWLlawvER3/OI6I3WtYVhBDX5/Rc52HeBLwTfl5n4YjUAgpnII86vwGT1mlH0AUAAA=="
+  },
+  "original_producer_sha256": "0eb759bfc8b83d84a9ad1545a1d296d3e9e1782f733d0e3cd91531a275dd2efd",
+  "instrument_sha256": "86f64f5ab9433aaea7d5860a5f100b3e93052adbc7e7791a9786670adc67843d",
+  "complete": true,
+  "observed_red": "relative __file__ prefix is not under absolute ROOT"
+}

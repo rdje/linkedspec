@@ -8,13 +8,13 @@ answers:
   - "can equal raw event text authorize source membership"
   - "which tests verify private executable source membership"
 date: 2026-10-07
-status: selector connected to compiler; callable correction and canonical membership acceptance remain open
+status: Compiler integrated and callable signature precedence repaired; canonical membership acceptance remains open
 tags: [perl, actionir, scanner, source-membership, source-span, identity]
-evidence: "The private SourceMembership selector uses actual producer event references and original scalar intervals; the original scanner/source/compiler remain unchanged. The authored fixture includes36 sources plus five authority/error guards. Closed before/after proof and distinguishing actual producer variants are retained under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0."
+evidence: "Original private .2.0 and integrated .2.1 measurements remain historical at their exact boundaries. Focused .0.2.2.1 retains actual original ten-assertion RED, corrected compiler40/new225 assertions per seed, original3 public sources/18 native-fresh values and unchanged sixteen-consumer1473 groups/Phase01035. All318 preceding checkpoint hashes freeze without refresh. Fresh committed canonical .0.2.2.2 remains required."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_executable_source_membership.t"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1-review.py"
 ---
 
 `SourceMembership::_select_executable_source_events` reuses MethodExpr's host
@@ -47,3 +47,5 @@ emitted the known `project_data_run.sh` setpgid warning despite exit0. Exact
 original snapshots and the actual reviewer rejection remain retained; subsequent
 host remeasurement uses the unchanged producer and oracle. The startup defect
 remains owned by `SESSION-STARTUP-READING.7`; recovery/purge are prohibited.
+
+Callable signature precedence is repaired by .0.2.2.1; retrieve [[perl-source-membership-callable-signature-precedence]] for original RED, exact delimiter ownership and full unchanged consumer proof. Prior .0.2.2.0 is historical at484fe128f with all318 original hashes unchanged; do not run its current-root producer against corrected source. Fresh .0.2.2.2 still owns canonical membership acceptance.

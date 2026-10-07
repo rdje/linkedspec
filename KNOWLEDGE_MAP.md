@@ -16696,8 +16696,8 @@ _Perl compiler pipeline validates explicit state before projecting descriptors a
 _Perl compiler helper collection selects original executable occurrences_
 
 - **answers:** where does compiler helper collection exclude quoted source occurrences | does compiler membership change the ordinary syntactic scanner API | why can a repaired quoted literal still have unresolved helper diagnostics | which tests prove compiler membership and native fresh quoted values
-- **date:** 2026-10-07 · **status:** compiler integrated; callable signature correction and canonical acceptance remain open
-- **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 retains original public producers, before/after channels and literal oracles/RED. Independent .0.2.2 recurrence reconstructs clean864b1a939 without overlays, preserves every public channel and original consumer plan, within the original bounded population. Canonical CI exposes a callable signature membership regression; acceptance remains open. Later source repairs and backend admission remain separate.`
+- **date:** 2026-10-07 · **status:** Compiler integrated and callable signature precedence repaired; canonical membership acceptance remains open
+- **evidence:** `Original private .2.0 and integrated .2.1 measurements remain historical at their exact boundaries. Focused .0.2.2.1 retains actual original ten-assertion RED, corrected compiler40/new225 assertions per seed, original3 public sources/18 native-fresh values and unchanged sixteen-consumer1473 groups/Phase01035. All318 preceding checkpoint hashes freeze without refresh. Fresh committed canonical .0.2.2.2 remains required.`
 - **source:** [`docs/knowledge/perl-compiler-source-membership.md`](docs/knowledge/perl-compiler-source-membership.md)
 
 ### perl-dedicated-family-source-acceptance
@@ -16809,8 +16809,8 @@ _Perl emptiness lowering treats quoted zero differently from a bound value and r
 _Private Perl source selection requires original event-bound scalar authority_
 
 - **answers:** how are helper-looking quoted occurrences excluded from executable membership | does the source membership selector change compiler discovery | why must a literal receiver quote opener remain executable | can equal raw event text authorize source membership | which tests verify private executable source membership
-- **date:** 2026-10-07 · **status:** selector connected to compiler; callable correction and canonical membership acceptance remain open
-- **evidence:** `The private SourceMembership selector uses actual producer event references and original scalar intervals; the original scanner/source/compiler remain unchanged. The authored fixture includes36 sources plus five authority/error guards. Closed before/after proof and distinguishing actual producer variants are retained under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.`
+- **date:** 2026-10-07 · **status:** Compiler integrated and callable signature precedence repaired; canonical membership acceptance remains open
+- **evidence:** `Original private .2.0 and integrated .2.1 measurements remain historical at their exact boundaries. Focused .0.2.2.1 retains actual original ten-assertion RED, corrected compiler40/new225 assertions per seed, original3 public sources/18 native-fresh values and unchanged sixteen-consumer1473 groups/Phase01035. All318 preceding checkpoint hashes freeze without refresh. Fresh committed canonical .0.2.2.2 remains required.`
 - **source:** [`docs/knowledge/perl-executable-source-membership.md`](docs/knowledge/perl-executable-source-membership.md)
 
 ### perl-final-codeblock-signature-declaration-gap
@@ -17671,11 +17671,11 @@ _Perl source slicing preserves host compatibility outside validated typed bounds
 - **source:** [`docs/knowledge/perl-source-location-slice-compatibility.md`](docs/knowledge/perl-source-location-slice-compatibility.md)
 
 ### perl-source-membership-callable-signature-precedence
-_Compiler source membership misreads a callable signature closer as a host quote_
+_Callable signature pipes precede host-quote suffix recognition in compiler membership_
 
 - **answers:** why does x,y codeblock invocation fail after compiler source membership integration | why does SourceMembership mask the return after a callable signature | is the callable signature pipe regression in the splitter or source membership | which task owns callable signature membership precedence repair
-- **date:** 2026-10-07 · **status:** Observed compiler regression; repair .0.2.2.1 and canonical acceptance .0.2.2.2 remain open
-- **evidence:** `The second exact .0.2.2 canonical candidate passes doctrines and historical recovery, then fails the unchanged callable fixture at x,y. Three original ToolBox/public sources preserve typed AST/signatures. x,y fails natively and freshly emitted; x,z and x,...y return ok. The real compiler packet shows original return spans10..19 and23..48 excluded by one literal range8..48. Five independently checked observation corruptions reject; original failed CI/candidate and complete source/AST/substitution/dump/emitted/value/error channels are retained.`
+- **date:** 2026-10-07 · **status:** Focused repair verified; fresh committed canonical acceptance .0.2.2.2 remains open
+- **evidence:** `Exact 484fe128f regular Git input snapshots plus declared common fixture/probe overlays supply 4920 inputs before and 4920 after; only the after tree replaces SourceMembership. Fourteen complete guarded commands retain original compiler RED and corrected GREEN under seeds0/1/42. All original39 compiler groups stay intact; the new27-row signature group fails ten authored assertions before and passes225 after, reaching40 total groups per seed. Original x,y fails native/fresh before; all three original public sources return ok on both routes under all three seeds (18 values), with identical source/typed AST and all healthy x,z/rest-y channels unchanged. The unchanged callable fixture loads generated source before its original execution abort, then passes all11 groups after. Sixteen unchanged consumers pass1473 ordered groups including full Phase01035. Twenty-one effective evidence controls/five historical controls/seven publication controls reject; all318 prior checkpoint hashes freeze mode/revision only. Full book58-input render preserves four exact examples. The new reviewer's relative-runpy prefix rejection and original bytes are retained, followed by absolute-prefix correction. MethodExpr, StatementSplit, original callable fixture, public schema/dependencies/CI/hooks remain unchanged. Focused repair is complete; fresh committed canonical .0.2.2.2 remains required before membership closure. Replacement, diagnostic origin and comments retain their owners.`
 - **source:** [`docs/knowledge/perl-source-membership-callable-signature-precedence.md`](docs/knowledge/perl-source-membership-callable-signature-precedence.md)
 
 ### perl-sparse-and-structural-slots

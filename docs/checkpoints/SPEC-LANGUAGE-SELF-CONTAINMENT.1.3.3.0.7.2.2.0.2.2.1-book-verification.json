@@ -1,0 +1,35 @@
+{
+  "book_inputs": 58,
+  "exact_examples": 4,
+  "controls": [
+    {
+      "name": "failed render",
+      "observed_red": "actual render completion"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "publication input guards"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "lost exact examples",
+      "observed_red": "original runtime examples"
+    },
+    {
+      "name": "hidden diagnostic owner",
+      "observed_red": "repair teaching: compiler-marker diagnostic origin"
+    },
+    {
+      "name": "hidden signature correction",
+      "observed_red": "repair teaching: Callable signature delimiters now retain their existing lexical ownership"
+    },
+    {
+      "name": "hidden canonical boundary",
+      "observed_red": "repair teaching: Compiler membership acceptance remains open until fresh committed canonical verification"
+    }
+  ],
+  "instrument_sha256": "ebff83fda80b41c1fde4671d299da108f42f8d1bd8eeb922ae1f7935f76a0ac4"
+}

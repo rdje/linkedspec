@@ -811,11 +811,22 @@ Top:: I { return(matches("if(true)", /if\(true\)/)) }
 ```
 
 Independent committed recurrence verifies the bounded membership fixtures.
-Compiler membership acceptance remains open: the existing callable regression
-shows that a signature ending in `y|` can mask the following return as host quote
-data, leaving an undefined `cb` call in native and independently emitted execution.
-The signature membership repair and fresh canonical acceptance are owned before
-membership closeout. The earlier statement-splitter signature repair still holds.
+Callable signature delimiters now retain their existing lexical ownership in
+the compiler selector. A final parameter named `y`, `tr`, `s`, `q`, `qq`, `qx`,
+`qr` or `m` cannot turn the closing signature pipe into a host quote opener.
+The same rule applies to fixed and rest parameters; genuine quoted payloads
+still keep their own delimiters and data interiors. For example:
+
+```spec
+Top:: I { cb={|x,y| return(x) }; return(cb("ok","unused")) }
+# result: "ok"
+```
+
+The original typed signature, inert body and real return origins are preserved
+on native and independently emitted routes. This corrects the undefined `cb`
+failure caused by the private membership range scan. The earlier
+statement-splitter signature repair still holds. Compiler membership acceptance
+remains open until fresh committed canonical verification completes.
 This checkpoint does not close exact selected-occurrence replacement, source
 comments or compiler-marker diagnostic origin. Mixed equal literal/executable
 spellings still need the replacement repair. The private fixture covers 36

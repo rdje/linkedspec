@@ -1,0 +1,148 @@
+{
+  "complete": true,
+  "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+  "epochs": {
+    "before": {
+      "commands": 7,
+      "controlled_seeds": [
+        0,
+        1,
+        42
+      ],
+      "compiler": {
+        "groups": 40,
+        "header_rows": 27,
+        "header_assertions": 165,
+        "failed_assertions": 10
+      },
+      "supplied_inputs": 4920
+    },
+    "after": {
+      "commands": 7,
+      "controlled_seeds": [
+        0,
+        1,
+        42
+      ],
+      "compiler": {
+        "groups": 40,
+        "header_rows": 27,
+        "header_assertions": 225,
+        "failed_assertions": 0
+      },
+      "consumers": {
+        "files": 16,
+        "groups": 1473,
+        "plans": [
+          41,
+          191,
+          23,
+          15,
+          13,
+          16,
+          28,
+          15,
+          20,
+          4,
+          16,
+          6,
+          27,
+          12,
+          11,
+          1035
+        ]
+      },
+      "supplied_inputs": 4920
+    }
+  },
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "observed_red": "complete epoch capture"
+    },
+    {
+      "name": "missing command",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "reordered commands",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "forged producer",
+      "observed_red": "actual capture producer"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "complete unchanged input guards"
+    },
+    {
+      "name": "nonzero compiler",
+      "observed_red": "actual compiler RED/GREEN exit"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "nested failure",
+      "observed_red": "complete original nested compiler reach"
+    },
+    {
+      "name": "lost header assertions",
+      "observed_red": "all authored source/reference assertions pass"
+    },
+    {
+      "name": "truncated header assertion",
+      "observed_red": "complete authored header assertion reach"
+    },
+    {
+      "name": "forged source",
+      "observed_red": "original public source"
+    },
+    {
+      "name": "forged AST",
+      "observed_red": "original block AST"
+    },
+    {
+      "name": "lost actual origins",
+      "observed_red": "actual producer origins"
+    },
+    {
+      "name": "forged value",
+      "observed_red": "authored native/fresh value oracle"
+    },
+    {
+      "name": "forged fresh value",
+      "observed_red": "authored native/fresh value oracle"
+    },
+    {
+      "name": "signature still masked",
+      "observed_red": "only real quoted data ranges"
+    },
+    {
+      "name": "lost Phase0 plan",
+      "observed_red": "complete original consumer plans"
+    },
+    {
+      "name": "lost supplied input",
+      "observed_red": "exact complete supplied input population"
+    },
+    {
+      "name": "forged production hash",
+      "observed_red": "exact complete supplied input population"
+    },
+    {
+      "name": "unreported overlay",
+      "observed_red": "sole declared overlays and excluded metadata"
+    },
+    {
+      "name": "unrelated production delta",
+      "observed_red": "sole production delta"
+    }
+  ],
+  "public_source_seed_pairs": 9,
+  "fresh_and_native_values": 18,
+  "original_value_red_pairs": 3,
+  "instrument_sha256": "11e9887b5245596e75a07bce03b754a02f412a2022f5d4a40e5a3bfd57b3eebc"
+}

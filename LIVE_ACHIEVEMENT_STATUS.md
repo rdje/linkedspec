@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: bounded membership proof retained; callable signature repair and fresh canonical acceptance precede replacement.
+Full PNT: callable signature membership repaired; fresh committed canonical acceptance precedes exact residual replacement.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — Exact 484fe128f regular Git input snapshots plus declared common fixture/probe overlays supply 4920 inputs before and 4920 after; only the after tree replaces SourceMembership. Fourteen complete guarded commands retain original compiler RED and corrected GREEN under seeds0/1/42. All original39 compiler groups stay intact; the new27-row signature group fails ten authored assertions before and passes225 after, reaching40 total groups per seed. Original x,y fails native/fresh before; all three original public sources return ok on both routes under all three seeds (18 values), with identical source/typed AST and all healthy x,z/rest-y channels unchanged. The unchanged callable fixture loads generated source before its original execution abort, then passes all11 groups after. Sixteen unchanged consumers pass1473 ordered groups including full Phase01035. Twenty-one effective evidence controls/five historical controls/seven publication controls reject; all318 prior checkpoint hashes freeze mode/revision only. Full book58-input render preserves four exact examples. The new reviewer's relative-runpy prefix rejection and original bytes are retained, followed by absolute-prefix correction. MethodExpr, StatementSplit, original callable fixture, public schema/dependencies/CI/hooks remain unchanged. Focused repair is complete; fresh committed canonical .0.2.2.2 remains required before membership closure. Replacement, diagnostic origin and comments retain their owners.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committed HEAD. Preserve the original callable RED and correct only exact unquoted signature pipe precedence in SourceMembership. Verify unchanged callable/private/compiler and direct consumers before committing. Fresh committed canonical .0.2.2.2 precedes membership closure and precise replacement .0.3.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2 from clean committed corrected HEAD. Independently recur the original compiler/public membership population plus callable regression with no production overlays; run exact staged canonical CI and normal hooks before closing membership .0.2. Then proceed to exact selected residual replacement .0.3. Preserve historical claims and their original hashes; diagnostic origin .7.2.2.1, recurring .0.4 and comments .7.3 remain owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — callable signature RED10/GREEN225; compiler40/18 values/direct1473 groups; canonical acceptance next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
 - `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
@@ -29,7 +30,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committ
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` — EOF/recovery/audit; RED12-GREEN41/153 + audit20 evidence denials.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — mark14;105→133 origins/RED14-GREEN81/1259 groups/148 RED.
 
 ## History
 

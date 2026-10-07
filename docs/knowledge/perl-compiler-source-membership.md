@@ -7,13 +7,13 @@ answers:
   - "why can a repaired quoted literal still have unresolved helper diagnostics"
   - "which tests prove compiler membership and native fresh quoted values"
 date: 2026-10-07
-status: compiler integrated; callable signature correction and canonical acceptance remain open
+status: Compiler integrated and callable signature precedence repaired; canonical membership acceptance remains open
 tags: [perl, actionir, compiler, source-membership, diagnostics, provenance]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 retains original public producers, before/after channels and literal oracles/RED. Independent .0.2.2 recurrence reconstructs clean864b1a939 without overlays, preserves every public channel and original consumer plan, within the original bounded population. Canonical CI exposes a callable signature membership regression; acceptance remains open. Later source repairs and backend admission remain separate."
+evidence: "Original private .2.0 and integrated .2.1 measurements remain historical at their exact boundaries. Focused .0.2.2.1 retains actual original ten-assertion RED, corrected compiler40/new225 assertions per seed, original3 public sources/18 native-fresh values and unchanged sixteen-consumer1473 groups/Phase01035. All318 preceding checkpoint hashes freeze without refresh. Fresh committed canonical .0.2.2.2 remains required."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_compiler_source_membership.t t/actionir_executable_source_membership.t"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1-review.py"
 ---
 
 EmitContext::_scan_contract_ir_events delegates to the compiler-only
@@ -67,3 +67,5 @@ an expected value for the two unassessed controls; its KeyError is retained and
 recurred independently. These do not establish product defects or authorize
 suppressing diagnostics. The known wrapper startup warning retains startup .7;
 no recovery or purge is authorized.
+
+Callable signature precedence is repaired by .0.2.2.1; retrieve [[perl-source-membership-callable-signature-precedence]] for original RED, exact delimiter ownership and full unchanged consumer proof. Prior .0.2.2.0 is historical at484fe128f with all318 original hashes unchanged; do not run its current-root producer against corrected source. Fresh .0.2.2.2 still owns canonical membership acceptance.
