@@ -7,12 +7,13 @@ answers:
   - "why can a repaired quoted literal still have unresolved helper diagnostics"
   - "which tests prove compiler membership and native fresh quoted values"
 date: 2026-10-07
-status: compiler integration implemented; canonical acceptance and later source repairs pending
+status: compiler integrated; callable signature correction and canonical acceptance remain open
 tags: [perl, actionir, compiler, source-membership, diagnostics, provenance]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 retains original public quote/mapping producers, immutable input manifests, complete before/after channels, independent original literal oracles and actual before-owner RED. The final reviewer binds complete compiler/direct-consumer TAP and observed evidence RED; no parent closeout or backend admission follows."
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 retains original public producers, before/after channels and literal oracles/RED. Independent .0.2.2 recurrence reconstructs clean864b1a939 without overlays, preserves every public channel and original consumer plan, within the original bounded population. Canonical CI exposes a callable signature membership regression; acceptance remains open. Later source repairs and backend admission remain separate."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_compiler_source_membership.t t/actionir_executable_source_membership.t"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
 ---
 
 EmitContext::_scan_contract_ir_events delegates to the compiler-only
@@ -47,7 +48,17 @@ Unresolved-pattern scanning still examines lowered text. Preserving helper-looki
 data can therefore expose an unresolved-helper count that corruption previously
 removed. A correct value is not readiness acceptance. Diagnostic marker/text
 origin remains .7.2.2.1-owned, precise residual replacement .0.3-owned, and source
-comments .7.3-owned. Membership parent acceptance remains .0.2.2.
+comments .7.3-owned. Independent committed recurrence .0.2.2.0 verifies its bounded original
+population. [[perl-source-membership-callable-signature-precedence]] owns the
+new callable regression; corrective .0.2.2.1 and committed canonical .0.2.2.2
+are required before membership acceptance.
+Its immutable activation inputs contain no overlays or production replacements;
+the earlier .2.1 claim remains historical ataf5d19971. Recur the new .2.2
+reviewer for current acceptance rather than refreshing the old publication inputs.
+Actual working permissions are separate from Git executable mode; retrieve
+[[project-root-evidence-filesystem-modes]] before checking current-root inputs.
+The immutable capture normalizes and guards full snapshot permissions. Acceptance
+checks original root bytes and Git executable bits without chmod.
 
 Initial test identity/regex expectations and a book review of smart apostrophes
 were instrument errors. Their original producers, rejected channels and exact

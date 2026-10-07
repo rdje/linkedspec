@@ -8,12 +8,13 @@ answers:
   - "can equal raw event text authorize source membership"
   - "which tests verify private executable source membership"
 date: 2026-10-07
-status: selector connected to compiler; canonical membership acceptance pending
+status: selector connected to compiler; callable correction and canonical membership acceptance remain open
 tags: [perl, actionir, scanner, source-membership, source-span, identity]
 evidence: "The private SourceMembership selector uses actual producer event references and original scalar intervals; the original scanner/source/compiler remain unchanged. The authored fixture includes36 sources plus five authority/error guards. Closed before/after proof and distinguishing actual producer variants are retained under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_executable_source_membership.t"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
 ---
 
 `SourceMembership::_select_executable_source_events` reuses MethodExpr's host

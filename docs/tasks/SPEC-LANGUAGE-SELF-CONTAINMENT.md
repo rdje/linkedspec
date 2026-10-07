@@ -3374,6 +3374,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Safe-slice split: Establish a private source-membership selector against actual producer origins first; separately connect the compiler collector and independently accept its public behavior. Keep original syntactic scans, literal arguments, callback bindings and family order. Exact residual replacement remains .0.3; actual source-comment classification remains .7.3.
   Acceptance: Reuse existing quote/host-quote/helper-pattern/slash-call contracts, retain original arguments, genuine literal receivers and true dependencies; no globally masked parsing or inferred raw-key pairing. Replay exact quoted/repeated/order guards and direct consumers before committing.
 
+  Closeout: Open. Original bounded recurrence does not close the callable signature compatibility defect; corrective .0.2.2.1 and exact committed canonical .0.2.2.2 are required.
+
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0`
   Status: `done`
   Goal: Implement private executable source membership without changing compiler discovery.
@@ -3432,10 +3434,71 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Current claim/Knowledge/book/task/index/roadmaps/live/resume/history agree; original116 hashes, all rejected instruments and two-failure replay survive. Canonical .2.2 remains separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Independently accept committed executable membership through exact canonical proof.
   Dependencies: `.1.3.3.0.7.2.2.0.2.1`
+  Activation: Clean864b1a93934ab7fd4b059b0a7cb9d4b417e33c66; hooks installed, no modified/untracked inputs or required jobs. README/bootstrap/memory, original source-membership and compiler records, unchanged literal/public fixtures, scanner/compiler interfaces, roadmap and ActionIR teaching reviewed. Artifact census is current. Supplied README/claim/containment policy hashes remain identical to their recorded comparison; other repositories remain read-only.
+  Owned paths: New leaf-prefixed immutable capture/reviewer/control/claim/publication evidence under docs/checkpoints/, docs/claims/ leaf record and current Knowledge/book/task/index/roadmaps/live/resume/change/notes. Also own tests/language-readiness/verify_objectives.py for the exact historical scanner-mock inverse and its falsifiers. Production, original Perl fixtures/producers, dependencies, CI and hooks remain unchanged.
+  Owned instrument correction: The first historical review incorrectly assumed the compiler claim remained live at864b1a939. REPO-HYGIENE.11 already froze it ataf5d19971. Preserve the initial script and actual assertion rejection; corrected review verifies all133 original historical hashes and exact mode/revision-only change without mutating or re-freezing the claim. Five effective historical corruptions reject. This is a new review-instrument error, not a compiler defect or claim refresh.
+  Owned mode-check correction: The first complete reviewer rejected unchanged perl/LinkedRE.pm because its working filesystem permissions are0640 while Git records100644. This already documented fact is canonical in docs/knowledge/project-root-evidence-filesystem-modes.md; the added root guard failed to retrieve it before repeating the invalid comparison. Full permission comparison is invalid for the current working tree; Git preserves executable/nonexecutable mode, whereas the reconstructed snapshot deliberately normalizes complete permissions. Retain the original reviewer/actual rejection, verify all original bytes and Git executable modes, and keep exact full snapshot permissions in the before/after input guard. No production mode or test source is changed.
+  Owned control correction: The complete reviewer correctly stopped on an unrejected renamed-consumer control. Its first byte replacement changed an indented nested assertion, not the claimed top-level group. Preserve that reviewer and actual rejection; anchor the mutation at the start of the top-level TAP line, then independently require the original group order and observed RED. Original consumer streams and oracles remain unchanged.
+  Retention identity correction: Direct execution of a renamed original review changes its __file__-derived artifact prefix and rejects before reaching the intended old failure. Preserve that actual filename rejection, then execute the retained exact source with its original __file__ identity. This restores original artifact lookup without callback, source-body or observation substitution; actual mode and ineffective-control rejections recur.
+  Blocking canonical defect / owned repair: First exact staged canonical run fails the required isolated historical-audit proof at verify_objectives.py::verify_signature_regression_evolution with unreviewed signature-regression drift: t/phase0_regression.t. The committed .2.1 mock-entry correction is absent from that exact source-evolution ledger. Own tests/language-readiness/verify_objectives.py's surgical Git-bound inverse and distinguishing omission/duplication/disabled/extra-edit denials here, before membership closeout; original milestone/claim/input/log bytes and all production/standard Perl tests remain unchanged. The .0.4 ledger reconciliation was sequenced too late for this canonical dependency; .0.4 still owns later recurring registrations. Retain the complete failed canonical stream and original verifier, prove only the af5d/31395 one-line delta with historical reconstruction and observed RED/GREEN, then rerun exact staged canonical CI. No blanket signature waiver or source-hash refresh.
   Acceptance: Fresh immutable membership recurrence, original literal/occurrence/slash/receiver/raw/control oracles and direct consumers, effective evidence/publication controls and source retention, exact staged canonical receipt and normal hooks before closing membership .0.2. Selected replacement .0.3 and recurring parent acceptance .0.4 remain separate.
+
+  Verified focused result: Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
+  Canonical landing condition: Membership acceptance remains open. Child .0 retains the original bounded proof; .1 corrects the callable regression; .2 independently accepts the committed correction with exact canonical proof.
+  Next: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committed HEAD. Preserve the original callable RED and correct only exact unquoted signature pipe precedence in SourceMembership. Verify unchanged callable/private/compiler and direct consumers before committing. Fresh committed canonical .0.2.2.2 precedes membership closure and precise replacement .0.3.
+
+- [x] **REPRODUCE / ISSUE** — Original independently authored literal/argument/occurrence and public-source oracles recur without overlays; original38-group compiler RED retains all three seeds.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Compiler selection uses actual source-bound producer origins; original literal arguments, receiver openers, order, dependencies and caller errors remain fixture authority.
+- [ ] **FIX** — Acceptance preserves every production and Perl-test input. The historical evidence auditor adds only the Git-bound inverse of the committed scanner mock; original historical source/hash authority remains exact.
+- [x] **ADDRESSED (verified)** — Complete compiler39 and original22 public sources recur under seeds0/1/42; all60 source/seed value pairs match on both routes (120 native/fresh checks); two no-oracle cases remain explicit.
+- [ ] **NO REGRESSION** — Fifteen unchanged suites reach1462 ordered groups including complete Phase01035; 17 evidence controls reject. Exact staged canonical receipt and normal hooks gate membership landing.
+- [ ] **LOCKSTEP** — Initial book58/3 examples/5 RED survives in the failed candidates; checkpoint .0 publishes six current render controls and the callable blocker. Original133 historical hashes/5 RED stay exact. Corrective/final parent lockstep remains open.
+
+  Verified canonical-blocker repair: Original auditor reproduces unreviewed signature-regression drift on the committed Phase0 source. The new exact af5d/31395 one-line inverse reconstructs the complete historical source; five missing/duplicate/disabled/foreign/extra-edit controls reject. Complete isolated historical replay restores134 inputs/84,613,241 bytes, passes22 recovery controls and60 evolution denials, and records zero healthy original-log reads/tracked writes. Retained failed-canonical.json includes the complete initial CI stream and exact staged binary patch; before-historical-verifier.py preserves the original producer. No prior historical measurement is refreshed.
+
+  Second canonical blocker / owned diagnosis: The corrected exact candidate passes all ten doctrines and the historical audit, then fails t/callable_codeblock_literal_contract.t's operator-named signature subtest: x,y native result is undef rather than ok, last_error is set, and generated emission exits255 after four groups. Own the complete second failed CI/candidate and original ToolBox substitution/descriptor/generated-source repro before diagnosing source authority. No fixture expectation change or test waiver is permitted. If compiler repair is required, split a safe corrective prerequisite under this acceptance leaf, preserve the original immutable measurement as historical evidence, and remeasure the corrected compiler before canonical membership closure. No task-tree pivot or uncommitted handoff.
+
+  Callable diagnosis instrument correction: Initial direct ScannerCore probe exits255 before public observation; exact retained-source replay attributes this to missing callback LinkedSpec::_split_action_ir_statements in the supplied facade bundle. Retain original producer/capture. Correct only the observer to intercept the real SourceMembership selection during public substitution, delegate exactly once to the unchanged original callback and retain actual source/event/argument references; no replacement dependency map or product override.
+
+  Decomposition: Two exact failed candidates are retained; no successful canonical receipt exists. Completed measurement/evidence-auditor work lands only as focused child .0. Corrective .1 and immutable canonical .2 keep this parent and membership .0.2 open. No verification policy or failure is bypassed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0`
+  Status: `done`
+  Goal: Retain bounded immutable membership recurrence, exact historical-auditor repair and the newly exposed callable regression without closing membership.
+  Activation: Clean864b1a93934ab7fd4b059b0a7cb9d4b417e33c66; decomposition of the same active acceptance activity after two retained canonical failures, without a task-tree pivot.
+  Owned paths: All current .0.2.2-prefixed checkpoint/capture/control/publication artifacts; this child claim record; tests/language-readiness/verify_objectives.py's exact committed Phase0 scanner-mock inverse; current task/index/roadmaps/Knowledge/book/live/resume/change/notes. Production, Perl fixtures, CI, hooks and dependencies remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Retained complete immutable70-command compiler/public/direct-consumer measurement and original RED/evidence controls; exact historical source inverse and five denials/isolated recovery; complete failed canonical streams and staged candidate patches; public ToolBox/native/fresh/AST/substitution/source-range callable diagnosis and effective observation controls. Book render, claim/memory/Knowledge/history/diff and normal doctrines/hooks.
+  Canonical trigger: None for this bounded proof checkpoint and evidence-auditor correction; no parent/admission closure or successful canonical measurement is claimed. Known compiler signature regression is owned by .0.2.2.1 and corrected committed acceptance by .0.2.2.2 before any membership closure.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json`
+  Acceptance: Preserve all original completed measurements and actual rejected instruments, publish the observed compatibility defect honestly, retain the exact whole-file historical inverse and reject unrelated changes. Leave membership parent and independent acceptance active; commit this finished checkpoint before corrective production work.
+
+  Verified focused result: Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0 - retain bounded membership proof` (Git owns identity).
+  Next: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committed HEAD. Preserve the original callable RED and correct only exact unquoted signature pipe precedence in SourceMembership. Verify unchanged callable/private/compiler and direct consumers before committing. Fresh committed canonical .0.2.2.2 precedes membership closure and precise replacement .0.3.
+
+- [x] **REPRODUCE / ISSUE** — Original bounded immutable source/AST/value/consumer streams and both failed canonical candidates survive; public x,y fails both routes, x,z/rest-y return ok.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Real original spans show the y| signature closer starts literal range8..48 and filters the real return at23..48; AST/splitter typed signature remains correct. SourceMembership host-quote precedence owns repair.
+- [x] **FIX** — Historical evidence auditor reverses only the committed af5d/31395 scanner-mock line and recovers complete historical bytes; five source controls reject. Production compatibility repair remains separately owned.
+- [x] **ADDRESSED (verified)** — Bounded compiler39/public66/120 route values/direct1462 and original RED/evidence controls pass; isolated134-input audit and actual callable diagnosis/five controls pass. No membership closure is inferred.
+- [x] **NO REGRESSION** — Production, Perl fixtures, CI, hooks and dependencies stay unchanged. Exact historical source/hash authority persists; original known callable RED is retained and scheduled for the next leaf.
+- [x] **LOCKSTEP** — Rendered book58/three exact examples/six controls, claim/Knowledge/task/index/roadmaps/live/resume and bounded histories disclose the same open parent/corrective frontier.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1`
+  Status: `pending`
+  Goal: Preserve callable signature pipe precedence in private compiler source membership.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.2.0`
+  Candidate owners: SourceMembership literal-range scan and its compiler/private regression; preserve MethodExpr and StatementSplit, original callable fixture, public source/event/argument/schema/order and dependency/error contracts.
+  Acceptance: Original x,y is typed correctly but the membership range from the signature closer consumes the return tail; native/fresh return undef with undefined cb. Preserve exact unquoted callable signature delimiters ahead of generic host-quote suffix recognition while respecting genuine host-quote openers. Verify fixed/rest y/tr/s/q/qq/qx/qr/m, zero/nested/quoted headers, genuine host quotes, unchanged typed errors and literal receivers. Preserve original source/AST/signature/values and real producer origins, retain before RED and new GREEN, direct consumers and appropriate complete Phase0, then commit. Parent acceptance stays open.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2`
+  Status: `pending`
+  Goal: Independently accept corrected committed compiler membership through exact canonical proof.
+  Dependencies: `.1.3.3.0.7.2.2.0.2.2.1`
+  Acceptance: Fresh immutable committed inputs without production overlays; original membership/literal/public-channel/value/source authority plus callable signature regression and unchanged direct consumers. Effective evidence controls, source retention, teaching and exact staged canonical receipt/normal hooks close .0.2.2 and membership .0.2 only. Precise replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3`
   Status: `pending`
@@ -3448,6 +3511,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Goal: Admit recurring executable source-ownership proof and independently compose this repair.
   Dependencies: `.1.3.3.0.7.2.2.0.3`
   Acceptance: Install the preserved diagnostic fixture as a green recurring test, register exact tracked/syntax/execution CI slots and reconcile only their source-bound historical consumer. Preserve before bytes and execute omitted/duplicate/disabled/extra-edit rejections; complete native/fresh compatibility, public book, unchanged consumers and exact staged canonical acceptance. Close executable parent .0 only; diagnostic origin .7.2.2.1 remains next.
+
+  Dependency correction: The already committed Phase0 compiler-mock inverse is verified by .0.2.2.0 because it blocks canonical membership acceptance. This leaf still owns only its later recurring-registration historical reconciliation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1`
   Status: `pending`
@@ -3748,7 +3813,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `active` | Private membership, compiler integration and independent canonical acceptance. |
 | 43.4.2.0.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` | `done` | Private selector with original intervals, arguments and receiver/slash guards. |
 | 43.4.2.0.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` | `done` | Compiler39/originalRED38; five native/fresh repairs and1462 direct groups; numeric newline compatibility preserved. |
-| 43.4.2.0.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2` | `pending` | Immutable membership recurrence and exact canonical acceptance. |
+| 43.4.2.0.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2` | `active` | Original bounded proof retained; callable correction and fresh canonical acceptance remain. |
+| 43.4.2.0.2.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` | `done` | Immutable proof/historical inverse/callable RED retained. |
+| 43.4.2.0.2.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` | `pending` | Correct callable signature membership precedence. |
+| 43.4.2.0.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2` | `pending` | Independently accept corrected committed membership. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
@@ -3789,6 +3857,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October7 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2`: Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
 
 October7 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1`: Compiler membership passes39 groups under seeds0/1/42 against original38 RED. Original22 public sources/ASTs remain exact; five native/fresh value repairs match all20 authored expected values, with unsupported_nested/raw_operand explicitly unassessed. Fifteen direct consumers pass1462 groups including Phase01035 after the retained two-failure replay, bounded numeric slash/newline correction and exact mock-entry update. Seven evidence/five historical/five publication controls reject; original116 hashes freeze mode/revision only. Book58 inputs/three examples passes. Diagnostic origin, precise replacement and canonical membership acceptance remain open.
 
@@ -3879,6 +3949,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0 - retain bounded membership proof` — bounded focused proof checkpoint; original parent stays open. Git owns identity.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1 - connect compiler source membership` — focused proof and normal hooks gate landing; Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family` — exact staged canonical receipt and normal hooks gate dedicated-family closure.
@@ -3950,6 +4022,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-07`: .0.2.2 decomposes after retained canonical historical-audit and callable failures: .0 retains bounded proof/inverse, .1 owns compiler signature correction, .2 requires fresh committed canonical acceptance.
 
 - `2026-10-07`: .0.2.1 connects compiler membership, repairs retained Phase0 numeric-newline/mock regressions and verifies five original native/fresh value improvements. Due hygiene precedes immutable canonical .2.2.
 

@@ -810,7 +810,13 @@ Top:: I { return(matches("if(true)", /if\(true\)/)) }
 # result: 1
 ```
 
-This integration does not close exact selected-occurrence replacement, source
+Independent committed recurrence verifies the bounded membership fixtures.
+Compiler membership acceptance remains open: the existing callable regression
+shows that a signature ending in `y|` can mask the following return as host quote
+data, leaving an undefined `cb` call in native and independently emitted execution.
+The signature membership repair and fresh canonical acceptance are owned before
+membership closeout. The earlier statement-splitter signature repair still holds.
+This checkpoint does not close exact selected-occurrence replacement, source
 comments or compiler-marker diagnostic origin. Mixed equal literal/executable
 spellings still need the replacement repair. The private fixture covers 36
 authored sources and five authority/error guards; its scanner cases do not admit

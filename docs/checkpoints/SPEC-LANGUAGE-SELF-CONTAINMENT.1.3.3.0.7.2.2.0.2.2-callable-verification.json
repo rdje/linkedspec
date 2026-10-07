@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "sources": 3,
+  "observed_bad_pairs": [
+    "x,y"
+  ],
+  "observed_healthy_pairs": [
+    "x,z",
+    "x,...y"
+  ],
+  "controls": [
+    {
+      "name": "fabricated healthy value",
+      "observed_red": "authored source/value/origin authority rejected"
+    },
+    {
+      "name": "lost real tail origin",
+      "observed_red": "actual original compiler origins"
+    },
+    {
+      "name": "wrong selected tail",
+      "observed_red": "authored source/value/origin authority rejected"
+    },
+    {
+      "name": "forged signature",
+      "observed_red": "authored source/value/origin authority rejected"
+    },
+    {
+      "name": "forged fresh success",
+      "observed_red": "authored source/value/origin authority rejected"
+    }
+  ],
+  "initial_empty_origin_observer_red": "actual original compiler origins",
+  "initial_direct_call_exit": 255,
+  "failed_candidate_sha256": "a3a0452f4d79efc55babd211749284a770a2890686095452e4849f9ba5f65fab",
+  "initial_direct_call_replay": {
+    "command": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "perl",
+      "-Iperl",
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-initial-callable-replay.pl"
+    ],
+    "exit": 0,
+    "stdout": {
+      "encoding": "gzip-base64",
+      "bytes": 186,
+      "sha256": "6f7f4510267bd675363dc272a22c01dffb8627473cd111c8928d2065ba4dc95a",
+      "data": "H4sIAAAAAAAC/03NwQrCMAyA4VcJvaig20mE3AQ9CILgrkKpXZhhXVbTDA/iuyte9AH+7386Uh3VoZsfWXpqm0wRcRuNRzmcEZsYREgRvdJ9YiWf+87H6wJW+xUMXApLBzGkdA2xh9m/4ktObD58Mc/qiwWjgcTKDIJBJk31L6hPj89pxyUHi7cqD5BYCDbr6iJu6ZRsUqHWoUwpvd7AYGLWugAAAA=="
+    },
+    "stderr": {
+      "encoding": "gzip-base64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+    },
+    "producer_sha256": "5f218356159e2e2fdb685c51c65054632f8e6525aa890c256b3c44cb978c15fd"
+  },
+  "instrument_sha256": "31faafd9f3eb1b1a3b5633f78c9163b61dedcf9d2ab2159bb95124b89ac59708"
+}

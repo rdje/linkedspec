@@ -1,0 +1,31 @@
+{
+  "book_inputs": 58,
+  "exact_examples": 3,
+  "controls": [
+    {
+      "name": "failed render",
+      "observed_red": "actual render completion"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "publication input guards"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "lost exact examples",
+      "observed_red": "original runtime examples"
+    },
+    {
+      "name": "hidden diagnostic owner",
+      "observed_red": "repair teaching: compiler-marker diagnostic origin"
+    },
+    {
+      "name": "hidden callable blocker",
+      "observed_red": "repair teaching: Compiler membership acceptance remains open"
+    }
+  ],
+  "instrument_sha256": "a2ada11c36624be433ca713fac4dee241ea9cd8adf23df2118618d16e6615c30"
+}

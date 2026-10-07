@@ -1,0 +1,82 @@
+{
+  "complete": true,
+  "failures": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-initial-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 1221,
+        "sha256": "d43f2476d534c0f45a1cd95e434f9899318f9c6190e99c568f92ee603861b764",
+        "data": "H4sIAAAAAAAC/82UUW/aMBDH3/kUp74AWrCBIiGhMQ3RUFXqMjRYNWkayEkuxcPxRbYzxEs/++zANKat2t7Ws+Rc7JP9//1jZ21EhqnI9tApyTowmKF2kAmlQAnrupMWwEIqhCv+QKou0fLV6obfUOZz7Sx/lG5Xp1xJvcfcVpjxnDLLsx1m+4pkKFkt43nvfpbcfpzdxr1VfL/ozd8n69ld8i5O1mzArn3rszEb+tYPfU9q6aRQPYPfJB5YdbyKwG+BMByNIpAaXpeU1wrfeHkApZC6023SJx+bzQsTPRiPG9FB51mwlgV6v6fw1ZJmikRuO0vhdp3lh3hx9wleQVvqqnaWhYJ2lxkU+TY9OrSd7gn1z/H0b3HpEVWO76jE1OCBz1EpYXh1dDvSb6/ZYMRDx8Z8YUSJBzJ7y5fNLCt+jPAHNFaStk2t9zU9L9C8Vp4rDG23waHt9sKZ8dmZn3QN2sF/H7CoCkYVan80c5y2TdqOIK2LAo3Uj9N+F4SFYtL6HX3zTLwQ5EGDHMga7QZdbTRIOsEG7AgC8gVtBKgzyk+ZMWRsBBoPYcFfDsNfDHg+WsGYhNyCap3HYYcJfPZPTTD8AgmBrbMdFME9MpBL/6NwZI4TaP+XK3Z5N1rfAYhR/yzFBAAA"
+      },
+      "instrument_sha256": "4daba07821503bdb9f739e56f6ec8efccb4c0b39c3a50e6646eabbbb997c3ade",
+      "observed_red": "initial-inputs.json"
+    },
+    {
+      "command": [
+        "python3",
+        "-c",
+        "from pathlib import Path; import sys; source = Path(sys.argv[1]); exec(compile(source.read_bytes(), str(source), 'exec'), {'__file__': sys.argv[2], '__name__': '__main__'})",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-initial-review.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 1113,
+        "sha256": "ea761d727e7eb2c7e8bacbc526ae6fa4275d4e0f4af299bba37c790b44feb465",
+        "data": "H4sIAAAAAAAC/71T32vbMBB+719x9MUyxMqPFtolTSF0bim0SVmyp5AJRb4korZkJLlbGNvfvpOzlsJeBhs5gX3n+6z7pPtu4aTCtVTPwCrrAzhUaAIoWZZQSh/S4QnArS4RTq98cNpsr087UGqD0O+ANnBV2aIp8ZpgABtnK6hl2JV6DbqqrQvwROHoNfB7PwJvG6cQxm2K0Scu3fZl2V+lI8BvqJiyVU0l2QHIHcpCrPcBPUs7QCx+JyhIIj4h53sixIb+ESIZwtuWgxVBhDCyOiTIr6Q25P9IW8L/bj/JvhzF3hpRWOW7aofqubbaBN+dP+U32cNkevd5cpdn8/zhNruZTReT++ljPl3wPj+j1eMXfECrF5+ZNjpoWWYOXzR+5fX+tauD8/M/+xovjR1u7HDe43DpX3xoucTybXFlGxLnGNqCQpu6CZ5V0ugNklSPQ+qy13J6T6HlJr3HqPAgA5+L+8fZx5yxT7PZArrtSKQ8plh8CbpbTGE8po0Co3lzGv0yglbLJOaS1TI7G5J4L6PGG6N20myxgNpRU1TQ1oA0BdBEBIh4n7xX838X3qQ9GlXNnbNuCH9B6OQXwsYssFkEAAA="
+      },
+      "instrument_sha256": "4daba07821503bdb9f739e56f6ec8efccb4c0b39c3a50e6646eabbbb997c3ade",
+      "observed_red": "unchanged production and test modes"
+    },
+    {
+      "command": [
+        "python3",
+        "-c",
+        "from pathlib import Path; import sys; source = Path(sys.argv[1]); exec(compile(source.read_bytes(), str(source), 'exec'), {'__file__': sys.argv[2], '__name__': '__main__'})",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-initial-control-review.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 831,
+        "sha256": "c1e101b90f418e406f9f7cf9cf47f75194954db26eef1ba49f3dfe8335031894",
+        "data": "H4sIAAAAAAAC/71SbUvDMBD+vl9x+KUtrt2LA2GbwhhVBJ2C85NoydJzi0uTcknVIfrbvXYqiOAXYXcQ7u25PMndnITEhZBrCAvrPBBKNB6k0Bq0cD4atgBOlEbYGztPyiyP99qglUHotUEZGBc2rzQecxnAA9kCSuFXWi1AFaUlD1fsjr4ct3EjcLYiiXDUpEIOJYKWT7e9u2gE+IIylLYo+cpwW5gQijxbbDy6MGoDs/hMsBPU9QEbr0GWPTAmy4IhfLfs33FJlhlRbBNsF0IZtt+ihvD/5Z3lfifyPYjcSteRK5Tr0irjXef6Kp3G55PZ6c3kNI2v0/OTeHo5m0/OZhfpbJ70kgPWbnKY9Fm79Rkro7wSOpbWeLI6JnxS+JyUm6/p9geD3/OtPy/c/tz23Tvm1Os2nGoaDQkSyiFMnEPyypqUyFIYVIbwEaXHHLhDjoaX7bMnrwDsQ70PUesnbAh/wghrUF4HXFUgwZJsVbY+AHSxQN0/AwAA"
+      },
+      "instrument_sha256": "43f7250cdd38c352c74ef8318e08394cf7c0a1a917312fdf7aeb8b9293e7a0c7",
+      "observed_red": "unrejected evidence control: renamed consumer group"
+    }
+  ],
+  "permission_input": {
+    "path": "perl/LinkedRE.pm",
+    "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+    "git_mode": "100644",
+    "filesystem_mode": "0640"
+  },
+  "instrument_sha256": "8cae5bd8545cc994be9e09ab2614105f968b3b6ecdc61cc3d4ae97c0d9448de4",
+  "scope": "Actual current-volume instrument failures only. The recorded permission input plus immutable Git bytes reproduce the false comparison in a reconstructed tree; Git executable mode remains unchanged. No chmod or source/test mutation. Retained original source executes under its original __file__ identity, preserving artifact-prefix lookup despite the historical source filename. No callback/source or artifact substitution. The original control changes a nested line and fails the demanded top-level RED. Do not refresh historical observations after future source or permission changes."
+}

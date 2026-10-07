@@ -28,6 +28,12 @@ BOUNDARY_BEFORE = "da5c8d1f66732f0989cecca745557005fe44e7c1"
 BOUNDARY_AFTER = "b2156813fffed53622e640583a46a4ca94186a08"
 BOUNDARY_RECURRENCE_OWNER = BOUNDARY_REPAIR_OWNER + ".1"
 BOUNDARY_RECURRENCE_AFTER = "d52add3e5e070b243eb3a2a532d061b51994a36a"
+COMPILER_MEMBERSHIP_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1"
+COMPILER_MEMBERSHIP_RECONCILIATION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0"
+COMPILER_MEMBERSHIP_BEFORE = "31395e440a38acec7a6712d470a90a90a6567863"
+COMPILER_MEMBERSHIP_AFTER = "af5d19971a1682f6895901fb769ff41b69842672"
+COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
+COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
 BOUNDARY_LOOP_BEFORE = br'''     for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
       if ($boundary =~ /\A(["'])(.*)\1\z/s) {
@@ -249,11 +255,23 @@ def restore_boundary_recurrence(source, contents):
     return contents.replace(insertion, b"", 1)
 
 
+def restore_compiler_scanner_mock(source, contents):
+    before = git("show", f"{COMPILER_MEMBERSHIP_BEFORE}:{source}")
+    after = git("show", f"{COMPILER_MEMBERSHIP_AFTER}:{source}")
+    require(after.count(COMPILER_SCAN_AFTER) == 1 and
+            after.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_BEFORE, 1) == before,
+            f"unreviewed compiler scanner mock history: {source}")
+    require(contents.count(COMPILER_SCAN_AFTER) == 1,
+            f"compiler scanner mock registration mismatch: {source}")
+    return contents.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_BEFORE, 1)
+
+
 def verify_signature_regression_evolution(source, contents, historical_hash):
     require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     current_hash = digest(contents)
+    contents = restore_compiler_scanner_mock(source, contents)
     contents = restore_boundary_recurrence(source, contents)
     require(contents.count(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR) == 1,
             f"occurrence regression registration mismatch: {source}")
@@ -271,8 +289,12 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
             "boundary_recurrence_before_revision": BOUNDARY_AFTER,
             "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
+            "compiler_membership_owner": COMPILER_MEMBERSHIP_OWNER,
+            "compiler_membership_reconciliation_owner": COMPILER_MEMBERSHIP_RECONCILIATION_OWNER,
+            "compiler_membership_before_revision": COMPILER_MEMBERSHIP_BEFORE,
+            "compiler_membership_after_revision": COMPILER_MEMBERSHIP_AFTER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact committed nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
+            "scope": "exact committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -558,11 +580,15 @@ def falsify(report):
                 current.replace(insertion, insertion.replace(b"is_deeply", b"ok", 1), 1),
                 current.replace(insertion, insertion.replace(b'"a,b,c"', b'"a"', 1), 1),
                 current.replace(insertion, insertion.replace(b"runtime_ctx_ref =>", b"other_ctx_ref =>", 1), 1),
+                current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_BEFORE, 1),
+                current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_AFTER * 2, 1),
+                current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_AFTER.replace(b"sub {", b"sub { return;"), 1),
+                current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_AFTER.replace(b"_scan_executable_contract_ir_events", b"_other_scan"), 1),
             )
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:",
-                       "boundary recurrence registration mismatch:")
+                       "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:")
         elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
             altered = (
                 current + b"# unreviewed boundary contract edit\n",

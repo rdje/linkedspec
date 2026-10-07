@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `af5d19971a1682f6895901fb769ff41b69842672` — clean due-hygiene activation.
-- latest_completed_leaf: `REPO-HYGIENE.11 - retain daily artifact census`.
-- active_work_unit: `REPO-HYGIENE.11` (done) — due artifact review verified; compiler membership remains committed at af5d19971.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
-- in_flight_uncommitted: None; intended clean post-landing handoff. Hygiene proof/docs are complete and no required background job remains.
+- activation_commit: `864b1a93934ab7fd4b059b0a7cb9d4b417e33c66` — clean canonical membership activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0 - retain bounded membership proof`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` (done) — bounded proof checkpoint; canonical membership remains open.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committed HEAD. Preserve the original callable RED and correct only exact unquoted signature pipe precedence in SourceMembership. Verify unchanged callable/private/compiler and direct consumers before committing. Fresh committed canonical .0.2.2.2 precedes membership closure and precise replacement .0.3.
+- in_flight_uncommitted: None; intended clean focused post-landing handoff. Checkpoint proof/docs complete; no required background job remains. Both failed canonical candidates and callable RED are retained; corrective production work starts only after this commit.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

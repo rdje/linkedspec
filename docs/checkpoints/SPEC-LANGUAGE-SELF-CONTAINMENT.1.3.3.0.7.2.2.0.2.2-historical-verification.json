@@ -1,0 +1,55 @@
+{
+  "complete": true,
+  "original_red": "unreviewed signature-regression drift: t/phase0_regression.t",
+  "accepted_source": {
+    "path": "t/phase0_regression.t",
+    "historical": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41",
+    "current": "679d5ed727942d957b4d7f457f1fd1ecf9d5f174eeed91865251af5de727a245",
+    "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1",
+    "reconciliation_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1",
+    "occurrence_repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1",
+    "raw_readiness_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+    "boundary_recurrence_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1",
+    "boundary_recurrence_before_revision": "b2156813fffed53622e640583a46a4ca94186a08",
+    "boundary_recurrence_after_revision": "d52add3e5e070b243eb3a2a532d061b51994a36a",
+    "compiler_membership_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1",
+    "compiler_membership_reconciliation_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0",
+    "compiler_membership_before_revision": "31395e440a38acec7a6712d470a90a90a6567863",
+    "compiler_membership_after_revision": "af5d19971a1682f6895901fb769ff41b69842672",
+    "before_revision": "67af62f7aa6dff39b6c3fd64b15fb5139f691a0a",
+    "after_revision": "446fb65fadca2e1bd31fec93bb9de779eb2134d1",
+    "scope": "exact committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"
+  },
+  "source_controls": [
+    {
+      "name": "missing committed mock",
+      "observed_red": "compiler scanner mock registration mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "duplicate mock",
+      "observed_red": "compiler scanner mock registration mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "disabled mock",
+      "observed_red": "compiler scanner mock registration mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "foreign mock",
+      "observed_red": "compiler scanner mock registration mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "unrelated source edit",
+      "observed_red": "unreviewed signature-regression drift: t/phase0_regression.t"
+    }
+  ],
+  "restored_inputs": 134,
+  "restored_bytes": 84613241,
+  "recovery_controls": 22,
+  "evolution_controls": 60,
+  "healthy_audit_guard": {
+    "original_log_attempts": 0,
+    "tracked_write_attempts": 0
+  },
+  "failed_candidate_sha256": "e6d5920adc8120992176ba5a3757c421507991f9783b53b43cd26d369b168f7b",
+  "instrument_sha256": "e1c69aa6873980703c618192605553b2d0974a11fc514716de7f9673a78da0f6"
+}

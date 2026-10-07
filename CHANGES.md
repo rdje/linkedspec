@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-07 — Retain bounded membership proof and own callable regression
+
+Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
+
 ## 2026-10-07 — REPO-HYGIENE.11 - retain daily artifact census
 
 Dated 2026-10-07T13:28:24.094691+00:00 census retains10838 parent candidates/13805895079 bytes and excludes9 nested repositories. Rust release is absent, deps has0 log/bin rows, incremental retains483 rows/2390808595 bytes. Fresh scoped metadata and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; evidence/caches retained. Book58 inputs/one review example passes; original133 compiler claim hashes freeze mode/revision only at clean af5d19971. Both stale maintenance pointers are corrected; canonical membership .0.2.2 follows.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: daily artifact review is verified; immutable canonical compiler-membership acceptance follows the clean maintenance commit.
+Full PNT: bounded membership proof retained; callable signature repair and fresh canonical acceptance precede replacement.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.11` — Dated 2026-10-07T13:28:24.094691+00:00 census retains10838 parent candidates/13805895079 bytes and excludes9 nested repositories. Rust release is absent, deps has0 log/bin rows, incremental retains483 rows/2390808595 bytes. Fresh scoped metadata and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; evidence/caches retained. Book58 inputs/one review example passes; original133 compiler claim hashes freeze mode/revision only at clean af5d19971. Both stale maintenance pointers are corrected; canonical membership .0.2.2 follows.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — Immutable864b1a939 supplies4878 regular inputs/no overlays and70 guarded commands. Original compiler39 per seed0/1/42, 66 original public channel observations and120 authored native/fresh values pass. Two original no-value-oracle cases remain explicit. Fifteen unchanged consumers pass1462 groups including Phase01035; original38 RED/17 evidence controls recur. Original133 historical hashes/five controls stay exact. The historical auditor admits only the committed scanner-mock inverse; original auditor RED/five source controls and isolated134-input recovery/22 controls/60 evolution denials pass. Two complete failed canonical candidates remain retained. The second exposes valid x,y callable membership corruption: three typed public sources distinguish one native/fresh bad pair from two healthy pairs, with five observation controls. Book58 inputs/3 exact examples/6 controls passes. This is a bounded proof checkpoint; membership acceptance remains open for signature repair .0.2.2.1 and fresh committed canonical .0.2.2.2. Production/Perl fixtures/CI/hooks/dependencies unchanged. Replacement, diagnostic origin and comments retain their later owners.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1 from clean committed HEAD. Preserve the original callable RED and correct only exact unquoted signature pipe precedence in SourceMembership. Verify unchanged callable/private/compiler and direct consumers before committing. Fresh committed canonical .0.2.2.2 precedes membership closure and precise replacement .0.3.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
 - `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
@@ -29,7 +30,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` — entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` — cursor/input15;133→163 origins/RED15-GREEN96/1274 groups/149 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` — mark14;105→133 origins/RED14-GREEN81/1259 groups/148 RED.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
 
 ## History
 

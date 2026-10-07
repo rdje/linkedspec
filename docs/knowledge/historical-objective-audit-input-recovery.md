@@ -90,3 +90,10 @@ insertion are normalized in addition to earlier admitted evolution. The current
 producer observes22 recovery controls,56 evolution denials and the same134
 inputs/84,613,241 bytes. Original milestone captures and all source/log hashes
 remain unchanged. Complete earlier counts above retain their dated boundary.
+
+October7 compiler-membership acceptance reconciles the already committed
+one-line Phase0 scanner mock through a whole-file Git-bound inverse. Its current
+isolated proof retains22 recovery controls and60 evolution denials over the
+same134 inputs; prior dated measurements remain unchanged. The original canonical
+rejection, source controls and exact repair are canonical in
+[[phase0-compiler-scanner-mock-historical-inverse]].
