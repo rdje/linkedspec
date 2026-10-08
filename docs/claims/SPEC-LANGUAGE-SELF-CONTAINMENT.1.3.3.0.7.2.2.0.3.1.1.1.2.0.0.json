@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0",
+  "claims": [
+    {
+      "name": "surviving-draft-recovery",
+      "statement": "All eight surviving changed files reconstruct byte-exact from the original 58a11ae80cc55f8d19a0a7a4f0203ae491d11383 Git delta and four complete untracked payloads. All48 original claim bindings verify; only durability mode/revision change. Six reason-sensitive corruption controls observe RED before GREEN. Eight selected production owners equal original Git bytes; the unfinished 205-line private emission draft is retained as evidence outside production.",
+      "scope": "The original non-ignored dirty-file inventory only. Immutable activation Git supplies four tracked baseline files and the48 original historical inputs; their SHA256 identities are retained in the crash snapshot and original claim snapshot and rechecked by the reviewer. This does not recover process memory, lost conversation or unsaved editor buffers, and does not accept the draft, close the foundation or later repair, run Phase0/canonical CI, or push. The initially failed reviewer and complete actual captured channels remain inputs; only the corrected isolated-index/object-store reviewer supplies GREEN. No cross-host reproduction claim is made.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-review.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-claim.py",
+        "granularity": "Each surviving file, original tracked baseline, retained untracked payload, original historical binding, selected production owner and actual corruption failure reason.",
+        "result": "All eight surviving changed files reconstruct byte-exact from the original 58a11ae80cc55f8d19a0a7a4f0203ae491d11383 Git delta and four complete untracked payloads. All48 original claim bindings verify; only durability mode/revision change. Six reason-sensitive corruption controls observe RED before GREEN. Eight selected production owners equal original Git bytes; the unfinished 205-line private emission draft is retained as evidence outside production."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An apparently complete handoff could drop or alter a surviving draft, substitute another activation, silently refresh a historical claim or leave unverified production installed.",
+        "oracle": "Immutable original Git blobs plus independently reconstructed private-index delta; original dirty-file inventory and historical claim hashes; byte-exact live production comparison.",
+        "red_control": "Observed named REDs: missing-survivor, foreign-activation, source-inverse, changed-draft, wrong-baseline and rehashed-foreign-freeze. The source inverse changes the actual invocation accessor in a valid patch and reaches the recovered-byte assertion."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-crash.json",
+            "sha256": "12521faa8e5563b72ed0a3b1ad97ace56fd1047c200f5f230a0724e95364aeba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-handoff.md",
+            "sha256": "cda03695baaee675a4e4fd472d094e1a4d7425e7781944eccb2e3e2a07345194",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-review.py",
+            "sha256": "078322e558679068a99c734c12f6d72973a906d0d926ec6a87a36ca049fd69ef",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-review.json",
+            "sha256": "f6c5bfcd67480b740e82147f6c89377c446f7ffb9dec0160ea387408d630daa0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-review-initial.py",
+            "sha256": "f6a2049c5d79b6e74b4269d7f6c6cbd16a447b523f4925665b23c44604275b2b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-review-initial-channels.json",
+            "sha256": "4033799d66830da3a0d151ed268c1cd8c6bd76c894a24b29bde0cdd11b3f06f3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0-before-SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+            "sha256": "5e840b634825f93beece7cc1bb32a9e75ac7c4038e920c3647f777e0ed67052f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0-freeze.json",
+            "sha256": "17f4334532ee882ee23dda788f062fda4500eb49459ee447eb592b2427cf770f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0-preserve.py",
+            "sha256": "d0875f1566e48d9da5ab4dda896d98a8b7af8b82b40fb78af693a8eaf4cad244",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+            "sha256": "4b305b1bf131b8c38c24397a49cb26d850aea19f2c9736069e01954176eac4c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json",
+            "sha256": "8190041d63a10b56a057fc5f0ed58c8badd42dd4fe5748ab8ce7b12226a3feae",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-claim.py",
+            "sha256": "af2176072e9f5773ce0129766b5d28f571193071ceb8651c7b99c589ab1d4790",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/SourceOrigins.pm",
+            "sha256": "1c59c6bac890fe7fec1bdd1e74626f3923360497b763b59db263be49900fa9b0",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "aa4596a81c7922d43bc69e38e562a091ae83c8e41523816833d46f3fecc8ba32",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST/Parser.pm",
+            "sha256": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "395f3591ca8416cb445949fb4b4deabf631f395da58cf91c8eb29e4805b75dfa",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/FlowExpr.pm",
+            "sha256": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ControlFlow.pm",
+            "sha256": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "8dd3d8f5c9821167866064e46d967d398d0286c0cc35890c84e8aee1086521c4",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/RewritePipeline.pm",
+            "sha256": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

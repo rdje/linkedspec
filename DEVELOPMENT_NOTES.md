@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Preserve interrupted emission work (.0.3.1.1.1.2.0.0)
+
+Crash recovery distinguishes surviving bytes from accepted behavior. Keep the exact dirty delta and untracked payloads with their activation Git identity; reconstruct in isolated Git index/object storage before restoring committed production. The first index-only reviewer fails during Git apply and remains retained with actual channels. The corrected reviewer preserves all original claim hashes and qualifies only durability mode/revision. Resume foundation proof at .2.0.1 using the saved draft; no lost conversation or unsaved-buffer recovery is asserted.
+
 ## 2026-10-08 — Explicit emitted continuation authority (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1)
 
 Actual typed entry_group consumption and deferred capture/mark/entry-named/raw-return output require different decisions. Original argument frames prove extraction only. The selected private plan binds output fragments to the actual known callback and invocation, then records copied/generated/consumed pieces at their producer seams. Equality validates a recorded result and never establishes authority. The packet and opaque-callback transfer remain unimplemented; six ordered repair slices and an independent labelled-character oracle precede mapping and canonical admission.

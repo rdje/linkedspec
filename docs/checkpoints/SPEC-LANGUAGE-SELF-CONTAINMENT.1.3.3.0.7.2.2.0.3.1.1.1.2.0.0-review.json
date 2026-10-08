@@ -1,0 +1,43 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0",
+  "base_revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+  "recovered_files": 8,
+  "tracked_delta_files": 4,
+  "untracked_files": 4,
+  "original_claim_bindings": 48,
+  "restored_production_owners": 8,
+  "controls": [
+    {
+      "name": "missing-survivor",
+      "result": "RED",
+      "reason": "incomplete or duplicate crash inventory"
+    },
+    {
+      "name": "foreign-activation",
+      "result": "RED",
+      "reason": "foreign activation revision"
+    },
+    {
+      "name": "source-inverse",
+      "result": "RED",
+      "reason": "changed crash bytes: perl/LinkedSpec/ActionIR/SourceOrigins.pm"
+    },
+    {
+      "name": "changed-draft",
+      "result": "RED",
+      "reason": "changed crash bytes: perl/LinkedSpec/ActionIR/SourceEmissions.pm"
+    },
+    {
+      "name": "wrong-baseline",
+      "result": "RED",
+      "reason": "wrong baseline bytes: MEMORY.md"
+    },
+    {
+      "name": "rehashed-foreign-freeze",
+      "result": "RED",
+      "reason": "foreign historical freeze"
+    }
+  ],
+  "result": "PASS",
+  "limits": "Surviving non-ignored working-tree files only; process memory, unsaved editor buffers and lost conversation are not recovered. Draft implementation is unverified. No foundation behavior proof, Phase0 run, replacement admission or push is claimed."
+}

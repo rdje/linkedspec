@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: residual producer authority selected; private emission protocol next.
+Machine-crash recovery complete; stop at the requested clean handoff checkpoint. Private emission foundation remains unverified.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — 66 source-guarded commands from four independently recovered 5313-input regular Git graphs distinguish retained capture/mark/entry-named/raw continuations from consumed typed entry groups. Authored occurrence pieces, actual parser frames, callback arguments/scalar context, native/fresh routes and 10 effective evidence RED controls pass. Original/candidate observations remain distinct; known literal replacement and readiness gaps stay owned. The selected private emission/callback-identity protocol is planned, unimplemented and unverified; production remains unchanged.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — All eight surviving dirty files recover from immutable Git/delta or complete untracked payloads. Six reason-sensitive corruption REDs,48 original claim bindings and eight byte-exact restored production owners pass. The unfinished emission draft is checkpoint evidence only. Exact sources, initial reviewer failure and handoff instructions remain retained; no foundation acceptance is claimed.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0: establish private emitted-fragment and actual callback/invocation identity with independent adversarial controls. Input/value/statement integration and complete private proof follow its six-slice plan; mapped replacement .1.1.2 and independent canonical .0.3.2 remain open.
+On a new continuation activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1; follow the saved recovery handoff to restore and prove the foundation draft. All original six-slice obligations, mapped replacement .1.1.2 and independent canonical .0.3.2 remain open. Stop here as requested.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
 - `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
@@ -29,7 +30,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0: establish p
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — callable signature RED10/GREEN225; compiler40/18 values/direct1473 groups; canonical acceptance next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
 - `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 
 ## History
 

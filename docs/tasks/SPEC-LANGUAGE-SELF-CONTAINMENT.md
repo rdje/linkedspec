@@ -3822,7 +3822,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Plan: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json; split typed emission integration further by actual family before writes if it grows beyond a safe slice.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0`
-  Status: `pending`
+  Status: `active`
   Goal: Private emission protocol and callback/invocation identity, with independent adversarial fixtures; no replacement behavior change.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
   Planned tier: `focused`
@@ -3830,6 +3830,34 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
   Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
   Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+  Recovery split: October9 machine-crash recovery preserves the exact surviving activation/draft at clean58a11ae80 in child .0; foundation implementation/proof remains child .1. Original activation text and all surviving bytes are recoverable from the child crash snapshot. No foundation acceptance or later integration is claimed.
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`; `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`
+  Status: `done`
+  Goal: Recover the interrupted foundation draft and stop at a clean, committed handoff checkpoint without admitting unverified production.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
+  Verification tier: `focused`
+  Focused checks: Exact original dirty-delta and untracked-byte reconstruction against immutable activation Git; independent corruption RED controls; historical-claim mode/revision-only preservation and all original bindings; byte-exact production restoration; memory/Knowledge/history/claim/doctrine/diff checks.
+  Canonical trigger: None for recovery-only checkpoint; no runtime, public contract, infrastructure or admission movement. No push requested.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0.json`
+  Acceptance: Preserve every surviving changed file before restoring production. Keep the incomplete foundation and all six repair-slice obligations open; give the next agent exact restoration/proof instructions. User requests recovery followed by stopping at the ensuing handoff-ready checkpoint.
+
+  Verification: Immutable58a11ae80 plus the exact dirty delta reconstruct four changed tracked files; four untracked payloads recover byte-exact. Independent missing-file/foreign-base/source-inverse/draft/baseline/rehashed-freeze controls observe six reason-checked REDs. All48 original claim bindings recover; only durability mode/revision change. Eight selected production owners equal their original Git bytes; the unverified205-line emission draft is retained only in the crash snapshot. Real Git index remains unchanged by the reviewer. Initial index-only review failed during Git apply; exact original producer/actual stderr survive, and isolated index/object storage supplies final PASS. No draft syntax/behavior, Phase0, parent closure or push claim.
+  Handoff: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-handoff.md. Normal focused doctrines/history/claim/Knowledge/memory/diff checks and hooks gate the clean checkpoint. Stop here; .2.0.1 is not activated.
+  Preparation correction: The first doctrine run rejects verbatim machine paths in the initial reviewer stderr. Stop the already rejected run; retain complete stdout/stderr as base64 with original hashes instead of rewriting their bytes. Corrected review reconstructs those channels; normal hooks must verify the final staged candidate.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0 - recover interrupted emission draft` (Git owns identity).
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`
+  Status: `pending`
+  Goal: Resume and prove the recovered private emission foundation, satisfying every original .2.0 obligation before integration.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`
+  Planned tier: `focused`
+  Planned focused proof: Restore the exact draft under this leaf, then author independent fragment/callback/invocation/Unicode/CRLF/literal/duplicate/opaque/nested/error oracles, original RED/corrected GREEN and effective source inverses. Preserve public callback shapes/context/errors and family order; run unchanged direct consumers and normal doctrines. Full guarded Phase0 remains required at final private acceptance .2.5.
+  Planned canonical boundary: None unless actual scope changes mechanical/public owners; mapped replacement and independent canonical admission retain separate ownership.
+  Planned claim record: none: No implementation measurement exists; declare the actual foundation proof record on activation.
+  Acceptance: Follow the selected six-slice plan and recovery handoff. The saved draft supplies a starting point only; no tests or accepted packets were recovered. Commit the verified foundation before activating .2.1.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`
   Status: `pending`
@@ -4218,7 +4246,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` | `done` | One exact finite archive/manifest/decision admission; canonical receipt gates landing. |
 | 43.4.2.0.3.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` | `done` | Actual typed/raw producer protocol selected; six private repair slices remain. |
 | 43.4.2.0.3.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2` | `pending` | After selection: repair residual authority and full guarded Phase0. |
-| 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `pending` | Establish private emission/callback identity before input/value/statement integration. |
+| 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `active` | Recovery checkpoint .0 complete; foundation implementation/proof .1 remains open. |
+| 43.4.2.0.3.1.1.1.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` | `done` | Exact crash draft retained; production restored; stop at clean handoff. |
+| 43.4.2.0.3.1.1.1.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` | `pending` | Next activation: recover private foundation draft and prove original obligations. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
