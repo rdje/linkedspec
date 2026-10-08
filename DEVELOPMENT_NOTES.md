@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Explicit emitted continuation authority (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1)
+
+Actual typed entry_group consumption and deferred capture/mark/entry-named/raw-return output require different decisions. Original argument frames prove extraction only. The selected private plan binds output fragments to the actual known callback and invocation, then records copied/generated/consumed pieces at their producer seams. Equality validates a recorded result and never establishes authority. The packet and opaque-callback transfer remain unimplemented; six ordered repair slices and an independent labelled-character oracle precede mapping and canonical admission.
+
 ## 2026-10-08 — Due metadata review (REPO-HYGIENE.13)
 
 Validate the supplied census start and its ancestors before traversal as well as child entries. The dated review keeps all artifacts; age, size and a passing metadata check do not prove disposal safety. Current standalone controls cover symlink starts/ancestors, nested Git markers, mock submodules and outside-root starts. Earlier producers and snapshots stay immutable. Unqualified legacy durability records are not implicitly live; preserve the actual preparation failure before correcting the current selector. The existing public teaching and retained .11 example remain accurate.

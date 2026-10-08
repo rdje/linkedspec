@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: daily artifact review complete; producer-bound residual selection next.
+Full PNT: residual producer authority selected; private emission protocol next.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.13` — Dated 2026-10-08T15:03:20.586063+00:00 census retains 12225 parent candidates/14790774770 bytes; three Rust log/bin locations are observed separately. Fresh metadata and independent lstat agree; size/boundary fixtures and four actual-channel RED controls pass. Zero removals; proof data and caches remain retained. The capacity claim preserves all198 original hashes at clean60e8ef2ab; the original legacy-mode preparation failure is retained. Public retention guidance is unchanged; focused checks and normal doctrines govern landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — 66 source-guarded commands from four independently recovered 5313-input regular Git graphs distinguish retained capture/mark/entry-named/raw continuations from consumed typed entry groups. Authored occurrence pieces, actual parser frames, callback arguments/scalar context, native/fresh routes and 10 effective evidence RED controls pass. Original/candidate observations remain distinct; known literal replacement and readiness gaps stay owned. The selected private emission/callback-identity protocol is planned, unimplemented and unverified; production remains unchanged.
 
 ## Next Action
 
-Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual typed/raw lowering producers and establish bounded residual continuation authority before production edits.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0: establish private emitted-fragment and actual callback/invocation identity with independent adversarial controls. Input/value/statement integration and complete private proof follow its six-slice plan; mapped replacement .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
 - `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
@@ -29,7 +30,6 @@ Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual ty
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
 - `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 
 ## History
 

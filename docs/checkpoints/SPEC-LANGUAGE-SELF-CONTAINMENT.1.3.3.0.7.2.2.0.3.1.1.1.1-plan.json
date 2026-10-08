@@ -1,0 +1,82 @@
+{
+  "status": "selected design; production unmodified; transfer protocol unimplemented and unverified",
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1",
+  "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+  "observed": [
+    "Actual IF/PUSH/RETURN callbacks retain selected capture/mark/entry-named helpers inside generated expressions; current ordinary replacement lowers them later.",
+    "Actual typed entry_group values become runtime expressions inside the containing PUSH, so their later canonical events are legitimately consumed.",
+    "Raw RETURN compatibility keeps capture_slice, capture_from and entry_named text through the actual legacy_raw_payload branch; the rejected candidate discards their overlapping original intervals.",
+    "The actual parser publishes argument frames against returned call/argument references. These frames supply extraction authority, not generated-output provenance.",
+    "Literal capture twins still reproduce the separately owned replacement failure. Literal readiness classification remains separately owned."
+  ],
+  "selected_private_protocol": {
+    "root": "One emission scope per actual canonical apply callback, nested inside the existing original-source invocation. Retain actual event, callback and invocation identity; isolate nested scopes and restore on exceptions.",
+    "input": "Use actual parser/CSV returned objects and original frames, or actual AST construction sidecars. Normalize/copy only at observed producer seams; copied/changed/foreign/opaque dependencies decline authority while preserving their ordinary result.",
+    "output": "Owned built-in producers explicitly compose generated pieces, source-copy pieces and consumed semantic nodes at actual construction/edit positions. The private packet records the emitted text and bounded original occurrence fragments; no public return/event field or signature changes.",
+    "identity": "Bind publication to the actual known callback and invocation. A custom callback that calls a built-in and returns an equal literal cannot inherit its packet. Equality only validates an already producer-owned piece; it never creates authority.",
+    "mapping": "Transport only a selected original event through contiguous producer-recorded copied fragments. Clear consumed, renamed/transformed, ambiguous, duplicate and opaque authority; generated/literal pieces have no executable origin. Original family order and callback calls/arguments/context/error effects remain exact.",
+    "forbidden": [
+      "generated raw search",
+      "equal-text occurrence queues",
+      "global source sort",
+      "blanket overlap continuation",
+      "placeholder edits to callback arguments",
+      "extra callback invocation",
+      "new public provenance fields",
+      "foreign repository or submodule implementation access"
+    ]
+  },
+  "independent_oracle": {
+    "input": "Authored literal pieces independently accumulate original Unicode scalar intervals; actual event references and argument frames must match them, with literal twins excluded.",
+    "output": "An independently authored labelled-character append/edit oracle follows explicit source-copy and generated operations at producer construction boundaries. Compare every selected event and actual output fragment; assert consumed typed entry_group has no continuation while raw entry_named retains one.",
+    "distinguishers": [
+      "repeated equal nested calls",
+      "same-interval duplicate events",
+      "authored/generated literal twins",
+      "actual callback that returns copied or equal literal text",
+      "renamed/transformed outputs",
+      "missing/foreign/changed source frames",
+      "opaque output",
+      "nested successful/fatal invocations",
+      "Unicode and CRLF"
+    ],
+    "required": "Retain actual original RED and corrected GREEN, meaningful production-source inverses, complete required Phase0 and unchanged direct consumers. Proposed output/callback transfer is not accepted by this diagnosis."
+  },
+  "bounded_owners": {
+    "perl/LinkedSpec/ActionIR/SourceOrigins.pm": "1c59c6bac890fe7fec1bdd1e74626f3923360497b763b59db263be49900fa9b0",
+    "perl/LinkedSpec/ActionIR/MethodExpr.pm": "aa4596a81c7922d43bc69e38e562a091ae83c8e41523816833d46f3fecc8ba32",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "395f3591ca8416cb445949fb4b4deabf631f395da58cf91c8eb29e4805b75dfa",
+    "perl/LinkedSpec/ActionIR/FlowExpr.pm": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+    "perl/LinkedSpec/ActionIR/ControlFlow.pm": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "8dd3d8f5c9821167866064e46d967d398d0286c0cc35890c84e8aee1086521c4",
+    "perl/LinkedSpec/ActionIR/RewritePipeline.pm": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987"
+  },
+  "repair_slices": [
+    [
+      "0",
+      "Private emission protocol and callback/invocation identity, with independent adversarial fixtures; no replacement behavior change."
+    ],
+    [
+      "1",
+      "Actual argument/node input frames and private copy/consumption authority; preserve callback objects and effects."
+    ],
+    [
+      "2",
+      "Typed value-emission builders; split further by actual family before writes if the affected branch set grows beyond a safe slice."
+    ],
+    [
+      "3",
+      "Structured control/statement and legacy raw-return emission builders at actual concatenation/substitution seams."
+    ],
+    [
+      "4",
+      "Compose actual emitted fragments with independent occurrence/callback/nested/literal oracles and meaningful source inverses."
+    ],
+    [
+      "5",
+      "Complete guarded Phase0/direct-consumer acceptance for the committed private producer repair; integrated replacement and independent canonical admission stay separate."
+    ]
+  ],
+  "limits": "No production change or generated-output transfer proof yet. Opaque scalar output must not acquire origin from text equality. Diagnosis does not close replacement, diagnostics/comments, independent canonical admission, other backend work or any global audit."
+}

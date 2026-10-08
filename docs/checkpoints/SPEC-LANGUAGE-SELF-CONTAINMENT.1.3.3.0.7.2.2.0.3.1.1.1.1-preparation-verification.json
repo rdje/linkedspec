@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+  "original_bindings_recovered": 42,
+  "original_claim_exact": true,
+  "real_index_unchanged": true,
+  "producer_sha256": "44ce530cfd169fe5969fec89ab7984f5c758c09ab906883b27a45816a91a480d",
+  "scope": "Original unadmitted candidate reconstructed from retained full binary delta over immutable Git base; every original claim input hash preserved. Isolated index/object store stays on the repository volume and is not another Git repository."
+}

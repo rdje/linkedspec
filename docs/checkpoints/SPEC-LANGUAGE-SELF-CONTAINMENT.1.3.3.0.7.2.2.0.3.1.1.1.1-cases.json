@@ -1,0 +1,175 @@
+[
+  {
+    "id": "nonempty_guard",
+    "label": "Top",
+    "action": "if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif()",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif() }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "if(is_nonempty(trim("
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": "))); push(items, trim("
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": ")); endif()"
+      }
+    ]
+  },
+  {
+    "id": "repeated_capture",
+    "label": "Top",
+    "action": "push(items, cat(capture_slice(), capture_slice()))",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { push(items, cat(capture_slice(), capture_slice())) }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "push(items, cat("
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": ", "
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": "))"
+      }
+    ]
+  },
+  {
+    "id": "literal_capture",
+    "label": "Top",
+    "action": "push(items, cat(\"capture_slice()\", capture_slice()))",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { push(items, cat(\"capture_slice()\", capture_slice())) }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "push(items, cat(\"capture_slice()\", "
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": "))"
+      }
+    ]
+  },
+  {
+    "id": "literal_condition",
+    "label": "Top",
+    "action": "if(is_nonempty(\"capture_slice()\")); push(items, trim(capture_slice())); endif()",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { if(is_nonempty(\"capture_slice()\")); push(items, trim(capture_slice())); endif() }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "if(is_nonempty(\"capture_slice()\")); push(items, trim("
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": ")); endif()"
+      }
+    ]
+  },
+  {
+    "id": "named_mark",
+    "label": "Top",
+    "action": "push(items, trim(capture_from(body_start)))",
+    "source": "Top::AND I { set(items, array()); mark_input_start(body_start) }\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { push(items, trim(capture_from(body_start))) }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "push(items, trim("
+      },
+      {
+        "helper": "capture_from(body_start)",
+        "contract_id": "capture_from_mark"
+      },
+      {
+        "text": "))"
+      }
+    ]
+  },
+  {
+    "id": "raw_array",
+    "label": "Top",
+    "action": "return([capture_slice(), \"capture_slice()\"])",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { return([capture_slice(), \"capture_slice()\"]) }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "authored_parts": [
+      {
+        "text": "return(["
+      },
+      {
+        "helper": "capture_slice()",
+        "contract_id": "capture_slice"
+      },
+      {
+        "text": ", \"capture_slice()\"])"
+      }
+    ]
+  },
+  {
+    "id": "entry_group",
+    "label": "Child",
+    "action": "push(items, cat(entry_group(0), entry_group(1)))",
+    "source": "Top::AND\n /(foo)\\(/\n -> Top[0] { return(call(Child)) }\n\nChild::AND\n I { set(items, array()) }\n /\\w+/\n /\\)/\n -> Child[0] { push(items, cat(entry_group(0), entry_group(1))) }\n -> Child[1] { return(copy(items)) }\n",
+    "input": "foo(bar)",
+    "authored_parts": [
+      {
+        "text": "push(items, cat("
+      },
+      {
+        "helper": "entry_group(0)",
+        "contract_id": "entry_group"
+      },
+      {
+        "text": ", "
+      },
+      {
+        "helper": "entry_group(1)",
+        "contract_id": "entry_group"
+      },
+      {
+        "text": "))"
+      }
+    ]
+  },
+  {
+    "id": "entry_named",
+    "label": "Child",
+    "action": "push(items, trim(entry_named(prefix)))",
+    "source": "Top::AND\n /(?<prefix>foo)\\(/\n -> Top[0] { return(call(Child)) }\n\nChild::AND\n I { set(items, array()) }\n /\\w+/\n /\\)/\n -> Child[0] { push(items, trim(entry_named(prefix))) }\n -> Child[1] { return(copy(items)) }\n",
+    "input": "foo(bar)",
+    "authored_parts": [
+      {
+        "text": "push(items, trim("
+      },
+      {
+        "helper": "entry_named(prefix)",
+        "contract_id": "entry_named"
+      },
+      {
+        "text": "))"
+      }
+    ]
+  }
+]

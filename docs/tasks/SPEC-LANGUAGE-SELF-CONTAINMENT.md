@@ -3794,16 +3794,92 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0 - admit one residual-repair history rollover` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Select explicit producer-bound nested and raw residual continuation from actual lowering authorities.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0`
   Acceptance: Trace actual typed capture/mark/entry and raw retained-output producers. Declare bounded owners/independent continuation oracle before writes. Distinguish literals, repeated/consumed events and opaque callbacks; preserve original candidate proof. No guessed offsets/raw-text authority.
+  Activation: Clean 997f1cb8f32ff4eaa1ba278e124cbaaac1942780; due artifact review and all ten doctrines/post-commit pointer PASS, brief0, clean Git and no required job confirmed before pivot. Relevant occurrence/residual and private method-argument Knowledge cards, actual Contracts/ControlFlow/FlowExpr/MethodLowering/MethodExpr owners and unchanged book limitation reviewed.
+  Owned paths: New leaf-prefixed docs/checkpoints diagnosis probes/captures/review/plan/claim and original source closure; docs/claims owning record; task/frontier/Knowledge/live/resume/change/notes. Production and original candidate evidence remain unchanged. Any later production repair must use its separately owned leaf after this diagnosis commits.
+  Verification tier: `focused`
+  Focused checks: Source-bound Toolbox substitution/AST/descriptor/dump/native/fresh probes on capture, named-mark, entry, repeated/literal and raw compatibility inputs; actual contract/dependency/parser emission traces, source-origin references and exact private argument frames. Preserve callback arguments/context/error effects and trace observer transparency; establish an independent authored-origin/continuation oracle and effective authority/evidence controls. Review unchanged public limitation, preserve intersecting prior claims by mode/revision only, and run memory/Knowledge/history/claims/diff/normal doctrines.
+  Canonical trigger: None for unchanged-production diagnosis/design. Production repair and independent canonical acceptance remain later leaves.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json`
+
+  Verification: 66 source-guarded commands from four independently recovered 5313-input regular Git graphs distinguish retained capture/mark/entry-named/raw continuations from consumed typed entry groups. Authored occurrence pieces, actual parser frames, callback arguments/scalar context, native/fresh routes and 10 effective evidence RED controls pass. Original/candidate observations remain distinct; known literal replacement and readiness gaps stay owned. The selected private emission/callback-identity protocol is planned, unimplemented and unverified; production remains unchanged.
+  Selection: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json declares eight bounded existing owners and six separately ordered repair slices. Actual known callback/invocation identity must own a packet; equal scalar output cannot grant origin. Input argument frames do not yet prove emitted fragments. Preserve family order/public fields and decline copied/foreign/opaque authority without changing ordinary callbacks. Independent labelled-character construction/edit and authored-origin oracles, actual RED/GREEN/source inverses/full Phase0/direct consumers are mandatory for later repair.
+  Book: Existing rejected-candidate/quoted-first teaching remains exact; no runtime/public behavior changes, so no edit/render needed.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1 - select residual producer authority` (Git owns identity).
+
+  Preparation correction: Normal hooks rejected seven verification owners because six pending repair nodes had active declaration keys. The exact original unadmitted staged delta, original claim/input hashes and actual declaration RED remain retained. Pending nodes now use planning keys and activate their own declarations only in their implementation slices. The completed frontier wording is corrected; fresh one-owner proof and normal hooks govern the corrected candidate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2`
   Status: `pending`
   Goal: Repair the selected producer-bound residual authority without changing family order or callback contracts.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
   Acceptance: Actual source-bound RED/GREEN and effective source inverses preserve nested/raw helpers, literal twins, exact original origins, repeated events and opaque dependencies. Full guarded Phase0 reaches1035/1035 and unchanged consumers pass before focused landing. Keep integrated mapping and independently committed canonical admission separate.
+
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.4`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.5`
+  Plan: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json; split typed emission integration further by actual family before writes if it grows beyond a safe slice.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0`
+  Status: `pending`
+  Goal: Private emission protocol and callback/invocation identity, with independent adversarial fixtures; no replacement behavior change.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`
+  Status: `pending`
+  Goal: Actual argument/node input frames and private copy/consumption authority; preserve callback objects and effects.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2`
+  Status: `pending`
+  Goal: Typed value-emission builders; split further by actual family before writes if the affected branch set grows beyond a safe slice.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3`
+  Status: `pending`
+  Goal: Structured control/statement and legacy raw-return emission builders at actual concatenation/substitution seams.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.4`
+  Status: `pending`
+  Goal: Compose actual emitted fragments with independent occurrence/callback/nested/literal oracles and meaningful source inverses.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.5`
+  Status: `pending`
+  Goal: Complete guarded Phase0/direct-consumer acceptance for the committed private producer repair; integrated replacement and independent canonical admission stay separate.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.4`
+  Planned tier: `focused`
+  Planned focused proof: Actual producer/callback identity and independently authored occurrence/fragment oracles, effective source inverses and direct consumers; source-bound complete Phase0 at final private acceptance. Preserve public shapes, callback arguments/context/errors, family order and historical evidence; memory/Knowledge/history/claim/diff/normal doctrines.
+  Planned canonical boundary: None for private implementation slices; integrated mapping and independent canonical replacement admission remain separately owned. Reclassify before writes if mechanical/public owners change.
+  Planned claim record: none: Planning only; activation must declare the actual measured implementation record before publishing results.
+  Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.2`
   Status: `pending`
@@ -4140,8 +4216,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `active` | Rejected candidate; producer-bound residual continuation precedes integrated repair. |
 | 43.4.2.0.3.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` | `done` | Rejected candidate retained; guarded nested residual RED and production restored6fe. |
 | 43.4.2.0.3.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` | `done` | One exact finite archive/manifest/decision admission; canonical receipt gates landing. |
-| 43.4.2.0.3.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` | `pending` | Next: select exact typed/raw producer-bound residual authority. |
+| 43.4.2.0.3.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` | `done` | Actual typed/raw producer protocol selected; six private repair slices remain. |
 | 43.4.2.0.3.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2` | `pending` | After selection: repair residual authority and full guarded Phase0. |
+| 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `pending` | Establish private emission/callback identity before input/value/statement integration. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |

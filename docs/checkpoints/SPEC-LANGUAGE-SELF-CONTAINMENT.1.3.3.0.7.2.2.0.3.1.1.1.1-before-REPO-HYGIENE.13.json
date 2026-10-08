@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.13",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review",
+      "statement": "At 2026-10-08T15:03:20.586063+00:00, the scoped parent census records 12225 artifact candidates/14790774770 bytes, with three explicit Rust locations observed separately. Fresh census and independent per-file lstat agree; aggregate/balanced-size controls and traversal fixtures pass. Actual source-guarded producers, exits and both full channels are retained, with four effective evidence RED controls. Zero files are removed; original intersecting claim hashes are preserved at the exact clean activation. The initial legacy-mode preparation failure remains retained.",
+      "scope": "Dated metadata, not content ownership, disposal safety, reclaimed space, current process liveness, recovery/purge or global audit closure. No deletion is attempted. Traversal excludes submodules/nested repositories, symlinks, foreign volumes, caches and managed runs; start-path guards are fixture-verified under a quiescent filesystem, not an adversarial concurrent-mutation guarantee. Retained review checks snapshot totals; --live measures a new changing state. Julia/Dart reusable caches and Lua native outputs remain retained under existing repository-local conventions. External OS/Python/Git prerequisites are read-only; all project-owned output and fixtures stay on the repository volume. Public retention guidance is unchanged, so no render is required. Earlier dated snapshots remain immutable.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.13-capture.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.13-freeze.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.13-claim.py",
+        "granularity": "Every dated path/suffix/size and Rust row, actual full channels/source guards, fixture exclusions and original claim hashes.",
+        "result": "At 2026-10-08T15:03:20.586063+00:00, the scoped parent census records 12225 artifact candidates/14790774770 bytes, with three explicit Rust locations observed separately. Fresh census and independent per-file lstat agree; aggregate/balanced-size controls and traversal fixtures pass. Actual source-guarded producers, exits and both full channels are retained, with four effective evidence RED controls. Zero files are removed; original intersecting claim hashes are preserved at the exact clean activation. The initial legacy-mode preparation failure remains retained."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Totals can hide wrong per-file sizes, boundary traversal or failed/unbound observations.",
+        "oracle": "Independent OS lstat, fresh scoped census, fixed boundary fixtures and guarded actual channel identities.",
+        "red_control": "Aggregate inflation and balanced size redistribution reject; start/ancestor symlink, nested repository, mock submodule and outside-root starts reject. Four reason-sensitive evidence mutations reject incomplete capture, forged producer, failed review and forged stdout."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitignore",
+            "sha256": "b61de7bd78fc7d317b44b9bec528665b632206a4c51d7a0c266a719af951b26c",
+            "role": "input"
+          },
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": "CHANGES.md",
+            "sha256": "3591be9ca52b85396e266b07533b388ff66907d1afa4ab8e1e29113471cd10bc",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "cc6ef0910de7f2f4f21807a15ad3ff02569fde873dd416d2fdffd34f89612be6",
+            "role": "input"
+          },
+          {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "sha256": "ee96cc24f77b3ea2336fcab2c7549291e0d19b8e50c0010f1a5d50586223f730",
+            "role": "input"
+          },
+          {
+            "path": "MEMORY.md",
+            "sha256": "e9f3e82577d62ed8fce0c36c828afc80397df1d0bcbb5ba78fb4368716d5e3f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/ARTIFACT_CLEANUP.md",
+            "sha256": "4e6727067c72f77def1fadafae01a023d3b4a9b7cf1f5d57f90e0bda79ad4a41",
+            "role": "input"
+          },
+          {
+            "path": "docs/TASK_TREE.md",
+            "sha256": "e791fad1284b690e6d7f7e1bda0efb5bf1e0990b7e490b07887451de8232fe4b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-actual-verification.json",
+            "sha256": "740eedd4f118fc67e2502bcf65153f0532bb43cf1481ba044942bd5b5dd0b606",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-actual.json",
+            "sha256": "c1ddfff61516d91cef207c6cfccab3448e5a4d6d6be3208b89a2bd48d9e3f81d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-artifact-review.json",
+            "sha256": "80e1067dadef97f1647d596e4489297a3e4c414500625a9fc5bed4547f394471",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-before-SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+            "sha256": "bde23e64670dbaa56007361ae8cf2654f20184a5c8bf4632b0ec148e4d1e1c2b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-capture.py",
+            "sha256": "189484b4d9ee9039e772c1772bd3e46b1f31a925042e68dcf4ed6f38902efef0",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-census.py",
+            "sha256": "6ff945e189bc0e41f3c347ebdfdd381a098fd845fc6e0231e1c7d47586f0e0c7",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-claim.py",
+            "sha256": "a618e9edf6d14d00ae77d6c4555f2dc471a1b89e6471d34545984bc5de218e4b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-freeze-initial-error.json",
+            "sha256": "6b813f8f73f57b4bd36d91cd51b03bb2dbfb7250e48b5c1006d0831180f1ed33",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-freeze-initial-inputs.json",
+            "sha256": "bde92307ae94d3df9719636f613ed126b81776bc0699438187d4e0a87c044779",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-freeze-initial.py",
+            "sha256": "55095b03f35678af072831d321a726f4560420a5d9deda1379279e99b8c0bd6c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-freeze.json",
+            "sha256": "88efa1b6f16f5f4710537f5db2cfdc4e2b038c6efdb7ee2305fe06101ec47448",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-freeze.py",
+            "sha256": "d6362a8abc4ae6d28dcd601426dc0e82c9b905b8c3296785273e6bdfc1aa49c3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publication-initial-CHANGES.md",
+            "sha256": "1ee9be6484ce6f451af3fe34abbc2b1aa784028d1f05d5a232bf01f490e1e10f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publication-initial-DEVELOPMENT_NOTES.md",
+            "sha256": "cc6ef0910de7f2f4f21807a15ad3ff02569fde873dd416d2fdffd34f89612be6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publication-initial-error.json",
+            "sha256": "23d1c49b80d243535d0a04afd7be82f2c5d633592b9f8fd714974252208f25a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publication-review.py",
+            "sha256": "78c0b3da3907954dd532f6a21a8c67a918303770dbaff12f44cc3ce5a789cd7b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publication-verification.json",
+            "sha256": "4f484af4e66216d2e90f83b41b8e4fe98cef95fe8f2787b71d2ba1eaca126817",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publish-initial.py",
+            "sha256": "eb6eb4c258979cebafce097de7787fe4ad38876d055b9913429d9f364a64f90f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-publish.py",
+            "sha256": "1f55142f76b64eb2b2c81d5e74fbde006f85a9511c409676ddfdb7d4c63422c2",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-review.py",
+            "sha256": "8bc2c9d13d6a7829141483f4858055e2be03e4f0bca6a2dae65958dfd21d864c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.13-verification.json",
+            "sha256": "125f29ceac6c05c7c6d31556a72bfc435f2b06812a88d2e7be1f9a6df070a656",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "sha256": "703c8296e0416be76abf3fc3f15f95925b88043a047fec31ee9400fc2d50c421",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "9171d65bfbed9402f609823e39df92d56f027f06f5aee9cc462a674e8ad42c65",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/REPO-HYGIENE.md",
+            "sha256": "ca4b6ac9d2a1f87dcc2fe42deb3e34a0e94139993597ce03bc310a32f0a6df6e",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

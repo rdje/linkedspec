@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+  "regular_git_inputs": 5313,
+  "actual_commands": 66,
+  "authored_typed_cases": 8,
+  "authored_raw_cases": 3,
+  "controls": [
+    {
+      "name": "incomplete actual capture",
+      "observed": "RED",
+      "reason": "complete actual report"
+    },
+    {
+      "name": "lost actual epoch",
+      "observed": "RED",
+      "reason": "exact epoch pair"
+    },
+    {
+      "name": "failed actual command",
+      "observed": "RED",
+      "reason": "actual successful process"
+    },
+    {
+      "name": "missing source guard",
+      "observed": "RED",
+      "reason": "actual complete input guards"
+    },
+    {
+      "name": "wrong hash seed",
+      "observed": "RED",
+      "reason": "ordered complete commands"
+    },
+    {
+      "name": "forged actual stdout",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "hide retained canonical origin",
+      "observed": "RED",
+      "reason": "actual exact helper origins"
+    },
+    {
+      "name": "forge argument boundary",
+      "observed": "RED",
+      "reason": "actual argument frame"
+    },
+    {
+      "name": "change callback context",
+      "observed": "RED",
+      "reason": "actual scalar callbacks"
+    },
+    {
+      "name": "change callback input",
+      "observed": "RED",
+      "reason": "original callback arguments"
+    }
+  ],
+  "producer_sha256": "a8d1d0967bbd244436a955f657d538f3c26798cfb60477a65218661a64348c0b",
+  "scope": "Four complete supplied source graphs recover independently. Authored cumulative pieces distinguish executable occurrence origins from literal twins. Original/candidate actual scalar callbacks, parser argument frames and full Toolbox channels are retained. Typed entry-group consumption is healthy; capture/mark/entry-named and raw payload continuation loss remains rejected. Literal replacement and unresolved literal classification are previously owned defects. No production repair, opaque-callback transfer proof, full Phase0 or parent closure is claimed."
+}
