@@ -1,0 +1,362 @@
+{
+  "complete": true,
+  "revision": "5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375",
+  "regular_git_inputs": 5018,
+  "overlays": [],
+  "commands": 77,
+  "controlled_seeds": [
+    0,
+    1,
+    42
+  ],
+  "compiler_groups": 41,
+  "public_cases": 22,
+  "public_seed_observations": 66,
+  "authored_value_pairs": 60,
+  "authored_route_values": 120,
+  "callable_sources": 3,
+  "callable_source_seed_pairs": 9,
+  "callable_route_values": 18,
+  "grouped_source_seed_pairs": 18,
+  "grouped_route_values": 36,
+  "default_query_sources": 72,
+  "grouped_assertions_per_seed": 789,
+  "no_original_value_oracle": [
+    "unsupported_nested",
+    "raw_operand"
+  ],
+  "direct_consumers": {
+    "groups": 1644,
+    "plans": [
+      41,
+      191,
+      23,
+      15,
+      13,
+      16,
+      28,
+      15,
+      20,
+      4,
+      16,
+      6,
+      27,
+      12,
+      11,
+      1035,
+      14,
+      5,
+      125,
+      12,
+      3,
+      12
+    ]
+  },
+  "historical_compiler_red": [
+    {
+      "seed": 0,
+      "groups": 38,
+      "failures": [
+        "interleaved_original_mapper",
+        "suppressed_original_return",
+        "double_quote",
+        "single_quote",
+        "escaped_double_quote",
+        "escaped_single_quote",
+        "unicode_scalar_crlf",
+        "quoted_comment_data",
+        "backtick_payload_only_scanned",
+        "q_pipe",
+        "qq_pipe",
+        "q_braces",
+        "qr_slash",
+        "m_slash",
+        "q_angle",
+        "host_substitution_segments",
+        "host_translation_segments",
+        "literal_receiver",
+        "literal_helper_argument",
+        "quoted_flow_condition",
+        "helper_pattern",
+        "grouped_helper_pattern",
+        "bare_regex_operand",
+        "numeric_slash_call_code_interval",
+        "indexed_q_code_interval",
+        "indexed_m_code_interval",
+        "indexed_qr_code_interval",
+        "comment_unclosed_quote_keeps_next_line",
+        "comment_membership_still_deferred",
+        "original_staged_parse_job",
+        "original_progressive_span_dispatch",
+        "original_recognition_checkpoint",
+        "original_my_declare_bare",
+        "original_scalar_assignment_operator",
+        "original_if_flow",
+        "original_return_general",
+        "compiler bridge preserves callback and caller error contracts",
+        "native and independently loaded generated parsers preserve quoted data"
+      ]
+    },
+    {
+      "seed": 1,
+      "groups": 38,
+      "failures": [
+        "interleaved_original_mapper",
+        "suppressed_original_return",
+        "double_quote",
+        "single_quote",
+        "escaped_double_quote",
+        "escaped_single_quote",
+        "unicode_scalar_crlf",
+        "quoted_comment_data",
+        "backtick_payload_only_scanned",
+        "q_pipe",
+        "qq_pipe",
+        "q_braces",
+        "qr_slash",
+        "m_slash",
+        "q_angle",
+        "host_substitution_segments",
+        "host_translation_segments",
+        "literal_receiver",
+        "literal_helper_argument",
+        "quoted_flow_condition",
+        "helper_pattern",
+        "grouped_helper_pattern",
+        "bare_regex_operand",
+        "numeric_slash_call_code_interval",
+        "indexed_q_code_interval",
+        "indexed_m_code_interval",
+        "indexed_qr_code_interval",
+        "comment_unclosed_quote_keeps_next_line",
+        "comment_membership_still_deferred",
+        "original_staged_parse_job",
+        "original_progressive_span_dispatch",
+        "original_recognition_checkpoint",
+        "original_my_declare_bare",
+        "original_scalar_assignment_operator",
+        "original_if_flow",
+        "original_return_general",
+        "compiler bridge preserves callback and caller error contracts",
+        "native and independently loaded generated parsers preserve quoted data"
+      ]
+    },
+    {
+      "seed": 42,
+      "groups": 38,
+      "failures": [
+        "interleaved_original_mapper",
+        "suppressed_original_return",
+        "double_quote",
+        "single_quote",
+        "escaped_double_quote",
+        "escaped_single_quote",
+        "unicode_scalar_crlf",
+        "quoted_comment_data",
+        "backtick_payload_only_scanned",
+        "q_pipe",
+        "qq_pipe",
+        "q_braces",
+        "qr_slash",
+        "m_slash",
+        "q_angle",
+        "host_substitution_segments",
+        "host_translation_segments",
+        "literal_receiver",
+        "literal_helper_argument",
+        "quoted_flow_condition",
+        "helper_pattern",
+        "grouped_helper_pattern",
+        "bare_regex_operand",
+        "numeric_slash_call_code_interval",
+        "indexed_q_code_interval",
+        "indexed_m_code_interval",
+        "indexed_qr_code_interval",
+        "comment_unclosed_quote_keeps_next_line",
+        "comment_membership_still_deferred",
+        "original_staged_parse_job",
+        "original_progressive_span_dispatch",
+        "original_recognition_checkpoint",
+        "original_my_declare_bare",
+        "original_scalar_assignment_operator",
+        "original_if_flow",
+        "original_return_general",
+        "compiler bridge preserves callback and caller error contracts",
+        "native and independently loaded generated parsers preserve quoted data"
+      ]
+    }
+  ],
+  "historical_signature_red": [
+    {
+      "groups": 40,
+      "header_rows": 27,
+      "header_assertions": 165,
+      "failed_assertions": 10,
+      "seed": 0
+    },
+    {
+      "groups": 40,
+      "header_rows": 27,
+      "header_assertions": 165,
+      "failed_assertions": 10,
+      "seed": 1
+    },
+    {
+      "groups": 40,
+      "header_rows": 27,
+      "header_assertions": 165,
+      "failed_assertions": 10,
+      "seed": 42
+    }
+  ],
+  "historical_grouped_red": [
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 903,
+      "failed_assertions": 114,
+      "seed": 0
+    },
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 903,
+      "failed_assertions": 114,
+      "seed": 1
+    },
+    {
+      "groups": 41,
+      "source_rows": 72,
+      "assertions": 903,
+      "failed_assertions": 114,
+      "seed": 42
+    }
+  ],
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "observed_red": "complete immutable capture"
+    },
+    {
+      "name": "missing public command",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "reordered commands",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "nonzero exit",
+      "observed_red": "actual quiet command completion"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "complete unchanged input guards"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "forged producer",
+      "observed_red": "actual capture instrument"
+    },
+    {
+      "name": "nested TAP failure",
+      "observed_red": "all nested and top-level TAP passes"
+    },
+    {
+      "name": "lost original literal",
+      "observed_red": "original public source"
+    },
+    {
+      "name": "lost original AST",
+      "observed_red": "original complete public channel: quoted_set/ast"
+    },
+    {
+      "name": "forged native value",
+      "observed_red": "original complete public channel: quoted_set/native"
+    },
+    {
+      "name": "lost generated source",
+      "observed_red": "original complete public channel: quoted_set/emitted"
+    },
+    {
+      "name": "lost metadata",
+      "observed_red": "original complete public channel: quoted_set/metadata"
+    },
+    {
+      "name": "truncated signature assertion",
+      "observed_red": "complete original nested assertion reach"
+    },
+    {
+      "name": "lost callable origin",
+      "observed_red": "actual producer origins"
+    },
+    {
+      "name": "forged callable native",
+      "observed_red": "authored native/fresh value oracle"
+    },
+    {
+      "name": "forged callable fresh",
+      "observed_red": "authored native/fresh value oracle"
+    },
+    {
+      "name": "forged callable AST",
+      "observed_red": "original block AST"
+    },
+    {
+      "name": "lost grouped assertion789",
+      "observed_red": "complete authored assertion reach"
+    },
+    {
+      "name": "lost grouped command",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "lost actual grouped origins",
+      "observed_red": "original real origins with only pattern-data exclusion"
+    },
+    {
+      "name": "retained false grouped metadata",
+      "observed_red": "only false primitive event and its aggregate counters removed"
+    },
+    {
+      "name": "changed grouped AST",
+      "observed_red": "unchanged original public channel: ast"
+    },
+    {
+      "name": "forged grouped fresh",
+      "observed_red": "unchanged original public channel: fresh"
+    },
+    {
+      "name": "lost default command",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "changed default query channel",
+      "observed_red": "all72 original default query/view/numeric/syntactic channels"
+    },
+    {
+      "name": "lost final consumer reach",
+      "observed_red": "complete TAP reach"
+    },
+    {
+      "name": "renamed consumer group",
+      "observed_red": "original direct consumer group order"
+    },
+    {
+      "name": "missing immutable input",
+      "observed_red": "unique complete inputs"
+    },
+    {
+      "name": "replaced immutable input",
+      "observed_red": "no replaced or overlay input"
+    },
+    {
+      "name": "forged immutable hash",
+      "observed_red": "exact committed input bytes"
+    }
+  ],
+  "instrument_sha256": "ea25df510dabd420054c35daaa26406992a6b2b6fdd82091329a8b846508d4a3"
+}

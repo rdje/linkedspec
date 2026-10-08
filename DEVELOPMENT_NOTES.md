@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Accept committed compiler membership
+
+Independent membership acceptance uses exact committed inputs and complete historical/public/default/consumer oracles. Correct values do not establish source ownership. Exact staged canonical receipt gates closure; selected-occurrence replacement remains separate. Detailed proof and limits: [SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2](docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json).
+
 ## 2026-10-08 — Preserve callable grouped-pattern membership
 
 Exact78012b1e7 snapshots/common authored fixture/cases/default observer supply4982 inputs per epoch; only after replaces MethodExpr/SourceMembership. Fifteen guarded commands retain original114 RED/903 assertions and corrected789 GREEN per seed0/1/42 across72 rows. All original40 groups/signature225 assertions remain intact; total41 groups pass. Six original grouped public sources preserve every source/AST/lowering/emitted/dump/native/fresh/error channel (36 route values); x,y only excludes its real regex-data origin and removes its false event from helper/canonical lists with their counts/hits. All72 default query/view/numeric/ordinary-scan channels remain byte-identical. Twenty-two unchanged consumers pass1644 groups, including original1473/Phase01035. Twenty-one evidence controls/five historical controls/nine publication controls reject; exact247 prior hashes freeze mode/revision only. Book58/five exact examples passes. Original metadata-oracle rejection/source and ineffective newline publication control/render are retained; exact corrected oracles accept. Default MethodExpr/ordinary scanners/splitter/other tests/contracts/CI/dependencies remain unchanged. Focused repair closes no parent; fresh committed canonical .0.2.2.2.2 remains required.

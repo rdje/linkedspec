@@ -1,0 +1,35 @@
+{
+  "complete": true,
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2-initial-review-replay.py"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 2495,
+    "sha256": "78f5512192a7e1ae1b47b25465d3a8e1dbc88b639cf40514d2b74cb92586d4a2",
+    "data": "H4sIAAAAAAAC/82WXW/aMBSG7/kVVm8SupAAgULRmFZRWiF1gArrzdRGxjmAR2JHtjPGpvW37yQBjbZTNW2txolkO7Fjv+fx8cecGhp1SELNklihZNpjS2CrRHJhtDcZ93uVq7Ph5cezy35l0r+6qPRGw+nZYPihP5y6NdfHp+q23Do+1TytVxZKpgmEFUZTDe5nLYVFQgmaCGkIfOXaEC6I1Zw16CltM1qvV/35SbMW+uw09Kl/wthpG1O/Spt+q2mVpooymFG2InYs8W8FDIQhjEYRiag25U6JkAseATnybmSUxoDKJ+feuWRYzvxYcLNMZ17ExQpCnQDzXsRVdJYLbjiNKgq+cFhjlkR04yabI4fgaEBqvpN5+zaWYRrBOxRKkAEwm8k4Qcm2lqli4BCp+IILGjnEyuqtskO+W0EwxzZBYHX264NA0Lj4iuWYcoHlH+W873u0u5e3/we4ALtH1G/UnyLNINj7BA5IcL3eygVnGnOFOo1jqjakS/LhAgwaqYxdZA5hMhWmfEAO1Px27sC+2tyR7UoPdrGJHmXL3Y0kDXUW4TE3BkL79TaWcjHnz9v9zu5e0Q5ovprb6drxzxEpMKkSGHuzREkGWrvFdMrUJKmxP1ko0MLNRS/lGvPr/s1gMhgNyRtidSxMsxPiFoNzHXavR6PpA+73v7d/gSgT4y1lDDMFa68HUUSVl2zMUor3vltreFnitrwLhTvhWqqV9sZ5rTvfffFuQGkuhc7bIvjZtoP8dY/DL3CNlr8X6AWZfXgqFfZxIhMQVC20Q7QJsVF3PBj3HWJ4DNnbNneKXrpTlYLzCNZfR9gDOz5erTMdZbfQ8bj+UKg2W0U8Ir0CJuUaSA9PbwjHReu+UlLhBmiYDPEs3PWRU35+gReT1C0I5DMCSnWLrFza0/N0vA7p4QqhIiTW4+j/48tJ59V2tltrG3UQ4sVJVL6BktntyaCP1KSa1Optt/QTZrMKGL8JAAA="
+  },
+  "initial_sha256": "2f9e5e1e3f721724a6895107e2b0a83169421d2b3d78eff61b900e376f219914",
+  "corrected_sha256": "ea25df510dabd420054c35daaa26406992a6b2b6fdd82091329a8b846508d4a3",
+  "replay_sha256": "3add0bc92891a82dab7997093ed6863bec45f3035ed9cf09f74e93e3d5a34dab",
+  "instrument_sha256": "acc35c99fc610c23973fbbad15181536db0464994ec989a3ec7ca43f8e8a9396",
+  "controls": [
+    {
+      "name": "exact initial missing artifact",
+      "observed_red": "Original source/filename replay exits1 on absent grouped-cause.json."
+    },
+    {
+      "name": "sole correction inverse",
+      "observed_result": "Corrected reference to retained cause-observations.json is the only reviewer delta; complete31-control positive review passes."
+    }
+  ]
+}

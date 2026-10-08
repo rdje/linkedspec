@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `78012b1e78bb114a41f54873f30ca63c421568c8` — clean grouped-pattern checkpoint activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1 - preserve callable grouped-pattern membership`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` (done) — bounded compiler callable/grouped-role correction.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 from clean corrected HEAD. Independently recur original membership/public/value channels, callable and grouped-pattern source/metadata/default-query oracles from committed inputs without production overlays; verify unchanged consumers and exact staged canonical CI/normal hooks before closing membership parents. Then precise selected replacement .0.3; recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned. Preserve historical hashes.
-- in_flight_uncommitted: None; intended clean focused post-landing handoff. Original RED/corrected GREEN/default/public/full consumer/book/claim checks complete. Fresh committed canonical acceptance starts after this commit; membership parents remain open.
+- activation_commit: `5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375` — clean corrected membership activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 - accept committed compiler membership`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` (done) — independent committed membership acceptance.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3 from clean committed HEAD after checking bounded-history capacity. Retrieve original quoted-twin/mapping/occurrence facts and Toolbox source-bound probes; author exact original/rewritten occurrence oracles before a safely bounded replacement repair. Preserve quoted bytes, real spans, arguments/references, family order and native/fresh/error contracts. Recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
+- in_flight_uncommitted: None; intended clean post-landing handoff. Complete immutable membership/history/book/claim checks and exact staged canonical receipt/normal hooks gate this commit. Precise replacement follows; other owners remain open.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

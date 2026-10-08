@@ -842,11 +842,14 @@ The regex's `set(counter,1)` is data. Its primitive event is excluded from
 compiler membership and the helper/canonical metadata event lists; genuine
 assignments and returns retain their source authority and order. A correct
 return value alone would not reveal an extra metadata event. Compiler membership
-acceptance remains open until fresh committed canonical verification completes.
-This checkpoint does not close exact selected-occurrence replacement, source
+acceptance independently recurs the original membership, signature and grouped-pattern
+oracles from committed inputs without overlays. Exact staged canonical proof is
+also required before closure. This acceptance does not close exact selected-occurrence replacement, source
 comments or compiler-marker diagnostic origin. Mixed equal literal/executable
-spellings still need the replacement repair. The private fixture covers 36
-authored sources and five authority/error guards; its scanner cases do not admit
+spellings still need the replacement repair. The original membership population
+covers 36 authored sources and five authority/error guards; the subsequent
+signature and grouped-pattern populations cover 27 and 72 authored rows,
+respectively. These scanner cases do not admit
 new executable syntax or establish another backend's behavior.
 
 Unresolved-helper text scans can still count the preserved helper spelling in a
