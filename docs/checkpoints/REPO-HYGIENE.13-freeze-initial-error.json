@@ -1,0 +1,12 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/REPO-HYGIENE.13-freeze-initial.py"
+  ],
+  "exit": 1,
+  "producer_sha256": "55095b03f35678af072831d321a726f4560420a5d9deda1379279e99b8c0bd6c",
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTMtZnJlZXplLWluaXRpYWwucHkiLCBsaW5lIDMwLCBpbiA8bW9kdWxlPgogICAgaWYgZHVyYWJpbGl0eVsnbW9kZSddICE9ICdsaXZlJyBvciBub3QgYW55KGVudHJ5WydwYXRoJ10gaW4gUFVCTElDQVRJT04gZm9yIGVudHJ5IGluIGR1cmFiaWxpdHlbJ2lucHV0cyddKToKICAgICAgIH5+fn5+fn5+fn5eXl5eXl5eXgpLZXlFcnJvcjogJ21vZGUnCg==",
+  "scope": "Actual recurrence of original preparation failure; not acceptance."
+}

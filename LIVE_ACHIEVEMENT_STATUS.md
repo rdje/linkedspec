@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: finite capacity prerequisite complete; producer-bound residual selection next.
+Full PNT: daily artifact review complete; producer-bound residual selection next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — One exact clean-record rollover under ADR0129. Five finite scalars admit one archive/manifest row and indexed decision; prior history/decisions/other controls remain exact. Actual reconstruction and authority RED controls precede exact canonical admission. Production remains restored6fe.
+`REPO-HYGIENE.13` — Dated 2026-10-08T15:03:20.586063+00:00 census retains 12225 parent candidates/14790774770 bytes; three Rust log/bin locations are observed separately. Fresh metadata and independent lstat agree; size/boundary fixtures and four actual-channel RED controls pass. Zero removals; proof data and caches remain retained. The capacity claim preserves all198 original hashes at clean60e8ef2ab; the original legacy-mode preparation failure is retained. Public retention guidance is unchanged; focused checks and normal doctrines govern landing.
 
 ## Next Action
 
-Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual typed/raw lowering producers and establish bounded residual continuation authority before production edits. Repair .1.1.1.2, integrated mapping .1.1.2 and independent canonical .0.3.2 remain open; keep the rejected overlap candidate retired.
+Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual typed/raw lowering producers and establish bounded residual continuation authority before production edits.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — actual origin/copy/frame RED7/GREEN10; public42/consumer144;11 source inverses/eight evidence RED.
@@ -29,7 +30,6 @@ Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual ty
 - `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 
 ## History
 

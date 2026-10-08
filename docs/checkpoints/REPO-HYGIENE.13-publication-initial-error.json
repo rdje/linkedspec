@@ -1,0 +1,17 @@
+{
+  "command": [
+    "perl",
+    "tools/roll_document_history.pl",
+    "--surface",
+    "change_history",
+    "--check"
+  ],
+  "exit": 255,
+  "stdout_base64": "",
+  "stderr_base64": "Y2hhbmdlX2hpc3RvcnkgY3VycmVudCBwcmVhbWJsZSBvbWl0cyBpdHMgaGlzdG9yeSBtYW5pZmVzdAo=",
+  "original_publisher_sha256": "eb6eb4c258979cebafce097de7787fe4ad38876d055b9913429d9f364a64f90f",
+  "inputs": {
+    "docs/checkpoints/REPO-HYGIENE.13-publication-initial-CHANGES.md": "1ee9be6484ce6f451af3fe34abbc2b1aa784028d1f05d5a232bf01f490e1e10f",
+    "docs/checkpoints/REPO-HYGIENE.13-publication-initial-DEVELOPMENT_NOTES.md": "cc6ef0910de7f2f4f21807a15ad3ff02569fde873dd416d2fdffd34f89612be6"
+  }
+}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-08 — REPO-HYGIENE.13 - retain due artifact review
+
+Dated 2026-10-08T15:03:20.586063+00:00 census retains 12225 parent candidates/14790774770 bytes; three Rust log/bin locations are observed separately. Fresh metadata and independent lstat agree; size/boundary fixtures and four actual-channel RED controls pass. Zero removals; proof data and caches remain retained. The capacity claim preserves all198 original hashes at clean60e8ef2ab; the original legacy-mode preparation failure is retained. Public retention guidance is unchanged; focused checks and normal doctrines govern landing.
+
 ## 2026-10-08 — Finite residual-repair history (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0)
 
 One exact clean-record suffix moves into governed history. ADR0129 admits one archive, its measured manifest row and one indexed decision; all other controls and prior bytes remain exact. Retained producers, reconstruction and actual authority denials precede staged canonical admission.

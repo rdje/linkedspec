@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "rejected": true,
+      "reason": "complete actual capture"
+    },
+    {
+      "name": "forged producer",
+      "rejected": true,
+      "reason": "producer identity"
+    },
+    {
+      "name": "failed review",
+      "rejected": true,
+      "reason": "actual exit"
+    },
+    {
+      "name": "forged stdout",
+      "rejected": true,
+      "reason": "channel identity"
+    }
+  ],
+  "instrument_sha256": "a618e9edf6d14d00ae77d6c4555f2dc471a1b89e6471d34545984bc5de218e4b",
+  "original_freeze_preparation_failure_retained": true,
+  "public_book": "Unchanged retention guidance and immutable example reviewed; no public behavior change."
+}

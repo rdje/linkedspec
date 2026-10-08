@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-08` (`REPO-HYGIENE.12`: historical Phase0 record qualified)
+- Last updated: `2026-10-08` (`REPO-HYGIENE.13`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -249,6 +249,25 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.12 - qualify historical Phase0 measurements` (Git owns identity).
   Handoff: Check bounded-history capacity from this clean commit, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff. Freeze the210-input diagnosis at its original committed boundary before changing any bound producer or book input; preserve original hashes. Mapped replacement .1.1 and independent canonical .2 remain required.
 
+- ID: `REPO-HYGIENE.13`
+  Status: `done`
+  Priority: P2 — due daily metadata review before residual-producer diagnosis.
+  Goal: Review the due artifact population without deleting retained proof data or reusable caches.
+  Activation: Clean 60e8ef2ab571bab5d951e0d6f701daf1752df36e; capacity canonical gate and commit completed, post-commit pointer PASS, brief0 and clean Git confirmed.
+  Reproduce: The latest record is 2026-10-07T13:28:24.094691+00:00; it became over24h old during the capacity canonical run.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.13-* metadata/review/capture producers and retained results; docs/claims/REPO-HYGIENE.13.json; latest cleanup record; cleanup Knowledge card; task/index/live/resume/change/notes; mode/revision-only preservation of intersecting original live claims. Scratch remains repository-relative under .linkedspec-data/scratch/hygiene13.
+  Verification tier: `focused`
+  Focused checks: Read-only same-volume parent metadata census and three explicit Rust release/incremental/deps log-bin locations; exclude submodules, nested repositories, symlinks, foreign volumes, managed runs and caches before traversal. Independently verify each observed path/type/size, test aggregate and balanced-size corruption plus traversal boundary fixtures, and retain actual commands/exits/full channels with source guards. Preserve original claim hashes at exact activation; review unchanged public retention guidance; run memory/Knowledge/history/claim/diff and normal doctrines.
+  Canonical trigger: None; dated retention review with no storage/runtime/contract/gate mechanism change.
+  Claim verification: `docs/claims/REPO-HYGIENE.13.json`
+  Acceptance: Publish exact dated metadata and effective independent controls before overwriting the latest-only date. Delete only a proved exact disposable target; otherwise zero deletion. Never traverse another repository or run recovery/purge. Commit before resuming SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.
+
+  Preparation corrections: The initial preservation helper indexed a missing legacy durability mode; exact initial source, actual error channels and75 original loaded claim inputs remain retained. The corrected selector admits only explicitly live records. The initial publisher matched an inline `##` example before the real CHANGES heading; the actual history check rejected its missing manifest preamble. Exact rejected chronology outputs/source/channels remain retained. Heading-only matching and reconstruction from clean activation restore the complete original preambles and records; an independent publication check verifies the correction. Neither rejected preparation is acceptance.
+
+  Verification: PASS; Dated 2026-10-08T15:03:20.586063+00:00 census retains 12225 parent candidates/14790774770 bytes; three Rust log/bin locations are observed separately. Fresh metadata and independent lstat agree; size/boundary fixtures and four actual-channel RED controls pass. Zero removals; proof data and caches remain retained. The capacity claim preserves all198 original hashes at clean60e8ef2ab; the original legacy-mode preparation failure is retained. Public retention guidance is unchanged; focused checks and normal doctrines govern landing.
+  Commit: `REPO-HYGIENE.13 - retain due artifact review` (Git owns identity).
+  Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1 from clean committed HEAD.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -263,6 +282,7 @@ the durable handoff state current.
 | 8 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
 | 9 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
 | 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
+| 11 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
 
 ## Decisions
 
@@ -291,6 +311,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-08` | `REPO-HYGIENE.13` | Actual census/live lstat/source guards/boundary fixtures/claim preservation; memory/Knowledge/history/diff and normal doctrines | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.12` | Original/qualified card and current book review; unchanged production/test/CI paths; memory/Knowledge/history/diff and normal doctrines | Historical lifecycle qualification only; no new measurement. |
 | `2026-10-07` | `REPO-HYGIENE.11` | Actual census/live lstat/full channels/book/freeze; memory/Knowledge/history/claims/doctrines/diff | PASS — 10838 parent rows/13805895079 bytes; zero removals. |
 | `2026-10-06` | `REPO-HYGIENE.10` | Actual census/live reviewer; original Legacy claim freeze; complete book/render controls; retained-claim replay; memory/history/Knowledge/claims/doctrines/diff | PASS — 8931 parent candidates/12619808609 bytes;483 incremental rows/2390808555 bytes; nine nested repositories excluded; zero removals;224 original bindings/112 unique hashes. |
@@ -322,6 +343,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-08: `.13` completes the due retained metadata review and resumes private residual-producer diagnosis.
 
 - 2026-10-08: `.12` qualifies the historical Phase0 card without a new census or timing claim; resumes private replacement work after history-capacity review.
 

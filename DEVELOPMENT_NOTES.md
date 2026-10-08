@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Due metadata review (REPO-HYGIENE.13)
+
+Validate the supplied census start and its ancestors before traversal as well as child entries. The dated review keeps all artifacts; age, size and a passing metadata check do not prove disposal safety. Current standalone controls cover symlink starts/ancestors, nested Git markers, mock submodules and outside-root starts. Earlier producers and snapshots stay immutable. Unqualified legacy durability records are not implicitly live; preserve the actual preparation failure before correcting the current selector. The existing public teaching and retained .11 example remain accurate.
+
 ## 2026-10-08 — Finite producer-residual history prerequisite
 
 ADR0129 follows the autonomous-PNT maintenance precedent of ADR0128 without asserting a new director grant. One exact clean suffix and actual manifest bytes supply the exhausted change-history archive slot. The single indexed decision receives only measured file/line capacity. All unrelated registry row bytes, prior archive rows/files and accepted decision bytes remain exact; actual accepted-state denials exercise the repaired routing functions. Parser behavior and public teaching do not change. Exact sources, initial formatting correction and retained channels: `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-plan.json` and `verification.json`.

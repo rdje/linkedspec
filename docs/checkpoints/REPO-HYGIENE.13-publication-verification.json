@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "revision": "60e8ef2ab571bab5d951e0d6f701daf1752df36e",
+  "results": [
+    {
+      "path": "CHANGES.md",
+      "original_sha256": "b179860bbcebd0a8339a91f5f8ac5e8a21d3ffa48c93819dfcc9caa025b6fbdc",
+      "current_sha256": "3591be9ca52b85396e266b07533b388ff66907d1afa4ab8e1e29113471cd10bc",
+      "preamble_and_prior_records_exact": true
+    },
+    {
+      "path": "DEVELOPMENT_NOTES.md",
+      "original_sha256": "60b3cb0a572b854434dbdf1d5c5bfb77a39999997d4c0b4a2ceeb1c841520b00",
+      "current_sha256": "cc6ef0910de7f2f4f21807a15ad3ff02569fde873dd416d2fdffd34f89612be6",
+      "preamble_and_prior_records_exact": true
+    }
+  ],
+  "original_preamble_red_retained": true,
+  "producer_sha256": "78c0b3da3907954dd532f6a21a8c67a918303770dbaff12f44cc3ce5a789cd7b"
+}
