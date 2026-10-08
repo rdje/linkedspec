@@ -3613,10 +3613,67 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/five exact examples/nine RED; original291 hashes/five RED;31 evidence RED; claim/Knowledge/task/index/roadmaps/live/resume/bounded histories agree. Later replacement/origin/comments remain owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3`
-  Status: `pending`
+  Status: `active`
   Goal: Replace only the selected executable residual occurrence, preserving quoted twins and literal bytes.
   Dependencies: `.1.3.3.0.7.2.2.0.2`
   Acceptance: Verify original and rewritten source frames, mixed identical occurrences in both orders, interleaved calls, nested/deferred values and native/fresh host-call repair. Preserve genuine raw spans and existing family ordering, then commit.
+
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2`
+  Safe-slice split: First retain current Toolbox source/AST/substitution/descriptor/dump/native/fresh observations and independent identical-occurrence oracles; select the exact original/rewritten frame owners from reached traces. Repair only that measured scope in .1; .2 independently recurs committed behavior and requires exact canonical receipt before parent closure. Do not infer spans from equal raw text or change contract-family precedence. Diagnostic origin, comments and recurring registration keep their existing owners.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`
+  Status: `done`
+  Goal: Diagnose the selected residual occurrence in original and rewritten source frames.
+  Dependencies: `.1.3.3.0.7.2.2.0.2`
+  Activation: Clean fa9b7608ed9e49712129bb5456d75d118e7207a0, empty brief, successful exact canonical receipt/normal hooks and no required job. Relevant roadmap, task, book, source-membership, original producer-frame and residual-order facts reviewed. The replacement mechanism is not presumed fixed by membership.
+  Owned paths: Leaf-prefixed tracked diagnosis/freeze/capture/reviewer/fixture/book artifacts and claim; prior318-input membership claim mode/revision-only freeze; source-ownership Knowledge/book, task/index/roadmaps/resume/live/change/notes. No production, standard test, CI/hook or dependency edits.
+  Verification tier: `focused`
+  Focused checks: Actual public Toolbox observations and reached source-location traces; independent literal/occurrence/frame/order/native/fresh/error oracles, exact committed producer/input identities, complete diagnostic RED with healthy guards, effective reason-specific evidence controls; unchanged AST/canonical/source-membership consumers, actual book render, claims/Knowledge/memory/history/diff and all normal doctrines.
+  Canonical trigger: None; diagnosis and safe ownership decomposition only. Repair and committed acceptance remain separately owned; no behavior or public contract admission here.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json`
+  Acceptance: Retain exact original source and all observed failures without claiming runtime repair. Distinguish selected real origins from actual replacement locations in both orders, repeated and interleaved twins, nested/deferred and rewritten data; preserve arguments/references, genuine raw spans, family order and successful guards. Select a safe .1 scope from observed mechanisms and commit.
+
+  Verification: Unchanged fa9b7608e supplies 5,045 regular Git inputs plus three explicit diagnosis overlays for each of two 44-command captures. Fourteen authored sources recur under seeds0/1/42. Corrected native/fresh routes expose seven replacement failures and seven healthy controls; complete RED reaches14 groups. Six unchanged consumers pass144 groups per capture. The selected original assignment32–53 is correct, but its rewritten twin lookup chooses quoted11 instead of executable35. Actual event/argument identities expose collector/canonical copies without private-origin handoff. Three actual built-in traces per population retain reached rewrites; initial invalid cat and mismatched deferred-context channels remain explicit. Twenty evidence, five instrument, five history and eleven render controls reject. Original318 membership hashes freeze mode/revision only at fa9b7608e; book58/seven exact examples passes. Production/tests/CI/hooks/contracts/dependencies remain unchanged. Diagnosis does not repair runtime or close replacement, recurring, diagnostic-origin or comment owners.
+  Owned instrument corrections: Initial display assumes public scanner contract_id and rejects; exact source/actual rejection recurrence and sole raw-watch display correction survive. Initial generated-data cat has one argument and is unsupported; explicit corrected source has two, with13 other source oracles unchanged. Original deferred guard compares facade binding context with a direct owner lacking it; corrected same-facade comparison passes and direct-owner channel remains separate. Complete original/current channels and exact correction inverses are verified; no production defect is inferred from these instrument errors.
+  Encountered documentation defect: Dated June12 Phase0 card still says current/1004/approximately3 minutes. Actual .0.2.2.2.2 canonical output is1035/1185 wallclock seconds for that exact run, without a universal duration claim. REPO-HYGIENE.12 owns qualification immediately after this clean commit.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0 - retain exact replacement diagnosis` (Git owns identity).
+  Next: Activate REPO-HYGIENE.12 from the clean diagnosis commit; qualify the dated Phase0 Knowledge snapshot without refreshing its measurements. Then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff, checking history capacity first. Preserve exact source and event/argument/reference authority; authored RED/GREEN precedes production changes. Mapped replacement .1.1 and committed canonical .2 remain required; no raw-text pairing/global sort.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0
+
+- [x] **REPRODUCE / ISSUE** — Actual LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source and independent emitted execution retain seven corrected failing sources/three seeds; complete14-group RED has seven healthy guards.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Observed real scanner/AST interval32–53 and reached RewritePipeline original32/rewritten11 queries distinguish executable35 from quoted11 after expansion. Actual collector/canonical reference copies lose original occurrence authority.
+- [x] **FIX** — Diagnosis/evidence and safe repair decomposition only; all production, standard tests and mechanical owners remain activation-exact.
+- [x] **ADDRESSED (verified)** — Complete original/corrected44 commands,42 source/seed pairs each, exact source/frame/argument/reference/metadata/value/error channels, actual traces and20 evidence controls; no runtime repair claimed.
+- [x] **NO REGRESSION** — Six unchanged direct consumers pass144 complete ordered groups twice. Exact canonical Phase01035 completed at activation; diagnosis changes no production or standard tests and does not claim a new full gate.
+- [x] **LOCKSTEP** — Book58/seven exact examples/11 controls, original318 hashes/five controls and five instrument controls; task/index/roadmaps/live/resume/Knowledge/claims/history/diff and normal hooks govern landing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1`
+  Status: `pending`
+  Goal: Repair only the measured selected-occurrence replacement boundary.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`
+  Acceptance: Author source-identical RED/GREEN before production changes; preserve original/rewritten literal bytes, real origin/reference identity, genuine raw spans, arguments, family order and native/fresh/error contracts. Split further before widening ownership; focused verification and normal hooks precede .2.
+
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
+  Safe-slice split: Private origin handoff through actual compiler event copies first, then exact original-to-rewritten interval mapping and insertion ownership. The before diagnostic corpus remains immutable; preserve callbacks, public schemas, family and consumed/exclusive order. No quoted rescanning or inferred equal-raw span may grant authority.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
+  Status: `pending`
+  Goal: Preserve private original occurrence authority through compiler collection/canonical copies.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`
+  Acceptance: Candidate owners: new perl/LinkedSpec/ActionIR/SourceOrigins.pm, Scanner.pm, Diagnostics.pm, CanonicalEvents.pm, CanonicalEvents/Core.pm and RewritePipeline.pm. Select exact invocation-local capture/copy and actual splitter-frame seams before editing; author source/ref/args/raw/fallback/foreign/malformed/delegation/error/reentrant controls. Keep replacement behavior unchanged here; verify original diagnostics/source/value/error channels and unchanged consumers, then focused commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
+  Status: `pending`
+  Goal: Replace selected original intervals in the current rewritten frame.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
+  Acceptance: Candidate owner: RewritePipeline.pm and its private original interval/edit translation seam. Author source-identical quoted/generated/interleaved/duplicate/nested/raw/implicit-newline/closure RED/GREEN before changing searches or insertions. Preserve literals, real spans, args/references, family ordering and native/fresh/errors; resolve every observed defect in a safely bounded slice. Focused repair precedes independently committed canonical replacement .0.3.2.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2`
+  Status: `pending`
+  Goal: Independently accept the committed replacement repair.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1`
+  Acceptance: Recur complete retained original/corrected oracles and unchanged consumers from committed inputs, with effective evidence/history/render controls. Exact staged canonical receipt and normal hooks precede closure of replacement .0.3 only; recurring .0.4, diagnostics and comments remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4`
   Status: `pending`
@@ -3932,7 +3989,12 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.2.2.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` | `done` | Immutable recurrence and grouped-pattern cause retained; repair next. |
 | 43.4.2.0.2.2.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` | `done` | Compiler grouped roles repaired; original114 RED/corrected789 GREEN and unchanged default/public/consumers. |
 | 43.4.2.0.2.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` | `done` | Complete committed membership verified; exact canonical receipt gates landing. |
-| 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
+| 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `active` | Diagnose exact selected-occurrence replacement first. |
+| 43.4.2.0.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` | `done` | Original/rewritten diagnosis verified; repair remains open. |
+| 43.4.2.0.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1` | `pending` | Repair the measured replacement boundary. |
+| 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `pending` | Private occurrence handoff through actual copies. |
+| 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `pending` | Original-to-rewritten mapped replacement and insertions. |
+| 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
 | 43.4.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.3` | `pending` | Independent quoted-data closeout before comments .7.3. |
@@ -3972,6 +4034,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October8 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`: Unchanged fa9b7608e supplies 5,045 regular Git inputs plus three explicit diagnosis overlays for each of two 44-command captures. Fourteen authored sources recur under seeds0/1/42. Corrected native/fresh routes expose seven replacement failures and seven healthy controls; complete RED reaches14 groups. Six unchanged consumers pass144 groups per capture. The selected original assignment32–53 is correct, but its rewritten twin lookup chooses quoted11 instead of executable35. Actual event/argument identities expose collector/canonical copies without private-origin handoff. Three actual built-in traces per population retain reached rewrites; initial invalid cat and mismatched deferred-context channels remain explicit. Twenty evidence, five instrument, five history and eleven render controls reject. Original318 membership hashes freeze mode/revision only at fa9b7608e; book58/seven exact examples passes. Production/tests/CI/hooks/contracts/dependencies remain unchanged. Diagnosis does not repair runtime or close replacement, recurring, diagnostic-origin or comment owners.
 
 October8 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2`: Fresh immutable5b4a9a8 supplies5018 regular committed inputs/no overlays for77 guarded commands. Compiler41/original40/signature225/grouped789 pass per seed0/1/42. All original66 public source/AST/lowering/emitted/metadata/value/error channels recur with120 authored route values; unsupported_nested/raw_operand retain explicit unassessed value scope. Plain callable18 and grouped36 native/fresh values preserve complete corrected source/origin/metadata channels. All72 default query/view/numeric/syntactic snapshots remain byte-identical. Twenty-two unchanged consumers pass1644 ordered groups/full Phase01035. Historical membership38, signature10 and grouped114 RED recur from original retained producers. Thirty-one evidence controls, five history controls and nine render controls reject. Exact291 repair hashes freeze mode/revision only at5b4a9a8. Book58/five exact examples passes. Production/tests/contracts/CI/hooks/dependencies remain unchanged. Initial missing-artifact reviewer/source/error are retained; exact rejection recurs and sole corrected reference passes complete review. Exact staged canonical receipt and normal hooks gate membership parent closure; precise replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
 
@@ -4072,6 +4136,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0 - retain exact replacement diagnosis` — bounded diagnosis; Git owns identity.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 - accept committed compiler membership` — independent membership acceptance; exact canonical receipt gates landing. Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1 - preserve callable grouped-pattern membership` — focused repair; fresh committed canonical acceptance remains open. Git owns identity.
@@ -4153,6 +4219,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- 2026-10-08: Exact replacement diagnosis retained; private handoff/mapped repair split before production and dated Phase0 correction owned.
 
 - `2026-10-08`: .0.2.2.2.2 independently accepts corrected committed membership; exact receipt gates parent closure and precise replacement follows.
 

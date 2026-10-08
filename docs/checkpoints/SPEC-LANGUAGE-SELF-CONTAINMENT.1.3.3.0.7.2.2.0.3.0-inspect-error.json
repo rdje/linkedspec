@@ -1,0 +1,22 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0-inspect.py"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 309,
+    "sha256": "a989b3aec1c2d8acdd90bd8044baf0fb75242a04ccf0c22686434ea268d98711",
+    "data": "H4sIAAAAAAAC/21Qy2rDMBC8+ysGYYgNAcdXG5NDoD+RBKFaaxKQpUQP16G0395140MOuewszM7sMAd1i8kTejfeDEVq8KFMIHjqndekF2JUVocGdZ3dk4uk5ScNjjVWxetEHWwyBoOncFl351VvmDgKl2I3qthfKBQnMZ/EFtVclQz1OYNxX+Qb5E9bdNjkLGDUDt8YH8ilNEGuBnJSJhGzYhYtNA1XS7p4c1Jij6J4q/39f898jQa7chn42bR4zcn2z5Qtt8DlWBzXhFss+c7ZH8uRtSw1AQAA"
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 518,
+    "sha256": "5987b0e3f98eb3f46c2a116326d18a671fd04ecb9586c0bfd6e90351f8cc4254",
+    "data": "H4sIAAAAAAAC/82RQWuDQBCF7/6KIRcTiG7apASkKUhiQmlqC9pegpbNOm0W111x10Iu+e1dhRI89N43h30Mj7cfTNpQhkfKShhXShtokKE0wKgQIKg2k8AB2HKBMCLvSrQVapIkG7JRzHppNPni5tQeieCyxELXyEihmCbshKysFe8iyWu09vZhvHsLd5GXRPutt36J0/Axfo7i1L/x53Zm/tK/tTPrvMdlV2X8+jyagu1GWCymwCXcV6poBT5YLICKcjme9PZilef/BXZ+18N2fD0d/wT8tgQHV6OwUSzcDKgsfrf942YHlylp7EnMB+8Sq5W9hMbr2s2Cvu9PXQbKh3Ke8Bw1jWoCGHzk/ABXnOILBgIAAA=="
+  },
+  "source_sha256": "52854efe4b0485d8f87c46eb62c864867a27f113d7a759c47b4247cedc772519",
+  "scope": "Actual recurrence of the initial display failure; initial console return remains separate. Public capture bytes are untouched. Ordinary scanner packets do not include contract_id."
+}

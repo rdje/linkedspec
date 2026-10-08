@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "command": "bash tools/project_data_run.sh perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $action=q{quoted=\\x27out=matches(\"x\", /x/)\\x27; out=matches(\"x\", /x/); return([quoted,out])}; $action =~ s/\\\\x27/chr(39)/ge; my $source=\"Top:: I { $action }\"; my %ctx; my $dump=\"\"; my $parser=LinkedSpec::Get(\\$source,runtime_ctx_ref=>\\%ctx,dump_parser_source=>1,parser_source_ref=>\\$dump); my $in=\"\"; my $value; eval { $value=$parser->(\\$in) }; my $error=$@; my $d=LinkedSpec::Get(\\$source,return_descriptor=>1); print JSON::PP->new->canonical->allow_nonref->encode({action=>$action,substitution=>LinkedSpec::call_spec_handler_subst(\"Top\",$action),value=>$value,error=>$error,meta=>$d->{spec}{Top}{meta}{action_rewriter},dump=>$dump}),\"\\n\";' ",
+  "tool_output_scope": "Exact tool-returned merged output; separate stdout/stderr not available. Successful shell exit does not establish parser execution.",
+  "raw_bytes": 17429,
+  "raw_sha256": "19310c336701fe75c17d08a57b0fb43bef6be1b5f1281e710309cd9d4ac18cb7",
+  "artifact": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0-initial-tool-return.json.gz",
+  "artifact_sha256": "aa7bb4a929ae70ac6db9cd7024b0f31854543191d6b01f7049dd1402d1dd5333",
+  "producer_sha256": "e1ba62ba2407e3d40bed3757d16acd5a71d3f404cfa669e253d60d05a0dbdf21",
+  "observed_action": "quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out])",
+  "observed_substitution": "$quoted = '$out = do { my $__ls_matches_value = \"x\"; defined($__ls_matches_value) ? (($__ls_matches_value =~ /x/) ? 1 : 0) : 0 }'; out=matches(\"x\", /x/); return [$quoted, $out]"
+}

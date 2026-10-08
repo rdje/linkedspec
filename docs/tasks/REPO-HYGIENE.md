@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `completed`
+- Status: `active`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-07` (`REPO-HYGIENE.11`: due review after clean compiler membership)
+- Last updated: `2026-10-08` (`REPO-HYGIENE.12`: dated Phase0 Knowledge record correction scheduled)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,9 +38,9 @@ the durable handoff state current.
 ## Task Tree
 
 - ID: `REPO-HYGIENE`
-  Status: `completed`
+  Status: `active`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -232,6 +232,15 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.11 - retain daily artifact census` (Git owns identity).
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
 
+- ID: `REPO-HYGIENE.12`
+  Status: `pending`
+  Priority: P2 — qualify a dated testing fact that still claims current counts and runtime.
+  Goal: Preserve the June12 Phase0 observations as dated history and route current reach/runtime to current proof.
+  Reproduce: Read docs/knowledge/phase0-regression-structure.md: status current,1004 subtests and approximately3 minutes. The completed .0.2.2.2.2 canonical receipt retains1035 tests/1185 wallclock seconds for its exact run; that single run is not a universal performance estimate.
+  Impact: Startup retrieval can mistake historical measurements for current suite size and execution expectations.
+  Schedule: After the clean selected-replacement diagnosis .0.3.0 and before its production repair .0.3.1; no dirty pivot.
+  Acceptance: Qualify the original dated observations without refreshing them or inferring a new universal duration. Preserve source/test/CI bytes and actual prior evidence; update Knowledge, task/live/resume/history and run focused documentation checks/normal hooks. Resume replacement repair from a clean commit.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -245,6 +254,7 @@ the durable handoff state current.
 | 7 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
 | 8 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
 | 9 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
+| 10 | `REPO-HYGIENE.12` | `pending` | Qualify dated Phase0 counts/runtime after clean replacement diagnosis, then resume production repair. |
 
 ## Decisions
 

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375` — clean corrected membership activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 - accept committed compiler membership`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` (done) — independent committed membership acceptance.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3 from clean committed HEAD after checking bounded-history capacity. Retrieve original quoted-twin/mapping/occurrence facts and Toolbox source-bound probes; author exact original/rewritten occurrence oracles before a safely bounded replacement repair. Preserve quoted bytes, real spans, arguments/references, family order and native/fresh/error contracts. Recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
-- in_flight_uncommitted: None; intended clean post-landing handoff. Complete immutable membership/history/book/claim checks and exact staged canonical receipt/normal hooks gate this commit. Precise replacement follows; other owners remain open.
+- activation_commit: `fa9b7608ed9e49712129bb5456d75d118e7207a0` — clean canonical membership boundary.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0 - retain exact replacement diagnosis`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` (done) — original/rewritten replacement diagnosis.
+- next_action: Activate REPO-HYGIENE.12 from the clean diagnosis commit; qualify the dated Phase0 Knowledge snapshot without refreshing its measurements. Then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff, checking history capacity first. Preserve exact source and event/argument/reference authority; authored RED/GREEN precedes production changes. Mapped replacement .1.1 and committed canonical .2 remain required; no raw-text pairing/global sort.
+- in_flight_uncommitted: None; intended clean post-landing handoff. Complete source-bound diagnosis, history/instrument/book/claim checks and normal focused hooks govern this commit; no production repair.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

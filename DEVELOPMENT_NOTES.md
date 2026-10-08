@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Exact replacement diagnosis
+
+Selected origin32 maps to rewritten35; raw search replaces quoted11. Preserve authority through copies/edits. See docs/knowledge/perl-residual-replacement-source-frames.md.
+
 ## 2026-10-08 — Accept committed compiler membership
 
 Independent membership acceptance uses exact committed inputs and complete historical/public/default/consumer oracles. Correct values do not establish source ownership. Exact staged canonical receipt gates closure; selected-occurrence replacement remains separate. Detailed proof and limits: [SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2](docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json).

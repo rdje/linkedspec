@@ -1,0 +1,111 @@
+{
+  "complete": true,
+  "revision": "fa9b7608ed9e49712129bb5456d75d118e7207a0",
+  "regular_git_inputs": 5045,
+  "overlays_per_capture": 3,
+  "commands_per_capture": 44,
+  "authored_sources": 14,
+  "source_seed_pairs_per_capture": 42,
+  "actual_red_groups": [
+    "quoted_before",
+    "interleaved_equal",
+    "distinct_twins",
+    "double_quoted_before",
+    "unicode_crlf",
+    "generated_data",
+    "set_before"
+  ],
+  "healthy_groups": 7,
+  "consumer_plans": [
+    23,
+    15,
+    20,
+    41,
+    41,
+    4
+  ],
+  "actual_traces_per_population": 3,
+  "controls": [
+    {
+      "name": "missing command",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "reordered commands",
+      "observed_red": "complete ordered command population"
+    },
+    {
+      "name": "incomplete capture",
+      "observed_red": "complete capture"
+    },
+    {
+      "name": "wrong producer",
+      "observed_red": "actual capture producer"
+    },
+    {
+      "name": "observer exit",
+      "observed_red": "complete observer exit"
+    },
+    {
+      "name": "wrong observer command",
+      "observed_red": "actual observer command"
+    },
+    {
+      "name": "lost input guard",
+      "observed_red": "whole input byte/mode guards"
+    },
+    {
+      "name": "forged channel",
+      "observed_red": "complete channel identity"
+    },
+    {
+      "name": "changed source",
+      "observed_red": "exact authored source"
+    },
+    {
+      "name": "lost AST source",
+      "observed_red": "original AST source"
+    },
+    {
+      "name": "wrong original frame",
+      "observed_red": "correct original real frame"
+    },
+    {
+      "name": "forged repaired replacement",
+      "observed_red": "actual rewritten quoted-twin location"
+    },
+    {
+      "name": "lost real origin",
+      "observed_red": "original event-bound origin present"
+    },
+    {
+      "name": "forged collector identity",
+      "observed_red": "collector copy/argument identity"
+    },
+    {
+      "name": "forged canonical identity",
+      "observed_red": "actual canonical producer input"
+    },
+    {
+      "name": "false native success",
+      "observed_red": "actual failed route values"
+    },
+    {
+      "name": "lost native error",
+      "observed_red": "actual failed route errors"
+    },
+    {
+      "name": "lost fresh error",
+      "observed_red": "actual failed route errors"
+    },
+    {
+      "name": "broken healthy value",
+      "observed_red": "healthy authored route oracle"
+    },
+    {
+      "name": "lost observer equivalence",
+      "observed_red": "same-facade observer equivalence"
+    }
+  ],
+  "producer_sha256": "beccaa015ca0f652cee481a14f1c6435ca2ba1a9df3acab96f5d17bc684ab249"
+}

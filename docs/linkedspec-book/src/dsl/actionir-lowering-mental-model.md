@@ -852,6 +852,29 @@ signature and grouped-pattern populations cover 27 and 72 authored rows,
 respectively. These scanner cases do not admit
 new executable syntax or establish another backend's behavior.
 
+Selection and replacement have separate source obligations. In current Perl,
+an assignment selected from executable source can still replace an earlier
+identical spelling inside a literal after preceding statements are lowered:
+
+```spec
+Top:: I { quoted='out=matches("x", /x/)'; out=matches("x", /x/); return([quoted,out]) }
+# current Perl: handler compilation fails after the quoted payload is rewritten
+```
+
+The reverse order preserves the literal and executes the actual assignment:
+
+```spec
+Top:: I { out=matches("x", /x/); quoted='out=matches("x", /x/)'; return([quoted,out]) }
+# result: ["out=matches(\"x\", /x/)", 1]
+```
+
+The typed AST and selected scanner origin distinguish the real occurrence from
+its quoted twin. Replacement must retain that distinction as earlier statements
+expand; finding equal text in the rewritten action loses it. Repeated assignments,
+interleaved equal spellings and data inside lowered expressions need the same
+protection. The selected-occurrence repair remains open; successful reverse-order
+execution does not establish the failing order or ActionIR readiness.
+
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.
 For example, the repaired `set(counter, 2)` literal retains an unresolved-helper

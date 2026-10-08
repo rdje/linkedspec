@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "unchanged_source_oracles": 13,
+  "corrected_source": "Top:: I { quoted=cat('out=matches(\"x\", /x/)', ''); out=matches(\"x\", /x/); return([quoted,out]) }",
+  "scope": "Exactly one cat-arity source correction, observed/unobserved same-facade comparison, separate direct-owner channel and output/prefix declarations. All original producers and actual captures remain unchanged; no production change.",
+  "inputs": {
+    "cases.json": "80aedd4e055a7c55b34b8415e0d4141c5aafc60531f0a8bf2754e02bd36bd259",
+    "probe.pl": "ccf9fb27614d646b6109939a15c75a066ab327b4af011f75ddeb1568b4c9826e",
+    "red-fixture.t": "d35357b3edb8c6eb07b2bd5cac9ca43ef2cfc915859f83912f1af81eab83b498",
+    "capture.py": "74dc077cc4169246a2fc4cf42963b99f8d332fffb0a7fa54514c4b812f19d2d3"
+  }
+}

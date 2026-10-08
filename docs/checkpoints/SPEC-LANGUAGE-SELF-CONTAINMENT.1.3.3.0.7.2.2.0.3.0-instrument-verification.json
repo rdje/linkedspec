@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "unchanged_source_oracles": 13,
+  "controls": [
+    {
+      "name": "changed original source",
+      "observed_red": "thirteen exact original source oracles"
+    },
+    {
+      "name": "lost cat interval",
+      "observed_red": "sole cat arity correction and exact interval translation"
+    },
+    {
+      "name": "lost same-facade guard",
+      "observed_red": "same-facade comparison and separate owner channel"
+    },
+    {
+      "name": "unrelated display edit",
+      "observed_red": "sole display schema correction"
+    },
+    {
+      "name": "forged display source",
+      "observed_red": "actual display source/error identity"
+    }
+  ],
+  "producer_sha256": "ec3ade3462bedd2beeffb0515c3303f25f2b9f0e87b95227600cb6b0e6e0f491",
+  "scope": "Exact source inverses and actual retained wrong-context/invalid-arity/display rejections. These are instrument controls; no production repair or additional runtime population."
+}

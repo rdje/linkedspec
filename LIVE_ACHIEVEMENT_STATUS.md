@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: complete committed membership accepted at its receipt-gated boundary; precise selected replacement next.
+Full PNT: exact replacement diagnosis verified; dated Phase0 qualification then private occurrence handoff/mapped repair.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — Fresh immutable5b4a9a8 supplies5018 regular committed inputs/no overlays for77 guarded commands. Compiler41/original40/signature225/grouped789 pass per seed0/1/42. All original66 public source/AST/lowering/emitted/metadata/value/error channels recur with120 authored route values; unsupported_nested/raw_operand retain explicit unassessed value scope. Plain callable18 and grouped36 native/fresh values preserve complete corrected source/origin/metadata channels. All72 default query/view/numeric/syntactic snapshots remain byte-identical. Twenty-two unchanged consumers pass1644 ordered groups/full Phase01035. Historical membership38, signature10 and grouped114 RED recur from original retained producers. Thirty-one evidence controls, five history controls and nine render controls reject. Exact291 repair hashes freeze mode/revision only at5b4a9a8. Book58/five exact examples passes. Production/tests/contracts/CI/hooks/dependencies remain unchanged. Initial missing-artifact reviewer/source/error are retained; exact rejection recurs and sole corrected reference passes complete review. Exact staged canonical receipt and normal hooks gate membership parent closure; precise replacement .0.3, recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` — Unchanged fa9b7608e supplies 5,045 regular Git inputs plus three explicit diagnosis overlays for each of two 44-command captures. Fourteen authored sources recur under seeds0/1/42. Corrected native/fresh routes expose seven replacement failures and seven healthy controls; complete RED reaches14 groups. Six unchanged consumers pass144 groups per capture. The selected original assignment32–53 is correct, but its rewritten twin lookup chooses quoted11 instead of executable35. Actual event/argument identities expose collector/canonical copies without private-origin handoff. Three actual built-in traces per population retain reached rewrites; initial invalid cat and mismatched deferred-context channels remain explicit. Twenty evidence, five instrument, five history and eleven render controls reject. Original318 membership hashes freeze mode/revision only at fa9b7608e; book58/seven exact examples passes. Production/tests/CI/hooks/contracts/dependencies remain unchanged. Diagnosis does not repair runtime or close replacement, recurring, diagnostic-origin or comment owners.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3 from clean committed HEAD after checking bounded-history capacity. Retrieve original quoted-twin/mapping/occurrence facts and Toolbox source-bound probes; author exact original/rewritten occurrence oracles before a safely bounded replacement repair. Preserve quoted bytes, real spans, arguments/references, family order and native/fresh/error contracts. Recurring .0.4, diagnostic origin .7.2.2.1 and comments .7.3 remain owned.
+Activate REPO-HYGIENE.12 from the clean diagnosis commit; qualify the dated Phase0 Knowledge snapshot without refreshing its measurements. Then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff, checking history capacity first. Preserve exact source and event/argument/reference authority; authored RED/GREEN precedes production changes. Mapped replacement .1.1 and committed canonical .2 remain required; no raw-text pairing/global sort.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` — two44-command captures, seven real failures/seven healthy guards, consumer144; exact replacement remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — committed77 commands/compiler41/public120+18+36/default72/consumer1644; canonical receipt gates membership closure.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` — grouped-role RED114/GREEN789; default72/public36/consumer1644; fresh canonical next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` — immutable73/consumer1473; grouped-pattern primitive cause retained; focused repair next.
@@ -29,7 +30,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3 from clean committed H
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` — progressiveRED5/GREEN148;16 combined origins/1608 groups/153 RED; exact actual-root mode repair.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` — stagedRED5/GREEN138; eight origins/1589 groups/130 RED and full original compiler/callback channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — original7 contracts/42 events/63 frames/zero origins,544 groups/108 RED; three-family repair partition.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — all112 contracts/227 origins/1318 groups/269 RED; fresh immutable family acceptance.
 
 ## History
 
