@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: historical Phase0 record qualified; check history capacity before private occurrence handoff/mapped repair.
+Full PNT: finite five-scalar capacity verified; accepted-state routing enforcement next, then private handoff and mapped replacement.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.12` — Qualified the original June12 Phase0 card as historical without refreshing its line, subtest, spec or timing observations. Replaced the misleading line-count-only reverification with original-record retrieval and complete-TAP guidance. Existing book coverage is count-free and stays unchanged; no production, tests, CI, contract or runtime behavior changes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` — One governed rollover preserves clean 47444428a lines 155–256 as 102 lines/27,567 bytes; all 42 prior archives and rows remain exact. Engineering collection: 45 files/28,934 lines/3,225,109 bytes; manifest 44 lines/26,633 bytes. The initial full routing gate rejects decisions at 129/128 files and 13,035/13,000 lines. Its complete 5,119-file staged graph/delta, original 78-input claim and seven omitted continuity guards recover exactly; the initial candidate remains unadmitted. Accepted indexed ADR0128 composes five finite scalars: engineering files 44→45, manifest lines 43→44/bytes 26,021→26,633, decision files 128→129/aggregate lines 13,000→13,043. All prior accepted decisions and other controls remain exact. Current composition passes 13 evidence RED controls and 12 actual decision thresholds/six authority denials; retained initial proof has 14 evidence RED, 18 thresholds/seven authority denials, five instrument RED and four snapshot RED. Both initial instrument failures retain exact producers and actual error channels. Proposed/missing-status function observations remain separately owned P1 .3.1.3; no composed bypass or runtime repair is claimed. Exact staged canonical receipt and normal hooks gate landing.
 
 ## Next Action
 
-Check bounded-history capacity from this clean commit, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff. Freeze the210-input diagnosis at its original committed boundary before changing any bound producer or book input; preserve original hashes. Mapped replacement .1.1 and independent canonical .2 remain required.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3 from clean committed HEAD. Freeze the capacity claim mode/revision only before changing its bound inputs; preserve every hash. Diagnose the complete accepted-state routing path and repair the measured gap with source-bound RED/GREEN and exact canonical proof. Private origin handoff .3.1.0, mapped replacement .1.1 and independent .2 follow; diagnosis210 freezes at 11f6a87d1 before its bound inputs change.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` — five finite controls; rejected original fully recoverable; accepted-state gap next P1.
 - `REPO-HYGIENE.12` — June12 Phase0 observations qualified as historical; no runtime or census refresh.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` — two44-command captures, seven real failures/seven healthy guards, consumer144; exact replacement remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — committed77 commands/compiler41/public120+18+36/default72/consumer1644; canonical receipt gates membership closure.
@@ -29,7 +30,6 @@ Check bounded-history capacity from this clean commit, then activate SPEC-LANGUA
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — recognitionRED18/GREEN191;42 origins/1671 groups/200 RED; complete earlier channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` — progressiveRED5/GREEN148;16 combined origins/1608 groups/153 RED; exact actual-root mode repair.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` — stagedRED5/GREEN138; eight origins/1589 groups/130 RED and full original compiler/callback channels.
 
 ## History
 

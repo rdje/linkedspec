@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "producer_sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+  "original_partial_producer_sha256": "64f0bd9ea017963496571b63c839c19b97f8ca9d3739680ff2a32516c4e72e8b",
+  "original_statement_sha256": "644846dee61837c2c1cc2b4b1f43315c27e240fa9385aabdda057ebcba7ce957",
+  "guarded_document_inputs": {
+    "DEVELOPMENT_NOTES.md": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+    "docs/history/development-notes/manifest.jsonl": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+    "doctrine/readme_stability/routes.jsonl": "2726b99db6c1416df2ae463e859481c0d94ffefc94408773cae2e265595761b3",
+    "MEMORY.md": "5a0ea91aae3e28b9475a63c0badda8fbd9d4c5e805784bdf160f1024719d06c5",
+    "CHANGES.md": "c273194711dfa670c9e595f5ba5ca612098225cd0a0c51fbdb840aa9634204a2",
+    "LIVE_ACHIEVEMENT_STATUS.md": "e6fcd6db0cda290872be12166921a9ca6ad0268ad67d23e454a925c3132bef92",
+    "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md": "3e73d26e0d0888a9363ca077707a841d3f86c6dd6dcbf2e0026d129daf795e65",
+    "docs/TASK_TREE.md": "b17902dc7f1745241d9cf097f315c095c8b5c59dbd8b5c92576de3aa20c26243",
+    "ROADMAP.md": "85a43ee56c4b509c46b7435658e29448fa82e9f54e8d27f8a01464fdcd9a8502",
+    "ROADMAP_V2.md": "62a16d965e81c843f8f8029d31d0e82a75240bc0f21b878f17c618777e519719",
+    "docs/knowledge/replacement-repair-engineering-history-capacity.md": "085d4d2c7bbdf70547af926a15b346e293d2048271f16d9d425cb9b649d1afea",
+    "docs/knowledge/routing-decision-accepted-state-gap.md": "fff6c5f39934cf61511be676712af58a9197faba1b64d9d7469b311bb68b4144"
+  },
+  "scope": "Claim-only continuation after the retained first continuity writer NameError. Static original statement recovered without importing or executing its document edits; no history, policy or continuity replay."
+}

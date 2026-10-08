@@ -1,0 +1,138 @@
+{
+   "complete" : true,
+   "controls" : [
+      {
+         "name" : "missing_new_record",
+         "observed" : "RED",
+         "reason" : "actual exact indexed decision authorization rejects this missing/mismatched input"
+      },
+      {
+         "name" : "missing_index",
+         "observed" : "RED",
+         "reason" : "actual exact indexed decision authorization rejects this missing/mismatched input"
+      },
+      {
+         "name" : "wrong_old_limits",
+         "observed" : "RED",
+         "reason" : "actual exact indexed decision authorization rejects this missing/mismatched input"
+      },
+      {
+         "name" : "wrong_new_limits",
+         "observed" : "RED",
+         "reason" : "actual exact indexed decision authorization rejects this missing/mismatched input"
+      },
+      {
+         "name" : "wrong_surface",
+         "observed" : "RED",
+         "reason" : "actual exact indexed decision authorization rejects this missing/mismatched input"
+      },
+      {
+         "name" : "unreviewed_increase",
+         "observed" : "RED",
+         "reason" : "actual numeric increase rejects absent reviewed authority"
+      }
+   ],
+   "instrument_sha256" : "4ae3fe73f75420980fb3cc2baef228df312628512fa18afbfe395c3212eab582",
+   "production_sha256" : "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+   "scope" : "Actual unchanged production functions with exact in-memory decision fixtures. Twelve boundary observations and six rejecting controls; accepted-state diagnostics remain separately owned .3.1.3. Full resulting-tree and canonical admission remain required.",
+   "thresholds" : [
+      {
+         "limit" : 128,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 128
+      },
+      {
+         "limit" : 129,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 128
+      },
+      {
+         "limit" : 128,
+         "metric" : "files",
+         "reasons" : [
+            "files 129/128"
+         ],
+         "rejected" : true,
+         "value" : 129
+      },
+      {
+         "limit" : 129,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 129
+      },
+      {
+         "limit" : 128,
+         "metric" : "files",
+         "reasons" : [
+            "files 130/128"
+         ],
+         "rejected" : true,
+         "value" : 130
+      },
+      {
+         "limit" : 129,
+         "metric" : "files",
+         "reasons" : [
+            "files 130/129"
+         ],
+         "rejected" : true,
+         "value" : 130
+      },
+      {
+         "limit" : 13000,
+         "metric" : "lines",
+         "reasons" : [
+            "aggregate lines 13042/13000"
+         ],
+         "rejected" : true,
+         "value" : 13042
+      },
+      {
+         "limit" : 13043,
+         "metric" : "lines",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 13042
+      },
+      {
+         "limit" : 13000,
+         "metric" : "lines",
+         "reasons" : [
+            "aggregate lines 13043/13000"
+         ],
+         "rejected" : true,
+         "value" : 13043
+      },
+      {
+         "limit" : 13043,
+         "metric" : "lines",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 13043
+      },
+      {
+         "limit" : 13000,
+         "metric" : "lines",
+         "reasons" : [
+            "aggregate lines 13044/13000"
+         ],
+         "rejected" : true,
+         "value" : 13044
+      },
+      {
+         "limit" : 13043,
+         "metric" : "lines",
+         "reasons" : [
+            "aggregate lines 13044/13043"
+         ],
+         "rejected" : true,
+         "value" : 13044
+      }
+   ]
+}

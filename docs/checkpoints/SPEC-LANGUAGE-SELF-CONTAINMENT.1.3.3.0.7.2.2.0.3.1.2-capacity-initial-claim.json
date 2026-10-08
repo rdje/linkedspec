@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2",
+  "claims": [
+    {
+      "name": "finite-clean-source-engineering-history-admission",
+      "statement": "Actual pressure RED and governed rollover GREEN preserve clean47444428a lines155\u2013256 as102 lines/27,567 bytes; all42 prior archives and manifest rows remain exact. The new root157/31,811 and manifest44/26,633 yield45 files/28,934 lines/3,225,109 bytes. Only files44\u219245, manifest lines43\u219244 and bytes26,021\u219226,633 change. Complete history query3,166,665 bytes,14 evidence RED,18 actual thresholds/7 authority RED and five exact instrument RED pass. Initial wrong-dictionary reviewer/source/combined error and reached channels remain retained. Two separate proposed/missing-status fixtures expose four authorizing function answers; P1 .3.1.3 owns composed diagnosis/repair. ADR0128 is explicitly accepted and independently checked; autonomous maintenance, no new explicit director grant or unlimited reserve. All other controls, production, tests, book, dependencies, hooks and checker bytes stay unchanged. Exact staged canonical receipt and normal hooks govern landing.",
+      "scope": "Exactly one governed archive and manifest row from clean47444428a, three scalar controls and explicitly accepted indexed ADR0128. Actual root/manifest/registry,42 original immutable archives and producer/input channels are bound; original clean Git source/blob reconstructs independently. Actual pressure RED/rollover GREEN and full history query,14 record corruptions,18 actual production thresholds/7 exact-authority denials, five instrument corruptions. These are evidence/authority controls, not parser semantic mutants. The initial reviewer is incomplete at wrong guard dictionary selection; exact first used source, combined shell error and initial reached control channels remain retained. Distinct original stdout/stderr are unavailable. Corrected review changes only that selection. The initial continuity writer stopped at an undeclared CURRENT constant after writing docs and before claim creation; exact used source and actual tool-returned channel survive. This publisher recovers its original static statement and completes only the claim, with no document replay. Proposed/missing-status diagnostics authorize in both functions; no composed bypass claimed. P1 .3.1.3 owns immediate full-path diagnosis/repair; current accepted ADR is independently checked. Autonomous maintenance does not assert a new explicit director grant or unlimited reserve. All other controls/history bytes/production/test/book/CI/hook/checker/dependency bytes stay unchanged. Exact staged canonical receipt and normal hooks govern admission independently; no runtime/readiness claim. Necessary read-only OS/Perl/Python/Git inputs, project data repository-local/same-volume; other repositories read-only.",
+      "rederive": {
+        "status": "checked",
+        "command": "At clean47444428a activation run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.py then docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-apply.py. At the published boundary run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py and docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-review.py. Original captures remain exact; claim-only continuation is docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py.",
+        "granularity": "{\"accepted_state_diagnostics\": [{\"contract_authorized\": true, \"limit_authorized\": true, \"name\": \"proposed_status\", \"source_location\": \"scripts/check_readme_routing_pressure.pl:adr_authorizes_limit_change/adr_authorizes_contract_change\"}, {\"contract_authorized\": true, \"limit_authorized\": true, \"name\": \"missing_status\", \"source_location\": \"scripts/check_readme_routing_pressure.pl:adr_authorizes_limit_change/adr_authorizes_contract_change\"}], \"archive_record\": {\"byte_count\": 27567, \"current_path\": \"DEVELOPMENT_NOTES.md\", \"immutable\": true, \"line_count\": 102, \"retrieval_command\": \"perl tools/read_document_history.pl --surface engineering_notes --segment 4963\", \"segment_id\": \"4963\", \"sha256\": \"3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40\", \"source_blob\": \"9d5f65cb3cc1db7e3fb1ae2aaaf237f47381c453\", \"source_commit\": \"47444428a8ceb65cb0ced06625db4eb8a44b8209\", \"source_end_line\": 256, \"source_path\": \"DEVELOPMENT_NOTES.md\", \"source_start_line\": 155, \"surface\": \"engineering_notes\", \"target_path\": \"docs/history/development-notes/segment-4963-3def29fef6d2.md\", \"type\": \"segment\"}, \"collection\": {\"bytes\": 3225109, \"files\": 45, \"lines\": 28934}, \"complete\": true, \"evidence_controls\": [{\"name\": \"archive_byte\", \"observed_red\": \"exact original clean source suffix\"}, {\"name\": \"prior_archive_byte\", \"observed_red\": \"all original immutable archive bytes\"}, {\"name\": \"prior_row_order\", \"observed_red\": \"original manifest bytes and order\"}, {\"name\": \"root_byte\", \"observed_red\": \"exact original prefix/new note and final separator only\"}, {\"name\": \"unrelated_limit\", \"observed_red\": \"only three finite scalars and all unrelated fields\"}, {\"name\": \"new_source_commit\", \"observed_red\": \"actual archive binding and independently reached source interval\"}, {\"name\": \"missing_command\", \"observed_red\": \"complete ordered pressure/publication command population\"}, {\"name\": \"pressure_exit\", \"observed_red\": \"actual pressure RED status\"}, {\"name\": \"forged_channel\", \"observed_red\": \"complete channel byte identity\"}, {\"name\": \"lost_input_guard\", \"observed_red\": \"all guarded actual input byte identities\"}, {\"name\": \"unaccepted_decision\", \"observed_red\": \"current decision actually accepted\"}, {\"name\": \"lost_status_diagnostic\", \"observed_red\": \"separate accepted-state diagnostic reach\"}, {\"name\": \"wrong_control_producer\", \"observed_red\": \"actual control producer\"}, {\"name\": \"wrong_control_capture\", \"observed_red\": \"actual control capture producer\"}], \"history_channel\": {\"path\": \"docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-history-channel.json.gz\", \"raw_bytes\": 4234221, \"sha256\": \"1f3f858b7b6a7c8aea77061f4c6979f00a7cd57abef3f98174523229635c93b6\", \"stdout_bytes\": 3166665, \"stdout_sha256\": \"eb2551d0a2c61f0904de1d8d7ddd3b1f7d837526dd64a6ed2ca2eb41e2b3803c\"}, \"new_manifest\": {\"bytes\": 26633, \"lines\": 44, \"sha256\": \"a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7\"}, \"prior_archives\": 42, \"producer_sha256\": \"f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3\", \"production_red_controls\": 7, \"production_thresholds\": 18, \"retained_root\": {\"bytes\": 31811, \"lines\": 157, \"sha256\": \"2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214\"}, \"revision\": \"47444428a8ceb65cb0ced06625db4eb8a44b8209\", \"scope\": \"Exact finite current admission and actual full input/command channels. Accepted-state function gap is retained and separately scheduled .3.1.3; current ADR is explicitly accepted. Exact staged canonical receipt remains required.\"}",
+        "result": "Actual pressure RED and governed rollover GREEN preserve clean47444428a lines155\u2013256 as102 lines/27,567 bytes; all42 prior archives and manifest rows remain exact. The new root157/31,811 and manifest44/26,633 yield45 files/28,934 lines/3,225,109 bytes. Only files44\u219245, manifest lines43\u219244 and bytes26,021\u219226,633 change. Complete history query3,166,665 bytes,14 evidence RED,18 actual thresholds/7 authority RED and five exact instrument RED pass. Initial wrong-dictionary reviewer/source/combined error and reached channels remain retained. Two separate proposed/missing-status fixtures expose four authorizing function answers; P1 .3.1.3 owns composed diagnosis/repair. ADR0128 is explicitly accepted and independently checked; autonomous maintenance, no new explicit director grant or unlimited reserve. All other controls, production, tests, book, dependencies, hooks and checker bytes stay unchanged. Exact staged canonical receipt and normal hooks govern landing."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Equal aggregate values or matching routing markers alone prove lossless finite accepted admission.",
+        "oracle": "Independent original Git root/suffix/manifest/archive reconstruction, exact unchanged fields, actual full query and pressure channels; independently checked current accepted Status and actual unchanged authorization functions.",
+        "red_control": "Actual pressure255 before apply0;14 evidence corruptions,7 actual indexed-authority denials,18 independent threshold observations and5 instrument denials. Two extra status fixtures authorize in both actual functions and remain separately owned; they are not rejecting controls."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-actual.json",
+            "sha256": "020ac51127a4151050981acd2a27e174447e3243a23f7a7c1ff6c69e6688ae78",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-apply.py",
+            "sha256": "f075c238e02dfe211b98c33a444ed5b297917e644861e34988855d5760e79c5e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command-initial.json",
+            "sha256": "b05d615bbba1d3bf82de69757ea167e17c8cbadec331e9f7f1afb675b6bc3002",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command.json",
+            "sha256": "83b82375d290214d0e0e43b44f6062026d54730fee2b773e984d7460462afe00",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-initial.json",
+            "sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.json",
+            "sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.pl",
+            "sha256": "d8c35104df9a3319d687c9092f3fd81c145b08c0a89ef49cbc918212ecc28363",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-error.json",
+            "sha256": "333c88a53a368b6f438eb1d90f33aad939e72e50ef4cc9faf4c42df423f0cf0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-initial.py",
+            "sha256": "64f0bd9ea017963496571b63c839c19b97f8ca9d3739680ff2a32516c4e72e8b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-history-channel.json.gz",
+            "sha256": "1f3f858b7b6a7c8aea77061f4c6979f00a7cd57abef3f98174523229635c93b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-review.py",
+            "sha256": "f73bd5b614cf9faaa1c9e4515867869511d743c36f1e799f171a7481d80cbe5b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-verification.json",
+            "sha256": "8e8679f27c223c8acdb8ccaa29093864333c84db045622c3b1483942e5b62aaf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.json",
+            "sha256": "7cad87c3c8bbf29fe8e79ece33737297311eb7a7b52ebe9ef73cd5b132094674",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.py",
+            "sha256": "341e7e7a5ea1c6cd0591403058c14e61424bb362c64afd0ae6dd1987512faff0",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publication-verification.json",
+            "sha256": "15c287da27a4d35165f5bcff68025e27ace73a88fb1f574bfc5a3e99645e11d9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py",
+            "sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-retain-error.py",
+            "sha256": "7e3bbb3d03ee80bc35487caf36b39cae267f918ce7d5f2a14f5e00ee0500dde1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-error.json",
+            "sha256": "bf06621d89803e6339f4abfccffbe4a3a7347c7a78eaf98947115958ace7f4f2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-initial.py",
+            "sha256": "90a4a82cc346b2858dd12b18a865949cabf0aa2ae7b546e87cff2c2c62022a7b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py",
+            "sha256": "f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-verification.json",
+            "sha256": "1d4ade7aa28e7b715f614011eefe21beaaf649c59e2bf3ce106a438a8ab75a25",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-proposed-note.md",
+            "sha256": "78d66a270057966a8754bd2140b87835f1bba4a839c59e7a054d49c914e81afb",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0128-replacement-note-history-capacity.md",
+            "sha256": "10864113f11d910eaa6f6d4ad772adcae5244c8a74c8f8bdb346bf559616f26d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "d4e888c20ab823630ae457d260d9049e95c5e19ee0df54be5e4c698f832a614d",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4963-3def29fef6d2.md",
+            "sha256": "3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+            "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+            "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+            "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+            "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+            "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+            "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+            "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+            "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+            "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+            "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+            "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+            "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+            "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+            "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+            "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+            "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+            "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+            "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+            "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+            "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+            "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+            "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+            "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+            "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+            "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+            "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+            "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+            "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+            "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+            "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+            "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+            "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+            "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+            "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+            "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+            "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+            "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+            "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+            "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+            "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+            "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+            "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/replacement-repair-engineering-history-capacity.md",
+            "sha256": "085d4d2c7bbdf70547af926a15b346e293d2048271f16d9d425cb9b649d1afea",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/routing-decision-accepted-state-gap.md",
+            "sha256": "fff6c5f39934cf61511be676712af58a9197faba1b64d9d7469b311bb68b4144",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "2726b99db6c1416df2ae463e859481c0d94ffefc94408773cae2e265595761b3",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/read_document_history.pl",
+            "sha256": "11bfe195deb0375ecc1a1f6ad1f14a01be50138f12022132b1953b99b9432128",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `11f6a87d136ce213899ca6a0cd98cf3f0833f720` — clean replacement diagnosis boundary.
-- latest_completed_leaf: `REPO-HYGIENE.12 - qualify historical Phase0 measurements`.
-- active_work_unit: `REPO-HYGIENE.12` (done) — historical Phase0 fact qualification.
-- next_action: Check bounded-history capacity from this clean commit, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff. Freeze the210-input diagnosis at its original committed boundary before changing any bound producer or book input; preserve original hashes. Mapped replacement .1.1 and independent canonical .2 remain required.
-- in_flight_uncommitted: None; intended clean post-landing handoff. Focused documentation checks and normal hooks govern this leaf; no production change.
+- activation_commit: `47444428a8ceb65cb0ced06625db4eb8a44b8209` — clean historical Phase0 qualification.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2 - retain finite replacement-note history`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` (done) — finite composed history/decision capacity.
+- next_action: Activate .3.1.3 from clean HEAD; freeze the capacity claim mode/revision only, diagnose the full accepted-state routing path, repair with RED/GREEN and canonical proof. Private handoff .3.1.0 and mapped replacement .1.1 follow.
+- in_flight_uncommitted: None; exact staged canonical receipt and normal hooks govern this completed leaf landing.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,8 +50,7 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: Granted ADR0127 admits44 files /43 manifest lines /26021 bytes; resulting manifest43 lines/26021 bytes is exact.
-  Legacy segment4964 preserves201 lines/27233 bytes from clean da3d; all prior immutable rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0128 admits45 files /44 manifest lines /26633 bytes; archive4963 preserves clean47444428a lines155–256. The same finite decision admits129 decision files /13043 aggregate lines; prior accepted records and all other controls stay exact.
 - current_change_history_capacity: ADR0122 admits47 files /46 manifest lines /26255 bytes; latest manifest46 lines/26255 bytes is exact; the admitted archive reserve is consumed.
   Nested repair rollover segment4966 preserves228 lines/28487 bytes from cleanb2156813; all44 prior immutable rows/bytes remain exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.

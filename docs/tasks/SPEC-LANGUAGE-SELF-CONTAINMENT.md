@@ -6,7 +6,7 @@
 - Status: `active` / closure definition
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-10-07`
+- Last updated: `2026-10-08`
 - Owner: repo-local workflow
 
 ## Goal
@@ -3649,18 +3649,56 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/seven exact examples/11 controls, original318 hashes/five controls and five instrument controls; task/index/roadmaps/live/resume/Knowledge/claims/history/diff and normal hooks govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Repair only the measured selected-occurrence replacement boundary.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`
   Acceptance: Author source-identical RED/GREEN before production changes; preserve original/rewritten literal bytes, real origin/reference identity, genuine raw spans, arguments, family order and native/fresh/error contracts. Split further before widening ownership; focused verification and normal hooks precede .2.
 
-  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
   Safe-slice split: Private origin handoff through actual compiler event copies first, then exact original-to-rewritten interval mapping and insertion ownership. The before diagnostic corpus remains immutable; preserve callbacks, public schemas, family and consumed/exclusive order. No quoted rescanning or inferred equal-raw span may grant authority.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2`
+  Status: `done`
+  Goal: Admit one engineering-note rollover and its finite decision-store prerequisite before selected replacement repair.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`, `REPO-HYGIENE.12`
+  Activation: Clean 47444428a8ceb65cb0ced06625db4eb8a44b8209; normal hygiene hooks/post-commit pointer pass, brief empty, no required job. README_POLICY, ADR0069/0127 and actual rollover/threshold/authorization owners reviewed. Full PNT authorizes autonomous maintenance; no new explicit director grant is asserted.
+  Owned paths: Both engineering_notes and decisions exact finite registry limit transitions; retained initial staged input graph/delta and actual complete routing RED; exact leaf-prefixed capacity producer/reviewer/observations and claim; new accepted indexed ADR0128; engineering_notes registry controls, governed root/manifest/new immutable segment; Knowledge/task/index/resume/live/change/notes. No parser, runtime, tests, book, dependency, hook or checker implementation changes.
+  Verification tier: `canonical`
+  Focused checks: Independently reconstruct exact original root/manifest/archives and prior decisions; verify five scalars only, retained rejected candidate and all actual guard inputs; run current composed evidence controls, actual decision thresholds/authority denials, history/claims/Knowledge/memory/diff and normal doctrines.
+  Canonical trigger: Documentation-storage/routing infrastructure; exact staged canonical receipt and normal hooks are required before private handoff.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json`
+  Acceptance: Admit one archive, one manifest row and one indexed accepted decision under five measured finite controls. Preserve all other fields, budgets, original history and accepted decision bytes; retain the original unadmitted candidate and errors without refreshing them. Exact canonical proof precedes clean P1 accepted-state guard work.
+  Encountered guard defect: Actual unchanged adr_authorizes_limit_change and adr_authorizes_contract_change return true for exact indexed fixtures with proposed or missing Status metadata. Leaf-prefixed capacity-controls.json retains both actual observations separately from seven successful rejection controls. Current ADR0128 is explicitly accepted, so this admission does not exercise the gap. .3.1.3 owns composed-path diagnosis and repair before private handoff; checker bytes stay unchanged in this capacity leaf.
+
+  Verification: One governed rollover preserves clean 47444428a lines 155–256 as 102 lines/27,567 bytes; all 42 prior archives and rows remain exact. Engineering collection: 45 files/28,934 lines/3,225,109 bytes; manifest 44 lines/26,633 bytes. The initial full routing gate rejects decisions at 129/128 files and 13,035/13,000 lines. Its complete 5,119-file staged graph/delta, original 78-input claim and seven omitted continuity guards recover exactly; the initial candidate remains unadmitted. Accepted indexed ADR0128 composes five finite scalars: engineering files 44→45, manifest lines 43→44/bytes 26,021→26,633, decision files 128→129/aggregate lines 13,000→13,043. All prior accepted decisions and other controls remain exact. Current composition passes 13 evidence RED controls and 12 actual decision thresholds/six authority denials; retained initial proof has 14 evidence RED, 18 thresholds/seven authority denials, five instrument RED and four snapshot RED. Both initial instrument failures retain exact producers and actual error channels. Proposed/missing-status function observations remain separately owned P1 .3.1.3; no composed bypass or runtime repair is claimed. Exact staged canonical receipt and normal hooks gate landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2 - retain finite replacement-note history` (Git owns identity).
+  Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3 from clean committed HEAD. Freeze the capacity claim mode/revision only before changing its bound inputs; preserve every hash. Diagnose the complete accepted-state routing path and repair the measured gap with source-bound RED/GREEN and exact canonical proof. Private origin handoff .3.1.0, mapped replacement .1.1 and independent .2 follow; diagnosis210 freezes at 11f6a87d1 before its bound inputs change.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec tools/roll_document_history.pl actual --check rejects the authored complete record at the unchanged90% boundary; full command/input/error channels retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Canonical engineering_notes file and manifest controls are full; actual rollover source and routing threshold/authorization functions select the exact clean suffix and finite engineering controls; full resulting-tree RED also exposes two decision-store limits.
+- [x] **FIX** — One governed archive/row and exact accepted indexed ADR0128 compose five finite controls; all other fields/budgets/history and prior accepted decisions stay unchanged. Proposed/missing-status function gap remains independently owned P1 .3.1.3, not repaired here.
+- [x] **ADDRESSED (verified)** — One governed rollover preserves clean 47444428a lines 155–256 as 102 lines/27,567 bytes; all 42 prior archives and rows remain exact. Engineering collection: 45 files/28,934 lines/3,225,109 bytes; manifest 44 lines/26,633 bytes. The initial full routing gate rejects decisions at 129/128 files and 13,035/13,000 lines. Its complete 5,119-file staged graph/delta, original 78-input claim and seven omitted continuity guards recover exactly; the initial candidate remains unadmitted. Accepted indexed ADR0128 composes five finite scalars: engineering files 44→45, manifest lines 43→44/bytes 26,021→26,633, decision files 128→129/aggregate lines 13,000→13,043. All prior accepted decisions and other controls remain exact. Current composition passes 13 evidence RED controls and 12 actual decision thresholds/six authority denials; retained initial proof has 14 evidence RED, 18 thresholds/seven authority denials, five instrument RED and four snapshot RED. Both initial instrument failures retain exact producers and actual error channels. Proposed/missing-status function observations remain separately owned P1 .3.1.3; no composed bypass or runtime repair is claimed. Exact staged canonical receipt and normal hooks gate landing.
+- [x] **NO REGRESSION** — Production/test/book/CI/hook/checker/dependency bytes unchanged; exact staged canonical receipt and all normal hooks gate this infrastructure landing. No product or composed-bypass claim.
+- [x] **LOCKSTEP** — Claims, two Knowledge facts, exact indexed decision, task/index/roadmaps/live/resume/change/notes/history and memory/diff gates agree; book N/A because no public behavior changes.
+
+  Admission composition: Actual complete routing rejects the initial candidate at decisions files129/128 and aggregate lines13035/13000. The initial78-input claim/producer channels remain verbatim in the complete5119-regular staged graph and recoverable full-index delta; seven omitted continuity guard inputs are recovered by that graph. Initial candidate is unadmitted. Own only one additional decision file and the measured final aggregate-line allowance through extra exact ADR0128 limit markers; preserve every existing decision byte and every other control. Extend this canonical infrastructure scope before changing those two decision controls, retain old evidence, and independently verify the complete five-scalar candidate.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3`
+  Status: `pending`
+  Priority: P1 — accepted-state routing-authority enforcement before further production work.
+  Goal: Close the observed accepted-state admission gap in the routing guard.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2`
+  Reproduce: Current exact-source capacity-controls.pl invokes both actual authorization functions with independently proposed/missing Status fixtures and exact indexed old/new markers; all four observed authorization answers are true. README_POLICY requires a newly added accepted indexed decision, not just matching markers.
+  Impact: The routing authorization functions do not distinguish an accepted record from a proposed or statusless one; verify the complete resulting-tree route before claiming a composed-gate bypass.
+  Schedule: Immediately after clean finite-capacity landing, before private origin handoff .3.1.0. No dirty pivot or hook bypass.
+  Acceptance: Retain actual full composed-path and independent status/index/marker RED before changing the smallest reached owner. Preserve accepted-record behavior, exact object matching and all independent pressure boundaries; repair current fixtures without rewriting historical evidence. Freeze bound prior claims mode/revision only, update Knowledge/continuity, run source-bound mutation proof and exact staged canonical CI. Split before widening if another gate already owns accepted-state rejection.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
   Status: `pending`
   Goal: Preserve private original occurrence authority through compiler collection/canonical copies.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3`
   Acceptance: Candidate owners: new perl/LinkedSpec/ActionIR/SourceOrigins.pm, Scanner.pm, Diagnostics.pm, CanonicalEvents.pm, CanonicalEvents/Core.pm and RewritePipeline.pm. Select exact invocation-local capture/copy and actual splitter-frame seams before editing; author source/ref/args/raw/fallback/foreign/malformed/delegation/error/reentrant controls. Keep replacement behavior unchanged here; verify original diagnostics/source/value/error channels and unchanged consumers, then focused commit.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
@@ -3991,7 +4029,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.2.2.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` | `done` | Complete committed membership verified; exact canonical receipt gates landing. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `active` | Diagnose exact selected-occurrence replacement first. |
 | 43.4.2.0.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` | `done` | Original/rewritten diagnosis verified; repair remains open. |
-| 43.4.2.0.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1` | `pending` | Repair the measured replacement boundary. |
+| 43.4.2.0.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1` | `active` | Finite history prerequisite, then private handoff and mapped repair. |
+| 43.4.2.0.3.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` | `done` | Five finite controls independently verified; original unadmitted candidate retained. |
+| 43.4.2.0.3.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` | `pending` | Actual accepted-state guard gap; compose and repair before private handoff. |
 | 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `pending` | Private occurrence handoff through actual copies. |
 | 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `pending` | Original-to-rewritten mapped replacement and insertions. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
@@ -4034,6 +4074,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October8 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2`: Actual pressure RED and governed rollover GREEN preserve clean47444428a lines155–256 as102 lines/27,567 bytes; all42 prior archives and manifest rows remain exact. The new root157/31,811 and manifest44/26,633 yield45 files/28,934 lines/3,225,109 bytes. Only files44→45, manifest lines43→44 and bytes26,021→26,633 change. Complete history query3,166,665 bytes,14 evidence RED,18 actual thresholds/7 authority RED and five exact instrument RED pass. Initial wrong-dictionary reviewer/source/combined error and reached channels remain retained. Two separate proposed/missing-status fixtures expose four authorizing function answers; P1 .3.1.3 owns composed diagnosis/repair. ADR0128 is explicitly accepted and independently checked; autonomous maintenance, no new explicit director grant or unlimited reserve. All other controls, production, tests, book, dependencies, hooks and checker bytes stay unchanged. Exact staged canonical receipt and normal hooks govern landing.
+
 
 October8 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0`: Unchanged fa9b7608e supplies 5,045 regular Git inputs plus three explicit diagnosis overlays for each of two 44-command captures. Fourteen authored sources recur under seeds0/1/42. Corrected native/fresh routes expose seven replacement failures and seven healthy controls; complete RED reaches14 groups. Six unchanged consumers pass144 groups per capture. The selected original assignment32–53 is correct, but its rewritten twin lookup chooses quoted11 instead of executable35. Actual event/argument identities expose collector/canonical copies without private-origin handoff. Three actual built-in traces per population retain reached rewrites; initial invalid cat and mismatched deferred-context channels remain explicit. Twenty evidence, five instrument, five history and eleven render controls reject. Original318 membership hashes freeze mode/revision only at fa9b7608e; book58/seven exact examples passes. Production/tests/CI/hooks/contracts/dependencies remain unchanged. Diagnosis does not repair runtime or close replacement, recurring, diagnostic-origin or comment owners.
 
@@ -4136,6 +4179,9 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2 - retain finite replacement-note history` — finite infrastructure prerequisite; Git owns identity.
+
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0 - retain exact replacement diagnosis` — bounded diagnosis; Git owns identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2 - accept committed compiler membership` — independent membership acceptance; exact canonical receipt gates landing. Git owns identity.
@@ -4219,6 +4265,9 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- 2026-10-08: Finite replacement-note history preserves every prior byte; accepted-state function gap owned .3.1.3 before private handoff.
+
 
 - 2026-10-08: Exact replacement diagnosis retained; private handoff/mapped repair split before production and dated Phase0 correction owned.
 

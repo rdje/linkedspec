@@ -1,0 +1,400 @@
+{
+  "complete": true,
+  "revision": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+  "producer_sha256": "341e7e7a5ea1c6cd0591403058c14e61424bb362c64afd0ae6dd1987512faff0",
+  "status": "finite engineering maintenance decision; actual governed publication and canonical admission required",
+  "old_limits": {
+    "max_bytes_per_file": 524288,
+    "max_files": 44,
+    "max_lines_per_file": 4096,
+    "max_total_bytes": 3407872,
+    "max_total_lines": 29000
+  },
+  "new_limits": {
+    "max_bytes_per_file": 524288,
+    "max_files": 45,
+    "max_lines_per_file": 4096,
+    "max_total_bytes": 3407872,
+    "max_total_lines": 29000
+  },
+  "old_member_limits": {
+    "DEVELOPMENT_NOTES.md": {
+      "max_bytes": 65536,
+      "max_lines": 512
+    },
+    "docs/history/development-notes/manifest.jsonl": {
+      "max_bytes": 26021,
+      "max_lines": 43
+    }
+  },
+  "new_member_limits": {
+    "DEVELOPMENT_NOTES.md": {
+      "max_bytes": 65536,
+      "max_lines": 512
+    },
+    "docs/history/development-notes/manifest.jsonl": {
+      "max_bytes": 26633,
+      "max_lines": 44
+    }
+  },
+  "old_contract": {
+    "authority": "docs/decisions/0069-bounded-change-and-notes-history.md",
+    "control": "bounded_collection",
+    "lifecycle": "partitioned",
+    "member_limits": {
+      "DEVELOPMENT_NOTES.md": {
+        "max_bytes": 65536,
+        "max_lines": 512
+      },
+      "docs/history/development-notes/manifest.jsonl": {
+        "max_bytes": 26021,
+        "max_lines": 43
+      }
+    },
+    "members": [
+      "DEVELOPMENT_NOTES.md",
+      "docs/history/development-notes/*.md",
+      "docs/history/development-notes/manifest.jsonl"
+    ],
+    "owner": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3",
+    "route_targets": [
+      "DEVELOPMENT_NOTES.md",
+      "docs/history/development-notes/*.md",
+      "docs/history/development-notes/manifest.jsonl"
+    ],
+    "state": "current",
+    "verifier": "document_history",
+    "transition_owners": null
+  },
+  "new_contract": {
+    "authority": "docs/decisions/0069-bounded-change-and-notes-history.md",
+    "control": "bounded_collection",
+    "lifecycle": "partitioned",
+    "member_limits": {
+      "DEVELOPMENT_NOTES.md": {
+        "max_bytes": 65536,
+        "max_lines": 512
+      },
+      "docs/history/development-notes/manifest.jsonl": {
+        "max_bytes": 26633,
+        "max_lines": 44
+      }
+    },
+    "members": [
+      "DEVELOPMENT_NOTES.md",
+      "docs/history/development-notes/*.md",
+      "docs/history/development-notes/manifest.jsonl"
+    ],
+    "owner": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3",
+    "route_targets": [
+      "DEVELOPMENT_NOTES.md",
+      "docs/history/development-notes/*.md",
+      "docs/history/development-notes/manifest.jsonl"
+    ],
+    "state": "current",
+    "verifier": "document_history",
+    "transition_owners": null
+  },
+  "original_root": {
+    "bytes": 58977,
+    "lines": 256,
+    "sha256": "cfc6d750a5dfb9d3a1ca8b52125c7cb2954983ccd7c94ed6bf77bff872f4d896"
+  },
+  "new_note": {
+    "bytes": 402,
+    "lines": 4,
+    "sha256": "c11f849bbb96738f7ede89f406ec96049738de0e5442e69385c1fbb06f9bdb5a"
+  },
+  "retained_root": {
+    "bytes": 31811,
+    "lines": 157,
+    "sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214"
+  },
+  "original_manifest": {
+    "bytes": 26021,
+    "lines": 43,
+    "sha256": "650fa15087cb318afa8bd72836cded55f3076b6108ca2ec878b68a56a990707e"
+  },
+  "new_manifest": {
+    "bytes": 26633,
+    "lines": 44,
+    "sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7"
+  },
+  "archive_record": {
+    "byte_count": 27567,
+    "current_path": "DEVELOPMENT_NOTES.md",
+    "immutable": true,
+    "line_count": 102,
+    "retrieval_command": "perl tools/read_document_history.pl --surface engineering_notes --segment 4963",
+    "segment_id": "4963",
+    "sha256": "3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40",
+    "source_blob": "9d5f65cb3cc1db7e3fb1ae2aaaf237f47381c453",
+    "source_commit": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+    "source_end_line": 256,
+    "source_path": "DEVELOPMENT_NOTES.md",
+    "source_start_line": 155,
+    "surface": "engineering_notes",
+    "target_path": "docs/history/development-notes/segment-4963-3def29fef6d2.md",
+    "type": "segment"
+  },
+  "collection": {
+    "files": 45,
+    "lines": 28934,
+    "bytes": 3225109
+  },
+  "prior_archives": [
+    {
+      "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+      "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+      "bytes": 27233,
+      "lines": 201
+    },
+    {
+      "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+      "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+      "bytes": 25099,
+      "lines": 231
+    },
+    {
+      "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+      "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+      "bytes": 18058,
+      "lines": 214
+    },
+    {
+      "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+      "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+      "bytes": 35403,
+      "lines": 190
+    },
+    {
+      "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+      "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+      "bytes": 26553,
+      "lines": 123
+    },
+    {
+      "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+      "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+      "bytes": 28181,
+      "lines": 114
+    },
+    {
+      "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+      "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+      "bytes": 28648,
+      "lines": 162
+    },
+    {
+      "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+      "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+      "bytes": 26949,
+      "lines": 128
+    },
+    {
+      "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+      "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+      "bytes": 28550,
+      "lines": 89
+    },
+    {
+      "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+      "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+      "bytes": 28169,
+      "lines": 114
+    },
+    {
+      "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+      "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+      "bytes": 27728,
+      "lines": 153
+    },
+    {
+      "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+      "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+      "bytes": 28297,
+      "lines": 258
+    },
+    {
+      "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+      "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+      "bytes": 14514,
+      "lines": 216
+    },
+    {
+      "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+      "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+      "bytes": 11955,
+      "lines": 216
+    },
+    {
+      "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+      "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+      "bytes": 13215,
+      "lines": 212
+    },
+    {
+      "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+      "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+      "bytes": 12898,
+      "lines": 213
+    },
+    {
+      "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+      "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+      "bytes": 24521,
+      "lines": 211
+    },
+    {
+      "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+      "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+      "bytes": 32348,
+      "lines": 207
+    },
+    {
+      "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+      "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+      "bytes": 25964,
+      "lines": 247
+    },
+    {
+      "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+      "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+      "bytes": 17316,
+      "lines": 206
+    },
+    {
+      "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+      "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+      "bytes": 22371,
+      "lines": 223
+    },
+    {
+      "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+      "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+      "bytes": 24930,
+      "lines": 239
+    },
+    {
+      "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+      "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+      "bytes": 23232,
+      "lines": 218
+    },
+    {
+      "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+      "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+      "bytes": 23679,
+      "lines": 231
+    },
+    {
+      "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+      "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+      "bytes": 26027,
+      "lines": 243
+    },
+    {
+      "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+      "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+      "bytes": 21008,
+      "lines": 215
+    },
+    {
+      "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+      "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+      "bytes": 21516,
+      "lines": 219
+    },
+    {
+      "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+      "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+      "bytes": 21907,
+      "lines": 214
+    },
+    {
+      "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+      "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+      "bytes": 25118,
+      "lines": 251
+    },
+    {
+      "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+      "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+      "bytes": 22183,
+      "lines": 225
+    },
+    {
+      "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+      "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+      "bytes": 21890,
+      "lines": 226
+    },
+    {
+      "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+      "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+      "bytes": 24332,
+      "lines": 242
+    },
+    {
+      "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+      "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+      "bytes": 22261,
+      "lines": 224
+    },
+    {
+      "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+      "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+      "bytes": 21384,
+      "lines": 209
+    },
+    {
+      "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+      "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+      "bytes": 22820,
+      "lines": 228
+    },
+    {
+      "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+      "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+      "bytes": 21417,
+      "lines": 211
+    },
+    {
+      "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+      "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+      "bytes": 371964,
+      "lines": 4096
+    },
+    {
+      "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+      "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+      "bytes": 367123,
+      "lines": 4096
+    },
+    {
+      "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+      "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+      "bytes": 378219,
+      "lines": 4096
+    },
+    {
+      "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+      "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+      "bytes": 524122,
+      "lines": 2890
+    },
+    {
+      "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+      "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+      "bytes": 436110,
+      "lines": 4096
+    },
+    {
+      "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+      "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+      "bytes": 213886,
+      "lines": 2034
+    }
+  ],
+  "scope": "One archive and one exact manifest row; three scalar changes only. No root, per-file, aggregate, other surface, history-byte, runtime, checker or dependency change; no unlimited PNT reserve. Autonomous full-PNT maintenance authorization, without a new explicit director grant claim."
+}

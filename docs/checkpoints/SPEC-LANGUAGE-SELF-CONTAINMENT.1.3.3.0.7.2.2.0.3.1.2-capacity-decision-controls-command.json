@@ -1,0 +1,32 @@
+{
+  "args": [
+    "perl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls.pl"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "base64": "QWN0dWFsIGRlY2lzaW9uIGNvbnRyb2xzOiB0d2VsdmUgdGhyZXNob2xkIG9ic2VydmF0aW9ucyBhbmQgc2l4IGF1dGhvcml0eSBSRUQgY29udHJvbHMgUEFTUy4K",
+    "bytes": 93,
+    "sha256": "e5140f1986bfa8de61c8891ea592a380d9685cd3e5a877434f636ba711a9ae95"
+  },
+  "stderr": {
+    "base64": "",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "input_hashes_before": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls.pl": "4ae3fe73f75420980fb3cc2baef228df312628512fa18afbfe395c3212eab582",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composition.json": "b5af817d971c7a18554ffece6e46f776050e7b85139db4abf55ea0d628469921",
+    "scripts/check_readme_routing_pressure.pl": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+    "docs/decisions/0128-replacement-note-history-capacity.md": "4ff5da005a07b2e6072bb406887e98a8826615f4f439b29598648031ca9e202e",
+    "docs/decisions/INDEX.md": "d4e888c20ab823630ae457d260d9049e95c5e19ee0df54be5e4c698f832a614d"
+  },
+  "input_hashes_after": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls.pl": "4ae3fe73f75420980fb3cc2baef228df312628512fa18afbfe395c3212eab582",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composition.json": "b5af817d971c7a18554ffece6e46f776050e7b85139db4abf55ea0d628469921",
+    "scripts/check_readme_routing_pressure.pl": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+    "docs/decisions/0128-replacement-note-history-capacity.md": "4ff5da005a07b2e6072bb406887e98a8826615f4f439b29598648031ca9e202e",
+    "docs/decisions/INDEX.md": "d4e888c20ab823630ae457d260d9049e95c5e19ee0df54be5e4c698f832a614d"
+  },
+  "review_producer_sha256": "406708ee56a55db48326c7078c74f8b5129c616e360d47c846353df6b61916bc"
+}

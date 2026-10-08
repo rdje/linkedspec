@@ -1,0 +1,205 @@
+{
+   "complete" : true,
+   "controls" : [
+      {
+         "name" : "missing_new_record",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "missing_index",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "wrong_old_limits",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "wrong_new_limits",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "wrong_old_contract",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "wrong_new_contract",
+         "observed" : "RED",
+         "reason" : "actual exact indexed authorization rejected the distinguishing missing/mismatched input"
+      },
+      {
+         "name" : "unreviewed_increase",
+         "observed" : "RED",
+         "reason" : "actual numeric increase rejects absent reviewed authority"
+      }
+   ],
+   "instrument_sha256" : "d8c35104df9a3319d687c9092f3fd81c145b08c0a89ef49cbc918212ecc28363",
+   "production_sha256" : "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+   "scope" : "Actual unchanged production functions and in-memory exact ADR/index fixtures. Status diagnostics remain separate from the seven rejecting controls; resulting-tree doctrines and canonical admission remain required.",
+   "status_observations" : [
+      {
+         "contract_authorized" : true,
+         "limit_authorized" : true,
+         "name" : "proposed_status",
+         "source_location" : "scripts/check_readme_routing_pressure.pl:adr_authorizes_limit_change/adr_authorizes_contract_change"
+      },
+      {
+         "contract_authorized" : true,
+         "limit_authorized" : true,
+         "name" : "missing_status",
+         "source_location" : "scripts/check_readme_routing_pressure.pl:adr_authorizes_limit_change/adr_authorizes_contract_change"
+      }
+   ],
+   "thresholds" : [
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 44
+      },
+      {
+         "limit" : 45,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 44
+      },
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "reasons" : [
+            "files 45/44"
+         ],
+         "rejected" : true,
+         "value" : 45
+      },
+      {
+         "limit" : 45,
+         "metric" : "files",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 45
+      },
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "reasons" : [
+            "files 46/44"
+         ],
+         "rejected" : true,
+         "value" : 46
+      },
+      {
+         "limit" : 45,
+         "metric" : "files",
+         "reasons" : [
+            "files 46/45"
+         ],
+         "rejected" : true,
+         "value" : 46
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 43
+      },
+      {
+         "limit" : 44,
+         "metric" : "lines",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 43
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "reasons" : [
+            "lines 44/43"
+         ],
+         "rejected" : true,
+         "value" : 44
+      },
+      {
+         "limit" : 44,
+         "metric" : "lines",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 44
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "reasons" : [
+            "lines 45/43"
+         ],
+         "rejected" : true,
+         "value" : 45
+      },
+      {
+         "limit" : 44,
+         "metric" : "lines",
+         "reasons" : [
+            "lines 45/44"
+         ],
+         "rejected" : true,
+         "value" : 45
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "reasons" : [
+            "bytes 26632/26021"
+         ],
+         "rejected" : true,
+         "value" : 26632
+      },
+      {
+         "limit" : 26633,
+         "metric" : "bytes",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 26632
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "reasons" : [
+            "bytes 26633/26021"
+         ],
+         "rejected" : true,
+         "value" : 26633
+      },
+      {
+         "limit" : 26633,
+         "metric" : "bytes",
+         "reasons" : [],
+         "rejected" : false,
+         "value" : 26633
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "reasons" : [
+            "bytes 26634/26021"
+         ],
+         "rejected" : true,
+         "value" : 26634
+      },
+      {
+         "limit" : 26633,
+         "metric" : "bytes",
+         "reasons" : [
+            "bytes 26634/26633"
+         ],
+         "rejected" : true,
+         "value" : 26634
+      }
+   ]
+}

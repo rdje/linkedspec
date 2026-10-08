@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "producer_sha256": "f73bd5b614cf9faaa1c9e4515867869511d743c36f1e799f171a7481d80cbe5b",
+  "controls": [
+    {
+      "name": "unrelated_reviewer_edit",
+      "observed_red": "sole exact guard-key correction"
+    },
+    {
+      "name": "wrong_first_exit",
+      "observed_red": "actual incomplete initial rejection"
+    },
+    {
+      "name": "forged_error",
+      "observed_red": "actual complete combined error identity"
+    },
+    {
+      "name": "lost_initial_channel",
+      "observed_red": "complete initial control channels"
+    },
+    {
+      "name": "wrong_retainer",
+      "observed_red": "actual error retainer"
+    }
+  ],
+  "original_source_sha256": "90a4a82cc346b2858dd12b18a865949cabf0aa2ae7b546e87cff2c2c62022a7b",
+  "corrected_source_sha256": "f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3",
+  "scope": "Exact first used reviewer, actual combined failure and initial reached control channels; sole guard-key correction. Original distinct stdout/stderr are unavailable. No product or policy repair inferred from this instrument error."
+}

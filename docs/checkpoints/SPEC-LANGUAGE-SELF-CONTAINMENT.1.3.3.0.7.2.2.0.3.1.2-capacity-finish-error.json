@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "actual_command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish.py",
+  "retained_source_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-initial.py",
+  "scope": "Actual tool-returned first failure, retained verbatim from the tool result; this was not a filesystem log capture. Original output combines tool channels, so distinct stdout/stderr are unavailable. The initial producer wrote continuity documents and stopped before claim creation at the missing CURRENT path constant. Resume only claim publication without replaying document edits.",
+  "tool_metadata": {
+    "chunk_id": "32b17d",
+    "wall_time_seconds": 0.5092075,
+    "exit_code": 1,
+    "original_token_count": 96
+  },
+  "tool_returned_channel": {
+    "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4yLWNhcGFjaXR5LWZpbmlzaC5weSIsIGxpbmUgOTAsIGluIDxtb2R1bGU+CiAgICBleHRyYXM9W0NVUlJFTlQsTUFOSUZFU1QsUkVHSVNUUlksJ2RvY3MvZGVjaXNpb25zLzAxMjgtcmVwbGFjZW1lbnQtbm90ZS1oaXN0b3J5LWNhcGFjaXR5Lm1kJywnZG9jcy9kZWNpc2lvbnMvSU5ERVgubWQnLAogICAgICAgICAgICBeXl5eXl5eCk5hbWVFcnJvcjogbmFtZSAnQ1VSUkVOVCcgaXMgbm90IGRlZmluZWQK",
+    "bytes": 381,
+    "sha256": "843b69c505010b1654a9e624c27902fa1726a0358c8d937d99ca17d5de84a334"
+  },
+  "source_sha256": "64f0bd9ea017963496571b63c839c19b97f8ca9d3739680ff2a32516c4e72e8b"
+}

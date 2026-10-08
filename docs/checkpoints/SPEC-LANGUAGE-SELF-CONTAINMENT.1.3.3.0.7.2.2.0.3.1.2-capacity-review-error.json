@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "producer_sha256": "7e3bbb3d03ee80bc35487caf36b39cae267f918ce7d5f2a14f5e00ee0500dde1",
+  "actual_first_command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py > .linkedspec-data/logs/replacement-note-capacity-review.log 2>&1",
+  "observed_exit_code": 1,
+  "original_used_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py",
+  "retained_source_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-initial.py",
+  "original_source_sha256": "90a4a82cc346b2858dd12b18a865949cabf0aa2ae7b546e87cff2c2c62022a7b",
+  "corrected_source_sha256": "f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3",
+  "combined_log": {
+    "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4yLWNhcGFjaXR5LXJldmlldy5weSIsIGxpbmUgMTc4LCBpbiA8bW9kdWxlPgogICAgZWxpZiBuYW1lID09ICdsb3N0X2lucHV0X2d1YXJkJzogYmFkWydhY3R1YWwnXVsnY29tbWFuZHMnXVswXVsnaW5wdXRfaGFzaGVzX2JlZm9yZSddLnBvcChuZXh0KGl0ZXIoYmVmb3JlKSkpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Xl5eXl5eXl5eXl5eXl5eXl5eXl4KS2V5RXJyb3I6ICdkb2NzL2NoZWNrcG9pbnRzL1NQRUMtTEFOR1VBR0UtU0VMRi1DT05UQUlOTUVOVC4xLjMuMy4wLjcuMi4yLjAuMy4xLjItY2FwYWNpdHktY29udHJvbHMucGwnCg==",
+    "bytes": 526,
+    "sha256": "2b23a4800792e3f4fce5b6beb1f56f7155186c35189d4d8f9070cf97d32ece63"
+  },
+  "retained_initial_control_channels": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command-initial.json": "b05d615bbba1d3bf82de69757ea167e17c8cbadec331e9f7f1afb675b6bc3002",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-initial.json": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f"
+  },
+  "scope": "Actual first shell-redirected combined error log and exact used source; distinct original stdout/stderr are unavailable. The initial reviewer is incomplete at its missing-input mutation. Sole correction selects the key from the actual publication guard dictionary; no product, history or policy change."
+}

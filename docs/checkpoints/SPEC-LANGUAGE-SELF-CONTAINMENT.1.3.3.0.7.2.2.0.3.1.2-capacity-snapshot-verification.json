@@ -1,0 +1,1414 @@
+{
+  "complete": true,
+  "revision": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+  "producer_sha256": "f1073c9eb5abaedacc170a4c0088ef00a1673d07ffd695cb882f01b688b0e0b9",
+  "recovery": {
+    "regular_inputs": 5119,
+    "declared_inputs_recovered": 78,
+    "omitted_guard_inputs_recovered": [
+      "CHANGES.md",
+      "LIVE_ACHIEVEMENT_STATUS.md",
+      "MEMORY.md",
+      "ROADMAP.md",
+      "ROADMAP_V2.md",
+      "docs/TASK_TREE.md",
+      "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md"
+    ]
+  },
+  "controls": [
+    {
+      "name": "missing_regular_input",
+      "observed_red": "complete original regular graph object/mode/size identity"
+    },
+    {
+      "name": "wrong_object",
+      "observed_red": "complete original regular graph object/mode/size identity"
+    },
+    {
+      "name": "wrong_mode",
+      "observed_red": "complete original regular graph object/mode/size identity"
+    },
+    {
+      "name": "changed_patch",
+      "observed_red": "complete original regular graph object/mode/size identity"
+    }
+  ],
+  "actual_recovery_commands": [
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "read-tree",
+        "47444428a8ceb65cb0ced06625db4eb8a44b8209"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "apply",
+        "--cached",
+        "--binary",
+        "--whitespace=nowarn"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 583496,
+      "stdout_sha256": "4a49a90744bbf2a76a9d86fb162a24fe8026c5fa0539621ac9a3db29820bc335",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "cat-file",
+        "--batch-check=%(objectname) %(objecttype) %(objectsize)"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 252660,
+      "stdout_sha256": "0a57fc2db789731470841b0f6fb4cb854eef4863b5a57072a60267877e5914a8",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 27512,
+      "stdout_sha256": "80baa743e95eead3777c8cf4d23b14cd6cd6ad04e74c39306cd3746bb3b406ca",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":DEVELOPMENT_NOTES.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 31811,
+      "stdout_sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-actual.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 450584,
+      "stdout_sha256": "020ac51127a4151050981acd2a27e174447e3243a23f7a7c1ff6c69e6688ae78",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-apply.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 8940,
+      "stdout_sha256": "f075c238e02dfe211b98c33a444ed5b297917e644861e34988855d5760e79c5e",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command-initial.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2120,
+      "stdout_sha256": "b05d615bbba1d3bf82de69757ea167e17c8cbadec331e9f7f1afb675b6bc3002",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2120,
+      "stdout_sha256": "83b82375d290214d0e0e43b44f6062026d54730fee2b773e984d7460462afe00",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-initial.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 5396,
+      "stdout_sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 5396,
+      "stdout_sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.pl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 5317,
+      "stdout_sha256": "d8c35104df9a3319d687c9092f3fd81c145b08c0a89ef49cbc918212ecc28363",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-error.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1580,
+      "stdout_sha256": "333c88a53a368b6f438eb1d90f33aad939e72e50ef4cc9faf4c42df423f0cf0e",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-initial.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 12672,
+      "stdout_sha256": "64f0bd9ea017963496571b63c839c19b97f8ca9d3739680ff2a32516c4e72e8b",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-history-channel.json.gz"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1341220,
+      "stdout_sha256": "1f3f858b7b6a7c8aea77061f4c6979f00a7cd57abef3f98174523229635c93b6",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-review.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 4172,
+      "stdout_sha256": "f73bd5b614cf9faaa1c9e4515867869511d743c36f1e799f171a7481d80cbe5b",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-verification.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1093,
+      "stdout_sha256": "8e8679f27c223c8acdb8ccaa29093864333c84db045622c3b1483942e5b62aaf",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 13699,
+      "stdout_sha256": "7cad87c3c8bbf29fe8e79ece33737297311eb7a7b52ebe9ef73cd5b132094674",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 6911,
+      "stdout_sha256": "341e7e7a5ea1c6cd0591403058c14e61424bb362c64afd0ae6dd1987512faff0",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publication-verification.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1834,
+      "stdout_sha256": "15c287da27a4d35165f5bcff68025e27ace73a88fb1f574bfc5a3e99645e11d9",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 7757,
+      "stdout_sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-retain-error.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2507,
+      "stdout_sha256": "7e3bbb3d03ee80bc35487caf36b39cae267f918ce7d5f2a14f5e00ee0500dde1",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-error.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2364,
+      "stdout_sha256": "bf06621d89803e6339f4abfccffbe4a3a7347c7a78eaf98947115958ace7f4f2",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-initial.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 16790,
+      "stdout_sha256": "90a4a82cc346b2858dd12b18a865949cabf0aa2ae7b546e87cff2c2c62022a7b",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 16835,
+      "stdout_sha256": "f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-verification.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 4076,
+      "stdout_sha256": "1d4ade7aa28e7b715f614011eefe21beaaf649c59e2bf3ce106a438a8ab75a25",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-proposed-note.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 401,
+      "stdout_sha256": "78d66a270057966a8754bd2140b87835f1bba4a839c59e7a054d49c914e81afb",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/decisions/0128-replacement-note-history-capacity.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 4582,
+      "stdout_sha256": "10864113f11d910eaa6f6d4ad772adcae5244c8a74c8f8bdb346bf559616f26d",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/decisions/INDEX.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 36710,
+      "stdout_sha256": "d4e888c20ab823630ae457d260d9049e95c5e19ee0df54be5e4c698f832a614d",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/manifest.jsonl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 26633,
+      "stdout_sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4963-3def29fef6d2.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 27567,
+      "stdout_sha256": "3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4964-8783c6d63164.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 27233,
+      "stdout_sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4965-eb7229ea8dfa.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 25099,
+      "stdout_sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4966-43fddeef5cda.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 18058,
+      "stdout_sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4967-f52d344f119c.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 35403,
+      "stdout_sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4968-f62a72418c77.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 26553,
+      "stdout_sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4969-daedb2f87400.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 28181,
+      "stdout_sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4970-d61f2b9e16b5.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 28648,
+      "stdout_sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4971-cca28e89f3a1.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 26949,
+      "stdout_sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4972-0e0508fa8d0b.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 28550,
+      "stdout_sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4973-2fb7ebaade12.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 28169,
+      "stdout_sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4974-99c831091c2b.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 27728,
+      "stdout_sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4975-47ec3018dc4a.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 28297,
+      "stdout_sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4976-8f23f4b6bde6.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 14514,
+      "stdout_sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4977-4ba5996b63aa.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 11955,
+      "stdout_sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4978-60c526ee0cd8.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 13215,
+      "stdout_sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4979-63966e071583.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 12898,
+      "stdout_sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4980-b29e3bd321a1.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 24521,
+      "stdout_sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4981-a05653da7d6c.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 32348,
+      "stdout_sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4982-0cca6b887182.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 25964,
+      "stdout_sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4983-274cdb2ddc2b.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 17316,
+      "stdout_sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4984-dd7eba212246.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 22371,
+      "stdout_sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4985-18da440ab1c4.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 24930,
+      "stdout_sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4986-1f25a697bee5.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 23232,
+      "stdout_sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4987-d0f32351bfe7.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 23679,
+      "stdout_sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4988-0b8be5746afe.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 26027,
+      "stdout_sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4989-0b0191f9e4ed.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21008,
+      "stdout_sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4990-be0e9432e2bb.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21516,
+      "stdout_sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4991-1cb120d0ffcd.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21907,
+      "stdout_sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4992-5973ef0574d7.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 25118,
+      "stdout_sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4993-6f38ebc623c7.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 22183,
+      "stdout_sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4994-05cbbd6ba0c6.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21890,
+      "stdout_sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4995-55a8d1e7f590.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 24332,
+      "stdout_sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4996-0a3cc59ea122.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 22261,
+      "stdout_sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4997-088d7f223720.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21384,
+      "stdout_sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4998-06929d61de2f.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 22820,
+      "stdout_sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-4999-b8c1bc03656b.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 21417,
+      "stdout_sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5000-b863304486bd.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 371964,
+      "stdout_sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5001-b398b2628fb3.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 367123,
+      "stdout_sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5002-f5c8f8bb2387.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 378219,
+      "stdout_sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5003-a1c1eff80d8c.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 524122,
+      "stdout_sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5004-cc6de6bb9fcd.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 436110,
+      "stdout_sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/segment-5005-b3b8a037c532.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 213886,
+      "stdout_sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/knowledge/replacement-repair-engineering-history-capacity.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 3216,
+      "stdout_sha256": "085d4d2c7bbdf70547af926a15b346e293d2048271f16d9d425cb9b649d1afea",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/knowledge/routing-decision-accepted-state-gap.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2582,
+      "stdout_sha256": "fff6c5f39934cf61511be676712af58a9197faba1b64d9d7469b311bb68b4144",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":doctrine/readme_stability/routes.jsonl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 24655,
+      "stdout_sha256": "2726b99db6c1416df2ae463e859481c0d94ffefc94408773cae2e265595761b3",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":scripts/check_readme_routing_pressure.pl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 47381,
+      "stdout_sha256": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":tools/project_data_env.sh"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 9311,
+      "stdout_sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":tools/project_data_run.sh"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 11043,
+      "stdout_sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":tools/read_document_history.pl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 3487,
+      "stdout_sha256": "11bfe195deb0375ecc1a1f6ad1f14a01be50138f12022132b1953b99b9432128",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":tools/roll_document_history.pl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 15268,
+      "stdout_sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":tools/run_python_project_data.sh"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1486,
+      "stdout_sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publication-verification.json"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 1834,
+      "stdout_sha256": "15c287da27a4d35165f5bcff68025e27ace73a88fb1f574bfc5a3e99645e11d9",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 7757,
+      "stdout_sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 7757,
+      "stdout_sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":DEVELOPMENT_NOTES.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 31811,
+      "stdout_sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/history/development-notes/manifest.jsonl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 26633,
+      "stdout_sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":doctrine/readme_stability/routes.jsonl"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 24655,
+      "stdout_sha256": "2726b99db6c1416df2ae463e859481c0d94ffefc94408773cae2e265595761b3",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":MEMORY.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 7886,
+      "stdout_sha256": "5a0ea91aae3e28b9475a63c0badda8fbd9d4c5e805784bdf160f1024719d06c5",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":CHANGES.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 55992,
+      "stdout_sha256": "c273194711dfa670c9e595f5ba5ca612098225cd0a0c51fbdb840aa9634204a2",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":LIVE_ACHIEVEMENT_STATUS.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 4857,
+      "stdout_sha256": "e6fcd6db0cda290872be12166921a9ca6ad0268ad67d23e454a925c3132bef92",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 915862,
+      "stdout_sha256": "3e73d26e0d0888a9363ca077707a841d3f86c6dd6dcbf2e0026d129daf795e65",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/TASK_TREE.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 343999,
+      "stdout_sha256": "b17902dc7f1745241d9cf097f315c095c8b5c59dbd8b5c92576de3aa20c26243",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":ROADMAP.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 445786,
+      "stdout_sha256": "85a43ee56c4b509c46b7435658e29448fa82e9f54e8d27f8a01464fdcd9a8502",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":ROADMAP_V2.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 258922,
+      "stdout_sha256": "62a16d965e81c843f8f8029d31d0e82a75240bc0f21b878f17c618777e519719",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/knowledge/replacement-repair-engineering-history-capacity.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 3216,
+      "stdout_sha256": "085d4d2c7bbdf70547af926a15b346e293d2048271f16d9d425cb9b649d1afea",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "show",
+        ":docs/knowledge/routing-decision-accepted-state-gap.md"
+      ],
+      "exit_code": 0,
+      "stdout_bytes": 2582,
+      "stdout_sha256": "fff6c5f39934cf61511be676712af58a9197faba1b64d9d7469b311bb68b4144",
+      "stderr_base64": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Actual isolated project-local alternate-index/object-store recovery of every regular staged input from reachable base and exact patch. No original index/object/branch write, no other repository or excluded payload inspection. All78 declared inputs and seven omitted actual continuity guards recover byte-exactly. Four distinguishing graph/patch controls reject. Original candidate remains unadmitted; actual routing RED channels retain complete bytes."
+}

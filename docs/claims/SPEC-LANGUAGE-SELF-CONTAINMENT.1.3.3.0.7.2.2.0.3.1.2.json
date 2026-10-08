@@ -1,0 +1,1214 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2",
+  "claims": [
+    {
+      "name": "finite-composed-engineering-and-decision-capacity",
+      "statement": "One governed rollover preserves clean 47444428a lines 155\u2013256 as 102 lines/27,567 bytes; all 42 prior archives and rows remain exact. Engineering collection: 45 files/28,934 lines/3,225,109 bytes; manifest 44 lines/26,633 bytes. The initial full routing gate rejects decisions at 129/128 files and 13,035/13,000 lines. Its complete 5,119-file staged graph/delta, original 78-input claim and seven omitted continuity guards recover exactly; the initial candidate remains unadmitted. Accepted indexed ADR0128 composes five finite scalars: engineering files 44\u219245, manifest lines 43\u219244/bytes 26,021\u219226,633, decision files 128\u2192129/aggregate lines 13,000\u219213,043. All prior accepted decisions and other controls remain exact. Current composition passes 13 evidence RED controls and 12 actual decision thresholds/six authority denials; retained initial proof has 14 evidence RED, 18 thresholds/seven authority denials, five instrument RED and four snapshot RED. Both initial instrument failures retain exact producers and actual error channels. Proposed/missing-status function observations remain separately owned P1 .3.1.3; no composed bypass or runtime repair is claimed. Exact staged canonical receipt and normal hooks gate landing.",
+      "scope": "One finite engineering-note rollover and the measured decision-store prerequisites, five exact scalar changes from clean47444428a; all42 prior archives/rows and127 prior accepted decisions remain exact. Final decision population129 files/13043 lines/959099 bytes. Initial three-scalar candidate is unadmitted: actual full routing rejects129/128 files and13035/13000 aggregate lines. Original78-input claim is verbatim and the complete5119-regular staged superset plus reachable clean base/full-index binary delta recovers all inputs, including seven omitted actual publisher continuity guards. This is a complete regular Git superset, not minimal IO; gitlinks/nonregular payload are metadata-only and uninspected. Current independent composition and actual production decision functions establish finite storage; retained initial producer proof is historical evidence, not refreshed against the final registry. The original reviewer KeyError and continuity-writer NameError retain exact used sources and actual combined channels. Distinct original stdout/stderr are unavailable for both. The first original routing failure has no independently retained before fingerprint; a separate actual guarded recurrence retains both complete channels and unchanged boundary. The final document adapter is a one-shot continuity journal, not an independently replayed measurement of its intermediate pre-write document state. Current final continuity bytes are explicit claim inputs. Proposed/missing-status functions authorize separately; .3.1.3 owns full-path diagnosis/repair before private handoff. Current ADR0128 is explicitly accepted and independently checked. No composed-bypass/runtime/readiness assertion, no new explicit director grant and no unlimited reserve. Exact staged canonical receipt and normal hooks govern admission independently. No parser/runtime/test/book/CI/hook/checker/dependency implementation changes; other repositories read-only, all project data repository-local/same-volume. Necessary Git/OS/Perl/Python tools are read-only external dependencies.",
+      "rederive": {
+        "status": "checked",
+        "command": "At the owning committed boundary run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composed-review.py and docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-snapshot-review.py. Initial plan/apply/review and both continuity writers are one-shot or original-snapshot producers; retain their original channels, do not replay them against changed inputs. Current claim-only publisher: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-composed-claim.py.",
+        "granularity": "{\"current\": {\"changed_scalars\": 5, \"complete\": true, \"composition_controls\": [{\"name\": \"extra_scalar\", \"observed_red\": \"exact five scalars only\"}, {\"name\": \"decision_file_allowance\", \"observed_red\": \"exact five scalars only\"}, {\"name\": \"prior_decision_byte\", \"observed_red\": \"all prior accepted decision bytes\"}, {\"name\": \"unaccepted_decision\", \"observed_red\": \"exact final decision population\"}, {\"name\": \"missing_exact_decision_marker\", \"observed_red\": \"exact composed decision bytes\"}, {\"name\": \"root_byte\", \"observed_red\": \"exact retained root and separator\"}, {\"name\": \"archive_byte\", \"observed_red\": \"complete original clean suffix\"}, {\"name\": \"prior_row_order\", \"observed_red\": \"all original manifest row bytes/order\"}, {\"name\": \"missing_guard_recovery\", \"observed_red\": \"complete initial guard closure recovered\"}, {\"name\": \"wrong_snapshot_producer\", \"observed_red\": \"actual snapshot recovery producer\"}, {\"name\": \"forged_routing_red\", \"observed_red\": \"complete retained channel\"}, {\"name\": \"lost_actual_control_guard\", \"observed_red\": \"\"}, {\"name\": \"wrong_control_producer\", \"observed_red\": \"\"}], \"decision_authority_red\": 6, \"decision_collection\": {\"bytes\": 959099, \"files\": 129, \"lines\": 13043}, \"decision_thresholds\": 12, \"engineering_collection\": {\"bytes\": 3225109, \"files\": 45, \"lines\": 28934}, \"producer_sha256\": \"406708ee56a55db48326c7078c74f8b5129c616e360d47c846353df6b61916bc\", \"recovered_omitted_guards\": 7, \"revision\": \"47444428a8ceb65cb0ced06625db4eb8a44b8209\", \"scope\": \"Independent current five-scalar composition; all prior archives and accepted decisions exact. Initial unadmitted candidate, actual two-limit RED, complete staged graph/delta, historical producers/channels and two instrument errors remain unchanged. Actual new decision controls and thirteen distinguishing composed evidence RED; complete resulting-tree/canonical admission remain separately required. No runtime or composed-bypass claim.\", \"snapshot_regular_inputs\": 5119}, \"initial_snapshot\": {\"declared_inputs_recovered\": 78, \"omitted_guard_inputs_recovered\": [\"CHANGES.md\", \"LIVE_ACHIEVEMENT_STATUS.md\", \"MEMORY.md\", \"ROADMAP.md\", \"ROADMAP_V2.md\", \"docs/TASK_TREE.md\", \"docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md\"], \"regular_inputs\": 5119}}",
+        "result": "One governed rollover preserves clean 47444428a lines 155\u2013256 as 102 lines/27,567 bytes; all 42 prior archives and rows remain exact. Engineering collection: 45 files/28,934 lines/3,225,109 bytes; manifest 44 lines/26,633 bytes. The initial full routing gate rejects decisions at 129/128 files and 13,035/13,000 lines. Its complete 5,119-file staged graph/delta, original 78-input claim and seven omitted continuity guards recover exactly; the initial candidate remains unadmitted. Accepted indexed ADR0128 composes five finite scalars: engineering files 44\u219245, manifest lines 43\u219244/bytes 26,021\u219226,633, decision files 128\u2192129/aggregate lines 13,000\u219213,043. All prior accepted decisions and other controls remain exact. Current composition passes 13 evidence RED controls and 12 actual decision thresholds/six authority denials; retained initial proof has 14 evidence RED, 18 thresholds/seven authority denials, five instrument RED and four snapshot RED. Both initial instrument failures retain exact producers and actual error channels. Proposed/missing-status function observations remain separately owned P1 .3.1.3; no composed bypass or runtime repair is claimed. Exact staged canonical receipt and normal hooks gate landing."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Matching aggregate capacity or exact routing markers alone establish lossless finite accepted admission with complete producer/input closure.",
+        "oracle": "Independent clean Git root/suffix/manifest/archive/decision reconstruction, exact five-scalar comparison, complete alternate-index recovery of every initial regular staged input and actual guarded full routing failure; separate current accepted Status check.",
+        "red_control": "Actual initial pressure255/publication0; initial14 evidence corruptions/18 actual thresholds/7 authority denials/5 instrument denials,4 staged graph/patch denials; full initial routing exit1 at both decision controls. Current13 composed corruptions and12 actual decision thresholds/6 authority denials. Status diagnostics remain authorizing, not rejecting controls."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "CHANGES.md",
+            "sha256": "b4f7cd2dde29b99dcae81b1d0b56f40527f7b0c6fcc270f5ea93b4dc84b04f4c",
+            "role": "input"
+          },
+          {
+            "path": "COMMIT.md",
+            "sha256": "eecc7322ac551a5f0a6fb3cedc6d9c50a7ffeffbab9b194776e9bcbbea98665c",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+            "role": "input"
+          },
+          {
+            "path": "DOCTRINE_ENFORCEMENT.md",
+            "sha256": "60681e8f66668f03b0a5b699fe5adb340e0506cd2813d6b27dcbbb6c1ec84256",
+            "role": "input"
+          },
+          {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "sha256": "8820b626a09fd7fda299b612e4c90b62a500a8bdb375b8e674b1e5932eabea9e",
+            "role": "input"
+          },
+          {
+            "path": "MEMORY.md",
+            "sha256": "6b66c0075bfc317a72c0afbd5d57c501a91470191903f06fbc223b3d07c034a8",
+            "role": "input"
+          },
+          {
+            "path": "README.md",
+            "sha256": "18c68a56b914d4379fff3d182cbae8b9911fa91b0d55da93a8fdd92971424154",
+            "role": "input"
+          },
+          {
+            "path": "README_POLICY.md",
+            "sha256": "9e967c6a0de617945e0d4b39631103334cf2144875b96fd37ed98f93aada2686",
+            "role": "input"
+          },
+          {
+            "path": "ROADMAP.md",
+            "sha256": "911ef6bfa3ceed1b5a3cc7218eb7cd0a788a9e2486864afdb73c4a9b3ccf0030",
+            "role": "input"
+          },
+          {
+            "path": "ROADMAP_V2.md",
+            "sha256": "5423a2d1aeb53896293bbc4a048d9f458eddd6bcd0d3627d9883d381196553bd",
+            "role": "input"
+          },
+          {
+            "path": "docs/TASK_TREE.md",
+            "sha256": "e99b3c4e4cdd19ae1b870725ff10ca4c291013d32550a8e025d4efd5047a19db",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-actual.json",
+            "sha256": "020ac51127a4151050981acd2a27e174447e3243a23f7a7c1ff6c69e6688ae78",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-apply.py",
+            "sha256": "f075c238e02dfe211b98c33a444ed5b297917e644861e34988855d5760e79c5e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-compose.py",
+            "sha256": "83f8e7ec5a1714132064a0c5144372b79b0388900f7d509adbbb60b7a6550603",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composed-publication.json",
+            "sha256": "698c01a215226a6b0822383e960ca18fe4d3bdff0034bd4f578e8271e99e69cc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composed-review.py",
+            "sha256": "406708ee56a55db48326c7078c74f8b5129c616e360d47c846353df6b61916bc",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composed-verification.json",
+            "sha256": "5797e6ebc690ab65843aebe3c7f793a9aab2d472480df3cd211aa1cce6953825",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-composition.json",
+            "sha256": "b5af817d971c7a18554ffece6e46f776050e7b85139db4abf55ea0d628469921",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command-initial.json",
+            "sha256": "b05d615bbba1d3bf82de69757ea167e17c8cbadec331e9f7f1afb675b6bc3002",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-command.json",
+            "sha256": "83b82375d290214d0e0e43b44f6062026d54730fee2b773e984d7460462afe00",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls-initial.json",
+            "sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.json",
+            "sha256": "5180e0b87cb863bde2550f12a109d5da98abfaa614ec1e187bc078858502d41f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-controls.pl",
+            "sha256": "d8c35104df9a3319d687c9092f3fd81c145b08c0a89ef49cbc918212ecc28363",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls-command.json",
+            "sha256": "7314105b32ac96f58db1a5d72eddc7e9a05240bf3584ba81201a95f9c96c6432",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls.json",
+            "sha256": "2401e6853aa0147173e4d0b94f825ec300ed2e50d59cd09d14912cf5f772a3ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-decision-controls.pl",
+            "sha256": "4ae3fe73f75420980fb3cc2baef228df312628512fa18afbfe395c3212eab582",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-final-docs-verification.json",
+            "sha256": "a0f23678dbe8a998daf6571a86cf1e41da191ce546467edaf632907e75f6b16a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-final-docs.py",
+            "sha256": "ab5ab2481fe14712d6399b8a214ec3cf8c11fe6a5162e727e7113e9bb25e19bd",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-error.json",
+            "sha256": "333c88a53a368b6f438eb1d90f33aad939e72e50ef4cc9faf4c42df423f0cf0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-finish-initial.py",
+            "sha256": "64f0bd9ea017963496571b63c839c19b97f8ca9d3739680ff2a32516c4e72e8b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-history-channel.json.gz",
+            "sha256": "1f3f858b7b6a7c8aea77061f4c6979f00a7cd57abef3f98174523229635c93b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-initial-claim.json",
+            "sha256": "80baa743e95eead3777c8cf4d23b14cd6cd6ad04e74c39306cd3746bb3b406ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-initial-staged-inputs.json",
+            "sha256": "21c7f6f2a4d518b9e3e8c1d8680e17a8aeb7eaad06bf161120e7cfe59d337c84",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-initial-staged.patch.gz",
+            "sha256": "924e6bba79f2b0cc2937d8e1201176d2c5794235a90c2c307f8a9433ab02dec3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-review.py",
+            "sha256": "f73bd5b614cf9faaa1c9e4515867869511d743c36f1e799f171a7481d80cbe5b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-instrument-verification.json",
+            "sha256": "8e8679f27c223c8acdb8ccaa29093864333c84db045622c3b1483942e5b62aaf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.json",
+            "sha256": "7cad87c3c8bbf29fe8e79ece33737297311eb7a7b52ebe9ef73cd5b132094674",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-plan.py",
+            "sha256": "341e7e7a5ea1c6cd0591403058c14e61424bb362c64afd0ae6dd1987512faff0",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publication-verification.json",
+            "sha256": "15c287da27a4d35165f5bcff68025e27ace73a88fb1f574bfc5a3e99645e11d9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-claim.py",
+            "sha256": "b49b0dd2df2c9eca56a8e99f11ea0fb582ad2405fb4ff0d3d9f1683c5a4fb8b4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-publish-composed-claim.py",
+            "sha256": "732d9257eaee3b73aa6038d909c0a52b8cd7e4cf19d5088ffcdf8ea6c91ed288",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-retain-candidate.py",
+            "sha256": "c564cec647391a7e1b2aa2e2765511b4768922780144672687d4354451df109e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-retain-error.py",
+            "sha256": "7e3bbb3d03ee80bc35487caf36b39cae267f918ce7d5f2a14f5e00ee0500dde1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-error.json",
+            "sha256": "bf06621d89803e6339f4abfccffbe4a3a7347c7a78eaf98947115958ace7f4f2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review-initial.py",
+            "sha256": "90a4a82cc346b2858dd12b18a865949cabf0aa2ae7b546e87cff2c2c62022a7b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-review.py",
+            "sha256": "f4af65f501cbab434c5958e5360782e60e3d32de08e3ea6e3c08fb24cfc98ac3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-routing-red.json",
+            "sha256": "5b806954e8632bfdadf993c7217f41a836bce3780bed0df61b3ae82ff83d64a1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-snapshot-review.py",
+            "sha256": "f1073c9eb5abaedacc170a4c0088ef00a1673d07ffd695cb882f01b688b0e0b9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-snapshot-verification.json",
+            "sha256": "707dd9c59302255200809e43423bdb7f3e5410ad4d1212f3437f06d6afffc1f4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-capacity-verification.json",
+            "sha256": "1d4ade7aa28e7b715f614011eefe21beaaf649c59e2bf3ce106a438a8ab75a25",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2-proposed-note.md",
+            "sha256": "78d66a270057966a8754bd2140b87835f1bba4a839c59e7a054d49c914e81afb",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0001-task-tree-and-commit-doctrine.md",
+            "sha256": "ea6c76ce5cf7c86a99260773de3bec8eade01d183831e21794d839819f8800f8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0002-all-target-actionir-ready-invariant.md",
+            "sha256": "5c6407e12b8471eea6f9fa3955db7908a2d8356b75c7618826d0a83f23d3e0a2",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0003-raw-perl-free-spec-authoring.md",
+            "sha256": "0d25361633aac15599afb235840f6433ea193c9d9531079ce257f559514f8f39",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0004-hosted-ci-disabled-local-gate.md",
+            "sha256": "23ef8b13356097904cfa7f03fe968e306830867521c5af4629765b9b6c91cc9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0005-knowledge-map-retrieval-layer.md",
+            "sha256": "9a32ac895e20706460cbae95c980716b2163864d5442e0df95af826adb149f32",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0006-multi-backend-vision.md",
+            "sha256": "0a23af6aa80fea31346edf113fdfab53c79b1df81e6c8cf1b44cc4ad0a8c95be",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0007-spec-format-terse-direction.md",
+            "sha256": "8b97269f089eef161633c209fb3cd7dcad2d8ad4190c472755280c6bf1bdde8a",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0008-authorize-reference-engine-defect-fixes.md",
+            "sha256": "67a9b05da04d75330774ed373670dd2f108d4c6c83f95837d0ddd67dbf617523",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0009-doctrine-enforcement-architecture.md",
+            "sha256": "73a9cd89aced4e136477de93ff9caac35243aea7a80e851981bc563cb6973593",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md",
+            "sha256": "225dfd10ef866207b75799dad25918203d7bc0c115f632207529a8038ed93853",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0011-text-to-ast-backend-doctrine.md",
+            "sha256": "bf19a77182e14720adf6ad83ef40ff07c465201659090e16f91bfac36e5e9eb7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0012-staged-linked-parsing-architecture.md",
+            "sha256": "e6246c13f81d61b2bb110ecc75fa171abf8de658a96c70fd824562c7e8f76acf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0013-spec-import-composition-contract.md",
+            "sha256": "6bf04df3ce921cd1e55ad5c553de3e8eac5675ec7bf1aa645b2f03c55a2ddbdf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0014-staged-parse-job-annotation-contract.md",
+            "sha256": "8772ebfb509366eb3198f41b3dfe91b880ebbc716bd3e4b9eab37e511fddd7ac",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0015-staged-parser-registry-dispatch-contract.md",
+            "sha256": "915debbe07a530272ada32da0ad6de12466f88d709d004dd1fcebc3ead283c4e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0016-staged-parsing-language-neutrality.md",
+            "sha256": "306713d0000e378a4741349597d5a1dc111b84cd57f126a146e16d52d36cd1ce",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0017-function-definition-staged-ast-contract.md",
+            "sha256": "1455e23d2697859462766f39baa7bea8691f893ffb45800ab313725dec55976d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0018-declaration-helper-legacy-compatibility-policy.md",
+            "sha256": "aac70620d59464b43c9e331cd9f0f75adf2f9f25206b8107b39e694055ac2889",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0019-terse-colon-slot-removal-engine-first.md",
+            "sha256": "d23a7fe9914c66c8b7ef979bbccbfefd3a75eeeae16c3d613a7c3cb28670e12e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0020-lifecycle-handler-drift-documentation-policy.md",
+            "sha256": "bc2deade81efb44cfe83bf25573441c504de51c0c44974c794b87a9cb44e2243",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0021-future-backend-rollout-order.md",
+            "sha256": "12ecf9004389ca4b5fd28c3a814a684ba4b015639143dfcf67e0db5fb7373412",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0022-native-in-memory-backend-embedding.md",
+            "sha256": "09b87e1949a87658187aa227d5087e1f2f1eb9726b34c4664d7aefa8be34f4bd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0023-user-observable-backend-and-cli-parity.md",
+            "sha256": "481ea7bc0c97821608c7b037943eeef6fa7f8b616f546651b3e0e57b66cb76a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0024-canonical-primary-cli-trace-protocol.md",
+            "sha256": "e518eaee19c1a82f67d6c298c09ec848eb687ddbfe6adc63f221f4f37e68cc13",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md",
+            "sha256": "d50e8ef040e1c320fca26dd722d55acaaa62ea6dcfba53e0df700d5b1d8da029",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0026-native-spec-resolution-and-loading-contract.md",
+            "sha256": "8e4304de27cb020b6f1720e4ed0cb5a8c11f614a5c78762d0ce14e83990ce853",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0027-unicode-17-full-default-case-conversion.md",
+            "sha256": "bd9ce27f2b9c774992e9a3af1d94416af8ad98516ee9d1fdef1dc759349a657d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0028-portable-scalar-to-text-coercion.md",
+            "sha256": "bbf8f06d389a53d8a72fd8f7395d40d69e7483394a930be54f63e7033a463c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0029-portable-scalar-numeric-helper-contract.md",
+            "sha256": "7524b4ca8edba9b7715373177ab7ed99b38c984129747a682bc160e876e2bad8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0030-variadic-callable-signature-contract.md",
+            "sha256": "84f8c74ca585ea03e2bdd663e81f8203d7d53348d1e35745b36e9637353d48fc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md",
+            "sha256": "27fbcbe873b65a597701fd107c24c7899735d746f6ba191788a05932ad93b645",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0032-final-codeblock-parameter-declaration.md",
+            "sha256": "66c5ce2477301d55850721571c1172afc7d3e30f4abc44a4fb870981b560de9d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0033-punctuation-light-zero-argument-calls.md",
+            "sha256": "cfe2b7fd4cfba41c64887dae8ef2a79c1c9ff3247ba18d88edc7817c01518102",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0034-post-parity-structured-text-requirements-program.md",
+            "sha256": "216959096d52451b495c0fa09937fa4ca8135a09cc47c2f4dedd90c7810b73d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0035-terse-readable-expressive-spec-authoring.md",
+            "sha256": "729c7655202b4bb0af10914402a4c866d0400e9913fd649aa9599bb16cb8e5ba",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0036-write-vivification-and-receiver-mutation.md",
+            "sha256": "c242c8915a0f9a337c3e6c7a74e5d1a77cd81c422c2e2ecf65608595fd3554d9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0037-selective-end-to-end-parser-observability.md",
+            "sha256": "8dce65146d9c76f2c05565573e2a77728918d42f055184a054441c0599976139",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0038-optional-native-parser-acceleration.md",
+            "sha256": "343a22ed4d7888d22149e8feec54487540ab596ee7ebefb2b31f6f0e641ea6e9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0039-rust-mutation-testing-cadence.md",
+            "sha256": "229f9ab1f3a5265220d6170cec802c5758b367b7383745adbf666ebcaa6867a5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0040-backend-implementation-companion-books.md",
+            "sha256": "ff2220b7bae6db6070aa8b8da71f5edfa206bfc275aa9a18e35e0a71b130556f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0041-final-codeblock-descriptor-and-lua-census-admission.md",
+            "sha256": "09651f27fe5e507c6ae0d3750f6e0d617ef792dd2ae3bf29d39708739a40f884",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0042-caller-owned-diagnostic-output-events.md",
+            "sha256": "c83c8ed9dadd07015ba0cbb38798fe16a5687f6fc2870c2dad7ba2ec9ea5fea6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md",
+            "sha256": "d0ec9ba2db7dce1c19822a5ccce4e496ec99a60c180c90b0346fa788c634a886",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md",
+            "sha256": "1f5bafac17c6017e7b85599c19f9fcee769d65f15cb7665243a7fc4adf669625",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0045-inter-match-gap-capture.md",
+            "sha256": "67fdf3aad9d5d5342372582a3e9493e122a36f839cfd756e030df499311ffb9f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0046-root-rule-selection-precedence.md",
+            "sha256": "79851ae8ed66b2de66c94a197f03114a0afb32dd7a21b839f86f54c13bbdfbe9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0047-duplicate-regex-slot-identity.md",
+            "sha256": "fe92dfd518094dcdbb9645fc3254adbaf2dabe565fb603260880c66a2d79193c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0048-explicit-repetition-action-result-collection.md",
+            "sha256": "0c8940ccbcbb67b1b99eb675f1ae8713b8edbf07e78bada30e4e575f55e9fd59",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md",
+            "sha256": "572cfc0e4d5e93f936e5dcdfe1bf3a054ef1b6ba2725b945e8a36725efa1a3d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0050-semantic-introspection-staged-artifact-records.md",
+            "sha256": "be525c07118d6a41726b6cdbae7209f91a470c0494d96a1d718347b169cdee88",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0051-unicode-17-xid-continue-rule-labels.md",
+            "sha256": "9a0c2d8bdfe66ea4e276344dc674248825a9b35c9453ccd4572658e908cf1392",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0052-repository-root-path-portability.md",
+            "sha256": "781e60be27e59d15c2dede575fee76da0fe4fe1dbd5657980a04c192c1415d11",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0053-project-data-ssd-storage-locality.md",
+            "sha256": "2f61c056150841155ef5a130f0e4988799a27463dba4dbd78fffce026f2ebb5e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md",
+            "sha256": "411b497babbc0e41fc95742353e4d3b99ec0880cddce3a6c991b8ab1f538b480",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md",
+            "sha256": "f8f9e6aa71e2630bfb7799390094b1a2f523fc94b9f330118e1b687597db1967",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0056-typed-source-location-and-cursor-algebra.md",
+            "sha256": "ecfa7bed06df894e1de369fa6f50f483afb48d3d91f1bf6cfcd780205b3be9fc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0057-perl-native-mcp-server-seams.md",
+            "sha256": "b18e5cfc4c36e042ee1a84e2c6bf3051b6c8080672c5185bdf5e9d7366eda710",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0058-rust-native-mcp-server-seams.md",
+            "sha256": "9c54a2761768e113dc624d2cead4c8457d90c8afef73264a1ef1383208a694cf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0059-dart-native-mcp-server-seams.md",
+            "sha256": "60d3a161571086f8c32efc7ff8809c93b1b3f17720bd5683e765d2c21414b7cd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0060-julia-native-mcp-server-seams.md",
+            "sha256": "da9b644612011ab696fdcbd9181ad9f35bf424d705348737370f660d1a0762ce",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0061-lua-native-mcp-server-seams.md",
+            "sha256": "c23ea9e46d8ea28e857587c59de36476edafc0a3c21402f5536d03d22176c1ea",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0062-recurring-mcp-six-runtime-composition.md",
+            "sha256": "c05661d4e305afbcca3eb37f17a4f8c9d7508541b1c2e1f05a0384ff03511e37",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0063-bounded-readme-landing-page.md",
+            "sha256": "28c41a6e3d3a65a5873a6fa40bf57f62f6be60ae4cacd57ca906aa15307e5241",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0064-expressive-self-containment-and-ebnf-profile.md",
+            "sha256": "942e8ea239652dbcc6902634f4a660f47bd679da004558ea5fec8f6d2526f4f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0065-satisfiable-memory-activation-commit-pointer.md",
+            "sha256": "8c23ce8a3a09722efa03b6542e97862908709345e45e9a1b786ab680b0c44eba",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0066-bounded-live-document-store.md",
+            "sha256": "b7d2039549ac408181aa7c3ab56164e82bb41a0be1f048be069678ab0416deed",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0067-live-achievement-status-history.md",
+            "sha256": "e7fcb5582e57e4101d73b6e2fc51ed62c5673757b1a53814836c7c816f341061",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0068-future-parity-task-partitions.md",
+            "sha256": "27fdcbf38a693b4fcddb241fee7aa333245ef36f633f05b270397bfd01051f56",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0069-bounded-change-and-notes-history.md",
+            "sha256": "33c2af511d2f8847795743506f50e9bd0671ff9bd5eee8e904533146d22745b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0070-engineering-notes-eleventh-segment-capacity.md",
+            "sha256": "3e5c13d8853cc99d4d5ee5713ff018cf0fca51df361b8f969cb0e5858225f0a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0071-engineering-notes-twelfth-segment-capacity.md",
+            "sha256": "20c6589c55c23277a9df95f7b991315a25ffb8ad5e592334b807be60a0376d98",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0072-change-history-seventeenth-member-capacity.md",
+            "sha256": "98ec9ea9d610a9f2d85e9e71511bda5a7a7b974f177e06556ebc8354476e7601",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0073-tiered-verification-cadence.md",
+            "sha256": "703570c5e38d74b4a447d844fdb59974c7fe559a90a8e6ede2db0a4f8a8d0736",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0074-dart-gap-admission-mutation-correction.md",
+            "sha256": "873ca7e7f585fd9862305ad5fe732512ef66d41bdf14193fff288f7b2fbcabdd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0075-engineering-notes-thirteenth-segment-capacity.md",
+            "sha256": "27710533cfe8d5133db926396fd80afd54b829e18142679905180414a4c94106",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0076-change-history-eighteenth-member-capacity.md",
+            "sha256": "9e7484ed278350bb8655230de42eb28e52ed7dce645b6ae7912919a0ffdf6fa7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0077-engineering-notes-fourteenth-member-capacity.md",
+            "sha256": "265bedd020041f9e0369ae0044303a632ea78fe23e9c5624300a581be42011f3",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0078-change-history-nineteenth-member-capacity.md",
+            "sha256": "4a57948bc8bfcb1660dab7968c6b0ac27bc6df5c54fa23f4c5304bc1a1fa11fa",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0079-inter-match-gap-recurring-public-closeout.md",
+            "sha256": "e9ad3d253fdcd70b5dbe886e3de0516300d8356ab02f96a764fe228d99e95f68",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0080-authority-preserving-progressive-span-dispatch.md",
+            "sha256": "cea6ef2180cabd7115f42da5b92d26cfc604b962ff5c332a3926a4f642e91bbf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0081-engineering-notes-fifteenth-member-capacity.md",
+            "sha256": "384d738c9f901f591f7031834b3676445053f53db8ec5614dcb24df476f75d60",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0082-change-history-twentieth-member-capacity.md",
+            "sha256": "1b8a0bf5a03735d1e51e0b8994112c695c37a52766c7c8640eb9d6ad07ad09c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0083-engineering-notes-sixteenth-member-capacity.md",
+            "sha256": "3d5d86f861427479711a7e102f6992f60bcf79e4becd94a0013d245f3c6ef684",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0084-future-parity-task-partition-capacity.md",
+            "sha256": "cdfda48eefb35d64be8be3c2924e6fff70b120632152f68c52439163f1de7a6f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0085-future-parity-task-partition-route-implementation.md",
+            "sha256": "8d36054785eaa78b353fd25f07db42db5557a9b996a119b5a1f7445ceeac5b9c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0086-change-history-twenty-first-member-capacity.md",
+            "sha256": "7b11fa29014e5ca6901d83120c21ac256b4a0c44782786382c4f98fff9fb4a55",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0087-engineering-notes-seventeenth-member-capacity.md",
+            "sha256": "ef33513f7f515131f5a8e77232c408f947baed310f112a8c93280320ccca1fd6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md",
+            "sha256": "9044703041834b4ac4235ef76144edc550c8c78f4061d5ebe079540d5d50e2fd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0089-change-history-twenty-second-member-capacity.md",
+            "sha256": "165d9336894d503de8e1b56e5b8d53ab6b8413d102d64d596dee25a422c74da8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0090-engineering-notes-eighteenth-member-capacity.md",
+            "sha256": "4d7371328a649ef80265cb2b7362dc91d0fec519d5296b66197cacdf58ace4b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0091-change-history-twenty-third-member-capacity.md",
+            "sha256": "f8b072277016837816fd63b38fb06a6e3d7de4bc8c492a60daa5ad093dec5bee",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0092-engineering-notes-nineteenth-member-capacity.md",
+            "sha256": "e62231a5f62e621c4a8d7f40b4b2b7c76ba8b6a2291782bae2a4c3f4a8817886",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0093-change-history-twenty-fourth-member-capacity.md",
+            "sha256": "b8001524d6e4367387ebdde4e54cadf9b655e017445155f81bfb0c59b04079c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md",
+            "sha256": "277585ea55b0cbd04eb77c0d81b72f8b5fe7709e3436af39efe075024a9531da",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0095-engineering-notes-twentieth-member-capacity.md",
+            "sha256": "144580843927500af33b0d30d4e7bc4fc634a2b120af80235c2077a33c5428dc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0096-change-history-twenty-fifth-member-capacity.md",
+            "sha256": "be98539114709660ce728ec37a5c9187f58de970a5297ccc6c039bc06980b1bc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0097-engineering-notes-twenty-first-member-capacity.md",
+            "sha256": "d75290215c60f9e86842ecddd3aa340565399d673a9b5de23eb027011f46aa6d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0098-change-history-twenty-sixth-member-capacity.md",
+            "sha256": "ba29318ddc169b5a7e93d7bc24fb46b5e6dfc688152f852ed0f4961feaa45c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0099-engineering-notes-twenty-second-member-capacity.md",
+            "sha256": "b1e5ca62dd77c89981aa17bdb10f14eaa3c23282dcaf2080e35435a45c93713d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0100-change-history-twenty-seventh-member-capacity.md",
+            "sha256": "b510afa6a547ff012920c0c4fb77e5cb4ab8591c3ebf6493de6b1abd50ff3147",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0101-engineering-notes-twenty-third-member-capacity.md",
+            "sha256": "4c895f475699cd22a70f127d3965b250b2ff056c42abb233f2556e1f497a4591",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0102-change-history-twenty-eighth-member-capacity.md",
+            "sha256": "5acc1485b97d06897f843af5b96a1f99cf6185326f7f30f52a92e40453ebf71f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0103-engineering-notes-twenty-fourth-member-capacity.md",
+            "sha256": "7350ebc710be1d8675d8bbd3b7e6813d319613381d4e712472d14b6b67b024b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0104-change-history-twenty-ninth-member-capacity.md",
+            "sha256": "4632545c2ca13ad7b162b7951eaa2ee16d980e67a50fb43a3740d3fbbbb51d7d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0105-engineering-notes-twenty-fifth-member-capacity.md",
+            "sha256": "e211af35d25ee2b4d15783c00afb6f59aa57b1c4d18b994a1882e5475320cd44",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0106-change-history-thirtieth-member-capacity.md",
+            "sha256": "5048241998cad14c07e2b360cfeb491e0d7527c8bfe6e246798594aedef0a061",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0107-engineering-notes-twenty-sixth-member-capacity.md",
+            "sha256": "41b8a3658aa81ce11ac84c600e2b6eb808b177bb6f1240e08da9cf9a4160df4d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0108-dart-reading-capacity-proposal.md",
+            "sha256": "9ef8923a2f3b1c4a1e2790d71d8c70486c31d3ac4bc9120347a21776070fe356",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0109-approved-dart-reading-capacity.md",
+            "sha256": "6ffcd37c04fa60fee2ed91cd578a13bdb6ff0f5e5d438afcf6d4fe48a88d665c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0110-change-history-thirty-first-member-capacity.md",
+            "sha256": "a95cb4b5a6652133d9034cc55a030364e5bc62f743a7007555979e45c86fc40c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0111-engineering-notes-twenty-seventh-member-capacity.md",
+            "sha256": "aaff9393391031c31b72b6d5a481235b5fb9fef497b662f51f937dc0f10c4602",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0112-change-history-thirty-second-member-capacity.md",
+            "sha256": "12f190bbc17aabb3e6573de2b1241021d5bd9e9b3865d2c01c1037acec49b0c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0113-engineering-notes-twenty-eighth-member-capacity.md",
+            "sha256": "627b88213fa36b79039ae3d232922341b3630b333d01241498d9799c299344ae",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0114-dart-reading-closeout-verification-exception.md",
+            "sha256": "542d392cafee7478cf3dfadb7f94ce1ec762b479ae8b087a5d26efd8937f3af7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0115-julia-reading-history-capacity.md",
+            "sha256": "3a5428c04f9428f8c634305bbb0291bcd75f65ca7a42a880b91c80986aa467e4",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0116-approved-julia-evidence-capacity.md",
+            "sha256": "e278b59da1fb8540f0e17f08eba0094ec2c32fbfd8d64a0bc743eecca5c352c5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0117-julia-reading-closeout-verification-exception.md",
+            "sha256": "8eb7d55f80f02b3831ccc385ea562376bd84bc772bc5f788e7ae62a5d82ce581",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0118-approved-lua-reading-evidence-capacity.md",
+            "sha256": "60ee589a624dfda3818d6e2b499e5446f1cadb1998ca3ac6be57a91750cee82e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0119-authorized-lua-reading-closeout.md",
+            "sha256": "bb63267b16fd691130fcf6652f66077c26e3243b4de254d501709754c381183c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0120-supporting-reading-unblock.md",
+            "sha256": "8452294efc9b662f3fe7dbbbc1b8a966a55825148f0073f63f7b895c27aba2d7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0121-approved-integration-history-capacity.md",
+            "sha256": "3a67835b27b34707779e31afa6b915a10a38d6785eb65a2251e9938cc228ebe5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0122-approved-conformance-evidence-capacity.md",
+            "sha256": "52fb624cc53d7e001318b90cfcf558979957f987e99e0f3cb83d679df6eb51b2",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0123-targeted-session-startup.md",
+            "sha256": "14a2a1d5bb46c734eb81614280fd1d20ebba3846563ed0b09d1179610031ec86",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0124-kind-preserving-sexpr-document.md",
+            "sha256": "ac48ac1972f589fbea8ae97c7f8e4979c1480c9b13f7ada9f74bc7315a8f7b34",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0125-startup-task-partitions.md",
+            "sha256": "608ea2e587122f1ddac3b72d0fd4fc9d3265ea52efe1686588c5675ee823c368",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0126-claim-publishing-contract.md",
+            "sha256": "e89d837fa29266b99f571e3c17deabd33a0741bb0c990d8cc9277df35cb62cbf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0127-legacy-diagnosis-note-capacity.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0128-replacement-note-history-capacity.md",
+            "sha256": "4ff5da005a07b2e6072bb406887e98a8826615f4f439b29598648031ca9e202e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "d4e888c20ab823630ae457d260d9049e95c5e19ee0df54be5e4c698f832a614d",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4963-3def29fef6d2.md",
+            "sha256": "3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+            "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+            "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+            "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+            "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+            "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+            "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+            "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+            "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+            "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+            "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+            "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+            "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+            "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+            "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+            "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+            "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+            "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+            "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+            "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+            "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+            "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+            "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+            "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+            "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+            "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+            "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+            "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+            "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+            "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+            "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+            "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+            "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+            "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+            "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+            "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+            "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+            "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+            "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+            "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+            "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+            "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+            "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/replacement-repair-engineering-history-capacity.md",
+            "sha256": "150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/routing-decision-accepted-state-gap.md",
+            "sha256": "fff6c5f39934cf61511be676712af58a9197faba1b64d9d7469b311bb68b4144",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md",
+            "sha256": "713f10a90b38aca02f76d9d1a74f67be1835903645020616b576b0b07dc69a5d",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "70b2b6bdd9b91d9fcce44317de4af2facf6d5d46a0b7debb6fd449c74f203578",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_claim_verification.sh",
+            "sha256": "3bac32b0118c174520d9dd5a9c9fb36b7a37e90d6d0698acfc0ec6b3f72d0f9a",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_stability.sh",
+            "sha256": "a0289f978b4e7fa29ec629392ffad22a33d625d8c530730ca06840d9b5c5d42e",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/read_document_history.pl",
+            "sha256": "11bfe195deb0375ecc1a1f6ad1f14a01be50138f12022132b1953b99b9432128",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

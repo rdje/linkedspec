@@ -1,0 +1,75 @@
+{
+  "complete": true,
+  "revision": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+  "producer_sha256": "406708ee56a55db48326c7078c74f8b5129c616e360d47c846353df6b61916bc",
+  "engineering_collection": {
+    "files": 45,
+    "lines": 28934,
+    "bytes": 3225109
+  },
+  "decision_collection": {
+    "files": 129,
+    "lines": 13043,
+    "bytes": 959099
+  },
+  "changed_scalars": 5,
+  "composition_controls": [
+    {
+      "name": "extra_scalar",
+      "observed_red": "exact five scalars only"
+    },
+    {
+      "name": "decision_file_allowance",
+      "observed_red": "exact five scalars only"
+    },
+    {
+      "name": "prior_decision_byte",
+      "observed_red": "all prior accepted decision bytes"
+    },
+    {
+      "name": "unaccepted_decision",
+      "observed_red": "exact final decision population"
+    },
+    {
+      "name": "missing_exact_decision_marker",
+      "observed_red": "exact composed decision bytes"
+    },
+    {
+      "name": "root_byte",
+      "observed_red": "exact retained root and separator"
+    },
+    {
+      "name": "archive_byte",
+      "observed_red": "complete original clean suffix"
+    },
+    {
+      "name": "prior_row_order",
+      "observed_red": "all original manifest row bytes/order"
+    },
+    {
+      "name": "missing_guard_recovery",
+      "observed_red": "complete initial guard closure recovered"
+    },
+    {
+      "name": "wrong_snapshot_producer",
+      "observed_red": "actual snapshot recovery producer"
+    },
+    {
+      "name": "forged_routing_red",
+      "observed_red": "complete retained channel"
+    },
+    {
+      "name": "lost_actual_control_guard",
+      "observed_red": ""
+    },
+    {
+      "name": "wrong_control_producer",
+      "observed_red": ""
+    }
+  ],
+  "decision_thresholds": 12,
+  "decision_authority_red": 6,
+  "snapshot_regular_inputs": 5119,
+  "recovered_omitted_guards": 7,
+  "scope": "Independent current five-scalar composition; all prior archives and accepted decisions exact. Initial unadmitted candidate, actual two-limit RED, complete staged graph/delta, historical producers/channels and two instrument errors remain unchanged. Actual new decision controls and thirteen distinguishing composed evidence RED; complete resulting-tree/canonical admission remain separately required. No runtime or composed-bypass claim."
+}
