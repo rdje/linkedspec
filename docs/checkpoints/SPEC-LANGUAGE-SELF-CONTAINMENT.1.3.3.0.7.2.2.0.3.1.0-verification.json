@@ -1,0 +1,55 @@
+{
+  "complete": true,
+  "revision": "32169d1282effa083a431b17b11c436fdd862771",
+  "producer_sha256": "c9d0d92f50b785791f450b4d247468da7eccbba1fa1907e22a9b31325fd5c6f1",
+  "original_regular_inputs": 5185,
+  "public_pairs": 42,
+  "consumer_groups_each_epoch": 144,
+  "corrected_original_red_groups": 7,
+  "private_green_groups": 10,
+  "source_inverse_controls": 11,
+  "original_guard_inputs_verified": 81,
+  "evidence_controls": [
+    {
+      "name": "lost-original-graph-entry",
+      "observed": "RED",
+      "reason": "complete regular graph"
+    },
+    {
+      "name": "forged-current-origin-producer",
+      "observed": "RED",
+      "reason": "recoverable declared overlay perl/LinkedSpec/ActionIR/SourceOrigins.pm"
+    },
+    {
+      "name": "omitted-consumer-result",
+      "observed": "RED",
+      "reason": "complete declared command population"
+    },
+    {
+      "name": "forged-complete-channel",
+      "observed": "RED",
+      "reason": "complete exact channel"
+    },
+    {
+      "name": "changed-public-value-with-valid-channel-hash",
+      "observed": "RED",
+      "reason": "source/value/error/effect/reference/argument/diagnostic preservation ('public:quoted_after', 0)"
+    },
+    {
+      "name": "forged-source-location-normalization",
+      "observed": "RED",
+      "reason": "unchanged original/rewrite source call sites"
+    },
+    {
+      "name": "wrong-prior-claim-boundary",
+      "observed": "RED",
+      "reason": "exact original committed boundary"
+    },
+    {
+      "name": "refreshed-original-claim-input",
+      "observed": "RED",
+      "reason": "exact prior record mode/revision only"
+    }
+  ],
+  "scope": "Four complete regular supplied graphs recover independently from exact Git object metadata/bytes and explicit epoch overlays, including interrupted initial after and corrected original fixture. Complete original/current public packets preserve AST, selected/copy reference relationships, args, source/generated code, diagnostics, native/fresh values/errors/effects. Only independently validated exact owner source locator, one-line import offset at two unchanged lookup sites and dated trace-prefix clocks normalize; raw channels remain complete. Original replacement body is byte-exact after removing only new invocation/import wrapping. Ten-group actual fixture GREEN; corrected original RED7; eleven effective named production inverse controls;81 prior hashes/mode-revision-only qualification. No replacement/readiness fix, other backend claim, recurring CI admission, minimal-IO assertion or completed interrupted capture."
+}

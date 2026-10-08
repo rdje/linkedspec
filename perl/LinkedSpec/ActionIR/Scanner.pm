@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::ActionIR::SourceOrigins ();
 
 sub _require_scanner_core_pkg {
  LinkedSpec::OwnerDispatch::require_pkg_cb(__PACKAGE__, 'LinkedSpec::ActionIR::ScannerCore', 'scan_contract_ir_events');
@@ -76,6 +77,7 @@ sub _scan_contract_ir_events {
    my $scan = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(@args);
    my $selected = LinkedSpec::ActionIR::SourceMembership::_select_executable_source_events($code, $scan);
    $events = $selected->{events};
+   LinkedSpec::ActionIR::SourceOrigins::_remember_selected_source_origins($events, $selected->{source_origins});
   }
   else {
    $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(@args);

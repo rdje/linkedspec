@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Private origins before mapped replacement (.0.3.1.0)
+
+Retain actual event references strongly in invocation-local source authority; copy coordinates only from recorded identities. Canonical synthetic events use returned-array/index frames, never helper raw-key guesses. Preserve callback scalar context and its successful error effect across the private collector. Correct only the authored copied-array cardinality and Core standalone import root; retain original sources/channels and restart final capture. Actual replacement stays unchanged for .1.1.
+
 ## 2026-10-08 — Accepted decision status (.0.3.1.3)
 
 Exact indexed markers formerly authorized proposed, missing and duplicate Status across five paths. Unique accepted-state checks now guard both implementations; independent cap Git fixtures avoid earlier routed-limit refusal masking the cap branch. Keep original capture/review sources and error channels separate, recover declared modes and initialize private HEAD before read-tree. No policy cap or parser/runtime movement.

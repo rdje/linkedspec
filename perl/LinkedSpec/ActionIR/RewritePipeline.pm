@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::ActionIR::SourceOrigins ();
 
 sub _retired_colon_scalar_slot_diagnostic_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }'
@@ -639,107 +640,109 @@ sub _build_action_rewrite_rules {
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules, $deps) = @_;
- my $scope = LinkedSpec::ActionIR::Trace::enter(
-  package => __PACKAGE__,
-  owner => 'rewrite_pipeline',
-  phase => 'rewrite_action_code_with_diagnostics',
-  label => $label,
-  details => {
-   label => defined($label) ? $label : '<undef>',
-   code_len => defined($code) ? length($code) : 0,
-   rewrite_rules_supplied => ref($rewrite_rules) eq 'ARRAY' ? 1 : 0,
-   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
-  },
- );
- $deps = {} unless ref($deps) eq 'HASH';
- my $collect_action_helper_ir_nodes = (ref($deps->{collect_action_helper_ir_nodes}) eq 'CODE')
-  ? $deps->{collect_action_helper_ir_nodes}
-  : undef;
- die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'collect_action_helper_ir_nodes'"
-  unless ref($collect_action_helper_ir_nodes) eq 'CODE';
- my $build_canonical_action_ir_events = (ref($deps->{build_canonical_action_ir_events}) eq 'CODE')
-  ? $deps->{build_canonical_action_ir_events}
-  : undef;
- die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_canonical_action_ir_events'"
-  unless ref($build_canonical_action_ir_events) eq 'CODE';
- my $find_unresolved_action_helpers = (ref($deps->{find_unresolved_action_helpers}) eq 'CODE')
-  ? $deps->{find_unresolved_action_helpers}
-  : undef;
- die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'find_unresolved_action_helpers'"
-  unless ref($find_unresolved_action_helpers) eq 'CODE';
+ return LinkedSpec::ActionIR::SourceOrigins::_with_source_origins($code, sub {
+  my $scope = LinkedSpec::ActionIR::Trace::enter(
+   package => __PACKAGE__,
+   owner => 'rewrite_pipeline',
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   details => {
+    label => defined($label) ? $label : '<undef>',
+    code_len => defined($code) ? length($code) : 0,
+    rewrite_rules_supplied => ref($rewrite_rules) eq 'ARRAY' ? 1 : 0,
+    rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+   },
+  );
+  $deps = {} unless ref($deps) eq 'HASH';
+  my $collect_action_helper_ir_nodes = (ref($deps->{collect_action_helper_ir_nodes}) eq 'CODE')
+   ? $deps->{collect_action_helper_ir_nodes}
+   : undef;
+  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'collect_action_helper_ir_nodes'"
+   unless ref($collect_action_helper_ir_nodes) eq 'CODE';
+  my $build_canonical_action_ir_events = (ref($deps->{build_canonical_action_ir_events}) eq 'CODE')
+   ? $deps->{build_canonical_action_ir_events}
+   : undef;
+  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_canonical_action_ir_events'"
+   unless ref($build_canonical_action_ir_events) eq 'CODE';
+  my $find_unresolved_action_helpers = (ref($deps->{find_unresolved_action_helpers}) eq 'CODE')
+   ? $deps->{find_unresolved_action_helpers}
+   : undef;
+  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'find_unresolved_action_helpers'"
+   unless ref($find_unresolved_action_helpers) eq 'CODE';
 
- my $rewrite_rules_supplied = ref($rewrite_rules) eq 'ARRAY' ? 1 : 0;
- $rewrite_rules //= _build_action_rewrite_rules($label, $deps);
- LinkedSpec::ActionIR::Trace::decision(
-  owner => 'rewrite_pipeline',
-  phase => 'rewrite_action_code_with_diagnostics',
-  label => $label,
-  decision => 'rewrite_rules_built',
-  taken => $rewrite_rules_supplied ? 0 : 1,
-  context => {
-   rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
-   rewrite_rules_supplied => $rewrite_rules_supplied,
-  },
- );
- my $ir_diag = $collect_action_helper_ir_nodes->($code, $rewrite_rules);
- LinkedSpec::ActionIR::Trace::decision(
-  owner => 'rewrite_pipeline',
-  phase => 'rewrite_action_code_with_diagnostics',
-  label => $label,
-  decision => 'helper_events_collected',
-  taken => ref($ir_diag) eq 'HASH' && ($ir_diag->{helper_action_ir_count} || 0) > 0,
-  context => {
-   helper_action_ir_count => ref($ir_diag) eq 'HASH' ? ($ir_diag->{helper_action_ir_count} || 0) : 0,
-  },
- );
- my $canonical_ir_diag = $build_canonical_action_ir_events->($label, $code, $ir_diag->{helper_action_ir_events});
- LinkedSpec::ActionIR::Trace::decision(
-  owner => 'rewrite_pipeline',
-  phase => 'rewrite_action_code_with_diagnostics',
-  label => $label,
-  decision => 'canonical_raw_perl_fallback',
-  taken => ref($canonical_ir_diag) eq 'HASH' && ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) > 0,
-  context => {
-   canonical_action_ir_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_count} || 0) : 0,
-   fallback_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) : 0,
-  },
- );
- my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
- my $diag = $find_unresolved_action_helpers->($rewritten, $rewrite_rules);
- LinkedSpec::ActionIR::Trace::decision(
-  owner => 'rewrite_pipeline',
-  phase => 'rewrite_action_code_with_diagnostics',
-  label => $label,
-  decision => 'unresolved_helpers_found',
-  taken => ref($diag) eq 'HASH' && ($diag->{unresolved_helper_count} || 0) > 0,
-  context => {
-   unresolved_helper_count => ref($diag) eq 'HASH' ? ($diag->{unresolved_helper_count} || 0) : 0,
-  },
- );
- my $result_diag = {
-  %$diag,
-  helper_action_ir_count => $ir_diag->{helper_action_ir_count},
-  helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
-  helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
-  helper_action_ir_events => $ir_diag->{helper_action_ir_events},
-  canonical_action_ir_count => $canonical_ir_diag->{canonical_action_ir_count},
-  canonical_action_ir_hits  => $canonical_ir_diag->{canonical_action_ir_hits},
-  canonical_action_ir_nodes => $canonical_ir_diag->{canonical_action_ir_nodes},
-  canonical_action_ir_events => $canonical_ir_diag->{canonical_action_ir_events},
-  canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
- };
- LinkedSpec::ActionIR::Trace::exit_scope(
-  $scope,
-  {
-   status => 'ok',
-   label => defined($label) ? $label : '<undef>',
-   rewritten_len => defined($rewritten) ? length($rewritten) : 0,
-   helper_action_ir_count => $result_diag->{helper_action_ir_count} || 0,
-   canonical_action_ir_fallback_count => $result_diag->{canonical_action_ir_fallback_count} || 0,
-   unresolved_helper_count => $result_diag->{unresolved_helper_count} || 0,
-  },
- );
- return ($rewritten, $result_diag)
+  my $rewrite_rules_supplied = ref($rewrite_rules) eq 'ARRAY' ? 1 : 0;
+  $rewrite_rules //= _build_action_rewrite_rules($label, $deps);
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'rewrite_rules_built',
+   taken => $rewrite_rules_supplied ? 0 : 1,
+   context => {
+    rewrite_rule_count => ref($rewrite_rules) eq 'ARRAY' ? scalar(@$rewrite_rules) : 0,
+    rewrite_rules_supplied => $rewrite_rules_supplied,
+   },
+  );
+  my $ir_diag = $collect_action_helper_ir_nodes->($code, $rewrite_rules);
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'helper_events_collected',
+   taken => ref($ir_diag) eq 'HASH' && ($ir_diag->{helper_action_ir_count} || 0) > 0,
+   context => {
+    helper_action_ir_count => ref($ir_diag) eq 'HASH' ? ($ir_diag->{helper_action_ir_count} || 0) : 0,
+   },
+  );
+  my $canonical_ir_diag = $build_canonical_action_ir_events->($label, $code, $ir_diag->{helper_action_ir_events});
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'canonical_raw_perl_fallback',
+   taken => ref($canonical_ir_diag) eq 'HASH' && ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) > 0,
+   context => {
+    canonical_action_ir_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_count} || 0) : 0,
+    fallback_count => ref($canonical_ir_diag) eq 'HASH' ? ($canonical_ir_diag->{canonical_action_ir_fallback_count} || 0) : 0,
+   },
+  );
+  my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
+  my $diag = $find_unresolved_action_helpers->($rewritten, $rewrite_rules);
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'rewrite_pipeline',
+   phase => 'rewrite_action_code_with_diagnostics',
+   label => $label,
+   decision => 'unresolved_helpers_found',
+   taken => ref($diag) eq 'HASH' && ($diag->{unresolved_helper_count} || 0) > 0,
+   context => {
+    unresolved_helper_count => ref($diag) eq 'HASH' ? ($diag->{unresolved_helper_count} || 0) : 0,
+   },
+  );
+  my $result_diag = {
+   %$diag,
+   helper_action_ir_count => $ir_diag->{helper_action_ir_count},
+   helper_action_ir_hits  => $ir_diag->{helper_action_ir_hits},
+   helper_action_ir_nodes => $ir_diag->{helper_action_ir_nodes},
+   helper_action_ir_events => $ir_diag->{helper_action_ir_events},
+   canonical_action_ir_count => $canonical_ir_diag->{canonical_action_ir_count},
+   canonical_action_ir_hits  => $canonical_ir_diag->{canonical_action_ir_hits},
+   canonical_action_ir_nodes => $canonical_ir_diag->{canonical_action_ir_nodes},
+   canonical_action_ir_events => $canonical_ir_diag->{canonical_action_ir_events},
+   canonical_action_ir_fallback_count => $canonical_ir_diag->{canonical_action_ir_fallback_count},
+  };
+  LinkedSpec::ActionIR::Trace::exit_scope(
+   $scope,
+   {
+    status => 'ok',
+    label => defined($label) ? $label : '<undef>',
+    rewritten_len => defined($rewritten) ? length($rewritten) : 0,
+    helper_action_ir_count => $result_diag->{helper_action_ir_count} || 0,
+    canonical_action_ir_fallback_count => $result_diag->{canonical_action_ir_fallback_count} || 0,
+    unresolved_helper_count => $result_diag->{unresolved_helper_count} || 0,
+   },
+  );
+  return ($rewritten, $result_diag)
+ })
 }
 
 1;

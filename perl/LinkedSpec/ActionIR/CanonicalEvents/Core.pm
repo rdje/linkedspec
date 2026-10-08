@@ -9,12 +9,13 @@ use 5.010;
 BEGIN {
  require File::Basename;
  my $module_dir = (File::Basename::fileparse(__FILE__))[1];
- my $canonical_events_dir = File::Basename::dirname($module_dir);
+ my $canonical_events_dir = $module_dir;
  my $action_ir_dir = File::Basename::dirname($canonical_events_dir);
  my $linked_spec_dir = File::Basename::dirname($action_ir_dir);
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::ActionIR::SourceOrigins ();
 
 my %DIRECT_KIND_BY_CONTRACT_ID = (
  call                             => 'CALL',
@@ -213,6 +214,7 @@ sub canonicalize_helper_action_ir_event {
   args        => _normalize_canonical_args($contract_id, $label, \%base_args),
  };
  $canonical->{_exclusive_statement} = 1 if $event->{exclusive_statement};
+ LinkedSpec::ActionIR::SourceOrigins::_copy_source_origin($event, $canonical);
  return $canonical
 }
 

@@ -3723,10 +3723,24 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete authority teaching is routed losslessly to the workflow chapter with a CI link; original rejected candidate/claim61 recovers exactly, four migration RED PASS and all caps stay exact. Book render, Knowledge/provenance, task/index/roadmaps/live/resume/change/notes and watched claim agree; scripts/check_memory_architecture.sh, both history checks, normal doctrines and git diff --check govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve private original occurrence authority through compiler collection/canonical copies.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3`
   Acceptance: Candidate owners: new perl/LinkedSpec/ActionIR/SourceOrigins.pm, Scanner.pm, Diagnostics.pm, CanonicalEvents.pm, CanonicalEvents/Core.pm and RewritePipeline.pm. Select exact invocation-local capture/copy and actual splitter-frame seams before editing; author source/ref/args/raw/fallback/foreign/malformed/delegation/error/reentrant controls. Keep replacement behavior unchanged here; verify original diagnostics/source/value/error channels and unchanged consumers, then focused commit.
+
+  Activation: Clean32169d1282; normal ten-doctrine hooks, promoted canonical receipt, post-commit first-parent pointer and empty brief verified. Guard81 inputs match current and exact owning Git bytes; prior claim changes mode/revision only before any bound file mutation.
+  Owned paths: New private SourceOrigins.pm; Scanner.pm, Diagnostics.pm, CanonicalEvents.pm, CanonicalEvents/Core.pm and RewritePipeline.pm capture/copy/frame seams only. Exact leaf-prefixed authored fixture, complete regular Git snapshots, channels/review/claim; prior guard mode/revision-only preservation; relevant book/Knowledge and task/index/roadmaps/live/resume/change/notes. No replacement search/edit, public field/signature, dependency or CI registration change.
+  Verification tier: `focused`
+  Focused checks: Authored actual scanner/copy/frame/reference/context/error/reentrant RED/GREEN, source-identical before/after public native/fresh/diagnostic corpus, effective production inverse controls and independent input recovery; six unchanged consumers, required Phase0/syntax, doctrines, memory/Knowledge/history/diff and book render.
+  Canonical trigger: none; independent replacement admission remains .0.3.2 after mapped repair .1.1.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json`
+  Import seam correction: The new Core import exposes its existing extra dirname step during direct no-I syntax. Retain exact initial Core, actual RED/GREEN channels and incomplete first after tree/runs/log; stop that obsolete owned capture. Correct only the module-directory starting point and require fresh final after capture; no completed candidate result is inferred from interrupted observations.
+  Instrument issue: Original copied-array denial control incorrectly expects one flag although the actual source splits into two statements. Retain exact initial fixture/complete RED channels; correct only [0] to [0,0]. Existing event count and no-origin behavior are correct. A corrected complete original fixture RED must precede production changes; original public capture continues against its immutable supplied tree.
+
+  Verification: Corrected authored original fixture RED7/10, final GREEN10/10; eleven effective source inverses reach named assertions. Four complete supplied graphs independently recover all5185 original regular Git entries plus exact epoch overlays. Forty-two complete public before/after pairs preserve AST/source/args/reference relations, generated code, diagnostics and native/fresh values/errors/effects; only exact owner locator, independently source-validated one-line import offset and dated trace-prefix clocks normalize. Six unchanged suites pass144 groups in each epoch. Eight content/history/input/channel controls reject. Original pipeline restores byte-for-byte after removing only invocation/import wrapping; search/edit logic stays untouched. Guard81 verifies original Git/current hashes before mode/revision-only freeze.
+  Corrections: Original copied-array expectation and first Core import version remain exact tracked sources with complete actual channels. Only copied flags [0]→[0,0] and Core module-directory starting point change; standalone no-I syntax has actual RED/GREEN. Initial after tree/runs/log stays incomplete; final fresh capture is the accepted proof.
+  Public/lockstep: The book explains private handoff without claiming the quoted-first repair or readiness. Knowledge, bounded live/change/notes, roadmap/index/task/resume and watched claim are synchronized. Required Phase0/syntax, book render, histories, memory/Knowledge/diff and normal doctrines govern focused landing. Recurring CI ownership remains .0.4; mapped replacement .1.1 precedes independent .0.3.2 canonical acceptance.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 - preserve private original occurrence authority` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
   Status: `pending`
@@ -4059,7 +4073,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1` | `active` | Finite history prerequisite, then private handoff and mapped repair. |
 | 43.4.2.0.3.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` | `done` | Five finite controls independently verified; original unadmitted candidate retained. |
 | 43.4.2.0.3.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` | `done` | Unique accepted Status across five authority paths; full Git-tree proof and independent recovery. |
-| 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `pending` | Private occurrence handoff through actual copies. |
+| 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `done` | Invocation-local origin/copy/frame RED/GREEN; replacement unchanged. |
 | 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `pending` | Original-to-rewritten mapped replacement and insertions. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |

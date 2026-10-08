@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "producer_sha256": "d396f1a82f85b89232b31fe60430d26172246f6ce11cb11e6a2dd4d2fd8c5f0f",
+  "initial_sha256": "38972f38b7bf7412d879389924bf0379d7eeb66f074f1efcf13678771fb3958b",
+  "corrected_sha256": "2cadc2c9ea66d6ead9c6c86ee9afec455a8ff1b70c3721bdce11ea65d7a436ae",
+  "actual_mechanism": "The canonical splitter returns two statements for host_call(); other_call(); the copied array is also two entries. Original private lookup is absent, so actual authority flags are [0,0], not the incorrectly authored [0]. Both event count and denial remain existing correct behavior.",
+  "change": "Only the copied-array expectation changes [0] to [0,0]; original source/actual complete channels remain retained. Corrected original RED is required before production edits."
+}

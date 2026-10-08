@@ -875,6 +875,14 @@ interleaved equal spellings and data inside lowered expressions need the same
 protection. The selected-occurrence repair remains open; successful reverse-order
 execution does not establish the failing order or ActionIR readiness.
 
+Perl retains selected original coordinates in a private rewrite invocation through
+the helper and canonical event copies. Raw fallback statements and synthesized
+value drops receive coordinates only from the canonical splitter's actual returned
+array and unchanged entry frames. Copied arrays, foreign source and transformed
+entries cannot borrow those coordinates. This channel adds no public event fields
+and does not yet translate original intervals across preceding replacements, so
+the failing quoted-first example above still needs that separate repair.
+
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.
 For example, the repaired `set(counter, 2)` literal retains an unresolved-helper

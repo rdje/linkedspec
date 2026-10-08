@@ -1,0 +1,52 @@
+{
+  "complete": true,
+  "producer_sha256": "8a4703b8b99169c179028137e5556c27c24ae1513da5b508f38ae490a8e37e9a",
+  "original_sha256": "fc7acbef86647594a6661acfe227f7801cffd99d71e9f8fc1858bd6b63b29f36",
+  "corrected_sha256": "d383ed377f90dd04ce87c89bcc4f9a01426a99d655ae0405ba32eb3c361411a7",
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-c",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm"
+  ],
+  "red": {
+    "exit": 2,
+    "stdout": {
+      "encoding": "gzip-base64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+    },
+    "stderr": {
+      "encoding": "gzip-base64",
+      "bytes": 653,
+      "sha256": "2fc45a37e2cf5166db924fdde1753610dfcdd771a571545e87224c67248b0685",
+      "data": "H4sIAAAAAAAC/6WST0vDQBDF736KudkekqX+AclJDUECJYrBDzDdHe3S3dmwO2nNtzcpCFXaQ/U6b97vwbwpkS8FXNAoBEvLGzJtR1o9aLGB61fVhj5qeo72w3LKOw+W4b5uSpgNoQePAzCRAQmjkASdA1kfkoriG1UUP1jgg+kdzWG2x+nAguO4gBzU0q4ixkG9UHTqNr++UQbjznIm60hoMt87sdmVoy25I9ugGpJdiJszQSddvzLeOjOeK+2lfAGqHZKQPzPslOm4Un1KxPQ36oF3DijQTcNjXZfIga1GV22JJakyRJoqd5YJFnf5xWP1VDfwjtaRyTIdfGcdTmbAVYgy/sG/8F/3MI4PjQIAAA=="
+    }
+  },
+  "green": {
+    "exit": 0,
+    "stdout": {
+      "encoding": "gzip-base64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+    },
+    "stderr": {
+      "encoding": "gzip-base64",
+      "bytes": 59,
+      "sha256": "91cc43bcd7af40af1daab124aed16eb208f23596880b493666db8d9d49647d0e",
+      "data": "H4sIAAAAAAAC/ytILcrR98nMy05NCS5ITdZ3TC7JzM/zDNJ3TszLz8tMTsxxLUvNKynWd84vStUryFUorswrSaxQ8PfmAgAkDUB/OwAAAA=="
+    }
+  },
+  "interrupted_capture_log": {
+    "encoding": "gzip-base64",
+    "bytes": 186,
+    "sha256": "ba03684114755bf24dff9e8fcfe83c26bfe50b0ee6d844c6f8bc71a9d1ae5dc9",
+    "data": "H4sIAAAAAAAC/3XNMQ6AIAyF4d1TeARnL0MqPEwT0gIWvb7ohINTk//LS3PbEvu1NDUEtyFqxbzMy5Q/QNFQx87SQwKdHVEapREDH8bizdnFcnxE+4X7fdeEvQY4X1Mc+w5BpWcTyOiVG4/tody6AAAA"
+  },
+  "scope": "Original Core had no import requiring its derived path; the new import exposed one extra dirname traversal. Start from the actual module directory, preserving existing remaining parent steps. Actual standalone no-I/perl syntax rejects before and succeeds after this sole correction. Initial after tree/runs remain incomplete and are not final acceptance; actual producer stays unchanged for a fresh after capture. No upstream/dependency inspection or pin change."
+}

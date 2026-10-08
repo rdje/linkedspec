@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::ActionIR::SourceOrigins ();
 
 sub default_deps_for_package {
  my ($pkg) = @_;
@@ -173,8 +174,30 @@ sub _build_canonical_action_ir_events {
 
  my @canonical_events;
  my $fallback_count = 0;
- foreach my $statement (@{$split_action_ir_statements->($code)}) {
+ my ($statements, $source_frames);
+ if (LinkedSpec::ActionIR::SourceOrigins::_is_active_for($code)) {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core');
+  my $callback_error;
+  my $split = LinkedSpec::ActionIR::StatementSplit::Core::_split_with_source_frames(sub {
+   my $result = $split_action_ir_statements->(@_);
+   $callback_error = $@;
+   return $result
+  }, $code);
+  # The frame collector preserves its caller's error. This dependency used to
+  # be called directly, so retain the dependency's own successful error effect.
+  $@ = $callback_error;
+  ($statements, $source_frames) = @{$split}{qw(statements source_frames)};
+ }
+ else {
+  $statements = $split_action_ir_statements->($code);
+ }
+ my $statement_index = 0;
+ foreach my $statement (@$statements) {
+  my $frame = $source_frames ? $source_frames->[$statement_index] : undef;
+  ++$statement_index;
+  my $matched_helper = 0;
   if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
+   $matched_helper = 1;
    my $event = shift @{$helper_event_queue{$statement}};
    my $exclusive_statement = delete $event->{_exclusive_statement};
    delete $helper_event_queue{$statement} if $exclusive_statement;
@@ -246,6 +269,8 @@ sub _build_canonical_action_ir_events {
     },
    );
   }
+  LinkedSpec::ActionIR::SourceOrigins::_remember_statement_origin($canonical_events[-1], $frame)
+   unless $matched_helper;
  }
 
  # Replay pending occurrences, including equal-text events interleaved across keys.

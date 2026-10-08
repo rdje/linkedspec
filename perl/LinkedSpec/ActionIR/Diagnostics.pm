@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use LinkedSpec::ActionIR::SourceOrigins ();
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
@@ -184,6 +185,7 @@ sub _collect_action_helper_ir_nodes {
     args        => $event->{args} || {},
     exclusive_statement => $rule->{exclusive_statement} ? 1 : 0,
    };
+   LinkedSpec::ActionIR::SourceOrigins::_copy_source_origin($event, $events[-1]);
    $hits{$ir_node} += 1;
    $total += 1;
   }

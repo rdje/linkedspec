@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "revision": "32169d1282effa083a431b17b11c436fdd862771",
+  "producer_sha256": "90f714af1f260ba67cdc9564c6af6e5705e74eef940014794625eb7f47dfa28a",
+  "prior_path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+  "original_sha256": "3824908abbba3a398a743284d30393e3dc442700bc48fe0ecda5f5b1cd7c6cdf",
+  "frozen_sha256": "7ac846a23ad2fd3ad7a8367c95229ce5ccfef9c561f447607c5ae4abdfafc08c",
+  "inputs_verified": 81,
+  "change": "durability mode/revision only; every original field/input hash preserved",
+  "production_unchanged": true
+}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: accepted-state guard and lossless book routing verified; exact canonical admission precedes private occurrence handoff and mapped replacement.
+Full PNT: private occurrence handoff verified; mapped interval replacement next, then independent acceptance/recurring/diagnostic/comment owners.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` — Five README/routing authority paths now require one accepted Status field; qualified/bare acceptance and exact index/transition/pressure checks remain. Original15 component and six full-gate policy violations reject after repair. Nine complete Git-tree gates per epoch, nine effective inverse mutants, ten authority denials,21 pressure boundaries and seven evidence RED pass; all5137 original regular inputs/18 staged boundaries and447 prior historical inputs recover exactly. Three verification preparation errors retain exact sources/actual recurrences. No cap/runtime changes; exact canonical receipt and normal hooks govern admission.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — Private original occurrence authority now survives selected scanner events, diagnostic/canonical copies and actual splitter frames within one rewrite invocation. Corrected RED7/GREEN10,42 exact public pairs,144 unchanged consumer groups per epoch,11 source inverse controls and eight evidence RED pass; all5185 original regular inputs and81 prior guard hashes recover. Replacement behavior remains unchanged.
 
 ## Next Action
 
-Activate .3.1.0 from clean committed HEAD; freeze this live guard claim mode/revision only before bound inputs change, then author private original-origin/ref/copy/frame RED/GREEN. Keep replacement behavior unchanged; mapped .1.1, independent .2, recurring .0.4, diagnostics and comments follow.
+Activate mapped replacement .3.1.1 from clean committed HEAD; preserve this private claim mode/revision only before bound inputs change. Check finite history headroom before authoring interval/edit-translation RED, then repair selected original occurrences without changing family order or public contracts.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — actual origin/copy/frame RED7/GREEN10; public42/consumer144;11 source inverses/eight evidence RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` — five accepted-state paths; complete Git-tree RED/GREEN, source inverses and original input recovery.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` — five finite controls; rejected original fully recoverable; accepted-state gap next P1.
 - `REPO-HYGIENE.12` — June12 Phase0 observations qualified as historical; no runtime or census refresh.
@@ -29,7 +30,6 @@ Activate .3.1.0 from clean committed HEAD; freeze this live guard claim mode/rev
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — recognitionRED18/GREEN191;42 origins/1671 groups/200 RED; complete earlier channels.
 
 ## History
 
