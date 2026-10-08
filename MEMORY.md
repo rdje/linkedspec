@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `fa9b7608ed9e49712129bb5456d75d118e7207a0` — clean canonical membership boundary.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0 - retain exact replacement diagnosis`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` (done) — original/rewritten replacement diagnosis.
-- next_action: Activate REPO-HYGIENE.12 from the clean diagnosis commit; qualify the dated Phase0 Knowledge snapshot without refreshing its measurements. Then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff, checking history capacity first. Preserve exact source and event/argument/reference authority; authored RED/GREEN precedes production changes. Mapped replacement .1.1 and committed canonical .2 remain required; no raw-text pairing/global sort.
-- in_flight_uncommitted: None; intended clean post-landing handoff. Complete source-bound diagnosis, history/instrument/book/claim checks and normal focused hooks govern this commit; no production repair.
+- activation_commit: `11f6a87d136ce213899ca6a0cd98cf3f0833f720` — clean replacement diagnosis boundary.
+- latest_completed_leaf: `REPO-HYGIENE.12 - qualify historical Phase0 measurements`.
+- active_work_unit: `REPO-HYGIENE.12` (done) — historical Phase0 fact qualification.
+- next_action: Check bounded-history capacity from this clean commit, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff. Freeze the210-input diagnosis at its original committed boundary before changing any bound producer or book input; preserve original hashes. Mapped replacement .1.1 and independent canonical .2 remain required.
+- in_flight_uncommitted: None; intended clean post-landing handoff. Focused documentation checks and normal hooks govern this leaf; no production change.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

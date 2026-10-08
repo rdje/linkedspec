@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-08 — REPO-HYGIENE.12 - qualify historical Phase0 measurements
+
+Qualified the original June12 Phase0 card as historical without refreshing its line, subtest, spec or timing observations. Replaced the misleading line-count-only reverification with original-record retrieval and complete-TAP guidance. Existing book coverage is count-free and stays unchanged; no production, tests, CI, contract or runtime behavior changes. Original-record retrieval and current complete-TAP guidance replace the stale current classification. Focused documentation, memory, Knowledge, history and normal doctrine checks govern this leaf; the public book needs no change.
+
 ## 2026-10-08 — Retain selected replacement diagnosis
 
 Unchanged fa9b7608e supplies 5,045 regular Git inputs plus three explicit diagnosis overlays for each of two 44-command captures. Fourteen authored sources recur under seeds0/1/42. Corrected native/fresh routes expose seven replacement failures and seven healthy controls; complete RED reaches14 groups. Six unchanged consumers pass144 groups per capture. The selected original assignment32–53 is correct, but its rewritten twin lookup chooses quoted11 instead of executable35. Actual event/argument identities expose collector/canonical copies without private-origin handoff. Three actual built-in traces per population retain reached rewrites; initial invalid cat and mismatched deferred-context channels remain explicit. Twenty evidence, five instrument, five history and eleven render controls reject. Original318 membership hashes freeze mode/revision only at fa9b7608e; book58/seven exact examples passes. Production/tests/CI/hooks/contracts/dependencies remain unchanged. Diagnosis does not repair runtime or close replacement, recurring, diagnostic-origin or comment owners.

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-08` (`REPO-HYGIENE.12`: dated Phase0 Knowledge record correction scheduled)
+- Last updated: `2026-10-08` (`REPO-HYGIENE.12`: historical Phase0 record qualified)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,7 +38,7 @@ the durable handoff state current.
 ## Task Tree
 
 - ID: `REPO-HYGIENE`
-  Status: `active`
+  Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
   Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`
 
@@ -233,13 +233,21 @@ the durable handoff state current.
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2 from clean committed HEAD. Recur original membership/value/source oracles and direct consumers without overlays; exact staged canonical proof precedes membership parent closeout.
 
 - ID: `REPO-HYGIENE.12`
-  Status: `pending`
+  Status: `done`
   Priority: P2 — qualify a dated testing fact that still claims current counts and runtime.
   Goal: Preserve the June12 Phase0 observations as dated history and route current reach/runtime to current proof.
   Reproduce: Read docs/knowledge/phase0-regression-structure.md: status current,1004 subtests and approximately3 minutes. The completed .0.2.2.2.2 canonical receipt retains1035 tests/1185 wallclock seconds for its exact run; that single run is not a universal performance estimate.
   Impact: Startup retrieval can mistake historical measurements for current suite size and execution expectations.
   Schedule: After the clean selected-replacement diagnosis .0.3.0 and before its production repair .0.3.1; no dirty pivot.
   Acceptance: Qualify the original dated observations without refreshing them or inferring a new universal duration. Preserve source/test/CI bytes and actual prior evidence; update Knowledge, task/live/resume/history and run focused documentation checks/normal hooks. Resume replacement repair from a clean commit.
+  Activation: Clean 11f6a87d136ce213899ca6a0cd98cf3f0833f720; diagnosis normal hooks/post-commit pointer pass, brief empty and no required background job. Original card, current book regression description, COMMIT/history controls and retained canonical acceptance reviewed.
+  Verification tier: `focused`
+  Focused checks: Review the original June12 card against its qualified version and the book's count-free regression description; preserve all original numerical observations as dated record text, leave production/tests/CI and the book unchanged, regenerate Knowledge Map, run memory/history/diff checks and all normal doctrines.
+  Canonical trigger: None; dated documentation qualification only, with no test/runtime/contract or mechanical owner change.
+  Claim verification: none: This slice qualifies the lifecycle of an existing dated record; it publishes no new measurement or performance estimate.
+  Verification: Qualified the original June12 Phase0 card as historical without refreshing its line, subtest, spec or timing observations. Replaced the misleading line-count-only reverification with original-record retrieval and complete-TAP guidance. Existing book coverage is count-free and stays unchanged; no production, tests, CI, contract or runtime behavior changes. Focused memory/Knowledge/history/diff checks and all normal doctrines govern landing. The original card is recoverable from clean11f6a87d1; no new duration or completeness claim is inferred.
+  Commit: `REPO-HYGIENE.12 - qualify historical Phase0 measurements` (Git owns identity).
+  Handoff: Check bounded-history capacity from this clean commit, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 for private original-origin handoff. Freeze the210-input diagnosis at its original committed boundary before changing any bound producer or book input; preserve original hashes. Mapped replacement .1.1 and independent canonical .2 remain required.
 
 ## Current Frontier
 
@@ -254,7 +262,7 @@ the durable handoff state current.
 | 7 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
 | 8 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
 | 9 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
-| 10 | `REPO-HYGIENE.12` | `pending` | Qualify dated Phase0 counts/runtime after clean replacement diagnosis, then resume production repair. |
+| 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
 
 ## Decisions
 
@@ -283,6 +291,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-08` | `REPO-HYGIENE.12` | Original/qualified card and current book review; unchanged production/test/CI paths; memory/Knowledge/history/diff and normal doctrines | Historical lifecycle qualification only; no new measurement. |
 | `2026-10-07` | `REPO-HYGIENE.11` | Actual census/live lstat/full channels/book/freeze; memory/Knowledge/history/claims/doctrines/diff | PASS — 10838 parent rows/13805895079 bytes; zero removals. |
 | `2026-10-06` | `REPO-HYGIENE.10` | Actual census/live reviewer; original Legacy claim freeze; complete book/render controls; retained-claim replay; memory/history/Knowledge/claims/doctrines/diff | PASS — 8931 parent candidates/12619808609 bytes;483 incremental rows/2390808555 bytes; nine nested repositories excluded; zero removals;224 original bindings/112 unique hashes. |
 | `2026-10-04` | `REPO-HYGIENE.9` | Actual census/live lstat/fresh metadata, two metadata/four channel/five book controls; claim/Knowledge/history/memory/doctrine/diff | PASS — zero removals; retained exact snapshot; producer hooks .1.1.1.2 next. |
@@ -299,6 +308,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.12` | `REPO-HYGIENE.12 - qualify historical Phase0 measurements` | Dated observations preserved; private replacement handoff resumes after capacity check. |
 | `REPO-HYGIENE.11` | `REPO-HYGIENE.11 - retain daily artifact census` | Exact dated metadata/full channels; zero removals, resume canonical membership .0.2.2. |
 | `REPO-HYGIENE.10` | `REPO-HYGIENE.10 - retain daily artifact census` | Exact metadata/actual-channel/book proof; zero removals, resume Legacy call/return/push. |
 | `REPO-HYGIENE.9` | `REPO-HYGIENE.9 - retain daily artifact census` | Actual full channels and independent metadata; preserve evidence/cache and return to eleven statement hooks. |
@@ -312,6 +322,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-08: `.12` qualifies the historical Phase0 card without a new census or timing claim; resumes private replacement work after history-capacity review.
 
 - 2026-10-07: `.11` verifies the due retained census with zero removals, corrects stale maintenance pointers and resumes canonical membership .0.2.2 after clean commit.
 

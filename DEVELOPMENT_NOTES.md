@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Phase0 fact status
+
+REPO-HYGIENE.12 qualifies June12 counts/timing as historical; current measurements belong to retained run proof.
+
 ## 2026-10-08 — Exact replacement diagnosis
 
 Selected origin32 maps to rewritten35; raw search replaces quoted11. Preserve authority through copies/edits. See docs/knowledge/perl-residual-replacement-source-frames.md.
