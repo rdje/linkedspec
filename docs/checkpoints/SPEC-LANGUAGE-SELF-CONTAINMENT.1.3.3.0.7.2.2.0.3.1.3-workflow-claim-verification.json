@@ -1,0 +1,39 @@
+{
+  "complete": true,
+  "producer_sha256": "0ebe98f368af68ecddefcdf211c6046f7fa0501739608ed50a745d35cd9c6506",
+  "recovered_regular_inputs": 5177,
+  "rejected_guard_inputs_recovered": 72,
+  "original_cleanup_inputs_verified": 21,
+  "original_cleanup_revision": "864b1a93934ab7fd4b059b0a7cb9d4b417e33c66",
+  "preservation_red_controls": [
+    {
+      "name": "lost_graph_entry",
+      "observed_red": "complete original staged graph"
+    },
+    {
+      "name": "forged_retention_source",
+      "observed_red": "actual retention producer"
+    },
+    {
+      "name": "forged_success",
+      "observed_red": "actual rejected canonical status"
+    },
+    {
+      "name": "lost_claim_input",
+      "observed_red": "all rejected guard inputs"
+    },
+    {
+      "name": "wrong_historical_revision",
+      "observed_red": "exact owning historical boundary"
+    },
+    {
+      "name": "refreshed_original_hash",
+      "observed_red": "only durability mode/revision may change"
+    },
+    {
+      "name": "changed_measurement",
+      "observed_red": "only durability mode/revision may change"
+    }
+  ],
+  "scope": "Independent private-index recovery reproduces the complete second rejected staged graph, exact binary delta/metadata and all72 guard input hashes. The unadmitted record remains retained verbatim; it is not historical at eb6. Older dated cleanup evidence verifies all21 original input hashes at its exact owning commit and changes mode/revision only. Seven content-sensitive historical/evidence corruptions reject. No original measurement/source/channel/hash refresh, cleanup rerun, new runtime evidence or canonical admission claim."
+}

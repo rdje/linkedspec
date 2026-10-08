@@ -67,6 +67,17 @@ require_readme_text() {
   fi
 }
 
+adr_has_accepted_status() {
+  local body="$1" count=0 value='' line
+  local accepted_pattern='^[[:blank:]]*accepted([[:blank:];]|$)'
+  while IFS= read -r line; do
+    [[ "$line" == '- Status:'* ]] || continue
+    count=$((count + 1))
+    value="${line#'- Status:'}"
+  done <<< "$body"
+  [[ "$count" -eq 1 && "$value" =~ $accepted_pattern ]]
+}
+
 new_adr_authorizes_caps() {
   old_line="$1"
   new_line="$2"
@@ -79,7 +90,8 @@ new_adr_authorizes_caps() {
     [[ -n "$adr" ]] || continue
     body="$(git show ":$adr" 2>/dev/null || true)"
     base="${adr##*/}"
-    if printf '%s\n' "$body" | grep -Fqx -- "- Previous README line cap: \`$old_line\`" &&
+    if adr_has_accepted_status "$body" &&
+       printf '%s\n' "$body" | grep -Fqx -- "- Previous README line cap: \`$old_line\`" &&
        printf '%s\n' "$body" | grep -Fqx -- "- New README line cap: \`$new_line\`" &&
        printf '%s\n' "$body" | grep -Fqx -- "- Previous README byte cap: \`$old_byte\`" &&
        printf '%s\n' "$body" | grep -Fqx -- "- New README byte cap: \`$new_byte\`" &&
@@ -99,12 +111,50 @@ initial_adr_authorizes_caps() {
   [[ -f "$adr" ]] || return 1
   body="$(stream_file "$adr")"
   index="$(stream_file docs/decisions/INDEX.md)"
-  printf '%s\n' "$body" | grep -Fqx -- '- Previous README line cap: `unbounded`' &&
+  adr_has_accepted_status "$body" &&
+    printf '%s\n' "$body" | grep -Fqx -- '- Previous README line cap: `unbounded`' &&
     printf '%s\n' "$body" | grep -Fqx -- "- New README line cap: \`$new_line\`" &&
     printf '%s\n' "$body" | grep -Fqx -- '- Previous README byte cap: `unbounded`' &&
     printf '%s\n' "$body" | grep -Fqx -- "- New README byte cap: \`$new_byte\`" &&
     printf '%s\n' "$index" | grep -Fq '(0063-bounded-readme-landing-page.md)'
 }
+
+run_authority_self_tests() (
+  # Fixture getters live only in this subshell; actual authority functions run.
+  fixture_index='(status-fixture.md) (0063-bounded-readme-landing-page.md)'
+  fixture_adr=''
+  git() {
+    if [[ "$1" == 'diff' ]]; then
+      printf '%s\n' 'docs/decisions/status-fixture.md'
+    elif [[ "$2" == ':docs/decisions/INDEX.md' ]]; then
+      printf '%s\n' "$fixture_index"
+    else
+      printf '%s\n' "$fixture_adr"
+    fi
+  }
+  stream_file() {
+    if [[ "$1" == 'docs/decisions/INDEX.md' ]]; then
+      printf '%s\n' "$fixture_index"
+    else
+      printf '%s\n' "$fixture_adr"
+    fi
+  }
+  for fixture_status in 'accepted' 'accepted; qualified' 'proposed' '' 'acceptedish' \
+      $'accepted\n- Status: accepted' $'proposed\n- Status: accepted'; do
+    expected=0
+    [[ "$fixture_status" == 'accepted' || "$fixture_status" == 'accepted; qualified' ]] && expected=1
+    status_line=''
+    [[ -z "$fixture_status" ]] || status_line="- Status: $fixture_status"$'\n'
+    fixture_adr="${status_line}"$'- Previous README line cap: `128`\n- New README line cap: `129`\n- Previous README byte cap: `6144`\n- New README byte cap: `6145`'
+    actual=0
+    if new_adr_authorizes_caps 128 129 6144 6145; then actual=1; fi
+    [[ "$actual" -eq "$expected" ]] || return 1
+    fixture_adr="${status_line}"$'- Previous README line cap: `unbounded`\n- New README line cap: `128`\n- Previous README byte cap: `unbounded`\n- New README byte cap: `6144`'
+    actual=0
+    if initial_adr_authorizes_caps 128 6144; then actual=1; fi
+    [[ "$actual" -eq "$expected" ]] || return 1
+  done
+)
 
 [[ -f README.md ]] || note 'README.md is missing'
 [[ -f README_POLICY.md ]] || note 'README_POLICY.md is missing'
@@ -114,6 +164,7 @@ fi
 if [[ "$fail" -ne 0 ]]; then exit 1; fi
 
 run_count_self_tests || note 'internal cap-boundary self-tests failed'
+run_authority_self_tests || note 'internal accepted-status authority self-tests failed'
 
 policy="$(stream_file README_POLICY.md)"
 if ! line_cap="$(marker_value 'Machine line cap' "$policy")"; then
@@ -179,9 +230,9 @@ if git cat-file -e HEAD:README_POLICY.md 2>/dev/null; then
     note 'HEAD README_POLICY.md has invalid machine cap markers'
   elif [[ "$line_cap" -gt "$old_line" || "$byte_cap" -gt "$old_byte" ]]; then
     if new_adr_authorizes_caps "$old_line" "$line_cap" "$old_byte" "$byte_cap"; then
-      ok "staged cap increase ${old_line}/${old_byte} -> ${line_cap}/${byte_cap} has a new indexed ADR"
+      ok "staged cap increase ${old_line}/${old_byte} -> ${line_cap}/${byte_cap} has a new accepted indexed ADR"
     else
-      note "cap increase ${old_line}/${old_byte} -> ${line_cap}/${byte_cap} requires a newly added, staged, indexed ADR with exact transition markers"
+      note "cap increase ${old_line}/${old_byte} -> ${line_cap}/${byte_cap} requires a newly added, accepted, staged, indexed ADR with exact transition markers"
     fi
   fi
 elif is_staged README_POLICY.md; then

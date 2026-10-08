@@ -23,7 +23,7 @@ Routing-pressure revision `.4.0` audited the next boundary before changing that 
 adds `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check. It classifies
 reader navigation separately from author-overflow destinations, follows routes transitively, assigns
 lifecycle-specific controls, and records legacy high-water marks as debt rather than healthy targets. Every focused run now
-proves 62 exact routes over 20 surfaces and all 32 mutation classes before the README doctrine can pass.
+proves 62 exact routes over 20 surfaces and all 40 mutation classes before the README doctrine can pass.
 
 The audit also found and traced a stale root `test_input/` layout entry introduced during the original README
 trim. LinkedSpec's current fixture roots are `t/` and `tests/`; `.4.1` removes the false route and checks every local
@@ -43,6 +43,25 @@ evidence by stable ID, install bounded current views and complete-record rollove
 the four current routes unchanged. That documentation-sustainability program is composition-closed.
 
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
+
+## Accepted decision authority
+
+An authority record must contain exactly one canonical `- Status:` field whose first state word is `accepted`.
+Both of these forms are accepted:
+
+```text
+- Status: accepted
+- Status: accepted; qualified engineering decision
+```
+
+These are alternatives, not two fields to put in one record. A proposed or missing status, two Status fields
+(even two accepted fields), and a word such as `acceptedish` reject admission. The same rule governs new routed
+limit or lifecycle changes, new README-cap increases, and the initial ADR `0063` authority paths. Accepted status
+does not replace the indexed filename, newly added staged record where required, or exact previous/new markers.
+For example, a proposed record with otherwise correct old/new cap values still fails the README doctrine.
+The wrapper's recurring tests exercise both actual cap-authority helpers; the routing oracle exercises all three
+actual routing-authority branches. Pressure, generated-owner freshness, and staged/worktree agreement remain
+separate checks.
 
 ## Public book
 

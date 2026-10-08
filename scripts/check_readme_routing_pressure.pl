@@ -748,6 +748,12 @@ sub staged_new_adrs {
     return grep { m{\Adocs/decisions/[^/]+\.md\z} && $_ ne 'docs/decisions/INDEX.md' } split /\n/, $out;
 }
 
+sub adr_is_accepted {
+    my ($body) = @_;
+    my @statuses = $body =~ /^- Status:([^\n]*)$/mg;
+    return @statuses == 1 && $statuses[0] =~ /\A[ \t]*accepted(?:[ \t;]|\z)/;
+}
+
 sub adr_authorizes_limit_change {
     my ($surface_id, $old, $new) = @_;
     my $index = snapshot_content('docs/decisions/INDEX.md') // '';
@@ -755,7 +761,8 @@ sub adr_authorizes_limit_change {
         my $body = snapshot_content($adr) // next;
         (my $base = $adr) =~ s{.*/}{};
         return 1
-            if $body =~ /^- Routed surface: `\Q$surface_id\E`$/m
+            if adr_is_accepted($body)
+            && $body =~ /^- Routed surface: `\Q$surface_id\E`$/m
             && $body =~ /^- Previous routed limits: `\Q@{[canonical_object($old)]}\E`$/m
             && $body =~ /^- New routed limits: `\Q@{[canonical_object($new)]}\E`$/m
             && index($index, "($base)") >= 0;
@@ -770,7 +777,8 @@ sub adr_authorizes_contract_change {
         my $body = snapshot_content($adr) // next;
         (my $base = $adr) =~ s{.*/}{};
         return 1
-            if $body =~ /^- Routed surface: `\Q$surface_id\E`$/m
+            if adr_is_accepted($body)
+            && $body =~ /^- Routed surface: `\Q$surface_id\E`$/m
             && $body =~ /^- Previous routed contract: `\Q@{[canonical_object($old)]}\E`$/m
             && $body =~ /^- New routed contract: `\Q@{[canonical_object($new)]}\E`$/m
             && index($index, "($base)") >= 0;
@@ -786,7 +794,7 @@ sub validate_registry_governance {
         my $adr = snapshot_content('docs/decisions/0063-bounded-readme-landing-page.md') // '';
         my $index = snapshot_content('docs/decisions/INDEX.md') // '';
         push @governance_errors, 'initial route registry requires accepted, indexed ADR 0063 authority'
-            if $adr !~ /routing-pressure|routed-destination/i || index($index, '(0063-bounded-readme-landing-page.md)') < 0;
+            if !adr_is_accepted($adr) || $adr !~ /routing-pressure|routed-destination/i || index($index, '(0063-bounded-readme-landing-page.md)') < 0;
         return @governance_errors;
     }
     my ($head_records, $decode_errors) = decode_registry($head_text);
@@ -825,11 +833,11 @@ sub validate_registry_governance {
         }
         my $limit_reviewed = adr_authorizes_limit_change($id, \%old_limits, \%new_limits);
         if (!limit_change_permitted(\%old_limits, \%new_limits, $limit_reviewed)) {
-            push @governance_errors, "surface $id threshold increase requires a newly added staged indexed ADR with exact old/new canonical limit objects";
+            push @governance_errors, "surface $id threshold increase requires a newly added accepted staged indexed ADR with exact old/new canonical limit objects";
         }
         if (canonical_object($old_contract) ne canonical_object($new_contract)
             && !$contract_reviewed) {
-            push @governance_errors, "surface $id lifecycle/control/owner contract change requires a newly added staged indexed ADR with exact old/new canonical contract objects";
+            push @governance_errors, "surface $id lifecycle/control/owner contract change requires a newly added accepted staged indexed ADR with exact old/new canonical contract objects";
         }
     }
     return @governance_errors;
@@ -861,6 +869,36 @@ sub self_test {
     my ($name, $code) = @_;
     my $ok = eval { $code->() };
     return ($ok && !$@) ? undef : $name;
+}
+
+sub authority_status_self_test {
+    my ($kind) = @_;
+    my $adr = $kind eq 'initial' ? 'docs/decisions/0063-bounded-readme-landing-page.md' : 'docs/decisions/status-fixture.md';
+    (my $base = $adr) =~ s{.*/}{};
+    my ($old, $new) = ({max_lines => 10}, {max_lines => 11});
+    my $markers = $kind eq 'initial' ? "Routing-pressure authority\n"
+        : "- Routed surface: `fixture`\n- Previous routed $kind: `" . canonical_object($old)
+          . "`\n- New routed $kind: `" . canonical_object($new) . "`\n";
+    my $body;
+    no warnings 'redefine';
+    local *staged_new_adrs = sub { return $adr };
+    local *head_content = sub { return undef };
+    local *snapshot_content = sub { return $_[0] eq 'docs/decisions/INDEX.md' ? "($base)" : $body };
+    for my $status ('accepted', 'accepted; qualified', 'proposed', '', 'acceptedish',
+                   "accepted\n- Status: accepted", "proposed\n- Status: accepted") {
+        $body = $markers . ($status eq '' ? '' : "- Status: $status\n");
+        my $authorized;
+        if ($kind eq 'initial') {
+            my @errors = validate_registry_governance([]);
+            $authorized = !@errors;
+        } else {
+            $authorized = $kind eq 'limits' ? adr_authorizes_limit_change('fixture', $old, $new)
+                : adr_authorizes_contract_change('fixture', $old, $new);
+        }
+        my $expected = $status eq 'accepted' || $status eq 'accepted; qualified';
+        return 0 if !!$authorized != !!$expected;
+    }
+    return 1;
 }
 
 sub run_mutation_self_tests {
@@ -905,6 +943,14 @@ sub run_mutation_self_tests {
             && debt_retirement_permitted($debt,$current,1);
     }];
     push @tests, ['32_resulting_tree_disagreement', sub { my ($index,$worktree)=('a','b'); return $index ne $worktree }];
+    push @tests, ['33_accepted_status', sub { return adr_is_accepted("- Status: accepted\n") && adr_is_accepted("- Status: accepted; qualified\n") && adr_is_accepted("- Status: accepted engineering decision\n") }];
+    push @tests, ['34_proposed_status', sub { return !adr_is_accepted("- Status: proposed; not accepted\n") }];
+    push @tests, ['35_missing_status', sub { return !adr_is_accepted("No Status field\n") && !adr_is_accepted("- Status:\n") }];
+    push @tests, ['36_duplicate_status', sub { return !adr_is_accepted("- Status: accepted\n- Status: accepted\n") && !adr_is_accepted("- Status: proposed\n- Status: accepted\n") }];
+    push @tests, ['37_exact_status_token', sub { return !adr_is_accepted("- Status: acceptedish\n") && !adr_is_accepted("- Status: unaccepted\n") }];
+    push @tests, ['38_routed_limit_status_authority', sub { return authority_status_self_test('limits') }];
+    push @tests, ['39_routed_contract_status_authority', sub { return authority_status_self_test('contract') }];
+    push @tests, ['40_initial_registry_status_authority', sub { return authority_status_self_test('initial') }];
     my @failed;
     for my $test (@tests) {
         my ($name, $code) = @$test;
@@ -1020,7 +1066,7 @@ if ($REPORT) {
     print "[readme-routing] routes reader_navigation=$route_counts{reader_navigation} author_overflow=$route_counts{author_overflow}\n";
     print "[readme-routing] surface $_\n" for @surface_reports;
 }
-print "[readme-routing] ok: 20 surfaces, 62 routes, $self_test_passed/32 mutation classes; resulting-tree closure and pressure controls pass\n";
+print "[readme-routing] ok: 20 surfaces, 62 routes, $self_test_passed/40 mutation classes; resulting-tree closure and pressure controls pass\n";
 exit 0;
 
 # These are the exact author-overflow candidates emitted on failure. The checker

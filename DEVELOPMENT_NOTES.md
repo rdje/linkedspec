@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Accepted decision status (.0.3.1.3)
+
+Exact indexed markers formerly authorized proposed, missing and duplicate Status across five paths. Unique accepted-state checks now guard both implementations; independent cap Git fixtures avoid earlier routed-limit refusal masking the cap branch. Keep original capture/review sources and error channels separate, recover declared modes and initialize private HEAD before read-tree. No policy cap or parser/runtime movement.
+
+Workflow routing also changes a dated cleanup input: retain the rejected72-input candidate, verify all21 cleanup hashes at owning864b1a939, and qualify mode/revision only. No original census, producer, channel or hash is refreshed; independent full-stage recovery and seven effective controls cover the preservation.
+
+Canonical pressure rejects the expanded CI chapter; preserve the rejected candidate, move the complete authority block to the writing-workflow owner and retain one link. Recover original artifact inputs before composing the corrected claim; never refresh the initial unadmitted publication or widen a cap.
+
 ## 2026-10-08 — Finite replacement-note history (.0.3.1.2)
 
 One governed engineering-note rollover preserves complete clean records before private occurrence handoff. The indexed decision admits one archive and exact manifest row; root, segment and aggregate budgets and prior history stay unchanged. Exact reconstruction and actual threshold/authority controls precede staged canonical acceptance.

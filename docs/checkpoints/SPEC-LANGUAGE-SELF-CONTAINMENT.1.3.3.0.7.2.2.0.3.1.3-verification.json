@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "producer_sha256": "9af3b7d1a5c8b1541134f87955af164812371fcad25c5c0bf4dce9f031d46faa",
+  "regular_inputs": 5137,
+  "frozen_original_inputs": 447,
+  "component_observations_each_epoch": 25,
+  "complete_full_gate_observations_each_epoch": 9,
+  "effective_source_inverse_mutants": 9,
+  "independent_authority_denials": 10,
+  "pressure_boundaries": 21,
+  "recovered_complete_boundaries": 18,
+  "evidence_red_controls": [
+    {
+      "name": "missing_input",
+      "observed_red": "complete reachable regular input graph"
+    },
+    {
+      "name": "wrong_source_producer",
+      "observed_red": "actual full-gate producer"
+    },
+    {
+      "name": "forged_status_success",
+      "observed_red": "status-distinguishing full gate result"
+    },
+    {
+      "name": "lost_independent_cap_leg",
+      "observed_red": "complete ordered full-gate population"
+    },
+    {
+      "name": "forged_status_error",
+      "observed_red": "status admission rather than independent pressure/freshness failure"
+    },
+    {
+      "name": "lost_input_boundary",
+      "observed_red": "independent complete staged boundary recovery"
+    },
+    {
+      "name": "missing_authority_branch",
+      "observed_red": "complete component population"
+    }
+  ],
+  "scope": "Independent complete reachable Git regular graph and declared overlay recovery, actual private-index object/full staged diff reconstruction, before/after source and command/channel identity, status-specific full-gate and five-branch observations, original claim mode/revision-only preservation and instrument-error provenance. Captured gates establish behavior; this review does not rerun them. Original error distinct channels/diff unavailable; separate actual recurrence is retained. No global doctrine bypass, runtime repair, historical synthetic-HEAD admission or submodule payload assertion."
+}

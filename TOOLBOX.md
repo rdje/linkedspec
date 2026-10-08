@@ -35,7 +35,11 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   [`scripts/check_readme_routing_pressure.pl`](scripts/check_readme_routing_pressure.pl). The data registry at
   `doctrine/readme_stability/routes.jsonl` must exactly cover 62 actual reader/author routes across 20 controlled
   surfaces; closure, existence, lifecycle controls, debt growth, staged-result agreement, and every threshold
-  increase fail closed. Its in-memory mutation oracle reports 32/32 before the doctrine can pass.
+  increase fail closed. Initial and new authority require exactly one canonical `- Status:` field beginning with
+  the state `accepted`; bare acceptance and qualifications after whitespace or a semicolon are supported.
+  Proposed, missing, duplicate, and malformed state fields cannot authorize a change. The index and exact old/new
+  markers remain independently required. Its in-memory mutation oracle reports 40/40 before the doctrine can pass;
+  the Bash wrapper also exercises both actual cap-authority paths with status fixtures.
   `DOCUMENT-HISTORY` ([`scripts/check_document_history.sh`](scripts/check_document_history.sh)) independently
   verifies bounded current views and hot shards, strict manifests, immutable repository-local segments, exact
   clean-Git reconstruction/slices, queryability, and rollover limits. Use `tools/read_document_history.pl`

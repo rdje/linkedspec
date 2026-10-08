@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "producer_sha256": "2f3aeeb13cb02052a63f24ac46c2c436d48e291ebd04850f3930dea4a2469bce",
+  "path": "docs/claims/REPO-HYGIENE.11.json",
+  "revision": "864b1a93934ab7fd4b059b0a7cb9d4b417e33c66",
+  "original_sha256": "d22f5018335dc47d2199b5bebf704aa9b862451ac7a69b5bf5132e5f62ae42d9",
+  "frozen_sha256": "fad0c5e2c0131682b56592d093568492feec9880af3f5f9f540eb93f97ff2efc",
+  "original_inputs_verified": 21,
+  "scope": "Dated cleanup evidence is qualified at its exact owning committed boundary. All21 original artifact inputs and original live record verify from immutable Git; only durability mode/revision changes. No cleanup rerun, input-hash refresh, new runtime/artifact census or original channel replacement. Independent rejected-candidate recovery and inverse controls remain required."
+}

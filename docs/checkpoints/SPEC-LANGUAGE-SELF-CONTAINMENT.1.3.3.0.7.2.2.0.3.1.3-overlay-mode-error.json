@@ -1,0 +1,67 @@
+{
+  "complete": true,
+  "producer_sha256": "7b1e8e17161af68267111a39bec6661e6a4b0c0bd7c8ed4a166d0bf1487ebcfd",
+  "original_used_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-resulting-tree-capture.py",
+  "retained_source_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-resulting-tree-capture-before.py",
+  "original_source_sha256": "7337a874a5c0e239101e191040ce20b929f3853c5ac98a35688f19dcb7764bfd",
+  "errors": [
+    {
+      "log_path": ".linkedspec-data/logs/accepted-state-after-resulting-tree.log",
+      "combined_channel": {
+        "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJlc3VsdGluZy10cmVlLWNhcHR1cmUucHkiLCBsaW5lIDE1MCwgaW4gPG1vZHVsZT4KICAgIGJlZm9yZSA9IGZpbmdlcnByaW50KHRyZWUsZW52LG92ZXJsYXlzKQogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJlc3VsdGluZy10cmVlLWNhcHR1cmUucHkiLCBsaW5lIDEwNCwgaW4gZmluZ2VycHJpbnQKICAgIGFzc2VydCBzaGEodGFyZ2V0LnJlYWRfYnl0ZXMoKSkgPT0gZW50cnlbJ3NoYTI1NiddIGFuZCB0YXJnZXQuc3RhdCgpLnN0X21vZGUgJiAwbzc3NyA9PSBpbnQoZW50cnlbJ21vZGUnXVstMzpdLDgpLCAnY29tcGxldGUgcmVndWxhciB3b3JrdHJlZSBpZGVudGl0eSAnK3BhdGgKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBjb21wbGV0ZSByZWd1bGFyIHdvcmt0cmVlIGlkZW50aXR5IHNjcmlwdHMvY2hlY2tfcmVhZG1lX3JvdXRpbmdfcHJlc3N1cmUucGwK",
+        "bytes": 792,
+        "sha256": "71725abb42137e9dae3ba7ae983650a68b0f9c32fa9057919465afe4220d22b4"
+      },
+      "exit_code": 1,
+      "producer_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-resulting-tree-capture.py",
+      "producer_sha256": "7337a874a5c0e239101e191040ce20b929f3853c5ac98a35688f19dcb7764bfd"
+    },
+    {
+      "log_path": ".linkedspec-data/logs/accepted-state-after-independent-caps.log",
+      "combined_channel": {
+        "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJlYWRtZS1jYXAtY2FwdHVyZS5weSIsIGxpbmUgNTgsIGluIDxtb2R1bGU+CiAgICBiZWZvcmUgPSBmaW5nZXJwcmludCh0cmVlLGVudixvdmVybGF5cykKICBGaWxlICJkb2NzL2NoZWNrcG9pbnRzL1NQRUMtTEFOR1VBR0UtU0VMRi1DT05UQUlOTUVOVC4xLjMuMy4wLjcuMi4yLjAuMy4xLjMtcmVzdWx0aW5nLXRyZWUtY2FwdHVyZS5weSIsIGxpbmUgMTA0LCBpbiBmaW5nZXJwcmludAogICAgYXNzZXJ0IHNoYSh0YXJnZXQucmVhZF9ieXRlcygpKSA9PSBlbnRyeVsnc2hhMjU2J10gYW5kIHRhcmdldC5zdGF0KCkuc3RfbW9kZSAmIDBvNzc3ID09IGludChlbnRyeVsnbW9kZSddWy0zOl0sOCksICdjb21wbGV0ZSByZWd1bGFyIHdvcmt0cmVlIGlkZW50aXR5ICcrcGF0aAogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGNvbXBsZXRlIHJlZ3VsYXIgd29ya3RyZWUgaWRlbnRpdHkgc2NyaXB0cy9jaGVja19yZWFkbWVfcm91dGluZ19wcmVzc3VyZS5wbAo=",
+        "bytes": 746,
+        "sha256": "dd033daacb112b56b6586c1869d47fbe994526ef67befa0684f051a723e409b2"
+      },
+      "exit_code": 1,
+      "producer_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-readme-cap-capture.py",
+      "producer_sha256": "8e7d563b694c8d02a495883459054810961091a5f6a7bf216d1b54d338bcfdd7"
+    }
+  ],
+  "observed_modes": [
+    {
+      "path": "scripts/check_readme_stability.sh",
+      "original_git_mode": "100755",
+      "actual_filesystem_permissions": "0o755",
+      "overlay_index_mode": "100644",
+      "bytes_exact": true
+    },
+    {
+      "path": "scripts/check_readme_routing_pressure.pl",
+      "original_git_mode": "100755",
+      "actual_filesystem_permissions": "0o755",
+      "overlay_index_mode": "100644",
+      "bytes_exact": true
+    }
+  ],
+  "recurrence": {
+    "before_diff": {
+      "base64": "ZGlmZiAtLWdpdCBhL3NjcmlwdHMvY2hlY2tfcmVhZG1lX3JvdXRpbmdfcHJlc3N1cmUucGwgYi9zY3JpcHRzL2NoZWNrX3JlYWRtZV9yb3V0aW5nX3ByZXNzdXJlLnBsCm9sZCBtb2RlIDEwMDY0NApuZXcgbW9kZSAxMDA3NTUKZGlmZiAtLWdpdCBhL3NjcmlwdHMvY2hlY2tfcmVhZG1lX3N0YWJpbGl0eS5zaCBiL3NjcmlwdHMvY2hlY2tfcmVhZG1lX3N0YWJpbGl0eS5zaApvbGQgbW9kZSAxMDA2NDQKbmV3IG1vZGUgMTAwNzU1Cg==",
+      "bytes": 244,
+      "sha256": "f5ca7185aa155081488f4d635a7e53f5fbe5c69a220d8b7e42777d2ffec2678e"
+    },
+    "after_diff": {
+      "base64": "",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "restored_boundary": {
+      "head": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+      "staged_patch_sha256": "b48bb11605271227c15c8363b96e5ce321593706a68f2cc59417da54ec0568ed",
+      "regular_inputs": 5137,
+      "index_graph_sha256": "eba1bd7c501dc3bdd279450c32a63e016bf65176ed4631f4c671c98d5bc67dfe",
+      "worktree_inputs_checked": 5137
+    }
+  },
+  "scope": "Both original after attempts fail before full gate invocation/report. Complete used helper and actual first combined logs retained; distinct original stdout/stderr unavailable. Separate actual private-index recurrence isolates two executable mode differences with exact body/object bytes. Correct only overlay modes to original regular Git modes; restored actual diff is empty and full fingerprint passes. Original repository metadata, production bytes, original before reports and submodule payload remain untouched; corrected after full gates still required."
+}

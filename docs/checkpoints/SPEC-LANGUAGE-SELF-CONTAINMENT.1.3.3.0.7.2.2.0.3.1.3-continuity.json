@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "producer_sha256": "f5a85a8970badcfffcd2384f9200ede071b8cf4e852c694adb4f4abb3b9be952",
+  "proof_sha256": "7d69643503d930e835c43f650e65fdcd160975f5d6a8c98d9a51475db63bf32b",
+  "document_hashes_before": {
+    "CHANGES.md": "b4f7cd2dde29b99dcae81b1d0b56f40527f7b0c6fcc270f5ea93b4dc84b04f4c",
+    "DEVELOPMENT_NOTES.md": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214",
+    "LIVE_ACHIEVEMENT_STATUS.md": "8820b626a09fd7fda299b612e4c90b62a500a8bdb375b8e674b1e5932eabea9e",
+    "ROADMAP.md": "911ef6bfa3ceed1b5a3cc7218eb7cd0a788a9e2486864afdb73c4a9b3ccf0030",
+    "ROADMAP_V2.md": "5423a2d1aeb53896293bbc4a048d9f458eddd6bcd0d3627d9883d381196553bd",
+    "docs/TASK_TREE.md": "e99b3c4e4cdd19ae1b870725ff10ca4c291013d32550a8e025d4efd5047a19db",
+    "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md": "3dc3273ebc8f95ae968cb7d957edd9639c95a7d49604cf3e54578b8a4bc93952"
+  },
+  "document_hashes_after": {
+    "CHANGES.md": "b0609a514a6bbca7cd705869078edd4ad33d3afc880bd696ed5b239327446392",
+    "DEVELOPMENT_NOTES.md": "5e0efd8f0f95b9a8ef93eba1b297b846923969718aa6bce6e8190c7ac431b14c",
+    "LIVE_ACHIEVEMENT_STATUS.md": "cbb7be8e6425e78574789686ff64bdd7fbe341948fb810b5d3ed75910f47d39d",
+    "ROADMAP.md": "c167d66717fee425ae95db1f04d6849e12673224d4040bd116011c065504acd9",
+    "ROADMAP_V2.md": "ec15c9ee2df4fd99f25ac43d9ccb53120e89341823d1927b4eeb0651c754fbf1",
+    "docs/TASK_TREE.md": "8304141591af476b6f7fab11001ae83f547fc4f6099303caf41cc731cabf2d86",
+    "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md": "ef7612c5752ecb3ca248cb86f5ff3f8b394c1462c212e3b9fb62adeb2d1f889c"
+  },
+  "scope": "One-shot routine continuity adaptation after complete verified proof. Current final documents are explicit claim/publisher inputs; this journal does not claim an independently replayed intermediate document state. No earlier notes/history/decision bytes are edited; pressure checks and exact canonical admission remain required."
+}

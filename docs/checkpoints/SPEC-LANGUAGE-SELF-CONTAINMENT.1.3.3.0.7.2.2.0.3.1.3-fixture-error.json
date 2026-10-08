@@ -1,0 +1,36 @@
+{
+  "complete": true,
+  "producer_sha256": "9b04cee27ee97fff547c1f07974facbb9112b1173817cb9a9c85cf9273ed4717",
+  "original_used_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-resulting-tree-capture.py",
+  "retained_source_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-resulting-tree-capture-initial.py",
+  "original_source_sha256": "76608b084e1c6dcfa78c9d0464439be462a53006860fcbe61533ec94f8d29eaa",
+  "initial_exit_code": 1,
+  "initial_combined_log": {
+    "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJlc3VsdGluZy10cmVlLWNhcHR1cmUucHkiLCBsaW5lIDE0NywgaW4gPG1vZHVsZT4KICAgIGJlZm9yZSA9IGZpbmdlcnByaW50KHRyZWUsZW52LG92ZXJsYXlzKQogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJlc3VsdGluZy10cmVlLWNhcHR1cmUucHkiLCBsaW5lIDExMiwgaW4gZmluZ2VycHJpbnQKICAgIGFzc2VydCBnaXRfZml4dHVyZSh0cmVlLGVudiwnZGlmZicsJy0tYmluYXJ5JykgPT0gYicnLCAnbm8gdHJhY2tlZCBzdGFnZS93b3JrdHJlZSBzcGxpdCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBubyB0cmFja2VkIHN0YWdlL3dvcmt0cmVlIHNwbGl0Cg==",
+    "bytes": 619,
+    "sha256": "52746a6b69010cebb9cb7ceca7cc602b50eecdb49da2bc8f19d95cf0d326e1b5"
+  },
+  "initial_channel_limits": "Original shell redirected stdout/stderr into this complete combined log; distinct channels and original Git diff bytes were not retained.",
+  "scope": "Instrument failure before full README gate invocation, not a production admission defect. Exact used source and actual first combined error retained; a separate actual Git recurrence below identifies the cause. No original index/object/ref or other repository write; gitlink payload remains uninspected.",
+  "recurrence": {
+    "before_diff": {
+      "base64": "ZGlmZiAtLWdpdCBhL3JneCBiL3JneApkZWxldGVkIGZpbGUgbW9kZSAxNjAwMDAKaW5kZXggZjZlNWFjZGM5Li4wMDAwMDAwMDAKLS0tIGEvcmd4CisrKyAvZGV2L251bGwKQEAgLTEgKzAsMCBAQAotU3VicHJvamVjdCBjb21taXQgZjZlNWFjZGM5OTcyMDM0OWQxZTNlY2VmOWY4MjFmMzY1YzRkYjE5Ywo=",
+      "bytes": 173,
+      "sha256": "4cb4e9eb1d7c4420b3ae56aed886f1c8cad6bfc806664699ce1789a772649f04"
+    },
+    "after_diff": {
+      "base64": "",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "restored_boundary": {
+      "head": "47444428a8ceb65cb0ced06625db4eb8a44b8209",
+      "staged_patch_sha256": "aebfc7f7ea7f8efd474e1ab2f4e7847a0a4f6eaa4c84b8ae104e55eb8c03a8b7",
+      "regular_inputs": 5137,
+      "index_graph_sha256": "64815c342fe5bb2b741ab552de174cc0cfea100895034f06614bea6215f7b53a",
+      "worktree_inputs_checked": 5137
+    },
+    "regular_inputs": 5137,
+    "correction": "Create only an empty directory at each excluded gitlink path; preserve every regular input and stage object, and never inspect or copy submodule payload."
+  }
+}

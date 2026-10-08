@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `47444428a8ceb65cb0ced06625db4eb8a44b8209` — clean historical Phase0 qualification.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2 - retain finite replacement-note history`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` (done) — finite composed history/decision capacity.
-- next_action: Activate .3.1.3 from clean HEAD; freeze the capacity claim mode/revision only, diagnose the full accepted-state routing path, repair with RED/GREEN and canonical proof. Private handoff .3.1.0 and mapped replacement .1.1 follow.
-- in_flight_uncommitted: None; exact staged canonical receipt and normal hooks govern this completed leaf landing.
+- activation_commit: `eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb` — clean finite capacity admission.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3 - require accepted README routing decisions`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` (done) — accepted-state guard verified; private handoff next.
+- next_action: Activate .3.1.0 from clean committed HEAD and freeze this guard claim mode/revision only before bound inputs change; author private original-origin/ref/copy/frame proof before production edits, keeping replacement behavior unchanged.
+- in_flight_uncommitted: none; completed guard/proof/book/continuity is committed under the declared exact canonical boundary; continue full PNT with private handoff, mapped replacement, independent acceptance and recurring ownership.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

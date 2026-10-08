@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "producer_sha256": "262f6be7cc32d399b5795a98a3bce316e0b2a270203bd3c0aef829a346412a23",
+  "original_used_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-review.py",
+  "retained_source_path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-review-initial.py",
+  "original_source_sha256": "c206e8f122954cfa06d8b7e0c18bc6f8f3fc1ddb21445938135952e9d5c94ad8",
+  "original_combined_error": {
+    "base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJldmlldy5weSIsIGxpbmUgMjE4LCBpbiA8bW9kdWxlPgogICAgY2hlY2tfY29tcG9uZW50cyhncm91cFsnY29tcG9uZW50cyddKTsgY2hlY2tfZnVsbChncm91cFsnZnVsbCddLEZhbHNlKTsgY2hlY2tfZnVsbChncm91cFsnY2FwcyddLFRydWUpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB+fn5+fn5+fn5+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eCiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy9kb2NzL2NoZWNrcG9pbnRzL1NQRUMtTEFOR1VBR0UtU0VMRi1DT05UQUlOTUVOVC4xLjMuMy4wLjcuMi4yLjAuMy4xLjMtcmV2aWV3LnB5IiwgbGluZSAxNjcsIGluIGNoZWNrX2Z1bGwKICAgIHJlY292ZXJfYm91bmRhcnkocm93LGluZGVwZW5kZW50X2NhcHMpCiAgICB+fn5+fn5+fn5+fn5+fn5+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJldmlldy5weSIsIGxpbmUgNzksIGluIHJlY292ZXJfYm91bmRhcnkKICAgIHJ1bigncmVhZC10cmVlJyxSRVYpCiAgICB+fn5eXl5eXl5eXl5eXl5eXl5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9TUEVDLUxBTkdVQUdFLVNFTEYtQ09OVEFJTk1FTlQuMS4zLjMuMC43LjIuMi4wLjMuMS4zLXJldmlldy5weSIsIGxpbmUgNzcsIGluIHJ1bgogICAgYXNzZXJ0IHJlc3VsdC5yZXR1cm5jb2RlID09IDAsICdwcml2YXRlIGlucHV0IHJlY292ZXJ5ICcrc3RyKGFyZ3MpKyc6ICcrcmVzdWx0LnN0ZGVyci5kZWNvZGUoZXJyb3JzPSdyZXBsYWNlJykKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBwcml2YXRlIGlucHV0IHJlY292ZXJ5ICgncmVhZC10cmVlJywgJ2ViNmQwZDZlYTdiODhkMTNlYmU2NjlhNTA3YjMxMjZkNzUwOGMwZWInKTogZmF0YWw6IG5vdCBhIGdpdCByZXBvc2l0b3J5OiAnL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvYWNjZXB0ZWQtc3RhdGUtcmV2aWV3L2luZGV4LmE2X19nMG9qLy5naXQnCgo=",
+    "bytes": 1355,
+    "sha256": "5280f7e909484202f48e323db16cd6cbf882be2dc932ca190ee96ef306c8079f"
+  },
+  "original_exit_code": 1,
+  "config_from_actual_source": "[core]\n\trepositoryformatversion = 0\n\tbare = false\n\tfsmonitor = false\n",
+  "args": [
+    "git",
+    "-c",
+    "core.fsmonitor=false",
+    "read-tree",
+    "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb"
+  ],
+  "recurrence": {
+    "before": {
+      "exit_code": 128,
+      "stdout": {
+        "base64": "",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "base64": "ZmF0YWw6IG5vdCBhIGdpdCByZXBvc2l0b3J5OiAnL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvYWNjZXB0ZWQtc3RhdGUtcmV2aWV3L2hlYWQtZGlhZ25vc2lzLmQ4N3E0cWVwLy5naXQnCg==",
+        "bytes": 148,
+        "sha256": "c7e7383f8d20b46bec91a9606ff662d9384a7c79389952be9cb5a1a6ad7c0941"
+      }
+    },
+    "after": {
+      "exit_code": 0,
+      "stdout": {
+        "base64": "",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "base64": "",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "actual_head_after": "47444428a8ceb65cb0ced06625db4eb8a44b8209"
+  },
+  "scope": "Original independent review stops at its first private read-tree before any staged boundary review/result publication. Exact used source and actual combined error retained; distinct original stdout/stderr unavailable. Separate actual minimal private Git recurrence derives config/revisions from exact original source, rejects missing HEAD with128, and passes after adding only historical BASE HEAD. Existing repository metadata and completed gate/semantic observations remain unchanged; corrected independent review remains required."
+}

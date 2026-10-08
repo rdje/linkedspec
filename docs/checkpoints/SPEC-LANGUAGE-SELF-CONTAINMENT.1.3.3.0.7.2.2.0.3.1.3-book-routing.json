@@ -1,0 +1,17 @@
+{
+  "complete": true,
+  "producer_sha256": "630b3b50f7784e89f76c074e95daf15d55cc53c4db0905aa72749af7144f292d",
+  "before_hashes": {
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md": "1e3c32bf78b0bf5c0be91e6d040c96554acd4be0af628387cf4147870f955ebe",
+    "docs/linkedspec-book/src/development/documentation-workflow.md": "74cc4d3b1bf7064720765a95f84d490ea5f7a96efa61455296ab168e171d7c02"
+  },
+  "after_hashes": {
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+    "docs/linkedspec-book/src/development/documentation-workflow.md": "9171d65bfbed9402f609823e39df92d56f027f06f5aee9cc462a674e8ad42c65"
+  },
+  "moved_block_sha256": "3d74ce367011047dfaa55018ef43e665be5754353f6c18f58ea13237b743c799",
+  "moved_block_bytes": 1022,
+  "ci_chapter_lines_before": 2064,
+  "ci_chapter_lines_after": 2047,
+  "scope": "The full original authority teaching block moves byte-for-byte into the documentation-workflow chapter. The CI chapter uses a link on an existing line; no cap changes or content loss. The direct workflow counter updates32 to40 for the same repaired current oracle; historical adoption results remain unchanged. Initial rejected candidate/source/claim/channels remain independently recoverable; focused routing, render, final identity publication and fresh exact canonical admission are required."
+}

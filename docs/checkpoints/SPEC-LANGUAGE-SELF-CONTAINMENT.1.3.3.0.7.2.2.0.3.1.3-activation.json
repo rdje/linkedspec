@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+  "producer_sha256": "0162beb5f7c7fb4b4b1e881006bd39ca71ce392b8007882d6d362d7eca5e60c6",
+  "records": [
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "revision": "11f6a87d136ce213899ca6a0cd98cf3f0833f720",
+      "inputs_checked": 210,
+      "original_sha256": "154c134251ad10ebb716c902e8cbed3e832ecdd310850f30a799d3bc59ec6e74",
+      "frozen_sha256": "4979b43bfea15922c2efb754e065c988fc731a5c4bc487065c2476a091e6e9ce",
+      "change": "mode/revision only"
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "inputs_checked": 237,
+      "original_sha256": "2a0336763f85e383a7c919fc0b0b3e1c40e98ee0b9d6a93db58ba6ed20a5512d",
+      "frozen_sha256": "45be885ec93081bf013e7e5220c3b434ab74acc5d91499179ba3dc6922c8120e",
+      "change": "mode/revision only"
+    }
+  ],
+  "scope": "Clean capacity boundary verified before owned activation producer. All447 original inputs match current and exact original Git bytes before any bound input change. No historical measurement, source, channel or input hash refresh; initial unadmitted capacity claim remains unchanged. Accepted-state repair pending."
+}

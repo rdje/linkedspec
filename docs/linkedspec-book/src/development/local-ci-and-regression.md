@@ -63,13 +63,13 @@ The data-only registry declares 62 routes over 20 surfaces. The checker independ
 routes, five policy/enforcement reader routes, 18 policy author-overflow routes, and the actual failure hints; it
 rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale
 generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory
-mutation oracle must report 32/32. At adoption, live status, task evidence, change history, and engineering notes
+mutation oracle must report 40/40. At adoption, live status, task evidence, change history, and engineering notes
 were immutable measured debt. All four are now current bounded collections: live status under ADR `0067`, task
 evidence under ADR `0068`, and change history plus engineering notes under ADR `0069`. Their former debt ceilings
 remain historical facts rather than reusable growth allowances.
 
 Historical admission and unchanged-closeout evidence, including exact commits and runtime results,
-lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`.
+lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`. See [accepted decision authority](documentation-workflow.md#accepted-decision-authority) for the Status rule and examples.
 
 #### Bounded views over exact history
 
@@ -115,7 +115,7 @@ Current collection ceilings are in `doctrine/readme_stability/routes.jsonl`; ear
 including engineering-notes segment 4992, remain recorded in ADRs `0081` and `0083`.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
-pressure checks on every accepted slice. See [history rollover and byte reconstruction](documentation-workflow.md#history-rollover-and-byte-reconstruction) for EOF and generation recovery. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
+pressure checks on every accepted slice. See [history rollover and byte reconstruction](documentation-workflow.md#history-rollover-and-byte-reconstruction) for EOF and generation recovery. Historical unchanged registry recomposition passed 20 surfaces / 62 routes / 32/32
 with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
 
 Use the bounded query that matches the question:

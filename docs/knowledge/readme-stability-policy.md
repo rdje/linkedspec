@@ -14,7 +14,7 @@ answers:
   - are README routed destinations pressure controlled
   - what revision adds README routing pressure closure
 date: 2026-07-29
-status: original adoption and routing-pressure revision closed; license decision remains independent proposed
+status: original adoption/routing revision closed; .3.1.3 verifies accepted-state repair; license decision remains independent proposed
 tags: [readme, documentation, doctrine, navigation, maintenance, license, routing, pressure, lifecycle]
 evidence: "README-STABILITY-POLICY.0-.2 close the 105-line / 5,072-byte landing page, hard 128/6,144 budgets, and original doctrine. Revision .4.0 ratifies the unchecked-neighbor repair; implementation .4.1 enforces exactly 62 routes across 20 surfaces with 32/32 mutation classes from one strict project-owned registry and unconditional resulting-tree checker. README is 105 lines / 5,057 bytes after deleting only ca846e7a's nonexistent test_input/ marker. Four dated debt baselines cannot auto-refresh and have finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners. Implementation canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds; unchanged .4.2 repeats exact owner identity, focused closure, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds and closes the revision. Licensing remains independent proposed .3."
 last_verified: 2026-08-09
@@ -70,9 +70,19 @@ states the present fact honestly.
 Revision `.4.0` accepts transitive routing-pressure closure without changing the current policy or checker.
 Leaf `.4.1` implements the registry that separates reader navigation from author overflow, classifies lifecycle-
 specific controls, checks the resulting tree unconditionally, and makes every threshold increase decision-owned.
-The checker reports 44 reader routes (39 README plus five policy/enforcement), 18 author routes, 20 surfaces, and
+At that historical admission the checker reported 44 reader routes (39 README plus five policy/enforcement), 18 author routes, 20 surfaces, and
 32/32 in-memory mutation classes. The clean audit
 records oversized neighboring surfaces as immutable debt and opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; it does
 not bless their current size or allow ordinary work to refresh their baselines.
+
+The 2026-10-08 accepted-state repair is owned by
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3`. Both doctrine implementations now require one canonical
+`- Status:` field beginning with the exact state `accepted`, followed by end of line, whitespace, or a semicolon.
+Bare and qualified acceptance remain supported; proposed, absent, duplicate and malformed state tokens reject
+authority. All five actual authority branches are exercised, and the routing oracle now requires 40/40 classes.
+The existing indexed filename, new staged record, exact old/new markers, and independent pressure/freshness
+predicates remain. No README/routing cap changes are part of this repair. Original adoption counts and timings
+above remain historical, not refreshed measurements. Current source-bound proof and its limits live in
+[[routing-decision-accepted-state-gap]].
 
 Related: [[repository-root-path-portability]] and [[project-data-workflow-routing]].
