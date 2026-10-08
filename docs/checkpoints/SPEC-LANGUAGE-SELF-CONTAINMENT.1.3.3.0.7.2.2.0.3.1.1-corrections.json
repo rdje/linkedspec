@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "unchanged_source_oracles": 16,
+  "corrected_source": "Top:: I { quoted=cat('out=matches(\"x\", /x/)', ''); out=matches(\"x\", /x/); return([quoted,out]) }",
+  "scope": "Exactly the established cat-arity source correction and its LF variant, observed/unobserved same-facade comparison, separate direct-owner channel and output/prefix declarations. All original producers and actual captures remain unchanged; no production change.",
+  "inputs": {
+    "cases.json": "511930ade1ea7969be84596ff89e238745eaafedc783c55b6a31e0845be4b0aa",
+    "probe.pl": "8fc44a90de4e2a154660be54a922456736f9057ef098392248b5875f89ac0d3e",
+    "replacement-fixture.t": "84f68715180fcf1c446b7ca1eedebe7e8f9ecd1d80d43b74e07226f12ac4d954",
+    "capture.py": "8a40fc527f8abb869cb1082f6c947247137802f3223140365dbd0db14a512e4b"
+  }
+}

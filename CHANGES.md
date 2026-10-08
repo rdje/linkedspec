@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-08 — Reject unsafe interval candidate (.0.3.1.1.0)
+
+The candidate fixes quoted twins but loses executable nested capture/mark continuations. Guarded Toolbox RED and unchanged consumers reject it; Phase0 aborts at926. Production is restored to6fe. Exact candidate, channels and recovery remain with the task leaf; P1 producer-bound repair precedes mapping and canonical acceptance.
+
 ## 2026-10-08 — Private occurrence handoff (.0.3.1.0)
 
 Private original occurrence authority now survives selected scanner events, diagnostic/canonical copies and actual splitter frames within one rewrite invocation. Corrected RED7/GREEN10,42 exact public pairs,144 unchanged consumer groups per epoch,11 source inverse controls and eight evidence RED pass; all5185 original regular inputs and81 prior guard hashes recover. Replacement behavior remains unchanged. Complete producers/channels and independent recovery: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0-verification.json. Two instrument/import corrections retain their original bytes and actual channels; the interrupted after capture is not acceptance.

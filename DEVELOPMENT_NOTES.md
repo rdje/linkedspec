@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-08 — Nested residual continuation blocks mapping (.0.3.1.1.0)
+
+Original-character interval identity distinguishes literals, but enclosing typed rewrites can preserve nested executable helpers for later residual callbacks. Consumption alone loses that continuation. Retain the rejected source and guarded Toolbox/consumer RED; restore6fe production. Producer-bound output authority needs its own bounded owner before mapping can land. Original instrument corrections and partial Phase0 are retained without promoting either to acceptance.
+
 ## 2026-10-08 — Private origins before mapped replacement (.0.3.1.0)
 
 Retain actual event references strongly in invocation-local source authority; copy coordinates only from recorded identities. Canonical synthetic events use returned-array/index frames, never helper raw-key guesses. Preserve callback scalar context and its successful error effect across the private collector. Correct only the authored copied-array cardinality and Core standalone import root; retain original sources/channels and restart final capture. Actual replacement stays unchanged for .1.1.

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `32169d1282effa083a431b17b11c436fdd862771` — clean accepted-state guard admission.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 - preserve private original occurrence authority`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` (done) — private occurrence authority verified; mapped replacement next.
-- next_action: Activate mapped replacement .3.1.1 from clean committed HEAD; preserve this private claim mode/revision only before bound inputs change. Check finite history headroom before authoring interval/edit-translation RED, then repair selected original occurrences without changing family order or public contracts.
-- in_flight_uncommitted: none; completed private handoff/proof/book/continuity is committed under focused verification. Continue full PNT with mapped replacement, independent acceptance, recurring ownership, diagnostics and comments.
-- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `6feff5d40a7e0554425314c120d7ce2b73586a49` — clean private occurrence handoff.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0 - reject unsafe interval candidate`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` (done) — clean production; finite capacity and producer-bound residual repair next.
+- next_action: From clean committed HEAD activate the finite change-history capacity prerequisite .3.1.1.1.0 before further writes; then select explicit producer-bound nested/raw residual authority .1.1.1.1 and repair .1.1.1.2. Integrated mapping .1.1.2 and independent canonical .0.3.2 remain open. Do not revive the rejected overlap-only candidate or relax family/callback/literal oracles.
+- in_flight_uncommitted: none; rejected candidate diagnosis/proofs/book/continuity committed. Production is byte-exact6fe; no candidate repair or parent closure is claimed.
+- blockers: Full PNT stops at safe-slice growth: blanket overlap consumption loses accepted nested/raw capture/mark/entry continuations. P1 producer-bound repair .3.1.1.1 and its finite history prerequisite are scheduled; no access/authority blocker.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

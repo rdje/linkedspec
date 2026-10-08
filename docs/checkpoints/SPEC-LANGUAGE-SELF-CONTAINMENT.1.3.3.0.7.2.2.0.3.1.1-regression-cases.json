@@ -1,0 +1,13 @@
+[
+  {
+    "id": "nonempty_guard",
+    "action": "if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif()",
+    "source": "Top::AND I.set(items, array())\n /a/\n -> Top[0] { }\n /,/\n /b/\n -> Top[1] { if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif() }\n -> Top[2] { return(array(copy(items))) }\n",
+    "input": "a,b",
+    "expected_value": [
+      [
+        "a"
+      ]
+    ]
+  }
+]

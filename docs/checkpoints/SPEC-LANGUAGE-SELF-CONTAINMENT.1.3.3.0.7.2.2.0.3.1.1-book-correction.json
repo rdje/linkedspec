@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "initial_sha256": "5b397dcffc3803b35ca0c05a2815c5cdf830ff667974d4a0191530cacb5022d0",
+  "corrected_sha256": "ad91807be8d655cc4afcd2ec9c1d7ed40e877d72a1084d191cd44d1284646f7d",
+  "old": "b'# result: [&quot;out=matches'",
+  "new": "b'# result: [\\\"out=matches'",
+  "actual_initial_error": {
+    "encoding": "gzip-base64",
+    "bytes": 580,
+    "sha256": "b74309a5a0f0ad1de166d944e9c62c637bfcfe9a17b4090bab528634fbb6dc27",
+    "data": "H4sIAAAAAAAC/82OQWvCQBCF7/6KqRcjmF3TQi22FoJGKWhaiO1RWDdjXbLZCbubgpf+9q4plILHXvrm8ph5M/NtrZC4F7KCqCbnwaJE40EKrUEL54fTHsBSaYQ+fyPd1uh4USz4gmTwxjv+rvyx3XOtTIWla1DykqTj8oiyakidI8VLNo/Xab56TVdZXGTrZTx/zrfpU77J8i1L2E2oMZuw61Dj4BOWxHuiijWn/gjCaYTkLhmBMvBQU9lqfAxYALVQJhp29jNot/svsLeTDvbM19FJYUpVCo8wA0nNiZWIzdlEFhuyfngPdevDPPpJhpZwDq3/tXw1g+/8CAZ4OKD06gPDQeMt6UH36U/aXaqXdhCKTGYt2Slc/O19AX/s0jFEAgAA"
+  },
+  "scope": "Actual mdBook render and positive nine-example check pass; one intended negative control uses encoded quotes where rendered code retains literal quotes. Original actual render/source/error retained. Only effective matching needle is corrected; no book/runtime change."
+}

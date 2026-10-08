@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: private occurrence handoff verified; mapped interval replacement next, then independent acceptance/recurring/diagnostic/comment owners.
+Full PNT stopped at safe-slice growth: mapped candidate rejected; clean-production diagnosis completed. P1 producer-bound residual repair and finite history prerequisite owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — Private original occurrence authority now survives selected scanner events, diagnostic/canonical copies and actual splitter frames within one rewrite invocation. Corrected RED7/GREEN10,42 exact public pairs,144 unchanged consumer groups per epoch,11 source inverse controls and eight evidence RED pass; all5185 original regular inputs and81 prior guard hashes recover. Replacement behavior remains unchanged.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — Rejected mapped-interval candidate:54 corrected quote pairs/108 route values and ten interval groups pass, but nested executable residuals lose their original authority. Guarded original/candidate Toolbox source proves two discarded capture intervals, native/fresh failure and unresolved2; one of154 unchanged consumer groups fails. Root Phase0 aborts926/98 failed/no plan and is supplemental, not full input-bound acceptance. Production is restored byte-exact6fe.
 
 ## Next Action
 
-Activate mapped replacement .3.1.1 from clean committed HEAD; preserve this private claim mode/revision only before bound inputs change. Check finite history headroom before authoring interval/edit-translation RED, then repair selected original occurrences without changing family order or public contracts.
+From clean committed HEAD activate the finite change-history capacity prerequisite .3.1.1.1.0 before further writes; then select explicit producer-bound nested/raw residual authority .1.1.1.1 and repair .1.1.1.2. Integrated mapping .1.1.2 and independent canonical .0.3.2 remain open. Do not revive the rejected overlap-only candidate or relax family/callback/literal oracles.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — actual origin/copy/frame RED7/GREEN10; public42/consumer144;11 source inverses/eight evidence RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` — five accepted-state paths; complete Git-tree RED/GREEN, source inverses and original input recovery.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` — five finite controls; rejected original fully recoverable; accepted-state gap next P1.
@@ -29,7 +30,6 @@ Activate mapped replacement .3.1.1 from clean committed HEAD; preserve this priv
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
 
 ## History
 

@@ -1,0 +1,40 @@
+{
+  "complete": true,
+  "producer_sha256": "c8740c148821d920af22c46818d9487d90d643c5b28d471841c5d3a845a75a76",
+  "guarded_epochs": 2,
+  "healthy_original_route_values": 2,
+  "failed_candidate_routes": 2,
+  "discarded_nested_intervals": 2,
+  "direct_candidate_consumer_failed_groups": 1,
+  "partial_phase0_failed_groups": 98,
+  "partial_phase0_observed_groups": 926,
+  "phase0_complete_suite": false,
+  "controls": [
+    {
+      "name": "lost-epoch",
+      "observed": "RED",
+      "reason": "actual complete epoch pair"
+    },
+    {
+      "name": "wrong-original-native",
+      "observed": "RED",
+      "reason": ""
+    },
+    {
+      "name": "hidden-nested-candidate-error",
+      "observed": "RED",
+      "reason": "'NoneType' object is not subscriptable"
+    },
+    {
+      "name": "hidden-copied-executable-calls",
+      "observed": "RED",
+      "reason": "actual generated executable calls retained"
+    },
+    {
+      "name": "wrong-retained-nested-origin",
+      "observed": "RED",
+      "reason": "actual original raw authority"
+    }
+  ],
+  "scope": "Guarded full regular Git copies independently reproduce the exact accepted original value and rejected candidate nested helper failure. Actual selected references/args/AST remain identical. Three outer edits consume two nested origins although generated executable calls remain; candidate known span lookup declines them. Root Phase0 is supplemental complete process output, aborting at926/no final plan; it is not a complete1035 proof or a guarded exact-input graph. All current production bytes match6fe; producer-bound nested/raw continuation repair remains P1 .1.1.1."
+}

@@ -1,0 +1,889 @@
+[
+  {
+    "id": "quoted_before",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out])",
+    "source": "Top:: I { quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 8,
+        "end": 29
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 32,
+        "end": 53
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "quoted_after",
+    "segments": [
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; return([quoted,out])"
+      }
+    ],
+    "action": "out=matches(\"x\", /x/); quoted='out=matches(\"x\", /x/)'; return([quoted,out])",
+    "source": "Top:: I { out=matches(\"x\", /x/); quoted='out=matches(\"x\", /x/)'; return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 0,
+        "end": 21
+      },
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 31,
+        "end": 52
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "interleaved_equal",
+    "segments": [
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /y/)"
+      },
+      {
+        "role": "plain",
+        "text": "; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "out=matches(\"x\", /x/); quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /y/); out=matches(\"x\", /x/); return([quoted,out])",
+    "source": "Top:: I { out=matches(\"x\", /x/); quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /y/); out=matches(\"x\", /x/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 0,
+        "end": 21
+      },
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 31,
+        "end": 52
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /y/)",
+        "start": 55,
+        "end": 76
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 78,
+        "end": 99
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "distinct_twins",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /y/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /y/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "quoted='out=matches(\"x\", /y/)'; out=matches(\"x\", /x/); out=matches(\"x\", /y/); return([quoted,out])",
+    "source": "Top:: I { quoted='out=matches(\"x\", /y/)'; out=matches(\"x\", /x/); out=matches(\"x\", /y/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /y/)",
+        "start": 8,
+        "end": 29
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 32,
+        "end": 53
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /y/)",
+        "start": 55,
+        "end": 76
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /y/)",
+      0
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "double_quoted_before",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted=\""
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches('x', /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\"; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches('x', /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "quoted=\"out=matches('x', /x/)\"; out=matches('x', /x/); return([quoted,out])",
+    "source": "Top:: I { quoted=\"out=matches('x', /x/)\"; out=matches('x', /x/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches('x', /x/)",
+        "start": 8,
+        "end": 29
+      },
+      {
+        "role": "real",
+        "raw": "out=matches('x', /x/)",
+        "start": 32,
+        "end": 53
+      }
+    ],
+    "expected_value": [
+      "out=matches('x', /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "unicode_crlf",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='雪 "
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "';\r\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "quoted='雪 out=matches(\"x\", /x/)';\r\nout=matches(\"x\", /x/); return([quoted,out])",
+    "source": "Top:: I { quoted='雪 out=matches(\"x\", /x/)';\r\nout=matches(\"x\", /x/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 10,
+        "end": 31
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 35,
+        "end": 56
+      }
+    ],
+    "expected_value": [
+      "雪 out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "generated_data",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted=cat('"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'); "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out])"
+      }
+    ],
+    "action": "quoted=cat('out=matches(\"x\", /x/)'); out=matches(\"x\", /x/); return([quoted,out])",
+    "source": "Top:: I { quoted=cat('out=matches(\"x\", /x/)'); out=matches(\"x\", /x/); return([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 12,
+        "end": 33
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 37,
+        "end": 58
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "nested_if",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "if(true) { quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out]) }"
+      }
+    ],
+    "action": "if(true) { quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out]) }",
+    "source": "Top:: I { if(true) { quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out]) } }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 19,
+        "end": 40
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 43,
+        "end": 64
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "deferred_body",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "cb={|| quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,out]) }; return(cb())"
+      }
+    ],
+    "action": "cb={|| quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out]) }; return(cb())",
+    "source": "Top:: I { cb={|| quoted='out=matches(\"x\", /x/)'; out=matches(\"x\", /x/); return([quoted,out]) }; return(cb()) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 15,
+        "end": 36
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 39,
+        "end": 60
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "repeated_real",
+    "segments": [
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return(out)"
+      }
+    ],
+    "action": "out=matches(\"x\", /x/); out=matches(\"x\", /x/); return(out)",
+    "source": "Top:: I { out=matches(\"x\", /x/); out=matches(\"x\", /x/); return(out) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 0,
+        "end": 21
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 23,
+        "end": 44
+      }
+    ],
+    "expected_value": 1,
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "distinct_real",
+    "segments": [
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "; "
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /y/)"
+      },
+      {
+        "role": "plain",
+        "text": "; return(out)"
+      }
+    ],
+    "action": "out=matches(\"x\", /x/); out=matches(\"x\", /y/); return(out)",
+    "source": "Top:: I { out=matches(\"x\", /x/); out=matches(\"x\", /y/); return(out) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 0,
+        "end": 21
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /y/)",
+        "start": 23,
+        "end": 44
+      }
+    ],
+    "expected_value": 0,
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "data_only",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'; return(quoted)"
+      }
+    ],
+    "action": "quoted='out=matches(\"x\", /x/)'; return(quoted)",
+    "source": "Top:: I { quoted='out=matches(\"x\", /x/)'; return(quoted) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 8,
+        "end": 29
+      }
+    ],
+    "expected_value": "out=matches(\"x\", /x/)",
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "set_before",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted=\""
+      },
+      {
+        "role": "literal_twin",
+        "text": "set(counter,2)"
+      },
+      {
+        "role": "plain",
+        "text": "\"; "
+      },
+      {
+        "role": "real",
+        "text": "set(counter,2)"
+      },
+      {
+        "role": "plain",
+        "text": "; return([quoted,counter])"
+      }
+    ],
+    "action": "quoted=\"set(counter,2)\"; set(counter,2); return([quoted,counter])",
+    "source": "Top:: I { quoted=\"set(counter,2)\"; set(counter,2); return([quoted,counter]) }",
+    "input": "",
+    "contract": "set_value",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "set(counter,2)",
+        "start": 8,
+        "end": 22
+      },
+      {
+        "role": "real",
+        "raw": "set(counter,2)",
+        "start": 25,
+        "end": 39
+      }
+    ],
+    "expected_value": [
+      "set(counter,2)",
+      2
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "set_after",
+    "segments": [
+      {
+        "role": "real",
+        "text": "set(counter,2)"
+      },
+      {
+        "role": "plain",
+        "text": "; quoted=\""
+      },
+      {
+        "role": "literal_twin",
+        "text": "set(counter,2)"
+      },
+      {
+        "role": "plain",
+        "text": "\"; return([quoted,counter])"
+      }
+    ],
+    "action": "set(counter,2); quoted=\"set(counter,2)\"; return([quoted,counter])",
+    "source": "Top:: I { set(counter,2); quoted=\"set(counter,2)\"; return([quoted,counter]) }",
+    "input": "",
+    "contract": "set_value",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "set(counter,2)",
+        "start": 0,
+        "end": 14
+      },
+      {
+        "role": "literal_twin",
+        "raw": "set(counter,2)",
+        "start": 24,
+        "end": 38
+      }
+    ],
+    "expected_value": [
+      "set(counter,2)",
+      2
+    ],
+    "scope": "Authored literal/value and original scalar occurrence oracle; baseline outcomes are unmeasured."
+  },
+  {
+    "id": "lf_quoted_before",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\nreturn([quoted,out])"
+      }
+    ],
+    "action": "quoted='out=matches(\"x\", /x/)'\nout=matches(\"x\", /x/)\nreturn([quoted,out])",
+    "source": "Top:: I { quoted='out=matches(\"x\", /x/)'\nout=matches(\"x\", /x/)\nreturn([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 8,
+        "end": 29
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 31,
+        "end": 52
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored '\\n' separator variant of quoted_before with unchanged independent literal/value oracle; original source population remains unmodified."
+  },
+  {
+    "id": "crlf_quoted_before",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'\r\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\r\nreturn([quoted,out])"
+      }
+    ],
+    "action": "quoted='out=matches(\"x\", /x/)'\r\nout=matches(\"x\", /x/)\r\nreturn([quoted,out])",
+    "source": "Top:: I { quoted='out=matches(\"x\", /x/)'\r\nout=matches(\"x\", /x/)\r\nreturn([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 8,
+        "end": 29
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 32,
+        "end": 53
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored '\\r\\n' separator variant of quoted_before with unchanged independent literal/value oracle; original source population remains unmodified."
+  },
+  {
+    "id": "lf_generated_data",
+    "segments": [
+      {
+        "role": "plain",
+        "text": "quoted=cat('"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "')\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\nreturn([quoted,out])"
+      }
+    ],
+    "action": "quoted=cat('out=matches(\"x\", /x/)')\nout=matches(\"x\", /x/)\nreturn([quoted,out])",
+    "source": "Top:: I { quoted=cat('out=matches(\"x\", /x/)')\nout=matches(\"x\", /x/)\nreturn([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 12,
+        "end": 33
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 36,
+        "end": 57
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored '\\n' separator variant of generated_data with unchanged independent literal/value oracle; original source population remains unmodified."
+  },
+  {
+    "id": "lf_interleaved_equal",
+    "segments": [
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\nquoted='"
+      },
+      {
+        "role": "literal_twin",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "'\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /y/)"
+      },
+      {
+        "role": "plain",
+        "text": "\n"
+      },
+      {
+        "role": "real",
+        "text": "out=matches(\"x\", /x/)"
+      },
+      {
+        "role": "plain",
+        "text": "\nreturn([quoted,out])"
+      }
+    ],
+    "action": "out=matches(\"x\", /x/)\nquoted='out=matches(\"x\", /x/)'\nout=matches(\"x\", /y/)\nout=matches(\"x\", /x/)\nreturn([quoted,out])",
+    "source": "Top:: I { out=matches(\"x\", /x/)\nquoted='out=matches(\"x\", /x/)'\nout=matches(\"x\", /y/)\nout=matches(\"x\", /x/)\nreturn([quoted,out]) }",
+    "input": "",
+    "contract": "scalar_assignment_operator",
+    "spans": [
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 0,
+        "end": 21
+      },
+      {
+        "role": "literal_twin",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 30,
+        "end": 51
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /y/)",
+        "start": 53,
+        "end": 74
+      },
+      {
+        "role": "real",
+        "raw": "out=matches(\"x\", /x/)",
+        "start": 75,
+        "end": 96
+      }
+    ],
+    "expected_value": [
+      "out=matches(\"x\", /x/)",
+      1
+    ],
+    "scope": "Authored '\\n' separator variant of interleaved_equal with unchanged independent literal/value oracle; original source population remains unmodified."
+  }
+]

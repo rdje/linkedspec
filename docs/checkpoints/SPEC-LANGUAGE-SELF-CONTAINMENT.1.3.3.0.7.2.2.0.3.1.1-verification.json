@@ -1,0 +1,82 @@
+{
+  "complete": true,
+  "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+  "producer_sha256": "e24995b5118a64d328d9d0e86b98dfa8e04b874d9286bf54f8bb089b570ca1ab",
+  "original_regular_inputs": 5216,
+  "supplied_graphs": 4,
+  "corrected_public_pairs": 54,
+  "repaired_source_seed_pairs": 33,
+  "unchanged_source_seed_pairs": 21,
+  "native_fresh_values": 108,
+  "independently_mapped_queries": 174,
+  "fixture_red_groups": 9,
+  "fixture_green_groups": 10,
+  "consumer_groups_each_epoch": 154,
+  "original_consumer_pass_groups": 154,
+  "candidate_consumer_pass_groups": 153,
+  "source_inverse_controls": 12,
+  "original_guard_inputs_verified": 127,
+  "evidence_controls": [
+    {
+      "name": "missing-original-input",
+      "observed": "RED",
+      "reason": "complete regular graph"
+    },
+    {
+      "name": "forged-current-producer",
+      "observed": "RED",
+      "reason": "recoverable overlay perl/LinkedSpec/ActionIR/RewritePipeline.pm"
+    },
+    {
+      "name": "omitted-consumer-result",
+      "observed": "RED",
+      "reason": "complete ordered command population"
+    },
+    {
+      "name": "forged-complete-channel",
+      "observed": "RED",
+      "reason": "complete channel identity"
+    },
+    {
+      "name": "validly-rehashed-wrong-value",
+      "observed": "RED",
+      "reason": "independent authored native/fresh value and literal oracle"
+    },
+    {
+      "name": "validly-rehashed-wrong-event-reference",
+      "observed": "RED",
+      "reason": "unchanged source/typed/ref/argument/family topology canonicalization"
+    },
+    {
+      "name": "validly-rehashed-wrong-current-interval",
+      "observed": "RED",
+      "reason": "independent original-character interval oracle"
+    },
+    {
+      "name": "validly-rehashed-lost-edit",
+      "observed": "RED",
+      "reason": "current source-map length"
+    },
+    {
+      "name": "validly-rehashed-changed-actual-edit",
+      "observed": "RED",
+      "reason": "actual substr producer and complete current text"
+    },
+    {
+      "name": "validly-rehashed-foreign-original",
+      "observed": "RED",
+      "reason": "unknown origin preserves compatibility fallback"
+    },
+    {
+      "name": "wrong-original-boundary",
+      "observed": "RED",
+      "reason": "original exact owning claim boundary"
+    },
+    {
+      "name": "refreshed-original-hash",
+      "observed": "RED",
+      "reason": "prior claim mode/revision only; no historical hash refresh"
+    }
+  ],
+  "scope": "Four full regular Git supplied supersets recover exact original metadata/hashes plus explicit three authored overlays and only one after production owner. Original flawed facade guard and invalid cat channels remain complete and separate. Corrected same-facade accepted-source population establishes33 repaired and21 unchanged source/seed pairs,108 native/fresh values; original source/AST/selected refs/args/copies/family/raw packets remain exact. Healthy generated/value/error/effect/diagnostic packets remain exact without normalization. Original character-label survival independently validates actual mapped spans and all actual edit substr results. Candidate is rejected: one of154 direct consumer groups fails raw compatibility nested capture lowering; guarded nonempty-guard Toolbox execution distinguishes unresolved2 host calls; Phase0 aborts at926 with98 failures and no final plan. Production is restored exactly to Base6fe. This is bounded diagnosis, not repair, readiness/diagnostic-origin, arbitrary grammar, other backend, recurring CI or canonical admission; OS/tool standard dependencies readonly, project data local."
+}

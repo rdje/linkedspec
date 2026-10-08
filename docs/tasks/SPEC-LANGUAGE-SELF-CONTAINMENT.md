@@ -3743,10 +3743,65 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0 - preserve private original occurrence authority` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1`
-  Status: `pending`
+  Status: `active`
   Goal: Replace selected original intervals in the current rewritten frame.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
   Acceptance: Candidate owner: RewritePipeline.pm and its private original interval/edit translation seam. Author source-identical quoted/generated/interleaved/duplicate/nested/raw/implicit-newline/closure RED/GREEN before changing searches or insertions. Preserve literals, real spans, args/references, family ordering and native/fresh/errors; resolve every observed defect in a safely bounded slice. Focused repair precedes independently committed canonical replacement .0.3.2.
+
+  Activation: Clean6feff5d40; focused private handoff, normal ten-doctrine hooks, post-commit first-parent pointer and empty brief verified. All127 private-handoff inputs match current and exact owning Git bytes; prior claim changes mode/revision only before any bound file mutation.
+  Original scope: RewritePipeline interval translation; unchanged SourceOrigins. Parent-prefixed source/proof and book/continuity; preserve public fields, family order, callbacks/refs/args/errors and dependency/CI ownership.
+  History scope: Clean CHANGES58564; new diagnosis summary stays within418 bytes/below58982. Detail belongs to exact proof; no prior shortening or cap change.
+
+  Instrument correction: Initial authored population accidentally reused .0.3.0 original inputs rather than its corrected same-facade probe/accepted two-argument cat source. Initial before/after producers, supplied graphs and complete channels remain exact; deferred early guard and invalid one-argument values are not execution acceptance. This leaf repeats the already established corrections and their LF variant under corrected-* files, while preserving all other source/value/interval oracles. Fresh immutable6fe corrected before and exact one-owner corrected after govern replacement acceptance; no production widening.
+
+  Safety split: Blanket overlap consumption breaks accepted nested/raw residual continuation. Candidate cannot land. Child .0 retains diagnosis/restores6fe; .1 establishes producer-bound authority, .2 integrates mapping; .0.3.2 independently admits it. This exceeds the one-owner safe slice; no upstream/access blocker or oracle relaxation.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0`
+  Status: `done`
+  Goal: Retain the rejected mapped-interval candidate and diagnose nested residual continuation before a safe repair.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0`
+  Owned paths: Existing parent-prefixed authored producers/graphs/channels/fixtures and retained candidate RewritePipeline source; new bounded regression Toolbox case and source-bound diagnosis/review/claim/Knowledge/book; prior private claim mode/revision only and continuity. Restore production exactly from clean6fe before landing; no test, schema, runtime, dependency or CI changes.
+  Acceptance: Recover four complete regular supplied graphs and preserve both initial instrument mistakes and corrected same-facade/two-argument sources. Distinguish the candidate's bounded quote success from actual nested capture continuation RED. Use actual Toolbox substitution/mapped-source trace/descriptor/native/fresh error with candidate source location; retain completed Phase0 diagnostic channel honestly and disclose its evolving-root input limit. Book must describe current production, not the rejected candidate as a shipped fix. Own the producer-bound repair .1 at P1; no parent closure.
+  Verification tier: `focused`
+  Focused checks: Independent complete candidate graph/channel/reference/value/character-identity recovery and effective source/evidence controls; guarded nested residual Toolbox RED versus unchanged owning Git source; unchanged six suites/private handoff recurrence; current-production syntax, book render and effective publication controls; normal memory/Knowledge/history/doctrine/diff checks.
+  Canonical trigger: none; rejected candidate is retained input only, not installed production. Independent repaired public-boundary admission remains .0.3.2.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json`
+
+  Verification: Four supplied graphs recover all5216 original regular Git inputs plus declared overlays. Corrected54 pairs/108 values and independent character-label mapping pass; eleven source/seed cases change from RED and seven healthy controls preserve complete channels. Twelve effective source inverses and twelve evidence RED reject. Initial wrong-facade/invalid-cat inputs remain exact; reviewer deferred-invocation cardinality and render-control quote needle corrections retain initial sources/errors. Candidate consumer153/154 passes, with raw compatibility nested capture failure; guarded original/candidate nested Toolbox pair and five controls reproduce consumed intervals20–35/57–72 and unresolved2 host-call errors. Root Phase0 process FAIL retains98 failures/926 observed/no final plan and explicit evolving-input limit; no full-suite or repaired-production claim. Restored current seven consumers pass154; current syntax passes. Full58-input book renders eight exact current examples and thirteen semantic publication controls reject. All127 original private guard hashes recover and freeze mode/revision only. Normal focused history/Knowledge/memory/doctrine/diff/hooks gate landing.
+  Root cause / ownership: Rejected candidate overlap branch in retained pipeline-candidate.pm consumes nested original intervals after containing IF/PUSH/ENDIF outputs retain executable capture_slice calls. Existing raw return fallback also needs residual continuation. Broader capture/named-mark/entry failures corroborate the partial Phase0 scope. P1 .1.1.1 first owns finite history capacity, then exact producer seam diagnosis and repair; no unrestricted generated search, overlap waiver, changed callback/family order or public fields. Current production exactly matches6fe; no parent closes.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0 - reject unsafe interval candidate` (Git owns identity).
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1`
+  Status: `pending`
+  Priority: P1 — nested accepted capture/mark helpers must survive containing typed rewrites before occurrence replacement can land.
+  Goal: Establish exact producer-bound source authority for executable residual helpers retained by a containing rewrite.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0`
+  Reproduce: Candidate lowering of if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif() rewrites all three outer statements, then maps both selected capture_slice intervals to missing. Generated source retains both calls; actual native/fresh execution fails with Undefined subroutine and metadata unresolved2. Actual source-bound .0 proof retains original event IDs/coordinates, outer edit history, generated code and errors. Clean6fe retains the accepted full Phase0 behavior.
+  Acceptance: Select exact private producer seam using existing AST/source/frame and contract authorities before any write. Preserve public event shapes, callback raw arguments/reference/context/error effects and canonical family order. Distinguish genuine copied executable subexpressions from generated or authored literals, duplicate same-interval residuals, repeated equal nested calls, renamed/transformed/foreign/opaque outputs and nested invocations. No unrestricted generated raw search, equal-text occurrence pairing, global source sort or blanket overlap waiver. Prove an independent origin oracle with actual original RED/corrected GREEN, meaningful source inverses, full required Phase0 and unchanged consumers. Declare bounded affected owners/tier before implementation and update book/claims.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0`
+  Status: `pending`
+  Goal: Admit exactly the finite change-history rollover capacity needed for producer-bound repair.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0`
+  Acceptance: Change reserve47 files/46 rows is consumed; new hot shard58959 approaches58982. Follow indexed ADR0128 autonomous-PNT precedent without claiming a new explicit director grant: admit only one necessary archive/row, actual manifest bytes and one indexed ADR/actual decision-store budget. Preserve every prior byte/control. Select exact clean suffix; exact staged canonical infrastructure proof/hooks are mandatory. Partition the task tree if further detail crosses pressure limits; preserve stable IDs/history.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
+  Status: `pending`
+  Goal: Select explicit producer-bound nested and raw residual continuation from actual lowering authorities.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0`
+  Acceptance: Trace actual typed capture/mark/entry and raw retained-output producers. Declare bounded owners/independent continuation oracle before writes. Distinguish literals, repeated/consumed events and opaque callbacks; preserve original candidate proof. No guessed offsets/raw-text authority.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2`
+  Status: `pending`
+  Goal: Repair the selected producer-bound residual authority without changing family order or callback contracts.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
+  Acceptance: Actual source-bound RED/GREEN and effective source inverses preserve nested/raw helpers, literal twins, exact original origins, repeated events and opaque dependencies. Full guarded Phase0 reaches1035/1035 and unchanged consumers pass before focused landing. Keep integrated mapping and independently committed canonical admission separate.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.2`
+  Status: `pending`
+  Goal: Integrate original interval replacement after producer-bound residual continuation and verify the full accepted action surface.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1`
+  Acceptance: Reuse original retained quote/interval/native/fresh sources and candidate inverses without historical refresh. Preserve both literal payloads and executable nested continuation; source-bound complete Phase0 is mandatory before focused landing. Keep .0.3.2 independent canonical admission, recurring .0.4, diagnostic origin and comments open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2`
   Status: `pending`
@@ -4074,7 +4129,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` | `done` | Five finite controls independently verified; original unadmitted candidate retained. |
 | 43.4.2.0.3.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` | `done` | Unique accepted Status across five authority paths; full Git-tree proof and independent recovery. |
 | 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `done` | Invocation-local origin/copy/frame RED/GREEN; replacement unchanged. |
-| 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `pending` | Original-to-rewritten mapped replacement and insertions. |
+| 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `active` | Rejected candidate; producer-bound residual continuation precedes integrated repair. |
+| 43.4.2.0.3.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` | `done` | Rejected candidate retained; guarded nested residual RED and production restored6fe. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |

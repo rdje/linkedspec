@@ -883,6 +883,25 @@ entries cannot borrow those coordinates. This channel adds no public event field
 and does not yet translate original intervals across preceding replacements, so
 the failing quoted-first example above still needs that separate repair.
 
+An interval-only replacement candidate was rejected before landing. Its quoted-first
+cases preserved the literal, but treating every enclosing replacement as consumption
+also discarded nested executable helpers that the existing lowerer intentionally
+leaves for later canonical residual events. For example:
+
+```text
+if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endif()
+```
+
+The outer conditional and push become Perl expressions while retaining executable
+`capture_slice()` calls. Those real calls still require their later helper lowering.
+The rejected candidate marked their original intervals missing and left unresolved
+host calls in the generated handler. The current production implementation remains
+the preceding verified version. A safe replacement repair must preserve explicit
+producer-bound authority for those nested continuations while denying generated or
+quoted equal spellings and already consumed duplicate events. It must retain
+canonical family order and callback behavior; an unrestricted generated-text search
+or an overlap waiver cannot provide that distinction.
+
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.
 For example, the repaired `set(counter, 2)` literal retains an unresolved-helper

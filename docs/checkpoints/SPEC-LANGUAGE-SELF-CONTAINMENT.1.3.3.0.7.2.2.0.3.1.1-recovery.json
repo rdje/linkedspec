@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "producer_sha256": "9d281b8d20ff0d3b488ac88551473fadaf40e822c74bc6a77e02fab634a33c08",
+  "manifest_sha256": "1aa0ca958300eb5fcf30797cbc43b61e61f75ebc123264b408dc2f673280902c",
+  "supplied_inputs": 5219,
+  "recovered_tree": ".linkedspec-data/scratch/mapped-replacement/recovered-zhxlymei",
+  "scope": "Actual complete candidate regular-input graph recovers only from reachable immutable Git objects and exact tracked authored/candidate overlays. No prior ignored capture tree, dependency implementation or refreshed historical input is used. Final whole-tree bytes/modes verify."
+}

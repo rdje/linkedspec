@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "initial_sha256": "2fce8d3882be42e28d20fef0db0de2de4539d9e8db3ccf98298507350629ea16",
+  "corrected_sha256": "e24995b5118a64d328d9d0e86b98dfa8e04b874d9286bf54f8bb089b570ca1ab",
+  "old": "            assert right['fresh']['stdout'] == right['fresh']['stderr'] == '' and right['fresh']['invocations'] == []",
+  "new": "            assert right['fresh']['stdout'] == right['fresh']['stderr'] == ''\n            assert right['fresh']['invocations'] == (left['fresh']['invocations'] if case['id'] == 'deferred_body' else []), 'original deferred invocation effects preserved'",
+  "actual_initial_error": {
+    "encoding": "gzip-base64",
+    "bytes": 894,
+    "sha256": "d7d049e8d198192c339e06e9fc1c3f89e0ab5e9788d1b3370078cc99762bc19a",
+    "data": "H4sIAAAAAAAC/82SQWvCQBCF7/6KoZdVMImxB0VqIWiUgrUFbS+iy2YzmsVkN93dWHrpb+8mXgRLbwVnLgPvsfs+ZtaacUwYP0K7UMaCRo7SAmd5DjkztjNqAcxEjnAXvKu8KtAEq9U0mCruZmlNcBA2q5IgF/KIqSmRB6niJuAZ8mOpRG1ZvcYTbxEt52/RPPZW8WLmTV6W6+hp+Rwv137o37vu+QO/77rn5tAPPY0ngZ9++XXXBfc4Qn8YdkFIeChUWuX46IIBiD1QKlmBlMJ4DITSgglJKRlBPbQ7jeuP+na1290OZG/YQNbhm+gfFWqBBsbQfEbLKskFbx80KzOzIVxptzKLqZfgXmkk2y5ca2xvUdcSZwZN52Zow0Gvob1Ea6iZMajdNYpDZjdkr9FkZLshxqaqsmRbr/oXDbU+a4QAk+mVRciT4swKJc3Zt9lensfu36sVNVwuQKy10q0fB2tGl34DAAA="
+  },
+  "scope": "Initial independent reviewer wrongly assumes no fresh invocation for the healthy deferred codeblock. Actual unchanged original/candidate deferred packets contain the same cb invocation. Sole correction requires that exact original invocation/effects packet for deferred_body; other cases require empty invocations. All full healthy public packets still compare exactly; no source/runtime/capture change."
+}
