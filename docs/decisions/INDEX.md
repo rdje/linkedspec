@@ -160,6 +160,7 @@ changed* lives in git (layer D), not here.
 
 | [0128](0128-replacement-note-history-capacity.md) | One finite engineering-note rollover before selected replacement repair | 2026-10-08 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 
+| [0129](0129-producer-residual-change-history-capacity.md) | One finite change-history rollover before producer-bound residual repair | 2026-10-08 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

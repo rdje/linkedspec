@@ -3772,7 +3772,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0 - reject unsafe interval candidate` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1`
-  Status: `pending`
+  Status: `active`
   Priority: P1 — nested accepted capture/mark helpers must survive containing typed rewrites before occurrence replacement can land.
   Goal: Establish exact producer-bound source authority for executable residual helpers retained by a containing rewrite.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0`
@@ -3780,10 +3780,18 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Select exact private producer seam using existing AST/source/frame and contract authorities before any write. Preserve public event shapes, callback raw arguments/reference/context/error effects and canonical family order. Distinguish genuine copied executable subexpressions from generated or authored literals, duplicate same-interval residuals, repeated equal nested calls, renamed/transformed/foreign/opaque outputs and nested invocations. No unrestricted generated raw search, equal-text occurrence pairing, global source sort or blanket overlap waiver. Prove an independent origin oracle with actual original RED/corrected GREEN, meaningful source inverses, full required Phase0 and unchanged consumers. Declare bounded affected owners/tier before implementation and update book/claims.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0`
-  Status: `pending`
+  Status: `done`
   Goal: Admit exactly the finite change-history rollover capacity needed for producer-bound repair.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0`
   Acceptance: Change reserve47 files/46 rows is consumed; new hot shard58959 approaches58982. Follow indexed ADR0128 autonomous-PNT precedent without claiming a new explicit director grant: admit only one necessary archive/row, actual manifest bytes and one indexed ADR/actual decision-store budget. Preserve every prior byte/control. Select exact clean suffix; exact staged canonical infrastructure proof/hooks are mandatory. Partition the task tree if further detail crosses pressure limits; preserve stable IDs/history.
+  Activation: Clean e7674382295936a1d6d3dbd34272d9c6803a269d; no modified/untracked files, hooks .githooks. README/bootstrap/memory/task/ADR0069/0122/0128, actual rollover and routing authority owners reviewed. Runtime and public book behavior do not change in this prerequisite; producer-bound selection follows from a clean commit.
+  Verification tier: `canonical`
+  Focused checks: Independent clean Git suffix/manifest/archive/decision reconstruction, exact finite registry diff, actual rollover RED/GREEN, actual routing threshold/accepted-authority controls; memory/Knowledge/doctrines/history/diff.
+  Canonical trigger: finite storage/routing infrastructure admission; exact staged tools/run_ci_local.sh receipt and normal hooks required.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json`
+
+  Verification: Actual rollover RED/GREEN; exact original suffix/range/hash/manifest and all prior archives/decisions reconstruct. Independent evidence corruptions and actual production threshold/accepted-state denials pass; exact measured five-scalar registry admission only. Initial publisher normalized unrelated JSON rows and appended the ADR outside the index table; exact initial producer/snapshots/review are retained. Final publication restores every unrelated row byte and inserts the single ADR row before the index instructions; strengthened review gates both. Normal doctrines and exact staged canonical receipt/hooks govern landing. Public book history teaching was reviewed and remains accurate; no parser/book behavior changes.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0 - admit one residual-repair history rollover` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
   Status: `pending`
@@ -4131,6 +4139,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` | `done` | Invocation-local origin/copy/frame RED/GREEN; replacement unchanged. |
 | 43.4.2.0.3.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1` | `active` | Rejected candidate; producer-bound residual continuation precedes integrated repair. |
 | 43.4.2.0.3.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` | `done` | Rejected candidate retained; guarded nested residual RED and production restored6fe. |
+| 43.4.2.0.3.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` | `done` | One exact finite archive/manifest/decision admission; canonical receipt gates landing. |
+| 43.4.2.0.3.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` | `pending` | Next: select exact typed/raw producer-bound residual authority. |
+| 43.4.2.0.3.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2` | `pending` | After selection: repair residual authority and full guarded Phase0. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |

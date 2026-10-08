@@ -1,0 +1,31 @@
+{
+  "args": [
+    "perl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-controls.pl"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "base64": "QWN0dWFsIHByb2R1Y3Rpb246IDMwIHRocmVzaG9sZCBvYnNlcnZhdGlvbnMgYW5kIDggYXV0aG9yaXR5IFJFRCBjb250cm9scyBwYXNzLgo=",
+    "sha256": "1786f2eae47c5881e2c594961099fda96cc5df3afb85ecad831c2a0c5d6187aa",
+    "bytes": 80
+  },
+  "stderr": {
+    "base64": "",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "inputs_before": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-controls.pl": "05d5fbb69b33aa92981baa0438da8c8dab020421ddbafaca3b33b18a72859efb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-plan.json": "628c3568ebe8a589e0b0761482148f4589d6aa9fb3514d9b97c7fc75e26e3c18",
+    "docs/decisions/0129-producer-residual-change-history-capacity.md": "10b565e36721fccc4498dca27b338217549bf0763c860096a4a9d0f56651e5cf",
+    "docs/decisions/INDEX.md": "61ed9e45e8eb37936a40bd7682cffa2ff902f2f7f78294f69676979d7a4fa362",
+    "scripts/check_readme_routing_pressure.pl": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106"
+  },
+  "inputs_after": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-controls.pl": "05d5fbb69b33aa92981baa0438da8c8dab020421ddbafaca3b33b18a72859efb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0-plan.json": "628c3568ebe8a589e0b0761482148f4589d6aa9fb3514d9b97c7fc75e26e3c18",
+    "docs/decisions/0129-producer-residual-change-history-capacity.md": "10b565e36721fccc4498dca27b338217549bf0763c860096a4a9d0f56651e5cf",
+    "docs/decisions/INDEX.md": "61ed9e45e8eb37936a40bd7682cffa2ff902f2f7f78294f69676979d7a4fa362",
+    "scripts/check_readme_routing_pressure.pl": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106"
+  }
+}

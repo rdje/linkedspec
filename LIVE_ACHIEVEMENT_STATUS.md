@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT stopped at safe-slice growth: mapped candidate rejected; clean-production diagnosis completed. P1 producer-bound residual repair and finite history prerequisite owned.
+Full PNT: finite capacity prerequisite complete; producer-bound residual selection next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — Rejected mapped-interval candidate:54 corrected quote pairs/108 route values and ten interval groups pass, but nested executable residuals lose their original authority. Guarded original/candidate Toolbox source proves two discarded capture intervals, native/fresh failure and unresolved2; one of154 unchanged consumer groups fails. Root Phase0 aborts926/98 failed/no plan and is supplemental, not full input-bound acceptance. Production is restored byte-exact6fe.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — One exact clean-record rollover under ADR0129. Five finite scalars admit one archive/manifest row and indexed decision; prior history/decisions/other controls remain exact. Actual reconstruction and authority RED controls precede exact canonical admission. Production remains restored6fe.
 
 ## Next Action
 
-From clean committed HEAD activate the finite change-history capacity prerequisite .3.1.1.1.0 before further writes; then select explicit producer-bound nested/raw residual authority .1.1.1.1 and repair .1.1.1.2. Integrated mapping .1.1.2 and independent canonical .0.3.2 remain open. Do not revive the rejected overlap-only candidate or relax family/callback/literal oracles.
+Select SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1: trace actual typed/raw lowering producers and establish bounded residual continuation authority before production edits. Repair .1.1.1.2, integrated mapping .1.1.2 and independent canonical .0.3.2 remain open; keep the rejected overlap candidate retired.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — actual origin/copy/frame RED7/GREEN10; public42/consumer144;11 source inverses/eight evidence RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` — five accepted-state paths; complete Git-tree RED/GREEN, source inverses and original input recovery.
@@ -29,7 +30,6 @@ From clean committed HEAD activate the finite change-history capacity prerequisi
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1` — compiler39/originalRED38; five native/fresh repairs,1462 groups/Phase01035; two regressions fixed.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0` — private47/68 events, RED20/GREEN41/321 groups; four actual producer RED; compiler integration next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
 
 ## History
 

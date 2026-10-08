@@ -1,0 +1,8 @@
+{
+  "base": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+  "frozen_mode_revision_only": [
+    "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json"
+  ],
+  "public_book": "development/documentation-workflow.md history contract reviewed; unchanged behavior requires no book edit",
+  "initial_formatting_correction": "exact initial sources/snapshots retained; unrelated registry bytes restored and ADR moved into index table"
+}

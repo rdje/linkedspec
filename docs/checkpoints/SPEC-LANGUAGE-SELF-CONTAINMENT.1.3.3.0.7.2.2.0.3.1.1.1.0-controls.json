@@ -1,0 +1,291 @@
+{
+   "complete" : true,
+   "controls" : [
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "missing_new_adr",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "missing_index",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "proposed_status",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "missing_status",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "duplicate_status",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            0,
+            0
+         ],
+         "name" : "malformed_status",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            0,
+            1,
+            0
+         ],
+         "name" : "wrong_limits",
+         "observed" : "RED"
+      },
+      {
+         "actual_authorizations" : [
+            1,
+            0,
+            1
+         ],
+         "name" : "wrong_contract",
+         "observed" : "RED"
+      }
+   ],
+   "producer_sha256" : "05d5fbb69b33aa92981baa0438da8c8dab020421ddbafaca3b33b18a72859efb",
+   "production_sha256" : "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+   "thresholds" : [
+      {
+         "key" : "max_files",
+         "limit" : 47,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 47
+      },
+      {
+         "key" : "max_files",
+         "limit" : 47,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 48
+      },
+      {
+         "key" : "max_files",
+         "limit" : 47,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 49
+      },
+      {
+         "key" : "max_files",
+         "limit" : 48,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 47
+      },
+      {
+         "key" : "max_files",
+         "limit" : 48,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 48
+      },
+      {
+         "key" : "max_files",
+         "limit" : 48,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 49
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 46,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 46
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 46,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 47
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 46,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 48
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 47,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 46
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 47,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 47
+      },
+      {
+         "key" : "max_lines",
+         "limit" : 47,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 48
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26255,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26830
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26255,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26831
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26255,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26832
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26831,
+         "metric" : "bytes",
+         "rejected" : false,
+         "value" : 26830
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26831,
+         "metric" : "bytes",
+         "rejected" : false,
+         "value" : 26831
+      },
+      {
+         "key" : "max_bytes",
+         "limit" : 26831,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26832
+      },
+      {
+         "key" : "max_files",
+         "limit" : 129,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 129
+      },
+      {
+         "key" : "max_files",
+         "limit" : 129,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 130
+      },
+      {
+         "key" : "max_files",
+         "limit" : 129,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 131
+      },
+      {
+         "key" : "max_files",
+         "limit" : 130,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 129
+      },
+      {
+         "key" : "max_files",
+         "limit" : 130,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 130
+      },
+      {
+         "key" : "max_files",
+         "limit" : 130,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 131
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13043,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 13076
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13043,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 13077
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13043,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 13078
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13077,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 13076
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13077,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 13077
+      },
+      {
+         "key" : "max_total_lines",
+         "limit" : 13077,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 13078
+      }
+   ]
+}
