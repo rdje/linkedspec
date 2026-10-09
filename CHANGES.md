@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Independently accept composed original input grants
+
+Independent input composition passes 140 assertions and ten effective semantic source faults across four lexical cases, eight actual executable events and 64 selected frame joins. Sixteen direct suites in 135 immutable supplied files, four reason-sensitive reviewer REDs and the complete 57-source book with two actual controls pass. All 287 original input-join bindings are preserved at 4f0499d26; production bytes are unchanged. The authored nested segment oracle follows actual compiler events through AST, MethodExpr, CSV and fresh AST captures. Deep copying and consumption retain occurrence identity; delayed ancestor/shape changes revoke descendants. Factory/dependency integration is next; complete private Phase0 and mapped/canonical admission remain open.
+
 ## 2026-10-10 — Join native inputs to original compiler-event grants
 
 Actual selected-event input grants PASS185 assertions/17 effective semantic source inverses; fifteen direct suites in134 immutable supplied files, five actual reviewer REDs and complete57-source book/two actual controls pass. Paired opaque AST lifetime RED1 becomes GREEN185 by registering only eligible actual roots. Two original claims preserve262 exact bindings at3dbe7b10a by mode/revision only. SourceEmissions binds actual native captures and parent grants to selected SourceOrigins events; explicit offsets authorize only matching source copies and child consumption. Invalid/changed/foreign/expired grants preserve ordinary text as generated. Parser/MethodExpr bytes and public callback shapes stay exact. Initial draft/proof failures are retained; independent input acceptance precedes factory/output integration.

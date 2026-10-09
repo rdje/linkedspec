@@ -8,7 +8,7 @@ answers:
   - "can a known outer callback inherit a nested opaque publication"
   - "what is the next private input authority implementation protocol"
 date: 2026-10-09
-status: private original-event input joining verified; independent acceptance and factory joining open
+status: private original-event input composition accepted; factory joining open
 tags: [perl, actionir, ast, source-provenance, callbacks, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0 observes four actual parser inputs/eight independently authored argument intervals, seven callback modes and a two-route actual Contracts dependency intervention; seven reason-sensitive evidence RED controls pass. All parent Perl/spec production inputs remain unchanged."
 reverify:
@@ -66,8 +66,9 @@ channels/source identities and seven reason-sensitive evidence corruptions.
 
 Implementation `.2.1.1` now verifies the standalone constructor collector;
 `docs/knowledge/perl-private-ast-constructions.md` owns its current behavior.
-Original-frame joining `.2.1.2` has verified implementation children and still
-requires its independent acceptance `.2.1.2.3`; factory/dependency capture `.2.1.3` remains open. This update preserves the historical diagnosis and its original bindings.
+Original-frame joining `.2.1.2` has verified implementation children and independent
+acceptance `.2.1.2.3`; factory/dependency capture `.2.1.3` remains open. This update
+preserves the historical diagnosis and its original bindings.
 
 Native parser-relative root/call/array frames now have their own bounded proof
 under `.2.1.2.0`; `docs/knowledge/perl-private-ast-input-frames.md` owns current
@@ -80,4 +81,6 @@ Finite supplemental consumer artifact-binding audit `.2.1.2.5` is verified;
 Original-event joining `.2.1.2.2` now verifies actual opaque grants with185/17,
 including an actual opaque AST lifetime repair. See
 `docs/knowledge/perl-original-event-input-grants.md`. Independent input acceptance
-`.2.1.2.3` is next. Native coordinates alone still grant no compiler-event authority.
+`.2.1.2.3` now verifies140/10, sixteen supplied suites/135 files and delayed actual
+parent-chain invalidation; `docs/knowledge/perl-input-composition-acceptance.md`
+owns that separate proof. Native coordinates alone still grant no compiler-event authority.

@@ -1,0 +1,14 @@
+{
+  "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+  "records": [
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "before": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-before-SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "original_sha256": "60634fb10f78e51c542f652cb2314470115f64cca207a4c079134fce631b79e9",
+      "after_sha256": "6adcbde2ba8272dedba0204a43ccb6613f27422e03df2189ceb10563bd136e9b",
+      "verified_bindings": 287
+    }
+  ],
+  "producer_sha256": "24bdcdc9aa9e5c2857529d0dc282a4d37f2a4288e5a2c292bd308eb6065aa86b",
+  "scope": "Only original live durability mode/revision changes. All original statements/proof fields/hashes and the separately historical original-recovery claim remain exact."
+}

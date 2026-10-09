@@ -981,7 +981,20 @@ grants preserve ordinary builder text as generated and consume no original sourc
 Later output composition and interval translation must still adjudicate duplicated
 copies and executable continuations.
 
-This input join is verified independently of built-in factory registration and
+Nested input grants retain the whole parent chain. For example, in
+`set(counter, cat(trim("λ😀"), cat("λ😀", "λ😀")))`, an AST capture can select the
+outer `cat`, a MethodExpr capture can select its inner `cat` argument, a CSV
+capture can retain that whole argument, and a fresh AST capture can select each
+inner string. These joins keep the two equal inner strings distinct. Repeating
+the whole `set` expression produces another pair of original occurrences; a
+quoted copy of the expression contributes no executable helper event.
+
+Independent input acceptance exercises that chain through actual compiler events.
+Changing an intermediate argument or CSV shape invalidates dependent grants even
+after selection. An unchanged neighboring branch remains valid. A failed nested
+scope restores the enclosing chain, and scope exit removes its authority.
+
+This input composition is verified before built-in factory registration and
 output integration. It does not change the quoted-first replacement example or
 establish complete private Phase0 or mapped/canonical admission. During factory
 and output integration, each injected dependency call still needs its own capture

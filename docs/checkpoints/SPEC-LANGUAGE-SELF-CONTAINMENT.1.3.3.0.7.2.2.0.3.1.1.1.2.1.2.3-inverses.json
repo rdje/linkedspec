@@ -1,0 +1,89 @@
+{
+  "result": "PASS",
+  "producer_sha256": "1835ae46e7480a9aef7233cddd1803c577d692454520e6be8629fecbd0a77891",
+  "fixture_sha256": "06e42c323ac7fe6572dfa226be72f2448d0ac65ca616e875b67863ce7b7bfdd6",
+  "source_sha256": "aa23000bf8db35960467791c00476179f10fe1ed152423853cb9732ce1f3f3ec",
+  "rows": [
+    {
+      "case": "rebase",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-rebase.json",
+      "sha256": "e92ae562e4c064cf96467d4f9851bf8ce55cf2805106b1672d6136334e04effc",
+      "source_sha256": "c832d9760c514728febed7d34c9fcaa3f55e4305831dfd17633018de3bb3cf7e",
+      "reason": "complete independently labelled cross-capture frame population",
+      "observed": "RED"
+    },
+    {
+      "case": "occurrence",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-occurrence.json",
+      "sha256": "5a0d4a518fa814cd2efcd6d9abb44ad1af0089d55c9e245446948f4b66aba553",
+      "source_sha256": "de3885a6f0af6ca546c10553f778393de2759b86531a137226fc420dfcf434d3",
+      "reason": "complete independently labelled cross-capture frame population",
+      "observed": "RED"
+    },
+    {
+      "case": "parent",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-parent.json",
+      "sha256": "a4dbd6a34841f0857435d35c8774bdfeb0772596b0e6d57e21752af9c1964218",
+      "source_sha256": "2c3a2bfd6cb5a94c973af23dfee5b14e269c51e73898573f556623f568d83b15",
+      "reason": "delayed ancestor mutation revokes descendant",
+      "observed": "RED"
+    },
+    {
+      "case": "cached-native",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-cached-native.json",
+      "sha256": "c92fa8e6d58e0396a830680a0a441a60f789335edc40881369d666e6f35f7b41",
+      "source_sha256": "b9394ff943ac47f50bb05305f75eb9d0aa5bf1c5e44874d93835335e5bebfc14",
+      "reason": "delayed CSV shape mutation revokes deep descendant",
+      "observed": "RED"
+    },
+    {
+      "case": "append-event",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-append-event.json",
+      "sha256": "57c8c4df13c86934f9778aa07529ac53b0039d3093837b008918cbb5f3e8d953",
+      "source_sha256": "56001bc9d501f633ff3090707d60c6d7348d11a2d849da8b8eeb1b9d95d40ff2",
+      "reason": "equal-coordinate foreign event remains generated",
+      "observed": "RED"
+    },
+    {
+      "case": "consume-event",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-consume-event.json",
+      "sha256": "b06035b11f38f5866aaec6c6adf7608476c2d6ffee84b39629b9c298366ad386",
+      "source_sha256": "6fa06ed7936613bdc1e8374a5f9c03cc9064a9aea895e16026339c4f57f8808d",
+      "reason": "foreign event consumes nothing",
+      "observed": "RED"
+    },
+    {
+      "case": "consume-child",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-consume-child.json",
+      "sha256": "cd11b92d2abc8d3a0910c06567d6f4a4c5074f2d93c41b6019dea47616568e61",
+      "source_sha256": "2f0c4ac755aa72d1579faeb4dc53efcaa54bc09224d6f071ccac665431567cdf",
+      "reason": "exact deep child consumption ledger",
+      "observed": "RED"
+    },
+    {
+      "case": "callback-once",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-callback-once.json",
+      "sha256": "f30e122495185b4f3c0270ec0977e8c410fdc3fa489f743351ba9f0a4ea00ef9",
+      "source_sha256": "ef8049f382cad5780921f6d994c8182aa1fcc5b58fa126f5b316a2700ead162f",
+      "reason": "actual joined callback executes once in scalar context",
+      "observed": "RED"
+    },
+    {
+      "case": "aliases",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-aliases.json",
+      "sha256": "84df32a6e2441840d81e881380c9c315bfa08746bcb46718769457ad5a2aec8b",
+      "source_sha256": "95746b1ec91ce08a667b1a36ee60075ee5b47561b9ee7ed6d244072ad798446c",
+      "reason": "actual joined caller alias is written",
+      "observed": "RED"
+    },
+    {
+      "case": "opaque-release",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-opaque-release.json",
+      "sha256": "1703879aa7c22053cb1cca9f91a2d31c1dd4876d33050b5c5f3663a537e18a93",
+      "source_sha256": "f132ccfa42b7463c4d34a6e988a2861abc23109858c452a1c735d1546f62407d",
+      "reason": "opaque destructor has executed before scope exit",
+      "observed": "RED"
+    }
+  ],
+  "scope": "Ten syntax-valid effective faults; full140-assertion coherent plans and independently authored semantic ledger/callback reasons. Original supplied bytes/population restore after each fault."
+}

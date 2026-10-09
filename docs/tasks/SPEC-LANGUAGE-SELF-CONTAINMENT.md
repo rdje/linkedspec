@@ -4015,15 +4015,26 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Resolution: Event-input implementation and its P1 opaque AST lifetime defect are fixed and source-bound verified. Earlier drafts remain unadmitted. Factory/dependency publication, typed/raw output integration, full private Phase0 and quoted-first mapped replacement remain owned subsequent work.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Independently accept parser/MethodExpr/original-event input composition before factory/dependency registration.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
   Owned paths: Focused composed acceptance artifacts/Knowledge/docs; production changes only for owned defects.
-  Planned tier: `focused`
-  Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
-  Planned canonical boundary: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
-  Planned claim record: none: Planning only; declare the actual measured record before results.
+  Verification tier: `focused`
+  Focused checks: Independently authored actual scanner/canonical event, nested AST/MethodExpr/CSV frame and per-character output/consumption ledgers; native-versus-joined context/aliases/effects/returns/fatal/opaque release; complete supplied direct consumers, coherent semantic source faults, reason-sensitive evidence controls, complete book render and normal focused workflow.
+  Canonical trigger: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json`
   Acceptance: Verify actual population and source provenance at each frame/identity join, aliases/context/effects/opaque/nested exceptions, copied/equal/foreign inputs and independent character/occurrence/copy/consume oracles. Keep original six-slice producer/Phase0/mapping/canonical obligations open.
+
+  Activation: Clean 4f0499d2634e9c04e6a3d07ee85f4159f5380834; original-event join185/17, consumers15/134, actual lifetime RED1/GREEN, evidence5/book57/2 and all ten doctrines/post-pointer PASS; Git clean and brief0. Selected protocol, current input/construction/origin Knowledge, actual native capture/getter and scanner/canonical seams, direct supplied capsule and ActionIR book reviewed.
+  Bounded acceptance: Independently authored nested segment/character oracle through actual repeated executable compiler events; alternate AST→MethodExpr→CSV→AST joins, original occurrence isolation, delayed mutation/scope restoration, and native-versus-joined context/alias/effect/error/opaque behavior. Supply the complete previous134-file capsule plus the new acceptance fixture. Production stays unchanged unless a concrete owned defect requires repair; factory/dependency/output and complete private Phase0/mapped/canonical remain open.
+
+  Result: Independent input composition passes 140 assertions and ten effective semantic source faults across four lexical cases, eight actual executable events and 64 selected frame joins. Sixteen direct suites in 135 immutable supplied files, four reason-sensitive reviewer REDs and the complete 57-source book with two actual controls pass. All 287 original input-join bindings are preserved at 4f0499d26; production bytes are unchanged.
+  LinkedSpec-tool evidence: Actual scanner→Diagnostics→CanonicalEvents population and private input capture/getter/builder probes; labelled authored nested source segments and independent character/consume ledgers. Native capture differential compares actual callback observations and destructor timing inside an active scope. Ten syntax-valid faults reach specific semantic REDs with all140 assertions; exact runtime/source/input/channel identities recur in the readonly reviewer.
+  Verification: Supplied135 files include all three actual JSON readers; original134 match clean4f0499d26, and only the new acceptance fixture extends the capsule. Four actual reviewer corruptions retain complete counterfactual bytes and channels, reject for exact reasons and restore every original JSON byte. Complete57-source book/missing-SUMMARY/rendered-teaching controls and normal root render PASS. Current bounded original-claim review proves all287 bindings and mode/revision-only preservation; the first broad selection-freezer is a retained write artifact, not collection-wide measurement proof. Syntax, memory/Knowledge/history/claim/diff and all ten normal doctrines gate landing.
+  Resolution: Finite standalone private input composition is independently accepted with no new production defect observed. Aggregate input parent stays active without separate parent admission; factory/dependency registration depends on this exact accepted leaf. Original six-slice output/full-private Phase0/mapped/canonical obligations remain open.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3 - accept composed original input grants` (Git records identity).
+
+  Historical falsification: One original frozen binding SHA is changed in the actual claim; the bounded reviewer observes the specific beyond-mode/revision RED. Original claim bytes restore exactly before readonly PASS. Complete changed bytes and actual command channels are retained under -preservation-control.json, with a readonly source-bound reviewer mode.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`
   Status: `done`
@@ -4113,7 +4124,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
   Goal: Known producer/dependency invocation ownership at actual factory seams; preserve ordinary custom callbacks and nested error behavior.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2`
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`
   Planned tier: `focused`
   Planned focused proof: Actual object/callback/invocation identities and independent original occurrence/fragment controls; unchanged direct consumers, public shapes/context/errors/family order; normal focused doctrine/claim/Knowledge/history checks.
   Planned canonical boundary: None for private bounded implementation; complete private Phase0 and independent mapped/public admission remain separately owned.
@@ -4519,7 +4530,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` | `done` | Native63/11, actual frames/consumers; P1 public trim repair next. |
 | 43.4.2.0.3.1.1.1.2.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` | `done` | Actual input107/13, fourteen supplied consumers; P1 prior evidence audit next. |
 | 43.4.2.0.3.1.1.1.2.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` | `done` | Actual185/17; consumers15/134; lifetime RED1/GREEN; independent input acceptance next. |
-| 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
+| 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `done` | Independent140/10, consumers16/135, evidence4/book57/2; factory ownership next. |
 | 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
 | 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `done` | Three historical gaps qualified; complete133-file/fourteen-suite/book57 recurrence. |
 | 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `done` | Three scalars;220 preserved files; production12/16 and evidence3; canonical receipt governs landing. |

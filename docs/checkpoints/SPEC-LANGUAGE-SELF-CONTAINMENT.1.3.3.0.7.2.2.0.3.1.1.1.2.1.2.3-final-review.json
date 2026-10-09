@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "producer_sha256": "b424b4e71f2fdf168b8c049d12b8157dac101d69815793084ab3d74499feab4c",
+  "checked": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-before-SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json": "60634fb10f78e51c542f652cb2314470115f64cca207a4c079134fce631b79e9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-book-review.json": "6a80b2a380d77cf45479c732c583f13f5453a7aadf2c17a4237413cfc250ac08",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-book-review.py": "200fdab510a12c94a6913d538c7cc72e2f73ca445b90825e44162f178be29f27",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-book.json": "642a5d11afcbc2538e97b722a507094786451708eb17b71962190e817705fdfb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-book.py": "2033e053d5e811759dc6783367434972be7b91fabe1377a6807932ce510287b4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-consumers.json": "4b93075563a5634ba12f108b4f6d866cbb3c9ac1005e76269dee72d0120439cb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-evidence.json": "e335059f2475512a7f25161980073f71e45e92f0a0c0c447767872e6a9318170",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-evidence.py": "0adb49850273670bfa392108ef0a37066ec9b2c8feb7b38721205aaa89af32f0",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-fixture.json": "4e9ab6a763d8a9ef1bc471344f4e5f745502fa5a5dd21891524756a7f2cc8582",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-freeze.json": "20d94e96fe1a1b976288264f2aadb2c06a6815ad5d66517b28fad86ceefb1096",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-aliases.json": "84df32a6e2441840d81e881380c9c315bfa08746bcb46718769457ad5a2aec8b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-append-event.json": "57c8c4df13c86934f9778aa07529ac53b0039d3093837b008918cbb5f3e8d953",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-cached-native.json": "c92fa8e6d58e0396a830680a0a441a60f789335edc40881369d666e6f35f7b41",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-callback-once.json": "f30e122495185b4f3c0270ec0977e8c410fdc3fa489f743351ba9f0a4ea00ef9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-consume-child.json": "cd11b92d2abc8d3a0910c06567d6f4a4c5074f2d93c41b6019dea47616568e61",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-consume-event.json": "b06035b11f38f5866aaec6c6adf7608476c2d6ffee84b39629b9c298366ad386",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-occurrence.json": "5a0d4a518fa814cd2efcd6d9abb44ad1af0089d55c9e245446948f4b66aba553",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-opaque-release.json": "1703879aa7c22053cb1cca9f91a2d31c1dd4876d33050b5c5f3663a537e18a93",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-parent.json": "a4dbd6a34841f0857435d35c8774bdfeb0772596b0e6d57e21752af9c1964218",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverse-rebase.json": "e92ae562e4c064cf96467d4f9851bf8ce55cf2805106b1672d6136334e04effc",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-inverses.json": "461c5334df03bf4c9120ee2ba3fb91720d5de761d92ad90de67d36cafd235e08",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-plan.json": "e4a8c306dcfd3a081447c24f84a583fd5fae02c4fa41cd3947b2d1de097d8b52",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-review.json": "c69a578c4a73427f475d52c1fa60ec48018370b5a63e41a546071e17ce5d7d5e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-review.py": "acf125cfc9a498f8ff6c2cd39a652ccfebed3824aabcd4c15770bae6b0b74d16"
+  },
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SW5kZXBlbmRlbnQgaW5wdXQgY29tcG9zaXRpb24gcmV2aWV3IFBBU1MxNDAvMTA7IGNvbnN1bWVyczE2LzEzNTsgb3JpZ2luYWwyODcgcHJlc2VydmVkCg==",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3-book-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3L3R3byBhY3R1YWwgY29udHJvbHM7IGV4YWN0IGlucHV0IGFuZCByZW5kZXJlZCB0ZWFjaGluZyBpZGVudGl0aWVzCg==",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Fresh actual readonly runtime/book review commands and exact four evidence-control source/counterfactual/channel identities, with all successful evidence restored. Runtime review independently verifies the bounded original287 bindings; the broad selection-freezer is retained as a write artifact, not collection-wide measurement proof."
+}

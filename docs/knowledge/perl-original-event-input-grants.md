@@ -10,7 +10,7 @@ answers:
   - "why must opaque AST returns stay out of the input grant registry"
   - "is original event input joining integrated with production lowerers"
 date: 2026-10-10
-status: private input join verified; independent input acceptance and factory/output integration open
+status: private input join and independent composition verified; factory/output integration open
 tags: [perl, actionir, input, provenance, identity, lifetime, source-emission]
 evidence: "Standalone185 assertions/seventeen effective semantic source inverses, fifteen supplied direct suites in134 exact files including all three reader JSONs, five actual reviewer REDs and complete57-source book/two render controls PASS. Actual opaque lifetime RED1 becomes GREEN185. Two intersecting claims preserve all262 original bindings at3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-review.py; current standalone PERL5LIB= prove -Iperl t/actionir_event_input_grants.t. Preserve original claim inputs at later compiler/document changes rather than refreshing historical captures."
@@ -62,8 +62,10 @@ The canonical book destination rule already lives in
 `docs/knowledge/tool-project-data-ssd-storage.md`; the corrected supplied render
 uses the actual caller-relative output path and retains each row before assertions.
 
-This is standalone private input authority. Independent input acceptance is next
-under .2.1.2.3, then actual factory/dependency registration .2.1.3. The known opaque
+Independent input acceptance .2.1.2.3 now verifies the nested actual event/capture
+composition separately; `docs/knowledge/perl-input-composition-acceptance.md` owns
+that proof and its limits. This remains standalone private input authority, with
+actual factory/dependency registration .2.1.3 next. The known opaque
 nested dependency publication constraint, typed/raw output emission, composition,
 full private Phase0 and mapped/canonical replacement admission remain open. The
 quoted-first replacement defect is not repaired by this input join. No public

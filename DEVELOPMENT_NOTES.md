@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Accept input joins through independent source and effect ledgers
+
+The composed acceptance builds labelled segments before parsing and never reads public spans or searches for occurrences. Actual repeated executable events traverse eight native/event joins apiece, with separate per-character copy and exact-child consume ledgers. Native-versus-joined callbacks and delayed parent mutation distinguish identity/effect errors. Independent input composition passes 140 assertions and ten effective semantic source faults across four lexical cases, eight actual executable events and 64 selected frame joins. Sixteen direct suites in 135 immutable supplied files, four reason-sensitive reviewer REDs and the complete 57-source book with two actual controls pass. All 287 original input-join bindings are preserved at 4f0499d26; production bytes are unchanged.
+
 ## 2026-10-10 — Original input authority requires actual parents and current native validation
 
 An event/token-rooted opaque grant joins actual native captures and explicit relative offsets. Every later use checks the actual parent chain and current native data, so detached descriptions, copied objects or equal text cannot select an occurrence. Actual wrong-public-search and per-character copy/consume oracles distinguish these paths. A paired weak-reference probe exposed new opaque AST retention; requiring an eligible actual native root preserves the native immediate release behavior. Final185/17, consumers15/134, evidence5 and book57/2 pass; all262 prior bindings stay historical. Factory/dependency/output/mapping admission remains separate.
