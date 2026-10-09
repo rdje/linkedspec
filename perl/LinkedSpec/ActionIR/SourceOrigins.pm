@@ -9,6 +9,12 @@ use Scalar::Util ();
 # actual event references, preventing address reuse while copies are assembled.
 our $_invocation;
 
+# Identity only: private producers bind to this actual dynamic invocation, not
+# to another invocation with equal source text. No event or callback field changes.
+sub _invocation_token {
+ return ref($_invocation) eq 'HASH' ? $_invocation : undef
+}
+
 sub _with_source_origins {
  my ($source, $callback) = @_;
  local $_invocation = {source => $source, events => {}};

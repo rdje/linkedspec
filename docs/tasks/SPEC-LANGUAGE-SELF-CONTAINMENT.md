@@ -3813,7 +3813,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Preparation correction: Normal hooks rejected seven verification owners because six pending repair nodes had active declaration keys. The exact original unadmitted staged delta, original claim/input hashes and actual declaration RED remain retained. Pending nodes now use planning keys and activate their own declarations only in their implementation slices. The completed frontier wording is corrected; fresh one-owner proof and normal hooks govern the corrected candidate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Repair the selected producer-bound residual authority without changing family order or callback contracts.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
   Acceptance: Actual source-bound RED/GREEN and effective source inverses preserve nested/raw helpers, literal twins, exact original origins, repeated events and opaque dependencies. Full guarded Phase0 reaches1035/1035 and unchanged consumers pass before focused landing. Keep integrated mapping and independently committed canonical admission separate.
@@ -3822,7 +3822,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Plan: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json; split typed emission integration further by actual family before writes if it grows beyond a safe slice.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0`
-  Status: `active`
+  Status: `done`
   Goal: Private emission protocol and callback/invocation identity, with independent adversarial fixtures; no replacement behavior change.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1`
   Planned tier: `focused`
@@ -3850,14 +3850,29 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0 - recover interrupted emission draft` (Git owns identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`
-  Status: `pending`
+  Status: `done`
   Goal: Resume and prove the recovered private emission foundation, satisfying every original .2.0 obligation before integration.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`
-  Planned tier: `focused`
-  Planned focused proof: Restore the exact draft under this leaf, then author independent fragment/callback/invocation/Unicode/CRLF/literal/duplicate/opaque/nested/error oracles, original RED/corrected GREEN and effective source inverses. Preserve public callback shapes/context/errors and family order; run unchanged direct consumers and normal doctrines. Full guarded Phase0 remains required at final private acceptance .2.5.
-  Planned canonical boundary: None unless actual scope changes mechanical/public owners; mapped replacement and independent canonical admission retain separate ownership.
-  Planned claim record: none: No implementation measurement exists; declare the actual foundation proof record on activation.
+  Verification tier: `focused`
+  Focused checks: Restore the exact draft under this leaf, then author independent fragment/callback/invocation/Unicode/CRLF/literal/duplicate/opaque/nested/error oracles, original RED/corrected GREEN and effective source inverses. Preserve public callback shapes/context/errors and family order; run unchanged direct consumers and normal doctrines. Full guarded Phase0 remains required at final private acceptance .2.5.
+  Canonical trigger: None unless actual scope changes mechanical/public owners; mapped replacement and independent canonical admission retain separate ownership.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1.json`
   Acceptance: Follow the selected six-slice plan and recovery handoff. The saved draft supplies a starting point only; no tests or accepted packets were recovered. Commit the verified foundation before activating .2.1.
+
+  Activation: Clean a367b66; only SourceEmissions.pm and the private SourceOrigins invocation accessor are production owners. No pipeline, public callback, family-order, dependency, gate or generated-format change. Independent labelled-character construction/consumption and identity controls precede integration; seven unchanged provenance/occurrence consumers and normal focused checks govern landing. Full guarded Phase0 remains .2.5. Supplied policy hashes match the canonical startup record.
+
+  Verification: Exact recovered SourceEmissions draft and six-line invocation accessor remain hash-identical to the crash snapshot. Independent authored occurrence/labelled-character, callback/context/alias/effect/opaque/nested/error/Unicode/CRLF fixture passes62 assertions; original absent-module RED establishes availability only. Sixteen valid production-source inverses reach their named semantic failures. Seven unchanged direct consumers pass in a source-guarded live superset; this is supplemental recurrence, not immutable complete Phase0 acceptance. Syntax and rendered public teaching pass; normal focused doctrines/history/claims/Knowledge/memory/diff/hooks govern landing.
+  Instrument corrections: The first capture-identity inverse was masked by its retained identity lookup; expanded double-callback failed earlier on packet ambiguity; the first unwind inverse was masked by an enclosing producer scope. Exact initial producer/fixture snapshots and actual full channels remain retained. Corrected source inverses reach copied-capture/count/direct-nested-unwind assertions; no production change or weakened acceptance oracle was needed.
+  Limits: Actual built-in producer registration and argument/node authority .2.1, typed/raw construction .2.2/.2.3, composed mapping proof .2.4, complete guarded Phase0 .2.5, interval replacement .1.1.2, independent canonical .0.3.2 and recurring integration .0.4 remain open. Private foundation adds no runtime replacement or public callback change. Due artifact review follows only after this clean commit.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 - verify private emission foundation` (Git owns identity).
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` Acceptance Checklist
+- [x] **REPRODUCE / ISSUE** — `perl -Iperl t/actionir_source_emissions.t` original absent-module RED is retained; original Toolbox `call_spec_handler_subst` nested residual diagnosis stays with .1.1.0 and .1.1.1.1. This foundation does not claim that runtime fix.
+- [x] **ROOT CAUSE (WHY + WHERE)** — SourceEmissions construction sidecars need actual callback/capture/event/source-token ownership; generated-source equality cannot own an occurrence. The source-bound fixture, authored character oracle and16 effective source inverses distinguish each mechanism; recovered draft bytes are exact.
+- [x] **FIX** — Add private SourceEmissions protocol and SourceOrigins invocation identity only; producer factories and RewritePipeline remain unchanged.
+- [x] **ADDRESSED (verified)** — Original foundation unavailable; corrected independent fixture PASS62,16 reason-sensitive source REDs; initial ineffective controls remain disclosed. Private foundation availability/semantics only.
+- [x] **NO REGRESSION** — `prove -v -Iperl` seven unchanged direct consumers PASS; source/fixture syntax clean. Complete guarded Phase0 is the separately owned final private acceptance .2.5, not this ordinary foundation leaf.
+- [x] **LOCKSTEP** — mdBook rendered and new private-foundation Knowledge card, task/frontier/roadmap/index/resume/live/change/notes/claim are synchronized. `git diff --check` and normal focused doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`
   Status: `pending`
@@ -4245,10 +4260,15 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` | `done` | Rejected candidate retained; guarded nested residual RED and production restored6fe. |
 | 43.4.2.0.3.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` | `done` | One exact finite archive/manifest/decision admission; canonical receipt gates landing. |
 | 43.4.2.0.3.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` | `done` | Actual typed/raw producer protocol selected; six private repair slices remain. |
-| 43.4.2.0.3.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2` | `pending` | After selection: repair residual authority and full guarded Phase0. |
-| 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `active` | Recovery checkpoint .0 complete; foundation implementation/proof .1 remains open. |
+| 43.4.2.0.3.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2` | `active` | After selection: repair residual authority and full guarded Phase0. |
+| 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `done` | Recovery and standalone foundation verified; actual integration remains separate. |
 | 43.4.2.0.3.1.1.1.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` | `done` | Exact crash draft retained; production restored; stop at clean handoff. |
-| 43.4.2.0.3.1.1.1.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` | `pending` | Next activation: recover private foundation draft and prove original obligations. |
+| 43.4.2.0.3.1.1.1.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` | `done` | Verified private foundation62/16; producer integration remains .2.1. |
+| 43.4.2.0.3.1.1.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1` | `pending` | Actual argument/node input authority and built-in callback registration. |
+| 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |
+| 43.4.2.0.3.1.1.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3` | `pending` | Statement/control/raw emission construction. |
+| 43.4.2.0.3.1.1.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.4` | `pending` | Independent composed fragment/occurrence mapping proof. |
+| 43.4.2.0.3.1.1.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.5` | `pending` | Complete guarded Phase0/direct-consumer private acceptance. |
 | 43.4.2.0.3.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2` | `pending` | Committed recurrence and canonical replacement acceptance. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |

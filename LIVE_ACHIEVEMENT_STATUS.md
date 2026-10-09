@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Machine-crash recovery complete; stop at the requested clean handoff checkpoint. Private emission foundation remains unverified.
+PNT private producer repair; standalone foundation verified and ready for actual producer/input integration.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — All eight surviving dirty files recover from immutable Git/delta or complete untracked payloads. Six reason-sensitive corruption REDs,48 original claim bindings and eight byte-exact restored production owners pass. The unfinished emission draft is checkpoint evidence only. Exact sources, initial reviewer failure and handoff instructions remain retained; no foundation acceptance is claimed.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — Exact recovered draft/accessor verified with62 independent fixture assertions and16 effective source inverses. Seven unchanged direct consumers pass; book rendered. Initial masked/earlier-failing inverses and actual channels remain retained. Actual producer integration, mapping and complete guarded Phase0 remain open.
 
 ## Next Action
 
-On a new continuation activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1; follow the saved recovery handoff to restore and prove the foundation draft. All original six-slice obligations, mapped replacement .1.1.2 and independent canonical .0.3.2 remain open. Stop here as requested.
+Complete due artifact review under REPO-HYGIENE at this clean boundary, then activate actual argument/node input authority .2.1. Full private Phase0 .2.5, mapped replacement .1.1.2 and independent canonical .0.3.2 stay open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — private foundation62/16; actual producer integration remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
 - `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
@@ -29,7 +30,6 @@ On a new continuation activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` — immutable73/consumer1473; grouped-pattern primitive cause retained; focused repair next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — callable signature RED10/GREEN225; compiler40/18 values/direct1473 groups; canonical acceptance next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
-- `REPO-HYGIENE.11` — due metadata review, zero removals; original133 hashes preserved; canonical membership next.
 
 ## History
 

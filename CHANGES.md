@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 private emission foundation
+
+Restore and verify the recovered two-owner standalone protocol:62 authored character/occurrence and callback assertions,16 effective source inverses and seven unchanged direct consumers pass. Exact initial inverse corrections remain retained. Private generated/copied/consumed fragments preserve callback identity/context/aliases/errors without wiring runtime replacement. Book rendered; actual producer integration and complete guarded Phase0 remain later leaves. Claim and Knowledge hold exact scope/evidence.
+
 ## 2026-10-09 — Crash recovery (.0.3.1.1.1.2.0.0)
 
 Preserve all eight surviving dirty files and the unfinished private emission draft outside production. Immutable Git/delta reconstruction,48 original claim bindings and six corruption REDs pass; eight production owners restore byte-exact. The committed handoff stops here; foundation .2.0.1 remains unverified. Full recovery inputs and next-step instructions are under the leaf checkpoint prefix.

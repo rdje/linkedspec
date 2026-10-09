@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Private emission authority is identity-bound
+
+SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 verifies the exact recovered draft with an independent labelled-character oracle and actual callback/capture/event/source identities. Sixteen source inverses distinguish registration, coordinates, consumption, context, aliases, invocation count, detachment and fatal nested unwind. Three initially masked or earlier-failing inverses are retained and strengthened. The module is standalone; input/node authority and built-in producer integration are next. See `docs/knowledge/perl-private-emission-foundation.md` and the owning claim; no replacement or full Phase0 acceptance is inferred.
+
 ## 2026-10-09 — Preserve interrupted emission work (.0.3.1.1.1.2.0.0)
 
 Crash recovery distinguishes surviving bytes from accepted behavior. Keep the exact dirty delta and untracked payloads with their activation Git identity; reconstruct in isolated Git index/object storage before restoring committed production. The first index-only reviewer fails during Git apply and remains retained with actual channels. The corrected reviewer preserves all original claim hashes and qualifies only durability mode/revision. Resume foundation proof at .2.0.1 using the saved draft; no lost conversation or unsaved-buffer recovery is asserted.

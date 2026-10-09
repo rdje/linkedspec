@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0-crash.json",
@@ -132,7 +132,8 @@
             "sha256": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "a367b66f06b1deacefc172484834b7cd9b1093d1"
       }
     }
   ]

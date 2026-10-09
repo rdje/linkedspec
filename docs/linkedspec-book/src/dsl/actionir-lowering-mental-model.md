@@ -895,12 +895,23 @@ if(is_nonempty(trim(capture_slice()))); push(items, trim(capture_slice())); endi
 The outer conditional and push become Perl expressions while retaining executable
 `capture_slice()` calls. Those real calls still require their later helper lowering.
 The rejected candidate marked their original intervals missing and left unresolved
-host calls in the generated handler. The current production implementation remains
-the preceding verified version. A safe replacement repair must preserve explicit
+host calls in the generated handler. The current runtime replacement still uses
+the preceding verified pipeline. A safe replacement repair must preserve explicit
 producer-bound authority for those nested continuations while denying generated or
 quoted equal spellings and already consumed duplicate events. It must retain
 canonical family order and callback behavior; an unrestricted generated-text search
 or an overlap waiver cannot provide that distinction.
+
+The private construction foundation now supports explicit generated, copied-source
+and consumed-source pieces. A packet belongs to the actual callback, event and
+source invocation that produced it; copied objects and equal scalar output cannot
+transfer that authority. Ordinary callback results, argument references, scalar
+context and exceptions retain their existing behavior. For example, generating
+the text `capture_slice()` gives it no original source coordinates, while an
+explicit copy records its selected original character interval. Duplicate copies
+remain separate fragments so later translation can reject ambiguous continuations.
+Producer integration and interval translation remain subsequent work; this
+standalone foundation does not change the quoted-first example above.
 
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.

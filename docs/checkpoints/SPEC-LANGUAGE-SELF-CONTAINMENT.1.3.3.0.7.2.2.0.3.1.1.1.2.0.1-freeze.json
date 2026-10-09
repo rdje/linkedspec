@@ -1,0 +1,11 @@
+{
+  "revision": "a367b66f06b1deacefc172484834b7cd9b1093d1",
+  "records": [
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0.json",
+      "original_sha256": "5c2b7244c1f632f8cba65e5f9366e22745dd3045f35425fc2b365d91f8c2bd80",
+      "preserved_sha256": "8d3738ecd0ea7238012599176d5bfbcc72ad463e7e24fe9d09257298dcf3f6af"
+    }
+  ],
+  "scope": "Every original input verified; durability mode/revision only."
+}
