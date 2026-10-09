@@ -7,7 +7,7 @@ answers:
   - which task owns Rust dependency warning reports
   - may LinkedSpec patch RGX or PGEN warning causes
   - what git boundary owns rgx and pgen warning fixes
-date: 2026-09-20
+date: 2026-10-10
 status: observable baseline retained; upstream implementation investigation and edits forbidden
 tags: [rust, dependencies, warnings, public-contract, task-tree]
 evidence: "Repeated completed canonical build logs report 1870 pgen and26 rgx-core warnings. September20 director boundary restricts LinkedSpec to published dependency interfaces and upstream reports."
@@ -30,5 +30,9 @@ reading dependency implementation, applying fixes, reconstructing generators or
 changing pins. LinkedSpec-owned code can be repaired in its own task-owned slices.
 
 Published contracts and observable command results are the integration authority.
-Implementation-derived dependency plans and conclusions have been removed.
+The canonical task and this fact adopted that boundary on September20. Roadmap
+projections still retained contrary internal-repair and pin-change plans until
+`RUST-DEPENDENCY-WARNING-ZERO.8` corrected their current paragraphs and status rows.
+Those projections now share the public RGX/upstream boundary; the historical
+output baseline and non-blocking runtime program remain unchanged.
 Related: [[rust-ci-pgen-missing-input-rebuilds]], [[verification-cadence-policy]].

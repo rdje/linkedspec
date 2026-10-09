@@ -42,6 +42,6 @@ full private Phase0, typed/raw output, mapping and independent canonical admissi
 remain open. Current public book behavior and the quoted-first replacement defect
 are unchanged by planning.
 
-Before framework implementation, P1 `RUST-DEPENDENCY-WARNING-ZERO.8` corrects contrary current
-Rust warning roadmap projections. It requires no dependency build or implementation
-access; afterward PNT returns to the first factory framework owner.
+Projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` now aligns the current Rust warning
+roadmaps with the adopted public RGX/upstream boundary. The first factory framework
+owner is next; no dependency build or implementation access was needed.

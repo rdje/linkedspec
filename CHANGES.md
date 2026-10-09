@@ -12,6 +12,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Align Rust warning roadmaps with the adopted RGX boundary
+
+Current Rust warning paragraphs and status rows in both roadmaps now follow the adopted RGX public-interface boundary. RGX owns transitive preparation and dependency repairs; LinkedSpec owns public reproduction/reporting, upstream-result verification and its own fixes. Historical output counts remain qualified and runtime warning follow-up stays non-blocking. Architecture and the public book already agree. No executable, dependency, pin or build change; factory framework PERL-PRIVATE-FACTORY-CAPTURE.1 is next.
+
+
 ## 2026-10-10 — Split actual factory capture into bounded owners
 
 The existing actual factory/dependency protocol is routed into linked bounded PERL-PRIVATE-FACTORY-CAPTURE implementation owners. Existing stable IDs and consumers remain unchanged; no production, public behavior, task partition/schema/capacity or admission change. Current self-containment roadmap status is aligned. P1 RUST-DEPENDENCY-WARNING-ZERO.8 owns contrary Rust warning roadmap projections and is next before framework implementation.

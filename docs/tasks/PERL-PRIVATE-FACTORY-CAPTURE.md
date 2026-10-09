@@ -115,7 +115,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.1` | `pending` | Private framework after the P1 roadmap projection correction, before any factory/pipeline activation. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.1` | `pending` | Private framework after completed projection repair RUST-DEPENDENCY-WARNING-ZERO.8, before any factory/pipeline activation. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.2` | `pending` | Depends on the preceding bounded owner. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
@@ -140,7 +140,7 @@ Phase0/consumer acceptance; mapped replacement and independent canonical admissi
 
 ## Blockers
 
-P1 roadmap projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` is the immediate next clean-boundary prerequisite. It preserves the adopted dependency black-box boundary and requires no build or external access.
+Projection repair `RUST-DEPENDENCY-WARNING-ZERO.8` is complete. No factory implementation blocker is known.
 
 Exact implementation details and any necessary finer function-family splits belong to the next owner
 before its production writes. Artifact recovery/purge remains prohibited pending SESSION-STARTUP-READING.7.

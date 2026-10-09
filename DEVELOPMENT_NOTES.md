@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Treat canonical dependency ownership as authoritative over stale projections
+
+The canonical warning task and Knowledge card already restricted dependency work to RGX public interfaces and upstream-owned repair. Stale roadmap projections still described internal generator repairs and nested pin integration. RUST-DEPENDENCY-WARNING-ZERO.8 corrects those current projections and their handoff pointers without remeasuring the historical warning output or changing policy/build behavior. Factory capture resumes from its separately owned first framework leaf.
+
 ## 2026-10-10 — Keep factory identity, dependency context and publication separate
 
 The proposed private framework will register actual built-in CODE references within the current source/producer invocation and isolate every injected dependency call. Scalar calls can use the existing packet capture; list/void calls must preserve native context under publication-disabled boundaries. Public dependency maps and callback fields retain actual references; a private thunk must forward aliases and actual callback identity. Trusted later builders explicitly compose retained child captures. This planning slice changes no behavior; linked owners avoid migrating existing task IDs or consumers. The discovered contrary roadmap warning policy has a separate immediate P1 correction owner.

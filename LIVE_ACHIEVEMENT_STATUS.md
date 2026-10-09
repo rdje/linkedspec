@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: bounded factory/dependency implementation plan complete; immediate policy-projection correction before framework work.
+Full PNT: dependency roadmap projection repair complete; private factory framework is next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` — The existing actual factory/dependency protocol is routed into linked bounded PERL-PRIVATE-FACTORY-CAPTURE implementation owners. Existing stable IDs and consumers remain unchanged; no production, public behavior, task partition/schema/capacity or admission change. Current self-containment roadmap status is aligned. P1 RUST-DEPENDENCY-WARNING-ZERO.8 owns contrary Rust warning roadmap projections and is next before framework implementation.
+`RUST-DEPENDENCY-WARNING-ZERO.8` — Current Rust warning paragraphs and status rows in both roadmaps now follow the adopted RGX public-interface boundary. RGX owns transitive preparation and dependency repairs; LinkedSpec owns public reproduction/reporting, upstream-result verification and its own fixes. Historical output counts remain qualified and runtime warning follow-up stays non-blocking. Architecture and the public book already agree. No executable, dependency, pin or build change; factory framework PERL-PRIVATE-FACTORY-CAPTURE.1 is next.
 
 ## Next Action
 
-Activate `RUST-DEPENDENCY-WARNING-ZERO.8`; correct current Rust warning roadmaps to the already adopted RGX black-box boundary, commit, then activate `PERL-PRIVATE-FACTORY-CAPTURE.1`. No dependency build or external access is required.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.1` from this clean commit and implement the private actual-callback registration/dependency boundary framework. Preserve historical claim inputs before production writes; factory/output/mapping/full-private/canonical admission remain open.
 
 ## Recent Completions
 
+- `RUST-DEPENDENCY-WARNING-ZERO.8` — stale roadmap permissions corrected; RGX public/upstream boundary preserved; factory framework next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` — linked bounded factory owners; current roadmap aligned; P1 policy projection correction next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` — independent140/10; actual8 events/64 joins; consumers16/135; evidence4/book57/2.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — original grants185/17; consumers15/134; lifetime RED1/GREEN; evidence5/book57/2.
@@ -29,7 +30,6 @@ Activate `RUST-DEPENDENCY-WARNING-ZERO.8`; correct current Rust warning roadmaps
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — historical recovery/selection status reconciled with current foundation.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — private foundation62/16; actual producer integration remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
 
 ## History
 

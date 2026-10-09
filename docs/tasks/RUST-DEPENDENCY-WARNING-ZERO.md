@@ -30,7 +30,8 @@ all contrary historical plans. No dependency implementation assumptions are reta
   reduced canonical coverage.
 - Do not change `.spec` language semantics, parser behavior, runtime results, generated-state formats, or backend
   capability claims merely to silence diagnostics.
-- Do not make this non-blocking hygiene program preempt the active Lua `map_leaves!` parity frontier.
+- Keep the runtime warning program non-blocking behind the active producer-bound residual repair frontier.
+  Leaf `.8` corrects documentation of the already adopted dependency boundary before that work resumes.
 
 ## Acceptance Criteria
 
@@ -80,18 +81,21 @@ all contrary historical plans. No dependency implementation assumptions are reta
   Commit: `RUST-DEPENDENCY-WARNING-ZERO.0 - own Rust warning cleanup`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.8`
-  Status: `pending`
-  Priority: P1; next clean boundary after the current factory planning leaf, before factory implementation.
+  Status: `done` / `focused-signoff-complete` (activated from clean `f7a20b60f72c7132e1ff1bf1292b90c59df32c6a`)
+  Priority: P1; corrected at the clean factory-planning handoff before factory implementation.
   Goal: Correct maintained roadmap projections that still authorize dependency implementation repairs and pin changes despite the adopted black-box boundary.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
   Owned paths: Current Rust warning status paragraphs/rows in ROADMAP.md and ROADMAP_V2.md; task/index, a bounded Knowledge correction and continuity only. No Rust, submodule, dependency pin, build or policy-rule changes.
   Reproduction: Both roadmaps still describe authored/generator dependency repairs and explicit nested pin integration. The canonical warning task and rust-dependency-warning-baseline Knowledge card already restrict work to RGX public-interface observation, upstream-owned repair/reporting and LinkedSpec-owned fixes. Read-only current prose exposes the contradiction; no dependency implementation inspection is required or authorized.
   Impact: A future agent could mistake stale roadmap prose for permission to cross the submodule or repository boundary.
-  Planned tier: `focused`
-  Planned focused proof: Exact current projection review against AGENTS.md and the canonical warning task/Knowledge; preserved historical evidence, no executable/pin changes; memory/Knowledge/history/claim/diff and normal doctrines. No warning census or dependency build is needed.
-  Planned canonical boundary: none for correcting projections of an existing directive; no new rule, infrastructure or dependency change.
-  Planned claim record: none: The correction publishes no new quantitative or runtime measurement.
+  Verification tier: `focused`
+  Focused checks: Exact current projection review against AGENTS.md and the canonical warning task/Knowledge; preserved historical evidence, no executable/pin changes; memory/Knowledge/history/claim/diff and normal doctrines. No warning census or dependency build is needed.
+  Canonical trigger: none for correcting projections of an existing directive; no new rule, infrastructure or dependency change.
+  Claim verification: none: The correction publishes no new quantitative or runtime measurement.
   Acceptance: All current Rust warning roadmap projections agree with the adopted public RGX interface/upstream ownership boundary. Preserve the existing historical output baseline and warning program IDs; keep its runtime census non-blocking. Commit the small correction and return to PERL-PRIVATE-FACTORY-CAPTURE.1.
+  Signoff evidence: Reviewed both current roadmap status paragraphs/rows against the canonical task, Knowledge card and director boundary. Replaced internal repair/generator/pin permissions with RGX public observation, upstream-owned reports/results and LinkedSpec-owned fixes. Historical output counts remain explicitly dated, without causal or fresh-build claims. Architecture and book already agree and stay unchanged. Task/index and factory handoff pointers are aligned; bounded history, Knowledge, memory, whitespace and ordinary doctrine checks govern this documentation-only commit. No executable, submodule, pin or build change.
+  Verification: `focused-signoff-complete`
+  Commit: `RUST-DEPENDENCY-WARNING-ZERO.8 - align warning roadmaps with RGX boundary`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.1`
   Status: `pending`
@@ -167,8 +171,7 @@ all contrary historical plans. No dependency implementation assumptions are reta
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.8` | `pending` / P1 projection correction | Next clean boundary after current factory planning; no dependency build or implementation work. |
-| 2 | `.1` | `pending` / non-blocking | Public warning-output census precedes upstream reporting, after explicit future activation. |
+| 1 | `.1` | `pending` / non-blocking | Public warning-output census precedes upstream reporting when a documented build is warranted. Current PNT returns to PERL-PRIVATE-FACTORY-CAPTURE.1 after completed `.8`. |
 
 ## Baseline Evidence
 
@@ -197,12 +200,14 @@ all contrary historical plans. No dependency implementation assumptions are reta
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-09-04` | `.0` | Git-boundary inspection; task metadata 1,732 IDs; Knowledge 935/7,942; Memory 59; history 49; README routing 20/62/32; rendered mdBook 82 files; memory/doctrine/whitespace checks | `PASS` — durable non-blocking ownership; no executable or pin movement; return to Lua `.19.6.2` |
+| `2026-10-10` | `.8` | Current roadmap/task/Knowledge/architecture/book boundary review; focused continuity checks and ordinary commit doctrines | `PASS` — documentation projection repair; no fresh build/measurement, executable or pin movement; return to factory framework `.1` |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.0` | `RUST-DEPENDENCY-WARNING-ZERO.0 - own Rust warning cleanup` | Prepared from clean `7ed47a0a`; no push |
+| `.8` | `RUST-DEPENDENCY-WARNING-ZERO.8 - align warning roadmaps with RGX boundary` | Clean factory-planning handoff; no build/pin/executable changes |
 
 ## Changelog
 
@@ -210,4 +215,4 @@ all contrary historical plans. No dependency implementation assumptions are reta
   dependency warning stream; implementation remains non-blocking behind current Lua parity.
 - `2026-09-04`: Intake `.0` focused-signoff-complete; `.1` remains durably queued and PNT returns to Lua `.19.6.2`.
 
-- `2026-10-10`: Factory planning discovers stale contrary roadmap projections. P1 `.8` owns their next-clean-boundary correction before factory implementation; the warning runtime program remains non-blocking.
+- `2026-10-10`: P1 `.8` corrects stale roadmap projections at the clean factory-planning handoff. Current paragraphs/rows share the RGX public/upstream boundary; the warning runtime program remains non-blocking and factory framework `.1` resumes next.
