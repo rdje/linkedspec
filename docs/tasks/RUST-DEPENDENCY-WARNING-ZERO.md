@@ -11,7 +11,7 @@ internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 - Status: `proposed` / non-blocking; intake `.0` focused-signoff-complete
 - Roadmap lane: `Repository quality / Rust dependency and generated-source hygiene`
 - Created: `2026-09-04`
-- Last updated: `2026-09-20`
+- Last updated: `2026-10-10`
 - Owner: repo-local workflow
 
 ## Goal
@@ -49,7 +49,7 @@ all contrary historical plans. No dependency implementation assumptions are reta
 - ID: `RUST-DEPENDENCY-WARNING-ZERO`
   Status: `proposed` / non-blocking
   Goal: Eliminate warning noise from every maintained Rust dependency and generated-source build used by LinkedSpec.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.0`
   Status: `done` / `focused-signoff-complete` (activated 2026-09-04 from exact clean Lua write-vivification
@@ -78,6 +78,20 @@ all contrary historical plans. No dependency implementation assumptions are reta
     dependency pin, generator, generated artifact, CI behavior, or runtime semantics changed.
   Verification: `focused-signoff-complete`
   Commit: `RUST-DEPENDENCY-WARNING-ZERO.0 - own Rust warning cleanup`
+
+- ID: `RUST-DEPENDENCY-WARNING-ZERO.8`
+  Status: `pending`
+  Priority: P1; next clean boundary after the current factory planning leaf, before factory implementation.
+  Goal: Correct maintained roadmap projections that still authorize dependency implementation repairs and pin changes despite the adopted black-box boundary.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
+  Owned paths: Current Rust warning status paragraphs/rows in ROADMAP.md and ROADMAP_V2.md; task/index, a bounded Knowledge correction and continuity only. No Rust, submodule, dependency pin, build or policy-rule changes.
+  Reproduction: Both roadmaps still describe authored/generator dependency repairs and explicit nested pin integration. The canonical warning task and rust-dependency-warning-baseline Knowledge card already restrict work to RGX public-interface observation, upstream-owned repair/reporting and LinkedSpec-owned fixes. Read-only current prose exposes the contradiction; no dependency implementation inspection is required or authorized.
+  Impact: A future agent could mistake stale roadmap prose for permission to cross the submodule or repository boundary.
+  Planned tier: `focused`
+  Planned focused proof: Exact current projection review against AGENTS.md and the canonical warning task/Knowledge; preserved historical evidence, no executable/pin changes; memory/Knowledge/history/claim/diff and normal doctrines. No warning census or dependency build is needed.
+  Planned canonical boundary: none for correcting projections of an existing directive; no new rule, infrastructure or dependency change.
+  Planned claim record: none: The correction publishes no new quantitative or runtime measurement.
+  Acceptance: All current Rust warning roadmap projections agree with the adopted public RGX interface/upstream ownership boundary. Preserve the existing historical output baseline and warning program IDs; keep its runtime census non-blocking. Commit the small correction and return to PERL-PRIVATE-FACTORY-CAPTURE.1.
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.1`
   Status: `pending`
@@ -153,7 +167,8 @@ all contrary historical plans. No dependency implementation assumptions are reta
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.1` | `pending` / non-blocking | Public warning-output census precedes upstream reporting, after explicit future activation. |
+| 1 | `.8` | `pending` / P1 projection correction | Next clean boundary after current factory planning; no dependency build or implementation work. |
+| 2 | `.1` | `pending` / non-blocking | Public warning-output census precedes upstream reporting, after explicit future activation. |
 
 ## Baseline Evidence
 
@@ -194,3 +209,5 @@ all contrary historical plans. No dependency implementation assumptions are reta
 - `2026-09-04`: Created from the director-requested durable ownership of the repeatedly reproduced canonical Rust
   dependency warning stream; implementation remains non-blocking behind current Lua parity.
 - `2026-09-04`: Intake `.0` focused-signoff-complete; `.1` remains durably queued and PNT returns to Lua `.19.6.2`.
+
+- `2026-10-10`: Factory planning discovers stale contrary roadmap projections. P1 `.8` owns their next-clean-boundary correction before factory implementation; the warning runtime program remains non-blocking.

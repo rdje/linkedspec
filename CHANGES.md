@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Split actual factory capture into bounded owners
+
+The existing actual factory/dependency protocol is routed into linked bounded PERL-PRIVATE-FACTORY-CAPTURE implementation owners. Existing stable IDs and consumers remain unchanged; no production, public behavior, task partition/schema/capacity or admission change. Current self-containment roadmap status is aligned. P1 RUST-DEPENDENCY-WARNING-ZERO.8 owns contrary Rust warning roadmap projections and is next before framework implementation.
+
 ## 2026-10-10 — Independently accept composed original input grants
 
 Independent input composition passes 140 assertions and ten effective semantic source faults across four lexical cases, eight actual executable events and 64 selected frame joins. Sixteen direct suites in 135 immutable supplied files, four reason-sensitive reviewer REDs and the complete 57-source book with two actual controls pass. All 287 original input-join bindings are preserved at 4f0499d26; production bytes are unchanged. The authored nested segment oracle follows actual compiler events through AST, MethodExpr, CSV and fresh AST captures. Deep copying and consumption retain occurrence identity; delayed ancestor/shape changes revoke descendants. Factory/dependency integration is next; complete private Phase0 and mapped/canonical admission remain open.

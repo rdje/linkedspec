@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Keep factory identity, dependency context and publication separate
+
+The proposed private framework will register actual built-in CODE references within the current source/producer invocation and isolate every injected dependency call. Scalar calls can use the existing packet capture; list/void calls must preserve native context under publication-disabled boundaries. Public dependency maps and callback fields retain actual references; a private thunk must forward aliases and actual callback identity. Trusted later builders explicitly compose retained child captures. This planning slice changes no behavior; linked owners avoid migrating existing task IDs or consumers. The discovered contrary roadmap warning policy has a separate immediate P1 correction owner.
+
 ## 2026-10-10 — Accept input joins through independent source and effect ledgers
 
 The composed acceptance builds labelled segments before parsing and never reads public spans or searches for occurrences. Actual repeated executable events traverse eight native/event joins apiece, with separate per-character copy and exact-child consume ledgers. Native-versus-joined callbacks and delayed parent mutation distinguish identity/effect errors. Independent input composition passes 140 assertions and ten effective semantic source faults across four lexical cases, eight actual executable events and 64 selected frame joins. Sixteen direct suites in 135 immutable supplied files, four reason-sensitive reviewer REDs and the complete 57-source book with two actual controls pass. All 287 original input-join bindings are preserved at 4f0499d26; production bytes are unchanged.

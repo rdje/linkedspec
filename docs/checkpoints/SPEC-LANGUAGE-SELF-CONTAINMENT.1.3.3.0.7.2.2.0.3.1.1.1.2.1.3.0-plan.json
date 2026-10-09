@@ -1,0 +1,81 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0",
+  "activation_commit": "541e1169ed51c4fa0814f26e1682cedcd137151f",
+  "status": "planned; no production changes or new runtime measurements",
+  "parent": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3",
+  "implementation_tree": "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+  "canonical_protocol": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0-plan.json",
+  "current_authorities": [
+    "docs/knowledge/perl-private-emission-foundation.md",
+    "docs/knowledge/perl-private-input-authority-selection.md",
+    "docs/knowledge/perl-original-event-input-grants.md",
+    "docs/knowledge/perl-input-composition-acceptance.md",
+    "docs/knowledge/ownerdispatch-shared-seam.md"
+  ],
+  "decision": "Keep existing stable IDs and current task consumers intact; place new bounded factory/dependency implementation owners in a linked dedicated task-tree. This is a new work owner, not a partition/migration or capacity extension.",
+  "private_runtime_protocol": {
+    "registration": "Add invocation-local registration of actual CODE references to the existing producer scope. Registration requires that actual SourceOrigins token and producer scope; retain strong references only until scope exit. Neither callback names, copied public contract/rule metadata nor equal values register anything. Existing explicit standalone producer-list scopes retain their behavior.",
+    "dependency": "Every injected dependency call gets a separate private capture boundary. Scalar calls use the actual callback through the existing scalar capture primitive; preserve the ordinary actual value and error channel. List/void calls preserve their existing context and aliases under an isolated publication-disabled boundary, because the current packet protocol accepts scalar strings only. Do not coerce list/void calls into scalar capture.",
+    "binding": "An optional private lexical thunk may call the boundary with the retained actual callback; it must not replace fields in caller-provided dependency maps or public default_deps results. Never clone/rebind a passed dependency/context map merely to install wrappers. If a private binding cannot prove these identities, instrument its actual call site.",
+    "known": "Register fresh actual built-in contract lower callbacks at their own factory return. For dependency factories, only exact actual built-in callback references may register; a custom target or callback with the same public name stays opaque. Preserve public callback fields and ordinary contracts/rules. Retaining an already registered actual callback selects only that callback in its own scope; copied metadata itself grants nothing.",
+    "composition": "A scalar invocation boundary does not implicitly transfer a child publication into its parent. Later trusted output builders must retain the actual child capture and explicitly compose its packet, using the existing identity getter. No output-text lookup, equal-value cache or raw search.",
+    "activation": "After individual owners are verified, nest producer and input scopes inside the existing SourceOrigins invocation before factories run. Capture each actual canonical apply callback in scalar context without changing its public reference, arguments, event/context identity, family order, text replacement behavior or diagnostics."
+  },
+  "implementation_order": [
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.1",
+      "owner": "SourceEmissions.pm",
+      "work": "Private registration/dependency boundary framework and native differential lifecycle/context/alias/error proof; no production factory or pipeline activation.",
+      "prerequisite": "RUST-DEPENDENCY-WARNING-ZERO.8"
+    },
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.2",
+      "owner": "Contracts.pm",
+      "work": "Actual built-in contract lower registration plus separate injected dependency calls. Reuse the canonical input_slice opaque-delegation diagnosis; prove current factory behavior without changing public maps/callback fields."
+    },
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.3",
+      "owner": "MethodLowering.pm",
+      "work": "Actual default native callback registration and injected method/value dependency boundaries. Split by function families before writes if this owner exceeds a safe slice."
+    },
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.4",
+      "owner": "FlowExpr.pm",
+      "work": "Actual default callbacks and flow-composite injected dependency boundaries, preserving native effects and arguments."
+    },
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.5",
+      "owner": "ControlFlow.pm",
+      "work": "Actual default callbacks and control-flow injected dependency boundaries, including nested success/fatal restoration. Split by branch families before writes if necessary."
+    },
+    {
+      "id": "PERL-PRIVATE-FACTORY-CAPTURE.6",
+      "owner": "RewritePipeline.pm",
+      "work": "Invocation-local scope activation before contract factories, separate factory dependencies and actual canonical apply captures; preserve current replacement algorithm and all public shapes/order."
+    }
+  ],
+  "proof_requirements": [
+    "Actual callback identities and public maps/context references, scalar/list/void differential observations where applicable, first/extra argument aliases and once-only effects.",
+    "Actual original SourceOrigins tokens, nested same-source/producer/input scopes, successful error-channel and fatal object identity, and scope-release/lifetime controls.",
+    "Actual known factory callback versus opaque dependency that calls a producer and returns an equal value; no inherited outer publication.",
+    "Complete selected supplied consumer capsule including all reader artifacts, exact original/new input populations and full actual channels.",
+    "Syntax-valid semantic source inverses with complete coherent TAP and reason-sensitive reviewer corruption controls. Do not use syntax/crash/absent-interface controls as semantic falsification.",
+    "Preserve historical claim boundaries before changing their instruments/inputs. Book teaches current implementation only; focused checks and normal doctrines govern each ordinary leaf."
+  ],
+  "handoff": {
+    "independent_composition": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4",
+    "private_complete_phase0": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.5",
+    "mapped_replacement": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.2",
+    "independent_canonical": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.2",
+    "immediate_projection_correction": "RUST-DEPENDENCY-WARNING-ZERO.8"
+  },
+  "limits": [
+    "No public node/event/contract/dependency provenance fields or changed public callback references.",
+    "No registration by name, copied metadata, output equality or occurrence queues.",
+    "No source mapping, typed/raw output construction, blanket consumption/overlap waiver or family-order change.",
+    "No submodule/dependency implementation inspection, pin change or other-repository write.",
+    "All project scratch/outputs remain repository-volume rooted. Existing wrapper recovery/purge prohibition remains active.",
+    "No separate parent or factory admission is claimed by planning or individual implementation leaves; original complete private and canonical owners remain open.",
+    "Before framework implementation, correct the separately owned current Rust warning roadmap projections at RUST-DEPENDENCY-WARNING-ZERO.8; then resume this tree."
+  ]
+}

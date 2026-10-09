@@ -4122,7 +4122,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Publication correction: Focused change-history check rejected a misplaced new record selected by an unanchored inline heading match. Exact failed CHANGES snapshot and explicitly limited transcribed output retained; original preamble/records reconstruct byte-identically before anchored insertion. Corrected checks rerun before landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Known producer/dependency invocation ownership at actual factory seams; preserve ordinary custom callbacks and nested error behavior.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`
   Planned tier: `focused`
@@ -4131,10 +4131,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Planned claim record: none: Planning only; actual implementation declares its own measured claim before results.
   Acceptance: Follow the committed .0 source-bound selection and preserve the original six-slice obligations; split further before writes if an actual owner set grows beyond a safe slice.
 
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`; linked implementation root `PERL-PRIVATE-FACTORY-CAPTURE` in `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
+  Status: `done`
+  Goal: Route the selected actual factory/dependency capture protocol into bounded implementation owners before production writes.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`
+  Owned paths: Existing task parent and a linked dedicated factory-capture task-tree; retained plan, Knowledge routing card, task index, relevant roadmap alignment, separately scheduled policy-projection defect intake and continuity. No production or public behavior change.
+  Verification tier: `focused`
+  Focused checks: Review selected canonical protocol/current private callback and factory interfaces; task/plan/continuity and unchanged public book alignment; memory, Knowledge, bounded histories, claim/diff and all normal doctrines. No redundant runtime remeasurement.
+  Canonical trigger: none for planning/routing only under existing bounded task collection rules; no schema, mechanical consumer, capacity or parent admission change.
+  Claim verification: none: This slice routes the already verified protocol into bounded owners and publishes no new runtime or quantitative measurement.
+  Acceptance: Preserve all existing stable task IDs and six-slice obligations, actual callback references and public shapes. Select invocation-local built-in registration and separate capture at injected dependency seams without names/equal text granting authority. Record first implementation leaf, owner sequence, native context/alias/effect/error and opaque-delegation proof requirements, and return to existing independent composition/full-private/mapped/canonical owners.
+  Activation: Clean 541e1169ed51c4fa0814f26e1682cedcd137151f; independent input-composition acceptance, all ten doctrines/post-pointer, clean Git and brief0 confirmed. Existing selected protocol/opaque-dependency Knowledge and actual SourceEmissions, Contracts, RewritePipeline and dependency-factory interfaces reviewed. No new behavior is inferred from this planning read.
+
+  Result: Existing selected factory/dependency protocol now has bounded linked implementation owners under `PERL-PRIVATE-FACTORY-CAPTURE`. Existing stable IDs and machine consumers stay in place; no partition/schema/capacity change. Invocation-local actual registration and separate scalar/list/void dependency boundaries are proposed, not implemented. Public maps/callback fields and explicit child composition remain mandatory.
+  LinkedSpec-tool evidence: Reviewed current SourceEmissions producer/capture/getter interfaces, actual Contracts factory and input_slice dependency seam, RewritePipeline source/apply seams and default owner dependency factories against the already retained opaque-delegation diagnosis. No new behavior or runtime population is rederived. Current public ActionIR book correctly describes accepted input composition and pending factory/output work; it needs no semantic change for this internal routing plan.
+  Verification: Task/plan/Knowledge/roadmap/continuity alignment, original stable-ID preservation, no production/book/pin changes, bounded histories, memory/Knowledge/claim/diff and normal doctrines gate this planning commit. Full private Phase0/mapped/canonical obligations remain with original owners.
+  Owned finding: Current Rust warning roadmap projections still propose internal dependency repairs and pin integration contrary to their already corrected canonical task/Knowledge. P1 `RUST-DEPENDENCY-WARNING-ZERO.8` records exact contradictory phrases and is next after this clean planning commit, before `PERL-PRIVATE-FACTORY-CAPTURE.1`; no dependency access/build/write is needed. Current self-containment roadmap prose also retains an obsolete unscheduled frontier and is aligned in this planning leaf.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0 - split factory capture implementation owners` (Git records identity).
+
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4`
   Status: `pending`
   Goal: Independent composed input/identity acceptance before typed value emission integration.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.6`
   Planned tier: `focused`
   Planned focused proof: Actual object/callback/invocation identities and independent original occurrence/fragment controls; unchanged direct consumers, public shapes/context/errors/family order; normal focused doctrine/claim/Knowledge/history checks.
   Planned canonical boundary: None for private bounded implementation; complete private Phase0 and independent mapped/public admission remain separately owned.
@@ -4535,7 +4555,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `done` | Three historical gaps qualified; complete133-file/fourteen-suite/book57 recurrence. |
 | 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `done` | Three scalars;220 preserved files; production12/16 and evidence3; canonical receipt governs landing. |
 | 43.4.2.0.3.1.1.1.2.1.2.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` | `done` | Original replay RED; first publication and eight no-write refusals; historical254. |
-| 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
+| 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `active` | Linked bounded PERL-PRIVATE-FACTORY-CAPTURE owners; no factory admission yet. |
+| 43.4.2.0.3.1.1.1.2.1.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` | `done` | Bounded owner plan; P1 roadmap projection correction next, then framework. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |
 | 43.4.2.0.3.1.1.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3` | `pending` | Statement/control/raw emission construction. |
