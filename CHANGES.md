@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4 order empty AST source intervals
+
+Limits trailing trim to the characters remaining after leading trim. Empty/whitespace-only expression and statement facade spans are ordered at the after-leading anchor; nonempty public text/intervals and native inputs stay exact. Same65-assertion fixture reproduces18 semantic failures on e0eb with47 controls passing, then final65 GREEN; four effective source inverses, twelve direct suites, three unchanged Toolbox routes and eight evidence controls pass. Only Parser production changes,241 prior native bindings are historical at e0eb, and book/Knowledge/continuity align. Original-event joining and full mapped/canonical admission remain open.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 retain native AST input frames
 
 Adds standalone parser-relative root trims and actual CSV-child occurrence frames for ordinary calls and array literals. Explicit parent/payload offsets preserve repeated/Unicode/CRLF/empty-slot positions independently of public base_start and raw-piece searches; copied/changed/foreign/manual/scoped roots and unsupported descendants decline. Native63 assertions/11 source inverses, constructor77 within eleven direct suites, three actual Toolbox routes and eight evidence controls pass. Original250 constructor bindings remain historical at0d52. Actual original/live AST probes also expose three inverted whitespace-only public spans per route; narrow trim intervention proves the pre-existing cause. P1 .2.1.2.4 repairs it immediately next; public behavior remains unchanged here, and native empty frames are independently ordered. Book, syntax and focused continuity workflow complete; compiler-event joining/copy/consume and full admission stay open.

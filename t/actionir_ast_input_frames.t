@@ -144,8 +144,8 @@ scope(sub {
  is($error, 'input-caller-error', 'input capture preserves successful caller error');
 });
 
-# Public all-whitespace spans have a separately owned existing defect. Native
-# frame expectations use the actual leading trim, including a zero-width result.
+# Native frame expectations use the actual leading trim independently of the
+# public base, including an ordered zero-width result for all-whitespace input.
 for my $source ('', '  ', "\r\n", " \r\n\t\x{2003}") {
  my $ordinary = $parse->($source, {base_start => 7});
  scope(sub {

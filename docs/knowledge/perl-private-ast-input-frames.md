@@ -10,7 +10,7 @@ answers:
 date: 2026-10-09
 status: native descriptive root/call/array frames verified; compiler-event joining open
 tags: [perl, actionir, ast, csv, source-provenance, identity]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 verifies63 assertions/11 semantic source inverses,11 guarded consumers,3 actual Toolbox routes and8 evidence controls. A separate original/live public whitespace-span defect is owned next in .2.1.2.4."
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 verifies63 assertions/11 semantic source inverses,11 guarded consumers,3 actual Toolbox routes and8 evidence controls. The separate original/live public whitespace-span defect is resolved in .2.1.2.4 with65 assertions/four source inverses."
 reverify:
   - "PERL5LIB= prove -v -Iperl t/actionir_ast_input_frames.t t/actionir_ast_constructions.t"
   - "Exact original supplied inputs, actual captures and source inverses live under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0-* and its claim; complete Phase0/source-event admission is not established."
@@ -50,5 +50,7 @@ still be joined under `.2.1.2.1-.3` in
 `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md`. Original-event copy/consumption,
 factory/dependency capture, typed output producers, mapping and complete
 Phase0/canonical admission remain open. The observed whitespace-only public span
-defect is `docs/knowledge/perl-empty-ast-trim-span.md`; native empty frames already
-retain ordered zero-width intervals independently of that public defect.
+defect is resolved by .2.1.2.4; see `docs/knowledge/perl-empty-ast-trim-span.md`.
+Native empty frames retain ordered zero-width intervals independently of the public
+base. The .0 compatibility statements above describe its historical boundary; the
+subsequent bounded public repair limits trailing trim after leading whitespace.

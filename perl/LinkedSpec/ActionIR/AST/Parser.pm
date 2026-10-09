@@ -240,6 +240,8 @@ sub _trim_with_offsets {
  if ($text =~ /(\s+)\z/s) {
   $trailing = length($1);
  }
+ my $remaining = length($text) - $leading;
+ $trailing = $remaining if $trailing > $remaining;
  my $start = $base_start + $leading;
  my $end = $base_start + length($text) - $trailing;
  my $trimmed = substr($text, $leading, length($text) - $leading - $trailing);

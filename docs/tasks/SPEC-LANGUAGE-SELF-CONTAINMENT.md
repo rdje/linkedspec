@@ -4002,17 +4002,26 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Verify actual population and source provenance at each frame/identity join, aliases/context/effects/opaque/nested exceptions, copied/equal/foreign inputs and independent character/occurrence/copy/consume oracles. Keep original six-slice producer/Phase0/mapping/canonical obligations open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Repair the observed inverted public AST interval for whitespace-only expressions before input joining proceeds.
   Priority: P1; reproducible public source-span invariant violation, scheduled immediately after .0 at the next clean boundary.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`
   Reproduction: Actual `LinkedSpec::ActionIR::AST::parse_action_expr(q{  }, {base_start => 7})` returns empty raw_perl with `{start => 9, end => 7}`. .0 owns the original-revision and exact trim-helper intervention diagnosis before this repair. Source interval is reversed; native input frames must not borrow it.
   Owned paths: AST/Parser.pm::_trim_with_offsets, focused empty/whitespace-root regression and direct dependents, exact baseline/intervention/final/source-inverse/claim artifacts, Knowledge/book/continuity.
-  Planned tier: `focused`
-  Planned focused proof: Independent Unicode/CRLF/whitespace trims and nonzero bases; actual public AST and private native frames; baseline observed RED and exact correction/source inverse; direct consumers, public book and ordinary focused doctrine checks. Preserve all nonempty parser behavior and callback/error/context contracts.
-  Planned canonical boundary: none for an ordinary invariant bug fix within the existing AST shape; escalate before writes if a public/generated contract or mechanical owner changes. Complete Phase0/mapped/canonical acceptance remains open.
-  Planned claim record: none: Pending repair; the source-bound observed defect/intervention belongs to .0, final repair declares its own actual record.
+  Verification tier: `focused`
+  Focused checks: Independent Unicode/CRLF/whitespace trims and nonzero bases; actual public AST and private native frames; baseline observed RED and exact correction/source inverse; direct consumers, public book and ordinary focused doctrine checks. Preserve all nonempty parser behavior and callback/error/context contracts.
+  Canonical trigger: none for an ordinary invariant bug fix within the existing AST shape; escalate before writes if a public/generated contract or mechanical owner changes. Complete Phase0/mapped/canonical acceptance remains open.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4.json`
   Acceptance: Empty/whitespace-only nodes have an ordered zero-width interval after original leading whitespace at the requested base; nonempty intervals remain exact. Close with actual RED/GREEN and distinguishing inverse; do not merely log or defer this defect.
+
+  Activation: Clean e0ebc8d24e6b473c74ad246873402ba9dcd7a3e3; native63/11, eleven consumers, three Toolbox routes/eight evidence controls and all ten hooks/post-commit pointer PASS; brief0 and clean Git confirmed. Original/live trim producer diagnosis and canonical empty-span/native-frame Knowledge reviewed.
+  Bounded fix: Limit trailing trim to the characters remaining after leading trim, retaining the existing start anchor. Public expression/statement zero-width intervals must agree with independent after-leading positions; preserve original nonempty text/intervals and all native-frame/constructor/callback/source-event boundaries.
+
+  Result: Same supplied65-assertion fixture observes original18 semantic public-span failures with47 native/nonempty controls passing, then final65 GREEN. Two-line trailing clamp after leading trim produces ordered after-leading zero-width intervals for both public facade routes; nonempty and native spans stay exact.
+  Verification: Four effective source inverses, twelve guarded live direct suites, three unchanged actual Toolbox routes and eight reason-sensitive evidence RED controls PASS. Exact original116-source closure and only Parser production replacement verified;241 prior native-claim bindings preserved historically at e0eb by mode/revision only. Syntax/book/memory/Knowledge/claim/history/diff and ten normal doctrines required before landing. No complete Phase0/mapped/canonical admission is claimed.
+  Orchestration correction: Standalone claim check overlapped staging and returned the known mixed-index missing-declaration failure. Transcribed result and original-snapshot/channel limits retained under -overlap-attempt.json; canonical claim-verification-index-snapshot card updated. Complete candidate is staged before the normal composed hook check and its index remains stable.
+  Resolution: P1 empty public-span defect fixed and verified; historical .0 diagnosis remains unchanged. Further MethodExpr capture .1 is the next eligible leaf.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4 - order empty AST source intervals` (Git records identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4424,7 +4433,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` | `pending` | Actual MethodExpr input capture/effects. |
 | 43.4.2.0.3.1.1.1.2.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` | `pending` | Original-event join and copy/consume. |
 | 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
-| 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `pending` | P1 whitespace-only public span repair, next after .0. |
+| 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

@@ -71,6 +71,7 @@ open. This update preserves the historical diagnosis and its original bindings.
 
 Native parser-relative root/call/array frames now have their own bounded proof
 under `.2.1.2.0`; `docs/knowledge/perl-private-ast-input-frames.md` owns current
-behavior. The newly observed original whitespace-only public AST span defect is
-P1 `.2.1.2.4`, scheduled next at the clean boundary before MethodExpr/event joining.
+behavior. The original whitespace-only public AST span defect is resolved by `.2.1.2.4`;
+`docs/knowledge/perl-empty-ast-trim-span.md` owns the actual repair evidence.
+MethodExpr input captures `.2.1.2.1` are next before original-event joining.
 Native input coordinates do not yet grant compiler-event copy/consume authority.

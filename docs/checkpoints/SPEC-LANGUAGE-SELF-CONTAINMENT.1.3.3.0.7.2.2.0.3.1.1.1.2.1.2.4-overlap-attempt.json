@@ -1,0 +1,10 @@
+{
+  "route": "standalone bash scripts/check_claim_verification.sh",
+  "tool_chunk": "af87f3",
+  "exit_code": 1,
+  "observed_merged_output": "claim-verification: FAIL: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4: exactly one Claim verification declaration required\nclaim-verification: self-test PASS 3 positive / 16 rejected controls\n",
+  "classification": "Known orchestration input-stability contract violated: staging overlapped running checker. Not a production or stable-candidate failure.",
+  "limits": "Tool result transcribed; original index snapshot and separated raw channels were not captured. No exact mixed-boundary reconstruction claim.",
+  "repair": "Stage complete candidate first; keep index stable through the pre-commit composed gate.",
+  "canonical_home": "docs/knowledge/claim-verification-index-snapshot.md"
+}

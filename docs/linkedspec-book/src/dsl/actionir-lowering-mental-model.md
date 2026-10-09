@@ -940,12 +940,15 @@ may call a producer and then return an equal literal. Its ordinary value remains
 valid, but the enclosing callback must not inherit the nested publication. These
 original-event joining and dependency safeguards remain subsequent integration.
 
-There is an existing public AST limitation for whitespace-only expressions:
-`parse_action_expr(q{  }, {base_start => 7})` currently returns an empty raw node
-with the reversed public interval `{start => 9, end => 7}`. Native input frames
-instead retain the ordered zero-width parser-input interval `[2, 2)`. The public
-trim repair is the next owned change; the native-frame addition preserves current
-public results while keeping their descriptive coordinates separate.
+Whitespace-only expressions have an ordered zero-width interval after leading
+whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
+empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
+`[2, 2)`. An empty or undefined input at the same base gives `[7, 7)`.
+The statement parser uses the same rule. Leading and trailing trim cannot consume
+the same characters twice. Nonempty input retains its original trimmed interval,
+and whitespace inside a quoted literal remains part of the literal. This corrects
+the earlier reversed public interval while keeping parser-relative descriptions
+separate from compiler-event authority.
 
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.

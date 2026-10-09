@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Edge trims cannot consume the same characters twice
+
+The original whitespace-only interval inversion came from measuring the entire source as both leading and trailing whitespace. Retaining the existing start anchor while limiting trailing trim to length(source)-leading prevents overlap before substring/end calculation. Empty inputs remain zero-width at base, all-whitespace inputs become zero-width after leading whitespace, and nonempty bodies retain exact positions including Unicode/CRLF and literal internal spaces. Actual facade RED18/GREEN65 and four source inverses distinguish double trimming, wrong anchors, missing bases and body consumption. Native frames63 and construction77 recur within twelve suites; the earlier original/live diagnosis is retained historically. No compiler-event authority follows from corrected public coordinates.
+
 ## 2026-10-09 — Native input lineage must ignore public searches and unsupported roots
 
 Each actual expression parse has a private input root. Original trim and actual CSV flush frames carry only explicit relative offsets into that root; child source-root identity must match the returned AST root before a detached frame is described. Compatibility public offsets remain unchanged: an actual wrong _find_piece_offset intervention collapses twin public starts while private original positions remain distinct. Unsupported assignment/fluent descendants decline rather than borrowing a foreign native input root. The independent empty-input probe found a separate original public bug: _trim_with_offsets counts the complete whitespace input as both leading and trailing, returning an inverted interval. Original0d52 and live each reproduce three RED intervals; clamping only a reversed end corrects all four authored rows. Native frames already use ordered zero-width positions after leading whitespace. The P1 .2.1.2.4 fix is scheduled immediately next, with nonempty compatibility controls; no runtime impact beyond the public span invariant is inferred.

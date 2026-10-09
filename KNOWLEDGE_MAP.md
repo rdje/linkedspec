@@ -16882,11 +16882,11 @@ _Perl emptiness lowering treats quoted zero differently from a bound value and r
 - **source:** [`docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md`](docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md)
 
 ### perl-empty-ast-trim-span
-_Whitespace-only public AST intervals are inverted by double edge trimming_
+_Whitespace-only public AST intervals are ordered after leading trim_
 
 - **answers:** why does a whitespace-only AST expression have an inverted source span | what owns the empty AST trim span defect | does the native AST input-frame change cause reversed empty public intervals | how can the original empty source-span failure be reproduced
-- **date:** 2026-10-09 · **status:** observed P1 public defect; immediate repair owned by .2.1.2.4
-- **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 retains original0d52a407 and live actual public AST observations:4 authored inputs per route,3 inverted whitespace-only intervals per route and a narrow trim-helper intervention.`
+- **date:** 2026-10-09 · **status:** resolved by .2.1.2.4; original diagnosis retained
+- **evidence:** `Repair .2.1.2.4 retains original18 semantic RED/47 controls, final65 assertions/four effective source inverses,12 consumers/three Toolbox routes/eight evidence controls. Historical SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 retains original0d52a407 and live actual public AST observations:4 authored inputs per route,3 inverted whitespace-only intervals per route and a narrow trim-helper intervention.`
 - **source:** [`docs/knowledge/perl-empty-ast-trim-span.md`](docs/knowledge/perl-empty-ast-trim-span.md)
 
 ### perl-executable-source-membership
@@ -17364,7 +17364,7 @@ _Native AST input frames follow actual root trims and CSV occurrences_
 
 - **answers:** how are native AST input frames rooted in actual parser input | does AST base_start select private original input coordinates | can public find_piece_offset select private AST input authority | which AST descendant input frames are currently retained | how do repeated CSV arguments retain separate private input positions
 - **date:** 2026-10-09 · **status:** native descriptive root/call/array frames verified; compiler-event joining open
-- **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 verifies63 assertions/11 semantic source inverses,11 guarded consumers,3 actual Toolbox routes and8 evidence controls. A separate original/live public whitespace-span defect is owned next in .2.1.2.4.`
+- **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 verifies63 assertions/11 semantic source inverses,11 guarded consumers,3 actual Toolbox routes and8 evidence controls. The separate original/live public whitespace-span defect is resolved in .2.1.2.4 with65 assertions/four source inverses.`
 - **source:** [`docs/knowledge/perl-private-ast-input-frames.md`](docs/knowledge/perl-private-ast-input-frames.md)
 
 ### perl-private-emission-crash-recovery

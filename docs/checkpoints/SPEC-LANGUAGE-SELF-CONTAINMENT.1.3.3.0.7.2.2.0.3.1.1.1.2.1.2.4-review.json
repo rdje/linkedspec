@@ -1,0 +1,62 @@
+{
+  "result": "PASS",
+  "assertions": 65,
+  "original_failed": 18,
+  "original_controls_passed": 47,
+  "source_inverses": 4,
+  "consumer_suites": 12,
+  "toolbox_routes": 3,
+  "evidence_controls": [
+    {
+      "name": "failed-final",
+      "reason": "actual final successful channels",
+      "result": "RED"
+    },
+    {
+      "name": "forged-final-source",
+      "reason": "actual input identity",
+      "result": "RED"
+    },
+    {
+      "name": "lost-original-RED",
+      "reason": "actual original semantic RED",
+      "result": "RED"
+    },
+    {
+      "name": "missing-inverse",
+      "reason": "complete inverse population",
+      "result": "RED"
+    },
+    {
+      "name": "forged-inverse-source",
+      "reason": "actual inverse producer identity",
+      "result": "RED"
+    },
+    {
+      "name": "failed-consumers",
+      "reason": "actual consumers PASS",
+      "result": "RED"
+    },
+    {
+      "name": "missing-consumer",
+      "reason": "complete consumer selection",
+      "result": "RED"
+    },
+    {
+      "name": "forged-Toolbox",
+      "reason": "unchanged Toolbox oracle",
+      "result": "RED"
+    }
+  ],
+  "prior_bindings": 241,
+  "producer_sha256": "f28eb2529db1d22a219b44f8490b6daf306dc79bd0d4c1372637ee04d02c4431",
+  "records": {
+    "final": "4a4258171c70276c69638517ee58ae8971f704d724ec4fb1178eae61c9e9dfc5",
+    "original": "68d73f6b51d59331f720b2dbc06878669d5da1e49b759e8d723aeb647123851c",
+    "inverses": "080c21f53e4779af4af25cf6fdf72c8f90dda85257fb69ac28f8a4ea983a56eb",
+    "consumers": "56d40733789a6eaf53be0998c463e7ba9359afb1e6dafae0273d9bef89b0381d",
+    "toolbox": "948c7cc8c8e01eb3eab2dd8c7700a540efb23055c7a6dfdb4873df5af4252489",
+    "freeze": "a97f2fd3ad0d8fcee1987b45e73db046eec7052b4acdaf1d911ca2e69f63fa2e"
+  },
+  "scope": "Public empty AST span invariant repair only. No new source authority, runtime lowering, mapped repair or complete Phase0 admission."
+}

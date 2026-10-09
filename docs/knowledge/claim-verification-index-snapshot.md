@@ -25,3 +25,12 @@ repair serializes staging and verification, retains the limited original failure
 canceled CI exit143/diff/log, then reruns proof against one unchanged staged candidate.
 This records the existing input-stability requirement, without weakening a checker
 or adding a claim that concurrent index mutation is supported.
+
+The October9 empty-span repair `.2.1.2.4` repeated this orchestration mistake:
+the standalone check began before staging, then the staged delta selected the
+new owner against the earlier cached task bytes. It returned the same declaration
+diagnostic. The retained `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-overlap-attempt.json`
+is a transcribed tool result, not a captured original index snapshot or separated
+raw-channel record. The complete staged candidate is subsequently checked through
+the normal commit hook with no concurrent index changes. This is the same known
+sequencing requirement; no checker change or production defect is inferred.
