@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: private input/callback authority selected; actual constructor integration next.
+Full PNT: standalone AST construction collector verified; explicit original-frame joining next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0` — Four source-bound parser cases/eight independent argument intervals, seven callback modes and two actual Contracts dependency interventions pass; seven reason-sensitive evidence RED controls. All production inputs remain unchanged. The future nested opaque-dependency capture constraint is owned by .2.1.3; explicit construction/original-frame/factory composition proceeds in four bounded children.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` — Actual capture/callback/returned-root and reachable constructor identities pass77 assertions/15 effective source inverses, ten direct consumer suites and eight evidence controls. Initial74/14 draft preserved. A weak-reference lifetime RED exposed a snapshot back-edge; identity-only alias records fix it and the inverse restores RED. Public AST and ordinary callback semantics remain exact; descriptions grant no original source authority.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` for actual AST construction identity using the retained .2.1.0 plan. Records remain descriptive until .2.1.2 joins original frames. Full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` to join actual roots/arguments to explicit selected-event/CSV frames. Factory/dependency captures .2.1.3, composition .2.1.4, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` — constructor77/15, exact consumers and lifetime RED/GREEN.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0` — exact input/factory protocol and opaque dependency capture constraint.
 - `REPO-HYGIENE.14` — due dated metadata/actual-channel review; zero removals.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — historical recovery/selection status reconciled with current foundation.
@@ -29,7 +30,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` for actu
 - `REPO-HYGIENE.12` — June12 Phase0 observations qualified as historical; no runtime or census refresh.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` — two44-command captures, seven real failures/seven healthy guards, consumer144; exact replacement remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — committed77 commands/compiler41/public120+18+36/default72/consumer1644; canonical receipt gates membership closure.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` — grouped-role RED114/GREEN789; default72/public36/consumer1644; fresh canonical next.
 
 ## History
 

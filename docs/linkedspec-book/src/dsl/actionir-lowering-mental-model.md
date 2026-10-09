@@ -913,14 +913,18 @@ remain separate fragments so later translation can reject ambiguous continuation
 Producer integration and interval translation remain subsequent work; this
 standalone foundation does not change the quoted-first example above.
 
-Input authority and output authority have separate boundaries. An AST node's
-public source span describes it; copying that hash does not copy the constructor's
-private identity. Original argument positions must come from the CSV producer's
-actual piece boundaries, including omitted empty slots. During output integration,
+Input authority and output authority have separate boundaries. The standalone
+AST constructor collector now retains the callback's actual returned root and
+reachable constructed nodes. Copying public source fields does not copy their
+private identity; replacing an equal child or changing a descendant also declines
+the retained description. Nested and exceptional captures restore the enclosing
+scope. These descriptions grant no original-source coordinates by themselves.
+Original argument positions must come from the CSV producer's actual piece
+boundaries, including omitted empty slots. During output integration,
 each injected dependency call also needs its own capture scope: an opaque callback
 may call a producer and then return an equal literal. Its ordinary value remains
 valid, but the enclosing callback must not inherit the nested publication. These
-input and dependency safeguards are selected next; they are not yet integrated.
+original-frame joining and dependency safeguards remain subsequent integration.
 
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.

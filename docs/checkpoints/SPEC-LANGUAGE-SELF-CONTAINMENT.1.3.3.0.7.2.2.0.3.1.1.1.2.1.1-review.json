@@ -1,0 +1,60 @@
+{
+  "result": "PASS",
+  "fixture_assertions": 77,
+  "semantic_source_inverses": 15,
+  "consumer_suites": 10,
+  "evidence_red_controls": [
+    {
+      "name": "failed-final",
+      "reason": "actual final successful channels",
+      "result": "RED"
+    },
+    {
+      "name": "forged-final-input",
+      "reason": "actual final input identity",
+      "result": "RED"
+    },
+    {
+      "name": "truncated-final",
+      "reason": "complete final TAP",
+      "result": "RED"
+    },
+    {
+      "name": "missing-inverse",
+      "reason": "complete semantic inverse population",
+      "result": "RED"
+    },
+    {
+      "name": "forged-inverse-source",
+      "reason": "actual inverse producer identity",
+      "result": "RED"
+    },
+    {
+      "name": "renamed-inverse-reason",
+      "reason": "named inverse oracle",
+      "result": "RED"
+    },
+    {
+      "name": "failed-consumers",
+      "reason": "actual direct consumers PASS",
+      "result": "RED"
+    },
+    {
+      "name": "missing-consumer",
+      "reason": "complete direct consumer selection",
+      "result": "RED"
+    }
+  ],
+  "public_toolbox_routes": 3,
+  "producer_sha256": "a8685b50626b68a0fc075a49f478a270eebd1bd795743ef1480b683813a4c253",
+  "record_hashes": {
+    "final": "bedb0d8d88812c01cce52751bca76cad32fce587ef8e980ed701ceb7e6e7d312",
+    "inverses": "c60bded8ac49690f2434740085294d9edef48dcb1b950983746dfef7191d1a22",
+    "original": "fee52b1ee50966d8893c35256ac05662409eda67cedbce28ad1cfa8a1ab5868f",
+    "cycle": "0486b9faaa3a9d3c0f5345c4990d994619c718a1ff3273004e03ed1553704cf2",
+    "consumers": "5bd483d9ad7865a0c0cbd782537acb164e23958fc9b631a36789c4afc120caa1",
+    "toolbox": "70b6d29c6e8713de4f16becf564f073033dbc32539e973ac4ec5acf4d236c781",
+    "freeze": "73f8a5f0982269a999fd587352d1b2d84412361f0d90cf392d3cd3b2677a2ef2"
+  },
+  "scope": "Standalone constructor descriptions only; original availability RED is not semantic. Actual lifetime-defect RED and fifteen source inverses distinguish semantics. Original-source joining and producer integration remain open."
+}

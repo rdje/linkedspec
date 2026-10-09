@@ -1,0 +1,78 @@
+ok 1 - private AST construction collector is available
+ok 2 - public AST unchanged by collection
+ok 3 - actual root has independent construction description
+ok 4 - actual child keeps its independently authored occurrence
+ok 5 - actual child keeps its independently authored occurrence
+ok 6 - equal children are distinct actual constructions
+ok 7 - copied capture denied
+ok 8 - foreign callback denied
+ok 9 - copied root denied
+ok 10 - returned description is detached
+ok 11 - descriptive capture field is not identity authority
+ok 12 - changed capture value denied
+ok 13 - mutated constructed scalar denied
+ok 14 - equal replacement descendant denied
+ok 15 - changed ancestor denies child lookup
+ok 16 - changed nested scalar denied
+ok 17 - exact original construction can be restored
+ok 18 - nested scope cannot borrow capture
+ok 19 - outer scope restored
+ok 20 - expired construction scope denied
+ok 21 - equal fresh scope cannot borrow capture
+ok 22 - copied return has no construction grant
+ok 23 - copied return cannot borrow a recorded node
+ok 24 - foreign return has no construction grant
+ok 25 - foreign return cannot borrow a recorded node
+ok 26 - foreign ordinary reference retained
+ok 27 - changed return has no construction grant
+ok 28 - changed return cannot borrow a recorded node
+ok 29 - opaque return has no construction grant
+ok 30 - opaque return cannot borrow a recorded node
+ok 31 - opaque ordinary return retained
+ok 32 - undef return has no construction grant
+ok 33 - undef return cannot borrow a recorded node
+ok 34 - actual callback return retained
+ok 35 - unreturned construction denied
+ok 36 - actual returned root selected among constructions
+ok 37 - exactly one callback invocation
+ok 38 - parse callback scalar context preserved
+ok 39 - argument reference identity preserved
+ok 40 - scalar argument alias preserved
+ok 41 - successful caller error preserved
+ok 42 - explicit public base remains descriptive
+ok 43 - fatal callback exception identity retained
+ok 44 - outer recorder restored after nested fatal capture
+ok 45 - actual nested capture retains its own construction
+ok 46 - nested construction cannot attach to outer capture
+ok 47 - fatal scope exception identity retained
+ok 48 - outer registry restored after nested fatal scope
+ok 49 - outside-scope ordinary return preserved
+ok 50 - outside-scope callback still called once
+ok 51 - outside scope has no construction description
+ok 52 - scope work void context preserved
+ok 53 - scope work list context preserved
+ok 54 - scope work scalar context preserved
+ok 55 - constructor contexts preserved with collection=0
+ok 56 - constructor contexts preserved with collection=1
+ok 57 - representative public AST remains exact
+ok 58 - representative actual root remains eligible
+ok 59 - representative public AST remains exact
+ok 60 - representative actual root remains eligible
+ok 61 - representative public AST remains exact
+ok 62 - representative actual root remains eligible
+ok 63 - representative public AST remains exact
+ok 64 - representative actual root remains eligible
+ok 65 - representative public AST remains exact
+ok 66 - representative actual root remains eligible
+ok 67 - representative public AST remains exact
+ok 68 - representative actual root remains eligible
+ok 69 - representative public AST remains exact
+ok 70 - representative actual root remains eligible
+ok 71 - representative public AST remains exact
+ok 72 - representative actual root remains eligible
+ok 73 - public block AST remains exact
+ok 74 - actual block root construction retained
+ok 75 - cyclic constructor metadata can be described
+ok 76 - changed cyclic metadata declines
+not ok 77 - snapshot graph released after original cycle is broken
+1..77

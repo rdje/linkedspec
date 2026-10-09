@@ -1,0 +1,111 @@
+"""Run supplied-tree constructor proof, semantic source inverses and consumers."""
+import base64
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+OWNER = 'SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1'
+PREFIX = 'docs/checkpoints/' + OWNER + '-'
+BASE = 'f61130d731d9901005d3332e0fbadf5c96896e2a'
+PARSER = 'perl/LinkedSpec/ActionIR/AST/Parser.pm'
+TEST = 't/actionir_ast_constructions.t'
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def write(name, value):
+    (ROOT / (PREFIX + name + '.json')).write_text(json.dumps(value, indent=2) + '\n')
+
+def run(name, files):
+    with tempfile.TemporaryDirectory(prefix='ast-construction-', dir=os.environ['TMPDIR']) as directory:
+        root = Path(directory)
+        for p, raw in files.items():
+            target = root / p
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
+        result = subprocess.run(['perl', '-Iperl', TEST], cwd=root,
+                                env=dict(os.environ, PERL5LIB='', PERL5OPT=''),
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return {'name': name, 'command': ['perl', '-Iperl', TEST], 'returncode': result.returncode,
+                'stdout_base64': base64.b64encode(result.stdout).decode(),
+                'stderr_base64': base64.b64encode(result.stderr).decode(),
+                'inputs': {p: digest(raw) for p, raw in sorted(files.items())}}
+
+mode = sys.argv[1]
+paths = subprocess.check_output(['git', 'ls-files', '-z', '--', 'perl', 'specs'], cwd=ROOT).decode().split('\0')
+paths = [p for p in paths if p and (ROOT / p).is_file()]
+if mode in ('original', 'cycle'):
+    files = {p: subprocess.check_output(['git', 'show', BASE + ':' + p], cwd=ROOT) for p in paths}
+    files[TEST] = (ROOT / TEST).read_bytes()
+    if mode == 'cycle':
+        files[PARSER] = (ROOT / (PREFIX + 'draft-parser.pm.txt')).read_bytes()
+    row = run(mode, files)
+    write(mode, row)
+    reason = ('snapshot graph released after original cycle is broken' if mode == 'cycle'
+              else 'private AST construction collector is available')
+    assert row['returncode'] != 0 and reason.encode() in base64.b64decode(row['stderr_base64'])
+    print(mode, 'RED:', reason)
+elif mode == 'final':
+    files = {p: (ROOT / p).read_bytes() for p in paths + [TEST]}
+    row = run(mode, files)
+    write(mode, row)
+    assert row['returncode'] == 0, base64.b64decode(row['stderr_base64']).decode(errors='replace')
+    controls = [
+        ('no-constructor-record', '$_construction_recorder->({node => $node, snapshot => _snapshot_construction($node, {})});', '# record omitted', 'actual root has independent construction description'),
+        ('shifted-description', 'start => $node->{source_span}{start}, end => $node->{source_span}{end}', 'start => 1 + $node->{source_span}{start}, end => $node->{source_span}{end}', 'actual root has independent construction description'),
+        ('copied-capture', 'my $entry = $_construction_scope->{captures}{Scalar::Util::refaddr($capture)};\n return undef unless $entry && _same_construction_reference($entry->{capture}, $capture)', 'my ($entry) = values %{$_construction_scope->{captures}};\n return undef unless $entry', 'copied capture denied'),
+        ('foreign-callback', '_same_construction_reference($entry->{callback}, $callback)', '1', 'foreign callback denied'),
+        ('mutated-scalars', 'return !ref($value) && (defined($value)\n   ? defined($snapshot->{value}) && $value eq $snapshot->{value}\n   : !defined($snapshot->{value}))', 'return !ref($value)', 'mutated constructed scalar denied'),
+        ('replaced-descendant', 'return 0 unless _same_construction_reference($value, $snapshot->{reference})\n  && ref($value) eq $snapshot->{type};', 'return 0 unless ref($value) eq $snapshot->{type};', 'equal replacement descendant denied'),
+        ('no-root-validation', '&& _construction_unchanged($capture->{value}, $entry->{root}{snapshot}, {});', '&& 1;', 'changed ancestor denies child lookup'),
+        ('unreturned-record', 'grep { $reachable{Scalar::Util::refaddr($_->{node})} } @recorded;', '@recorded;', 'unreturned construction denied'),
+        ('copied-arguments', 'my $arguments = \\@_;', 'my $arguments = [@_];', 'scalar argument alias preserved'),
+        ('list-callback', 'my $value = $callback->(@$arguments);', 'my @values = $callback->(@$arguments); my $value = $values[-1];', 'parse callback scalar context preserved'),
+        ('double-callback', 'my $value = $callback->(@$arguments);', 'my $ignored = $callback->(@$arguments); my $value = $callback->(@$arguments);', 'exactly one callback invocation'),
+        ('no-recorder-unwind', 'local $_construction_recorder = ref($_construction_scope)', '$_construction_recorder = ref($_construction_scope)', 'outer recorder restored after nested fatal capture'),
+        ('no-scope-unwind', 'local $_construction_scope = {captures => {}};', '$_construction_scope = {captures => {}};', 'outer scope restored'),
+        ('shared-description', 'source_span => {start => $node->{source_span}{start}, end => $node->{source_span}{end}},', 'source_span => $node->{source_span},', 'returned description is detached'),
+        ('cyclic-snapshot-back-edge', 'return {reference => $value, type => ref($value), alias => 1} if $seen->{$key};', 'return $seen->{$key} if $seen->{$key};', 'snapshot graph released after original cycle is broken'),
+    ]
+    rows = []
+    for name, old, new, reason in controls:
+        assert files[PARSER].count(old.encode()) == 1, name
+        changed = dict(files)
+        changed[PARSER] = files[PARSER].replace(old.encode(), new.encode(), 1)
+        observed = run(name, changed)
+        observed.update(source=PARSER, old=old, new=new, required_failure=reason)
+        rows.append(observed)
+        write('inverses', rows) # Preserve failed inverse attempts before checking.
+        error = base64.b64decode(observed['stderr_base64']).decode(errors='replace')
+        assert observed['returncode'] != 0 and reason in error, (name, error)
+        assert 'syntax error' not in error and 'Compilation failed' not in error, name
+    print('Final GREEN and', len(rows), 'effective semantic source inverses.')
+elif mode == 'consumers':
+    tests = ['t/' + name + '.t' for name in (
+        'actionir_ast_constructions', 'actionir_ast_parser', 'actionir_source_emissions',
+        'canonical_event_occurrence_order', 'actionir_nested_block_source_spans',
+        'actionir_compiler_source_membership', 'actionir_executable_source_membership',
+        'trace_actionir_method_lowering', 'trace_emit_context_bridge')]
+    tests += ['docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0-origin-fixture.t']
+    paths = subprocess.check_output(['git', 'ls-files', '-z', '--', 'perl', 'specs', 't'], cwd=ROOT).decode().split('\0')
+    inputs = {p: digest((ROOT / p).read_bytes()) for p in paths + tests + [PREFIX + 'proof.py'] if p and (ROOT / p).is_file()}
+    result = subprocess.run(['prove', '-v', '-Iperl'] + tests, cwd=ROOT,
+                            env=dict(os.environ, PERL5LIB='', PERL5OPT=''),
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    row = {'name': mode, 'command': ['prove', '-v', '-Iperl'] + tests,
+           'returncode': result.returncode, 'inputs': inputs,
+           'stdout_base64': base64.b64encode(result.stdout).decode(),
+           'stderr_base64': base64.b64encode(result.stderr).decode(),
+           'unchanged': all(digest((ROOT / p).read_bytes()) == h for p, h in inputs.items()),
+           'scope': 'Guarded live parent Perl/spec/test superset; standard toolchain and published dependency outputs reused. No immutable complete Phase0/dependency reproduction claim.'}
+    write(mode, row)
+    assert row['unchanged'], 'consumer inputs changed'
+    print('Direct consumers exit', result.returncode)
+    raise SystemExit(result.returncode)
+else:
+    raise SystemExit('original|cycle|final|consumers required')

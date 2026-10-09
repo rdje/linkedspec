@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Constructor snapshots must retain identity without snapshot back-edges
+
+The actual returned AST root selects its reachable recorded constructions, excluding abandoned parse attempts. Recursive snapshots compare both public scalar data and every plain hash/array reference, so replacing an equal descendant loses eligibility. Descriptions are detached and cannot grant source coordinates; .2.1.2 must join explicit event/CSV frames. The new lifetime control constructs cyclic metadata through actual _node/capture, breaks its original cycle and checks a weakened reference after scope exit. Returning the original snapshot for a repeated reference creates a new persistent snapshot cycle. Identity-only alias records validate the repeated reference without that back-edge; observed RED/GREEN and the restored-source inverse close the defect. The .2.1.1 claim retains final77/15, initial74/14 and all exact producers, with ten live consumers supplemental to later complete Phase0.
+
 ## 2026-10-09 — Original input and output authority need different seams
 
 AST constructor references distinguish copied public nodes, while MethodExpr already supplies original CSV flush frames. Constructor source spans alone remain descriptive; private child authority must use actual returned occurrences and explicit parent/payload rebasing. In the actual Contracts input_slice closure, an opaque dependency can call a controlled future builder and return an equal literal; an unguarded outer capture inherits its packet. A separate actual dependency capture preserves scalar value/order/effects and blocks inheritance. This requirement is now scheduled before producer integration, not classified as a shipped failure. The .2.1.0 retained plan and Knowledge fact select four bounded children; all116 production Perl/spec inputs are unchanged.

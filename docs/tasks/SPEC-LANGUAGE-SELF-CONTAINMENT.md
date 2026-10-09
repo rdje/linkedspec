@@ -3916,14 +3916,26 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0 - select private input capture boundaries` (Git records identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Actual AST construction sidecars and returned-node identity, preserving all public nodes and parser behavior.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0`
-  Planned tier: `focused`
-  Planned focused proof: Actual object/callback/invocation identities and independent original occurrence/fragment controls; unchanged direct consumers, public shapes/context/errors/family order; normal focused doctrine/claim/Knowledge/history checks.
-  Planned canonical boundary: None for private bounded implementation; complete private Phase0 and independent mapped/public admission remain separately owned.
-  Planned claim record: none: Planning only; actual implementation declares its own measured claim before results.
+  Verification tier: `focused`
+  Focused checks: Actual object/callback/invocation identities and independent original occurrence/fragment controls; unchanged direct consumers, public shapes/context/errors/family order; normal focused doctrine/claim/Knowledge/history checks.
+  Canonical trigger: None for private bounded implementation; complete private Phase0 and independent mapped/public admission remain separately owned.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1.json`
   Acceptance: Follow the committed .0 source-bound selection and preserve the original six-slice obligations; split further before writes if an actual owner set grows beyond a safe slice.
+
+  Activation: Clean f61130d731d9901005d3332e0fbadf5c96896e2a; all ten diagnosis hooks/post-commit pointer pass, brief0 and clean Git confirmed. Read the committed .2.1.0 plan, AST constructor/parser callers and public AST tests.
+  Owned paths: AST/Parser.pm only production owner; new t/actionir_ast_constructions.t; leaf-prefixed exact proof/review/capture/freeze/claim inputs; Knowledge/book/frontier/live/change/notes/resume; mode/revision-only historical preservation of intersecting live claims.
+  Bounded protocol: A dynamic private construction scope retains actual capture/callback/returned-root and reachable constructed-node identities. Snapshot comparisons reject mutated or replaced descendants; nested/fatal calls restore collectors. Returned descriptions grant no source origin; explicit event/CSV-frame joining remains .2.1.2. Preserve ordinary parse results and public field/callback shapes, scalar parse capture, work contexts, argument aliases and successful caller error semantics.
+
+  Review control owned here: Custom constructor metadata may contain a cycle that is subsequently broken by its caller. Check that the private snapshot does not retain a newly cyclic snapshot graph after scope exit; reproduce through actual _node/capture and a weakened metadata reference. Actual RED fails77: snapshot graph released after original cycle is broken. Root cause: repeated references returned the original snapshot, creating snapshot back-edges. Fixed here with identity-only alias records; final77 and an inverse restoring the back-edge must pass/reject before landing. Ordinary parser ASTs remain acyclic.
+
+  Result: Standalone construction collector PASS77 assertions/15 effective semantic source inverses. Actual capture/callback/root/reachable construction identities, detached descriptions, exact public AST, aliases/count/context/error/exception and nested successful/fatal restoration hold. Original availability RED is disclosed separately from semantics. Initial74/14 draft preserved; actual lifetime RED exposed snapshot back-edge retention after a caller breaks a metadata cycle, fixed with identity-only alias records and distinguished by the fifteenth source inverse. This defect is closed by observed RED/GREEN and release proof. No original source grant or producer/mapping integration lands.
+  Verification: Ten guarded live direct consumer suites and three actual call_spec_handler_subst Toolbox routes PASS against the original pre-change oracle; independent exact-input/TAP/source-inverse/draft/freeze reviewer and eight reason-sensitive evidence RED controls PASS. Only Parser changes production, all other parent Perl/spec bytes match f61130d; prior diagnosis claim preserves134 original bindings by mode/revision only. Perl syntax/diff and mdBook PASS (known large-index warning); bounded history/memory/Knowledge/claims and all normal commit hooks required.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1 - retain actual AST constructions` (Git records identity).
+
+  LinkedSpec-tool evidence: Actual `LinkedSpec::call_spec_handler_subst` replays the three healthy authored twins/Unicode-literal/CRLF actions; exact lowered values match the .2.1.0 retained independent pre-change observation. Full channels/source guards are `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1-toolbox.json`; empty-slot behavior remains parser-only.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2`
   Status: `pending`
@@ -4339,7 +4351,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` | `done` | Historical recovery/selection cards now link current standalone foundation authority. |
 | 43.4.2.0.3.1.1.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1` | `active` | Actual argument/node input authority and built-in callback registration. |
 | 43.4.2.0.3.1.1.1.2.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0` | `done` | Four/eight input proof; actual opaque nested capture constraint and selected protocol. |
-| 43.4.2.0.3.1.1.1.2.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` | `pending` | Actual AST construction identity. |
+| 43.4.2.0.3.1.1.1.2.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` | `done` | Standalone construction77/15; lifetime RED/GREEN; original-frame joining next. |
 | 43.4.2.0.3.1.1.1.2.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` | `pending` | Actual MethodExpr argument/frame authority. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |

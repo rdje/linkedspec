@@ -13,6 +13,7 @@ BEGIN {
 
 use LinkedSpec::ActionIR::AST ();
 use LinkedSpec::OwnerDispatch ();
+use Scalar::Util ();
 
 #------------------------------------------------------------------------------
 # Package : LinkedSpec::ActionIR::AST::Parser
@@ -21,6 +22,123 @@ use LinkedSpec::OwnerDispatch ();
 #           can switch consumers to these nodes family by family.
 #------------------------------------------------------------------------------
 
+# Private construction descriptions are separate from original-source authority.
+# A caller must later join an actual construction to an explicit input frame;
+# public source/source_span fields and equal copies cannot make that selection.
+our ($_construction_scope, $_construction_recorder);
+
+sub _same_construction_reference {
+ my ($left, $right) = @_;
+ return ref($left) && ref($right)
+  && Scalar::Util::refaddr($left) == Scalar::Util::refaddr($right)
+}
+
+sub _snapshot_construction {
+ my ($value, $seen) = @_;
+ return {value => $value} unless ref($value);
+ my $key = Scalar::Util::refaddr($value);
+ # A repeated reference needs identity validation, not a snapshot back-edge.
+ # Back-edges would keep the snapshot alive after a caller breaks its own cycle.
+ return {reference => $value, type => ref($value), alias => 1} if $seen->{$key};
+ my $snapshot = {reference => $value, type => ref($value)};
+ $seen->{$key} = $snapshot;
+ if (ref($value) eq 'HASH') {
+  $snapshot->{fields} = {map { $_ => _snapshot_construction($value->{$_}, $seen) } keys %$value};
+ } elsif (ref($value) eq 'ARRAY') {
+  $snapshot->{items} = [map { _snapshot_construction($_, $seen) } @$value];
+ }
+ return $snapshot
+}
+
+sub _construction_unchanged {
+ my ($value, $snapshot, $seen) = @_;
+ unless (exists $snapshot->{reference}) {
+  return !ref($value) && (defined($value)
+   ? defined($snapshot->{value}) && $value eq $snapshot->{value}
+   : !defined($snapshot->{value}))
+ }
+ return 0 unless _same_construction_reference($value, $snapshot->{reference})
+  && ref($value) eq $snapshot->{type};
+ return 1 if $snapshot->{alias};
+ my $key = Scalar::Util::refaddr($snapshot);
+ return 1 if $seen->{$key}++;
+ if (ref($value) eq 'HASH') {
+  return 0 unless keys(%$value) == keys(%{$snapshot->{fields}});
+  for my $field (keys %{$snapshot->{fields}}) {
+   return 0 unless exists($value->{$field})
+    && _construction_unchanged($value->{$field}, $snapshot->{fields}{$field}, $seen);
+  }
+ } elsif (ref($value) eq 'ARRAY') {
+  return 0 unless @$value == @{$snapshot->{items}};
+  for my $index (0 .. $#$value) {
+   return 0 unless _construction_unchanged($value->[$index], $snapshot->{items}[$index], $seen);
+  }
+ }
+ return 1
+}
+
+sub _construction_description {
+ my ($node) = @_;
+ return {
+  kind => $node->{kind}, source => $node->{source},
+  source_span => {start => $node->{source_span}{start}, end => $node->{source_span}{end}},
+ }
+}
+
+sub _with_node_constructions {
+ my ($work) = @_;
+ local $_construction_scope = {captures => {}};
+ local $_construction_recorder;
+ if (!defined wantarray) { $work->(); return }
+ return $work->()
+}
+
+sub _capture_node_constructions {
+ my $callback = shift;
+ my $arguments = \@_; # Retain aliases as well as argument reference identities.
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my @recorded;
+  local $_construction_recorder = ref($_construction_scope) eq 'HASH'
+   ? sub { push @recorded, $_[0] } : undef;
+  my $value = $callback->(@$arguments);
+  my $capture = {value => $value, construction => undef};
+  my ($root) = grep { _same_construction_reference($_->{node}, $value) } @recorded;
+  if ($root && _construction_unchanged($value, $root->{snapshot}, {})) {
+   my %reachable;
+   _snapshot_construction($value, \%reachable);
+   my %nodes = map { Scalar::Util::refaddr($_->{node}) => $_ }
+    grep { $reachable{Scalar::Util::refaddr($_->{node})} } @recorded;
+   $_construction_scope->{captures}{Scalar::Util::refaddr($capture)} = {
+    capture => $capture, callback => $callback, root => $root, nodes => \%nodes,
+   };
+   $capture->{construction} = _construction_description($value);
+  }
+  return $capture
+ })
+}
+
+sub _construction_for {
+ my ($capture, $callback, $node) = @_;
+ return undef unless ref($_construction_scope) eq 'HASH' && ref($capture) eq 'HASH' && ref($node) eq 'HASH';
+ my $entry = $_construction_scope->{captures}{Scalar::Util::refaddr($capture)};
+ return undef unless $entry && _same_construction_reference($entry->{capture}, $capture)
+  && _same_construction_reference($entry->{callback}, $callback)
+  && _same_construction_reference($entry->{root}{node}, $capture->{value})
+  && _construction_unchanged($capture->{value}, $entry->{root}{snapshot}, {});
+ my $record = $entry->{nodes}{Scalar::Util::refaddr($node)};
+ return undef unless $record && _same_construction_reference($record->{node}, $node)
+  && _construction_unchanged($node, $record->{snapshot}, {});
+ return _construction_description($node)
+}
+
+sub _record_node_construction {
+ my ($node) = @_;
+ return unless ref($node) eq 'HASH';
+ my $error = $@;
+ $_construction_recorder->({node => $node, snapshot => _snapshot_construction($node, {})});
+ $@ = $error;
+ return
+}
 sub _fallback_trim {
  my ($value) = @_;
  return undef unless defined $value;
@@ -62,11 +180,23 @@ sub _span {
 sub _node {
  my ($kind, $source, $start, $end, %fields) = @_;
  return LinkedSpec::ActionIR::AST::node(
-  $kind,
-  source => $source,
-  source_span => _span($start, $end),
-  %fields,
- )
+  $kind, source => $source, source_span => _span($start, $end), %fields,
+ ) unless ref($_construction_recorder) eq 'CODE';
+ my $construct = sub {
+  return LinkedSpec::ActionIR::AST::node(
+   $kind, source => $source, source_span => _span($start, $end), %fields,
+  )
+ };
+ # Preserve the constructor's original context, including direct private calls.
+ if (!defined wantarray) { $construct->(); return }
+ if (wantarray) {
+  my @nodes = $construct->();
+  _record_node_construction($_) for @nodes;
+  return @nodes
+ }
+ my $node = $construct->();
+ _record_node_construction($node);
+ return $node
 }
 
 sub _raw_node {

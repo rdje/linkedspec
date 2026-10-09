@@ -1,0 +1,57 @@
+{
+  "result": "PASS",
+  "fixture_assertions": 74,
+  "semantic_source_inverses": 14,
+  "consumer_suites": 10,
+  "evidence_red_controls": [
+    {
+      "name": "failed-final",
+      "reason": "actual final successful channels",
+      "result": "RED"
+    },
+    {
+      "name": "forged-final-input",
+      "reason": "actual final input identity",
+      "result": "RED"
+    },
+    {
+      "name": "truncated-final",
+      "reason": "complete final TAP",
+      "result": "RED"
+    },
+    {
+      "name": "missing-inverse",
+      "reason": "complete semantic inverse population",
+      "result": "RED"
+    },
+    {
+      "name": "forged-inverse-source",
+      "reason": "actual inverse producer identity",
+      "result": "RED"
+    },
+    {
+      "name": "renamed-inverse-reason",
+      "reason": "named inverse oracle",
+      "result": "RED"
+    },
+    {
+      "name": "failed-consumers",
+      "reason": "actual direct consumers PASS",
+      "result": "RED"
+    },
+    {
+      "name": "missing-consumer",
+      "reason": "complete direct consumer selection",
+      "result": "RED"
+    }
+  ],
+  "producer_sha256": "34d461b9081e82f15f099cc4700b69682c3982b013de91a88e04f4ca3a454191",
+  "record_hashes": {
+    "final": "00e238583b94a0f8d25c86e6ea38a0d9b8232a50f47b91223b1dda6ecaec282c",
+    "inverses": "94c9de2f86de9dd6ba086bd238d071f5f95a725d84d77a18e2870be8b4d85b96",
+    "original": "20eb12ac6e9fff0ad4301ccec34b3bd2e5151dae3f29c75e9ce66d1d31395db8",
+    "consumers": "688df8413becf609a0ff083dd00ff3a43d7d0fce916997ece4c03538faffc663",
+    "freeze": "73f8a5f0982269a999fd587352d1b2d84412361f0d90cf392d3cd3b2677a2ef2"
+  },
+  "scope": "Standalone constructor descriptions only; original availability RED is not semantic. Fourteen source inverses distinguish semantics. Original-source joining and producer integration remain open."
+}
