@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `f7a20b60f72c7132e1ff1bf1292b90c59df32c6a` — clean factory planning handoff.
-- latest_completed_leaf: `RUST-DEPENDENCY-WARNING-ZERO.8 - align warning roadmaps with RGX boundary`.
-- active_work_unit: `RUST-DEPENDENCY-WARNING-ZERO.8` (done).
-- next_action: Activate PERL-PRIVATE-FACTORY-CAPTURE.1; preserve historical claims, then implement the private actual-callback registration/dependency boundary framework.
-- in_flight_uncommitted: none after this focused projection-repair commit.
-- blockers: none; factory/output/full-private/mapped/canonical obligations remain open.
+- activation_commit: `02345ee21f9cd674dea073b5e25f6200bd0a6ead` — clean warning roadmap projection repair.
+- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.1 - isolate native dependency calls`.
+- active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.1` (done).
+- next_action: Activate PERL-PRIVATE-FACTORY-CAPTURE.2; inspect actual Contracts registration/dependency seams, preserve historical inputs and split before writes if needed.
+- in_flight_uncommitted: none after this focused framework commit.
+- blockers: none; production factory/pipeline/output/full-private/mapped/canonical obligations remain open.
 - standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited.
-- task_owner: `docs/tasks/RUST-DEPENDENCY-WARNING-ZERO.md`; next owner `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
-- authority: docs/knowledge/perl-factory-capture-plan.md; retained original protocol.
+- task_owner: `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
+- authority: docs/knowledge/perl-factory-capture-framework.md; retained factory protocol.

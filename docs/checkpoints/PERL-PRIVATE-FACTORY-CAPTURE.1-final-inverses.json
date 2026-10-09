@@ -1,0 +1,98 @@
+{
+  "result": "PASS",
+  "producer_sha256": "ddaff0532f7c8eb2d9ad349be3f745f73a57e906773a6cb4b28acecda1d6479d",
+  "fixture_sha256": "c345b24bba20e949723225d61242a70574b19fd6ff95b997d6efa375a1c8349d",
+  "source_sha256": "584ec65abc8271786c42561c5047783c5f1bb540c8734ab3dfa60ad2aab5e276",
+  "rows": [
+    {
+      "case": "registration-token",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-registration-token.json",
+      "sha256": "10786db7e0da6acab26536015f90be3e0bf39266e98b8dd197355a2aa5f418a2",
+      "source_sha256": "349d21732f42572402e10d49875eebcea6fbfbcf3b164402ab0eadee307ca1be",
+      "reason": "foreign source registration cannot leak into restored outer scope",
+      "observed": "RED"
+    },
+    {
+      "case": "callback-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-callback-identity.json",
+      "sha256": "6620f2fdf80007238847cc1c7b1dd5d4becaffc7bcb03fa32d343c3493477f72",
+      "source_sha256": "c08267126804d127828ee46600632a91db82ee7cb08f302afa67e889e0bf7cd9",
+      "reason": "equal fresh callback and copied metadata have no registration",
+      "observed": "RED"
+    },
+    {
+      "case": "scalar-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-scalar-boundary.json",
+      "sha256": "373e855f3fe5135664e2059d623fac00d5856654675f710b757b5fbbcb10a675",
+      "source_sha256": "e75f68239e6e53be687717da1359e9c0965883621d8bd84e8e94f6a1e1a0181e",
+      "reason": "scalar opaque dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "list-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-list-boundary.json",
+      "sha256": "ab4203a55bbdc592ae23af4c048af8c8c8f042a28ff75658e82c42681ea271e6",
+      "source_sha256": "2873e341d9b09df3e0f5df71e161f05856ebe9e8c28e82799d90c1ec4a3f4d56",
+      "reason": "list opaque dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "void-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-void-boundary.json",
+      "sha256": "550c2a471fbca589fb37eca9e2c1c1ee9291ae1e27cbffd7e41c0b329a97adec",
+      "source_sha256": "0e567b9e852569a83267280a9c9a1d3e0c078a79c54335d4db86626a886ddbac",
+      "reason": "void opaque dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "list-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-list-context.json",
+      "sha256": "e130e4ad7fd11717f2cc94fc33ea25ccb922344a8777512c213bbc2c12d9e48b",
+      "source_sha256": "601546068c8124778788cc181489de6e487d3dbe5412bbd5036c2693a39349a6",
+      "reason": "0/list/string dependency retains native context",
+      "observed": "RED"
+    },
+    {
+      "case": "void-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-void-context.json",
+      "sha256": "7c72bfff0706c149385eba2ccd5707e55708e18632e60aa66ad59813c971fe73",
+      "source_sha256": "ab985d6395ce42d742ac12fee997e84be16f307f34c26c44ebcce37bc4526a29",
+      "reason": "0/void/string dependency retains native context",
+      "observed": "RED"
+    },
+    {
+      "case": "aliases",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-aliases.json",
+      "sha256": "ee2f8b43a3968f23e5b3a9f28ec83377097aa53d58fc72f3ebe758ba0e5eed5d",
+      "source_sha256": "335deb8ff92cee4479f92ef8606d9d18edb074f90f91b85146ac8f612883ff78",
+      "reason": "0/scalar/string both original caller aliases are written",
+      "observed": "RED"
+    },
+    {
+      "case": "once",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-once.json",
+      "sha256": "dec04f4d4fbeac07fe8a98ad87cb429b4bf0aa22a9b14ac877f4a233404f098c",
+      "source_sha256": "3537fd7d1193cdd2569e8100173d9babaa704b7dfcf9efd1194a58b36e516842",
+      "reason": "0/scalar/string actual dependency executes once",
+      "observed": "RED"
+    },
+    {
+      "case": "success-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-success-error.json",
+      "sha256": "6b63bebc645b9dc8699983062f4a4b3bfdb683082db2d9455491bdbbb0efacb1",
+      "source_sha256": "8702171958782a64d03ad98b5c64511ce5eddf1d0105b5a799fafc71e03c527c",
+      "reason": "0/scalar/string successful error effect survives",
+      "observed": "RED"
+    },
+    {
+      "case": "callback-retention",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-inverse-callback-retention.json",
+      "sha256": "da7dbf4c38ac4220b597cb0f3c81c8c82ab764c97b5779f9953f877de815365d",
+      "source_sha256": "a5fc01572b647eab63110b59ccfd46c3a9782c3ffa67d53e280ca837ed394e03",
+      "reason": "registered actual callback stays strongly retained until scope exit",
+      "observed": "RED"
+    }
+  ],
+  "assertions": 224,
+  "scope": "Syntax-valid effective faults; complete coherent TAP plans and independently authored identity/context/publication/lifetime reasons. Original supplied bytes/population restore after each fault."
+}

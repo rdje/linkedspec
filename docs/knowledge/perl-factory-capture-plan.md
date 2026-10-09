@@ -6,14 +6,14 @@ answers:
   - "which task owns invocation-local built-in callback registration"
   - "where is the private dependency scalar list void boundary planned"
 date: 2026-10-10
-status: planned; no implementation or new measurement claimed
+status: framework accepted; production factory and pipeline owners remain planned
 tags: [perl, actionir, source-emission, planning, callbacks]
 evidence: "The original factory planning leaf routes the existing selected protocol to docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Existing stable IDs and task consumers remain in place; no partition, capacity or runtime change."
 reverify: "Read docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md and its referenced original planning leaf/plan; implementation status and verification live beside each stable owner."
 ---
 
 The next private factory/dependency implementation is owned by the linked
-`docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md` tree. Its first leaf adds invocation-local
+`docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md` tree. Its first leaf now implements invocation-local
 actual callback registration and separate dependency invocation boundaries in
 SourceEmissions; later owners cover Contracts, MethodLowering, FlowExpr,
 ControlFlow and final RewritePipeline activation. The detailed proposed protocol
@@ -23,7 +23,8 @@ is retained under
 The plan reuses the actual opaque-dependency diagnosis in
 `docs/knowledge/perl-private-input-authority-selection.md` and the independently
 accepted current input joins in `docs/knowledge/perl-input-composition-acceptance.md`.
-It adds no new runtime observation. Actual built-in callback references may
+The planning record adds no runtime observation. Current framework evidence is
+owned by `docs/knowledge/perl-factory-capture-framework.md`. Actual built-in callback references may
 register within the current source/producer scope; public names, copied metadata
 and equal values cannot register an unknown callback. Every injected dependency
 call needs its own capture boundary. Native list/void contexts require isolated
@@ -43,5 +44,5 @@ remain open. Current public book behavior and the quoted-first replacement defec
 are unchanged by planning.
 
 Projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` now aligns the current Rust warning
-roadmaps with the adopted public RGX/upstream boundary. The first factory framework
-owner is next; no dependency build or implementation access was needed.
+roadmaps with the adopted public RGX/upstream boundary. The standalone framework
+is accepted and Contracts `.2` is next; no dependency build or implementation access was needed.

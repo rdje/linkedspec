@@ -213,6 +213,37 @@ sub _with_emission_producers {
  return $work->()
 }
 
+# Factory seams register their actual callback without changing the public
+# reference. A different source invocation cannot add to an enclosing registry.
+sub _register_emission_producer {
+ my ($callback) = @_;
+ if (ref($_producers) eq 'HASH'
+     && _same_reference($_producers->{source_token}, _current_source_token())
+     && ref($callback) eq 'CODE') {
+  $_producers->{known}{Scalar::Util::refaddr($callback)} = $callback;
+ }
+ return $callback
+}
+
+# Injected calls need their own boundary even when their ordinary output equals
+# a nested producer's text. Keep argument aliases and native list/void contexts;
+# only the scalar protocol can retain an emission packet. Parents that need a
+# child packet must explicitly retain _capture_emission's actual capture.
+sub _invoke_emission_dependency {
+ my $callback = shift;
+ if (!defined wantarray) {
+  local $_call;
+  $callback->(@_);
+  return
+ }
+ if (wantarray) {
+  local $_call;
+  return $callback->(@_)
+ }
+ my $capture = _capture_emission($callback, @_);
+ return $capture->{value}
+}
+
 sub _eligible_call {
  return ref($_call) eq 'HASH' && $_call->{known}
   && _same_reference($_call->{source_token}, _current_source_token())

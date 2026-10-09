@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate native injected dependency calls
+
+The standalone private framework passes224 assertions,30 native differential modes and11 effective semantic source faults;17 direct suites in136 supplied files, evidence4 and complete book57/two controls pass. Actual callbacks register only in their current source/producer scope. Scalar dependency calls get separate captures; list/void calls retain native contexts with publication disabled. Caller aliases, once-only effects, returns/errors, map references and lifetime are preserved. The initial four identity failures came from a shared native fixture callback and are retained with the actual reference probe; lexical fixture closures correct that assumption without another production change. Original232 input-composition bindings are historical. Production factory/pipeline/output/mapping/full-private/canonical integration remains open; Contracts owner .2 is next.
+
 ## 2026-10-10 — Align Rust warning roadmaps with the adopted RGX boundary
 
 Current Rust warning paragraphs and status rows in both roadmaps now follow the adopted RGX public-interface boundary. RGX owns transitive preparation and dependency repairs; LinkedSpec owns public reproduction/reporting, upstream-result verification and its own fixes. Historical output counts remain qualified and runtime warning follow-up stays non-blocking. Architecture and the public book already agree. No executable, dependency, pin or build change; factory framework PERL-PRIVATE-FACTORY-CAPTURE.1 is next.

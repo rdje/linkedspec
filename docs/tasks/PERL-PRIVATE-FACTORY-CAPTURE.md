@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `pending` / implementation planned
+- Status: `active` / framework accepted; Contracts integration next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -39,22 +39,27 @@ quoted-first example do not change here. Other repositories and all submodules r
 ## Task Tree
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-  Status: `pending`
+  Status: `active`
   Goal: Actual factory/dependency registration and invocation boundaries under the selected original-source protocol.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
   Children: `PERL-PRIVATE-FACTORY-CAPTURE.1`, `PERL-PRIVATE-FACTORY-CAPTURE.2`, `PERL-PRIVATE-FACTORY-CAPTURE.3`, `PERL-PRIVATE-FACTORY-CAPTURE.4`, `PERL-PRIVATE-FACTORY-CAPTURE.5`, `PERL-PRIVATE-FACTORY-CAPTURE.6`.
   Acceptance: Individual bounded owners preserve current public behavior and pass source-bound focused proof. Return independent composition to the original owner; no separate parent admission is inferred.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.1`
-  Status: `pending`
+  Status: `done` / `focused-signoff-complete` (activated from clean `02345ee21f9cd674dea073b5e25f6200bd0a6ead`)
   Goal: Private registration/dependency boundary framework and native differential lifecycle/context/alias/error proof; no production factory or pipeline activation.
   Dependencies: `RUST-DEPENDENCY-WARNING-ZERO.8`
   Owned paths: `perl/LinkedSpec/ActionIR/SourceEmissions.pm`; focused fixture/proof/claim, relevant Knowledge/book and continuity. No unrelated producer or mapping changes.
-  Planned tier: `focused`
-  Planned focused proof: Actual/native callback and invocation identities; scalar/list/void context where applicable, aliases, once-only effects, exact return/error/fatal values, opaque nested delegation, scope restoration/release and unchanged public maps. Complete supplied direct consumers, effective semantic faults, retained instrument/input/channel identities, relevant book and ordinary doctrines.
-  Planned canonical boundary: none for bounded private implementation without public/generated/mechanical change; reclassify before writes if scope crosses those boundaries. Complete private Phase0 and canonical replacement remain separately owned.
-  Planned claim record: none: Planning only; declare the actual source-bound measurement record at activation before publishing results.
+  Verification tier: `focused`
+  Focused checks: Actual/native callback and invocation identities; scalar/list/void context, aliases, once-only effects, exact return/error/fatal values, opaque nested delegation, scope restoration/release and unchanged public maps. Complete supplied direct consumers, effective semantic faults, retained instrument/input/channel identities, complete relevant book and ordinary doctrines.
+  Canonical trigger: none for bounded private implementation without public/generated/mechanical change; reclassify before writes if scope crosses those boundaries. Complete private Phase0 and canonical replacement remain separately owned.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json`
   Acceptance: Follow the retained owner plan; choose no authority by name, copied metadata or equal value. Preserve existing selected input grants and callback references. Split further before writes if actual code paths exceed a safe slice. Commit before activating the next owner.
+  Result: The standalone private framework passes224 assertions,30 native differential modes and11 effective semantic source faults;17 direct suites in136 supplied files, evidence4 and complete book57/two controls pass. Actual callbacks register only in their current source/producer scope. Scalar dependency calls get separate captures; list/void calls retain native contexts with publication disabled. Caller aliases, once-only effects, returns/errors, map references and lifetime are preserved. The initial four identity failures came from a shared native fixture callback and are retained with the actual reference probe; lexical fixture closures correct that assumption without another production change. Original232 input-composition bindings are historical. Production factory/pipeline/output/mapping/full-private/canonical integration remains open; Contracts owner .2 is next.
+  Signoff evidence: Source-bound capture/review, native closure probe and all initial draft source/instrument/channels retained under docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-*. Complete positive and each syntax-valid fault retain coherent224-assertion TAP and distinguishing semantic failures. Evidence controls reject failed positive, missing reader artifact, missing inverse and missing semantic reason after a rehashed index, then restore actual PASS. Complete57-source book retains missing SUMMARY and removed rendered-marker controls. Exact original232 input hashes and mode/revision-only preservation are independently reviewed; actual original-hash corruption rejects and restores.
+  Reverify: `bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-review.py`; separately run `PERL-PRIVATE-FACTORY-CAPTURE.1-preservation-control.py` with the same wrapper. Capture/freezer/claim publisher entrypoints are one-shot; do not replay them.
+  Verification: `focused-signoff-complete`; ordinary history/Knowledge/memory/claim/doctrine/whitespace checks govern the staged candidate.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.1 - isolate native dependency calls`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.2`
   Status: `pending`
@@ -115,12 +120,11 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.1` | `pending` | Private framework after completed projection repair RUST-DEPENDENCY-WARNING-ZERO.8, before any factory/pipeline activation. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.2` | `pending` | Depends on the preceding bounded owner. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3` | `pending` | Depends on the preceding bounded owner. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.2` | `pending` | Actual Contracts callbacks and injected dependencies after accepted standalone framework. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3` | `pending` | Depends on the preceding bounded owner. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
 
 ## Handoff
 
@@ -145,15 +149,30 @@ Projection repair `RUST-DEPENDENCY-WARNING-ZERO.8` is complete. No factory imple
 Exact implementation details and any necessary finer function-family splits belong to the next owner
 before its production writes. Artifact recovery/purge remains prohibited pending SESSION-STARTUP-READING.7.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.1
+
+- [x] **REPRODUCE / ISSUE** — Actual `perl -Iperl t/actionir_factory_capture.t` supplied runs distinguish a separate dependency boundary from an enclosing known callback inheriting opaque nested publication. The scalar/list/void boundary-removal source controls retain complete semantic RED plans; this is a private integration requirement, not a claimed shipped pipeline defect.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `SourceEmissions.pm:218` binds actual callback registration to the current source/producer; `SourceEmissions.pm:232` isolates injected calls from the dynamic publication slot. Actual native reference probing explains the four initial draft failures: its no-lexical-state factory returned one shared CODE reference. The fixture premise was wrong; production bytes stay exact across its correction.
+- [x] **FIX** — Return the same actual registered callback; isolate scalar calls with actual captures and list/void calls with their native contexts and locally disabled publication. Forward original argument aliases; keep ordinary values/errors and public maps unchanged. Give the distinct-closure fixture actual lexical state.
+- [x] **ADDRESSED (verified)** — Source-bound PASS224 assertions/30 native differential modes and eleven effective, syntax-valid semantic faults; actual reviewer and original-binding corruption controls reject then restore PASS. `PERL-PRIVATE-FACTORY-CAPTURE.1-final-review.py` and `-preservation-control.py` are the repeatable readonly entrypoints under `tools/run_python_project_data.sh`.
+- [x] **NO REGRESSION** — Focused tier: seventeen actual supplied direct suites PASS with136 exact files, including all three JSON reader inputs; only SourceEmissions production bytes are overlaid. `perl -c -Iperl` checks the module/fixture; all source faults have coherent224-assertion TAP. Complete private Phase0 and mapped/canonical acceptance stay separately owned, without a full-suite claim here.
+- [x] **LOCKSTEP** — Complete57-source mdBook build and two actual source/render controls PASS; Knowledge, current roadmaps/task index and bounded history/live/memory pointers are synchronized. Original232 bindings remain historical. No public/generated contract, submodule or pin change; Contracts `.2` is next.
+
 ## Verification Log
 
-Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`; no implementation or runtime result is claimed here.
+Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`.
+
+- `2026-10-10`, `.1`: PASS224/11, native30, supplied17/136, evidence4/book57/2 and original232 preservation. The four initial draft identity failures are retained and diagnosed, with no production change hidden by their fixture correction. SourceEmissions syntax is checked in every source-fault run; direct supplied consumers recur. All normal doctrine hooks are required before landing.
+- `2026-10-10`, `.1`: Initial commit hooks rejected the missing formal acceptance checklist in this new tree. The completed checklist above now cites the existing actual proof and its limits; no runtime instrument, artifact or source changes for this workflow correction.
 
 ## Commit Log
 
 The planning commit belongs to the original tree. Every implementation leaf records its own result and commit
 beside its stable ID; Git is the commit-identity authority.
 
+- `.1`: `PERL-PRIVATE-FACTORY-CAPTURE.1 - isolate native dependency calls`, from clean02345ee21; no push.
+
 ## Changelog
 
 - `2026-10-10`: Created the linked bounded implementation tree under the existing private producer protocol.
+- `2026-10-10`: `.1` accepts the standalone actual registration/native dependency framework and hands off to Contracts `.2`. Initial fixture reference reuse is durably diagnosed; factory/pipeline activation remains open.

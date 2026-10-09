@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Register actual callback identity and isolate publication per native context
+
+Private factory registration retains actual CODE references within the current source/producer scope and returns the same callback. Scalar dependency calls use separate captures; list/void calls isolate the dynamic publication slot without context coercion. Native differential traces preserve aliases, effects and both error channels; weak references bound lifetime. A no-lexical-state fixture factory reused one actual CODE reference: four initial failures and an extracted native probe are retained. Lexical fixture closures correct that premise without another production change. Final224/11, native30, consumers17/136, evidence4/book57/2 and original232 preservation pass. Production factory/output/mapping integration stays separately owned.
+
 ## 2026-10-10 — Treat canonical dependency ownership as authoritative over stale projections
 
 The canonical warning task and Knowledge card already restricted dependency work to RGX public interfaces and upstream-owned repair. Stale roadmap projections still described internal generator repairs and nested pin integration. RUST-DEPENDENCY-WARNING-ZERO.8 corrects those current projections and their handoff pointers without remeasuring the historical warning output or changing policy/build behavior. Factory capture resumes from its separately owned first framework leaf.

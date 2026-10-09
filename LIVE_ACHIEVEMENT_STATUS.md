@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: dependency roadmap projection repair complete; private factory framework is next.
+Full PNT: standalone factory/dependency framework accepted; Contracts integration is next.
 
 ## Latest Completed Slice
 
-`RUST-DEPENDENCY-WARNING-ZERO.8` — Current Rust warning paragraphs and status rows in both roadmaps now follow the adopted RGX public-interface boundary. RGX owns transitive preparation and dependency repairs; LinkedSpec owns public reproduction/reporting, upstream-result verification and its own fixes. Historical output counts remain qualified and runtime warning follow-up stays non-blocking. Architecture and the public book already agree. No executable, dependency, pin or build change; factory framework PERL-PRIVATE-FACTORY-CAPTURE.1 is next.
+`PERL-PRIVATE-FACTORY-CAPTURE.1` — The standalone private framework passes224 assertions,30 native differential modes and11 effective semantic source faults;17 direct suites in136 supplied files, evidence4 and complete book57/two controls pass. Actual callbacks register only in their current source/producer scope. Scalar dependency calls get separate captures; list/void calls retain native contexts with publication disabled. Caller aliases, once-only effects, returns/errors, map references and lifetime are preserved. The initial four identity failures came from a shared native fixture callback and are retained with the actual reference probe; lexical fixture closures correct that assumption without another production change. Original232 input-composition bindings are historical. Production factory/pipeline/output/mapping/full-private/canonical integration remains open; Contracts owner .2 is next.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.1` from this clean commit and implement the private actual-callback registration/dependency boundary framework. Preserve historical claim inputs before production writes; factory/output/mapping/full-private/canonical admission remain open.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.2` from this clean commit. Inspect the actual Contracts factory/dependency seams under the retained protocol and split before writes if needed. Preserve historical claim inputs before changing their bytes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.1` — standalone224/11, native30, supplied17/136, evidence4/book57/2; original232 preserved; draft reference diagnosis retained.
 - `RUST-DEPENDENCY-WARNING-ZERO.8` — stale roadmap permissions corrected; RGX public/upstream boundary preserved; factory framework next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` — linked bounded factory owners; current roadmap aligned; P1 policy projection correction next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` — independent140/10; actual8 events/64 joins; consumers16/135; evidence4/book57/2.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.1` from this clean commit and implement t
 - `REPO-HYGIENE.14` — due dated metadata/actual-channel review; zero removals.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — historical recovery/selection status reconciled with current foundation.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — private foundation62/16; actual producer integration remains open.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
 
 ## History
 

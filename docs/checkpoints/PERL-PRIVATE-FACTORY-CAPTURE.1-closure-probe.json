@@ -1,0 +1,14 @@
+{
+  "producer_sha256": "a3024f593fb5602687be8d0f4dcfeb50766ebd40ef666bff4709ddc906d9494a",
+  "fixture": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-draft1-fixture.t",
+  "fixture_sha256": "3ab0974f51786a18d1e1dbfae663604e07107908b37f04b340ec0a6e4a2c3f6d",
+  "command": [
+    "perl",
+    "-e",
+    "use Scalar::Util qw(refaddr);\nsub factory { return sub { emit(@_) } }\nmy $left = factory(); my $right = factory();\nprint \"same_actual_callback=\", (refaddr($left) == refaddr($right) ? 1 : 0), \"\n\";\nsub lexical_factory { my $identity = {}; return sub { ++$identity->{calls}; return 'same' } }\nmy $a = lexical_factory(); my $b = lexical_factory();\nprint \"distinct_lexical_callbacks=\", (refaddr($a) != refaddr($b) ? 1 : 0), \"\n\";\n"
+  ],
+  "returncode": 0,
+  "stdout_base64": "c2FtZV9hY3R1YWxfY2FsbGJhY2s9MQpkaXN0aW5jdF9sZXhpY2FsX2NhbGxiYWNrcz0xCg==",
+  "stderr_base64": "",
+  "scope": "The actual draft factory body is extracted unchanged. Two calls return one actual CODE reference; lexical state produces distinct closures. This diagnoses an invalid fixture assumption, not a production registry failure."
+}

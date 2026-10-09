@@ -994,14 +994,34 @@ Changing an intermediate argument or CSV shape invalidates dependent grants even
 after selection. An unchanged neighboring branch remains valid. A failed nested
 scope restores the enclosing chain, and scope exit removes its authority.
 
-This input composition is verified before built-in factory registration and
-output integration. It does not change the quoted-first replacement example or
-establish complete private Phase0 or mapped/canonical admission. During factory
-and output integration, each injected dependency call still needs its own capture
-scope: an opaque callback
-may call a producer and then return an equal literal. Its ordinary value remains
-valid, but the enclosing callback must not inherit the nested publication. These
-factory/dependency safeguards remain subsequent integration.
+This input composition is verified before production factory and output
+integration. It does not change the quoted-first replacement example or establish
+complete private Phase0 or mapped/canonical admission.
+
+Private dependency calls preserve native context while isolating publication.
+The standalone framework now lets a factory register its actual callback in the
+current source and producer scope, returning that same reference. A fresh scope
+cannot borrow registrations; finished scopes release their references. Two
+factory invocations can return the same actual callback, so invocation count or a
+public name cannot establish distinct identities.
+
+Each injected call receives a separate boundary. For example, an opaque callback
+can call a producer and return the equal literal `same`. The ordinary result stays
+`same`, while its enclosing callback receives no nested publication. The boundary
+preserves caller aliases, one invocation, successful error effects and fatal
+exception identity:
+
+| Native call context | Ordinary result | Private publication behavior |
+| --- | --- | --- |
+| Scalar | The actual scalar, reference or undefined result | Separate capture; only an actually registered callback can publish its own scalar-string packet |
+| List | The actual returned list | Isolated call with publication disabled |
+| Void | The original effects | Isolated call with publication disabled |
+
+A known child captured explicitly retains its own packet. Returning that child's
+text does not transfer the packet to its parent; later output builders must
+compose the actual retained child capture. Public dependency maps and callback
+fields stay unchanged. The framework is verified independently; production
+factory call sites and pipeline activation remain subsequent integration.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
