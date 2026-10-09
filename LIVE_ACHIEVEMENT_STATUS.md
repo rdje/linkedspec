@@ -6,7 +6,7 @@ PNT private producer repair; standalone foundation verified and ready for actual
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — Exact recovered draft/accessor verified with62 independent fixture assertions and16 effective source inverses. Seven unchanged direct consumers pass; book rendered. Initial masked/earlier-failing inverses and actual channels remain retained. Actual producer integration, mapping and complete guarded Phase0 remain open.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — Older recovery/selection cards now identify their original historical boundaries and link the verified standalone foundation. No runtime or measurement change; actual producer integration remains open.
 
 ## Next Action
 
@@ -14,6 +14,7 @@ Complete due artifact review under REPO-HYGIENE at this clean boundary, then act
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — historical recovery/selection status reconciled with current foundation.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — private foundation62/16; actual producer integration remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
@@ -29,7 +30,6 @@ Complete due artifact review under REPO-HYGIENE at this clean boundary, then act
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` — grouped-role RED114/GREEN789; default72/public36/consumer1644; fresh canonical next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` — immutable73/consumer1473; grouped-pattern primitive cause retained; focused repair next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — callable signature RED10/GREEN225; compiler40/18 values/direct1473 groups; canonical acceptance next.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0` — bounded immutable proof/historical inverse; callable signature regression owned; membership stays open.
 
 ## History
 

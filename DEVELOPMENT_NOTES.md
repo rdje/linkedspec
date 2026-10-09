@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Historical recovery assertions need explicit boundaries
+
+SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2 corrects two stale current-status fields after foundation acceptance. The recovery reviewer proves production restoration at its original Git checkpoint; current installed private code belongs to the separate foundation proof. The cards now expose that distinction and current authority without rewriting historical evidence or claiming integrated runtime acceptance.
+
 ## 2026-10-09 — Private emission authority is identity-bound
 
 SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 verifies the exact recovered draft with an independent labelled-character oracle and actual callback/capture/event/source identities. Sixteen source inverses distinguish registration, coordinates, consumption, context, aliases, invocation count, detachment and fatal nested unwind. Three initially masked or earlier-failing inverses are retained and strengthened. The module is standalone; input/node authority and built-in producer integration are next. See `docs/knowledge/perl-private-emission-foundation.md` and the owning claim; no replacement or full Phase0 acceptance is inferred.

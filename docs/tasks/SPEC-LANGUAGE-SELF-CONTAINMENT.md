@@ -3832,7 +3832,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Follow the exact selected protocol and limits in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1-plan.json. Never infer output authority from equal text. Commit this bounded slice before activating the next.
 
   Recovery split: October9 machine-crash recovery preserves the exact surviving activation/draft at clean58a11ae80 in child .0; foundation implementation/proof remains child .1. Original activation text and all surviving bytes are recoverable from the child crash snapshot. No foundation acceptance or later integration is claimed.
-  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`; `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`.
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`; `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`; `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2`.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0`
   Status: `done`
@@ -3873,6 +3873,19 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **ADDRESSED (verified)** — Original foundation unavailable; corrected independent fixture PASS62,16 reason-sensitive source REDs; initial ineffective controls remain disclosed. Private foundation availability/semantics only.
 - [x] **NO REGRESSION** — `prove -v -Iperl` seven unchanged direct consumers PASS; source/fixture syntax clean. Complete guarded Phase0 is the separately owned final private acceptance .2.5, not this ordinary foundation leaf.
 - [x] **LOCKSTEP** — mdBook rendered and new private-foundation Knowledge card, task/frontier/roadmap/index/resume/live/change/notes/claim are synchronized. `git diff --check` and normal focused doctrines govern landing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2`
+  Status: `done`
+  Goal: Reconcile older recovery/producer-selection Knowledge statuses with the now verified standalone foundation.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1`
+  Acceptance: Preserve original dated diagnosis/recovery evidence, identify the historical reverify boundary, link current foundation authority, and keep actual integration/Phase0/mapping obligations open. No code, test, proof-input, policy, public API or measurement change.
+  Verification tier: `focused`
+  Focused checks: Review the two source cards against committed foundation acceptance and original historical boundaries; regenerate/gate Knowledge Map; memory/task metadata/claim/history/diff and normal hooks. Existing public teaching remains accurate.
+  Canonical trigger: none; bounded correction of existing fact status only.
+  Claim verification: none: This slice corrects retrieval/status of already accepted evidence and publishes no new measurement.
+  Verification: Both original historical assertions are retained; current status and continuation links now resolve to the committed standalone foundation. Knowledge regeneration, memory/task/claims/history/diff and normal doctrine hooks govern landing. Public book already describes the standalone foundation and open integration accurately; no edit/render is required.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2 - reconcile foundation knowledge status` (Git owns identity).
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1`
   Status: `pending`
@@ -4264,6 +4277,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0` | `done` | Recovery and standalone foundation verified; actual integration remains separate. |
 | 43.4.2.0.3.1.1.1.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` | `done` | Exact crash draft retained; production restored; stop at clean handoff. |
 | 43.4.2.0.3.1.1.1.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` | `done` | Verified private foundation62/16; producer integration remains .2.1. |
+| 43.4.2.0.3.1.1.1.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` | `done` | Historical recovery/selection cards now link current standalone foundation authority. |
 | 43.4.2.0.3.1.1.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1` | `pending` | Actual argument/node input authority and built-in callback registration. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |
 | 43.4.2.0.3.1.1.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.3` | `pending` | Statement/control/raw emission construction. |

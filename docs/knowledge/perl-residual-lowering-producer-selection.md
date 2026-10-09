@@ -8,7 +8,7 @@ answers:
   - "do method argument frames prove generated output provenance"
   - "can equal scalar callback output establish source authority"
 date: 2026-10-08
-status: bounded diagnosis; private emission protocol selected but unimplemented
+status: bounded diagnosis; standalone emission foundation verified; integration open
 tags: [perl, actionir, residual, producer, source-provenance, callback]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1 retains four independently recovered5313-input regular Git graphs and66 actual commands under three seeds. Eight typed/literal and three raw sources, actual callback/parser-frame/Toolbox channels and ten effective evidence RED controls distinguish the producer behavior. Production remains unchanged."
 reverify:
@@ -38,8 +38,13 @@ The selected repair plan uses a private emission scope, actual known callback
 and invocation identity, original argument/node frames, and explicit copied,
 generated and consumed fragments at the actual construction/edit seams.
 An opaque callback returning an equal literal cannot acquire authority from
-value equality. This protocol is a design requirement, not an implemented or
-verified mechanism. Its six ordered repair slices must prove an independently
-authored labelled-character oracle, source inverses, callback/error/nested
-controls, complete Phase0 and unchanged consumers before integration. Original
+value equality. At the diagnosis boundary the protocol was unimplemented. The
+subsequent standalone foundation (`docs/knowledge/perl-private-emission-foundation.md`)
+is now verified; actual producer/input integration, composed continuation,
+complete Phase0 and interval replacement remain open in the ordered repair plan. Original
 family order, public shapes and callback arguments remain requirements.
+
+The original diagnosis remains historical at its recorded unchanged-production
+boundary. The current foundation authority supersedes only the earlier
+unimplemented status; it does not widen the diagnosis or accept the integrated
+producer/mapping repair.

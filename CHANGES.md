@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2 current foundation retrieval
+
+Reconcile the older recovery and producer-selection Knowledge cards with committed standalone foundation acceptance. Retain their original dated evidence, name the immutable recovery reverify boundary, and link current authority. Runtime/proof bytes and open integration/Phase0/mapping obligations remain unchanged. Knowledge/history/memory/task/diff and normal hooks validate this documentation correction.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 private emission foundation
 
 Restore and verify the recovered two-owner standalone protocol:62 authored character/occurrence and callback assertions,16 effective source inverses and seven unchanged direct consumers pass. Exact initial inverse corrections remain retained. Private generated/copied/consumed fragments preserve callback identity/context/aliases/errors without wiring runtime replacement. Book rendered; actual producer integration and complete guarded Phase0 remain later leaves. Claim and Knowledge hold exact scope/evidence.
