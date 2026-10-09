@@ -8,11 +8,11 @@ answers:
   - "can a known outer callback inherit a nested opaque publication"
   - "what is the next private input authority implementation protocol"
 date: 2026-10-09
-status: constructor collector verified; original-frame and factory integration open
+status: native constructor/input frames verified; compiler-event and factory joining open
 tags: [perl, actionir, ast, source-provenance, callbacks, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0 observes four actual parser inputs/eight independently authored argument intervals, seven callback modes and a two-route actual Contracts dependency intervention; seven reason-sensitive evidence RED controls pass. All parent Perl/spec production inputs remain unchanged."
 reverify:
-  - "Current constructor collector: PERL5LIB= prove -v -Iperl t/actionir_ast_constructions.t"
+  - "Current constructor/native input collectors: PERL5LIB= prove -v -Iperl t/actionir_ast_constructions.t t/actionir_ast_input_frames.t"
   - "The .2.1.0 unchanged-production diagnosis is historical at f61130d731d9901005d3332e0fbadf5c96896e2a after constructor integration; do not refresh its original source guards."
 ---
 
@@ -68,3 +68,9 @@ Implementation `.2.1.1` now verifies the standalone constructor collector;
 `docs/knowledge/perl-private-ast-constructions.md` owns its current behavior.
 Original-frame joining `.2.1.2` and factory/dependency capture `.2.1.3` remain
 open. This update preserves the historical diagnosis and its original bindings.
+
+Native parser-relative root/call/array frames now have their own bounded proof
+under `.2.1.2.0`; `docs/knowledge/perl-private-ast-input-frames.md` owns current
+behavior. The newly observed original whitespace-only public AST span defect is
+P1 `.2.1.2.4`, scheduled next at the clean boundary before MethodExpr/event joining.
+Native input coordinates do not yet grant compiler-event copy/consume authority.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: standalone AST construction collector verified; explicit original-frame joining next.
+Full PNT: native AST input frames verified; newly observed P1 whitespace-only public span repair next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` — Actual capture/callback/returned-root and reachable constructor identities pass77 assertions/15 effective source inverses, ten direct consumer suites and eight evidence controls. Initial74/14 draft preserved. A weak-reference lifetime RED exposed a snapshot back-edge; identity-only alias records fix it and the inverse restores RED. Public AST and ordinary callback semantics remain exact; descriptions grant no original source authority.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` — Native root/call/array frames pass63 assertions/11 source inverses, eleven direct suites, three actual Toolbox routes and eight evidence controls. Wrong public-search positions do not select private CSV frames; descriptions grant no compiler-event origin. Original/live public AST probes expose six inverted whitespace-only intervals; exact trim-helper intervention locates the pre-existing double-edge-trim defect, owned immediately next in .2.1.2.4. Native empty frames are ordered independently.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` to join actual roots/arguments to explicit selected-event/CSV frames. Factory/dependency captures .2.1.3, composition .2.1.4, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` and repair whitespace-only public AST spans before MethodExpr captures .2.1.2.1, original-event joining .2.1.2.2 and input acceptance .2.1.2.3. Factory/composition, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` — native63/11; actual empty public-span cause and immediate P1 repair owner.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` — constructor77/15, exact consumers and lifetime RED/GREEN.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0` — exact input/factory protocol and opaque dependency capture constraint.
 - `REPO-HYGIENE.14` — due dated metadata/actual-channel review; zero removals.
@@ -29,7 +30,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` to join 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2` — five finite controls; rejected original fully recoverable; accepted-state gap next P1.
 - `REPO-HYGIENE.12` — June12 Phase0 observations qualified as historical; no runtime or census refresh.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0` — two44-command captures, seven real failures/seven healthy guards, consumer144; exact replacement remains open.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — committed77 commands/compiler41/public120+18+36/default72/consumer1644; canonical receipt gates membership closure.
 
 ## History
 

@@ -25,7 +25,7 @@ use Scalar::Util ();
 # Private construction descriptions are separate from original-source authority.
 # A caller must later join an actual construction to an explicit input frame;
 # public source/source_span fields and equal copies cannot make that selection.
-our ($_construction_scope, $_construction_recorder);
+our ($_construction_scope, $_construction_recorder, $_construction_input, $_provided_parse_input);
 
 sub _same_construction_reference {
  my ($left, $right) = @_;
@@ -89,6 +89,7 @@ sub _with_node_constructions {
  my ($work) = @_;
  local $_construction_scope = {captures => {}};
  local $_construction_recorder;
+ local ($_construction_input, $_provided_parse_input);
  if (!defined wantarray) { $work->(); return }
  return $work->()
 }
@@ -98,6 +99,8 @@ sub _capture_node_constructions {
  my $arguments = \@_; # Retain aliases as well as argument reference identities.
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   my @recorded;
+  my $input_source = @$arguments && !ref($arguments->[0]) ? $arguments->[0] : undef;
+  local ($_construction_input, $_provided_parse_input);
   local $_construction_recorder = ref($_construction_scope) eq 'HASH'
    ? sub { push @recorded, $_[0] } : undef;
   my $value = $callback->(@$arguments);
@@ -110,6 +113,7 @@ sub _capture_node_constructions {
     grep { $reachable{Scalar::Util::refaddr($_->{node})} } @recorded;
    $_construction_scope->{captures}{Scalar::Util::refaddr($capture)} = {
     capture => $capture, callback => $callback, root => $root, nodes => \%nodes,
+    input_source => $input_source,
    };
    $capture->{construction} = _construction_description($value);
   }
@@ -135,9 +139,79 @@ sub _record_node_construction {
  my ($node) = @_;
  return unless ref($node) eq 'HASH';
  my $error = $@;
- $_construction_recorder->({node => $node, snapshot => _snapshot_construction($node, {})});
+ my $input = $_construction_input;
+ my $frame = _valid_parser_input($input)
+  && defined($node->{source}) && !ref($node->{source}) && $node->{source} eq $input->{raw}
+  && ref($node->{source_span}) eq 'HASH'
+  && $node->{source_span}{start} == $input->{public_start}
+  && $node->{source_span}{end} == $input->{public_end}
+  ? {root => $input->{root}, raw => $input->{raw}, start => $input->{start}, end => $input->{end}}
+  : undef;
+ $_construction_recorder->({node => $node, snapshot => _snapshot_construction($node, {}), input => $frame});
  $@ = $error;
  return
+}
+
+# Native input frames describe an actual parser invocation. They are not
+# compiler-event origins. Only explicit root trims and CSV piece boundaries are
+# eligible here; compatibility searches continue to serve public AST spans.
+sub _valid_parser_input {
+ my ($input) = @_;
+ return 0 unless ref($input) eq 'HASH' && ref($input->{root}) eq 'HASH'
+  && defined($input->{root}{source}) && !ref($input->{root}{source})
+  && defined($input->{raw}) && !ref($input->{raw});
+ my ($start, $end) = @{$input}{qw(start end)};
+ return defined($start) && !ref($start) && $start =~ /\A[0-9]+\z/o
+  && defined($end) && !ref($end) && $end =~ /\A[0-9]+\z/o
+  && $start <= $end && $end <= length($input->{root}{source})
+  && substr($input->{root}{source}, $start, $end - $start) eq $input->{raw}
+}
+
+sub _parser_input_frame {
+ my ($source, $base_start, $trimmed, $start, $end, $provided) = @_;
+ return undef unless defined($source) && !ref($source);
+ my $parent = _valid_parser_input($provided) && $provided->{raw} eq $source
+  ? $provided : {root => {source => $source}, raw => $source, start => 0, end => length($source)};
+ my $input_start = $parent->{start} + $start - $base_start;
+ my $input = {root => $parent->{root}, raw => $trimmed,
+  start => $input_start, end => $input_start + length($trimmed),
+  public_start => $start, public_end => $end};
+ return _valid_parser_input($input) ? $input : undef
+}
+
+sub _csv_parser_input {
+ my ($source, $offset, $length) = @_;
+ my $input = $_construction_input;
+ return undef unless _valid_parser_input($input) && $input->{raw} eq $source;
+ return undef if $offset < 0 || $length < 0 || $offset + $length > length($source);
+ return {root => $input->{root}, raw => substr($source, $offset, $length),
+  start => $input->{start} + $offset, end => $input->{start} + $offset + $length}
+}
+
+sub _csv_argument_input {
+ my ($input, $frame, $argument, $public_start) = @_;
+ return undef unless _valid_parser_input($input) && ref($frame) eq 'HASH'
+  && $frame->{source} eq $input->{raw} && $frame->{raw} eq $argument;
+ my $span = $frame->{source_span};
+ return undef unless ref($span) eq 'HASH';
+ my $child = {root => $input->{root}, raw => $argument,
+  start => $input->{start} + $span->{start}, end => $input->{start} + $span->{end},
+  public_start => $public_start, public_end => $public_start + length($argument)};
+ return _valid_parser_input($child) ? $child : undef
+}
+
+sub _input_frame_for {
+ my ($capture, $callback, $node) = @_;
+ return undef unless _construction_for($capture, $callback, $node);
+ my $entry = $_construction_scope->{captures}{Scalar::Util::refaddr($capture)};
+ my $root = $entry->{root}{input};
+ my $input = $entry->{nodes}{Scalar::Util::refaddr($node)}{input};
+ return undef unless _valid_parser_input($root) && _valid_parser_input($input)
+  && _same_construction_reference($root->{root}, $input->{root})
+  && defined($entry->{input_source}) && !ref($entry->{input_source})
+  && $root->{root}{source} eq $entry->{input_source};
+ return {source => $input->{root}{source}, raw => $input->{raw},
+  source_span => {start => $input->{start}, end => $input->{end}}}
 }
 sub _fallback_trim {
  my ($value) = @_;
@@ -376,6 +450,10 @@ sub parse_action_expr {
  $opts = {} unless ref($opts) eq 'HASH';
  my $base_start = defined($opts->{base_start}) ? $opts->{base_start} : 0;
  my ($trimmed, $start, $end) = _trim_with_offsets($expr, $base_start);
+ my $provided = $_provided_parse_input;
+ local $_provided_parse_input;
+ local $_construction_input = ref($_construction_recorder) eq 'CODE'
+  ? _parser_input_frame($expr, $base_start, $trimmed, $start, $end, $provided) : undef;
  return _raw_node($trimmed, $start, $end, 'empty_expression')
   unless length($trimmed);
  return _parse_expr($trimmed, $start, $end)
@@ -462,7 +540,8 @@ sub _parse_call_expr {
  return undef unless ref($call) eq 'HASH' && defined($call->{method});
  my $open_idx = index($trimmed, '(');
  my $payload = substr($trimmed, $open_idx + 1, length($trimmed) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, $call->{method});
+ my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, $call->{method},
+  _csv_parser_input($trimmed, $open_idx + 1, length($payload)));
  return _node(
   'call',
   $trimmed,
@@ -741,8 +820,17 @@ sub _skip_switch_branch_separators {
 }
 
 sub _parse_arg_exprs {
- my ($payload, $payload_start, $method) = @_;
- my $parts = _split_top_level_csv($payload, $method);
+ my ($payload, $payload_start, $method, $input) = @_;
+ my ($parts, $frames);
+ if (_valid_parser_input($input) && $input->{raw} eq $payload) {
+  _require_method_expr_pkg() unless LinkedSpec::ActionIR::MethodExpr->can('_split_csv_with_source_frames');
+  my $capture = LinkedSpec::ActionIR::MethodExpr::_split_csv_with_source_frames(
+   \&_split_top_level_csv, $payload, $method);
+  ($parts, $frames) = @{$capture}{qw(arguments source_frames)};
+ } else {
+  $parts = _split_top_level_csv($payload, $method);
+  $frames = [];
+ }
  my %pattern_starts;
  if (defined($method)) {
   my $prefix = "$method(";
@@ -751,10 +839,13 @@ sub _parse_arg_exprs {
  }
  my @args;
  my $cursor = 0;
+ my $index = 0;
  foreach my $arg (@$parts) {
   my $arg_offset = _find_piece_offset($payload, $arg, $cursor);
   $arg_offset = $cursor unless defined $arg_offset;
   my $start = $payload_start + $arg_offset;
+  local $_construction_input = _csv_argument_input($input, $frames->[$index++], $arg, $start);
+  local $_provided_parse_input = $_construction_input;
   # A recognized pattern owns the argument before fluent-dot parsing begins.
   my $literal = $pattern_starts{$arg_offset}
    ? _parse_literal_expr($arg, $start, $start + length($arg)) : undef;
@@ -777,7 +868,8 @@ sub _parse_array_literal_expr {
  my ($trimmed, $start, $end) = @_;
  return undef unless _outer_delimiter_is_balanced($trimmed, '[', ']');
  my $payload = substr($trimmed, 1, length($trimmed) - 2);
- my @items = _parse_arg_exprs($payload, $start + 1);
+ my @items = _parse_arg_exprs($payload, $start + 1, undef,
+  _csv_parser_input($trimmed, 1, length($payload)));
  return _node('array_literal', $trimmed, $start, $end, items => \@items)
 }
 

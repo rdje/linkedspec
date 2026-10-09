@@ -3938,7 +3938,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   LinkedSpec-tool evidence: Actual `LinkedSpec::call_spec_handler_subst` replays the three healthy authored twins/Unicode-literal/CRLF actions; exact lowered values match the .2.1.0 retained independent pre-change observation. Full channels/source guards are `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1-toolbox.json`; empty-slot behavior remains parser-only.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Actual MethodExpr argument objects and original-frame copy/consumption authority; preserve opaque dependency outputs and callback effects.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1`
   Planned tier: `focused`
@@ -3946,6 +3946,73 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Planned canonical boundary: None for private bounded implementation; complete private Phase0 and independent mapped/public admission remain separately owned.
   Planned claim record: none: Planning only; actual implementation declares its own measured claim before results.
   Acceptance: Follow the committed .0 source-bound selection and preserve the original six-slice obligations; split further before writes if an actual owner set grows beyond a safe slice.
+
+  Safety split: Native parser-input occurrence frames, actual MethodExpr capture/effects and compiler-event SourceOrigins joining are separate authorities. Implement .0-.2 and independently accept .3 before factory capture. The newly observed whitespace-only public AST span defect is P1 .4, next after .0, before .1. Native frames remain descriptive until the actual event/callback/invocation join; unsupported parser split paths decline conservatively.
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`
+  Status: `done`
+  Goal: Retain actual parser-relative root and CSV-child frames without using compatibility raw-piece searches.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1`
+  Owned paths: AST/Parser.pm; new t/actionir_ast_input_frames.t; leaf-prefixed proof/claim/freeze; Knowledge/book/continuity.
+  Verification tier: `focused`
+  Focused checks: Actual LinkedSpec AST parse callbacks/Toolbox facade and original MethodExpr CSV returns, independent authored input intervals and wrong-public-search intervention; supplied-tree original RED/GREEN and semantic source inverses; unchanged constructor/direct consumers, full actual channels/source/input binding and evidence REDs; syntax/mdBook/memory/Knowledge/history/claim/diff/normal hooks.
+  Canonical trigger: none; private bounded descriptive parser frames, no original-event grant, current public behavior or admission change. Complete private Phase0 and canonical mapping remain separate.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0.json`
+  Activation: Clean0d52a407c4c508cfb00d45765471f741a10de616; constructor77/15, ten consumers, three actual Toolbox routes/eight evidence controls and all ten hooks/post-commit pointer PASS; brief0 and clean Git confirmed. Current constructor/selection Knowledge and actual _parse_arg_exprs/call/array parser seams reviewed.
+  Acceptance: Original trims, actual CSV flush frames, retained argument occurrence indices, independent Unicode/CRLF/repeated/empty-slot spans, deliberately wrong public _find_piece_offset controls; actual identities and public AST/callback/effect/nested restoration unchanged. Ordinary call/array CSV routes are eligible; unsupported split routes conservatively decline. No original-event authority.
+
+  Result: Native descriptive root/call/array input frames PASS63 assertions/11 effective semantic source inverses. Actual original CSV returned occurrences rebase through explicit payload/parent offsets, independent of public base_start and compatibility _find_piece_offset; a wrong-public-search intervention preserves ordinary AST while separating private twins. Copied/changed/foreign/manual/native-root/CSV/scoped identities decline; unsupported descendants remain conservative. Existing constructor77 recurs. No compiler-event/source-copy/consume grant lands.
+  Verification: Eleven guarded live direct suites, three actual call_spec_handler_subst routes, exact producer/input/semantic-inverse/source/claim preservation reviewer and eight reason-sensitive evidence RED controls PASS. All250 original constructor-claim bindings preserved by mode/revision only at0d52a407. Only Parser production bytes change; syntax, public book and mdBook PASS (existing large-search-index warning). Memory/Knowledge/claim/history/diff and normal hooks required before landing.
+  Owned finding: Four actual public empty/whitespace inputs at original0d52 and live source yield three inverted intervals per route (six independent product RED rows); commands themselves exit0. Actual _trim_with_offsets returns empty/base+length/base because both edge trims consume the full whitespace input. A narrow end-to-start intervention corrects all four rows on both routes. This predates native frames, whose four empty intervals are independently ordered. P1 repair .2.1.2.4 is next immediately after this clean commit, before .1; broader runtime failure is unassessed and no public repair is claimed here.
+  LinkedSpec-tool evidence: Actual AST public parse, original MethodExpr CSV callback/returned-reference observation, call_spec_handler_subst against the original three-route oracle, and exact original/live trim-helper intervention; complete source-guarded channels retained under `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0-*`.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 - retain native AST input frames` (Git records identity).
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
+  Status: `pending`
+  Goal: Retain actual MethodExpr input captures and original frame identities while preserving callback effects and existing bridge contracts.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`
+  Owned paths: MethodExpr.pm and/or SourceEmissions.pm only as required by actual capture seam; focused tests/proof/docs.
+  Planned tier: `focused`
+  Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
+  Planned canonical boundary: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
+  Planned claim record: none: Planning only; declare the actual measured record before results.
+  Acceptance: Use actual original producer returns and frames; preserve existing legacy wrapper semantics and all ordinary callback results/context/references/aliases/effects/errors. Do not infer input identity from a copied descriptive frame. Choose the minimal owning seam before production writes.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
+  Status: `pending`
+  Goal: Join actual parser/argument captures to selected compiler events and original copy/consume authority.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
+  Owned paths: SourceEmissions.pm; necessary MethodExpr private seam only; focused tests/proof/docs.
+  Planned tier: `focused`
+  Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
+  Planned canonical boundary: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
+  Planned claim record: none: Planning only; declare the actual measured record before results.
+  Acceptance: Bind actual capture/callback/event/returned node or argument-array occurrence to current SourceOrigins and private input scopes. No detached packet, copied/changed/foreign identity or equal text selects original frames. Rebase explicit original offsets and preserve builder text; unsupported inputs become generated or decline consumption.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`
+  Status: `pending`
+  Goal: Independently accept parser/MethodExpr/original-event input composition before factory/dependency registration.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
+  Owned paths: Focused composed acceptance artifacts/Knowledge/docs; production changes only for owned defects.
+  Planned tier: `focused`
+  Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
+  Planned canonical boundary: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
+  Planned claim record: none: Planning only; declare the actual measured record before results.
+  Acceptance: Verify actual population and source provenance at each frame/identity join, aliases/context/effects/opaque/nested exceptions, copied/equal/foreign inputs and independent character/occurrence/copy/consume oracles. Keep original six-slice producer/Phase0/mapping/canonical obligations open.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`
+  Status: `pending`
+  Goal: Repair the observed inverted public AST interval for whitespace-only expressions before input joining proceeds.
+  Priority: P1; reproducible public source-span invariant violation, scheduled immediately after .0 at the next clean boundary.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`
+  Reproduction: Actual `LinkedSpec::ActionIR::AST::parse_action_expr(q{  }, {base_start => 7})` returns empty raw_perl with `{start => 9, end => 7}`. .0 owns the original-revision and exact trim-helper intervention diagnosis before this repair. Source interval is reversed; native input frames must not borrow it.
+  Owned paths: AST/Parser.pm::_trim_with_offsets, focused empty/whitespace-root regression and direct dependents, exact baseline/intervention/final/source-inverse/claim artifacts, Knowledge/book/continuity.
+  Planned tier: `focused`
+  Planned focused proof: Independent Unicode/CRLF/whitespace trims and nonzero bases; actual public AST and private native frames; baseline observed RED and exact correction/source inverse; direct consumers, public book and ordinary focused doctrine checks. Preserve all nonempty parser behavior and callback/error/context contracts.
+  Planned canonical boundary: none for an ordinary invariant bug fix within the existing AST shape; escalate before writes if a public/generated contract or mechanical owner changes. Complete Phase0/mapped/canonical acceptance remains open.
+  Planned claim record: none: Pending repair; the source-bound observed defect/intervention belongs to .0, final repair declares its own actual record.
+  Acceptance: Empty/whitespace-only nodes have an ordered zero-width interval after original leading whitespace at the requested base; nonempty intervals remain exact. Close with actual RED/GREEN and distinguishing inverse; do not merely log or defer this defect.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4352,7 +4419,12 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1` | `active` | Actual argument/node input authority and built-in callback registration. |
 | 43.4.2.0.3.1.1.1.2.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0` | `done` | Four/eight input proof; actual opaque nested capture constraint and selected protocol. |
 | 43.4.2.0.3.1.1.1.2.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` | `done` | Standalone construction77/15; lifetime RED/GREEN; original-frame joining next. |
-| 43.4.2.0.3.1.1.1.2.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` | `pending` | Actual MethodExpr argument/frame authority. |
+| 43.4.2.0.3.1.1.1.2.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` | `active` | Actual MethodExpr argument/frame authority. |
+| 43.4.2.0.3.1.1.1.2.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` | `done` | Native63/11, actual frames/consumers; P1 public trim repair next. |
+| 43.4.2.0.3.1.1.1.2.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` | `pending` | Actual MethodExpr input capture/effects. |
+| 43.4.2.0.3.1.1.1.2.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` | `pending` | Original-event join and copy/consume. |
+| 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
+| 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `pending` | P1 whitespace-only public span repair, next after .0. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

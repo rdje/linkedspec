@@ -1,0 +1,98 @@
+{
+  "result": "PASS",
+  "fixture_assertions": 63,
+  "source_inverses": 11,
+  "consumer_suites": 11,
+  "toolbox_routes": 3,
+  "empty_product_reds": [
+    {
+      "route": "live",
+      "source": "  ",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    },
+    {
+      "route": "live",
+      "source": "\r\n",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    },
+    {
+      "route": "live",
+      "source": " \r\n\t\u2003",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    },
+    {
+      "route": "original",
+      "source": "  ",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    },
+    {
+      "route": "original",
+      "source": "\r\n",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    },
+    {
+      "route": "original",
+      "source": " \r\n\t\u2003",
+      "result": "RED",
+      "reason": "public empty source interval is inverted"
+    }
+  ],
+  "evidence_red_controls": [
+    {
+      "name": "failed-final",
+      "reason": "actual final successful channels",
+      "result": "RED"
+    },
+    {
+      "name": "forged-final-input",
+      "reason": "actual input identity",
+      "result": "RED"
+    },
+    {
+      "name": "missing-inverse",
+      "reason": "complete inverse population",
+      "result": "RED"
+    },
+    {
+      "name": "forged-inverse-producer",
+      "reason": "actual inverse producer identity",
+      "result": "RED"
+    },
+    {
+      "name": "failed-consumers",
+      "reason": "actual consumers PASS",
+      "result": "RED"
+    },
+    {
+      "name": "missing-consumer",
+      "reason": "complete direct consumer selection",
+      "result": "RED"
+    },
+    {
+      "name": "forged-Toolbox-output",
+      "reason": "actual unchanged Toolbox oracle",
+      "result": "RED"
+    },
+    {
+      "name": "missing-original-empty-route",
+      "reason": "empty original/live routes",
+      "result": "RED"
+    }
+  ],
+  "producer_sha256": "bad4a9bc6d4f26f16f8e6de7a246b5f893922cb5ee08c8a3f026197d4197921f",
+  "records": {
+    "final": "28f13df095dc257985d91d43a91ba6c69d3424628173c21efb6b5ea27dd8030a",
+    "inverses": "fd2978b780152e6ac5a0385804445fbb27adf204a21850cf10508b042e4d04ed",
+    "original": "73d7f9e99c61b223aea3266d46a8dd27bb238a5ad80594d1e7265532cb5b37c4",
+    "consumers": "292a4a61bbe2afe189bca60b7cdf396b80f0588217c03603d40716a868641346",
+    "toolbox": "31887549d197012ce506db4656d0a6407cba8fa7496a933f5f94fbaf10d900a3",
+    "empty": "c9aca6e762733d10cf25277dbe770f6bb46131e874d8527589431e908fdb26ce",
+    "freeze": "f65515d4d7428336219850cf76deae31f27c3244e9b89543b84e86d60bd060aa"
+  },
+  "scope": "Native parser-relative frames only; no compiler-event/source-copy grant. Existing whitespace-only public-span defect is independently observed and scheduled next as .2.1.2.4; no fix is claimed."
+}

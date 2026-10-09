@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 retain native AST input frames
+
+Adds standalone parser-relative root trims and actual CSV-child occurrence frames for ordinary calls and array literals. Explicit parent/payload offsets preserve repeated/Unicode/CRLF/empty-slot positions independently of public base_start and raw-piece searches; copied/changed/foreign/manual/scoped roots and unsupported descendants decline. Native63 assertions/11 source inverses, constructor77 within eleven direct suites, three actual Toolbox routes and eight evidence controls pass. Original250 constructor bindings remain historical at0d52. Actual original/live AST probes also expose three inverted whitespace-only public spans per route; narrow trim intervention proves the pre-existing cause. P1 .2.1.2.4 repairs it immediately next; public behavior remains unchanged here, and native empty frames are independently ordered. Book, syntax and focused continuity workflow complete; compiler-event joining/copy/consume and full admission stay open.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1 retain actual AST constructions
 
 Adds standalone dynamic construction capture in AST/Parser.pm without public node fields or original-source grants. Actual capture/callback/root/reachable node identity and immutable plain hash/array/scalar snapshots decline copied, mutated, replaced, opaque or unreturned constructions. Contexts, argument aliases, once-only callbacks, successful caller error and fatal nested restoration remain exact. An actual weak-reference RED exposed snapshot back-edge retention after the original metadata cycle was broken; identity-only aliases fix it. Final77 assertions/15 source inverses, ten guarded consumer suites and eight evidence controls pass. Initial74/14 draft and exact producers are preserved; the prior diagnosis claim retains134 original inputs historically. Syntax, book and focused memory/history/Knowledge/claim workflow complete; original-frame/factory integration remains open.

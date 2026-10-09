@@ -61,3 +61,9 @@ argument objects to explicit selected-event/CSV frames before emission builders
 may copy or consume original intervals. Factory/dependency capture, typed producer
 integration, mapping and independent canonical admission remain open. The selected
 protocol is `docs/knowledge/perl-private-input-authority-selection.md`.
+
+The native parser-input extension is now owned by
+`docs/knowledge/perl-private-ast-input-frames.md`. The original constructor proof
+above is historical at `0d52a407c4c508cfb00d45765471f741a10de616`; its77-assertion
+fixture continues as a direct consumer. Do not refresh its original source-inverse
+guards after the frame extension.

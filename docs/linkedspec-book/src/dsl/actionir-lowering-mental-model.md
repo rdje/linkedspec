@@ -919,12 +919,33 @@ reachable constructed nodes. Copying public source fields does not copy their
 private identity; replacing an equal child or changing a descendant also declines
 the retained description. Nested and exceptional captures restore the enclosing
 scope. These descriptions grant no original-source coordinates by themselves.
-Original argument positions must come from the CSV producer's actual piece
-boundaries, including omitted empty slots. During output integration,
+Native parser-input frames now retain original root trims and the CSV producer's
+actual argument boundaries for ordinary calls and array literals, including omitted
+empty slots. They use character offsets in the actual parser input independently
+of the public `base_start`. For `cat("a", "a")` parsed with `base_start => 23`:
+
+| Node | Public AST interval | Native input interval |
+| --- | --- | --- |
+| Root call | `[23, 36)` | `[0, 13)` |
+| First string | `[27, 30)` | `[4, 7)` |
+| Second string | `[32, 35)` | `[9, 12)` |
+
+The native frames follow actual returned CSV occurrences, so equal arguments keep
+separate positions. Unsupported descendant split paths conservatively decline
+frames. Joining these parser-relative frames to selected compiler-event origins
+remains subsequent work; the native channel alone grants no original-event copy
+or consumption authority. During output integration,
 each injected dependency call also needs its own capture scope: an opaque callback
 may call a producer and then return an equal literal. Its ordinary value remains
 valid, but the enclosing callback must not inherit the nested publication. These
-original-frame joining and dependency safeguards remain subsequent integration.
+original-event joining and dependency safeguards remain subsequent integration.
+
+There is an existing public AST limitation for whitespace-only expressions:
+`parse_action_expr(q{  }, {base_start => 7})` currently returns an empty raw node
+with the reversed public interval `{start => 9, end => 7}`. Native input frames
+instead retain the ordered zero-width parser-input interval `[2, 2)`. The public
+trim repair is the next owned change; the native-frame addition preserves current
+public results while keeping their descriptive coordinates separate.
 
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.
