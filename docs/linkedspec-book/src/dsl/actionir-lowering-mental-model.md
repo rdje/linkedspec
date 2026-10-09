@@ -913,6 +913,15 @@ remain separate fragments so later translation can reject ambiguous continuation
 Producer integration and interval translation remain subsequent work; this
 standalone foundation does not change the quoted-first example above.
 
+Input authority and output authority have separate boundaries. An AST node's
+public source span describes it; copying that hash does not copy the constructor's
+private identity. Original argument positions must come from the CSV producer's
+actual piece boundaries, including omitted empty slots. During output integration,
+each injected dependency call also needs its own capture scope: an opaque callback
+may call a producer and then return an equal literal. Its ordinary value remains
+valid, but the enclosing callback must not inherit the nested publication. These
+input and dependency safeguards are selected next; they are not yet integrated.
+
 Unresolved-helper text scans can still count the preserved helper spelling in a
 literal. A correct returned value therefore does not establish ActionIR readiness.
 For example, the repaired `set(counter, 2)` literal retains an unresolved-helper

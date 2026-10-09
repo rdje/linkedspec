@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0 select private input capture boundaries
+
+Unchanged-production diagnosis retains four AST/MethodExpr inputs/eight independent original argument intervals, seven callback modes and two actual Contracts dependency interventions. Seven evidence RED controls pass. Construction identity, original-frame joining and nested dependency capture are selected as separate private obligations in four implementation children; opaque nested publication inheritance is a prospective integration constraint owned by .2.1.3. Public book and stale MethodExpr fact title now match current scope. Retained source/actual-channel reviewer and mdBook pass; the prior cleanup claim preserves all25 original bindings at476bbd. No production behavior, mapping or Phase0/canonical acceptance changes.
+
 ## 2026-10-09 — REPO-HYGIENE.14 retain due artifact review
 
 Dated 2026-10-09T17:03:50.457281+00:00 parent census retains 12244 candidate rows/14790891057 bytes; three explicit Rust paths are recorded separately. Fresh census, independent per-file OS metadata, size/traversal fixtures and four actual-channel corruption controls pass. Zero removals; verification evidence and reusable caches remain retained. This is a dated metadata observation, not disposal safety, content ownership, liveness or recovery/purge acceptance. Actual producers, exits and both channels are retained; original claims and snapshots remain unchanged. Public retention guidance remains accurate. Focused continuity/doctrine checks and normal hooks govern landing.

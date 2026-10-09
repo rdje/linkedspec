@@ -1,0 +1,70 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0",
+  "activation_commit": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+  "decision": "Keep construction identity, original input frames and output publication as separate private authorities; integrate only actual selected identities within the current SourceOrigins invocation.",
+  "unchanged_production": true,
+  "observations": {
+    "ast": "AST::Parser::_node returns actual constructor objects; public source/source_span fields survive copies. Constructor records alone do not grant original source authority.",
+    "arguments": "MethodExpr existing actual CSV/parser return sidecars match independent original intervals for twins, literal Unicode, CRLF and dropped empty CSV slots; copied/foreign/opaque returns decline frames, changed entries decline individually.",
+    "dependency": "Actual Contracts input_slice closure calls the injected method callback in scalar context. A controlled future builder in an opaque dependency publishes into an unguarded outer capture. Capturing that dependency separately preserves value/order/context and denies inherited publication. This is a future integration constraint, not a shipped producer defect."
+  },
+  "implementation_children": [
+    {
+      "suffix": ".1",
+      "owners": [
+        "perl/LinkedSpec/ActionIR/AST/Parser.pm"
+      ],
+      "protocol": "Add a dynamically scoped constructor observer and scalar parse-capture wrapper at actual _node return; retain actual constructed references and immutable descriptions. Select only the actual returned root and unchanged constructed objects. Nested and fatal calls restore outer scope; no public AST fields or SourceOrigins grants. Constructor coordinates remain descriptive until .2.",
+      "proof": "Independent expected public AST; actual construction/root/callback identities; copied, foreign, mutated, opaque, nested and fatal results; scalar context, exactly-once and successful error preservation; constructor observer absent behaves identically."
+    },
+    {
+      "suffix": ".2",
+      "owners": [
+        "perl/LinkedSpec/ActionIR/AST/Parser.pm",
+        "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+        "perl/LinkedSpec/ActionIR/SourceEmissions.pm"
+      ],
+      "protocol": "Root input frame comes from the actual selected event and its invocation-local SourceOrigins entry. Join actual AST root construction to the explicitly supplied original input/trim frame. At argument recursion capture the original CSV return once, pair each actual returned occurrence with its retained original flush frame, and attach only the actual recursively returned constructed child. Rebase through explicit parent/payload offsets. Public _find_piece_offset behavior may remain for compatibility, but it must not select private authority. Other parser branches require their own explicit split-frame path or conservatively decline. Copy/consume operations use these retained frames; transformed text is generated.",
+      "proof": "Independent labelled original occurrences for repeated/literal Unicode/CRLF/empty slots; compare public AST unchanged; equal source in foreign invocations and copied/changed references cannot borrow private grants. Full typed-form coverage remains bounded by later producer children and .2.5."
+    },
+    {
+      "suffix": ".3",
+      "owners": [
+        "perl/LinkedSpec/ActionIR/SourceEmissions.pm",
+        "perl/LinkedSpec/ActionIR/Contracts.pm",
+        "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+        "perl/LinkedSpec/ActionIR/FlowExpr.pm",
+        "perl/LinkedSpec/ActionIR/ControlFlow.pm",
+        "perl/LinkedSpec/ActionIR/RewritePipeline.pm"
+      ],
+      "protocol": "Register exact actual callbacks produced at built-in factory seams in the current source invocation, retaining references. Do not infer registration from a public name, result equality or copied contract. At every injectable lowering dependency seam enter a separate capture with its actual callback, without replacing public callback references or adding fields. Unknown callbacks retain ordinary values but no publications; trusted parents explicitly compose only retained child packets. Outer authority must not extend across a custom dependency delegation. Preserve scalar context/argument references/effects/errors and canonical family order.",
+      "proof": "Run the observed equal-literal dependency control through actual factories; copied/foreign supplied rules and dependency wrappers; exact call count/context/order/aliases/error objects; nested successful/fatal scope restoration."
+    },
+    {
+      "suffix": ".4",
+      "owners": [
+        "focused input composition acceptance"
+      ],
+      "protocol": "Accept the combined input/construction/factory seams independently before typed value emitters. Reconcile plan coverage and retain source-bound proof; parent six-slice .2.2-.2.5 and mapped/canonical admission remain open."
+    }
+  ],
+  "constraints": [
+    "No raw-text search or equal-output occurrence queues for private source selection.",
+    "No public node/event/contract/dependency provenance fields, dependency keys or changed callback identities.",
+    "No global source sort, blanket overlap/consumption waiver, skipped callback or altered canonical family order.",
+    "Production dependency internals remain black boxes; standard published outputs reused.",
+    "Split any implementation owner growth before writes; commit each leaf before proceeding."
+  ],
+  "acceptance_remaining": [
+    "Actual constructor sidecars .2.1.1",
+    "Original input joining .2.1.2",
+    "Factory/dependency capture .2.1.3",
+    "Composition .2.1.4",
+    "Typed values .2.2",
+    "Statements/control/raw .2.3",
+    "Packet composition .2.4",
+    "Complete guarded Phase0 and consumers .2.5",
+    "Mapped replacement .1.1.2",
+    "Independent canonical .0.3.2"
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "twins",
+    "source": "cat(trim(capture_slice()), trim(capture_slice()))",
+    "arguments": [
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 4,
+          "end": 25
+        }
+      },
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 27,
+          "end": 48
+        }
+      }
+    ]
+  },
+  {
+    "id": "literal-unicode",
+    "source": "cat(\"λ😀capture_slice()\", trim(capture_slice()))",
+    "arguments": [
+      {
+        "raw": "\"λ😀capture_slice()\"",
+        "source_span": {
+          "start": 4,
+          "end": 23
+        }
+      },
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 25,
+          "end": 46
+        }
+      }
+    ]
+  },
+  {
+    "id": "crlf",
+    "source": " \r\n cat(\r\ntrim(capture_slice()),\r\ntrim(capture_slice())\r\n) \r\n",
+    "arguments": [
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 10,
+          "end": 31
+        }
+      },
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 34,
+          "end": 55
+        }
+      }
+    ]
+  },
+  {
+    "id": "empty-slots",
+    "source": "cat(,trim(capture_slice()),,trim(capture_slice()),)",
+    "arguments": [
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 5,
+          "end": 26
+        }
+      },
+      {
+        "raw": "trim(capture_slice())",
+        "source_span": {
+          "start": 28,
+          "end": 49
+        }
+      }
+    ]
+  }
+]

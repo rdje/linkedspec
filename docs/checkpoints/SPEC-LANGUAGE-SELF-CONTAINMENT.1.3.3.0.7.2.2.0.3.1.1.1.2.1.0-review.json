@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "cases": 4,
+  "authored_arguments": 8,
+  "callback_modes": 7,
+  "dependency_interventions": 2,
+  "evidence_red_controls": [
+    {
+      "name": "failed-exit",
+      "result": "RED",
+      "reason": "successful actual exit"
+    },
+    {
+      "name": "forged-source",
+      "result": "RED",
+      "reason": "actual input identity"
+    },
+    {
+      "name": "missing-case",
+      "result": "RED",
+      "reason": "complete case population"
+    },
+    {
+      "name": "copied-node-as-actual",
+      "result": "RED",
+      "reason": "actual distinct node identities"
+    },
+    {
+      "name": "shifted-original-frame",
+      "result": "RED",
+      "reason": "independent original argument frame"
+    },
+    {
+      "name": "extra-callback",
+      "result": "RED",
+      "reason": "callback count/context"
+    },
+    {
+      "name": "opaque-packet-inheritance",
+      "result": "RED",
+      "reason": "nested opaque capture barrier distinguishes equal text"
+    }
+  ],
+  "actual_sha256": "2013c0e1998280dcdaecda1b66a9714513c506c649bd02e9a3ee495740dd74ff",
+  "reviewer_sha256": "de2cca768bcdc527ead8678a9576035dad21c9afea4ad974afd91703e56d577d",
+  "scope": "Unchanged-production diagnosis and selected future private protocol; not implemented AST authority or production producer integration."
+}

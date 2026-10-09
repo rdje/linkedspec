@@ -1,0 +1,14 @@
+{
+  "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+  "records": [
+    {
+      "path": "docs/claims/REPO-HYGIENE.14.json",
+      "before": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0-before-REPO-HYGIENE.14.json",
+      "original_sha256": "2174cb77a99eaadfc7be838e0b8ea5fe2868e48c3cd08483e4c8730c8cd3bf4f",
+      "after_sha256": "56c6e8c3b6720ac3ab3a0181d7b867f8ae3bc7cec382220c67c9a2bdd0de31a4",
+      "verified_bindings": 25
+    }
+  ],
+  "producer_sha256": "ded5908d666e75ef23905248f59641d237382eb961aa30475f2d6b6f78984eaf",
+  "scope": "Only durability mode/revision change; original claim statements and hashes are preserved."
+}

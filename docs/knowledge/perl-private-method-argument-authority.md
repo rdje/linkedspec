@@ -1,6 +1,6 @@
 ---
 id: perl-private-method-argument-authority
-title: MethodExpr retains exact CSV returns but publishes no argument occurrence frames
+title: MethodExpr binds private argument frames to actual CSV and parser returns
 answers:
   - "how does MethodExpr preserve original CSV argument object identity"
   - "where must MethodExpr argument occurrence coordinates be recorded"
@@ -63,3 +63,8 @@ OwnerDispatch preserves successful caller error state. Final immutable nine-suit
 actual parser/CSV frames under three seeds,23 evidence controls and18 rendered
 book examples; the diagnosis above is historical at
 6ce4798 and is not an unchanged-current-production replay after this change.
+
+The October 9 input-authority diagnosis preserves the historical observations above
+and corrects the stale pre-implementation title. Current source-bound observations
+and the next integration protocol live in
+`docs/knowledge/perl-private-input-authority-selection.md`.

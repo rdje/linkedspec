@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Original input and output authority need different seams
+
+AST constructor references distinguish copied public nodes, while MethodExpr already supplies original CSV flush frames. Constructor source spans alone remain descriptive; private child authority must use actual returned occurrences and explicit parent/payload rebasing. In the actual Contracts input_slice closure, an opaque dependency can call a controlled future builder and return an equal literal; an unguarded outer capture inherits its packet. A separate actual dependency capture preserves scalar value/order/effects and blocks inheritance. This requirement is now scheduled before producer integration, not classified as a shipped failure. The .2.1.0 retained plan and Knowledge fact select four bounded children; all116 production Perl/spec inputs are unchanged.
+
 ## 2026-10-09 — Dated artifact metadata remains retention evidence
 
 REPO-HYGIENE.14 repeats the bounded non-following census and independent OS metadata/traversal/channel controls. The new hygiene14 fixture is excluded before traversal alongside prior fixture roots. No exact deletion target was proved disposable, so all proof data and reusable caches remain retained. Read-only liveness listing can still misclassify live runs under restricted permissions; existing startup .7 ownership and recovery/purge prohibition remain in force.
