@@ -1,0 +1,15 @@
+{
+  "scope": "Unadmitted reviewer membership-classification draft, transcribed tool exception only; original separate Python channels unavailable. No runtime/fixture/control input changes.",
+  "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-first-review.py",
+  "producer_sha256": "f487adab14f018db02f215f61889d7eea34105b1876a10acabd7075c99bad488",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-review.py",
+    "--capture"
+  ],
+  "exit": 1,
+  "exception": "AssertionError at line47: expected exactly3 checkpoint paths",
+  "cause": "The original complete133-file capsule contains three JSON reader artifacts and one standalone original-origin test under docs/checkpoints. Counting every checkpoint path as JSON incorrectly counts4.",
+  "repair": "Require the exact three JSON reader paths separately; the actual checkpoint test remains an unchanged selected consumer."
+}

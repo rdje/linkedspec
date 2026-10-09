@@ -942,13 +942,53 @@ the selected compiler event before they can authorize original-source copying.
 
 The native frames follow actual returned CSV occurrences, so equal arguments keep
 separate positions. Unsupported descendant split paths conservatively decline
-frames. Joining these parser-relative frames to selected compiler-event origins
-remains subsequent work; the native channel alone grants no original-event copy
-or consumption authority. During output integration,
-each injected dependency call also needs its own capture scope: an opaque callback
+frames. A private event-input layer now joins these descriptions to the actual
+selected compiler event within its original source invocation. It retains the
+actual parser capture, callback, returned construction or argument array, and
+parent input grant. Its opaque grant selects that original occurrence; returned
+coordinate descriptions are detached and cannot transfer authority.
+
+For example, suppose the original action begins with `λ😀` followed by CRLF,
+then the selected event is `cat("a", "a")`. The prefix occupies four Unicode
+character positions, including both CR and LF. The private join produces:
+
+| Selected input | Native parser interval | Original action interval |
+| --- | --- | --- |
+| Root call | `[0, 13)` | `[4, 17)` |
+| First string | `[4, 7)` | `[8, 11)` |
+| Second string | `[9, 12)` | `[13, 16)` |
+
+Changing the public AST `base_start`, or deliberately collapsing its public
+text-search offsets, does not change these original intervals. A nested capture
+rebases through its actual parent grant and its own native input offsets. This
+also supports retained CSV occurrences with omitted empty slots. An empty input
+keeps its ordered zero-width interval after the original leading whitespace.
+
+The grant is validated again whenever it is used. Copying an AST, capture,
+argument array or grant description cannot borrow it. Another actual event cannot
+borrow the capture even when it has equal text and coordinates. Changing the AST
+tree invalidates its dependent grants; changing one MethodExpr argument invalidates
+that occurrence while an unchanged neighbor keeps its own frame. Nested equal-source
+invocations have distinct identities, and finished scopes leave no global cache.
+Opaque AST callback returns keep the native collector's immediate release behavior.
+
+Input copying and consumption remain separate operations. Copying the first string
+twice records two copies of `[8, 11)`; it does not select the second equal string.
+Generating `"a"` records generated text with no original interval. Transforming the
+first string to `"A"` also records generated text. Consuming the first input records
+only `[8, 11)`, leaving the second occurrence available. Invalid, stale or foreign
+grants preserve ordinary builder text as generated and consume no original source.
+Later output composition and interval translation must still adjudicate duplicated
+copies and executable continuations.
+
+This input join is verified independently of built-in factory registration and
+output integration. It does not change the quoted-first replacement example or
+establish complete private Phase0 or mapped/canonical admission. During factory
+and output integration, each injected dependency call still needs its own capture
+scope: an opaque callback
 may call a producer and then return an equal literal. Its ordinary value remains
 valid, but the enclosing callback must not inherit the nested publication. These
-original-event joining and dependency safeguards remain subsequent integration.
+factory/dependency safeguards remain subsequent integration.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

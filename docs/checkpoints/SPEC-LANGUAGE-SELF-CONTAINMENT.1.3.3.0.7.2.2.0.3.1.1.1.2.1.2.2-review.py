@@ -1,0 +1,216 @@
+"""Independently recover every supplied proof epoch and actual retained channel."""
+import ast
+import base64
+import copy
+import hashlib
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+BASE = '3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e'
+LEAF = 'SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2'
+PREFIX = 'docs/checkpoints/' + LEAF + '-'
+SEED = 'docs/checkpoints/' + LEAF[:-1] + '1-consumers.json'
+MODULE = 'perl/LinkedSpec/ActionIR/SourceEmissions.pm'
+TEST = 't/actionir_event_input_grants.t'
+assert sys.argv[1:] in ([], ['--capture'])
+checked = {}
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def blob(path):
+    return subprocess.check_output(['git', 'show', BASE + ':' + path], cwd=ROOT)
+
+
+def read(path):
+    raw = (ROOT / path).read_bytes()
+    checked[path] = digest(raw)
+    return raw
+
+
+def record(name):
+    return json.loads(read(PREFIX + name + '.json'))
+
+
+seed_raw = blob(SEED)
+seed = json.loads(seed_raw)
+original = {path: blob(path) for path in seed['inputs']}
+assert len(original) == 133
+original_hashes = {path: digest(raw) for path, raw in original.items()}
+assert original_hashes == seed['inputs']
+assert {path for path in original if path.startswith('docs/checkpoints/') and path.endswith('.json')} == {
+    'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0-cases.json',
+    'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0-cases.json',
+    'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1-cases.json'}
+current_module = read(MODULE)
+current_fixture = read(TEST)
+prior_module = read(PREFIX + 'pre-lifetime-SourceEmissions.pm')
+prior_fixture = read(PREFIX + 'pre-lifetime-fixture.t')
+before_fixture = read(PREFIX + 'before-fixture.t')
+assert read(PREFIX + 'before-SourceEmissions.pm') == original[MODULE]
+for path, raw in original.items():
+    if path != MODULE:
+        assert (ROOT / path).read_bytes() == raw, 'unexpected current runtime input: ' + path
+
+producer_names = ('baseline.py', 'first-capture.py', 'pre-lifetime-capture.py', 'capture.py',
+                  'first-opaque-lifetime.py', 'opaque-lifetime.py')
+producers = {digest(read(PREFIX + name)): name for name in producer_names}
+
+
+def population(module, fixture):
+    return dict(original_hashes, **{MODULE: digest(module), TEST: digest(fixture)})
+
+
+def channels(row, module, fixture, command):
+    assert row['producer_sha256'] in producers, 'unbound capture producer'
+    assert row['inputs'] == population(module, fixture), 'wrong supplied input population/content'
+    assert row['command'] == command, 'wrong actual command'
+    assert row['unchanged'] is True, 'supplied inputs changed during command'
+    if 'base' in row:
+        assert row['base'] == BASE and row['seed'] == SEED and row['seed_sha256'] == digest(seed_raw)
+    return base64.b64decode(row['stdout_base64'], validate=True), base64.b64decode(row['stderr_base64'], validate=True)
+
+
+def tap(row, module, fixture, count, reason=None):
+    out, err = channels(row, module, fixture, ['perl', '-Iperl', TEST])
+    assert re.findall(rb'^1\.\.([0-9]+)$', out, re.MULTILINE) == [str(count).encode()], 'incomplete TAP plan'
+    assert [int(n) for n in re.findall(rb'^(?:not )?ok ([0-9]+)', out, re.MULTILINE)] == list(range(1, count + 1)), 'incoherent TAP assertions'
+    failures = re.findall(rb'^not ok [0-9]+ - (.*)$', out, re.MULTILINE)
+    if reason is None:
+        assert row['returncode'] == 0 and not failures, 'failed positive fixture'
+    else:
+        assert 0 < row['returncode'] < 255 and row['returncode'] == len(failures), 'non-semantic failure exit'
+        assert any(reason.encode() in failure for failure in failures), 'missing distinguishing semantic RED'
+    return failures
+
+
+before = record('before')
+out, err = channels(before, original[MODULE], before_fixture, ['perl', '-Iperl', TEST])
+assert before['returncode'] != 0 and b'Bail out!' in out and b'original-event input grant interface unavailable' in out
+tap(record('after'), prior_module, prior_fixture, 183)
+tap(record('final-after'), current_module, current_fixture, 185)
+for name, module, fixture in [('consumers', prior_module, prior_fixture),
+                               ('final-consumers', current_module, current_fixture)]:
+    row = record(name)
+    out, err = channels(row, module, fixture, seed['command'] + [TEST])
+    assert row['returncode'] == 0 and b'All tests successful.' in out and b'Result: PASS' in out
+    assert re.search(rb'Files=15,', out), 'missing full fifteen-suite consumer result'
+
+for name in ('first-lifetime-before', 'lifetime-before'):
+    failures = tap(record(name), prior_module, current_fixture, 185,
+                   'joined opaque AST return preserves native immediate release')
+    assert failures == [b'joined opaque AST return preserves native immediate release'], 'lifetime RED not isolated'
+tap(record('lifetime-after'), current_module, current_fixture, 185)
+
+# Execute only the actual retained producer's pure mutation definitions in RAM.
+# Recovering the generated bytes and matching their recorded hashes binds the
+# actual mutant inputs without trusting a handwritten replacement catalogue.
+def mutations(producer, source):
+    path = PREFIX + producer
+    tree = ast.parse(read(path), filename=path)
+    functions = [node for node in tree.body if isinstance(node, ast.FunctionDef)
+                 and node.name in ('sub_body', 'edit')]
+    blocks = [node for node in tree.body if isinstance(node, ast.With)]
+    assert len(functions) == 2 and len(blocks) == 1
+    branch = blocks[0].body[-1]
+    assert isinstance(branch, ast.If)
+    inverse = branch.orelse[0].orelse
+    selected = []
+    for node in inverse:
+        if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == 'reports' for target in node.targets):
+            break
+        selected.append(node)
+    assert selected and isinstance(selected[0], ast.Assign)
+    namespace = {'source': source.decode()}
+    program = ast.Module(body=functions + selected, type_ignores=[])
+    exec(compile(program, path, 'exec'), namespace)
+    return {name: (raw, reason) for name, raw, reason in namespace['variants']}
+
+
+prior_mutations = mutations('pre-lifetime-capture.py', prior_module)
+final_mutations = mutations('capture.py', current_module)
+assert len(prior_mutations) == 16 and len(final_mutations) == 17
+
+
+def inverse_row(path, row, raw, reason, module, fixture, normal_plan):
+    assert row['source_sha256'] == digest(raw) and row['original_source_sha256'] == digest(module), 'wrong mutant source'
+    assert row['distinguishing_reason'] == reason, 'wrong distinguishing reason'
+    syntax = row['syntax']
+    out, err = channels(syntax, raw, fixture, ['perl', '-Iperl', '-c', MODULE])
+    assert syntax['returncode'] == 0 and b'syntax OK' in err, 'syntax control is not valid'
+    plan = normal_plan + 3 if row['case'] == 'callback-once' else normal_plan
+    failures = tap(row, raw, fixture, plan, reason)
+    return plan, sum(reason.encode() in failure for failure in failures)
+
+
+for label, variants, module, fixture, plan in [('inverses', prior_mutations, prior_module, prior_fixture, 183),
+                                               ('final-inverses', final_mutations, current_module, current_fixture, 185)]:
+    index = record(label)
+    assert index['result'] == 'PASS' and index['source_sha256'] == digest(module) and index['fixture_sha256'] == digest(fixture)
+    assert index['producer_sha256'] in producers
+    assert len(index['rows']) == len(variants) and {entry['case'] for entry in index['rows']} == set(variants), 'missing inverse population'
+    for entry in index['rows']:
+        path = entry['path']
+        raw_report = read(path)
+        assert digest(raw_report) == entry['sha256'], 'changed inverse record'
+        row = json.loads(raw_report)
+        raw, reason = variants[entry['case']]
+        actual_plan, failures = inverse_row(path, row, raw, reason, module, fixture, plan)
+        assert entry['source_sha256'] == digest(raw) and entry['reason'] == reason and entry['observed'] == 'RED'
+        assert entry['semantic_failures'] == failures and entry.get('assertions', actual_plan) == actual_plan
+
+first_controls = []
+for path in sorted((ROOT / 'docs/checkpoints').glob(LEAF + '-first-inverse-*.json')):
+    row = json.loads(read(path.relative_to(ROOT).as_posix()))
+    if 'case' not in row:
+        continue
+    raw, reason = prior_mutations[row['case']]
+    inverse_row(path, row, raw, reason, prior_module, prior_fixture, 183)
+    first_controls.append(row['case'])
+assert len(first_controls) == 11
+record('first-inverse-error')
+record('first-lifetime-error')
+
+freeze = record('freeze')
+assert freeze['revision'] == BASE and len(freeze['records']) == 2
+assert freeze['producer_sha256'] == digest(read(PREFIX + 'freeze.py'))
+bindings = 0
+for entry in freeze['records']:
+    original_raw = blob(entry['path'])
+    assert read(entry['before']) == original_raw and digest(original_raw) == entry['original_sha256']
+    original_record = json.loads(original_raw)
+    updated = copy.deepcopy(original_record)
+    count = 0
+    for claim in updated['claims']:
+        durability = claim['durability']
+        if durability.get('mode') != 'live':
+            continue
+        for item in durability['inputs']:
+            assert digest(blob(item['path'])) == item['sha256'], 'wrong original claim input'
+            count += 1
+        durability.update(mode='historical', revision=BASE)
+    current_raw = read(entry['path'])
+    assert json.loads(current_raw) == updated and digest(current_raw) == entry['after_sha256']
+    assert count == entry['verified_bindings']
+    bindings += count
+assert bindings == 262
+
+report = {'result': 'PASS', 'base': BASE, 'producer_sha256': digest(Path(__file__).read_bytes()),
+          'fixture_assertions': 185, 'supplied_inputs': 134, 'consumer_suites': 15,
+          'final_source_inverses': 17, 'draft_source_inverses': 16, 'unadmitted_initial_inverse_reports': 11,
+          'opaque_lifetime_before_failures': 1, 'frozen_claims': 2, 'original_claim_bindings': bindings,
+          'checked_artifacts': checked,
+          'scope': 'Exact producer, supplied input, actual channel, coherent TAP, semantic inverse and original claim preservation review. Initial drafts/failing instrument checks stay distinct from final acceptance. This does not run the runtime commands or establish full private Phase0, output integration or mapped/canonical admission.'}
+target = ROOT / (PREFIX + 'review.json')
+if sys.argv[1:]:
+    assert not target.exists(), 'one-shot review capture'
+    target.write_text(json.dumps(report, indent=2) + '\n')
+elif target.exists():
+    assert json.loads(target.read_bytes()) == report, 'review artifact inputs changed'
+print('Event-input review PASS185/17; consumers15/134; isolated lifetime RED1/GREEN; original262 bindings preserved')

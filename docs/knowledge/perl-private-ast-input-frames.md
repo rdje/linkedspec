@@ -8,7 +8,7 @@ answers:
   - "which AST descendant input frames are currently retained"
   - "how do repeated CSV arguments retain separate private input positions"
 date: 2026-10-09
-status: native descriptive root/call/array frames verified; compiler-event joining open
+status: native descriptive root/call/array frames verified; separate original-event grants available
 tags: [perl, actionir, ast, csv, source-provenance, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 verifies63 assertions/11 semantic source inverses,11 guarded consumers,3 actual Toolbox routes and8 evidence controls. The separate original/live public whitespace-span defect is resolved in .2.1.2.4 with65 assertions/four source inverses."
 reverify:
@@ -45,11 +45,11 @@ semantics remain unchanged; the previous77-assertion constructor fixture recurs 
 the eleven-suite direct matrix.
 
 These are **parser-relative input frames, not compiler-event origins**. The
-actual selected SourceOrigins event/invocation and MethodExpr input captures must
-still be joined under `.2.1.2.1-.3` in
-`docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md`. Original-event copy/consumption,
-factory/dependency capture, typed output producers, mapping and complete
-Phase0/canonical admission remain open. The observed whitespace-only public span
+actual selected SourceOrigins event/invocation is now joined separately under
+`.2.1.2.2`; `docs/knowledge/perl-original-event-input-grants.md` owns those opaque
+copy/consume grants. Independent input acceptance `.2.1.2.3`, factory/dependency
+capture, typed output producers, mapping and complete private Phase0/canonical
+admission remain open. The observed whitespace-only public span
 defect is resolved by .2.1.2.4; see `docs/knowledge/perl-empty-ast-trim-span.md`.
 Native empty frames retain ordered zero-width intervals independently of the public
 base. The .0 compatibility statements above describe its historical boundary; the

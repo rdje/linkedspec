@@ -34,3 +34,9 @@ guarded Phase0 and independent canonical admission remain separately owned by th
 selected repair plan. The quoted-first replacement defect remains open. The
 original absent-module RED establishes availability only; the sixteen effective
 source inverses supply the distinguishing semantic RED evidence.
+
+Actual compiler-event input joining is now separately verified by .2.1.2.2;
+`docs/knowledge/perl-original-event-input-grants.md` owns its scope and lifetime
+repair. The original foundation proof remains historical at3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e;
+existing standalone emission behavior still recurs. Factory/output/mapping
+integration and complete private acceptance remain open.

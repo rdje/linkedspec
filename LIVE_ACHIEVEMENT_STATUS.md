@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: private capacity publisher replay repaired; original-event joining next.
+Full PNT: actual original-event input grants verified; independent input acceptance next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — Original publisher product RED grows result/evidence/recent2→3; corrected first publication emits exactly one pair/row; eight reason-sensitive refusals preserve the entire fixture file population, contents and modes. Ten actual commands recur exactly from254 Git-bound historical inputs. All249 original capacity bindings and proof fields remain intact at31fe4fd36 by mode/revision only.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — Actual selected-event input grants PASS185 assertions/17 effective semantic source inverses; fifteen direct suites in134 immutable supplied files, five actual reviewer REDs and complete57-source book/two actual controls pass. Paired opaque AST lifetime RED1 becomes GREEN185 by registering only eligible actual roots. Two original claims preserve262 exact bindings at3dbe7b10a by mode/revision only.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` for original-event input joining and copy/consume authority, then input acceptance .3. Factory/composition, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` for independent parser/MethodExpr/original-event input acceptance. Factory/dependency .2.1.3, typed/raw outputs .2.2-.4, full private Phase0 .2.5, mapped replacement .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — original grants185/17; consumers15/134; lifetime RED1/GREEN; evidence5/book57/2.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — publisher replay RED; first publication/8 no-write denials; historical254 and capacity249 preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — three historical observations qualified; supplied14/133, book57/2; original bindings preserved.
@@ -29,7 +30,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` for or
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1` — actual typed/raw producer selection; private protocol remains unimplemented.
 - `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
 
 ## History
 

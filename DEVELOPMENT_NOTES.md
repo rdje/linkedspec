@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Original input authority requires actual parents and current native validation
+
+An event/token-rooted opaque grant joins actual native captures and explicit relative offsets. Every later use checks the actual parent chain and current native data, so detached descriptions, copied objects or equal text cannot select an occurrence. Actual wrong-public-search and per-character copy/consume oracles distinguish these paths. A paired weak-reference probe exposed new opaque AST retention; requiring an eligible actual native root preserves the native immediate release behavior. Final185/17, consumers15/134, evidence5 and book57/2 pass; all262 prior bindings stay historical. Factory/dependency/output/mapping admission remains separate.
+
 ## 2026-10-09 — One-shot publishers require a pre-write state guard
 
 A retained writer is distinct from a reviewer. The capacity publisher formerly rewrote current continuity on replay; status/output guards now deny before any write. Actual original RED, one successful publication and eight exact no-write denials recur in isolated Git-bound fixtures. Preserve all original capacity inputs historically before changing the writer; use the retained --check reviewer for recurrence.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Join native inputs to original compiler-event grants
+
+Actual selected-event input grants PASS185 assertions/17 effective semantic source inverses; fifteen direct suites in134 immutable supplied files, five actual reviewer REDs and complete57-source book/two actual controls pass. Paired opaque AST lifetime RED1 becomes GREEN185 by registering only eligible actual roots. Two original claims preserve262 exact bindings at3dbe7b10a by mode/revision only. SourceEmissions binds actual native captures and parent grants to selected SourceOrigins events; explicit offsets authorize only matching source copies and child consumption. Invalid/changed/foreign/expired grants preserve ordinary text as generated. Parser/MethodExpr bytes and public callback shapes stay exact. Initial draft/proof failures are retained; independent input acceptance precedes factory/output integration.
+
 ## 2026-10-09 — Reject private capacity publisher replay
 
 Original publisher product RED grows result/evidence/recent2→3; corrected first publication emits exactly one pair/row; eight reason-sensitive refusals preserve the entire fixture file population, contents and modes. Ten actual commands recur exactly from254 Git-bound historical inputs. All249 original capacity bindings and proof fields remain intact at31fe4fd36 by mode/revision only. The writer refuses completed or partially published state before writes. Exact redundant current entries are removed; parser, policy and public book behavior stay unchanged.

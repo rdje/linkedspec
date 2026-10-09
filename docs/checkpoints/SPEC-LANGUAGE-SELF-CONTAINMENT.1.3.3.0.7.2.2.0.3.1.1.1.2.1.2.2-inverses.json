@@ -1,0 +1,169 @@
+{
+  "result": "PASS",
+  "source_sha256": "30a85193ed9a83266e7a0d163a41fcccca70e753f1e51541e1594865c3bb7d8f",
+  "fixture_sha256": "5c84f81be9d3340d879d9b4b2f8aff96b4f11d5c8003204845279dec8860f186",
+  "producer_sha256": "e17601b3470fdd57168ca98c3fabebfdbe1d4490ec4ad47a858f1c3e585a4d6f",
+  "rows": [
+    {
+      "case": "source-token",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-source-token.json",
+      "sha256": "a3928d5973b8b84480ec002615ce359ee3e3c119af2a2dc891e130ce4c9fb6f8",
+      "source_sha256": "94c641e33e19257f3b42b6ac866209814d7917d155fdb6d6ff9b7eab01a7cf4e",
+      "reason": "same actual event reselected in a different source token cannot borrow input scope",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "copied-capture-selection",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-copied-capture-selection.json",
+      "sha256": "98f1fe144ff9ba332cce1c2c811c7bb3b069735babd426f35c57c2946946b32c",
+      "source_sha256": "81814264ff0e6c080acdd62cf241b36750ef6395cdac393a1f579b86b5fb6656",
+      "reason": "copied outer capture denied",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "callback-identity",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-callback-identity.json",
+      "sha256": "dd7e28e5c1ab0c9176e7e482946288aecc1c66504c04771cf7efc493a13371d2",
+      "source_sha256": "fdfb36d18524b3c08dd0cdd84d3a21d82b1f152c5446ad2a3f84f1a0eab33be3",
+      "reason": "foreign callback denied",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "event-identity",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-event-identity.json",
+      "sha256": "3fe66ba69998703d55b1b19faf77287488c701fb14fe0104e93c7db0f081a048",
+      "source_sha256": "e545177ab2b511a20b2b82606508fc46793fc52d808162bf794078ae6ae3d647",
+      "reason": "copied event cannot borrow another event capture",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "capture-value",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-capture-value.json",
+      "sha256": "549b4161d62cd9959d61fc8f0d82dc1c397ccc60a1b643e0b87a2a8403d6dbbc",
+      "source_sha256": "faf86a30e8257b83fa30385a7d99b88ba79b3f58e0ca04a3dc6daeb5ad6dd191",
+      "reason": "changed capture return revokes an already selected grant",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "copied-grant-selection",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-copied-grant-selection.json",
+      "sha256": "8d2e35e13118334bbb463fe36f99a81ada4d5d6e363d0c80452056dad7d1e3f4",
+      "source_sha256": "6b177d2c2c56aa6d87ba153cc830e5bf86429179d61f6a735ce245e214ebafbb",
+      "reason": "copied opaque grant denied",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "cached-native-grant",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-cached-native-grant.json",
+      "sha256": "4aaa3010a27bba6bf261b62d951bca094c4f71737d3cdbbe946c8dbb2d67f9a4",
+      "source_sha256": "8ff046bbef916cd3f92be105143eafd50645d51fd49deb51290700bc1e787806",
+      "reason": "changed AST ancestor revokes an already selected grant",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "parent-revalidation",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-parent-revalidation.json",
+      "sha256": "96accb5b27cf60581d08055b3c4fef175b806d37731dde8f8be3dcf76df65507",
+      "source_sha256": "8cefdacd450a07298da81a33c8573a2f06ab213458d652a1903f2056ebacbd49",
+      "reason": "changed retained parent revokes its descendant grant",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "global-rebase",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-global-rebase.json",
+      "sha256": "c93b396372eff0dd43d0af1a96e104dbaab648940ddc7e48c1a5fb6b9a111da0",
+      "source_sha256": "537224c29bc92787ffc62eb765a6620505c0b7833482242f6aa973cc1200be76",
+      "reason": "actual AST argument joins original event interval",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 10
+    },
+    {
+      "case": "argument-occurrence-index",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-argument-occurrence-index.json",
+      "sha256": "6522afe23d52305ccf66ac3084be6e8c1f5ca29ebaa4ce60b486bf0eea43f4bd",
+      "source_sha256": "80f296b2e5fef489ede5da2146e9ced03ca057225700ed02dfaca5e9b92d25b8",
+      "reason": "actual MethodExpr occurrence joins original event interval",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 4
+    },
+    {
+      "case": "callback-once",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-callback-once.json",
+      "sha256": "9b10732e3906f8ab37f881da0466c643dcad5c0d3be0bde3e9ee734022522bcf",
+      "source_sha256": "c1c87c01326471c9cba45fe953c817e59a6fb96407c67f36dfcc0ad1de56ae7c",
+      "reason": "actual callback called once",
+      "observed": "RED",
+      "assertions": 186,
+      "semantic_failures": 3
+    },
+    {
+      "case": "argument-aliases",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-argument-aliases.json",
+      "sha256": "d0d5f1ec686e82f5288bfd0ff5f87019205ac513d1ce332d5a9d49204a65b5de",
+      "source_sha256": "9b96892e4fd2d051ea07417130dffac9c9361a168b526f172a6fdcda91c07f2d",
+      "reason": "extra scalar alias preserved",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 3
+    },
+    {
+      "case": "append-event-identity",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-append-event-identity.json",
+      "sha256": "5010a47ae5108bb4d0a2f2a4553832bdca604dda1d2ab9d0785ebd53f6865bc7",
+      "source_sha256": "c6445717cfd88ca7e75270f431313c6060ac942f94247f94bce55913fe0a6660",
+      "reason": "invalid or foreign actual grant cannot copy original authority",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "consume-event-identity",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-consume-event-identity.json",
+      "sha256": "1c0c6ecb527fc8fce4da42106555865667fe4f347fde4cdac0344da8139f8fdd",
+      "source_sha256": "a4462e521cd70a8d1a2264541ce94373588026fa0c7c288a45b683e420ffbf79",
+      "reason": "invalid or foreign actual grant cannot consume source",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 1
+    },
+    {
+      "case": "consume-child-interval",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-consume-child-interval.json",
+      "sha256": "f47303d158aa5e4e29d9064236902187b161e097228c55cbd21f2c1ca01d8dcc",
+      "source_sha256": "c9edd7a72b83f62e69fddc49458bf793615e744e06b143ef0c43b211a724fdbc",
+      "reason": "only actual selected child consumed",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 5
+    },
+    {
+      "case": "transformed-text",
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-inverse-transformed-text.json",
+      "sha256": "b0f10ad64378db0d829eb7ed6c5f90de6cb3791b6279a7daedcb68a9e0cb5e43",
+      "source_sha256": "511c429f83772b097d61a0078f1f85dfd8caac3393fd49e815ae2b1234e381f6",
+      "reason": "independent per-character original occurrence oracle",
+      "observed": "RED",
+      "assertions": 183,
+      "semantic_failures": 5
+    }
+  ],
+  "scope": "Sixteen valid source inverses; exact coherent plans (183, or186 for the callback-twice inverse) and reason-specific semantic RED for each. Exact source and entire supplied file population restore after each inverse."
+}

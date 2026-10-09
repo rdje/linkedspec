@@ -16,7 +16,7 @@ BEGIN {
 use Scalar::Util ();
 use LinkedSpec::ActionIR::SourceOrigins ();
 
-our ($_producers, $_call);
+our ($_producers, $_call, $_inputs);
 
 sub _same_reference {
  my ($left, $right) = @_;
@@ -26,6 +26,176 @@ sub _same_reference {
 
 sub _current_source_token {
  return LinkedSpec::ActionIR::SourceOrigins::_invocation_token()
+}
+
+# Load only when the private input scope/captures are used. The standalone
+# emission foundation does not otherwise depend on the parser modules.
+sub _load_input_collectors {
+ my $error = $@;
+ require LinkedSpec::ActionIR::AST::Parser;
+ require LinkedSpec::ActionIR::MethodExpr;
+ $@ = $error;
+ return
+}
+
+sub _with_source_inputs {
+ my ($work) = @_;
+ _load_input_collectors();
+ local $_inputs = {source_token => _current_source_token(), captures => {}, grants => {}};
+ my $collect = sub { LinkedSpec::ActionIR::MethodExpr::_with_input_captures($work) };
+ if (!defined wantarray) {
+  LinkedSpec::ActionIR::AST::Parser::_with_node_constructions($collect);
+  return
+ }
+ return LinkedSpec::ActionIR::AST::Parser::_with_node_constructions($collect)
+}
+
+sub _eligible_input_scope {
+ return ref($_inputs) eq 'HASH'
+  && _same_reference($_inputs->{source_token}, _current_source_token())
+}
+
+sub _copy_input_description {
+ my ($frame) = @_;
+ return {source => $frame->{source}, raw => $frame->{raw}, source_span => {%{$frame->{source_span}}}}
+}
+
+sub _retain_input_grant {
+ my ($record) = @_;
+ my $tag = '';
+ my $grant = bless \$tag, 'LinkedSpec::ActionIR::SourceEmissions::Input';
+ $record->{grant} = $grant;
+ $_inputs->{grants}{Scalar::Util::refaddr($grant)} = $record;
+ return $grant
+}
+
+sub _event_input_for {
+ my ($event) = @_;
+ return undef unless _eligible_input_scope();
+ my $origin = LinkedSpec::ActionIR::SourceOrigins::_origin_for($event);
+ return undef unless $origin;
+ return _retain_input_grant({kind => 'event', event => $event, frame => _copy_input_description($origin)})
+}
+
+sub _capture_input_record {
+ my ($capture, $callback, $event) = @_;
+ return undef unless _eligible_input_scope() && ref($capture) eq 'HASH';
+ my $record = $_inputs->{captures}{Scalar::Util::refaddr($capture)};
+ return undef unless $record && _same_reference($record->{capture}, $capture)
+  && _same_reference($record->{callback}, $callback) && _same_reference($record->{event}, $event)
+  && _same_reference($record->{value}, $capture->{value});
+ return $record
+}
+
+sub _native_input_for {
+ my ($capture, $node, $arguments, $index) = @_;
+ return LinkedSpec::ActionIR::AST::Parser::_input_frame_for(
+  $capture->{native}, $capture->{callback}, $node) if $capture->{mode} eq 'ast';
+ return LinkedSpec::ActionIR::MethodExpr::_argument_input_for(
+  $capture->{native}, $capture->{callback}, $arguments, $index)
+}
+
+# Native offsets are descriptions of the actual captured input. Only the
+# retained actual parent grant selects the original compiler-event occurrence.
+sub _rebase_input_frame {
+ my ($native, $parent) = @_;
+ return undef unless ref($native) eq 'HASH' && ref($native->{source_span}) eq 'HASH'
+  && defined($native->{source}) && !ref($native->{source}) && $native->{source} eq $parent->{raw}
+  && defined($native->{raw}) && !ref($native->{raw});
+ my ($start, $end) = @{$native->{source_span}}{qw(start end)};
+ return undef unless _valid_span({start => 0, end => length($parent->{raw})}, $start, $end)
+  && substr($parent->{raw}, $start, $end - $start) eq $native->{raw};
+ return {source => $parent->{source}, raw => $native->{raw}, source_span => {
+  start => $parent->{source_span}{start} + $start, end => $parent->{source_span}{start} + $end}}
+}
+
+# Revalidate on every use, including already selected descendants. Nothing in a
+# detached description, equal copy or expired/nested registry can select a grant.
+sub _input_record {
+ my ($grant) = @_;
+ return undef unless _eligible_input_scope()
+  && ref($grant) eq 'LinkedSpec::ActionIR::SourceEmissions::Input';
+ my $record = $_inputs->{grants}{Scalar::Util::refaddr($grant)};
+ return undef unless $record && _same_reference($record->{grant}, $grant);
+ my $origin = LinkedSpec::ActionIR::SourceOrigins::_origin_for($record->{event});
+ my $frame = $record->{frame};
+ return undef unless $origin && $frame->{source} eq $origin->{source}
+  && _valid_span($origin->{source_span}, @{$frame->{source_span}}{qw(start end)})
+  && substr($frame->{source}, $frame->{source_span}{start}, length($frame->{raw})) eq $frame->{raw}
+  && $frame->{source_span}{end} - $frame->{source_span}{start} == length($frame->{raw});
+ if ($record->{kind} ne 'event') {
+  my $capture = $record->{capture};
+  return undef unless _same_reference($capture,
+   _capture_input_record($capture->{capture}, $capture->{callback}, $record->{event}));
+  my $parent = _input_record($capture->{parent});
+  return undef unless $parent;
+  my $current = _rebase_input_frame(
+   _native_input_for($capture, @{$record}{qw(node arguments index)}), $parent->{frame});
+  return undef unless $current && $current->{raw} eq $frame->{raw}
+   && $current->{source_span}{start} == $frame->{source_span}{start}
+   && $current->{source_span}{end} == $frame->{source_span}{end};
+ }
+ return $record
+}
+
+sub _input_description {
+ my $record = _input_record($_[0]);
+ return $record ? _copy_input_description($record->{frame}) : undef
+}
+
+sub _capture_source_input {
+ my $mode = shift;
+ my $parent = shift;
+ my $callback = shift;
+ my $source = @_ && !ref($_[0]) ? $_[0] : undef;
+ _load_input_collectors();
+ my $native = $mode eq 'ast'
+  ? LinkedSpec::ActionIR::AST::Parser::_capture_node_constructions($callback, @_)
+  : $mode eq 'method'
+   ? LinkedSpec::ActionIR::MethodExpr::_capture_method_input($callback, @_)
+   : LinkedSpec::ActionIR::MethodExpr::_capture_csv_input($callback, @_);
+ my $error = $@;
+ my $capture = {value => $native->{value}};
+ my $input = _input_record($parent);
+ # The native AST collector does not retain opaque callback returns. Register
+ # only eligible actual AST roots, preserving that ordinary release behavior.
+ my $root = $mode eq 'ast'
+  ? LinkedSpec::ActionIR::AST::Parser::_input_frame_for($native, $callback, $native->{value}) : undef;
+ if ($input && defined($source) && $source eq $input->{frame}{raw}
+     && ($mode ne 'ast' || _rebase_input_frame($root, $input->{frame}))) {
+  $_inputs->{captures}{Scalar::Util::refaddr($capture)} = {
+   capture => $capture, native => $native, callback => $callback, mode => $mode,
+   value => $capture->{value}, parent => $parent, event => $input->{event},
+  };
+ }
+ $@ = $error;
+ return $capture
+}
+
+sub _capture_ast_input { return _capture_source_input('ast', @_) }
+sub _capture_method_input { return _capture_source_input('method', @_) }
+sub _capture_csv_input { return _capture_source_input('csv', @_) }
+
+sub _derived_input_for {
+ my ($capture, $callback, $event, $mode, $node, $arguments, $index) = @_;
+ my $record = _capture_input_record($capture, $callback, $event);
+ return undef unless $record && ($mode eq 'ast' ? $record->{mode} eq 'ast' : $record->{mode} ne 'ast');
+ my $parent = _input_record($record->{parent});
+ return undef unless $parent;
+ my $frame = _rebase_input_frame(_native_input_for($record, $node, $arguments, $index), $parent->{frame});
+ return undef unless $frame;
+ return _retain_input_grant({kind => $mode, event => $event, frame => $frame,
+                            capture => $record, node => $node, arguments => $arguments, index => $index})
+}
+
+sub _ast_input_for {
+ my ($capture, $callback, $event, $node) = @_;
+ return _derived_input_for($capture, $callback, $event, 'ast', $node, undef, undef)
+}
+
+sub _argument_input_for {
+ my ($capture, $callback, $event, $arguments, $index) = @_;
+ return _derived_input_for($capture, $callback, $event, 'argument', undef, $arguments, $index)
 }
 
 # The caller supplies actual known callbacks at their factory seam. Strong
@@ -176,6 +346,27 @@ sub _append_generated {
 # text alone does not grant a frame or choose an occurrence.
 sub _append_source {
  return _append_piece(@_)
+}
+
+sub _append_input {
+ my ($builder, $text, $grant) = @_;
+ my $record = _builder_record($builder);
+ my $input = _input_record($grant);
+ if ($record && $input && _same_reference($record->{event}, $input->{event})) {
+  return _append_source($builder, $text, @{$input->{frame}{source_span}}{qw(start end)})
+ }
+ return _append_generated($builder, $text)
+}
+
+sub _consume_input {
+ my ($builder, $grant) = @_;
+ my $record = _builder_record($builder);
+ return $builder unless $record;
+ $record->{invalid} = 1 if $record->{published};
+ my $input = _input_record($grant);
+ return $builder unless $input && _same_reference($record->{event}, $input->{event});
+ push @{$record->{consumed}}, {event => $input->{event}, source_span => {%{$input->{frame}{source_span}}}};
+ return $builder
 }
 
 sub _consume_source {

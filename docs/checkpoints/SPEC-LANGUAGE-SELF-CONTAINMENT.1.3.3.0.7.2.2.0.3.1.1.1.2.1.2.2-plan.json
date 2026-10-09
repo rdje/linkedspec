@@ -1,0 +1,32 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2",
+  "activation_commit": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+  "production_owners": [
+    "perl/LinkedSpec/ActionIR/SourceEmissions.pm"
+  ],
+  "protocol": {
+    "scope": "_with_source_inputs(work) lazily loads existing AST and MethodExpr collectors and nests their invocation-local scopes under the actual current SourceOrigins token. Work context is preserved. Loading preserves caller error; existing capture wrappers keep their already verified successful caller-error semantics and fatal/alias/once-only scalar behavior.",
+    "root": "_event_input_for(actual_event) grants only its currently selected actual SourceOrigins frame. Opaque blessed scalar grant is lookup identity; detached _input_description is metadata.",
+    "capture": "_capture_ast_input(parent_grant, callback, source, ...), _capture_method_input and _capture_csv_input always execute their actual callback once through the existing collectors, preserving original argument aliases and actual returned values. Retain actual outer/native captures, callback, initial source and actual parent grant only in the current scope. AST registration requires an eligible actual native root, preserving the native collector's immediate release of opaque results. Actual before RED1 and after GREEN use the same paired weak-reference oracle; initial draft proof stays retained and unadmitted.",
+    "getters": "_ast_input_for(actual_capture, actual_callback, actual_event, actual_node) and _argument_input_for(actual_capture, actual_callback, actual_event, actual_arguments, index) validate the actual registered capture/value/event identities and delegate current native construction/argument validation. Rebase native source-relative spans only through the validated retained parent input frame, never public base_start/search or equal-text occurrence queues.",
+    "reuse": "Every grant use revalidates its original event, token, parent chain and actual current native data; changing capture values, AST ancestors, MethodExpr root/shape/indexed values, copied/foreign/nested/expired objects decline. A changed MethodExpr neighbor does not revoke an unchanged indexed grant unless the shape/root changes.",
+    "output": "_append_input(builder, text, grant) copies only matching actual builder/event and validated unchanged raw input; transformed or invalid grants append generated text. _consume_input(builder, grant) consumes only its independently valid original child interval. Existing explicit source append/consume and builder APIs stay unchanged."
+  },
+  "fixture_oracles": [
+    "Independently accumulated Unicode/CRLF/repeated/omitted-slot/array/nested/empty offsets",
+    "Actual scanner\u2192Diagnostics\u2192CanonicalEvents event references and copies",
+    "Wrong public AST find_piece_offset cannot select private original coordinates",
+    "Actual capture/callback/event/node/argument-array identities; changed roots/ancestors/shape/values and detached descriptions",
+    "Scalar once-only actual callback values/references/aliases, existing caller-error contract, fatal objects, nested successful/fatal restoration",
+    "Independent per-character output source-label and exact consumed-child intervals; transformed/generated/equal text",
+    "Expired input/source scopes and strong-registry release without a global cache"
+  ],
+  "limits": [
+    "Private standalone input joining only; production factory/dependency registration remains .2.1.3. Do not claim the known opaque nested dependency publication constraint fixed.",
+    "Existing AST/MethodExpr producers remain unchanged. Unsupported descendant split paths decline as before.",
+    "Full private Phase0 .2.5, output integration .2.2-.4, mapped replacement .1.1.2 and independent canonical .0.3.2 remain open.",
+    "The baseline absent-interface RED proves availability only; effective production-source inverses must distinguish semantics.",
+    "Complete supplied direct consumers include all actual reader artifacts from the prior corrected133-file capsule plus the new authored fixture; exact before/after input population/content and actual full channels are retained.",
+    "No dependency implementation, submodule pin, other repository, policy/checker or public event/node/callback shape changes."
+  ]
+}

@@ -8,7 +8,7 @@ answers:
   - "can copied MethodExpr captures or arrays select original argument frames"
   - "which consumer artifacts belong to the MethodExpr capture proof"
 date: 2026-10-09
-status: standalone MethodExpr input captures verified; compiler-event joining open
+status: native MethodExpr captures verified; separate original-event grants available
 tags: [perl, actionir, methodexpr, csv, callbacks, identity, source-provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1 verifies107 supplied assertions/13 effective source inverses,14 supplied consumer suites,3 actual Toolbox routes,3 actual missing-artifact REDs and10 reason-sensitive evidence controls."
 reverify:
@@ -41,7 +41,9 @@ Unicode, CRLF, repeated, nested-call and quoted-comma expectations are accumulat
 from authored pieces independently of parser searches. Nested same-scope captures
 and nested successful/fatal scopes restore the outer collector and registry.
 These are original **parser-input descriptions**, not compiler-event SourceOrigins
-or permission to copy/consume compiler source. Event joining remains `.2.1.2.2`.
+or permission to copy/consume compiler source. Separate actual event joining now
+exists under `.2.1.2.2`; `docs/knowledge/perl-original-event-input-grants.md` owns
+its validated grant and ordinary callback/lifetime boundaries.
 
 The original interface RED establishes availability only;13 final valid source
 inverses establish semantics. An initial invalid no-method-fields mutation is

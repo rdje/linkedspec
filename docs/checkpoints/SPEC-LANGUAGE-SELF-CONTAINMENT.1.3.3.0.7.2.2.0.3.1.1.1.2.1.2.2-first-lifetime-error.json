@@ -1,0 +1,15 @@
+{
+  "scope": "Unadmitted lifetime capture verifier position error; transcribed tool exception only, separate original Python channels unavailable. Actual full underlying185-assertion product TAP is retained in first-lifetime-before.json.",
+  "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-first-opaque-lifetime.py",
+  "producer_sha256": "6d3e08f2c3661a5b05dd6d8de1a954430a1e7c1af2915524c453718dfaac4022",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-opaque-lifetime.py",
+    "before"
+  ],
+  "exit": 1,
+  "exception": "AssertionError at fixed native opaque assertion index149",
+  "cause": "Earlier additional negative cases moved the native/opaque lifetime assertions; the verifier wrongly hard-coded an assertion number.",
+  "repair": "Match the exact semantic assertion text with its actual top-level number, require only the joined-release semantic failure in the before run, and retain the complete coherent185 plan."
+}
