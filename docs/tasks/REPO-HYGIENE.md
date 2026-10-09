@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-08` (`REPO-HYGIENE.13`: due retained artifact review)
+- Last updated: `2026-10-09` (`REPO-HYGIENE.14`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -268,6 +268,23 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.13 - retain due artifact review` (Git owns identity).
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1 from clean committed HEAD.
 
+- ID: `REPO-HYGIENE.14`
+  Status: `done`
+  Priority: P2 — due daily review at the clean foundation boundary.
+  Goal: Review the due artifact population while retaining proof data and reusable caches.
+  Activation: Clean 85691a26603ffd5c2453c39237fb4de407861d7f; foundation and Knowledge correction hooks/post-commit pointers pass; brief0 and no modified/untracked files confirmed.
+  Reproduce: Latest cleanup record 2026-10-08T15:03:20.586063+00:00 is over24h old.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.14-* census/review/capture/claim producers and retained actual channels; docs/claims/REPO-HYGIENE.14.json; latest-only cleanup record; existing cleanup Knowledge card; task/index/live/resume/change/notes; mode/revision-only preservation of any intersecting live claims. All fixtures stay in repository-local .linkedspec-data/scratch/hygiene14.
+  Verification tier: `focused`
+  Focused checks: Non-following same-volume parent census and three explicit Rust release/incremental/deps log-bin locations; exclude submodules/nested repositories/symlinks/other volumes/managed runs/caches before traversal. Fresh census plus independent per-file OS lstat, aggregate/balanced-size controls and traversal fixtures; actual guarded producer/exits/full-channel review and evidence controls; preserve original claim bindings; review unchanged public retention guidance; memory/Knowledge/history/claims/diff and normal hooks.
+  Canonical trigger: none; dated retention review changes no storage/runtime/contract/gate mechanism.
+  Claim verification: `docs/claims/REPO-HYGIENE.14.json`
+  Acceptance: Retain dated exact rows and independent controls before overwriting the latest date. Delete only an exactly proved disposable target; otherwise zero removal. Recovery/purge remains prohibited under SESSION-STARTUP-READING.7. Commit before activating actual producer/input authority SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.
+
+  Verification: PASS; Dated 2026-10-09T17:03:50.457281+00:00 parent census retains 12244 candidate rows/14790891057 bytes; three explicit Rust paths are recorded separately. Fresh census, independent per-file OS metadata, size/traversal fixtures and four actual-channel corruption controls pass. Zero removals; verification evidence and reusable caches remain retained. This is a dated metadata observation, not disposal safety, content ownership, liveness or recovery/purge acceptance. Original live-claim selector found no intersecting live records; historical claims remain unchanged. Existing public retention guidance was read and remains accurate; no book edit/render required. Memory/Knowledge/history/claim/diff and normal hooks govern landing.
+  Commit: `REPO-HYGIENE.14 - retain due artifact review` (Git owns identity).
+  Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1 only from the ensuing clean boundary.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -283,6 +300,7 @@ the durable handoff state current.
 | 9 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
 | 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
 | 11 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
+| 12 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
 
 ## Decisions
 
@@ -311,6 +329,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-09` | `REPO-HYGIENE.14` | Guarded actual census/review, independent metadata and size/boundary/channel controls; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.13` | Actual census/live lstat/source guards/boundary fixtures/claim preservation; memory/Knowledge/history/diff and normal doctrines | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.12` | Original/qualified card and current book review; unchanged production/test/CI paths; memory/Knowledge/history/diff and normal doctrines | Historical lifecycle qualification only; no new measurement. |
 | `2026-10-07` | `REPO-HYGIENE.11` | Actual census/live lstat/full channels/book/freeze; memory/Knowledge/history/claims/doctrines/diff | PASS — 10838 parent rows/13805895079 bytes; zero removals. |
@@ -343,6 +362,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-09: `.14` completes the due retained metadata review at the clean foundation boundary; producer/input authority .2.1 follows.
 
 - 2026-10-08: `.13` completes the due retained metadata review and resumes private residual-producer diagnosis.
 

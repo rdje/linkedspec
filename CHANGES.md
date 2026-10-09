@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — REPO-HYGIENE.14 retain due artifact review
+
+Dated 2026-10-09T17:03:50.457281+00:00 parent census retains 12244 candidate rows/14790891057 bytes; three explicit Rust paths are recorded separately. Fresh census, independent per-file OS metadata, size/traversal fixtures and four actual-channel corruption controls pass. Zero removals; verification evidence and reusable caches remain retained. This is a dated metadata observation, not disposal safety, content ownership, liveness or recovery/purge acceptance. Actual producers, exits and both channels are retained; original claims and snapshots remain unchanged. Public retention guidance remains accurate. Focused continuity/doctrine checks and normal hooks govern landing.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2 current foundation retrieval
 
 Reconcile the older recovery and producer-selection Knowledge cards with committed standalone foundation acceptance. Retain their original dated evidence, name the immutable recovery reverify boundary, and link current authority. Runtime/proof bytes and open integration/Phase0/mapping obligations remain unchanged. Knowledge/history/memory/task/diff and normal hooks validate this documentation correction.

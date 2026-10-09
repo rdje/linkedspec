@@ -19,7 +19,7 @@ answers:
   - "what did REPO-HYGIENE.5 remove"
   - "is Dart dot dart tool safe to delete"
   - "how much space did the July 17 artifact cleanup reclaim"
-date: 2026-10-08
+date: 2026-10-09
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
@@ -28,6 +28,7 @@ evidence_update_2026_10_03: "REPO-HYGIENE.8 retains the dated parent/Rust enumer
 evidence_update_2026_10_04: "REPO-HYGIENE.9 retains the October4 exact parent/Rust rows and actual full census/review channels with producer guards. Fresh scoped metadata and independent lstat agree, two metadata/four channel controls reject, zero removals. Original snapshots remain immutable; caches/proof data remain retained."
 evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/Rust metadata snapshot and actual full census/review channels with producer guards. Fresh scoped census and independent per-file lstat, metadata/channel/render controls verify the dated observation; zero removals. Previous snapshots remain immutable, and all evidence/caches remain retained."
 evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
+evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 reverify: "git check-ignore -v rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; git ls-files rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; bash tools/test_tool_project_data_storage.sh"
 ---
 

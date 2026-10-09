@@ -1,0 +1,6 @@
+{
+  "revision": "85691a26603ffd5c2453c39237fb4de407861d7f",
+  "records": [],
+  "producer_sha256": "eeb58ba28cd68127f6112e089a030daeba73615be3374e8c729ea23e30aefd37",
+  "scope": "Only durability mode/revision change; original claim statements and hashes are preserved."
+}

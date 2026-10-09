@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Dated artifact metadata remains retention evidence
+
+REPO-HYGIENE.14 repeats the bounded non-following census and independent OS metadata/traversal/channel controls. The new hygiene14 fixture is excluded before traversal alongside prior fixture roots. No exact deletion target was proved disposable, so all proof data and reusable caches remain retained. Read-only liveness listing can still misclassify live runs under restricted permissions; existing startup .7 ownership and recovery/purge prohibition remain in force.
+
 ## 2026-10-09 — Historical recovery assertions need explicit boundaries
 
 SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2 corrects two stale current-status fields after foundation acceptance. The recovery reviewer proves production restoration at its original Git checkpoint; current installed private code belongs to the separate foundation proof. The cards now expose that distinction and current authority without rewriting historical evidence or claiming integrated runtime acceptance.

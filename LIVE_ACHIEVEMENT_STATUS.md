@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT private producer repair; standalone foundation verified and ready for actual producer/input integration.
+Full PNT: due artifact review complete; actual private producer/input authority next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — Older recovery/selection cards now identify their original historical boundaries and link the verified standalone foundation. No runtime or measurement change; actual producer integration remains open.
+`REPO-HYGIENE.14` — Dated 2026-10-09T17:03:50.457281+00:00 parent census retains 12244 candidate rows/14790891057 bytes; three explicit Rust paths are recorded separately. Fresh census, independent per-file OS metadata, size/traversal fixtures and four actual-channel corruption controls pass. Zero removals; verification evidence and reusable caches remain retained. This is a dated metadata observation, not disposal safety, content ownership, liveness or recovery/purge acceptance.
 
 ## Next Action
 
-Complete due artifact review under REPO-HYGIENE at this clean boundary, then activate actual argument/node input authority .2.1. Full private Phase0 .2.5, mapped replacement .1.1.2 and independent canonical .0.3.2 stay open.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1 for actual argument/node input and callback authority. Full private Phase0 .2.5, interval mapping .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.14` — due dated metadata/actual-channel review; zero removals.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.2` — historical recovery/selection status reconciled with current foundation.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1` — private foundation62/16; actual producer integration remains open.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0` — crash draft preserved; production restored; clean handoff stop.
@@ -29,7 +30,6 @@ Complete due artifact review under REPO-HYGIENE at this clean boundary, then act
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2` — committed77 commands/compiler41/public120+18+36/default72/consumer1644; canonical receipt gates membership closure.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1` — grouped-role RED114/GREEN789; default72/public36/consumer1644; fresh canonical next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0` — immutable73/consumer1473; grouped-pattern primitive cause retained; focused repair next.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1` — callable signature RED10/GREEN225; compiler40/18 values/direct1473 groups; canonical acceptance next.
 
 ## History
 

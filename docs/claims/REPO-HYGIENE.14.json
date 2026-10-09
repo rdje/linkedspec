@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.14",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review",
+      "statement": "At 2026-10-09T17:03:50.457281+00:00, the scoped parent metadata census retains 12244 candidate rows/14790891057 bytes; three explicit Rust release/incremental/deps log-bin locations are observed separately. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Actual source-guarded commands/exits/full channels and four reason-sensitive evidence RED controls verify. Zero files are removed; proof data and reusable caches remain retained.",
+      "scope": "Dated per-file metadata only. Candidate size/age does not establish content ownership, disposal safety, reclaimed space, process liveness, recovery/purge or global audit completion. Submodules/nested repositories, symlinks, other volumes, managed runs and reusable caches are excluded before traversal. Three explicit Rust paths are separate observations. Boundary fixtures assume a quiescent filesystem; no adversarial concurrent-mutation guarantee. --live measures new changing state; default review checks retained totals. Standard OS/Python/Git dependencies are read-only; all project-owned outputs and fixtures remain on the repository volume. No deletion or public behavior change; public retention teaching remains accurate.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.14-capture.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.14-review-actual.py",
+        "granularity": "Each dated candidate/Rust path, suffix and byte size; actual commands/exits/channels/source guards; boundary fixtures and historical claim bindings.",
+        "result": "At 2026-10-09T17:03:50.457281+00:00, the scoped parent metadata census retains 12244 candidate rows/14790891057 bytes; three explicit Rust release/incremental/deps log-bin locations are observed separately. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Actual source-guarded commands/exits/full channels and four reason-sensitive evidence RED controls verify. Zero files are removed; proof data and reusable caches remain retained."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Aggregate totals might hide altered per-file sizes, unsafe traversal, failed observations or forged producer/channel identities.",
+        "oracle": "Independent OS lstat and fresh census, fixed traversal fixtures, exact retained command/source/channel identities.",
+        "red_control": "Aggregate inflation and balanced-size redistribution reject. Start/ancestor symlinks, nested repositories, mock submodules and outside-root starts reject. Four actual-channel controls reject incomplete capture, forged producer, failed review and forged stdout with their named reasons."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitignore",
+            "sha256": "b61de7bd78fc7d317b44b9bec528665b632206a4c51d7a0c266a719af951b26c",
+            "role": "input"
+          },
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": "CHANGES.md",
+            "sha256": "4580c30c67aac13dcda7372434e9c08ac94c51e64d7b5c9b556cb6561e072f60",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "b9740fb5c80c1b71adf8268f087947b22c33e40fb35e0aeecf8c10019cf8647b",
+            "role": "input"
+          },
+          {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "sha256": "fa0d167887a741f97792a364f4e2842d4427b520a1c9a9ad1440f39ccabdc2b2",
+            "role": "input"
+          },
+          {
+            "path": "MEMORY.md",
+            "sha256": "b2aebb7b2ed153d37f8f5d166e8c75fb91ee4749d61da9b38e096bd043f43c17",
+            "role": "input"
+          },
+          {
+            "path": "docs/ARTIFACT_CLEANUP.md",
+            "sha256": "46129b6979bebf7199a421803bae011b8c1ff5f21cfb790622ab687cd4e3f370",
+            "role": "input"
+          },
+          {
+            "path": "docs/TASK_TREE.md",
+            "sha256": "8718c5bd42051fb6bd7c090f8651e229b9b9b006a6f6b09cc3b214ce68b1e09e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-actual-verification.json",
+            "sha256": "f30baa1d711fd6af956de5f941f21bb4a61140c3ba5d14ae75521da79252eb93",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-actual.json",
+            "sha256": "6e6e8e2e6fc87414a74eb28e152136beabf051ec7fb539d805a01117c0335b1d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-artifact-review.json",
+            "sha256": "5b8fa4461bfe4196e4ae0859a15743484a0781c66dd3a39fa5d9a7a78158106c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-capture.py",
+            "sha256": "61cc4664e5df319af94719a19c32901d65690083b00a5590d4dc46d06bbe2a24",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-census.py",
+            "sha256": "2a346842c92dd40eebd552205adfbe1bfd5446d1bb05c44828dc5e7e2138c82e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-claim.py",
+            "sha256": "2491c86152b031fd2d7620dc42f778def3aa9d2b24d3dd95e5568e7905e7904a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-freeze.json",
+            "sha256": "4edd5d6c1d41e90c145a7a648fc7c58d815d1de3922e5bb8df96571aa1dc0027",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-freeze.py",
+            "sha256": "eeb58ba28cd68127f6112e089a030daeba73615be3374e8c729ea23e30aefd37",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-review-actual.py",
+            "sha256": "32aab519ae1a3a64112e7d5d9d1ef3df25782977497c1df715f9754792456261",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-review.py",
+            "sha256": "df03a2b37587f472e7bca39a5001f352b927888d835070be84ac234e06e4541e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.14-verification.json",
+            "sha256": "7c70839070dfcd5ac98b2f686aa71689001264590f69845960cc3a882c8d9ffc",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "sha256": "19b088bf80e8ec1ed3fb26f7050c88549a09202db79dbf6a1d43cd7b5d1fad3d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "9171d65bfbed9402f609823e39df92d56f027f06f5aee9cc462a674e8ad42c65",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/REPO-HYGIENE.md",
+            "sha256": "bc9b6f609c4477b56f8afc0fc7d8c79f7ec74854297a70d5aad7ceafc5b8c233",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}
