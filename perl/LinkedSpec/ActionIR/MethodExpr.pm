@@ -11,7 +11,7 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 use Scalar::Util ();
 
-our ($_source_csv_recorder, $_source_method_recorder);
+our ($_source_csv_recorder, $_source_method_recorder, $_input_capture_scope);
 
 # Select by retained occurrence index. Changed values lose only their own frame;
 # copied arrays and foreign source are rejected by the surrounding collector.
@@ -32,11 +32,16 @@ sub _select_argument_frames {
 # restore an enclosing invocation on both successful and exceptional returns.
 sub _split_csv_with_source_frames {
  my ($callback, @args) = @_;
+ return _collect_csv_source_frames($callback, \@args)
+}
+
+sub _collect_csv_source_frames {
+ my ($callback, $args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  my $source = $args[0];
+  my $source = $args->[0];
   my @recorded;
   local $_source_csv_recorder = sub { push @recorded, $_[0] };
-  my $arguments = $callback->(@args);
+  my $arguments = $callback->(@$args);
   my $frames = [];
   if (ref($arguments) eq 'ARRAY' && defined($source) && !ref($source)) {
    for my $batch (@recorded) {
@@ -52,11 +57,16 @@ sub _split_csv_with_source_frames {
 
 sub _parse_method_with_source_frames {
  my ($callback, @args) = @_;
+ return _collect_method_source_frames($callback, \@args)
+}
+
+sub _collect_method_source_frames {
+ my ($callback, $args) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
-  my $source = $args[0];
+  my $source = $args->[0];
   my @recorded;
   local $_source_method_recorder = sub { push @recorded, $_[0] };
-  my $call = $callback->(@args);
+  my $call = $callback->(@$args);
   my $frames = [];
   if (ref($call) eq 'HASH' && ref($call->{args}) eq 'ARRAY'
       && defined($source) && !ref($source)) {
@@ -74,6 +84,91 @@ sub _parse_method_with_source_frames {
   }
   return {call => $call, source_frames => $frames}
  })
+}
+
+# Input captures retain actual objects only for the enclosing private scope.
+# Legacy wrappers above keep their copied arguments; direct captures preserve
+# the original aliases through a reference to their remaining @_ entries.
+sub _with_input_captures {
+ my ($work) = @_;
+ local $_input_capture_scope = {captures => {}};
+ local ($_source_csv_recorder, $_source_method_recorder);
+ if (!defined wantarray) { $work->(); return }
+ return $work->()
+}
+
+sub _same_input_reference {
+ my ($left, $right) = @_;
+ return ref($left) && ref($right)
+  && Scalar::Util::refaddr($left) == Scalar::Util::refaddr($right)
+}
+
+sub _copy_input_frame {
+ my ($frame) = @_;
+ return undef unless ref($frame) eq 'HASH';
+ return {source => $frame->{source}, raw => $frame->{raw},
+         source_span => {%{$frame->{source_span}}}}
+}
+
+sub _retain_input_capture {
+ my ($callback, $framed, $mode) = @_;
+ my $value = $framed->{$mode eq 'method' ? 'call' : 'arguments'};
+ my $capture = {value => $value};
+ if (ref($_input_capture_scope) eq 'HASH') {
+  my $arguments = $mode eq 'method'
+   ? (ref($value) eq 'HASH' ? $value->{args} : undef) : $value;
+  $_input_capture_scope->{captures}{Scalar::Util::refaddr($capture)} = {
+   capture => $capture, callback => $callback, value => $value, mode => $mode,
+   arguments => $arguments, count => ref($arguments) eq 'ARRAY' ? scalar(@$arguments) : undef,
+   fields => $mode eq 'method' && ref($value) eq 'HASH'
+    ? {map { $_ => $value->{$_} } qw(method source_method source)} : {},
+   frames => [map { _copy_input_frame($_) } @{$framed->{source_frames}}],
+  };
+ }
+ return $capture
+}
+
+sub _capture_csv_input {
+ my $callback = shift;
+ my $framed = _collect_csv_source_frames($callback, \@_);
+ return _retain_input_capture($callback, $framed, 'csv')
+}
+
+sub _capture_method_input {
+ my $callback = shift;
+ my $framed = _collect_method_source_frames($callback, \@_);
+ return _retain_input_capture($callback, $framed, 'method')
+}
+
+# An equal description, callback name or copied array cannot select a frame.
+# Changed argument values decline individually; a changed array shape declines
+# the whole capture because its original occurrence indices no longer apply.
+sub _argument_input_for {
+ my ($capture, $callback, $arguments, $index) = @_;
+ return undef unless ref($_input_capture_scope) eq 'HASH' && ref($capture) eq 'HASH'
+  && ref($callback) eq 'CODE' && ref($arguments) eq 'ARRAY'
+  && defined($index) && !ref($index) && $index =~ /\A(?:0|[1-9][0-9]*)\z/;
+ my $record = $_input_capture_scope->{captures}{Scalar::Util::refaddr($capture)};
+ return undef unless ref($record) eq 'HASH'
+  && _same_input_reference($record->{capture}, $capture)
+  && _same_input_reference($record->{callback}, $callback)
+  && _same_input_reference($record->{value}, $capture->{value})
+  && _same_input_reference($record->{arguments}, $arguments)
+  && @$arguments == $record->{count} && $index < @$arguments;
+ if ($record->{mode} eq 'method') {
+  my $value = $record->{value};
+  return undef unless _same_input_reference($value->{args}, $arguments);
+  for my $field (qw(method source_method source)) {
+   return undef unless defined($value->{$field}) && !ref($value->{$field})
+    && defined($record->{fields}{$field}) && !ref($record->{fields}{$field})
+    && $value->{$field} eq $record->{fields}{$field};
+  }
+ }
+ my $frame = $record->{frames}[$index];
+ my $value = $arguments->[$index];
+ return undef unless ref($frame) eq 'HASH' && defined($value) && !ref($value)
+  && $value eq $frame->{raw};
+ return _copy_input_frame($frame)
 }
 
 # Derive edge trimming from the original piece boundary, never a text search.

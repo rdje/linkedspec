@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-09 — Actual MethodExpr captures preserve aliases without changing legacy wrappers
+
+Argument-reference collector helpers let old wrappers pass their copied local array while new private captures pass the remaining original @_ aliases. A scoped strong registry selects only actual capture/callback/return/argument-array/index identities, unchanged root fields/array shape and matching original indexed text. Getter descriptions are detached and expire with the scope. Actual107/13 proof distinguishes aliases, copies, root/value/shape changes, context and nested fatal restoration. Reviewing the selected consumer graph also caught a repeated known provenance gap: broad Perl/spec/t hashes omitted checkpoint JSON. The final fourteen suites run in a supplied133-file tree including all three JSON inputs; each missing artifact produces an actual reader RED. Earlier finite supplemental captures are owned next as P1 .2.1.2.5; current hashes cannot reconstruct past per-read bytes. No original-event copy/consume authority is inferred from input descriptions.
+
 ## 2026-10-09 — Edge trims cannot consume the same characters twice
 
 The original whitespace-only interval inversion came from measuring the entire source as both leading and trailing whitespace. Retaining the existing start anchor while limiting trailing trim to length(source)-leading prevents overlap before substring/end calculation. Empty inputs remain zero-width at base, all-whitespace inputs become zero-width after leading whitespace, and nonempty bodies retain exact positions including Unicode/CRLF and literal internal spaces. Actual facade RED18/GREEN65 and four source inverses distinguish double trimming, wrong anchors, missing bases and body consumption. Native frames63 and construction77 recur within twelve suites; the earlier original/live diagnosis is retained historically. No compiler-event authority follows from corrected public coordinates.

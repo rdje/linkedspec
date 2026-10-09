@@ -1,0 +1,75 @@
+{
+  "result": "PASS",
+  "assertions": 107,
+  "source_inverses": 13,
+  "consumer_suites": 14,
+  "supplied_consumer_inputs": 133,
+  "actual_missing_artifact_reds": 3,
+  "toolbox_routes": 3,
+  "evidence_controls": [
+    {
+      "name": "failed-final",
+      "reason": "actual final successful channels",
+      "result": "RED"
+    },
+    {
+      "name": "forged-final-source",
+      "reason": "actual input identity",
+      "result": "RED"
+    },
+    {
+      "name": "lost-original-RED",
+      "reason": "actual original interface RED",
+      "result": "RED"
+    },
+    {
+      "name": "missing-inverse",
+      "reason": "complete inverse population",
+      "result": "RED"
+    },
+    {
+      "name": "forged-inverse-source",
+      "reason": "actual inverse producer identity",
+      "result": "RED"
+    },
+    {
+      "name": "failed-consumers",
+      "reason": "actual consumers PASS",
+      "result": "RED"
+    },
+    {
+      "name": "missing-consumer",
+      "reason": "complete consumer selection",
+      "result": "RED"
+    },
+    {
+      "name": "forged-Toolbox",
+      "reason": "unchanged Toolbox oracle",
+      "result": "RED"
+    },
+    {
+      "name": "missing-artifact-control",
+      "reason": "complete actual artifact controls",
+      "result": "RED"
+    },
+    {
+      "name": "forged-artifact-input",
+      "reason": "actual missing artifact input boundary",
+      "result": "RED"
+    }
+  ],
+  "prior_bindings": 239,
+  "producer_sha256": "6b4e25cf0d5879d0a3f722db5f01ec58b02c38d842c9ee7c01070983680677b8",
+  "records": {
+    "final": "90c8bd277b4a9175f65c8d25af20b44daab42935e65e51a0b1446b4199c5db6f",
+    "original": "484eccfcc3a1b1e3cf7c8f82ce48a5ee4db1d00e5141818e3204674fa6f2bc29",
+    "inverses": "06c06b23892acdb41bcfc4ef809fbfdaad49d7a1b5069d666b7d56b1e3643bc2",
+    "consumers": "721127b38c495cd0ea7591617b4ac45de9d4d1d64c6a808ad695fb41bde5dcc4",
+    "toolbox": "6ccec8773e41209106c86ffcea75fc5b8d2666c0492fd006e3c1b94e1a910bb0",
+    "freeze": "4febf439adebabe9d647fc7e59e911ca73042de2cdab1eddf06c5ed751e0ad0c",
+    "artifact-controls": "b553e41ce7681b4609979fab6222cdc5201e164e4e5a8f0504aaff2bc0bf52b0",
+    "draft-inverses": "e3f8807429ab429f5355b1b43f2484f0a69dd5118dd3d627b4e0a4cd563bd253",
+    "draft-consumers": "dfcbea7b6f3aa9d5526fe1dc2e7215c722ab9a7ad1bd8228a39a93f480f62270"
+  },
+  "scope": "Actual MethodExpr capture/return/argument occurrence identity and direct alias semantics only. Legacy copied wrappers preserved. Initial invalid syntax control and incomplete broad consumer manifest remain rejected drafts; final inverses are semantic and final selected consumers use a supplied tree including three actual JSON inputs. Earlier finite supplemental consumer input audit is next P1 .2.1.2.5. No compiler-event grant, complete Phase0 or mapped/canonical admission."
+}

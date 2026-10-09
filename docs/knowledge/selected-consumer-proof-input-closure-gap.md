@@ -6,8 +6,8 @@ answers:
   - "which inputs were omitted by the basic regex proof publisher"
   - "can continuity publishing change Phase0 input bytes after its run"
   - "who owns the selected consumer and book proof input closure repair"
-date: 2026-10-04
-status: selected gap superseded by verified source-bound remeasurement .1.1.3.1; historical audit remains open
+date: 2026-10-09
+status: earlier selected gap superseded by .1.1.3.1; finite recent audit .2.1.2.5 open
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
 evidence: "The final .1.1.0 review preserves the original claim/publisher as claim-initial.json/.py, separates the complete private/compiler measurement from consumer/render observations, and discloses broader falsification/durability gaps with an immediate P1 repair. The actual passing TAP and render streams are unchanged."
 reverify: "Read the source-backed selected input graph and actual remeasurement under .1.1.3 when it lands; initial producer/claim and observed streams remain under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-. Do not refresh their input hashes as if they captured a newer run."
@@ -48,3 +48,14 @@ are added. The actual initial missing-file RED stays intact. Twenty-two evidence
 corruptions reject; the final public book has a separate complete capsule and
 render. Preparation is frozen at exact e853cd5; the private/compiler claim remains
 unchanged. Statement frames are next; the broader historical audit stays startup .5.
+
+The October9 MethodExpr capture review finds the same class in the finite private
+foundation/constructor/native/empty-span continuation. The Perl/spec/t hash set
+omits checkpoint JSON opened by the selected membership suites. The new MethodExpr
+legacy suite also reads its original argument-case JSON. Current `.2.1.2.1` repairs
+its proof with a supplied input tree. P1 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
+in `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` audits/qualifies the finite earlier
+supplemental observations and rederives a complete selected recurrence immediately
+after that leaf, before original-event joining. Original source-bound standalone
+fixture/inverse proof remains separate; no current hashes retroactively bind past
+per-read artifacts. The wider historical audit stays with startup `.5`.

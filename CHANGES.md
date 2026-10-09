@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1 retain actual MethodExpr input captures
+
+Adds invocation-local actual capture/callback/return/argument-array identity with detached original occurrence frames. Shared collectors preserve direct scalar aliases for new captures and copied local arguments for legacy wrappers; scalar once-only callbacks, caller errors, fatal identities and nested unwind remain exact. Standalone107 assertions/13 semantic source inverses pass. Fourteen suites pass in a133-file supplied tree with three explicit checkpoint JSON artifacts; three actual artifact omissions fail their readers, three Toolbox routes and ten evidence controls pass. Initial syntax-control and incomplete broad consumer-manifest drafts remain unadmitted. Prior239 empty-span bindings are historical at8f0c. The same gap in finite earlier supplemental captures is scheduled immediately as P1 .2.1.2.5 before event joining. Book/Knowledge/continuity align; compiler-event grants and full admission stay open.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4 order empty AST source intervals
 
 Limits trailing trim to the characters remaining after leading trim. Empty/whitespace-only expression and statement facade spans are ordered at the after-leading anchor; nonempty public text/intervals and native inputs stay exact. Same65-assertion fixture reproduces18 semantic failures on e0eb with47 controls passing, then final65 GREEN; four effective source inverses, twelve direct suites, three unchanged Toolbox routes and eight evidence controls pass. Only Parser production changes,241 prior native bindings are historical at e0eb, and book/Knowledge/continuity align. Original-event joining and full mapped/canonical admission remain open.

@@ -73,5 +73,8 @@ Native parser-relative root/call/array frames now have their own bounded proof
 under `.2.1.2.0`; `docs/knowledge/perl-private-ast-input-frames.md` owns current
 behavior. The original whitespace-only public AST span defect is resolved by `.2.1.2.4`;
 `docs/knowledge/perl-empty-ast-trim-span.md` owns the actual repair evidence.
-MethodExpr input captures `.2.1.2.1` are next before original-event joining.
+MethodExpr input captures `.2.1.2.1` now have standalone107/13 proof;
+`docs/knowledge/perl-private-method-input-captures.md` owns their current behavior.
+P1 supplemental consumer artifact-binding audit `.2.1.2.5` is next before
+original-event joining.
 Native input coordinates do not yet grant compiler-event copy/consume authority.

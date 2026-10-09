@@ -3969,20 +3969,31 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0 - retain native AST input frames` (Git records identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Retain actual MethodExpr input captures and original frame identities while preserving callback effects and existing bridge contracts.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`
   Owned paths: MethodExpr.pm and/or SourceEmissions.pm only as required by actual capture seam; focused tests/proof/docs.
-  Planned tier: `focused`
-  Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
-  Planned canonical boundary: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
-  Planned claim record: none: Planning only; declare the actual measured record before results.
+  Verification tier: `focused`
+  Focused checks: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
+  Canonical trigger: none for private bounded implementation; full Phase0 and independent canonical admission remain open.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1.json`
   Acceptance: Use actual original producer returns and frames; preserve existing legacy wrapper semantics and all ordinary callback results/context/references/aliases/effects/errors. Do not infer input identity from a copied descriptive frame. Choose the minimal owning seam before production writes.
+
+  Activation: Clean8f0cdaec69b80ce5a8f4edfd783199693498bae1; empty-span65/4, twelve consumers, all ten hooks/post-pointer PASS, brief0 and clean Git. MethodExpr canonical bridge/selection Knowledge, actual collector/parser/CSV seams, original bridge tests and public ActionIR book reviewed.
+  Chosen seam: MethodExpr only. Factor existing collectors through argument-reference helpers; legacy wrappers retain their copied local arguments. New private scoped captures pass original argument aliases, call once in scalar context, retain actual callback/capture/result/argument-array identity and immutable initial source/selected frame descriptions. Getter rejects copied captures/callbacks/arrays, changed root fields/array shape or changed indexed values; returned frames are detached. Nested input scopes and fatal callbacks restore outer state. No SourceEmissions/compiler-event copy/consume grant in this leaf.
+  Owned evidence correction: Source-backed selected consumer review finds checkpoint JSON reads omitted from the broad perl/spec/t manifest. Preserve the initial passing draft and its producer; rerun this leaf in a supplied Perl/spec/selected-test tree with all three actual JSON inputs and explicit baseline-off environment. Broader earlier private foundation/constructor/native/empty-span consumer artifact binding audit is P1 .2.1.2.5, scheduled immediately after this leaf before event joining; bounded standalone fixture proof stays distinct from those supplemental observations.
+
+  Result: Standalone actual MethodExpr input captures PASS107 assertions/13 valid semantic source inverses. Actual callback/return/capture/argument-array/index identities and unchanged method root fields/array shape bind detached original frames. Direct scalar/extra aliases, once-only scalar callbacks, legacy copied wrappers, successful caller error, actual fatal identity and same-scope/nested unwind remain exact.
+  Verification: Fourteen selected suites PASS in an exact133-file supplied tree (116 Perl/spec, fourteen tests, three JSON artifacts); contents/population unchanged. Three actual missing-artifact controls reach reader failures; three unchanged Toolbox routes and ten reason-sensitive evidence RED controls PASS. Original availability RED is separate from semantic inverses. Invalid initial syntax mutation and broader draft consumer manifest stay retained and unadmitted. Only MethodExpr production changes;239 prior empty-span bindings remain historical at8f0c by mode/revision only. Syntax/book/memory/Knowledge/claim/history/diff and normal ten doctrines required before landing.
+  LinkedSpec-tool evidence: Actual MethodExpr parser/CSV callbacks and actual call_spec_handler_subst captures against the retained three-route original oracle; supplied final/input/source-inverse/missing-artifact channels are independently reviewed under the leaf checkpoint prefix.
+  Finding disposition: The finite earlier supplemental consumer JSON-binding gap is owned as immediate P1 .2.1.2.5; current supplied proof repairs this leaf, while original earlier observations require explicit audit/qualification. No compiler-event joining, output lowering or complete Phase0/mapped/canonical admission is claimed.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1 - retain actual MethodExpr input captures` (Git records identity).
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
   Status: `pending`
   Goal: Join actual parser/argument captures to selected compiler events and original copy/consume authority.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
   Owned paths: SourceEmissions.pm; necessary MethodExpr private seam only; focused tests/proof/docs.
   Planned tier: `focused`
   Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
@@ -4022,6 +4033,20 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Orchestration correction: Standalone claim check overlapped staging and returned the known mixed-index missing-declaration failure. Transcribed result and original-snapshot/channel limits retained under -overlap-attempt.json; canonical claim-verification-index-snapshot card updated. Complete candidate is staged before the normal composed hook check and its index remains stable.
   Resolution: P1 empty public-span defect fixed and verified; historical .0 diagnosis remains unchanged. Further MethodExpr capture .1 is the next eligible leaf.
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4 - order empty AST source intervals` (Git records identity).
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
+  Status: `pending`
+  Goal: Audit and qualify earlier supplemental private consumer captures, then retain a complete supplied recurrence before original-event joining.
+  Priority: P1; immediate next after .2.1.2.1, before .2.1.2.2.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
+  Reproduction: Earlier .2.1.2.4-consumers.json hashes Perl/spec/t but t/actionir_compiler_source_membership.t and t/actionir_executable_source_membership.t read checkpoint .2.0-cases.json and .2.2.2.1-cases.json outside that set. .2.1.2.1 additionally selects the legacy argument suite with its .1.3.2.0-cases.json. Same known selected-consumer-proof-input-closure-gap class; original per-read bytes were not separately guarded. Actual passing channels are not retroactively upgraded by current hashes.
+  Impact: Supplemental consumer durability leg is incomplete; standalone source-bound fixture/inverse proofs remain separate. Inspect the finite foundation/constructor/native/empty-span records, preserve original claims, disclose missing broader legs with this repair owner and rederive the smallest complete selected capsule. Do not expand into the full historical audit owned by SESSION-STARTUP-READING.5.
+  Owned paths: Prior finite claim/producer disclosures and preserved before records; supplied selected consumer capsule/proof/claim; relevant Knowledge/book/continuity only. No product change unless a separately owned actual defect is found.
+  Planned tier: `focused`
+  Planned focused proof: Independently authored reader edges, exact supplied artifact population/content, actual full channels, distinguishing missing/changed artifact controls and original claim preservation; focused doctrines/book/history.
+  Planned canonical boundary: None for bounded evidence correction; complete Phase0 and independent mapped/canonical admission remain open.
+  Planned claim record: none: Pending actual audit; declare measured record before publishing results.
+  Acceptance: Prior broad observations are accurately qualified; actual supplied recurrence includes every selected artifact input and distinguishes omissions. Original evidence is recoverable, and future agents find this corrected input contract without archaeology.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4430,10 +4455,11 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` | `done` | Standalone construction77/15; lifetime RED/GREEN; original-frame joining next. |
 | 43.4.2.0.3.1.1.1.2.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2` | `active` | Actual MethodExpr argument/frame authority. |
 | 43.4.2.0.3.1.1.1.2.1.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` | `done` | Native63/11, actual frames/consumers; P1 public trim repair next. |
-| 43.4.2.0.3.1.1.1.2.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` | `pending` | Actual MethodExpr input capture/effects. |
+| 43.4.2.0.3.1.1.1.2.1.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` | `done` | Actual input107/13, fourteen supplied consumers; P1 prior evidence audit next. |
 | 43.4.2.0.3.1.1.1.2.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` | `pending` | Original-event join and copy/consume. |
 | 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
 | 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
+| 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `pending` | P1 supplemental consumer artifact binding audit, next after .1. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

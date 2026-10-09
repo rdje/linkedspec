@@ -930,6 +930,16 @@ of the public `base_start`. For `cat("a", "a")` parsed with `base_start => 23`:
 | First string | `[27, 30)` | `[4, 7)` |
 | Second string | `[32, 35)` | `[9, 12)` |
 
+MethodExpr input captures likewise retain the actual callback return and original
+argument array within a private scope. For ` cat("a", "a") `, its argument frames
+are `[5, 8)` and `[10, 13)` in that original input. Copying a capture or array cannot
+select those frames. A changed value loses its own frame; changing the array shape
+or method/source fields declines the capture. Returned frame descriptions are
+detached. Direct captures preserve callback scalar aliases, while the earlier
+frame wrappers retain their existing copied-argument behavior. Nested successes
+and exceptions restore the enclosing scope. These input descriptions still require
+the selected compiler event before they can authorize original-source copying.
+
 The native frames follow actual returned CSV occurrences, so equal arguments keep
 separate positions. Unsupported descendant split paths conservatively decline
 frames. Joining these parser-relative frames to selected compiler-event origins

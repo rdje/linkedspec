@@ -68,3 +68,9 @@ The October 9 input-authority diagnosis preserves the historical observations ab
 and corrects the stale pre-implementation title. Current source-bound observations
 and the next integration protocol live in
 `docs/knowledge/perl-private-input-authority-selection.md`.
+
+Standalone actual input captures now have their own owner and compatibility proof:
+`docs/knowledge/perl-private-method-input-captures.md`. They preserve direct scalar
+aliases while legacy wrappers keep their copied arguments. This does not grant
+compiler-event authority. The finite recent supplemental consumer artifact-binding
+audit is `.2.1.2.5`; the historical bridge proof above remains its original result.
