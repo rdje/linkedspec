@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-09 — Finite engineering-notes aggregate admission
+
+ADR0130 admits one bounded hot-shard allowance of512 aggregate lines. Root, per-file, bytes, membership and immutable history remain exact; no archive reserve is granted. The indexed decision accounts for its own exact collection overhead. Retained independent reconstruction and actual threshold/authority controls precede exact staged canonical admission.
+
 ## 2026-10-09 — Historical artifact gaps need individual qualification and complete replacement
 
 The foundation producer hashes docs/checkpoints, while subsequent private consumer producers hash only Perl/spec/t. Actual source-backed audit distinguishes foundation2306/both artifacts from constructor215/native216/empty217/two missing JSON inputs each; all recorded identities match their epochs. Preserve original claims and bounded fixture/inverse legs, separate incomplete supplemental observations into explicit gap entries, and supersede current acceptance with a complete supplied recurrence. Current fourteen suites use133 immutable files including all three actual JSON reader inputs. Missing each artifact fails its unchanged reader; restoring the trim defect produces18 semantic failures. Complete book57 captures config/source population; missing SUMMARY fails compilation, while deleting explanatory text still compiles but fails its rendered marker. Eleven evidence controls distinguish failed/incomplete/forged records. This finite correction does not reconstruct original per-read bytes or close the broader startup historical audit.

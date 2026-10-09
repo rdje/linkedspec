@@ -1,0 +1,8 @@
+{
+  "capture_kind": "transcribed actual combined tool outputs; separate original channel bytes unavailable",
+  "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6-capacity.py apply",
+  "initial_exit_code": 1,
+  "initial_failure": "KeyError: 'id' at capacity.py:76 old_by_id = {r['id']: r for r in old}",
+  "partial_writes": "Only exact current note/change records written; routing/index/ADR unchanged. Initial retainer falsely used an inline ## in CHANGES header as first record and rejected restoration. Subsequent retry therefore correctly rejected changed CHANGES, after rewriting only the identical note addition. Final anchored whole-record comparison verifies exact literal insertions against clean Git and restores both roots.",
+  "repair": "Preserve data-only registry header; index only records with id. Restore only proven literal additions at anchored record boundaries. Initial producer retained separately; no product/checker/history change."
+}

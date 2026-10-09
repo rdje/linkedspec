@@ -4059,19 +4059,25 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit a finite, measured engineering-notes aggregate capacity extension before further implementation.
   Priority: P1; immediate after .2.1.2.5, before original-event joining .2.1.2.2.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
   Reproduction: .2.1.2.5 pre-commit README-STABILITY rejects engineering_notes aggregate29002/29000 lines; removing two redundant mutable header separators restores the exact boundary without losing text. Further required records need a separately owned finite decision.
   Owned paths: Canonical routing/decision capacities, new indexed ADR, exact pressure evidence/claim, Knowledge and continuity; immutable history remains byte-identical.
-  Planned tier: `canonical`
-  Planned focused proof: Exact resulting-tree pressure census, unchanged immutable history identities, distinguishing capacity denial, README/Knowledge/history/doctrines and full exact staged canonical CI.
-  Planned canonical boundary: Mechanical routing/size-policy infrastructure and finite capacity admission.
-  Planned claim record: none: Pending capacity measurement and retained proof must be declared before acceptance.
+  Verification tier: `canonical`
+  Focused checks: Exact resulting-tree pressure census, unchanged immutable history identities, distinguishing capacity denial, README/Knowledge/history/doctrines and full exact staged canonical CI.
+  Canonical trigger: Mechanical routing/size-policy infrastructure and finite capacity admission.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json`
   Acceptance: A precise finite increase has an indexed decision under current full-PNT engineering authority, actual bounded admission evidence, preserved history, and exact staged canonical receipt. No unlimited reserve or reused director grant.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Exactly three registry scalars admit engineering_notes aggregate lines29000→29512 and the sole new indexed ADR0130 decision: files130→131 and aggregate lines13077→13109. Independent Git reconstruction preserves220 prior history/decision files and all prior current-root records; engineering notes use45 files/29004 lines/3238344 bytes, decisions use131 files/13109 lines/966986 bytes. Twelve actual production aggregate observations, sixteen actual accepted/indexed/exact-authority RED controls and three actual reviewer evidence REDs pass. Root, byte, per-file, manifest, membership and every other registry control stay exact. No new archive member is admitted. Exact staged canonical CI and receipt are required before landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6 - admit finite engineering notes aggregate` (Git records identity).
+  Activation: Clean bece12874183477b6e601dd122cb1c39119b613e; all ten doctrines/post-pointer PASS, brief0 and clean Git confirmed. README_POLICY and ADR0069/0128/0129 reviewed; existing public accepted-authority explanation already covers this data-only capacity admission.
+  Exact selection: engineering_notes aggregate lines29000→29512, one bounded hot-shard allowance. Other engineering-note controls and immutable history stay exact. Admit only the new ADR0130 file and its exact resulting aggregate decision lines; canonical staged proof remains mandatory.
+  Result: Finite three-scalar data-only admission, accepted indexed ADR0130 and original history/current-record preservation independently verified. Initial header/retainer draft failures are retained with channel limitations. Existing book authority teaching already covers these unchanged rules. No parser/runtime/test/checker/dependency change.
+  LinkedSpec-tool evidence: Actual unchanged routing threshold and accepted/indexed authority functions, exact Git history recovery and actual reviewer subprocess REDs; complete control channels/mutant plans retained under this leaf prefix.
+  Result: Finite three-scalar data-only admission, accepted indexed ADR0130 and original history/current-record preservation independently verified. Initial header/retainer draft failures are retained with channel limitations. Existing book authority teaching already covers these unchanged rules. No parser/runtime/test/checker/dependency change.
+  LinkedSpec-tool evidence: Actual unchanged routing threshold and accepted/indexed authority functions, exact Git history recovery and actual reviewer subprocess REDs; complete control channels/mutant plans retained under this leaf prefix.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4485,7 +4491,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
 | 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
 | 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `done` | Three historical gaps qualified; complete133-file/fourteen-suite/book57 recurrence. |
-| 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `pending` | Finite canonical engineering-notes capacity admission before event joining. |
+| 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `done` | Three scalars;220 preserved files; production12/16 and evidence3; canonical receipt governs landing. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

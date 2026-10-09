@@ -1,0 +1,220 @@
+{
+  "result": "PASS",
+  "base": "bece12874183477b6e601dd122cb1c39119b613e",
+  "preserved_files": 220,
+  "preserved_bytes": 8027805,
+  "measured": {
+    "engineering_notes": {
+      "files": 45,
+      "lines": 29004,
+      "bytes": 3238344
+    },
+    "decisions": {
+      "files": 131,
+      "lines": 13109,
+      "bytes": 966986
+    }
+  },
+  "controls": {
+    "authority": [
+      {
+        "name": "missing_new_record",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "missing_index",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "proposed_status",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "missing_status",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "duplicate_status",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "wrong_old_limits",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "wrong_new_limits",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "unreviewed_increase",
+        "observed": "RED",
+        "surface": "engineering_notes"
+      },
+      {
+        "name": "missing_new_record",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "missing_index",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "proposed_status",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "missing_status",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "duplicate_status",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "wrong_old_limits",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "wrong_new_limits",
+        "observed": "RED",
+        "surface": "decisions"
+      },
+      {
+        "name": "unreviewed_increase",
+        "observed": "RED",
+        "surface": "decisions"
+      }
+    ],
+    "instrument_sha256": "a55f5473edfa5b600d4e3976033aca46ed479c88eb862465697789a9d4abf01f",
+    "measured": {
+      "decisions": {
+        "bytes": 966986,
+        "files": 131,
+        "lines": 13109
+      },
+      "engineering_notes": {
+        "bytes": 3238344,
+        "files": 45,
+        "lines": 29004
+      }
+    },
+    "production_sha256": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+    "scope": "Actual unchanged production functions with actual current file census and in-memory ADR/index controls. Complete resulting-tree doctrine and staged canonical proof remain separately required.",
+    "thresholds": [
+      {
+        "limit": 29000,
+        "reasons": [
+          "aggregate lines 29004/29000"
+        ],
+        "rejected": true,
+        "surface": "engineering_notes",
+        "value": 29004
+      },
+      {
+        "limit": 29512,
+        "reasons": [],
+        "rejected": false,
+        "surface": "engineering_notes",
+        "value": 29004
+      },
+      {
+        "limit": 29000,
+        "reasons": [
+          "aggregate lines 29512/29000"
+        ],
+        "rejected": true,
+        "surface": "engineering_notes",
+        "value": 29512
+      },
+      {
+        "limit": 29512,
+        "reasons": [],
+        "rejected": false,
+        "surface": "engineering_notes",
+        "value": 29512
+      },
+      {
+        "limit": 29000,
+        "reasons": [
+          "aggregate lines 29513/29000"
+        ],
+        "rejected": true,
+        "surface": "engineering_notes",
+        "value": 29513
+      },
+      {
+        "limit": 29512,
+        "reasons": [
+          "aggregate lines 29513/29512"
+        ],
+        "rejected": true,
+        "surface": "engineering_notes",
+        "value": 29513
+      },
+      {
+        "limit": 13077,
+        "reasons": [
+          "aggregate lines 13109/13077"
+        ],
+        "rejected": true,
+        "surface": "decisions",
+        "value": 13109
+      },
+      {
+        "limit": 13109,
+        "reasons": [],
+        "rejected": false,
+        "surface": "decisions",
+        "value": 13109
+      },
+      {
+        "limit": 13077,
+        "reasons": [
+          "aggregate lines 13109/13077"
+        ],
+        "rejected": true,
+        "surface": "decisions",
+        "value": 13109
+      },
+      {
+        "limit": 13109,
+        "reasons": [],
+        "rejected": false,
+        "surface": "decisions",
+        "value": 13109
+      },
+      {
+        "limit": 13077,
+        "reasons": [
+          "aggregate lines 13110/13077"
+        ],
+        "rejected": true,
+        "surface": "decisions",
+        "value": 13110
+      },
+      {
+        "limit": 13109,
+        "reasons": [
+          "aggregate lines 13110/13109"
+        ],
+        "rejected": true,
+        "surface": "decisions",
+        "value": 13110
+      }
+    ]
+  },
+  "producer_sha256": "dec4856bafcee8135a3c6077acfc727e3827d2a8f6657b0a6b182ce4c4f16570"
+}

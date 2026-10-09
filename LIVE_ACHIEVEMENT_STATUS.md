@@ -2,18 +2,20 @@
 
 ## Current Activity
 
-Full PNT: finite private consumer artifact-binding audit verified; finite canonical engineering-notes capacity next.
+Full PNT: finite engineering-notes aggregate admission verified; original-event joining next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — Foundation2306 historical input identities include both selected JSON artifacts; constructor/native/empty-span manifests omit them. Three supplemental observations now carry explicit historical gaps; original759 bounded bindings and163 MethodExpr inputs remain preserved. Current fourteen-suite/133-file immutable recurrence, three actual artifact REDs, semantic RED18 and complete57-input book/two source controls pass, with eleven evidence controls. Original missing per-read bytes are not reconstructed; standalone source proofs remain distinct.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — Exactly three registry scalars admit engineering_notes aggregate lines29000→29512 and the sole new indexed ADR0130 decision: files130→131 and aggregate lines13077→13109. Independent Git reconstruction preserves220 prior history/decision files and all prior current-root records; engineering notes use45 files/29004 lines/3238344 bytes, decisions use131 files/13109 lines/966986 bytes. Twelve actual production aggregate observations, sixteen actual accepted/indexed/exact-authority RED controls and three actual reviewer evidence REDs pass. Root, byte, per-file, manifest, membership and every other registry control stay exact. No new archive member is admitted. Exact canonical receipt governs landing.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` for finite canonical engineering-notes capacity admission; then .2.1.2.2 joins original events and copy/consume authority. Factory/composition, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` for original-event input joining and copy/consume authority, then input acceptance .3. Factory/composition, full private Phase0 .2.5, mapping .1.1.2 and independent canonical .0.3.2 remain open.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — three historical observations qualified; supplied14/133, book57/2; original bindings preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` — actual107/13; fourteen supplied consumers; three artifact REDs; P1 prior audit owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` — public empty spans65/4, original18 RED and twelve consumers.
@@ -28,8 +30,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` for fi
 - `REPO-HYGIENE.13` — due retained census; zero removals; original capacity claim preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0` — finite change-history capacity; exact reconstruction and actual authority controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0` — candidate rejected; guarded nested residual RED, consumer1/154 failure; production restored6fe.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0` — actual origin/copy/frame RED7/GREEN10; public42/consumer144;11 source inverses/eight evidence RED.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3` — five accepted-state paths; complete Git-tree RED/GREEN, source inverses and original input recovery.
 
 ## History
 

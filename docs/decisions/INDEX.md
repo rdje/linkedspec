@@ -168,3 +168,4 @@ changed* lives in git (layer D), not here.
 3. Link it from the task-tree(s) it relates to.
 4. To change a fact, add a new record (or mark the old one `superseded by 00NN`) — do
    not rewrite history.
+| [0130](0130-finite-engineering-notes-aggregate.md) | One bounded hot-shard aggregate allowance; exact decision overhead | 2026-10-09 | accepted engineering maintenance; canonical admission required | history, capacity, verification |

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — Finite engineering-notes aggregate capacity
+
+Admit engineering_notes aggregate29000→29512 under ADR0130, plus only the new decision and its exact aggregate-line overhead. Existing history and all other controls remain exact; retained independent/production controls and canonical receipt govern admission.
+
 ## 2026-10-09 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5 qualify private consumer artifact boundaries
 
 Audits four finite historical supplemental captures. Foundation includes both selected JSON artifacts among2306 matching recorded inputs; constructor215/native216/empty217 each omit two membership JSON reads. Their three primary checked claims now exclude broad consumer counts, with separate explicit historical falsification/durability gap entries. All original before claims,759 bounded bindings and actual channels remain;163 MethodExpr inputs freeze at42e00f84 by mode/revision only. A complete133-file/fourteen-suite immutable supplied recurrence passes, with three actual missing-artifact reader REDs and restored-trim semantic RED18. Complete book57 inputs/two actual source controls and eleven evidence controls pass. No product code changes; missing historical per-read bytes are not retrospectively filled. Event joining and full admission remain open.
