@@ -2,11 +2,11 @@
 
 ## Current Activity
 
-Full PNT: finite engineering-notes aggregate admission verified; original-event joining next.
+Full PNT: private capacity publisher replay repaired; original-event joining next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — Exactly three registry scalars admit engineering_notes aggregate lines29000→29512 and the sole new indexed ADR0130 decision: files130→131 and aggregate lines13077→13109. Independent Git reconstruction preserves220 prior history/decision files and all prior current-root records; engineering notes use45 files/29004 lines/3238344 bytes, decisions use131 files/13109 lines/966986 bytes. Twelve actual production aggregate observations, sixteen actual accepted/indexed/exact-authority RED controls and three actual reviewer evidence REDs pass. Root, byte, per-file, manifest, membership and every other registry control stay exact. No new archive member is admitted. Exact canonical receipt governs landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — Original publisher product RED grows result/evidence/recent2→3; corrected first publication emits exactly one pair/row; eight reason-sensitive refusals preserve the entire fixture file population, contents and modes. Ten actual commands recur exactly from254 Git-bound historical inputs. All249 original capacity bindings and proof fields remain intact at31fe4fd36 by mode/revision only.
 
 ## Next Action
 
@@ -14,7 +14,7 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` for or
 
 ## Recent Completions
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — publisher replay RED; first publication/8 no-write denials; historical254 and capacity249 preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — three historical observations qualified; supplied14/133, book57/2; original bindings preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` — actual107/13; fourteen supplied consumers; three artifact REDs; P1 prior audit owned.

@@ -1,6 +1,7 @@
 """Publish the measured finite allowance and the intended canonical handoff."""
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -8,6 +9,23 @@ LEAF = 'SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6'
 PREFIX = 'docs/checkpoints/' + LEAF + '-'
 BASE = 'bece12874183477b6e601dd122cb1c39119b613e'
 NEXT = LEAF[:-1] + '2'
+fact = 'docs/knowledge/finite-engineering-notes-aggregate.md'
+task_source = (ROOT / 'docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md').read_text()
+task_marker = '- ID: `' + LEAF + '`'
+refusal = 'one-shot publisher requires an unpublished uniquely active leaf; use retained reviewers'
+if task_source.count(task_marker) != 1:
+    raise SystemExit(refusal)
+task_start = task_source.index(task_marker)
+task_end = task_source.index('\n- ID:', task_start + 1)
+task_node = task_source[task_start:task_end]
+if (re.findall(r'^  Status: `([^`]+)`$', task_node, re.MULTILINE) != ['active']
+        or re.search(r'^  (?:Result|LinkedSpec-tool evidence):', task_node, re.MULTILINE)
+        or (ROOT / fact).exists()
+        or (ROOT / ('docs/claims/' + LEAF + '.json')).exists()
+        or any(line.startswith('- `' + LEAF + '`')
+               for line in (ROOT / 'LIVE_ACHIEVEMENT_STATUS.md').read_text().splitlines())):
+    raise SystemExit(refusal)
+
 plan = json.loads((ROOT / (PREFIX + 'plan.json')).read_bytes())
 proof = json.loads((ROOT / (PREFIX + 'verification.json')).read_bytes())
 evidence = json.loads((ROOT / (PREFIX + 'evidence.json')).read_bytes())
@@ -23,7 +41,6 @@ statement = ('Exactly three registry scalars admit engineering_notes aggregate l
              'sixteen actual accepted/indexed/exact-authority RED controls and three actual reviewer '
              'evidence REDs pass. Root, byte, per-file, manifest, membership and every other registry '
              'control stay exact. No new archive member is admitted.')
-fact = 'docs/knowledge/finite-engineering-notes-aggregate.md'
 (ROOT / fact).write_text('''---
 id: finite-engineering-notes-aggregate
 title: Engineering notes have one finite hot-shard aggregate allowance

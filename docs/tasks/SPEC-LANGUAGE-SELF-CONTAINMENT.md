@@ -3948,7 +3948,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Follow the committed .0 source-bound selection and preserve the original six-slice obligations; split further before writes if an actual owner set grows beyond a safe slice.
 
   Safety split: Native parser-input occurrence frames, actual MethodExpr capture/effects and compiler-event SourceOrigins joining are separate authorities. Implement .0-.2 and independently accept .3 before factory capture. The newly observed whitespace-only public AST span defect is P1 .4, next after .0, before .1. Native frames remain descriptive until the actual event/callback/invocation join; unsupported parser split paths decline conservatively.
-  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`.
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7`.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`
   Status: `done`
@@ -3993,7 +3993,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
   Status: `pending`
   Goal: Join actual parser/argument captures to selected compiler events and original copy/consume authority.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7`
   Owned paths: SourceEmissions.pm; necessary MethodExpr private seam only; focused tests/proof/docs.
   Planned tier: `focused`
   Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
@@ -4076,8 +4076,26 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Exact selection: engineering_notes aggregate lines29000→29512, one bounded hot-shard allowance. Other engineering-note controls and immutable history stay exact. Admit only the new ADR0130 file and its exact resulting aggregate decision lines; canonical staged proof remains mandatory.
   Result: Finite three-scalar data-only admission, accepted indexed ADR0130 and original history/current-record preservation independently verified. Initial header/retainer draft failures are retained with channel limitations. Existing book authority teaching already covers these unchanged rules. No parser/runtime/test/checker/dependency change.
   LinkedSpec-tool evidence: Actual unchanged routing threshold and accepted/indexed authority functions, exact Git history recovery and actual reviewer subprocess REDs; complete control channels/mutant plans retained under this leaf prefix.
-  Result: Finite three-scalar data-only admission, accepted indexed ADR0130 and original history/current-record preservation independently verified. Initial header/retainer draft failures are retained with channel limitations. Existing book authority teaching already covers these unchanged rules. No parser/runtime/test/checker/dependency change.
-  LinkedSpec-tool evidence: Actual unchanged routing threshold and accepted/indexed authority functions, exact Git history recovery and actual reviewer subprocess REDs; complete control channels/mutant plans retained under this leaf prefix.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7`
+  Status: `done`
+  Goal: Reject one-shot capacity publisher replay before writes and remove its duplicate current publication entries.
+  Priority: P2; immediate after .2.1.2.6, before event joining .2.1.2.2.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`
+  Reproduction: Running .2.1.2.6-publish.py twice appends another identical Result/LinkedSpec-tool evidence pair and another Recent Completions row. The capacity candidate contains two of each; the actual capacity proof remains unchanged.
+  Impact: Current continuity contains redundant records and a successful replay can rewrite the resume pointer. Own the finite writer defect without changing capacity authority, historical proof or public parser behavior.
+  Owned paths: The private .6 publisher, exact duplicate current task/live entries, historical .6 claim preservation, isolated actual publisher proof, Knowledge and continuity. No checker, policy, dependency or immutable history changes.
+  Verification tier: `focused`
+  Focused checks: Original Git-bound publisher product RED; corrected successful first publication and reason-sensitive replay/partial-state denials with exact whole-fixture no-write oracle; historical input identity and claim preservation; syntax, normal doctrines, history and diff.
+  Canonical trigger: None for this private checkpoint writer and current clerical correction. Mechanical capacity admission already has an exact committed canonical receipt; event and mapped admission remain separate.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json`
+  Acceptance: Only an unpublished uniquely active .6 node may publish. Completed, duplicate-status or partly published state must reject before any write; first publication still produces one result pair and one recent row. Preserve the actual original source and every original artifact input at the clean capacity commit. Remove only the duplicate current copies.
+  Activation: Clean 31fe4fd3655466018a509d894fc6bca3a331944d; capacity canonical CI1035/CLI66x2, all ten hooks and post-pointer PASS; promoted receipt, empty brief and clean Git confirmed. Canonical one-shot reviewer restrictions and actual publisher read before writes. Existing public book teaching remains accurate for this private writer repair.
+  Verification: Original publisher product RED grows result/evidence/recent2→3; corrected first publication emits exactly one pair/row; eight reason-sensitive refusals preserve the entire fixture file population, contents and modes. Ten actual commands recur exactly from254 Git-bound historical inputs. All249 original capacity bindings and proof fields remain intact at31fe4fd36 by mode/revision only. Syntax, exact claim preservation/replay, memory/Knowledge/history/diff and all ten normal doctrines required before landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7 - reject private capacity publisher replay` (Git records identity).
+  Result: Replay defect closed by a pre-write guard; exact duplicate current task pair and recent row removed. No capacity or historical claim is refreshed and no public product behavior changes. Existing book teaching remains accurate.
+  LinkedSpec-tool evidence: Actual retained capacity publisher subprocess RED/GREEN, full Git input recovery, exact historical claim comparison and complete fixture-file no-write oracles.
+  Publication correction: Focused change-history check rejected a misplaced new record selected by an unanchored inline heading match. Exact failed CHANGES snapshot and explicitly limited transcribed output retained; original preamble/records reconstruct byte-identically before anchored insertion. Corrected checks rerun before landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4492,6 +4510,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
 | 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `done` | Three historical gaps qualified; complete133-file/fourteen-suite/book57 recurrence. |
 | 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `done` | Three scalars;220 preserved files; production12/16 and evidence3; canonical receipt governs landing. |
+| 43.4.2.0.3.1.1.1.2.1.2.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` | `done` | Original replay RED; first publication and eight no-write refusals; historical254. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

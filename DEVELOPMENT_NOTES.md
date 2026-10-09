@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-09 — One-shot publishers require a pre-write state guard
+
+A retained writer is distinct from a reviewer. The capacity publisher formerly rewrote current continuity on replay; status/output guards now deny before any write. Actual original RED, one successful publication and eight exact no-write denials recur in isolated Git-bound fixtures. Preserve all original capacity inputs historically before changing the writer; use the retained --check reviewer for recurrence.
+
 ## 2026-10-09 — Finite engineering-notes aggregate admission
 
 ADR0130 admits one bounded hot-shard allowance of512 aggregate lines. Root, per-file, bytes, membership and immutable history remain exact; no archive reserve is granted. The indexed decision accounts for its own exact collection overhead. Retained independent reconstruction and actual threshold/authority controls precede exact staged canonical admission.

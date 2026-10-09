@@ -1,0 +1,16 @@
+{
+  "scope": "Unadmitted local publication layout mistake; transcribed from the tool result. Original separate stdout/stderr channels and the inline writer as a standalone file are unavailable. No behavioral proof or canonical admission was affected.",
+  "command": [
+    "perl",
+    "tools/roll_document_history.pl",
+    "--surface",
+    "change_history",
+    "--check"
+  ],
+  "exit": 255,
+  "combined_output": "change_history current preamble omits its history manifest\n",
+  "input_snapshot": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7-first-CHANGES.md",
+  "input_sha256": "55f5865ce7d4ccf5d9dae8c9f41b8bfc546691fa3b98bd4eb4a6ef506fca3811",
+  "cause": "The inline publisher selected the first unanchored ## occurrence inside the preamble code span instead of a record heading.",
+  "repair": "Remove exactly the new block, prove byte equality with clean capacity HEAD, then insert before the first anchored level-two heading. No old record or preamble bytes change."
+}

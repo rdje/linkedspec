@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-09 — Reject private capacity publisher replay
+
+Original publisher product RED grows result/evidence/recent2→3; corrected first publication emits exactly one pair/row; eight reason-sensitive refusals preserve the entire fixture file population, contents and modes. Ten actual commands recur exactly from254 Git-bound historical inputs. All249 original capacity bindings and proof fields remain intact at31fe4fd36 by mode/revision only. The writer refuses completed or partially published state before writes. Exact redundant current entries are removed; parser, policy and public book behavior stay unchanged.
+
 ## 2026-10-09 — Finite engineering-notes aggregate capacity
 
 Admit engineering_notes aggregate29000→29512 under ADR0130, plus only the new decision and its exact aggregate-line overhead. Existing history and all other controls remain exact; retained independent/production controls and canonical receipt govern admission.
