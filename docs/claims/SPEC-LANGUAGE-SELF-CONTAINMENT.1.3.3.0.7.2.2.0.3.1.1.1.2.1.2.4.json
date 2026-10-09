@@ -4,13 +4,13 @@
   "claims": [
     {
       "name": "ordered-public-empty-ast-source-intervals",
-      "statement": "The same supplied65-assertion public facade/native/nonempty fixture fails18 public whitespace assertions on original e0eb with47 controls passing, then final65 GREEN. A two-line trailing-trim clamp after leading trim restores ordered after-leading zero-width intervals without changing nonempty bodies or native frames. Four effective semantic source inverses, twelve guarded direct suites, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass. Only AST/Parser production changes; all241 original native-claim bindings remain historical at e0eb by mode/revision only.",
-      "scope": "Bounded public AST empty-span invariant bug fix within the existing expression/statement shapes. The authored empty/undefined/CRLF/Unicode-whitespace cases use bases0,7,23; nonempty Unicode/literal/call/array/body controls use bases0,23. Private frames and existing constructor semantics recur. No new compiler-event authority, output lowering, mapped residual repair, complete Phase0 or canonical admission is claimed. Consumers/Toolbox reuse guarded live sources, the standard toolchain and published dependency outputs; supplied original/final fixture copies retain the exact Perl/spec closure and actual channels.",
+      "statement": "The same supplied65-assertion public facade/native/nonempty fixture fails18 public whitespace assertions on original e0eb with47 controls passing, then final65 GREEN. A two-line trailing-trim clamp after leading trim restores ordered after-leading zero-width intervals without changing nonempty bodies or native frames. Four effective semantic source inverses, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass. Only AST/Parser production changes; all241 original native-claim bindings remain historical at e0eb by mode/revision only.",
+      "scope": "Bounded public AST empty-span invariant bug fix within the existing expression/statement shapes. The authored empty/undefined/CRLF/Unicode-whitespace cases use bases0,7,23; nonempty Unicode/literal/call/array/body controls use bases0,23. Private frames and existing constructor semantics recur. No new compiler-event authority, output lowering, mapped residual repair, complete Phase0 or canonical admission is claimed. Consumers/Toolbox reuse guarded live sources, the standard toolchain and published dependency outputs; supplied original/final fixture copies retain the exact Perl/spec closure and actual channels. Checked durability and semantic acceptance here are limited to the bounded standalone fixture/source-inverse and explicitly retained Toolbox/diagnostic measurements. Historical supplemental selected-consumer result counts from the original record are separated into historical-supplemental-consumer-observation below because two actual checkpoint JSON inputs were omitted. Original hashes/channels remain preserved; current epoch hashes do not retroactively identify original per-read bytes. Current replacement owner SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5; remaining original historical legs: SESSION-STARTUP-READING.5.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-proof.py original; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-proof.py final; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-proof.py consumers; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-toolbox.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-review.py",
         "granularity": "Every authored public/native interval, original/final TAP row, semantic source intervention and actual copied producer closure; complete selected consumer commands and three retained Toolbox lowering oracles; every preceding native-claim input.",
-        "result": "The same supplied65-assertion public facade/native/nonempty fixture fails18 public whitespace assertions on original e0eb with47 controls passing, then final65 GREEN. A two-line trailing-trim clamp after leading trim restores ordered after-leading zero-width intervals without changing nonempty bodies or native frames. Four effective semantic source inverses, twelve guarded direct suites, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass. Only AST/Parser production changes; all241 original native-claim bindings remain historical at e0eb by mode/revision only."
+        "result": "The same supplied65-assertion public facade/native/nonempty fixture fails18 public whitespace assertions on original e0eb with47 controls passing, then final65 GREEN. A two-line trailing-trim clamp after leading trim restores ordered after-leading zero-width intervals without changing nonempty bodies or native frames. Four effective semantic source inverses, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass. Only AST/Parser production changes; all241 original native-claim bindings remain historical at e0eb by mode/revision only."
       },
       "falsify": {
         "status": "checked",
@@ -1219,6 +1219,27 @@
           }
         ],
         "revision": "8f0cdaec69b80ce5a8f4edfd783199693498bae1"
+      }
+    },
+    {
+      "name": "historical-supplemental-consumer-observation",
+      "statement": "At historical epoch 8f0cdaec69b80ce5a8f4edfd783199693498bae1, the retained command reports PASS for 12 selected suites. Its recorded manifest contains 217 inputs but omits both actual membership checkpoint JSON reads. This is an actual passing observation with incomplete historical artifact binding, separate from the bounded standalone fixture proof.",
+      "scope": "The original command/channels and exact before claim are retained under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5-before-SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4.json. No complete source-bound supplemental consumer acceptance is claimed at that historical boundary. Current immutable133-file/fourteen-suite recurrence under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5 supersedes acceptance without relabeling the original run; the broader historical audit remains SESSION-STARTUP-READING.5.",
+      "rederive": {
+        "status": "checked",
+        "command": "At 8f0cdaec69b80ce5a8f4edfd783199693498bae1, the original captured command in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4-consumers.json",
+        "granularity": "Actual selected-suite command/exit/full channels and recorded manifest membership, not unrecorded per-read JSON bytes.",
+        "result": "Original command exit0 and Result: PASS retained; two required checkpoint JSON paths are absent from its original input manifest."
+      },
+      "falsify": {
+        "status": "gap",
+        "reason": "Original per-read JSON bytes were not separately guarded, so the hypothesis that a different unrecorded artifact influenced that original result cannot be retroactively falsified. Current actual missing-artifact/source controls and complete supplied recurrence supersede active acceptance.",
+        "repair_owner": "SESSION-STARTUP-READING.5"
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Two actual checkpoint JSON inputs are absent from the historical consumer manifest. Original recorded hashes and channels remain unchanged in the before claim/capture; adding current or epoch hashes cannot reconstruct those per-read bytes. The complete supplied recurrence repairs current acceptance.",
+        "repair_owner": "SESSION-STARTUP-READING.5"
       }
     }
   ]

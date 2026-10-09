@@ -1,0 +1,20 @@
+{
+  "capture_kind": "transcribed actual tool output; original separated raw channels and index digest were not retained",
+  "base": "42e00f840059db5bd4e602aee7a3b5d1e366b97b",
+  "command": "git --no-pager commit -F git_message_brief.txt",
+  "exit": 1,
+  "failures": [
+    "[readme-routing] FAIL: surface engineering_notes exceeds control: aggregate lines 29002/29000",
+    "claim-verification: FAIL: gap repair owner is not open: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5"
+  ],
+  "other_doctrines": "eight reported PASS",
+  "repair": "Remove exactly two redundant mutable engineering-notes header blank lines; retain remaining original historical legs under open SESSION-STARTUP-READING.5. Schedule finite capacity admission separately as SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6. No gate weakened or immutable history changed.",
+  "subsequent_gate": {
+    "exit": 1,
+    "failures": [
+      "verification declarations must change for exactly one owning leaf; found 2 [SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5, SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6]"
+    ],
+    "other_doctrines": "eight reported PASS including README-STABILITY",
+    "repair": "Future leaf exact declarations changed to existing Planned field convention. Existing canonical task-verification-single-owner Knowledge card applies; no checker changed."
+  }
+}

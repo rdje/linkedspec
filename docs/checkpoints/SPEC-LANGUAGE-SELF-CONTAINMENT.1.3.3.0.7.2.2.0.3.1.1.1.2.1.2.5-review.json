@@ -1,0 +1,82 @@
+{
+  "result": "PASS",
+  "audited_records": 4,
+  "omitted_artifact_records": 3,
+  "foundation_inputs": 2306,
+  "original_bindings_preserved": 759,
+  "methodexpr_bindings_frozen": 163,
+  "consumer_suites": 14,
+  "supplied_consumer_inputs": 133,
+  "semantic_red_assertions": 18,
+  "actual_missing_artifact_reds": 3,
+  "book_inputs": 57,
+  "book_controls": 2,
+  "evidence_controls": [
+    {
+      "name": "missing-original-owner",
+      "reason": "complete finite original population",
+      "result": "RED"
+    },
+    {
+      "name": "invent-foundation-gap",
+      "reason": "actual omitted artifact population",
+      "result": "RED"
+    },
+    {
+      "name": "hide-native-gap",
+      "reason": "actual omitted artifact population",
+      "result": "RED"
+    },
+    {
+      "name": "forge-original-input",
+      "reason": "complete original recorded identities",
+      "result": "RED"
+    },
+    {
+      "name": "failed-recurrence",
+      "reason": "actual complete recurrence PASS",
+      "result": "RED"
+    },
+    {
+      "name": "drop-supplied-json",
+      "reason": "complete supplied consumer population",
+      "result": "RED"
+    },
+    {
+      "name": "lost-semantic-red",
+      "reason": "actual semantic RED18",
+      "result": "RED"
+    },
+    {
+      "name": "missing-artifact-control",
+      "reason": "complete actual artifact controls",
+      "result": "RED"
+    },
+    {
+      "name": "omit-book-chapter",
+      "reason": "complete book input population",
+      "result": "RED"
+    },
+    {
+      "name": "failed-book",
+      "reason": "actual complete rendered marker",
+      "result": "RED"
+    },
+    {
+      "name": "forge-changed-marker",
+      "reason": "actual rendered marker product RED",
+      "result": "RED"
+    }
+  ],
+  "producer_sha256": "5a2d1b477be0dd7bca07dabf2dcb60822846bd896d9b24ce4d0fe8283f8b2d2b",
+  "records": {
+    "audit": "6faa6cc343cc0663ef2753ff0caaeb9423c36857dba9dd2ef410a2603083c010",
+    "qualification": "549d9a1687a4dd612bf8d986430f2364f24056086c5c4d3f95439c6d1acd2b6f",
+    "consumers": "08d950bf496404706c72bb35c37b3a8a54bc8f55d5d8bb720daafce4376633fa",
+    "source-inverse": "450abc838ea40665c8d2e3d6b7a9c4841765c8d50f18bcb65efccf7a72583df9",
+    "artifact-controls": "c5368c3392626f46a0dd38dbe50cb4088574b1d1fc1440874bccd20ebc3690a5",
+    "book": "6fa8eaa95b8ac0381b9ba39304d753a74365697fdca5583a2b547a739b8c89fa",
+    "freeze": "1c7e2113c6ea31abd21c5c0f83a69ad91db812e94d8d612cc034e1a7611ba6de"
+  },
+  "scope": "Finite historical qualification and complete current selected recurrence/book. Earlier unrecorded per-read JSON bytes remain explicitly unavailable; no retroactive complete acceptance, full Phase0 or mapped/canonical admission."
+}

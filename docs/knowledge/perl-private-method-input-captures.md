@@ -55,6 +55,8 @@ Perl/prove modules and project-volume TMPDIR are reused; complete Phase0, toolch
 reproduction and mapped/canonical admission are not established.
 
 The same known artifact-binding gap in earlier finite supplemental captures is
-P1 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`, immediate next before event joining. No current
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`, now verified with three explicit historical
+gap entries and complete current recurrence; see
+`docs/knowledge/private-consumer-artifact-binding-audit.md`. No current
 hashes retroactively bind original per-read artifact bytes. Original standalone
 fixture/inverse proof remains separate; the broad historical audit stays startup `.5`.

@@ -1,0 +1,31 @@
+{
+  "rows": [
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1.json",
+      "disposition": "unchanged; both artifacts already recorded, all2306 epoch hashes match"
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1.json",
+      "disposition": "bounded statement scoped; historical observation explicitly gapped",
+      "old_statement": "Ten guarded live consumer suites, three actual public Toolbox lowering routes and eight reason-sensitive evidence RED controls pass; only Parser changes production.",
+      "new_statement": "Three actual public Toolbox lowering routes and eight reason-sensitive evidence RED controls pass; only Parser changes production.",
+      "after_sha256": "82b0be3f2a28bc720d7824b3e3a4c4852ace2744764018d4a974065ad5e517ac"
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0.json",
+      "disposition": "bounded statement scoped; historical observation explicitly gapped",
+      "old_statement": "Eleven guarded live suites (including constructor77), three actual Toolbox routes and eight reason-sensitive evidence RED controls pass.",
+      "new_statement": "Three actual Toolbox routes and eight reason-sensitive evidence RED controls pass.",
+      "after_sha256": "e37a9963da054c9f5bdf5f51b4af004ec50bb1c3586ab779f91219bd4bcbdf13"
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4.json",
+      "disposition": "bounded statement scoped; historical observation explicitly gapped",
+      "old_statement": "Four effective semantic source inverses, twelve guarded direct suites, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass.",
+      "new_statement": "Four effective semantic source inverses, three unchanged actual Toolbox lowering routes and eight reason-sensitive evidence controls pass.",
+      "after_sha256": "f2ed9bc68251be73169586f414773b2e063037d56c7da03df0fa8e2785bdbed0"
+    }
+  ],
+  "producer_sha256": "e64f4d5998a17030efb5a7b86f9a9a5fd3b0d8859c42ccc8ab258dfc63d64214",
+  "scope": "Three supplemental observations qualified; all original bounded input hashes and claims retained. Foundation is unchanged."
+}

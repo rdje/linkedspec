@@ -3948,7 +3948,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Follow the committed .0 source-bound selection and preserve the original six-slice obligations; split further before writes if an actual owner set grows beyond a safe slice.
 
   Safety split: Native parser-input occurrence frames, actual MethodExpr capture/effects and compiler-event SourceOrigins joining are separate authorities. Implement .0-.2 and independently accept .3 before factory capture. The newly observed whitespace-only public AST span defect is P1 .4, next after .0, before .1. Native frames remain descriptive until the actual event/callback/invocation join; unsupported parser split paths decline conservatively.
-  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`.
+  Children: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`, `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0`
   Status: `done`
@@ -3993,7 +3993,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2`
   Status: `pending`
   Goal: Join actual parser/argument captures to selected compiler events and original copy/consume authority.
-  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`
   Owned paths: SourceEmissions.pm; necessary MethodExpr private seam only; focused tests/proof/docs.
   Planned tier: `focused`
   Planned focused proof: Actual source/identity/effect boundaries and independent per-character occurrence oracle; direct dependents; exact producer/input bindings and normal focused workflow.
@@ -4035,18 +4035,43 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4 - order empty AST source intervals` (Git records identity).
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Audit and qualify earlier supplemental private consumer captures, then retain a complete supplied recurrence before original-event joining.
   Priority: P1; immediate next after .2.1.2.1, before .2.1.2.2.
   Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1`
   Reproduction: Earlier .2.1.2.4-consumers.json hashes Perl/spec/t but t/actionir_compiler_source_membership.t and t/actionir_executable_source_membership.t read checkpoint .2.0-cases.json and .2.2.2.1-cases.json outside that set. .2.1.2.1 additionally selects the legacy argument suite with its .1.3.2.0-cases.json. Same known selected-consumer-proof-input-closure-gap class; original per-read bytes were not separately guarded. Actual passing channels are not retroactively upgraded by current hashes.
-  Impact: Supplemental consumer durability leg is incomplete; standalone source-bound fixture/inverse proofs remain separate. Inspect the finite foundation/constructor/native/empty-span records, preserve original claims, disclose missing broader legs with this repair owner and rederive the smallest complete selected capsule. Do not expand into the full historical audit owned by SESSION-STARTUP-READING.5.
+  Impact: Supplemental consumer durability leg is incomplete; standalone source-bound fixture/inverse proofs remain separate. Inspect the finite foundation/constructor/native/empty-span records, preserve original claims, disclose remaining original historical legs with open SESSION-STARTUP-READING.5 and rederive the smallest complete selected capsule. Do not expand into the full historical audit owned by SESSION-STARTUP-READING.5.
   Owned paths: Prior finite claim/producer disclosures and preserved before records; supplied selected consumer capsule/proof/claim; relevant Knowledge/book/continuity only. No product change unless a separately owned actual defect is found.
-  Planned tier: `focused`
-  Planned focused proof: Independently authored reader edges, exact supplied artifact population/content, actual full channels, distinguishing missing/changed artifact controls and original claim preservation; focused doctrines/book/history.
-  Planned canonical boundary: None for bounded evidence correction; complete Phase0 and independent mapped/canonical admission remain open.
-  Planned claim record: none: Pending actual audit; declare measured record before publishing results.
+  Verification tier: `focused`
+  Focused checks: Independently authored reader edges, exact supplied artifact population/content, actual full channels, distinguishing missing/changed artifact controls and original claim preservation; focused doctrines/book/history.
+  Canonical trigger: None for bounded evidence correction; complete Phase0 and independent mapped/canonical admission remain open.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json`
   Acceptance: Prior broad observations are accurately qualified; actual supplied recurrence includes every selected artifact input and distinguishes omissions. Original evidence is recoverable, and future agents find this corrected input contract without archaeology.
+
+  Activation: Clean42e00f840059db5bd4e602aee7a3b5d1e366b97b; MethodExpr107/13, fourteen supplied suites/133 files, three missing-artifact REDs/three Toolbox routes/ten evidence controls, all ten hooks/post-pointer PASS; brief0 and clean Git. Canonical selected-consumer gap/capsule Knowledge, finite four claim scopes and actual producer populations reviewed.
+  Audit boundary: Exactly .2.0.1 foundation, .2.1.1 constructor, .2.1.2.0 native frames and .2.1.2.4 empty-span supplemental consumer records. Foundation producer includes docs/checkpoints in its hash superset, unlike later producers; assess actual manifests individually. Preserve every original claim and recorded hash. Checked standalone fixture/inverse claims remain separate from any newly explicit historical supplemental gaps. Current complete supplied recurrence and complete book input/render boundary will supersede observations where exact original per-read recovery is unavailable.
+  Result: Four actual historical records assessed independently. Foundation has2306 matching recorded inputs and both selected JSON artifacts; its claim stays unchanged. Constructor215/native216/empty217 recorded hashes also match their epochs, but each omits both membership JSON reads. Their three checked primary claims now exclude broad consumer counts; separate historical observation entries disclose falsification/durability gaps with open historical owner SESSION-STARTUP-READING.5; this leaf completes the current replacement. Original before records,759 bounded bindings and behavioral proof fields remain intact;163 current MethodExpr bindings freeze by mode/revision only.
+  Verification: Current immutable133-file/fourteen-suite supplied recurrence PASS with exact input contents/population; three actual missing-JSON reader REDs and restored-trim semantic RED18 retained. Separate complete57-input book render PASS, missing-SUMMARY command RED and changed-chapter rendered-marker product RED (command exit0) retained. Eleven reason-sensitive evidence RED controls PASS. Exact Git epoch/input/capture/before/qualification and producer identities independently rederived; no product bytes change. Memory/Knowledge/claim/history/diff and all ten normal doctrines required before landing.
+  Commit-check correction: First gate rejected engineering_notes29002/29000 and a completed historical gap owner. Two redundant mutable header blank lines are removed; gaps retain open SESSION-STARTUP-READING.5. Finite capacity admission is owned next by .2.1.2.6; no immutable history or limit changed here.
+  Resolution: Finite evidence defect closed by explicit historical qualification and complete current replacement proof; missing original per-read bytes are not reconstructed. No full Phase0/mapped/canonical admission or broader historical-audit closeout. Finite engineering-notes capacity maintenance .2.1.2.6 is next, before original-event joining .2.1.2.2.
+  LinkedSpec-tool evidence: Actual unchanged selected public/compiler/AST/MethodExpr/source-origin consumer routes, three actual artifact-reader failures and actual public AST trim-source inverse; full supplied command channels retained under the leaf checkpoint prefix.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5 - qualify private consumer artifact boundaries` (Git records identity).
+
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6`
+  Status: `pending`
+  Goal: Admit a finite, measured engineering-notes aggregate capacity extension before further implementation.
+  Priority: P1; immediate after .2.1.2.5, before original-event joining .2.1.2.2.
+  Dependencies: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5`
+  Reproduction: .2.1.2.5 pre-commit README-STABILITY rejects engineering_notes aggregate29002/29000 lines; removing two redundant mutable header separators restores the exact boundary without losing text. Further required records need a separately owned finite decision.
+  Owned paths: Canonical routing/decision capacities, new indexed ADR, exact pressure evidence/claim, Knowledge and continuity; immutable history remains byte-identical.
+  Planned tier: `canonical`
+  Planned focused proof: Exact resulting-tree pressure census, unchanged immutable history identities, distinguishing capacity denial, README/Knowledge/history/doctrines and full exact staged canonical CI.
+  Planned canonical boundary: Mechanical routing/size-policy infrastructure and finite capacity admission.
+  Planned claim record: none: Pending capacity measurement and retained proof must be declared before acceptance.
+  Acceptance: A precise finite increase has an indexed decision under current full-PNT engineering authority, actual bounded admission evidence, preserved history, and exact staged canonical receipt. No unlimited reserve or reused director grant.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3`
   Status: `pending`
@@ -4459,7 +4484,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.3.1.1.1.2.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` | `pending` | Original-event join and copy/consume. |
 | 43.4.2.0.3.1.1.1.2.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` | `pending` | Independent joined-input acceptance. |
 | 43.4.2.0.3.1.1.1.2.1.2.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` | `done` | Public empty spans65/4; original18 RED, twelve consumers verified. |
-| 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `pending` | P1 supplemental consumer artifact binding audit, next after .1. |
+| 43.4.2.0.3.1.1.1.2.1.2.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` | `done` | Three historical gaps qualified; complete133-file/fourteen-suite/book57 recurrence. |
+| 43.4.2.0.3.1.1.1.2.1.2.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` | `pending` | Finite canonical engineering-notes capacity admission before event joining. |
 | 43.4.2.0.3.1.1.1.2.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` | `pending` | Known factory/dependency capture identity. |
 | 43.4.2.0.3.1.1.1.2.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4` | `pending` | Independent private input composition acceptance. |
 | 43.4.2.0.3.1.1.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.2` | `pending` | Typed value emission at actual construction seams. |

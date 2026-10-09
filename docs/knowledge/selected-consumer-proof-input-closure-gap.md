@@ -7,7 +7,7 @@ answers:
   - "can continuity publishing change Phase0 input bytes after its run"
   - "who owns the selected consumer and book proof input closure repair"
 date: 2026-10-09
-status: earlier selected gap superseded by .1.1.3.1; finite recent audit .2.1.2.5 open
+status: earlier gap superseded by .1.1.3.1; finite recent audit .2.1.2.5 verified
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
 evidence: "The final .1.1.0 review preserves the original claim/publisher as claim-initial.json/.py, separates the complete private/compiler measurement from consumer/render observations, and discloses broader falsification/durability gaps with an immediate P1 repair. The actual passing TAP and render streams are unchanged."
 reverify: "Read the source-backed selected input graph and actual remeasurement under .1.1.3 when it lands; initial producer/claim and observed streams remain under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-. Do not refresh their input hashes as if they captured a newer run."
@@ -59,3 +59,9 @@ supplemental observations and rederives a complete selected recurrence immediate
 after that leaf, before original-event joining. Original source-bound standalone
 fixture/inverse proof remains separate; no current hashes retroactively bind past
 per-read artifacts. The wider historical audit stays with startup `.5`.
+
+The finite October9 audit is now verified; its exact scope, three qualified
+historical records, unchanged foundation and complete current recurrence/book
+live in `docs/knowledge/private-consumer-artifact-binding-audit.md`. It closes
+that finite correction; missing historical per-read bytes remain explicit and
+the broader startup audit stays open.

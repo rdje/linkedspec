@@ -273,6 +273,16 @@ complete output channels and reject missing inputs or incomplete TAP plans.
 Passing older transcripts retain their original boundary until remeasurement
 supersedes them. Preparation alone is not consumer acceptance.
 
+Checkpoint JSON belongs to the measured input tree. A guard over Perl, specs and
+tests can omit a case file opened under a checkpoint directory. Retain every
+actual reader edge and exercise the selected tests in a supplied tree containing
+those artifacts; removing a required case file must fail its unchanged reader.
+Inspect earlier manifests individually: a wider producer may already include the
+same artifact. Preserve an incomplete historical transcript as an observation,
+qualify its missing evidence, and use a complete new recurrence for acceptance.
+Current hashes cannot identify an earlier unrecorded read. Book rendering likewise
+needs its complete configuration and source tree, including every chapter.
+
 The selected thirteen-suite remeasurement preserves two actual input boundaries.
 Twelve suites complete 1,298 groups using the original fixed capsule. The last
 suite initially fails before its first assertion because its checkpoint case
