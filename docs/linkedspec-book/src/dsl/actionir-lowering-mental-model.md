@@ -1253,6 +1253,37 @@ undefined/empty rejection and zero/reference handoff without admitting complete
 secondary helpers or new AST grammar. Other guarded AST owners and pipeline
 composition remain separate verification steps; this adds no assignment syntax.
 
+AST call-statement required callbacks now have private capture boundaries.
+The existing statement owner retains six callback roles. Normalization and trim
+are validated eagerly after the AST call/method/argument guards. The additional
+requirements retain their branch order:
+
+| Statement path | Additional required callbacks and timing |
+| --- | --- |
+| `return(...)` | Trim is already validated; tagged returns trim the label and may trim payload fallbacks. |
+| `return_undef()` | Normalization receives the actual argument array and the existing zero-argument count contract. |
+| `set(...)` | Normalization keeps its two-argument count contract; assignment lowering retains its existing separate responsibility. |
+| `set_key(...)` | Hash-symbol extraction and key lowering are required only after successful three-argument normalization. |
+| `push(...)` | Array-symbol extraction is required before the arity guard; primitive lowering is required after arity and scoped-target guards. |
+
+For example, an invalid `push` arity still diagnoses a missing array extractor,
+while it never requires the primitive lowerer. Rejected `set_key` normalization
+never requires the hash/key callbacks. Capturing dependencies preserves these
+existing outcomes and exact missing/non-CODE diagnostics.
+
+Normalizer calls keep the actual source-helper argument array. Trim calls keep
+its scalar-slot aliases; a scoped push first trims that original array and then
+uses the existing copied effective-argument array. Hash/key/array/primitive calls
+receive the owner's local scalar copies. Tagged-return payload helpers retain
+the original array-slice aliases. These distinctions preserve native mutation,
+call order, scalar context, public callback references and error identities.
+Each required child gets its own capture: publishing text equal to the final
+statement cannot donate a packet to the enclosing statement lowerer. Selecting
+a known child preserves that actual callback's identity. Explicit secondary
+helper controls verify the bounded caller paths; complete helpers, AST grammar,
+optional assignment callbacks and pipeline composition retain separate owners.
+This introduces no statement syntax or new helper semantics.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

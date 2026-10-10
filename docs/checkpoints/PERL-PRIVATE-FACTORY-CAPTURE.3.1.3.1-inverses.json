@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "producer_sha256": "e86d171fe6c51ce421dadac196e0840fa08169c5d2e4b087978ba11396c44719",
+  "source_sha256": "4132100364255f43cf8547148a101026a1b4a06dc5458679fbcd18cb15c15f22",
+  "assertions": 695,
+  "rows": [
+    {
+      "case": "required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1-inverse-required.json",
+      "sha256": "9708d15a2f5f639484b089c583dfa015aee64978bb47537083dd642363797c70",
+      "source_sha256": "ce4caecac34efaddc6d23a350096b0d0dadc439a946e594518b49636c77a668e",
+      "reason": "_lower_ast_call_statement/normalize_method_args_with_optional_scope/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1-inverse-identity.json",
+      "sha256": "07fe539a6f3266f5e2990f550498424d54c9bf62c77796ce60f8aac38e742190",
+      "source_sha256": "8a81e682c2a342581327cacd71d5af72f427cdaf4d47536e93b85c7db108171f",
+      "reason": "_lower_ast_call_statement/lower_primitive_literal_expr/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1-inverse-diagnostic.json",
+      "sha256": "8ce113bfa16db11cd7764ce81ff9f611b4c821b38900c6803f61bea68bf33976",
+      "source_sha256": "81d8eb07f3dcb684e051340588a6d362b4eb864b7418192706edc481136ed28c",
+      "reason": "_lower_ast_call_statement/lower_primitive_literal_expr required dependency diagnostic remains exact",
+      "observed": "RED"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ date: 2026-10-10
 status: bounded guarded hash-key proof verified; other guarded AST and pipeline owners open
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0 retains paired171 complete assertion names:3 original isolation REDs,168 original passing controls/all171 current GREEN. Three native-current callback and15 bounded branch ledgers, cold4, three effective source faults, supplied39/158, five actual reviewer REDs/restoration and complete book57+32/three controls pass. All275 original block-value live bindings remain historical at b50ce085a. Draft/final baseline rows differ only in producer hash after stale header-only correction."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0-final-review.py; separately run preservation-control.py and publish-claim.py under the same wrapper. Defaults are readonly. Capture/freezer and --capture publication are one-shot writers. Earlier reviewers require accepted Git inputs; block-value requires b50ce085a. MEMORY.md owns the current frontier."
+reverify: "Hash-key commands require accepted2e9e5443e Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0-final-review.py; separately run preservation-control.py and publish-claim.py under the same wrapper. Defaults are readonly. Capture/freezer and --capture publication are one-shot writers. Earlier reviewers require accepted Git inputs; block-value requires b50ce085a. MEMORY.md owns the current frontier."
 ---
 
 Only the required resolver return in

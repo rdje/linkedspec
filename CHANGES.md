@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate AST call-statement required callbacks
+
+Bind one required resolver for six roles; preserve eager/lazy validation, source-array aliases/scoped copies, local scalars, callback/error identities and native branches under explicit helper controls. Paired695 retains18 original isolation REDs/677 controls/all695 GREEN; native18/branches44/cold12/inverse3, supplied41/160/evidence5 and full book89/3 pass. Original280 hash-key inputs stay historical at2e9e5443e. Readonly claim gates279 live inputs. Public Phase0 passes1035/1035 in1186 seconds; canonical detail: docs/knowledge/perl-method-ast-call-capture.md. Other guarded/optional/private admissions remain open; array-end mutation .3.1.3.2 follows a clean commit.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0: Isolate guarded AST hash-key lowering
 
 Bind only the scalar-held hash-index key required resolver. Preserve actual node/target rejection before validation, eager required CODE validation for valid nodes, source fallback, copied key-source scalar, native effects/errors/fatal identity/public callback and zero/reference handoff under explicit secondary controls.

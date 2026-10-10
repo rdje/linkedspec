@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Preserve path-specific AST call dependency validation
+
+Six required roles share one resolver. Normalizer/trim are eager, hash/key follow successful set_key normalization, array extraction precedes push arity and primitive lowering follows arity/scoped-target guards. Trim keeps source slots/scoped copies; other scalar callbacks use local copies. Mutating undefined primitive/array probes deliberately differ from nonmutating ambiguity/bare-target controls. Paired695 has18 original isolation REDs/677 controls/all695 GREEN; native18/branches44/cold12/inverse3 and supplied41/160 pass. All280 original hash-key bindings stay historical at2e9e5443e. Canonical detail: docs/knowledge/perl-method-ast-call-capture.md; optional assignment callbacks and independent admissions remain separate.
+
 ## 2026-10-10 — Preserve guarded AST key validation order
 
 The hash-index key owner rejects node kind/target before dependency lookup, then validates CODE before source extraction. With supplied scalar sources, callback mutation stays in its local copy; explicit source/payload/assembly controls bound native fallback and zero/reference handoff. Paired171 has3 original isolation REDs/168 controls/all171 GREEN; native3/branches15/cold4/inverse3 and supplied39/158 pass. Original275 inputs stay historical at b50ce085a. Retain draft capture producer/two results before stale header-only correction; independent review proves exact baseline equality apart from producer hash. Canonical detail: docs/knowledge/perl-method-ast-hash-key-capture.md. Current roadmap/index summaries route prior factory-leaf detail to the owning task tree.
