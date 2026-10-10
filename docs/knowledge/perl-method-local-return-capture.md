@@ -12,7 +12,7 @@ date: 2026-10-10
 status: bounded local-return proof verified; block-value and remaining owners open
 tags: [perl, actionir, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0 retains paired115 complete assertion names:6 original publication-isolation REDs,109 original passing controls and115 current GREEN. Two invoked roles/six native-current ledgers, cold4, three effective source faults, supplied35/154, five actual reviewer REDs/restoration, original-binding RED/restoration and complete book57+32/three controls pass. All399 original capacity/audit live bindings remain historical at268891fdf."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py; separately run preservation-control.py and publish-claim.py under the same wrapper. Their defaults are readonly. Capture/freezer and --capture publication are one-shot writers. Earlier factory/runtime/book reviewers require their recorded accepted Git input boundaries."
+reverify: "Local-return commands require accepted de3b50dd Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py; separately preservation-control.py and publish-claim.py under the same wrapper. Current block-value proof/original273 preservation: .3.1.2.2.1-final-review.py under that wrapper. Defaults are readonly; capture/freezer and --capture publication are one-shot writers. MEMORY.md owns the frontier."
 ---
 
 Only the required resolver return in _lower_block_local_return_payload_expr

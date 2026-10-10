@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Distinguish block-value callback isolation from ambiguity rejection
+
+Block-value directly invokes trim/split/parse while validating normalization only. Raw-statement trim retains the split-array slot alias; AST dispatch retains the original map then copies it for the bridge guard. Emit exactly one trim publication: emitting on all three native calls triggers existing ambiguity rejection and masks donation. Paired222 has9 original isolation REDs/213 controls/all222 GREEN; native9/branches16/cold5/inverse3 and supplied37/156 pass. Explicit secondary-helper controls retain actual copied bridge/early results/fallback; independent execution checks three generated return/effect paths. Canonical detail: docs/knowledge/perl-method-block-value-capture.md. Original273 local-return inputs stay historical at de3b50dd; older card reverify instructions now name that accepted boundary and delegate current lookup to MEMORY.md. Broader admissions remain independent.
+
 ## 2026-10-10 — Keep local-return callback authority separate from payload guards
 
 Parser and normalizer return their actual hash/array references through the private required binding; normalization keeps the shared parser argument array and both count arguments. The caller's controlled payload result still rejects undefined/empty output, retains zero and prefixes hash-shaped expressions. Paired115 has6 original isolation REDs/109 controls/all115 current GREEN; native6/cold4/inverse3, supplied35/154, evidence5 and complete book57+32/3 pass. Preserve original399 capacity/audit inputs at268891fdf before source/book/history writes. Dated earlier reviewers require their accepted input boundaries. Canonical detail: docs/knowledge/perl-method-local-return-capture.md; current claim has273 live inputs and compact original-record preservation. Block-value AST/fallback is the next independent leaf.

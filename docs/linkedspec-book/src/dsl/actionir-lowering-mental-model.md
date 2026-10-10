@@ -1199,6 +1199,37 @@ receives its existing unary `+` prefix. Required missing/non-CODE diagnostics re
 exact. The payload helper, block-value AST routing/fallback and later pipeline
 composition keep their separate responsibilities.
 
+Block-value required callbacks now have separate private capture boundaries.
+The resolver validates trim, statement splitting, method parsing and argument
+normalization. This caller directly invokes the first three; normalization is
+validated here and belongs to other helper calls. Public dependency maps retain
+the actual callbacks. Scalar context, native invocation counts, scalar copies,
+error effects and fatal object identities stay intact. Trimming a raw statement
+still receives the actual slot in the array returned by statement splitting,
+so its existing mutation effects reach that array.
+
+AST-first dispatch retains its original dependency map for parsing, then copies
+the map and adds the bridge guard for AST lowering. A defined, nonempty result
+returns immediately, including `0` and an actual reference result. Undefined or
+empty AST output falls back to the existing brace-block path. The required
+callback captures preserve this order and the guard without changing AST or
+secondary-helper semantics.
+
+For example, a statement splitter may publish `do { VALUE }` while returning
+its actual statement array. When the block owner also returns the ordinary
+expression `do { VALUE }`, its enclosing capture cannot inherit the splitter's
+packet. A selected known child keeps its actual identity in its own capture.
+This boundary also applies to repeated trim calls; it preserves their native
+effects. Required missing/non-CODE diagnostics remain exact, including the
+locally uninvoked normalizer.
+
+Existing block-local returns keep their control flow. With explicit helper
+results, a nonfinal return sets the generated done flag and skips later side
+effects; an ordinary final return follows earlier side effects. These capture
+boundaries add no block syntax or return semantics. Complete AST/helper behavior,
+other required owners and later pipeline composition retain their separate
+verification responsibilities.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

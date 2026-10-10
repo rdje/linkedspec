@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "producer_sha256": "e2a6cb87c15f94732f5d68ab2da2af626bab49d97f0682e5ed81406c5a0e9709",
+  "source_sha256": "354c9fe14f1f1038fb824a834fb1a8c9095250af935850007729ac6eb8621cee",
+  "assertions": 222,
+  "rows": [
+    {
+      "case": "required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-inverse-required.json",
+      "sha256": "32d8ead36d224988ce1421fce887a7325c0c2402de60dd973a473dc26363d539",
+      "source_sha256": "bf175475a9523227f28149b4b321cb336d899d6322e1738d860cc42fd0b37101",
+      "reason": "_lower_block_value_expr/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-inverse-identity.json",
+      "sha256": "9748d4ba668f9c3bcf1ad62ee32d108329634dc9ae758fad44efe870923991ad",
+      "source_sha256": "520238ae7f0c49c14b8258fba580d1eb7e4e49dc33f5870f53926f044c5a6711",
+      "reason": "_lower_block_value_expr/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-inverse-diagnostic.json",
+      "sha256": "2621cadfae4ab77ccbd9d2924a88723847cd7761c70f896d0412ad2950fa007c",
+      "source_sha256": "1bbebb8c0146bfd1cdce0a755aa6bf696db2f886cc085615c1a891282cf9e585",
+      "reason": "_lower_block_value_expr/normalize_method_args_with_optional_scope required dependency diagnostic remains exact",
+      "observed": "RED"
+    }
+  ]
+}

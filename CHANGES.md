@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1: Isolate block-value required callbacks
+
+Bind only the block-value required resolver return. Trim/split/parse retain actual public callback references, scalar context, native counts/copies/effects/errors/fatal identity and the split-array slot alias. The normalizer remains eagerly validated without local invocation. AST-first/copied bridge dispatch, zero/reference early returns and guarded fallback remain intact under explicit secondary-helper controls.
+
+Validation: paired222 complete assertion names retain9 original isolation REDs/213 passing controls/all222 current GREEN; native9/branches16, cold5 and three effective syntax-valid source faults pass. Exactly one trim publication prevents ambiguity masking. Three controlled generated blocks have independent Perl execution return-value/side-effect oracles. Supplied37/156, five reviewer REDs/restoration, original-binding RED/restoration and complete book57+32/three controls pass. Preserve all273 original local-return live bindings historically at de3b50dd without refreshing any old proof/hash field. Current readonly claim gates275 live inputs in66597 bytes, plus compact original-record/final-publisher historical inputs. Public Phase0 compatibility passes1035/1035 in1204 seconds; ordinary doctrine/history/Knowledge/memory/diff checks govern landing. No complete helper/language, private pipeline/full-private/mapped/canonical or parent admission follows. Next: guarded AST .3.1.3 after clean commit.
+
 ## 2026-10-10 — Isolate local-return required dependencies
 
 One local-return resolver isolates its actual parser/normalizer callbacks. Complete paired115 TAP retains6 original publication-isolation REDs,109 passing controls and115 current GREEN; two roles/six native-current ledgers, cold4 and three semantic source faults pass. Shared arrays/count arguments, scalar copies, native effects/errors/public callbacks and undefined/empty/zero/brace payload guards remain intact under an explicit controlled payload helper. Supplied35/154, evidence5, original-binding RED/restoration and complete book57+32/three controls pass. All399 original capacity/audit live bindings stay historical at268891fdf; no old measurement/hash is refreshed. The readonly publication gates273 current inputs in65482 bytes. Block-value .3.1.2.2.1 follows separately; private pipeline/full-private/mapped/canonical admissions remain open.

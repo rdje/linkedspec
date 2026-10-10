@@ -1,0 +1,13 @@
+{
+  "revision": "de3b50dd06d4aff6babf379282f90368810d49e5",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-before-local-return.json",
+  "original_sha256": "a329214f2ade7e01618ed72baaa999c9629651884f6342d7695dbcd4035651cb",
+  "after_sha256": "56c48ebf7bc995be72aa254254bf48ece9929a6773382ae7e3337267eae981c5",
+  "verified_bindings": 273,
+  "live_claims": [
+    "method-required-local-return-isolation"
+  ],
+  "producer_sha256": "52d05612818912f72183f8f13de57839346c5970382b91dc135667d828941eff",
+  "scope": "Only the one original live durability mode/revision fields change. All273 original Git-bound inputs, every proof/hash field and the already historical claim remain exact. No prior local-return runtime or book observation is refreshed."
+}
