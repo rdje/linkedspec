@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1 — Push required capture
+
+Bind only one push required resolver return. Preserve four eager roles and actual raw versus copied
+effective arrays, repeated trim/extractor effects, local scalar slots, final extractor/binding
+identity, maps and native contexts/error/fatal/reference/results. Complete850 main/15 cold pass;24
+native-current callbacks/two arities,56 controlled branches/six public Toolbox rows match.
+Identical850 TAP retains24 original publication REDs/826 controls. Three syntax-valid faults,
+supplied58 suites/178 files, evidence5/original296 restoration/book89/3 and
+readonly303-input71948-byte publication pass. Every original set-key hash/proof field stays
+historical at d74c53485.
+
+Preserve and reconstruct the initial probe correction:56 actual guard cases versus the initial55
+expectation, accurate child/index labels, two added quoted-value append probes and the
+arity-qualified diagnostic-fault name. All original producer/fixture/native channels remain tracked.
+Book teaching explains raw/effective array aliases and documented child/index precedence. Both stale
+roadmap assignment-next cells are fixed. Both required syntax checks and supplemental public Phase0
+PASS1035/1035 with complete channels retained. Normal hooks govern clean landing. No new language,
+complete helper or independent broader admission; TYPE-REFERENCE-BOOK and existing regex repairs
+remain separately owned.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0 — Set-key required capture
 
 Bind only the required set-key resolver return. Preserve eager roles before AST fast path, actual

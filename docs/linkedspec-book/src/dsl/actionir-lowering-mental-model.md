@@ -1497,6 +1497,45 @@ Secondary AST, mutation-value, uniform-target and index-assembly helpers are
 explicit controls in this proof. Their complete behavior, optional/direct
 callbacks and broader language admission remain separate.
 
+Push required callbacks now have separate private capture boundaries.
+The statement owner acquires its parser, array-symbol extractor, trim callback
+and primitive-literal callback before the AST fast path. Required validation
+keeps the existing diagnostic and the public dependency map retains actual
+callbacks. Scalar context, successful error effects and fatal exception identity
+remain native.
+
+The compatibility path treats two and three arguments differently. Two arguments
+reuse the parser's actual argument array. Three arguments first trim and validate
+the scoped target, then copy the selected target and value into a separate
+array. Later trim effects mutate those copies. The target and value are each
+trimmed for ambiguity checks and again for final lowering; the three-argument
+path also has its initial scoped-target trim. Extractors and primitive lowering
+receive local scalar copies. The final extractor and uniform-binding helper
+share the same local target.
+
+For an internal callback that returns the incoming text and appends `!` to its
+argument, a two-argument raw array `["legacy target", "value expression"]` ends
+as `["legacy target!!", "value expression!!"]`. Its three-argument counterpart
+ends as `["scope", "legacy target!", "value expression"]`; the later effects
+belong to the separate effective array. These are Perl alias examples, not new
+DSL syntax. Empty or undefined guard results keep their existing rejection or
+fallback; `0` remains nonempty where that guard accepts it.
+
+Existing child/index precedence remains visible: `push(items, 1)` calls the
+child rule `items` and selects element `1` for the current accumulator.
+`push(Top, items, 1)` calls `Top` and selects element `1` for `items`.
+Quoted-value forms such as `push(items, "v")` and `push(Top, items, "v")`
+retain their explicit value append lowering. Two bare names retain the existing
+rule-handler-or-value decision. Removed aggregate selectors still diagnose.
+These are generated-source observations; this private change adds no language
+form or new execution admission.
+
+Known and opaque required children cannot donate equal-text publication to the
+enclosing push, and known capture uses the selected actual callback identity.
+Secondary AST, value, binding, push-assembly and ambiguity helpers are explicit
+controls in this proof. Their complete behavior, optional/direct callbacks and
+broader language admission remain separate.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

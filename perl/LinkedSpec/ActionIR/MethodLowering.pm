@@ -8178,7 +8178,7 @@ sub _lower_push_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
- return $cb;
+ return _bind_emission_dependency($cb);
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');

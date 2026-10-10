@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Push raw/effective arrays and child/index precedence
+
+Two-argument push aliases the raw parser array; three-argument push first trims/validates scoped
+target and then copies raw slots1/2 to a separate effective array. Target/value preview and final
+trim alias those effective slots. Successful trim runs four/two-argument or five/three-argument
+times; controlled undefined trim runs three or one, fatal stops immediately. Array extraction and
+primitive lowering receive local copies; final extraction and binding share the final local target.
+Four eager roles validate before AST fast path.
+
+Native24/branches56/public6 and paired850 TAP retain24 original REDs/826 controls/all850 GREEN.
+Faults3, supplied58/178, evidence5/original296 restoration/book89/3 and readonly303-input71948-byte
+publication pass. Initial driver counted55 instead of56 cases and mislabeled numeric push as append.
+Contracts numeric push paths preserve child/index precedence; immutable initial
+producer/fixtures/native channels reconstruct corrected labels, two added quoted append rows and
+diagnostic-fault arity. No product defect or old observation refresh follows. Set-key replay
+requires accepted d74c53485 inputs; only one live durability mode/revision changes. Both stale
+roadmap table cells are fixed. Both required syntax checks and supplemental public Phase0
+PASS1035/1035 with complete channels retained. Normal hooks govern clean landing.
+
 ## 2026-10-10 — Set-key normalization arrays and local lowering slots
 
 Set-key validates five required roles before AST fast path. Normalization receives the actual parser

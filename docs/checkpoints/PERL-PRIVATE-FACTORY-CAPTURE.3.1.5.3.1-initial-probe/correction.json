@@ -1,0 +1,19 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1",
+  "result": "initial driver assertion rejected",
+  "source_changed": false,
+  "observed": {
+    "callbacks": 24,
+    "branches": 56,
+    "public": 4
+  },
+  "incorrect_driver_branch_count": 55,
+  "correction": "Independent branch ledger has56 cases. Preserve numeric child/index probes with accurate names and add quoted-value append probes. Correct the diagnostic mutant expected name to include arity2 before using that mode. No production change or original observation replacement.",
+  "precedence_owner": "perl/LinkedSpec/ActionIR/Contracts.pm:495 and517 preserve numeric child/index push before generic mutation; docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md documents it.",
+  "inputs": {
+    "actionir_method_push_required_capture_cold.t": "e2684123f3a6de616427aff3e0e36690a829e3e97c381c33e2c7c563825f5e1b",
+    "native.json": "b5b7d417d48191303ad66b8c98f8d85770e0864428927c46febcb190b2b6b772",
+    "capture.py": "cc171712fac492769d85d05e9c4b3b7650721a1772bd5f095dc8abd18cba2301",
+    "actionir_method_push_required_capture.t": "06db7781a2b3e22164231234cc53c6cfeca3357d08050730cf243c5f67db0429"
+  }
+}

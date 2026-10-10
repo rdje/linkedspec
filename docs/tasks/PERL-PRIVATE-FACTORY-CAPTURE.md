@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / push required callbacks next
+- Status: `active` / regex and undefined-return required callbacks next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -563,15 +563,23 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal hooks govern clean landing; activate push .5.3.1 only after this commit and brief0/clean verification. No broader admission or push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1`
-  Status: `pending`
+  Status: `done` / bounded one-resolver push proof verified
   Goal: Isolate required push callbacks while preserving child-call precedence and repeated raw/effective argument handling.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0`
   Owned paths: Only required resolver return in _lower_push_statement; bounded fixtures/proof/preservation/Knowledge/book/continuity.
-  Planned tier: `focused`
-  Planned focused proof: Actual parser/extractor/trim/primitive roles; two/three/other arity and ambiguous/bare/typed target branches, actual raw versus effective array slots and repeated trim effects, contexts/errors/maps/results, source faults/consumers/book/required public compatibility.
-  Planned canonical boundary: none for bounded private resolver; independent admissions remain open.
-  Planned claim record: none: Planning only; declare source-bound measurement at activation.
+  Verification tier: `focused`
+  Focused checks: Actual parser/extractor/trim/primitive roles; two/three/other arity and ambiguous/bare/typed target branches, actual raw versus effective array slots and repeated trim effects, contexts/errors/maps/results, source faults/consumers/book/required public compatibility.
+  Canonical trigger: none for bounded private resolver; independent admissions remain open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json`
   Acceptance: Commit verified child before regex/undefined-return child; no child-call or public-language expansion.
+
+  Activation: Set-key accepted d74c534853832f6286813d924e018bd1bc6c2239; all10 doctrines/post-pointer/brief0 and clean Git verified. Preserve296 original live bindings before bound writes. Actual push owner acquires four eager roles before AST fast path; two arguments alias raw array, three arguments copy selected slots after scoped validation. Capture native repeated trim/extractor effects before editing its one required return.
+  Closed documentation defect (P2, fixed/verified in this leaf): Both ROADMAP.md and ROADMAP_V2.md self-containment table rows previously scheduled already completed assignment .5.2. Reproduce with rg -F "assignment required .5.2 follows" against those files. Header-only continuity updates missed the duplicated table cells. Both cells now align with this leaf and the old text is absent in both files.
+
+  Verified bounded result: One required resolver return only. PASS850 main/15 cold,24 exact native-current outcomes/four invoked roles/two arities,56 independent branches/six actual public Toolbox rows, paired24 original REDs/826 controls/all850 GREEN, three syntax-valid source faults and supplied58 suites/178 files. Eager validation, actual raw versus copied effective arrays, repeated trim/extractor effects, local scalar slots, shared final extractor/binding target, maps/context/error/fatal/reference/results remain native.
+  Signoff evidence: Complete producers/native/current/TAP/fault/consumer channels/input hashes, five actual evidence corruptions, original296-binding corruption/restoration, full book57+32/three controls and readonly303-input71948-byte publication PASS. Initial branch-count/public-label/diagnostic-reason correction retains complete original producer/fixtures/native channels and independently reconstructs exact differences. No old runtime refresh. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; staged claim gate117 records/152 claims/seven existing disclosed gaps PASS. Normal hooks govern ordinary landing.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1 - isolate push required callbacks`
+  Handoff: Normal hooks govern clean landing; activate regex/undefined-return .5.3.2 only after this commit, brief0 and clean Git. No broader admission or push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`
   Status: `pending`
@@ -667,7 +675,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` | `pending` | Set-key required verified; preserve296 live inputs and refine actual push raw/effective argument and repeated callback paths from clean HEAD. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` | `pending` | Push required verified; preserve303 live inputs and establish native regex literal/flags and undefined-return normalization paths from clean HEAD. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -900,7 +908,19 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Supplied56 suites/176 files PASS. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; full transitive/private/canonical admission stays separately owned.
 - [x] **LOCKSTEP** — Knowledge1341/10286 and book teaching/render pass. Roadmap/index/live/history/memory and whitespace align; exact staged memory/claim and normal hooks govern clean landing before push required .5.3.1.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1
+
+- [x] **BUG / SYMPTOM** — Required push callbacks could donate nested equal-text publication or borrow parent identity across two/three-argument paths.
+- [x] **PROOF** — Accepted d74c53485 complete850 TAP has exactly24 isolation REDs/826 controls. Final native24/branch56/public6 ledgers precede the one resolver edit; original probe correction remains immutable and independently reconstructible.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The required resolver returned actual callbacks while enclosing publication remained active. Actual child eligibility and parent packet lookup distinguish donation/borrowed identity.
+- [x] **FIX** — Bind only the push required resolver return. Preserve four eager roles, actual raw/effective arrays and scalar aliases, repeated trim/extractor effects, native guards/order/maps/context/error/fatal/reference/results. Secondary helpers remain controls.
+- [x] **ADDRESSED (verified)** — PASS850/cold15/native24/branches56/public6/inverse3, paired24 RED/826 controls/850 GREEN, supplied58/178/evidence5/original296 restoration/book89/3 and readonly303-input71948-byte publication. Original count/label/diagnostic-name instrument correction is fully retained/reconstructed.
+- [x] **NO REGRESSION** — Supplied58 suites/178 files and both required syntax checks/public Phase0 PASS1035/1035 with complete channels retained. No full transitive/private/canonical admission inferred.
+- [x] **LOCKSTEP** — Knowledge1342/10293 and complete book teaching/render pass. Both stale roadmap table cells corrected; history/whitespace pass and claim gate117/152/seven existing gaps passes. Exact staged docs/memory and normal hooks govern clean landing before .5.3.2.
+
 ## Verification Log
+
+- `2026-10-10`, `.3.1.5.3.1`: Push required .3.1.5.3.1 verifies850/cold15/native24/branches56/public6/inverse3, paired24 RED/826 controls/850 GREEN and supplied58/178/evidence5/book89/3. All296 original set-key bindings stay historical at d74c53485; readonly303-input71948-byte claim passes. Four eager roles preserve actual raw versus copied effective arrays, repeated trim/extractor effects, local scalar copies and final extractor/binding identity. Original count/public-label/diagnostic-name probe correction is retained and independently reconstructed. Secondary helpers and independent admissions remain separate. Both stale roadmap table next-task cells are corrected. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; normal hooks govern clean landing. Regex/undefined-return .5.3.2 follows clean handoff; TYPE-REFERENCE-BOOK stays queued.
 
 - `2026-10-10`, `.3.1.5.3.0`: Bounded539/cold17/native15/branches37/public3/inverse3, paired15 RED/524 controls/539 GREEN, supplied56/176/evidence5/original300 restoration/book89/3 and readonly296-input69937-byte publication PASS. Actual parser/selected arrays, readonly arities and trim/local scalar slots remain exact. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained. History/memory/claim/diff and normal hooks govern clean landing.
 
@@ -972,6 +992,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.5.2`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 - isolate assignment required callbacks`, from clean2b1f949b8; no push.
 
 - `.3.1.5.3.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0 - isolate set-key required callbacks`, from clean ea6926fef; no push.
+
+- `.3.1.5.3.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1 - isolate push required callbacks`, from clean d74c53485; no push.
 
 ## Changelog
 
@@ -1098,3 +1120,11 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Assignment required .5.2 accepted at ea6926fef with all10 doctrines, post-pointer/brief0 and clean Git. Split remaining helper .5.3 before writes into set-key .0, push .1 and regex/undefined-return .2; activate .0. Five eager set-key roles and actual normalized argument slots need native proof before the one required resolver edit. Existing regex discrepancy owners remain separate.
 
 - `2026-10-10`: Set-key .5.3.0 retains15 native outcomes/37 controlled branches/three actual public Toolbox rows before exactly one required resolver edit. All539 current TAP pass against identical15-RED/524-control original names. Cold17, source faults3, supplied56/176, evidence5/original300 restoration/book89/3 and readonly296/69937 proof pass. No instrument correction needed; both required syntax checks/public Phase0 PASS1035 with full channels retained; normal hooks govern ordinary landing.
+
+- `2026-10-10`: Set-key accepted d74c53485 with all10 doctrines, post-pointer/brief0 and clean Git. Activate push .5.3.1; preserve296 original bindings before bound writes. Own stale assignment-next cells in both roadmap tables in this leaf.
+
+- `2026-10-10`, push native preflight: Initial driver incorrectly expected55 branches, actual immutable capture has24 callbacks/56 branches/four public rows. Preserve original producer/fixture/cold fixture/native channels and identities in .5.3.1-initial-probe/. Numeric push probes select documented child/index precedence at Contracts.pm:495/517, not a new product defect. Retain those probes with correct labels and add quoted-value append probes; diagnostic mutant expected name gains actual arity2. Source remains accepted d74c53485. Final native capture must precede production edit; independent review binds the complete correction lineage.
+
+- `2026-10-10`, push native checkpoint: Final native24 callback rows/56 guard cases/six public Toolbox rows captured on accepted d74c53485. Complete850 TAP retains exactly24 publication/identity REDs and826 passing controls. Repeated trim raw-slot/copy behavior and extractor/primitive local slots match source. Initial branch-count/label/diagnostic-reason draft stays immutable under initial-probe; production edit is limited to one required resolver return.
+
+- `2026-10-10`: Push required .3.1.5.3.1 verifies850/cold15/native24/branches56/public6/inverse3, paired24 RED/826 controls/850 GREEN and supplied58/178/evidence5/book89/3. All296 original set-key bindings stay historical at d74c53485; readonly303-input71948-byte claim passes. Four eager roles preserve actual raw versus copied effective arrays, repeated trim/extractor effects, local scalar copies and final extractor/binding identity. Original count/public-label/diagnostic-name probe correction is retained and independently reconstructed. Secondary helpers and independent admissions remain separate. Both stale roadmap table next-task cells are corrected. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; normal hooks govern clean landing. Regex/undefined-return .5.3.2 follows clean handoff; TYPE-REFERENCE-BOOK stays queued.
