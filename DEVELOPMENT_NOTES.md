@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Preserve native block fallback and local validation
+
+Component/side-effect required bindings preserve actual reference/shared-array behavior and native undefined fallbacks; local flow is validation-only. Canonical detail/proof: docs/knowledge/perl-method-block-component-capture.md and .3.1.2.1 claim. The hook blocked an extra history member; only this new note is shortened. P1 .3.1.2.3 owns finite canonical capacity before further runtime work.
+
 ## 2026-10-10 — Keep inline scalar copies and shared parser arrays native
 
 Inline if parses a local branch scalar; switch passes its original slot. Both normalizers retain actual parser-returned array aliases. Explicit constant branch/case/truthiness controls bound the two actual caller bodies. Two inline if/switch required resolvers pass177 main/cold4 and six effective syntax-valid source faults. All five actual roles and15 native/current ledgers match; paired complete177 TAP has15 original publication-isolation REDs,162 passing original controls and all177 current GREEN. Supplied31 suites/150 files, evidence5, original-binding RED/restoration and book57/two controls pass. All240 original inference bindings stay historical at9032b20e. The initial copied freezer rejects at its wrong-prefix replay guard before writes; retain actual rejection/original-input snapshot and reconstruct only prefix/docstring/console correction. Block component/side-effect .3.1.2.1 is next; remaining required/optional, pipeline/output/full-private/mapped/canonical and parent owners remain open.

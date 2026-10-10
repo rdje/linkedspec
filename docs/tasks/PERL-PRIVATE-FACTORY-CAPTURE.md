@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / MethodLowering inline required bindings accepted; block component/side-effect family next
+- Status: `active` / MethodLowering block component required bindings accepted; finite notes-capacity prerequisite next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -218,7 +218,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Status: `active` / bounded inline and block children
   Goal: Inline/block required dependency boundaries with bounded native/current actual-call proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1`
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2`.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2`.
   Owned paths: MethodLowering required seams in the six original inline/block owners; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
   Split rationale: Separate inline if/switch, block component/side-effect and block local-return/value control paths. Each family declares invoked versus validation-only callbacks and explicit secondary controls before writes; shared/native context primitive remains unchanged.
   Planned tier: `focused`
@@ -245,20 +245,39 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0 - isolate inline control dependencies`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`
-  Status: `pending`
-  Goal: Block component and side-effect required dependency boundaries.
+  Status: `done` / `focused-signoff-complete` (activated from clean `65bd00faa0b10abc106a6da2283391c268ee88fa`)
+  Goal: Block component and side-effect required dependency boundaries with actual native fallback/reference behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0`
-  Owned paths: MethodLowering required return seams in _lower_block_value_component_expr and _lower_block_side_effect_statement; focused fixtures/proof/claim, Knowledge/book/continuity.
-  Planned tier: `focused`
-  Planned focused proof: Actual invoked callback/native behavior and original maps; separate validation-only lower_flow_composite_expr requirement in the component owner. Explicit secondary/AST controls and actual source-bound semantic faults; supplied consumers and complete relevant book.
-  Planned canonical boundary: none for bounded private implementation; original admission owners retain closeout.
-  Planned claim record: none: Declare bounded source-bound measurement at activation.
-  Acceptance: Preserve current claim inputs before writes; do not present validation-only requirements as actual invocations. Commit before .3.1.2.2.
+  Owned paths: MethodLowering required return seams only in _lower_block_value_component_expr and _lower_block_side_effect_statement; focused fixtures/proof/claim, Knowledge/book/continuity. No AST/secondary helper, optional/direct or pipeline changes.
+  Verification tier: `focused`
+  Focused checks: Six invoked callback roles and separate validation-only lower_flow_composite_expr requirement; complete native/current string/undefined/fatal/reference ledgers, actual native fallback values and shared normalizer arrays, copied inputs/public references/contexts/effects/errors, exact required diagnostics and paired publication RED/GREEN. Explicit constant/undef secondary and AST controls isolate the actual two bodies. Per-seam boundary/identity/diagnostic faults include the validation-only missing-flow requirement; cold loading, supplied direct consumers, retained producers/all inputs/channels, actual reviewer/original-binding controls and complete book.
+  Canonical trigger: none for bounded private implementation without public/generated/mechanical changes; original full-private/mapped/canonical owners retain admission.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json`
+  Acceptance: Preserve all242 original inline claim live inputs before source/fixture/book writes. Bind only the two required returns, preserving undefined-result fallbacks and actual references/aliases/native behavior. Do not claim an invocation for the validation-only flow callback. Commit before the separately owned finite history-capacity prerequisite .3.1.2.3; retain a concise complete note under existing limits.
+
+  Result: Block component/side-effect required bindings pass223 main/cold4 and six effective syntax-valid source faults. Six invoked roles, a separately validated local flow binding and20 native/current ledgers preserve fallback/reference/context/alias/effect/error behavior. Paired complete223 TAP has18 original publication-isolation REDs,205 original passing controls and all223 current GREEN. Supplied33 suites/152 files, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical at65bd00faa. Finite history-capacity .3.1.2.3 precedes local-return/value .3.1.2.2; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations stay open.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-* bind exact native/current20 ledgers, paired223 complete plans/exact18 original failures, six complete syntax-valid semantic faults, supplied33/152, evidence5, original242 preservation and book57/two controls. Production independently reconstructs only two required return edits; separate flow diagnostic fault distinguishes local validation without claiming direct invocation or a complete transitive graph.
+  Reverify: `bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py`; separately run its preservation-control.py with the same wrapper. One-shot writers are not resume entrypoints.
+  Verification: `focused-signoff-complete`; ordinary doctrine hooks govern staged admission.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 - isolate block component dependencies`
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3`
+  Status: `pending` / `P1` finite history-capacity prerequisite
+  Goal: Admit one exact engineering-notes archive member and its exact manifest capacity through a separately indexed accepted decision; preserve all prior history and current runtime proof inputs.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`
+  Owned paths: Exact registry/ADR/index, engineering-notes complete-record rollover, retained capacity producer/claim, Knowledge and continuity. Stable storage responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; no runtime/checker or external-repository changes.
+  Reproduction: The .3.1.2.1 ordinary commit hook rejects the proposed new segment under existing engineering_notes file-count and manifest limits. ADR0130 expressly grants no new member. Reproduce from this clean boundary with the production rollover/checkers and exact source/hash reconstruction.
+  Impact / priority: P1 prerequisite for sustained PNT chronology; ordinary runtime slices cannot expand routing controls or rewrite immutable history. The current slice shortens only its newly authored note and withdraws only its uncommitted redundant rollover.
+  Planned tier: `canonical`
+  Planned focused proof: Independent clean-Git preservation; exact old/new canonical limit and contract objects; actual production boundary/accepted-indexed-authority REDs, retained all inputs/producers/channels and reviewer corruption controls; unchanged public documentation authority contract.
+  Planned canonical boundary: Routing-capacity infrastructure requires exact complete staged-candidate CI/receipt before landing.
+  Planned claim record: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json` at activation; no capacity admission claimed by this pending node.
+  Acceptance: Use finite engineering-maintenance authority under current PNT and ADR0128/0129/0130 precedent. Preserve every old immutable byte and manifest record; admit only one measured new member and exact manifest growth. Account for the sole ADR in decision-store limits where required. Commit canonical proof before local-return/value .3.1.2.2.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2`
   Status: `pending`
   Goal: Block-local return and block-value required dependency boundaries.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3`
   Owned paths: MethodLowering required return seams in _lower_block_local_return_payload_expr and _lower_block_value_expr; focused fixtures/proof/claim, Knowledge/book/continuity.
   Planned tier: `focused`
   Planned focused proof: Actual invoked callbacks, AST-first/retained fallback path controls, native local-return/value shape, caller maps/aliases/errors and exact diagnostics; separate validation-only normalizer requirement in block-value owner. Supplied direct consumers, semantic source faults and complete relevant book.
@@ -358,11 +377,13 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` | `pending` | Block component/side-effect actual calls and separate validation-only flow requirement; preserve current claim before writes. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` | `pending` | Own finite engineering-history member/manifest capacity with exact canonical proof before further runtime slices. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` | `pending` | Inspect/refine local-return/value required seams after the capacity prerequisite; preserve current claim before writes. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
+| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
+
 
 ## Handoff
 
@@ -462,6 +483,15 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Focused tier:31 suites PASS in150 supplied files with all three reader JSONs, previous dependency/default/construction fixtures and Trace. This is bounded two-caller proof with controlled branch/case/truthiness helpers; no universal language behavior, complete private Phase0 or mapped/canonical/parent admission inferred.
 - [x] **LOCKSTEP** — Complete57-source book/two actual render controls PASS. Knowledge, roadmaps/index and bounded history/live/memory align; all240 original inference bindings remain historical. Block component/side-effect .3.1.2.1 is next, followed by local-return/value .3.1.2.2 and remaining required/optional owners.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1
+
+- [x] **REPRODUCE / ISSUE** — Identical actual fixture reaches complete223 TAP:18 original publication-isolation REDs,205 original controls pass and all223 current GREEN. Six actual invoked roles distinguish ordinary fallback/reference values from donated nested publication; no shipped pipeline failure is inferred.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Component/side-effect require_dep closures returned direct injected callbacks while the enclosing SourceEmissions publication slot stayed active. Actual eligible-call/packet retrieval and wrapper-identity faults distinguish the boundary. The component's local flow binding is eagerly validated but has no direct invocation; secondary helpers are explicitly controlled, with no complete transitive-graph claim.
+- [x] **FIX** — Bind only the two required returns through the unchanged native-context helper. Preserve undefined-result fallback, actual reference identity, copied top-level inputs, public callbacks and shared parser-array mutations. Keep local flow validation and its original diagnostic rather than fabricating invocation coverage.
+- [x] **ADDRESSED (verified)** — Paired18 RED/223 GREEN, exact20 native/current ledgers and six complete syntax-valid semantic faults PASS; the component diagnostic fault specifically distinguishes its validation-only missing-flow requirement. Five actual evidence controls and original-binding corruption reject/restored PASS; cold4 and all required diagnostics pass. Readonly final-review/preservation-control retain exact producer/input/channel identities.
+- [x] **NO REGRESSION** — Focused tier:33 suites PASS in152 supplied files with all three reader JSONs, previous dependency/default/construction fixtures and Trace. Explicit constant/undef AST and secondary helpers bound the two actual caller bodies; no universal helper/AST/language behavior, complete private Phase0 or mapped/canonical/parent admission inferred.
+- [x] **LOCKSTEP** — Complete57-source book/two actual render controls PASS. Knowledge, roadmaps/index and bounded history/live/memory align; all242 original inline bindings remain historical. The concise new note fits existing pressure limits; no immutable history or capacity is changed. Finite history-capacity .3.1.2.3 precedes local-return/value .3.1.2.2.
+
 ## Verification Log
 
 Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`.
@@ -483,6 +513,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 - `2026-10-10`, `.3.1.2.0`: Two inline if/switch required resolvers pass177 main/cold4 and six effective syntax-valid source faults. All five actual roles and15 native/current ledgers match; paired complete177 TAP has15 original publication-isolation REDs,162 passing original controls and all177 current GREEN. Supplied31 suites/150 files, evidence5, original-binding RED/restoration and book57/two controls pass. All240 original inference bindings stay historical at9032b20e. The initial copied freezer rejects at its wrong-prefix replay guard before writes; retain actual rejection/original-input snapshot and reconstruct only prefix/docstring/console correction. Block component/side-effect .3.1.2.1 is next; remaining required/optional, pipeline/output/full-private/mapped/canonical and parent owners remain open. Ordinary doctrine hooks govern staged admission.
 
+- `2026-10-10`, `.3.1.2.1`: Block component/side-effect required bindings pass223 main/cold4 and six effective syntax-valid source faults. Six invoked roles, a separately validated local flow binding and20 native/current ledgers preserve fallback/reference/context/alias/effect/error behavior. Paired complete223 TAP has18 original publication-isolation REDs,205 original passing controls and all223 current GREEN. Supplied33 suites/152 files, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical at65bd00faa. Local-return/value .3.1.2.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations stay open. Ordinary doctrine hooks govern staged admission.
+
 ## Commit Log
 
 The planning commit belongs to the original tree. Every implementation leaf records its own result and commit
@@ -500,6 +532,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1 - isolate required inference dependencies`, from clean429d0c6d; no push.
 
 - `.3.1.2.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0 - isolate inline control dependencies`, from clean9032b20e; no push.
+
+- `.3.1.2.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 - isolate block component dependencies`, from clean65bd00faa; no push.
 
 ## Changelog
 
@@ -536,3 +570,7 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Before inline/block production writes, split .3.1.2 into inline if/switch .0, component/side-effect .1 and local-return/value .2. Declare the two existing validation-only requirements separately from actual invocations. Activate .3.1.2.0 from clean9032b20e; guarded AST .3.1.3 depends on final .3.1.2.2.
 
 - `2026-10-10`: `.3.1.2.0` accepts inline if/switch required boundaries and original240 preservation. Wrong-prefix freezer guard rejection is reproduced before successful preservation; production remains exactly two required return edits. Block component/side-effect .3.1.2.1 is next.
+
+- `2026-10-10`: Activate block component/side-effect .3.1.2.1 from clean65bd00faa. Own two required returns, six actual invoked roles and separate flow validation; native undefined-result fallback and direct reference outcomes are explicit proof requirements. Preserve all242 original inline input bindings before writes.
+
+- `2026-10-10`: `.3.1.2.1` accepts component/side-effect required boundaries, native fallback/reference outcomes and separate local flow validation, preserving original242 inputs. The attempted rollover was blocked by README-STABILITY file-count/manifest controls. Withdraw only the uncommitted redundant segment after exact clean-source verification; shorten only this new note. Pending P1 .3.1.2.3 owns a separate finite canonical capacity admission before local-return/value .3.1.2.2.

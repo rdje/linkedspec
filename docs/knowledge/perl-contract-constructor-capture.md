@@ -11,7 +11,7 @@ date: 2026-10-10
 status: bounded local/delegated construction registration verified; other owners and pipeline activation open
 tags: [perl, actionir, contracts, factories, callbacks, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.1.1 retains447 main/six cold assertions,20 effective semantic source faults and23 supplied suites in142 files. Two complete174-entry native/current catalogues match metadata/order/ordinary benign-input values and callback reuse patterns. Twelve local reference snapshots and fourteen substituted-factory opacity controls pass. Four actual reviewer corruptions and one original-binding corruption reject then restore PASS; complete57-source book/two controls pass. Original248 dependency bindings remain historical."
-reverify: "Current composed direct-consumer/identity proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-final-review.py; separately run its preservation-control.py. Original constructor final-review/preservation-control require accepted33e57deee inputs. Capture/freezer/publisher are one-shot writers."
+reverify: "Current composed direct-consumer/identity proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py; separately run its preservation-control.py. Original constructor final-review/preservation-control require accepted33e57deee inputs. Capture/freezer/publisher are one-shot writers."
 ---
 
 Contracts' twelve local group constructors pass their own literal arrays through
@@ -54,5 +54,5 @@ live in docs/knowledge/perl-method-default-capture.md. Required trim .3.1.0 and 
 and remaining required/optional families are next. Original244 constructor bindings are historical at33e57deee.
 
 Required inference .3.1.1 is accepted; current native/caller/isolation rules
-live in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 is accepted; block .3.1.2.1
+live in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 and block component .3.1.2.1 are accepted; local-return/value .3.1.2.2
 is next; remaining required/optional and pipeline owners stay open.

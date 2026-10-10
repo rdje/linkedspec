@@ -11,7 +11,7 @@ date: 2026-10-10
 status: bounded default selection verified; required and optional dependencies remain open
 tags: [perl, actionir, methods, callbacks, identity, default-factory]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.0 retains426 main/six cold assertions,24 effective source faults and25 direct suites in144 supplied files. Two native/current19-callback map ledgers match. Every actual reference/same-name replacement/native alias and opaque equal-text publication control passes. Four actual reviewer corruptions and one original-binding corruption reject/restored PASS; complete57-source book/two controls pass. Original244 bindings remain historical. Initial30 all-GREEN captures/producer retained before prose-only scope correction and unchanged-input recapture."
-reverify: "Original default-selection reviewers require accepted89a4ede6f inputs. Current inline-control integration/original240 preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-final-review.py; separately run its preservation-control.py. Capture/freezer/publisher are one-shot writers."
+reverify: "Original default-selection reviewers require accepted89a4ede6f inputs. Current inline-control integration/original240 preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py; separately run its preservation-control.py. Capture/freezer/publisher are one-shot writers."
 ---
 
 MethodLowering::default_deps_for_package keeps the actual OwnerDispatch map and
@@ -50,5 +50,5 @@ composition, complete private Phase0, mapped replacement and independent canonic
 admission remain open. Registration selects an actual callback; it does not prove
 that a successful helper has published or composed a packet.
 
-Current inline rules/evidence live in docs/knowledge/perl-method-inline-capture.md.
+Current block-component rules/evidence live in docs/knowledge/perl-method-block-component-capture.md.
 All282 original default-selection bindings are historical at89a4ede6f.

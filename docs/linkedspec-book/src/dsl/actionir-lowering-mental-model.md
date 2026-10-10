@@ -1159,6 +1159,29 @@ that identity. This integration changes neither branch selection nor authored
 syntax. Branch payload/case/truthiness helpers, block-value dependencies and later
 pipeline composition keep their separate responsibilities.
 
+Block component and side-effect dependencies now have separate private captures.
+These two required resolvers retain the actual callbacks in their public maps.
+The component owner invokes trim, primitive-literal and direct-access lowerers;
+the side-effect owner invokes trim, method parsing and argument normalization.
+The component's flow callback remains an eagerly validated requirement that this
+body never invokes. Validation and invocation are separate contract obligations.
+
+An undefined primitive-literal result still permits direct-access fallback, and
+an undefined direct-access result can still reach method-value fallback. An
+unrecognized side-effect parse can likewise fall back to component lowering.
+A returned reference stays the same reference. These native outcomes remain
+intact alongside scalar contexts, copied top-level inputs, callback counts and
+error identities. Argument normalization keeps the actual parser-returned array
+and its shared mutation effects.
+
+For example, an injected primitive lowerer can return no literal while the next
+lowerer supplies the ordinary value expression. Publishing equal text inside
+that child does not donate a packet to the enclosing component. A selected known
+child retains its own callback identity; its wrapper cannot replace that identity.
+Required missing/non-CODE diagnostics remain in force, including the validation-only
+flow callback. AST routing and secondary helper behavior are unchanged. Block-local
+return/value dependencies and later pipeline composition remain separate steps.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
