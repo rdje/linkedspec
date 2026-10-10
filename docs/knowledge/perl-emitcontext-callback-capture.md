@@ -8,10 +8,10 @@ answers:
   - "does EmitContext copy scalar arguments or forward caller aliases"
   - "can a resolved EmitContext owner or default factory donate nested publication"
 date: 2026-10-10
-status: bounded EmitContext prerequisite verified; Contracts and pipeline integration open
+status: bounded EmitContext and Contracts integration verified; other owners/pipeline open
 tags: [perl, actionir, emitcontext, callbacks, identity, dependencies]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.0 retains345 main/five cold assertions,30 exact native/current observation ledgers,28 actual definition-owned callback selections,six opaque owner/factory publication modes,13 effective semantic source faults and19 direct suites in138 supplied files. Original233 framework bindings remain exact historically. The first duplicate-Trace preflight failure is retained separately from runtime observations."
-reverify: "The original .2.0 reviewers require exact2d8784780 historical inputs. Current Contracts integration and all235 original EmitContext bindings are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
+reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current constructor integration and original248 dependency preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 EmitContext retains actual native facade CODE references in a private lexical
@@ -37,7 +37,7 @@ error state. Shared OwnerDispatch mechanics and public maps remain unchanged.
 
 The framework's direct alias/error rules and this facade's copied arguments/error
 restoration describe different existing call boundaries. Do not replace either
-with the other's semantics. Contracts callback construction, the other dependency
+with the other's semantics. Contracts construction is verified separately. Other dependency
 owners, RewritePipeline scope activation and explicit output composition remain
 subsequent owners in docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Complete private
 Phase0, mapped replacement and independent canonical admission remain open.
@@ -45,3 +45,7 @@ Phase0, mapped replacement and independent canonical admission remain open.
 Contracts private dependency/default integration is now verified; see
 docs/knowledge/perl-contract-dependency-capture.md. Actual lower construction and
 pipeline activation remain subsequent owners.
+
+Current own-constructor registration is verified by .2.1.1; see
+docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
+require exactbe7d70719 historical inputs.

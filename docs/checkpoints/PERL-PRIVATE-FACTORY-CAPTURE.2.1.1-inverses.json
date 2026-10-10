@@ -1,0 +1,236 @@
+{
+  "result": "PASS",
+  "producer_sha256": "0fc5d0aced2ccbbfb84b7a06b46faed5279f1e8efc07a123803bbd1cef28a536",
+  "sources": {
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "3be7560d2075870f124f2b746cebdc249c294362b23dca75decebda65abadd56",
+    "perl/LinkedSpec/ActionIR/StagedParseJob.pm": "46ab2a3e2cc7964dad87916fbe7bfc4abff8b3e63d9e898532b64f7e130ad43f",
+    "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm": "f7b47a9ee060979fc14723cae3dc95eaac5f337f709246a8f6ab32c7b2e1d59e"
+  },
+  "fixture_assertions": {
+    "t/actionir_contract_factory_capture.t": 447,
+    "t/actionir_contract_factory_capture_cold.t": 6
+  },
+  "rows": [
+    {
+      "case": "local-call_and_dispatch_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-call_and_dispatch_contracts.json",
+      "sha256": "b6f74e9c7669f17d84936f828936880d80d6baa8b1b1262a6b0197b266f91c6d",
+      "source_sha256": "2fea0304d9a3487f5533e33824dd737413559caade85151f92a0e872d11fd6a7",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-recursive_observation_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-recursive_observation_contracts.json",
+      "sha256": "2b4bab0cc36f0376208213e97c5db1109c60a25a9d918ff998d8a9d876ba0c58",
+      "source_sha256": "9121c49eb3c5e08598ed999df11ce6e444cf084add55ea3840f1a655c5da3a45",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-inter_match_gap_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-inter_match_gap_contracts.json",
+      "sha256": "afc440ed8bcb5af29f0e86170056642d3f5ab196a18dfdec9242c8e7ae407921",
+      "source_sha256": "f4b715a9ea575b0f4eb219be0c2bfa157230aaa49fb4ca8be3d1142fb8278621",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-recognition_transaction_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-recognition_transaction_contracts.json",
+      "sha256": "9cede67a222f3d8bb5caa9adcada0b1fc07cff7e391f8c8b3ca88dd068845c4a",
+      "source_sha256": "27dc134a8f09f3073c657bf1d51d455a0d714e8d7b3f30d8143d4e8adb45f040",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-return_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-return_contracts.json",
+      "sha256": "3991cbe449196efe59d9051230f64143ad208c81bb5c5480934c0e7c77377ea7",
+      "source_sha256": "fc04643b8f6b030cda2c78f2fec8ee205376ae77c2fc814a60213e5c0623513b",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-capture_and_cursor_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-capture_and_cursor_contracts.json",
+      "sha256": "35b2a3569fe5af56f0589d8e5c7c7884b1c1a3b6a879bdb59a61efa787a604ce",
+      "source_sha256": "c4ed237dc3220f9501eb48f60fa3e354338ab57e4998f0fb6ba7e741d77662bb",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-passthrough_ir_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-passthrough_ir_contracts.json",
+      "sha256": "72a0d65d9d5ba9612cd53e7bdcd937cf76708089f288425c4c6a712b7be7a463",
+      "source_sha256": "283463bd813ee3d4f1cddfbb1760d7a11ab12eae3fc68a6146c30fa79b7113dc",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-assignment_and_regex_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-assignment_and_regex_contracts.json",
+      "sha256": "108dfaa5be6bc156ad5367b90bf7655040fc61cb7d20827310b7114808966c66",
+      "source_sha256": "e57905315f6a38b1c8e04a4e751922215758f1cec706321bebe57db41cd7a013",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-array_pipeline_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-array_pipeline_contracts.json",
+      "sha256": "98a436ceeac28b2f423dfeace43694106c8757d0cdb6f0b539ddcf5f44ab40c6",
+      "source_sha256": "d00de287f4705b1eb8734b162f46d7ae1e74b63d035e4b5a48e0bbaa7080170b",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-dropped_value_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-dropped_value_contracts.json",
+      "sha256": "669ae185db9900ac0821b18dc6baf51769bad7903bc1d37c34653c0aef2fa392",
+      "source_sha256": "883667d93e8a7e51839c1a028f8bac28f7ce2a194bf769e2ff5ec62e008865bd",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-flow_control_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-flow_control_contracts.json",
+      "sha256": "9275911ee29a48c7035fa3a66687c0f89176780d697773b5922bb308ae5ee8f3",
+      "source_sha256": "a10cfb98ac2a692a068771043cb1d02646b62f028c771fccb2f969f4cc379a2c",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "local-emit_and_declare_contracts",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-local-emit_and_declare_contracts.json",
+      "sha256": "754140c145b0d1d187b4b2bf43f25504e33cd25d1b246c97e397ede1c4eaa6ba",
+      "source_sha256": "6274432aaefbe2fb522637c160ce8e6bfff160e32d219763215642d8a63658e4",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "staged-registration",
+      "module": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-staged-registration.json",
+      "sha256": "3bf2993dde14646b375a313cc68207682044a2e490fb0d15f06d84380e2273df",
+      "source_sha256": "336e6f040fbc68b96f8191b72dcac6f31d81dbcd53bded183e13cd1d55ff5dea",
+      "reason": "staged_parse_job actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "progressive-registration",
+      "module": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-progressive-registration.json",
+      "sha256": "ddf28da18a371030d62a1c0bd40f3d6a68e6d4730346cd5511f7a97ee77277c0",
+      "source_sha256": "4f637072727b8bac621187d6fa206ec97837e5c4a3fc4644986fe1b5b30d0999",
+      "reason": "progressive_span_dispatch actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "blind-catalogue",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-blind-catalogue.json",
+      "sha256": "a7559ef7344a02031b5c97bb3fadd169a266a366fcf38c991056b6de8f8315a7",
+      "source_sha256": "d567b4d29fb0753cc1931df0be39db44035918884d584a4ed9ccb5487abc4bc7",
+      "reason": "LinkedSpec::ActionIR::Contracts::_build_call_and_dispatch_contracts substituted factory cannot register its opaque callback",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "wrong-callback",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-wrong-callback.json",
+      "sha256": "21a5c547c6d3bf42cedecc336c2903513f4a53240a89fdf1d61fcbab341cecbe",
+      "source_sha256": "a45c78cc31df76a0d3de8bcddb804176cab36d63e8cadebb1a720414ee48e7bb",
+      "reason": "actual returned callback is selected in its producer scope",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "copied-array",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-copied-array.json",
+      "sha256": "12a3133cdf1015ef00161374150ece2c543bf815cca94982ce807cee1c7513a1",
+      "source_sha256": "af79064627fa9338e129df87cc737d648acb31d6116d91bd8a3e46f8c12dada2",
+      "reason": "local seam 0 returns the actual array",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "copied-callback",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-copied-callback.json",
+      "sha256": "8ae8564cc9d3a5ec3044910e4b5711b6fe16ea2e5da0443d3461e1361f6fac4e",
+      "source_sha256": "43f375660d575e88eb6768d5f0fe7fcd45ad52174006569963b87f17758206e9",
+      "reason": "local seam 0 preserves actual public lower references",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "callback-retention",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-callback-retention.json",
+      "sha256": "a1d9eb0082dae9a36efc2b3774ba74cbf059cefbaa11df07a4bc62d3ac3f9e16",
+      "source_sha256": "53a54b8a177ca0f9eabc8790bae557c619317c3bf37df9cd20e0ea64ec6bf02c",
+      "reason": "producer scope exit releases actual lexical factory callback",
+      "fixture": "t/actionir_contract_factory_capture.t",
+      "assertions": 447,
+      "observed": "RED"
+    },
+    {
+      "case": "cold-loading",
+      "module": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-inverse-cold-loading.json",
+      "sha256": "5262c937b17c9b3537b3cfee1c6ea2a63846f60eb2f89f989b577b445e63c3dc",
+      "source_sha256": "6c9b010402b1188208897cba618fc134659c445aabc80edfbfca132d363bbeff",
+      "reason": "cold factory registration keeps SourceEmissions unloaded",
+      "fixture": "t/actionir_contract_factory_capture_cold.t",
+      "assertions": 6,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Each local/delegated seam removed separately, blind aggregate authority, wrong callback, public reference copies, scope retention and cold loading; effective syntax-valid semantic faults with complete positive-sized TAP and named REDs. Exact supplied bytes restore after every case."
+}

@@ -6,7 +6,7 @@ answers:
   - "which task owns invocation-local built-in callback registration"
   - "where is the private dependency scalar list void boundary planned"
 date: 2026-10-10
-status: framework, EmitContext and Contracts dependency integration accepted; lower construction and pipeline owners remain planned
+status: framework, EmitContext and Contracts dependencies/construction accepted; other owners and pipeline remain planned
 tags: [perl, actionir, source-emission, planning, callbacks]
 evidence: "The original factory planning leaf routes the existing selected protocol to docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Existing stable IDs and task consumers remain in place; no partition, capacity or runtime change."
 reverify: "Read docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md and its referenced original planning leaf/plan; implementation status and verification live beside each stable owner."
@@ -45,12 +45,16 @@ are unchanged by planning.
 
 Projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` now aligns the current Rust warning
 roadmaps with the adopted public RGX/upstream boundary. The standalone framework
-is accepted and Contracts `.2` is next; no dependency build or implementation access was needed.
+and the EmitContext/Contracts children are accepted; MethodLowering `.3` is next. No dependency build or implementation access was needed.
 
 The bounded EmitContext prerequisite .2.0 is accepted; actual Contracts/default
 callback construction is .2.1. Its current identity and native bridge rules live in
 docs/knowledge/perl-emitcontext-callback-capture.md.
 
-Contracts dependency/default selection .2.1.0 is accepted; actual local/delegated
-lower construction registration .2.1.1 is next. Current binding and target rules
+Contracts dependency/default selection .2.1.0 and actual local/delegated
+lower construction .2.1.1 are accepted; MethodLowering .3 is next. Current binding and target rules
 live in docs/knowledge/perl-contract-dependency-capture.md.
+
+Actual local/delegated lower construction .2.1.1 is accepted. MethodLowering .3
+is next; current constructor authority/ref/lifetime rules live in
+docs/knowledge/perl-contract-constructor-capture.md.

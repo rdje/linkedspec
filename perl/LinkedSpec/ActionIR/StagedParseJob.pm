@@ -25,7 +25,7 @@ my %DIRECT_TEXT_SOURCE = map { ($_ => 1) } qw(entry_text entry_group match_text 
 
 sub build_contracts {
  my ($label) = @_;
- return [
+ my $contracts = [
   {
    id                  => 'staged_parse_job',
    ir_node             => 'STAGED_PARSE_JOB_MARKER',
@@ -40,7 +40,13 @@ sub build_contracts {
     return _lower_statement($code, $args, $label)
    },
   },
- ]
+ ];
+ # Register only this constructor's actual lower callback, keeping public refs.
+ if (defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer) {
+  LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($_->{lower})
+   for @$contracts;
+ }
+ return $contracts
 }
 
 sub try_scan_contract_ir_events {

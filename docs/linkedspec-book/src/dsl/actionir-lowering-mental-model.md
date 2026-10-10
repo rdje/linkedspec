@@ -1020,8 +1020,8 @@ exception identity:
 A known child captured explicitly retains its own packet. Returning that child's
 text does not transfer the packet to its parent; later output builders must
 compose the actual retained child capture. Public dependency maps and callback
-fields stay unchanged. The framework is verified independently; production
-factory registration and pipeline activation remain subsequent integration.
+fields stay unchanged. The framework is verified independently. Current factory integration is
+described below; other dependency owners and pipeline activation remain open.
 
 EmitContext now selects definition-owned callback references for contract defaults.
 It snapshots the actual native facade references when the module loads. Replacing
@@ -1037,8 +1037,8 @@ text cannot donate publication to the facade. Native scalar/list/void behavior,
 return and exception identities, once-only effects and the actual factory map
 remain unchanged. The existing bridge copies scalar arguments before dispatch,
 shares referenced objects, and restores the caller's successful error state;
-private isolation preserves those existing rules. Contract construction and
-pipeline activation are still separate integration steps.
+private isolation preserves those existing rules. Contract construction is
+described below; other dependency owners and pipeline activation remain open.
 
 Contracts now isolate injected callbacks through private bindings.
 Their public default maps and returned callback fields keep the actual original
@@ -1055,8 +1055,28 @@ return the equal literal `same`. The contract still returns `same`, with the sam
 native effect order and scalar call, while its enclosing capture receives no
 nested publication. The optional dropped-value fallback and both bare child-call
 push paths follow the same rule. Private bindings release retained callbacks
-when they are released. Actual contract lower registration at construction sites
-and pipeline scope activation remain later integration steps.
+when they are released. Actual lower construction registration is described below; other dependency
+owners and pipeline scope activation remain later integration steps.
+
+Built-in lower callbacks now register at their own construction sites.
+Each local contract constructor registers the actual callbacks in its own literal
+array and returns that same array, its hashes and its callback references. The
+staged parse-job and progressive span-dispatch constructors register their own
+callbacks too. Catalogue assembly keeps the existing family order.
+
+A substituted factory can return a contract with the same name and an opaque
+callback that emits and returns `opaque_literal`. Its ordinary result stays the
+same; catalogue assembly does not register it. Copying the metadata cannot borrow
+another constructor's authority. A retained callback already selected in the
+current scope still has its own actual identity.
+
+Constructor registration lasts only within the actual source and producer scope.
+Nested equal-source and producer scopes cannot borrow it; leaving the nested
+scope restores the enclosing selection. The producer scope retains its actual
+callbacks while eligible and releases those references at exit. Cold construction
+does not load the private emission channel or Trace. Registration selects a
+callback; later output builders must still publish and explicitly compose actual
+packets. Other dependency owners and pipeline activation remain open.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

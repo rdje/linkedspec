@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Register lower callbacks at their own native constructors
+
+Actual local/delegated lower construction passes447 main/six cold assertions and20 effective semantic source faults. Two complete174-entry native/current catalogues match metadata/order, ordinary benign-input values and callback reuse patterns. All174 actual returned callbacks select in their current scope; twelve local return seams preserve actual array/hash/lower references and fourteen substituted factories remain opaque. Twenty-three suites in142 supplied files, evidence4 and complete book57/two controls pass. Nested source/producer selection restores, a lexical callback releases at scope exit, and cold construction stays lazy. All248 original dependency bindings are historical atbe7d70719. MethodLowering .3 is next; other dependency owners/pipeline/output/full-private/mapped/canonical obligations remain open.
+
 ## 2026-10-10 — Isolate contract dependencies without changing public maps
 
 Contracts private dependency/default integration passes312 main/six cold assertions,15 exact native/current observation ledgers and16 effective semantic source faults;21 direct suites in140 supplied files, evidence4 and complete book57/two controls pass. Required/optional/bare calls retain actual callbacks in private native-context bindings; public maps/default results/lower fields stay unchanged. Built-in target plus retained definition identity selects native defaults. Actual input_slice, dropped fallback and both bare push paths deny opaque nested publication. All235 original EmitContext bindings are historical at2d8784780. One draft lifetime failure is reproduced on original/current sources and fixed only in the lexical-state fixture; all failed channels/probe inputs remain. Actual lower construction .2.1.1 is next; other owners/pipeline/output/full-private/mapped/canonical obligations remain open.

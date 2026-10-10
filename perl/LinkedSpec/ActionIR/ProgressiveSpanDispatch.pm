@@ -17,7 +17,7 @@ my $BARE_BINDING_PATTERN = qr/\A[A-Za-z_][A-Za-z0-9_]*\z/o;
 
 sub build_contracts {
  my ($label) = @_;
- return [
+ my $contracts = [
   {
    id                 => 'progressive_span_dispatch',
    ir_node            => 'PROGRESSIVE_DISPATCH_SPAN',
@@ -32,7 +32,13 @@ sub build_contracts {
     return _lower_statement($code, $args, $label)
    },
   },
- ]
+ ];
+ # Register only this constructor's actual lower callback, keeping public refs.
+ if (defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer) {
+  LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($_->{lower})
+   for @$contracts;
+ }
+ return $contracts
 }
 
 sub try_scan_contract_ir_events {

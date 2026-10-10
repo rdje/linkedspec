@@ -11,7 +11,7 @@ date: 2026-10-10
 status: private dependency/default integration verified; actual lower construction and pipeline activation open
 tags: [perl, actionir, contracts, dependencies, callbacks, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.1.0 retains312 main/six cold assertions,15 exact native/current ledgers,16 effective syntax-valid semantic source faults and21 supplied suites in140 files. Four actual reviewer corruptions and one original-binding corruption reject then restore PASS; complete57-source book/two controls pass. All235 original EmitContext bindings are historical. One failed draft lifetime check and its consumer run are retained with exact original/current and lexical-state probe channels; only the lifetime fixture changed."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py; separately run its preservation-control.py with the same wrapper. Capture/freezer/publisher/probe programs are retained one-shot writers."
+reverify: "Original .2.1.0 reviewers require exactbe7d70719 historical inputs. Current constructor integration and all248 original dependency bindings are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 Contracts::_require_lowering_deps creates private lexical bindings for its actual
@@ -46,7 +46,11 @@ identical before and after that fixture correction. The original failed312 TAP,
 failed21-suite channels, actual instrument/source/fixture and four probe modes
 remain retained; they are not classified as a production retention defect.
 
-Actual local and delegated lower construction registration is the next child
+Actual local and delegated lower construction registration is now verified under
 .2.1.1 in docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Other dependency owners,
 pipeline/output integration, complete private Phase0, mapped replacement and
 independent canonical admission remain open.
+
+Actual local/delegated construction .2.1.1 is now verified; see
+docs/knowledge/perl-contract-constructor-capture.md. Other dependency owners and
+pipeline activation remain subsequent work.

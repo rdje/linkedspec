@@ -19,6 +19,18 @@ use LinkedSpec::ActionIR::BoundaryLabels ();
 use LinkedSpec::ActionIR::ProgressiveSpanDispatch ();
 use LinkedSpec::ActionIR::StagedParseJob ();
 
+# Each local constructor supplies its own actual literal array. Do not apply
+# this to the aggregate catalogue: a substituted factory owns opaque callbacks.
+# Return the same array, hashes and lower references; require-only callers stay lazy.
+sub _register_native_contracts {
+ my ($contracts) = @_;
+ if (defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer) {
+  LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($_->{lower})
+   for @$contracts;
+ }
+ return $contracts
+}
+
 sub _is_primitive_literal_token {
  my ($expr) = @_;
  return 0 unless defined($expr) && length($expr);
@@ -65,7 +77,7 @@ sub _quote_recognition_transaction_string {
 
 sub _build_recursive_observation_contracts {
  my ($label) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'observe_recognition',
    ir_node            => 'OBSERVE_RECOGNITION',
@@ -88,7 +100,7 @@ sub _build_recursive_observation_contracts {
      .'(ref($minfo) eq "HASH" ? $minfo : undef))'
    },
   },
- ]
+ ])
 }
 
 sub _build_inter_match_gap_contracts {
@@ -99,7 +111,7 @@ sub _build_inter_match_gap_contracts {
   {name => 'gap_text', ir_node => 'GAP_TEXT_READ'},
   {name => 'gap_kind', ir_node => 'GAP_KIND_READ'},
  );
- return [map {
+ return _register_native_contracts([map {
   my $name = $_->{name};
   {
    id => $name,
@@ -112,7 +124,7 @@ sub _build_inter_match_gap_contracts {
     return $code
    },
   }
- } @specs]
+ } @specs])
 }
 
 #------------------------------------------------------------------------------
@@ -122,7 +134,7 @@ sub _build_inter_match_gap_contracts {
 #------------------------------------------------------------------------------
 sub _build_recognition_transaction_contracts {
  my ($label) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'recognition_checkpoint',
    ir_node            => 'RECOGNITION_CHECKPOINT',
@@ -198,7 +210,7 @@ sub _build_recognition_transaction_contracts {
      ._quote_recognition_transaction_string($label).')'
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -450,7 +462,7 @@ sub _build_call_and_dispatch_contracts {
  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
   ? _bind_emission_dependency($deps->{bare_symbol_kind})
   : sub { return undef };
- return [
+ return _register_native_contracts([
   {
    id                 => 'call',
    ir_node            => 'CALL',
@@ -577,7 +589,7 @@ sub _build_call_and_dispatch_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -586,7 +598,7 @@ sub _build_call_and_dispatch_contracts {
 #------------------------------------------------------------------------------
 sub _build_return_contracts {
  my ($label, $d) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'return_general',
    ir_node            => 'RETURN',
@@ -642,7 +654,7 @@ sub _build_return_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -652,7 +664,7 @@ sub _build_return_contracts {
 sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
  $d = {} unless ref($d) eq 'HASH';
- return [
+ return _register_native_contracts([
   {
    id                 => 'capture_macro',
    ir_node            => 'CAPTURE_MACRO',
@@ -2045,7 +2057,7 @@ sub _build_capture_and_cursor_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2053,7 +2065,7 @@ sub _build_capture_and_cursor_contracts {
 # Purpose : Canonical IR-only contracts that do not rewrite source text.
 #------------------------------------------------------------------------------
 sub _build_passthrough_ir_contracts {
- return [
+ return _register_native_contracts([
   { id => 'exit_bare',                       ir_node => 'EXIT',           diag_name => 'exit',              compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
   { id => 'linecount_prefix_newline_matches',ir_node => 'LINE_COUNT',     diag_name => 'line_count',        compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
   { id => 'print_capture_substr',            ir_node => 'PRINT',          diag_name => 'print',             compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
@@ -2066,7 +2078,7 @@ sub _build_passthrough_ir_contracts {
   { id => 'position_tracking',               ir_node => 'POSITION_TRACK', diag_name => 'position_tracking', compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
   { id => 'print_foreach_iterable',          ir_node => 'PRINT',          diag_name => 'print',             compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
   { id => 'split_trim_filter_assignment',    ir_node => 'ASSIGN',         diag_name => 'raw_assignment',    compatibility_surface => 1, unresolved_pattern => undef, lower => sub { my ($code) = @_; return $code } },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2075,7 +2087,7 @@ sub _build_passthrough_ir_contracts {
 #------------------------------------------------------------------------------
 sub _build_assignment_and_regex_contracts {
  my ($d) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'push',
    ir_node            => 'PUSH',
@@ -2170,7 +2182,7 @@ sub _build_assignment_and_regex_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2179,7 +2191,7 @@ sub _build_assignment_and_regex_contracts {
 #------------------------------------------------------------------------------
 sub _build_array_pipeline_contracts {
  my ($d) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'split_array',
    ir_node            => 'SPLIT',
@@ -2276,7 +2288,7 @@ sub _build_array_pipeline_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2290,7 +2302,7 @@ sub _build_dropped_value_contracts {
  my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
  my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
- return [
+ return _register_native_contracts([
   {
    id                 => 'value_drop_statement',
    ir_node            => 'VALUE_DROP',
@@ -2302,7 +2314,7 @@ sub _build_dropped_value_contracts {
     return $lower->($code) || $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2311,7 +2323,7 @@ sub _build_dropped_value_contracts {
 #------------------------------------------------------------------------------
 sub _build_flow_control_contracts {
  my ($d) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'if_flow',
    ir_node            => 'IF',
@@ -2432,7 +2444,7 @@ sub _build_flow_control_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------
@@ -2441,7 +2453,7 @@ sub _build_flow_control_contracts {
 #------------------------------------------------------------------------------
 sub _build_emit_and_declare_contracts {
  my ($label, $d) = @_;
- return [
+ return _register_native_contracts([
   {
    id                 => 'say_stmt',
    ir_node            => 'SAY',
@@ -2501,7 +2513,7 @@ sub _build_emit_and_declare_contracts {
     return $code
    },
   },
- ]
+ ])
 }
 
 #------------------------------------------------------------------------------

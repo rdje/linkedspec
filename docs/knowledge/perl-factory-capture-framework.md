@@ -8,10 +8,10 @@ answers:
   - "why do two Perl factory calls return the same callback reference"
   - "does private factory capture preserve callback aliases and error objects"
 date: 2026-10-10
-status: standalone framework verified; production factory and pipeline integration open
+status: framework and Contracts integration verified; other dependency owners/pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Original .1 reviewers require exactb21b3bb9 inputs; original .2.0 reviewers require exact2d8784780 inputs. Current Contracts integration and original235 EmitContext preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
+reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current constructor integration and original248 dependency preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -43,8 +43,8 @@ identity checks therefore tested the wrong premise. The corrected fixture adds
 lexical state; production bytes are identical before and after that correction.
 This is a measured local observation, not a universal cross-version closure rule.
 
-Actual Contracts, MethodLowering, FlowExpr, ControlFlow and RewritePipeline
-registration/call sites remain later owners in
+Contracts registration/call sites are verified in the linked children.
+MethodLowering, FlowExpr, ControlFlow and RewritePipeline remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
@@ -59,3 +59,7 @@ only the fixture changes, and lexical-state callbacks release on both boundaries
 Current dependency integration and bounded original235 preservation are reviewed by
 that owner; see docs/knowledge/perl-contract-dependency-capture.md. The .2.0
 reviewer now requires its exact2d8784780 historical input boundary.
+
+Current own-constructor registration is verified by .2.1.1; see
+docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
+require exactbe7d70719 historical inputs.
