@@ -11,7 +11,7 @@ date: 2026-10-10
 status: bounded EmitContext prerequisite verified; Contracts and pipeline integration open
 tags: [perl, actionir, emitcontext, callbacks, identity, dependencies]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.0 retains345 main/five cold assertions,30 exact native/current observation ledgers,28 actual definition-owned callback selections,six opaque owner/factory publication modes,13 effective semantic source faults and19 direct suites in138 supplied files. Original233 framework bindings remain exact historically. The first duplicate-Trace preflight failure is retained separately from runtime observations."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-final-review.py; separately run its preservation-control.py with the same wrapper. One-shot capture/freezer/publisher programs are not resume commands."
+reverify: "The original .2.0 reviewers require exact2d8784780 historical inputs. Current Contracts integration and all235 original EmitContext bindings are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 EmitContext retains actual native facade CODE references in a private lexical
@@ -41,3 +41,7 @@ with the other's semantics. Contracts callback construction, the other dependenc
 owners, RewritePipeline scope activation and explicit output composition remain
 subsequent owners in docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Complete private
 Phase0, mapped replacement and independent canonical admission remain open.
+
+Contracts private dependency/default integration is now verified; see
+docs/knowledge/perl-contract-dependency-capture.md. Actual lower construction and
+pipeline activation remain subsequent owners.

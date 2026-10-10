@@ -11,7 +11,7 @@ date: 2026-10-10
 status: standalone framework verified; production factory and pipeline integration open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "The original .1 reviewers require the exact b21b3bb9 historical input boundary. Current EmitContext integration and exact preservation of all233 original framework bindings are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-final-review.py under tools/run_python_project_data.sh. Do not rerun one-shot capture/freezer programs."
+reverify: "Original .1 reviewers require exactb21b3bb9 inputs; original .2.0 reviewers require exact2d8784780 inputs. Current Contracts integration and original235 EmitContext preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -52,3 +52,10 @@ owners. The quoted-first replacement defect is unchanged.
 EmitContext now owns its definition-bound facade selection and resolved-call
 prerequisite; see docs/knowledge/perl-emitcontext-callback-capture.md. Actual
 Contracts callback construction and pipeline activation remain subsequent owners.
+
+The same no-lexical-state lifetime premise recurred in the Contracts draft. Its
+exact original/current probe is retained under PERL-PRIVATE-FACTORY-CAPTURE.2.1.0;
+only the fixture changes, and lexical-state callbacks release on both boundaries.
+Current dependency integration and bounded original235 preservation are reviewed by
+that owner; see docs/knowledge/perl-contract-dependency-capture.md. The .2.0
+reviewer now requires its exact2d8784780 historical input boundary.

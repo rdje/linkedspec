@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / framework and EmitContext prerequisite accepted; Contracts construction next
+- Status: `active` / Contracts dependency/default integration accepted; actual lower construction next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -68,7 +68,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Children: `PERL-PRIVATE-FACTORY-CAPTURE.2.0`, `PERL-PRIVATE-FACTORY-CAPTURE.2.1`.
   Owned paths: The actual EmitContext callback/owner bridge prerequisite, Contracts and its StagedParseJob/ProgressiveSpanDispatch callback factories; bounded proof/Knowledge/book/continuity. Shared OwnerDispatch mechanics remain unchanged.
   Split rationale: Contracts defaults are actual EmitContext facade callbacks; current names alone cannot select them as built-in. Establish definition-bound references and isolate resolved owner calls before default factory registration. Register locally constructed lower callbacks at their own seams, including the two delegated factory owners, while isolating injected dependencies.
-  Parent handoff: After accepted child .2.1, the next owner depends on that exact child. No separate factory parent admission is inferred; original independent composition/full-private/canonical owners retain closeout.
+  Parent handoff: After accepted child .2.1.1, the next owner depends on that exact child. No separate factory parent admission is inferred; original independent composition/full-private/canonical owners retain closeout.
   Planned tier: `focused`
   Planned focused proof: Actual/native callback and invocation identities; scalar/list/void context where applicable, aliases, once-only effects, exact return/error/fatal values, opaque nested delegation, scope restoration/release and unchanged public maps. Complete supplied direct consumers, effective semantic faults, retained instrument/input/channel identities, relevant book and ordinary doctrines.
   Planned canonical boundary: none for bounded private implementation without public/generated/mechanical change; reclassify before writes if scope crosses those boundaries. Complete private Phase0 and canonical replacement remain separately owned.
@@ -92,7 +92,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.2.0 - bind native facade callback identity`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.2.1`
-  Status: `pending`
+  Status: `active` / bounded implementation children
   Goal: Actual Contracts/default callback registration at trusted construction seams and isolated injected calls, including the two delegated contract factories.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.2.0`
   Owned paths: `perl/LinkedSpec/ActionIR/Contracts.pm`, `StagedParseJob.pm`, `ProgressiveSpanDispatch.pm` for their own actual lower callbacks; bounded proof/Knowledge/book/continuity. No global owner-dispatch or mapping change.
@@ -101,11 +101,41 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned canonical boundary: none for bounded private implementation; original independent composition/full-private/mapped/canonical obligations remain open.
   Planned claim record: none: Planning only; declare source-bound actual measurement at activation.
   Acceptance: Register callbacks inside their own built-in construction seams without granting authority to callbacks returned by substituted factories. Isolate injected dependencies through private bindings or actual call sites while retaining public maps/default results/returned callback fields and family order. Commit before MethodLowering owner .3.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0`, `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1`.
+  Split rationale: Isolate private injected bindings/default selection first, then register locally constructed lower callbacks and the two delegated factories. This bounds source ownership and avoids introducing known callbacks before their injected calls are isolated.
+  Parent handoff: After accepted .2.1.1, MethodLowering .3 depends on that exact child; no separate parent admission is inferred.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0`
+  Status: `done` / `focused-signoff-complete` (activated from clean `2d878478028fc417ac5b7790c016543c18c1f48b`)
+  Goal: Isolate Contracts private injected callback bindings and select actual native contract defaults while preserving public maps, callback references, native contexts/aliases/effects/errors and cold loading.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.2.0`
+  Owned paths: `perl/LinkedSpec/ActionIR/Contracts.pm` only for native default selection and private required/optional/bare dependency bindings; bounded fixture/proof/claim, relevant Knowledge/book/continuity. Actual contract lower registration and delegated factories remain .2.1.1. No owner-dispatch, pipeline/output/mapping or family-order change.
+  Verification tier: `focused`
+  Focused checks: Actual native default references versus custom targets/same-name overrides, exact public map preservation; direct native scalar/list/void alias/effect/value/error ledgers and actual injected callback identity; each required/optional/bare binding, original input_slice opaque-publication control, weak lifetime and cold loading; complete supplied direct consumers, effective semantic source faults, actual input/instrument/channel identities and reviewer controls; complete book and ordinary doctrines.
+  Canonical trigger: none for bounded private owner integration without public/generated/mechanical changes. Escalate before writes if proof exposes cross-cutting uncertainty. Complete private/mapped/canonical admission remains open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json`
+  Acceptance: Preserve the current EmitContext claim before input writes. Select native default callbacks only for the built-in target and exact retained native references. Caller maps/default results/public lower fields stay actual and unchanged. Private lexical thunks must retain/invoke the actual callback and forward aliases/context/errors without autoloading SourceEmissions. Optional dropped and bare paths must not bypass isolation. No actual contract lower registration or pipeline activation. Commit before .2.1.1.
+  Result: Contracts private dependency/default integration passes312 main/six cold assertions,15 exact native/current observation ledgers and16 effective semantic source faults;21 direct suites in140 supplied files, evidence4 and complete book57/two controls pass. Required/optional/bare calls retain actual callbacks in private native-context bindings; public maps/default results/lower fields stay unchanged. Built-in target plus retained definition identity selects native defaults. Actual input_slice, dropped fallback and both bare push paths deny opaque nested publication. All235 original EmitContext bindings are historical at2d8784780. One draft lifetime failure is reproduced on original/current sources and fixed only in the lexical-state fixture; all failed channels/probe inputs remain. Actual lower construction .2.1.1 is next; other owners/pipeline/output/full-private/mapped/canonical obligations remain open.
+  Signoff evidence: Final main312/cold6 and all sixteen syntax-valid source faults retain coherent complete TAP and their named semantic REDs. Original/current15 JSON ledgers match. Complete supplied21/140 retains the original three JSON reader inputs. Four reason-sensitive reviewer corruptions and one original-binding corruption reject then restore actual PASS. Full57-source book retains two actual controls. Initial no-state lifetime failure/consumer run and exact native/current/lexical probe remain distinct from production REDs; production bytes are unchanged for the fixture correction.
+  Reverify: `bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-review.py`; separately run its `preservation-control.py` with the same wrapper. One-shot captures/freezer/publisher/probe must not be replayed.
+  Verification: `focused-signoff-complete`; ordinary doctrine hooks govern admission.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0 - isolate contract dependencies`
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1`
+  Status: `pending`
+  Goal: Register actual locally constructed contract lower callbacks and the two delegated factory owners at their own construction seams.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0`
+  Owned paths: Contracts local builder returns and StagedParseJob/ProgressiveSpanDispatch own build_contracts returns; bounded proof/Knowledge/book/continuity. No default/dependency rework or shared owner-dispatch change.
+  Planned tier: `focused`
+  Planned focused proof: Actual complete contract metadata/order/native references, changed/substituted factory opacity, individual construction seams, native values/effects/lifetime/cold loading, complete supplied consumers, effective semantic source faults and retained evidence/book controls.
+  Planned canonical boundary: none for bounded private factory construction; original complete private/independent/mapped/canonical owners remain open.
+  Planned claim record: none: Planning only; declare actual source-bound measurement at activation.
+  Acceptance: Register actual native lower CODE references inside each owning factory, never blindly register callbacks returned by a substituted factory. Preserve actual public array/hash/lower references and family order. Commit before MethodLowering .3.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3`
   Status: `pending`
   Goal: Actual default native callback registration and injected method/value dependency boundaries. Split by function families before writes if this owner exceeds a safe slice.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.2.1`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1`
   Owned paths: `perl/LinkedSpec/ActionIR/MethodLowering.pm`; focused fixture/proof/claim, relevant Knowledge/book and continuity. No unrelated producer or mapping changes.
   Planned tier: `focused`
   Planned focused proof: Actual/native callback and invocation identities; scalar/list/void context where applicable, aliases, once-only effects, exact return/error/fatal values, opaque nested delegation, scope restoration/release and unchanged public maps. Complete supplied direct consumers, effective semantic faults, retained instrument/input/channel identities, relevant book and ordinary doctrines.
@@ -150,7 +180,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.2.1` | `pending` | EmitContext prerequisite accepted; actual Contracts/default/delegated callback construction and injected calls next. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1` | `pending` | Dependencies accepted; register actual local/delegated lower callbacks at their own construction seams. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -197,6 +227,15 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Focused tier: nineteen direct suites PASS in138 supplied files, including Trace and all three JSON reader inputs. Source-fault syntax and complete TAP remain checked. No complete private Phase0, mapped replacement or canonical/parent admission inferred.
 - [x] **LOCKSTEP** — Complete57-source book and missing-SUMMARY/removed-rendered-marker controls PASS. Knowledge, roadmaps/index and bounded history/live/memory pointers align. Original233 bindings are preserved; .2.1 is the next bounded owner.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.2.1.0
+
+- [x] **REPRODUCE / ISSUE** — Reuse the canonical input_slice dynamic-publication diagnosis. Actual required/optional/fallback/bare boundary-removal faults retain complete semantic REDs. Current production lowerers still do not publish packets; no shipped pipeline defect is inferred.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_require_lowering_deps` and `_build_call_and_dispatch_contracts` retained direct injected callback calls. A known parent could inherit an opaque nested publication. Default selection also needs both the actual built-in target and retained native callback references. The isolated lifetime RED is reproduced on original/current sources and the lexical-state control passes both, matching the known native fixture issue.
+- [x] **FIX** — Use private lexical bindings for required/optional/bare calls, forwarding actual callbacks/aliases/context; preserve caller maps/public fields and cold loading. Select built-in defaults through the accepted actual-reference getter. Correct only the lifetime fixture's lexical premise after preserving its actual failed inputs/channels.
+- [x] **ADDRESSED (verified)** — Main312/cold6, native15 and sixteen effective syntax-valid semantic controls PASS. Four reviewer corruptions and one frozen original-binding corruption reject then restore actual PASS; all producer/input/channel identities remain bound. Repeatable final-review/preservation-control entrypoints are retained.
+- [x] **NO REGRESSION** — Focused tier: twenty-one suites PASS in140 exact supplied files, including Trace and all three JSON reader artifacts. Production bytes do not change for fixture correction. No complete private Phase0, mapped/canonical or parent admission inferred.
+- [x] **LOCKSTEP** — Complete57-source book/two actual render controls PASS; Knowledge, task index/roadmaps and bounded history/live/memory pointers align. All235 original EmitContext bindings remain historical. Actual local/delegated lower registration .2.1.1 is next.
+
 ## Verification Log
 
 Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`.
@@ -206,6 +245,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 - `2026-10-10`, `.2.0`: EmitContext passes345 main/five cold assertions,30 exact native/current observation ledgers and13 effective semantic source faults. Nineteen direct suites in138 supplied files, four actual reviewer REDs and complete57-source book/two controls pass. Actual definition-owned references select28 native callbacks; same-name replacements and copied metadata remain opaque. Resolved owner/default-factory calls cannot donate nested publication in six scalar/list/void modes. Existing argument copies, shared references, return/error/fatal identities, actual factory maps and lazy loading remain unchanged. All233 original framework bindings are historical atb21b3bb9. Contracts construction/dependency integration .2.1 is next; pipeline/output/full-private/mapped/canonical obligations remain open.
 
+- `2026-10-10`, `.2.1.0`: Contracts private dependency/default integration passes312 main/six cold assertions,15 exact native/current observation ledgers and16 effective semantic source faults;21 direct suites in140 supplied files, evidence4 and complete book57/two controls pass. Required/optional/bare calls retain actual callbacks in private native-context bindings; public maps/default results/lower fields stay unchanged. Built-in target plus retained definition identity selects native defaults. Actual input_slice, dropped fallback and both bare push paths deny opaque nested publication. All235 original EmitContext bindings are historical at2d8784780. One draft lifetime failure is reproduced on original/current sources and fixed only in the lexical-state fixture; all failed channels/probe inputs remain. Actual lower construction .2.1.1 is next; other owners/pipeline/output/full-private/mapped/canonical obligations remain open.
+
 ## Commit Log
 
 The planning commit belongs to the original tree. Every implementation leaf records its own result and commit
@@ -213,6 +254,7 @@ beside its stable ID; Git is the commit-identity authority.
 
 - `.1`: `PERL-PRIVATE-FACTORY-CAPTURE.1 - isolate native dependency calls`, from clean02345ee21; no push.
 - `.2.0`: `PERL-PRIVATE-FACTORY-CAPTURE.2.0 - bind native facade callback identity`, from cleanb21b3bb9; no push.
+- `.2.1.0`: `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0 - isolate contract dependencies`, from clean2d8784780; no push.
 
 ## Changelog
 
@@ -221,3 +263,11 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Before Contracts production writes, split `.2` into `.2.0` actual facade identity/resolved-owner boundaries and `.2.1` actual contract/default/delegated callback construction plus dependency isolation. This follows current public bridge interfaces and leaves shared OwnerDispatch mechanics unchanged.
 
 - `2026-10-10`: `.2.0` accepts definition-owned EmitContext selection and separate native owner/factory calls, with exact original framework preservation. Contracts .2.1 remains next.
+
+- `2026-10-10`: Before .2.1 production writes, split private required/optional/bare dependency isolation and native defaults (.2.1.0) from actual local/delegated lower construction registration (.2.1.1). Activate .2.1.0 from clean2d8784780.
+
+- `2026-10-10`, `.2.1.0` investigation: Initial main fixture has complete312 TAP with one RED (private binding release), while other311 and cold6 PASS. Retain actual instrument/fixture/source/channels. Reproduce the exact final lifetime block against original/current Contracts and a lexical-state control before changing production or classifying retention. Owner .2.1.0 fixes and verifies this immediately; consumer result remains in flight.
+
+- `2026-10-10`, `.2.1.0` diagnosis/fix: The exact extracted final lifetime block fails on both original and current Contracts without lexical callback state; the lexical-state control passes on both. This reverifies the existing canonical native shared-closure fixture finding, rather than a production retention defect. Preserve failed main312/consumer21 runs, original instrument/fixture/source and actual four probe channels. Give only the lifetime fixture actual lexical state; production bytes stay exact. Final captures use separate final-* paths.
+
+- `2026-10-10`: `.2.1.0` accepts private actual dependency bindings/native default selection with exact original235 preservation. Actual lower construction .2.1.1 remains next.

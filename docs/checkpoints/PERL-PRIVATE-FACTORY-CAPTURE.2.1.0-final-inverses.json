@@ -1,0 +1,172 @@
+{
+  "result": "PASS",
+  "producer_sha256": "f7ae8b11cce38cf939045944c53794a130c34c534b458f3b081ec81ff5ae24ca",
+  "source_sha256": "bf347220b777aba8c0c3b8e30525c6445adcb7b00b9fb467c1f89966a5a91264",
+  "fixture_assertions": {
+    "t/actionir_contract_dependency_capture.t": 312,
+    "t/actionir_contract_dependency_capture_cold.t": 6
+  },
+  "rows": [
+    {
+      "case": "required-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-required-boundary.json",
+      "sha256": "c94bb1fc187d5f602655e3532ad5dee32f92ff7fb57b1ccd816899f07b08f72e",
+      "source_sha256": "b6050c2cc85d6d74baaff97e47368ca1b7b5b4004f86fb81dbf30891036f97e4",
+      "reason": "lower_method_value_expr opaque dependency cannot donate nested publication",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "optional-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-optional-boundary.json",
+      "sha256": "83dc5f4a200e255f1524dc01f6c75e065bb396d5b2f631da8c8068b558513c8b",
+      "source_sha256": "1497d7b7cb8a5fbae5daca0e77c98d83caef6c4fc51985bdde84ed2b98fdda6a",
+      "reason": "lower_dropped_value_statement opaque dependency cannot donate nested publication",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "fallback-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-fallback-boundary.json",
+      "sha256": "83a6aa49097ff83c1773f840caad01d9e7991d83a67e939beddddfb2e31bde3d",
+      "source_sha256": "4eb3b517cb3eaee1e4dcaf97181a02cb3a3ca59577f5e4c30c786de7c2c2c965",
+      "reason": "fallback dropped required dependency cannot donate nested publication",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "bare-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-bare-boundary.json",
+      "sha256": "53c0d29affef1e287189ee5e1dbafe99094b50a7e6d0b4cf7e5d6626352f9fa2",
+      "source_sha256": "8584dda3c4c4fd972748d277a3108ce83905831e5efd090e0d1315e36a742a2d",
+      "reason": "push_child_call_builtin bare dependency cannot donate nested publication",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "custom-default-target",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-custom-default-target.json",
+      "sha256": "671cc4e3c1f96e0395ed7074c1d0a36664bdbc395ff5c2b4cc30b01e480f208b",
+      "source_sha256": "7dff3f8fd43e4b8444044dd3e738ac831145e8da57d1bc579431b22369ed13ba",
+      "reason": "custom default target cannot register even aliased native callbacks",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "same-name-default",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-same-name-default.json",
+      "sha256": "165752a0b1db0aef6544dc5515ba32557dd3a7b749051b92bef539fcf9dd0da3",
+      "source_sha256": "28d748e62d70a77e66ccf20a4240e0095b1bc0bb13cbbbb508dd3050dffb3fa7",
+      "reason": "same-name default replacement remains opaque",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "missing-native-default",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-missing-native-default.json",
+      "sha256": "2851443004ef05274b5ca7f1cff3279ecf91f94bed1b0c204ce0d8ff24bf1965",
+      "source_sha256": "3a407ebb70d7d14e1ada8f76487dc8921f1ef002f0ff2a81962785cd04d4e03f",
+      "reason": "native default selects each actual definition-owned reference once",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "alias-copies",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-alias-copies.json",
+      "sha256": "7fdbf6d4a4cfb330aac47ddead7d83f5a8eab4619c26696d6656dc95161f25bb",
+      "source_sha256": "949ceea08c2962a77e016be426e596538768c37c4141f0be772bc1ae0bf951e1",
+      "reason": "scalar/string first and extra caller aliases survive",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "list-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-list-context.json",
+      "sha256": "36b8602733358942c2a49f7ee2f9bd05de916e1bf05c6374303327149b89c11a",
+      "source_sha256": "7823cced462f95bda5559549ab6294f2302552ba2bf07844c51498e423f3fdc2",
+      "reason": "list/string native dependency context survives",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "void-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-void-context.json",
+      "sha256": "7925bd8b6fe896f09ce43a14770b15a90777bf0b820bc29a882bbc7d83c64563",
+      "source_sha256": "2cef0291531c1aac9d8f3a3bd759d99b5a024255c0dba2da449854d8466add98",
+      "reason": "void/string native dependency context survives",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "once",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-once.json",
+      "sha256": "2caed5ca21b02264f683a2ab600885fe51a2500abbe30ae17fb77c26bba71587",
+      "source_sha256": "d541659622c1f23bdf589c4ba4bf3acd11acad877535901e5689e4e9c8d57746",
+      "reason": "scalar/string actual injected callback executes once",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "incoming-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-incoming-error.json",
+      "sha256": "16befff65dd610a3fbf991c0e85da746b718a32f04b2d37c07f32e8e124182c2",
+      "source_sha256": "b53a14c33658545013cfbdf35705b469cfee5daa9bc4ca578e4df509396b2f40",
+      "reason": "scalar/string native incoming error survives",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "successful-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-successful-error.json",
+      "sha256": "9c5f91aaa6635a0260ceb0bb3a1bbe7f360b99a3a49d0249f19e1bb775881d93",
+      "source_sha256": "50da5c422f7411d8cb53ef40647c7ac66100183203825e5d829cc956a29e36e4",
+      "reason": "scalar/string native successful error effect survives",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "fatal-object",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-fatal-object.json",
+      "sha256": "034e1008d703153774ad438cda317728de6f4284687d1322d3bf8bf867db084e",
+      "source_sha256": "2e2bca124e078a2de8f57ffb5f1f000fe8b605f2dd264966e24750604e465bab",
+      "reason": "scalar/fatal fatal object identity survives",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "callback-retention",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-callback-retention.json",
+      "sha256": "5b7104c5b51c11e0043ceb3cf807f1153b3d8aa9174288e7ace1c7670af0a6d6",
+      "source_sha256": "5bf141ee9f48842d0adb29141909de6eb9c13f9e338ee7264fd26aa1559ed2ef",
+      "reason": "private binding release leaves no global callback cache",
+      "fixture": "t/actionir_contract_dependency_capture.t",
+      "assertions": 312,
+      "observed": "RED"
+    },
+    {
+      "case": "cold-loading",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0-final-inverse-cold-loading.json",
+      "sha256": "ae85a5b033b94eee820b121a87b1b3902f26a5278dd3ad2fac397294dc3d2ee1",
+      "source_sha256": "1167f461cbc1f254c264986a302a360da8983b786637a2f940483dd743b5aaee",
+      "reason": "cold binding keeps SourceEmissions unloaded",
+      "fixture": "t/actionir_contract_dependency_capture_cold.t",
+      "assertions": 6,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Syntax-valid effective source faults; complete coherent main/cold TAP and independently named identity/context/publication/error/lazy-load REDs. Supplied bytes/population restore after every fault."
+}

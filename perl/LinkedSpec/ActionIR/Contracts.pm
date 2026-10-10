@@ -245,7 +245,26 @@ sub default_deps_for_package {
  if (defined($pkg) && length($pkg) && $pkg->can('_lower_dropped_value_statement')) {
   $deps->{lower_dropped_value_statement} = $pkg->can('_lower_dropped_value_statement');
  }
+ # Package identity alone is insufficient: the selector also compares each
+ # actual callback with EmitContext's retained native definition references.
+ if (defined($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+  && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_contract_emission_callback) {
+  LinkedSpec::RuleIR::EmitContext::_register_builtin_contract_emission_callback($_)
+   for values %$deps;
+ }
  return $deps
+}
+
+# Private bindings retain the actual injected callback without changing caller
+# maps or public callback fields. Forward @_ aliases in the original context.
+# Keep require-only consumers lazy when the private channel is absent.
+sub _bind_emission_dependency {
+ my ($callback) = @_;
+ return sub {
+  return LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($callback, @_)
+   if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
+  return $callback->(@_)
+ }
 }
 
 sub _require_lowering_deps {
@@ -255,11 +274,11 @@ sub _require_lowering_deps {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::Contracts::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb
+  return _bind_emission_dependency($cb)
  };
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
  my $lower_dropped_value_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_dropped_value_statement}) eq 'CODE')
-  ? $deps->{lower_dropped_value_statement}
+  ? _bind_emission_dependency($deps->{lower_dropped_value_statement})
   : sub {
    my ($code) = @_;
    my $lowered = $lower_method_value_expr->($code);
@@ -429,7 +448,7 @@ sub typed_source_projection_rows {
 sub _build_call_and_dispatch_contracts {
  my ($label, $deps) = @_;
  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
-  ? $deps->{bare_symbol_kind}
+  ? _bind_emission_dependency($deps->{bare_symbol_kind})
   : sub { return undef };
  return [
   {

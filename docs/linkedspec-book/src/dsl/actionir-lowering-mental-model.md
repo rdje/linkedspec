@@ -1040,6 +1040,24 @@ shares referenced objects, and restores the caller's successful error state;
 private isolation preserves those existing rules. Contract construction and
 pipeline activation are still separate integration steps.
 
+Contracts now isolate injected callbacks through private bindings.
+Their public default maps and returned callback fields keep the actual original
+references. Private required, optional dropped-value and bare-type bindings
+retain and invoke the actual callback with the original argument aliases and
+scalar/list/void context. They stay lazy when the emission channel is absent.
+Only the built-in EmitContext target can select native defaults, and each actual
+reference must also match its retained native definition. A custom target cannot
+register defaults merely by aliasing those native references; replacing a native
+public name with another callback also leaves that replacement opaque.
+
+For example, an opaque `input_slice(0, 1)` dependency can invoke a producer and
+return the equal literal `same`. The contract still returns `same`, with the same
+native effect order and scalar call, while its enclosing capture receives no
+nested publication. The optional dropped-value fallback and both bare child-call
+push paths follow the same rule. Private bindings release retained callbacks
+when they are released. Actual contract lower registration at construction sites
+and pipeline scope activation remain later integration steps.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
