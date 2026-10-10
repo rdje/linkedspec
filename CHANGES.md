@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0 — Set-key required capture
+
+Bind only the required set-key resolver return. Preserve eager roles before AST fast path, actual
+parser/selected arrays and readonly arities, normalized trim slots versus local target/key/value
+copies, shared extractor/binding target, maps and native context/error/fatal/reference/results.
+Complete539 main/17 cold pass;15 native-current callback,37 controlled branch and three public
+Toolbox rows match. Identical539 TAP retains15 original publication REDs/524 controls. Three
+syntax-valid faults, supplied56 suites/176 files, evidence5/original300 restoration/book89/3 and
+readonly296-input69937-byte publication pass. Every original assignment hash/proof field stays
+historical at ea6926fef.
+
+Split .5.3 before implementation into set-key, push and regex/undefined-return children. Book
+teaching distinguishes normalized-array trim aliases from local lowering slots, and statement
+mutation from pure-value generated code. No instrument correction, new public admission or old
+measurement refresh. Knowledge1341/10286, history/whitespace and normal hooks govern landing; both
+required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained.
+TYPE-REFERENCE-BOOK and existing regex repairs stay separately owned.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 — Assignment required capture
 
 Bind only three required resolver returns in assignment wrapper/scalar assignment/array append

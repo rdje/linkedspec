@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: assignment required .3.1.5.2 is verified; normal hooks govern ordinary landing before remaining statement helpers .5.3. TYPE-REFERENCE-BOOK stays queued; broader private admissions remain open.
+Full PNT: set-key required .3.1.5.3.0 is verified; normal hooks govern ordinary landing before push required .5.3.1. TYPE-REFERENCE-BOOK stays queued; broader private admissions remain open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2` — Three required resolver returns only;938/cold17/native27/branches60/public5/inverse9, paired27 RED/911 controls/938 GREEN and supplied54/174/evidence5/original306 restoration/book89/3 pass. Readonly300-input71043-byte publication agrees. Both syntax checks/public Phase0 PASS1035 with full channels; Knowledge1340/10280, history/memory/claim/diff and normal hooks govern landing.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0` — One required resolver return;539/cold17/native15/branches37/public3/inverse3, paired15 RED/524 controls/539 GREEN and supplied56/176/evidence5/original300 restoration/book89/3 pass. Readonly296-input69937-byte publication agrees. Both syntax checks/public Phase0 PASS1035 with full channels; Knowledge1341/10286, history/memory/claim/diff and normal hooks govern landing.
 
 ## Next Action
 
-Activate remaining statement required .3.1.5.3 from clean HEAD; preserve300 assignment live inputs and refine actual helper callback/alias paths before production writes.
+Activate push required .3.1.5.3.1 from clean HEAD; preserve296 set-key live inputs and refine actual raw/effective argument and repeated callback paths before production writes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0` — required539/cold17/native15/branches37/public3/inverse3, paired15 RED/539 GREEN, supplied56/176/evidence5/original300/book89/3; readonly296/69937; public Phase01035/full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2` — required938/cold17/native27/branches60/public5/inverse9, paired27 RED/938 GREEN, supplied54/174/evidence5/original306/book89/3; readonly300/71043; public Phase01035/full channels.
 - `REPO-HYGIENE.15` — dated13433 parent rows/15594802423 bytes, separate Rust metadata, fresh OS/size/traversal/four channel controls, zero removals; historical commit projections repaired; readonly19/7303; public guidance unchanged.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1` — required574/cold15/native9/branches52/public9/inverse6, paired9 RED/574 GREEN, supplied52/172/evidence5/book89/3; original307 preserved; original instruments retained/replayed; public Phase01035/full channels.
@@ -29,7 +30,6 @@ Activate remaining statement required .3.1.5.3 from clean HEAD; preserve300 assi
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead and blocking audit/proof repairs accepted at268891fdf; all10/canonical receipt/CLI66x2/Phase0 1035 pass.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` — main223/cold4, paired18 RED/223 GREEN, callers20/roles6/validation1/inverse6, supplied33/152, evidence5/book57/2; original242 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0` — main177/cold4, paired15 RED/177 GREEN, callers15/roles5/inverse6, supplied31/150, evidence5/book57/2; original240 and wrong-prefix guard retained.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` — main277/cold4, paired24 RED/277 GREEN, callers25/roles8/inverse9, supplied29/148, evidence5/book57/2; original262 retained.
 
 
 ## History

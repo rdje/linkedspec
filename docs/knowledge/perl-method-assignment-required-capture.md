@@ -11,10 +11,10 @@ answers:
   - "do private legacy assignment branches admit removed public selectors"
   - "which readonly command reviews assignment required isolation"
 date: 2026-10-10
-status: bounded assignment required proof verified; ordinary landing and broader admissions separate
+status: historical bounded assignment required proof accepted at ea6926fef; later statement helpers remain separate
 tags: [perl, actionir, callbacks, capture, aliases, assignment]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py; separately final-review.py and publish-claim.py under that wrapper. Readonly defaults; capture/freezer/--capture are one-shot writers. Earlier generalized-return proof requires accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including its original live claim. MEMORY.md owns the current frontier."
+reverify: "After later source/book changes these assignment commands require accepted ea6926fefee33cbf77fe512a821d7ba2a4ffc14f Git inputs including the original live claim. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py; separately final-review.py and publish-claim.py under that wrapper. Readonly defaults; capture/freezer/--capture are one-shot writers. Earlier generalized-return proof requires accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including its original live claim. MEMORY.md owns the current frontier."
 ---
 
 Only the required resolver returns in `_lower_assign_statement`,

@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "producer_sha256": "3a74c9688ef3effcc5d9fa9d06edd95644f002f3d8afc9811496b6416eb98852",
+  "source_sha256": "4e9309ff948164e673aa7fbe4d4562db9c31e075891ea36cb30a63fc691f0ade",
+  "assertions": 539,
+  "rows": [
+    {
+      "case": "set-key-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-inverse-set-key-required.json",
+      "sha256": "11482e372d03207c9dd72254462c666f1f0e3c4152a1062a9aabba18fba60a6e",
+      "source_sha256": "559a5d993694430229e1f298be91a2d58deb51302d05f204f19b32b0cfb921f6",
+      "reason": "_lower_set_key_statement/parse_method_function_expr/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "set-key-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-inverse-set-key-identity.json",
+      "sha256": "f1393f2f9f49a35e006b4289ee38564c8a71310ed53a03d9baaf06d73a6e2c21",
+      "source_sha256": "2ef22e5c405bd03e41e55adabb92ced5946c2cc403bce37490b23aeda0549cd0",
+      "reason": "_lower_set_key_statement/parse_method_function_expr/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "set-key-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-inverse-set-key-diagnostic.json",
+      "sha256": "3900b83410c2fc361089e3f03d20669cdfaf951c35d70e1352e6f7480abbab4b",
+      "source_sha256": "591397295f8b0e89d9540b6344f77c0357a1250d12bd5bd2651520ae3b1edcf5",
+      "reason": "_lower_set_key_statement/parse_method_function_expr required diagnostic retains native selection",
+      "observed": "RED"
+    }
+  ]
+}

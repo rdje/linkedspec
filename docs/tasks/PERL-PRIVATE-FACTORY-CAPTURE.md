@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / remaining statement required callbacks next
+- Status: `active` / push required callbacks next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -536,15 +536,53 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal hooks govern clean landing; activate remaining statement helpers .5.3 only after this commit and brief0/clean verification. No push or broader admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3`
-  Status: `pending`
-  Goal: Remaining helper statement required callbacks; refine/split before writes if needed.
+  Status: `active` / split before implementation into bounded helper families
+  Goal: Remaining helper statement required callbacks; preserve independent native selection and alias proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2`
-  Owned paths: Required resolver seams in _lower_set_key_statement, _lower_push_statement, _lower_regex_subst_statement and _lower_return_undef_statement; bounded source-bound fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls stay .3.2.
+  Owned paths: _lower_set_key_statement, _lower_push_statement, _lower_regex_subst_statement and _lower_return_undef_statement required resolvers; source-bound fixtures/proof/Knowledge/book/continuity. Optional/direct calls stay .3.2.
+  Claim verification: none: Routing/refinement only; each child owns its actual measurement.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`.
+  Refinement: Actual four bodies have separate key normalization, repeated raw/effective push argument handling, and regex literal/flags versus undefined-return paths. Keep set-key, push and regex/undefined-return proof/commits separate. Parent closes only when all children are verified; no independent broader admission inferred.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0`
+  Status: `done` / bounded one-resolver set-key proof verified
+  Goal: Isolate required set-key dependencies without changing eager validation or actual normalized argument slots.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2`
+  Owned paths: Only required resolver return in _lower_set_key_statement, bounded native/cold fixtures and retained producers/proof/claim, original assignment preservation, Knowledge/book/continuity.
+  Verification tier: `focused`
+  Focused checks: Preserve all300 accepted assignment bindings before bound writes. Establish five eager roles before AST fast path, actual parser/normalizer arrays and literal arities, three trim slots and shared local target/key slots, scalar context/error/fatal/reference/effect/public-map contracts. Bound AST/mutation/uniform target/index helpers explicitly. Retain native-current ledgers, identical original/current TAP, effective source faults, supplied54/174 seed plus bounded fixtures, evidence/original-binding restoration, full recursive book and required syntax/public Phase0 compatibility; normal memory/Knowledge/history/claim/doctrine/diff checks govern landing.
+  Canonical trigger: none for one private required resolver return; optional/direct, complete helper/AST/language, mapped/output/full-private and independent canonical admissions stay separate.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json`
+  Acceptance: Native selection, argument slots and outcomes preserved; commit before push child.
+  Native checkpoint: Complete539 TAP retains exactly15 publication REDs/524 passing controls; native15 callback outcomes/37 controlled branches/three public Toolbox rows precede the one required resolver return edit. Normalizer literal arities remain readonly. Trim aliases actual normalized array slots, whereas extractor/key lowerer receive local copies; extractor and binding helper share the same local target. Native-current observations match; both required syntax checks and supplemental public Phase0 PASS1035 with complete channels. Normal hooks govern ordinary landing.
+  Activation: Assignment .5.2 accepted ea6926fef with all10 doctrines, post-pointer/brief0 and clean Git. Current four helper bodies, RuleIR EmitContext bridges and relevant public helper reference were read. Set-key acquires parser, scope normalizer, hash extractor, key lowering and trim before AST fast path. Three normalized argument slots are trimmed before nonempty guards; secondary AST/mutation/uniform helpers remain controls. Preserve300 original bindings and establish native observations before source edits.
+
+  Verified bounded result: One required resolver return only. PASS539 main/17 cold,15 exact native-current callback outcomes,37 independently enumerated branches/three public Toolbox observations, paired15 original publication REDs/524 controls/all539 GREEN, three syntax-valid source faults and supplied56 suites/176 files. Five invoked roles preserve eager selection, readonly normalizer arities, actual parser/selected arrays, normalized trim slots versus local scalar copies, shared extractor/binding target and contexts/error effects/fatal/reference/maps/results.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-* retain complete producer/native/current/TAP/fault/consumer channels/input identities. Evidence5 and original300-binding corruption/restoration pass. Full recursive book57+32/three controls and readonly296-input69937-byte publication pass. No instrument correction or old runtime refresh; both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; normal hooks govern ordinary landing.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0 - isolate set-key required callbacks`
+  Handoff: Normal hooks govern clean landing; activate push .5.3.1 only after this commit and brief0/clean verification. No broader admission or push.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1`
+  Status: `pending`
+  Goal: Isolate required push callbacks while preserving child-call precedence and repeated raw/effective argument handling.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0`
+  Owned paths: Only required resolver return in _lower_push_statement; bounded fixtures/proof/preservation/Knowledge/book/continuity.
   Planned tier: `focused`
-  Planned focused proof: Actual native callback identities, guards/aliases/contexts/effects/errors/results, opaque publication separation, original-input preservation, complete retained faults/consumer/book evidence and required public compatibility.
-  Planned canonical boundary: none for bounded private implementation; original independent admissions remain open.
-  Planned claim record: none: Planning only; declare actual source-bound measurement at activation.
-  Acceptance: Preserve native caller behavior, commit before the next child and infer no separate parent admission.
+  Planned focused proof: Actual parser/extractor/trim/primitive roles; two/three/other arity and ambiguous/bare/typed target branches, actual raw versus effective array slots and repeated trim effects, contexts/errors/maps/results, source faults/consumers/book/required public compatibility.
+  Planned canonical boundary: none for bounded private resolver; independent admissions remain open.
+  Planned claim record: none: Planning only; declare source-bound measurement at activation.
+  Acceptance: Commit verified child before regex/undefined-return child; no child-call or public-language expansion.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`
+  Status: `pending`
+  Goal: Isolate regex-substitution and undefined-return required callbacks with native literal/flags and parser/normalizer guards.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1`
+  Owned paths: Only required resolver returns in _lower_regex_subst_statement and _lower_return_undef_statement; bounded fixtures/proof/preservation/Knowledge/book/continuity.
+  Planned tier: `focused`
+  Planned focused proof: Actual eager extractor/strip/trim and parser/normalizer acquisition, copied pattern/replacement/flags including default temporary, actual arity array/literals, native contexts/errors/maps/results, source faults/consumers/book/required public compatibility. Existing quoted-flags/callback/receiver defects remain owned by SESSION-STARTUP-READING.59; this required capture scope does not admit their repair.
+  Planned canonical boundary: none for bounded private resolvers; independent admissions remain open.
+  Planned claim record: none: Planning only; declare source-bound measurement at activation.
+  Acceptance: Commit verified child and close routing parent before receiver/parser required .3.1.6; no broader parent admission inferred.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6`
   Status: `pending`
@@ -629,7 +667,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3` | `pending` | Assignment required .5.2 verified; preserve300 live inputs and refine remaining statement helper required seams from clean HEAD. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` | `pending` | Set-key required verified; preserve296 live inputs and refine actual push raw/effective argument and repeated callback paths from clean HEAD. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -853,7 +891,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Supplied54 suites/174 files PASS. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained. Full transitive/private/canonical admission remains separately owned.
 - [x] **LOCKSTEP** — Knowledge1340/10280 and book teaching/render pass. Roadmap/index/live/history/memory and whitespace align; exact staged memory/claim and normal hooks govern clean landing before remaining statement helpers .5.3.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0
+
+- [x] **REPRODUCE / ISSUE** — Identical539 TAP against clean ea6926fef retains15 publication REDs/524 controls. Native15/branches37/public3 precede the one required resolver edit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The required resolver returns actual callbacks while parent publication stays active. Actual child eligibility and parent packet lookup distinguish nested donation and borrowed identity.
+- [x] **FIX** — Bind only the set-key required resolver return. Preserve eager roles before AST fast path, actual parser/selected arrays and readonly arity literals, three trim slots versus local target/key/value copies, shared extractor/binding target, native contexts/effects/errors/fatal/reference/maps/results. Secondary helpers remain explicit controls.
+- [x] **ADDRESSED (verified)** — PASS539/cold17/native15/branches37/public3/inverse3, paired15 RED/524 controls/539 GREEN. Supplied56/176/evidence5/original300 restoration/book89/3 and readonly296-input69937-byte publication pass. No instrument correction or old observation refresh.
+- [x] **NO REGRESSION** — Supplied56 suites/176 files PASS. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained; full transitive/private/canonical admission stays separately owned.
+- [x] **LOCKSTEP** — Knowledge1341/10286 and book teaching/render pass. Roadmap/index/live/history/memory and whitespace align; exact staged memory/claim and normal hooks govern clean landing before push required .5.3.1.
+
 ## Verification Log
+
+- `2026-10-10`, `.3.1.5.3.0`: Bounded539/cold17/native15/branches37/public3/inverse3, paired15 RED/524 controls/539 GREEN, supplied56/176/evidence5/original300 restoration/book89/3 and readonly296-input69937-byte publication PASS. Actual parser/selected arrays, readonly arities and trim/local scalar slots remain exact. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained. History/memory/claim/diff and normal hooks govern clean landing.
 
 - `2026-10-10`, `.3.1.5.2`: Bounded938/cold17/native27/branches60/public5/inverse9, paired27 RED/911 controls/938 GREEN, supplied54/174/evidence5/original306 restoration/book89/3 and readonly300-input71043-byte publication PASS. Native eager roles, readonly kind/source and repeated trim slots remain exact. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained. History/memory/claim/diff and normal hooks govern clean landing.
 
@@ -921,6 +970,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.2.2.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0 - isolate local return required callbacks`, from clean268891fdf; no push.
 
 - `.3.1.5.2`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 - isolate assignment required callbacks`, from clean2b1f949b8; no push.
+
+- `.3.1.5.3.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0 - isolate set-key required callbacks`, from clean ea6926fef; no push.
 
 ## Changelog
 
@@ -1043,3 +1094,7 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Hygiene.15 accepted at2b1f949b8 with all10 doctrines, post-pointer/brief0 and clean Git. Activate assignment required .5.2 with three planned required resolver seams. Preserve306 generalized-return live inputs before bound writes, then establish eager validation, distinct initializer kind/source aliases and repeated trim behavior. Secondary helpers/optional selection and broader admissions remain separate; no source edit yet.
 
 - `2026-10-10`: Assignment .5.2 retains27 native callback outcomes/60 branches/five public Toolbox rows before exactly three required resolver edits. All938 current TAP pass against the identical27-RED/911-control original population. Cold17, nine effective source faults, supplied54/174, evidence5/original306 restoration/book89/3 and readonly300/71043 proof pass. No fixture correction needed; both required syntax checks/public Phase0 PASS1035 with full channels retained; normal hooks govern ordinary landing.
+
+- `2026-10-10`: Assignment required .5.2 accepted at ea6926fef with all10 doctrines, post-pointer/brief0 and clean Git. Split remaining helper .5.3 before writes into set-key .0, push .1 and regex/undefined-return .2; activate .0. Five eager set-key roles and actual normalized argument slots need native proof before the one required resolver edit. Existing regex discrepancy owners remain separate.
+
+- `2026-10-10`: Set-key .5.3.0 retains15 native outcomes/37 controlled branches/three actual public Toolbox rows before exactly one required resolver edit. All539 current TAP pass against identical15-RED/524-control original names. Cold17, source faults3, supplied56/176, evidence5/original300 restoration/book89/3 and readonly296/69937 proof pass. No instrument correction needed; both required syntax checks/public Phase0 PASS1035 with full channels retained; normal hooks govern ordinary landing.

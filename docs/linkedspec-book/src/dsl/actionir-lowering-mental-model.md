@@ -1469,6 +1469,34 @@ selected actual callback's identity. Secondary AST, value, tracked-assignment,
 push and migration helpers are explicit controls in this bounded verification;
 complete helper and language admission remain separate.
 
+Set-key required callbacks now have separate private capture boundaries.
+The statement owner requires its parser, optional-scope argument normalizer,
+hash-symbol extractor, key lowerer and trim callback before the AST fast path.
+The normalizer receives the actual parser argument array and readonly literal
+arity bounds `3, 3`. Its selected result supplies the target, key and value slots
+that trim receives. All three trim calls occur before the nonempty guards, so a
+failed first trim still preserves the native effects of the later trim calls.
+
+Trim can mutate those actual normalized-array slots. Its returned values become
+separate local target, key and value scalars. Hash extraction and the later
+uniform-binding helper share the local target; key lowering receives the local
+key, and mutation-value lowering receives the local value. A callback's local
+target mutation therefore reaches the binding helper while leaving the earlier
+normalized target slot unchanged. Public dependency maps keep actual callbacks,
+and native scalar context, successful error effects and fatal objects survive.
+
+The existing public distinction also remains visible in generated code:
+`set_key(meta, "key", 1)` lowers to a binding-runtime index update, while
+`return(set_key(meta, "key", 1))` emits the pure helper's copied hash value.
+`set_key(hash(meta), "key", 1)` retains the removed-selector diagnostic.
+These observations do not add a new assignment form or expand accepted arity.
+
+Known and opaque required children cannot donate equal-text publication to the
+enclosing statement; known capture uses the actual selected callback identity.
+Secondary AST, mutation-value, uniform-target and index-assembly helpers are
+explicit controls in this proof. Their complete behavior, optional/direct
+callbacks and broader language admission remain separate.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Set-key normalization arrays and local lowering slots
+
+Set-key validates five required roles before AST fast path. Normalization receives the actual parser
+argument array and readonly literal arities3/3. Trim receives the selected array slots and invokes
+all three callbacks before nonempty guards. Returned trim values become local target/key/value
+scalars; hash extraction and binding share the local target, while mutation lowering receives the
+local value. Normalizer-array effects survive undefined outcomes; a distinct selected-array control
+preserves separate parser/normalizer identities.
+
+Native15/branches37/public3 and identical539 TAP retain15 original publication REDs/524
+controls/all539 current GREEN. Faults3, supplied56/176, evidence5/original300 restoration/book89/3
+and readonly296-input69937-byte publication pass. Only one required resolver return changes.
+Secondary helpers are controls; statement index update, pure copied-value source and
+removed-selector rejection retain current generated-code distinctions. No instrument correction or
+old runtime refresh. Earlier assignment replay requires accepted ea6926fef inputs; only one live
+durability mode/revision changes. Both required syntax checks and supplemental public Phase0
+PASS1035/1035 with full channels retained. Normal hooks govern clean landing.
+
 ## 2026-10-10 — Assignment eager callbacks and native scalar slots
 
 The wrapper validates six required roles before target selection, in extractor scalar/array/hash,
