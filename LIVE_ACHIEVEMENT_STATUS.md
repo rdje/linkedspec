@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: AST assignment .3.1.3.3 bounded proof and supplemental public compatibility are verified; ordinary hooks govern landing. Main method/value .3.1.4 follows a clean commit. TYPE-REFERENCE-BOOK stays queued; broader private admissions remain open.
+Full PNT: main method/value .3.1.4 bounded proof and supplemental public compatibility are verified; normal doctrine hooks govern landing. Scalar/return/mutation .3.1.5 follows clean commit. TYPE-REFERENCE-BOOK stays queued; broader private admissions remain open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3` — One required key resolver on hash-index fallback now binds its private capture. Native lazy guards, local key copies, actual callbacks/maps/fatal objects, new tracked target spans and direct results survive. PASS864/cold8/native3/branches66/inverse3; paired3 original REDs/861 controls/864 GREEN. Supplied46 suites/166 files, evidence5, correct original283-binding corruption/restoration, book89/3 and readonly291-input69504-byte publication pass. Initial wrong-target preservation producer/result/reviewer stay exact; independent readonly supplied-tree replay refuses its ineffective control before corrected actual RED/restored PASS. Original283 proof/hash fields stay historical at4fde89c19. Both syntax checks and supplemental standard public Phase0 PASS1035/1035 with complete channels retained separately; full transitive input-capsule limitation explicit. Claim110/139/seven existing gaps and Knowledge1336/10239 pass. Stale planning-card projection repaired; ordinary final checks/hooks govern landing.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` — One main required resolver binds separate captures while preserving eager validation, locally unused inference, lazy initializer and key re-acquisition. PASS518/cold10/native42/branches23/inverse3, paired42 original REDs/476 controls/518 GREEN, supplied48 suites/168 files/evidence5/book89/3 and readonly299-input69961-byte claim. Original291 proof/hash fields stay historical at049e1ba53. Actual native drafts reproduce read-only kind, shape-copy and seed-count errors; separate deterministic replay normalizes only generated traceback paths and retains full raw channels. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with complete channels retained and full transitive capsule limit explicit. Knowledge1337/10249, memory/task/history/whitespace pass; exact staged claim verification and all normal doctrines govern landing.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` from clean HEAD; preserve291 current inputs, then refine actual required paths and safe families in main method/value before bound writes.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5` from clean HEAD; preserve299 current inputs, then split actual scalar/return/mutation required seams into bounded children before production writes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` — main518/cold10/native42/branches23/inverse3, paired42 RED/518 GREEN, supplied48/168/evidence5/book89/3; original291 preserved; native drafts retained/replayed; public Phase01035 with full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3` — main864/cold8/native3/branches66/inverse3, paired3 RED/864 GREEN, supplied46/166/evidence5/book89/3; prior283 preserved; wrong-target instrument retained/rejected; public Phase01035 with full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` — main858/cold8, paired12 RED/858 GREEN, native12/branches44/role1/inverse3, supplied44/164/evidence5/book89/3; original356 preserved; public Phase01035/1472 seconds; per-type book follow-up queued.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — finite capacity222/30/23/4, exact suffix112/27100, original279, book89/3 and356-input claim; index/separator repairs retain all initial evidence; canonical receipt governs landing.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` from clean HEAD; preserve291 curre
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.0` — main426/cold6, native2x19/inverse24, supplied25/144, evidence4/book57/2; original244 and initial30 captures retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1` — main447/cold6, native2x174/inverse20, supplied23/142, evidence4/book57/2; original248 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0` — main312/cold6, native15/inverse16, supplied21/140, evidence4/book57/2; original235 and lifetime diagnosis retained.
-- `PERL-PRIVATE-FACTORY-CAPTURE.2.0` — main345/cold5, native30, inverse13, supplied19/138, evidence4/book57/2; original233 preserved.
 
 ## History
 

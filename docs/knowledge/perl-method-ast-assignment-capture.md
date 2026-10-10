@@ -11,10 +11,10 @@ answers:
   - "where are the original283 array end inputs preserved"
   - "which readonly command reviews AST assignment callback isolation"
 date: 2026-10-10
-status: bounded runtime/book proof verified; supplemental public compatibility and ordinary hooks govern landing
+status: historical accepted049e1ba53 bounded runtime/book proof
 tags: [perl, actionir, callbacks, capture, ast, assignment, guards, aliases, verification]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3 retains864 main/8 cold assertions,3 complete native-current callback ledgers and66 controlled branch rows. Identical864 assertion names retain3 original publication REDs/861 passing controls/all864 current GREEN. Three effective syntax-valid semantic faults, supplied46 suites/166 inputs, five evidence controls, original283-binding corruption/restoration and complete book57+32/three controls pass. The first wrong-target preservation instrument and actual result remain exact; independent review reproduces its readonly validation rejection."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier array-end reviewers require accepted4fde89c1958faf4057ab80eb7e7cd50962c7ac3c Git inputs, including the original live claim. MEMORY.md owns the current frontier."
+reverify: "These assignment commands require accepted049e1ba537f2bde635b2c0fed31fe83f6b3c129b Git inputs after later source/book changes. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier array-end reviewers require accepted4fde89c1958faf4057ab80eb7e7cd50962c7ac3c Git inputs, including the original live claim. MEMORY.md owns the current frontier."
 ---
 
 Only the required resolver return in `_lower_ast_assignment_operator_statement` changes to a private emission

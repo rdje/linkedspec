@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Main method/value acquisition order and path-specific aliases
+
+The shared required resolver validates14 eager callback roles before its undefined-input guard. Inference is
+locally validated-only. AST hash fallback re-acquires the key callback after target/fast-path/source checks, so
+a public-map replacement after eager acquisition affects that path; legacy has_key retains the earlier callback.
+Initializer validation remains lazy after valid aggregate target/direct shape checks. Its container-kind literal
+is read-only, while the source is a writable local copy. Shape-member trim copies a CSV element; constructor trim
+can alias the returned CSV slot. Parser arguments and split statements also retain actual scalar-slot aliases,
+and the final pipeline receives the actual source-span reference. Covered normalizer arity/scope profiles remain
+native. Explicit secondary controls bound these owner claims without complete helper/AST/language admission.
+
+Source-bound518/10/3, native42/branches23, paired42 RED/476 controls/518 GREEN, supplied48/168, evidence5 and book89/3
+pass. Prior291 bindings remain historical at049e1ba53; current299-input claim69961 bytes is independently reproduced.
+Keep rejected fixture/reviewer premises and exact native channels instead of rewriting measurements: read-only
+kind mutation, false shape-slot alias, and166 original inputs confused with168 including fixtures. The first replay
+report contains a random supplied path in its Python traceback and fails repeatable full equality; preserve it.
+The separate replay checks every original field/outcome, normalizes only that generated path and retains full
+actual stderr separately. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with complete channels retained; the full transitive input capsule remains outside that compatibility run.
+
 ## 2026-10-10 — Assignment fallback validation and target-span copies
 
 The AST assignment owner validates its required key callback later than the scalar-held helper: fallback first

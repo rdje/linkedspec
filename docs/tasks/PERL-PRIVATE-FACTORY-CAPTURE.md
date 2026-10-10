@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / AST assignment verified; main method/value next
+- Status: `active` / scalar-return-mutation required callbacks next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -443,15 +443,24 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4 - admit finite guarded AST history capacity`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4`
-  Status: `pending`
-  Goal: Main method/value lowering required dependency boundaries; split further before writes if needed.
+  Status: `done` / focused-signoff-complete; normal doctrine hooks govern landing (activated from clean `049e1ba537f2bde635b2c0fed31fe83f6b3c129b`)
+  Goal: Isolate main method/value required dependencies with native eager/lazy acquisition, alias and controlled caller-path proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`
-  Owned paths: MethodLowering required seams in _lower_method_value_expr; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
-  Planned tier: `focused`
-  Planned focused proof: Actual native/current caller behavior, opaque dependency separation, contexts/aliases/effects/errors/public maps, retained source-bound faults/consumers and complete relevant book.
-  Planned canonical boundary: none for bounded private implementation; original full-private/mapped/canonical owners retain admission.
-  Planned claim record: none: Planning only; declare source-bound measurement at activation.
-  Acceptance: Preserve actual public references and native behavior. Commit each bounded family before advancing; no independent parent admission inferred.
+  Owned paths: Only the required resolver return in _lower_method_value_expr; bounded fixtures/retained source-bound producer/reviewer/claim, Knowledge/book/continuity. Public maps/callback fields and complete secondary-helper/AST grammar/language behavior remain separate; optional/direct calls stay .3.2.
+  Verification tier: `focused`
+  Focused checks: Refine every eager/lazy required role and actual invocation before production writes. Preserve eager CODE validation before undefined-input guard, locally validated-only inference, lazy initializer and key re-acquisition, actual callbacks/maps/spans/returned arrays, local copies versus shared source/argument slots, native contexts/effects/errors/fatal objects and opaque/known publication separation. Explicit secondary controls and original/current full native observations bound representative actual owner paths, AST/legacy bridge and recursive/local adapters without complete helper/language admission. Retain identical complete TAP, effective syntax-valid source faults, supplied46/166 consumer seed plus bounded fixtures, original291-input preservation with actual corruption RED/restoration, evidence controls, complete recursive-include book, standard syntax/public Phase0 and ordinary doctrines/history/memory/diff. Split before writes if actual scope exceeds a safe slice.
+  Canonical trigger: None for a bounded private required resolver. Complete helper/AST/language, optional/direct, output/mapped/full-private/parent and final push admissions stay independent.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json`
+  Acceptance: Preserve all291 current inputs at clean049e1ba53 before bound writes; retain every old proof/hash field without refresh. Change only the selected required resolver seam after native proof. Preserve actual callback selection, acquisition/guard order, native argument aliases/copies/results and exact diagnostics. Commit before .3.1.5; no independent parent admission inferred.
+  Progress: Clean assignment commit has all10 doctrines, required syntax/public Phase01035, full compatibility channels, post-pointer/brief0 and clean Git. Preliminary owner reads find eager validation plus additional acquisition inside local AST adapters; inventory actual paths and aliases before choosing final bounded fixtures. Preserve original bindings before production/book/card writes.
+  Refined scope: Original291 inputs are frozen at049e1ba53. Main resolver has14 eager required roles; infer_scalar_container_kind is locally validated without local invocation. AST assignment re-acquires the key callback and lazily acquires lower_declare_initializer_expr. Bounded native proof reaches14 invoked roles in42 string/undefined/fatal rows plus23 alias/arity/lazy/result/guard branches. Identical518 TAP retains42 publication REDs and476 passing controls before the sole production edit; cold10 passes. Explicit helper controls exclude complete nested-helper/AST/language admission.
+  Owned instrument defects: Initial initializer probe attempted to mutate its read-only kind literal; retain draft fixture/result and correct the probe to inspect read-only flags and mutate the writable source copy. Initial shape-member alias assertion wrongly expected the CSV slot: actual lower_shape_member_expr copies it before trim; retain alias draft fixture/TAP and distinguish unchanged shape CSV slots from aliased constructor slots. Both are fixture premises, not production defects; independently replay the retained native drafts before signoff. No original capture/hash is refreshed.
+  Review recovery: Copied reviewer confused166 original seed inputs with168 including the two fixtures; retain draft/rejection and change only that assertion. First native draft replay retains a random supplied-directory prefix in its Python traceback, making full JSON equality unstable on the next read-only run. Preserve that producer/result unchanged; draft-replay-review.py separately repeats actual replays, compares every original input/result field and normalizes only that generated traceback path for deterministic equality, retaining full actual channels separately. Fresh readonly replay passes. An early final composition rejects this instability and an attempted publication refuses its absent final-review prerequisite; no claim was published. The framework card's separate stale local-return/value-next projection is repaired by routing current selection to MEMORY/task rather than duplicating it.
+  Result: Bounded PASS518 main/10 cold;14 actually invoked roles/42 native-current callback rows and23 controlled branch rows. Identical518 TAP names retain42 original publication REDs/476 passing controls/all518 current GREEN. Three syntax-valid semantic faults, supplied48 suites/168 files, five actual reviewer corruptions, original291-binding corruption/restoration, three actual native draft replays and complete book89/three controls PASS. Readonly publication gates299 live inputs/69961 bytes; every old291 binding/proof field remains exact at049e1ba53.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-* retain actual producers, complete channels/input populations, mutants, evidence counterfactuals and original/repaired draft replays. The only normalized field is the generated supplied-directory prefix in the Python draft-review traceback; complete raw stderr stays retained. Both original Perl draft channels remain byte-exact. Supplemental standard compatibility retains full channels separately and does not reconstruct a complete transitive capsule.
+  Reverify: final-review.py, preservation-control.py and publish-claim.py under tools/run_python_project_data.sh; defaults readonly. draft-replay-review.py owns repeatable actual native replays; the initial draft-review producer/result remain exact. Capture/freezer/--capture are one-shot writers. Prior assignment reviewers require accepted049e1ba53 Git inputs including its original live claim.
+  Verification: Bounded composed proof and readonly299-input publication PASS; Knowledge1337/10249 generated. Both chronology checks, memory architecture and whitespace PASS. Both required syntax checks and supplemental standard public Phase0 PASS1035/1035 with complete channels retained. Pre-stage claim scan checks accepted index only; exact final staged normal doctrine hooks admit the new record. Scalar/return/mutation .3.1.5 follows a clean commit; complete helper/AST/language/optional/direct/output/mapped/full-private/parent/canonical admissions remain separate.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4 - isolate main method value required callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5`
   Status: `pending`
@@ -523,7 +532,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` | `pending` | Activate main method/value from clean HEAD; preserve291 current inputs and refine actual required paths/safe families before bound writes. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5` | `pending` | Main .3.1.4 verified; activate from clean commit, preserve299 inputs and split scalar/return/mutation helpers before production writes. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -711,7 +720,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035, with complete channels retained. Full transitive capsule/private/canonical admissions stay with existing parent owners; no runtime benchmark or output-volume comparison is inferred.
 - [x] **LOCKSTEP** — Book teaching/render89/3 and Knowledge1336/10239 generation pass; stale planning-card projection repaired. Claim110/139/seven existing gaps, exact staged memory handoff, both history checks, matching roadmap projections and whitespace pass. Fresh readonly publication remains291 inputs/69504 bytes after complete compatibility retention. Ordinary doctrine hooks govern landing before main method/value .3.1.4.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.4
+
+- [x] **REPRODUCE / ISSUE** — Identical518 TAP against clean049e1ba53 retains42 publication REDs/476 passing controls. Native42/branches23 observations precede the single production edit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Main required resolver returns actual callbacks while the parent's publication slot stays active. Actual child eligibility/parent packet lookup distinguish donation and borrowed identity; eager validation, lazy initializer/key reacquisition and path-specific aliases remain native.
+- [x] **FIX** — Bind one shared required return through the unchanged native-context helper. Preserve actual public callbacks/maps, native guard/acquisition order, local copies/shared array slots, readonly kind literal/source/span references, successful error effects and fatal objects. No public syntax/format or complete helper/AST/language expansion.
+- [x] **ADDRESSED (verified)** — PASS518/cold10/native42/branches23/three effective syntax-valid faults; paired42 RED/476 controls/518 GREEN. Evidence5, original291-binding corruption/restoration, exact retained native drafts and complete book89/3 pass. Readonly299-input69961-byte claim agrees; all old291 proof/hash fields stay historical at049e1ba53.
+- [x] **NO REGRESSION** — Supplied48 suites/168 files PASS. Both required syntax checks and supplemental standard public Phase0 PASS1035/1035 with complete channels retained. Broader/private/canonical input-capsule limits remain explicit.
+- [x] **LOCKSTEP** — Knowledge1337/10249 and book teaching/render pass; framework-card stale frontier repaired. Current roadmap/index/live/history/memory handoff, both history checks and whitespace align. Exact final staged claim verification and all10 normal doctrine hooks govern landing before .3.1.5.
+
 ## Verification Log
+
+- `2026-10-10`, `.3.1.4`: Main518/cold10/native42/branches23/inverse3, identical42 RED/476 controls/518 GREEN, supplied48/168/evidence5/original291 restoration and book89/3 PASS. Actual native drafts and deterministic traceback-path review retain every original instrument/result. Readonly299-input69961-byte publication agrees; both required syntax checks/public Phase0 PASS1035 with complete channels. Knowledge1337/10249 and history/memory/task/whitespace checks pass; exact staged normal doctrines govern landing before .3.1.5.
 
 - `2026-10-10`, `.3.1.3.4`: Focused capacity222/30/23/4, original279 preservation/corruption, instrument chain and book89/3 PASS; readonly356-input claim86568 bytes. Exact clean-source suffix112/27100 and every old immutable/manifest/ADR byte survive. All initial matcher/source-blob/separator defects stay retained; final metadata13180 accounts exactly for index growth2. Canonical staged receipt and normal hooks govern admission; no future reserve or runtime change.
 
@@ -861,3 +881,11 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035; compatibility producer/result retain complete channels and explicit transitive input-capsule limit. Claim110/139/seven existing gaps and Knowledge1336/10239 PASS. Final continuity/history/memory/whitespace and normal doctrine hooks govern landing; main method/value .3.1.4 follows the accepted assignment child without separate group admission. Preserve291 current inputs before later bound writes.
 
 - `2026-10-10`: Exact final staged memory architecture PASS; both history checks PASS218/36013 and233/40130 lines/bytes, matching expressive roadmap rows and staged whitespace PASS. Fresh readonly bounded publisher still gates291 live inputs/69504 bytes after separate full-channel compatibility result; its readonly verification passes. All acceptance boxes complete; normal all-doctrine hooks govern the ordinary commit.
+
+- `2026-10-10`: Assignment .3.1.3.3 accepted at049e1ba53 with all10 doctrines, post-pointer/brief0 and clean Git. Activate main method/value .3.1.4; preserve291 original inputs first. Preliminary source recovery identifies eager validation, a locally unused inference binding, an additional initializer acquisition and key re-acquisition within an AST adapter. Establish exact native/alias/path proof before changing the required seam; split if needed.
+
+- `2026-10-10`: Main required resolver source-bound proof PASS518/10/3, native42/branches23 and exact paired42 RED/476 controls/518 GREEN. Supplied48/168, evidence5/original291 restoration, actual retained draft replays and book89/3 PASS. Random supplied traceback-path drift is resolved by a separate deterministic replay with full raw channels retained; original producer/result remain exact. Readonly publication gates299 live inputs/69961 bytes. Standard public compatibility runs separately before final handoff/ordinary commit.
+
+- `2026-10-10`: Pre-stage claim scan PASS110 records/139 claims/seven existing gaps and self-test3/16. As the existing claim-verification-index-snapshot card explains, this reads accepted index blobs, so it does not admit the new unstaged main record. The exact staged normal doctrine hook must validate111 records/141 claims (derive actual result there). Knowledge1337/10249, memory, task metadata and whitespace PASS. Public Phase0 remains in flight; no index mutation overlapped the completed claim scan.
+
+- `2026-10-10`: Both required Perl syntax checks and supplemental public Phase0 PASS1035/1035; full channels retained and compatibility runner closes. Main518/10/3/native42/branches23, paired42 RED/476 controls/518 GREEN, supplied48/168/evidence5/book89/3 and readonly299-input69961-byte claim remain exact. Final staged normal claim/doctrine hooks govern landing; then scalar/return/mutation .3.1.5 activates from clean HEAD with299-input preservation.

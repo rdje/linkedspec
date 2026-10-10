@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "producer_sha256": "fabe454f0bdc7b8ea6fd3028e7f1c9b9d13d13f170de5f612df6ccf2cd49f657",
+  "source_sha256": "e3ed2f292c372f28b214cc08f4c6e371a404c02243c387c0b95965b38d78e3ad",
+  "assertions": 518,
+  "rows": [
+    {
+      "case": "required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-inverse-required.json",
+      "sha256": "48219fc6ce01a04ba3052d508cbd3f877f9e522c23538d70afc854986a8a1899",
+      "source_sha256": "28aaf3c5fd73bc63bf14c2074d94a651bf124c77ebe343b8ba01ec34fe651b10",
+      "reason": "trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-inverse-identity.json",
+      "sha256": "e775f8a8e830da8ef70ec5ab0277efd193798cbf0b74cc583df0c646ad1ef559",
+      "source_sha256": "33618c607dc85ffe9941dad452d803bab671a4706135ed4638ce15e927548d72",
+      "reason": "trim_action_ir_value/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-inverse-diagnostic.json",
+      "sha256": "67158bed075db4fdd254d8c222270ad0e0ddd8f31edd4abeb493e5bb5b29faec",
+      "source_sha256": "1a31a5845f2c26b8230ea89275ac1de3276351f54b4823b8e5674f9f34ca4688",
+      "reason": "trim_action_ir_value eager diagnostic precedes undefined-input guard",
+      "observed": "RED"
+    }
+  ]
+}

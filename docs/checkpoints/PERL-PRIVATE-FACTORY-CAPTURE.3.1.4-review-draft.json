@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-review.py",
+    "--capture"
+  ],
+  "returncode": 1,
+  "producer_sha256": "d55ac4fbf0d17994632f1179177a97ec6b28cd191328d6480290d3b130a75490",
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS40LXJldmlldy5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgbGVuKG9yaWdpbmFsKSA9PSAxNjggYW5kIHtwOiBkaWdlc3QocmF3KSBmb3IgcCwgcmF3IGluIG9yaWdpbmFsLml0ZW1zKCl9ID09IHNlZWRbJ2lucHV0cyddCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+}

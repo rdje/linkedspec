@@ -64,11 +64,12 @@ Current own-constructor registration is verified by .2.1.1; see
 docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
 require exactbe7d70719 historical inputs.
 
-MethodLowering defaults .3.0, required trim .3.1.0 and required inference
-.3.1.1 are accepted; inline .3.1.2.0 and block component .3.1.2.1 are accepted; local-return/value .3.1.2.2 and remaining required/optional families are next. Current rules/evidence live in
-docs/knowledge/perl-method-default-capture.md. Original owner reviews retain
-their recorded accepted input boundaries.
+MethodLowering family evidence lives in the individual callback cards and
+docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Original owner reviews retain their
+recorded accepted Git input boundaries. MEMORY.md and that tree's frontier own
+current selection; this framework card does not duplicate a changing next leaf.
 
-Required inference .3.1.1 is accepted; current native/caller/isolation rules
-live in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 and block component .3.1.2.1 are accepted; local-return/value .3.1.2.2
-is next; remaining required/optional and pipeline owners stay open.
+Correction dated2026-10-10 under .3.1.4: the previous paragraphs incorrectly
+called local-return/value .3.1.2.2 next after those children and later guarded
+AST children had already landed. Their historical evidence is unchanged; only
+the stale current projection is removed.

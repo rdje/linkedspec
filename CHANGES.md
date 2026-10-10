@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.4 — Main method/value required callback isolation
+
+Bind only the shared required resolver return in _lower_method_value_expr. Preserve14 eager roles before the
+undefined-input guard, locally validated-only inference, lazy initializer and AST key re-acquisition. Actual
+callbacks/maps/spans, scalar context, native copies versus shared array slots, arity/scope flags, successful error
+effects, fatal objects and empty/zero results remain unchanged. Complete helpers/AST/language and optional/direct
+owners remain separate; no authored syntax or generated-format contract changes.
+
+Proof passes518 main/10 cold assertions,42 exact native-current callback rows and23 controlled branch rows.
+Identical TAP retains42 original publication REDs/476 passing controls/all518 current GREEN. Three syntax-valid
+source faults, supplied48 suites/168 files, evidence5, original291-binding corruption/restoration and complete
+book57+32/three controls pass. Prior291 inputs/proof fields stay historical at049e1ba53. Readonly publication gates
+299 live inputs in69961 bytes. Retained native drafts reproduce read-only kind, shape-member-copy and seed-count
+premise errors. The original replay's random traceback-path instability stays retained; separate deterministic
+replay normalizes only that generated prefix and retains complete actual channels. Repair the framework card's
+stale current frontier by routing selection to MEMORY/task. Both required syntax checks and supplemental public Phase0 PASS1035/1035 with complete channels retained; exact staged claim/doctrine hooks govern landing.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3 — AST assignment required key isolation
 
 Bind the single required key resolver on AST hash-index assignment fallback. Preserve lazy validation after

@@ -1339,6 +1339,43 @@ owner paths; complete helpers, AST grammar, other callback owners and later
 pipeline composition retain separate admission. This adds no assignment syntax
 or public mutation semantics.
 
+Main method/value required callbacks now have separate private capture boundaries.
+The resolver validates its eager callbacks before checking whether the input is
+undefined or empty. This includes the locally unused scalar-container inference
+binding: a missing callback still produces its existing diagnostic even when no
+expression will be lowered. The initializer callback remains lazy. For example,
+an AST `set(array(meta), [])` needs it after the target and shape checks, whereas
+an early primitive result or a mismatched aggregate shape does not reach it.
+These are compiler dependency contracts; they introduce no authored syntax.
+
+The local AST hash-assignment adapter re-acquires the key callback after its
+source and scalar-held fallback checks. Replacing that callback in the public
+dependency map after eager acquisition therefore affects this AST path. The
+legacy `has_key` path keeps its earlier selected callback. Each acquisition
+preserves that existing selection rule and validates the actual selected CODE
+reference. The public map retains the caller's callbacks.
+
+Aliases depend on the actual adapter. Argument normalization receives the parser's
+returned array, so mutating that array remains visible to its caller. Trim can
+receive a parser argument slot, a split statement slot or an array-constructor
+CSV slot directly. In contrast, shape-member lowering copies a CSV element
+before trimming it: changing that local scalar leaves the returned CSV array
+unchanged. Array/hash symbol adapters also keep their existing local receiver
+copies. A declaration initializer receives a read-only container-kind literal
+(`array` or `hash`) and a writable local source copy. Mutating the latter leaves
+the AST source field unchanged. The final array-pipeline callback receives the
+actual source-span reference.
+
+Callback capture preserves scalar context, call order, successful error effects,
+fatal exception objects, undefined/empty/zero results and these alias distinctions.
+For example, primitive lowering accepts a defined empty result, while the AST
+key and initializer paths reject empty results and accept `0`. A child may
+publish text equal to the enclosing result without donating its packet to that
+parent. Selecting a known child uses the actual callback's identity. Explicit
+secondary-helper controls verify these bounded owner paths; complete helper and
+AST language behavior, optional/direct callbacks, output composition and mapped
+replacement retain separate admission.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
