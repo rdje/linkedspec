@@ -1,0 +1,108 @@
+{
+  "result": "PASS",
+  "classification": "instrument matcher labels; no production or fixture repair",
+  "producer_before_sha256": "0c8a297fc649a8b39276d856cf2438abef691c7588dc2e4471f800d2e440e9a2",
+  "producer_after_sha256": "8d7a92f074aaac72957be150d85ae983c3797a100f5cdeac714076c1ca9181c7",
+  "source_sha256": "94af7458db808827a7ebbe17e9dfdbcd2948ce233564d61f83dd563dbcad019d",
+  "fixture_sha256": "face9d754caef969fbdfd945d02d1f7ee75b230d8ea25187bf039671a188961a",
+  "cold_sha256": "5dc9a242a2ea3c7ee9699797a5b007533a6e1d91d688284dafd574faa9441b80",
+  "actual_retention_fault_returncode": 1,
+  "declared_wrong_reason": "private binding release leaves no global callback cache",
+  "actual_semantic_red": [
+    "not ok 255 - private binding release leaves no global callback retention"
+  ],
+  "full_plan": 255,
+  "cold_preflight": "The cold fixture says cold private binding keeps SourceEmissions unloaded; align the inherited matcher before that fault executes.",
+  "rows": [
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-before.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-before.json",
+      "sha256": "110c86251626cf674bf38965757eb1343a7f8d876e538a76be2571d323683cfd"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-cold.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-cold.json",
+      "sha256": "7be26d801e18fc4b00079eec229cbe7d7b356da73301c2e32729d015b4bb20ca"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-consumers.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-consumers.json",
+      "sha256": "5bdbef0c0d50c37545c316bb907a9f563a3a703ffd7b9c5f40246d91a4e12292"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-fixture.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-fixture.json",
+      "sha256": "7aedb5efbba3d98a33a9089e247f7e62c7b37ebc5624a85080367fd075902ff1"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-alias-copies.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-alias-copies.json",
+      "sha256": "c08b1d81b1c0de3205dcc3b0cff9e314f31892da34e1a7e5bb0cd445a38da398"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-binding-boundary.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-binding-boundary.json",
+      "sha256": "91a28457be8fa10e1396fe3fa54958d7b1b33ff30cfbbee48a54760641af75b4"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-callback-retention.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-callback-retention.json",
+      "sha256": "7882a427f297e0be0542d82c8f3ea121d21175cacc45b1e689d337334bc86563"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-fatal-object.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-fatal-object.json",
+      "sha256": "0f30f68e8372018e03f526d48c1d5c02a83d7af292f63d759cf8cafbadad53a3"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-incoming-error.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-incoming-error.json",
+      "sha256": "cad7450a46fe7c7a509578aba399110a129c9cafdeca0701153b2ad9df25618d"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-list-context.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-list-context.json",
+      "sha256": "846bffcfee72ba17337458796f0858f26987fa4f12aff34e4981ee32765d90aa"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-once.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-once.json",
+      "sha256": "b78b3b61af253a2650396b94a360ba9e191fd6ae6ecd03ca26ad1ea3650acc43"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-infer_direct_shape_literal_kind.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-required-infer_direct_shape_literal_kind.json",
+      "sha256": "f62bdd8d97545066291e9e64c4dc085f4f4a185647ee0782d482015afe8e5ba6"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-lower_inline_switch_case_value_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-required-lower_inline_switch_case_value_expr.json",
+      "sha256": "96a11ef3cef79cbb0d16e34320c4da5f6319d618e470ec810bc7bbdf7b400610"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-normalize_method_tag_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-required-normalize_method_tag_expr.json",
+      "sha256": "e3d41905d59bab8b09175a222f8564d9f6d76803e279fbee30b15906199b1f3f"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-successful-error.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-successful-error.json",
+      "sha256": "dc3823f8e26d1a1a896fb563056259c4d076d67ac065b9e630dbb2c60eabc3b0"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-void-context.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-inverse-void-context.json",
+      "sha256": "5e61057dbcbd2f28cc84f37d23f5b4c5a769c6ed0755dbef4eae4c6660c75afc"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-native.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-native.json",
+      "sha256": "4367ab1cbfd7ce4250ce42e5d5808baf677f6725a5559ae548078cfe7db2886a"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-observe.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-draft1-observe.json",
+      "sha256": "cf04973d8cf478b02dd1bbf713bb203c028b38644ad00fc31875dced92e36c8b"
+    }
+  ]
+}

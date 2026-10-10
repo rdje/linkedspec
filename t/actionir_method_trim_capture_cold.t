@@ -1,0 +1,14 @@
+use strict;
+use warnings;
+use Test::More;
+use Scalar::Util qw(refaddr);
+use LinkedSpec::ActionIR::MethodLowering ();
+my $actual = sub { return '"tag"' };
+my $deps = {trim_action_ir_value => $actual};
+my $bound = LinkedSpec::ActionIR::MethodLowering::_bind_emission_dependency($actual);
+is($bound->('same'), '"tag"', 'cold private binding keeps ordinary scalar return');
+is(LinkedSpec::ActionIR::MethodLowering::_normalize_method_tag_expr('same', $deps), '"tag"', 'cold actual caller keeps ordinary result');
+is(refaddr($deps->{trim_action_ir_value}), refaddr($actual), 'cold caller public callback stays exact');
+ok(!$INC{'LinkedSpec/ActionIR/SourceEmissions.pm'}, 'cold private binding keeps SourceEmissions unloaded');
+ok(!$INC{'LinkedSpec/Trace.pm'}, 'cold private binding keeps Trace unloaded');
+done_testing;

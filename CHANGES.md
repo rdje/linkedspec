@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate MethodLowering required trim callbacks
+
+Private trim bindings pass255 main/five cold assertions and13 effective syntax-valid source faults. The same full fixture has exactly eleven original publication-isolation REDs and all255 current GREEN, with244 original controls passing. Fifteen native dependency and nine actual caller ledgers match context, aliases, copied top-level inputs, public references and value/effect/error/fatal behavior. Twenty-seven suites in146 supplied files, evidence4, original-binding RED and complete book57/two controls pass. All282 original method-default bindings remain historical at89a4ede6f. The partial attempt retains18 actual captures/producer; only two inherited assertion matcher labels change before recapture, with unchanged production/fixtures. Other required .3.1 children, optional/direct .3.2, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.
+
 ## 2026-10-10 — Select actual native MethodLowering defaults
 
 MethodLowering default native selection passes426 main/six cold assertions and24 effective syntax-valid source faults. Two complete19-callback native/current maps preserve keys, actual references and reuse. Actual OwnerDispatch map/ref snapshots, all nineteen same-name/retained-native controls, custom native aliases, opaque equal-text publication attempts and bounded source/producer restoration pass. Twenty-five suites in144 supplied files, evidence4, original-binding RED and complete book57/two controls pass. All244 original construction bindings remain historical at33e57deee. Initial30 all-GREEN captures/producer are retained before correcting inherited scope prose and recapturing with unchanged production/fixtures. Required .3.1 and optional/direct .3.2 dependency boundaries are next; no native-helper packet, full-private/mapped/canonical or parent admission is inferred.

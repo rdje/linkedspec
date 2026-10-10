@@ -1,0 +1,142 @@
+{
+  "result": "PASS",
+  "producer_sha256": "8d7a92f074aaac72957be150d85ae983c3797a100f5cdeac714076c1ca9181c7",
+  "source_sha256": "94af7458db808827a7ebbe17e9dfdbcd2948ce233564d61f83dd563dbcad019d",
+  "fixture_assertions": {
+    "t/actionir_method_trim_capture.t": 255,
+    "t/actionir_method_trim_capture_cold.t": 5
+  },
+  "rows": [
+    {
+      "case": "required-infer_direct_shape_literal_kind",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-infer_direct_shape_literal_kind.json",
+      "sha256": "13bd0f23d4aa071f64c1e2c39323574724b389b81c5dc27ca95bbca9e670302d",
+      "source_sha256": "2885ffbfe4078930d336d7860a8def43c914b158487050ec92ab5e894f5ee28a",
+      "reason": "_infer_direct_shape_literal_kind/0 injected trim cannot donate nested publication",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "required-normalize_method_tag_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-normalize_method_tag_expr.json",
+      "sha256": "3667d78d352028c6e593cbdefefd2992367d33d7e7186a70bee4b31647c0b9df",
+      "source_sha256": "c5a6fe350e8a922e253bf052213e8f73c01ce95f10e858e65137031d33a51c09",
+      "reason": "_normalize_method_tag_expr/0 injected trim cannot donate nested publication",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "required-lower_inline_switch_case_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-required-lower_inline_switch_case_value_expr.json",
+      "sha256": "3df476e36ae93b61849aff4121d1d035fe8568f648cd63e27377f6ed99e87368",
+      "source_sha256": "c418f66306135b7d42f6e6dc65093f2a6984ca46e1fcf862eed0f92a0488985c",
+      "reason": "_lower_inline_switch_case_value_expr/0 injected trim cannot donate nested publication",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "binding-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-binding-boundary.json",
+      "sha256": "d7c39052a8a89d580bff816a418a09cb37c75c8f1c606792d95ba154036e409f",
+      "source_sha256": "5b53ddccd91d8ffcc042d9206aede530d1bf2736315c45e38cc754cccb5ec347",
+      "reason": "_normalize_method_tag_expr/0 injected trim cannot donate nested publication",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "alias-copies",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-alias-copies.json",
+      "sha256": "af8843778686552e69cc51356cd67e3830a024b95924a0fe0fb80619464eecc5",
+      "source_sha256": "fc2338c9a3cb54729297aa939d69b35a82fee7778930ee3954addfb0315fa61c",
+      "reason": "scalar/string first and extra caller aliases survive",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "list-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-list-context.json",
+      "sha256": "0a8e43bb4d4719e8867e2e9a223b385dce0e83919111d61fafb9accd3fe9bfd3",
+      "source_sha256": "c6624d2bd66f9af8e4d51a4ef6099f641716c5069dcc77ae6d076061d79ae99e",
+      "reason": "list/string native dependency context survives",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "void-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-void-context.json",
+      "sha256": "4e8cee221e0eb13b683a3fa2af5a745bc2a5101955bfad50f8459ead587dd57e",
+      "source_sha256": "38100fe334e52ed58a0aac184ce746faa646c019c1636ef3c35835f693cfaadf",
+      "reason": "void/string native dependency context survives",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "once",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-once.json",
+      "sha256": "c87e2f8adcd97151ec62b1f1f77536324375f43149eb8c6df49fc5badc08a14f",
+      "source_sha256": "15174e123767b6a540d1ff4b158edb085d4b040dd6d2fa081e1ca0a89c90a819",
+      "reason": "scalar/string actual injected callback executes once",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "incoming-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-incoming-error.json",
+      "sha256": "7301619df0e5a8a7e77315eabde145d4f1bdef24c37e88166562f851f95db3ba",
+      "source_sha256": "2fe12c748b6dd20204a59f8de3fa4deb2d30e504c98c33f6b59651592c36e8ab",
+      "reason": "scalar/string native incoming error survives",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "successful-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-successful-error.json",
+      "sha256": "ff1a384eca22a99c2ab7f1fb46fb4c11bcecaf72bb334e4d014d250c17901a94",
+      "source_sha256": "44bc5dcde27c5b29f76fbb0307e0900cdce9bb4712f0b8767bdbf67353262602",
+      "reason": "scalar/string native successful error effect survives",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "fatal-object",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-fatal-object.json",
+      "sha256": "9048e9f271469649a94d08a69fdd589d9c6403cbe7cbd54766be35003c76cc3f",
+      "source_sha256": "b900663190e241d87a64f4a032473fc52fc1e73321082cc6550ee6ca13cfc87e",
+      "reason": "scalar/fatal fatal object identity survives",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "callback-retention",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-callback-retention.json",
+      "sha256": "f2cc572f1ea287fdc5b30371da2257bc84d93ae7d7fd316224ded65e7897df1a",
+      "source_sha256": "15793624d716519e5a13358edd5b795171879827355d816ef7610978eda51543",
+      "reason": "private binding release leaves no global callback retention",
+      "fixture": "t/actionir_method_trim_capture.t",
+      "assertions": 255,
+      "observed": "RED"
+    },
+    {
+      "case": "cold-loading",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0-inverse-cold-loading.json",
+      "sha256": "b207763872c659b2ce5be3b545087a5b62556929e3edc2bf60b09697be63cd72",
+      "source_sha256": "1ba29aed620e60b0df97f5debdf65a413d5635b6d49673db3e60a57275664c80",
+      "reason": "cold private binding keeps SourceEmissions unloaded",
+      "fixture": "t/actionir_method_trim_capture_cold.t",
+      "assertions": 5,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Three actual required trim seams and private native-context binding primitive; effective syntax-valid source faults, coherent complete main/cold TAP and independently named alias/context/publication/effect/error/lifetime/lazy-load REDs. Supplied bytes/population restore after every fault."
+}

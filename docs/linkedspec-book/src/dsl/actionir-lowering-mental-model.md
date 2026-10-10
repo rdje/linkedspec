@@ -1092,9 +1092,27 @@ Its ordinary value survives; equal text supplies no selected emission packet.
 Native-reference selection is scoped to the actual source and producer invocation,
 so nested equal-source or producer scopes cannot borrow the enclosing selection.
 Cold default construction loads neither the private emission channel nor Trace.
-Required and optional MethodLowering dependency calls remain the next integration
-steps, followed by other owners, pipeline scopes and explicit output composition.
+MethodLowering required trim bindings are described below; remaining required and
+optional calls precede other owners, pipeline scopes and explicit output composition.
 Default selection alone makes no claim that a helper has published a packet.
+
+MethodLowering now isolates trim dependencies in three small value helpers.
+Direct shape inference, method-tag normalization and inline switch-case label
+normalization retain the actual injected callback through a private lexical
+binding. Public dependency maps keep their original callback references. The
+binding forwards native scalar/list/void context, argument aliases, ordinary
+values, once-only effects and error identities; it stays lazy when the private
+emission channel is absent. Existing top-level argument copies stay intact.
+
+For example, an opaque trim callback may publish the generated literal `"tag"`
+and return the ordinary atom `tag`. Tag normalization still returns `"tag"`;
+the enclosing callback receives no donated publication. Inline switch-case
+normalization retains its existing two trim calls for that bare atom. Direct
+shape inference still delegates accepted shape values to the method/value owner.
+A known child's explicit capture can retain its own packet, while its enclosing
+callback receives only the ordinary value. Remaining required function families,
+optional/direct dependencies, other owners and pipeline/output composition stay
+separate integration steps. This private boundary changes no authored DSL form.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

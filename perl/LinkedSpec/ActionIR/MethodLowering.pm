@@ -167,6 +167,18 @@ sub default_deps_for_package {
  return $deps
 }
 
+# Keep caller maps and public callback fields intact. This private lexical
+# binding forwards the retained callback with native argument aliases/context.
+# Require-only callers stay lazy while the emission channel is absent.
+sub _bind_emission_dependency {
+ my ($callback) = @_;
+ return sub {
+  return LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($callback, @_)
+   if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
+  return $callback->(@_)
+ }
+}
+
 #------------------------------------------------------------------------------
 # Function: _declare_sigil_for_type
 # Purpose : Map canonical declaration type name to Perl declaration sigil.
@@ -196,7 +208,7 @@ sub _infer_direct_shape_literal_kind {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
@@ -441,7 +453,7 @@ sub _normalize_method_tag_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
@@ -467,7 +479,7 @@ sub _lower_inline_switch_case_value_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 

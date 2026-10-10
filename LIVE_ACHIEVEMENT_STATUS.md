@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: MethodLowering native defaults accepted; required injected dependency boundaries are next.
+Full PNT: Required MethodLowering trim bindings accepted; assignment/declaration inference family is next.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.0` — MethodLowering default native selection passes426 main/six cold assertions and24 effective syntax-valid source faults. Two complete19-callback native/current maps preserve keys, actual references and reuse. Actual OwnerDispatch map/ref snapshots, all nineteen same-name/retained-native controls, custom native aliases, opaque equal-text publication attempts and bounded source/producer restoration pass. Twenty-five suites in144 supplied files, evidence4, original-binding RED and complete book57/two controls pass. All244 original construction bindings remain historical at33e57deee. Initial30 all-GREEN captures/producer are retained before correcting inherited scope prose and recapturing with unchanged production/fixtures. Required .3.1 and optional/direct .3.2 dependency boundaries are next; no native-helper packet, full-private/mapped/canonical or parent admission is inferred.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.0` — Private trim bindings pass255 main/five cold assertions and13 effective syntax-valid source faults. The same full fixture has exactly eleven original publication-isolation REDs and all255 current GREEN, with244 original controls passing. Fifteen native dependency and nine actual caller ledgers match context, aliases, copied top-level inputs, public references and value/effect/error/fatal behavior. Twenty-seven suites in146 supplied files, evidence4, original-binding RED and complete book57/two controls pass. All282 original method-default bindings remain historical at89a4ede6f. The partial attempt retains18 actual captures/producer; only two inherited assertion matcher labels change before recapture, with unchanged production/fixtures. Other required .3.1 children, optional/direct .3.2, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1` from clean HEAD. Inspect/split required callback bindings before writes and preserve current claim inputs.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` from clean HEAD. Inspect/refine assignment/declaration inference required callback seams and preserve current claim inputs before writes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.0` — main255/cold5, paired11 RED/255 GREEN, native15/callers9/inverse13, supplied27/146, evidence4/book57/2; original282 and partial18 retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.0` — main426/cold6, native2x19/inverse24, supplied25/144, evidence4/book57/2; original244 and initial30 captures retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.1.1` — main447/cold6, native2x174/inverse20, supplied23/142, evidence4/book57/2; original248 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0` — main312/cold6, native15/inverse16, supplied21/140, evidence4/book57/2; original235 and lifetime diagnosis retained.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1` from clean HEAD. Inspect/split requi
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` — actual107/13; fourteen supplied consumers; three artifact REDs; P1 prior audit owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` — public empty spans65/4, original18 RED and twelve consumers.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0` — native63/11; actual empty public-span cause and immediate P1 repair owner.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1` — constructor77/15, exact consumers and lifetime RED/GREEN.
 
 ## History
 
