@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "producer_sha256": "9bf61802c07a1837bdf27986f7f7b615914e9a76a628a41217cd49cbbf4a4967",
+  "source_sha256": "650be03ea2c6ed5c22de74cb1676e1e7c2663b4de765f2aad9cfe5205df16dc0",
+  "fixture_assertions": {
+    "t/actionir_method_inline_capture.t": 177,
+    "t/actionir_method_inline_capture_cold.t": 4
+  },
+  "rows": [
+    {
+      "case": "required-lower_inline_if_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-required-lower_inline_if_value_expr.json",
+      "sha256": "9ff620f2a464963962b5821b18e8b8b72ea1373b1acbb34a0b2c1a1d2d011d20",
+      "source_sha256": "83aa88a00aaca4f1fdfc4f5313365bfd9b3ffefd9dccbafaeb37f10e8cfc6121",
+      "reason": "_lower_inline_if_value_expr/normalize_method_args_with_optional_scope/0 required dependency cannot donate nested publication",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    },
+    {
+      "case": "identity-lower_inline_if_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-identity-lower_inline_if_value_expr.json",
+      "sha256": "d7d37607eef37fdf6f8ca4cfa477122ea599e99b726d2fe08edcc793419598ce",
+      "source_sha256": "d5209d0f5542cbe920d018b023c3eb1795e03cc7744b68ce807fdc8aaca509c6",
+      "reason": "_lower_inline_if_value_expr/normalize_method_args_with_optional_scope/1 actual callback has its own identity boundary",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic-lower_inline_if_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-diagnostic-lower_inline_if_value_expr.json",
+      "sha256": "e51b335c2fd49c6c4a6e058e5e573aea662ced0fcaaecbc6d82acc25e677592a",
+      "source_sha256": "434860da1959f802fbc56a777515a24b3af63e68036cd4557524a3c1ef62e5ee",
+      "reason": "_lower_inline_if_value_expr/normalize_method_args_with_optional_scope required dependency diagnostic remains exact",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    },
+    {
+      "case": "required-lower_inline_switch_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-required-lower_inline_switch_value_expr.json",
+      "sha256": "da8e937b1bb16a686c3e198b711029e731cfec146dd5170c8e3cf6bede6b60ee",
+      "source_sha256": "0efa0a85392df37b2a529034a88963d63d24d41855d0578bb3d96c8c592e3241",
+      "reason": "_lower_inline_switch_value_expr/normalize_method_args_with_optional_scope/0 required dependency cannot donate nested publication",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    },
+    {
+      "case": "identity-lower_inline_switch_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-identity-lower_inline_switch_value_expr.json",
+      "sha256": "220eb7d1e315b3a8853d341c7a45e6264efaf7b790c3c01bea3fca79aee34da5",
+      "source_sha256": "44d70e1c941ea1c162bd139ae8319db45d481f3d74de0e2cc53c44f23e59ff3a",
+      "reason": "_lower_inline_switch_value_expr/normalize_method_args_with_optional_scope/1 actual callback has its own identity boundary",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic-lower_inline_switch_value_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-inverse-diagnostic-lower_inline_switch_value_expr.json",
+      "sha256": "19499adc6aade4378d8d21ba456c2a77c2ffee785297bc7b12ca0b9d5d39e2ae",
+      "source_sha256": "149776ebacd55e8a3dbf254f82ce814503502f831e938120b57f308bf1f5cbe0",
+      "reason": "_lower_inline_switch_value_expr/normalize_method_args_with_optional_scope required dependency diagnostic remains exact",
+      "fixture": "t/actionir_method_inline_capture.t",
+      "assertions": 177,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Two actual required-resolution seams/five callback roles; each boundary removal, actual-to-wrapper identity substitution and original required diagnostic removal is syntax-valid and produces named semantic REDs with a complete unchanged fixture plan. Supplied bytes/population restore after every fault."
+}

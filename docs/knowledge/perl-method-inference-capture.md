@@ -2,17 +2,17 @@
 id: perl-method-inference-capture
 title: Assignment and declaration inference retain actual callbacks in private required-call boundaries
 answers:
-  - "which MethodLowering required calls have private emission bindings"
+  - "which MethodLowering inference required calls have private emission bindings"
   - "can assignment inference dependencies donate publication to their enclosing callback"
   - "does the method argument normalizer receive the actual parser returned array"
   - "does private declaration dependency integration add authored declaration syntax"
   - "what is the native RED GREEN proof for MethodLowering assignment declaration inference"
   - "why did the inference reviewer initially lack its consumer capture"
 date: 2026-10-10
-status: three inference resolvers verified; inline block and remaining required optional pipeline owners open
+status: three inference resolvers and inline successor verified; block and remaining required optional pipeline owners open
 tags: [perl, actionir, methods, callbacks, dependencies, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.1 retains complete paired 277 TAP: 24 original publication-isolation REDs, 253 original controls pass, all 277 current GREEN. All eight callback roles and 25 native/current ledgers match. Nine effective source faults, cold4, consumers29/148, evidence5, original-binding RED/restoration and complete book57/two controls pass; all262 original trim bindings stay historical."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-final-review.py; separately run its preservation-control.py with the same wrapper. Original trim reviewers require accepted429d0c6d inputs. Capture/freezer/publisher are one-shot writers."
+reverify: "Original inference reviewers require accepted9032b20e inputs. Current inline/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-final-review.py; separately run its preservation-control.py with the same wrapper. Original trim reviewers require accepted429d0c6d inputs. Capture/freezer/publisher are one-shot writers."
 ---
 
 MethodLowering's private native-context lexical binding now covers required
@@ -59,7 +59,8 @@ semantic reasons. Original 262 input bindings remain historical at 429d0c6d; an
 actual original-binding corruption rejects and restores. The complete book retains
 57 inputs and both missing-summary and missing-rendered-marker controls.
 
-Inline/block required families .3.1.2 are next, followed by the remaining required
+Inline required .3.1.2.0 is accepted; current evidence lives in
+docs/knowledge/perl-method-inline-capture.md. Block .3.1.2.1 is next, followed by remaining required
 families and optional/direct .3.2. Other owners, pipeline scopes, explicit output
 composition, complete private Phase0, mapped replacement and independent canonical
 or parent admission remain open. Production lowerers do not yet publish packets;

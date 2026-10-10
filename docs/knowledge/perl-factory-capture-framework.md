@@ -11,7 +11,7 @@ date: 2026-10-10
 status: framework and Contracts integration verified; other dependency owners/pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current inference integration and original262 trim preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
+reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current inline-control integration and original240 inference preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -44,7 +44,7 @@ lexical state; production bytes are identical before and after that correction.
 This is a measured local observation, not a universal cross-version closure rule.
 
 Contracts registration/call sites are verified in the linked children.
-MethodLowering required/optional dependencies, FlowExpr, ControlFlow and RewritePipeline remain later owners in
+Remaining MethodLowering required/optional dependencies, FlowExpr, ControlFlow and RewritePipeline remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
@@ -65,10 +65,10 @@ docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers no
 require exactbe7d70719 historical inputs.
 
 MethodLowering defaults .3.0, required trim .3.1.0 and required inference
-.3.1.1 are accepted; inline/block .3.1.2 and remaining required/optional families are next. Current rules/evidence live in
+.3.1.1 are accepted; inline .3.1.2.0 is accepted; block .3.1.2.1 and remaining required/optional families are next. Current rules/evidence live in
 docs/knowledge/perl-method-default-capture.md. Original owner reviews retain
 their recorded accepted input boundaries.
 
 Required inference .3.1.1 is accepted; current native/caller/isolation rules
-live in docs/knowledge/perl-method-inference-capture.md. Inline/block .3.1.2
+live in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 is accepted; block .3.1.2.1
 is next; remaining required/optional and pipeline owners stay open.

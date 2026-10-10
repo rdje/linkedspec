@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: Required assignment/declaration inference bindings accepted; inline/block family is next.
+Full PNT: Inline if/switch required bindings accepted; block component/side-effect family is next.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` — Three MethodLowering assignment/declaration required resolvers pass 277 main/four cold assertions and nine effective syntax-valid source faults. All eight callback roles and 25 native/current ledgers match; the same complete fixture has exactly 24 original publication-isolation REDs, 253 original passing controls and 277 current GREEN. Twenty-nine suites in 148 supplied files, evidence5, original-binding RED/restoration and complete book57/two controls pass. All262 original trim bindings stay historical at429d0c6d. An early review started before consumers.json existed; the fifth actual evidence control reproduces that missing-result rejection and restores PASS, with unchanged production/fixtures/capture programs. Inline/block .3.1.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0` — Two inline if/switch required resolvers pass177 main/cold4 and six effective syntax-valid source faults. All five actual roles and15 native/current ledgers match; paired complete177 TAP has15 original publication-isolation REDs,162 passing original controls and all177 current GREEN. Supplied31 suites/150 files, evidence5, original-binding RED/restoration and book57/two controls pass. All240 original inference bindings stay historical at9032b20e. The initial copied freezer rejects at its wrong-prefix replay guard before writes; retain actual rejection/original-input snapshot and reconstruct only prefix/docstring/console correction. Block component/side-effect .3.1.2.1 is next; remaining required/optional, pipeline/output/full-private/mapped/canonical and parent owners remain open.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2` from clean HEAD. Inspect/refine inline/block required seams and preserve current claim inputs before writes.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` from clean HEAD. Inspect/refine block component/side-effect required seams, distinguish validation-only requirements and preserve current claim inputs before writes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0` — main177/cold4, paired15 RED/177 GREEN, callers15/roles5/inverse6, supplied31/150, evidence5/book57/2; original240 and wrong-prefix guard retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` — main277/cold4, paired24 RED/277 GREEN, callers25/roles8/inverse9, supplied29/148, evidence5/book57/2; original262 retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.0` — main255/cold5, paired11 RED/255 GREEN, native15/callers9/inverse13, supplied27/146, evidence4/book57/2; original282 and partial18 retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.0` — main426/cold6, native2x19/inverse24, supplied25/144, evidence4/book57/2; original244 and initial30 captures retained.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2` from clean HEAD. Inspect/refine in
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — three historical observations qualified; supplied14/133, book57/2; original bindings preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1` — actual107/13; fourteen supplied consumers; three artifact REDs; P1 prior audit owned.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4` — public empty spans65/4, original18 RED and twelve consumers.
 
 ## History
 

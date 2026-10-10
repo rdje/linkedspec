@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate inline if and switch dependencies
+
+Two inline if/switch required resolvers pass177 main/cold4 and six effective syntax-valid source faults. All five actual roles and15 native/current ledgers match; paired complete177 TAP has15 original publication-isolation REDs,162 passing original controls and all177 current GREEN. Supplied31 suites/150 files, evidence5, original-binding RED/restoration and book57/two controls pass. All240 original inference bindings stay historical at9032b20e. The initial copied freezer rejects at its wrong-prefix replay guard before writes; retain actual rejection/original-input snapshot and reconstruct only prefix/docstring/console correction. Block component/side-effect .3.1.2.1 is next; remaining required/optional, pipeline/output/full-private/mapped/canonical and parent owners remain open.
+
 ## 2026-10-10 — Isolate assignment and declaration inference dependencies
 
 Three MethodLowering assignment/declaration required resolvers pass 277 main/four cold assertions and nine effective syntax-valid source faults. All eight callback roles and 25 native/current ledgers match; the same complete fixture has exactly 24 original publication-isolation REDs, 253 original passing controls and 277 current GREEN. Twenty-nine suites in 148 supplied files, evidence5, original-binding RED/restoration and complete book57/two controls pass. All262 original trim bindings stay historical at429d0c6d. An early review started before consumers.json existed; the fifth actual evidence control reproduces that missing-result rejection and restores PASS, with unchanged production/fixtures/capture programs. Inline/block .3.1.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.

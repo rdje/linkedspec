@@ -1122,7 +1122,8 @@ normalization receives that same array and its native mutations remain visible.
 Scalar inputs retain the helpers' existing local-copy behavior. Ordinary string,
 reference and undefined returns, callback counts and error identities stay intact.
 
-For example, container inference for `copy(array(x))` still returns `array`.
+For example, a controlled probe of the retained private container-inference
+helper maps `copy(array(x))` to `array`; this is an internal fixture input.
 An injected parser or argument normalizer may publish that same text while it
 runs, but the enclosing inference capture cannot inherit its packet. A known
 callback receives its own identity boundary; selecting a private wrapper in its
@@ -1133,6 +1134,30 @@ this private integration adds no authored declaration syntax. Required missing
 or non-CODE dependencies retain their original diagnostics. Inline/block and
 other required families, optional/direct calls and pipeline composition remain
 separate steps.
+
+Inline if and switch dependencies now use their own private capture boundaries.
+The two caller bodies retain their actual parser and argument-normalizer callbacks;
+inline `if` also retains the actual condition lowerer. Public dependency maps keep
+those references. Required calls preserve native scalar context, callback counts,
+ordinary values and error identities. Parser-returned argument arrays remain shared:
+normalization sees the actual arrays and preserves their native mutation effects.
+The existing scalar argument behavior also remains intact: inline `if` parses a
+local branch-scalar copy, while `switch` passes its shared branch scalar.
+
+For example, the existing value forms remain:
+
+```text
+return(if(flag, "yes", elseif(other, "other"), else("no")))
+return(switch(kind, case(word, "word"), default("other")))
+```
+
+An injected branch parser or normalizer may publish text equal to the enclosing
+Perl expression while it runs. The caller still returns its ordinary expression;
+its parent capture receives no donated packet. Selecting a known actual callback
+preserves its identity in its own boundary. Private wrappers cannot substitute for
+that identity. This integration changes neither branch selection nor authored
+syntax. Branch payload/case/truthiness helpers, block-value dependencies and later
+pipeline composition keep their separate responsibilities.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

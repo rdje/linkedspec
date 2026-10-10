@@ -11,7 +11,7 @@ date: 2026-10-10
 status: three required trim callers verified; other required optional and pipeline owners open
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture."
-reverify: "Original trim reviewers require accepted429d0c6d inputs. Current inference/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-final-review.py; separately run its preservation-control.py with the same wrapper. Capture/freezer/publisher are one-shot writers."
+reverify: "Original trim reviewers require accepted429d0c6d inputs. Current inline-control/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0-final-review.py; separately run its preservation-control.py with the same wrapper. Capture/freezer/publisher are one-shot writers."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -52,8 +52,9 @@ checks unchanged production/fixture bytes before accepting the repeated capture.
 This is an instrument-label repair, not a hidden production lifetime correction.
 
 Assignment/declaration inference .3.1.1 is now accepted; current rules/evidence live
-in docs/knowledge/perl-method-inference-capture.md. Remaining required families
-.3.1.2 through .6 are next. Optional/direct callbacks .3.2,
+in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 is now accepted; current evidence lives in
+docs/knowledge/perl-method-inline-capture.md. Remaining block/required families
+.3.1.2.1 through .6 are next. Optional/direct callbacks .3.2,
 other owners, automatic pipeline scopes and explicit output composition remain
 open. Complete private Phase0, mapped replacement and independent canonical/parent
 admission retain their original owners. Current production lowerers do not yet
