@@ -11,7 +11,7 @@ date: 2026-10-10
 status: standalone framework verified; production factory and pipeline integration open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.1-final-review.py; the separately retained preservation-control.py verifies the original frozen claim. Do not rerun one-shot capture/freezer programs."
+reverify: "The original .1 reviewers require the exact b21b3bb9 historical input boundary. Current EmitContext integration and exact preservation of all233 original framework bindings are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-final-review.py under tools/run_python_project_data.sh. Do not rerun one-shot capture/freezer programs."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -48,3 +48,7 @@ registration/call sites remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
+
+EmitContext now owns its definition-bound facade selection and resolved-call
+prerequisite; see docs/knowledge/perl-emitcontext-callback-capture.md. Actual
+Contracts callback construction and pipeline activation remain subsequent owners.

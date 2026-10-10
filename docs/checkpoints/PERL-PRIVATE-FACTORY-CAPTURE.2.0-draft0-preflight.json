@@ -1,0 +1,13 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-capture.py",
+    "native"
+  ],
+  "producer_sha256": "fb7845f0bce068d5a478b45a2bc1a6ffe3c88c85bccefd20bcff474c1019bd23",
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjIuMC1jYXB0dXJlLnB5IiwgbGluZSA1MiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBwYXRoIG5vdCBpbiBmaWxlcwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "scope": "Capture preflight rejects before runtime: Trace fixture is already in the original136 inputs. No native report or source fault produced."
+}

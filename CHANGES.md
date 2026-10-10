@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Bind actual native facade references and isolate owner calls
+
+EmitContext passes345 main/five cold assertions,30 exact native/current observation ledgers and13 effective semantic source faults. Nineteen direct suites in138 supplied files, four actual reviewer REDs and complete57-source book/two controls pass. Actual definition-owned references select28 native callbacks; same-name replacements and copied metadata remain opaque. Resolved owner/default-factory calls cannot donate nested publication in six scalar/list/void modes. Existing argument copies, shared references, return/error/fatal identities, actual factory maps and lazy loading remain unchanged. All233 original framework bindings are historical atb21b3bb9. Contracts construction/dependency integration .2.1 is next; pipeline/output/full-private/mapped/canonical obligations remain open.
+
 ## 2026-10-10 — Isolate native injected dependency calls
 
 The standalone private framework passes224 assertions,30 native differential modes and11 effective semantic source faults;17 direct suites in136 supplied files, evidence4 and complete book57/two controls pass. Actual callbacks register only in their current source/producer scope. Scalar dependency calls get separate captures; list/void calls retain native contexts with publication disabled. Caller aliases, once-only effects, returns/errors, map references and lifetime are preserved. The initial four identity failures came from a shared native fixture callback and are retained with the actual reference probe; lexical fixture closures correct that assumption without another production change. Original232 input-composition bindings are historical. Production factory/pipeline/output/mapping/full-private/canonical integration remains open; Contracts owner .2 is next.

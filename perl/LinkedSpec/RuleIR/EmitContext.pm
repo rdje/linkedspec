@@ -216,7 +216,7 @@ sub _actionir_owner_default_deps {
    { owner_key => $owner_key },
   );
   my $code = _actionir_owner_callback($owner_key, 'default_deps_for_package');
-  my $owner_deps = $code->(__PACKAGE__);
+  my $owner_deps = _invoke_actionir_emission_dependency($code, __PACKAGE__);
   my $dep_keys = ref($owner_deps) eq 'HASH' ? join(',', sort keys %$owner_deps) : '';
   _trace_emit_context_decision(
    phase => 'owner_deps',
@@ -312,6 +312,22 @@ sub _actionir_owner_default_deps {
 }
 
 #------------------------------------------------------------------------------
+# Function: _invoke_actionir_emission_dependency
+# Purpose : Isolate an actual owner/factory call when private capture is loaded,
+#           retaining the native direct call for require-only consumers.
+# Args    : ($callback, @args)
+# Returns : actual callback value in caller context
+#------------------------------------------------------------------------------
+sub _invoke_actionir_emission_dependency {
+ my $callback = shift;
+ # Keep require-only consumers lazy. A private emission invocation already has
+ # SourceEmissions loaded; outside that channel the native call stays direct.
+ return LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($callback, @_)
+  if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
+ return $callback->(@_)
+}
+
+#------------------------------------------------------------------------------
 # Function: _call_actionir_owner
 # Purpose : Dispatch one helper callback to a local ActionIR owner without
 #           appending that owner's default dependency bundle.
@@ -333,7 +349,7 @@ sub _call_actionir_owner {
   );
   my $code = _actionir_owner_callback($owner_key, $method);
   if ($wantarray) {
-   my @ret = $code->(@args);
+   my @ret = _invoke_actionir_emission_dependency($code, @args);
    _trace_emit_context_exit(
     $scope,
     { status => 'ok', owner_key => $owner_key, method => $method, return_count => scalar(@ret) },
@@ -341,14 +357,14 @@ sub _call_actionir_owner {
    return @ret
   }
   if (defined $wantarray) {
-   my $ret = $code->(@args);
+   my $ret = _invoke_actionir_emission_dependency($code, @args);
    _trace_emit_context_exit(
     $scope,
     { status => 'ok', owner_key => $owner_key, method => $method, return_ref => ref($ret) || '' },
    );
    return $ret
   }
-  $code->(@args);
+  _invoke_actionir_emission_dependency($code, @args);
   _trace_emit_context_exit(
    $scope,
    { status => 'ok', owner_key => $owner_key, method => $method, context => 'void' },
@@ -380,7 +396,7 @@ sub _call_actionir_owner_with_deps {
   my $code = _actionir_owner_callback($owner_key, $method);
   my $deps = _actionir_owner_default_deps($owner_key);
   if ($wantarray) {
-   my @ret = $code->(@args, $deps);
+   my @ret = _invoke_actionir_emission_dependency($code, @args, $deps);
    _trace_emit_context_exit(
     $scope,
     { status => 'ok', owner_key => $owner_key, method => $method, return_count => scalar(@ret) },
@@ -388,14 +404,14 @@ sub _call_actionir_owner_with_deps {
    return @ret
   }
   if (defined $wantarray) {
-   my $ret = $code->(@args, $deps);
+   my $ret = _invoke_actionir_emission_dependency($code, @args, $deps);
    _trace_emit_context_exit(
     $scope,
     { status => 'ok', owner_key => $owner_key, method => $method, return_ref => ref($ret) || '' },
    );
    return $ret
   }
-  $code->(@args, $deps);
+  _invoke_actionir_emission_dependency($code, @args, $deps);
   _trace_emit_context_exit(
    $scope,
    { status => 'ok', owner_key => $owner_key, method => $method, context => 'void' },
@@ -1137,6 +1153,52 @@ sub _lower_regex_subst_statement {
 sub _lower_return_undef_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_undef_statement', @args)
+}
+
+# Capture definition-owned references once, after this module defines them.
+# Later public symbol replacement cannot turn an equal name into this identity.
+# This initial set owns the Contracts default dependencies and bare-type hook;
+# later dependency owners extend their own explicitly verified selection seams.
+my @builtin_contract_emission_callbacks = (
+ \&_lower_return_general_statement,
+ \&_lower_assign_method_statement,
+ \&_lower_scalar_assignment_operator_statement,
+ \&_lower_array_append_operator_statement,
+ \&_lower_array_end_mutation_method_statement,
+ \&_lower_hash_index_assignment_operator_statement,
+ \&_lower_set_key_statement,
+ \&_lower_push_statement,
+ \&_lower_regex_subst_statement,
+ \&_lower_array_pipeline_expr,
+ \&_lower_if_flow_statement,
+ \&_lower_elseif_flow_statement,
+ \&_lower_else_flow_statement,
+ \&_lower_endif_flow_statement,
+ \&_lower_while_flow_statement,
+ \&_lower_switch_flow_statement,
+ \&_lower_case_flow_statement,
+ \&_lower_default_flow_statement,
+ \&_lower_endcase_flow_statement,
+ \&_lower_endswitch_flow_statement,
+ \&_lower_say_statement,
+ \&_lower_print_statement,
+ \&_lower_print_each_statement,
+ \&_lower_exit_now_statement,
+ \&_lower_return_undef_statement,
+ \&_lower_method_value_expr,
+ \&_lower_dropped_value_statement,
+ \&_bare_symbol_kind,
+);
+
+sub _register_builtin_contract_emission_callback {
+ my ($callback) = @_;
+ return $callback unless ref($callback) eq 'CODE'
+  && defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer;
+ for my $builtin (@builtin_contract_emission_callbacks) {
+  return LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($callback)
+   if LinkedSpec::ActionIR::SourceEmissions::_same_reference($callback, $builtin);
+ }
+ return $callback
 }
 
 1;

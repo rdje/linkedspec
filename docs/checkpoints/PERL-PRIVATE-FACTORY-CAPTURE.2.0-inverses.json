@@ -1,0 +1,142 @@
+{
+  "result": "PASS",
+  "producer_sha256": "fdac51f2db0317056e313b95c05cdd9d6aa606a0dfecfd33642d5fbe87457fe4",
+  "source_sha256": "e14d7fd067231819fed2096a68925c020c3d10451c0f72d55aa84d72701d5eaf",
+  "fixture_assertions": {
+    "t/actionir_emit_context_capture.t": 345,
+    "t/actionir_emit_context_capture_cold.t": 5
+  },
+  "rows": [
+    {
+      "case": "accept-any-reference",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-accept-any-reference.json",
+      "sha256": "330260abe34a44ba36fd86db3c49bbff1c527a86d13026437200a58623f2aac2",
+      "source_sha256": "c8e6f296b3f0fa645f0d9c4ae4a24d603999b5f01f0bd8900a292b1c6d24beff",
+      "reason": "same public name replacement cannot enter the definition-owned selection",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "lost-native-reference",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-lost-native-reference.json",
+      "sha256": "5d3f4ae65570f192fe0caa9cb6e4ebcd4ce4fe2778f6532266db26f80e483ba2",
+      "source_sha256": "44f3d9d0b7cf0d826bde2f2c30c7aa8b09a5a1bd5168c7ee5aecafd0169bdc67",
+      "reason": "_lower_method_value_expr actual definition-owned reference reaches registration once",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "follow-public-name",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-follow-public-name.json",
+      "sha256": "62e626b9e155e1449935ed570ebdac2a9e552302e8ca4ef181747afb2d8d2e60",
+      "source_sha256": "94cf47cce2798430b1faf740b16b1e9aadab33304c74566814e9b36d7cc5abbc",
+      "reason": "same public name replacement cannot enter the definition-owned selection",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "owner-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-owner-boundary.json",
+      "sha256": "0f06906fae6905f1ca9c507c56e94741ce783b5eae907a7cdd1ba3c645703a0e",
+      "source_sha256": "9e97b9097ce8e6028f69557dcbd60abae0b9bc8a58f265360b416929b91b90b8",
+      "reason": "owner/scalar opaque resolved call cannot donate nested publication",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "factory-boundary",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-factory-boundary.json",
+      "sha256": "6f494d4d1ed4536f04944d47e3ca84ae46cfb9bbbb57a437f7335923640170a4",
+      "source_sha256": "768a75f6290e48ecf35bf5363357f143e86727e521236d8410de979110423314",
+      "reason": "factory/scalar opaque resolved call cannot donate nested publication",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "list-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-list-context.json",
+      "sha256": "2fd4f75ab2679f16f4eb7d9a2b0b75de3d00063c70052c5d8381486808c03597",
+      "source_sha256": "7e3d4971e8121f5223f600d092500d371cd4a65230b1b00f1f040421e6684dc0",
+      "reason": "0/list/string owner retains native context",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "void-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-void-context.json",
+      "sha256": "3d60d2ec6141f4d18248193556b82229dbeb0dfa0f9ca371a6ed24489742a0a2",
+      "source_sha256": "3a56f9a749a6c49351f54362823867a8dfb8a93ffb78ac072375111be5925c5c",
+      "reason": "0/void/string owner retains native context",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "with-deps-context",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-with-deps-context.json",
+      "sha256": "ed7a2f7d696766e85bec64485bf06bda6ae1e65f731b3594b9f7d767e3048f6e",
+      "source_sha256": "52778b97d0d950bcd30aa424ff89f098c10a9217f07245f6ecb4b08973966397",
+      "reason": "1/list/string owner retains native context",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "caller-copies",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-caller-copies.json",
+      "sha256": "e276fda0a40fcb0b7a1d82debb6dfccab848dade61c7cf8b72e86e643c250f1f",
+      "source_sha256": "8abb0b066db2c2bf71303705c21ee5216a2e45b6dbdee3868e961018dd4b9be9",
+      "reason": "0/scalar/string bridge retains its existing caller argument copies",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "factory-map",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-factory-map.json",
+      "sha256": "a832065f808ec8047d58f18790862935254c21611011925ddc09773460942de8",
+      "source_sha256": "834ad32682bcee3d7e5e90ea27f0b701a38e266e5187845cc4363dff9a259472",
+      "reason": "1/scalar/string owner receives the exact factory map",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "incoming-error",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-incoming-error.json",
+      "sha256": "ec0bd7f9642c944936bf41a6b21607ee802cb6b41b2c171691fa9e28dc047a7a",
+      "source_sha256": "55f833789a53dad712700c12fad65ecdd65f707caed9db810e9d7d2543e28e42",
+      "reason": "0/scalar/string owner observes native incoming error",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "fatal-object",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-fatal-object.json",
+      "sha256": "89172275b2bd5afbf73d66ddd3de388f27db7f11950f2edd317808b21a703e72",
+      "source_sha256": "38026d33251591b9c161390b4612c9a3cd7c53da10a1f6ca7cbbafa78b8d1f26",
+      "reason": "0/scalar/fatal fatal object identity survives",
+      "fixture": "t/actionir_emit_context_capture.t",
+      "assertions": 345,
+      "observed": "RED"
+    },
+    {
+      "case": "cold-loading",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.0-inverse-cold-loading.json",
+      "sha256": "2a70b97785e622aa13d1269f24648a1306a9593aa7c3d614b874ec18d553f03f",
+      "source_sha256": "84c6bf750cfa95345e22e3a634ef533dfb27d5710ed7cde55d2c4010d3c2fbb5",
+      "reason": "cold selection keeps SourceEmissions unloaded",
+      "fixture": "t/actionir_emit_context_capture_cold.t",
+      "assertions": 5,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Syntax-valid effective source faults; complete coherent main/cold TAP and independently named identity/context/publication/error/lazy-load REDs. Supplied bytes/population restore after every fault."
+}

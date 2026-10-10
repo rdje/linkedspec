@@ -1021,7 +1021,24 @@ A known child captured explicitly retains its own packet. Returning that child's
 text does not transfer the packet to its parent; later output builders must
 compose the actual retained child capture. Public dependency maps and callback
 fields stay unchanged. The framework is verified independently; production
-factory call sites and pipeline activation remain subsequent integration.
+factory registration and pipeline activation remain subsequent integration.
+
+EmitContext now selects definition-owned callback references for contract defaults.
+It snapshots the actual native facade references when the module loads. Replacing
+`_lower_method_value_expr` under the same public name leaves the replacement
+opaque; retaining the original actual reference still selects the native facade.
+Copying a contract description with that public name cannot select another callback.
+Selection returns the exact original callback and keeps require-only consumers
+lazy: it does not load the private emission channel or Trace.
+
+The facade's resolved default factory and owner each receive their own call
+boundary. An opaque owner or factory that emits `same` and returns that equal
+text cannot donate publication to the facade. Native scalar/list/void behavior,
+return and exception identities, once-only effects and the actual factory map
+remain unchanged. The existing bridge copies scalar arguments before dispatch,
+shares referenced objects, and restores the caller's successful error state;
+private isolation preserves those existing rules. Contract construction and
+pipeline activation are still separate integration steps.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
