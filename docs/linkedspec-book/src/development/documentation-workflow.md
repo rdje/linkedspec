@@ -63,6 +63,11 @@ The wrapper's recurring tests exercise both actual cap-authority helpers; the ro
 actual routing-authority branches. Pressure, generated-owner freshness, and staged/worktree agreement remain
 separate checks.
 
+A new archive slot admits only one measured rollover.
+Keep root, per-file and aggregate limits unchanged unless their own accepted authority changes.
+Add decision-index rows inside the existing table, before its authoring instructions.
+When repairing placement, retain accepted row text and decision files exactly.
+
 ## Public book
 
 This book is for:

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Bound the next change-history generation
+
+The full change-history member/manifest limits and near-rollover root require one finite canonical
+prerequisite. Keep exact clean-source suffix reconstruction and all older immutable bytes. Two
+accepted index rows were appended below authoring instructions; move their unchanged text into the
+table and reject a displaced-row counterfactual. Original 279 AST-call bindings remain historical
+at 9085eb1e5. Canonical detail: docs/knowledge/guarded-ast-change-history-capacity.md.
+
 ## 2026-10-10 — Preserve path-specific AST call dependency validation
 
 Six required roles share one resolver. Normalizer/trim are eager, hash/key follow successful set_key normalization, array extraction precedes push arity and primitive lowering follows arity/scoped-target guards. Trim keeps source slots/scoped copies; other scalar callbacks use local copies. Mutating undefined primitive/array probes deliberately differ from nonmutating ambiguity/bare-target controls. Paired695 has18 original isolation REDs/677 controls/all695 GREEN; native18/branches44/cold12/inverse3 and supplied41/160 pass. All280 original hash-key bindings stay historical at2e9e5443e. Canonical detail: docs/knowledge/perl-method-ast-call-capture.md; optional assignment callbacks and independent admissions remain separate.

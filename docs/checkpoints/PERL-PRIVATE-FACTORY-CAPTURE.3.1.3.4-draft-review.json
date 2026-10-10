@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "base": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+  "producer_sha256": "fb09505be9c9a9f87b2352a2a5240be6ae1e7293a1c27df7e791c0b0bd9ab31f",
+  "draft_sha256": "c90916c331b16ff0ace09a40236ef339bda812a97d87b43339f1af9acf115d10",
+  "applied_sha256": "a607c3078cac37c4b95c291f7cfedcd1f7a95c2f175e371adb17a168416a8e74",
+  "applied_red_sha256": "ad346b0dab258faae31d635b24d7a1aade51048c5340c817cb8e1dc47ea6a41e",
+  "current_sha256": "0d955e24758611b5792e68e3f199cca1d832dd73a98d65d964cc6c60cc508205",
+  "snapshot_sha256": "bb89cf404cf51a76601f968a0b79558a014c1f25f2a00ef2ea98adde9544006f",
+  "pressure_sha256": "5f31d5788600be4948de9782c550a47ff4ddaee49623ad33bf959a298c3bfe49",
+  "replay": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-capacity.py",
+      "apply"
+    ],
+    "returncode": 1,
+    "stdout_base64": "",
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5EcTJCUUMvdG1wL2NhcGFjaXR5LW1hdGNoZXItcmVwbGF5LXA4YnZ2Z2hmL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjEuMy40LWRyYWZ0LWNhcGFjaXR5LnB5IiwgbGluZSAzODgsIGluIDxtb2R1bGU+CiAgICBnbG9iYWxzKClbcGFyc2VyLnBhcnNlX2FyZ3MoKS5tb2RlXSgpCiAgICB+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fl5eCiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLkRxMkJRQy90bXAvY2FwYWNpdHktbWF0Y2hlci1yZXBsYXktcDhidnZnaGYvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS4zLjQtZHJhZnQtY2FwYWNpdHkucHkiLCBsaW5lIDIzOCwgaW4gYXBwbHkKICAgIGFzc2VydCBwcmVzc3VyZVsnZXhpdF9jb2RlJ10gIT0gMCBhbmQgYidSRVFVSVJFRCcgaW4gYmFzZTY0LmI2NGRlY29kZShwcmVzc3VyZVsnc3Rkb3V0J11bJ2Jhc2U2NCddKSArIGJhc2U2NC5iNjRkZWNvZGUocHJlc3N1cmVbJ3N0ZGVyciddWydiYXNlNjQnXSksICdhY3R1YWwgcHJlc3N1cmUgUkVEIGJlZm9yZSByb2xsb3ZlcicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGFjdHVhbCBwcmVzc3VyZSBSRUQgYmVmb3JlIHJvbGxvdmVyCg==",
+    "before": {
+      "doctrine/readme_stability/routes.jsonl": "f0d0998ba1091bd6124178a94c9c23eb8e655188b0a78f465b8027b438ea7a3a",
+      "docs/decisions/INDEX.md": "e23ef4c733c7674f932f5d7260cc7d1739f116025ca296b45be89488eb811962",
+      "docs/history/changes/manifest.jsonl": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913",
+      "CHANGES.md": "9ef258d3c230cfbab47eae7e7c838b60e0e3c47f824e11f30f9d3a295492545f",
+      "DEVELOPMENT_NOTES.md": "a73eb68e1febdd51678181d6867d8c12cca5be10150510528f9e571acc177174",
+      "scripts/check_readme_routing_pressure.pl": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+      "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+      "docs/linkedspec-book/src/development/documentation-workflow.md": "c853ad5e782e39e14e77286cc198c31c7f327e3332307813239a259184ac00a4",
+      "docs/linkedspec-book/src/development/local-ci-and-regression.md": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-capacity.py": "c90916c331b16ff0ace09a40236ef339bda812a97d87b43339f1af9acf115d10"
+    },
+    "after": {
+      "CHANGES.md": "c93f7e930742541dc89483a3eb49ac6fce0d6e5cbd34bf9c33bc6ff56d6e768d",
+      "DEVELOPMENT_NOTES.md": "424728e2911a8e7f6cb4a3e17e4de769350e0366946a2eccdfdfb20cbcd3639c",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-capacity.py": "c90916c331b16ff0ace09a40236ef339bda812a97d87b43339f1af9acf115d10",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-pressure.json": "5f31d5788600be4948de9782c550a47ff4ddaee49623ad33bf959a298c3bfe49",
+      "docs/decisions/INDEX.md": "e23ef4c733c7674f932f5d7260cc7d1739f116025ca296b45be89488eb811962",
+      "docs/history/changes/manifest.jsonl": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913",
+      "docs/linkedspec-book/src/development/documentation-workflow.md": "c853ad5e782e39e14e77286cc198c31c7f327e3332307813239a259184ac00a4",
+      "docs/linkedspec-book/src/development/local-ci-and-regression.md": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+      "doctrine/readme_stability/routes.jsonl": "f0d0998ba1091bd6124178a94c9c23eb8e655188b0a78f465b8027b438ea7a3a",
+      "scripts/check_readme_routing_pressure.pl": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+      "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d"
+    }
+  },
+  "scope": "Original draft producer, actual initial pressure255 channel and exact two draft roots retained. Fresh same-volume supplied replay uses only own read-only Git objects and captures complete process channels; it stops at the same uppercase matcher before archive/manifest/registry/index/ADR/book writes. Applied producer differs from initial draft only by two pressure matcher literals. Current readonly review additionally corrects the one source-blob path and references the retained actual applied producer; its original plan hashes remain unchanged. Actual stale-source-blob RED is retained. Initial replay reviewer used an unanchored heading guard; its exact unpublished draft survives and the final guard anchors real heading lines. No production tool or threshold changes."
+}

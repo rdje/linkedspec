@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: AST call .3.1.3.1 verified; array-end .3.1.3.2 is next. Remaining guarded/required/optional and independent private admissions stay open.
+Full PNT: Finite change-history .3.1.3.4 focused proof is verified; exact staged canonical receipt governs admission. Guarded AST array-end .3.1.3.2 follows the clean commit. Remaining required/optional and independent private admissions stay open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1` — One required resolver isolates six actual roles while preserving eager/lazy validation, source-helper ARRAY identity, trim slots/scoped copies, local scalar copies, return-payload slice aliases, native effects/errors/fatal identities/public callbacks and bounded branch fallback under explicit helper controls. Paired695 retains18 original isolation REDs/677 passing controls/all695 current GREEN; native18/branches44/cold12/inverse3, supplied41/160/evidence5/restoration, original-binding RED/restoration and full book57+32/three controls pass. All280 original hash-key inputs stay historical at2e9e5443e with every old proof/hash field exact. Readonly claim gates279 live inputs in67298 bytes. Public Phase0 passes1035/1035 in1186 seconds; Claim107/133/7 and Knowledge1331/10207 PASS. Final ordinary checks/hooks govern landing. Complete helpers/AST grammar/language, optional assignment callback and independent private admissions remain separate.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — One finite change-history archive preserves the exact clean9085eb1e5 suffix112 lines/27100 bytes and222 older immutable files. Production30 threshold/23 authority cases, four reviewer corruptions/restoration, original279-binding corruption/restoration and book89/3 pass. Files48→49, manifest47→48/26831→27407, decisions132→133/13144→13180 account only for this archive/ADR/index row/separator; other ceilings/rows remain exact. Accepted0130/0131 rows move unchanged into the table. Initial matcher/source-blob/one-line undercount instruments and results remain retained; separate final proof refreshes no original hash. Readonly claim gates356 live inputs in86568 bytes. Knowledge1332/10215 and both history checks pass. Exact staged canonical receipt/normal hooks govern landing. Runtime/source/tests and broader private admissions remain unchanged/open.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` from clean HEAD. Preserve279 current live inputs before bound writes; retain actual AST array-end guards, symbol callback, receiver fallback and native effects/identities under explicit secondary controls.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` from the clean canonical capacity commit. Preserve356 current live inputs before bound writes. Retain actual array-end guards, symbol callback, receiver fallback and native effects/identities under explicit secondary controls.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — finite capacity222/30/23/4, exact suffix112/27100, original279, book89/3 and356-input claim; index/separator repairs retain all initial evidence; canonical receipt governs landing.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1` — main695/cold12, paired18 RED/695 GREEN, native18/branches44/roles6/inverse3, supplied41/160/evidence5/book89/3; original280 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0` — main171/cold4, paired3 RED/171 GREEN, native3/branches15/role1/inverse3, supplied39/158/evidence5/book89/3; original275/draft baseline preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1` — main222/cold5, paired9 RED/222 GREEN, native9/branches16/roles3/validation1/inverse3, supplied37/156, evidence5/book89/3; original273 preserved; public Phase0 1035.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` from clean HEAD. Preserve279 cur
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.0` — main345/cold5, native30, inverse13, supplied19/138, evidence4/book57/2; original233 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.1` — standalone224/11, native30, supplied17/136, evidence4/book57/2; original232 preserved; draft reference diagnosis retained.
 - `RUST-DEPENDENCY-WARNING-ZERO.8` — stale roadmap permissions corrected; RGX public/upstream boundary preserved; factory framework next.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` — linked bounded factory owners; current roadmap aligned; P1 policy projection correction next.
 
 ## History
 

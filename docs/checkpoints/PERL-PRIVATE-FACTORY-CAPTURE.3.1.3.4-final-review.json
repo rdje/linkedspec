@@ -1,0 +1,84 @@
+{
+  "result": "PASS",
+  "producer_sha256": "628122af066d7952afa180e248b4ce5bbc730ae13b33a54a6cfb781a026e3af6",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-book-review.json": "261b15db269a4bc9893f38356615841c09a5990ea531c9f91538d0c5c1c068fc",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-book-review.py": "67494942da895f39c6dbb0852371035fde9f4ff1d7cd7ba01f3bf12a7e084f92",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-book.json": "a3e017b5ce30895fe280741ad7edab59d1485167d21a6643612f4422c4f7ee44",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-book.py": "b37753b290156d3ee82a62b9b7c274a389f50a8cc7486f67ecbf16d9466e0827",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-controls.json": "7d6cdf02c38630edc5da353b49c87eff0b581feb635d8a51c5c101d833f8eb22",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-controls.pl": "ffb8c8e1c6518a78b853cc3531ae5d08c1601a0794dfd19174857a9601c2051e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-review.json": "927eec97d46d131f25f2f190482a480453238b1d47abeafe6c743c6f1bdce24b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-review.py": "fb09505be9c9a9f87b2352a2a5240be6ae1e7293a1c27df7e791c0b0bd9ab31f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-capacity.py": "84c304ed643fd1dc4448a60b579fc37786969ebf61ed875749bf21eba0077f65",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-controls.json": "9733a526ebe9be5552da14897322a90ff5318dad5085448d8fc9ec2adb941896",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-controls.pl": "3a69aa43b8f522db37e0cf0436ac4701e324962f1cfd2b945988a967e2fa7c16",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-evidence.json": "558729dd04f5d31c9c6726cd501e49d2885d55efeaf5eb934ec43832b6b660b5",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-plan.json": "a77cde1eb76c8284224f1678661ca4bf6aea43c73a7f8c5176fd5f292e5dd180",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-initial-metadata.json": "c96337dc403391bc3639787d8d9f9758467e85695d5c9daa0cc3ea9306244c82",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-plan.json": "74375168a4efe4214e2f8c309f46e218c4c2572fd4b480e3e401753e6d019e52",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preservation-control.json": "5c2002d708c5470aea5b5f66fb1a61035161a2c12ec2d7e740885ff447483bac",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preservation-control.py": "0d7c32f1ef4e6a78d975fbb55bc2979bc973a23dccee5685f7fae039719318f4",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preserve-review.json": "cb4517c03ec163ee5f1123ce29ce894b07442625bb72b89694923786e1a35a8d",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preserve-review.py": "d8cdfabf97b06f04c4144800d1ef7f13ab7dd55952238e2eb0dad4d566cfb687",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-pressure.json": "5f31d5788600be4948de9782c550a47ff4ddaee49623ad33bf959a298c3bfe49",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-rollover.json": "47ffd593392923fbd651062ac9d98442b76932ca6580226d1f647059b21ce553",
+    "docs/decisions/INDEX.md": "10bac442f509a6086f38da6a0ae3205f415b3c51bf106400826ee10080eae831"
+  },
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-capacity.py",
+        "final"
+      ],
+      "returncode": 0,
+      "stdout_base64": "RmluaXRlIGNhcGFjaXR5IHJldmlldyBQQVNTOiAyMjIgaW1tdXRhYmxlIGZpbGVzOzMwIHRocmVzaG9sZHMvMjMgYXV0aG9yaXR5IFJFRHMuCkNvbXBsZXRlIGZpbml0ZSBjYXBhY2l0eSByZXZpZXcvZXZpZGVuY2UgUEFTUzsgY2Fub25pY2FsIHJlY2VpcHQgZ292ZXJucyBsYW5kaW5nLgo=",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preserve-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "QVNULWNhbGwgcHJlc2VydmF0aW9uIHJldmlldyBQQVNTOyBvcmlnaW5hbDI3OSBwcmVzZXJ2ZWQgd2l0aCBtb2RlL3JldmlzaW9uLW9ubHkgY2hhbmdlCg==",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-preservation-control.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SGlzdG9yaWNhbCBwcmVzZXJ2YXRpb24gY29udHJvbCBQQVNTOiBhY3R1YWwgb3JpZ2luYWwtYmluZGluZyBSRUQvcmVzdG9yZWQgcmVhZG9ubHkgUEFTUwo=",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-draft-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "RHJhZnQgcHJlc3N1cmUvcmVwbGF5IHJldmlldyBQQVNTOiBhY3R1YWwyNTUgYW5kIHNhbWUgaXNvbGF0ZWQgbWF0Y2hlciBzdG9wOyBleGFjdCBkcmFmdC9hcHBsaWVkL3JlYWRvbmx5IGluc3RydW1lbnQgY2hhaW4K",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-book-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL3RocmVlIGFjdHVhbCBjb250cm9sczsgZXhhY3QgaW5wdXQgYW5kIHJlbmRlcmVkIHRlYWNoaW5nIGlkZW50aXRpZXMK",
+      "stderr_base64": ""
+    }
+  ],
+  "immutable_files": 222,
+  "production_threshold_cases": 30,
+  "production_authority_cases": 23,
+  "reviewer_controls": 4,
+  "historical_bindings_preserved": 279,
+  "book_sources": 89,
+  "book_controls": 3,
+  "scope": "Focused finite candidate proof only; exact staged canonical receipt governs admission. Independent clean-source/root/manifest/immutable-byte reconstruction, actual production threshold/authority controls, exact four evidence counterfactuals/rejections/restoration, original279 preservation/corruption, retained draft/applied/final instruments and complete book/include/rendered controls. Actual initial separator undercount remains retained; final measured budgets fit. No runtime or future-capacity admission follows."
+}

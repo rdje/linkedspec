@@ -1,0 +1,20 @@
+{
+  "args": [
+    "perl",
+    "tools/roll_document_history.pl",
+    "--surface",
+    "change_history",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "base64": "ZG9jdW1lbnQtaGlzdG9yeSByb2xsb3ZlcjogY2hhbmdlX2hpc3RvcnkgYXJjaGl2ZWQgMTEyIGxpbmUocykgYXMgNDk2NDsgY3VycmVudCBpcyAxNzkvNTEyIGxpbmVzIGFuZCAzMjMwNS82NTUzNiBieXRlcwo=",
+    "bytes": 119,
+    "sha256": "1b3fea63fd2e235f714f6845cb048b4266db14d5465001ed9233f9fe7f282491"
+  },
+  "stderr": {
+    "base64": "",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "revision": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+  "historical_bindings_preserved": 279,
+  "producer_sha256": "d8cdfabf97b06f04c4144800d1ef7f13ab7dd55952238e2eb0dad4d566cfb687",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-before-ast-call.json": "3d42718aa096607aec605b6cba4f62ea305b2e3f52439d48cf9ac3cd83ee449e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-freeze.json": "20f6e2309bed690f3bf6f54dbdc52c03831146aa37fe5689b618e1cbc3526a24",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-freeze.py": "fc1e42698bef249fc7ba5e0cd53d88cb9223344f01593009f6487b5607e2996b",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json": "a53600e0dcfdffe498060f50d8afd14f369c454a4de66e32359cde023148747f"
+  },
+  "scope": "All279 original AST-call Git input bindings and every proof/hash field remain exact. Only one live durability mode/revision changes; the already historical hash-key preservation claim stays unchanged. No AST-call runtime or book measurement is refreshed."
+}

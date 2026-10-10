@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / guarded AST call verified; array-end next
+- Status: `active` / finite change-history prerequisite verified; array-end next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -341,7 +341,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Status: `active` / four bounded guarded AST children
   Goal: Guarded AST required dependency boundaries with separate native validation-order proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1`
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4`.
   Owned paths: MethodLowering required seams in _lower_ast_scalar_held_hash_index_assignment_value_node, _lower_ast_call_statement, _lower_ast_array_end_mutation_method_statement, _lower_ast_assignment_operator_statement; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
   Planned tier: `focused`
   Planned focused proof: Actual native/current caller behavior, opaque dependency separation, contexts/aliases/effects/errors/public maps, retained source-bound faults/consumers and complete relevant book.
@@ -386,7 +386,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
   Status: `pending`
   Goal: AST array-end mutation required symbol-extraction boundary.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4`
   Owned paths: Required resolver return in _lower_ast_array_end_mutation_method_statement; bounded fixtures/proof/claim, Knowledge/book/continuity. Optional/direct callbacks stay .3.2.
   Planned tier: `focused`
   Planned focused proof: Actual symbol callback, pre-validation node/method/arity guards, native receiver fallback, context/aliases/effects/errors/maps and publication separation; source faults, supplied consumers and complete book under explicit secondary-helper controls.
@@ -404,6 +404,29 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned canonical boundary: none for bounded private implementation; original admissions remain open.
   Planned claim record: none: Declare measured record at activation.
   Acceptance: Preserve current bindings before writes and actual references/native behavior; commit before main method/value .3.1.4. No independent parent admission inferred.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4`
+  Status: `done` / `exact staged canonical receipt and normal hooks govern admission` (activated from clean `9085eb1e5075146ca00dab52304f85937cf7ea05`)
+  Goal: Admit exactly one change-history archive member and measured manifest/decision overhead before further guarded AST slices.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`
+  Owned paths: CHANGES.md and one new immutable clean-source suffix/manifest generation; one exact registry row change for change_history and exact indexed ADR prerequisite; move the unchanged0130/0131 index rows from below the authoring instructions into the existing table; bounded capacity producer/reviewer/claim, Knowledge and continuity. Existing runtime/source/tests, all older immutable bytes, root/per-file/aggregate ceilings and unrelated registry fields remain unchanged. Review/render existing mdBook teaching; no public semantics change.
+  Verification tier: `canonical`
+  Focused checks: Retain actual pressure RED before governed rollover GREEN; independently reconstruct exact clean-source suffix/blob/range/digest, current root and all older archive/manifest/decision bytes. Execute unchanged production threshold and accepted/indexed/exact-object authority functions with actual measured inputs and distinguishing REDs; reason-sensitive reviewer corruptions/restoration; current279-input AST-call preservation before bound writes and full book/include render. Normal doctrines/history/Knowledge/memory/diff and exact staged canonical CI/receipt.
+  Canonical trigger: Registry capacity and decision/history infrastructure require exact staged canonical admission; focused proof alone cannot land.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json`
+  Acceptance: Current CHANGES58706 bytes is276 bytes below mandatory rollover; collection48 files and manifest47 lines/26831 bytes reach admitted limits. Own the imminent required rollover rather than discard/shorten accepted history. Admit only one actual archive and its exact manifest growth plus this sole indexed ADR overhead under ADR0128/0129/0131 engineering precedent; no future reserve or new director grant. Preserve279 current AST-call inputs at clean9085eb1e5 before bound writes; no old measurement/hash refresh. Resume .3.1.3.2 only after canonical clean commit.
+
+  Owned defect: Decision INDEX.md places accepted0130/0131 rows below `## How to add a record`, outside its table (reproduce by reading that marker through EOF). Actual previous capacity producer appended old(INDEX)+INDEX_ROW; unchanged index lookup accepts links anywhere, so normal gates did not reject this presentation drift. Preserve both exact row bytes and all existing prose, move them in numeric order into the table, then insert only0132. The new producer/reviewer must derive the complete exact transformation and a displaced-row counterfactual must fail; no old ADR or accepted producer is rewritten.
+  Instrument recovery: Initial capacity writer correctly observes actual pressure255/lowercase rollover-required text but its uppercase REQUIRED matcher rejects before archive/manifest/registry/index/ADR/book writes. Retain exact draft producer, original pressure and two draft hot-root records; restore only those exact newly inserted records to clean base, correct only the two matcher literals, and capture supplied-isolation replay before retry. No production checker or history threshold changes.
+  Applied-instrument recovery: Actual rollover succeeds; independent CHANGES prefix/suffix/range/digest agree. Initial copied readonly reviewer names the old NOTES source blob, so capture stops before production controls. Retain exact applied producer, unchanged original plan and fresh actual source-blob RED. Current reviewer corrects only that source-blob path and identifies the retained actual apply producer; no measured plan hash is refreshed. Preserve the unpublished draft replay reviewer too; its first unanchored heading guard matched inline `## ` in the CHANGES preamble, and the final guard anchors real headings. All dependent follow-ups now require successful preceding exits.
+  Exact overhead correction: Initial index placement adds one row and one separating LF, so actual decisions census is133 files/13180 lines while the first metadata allowance is13179. Retain original applied producer/plan/control channels and both initial metadata files unchanged; their production threshold row records actual13180 rejected at13179. Separate final-capacity producer derives physical index growth, corrects only that same-width scalar in registry/ADR, writes a separately named final plan/control/evidence set and rejects any measured census above admitted ceilings. No initial measurement or hash is replaced.
+
+  Result: Focused finite proof PASS222 prior immutable files/30 production threshold/23 authority cases/four actual reviewer corruptions and exact restoration. Clean9085eb1e5 change suffix lines172–283 (112 lines/27100 bytes) becomes segment4964-a4dea8bac129; current root179/32305. Admit exactly change_history files48→49, manifest47→48 lines/26831→27407 bytes, decisions132→133 files/13144→13180 lines. Existing root/per-file/aggregate limits and unrelated physical registry rows remain exact. Restore unchanged0130/0131 index rows to the table, add only0132 and preserve old prose. Original279 AST-call inputs stay historical with mode/revision-only changes and actual corruption RED/restoration. Full book57+32/three controls PASS. Readonly publication gates356 live inputs in86568 bytes plus two compact historical inputs.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-* retain actual draft/applied/final producers and original/initial/final channels, exact roots/metadata/plans and all counterfactual bytes. Initial uppercase pressure guard, stale source-blob expectation and one-line separator undercount remain explicit retained REDs; no original measured hash/result is refreshed. Finalizer changes only the exact same-width decision line scalar in registry/ADR and produces separately named final proof. Actual census fits every admitted ceiling. Source/runtime/tests, old ADRs and dependency pins remain unchanged.
+  Reverify: final-review.py and publish-claim.py under tools/run_python_project_data.sh; defaults readonly. Initial capacity.py requires retained initial metadata, current final-capacity.py owns corrected proof. Capture/freezer/repair and --capture are one-shot writers. Earlier AST-call reviewers require accepted9085eb1e5 Git inputs.
+  Gate preparation: An early README check began before staging, fixing INDEX_MODE false and rejecting the absent newly staged ADR authority. Source trace identifies staged_result_exists/staged_new_adrs; the complete staged rerun passes20 surfaces/62 routes/40 mutation classes without record/checker changes. Claim verification passes108 records/135 claims/7 existing disclosed gaps. ADR0132 retains its initial-instrument review reference; the current readonly entrypoints are the final-review.py/publish-claim.py commands above.
+  Verification: Focused composed runtime-free capacity/preservation/instrument/book proof PASS. Knowledge1332/10215; both bounded-history checks and diff hygiene PASS. Canonical tier requires tools/run_ci_local.sh for the exact final staged candidate, its bound receipt and all normal doctrine hooks before landing; focused evidence alone admits no capacity. Guarded AST array-end .3.1.3.2 follows a clean canonical commit.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4 - admit finite guarded AST history capacity`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4`
   Status: `pending`
@@ -486,7 +509,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` | `pending` | Activate bounded AST array-end mutation from clean HEAD; preserve279 current claim inputs before bound writes. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` | `pending` | Activate bounded AST array-end mutation from clean HEAD; preserve356 current claim inputs before bound writes. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -647,7 +670,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Supplied41/160 PASS; original158 Git inputs exact except owned module overlay, with three prior reader JSONs and Trace. Standard public Phase0 passes1035/1035 in1186 seconds; both required Perl syntax checks PASS. Complete helpers/AST grammar/language, optional assignment callback, other guarded owners and independent private admissions remain outside this proof.
 - [x] **LOCKSTEP** — Full book57+32/three controls PASS; all280 original bindings historical at2e9e5443e with every old proof/hash field exact. Knowledge1331/10207 PASS; bounded roadmap-index/live/history/memory align and final ordinary checks/hooks govern landing. Array-end .3.1.3.2 follows a clean commit.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4
+
+- [x] **REPRODUCE / ISSUE** — Actual production history --check exits255 at292 lines/59406 bytes before rollover. Existing member48/manifest47/26831 limits are full. Accepted0130/0131 index rows occur below authoring instructions. Initial matcher/source-blob/metadata instruments and actual RED channels remain retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Required complete-record rollover adds one immutable member/manifest row. Previous capacity producer appends old(INDEX)+INDEX_ROW; filename authority checks do not enforce table placement. Physical index growth adds both a row and a separating LF, so the first13179 allowance rejects actual13180. Own tools and exact source/blob/census controls establish each mechanism.
+- [x] **FIX** — ADR0132 admits only one actual member, exact manifest growth and sole new ADR/index/separator overhead; all other fields/old immutable bytes stay exact. Move unchanged0130/0131 rows into the table and add0132. Retain all initial instruments/plans/results; separate finalizer corrects only the measured same-width scalar and rejects census overflow.
+- [x] **ADDRESSED (verified)** — Independent exact prefix/suffix/blob/range/digest/manifest reconstruction retains222 prior immutable files. Production30 threshold/23 authority cases pass. Four actual reviewer corruptions, including displaced index row with rehashed plan, reject; full restoration passes. Original279-binding corruption rejects beyond mode/revision. Full book89/3 passes; readonly composed proof and publication agree.
+- [x] **NO REGRESSION** — Runtime/source/tests, prior accepted ADRs, unchanged production checker/roller and dependency pins remain byte-exact. Exact staged canonical CI/receipt and normal hooks are the required admission boundary; focused capacity proof alone cannot land. Original AST-call public Phase0 compatibility remains historical at9085eb1e5, without remeasurement or hash refresh.
+- [x] **LOCKSTEP** — Current task/frontier, roadmap/index, bounded live/history/memory and Knowledge1332/10215 align. Book teaching clarifies finite capacity and decision-table placement; complete render/includes/three controls pass. Both history checks pass; original279 inputs remain historical. Current claim gates356 live inputs in86568 bytes; canonical receipt governs landing before array-end .3.1.3.2.
+
 ## Verification Log
+
+- `2026-10-10`, `.3.1.3.4`: Focused capacity222/30/23/4, original279 preservation/corruption, instrument chain and book89/3 PASS; readonly356-input claim86568 bytes. Exact clean-source suffix112/27100 and every old immutable/manifest/ADR byte survive. All initial matcher/source-blob/separator defects stay retained; final metadata13180 accounts exactly for index growth2. Canonical staged receipt and normal hooks govern admission; no future reserve or runtime change.
 
 - `2026-10-10`, `.3.1.3.1`: Bounded695/cold12/native18/branches44/inverse3, paired18 RED/677 controls/695 GREEN, supplied41/160/evidence5/original-binding restoration and book89/3 PASS. Original280 bindings stay historical at2e9e5443e; readonly279-live-input publication67298 bytes. Both required Perl syntax checks and standard public Phase0 1035/1035 in1186 seconds PASS. Claim107/133/7 and Knowledge1331/10207 PASS; final ordinary checks/hooks govern landing.
 
@@ -759,3 +793,7 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Split guarded AST .3.1.3 into four stable owner leaves before writes; activate hash-index key .3.1.3.0 from clean b50ce085a. Freeze275 current block-value inputs first. Preserve exact draft producer/two baseline results before stale header-only correction; same original rows otherwise compare byte-for-byte. Bounded171/cold4/native3/branches15/inverse3 and supplied39/158/full book89/3 pass; Evidence/claim pass; public Phase0 passes1035/1035 in1200 seconds. Ordinary doctrine hooks govern landing; AST call .3.1.3.1 follows clean commit.
 
 - `2026-10-10`: Activate AST call .3.1.3.1 from clean2e9e5443e; preserve280 inputs first. Refine all six required roles and eager/lazy validation before writes. Bounded695/cold12/native18/branches44/inverse3, supplied41/160/evidence5/original-binding restoration/full book89/3 PASS. Public Phase0 passes1035/1035 in1186 seconds; Claim107/133/7 and Knowledge1331/10207 PASS. Final ordinary checks/hooks govern landing; commit before array-end .3.1.3.2.
+
+- `2026-10-10`: AST-call commit9085eb1e5 passes all10 doctrines/post-pointer; brief0/clean Git verified. Own imminent change-history capacity under .3.1.3.4 before array-end: root58706 is276 bytes below rollover; collection48 and manifest47/26831 reach admitted limits. Existing ADR0129/0131 engineering precedent governs one finite canonical prerequisite, with no old immutable or threshold weakening.
+
+- `2026-10-10`: Finite change-history .3.1.3.4 focused proof222/30/23/4, original279 and book89/3 PASS; retain every initial instrument/result, exact final separator count and bounded356-input claim. Stage final canonical candidate/receipt before landing; then resume array-end .3.1.3.2.

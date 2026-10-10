@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2e9e5443ea38789fe454ee7ee24a68be81d4546c` — clean AST call-statement activation.
-- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 - isolate AST call required callbacks`.
+- activation_commit: `9085eb1e5075146ca00dab52304f85937cf7ea05` — clean finite change-history activation.
+- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4 - admit finite guarded AST history capacity`.
 - active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` (pending).
-- next_action: Activate bounded AST array-end mutation from clean HEAD; preserve279 current claim inputs before bound writes.
+- next_action: Activate bounded AST array-end mutation from clean HEAD; preserve356 current claim inputs before bound writes.
 - in_flight_uncommitted: none.
 - blockers: none; remaining guarded/required/optional, other owners/pipeline/output/full-private/mapped/canonical obligations remain open.
 - standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited.
 - task_owner: `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
-- authority: docs/knowledge/perl-method-ast-call-capture.md; retained factory protocol/current input grants. Earlier reviewers require accepted Git inputs; hash-key requires2e9e5443e.
+- authority: docs/knowledge/guarded-ast-change-history-capacity.md; current readonly final-review.py/publish-claim.py. Initial capacity.py requires retained initial metadata; no one-shot replay. Earlier AST-call proof requires accepted9085eb1e5 Git inputs.

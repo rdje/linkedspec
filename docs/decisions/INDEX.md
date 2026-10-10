@@ -161,6 +161,10 @@ changed* lives in git (layer D), not here.
 | [0128](0128-replacement-note-history-capacity.md) | One finite engineering-note rollover before selected replacement repair | 2026-10-08 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 
 | [0129](0129-producer-residual-change-history-capacity.md) | One finite change-history rollover before producer-bound residual repair | 2026-10-08 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0130](0130-finite-engineering-notes-aggregate.md) | One bounded hot-shard aggregate allowance; exact decision overhead | 2026-10-09 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0131](0131-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-10 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0132](0132-finite-change-history-member.md) | One finite change-history member and exact manifest/decision overhead | 2026-10-10 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).
@@ -168,5 +172,3 @@ changed* lives in git (layer D), not here.
 3. Link it from the task-tree(s) it relates to.
 4. To change a fact, add a new record (or mark the old one `superseded by 00NN`) — do
    not rewrite history.
-| [0130](0130-finite-engineering-notes-aggregate.md) | One bounded hot-shard aggregate allowance; exact decision overhead | 2026-10-09 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
-| [0131](0131-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-10 | accepted engineering maintenance; canonical admission required | history, capacity, verification |

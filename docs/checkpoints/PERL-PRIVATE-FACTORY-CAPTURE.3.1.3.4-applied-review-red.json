@@ -1,0 +1,26 @@
+{
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-applied-capacity.py",
+    "capture"
+  ],
+  "returncode": 1,
+  "producer_sha256": "a607c3078cac37c4b95c291f7cfedcd1f7a95c2f175e371adb17a168416a8e74",
+  "plan_sha256": "74375168a4efe4214e2f8c309f46e218c4c2572fd4b480e3e401753e6d019e52",
+  "resulting_inputs": {
+    "doctrine/readme_stability/routes.jsonl": "24d02bf25948900aa3273a81639d9d0d63c3a800a01d918b3ee3a0b65876d808",
+    "docs/decisions/INDEX.md": "10bac442f509a6086f38da6a0ae3205f415b3c51bf106400826ee10080eae831",
+    "docs/history/changes/manifest.jsonl": "595723d361bb9684bb4be4a1d8a81abf0db56df62554d5d195c5b79f84ec53b7",
+    "CHANGES.md": "e0e5df8143b8890b6b885d87603386389918414dfa1424e13203659973ecbe1e",
+    "DEVELOPMENT_NOTES.md": "424728e2911a8e7f6cb4a3e17e4de769350e0366946a2eccdfdfb20cbcd3639c",
+    "scripts/check_readme_routing_pressure.pl": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+    "tools/roll_document_history.pl": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+    "docs/linkedspec-book/src/development/documentation-workflow.md": "8568e7f95213a5cbc4284385b13d7ecdca1079599483174896354a44a77d19eb",
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+    "docs/decisions/0132-finite-change-history-member.md": "b4f28a11b6f62ea6a9bad88a364477d7cf4ea0c1e7537e5b4c34eef7ac7831d5",
+    "docs/history/changes/segment-4964-a4dea8bac129.md": "a4dea8bac129d901c055cf022e514391969d630b382dca4bad350aa866c3739c"
+  },
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS4zLjQtYXBwbGllZC1jYXBhY2l0eS5weSIsIGxpbmUgMzg4LCBpbiA8bW9kdWxlPgogICAgZ2xvYmFscygpW3BhcnNlci5wYXJzZV9hcmdzKCkubW9kZV0oKQogICAgfn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS4zLjQtYXBwbGllZC1jYXBhY2l0eS5weSIsIGxpbmUgMzEyLCBpbiBjYXB0dXJlCiAgICB2ZXJpZnlfYmFzZSgpCiAgICB+fn5+fn5+fn5+fl5eCiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy9kb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuMy4xLjMuNC1hcHBsaWVkLWNhcGFjaXR5LnB5IiwgbGluZSAyODIsIGluIHZlcmlmeV9iYXNlCiAgICBhc3NlcnQgc2VnbWVudCA9PSBleHBlY3RlZCBhbmQgcmVhZCh0YXJnZXQpID09IGFyY2hpdmUgYW5kIHBsYW5bJ3NlZ21lbnQnXSA9PSB0YXJnZXQsICdleGFjdCBjbGVhbiBzb3VyY2Ugc2VnbWVudCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogZXhhY3QgY2xlYW4gc291cmNlIHNlZ21lbnQK",
+  "scope": "Fresh actual replay of the applied producer reviewer stops at its stale NOTES source-blob expectation before production controls run. The archive/root/source range and digest already match independent CHANGES reconstruction. Retain actual applied producer/plan/channels without refreshing their hashes; only the readonly expectation and producer identity reference change."
+}
