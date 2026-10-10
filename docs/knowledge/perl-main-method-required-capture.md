@@ -13,10 +13,10 @@ answers:
   - "does the main array pipeline callback keep the actual source span"
   - "which readonly command reviews main method value callback isolation"
 date: 2026-10-10
-status: bounded source/runtime/book proof verified; ordinary landing and broader admissions separate
+status: historical bounded source/runtime/book proof verified at4b48593b5; broader admissions separate
 tags: [perl, actionir, callbacks, capture, aliases, validation, ast, method-value]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.4 retains518 main/10 cold assertions,42 complete native-current callback rows and23 controlled branch rows. Exactly42 original publication REDs and476 passing controls become518 current GREEN. Three syntax-valid semantic faults, supplied48 suites/168 files, five actual evidence controls, original291-binding corruption/restoration and complete book57+32/three controls pass. Retained native draft replays reproduce the read-only literal, shape-copy and seed-count mistakes without refreshing original channels."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier assignment review requires accepted049e1ba537f2bde635b2c0fed31fe83f6b3c129b Git inputs including its original live claim. MEMORY.md owns the current frontier."
+reverify: "Historical commands require accepted4b48593b59acb7aba4d616ae1bdc4320fbbf5364 Git inputs, including the original live claim, after later source/book/card edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier assignment review requires accepted049e1ba537f2bde635b2c0fed31fe83f6b3c129b Git inputs including its original live claim. MEMORY.md owns the current frontier."
 ---
 
 Only the required resolver return in `_lower_method_value_expr` changes to
@@ -88,3 +88,7 @@ syntax/Phase0 compatibility retains complete channels separately, with no comple
 transitive capsule, runtime benchmark or private/canonical admission inferred.
 Optional/direct callbacks, complete helpers/AST/language, output composition,
 mapped replacement and original parent admissions remain separately owned.
+
+All299 original live input identities now remain historical at4b48593b59acb7aba4d616ae1bdc4320fbbf5364.
+The later bare/mutation leaf preserves every original proof/hash field; its
+perl-method-slot-required-capture card owns the current bounded proof.

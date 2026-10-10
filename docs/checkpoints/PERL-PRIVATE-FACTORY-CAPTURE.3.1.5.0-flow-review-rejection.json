@@ -1,0 +1,12 @@
+{
+  "producer_sha256": "1f324c9a8e914d9062bcdbb596f61d72328f8a8e43555df26e7cc760f0ed9af5",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-flow-review-draft.py",
+    "--capture"
+  ],
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS41LjAtZmxvdy1yZXZpZXctZHJhZnQucHkiLCBsaW5lIDEzNiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBjaGFubmVscyhyb3cpID09IGNoYW5uZWxzKG9yaWdpbmFsKSwgJ25hdGl2ZSByZXBsYXkgY2hhbm5lbCBkcmlmdCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogbmF0aXZlIHJlcGxheSBjaGFubmVsIGRyaWZ0Cg==",
+  "scope": "Actual rejected byte-exact replay: Test::More expected ARRAY reference in the source-fault stderr contains a process-local address. Original probe/producer/results remain unchanged; no runtime lowering discrepancy."
+}

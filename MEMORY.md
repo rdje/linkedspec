@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `049e1ba537f2bde635b2c0fed31fe83f6b3c129b` — clean main method/value activation.
-- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4 - isolate main method value required callbacks`.
-- active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` (done).
-- next_action: Activate .3.1.5 from clean HEAD; preserve299 current inputs, then split scalar/return/mutation required helpers into bounded children before production writes.
+- activation_commit: `4b48593b59acb7aba4d616ae1bdc4320fbbf5364` — clean bare/mutation required activation.
+- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0 - isolate bare mutation required callbacks`.
+- active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0` (done).
+- next_action: Activate generalized returns .3.1.5.1 from clean HEAD; preserve307 current inputs, then refine actual payload/statement required paths before bound writes.
 - in_flight_uncommitted: none.
-- blockers: none; complete helper/AST/language/optional/direct/output/mapped/full-private/parent/canonical admissions remain separate.
+- blockers: none; optional package-flow repair .3.2.0 and broader independent admissions remain separate.
 - standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited.
 - task_owner: `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
-- authority: main final-review.py/preservation-control.py/publish-claim.py defaults readonly; claim299 inputs/69961 bytes. Earlier assignment needs049e1ba53 inputs. TYPE-REFERENCE-BOOK stays queued.
+- authority: perl-method-slot-required-capture card names readonly final-review.py/preservation-control.py/publish-claim.py;307/73390 claim passes. Earlier main proof requires accepted4b48593b5 inputs. Capture/freezer/--capture one-shot; TYPE-REFERENCE-BOOK queued.

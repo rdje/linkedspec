@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0 — Bare/mutation required callback isolation
+
+Bind only the required resolver returns in the bare-source and mutation-slot owners. Preserve eager trim /
+primitive CODE validation before undefined input, local source copies, actual public callback maps, native
+contexts/error effects/fatal objects and exact kind/reserved/retired/primitive/flow/method guards and results.
+Complete455 main/11 cold assertions pass. Nine native-current callback rows and58 bounded branch rows match;
+identical455 TAP retains9 original publication REDs/446 controls. Six syntax-valid faults, supplied50 suites /
+170 files, five evidence corruptions, original299-binding corruption/restoration and complete book89/3 pass.
+Readonly claim binds307 live inputs in73390 bytes; original main proof fields stay historical at4b48593b5.
+
+Public Toolbox diagnosis confirms the existing package-flow callback is reachable and distinct from the map
+entry. Own/schedule optional capture under P2 .3.2.0 without changing that branch. Preserve the original
+compact-argument expectation failure, fixed native16/169, branch-removal semantic RED and all six native
+replay channels. Only the actual Test::More expected ARRAY address in mutant stderr is normalized; raw
+channels, rejected reviewer and exact differing-line diagnostic remain tracked. Initial trim-zero fixture
+expectation corrected before capture; production guards stay native. Historical default/block card frontier
+projections now route to MEMORY/task authority. Generalized returns .5.1 follows this ordinary clean commit.
+Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035 with complete
+channels retained. Full transitive input/private/canonical admission remains separately owned.
+
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.4 — Main method/value required callback isolation
 
 Bind only the shared required resolver return in _lower_method_value_expr. Preserve14 eager roles before the

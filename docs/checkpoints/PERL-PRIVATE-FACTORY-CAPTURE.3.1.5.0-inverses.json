@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "producer_sha256": "acd52a8c3bc38bbd42c953fa6999789e165e9d3c44285fecab82586721c286e3",
+  "source_sha256": "6ef4844f5b3a7b8cc137eda4d528ffdd272d2e7bc1072196b866f74156e6257b",
+  "assertions": 455,
+  "rows": [
+    {
+      "case": "bare-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-bare-required.json",
+      "sha256": "b79377e10c72d1da1cfedaad18996492c3e945973da6a68c9ee7f13abf44aa6e",
+      "source_sha256": "752b587c3bf34606ee9ae85bc6edc0ab6c1ee59c42799dd9d5975d0c2f90ffe4",
+      "reason": "_lower_source_slot_bare_scalar_read_expr/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "bare-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-bare-identity.json",
+      "sha256": "42d3ebd170cec88ff7d61df88a2647b0f9fe18292cdeb2919a6bd1e0c22e4b3f",
+      "source_sha256": "a0632d91febe5cdc08b1e46504c089ebe3dcacda0ff15f64496d9f4d286e85de",
+      "reason": "_lower_source_slot_bare_scalar_read_expr/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "bare-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-bare-diagnostic.json",
+      "sha256": "a708278cbd72e4c7c62ed24c140f842be927649948096e62590984b0b37de316",
+      "source_sha256": "26d2543dd2618c68601e556a4cdb3c9677592153cf2d5cfcd1ec99f0d320da21",
+      "reason": "_lower_source_slot_bare_scalar_read_expr/trim_action_ir_value eager diagnostic precedes undefined-input guard",
+      "observed": "RED"
+    },
+    {
+      "case": "mutation-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-mutation-required.json",
+      "sha256": "f679b1b4edd3ffb2fed3f1ee7c2cb53e56eca988992dd925fe597ad8210d0f08",
+      "source_sha256": "55c5a0142c4b11f2b1583ea692fbc3028d4e1c17d47c87a6b7f85a2a7ecbadcc",
+      "reason": "_lower_mutation_slot_value_expr/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "mutation-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-mutation-identity.json",
+      "sha256": "cbee577f1a7e8c032212cff25e8c08c6d9f757413ef26764b8dd531563e34799",
+      "source_sha256": "ad91508662cb3f6c9262597f5b0db049159cbcc180895395c6ab629a96ac18d7",
+      "reason": "_lower_mutation_slot_value_expr/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "mutation-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-inverse-mutation-diagnostic.json",
+      "sha256": "c806bdc3d965bd286d39c977a61cb0fad31aa801334e714e2d8730d1be7497b3",
+      "source_sha256": "e7f34f7ae75f6e540cbd9c5cfcdfb3be3bb00965b5244cba408013f6b2922175",
+      "reason": "_lower_mutation_slot_value_expr/trim_action_ir_value eager diagnostic precedes undefined-input guard",
+      "observed": "RED"
+    }
+  ]
+}

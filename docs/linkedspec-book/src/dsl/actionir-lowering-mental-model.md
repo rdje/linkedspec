@@ -1376,6 +1376,36 @@ secondary-helper controls verify these bounded owner paths; complete helper and
 AST language behavior, optional/direct callbacks, output composition and mapped
 replacement retain separate admission.
 
+Bare-source and mutation-slot required callbacks now have separate private capture boundaries.
+The bare-source owner requires trim; the mutation-slot owner requires trim and
+primitive-literal lowering. Both validate those callbacks before rejecting an
+undefined input. Each callback receives the existing local source scalar copy,
+so changing that argument leaves the caller's original source unchanged. Public
+dependency maps keep the actual callbacks, and scalar context, successful error
+effects and fatal exception objects retain their native behavior.
+
+Bare-source classification still rejects reserved literals and engine locals.
+For an ordinary name such as `items`, remembered array kind produces `[@items]`,
+hash kind produces `{%items}`, and other or unknown kind produces `$items` in
+the Perl backend. The optional kind callback receives the existing local name
+slot. A retired `:items` spelling still reaches its migration diagnostic.
+
+Mutation values try bare-source lowering before primitive lowering. A nonempty
+bare result, including `0`, returns immediately; a defined primitive result,
+including an empty string, also returns immediately. An unclaimed identifier
+stops before flow and method fallback. A trimmed numeric string `0` continues
+through those fallbacks if the controlled earlier lowerers return undefined.
+Method fallback rejects empty results, accepts `0`, and otherwise keeps the
+current trimmed source. A legacy flow callback's source mutation remains visible
+to that fallback.
+
+The legacy optional flow branch selects an existing package callback rather than
+the public dependency map's same-named entry. Required callback isolation preserves
+that selection; isolating this direct callback remains separate work. Opaque and
+known required children each have their own capture, so equal returned text cannot
+transfer their publication to a parent. Explicit secondary-helper controls bound
+these checks; they do not admit complete helper or language behavior.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

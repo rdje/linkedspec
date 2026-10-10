@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Bare/mutation source guards and actual legacy package-flow selection
+
+The bare-source owner eagerly requires trim; mutation eagerly requires trim/primitive. Both copy the source
+scalar before invoking callbacks. Bare-kind receives a local name slot and retains its optional selection;
+mutation accepts nonempty bare results and defined primitive results, including empty/reference values.
+Unclaimed identifiers stop before flow. Numeric0 is not an identifier and can reach flow/method fallback
+when earlier controlled lowerers return undefined. Flow mutation survives into that fallback. The required
+slice changes only two resolver returns; all9 native callback and58 bounded branch observations stay exact.
+
+The legacy mutation flow branch reads a package variable, not a required/map acquisition. Public Toolbox
+normalizes and(true,false) to callback argument and(true, false); a localized package callback supplies the
+actual emitted mutation value. Original16 TAP with its one wrong compact-argument expectation stays intact;
+fixed16/169 and a syntax-valid package-branch-removal RED diagnose the separately owned P2 .3.2.0 repair.
+No authored-language failure or optional capture fix is inferred from the controlled publication inheritance.
+A replay initially treated Test::More's expected ARRAY address as stable. Retained raw channels establish
+that one process-local hex address as the only difference; final comparison normalizes only that named line,
+keeping all stdout and remaining stderr exact. Rejected reviewer and actual rerun remain durable inputs.
+
+Old default/block cards projected completed leaves as next. Remove that stale current projection while
+preserving dated proof and routing selection to MEMORY/task ownership. All299 original main input identities
+and every old proof/hash field remain historical at4b48593b5. Current bounded claim307/73390 and full book /
+recursive-include controls preserve separate complete-helper/AST/language/private/canonical admissions.
+Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035 with complete
+channels retained. Full transitive input/private/canonical admission remains separately owned.
+
+
 ## 2026-10-10 — Main method/value acquisition order and path-specific aliases
 
 The shared required resolver validates14 eager callback roles before its undefined-input guard. Inference is

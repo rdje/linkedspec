@@ -8,10 +8,10 @@ answers:
   - "does MethodLowering default construction preserve the actual OwnerDispatch map"
   - "does cold MethodLowering default construction load SourceEmissions"
 date: 2026-10-10
-status: bounded default selection verified; required and optional dependencies remain open
+status: historical bounded default selection verified; current frontier belongs to MEMORY.md
 tags: [perl, actionir, methods, callbacks, identity, default-factory]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.0 retains426 main/six cold assertions,24 effective source faults and25 direct suites in144 supplied files. Two native/current19-callback map ledgers match. Every actual reference/same-name replacement/native alias and opaque equal-text publication control passes. Four actual reviewer corruptions and one original-binding corruption reject/restored PASS; complete57-source book/two controls pass. Original244 bindings remain historical. Initial30 all-GREEN captures/producer retained before prose-only scope correction and unchanged-input recapture."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. Original default-selection reviewers require accepted89a4ede6f inputs. Current inline-control integration/original240 preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py. Current book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. Original default-selection reviewers require accepted89a4ede6f inputs. Historical inline-control integration/original240 preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py. Historical book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
 ---
 
 MethodLowering::default_deps_for_package keeps the actual OwnerDispatch map and
@@ -44,8 +44,10 @@ review reconstructs the prose/console-only correction and verifies unchanged
 runtime inputs and actual recapture. No production or fixture change followed that
 correction, and no original runtime failure is invented or hidden.
 
-Required trim .3.1.0 and inference .3.1.1 are accepted; inline .3.1.2.0 is accepted; remaining block/required families .3.1.2.1
-through .6 and optional/direct calls .3.2 remain planned. Other owners, automatic pipeline scope activation, explicit output
+This card records the bounded default-selection boundary, not the current task
+frontier. Current required-family selection and accepted children belong to
+MEMORY.md and docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Other owners,
+automatic pipeline scope activation, explicit output
 composition, complete private Phase0, mapped replacement and independent canonical
 admission remain open. Registration selects an actual callback; it does not prove
 that a successful helper has published or composed a packet.

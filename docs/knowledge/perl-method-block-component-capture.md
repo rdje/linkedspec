@@ -10,10 +10,10 @@ answers:
   - "does private block component binding preserve actual reference return identity"
   - "what is the native RED GREEN proof for block component dependency capture"
 date: 2026-10-10
-status: block component and side-effect required boundaries verified; local-return value and remaining owners open
+status: historical block component and side-effect boundaries verified; current frontier belongs to MEMORY.md
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original inline reviewers require accepted65bd00faa inputs. Current book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original inline reviewers require accepted65bd00faa inputs. Historical book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -64,9 +64,10 @@ and five evidence controls reject then restore PASS, including missing consumer
 results. Complete book capture retains57 inputs and both source/render controls.
 No old measurement or input hash is refreshed.
 
-Local-return/value .3.1.2.2 is next, followed by remaining required/optional owners.
-Refine that family before writes if AST-first and fallback controls exceed a safe
-slice. Other owners, automatic pipeline scopes, explicit output composition,
+The local-return/value family subsequently landed under .3.1.2.2.0 and .3.1.2.2.1;
+their dated facts and accepted Git inputs have separate cards. Current task selection
+belongs to MEMORY.md and docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Other owners,
+automatic pipeline scopes, explicit output composition,
 complete private Phase0, mapped replacement and independent canonical/parent
 admission remain open. Production lowerers do not yet publish packets; no shipped
 pipeline failure is inferred from these controlled integration constraints.
