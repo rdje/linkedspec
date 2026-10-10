@@ -1,0 +1,279 @@
+{
+  "result": "PASS",
+  "producer_sha256": "b38696afe1617e9d0fa7d38418db2f63a1d8bf2b13149cc430149cd4b5cd4461",
+  "sources": {
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "0e77c4ac0fe9ae4bf2c727ff0fab7054862f8647fc176b0f892ec2d606208394",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "abe3da322820ec9de791e55887ab6377f4d5c4aac6381b73c2e0ce9c351b50d7"
+  },
+  "fixture_assertions": {
+    "t/actionir_method_default_capture.t": 426,
+    "t/actionir_method_default_capture_cold.t": 6
+  },
+  "rows": [
+    {
+      "case": "native-trim_action_ir_value",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-trim_action_ir_value.json",
+      "sha256": "5f51bf8b89dd127f020205e657fa66d2d5010b2e6902867c9f81f5b8d9577177",
+      "source_sha256": "642504796633ef804764670a0ade95d64766800f3fb9a5f64c5043aa58d752ee",
+      "reason": "trim_action_ir_value actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-split_declare_symbol_names",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_declare_symbol_names.json",
+      "sha256": "08cf2eee99012664e873386a1ee166358a64db956701db202882744ebda97342",
+      "source_sha256": "5faf91a02cd80d6b730d1256c2b5bddee548c6a3a3dcc56a243b9cf417e52047",
+      "reason": "split_declare_symbol_names actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-parse_declare_binding_entry",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-parse_declare_binding_entry.json",
+      "sha256": "1c61fc22e038da9b9b47a3137a88933d830ea01fe3ba67072ad6309cfc94fb5a",
+      "source_sha256": "59022f81feaacf257ea8afd2ddefb09aa734476e7bb931d857a7737cc142b980",
+      "reason": "parse_declare_binding_entry actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_declare_initializer_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_declare_initializer_expr.json",
+      "sha256": "cfea865223ae0f6dbc0cbc1adb690bba65b5359367cbea2742852b7396340a6c",
+      "source_sha256": "ecd790e5d880f7ece91e6b4dda346d0c46b6e0a185b9e273fe5d88d11040889b",
+      "reason": "lower_declare_initializer_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-parse_method_function_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-parse_method_function_expr.json",
+      "sha256": "e94b80784d716ac16fc273963bdb8888b34f2821d8d8db6f320d26c5dbba4bbb",
+      "source_sha256": "0bb26ace218d9ac411f4e9ae85a7cf62f17cbd19faabf5dcce11ce5984d2d874",
+      "reason": "parse_method_function_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-normalize_method_args_with_optional_scope",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-normalize_method_args_with_optional_scope.json",
+      "sha256": "7586ae4b3b49c42c102643f4256317ff43f953548adca39f397d778116304b6c",
+      "source_sha256": "ba08ed6d7c89d4f52b1b3ea79cb16066a7ea909c0820305e7e283af7050518fa",
+      "reason": "normalize_method_args_with_optional_scope actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_direct_nested_access_value_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_direct_nested_access_value_expr.json",
+      "sha256": "9cabc5ee0bd0ef29b40cae767de136f27bff63eb5bb644a57f2a1fe1ac3e9113",
+      "source_sha256": "0fe04ec86bd17747dd63b2437115530b3edda38346248985170a80ceb3c4831f",
+      "reason": "lower_direct_nested_access_value_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-extract_array_symbol_name",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_array_symbol_name.json",
+      "sha256": "09d1b829d0af3dfdb6bc32613f15747eec8660e652b51c00911cba676811535c",
+      "source_sha256": "dc71cb7fd21818ba98e9b70e135774703ffd7209e4a98d09ba2567f094fc2e97",
+      "reason": "extract_array_symbol_name actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-extract_hash_symbol_name",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_hash_symbol_name.json",
+      "sha256": "66e04a0c0460521f5120d5e677999cadbf6432bee27acee4c9e063228298ff7d",
+      "source_sha256": "555465499c1add9060450f84c8cca17ecf56615c655ab6874e756bda6b015e9c",
+      "reason": "extract_hash_symbol_name actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-extract_scalar_symbol_name",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_scalar_symbol_name.json",
+      "sha256": "c31768e7f06b302df21b0327f72f54ac16a55f1f3a509d5f76619808de10426f",
+      "source_sha256": "41a5dd8fba96bf976eb74c69c440356ad00fb0aff3ad198eb74796e01daedf7e",
+      "reason": "extract_scalar_symbol_name actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_scalar_access_key_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_scalar_access_key_expr.json",
+      "sha256": "a6dcd20d710f2649c99dbfda59e8b6f00fb1d9333b7dc42f689dce9f2f2570b1",
+      "source_sha256": "5cdf5c2b305b9488d3763d6e494deaa9c303f9e68169962bdc4b75c9412f6afd",
+      "reason": "lower_scalar_access_key_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_primitive_literal_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_primitive_literal_expr.json",
+      "sha256": "ef01e03323412200891cc6b2db1cd75ad907236f34e704271914d9d1de9f8b95",
+      "source_sha256": "7f8ac533d251f356d5c37205863056697dce4426defc8bed85e3b2c99855a165",
+      "reason": "lower_primitive_literal_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-infer_scalar_container_kind",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-infer_scalar_container_kind.json",
+      "sha256": "0dddaca24c0075384ee7febf0145d26b3c1b0a9adce38923df7ce35a25014dee",
+      "source_sha256": "a2e786d91f15efa7a11da44e1c9d5f54f487c4745d35cad0d5ef584bd03d0847",
+      "reason": "infer_scalar_container_kind actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-split_top_level_csv",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_top_level_csv.json",
+      "sha256": "d593e9f9ad199560ec63cc7da6f9d9a9dcb6cfde80d8e49458c911cf5e10aafc",
+      "source_sha256": "fb760a20e78bde29255a3d70f1ad9629f702cb1b698c6f87f34f82e7bf2df531",
+      "reason": "split_top_level_csv actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-split_action_ir_statements",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_action_ir_statements.json",
+      "sha256": "df50e88e352679f5a0fa1b186b6c91358f45a62a1076fcd4a6600783d40d7ab7",
+      "source_sha256": "d1dbb215ee7570de9cd2254037c7144efe96e61bc969d1ed9b920074d79bde74",
+      "reason": "split_action_ir_statements actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_array_pipeline_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_array_pipeline_expr.json",
+      "sha256": "8e6e9ef829356f501276682bfcea5306e28b657a5e7dda7efa5dc07004f56475",
+      "source_sha256": "4d6e3c36910a54c08ad2e992bc42127dc728c3d2ab00a4839f1571f83dcb5bf7",
+      "reason": "lower_array_pipeline_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_assignment_source_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_assignment_source_expr.json",
+      "sha256": "1ce37b008fa81071faf27717930d802c555ce9a9d2022e833ff288cdde93dfa6",
+      "source_sha256": "37e15d312ca633eb38d29e95b5f0b3e10dcac52508776267c9a9ea30077e732a",
+      "reason": "lower_assignment_source_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-lower_flow_composite_expr",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_flow_composite_expr.json",
+      "sha256": "d3ac1dc2fa269ce4c191cd7e29227f95bc86417f9b1be1e51f837f2491440452",
+      "source_sha256": "d1622a2d18a0d488b97de7e6f299da947c138594a971bd08c9bebebd0c137eab",
+      "reason": "lower_flow_composite_expr actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "native-strip_literal_delimiters",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-strip_literal_delimiters.json",
+      "sha256": "da82924854a3b318dd24ce977bf873ed868f8cfe5fb3fcede516992f666f3e1c",
+      "source_sha256": "2faddb54003923114b333e744fe405deda2f799b174d0f6438b011f0fd7f5905",
+      "reason": "strip_literal_delimiters actual native reference is selected in current scope",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "missing-factory",
+      "module": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-missing-factory.json",
+      "sha256": "29fa448f069edcb723af4d93d3b32236f200ec89314271b784ae88bf496e09bc",
+      "source_sha256": "bd11bec958e3ba1b92c6d42cc00e7412d21e1c2701993c5ae40262fb22e51601",
+      "reason": "native default selects each actual reference exactly once",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "custom-target",
+      "module": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-custom-target.json",
+      "sha256": "5308cd8eb375f631a074db32a3e6ec20d8a1da797c32fd8d54e51d9ea629fafc",
+      "source_sha256": "38fabd6ccb52955f05fe091073e9c86d9378b963f9a0b76304516a6a0cc2b7d5",
+      "reason": "trim_action_ir_value custom target cannot register its native alias",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "same-name-reference",
+      "module": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-same-name-reference.json",
+      "sha256": "81ed3f60084f1533e7b3387c14776919e81597e7349ebd8af7fd61a1be06500b",
+      "source_sha256": "9889c42414037e1ee37a3bf7e107afe9c475b6c53d3065508675943dab21ff2f",
+      "reason": "trim_action_ir_value same-name replacement remains opaque",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "copied-map",
+      "module": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-copied-map.json",
+      "sha256": "3b4caf24fce9ce0db1f0772f94bfa306e6ebefde1dbecefc5d8142776f0c56ff",
+      "source_sha256": "f87aea12abbbd1ab726efbad75d8729a666d15923333f48c8a14e8e3889880b4",
+      "reason": "default factory returns the exact actual OwnerDispatch map",
+      "fixture": "t/actionir_method_default_capture.t",
+      "assertions": 426,
+      "observed": "RED"
+    },
+    {
+      "case": "cold-loading",
+      "module": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-cold-loading.json",
+      "sha256": "eda51ffae7db0d0d8b9a283a3c4d25eac96b19fb02080d554d328fef9b45138d",
+      "source_sha256": "56e29b662f1cc125375fe78ef18bdc018da57a0dd2a0e2744a008851119c11dc",
+      "reason": "cold method default keeps SourceEmissions unloaded",
+      "fixture": "t/actionir_method_default_capture_cold.t",
+      "assertions": 6,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Each of nineteen method native definition references removed separately, factory registration omitted, custom target/ref selection bypassed, actual map copied and cold loading introduced; effective syntax-valid semantic faults with complete positive-sized TAP and named REDs. Exact supplied bytes restore after every case."
+}

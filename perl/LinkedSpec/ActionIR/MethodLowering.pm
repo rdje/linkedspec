@@ -132,7 +132,7 @@ sub _runtime_typed_truthiness_expr {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::build_dep_map(
+ my $deps = LinkedSpec::OwnerDispatch::build_dep_map(
   __PACKAGE__,
   $pkg,
   [
@@ -156,7 +156,15 @@ sub default_deps_for_package {
    'lower_flow_composite_expr',
    'strip_literal_delimiters',
   ],
- )
+ );
+ # Both the target and the actual definition-owned reference must match.
+ # Keep public map/callback identities and cold require-only behavior intact.
+ if (defined($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+  && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_method_emission_callback) {
+  LinkedSpec::RuleIR::EmitContext::_register_builtin_method_emission_callback($_)
+   for values %$deps;
+ }
+ return $deps
 }
 
 #------------------------------------------------------------------------------

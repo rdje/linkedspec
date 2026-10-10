@@ -1,0 +1,10 @@
+{
+  "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-before-construction.json",
+  "original_sha256": "42570711a0d569714ee04b6dec8a4171d3d9c2f420fd7fc75a337721abf2d133",
+  "after_sha256": "0851f5c07bb6171ae5c7b89aac2dad629dfd5ac6e5a0dcf6ba7125609a3e40ee",
+  "verified_bindings": 244,
+  "producer_sha256": "448abd2252a3f78ffeae665109ba6d8e409d2949150773ee9998c66c460d2af5",
+  "scope": "Only original live durability mode/revision changes. All original proof fields and hashes, including already historical bindings, remain exact. No historical measurement is refreshed."
+}

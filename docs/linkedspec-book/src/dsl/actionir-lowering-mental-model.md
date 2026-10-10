@@ -1078,6 +1078,24 @@ does not load the private emission channel or Trace. Registration selects a
 callback; later output builders must still publish and explicitly compose actual
 packets. Other dependency owners and pipeline activation remain open.
 
+MethodLowering defaults now select their actual native callback references.
+The built-in EmitContext target returns its original dependency map and callback
+fields. A separate definition-owned catalogue compares each actual callback with
+the reference retained when EmitContext loaded. Replacing `_trim_action_ir_value`
+under the same public name keeps the replacement in the public map and leaves it
+opaque. Retaining the original callback still selects that actual native reference
+in the current scope. A custom target that aliases native callbacks keeps those
+references but cannot register them through the default factory.
+
+For example, a same-name replacement can emit and return the literal `same`.
+Its ordinary value survives; equal text supplies no selected emission packet.
+Native-reference selection is scoped to the actual source and producer invocation,
+so nested equal-source or producer scopes cannot borrow the enclosing selection.
+Cold default construction loads neither the private emission channel nor Trace.
+Required and optional MethodLowering dependency calls remain the next integration
+steps, followed by other owners, pipeline scopes and explicit output composition.
+Default selection alone makes no claim that a helper has published a packet.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

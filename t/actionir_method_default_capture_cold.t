@@ -1,0 +1,14 @@
+use strict;
+use warnings;
+use Test::More;
+use Scalar::Util qw(refaddr);
+use LinkedSpec::RuleIR::EmitContext ();
+use LinkedSpec::ActionIR::MethodLowering ();
+my $map = LinkedSpec::ActionIR::MethodLowering::default_deps_for_package('LinkedSpec::RuleIR::EmitContext');
+is(ref($map), 'HASH', 'cold default returns native map shape');
+is(scalar(keys %$map), 19, 'cold default retains actual key population');
+is(refaddr($map->{trim_action_ir_value}), refaddr(LinkedSpec::RuleIR::EmitContext->can('_trim_action_ir_value')), 'cold public callback stays exact');
+ok(!$INC{'LinkedSpec/ActionIR/SourceEmissions.pm'}, 'cold method default keeps SourceEmissions unloaded');
+ok(!$INC{'LinkedSpec/Trace.pm'}, 'cold method default keeps Trace unloaded');
+ok(!defined($LinkedSpec::ActionIR::SourceEmissions::_producers), 'cold selection creates no producer scope');
+done_testing;

@@ -1201,6 +1201,41 @@ sub _register_builtin_contract_emission_callback {
  return $callback
 }
 
+# MethodLowering defaults have their own definition-owned population. A later
+# lookup under the same public name cannot select a replacement callback.
+my @builtin_method_emission_callbacks = (
+ \&_trim_action_ir_value,
+ \&_split_declare_symbol_names,
+ \&_parse_declare_binding_entry,
+ \&_lower_declare_initializer_expr,
+ \&_parse_method_function_expr,
+ \&_normalize_method_args_with_optional_scope,
+ \&_lower_direct_nested_access_value_expr,
+ \&_extract_array_symbol_name,
+ \&_extract_hash_symbol_name,
+ \&_extract_scalar_symbol_name,
+ \&_lower_scalar_access_key_expr,
+ \&_lower_primitive_literal_expr,
+ \&_infer_scalar_container_kind,
+ \&_split_top_level_csv,
+ \&_split_action_ir_statements,
+ \&_lower_array_pipeline_expr,
+ \&_lower_assignment_source_expr,
+ \&_lower_flow_composite_expr,
+ \&_strip_literal_delimiters,
+);
+
+sub _register_builtin_method_emission_callback {
+ my ($callback) = @_;
+ return $callback unless ref($callback) eq 'CODE'
+  && defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer;
+ for my $builtin (@builtin_method_emission_callbacks) {
+  return LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($callback)
+   if LinkedSpec::ActionIR::SourceEmissions::_same_reference($callback, $builtin);
+ }
+ return $callback
+}
+
 1;
 
 sub _lower_assign_method_statement {

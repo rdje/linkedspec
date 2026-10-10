@@ -1,0 +1,158 @@
+{
+  "result": "PASS",
+  "reason": "Inherited inverse scope prose named constructor controls; correct descriptive text and console label only. All initial commands passed; production and fixtures unchanged. Original producer and all30 actual captures retained before repeat capture.",
+  "producer_before_sha256": "f0c83c918aae1cf5200d5c28177cce48eb3b8affd01ba867b80d699967c043b2",
+  "producer_after_sha256": "b38696afe1617e9d0fa7d38418db2f63a1d8bf2b13149cc430149cd4b5cd4461",
+  "rows": [
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-cold.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-cold.json",
+      "sha256": "35f3370270bb2c007833c4857a3b3df8b4f868782de049c8a6c55cfd16ac8226"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-consumers.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-consumers.json",
+      "sha256": "664e7ebd0e9a782d9f7c3c0a50a1755fe92662dbbaaa67eedd9b14f59ac719e6"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-fixture.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-fixture.json",
+      "sha256": "5417c8beb282488a2f5daf6f824976b24e9b37754a6d2ffdd11278a846d7ff10"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-cold-loading.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-cold-loading.json",
+      "sha256": "b8a80b6c68338833bf044ce4ba419ecb432c0ad92742d53c8da46f9ffcf66eb1"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-copied-map.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-copied-map.json",
+      "sha256": "dbd26c9a4a1b0277d998f74d2e7d8b94456c9fb55145fd58fdc988b750be9819"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-custom-target.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-custom-target.json",
+      "sha256": "d5b77f21fbec3d008e8ebbbc2bd202a797b04c9306043b0ff4e000bc293ac942"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-missing-factory.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-missing-factory.json",
+      "sha256": "be8acbe0b83258f00ca0d8f58783bde5f32abb9d685734fae00229f4ac182f20"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_array_symbol_name.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-extract_array_symbol_name.json",
+      "sha256": "fa1db55db7c53a22f3538a83ffb5ac54528fcd63248a9aefc4367d413e39989b"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_hash_symbol_name.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-extract_hash_symbol_name.json",
+      "sha256": "fe2e38ea0f6671a02f555047f433cc034e6dc141fe338df9a97ed96b33e12bc0"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-extract_scalar_symbol_name.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-extract_scalar_symbol_name.json",
+      "sha256": "d6645dd8c0cf305737f3a014c975a780734244963f6e6e8bd5b7fcb1ee1aef51"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-infer_scalar_container_kind.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-infer_scalar_container_kind.json",
+      "sha256": "3f22a28cc5e1a4be895ea1b418a93072d8c997567444121bb56fb39d7f6de40f"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_array_pipeline_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_array_pipeline_expr.json",
+      "sha256": "15fcb44aad9050a3a5f54fc3244515df8ec8b30ed13c74fa82a398ab3d540690"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_assignment_source_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_assignment_source_expr.json",
+      "sha256": "8fd2c9becc1b439f015956774087499b77628274a5a3b32f797420ab16960aa9"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_declare_initializer_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_declare_initializer_expr.json",
+      "sha256": "fab566da2f5c89f21635e101e9410c472c058af715b075755a479930ffbb5dff"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_direct_nested_access_value_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_direct_nested_access_value_expr.json",
+      "sha256": "c40f75a0ebdbc5d8e55bde7fa76390991e6bfbfec4c53de1d5266dbd3f73f502"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_flow_composite_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_flow_composite_expr.json",
+      "sha256": "3a54114643cec0feb4d1c5107ebe58ddf042e3418906972b74a737944abbd716"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_primitive_literal_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_primitive_literal_expr.json",
+      "sha256": "6ba73efdcb60db0b9cca8cb86fa566e57092896c94c870251f34599e86b62b30"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-lower_scalar_access_key_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-lower_scalar_access_key_expr.json",
+      "sha256": "d1cc14b3521d9a817294d78f31b1b7e8914d3f813c17cf89ca7a55ca6a85c98d"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-normalize_method_args_with_optional_scope.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-normalize_method_args_with_optional_scope.json",
+      "sha256": "7c2c2e7b60fbdfcc892a2d0bdcf177216ca79bcc41009e5570cbbe9c434fc5e4"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-parse_declare_binding_entry.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-parse_declare_binding_entry.json",
+      "sha256": "9a4a6e24796cd42a1f92528a8c8b92c1142f3e2ce5ba1886cb321640e494a0e7"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-parse_method_function_expr.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-parse_method_function_expr.json",
+      "sha256": "f84cd49b12889dcedfb355f4cfb40b920984486d3dfc59a08a122403b7e9f62e"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_action_ir_statements.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-split_action_ir_statements.json",
+      "sha256": "5604b85fb0f454b3344197c809d25a4f15fe35dfacebe310fee30e0bdca32aff"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_declare_symbol_names.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-split_declare_symbol_names.json",
+      "sha256": "08943eb0bcd03be20e754045ff9d67d749b80da484b2cefb75e9a2dedaea6495"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-split_top_level_csv.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-split_top_level_csv.json",
+      "sha256": "9c8ed687ac01ec444627d78cdad50d5aa315488893e79da0eea373558d388e8c"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-strip_literal_delimiters.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-strip_literal_delimiters.json",
+      "sha256": "ca7d97daa8681d59fb0b88a9a1d29f931179c3261984c82ebff77fa46019f683"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-native-trim_action_ir_value.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-native-trim_action_ir_value.json",
+      "sha256": "9d8a2b44af0b6c858a95060b1bdccf0a270408e0b6774d51a4ee5503184a4717"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverse-same-name-reference.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverse-same-name-reference.json",
+      "sha256": "24182d1fbfdd24395a93fefee47362b5af1940eb288e53f8f04593ca900f09af"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-inverses.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-inverses.json",
+      "sha256": "fceeb81a7e232115309840fa04f16f2550dd5d6b490147d6dd5060db5622e439"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-native.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-native.json",
+      "sha256": "abe1d59b811af9405d1c3d15226188e1d0cdfd500fd044d88c81150dc2c1f998"
+    },
+    {
+      "original": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-observe.json",
+      "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-initial-observe.json",
+      "sha256": "e6b6345958fb8a454afad2721a5f8832799c668c8f288bdd35959c4d11fb9f28"
+    }
+  ]
+}

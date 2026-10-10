@@ -11,7 +11,7 @@ date: 2026-10-10
 status: framework and Contracts integration verified; other dependency owners/pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current constructor integration and original248 dependency preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
+reverify: "Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current method default selection and original244 construction preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-final-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -44,14 +44,14 @@ lexical state; production bytes are identical before and after that correction.
 This is a measured local observation, not a universal cross-version closure rule.
 
 Contracts registration/call sites are verified in the linked children.
-MethodLowering, FlowExpr, ControlFlow and RewritePipeline remain later owners in
+MethodLowering required/optional dependencies, FlowExpr, ControlFlow and RewritePipeline remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
 
 EmitContext now owns its definition-bound facade selection and resolved-call
 prerequisite; see docs/knowledge/perl-emitcontext-callback-capture.md. Actual
-Contracts callback construction and pipeline activation remain subsequent owners.
+Contracts callback construction is verified separately; pipeline activation remains open.
 
 The same no-lexical-state lifetime premise recurred in the Contracts draft. Its
 exact original/current probe is retained under PERL-PRIVATE-FACTORY-CAPTURE.2.1.0;
@@ -63,3 +63,8 @@ reviewer now requires its exact2d8784780 historical input boundary.
 Current own-constructor registration is verified by .2.1.1; see
 docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
 require exactbe7d70719 historical inputs.
+
+Current MethodLowering default selection .3.0 is accepted; required .3.1 and
+optional/direct .3.2 bindings remain next. Current rules/evidence live in
+docs/knowledge/perl-method-default-capture.md. Original owner reviews retain
+their recorded accepted input boundaries.

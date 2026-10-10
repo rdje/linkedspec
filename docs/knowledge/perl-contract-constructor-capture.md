@@ -11,7 +11,7 @@ date: 2026-10-10
 status: bounded local/delegated construction registration verified; other owners and pipeline activation open
 tags: [perl, actionir, contracts, factories, callbacks, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.1.1 retains447 main/six cold assertions,20 effective semantic source faults and23 supplied suites in142 files. Two complete174-entry native/current catalogues match metadata/order/ordinary benign-input values and callback reuse patterns. Twelve local reference snapshots and fourteen substituted-factory opacity controls pass. Four actual reviewer corruptions and one original-binding corruption reject then restore PASS; complete57-source book/two controls pass. Original248 dependency bindings remain historical."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1-final-review.py; separately run its preservation-control.py with the same wrapper. One-shot capture/freezer/publisher programs are not resume commands."
+reverify: "Current composed direct-consumer/identity proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-final-review.py; separately run its preservation-control.py. Original constructor final-review/preservation-control require accepted33e57deee inputs. Capture/freezer/publisher are one-shot writers."
 ---
 
 Contracts' twelve local group constructors pass their own literal arrays through
@@ -48,3 +48,7 @@ Other dependency owners, RewritePipeline automatic scopes and explicit output
 composition remain later owners in docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md.
 Complete private Phase0, mapped replacement and independent canonical admission
 remain open with their original owners.
+
+MethodLowering default selection .3.0 is now accepted; current target/ref rules
+live in docs/knowledge/perl-method-default-capture.md. Required .3.1 and optional/direct
+.3.2 bindings remain next. Original244 constructor bindings are historical at33e57deee.
