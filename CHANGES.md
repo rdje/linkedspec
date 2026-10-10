@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — REPO-HYGIENE.15 — Due retained artifact review and historical commit pointers
+
+Retain dated13433 parent artifact metadata rows/15594802423 bytes, with three Rust locations observed
+separately. Fresh scoped census, independent per-file lstat, size/traversal fixtures and four reason-sensitive
+actual-channel controls pass; zero files removed. Prior snapshots, proof inputs and reusable caches remain
+retained. Current date/card/index/roadmap/live/resume pointers align; readonly claim binds19 inputs in7303 bytes.
+The generalized-return306-input claim stays live/unchanged. Existing public retention guidance remains accurate.
+
+Targeted Git subject/stat/parent metadata/task-diff audit corrects original .1/.2 pending commit placeholders
+to d07ee79ea and cf0df4220. Dated behavior, pin observations and verification fields remain exact; later .1
+hash-sync refreshes are distinct from admission and already superseded by ADR0065. A premature independent
+review rejected missing actual.json before any verification write; final review follows capture completion.
+Knowledge1339/10272, history/memory/claim/diff and normal hooks govern landing before assignment required .5.2.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 — Generalized-return required capture
 
 Bind only the required resolver returns in generalized payload/statement owners. Preserve payload trim after

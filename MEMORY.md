@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2c5f84092d91c808ab82b4b886b51e65fc1ac864` — clean generalized-return activation.
-- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 - isolate generalized return required callbacks`.
-- active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1` (done).
-- next_action: Own the due retained artifact review from clean HEAD, then activate assignment required .3.1.5.2; preserve306 current claim inputs before any bound writes.
+- activation_commit: `edc9165a4559ef8f0e3c34e2b6cc3623f2893feb` — clean due artifact-review activation.
+- latest_completed_leaf: `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers`.
+- active_work_unit: `REPO-HYGIENE.15` (done).
+- next_action: Activate PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 from clean HEAD; preserve306 generalized-return live inputs before bound writes, then refine assignment required callbacks/aliases.
 - in_flight_uncommitted: none.
-- blockers: none; optional package-flow .3.2.0 and broader independent admissions remain separate.
+- blockers: none; broader independent private admissions remain separate.
 - standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited.
-- task_owner: `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`; next hygiene owner `docs/tasks/REPO-HYGIENE.md`.
-- authority: perl-method-general-return-required-capture names readonly final-review/preservation-control/publish-claim;306/72937 claim passes. Earlier bare/mutation proof requires accepted2c5f84092 inputs. Capture/freezer/--capture one-shot; TYPE-REFERENCE-BOOK queued.
+- task_owner: `docs/tasks/REPO-HYGIENE.md`; next `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
+- authority: Hygiene.15 review-actual.py/claim.py defaults readonly;19/7303 claim passes. Generalized-return306/72937 remains live at edc9165a4; its final-review/preservation/publisher commands remain readonly. Capture/freezer/--capture one-shot; TYPE-REFERENCE-BOOK queued.

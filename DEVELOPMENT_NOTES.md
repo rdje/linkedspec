@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Dated hygiene provenance and historical attribution
+
+Hygiene.15 records only changing per-file metadata:13433 parent candidates/15594802423 bytes, plus separate
+Rust release/incremental/deps observations. Independent OS lstat and fresh census distinguish per-file size
+redistribution from matching totals. Fixed traversal and four actual-channel controls reject unsafe starts or
+forged/incomplete evidence. Zero removals; recovery/purge remains prohibited. Every prior fixture is excluded.
+
+Capture/freezer and --capture publication are one-shot; actual reviewer/publisher defaults are readonly.
+Bind the actual19 measurement/producer/date/guidance inputs, excluding mutable continuity prose that does not
+produce the metadata. No intersecting old live claim needs freezing; generalized-return306 remains unchanged.
+The initial reviewer was invoked while capture still ran, and rejected its missing result without a write.
+Finish capture before dependent review; no measurement is admitted from that ordering error.
+
+Historical .1/.2 commit placeholders originated in their original Git task diffs. Targeted Git audit identifies
+initial ignore/untracking d07ee79ea and local-dirt cf0df4220, distinct from later .1 hash-sync pointer refreshes.
+Repair those two projections only; retain dated proof/pin observations and the existing ADR0065 supersession.
+Public retention prose remains accurate, so this metadata-only review needs no book edit or runtime recurrence.
+
 ## 2026-10-10 — Generalized-return required selection, scalar slots and instrument boundaries
 
 Payload undefined input bypasses trim validation. The statement owner validates parser before AST fast path

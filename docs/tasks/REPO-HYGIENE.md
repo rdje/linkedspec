@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-09` (`REPO-HYGIENE.14`: due retained artifact review)
+- Last updated: `2026-10-10` (`REPO-HYGIENE.15`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -61,7 +61,7 @@ the durable handoff state current.
   Verification: `git status --ignored` shows `.claude/projects/` ignored; `git ls-files --stage rgx` shows
     `160000 8763a0e... rgx`; `git submodule status -- rgx` reports the pinned submodule; parent `git status`
     does not report dirty `rgx`; memory/doctrine/Knowledge Map/diff checks pass.
-  Commit: `pending`
+  Commit: `cf0df422097d55aaf2379cac8907319107406e6b` — `REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt`
 
 - ID: `REPO-HYGIENE.3`
   Status: `done` (2026-07-07)
@@ -285,6 +285,29 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.14 - retain due artifact review` (Git owns identity).
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1 only from the ensuing clean boundary.
 
+- ID: `REPO-HYGIENE.15`
+  Status: `done`
+  Priority: P2 — daily review due at the clean generalized-return boundary.
+  Goal: Retain a fresh exact parent/Rust artifact metadata snapshot without removing proof data or caches.
+  Activation: Clean edc9165a4559ef8f0e3c34e2b6cc3623f2893feb; all10 generalized-return doctrines, post-pointer/brief0 and clean Git verified. No required job remains.
+  Reproduce: Latest cleanup record 2026-10-09T17:03:50.457281+00:00 is over24h old.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.15-* producers/retained channels and docs/claims/REPO-HYGIENE.15.json; latest-only cleanup record and existing cleanup Knowledge card; this tree/index, both current roadmap maintenance pointers, bounded live/resume/history and derived map. Preserve mode/revision-only any intersecting prior live claim before bound writes. All fixture outputs use .linkedspec-data/scratch/hygiene15.
+  Verification tier: `focused`
+  Focused checks: Non-following same-volume parent census and separate Rust release/incremental/deps log-bin metadata; exclude submodules/nested repositories, symlinks, other volumes, managed runs, reusable caches and every prior hygiene fixture before traversal. Fresh scoped census/independent per-file OS lstat, aggregate/balanced-size and traversal fixtures, guarded actual commands/exits/full channels and four reason-sensitive evidence controls; exact old claim preservation if applicable; review unchanged public retention guidance; Knowledge/memory/history/claim/diff and normal hooks.
+  Canonical trigger: none; dated retention evidence changes no storage/runtime/public/gate mechanism.
+  Claim verification: `docs/claims/REPO-HYGIENE.15.json`
+  Acceptance: Retain exact dated rows/channels before overwriting the latest date. Remove only an exactly proved disposable target, otherwise zero removal. SESSION-STARTUP-READING.7 continues to prohibit recovery/purge. Capture/freezer and --capture publication are one-shot writers; final reviewer/publisher defaults readonly. Bind actual measurement/producer inputs without gratuitous mutable continuity bindings. Commit before returning to assignment required PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2; generalized-return306-input proof remains live if no bound input changes.
+
+  Instrument ordering: An independent review was invoked before the actual capture session completed; actual.json was absent and FileNotFoundError rejected before any verification record write. This is a tool-call ordering error, not failed census evidence. Wait for capture exit0 before invoking the reviewer; the final actual-channel controls still reject incomplete evidence. No measurement is admitted from that attempt.
+
+  Owned issue (P3; resolved below): REPO-HYGIENE.2 is marked done with verified July6 behavior but its Commit field remains pending. Reproduce by reading that node; stale historical attribution can mislead recovery. Audit the relevant Git subjects/diffs and repair only the commit projection, preserving dated behavior/pin evidence.
+
+  Resolved historical projections (P3): Targeted Git subject/stat/parent metadata and task diffs identify .1 admission d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 admission cf0df422097d55aaf2379cac8907319107406e6b. Original commits themselves introduced the pending commit placeholders. Repair only .1 Commit Log and .2 Commit fields; original behavior, dates, pin observations and verification statements remain unchanged. The later .1 hash-sync commits were pointer refreshes, not the ignore/untracking admission; their self-referential convention is already superseded by ADR0065. No historical runtime recurrence is claimed.
+
+  Verification: PASS — Dated 2026-10-10T17:39:44.064947+00:00 parent census retains13433 rows/15594802423 bytes; Rust release is absent, debug/deps has0 matching files, debug/incremental has483 matching files/2390808592 bytes, recorded separately. Fresh metadata and independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. Zero removals, no intersecting prior live claims, and readonly19-input7303-byte publication passes. Knowledge1339/10272, memory/history/claims/diff and normal hooks govern landing. Existing public retention guidance was reviewed and remains accurate; no book edit/render is required for this metadata-only maintenance.
+  Commit: `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers`
+  Handoff: Resume assignment required PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 from clean HEAD; preserve306 generalized-return inputs before bound writes. Current generalized-return live claim stays unchanged throughout hygiene.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -301,6 +324,7 @@ the durable handoff state current.
 | 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
 | 11 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
 | 12 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
+| 13 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
 
 ## Decisions
 
@@ -325,10 +349,20 @@ the durable handoff state current.
 
 - None.
 
+## Acceptance Checklist — REPO-HYGIENE.15
+
+- [x] **REPRODUCE / ISSUE** — Latest October9 date is over24h old at the clean generalized-return boundary. Two old completed hygiene records still contain pending commit placeholders.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Daily metadata changes independently of prior retained snapshots. Git task diffs show .1/.2 original commits introduced those placeholders; targeted subject/stat/parent metadata audit identifies the admissions, distinct from later .1 hash-sync refreshes.
+- [x] **FIX** — Retain the exact parent/Rust census and actual channels, refresh only latest date/current pointers, exclude every prior fixture and retain all proof/caches. Correct only two historical commit projections; no source/pin/public behavior change.
+- [x] **ADDRESSED (verified)** — Dated13433 parent rows/15594802423 bytes; separate three Rust metadata populations; fresh census/independent per-file lstat/size/traversal and four reason-sensitive evidence controls PASS. Readonly19-input7303-byte claim reconstructs; no original live claim intersects the changed surfaces.
+- [x] **NO REGRESSION** — Zero files removed. Submodules/other repositories, symlinks, other volumes, managed runs/caches and prior fixtures are excluded. Existing public retention teaching remains accurate; no runtime/generated/toolchain/contract change requires broader CI.
+- [x] **LOCKSTEP** — Cleanup record, Knowledge1339/10272, current roadmap/index/live/history/resume and historical commit projections align. Memory/claim/history/whitespace and normal all-doctrine hooks govern landing before the clean assignment handoff. Recovery/purge remains prohibited.
+
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-10` | `REPO-HYGIENE.15` | Guarded actual parent/Rust census, fresh per-file lstat, size/traversal/four channel controls, Git attribution audit; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals; two commit projections repaired. |
 | `2026-10-09` | `REPO-HYGIENE.14` | Guarded actual census/review, independent metadata and size/boundary/channel controls; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.13` | Actual census/live lstat/source guards/boundary fixtures/claim preservation; memory/Knowledge/history/diff and normal doctrines | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.12` | Original/qualified card and current book review; unchanged production/test/CI paths; memory/Knowledge/history/diff and normal doctrines | Historical lifecycle qualification only; no new measurement. |
@@ -348,6 +382,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.15` | `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers` | Dated metadata/full channels, zero removals, old attribution repaired; resume assignment required .5.2. |
 | `REPO-HYGIENE.12` | `REPO-HYGIENE.12 - qualify historical Phase0 measurements` | Dated observations preserved; private replacement handoff resumes after capacity check. |
 | `REPO-HYGIENE.11` | `REPO-HYGIENE.11 - retain daily artifact census` | Exact dated metadata/full channels; zero removals, resume canonical membership .0.2.2. |
 | `REPO-HYGIENE.10` | `REPO-HYGIENE.10 - retain daily artifact census` | Exact metadata/actual-channel/book proof; zero removals, resume Legacy call/return/push. |
@@ -359,7 +394,7 @@ the durable handoff state current.
 | `REPO-HYGIENE.2` | `REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt` | `.claude/projects/` ignore plus `rgx` submodule local-dirt ignore. |
 | `REPO-HYGIENE.3` | `REPO-HYGIENE.3 - remove generated artifacts` | Removed ignored/untracked `rust/target` and mdBook build output; left `rgx` corpus artifacts intact. |
 | `REPO-HYGIENE.4` | `REPO-HYGIENE.4 - clean Rust and Julia generated caches` | Depot-aware cache and provenance-checked temp-log cleanup; preserved package, registry, and unrelated temp data. |
-| `REPO-HYGIENE.1` | `pending` | Populated after commit |
+| `REPO-HYGIENE.1` | `d07ee79ea073823c06711b0cc2cf3516d0f172b6` | Original ignore/untracking admission; later hash-sync commits are historical pointer refreshes, superseded by ADR0065. |
 
 ## Changelog
 
@@ -392,3 +427,5 @@ the durable handoff state current.
 - `2026-07-17`: Completed REPO-HYGIENE.5 — reclaimed 16G from ignored Rust/Dart output, two Julia compiled
   caches, and fifteen provenance/liveness-checked stale generation logs; preserved depot content, the unrelated
   18G `claude-501` tree, unknown temp trees, `rgx` corpus artifacts, and all tracked content.
+
+- `2026-10-10`: Due retained .15 metadata review passes with13433 parent rows/15594802423 bytes and three separate Rust locations; zero removals. Fresh per-file metadata, traversal and four channel controls pass; readonly19-input7303-byte claim/Knowledge1339/10272 align. A premature review rejected a missing capture before any verification write; final review follows capture completion. Targeted Git audit repairs .1/.2 original pending commit projections without changing dated proof. Normal hooks govern clean landing before assignment required .5.2.
