@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate local-return required dependencies
+
+One local-return resolver isolates its actual parser/normalizer callbacks. Complete paired115 TAP retains6 original publication-isolation REDs,109 passing controls and115 current GREEN; two roles/six native-current ledgers, cold4 and three semantic source faults pass. Shared arrays/count arguments, scalar copies, native effects/errors/public callbacks and undefined/empty/zero/brace payload guards remain intact under an explicit controlled payload helper. Supplied35/154, evidence5, original-binding RED/restoration and complete book57+32/three controls pass. All399 original capacity/audit live bindings stay historical at268891fdf; no old measurement/hash is refreshed. The readonly publication gates273 current inputs in65482 bytes. Block-value .3.1.2.2.1 follows separately; private pipeline/full-private/mapped/canonical admissions remain open.
+
 ## 2026-10-10 — Finite engineering-history member capacity
 
 ADR0131 admits one archive member, exact manifest growth and only the new decision overhead. Preserve every old immutable byte and complete clean-source record. Retained independent reconstruction, production threshold/authority REDs and reviewer controls govern focused proof; exact staged canonical CI gates admission.

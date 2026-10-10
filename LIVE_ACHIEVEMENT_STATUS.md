@@ -2,19 +2,20 @@
 
 ## Current Activity
 
-Full PNT: Block component bindings and finite history-capacity prerequisite verified; local-return/value family follows canonical landing.
+Full PNT: Local-return required binding verified; block-value .3.1.2.2.1 is next. Remaining required/optional and other private pipeline/admission owners remain open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — ADR0131 separately admits one engineering-history member and exact manifest/decision overhead. All220 prior immutable files remain exact; clean-source suffix/root/manifest reconstruction,30 actual thresholds/23 authority REDs and three reviewer corruption REDs/restored PASS verify the finite proposal. Exact staged canonical CI/receipt governs landing. The blocking historical-auditor inverse preserves134 inputs/84613241 bytes, recovery22/evolution64 and guard0; original241 runtime/book bindings are historical before book57/2 teaching proof. Four actual historical evidence REDs/restoration pass. Public fixture prose is corrected; unchanged classifier70/36 RED/GREEN, exact original504 proof replay, current book57+32/three controls and three new evidence REDs/restoration pass. Six constructor-literal migrations preserve paired277 names and supplied33/152; unchanged full public/executable retirement checks pass. Earlier57-file render limits remain explicit; canonical admission gates landing.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0` — One required resolver preserves actual parser/normalizer callbacks, shared argument arrays/counts, scalar copies, effects/errors/fatal identities, diagnostics and payload guards. Paired115 complete assertions retain6 original isolation REDs/109 passing controls/all115 current GREEN; native6/roles2, cold4 and inverse3 pass. Supplied35/154, five evidence REDs/restoration, original-binding RED/restoration and complete book57+32/three controls pass. All399 prior capacity/audit live inputs are historical at268891fdf, with every original hash/proof field and older historical claim unchanged. Readonly claim gates273 current inputs in65482 bytes. Public Phase0 compatibility passes1035/1035; ordinary doctrine hooks govern landing. No private pipeline/full-private/mapped/canonical or parent admission follows.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` from clean HEAD after canonical commit. Inspect/refine local-return/value required seams; preserve current capacity and runtime claim inputs before writes.
+Inspect/refine `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1` from clean HEAD. Preserve current273 live claim inputs before writes. Retain block-value AST-first dispatch/copied bridge dependencies, guarded fallback/shared-array paths and separately validated never-invoked normalizer; no broader admission inferred.
 
 ## Recent Completions
 
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead;220 preserved/30 thresholds/23 authority REDs/evidence3; historical134/22/64/guard0/book57/2/evidence4; exact canonical admission required.
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0` — main115/cold4, paired6 RED/115 GREEN, native6/roles2/inverse3, supplied35/154, evidence5/book57+32/3; original399 preserved; public Phase0 1035.
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead and blocking audit/proof repairs accepted at268891fdf; all10/canonical receipt/CLI66x2/Phase0 1035 pass.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` — main223/cold4, paired18 RED/223 GREEN, callers20/roles6/validation1/inverse6, supplied33/152, evidence5/book57/2; original242 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0` — main177/cold4, paired15 RED/177 GREEN, callers15/roles5/inverse6, supplied31/150, evidence5/book57/2; original240 and wrong-prefix guard retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` — main277/cold4, paired24 RED/277 GREEN, callers25/roles8/inverse9, supplied29/148, evidence5/book57/2; original262 retained.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` from clean HEAD after canonical 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` — independent140/10; actual8 events/64 joins; consumers16/135; evidence4/book57/2.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — original grants185/17; consumers15/134; lifetime RED1/GREEN; evidence5/book57/2.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — publisher replay RED; first publication/8 no-write denials; historical254 and capacity249 preserved.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
 
 ## History
 

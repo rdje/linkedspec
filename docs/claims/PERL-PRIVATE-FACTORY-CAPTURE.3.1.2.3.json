@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "CHANGES.md",
@@ -1247,7 +1247,8 @@
             "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "268891fdf948b1ccf875087416b62100e0ddc059"
       }
     },
     {
@@ -1337,7 +1338,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "ARCHITECTURE_STATE.md",
@@ -2109,7 +2110,8 @@
             "sha256": "8c07ce1c7f16480985c01ef2cbf953460af9ec0d3897a2062843b161d80c7c1a",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "268891fdf948b1ccf875087416b62100e0ddc059"
       }
     },
     {

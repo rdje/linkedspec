@@ -1180,8 +1180,24 @@ lowerer supplies the ordinary value expression. Publishing equal text inside
 that child does not donate a packet to the enclosing component. A selected known
 child retains its own callback identity; its wrapper cannot replace that identity.
 Required missing/non-CODE diagnostics remain in force, including the validation-only
-flow callback. AST routing and secondary helper behavior are unchanged. Block-local
-return/value dependencies and later pipeline composition remain separate steps.
+flow callback. AST routing and secondary helper behavior are unchanged. Block-value
+dependencies and later pipeline composition remain separate steps.
+
+Local-return required callbacks now have separate private capture boundaries.
+The parser and argument normalizer retain their actual public callback references.
+Normalization receives the parser's shared argument array and both original count
+arguments. Existing scalar copies, once-only effects, scalar context and error
+identities remain intact. Undefined parses and non-return methods stop before
+normalization; missing parser arguments still supply an empty array.
+
+For example, an injected normalizer can publish `VALUE` while returning its actual
+argument array. The local-return owner can produce the ordinary payload expression
+`VALUE`, but its enclosing capture cannot inherit that child's packet. A selected
+actual callback keeps its own identity boundary. After payload lowering, undefined
+or empty output is rejected, `0` stays valid, and a leading hash-shaped expression
+receives its existing unary `+` prefix. Required missing/non-CODE diagnostics remain
+exact. The payload helper, block-value AST routing/fallback and later pipeline
+composition keep their separate responsibilities.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

@@ -1,0 +1,14 @@
+{
+  "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-before-capacity.json",
+  "original_sha256": "84308ddabb754aebf46b2a345d6df8f3b036f1c508b5dbc3565b0c05ca468beb",
+  "after_sha256": "d83f64e08af2af3812c4665d11025612a036a504df70ff9e563ae5410e1ab69a",
+  "verified_bindings": 399,
+  "live_claims": [
+    "finite-engineering-history-member",
+    "contracts-factory-historical-inverse"
+  ],
+  "producer_sha256": "65a14cf9ae0c294df5a1aa3802ac42da42105ca76191e6448f6185e79b6047a8",
+  "scope": "Only the two original live durability mode/revision fields change. All399 original Git-bound inputs, every proof/hash field and both already historical claims remain exact. No prior capacity, runtime, audit or book observation is refreshed."
+}

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Keep local-return callback authority separate from payload guards
+
+Parser and normalizer return their actual hash/array references through the private required binding; normalization keeps the shared parser argument array and both count arguments. The caller's controlled payload result still rejects undefined/empty output, retains zero and prefixes hash-shaped expressions. Paired115 has6 original isolation REDs/109 controls/all115 current GREEN; native6/cold4/inverse3, supplied35/154, evidence5 and complete book57+32/3 pass. Preserve original399 capacity/audit inputs at268891fdf before source/book/history writes. Dated earlier reviewers require their accepted input boundaries. Canonical detail: docs/knowledge/perl-method-local-return-capture.md; current claim has273 live inputs and compact original-record preservation. Block-value AST/fallback is the next independent leaf.
+
 ## 2026-10-10 — One finite engineering-history archive member
 
 ADR0131 separately admits one engineering-notes member and only its exact manifest growth. A complete clean-source suffix moves to immutable history; all prior segments, manifest rows and runtime proof remain exact. The decision store accounts for this sole new ADR. Production threshold/accepted-indexed-authority and reviewer RED controls precede exact staged canonical admission. No further reserve or root/aggregate increase is granted; local-return/value .3.1.2.2 follows the canonical commit.

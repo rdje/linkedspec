@@ -10,7 +10,7 @@ date: 2026-10-10
 status: exact committed-source inverse and isolated recovery verified; canonical receipt required before landing
 tags: [historical-audit, perl, contracts, factories, claims, verification]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3 owns the canonical blocker. The old auditor requires decoder-only b2156813 bytes; current Contracts exactly matches accepted constructor33e57dee after dependencybe7d7071. Exact Git parent/source lineage joins baseline2d878478 to b2156813. Full isolated recovery preserves134 inputs/84613241 bytes,22 recovery controls and64 evolution denials with zero healthy original-log reads/tracked writes. Original runtime/book241 bindings are preserved at cdc45f9cb before book teaching changes; complete book57/two controls pass."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-audit-review.py; original capacity and metadata repair readonly reviewers remain separately valid. Preserve current claim inputs before future writes."
+reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-audit-review.py; original capacity and metadata repair readonly reviewers remain separately valid. Preserve current claim inputs before future writes. Current local-return integration, complete book and original399 preservation: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py under tools/run_python_project_data.sh; use only readonly defaults. MEMORY.md owns the current frontier."
 ---
 
 The canonical gate passed all ten doctrines, syntax and structural checks before

@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "producer_sha256": "72a30c3c2784071cfd60235d01f8b3b7b3bc35486a6221007cdf7106804e2739",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-before-capacity.json": "84308ddabb754aebf46b2a345d6df8f3b036f1c508b5dbc3565b0c05ca468beb",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-before.json": "c99370048b5a6ec54bbad3c33f1bad83d9ede0fefcd485317a2b093f7a60d53b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-book-review.json": "ed91830117ecb7fd151b506b48e52cb20571ef643ee82d95cbb33cc404f07ae5",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-book-review.py": "1a4ccdc96deb6dd41a0ff0d7c1fa6ab6f24411b82b72a2de9b88edd21031a59a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-book.json": "577344c12ad5ee2499449b7dfeacdaa9f1149b09b0395e00cea575325273da40",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-book.py": "f8d7abdfbb190bcc1c98fc72290aa276f65fcb035cff545505d6e9a92d688f44",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-cold.json": "ccad1c0ae11759d9b40980ef7bbfa2ccdacc2cb99fb941369ea4c88765d52fe1",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-consumers.json": "8dddc7c8cc8c3252794d424e85672813d5b2c6048d893162f5bed6d1c60c8552",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-evidence.json": "cf6972735bcbf10187554f1d79a7421f09de33d7a5ee0f3566975467b125400a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-evidence.py": "aa66252d8168dc502d4477e931f1027453760ad5fc17503ac3c4e7162bc28e0b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-fixture.json": "12327dc4ad36dbd67a41c86a1f56c173c56f1dea951756a38e17c3e8a5e8a771",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-freeze.json": "f2a19e3f956bfe7556400555ddf79c7b67f746865704acc03a2d9b81044d0b0a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-inverse-diagnostic.json": "bd6af30ef5fc8f0cf5a6397b6bb7e7a01e2a39ce6626a6342ccb0ee9a4ef91d5",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-inverse-identity.json": "85c3a67945563556aeacd86286de1bcbb3f03b65734dfb64627b71662ac028cb",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-inverse-required.json": "96b657ad8c5b3deadbff95f3ecda1ddafbb17b24cbd724243833eef43007997c",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-inverses.json": "a9d72bf37f9240ffa576c363ca8a3e570f242b49436c405ab89b2e5a279e605e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-native.json": "8e2a76f918cd0d849ca67a4f2a8457dd23523ed11a3438d5181f6d5a660354c7",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-observe.json": "ee3cff45bb9f673af4106df1f862b9b514a49d7fc4f5ec868620057695295b54",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-preservation-control.json": "ce5c5fd348c8de893e0815c3710da02b21b19cd6040ba2f08ec6028d93f3704a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-preservation-control.py": "e6bd62dae07f90694db5eff005040fd259353b302f04873477ef6fab2dbc862d",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-review.json": "17ec9fecdb0bac0d79a67c7038e014e117f258e8edd675a11ae216d680228a54",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-review.py": "e87fdcc6ea949648ff26068978a989707a928e4ffe0b74d96b3413c3fe7e7db5"
+  },
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "TG9jYWwgcmV0dXJuIHJldmlldyBQQVNTMTE1LzQvMzsgY2FsbGVyczYvcm9sZXMyOyBwYWlyZWQ2UkVELzExNUdSRUVOOyBjb25zdW1lcnMzNS8xNTQ7IG9yaWdpbmFsMzk5IHByZXNlcnZlZAo=",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-book-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL3RocmVlIGFjdHVhbCBjb250cm9sczsgZXhhY3QgaW5wdXQgYW5kIHJlbmRlcmVkIHRlYWNoaW5nIGlkZW50aXRpZXMK",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-preservation-control.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SGlzdG9yaWNhbCBwcmVzZXJ2YXRpb24gY29udHJvbCBQQVNTOiBhY3R1YWwgb3JpZ2luYWwtYmluZGluZyBSRUQvcmVzdG9yZWQgcmVhZG9ubHkgUEFTUwo=",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Fresh actual readonly runtime/book review commands and exact five evidence-control source/counterfactual/channel identities, with all successful evidence restored. Runtime review independently verifies the bounded original399 bindings; all actual local-return required binding source faults and native alias/context/effect/error and actual callback identity controls remain retained."
+}
