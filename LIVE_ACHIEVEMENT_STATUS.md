@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: push required .3.1.5.3.1 verified; normal hooks govern clean landing before regex/undefined-return .5.3.2. TYPE-REFERENCE-BOOK stays queued; broader private admissions remain open.
+Full PNT: regex/undefined-return .3.1.5.3.2 verified; normal hooks govern clean landing. P1 receiver-copy/callback repair .3.1.6.0 precedes required receiver capture. TYPE-REFERENCE-BOOK and broader admissions stay queued.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` — One required resolver return;850/cold15/native24/branches56/public6/inverse3, paired24 RED/826 controls/850 GREEN, supplied58/178/evidence5/original296/book89/3 pass. Readonly303-input71948-byte publication agrees; original probe correction reconstructed. Both syntax checks/public Phase0 PASS1035/full channels; Knowledge1342/10293 and staged claim117/152/seven existing gaps PASS; normal hooks govern landing.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` — Two required returns;619/cold23/native24/branches32/public4/inverse6, paired24 RED/595 controls/619 GREEN, native179/supplied60/182/evidence5/original303/book89/3 and readonly307-input73113-byte proof PASS. Original fault-generator failure/EOF fix retained and reconstructed. Both syntax checks/public Phase0 PASS1035/full channels, Knowledge1343/10299 and claim118/154/seven existing gaps PASS; normal hooks govern landing.
 
 ## Next Action
 
-Activate regex/undefined-return .3.1.5.3.2 from clean HEAD; preserve303 push live inputs and capture native literal/flags and undefined-return normalization paths before production writes.
+Activate P1 receiver .3.1.6.0 from clean HEAD; split confirmed public single-step hash-copy type loss and distinct legacy kind-callback failure before writes. Preserve307 current inputs first, then repair before required receiver/parser capture.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` — required619/23/native24/branches32/public4/inverse6, paired24 RED/619 GREEN, native179/supplied60/182/evidence5/original303/book89/3; readonly307/73113; public Phase01035/full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` — required850/cold15/native24/branches56/public6/inverse3, paired24 RED/850 GREEN, supplied58/178/evidence5/original296/book89/3; readonly303/71948; original probe retained/reconstructed; public Phase01035/full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0` — required539/cold17/native15/branches37/public3/inverse3, paired15 RED/539 GREEN, supplied56/176/evidence5/original300/book89/3; readonly296/69937; public Phase01035/full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2` — required938/cold17/native27/branches60/public5/inverse9, paired27 RED/938 GREEN, supplied54/174/evidence5/original306/book89/3; readonly300/71043; public Phase01035/full channels.
@@ -29,7 +30,6 @@ Activate regex/undefined-return .3.1.5.3.2 from clean HEAD; preserve303 push liv
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1` — main222/cold5, paired9 RED/222 GREEN, native9/branches16/roles3/validation1/inverse3, supplied37/156, evidence5/book89/3; original273 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0` — main115/cold4, paired6 RED/115 GREEN, native6/roles2/inverse3, supplied35/154, evidence5/book57+32/3; original399 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead and blocking audit/proof repairs accepted at268891fdf; all10/canonical receipt/CLI66x2/Phase0 1035 pass.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` — main223/cold4, paired18 RED/223 GREEN, callers20/roles6/validation1/inverse6, supplied33/152, evidence5/book57/2; original242 preserved.
 
 
 ## History

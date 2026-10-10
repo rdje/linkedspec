@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2 — Regex and undefined-return required capture
+
+Bind exactly two required resolver returns. Preserve eager selection, local regex scalar copies,
+repeated stripping and defined/default flag slots; undefined-return retains actual normalized
+argument arrays and readonly0/0 arities. PASS619 main/23 cold,24 native-current callback rows,
+32 branches/four public Toolbox rows, paired24 original REDs/595 controls/619 GREEN, six effective
+faults, supplied60 suites/182 files, evidence5/original303 restoration and book89/three controls.
+Readonly307-input73113-byte claim passes; all original push identities remain historical at ae65603bc.
+
+The immutable179-file native probe precedes the182-file assertion capsule. Retain the original
+fault-generator final-owner delimiter failure and exact separate EOF correction; no native probe
+or assertion is refreshed. Book teaching and Knowledge1343/10299 agree. Duplicate task-index
+current projections are corrected. Both syntax checks and supplemental public Phase0 PASS1035
+with full channels retained; staged claim/doctrine checks govern landing. Separate retained receiver
+diagnosis owns P1 .3.1.6.0: scalar-held hash .copy() loses type while function-form and multi-step
+controls work; a distinct legacy kind callback fails. Repair follows clean landing. Existing .59
+language/receiver repairs and broader admissions remain separate.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1 — Push required capture
 
 Bind only one push required resolver return. Preserve four eager roles and actual raw versus copied

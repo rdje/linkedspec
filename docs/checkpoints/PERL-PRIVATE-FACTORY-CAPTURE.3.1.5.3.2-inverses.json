@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "producer_sha256": "05f524d7b8858da31c6693f02a8d8bd570a7c46437fe77ec1f2680d1fdeb8177",
+  "source_sha256": "f2047eb13532507e3da8ca4354d9b83a20fe7cbc17caf125480b7acaf9507439",
+  "assertions": 619,
+  "rows": [
+    {
+      "case": "regex-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-regex-required.json",
+      "sha256": "8cee8b4091a3ca320d3215b37e7738219d8cc11bd4b24eabc9096136341ccf53",
+      "source_sha256": "3cf5014b234bf3244a75860ef689719821fd33e42c93397cb536dacbd9712815",
+      "reason": "_lower_regex_subst_statement/defined/extract_scalar_symbol_name/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "regex-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-regex-identity.json",
+      "sha256": "6d7a76f2bab9249c06c1514618db0c3dcf84d172423842703cd283d83430f51b",
+      "source_sha256": "3d02b670dd40caf2e1391b8a2953a307501a71f1bdeff4403a9827320be6bb8c",
+      "reason": "_lower_regex_subst_statement/defined/extract_scalar_symbol_name/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "regex-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-regex-diagnostic.json",
+      "sha256": "24c21561239785fbf9faf512b5d5419b358bacae1b08110db3b210260b48a59a",
+      "source_sha256": "75d098b9ca4fbbb87a94c8a46bc0049165257ac6d4d937eb303e9d2b10fe8fe1",
+      "reason": "_lower_regex_subst_statement/defined/extract_scalar_symbol_name required diagnostic retains native selection",
+      "observed": "RED"
+    },
+    {
+      "case": "undef-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-undef-required.json",
+      "sha256": "2a622793ff57472549eba0629ef734cc15834ca1743a5bbf692ab453804f964c",
+      "source_sha256": "22060f5ca1a6e9e45677e35c2b7e23f8531708fc52807035663201169f0d2153",
+      "reason": "_lower_return_undef_statement/plain/parse_method_function_expr/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "undef-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-undef-identity.json",
+      "sha256": "f8def22b1840b5e286b878f28a5876627fe4c19eade683170ab4e4a12a3daff2",
+      "source_sha256": "29481d25e124dba5073c51679f518e51e1df11e885fb92bd1cdb43e554b7ad67",
+      "reason": "_lower_return_undef_statement/plain/parse_method_function_expr/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "undef-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-inverse-undef-diagnostic.json",
+      "sha256": "94c8ee11d9ca9de27b3656703d140a770d42f84735c6e62b8a009fe7f4cfe6d4",
+      "source_sha256": "6ee04600e2904b068a5f90bba25e0f71bb3a33a529c505d94b9439d131abf9e2",
+      "reason": "_lower_return_undef_statement/plain/parse_method_function_expr required diagnostic retains native selection",
+      "observed": "RED"
+    }
+  ]
+}

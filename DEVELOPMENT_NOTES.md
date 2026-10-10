@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Regex flag slots and final-owner fault boundaries
+
+Regex trimming receives a writable local slot for defined flags and a readonly empty literal for
+missing flags; its result overwrites local mutation. Both delimiter stripping calls precede the
+pair's defined guard. Undefined-return normalizes actual parser arguments with readonly0/0 literals,
+preserving array mutation even on undefined/fatal outcomes. Independent guards retain native behavior.
+
+Immutable179-file native capture precedes182-file paired assertions, including the retained JSON
+reader. PASS619/23/native24/branches32/public4/fault6, paired24 RED/595 controls/619 GREEN,
+supplied60/182/evidence5/original303/book89/3 and readonly307/73113 compose. The original source-fault
+producer assumed another function after each owner and failed at the module's final owner. Preserve
+its actual ValueError/unchanged inputs; a separate producer handles EOF with only that delimiter
+change. Independent review reconstructs the exact delta and all six effective faults. No original
+runtime channel is refreshed. Both syntax checks/public Phase0 PASS1035 with complete channels.
+Separate supplemental receiver diagnosis shows AST single-step copy chooses array for scalar-held
+hash values; function-form and multi-step hash controls work. Legacy hash normalization separately
+uses an unbound kind callback. Retained producers/channels and pending P1 .3.1.6.0 own repair, split
+before writes; no unrelated receiver behavior is admitted by this required-capture claim.
+
 ## 2026-10-10 — Push raw/effective arrays and child/index precedence
 
 Two-argument push aliases the raw parser array; three-argument push first trims/validates scoped

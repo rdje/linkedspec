@@ -1536,6 +1536,41 @@ Secondary AST, value, binding, push-assembly and ambiguity helpers are explicit
 controls in this proof. Their complete behavior, optional/direct callbacks and
 broader language admission remain separate.
 
+Regex-substitution and undefined-return required callbacks now have separate
+private capture boundaries. Substitution eagerly requires scalar extraction,
+literal-delimiter stripping and trim. Its target, pattern, replacement and
+flags are local scalar copies. It strips both pattern and replacement before
+checking either result for undefined; empty strings and `0` retain the existing
+defined-only acceptance. Pattern and replacement use distinct local slots.
+
+Defined flags reach trim through a writable local slot. Missing flags instead
+supply a readonly empty literal. The trim result replaces the local flags value;
+an undefined result falls back to empty flags. For example, an internal trim
+callback that returns the incoming `g` and then mutates its argument still emits
+`$SCALAR_SLOT =~ s{PATTERN}{REPLACEMENT}g`. The caller's flags stay unchanged.
+This is a Perl argument-alias example, not a new regex syntax contract.
+
+The undefined-return owner eagerly requires parser and optional-scope normalizer
+before its AST fast path. Its compatibility path passes the actual parser
+argument array with readonly literal bounds `0, 0`. A supplied normalizer can
+mutate that array even when it then returns undefined or throws. A distinct
+normalizer result retains its own identity. These controlled callbacks describe
+the private seam; they do not bypass public argument validation.
+
+Existing public generated forms remain: `regex_subst(text, /A/, "X", g)` and
+`substr(text, /A/, "X", g)` emit `$text =~ s{A}{X}g`; `return_undef()` and
+`return_undef(Top)` emit `return undef`. These are source observations, not new
+execution or cross-backend admissions. Quoted flags, callback statement routing
+and active-receiver protection remain separately tracked repairs under
+`SESSION-STARTUP-READING.59`.
+
+Known and opaque required children cannot donate equal-text publication to either
+enclosing owner; known capture uses the actual selected callback identity. The
+undefined-return AST helper is an explicit control in this bounded proof. Public
+dependency maps, native scalar context, successful error effects and fatal
+exception identity stay unchanged. Complete helper/AST/language, optional/direct
+callbacks and broader private admission remain separate.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
