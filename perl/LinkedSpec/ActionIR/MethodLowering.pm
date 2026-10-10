@@ -234,7 +234,7 @@ sub _infer_assignment_source_container_kind {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
@@ -286,7 +286,7 @@ sub _lower_value_binding_source_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_assignment_source_expr = $require_dep->('lower_assignment_source_expr');
@@ -406,7 +406,7 @@ sub _lower_typed_declare_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $split_declare_symbol_names = $require_dep->('split_declare_symbol_names');
  my $parse_declare_binding_entry = $require_dep->('parse_declare_binding_entry');

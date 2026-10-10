@@ -1,0 +1,102 @@
+{
+  "result": "PASS",
+  "producer_sha256": "440dc71fa96389748b0b7b59a0a242e7cbadde053084548dcff6da524912a606",
+  "source_sha256": "8264fbd2eea1a758e0f5218fc3865a4bab6609a6d81ab3473a475b4032715044",
+  "fixture_assertions": {
+    "t/actionir_method_inference_capture.t": 277,
+    "t/actionir_method_inference_capture_cold.t": 4
+  },
+  "rows": [
+    {
+      "case": "required-infer_assignment_source_container_kind",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-required-infer_assignment_source_container_kind.json",
+      "sha256": "7a0277d1873907e680f7266beb827805adb5096622b814af9e736be585b71b7c",
+      "source_sha256": "e8b2308e5446f46f120e13174cd75958e1d376c478057ec568d3018470361673",
+      "reason": "_infer_assignment_source_container_kind/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "identity-infer_assignment_source_container_kind",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-identity-infer_assignment_source_container_kind.json",
+      "sha256": "df09482916349c9b08ebc9c7831aff912e5f82a7eda8272be775f3c1aaef5fdc",
+      "source_sha256": "8a6a3d99e552c603d3ea602db84ae6fb9b7e2b967bb2f521cf7ec7ed2a1666aa",
+      "reason": "_infer_assignment_source_container_kind/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic-infer_assignment_source_container_kind",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-diagnostic-infer_assignment_source_container_kind.json",
+      "sha256": "1ed51a54d236cedba80c03f919456b95ca57ca09d0c0d803c40df5620ff8eab7",
+      "source_sha256": "45828825c8e5f6813c620ea01bb6943365ff2d1c63ac4c2b6b193c202a84f650",
+      "reason": "_infer_assignment_source_container_kind/trim_action_ir_value required dependency diagnostic remains exact",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "required-lower_value_binding_source_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-required-lower_value_binding_source_expr.json",
+      "sha256": "86ef1d0a3033f4575cbdda2803ea984247225d69750774e9173d2eb7b588b954",
+      "source_sha256": "96b7d11523801cfa5cd66be7c82904763518f0fd9d9bab7c5afd461af9ebee62",
+      "reason": "_lower_value_binding_source_expr/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "identity-lower_value_binding_source_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-identity-lower_value_binding_source_expr.json",
+      "sha256": "9beed0b68333b029bad432b77b9f289a89207c6eee06033e26dda816c8b24a1e",
+      "source_sha256": "246aaf324b5c90f16b6e73edde83c627e0a86bff4e05d90275a8dd2296ccb68c",
+      "reason": "_lower_value_binding_source_expr/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic-lower_value_binding_source_expr",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-diagnostic-lower_value_binding_source_expr.json",
+      "sha256": "033d3356b58093b2864cab202dc06cfb495938d6daadc331736b496b498efdb7",
+      "source_sha256": "b14c76c432b94ee8102b1a10ee0320ae6f4c9b52bd3be62fcec4616c96880b58",
+      "reason": "_lower_value_binding_source_expr/trim_action_ir_value required dependency diagnostic remains exact",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "required-lower_typed_declare_statement",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-required-lower_typed_declare_statement.json",
+      "sha256": "e711161d7484a1d0fe56710463495e38dc96a5c24f43aa0555881e48caa0a2e1",
+      "source_sha256": "8428380db88b74a9797a09a15bc7ad96fee708b2607a8c7660c8889730a72b6d",
+      "reason": "_lower_typed_declare_statement/split_declare_symbol_names/0 required dependency cannot donate nested publication",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "identity-lower_typed_declare_statement",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-identity-lower_typed_declare_statement.json",
+      "sha256": "6ca29878011122fd7470a3b02c4500a148c050db5bf16c8fad933b1c6f23a931",
+      "source_sha256": "d0732c776e610fca429017d8578c19a8f55102dc19616a91b9b1dc728b2bcf06",
+      "reason": "_lower_typed_declare_statement/split_declare_symbol_names/1 actual callback has its own identity boundary",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic-lower_typed_declare_statement",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1-inverse-diagnostic-lower_typed_declare_statement.json",
+      "sha256": "b788119649beaa45e9c0cac03099feae35fc387c7f6c9c989cd88ac509ecbc29",
+      "source_sha256": "dee5e50aceb06fc0189f5b9cf57247e6ff9f9b589fb24f5900dc3edda120d8fd",
+      "reason": "_lower_typed_declare_statement/split_declare_symbol_names required dependency diagnostic remains exact",
+      "fixture": "t/actionir_method_inference_capture.t",
+      "assertions": 277,
+      "observed": "RED"
+    }
+  ],
+  "scope": "Three actual required-resolution seams/eight callback roles; each boundary removal, actual-to-wrapper identity substitution and original required diagnostic removal is syntax-valid and produces named semantic REDs with a complete unchanged fixture plan. Supplied bytes/population restore after every fault."
+}

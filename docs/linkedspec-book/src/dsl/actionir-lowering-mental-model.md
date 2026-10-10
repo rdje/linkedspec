@@ -1114,6 +1114,26 @@ callback receives only the ordinary value. Remaining required function families,
 optional/direct dependencies, other owners and pipeline/output composition stay
 separate integration steps. This private boundary changes no authored DSL form.
 
+MethodLowering also isolates assignment and declaration inference dependencies.
+The private required-callback boundaries cover assignment container inference,
+value binding and the retained typed-declaration helper. Their dependency maps
+still expose the actual callbacks. A parser may return a shared argument array;
+normalization receives that same array and its native mutations remain visible.
+Scalar inputs retain the helpers' existing local-copy behavior. Ordinary string,
+reference and undefined returns, callback counts and error identities stay intact.
+
+For example, container inference for `copy(array(x))` still returns `array`.
+An injected parser or argument normalizer may publish that same text while it
+runs, but the enclosing inference capture cannot inherit its packet. A known
+callback receives its own identity boundary; selecting a private wrapper in its
+place would incorrectly hide that identity. Value binding likewise preserves
+its actual assignment-source result, including a returned reference. The retained
+typed-declaration helper keeps its existing split, parse and initializer calls;
+this private integration adds no authored declaration syntax. Required missing
+or non-CODE dependencies retain their original diagnostics. Inline/block and
+other required families, optional/direct calls and pipeline composition remain
+separate steps.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

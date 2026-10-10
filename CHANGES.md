@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Isolate assignment and declaration inference dependencies
+
+Three MethodLowering assignment/declaration required resolvers pass 277 main/four cold assertions and nine effective syntax-valid source faults. All eight callback roles and 25 native/current ledgers match; the same complete fixture has exactly 24 original publication-isolation REDs, 253 original passing controls and 277 current GREEN. Twenty-nine suites in 148 supplied files, evidence5, original-binding RED/restoration and complete book57/two controls pass. All262 original trim bindings stay historical at429d0c6d. An early review started before consumers.json existed; the fifth actual evidence control reproduces that missing-result rejection and restores PASS, with unchanged production/fixtures/capture programs. Inline/block .3.1.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.
+
 ## 2026-10-10 — Isolate MethodLowering required trim callbacks
 
 Private trim bindings pass255 main/five cold assertions and13 effective syntax-valid source faults. The same full fixture has exactly eleven original publication-isolation REDs and all255 current GREEN, with244 original controls passing. Fifteen native dependency and nine actual caller ledgers match context, aliases, copied top-level inputs, public references and value/effect/error/fatal behavior. Twenty-seven suites in146 supplied files, evidence4, original-binding RED and complete book57/two controls pass. All282 original method-default bindings remain historical at89a4ede6f. The partial attempt retains18 actual captures/producer; only two inherited assertion matcher labels change before recapture, with unchanged production/fixtures. Other required .3.1 children, optional/direct .3.2, other owners/pipeline/output/full-private/mapped/canonical and parent obligations remain open.

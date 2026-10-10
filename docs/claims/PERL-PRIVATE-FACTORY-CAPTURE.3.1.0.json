@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.0-consumers.json",
@@ -1332,7 +1332,8 @@
             "sha256": "99518d360e5e5b143b724173872416b94309e53e2d1334c7a222f744a1e5335d",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc"
       }
     },
     {
