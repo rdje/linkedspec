@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3 — AST assignment required key isolation
+
+Bind the single required key resolver on AST hash-index assignment fallback. Preserve lazy validation after
+node/target/scalar-held/source guards, the local key scalar copy, actual callbacks/maps/fatal objects, secondary
+helper order, new tracked target-span construction and direct guard results. Other assignment branches bypass
+this unreachable dependency; complete helpers, AST grammar/language and optional/direct owners stay separate.
+
+Bounded proof passes 864 main and eight cold assertions, three native callback rows, 66 controlled branch rows
+and three syntax-valid semantic faults. Identical original/current TAP retains exactly three original publication
+REDs and 861 passing controls before all 864 become GREEN. Supplied 46 suites/166 files, five evidence corruptions,
+correct original-binding corruption/restoration and complete book57+32/three controls pass. All 283 prior input
+identities and proof fields remain historical at4fde89c19; readonly publication gates291 live inputs in69504 bytes.
+
+Retain the first wrong-target preservation producer/result/reviewer unchanged: its unrelated mutation produced
+reviewer return0 and its own validation refused admission. An independent supplied tree reproduces that rejection;
+correcting only CLAIM obtains the actual required RED/restored PASS. Production, fixtures and runtime captures
+were unchanged by this repair. Correct the stale planning-card projection; TYPE-REFERENCE-BOOK stays queued.
+Both required syntax checks and supplemental public Phase0 PASS1035/1035; complete channels are retained separately
+with the full transitive input-capsule limitation explicit. Claim110/139/seven existing gaps and Knowledge1336/10239
+pass. Final continuity and ordinary doctrine hooks govern landing; main method/value .3.1.4 follows clean commit.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2 — AST array-end required callback isolation
 
 Bind the actual array-symbol extractor at the single required resolver in the AST array-end statement owner.

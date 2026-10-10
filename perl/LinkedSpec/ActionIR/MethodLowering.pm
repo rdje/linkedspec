@@ -2391,7 +2391,7 @@ sub _lower_ast_assignment_operator_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $ast_value_source = sub {
   my ($value_node) = @_;

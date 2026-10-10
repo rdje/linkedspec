@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Assignment fallback validation and target-span copies
+
+The AST assignment owner validates its required key callback later than the scalar-held helper: fallback first
+requires a valid target, unsuccessful scalar-held result and nonempty key/value sources. Scalar assignment,
+append and delegated nested-access do not validate that unreachable key dependency. Both source extractions
+precede the source guards; undefined/empty key results stop before payload lowering, while zero stays valid.
+The callback sees a local key scalar copy, preserving native mutation without changing the AST key field.
+
+Tracked writes create a new target-only span using the original start plus target length, rather than reusing
+the original span. Untracked writes return the inner expression; tracked guard results return directly, including
+undefined, empty, zero and reference values. Explicit secondary controls admit these owner paths without claiming
+complete helper, AST grammar or authored-language behavior. Source-bound864/8/3, native3/branches66, paired3 RED/
+861 controls/864 GREEN, supplied46/166, evidence5 and book89/3 pass. Prior283 bindings freeze at4fde89c19.
+
+The first preservation instrument retained the predecessor's capacity CLAIM constant. Its actual reviewer return0
+exposed an ineffective corruption control, and original bytes restored. Keep that producer/result/reviewer exact;
+an isolated readonly replay reproduces the validation rejection. Change only CLAIM, then require actual correct
+original-binding rejection/restoration. The final composed review includes this audit; no runtime producer,
+fixture, capture or production edit is refreshed. Current planning selection routes to MEMORY.md/task frontier.
+Both required syntax checks and supplemental public Phase0 PASS1035/1035, with complete channels retained outside
+the bounded runtime capsule. Its full transitive input population is not reconstructed by this compatibility run.
+
 ## 2026-10-10 — AST array-end receiver copies and verification output boundaries
 
 The required extractor sees the owner's local receiver scalar, not the AST source field. Mutation from `items` to

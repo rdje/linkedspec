@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / AST array-end verified; assignment next
+- Status: `active` / AST assignment verified; main method/value next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -338,7 +338,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1 - isolate block value required callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3`
-  Status: `active` / four bounded guarded AST children
+  Status: `active` / bounded guarded AST implementation children verified; original independent admission open
   Goal: Guarded AST required dependency boundaries with separate native validation-order proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1`
   Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4`.
@@ -348,6 +348,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned canonical boundary: none for bounded private implementation; original full-private/mapped/canonical owners retain admission.
   Planned claim record: none: Planning only; declare source-bound measurement at activation.
   Acceptance: Preserve actual public references and native behavior. Commit each bounded family before advancing; no independent parent admission inferred.
+  Parent handoff: After accepted assignment child .3.1.3.3, main method/value .3.1.4 depends on that exact child. This implementation handoff is not a separate group/full-private/canonical admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0`
   Status: `done` / `focused-signoff-complete; normal doctrine hooks govern landing` (activated from clean `b50ce085a63c8777973bc4c4e4a999a8840c462b`)
@@ -402,15 +403,21 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2 - isolate AST array-end required callback`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`
-  Status: `pending`
-  Goal: AST assignment-operator required callback boundaries.
+  Status: `done` / `focused-signoff-complete; normal doctrine hooks govern landing` (activated from clean `4fde89c1958faf4057ab80eb7e7cd50962c7ac3c`)
+  Goal: Isolate the AST assignment-operator required key callback without changing native lazy validation, helper paths or guard behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
-  Owned paths: Required resolver return in _lower_ast_assignment_operator_statement; bounded fixtures/proof/claim, Knowledge/book/continuity. Optional/direct callbacks stay .3.2.
-  Planned tier: `focused`
-  Planned focused proof: Distinguish actual invoked and path-specific validation roles; retain native guarded assignment behavior, contexts/aliases/effects/errors/maps and publication separation. Effective source faults, supplied consumers and complete book; refine before writes if branch scope exceeds one safe slice.
-  Planned canonical boundary: none for bounded private implementation; original admissions remain open.
-  Planned claim record: none: Declare measured record at activation.
-  Acceptance: Preserve current bindings before writes and actual references/native behavior; commit before main method/value .3.1.4. No independent parent admission inferred.
+  Owned paths: Only the required resolver return in _lower_ast_assignment_operator_statement; bounded main/cold fixtures and retained source-bound producer/reviewer/claim, Knowledge/book/continuity. Correct the stale perl-factory-capture-plan current projection within this callback family. Optional/direct callbacks stay .3.2; complete secondary helpers, AST grammar/language and parent admissions remain independent.
+  Verification tier: `focused`
+  Focused checks: One actually invoked lower_scalar_access_key_expr role on hash-index fallback; native string/undefined/fatal callback ledgers, scalar context/local key-copy aliases, effects/errors/fatal identities, actual public maps and opaque/known publication separation. Node/expected-kind/target/source guards and scalar-held fast path precede required validation. Explicit secondary controls cover scalar, append, scalar-held/fallback hash and nested-access branches; variable-source fast read/fallback, empty/undefined/zero guards, untracked/tracked writes, new target-span values/reference and direct guard results. Identical original/current TAP, three effective syntax-valid faults, supplied44/164 consumer seed plus two fixtures, original283 binding preservation with corruption RED/restoration, evidence controls, complete recursive-include book, required Perl syntax/public Phase0 and ordinary doctrines/history/memory/diff.
+  Canonical trigger: None for one bounded private required resolver. Other required/optional, complete helpers/AST grammar/language, output/mapped/full-private/parent and final push admissions remain separate.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json`
+  Acceptance: Preserve all283 current inputs at clean4fde89c19 before bound writes; retain every original proof/hash field without refresh. Change one required return only. Preserve actual callback/map/node references, local key scalar copy, lazy required diagnostic after source/fast-path guards, native helper order/results and the new tracked target-span construction. Commit before main method/value .3.1.4; split before writes if actual branch scope exceeds a safe slice.
+  Progress: Clean array-end acceptance has all10 doctrines, public Phase01035, post-pointer/brief0 and clean Git. Actual owner/caller paths read; source and secondary helper boundaries are explicit. Preserve original bindings before production/book/card writes. The planning card repeats local-return/value as next despite completed leaves; repair only its current projection, preserving historical proof and selected assignment frontier.
+  Result: Bounded proof PASS864 main/8 cold; one required role/three complete native-current callback rows and66 controlled branch rows. Identical864 TAP names retain3 original publication REDs/861 passing controls/all864 current GREEN. Three syntax-valid source faults, supplied46 suites/166 files, five actual reviewer corruption REDs/restoration, correct original283-binding corruption/restoration and full book57+32/three controls pass. Readonly claim gates291 live inputs in69504 bytes plus two compact historical inputs; original283 identities/proof fields remain exact at4fde89c19.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-* retain actual producers, full native/TAP/fault/consumer/book channels and counterfactual inputs. The initial wrong-target preservation producer/result/reviewer are unchanged; independent supplied-tree review reproduces its readonly rejection, corrected producer differs only by CLAIM and achieves actual original-binding RED/restored PASS. Production/fixtures/runtime captures were unchanged during that repair. Separate compatibility directory retains standard live-worktree syntax/Phase0 channels, with full transitive input-capsule limitation explicit.
+  Reverify: final-review.py, preservation-control.py and publish-claim.py under tools/run_python_project_data.sh; defaults readonly. Capture/freezer and --capture are one-shot writers. Earlier array-end reviewers require accepted4fde89c19 Git inputs including its original live claim.
+  Verification: Bounded composed review and readonly291-input publication PASS; Knowledge1336/10239 generated. Claim gate PASS110 records/139 claims/seven existing disclosed leg gaps; new record has all three legs. Both chronology checks and whitespace PASS. Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035, with full channels retained separately and the full transitive input-capsule limitation explicit. Final continuity/memory and normal doctrine hooks govern landing; main method/value .3.1.4 follows clean commit.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3 - isolate AST assignment required callback`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4`
   Status: `done` / `exact staged canonical receipt and normal hooks govern admission` (activated from clean `9085eb1e5075146ca00dab52304f85937cf7ea05`)
@@ -438,7 +445,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4`
   Status: `pending`
   Goal: Main method/value lowering required dependency boundaries; split further before writes if needed.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3`
   Owned paths: MethodLowering required seams in _lower_method_value_expr; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
   Planned tier: `focused`
   Planned focused proof: Actual native/current caller behavior, opaque dependency separation, contexts/aliases/effects/errors/public maps, retained source-bound faults/consumers and complete relevant book.
@@ -516,7 +523,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3` | `pending` | Activate bounded AST assignment operators from clean HEAD; preserve283 current claim inputs and refine actual required/guard paths before bound writes. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` | `pending` | Activate main method/value from clean HEAD; preserve291 current inputs and refine actual required paths/safe families before bound writes. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -695,6 +702,15 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Both required Perl syntax checks and standard public Phase0 PASS1035/1035 in1472 seconds. Broader helper/AST, optional/direct/output/mapped/full-private/parent/canonical admissions remain separately owned.
 - [x] **LOCKSTEP** — Knowledge1335/10231 and book teaching/complete render pass. Qualitative TYPE-REFERENCE-BOOK/.8 findings are owned and scheduled without pivot; current ROADMAP_V2 frontier drift is repaired. Both bounded history checks, the exact staged memory handoff and whitespace pass. Ordinary doctrine hooks, including resulting-tree pressure, govern landing before assignment .3.1.3.3.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3
+
+- [x] **REPRODUCE / ISSUE** — Identical complete864 TAP against clean4fde89c19 retains exactly3 publication failures and861 passing controls. Actual native callback/branch observations precede the one production edit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The hash-fallback required resolver in _lower_ast_assignment_operator_statement returns the actual key callback directly; nested child publication reaches the parent capture and opaque children borrow eligibility. Actual packet/identity controls distinguish both failures while native lazy validation and local key copies remain fixed.
+- [x] **FIX** — One required return binds _bind_emission_dependency($cb). Public map/callback references, native source/fast-path guards, helper order, new target-span construction and direct results remain native; no complete secondary helper/AST grammar/language or optional/direct expansion.
+- [x] **ADDRESSED (verified)** — PASS864/cold8/native3/branches66/three syntax-valid faults; paired3 original REDs/861 controls/864 current GREEN. Supplied46/166, evidence5, correct original283-binding corruption/restoration and complete book89/3 pass. Initial wrong-target instrument/result/reviewer stay exact and independently reject; corrected actual control restores PASS. Composed review and readonly291-live-input69504-byte publication agree; original283 proof/hash fields stay historical at4fde89c19.
+- [x] **NO REGRESSION** — Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035, with complete channels retained. Full transitive capsule/private/canonical admissions stay with existing parent owners; no runtime benchmark or output-volume comparison is inferred.
+- [x] **LOCKSTEP** — Book teaching/render89/3 and Knowledge1336/10239 generation pass; stale planning-card projection repaired. Claim110/139/seven existing gaps, exact staged memory handoff, both history checks, matching roadmap projections and whitespace pass. Fresh readonly publication remains291 inputs/69504 bytes after complete compatibility retention. Ordinary doctrine hooks govern landing before main method/value .3.1.4.
+
 ## Verification Log
 
 - `2026-10-10`, `.3.1.3.4`: Focused capacity222/30/23/4, original279 preservation/corruption, instrument chain and book89/3 PASS; readonly356-input claim86568 bytes. Exact clean-source suffix112/27100 and every old immutable/manifest/ADR byte survive. All initial matcher/source-blob/separator defects stay retained; final metadata13180 accounts exactly for index growth2. Canonical staged receipt and normal hooks govern admission; no future reserve or runtime change.
@@ -833,3 +849,15 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Final diff review caught a continuity writer matching the inline `## ` example instead of a heading, placing the new CHANGES record inside its preamble. Restore the exact preamble and place the complete new record before the first anchored heading; verify both chronology checks and whitespace before landing. No immutable archive, bound producer or measured input changed.
 
 - `2026-10-10`: Final readonly publisher still verifies283 live inputs/67540 bytes; composed review PASS. Both chronology checks PASS at197/34109 and211/38165 lines/bytes. Early memory/pressure checks correctly reject mixed staged/unstaged final continuity; stage the exact final records, then memory architecture and staged whitespace PASS. Normal all-doctrine commit hooks rerun resulting-tree pressure for the complete candidate.
+
+- `2026-10-10`: Array-end .3.1.3.2 accepted at4fde89c19 with all10 doctrines; post-pointer/brief0/clean Git verified. Activate assignment .3.1.3.3; own the stale current planning-card projection (local-return/value incorrectly still next). Preserve283 prior live bindings before bound writes; refine the one lazy hash-fallback role and all explicitly controlled branch contracts.
+
+- `2026-10-10`: Assignment initial preservation instrument incorrectly retained CLAIM .3.1.3.4 from its capacity predecessor. It mutated an unrelated historical claim, which restored exactly; the actual assignment reviewer still returned0, so the instrument correctly refused admission. Retain unchanged initial producer/result/reviewer, reconstruct this invalid control independently, correct only CLAIM to the frozen array-end .3.1.3.2 record and require an actual nonzero RED/restored PASS. Production, fixtures, runtime captures and original283 hashes are unchanged.
+
+- `2026-10-10`: Assignment runtime864/8/3/native3/branches66, paired3 RED/861 controls/864 GREEN and supplied46/166 PASS. Corrected preservation control obtains actual original283 RED/restored PASS; initial wrong-target source/result/reviewer remain exact and independent supplied-tree audit rejects its readonly validation. Evidence5 and book89/3 PASS. Composed readonly review and291-input69504-byte publication PASS; Knowledge1336/10239 generated. Public Phase0 runs separately with complete channels retained and explicit input-capsule limitation.
+
+- `2026-10-10`: Claim verification PASS110 records/139 claims/seven existing disclosed leg gaps, self-test3 positive/16 rejected; new assignment record has all three legs. Both chronology checks PASS217/35875 and232/40017 lines/bytes; whitespace PASS. Standard public Phase0 remains in flight; full channel retention is separate from bounded source/input acceptance.
+
+- `2026-10-10`: Both required Perl syntax checks and supplemental standard public Phase0 PASS1035/1035; compatibility producer/result retain complete channels and explicit transitive input-capsule limit. Claim110/139/seven existing gaps and Knowledge1336/10239 PASS. Final continuity/history/memory/whitespace and normal doctrine hooks govern landing; main method/value .3.1.4 follows the accepted assignment child without separate group admission. Preserve291 current inputs before later bound writes.
+
+- `2026-10-10`: Exact final staged memory architecture PASS; both history checks PASS218/36013 and233/40130 lines/bytes, matching expressive roadmap rows and staged whitespace PASS. Fresh readonly bounded publisher still gates291 live inputs/69504 bytes after separate full-channel compatibility result; its readonly verification passes. All acceptance boxes complete; normal all-doctrine hooks govern the ordinary commit.

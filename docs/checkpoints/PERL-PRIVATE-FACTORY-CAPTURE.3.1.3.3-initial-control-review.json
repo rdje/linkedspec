@@ -1,0 +1,25 @@
+{
+  "producer_sha256": "79a8505250fcb1abb2a808444ab63057ca1058fc6287ae3cd8f7b945b8da6d9c",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.py": "5e2393d8619e7f0cddd0f7814a165a9b2ab4ca232a7bb2f02654c8942ce98e21",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial-reviewer.py": "abd79d91e532ed32de9566c1a189a1f04b99ba63817f231733495044b6027296",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial.json": "7a20eda2a12733eddcc9b078fe3965c17b88b9b11e0dc0cdb6e2117b55dd15b4",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial.py": "e58f4e632f153f0ef97c9fdcdc23b67cb1c801585c52fc1f1cde731980b361c0",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e"
+  },
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.json": "7a20eda2a12733eddcc9b078fe3965c17b88b9b11e0dc0cdb6e2117b55dd15b4",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.py": "e58f4e632f153f0ef97c9fdcdc23b67cb1c801585c52fc1f1cde731980b361c0",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-review.py": "abd79d91e532ed32de9566c1a189a1f04b99ba63817f231733495044b6027296",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e"
+  },
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5Vb1F2M3YvdG1wL2luaXRpYWwtY29udHJvbC1zZ19wbWltNS9kb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuMy4xLjMuMy1wcmVzZXJ2YXRpb24tY29udHJvbC5weSIsIGxpbmUgNTYsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgcmVwb3J0WydyZWQnXVsnY29tbWFuZCddID09IENPTU1BTkQgYW5kIHJlcG9ydFsncmVkJ11bJ3JldHVybmNvZGUnXSAhPSAwCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "unchanged": true,
+  "scope": "Initial unrelated-claim mutation restored exactly but produced no reviewer RED. Retain original instrument/result/reviewer, reconstruct mutation bytes and actual zero result, and reproduce the instrument readonly validation rejection. Corrected instrument differs only by the claim target; runtime fixtures/captures/production stay unchanged."
+}

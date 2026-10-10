@@ -6,7 +6,7 @@ answers:
   - "which task owns invocation-local built-in callback registration"
   - "where is the private dependency scalar list void boundary planned"
 date: 2026-10-10
-status: framework, EmitContext and Contracts dependencies/construction accepted; MethodLowering defaults accepted; required trim/inference/inline/block-component accepted; remaining dependencies and pipeline planned
+status: bounded implementation plan; MEMORY.md and the owning task tree select the current frontier
 tags: [perl, actionir, source-emission, planning, callbacks]
 evidence: "The original factory planning leaf routes the existing selected protocol to docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Existing stable IDs and task consumers remain in place; no partition, capacity or runtime change."
 reverify: "Read docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md and its referenced original planning leaf/plan; implementation status and verification live beside each stable owner."
@@ -43,28 +43,15 @@ full private Phase0, typed/raw output, mapping and independent canonical admissi
 remain open. Current public book behavior and the quoted-first replacement defect
 are unchanged by planning.
 
-Projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` now aligns the current Rust warning
-roadmaps with the adopted public RGX/upstream boundary. The standalone framework
-and the EmitContext/Contracts children are accepted; MethodLowering defaults `.3.0` are accepted; required trim `.3.1.0` is accepted; inference `.3.1.1` is accepted; inline `.3.1.2.0` is accepted; block `.3.1.2.1` is accepted; local-return/value `.3.1.2.2` and remaining required/optional calls are next. No dependency build or implementation access was needed.
+Projection correction `RUST-DEPENDENCY-WARNING-ZERO.8` aligned the Rust warning
+roadmaps with the adopted public RGX/upstream boundary. No dependency build or
+implementation access was needed. The framework, EmitContext, Contracts and
+MethodLowering implementation results are recorded beside their stable IDs in
+the owning task tree; their dated cards retain the accepted Git input boundaries.
 
-The bounded EmitContext prerequisite .2.0 is accepted; actual Contracts/default
-callback construction is .2.1. Its current identity and native bridge rules live in
-docs/knowledge/perl-emitcontext-callback-capture.md.
-
-Contracts dependency/default selection .2.1.0 and actual local/delegated
-lower construction .2.1.1 are accepted; MethodLowering defaults .3.0 are accepted; required trim .3.1.0 is accepted; inference .3.1.1 is accepted; inline .3.1.2.0 is accepted; block .3.1.2.1 is accepted; local-return/value .3.1.2.2 and remaining required/optional calls are next. Current binding and target rules
-live in docs/knowledge/perl-contract-dependency-capture.md.
-
-Actual local/delegated lower construction .2.1.1 is accepted. MethodLowering defaults .3.0 are accepted; required trim .3.1.0 is accepted; inference .3.1.1 is accepted; inline .3.1.2.0 is accepted; block .3.1.2.1 is accepted; local-return/value .3.1.2.2 and remaining required/optional calls
-are next; current constructor authority/ref/lifetime rules live in
-docs/knowledge/perl-contract-constructor-capture.md.
-
-Actual MethodLowering default selection .3.0 is accepted; target/ref/map rules and
-bounded proof live in docs/knowledge/perl-method-default-capture.md. Required trim .3.1.0 is accepted;
-inference .3.1.1 is accepted; inline .3.1.2.0 is accepted; block .3.1.2.1 is accepted; local-return/value .3.1.2.2 and remaining required/optional calls remain next; no separate parent admission is inferred.
-
-Required trim .3.1.0 is accepted; bounded native/caller/isolation evidence lives in
-docs/knowledge/perl-method-trim-capture.md. Required inference .3.1.1 is accepted; current evidence lives in
-docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 is accepted; current evidence lives in
-docs/knowledge/perl-method-inline-capture.md. Block .3.1.2.1 is accepted; current evidence lives in
-docs/knowledge/perl-method-block-component-capture.md. Local-return/value .3.1.2.2 is next.
+The October10 assignment leaf corrects this card's stale repeated current-state
+projection, which still called completed local-return/value work next. Current
+selection belongs to `MEMORY.md` and the task-tree frontier, rather than a second
+chronology here. At that correction, array-end acceptance at `4fde89c19` precedes
+the assignment leaf; later required/optional owners and pipeline integration have
+their own task nodes. No historical proof or measurement is refreshed by this repair.

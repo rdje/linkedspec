@@ -11,10 +11,10 @@ answers:
   - "where are the original356 capacity inputs preserved"
   - "which readonly command reviews AST array end callback isolation"
 date: 2026-10-10
-status: bounded runtime/book proof verified; public compatibility and ordinary hooks govern landing
+status: historical bounded proof accepted at4fde89c19; current callback frontier is in MEMORY.md
 tags: [perl, actionir, callbacks, capture, ast, arrays, mutation, aliases, verification]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2 retains858 main/8 cold assertions,12 complete native-current callback ledgers and44 controlled branch rows. Identical858 assertion names retain12 original publication REDs/846 passing controls/all858 current GREEN. Three effective syntax-valid semantic faults, supplied44 suites/164 inputs including unchanged public uniform binding, five reviewer REDs/restoration, original356-binding RED/restoration and complete book57+32/three controls pass."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier capacity reviewers require accepted b0099d9ade78623b38c2213867b84f1e32014fe7 Git inputs, including the original live claim. MEMORY.md owns the current frontier."
+reverify: "These array-end commands require accepted4fde89c1958faf4057ab80eb7e7cd50962c7ac3c Git inputs after later source/book edits. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier capacity reviewers require accepted b0099d9ade78623b38c2213867b84f1e32014fe7 Git inputs, including the original live claim. MEMORY.md owns the current frontier."
 ---
 
 Only the required resolver return in `_lower_ast_array_end_mutation_method_statement` changes, from the actual

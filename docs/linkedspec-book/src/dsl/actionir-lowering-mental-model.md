@@ -1310,6 +1310,35 @@ complete helper/AST grammar, other callback owners and pipeline composition
 remain separately owned. The public array mutation contract still yields an
 independent updated array and discards the removed element for pop operations.
 
+AST assignment key lowering now has a private capture boundary.
+The assignment owner uses its required key callback only on the hash-index
+fallback. It first checks the node and expected kind, validates the target name,
+and tries the existing scalar-held assignment helper. A nonempty helper result,
+including `0`, bypasses the callback. Otherwise it extracts both key and value
+sources and rejects undefined or empty sources before requiring the key callback.
+Scalar assignment, array append and delegated nested-access branches do not
+validate this unreachable dependency. Missing/non-CODE diagnostics remain exact
+when the fallback actually reaches it.
+
+The callback receives a local key-source scalar copy. For example, changing
+`key` to `key!` inside that callback leaves the AST key source unchanged; its
+ordinary returned key still supplies the hash-write text. Undefined or empty
+returned keys stop before payload lowering, while `0` remains valid. Public
+dependency maps keep the actual callback, scalar context and fatal objects.
+An opaque child publishing `VALUE` cannot donate its packet when the enclosing
+guard also returns `VALUE`; selecting a known child uses its actual identity.
+
+The existing guard first rejects an empty inner expression. An untracked target
+returns the inner expression directly. A tracked target needs an original span
+and receives a new target-only span: target `meta` at original start `17` produces
+`{start => 17, end => 21}`, leaving the original span untouched. The guard's
+undefined, empty, zero or reference result returns directly. Existing variable
+source selection still prefers a nonempty function-scalar read and otherwise
+falls back to the AST source. Explicit secondary-helper controls verify these
+owner paths; complete helpers, AST grammar, other callback owners and later
+pipeline composition retain separate admission. This adds no assignment syntax
+or public mutation semantics.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

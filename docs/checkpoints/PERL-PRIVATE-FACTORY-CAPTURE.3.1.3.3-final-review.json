@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "producer_sha256": "79f93feb62a4a55dcfdec312c57affbe08e13c7550e94330cc81106820cf1875",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-before-array-end.json": "c46b952a86fb19e42ce4d1a7d0b3695e4c6d2ba4fb7343eee24864525176785f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-before.json": "9a9b1c04b980a58d52100ce5c18041b6fb7f790b8a17474865d48f35f32dd069",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-book-review.json": "9db6208521901433b9a5105c874fd10cebf5d46ab4ecb7e20d452759e68e2901",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-book-review.py": "b686c9ceb9ac82ab433e71ebe7c1ea9e84f0c3bac783e88151a25c1c5639445c",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-book.json": "97120ad0e1f0780c76ff92df1a255ee071bca98504c69adc5ecbbe11b7ca5fe2",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-book.py": "7abf481d1af19273ad72de93bb63f2eb734acc6cd5c9aa167d402e7d112a39fa",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-cold.json": "eb27187a88255e7a1e0bb7f67d4f99f52135004da076e22c72a8c6db08919888",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-consumers.json": "c133d4f1503cd824bff1ae000a1a2b921516314c06f9cc74e4c3f80ac6e2b914",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-evidence.json": "764f746253a4a2c734d08f12d245d6591adcda28aa8c57c0a004ed6acd3134e3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-evidence.py": "5d62bb70e7c040ee78ec5c2552652705fe0c8008215d7fd6424e39fc8d51628b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-fixture.json": "4f27c06164c56e575de2104ad80cb5012970f2f07fde34812d5a665697c1b012",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-freeze.json": "5015242341cef523a314befcb8d7c4216c2d668cac3e6505e4d016ff6565ecb9",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-initial-control-review.json": "5987f1188c96ae5ea52392ae14657d2b39956c1dc4995b598191d13d13940506",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-initial-control-review.py": "79a8505250fcb1abb2a808444ab63057ca1058fc6287ae3cd8f7b945b8da6d9c",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-inverse-diagnostic.json": "9486aae7bb39be207dfaa594010d08e87aa300ecd80c3ed7911629c7e10ba7cd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-inverse-identity.json": "dcf455f6c0304d281024e2b4b361ee7a457a7c8d6ddf31f600f43b565371c67f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-inverse-required.json": "c0f862136ca10d0a1a498c1491cf1b56ea9c842f531c1a907242523429ffdc53",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-inverses.json": "8273f95c008b34a20519098908238105d68eb8c7a6a843b9ad5e4818de27fe5a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-native.json": "4d5f3de34e5fe60809ae1ff5097a881e8b170c9938493fc869ad09bb5044ef9f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-observe.json": "2f3fe4b99ced8e52932d8c891d53a5853969e38211a9fbd1d369689c21a3f319",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.json": "912e3dd75d80fbbad79de9ea489aa4aa3abe63126cddad5138f52055e8cc73cd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.py": "5e2393d8619e7f0cddd0f7814a165a9b2ab4ca232a7bb2f02654c8942ce98e21",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial-reviewer.py": "abd79d91e532ed32de9566c1a189a1f04b99ba63817f231733495044b6027296",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial.json": "7a20eda2a12733eddcc9b078fe3965c17b88b9b11e0dc0cdb6e2117b55dd15b4",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-initial.py": "e58f4e632f153f0ef97c9fdcdc23b67cb1c801585c52fc1f1cde731980b361c0",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-review.json": "afdd016cfe497efeeaafcd5bf33999f945976861f7006468acd3b00ea483345f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-review.py": "abd79d91e532ed32de9566c1a189a1f04b99ba63817f231733495044b6027296",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e"
+  },
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "QVNUIGFzc2lnbm1lbnQgcmV2aWV3IFBBU1M4NjQvOC8zOyBjYWxsYmFja3MzL2JyYW5jaGVzNjY7IHBhaXJlZDNSRUQvODY0R1JFRU47IGNvbnN1bWVyczQ2LzE2Njsgb3JpZ2luYWwyODMgcHJlc2VydmVkCg==",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-book-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL3RocmVlIGFjdHVhbCBjb250cm9sczsgZXhhY3QgaW5wdXQgYW5kIHJlbmRlcmVkIHRlYWNoaW5nIGlkZW50aXRpZXMK",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-preservation-control.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SGlzdG9yaWNhbCBwcmVzZXJ2YXRpb24gY29udHJvbCBQQVNTOiBhY3R1YWwgb3JpZ2luYWwtYmluZGluZyBSRUQvcmVzdG9yZWQgcmVhZG9ubHkgUEFTUwo=",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3-initial-control-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SW5pdGlhbCBwcmVzZXJ2YXRpb24gaW5zdHJ1bWVudCByZXZpZXcgUEFTUzogd3JvbmcgdGFyZ2V0L25vIFJFRCByZXRhaW5lZCBhbmQgcmVhZG9ubHkgdmFsaWRhdGlvbiByZWplY3RzCg==",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Fresh actual readonly runtime/book review commands and exact five evidence-control source/counterfactual/channel identities, with all successful evidence restored. Initial wrong-claim preservation producer/result/reviewer remain exact; the independent supplied-tree audit reproduces its readonly validation rejection, and corrected actual original-binding corruption rejects/restores. Runtime review independently verifies the bounded original283 bindings; all actual AST assignment required key source faults and native local key-copy/lazy-validation/context/effect/error and actual callback identity controls remain retained."
+}
