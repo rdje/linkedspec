@@ -1432,6 +1432,43 @@ is equal, and capture uses the selected actual callback's identity. Secondary
 helpers remain explicit controls in this bounded proof; complete helper/AST
 behavior and optional/direct callbacks retain separate admission.
 
+Assignment required callbacks now have separate private capture boundaries.
+The `set(target, source)` lowering owner validates its three symbol extractors,
+assignment-source callback, initializer callback and trim callback before
+selecting a target branch. Both operator owners require trim before checking
+their input. These checks preserve the existing missing-callback diagnostic and
+leave the public dependency map holding the actual callbacks.
+
+For example, the existing public forms `set(counter, 1)`, `counter = 1` and
+`items += 1` still lower successfully. The scalar and append operators first try
+their existing AST path. Their compatibility regex fallback trims the complete
+expression and then its captured right-hand side, using two distinct local
+scalar slots. The value helper receives that same right-hand-side slot after
+the trim result replaces any mutation made during the callback. This preserves
+native Perl argument aliases, scalar context, successful error effects and fatal
+exception identity.
+
+The private legacy aggregate branches pass a readonly literal kind (`array` or
+`hash`) and a writable local copy of the source to the initializer callback.
+Callback mutation may change that local source; it cannot change the caller's
+source or the kind literal. The symbol extractors share the local target slot
+previously passed to trim. Private scalar and aggregate branches accept defined
+empty results where their existing guards do so; operator and bare-binding paths
+require nonempty results and continue to accept the string `0`.
+
+These private branches do not make removed public selectors valid:
+`set(array(items), 1)` still reports
+`aggregate_selector_removed surface=array identifier=items replacement=items`,
+and `set(hash(meta), 1)` reports the corresponding hash diagnostic. The optional
+kind callback for scalar-held wrappers keeps its existing selection and local
+name alias. Its isolation remains separate work.
+
+Opaque and known required children cannot transfer their publication to an
+enclosing assignment with equal result text. Known-child capture uses the
+selected actual callback's identity. Secondary AST, value, tracked-assignment,
+push and migration helpers are explicit controls in this bounded verification;
+complete helper and language admission remain separate.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

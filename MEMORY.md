@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `edc9165a4559ef8f0e3c34e2b6cc3623f2893feb` — clean due artifact-review activation.
-- latest_completed_leaf: `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers`.
-- active_work_unit: `REPO-HYGIENE.15` (done).
-- next_action: Activate PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 from clean HEAD; preserve306 generalized-return live inputs before bound writes, then refine assignment required callbacks/aliases.
+- activation_commit: `2b1f949b897cc8fac8f87f7652ad67eb90241479` — clean assignment required activation.
+- latest_completed_leaf: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 - isolate assignment required callbacks`.
+- active_work_unit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2` (done).
+- next_action: Activate remaining statement required PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3 from clean HEAD; preserve300 assignment live bindings and refine native helper paths before writes.
 - in_flight_uncommitted: none.
-- blockers: none; broader independent private admissions remain separate.
-- standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited.
-- task_owner: `docs/tasks/REPO-HYGIENE.md`; next `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
-- authority: Hygiene.15 review-actual.py/claim.py defaults readonly;19/7303 claim passes. Generalized-return306/72937 remains live at edc9165a4; its final-review/preservation/publisher commands remain readonly. Capture/freezer/--capture one-shot; TYPE-REFERENCE-BOOK queued.
+- blockers: none; optional/direct and broader independent admissions remain separate.
+- standing_limit: SESSION-STARTUP-READING.7 remains open; artifact recovery/purge prohibited. Latest retained artifact review is October10.
+- task_owner: `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`.
+- authority: Assignment final-review/preservation/publisher defaults readonly;300/71043 claim passes. Earlier generalized-return commands require accepted edc9165a4 Git inputs including original live claim. Capture/freezer/--capture one-shot; hygiene.15 remains live; TYPE-REFERENCE-BOOK queued.

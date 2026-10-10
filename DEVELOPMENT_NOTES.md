@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Assignment eager callbacks and native scalar slots
+
+The wrapper validates six required roles before target selection, in extractor scalar/array/hash,
+assignment-source, initializer, trim order. Operator owners validate trim before input guards, try
+AST first and trim the captured RHS only on regex fallback. Wrapper trim/extractors share a writable
+local target slot; initializer kind is a readonly literal with a distinct writable local source.
+Each operator uses two distinct trim slots and passes the actual second slot to its value helper
+after assigning the returned trim result. Native mutation/context/error/fatal/reference observations
+remain exact.
+
+Eight invoked owner/role pairs span nine path/role targets because initializer array/hash paths are
+separate. Bounded27 native outcomes/60 branches/five actual public rows and identical938 assertions
+establish27 original publication REDs/911 passing controls/all938 current GREEN. Nine effective
+source faults, supplied54/174, evidence5/original306 restoration/book89/3 and
+readonly300-input71043-byte publication pass. Secondary helpers and optional kind selection are
+controlled; private legacy branches do not admit removed public selectors. No instrument refinement
+or historical measurement refresh was needed. Current generalized-return card points historical
+replays to accepted edc9165a4; original claim fields and306 hashes remain exact at2b1f949b8. Both
+required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained.
+Normal doctrine hooks govern clean landing.
+
 ## 2026-10-10 — Dated hygiene provenance and historical attribution
 
 Hygiene.15 records only changing per-file metadata:13433 parent candidates/15594802423 bytes, plus separate

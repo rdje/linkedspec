@@ -8,7 +8,7 @@ October6 artifact review: REPO-HYGIENE.10 retains verified metadata/full channel
 
 # ROADMAP
 
-October10 artifact maintenance: REPO-HYGIENE.15 retains the verified dated parent/Rust metadata and full channels with zero removals. Two historical hygiene commit placeholders are corrected from Git. Resume assignment required PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 from the clean boundary; private/canonical admissions and TYPE-REFERENCE-BOOK remain separately owned.
+October10 current callback activity: Assignment required .3.1.5.2 verifies938/cold17/native27/branches60/public5/inverse9, paired27 RED/911 controls/938 GREEN and supplied54/174/evidence5/book89/3. All306 original generalized-return bindings stay historical at2b1f949b8; readonly300-input71043-byte claim passes. Eager acquisition, readonly initializer kind/writable source, local copies and distinct repeated-trim RHS slots stay native. Secondary helpers are controlled; optional/direct and independent broader admissions remain open. Both required syntax checks and supplemental public Phase0 PASS1035 with full channels retained; normal doctrine hooks govern ordinary landing. TYPE-REFERENCE-BOOK stays queued without pivot; remaining statement helpers .3.1.5.3 follow clean handoff.
 
 October10 queued book reference: [TYPE-REFERENCE-BOOK](docs/tasks/TYPE-REFERENCE-BOOK.md) owns the qualitative
 DBIQNP organization/depth gap and encountered legacy task-status contradictions. Inventory and per-type

@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 — Assignment required capture
+
+Bind only three required resolver returns in assignment wrapper/scalar assignment/array append
+owners. Preserve eager required selection, actual maps, local copies, readonly initializer
+kind/writable source, shared target and distinct repeated operator trim slots, actual RHS helper
+alias, native context/error effects/fatal/reference identity and guard/AST/regex results.
+Complete938 main/17 cold pass;27 native-current callback,60 controlled branch and five named public
+Toolbox rows match. Identical938 TAP retains27 original publication REDs/911 controls. Nine
+syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions,
+original306-binding corruption/restoration and full book89/three controls pass. Readonly claim
+binds300 inputs in71043 bytes; generalized-return proof becomes historical at2b1f949b8 with every
+original hash/proof field unchanged.
+
+No instrument correction or old runtime refresh is needed. Book examples distinguish private legacy
+aggregate paths from current public selector rejection. Optional kind selection remains separate.
+Knowledge1340/10280 and bounded history/whitespace checks govern landing; both required syntax
+checks and supplemental public Phase0 PASS1035/1035 with full channels retained; normal hooks govern
+ordinary landing. TYPE-REFERENCE-BOOK stays queued and broader independent admissions remain open.
+
 ## 2026-10-10 — REPO-HYGIENE.15 — Due retained artifact review and historical commit pointers
 
 Retain dated13433 parent artifact metadata rows/15594802423 bytes, with three Rust locations observed

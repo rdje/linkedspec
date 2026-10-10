@@ -1,0 +1,80 @@
+{
+  "result": "PASS",
+  "producer_sha256": "dc72de9172fce7aaa13687ed7a11843a0d0f528b52d03648f6f8bd114bc28527",
+  "source_sha256": "559a5d993694430229e1f298be91a2d58deb51302d05f204f19b32b0cfb921f6",
+  "assertions": 938,
+  "rows": [
+    {
+      "case": "wrapper-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-wrapper-required.json",
+      "sha256": "986b601f9c4e3a886bd74cc5e6822a73101d1636f9a8e14060e7950eb0c7e9b5",
+      "source_sha256": "984ee17263e473311eea1c6537653c132ddf09ddf632eb7ce6d665f64661937e",
+      "reason": "_lower_assign_statement/extract_scalar_symbol_name/scalar/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "wrapper-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-wrapper-identity.json",
+      "sha256": "d622f97b6aab7e51561d2b4aefb5b669689f933a51b76ee2a1eb030751ec20d1",
+      "source_sha256": "38d4bfa1c9c24acb1601cb03e9ad2db63ce5057f2b3247c6633d36983867f58c",
+      "reason": "_lower_assign_statement/extract_scalar_symbol_name/scalar/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "wrapper-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-wrapper-diagnostic.json",
+      "sha256": "af5956a28e170824ad9b56bb651f607570d5817da08fde6aa29b576359c88fc1",
+      "source_sha256": "90be01e057c3cd1ed35d02306fe23f707529cdaca366a4eb5c11521a0274fd53",
+      "reason": "_lower_assign_statement/extract_scalar_symbol_name required diagnostic retains native selection",
+      "observed": "RED"
+    },
+    {
+      "case": "scalar-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-scalar-required.json",
+      "sha256": "e92dbce1dfb0fb4ba95adfd3e107cbaee03e37b30b877b3b570fb965b3621384",
+      "source_sha256": "c9983d15a71fb09d03f1aa8b99952c06c5dd4694d8a7654efa429da6576bbe15",
+      "reason": "_lower_scalar_assignment_operator_statement/trim_action_ir_value/fallback/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "scalar-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-scalar-identity.json",
+      "sha256": "838581d6e0524144a9a3bbb69c7cd7c29ed7574a2f56a84522cb0c7d962a8fff",
+      "source_sha256": "163b28537323f516b1eba1942e13b51353d227e7cc4d7be0a9b9b2d1696ebb4b",
+      "reason": "_lower_scalar_assignment_operator_statement/trim_action_ir_value/fallback/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "scalar-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-scalar-diagnostic.json",
+      "sha256": "e73deb2ba56b182ee2ea7466a9a52f112de23382213570864350ee7bcf4d0031",
+      "source_sha256": "8ab34b7bddce267af684d3016dd3e7e257f0520b38bf425c9edec382b165c95d",
+      "reason": "_lower_scalar_assignment_operator_statement/trim_action_ir_value required diagnostic retains native selection",
+      "observed": "RED"
+    },
+    {
+      "case": "append-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-append-required.json",
+      "sha256": "9a873a09f4905513260dc260e63fe918cc5a837008d42773e817ada4968ae7c1",
+      "source_sha256": "a442a0b95cf238268a037400958c3d7ad535fbab87810faba609c0e7297bd91c",
+      "reason": "_lower_array_append_operator_statement/trim_action_ir_value/fallback/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "append-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-append-identity.json",
+      "sha256": "22b0bdad3c27f387cbbd91f17e238f94efbbddc641fa7ce9162ab39b48d328ea",
+      "source_sha256": "cf7983782725be5f580aea649e59c257106c28659dab6bc409f527885a9e5470",
+      "reason": "_lower_array_append_operator_statement/trim_action_ir_value/fallback/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "append-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-inverse-append-diagnostic.json",
+      "sha256": "4a01eff035f671f9236eb99678afb94dd5b1f02fa532dc24b8f00d3969a6f7f9",
+      "source_sha256": "6d77ef04e483e28f90dd6ec3543162c23b668a4e692a888661d7f099b77786b0",
+      "reason": "_lower_array_append_operator_statement/trim_action_ir_value required diagnostic retains native selection",
+      "observed": "RED"
+    }
+  ]
+}

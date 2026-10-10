@@ -14,10 +14,10 @@ answers:
   - "where is the obsolete return migration Knowledge recipe repair owned"
   - "which readonly command reviews generalized return required isolation"
 date: 2026-10-10
-status: bounded generalized-return required proof verified; ordinary landing and broader admissions separate
+status: historical bounded generalized-return proof accepted at edc9165a4; later required callbacks remain separate
 tags: [perl, actionir, callbacks, capture, aliases, return, payload]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 retains574 main/15 cold assertions,9 exact native-current required callback rows,52 enumerated branch rows and9 public Toolbox observations. Identical574 TAP retains9 original publication REDs/565 controls and574 current GREEN. Six syntax-valid faults, supplied52 suites/172 files, five evidence corruptions, original307-binding corruption/restoration and full book57+32/three controls pass. Original partial28 loading draft and initial565 instrument remain unchanged; four supplied172-file historical replays preserve raw channels, normalizing only the draft Test::More expected HASH address."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier bare/mutation proof requires accepted2c5f84092d91c808ab82b4b886b51e65fc1ac864 Git inputs including the original live claim. MEMORY.md and the task tree own current selection."
+reverify: "After later source/book changes, these generalized-return commands require accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including the original live claim. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier bare/mutation proof requires accepted2c5f84092d91c808ab82b4b886b51e65fc1ac864 Git inputs including the original live claim. MEMORY.md and the task tree own current selection."
 ---
 
 Only the required resolver returns in `_lower_return_payload_expr` and
