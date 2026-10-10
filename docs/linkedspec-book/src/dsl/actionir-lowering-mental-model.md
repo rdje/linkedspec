@@ -1406,6 +1406,32 @@ known required children each have their own capture, so equal returned text cann
 transfer their publication to a parent. Explicit secondary-helper controls bound
 these checks; they do not admit complete helper or language behavior.
 
+Generalized-return required callbacks now have separate private capture boundaries.
+The payload owner rejects an undefined input before requiring trim. The statement
+owner requires its parser before trying the AST fast path, even when that fast
+path returns immediately; it acquires trim only for the labelled multi-argument
+path. Required validation keeps its original diagnostic and selection order.
+Public dependency maps still hold the actual callbacks. Local source scalar
+copies, scalar context, successful error effects and fatal exception objects
+retain their native behavior.
+
+The labelled fallback passes actual parser-array slots to trim: both the label
+and a payload whose lowering is empty or undefined can be mutated through those
+slots. For example, trimming `Node` and `payload` may leave the parser array as
+`["Node!", "payload!"]` while returned pre-mutation values produce
+`return ['?Node:',  payload]`. This internal Perl example describes alias behavior,
+not new DSL syntax. Labels must match the existing word-character rule; `0` is
+valid. Nonempty payload results include `0`, while empty or undefined results
+trigger the existing fallback or rejection.
+
+Payload lowering keeps its AST/method, bare-read and legacy raw-helper order.
+The raw compatibility rewrite still stops when stable or after 64 passes; that
+limit does not admit arbitrary host expressions as typed ActionIR. Required
+children cannot donate publication to the enclosing return, even if their text
+is equal, and capture uses the selected actual callback's identity. Secondary
+helpers remain explicit controls in this bounded proof; complete helper/AST
+behavior and optional/direct callbacks retain separate admission.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

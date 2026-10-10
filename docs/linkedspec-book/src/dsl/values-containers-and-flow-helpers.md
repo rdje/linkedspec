@@ -167,7 +167,18 @@ return(array("?node:", name, copy(children)));
 return({ "kind" : "token", "text" : entry_text(), "tags" : [tag, true] });
 ```
 
-Older return helpers still exist and are useful when reading legacy specs, but new public examples should prefer the generalized `return(...)` form when it expresses the intent clearly.
+`return_undef()` remains supported and lowers to an undefined return in the Perl
+reference backend. The retired spellings `return_a`, `return_m`, `return_ma`,
+`return_imatch`, `return_im`, and `return_array` are not current return helpers;
+the Perl helper rewriter leaves the demonstrated calls unchanged. Use the
+generalized `return(...)` form for new structured payloads.
+
+When migrating an older recipe, also remove retired aggregate selectors. For
+example, `return(array_copy(array(Top)))` is rejected with
+`aggregate_selector_removed`. The selector-free constructor/copy expression
+`return(array(copy(Top)))` lowers to `return [[@Top]]` in the Perl reference
+backend. These examples describe the named forms; they are not an exhaustive
+inventory of return or container operations.
 
 Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use
 them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression

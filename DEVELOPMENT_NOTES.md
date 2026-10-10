@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Generalized-return required selection, scalar slots and instrument boundaries
+
+Payload undefined input bypasses trim validation. The statement owner validates parser before AST fast path
+but requires trim only for its labelled multi-argument path. Actual label/fallback trim arguments are parser
+array scalar slots, unlike the locally copied source input. The native mutation control retains mutated
+['Node!', 'payload!'] slots while returning copied pre-mutation values and exact two-space label formatting.
+Payload fallback retains AST/method, bare and legacy raw-helper order with stabilization or64-pass stopping.
+Three invoked owner/role pairs,9 native rows and52 enumerated controlled branches remain exact; only two
+required resolver returns change. Secondary helpers are explicit controls, not full language admission.
+
+The first direct-owner fixture imported LinkedSpec alone, whose public Toolbox lazily loads MethodLowering.
+Its partial28/no-plan/exit255 capture is an instrument bootstrap error; adding only the explicit owner import
+produces the first corrected565 fixture. Preserve draft/producer/captures before separately augmenting alias
+proof to574. Four historical172-file supplied replays confirm original channels. The only nondeterminism is
+one named Test::More expected HASH address in the rejected draft; retain raw channels and normalize only that
+line. A copied review cold11 constant rejected the actual15 plan before publication and was corrected; no
+runtime observation was refreshed. Source, instrument and evidence populations reconstruct independently.
+
+Actual public Toolbox rejects the old return(array_copy(array(Top))) migration recipe with the current
+aggregate-selector diagnostic; return(array(copy(Top))) emits return [[@Top]]. Own the obsolete Knowledge
+recipe repair under P2 TYPE-REFERENCE-BOOK.1 after the current implementation activity, preserving historical
+retirement proof. The book's named return guidance is corrected now; no exhaustive type/method inventory is
+claimed. The local-return card's already accepted block-value projection now points to its historical Git
+boundary and current MEMORY/task selection. All307 prior hashes remain exact; new claim is306/72937.
+
+Both required syntax checks and supplemental public Phase0 PASS1035/1035 retain complete channels; no full
+transitive/private/canonical admission is inferred. Due artifact review follows clean landing before .5.2.
+
 ## 2026-10-10 — Bare/mutation source guards and actual legacy package-flow selection
 
 The bare-source owner eagerly requires trim; mutation eagerly requires trim/primitive. Both copy the source

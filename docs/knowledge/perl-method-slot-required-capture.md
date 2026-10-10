@@ -13,10 +13,10 @@ answers:
   - "where is the optional mutation package flow capture repair owned"
   - "which readonly command reviews bare mutation required isolation"
 date: 2026-10-10
-status: bounded required source/runtime/book proof verified; ordinary landing and broader admissions separate
+status: historical bounded required proof accepted at 2c5f84092; current selection belongs to MEMORY.md and task tree
 tags: [perl, actionir, callbacks, capture, aliases, mutation, source-slot, flow]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0 retains455 main/11 cold assertions,9 exact native-current required callback rows and58 enumerated branch rows. Identical455 TAP retains9 original publication REDs/446 controls and455 current GREEN. Six syntax-valid source faults, supplied50 suites/170 files, five evidence corruptions, original299-binding corruption/restoration and full book57+32/three controls pass. Accepted4b48593b5 legacy-flow native16/169 and branch-removal RED retain original compact-argument premise failure; six replay channels preserve raw stderr and normalize only one Test::More expected ARRAY address. Optional repair remains .3.2.0."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier main proof requires accepted4b48593b59acb7aba4d616ae1bdc4320fbbf5364 Git inputs including the original live claim. MEMORY.md and the task tree own current selection."
+reverify: "Historical bare/mutation commands require accepted 2c5f84092d91c808ab82b4b886b51e65fc1ac864 Git inputs including the original live claim: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly; capture/freezer/--capture are one-shot writers. Earlier main proof requires accepted4b48593b59acb7aba4d616ae1bdc4320fbbf5364 Git inputs including the original live claim. MEMORY.md and the task tree own current selection."
 ---
 
 Only the required resolver returns in `_lower_source_slot_bare_scalar_read_expr`

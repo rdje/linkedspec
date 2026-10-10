@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "producer_sha256": "cd67cc9f35adde880fd55e5a7ca1a5dab7e49e2c6e5abf840888ad88fcf6085b",
+  "source_sha256": "00344f292ae2f10671b1906f009571b664444c337fd1bb61436ec4a8cffdf591",
+  "assertions": 574,
+  "rows": [
+    {
+      "case": "payload-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-payload-required.json",
+      "sha256": "aa1030ed0e2175d749649ee5cc14948cf8b0eed0bfdd8a9761e004abb46cb892",
+      "source_sha256": "477ba67755563e21818db9ecc8dba73f34037e429aa935da9d171774a0c5cd31",
+      "reason": "_lower_return_payload_expr/trim_action_ir_value/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "payload-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-payload-identity.json",
+      "sha256": "ef0ec3fd2903bd4e78b6cfbdce7c98c6a520d7a780bd5ec15bd66a30d0001443",
+      "source_sha256": "328b52db637b5f26fd11530098f4b27218e54491d23a09049817f9673741e95a",
+      "reason": "_lower_return_payload_expr/trim_action_ir_value/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "payload-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-payload-diagnostic.json",
+      "sha256": "fc47d6cf1791ccd1874f7f91cebf7c3ce1e7e299c605d6c93bccf6736fe78f17",
+      "source_sha256": "daea788ca9c56e09088466b343e703b2a5b3290a93cb90939a9dd16f7b0690c2",
+      "reason": "_lower_return_payload_expr/trim_action_ir_value required diagnostic retains native selection",
+      "observed": "RED"
+    },
+    {
+      "case": "statement-required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-statement-required.json",
+      "sha256": "51ce480e7077f0afe67516f2ef9e861bb57372bc9eb550bd17253ed95a7749c0",
+      "source_sha256": "967472fe63a7b64b4bb4190d2de1426471c95775e95b49b2f596ad9dbcc9d5af",
+      "reason": "_lower_return_general_statement/parse_method_function_expr/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "statement-identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-statement-identity.json",
+      "sha256": "4e495b52acf76f455673389265f9310e108515bc5a87759b671ec81267dca2c2",
+      "source_sha256": "a2c7affd12669a5cd7780140484b88ad4c55747697f0a1af140eb8076fce3d93",
+      "reason": "_lower_return_general_statement/parse_method_function_expr/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "statement-diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-complete-inverse-statement-diagnostic.json",
+      "sha256": "dd0f0cac531bc6922b3914fd6681478ff3f28dec0b116206f742b7158d9cadd3",
+      "source_sha256": "b06e6a13c236f2c5c675276687174ab083e33231f3dd947f6a24e56890107692",
+      "reason": "_lower_return_general_statement/parse_method_function_expr required diagnostic retains native selection",
+      "observed": "RED"
+    }
+  ]
+}

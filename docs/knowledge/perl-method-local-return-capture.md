@@ -9,10 +9,10 @@ answers:
   - "what native RED GREEN proof covers local return required dependencies"
   - "where are the original399 capacity audit input bindings preserved"
 date: 2026-10-10
-status: bounded local-return proof verified; block-value and remaining owners open
+status: historical bounded local-return proof verified; current selection belongs to MEMORY.md and task tree
 tags: [perl, actionir, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0 retains paired115 complete assertion names:6 original publication-isolation REDs,109 original passing controls and115 current GREEN. Two invoked roles/six native-current ledgers, cold4, three effective source faults, supplied35/154, five actual reviewer REDs/restoration, original-binding RED/restoration and complete book57+32/three controls pass. All399 original capacity/audit live bindings remain historical at268891fdf."
-reverify: "Local-return commands require accepted de3b50dd Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py; separately preservation-control.py and publish-claim.py under the same wrapper. Current block-value proof/original273 preservation: .3.1.2.2.1-final-review.py under that wrapper. Defaults are readonly; capture/freezer and --capture publication are one-shot writers. MEMORY.md owns the frontier."
+reverify: "Local-return commands require accepted de3b50dd Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py; separately preservation-control.py and publish-claim.py under the same wrapper. Historical block-value proof/original273 preservation requires accepted b50ce085a Git inputs: .3.1.2.2.1-final-review.py under that wrapper. Defaults are readonly; capture/freezer and --capture publication are one-shot writers. MEMORY.md and the task tree own the current frontier."
 ---
 
 Only the required resolver return in _lower_block_local_return_payload_expr
@@ -62,7 +62,8 @@ text is absent from rendered HTML, and an omitted include is rejected despite
 mdBook exit0. Full channels and HTML are losslessly retained in a packed capture.
 Earlier book observations keep their recorded narrower scopes and input boundaries.
 
-Block-value .3.1.2.2.1 follows separately. Remaining required/optional owners,
+Block-value .3.1.2.2.1 was accepted at b50ce085a; its proof retains that historical
+input boundary. MEMORY.md and the task tree select current work. Remaining required/optional owners,
 pipeline scopes, explicit output composition, complete private Phase0, mapped
 replacement and independent canonical/parent admission remain open. Ordinary
 public compatibility validation does not establish those private admissions.

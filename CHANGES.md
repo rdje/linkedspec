@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 — Generalized-return required capture
+
+Bind only the required resolver returns in generalized payload/statement owners. Preserve payload trim after
+its undefined guard, eager statement parser before AST fast path, lazy label trim, actual public callbacks,
+local source copies versus writable parser-array slots, native contexts/error effects/fatal objects and
+AST/method/bare/raw64/label/guard/reference behavior. Complete574 main/15 cold assertions pass;9 native-current
+callback,52 branch and9 named public Toolbox rows match. Identical574 TAP retains9 original publication
+REDs/565 controls. Six syntax-valid faults, supplied52 suites/172 files, five actual evidence corruptions,
+original307-binding corruption/restoration and complete book89/three controls pass. Readonly claim binds306
+live inputs in72937 bytes; original bare/mutation proof fields stay historical at2c5f84092.
+
+Retain the rejected partial28 loading fixture and its public lazy-load diagnosis. The initial corrected565
+fixture differs only by explicit owner import; complete574 adds only fallback parser-slot instrumentation
+and9 alias controls. Four historical supplied172-file replays retain raw channels; only the loading draft's
+Test::More expected HASH address is normalized, with all stdout/other stderr byte-exact. Repair stale local
+return current projections without changing historical proof. Clarify supported/retired return forms and
+selector-free copy examples in the book; obsolete Knowledge migration recipes have P2 repair owner
+TYPE-REFERENCE-BOOK.1. Broader private/canonical admissions remain open.
+
+Both required syntax checks and supplemental public Phase0 PASS1035/1035 with full channels retained;
+Knowledge1339/10270, both history checks and whitespace pass. Exact staged normal hooks govern landing.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0 — Bare/mutation required callback isolation
 
 Bind only the required resolver returns in the bare-source and mutation-slot owners. Preserve eager trim /

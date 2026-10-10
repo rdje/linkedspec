@@ -71,6 +71,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Reconcile canonical grammar/contracts/capabilities, owned receiver dispatch and tests; enumerate literals, constructors, operators, free helpers, receiver methods, aliases and codeblock invocation separately. Map every item to current and proposed canonical sections, identify exact depth/navigation gaps, retain executable example requirements and backend limits, and choose a bounded section/layout plan under existing document pressure controls. No exhaustive claim from sampled tables.
   Planned tier: `focused`; reclassify before any public/mechanical contract change.
   Claim verification: none: Unactivated qualitative plan; declare a source-bound claim record before publishing inventory or coverage measurements.
+  Owned intake (P2; scheduled first documentation phase after active implementation): PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 found obsolete current-labelled migration recipes in docs/knowledge/retired-return-helpers-canonical-rewrite.md and docs/knowledge/actionir-return-node-retired-to-return.md. Public Toolbox return(array_copy(array(Top))) raises aggregate_selector_removed; return(array(copy(Top))) lowers. Audit/repair the complete dated recipe family before using it as current inventory authority, preserve original retirement measurements, and verify replacements against the admitted uniform-binding contract. The current callback activity continues without pivot.
 
 - ID: `TYPE-REFERENCE-BOOK.2`
   Status: `pending`
