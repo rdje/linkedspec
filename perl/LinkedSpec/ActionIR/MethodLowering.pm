@@ -1220,7 +1220,7 @@ sub _lower_ast_scalar_held_hash_index_assignment_value_node {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
 

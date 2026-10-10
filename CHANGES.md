@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0: Isolate guarded AST hash-key lowering
+
+Bind only the scalar-held hash-index key required resolver. Preserve actual node/target rejection before validation, eager required CODE validation for valid nodes, source fallback, copied key-source scalar, native effects/errors/fatal identity/public callback and zero/reference handoff under explicit secondary controls.
+
+Validation: paired171 complete assertions retain3 original isolation REDs/168 passing controls/all171 current GREEN; native3/branches15/cold4, three source faults, supplied39/158, evidence5/restoration, original-binding RED/restoration and full book57+32/three controls pass. Preserve all275 original block-value inputs at b50ce085a. Retain draft producer/two results before stale header-only correction; both original baseline rows otherwise stay exact. Readonly claim gates280 live inputs in67806 bytes plus two compact historical inputs. Public Phase0 passes1035/1035 in1200 seconds; ordinary doctrine/history/Knowledge/memory/diff checks govern landing. Guarded AST is split into four owners; AST call statements .3.1.3.1 follow the clean commit. No complete helper/AST grammar/language or independent private admission follows.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1: Isolate block-value required callbacks
 
 Bind only the block-value required resolver return. Trim/split/parse retain actual public callback references, scalar context, native counts/copies/effects/errors/fatal identity and the split-array slot alias. The normalizer remains eagerly validated without local invocation. AST-first/copied bridge dispatch, zero/reference early returns and guarded fallback remain intact under explicit secondary-helper controls.

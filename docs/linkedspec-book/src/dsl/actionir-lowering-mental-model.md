@@ -1230,6 +1230,29 @@ boundaries add no block syntax or return semantics. Complete AST/helper behavior
 other required owners and later pipeline composition retain their separate
 verification responsibilities.
 
+Guarded hash-index key callbacks now have private capture boundaries.
+The scalar-held hash-index assignment owner keeps its existing validation order:
+a nonmatching AST node or invalid target name stops before dependency lookup.
+A valid node requires the key-lowering callback before extracting key/value
+source. When the source helper has no nonempty expression, the existing node
+source fallback remains available. Missing/non-CODE callback diagnostics stay
+exact.
+
+The actual key callback receives a local copy of the selected key-source scalar.
+Mutating that argument retains its native local effect without changing the AST
+node's source field. Public dependency maps keep the actual callback reference;
+scalar context, once-only effects, ordinary values and error identities remain
+intact. A child may publish `VALUE` while returning its ordinary lowered key.
+Even when the enclosing assignment lowerer also produces `VALUE`, its capture
+cannot inherit that child's packet. Selecting a known child retains that actual
+callback's own identity boundary.
+
+Source extraction, mutation-value lowering and final binding assembly retain
+their existing responsibilities. Bounded caller controls preserve source fallback,
+undefined/empty rejection and zero/reference handoff without admitting complete
+secondary helpers or new AST grammar. Other guarded AST owners and pipeline
+composition remain separate verification steps; this adds no assignment syntax.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

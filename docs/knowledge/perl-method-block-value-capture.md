@@ -13,7 +13,7 @@ date: 2026-10-10
 status: bounded block-value proof verified; remaining required and pipeline owners open
 tags: [perl, actionir, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1 retains paired222 complete assertion names:9 original isolation REDs,213 original passing controls and222 current GREEN. Nine native-current callback and16 controlled branch ledgers, cold5, three effective source faults, supplied37/156, five actual reviewer REDs/restoration, original-binding RED/restoration and complete book57+32/three controls pass. All273 original local-return live bindings stay historical at de3b50dd."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-final-review.py; separately run preservation-control.py and publish-claim.py under the same wrapper. Defaults are readonly; capture/freezer and --capture publication are one-shot writers. Earlier reviewers require their accepted Git input boundaries; local-return requires de3b50dd."
+reverify: "Block-value commands require accepted b50ce085a Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1-final-review.py; separately preservation-control.py and publish-claim.py under the same wrapper. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card. Capture/freezer and --capture publication are one-shot writers."
 ---
 
 Only the required resolver return in _lower_block_value_expr changes. Four

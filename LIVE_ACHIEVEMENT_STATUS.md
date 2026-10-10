@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: Block-value required binding verified; guarded AST .3.1.3 is next. Remaining required/optional and other private pipeline/admission owners remain open.
+Full PNT: Guarded AST hash-key binding verified; AST call .3.1.3.1 is next. Remaining guarded/required/optional and private pipeline/admission owners remain open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1` — One required resolver isolates actual trim/split/parse callbacks while validating normalization only. Paired222 complete assertions retain9 original isolation REDs/213 passing controls/all222 current GREEN; native9/branches16, cold5 and inverse3 pass. Actual split-array aliases, copied AST bridge map, zero/reference early results and native effects/errors survive under explicit secondary-helper controls; three controlled generated blocks have independent Perl execution return-value/side-effect oracles. Supplied37/156, evidence5/restoration, original-binding RED/restoration and complete book57+32/three controls pass. All273 prior local-return live inputs stay historical at de3b50dd with every original hash/proof field exact. Readonly claim gates275 current inputs in66597 bytes. Public Phase0 compatibility passes1035/1035 in1204 seconds; ordinary doctrine hooks govern landing. No complete helper/language, private pipeline/full-private/mapped/canonical or parent admission follows.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0` — One required resolver preserves native AST node/target guard order, eager CODE validation for valid nodes, source fallback, copied key-source scalar, public callback/context/effects/errors/fatal identity and zero/reference handoff under explicit secondary controls. Paired171 complete assertions retain3 original isolation REDs/168 passing controls/all171 current GREEN; native3/branches15/cold4/inverse3, supplied39/158/evidence5/restoration, original-binding RED/restoration and full book57+32/three controls pass. All275 original block-value inputs remain historical at b50ce085a with every old proof/hash field exact. Draft producer/two baseline results are retained; only stale header/hash changes before exact original recapture. Readonly claim gates280 live inputs in67806 bytes. Public Phase0 passes1035/1035 in1200 seconds; ordinary doctrine hooks govern landing. No complete helper/AST grammar/language or independent private admission follows.
 
 ## Next Action
 
-Inspect/refine `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3` from clean HEAD. Preserve current275 live claim inputs before writes. Four guarded AST required owners may need separate bounded leaves; keep optional/direct and independent admissions open.
+Inspect/refine `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1` from clean HEAD. Preserve current280 live claim inputs before bound writes. Retain actual AST call normalizer/trim references, path-specific reachability, native arguments/guards and validation order; split further before writes if needed.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0` — main171/cold4, paired3 RED/171 GREEN, native3/branches15/role1/inverse3, supplied39/158/evidence5/book89/3; original275/draft baseline preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1` — main222/cold5, paired9 RED/222 GREEN, native9/branches16/roles3/validation1/inverse3, supplied37/156, evidence5/book89/3; original273 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0` — main115/cold4, paired6 RED/115 GREEN, native6/roles2/inverse3, supplied35/154, evidence5/book57+32/3; original399 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead and blocking audit/proof repairs accepted at268891fdf; all10/canonical receipt/CLI66x2/Phase0 1035 pass.
@@ -29,7 +30,6 @@ Inspect/refine `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3` from clean HEAD. Preserve cu
 - `RUST-DEPENDENCY-WARNING-ZERO.8` — stale roadmap permissions corrected; RGX public/upstream boundary preserved; factory framework next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0` — linked bounded factory owners; current roadmap aligned; P1 policy projection correction next.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3` — independent140/10; actual8 events/64 joins; consumers16/135; evidence4/book57/2.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — original grants185/17; consumers15/134; lifetime RED1/GREEN; evidence5/book57/2.
 
 ## History
 

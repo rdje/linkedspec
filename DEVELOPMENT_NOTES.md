@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Preserve guarded AST key validation order
+
+The hash-index key owner rejects node kind/target before dependency lookup, then validates CODE before source extraction. With supplied scalar sources, callback mutation stays in its local copy; explicit source/payload/assembly controls bound native fallback and zero/reference handoff. Paired171 has3 original isolation REDs/168 controls/all171 GREEN; native3/branches15/cold4/inverse3 and supplied39/158 pass. Original275 inputs stay historical at b50ce085a. Retain draft capture producer/two results before stale header-only correction; independent review proves exact baseline equality apart from producer hash. Canonical detail: docs/knowledge/perl-method-ast-hash-key-capture.md. Current roadmap/index summaries route prior factory-leaf detail to the owning task tree.
+
 ## 2026-10-10 — Distinguish block-value callback isolation from ambiguity rejection
 
 Block-value directly invokes trim/split/parse while validating normalization only. Raw-statement trim retains the split-array slot alias; AST dispatch retains the original map then copies it for the bridge guard. Emit exactly one trim publication: emitting on all three native calls triggers existing ambiguity rejection and masks donation. Paired222 has9 original isolation REDs/213 controls/all222 GREEN; native9/branches16/cold5/inverse3 and supplied37/156 pass. Explicit secondary-helper controls retain actual copied bridge/early results/fallback; independent execution checks three generated return/effect paths. Canonical detail: docs/knowledge/perl-method-block-value-capture.md. Original273 local-return inputs stay historical at de3b50dd; older card reverify instructions now name that accepted boundary and delegate current lookup to MEMORY.md. Broader admissions remain independent.
