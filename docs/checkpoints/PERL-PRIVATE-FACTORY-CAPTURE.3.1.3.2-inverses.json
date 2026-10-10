@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "producer_sha256": "da53ebf1b8da2f13ee934ed0708f264103fc88e4c1c0146b10d86d999df3bb2d",
+  "source_sha256": "4883240caa9d1da4bf71d52db6d87d23b8c1c51706c0f3eea501c730bc60b934",
+  "assertions": 858,
+  "rows": [
+    {
+      "case": "required",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-inverse-required.json",
+      "sha256": "33f4c4d9aeb1e1981e4a87df3a4070544099993fdf5b3abff17b2de01aa1863a",
+      "source_sha256": "4132100364255f43cf8547148a101026a1b4a06dc5458679fbcd18cb15c15f22",
+      "reason": "_lower_ast_array_end_mutation_method_statement/push_back/0 required dependency cannot donate nested publication",
+      "observed": "RED"
+    },
+    {
+      "case": "identity",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-inverse-identity.json",
+      "sha256": "ac4088b014791dbcd35389f631d9c638aec8bab788d95b37c07695c8ae5e4008",
+      "source_sha256": "60a95df8a6e61e5017e2765556a1c986518936da60384ade6b65550e72dfdc5d",
+      "reason": "_lower_ast_array_end_mutation_method_statement/pop_front/1 actual callback has its own identity boundary",
+      "observed": "RED"
+    },
+    {
+      "case": "diagnostic",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-inverse-diagnostic.json",
+      "sha256": "9f714b256ff7504f7449b6557fc905052a1dc098d76f479bbbec5cb2d001f467",
+      "source_sha256": "b1d691e23abe4bf73b485359618e584b4bfa7e9433cbd4a2bbde6b39558661c6",
+      "reason": "_lower_ast_array_end_mutation_method_statement/push_back required dependency diagnostic remains exact",
+      "observed": "RED"
+    }
+  ]
+}

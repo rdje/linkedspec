@@ -1284,6 +1284,32 @@ helper controls verify the bounded caller paths; complete helpers, AST grammar,
 optional assignment callbacks and pipeline composition retain separate owners.
 This introduces no statement syntax or new helper semantics.
 
+AST array-end symbol extraction now has a private capture boundary.
+The existing `push_back`, `push_front`, `pop_back` and `pop_front` statement
+owner still checks the fluent node, single method call and method name first.
+Push requires one argument and pop requires none; invalid arity reaches the
+existing unsupported-helper result before a missing dependency is diagnosed.
+A valid arity requires the actual array-symbol extractor before reading the
+receiver source, with the same missing/non-CODE diagnostic.
+
+The extractor receives the owner's local receiver scalar copy. If a custom
+extractor changes `items` to `items!`, the AST source field stays unchanged,
+while later binding lookup sees `items!`. If that callback returns undefined,
+the changed spelling no longer permits the bare-name fallback. An undefined
+result without that mutation still falls back from `items` to the same named
+target. Private capture preserves these native outcomes rather than normalizing
+the callback's effects away.
+
+Each extractor call has its own capture. An opaque callback may publish and
+return text equal to the final statement without transferring its packet to
+the enclosing lowerer; selecting a known child retains that actual callback's
+identity. Public dependency maps, scalar context, fatal objects, host
+push/unshift/pop/shift fallback text and direct receiver-guard results stay
+unchanged. Controlled secondary helpers verify the bounded owner paths;
+complete helper/AST grammar, other callback owners and pipeline composition
+remain separately owned. The public array mutation contract still yields an
+independent updated array and discards the removed element for pop operations.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

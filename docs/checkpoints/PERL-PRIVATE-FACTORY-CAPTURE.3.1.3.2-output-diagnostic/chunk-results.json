@@ -1,0 +1,24 @@
+{
+  "purpose": "Qualitative tool-transport diagnostic; no project runtime or whole-run volume measurement.",
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-output-diagnostic/stream_probe.py",
+  "first": {
+    "chunk_id": "ef9afc",
+    "wall_time_seconds": 1.002414875,
+    "session_id": 61288,
+    "original_token_count": 150,
+    "output": "first_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\nfirst_chunk\n"
+  },
+  "second": {
+    "chunk_id": "83cd18",
+    "wall_time_seconds": 2.1355765,
+    "exit_code": 0,
+    "original_token_count": 325,
+    "output": "second_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\nsecond_chunk\n"
+  },
+  "checks": {
+    "first_result_only_first_block": true,
+    "second_result_only_second_block": true,
+    "concatenation_is_complete_expected_stream": true
+  },
+  "conclusion": "Each response and its before-truncation count concern that response's recent-output chunk. Comparing final-chunk counts from different jobs does not establish a whole-stream difference."
+}

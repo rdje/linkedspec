@@ -10,7 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2 — AST array-end required callback isolation
 
+Bind the actual array-symbol extractor at the single required resolver in the AST array-end statement owner.
+All four methods retain native node/call/method/arity/source/payload guards, local receiver scalar copies and
+mutation-sensitive bare-name fallback, actual public callbacks/maps/spans, host texts and direct guard results.
+Explicit secondary-helper controls keep the admission bounded; no authored-language or complete-helper expansion.
+
+Proof passes858 main/8 cold,12 complete native-current callback ledgers/44 branch ledgers, three syntax-valid
+semantic source faults, identical12 original publication REDs/846 passing controls/all858 current GREEN and
+supplied44 suites/164 files including unchanged public uniform binding. Five reviewer corruptions and original356
+binding corruption reject and restore. Every original capacity proof/hash field stays historical at b0099d9ad.
+Complete book57+32/three actual controls and readonly283-live-input67540-byte publication pass. Both required Perl
+syntax checks and standard public Phase0 PASS1035/1472 seconds; claim109/137/seven existing gaps and Knowledge1335/10231
+pass. Final ordinary history/memory/pressure/whitespace/doctrine checks govern landing; assignment .3.1.3.3 follows.
+
+Record the qualitative DBIQNP type-reference gap and exact legacy task-record repairs in pending TYPE-REFERENCE-BOOK;
+restore ROADMAP_V2's stale current factory frontier. A controlled actual two-response probe resolves an invalid
+comparison of final tool chunks as whole-run output measurements. Its producer/results and Knowledge fact survive;
+the original full Phase0 stream was not retained and no warning-volume claim is made. Runtime proof remains exact.
 
 ## 2026-10-10 — One finite change-history rollover
 

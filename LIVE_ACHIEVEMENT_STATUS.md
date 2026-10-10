@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: Finite change-history .3.1.3.4 focused proof is verified; exact staged canonical receipt governs admission. Guarded AST array-end .3.1.3.2 follows the clean commit. Remaining required/optional and independent private admissions stay open.
+Full PNT: AST array-end .3.1.3.2 bounded proof and public compatibility are verified; normal doctrine hooks govern landing. Assignment .3.1.3.3 follows a clean commit. TYPE-REFERENCE-BOOK remains queued without pivot; broader required/optional and private admissions stay open.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — One finite change-history archive preserves the exact clean9085eb1e5 suffix112 lines/27100 bytes and222 older immutable files. Production30 threshold/23 authority cases, four reviewer corruptions/restoration, original279-binding corruption/restoration and book89/3 pass. Files48→49, manifest47→48/26831→27407, decisions132→133/13144→13180 account only for this archive/ADR/index row/separator; other ceilings/rows remain exact. Accepted0130/0131 rows move unchanged into the table. Initial matcher/source-blob/one-line undercount instruments and results remain retained; separate final proof refreshes no original hash. Readonly claim gates356 live inputs in86568 bytes. Knowledge1332/10215 and both history checks pass. Exact staged canonical receipt/normal hooks govern landing. Runtime/source/tests and broader private admissions remain unchanged/open.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` — One required array extractor return now binds its private child capture. Four methods retain actual callbacks/maps, native guards, local receiver-copy mutation and bare-name fallback. PASS858/cold8/native12/branches44/inverse3; paired12 original REDs/846 controls/858 GREEN. Supplied44 suites/164 inputs include unchanged public uniform binding. Evidence5/original356-binding restoration/full book89/3 and readonly283-live-input67540-byte publication pass; every original capacity hash/proof field remains historical at b0099d9ad. Both Perl syntax checks and public Phase0 PASS1035/1472 seconds. Claim109/137/seven existing gaps and Knowledge1335/10231 pass. Qualitative per-type reference and legacy task repairs are scheduled; current ROADMAP_V2 frontier drift is corrected. Controlled actual output responses resolve the invalid comparison of final-chunk token counts; full original Phase0 stream is unavailable and no warning-volume claim is made. Ordinary final checks/hooks govern landing.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` from the clean canonical capacity commit. Preserve356 current live inputs before bound writes. Retain actual array-end guards, symbol callback, receiver fallback and native effects/identities under explicit secondary controls.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3` from clean HEAD. Preserve283 current live inputs before bound writes and refine actual assignment callback, lazy validation and guarded helper branches.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` — main858/cold8, paired12 RED/858 GREEN, native12/branches44/role1/inverse3, supplied44/164/evidence5/book89/3; original356 preserved; public Phase01035/1472 seconds; per-type book follow-up queued.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — finite capacity222/30/23/4, exact suffix112/27100, original279, book89/3 and356-input claim; index/separator repairs retain all initial evidence; canonical receipt governs landing.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1` — main695/cold12, paired18 RED/695 GREEN, native18/branches44/roles6/inverse3, supplied41/160/evidence5/book89/3; original280 preserved; public Phase0 1035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0` — main171/cold4, paired3 RED/171 GREEN, native3/branches15/role1/inverse3, supplied39/158/evidence5/book89/3; original275/draft baseline preserved; public Phase0 1035.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` from the clean canonical capacit
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.1.0` — main312/cold6, native15/inverse16, supplied21/140, evidence4/book57/2; original235 and lifetime diagnosis retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.2.0` — main345/cold5, native30, inverse13, supplied19/138, evidence4/book57/2; original233 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.1` — standalone224/11, native30, supplied17/136, evidence4/book57/2; original232 preserved; draft reference diagnosis retained.
-- `RUST-DEPENDENCY-WARNING-ZERO.8` — stale roadmap permissions corrected; RGX public/upstream boundary preserved; factory framework next.
 
 ## History
 

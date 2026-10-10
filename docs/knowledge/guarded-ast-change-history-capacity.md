@@ -11,10 +11,10 @@ answers:
   - "which readonly command reviews guarded AST history capacity"
   - "does this capacity leaf admit future archive reserve"
 date: 2026-10-10
-status: focused candidate verified; exact staged canonical admission required
+status: historical accepted capacity at b0099d9ad; original inputs required
 tags: [history, capacity, continuity, verification, ast, decisions]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4 retains actual pressure255, exact clean9085eb1e5 suffix112 lines/27100 bytes, all222 prior immutable identities, production30 threshold/23 authority cases, four reviewer corruptions/restoration, original279-input preservation with actual corruption RED/restoration and complete book57+32/three controls. Canonical receipt and normal hooks govern admission."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-review.py; separately publish-claim.py under that wrapper. Defaults are readonly. Initial/current capture/freezer/repair and --capture publication are one-shot writers. Original capacity.py requires retained initial metadata; current final-capacity.py owns corrected proof. Earlier AST-call reviewers require accepted9085eb1e5 Git inputs. MEMORY.md owns the frontier."
+reverify: "Historical commands require accepted b0099d9ade78623b38c2213867b84f1e32014fe7 Git inputs, including the original live claim. Do not replay against later AST/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-review.py; separately publish-claim.py under that wrapper. Defaults are readonly. Initial/current capture/freezer/repair and --capture publication are one-shot writers. Original capacity.py requires retained initial metadata; current final-capacity.py owns corrected proof. Earlier AST-call reviewers require accepted9085eb1e5 Git inputs. MEMORY.md owns the frontier."
 ---
 
 At clean activation 9085eb1e5075146ca00dab52304f85937cf7ea05, the change hot root
@@ -73,3 +73,5 @@ produces ERROR despite exit0. Public documentation clarifies finite capacity and
 index table placement. Runtime/source/tests and dependency pins do not change.
 Exact staged canonical CI/receipt and normal hooks are required before landing;
 array-end .3.1.3.2 and independent private/mapped/parent admissions remain open.
+
+Accepted capacity commit b0099d9ade78623b38c2213867b84f1e32014fe7 passes canonical CI and all10 normal doctrines; its exact receipt was promoted. Array-end .3.1.3.2 preserves all356 original live bindings historically before later bound edits. Earlier measured numbers and hashes remain unchanged.

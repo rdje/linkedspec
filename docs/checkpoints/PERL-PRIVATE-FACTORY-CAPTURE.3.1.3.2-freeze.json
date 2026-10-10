@@ -1,0 +1,13 @@
+{
+  "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-before-history-capacity.json",
+  "original_sha256": "1da01349e99425d11c26b0da6f323a23364caa6dce51ff1721c07deebd75d64f",
+  "after_sha256": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e",
+  "verified_bindings": 356,
+  "live_claims": [
+    "guarded-ast-finite-change-history-capacity"
+  ],
+  "producer_sha256": "855b4630dbbf1ea226fcd832eb5e1b7ef0c6d76cce0025bb2808fbacbe94a574",
+  "scope": "Only the one original live durability mode/revision changes. All356 original Git-bound inputs and every original proof/hash field remain exact. The already historical AST-call preservation claim is unchanged. No capacity, runtime or book observation is refreshed."
+}

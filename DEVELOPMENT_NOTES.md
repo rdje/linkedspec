@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — AST array-end receiver copies and verification output boundaries
+
+The required extractor sees the owner's local receiver scalar, not the AST source field. Mutation from `items` to
+`items!` survives into binding lookup; an undefined result then loses the existing bare-name fallback. Without
+mutation, undefined still falls back to `items`. The one private dependency binding preserves both outcomes,
+scalar effects/errors/fatal identities, all four method guards and direct guard results. Source-bound858/8/3,
+native12/branches44 and paired12 RED/846 controls/858 GREEN establish only the controlled owner boundary; unchanged
+public uniform binding is additionally supplied in44 suites/164 files. Original356 capacity bindings freeze at
+b0099d9ad before source/book/card/history writes; no old measured hash or proof field is refreshed.
+
+TYPE-REFERENCE-BOOK owns the qualitative per-type navigation/depth finding and exact legacy task-status repairs
+as scheduled follow-up. No exhaustive supported-method census was performed. The active AST work continues.
+Current ROADMAP_V2 had still selected block-value; copying the exact current ROADMAP row restores the shared frontier.
+
+The public Phase0 command completes1035 tests in1472 seconds. Its full original stream was not retained. Comparing
+its final response token metadata with an earlier job's final response used unestablished populations: each tool
+poll returns recent output, as the retained disjoint-block probe demonstrates. Concatenation recovers the expected
+controlled stream, not the lost Phase0 stream. Retain full output before filtering when content/volume matters;
+make no warning-volume claim from those final chunks. See verification-output-chunk-boundary Knowledge card.
+
 ## 2026-10-10 — Bound the next change-history generation
 
 The full change-history member/manifest limits and near-rollover root require one finite canonical

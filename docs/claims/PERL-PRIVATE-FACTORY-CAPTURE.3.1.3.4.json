@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "CHANGES.md",
@@ -1802,7 +1802,8 @@
             "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7"
       }
     },
     {

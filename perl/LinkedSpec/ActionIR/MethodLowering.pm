@@ -2322,7 +2322,7 @@ sub _lower_ast_array_end_mutation_method_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
 
