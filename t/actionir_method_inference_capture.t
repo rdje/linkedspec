@@ -36,7 +36,7 @@ sub expected {
 sub setup {
  my ($role, $outcome, $event, $known) = @_;
  my ($owner, $target, $keys) = @$role;
- my $state = {trace => [], eligible => [], calls => {}, args => ['array(x)'], entries => ['entry'],
+ my $state = {trace => [], eligible => [], calls => {}, args => ['array("x")'], entries => ['entry'],
   binding => {name => 'target', init => 'value'}, returned => {marker => 'actual'}};
  my $call = {method => 'copy', args => $state->{args}};
  my $fatal = bless {}, 'MethodInferenceFatal';
@@ -93,7 +93,7 @@ sub observations {
   push @outcomes, 'reference' if $key eq 'lower_assignment_source_expr';
   for my $outcome (@outcomes) {
    my ($deps, $actual, $state, $fatal) = setup($role, $outcome);
-   my $input = $name eq '_infer_assignment_source_container_kind' ? 'copy(array(x))' : 'source';
+   my $input = $name eq '_infer_assignment_source_container_kind' ? 'copy(array("x"))' : 'source';
    my ($value, $error, $success_error);
    eval { $@ = 'incoming inference error'; $value = owner($name, $input, $deps); $success_error = $@; 1 }
     or $error = $@;
@@ -114,7 +114,7 @@ for my $row (@{observations()}) {
  my $label = join '/', @{$row}{qw(owner key outcome)};
  my $keys = $row->{owner} eq '_lower_value_binding_source_expr' ? 2 : 3;
  is_deeply($row->{map_identity}, [(1) x $keys], "$label actual public callback references stay exact");
- is($row->{input}, $row->{owner} eq '_infer_assignment_source_container_kind' ? 'copy(array(x))' : 'source',
+ is($row->{input}, $row->{owner} eq '_infer_assignment_source_container_kind' ? 'copy(array("x"))' : 'source',
   "$label top-level scalar input keeps existing copy behavior");
  ok(@{$row->{trace}} && !grep({$_->{context} ne 'scalar'} @{$row->{trace}}), "$label actual required calls retain scalar context");
  is($row->{trace}[0]{error}, 'incoming inference error', "$label native incoming error survives");
@@ -131,7 +131,7 @@ for my $row (@{observations()}) {
  if ($row->{key} eq 'normalize_method_args_with_optional_scope') {
   my ($trace) = grep {$_->{key} eq $row->{key}} @{$row->{trace}};
   is($trace->{actual_args}, 1, "$label normalizer receives the actual parser-returned array");
-  is_deeply($row->{args}, [$row->{outcome} eq 'string' ? 'array(x)!' : 'array(x)', 'effect'], "$label normalizer mutates the actual shared argument array");
+  is_deeply($row->{args}, [$row->{outcome} eq 'string' ? 'array("x")!' : 'array("x")', 'effect'], "$label normalizer mutates the actual shared argument array");
  }
 }
 for my $role (@roles) {
@@ -140,7 +140,7 @@ for my $role (@roles) {
   scope(sub {
    my $event = event();
    my ($deps, $actual, $state) = setup($role, 'string', $event, $known);
-   my $input = $name eq '_infer_assignment_source_container_kind' ? 'copy(array(x))' : 'source';
+   my $input = $name eq '_infer_assignment_source_container_kind' ? 'copy(array("x"))' : 'source';
    my $outer = sub { return owner($name, $input, $deps) };
    producers($known ? [$outer, $actual->{$key}] : [$outer], sub {
     my $result = capture($outer);

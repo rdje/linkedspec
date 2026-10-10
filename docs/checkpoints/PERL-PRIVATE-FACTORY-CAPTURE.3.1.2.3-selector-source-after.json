@@ -1,0 +1,17 @@
+{
+  "inputs": {
+    "t/actionir_method_inference_capture.t": "a177b4c439d33b14e96b1c246beca022ba391c46c8f486132c2df7d94be32d38",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-selector-review.py": "16058164dc2d0f44c4db71006341853daabbb9ece8aab05616c4d6298d288dae",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-selector-source-probe.py": "1f87a9d6f2dacdb2e757a781abacceb9b598e1a04cfd688df7f73893d9f48cdf",
+    "tools/check_executable_aggregate_selector_sources.py": "606ccd944a0fc1e2ad079bd95be015e38888aaa082bb7225fc6749818f2cfb57"
+  },
+  "args": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-selector-source-probe.py"
+  ],
+  "exit_code": 0,
+  "stdout_base64": "eyJjbGFzc2lmaWVkIjogMCwgInBvc2l0aXZlIjogW119Cg==",
+  "stderr_base64": "",
+  "producer_sha256": "080e4edae7ebe008833c3424b63a78f6eb7c0c6fe7fd8639e8626f6b829eb71b",
+  "unchanged": true
+}

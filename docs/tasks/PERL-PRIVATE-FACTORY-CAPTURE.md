@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / MethodLowering block component required bindings accepted; finite notes-capacity prerequisite next
+- Status: `active` / MethodLowering block component required bindings and finite history-capacity prerequisite verified; local-return/value family next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-10`
@@ -219,7 +219,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Goal: Inline/block required dependency boundaries with bounded native/current actual-call proof.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1`
   Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2`.
-  Owned paths: MethodLowering required seams in the six original inline/block owners; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
+  Owned paths: MethodLowering required seams in the six original inline/block owners; focused fixtures/proof/claim, Knowledge/book/continuity. Finite canonical history-capacity prerequisite .3.1.2.3 is separately bounded; optional/direct calls remain .3.2.
   Split rationale: Separate inline if/switch, block component/side-effect and block local-return/value control paths. Each family declares invoked versus validation-only callbacks and explicit secondary controls before writes; shared/native context primitive remains unchanged.
   Planned tier: `focused`
   Planned focused proof: Actual native/current caller behavior, opaque/known dependency separation, contexts/aliases/effects/errors/public maps, exact required diagnostics, retained semantic source faults/consumers and complete relevant book.
@@ -262,17 +262,34 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 - isolate block component dependencies`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3`
-  Status: `pending` / `P1` finite history-capacity prerequisite
+  Status: `done` / `focused-signoff-complete; canonical receipt required before landing` (activated from clean `cdc45f9cbddbc53603e885225af2a35688657292`)
   Goal: Admit one exact engineering-notes archive member and its exact manifest capacity through a separately indexed accepted decision; preserve all prior history and current runtime proof inputs.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1`
-  Owned paths: Exact registry/ADR/index, engineering-notes complete-record rollover, retained capacity producer/claim, Knowledge and continuity. Stable storage responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; no runtime/checker or external-repository changes.
+  Owned paths: Exact registry/ADR/index, engineering-notes complete-record rollover, retained capacity producer/claim, Knowledge and continuity. Stable storage responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; no runtime/threshold-checker or external-repository changes. Blocking ownership includes t/actionir_method_inference_capture.t six-literal retained-constructor migration and tests/language-readiness/verify_objectives.py exact committed Contracts inverse, its source controls/retained proof, relevant book/Knowledge and committed runtime-claim preservation before book edits.
   Reproduction: The .3.1.2.1 ordinary commit hook rejects the proposed new segment under existing engineering_notes file-count and manifest limits. ADR0130 expressly grants no new member. Reproduce from this clean boundary with the production rollover/checkers and exact source/hash reconstruction.
   Impact / priority: P1 prerequisite for sustained PNT chronology; ordinary runtime slices cannot expand routing controls or rewrite immutable history. The current slice shortens only its newly authored note and withdraws only its uncommitted redundant rollover.
-  Planned tier: `canonical`
-  Planned focused proof: Independent clean-Git preservation; exact old/new canonical limit and contract objects; actual production boundary/accepted-indexed-authority REDs, retained all inputs/producers/channels and reviewer corruption controls; unchanged public documentation authority contract.
-  Planned canonical boundary: Routing-capacity infrastructure requires exact complete staged-candidate CI/receipt before landing.
-  Planned claim record: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json` at activation; no capacity admission claimed by this pending node.
+  Verification tier: `canonical`
+  Focused checks: Independent clean-Git preservation; exact old/new canonical limit and contract objects; actual production boundary/accepted-indexed-authority REDs, retained all inputs/producers/channels and reviewer corruption controls; unchanged public documentation authority contract. Actual original504-input supplied replay, unchanged public selector classifier70/36 RED/GREEN, complete current book57+32 with three controls, retained failed draft render/producer and three actual new evidence REDs/restoration.
+  Canonical trigger: Routing-capacity infrastructure requires exact complete staged-candidate CI/receipt before landing.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json`
   Acceptance: Use finite engineering-maintenance authority under current PNT and ADR0128/0129/0130 precedent. Preserve every old immutable byte and manifest record; admit only one measured new member and exact manifest growth. Account for the sole ADR in decision-store limits where required. Commit canonical proof before local-return/value .3.1.2.2.
+
+  Result: ADR0131 admits exactly engineering_notes files45→46 and manifest44→45 lines/26633→27245 bytes; decisions131→132 files and13109→13144 aggregate lines account only for this sole new record/index row. Every other registry field and all220 prior immutable history/decision files stay exact. Production rollover creates segment4962 from the complete clean-cdc45f9cb suffix; independent root/blob/range/digest/manifest reconstruction passes. Actual30 thresholds/23 authority REDs and three reviewer corruption REDs/restored PASS are retained. Original runtime source/fixture proof remains exact atCDC; its241 original runtime/book bindings are historical at cdc45f9cb before book teaching edits. Blocking historical-auditor repair accepts only the two exact committed Contracts source blobs; full134/84613241 recovery,22 recovery/64 evolution denials, guard0, book57/2 and four evidence REDs/restoration pass. Exact staged canonical CI/receipt governs landing; local-return/value .3.1.2.2 follows the canonical commit.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-* retain exact producer, plan, rollover/control/reviewer channels and counterfactual bytes. Original capacity claim binds245 live and nine original historical inputs; the separately scoped historical repair adds259 live/two original historical inputs without refreshing those hashes. The exact rejected first publication and actual missing-producer schema RED are retained. A guarded metadata-only repair labels the unchanged original checker/roller as producers without refreshing any original hash or measured proof. No root/aggregate/per-file or future archive reserve is granted; stable storage owner remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3.
+  Reverify: `bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-selector-review.py` plus its `capacity.py final` under the same wrapper at the frozen boundary; this replays the exact original504-input historical proof in supplied isolation. Preserve current original/publication inputs before later writes. Apply/capture/freezer/book/packer/evidence/publisher are one-shot writers.
+  Public explanation/input-closure signoff: Actual third canonical failure is repaired without changing the selector checker or expected36 count. Retained exact original uncommitted four-claim publication plus all504 original live identities replay the unchanged historical reviewer/validator in isolation. Current book includes57 configuration/source and32 recursive include files; missing-SUMMARY, removed-marker and omitted-include ERROR controls pass. Exact607752-byte raw capture is losslessly packed259324 bytes within the chosen524288-byte capture budget. Three actual reviewer REDs restore. The final corrected four-claim record keeps shared245 directly gated plus154 additional current inputs; every original additional259 remains individually hash-gated through its retained publication and actual supplied validator. Six literal constructor migrations preserve paired277 complete assertion names and supplied33/152; actual two-input source scanner goes from six positive lines to zero. Intermediate368-input publication/reader/evidence and three pre-migration draft captures remain exact. Original committed runtime/history measurements stay exact. Earlier57-file renders are explicitly narrower observations; broader retrospective producer/input admission remains startup .5.
+  Verification: Focused source-bound proof complete; exact staged canonical receipt and normal doctrines are mandatory before commit.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3 - admit history capacity and reconcile factory audit`
+
+  Blocking defect ownership (focused fix verified; canonical receipt gates landing): P1 historical recovery audit rejects committed Contracts dependencies be7d7071 and construction33e57dee because its boundary inverse expects exact b2156813 bytes. Canonical CI reaches all10 doctrine PASS before this actual rejection. Current Contracts is exactly the accepted33e57dee whole Git blob, with no later drift; baseline2d878478 equals b2156813. Own an exact committed-source inverse here, preserving all historical source/log/checkpoint hashes and rejecting every other byte change. This is historical integrity replay, not fresh historical runtime execution or new factory admission.
+  Additional blocking defect ownership (P1; focused fix verified in current .3 slice): Third canonical attempt passes doctrines, historical recovery and cross-backend admission but rejects the inference chapter's internal `copy(array(x))` fixture spelling at line1126: no explicit removed/rejected/migrated context. Own the public explanation repair here. Reproduce through tools/check_public_aggregate_selector_surface.py; preserve the original uncommitted four-claim candidate and all504 live bindings before edits, retain original proof source/channels, remove the obsolete spelling from the product explanation, and run actual unchanged classifier RED/GREEN plus complete book proof and canonical admission. No checker threshold, runtime or archived measurement changes are authorized by this repair.
+
+
+  Additional proof-supplier defect ownership (P1; focused fix verified in current .3 slice): Actual retained book command exits0 while logging missing {{#include}} files because copied supplier materializes only57 book/config files. Own current transitive include closure and an actual omitted-include rejection control here; retain original producer/partial channel before correcting its copied chapter lookup. Original five-line/six-literal authoring guard rejection and unchanged-fixture draft producer/three captures remain retained; final supplier requires actual six-literal migration before measurement. Earlier captures remain bounded observations, not complete external-include proof. SESSION-STARTUP-READING.5 retains the broader historical producer/input audit; this finite correction does not relabel its older measurements.
+
+  Composed source-scan blocker ownership (P1; current .3 slice): Full public checker additionally rejects six retired bare-selector literals on five lines in the inference fixture and the exact old paragraph literal in the new reviewer. The private probe is not a runtime admission, but source retirement still forbids duplicate positive spellings. Retain the current publication/reader/evidence before edits. Own a six-literal migration to the retained quoted-literal array constructor, fragment the historical prose reconstruction, prove paired unchanged assertion names and supplied consumers, and run unchanged executable/public checkers. Original fixture bytes remain recoverable at clean CDC; no production or scanner implementation change.
+
+  Canonical claim-path blocker ownership (P1; focused alias verified in current .3 slice): Nine doctrines pass; CLAIM-VERIFICATION rejects untracked input rgx/README.md. Actual public70 discovery reads RGX's published README, but LinkedSpec tracks only its Gitlink. Own exact read-only published-document snapshot and one input alias here, requiring current/public capture hashes to match. Retain the rejected publication/producer and actual guard RED; do not inspect dependency implementation, relax tracked-input validation or change any dependency pin. Exact published bytes match both actual public captures; the final104808-byte record replaces only this untracked durability path. Retain the actual partial publisher name-binding failure and exact one-token correction before publication.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2`
   Status: `pending`
@@ -377,12 +394,13 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` | `pending` | Own finite engineering-history member/manifest capacity with exact canonical proof before further runtime slices. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` | `pending` | Inspect/refine local-return/value required seams after the capacity prerequisite; preserve current claim before writes. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` | `pending` | Inspect/refine local-return/value required seams after the capacity prerequisite; preserve current claim before writes. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Depends on the preceding bounded owner. |
+
+
 
 
 ## Handoff
@@ -492,6 +510,15 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Focused tier:33 suites PASS in152 supplied files with all three reader JSONs, previous dependency/default/construction fixtures and Trace. Explicit constant/undef AST and secondary helpers bound the two actual caller bodies; no universal helper/AST/language behavior, complete private Phase0 or mapped/canonical/parent admission inferred.
 - [x] **LOCKSTEP** — Complete57-source book/two actual render controls PASS. Knowledge, roadmaps/index and bounded history/live/memory align; all242 original inline bindings remain historical. The concise new note fits existing pressure limits; no immutable history or capacity is changed. Finite history-capacity .3.1.2.3 precedes local-return/value .3.1.2.2.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3
+
+- [x] **REPRODUCE / ISSUE** — Existing engineering-history membership/manifest limits reject the newly required archive member; the ordinary feature commit retains a concise complete note and grants no capacity. Actual production controls reproduce each old-limit failure with the actual resulting census.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The production roller reaches a finite history-member requirement while README_POLICY and ADR0130 require a new exact accepted/indexed decision for membership/contract changes. Actual unchanged exceeds_limits and adr_authorizes_limit_change/adr_authorizes_contract_change functions distinguish threshold versus authority denial.
+- [x] **FIX** — Separately indexed ADR0131 admits only one member, its exact manifest line/byte overhead and the sole decision/index overhead. Preserve stable routes/owner and all other controls. Independently reconstruct complete clean-source suffix/root/blob/range/digest and every original manifest row; no immutable rewriting or runtime/checker change.
+- [x] **ADDRESSED (verified)** — Retained30 actual production threshold observations and23 authority REDs distinguish old/new limits, excess usage, missing/proposed/duplicate status/index/decision and mismatched canonical objects. Three actual reviewer corruption subprocesses reject omitted history and forged original/resulting identities, then exact restoration passes. Readonly capacity.py final is the frozen-boundary reverify entrypoint.
+- [x] **NO REGRESSION** — All220 prior immutable history/decision files remain byte-exact; only one new complete clean-source segment appears. Original nine policy/support identities are historical and current245 producer/input identities live-gated. Public runtime, test, threshold-checker, dependency and external repository bytes are unchanged. The separately owned historical auditor admits only the exact two committed Contracts source revisions; healthy134-input recovery and64 evolution denials pass. Canonical tier: exact full staged CI/receipt is mandatory before landing, with no focused-only admission claim.
+- [x] **LOCKSTEP** — Exact sole ADR/index and bounded history/Knowledge/roadmap/live/memory pointers align. Existing mdBook accepted-decision authority and bounded-history contracts stay accurate; the updated architecture chapter explains exact committed factory source reconciliation without product behavior movement. No future archive reserve is granted; local-return/value .3.1.2.2 resumes only after canonical commit.
+
 ## Verification Log
 
 Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`.
@@ -574,3 +601,15 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Activate block component/side-effect .3.1.2.1 from clean65bd00faa. Own two required returns, six actual invoked roles and separate flow validation; native undefined-result fallback and direct reference outcomes are explicit proof requirements. Preserve all242 original inline input bindings before writes.
 
 - `2026-10-10`: `.3.1.2.1` accepts component/side-effect required boundaries, native fallback/reference outcomes and separate local flow validation, preserving original242 inputs. The attempted rollover was blocked by README-STABILITY file-count/manifest controls. Withdraw only the uncommitted redundant segment after exact clean-source verification; shorten only this new note. Pending P1 .3.1.2.3 owns a separate finite canonical capacity admission before local-return/value .3.1.2.2.
+
+- `2026-10-10`: Activate finite capacity .3.1.2.3 from clean cdc45f9cb. Preserve prior immutable history/decision bytes and runtime proof; retain exact one-member rollover and production authority/threshold evidence before staged canonical admission.
+
+- `2026-10-10`: Finite capacity .3.1.2.3 focused proof passes with exact220 preservation,30 production thresholds/23 authority denials and three reviewer REDs/restoration. Exact staged canonical receipt governs landing; runtime .3.1.2.2 follows the canonical commit.
+
+- `2026-10-10`: The first .3.1.2.3 canonical candidate stops at CLAIM-VERIFICATION: the nine-input historical claim lacks a producer role; other nine doctrines pass. Own the publisher metadata defect here. Retain the exact rejected claim and actual validator rejection; a guarded repair labels unchanged original production checker/roller bytes as producers without refreshing hashes or capacity measurements. Then restage and rerun exact canonical CI.
+
+- `2026-10-10`: Guarded .3.1.2.3 publication repair passes the actual validator, retaining the exact initial claim and complete actual schema RED channel. Only two original producer-role labels, explicit disclosure and five retained repair/validator inputs change; all original hashes/capacity measurements stay exact. Readonly repair-publication.py review independently reconstructs the corrected record and reproduces RED/GREEN. Restage the complete candidate before rerunning canonical CI.
+
+- `2026-10-10`: Second canonical candidate passes all10 doctrines, syntax and structural contracts, then actual .0.4.2.1 recovery rejects unreviewed Contracts boundary drift. Toolbox/KM trace identifies the absent two-commit factory inverse; own P1 repair within this canonical prerequisite, preserving exact staged candidate, original auditor and actual RED channel before writes. No other new selected executable-source drift is present beyond existing admitted Phase0/CI evolution.
+
+- `2026-10-10`: Historical prerequisite complete: exact two-commit Contracts inverse, retained failed staged candidate/original auditor/actual RED, full134 inputs/84613241 bytes,22 recovery controls/64 evolution denials and guard0. Freeze original241 runtime/book inputs at cdc45f9cb before architecture teaching edits; runtime artifact review223/4/6 and supplied33/152 remains exact. Book57/2 and four actual reviewer counterfactual REDs/restoration pass. The bounded123912-byte claim retains original capacity245/nine inputs and adds historical repair259/two. Stage the complete final candidate and rerun canonical CI; no capacity or full-private admission before receipt.

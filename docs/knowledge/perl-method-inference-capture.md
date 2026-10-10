@@ -12,7 +12,7 @@ date: 2026-10-10
 status: three inference resolvers and inline successor verified; block and remaining required optional pipeline owners open
 tags: [perl, actionir, methods, callbacks, dependencies, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.1 retains complete paired 277 TAP: 24 original publication-isolation REDs, 253 original controls pass, all 277 current GREEN. All eight callback roles and 25 native/current ledgers match. Nine effective source faults, cold4, consumers29/148, evidence5, original-binding RED/restoration and complete book57/two controls pass; all262 original trim bindings stay historical."
-reverify: "Original inference reviewers require accepted9032b20e inputs. Current block-component/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py; separately run its preservation-control.py with the same wrapper. Original trim reviewers require accepted429d0c6d inputs. Capture/freezer/publisher are one-shot writers."
+reverify: "Original inference reviewers require accepted9032b20e inputs. Current block-component/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original trim reviewers require accepted429d0c6d inputs. Current book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers."
 ---
 
 MethodLowering's private native-context lexical binding now covers required

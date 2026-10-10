@@ -1,0 +1,1298 @@
+{
+  "version": 1,
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3",
+  "claims": [
+    {
+      "name": "finite-engineering-history-member",
+      "statement": "One finite engineering-history member and exact manifest growth are independently verified. All220 prior immutable history/decision files remain exact; the production rollover archives only a complete clean-source suffix. Engineering notes measure46 files/29064 lines/3253190 bytes, manifest45 lines/27245 bytes, decisions132 files/13144 lines/971652 bytes. Thirty actual production threshold observations,23 accepted/indexed/exact-object authority REDs and three reviewer-corruption REDs/restored PASS verify this proposal. Exact staged canonical CI/receipt separately governs admission.",
+      "scope": "Exactly one member, exact manifest line/byte overhead and sole ADR0131 decision overhead at clean cdc45f9cb. Existing root/aggregate/per-file and unrelated controls, prior immutable bytes, runtime/checker/dependency behavior stay unchanged. Focused evidence alone admits no capacity; canonical staged proof governs landing.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-capacity.py final. Apply/capture/evidence/publisher are retained one-shot writers, not resume entrypoints.",
+        "granularity": "Every old immutable file; independently reconstructed clean-source record suffix and current root, every manifest field/row, sole exact ADR/index insertion and full registry object/byte comparison; actual complete current censuses and each of30/23 production observations; all actual reviewer channels and counterfactual bytes.",
+        "result": "One finite engineering-history member and exact manifest growth are independently verified. All220 prior immutable history/decision files remain exact; the production rollover archives only a complete clean-source suffix. Engineering notes measure46 files/29064 lines/3253190 bytes, manifest45 lines/27245 bytes, decisions132 files/13144 lines/971652 bytes. Thirty actual production threshold observations,23 accepted/indexed/exact-object authority REDs and three reviewer-corruption REDs/restored PASS verify this proposal. Exact staged canonical CI/receipt separately governs admission."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Extra capacity could land without exact accepted/indexed authority, a boundary could admit excess usage, or preservation evidence could hide missing/altered history.",
+        "oracle": "Unchanged production threshold/authority functions executed against actual current metrics and in-memory decision/index mutations; independent Git-backed full-byte reconstruction and actual reviewer subprocesses.",
+        "red_control": "All five dimensions reject actual usage under old limits and reject new-limit-plus-one; exact new boundaries pass. Twenty-three actual authority denials distinguish missing new decision/index, proposed/missing/duplicate status, wrong old/new canonical limit/contract objects and unreviewed increases. Three actual reviewer subprocesses reject missing history membership, forged original hash and forged resulting registry hash; actual exact restoration passes."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "CHANGES.md",
+            "sha256": "9a80187ac02126a9af9437a729064f05ed4d203bbab408988da11d5d6b0b8761",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "df1e142fc157f06d1c1d4b69ea60388aaada2336d80be44ed674a795eb4c7ca3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-capacity.py",
+            "sha256": "5eb080f1c24d13e8d70f0ec3d8ad570eb246be7374f90b8e76f6511a11fd2aa4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-controls.json",
+            "sha256": "b67078373a611c3f772fa2402daaf1cc58ef112ac8d68992bec8d5143cd62403",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-controls.pl",
+            "sha256": "02fce96b2fcb46e4e2887d5a8df88b4967852076340562ef673d0c82df12f1d9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-evidence.json",
+            "sha256": "1836f76c82c0949ac85d19ecdf1cf1c139009d8d154d68a4b25f92bd707c1ab6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-final.json",
+            "sha256": "cce79b9cdf28fec772b00f4ccd8f172b4f9fe0400ad4b5e6e25659845fa5612c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-plan.json",
+            "sha256": "a29fdda313ee686eebef506e119ea1c68ae72c4bc4c9f4be853f9b61b534c72e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-publish-claim.py",
+            "sha256": "1ab9c280ba05e1ec85da86df0d0affbb5f1a621cee6263a3caebd6f9c7ab729d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-rollover.json",
+            "sha256": "edcfa1538d830fb5470adfd2ffe61d4f72d0529bcedbe795a376e6852ac001a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0001-task-tree-and-commit-doctrine.md",
+            "sha256": "ea6c76ce5cf7c86a99260773de3bec8eade01d183831e21794d839819f8800f8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0002-all-target-actionir-ready-invariant.md",
+            "sha256": "5c6407e12b8471eea6f9fa3955db7908a2d8356b75c7618826d0a83f23d3e0a2",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0003-raw-perl-free-spec-authoring.md",
+            "sha256": "0d25361633aac15599afb235840f6433ea193c9d9531079ce257f559514f8f39",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0004-hosted-ci-disabled-local-gate.md",
+            "sha256": "23ef8b13356097904cfa7f03fe968e306830867521c5af4629765b9b6c91cc9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0005-knowledge-map-retrieval-layer.md",
+            "sha256": "9a32ac895e20706460cbae95c980716b2163864d5442e0df95af826adb149f32",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0006-multi-backend-vision.md",
+            "sha256": "0a23af6aa80fea31346edf113fdfab53c79b1df81e6c8cf1b44cc4ad0a8c95be",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0007-spec-format-terse-direction.md",
+            "sha256": "8b97269f089eef161633c209fb3cd7dcad2d8ad4190c472755280c6bf1bdde8a",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0008-authorize-reference-engine-defect-fixes.md",
+            "sha256": "67a9b05da04d75330774ed373670dd2f108d4c6c83f95837d0ddd67dbf617523",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0009-doctrine-enforcement-architecture.md",
+            "sha256": "73a9cd89aced4e136477de93ff9caac35243aea7a80e851981bc563cb6973593",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md",
+            "sha256": "225dfd10ef866207b75799dad25918203d7bc0c115f632207529a8038ed93853",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0011-text-to-ast-backend-doctrine.md",
+            "sha256": "bf19a77182e14720adf6ad83ef40ff07c465201659090e16f91bfac36e5e9eb7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0012-staged-linked-parsing-architecture.md",
+            "sha256": "e6246c13f81d61b2bb110ecc75fa171abf8de658a96c70fd824562c7e8f76acf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0013-spec-import-composition-contract.md",
+            "sha256": "6bf04df3ce921cd1e55ad5c553de3e8eac5675ec7bf1aa645b2f03c55a2ddbdf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0014-staged-parse-job-annotation-contract.md",
+            "sha256": "8772ebfb509366eb3198f41b3dfe91b880ebbc716bd3e4b9eab37e511fddd7ac",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0015-staged-parser-registry-dispatch-contract.md",
+            "sha256": "915debbe07a530272ada32da0ad6de12466f88d709d004dd1fcebc3ead283c4e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0016-staged-parsing-language-neutrality.md",
+            "sha256": "306713d0000e378a4741349597d5a1dc111b84cd57f126a146e16d52d36cd1ce",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0017-function-definition-staged-ast-contract.md",
+            "sha256": "1455e23d2697859462766f39baa7bea8691f893ffb45800ab313725dec55976d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0018-declaration-helper-legacy-compatibility-policy.md",
+            "sha256": "aac70620d59464b43c9e331cd9f0f75adf2f9f25206b8107b39e694055ac2889",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0019-terse-colon-slot-removal-engine-first.md",
+            "sha256": "d23a7fe9914c66c8b7ef979bbccbfefd3a75eeeae16c3d613a7c3cb28670e12e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0020-lifecycle-handler-drift-documentation-policy.md",
+            "sha256": "bc2deade81efb44cfe83bf25573441c504de51c0c44974c794b87a9cb44e2243",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0021-future-backend-rollout-order.md",
+            "sha256": "12ecf9004389ca4b5fd28c3a814a684ba4b015639143dfcf67e0db5fb7373412",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0022-native-in-memory-backend-embedding.md",
+            "sha256": "09b87e1949a87658187aa227d5087e1f2f1eb9726b34c4664d7aefa8be34f4bd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0023-user-observable-backend-and-cli-parity.md",
+            "sha256": "481ea7bc0c97821608c7b037943eeef6fa7f8b616f546651b3e0e57b66cb76a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0024-canonical-primary-cli-trace-protocol.md",
+            "sha256": "e518eaee19c1a82f67d6c298c09ec848eb687ddbfe6adc63f221f4f37e68cc13",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md",
+            "sha256": "d50e8ef040e1c320fca26dd722d55acaaa62ea6dcfba53e0df700d5b1d8da029",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0026-native-spec-resolution-and-loading-contract.md",
+            "sha256": "8e4304de27cb020b6f1720e4ed0cb5a8c11f614a5c78762d0ce14e83990ce853",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0027-unicode-17-full-default-case-conversion.md",
+            "sha256": "bd9ce27f2b9c774992e9a3af1d94416af8ad98516ee9d1fdef1dc759349a657d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0028-portable-scalar-to-text-coercion.md",
+            "sha256": "bbf8f06d389a53d8a72fd8f7395d40d69e7483394a930be54f63e7033a463c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0029-portable-scalar-numeric-helper-contract.md",
+            "sha256": "7524b4ca8edba9b7715373177ab7ed99b38c984129747a682bc160e876e2bad8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0030-variadic-callable-signature-contract.md",
+            "sha256": "84f8c74ca585ea03e2bdd663e81f8203d7d53348d1e35745b36e9637353d48fc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md",
+            "sha256": "27fbcbe873b65a597701fd107c24c7899735d746f6ba191788a05932ad93b645",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0032-final-codeblock-parameter-declaration.md",
+            "sha256": "66c5ce2477301d55850721571c1172afc7d3e30f4abc44a4fb870981b560de9d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0033-punctuation-light-zero-argument-calls.md",
+            "sha256": "cfe2b7fd4cfba41c64887dae8ef2a79c1c9ff3247ba18d88edc7817c01518102",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0034-post-parity-structured-text-requirements-program.md",
+            "sha256": "216959096d52451b495c0fa09937fa4ca8135a09cc47c2f4dedd90c7810b73d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0035-terse-readable-expressive-spec-authoring.md",
+            "sha256": "729c7655202b4bb0af10914402a4c866d0400e9913fd649aa9599bb16cb8e5ba",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0036-write-vivification-and-receiver-mutation.md",
+            "sha256": "c242c8915a0f9a337c3e6c7a74e5d1a77cd81c422c2e2ecf65608595fd3554d9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0037-selective-end-to-end-parser-observability.md",
+            "sha256": "8dce65146d9c76f2c05565573e2a77728918d42f055184a054441c0599976139",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0038-optional-native-parser-acceleration.md",
+            "sha256": "343a22ed4d7888d22149e8feec54487540ab596ee7ebefb2b31f6f0e641ea6e9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0039-rust-mutation-testing-cadence.md",
+            "sha256": "229f9ab1f3a5265220d6170cec802c5758b367b7383745adbf666ebcaa6867a5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0040-backend-implementation-companion-books.md",
+            "sha256": "ff2220b7bae6db6070aa8b8da71f5edfa206bfc275aa9a18e35e0a71b130556f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0041-final-codeblock-descriptor-and-lua-census-admission.md",
+            "sha256": "09651f27fe5e507c6ae0d3750f6e0d617ef792dd2ae3bf29d39708739a40f884",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0042-caller-owned-diagnostic-output-events.md",
+            "sha256": "c83c8ed9dadd07015ba0cbb38798fe16a5687f6fc2870c2dad7ba2ec9ea5fea6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0043-eager-logical-helper-and-typed-truthiness.md",
+            "sha256": "d0ec9ba2db7dce1c19822a5ccce4e496ec99a60c180c90b0346fa788c634a886",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md",
+            "sha256": "1f5bafac17c6017e7b85599c19f9fcee769d65f15cb7665243a7fc4adf669625",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0045-inter-match-gap-capture.md",
+            "sha256": "67fdf3aad9d5d5342372582a3e9493e122a36f839cfd756e030df499311ffb9f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0046-root-rule-selection-precedence.md",
+            "sha256": "79851ae8ed66b2de66c94a197f03114a0afb32dd7a21b839f86f54c13bbdfbe9",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0047-duplicate-regex-slot-identity.md",
+            "sha256": "fe92dfd518094dcdbb9645fc3254adbaf2dabe565fb603260880c66a2d79193c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0048-explicit-repetition-action-result-collection.md",
+            "sha256": "0c8940ccbcbb67b1b99eb675f1ae8713b8edbf07e78bada30e4e575f55e9fd59",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md",
+            "sha256": "572cfc0e4d5e93f936e5dcdfe1bf3a054ef1b6ba2725b945e8a36725efa1a3d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0050-semantic-introspection-staged-artifact-records.md",
+            "sha256": "be525c07118d6a41726b6cdbae7209f91a470c0494d96a1d718347b169cdee88",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0051-unicode-17-xid-continue-rule-labels.md",
+            "sha256": "9a0c2d8bdfe66ea4e276344dc674248825a9b35c9453ccd4572658e908cf1392",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0052-repository-root-path-portability.md",
+            "sha256": "781e60be27e59d15c2dede575fee76da0fe4fe1dbd5657980a04c192c1415d11",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0053-project-data-ssd-storage-locality.md",
+            "sha256": "2f61c056150841155ef5a130f0e4988799a27463dba4dbd78fffce026f2ebb5e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md",
+            "sha256": "411b497babbc0e41fc95742353e4d3b99ec0880cddce3a6c991b8ab1f538b480",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md",
+            "sha256": "f8f9e6aa71e2630bfb7799390094b1a2f523fc94b9f330118e1b687597db1967",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0056-typed-source-location-and-cursor-algebra.md",
+            "sha256": "ecfa7bed06df894e1de369fa6f50f483afb48d3d91f1bf6cfcd780205b3be9fc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0057-perl-native-mcp-server-seams.md",
+            "sha256": "b18e5cfc4c36e042ee1a84e2c6bf3051b6c8080672c5185bdf5e9d7366eda710",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0058-rust-native-mcp-server-seams.md",
+            "sha256": "9c54a2761768e113dc624d2cead4c8457d90c8afef73264a1ef1383208a694cf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0059-dart-native-mcp-server-seams.md",
+            "sha256": "60d3a161571086f8c32efc7ff8809c93b1b3f17720bd5683e765d2c21414b7cd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0060-julia-native-mcp-server-seams.md",
+            "sha256": "da9b644612011ab696fdcbd9181ad9f35bf424d705348737370f660d1a0762ce",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0061-lua-native-mcp-server-seams.md",
+            "sha256": "c23ea9e46d8ea28e857587c59de36476edafc0a3c21402f5536d03d22176c1ea",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0062-recurring-mcp-six-runtime-composition.md",
+            "sha256": "c05661d4e305afbcca3eb37f17a4f8c9d7508541b1c2e1f05a0384ff03511e37",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0063-bounded-readme-landing-page.md",
+            "sha256": "28c41a6e3d3a65a5873a6fa40bf57f62f6be60ae4cacd57ca906aa15307e5241",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0064-expressive-self-containment-and-ebnf-profile.md",
+            "sha256": "942e8ea239652dbcc6902634f4a660f47bd679da004558ea5fec8f6d2526f4f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0065-satisfiable-memory-activation-commit-pointer.md",
+            "sha256": "8c23ce8a3a09722efa03b6542e97862908709345e45e9a1b786ab680b0c44eba",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0066-bounded-live-document-store.md",
+            "sha256": "b7d2039549ac408181aa7c3ab56164e82bb41a0be1f048be069678ab0416deed",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0067-live-achievement-status-history.md",
+            "sha256": "e7fcb5582e57e4101d73b6e2fc51ed62c5673757b1a53814836c7c816f341061",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0068-future-parity-task-partitions.md",
+            "sha256": "27fdcbf38a693b4fcddb241fee7aa333245ef36f633f05b270397bfd01051f56",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0069-bounded-change-and-notes-history.md",
+            "sha256": "33c2af511d2f8847795743506f50e9bd0671ff9bd5eee8e904533146d22745b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0070-engineering-notes-eleventh-segment-capacity.md",
+            "sha256": "3e5c13d8853cc99d4d5ee5713ff018cf0fca51df361b8f969cb0e5858225f0a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0071-engineering-notes-twelfth-segment-capacity.md",
+            "sha256": "20c6589c55c23277a9df95f7b991315a25ffb8ad5e592334b807be60a0376d98",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0072-change-history-seventeenth-member-capacity.md",
+            "sha256": "98ec9ea9d610a9f2d85e9e71511bda5a7a7b974f177e06556ebc8354476e7601",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0073-tiered-verification-cadence.md",
+            "sha256": "703570c5e38d74b4a447d844fdb59974c7fe559a90a8e6ede2db0a4f8a8d0736",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0074-dart-gap-admission-mutation-correction.md",
+            "sha256": "873ca7e7f585fd9862305ad5fe732512ef66d41bdf14193fff288f7b2fbcabdd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0075-engineering-notes-thirteenth-segment-capacity.md",
+            "sha256": "27710533cfe8d5133db926396fd80afd54b829e18142679905180414a4c94106",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0076-change-history-eighteenth-member-capacity.md",
+            "sha256": "9e7484ed278350bb8655230de42eb28e52ed7dce645b6ae7912919a0ffdf6fa7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0077-engineering-notes-fourteenth-member-capacity.md",
+            "sha256": "265bedd020041f9e0369ae0044303a632ea78fe23e9c5624300a581be42011f3",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0078-change-history-nineteenth-member-capacity.md",
+            "sha256": "4a57948bc8bfcb1660dab7968c6b0ac27bc6df5c54fa23f4c5304bc1a1fa11fa",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0079-inter-match-gap-recurring-public-closeout.md",
+            "sha256": "e9ad3d253fdcd70b5dbe886e3de0516300d8356ab02f96a764fe228d99e95f68",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0080-authority-preserving-progressive-span-dispatch.md",
+            "sha256": "cea6ef2180cabd7115f42da5b92d26cfc604b962ff5c332a3926a4f642e91bbf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0081-engineering-notes-fifteenth-member-capacity.md",
+            "sha256": "384d738c9f901f591f7031834b3676445053f53db8ec5614dcb24df476f75d60",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0082-change-history-twentieth-member-capacity.md",
+            "sha256": "1b8a0bf5a03735d1e51e0b8994112c695c37a52766c7c8640eb9d6ad07ad09c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0083-engineering-notes-sixteenth-member-capacity.md",
+            "sha256": "3d5d86f861427479711a7e102f6992f60bcf79e4becd94a0013d245f3c6ef684",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0084-future-parity-task-partition-capacity.md",
+            "sha256": "cdfda48eefb35d64be8be3c2924e6fff70b120632152f68c52439163f1de7a6f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0085-future-parity-task-partition-route-implementation.md",
+            "sha256": "8d36054785eaa78b353fd25f07db42db5557a9b996a119b5a1f7445ceeac5b9c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0086-change-history-twenty-first-member-capacity.md",
+            "sha256": "7b11fa29014e5ca6901d83120c21ac256b4a0c44782786382c4f98fff9fb4a55",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0087-engineering-notes-seventeenth-member-capacity.md",
+            "sha256": "ef33513f7f515131f5a8e77232c408f947baed310f112a8c93280320ccca1fd6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md",
+            "sha256": "9044703041834b4ac4235ef76144edc550c8c78f4061d5ebe079540d5d50e2fd",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0089-change-history-twenty-second-member-capacity.md",
+            "sha256": "165d9336894d503de8e1b56e5b8d53ab6b8413d102d64d596dee25a422c74da8",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0090-engineering-notes-eighteenth-member-capacity.md",
+            "sha256": "4d7371328a649ef80265cb2b7362dc91d0fec519d5296b66197cacdf58ace4b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0091-change-history-twenty-third-member-capacity.md",
+            "sha256": "f8b072277016837816fd63b38fb06a6e3d7de4bc8c492a60daa5ad093dec5bee",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0092-engineering-notes-nineteenth-member-capacity.md",
+            "sha256": "e62231a5f62e621c4a8d7f40b4b2b7c76ba8b6a2291782bae2a4c3f4a8817886",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0093-change-history-twenty-fourth-member-capacity.md",
+            "sha256": "b8001524d6e4367387ebdde4e54cadf9b655e017445155f81bfb0c59b04079c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md",
+            "sha256": "277585ea55b0cbd04eb77c0d81b72f8b5fe7709e3436af39efe075024a9531da",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0095-engineering-notes-twentieth-member-capacity.md",
+            "sha256": "144580843927500af33b0d30d4e7bc4fc634a2b120af80235c2077a33c5428dc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0096-change-history-twenty-fifth-member-capacity.md",
+            "sha256": "be98539114709660ce728ec37a5c9187f58de970a5297ccc6c039bc06980b1bc",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0097-engineering-notes-twenty-first-member-capacity.md",
+            "sha256": "d75290215c60f9e86842ecddd3aa340565399d673a9b5de23eb027011f46aa6d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0098-change-history-twenty-sixth-member-capacity.md",
+            "sha256": "ba29318ddc169b5a7e93d7bc24fb46b5e6dfc688152f852ed0f4961feaa45c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0099-engineering-notes-twenty-second-member-capacity.md",
+            "sha256": "b1e5ca62dd77c89981aa17bdb10f14eaa3c23282dcaf2080e35435a45c93713d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0100-change-history-twenty-seventh-member-capacity.md",
+            "sha256": "b510afa6a547ff012920c0c4fb77e5cb4ab8591c3ebf6493de6b1abd50ff3147",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0101-engineering-notes-twenty-third-member-capacity.md",
+            "sha256": "4c895f475699cd22a70f127d3965b250b2ff056c42abb233f2556e1f497a4591",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0102-change-history-twenty-eighth-member-capacity.md",
+            "sha256": "5acc1485b97d06897f843af5b96a1f99cf6185326f7f30f52a92e40453ebf71f",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0103-engineering-notes-twenty-fourth-member-capacity.md",
+            "sha256": "7350ebc710be1d8675d8bbd3b7e6813d319613381d4e712472d14b6b67b024b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0104-change-history-twenty-ninth-member-capacity.md",
+            "sha256": "4632545c2ca13ad7b162b7951eaa2ee16d980e67a50fb43a3740d3fbbbb51d7d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0105-engineering-notes-twenty-fifth-member-capacity.md",
+            "sha256": "e211af35d25ee2b4d15783c00afb6f59aa57b1c4d18b994a1882e5475320cd44",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0106-change-history-thirtieth-member-capacity.md",
+            "sha256": "5048241998cad14c07e2b360cfeb491e0d7527c8bfe6e246798594aedef0a061",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0107-engineering-notes-twenty-sixth-member-capacity.md",
+            "sha256": "41b8a3658aa81ce11ac84c600e2b6eb808b177bb6f1240e08da9cf9a4160df4d",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0108-dart-reading-capacity-proposal.md",
+            "sha256": "9ef8923a2f3b1c4a1e2790d71d8c70486c31d3ac4bc9120347a21776070fe356",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0109-approved-dart-reading-capacity.md",
+            "sha256": "6ffcd37c04fa60fee2ed91cd578a13bdb6ff0f5e5d438afcf6d4fe48a88d665c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0110-change-history-thirty-first-member-capacity.md",
+            "sha256": "a95cb4b5a6652133d9034cc55a030364e5bc62f743a7007555979e45c86fc40c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0111-engineering-notes-twenty-seventh-member-capacity.md",
+            "sha256": "aaff9393391031c31b72b6d5a481235b5fb9fef497b662f51f937dc0f10c4602",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0112-change-history-thirty-second-member-capacity.md",
+            "sha256": "12f190bbc17aabb3e6573de2b1241021d5bd9e9b3865d2c01c1037acec49b0c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0113-engineering-notes-twenty-eighth-member-capacity.md",
+            "sha256": "627b88213fa36b79039ae3d232922341b3630b333d01241498d9799c299344ae",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0114-dart-reading-closeout-verification-exception.md",
+            "sha256": "542d392cafee7478cf3dfadb7f94ce1ec762b479ae8b087a5d26efd8937f3af7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0115-julia-reading-history-capacity.md",
+            "sha256": "3a5428c04f9428f8c634305bbb0291bcd75f65ca7a42a880b91c80986aa467e4",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0116-approved-julia-evidence-capacity.md",
+            "sha256": "e278b59da1fb8540f0e17f08eba0094ec2c32fbfd8d64a0bc743eecca5c352c5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0117-julia-reading-closeout-verification-exception.md",
+            "sha256": "8eb7d55f80f02b3831ccc385ea562376bd84bc772bc5f788e7ae62a5d82ce581",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0118-approved-lua-reading-evidence-capacity.md",
+            "sha256": "60ee589a624dfda3818d6e2b499e5446f1cadb1998ca3ac6be57a91750cee82e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0119-authorized-lua-reading-closeout.md",
+            "sha256": "bb63267b16fd691130fcf6652f66077c26e3243b4de254d501709754c381183c",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0120-supporting-reading-unblock.md",
+            "sha256": "8452294efc9b662f3fe7dbbbc1b8a966a55825148f0073f63f7b895c27aba2d7",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0121-approved-integration-history-capacity.md",
+            "sha256": "3a67835b27b34707779e31afa6b915a10a38d6785eb65a2251e9938cc228ebe5",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0122-approved-conformance-evidence-capacity.md",
+            "sha256": "52fb624cc53d7e001318b90cfcf558979957f987e99e0f3cb83d679df6eb51b2",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0123-targeted-session-startup.md",
+            "sha256": "14a2a1d5bb46c734eb81614280fd1d20ebba3846563ed0b09d1179610031ec86",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0124-kind-preserving-sexpr-document.md",
+            "sha256": "ac48ac1972f589fbea8ae97c7f8e4979c1480c9b13f7ada9f74bc7315a8f7b34",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0125-startup-task-partitions.md",
+            "sha256": "608ea2e587122f1ddac3b72d0fd4fc9d3265ea52efe1686588c5675ee823c368",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0126-claim-publishing-contract.md",
+            "sha256": "e89d837fa29266b99f571e3c17deabd33a0741bb0c990d8cc9277df35cb62cbf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0127-legacy-diagnosis-note-capacity.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0128-replacement-note-history-capacity.md",
+            "sha256": "4ff5da005a07b2e6072bb406887e98a8826615f4f439b29598648031ca9e202e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0129-producer-residual-change-history-capacity.md",
+            "sha256": "10b565e36721fccc4498dca27b338217549bf0763c860096a4a9d0f56651e5cf",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0130-finite-engineering-notes-aggregate.md",
+            "sha256": "e09b66b9a278977b67bf0edc1bc80368ae1603ae8c191285a57cf206644552b2",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0131-finite-engineering-notes-member.md",
+            "sha256": "91a1dd4978d406dc8df9b64daa7514becda0e9209f138da12f7727a440775829",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "e23ef4c733c7674f932f5d7260cc7d1739f116025ca296b45be89488eb811962",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/manifest.jsonl",
+            "sha256": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4965-52ebe44bf0ea.md",
+            "sha256": "52ebe44bf0ea9e311c684dd73644558158156a59f445ff88640fe03a68de3226",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4966-48d6c2400b1f.md",
+            "sha256": "48d6c2400b1f9bebe228e1f4b14647f28bd0a0d65c18e47feee4f87447b9af4b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4967-7e9c68a6c386.md",
+            "sha256": "7e9c68a6c38627f9e45272520f60f2c5f90adcef964b739e3232bbc6872a67a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4968-0c53b15ed89c.md",
+            "sha256": "0c53b15ed89c4508e6c32646dad8173196080af27b148e5ba447b2aa57ff3b0c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4969-b3bd23d1465d.md",
+            "sha256": "b3bd23d1465d5feecd69d00771d4940ad36e2ae0579b24ebff64ccec0598da71",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4970-298de6f4214e.md",
+            "sha256": "298de6f4214e71bc734bfd8fce2f8c060b980a3a0f2bd82ca00a91fab189c4e9",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4971-3fe6b617d78e.md",
+            "sha256": "3fe6b617d78ebd96a05583151dfe46b217d7a5bae49850216104ee649e0f43c2",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4972-6d1a25081329.md",
+            "sha256": "6d1a25081329e6b20a112e683947f43a963912fd252c9cd058c47bf1357c5524",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4973-a9bf2b28f0ab.md",
+            "sha256": "a9bf2b28f0abf55e10f7078989d83720ea315a5f8cb6fb9a59ee6622c4140a85",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4974-38bd13bb0125.md",
+            "sha256": "38bd13bb0125cfb12dbba6255586b14c13c541438a7904a29547e5135143ef92",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4975-3da9552f81c9.md",
+            "sha256": "3da9552f81c93de15c4add8d42685f2880d29a0361026a7f29cdb677faaa54a0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4976-6d1dd54d605a.md",
+            "sha256": "6d1dd54d605a5363a60cfc39d7918f91cd6d3934f8df6e3d57c00f14c1d0d026",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4977-65e8f007697e.md",
+            "sha256": "65e8f007697e26885118d213257a695012e39fd07323f9dae4834fb904fe6d6e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4978-f54190d7a909.md",
+            "sha256": "f54190d7a9094e9c473472499f20e0b2b69053f08f1938aa4cb7447088a6acef",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4979-6e4108166552.md",
+            "sha256": "6e41081665523985eebc3e6f93a0070419e90be21f2f02898b4d8f25844ae35b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4980-f04b37b1dab6.md",
+            "sha256": "f04b37b1dab6628be794d952afa082fec6ff5b244c999081267f882673cbd4fe",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4981-5a6450db0974.md",
+            "sha256": "5a6450db09742fc1ac54486af8ac47eec95afbf9e7d52901dbe3912937d30de8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4982-c00b7a2471b5.md",
+            "sha256": "c00b7a2471b553ab83c98d104a731ac521966e5219be58daa289cd012c754aa7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4983-90ac78b47470.md",
+            "sha256": "90ac78b4747014cf1c23511da66b37cd4c1e2e3d100d0b62ef7719e4cbc5bc3a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4984-d720d564937d.md",
+            "sha256": "d720d564937dc8d5f5d14a2942335ec874a481dda01e8824b2956a0742e9c69f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4985-3ac09e49b49f.md",
+            "sha256": "3ac09e49b49f7bb8b05ea70af1286cd803310b212dcad344235ddce324b97f2c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4986-77d2fe560005.md",
+            "sha256": "77d2fe560005d811cebbf32063fecfa7d95a13ed47a0b61d5984cb4605dc94d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4987-1c30315e50b1.md",
+            "sha256": "1c30315e50b1b66ccd2ddc5602af535da9530b2a199531577f221503b2142d37",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4988-4251613b7181.md",
+            "sha256": "4251613b718148733c85a08c92ccb0bcba13a87a5aa68b09c61f626c56f3fe89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4989-8c4cd2d5524c.md",
+            "sha256": "8c4cd2d5524ce0ae1a966cbeee5c84d51eb47b3d2a95e4ee7c176f5aaf137191",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4990-eefd32bcaf3a.md",
+            "sha256": "eefd32bcaf3a63edbd6c66c106b233d4f35e59aa1450321951d1c311e3d6f922",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4991-b1e841ec3afa.md",
+            "sha256": "b1e841ec3afa688ba93280461cedef3e4827bfd3710dc1e8f1785bc87e34934a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4992-713760c02200.md",
+            "sha256": "713760c0220081295f349c67e97500aa205818498eebdf99b2ba6724f0a2aebb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4993-08b98f843508.md",
+            "sha256": "08b98f843508c6ab1b1d0e85b65a287e0f97a56451f86595af0611c30f1cd3f8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4994-c18fbfc8378a.md",
+            "sha256": "c18fbfc8378a31cd670b6fcb4e0abea3dc9393fb808ac6f6b5c4636f5f6958c8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4995-b652cbcd191b.md",
+            "sha256": "b652cbcd191b18cd588c428dc0272944e3783e26b96879fc269fc8eefeb3fb02",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4996-f5578663cbea.md",
+            "sha256": "f5578663cbeab0b3975c53b2e57c1c0c0a6fbb859b866433cf701a0d5fd34e1f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4997-763f6a803dba.md",
+            "sha256": "763f6a803dba1ca2bff16ff546c246e1ed3108ca5e72fd8ccce41f5339d1d1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4998-2b8f3f4a0e19.md",
+            "sha256": "2b8f3f4a0e195495f676f3668bd3a388fd4201c6350a75071f9734a4ae8edb76",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-4999-4a115e6f11a0.md",
+            "sha256": "4a115e6f11a0107c98ea30bcbd9eddc1716debd7a0d87bc290ca653e7201ed0d",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5000-0774ec340540.md",
+            "sha256": "0774ec340540f5dc5d535ef6ec32735a7a424a6db09fec0b3ff043e422d50147",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5001-90d6173c210e.md",
+            "sha256": "90d6173c210ee78897406097beaf2fe2994ccd1369dfe4d1fbe6a06af78c61e6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5002-48362250b3eb.md",
+            "sha256": "48362250b3eb5f001b392830665abc21e4ba9e5e61a6377ca189668dd60b016e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5003-ebeda25a0ac9.md",
+            "sha256": "ebeda25a0ac9d387861903832e7554f52540f18c878430be76417dd47ca7e017",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5004-a862fd62c7c0.md",
+            "sha256": "a862fd62c7c0e752c712e7d85d3b615a7a8d076e3f2c843402a97a36b389642b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5005-4dd8ee439b16.md",
+            "sha256": "4dd8ee439b169422a70ee802d2e85dea9f9413ab1b01c1d674fd0af3b671c416",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5006-f6b408743b88.md",
+            "sha256": "f6b408743b8871141fd0623f72544d478ab4eb52828a1f07ede06581f94afe44",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5007-c1a70595e145.md",
+            "sha256": "c1a70595e145ac63157cc6e57621c2b628c832186ebc5e96b2254c07b7b429ea",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5008-304eaabe2e8c.md",
+            "sha256": "304eaabe2e8cfd13c91831e7e7896b19dad16e2380073bdc8de199ab5702d5ee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5009-ca3ef718aefb.md",
+            "sha256": "ca3ef718aefb9cf0df0dd9685b3811d7e9d5442c7b4e2920bc706ffd98e6aa2a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/changes/segment-5010-f088d5657732.md",
+            "sha256": "f088d5657732b2879255cdef647127fe3abf0ade0216bc4d1d40351faff4ae68",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "dba6d6e72f63b2a2be81064f85224ca007157e83e81daaafafe68612d2b35bc9",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4962-fddeeec42da3.md",
+            "sha256": "fddeeec42da37220b49a6c2d3237f215077d82aaad4c0e2b8e4f922ec6f66086",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4963-3def29fef6d2.md",
+            "sha256": "3def29fef6d27a7c86b97adf15917fc3e0d030ee14f50f45c6b3f3d03a910c40",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+            "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+            "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+            "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+            "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+            "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+            "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+            "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+            "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+            "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+            "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+            "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+            "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+            "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+            "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+            "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+            "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+            "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+            "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+            "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+            "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+            "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+            "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+            "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+            "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+            "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+            "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+            "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+            "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+            "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+            "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+            "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+            "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+            "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+            "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+            "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+            "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+            "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+            "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+            "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+            "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+            "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+            "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/finite-engineering-notes-member-0131.md",
+            "sha256": "e2c77f1a2da3e8d0b874722432e2c89e33755e35dc06da2effc95c1fcc1b26e3",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "c853ad5e782e39e14e77286cc198c31c7f327e3332307813239a259184ac00a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "f0d0998ba1091bd6124178a94c9c23eb8e655188b0a78f465b8027b438ea7a3a",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "original-capacity-input-boundary",
+      "statement": "Original registry, index, manifest, current chronology roots and actual support sources remain bound to clean cdc45f9cb; no original measurement hash is refreshed.",
+      "scope": "Exactly nine original mutable/support input identities in the independent plan; unchanged immutable file identities are additionally live-gated by the first claim.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-capacity.py final",
+        "granularity": "Each exact original Git blob identity and complete clean-source reconstruction.",
+        "result": "All nine original input hashes match clean cdc45f9cb; prior history remains exact."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Forged original identities could conceal altered source history.",
+        "oracle": "Independent Git-backed population and original/current hash comparison.",
+        "red_control": "Actual forged original-history hash fails the reviewer and exact original plan restoration passes; full channels retained."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "historical",
+        "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+        "inputs": [
+          {
+            "path": "CHANGES.md",
+            "sha256": "a5efead8f192c785c11f664dcd0a462ff3e6a13043bb7769146890854a0d20d8",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "5adacfc162ffec34d6da5a01d76f8a81a73d1c539b4ad81f99984ccc6c246d86",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "17c43b43cd09069f409a1080b83bb5577717aebb1462fe0b803d9bd587bfa39d",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "a6e5b4378510dd165e9134abf3a089853fd5df6414e53bf3321d7cb9acb84fd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "c853ad5e782e39e14e77286cc198c31c7f327e3332307813239a259184ac00a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "6ab61a47a5759093f82b1be41a4b6a5c016ce23ac28bec3a640d07bab7c74d29",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+            "role": "input"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

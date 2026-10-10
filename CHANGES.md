@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-10 — Finite engineering-history member capacity
+
+ADR0131 admits one archive member, exact manifest growth and only the new decision overhead. Preserve every old immutable byte and complete clean-source record. Retained independent reconstruction, production threshold/authority REDs and reviewer controls govern focused proof; exact staged canonical CI gates admission.
+
 ## 2026-10-10 — Isolate block component and side-effect dependencies
 
 Block component/side-effect required bindings pass223 main/cold4 and six effective syntax-valid source faults. Six invoked roles, a separately validated local flow binding and20 native/current ledgers preserve fallback/reference/context/alias/effect/error behavior. Paired complete223 TAP has18 original publication-isolation REDs,205 original passing controls and all223 current GREEN. Supplied33 suites/152 files, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical at65bd00faa. Local-return/value .3.1.2.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations stay open.

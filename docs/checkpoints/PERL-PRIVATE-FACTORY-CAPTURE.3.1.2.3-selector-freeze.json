@@ -1,0 +1,12 @@
+{
+  "base": "cdc45f9cbddbc53603e885225af2a35688657292",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-selector-before-claim.json",
+  "original_sha256": "002580936887c87988d3b06d7481100f574d70b05dc4274ca0cf6e870625bca1",
+  "claims": 4,
+  "live_inputs": 504,
+  "model": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+  "model_git_sha256": "a17f8968cf945ae79f85a9f28c6be687fbb8b97bb601488445918da47a28dc1a",
+  "producer_sha256": "ed8b9f38bc2ecd3da268ba13c7408cc03b59e44dde09f65fb82c70b3e7e4a4dd",
+  "scope": "Exact uncommitted original publication and all504 input identities; original model source is recoverable from clean CDC Git. Existing proof producers/channels stay byte-exact. No committed measurement is refreshed."
+}

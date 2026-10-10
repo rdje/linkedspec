@@ -1608,3 +1608,19 @@ failures remain unchanged. Source comments have
 their own `.0.7.3` classification repair. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
 for exact executed examples. Stable order does not close readiness, dispatcher/full composition
 or another backend's behavior.
+
+## Historical evidence after private factory capture
+
+Historical replay admits only the exact committed factory source succession.
+The Contracts audit now recognizes the accepted dependency-binding and native
+constructor changes at `be7d7071` and `33e57dee`. It proves their source parents
+join the earlier decoder revision, requires the complete current file to match
+the accepted constructor commit, and restores the earlier bytes before applying
+the decoder inverse. An unrelated edit, missing private binding or changed
+registration is rejected; a future source change needs its own reviewed inverse.
+
+This checks the integrity of earlier evidence. It preserves the original source,
+checkpoint and archived-log hashes and does not rerun or extend historical runtime
+claims. Fresh private capture behavior remains bounded by its own fixtures and
+consumers. The isolated recovery proof exercises actual source denials and forbids
+healthy original-log reads or tracked writes. See the [historical replay workflow](../development/documentation-workflow.md#replaying-historical-evidence-after-a-repair).

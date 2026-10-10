@@ -12,7 +12,7 @@ date: 2026-10-10
 status: inline required boundaries verified; block and remaining required optional pipeline owners open
 tags: [perl, actionir, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0 retains complete paired177 TAP:15 original publication-isolation REDs,162 original controls pass, all177 current GREEN. All five actual roles and15 native/current ledgers match; six effective source faults, cold4, supplied31/150, evidence5, original-binding RED/restoration and book57/two controls pass. All240 original inference bindings stay historical. The wrong-prefix freezer guard rejects before writes; actual rejection/original snapshot and exact three-string correction remain retained."
-reverify: "Original inline reviewers require accepted65bd00faa inputs. Current block/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py; separately run its preservation-control.py with the same wrapper. Original inference reviewers require accepted9032b20e inputs. Capture/freezer/publisher/guard diagnosis are one-shot writers."
+reverify: "Original inline reviewers require accepted65bd00faa inputs. Current block/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original inference reviewers require accepted9032b20e inputs. Capture/freezer/publisher/guard diagnosis are one-shot writers."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings

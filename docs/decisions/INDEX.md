@@ -169,3 +169,4 @@ changed* lives in git (layer D), not here.
 4. To change a fact, add a new record (or mark the old one `superseded by 00NN`) — do
    not rewrite history.
 | [0130](0130-finite-engineering-notes-aggregate.md) | One bounded hot-shard aggregate allowance; exact decision overhead | 2026-10-09 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0131](0131-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-10 | accepted engineering maintenance; canonical admission required | history, capacity, verification |

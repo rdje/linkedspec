@@ -13,7 +13,7 @@ date: 2026-10-10
 status: block component and side-effect required boundaries verified; local-return value and remaining owners open
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-final-review.py; separately run its preservation-control.py with the same wrapper. Original inline reviewers require accepted65bd00faa inputs. Capture/freezer/publisher are one-shot writers."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original inline reviewers require accepted65bd00faa inputs. Current book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings

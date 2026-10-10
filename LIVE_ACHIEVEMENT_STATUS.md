@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: Block component/side-effect required bindings accepted; finite engineering-history capacity is next.
+Full PNT: Block component bindings and finite history-capacity prerequisite verified; local-return/value family follows canonical landing.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` — Block component/side-effect required bindings pass223 main/cold4 and six effective syntax-valid source faults. Six invoked roles, a separately validated local flow binding and20 native/current ledgers preserve fallback/reference/context/alias/effect/error behavior. Paired complete223 TAP has18 original publication-isolation REDs,205 original passing controls and all223 current GREEN. Supplied33 suites/152 files, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical at65bd00faa. Finite history-capacity .3.1.2.3 precedes local-return/value .3.1.2.2; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations stay open.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — ADR0131 separately admits one engineering-history member and exact manifest/decision overhead. All220 prior immutable files remain exact; clean-source suffix/root/manifest reconstruction,30 actual thresholds/23 authority REDs and three reviewer corruption REDs/restored PASS verify the finite proposal. Exact staged canonical CI/receipt governs landing. The blocking historical-auditor inverse preserves134 inputs/84613241 bytes, recovery22/evolution64 and guard0; original241 runtime/book bindings are historical before book57/2 teaching proof. Four actual historical evidence REDs/restoration pass. Public fixture prose is corrected; unchanged classifier70/36 RED/GREEN, exact original504 proof replay, current book57+32/three controls and three new evidence REDs/restoration pass. Six constructor-literal migrations preserve paired277 names and supplied33/152; unchanged full public/executable retirement checks pass. Earlier57-file render limits remain explicit; canonical admission gates landing.
 
 ## Next Action
 
-Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` from clean HEAD. Separately admit one exact engineering-history member/manifest capacity with canonical proof before local-return/value .3.1.2.2.
+Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2` from clean HEAD after canonical commit. Inspect/refine local-return/value required seams; preserve current capacity and runtime claim inputs before writes.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` — finite member/exact overhead;220 preserved/30 thresholds/23 authority REDs/evidence3; historical134/22/64/guard0/book57/2/evidence4; exact canonical admission required.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1` — main223/cold4, paired18 RED/223 GREEN, callers20/roles6/validation1/inverse6, supplied33/152, evidence5/book57/2; original242 preserved.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0` — main177/cold4, paired15 RED/177 GREEN, callers15/roles5/inverse6, supplied31/150, evidence5/book57/2; original240 and wrong-prefix guard retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.1` — main277/cold4, paired24 RED/277 GREEN, callers25/roles8/inverse9, supplied29/148, evidence5/book57/2; original262 retained.
@@ -29,7 +30,6 @@ Activate `PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3` from clean HEAD. Separately admi
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2` — original grants185/17; consumers15/134; lifetime RED1/GREEN; evidence5/book57/2.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7` — publisher replay RED; first publication/8 no-write denials; historical254 and capacity249 preserved.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6` — finite aggregate512, sole exact decision;220 preserved files; production12/16/evidence3.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5` — three historical observations qualified; supplied14/133, book57/2; original bindings preserved.
 
 ## History
 

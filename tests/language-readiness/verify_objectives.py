@@ -32,6 +32,10 @@ COMPILER_MEMBERSHIP_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1"
 COMPILER_MEMBERSHIP_RECONCILIATION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0"
 COMPILER_MEMBERSHIP_BEFORE = "31395e440a38acec7a6712d470a90a90a6567863"
 COMPILER_MEMBERSHIP_AFTER = "af5d19971a1682f6895901fb769ff41b69842672"
+CONTRACT_CAPTURE_BEFORE = "2d878478028fc417ac5b7790c016543c18c1f48b"
+CONTRACT_CAPTURE_DEPENDENCIES = "be7d70719856e76b7cb5a427ad6061a7109028ea"
+CONTRACT_CAPTURE_AFTER = "33e57deee73e27b97e9c21116bc70942f3f33772"
+CONTRACT_CAPTURE_OWNERS = ("PERL-PRIVATE-FACTORY-CAPTURE.2.1.0", "PERL-PRIVATE-FACTORY-CAPTURE.2.1.1")
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -312,9 +316,30 @@ def verify_perl_storage_evolution(source, contents, historical_hash):
             "scope": "exact 27-to-28 census and new allocator membership; original bytes preserved"}
 
 
+def restore_contract_factory_capture(source, contents):
+    """Admit only the two named committed whole-file factory changes.
+
+    This is historical byte reconciliation, never a fresh runtime assertion.
+    Any later or foreign source edit requires its own reviewed inverse.
+    """
+    before = git("show", f"{CONTRACT_CAPTURE_BEFORE}:{source}")
+    dependencies = git("show", f"{CONTRACT_CAPTURE_DEPENDENCIES}:{source}")
+    after = git("show", f"{CONTRACT_CAPTURE_AFTER}:{source}")
+    require(before == git("show", f"{BOUNDARY_AFTER}:{source}") and
+            before == git("show", f"{CONTRACT_CAPTURE_DEPENDENCIES}^1:{source}") and
+            dependencies == git("show", f"{CONTRACT_CAPTURE_AFTER}^1:{source}") and
+            before != dependencies and dependencies != after,
+            f"unreviewed Contracts factory capture history: {source}")
+    require(contents == after,
+            f"unreviewed Contracts factory capture drift: {source}")
+    return before
+
+
 def verify_boundary_contract_evolution(source, contents, historical_hash):
     require(source == "perl/LinkedSpec/ActionIR/Contracts.pm",
             f"unapproved boundary contract source: {source}")
+    current_hash = digest(contents)
+    contents = restore_contract_factory_capture(source, contents)
     before = git("show", f"{BOUNDARY_BEFORE}:{source}")
     after = git("show", f"{BOUNDARY_AFTER}:{source}")
     require(digest(before) == historical_hash,
@@ -326,10 +351,14 @@ def verify_boundary_contract_evolution(source, contents, historical_hash):
         BOUNDARY_LOOP_AFTER, BOUNDARY_LOOP_BEFORE, 1)
     require(normalized == before and contents == after,
             f"unreviewed boundary contract drift: {source}")
-    return {"path": source, "historical": historical_hash, "current": digest(contents),
+    return {"path": source, "historical": historical_hash, "current": current_hash,
             "owner": BOUNDARY_REPAIR_OWNER,
             "before_revision": BOUNDARY_BEFORE, "after_revision": BOUNDARY_AFTER,
-            "scope": "exact decoder import and quoted-boundary loop replacement; original historical bytes recovered; no fresh objective execution"}
+            "factory_capture_owners": list(CONTRACT_CAPTURE_OWNERS),
+            "factory_capture_before_revision": CONTRACT_CAPTURE_BEFORE,
+            "factory_capture_dependencies_revision": CONTRACT_CAPTURE_DEPENDENCIES,
+            "factory_capture_after_revision": CONTRACT_CAPTURE_AFTER,
+            "scope": "exact two committed whole-file factory/dependency changes, then decoder import and quoted-boundary loop inverse; original historical bytes recovered; no fresh objective execution"}
 
 
 def audit_evidence(read=read_relative):
@@ -599,8 +628,15 @@ def falsify(report):
                 current.replace(BOUNDARY_LOOP_AFTER,
                                 BOUNDARY_LOOP_AFTER.replace(b"_decode_recognized_labels", b"_other_decoder"), 1),
             )
+            altered += (
+                current.replace(b"return _bind_emission_dependency($cb)", b"return $cb", 1),
+                current.replace(b"return _register_native_contracts([", b"return [", 1),
+                current.replace(b"sub _register_native_contracts {", b"sub _other_native_contracts {", 1),
+                current.replace(b"SourceEmissions::_invoke_emission_dependency($callback", b"SourceEmissions::_invoke_other_dependency($callback", 1),
+            )
             verify = verify_boundary_contract_evolution
-            reasons = ("boundary contract registration mismatch:", "unreviewed boundary contract drift:")
+            reasons = ("boundary contract registration mismatch:", "unreviewed boundary contract drift:",
+                       "unreviewed Contracts factory capture drift:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")
         require(all(candidate != current for candidate in altered),

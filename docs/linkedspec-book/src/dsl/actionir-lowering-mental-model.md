@@ -1122,8 +1122,9 @@ normalization receives that same array and its native mutations remain visible.
 Scalar inputs retain the helpers' existing local-copy behavior. Ordinary string,
 reference and undefined returns, callback counts and error identities stay intact.
 
-For example, a controlled probe of the retained private container-inference
-helper maps `copy(array(x))` to `array`; this is an internal fixture input.
+For example, the historical container-inference fixture supplies a retired
+aggregate selector to the retained helper and observes the internal `array`
+classification. This controlled fixture does not describe current authored syntax.
 An injected parser or argument normalizer may publish that same text while it
 runs, but the enclosing inference capture cannot inherit its packet. A known
 callback receives its own identity boundary; selecting a private wrapper in its
