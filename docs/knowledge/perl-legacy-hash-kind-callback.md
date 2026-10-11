@@ -17,7 +17,7 @@ status: three small optional kind boundaries isolated; native container cache de
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify:
-  - "Current small-kind proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-publish-claim.py; review.py, consumer-review.py, book-review.py and evidence.py under that prefix are readonly by default."
+  - "Current proof routing: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py; its accepted-review.py, historical.py and book-review.py defaults are readonly. Original .2 commands require accepted fc96936fb logical inputs and claim namespace, including33 published historical inputs beyond its immediate bindings."
   - "Historical legacy hash review requires accepted c90b99a83 Git inputs: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-review.py."
   - "Use the original accepted leaf's Git input state when later changes supersede its exact module/test/book bindings. Capture/freezer/correction writers are one-shot; do not refresh observations."
 ---
@@ -106,3 +106,15 @@ failure, full-private/parent behavior or canonical CI. Thirteen original ingress
 sites remain under .3-.8; the separately discovered cache repair .9 runs first.
 The current readonly publication gates the retained native, paired, full-source,
 consumer, book and evidence records. First capture writers are retired.
+
+Readonly census repair .3.2.1.10 leaves the three callback bindings unchanged.
+The first actual post-maintenance refusal is a missing new hygiene claim at
+fixed61cca1ccc. A new reader enumerates the claim population from that same Git
+boundary. Original accepted publication replay supplies532 files, including33
+missing published historical inputs; extended533-file cases distinguish the old
+namespace failure, corrected review, three population faults and restoration.
+The first499-file incomplete replay and the initial wrong Git wording matcher
+remain retained. The original report keeps its actual capture producer identity;
+executed corrected source is separately retained/hash-bound. Original390 declared
+bindings and both full publications are preserved with mode/revision changes only.
+Canonical namespace/recovery facts: docs/knowledge/repo-generated-artifact-cleanup-boundary.md.

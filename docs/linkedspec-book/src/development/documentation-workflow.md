@@ -92,6 +92,32 @@ Use the current Knowledge card's readonly entrypoint when documents have changed
 it should preserve and check the accepted publication separately. Updating a
 command must not refresh an earlier observation or silently change its boundary.
 
+### Historical claim populations
+
+A review of an accepted claim population must enumerate files from that same Git
+boundary. Listing today's claim files and then reading each from an older commit
+fails as soon as an unrelated newer claim is added. Keep the historical population
+fixed; verify newer files separately. For example, adding a daily maintenance claim
+must leave an accepted callback review usable without substituting its old inputs.
+
+An accepted publication replay can also require published historical inputs beyond
+its immediate live bindings. Supply those inputs from their recorded revisions,
+verify their original hashes, and retain any incomplete replay and its failure.
+A corrected reader has its own executed source and identity. A historical report
+continues to identify the producer that originally captured it; changing the reader
+must never relabel or refresh that observation.
+
+The current optional-kind proof entrypoint checks the retained accepted callback
+and maintenance publications, fixed claim membership and the current book:
+
+```bash
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py
+```
+
+Its default is readonly. Capture, preservation, supplied-replay and source-fault
+writers are one-shot evidence producers, not resume commands. This correction
+changes verification routing; it does not change callback or language behavior.
+
 ## Public book
 
 This book is for:

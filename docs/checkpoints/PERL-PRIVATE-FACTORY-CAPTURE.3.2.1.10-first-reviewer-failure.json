@@ -1,0 +1,12 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-review.py",
+    "--capture"
+  ],
+  "returncode": 1,
+  "producer_sha256": "4973a3f6424b0753ade960cfb8085285bd68199ddb954e1135e99e5054022ca8",
+  "actual_merged_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjEwLXJldmlldy5weSIsIGxpbmUgMTY2LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGNvbW1hbmRfdGV4dCBpbiBjdXJyZW50LnNwbGl0KGInXG4tLS0nLCAyKVsxXSwgJ2N1cnJlbnQgcmVhZG9ubHkgcm91dGluZyBwb2ludGVyJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogY3VycmVudCByZWFkb25seSByb3V0aW5nIHBvaW50ZXIK",
+  "scope": "First composed reader completes original/input/source/recovery checks and dependent history/book reviews, then wrongly selects the body rather than the YAML header for its routing check. It writes no review.json. Exact first source/available merged outer failure retained; separate outer channels unavailable. Distinct final reviewer corrects the header selection and retains this failure without refreshing native/replay observations."
+}

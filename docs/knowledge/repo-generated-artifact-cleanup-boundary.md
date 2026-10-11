@@ -38,7 +38,7 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify: "Current dated metadata: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.16-review-actual.py; separately REPO-HYGIENE.16-claim.py under that wrapper. Defaults readonly. Capture/freezer/baseline/--live/--capture writers are retired. Historical ADR0133 .3.1.6.6/publish.py and original hygiene15 commands require their recorded accepted Git inputs; hygiene15 originals are accepted d8418423e. Current proof-routing repair follows MEMORY.md and .3.2.1.10."
+reverify: "Current composed recovery: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py. accepted-review.py, historical.py and book-review.py under that prefix are readonly defaults. Original hygiene16 claim/review requires accepted16c70eaab inputs, including the original live predecessor claim; current recovery retains actual25-input replay/RED/restoration. Original optional-kind publication requires acceptedfc96936fb namespace and33 additional published historical inputs. Capture/preservation/replay/--capture writers are retired; no original observation is refreshed."
 
 ---
 
@@ -108,3 +108,23 @@ not an observed runtime/native product failure. P2 .3.2.1.10 owns the complete
 first rejection, fixed-Git population repair and effective unrelated-claim controls
 immediately after hygiene16, before container-cache .9. Original retired producers
 and native observations remain immutable; the repair needs a new readonly owner.
+
+The first actual post-maintenance refusal confirms the namespace mechanism above.
+The corrected reader uses git ls-tree at the same fixed61cca1ccc boundary used
+for Git file reads. Actual accepted532-input publication replay passes; adding the
+new hygiene claim gives533 inputs and rejects the original reader. The corrected
+reader passes; stale namespace, omitted original intersecting claim and added new
+claim faults reject, then exact restoration passes. The accepted maintenance
+publication has its separate25-input replay, bound-predecessor change RED and
+restoration. Every original390 declared binding/full publication remains preserved.
+
+The first preservation parent expected does not exist in, while actual Git says
+exists on disk, but not in. Its raw child refusal, exact failed matcher and available
+merged parent failure remain retained. A distinct preservation writer uses the
+actual saved reason. The first499-file supplied replay omits the predecessor's
+consumer seed and fails. That seed is already bound by the published historical339
+predecessor inputs; a distinct complete replay adds the33 absent published inputs.
+This repairs an incomplete replay instrument, not an original durability leg.
+Original observations/hashes/producers remain unchanged. Historical reports keep
+their actual capture-producer identity, while executed corrected source has its
+own retained hash and command. No runtime product or broader admission is inferred.

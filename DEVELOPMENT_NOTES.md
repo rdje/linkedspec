@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Historical readers need a fixed population and complete published inputs
+
+Enumerate historical claim membership from the same Git boundary used to read its contents. A current filesystem namespace introduced an unrelated later claim and broke the accepted readonly reviewer. Retain the actual failure, original full publications and capture-producer identity; execute the sole corrected body under its separate source/hash identity. The first499-file replay omitted33 already-published historical predecessor inputs, so it was an incomplete instrument, not missing original durability. Complete532/533 recovery and semantic source/membership controls now pass. Preserve the first matcher, replay and YAML-selector failures and first positive report/before-card bytes. Current verification is readonly422/97759; canonical discovery is docs/knowledge/repo-generated-artifact-cleanup-boundary.md. Owner: PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.
+
 ## 2026-10-11 — Fixed historical populations must not use the current namespace
 
 The daily retained review changes metadata records without deleting proof/cache data. Its fresh census and independent lstat agree; every prior hygiene fixture remains excluded. Preserve actual producer channels before advancing the latest date. Existing public retention teaching still applies.

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-preserve.py"
+  ],
+  "returncode": 1,
+  "producer_sha256": "ef5a00273c32c952b7e498989ab0a872848a79a63d77fecb6ce1a95611c22e21",
+  "actual_merged_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjEwLXByZXNlcnZlLnB5IiwgbGluZSAzNywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByZXN1bHQucmV0dXJuY29kZSAhPSAwIGFuZCBiJ2RvY3MvY2xhaW1zL1JFUE8tSFlHSUVORS4xNi5qc29uJyBpbiByZXN1bHQuc3RkZXJyIGFuZCBiJ2RvZXMgbm90IGV4aXN0IGluJyBpbiByZXN1bHQuc3RkZXJyLCAnYWN0dWFsIHVucmVsYXRlZC1jbGFpbSBvcmlnaW5hbCByZWZ1c2FsJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGFjdHVhbCB1bnJlbGF0ZWQtY2xhaW0gb3JpZ2luYWwgcmVmdXNhbAo=",
+  "scope": "Original actual readonly child refusal is already retained with complete separate channels. The first parent rejects its own overly narrow wording matcher before any claim freeze. Available redirected merged parent channels and actual exit1 are retained; separate parent channels unavailable. Do not rerun or refresh the first writer/observation."
+}

@@ -1,0 +1,52 @@
+{
+  "base": "16c70eaab688a877053b1addde8f07bc548e1cbf",
+  "records": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-before-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "original_sha256": "67cad141d828534950ffb109b5f60ee1271d370e4977f83288c538ffa80943c3",
+      "affected": [
+        {
+          "index": 0,
+          "name": "three-small-optional-kind-private-boundaries",
+          "bindings": 366
+        }
+      ],
+      "after_sha256": "7baed10c98af4a74507972b96f5dac3ac8852343e4dfe337b94dee5c9efc50b9"
+    },
+    {
+      "claim": "docs/claims/REPO-HYGIENE.16.json",
+      "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-before-REPO-HYGIENE.16.json",
+      "original_sha256": "e57a181333e9e76cc684bea5a55097b734e4090b35ad3dd922b61ef299c38e2b",
+      "affected": [
+        {
+          "index": 0,
+          "name": "dated-retained-artifact-review",
+          "bindings": 24
+        }
+      ],
+      "after_sha256": "ef38f269319f7ff917589b16a54df8f53f2a379b8fc650b217f8026b0f1a777c"
+    }
+  ],
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+    "docs/claims/REPO-HYGIENE.16.json",
+    "docs/knowledge/perl-legacy-hash-kind-callback.md",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md"
+  ],
+  "producer_sha256": "038dc98d9ffff51e045fa7f8e6a214a33e1fe07bafd1298188b35b1eccaebd91",
+  "first_preserve_producer_sha256": "ef5a00273c32c952b7e498989ab0a872848a79a63d77fecb6ce1a95611c22e21",
+  "refusal_sha256": "2346f87e5d85ab96cdffb897e1f9312a664e935d2c92341bd639800fe4056358",
+  "scope": "Every original390 declared binding and both full publications preserved; only each intersecting live mode/revision pair changes. Prior actual baseline and first actual namespace refusal precede bound writes. Retired observations/producers remain unchanged."
+}

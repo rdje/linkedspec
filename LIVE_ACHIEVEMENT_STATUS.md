@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: due daily review .16 is verified. Next repair the optional-kind readonly claim census .3.2.1.10, then current-container cache .9 before giant kind .3. Thirteen original ingress sites remain under .3-.8. TYPE-REFERENCE-BOOK stays queued.
+Full PNT: readonly claim-census repair .3.2.1.10 is verified. Next current-container cache .9 before giant kind .3. Thirteen original ingress sites remain under .3-.8; TYPE-REFERENCE-BOOK stays queued.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.16` — REPO-HYGIENE.16 retains dated14888 parent candidate rows/16643190359 bytes and separate Rust release/deps/incremental populations. Fresh metadata/independent lstat, size/traversal/four actual-channel controls pass. Zero removals; readonly24-input9306-byte publication and prior optional-kind readonly baseline pass. Current proof-routing risk is owned by .3.2.1.10: current claim names are incorrectly read from a fixed older Git boundary. First complete new-claim rejection and repair follow this clean maintenance commit, before cache .9. Existing public retention guidance remains accurate; no runtime/source/pin/cache change. Normal focused hooks govern landing.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — Readonly claim-census repair .3.2.1.10 is verified: the original newer-claim refusal is retained, the sole source correction selects the fixed historical Git population, and original390 bindings/full85779+9306-byte publications remain exact except historical mode/revision. Accepted532/extended533 seven-case callback recovery,25-input maintenance recovery, four beyond-hash evidence RED/restorations and full book89/three controls pass. The current readonly422-input/97759-byte publication checks corrected card routes and unchanged runtime proof. First failed instruments and first passing report/before-card bytes remain retained. Daily hygiene16 removed0. Next current-container cache .9, then giant kind .3; thirteen original ingress sites .3-.8 and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
 
 ## Next Action
 
-From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10. Retain the first actual new-claim refusal and original .2 full publication/bindings; correct only fixed-baseline claim population in a new readonly reviewer, preserving all retired native observations. Then cache .9 and giant kind .3.
+From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9. Preserve intersecting accepted publications and current baseline before source/card writes. Use retained native opposite-order diagnostics and public Toolbox probes, then fix the dynamic-container /o cache with focused paired/source/consumer/book/standard proof. Commit before giant kind .3.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — original390/full85779+9306, fixed Git population, recovery532/533/seven and maintenance25, evidence4/book89/3, readonly422/97759; first failures preserved; cache .9 next.
 - `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — native18/105/6/cold9/symbolic42/object10; final1135/57 RED/1078 controls; nine faults; supplied69/223/15093/book89/3/original339/full78325; evidence6/standard1035/readonly366/85779 PASS.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` — one trim call; native213/6/33/2/cold3; paired298/3 RED/295 controls; faults6/supplied68/215/13958/evidence6/book89/3/original339/full78574; readonly339/78325; standard Phase01035.
@@ -29,7 +30,6 @@ From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10. Retain the first
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1` — native8/branches34/authority4/public2/cold2; paired215/6 RED/209 controls, faults6/2/4/3/4, supplied62/191/11879/evidence7/original322/book89/3; supplemental standard Phase01035 passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` — committedc90b99a83; native35, paired487/48 RED, faults5, supplied61/187/evidence6/original546/book89/3 and supplemental Phase01035; normal10 hooks and clean handoff passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0` — committed770cffcc; public50/paired9 RED, supplied61/184/book89/3 and composed546-input publication; exact canonical attempt04, normal hooks and clean handoff passed.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` — required619/23/native24/branches32/public4/inverse6, paired24 RED/619 GREEN, native179/supplied60/182/evidence5/original303/book89/3; readonly307/73113; public Phase01035/full channels.
 
 ## History
 
