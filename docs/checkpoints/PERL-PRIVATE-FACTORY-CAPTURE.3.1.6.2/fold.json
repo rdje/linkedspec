@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "base": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+  "producer_sha256": "301e7ae713f0d1f2123e1142b129d561c519876b74a23864ad115311987b9d06",
+  "old_array_sha256": "37634426d02f5308d0e4e0938ad5e880f4f16a7f1ac5cf89f694e19bfa039d18",
+  "original_scalar_sha256": "cc2089f496a6a2bb7138bac830879268361ec94effad8852bcb2038e598a8076",
+  "combined_sha256": "02a786c68d42e99fdffebaa997fcd2ca38eab3bd83976328d290502d5fc453d5",
+  "old_questions": 7,
+  "new_questions": 6,
+  "combined_questions": 13,
+  "original_scalar_preserved": true,
+  "new_card_removed": true,
+  "scope": "Only the existing related receiver card is updated; both original bodies and all13 question rows are preserved. The original array card is also saved byte-exactly. Only the verified newly introduced scalar card is removed after copy/hash verification. Registry limits and runtime/book observations remain unchanged."
+}

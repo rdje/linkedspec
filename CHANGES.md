@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2 — Isolate required number/string callbacks
+
+Two resolver returns bind four actual required callbacks, preserving eager selection, substring
+aliases, parser-returned object identity/source annotations, maps/context/errors and fatal identity.
+Immutable native16/branches73/authority8/public4/cold4 precede identical436 TAP:12 original authority
+REDs/424 controls/all436 current GREEN. Ten complete syntax-valid faults, supplied63 suites/195
+inputs/12315 assertions, evidence7/original314 and book89/three controls pass. Exact failed reviewer
+and premature evidence preflight remain recoverable; anchored reconstruction repairs only the reader.
+Full scope: docs/knowledge/perl-array-receiver-required-capture.md. Standard syntax/public Phase0
+passes1035 with complete channels; readonly337-input/83792-byte metadata closure passes; original323 publication/card/publisher remain exact and replayable. Finite notes
+rollover .3.1.6.6 precedes hash .3; no limits change in this slice.
+The rejected extra Knowledge card is consolidated into the existing related receiver card. Both
+original bodies/all13 questions and original323 hashes survive; actual original publication replay/
+card RED and two metadata RED/restorations pass. Runtime/book observations and all limits stay exact.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1 — Isolate required array receiver callbacks
 
 Bind the array normalizer's required trim/parser return, retaining eager callback selection,

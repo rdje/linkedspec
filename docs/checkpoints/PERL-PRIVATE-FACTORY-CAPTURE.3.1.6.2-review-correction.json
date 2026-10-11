@@ -1,0 +1,9 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2",
+  "original_producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-review-draft.py",
+  "original_sha256": "a5ee2f2dfdaeacf175e278b4177c10141f5a93c060b5aff42c08c67a51ca4597",
+  "reported_exit": 1,
+  "boundary": "Original review.py --capture exited1 at line124 re.fullmatch with TypeError: expected string or bytes-like object, got NoneType. The diagnostic selector matched parser-missing-args, whose native error is undef. No review.json was produced. This is a transcription of the observed complete tool boundary, not a raw process envelope.",
+  "dependent_attempt": "The following evidence.py --capture was mistakenly started before checking the failed review result. It exited1 before copying files, at read_bytes(review.json), with FileNotFoundError. No evidence result or reached-channel file was produced. This preflight failure is transcribed from the observed tool boundary; the identical evidence producer is retained and may run after its prerequisite actually succeeds.",
+  "repair": "Anchor the diagnostic case selector to the two authored missing/non-CODE dependency labels for each family. Preserve both failed boundaries and original source; native probes, capture producer, runtime/TAP/fault/consumer/book results remain exact. No partial review or evidence success is claimed."
+}

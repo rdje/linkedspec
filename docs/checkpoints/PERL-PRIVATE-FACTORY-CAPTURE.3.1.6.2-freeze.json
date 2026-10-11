@@ -1,0 +1,13 @@
+{
+  "revision": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-before-array.json",
+  "original_sha256": "29b7837f7801ec7a83c41d7a2f1546ccaf626472201578f52742049bcb6f2e99",
+  "after_sha256": "d8af091e2ba9ad106195d7ba58ebb5b4b1862f0f8f87ee870aac992ed82b7464",
+  "verified_bindings": 314,
+  "live_claims": [
+    "array-required-callback-isolation"
+  ],
+  "producer_sha256": "779da10a5b1f7480d7bbf2acb9064a8476adbb85171441cbdc129b939026ea25",
+  "scope": "Only original live durability mode/revision changes. All314 accepted inputs and every original proof/hash field remain recoverable at the accepted Git revision. Earlier historical scalar-copy preservation is unchanged. No runtime, CI or book observation is refreshed."
+}

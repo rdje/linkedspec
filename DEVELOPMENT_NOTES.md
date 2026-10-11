@@ -10,6 +10,7 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Required number/string callback binding preserves actual parser-returned hash identity and mutation-driven source annotations; full rationale: docs/knowledge/perl-array-receiver-required-capture.md.
 ## 2026-10-11 — Required array callbacks retain substring aliases
 
 Bind required trim/parser returns without copying actual substring arguments or changing eager selection.

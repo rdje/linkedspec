@@ -1,0 +1,26 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2",
+  "base": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+  "original_inputs": 323,
+  "original_files": {
+    "original-claim.json": {
+      "logical_path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "sha256": "97904a271c5071a01c8b8ddcc1580f9156a4596cfc04a3dabef8c7624f371d24"
+    },
+    "original-publisher.py": {
+      "logical_path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-publish-claim.py",
+      "sha256": "42c8958790e9b0b5107165caa688ea1767e236915483fc8add1352d0eed03c74"
+    },
+    "original-scalar-card.md": {
+      "logical_path": "docs/knowledge/perl-scalar-receiver-required-capture.md",
+      "sha256": "cc2089f496a6a2bb7138bac830879268361ec94effad8852bcb2038e598a8076"
+    }
+  },
+  "hook_boundary": {
+    "reported_commit_exit": 1,
+    "head_unchanged": true,
+    "denial": "[readme-routing] FAIL: surface knowledge_cards exceeds control: files 1351/1350",
+    "termination": "After the actual README doctrine rejection, stop only verified LinkedSpec hook group68231 with TERM. Git commit returns1; HEAD remains5bf068c92. Later claim checks were unfinished and are not claimed as passed. This is an observed-boundary transcription, not a raw complete hook envelope."
+  },
+  "scope": "Consolidate the new related receiver facts into the existing array receiver card, preserving this original card, original77181-byte claim, actual original publisher and every323 measured input hash. Original native/runtime/TAP/fault/consumer/book/evidence observations stay exact. No registry limit changes or new runtime observation."
+}

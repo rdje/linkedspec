@@ -1614,6 +1614,26 @@ successful error state, fatal objects, source/arity/family guards and require-on
 lazy loading stay native. Optional/direct dependencies and complete helper,
 AST, language and private-pipeline admission remain separate work.
 
+Required number and string receiver callbacks retain the same eager selection
+and separate child capture. Both normalizers require trim and method parsing
+before their input guards. Their splitter keeps actual substring aliases, and
+replacing the parser in the public map during trim cannot replace the selected
+callback. Number chains such as `score.abs().add(2)` still compose numeric
+helpers; string chains such as `raw.trim().lowercase()` still compose string
+helpers. This private capture change preserves existing method families,
+arity checks and terminal continuation behavior.
+
+The string normalizer writes `__source_expr` on the actual parser-returned call
+hash. For example, a controlled parser that recognizes `trim()` and then appends
+`!` through its argument returns the same call object, annotated with `trim()!`.
+Copying callback arguments would lose that annotation effect. If a controlled
+parser returns one shared call object for `raw.trim().lowercase()`, both retained
+references see its final `lowercase()` annotation. These injection examples
+describe compiler callback contracts; they introduce no new DSL methods.
+Number callbacks likewise retain their actual returned references. Both owners
+preserve ordinary values, contexts, errors, fatal-object identity, public maps
+and require-only lazy loading while isolating opaque publication.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
