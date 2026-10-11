@@ -1,0 +1,8 @@
+{
+  "actual_returncode": 1,
+  "producer_sha256": "0b8abef4c1aa163bd52fad06be609765a673317eb50883fe5c40b78b181e0fbe",
+  "reached_sha256": "6f54675df5ce4335550337cf4ee24b9e331710636f6396371306acee34c13448",
+  "available_merged_outer_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjMtcG9ydGFiaWxpdHktcmVjb3Zlci5weSIsIGxpbmUgNzcsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgcHJvY2Vzcy5yZXR1cm5jb2RlID09IDAgYW5kIG5vdCBwcm9jZXNzLnN0ZGVycgogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "separate_outer_channels": "unavailable",
+  "scope": "First512-input recovery verifies every original binding but the original publisher fails its fixed claim population assertion. Nested Git pathspecs are rooted below the real work tree because the scratch capsule lacks an explicit read-only Git context. This is an instrument context error, not missing original bound inputs. Preserve source/reached child channels and use a distinct final producer with runtime-derived GIT_DIR/GIT_WORK_TREE/GIT_OPTIONAL_LOCKS=0; no repository is created or mutated."
+}

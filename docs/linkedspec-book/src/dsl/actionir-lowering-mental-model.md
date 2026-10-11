@@ -1563,11 +1563,40 @@ binding fixture, executed live and from independently loaded emitted source,
 produce identical observations and emitted bytes after either container warm-up.
 The repair establishes no new authored syntax or authored-language failure.
 
-After these capture repairs, thirteen MethodLowering ingress sites remain from the October11 compiled-source inventory:
+### Main method kind callbacks
+
+The main method-value helper has two distinct injected kind selections. Its outer
+selection occurs before trim. The local kind helper first checks whether a name
+is a registered scalar-valued function, then invokes that earlier selection.
+Its inner AST assignment selects again when deciding the target's sigil. A trim
+callback that replaces the map entry therefore affects the inner selection while
+the outer selection retains its original reference.
+
+For example, if the map initially contains callback A and trim installs callback
+B, an outer array-name decision calls A; the inner array/hash assignment decision
+calls B. A registered scalar-function name can bypass A in the outer helper,
+while the inner assignment keeps its separate kind decision. These are private
+lowering examples, not additional authored DSL forms.
+
+Each injected invocation has its own emission boundary. An actual registered
+CODE reference keeps its eligibility. A tied map can pass the CODE guard and
+then return a symbolic name or blessed CODE as its selected value; those existing
+native calls remain opaque and cannot acquire authority by resolving a name.
+Every child, including a registered CODE child, keeps its packet separate from
+the parent. Returning matching text does not transfer publication ownership.
+
+The original local outer helper and its 22 call sites remain in place. Optional
+lookup timing, undefined defaults, local argument mutations, scalar context,
+coercion and fatal errors retain their measured native behavior. Requiring or
+calling the helper without the private emission channel keeps that channel
+unloaded. This isolates two dependency boundaries; successful execution of every
+branch and complete private admission remain separate work.
+
+After these capture repairs, eleven MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Optional kind callbacks | 4 | Actual map selection, undefined defaults, early local-name decisions and aliases |
+| Optional kind callbacks | 2 | Actual map selection, undefined defaults, early local-name decisions and aliases |
 | Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
 | Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
 | Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |

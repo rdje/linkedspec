@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: current-container repair .3.2.1.9 is verified. Next giant optional kind .3, then original ingress families .4-.8. Thirteen original ingress sites remain; independent admissions and TYPE-REFERENCE-BOOK stay queued.
+Full PNT: main method optional-kind .3.2.1.3 and portable diagnostic repair are verified; focused normal hooks govern landing. Next source/assignment optional-kind .4 activates only from the committed clean handoff. No push.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — Current-container guard .3.2.1.9 is verified: remove only /o from the interpolated literal-container regex, preserving bare-name early return and optional callback identity/aliases/errors. First224-input native/public observations retain40 rows/26 intended changes and unchanged public lowering/live/independently executed emitted source. Three223-input legacy probes change only five target/container-empty fields; symbolic/object streams remain exact. Identical285 TAP has98 original REDs/187 controls/all current GREEN; three full-source faults fail98/8/67. Complete70 suites/225 inputs/15378 assertions, evidence4/book89/4 and supplemental standard syntax/public Phase01035 pass. Original422 bindings/full97759 publication and actual baseline stay exact except historical mode/revision atde02b83a1. Current readonly490-input/113730-byte publication passes; first mode-reviewer failure remains retained. Normal focused hooks govern landing. Next giant optional kind .3; thirteen original ingress sites .3-.8 and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — Main method kind .3.2.1.3 is verified: bind exactly two injected invocation boundaries, preserving outer selection before trim/scalar-name refusal and independent inner AST reselection. Actual CODE identity is retained; tied-selected symbolic/blessed calls remain opaque with native aliases/errors/locations2550/3850/global lines. Native91+36/cold6 retains20 intended authority changes. Corrected229 TAP has50 original REDs/179 controls/all GREEN; nine full-source faults fail25/25/6/53/41/2/2/74/32. Every71 supplied suite/230 input/15607 assertion, evidence5/book89/4 and supplemental standard syntax/public Phase01035 passes. Original490/full113730 publication/baseline is preserved historically at61a73324. Current readonly531-input/125217-byte final publication passes; exact first wrong-parent fixture/producer/six current failures, failed consumers and two pre-execution fault builders remain retained. First normal commit1/ROOT-PATHS failure is repaired by byte-exact base64 diagnostics; full75-file first candidate/511-input119230 publication, actual hook failure/timing disclosure and first recovery context failure remain retained. Complete512-input original replay/changed-input RED/restoration PASS. Normal focused hooks govern the retry. Next source/assignment kind .4; eleven original ingress sites .4-.8 and independent admissions remain open. TYPE-REFERENCE-BOOK stays queued.
 
 ## Next Action
 
-From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3. Preserve the current490-input/full113730 publication and actual baseline before bound changes. Native-first proof covers only the outer base_bare_symbol_kind and inner AST-assignment bare_symbol_kind bindings of _lower_method_value_expr; retain the unrelated outer local helper and its22 calls. Focused proof/book/standard checks and commit precede .4.
+From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4. Preserve current531 bindings/full125217 publication and actual baseline before bound writes. Native-first proof covers only _lower_source_slot_bare_scalar_read_expr and _lower_assign_statement optional kind invocations, preserving reserved/migration/sigil guards, local name aliases and selection timing. Focused proof/book/standard checks and commit precede .5.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — native91+36/cold6/20 authority changes, final229/50 RED/179 controls, nine faults, supplied71/230/15607/evidence5/book89/4/standard1035; original490/113730; first75-file511/119230/recovery512; final readonly531/125217.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — original390/full85779+9306, fixed Git population, recovery532/533/seven and maintenance25, evidence4/book89/3, readonly422/97759; first failures preserved; cache .9 next.
 - `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
@@ -29,7 +30,6 @@ From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3. Preserve the curr
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6` — immutable224/scalar337; exact4961/612 bytes/35 lines, production30/23, reviewer3/preservation2 restored, book89/3; readonly377/103173; exact staged canonical admission required.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2` — native16/branches73/authority8/public4/cold4; paired436/12 RED/424 controls, ten faults, supplied63/195/12315/evidence7/original314/book89/3; readonly337/83792 and supplemental Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1` — native8/branches34/authority4/public2/cold2; paired215/6 RED/209 controls, faults6/2/4/3/4, supplied62/191/11879/evidence7/original322/book89/3; supplemental standard Phase01035 passed.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` — committedc90b99a83; native35, paired487/48 RED, faults5, supplied61/187/evidence6/original546/book89/3 and supplemental Phase01035; normal10 hooks and clean handoff passed.
 
 ## History
 

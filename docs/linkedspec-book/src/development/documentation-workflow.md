@@ -112,7 +112,7 @@ regressions, preserves earlier accepted publications and validates the current
 book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-publish-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-publish-claim-final.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
@@ -495,3 +495,9 @@ bash tools/run_ci_local.sh
 ```
 
 If validation could not be run, say so in the final answer and record the limitation when appropriate.
+
+The current main-method kind proof preserves the complete earlier `.3.2.1.9`
+publication, all490 bindings and its actual readonly baseline before changing
+bound inputs. Rechecking that historical publication requires its accepted
+`61a73324` logical inputs. Its original producers and observations remain exact;
+the current proof uses a separate corrected parent-packet oracle and reviewer.

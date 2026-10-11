@@ -1,0 +1,7 @@
+{
+  "actual_outer_returncode": 1,
+  "separate_outer_channels": "unavailable",
+  "first_consumer_result_sha256": "9b815f30e12d698eea8c86d15322e23dd55ad39a5ce0d2b43e1fa90133eac277",
+  "scope": "Actual first broader consumer capture exits1 on the six retained known-parent oracle failures in the first fixture. It is provisional, retained without refresh; final consumers use the sole corrected fixture and separately scoped producer.",
+  "available_merged_outer_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjMtcnVuLnB5IiwgbGluZSAxMDMsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgKHByb2Nlc3MucmV0dXJuY29kZSAhPSAwIGFuZCBiJ25vdCBvayAnIGluIHByb2Nlc3Muc3Rkb3V0KSBpZiByZWQgZWxzZSBwcm9jZXNzLnJldHVybmNvZGUgPT0gMAogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK"
+}

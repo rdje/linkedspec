@@ -2547,7 +2547,7 @@ sub _lower_method_value_expr {
  my $bare_symbol_kind = sub {
   my ($name) = @_;
   return 'scalar' if _user_function_scalar_value_name($deps, $name);
-  return $base_bare_symbol_kind->($name)
+  return _bind_emission_dependency(ref($base_bare_symbol_kind) eq 'CODE' ? $base_bare_symbol_kind : sub { return $base_bare_symbol_kind->(@_) })->($name)
  };
  my $extract_array_symbol_name = sub {
   my ($candidate_expr) = @_;
@@ -3847,7 +3847,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
       ? $deps->{bare_symbol_kind}
       : sub { return undef };
-     $target_sigil = '$' if (($bare_symbol_kind->($target_name) // '') eq 'scalar');
+     $target_sigil = '$' if ((_bind_emission_dependency(ref($bare_symbol_kind) eq 'CODE' ? $bare_symbol_kind : sub { return $bare_symbol_kind->(@_) })->($target_name) // '') eq 'scalar');
     }
    }
 

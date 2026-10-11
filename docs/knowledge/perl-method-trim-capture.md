@@ -2,6 +2,8 @@
 id: perl-method-trim-capture
 title: Method dependency bindings and the compiled remaining-call inventory
 answers:
+  - "when does the main method helper reselect its inner kind callback"
+  - "can a known kind callback donate a parent emission packet"
   - "which MethodLowering required trim calls have private emission bindings"
   - "can an opaque trim callback donate publication to a method tag or switch case"
   - "does MethodLowering private dependency binding preserve native aliases and contexts"
@@ -17,12 +19,13 @@ answers:
   - "does dropped value trim compare lowering with the returned slot after effects"
   - "which readonly command verifies inline required dropped value trim isolation"
 date: 2026-10-11
-status: inline required trim and three small optional kind sites isolated; thirteen ingress sites remain under .3.2.1.3-.8
+status: inline required trim and five optional kind sites isolated; eleven ingress sites remain under .3.2.1.4-.8
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
 reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-publish-claim.py; review.py, native-review-final.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-publish-claim-final.py; review-final.py, native-review.py, book-review-final.py and evidence-final.py under the same wrapper/prefix have readonly defaults."
   - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
+  - "Historical .3.2.1.9 readonly commands require accepted61a73324 logical inputs/full original claim. Its original490 bindings/full113730-byte publication and actual baseline are preserved before .3 changes. Original .9/earlier producers and observations remain unchanged."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -160,3 +163,22 @@ routing live in docs/knowledge/perl-legacy-hash-kind-callback.md. Thirteen origi
 ingress sites remain under .3-.8. The separately discovered /o container-cache
 repair .9 follows .2 and due daily hygiene before .3; it is not an extra original
 ingress site. The original static inventory remains a dated accepted snapshot.
+
+The main _lower_method_value_expr helper now binds only its two injected kind
+invocations. The outer base reference is selected before trim and is invoked
+only after the local helper's scalar-function-name first refusal. The inner
+AST assignment independently selects later, so a trim replacement is observed
+there. The local outer helper and its22 calls remain local implementation code.
+Both sites bind an actual CODE identity directly; a tied map's selected symbolic
+name or blessed CODE remains an opaque caller-local delegation. Their native
+invalid-call locations2550/3850 and every global source line remain unchanged.
+Known CODE eligibility survives, but no child donates a packet to its parent.
+
+First loaded/cold native ledgers and a separate supplemental authority ledger
+precede assertions and production edits. The latter replays the original probe
+stdout exactly. The first229 fixture wrongly allows known-parent donation; its
+actual six-failure current TAP, exact first fixture/producer and two fault-builder
+failures remain tracked. A sole parent-packet oracle correction gives50 original
+isolation REDs/179 controls and all229 current GREEN. Original observations are
+never refreshed. The accepted readonly command above owns the bounded current
+proof; older .9/.10 publications require their preserved logical Git inputs.

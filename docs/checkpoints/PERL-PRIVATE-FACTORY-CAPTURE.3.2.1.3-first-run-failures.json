@@ -1,0 +1,27 @@
+{
+  "rows": [
+    {
+      "name": "green",
+      "actual_outer_returncode": 1,
+      "separate_outer_channels": "unavailable",
+      "producer_sha256": "da488d7051ba0c7f14fcd3538c25eb6887b00c78edacc3ab4218e0b5f7b4fc0c",
+      "available_merged_outer_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjMtcnVuLnB5IiwgbGluZSAxMDMsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgKHByb2Nlc3MucmV0dXJuY29kZSAhPSAwIGFuZCBiJ25vdCBvayAnIGluIHByb2Nlc3Muc3Rkb3V0KSBpZiByZWQgZWxzZSBwcm9jZXNzLnJldHVybmNvZGUgPT0gMAogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK"
+    },
+    {
+      "name": "opaque-code",
+      "actual_outer_returncode": 1,
+      "separate_outer_channels": "unavailable",
+      "producer_sha256": "da488d7051ba0c7f14fcd3538c25eb6887b00c78edacc3ab4218e0b5f7b4fc0c",
+      "available_merged_outer_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjMtcnVuLnB5IiwgbGluZSA0OSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBzb3VyY2UuY291bnQodGVybSkgPT0gMQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+    },
+    {
+      "name": "direct-noncode",
+      "actual_outer_returncode": 1,
+      "separate_outer_channels": "unavailable",
+      "producer_sha256": "da488d7051ba0c7f14fcd3538c25eb6887b00c78edacc3ab4218e0b5f7b4fc0c",
+      "available_merged_outer_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjMtcnVuLnB5IiwgbGluZSA1NCwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBzb3VyY2UuY291bnQodGVybSkgPT0gMQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+    }
+  ],
+  "first_fixture_sha256": "f95c5a153cf1cf3e12ec6013e39002d55d95c6fc34775a68bc4aee741b336e3e",
+  "scope": "Actual first green producer exit1 retains child TAP229/six known-parent oracle failures in green.json. The immutable first fixture incorrectly expects a known child to donate a parent packet. Canonical native authority contract requires no donation. Two whole-source fault builders stop before execution because their global selected-kind text also occurs at older small optional sites. Exact original run.py, fixture, failed actual channels and all first completed results remain unchanged; accepted run-final.py scopes those replacements to the two changed call lines."
+}
