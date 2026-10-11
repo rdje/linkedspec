@@ -1,0 +1,16 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4",
+  "original_probe": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+  "original_probe_sha256": "3c342cb0dc647a573922305d3d2e94e697de4cf18c504ad29eef25a1cbf75d36",
+  "original_result": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft.json",
+  "original_result_sha256": "fb34fcf512afac7a817f538086ccedda6d1a5d638963b620b4b6070be3f1b75c",
+  "corrected_probe": "t/actionir_array_end_required_probe.pl",
+  "corrected_probe_sha256": "d7c252a466ecee426ed0a8e0ab264b66d550419fffa7dcdf55d17b22a65e1d80",
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-capture.py",
+  "producer_sha256": "b54d6bffe8d26e2fc66387521a367bc5ca13d25764e09565f34078828db2af63",
+  "original_inner_returncode": 255,
+  "original_supplied_inputs": 201,
+  "original_outer_boundary": "Actual tool-return exits1 at capture.py line77 native/current probe failed. The full original tool transport envelope was not independently retained; this is an explicit boundary transcription, not a claimed raw outer capsule. The original inner full channels,201 input identities and unchanged supplied census are retained exactly.",
+  "cause": "Perl strict compilation rejects undeclared $role in the replace-role case postfix loop at original probe line139. No runtime observations were produced.",
+  "repair": "Only replace that malformed postfix loop with a declared lexical-role loop. Exact original probe/result remain tracked; capture producer, cold probe, accepted seed and production source stay unchanged. A fresh one-shot native result follows this disclosed instrument correction before assertions or source edits."
+}

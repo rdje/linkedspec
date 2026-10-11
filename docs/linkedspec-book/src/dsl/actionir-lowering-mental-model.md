@@ -1310,6 +1310,32 @@ complete helper/AST grammar, other callback owners and pipeline composition
 remain separately owned. The public array mutation contract still yields an
 independent updated array and discards the removed element for pop operations.
 
+The legacy array-end parser separately requires trim, method parsing and
+array-symbol extraction before trimming or checking the input. It selects all
+three actual callbacks eagerly, so replacing the parser or extractor entry from
+trim leaves that invocation's selected callbacks intact. Each required callback
+has its own private emission capture. Opaque children cannot donate publication
+to an enclosing caller; known children retain their actual callback identity.
+The parser's ordinary return remains a structured result containing target,
+method, receiver and payload; private capture preserves those returned objects.
+
+Trim keeps the splitter's actual substring arguments. A controlled trim that
+returns incoming text and appends `!` shifts `push_back(value)` to
+`.push_back(value)`, which the injected parser declines. The extractor receives
+the local receiver slot: changing `items` to `items!` changes the result's
+receiver, while an extracted target of `items` remains separate. Returning
+undefined without mutation keeps the bare-name fallback; mutation can remove
+that fallback.
+
+The final push-payload trim receives the actual first element of the parser's
+returned argument array. Returning `value` and appending `!` through that slot
+leaves the result payload `value` while the returned argument array holds
+`value!`. Push requires one argument, pop none; empty payloads are declined and
+nonempty `0` is retained. These injection controls describe native compiler
+callback boundaries. Method grammar remains delegated to the supplied parser;
+they add no authored-language syntax. Public mutation behavior still returns
+an independent updated array, with pop discarding the removed element.
+
 AST assignment key lowering now has a private capture boundary.
 The assignment owner uses its required key callback only on the hash-index
 fallback. It first checks the node and expected kind, validates the target name,

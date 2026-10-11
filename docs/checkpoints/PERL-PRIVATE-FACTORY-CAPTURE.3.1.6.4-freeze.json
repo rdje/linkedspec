@@ -1,0 +1,35 @@
+{
+  "base": "98990ffbc4a7150b20d0e416be3ea4f9938cfd10",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-before-hash-required.json",
+  "original_sha256": "e27946aad62857c86bfafe17a08f2a741a50d93fc817729789aaa28486411ac4",
+  "after_sha256": "5e27e8404d160b094365c1101742ce3ef010adeeb4a44f8e128e2ac9915b2756",
+  "producer_sha256": "344c3d187876e2a5441b5f66951de92ee5a3f9d6f7ab56396fad50379c93cc9d",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+    "docs/knowledge/perl-method-ast-array-end-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "name": "hash-required-callback-isolation",
+      "bindings": 321,
+      "intersections": [
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+        "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+      ]
+    }
+  ],
+  "scope": "All321 accepted live bindings and the full original claim are preserved before source/book/card writes. Only first live durability mode/revision changes; the separate original-review-command preservation claim and all old fields/producer/hash/observations remain exact. Every live record was checked for intersections."
+}

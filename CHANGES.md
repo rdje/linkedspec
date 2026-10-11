@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4 — Isolate required array-end parser callbacks
+
+Bind the legacy parser's required trim/parser/extractor return, preserving eager selection, splitter and payload-slot effects, returned objects, maps/context/errors and fatal identity. Native12/branches57 precede paired325:9 original authority REDs/316 controls/all325 GREEN. Five source faults, supplied65/203/12948 and book89/three controls pass; first compile-failed probe and wrong-wrapper preflight remain explicit. Eight evidence RED/restorations and standard syntax/public Phase01035 pass with full channels; normal focused gates govern landing. Full scope: docs/knowledge/perl-method-ast-array-end-capture.md.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 — Isolate required hash callbacks
 
 Bind one required trim/parser resolver return, preserving eager selection, substring effects, shared returned references, maps/context/errors and fatal identity. Native8/branches52 precede paired308:6 original authority REDs/302 controls/all308 GREEN. Five source faults, supplied64/199/12623, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with complete channels; normal focused landing gates govern acceptance; full scope: docs/knowledge/perl-array-receiver-required-capture.md.

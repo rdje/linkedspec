@@ -1,0 +1,13 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4",
+  "original_command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-capture.py",
+    "consumers"
+  ],
+  "original_tool_returncode": 126,
+  "original_tool_output": "tools/project_data_run.sh: line 309: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-capture.py: Permission denied\n",
+  "boundary": "Tool-return transcription; no independently retained raw transport envelope. The generic wrapper tried to execute the non-executable Python file directly. The capture producer never ran and no consumer result was produced by that invocation.",
+  "correction": "Use tools/run_python_project_data.sh, which invokes the Python interpreter. Producer/instruments/native observations stay unchanged; corrected actual consumer run is separately retained in consumers.json."
+}
