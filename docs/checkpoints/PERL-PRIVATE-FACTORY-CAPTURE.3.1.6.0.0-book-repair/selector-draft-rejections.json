@@ -1,0 +1,20 @@
+{
+  "producer": "selector-proof-draft.py",
+  "attempts": [
+    {
+      "original_name": "selectors.py",
+      "actual_exit_code": 1,
+      "reason": "AttributeError: partially initialized module 'subprocess' has no attribute 'run'",
+      "root_cause": "Producer filename shadowed Python's selectors standard-library module during subprocess import.",
+      "repair": "Rename to selector-proof.py; retained draft uses a nonconflicting name."
+    },
+    {
+      "original_name": "selector-proof.py",
+      "actual_exit_code": 1,
+      "reason": "AssertionError on expected current chapter classified references: 0",
+      "root_cause": "Draft incorrectly assumed this chapter contained no other historical selector mentions. Actual unchanged classifier reports3 at lines1461,1463,1492; all are already classified.",
+      "repair": "Require the observed3 retained historical mentions; only the unclassified synthetic fixture spelling is removed."
+    }
+  ],
+  "provenance": "Transcribed actual tool results and direct unchanged-classifier diagnostic, not original transport envelopes. Both drafts refused before writing a selectors.json result. No original runtime observations or book captures changed."
+}

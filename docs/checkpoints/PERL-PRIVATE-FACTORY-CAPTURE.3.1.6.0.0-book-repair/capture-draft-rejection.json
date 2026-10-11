@@ -1,0 +1,9 @@
+{
+  "result": "capture refused before writing any packet",
+  "producer": "capture-before-draft.py",
+  "actual_exit_code": 1,
+  "actual_reason": "AssertionError: failed staged candidate changed",
+  "root_cause": "Draft used abbreviated index headers; canonical fingerprint uses git diff --cached --binary --full-index --no-ext-diff HEAD. Index remained unchanged and the canonical fingerprint still matches attempt03.",
+  "repair": "Correct only the diff command to the repository's exact canonical fingerprint representation; retain original draft. No original proof or runtime observation changed.",
+  "provenance": "Transcribed actual tool result; not an original transport envelope. No measurement was emitted or captured by the rejected draft."
+}

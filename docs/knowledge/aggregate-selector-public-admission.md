@@ -31,7 +31,7 @@ clearly historical milestone. It may not present the spelling as an accepted exa
 surface, or future work. `tools/check_public_aggregate_selector_surface.py` enforces that distinction across the
 root README/roadmaps/architecture state, capability guide, and every mdBook source page. Its exact current inventory
 is 70 public files. It composes the runtime/source retirement checker so public and executable admission cannot
-diverge. Its current inventory is 36 classified retired/history references and zero current examples. Seven concrete
+diverge. Its current inventory is 40 classified retired/history references and zero current examples. Seven concrete
 retired spellings are confined to one uniquely bounded migration section: two rejected examples and five ordered
 old-to-new contrasts guarded by eleven in-memory mutations. Four earlier counted occurrences were prose false
 positives and two later duplicate root-README history mentions were routed to canonical owners.

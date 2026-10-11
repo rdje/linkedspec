@@ -10,6 +10,40 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 — Preserve scalar-bound receiver copy types
+
+A scalar-held hash copied with .copy() returned[] because AST receiver selection fell through to
+array wrapping. Route a bound variable with one zero-argument copy call through existing
+function-form runtime container dispatch. One12-line insertion preserves hashes/empty hashes,
+arrays/empty arrays and shallow outer/nested identity. Scalar, legacy aggregate, wrong-arity and
+multi-step controls retain their behavior.
+
+Immutable184-input live/standalone/typed-AST proof has identical50 TAP:9 original semantic REDs/
+41 controls/all50 current GREEN. Three complete syntax-valid faults fail9/4/8 named assertions;
+supplied61 suites/184 files, evidence5/original307 restoration/book89/three controls and
+the composed current publication pass. Full actual generated source is retained. No original
+instrument/channel is refreshed. Book examples and the derived Knowledge Map agree. Exact staged
+canonical receipt and normal hooks govern landing; the distinct legacy kind callback .6.0.1
+and broader factory admissions remain separate.
+
+Canonical CI selects tracked/syntax inputs and a separate regression command. Attempt01 was
+cancelled for selection; attempt02 passes all10 doctrines then rejects historical registration.
+Its complete staged diff/channels and original runner/auditor are retained. Exact three-insertion
+inverse restores historical bytes; full192 inputs,22 recovery/74 evolution controls and evidence3
+pass under zero healthy original-log reads/tracked writes. Initial runtime claim/publisher are
+retained; publication extends only its publisher identity plus the CI supplement. Fresh exact
+canonical receipt is required.
+
+Attempt03 reaches aggregate-selector admission and exposes a pre-existing unclassified
+private AST book example. Retain its full failed candidate/channels and502 bindings;
+replace only that example with typed-node prose. The whole census also needs its
+four valid rejected examples counted, and17 negative/private fixture files need exact
+path/full-byte classification. Retain the initial521-binding book composition; its
+original review/publication replay without refreshing observations. Current complete
+book, census and strict scanner controls compose separately; canonical admission remains
+required. Current claim publication uses one combined live input population to avoid
+duplicating the shared runtime/CI inputs; both earlier publications remain recoverable.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2 — Regex and undefined-return required capture
 
 Bind exactly two required resolver returns. Preserve eager selection, local regex scalar copies,

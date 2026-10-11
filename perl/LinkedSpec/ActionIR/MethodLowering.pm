@@ -4750,6 +4750,18 @@ my $lower_numeric_array_reducer_source_expr = sub {
   };
 
   my $first_method = $calls->[0]{method} // '';
+  my $first_args = $calls->[0]{args} || [];
+  if ($first_method eq 'copy' && @$calls == 1
+   && ref($first_args) eq 'ARRAY' && @$first_args == 0
+   && ($receiver->{kind} // '') eq 'variable'
+   && (($bare_symbol_kind->($receiver->{name}) // '') eq 'scalar')) {
+   # Scalar bindings can hold either container family. Reuse function-form
+   # copy's runtime dispatch before selecting an array or hash receiver chain.
+   return $lower_ast_aggregate_call_node->({
+    kind => 'call', name => 'copy', args => [$receiver],
+    source_span => $node->{source_span},
+   });
+  }
   if (_is_tree_traversal_receiver_method($first_method)) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',

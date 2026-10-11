@@ -1,0 +1,515 @@
+{
+  "result": "PASS",
+  "producer_sha256": "9ac79ac4ad30284a30f2842f85b92cc89f5e85335b17f4ceaa1f41f4857ce499",
+  "scanner_sha256": "ac92c88f12d48522c66276dfea6c3dbdd936cbc1898976c9e1298e1511b1be64",
+  "original_sha256": "606ccd944a0fc1e2ad079bd95be015e38888aaa082bb7225fc6749818f2cfb57",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t": "a8df7205e161079dbe613cea241ca44d4ab41a394008d683aa40192b98edc9b8",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t": "d7bfd7224b3061469372af170a1ab173a74c9e009b2a9f666d82cc5058522d32",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t": "d33c8de6d0ba7ed1062dbb640d4ca59d6a4581c9ef8ef5a26b6448b5871ca328",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t": "edfa5a28612fd070da0dfe6ad1977b599582c2568f8640ad1b71909acf2e5120",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py": "e88b76a38bfe15eb3f47f769cd1c93700f3e6b9faae742bcb2414fd26a20885b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py": "0fb2e4ab144a39abc5ba82b4653a9a4c4f5bfeaf6d6d3655d07f6f1eebf4c02e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py": "5afef5f1bac33fcb965c1099d1c742d047d80c5b4ee1bb03b1a729b5f0173144",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t": "06db7781a2b3e22164231234cc53c6cfeca3357d08050730cf243c5f67db0429",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py": "700ce617ca4b57dcb78bf50fd1cba31be80b55bef4bc742e432e150d40172ba8",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py": "0ef00dd86ea82d2b9a3ed193aa4b8e7e772ec7f96a80c938fabf55532998db99",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py": "4712a89a636b0f0348330d8c69176616c336170cb157ffd54bcf4866ef92cf35",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py": "ba8df149c3cee886eb2abdd90cdd34e3ddddd184eaf2eb77610ee98bc7bd0e20",
+    "t/actionir_method_assignment_required_capture.t": "46e2ea2edd6fe99255af1375725a10db4a90be291db8bcae07c6360d133d5505",
+    "t/actionir_method_general_return_capture.t": "79e1a62864441c368e76e393aac9a29907b82e1a28600e5429ec3c0ba99fb4bf",
+    "t/actionir_method_push_required_capture.t": "765c036df9bc0842d398221fc0a8f15aafc4398dfa81f5ad8b402c084e49c384",
+    "t/actionir_method_set_key_required_capture.t": "f065c51628152d04b137ac6bf5f66739653703f6b69d4d51cc0e194d5e1b6803",
+    "t/actionir_method_value_capture.t": "9e9e1d9ab525d387ae3d1689a1c1465dab08f39ecccb78868ad62cee6ed50269"
+  },
+  "original_positive": [
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t:71:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t:199:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t:198:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py:131:{'case':'old-migration','error':'aggregate_selector_removed surface=array identifier=Top replacement=Top\\n','source':'return(array_copy(array(Top)))','value':None},",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py:140:('array-selector','set(array(items), 1)'),('hash-selector','set(hash(meta), 1)')]",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py:123:('removed-selector','set_key(hash(meta), \"key\", 1)')]",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t:210:['scoped-append', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)']);",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:131:('scoped-child-index','push(Top, items, 1)'),('removed-selector','push(array(items), 1)'),",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:227:\"['removed-selector', 'push(array(items), 1)']);\",",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:228:\"['removed-selector', 'push(array(items), 1)'],\\n  ['append', 'push(items, \\\"v\\\")'], ['scoped-append', 'push(Top, items, \\\"v\\\")']);\")",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:79:assert [r['spelling'] for r in new_rows[BOOK]] == ['array(items)', 'hash(meta)', 'hash(meta)']",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:80:assert new_rows[GUIDE][0]['spelling'] == 'array(Top)'",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:88:supplied_files[BOOK] = supplied_files[BOOK].replace(b'array(items)', b'items', 1)",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:90:supplied_files[BOOK] += b'\\n\\nAn example is `array(new_binding)`.\\n'",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:111:'unclassified-example': b\"presents 'array(new_binding)' without explicit\"}[name]",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr",
+    "t/actionir_method_assignment_required_capture.t:202:['array-selector','set(array(items), 1)',\"aggregate_selector_removed surface=array identifier=items replacement=items\\n\"],",
+    "t/actionir_method_assignment_required_capture.t:203:['hash-selector','set(hash(meta), 1)',\"aggregate_selector_removed surface=hash identifier=meta replacement=meta\\n\"]);",
+    "t/actionir_method_general_return_capture.t:206:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+    "t/actionir_method_push_required_capture.t:210:['scoped-child-index', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)'],",
+    "t/actionir_method_set_key_required_capture.t:191:['removed-selector', 'set_key(hash(meta), \"key\", 1)',",
+    "t/actionir_method_value_capture.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+    "t/actionir_method_value_capture.t:213:['trim-constructor-slot', 'trim_action_ir_value', {scenario => 'plain', input => 'array(LIT)'}],"
+  ],
+  "current_positive": [],
+  "current_classified": 27,
+  "controls": [
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t:362:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t:71:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t:71:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t:71:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t:260:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t:199:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t:199:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t:199:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t:308:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t:198:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t:198:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t:198:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t:307:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py:131:{'case':'old-migration','error':'aggregate_selector_removed surface=array identifier=Top replacement=Top\\n','source':'return(array_copy(array(Top)))','value':None},"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py:131:{'case':'old-migration','error':'aggregate_selector_removed surface=array identifier=Top replacement=Top\\n','source':'return(array_copy(array(Top)))','value':None},"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py:131:{'case':'old-migration','error':'aggregate_selector_removed surface=array identifier=Top replacement=Top\\n','source':'return(array_copy(array(Top)))','value':None},",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py:239:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py:140:('array-selector','set(array(items), 1)'),('hash-selector','set(hash(meta), 1)')]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py:140:('array-selector','set(array(items), 1)'),('hash-selector','set(hash(meta), 1)')]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py:140:('array-selector','set(array(items), 1)'),('hash-selector','set(hash(meta), 1)')]",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py:257:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py:123:('removed-selector','set_key(hash(meta), \"key\", 1)')]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py:123:('removed-selector','set_key(hash(meta), \"key\", 1)')]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py:123:('removed-selector','set_key(hash(meta), \"key\", 1)')]",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py:240:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t:210:['scoped-append', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)']);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t:210:['scoped-append', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)']);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t:210:['scoped-append', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)']);",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t:321:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:131:('scoped-child-index','push(Top, items, 1)'),('removed-selector','push(array(items), 1)'),",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:227:\"['removed-selector', 'push(array(items), 1)']);\",",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:228:\"['removed-selector', 'push(array(items), 1)'],\\n  ['append', 'push(items, \\\"v\\\")'], ['scoped-append', 'push(Top, items, \\\"v\\\")']);\")"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:131:('scoped-child-index','push(Top, items, 1)'),('removed-selector','push(array(items), 1)'),",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:227:\"['removed-selector', 'push(array(items), 1)']);\",",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:228:\"['removed-selector', 'push(array(items), 1)'],\\n  ['append', 'push(items, \\\"v\\\")'], ['scoped-append', 'push(Top, items, \\\"v\\\")']);\")"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:131:('scoped-child-index','push(Top, items, 1)'),('removed-selector','push(array(items), 1)'),",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:227:\"['removed-selector', 'push(array(items), 1)']);\",",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:228:\"['removed-selector', 'push(array(items), 1)'],\\n  ['append', 'push(items, \\\"v\\\")'], ['scoped-append', 'push(Top, items, \\\"v\\\")']);\")",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py:290:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:79:assert [r['spelling'] for r in new_rows[BOOK]] == ['array(items)', 'hash(meta)', 'hash(meta)']",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:80:assert new_rows[GUIDE][0]['spelling'] == 'array(Top)'",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:88:supplied_files[BOOK] = supplied_files[BOOK].replace(b'array(items)', b'items', 1)",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:90:supplied_files[BOOK] += b'\\n\\nAn example is `array(new_binding)`.\\n'",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:111:'unclassified-example': b\"presents 'array(new_binding)' without explicit\"}[name]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:79:assert [r['spelling'] for r in new_rows[BOOK]] == ['array(items)', 'hash(meta)', 'hash(meta)']",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:80:assert new_rows[GUIDE][0]['spelling'] == 'array(Top)'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:88:supplied_files[BOOK] = supplied_files[BOOK].replace(b'array(items)', b'items', 1)",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:90:supplied_files[BOOK] += b'\\n\\nAn example is `array(new_binding)`.\\n'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:111:'unclassified-example': b\"presents 'array(new_binding)' without explicit\"}[name]"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:79:assert [r['spelling'] for r in new_rows[BOOK]] == ['array(items)', 'hash(meta)', 'hash(meta)']",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:80:assert new_rows[GUIDE][0]['spelling'] == 'array(Top)'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:88:supplied_files[BOOK] = supplied_files[BOOK].replace(b'array(items)', b'items', 1)",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:90:supplied_files[BOOK] += b'\\n\\nAn example is `array(new_binding)`.\\n'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:111:'unclassified-example': b\"presents 'array(new_binding)' without explicit\"}[name]",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py:128:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py:69:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py",
+      "case": "copied",
+      "positive": [
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "copied/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py",
+      "case": "edited",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py",
+      "case": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:16:OLD = b'an AST `set(array(meta), [])` needs it after the target and shape checks, whereas\\nan early primitive result or a mismatched aggregate shape does not reach it.'",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:57:assert result.returncode != 0 and b\"presents 'array(meta)' without explicit removed/rejected/migrated historical context\" in result.stderr",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py:69:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_assignment_required_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/t/actionir_method_assignment_required_capture.t:202:['array-selector','set(array(items), 1)',\"aggregate_selector_removed surface=array identifier=items replacement=items\\n\"],",
+        "copied/t/actionir_method_assignment_required_capture.t:203:['hash-selector','set(hash(meta), 1)',\"aggregate_selector_removed surface=hash identifier=meta replacement=meta\\n\"]);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_assignment_required_capture.t",
+      "case": "edited",
+      "positive": [
+        "t/actionir_method_assignment_required_capture.t:202:['array-selector','set(array(items), 1)',\"aggregate_selector_removed surface=array identifier=items replacement=items\\n\"],",
+        "t/actionir_method_assignment_required_capture.t:203:['hash-selector','set(hash(meta), 1)',\"aggregate_selector_removed surface=hash identifier=meta replacement=meta\\n\"]);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_assignment_required_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "t/actionir_method_assignment_required_capture.t:202:['array-selector','set(array(items), 1)',\"aggregate_selector_removed surface=array identifier=items replacement=items\\n\"],",
+        "t/actionir_method_assignment_required_capture.t:203:['hash-selector','set(hash(meta), 1)',\"aggregate_selector_removed surface=hash identifier=meta replacement=meta\\n\"]);",
+        "t/actionir_method_assignment_required_capture.t:333:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_general_return_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/t/actionir_method_general_return_capture.t:206:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_general_return_capture.t",
+      "case": "edited",
+      "positive": [
+        "t/actionir_method_general_return_capture.t:206:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_general_return_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "t/actionir_method_general_return_capture.t:206:['undefined', 'return_undef()', 'return undef'], ['old-migration', 'return(array_copy(array(Top)))', undef],",
+        "t/actionir_method_general_return_capture.t:320:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_push_required_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/t/actionir_method_push_required_capture.t:210:['scoped-child-index', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)'],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_push_required_capture.t",
+      "case": "edited",
+      "positive": [
+        "t/actionir_method_push_required_capture.t:210:['scoped-child-index', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)'],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_push_required_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "t/actionir_method_push_required_capture.t:210:['scoped-child-index', 'push(Top, items, 1)'], ['removed-selector', 'push(array(items), 1)'],",
+        "t/actionir_method_push_required_capture.t:322:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_set_key_required_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/t/actionir_method_set_key_required_capture.t:191:['removed-selector', 'set_key(hash(meta), \"key\", 1)',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_set_key_required_capture.t",
+      "case": "edited",
+      "positive": [
+        "t/actionir_method_set_key_required_capture.t:191:['removed-selector', 'set_key(hash(meta), \"key\", 1)',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_set_key_required_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "t/actionir_method_set_key_required_capture.t:191:['removed-selector', 'set_key(hash(meta), \"key\", 1)',",
+        "t/actionir_method_set_key_required_capture.t:303:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_value_capture.t",
+      "case": "copied",
+      "positive": [
+        "copied/t/actionir_method_value_capture.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+        "copied/t/actionir_method_value_capture.t:213:['trim-constructor-slot', 'trim_action_ir_value', {scenario => 'plain', input => 'array(LIT)'}],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_value_capture.t",
+      "case": "edited",
+      "positive": [
+        "t/actionir_method_value_capture.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+        "t/actionir_method_value_capture.t:213:['trim-constructor-slot', 'trim_action_ir_value', {scenario => 'plain', input => 'array(LIT)'}],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_method_value_capture.t",
+      "case": "added-selector",
+      "positive": [
+        "t/actionir_method_value_capture.t:76:BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],",
+        "t/actionir_method_value_capture.t:213:['trim-constructor-slot', 'trim_action_ir_value', {scenario => 'plain', input => 'array(LIT)'}],",
+        "t/actionir_method_value_capture.t:369:source = 'array(unclassified)'"
+      ],
+      "classified": 0
+    }
+  ],
+  "restored": true,
+  "scope": "Exact existing scanner functions on all17 retained flagged fixtures. Original27 positives become27 classifications solely through exact path/full-byte registry entries. All17 copied,17 edited and17 added-selector variants reject; restoration passes. No broad filename/prefix/directory exclusion, scanner logic or discovery change."
+}

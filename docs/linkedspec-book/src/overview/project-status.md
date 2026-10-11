@@ -29,8 +29,8 @@ executable positives, five backend rejection routes, and capability 90/0/0. This
 the broader current-status audit and parent closeout remain owned by `.23.2`.
 
 The current selector inventory includes 70 public files after review of the
-complete-document grammar and regression-fixture chapters. Its 36 classified historical references include
-the constructor guide's explicit single-bare-value rejection. Zero current examples
+complete-document grammar and regression-fixture chapters. Its 40 classified historical references include
+the constructor guide and four rejected assignment/set-key/return examples. Zero current examples
 and all migration-contrast checks remain unchanged.
 
 ## Task metadata is globally unambiguous
@@ -1922,10 +1922,10 @@ on installed PUC5.5.1 and LuaJIT; declared PUC5.4 remains separately owned.
 Exact proof: `docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md`.
 
 **Public selector context and census:**
-the checker covers 70 public files and 36 explicitly classified removed/history
+the checker covers 70 public files and 40 explicitly classified removed/history
 references, with zero current examples. The rejected Julia example carries its
 classification inside the fence. The constructor guide's later rejected spelling
-is included in the current census. These documentation checks do not close the
+and four rejected assignment/set-key/return examples are included in the current census. These documentation checks do not close the
 separately owned Julia runtime defect described below.
 
 **Known Lua option limitation — false iteration setting becomes the default:**

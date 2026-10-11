@@ -30,6 +30,41 @@ HISTORICAL_DIAGNOSTIC_INPUTS = {
         "52a83a6bb01129e7f0c96f594a6e85bb2f25cedfbd86d91853a3e620b92bb90e",
     "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-split-probe-initial.pl":
         "1f96bcb1dd60201a602282b576074b0ab3abfd77fcf006ab16417bc25d8627c3",
+    # Exact negative/private synthetic fixtures; any byte edit or copied path rejects.
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-alias-draft.t':
+        'a8df7205e161079dbe613cea241ca44d4ab41a394008d683aa40192b98edc9b8',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4-draft-fixture.t':
+        'd7bfd7224b3061469372af170a1ab173a74c9e009b2a9f666d82cc5058522d32',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-initial-fixture.t':
+        'd33c8de6d0ba7ed1062dbb640d4ca59d6a4581c9ef8ef5a26b6448b5871ca328',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-loading-draft.t':
+        'edfa5a28612fd070da0dfe6ad1977b599582c2568f8640ad1b71909acf2e5120',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1-review.py':
+        'e88b76a38bfe15eb3f47f769cd1c93700f3e6b9faae742bcb2414fd26a20885b',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py':
+        '0fb2e4ab144a39abc5ba82b4653a9a4c4f5bfeaf6d6d3655d07f6f1eebf4c02e',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0-review.py':
+        '5afef5f1bac33fcb965c1099d1c742d047d80c5b4ee1bb03b1a729b5f0173144',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-initial-probe/actionir_method_push_required_capture.t':
+        '06db7781a2b3e22164231234cc53c6cfeca3357d08050730cf243c5f67db0429',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1-review.py':
+        '700ce617ca4b57dcb78bf50fd1cba31be80b55bef4bc742e432e150d40172ba8',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/census/proof.py':
+        '0ef00dd86ea82d2b9a3ed193aa4b8e7e772ec7f96a80c938fabf55532998db99',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof-draft.py':
+        '4712a89a636b0f0348330d8c69176616c336170cb157ffd54bcf4866ef92cf35',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/selector-proof.py':
+        'ba8df149c3cee886eb2abdd90cdd34e3ddddd184eaf2eb77610ee98bc7bd0e20',
+    't/actionir_method_assignment_required_capture.t':
+        '46e2ea2edd6fe99255af1375725a10db4a90be291db8bcae07c6360d133d5505',
+    't/actionir_method_general_return_capture.t':
+        '79e1a62864441c368e76e393aac9a29907b82e1a28600e5429ec3c0ba99fb4bf',
+    't/actionir_method_push_required_capture.t':
+        '765c036df9bc0842d398221fc0a8f15aafc4398dfa81f5ad8b402c084e49c384',
+    't/actionir_method_set_key_required_capture.t':
+        'f065c51628152d04b137ac6bf5f66739653703f6b69d4d51cc0e194d5e1b6803',
+    't/actionir_method_value_capture.t':
+        '9e9e1d9ab525d387ae3d1689a1c1465dab08f39ecccb78868ad62cee6ed50269',
 }
 SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_.])(?:array|hash)\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)"

@@ -1,0 +1,26 @@
+{
+  "scope": "Transcribed actual tool refusals and retained original producer/input identities; no original transport envelopes are claimed.",
+  "cases": [
+    {
+      "case": "scanner boundary line-count premise",
+      "actual_exit_code": 1,
+      "reason": "Initial inline capture expected28 flagged lines; actual unchanged scanner derives27 across17 paths. It refused before writing.",
+      "repair": "Tracked scanner-capture.py derives and retains the actual17/27 population; exact scanner proof has51 denials."
+    },
+    {
+      "case": "nested book producer root",
+      "actual_exit_code": 1,
+      "reason": "After an atomic patch rejection, the copied census/book.py still had its parent directory's ROOT/PREFIX and refused the57-source guard before writing an artifact.",
+      "original_source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-repair/book.py",
+      "repair": "Change only ROOT to parents[4] and PREFIX to the census directory in the copied producer/reviewer; fresh complete book89/3 retained separately."
+    },
+    {
+      "case": "historical producer population premise",
+      "actual_exit_code": 1,
+      "reason": "audit-proof.py retained successful inner execution before refusing its expected192 input count. Actual producer reads183 inputs; the earlier192 capsule added nine supplementary files. The historical auditor encounters only public-checker evolution, yielding80 actual evolution denials rather than the draft's expected135.",
+      "original_producer": "audit-proof.py",
+      "original_result": "audit-proof.json.gz",
+      "repair": "Keep both immutable; remove unused scanner historical branches with audit-final-source.py and retain a distinct final183-input/80-denial execution. The scanner remains independently covered by17 exact inputs/51 actual denials."
+    }
+  ]
+}

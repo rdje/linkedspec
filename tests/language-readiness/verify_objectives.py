@@ -139,6 +139,19 @@ RAW_READINESS_CI_INSERTIONS = (
      b"PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t\n"),
 )
 
+SCALAR_RECEIVER_COPY_OWNER = "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0"
+SCALAR_RECEIVER_COPY_CI_INSERTIONS = (
+    (b"require_tracked_file t/uniform_binding_contract.t\n",
+     b"require_tracked_file t/actionir_receiver_scalar_copy.t\n"
+     b"require_tracked_file t/actionir_receiver_scalar_copy_probe.pl\n"),
+    (b"perl -c -Iperl t/actionir_ast_parser.t\n",
+     b"perl -c -Iperl t/actionir_receiver_scalar_copy.t\n"
+     b"perl -c -Iperl t/actionir_receiver_scalar_copy_probe.pl\n"),
+    (b"prove -Iperl t/actionir_ast_parser.t\n",
+     b'\nlog "running scalar receiver-copy regression suite"\n'
+     b"prove -Iperl t/actionir_receiver_scalar_copy.t\n"),
+)
+
 PERL_STORAGE_REPLACEMENTS = (
     (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
      b"(( ${#perl_temp_owners[@]} == 28 )) ||\n"),
@@ -183,7 +196,7 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in (RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
+    for anchor, insertion in (SCALAR_RECEIVER_COPY_CI_INSERTIONS + RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
                               + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
@@ -197,7 +210,23 @@ def verify_governance_evolution(source, contents, historical_hash):
             "source_correction_owner": NORMALIZATION_CORRECTION_OWNER,
             "artifact_recovery_owner": ARTIFACT_RECOVERY_OWNER,
             "raw_readiness_owner": RAW_READINESS_OWNER,
+            "scalar_receiver_copy_owner": SCALAR_RECEIVER_COPY_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
+
+
+def verify_selector_governance_evolution(source, contents, historical_hash):
+    require(source == "tools/check_public_aggregate_selector_surface.py",
+            f"unapproved selector governance source: {source}")
+    before = b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 36\n"
+    after = b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 40\n"
+    require(contents.count(after) == 1,
+            f"selector governance registration mismatch: {source}")
+    normalized = contents.replace(after, before, 1)
+    require(digest(normalized) == historical_hash,
+            f"unreviewed selector governance drift: {source}")
+    return {"path": source, "historical": historical_hash,
+            "current": digest(contents), "owner": SCALAR_RECEIVER_COPY_OWNER,
+            "scope": "exact public census inverse; every original checker byte preserved"}
 
 
 def signature_subtest(contents):
@@ -436,6 +465,10 @@ def audit_evidence(read=read_relative):
                 governance_updates.append(verify_boundary_contract_evolution(
                     source, read(source), row["sha256"]))
                 continue
+            if source == "tools/check_public_aggregate_selector_surface.py":
+                governance_updates.append(verify_selector_governance_evolution(
+                    source, read(source), row["sha256"]))
+                continue
             require(source.startswith("docs/") and source.endswith(".md"),
                     f"current executable evidence drift: {source}")
             documentation_updates.append({"path": source, "historical": row["sha256"],
@@ -571,6 +604,18 @@ def falsify(report):
                 current.replace(b"perl -c -Iperl t/actionir_raw_dependency_compatibility.t\n", b"", 1),
                 current.replace(b" t/actionir_raw_dependency_compatibility.t\n", b"\n", 1),
             )
+            altered += tuple(current.replace(insertion, b"", 1)
+                             for _, insertion in SCALAR_RECEIVER_COPY_CI_INSERTIONS)
+            altered += tuple(current.replace(insertion, insertion * 2, 1)
+                             for _, insertion in SCALAR_RECEIVER_COPY_CI_INSERTIONS)
+            altered += (
+                current.replace(b"prove -Iperl t/actionir_receiver_scalar_copy.t\n",
+                                b"true t/actionir_receiver_scalar_copy.t\n", 1),
+                current.replace(b"perl -c -Iperl t/actionir_receiver_scalar_copy.t\n",
+                                b"perl -c -Iperl t/other_copy.t\n", 1),
+                current.replace(b"require_tracked_file t/actionir_receiver_scalar_copy_probe.pl\n", b"", 1),
+                current.replace(b"perl -c -Iperl t/actionir_receiver_scalar_copy_probe.pl\n", b"", 1),
+            )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
         elif source == "tools/test_perl_project_data_storage.sh":
@@ -637,6 +682,18 @@ def falsify(report):
             verify = verify_boundary_contract_evolution
             reasons = ("boundary contract registration mismatch:", "unreviewed boundary contract drift:",
                        "unreviewed Contracts factory capture drift:")
+        elif source == "tools/check_public_aggregate_selector_surface.py":
+            line = b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 40\n"
+            altered = (
+                current + b"# unreviewed edit\n",
+                current.replace(line, b"", 1),
+                current.replace(line, line * 2, 1),
+                current.replace(line, b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 39\n", 1),
+                current.replace(b"reference_count = check_exact_references(paths)", b"reference_count = 0", 1),
+                current.replace(b"EXPECTED_PUBLIC_FILE_COUNT = 70", b"EXPECTED_PUBLIC_FILE_COUNT = 69", 1),
+            )
+            verify = verify_selector_governance_evolution
+            reasons = ("selector governance registration mismatch:", "unreviewed selector governance drift:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")
         require(all(candidate != current for candidate in altered),

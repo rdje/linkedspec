@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "producer_sha256": "d8265d98e9876207610a78379630c52e8974dc6252153010e25487d83dc0c3dd",
+  "snapshot_sha256": "324e5443db8e81b798444cc2e5f6df39d2faf2a98c0d3a564a296beb5f307192",
+  "live_declarations": 502,
+  "unique_live_inputs": 487,
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-final-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcG9zZWQgcmVjZWl2ZXItY29weSByZXZpZXcgUEFTUzUwLzM7IHBhaXJlZDlSRUQvNTBHUkVFTjsgY29uc3VtZXJzNjEvMTg0OyBldmlkZW5jZTU7IG9yaWdpbmFsMzA3OyBib29rODkvMwo=",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-canonical/publish-claim.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q0kgY29tcGF0aWJpbGl0eSBzdXBwbGVtZW50IFBBU1M6IDE5OCBsaXZlIGJpbmRpbmdzCg==",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-publish-claim.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "UmVjZWl2ZXItY29weSBwdWJsaWNhdGlvbiBQQVNTOiAzMDQgbGl2ZSBpbnB1dHM7IDExODAzNCBieXRlczsgb3JpZ2luYWwzMDcgcHJlc2VydmVkCg==",
+      "stderr_base64": ""
+    }
+  ],
+  "unchanged": true,
+  "scope": "Fresh original readonly final review and both original publications against every retained failed03 live input and original claim. Original instruments/observations unchanged. Current runtime/CI source equality and corrected book are separately checked; no successful canonical admission is inferred."
+}

@@ -10,6 +10,42 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-10 — Scalar storage kind cannot select a receiver copy's container family
+
+Bare assignment records scalar storage even when its runtime value is an array or hash. The AST
+hash-copy discriminator knew aggregate hash kind or a later hash method; a single scalar-bound
+copy therefore selected an array snapshot. Reusing aggregate function-form copy before receiver
+family selection preserves runtime type while keeping the typed receiver node and source span.
+The new branch requires a scalar-bound variable, one call and zero arguments; other populations
+retain their existing routes.
+
+Live and retained standalone generated-source execution each cover14 cases. Reference identity
+is checked before serialization: outer snapshots differ while nested references are shared.
+Poisoned AST chain/receiver/call source fields still produce the hash. Original50 TAP retains9
+semantic REDs/41 controls; all50 current pass. Faults distinguish removed dispatch, swallowed
+chain tails and borrowed references with9/4/8 failures. Supplied61/184, evidence5/original307/
+book89/3 and the composed current publication pass. Exact canonical receipt governs admission; the separately
+reproduced legacy kind callback stays .6.0.1. Earlier regex proof requires accepted2b4e484a9
+inputs including its original live claim.
+
+Canonical CI selects tracked/syntax inputs and a separate regression command. Attempt01 was
+cancelled for selection; attempt02 passes all10 doctrines then rejects historical registration.
+Its complete staged diff/channels and original runner/auditor are retained. Exact three-insertion
+inverse restores historical bytes; full192 inputs,22 recovery/74 evolution controls and evidence3
+pass under zero healthy original-log reads/tracked writes. Initial runtime claim/publisher are
+retained; publication extends only its publisher identity plus the CI supplement. Fresh exact
+canonical receipt is required.
+
+Attempt03 reaches aggregate-selector admission and exposes a pre-existing unclassified
+private AST book example. Retain its full failed candidate/channels and502 bindings;
+replace only that example with typed-node prose. The whole census also needs its
+four valid rejected examples counted, and17 negative/private fixture files need exact
+path/full-byte classification. Retain the initial521-binding book composition; its
+original review/publication replay without refreshing observations. Current complete
+book, census and strict scanner controls compose separately; canonical admission remains
+required. Current claim publication uses one combined live input population to avoid
+duplicating the shared runtime/CI inputs; both earlier publications remain recoverable.
+
 ## 2026-10-10 — Regex flag slots and final-owner fault boundaries
 
 Regex trimming receives a writable local slot for defined flags and a readonly empty literal for

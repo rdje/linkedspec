@@ -1,0 +1,11 @@
+{
+  "encoding": "gzip-json",
+  "sha256": "324e5443db8e81b798444cc2e5f6df39d2faf2a98c0d3a564a296beb5f307192",
+  "uncompressed_sha256": "89456843231b8a09845cb8238589707efd8f1990df74c1e34727f7e1a0144248",
+  "uncompressed_bytes": 126216900,
+  "producer_sha256": "c80c07c16f5ab9c3d43e74f27314f280596ca919e78843a1816512d4ed504d59",
+  "fingerprint": "2b4e484a9bf27471d23d86f72aa25c7616b2bd3b 52f2aaa8933cbd9adaafcd09fb3b17769e817bf660083f13d54977e3de62cee6",
+  "live_declarations": 502,
+  "unique_live_inputs": 487,
+  "result": "retained failed attempt03"
+}

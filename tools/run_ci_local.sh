@@ -541,6 +541,8 @@ require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
+require_tracked_file t/actionir_receiver_scalar_copy.t
+require_tracked_file t/actionir_receiver_scalar_copy_probe.pl
 require_tracked_file t/semantic_index_perl_foundation.t
 require_tracked_file t/semantic_index_perl_static_projection.t
 require_tracked_file t/semantic_index_perl_calls_projection.t
@@ -684,6 +686,8 @@ perl -c tools/check_generated_source_contract.pl
 perl -c tools/check_language_capability_coverage.pl
 perl -c tools/check_native_spec_resolution_contract.pl
 perl -c -Iperl t/actionir_ast_parser.t
+perl -c -Iperl t/actionir_receiver_scalar_copy.t
+perl -c -Iperl t/actionir_receiver_scalar_copy_probe.pl
 perl -c -Iperl perl/LinkedSpec/ActionIR/RawDependencies.pm
 perl -c -Iperl t/actionir_raw_dependency_metadata.t
 perl -c -Iperl t/actionir_raw_dependency_provenance.t
@@ -1087,6 +1091,9 @@ perl tools/check_language_capability_coverage.pl
 
 log "running ActionIR AST parser focused suite"
 prove -Iperl t/actionir_ast_parser.t
+
+log "running scalar receiver-copy regression suite"
+prove -Iperl t/actionir_receiver_scalar_copy.t
 
 log "running source-bound raw dependency readiness and provenance suites"
 PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t

@@ -1344,8 +1344,9 @@ The resolver validates its eager callbacks before checking whether the input is
 undefined or empty. This includes the locally unused scalar-container inference
 binding: a missing callback still produces its existing diagnostic even when no
 expression will be lowered. The initializer callback remains lazy. For example,
-an AST `set(array(meta), [])` needs it after the target and shape checks, whereas
-an early primitive result or a mismatched aggregate shape does not reach it.
+a synthetic array-set AST targeting `meta` needs it after the target and shape
+checks, whereas an early primitive result or a mismatched aggregate shape does
+not reach it.
 These are compiler dependency contracts; they introduce no authored syntax.
 
 The local AST hash-assignment adapter re-acquires the key callback after its

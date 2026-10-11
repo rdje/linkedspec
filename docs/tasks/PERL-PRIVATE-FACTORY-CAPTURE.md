@@ -602,7 +602,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal hooks govern ordinary landing from clean ae65603bc; clear brief and verify post-pointer/clean Git before P1 receiver .3.1.6.0 activation. No push or broader admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6`
-  Status: `pending`
+  Status: `active` / bounded correctness prerequisite and required receiver/parser children
   Goal: Receiver/parser helpers required dependency boundaries; split further before writes if needed.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3`
   Owned paths: MethodLowering required seams in _normalize_array_receiver_value_chain_expr, _normalize_number_receiver_value_chain_expr, _normalize_string_receiver_value_chain_expr, _normalize_hash_receiver_value_chain_expr, _parse_array_end_mutation_method_statement, _parse_hash_index_assignment_operator_statement, _lower_hash_index_assignment_operator_statement; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
@@ -612,17 +612,115 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare source-bound measurement at activation.
   Acceptance: Preserve actual public references and native behavior. Commit each bounded family before advancing; no independent parent admission inferred.
 
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5`.
+  Refinement: Complete the two confirmed correctness repairs first, each with its own native/RED/GREEN proof and commit; then isolate array, number/string, hash, array-end parser and hash-index parser/lowerer required seams separately. This routing parent grants no independent admission.
+
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0`
-  Status: `pending` / P1 receiver-copy correctness diagnosis and repair before required receiver capture
-  Goal: Resolve the newly observed scalar-held hash receiver .copy() type loss and investigate the legacy hash normalizer's unbound kind callback before admitting receiver proof.
+  Status: `active` / two distinct correctness children
+  Goal: Repair scalar-held hash single-step receiver-copy type loss and the separate legacy hash kind-callback failure before required receiver capture.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`
-  Owned paths: Bounded MethodLowering receiver-copy selection/normalization, exact public Get/source and fallback reproduction, independent regression/fault proof, public book/Knowledge/continuity. Preserve current307 bindings first; split public-copy and legacy callback repairs if their mechanisms diverge.
-  Planned tier: `canonical`
-  Planned focused proof: Actual scalar-held hash/array/unknown receiver results, function-form and multi-step controls, source/AST selected route, missing callback defaults and injection selection. Diagnose with LinkedSpec Toolbox before editing; retain original source/observations and effective counterfactuals.
-  Planned canonical boundary: Public value correctness change requires exact staged canonical admission after focused proof.
-  Planned claim record: none: Pending diagnostic/repair planning; declare measured record at activation.
-  Reproduction / impact: Public call_spec_handler_subst on meta = {"k": "v"}; return(meta.copy()) emits an ARRAY-only snapshot. Function-form copy(meta) and documented multi-step copy controls are being checked with Get. Instrumented normalizer selection shows the parsed route bypasses all legacy receiver normalizers. AST copy_starts_hash_receiver_chain only selects hash from remembered hash kind or a later hash method, whereas ordinary assignment remembers a scalar value slot. A second suspicious legacy bare_symbol_kind call lacks a local binding; establish its actual reach and failure independently.
-  Scheduling: First bounded receiver work after the current clean commit. Current runtime proof stays limited to its two required returns; no product repair or new behavior is admitted here.
+  Owned paths: Routing only; child .0 owns public copy selection, child .1 owns legacy callback selection/default. Preserve current claim inputs before each child's writes.
+  Claim verification: none: Routing/refinement only; children own actual measured acceptance.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0`, `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1`.
+  Reproduction / impact: Retained previous-leaf supplemental Get returns [] for scalar-held hash .copy(), original hash for function-form copy, and1 for the multi-step hash-copy/count control. Instrumented normalizers are not called by the parsed AST route. Separately, direct legacy hash normalizer with injected kind callback fails at an unbound package callback. No public reach is inferred for the latter.
+  Acceptance: Each child must fix and verify its own mechanism and commit before the next; preserve existing multi-step and aggregate receiver behavior. No broader factory admission.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0`
+  Status: `done` / composed focused proof verified; exact canonical receipt governs landing
+  Goal: Preserve the runtime container type when a scalar-held binding is copied with receiver .copy().
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`
+  Owned paths: Bounded AST single-step copy selection in MethodLowering; public Get/source and typed-AST regression, supplied consumers/faults/preservation/book/claim/Knowledge/continuity. Canonical runner selection of the new regression, tests/language-readiness/verify_objectives.py exact historical CI inverse/falsifiers, publication extension and interrupted/failed-gate evidence are also owned here. Public-selector census/scanner classification, their exact historical inverse and complete prior-stage replay/final book evidence also belong here. Legacy callback repair and required receiver seams stay separate.
+  Verification tier: `canonical`
+  Focused checks: Preserve all307 accepted regex/undefined-return inputs before bound writes. Retain identical original/current public regression with explicit shape, empty/container snapshot and array/hash/legacy aggregate controls; prove typed AST fields instead of source text and existing function-form behavior. Retain complete input-bound channels, effective source faults and unchanged supplied60/182 seed consumers plus new regression. Full recursive book, original-binding restoration and ordinary memory/Knowledge/history/claim/diff checks; canonical tracked-input/syntax/execution selection, exact historical CI inverse/native RED/full192 inputs/22 recovery/74 evolution/evidence3 and one-shot publication extension are required.
+  Canonical trigger: P1 public value correctness repair and its canonical regression wiring; exact staged canonical receipt required before ordinary hooks/commit.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json`
+  Acceptance: Fix the confirmed scalar-held hash loss without changing single-step array snapshots, legacy aggregate bindings or multi-step chain selection. Split further before widening to other receiver populations. Commit before the distinct legacy callback child.
+  Activation: Clean2b4e484a9 accepts the two required resolver bindings with all10 doctrines, post-pointer/brief0 and clean Git. Existing fluent-chain/duck-typing/hash-chain records and relevant helper book sections recovered. Parsed AST single-step copy fails the hash discriminator for a scalar-bound value and falls through to array wrapping. Preserve307 inputs and establish source-bound original RED before any production edit.
+
+  Owned canonical book defect (P1): Attempt03 exits1 at the public aggregate-selector checker: actionir-lowering-mental-model.md:1347 presents a retired selector-shaped private AST example without rejection/history context. The passage is byte-identical at activation HEAD; canonical admission is blocked. Retain the complete failed staged candidate, channels and current live claim inputs before any bound write. Replace only this synthetic-fixture spelling with typed-node prose, leaving the selector checker/counts unchanged. Replay the original proof against its retained inputs, render and check the corrected book separately, and publish the composed current evidence before a fresh exact canonical run. No runtime observation or original capture may be refreshed.
+
+  Owned census prerequisite (P1, verified): After the exact single-example repair, the unchanged whole public checker reports40 classified references versus expected36. The individual chapter proof is valid but does not admit the whole public population. Retain the actual full-check channels and derive exact path/text additions against the last admitted population before choosing a minimal prose or inventory repair. Current original runtime/CI proofs remain intact; fresh canonical admission remains required. Source-bound complete census and distinguishing controls now verify the count-only repair below.
+
+  Census repair scope: Compared with parent-owned public source at268891fdf, the architecture chapter adds three correctly rejected assignment/set-key examples and the values guide adds one correctly rejected return-migration example. Retain these useful public boundaries; change only EXPECTED_CLASSIFIED_REFERENCE_COUNT from36 to40. Retain every current live identity before this bound change, the initial composed publication/reviewer/publisher, actual census failure channels and complete current public source. Prove exact source evolution and original36 RED/current40 GREEN/missing-reference/unclassified-example controls. Original192 CI proof replays with the exact count inverse; current runtime and corrected book remain unchanged. Extend the existing current composition transparently; no original runtime capture or historical result refresh.
+
+  Owned executable scanner prerequisite (P1): The corrected whole public check reaches its composed executable scanner and rejects17 exact negative/diagnostic/private synthetic fixture files from focused factory work and this repair. Current scan reports27 lines; these are rejection controls or retained private experiments, not authored positive support. Retain original scanner, exact flagged bytes and complete failure channels before writing. Extend only its existing exact-path/full-byte diagnostic registry. Actual original rejection/current acceptance plus copied-file, edited-file and added-selector controls must preserve denial; no prefix or directory exclusion is permitted. Synchronize current census prose and render a fresh complete book after those count projections. Keep all earlier capture/book/publication stages immutable and replay the initial composition against its original inputs.
+
+  Historical checker evolution prerequisite (P1): The focused actual .4.2.1 producer rejects current executable evidence drift for the public checker after its count correction. Retain this failure and the original auditor before extending its reviewed source evolution. Admit only the exact36-to40 count inverse and exact17-entry scanner insertion inverse; both must recover complete original milestone hashes. Extend reason-sensitive falsifiers for both source families. The isolated historical recovery/read-denial proof must pass afresh with every actual input retained; old192/22/74 records remain unchanged and replayable. No milestone/archive/hash relabeling or broad executable allowance is permitted.
+
+  Final historical scope / verified correction: Actual producer input membership shows only the public checker belongs to the historical audited source population. The original192 capsule comprises183 producer inputs plus nine supplementary files. Preserve the draft wrapper/source/result that assumed192/135; remove its unused scanner historical branches. Final auditor changes only the public count inverse with six reason-sensitive controls, and actual isolated proof verifies183 inputs/134 restored/22 recovery/80 evolution denials. Scanner source evolution remains separately exact with17/27/51 controls. Final composed publication verifies546 distinct live inputs/129964 bytes; original502 and first521 publications stay recoverable. Fresh exact canonical attempt04 and normal hooks govern landing.
+
+  Canonical prerequisite / P1 focused repair verified: Canonical attempt02 exits1 after all10 doctrines pass: historical audit raises governance registration mismatch for tools/run_ci_local.sh. Reproduce through .4.2.1-proof.py. The changed AST command and inserted syntax lines interrupt raw-readiness anchors. Exact scalar-copy CI registration/inverse now preserves historical bytes and rejection behavior; original RED/full192/22 recovery/74 evolution/evidence3 pass. Fresh exact canonical admission remains required. Full failed staged candidate/channels and original runner/auditor are retained under the leaf canonical directory.
+
+  Verified bounded result: P1 scalar-bound receiver-copy .3.1.6.0.0 verifies50 assertions, original9 REDs/41 controls/50 GREEN, live/standalone14-case ledgers, typed source poisoning and shallow snapshot identity. Three source faults reject9/4/8; supplied61/184, evidence5/original307 restoration and book89/3 pass. Exact CI inverse/native registration RED, complete192 supplied inputs,22 recovery/74 evolution controls and evidence3 pass. Canonical prerequisites cover the corrected private-AST book example, complete public census and exact negative-fixture registration. Retained stage replays preserve every original observation; current composed publication and fresh exact canonical receipt govern landing. Legacy hash callback .3.1.6.0.1 follows, before required .6.1-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued.
+  Signoff evidence: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-* retain complete184-input native/current/TAP/consumer and full syntax-valid mutant sources/channels, actual generated source, evidence5 and original307 restoration. Native probe/regression unchanged; no instrument correction. The original and initial book publications replay from exact502/521 bindings; current composed publication passes. Public70/40/0, scanner17/27/51 and fresh historical183/22/80 evidence are retained; canonical reviewer retains full192 inputs, original RED and22/74/evidence3. Initial303, extended502 and first book521 declarations/publications stay recoverable; no original runtime observation or native instrument changes. Current composition gates exact census/scanner/auditor and documented projection deltas. Knowledge1346/10319 passes. Canonical receipt and normal hooks are required before this intended handoff can land.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`
+  Handoff: After exact canonical admission, normal commit and post-pointer/brief0/clean verification, activate legacy .6.0.1 with complete current live-input preservation. No push or broader factory admission.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1`
+  Status: `pending` / P2 private legacy hash kind callback
+  Goal: Select the injected bare_symbol_kind callback or documented undefined default locally in legacy hash normalization; preserve actual aliases/context/effects and private authority.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0`
+  Owned paths: Legacy _normalize_hash_receiver_value_chain_expr kind callback only; direct source-bound native/error/default/identity proof, supplied consumers/book/claim/Knowledge/continuity. Required resolver capture stays .6.3.
+  Planned tier: `focused`
+  Planned focused proof: Reproduce the retained direct normalizer failure with valid dependencies; distinguish actual injected map callback from unrelated package state. Missing/non-CODE default, explicit hash/array and lookahead branches, aliases/errors/contexts/maps and opaque publication control must pass. Own effective source inverses and exact supplied inputs.
+  Planned canonical boundary: none for bounded private fallback selection; escalate before any new public/API/format effect.
+  Planned claim record: none: Planning only; declare measured record at activation.
+  Acceptance: Resolve the owned failure with actual selected callback/default and no package-state dependence; commit before required receiver children.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1`
+  Status: `pending`
+  Goal: Isolate array receiver required callbacks while preserving actual native behavior.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1`
+  Owned paths: Only required resolver returns in _normalize_array_receiver_value_chain_expr; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
+  Planned tier: `focused`
+  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
+  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
+  Planned claim record: none: Planning only; declare measurement at activation.
+  Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2`
+  Status: `pending`
+  Goal: Isolate number/string receiver required callbacks while preserving actual native behavior.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1`
+  Owned paths: Only required resolver returns in _normalize_number_receiver_value_chain_expr and _normalize_string_receiver_value_chain_expr; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
+  Planned tier: `focused`
+  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
+  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
+  Planned claim record: none: Planning only; declare measurement at activation.
+  Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`
+  Status: `pending`
+  Goal: Isolate hash receiver required callbacks while preserving actual native behavior.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2`
+  Owned paths: Only required resolver returns in _normalize_hash_receiver_value_chain_expr; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
+  Planned tier: `focused`
+  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
+  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
+  Planned claim record: none: Planning only; declare measurement at activation.
+  Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4`
+  Status: `pending`
+  Goal: Isolate array-end parser required callbacks while preserving actual native behavior.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`
+  Owned paths: Only required resolver returns in _parse_array_end_mutation_method_statement; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
+  Planned tier: `focused`
+  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
+  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
+  Planned claim record: none: Planning only; declare measurement at activation.
+  Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5`
+  Status: `pending`
+  Goal: Isolate hash-index parser/lowerer required callbacks while preserving actual native behavior.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4`
+  Owned paths: Only required resolver returns in _parse_hash_index_assignment_operator_statement and _lower_hash_index_assignment_operator_statement; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
+  Planned tier: `focused`
+  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
+  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
+  Planned claim record: none: Planning only; declare measurement at activation.
+  Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2`
   Status: `pending`
@@ -696,7 +794,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0` | `pending` | Split and repair confirmed single-step hash-copy type loss and distinct legacy kind-callback failure before required receiver capture; preserve307 current inputs first. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` | `pending` | Repair the independently reproduced legacy hash kind-callback failure; preserve all accepted copy/CI live inputs first. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -949,7 +1047,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Supplied60 suites/182 files and both required syntax checks/supplemental public Phase0 PASS1035 with complete channels retained. Existing .59 and newly owned receiver-copy failures stay explicitly separate; no broader admission inferred.
 - [x] **LOCKSTEP** — Knowledge1343/10299/book teaching/render and staged claim118/154/seven existing gaps PASS. Duplicate index projections repaired; continuity/history/memory/whitespace align. Exact staged handoff and normal doctrine hooks govern ordinary landing; P1 receiver repair is owned and scheduled.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0
+
+- [x] **REPRODUCE / ISSUE** — Immutable184-input probe and identical50 original TAP retain9 semantic REDs/41 controls: scalar-held hash .copy() returns[] in live, standalone and poisoned-source typed AST execution, while function-form and multi-step controls work.
+- [x] **ROOT CAUSE (WHY + WHERE)** — AST copy_starts_hash_receiver_chain recognizes aggregate hash kind or later hash methods, but bare assignment remembers scalar storage. Single-step scalar-held hashes fall into array wrapping. Full actual Get/generated/typed source and result channels retain the mechanism.
+- [x] **FIX** — One exact12-line AST insertion routes a scalar-bound variable, one copy call and zero arguments through the existing aggregate function-form copy lowerer. Preserve all other receiver/arity/family selection and actual typed receiver fields.
+- [x] **ADDRESSED (verified)** — PASS50 with exact9-RED/41-control original names. Live/standalone14-case ledgers preserve hash/array/empty/scalar values, outer/nested identity and typed source poisoning. Three syntax-valid complete source faults fail9/4/8 named assertions; evidence5/original307 restoration and the final composed publication pass. No native probe/assertion correction. Exact book/census/scanner/historical prerequisites have their own retained proof stages.
+- [x] **NO REGRESSION** — Supplied61 suites/184 files pass, retaining all60 predecessor suites plus the regression. Legacy rule aggregate array, wrong arity and multi-step controls remain exact. Exact staged canonical receipt is required before landing this public repair; no broader factory admission inferred.
+- [x] **LOCKSTEP** — Knowledge1346/10319 and final book89/three controls pass. Current roadmap/index/live/history/memory align; exact staged memory/history/whitespace and canonical receipt/normal doctrine hooks govern intended clean landing before legacy .6.0.1.
+
 ## Verification Log
+
+- `2026-10-10`, `.3.1.6.0.0`: P1 scalar-bound receiver-copy .3.1.6.0.0 verifies50 assertions, original9 REDs/41 controls/50 GREEN, live/standalone14-case ledgers, typed source poisoning and shallow snapshot identity. Three source faults reject9/4/8; supplied61/184, evidence5/original307 restoration and book89/3 pass. Exact CI inverse/native registration RED, complete192 supplied inputs,22 recovery/74 evolution controls and evidence3 pass. Initial runtime publication is retained; its publisher extension adds the CI supplement without refreshing native proof. Readonly304-core/198-CI bindings and118034-byte claim pass. Fresh exact canonical receipt and normal hooks govern landing. Legacy hash callback .3.1.6.0.1 follows, before required .6.1-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued.
 
 - `2026-10-10`, `.3.1.5.3.2`: PASS619/23/native24/branches32/public4/inverse6, paired24 RED/595 controls/619 GREEN, native179/test182/supplied60/evidence5/original303/book89/3 and readonly307/73113. Both syntax checks/public Phase0 PASS1035/full channels; claim118/154/seven existing gaps and Knowledge1343/10299 PASS. Exact staged memory/history/diff and normal hooks govern landing. Routing .5/.5.3 close only their verified children; independent admissions remain open.
 
@@ -1029,6 +1138,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.5.3.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1 - isolate push required callbacks`, from clean d74c53485; no push.
 
 - `.3.1.5.3.2`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2 - isolate regex and undefined-return callbacks`, from clean ae65603bc; no push.
+
+- `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
 
@@ -1181,3 +1292,19 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`: Both required syntax checks and supplemental public Phase0 PASS1035/1035 with complete channels retained; compatibility job closes. Required-capture307-input73113-byte readonly publication remains exact. Standalone staged claim verification and final ordinary landing checks remain pending. P1 receiver-copy diagnosis/repair .3.1.6.0 follows clean handoff and splits the public AST and legacy callback mechanisms before writes.
 
 - `2026-10-10`: Standalone staged claim verification PASS118 records/154 claims/seven existing disclosed gaps, self-test3 positive/16 rejected. Current leaf and .5/.5.3 routing parents have verified children; original independent admissions stay open. Intended clean handoff selects P1 receiver .3.1.6.0, split before writes. Final history/memory/whitespace and normal hooks govern landing.
+
+- `2026-10-10`: Clean2b4e484a9 activates P1 .3.1.6.0.0 after all10 doctrines/post-pointer/brief0 and clean Git. Split public AST copy and legacy callback repairs before writes, and give each remaining required receiver/parser family a bounded owner. No new observation or production edit yet; preserve307 current bindings first.
+
+- `2026-10-10`, receiver-copy preservation: All307 accepted regex/undefined-return bindings verified against clean2b4e484a9 before bound writes; only one live mode/revision becomes historical, with the existing push preservation claim unchanged. Immutable public probe/regression and one-shot184-input capture producer now establish native live/standalone/typed-AST behavior before any source change. No handoff or admission yet.
+
+- `2026-10-10`, public copy native checkpoint: Immutable184-file capsule retains live/standalone14-case ledgers, full actual generated source, shallow identity, typed-AST poisoned-source and aggregate/arity controls. Identical50 TAP before the source edit has exactly9 semantic REDs/41 controls. Add only the scalar-bound, one-call, zero-argument AST copy dispatch to the existing aggregate copy lowerer; current verification starts. Multi-step, other receiver families and legacy callback selection remain separate.
+
+- `2026-10-10`: P1 scalar-bound receiver-copy .3.1.6.0.0 verifies50 assertions, original9 REDs/41 controls/50 GREEN, live/standalone14-case ledgers, typed source poisoning and shallow snapshot identity. Three source faults reject9/4/8; supplied61/184, evidence5/original307 restoration and book89/3 pass. Exact CI inverse/native registration RED, complete192 supplied inputs,22 recovery/74 evolution controls and evidence3 pass. Initial runtime publication is retained; its publisher extension adds the CI supplement without refreshing native proof. Readonly304-core/198-CI bindings and118034-byte claim pass. Fresh exact canonical receipt and normal hooks govern landing. Legacy hash callback .3.1.6.0.1 follows, before required .6.1-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued. Intended clean handoff is prepared before exact staged canonical CI; no candidate mutation may overlap that gate.
+
+- `2026-10-10`, owned CI selection gap (P2): The canonical runner has an explicit Perl test list and did not select the new public receiver-copy regression. Reproduce by searching accepted2b4e484a9 tools/run_ci_local.sh for t/actionir_receiver_scalar_copy.t (absent). Focused61/184 proof passes, but future canonical runs would omit this guard. Stop first canonical session80828 (actual exit130) before index mutation, retain complete redirected channels and disclosed post-cancel fingerprint under the owned canonical/attempt-01.json, and add tracked-input/syntax/execution selection in this leaf. Exact updated candidate must run canonical CI afresh; no initial receipt/admission is claimed.
+
+- `2026-10-10`, canonical selection repair: tools/run_ci_local.sh now requires both new files tracked, checks each Perl syntax, and executes the regression beside the AST parser suite. Shell syntax passes; Knowledge1345/10312 generated. Focused303-input71361-byte publication remains unchanged. Final staged docs and fresh canonical attempt02 must validate this exact updated candidate before commit.
+
+- `2026-10-10`, canonical prerequisite repaired: Attempt02 exits1 after all10 doctrines pass, at historical runner registration. Full failed binary candidate/channels and original runner/auditor are retained. Original RED/activation control and exact three-insertion historical inverse/full192 inputs/22 recovery/74 evolution/evidence3 pass. Initial303 runtime publication/publisher stay retained; extension changes only publisher identity plus added CI supplement, preserving every runtime proof field. Readonly304-core/198-CI bindings/118034-byte claim and Knowledge1345/10312 pass. Fresh attempt03 must use approved host execution from the start per existing process-locality prerequisite. No canonical success is inferred.
+
+- `2026-10-11`, canonical attempt03 prerequisites: Retain full failed candidate/channels/original502 declarations/487 files and initial521 declarations/506 files. Correct one synthetic AST book example; retain all four valid rejected public additions and advance only36-to40 census. Public70/40/0, parent69/36, migration11/three actual REDs; scanner17 paths/27 lines/51 strict denials; final book89/3 and fresh isolated historical183 inputs/134 restored/22 recovery/80 evolution denials pass. Original and initial publications replay exact inputs. The draft192/135 wrapper refuses after retaining inner success; nine supplementary capsule inputs explain192 versus actual183, and unused scanner historical branches are removed. Original native/runtime proof unchanged. Final composed publication/Knowledge1346/10319 and fresh exact attempt04 receipt/normal hooks govern landing; no admission is inferred from failed03.

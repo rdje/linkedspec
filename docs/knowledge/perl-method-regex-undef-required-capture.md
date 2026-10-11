@@ -12,7 +12,7 @@ date: 2026-10-10
 status: bounded composed proof verified; ordinary landing and broader admissions separate
 tags: [perl, actionir, callbacks, capture, aliases, regex, return]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2 verifies619 main/23 cold,24 exact native-current callback rows,32 branches/four public Toolbox rows, six semantic faults, supplied60 suites/182 files, evidence5/original303 restoration and full book89/three controls. Immutable179-file native capsule precedes182-file paired assertions:24 original isolation REDs/595 controls/all619 current GREEN. Original final-owner fault-generator failure and exact delimiter repair are retained; no broader admission."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly. Capture/freezer/faults/fault-boundary/evidence/--capture are one-shot writers. Earlier push commands require accepted ae65603bc5bee1f3abeab4d7a028546ddbc8da93 Git inputs including original live claim."
+reverify: "These regex/undefined-return commands require accepted2b4e484a9bf27471d23d86f72aa25c7616b2bd3b Git inputs after later source/book changes, including original live claim. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-final-review.py; separately preservation-control.py and publish-claim.py under that wrapper. Defaults readonly. Capture/freezer/faults/fault-boundary/evidence/--capture are one-shot. Earlier push commands require accepted ae65603bc5bee1f3abeab4d7a028546ddbc8da93 inputs."
 ---
 
 Regex substitution eagerly requires scalar extraction, delimiter stripping and

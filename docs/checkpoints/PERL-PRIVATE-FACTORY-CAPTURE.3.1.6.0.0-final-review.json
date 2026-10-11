@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "producer_sha256": "fd7c5574f619d94364c5ffdebe72bf4f0f741f1f9afe55a7d82c6c1d1bfbad20",
+  "checked": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-before-regex-undef.json": "daa56b047458682d579aebf738e069f826dbb1739f5f687fbe589256ee0161f1",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-before.json": "ee1f40c37171e96d3e9aed7faa558c5d4486e7e34f1b9c55d2d13d7de2ae8692",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-review.json": "6b6d97ec820a8536c64612482bf5fefb88bd4f76957cafeb2545df93b28a8701",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-review.py": "fa61cb71deacded480cc1d58db528bd3fd832c31aee91bb1d3856f6630a116e9",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book.json": "a651c3a7dcc3ad7d58afb0d8365a88aa880961aa58bab708fd60523ac3fb6bfd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book.py": "d8aaa4bdba58e77ec68483b4dc497c35b620945c7f5f2f30fc72b8246344c0e7",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-consumers.json": "c9a868e1487cc9d96c876e821d9b843c6a14b65a4b96360c94ec28f7a4a29e2e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-evidence.json": "9a6185189728422f2c006e39315d14f9fd5da70ad3d8a2cb221aa2b3e086d141",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-evidence.py": "362a0cc6d900ea6129dbc8ec8a13b2c8ee80d2a963668c0bcaa6444652986b20",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-fixture.json": "76530da4ef715a096be84c64e4bc1baa8605058bcd9b40efa9f1738d7ad4ef6c",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-freeze.json": "679696d303a524193eebf5135c70140b2fa8e432b313eb8deed654ea23b4dd7d",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-inverse-borrow-reference.json": "10a95877564ca5d3dea0b6b41409b4b7c1ca13f66a2e47b4fa2079455c7f42f7",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-inverse-ignore-tail.json": "50577867f9cd1c28586b28328fdb65129efbb3604d68dbaf7126c7cde02babd7",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-inverse-remove-fix.json": "f0d3131b2b1862eecfd8085839f0b6d9ad0f34555425c8e1ed5add51feaa3d06",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-inverses.json": "f1f185263187f66d2e89eae0b2d8bc5a58a0a5ccf9e4597ee958f396d8a8580e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-native.json": "6b8ba9dbe6df9e40e9c94c4e0b2bf44cd907063cd485bd5ea3969ae7736c2158",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-preservation-control.py": "138c7dcbd211219affa9914a77308d1f44333cac1ea6132293904a905ba6ca87",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-review.json": "cb7f7cfe86f76b65a2b1d9efd8b9fbaa9ef47e0c865bdd06d32a276560be5ca9",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-review.py": "ac2d1c9a9b3fa894fdcb86db51df10e87b96d1047054a5e2d18b9d1b40874dbc"
+  },
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "UmVjZWl2ZXItY29weSByZXZpZXcgUEFTUzUwOyBwYWlyZWQ5UkVELzQxY29udHJvbHMvNTBHUkVFTjsgcm91dGVzIGxpdmUvc3RhbmRhbG9uZS90eXBlZDsgZmF1bHRzOS80Lzg7IGNvbnN1bWVyczYxLzE4NDsgb3JpZ2luYWwzMDcgcHJlc2VydmVkCg==",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-book-review.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL3RocmVlIGFjdHVhbCBjb250cm9sczsgZXhhY3QgaW5wdXQgYW5kIHJlbmRlcmVkIHRlYWNoaW5nIGlkZW50aXRpZXMK",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0-preservation-control.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "SGlzdG9yaWNhbCBwcmVzZXJ2YXRpb24gY29udHJvbCBQQVNTOiBhY3R1YWwgb3JpZ2luYWwtYmluZGluZyBSRUQvcmVzdG9yZWQgcmVhZG9ubHkgUEFTUwo=",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Fresh actual readonly runtime/book/preservation reviews and exact five evidence-control counterfactual/channel identities. Original307 bindings remain exact. Complete native live/standalone14-case ledgers, identical50 TAP and three effective source faults admit one scalar-bound single-step copy dispatch. Typed source fields are independently poisoned. Original probe/regression/channels remain unchanged; no legacy callback or broader factory admission."
+}

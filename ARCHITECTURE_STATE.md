@@ -404,7 +404,7 @@ authoring examples elsewhere remain correctly selector-free.
 two rejected examples, and five ordered non-identity mappings whose old side contains a removed one-identifier
 selector and whose replacement does not. Eleven in-memory mutations prove collapse, omission, wrong replacement,
 selector retention, and reordering fail independently of the public occurrence census. That checkpoint proved 61 public
-files / 32 classified historical references / zero current examples. The current census is 69/36/0, with zero executable selector positives.
+files / 32 classified historical references / zero current examples. The current public census is 70/40/0; executable selector admission is checked separately.
 No parser, compiler, runtime, `.spec`, generated format, capability, or public API behavior changes; `.23.2` owns
 the remaining current-status reconciliation and parent closeout.
 

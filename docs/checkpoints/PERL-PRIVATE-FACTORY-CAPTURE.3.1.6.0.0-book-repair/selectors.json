@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "producer_sha256": "ba8df149c3cee886eb2abdd90cdd34e3ddddd184eaf2eb77610ee98bc7bd0e20",
+  "rows": [
+    {
+      "name": "original",
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util\nfrom pathlib import Path\nspec = importlib.util.spec_from_file_location('selector', 'tools/check_public_aggregate_selector_surface.py')\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nmodule.ROOT = Path.cwd()\nprint('classified references:', module.check_exact_references([module.ROOT / 'docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md']))\n"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "cHVibGljLWFnZ3JlZ2F0ZS1zZWxlY3Rvci1zdXJmYWNlOiBkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL2FjdGlvbmlyLWxvd2VyaW5nLW1lbnRhbC1tb2RlbC5tZDoxMzQ3IHByZXNlbnRzICdhcnJheShtZXRhKScgd2l0aG91dCBleHBsaWNpdCByZW1vdmVkL3JlamVjdGVkL21pZ3JhdGVkIGhpc3RvcmljYWwgY29udGV4dAo=",
+      "inputs": {
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md": "2bf18f9be7425acf774a4a2f0002e28d6cbd3f95ef4adbc6e58e2195124e50e3",
+        "tools/check_public_aggregate_selector_surface.py": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808"
+      },
+      "unchanged": true
+    },
+    {
+      "name": "current",
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util\nfrom pathlib import Path\nspec = importlib.util.spec_from_file_location('selector', 'tools/check_public_aggregate_selector_surface.py')\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nmodule.ROOT = Path.cwd()\nprint('classified references:', module.check_exact_references([module.ROOT / 'docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md']))\n"
+      ],
+      "returncode": 0,
+      "stdout_base64": "Y2xhc3NpZmllZCByZWZlcmVuY2VzOiAzCg==",
+      "stderr_base64": "",
+      "inputs": {
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md": "a777078731646a859dcfcc424fb136f357978e4348fc6a170cf55aab3e47db31",
+        "tools/check_public_aggregate_selector_surface.py": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808"
+      },
+      "unchanged": true
+    },
+    {
+      "name": "inverse",
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util\nfrom pathlib import Path\nspec = importlib.util.spec_from_file_location('selector', 'tools/check_public_aggregate_selector_surface.py')\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nmodule.ROOT = Path.cwd()\nprint('classified references:', module.check_exact_references([module.ROOT / 'docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md']))\n"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "cHVibGljLWFnZ3JlZ2F0ZS1zZWxlY3Rvci1zdXJmYWNlOiBkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL2FjdGlvbmlyLWxvd2VyaW5nLW1lbnRhbC1tb2RlbC5tZDoxMzQ3IHByZXNlbnRzICdhcnJheShtZXRhKScgd2l0aG91dCBleHBsaWNpdCByZW1vdmVkL3JlamVjdGVkL21pZ3JhdGVkIGhpc3RvcmljYWwgY29udGV4dAo=",
+      "inputs": {
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md": "2bf18f9be7425acf774a4a2f0002e28d6cbd3f95ef4adbc6e58e2195124e50e3",
+        "tools/check_public_aggregate_selector_surface.py": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808"
+      },
+      "unchanged": true
+    }
+  ],
+  "scope": "Existing classifier on this exact private-AST chapter; original and exact inverse reject, prose repair preserves its three existing classified historical mentions and removes the unclassified synthetic example. No full public inventory/runtime/capability admission is inferred; canonical CI separately composes those checks."
+}
