@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 — Isolate required hash callbacks
+
+Bind one required trim/parser resolver return, preserving eager selection, substring effects, shared returned references, maps/context/errors and fatal identity. Native8/branches52 precede paired308:6 original authority REDs/302 controls/all308 GREEN. Five source faults, supplied64/199/12623, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with complete channels; normal focused landing gates govern acceptance; full scope: docs/knowledge/perl-array-receiver-required-capture.md.
+
 ## 2026-10-11 — Repair the current ADR0133 review command
 
 Replace the stale historical-only pointer with a current readonly reviewer; retain all377 accepted bindings and actual395-input original publication recovery. Three current-reviewer RED/restorations and book89/three controls pass; both failed recovery drafts remain retained. No capacity or runtime change. Owner: PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.

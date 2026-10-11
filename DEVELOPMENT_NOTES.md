@@ -10,6 +10,8 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Required hash capture retains eager parser selection and actual shared call references without source annotation; splitter mutation and copy/family guards stay native. Full rationale: docs/knowledge/perl-array-receiver-required-capture.md.
+
 ## 2026-10-11 — Historical publication recovery includes historical reader inputs
 
 A live binding list is insufficient when a producer also reads preserved historical inputs: ADR0133 recovery needs17 hygiene inputs alongside377 live bindings and its full claim. Preserve complete failed drafts before correcting a recovery population or loop shadow. Exact original producers/observations stay fixed; current readonly command and proof: docs/knowledge/finite-engineering-notes-member-0131.md.

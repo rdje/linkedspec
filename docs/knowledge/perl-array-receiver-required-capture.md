@@ -1,6 +1,6 @@
 ---
 id: perl-array-receiver-required-capture
-title: Required array, number and string receiver callbacks preserve native effects
+title: Required array, number, string and hash receiver callbacks preserve native effects
 answers:
   - "which required callbacks does the array receiver normalizer acquire"
   - "can trim replace the array normalizer parser after selection"
@@ -15,13 +15,18 @@ answers:
   - "are shared parser returned call references preserved"
   - "can trim replace the selected number or string parser"
   - "where is required number and string callback isolation verified"
+  - "which required callbacks does the hash receiver normalizer select"
+  - "does the hash receiver annotate shared parser returned calls"
+  - "can hash required trim replace the already selected parser"
+  - "where is required hash callback isolation verified"
 date: 2026-10-11
 status: focused receiver proof verified; related facts consolidated within the existing card limit
 tags: [perl, actionir, receivers, callbacks, aliases, publication]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1 retains immutable189-input first-native8 callback outcomes/34 branches/4 authority rows/2 public source rows/2 cold rows. Identical215 TAP has6 original authority REDs/209 controls/all215 current GREEN. Five syntax-valid full-module faults fail6/2/4/3/4. Actual supplied62 suites/191 inputs/11879 assertions book89/three controls and seven actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035 with complete channels and no full transitive input capsule. Original322 predecessor bindings stay historical atc90b99a83. Original consumer wrapper outer1 is distinct from its actual inner PASS; separate path-complete review checks every command/header/plan and predecessor diagnostics. Number/string boundary: PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2 retains immutable193-input native16 callback outcomes/73 branches/8 actual authority rows/4 public source/4 cold rows. Identical436 TAP has12 original authority REDs/424 controls/all436 current GREEN. Five separate syntax-valid source faults for each owner fail6/2/4/3/4 for number and6/2/6/3/4 for string. Supplied63 suites/195 inputs/12315 assertions, seven actual evidence RED/restorations and full book89/three controls pass. Original314 predecessor bindings remain historical at5bf068c92."
 reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-publish-claim.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-publish-claim.py"
-  - "Earlier array proof requires accepted5bf068c92 Git inputs. Current original-publication replay supplies its exact logical inputs. Capture/freezer/fault/evidence writers are one-shot; native/runtime observations are never refreshed."
+  - "Earlier array/scalar proofs require their accepted Git inputs (array5bf068c92, scalar d8418423e). At each earlier accepted boundary, its original-publication replay supplies exact logical inputs. Capture/freezer/fault/evidence writers are one-shot; native/runtime observations are never refreshed."
 ---
 
 This stable card covers related required receiver callbacks. Earlier array proof
@@ -146,3 +151,41 @@ compatibility record has no full transitive input capsule, benchmark or broader
 private/canonical admission.
 Canonical focused-fixture registration stays scheduled under `.7`, before pipeline
 activation `.6`; this proof establishes no independent canonical coverage.
+
+## Hash receiver required callbacks
+
+The hash normalizer eagerly selects required trim and method parsing before its
+first trim or input guard. Only its required resolver return changes to bind each
+actual callback in a separate private capture. Known children retain authority by
+actual reference; opaque children cannot donate publication to the normalizer.
+Public maps, scalar contexts, successful error state and fatal-object identity
+remain native. The optional kind callback was already isolated by its earlier
+repair and stays unchanged here.
+
+Controlled trim mutation retains actual splitter substring effects: returning the
+incoming text and appending `!` shifts the later `sorted_keys()` call text to
+`.sorted_keys()`, which is declined. The caller's original source stays intact.
+The hash owner does not annotate the actual parser-returned call object. A shared
+`pick_keys(a)` object returned for both calls in
+`meta.pick_keys(a).drop_keys(b)` remains the same reference twice and produces
+`pick_keys(pick_keys(meta, a), a)`. Parser replacement from trim cannot change the
+already selected callback. Existing copy-kind/lookahead, arity, hash/array-family
+and terminal guards remain native; cold require-only calls do not load emissions.
+
+PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 retains immutable197-input native8 callback
+outcomes/52 branches/4 authority/2 public-source/2 cold rows before assertions or
+source edits. Identical308 TAP retains6 original authority REDs/302 controls and
+all308 current GREEN. Five complete syntax-valid source faults fail6/2/4/5/8.
+Supplied64 suites/199 inputs/12623 assertions, seven actual evidence
+RED/restorations and complete book89/three controls pass. Complete producer/input
+identities and channels remain under
+`docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-`.
+Earlier observations and all115 predecessor bindings remain historical at e4507973a;
+no native instrument or old observation is refreshed. The public Toolbox rows
+verify generated source only. Optional/direct and broader independent admissions
+remain open; canonical fixture registration .7 precedes pipeline .6.
+
+Supplemental standard syntax and public Phase0 pass1035 with complete channels
+retained in `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-compatibility/`. This is a live
+compatibility check, with no full transitive input capsule, benchmark or broader
+private/canonical admission.

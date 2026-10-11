@@ -1,0 +1,34 @@
+{
+  "base": "e4507973aff0a4ebcd09299d971a8d78a86c10b1",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-before-command-repair.json",
+  "original_sha256": "7331039015f3c064d6f43d4a79b977e9df3e5f6a523fa6f50b6c1f358287d163",
+  "after_sha256": "f0b67d819983ff7a387730641133e56b8c5225170d5d6c3f05c96b7420bd145c",
+  "producer_sha256": "eca6e51a73ba0095c60a586780449aab77141c75830365d2755ea8d346313ba4",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+    "docs/knowledge/perl-array-receiver-required-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "name": "current-admission-review-command",
+      "bindings": 115,
+      "intersections": [
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md"
+      ]
+    }
+  ],
+  "scope": "All115 accepted live bindings and the full original claim are preserved before source/book/card writes. Only first live durability mode/revision changes; the separate395-input historical recovery claim and all old fields/producer/hash/observations remain exact. Every live record was checked for intersections."
+}

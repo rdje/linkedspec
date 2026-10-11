@@ -767,15 +767,19 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1 - repair the current admission review command`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`
-  Status: `pending`
+  Status: `done` / focused proof verified; normal hooks govern landing
   Goal: Isolate hash receiver required callbacks while preserving actual native behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1`
   Owned paths: Only required resolver returns in _normalize_hash_receiver_value_chain_expr; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
-  Planned tier: `focused`
-  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
-  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
-  Planned claim record: none: Planning only; declare measurement at activation.
+  Verification tier: `focused`
+  Focused checks: Preserve every intersecting live claim before bound writes. Retain actual native acquisition order/required role inventory, source and caller guards, aliases/context/error/fatal/maps/results and shared returned references; complete native/current ledgers, identical paired RED/GREEN, effective whole-source faults, path-complete supplied consumers, actual evidence controls/book and standard syntax/public Phase0. Ordinary doctrine/history/Knowledge/memory/whitespace checks and normal hooks govern landing.
+  Canonical trigger: none for bounded private required-resolver capture; optional/direct, independent admissions and canonical fixture registration .7 remain separately owned.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json`
+  Activation: Clean e4507973aff0a4ebcd09299d971a8d78a86c10b1, all10 normal hooks/post-pointer/brief0 and clean Git verified after the command-repair prerequisite. Both required roles are selected before trim; the already repaired optional kind callback remains separate. Relevant hash-family and required receiver cards, caller/normalizer code and book callback sections reviewed. Enumerate all live intersections and preserve their original full claims before source/book/card writes; no native observation or source edit yet.
   Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+  Focused implementation evidence: All-live preservation selected exactly the115-binding current-review-command claim; its full claim and actual accepted publisher PASS are retained before bound writes, with only live mode/revision converted at e4507973a. Immutable197-input native8 callback/52 branch/4 authority/2 public-source/2 cold rows precede authored308 TAP and the exact one-return edit. Original6 authority REDs/302 controls become all308 GREEN. Five full syntax-valid faults fail6/2/4/5/8. Supplied64 suites/199 inputs/12623 assertions, seven actual evidence RED/restorations and full book89/three controls pass. Shared actual call references have no hash-owner source annotation; eager parser replacement, substring effects, kind/copy/arity/family/terminal guards remain exact. Standard syntax/public Phase0 passes1035 with full channels and readonly321-input/75495-byte publication passes; ordinary landing gates govern acceptance; no broader admission is inferred.
+  Signoff evidence: Required hash .3.1.6.3 binds one resolver return and preserves eager trim/parser selection, substring effects, actual shared call references without annotation, maps/context/errors and fatal identity. Immutable native197/8 callbacks/52 branches/4 authority/2 public-source/2 cold precedes paired308:6 original authority REDs/302 controls/all308 GREEN. Five full-source faults fail6/2/4/5/8; supplied64 suites/199 inputs/12623 assertions, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly321-input/75495-byte publication passes. Normal focused hooks govern landing before array-end .3.1.6.4. Optional/direct, independent admissions and TYPE-REFERENCE-BOOK remain queued; fixture registration .7 precedes pipeline .6.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 - isolate required hash receiver callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4`
   Status: `pending`
@@ -884,14 +888,13 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` | `pending` | Required hash callbacks follow the review-command repair. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` | `pending` | Required array-end parser callbacks. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
-| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 8 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` | `pending` | Required array-end parser callbacks. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
+| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
 
 
 
@@ -1188,7 +1191,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Full mdbook build proof89/three controls passes; historical producers and observations remain exact. Parent canonical CI/public Phase01035/CLI66 per environment passed at d95a25c8b. This ordinary documentation repair requires focused checks and normal hooks, with no new runtime admission claim.
 - [x] **LOCKSTEP** — Readonly publication115 live/395 historical inputs/121873 bytes, reused Knowledge card, roadmap/index/live/MEMORY and bounded histories align. Ordinary doctrine/memory/whitespace checks and all normal commit hooks govern landing before hash activation.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3
+
+- [x] **REPRODUCE / ISSUE** — Immutable first-native197-input inventory retains8 callback outcomes/52 branches/4 actual authority/2 public-source/2 cold rows before assertions or source edits. Original paired308 TAP has6 named authority failures and302 passing controls.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The required hash resolver returns raw children, allowing parent capture to receive their publication. Eager trim/parser selection, actual splitter aliases, caller maps and parser-returned shared objects are independently retained; hash owner adds no source annotation.
+- [x] **FIX** — Only the one required resolver return binds the actual callback with _bind_emission_dependency; optional kind handling and every other Module byte remain accepted Git-exact.
+- [x] **ADDRESSED (verified)** — Identical308 current assertions pass; actual opaque/known child eligibility and zero parent packet distinguish isolation from wrapper identity. Five complete syntax-valid faults fail6/2/4/5/8; seven actual evidence REDs each restore.
+- [x] **NO REGRESSION** — Path-complete supplied64 suites/199 inputs/12623 assertions, native value/alias/context/error/fatal/maps/shared-reference/copy-family/terminal controls and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; no full transitive input capsule or broader admission is claimed.
+- [x] **LOCKSTEP** — All115 original bindings/full claim remain historical at e4507973a without refresh; the actual accepted publisher baseline and mode/revision-only reconstruction pass. Readonly321/75495 publication, reused Knowledge card, book/roadmap/index/live/MEMORY and bounded histories align. Normal focused gates/hooks govern landing before .3.1.6.4.
+
 ## Verification Log
+
+- `2026-10-11`, `.3.1.6.3`: Required hash .3.1.6.3 binds one resolver return and preserves eager trim/parser selection, substring effects, actual shared call references without annotation, maps/context/errors and fatal identity. Immutable native197/8 callbacks/52 branches/4 authority/2 public-source/2 cold precedes paired308:6 original authority REDs/302 controls/all308 GREEN. Five full-source faults fail6/2/4/5/8; supplied64 suites/199 inputs/12623 assertions, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly321-input/75495-byte publication passes. Normal focused hooks govern landing before array-end .3.1.6.4. Optional/direct, independent admissions and TYPE-REFERENCE-BOOK remain queued; fixture registration .7 precedes pipeline .6.
 
 - `2026-10-11`, `.3.1.6.6.1`: Review-command repair .3.1.6.6.1 replaces only ADR0133's stale pointer and related current guidance. All377 accepted bindings remain historical at d95a25c8b, whose canonical CI and normal hooks passed. Actual accepted-publication recovery supplies395 files (377 live bindings,17 historical hygiene inputs and its full claim), rejects changed ADR/omitted input and restores PASS. Three current-reviewer REDs each restore; book89/three controls and readonly115-input/121873-byte publication pass. Both failed recovery drafts remain exact with their observed limits; no original producer/hash/observation refresh or runtime/capacity change. Required hash .3.1.6.3 follows this focused commit; TYPE-REFERENCE-BOOK and independent admissions remain queued.
 
@@ -1247,6 +1261,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.3.1.6.3`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 - isolate required hash receiver callbacks`, activated from clean e4507973a; focused proof and standard compatibility verified, normal hooks govern landing.
+
 - `.3.1.6.6.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1 - repair the current admission review command`, activated from clean d95a25c8b; focused proof and normal hooks govern landing.
 
 - `.3.1.6.6`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6 - admit one finite engineering-history member`, from clean d8418423e; exact staged canonical receipt required; no push.
@@ -1290,6 +1306,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- `2026-10-11`, `.3.1.6.3`: Required hash .3.1.6.3 binds one resolver return and preserves eager trim/parser selection, substring effects, actual shared call references without annotation, maps/context/errors and fatal identity. Immutable native197/8 callbacks/52 branches/4 authority/2 public-source/2 cold precedes paired308:6 original authority REDs/302 controls/all308 GREEN. Five full-source faults fail6/2/4/5/8; supplied64 suites/199 inputs/12623 assertions, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly321-input/75495-byte publication passes. Normal focused hooks govern landing before array-end .3.1.6.4. Optional/direct, independent admissions and TYPE-REFERENCE-BOOK remain queued; fixture registration .7 precedes pipeline .6.
 
 - `2026-10-11`, `.3.1.6.6`: Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
 

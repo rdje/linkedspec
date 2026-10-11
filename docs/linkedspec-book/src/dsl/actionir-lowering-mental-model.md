@@ -1634,6 +1634,32 @@ Number callbacks likewise retain their actual returned references. Both owners
 preserve ordinary values, contexts, errors, fatal-object identity, public maps
 and require-only lazy loading while isolating opaque publication.
 
+Required hash receiver callbacks retain eager trim/parser selection and separate
+child capture. Both required roles are validated before any trim or input guard;
+replacing the parser in the dependency map during trim leaves the selected
+callback intact. Missing/non-CODE dependencies retain the existing diagnostic.
+Ordinary values, scalar contexts, error state, fatal objects and public callback
+references remain native, and require-only calls keep SourceEmissions lazy.
+
+Hash trim callbacks receive actual splitter substring arguments. A controlled
+trim that returns its incoming text and appends `!` through the argument makes
+the later `sorted_keys()` call text become `.sorted_keys()`, which is declined;
+the caller's `meta.sorted_keys()` remains unchanged. Parser-returned hash objects
+retain their actual references without a source annotation. For example, an
+injected parser returning one shared `pick_keys(a)` object for both calls in
+`meta.pick_keys(a).drop_keys(b)` produces `pick_keys(pick_keys(meta, a), a)`.
+These are callback-injection contracts, not new language features.
+
+Existing hash/array transitions remain intact: `meta.sorted_keys().join_values("-")`
+normalizes to `join_values("-", sorted_keys(meta))`, and
+`meta.sorted_values().sum()` normalizes to `sum(sorted_values(meta))`.
+Copy selection still uses the established explicit receiver, remembered kind
+and next-family guards; terminal continuations and wrong arities are declined.
+The required callback capture prevents opaque child publication from reaching
+the enclosing normalizer and retains known-child authority by actual identity.
+Optional/direct dependencies and broader private/canonical admission remain
+separately owned.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is
