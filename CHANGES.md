@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0 — compiled remaining-call inventory
+
+Read-only MethodLowering inventory retains108 source/compiled named functions,218 CVs,812 executable CODE sites and207 lexical bindings. Thirteen generated-string candidates are excluded;17 ingress sites are assigned to eight bounded fix leaves. The original212-input dropped-value diagnosis confirms an inline required trim gap, scheduled first under .3.2.1.1. Source and all211 accepted consumer inputs remain unchanged.
+
+Independent compiler/source review, three syntax-valid compiled-source and three membership/binding/family REDs with restoration, exact original reviewer failure/correction, original355/full120239 publication/baseline preservation, full book89/three controls and focused evidence establish this static scope. Book, reused Knowledge cards and current projections explain the remaining native contracts; stale trim/index routing is repaired. Runtime/full-private/parent/canonical admission remains separate. Normal focused doctrine/hooks govern landing.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 — Isolate the legacy package-flow callback
 
 Bind the actual direct package-flow invocation without changing its CODE guard or substituting a map dependency. Preserve the actual trimmed-slot alias, scalar context, callback/map references and replacement, fallback/equality rules, error effects and fatal/result identities. First native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six full-source faults, final supplied67/211/13660, seven actual evidence RED/restorations and book89/3 pass. Original350/full84391 publication stays exact. First indentation/reviewer-count denials and scope-wording correction remain explicit with exact instruments/channels and distinct final captures, without native refresh. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly355-live-input/120239-byte publication and ordinary focused commit checks govern landing. Scope and readonly proof: docs/knowledge/perl-method-slot-required-capture.md.

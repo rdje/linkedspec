@@ -1,0 +1,13 @@
+{
+  "returncode": 1,
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py",
+    "--capture"
+  ],
+  "channel": "shell-merged-stdout-stderr",
+  "merged_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtcmV2aWV3LnB5IiwgbGluZSAxODgsIGluIDxtb2R1bGU+CiAgICBtYWluKGJvb2woc3lzLmFyZ3ZbMTpdKSkKICAgIH5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtcmV2aWV3LnB5IiwgbGluZSAxNjcsIGluIG1haW4KICAgIHJlc3VsdCA9IGF1ZGl0KChST09UIC8gTU9EVUxFKS5yZWFkX3RleHQoKSwgbmF0aXZlX3Jvd3NbJ25hdGl2ZSddLCBuYXRpdmVfcm93c1snb3B0cmVlJ10sIGludmVudG9yeSkKICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgOTcsIGluIGF1ZGl0CiAgICBhc3NlcnQgbGVuKG9ic2VydmVkKSA9PSA4MTIsICdkeW5hbWljIGludm9jYXRpb24gcG9wdWxhdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogZHluYW1pYyBpbnZvY2F0aW9uIHBvcHVsYXRpb24K",
+  "producer_sha256": "124ae5d8dd0c5419f52a38860a2e2bb5aea613a50e9c8ebb5b000261d93e5b4e",
+  "limit": "Original shell used 2>&1; separate stdout/stderr is unavailable. No observation or production input changed."
+}

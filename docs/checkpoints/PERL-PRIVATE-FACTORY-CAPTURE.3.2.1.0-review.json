@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "summary": {
+    "functions": 108,
+    "cvs": 218,
+    "variable_calls": 810,
+    "dynamic_calls": 812,
+    "bindings": 207,
+    "remaining_sites": 17,
+    "classes": {
+      "already-bound-dependency": 359,
+      "already-bound-direct": 1,
+      "boundary-cold-fallback": 1,
+      "local-helper-closure": 338,
+      "local-required-resolver": 96,
+      "remaining-formal-trim": 4,
+      "remaining-inline-required": 1,
+      "remaining-named-code-dispatch": 1,
+      "remaining-optional-ast": 2,
+      "remaining-optional-kind": 7,
+      "remaining-predicate": 2
+    }
+  },
+  "native_input_union": 214,
+  "producer_sha256": "ec3082cd3fb9b82b935ae997d9029c91e8017a81050ab4d9e6f0389a3140a81f",
+  "inventory_sha256": "4857ff7e31e9ffb85b906fd50409d6a912859877a2a034f7382cd8dbecd197dd"
+}

@@ -873,15 +873,133 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 - isolate package-flow callback`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Remaining MethodLowering optional/direct dependency families; refine and split actual callers before writes.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0`
-  Owned paths: All remaining MethodLowering optional/direct calls, bounded proof/claim, Knowledge/book/continuity. Required and package-flow boundaries retain their earlier owners.
+  Owned paths: All remaining MethodLowering optional/direct calls, bounded proof/claim, Knowledge/book/continuity. Accepted required-resolver and package-flow proofs retain their earlier owners; the newly diagnosed inline-required direct call belongs to child .3.2.1.1.
   Planned tier: `focused`
   Planned focused proof: Actual native/public callback identities, contexts/aliases/effects/errors and opaque publication isolation; retained source faults/consumers, input/evidence controls, book and standard compatibility.
   Planned canonical boundary: none for bounded private implementation; original independent admissions remain open.
   Planned claim record: none: Planning only; declare measurements at activation.
   Acceptance: Commit each bounded family before FlowExpr and infer no separate parent admission.
+
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families.
+
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
+  Status: `done` / focused static inventory
+  Goal: Produce the exact remaining MethodLowering optional/direct callback inventory and split bounded implementation families before production writes.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0`
+  Owned paths: Read-only MethodLowering/accepted consumer sources; source-bound native/static inventory instruments and claims/checkpoints; trim/slot Knowledge cards, relevant architecture book section and continuity. No production or runtime-test edit is owned by this inventory leaf.
+  Verification tier: `focused`
+  Focused checks: Preserve every intersecting live binding/full accepted publication and actual readonly baseline before bound documentation writes. Retain first compiled/source observations before census assertions; independently reconstruct actual variable-call and already-bound/required/optional/direct classifications, source identities and complete populations. Exercise syntax-valid omission/addition/binding and reason-sensitive artifact controls, full book rendering and unchanged accepted production/consumer input hashes. This documentation/diagnostic inventory changes no action-rewriter runtime; reuse accepted .3.2.0 standard compatibility without claiming new runtime admission. Ordinary doctrine/history/Knowledge/memory/whitespace checks govern landing.
+  Canonical trigger: none for read-only source inventory and documentation; reclassify before runtime/public/API/format or mechanical infrastructure writes.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json`
+  Activation: Clean91e972cfa0d214784b0172828f7baa378c25f23e; all10 doctrines/post-pointer/post-memory/brief0 and clean Git verified. Original implementation protocol, scoped roadmap/task contracts, relevant default/trim/block/slot canonical cards, Toolbox and current book reviewed. Exact remaining families are not yet known. Activation-only task/MEMORY census finds no live intersections. Preserve original355 live/172 historical bindings/full120239-byte publication and actual accepted publisher baseline before changing bound book/slot card. Use current accepted consumers-final.json, not its preserved pre-indentation predecessor. No Knowledge slot remains; reuse cards.
+  Owned continuity defect: P3 trim card still projects required .3.1.2.1-.6 as next and labels old block/book commands current. Reproduce by its final frontier paragraph/reverify field versus committed MEMORY and the completed required nodes. Impact: a fresh session may select completed work or run historical reviewers against later source/book. Correct current routing in this leaf while retaining dated proof/accepted historical requirements; do not invent a new acceptance revision.
+  Additional owned continuity defect: P3 task-index parent row still projects required .3.1.6.5 as the next optional .3.2.0 work despite committed package-flow .3.2.0; reproduce at docs/TASK_TREE.md's SPEC-LANGUAGE-SELF-CONTAINMENT row. Align this current private-activity projection with the verified inventory and .3.2.1.1 next; preserve earlier parent obligations.
+  Owned instrument defect: P3 first reviewer descends through the outer returned-CODE callee into its ordinary named binder, reporting only811 dynamic sites. Exact first source/actual merged shell exit1 are retained. Correct traversal to stop at returned CODE, independently reconstruct the correction and original reason, and retain every native observation unchanged.
+  Result: Independent read-only compiler/source review PASS108 named functions/218 CVs/812 CODE sites/207 bindings/17 remaining ingress sites, with thirteen generated-string exclusions. Three syntax-valid full-source controls and three membership/binding/family controls each reject with the named reason and restore. Exact original reviewer/merged exit1 and sole returned-CODE traversal correction reproduce independently. The original212-input required-trim diagnosis is unchanged and fixes under .1 first. All211 accepted runtime inputs stay exact; no runtime source/test change or new runtime gate.
+  Preservation: Actual accepted publisher baseline and full120239-byte three-claim record preserve every355 original live binding plus both172 prior historical bindings; only its one live mode/revision pair becomes historical91e. Two evidence interventions reject forged original fields beyond updated freeze SHA and false native diagnosis, each exact restoration passes. No native observation/hash refresh.
+  Verification: Full supplied book57+32/three controls PASS; readonly339-live-input/78574-byte claim PASS. Stale trim-card/index routing repaired, slot commands historical91e, eight bounded fix leaves/native contracts recorded. Both chronology checks, derived Knowledge, explicit memory architecture/whitespace and final normal focused doctrine hooks govern landing. Accepted .3.2.0 standard compatibility is reused for unchanged runtime; no complete helper/private/parent/canonical admission.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0 - inventory remaining callback ingress`
+  Acceptance: Every actual remaining caller is assigned to a bounded child with its native selection/context/alias/result/error requirements before implementation; current production and accepted runtime artifacts stay byte-identical. Commit this inventory before activating the first family. No complete helper/language/private/parent/canonical admission follows from a static or compiled census.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1`
+  Status: `pending`
+  Goal: Isolate the inline-validated required trim call in _lower_dropped_value_statement, preserving actual selection, guards, aliases, diagnostics, AST/method fallbacks and values/errors.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
+  Owned issue: P2 direct required callback gap confirmed by the remaining-call inventory. This helper reads trim directly from the caller map, validates CODE inline and invokes it without the private binding; the earlier required-family implementation covered resolver-return seams. Reproduce with the current inventory's gap-probe.pl under the accepted211-input capsule, using actual opaque/known trim publication and explicit AST/unknown-helper/method controls. Actual original212-input diagnosis retains two opaque/known rows: both execute once in scalar context, return do { LOWERED; undef }, retain the actual map reference, report eligibility[1] and donate the parent packet. Root cause: inline map selection/CODE validation bypasses the already-bound required resolver return. Impact: an opaque trim can borrow enclosing eligibility and donate equal-text publication at this private dependency boundary. No authored-language failure is inferred. Inventory owns the exact first diagnosis/source/channels; this child owns the verified fix immediately afterward. Readonly reproduction uses the gap probe with accepted91e972cfa0 runtime inputs; all later assertions must retain the original two-row observation.
+  Owned paths: Only the direct required trim invocation/selection in _lower_dropped_value_statement, bounded native/counterfactual/fault/consumer/book/claim and continuity proof. No resolver guard or public callback-map change.
+  Planned tier: `focused`
+  Planned focused proof: Original/current native callback selection, actual local alias and context/error/fatal/result identities, required CODE/input/AST/unknown-helper/fallback ordering, opaque/known publication, effective source/evidence controls, supplied consumers/book and standard compatibility.
+  Planned canonical boundary: none for one private call binding; escalate before public/API/format/infrastructure movement.
+  Planned claim record: none: Declare the actual measurement record at activation after the inventory commits.
+  Acceptance: Resolve the diagnosed P2 direct-required boundary first, before optional kind/predicate/formal families, and commit before moving on. Keep every original inventory observation intact.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
+  Status: `pending`
+  Goal: Isolate small optional kind callbacks with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1`
+  Owned paths: Only _infer_assignment_source_container_kind, _uniform_binding_target_symbol and direct map dereference in _codeblock_variable_call_candidate in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Three sites; preserve actual optional map CODE selection/undefined defaults, local argument aliases, user-function names and parameter-kind early decisions, scalar results/truthiness/errors/fatal objects.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3`
+  Status: `pending`
+  Goal: Isolate giant method optional kind callbacks with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
+  Owned paths: Only _lower_method_value_expr outer base_bare_symbol_kind and inner AST-assignment bare_symbol_kind shadow in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Two distinct injected bindings; retain local outer helper and scalar-name first refusal, actual map/default references, nested aliases, optional lookup timing and AST target decisions. Do not bind all22 calls of the unrelated outer local helper.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4`
+  Status: `pending`
+  Goal: Isolate source and assignment optional kind callbacks with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3`
+  Owned paths: Only _lower_source_slot_bare_scalar_read_expr and _lower_assign_statement optional bare_symbol_kind in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Two sites; preserve reserved-name/migration and sigil guards, actual local name slots including mutation effects, original optional map/default selection and final source/assignment results.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5`
+  Status: `pending`
+  Goal: Isolate optional AST dependency callbacks with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4`
+  Owned paths: Only _lower_ast_block_side_effect_statement lower_array_pipeline_expr and _lower_ast_call_statement lower_assign_statement in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Two sites; preserve pipeline CODE guard/source/span slots and first nonempty result, assignment actual effective argument-array slots and existing local fallback thunk, guard/acquisition order and exact results/errors.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6`
+  Status: `pending`
+  Goal: Isolate mutation and write predicates with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5`
+  Owned paths: Only _receiver_mutation_target_is_tracked and _nested_write_target_is_tracked in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Two sites; validate target before map lookup, keep selected actual predicate identity and target scalar alias, once-only effects, truthiness and boolean result/error/fatal behavior.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7`
+  Status: `pending`
+  Goal: Isolate formal trim callback boundaries with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6`
+  Owned paths: Only _extract_outer_brace_payload and _split_receiver_dot_method_expr in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: Four sites in two formal-CODE helpers; preserve actual supplied callback reference and expr/receiver/call-source slot aliases, scalar context, brace/quote/dot scanning order, early guards, results/errors/fatal objects. Existing callers may pass an already-bound callback; retain native nesting.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`
+  Status: `pending`
+  Goal: Isolate selected named-helper CODE dispatch with a private emission boundary.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7`
+  Owned paths: Only _lower_block_side_effect_statement lowerer dispatch loop in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
+  Native contract: One dynamic site selecting six named helper CODE references in existing order. Keep selected reference/localization/replacement behavior, actual trimmed/deps argument slots, first nonempty return and undef/error/fatal restoration. No authority by helper name and no complete static helper admission.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.4`
   Status: `pending`
@@ -933,7 +1051,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1` | `pending` | Package-flow .3.2.0 verified; inventory and split remaining optional/direct families before writes. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` | `pending` | Verified inventory owns17 remaining sites; repair the diagnosed inline-required dropped-value trim first, preserving original native observations. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
@@ -1561,3 +1679,5 @@ beside its stable ID; Git is the commit-identity authority.
 - [x] **ADDRESSED (verified)** — Paired299 now GREEN; six complete syntax-valid source faults fail3/1/35/85/55/7. Seven actual evidence corruptions reject for named reasons and every exact restoration passes. First observations/hashes and rejected indentation/count instruments/merged channels remain unchanged; separate final runs verify the sole whitespace correction.
 - [x] **NO REGRESSION** — Final supplied67 actual paths/plans/211 inputs/13660 assertions and exact predecessor diagnostics pass. Supplemental standard syntax/public Phase01035 retains full channels without a full transitive input capsule. Complete secondary helpers/language/private/canonical admission stays separate.
 - [x] **LOCKSTEP** — Full book89/three controls, reused Knowledge1349/10375, roadmap/index/live/memory and both bounded histories align. Original350/full84391-byte claim and actual accepted publisher baseline stay exact except one live mode/revision pair. Normal focused doctrine/memory/whitespace hooks govern landing before .3.2.1.
+
+- `2026-10-11`: Remaining-call inventory .3.2.1.0 verifies108/218/812/207/17, six semantic census RED/restorations, two evidence controls, original355/full120239/actual baseline and full book89/3. Readonly339/78574 publication and unchanged211 runtime inputs preserve exact scope. Original returned-CODE reviewer failure/correction retained. Eight bounded fix leaves follow; inline required trim .1 is next after the focused clean commit.

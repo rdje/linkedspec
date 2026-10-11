@@ -1490,6 +1490,36 @@ alone keeps SourceEmissions lazy. Explicit bare-source, primitive, method and
 migration controls bound this proof; complete helper and language behavior retain
 separate admission.
 
+The remaining MethodLowering audit distinguishes dependency ingress from local
+implementation closures. A required resolver can validate and privately bind a
+callback, while an inline CODE check can still lead to a direct unisolated call.
+For example, `_lower_dropped_value_statement` currently reads and validates trim
+from the dependency map directly. A controlled probe demonstrates inherited
+eligibility and equal-text publication at that call; its required trim boundary
+is the next repair. This establishes an internal capture gap, without inferring
+an authored-language failure.
+
+The October11 compiled-source inventory records seventeen remaining call sites:
+
+| Entry form | Sites | Native behavior the repair must preserve |
+|---|---:|---|
+| Inline required trim | 1 | Existing CODE diagnostic and input/AST/fallback guard order |
+| Optional kind callbacks | 7 | Actual map selection, undefined defaults, early local-name decisions and aliases |
+| Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
+| Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
+| Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |
+| Selected named-helper CODE dispatch | 1 | Existing six-helper order, actual selected references and first nonempty result |
+
+This is a compiled syntax inventory, not successful execution of every branch.
+It includes nested anonymous closures and resolves their lexical bindings: the
+outer local `bare_symbol_kind` helper and an inner injected callback with the
+same spelling are different bindings. Generated Perl string literals containing
+callback-looking text are excluded by the compiler view. Literal local helper
+closures remain implementation code; any injected callback they invoke still
+needs its own boundary. Static named calls and complete helper behavior retain
+separate review. The already isolated hash-chain kind and package-flow calls
+are excluded from this remaining population.
+
 Generalized-return required callbacks now have separate private capture boundaries.
 The payload owner rejects an undefined input before requiring trim. The statement
 owner requires its parser before trying the AST fast path, even when that fast

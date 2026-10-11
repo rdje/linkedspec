@@ -1,0 +1,10 @@
+{
+  "producer_sha256": "3f05809ed7ebf70aa2df69b45e15c1dac71b05bdfb877b23fb1f7e52e817d195",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0-publish-claim.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "UGFja2FnZS1mbG93IHB1YmxpY2F0aW9uIFBBU1M6IDM1NSBsaXZlIGlucHV0czsgMTIwMjM5IGJ5dGVzOyBvcmlnaW5hbDM1MC9mdWxsODQzOTEgYW5kIGhpc3RvcmljYWwxNjggZXhhY3QK",
+  "stderr_base64": ""
+}

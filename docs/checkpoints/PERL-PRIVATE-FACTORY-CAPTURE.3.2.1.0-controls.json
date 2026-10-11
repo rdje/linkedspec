@@ -1,0 +1,159 @@
+{
+  "result": "PASS",
+  "rows": [
+    {
+      "name": "omitted-direct-call",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-omitted-direct-call.json",
+      "artifact_sha256": "a7183fd81d8a6faa277d58f738c91d6e2c4b2aa0c9ec3b503386e3d94df5a4b5",
+      "expected_reason": "dynamic invocation population",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-omitted-direct-call.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgODksIGluIGF1ZGl0CiAgICBhc3NlcnQgbGVuKG9ic2VydmVkKSA9PSA4MTIsICdkeW5hbWljIGludm9jYXRpb24gcG9wdWxhdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogZHluYW1pYyBpbnZvY2F0aW9uIHBvcHVsYXRpb24K"
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "added-formal-call",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-added-formal-call.json",
+      "artifact_sha256": "cb398bffeb93d47f8de6e63ea496b5932b00ff6e6435dfb05bb10645d5736296",
+      "expected_reason": "independent deparsed/optree variable population",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-added-formal-call.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgODgsIGluIGF1ZGl0CiAgICBhc3NlcnQgbmFtZXMgPT0gZXhwZWN0ZWRfbmFtZXMgYW5kIHN1bShuYW1lcy52YWx1ZXMoKSkgPT0gODEwLCAnaW5kZXBlbmRlbnQgZGVwYXJzZWQvb3B0cmVlIHZhcmlhYmxlIHBvcHVsYXRpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBpbmRlcGVuZGVudCBkZXBhcnNlZC9vcHRyZWUgdmFyaWFibGUgcG9wdWxhdGlvbgo="
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "unbound-required-resolver",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-unbound-required-resolver.json",
+      "artifact_sha256": "f713f784e91e97236efd6de61897552bf566ffc6b32a17d4252e7c745437ae59",
+      "expected_reason": "required resolver binding return",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-unbound-required-resolver.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgMTE4LCBpbiBhdWRpdAogICAgYXNzZXJ0ICdyZXR1cm4gX2JpbmRfZW1pc3Npb25fZGVwZW5kZW5jeSgkY2IpOycgaW4gYm9keSwgJ3JlcXVpcmVkIHJlc29sdmVyIGJpbmRpbmcgcmV0dXJuJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogcmVxdWlyZWQgcmVzb2x2ZXIgYmluZGluZyByZXR1cm4K"
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "omitted-member",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-omitted-member.json",
+      "artifact_sha256": "ab7431cb89180bb166a10a1ee494a52ba71f58014384f0809191cfd71431c295",
+      "expected_reason": "complete invocation membership",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-omitted-member.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgOTEsIGluIGF1ZGl0CiAgICBhc3NlcnQgbGVuKHJlY29yZGVkKSA9PSBsZW4oaW52ZW50b3J5WydjYWxscyddKSBhbmQgc2V0KHJlY29yZGVkKSA9PSBzZXQob2JzZXJ2ZWQpLCAnY29tcGxldGUgaW52b2NhdGlvbiBtZW1iZXJzaGlwJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogY29tcGxldGUgaW52b2NhdGlvbiBtZW1iZXJzaGlwCg=="
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "shadow-binding-conflation",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-shadow-binding-conflation.json",
+      "artifact_sha256": "04736e4864ec00e1cfb74c9b8b9a2d64a41a31471e927191c36c76478f09784e",
+      "expected_reason": "lexical binding identity",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-shadow-binding-conflation.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgOTUsIGluIGF1ZGl0CiAgICBhc3NlcnQgKHJvd1snbGluZSddLCByb3dbJ25hbWUnXSwgcm93LmdldCgnYmluZGluZycpKSA9PSAobGluZSwgbmFtZSwgYmluZGluZyksICdsZXhpY2FsIGJpbmRpbmcgaWRlbnRpdHknCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGxleGljYWwgYmluZGluZyBpZGVudGl0eQo="
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "wrong-ingress-family",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-wrong-ingress-family.json",
+      "artifact_sha256": "24ddf2f8c8fd91ae74ddb6a2b7b757fefb53e3656c61fc9896023ad37679ffd7",
+      "expected_reason": "remaining ingress families and lexical declarations",
+      "denied": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-oracle.py",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-control-wrong-ingress-family.json"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjAtY29udHJvbC1vcmFjbGUucHkiLCBsaW5lIDE3LCBpbiA8bW9kdWxlPgogICAgcmV2aWV3LmF1ZGl0KHNvdXJjZSwgbmF0aXZlLCBvcHRyZWUsIHJvd1snaW52ZW50b3J5J10pCiAgICB+fn5+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4wLXJldmlldy5weSIsIGxpbmUgMTAyLCBpbiBhdWRpdAogICAgYXNzZXJ0IHJlbWFpbmluZyA9PSBSRU1BSU5JTkcsICdyZW1haW5pbmcgaW5ncmVzcyBmYW1pbGllcyBhbmQgbGV4aWNhbCBkZWNsYXJhdGlvbnMnCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogcmVtYWluaW5nIGluZ3Jlc3MgZmFtaWxpZXMgYW5kIGxleGljYWwgZGVjbGFyYXRpb25zCg=="
+      },
+      "restored": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "SW5kZXBlbmRlbnQgaW52ZW50b3J5IHJldmlldyBQQVNTMTA4IGZ1bmN0aW9ucy8yMTggQ1ZzLzgxMiBDT0RFIGNhbGxzLzIwNyBiaW5kaW5ncy8xNyByZW1haW5pbmcgc2l0ZXMK",
+        "stderr_base64": ""
+      }
+    }
+  ],
+  "producer_sha256": "219eaea393ef66c67424620553b52d3b9cdb14472ae9392df0af39dbffa102ca",
+  "oracle_sha256": "059c2d74c2971c71b7cf83881ac83bdcc545c0815f40b7216472cf394436bdd0",
+  "review_sha256": "ec3082cd3fb9b82b935ae997d9029c91e8017a81050ab4d9e6f0389a3140a81f",
+  "scope": "Three actual syntax-valid full-source variants with both independent compiler products and complete213-input capsules; three reason-sensitive inventory mutations. Each actual independent oracle returns nonzero with its named semantic reason, followed by actual restored readonly PASS. No runtime callback behavior or changed native observation is inferred."
+}

@@ -1,17 +1,23 @@
 ---
 id: perl-method-trim-capture
-title: Required trim calls have private captures while native values and public references stay intact
+title: Method dependency bindings and the compiled remaining-call inventory
 answers:
   - "which MethodLowering required trim calls have private emission bindings"
   - "can an opaque trim callback donate publication to a method tag or switch case"
   - "does MethodLowering private dependency binding preserve native aliases and contexts"
   - "what is the native RED GREEN proof for MethodLowering trim isolation"
   - "why did the MethodLowering retention source fault stop its first capture harness"
-date: 2026-10-10
-status: three required trim callers verified; other required optional and pipeline owners open
+  - "what remains after MethodLowering required resolver and package flow isolation"
+  - "how many remaining MethodLowering dependency ingress sites are compiled"
+  - "why are two bare_symbol_kind names different lexical bindings"
+  - "why does the callback source regex overcount generated Perl strings"
+  - "where is the inline dropped value required trim gap owned"
+  - "which readonly command verifies the MethodLowering compiled call census"
+date: 2026-10-11
+status: historical required trim proof; seventeen remaining MethodLowering ingress sites owned by .3.2.1 children
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. Original trim reviewers require accepted429d0c6d inputs. Current block-component/preservation: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Current book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Current inventory: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-publish-claim.py; review.py, evidence-review.py and book-review.py under the same prefix/wrapper are readonly. First captures/freezer/controls and --capture are retired one-shot writers. Historical trim review requires accepted429d0c6d inputs; block-component and book commands below require their originally recorded accepted Git inputs, not current source/book. Local-return final-review.py under .3.1.2.2.0 requires acceptedde3b50dd inputs. MEMORY.md and the task tree own current selection."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -51,12 +57,55 @@ producer; the readonly reviewer reconstructs only those two matcher changes and
 checks unchanged production/fixture bytes before accepting the repeated capture.
 This is an instrument-label repair, not a hidden production lifetime correction.
 
-Assignment/declaration inference .3.1.1 is now accepted; current rules/evidence live
-in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 is now accepted; current evidence lives in
-docs/knowledge/perl-method-inline-capture.md. Remaining block/required families
-.3.1.2.1 through .6 are next. Optional/direct callbacks .3.2,
-other owners, automatic pipeline scopes and explicit output composition remain
-open. Complete private Phase0, mapped replacement and independent canonical/parent
-admission retain their original owners. Current production lowerers do not yet
-publish emission packets; the controlled fixture establishes private integration
-constraints without claiming a shipped pipeline failure.
+The dated trim result above remains historical. Required resolver families have
+landed; current work follows MEMORY.md and the task-tree frontier, rather than
+reselecting the completed .3.1.2.1-.6 families. The old block/book commands are
+historical, and their accepted Git inputs must be restored before re-verification.
+No new acceptance revision is invented for those older commands.
+
+The read-only .3.2.1.0 inventory starts at accepted91e972cfa0. The source and first
+B::Deparse view have the same108 named functions. A separate core B traversal
+retains218 named/anonymous CVs and812 executable CODE invocations:810 lexical
+variable calls, one direct map dereference and one already-bound returned CODE
+call. The823 raw variable-arrow candidates exceed the compiler's810 by thirteen
+pieces of generated string text. Neither view executes the callbacks or proves
+a transitive call graph. Native observations precede census assertions; all211
+accepted consumer inputs remain unchanged.
+
+Every executable dynamic site is classified:359 already-bound dependencies,
+one already-bound package call, one boundary-internal cold fallback,96 local
+required-resolver calls,338 literal local-helper closure calls, and17 remaining
+ingress sites. The207 lexical bindings resolve through captured parent pad slots.
+The giant function's outer bare_symbol_kind local closure has22 calls; its inner
+optional shadow is a distinct one-call binding. The optional array-normalizer
+kind is selected but has no local invocation. Eager required validation of the
+main infer_scalar_container_kind role likewise does not imply a local call.
+
+The17 remaining sites are owned in order by .3.2.1.1-.8: inline required trim1;
+small optional kind3; giant outer/shadow kind2; source/assignment kind2; optional
+AST2; predicates2; formal trim4; named CODE dispatch1. Literal local closures are
+not caller-supplied authority; their actual injected ingress remains separately
+classified. The CODE dispatch loop still selects actual references to six named
+helpers in native order and has its own conservative private-boundary repair.
+Static named calls, full helper behavior, FlowExpr/ControlFlow, pipeline/output,
+full-private, mapped replacement and independent parent/canonical admissions
+remain with their original owners. TYPE-REFERENCE-BOOK stays queued.
+
+The original212-input dropped-value probe observes both opaque and known trim
+callbacks executing once in scalar context with eligibility[1] and parent
+publication. Source selection and CODE validation are inline, bypassing the
+already-bound resolver returns. P2 .3.2.1.1 owns the verified fix first; the
+original diagnosis is retained unchanged. It does not establish an authored DSL
+failure. Three compiled full-source controls remove/add a call or unbind a
+required resolver, and three membership/binding/family corruptions are rejected
+with their exact reasons, followed by six actual restored reviews.
+
+The first independent reviewer incorrectly descended through the returned-CODE
+callee into the named binder, undercounting the dynamic population. Its exact
+source and original merged shell failure remain retained; the correction stops
+at that callee and is independently reconstructed. Separate stdout/stderr for
+that failed shell invocation are unavailable. No native source or observation
+was refreshed. Original355 bindings/full120239-byte publication and both prior
+historical claims remain exact, with only its one live mode/revision pair frozen
+at91e972cfa0. Inventory source/producer/member/semantic controls and complete book
+proof admit only this static scope, not a runtime or parent promotion.

@@ -1,0 +1,35 @@
+{
+  "base": "91e972cfa0d214784b0172828f7baa378c25f23e",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-before-package-flow.json",
+  "original_sha256": "e89b8cfc69636d0e51c00ee06892b06102648d0676ea966748f4594f77c4097c",
+  "after_sha256": "0470998fd64f215509b06deff2db3b6fc6468c3a4f1bed1edb2dccb693a40ab5",
+  "producer_sha256": "3f05809ed7ebf70aa2df69b45e15c1dac71b05bdfb877b23fb1f7e52e817d195",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+    "docs/knowledge/perl-method-slot-required-capture.md",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "name": "legacy-package-flow-callback-isolation",
+      "bindings": 355,
+      "intersections": [
+        "docs/knowledge/perl-method-slot-required-capture.md",
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md"
+      ]
+    }
+  ],
+  "scope": "All355 accepted live bindings and full120239-byte three-claim publication remain exact, including both prior historical claims. Only one live mode/revision pair becomes historical at91e972cfa0. Actual accepted publisher baseline precedes bound documentation edits; runtime source and accepted consumers stay unchanged."
+}

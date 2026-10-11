@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Compiled callback ingress versus local closures
+
+PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0 preserves two compiler views before assertions. B::Deparse counts810 lexical callback calls; a separate B optree traversal adds one direct map call and one already-bound returned CODE invocation. Parent pad slots separate same-spelled outer local and inner injected bare_symbol_kind bindings. The823 raw arrow candidates include13 generated-string pieces; do not use source regex membership alone.
+
+All812 dynamic sites and207 bindings are classified, including359 bound dependencies,96 local resolvers,338 local helpers and17 remaining ingress sites. Inline required validation bypasses resolver-return binding in dropped-value trim; the exact known/opaque diagnosis is owned by .3.2.1.1. A first reviewer descended through returned CODE and undercounted; retain its exact source/actual merged failure and reconstruct only the traversal correction. Durable source/contracts/counts and readonly entrypoints live in docs/knowledge/perl-method-trim-capture.md and the owning task/checkpoints. No callback runtime/transitive/helper admission follows from compiled syntax.
+
 ## 2026-10-11 — Package-flow selection and current-slot equality survive isolation
 
 The legacy mutation flow branch reads the package CODE reference, not the dependency map entry. Its actual argument aliases the trimmed slot shared with controlled bare/primitive/method helpers. Mutation reaches fallback; flow equality compares the post-callback slot, so returning the original text after mutation succeeds while returning the changed text falls through. Callback self-replacement affects the next call and surrounding localization restores the prior value. The private binding preserves those semantics while opaque/known children cannot donate parent packets. Exact whole-source review caught indentation and a copied consumer count before acceptance; first instruments/merged channels remain retained and distinct final runs verify the sole whitespace correction. Full rationale and bounded proof: docs/knowledge/perl-method-slot-required-capture.md.
