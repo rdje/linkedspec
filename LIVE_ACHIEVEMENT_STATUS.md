@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: finite engineering-history prerequisite .3.1.6.6 focused proof verified; exact staged canonical CI/receipt governs admission. Required hash callbacks .3.1.6.3 follow. TYPE-REFERENCE-BOOK remains queued after this activity.
+Full PNT: review-command repair .3.1.6.6.1 focused proof verified; normal commit hooks govern landing. Required hash callback isolation follows. TYPE-REFERENCE-BOOK remains queued after the private callback activity.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6` — Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1` — Review-command repair .3.1.6.6.1 replaces only ADR0133's stale pointer and related current guidance. All377 accepted bindings remain historical at d95a25c8b, whose canonical CI and normal hooks passed. Actual accepted-publication recovery supplies395 files (377 live bindings,17 historical hygiene inputs and its full claim), rejects changed ADR/omitted input and restores PASS. Three current-reviewer REDs each restore; book89/three controls and readonly115-input/121873-byte publication pass. Both failed recovery drafts remain exact with their observed limits; no original producer/hash/observation refresh or runtime/capacity change. Required hash .3.1.6.3 follows this focused commit; TYPE-REFERENCE-BOOK and independent admissions remain queued.
 
 ## Next Action
 
-Activate required hash callbacks .3.1.6.3 from clean accepted Git. Preserve all377 current capacity claim bindings before bound writes, inventory actual native callbacks/aliases/contexts/returned references and retain first observations before the bounded required resolver change.
+Activate required hash callbacks .3.1.6.3 from clean accepted Git. Enumerate every live intersection, preserve all current repair bindings before bound writes, and retain actual native callback/alias/context/returned-reference observations before assertions or resolver edits.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1` — current pointer; original377/395 recovery/two REDs, current reviewer3 restored, book89/3, readonly115/121873; both draft failures retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6` — immutable224/scalar337; exact4961/612 bytes/35 lines, production30/23, reviewer3/preservation2 restored, book89/3; readonly377/103173; exact staged canonical admission required.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2` — native16/branches73/authority8/public4/cold4; paired436/12 RED/424 controls, ten faults, supplied63/195/12315/evidence7/original314/book89/3; readonly337/83792 and supplemental Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1` — native8/branches34/authority4/public2/cold2; paired215/6 RED/209 controls, faults6/2/4/3/4, supplied62/191/11879/evidence7/original322/book89/3; supplemental standard Phase01035 passed.
@@ -29,7 +30,6 @@ Activate required hash callbacks .3.1.6.3 from clean accepted Git. Preserve all3
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.4` — main518/cold10/native42/branches23/inverse3, paired42 RED/518 GREEN, supplied48/168/evidence5/book89/3; original291 preserved; native drafts retained/replayed; public Phase01035 with full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3` — main864/cold8/native3/branches66/inverse3, paired3 RED/864 GREEN, supplied46/166/evidence5/book89/3; prior283 preserved; wrong-target instrument retained/rejected; public Phase01035 with full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2` — main858/cold8, paired12 RED/858 GREEN, native12/branches44/role1/inverse3, supplied44/164/evidence5/book89/3; original356 preserved; public Phase01035/1472 seconds; per-type book follow-up queued.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4` — finite capacity222/30/23/4, exact suffix112/27100, original279, book89/3 and356-input claim; index/separator repairs retain all initial evidence; canonical receipt governs landing.
 
 ## History
 

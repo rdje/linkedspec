@@ -1,0 +1,30 @@
+{
+  "producer_sha256": "d74be1a30cfc29193d0891733c6d4c0107786e97f4a3f19d438b5c33a6ad2723",
+  "rows": [
+    {
+      "name": "population-draft-recurrence",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1/review-population-draft.py",
+        "--capture-original"
+      ],
+      "source_sha256": "b076fc4ee20895499eb908d18aca51699e8335816572302a3f599b9f458dcce0",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS42LjYuMS9yZXZpZXctcG9wdWxhdGlvbi1kcmFmdC5weSIsIGxpbmUgMTEyLCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHJvd1snb3JpZ2luYWxfc2hhMjU2J10gPT0gc2hhKG9yaWdpbmFsX3JhdykKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+    },
+    {
+      "name": "corrected",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1/review.py",
+        "--capture-original"
+      ],
+      "source_sha256": "824c3d1ad11d89d18f888f808ce1366bb9ea078b3066a2bac07451ec5e532b66",
+      "returncode": 0,
+      "stdout_base64": "Q3VycmVudCByZXZpZXcgUEFTUzogZXhhY3QgcG9pbnRlci9ndWlkYW5jZTsgYWNjZXB0ZWQzNzcgbGl2ZSBwbHVzMTcgaGlzdG9yaWNhbCBiaW5kaW5ncy8zOTUgc3VwcGxpZWQgaW5wdXRzOyBvcmlnaW5hbCBwdWJsaWNhdGlvbiBQQVNTL3R3byBSRURzL3Jlc3RvcmVkOyBmaXJzdCBkcmFmdCBmYWlsdXJlIHJldGFpbmVkCg==",
+      "stderr_base64": ""
+    }
+  ],
+  "original_failed_boundary": "The population draft original tool invocation exited1 at original_sha256 comparison before a recovery report or publisher execution. No original outer invocation capsule was saved; this separately identified fresh recurrence does not reconstruct it."
+}

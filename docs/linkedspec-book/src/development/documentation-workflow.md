@@ -81,6 +81,11 @@ Keep its original hashes at the accepted Git revision, then separately verify th
 new rollover against that revision. A healthy render also checks recursive local
 includes: mdBook can report an include error while returning exit0.
 
+A historical review command requires its original logical inputs.
+Use the current Knowledge card's readonly entrypoint when documents have changed;
+it should preserve and check the accepted publication separately. Updating a
+command must not refresh an earlier observation or silently change its boundary.
+
 ## Public book
 
 This book is for:

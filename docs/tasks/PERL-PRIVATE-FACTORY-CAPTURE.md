@@ -726,10 +726,11 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal focused hooks, post-pointer, brief0 and clean Git must pass before finite notes rollover activation. Current source/book/card/native instruments are fixed; no push or wider admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6`
-  Status: `done` / focused-signoff-complete; canonical admission required
+  Status: `done` / canonical-admitted at d95a25c8b
   Goal: Admit only the next measured engineering-notes rollover before further required receiver commits.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2`
   Owned paths: Finite engineering-notes root/manifest/new exact clean-HEAD suffix, resulting-tree registry and sole required decision/index overhead; bounded claim/proof/Knowledge/book/continuity. All prior immutable history/decision bytes, threshold percentages and unrelated registry fields remain exact. No runtime change.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1` owns the subsequently discovered readonly-command repair.
   Verification tier: `canonical`
   Focused checks: Preserve predecessor live claim bindings before bound writes; retain actual next-record rollover pressure and existing admission RED. Independently reconstruct the exact clean-Git suffix/blob/range/digest and lossless root/manifest, all prior immutable bytes, finite registry/decision overhead, unchanged production threshold/accepted-indexed-object authority and actual reason-sensitive evidence RED/restorations. Required ordinary doctrines/history/Knowledge/memory/diff and exact staged canonical CI/receipt.
   Canonical trigger: Documentation/storage/registry infrastructure changes require exact staged canonical admission before landing.
@@ -746,11 +747,29 @@ quoted-first example do not change here. Other repositories and all submodules r
   Focused final preflight: Actual unchanged production validate() plus the exact AST-extracted run_check input reader accepts both staged changed records (four capacity claims/one historical hygiene claim, zero gaps). Every live binding intersecting the staged path set matches current bytes. Memory, readonly377/103173 publication, both history checks and whitespace pass; fresh exact canonical admission is still required.
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6 - admit one finite engineering-history member`
   Handoff: Exact staged canonical CI/receipt, all normal hooks, post-pointer, brief0 and clean Git must pass before required hash activation. Full private fixture admission remains separately owned by .7.
+  Accepted boundary: d95a25c8b5904bfbc893aee5249dbaf278496eb3; actual default canonical gate exit0, Phase01035, CLI66/66 in both environments, exact receipt promotion and all10 normal hooks/post-pointer/brief0/clean Git passed. Optional opt-in matrices were outside that invocation. The subsequent pointer defect is owned and repaired by .3.1.6.6.1 before hash activation.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1`
+  Status: `done` / `focused-signoff-complete`
+  Goal: Repair ADR0133's stale readonly review command while preserving accepted finite-admission evidence.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6`
+  Owned paths: ADR0133 review pointer only; related existing capacity Knowledge card and book workflow guidance; exact predecessor-claim preservation, bounded diagnostic/replay/reviewer/claim evidence and continuity. No capacity contract, registry, runtime or historical observation changes.
+  Verification tier: `focused`
+  Focused checks: Enumerate all live claims intersecting intended writes and preserve every accepted binding before edits. Retain the actual stale-command failure and current guarded baseline, replay the accepted publication in its original Git input state, independently reconstruct the sole ADR pointer correction and related guidance, exercise distinguishing actual RED/restoration controls, render the book, and run ordinary doctrines/history/Knowledge/memory/whitespace checks.
+  Canonical trigger: none for a documentation-command correction with unchanged infrastructure, capacity authorization and runtime; the predecessor's exact canonical receipt remains historical.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json`
+  Owned issue: P3 ADR0133 advertises the hyphenated capacity.py review command against current inputs. Actual tools/run_python_project_data.sh invocation exits1 at verify_base line264 with complete current root reconstruction, because the historical instrument expects archived wording while the corrected current root says admitted. The current leaf-directory guarded publisher passes. The pre-landing diagnosis and scheduled repair are retained in d95a25c8b's commit message; this child repairs the current entrypoint before hash activation.
+  Activation: Clean d95a25c8b5904bfbc893aee5249dbaf278496eb3, brief0, promoted canonical receipt and all10 normal hooks/post-pointer verified. Record this owner before preservation or other writes. No verification job remains from the parent.
+  Owned replay preflight issue: The first supplied accepted-publication replay includes377 live bindings plus its claim, but omits17 historical hygiene inputs read by the actual hygiene reviewer. Its accepted row exits1 at missing .gitignore with unchanged378 supplied inputs; complete outer channels and the draft producer remain retained. The original19-input hygiene claim already retains these hashes at accepted Git. Expand the supplied population from that published historical record, preserve original producer/observation/hash bytes, and retain an actual omitted-input RED alongside the corrected recovery. No partial replay success or new hygiene observation is claimed.
+  Owned second preflight issue: The population draft reuses raw for a historical input, then returns that value as the original full claim. Actual invocation exits1 at original_sha256 comparison before writing a recovery report or running the accepted publisher. Preserve review-population-draft.py exactly, rename only the loop temporary, and capture a fresh recurrence of that draft failure plus the corrected outer invocation. The original tool-return failure is disclosed as such; no unavailable original outer capsule or partial success is inferred.
+  Acceptance: Keep the full accepted predecessor claim and original hashes/producer/input state recoverable; do not refresh old observations or silently repoint a command to another historical-only instrument. The new current reviewer must work against the final current documents. Commit before required hash .3.1.6.3.
+  Signoff evidence: Review-command repair .3.1.6.6.1 replaces only ADR0133's stale pointer and related current guidance. All377 accepted bindings remain historical at d95a25c8b, whose canonical CI and normal hooks passed. Actual accepted-publication recovery supplies395 files (377 live bindings,17 historical hygiene inputs and its full claim), rejects changed ADR/omitted input and restores PASS. Three current-reviewer REDs each restore; book89/three controls and readonly115-input/121873-byte publication pass. Both failed recovery drafts remain exact with their observed limits; no original producer/hash/observation refresh or runtime/capacity change. Required hash .3.1.6.3 follows this focused commit; TYPE-REFERENCE-BOOK and independent admissions remain queued.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1 - repair the current admission review command`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`
   Status: `pending`
   Goal: Isolate hash receiver required callbacks while preserving actual native behavior.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1`
   Owned paths: Only required resolver returns in _normalize_hash_receiver_value_chain_expr; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
   Planned tier: `focused`
   Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
@@ -865,7 +884,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` | `pending` | Required hash callbacks follow accepted finite history prerequisite. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` | `pending` | Required hash callbacks follow the review-command repair. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` | `pending` | Required array-end parser callbacks. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
@@ -1160,7 +1179,18 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **ADDRESSED / NO REGRESSION** — Production30 thresholds/23 authority denials, three reviewer and two preservation REDs each restore. Original337 scalar bindings and all claim fields remain historical without refresh. Runtime/checkers/dependencies stay exact; full book89/3 passes.
 - [x] **LOCKSTEP** — Existing capacity card retains original body/questions and adds three; readonly377/103173 publication, live roadmap/index/memory and both history checks align. Exact staged canonical receipt and all normal hooks are required for landing; no full private-fixture admission is inferred.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1
+
+- [x] **REPRODUCE / ISSUE** — Actual stale capacity.py review exits1 against current notes while the accepted guarded baseline passes; complete pre-edit channels retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Tool-backed traceback identifies historical verify_base root reconstruction at capacity.py:264. The current correction changes one readonly pointer, with every other ADR byte compared against accepted Git. Initial recovery omissions and variable shadowing have retained exact drafts, named failure boundaries and separate corrected proof.
+- [x] **FIX** — ADR0133 names the current readonly review.py; the existing related card and book explain historical input boundaries. No capacity authorization, registry or runtime changes.
+- [x] **ADDRESSED (verified)** — Current reviewer PASS; actual original publication395-input PASS/two named REDs/restoration and three current-reviewer REDs/restorations pass. Original377 hashes/full claim preserved without refresh; the17 historical hygiene inputs derive from their original published claim.
+- [x] **NO REGRESSION** — Full mdbook build proof89/three controls passes; historical producers and observations remain exact. Parent canonical CI/public Phase01035/CLI66 per environment passed at d95a25c8b. This ordinary documentation repair requires focused checks and normal hooks, with no new runtime admission claim.
+- [x] **LOCKSTEP** — Readonly publication115 live/395 historical inputs/121873 bytes, reused Knowledge card, roadmap/index/live/MEMORY and bounded histories align. Ordinary doctrine/memory/whitespace checks and all normal commit hooks govern landing before hash activation.
+
 ## Verification Log
+
+- `2026-10-11`, `.3.1.6.6.1`: Review-command repair .3.1.6.6.1 replaces only ADR0133's stale pointer and related current guidance. All377 accepted bindings remain historical at d95a25c8b, whose canonical CI and normal hooks passed. Actual accepted-publication recovery supplies395 files (377 live bindings,17 historical hygiene inputs and its full claim), rejects changed ADR/omitted input and restores PASS. Three current-reviewer REDs each restore; book89/three controls and readonly115-input/121873-byte publication pass. Both failed recovery drafts remain exact with their observed limits; no original producer/hash/observation refresh or runtime/capacity change. Required hash .3.1.6.3 follows this focused commit; TYPE-REFERENCE-BOOK and independent admissions remain queued.
 
 - `2026-10-11`, `.3.1.6.6`: Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
 
@@ -1216,6 +1246,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 - `2026-10-10`, `.3.1.2.1`: Block component/side-effect required bindings pass223 main/cold4 and six effective syntax-valid source faults. Six invoked roles, a separately validated local flow binding and20 native/current ledgers preserve fallback/reference/context/alias/effect/error behavior. Paired complete223 TAP has18 original publication-isolation REDs,205 original passing controls and all223 current GREEN. Supplied33 suites/152 files, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical at65bd00faa. Local-return/value .3.1.2.2 is next; remaining required/optional, other owners/pipeline/output/full-private/mapped/canonical and parent obligations stay open. Ordinary doctrine hooks govern staged admission.
 
 ## Commit Log
+
+- `.3.1.6.6.1`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1 - repair the current admission review command`, activated from clean d95a25c8b; focused proof and normal hooks govern landing.
 
 - `.3.1.6.6`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6 - admit one finite engineering-history member`, from clean d8418423e; exact staged canonical receipt required; no push.
 
@@ -1432,3 +1464,5 @@ beside its stable ID; Git is the commit-identity authority.
 - `2026-10-10`, canonical prerequisite repaired: Attempt02 exits1 after all10 doctrines pass, at historical runner registration. Full failed binary candidate/channels and original runner/auditor are retained. Original RED/activation control and exact three-insertion historical inverse/full192 inputs/22 recovery/74 evolution/evidence3 pass. Initial303 runtime publication/publisher stay retained; extension changes only publisher identity plus added CI supplement, preserving every runtime proof field. Readonly304-core/198-CI bindings/118034-byte claim and Knowledge1345/10312 pass. Fresh attempt03 must use approved host execution from the start per existing process-locality prerequisite. No canonical success is inferred.
 
 - `2026-10-11`, canonical attempt03 prerequisites: Retain full failed candidate/channels/original502 declarations/487 files and initial521 declarations/506 files. Correct one synthetic AST book example; retain all four valid rejected public additions and advance only36-to40 census. Public70/40/0, parent69/36, migration11/three actual REDs; scanner17 paths/27 lines/51 strict denials; final book89/3 and fresh isolated historical183 inputs/134 restored/22 recovery/80 evolution denials pass. Original and initial publications replay exact inputs. The draft192/135 wrapper refuses after retaining inner success; nine supplementary capsule inputs explain192 versus actual183, and unused scanner historical branches are removed. Original native/runtime proof unchanged. Final composed publication/Knowledge1346/10319 and fresh exact attempt04 receipt/normal hooks govern landing; no admission is inferred from failed03.
+
+- `2026-10-11`, `.3.1.6.6.1`: Review-command repair .3.1.6.6.1 replaces only ADR0133's stale pointer and related current guidance. All377 accepted bindings remain historical at d95a25c8b, whose canonical CI and normal hooks passed. Actual accepted-publication recovery supplies395 files (377 live bindings,17 historical hygiene inputs and its full claim), rejects changed ADR/omitted input and restores PASS. Three current-reviewer REDs each restore; book89/three controls and readonly115-input/121873-byte publication pass. Both failed recovery drafts remain exact with their observed limits; no original producer/hash/observation refresh or runtime/capacity change. Required hash .3.1.6.3 follows this focused commit; TYPE-REFERENCE-BOOK and independent admissions remain queued.

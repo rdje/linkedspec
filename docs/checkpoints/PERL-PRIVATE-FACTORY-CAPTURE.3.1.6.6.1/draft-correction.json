@@ -1,0 +1,8 @@
+{
+  "draft_sha256": "7661cb0ad0c70de5f0f07d084f17318cb942035ca2bc6005ef7e62b5d25c8cc9",
+  "reached_sha256": "9aa8e4557bdb4cc5eeada4ff069d222005f8f8ff2f98b52eeb85c161cf8f0644",
+  "producer_sha256": "b465a0c84afb643cda79e6c5c0bccca572455bbe52a8401db60c6932b8a29017",
+  "result": "Original recovery exits1 before success assertion; all378 supplied inputs unchanged.",
+  "cause": "The primary live binding list omits17 historical hygiene inputs read by the actual preserved hygiene reviewer. Their original19-input claim and hashes are already retained at accepted Git.",
+  "repair": "Supply the additional historical inputs from accepted Git, deriving membership from their preserved claim. Keep original producer, observations and input hashes unchanged. Fresh original-publication recovery includes an omitted-.gitignore RED and exact restoration. No partial failed-replay success is claimed."
+}

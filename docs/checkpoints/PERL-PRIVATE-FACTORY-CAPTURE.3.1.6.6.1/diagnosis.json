@@ -1,0 +1,24 @@
+{
+  "producer_sha256": "ab7d1a7a3f6f13fe672046230f0c9ce6286c60204b075a237d9cd2037a61e542",
+  "base": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+  "stale": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6-capacity.py",
+      "review"
+    ],
+    "returncode": 1,
+    "stdout_base64": "",
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS42LjYtY2FwYWNpdHkucHkiLCBsaW5lIDM4NSwgaW4gPG1vZHVsZT4KICAgIGdsb2JhbHMoKVtwYXJzZXIucGFyc2VfYXJncygpLm1vZGVdKCkKICAgIH5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Xl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjEuNi42LWNhcGFjaXR5LnB5IiwgbGluZSAzMjMsIGluIHJldmlldwogICAgcGxhbiA9IHZlcmlmeV9iYXNlKCkKICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjEuNi42LWNhcGFjaXR5LnB5IiwgbGluZSAyNjQsIGluIHZlcmlmeV9iYXNlCiAgICBhc3NlcnQgcmVhZCgnREVWRUxPUE1FTlRfTk9URVMubWQnKSA9PSByb290LCAnY29tcGxldGUgY3VycmVudCByb290IHJlY29uc3RydWN0aW9uJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogY29tcGxldGUgY3VycmVudCByb290IHJlY29uc3RydWN0aW9uCg=="
+  },
+  "guarded": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6/publish.py"
+    ],
+    "returncode": 0,
+    "stdout_base64": "RmluaXRlIGFkbWlzc2lvbiBtZXRhZGF0YSBjbG9zdXJlIFBBU1M6IDM3NyBsaXZlIGlucHV0czsgMTAzMTczIGJ5dGVzOyBvcmlnaW5hbDM0Ny8zNjIgaW5wdXRzIHJldGFpbmVkOyBoaXN0b3JpY2FsIHByb2R1Y2VyIHByb3ZlbmFuY2UgYW5kIGh5Z2llbmUxOSByZXBhaXJlZAo=",
+    "stderr_base64": ""
+  },
+  "scope": "Actual current-input command channels before any bound write. The old instrument requires its original logical draft; the accepted guarded publisher handles the corrected root. No historical observation is refreshed."
+}

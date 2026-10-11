@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Historical publication recovery includes historical reader inputs
+
+A live binding list is insufficient when a producer also reads preserved historical inputs: ADR0133 recovery needs17 hygiene inputs alongside377 live bindings and its full claim. Preserve complete failed drafts before correcting a recovery population or loop shadow. Exact original producers/observations stay fixed; current readonly command and proof: docs/knowledge/finite-engineering-notes-member-0131.md.
+
 ## 2026-10-11 — One finite engineering-history archive member
 
 ADR0133 admits one measured engineering-notes archive member and its exact manifest growth. The next complete record crosses the line rollover threshold; production pressure and old admission reject before the exact clean-Git suffix is admitted. All accepted immutable bytes and337 scalar publication bindings remain preserved. Independent reconstruction, production threshold/authority and evidence controls precede exact staged canonical admission; required hash callbacks follow. No future member reserve or root/aggregate increase is granted.

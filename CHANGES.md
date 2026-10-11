@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — Repair the current ADR0133 review command
+
+Replace the stale historical-only pointer with a current readonly reviewer; retain all377 accepted bindings and actual395-input original publication recovery. Three current-reviewer RED/restorations and book89/three controls pass; both failed recovery drafts remain retained. No capacity or runtime change. Owner: PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.
+
 ## 2026-10-11 — Finite engineering-history member capacity
 
 ADR0133 admits one archive member, exact manifest growth and sole decision overhead before required hash callback work. Preserve all accepted immutable history and337 prior scalar publication inputs. Actual pressure/admission REDs, independent reconstruction, production authority controls and book rendering precede exact staged canonical admission.

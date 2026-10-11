@@ -9,12 +9,27 @@ answers:
   - "which decision admits engineering notes segment 4961"
   - "how are scalar callback bindings preserved before ADR0133"
   - "does ADR0133 admit another future archive member"
+  - "why does the ADR0133 capacity review command fail against current notes"
+  - "where is the current ADR0133 readonly review command"
+  - "how is the accepted ADR0133 publication recovered after its pointer repair"
+  - "why can publication replay require historical inputs beyond live bindings"
 date: 2026-10-11
-status: ADR0131 historical; ADR0133 focused proof verified with exact staged canonical receipt required
+status: ADR0131 and ADR0133 evidence historical; current review-command repair verified
 tags: [documentation, history, capacity, verification]
 evidence: "ADR0133 owns the next finite rollover at clean d8418423e. All224 prior immutable history/decision files and337 accepted scalar publication inputs remain exact. Engineering notes47/29361/3280501, manifest46/27857 and decisions134/13215/980960 are independently reconstructed. Actual next-record and old admission REDs, production30 thresholds/23 authority denials, three reviewer and two preservation RED/restorations, full book89/3 precede exact staged canonical admission. ADR0131 original account remains below."
-reverify: "At the ADR0133 accepted boundary run bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6/publish.py (readonly default). Prior ADR0131 commands require their recorded Git inputs; preserve current claim before later bound writes. One-shot apply/capture/evidence/freezer/publisher writers are not resume commands."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1/review.py (readonly default). Accepted admission instruments require their recorded Git inputs; current review retains their original publication and channels. One-shot capture/freezer writers are not resume commands."
 ---
+
+## Current review-command repair
+
+ADR0133 was accepted at d95a25c8b with canonical CI and all normal hooks passing.
+Its old command selected an instrument that requires the original logical draft,
+so current notes failed its exact root check. The current reviewer checks the
+sole ADR pointer correction and related guidance, preserves the accepted claim
+at that Git boundary, and validates an actual supplied original-publication replay.
+That replay supplies the historical hygiene inputs read by the actual reviewer,
+alongside the live bindings; the initial omitted-input failure remains retained.
+The dated admission accounts below retain their original bodies and measurements.
 
 # The next finite admission: ADR0133
 

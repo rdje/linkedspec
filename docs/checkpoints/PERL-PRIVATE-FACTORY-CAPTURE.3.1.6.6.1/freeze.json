@@ -1,0 +1,39 @@
+{
+  "base": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+  "producer_sha256": "ab7d1a7a3f6f13fe672046230f0c9ce6286c60204b075a237d9cd2037a61e542",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+    "docs/decisions/0133-finite-engineering-notes-member.md",
+    "docs/knowledge/finite-engineering-notes-member-0131.md",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md"
+  ],
+  "records": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1/before-PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "names": [
+        "finite-engineering-history-member"
+      ],
+      "bindings": 377,
+      "intersections": [
+        "CHANGES.md",
+        "DEVELOPMENT_NOTES.md",
+        "docs/decisions/0133-finite-engineering-notes-member.md",
+        "docs/knowledge/finite-engineering-notes-member-0131.md",
+        "docs/linkedspec-book/src/development/documentation-workflow.md"
+      ],
+      "original_sha256": "7ee7a2e502d1c12c2bd4b4932fccbacc621a0e6c340e8a73d0747d1550ddf2ff",
+      "after_sha256": "9525afe9bd6c0af8fe82c524cb11b16f879d4f5591f185b9a395f432ba39155f"
+    }
+  ],
+  "scope": "Every intersecting live record is preserved before bound writes; only live durability mode/revision changes. Exact original full claims and all input hashes remain recoverable at accepted Git. Other historical claims, producers and observations remain unchanged."
+}
