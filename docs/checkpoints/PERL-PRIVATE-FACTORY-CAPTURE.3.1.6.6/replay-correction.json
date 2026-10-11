@@ -1,0 +1,5 @@
+{
+  "producer_sha256": "6949be9b7c793eac44eac220acaf0fc907766479330e11d03d7a22c4a9ef66de",
+  "reached_sha256": "04179a8b88a411f820d67210cd23b58e1e2a66bcc921b89d6c8fb0bcef14f644",
+  "observed": "First original logical replay exits1 before publication because source include executable modes were not copied; full original reached envelope is retained. No partial replay success is claimed. Restore actual supplied file modes, independently verified against the original book mode ledger. Decode nested original assertion-envelope stderr for the named changed-root reason; outer raw channels remain complete. Original347 claim, instruments, inputs and observations unchanged."
+}

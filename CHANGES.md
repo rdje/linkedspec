@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — Finite engineering-history member capacity
+
+ADR0133 admits one archive member, exact manifest growth and sole decision overhead before required hash callback work. Preserve all accepted immutable history and337 prior scalar publication inputs. Actual pressure/admission REDs, independent reconstruction, production authority controls and book rendering precede exact staged canonical admission.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2 — Isolate required number/string callbacks
 
 Two resolver returns bind four actual required callbacks, preserving eager selection, substring

@@ -1,0 +1,11 @@
+{
+  "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+  "claim": "docs/claims/REPO-HYGIENE.15.json",
+  "original_sha256": "f78aafb04bd05106067d7f9c3564e9cebb66812c4b961adefa785266125214ef",
+  "after_sha256": "4b1ea443c41bdb9bbd31e982ba8787bfdba778cd412baefd33d05f39e5c25145",
+  "verified_bindings": 19,
+  "late_preservation": true,
+  "book_was_already_edited": true,
+  "producer_sha256": "9e3b61c58a358c5b9642b6344df58d90fe092e11f0172636ff7852113b40972f",
+  "scope": "All19 accepted Git input hashes and original claim fields preserved; only live mode/revision changes. Shared book was already edited when intersection was discovered; the exact original remains recoverable at accepted Git. No original observation or hash is refreshed."
+}

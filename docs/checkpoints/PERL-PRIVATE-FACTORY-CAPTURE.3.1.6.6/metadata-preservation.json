@@ -1,0 +1,6 @@
+{
+  "bindings_verified": 362,
+  "claim_sha256": "0346885529773a580ec484aebd6d7e6bcd1a7081019215aa10c1eb84964e299d",
+  "publisher_sha256": "95d0d636e86168d77e706b5b0b6b8d0635fff89299ceb8c94ebf2558fce53b34",
+  "disclosure": "Exact original362-input closure preserved before current publisher repair. All361 other inputs stay exact; the prior publisher will relocate byte-identically. Two historical checked records need actual tracked producer provenance; no original hash or runtime observation is refreshed."
+}

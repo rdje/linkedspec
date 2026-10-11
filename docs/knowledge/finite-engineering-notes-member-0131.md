@@ -1,17 +1,47 @@
 ---
 id: finite-engineering-notes-member-0131
-title: ADR0131 admits one engineering-history member and exact manifest growth
+title: Finite engineering-history admissions preserve exact archives and prior proof
 answers:
   - "which decision admits engineering notes segment 4962"
   - "why does engineering notes allow 46 files and 45 manifest lines"
   - "what repairs the block component commit engineering history pressure failure"
   - "does ADR0131 grant future archive capacity"
-date: 2026-10-10
-status: finite focused proof verified; exact staged canonical receipt required before landing
+  - "which decision admits engineering notes segment 4961"
+  - "how are scalar callback bindings preserved before ADR0133"
+  - "does ADR0133 admit another future archive member"
+date: 2026-10-11
+status: ADR0131 historical; ADR0133 focused proof verified with exact staged canonical receipt required
 tags: [documentation, history, capacity, verification]
-evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3 independently preserves220 old immutable history/decision files. Engineering notes measure46 files/29064 lines/3253190 bytes; manifest45 lines/27245 bytes. Thirty actual production thresholds,23 accepted/indexed/exact-object authority REDs and three actual reviewer corruption REDs/restored PASS verify the finite change. ADR0131 admits one member and only612 manifest bytes/one line; decisions admit its sole file and35 aggregate lines. Exact canonical CI/receipt governs landing."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. At the frozen capacity boundary, run bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-capacity.py final. Preserve this claim before later bound-input edits; apply/capture/evidence/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+evidence: "ADR0133 owns the next finite rollover at clean d8418423e. All224 prior immutable history/decision files and337 accepted scalar publication inputs remain exact. Engineering notes47/29361/3280501, manifest46/27857 and decisions134/13215/980960 are independently reconstructed. Actual next-record and old admission REDs, production30 thresholds/23 authority denials, three reviewer and two preservation RED/restorations, full book89/3 precede exact staged canonical admission. ADR0131 original account remains below."
+reverify: "At the ADR0133 accepted boundary run bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6/publish.py (readonly default). Prior ADR0131 commands require their recorded Git inputs; preserve current claim before later bound writes. One-shot apply/capture/evidence/freezer/publisher writers are not resume commands."
 ---
+
+# The next finite admission: ADR0133
+
+The clean d8418423e root has460 lines/58419 bytes. Its next complete four-line
+record reaches464 lines/59032 bytes and the unchanged production roller requires
+rollover. The actual old routing gate rejects files47/46 and manifest46/45 lines,
+27857/27245 bytes. Only one archive member (segment4961) is admitted, with612
+manifest bytes/one line and35 decision/index lines. Root, aggregate, per-file and
+all unrelated limits remain unchanged. No further archive reserve is granted.
+
+Independent Git-backed reconstruction retains every224 prior immutable
+history/decision file, exact complete clean-source suffix/blob/range/digest,
+current root and all older manifest rows. The existing production threshold and
+accepted/indexed/exact-object functions execute30 boundary observations and23
+authority denials; three actual reviewer corruption REDs restore exactly.
+
+Before any bound write, the full accepted scalar claim and all337 original input
+hashes are preserved at d8418423e; only its live mode/revision changes. Two actual
+preservation controls reject a forged original binding and altered preserved
+statement even after their immediate SHA metadata is updated. Every changed byte
+and reached channel is retained before assertions; each exact restoration passes.
+The full book captures57 sources plus32 recursive local includes and three actual
+controls. Exact staged canonical CI/receipt and ordinary hooks govern landing.
+
+The original ADR0131 body below is retained exactly; its historical commands need
+its own accepted input state. Current readonly review is named in front matter.
+
 
 # One separately owned finite rollover
 

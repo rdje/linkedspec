@@ -1,0 +1,7 @@
+{
+  "bindings_verified": 347,
+  "original_claim_sha256": "2276209299580f88cea7723953eb29edc2b11b2fc0ee320dd30a776f893f7785",
+  "original_root_sha256": "5d42a0eef9945bcf8f42188b8718bdf8f4b66d3f328b51238ca7700e32781856",
+  "original_card_sha256": "f89066e4647e4f46ebbbfa9336f0fb406f54c8eb7680a8ce27fc8209ba7bfaf8",
+  "correction": "Only archive-admission chronology wording changes; archived becomes admitted with equal byte length. Old production roller/controls/native observations and metrics stay fixed. Original uncommitted347-input publication remains supplied/replayable; current root/card differ only through authorized wording and readonly-entrypoint correction."
+}

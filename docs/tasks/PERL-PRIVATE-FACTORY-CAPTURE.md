@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / finite notes rollover prerequisite next
+- Status: `active` / required hash callback isolation next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-11`
@@ -726,15 +726,26 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal focused hooks, post-pointer, brief0 and clean Git must pass before finite notes rollover activation. Current source/book/card/native instruments are fixed; no push or wider admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6`
-  Status: `pending`
+  Status: `done` / focused-signoff-complete; canonical admission required
   Goal: Admit only the next measured engineering-notes rollover before further required receiver commits.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2`
   Owned paths: Finite engineering-notes root/manifest/new exact clean-HEAD suffix, resulting-tree registry and sole required decision/index overhead; bounded claim/proof/Knowledge/book/continuity. All prior immutable history/decision bytes, threshold percentages and unrelated registry fields remain exact. No runtime change.
-  Planned tier: `canonical`
-  Planned focused proof: Preserve predecessor live claim bindings before bound writes; retain actual next-record rollover pressure and existing admission RED. Independently reconstruct the exact clean-Git suffix/blob/range/digest and lossless root/manifest, all prior immutable bytes, finite registry/decision overhead, unchanged production threshold/accepted-indexed-object authority and actual reason-sensitive evidence RED/restorations. Required ordinary doctrines/history/Knowledge/memory/diff and exact staged canonical CI/receipt.
-  Planned canonical boundary: Documentation/storage/registry infrastructure changes require exact staged canonical admission before landing.
-  Planned claim record: none: Planning only; measure the exact next member/manifest/decision delta at clean activation, without borrowing ADR0131 reserve or granting future growth.
+  Verification tier: `canonical`
+  Focused checks: Preserve predecessor live claim bindings before bound writes; retain actual next-record rollover pressure and existing admission RED. Independently reconstruct the exact clean-Git suffix/blob/range/digest and lossless root/manifest, all prior immutable bytes, finite registry/decision overhead, unchanged production threshold/accepted-indexed-object authority and actual reason-sensitive evidence RED/restorations. Required ordinary doctrines/history/Knowledge/memory/diff and exact staged canonical CI/receipt.
+  Canonical trigger: Documentation/storage/registry infrastructure changes require exact staged canonical admission before landing.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json`
   Acceptance: Follow the established finite maintenance authority and ADR0131 precedent; no user decision or new runtime scope is inferred. Do not rewrite accepted immutable archives. Commit the exact canonical prerequisite before hash .3.1.6.3.
+
+  Activation: Clean d8418423e and brief0 verified. Preserve337 accepted scalar publication inputs before bound writes; one-shot freezer now retains the original full claim and mode/revision-only conversion at this Git boundary. Reuse the existing finite-engineering-notes-member-0131 fact card. Exact next-record line pressure, clean-Git rollover, sole ADR0133 and manifest/registry delta are this leaf; no runtime or dependency change.
+
+  Signoff evidence: Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
+  Owned draft correction: P3 the new note says old admission rejects before the suffix is archived; the retained actual channels prove archive creation precedes the old routing rejection. Preserve all347 draft publication inputs and exact original root/card/full claim under the leaf directory. Correct only archived→admitted (equal bytes), retaining old instruments/observations/metrics. Current readonly closure must independently prove this exact change and replay the full original logical publication; actual changed-root and unrelated-wording REDs restore before canonical admission. No original producer/input hash is refreshed.
+  Replay preflight correction: First original logical replay exits1 because executable source-include modes were not copied; original draft/reached full envelope remain exact under the leaf directory. Copy supplied modes and compare them with the original book mode ledger; decode nested assertion envelopes only to identify the named reason while preserving outer raw channels. No partial replay success or original runtime/book remeasurement is claimed.
+  Verified wording closure: Original347-input publication replays healthy/changed-root named RED/restored with supplied original modes verified against the book ledger;345 current inputs remain exact and two relocate byte-identically. Current root changes only archived→admitted with equal byte/line dimensions; the related card changes only its readonly entrypoint. One unrelated wording RED restores. Guarded readonly362-input/94219-byte closure passes without original source/observation/metric refresh. Both historical lower claims remain exact; original draft/preflight channels are retained.
+  Owned canonical blockers and verified repair: Attempt01 exits1 with detailed log unavailable after incorrectly using automatically cleaned scratch; no cause or partial success is inferred. Exact unchanged candidate attempt02 retains the full report: nine doctrines PASS, CLAIM-VERIFICATION rejects checked historical records without a tracked producer; runtime stages never start. Actual unchanged validate() rejects both original historical entries and accepts one exact existing pressure-checker role change plus the original scalar publisher as a historical producer; no original SHA changes. Separately own the missed REPO-HYGIENE.15 book intersection: all19 original Git hashes/full claim fields verify at d8418423e, only mode/revision changes and late preservation timing is explicit. A beyond-immediate-SHA original-binding RED restores. Original362 closure/publisher and every362 hash remain retained (361 current/one byte-identical relocation); guarded readonly377/103173 closure passes. Related hygiene Knowledge retains its dated body with current context; no new card. Persistent project-local logging/explicit failed-run retention repair invocation only. Restricted false-abandoned recurrence is already owned by SESSION-STARTUP-READING.7; permitted exact-PID inspection confirms active CI and no recovery/purge occurs. Restage all scope before fresh canonical admission.
+  Focused final preflight: Actual unchanged production validate() plus the exact AST-extracted run_check input reader accepts both staged changed records (four capacity claims/one historical hygiene claim, zero gaps). Every live binding intersecting the staged path set matches current bytes. Memory, readonly377/103173 publication, both history checks and whitespace pass; fresh exact canonical admission is still required.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6 - admit one finite engineering-history member`
+  Handoff: Exact staged canonical CI/receipt, all normal hooks, post-pointer, brief0 and clean Git must pass before required hash activation. Full private fixture admission remains separately owned by .7.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3`
   Status: `pending`
@@ -854,15 +865,14 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6` | `pending` | Finite notes rollover prerequisite after verified number/string capture; preserve accepted inputs first. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` | `pending` | Required hash callbacks follow the finite canonical prerequisite. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` | `pending` | Required array-end parser callbacks. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
-| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
-| 8 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 9 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` | `pending` | Required hash callbacks follow accepted finite history prerequisite. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` | `pending` | Required array-end parser callbacks. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
+| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
+| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 8 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
 
 
 
@@ -1142,7 +1152,17 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION / LOCKSTEP** — Supplied63 suites/195 inputs/12315 assertions, all actual ordered paths/headers/plans and exact predecessor diagnostics pass. Book89/three controls, Knowledge1349/10343, standard syntax/public Phase01035 and readonly337-input/83792-byte metadata closure pass; original323 publication/card/publisher remain exact and replayable. Both history roots preserve all predecessor bytes outside their sole new complete records. Normal focused hooks govern landing; finite notes prerequisite .6 is next.
 - [x] **COMMIT BLOCKER RESOLVED** — Existing-card consolidation retains both bodies/all13 questions and every original323 hash. Original exact publication healthy/card RED/restored PASS and two metadata RED/restorations pass. Readonly337/83792 and the actual restaged README20/62/40 gate pass; no native/runtime/book refresh or limit increase. First failed hook boundary and interrupted later checks remain explicit.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6
+
+- [x] **BUG / SYMPTOM** — Next complete note requires rollover; the old gate rejects the archive slot and manifest lines/bytes.
+- [x] **PROOF / ROOT CAUSE** — Actual464-line/59032-byte pressure and old47/46,46/45,27857/27245 admission REDs are retained. Independent clean-Git reconstruction preserves224 immutable files and the exact suffix/blob/range/digest/root/manifest.
+- [x] **FIX** — Sole ADR0133 admits one measured member,612 manifest bytes/one line and35 decision/index lines. All unrelated/root/aggregate/per-file limits stay exact; no future reserve.
+- [x] **ADDRESSED / NO REGRESSION** — Production30 thresholds/23 authority denials, three reviewer and two preservation REDs each restore. Original337 scalar bindings and all claim fields remain historical without refresh. Runtime/checkers/dependencies stay exact; full book89/3 passes.
+- [x] **LOCKSTEP** — Existing capacity card retains original body/questions and adds three; readonly377/103173 publication, live roadmap/index/memory and both history checks align. Exact staged canonical receipt and all normal hooks are required for landing; no full private-fixture admission is inferred.
+
 ## Verification Log
+
+- `2026-10-11`, `.3.1.6.6`: Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
 
 - `2026-10-11`, `.3.1.6.2`: Required number/string .3.1.6.2 binds four actual trim/parser callbacks through two resolver returns, preserving eager selection, substring effects, actual parser-returned object annotations, maps/context/errors and fatal identity. Paired436 assertions retain12 original authority REDs/424 controls/all436 GREEN; ten separate full-source faults, supplied63/195/12315, evidence7/original314 and book89/3 pass. The first reviewer label error and premature dependent preflight are retained and repaired without native/runtime refresh. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly337-input/83792-byte metadata closure passes; original323 publication/card/publisher remain exact and replayable. Finite notes rollover prerequisite .3.1.6.6 precedes hash .3; remaining required families, TYPE-REFERENCE-BOOK and independent admissions stay queued. Canonical private-fixture registration .7 precedes pipeline .6.
 
@@ -1197,6 +1217,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.3.1.6.6`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6 - admit one finite engineering-history member`, from clean d8418423e; exact staged canonical receipt required; no push.
+
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2 - isolate number/string required callbacks` — focused proof, supplemental public compatibility and bounded readonly publication verified; normal hooks govern landing.
 
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1 - isolate generalized return required callbacks` — required574/15/native9/branches52/public9/inverse6, supplied52/172/evidence5/book89/3; original307 historical; original instruments retained/replayed; public Phase01035/full channels; normal hooks govern landing.
@@ -1236,6 +1258,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- `2026-10-11`, `.3.1.6.6`: Finite notes prerequisite .3.1.6.6 preserves all224 prior immutable history/decision files and337 accepted scalar bindings at clean d8418423e. Exact segment4961/612 manifest bytes/one line and sole ADR0133/index35-line overhead are independently reconstructed. Actual next-note and old admission REDs, production30 thresholds/23 authority denials, three reviewer/two preservation REDs with exact restoration, full book89/3 and readonly377-input/103173-byte publication pass. Existing related Knowledge card retains its historical body/questions; no slot or future reserve is added. Exact staged canonical CI/receipt and normal hooks govern admission before hash .3.1.6.3; remaining families, TYPE-REFERENCE-BOOK and independent admissions stay queued.
 
 - `2026-10-11`, `.3.1.6.2`: Required number/string .3.1.6.2 binds four actual trim/parser callbacks through two resolver returns, preserving eager selection, substring effects, actual parser-returned object annotations, maps/context/errors and fatal identity. Paired436 assertions retain12 original authority REDs/424 controls/all436 GREEN; ten separate full-source faults, supplied63/195/12315, evidence7/original314 and book89/3 pass. The first reviewer label error and premature dependent preflight are retained and repaired without native/runtime refresh. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly337-input/83792-byte metadata closure passes; original323 publication/card/publisher remain exact and replayable. Finite notes rollover prerequisite .3.1.6.6 precedes hash .3; remaining required families, TYPE-REFERENCE-BOOK and independent admissions stay queued. Canonical private-fixture registration .7 precedes pipeline .6. New engineering note stays under existing pressure limits; .3.1.6.6 owns the next exact finite rollover.
 

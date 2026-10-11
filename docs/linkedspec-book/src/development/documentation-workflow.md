@@ -68,6 +68,19 @@ Keep root, per-file and aggregate limits unchanged unless their own accepted aut
 Add decision-index rows inside the existing table, before its authoring instructions.
 When repairing placement, retain accepted row text and decision files exactly.
 
+A complete record can trigger rollover through line count even when bytes remain
+below the byte boundary. For example, adding four lines to a root with460 lines
+crosses the mandatory461-line boundary. Retain the actual `--check` failure before
+running `--apply`; inspect the clean-Git suffix, source blob, line range and digest.
+If the collection has no archive slot, own a separate finite admission before
+continuing feature work. Its exact manifest growth and sole decision/index overhead
+need accepted authority; an earlier finite allowance supplies no future reserve.
+
+Preserve any live evidence that binds the root or book before changing them.
+Keep its original hashes at the accepted Git revision, then separately verify the
+new rollover against that revision. A healthy render also checks recursive local
+includes: mdBook can report an include error while returning exit0.
+
 ## Public book
 
 This book is for:

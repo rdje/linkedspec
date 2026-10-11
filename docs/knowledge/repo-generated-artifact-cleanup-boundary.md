@@ -21,7 +21,10 @@ answers:
   - "what did REPO-HYGIENE.5 remove"
   - "is Dart dot dart tool safe to delete"
   - "how much space did the July 17 artifact cleanup reclaim"
-date: 2026-10-10
+  - "which live claims must be preserved before changing a shared book chapter"
+  - "why was the October10 hygiene claim preserved during ADR0133"
+  - "do historical checked claims need a tracked producer input"
+date: 2026-10-11
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
@@ -32,8 +35,16 @@ evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/R
 evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
-reverify: "git check-ignore -v rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; git ls-files rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; bash tools/test_tool_project_data_storage.sh"
+reverify: "Current ADR0133 closure: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6/publish.py (readonly). Original REPO-HYGIENE.15 commands below require accepted d8418423e inputs, including the original live claim/book/card. No cleanup or runtime observation is refreshed."
 ---
+
+# Shared publication inputs and historical provenance
+
+Before changing a shared book chapter, enumerate intersections across every live claim; the immediate predecessor is insufficient. ADR0133 changed the documentation-workflow chapter before noticing REPO-HYGIENE.15 also bound it. All19 original hashes and claim fields were subsequently verified against clean d8418423e and preserved with only mode/revision changes. The late timing is disclosed; original dated observations are unchanged.
+
+Every checked durability record, including a historical one, needs a tracked producer input. The actual claim validator rejects the two original producer-free historical entries and accepts exact provenance repairs without refreshing hashes. The original362-input draft, publisher and actual failed CI report remain retained. Logs needed after command exit belong outside automatically cleaned managed scratch, or require explicit failed-run retention.
+
+The original hygiene body below is dated evidence. Its readonly publication commands require its accepted Git input state; current closure and exact preservation review are named above. No recovery, purge or artifact removal is authorized here.
 
 # Repo Generated Artifact Cleanup Boundary
 
