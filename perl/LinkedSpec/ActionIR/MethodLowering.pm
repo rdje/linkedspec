@@ -7716,6 +7716,11 @@ sub _normalize_hash_receiver_value_chain_expr {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
 
+ my $kind_callback = (ref($deps) eq 'HASH') ? $deps->{bare_symbol_kind} : undef;
+ my $bare_symbol_kind = _bind_emission_dependency(
+  ref($kind_callback) eq 'CODE' ? $kind_callback : sub { return undef },
+ );
+
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 

@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 — Select the legacy hash kind callback locally
+
+Legacy hash receiver normalization ignored its injected kind callback and used an unbound
+package variable. Four local binding lines select the actual CODE once before trim, use an
+undefined default for missing/non-CODE input and keep child emission capture separate.
+Native context, actual match aliases, maps, effects, errors and fatal-object identity remain.
+
+First-native35 cases include23 unchanged controls/12 intended repairs and two cold rows.
+Identical487 TAP retains48 original semantic REDs/439 controls/all487 current GREEN. Five
+complete syntax-valid faults fail48/3/9/5/3; supplied61 suites/187 inputs/11664 assertions,
+six actual evidence RED/restorations and full book89/three controls pass. Independent Perl
+slot/write probes distinguish a clear readonly flag from match write rejection. Original546
+copy/CI bindings remain historical at770cffcc. Draft/error-prefix and diagnostic-wrapper
+corrections retain original observations and replay byte-exactly. Supplemental syntax/public
+Phase0 passes1035 with complete channels; no transitive capsule or broader admission claimed.
+Book/compiler explanation and Knowledge cards align. Required array receiver .3.1.6.1 follows.
+
 ## 2026-10-10 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 — Preserve scalar-bound receiver copy types
 
 A scalar-held hash copied with .copy() returned[] because AST receiver selection fell through to

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / regex and undefined-return required callbacks next
+- Status: `active` / required array receiver capture next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
-- Last updated: `2026-10-10`
+- Last updated: `2026-10-11`
 - Owner: LinkedSpec repo-local PNT
 - Parent: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` in `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md`
 - Planning owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
@@ -616,7 +616,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Refinement: Complete the two confirmed correctness repairs first, each with its own native/RED/GREEN proof and commit; then isolate array, number/string, hash, array-end parser and hash-index parser/lowerer required seams separately. This routing parent grants no independent admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0`
-  Status: `active` / two distinct correctness children
+  Status: `done` / both distinct correctness children verified
   Goal: Repair scalar-held hash single-step receiver-copy type loss and the separate legacy hash kind-callback failure before required receiver capture.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2`
   Owned paths: Routing only; child .0 owns public copy selection, child .1 owns legacy callback selection/default. Preserve current claim inputs before each child's writes.
@@ -657,15 +657,27 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: After exact canonical admission, normal commit and post-pointer/brief0/clean verification, activate legacy .6.0.1 with complete current live-input preservation. No push or broader factory admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1`
-  Status: `pending` / P2 private legacy hash kind callback
+  Status: `done` / `focused-signoff-complete` P2 private legacy hash kind callback (activated from clean `770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e`)
   Goal: Select the injected bare_symbol_kind callback or documented undefined default locally in legacy hash normalization; preserve actual aliases/context/effects and private authority.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0`
   Owned paths: Legacy _normalize_hash_receiver_value_chain_expr kind callback only; direct source-bound native/error/default/identity proof, supplied consumers/book/claim/Knowledge/continuity. Required resolver capture stays .6.3.
-  Planned tier: `focused`
-  Planned focused proof: Reproduce the retained direct normalizer failure with valid dependencies; distinguish actual injected map callback from unrelated package state. Missing/non-CODE default, explicit hash/array and lookahead branches, aliases/errors/contexts/maps and opaque publication control must pass. Own effective source inverses and exact supplied inputs.
-  Planned canonical boundary: none for bounded private fallback selection; escalate before any new public/API/format effect.
-  Planned claim record: none: Planning only; declare measured record at activation.
+  Verification tier: `focused`
+  Focused checks: Preserve all546 predecessor live inputs before bound writes. Retain first native observations and paired regression RED/GREEN; distinguish injected/default selection from unrelated package state. Cover explicit container and lookahead branches, guards/arity, readonly match aliases, scalar context/effects/errors/fatal identity, selection timing/public maps and opaque/known publication separation. Run effective source faults, exact supplied consumers, evidence/original-binding corruption controls, full recursive-include book, required Perl syntax/public Phase0, history/memory/Knowledge/whitespace and normal doctrines.
+  Canonical trigger: none for bounded private fallback selection; escalate before any new public/API/format or mechanical-owner effect.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json`
   Acceptance: Resolve the owned failure with actual selected callback/default and no package-state dependence; commit before required receiver children.
+  Activation: Predecessor770cffcc passed exact canonical CI and normal hooks; promoted receipt, post-pointer, brief0 and clean tree verified. Current source paths, retained receiver diagnosis, private authority contract and relevant compiler/book sections reviewed. Preserve accepted inputs before changing source, bound Knowledge/book or roadmap projections.
+  Owned continuity issue: P3 root metadata still named regex/undefined-return as next despite the current frontier naming legacy hash repair. Reproduce by comparing Metadata with Current Frontier at activation; impact is conflicting resume guidance. Correct the current header in this leaf, leaving historical evidence unchanged.
+  Native evidence: All546 accepted predecessor bindings preserved before bound writes. Immutable186-file native probe retains35 cases (23 selected-callback controls and12 intended selection/default repairs) plus two require-only cold rows. A valid injected hash callback with undefined package state fails before invoking that callback; conflicting package callbacks also determine the wrong result. Source is still unchanged.
+  Owned alias finding: Native match arguments report Internals::SvREADONLY=0 yet reject writes. Treating that flag as writability would make the fixture and a copied-argument implementation unsound. Independent pure-Perl four-case oracle proves lexical/copied-match flag0 writes succeed, literal flag1 writes fail, and actual match-slot alias flag0 writes fail. Retained match-alias.py/json and t/perl_match_alias_writability_probe.pl own this diagnosis. Assert actual write rejection separately; preserve native instruments and add a gated fact card at signoff.
+  Fixture refinement: Initial408-assertion draft/33 REDs retained verbatim. Its one native-control RED is exactly t/ versus ./t/ loader spelling in the readonly-write diagnostic. fixture-correction.py/json retain that source and correct only a shallow expected-error prefix plus trace-dependent loops into fixed authored-row ledger assertions. Immutable original native/capture/before remain unchanged; complete-capture.py retains the corrected487-assertion before with48 intended selection/default/authority REDs and439 passing controls, including all23 complete native observations. Production is unchanged until this baseline is retained.
+  Implementation progress: Four local binding lines select the map callback once before trim, default non-CODE/missing input to undefined and bind its separate private capture. First current fixture.json retains inner exit0/all487 GREEN. Its complete-capture wrapper reported outer1 solely because the unchanged public-copy test intentionally emits one structured observation diagnostic. capture-correction.py/json preserve that producer/result and supersede its empty-stderr assumption with exact recognized JSON plus rejection of other stderr in final-capture.py. The initial correction writer's one-versus-two pointer preflight refusal happened before target writes; exact draft retained. No runtime/native observation is refreshed.
+  Signoff evidence: P2 legacy hash kind callback .3.1.6.0.1 selects the injected CODE callback once before trim and defaults missing/non-CODE to unknown. First-native35 cases retain23 complete controls/12 intended repairs plus two cold rows; paired487 assertions retain48 original REDs/439 controls/all487 GREEN. Five syntax-valid faults fail48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions, six evidence RED/restorations and book89/3 pass. Independent Perl5.34.1 four-case slot/write oracle proves a match argument can have readonly flag0 yet reject writes. All546 predecessor bindings remain historical at770cffcc, with original observations and both bounded instrument corrections retained/replayed. Supplemental standard syntax/public Phase0 passes1035; no full transitive capsule or broader admission is inferred. Required array receiver .3.1.6.1 follows, then .6.2-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued.
+  Publisher preflight correction: First publish-claim draft exits1 before writing the claim: runtime faults is a named count dictionary, not integer5. Retain exact draft and publish-correction.json with disclosed terminal transcription; corrected publisher compares all five names/counts and reconstructs this exact bounded source correction. Its reconstruction check also refused once before writes because an unanchored source search matched its own string literal. Exact second draft/hash and cause retained; newline-anchored removal verifies the bounded correction. Runtime/native/review proof remains unchanged.
+  Closure: P2 callback selection/default failure fixed and verified. P3 conflicting root metadata corrected to the current frontier. Independent readonly review reconstructs all original/native/current/consumer/book inputs, five complete mutants, pure-Perl oracle and both exact correction replays. Six actual evidence corruptions reject for named reasons and restore. Claim publisher defaults readonly; all one-shot producers and original failed stages are retained.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 - select legacy hash kind callback locally`
+  Owned commit prerequisite / P2 documentation pressure: First normal-hook attempt rejects the proposed engineering-notes archive/manifest against existing collection/member limits. The new live note crossed rollover pressure. The hook group was terminated after that rejection (outer commit exit1); HEAD remains770cffcc. Shorten only the new note, retaining its full detail in canonical fact cards/task evidence, restore the exact clean-HEAD manifest and remove only the verified uncommitted generated segment. No threshold increase or immutable accepted history edit. Retain rejected note/manifest/segment and exact compaction producer under docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1/. Re-run history/routing checks and normal hooks; existing322-input runtime publication remains exact.
+  Handoff: Normal focused hooks, post-pointer, brief0 and clean tree are required before array receiver activation. No push or wider factory admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1`
   Status: `pending`
@@ -794,7 +806,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` | `pending` | Repair the independently reproduced legacy hash kind-callback failure; preserve all accepted copy/CI live inputs first. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1` | `pending` | Isolate required array receiver callbacks after the verified legacy repair; preserve accepted claim inputs first. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | Depends on the preceding bounded owner. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | Depends on the preceding bounded owner. |
@@ -1056,7 +1068,16 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 - [x] **NO REGRESSION** — Supplied61 suites/184 files pass, retaining all60 predecessor suites plus the regression. Legacy rule aggregate array, wrong arity and multi-step controls remain exact. Exact staged canonical receipt is required before landing this public repair; no broader factory admission inferred.
 - [x] **LOCKSTEP** — Knowledge1346/10319 and final book89/three controls pass. Current roadmap/index/live/history/memory align; exact staged memory/history/whitespace and canonical receipt/normal doctrine hooks govern intended clean landing before legacy .6.0.1.
 
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1
+
+- [x] **REPRODUCE / ROOT CAUSE** — Injected kind callbacks were ignored for package state. First-native35 cases/23 controls/12 intended repairs plus cold2 retained before four-line binding change;487 paired TAP has48 original semantic REDs/439 controls.
+- [x] **FIX / VERIFIED** — Select actual CODE once before trim or undefined default; isolate its publication. All487 current pass; five syntax-valid complete faults fail48/3/9/5/3. Context, actual match aliases/write rejection, maps/effects/errors/fatal identity and native guards retain behavior.
+- [x] **ORACLE / DURABILITY** — Independent Perl four-case slot/write probe, six actual evidence RED/restorations, byte-exact correction replays and original546 Git binding preservation pass. Original draft/failed wrapper remain recoverable; no native/runtime/CI observation refreshed.
+- [x] **NO REGRESSION / LOCKSTEP** — Supplied61 suites/187 inputs/11664 assertions, book89/three controls and supplemental syntax/public Phase01035 pass. Claim/Knowledge/roadmap/continuity align; normal focused hooks govern landing before .3.1.6.1.
+
 ## Verification Log
+
+- `2026-10-11`, `.3.1.6.0.1`: P2 legacy hash kind callback .3.1.6.0.1 selects the injected CODE callback once before trim and defaults missing/non-CODE to unknown. First-native35 cases retain23 complete controls/12 intended repairs plus two cold rows; paired487 assertions retain48 original REDs/439 controls/all487 GREEN. Five syntax-valid faults fail48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions, six evidence RED/restorations and book89/3 pass. Independent Perl5.34.1 four-case slot/write oracle proves a match argument can have readonly flag0 yet reject writes. All546 predecessor bindings remain historical at770cffcc, with original observations and both bounded instrument corrections retained/replayed. Supplemental standard syntax/public Phase0 passes1035; no full transitive capsule or broader admission is inferred. Required array receiver .3.1.6.1 follows, then .6.2-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued. Readonly review/evidence/publication and required focused checks govern landing.
 
 - `2026-10-10`, `.3.1.6.0.0`: P1 scalar-bound receiver-copy .3.1.6.0.0 verifies50 assertions, original9 REDs/41 controls/50 GREEN, live/standalone14-case ledgers, typed source poisoning and shallow snapshot identity. Three source faults reject9/4/8; supplied61/184, evidence5/original307 restoration and book89/3 pass. Exact CI inverse/native registration RED, complete192 supplied inputs,22 recovery/74 evolution controls and evidence3 pass. Initial runtime publication is retained; its publisher extension adds the CI supplement without refreshing native proof. Readonly304-core/198-CI bindings and118034-byte claim pass. Fresh exact canonical receipt and normal hooks govern landing. Legacy hash callback .3.1.6.0.1 follows, before required .6.1-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued.
 
@@ -1142,6 +1163,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- `2026-10-11`, `.3.1.6.0.1`: P2 legacy hash kind callback .3.1.6.0.1 selects the injected CODE callback once before trim and defaults missing/non-CODE to unknown. First-native35 cases retain23 complete controls/12 intended repairs plus two cold rows; paired487 assertions retain48 original REDs/439 controls/all487 GREEN. Five syntax-valid faults fail48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions, six evidence RED/restorations and book89/3 pass. Independent Perl5.34.1 four-case slot/write oracle proves a match argument can have readonly flag0 yet reject writes. All546 predecessor bindings remain historical at770cffcc, with original observations and both bounded instrument corrections retained/replayed. Supplemental standard syntax/public Phase0 passes1035; no full transitive capsule or broader admission is inferred. Required array receiver .3.1.6.1 follows, then .6.2-.6.5; TYPE-REFERENCE-BOOK and independent admissions stay queued. Normal focused commit workflow precedes array receiver activation.
 
 - `2026-10-10`: From clean268891fdf, split local-return/value .3.1.2.2 before writes into local-return .0 and block-value .1; guarded AST now depends on .1. Preserve all399 current capacity/audit bindings before any bound input changes. Local-return changes only one required return and verifies115/4/3, native6/roles2, paired6 RED/109 controls/115 GREEN, supplied35/154, evidence5 and complete book57+32/3. Dated older reviewers require their accepted Git input boundaries. Public Phase0 passes1035/1035; ordinary hooks govern the focused commit. Block-value .1 is next; broader private/parent admissions stay open.
 

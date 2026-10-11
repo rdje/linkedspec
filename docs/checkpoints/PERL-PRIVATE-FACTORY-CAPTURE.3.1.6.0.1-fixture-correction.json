@@ -1,0 +1,14 @@
+{
+  "producer_sha256": "6376408a0d8f7cbc742a0b467e626331c49016cb269f716abb39ed0b04ea6f30",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-before.json",
+  "before_sha256": "a9bfe745a09935e9d7d68ba6999cef4c8020a28a999f076d6dcd5310edf52659",
+  "draft": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-fixture-draft.t",
+  "draft_sha256": "16eea53c1608b2202aef53b6574c23478ca0a68f08b263de61e6548b1ce19673",
+  "corrected_test": "t/actionir_receiver_scalar_copy.t",
+  "corrected_test_sha256": "8ce7600fbf8b16b67ede3af51fdf18d229dd46d9464e5aa47cbffefd5b5a9152",
+  "original_capture": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-capture.py",
+  "original_capture_sha256": "a98a0759098d78beec18a6833d3724b61f0f7eabb70c01ecf416021d5e7d3dcd",
+  "complete_capture": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-complete-capture.py",
+  "complete_capture_sha256": "385eff349fb0196a8706ad6b29f3c174f8bfaa655578d4ebf534699b4a0e3574",
+  "scope": "Draft408 assertions/33 failures retained verbatim. One native-control failure is only t/ versus ./t/ loader spelling in an otherwise equal readonly-write diagnostic. Compare a shallow expected-row copy after that exact path-prefix adjustment; raw observations remain unchanged. Replace trace-dependent assertion loops with six fixed whole-ledger assertions per authored case, so intended callback count changes cannot change the paired population. Original native/draft producers and results are not refreshed. Complete producer differs only by its disclosed docstring/native-mode prohibition/corrected-before output and reader selection."
+}

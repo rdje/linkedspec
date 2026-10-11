@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Caller-local hash kind selection preserves native match-slot behavior
+
+Select the actual injected CODE once before trim, default missing/non-CODE to unknown,
+and isolate its private emission capture. Map replacement cannot change that invocation.
+Required hash resolver returns stay with .3.1.6.3; no public syntax or parent admission.
+
+Native match aliases have readonly flag0 yet reject writes. The independent Perl5.34.1
+slot/write oracle distinguishes lexical/literal/match/copied-match behavior; the argument-copy
+fault has nine REDs. See docs/knowledge/perl-match-alias-writability.md for exact scope.
+
+Complete487 TAP retains48 original REDs/439 controls/all487 GREEN. Five source faults,
+supplied61/187, evidence6/original546 and book89/3 pass; supplemental public Phase0 passes1035.
+Draft408/path-prefix and first-positive diagnostic-wrapper refusals remain exact; separate
+corrections replay byte-identically. See docs/knowledge/perl-legacy-hash-kind-callback.md
+and the owning task record for complete retained instruments, channels and claim limits.
+
 ## 2026-10-10 — Scalar storage kind cannot select a receiver copy's container family
 
 Bare assignment records scalar storage even when its runtime value is an array or hash. The AST

@@ -1,0 +1,18 @@
+{
+  "producer_sha256": "e02419b40096c5cd5d937250d65dfc7b7fe79fba4bf863db16e30f9de30c73d8",
+  "original_producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-complete-capture.py",
+  "original_producer_sha256": "385eff349fb0196a8706ad6b29f3c174f8bfaa655578d4ebf534699b4a0e3574",
+  "first_positive": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-fixture.json",
+  "first_positive_sha256": "b7ad3672dcae774468aa1b85b30ec96d2d6087c92b0207c04887659292d6a9b2",
+  "final_producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-final-capture.py",
+  "final_producer_sha256": "132c19daedaddfebb275732074a1e6e3285809093beca46aa006918b71d23665",
+  "observed_inner_exit": 0,
+  "observed_assertions": 487,
+  "observed_failures": 0,
+  "reported_outer_exit": 1,
+  "preflight_draft": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-capture-correction-draft.py",
+  "preflight_draft_sha256": "e69cb932535214a0cc48ce27efb9ac6818deb125f1d5b504f7ccb861b2910667",
+  "preflight_refusal": "Initial correction writer expected one fixture.json pointer; the instrument has two. It refused before writing either target. Exact draft retained; corrected guard requires both pointers.",
+  "outer_boundary": "Terminal tool reported exit1 at the empty-stderr assertion. This is a transcription of that observed boundary, not a retained raw transport envelope.",
+  "scope": "First actual positive remains verbatim: inner exit0,487 GREEN, one existing structured public-copy diagnostic. Retain the original complete producer unchanged. Its zero-stderr assumption is superseded by an exact single recognized JSON diagnostic and rejection of all other stderr. Final producer writes a separate positive artifact and selects it for faults; no prior result is refreshed."
+}

@@ -1,0 +1,13 @@
+{
+  "draft": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-publish-claim-draft.py",
+  "draft_sha256": "f040cf128a48a4ab8344b0a5c5bf5bfe6d5656b2111b0534c3111553aef18326",
+  "old": "'faults': 5, 'pure_perl_oracle_cases': 4",
+  "new": "'faults': {'remove-binding': 48, 'raw-callback': 3, 'copy-argument': 9, 'hash-default': 5, 'late-selection': 3}, 'pure_perl_oracle_cases': 4",
+  "reported_exit": 1,
+  "boundary": "Terminal tool observed assertion failure comparing runtime expected values, before TARGET.write_bytes. This is a transcription, not a raw transport envelope.",
+  "cause": "runtime faults is the named five-fault count dictionary, not integer5. Compare the complete named inventory with counts48/3/9/5/3. No claim target existed or was written. Runtime review and original observations remain unchanged.",
+  "second_draft": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-publish-claim-check-draft.py",
+  "second_draft_sha256": "8716e8d5bc8ae2e657cbcad1aad4f29dd33ff3894dfb6ba91d17e21bd280d49a",
+  "second_reported_exit": 1,
+  "second_cause": "The source reconstruction block searched for unanchored expected = and matched that text inside its own index expression. It refused before claim writes. Anchor to newline plus expected assignment, then remove exactly the correction block. Actual proof reports remain unchanged."
+}

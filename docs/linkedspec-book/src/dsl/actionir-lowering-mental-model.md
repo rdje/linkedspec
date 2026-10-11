@@ -1572,6 +1572,25 @@ dependency maps, native scalar context, successful error effects and fatal
 exception identity stay unchanged. Complete helper/AST/language, optional/direct
 callbacks and broader private admission remain separate.
 
+Legacy hash receiver normalization selects its optional kind callback locally.
+It retains the caller's actual `bare_symbol_kind` callback before trimming the
+expression. A missing or non-CODE callback supplies an undefined kind. For
+example, a known hash receiver `meta.copy()` normalizes to `copy(meta)`; a known
+array receiver leaves hash normalization without a result. A hash-specific next
+method can still establish the hash family when the receiver kind is unknown.
+Changing the caller's dependency map during trim does not replace the callback
+already selected for this invocation.
+
+The kind callback receives the original Perl match-variable argument. Its clear
+`Internals::SvREADONLY` flag does not mean that writes are permitted: assigning
+through that alias still raises Perl's read-only-value error. Copying the argument
+into a lexical scalar would change that behavior. The compiler preserves the
+actual alias, scalar context, once-only effects and fatal-object identity.
+The callback has its own private capture, so an opaque child cannot donate
+equal-text publication to the enclosing normalizer. A known child retains its
+actual callback identity, while the public dependency map retains the caller's
+original reference.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

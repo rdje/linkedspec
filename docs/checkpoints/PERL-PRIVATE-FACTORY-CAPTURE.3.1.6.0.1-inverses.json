@@ -1,0 +1,109 @@
+{
+  "producer_sha256": "132c19daedaddfebb275732074a1e6e3285809093beca46aa006918b71d23665",
+  "positive": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-positive.json",
+  "variants": [
+    {
+      "label": "remove-binding",
+      "reason": "legacy map-over-undefined-package result",
+      "failures": [
+        "legacy map-over-undefined-package result",
+        "legacy map-over-undefined-package exact error selection",
+        "legacy map-over-undefined-package selected callback count",
+        "legacy map-over-undefined-package actual injected callback selected",
+        "legacy map-over-undefined-package callback scalar context",
+        "legacy map-over-undefined-package actual match value",
+        "legacy map-over-undefined-package native match flag remains clear",
+        "legacy map-over-undefined-package match argument is separate from caller scalar",
+        "legacy map-over-undefined-package incoming error effect survives",
+        "legacy map-over-array-package result",
+        "legacy map-over-array-package actual injected callback selected",
+        "legacy array-map-over-hash-package result",
+        "legacy array-map-over-hash-package actual injected callback selected",
+        "legacy unknown-map-over-hash-package result",
+        "legacy unknown-map-over-hash-package actual injected callback selected",
+        "legacy missing-map-over-hash-package result",
+        "legacy missing-map-over-hash-package selected callback count",
+        "legacy missing-map-over-hash-package actual injected callback selected",
+        "legacy missing-map-over-hash-package callback scalar context",
+        "legacy missing-map-over-hash-package actual match value",
+        "legacy missing-map-over-hash-package native match flag remains clear",
+        "legacy missing-map-over-hash-package match argument is separate from caller scalar",
+        "legacy missing-map-over-hash-package incoming error effect survives",
+        "legacy noncode-map-over-hash-package result",
+        "legacy noncode-map-over-hash-package selected callback count",
+        "legacy noncode-map-over-hash-package actual injected callback selected",
+        "legacy noncode-map-over-hash-package callback scalar context",
+        "legacy noncode-map-over-hash-package actual match value",
+        "legacy noncode-map-over-hash-package native match flag remains clear",
+        "legacy noncode-map-over-hash-package match argument is separate from caller scalar",
+        "legacy noncode-map-over-hash-package incoming error effect survives",
+        "legacy missing-map-with-undefined-package exact error selection",
+        "legacy noncode-map-with-undefined-package exact error selection",
+        "legacy missing-map-lookahead result",
+        "legacy missing-map-lookahead exact error selection",
+        "legacy map-over-fatal-package result",
+        "legacy map-over-fatal-package exact error selection",
+        "legacy map-over-fatal-package actual injected callback selected",
+        "legacy fatal-map-over-array-package exact error selection",
+        "legacy fatal-map-over-array-package actual injected callback selected",
+        "legacy fatal-map-over-array-package actual fatal identity",
+        "legacy readonly-map-over-array-package exact error selection",
+        "legacy readonly-map-over-array-package actual injected callback selected",
+        "legacy readonly-map-over-array-package actual write rejection",
+        "legacy authority/0 separate publication",
+        "legacy authority/0 actual callback identity",
+        "legacy authority/1 separate publication",
+        "legacy cold default avoids undefined package callback"
+      ],
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-inverse-remove-binding.json"
+    },
+    {
+      "label": "raw-callback",
+      "reason": "legacy authority/0 separate publication",
+      "failures": [
+        "legacy authority/0 separate publication",
+        "legacy authority/0 actual callback identity",
+        "legacy authority/1 separate publication"
+      ],
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-inverse-raw-callback.json"
+    },
+    {
+      "label": "copy-argument",
+      "reason": "legacy native-hash actual readonly match alias",
+      "failures": [
+        "legacy native-readonly complete native observation",
+        "legacy native-readonly result",
+        "legacy native-readonly exact error selection",
+        "legacy native-readonly actual write rejection",
+        "legacy readonly-map-over-array-package result",
+        "legacy readonly-map-over-array-package exact error selection",
+        "legacy readonly-map-over-array-package actual write rejection",
+        "legacy native-hash actual readonly match alias",
+        "legacy authority/1 actual callback identity"
+      ],
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-inverse-copy-argument.json"
+    },
+    {
+      "label": "hash-default",
+      "reason": "legacy missing-map-over-hash-package result",
+      "failures": [
+        "legacy missing-map-over-hash-package result",
+        "legacy noncode-map-over-hash-package result",
+        "legacy missing-map-with-undefined-package result",
+        "legacy noncode-map-with-undefined-package result",
+        "legacy cold missing callback defaults to unknown"
+      ],
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-inverse-hash-default.json"
+    },
+    {
+      "label": "late-selection",
+      "reason": "legacy native-map-replacement result",
+      "failures": [
+        "legacy native-map-replacement complete native observation",
+        "legacy native-map-replacement result",
+        "legacy native-map-replacement actual injected callback selected"
+      ],
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-inverse-late-selection.json"
+    }
+  ]
+}

@@ -29,4 +29,74 @@ unlike($observed->{typed_source}, qr/__poison_/, 'typed AST ignores all poisoned
 is($observed->{legacy_source}, 'return [@Top]', 'legacy rule aggregate array snapshot remains exact');
 like($observed->{wrong_arity_source}, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:copy/,
  'receiver copy still rejects an extra argument');
+my $legacy_loaded=do './t/actionir_legacy_hash_kind_probe.pl';
+die $@ || $! unless defined $legacy_loaded;
+my $legacy_native_path='docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json';
+open my $legacy_fh,'<',$legacy_native_path or die "$legacy_native_path: $!";
+my $legacy_capture=JSON::PP->new->decode(do {local $/;<$legacy_fh>});
+close $legacy_fh or die "$legacy_native_path: $!";
+my $legacy_native=JSON::PP->new->decode(MIME::Base64::decode_base64($legacy_capture->{stdout_base64}));
+is($legacy_capture->{returncode},0,'legacy first native probe completed');
+my $legacy_cases=LegacyHashKindProbe::cases();
+is(scalar(@{$legacy_native->{cases}}),scalar(@$legacy_cases),'legacy complete native case population');
+my $legacy_current=LegacyHashKindProbe::observations();
+for my $index (0..$#$legacy_cases) {
+ my $case=$legacy_cases->[$index];
+ my $row=$legacy_current->{cases}[$index];
+ my $label='legacy '.$case->{name};
+ my $expected_native=$legacy_native->{cases}[$index];
+ if ($case->{name} eq 'native-readonly') {
+  $expected_native={%$expected_native};
+  my $adjusted=$expected_native->{error}=~s{at t/actionir_legacy_hash_kind_probe\.pl line (?=\d+\.\n\z)}{at ./t/actionir_legacy_hash_kind_probe.pl line };
+  is($adjusted,1,'legacy native readonly loader spelling is the sole path adjustment');
+ }
+ is_deeply($row,$expected_native,"$label complete native observation") unless $case->{repair};
+ is($row->{value},$case->{value},"$label result");
+ is($row->{error_kind},$case->{error},"$label exact error selection");
+ is(scalar(@{$row->{trace}}),$case->{calls},"$label selected callback count");
+ ok($row->{public_map_preserved},"$label actual caller map survives");
+ is($row->{caller_after},exists($case->{expr}) ? $case->{expr} : 'meta.copy()',"$label caller scalar survives");
+ is_deeply([map {$_->{origin}} @{$row->{trace}}],[('map') x $case->{calls}],"$label actual injected callback selected");
+ is_deeply([map {$_->{context}} @{$row->{trace}}],[('scalar') x $case->{calls}],"$label callback scalar context");
+ is_deeply([map {$_->{args}} @{$row->{trace}}],[map {['meta']} 1..$case->{calls}],"$label actual match value");
+ is_deeply([map {$_->{readonly}} @{$row->{trace}}],[map {[0]} 1..$case->{calls}],"$label native match flag remains clear");
+ is_deeply([map {$_->{caller_slot}} @{$row->{trace}}],[(0) x $case->{calls}],"$label match argument is separate from caller scalar");
+ is_deeply([map {$_->{incoming_error}} @{$row->{trace}}],[('incoming legacy kind error') x $case->{calls}],"$label incoming error effect survives");
+ if (($case->{error} // '') eq 'map-fatal') {
+  is_deeply($row->{error},{type=>'LegacyHashKindMapFatal',kind=>'map-fatal'},"$label actual fatal identity");
+ } elsif (($case->{error} // '') eq 'readonly') {
+  like($row->{error},qr/Modification of a read-only value attempted/,"$label actual write rejection");
+ }
+}
+my $legacy_writability=LegacyHashKindProbe::invoke({name=>'native-hash',kind=>'hash',outcome=>'readonly'});
+is($legacy_writability->{error_kind},'readonly','legacy native-hash actual readonly match alias');
+is($legacy_writability->{caller_after},'meta.copy()','legacy rejected match write leaves caller intact');
+for my $known (0,1) {
+ LinkedSpec::ActionIR::SourceOrigins::_with_source_origins('same',sub {
+  my $event={raw=>'same'};
+  LinkedSpec::ActionIR::SourceOrigins::_remember_source_origin($event,
+   {event=>$event,source=>'same',source_span=>{start=>0,end=>4}});
+  my ($deps,$state,$package_cb)=LegacyHashKindProbe::setup({name=>'authority',kind=>'hash'});
+  $state->{event}=$event;
+  my $outer=sub {LegacyHashKindProbe::invoke_owner($deps,$state,$package_cb)};
+  LinkedSpec::ActionIR::SourceEmissions::_with_emission_producers($known ? [$outer,$deps->{bare_symbol_kind}] : [$outer],sub {
+   my $result=LinkedSpec::ActionIR::SourceEmissions::_capture_emission($outer);
+   is($result->{value},'copy(meta)',"legacy authority/$known ordinary value");
+   ok(!LinkedSpec::ActionIR::SourceEmissions::_emission_for($result,$outer,$event),"legacy authority/$known separate publication");
+   is_deeply($state->{eligible},[$known],"legacy authority/$known actual callback identity");
+   is(scalar(@{$state->{trace}}),1,"legacy authority/$known once-only effect");
+   ok(LegacyHashKindProbe::same($deps->{bare_symbol_kind},$state->{actual}),"legacy authority/$known public callback unchanged");
+   is_deeply($state->{trace}[0]{args},['meta'],"legacy authority/$known actual match value");
+  });
+ });
+}
+my $legacy_cold=$legacy_current->{cold};
+is($legacy_cold->{returncode},0,'legacy cold probe completed');
+is($legacy_cold->{value}{loaded_before},0,'legacy cold owner starts without emission channel');
+is($legacy_cold->{value}{loaded_after},0,'legacy cold binding keeps channel lazy');
+is_deeply($legacy_cold->{value}{rows}[0],$legacy_native->{cold}{value}{rows}[0],'legacy cold injected callback stays native');
+is($legacy_cold->{value}{rows}[0]{value},'copy(meta)','legacy cold injected result');
+is($legacy_cold->{value}{rows}[1]{value},undef,'legacy cold missing callback defaults to unknown');
+is($legacy_cold->{value}{rows}[1]{error},undef,'legacy cold default avoids undefined package callback');
+ok($legacy_cold->{value}{rows}[1]{map_preserved},'legacy cold default preserves absent map field');
 done_testing();
