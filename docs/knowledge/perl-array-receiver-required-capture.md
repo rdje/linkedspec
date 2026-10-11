@@ -1,0 +1,74 @@
+---
+id: perl-array-receiver-required-capture
+title: Required array receiver callbacks retain actual substring effects and separate publication
+answers:
+  - "which required callbacks does the array receiver normalizer acquire"
+  - "can trim replace the array normalizer parser after selection"
+  - "does receiver splitting pass actual substring arguments to trim"
+  - "why can trim mutation turn sorted into a rejected dot call"
+  - "does array receiver callback capture copy its arguments"
+  - "where is required array receiver isolation verified"
+  - "why did the array consumer wrapper refuse passing suites"
+date: 2026-10-11
+status: bounded focused proof verified; supplemental public compatibility passed; canonical integration remains separately owned
+tags: [perl, actionir, receivers, callbacks, aliases, publication]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1 retains immutable189-input first-native8 callback outcomes/34 branches/4 authority rows/2 public source rows/2 cold rows. Identical215 TAP has6 original authority REDs/209 controls/all215 current GREEN. Five syntax-valid full-module faults fail6/2/4/3/4. Actual supplied62 suites/191 inputs/11879 assertions book89/three controls and seven actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035 with complete channels and no full transitive input capsule. Original322 predecessor bindings stay historical atc90b99a83. Original consumer wrapper outer1 is distinct from its actual inner PASS; separate path-complete review checks every command/header/plan and predecessor diagnostics."
+reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-review.py"
+  - "Use the original accepted leaf's Git input state after later source/book changes. Capture/freezer/fault/evidence writers are one-shot; original observations and refused instruments must not be refreshed."
+---
+
+The legacy array receiver normalizer eagerly requires trim and method parsing.
+It validates both before its first trim or input guard. Missing/non-CODE roles
+retain the required-dependency diagnostic. Parser replacement during trim cannot
+change the actual parser already selected for this invocation.
+
+The normalizer now binds only its required resolver return. Each selected child
+has a separate private capture, keeping opaque publication from the enclosing
+normalizer and retaining known-child authority by actual callback reference.
+Public dependency maps, scalar context, effects, successful error state and fatal
+object identity stay native. Cold require-only calls leave SourceEmissions unloaded.
+
+The splitter passes actual `substr` arguments to trim, alongside local scalar
+copies. A controlled trim callback returns its incoming text and then appends `!`
+through the argument. Mutation of the receiver substring shifts the later call
+argument to `.sorted()`, which the parser declines. The caller's original
+`items.sorted()` remains unchanged. All observed argument flags are clear, so
+flags alone do not distinguish these aliases from copied scalar arguments.
+The syntax-valid copied-argument fault loses the native effect and fails the
+whole callback ledger and authored result, as well as known-callback identity.
+
+The native/current comparison retains all ordinary callback/branch observations.
+Only the four missing/non-CODE diagnostic locations are normalized in shallow
+comparison copies; their exact diagnostic stems and original source line remain
+checked, while complete raw channels retain the original supplied paths.
+Source, method, arity, terminal-family, nested/quoted/decimal splitter guards and
+optional kind non-invocation keep their native outcomes. Optional/direct capture
+stays with `.3.2`; other required families and full helper/AST/language/private
+pipeline admissions retain their separate owners.
+
+The consumer capture's original postcondition expected bare `t/*.t` lines. Actual
+prove headers carry progress dots, and one accepted suite lives under
+`docs/checkpoints/`. Its retained command succeeded with all62 suites; the
+wrapper then refused. The separate readonly reviewer checks all62 ordered
+command paths, headers and complete plans, the success summary and byte-exact
+predecessor diagnostic stream. It does not rerun or refresh the original result.
+
+Producers, exact runtime inputs, whole mutant sources and distinct channels are
+retained under `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-`.
+
+The first evidence writer stopped at an inverse artifact-hash guard before its
+intended semantic denial. Its original source and observed outer1 transcription
+are retained; reached inner channels were not saved and are unavailable. The
+corrected fresh seven-control recurrence retains those actual channels before
+assertions, reproduces the hash-only denial separately, and tests the semantic
+reason beyond its updated immediate binding. This does not reconstruct lost
+original channels or refresh any native/runtime observation.
+
+Canonical fixture selection remains an explicit integration prerequisite. Adding
+this focused test does not automatically register it in canonical CI; the
+canonical contract is owned by
+`docs/knowledge/perl-receiver-copy-canonical-selection.md`. Complete focused
+private-fixture registration is scheduled under
+`PERL-PRIVATE-FACTORY-CAPTURE.7`, before pipeline activation `.6`. This card's
+source-bound focused proof makes no independent canonical-coverage claim.

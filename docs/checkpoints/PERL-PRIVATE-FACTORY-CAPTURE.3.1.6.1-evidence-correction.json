@@ -1,0 +1,9 @@
+{
+  "original_producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-evidence.py",
+  "original_sha256": "bbed29684c3c941a7ac0939cdaaea422556951a1e9993e9b4bbe8d3e94f79288",
+  "reported_exit": 1,
+  "reported_failure": "AssertionError: ('wrong evidence denial', 'missing-semantic-reason')",
+  "boundary": "Actual terminal outer exit1 occurred after healthy review and the false-positive RED/restoration, at the next control. This is a transcription of the observed terminal boundary, not raw transport channels. The first writer accumulated results until its final publication; reached inner command channels were not retained and cannot be recovered. No original partial-control success is claimed.",
+  "cause": "Changing the inverse stdout alone first violates the inverses index artifact SHA. To reach the semantic reason check, change the immediate index SHA to the damaged artifact identity as well. Retain a separate actual hash-only denial to reproduce the first boundary. Final producer checkpoints its reached healthy/RED/restored channels before assertions. Original runtime observations, reviewer and first evidence source stay unchanged.",
+  "repair_owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1"
+}

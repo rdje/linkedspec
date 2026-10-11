@@ -10,6 +10,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1 — Isolate required array receiver callbacks
+
+Bind the array normalizer's required trim/parser return, retaining eager callback selection,
+actual substring mutation, maps/context/errors/fatal identity and caller values. Original215
+TAP has6 authority REDs/209 controls; all215 current pass. Five complete syntax-valid faults
+fail6/2/4/3/4. Supplied62 suites/191 inputs/11879 assertions, evidence7/original322 and book89/
+three controls pass. Preserve original consumer wrapper refusal and the first evidence attempt's
+unavailable partial channels; separate path-complete/fresh controls govern accepted proof.
+Full instruments and scope: docs/knowledge/perl-array-receiver-required-capture.md. Supplemental
+standard syntax/public Phase0 passes1035 with complete channels. Number/string .3.1.6.2 is next.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 — Select the legacy hash kind callback locally
 
 Legacy hash receiver normalization ignored its injected kind callback and used an unbound

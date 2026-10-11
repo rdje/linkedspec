@@ -1591,6 +1591,29 @@ equal-text publication to the enclosing normalizer. A known child retains its
 actual callback identity, while the public dependency map retains the caller's
 original reference.
 
+Required array receiver callbacks retain their native argument boundaries.
+The normalizer acquires trim and method parsing before trimming or checking the
+input. A missing or non-CODE callback keeps the existing required-dependency
+diagnostic. Replacing the parser entry from a trim callback does not change the
+parser already selected for that invocation. Public dependency maps retain
+their actual references.
+
+Trim receives local scalar copies and the splitter's actual substring arguments.
+These are different alias boundaries despite their clear readonly flags. For
+example, a controlled trim callback that returns its incoming text and appends
+`!` through its argument changes the splitter's receiver substring. The later
+call text becomes `.sorted()` instead of `sorted()`, and normalization declines.
+The caller's original `items.sorted()` string stays unchanged. Copying every
+callback argument would suppress that native effect. The parser receives its
+local call-expression slot; its ordinary mutation remains local.
+
+Each required callback has a separate private emission capture. Opaque children
+cannot donate equal-text publication to the enclosing normalizer; known children
+retain their actual callback identity. Ordinary values, scalar context, effects,
+successful error state, fatal objects, source/arity/family guards and require-only
+lazy loading stay native. Optional/direct dependencies and complete helper,
+AST, language and private-pipeline admission remain separate work.
+
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an
 empty raw node with `{start => 9, end => 9}`; the native parser-input frame is

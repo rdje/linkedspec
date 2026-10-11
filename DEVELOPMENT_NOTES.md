@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Required array callbacks retain substring aliases
+
+Bind required trim/parser returns without copying actual substring arguments or changing eager selection.
+Native215/6 RED/209 controls, faults5, supplied62/191, evidence7/book89/3 retain the contract.
+Full scope and refused-instrument limits: docs/knowledge/perl-array-receiver-required-capture.md.
+
 ## 2026-10-11 — Caller-local hash kind selection preserves native match-slot behavior
 
 Select the actual injected CODE once before trim, default missing/non-CODE to unknown,
