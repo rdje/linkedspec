@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1 — Isolate inline-required dropped-value trim
+
+Bind exactly one direct required trim invocation, preserving both actual map reads/CODE validation, local versus returned argument slots, references, context, effects, errors and all input/AST/fallback guards. Native213/6 outcomes/33 guards/2 authority/3 cold precedes identical298 TAP:3 original isolation REDs/295 passing controls/all298 current GREEN. Six syntax-valid full-source faults fail3/1/2/14/9/4; supplied68 suites/215 inputs/13958 assertions, six evidence RED/restorations beyond updated immediate hashes and complete book89/three controls pass. Original339 bindings/full78574-byte inventory publication and actual baseline remain exact. Current book/card explain the verified boundary and sixteen remaining ingress sites. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly339-live-input/78325-byte publication passes and ordinary focused hooks govern landing. No full-helper/private/parent/canonical admission. Scope and readonly proof: docs/knowledge/perl-method-trim-capture.md.
+
 ## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0 — compiled remaining-call inventory
 
 Read-only MethodLowering inventory retains108 source/compiled named functions,218 CVs,812 executable CODE sites and207 lexical bindings. Thirteen generated-string candidates are excluded;17 ingress sites are assigned to eight bounded fix leaves. The original212-input dropped-value diagnosis confirms an inline required trim gap, scheduled first under .3.2.1.1. Source and all211 accepted consumer inputs remain unchanged.

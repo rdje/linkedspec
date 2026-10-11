@@ -13,11 +13,14 @@ answers:
   - "why does the callback source regex overcount generated Perl strings"
   - "where is the inline dropped value required trim gap owned"
   - "which readonly command verifies the MethodLowering compiled call census"
+  - "why does dropped value trim read a tied dependency map twice"
+  - "does dropped value trim compare lowering with the returned slot after effects"
+  - "which readonly command verifies inline required dropped value trim isolation"
 date: 2026-10-11
-status: historical required trim proof; seventeen remaining MethodLowering ingress sites owned by .3.2.1 children
+status: inline required dropped-value trim isolated; sixteen optional/direct ingress sites remain under .3.2.1.2-.8
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
-evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture."
-reverify: "Current inventory: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0-publish-claim.py; review.py, evidence-review.py and book-review.py under the same prefix/wrapper are readonly. First captures/freezer/controls and --capture are retired one-shot writers. Historical trim review requires accepted429d0c6d inputs; block-component and book commands below require their originally recorded accepted Git inputs, not current source/book. Local-return final-review.py under .3.1.2.2.0 requires acceptedde3b50dd inputs. MEMORY.md and the task tree own current selection."
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
+reverify: "Current inline-required trim: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-publish-claim.py; review.py, consumer-review.py, book-review.py and evidence.py under the same prefix/wrapper are readonly by default. First captures/freezer/faults and --capture are retired one-shot writers. Historical inventory .3.2.1.0-publish-claim.py requires accepted354c15530fd1445ebfa8c6c0683e7b8d066caced Git inputs including its original live claim/book/card. Earlier trim review requires accepted429d0c6d inputs; old block/book commands require their originally recorded accepted Git inputs. Local-return final-review.py under .3.1.2.2.0 requires acceptedde3b50dd inputs. MEMORY.md and the task tree own current selection."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -81,7 +84,7 @@ optional shadow is a distinct one-call binding. The optional array-normalizer
 kind is selected but has no local invocation. Eager required validation of the
 main infer_scalar_container_kind role likewise does not imply a local call.
 
-The17 remaining sites are owned in order by .3.2.1.1-.8: inline required trim1;
+At the inventory acceptance, the17 remaining sites are owned in order by .3.2.1.1-.8: inline required trim1;
 small optional kind3; giant outer/shadow kind2; source/assignment kind2; optional
 AST2; predicates2; formal trim4; named CODE dispatch1. Literal local closures are
 not caller-supplied authority; their actual injected ingress remains separately
@@ -94,8 +97,8 @@ remain with their original owners. TYPE-REFERENCE-BOOK stays queued.
 The original212-input dropped-value probe observes both opaque and known trim
 callbacks executing once in scalar context with eligibility[1] and parent
 publication. Source selection and CODE validation are inline, bypassing the
-already-bound resolver returns. P2 .3.2.1.1 owns the verified fix first; the
-original diagnosis is retained unchanged. It does not establish an authored DSL
+already-bound resolver returns. P2 .3.2.1.1 repairs that boundary first; the
+original diagnosis remains retained unchanged. It does not establish an authored DSL
 failure. Three compiled full-source controls remove/add a call or unbind a
 required resolver, and three membership/binding/family corruptions are rejected
 with their exact reasons, followed by six actual restored reviews.
@@ -109,3 +112,42 @@ was refreshed. Original355 bindings/full120239-byte publication and both prior
 historical claims remain exact, with only its one live mode/revision pair frozen
 at91e972cfa0. Inventory source/producer/member/semantic controls and complete book
 proof admit only this static scope, not a runtime or parent promotion.
+
+
+Inline-required dropped-value trim (.3.2.1.1) changes exactly one invocation to
+_bind_emission_dependency($trim_action_ir_value)->($expr), retaining the original
+line count and every CODE/input/AST/fallback guard. Undefined input returns before
+lookup or required validation. Defined input preserves the inline map expression:
+a tied HASH is read once for CODE checking and again for actual selection, then
+the selected reference is validated. The second reference can differ or be non-CODE;
+its native diagnostic and ordering survive. Callback self-replacement selects the
+replacement only on the next call; unrelated/public map references remain exact.
+
+The actual trim argument is the owner's writable local input copy. Scalar mutation
+leaves the caller scalar unchanged, and object input/returned object identities
+remain native. AST/method helpers share the separate returned trim slot. Final
+lowered equality compares that slot after method effects: returning original text
+after mutating the slot is accepted, while returning changed equal text stops.
+Empty/undefined trim, invalid/raw AST, unknown helper including the string0,
+empty/zero/equal/hash lowered values and receiver-mutation discard are covered by
+explicit controlled secondary helpers. They do not admit complete AST/language
+behavior. Native fatal objects and successful/incoming error effects survive.
+
+First213-input observations retain6 callback outcomes/33 guard cases/2 authority
+rows/3 cold cases before assertions. Their original authority rows match the earlier
+inventory diagnosis exactly. Fresh subprocesses run the same probe command, retaining
+Perl's native IO-context handle/record diagnostic suffix rather than normalizing it
+or letting fixture IO change it. Identical298 TAP retains3 original isolation REDs
+and295 controls, then all298 current GREEN. Six whole-source syntax-valid faults
+fail3/1/2/14/9/4 for raw call, wrapper identity, coerced argument, removed CODE check,
+removed input guard and caller-based final equality. Complete supplied68 ordered
+suite paths/plans/215 inputs/13958 assertions pass with exact predecessor stderr.
+
+The controlled known/opaque callbacks have separate captures: actual identity controls
+eligibility and neither donates the parent packet. Cold require/invocation still
+loads no SourceEmissions. Original339 bindings/full78574-byte inventory record and
+actual publisher baseline remain exact, with only its one live mode/revision pair
+historical at354c15530. Earlier native observations and historical claims stay exact.
+Sixteen remaining ingress sites follow under .2-.8; independent helper/private,
+FlowExpr/ControlFlow, root fixture .7 before root pipeline .6, output/mapped/parent/
+canonical admissions and TYPE-REFERENCE-BOOK remain separate.

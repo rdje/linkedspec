@@ -1,0 +1,50 @@
+{
+  "result": "PASS",
+  "rows": [
+    {
+      "name": "raw-call",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-raw-call.json",
+      "artifact_sha256": "12a2fae642a421cb965b7aabdbd5286934b508869a08b1e42f25440d77a73ca5",
+      "failure_count": 3,
+      "required_reason": "dropped trim known0 child cannot donate parent packet"
+    },
+    {
+      "name": "wrapper-identity",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-wrapper-identity.json",
+      "artifact_sha256": "66e180223ef61f77e68e16ecd16f1adf776fa5a0e7658889ad609a2a0003f33d",
+      "failure_count": 1,
+      "required_reason": "dropped trim known1 actual callback controls eligibility"
+    },
+    {
+      "name": "coerced-argument",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-coerced-argument.json",
+      "artifact_sha256": "c3f3d3b5f0dedf9660e1b095698fda341fc8837e10160ca35ef7fcde04ae6309",
+      "failure_count": 2,
+      "required_reason": "dropped trim reference-input complete native observation"
+    },
+    {
+      "name": "removed-code-validation",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-removed-code-validation.json",
+      "artifact_sha256": "07d9137c0741a8c3e7528259cac25ed54b0e2fa348581afc83515f49cdff7d0e",
+      "failure_count": 14,
+      "required_reason": "dropped trim deps-missing keeps its required diagnostic"
+    },
+    {
+      "name": "removed-input-guard",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-removed-input-guard.json",
+      "artifact_sha256": "c14fc9c9fc9e0ea507231417566d849bbbfc0b1dd7ee2b75a519e8737c46c123",
+      "failure_count": 9,
+      "required_reason": "dropped trim undefined-tied stops before dependency lookup"
+    },
+    {
+      "name": "caller-equality",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-inverse-caller-equality.json",
+      "artifact_sha256": "3a8605cdc06e17a9d9da1c9651bee8a6e048ab5ef30aaaccc67cb243393634d8",
+      "failure_count": 4,
+      "required_reason": "dropped trim method-mutated-original authored result"
+    }
+  ],
+  "producer_sha256": "e1ccd7c56290c14e6edd02124bd109abc0cb1ba0acd610e961549c9eae2274db",
+  "module_sha256": "6d5af4ac66a5fc5e38289810db1e1269706d68828c279b98634a52392c76887c",
+  "scope": "Six exact whole-source syntax-valid variants supplied with215 exact inputs each. Actual original probe and identical298-assertion fixture retain complete channels and distinguishing semantic reasons. No current/native artifact or old observation is refreshed."
+}

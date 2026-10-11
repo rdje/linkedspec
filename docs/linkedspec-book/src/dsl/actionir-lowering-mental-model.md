@@ -1490,20 +1490,33 @@ alone keeps SourceEmissions lazy. Explicit bare-source, primitive, method and
 migration controls bound this proof; complete helper and language behavior retain
 separate admission.
 
-The remaining MethodLowering audit distinguishes dependency ingress from local
-implementation closures. A required resolver can validate and privately bind a
-callback, while an inline CODE check can still lead to a direct unisolated call.
-For example, `_lower_dropped_value_statement` currently reads and validates trim
-from the dependency map directly. A controlled probe demonstrates inherited
-eligibility and equal-text publication at that call; its required trim boundary
-is the next repair. This establishes an internal capture gap, without inferring
-an authored-language failure.
+Inline required trim in `_lower_dropped_value_statement` now has its own private
+capture. Undefined input returns before dependency lookup. Defined input still
+requires a CODE callback with the same missing-dependency diagnostic. The native
+map expression reads the callback once for its CODE check and again for selection;
+the selected reference is validated and retained. Tied-map behavior and callback
+replacement keep that order and actual identity.
 
-The October11 compiled-source inventory records seventeen remaining call sites:
+Trim receives the existing local input scalar in scalar context. Mutating it leaves
+the caller scalar unchanged; an object input keeps its actual object reference.
+The returned trim slot is separate from that input slot and is shared with the
+later AST and method helpers. Empty or undefined trim stops immediately. A raw or
+non-hash AST stops before method lowering; an unknown helper retains its existing
+diagnostic. A lowered `0` is retained, a hash expression receives its existing `+`
+prefix, and receiver mutation uses its existing discard temporary. Final equality
+uses the returned slot after method effects. These are internal callback contracts,
+with controlled secondary helpers rather than new DSL spellings.
+
+Opaque and known trim callbacks cannot donate publication to the parent. Known
+eligibility uses the selected callback itself. The original controlled diagnosis
+is retained, and the same regression changes three isolation failures to success
+while preserving295 native controls. Successful error effects, actual fatal objects,
+public map references and lazy loading remain native.
+
+After this repair, sixteen MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Inline required trim | 1 | Existing CODE diagnostic and input/AST/fallback guard order |
 | Optional kind callbacks | 7 | Actual map selection, undefined defaults, early local-name decisions and aliases |
 | Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
 | Mutation/write predicates | 2 | Target validation before lookup and original truthiness |

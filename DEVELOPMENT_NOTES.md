@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Inline validation requires its own callback boundary
+
+The dropped-value trim caller validates/selects directly instead of using a bound required resolver return. Undefined input stops before lookup. Defined input reads a tied dependency map twice: CODE-check first, actual selection second, then validation of the selected reference. Bind only that actual invocation. Its writable argument is a local input copy; AST/method helpers share a separate returned trim slot, and final equality uses that slot after method effects. Preserve those native contracts and actual map/reference/error identities. Fresh subprocess probes retain Perl's complete native IO-context die suffix instead of changing it through test IO. Original diagnosis/native observations, paired authority RED/GREEN, full-source faults and beyond-hash evidence controls remain immutable. Full rationale and bounded proof: docs/knowledge/perl-method-trim-capture.md; owner PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.
+
 ## 2026-10-11 — Compiled callback ingress versus local closures
 
 PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0 preserves two compiler views before assertions. B::Deparse counts810 lexical callback calls; a separate B optree traversal adds one direct map call and one already-bound returned CODE invocation. Parent pad slots separate same-spelled outer local and inner injected bare_symbol_kind bindings. The823 raw arrow candidates include13 generated-string pieces; do not use source regex membership alone.

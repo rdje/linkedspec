@@ -2063,7 +2063,7 @@ sub _lower_dropped_value_statement {
  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback 'trim_action_ir_value'"
   unless ref($trim_action_ir_value) eq 'CODE';
 
- my $trimmed = $trim_action_ir_value->($expr);
+ my $trimmed = _bind_emission_dependency($trim_action_ir_value)->($expr);
  return undef unless defined($trimmed) && length($trimmed);
  my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
  return undef unless ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') ne 'raw_perl';

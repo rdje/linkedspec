@@ -1,0 +1,36 @@
+{
+  "base": "354c15530fd1445ebfa8c6c0683e7b8d066caced",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-before-inventory.json",
+  "original_sha256": "dee348f1e8decb19781ed14f776000347d4d8fe8c8443ed7df097361fe861ac2",
+  "after_sha256": "bea9edc02fafdffbefd463b00d51788268dc04fa08f78d2e58ca086e60960b40",
+  "producer_sha256": "369778ffe023bde41d6b6ac6ecbe347f80af74b2b8630bb949900f91167ba452",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "name": "remaining-method-callback-ingress-inventory",
+      "bindings": 339,
+      "intersections": [
+        "docs/knowledge/perl-method-trim-capture.md",
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+        "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+      ]
+    }
+  ],
+  "scope": "Every339 accepted live binding and full78574-byte original inventory record remains exact. Actual accepted readonly publisher baseline precedes runtime/book/card writes. Only its sole live mode/revision pair becomes historical354c15530; all older historical publications and first native/counterfactual observations remain unchanged."
+}
