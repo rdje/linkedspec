@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / optional and direct callback isolation next
+- Status: `active` / remaining optional and direct callback isolation next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-11`
@@ -843,7 +843,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5 - isolate required hash-index callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2`
-  Status: `pending`
+  Status: `active` / package-flow child first
   Goal: Isolate MethodLowering optional and direct injected callback calls; split function families before writes as needed.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6`
   Owned paths: `perl/LinkedSpec/ActionIR/MethodLowering.pm` optional/direct callback calls; focused proof/claim, Knowledge/book/continuity.
@@ -856,15 +856,21 @@ quoted-first example do not change here. Other repositories and all submodules r
   Owned issue: P2 private-protocol gap in _lower_mutation_slot_value_expr: the optional flow branch reads package variable $LinkedSpec::ActionIR::MethodLowering::lower_flow_composite_expr rather than acquiring a map callback. Toolbox call_spec_handler_subst('Top', 'items += and(true,false)') uses the normal RuntimeLogical expression with no package override; localizing that package variable to a callback returning FLOW_OVERRIDE produces BindingRuntime::push_value(..., FLOW_OVERRIDE) and invokes it once. This is an actual reachable legacy direct callback, not a missing required-role acquisition. Preserve its native selection/behavior and isolate its publication under .3.2.0; do not silently replace it with a new map dependency or infer an authored-language failure. Retain a supplied native probe before the current required edits.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0`
-  Status: `pending`
+  Status: `done` / `focused-signoff-complete`
   Goal: Isolate the reachable legacy mutation package-flow direct callback while preserving its actual callback selection, context, arguments, ordinary value/effects/errors and public behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6`
   Owned paths: Only the direct package-flow call in _lower_mutation_slot_value_expr; bounded actual native/public Toolbox and publication proof, retained source faults/consumers/book/claim and continuity. Required slot callbacks are separately owned by .3.1.5.0.
-  Planned tier: `focused`
-  Planned focused proof: Reuse the original4b48593b5 Toolbox diagnosis with its exact historical inputs; independently reproduce opaque/known packet isolation and actual callback identity, native selection versus an unrelated map callback, undefined/equal/empty/zero/fatal branches, aliases/effects/errors, source/input/evidence controls and public compatibility.
-  Planned canonical boundary: none for one private call binding that preserves native behavior; reclassify before any public dependency/API/format change.
-  Planned claim record: none: Planning only; declare actual source-bound measurement at activation.
+  Verification tier: `focused`
+  Focused checks: Reuse the original4b48593b5 Toolbox diagnosis with its exact historical inputs; independently reproduce opaque/known packet isolation and actual callback identity, native selection versus an unrelated map callback, undefined/equal/empty/zero/fatal branches, actual trimmed-slot aliases/effects/errors/results/maps, cold laziness, source/input/evidence controls, complete supplied consumers/book and standard syntax/public Phase0. Ordinary doctrine/history/Knowledge/memory checks govern landing.
+  Canonical trigger: none for one private call binding that preserves native behavior; reclassify before any public dependency/API/format change.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json`
+  Activation: Clean4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31, all10 normal hooks/post-pointer/brief0 and clean Git verified. Roadmap, original slot/flow canonical card and historical probe/capture, actual mutation owner/required binder, public caller and book reviewed. Only one direct package-flow invocation is owned: preserve its CODE guard, actual selected package reference, scalar call and trimmed-slot alias; do not introduce a map role. Preserve all350 accepted predecessor bindings/full84391-byte publication and actual readonly baseline before bound writes. Retain first native observations before assertions or the one-line source edit. Reuse slot/assignment cards; no Knowledge slot remains.
   Acceptance: Resolve this owned P2 boundary before remaining optional families. Preserve the existing package callback rather than inventing new map semantics. Commit before .3.2.1; complete helper/language and parent admissions remain separate.
+  Progress: Original350 bindings/full84391-byte record and accepted publisher baseline are preserved before bound writes. First native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299: exactly3 original isolation REDs/296 controls/all299 GREEN. Six whole-module faults fail3/1/35/85/55/7. First and distinct final supplied67/211/13660 and book89/3 pass. Final readonly review reconstructs the exact one-call source edit and all original artifacts. All seven actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035 with complete channels; no full transitive input capsule is inferred. Initial indentation denial and copied reviewer-count typo are owned here, with exact first module/instruments/merged failure channels; separate final captures verify the sole whitespace correction. Copied capture scope wording is preserved and its sole descriptive correction is gated; no native observation/hash is refreshed.
+
+  Result: Package-flow .3.2.0 isolates the single direct package callback while preserving actual package selection, trimmed-slot aliases, context/maps/replacement/errors and public generated source. Native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six source faults, final supplied67/211/13660, seven evidence RED/restorations, book89/3 and supplemental standard syntax/public Phase01035 pass. Original350/full84391 publication and first instruments/channels remain exact. Normal focused hooks govern landing before remaining optional/direct .3.2.1; TYPE-REFERENCE-BOOK and independent admissions stay queued. Fixture registration .7 precedes pipeline .6.
+  Publication: Readonly publisher reconstructs355 live/172 historical inputs in120239 bytes; original350/full84391 and accepted168-file historical diagnosis stay exact.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 - isolate package-flow callback`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1`
   Status: `pending`
@@ -927,12 +933,11 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0` | `pending` | Isolate the already owned reachable package-flow direct callback after required hash-index landing; preserve its actual package selection. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1` | `pending` | Remaining optional/direct families follow the package-flow boundary. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1` | `pending` | Package-flow .3.2.0 verified; inventory and split remaining optional/direct families before writes. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
 
 ## Handoff
 
@@ -1246,6 +1251,8 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 
 ## Verification Log
 
+- `2026-10-11`, `.3.2.0`: Package-flow .3.2.0 isolates the single direct package callback while preserving actual package selection, trimmed-slot aliases, context/maps/replacement/errors and public generated source. Native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six source faults, final supplied67/211/13660, seven evidence RED/restorations, book89/3 and supplemental standard syntax/public Phase01035 pass. Original350/full84391 publication and first instruments/channels remain exact. Normal focused hooks govern landing before remaining optional/direct .3.2.1; TYPE-REFERENCE-BOOK and independent admissions stay queued. Fixture registration .7 precedes pipeline .6.
+
 - `2026-10-11`, `.3.1.6.4`: Required array-end .3.1.6.4 binds one resolver return for trim/parser/extractor, preserving eager selection, actual payload argument slots, splitter effects, structured results, maps/context/errors and fatal identity. Completed native201/12 callbacks/57 branches/6 authority/4 public-source/2 cold precedes paired325:9 original authority REDs/316 controls/all325 GREEN. Five faults fail9/3/36/9/18; supplied65/203/12948, evidence8/original321 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly329-input/78324-byte publication passes. Compile-failed instrumentation and wrong-wrapper preflight remain explicit without runtime refresh. Normal focused hooks govern landing before hash-index .3.1.6.5; optional/direct, independent admissions and TYPE-REFERENCE-BOOK stay queued. Fixture registration .7 precedes pipeline .6.
 
 - `2026-10-11`, `.3.1.6.3`: Required hash .3.1.6.3 binds one resolver return and preserves eager trim/parser selection, substring effects, actual shared call references without annotation, maps/context/errors and fatal identity. Immutable native197/8 callbacks/52 branches/4 authority/2 public-source/2 cold precedes paired308:6 original authority REDs/302 controls/all308 GREEN. Five full-source faults fail6/2/4/5/8; supplied64 suites/199 inputs/12623 assertions, evidence7/original115 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly321-input/75495-byte publication passes. Normal focused hooks govern landing before array-end .3.1.6.4. Optional/direct, independent admissions and TYPE-REFERENCE-BOOK remain queued; fixture registration .7 precedes pipeline .6.
@@ -1307,6 +1314,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.3.2.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 - isolate package-flow callback`, from clean4cc0b5a2a; focused proof and standard compatibility verified, normal hooks govern landing.
+
 - `.3.1.6.4`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4 - isolate required array-end parser callbacks`, activated from clean98990ffbc; focused proof and standard compatibility verified, normal hooks govern landing.
 
 - `.3.1.6.3`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3 - isolate required hash receiver callbacks`, activated from clean e4507973a; focused proof and standard compatibility verified, normal hooks govern landing.
@@ -1354,6 +1363,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- `2026-10-11`, `.3.2.0`: Package-flow .3.2.0 isolates the single direct package callback while preserving actual package selection, trimmed-slot aliases, context/maps/replacement/errors and public generated source. Native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six source faults, final supplied67/211/13660, seven evidence RED/restorations, book89/3 and supplemental standard syntax/public Phase01035 pass. Original350/full84391 publication and first instruments/channels remain exact. Normal focused hooks govern landing before remaining optional/direct .3.2.1; TYPE-REFERENCE-BOOK and independent admissions stay queued. Fixture registration .7 precedes pipeline .6.
 
 - `2026-10-11`, `.3.1.6.4`: Required array-end .3.1.6.4 binds one resolver return for trim/parser/extractor, preserving eager selection, actual payload argument slots, splitter effects, structured results, maps/context/errors and fatal identity. Completed native201/12 callbacks/57 branches/6 authority/4 public-source/2 cold precedes paired325:9 original authority REDs/316 controls/all325 GREEN. Five faults fail9/3/36/9/18; supplied65/203/12948, evidence8/original321 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly329-input/78324-byte publication passes. Compile-failed instrumentation and wrong-wrapper preflight remain explicit without runtime refresh. Normal focused hooks govern landing before hash-index .3.1.6.5; optional/direct, independent admissions and TYPE-REFERENCE-BOOK stay queued. Fixture registration .7 precedes pipeline .6.
 
@@ -1540,3 +1551,13 @@ beside its stable ID; Git is the commit-identity authority.
 - [x] **CAPACITY** — Exactly one member/576 manifest bytes/one line and sole ADR0134/index35-line overhead; root/per-file/aggregate and unrelated controls remain exact. Actual pressure/old-admission REDs and independent complete-suffix/root/manifest/registry/decision reconstruction pass.
 - [x] **PROOF** — All226 prior files and329 accepted array-end bindings/full claim retained. Production30 thresholds/23 authority denials, four named reviewer/two beyond-immediate-SHA preservation REDs each restore. Original180-file draft/46-file extension, failed reason ordering and wrong-book census remain explicit, byte-bound and owned; corrected readonly producer reconstruction and complete book89/three controls pass.
 - [x] **LOCKSTEP** — Guarded readonly392-input/108215-byte claim, exact original369/380 publications, two portable-evidence RED/restorations and11 strict selector denials, reused card and derived map, book/current roadmaps/index/live/MEMORY and bounded histories align. Exact staged canonical CI/receipt and all normal hooks are mandatory landing conditions. Hash-index .5 remains next; no runtime/full-private/parent admission or future capacity reserve.
+
+
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.2.0
+
+- [x] **REPRODUCE / ISSUE** — Actual first-native209 inputs retain opaque/known child publication donation; identical299 TAP has exactly three isolation failures and296 native controls. Original4b48593b5 public argument-premise rejection and six historical replay channels remain explicit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_lower_mutation_slot_value_expr` directly invoked the actual package CODE callback with parent publication active. The dependency map entry does not select this branch. Actual eligibility and parent packet lookup distinguish borrowed identity and donation.
+- [x] **FIX** — Bind only that direct invocation; retain the existing CODE guard/reference and actual trimmed-slot alias. Context, results/errors/effects, callback replacement/localization, method/equality/source fallback and cold loading remain native.
+- [x] **ADDRESSED (verified)** — Paired299 now GREEN; six complete syntax-valid source faults fail3/1/35/85/55/7. Seven actual evidence corruptions reject for named reasons and every exact restoration passes. First observations/hashes and rejected indentation/count instruments/merged channels remain unchanged; separate final runs verify the sole whitespace correction.
+- [x] **NO REGRESSION** — Final supplied67 actual paths/plans/211 inputs/13660 assertions and exact predecessor diagnostics pass. Supplemental standard syntax/public Phase01035 retains full channels without a full transitive input capsule. Complete secondary helpers/language/private/canonical admission stays separate.
+- [x] **LOCKSTEP** — Full book89/three controls, reused Knowledge1349/10375, roadmap/index/live/memory and both bounded histories align. Original350/full84391-byte claim and actual accepted publisher baseline stay exact except one live mode/revision pair. Normal focused doctrine/memory/whitespace hooks govern landing before .3.2.1.

@@ -1,0 +1,25 @@
+{
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0-review.py",
+        "--capture"
+      ],
+      "returncode": 1,
+      "merged_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4wLXJldmlldy5weSIsIGxpbmUgODIsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc291cmNlID09IG9yaWdpbmFsWzpzdGFydF0gKyBib2R5LnJlcGxhY2Uob2xkX2NhbGwsIG5ld19jYWxsLCAxKSArIG9yaWdpbmFsW2VuZDpdLCAnd2hvbGUgbW9kdWxlIGV4YWN0IG9uZS1jYWxsIGNoYW5nZScKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IHdob2xlIG1vZHVsZSBleGFjdCBvbmUtY2FsbCBjaGFuZ2UK",
+      "producer_sha256": "1d11bb026df82db1953e2ea346ed262a53b691a127d6cd18298240c6998579a9"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0-consumer-review.py",
+        "--capture"
+      ],
+      "returncode": 1,
+      "merged_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4wLWNvbnN1bWVyLXJldmlldy5weSIsIGxpbmUgMzQsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc3VtbWFyeT09WyhiJzY3JyxiJzEzNjcwJyldLCdjb21wbGV0ZSBjb25zdW1lciBzdW1tYXJ5JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogY29tcGxldGUgY29uc3VtZXIgc3VtbWFyeQo=",
+      "producer_sha256": "744462b0558274f7e60e3c6f621b6516ef4871f49b2f51f8c01812e213fe7483"
+    }
+  ],
+  "scope": "Original complete merged command channels; separate stdout/stderr were not retained by the invoking shell. Both reviewers stopped before report creation. First module/captures/faults remain unchanged."
+}

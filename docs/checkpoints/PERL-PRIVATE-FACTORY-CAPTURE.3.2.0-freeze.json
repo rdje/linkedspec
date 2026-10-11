@@ -1,0 +1,37 @@
+{
+  "base": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0-before-hash-index.json",
+  "original_sha256": "60f11521c616bb835e1904420258fd02f1d59bb4bf7729bd858fb9412b65ed00",
+  "after_sha256": "b488a350ab28c5b9131bf94596126491a09b37f93e70f52bb912975cc3f8aa64",
+  "producer_sha256": "8effc0b218a32875d82c9fac7c3d759c83bef7634659def6d46cac448778543e",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+    "docs/knowledge/perl-method-ast-assignment-capture.md",
+    "docs/knowledge/perl-method-slot-required-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "name": "hash-index-required-callback-isolation",
+      "bindings": 350,
+      "intersections": [
+        "docs/knowledge/perl-method-ast-assignment-capture.md",
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+        "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+      ]
+    }
+  ],
+  "scope": "All350 accepted bindings and full84391-byte two-claim publication stay exact. Only first live mode/revision becomes historical; original historical preservation claim stays unchanged. Actual accepted publisher baseline precedes bound writes. Every live record was checked for intersections."
+}

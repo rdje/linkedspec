@@ -6948,7 +6948,7 @@ sub _lower_mutation_slot_value_expr {
  return undef if $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
 
  if (ref($lower_flow_composite_expr) eq 'CODE') {
-  my $flow_expr = $lower_flow_composite_expr->($trimmed);
+  my $flow_expr = _bind_emission_dependency($lower_flow_composite_expr)->($trimmed);
   if (defined($flow_expr) && length($flow_expr) && $flow_expr ne $trimmed) {
    _trace_method_decision(
     phase => 'lower_mutation_slot_value_expr',

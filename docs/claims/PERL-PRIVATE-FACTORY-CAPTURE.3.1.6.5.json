@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/uniform_binding_contract.json",
@@ -1772,7 +1772,8 @@
             "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31"
       }
     },
     {

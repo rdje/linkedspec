@@ -1463,12 +1463,32 @@ Method fallback rejects empty results, accepts `0`, and otherwise keeps the
 current trimmed source. A legacy flow callback's source mutation remains visible
 to that fallback.
 
-The legacy optional flow branch selects an existing package callback rather than
-the public dependency map's same-named entry. Required callback isolation preserves
-that selection; isolating this direct callback remains separate work. Opaque and
-known required children each have their own capture, so equal returned text cannot
-transfer their publication to a parent. Explicit secondary-helper controls bound
-these checks; they do not admit complete helper or language behavior.
+The legacy optional flow branch now isolates its actual package callback in a
+separate private capture. It selects an existing CODE reference from the package
+variable, preserving that reference and the public dependency map's same-named
+entry. The map entry does not select this branch. For example, the public Toolbox
+call `call_spec_handler_subst('Top', 'items += and(true,false)')` normally lowers
+the logical expression through `RuntimeLogical`. A localized package callback
+returning `FLOW_OVERRIDE` is called once, in scalar context, with the normalized
+argument `and(true, false)` and supplies that mutation value.
+
+The callback receives the actual trimmed-value slot. If it changes that slot
+from `and(true,false)` to `and(true,false)!` and returns undefined, method fallback
+sees the changed text; an empty or undefined method result leaves that changed
+source as the final fallback. Returning `0` or a reference still succeeds. Flow
+results are compared with the slot's current value: returning the original text
+after changing the slot is accepted, while returning the changed text proceeds
+to method fallback. These examples explain internal callback behavior, without
+adding DSL syntax. Replacing the package callback during a call affects the next
+call, and surrounding Perl localization still restores the prior package value.
+
+Both opaque and known callbacks have their own capture, so equal returned text
+cannot transfer a child's publication to its parent. Known eligibility uses the
+actual selected callback's identity. Scalar context, argument aliases, successful
+error effects and fatal exception objects survive, and loading MethodLowering
+alone keeps SourceEmissions lazy. Explicit bare-source, primitive, method and
+migration controls bound this proof; complete helper and language behavior retain
+separate admission.
 
 Generalized-return required callbacks now have separate private capture boundaries.
 The payload owner rejects an undefined input before requiring trim. The statement
