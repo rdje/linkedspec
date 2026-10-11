@@ -1,0 +1,733 @@
+{
+  "result": "PASS",
+  "base": "dd82f9cbced8311dca8ea8610282780e0c0adf3e",
+  "producer_sha256": "e30073f946ad3fd1bb743ae41764876ca7cf8da57229853e08fe427ac552d8f0",
+  "owned_bound_paths": [
+    "docs/knowledge/perl-legacy-hash-kind-callback.md",
+    "docs/knowledge/perl-method-assignment-required-capture.md",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "census": [
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "sha256": "02e72a86c291c445b8da96e313b41f0a6494e9f599290e3b44d5bdb685898f07",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "sha256": "92b6bb85061688a960d62d7d1bd44e4367794dee42304d23dce6beaf87ff4668",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "sha256": "27a03b0168c54db4d20f32aed8dafc78f55197c353776769e8d220806e101022",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "sha256": "0851f5c07bb6171ae5c7b89aac2dad629dfd5ac6e5a0dcf6ba7125609a3e40ee",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "sha256": "d5f01e96af3be2d5e435f39c6f2f98ec262a78b1bbc12470cc866799a662e04f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "sha256": "4732edfe9018dd6c9d85c883c6130d3ddb6ef1d2cd5f777d13113bc433b21452",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "sha256": "9bc82edf6f91b7a58e676fd1dcdd4f0a30587696500f6010a99dd1d4a3eec14a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "sha256": "d6443e30ad8665ca0d50415b98f54dee78b555975628692f27a55266a88eb170",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "sha256": "90c83317093cbca74aed756463149033b0f231b7c88b9c8ad079e2cb06d995b0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "sha256": "56c48ebf7bc995be72aa254254bf48ece9929a6773382ae7e3337267eae981c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "sha256": "2c3571b3ac4478b598892d170f5429cbd0d7f0142ab953d00a037c53ae739d69",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "sha256": "d83f64e08af2af3812c4665d11025612a036a504df70ff9e563ae5410e1ab69a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "sha256": "0634628b0ffc2b4940fbd9cee2d2bd216453aeef46a7c721ee569e061c70a6c1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "sha256": "a53600e0dcfdffe498060f50d8afd14f369c454a4de66e32359cde023148747f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "sha256": "c706071e163cc90037efd8355d2c26090d2f268977c513f8598368ad47e8e154",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "sha256": "71d1c563980b23c27a3834bf9991c27a95214af0739bd989ac61591e21ca4277",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "sha256": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "sha256": "550c275df6cea6fc85fc7969b82de03e2bb0afde7447a160baa3d02136f17ac3",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "sha256": "21d22432a45b6e5e64ad0175e8de19b6c1d524985f82ca4aedb0bfa128b15af8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "sha256": "d1746ffad6d4ccaed646ebb6154f9202d7feb14ca97dc71ae9d50ede466668c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "sha256": "70f4cccfe1d444001e7a6055d595d2bebbe03e23247a03e4b13146a27bc731e1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "sha256": "137c92cabdb0c84984191ac2f891b407cd2dfb40ffdad343c3b6ee71b9eec35e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "sha256": "11c629d771223d5088441ff8964640deaf8015cf0094cfac1449f9d05c1ff5e3",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "sha256": "9818aae50fafbca97528cd779f2a9172dcdfd3762302416e2f8d422da0a90c1d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "sha256": "139c524a3140736a64590a41442669cb08e6f44ce4b3ea81e993250a3fcb7d60",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "sha256": "366be575ec187381a177aca1e9ff12f47115a615ce6fd486cc46eb3f3a2816fa",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "sha256": "d8af091e2ba9ad106195d7ba58ebb5b4b1862f0f8f87ee870aac992ed82b7464",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "sha256": "0c86d08ee2609fdac11e9e5d9a0eae572d262debc84ca4bde131d78cb3a46037",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "sha256": "5e27e8404d160b094365c1101742ce3ef010adeeb4a44f8e128e2ac9915b2756",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "sha256": "10cc07a2d9461cd13b1625cd08610ac74a2ff66bba9ee3fc323c7b271d76f539",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "sha256": "b488a350ab28c5b9131bf94596126491a09b37f93e70f52bb912975cc3f8aa64",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "sha256": "f0b67d819983ff7a387730641133e56b8c5225170d5d6c3f05c96b7420bd145c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "sha256": "9525afe9bd6c0af8fe82c524cb11b16f879d4f5591f185b9a395f432ba39155f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "sha256": "1ac3cc18f3043533ff7c98ea4f7893b182e37a49bfd513e5834f97721146b6f5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "sha256": "0470998fd64f215509b06deff2db3b6fc6468c3a4f1bed1edb2dccb693a40ab5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "sha256": "bea9edc02fafdffbefd463b00d51788268dc04fa08f78d2e58ca086e60960b40",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "sha256": "f9d270a13fd61a9a875899b3dbfe4a7d78f7b26d4c5326fade9f31d7d77e9f77",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "sha256": "8e25463fca1ecd601837694f78176d6bbc61b2562a93f329dcee7b153d35a539",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "sha256": "7baed10c98af4a74507972b96f5dac3ac8852343e4dfe337b94dee5c9efc50b9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "sha256": "0a34328333e6070e4b5b1e9dc14def37070e5f4f545bb1c31daa9ea2a9289e86",
+      "intersections": [
+        {
+          "claim_index": 0,
+          "paths": [
+            "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "docs/knowledge/perl-method-trim-capture.md",
+            "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+          ],
+          "bindings": 531
+        }
+      ]
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "sha256": "3eb6d43cf473fd797c2e39b804a6364ae19ed016bacf38f0723a0804b2cb1388",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.10.json",
+      "sha256": "52bc0c809b169cfedbb58cbbcf1574017d3c351b910f136fbed674d27c85a8c1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.11.json",
+      "sha256": "fad0c5e2c0131682b56592d093568492feec9880af3f5f9f540eb93f97ff2efc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.13.json",
+      "sha256": "0f8dcc632434b5b153afa84c0c5587bb250dc1485a1cc8fd2b98037b365591b4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.14.json",
+      "sha256": "56c6e8c3b6720ac3ab3a0181d7b867f8ae3bc7cec382220c67c9a2bdd0de31a4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.15.json",
+      "sha256": "4b1ea443c41bdb9bbd31e982ba8787bfdba778cd412baefd33d05f39e5c25145",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.16.json",
+      "sha256": "ef38f269319f7ff917589b16a54df8f53f2a379b8fc650b217f8026b0f1a777c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.8.json",
+      "sha256": "554576fbf3ae1463f80d18cb4b2efba421206c685cb9bdcc19a63c853c088a0b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.9.json",
+      "sha256": "09f4c298ec27702f75a5de33bb4de7dcd09c5d2f45694476d7ecf35311aede93",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SESSION-STARTUP-READING.87.2.json",
+      "sha256": "fede15f524188d76a833d1c84927e42f9ccf2e019cd973740f2549e31144d4d4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2.json",
+      "sha256": "8f11e527e9478b6b2ceab45206baf3dbb7b8ed4a8aa15c4e0f53f8480e552846",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0.json",
+      "sha256": "858c96f5b68736e7c1d123f3696c840c1c5b5d217641ca397a9108a65fae739e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1.json",
+      "sha256": "2c6b4e4c0d058e4dc23d92ba2e8c250d0bcace9e368b21c9aee266b101546780",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.json",
+      "sha256": "a4cc102fdb5a0b2d93ccf26e0b34924a634b3fc9ba8b6c02c31fb106aaa7c362",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0.json",
+      "sha256": "c03683ca89c18769b5f928e291348c712cdd1d4caaa71090320cb96262b1f50d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1.json",
+      "sha256": "c6a205a8b3a21a2d669447b9574e1866ebff3ebb97599b42c786e1dae0884957",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0.json",
+      "sha256": "fcb437f90833edd06bbe4142d77e1c9e5689ff790fd7cfaf6ca2af78a261ae32",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1.json",
+      "sha256": "2ae713a2d7f629bba15c5989270fb735159ebb3e35a8947484d1c4530d6c0d46",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0.json",
+      "sha256": "c0f7eb76f7bf0cc7ffa92a234035a0d4d12d7b3410d53c895b93c57d68895439",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1.json",
+      "sha256": "469828e0b1533d5261257cb423e32e45326eb42c9844d427fbe5c04679aa43e4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2.json",
+      "sha256": "ca36ca48f7e5f7f61a0992e9a5a73cbf87885e6a171044582ad3ff61f1873ae6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3.json",
+      "sha256": "03806abc7016a8ec1dace96c7331d6ed5f27be84f8e21843917f38df7b2aa678",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4.json",
+      "sha256": "2af34b52788a9d6b88841298db638d3658066dec8921ae13d36698c631e758f7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5.json",
+      "sha256": "249e1c46cd832b943351c1e5c8dab9f272561c0a71fc0aede96663e757128b98",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6.json",
+      "sha256": "0358f494817468390dd34ad14459c30b50836d56d17b68ba143c8c567cbcdff8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0.json",
+      "sha256": "3728ddebad760f5edb37b945c703a40c06f41f749fa07e78bb93844077ab37c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1.json",
+      "sha256": "c753d110cdf2332e02b9a48f4c2c7d41d54658ba5ceda34da85f32d132f91df7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0.json",
+      "sha256": "3e5d369f0a35f4c84f47f3330ad31ab6c9f37b37070441ce41ab55fc56b5fe88",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1.json",
+      "sha256": "2408411dc5c4acd20872ef42d4995d31701c8bb5ae4ef1ea7f983cd7e77e5d40",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1.json",
+      "sha256": "78d9e9849059b5a891c04431eb5770cbefc71ace4d0859e1b3c1723a43ba74e2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0.json",
+      "sha256": "d47113cdce756e3dce3b7e745af2be7d398ee66d5621d016a45b8c1acff2b92d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0.json",
+      "sha256": "2e114434711c815316afc09fa1a6c6a96727c67f82c0d24d26a8e852f11dca37",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0.json",
+      "sha256": "706aef8907707690c223c636e88d8fce8a924f03d7608bec8fe39d24cf5ca8f7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0.json",
+      "sha256": "a8174ca4112ecf6538d827819c9ae36dc9779dadf72ba38d4521fc3c54eadaa5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1.json",
+      "sha256": "42fbdd807edab3cbf811c7bda01c16c5f4fed5fc1882d80a3edaf5666dc00d3c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2.json",
+      "sha256": "8d82bbcbf197d6e6ad39a18d3141a97bb60fefe2c6606b035e97dc93b10382e0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3.json",
+      "sha256": "6d7f46258c6b377dcc4035d4f23c63043bf4645df65d2d197101e016e2a6540b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0.json",
+      "sha256": "8b562402e76e534be9284d9fefac75195b22144eedca464f3ac60e0ee361824d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1.json",
+      "sha256": "003bc309941e62904b89443076e9cbcda1a6b5aad51409351ca3962fcb45fbd6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0.json",
+      "sha256": "c5f2abd9d4a859c1c31aba0a2074596688b3909c9dce06dbd8ae77e0e1b87094",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1.json",
+      "sha256": "133c6676930f360facf8e5ad3441e4ec21182b39426e9525d073573e973b0922",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0.json",
+      "sha256": "fccc9456cf566e610bb0ed6e388167d2bfb8461412e82bd81224cc24e635fe2e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0.json",
+      "sha256": "0fdac0382fdeb679ef54f504b2a65d74faf6cf6610ef9099e0a61fd1e0839023",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1.json",
+      "sha256": "337687206148eeae87b4b3b73dda14df350afa52862e0905bbc4717f7daa05dc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2.json",
+      "sha256": "f391bf4cb0a6d8993093cf2d0fb425470986a362089a7a26004b7977f4711308",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3.json",
+      "sha256": "b04081a18b5235222121632e38cec240835bad1a6c96f54386fd4a7f58f6475a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0.json",
+      "sha256": "41ae27a8078b1140eb30ee8666ab20376c5fa2af747aa5795f8c68575b7ee51a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1.json",
+      "sha256": "deb7e6aad856400b15837421daef87043d310834fcd6ffae557cc791931e7c58",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1.json",
+      "sha256": "5985b9f2cf1a65d83f298f26eaa71d6650e8b4aecfd3bae675acbe99dd5314fe",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.json",
+      "sha256": "1c16da896214dd9f21c90107c43310a818088036c82a4713ad9fd29dabde2c63",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1.json",
+      "sha256": "0793d756f3809f1df77e6c7b72ec162fbad9c1ad9ee4fa8418871abfe3a9b41f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3.json",
+      "sha256": "eb53c6e2ef0c273474bd96d521fbb67cb52018cbbbe59e593e8a61bdbb00015e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1.json",
+      "sha256": "79c71e36c59d0f49ccd248ebedb0058ed58e3fd8527bfb4ef851e54a0de9d25c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json",
+      "sha256": "8045ae24e2031c28ea09592e087ab800ab65ba925ea5ce3830a5648b541aa4b7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.json",
+      "sha256": "75fd71f7e1d1885a0bf6e0ccebe24f5723528ea62c41a3dc24369e9dc1dce1bc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.json",
+      "sha256": "ea6b6f526b56b9bb5cf78c2d530b78dd8664094b1ed095f2fc9a0626a478116a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1.json",
+      "sha256": "06f83174458799cee57e783d6f3675f51b9f204272e9a39d284994b71f8aea0d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2.json",
+      "sha256": "e7c57b98e69f92a1837cba096658e4f236735b5292d80ad87e7e0fdb252e8841",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3.json",
+      "sha256": "4c12ece52b840d7f93abd40b026638a2a8337ae049224dc1cbcb0f45dfde24bf",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4.json",
+      "sha256": "19af72a42ca6e145e8720ea6c1ba0d2614fcfa1854cab22baf3be59d02f00d65",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5.json",
+      "sha256": "a50f59e1461305f66572eed13b3065f746f521bfa4128aba343467ad2dd26d6d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6.json",
+      "sha256": "68b0c94a863f4b4eab0c40cfa8d6080c76f127f988dde813ba7fef39c9d36434",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "sha256": "ca0d5fca1f9483dc9211f04f52ce6491c71618c90bb6aa8189ea4293182bb8ea",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "sha256": "8b28e799b7719f643ab0cd92722c1b99f02640d2988f900278542b3231e5212f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "sha256": "f4312127744b9d592961895960ea63d35d5196fabd850fc778f63807ce69d442",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "sha256": "3eb42566908dd46238c8a257f5666bf74cfee93ef09303c13cc600db63290d3e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "sha256": "df2a419815531dfe757aa9331a28684d7e3fe6f10f63ae7ce7d46eeedcf0feef",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "sha256": "e1c2994795e0d8ae2841fd91b35a05998ebed02126ac1a14ba3cf890dba5adfa",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "sha256": "2902e51663ce30eb009109fb583b5b4e04694ed84f3c072659db2a7f68251f81",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "sha256": "900911d9d8b1b7d0a9929680c41a4daedf86048ead5dfb649b9a6bfe2ad475d1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "sha256": "e819d6419910606c253ddb751e9fd515df44e242268f562bdb9a6b83b9c623b2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "sha256": "16f86d9dd48175cb62759ef3fe4a03d15ffc3c5907f86adaea827547d9c2f672",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "sha256": "1781b160725930097ffa3f8ceb7064e6f6dfede740ae147f205798f65db7d53c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "sha256": "256b373f8a59970554fac7b9ce22d26157c24f9bd7ff7b49b04012b7fa6770ff",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "sha256": "b5894f3080b4e2c7c6036410b37a78a0d4a790cf46f8c011421a1848d1644551",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "sha256": "ce49d3747ecefb16d4b1715432c6817c806638535da5c4f1296642504f57b135",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "sha256": "1aaff4f7ae1b65cdc1a47d9fc6ea051c4b003631a2a95190e6bc3834ea2b9db2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "sha256": "4979b43bfea15922c2efb754e065c988fc731a5c4bc487065c2476a091e6e9ce",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "sha256": "1903ad33445bfed63ab18d312c74a295aa5e2e2b0eedf524a9f2db01a59ccd7d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "sha256": "5eb729f109410be4e154f537425e51285c3c411ce84ee4e970649dac63d388f8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+      "sha256": "13d228cf8d4768959f4cd6932c078dacd8ea9f19fbd29a378baae490a9dad41b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "sha256": "4b305b1bf131b8c38c24397a49cb26d850aea19f2c9736069e01954176eac4c9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0.json",
+      "sha256": "8d3738ecd0ea7238012599176d5bfbcc72ad463e7e24fe9d09257298dcf3f6af",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1.json",
+      "sha256": "dcc5ee7edb26eb306e673bd269993d0c9ae46ad94c58729b7a1136b1b3cc02e9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0.json",
+      "sha256": "acaa888bcf4f3205f0a49e1f5f5ca83cd341510f7a98147949c12557db416cc6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1.json",
+      "sha256": "82b0be3f2a28bc720d7824b3e3a4c4852ace2744764018d4a974065ad5e517ac",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0.json",
+      "sha256": "e37a9963da054c9f5bdf5f51b4af004ec50bb1c3586ab779f91219bd4bcbdf13",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1.json",
+      "sha256": "6a9c86044fa37b1611c42bf04e41ef41e2be142859f8959b5a85f6947c5451d6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "sha256": "6adcbde2ba8272dedba0204a43ccb6613f27422e03df2189ceb10563bd136e9b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "sha256": "30d734283956bd113a557694a490be8c57145c827c69e1131990ce82f252e377",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4.json",
+      "sha256": "f2ed9bc68251be73169586f414773b2e063037d56c7da03df0fa8e2785bdbed0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "sha256": "43bcb5bdac6e23be015759cfabca9d5ca27997843df525bad7d4e1ef75a70935",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+      "sha256": "3a98b634899a2f462ffb925d4b2c59f8fba6ecf70e8c942775f01fba6852cb50",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "sha256": "1db79185287b3238b5570145915a8dc178ae937d4d9d401ddd3beb372bd659dc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "sha256": "45be885ec93081bf013e7e5220c3b434ab74acc5d91499179ba3dc6922c8120e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "sha256": "7ac846a23ad2fd3ad7a8367c95229ce5ccfef9c561f447607c5ae4abdfafc08c",
+      "intersections": []
+    }
+  ],
+  "selected": [
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "sha256": "0a34328333e6070e4b5b1e9dc14def37070e5f4f545bb1c31daa9ea2a9289e86",
+      "bytes": 125217,
+      "intersections": [
+        {
+          "claim_index": 0,
+          "paths": [
+            "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "docs/knowledge/perl-method-trim-capture.md",
+            "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+          ],
+          "bindings": 531
+        }
+      ]
+    }
+  ],
+  "baseline_sha256": "0ff5589d0b4033b2fb87e79430a4fbf0bc626c2c85a35f3318a895c469f1c82a",
+  "scope": "Fixed original Git claim namespace. Every intersecting original live binding and full publication is verified before bound writes; only its live mode/revision pair becomes historical. Original readonly baseline has actual separate channels. No old observation or producer is refreshed."
+}

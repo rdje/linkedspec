@@ -6880,7 +6880,7 @@ sub _lower_source_slot_bare_scalar_read_expr {
   return undef;
  }
  return undef if $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o;
- my $kind = $bare_symbol_kind->($name);
+ my $kind = _bind_emission_dependency(ref($bare_symbol_kind) eq 'CODE' ? $bare_symbol_kind : sub { return $bare_symbol_kind->(@_) })->($name);
  return '[@'.$name.']' if defined($kind) && $kind eq 'array';
  return '{%'.$name.'}' if defined($kind) && $kind eq 'hash';
  return '$'.$name
@@ -7153,7 +7153,7 @@ sub _lower_assign_statement {
   my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
    ? $deps->{bare_symbol_kind}
    : sub { return undef };
-  if (($bare_symbol_kind->($target_name) // '') eq 'scalar') {
+  if ((_bind_emission_dependency(ref($bare_symbol_kind) eq 'CODE' ? $bare_symbol_kind : sub { return $bare_symbol_kind->(@_) })->($target_name) // '') eq 'scalar') {
    my $source_expr = _lower_value_binding_source_expr($source, $deps);
    return $finish->(undef, 'scalar_held_wrapper_target_failed', { target => $target_name })
     unless defined($source_expr) && length($source_expr);

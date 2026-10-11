@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-12 — Preserve selection timing at each optional kind invocation
+
+Source-slot reads retain their selection before trim; assignment selects only after trim and target guards. Bind at each actual invocation so those distinct lookup orders remain intact. Actual CODE identity is retained; a tied-selected symbolic or blessed CODE value delegates opaquely in the original caller. A local name mutation reaches emitted source or the tracked target while the caller text stays unchanged. Eager required validation, eighteen reserved source names, migration/target guards, native6883/7156/global lines, contexts/coercion/errors/fatal objects and cold loading remain native.
+
+First231-input native156/six cold precedes assertions/source edits and differs only in20 authority rows after the two-line repair. The same286 fixture has56 original REDs/230 controls/all current GREEN. Nine effective complete-source faults, full72/233/15893 consumers, evidence5/book89/4 and supplemental standard1035 pass. No oracle/instrument correction or observation refresh is needed. Readonly498/114980 publication reuses original531/full125217 with accepteddd82f9cb provenance; complete predecessor publication/baseline and fixed historical membership remain recoverable. Source and assignment canonical facts: docs/knowledge/perl-method-assignment-required-capture.md. Owner: PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.
+
 ## 2026-10-11 — A local helper and its injected kind callbacks have different ownership
 
 Keep the main method's local kind helper/22 calls intact and bind only its outer injected base callback and distinct inner AST-assignment callback. The outer reference survives trim replacement; the inner reselects later. Preserve the scalar-function-name first refusal, local aliases/context/coercion/errors and invalid-call locations2550/3850. Actual CODE retains its identity; tied-selected symbolic/blessed values use caller-local opaque delegation. A known child remains eligible but never donates its packet to the parent.

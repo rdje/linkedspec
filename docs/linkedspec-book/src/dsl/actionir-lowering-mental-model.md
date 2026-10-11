@@ -1592,11 +1592,44 @@ calling the helper without the private emission channel keeps that channel
 unloaded. This isolates two dependency boundaries; successful execution of every
 branch and complete private admission remain separate work.
 
-After these capture repairs, eleven MethodLowering ingress sites remain from the October11 compiled-source inventory:
+### Source-slot and assignment kind callbacks
+
+Source-slot reads and assignment target handling now give their optional kind
+callback a separate emission boundary. They keep different selection timing:
+
+| Private call | If trim replaces callback A with B | Callback used |
+|---|---|---|
+| Read the bare source name `items` | A remembers array; B remembers hash | A, producing `[@items]` |
+| Decide a legacy wrapped assignment target | A remembers array; B remembers scalar | B, selecting the existing scalar-held target path |
+
+The read selects before trim and before rejecting undefined input, but invokes
+kind only after the name and reserved-name guards. Reserved literals such as
+`undef`, `true` and `false`, and engine locals such as `IMATCH` and `CAPTURE`,
+remain unclaimed. Missing or ordinary non-CODE kind entries retain the undefined
+default, which makes an ordinary source name a scalar read. Array and hash kinds
+still produce `[@items]` and `{%items}`.
+
+Assignment validates all six required dependencies eagerly. It trims the target,
+handles retired `:items`, and handles ordinary bare targets before considering
+its optional kind selection. Its legacy wrapped-target branch selects kind only
+when that branch is reached. The table describes private compiler calls; public
+authors keep using bare typed bindings. Removed `array(items)` and `hash(items)`
+selectors remain rejected publicly.
+
+Both kind calls receive writable local names. A callback mutation changes the
+name used by the resulting read or tracked assignment, while the caller's source
+or target text stays unchanged. Actual CODE retains its identity. A tied map's
+symbolic or blessed CODE selection keeps its native opaque call and cannot gain
+known authority through a name. Registered CODE remains eligible, and every child
+keeps its emission packet separate from its parent. Selection order, defaults,
+result coercion, scalar context, error effects, fatal objects and lazy loading
+retain their native behavior. Downstream assignment value and tracked-write
+helpers are controlled in this bounded proof; full helper admission is separate.
+
+After these capture repairs, nine MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Optional kind callbacks | 2 | Actual map selection, undefined defaults, early local-name decisions and aliases |
 | Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
 | Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
 | Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |

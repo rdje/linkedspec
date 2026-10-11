@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "producer_sha256": "fc566e989e964e4d71889a62480fbe6c42682dd84c2cdfc66339c7b428da6226",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-consumers-final.json": "66b7fabd0ef10ad2cadc489534783d05d2cb4327f4d7df92c5908a7922396c60",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "9fe54748689afb5acbe184116d1f42a6da3cf439040af2719acae4670bb8f6a4",
+    "t/actionir_source_assignment_kind_probe.pl": "fcc8cc26c86597dc40d64df459e2d61f12849c9d84d954b8efbcd5f85f6899fa",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-observe.py": "783f9da76af9050e9f2fa401e5c1a658c4934f757885fc0c75a80b0a41089ddd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-native.json": "2f436bd138b51d660e542a1cdd0458f6599ffa6d077dc617b8e4a634eb033d69",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-reached.json": "12cf2a33e75143228b4bf76755f6eec1555b62e1bb53c01159e3eb613eeff5bd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-after-native.json": "6685933d4df9bc7df13f8f34e1a821eccb69aefa4c466251f9dce6dad4e215f0",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-after-reached.json": "cee5e678d4dbdb68e248eaeb6e518ddb8e6eb5e9e30d1298352bb97c2eb59b77"
+  },
+  "loaded_rows": 156,
+  "cold_rows": 6,
+  "changed_complete_rows": 20,
+  "scope": "Both real optional selections/calls with eager required acquisition, guards and extractors. Only downstream assignment value/tracked helpers are controls. All complete native rows, modes, aliases, errors, lookup timing and cold loading retained; known CODE eligibility survives without child-to-parent packet donation. No full-helper/private/canonical admission."
+}

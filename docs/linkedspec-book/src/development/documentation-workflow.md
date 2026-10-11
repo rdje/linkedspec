@@ -103,6 +103,11 @@ must leave an accepted callback review usable without substituting its old input
 An accepted publication replay can also require published historical inputs beyond
 its immediate live bindings. Supply those inputs from their recorded revisions,
 verify their original hashes, and retain any incomplete replay and its failure.
+Keep complete diagnostic channels byte-exact and portable, including tracebacks.
+Encode raw diagnostic bytes when they contain checkout identity, and decode them
+for review. Changing that representation must retain the original publication
+and prove that altered diagnostic bytes are rejected.
+
 A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
@@ -112,7 +117,7 @@ regressions, preserves earlier accepted publications and validates the current
 book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-publish-claim-final.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-publish-claim.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
