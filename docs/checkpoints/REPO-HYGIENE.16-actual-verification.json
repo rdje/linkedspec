@@ -1,0 +1,28 @@
+{
+  "owner": "REPO-HYGIENE.16",
+  "result": "PASS",
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "rejected": true,
+      "reason": "complete actual capture"
+    },
+    {
+      "name": "forged producer",
+      "rejected": true,
+      "reason": "producer identity"
+    },
+    {
+      "name": "failed review",
+      "rejected": true,
+      "reason": "actual exit"
+    },
+    {
+      "name": "forged stdout",
+      "rejected": true,
+      "reason": "channel identity"
+    }
+  ],
+  "producer_sha256": "dd32e7e2ef5134a858a8d2e45d7f327f70a6377403121a3f13bf2fe57b334234",
+  "limits": "Dated retained metadata and actual channels only; no content ownership, disposal safety, liveness, recovery/purge or concurrent adversarial traversal guarantee."
+}

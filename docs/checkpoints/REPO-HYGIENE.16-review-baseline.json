@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-publish-claim.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "U21hbGwgb3B0aW9uYWwta2luZCBwdWJsaWNhdGlvbiBQQVNTOiAzNjYgbGl2ZSBpbnB1dHM7IDg1Nzc5IGJ5dGVzCg==",
+  "stderr_base64": "",
+  "inputs": {
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json": "67cad141d828534950ffb109b5f60ee1271d370e4977f83288c538ffa80943c3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-publish-claim.py": "7145853e62ce86be99903b608ee554dacff6ffc18dc8914657fc3d468bcec7c9"
+  },
+  "unchanged": true,
+  "producer_sha256": "1b5d6375087d769d029a5f612a1f0a5ca7c915c9b813e40a0cb10186f6a372f1",
+  "scope": "Actual supplemental readonly predecessor publication before adding the unrelated maintenance claim. Its full366-input/85779-byte publication at accepted fc96936fb retains the original input population; this observation does not admit new runtime behavior. Fixed-baseline current-namespace risk is owned by .3.2.1.10."
+}

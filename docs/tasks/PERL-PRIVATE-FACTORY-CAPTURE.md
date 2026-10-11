@@ -883,7 +883,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare measurements at activation.
   Acceptance: Commit each bounded family before FlowExpr and infer no separate parent admission.
 
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site. Readonly accepted-claim census repair .3.2.1.10 follows due hygiene before .9; it adds no runtime ingress site.
 
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
@@ -1020,7 +1020,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9`
   Status: `pending` / P2 native container-regex cache repair
   Goal: Make uniform binding target recognition honor the current container argument on every invocation, independent of the first array/hash call in the process.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10`
   Owned issue: Discovered during .2 original paired proof: target/container-empty returns item after an array-first call, contradicting the authored current-container oracle. _uniform_binding_target_symbol interpolates container in a regex with /o, caching the first interpolation. Reproduce with the retained .2 main native row and fresh-process array/hash ordering diagnostic. Impact: the private target-recognition decision may accept or reject a wrapped target according to the first container instead of its current argument. No authored-language failure is inferred before public Toolbox reproduction.
   Priority / schedule: P2; fix immediately after .2 and the now-due daily hygiene clean-boundary slice, before giant optional kind .3. The bounded capture slice preserves its original native cache behavior; do not mix this separate guard correction into it.
   Owned paths: The dynamic-container regex in _uniform_binding_target_symbol, fresh-process/native and public Toolbox reproduction, effective source inverse/consumer proof, affected book/Knowledge and continuity. No unrelated regex audit or other-backend change.
@@ -1077,11 +1077,24 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare the actual source-bound measurement record at activation before publishing results.
   Acceptance: Follow the retained owner plan; choose no authority by name, copied metadata or equal value. Preserve existing selected input grants and callback references. Split further before writes if actual code paths exceed a safe slice. Commit before activating the next owner.
 
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10`
+  Status: `pending` / P2 readonly original-claim population repair
+  Goal: Make the accepted .2 readonly review independent of unrelated claims added after its fixed baseline, while retaining the complete original claim census and every native observation.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`, `REPO-HYGIENE.16`
+  Owned issue: During hygiene preflight, the .2 reviewer is found to enumerate current docs/claims/*.json but read each from fixed61cca1ccc. A new unrelated REPO-HYGIENE.16 claim does not exist at that Git boundary. Reproduce after its publication with the current .2 readonly review/publication command; accepted-baseline git cat-file already confirms the new path absent. Source location: .2-review.py original live-intersection loop. Impact: current readonly proof can fail solely from an unrelated new claim. This is a source-established risk until the first complete runtime rejection is retained; no runtime/native product regression is inferred.
+  Priority / schedule: P2; own immediately, activate at the clean hygiene16 boundary before container-cache .9, then resume giant kind .3. Do not change a retired producer or its original observation/hash in place.
+  Owned paths: New source-bound readonly review/publication and exact original/current claim population controls; preserve .2 complete live bindings/full publication and actual original baseline or disclosed Git recovery before bound changes, relevant Knowledge/book and continuity. Keep the original .2 reviewer/record and all native/paired/fault/consumer/book observations immutable.
+  Planned tier: `focused`
+  Planned focused proof: Actual original refusal with the new unrelated claim; independent fixed-Git claim population rather than current namespace, unrelated addition/omission controls and effective return-to-original fault. Reconstruct the sole reviewer correction and exact original publication, reuse immutable runtime/book proof, verify current readonly endpoints and ordinary doctrines.
+  Planned canonical boundary: none for bounded readonly proof routing without product/storage/gate changes; reclassify before crossing those surfaces.
+  Planned claim record: none: Declare the actual source-bound record at activation before publishing measured results.
+  Acceptance: Restore current readonly review without weakening original census or refreshing observations. Commit before .9; independent admissions remain separate.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` | `pending` | Due REPO-HYGIENE review first at clean boundary; then fix current-container /o cache before giant kind .3. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` | `pending` | Finish due hygiene16; then repair fixed-baseline claim census before cache .9 and giant kind .3. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |

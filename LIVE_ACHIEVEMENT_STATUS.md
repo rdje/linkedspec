@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: three small optional kind sites .3.2.1.2 are verified. Daily cleanup is due at the next clean boundary, followed by owned container-cache .9 before giant kind .3. Thirteen original ingress sites remain. TYPE-REFERENCE-BOOK stays queued.
+Full PNT: due daily review .16 is verified. Next repair the optional-kind readonly claim census .3.2.1.10, then current-container cache .9 before giant kind .3. Thirteen original ingress sites remain under .3-.8. TYPE-REFERENCE-BOOK stays queued.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — Three small optional kind sites .3.2.1.2 are isolated with actual CODE identity and opaque non-CODE delegation. Native216/18/105/6/cold9, symbolic217/42 and object218/10 precede final paired1135:57 isolation REDs/1078 controls/all1135 GREEN. Nine whole-source faults, supplied69 suites/223 inputs/15093 assertions, six evidence RED/restorations and full book89/3 pass. Original339 bindings/full78325 trim publication remain exact. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly366-live-input/85779-byte publication passes. Normal focused hooks govern landing. First warning/oracle/census failures and sole repairs stay retained. Due clean-boundary hygiene precedes P2 container-cache .9, then giant kind .3. Thirteen original ingress sites remain under .3-.8; independent admissions and TYPE-REFERENCE-BOOK stay queued.
+`REPO-HYGIENE.16` — REPO-HYGIENE.16 retains dated14888 parent candidate rows/16643190359 bytes and separate Rust release/deps/incremental populations. Fresh metadata/independent lstat, size/traversal/four actual-channel controls pass. Zero removals; readonly24-input9306-byte publication and prior optional-kind readonly baseline pass. Current proof-routing risk is owned by .3.2.1.10: current claim names are incorrectly read from a fixed older Git boundary. First complete new-claim rejection and repair follow this clean maintenance commit, before cache .9. Existing public retention guidance remains accurate; no runtime/source/pin/cache change. Normal focused hooks govern landing.
 
 ## Next Action
 
-From the clean accepted .2 commit activate the due REPO-HYGIENE leaf, then repair container-cache .3.2.1.9 before giant kind .3. Preserve intersecting live claims/full records and actual baselines before bound writes. Never pivot while dirty.
+From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10. Retain the first actual new-claim refusal and original .2 full publication/bindings; correct only fixed-baseline claim population in a new readonly reviewer, preserving all retired native observations. Then cache .9 and giant kind .3.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — native18/105/6/cold9/symbolic42/object10; final1135/57 RED/1078 controls; nine faults; supplied69/223/15093/book89/3/original339/full78325; evidence6/standard1035/readonly366/85779 PASS.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` — one trim call; native213/6/33/2/cold3; paired298/3 RED/295 controls; faults6/supplied68/215/13958/evidence6/book89/3/original339/full78574; readonly339/78325; standard Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` — compiled108/218/812/207/17; six census controls; original355/full120239; unchanged211 runtime inputs; eight planned fix leaves; inline required trim .1 next.
@@ -29,7 +30,6 @@ From the clean accepted .2 commit activate the due REPO-HYGIENE leaf, then repai
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` — committedc90b99a83; native35, paired487/48 RED, faults5, supplied61/187/evidence6/original546/book89/3 and supplemental Phase01035; normal10 hooks and clean handoff passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0` — committed770cffcc; public50/paired9 RED, supplied61/184/book89/3 and composed546-input publication; exact canonical attempt04, normal hooks and clean handoff passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` — required619/23/native24/branches32/public4/inverse6, paired24 RED/619 GREEN, native179/supplied60/182/evidence5/original303/book89/3; readonly307/73113; public Phase01035/full channels.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` — required850/cold15/native24/branches56/public6/inverse3, paired24 RED/850 GREEN, supplied58/178/evidence5/original296/book89/3; readonly303/71948; original probe retained/reconstructed; public Phase01035/full channels.
 
 ## History
 

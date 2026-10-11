@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Fixed historical populations must not use the current namespace
+
+The daily retained review changes metadata records without deleting proof/cache data. Its fresh census and independent lstat agree; every prior hygiene fixture remains excluded. Preserve actual producer channels before advancing the latest date. Existing public retention teaching still applies.
+
+While preparing a new maintenance claim, the optional-kind reviewer is found to enumerate current claim files before reading each from fixed61cca1ccc. A later unrelated claim cannot exist there. Retain the actual preceding366-input/85779-byte readonly publication baseline; .3.2.1.10 owns first complete refusal after new claim publication and a source-bound fixed-Git population repair before cache .9. Keep the original producer/observations immutable; add a new readonly owner. Canonical discovery: docs/knowledge/repo-generated-artifact-cleanup-boundary.md. No native/runtime product regression is inferred.
+
 ## 2026-10-11 — Optional CODE checks do not guarantee the selected value is CODE
 
 The three small kind callers read a tied map for CODE validation and again for selection. MethodLowering permits symbolic references, while SourceEmissions requires strict references and actual unblessed CODE identity for authority. Binding the second non-CODE value directly would alter native dispatch/errors; resolving its name would grant unjustified authority. Retain actual CODE directly and otherwise bind an opaque caller-local delegation with native aliases and bad-call locations. Function inventory remains authoritative before parameter/kind fallback, even when empty. The actual string-overloaded candidate name object reaches the callback unchanged.

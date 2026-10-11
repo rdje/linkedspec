@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-10` (`REPO-HYGIENE.15`: due retained artifact review)
+- Last updated: `2026-10-11` (`REPO-HYGIENE.16`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -308,6 +308,25 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers`
   Handoff: Resume assignment required PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 from clean HEAD; preserve306 generalized-return inputs before bound writes. Current generalized-return live claim stays unchanged throughout hygiene.
 
+- ID: `REPO-HYGIENE.16`
+  Status: `done`
+  Priority: P2 — daily retained review due before the owned container-cache repair.
+  Goal: Retain a fresh exact parent/Rust artifact metadata snapshot; remove only exactly proved disposable files and preserve proof data/caches.
+  Activation: Clean fc96936fb64d27e692e66377b2e332641c2674fd; optional-kind .2 actual commit/all10 doctrines/post-pointer/post-memory/brief0 and clean Git verified. No required job remains. Cleanup Knowledge card, original .15 tools/contract, current latest-only record and public documentation-workflow retention section reviewed.
+  Reproduce: Latest cleanup 2026-10-10T17:39:44.064947+00:00 is over24h old.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.16-* instruments/retained channels and docs/claims/REPO-HYGIENE.16.json; latest-only cleanup record and existing cleanup Knowledge card; this tree/index, private factory current frontier and discovered readonly-reviewer repair planning only, current roadmap maintenance/callback projections, bounded live/resume/history and derived map. Preserve every intersecting original live claim/full record before bound writes. Fixtures remain in .linkedspec-data/scratch/hygiene16; exclude all prior hygiene fixtures.
+  Verification tier: `focused`
+  Focused checks: Non-following same-volume parent census plus separate Rust release/incremental/deps log-bin metadata. Exclude every submodule/nested repository, symlink, other volume, managed run/cache, book/Dart output and prior hygiene fixture before traversal. Retain actual guarded commands/exits/full channels, fresh scoped census/independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive channel controls; original intersecting claim preservation if any; unchanged public retention teaching review; Knowledge/history/memory/claim/diff and normal doctrines.
+  Canonical trigger: none; dated retention evidence changes no storage/runtime/public/toolchain/gate mechanism.
+  Claim verification: `docs/claims/REPO-HYGIENE.16.json`
+  Acceptance: Keep original snapshots immutable; advance latest date only after actual census/review completes. Zero removals is valid if no exact disposable target is proved. SESSION-STARTUP-READING.7 prohibits recovery/purge. Capture/freezer/--capture publication are one-shot writers; default final reviewer/publication are readonly. Existing book retention guidance remains accurate; no new public behavior or book prose is needed for this metadata review. Commit before readonly accepted-claim census repair .3.2.1.10, then container-cache .9. The .2 publication byte bindings stay unchanged here; .10 owns the current-namespace/fixed-baseline review defect exposed by a new unrelated claim.
+
+  Owned preflight finding: .2-review.py enumerates current claim files before git-show at fixed61cca1ccc. Actual git cat-file confirms the new hygiene16 claim absent there; once published, this unrelated path is expected to refuse the readonly review. Retain the actual .2 readonly publication baseline before publishing the unrelated new claim. P2 private proof-routing .3.2.1.10 now owns the exact first runtime reproduction and verified repair immediately after this clean hygiene commit, before cache .9. No retired producer or native evidence is changed here.
+
+  Verification: PASS — Dated2026-10-11T18:33:20.336100+00:00 parent14888 rows/16643190359 bytes. Rust release absent; debug/deps0; debug/incremental483 rows/2390809875 bytes, separate from parent. Fresh census/independent per-file lstat, aggregate/balanced-size/traversal and four reason-sensitive full-channel controls pass. Zero removals; original live intersections0. Actual preceding optional-kind readonly366/85779 baseline PASS before new claim publication. Readonly24-input9306-byte retention publication passes. Existing book retention guidance remains accurate; no public prose change/render needed. Knowledge1349/10390 and both histories/memory/claims/diff/normal hooks govern landing. .10 owns current-namespace/fixed-baseline proof routing before cache .9; no product or full-private admission.
+  Commit: `REPO-HYGIENE.16 - retain due artifact metadata review`.
+  Handoff: Activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10 from clean HEAD; retain the actual new-claim refusal and original .2 publication before a new readonly repair. Then cache .9 and giant kind .3. Existing .2 byte bindings/observations remain unchanged here.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -324,6 +343,7 @@ the durable handoff state current.
 | 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
 | 11 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
 | 12 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
+| 14 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
 | 13 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
 
 ## Decisions
@@ -358,10 +378,20 @@ the durable handoff state current.
 - [x] **NO REGRESSION** — Zero files removed. Submodules/other repositories, symlinks, other volumes, managed runs/caches and prior fixtures are excluded. Existing public retention teaching remains accurate; no runtime/generated/toolchain/contract change requires broader CI.
 - [x] **LOCKSTEP** — Cleanup record, Knowledge1339/10272, current roadmap/index/live/history/resume and historical commit projections align. Memory/claim/history/whitespace and normal all-doctrine hooks govern landing before the clean assignment handoff. Recovery/purge remains prohibited.
 
+## Acceptance Checklist — REPO-HYGIENE.16
+
+- [x] **REPRODUCE / ISSUE** — October10 cleanup is over24h old at clean fc96936fb; retain a new dated parent/Rust metadata review. Current-namespace/fixed-baseline proof-routing risk has a separate next repair owner .3.2.1.10.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Filesystem metadata changes independently of old snapshots. Guarded census excludes all prior hygiene fixtures and non-owned/reusable boundaries before traversal; independent per-file OS lstat tests each retained size. Readonly census defect source location is .2-review.py:291-295, with actual absent-path Git confirmation.
+- [x] **FIX** — Retain the exact dated snapshot/actual channels and refresh only current maintenance records/pointers. Zero removals. Retain preceding readonly publication baseline before adding the unrelated new claim; .10 owns the actual refusal and bounded new-reviewer repair.
+- [x] **ADDRESSED (verified)** — Parent14888/16643190359; separate incremental483/2390809875, release absent/deps0. Fresh metadata, balanced-size/traversal/four channel controls and readonly24/9306 publication PASS. No prior live byte-binding intersection.
+- [x] **NO REGRESSION** — Zero files removed; submodules/other repositories, symlinks/other volumes, managed runs/cache/book/Dart outputs and every prior hygiene fixture excluded. Existing book teaching reviewed unchanged. No runtime/toolchain/storage/public change; no full CI trigger.
+- [x] **LOCKSTEP** — Latest-only cleanup record, reused Knowledge1349/10390, current roadmap/index/live/history/MEMORY and owned next repair align. Both history pressure checks, scripts/check_memory_architecture.sh, git diff --check and normal all-doctrine hooks govern landing; recovery/purge remains prohibited.
+
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-11` | `REPO-HYGIENE.16` | Guarded actual census/fresh lstat, size/traversal/four channel controls, preceding readonly baseline; histories/Knowledge/memory/claims/diff/hooks | PASS — dated retained snapshot/zero removals; source-established proof-routing repair .10 next. |
 | `2026-10-10` | `REPO-HYGIENE.15` | Guarded actual parent/Rust census, fresh per-file lstat, size/traversal/four channel controls, Git attribution audit; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals; two commit projections repaired. |
 | `2026-10-09` | `REPO-HYGIENE.14` | Guarded actual census/review, independent metadata and size/boundary/channel controls; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals. |
 | `2026-10-08` | `REPO-HYGIENE.13` | Actual census/live lstat/source guards/boundary fixtures/claim preservation; memory/Knowledge/history/diff and normal doctrines | PASS — dated retained snapshot; zero removals. |
@@ -382,6 +412,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.16` | `REPO-HYGIENE.16 - retain due artifact metadata review` | Dated actual metadata/zero removals and preceding readonly baseline; .10 before cache .9. |
 | `REPO-HYGIENE.15` | `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers` | Dated metadata/full channels, zero removals, old attribution repaired; resume assignment required .5.2. |
 | `REPO-HYGIENE.12` | `REPO-HYGIENE.12 - qualify historical Phase0 measurements` | Dated observations preserved; private replacement handoff resumes after capacity check. |
 | `REPO-HYGIENE.11` | `REPO-HYGIENE.11 - retain daily artifact census` | Exact dated metadata/full channels; zero removals, resume canonical membership .0.2.2. |
@@ -397,6 +428,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `d07ee79ea073823c06711b0cc2cf3516d0f172b6` | Original ignore/untracking admission; later hash-sync commits are historical pointer refreshes, superseded by ADR0065. |
 
 ## Changelog
+
+- `2026-10-11`: .16 completes the due retained review with zero removals, exact metadata/full channels/readonly24/9306 and preceding optional-kind baseline. Own fixed-baseline namespace repair .3.2.1.10 immediately after clean landing, before cache .9.
 
 - 2026-10-09: `.14` completes the due retained metadata review at the clean foundation boundary; producer/input authority .2.1 follows.
 

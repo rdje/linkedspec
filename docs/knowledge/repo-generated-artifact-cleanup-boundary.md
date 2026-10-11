@@ -2,6 +2,8 @@
 id: repo-generated-artifact-cleanup-boundary
 title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
 answers:
+  - "why can a new maintenance claim break an older readonly review"
+  - "which task owns the fixed baseline claim namespace repair"
   - "which commits admitted initial repository artifact ignores and local dirt policy"
   - "why did old hygiene task commit fields still say pending"
   - "which generated artifacts are safe to delete for disk cleanup"
@@ -35,7 +37,9 @@ evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/R
 evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
-reverify: "Current ADR0133 closure: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6/publish.py (readonly). Original REPO-HYGIENE.15 commands below require accepted d8418423e inputs, including the original live claim/book/card. No cleanup or runtime observation is refreshed."
+evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
+reverify: "Current dated metadata: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.16-review-actual.py; separately REPO-HYGIENE.16-claim.py under that wrapper. Defaults readonly. Capture/freezer/baseline/--live/--capture writers are retired. Historical ADR0133 .3.1.6.6/publish.py and original hygiene15 commands require their recorded accepted Git inputs; hygiene15 originals are accepted d8418423e. Current proof-routing repair follows MEMORY.md and .3.2.1.10."
+
 ---
 
 # Shared publication inputs and historical provenance
@@ -91,3 +95,16 @@ and `git show --format=fuller --stat cf0df422097d55aaf2379cac8907319107406e6b`, 
 `.gitignore`, `.gitmodules` and task-tree diffs. The former admits ignore/untracking; the latter admits the local
 dirt policy. Neither attribution is a fresh execution of the dated verification commands. The original pending
 placeholders are corrected in the task tree; historical behavior/pin observations remain exact.
+
+A new maintenance claim must not change the original claim population reviewed at
+an older accepted Git boundary. The optional-kind .3.2.1.2 reviewer currently
+lists present docs/claims/*.json but reads those paths with git show at61cca1ccc.
+Its sole original-census self exclusion covers its own .2 claim, so a later
+unrelated REPO-HYGIENE.16 claim is absent at that fixed boundary. Source location:
+docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-review.py:291-295. Actual
+Git cat-file confirms that absence; the pre-maintenance readonly publication
+baseline is separately retained. This is a source-established proof-routing risk,
+not an observed runtime/native product failure. P2 .3.2.1.10 owns the complete
+first rejection, fixed-Git population repair and effective unrelated-claim controls
+immediately after hygiene16, before container-cache .9. Original retired producers
+and native observations remain immutable; the repair needs a new readonly owner.
