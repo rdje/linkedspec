@@ -1,0 +1,15 @@
+{
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-census-first.py",
+  "stdin_sha256": "d9e977cbe3976cd030ba7cdecd80e00f401226ad8e53e3f7316146de9518258e",
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-"
+  ],
+  "returncode": 1,
+  "actual_merged_output": "{\"claim\": \"docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json\", \"name\": \"inline-required-dropped-value-trim-isolation\", \"bindings\": 339, \"bytes\": 78325, \"intersections\": [\"docs/knowledge/perl-method-trim-capture.md\", \"docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md\", \"perl/LinkedSpec/ActionIR/MethodLowering.pm\"]}\nTraceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\nKeyError: 'inputs'\n",
+  "scope": "Exact first ad-hoc stdin source and available actual merged tool output retained. Separate stdout/stderr unavailable. It printed the .1 live intersection, then inspected a non-live historical claim before checking mode; no files or observations changed. Correct accepted freezer skips non-live records before reading inputs and independently completes the census."
+}

@@ -269,13 +269,13 @@ sub _infer_assignment_source_container_kind {
   return 'array' if $inner =~ /^array\s*\(/o;
   return 'hash' if $inner =~ /^hash\s*\(/o;
   if ($inner =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
-   my $kind = $bare_symbol_kind->($1);
+   my $kind_callback = ref($bare_symbol_kind) eq 'CODE' ? $bare_symbol_kind : sub { return $bare_symbol_kind->(@_) };
+   my $kind = _bind_emission_dependency($kind_callback)->($1);
    return $kind if defined($kind) && ($kind eq 'array' || $kind eq 'hash');
    return undef;
   }
   return _infer_assignment_source_container_kind($inner, $deps);
  }
-
  return undef
 }
 
@@ -1289,9 +1289,9 @@ sub _uniform_binding_target_symbol {
  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
   ? $deps->{bare_symbol_kind}
   : sub { return undef };
- return (($bare_symbol_kind->($name) // '') eq 'scalar') ? $name : undef
+ my $kind_callback = ref($bare_symbol_kind) eq 'CODE' ? $bare_symbol_kind : sub { return $bare_symbol_kind->(@_) };
+ return ((_bind_emission_dependency($kind_callback)->($name) // '') eq 'scalar') ? $name : undef
 }
-
 sub _uniform_binding_hash_index_set_expr {
  my ($target, $key_expr, $value_expr) = @_;
  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -1497,18 +1497,18 @@ sub _contextual_codeblock_runtime_record {
  return LinkedSpec::CallableContract::runtime_record_from_argument($node)
 }
 
-sub _codeblock_variable_call_candidate {
+sub _codeblock_variable_call_candidate { # A pure function cannot borrow callable names from its rule caller.
  my ($deps, $name) = @_;
  return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  my $function_names = ref($deps) eq 'HASH' ? $deps->{__user_function_scalar_value_names} : undef;
- # A pure function cannot borrow callable names from its rule caller.
  return $function_names->{$name} ? 1 : 0 if ref($function_names) eq 'HASH';
  my $parameter_kinds = ref($deps) eq 'HASH' ? $deps->{__user_function_parameter_kinds} : undef;
  return 1 if ref($parameter_kinds) eq 'HASH' && ($parameter_kinds->{$name} // '') eq 'codeblock';
  return 0 unless ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE';
- return (($deps->{bare_symbol_kind}->($name) // '') eq 'scalar') ? 1 : 0
+ my $selected_kind = $deps->{bare_symbol_kind};
+ my $kind_callback = ref($selected_kind) eq 'CODE' ? $selected_kind : sub { return $selected_kind->(@_) };
+ return ((_bind_emission_dependency($kind_callback)->($name) // '') eq 'scalar') ? 1 : 0
 }
-
 sub _codeblock_runtime_binding_expr {
  my ($deps, $required_name) = @_;
  return $deps->{__user_function_codeblock_binding_frame}

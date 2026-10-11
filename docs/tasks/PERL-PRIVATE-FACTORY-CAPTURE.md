@@ -883,7 +883,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare measurements at activation.
   Acceptance: Commit each bounded family before FlowExpr and infer no separate parent admission.
 
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site.
 
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
@@ -924,21 +924,31 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1 - isolate dropped-value trim`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Isolate small optional kind callbacks with a private emission boundary.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1`
   Owned paths: Only _infer_assignment_source_container_kind, _uniform_binding_target_symbol and direct map dereference in _codeblock_variable_call_candidate in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
   Native contract: Three sites; preserve actual optional map CODE selection/undefined defaults, local argument aliases, user-function names and parameter-kind early decisions, scalar results/truthiness/errors/fatal objects.
-  Planned tier: `focused`
-  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
-  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
-  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Verification tier: `focused`
+  Focused checks: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Canonical trigger: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json`
   Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+  Activation: Clean61cca1cccff6027461e120e4236431d1bc7d20b1; actual .1 commit/all10 hooks/post-pointer/post-memory/brief0 and clean Git verified. Current roadmap/frontier, original private-authority protocol, compiled inventory, actual three helper paths, earlier required-inference fixtures, legacy hash-kind/match and pure-function/codeblock canonical contracts, and the relevant book are reviewed. No source/fixture/card/book writes yet. Preserve every intersecting live binding/full record and actual accepted readonly baseline first. Native-first coverage includes the actual optional selection/defaults, tied-map reads and second references, regex/local argument slots, callable-name/parameter early returns, returned objects/coercion, errors and cold paths. Required/secondary helper behavior remains explicitly controlled; no full-helper admission.
+  Instrument preflight repair: The first read-only stdin census printed the sole .1 live intersection, then raised KeyError inputs on a non-live historical claim because it read inputs before checking mode. No bound file changed. Exact first source and available actual merged tool output are retained under .2-census-first.py/json; separate channels are unavailable. The accepted freezer already places the mode guard first and must complete the whole census/actual baseline before preservation. This is a repaired instrument assumption, not a claim-schema or runtime defect.
+  Progress: Original339 live bindings/full78325-byte trim publication and actual accepted readonly baseline are preserved. First native216 retains18 callback cases/105 guard cases/6 authority rows/9 cold cases, actual0/empty stderr/unchanged inputs. Original six authority rows have eligibility[1] and parent packets. Separate pre-assertion symbolic-native217 retains42 rows: qualified/unqualified names and blessed CODE execute in18 rows, while GLOB/undefined/ARRAY/HASH fail in24 rows. Valid selected non-CODE values inherit eligibility[1] and donate parent packets. Both original probes/producers/results stay immutable; no production edits yet.
+  Owned native-contract refinement: P2 remains the same three optional ingress sites. A tied map CODE-checks one value and selects a second; MethodLowering has no strict refs, so a symbolic second value can execute. SourceEmissions uses strict refs and grants authority only to actual CODE identities. Reproduce with the two retained probes/native capsules. Directly binding a non-CODE second value would change existing dispatch/errors. Fix within this leaf using the actual selected CODE when present and a caller-local opaque delegation otherwise; preserve the original native bad-call source locations and aliases. Do not resolve a string name to grant authority. This preserves an existing private path, not new DSL syntax.
+  Reference instrument repair: First218-input object-name child returns0/unchanged with ten full native rows, but the parent rejects one Name-used-only-once warning from its temporary localized symbol. Exact first probe/producer/native JSON and actual merged parent failure are retained under reference-probe-first.pl, reference-native-capture.py/json and reference-first-failure.json. Separate parent channels unavailable. Only no warnings redefine becomes no warnings qw(redefine once), keeping line count; a distinct reference-native-final capture must prove byte-identical original stdout and unchanged other217 inputs before assertions. No native callback diagnostic or production source is suppressed/refreshed.
+  Paired oracle refinement / owned defect: First223-input paired1135 TAP has57 isolation REDs and one target/container-empty authored-result failure. Exact first fixture/source-bound result and sole map-entry correction are retained under fixture-first.t, before.json and fixture-first-repair.json. Original native observations remain unchanged. Fresh216-input diagnostic runs two processes/four calls in opposite array/hash orders: each first wrapped target returns item/calls kind once; each second correct-container target returns undef/calls kind zero. Installed perlop confirms /o never recompiles interpolation. Root cause is the helper dynamic-container /o, not optional binding. P2 repair .9 is scheduled immediately after this slice and due clean-boundary hygiene, before .3; no authored-language failure inferred. Distinct before-final capture must verify exactly57 isolation REDs/other controls before production edits.
+  Implementation progress: Final unchanged1135 TAP retains exactly57 isolation REDs/1078 controls before source edits, then all1135 GREEN after only three private bindings. Three current218-input probes actual0/empty stderr/unchanged. Actual CODE identities bind directly; non-CODE selected values use caller-local opaque delegation, preserving symbolic/blessed execution, aliases and native invalid-call locations272/1292/1509. Each owner/global source line count stays unchanged. Existing guard/lookup/early decision logic and /o cache remain native. Supplied consumers and supplemental standard syntax/public Phase0 are running; full-source faults, book/review/evidence/publication and ordinary commit remain.
+  Result: Exactly three optional kind invocation boundaries isolated; original selection/guards/aliases/context/references/errors/early decisions/cold behavior preserved. Actual CODE binds directly and selected symbolic/blessed values remain opaque via caller-local delegation. All1135 paired assertions GREEN after57 original isolation REDs/1078 controls; first58/wrong authored cache oracle and sole repair stay exact. Nine complete full-source faults fail15/15/27/7/29/34/19/12/70. Supplied69/223/15093, six beyond-hash evidence RED/restorations, full book89/3 and standard syntax/public Phase01035 PASS with full channels. Readonly review independently reconstructs original339/full78325/baseline, complete original live census, source/fault/native/consumer/book inputs and first warning/oracle/census failures. All original native observations/producers remain unchanged.
+  Publication: Readonly366 live inputs/85779 bytes; original trim claim all339/full78325 retained historically at61cca1ccc. Both reused cards/Knowledge1349/10388, book, current roadmaps/index/live/resume and bounded histories align. Standard compatibility is supplemental without full transitive capsule; no full-helper/private/parent/canonical admission.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2 - isolate three optional kind callbacks`; normal focused doctrine/memory/whitespace hooks govern landing from clean61cca1ccc. No push. First clean boundary activates due daily hygiene, then P2 container-cache .9 before .3.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3`
   Status: `pending`
   Goal: Isolate giant method optional kind callbacks with a private emission boundary.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9`
   Owned paths: Only _lower_method_value_expr outer base_bare_symbol_kind and inner AST-assignment bare_symbol_kind shadow in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
   Native contract: Two distinct injected bindings; retain local outer helper and scalar-name first refusal, actual map/default references, nested aliases, optional lookup timing and AST target decisions. Do not bind all22 calls of the unrelated outer local helper.
   Planned tier: `focused`
@@ -1007,6 +1017,20 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
   Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
 
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9`
+  Status: `pending` / P2 native container-regex cache repair
+  Goal: Make uniform binding target recognition honor the current container argument on every invocation, independent of the first array/hash call in the process.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2`
+  Owned issue: Discovered during .2 original paired proof: target/container-empty returns item after an array-first call, contradicting the authored current-container oracle. _uniform_binding_target_symbol interpolates container in a regex with /o, caching the first interpolation. Reproduce with the retained .2 main native row and fresh-process array/hash ordering diagnostic. Impact: the private target-recognition decision may accept or reject a wrapped target according to the first container instead of its current argument. No authored-language failure is inferred before public Toolbox reproduction.
+  Priority / schedule: P2; fix immediately after .2 and the now-due daily hygiene clean-boundary slice, before giant optional kind .3. The bounded capture slice preserves its original native cache behavior; do not mix this separate guard correction into it.
+  Owned paths: The dynamic-container regex in _uniform_binding_target_symbol, fresh-process/native and public Toolbox reproduction, effective source inverse/consumer proof, affected book/Knowledge and continuity. No unrelated regex audit or other-backend change.
+  Planned tier: `focused`
+  Planned focused proof: Preserve intersecting accepted claims/full records and actual baseline first; keep first order-dependent observations, verify both first-container orders plus current/empty/mismatched container arguments, retain paired RED/GREEN and source inverse, inspect actual emitted/public behavior, run direct consumers/book and standard syntax/public Phase0, then normal doctrines.
+  Planned canonical boundary: none for a bounded implementation repair of the existing container contract; reclassify before public/API/format/mechanical changes.
+  Planned claim record: none: Declare the actual source-bound record at activation; .2 owns the first diagnosis and wrong-oracle repair artifacts.
+  Acceptance: Verify a current-argument decision without changing optional callback selection/identity/aliases. Commit before resuming .3; full-helper/parent/canonical admissions remain separate.
+
+
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.4`
   Status: `pending`
   Goal: Actual default callbacks and flow-composite injected dependency boundaries, preserving native effects and arguments.
@@ -1057,7 +1081,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` | `pending` | Inline-required .1 verified; preserve the accepted claim/baseline, then isolate three small optional kind sites with native selection/alias/guard proof. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` | `pending` | Due REPO-HYGIENE review first at clean boundary; then fix current-container /o cache before giant kind .3. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
@@ -1375,6 +1399,8 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 
 ## Verification Log
 
+- `2026-10-11`, `.3.2.1.2`: Native18/105/6/cold9, symbolic42/object10; first1135/58 retains one wrong oracle, final1135/57 RED/1078 controls/allGREEN. Nine faults15/15/27/7/29/34/19/12/70; supplied69/223/15093, evidence6/book89/3/original339/full78325/standard1035 and readonly366/85779 PASS. Three owned bindings only; warning/oracle/census first failures/sole repairs exact. Normal focused hooks govern landing; due hygiene then P2 cache .9 before .3.
+
 - `2026-10-11`, `.3.2.0`: Package-flow .3.2.0 isolates the single direct package callback while preserving actual package selection, trimmed-slot aliases, context/maps/replacement/errors and public generated source. Native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six source faults, final supplied67/211/13660, seven evidence RED/restorations, book89/3 and supplemental standard syntax/public Phase01035 pass. Original350/full84391 publication and first instruments/channels remain exact. Normal focused hooks govern landing before remaining optional/direct .3.2.1; TYPE-REFERENCE-BOOK and independent admissions stay queued. Fixture registration .7 precedes pipeline .6.
 
 - `2026-10-11`, `.3.1.6.4`: Required array-end .3.1.6.4 binds one resolver return for trim/parser/extractor, preserving eager selection, actual payload argument slots, splitter effects, structured results, maps/context/errors and fatal identity. Completed native201/12 callbacks/57 branches/6 authority/4 public-source/2 cold precedes paired325:9 original authority REDs/316 controls/all325 GREEN. Five faults fail9/3/36/9/18; supplied65/203/12948, evidence8/original321 and book89/three controls pass. Standard syntax/public Phase0 passes1035 with full channels; readonly329-input/78324-byte publication passes. Compile-failed instrumentation and wrong-wrapper preflight remain explicit without runtime refresh. Normal focused hooks govern landing before hash-index .3.1.6.5; optional/direct, independent admissions and TYPE-REFERENCE-BOOK stay queued. Fixture registration .7 precedes pipeline .6.
@@ -1438,6 +1464,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.3.2.1.2`: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2 - isolate three optional kind callbacks`, from clean61cca1ccc; ordinary focused proof/standard compatibility verified, normal hooks govern landing.
+
 - `.3.2.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 - isolate package-flow callback`, from clean4cc0b5a2a; focused proof and standard compatibility verified, normal hooks govern landing.
 
 - `.3.1.6.4`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4 - isolate required array-end parser callbacks`, activated from clean98990ffbc; focused proof and standard compatibility verified, normal hooks govern landing.
@@ -1487,6 +1515,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- `2026-10-11`, `.3.2.1.2`: Native18/105/6/cold9, symbolic42/object10; first1135/58 retains one wrong oracle, final1135/57 RED/1078 controls/allGREEN. Nine faults15/15/27/7/29/34/19/12/70; supplied69/223/15093, evidence6/book89/3/original339/full78325/standard1035 and readonly366/85779 PASS. Three owned bindings only; warning/oracle/census first failures/sole repairs exact. Normal focused hooks govern landing; due hygiene then P2 cache .9 before .3.
 
 - `2026-10-11`, `.3.2.0`: Package-flow .3.2.0 isolates the single direct package callback while preserving actual package selection, trimmed-slot aliases, context/maps/replacement/errors and public generated source. Native209/4 outcomes/32 branches/2 authority/2 public/2 cold precedes paired299:3 original isolation REDs/296 controls/all299 GREEN. Six source faults, final supplied67/211/13660, seven evidence RED/restorations, book89/3 and supplemental standard syntax/public Phase01035 pass. Original350/full84391 publication and first instruments/channels remain exact. Normal focused hooks govern landing before remaining optional/direct .3.2.1; TYPE-REFERENCE-BOOK and independent admissions stay queued. Fixture registration .7 precedes pipeline .6.
 

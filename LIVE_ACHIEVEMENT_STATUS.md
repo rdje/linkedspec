@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: inline-required dropped-value trim .3.2.1.1 is verified; three small optional kind sites .3.2.1.2 are next after the clean commit. Sixteen remaining MethodLowering ingress sites retain .2-.8 owners. TYPE-REFERENCE-BOOK remains queued after the private callback activity.
+Full PNT: three small optional kind sites .3.2.1.2 are verified. Daily cleanup is due at the next clean boundary, followed by owned container-cache .9 before giant kind .3. Thirteen original ingress sites remain. TYPE-REFERENCE-BOOK stays queued.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` — Inline-required dropped-value trim .3.2.1.1 binds one actual callback invocation, preserving native map selection/CODE guards, slots, context, effects and errors. Native213/6/33/2/cold3 precedes paired298:3 original isolation REDs/295 controls/all298 GREEN. Six full-source faults, supplied68 suites/215 inputs/13958 assertions, six evidence RED/restorations and full book89/3 pass. Original339 bindings/full78574 inventory publication and actual baseline stay exact. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly339-live-input/78325-byte publication passes. Normal focused hooks govern landing. Small optional kind .3.2.1.2 follows the clean commit; sixteen remaining ingress sites are owned by .2-.8. FlowExpr/ControlFlow, fixture registration .7 before pipeline .6, independent admissions and TYPE-REFERENCE-BOOK remain queued.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — Three small optional kind sites .3.2.1.2 are isolated with actual CODE identity and opaque non-CODE delegation. Native216/18/105/6/cold9, symbolic217/42 and object218/10 precede final paired1135:57 isolation REDs/1078 controls/all1135 GREEN. Nine whole-source faults, supplied69 suites/223 inputs/15093 assertions, six evidence RED/restorations and full book89/3 pass. Original339 bindings/full78325 trim publication remain exact. Supplemental standard syntax/public Phase0 passes1035 with complete channels; readonly366-live-input/85779-byte publication passes. Normal focused hooks govern landing. First warning/oracle/census failures and sole repairs stay retained. Due clean-boundary hygiene precedes P2 container-cache .9, then giant kind .3. Thirteen original ingress sites remain under .3-.8; independent admissions and TYPE-REFERENCE-BOOK stay queued.
 
 ## Next Action
 
-Activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2 from the clean accepted trim commit. Preserve every intersecting live claim/full record and actual baseline before bound writes. Retain native behavior for _infer_assignment_source_container_kind, _uniform_binding_target_symbol and _codeblock_variable_call_candidate before assertions or binding only their three optional kind invocations.
+From the clean accepted .2 commit activate the due REPO-HYGIENE leaf, then repair container-cache .3.2.1.9 before giant kind .3. Preserve intersecting live claims/full records and actual baselines before bound writes. Never pivot while dirty.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — native18/105/6/cold9/symbolic42/object10; final1135/57 RED/1078 controls; nine faults; supplied69/223/15093/book89/3/original339/full78325; evidence6/standard1035/readonly366/85779 PASS.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` — one trim call; native213/6/33/2/cold3; paired298/3 RED/295 controls; faults6/supplied68/215/13958/evidence6/book89/3/original339/full78574; readonly339/78325; standard Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` — compiled108/218/812/207/17; six census controls; original355/full120239; unchanged211 runtime inputs; eight planned fix leaves; inline required trim .1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0` — native209/4/32/2/2/2; paired299/3 RED/296 controls; six faults; final67/211/13660; evidence7/book89/3/original350/full84391; standard Phase01035; first rejected instruments retained.
@@ -29,7 +30,6 @@ Activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2 from the clean accepted trim commi
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0` — committed770cffcc; public50/paired9 RED, supplied61/184/book89/3 and composed546-input publication; exact canonical attempt04, normal hooks and clean handoff passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2` — required619/23/native24/branches32/public4/inverse6, paired24 RED/619 GREEN, native179/supplied60/182/evidence5/original303/book89/3; readonly307/73113; public Phase01035/full channels.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1` — required850/cold15/native24/branches56/public6/inverse3, paired24 RED/850 GREEN, supplied58/178/evidence5/original296/book89/3; readonly303/71948; original probe retained/reconstructed; public Phase01035/full channels.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0` — required539/cold17/native15/branches37/public3/inverse3, paired15 RED/539 GREEN, supplied56/176/evidence5/original300/book89/3; readonly296/69937; public Phase01035/full channels.
 
 ## History
 

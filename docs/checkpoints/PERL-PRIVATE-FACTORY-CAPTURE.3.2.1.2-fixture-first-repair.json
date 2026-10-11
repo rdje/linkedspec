@@ -1,0 +1,8 @@
+{
+  "first_fixture": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t",
+  "first_fixture_sha256": "50bb888f666f12b1ac1b6afb1e223b12a2a6328fe8d338593e0b44d74adc8f15",
+  "first_capture_sha256": "f70a5f38e40f1e6d1bbd69f4551a595312a71f3f2859163b6d9aaccd45bd26b4",
+  "old_base64": "cXcodGllZC1zZWxlY3Rpb24gbWFwLXJlcGxhY2VtZW50IHJlc3VsdC1zY2FsYXIgYmFyZS1uYW1lIHNwYWNlZC1uYW1lKTs=",
+  "new_base64": "cXcodGllZC1zZWxlY3Rpb24gbWFwLXJlcGxhY2VtZW50IHJlc3VsdC1zY2FsYXIgYmFyZS1uYW1lIHNwYWNlZC1uYW1lIGNvbnRhaW5lci1lbXB0eSk7",
+  "scope": "First paired1135 TAP contains57 intended isolation REDs and one wrong authored target/container-empty expectation. Original native snapshots are unchanged. Fresh-process container-cache diagnosis confirms /o caches the first array/hash container, so the current capture slice preserves native container-empty=item in the array-first probe order. Only this one authored-result map entry changes before distinct final paired capture; the real P2 container-cache guard fix is owned/scheduled under .9."
+}

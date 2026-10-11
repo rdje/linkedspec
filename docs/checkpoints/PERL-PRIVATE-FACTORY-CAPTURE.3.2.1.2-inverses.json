@@ -1,0 +1,71 @@
+{
+  "result": "PASS",
+  "rows": [
+    {
+      "name": "raw-infer",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-raw-infer.json",
+      "artifact_sha256": "bd497632df2e5cc0f51e3c8207ed705ec87751ff7d4ad624a6cb3f2719dbcfe4",
+      "failure_count": 15,
+      "required_reason": "small kind infer/known0 child cannot donate parent packet"
+    },
+    {
+      "name": "raw-target",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-raw-target.json",
+      "artifact_sha256": "574db4ad3ac4f3796ec7980e7d944298bea918fdf508fb2d5726f29c8638a330",
+      "failure_count": 15,
+      "required_reason": "small kind target/known0 child cannot donate parent packet"
+    },
+    {
+      "name": "raw-candidate",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-raw-candidate.json",
+      "artifact_sha256": "9b6920d21645fcc37b1f8d8a516f9f3b20551d56b78e8afb2eb9866db31484eb",
+      "failure_count": 27,
+      "required_reason": "small kind candidate/known0 child cannot donate parent packet"
+    },
+    {
+      "name": "wrapper-identity",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-wrapper-identity.json",
+      "artifact_sha256": "e869f6ce3ae85eb0cfefe21806d02c74c899012de5d0cf0d9fc29b17d51efa26",
+      "failure_count": 7,
+      "required_reason": "small kind infer/known1 actual selected CODE controls eligibility"
+    },
+    {
+      "name": "argument-copy",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-argument-copy.json",
+      "artifact_sha256": "28c4c6f63dd102b54a2a7164f43b8abe5c148494a58140d17245ac88cbc3a001",
+      "failure_count": 29,
+      "required_reason": "small kind infer/effect complete native observation"
+    },
+    {
+      "name": "object-coercion",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-object-coercion.json",
+      "artifact_sha256": "0641eba4d6e534fb165fd4075afb51b3ca890571fad9366100464d493cdbd427",
+      "failure_count": 34,
+      "required_reason": "reference kind effect/known0 actual object argument identity survives"
+    },
+    {
+      "name": "code-validation",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-code-validation.json",
+      "artifact_sha256": "9a5d8c651f9bf7c776ac89b510f2d6f313b874b9516b5e85b224673e24f2f7ca",
+      "failure_count": 19,
+      "required_reason": "small kind infer/kind-string complete native observation"
+    },
+    {
+      "name": "early-function-decision",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-early-function-decision.json",
+      "artifact_sha256": "7be0b96a8aac59d5634ecd337d23f75d61b594cfc69357465ae5144da64c3c7f",
+      "failure_count": 12,
+      "required_reason": "small kind candidate/function-name-absent independent authored result"
+    },
+    {
+      "name": "name-authority",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-inverse-name-authority.json",
+      "artifact_sha256": "c2324b0c6157f5ea3849d8a25cfcbd1b31e4540953c19d3af845847f6ff447cc",
+      "failure_count": 70,
+      "required_reason": "symbolic kind infer/qualified/known1 selected non-CODE remains opaque"
+    }
+  ],
+  "producer_sha256": "fe50b540d6511375f450877c6cc9b38b1c6ff45e880e78faa358c357890c10cb",
+  "module_sha256": "db180b907d532bdd965acf55e4cc0090db6524a7a68623e9b1638628cca2470b",
+  "scope": "Nine complete scoped whole-source syntax-valid faults, each223-input capsule, all three actual probes and identical1135 TAP. Named reasons distinguish each actual boundary, callback identity/aliases/object/CODE guard/early decision and forbidden name-based authority. Every full source/channel/input identity is retained before interpretation; no native observation is refreshed."
+}

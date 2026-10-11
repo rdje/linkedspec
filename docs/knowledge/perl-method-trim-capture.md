@@ -17,10 +17,10 @@ answers:
   - "does dropped value trim compare lowering with the returned slot after effects"
   - "which readonly command verifies inline required dropped value trim isolation"
 date: 2026-10-11
-status: inline required dropped-value trim isolated; sixteen optional/direct ingress sites remain under .3.2.1.2-.8
+status: inline required trim and three small optional kind sites isolated; thirteen ingress sites remain under .3.2.1.3-.8
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
-reverify: "Current inline-required trim: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-publish-claim.py; review.py, consumer-review.py, book-review.py and evidence.py under the same prefix/wrapper are readonly by default. First captures/freezer/faults and --capture are retired one-shot writers. Historical inventory .3.2.1.0-publish-claim.py requires accepted354c15530fd1445ebfa8c6c0683e7b8d066caced Git inputs including its original live claim/book/card. Earlier trim review requires accepted429d0c6d inputs; old block/book commands require their originally recorded accepted Git inputs. Local-return final-review.py under .3.1.2.2.0 requires acceptedde3b50dd inputs. MEMORY.md and the task tree own current selection."
+reverify: "Current remaining-call proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-publish-claim.py; review.py, consumer-review.py, book-review.py and evidence.py under the same prefix/wrapper are readonly by default. First captures/freezer/faults and --capture are retired one-shot writers. Historical inline trim .3.2.1.1-publish-claim.py requires accepted61cca1cccff6027461e120e4236431d1bc7d20b1 Git inputs including its original live claim/book/card. Historical inventory .3.2.1.0-publish-claim.py requires accepted354c15530fd1445ebfa8c6c0683e7b8d066caced Git inputs including its original live claim/book/card. Earlier trim review requires accepted429d0c6d inputs; old block/book commands require their originally recorded accepted Git inputs. Local-return final-review.py under .3.1.2.2.0 requires acceptedde3b50dd inputs. MEMORY.md and the task tree own current selection."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -148,6 +148,13 @@ eligibility and neither donates the parent packet. Cold require/invocation still
 loads no SourceEmissions. Original339 bindings/full78574-byte inventory record and
 actual publisher baseline remain exact, with only its one live mode/revision pair
 historical at354c15530. Earlier native observations and historical claims stay exact.
-Sixteen remaining ingress sites follow under .2-.8; independent helper/private,
+At that acceptance sixteen ingress sites remained under .2-.8; independent helper/private,
 FlowExpr/ControlFlow, root fixture .7 before root pipeline .6, output/mapped/parent/
 canonical admissions and TYPE-REFERENCE-BOOK remain separate.
+
+Three small optional kind boundaries .3.2.1.2 are now isolated. Their canonical
+native selection/symbolic dispatch/object identity/cache facts and readonly proof
+routing live in docs/knowledge/perl-legacy-hash-kind-callback.md. Thirteen original
+ingress sites remain under .3-.8. The separately discovered /o container-cache
+repair .9 follows .2 and due daily hygiene before .3; it is not an extra original
+ingress site. The original static inventory remains a dated accepted snapshot.

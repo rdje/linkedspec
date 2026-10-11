@@ -1,0 +1,13 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native-capture.py"
+  ],
+  "returncode": 1,
+  "actual_merged_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjItcmVmZXJlbmNlLW5hdGl2ZS1jYXB0dXJlLnB5IiwgbGluZSA2MywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCB1bmNoYW5nZWQgYW5kIHJlc3VsdC5yZXR1cm5jb2RlID09IDAgYW5kIG5vdCByZXN1bHQuc3RkZXJyLCAnbmF0aXZlIHNtYWxsIG9wdGlvbmFsLWtpbmQgb2JzZXJ2YXRpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogbmF0aXZlIHNtYWxsIG9wdGlvbmFsLWtpbmQgb2JzZXJ2YXRpb24K",
+  "original_probe": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-probe-first.pl",
+  "original_probe_sha256": "49c8b5797382e2647d2677ab159b01e66b7762bd2ca5bc20b9b131d5d69077f6",
+  "original_native_sha256": "5e3767edd38ac22d14717842513b9536336507060b135afb00b9df617bfb3b03",
+  "scope": "First native child actually returned0 with unchanged218 inputs and ten full observation rows, plus one compile-time Name-used-only-once warning from the temporary symbol. The one-shot parent assertion rejected nonempty stderr. Exact original probe/producer/native artifact and available actual merged parent output are retained; separate parent channels unavailable. Only the probe warning declaration changes, keeping line count and all callback observations."
+}

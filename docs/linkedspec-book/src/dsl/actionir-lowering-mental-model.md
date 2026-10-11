@@ -1513,11 +1513,46 @@ is retained, and the same regression changes three isolation failures to success
 while preserving295 native controls. Successful error effects, actual fatal objects,
 public map references and lazy loading remain native.
 
-After this repair, sixteen MethodLowering ingress sites remain from the October11 compiled-source inventory:
+Three small optional kind callers now isolate their selected callback:
+`_infer_assignment_source_container_kind`, `_uniform_binding_target_symbol`, and
+`_codeblock_variable_call_candidate`. Inference selects the optional role before
+trim; recursive inference selects again. A plain binding target returns before
+kind lookup. Codeblock candidates first consult a function's own scalar-name
+inventory, which is authoritative even when empty, then its codeblock parameter
+kinds. Those early decisions cannot borrow callable names from a surrounding rule.
+
+The native CODE check and subsequent selection still perform two map reads.
+A tied map can supply different values for them. An actual selected CODE retains
+its own identity; a symbolic name or blessed CODE keeps its native caller-local
+dispatch through an opaque private capture. Resolving a name never grants known
+producer status. Invalid second selections keep their native errors. Callback
+replacement affects the next selection, while public map references stay intact.
+
+Inference passes its actual read-only match argument; target and candidate helpers
+pass their writable local arguments. A string-overloaded candidate-name object
+keeps its actual reference, including caller-visible object mutation. Returned
+objects, scalar context, once-only effects, error state, fatal objects and cold
+loading remain native. Neither actual CODE callbacks nor symbolic delegation can
+donate a parent publication.
+
+One existing target-recognition defect remains separately owned: its dynamic
+container regex uses `/o`, so it caches the first container in each Perl process.
+The private helper currently behaves as follows when kind reports `scalar`:
+
+| Fresh-process call order | First result | Second result |
+|---|---|---|
+| `array(item)` with container `array`, then `hash(item)` with container `hash` | `item` | undefined |
+| `hash(item)` with container `hash`, then `array(item)` with container `array` | `item` | undefined |
+
+These are internal helper observations; an authored-language failure has not been
+inferred. The capture repair preserves them. The next guard repair will make the
+current container argument govern each call and verify the affected public paths.
+
+After these capture repairs, thirteen MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Optional kind callbacks | 7 | Actual map selection, undefined defaults, early local-name decisions and aliases |
+| Optional kind callbacks | 4 | Actual map selection, undefined defaults, early local-name decisions and aliases |
 | Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
 | Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
 | Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |

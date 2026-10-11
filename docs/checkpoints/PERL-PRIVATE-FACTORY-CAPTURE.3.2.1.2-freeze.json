@@ -1,0 +1,37 @@
+{
+  "base": "61cca1cccff6027461e120e4236431d1bc7d20b1",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-before-trim.json",
+  "original_sha256": "d8a0989e2fc34bcc0af81071a3a02fb6287f9866ed0d06c980bc2b46bbfeaf13",
+  "after_sha256": "f9d270a13fd61a9a875899b3dbfe4a7d78f7b26d4c5326fade9f31d7d77e9f77",
+  "producer_sha256": "e2a63519c6f2b61119b2716c3dc8d2c9527d977bd8dce4f01540a6686c1a6eac",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+    "docs/knowledge/perl-legacy-hash-kind-callback.md",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "name": "inline-required-dropped-value-trim-isolation",
+      "bindings": 339,
+      "intersections": [
+        "docs/knowledge/perl-method-trim-capture.md",
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+        "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+      ]
+    }
+  ],
+  "scope": "Every339 accepted live binding and full78325-byte original dropped-trim record remains exact. Actual accepted readonly publisher baseline precedes runtime/book/card writes. Only its sole live mode/revision pair becomes historical61cca1ccc; all older historical publications and first native/counterfactual observations remain unchanged."
+}

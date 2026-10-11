@@ -1,7 +1,11 @@
 ---
 id: perl-legacy-hash-kind-callback
-title: Legacy hash receiver normalization selects the caller's kind callback locally
+title: Native optional kind selection and private callback identity
 answers:
+  - "why does uniform binding target recognition depend on the first container"
+  - "which small optional kind helpers preserve actual tied map second selections"
+  - "can a tied bare_symbol_kind map select a symbolic call after a CODE check"
+  - "why must a non CODE optional kind selection remain opaque"
   - "why did legacy hash receiver copy call an undefined package variable"
   - "does legacy hash normalization use the injected bare_symbol_kind callback"
   - "what happens when the legacy hash kind callback is missing or non CODE"
@@ -9,11 +13,12 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-11
-status: bounded runtime consumer evidence and book proof verified; supplemental public compatibility passed
+status: three small optional kind boundaries isolated; native container cache defect owned by .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-review.py"
+  - "Current small-kind proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-publish-claim.py; review.py, consumer-review.py, book-review.py and evidence.py under that prefix are readonly by default."
+  - "Historical legacy hash review requires accepted c90b99a83 Git inputs: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-review.py."
   - "Use the original accepted leaf's Git input state when later changes supersede its exact module/test/book bindings. Capture/freezer/correction writers are one-shot; do not refresh observations."
 ---
 
@@ -42,3 +47,62 @@ output/mapping, full-private and independent parent admissions retain their owne
 
 The match flag/write distinction has its own canonical fact card:
 `docs/knowledge/perl-match-alias-writability.md`.
+
+Small optional-kind .3.2.1.2 covers _infer_assignment_source_container_kind,
+_uniform_binding_target_symbol and _codeblock_variable_call_candidate. First216
+supplied inputs retain18 callback cases/105 guard cases/6 authority rows/9 cold
+cases before assertions or source changes. Required/secondary helpers are explicit
+controls; original callbacks inherit eligibility1 and donate all six parent packets.
+
+The native map expression checks one value for CODE and reads a second for selection.
+MethodLowering has no strict refs, so the selected value may be a qualified or
+unqualified symbolic name or blessed CODE and still execute. Separate217-input
+first-native proof retains42 rows: those three variants execute in18 rows, while
+GLOB/undefined/ARRAY/HASH fail in24 rows at the actual original helper call sites.
+Match arguments reject writes; local target/candidate arguments accept them without
+changing the caller scalar. All actual channels and first probe bytes are retained.
+
+SourceEmissions::_capture_emission uses strict refs and only actual unblessed CODE
+identities can be known. Directly binding a non-CODE second value would change
+native dispatch or errors. The three bindings keep the actual CODE identity when
+selected and treat caller-local delegation of a non-CODE value as opaque, preserving
+its native call site and aliases. Resolving a symbolic name must not confer authority.
+The original native producers are retired one-shot writers; current acceptance and
+next work follow MEMORY.md and docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md.
+
+The native target helper caches its first dynamic container interpolation through
+/o. The .2 first paired1135 fixture exposed a wrong authored container-empty
+expectation in the array-first probe order. Exact first fixture/capture and its
+sole authored map correction are retained; all original native observations remain
+unchanged. Separate216-input fresh-process diagnosis runs array then hash and
+hash then array. Each first target is recognized; each second correct-container
+target is rejected before kind lookup. P2 .3.2.1.9 owns the guard repair immediately
+after .2 and due daily hygiene, before .3. This is a private-helper diagnosis;
+public Toolbox reproduction is required before claiming an authored-language failure.
+
+The separate object-name native probe retains10 rows over218 supplied inputs.
+Its first child returned0 with a compile-time once-warning; the parent rejected
+nonempty stderr. Exact first probe/producer/native result and available merged
+parent failure remain retained. Only the probe's warning declaration changes;
+all ten stdout observations are byte-identical and all other217 inputs stay exact.
+The actual overloaded name object reaches the callback unchanged, preserving
+coercion count, shared-object mutation and fatal object identity.
+
+The first1135-assertion fixture has58 failures:57 intended isolation REDs and one
+wrong authored container-empty expectation. Only that authored result map changes
+before final paired capture. The identical final1135 TAP has57 isolation REDs and
+1078 passing controls against accepted61cca1ccc, then all1135 current GREEN.
+Nine syntax-valid full-source faults fail15/15/27/7/29/34/19/12/70 assertions for
+named boundary, identity, alias, object, CODE validation, early function inventory
+and name-authority reasons. Supplied69 suites/223 inputs/15093 assertions and
+complete book89 inputs/three controls pass. Original339 bindings/full78325-byte
+trim publication stay exact except its sole live mode/revision becoming historical
+at61cca1ccc. The initial census instrument's non-live-input KeyError and available
+merged output remain retained; the complete guarded census precedes all bound writes.
+
+These facts establish three private callback boundaries and the explicit controlled
+helper cases. They do not admit all secondary helper behavior, authored-language
+failure, full-private/parent behavior or canonical CI. Thirteen original ingress
+sites remain under .3-.8; the separately discovered cache repair .9 runs first.
+The current readonly publication gates the retained native, paired, full-source,
+consumer, book and evidence records. First capture writers are retired.
