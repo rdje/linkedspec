@@ -1,6 +1,6 @@
 ---
 id: perl-method-ast-call-capture
-title: AST call statements isolate six required callback roles and retain native lazy validation
+title: AST call callbacks retain native validation, aliases and separate publication
 answers:
   - "which AST call statement callbacks have private emission boundaries"
   - "when does AST call lowering validate hash key array and primitive callbacks"
@@ -10,11 +10,14 @@ answers:
   - "does tagged return payload lowering retain actual array slice aliases"
   - "what native RED GREEN proof covers AST call statement dependencies"
   - "where are the original280 guarded hash key inputs preserved"
-date: 2026-10-10
-status: bounded six-role AST call proof; other guarded owners and independent admissions open
+  - "why do tied AST pipeline clone FETCH traces need deterministic probe iteration"
+  - "does optional AST assignment keep the normalized argument ARRAY slots"
+  - "can an AST assignment fallback thunk inherit a registered helper identity"
+date: 2026-10-12
+status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "AST-call commands require accepted9085eb1e5 Git inputs; later source/book edits are outside that boundary. Historical command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1-final-review.py; separately run preservation-control.py and publish-claim.py under the same wrapper. Defaults are readonly. Capture/freezer and --capture publication are one-shot writers. Earlier reviewers require accepted Git inputs; hash-key requires2e9e5443e. MEMORY.md owns the current frontier."
+reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Iterator-review.py verifies the distinct native-first input repair. Historical six-role AST proof requires accepted9085eb1e5 logical inputs; .3.1.3.1-final-review.py/preservation-control.py/publish-claim.py remain readonly historical entrypoints. Hash-key requires2e9e5443e. Capture/freezer/--capture are one-shot writers; MEMORY.md owns the frontier."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The
@@ -78,3 +81,28 @@ Missing SUMMARY fails; removed teaching text disappears from HTML; omitted inclu
 produces ERROR despite exit0. Full channels/HTML remain lossless. Public Phase0
 is compatibility proof only. Other guarded owners, optional/direct calls,
 pipeline/output/full-private/mapped/canonical and parent admissions remain open.
+
+The later optional AST slice `.3.2.1.5` owns a distinct diagnostic-input repair.
+Its original tied Map delegated FIRSTKEY/NEXTKEY to ordinary hash iteration.
+Two unchanged-source234-input runs differ in24 loaded rows solely in clone FETCH
+order: their FETCH multisets, first role lookup and every other field are exact.
+Do not normalize those original observations or infer a production defect. The
+distinct stable probe changes only those iterator bodies to a sorted queue. Two
+fresh235-input runs repeat all148 loaded/six cold rows and stdout bytes exactly;
+26 clone rows retain their deterministic native FETCH order. Reverify with
+`bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-iterator-review.py`.
+The reader retains original and stable producers, complete channels, input hashes
+and modes. This establishes fixture stability, without admitting complete helpers.
+
+The optional AST assignment boundary now binds its selected actual CODE directly.
+Selection follows successful normalization and retains the native CODE check
+plus second map read. Tied-selected symbolic/blessed dispatch stays caller-local
+and opaque. The existing default local thunk forwards the original dependency
+map and is itself opaque even if its downstream helper is registered. Both
+callback arguments alias the actual effective ARRAY slots. Returning a separate
+normalized ARRAY therefore directs mutation into that ARRAY while preserving
+the original argument ARRAY. Replacement during normalization affects the current
+selection; replacement inside the callback affects the next owner invocation.
+The `.3.2.1.5` native reader retains148 loaded/six cold complete rows with16
+authority-only row changes; its identical272-assertion regression has44 original
+isolation REDs/228 controls/all GREEN. Secondary helper bodies remain controls.

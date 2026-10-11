@@ -740,7 +740,7 @@ sub _lower_ast_block_side_effect_statement {
   if (defined($method) && $method =~ /^(?:split|split_each|trim_each|filter_nonempty|filter_match|lowercase_each|uppercase_each|uniq)$/o) {
    my $lower_array_pipeline_expr = ref($deps) eq 'HASH' ? $deps->{lower_array_pipeline_expr} : undef;
    if (ref($lower_array_pipeline_expr) eq 'CODE') {
-    my $lowered = $lower_array_pipeline_expr->($node->{source}, $node->{source_span});
+    my $lowered = _bind_emission_dependency($lower_array_pipeline_expr)->($node->{source}, $node->{source_span});
     return $lowered if defined($lowered) && length($lowered);
    }
   }
@@ -2167,7 +2167,7 @@ sub _lower_ast_call_statement {
   my $lower_assign_statement = (ref($deps) eq 'HASH' && ref($deps->{lower_assign_statement}) eq 'CODE')
    ? $deps->{lower_assign_statement}
    : sub { return _lower_assign_statement($_[0], $_[1], $deps) };
-  my $lowered = $lower_assign_statement->($effective_args->[0], $effective_args->[1]);
+  my $lowered = _bind_emission_dependency(ref($lower_assign_statement) eq 'CODE' ? $lower_assign_statement : sub { return $lower_assign_statement->(@_) })->($effective_args->[0], $effective_args->[1]);
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($lowered) && length($lowered);
   my $target = $trim_action_ir_value->($effective_args->[0]);

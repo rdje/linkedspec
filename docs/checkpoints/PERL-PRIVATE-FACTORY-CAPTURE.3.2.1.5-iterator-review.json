@@ -1,0 +1,1111 @@
+{
+  "result": "PASS",
+  "producer_sha256": "d8af8ce68a78d14152fd388a47f24ba61380860f8897487e19ad04d4d8dd9961",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-consumers.json": "881280923aa1911193c4655c82f6f3a2130cb1d407b7683adf3bac5f0b85b383",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-native.json": "f3e55367d79099d630bd9c68d98f3ed862b295b0937d62e984af7261f8507f91",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-reached.json": "904b4f061d13d84755cbf8719bf2136dc49882467d3fa3efcac004f8e7d8a03a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-recheck-native.json": "1a0c78e97757aa68b94e71d4a13d158061d81d8e423e83b104750f758b0e497a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-recheck-reached.json": "0a4a98f7e4c68543d8e868fe3e957275f797894ffc31c732b36cce99af1b562a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-recheck-stable-native.json": "3bece41b1d8153fc6bad6addb0ae8adea46ab1a4386236cc29aa3a281a06ec1a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-recheck-stable-reached.json": "09d5d205e56aca69b3a61a54a2d08c2d889bb6f54629f1ac760f9d50f9c2dd27",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-native.json": "f2520dbecc75b901848c0d3ffe1b06af06b7789f4077e1ee576e4e7ebbbd157a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-reached.json": "09d5d205e56aca69b3a61a54a2d08c2d889bb6f54629f1ac760f9d50f9c2dd27",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-iterator-review.py": "d8af8ce68a78d14152fd388a47f24ba61380860f8897487e19ad04d4d8dd9961",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-observe-recheck.py": "28994b9eec94cd1025bba301fb6c4d9aec5be0080f4716ac7a94f8def21044f3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-observe-stable.py": "5352adee44c67f99310d9b53254d14bad46ce36ad6778ee3116187864cc8f9f1",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-observe.py": "9bf8dbde97f24dffb24473a1d8425775dd241fec11900bd9346b0dcce34eaedb",
+    "t/actionir_ast_optional_probe.pl": "f617e493bbc55a0df5cc4e33d8380a00a2fbbabf9d9c99ba17ce1b8e61d11737",
+    "t/actionir_ast_optional_stable_probe.pl": "3c4769b3d56803d501facc37d7fc7e869d9c659aebac246d9e40b6e46fd913d5"
+  },
+  "source_revision": "15197dfdf0f198a4eb25517e278edba491d12db7",
+  "original_module_sha256": "9fe54748689afb5acbe184116d1f42a6da3cf439040af2719acae4670bb8f6a4",
+  "first_native_inputs": 234,
+  "stable_native_inputs": 235,
+  "loaded_rows": 148,
+  "cold_rows": 6,
+  "original_same_source_changes": [
+    {
+      "group": "branches",
+      "id": "pipeline/tied-first-bad",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "branches",
+      "id": "pipeline/tied-second-bad",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-qualified/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-qualified/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-unqualified/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-unqualified/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-blessed-code/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-blessed-code/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-glob/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-glob/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-undefined/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-array/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-array/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-hash/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-hash/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-name-object/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-name-object/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-qualified",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-blessed-code",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-glob",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-undefined",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-array",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-hash",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-name-object",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr"
+      ]
+    }
+  ],
+  "first_to_stable_order_changes": [
+    {
+      "group": "branches",
+      "id": "pipeline/tied-first-bad",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "branches",
+      "id": "pipeline/tied-second-bad",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-qualified/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-qualified/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-unqualified/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-unqualified/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-blessed-code/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-blessed-code/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-glob/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-glob/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-undefined/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-undefined/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-array/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-array/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-hash/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-hash/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-name-object/known-0",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "authority",
+      "id": "pipeline/tied-name-object/known-1",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-qualified",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-unqualified",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-blessed-code",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-glob",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "lower_array_pipeline_expr",
+        "unrelated"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-undefined",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-array",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "lower_array_pipeline_expr",
+        "unrelated",
+        "normalize_method_args_with_optional_scope"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-hash",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    },
+    {
+      "group": "symbolic",
+      "id": "pipeline/tied-name-object",
+      "changed_fields": [
+        "fetches"
+      ],
+      "before_fetches": [
+        "lower_array_pipeline_expr",
+        "trim_action_ir_value",
+        "normalize_method_args_with_optional_scope",
+        "unrelated",
+        "lower_array_pipeline_expr"
+      ],
+      "after_fetches": [
+        "lower_array_pipeline_expr",
+        "lower_array_pipeline_expr",
+        "normalize_method_args_with_optional_scope",
+        "trim_action_ir_value",
+        "unrelated"
+      ]
+    }
+  ],
+  "stable_clone_rows": [
+    "pipeline/tied-first-bad",
+    "pipeline/tied-second-bad",
+    "pipeline/tied-qualified/known-0",
+    "pipeline/tied-qualified/known-1",
+    "pipeline/tied-unqualified/known-0",
+    "pipeline/tied-unqualified/known-1",
+    "pipeline/tied-blessed-code/known-0",
+    "pipeline/tied-blessed-code/known-1",
+    "pipeline/tied-glob/known-0",
+    "pipeline/tied-glob/known-1",
+    "pipeline/tied-undefined/known-0",
+    "pipeline/tied-undefined/known-1",
+    "pipeline/tied-array/known-0",
+    "pipeline/tied-array/known-1",
+    "pipeline/tied-hash/known-0",
+    "pipeline/tied-hash/known-1",
+    "pipeline/tied-name-object/known-0",
+    "pipeline/tied-name-object/known-1",
+    "pipeline/tied-qualified",
+    "pipeline/tied-unqualified",
+    "pipeline/tied-blessed-code",
+    "pipeline/tied-glob",
+    "pipeline/tied-undefined",
+    "pipeline/tied-array",
+    "pipeline/tied-hash",
+    "pipeline/tied-name-object"
+  ],
+  "stable_recheck_exact_stdout": true,
+  "scope": "First full native producer/observations stay immutable. Two fresh original-source captures vary in24 complete rows solely through tied diagnostic storage-hash clone iteration, with equal FETCH multisets and every other field exact. A distinct input changes only FIRSTKEY/NEXTKEY to sorted iteration. Stable148 loaded/six cold populations recur byte-for-byte twice on unchanged accepted production before assertions/source edits; first-vs-stable differs only in clone FETCH order. All26 stable clone rows have the explicit order. This repairs the proof fixture, not production behavior or an earlier native observation. Original runtime inputs are recoverable from acceptedBASE and the full supplied seed; no full-helper/private/parent/canonical admission."
+}

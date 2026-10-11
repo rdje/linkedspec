@@ -1,6 +1,6 @@
 ---
 id: perl-method-block-component-capture
-title: Block components retain native fallbacks and references with separate validated and invoked dependencies
+title: Block component and AST pipeline callbacks retain native references and fallbacks
 answers:
   - "which MethodLowering required calls have private emission bindings"
   - "can block component side effect dependencies donate nested publication"
@@ -9,11 +9,13 @@ answers:
   - "why is the block component local lower_flow_composite_expr binding validated but never directly invoked"
   - "does private block component binding preserve actual reference return identity"
   - "what is the native RED GREEN proof for block component dependency capture"
-date: 2026-10-10
-status: historical block component and side-effect boundaries verified; current frontier belongs to MEMORY.md
+  - "does the optional AST pipeline callback mutate the actual node source and span slots"
+  - "how many map reads precede the optional AST pipeline CODE guard"
+date: 2026-10-12
+status: optional AST pipeline isolation verified; earlier block-component proof remains historical
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py; separately run its preservation-control.py with the same wrapper. Original inline reviewers require accepted65bd00faa inputs. Historical book proof: PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3-book-review.py under the same wrapper. Original book inputs remain historical at cdc45f9cb; capture/freezer/publisher are one-shot writers. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -71,3 +73,14 @@ automatic pipeline scopes, explicit output composition,
 complete private Phase0, mapped replacement and independent canonical/parent
 admission remain open. Production lowerers do not yet publish packets; no shipped
 pipeline failure is inferred from these controlled integration constraints.
+
+The optional AST pipeline call now has a separate boundary under `.3.2.1.5`.
+Its dependency map is read once, then the selected value must be actual CODE.
+Missing/non-CODE values retain value-component fallback, including the native
+clone of the dependency map. Callback inputs alias the actual node source and
+span slots; mutation and replacement of the span slot reach the original node.
+Defined nonempty values, including `0`, retain first-result behavior. Registered
+CODE stays eligible, but its child packet cannot satisfy a parent capture.
+The full native148/six rows change only16 authority rows across both optional
+AST owners; secondary helpers remain explicit controls. The iterator fact in
+docs/knowledge/perl-method-ast-call-capture.md explains the distinct stable diagnostic input.

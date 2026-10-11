@@ -1626,11 +1626,44 @@ result coercion, scalar context, error effects, fatal objects and lazy loading
 retain their native behavior. Downstream assignment value and tracked-write
 helpers are controlled in this bounded proof; full helper admission is separate.
 
-After these capture repairs, nine MethodLowering ingress sites remain from the October11 compiled-source inventory:
+### Optional AST pipeline and assignment callbacks
+
+The AST statement owners now isolate the optional pipeline and assignment
+callbacks. The pipeline owner reads its dependency once, then invokes it only
+when that selected value is an actual CODE reference. A missing or non-CODE
+selection continues to the existing value-component fallback. A defined,
+nonempty result returns immediately, including the string `0`.
+
+The assignment owner first validates its required normalization and trim
+callbacks. Successful normalization supplies the actual effective argument
+ARRAY; optional assignment selection happens afterward. The existing selection
+performs a CODE check and a second dependency-map read. A tied map can therefore
+return a different second value. Actual CODE retains its registered identity;
+existing symbolic and blessed calls retain their native caller-local dispatch
+and remain opaque. A missing or ordinary non-CODE entry selects the existing
+local assignment thunk, which forwards the original dependency map and remains
+opaque even when its downstream helper is registered.
+
+These calls retain different argument aliases:
+
+| Private callback input | Example callback effect | Preserved result |
+|---|---|---|
+| Pipeline node source and span slots | Append `!` to `SOURCE`; add a span field | The actual AST node and span HASH change |
+| Assignment arguments from the original ARRAY | Change `item`, `VALUE` | The source argument ARRAY becomes `["item!", "VALUE!"]` |
+| Assignment arguments from a separate normalized ARRAY | Change `other`, `PAYLOAD` | Only that effective ARRAY becomes `["other!", "PAYLOAD!"]` |
+
+The pipeline callback can also replace the actual node's span slot. Callback
+replacement during normalization affects the current assignment call; replacement
+inside either selected callback affects the next owner call. Every child keeps
+its publication separate from the parent, including a registered CODE child.
+Scalar context, result coercion, error effects, fatal object identity, fallback
+order and lazy loading retain their native behavior. Secondary lowering helpers
+are controlled in this bounded proof; full helper admission remains separate.
+
+After these capture repairs, seven MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Optional AST callbacks | 2 | Pipeline CODE guard and assignment's existing local fallback |
 | Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
 | Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |
 | Selected named-helper CODE dispatch | 1 | Existing six-helper order, actual selected references and first nonempty result |
@@ -1700,7 +1733,7 @@ These private branches do not make removed public selectors valid:
 `aggregate_selector_removed surface=array identifier=items replacement=items`,
 and `set(hash(meta), 1)` reports the corresponding hash diagnostic. The optional
 kind callback for scalar-held wrappers keeps its existing selection and local
-name alias. Its isolation remains separate work.
+name alias, with the separate emission boundary described above.
 
 Opaque and known required children cannot transfer their publication to an
 enclosing assignment with equal result text. Known-child capture uses the

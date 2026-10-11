@@ -117,7 +117,7 @@ regressions, preserves earlier accepted publications and validates the current
 book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-publish-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
@@ -126,6 +126,13 @@ publication; it must not substitute later runtime or documentation bytes.
 Capture, preservation, supplied-replay and source-fault writers are one-shot
 evidence producers, not resume commands. Each accepted record retains its own
 scope, source identity and historical boundary.
+
+When a diagnostic input proves unstable, retain its first producer and actual
+observations. For example, the optional AST probe's ordinary tied-hash iterator
+changed only clone FETCH order across unchanged-source runs. Its distinct sorted
+iterator input was observed twice before regression expectations or production
+edits. The reader checks complete native rows and byte-identical recurrence;
+it does not normalize or replace the original unordered observations.
 
 ## Public book
 

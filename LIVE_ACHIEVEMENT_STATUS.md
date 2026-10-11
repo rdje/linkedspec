@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: source/assignment optional-kind .3.2.1.4 is verified; focused normal hooks govern landing. Next AST optional callbacks .5 activate only after the committed clean handoff. Nine original MethodLowering ingress sites remain; independent private/parent/canonical admissions stay open. No push.
+Full PNT: AST optional .5 is verified from clean15197dfd; normal focused commit/brief0/post-checks/clean handoff precede mutation/write predicates .6. Seven MethodLowering ingress sites and independent admissions remain owned. No push.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4` — Source/assignment kind .3.2.1.4 is verified: isolate only two optional invocation lines, retaining actual CODE identity and opaque tied-selected symbolic/blessed dispatch. Read selects before trim; assignment selects after trim and target guards. Local name mutation reaches final source/tracked target without changing caller text; defaults, reserved/migration guards, scalar context, coercion/errors/fatal identity, native6883/7156/global lines and cold loading remain exact. First231-input native156 loaded/six cold differs only in20 complete authority rows. Identical286 TAP has56 original isolation REDs/230 controls/all GREEN; nine whole-source faults fail28/28/8/52/37/8/6/75/18. Every72 ordered supplied suite/233 input/15893 assertion, evidence5/book89/4 and supplemental standard syntax/public Phase01035 passes. Original531/full125217 .3 publication/baseline remains exact except historical mode/revision atdd82f9cb; original producers/observations/fixture never refresh or require correction. Readonly498-live-input/114980-byte publication passes. Normal focused hooks govern landing. Next AST optional .5; nine original ingress sites .5-.8 and independent admissions remain open. TYPE-REFERENCE-BOOK stays queued.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5` — AST optional .3.2.1.5 is verified: isolate only pipeline/assignment invocation lines, retaining single-read CODE guarding, normalization/two map reads, source/span/effective-ARRAY aliases and the opaque local fallback. Actual CODE identity stays direct; tied-selected symbolic/blessed assignment dispatch remains opaque and caller-local. Native148 loaded/six cold changes only16 authority rows; identical272 has44 original isolation REDs/228 controls/all GREEN. Eleven complete-source faults, full73 supplied suites/237 inputs/16165 assertions, evidence6/book89/four controls and supplemental standard Phase01035 pass. Original unordered234-input captures retain24 order-only changes; distinct235-input stable iteration repeats all native rows/stdout bytes before expectations/source edits. Original498/full114980/baseline stay historical at15197dfd; readonly517-live-input/119899-byte publication passes. Normal focused hooks govern landing. Next mutation/write predicates .6; seven ingress sites and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
 
 ## Next Action
 
-From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5. Preserve current498 bindings/full114980 publication and actual readonly baseline before bound writes. Native-first scope is only AST block pipeline and AST call assignment optional invocations, preserving actual source/span/effective-array slots, CODE/default guards, selection timing, local fallback and native behavior. Focused proof/book/standard checks and commit precede .6.
+From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6. Preserve current517 bindings/full119899 publication and actual readonly baseline before bound writes. Native-first scope is only receiver-mutation/nested-write predicates, retaining target validation before lookup, actual selected predicate identity/target aliases, truthiness/context/results/errors and cold behavior. Focused proof/book/standard checks and commit precede formal trim .7.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5` — native148/six/16 changes; stable235 recurrence/original234 iterator repair; paired272/44 RED/228 controls; eleven faults; full73/237/16165/evidence6/book89/4/standard1035; original498/114980; readonly517/119899.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4` — native156/six cold/20 changes; paired286/56 RED/230 controls, nine faults; supplied72/233/15893/evidence5/book89/4/standard1035; original531/125217; readonly498/114980.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — native91+36/cold6/20 authority changes, final229/50 RED/179 controls, nine faults, supplied71/230/15607/evidence5/book89/4/standard1035; original490/113730; first75-file511/119230/recovery512; final readonly531/125217.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
@@ -29,7 +30,6 @@ From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5. Preserve current4
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` — native8/branches52/authority4/public2/cold2; paired308/6 RED/302 controls, faults6/2/4/5/8, supplied64/199/12623/evidence7/original115/book89/3; readonly321/75495; standard Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1` — current pointer; original377/395 recovery/two REDs, current reviewer3 restored, book89/3, readonly115/121873; both draft failures retained.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6` — immutable224/scalar337; exact4961/612 bytes/35 lines, production30/23, reviewer3/preservation2 restored, book89/3; readonly377/103173; exact staged canonical admission required.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2` — native16/branches73/authority8/public4/cold4; paired436/12 RED/424 controls, ten faults, supplied63/195/12315/evidence7/original314/book89/3; readonly337/83792 and supplemental Phase01035.
 
 ## History
 

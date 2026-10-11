@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "producer_sha256": "2ccf1b5e45ad11a4e520507192cf85a54d9597383fd2625a09ecf6a0d94ff030",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-consumers.json": "881280923aa1911193c4655c82f6f3a2130cb1d407b7683adf3bac5f0b85b383",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "772cc7ac8c6550077055a9cbffeb66e716663742c7e417b7012c24d61986133c",
+    "t/actionir_ast_optional_stable_probe.pl": "3c4769b3d56803d501facc37d7fc7e869d9c659aebac246d9e40b6e46fd913d5",
+    "t/actionir_ast_optional_probe.pl": "f617e493bbc55a0df5cc4e33d8380a00a2fbbabf9d9c99ba17ce1b8e61d11737",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-observe-stable.py": "5352adee44c67f99310d9b53254d14bad46ce36ad6778ee3116187864cc8f9f1",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-iterator-review.py": "d8af8ce68a78d14152fd388a47f24ba61380860f8897487e19ad04d4d8dd9961",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-iterator-review.json": "085460c907ebb65fd71e993b1c1c04586403002b6a98eb100424be7816298baa",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-native.json": "f2520dbecc75b901848c0d3ffe1b06af06b7789f4077e1ee576e4e7ebbbd157a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-reached.json": "09d5d205e56aca69b3a61a54a2d08c2d889bb6f54629f1ac760f9d50f9c2dd27",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-after-stable-native.json": "a96d06ef4ce6f87ebc731cf94ff5927a2941ecbec7bf981ee31d4f953a948082",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-after-stable-reached.json": "9dc2ff9908a050d389402abcdc41a0e9dfd5d437f87503455c7ccc3e31e3d6a0"
+  },
+  "loaded_rows": 148,
+  "cold_rows": 6,
+  "changed_complete_rows": 16,
+  "scope": "Both real optional AST selections/calls, pipeline single-read CODE guard/source/span aliases and assignment required acquisition/normalization/two map reads/effective ARRAY aliases/local fallback thunk. Secondary helper bodies are controls. Complete native rows/modes/errors/context/coercion/guard/result/fatal/cold behavior retained, with16 complete authority-row changes. Original unordered iterator inputs/observations remain exact; distinct stable input was observed twice before authored assertions/production edits. No full-helper/private/canonical admission."
+}
