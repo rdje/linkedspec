@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "producer_sha256": "b9347cd5012b14a3e75a497e0f8df25a50001e8a728e3bd14ff4f9b0fd985e76",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-native-review.py": "d8099f20b81d3ef36259293999853225bfabf14ef22dd311b957c0115171ced4",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-first-native-review-failure.json": "02ea04c39fa80736bb6f1543b5fba4e40f8dee463dab6d2b541062a2f0ac0da9",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-consumers.json": "7805b6eb420b423d0c39f1a90fb591d0663e715a44d3a742e28fea0943f3616c",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "b420de83c6924094b7ca9e8fd9b01df74f990619c667ae241dbc5af012ce65ff",
+    "t/actionir_uniform_target_probe.pl": "874b0be404db0d8d5d55c58186ecc5eac1b9eb228d12b542b2ac36a07f08a536",
+    "capability_conformance/uniform_binding_contract.json": "14961ba1dd96ff2d0c2c2e4ba609fcf945ab321b1a8de6ca2458476c5107d5ec",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-observe.py": "635f7a3d17b6300193b2eb081c8aae7b7848f0bdd53f2d2d2e78d087ba22a5ea",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-before-observations.json": "ad70bca323e93afac46f7b6337a58f70aa5015f31a16ef8bbd35e4969c789013",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-before-reached.json": "aaca5ad4e8ea91af50640d52bd93f9249fe21d220b3825742fbe9a900078269a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-after-observations.json": "71bd3b5d3aa0cdd10fc67010bcdb379c68fa63d780d563c4be08fd060313f1eb",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-after-reached.json": "5575722fcb5ec7aaefcabf7d7ac38762bebc1840135d93647ce7f12ea112b979",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-legacy.py": "33e188219968333f6a9a5c79ad20d19714071a9c45f4fb335aafd9b5019789c6",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-legacy.json": "21620a2cdf8fc78292bc435719b303296b9e9d02d8848fa057e30a9d9d308191",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-legacy-reached.json": "e95746c42e1105553b00794b6cb558680c3b0133d6a3a6909e44989d68060f54",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-native-review-final.py": "b9347cd5012b14a3e75a497e0f8df25a50001e8a728e3bd14ff4f9b0fd985e76",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-current.json": "1309e755bb18788f8acef4a04c90491eafb87c62d7eac818effd101b47dabab7",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-symbolic-current.json": "c3f2b6f59966a7994e69328322dbeeab1f24630ac5192a9ec897da8fa4af57d2",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-current.json": "90445eb3858a4e4ce39d49b1ca93cfa7eb3373e7bf9095462482cde32cdc0ec0"
+  },
+  "native_rows": 40,
+  "changed_native_rows": 26,
+  "fresh_before_commands": 4,
+  "fresh_after_commands": 4,
+  "legacy_commands": 3,
+  "scope": "Complete224-input native/public before/after commands, exact40 member rows and26 intended changes; public full observations/emitted source stay exact across changes/orders. Complete223-input legacy probes change only five fields of target/container-empty; full symbolic/object observations unchanged. No authored-language failure, full-helper/private/parent/canonical admission."
+}

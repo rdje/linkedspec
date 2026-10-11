@@ -1,0 +1,8 @@
+{
+  "returncode": 1,
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-native-review.py",
+  "producer_sha256": "d8099f20b81d3ef36259293999853225bfabf14ef22dd311b957c0115171ced4",
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjktbmF0aXZlLXJldmlldy5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc2V0KHJlY29yZFsnbW9kZXMnXSkgPT0gc2V0KGV4cGVjdGVkKSBhbmQgYWxsKG0gaW4gKDBvNjQ0LCAwbzc1NSkgZm9yIG0gaW4gcmVjb3JkWydtb2RlcyddLnZhbHVlcygpKQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "separate_outer_channels": "unavailable",
+  "diagnosis": "The retained filesystem modes include eleven0640 files and one0750 executable. The first reviewer wrongly restricts observations to0644/0755. Actual capture copied and checked all modes; runtime proof did not fail."
+}

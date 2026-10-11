@@ -1535,18 +1535,33 @@ objects, scalar context, once-only effects, error state, fatal objects and cold
 loading remain native. Neither actual CODE callbacks nor symbolic delegation can
 donate a parent publication.
 
-One existing target-recognition defect remains separately owned: its dynamic
-container regex uses `/o`, so it caches the first container in each Perl process.
-The private helper currently behaves as follows when kind reports `scalar`:
+### Current-container target recognition
+
+The private target helper recognizes each wrapped target against the container
+argument of that invocation. Its interpolated regex no longer uses `/o`, which
+incorrectly cached the first container in a Perl process. When kind reports
+`scalar`, both orders now recognize both targets:
 
 | Fresh-process call order | First result | Second result |
 |---|---|---|
-| `array(item)` with container `array`, then `hash(item)` with container `hash` | `item` | undefined |
-| `hash(item)` with container `hash`, then `array(item)` with container `array` | `item` | undefined |
+| `array(item)` with container `array`, then `hash(item)` with container `hash` | `item` | `item` |
+| `hash(item)` with container `hash`, then `array(item)` with container `array` | `item` | `item` |
 
-These are internal helper observations; an authored-language failure has not been
-inferred. The capture repair preserves them. The next guard repair will make the
-current container argument govern each call and verify the affected public paths.
+A mismatched target, such as `array(item)` with current container `hash`, declines
+before kind lookup even after an earlier array call. An empty current container
+also declines `array(item)`. Container text remains literal: `array.(item)` matches
+container `array.`, while `arrayX(item)` does not. This preserves the existing
+private literal-matching contract without adding a container whitelist. A bare
+`item` returns directly without kind lookup; matching wrapped targets still require
+kind `scalar` and retain callback identity, arguments, effects and fatal objects.
+
+These examples describe internal helper calls. Public `.spec` authors use bare
+typed bindings: `push(item, "x")` and `set_key(item, "key", "x")`. Exact
+`array(item)` and `hash(item)` selectors remain rejected with
+`aggregate_selector_removed`. Actual Toolbox lowering and the neutral supported
+binding fixture, executed live and from independently loaded emitted source,
+produce identical observations and emitted bytes after either container warm-up.
+The repair establishes no new authored syntax or authored-language failure.
 
 After these capture repairs, thirteen MethodLowering ingress sites remain from the October11 compiled-source inventory:
 

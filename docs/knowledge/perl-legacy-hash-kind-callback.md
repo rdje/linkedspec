@@ -13,13 +13,12 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-11
-status: three small optional kind boundaries isolated; native container cache defect owned by .3.2.1.9
+status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify:
-  - "Current proof routing: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py; its accepted-review.py, historical.py and book-review.py defaults are readonly. Original .2 commands require accepted fc96936fb logical inputs and claim namespace, including33 published historical inputs beyond its immediate bindings."
-  - "Historical legacy hash review requires accepted c90b99a83 Git inputs: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-review.py."
-  - "Use the original accepted leaf's Git input state when later changes supersede its exact module/test/book bindings. Capture/freezer/correction writers are one-shot; do not refresh observations."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-publish-claim.py; review.py, native-review-final.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind
@@ -118,3 +117,14 @@ remain retained. The original report keeps its actual capture producer identity;
 executed corrected source is separately retained/hash-bound. Original390 declared
 bindings and both full publications are preserved with mode/revision changes only.
 Canonical namespace/recovery facts: docs/knowledge/repo-generated-artifact-cleanup-boundary.md.
+
+Current-container repair .3.2.1.9 removes only /o from the interpolated target regex.
+Each call uses its actual literal container, preserving bare-name early return,
+CODE selection/isolation and native argument/effect/error behavior. Four first
+224-input native/public observations precede assertions and source edits. The old
+callback fixture migrates only target/container-empty: value, eligibility, events,
+trace and successful error state now reflect rejection before lookup. All other
+main observations and full symbolic/object observations remain exact. Public
+Toolbox selector rejection, supported live execution and independently loaded
+emitted source stay unchanged across explicit first-container orders. This is a
+private guard repair; no authored-language failure or new syntax is admitted.

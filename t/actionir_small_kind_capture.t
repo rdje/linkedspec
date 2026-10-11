@@ -40,7 +40,7 @@ my %base = (infer => 'array', target => 'item', candidate => 1);
 my %infer = (map { ($_ => 'array') } qw(tied-selection map-replacement result-array selection-before-trim
  method-array copy-array flat-recursive copy-recursive));
 @infer{qw(result-hash direct-shape method-hash copy-hash recursive-replacement)} = map { 'hash' } 1 .. 5;
-my %target = map { ($_ => 'item') } qw(tied-selection map-replacement result-scalar bare-name spaced-name container-empty);
+my %target = map { ($_ => 'item') } qw(tied-selection map-replacement result-scalar bare-name spaced-name);
 my %candidate = map { ($_ => 1) } qw(tied-selection map-replacement result-scalar function-name-present
  function-name-bad-shape parameter-codeblock parameter-scalar parameter-zero parameter-absent
  parameter-bad-shape early-name-tied early-parameter-tied);
@@ -53,7 +53,13 @@ for my $group (qw(callbacks branches)) {
   my $label = 'small kind '.$row->{name};
   ++$names{$row->{name}};
   $rows{$row->{name}} = $row;
-  is_deeply($row, $native->{$group}[$index], "$label complete native observation");
+  my $expected_native = $native->{$group}[$index];
+  if ($row->{name} eq 'target/container-empty') {
+   # PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9: current empty container rejects before lookup.
+   $expected_native = {%$expected_native, eligible => [], events => [], trace => [],
+    success_error => 'incoming small kind', value => undef};
+  }
+  is_deeply($row, $expected_native, "$label complete native observation");
   my $expected;
   if ($group eq 'callbacks') {
    $expected = $base{$owner};

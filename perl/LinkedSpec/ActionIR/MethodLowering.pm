@@ -1284,7 +1284,7 @@ sub _uniform_binding_target_symbol {
  my ($target_expr, $container, $deps) = @_;
  return undef unless defined($target_expr) && defined($container);
  return $1 if $target_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o;
- return undef unless $target_expr =~ /^\Q$container\E\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o;
+ return undef unless $target_expr =~ /^\Q$container\E\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/;
  my $name = $1;
  my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
   ? $deps->{bare_symbol_kind}

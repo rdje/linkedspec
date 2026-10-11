@@ -107,16 +107,20 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current optional-kind proof entrypoint checks the retained accepted callback
-and maintenance publications, fixed claim membership and the current book:
+The current target-recognition and callback proof entrypoint checks its focused
+regressions, preserves earlier accepted publications and validates the current
+book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9-publish-claim.py
 ```
 
-Its default is readonly. Capture, preservation, supplied-replay and source-fault
-writers are one-shot evidence producers, not resume commands. This correction
-changes verification routing; it does not change callback or language behavior.
+Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
+requires its accepted `de02b83a1` logical inputs when rechecking that historical
+publication; it must not substitute later runtime or documentation bytes.
+Capture, preservation, supplied-replay and source-fault writers are one-shot
+evidence producers, not resume commands. Each accepted record retains its own
+scope, source identity and historical boundary.
 
 ## Public book
 

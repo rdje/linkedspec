@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: readonly claim-census repair .3.2.1.10 is verified. Next current-container cache .9 before giant kind .3. Thirteen original ingress sites remain under .3-.8; TYPE-REFERENCE-BOOK stays queued.
+Full PNT: current-container repair .3.2.1.9 is verified. Next giant optional kind .3, then original ingress families .4-.8. Thirteen original ingress sites remain; independent admissions and TYPE-REFERENCE-BOOK stay queued.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — Readonly claim-census repair .3.2.1.10 is verified: the original newer-claim refusal is retained, the sole source correction selects the fixed historical Git population, and original390 bindings/full85779+9306-byte publications remain exact except historical mode/revision. Accepted532/extended533 seven-case callback recovery,25-input maintenance recovery, four beyond-hash evidence RED/restorations and full book89/three controls pass. The current readonly422-input/97759-byte publication checks corrected card routes and unchanged runtime proof. First failed instruments and first passing report/before-card bytes remain retained. Daily hygiene16 removed0. Next current-container cache .9, then giant kind .3; thirteen original ingress sites .3-.8 and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — Current-container guard .3.2.1.9 is verified: remove only /o from the interpolated literal-container regex, preserving bare-name early return and optional callback identity/aliases/errors. First224-input native/public observations retain40 rows/26 intended changes and unchanged public lowering/live/independently executed emitted source. Three223-input legacy probes change only five target/container-empty fields; symbolic/object streams remain exact. Identical285 TAP has98 original REDs/187 controls/all current GREEN; three full-source faults fail98/8/67. Complete70 suites/225 inputs/15378 assertions, evidence4/book89/4 and supplemental standard syntax/public Phase01035 pass. Original422 bindings/full97759 publication and actual baseline stay exact except historical mode/revision atde02b83a1. Current readonly490-input/113730-byte publication passes; first mode-reviewer failure remains retained. Normal focused hooks govern landing. Next giant optional kind .3; thirteen original ingress sites .3-.8 and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
 
 ## Next Action
 
-From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9. Preserve intersecting accepted publications and current baseline before source/card writes. Use retained native opposite-order diagnostics and public Toolbox probes, then fix the dynamic-container /o cache with focused paired/source/consumer/book/standard proof. Commit before giant kind .3.
+From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3. Preserve the current490-input/full113730 publication and actual baseline before bound changes. Native-first proof covers only the outer base_bare_symbol_kind and inner AST-assignment bare_symbol_kind bindings of _lower_method_value_expr; retain the unrelated outer local helper and its22 calls. Focused proof/book/standard checks and commit precede .4.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — original390/full85779+9306, fixed Git population, recovery532/533/seven and maintenance25, evidence4/book89/3, readonly422/97759; first failures preserved; cache .9 next.
 - `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — native18/105/6/cold9/symbolic42/object10; final1135/57 RED/1078 controls; nine faults; supplied69/223/15093/book89/3/original339/full78325; evidence6/standard1035/readonly366/85779 PASS.
@@ -29,7 +30,6 @@ From clean HEAD activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9. Preserve intersec
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2` — native16/branches73/authority8/public4/cold4; paired436/12 RED/424 controls, ten faults, supplied63/195/12315/evidence7/original314/book89/3; readonly337/83792 and supplemental Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1` — native8/branches34/authority4/public2/cold2; paired215/6 RED/209 controls, faults6/2/4/3/4, supplied62/191/11879/evidence7/original322/book89/3; supplemental standard Phase01035 passed.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1` — committedc90b99a83; native35, paired487/48 RED, faults5, supplied61/187/evidence6/original546/book89/3 and supplemental Phase01035; normal10 hooks and clean handoff passed.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0` — committed770cffcc; public50/paired9 RED, supplied61/184/book89/3 and composed546-input publication; exact canonical attempt04, normal hooks and clean handoff passed.
 
 ## History
 
