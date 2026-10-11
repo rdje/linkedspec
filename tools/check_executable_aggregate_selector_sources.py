@@ -26,6 +26,12 @@ TEST_HOLD_ENV = "_LINKEDSPEC_SELECTOR_PROBE_HOLD_SECONDS"
 # its historical claim description. Classify only their exact path and bytes;
 # a copied file, edited input or added selector remains a positive candidate.
 HISTORICAL_DIAGNOSTIC_INPUTS = {
+    # Private array-end parser injection controls, including the compile-failed
+    # native draft. These do not exercise public authoring acceptance.
+    't/actionir_array_end_required_probe.pl':
+        'd7c252a466ecee426ed0a8e0ab264b66d550419fffa7dcdf55d17b22a65e1d80',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl':
+        '3c342cb0dc647a573922305d3d2e94e697de4cf18c504ad29eef25a1cbf75d36',
     "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-claim.py":
         "52a83a6bb01129e7f0c96f594a6e85bb2f25cedfbd86d91853a3e620b92bb90e",
     "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-split-probe-initial.pl":

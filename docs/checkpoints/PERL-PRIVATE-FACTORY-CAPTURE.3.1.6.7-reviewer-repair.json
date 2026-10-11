@@ -1,0 +1,9 @@
+{
+  "producer_sha256": "3ddb615f0265786d4b868ea9ae8ca9c19680938b60ba1103a9853a86e66e1eee",
+  "original_reviewer_sha256": "d8c2b8807251d667e080606fd94bf6c456ba798e661c72429e62bf67bdd5338f",
+  "original_plan_sha256": "3b1fdaf4e8c78cac48882f73389a8bf482a725671cb5b9836f63271d6fea5b2d",
+  "failed_reached_sha256": "bfe27061e779ac2d8bdbd5be2c9ecba4ea82f0cec9a311fc8ba3b6e2afbdf3ad",
+  "failure_sha256": "8d5277cfb514a8ab5eeff76adfc1dc9387b41614ff0403a10fcd4b0ddfd53baf",
+  "current_reviewer_sha256": "189237c86a4b9956734c5f70a815bf4df9f2c3ce1c9affc0d8534d01998c3778",
+  "scope": "Retire original one-shot writer entrypoints from the current reviewer; keep full applied/draft source exact. Move correction equality after independent field checks so named counterfactual reasons remain reachable. The original plan remains exact and identifies the original applied and first census reviewer sources. No original observation/hash is refreshed; distinct current evidence capture follows."
+}

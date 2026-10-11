@@ -1,0 +1,32 @@
+{
+  "intersections": [
+    {
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "name": "finite-change-history-with-portable-evidence",
+      "inputs": 380,
+      "intersections": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7/publish.py"
+      ]
+    }
+  ],
+  "before_claim_sha256": "e7791186aedfe22cd0638a9c55faec842e934657b9efbb07071e4909ddb9bafe",
+  "before_publisher_sha256": "bb98766f19cb7ea7c5b49855b2de1be3ab180cb2043d48d40299e936908b6075",
+  "before_scanner_sha256": "ac92c88f12d48522c66276dfea6c3dbdd936cbc1898976c9e1298e1511b1be64",
+  "original380_publisher": {
+    "returncode": 0,
+    "stdout_base64": "R3VhcmRlZCBmaW5pdGUgY2hhbmdlLWhpc3RvcnkgcHVibGljYXRpb24gUEFTUzogMzgwIGxpdmUgaW5wdXRzOyA5OTQ4MCBieXRlczsgb3JpZ2luYWwzNjkgZXhhY3QvdHdvIHBvcnRhYmxlLWV2aWRlbmNlIFJFRHMgcmVzdG9yZWQK",
+    "stderr_base64": ""
+  },
+  "original_scanner_red": {
+    "returncode": 1,
+    "stdout_base64": "",
+    "stderr_base64": "ZXhlY3V0YWJsZS1hZ2dyZWdhdGUtc2VsZWN0b3Itc2NhbjogcG9zaXRpdmUgc2VsZWN0b3Igc291cmNlIHJlbWFpbnMKZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS42LjQtbmF0aXZlLWRyYWZ0LXByb2JlLnBsOjExOTpbJ2xpdGVyYWwtYXJyYXknLCdbMV0ucHVzaF9iYWNrKHZhbHVlKSddLFsnbGVnYWN5LWFycmF5LXNlbGVjdG9yJywnYXJyYXkoaXRlbXMpLnB1c2hfYmFjayh2YWx1ZSknXSwKZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS42LjQtbmF0aXZlLWRyYWZ0LXByb2JlLnBsOjEyMDpbJ3NwYWNlZC1hcnJheS1zZWxlY3RvcicsJ2FycmF5ICggaXRlbXMgKS5wdXNoX2JhY2sodmFsdWUpJ10sCmRvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjEuNi40LW5hdGl2ZS1kcmFmdC1wcm9iZS5wbDoxNDU6cHVzaCBAcm93cyx7bmFtZT0+J3NlbGVjdG9yLXRhcmdldC0nLiR0YXJnZXQtPlswXSx0YXJnZXQ9PiR0YXJnZXQtPlsxXSxpbnB1dD0+J2FycmF5KGl0ZW1zKS5wdXNoX2JhY2sodmFsdWUpJ307CnQvYWN0aW9uaXJfYXJyYXlfZW5kX3JlcXVpcmVkX3Byb2JlLnBsOjExOTpbJ2xpdGVyYWwtYXJyYXknLCdbMV0ucHVzaF9iYWNrKHZhbHVlKSddLFsnbGVnYWN5LWFycmF5LXNlbGVjdG9yJywnYXJyYXkoaXRlbXMpLnB1c2hfYmFjayh2YWx1ZSknXSwKdC9hY3Rpb25pcl9hcnJheV9lbmRfcmVxdWlyZWRfcHJvYmUucGw6MTIwOlsnc3BhY2VkLWFycmF5LXNlbGVjdG9yJywnYXJyYXkgKCBpdGVtcyApLnB1c2hfYmFjayh2YWx1ZSknXSwKdC9hY3Rpb25pcl9hcnJheV9lbmRfcmVxdWlyZWRfcHJvYmUucGw6MTQ3OnB1c2ggQHJvd3Mse25hbWU9PidzZWxlY3Rvci10YXJnZXQtJy4kdGFyZ2V0LT5bMF0sdGFyZ2V0PT4kdGFyZ2V0LT5bMV0saW5wdXQ9PidhcnJheShpdGVtcykucHVzaF9iYWNrKHZhbHVlKSd9Owo="
+  },
+  "canonical02": {
+    "exit_code": 1,
+    "log_bytes": 37332532,
+    "log_sha256": "031b3df141ac2b6c89ddb227df7643fdba100aed6613d6a1fe2a6c5cd34182b7",
+    "log": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-selector-canonical02.log.gz",
+    "limit": "Final aggregate-selector admission rejects private controls; Phase0/CLI/final receipt not reached."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7",
+  "observed_exit_code": 1,
+  "original_producer_sha256": "d8c2b8807251d667e080606fd94bf6c456ba798e661c72429e62bf67bdd5338f",
+  "reached_sha256": "bfe27061e779ac2d8bdbd5be2c9ecba4ea82f0cec9a311fc8ba3b6e2afbdf3ad",
+  "cause": "The added exact census-repair equality ran before original reason-specific checks. The missing_history_member mutant was correctly rejected by the new earlier equality, but the evidence writer expected the later complete-prior-population reason and failed. Its finally block restored the complete226-file plan.",
+  "limits": "Retained reached envelope includes healthy226 and complete actual child RED channels/mutant bytes. No full evidence PASS is claimed for this attempt. The original outer transport envelope is unavailable; observed outer exit1 and named assertion missing_history_member are transcribed. Repair makes the current capacity entrypoint readonly and runs the correction equality after existing field-specific checks; fresh evidence uses a distinct producer."
+}

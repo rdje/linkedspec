@@ -1,0 +1,36 @@
+{
+  "base": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-before-array-end.json",
+  "original_sha256": "aa0771c91a00b7d33595d28ae4b254fb88dab1f0fdfbf0ca0edb2d6cbc2375ea",
+  "after_sha256": "10cc07a2d9461cd13b1625cd08610ac74a2ff66bba9ee3fc323c7b271d76f539",
+  "producer_sha256": "dfbc3035b3c6128b412395a0f797c920356a770fa064ba5bf2f4d8e27e6c5196",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+    "docs/decisions/INDEX.md",
+    "docs/history/changes/manifest.jsonl",
+    "docs/knowledge/guarded-ast-change-history-capacity.md",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "doctrine/readme_stability/routes.jsonl"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "name": "array-end-required-callback-isolation",
+      "bindings": 329,
+      "intersections": [
+        "docs/linkedspec-book/src/development/documentation-workflow.md"
+      ]
+    }
+  ],
+  "scope": "All329 accepted live bindings and the full original claim are preserved before governed history/book/card writes. Only first live durability mode/revision changes; the separate original-hash preservation claim and all old fields/producer/hash/observations remain exact. Every live record was checked for intersections."
+}

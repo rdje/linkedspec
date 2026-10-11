@@ -76,6 +76,12 @@ If the collection has no archive slot, own a separate finite admission before
 continuing feature work. Its exact manifest growth and sole decision/index overhead
 need accepted authority; an earlier finite allowance supplies no future reserve.
 
+Rollover generation and capacity admission are separate steps. After the roller
+creates an exact archive, the existing routing gate can reject the additional
+member and manifest growth. Retain that rejection before adding the finite
+accepted decision and exact limits; then stage the whole proposal and run
+canonical CI. A successful generation alone grants no capacity.
+
 Preserve any live evidence that binds the root or book before changing them.
 Keep its original hashes at the accepted Git revision, then separately verify the
 new rollover against that revision. A healthy render also checks recursive local

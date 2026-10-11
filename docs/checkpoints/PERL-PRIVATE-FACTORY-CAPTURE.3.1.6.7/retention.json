@@ -1,0 +1,12 @@
+{
+  "producer_sha256": "a8a645bbd8aa18b62336e39e6bba97563e11ce2f53851a2742014e3575d83837",
+  "original_claim_sha256": "3948b9a84e4dba1e018643dffc667149ca1eb7176d256726fed708b273026a7d",
+  "original_inputs_sha256": "377cb8fc36de3729e9ea14bdb1c44e2ae9583cb9f1f0440c1ad44b297ccb6ca7",
+  "original_bindings": 369,
+  "relocations": [
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-book-correction.json",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-review.py",
+    "docs/knowledge/guarded-ast-change-history-capacity.md"
+  ],
+  "scope": "All369 first-publication inputs/full claim are verified before writes. Three changing inputs relocate in exact decoded form;366 other bytes stay current. The original94175-byte publication, publisher and observations remain exact. This is byte-bound preservation, not a fresh original-publication execution. The complete current proof is separately rerun after the encoding repair."
+}

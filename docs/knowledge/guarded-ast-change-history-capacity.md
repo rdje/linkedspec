@@ -1,6 +1,6 @@
 ---
 id: guarded-ast-change-history-capacity
-title: One finite change-history rollover precedes guarded AST array-end callback work
+title: Finite change-history capacity under ADR0132 and ADR0134
 answers:
   - "which change history capacity precedes guarded AST array end isolation"
   - "what exact finite limits does ADR0132 admit"
@@ -10,12 +10,50 @@ answers:
   - "where are the original279 AST call input bindings preserved"
   - "which readonly command reviews guarded AST history capacity"
   - "does this capacity leaf admit future archive reserve"
-date: 2026-10-10
-status: historical accepted capacity at b0099d9ad; original inputs required
+  - "which decision admits change history segment 4963"
+  - "how are array end callback bindings preserved before ADR0134"
+  - "why does the ADR0134 census retain an incomplete180 member draft"
+  - "which readonly command reviews current ADR0134 capacity"
+date: 2026-10-11
+status: current finite ADR0134 proposal; exact canonical receipt governs admission
 tags: [history, capacity, continuity, verification, ast, decisions]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4 retains actual pressure255, exact clean9085eb1e5 suffix112 lines/27100 bytes, all222 prior immutable identities, production30 threshold/23 authority cases, four reviewer corruptions/restoration, original279-input preservation with actual corruption RED/restoration and complete book57+32/three controls. Canonical receipt and normal hooks govern admission."
-reverify: "Historical commands require accepted b0099d9ade78623b38c2213867b84f1e32014fe7 Git inputs, including the original live claim. Do not replay against later AST/book edits. bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4-final-review.py; separately publish-claim.py under that wrapper. Defaults are readonly. Initial/current capture/freezer/repair and --capture publication are one-shot writers. Original capacity.py requires retained initial metadata; current final-capacity.py owns corrected proof. Earlier AST-call reviewers require accepted9085eb1e5 Git inputs. MEMORY.md owns the frontier."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-review.py; separately docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7/publish.py under that wrapper. The original369-input first publication is preserved under the leaf directory; old publish-claim.py requires its original logical inputs. Both defaults readonly. Original applied/capture/freezer/correction producers and --capture writers are one-shot. ADR0132 remains historical at b0099d9ade78623b38c2213867b84f1e32014fe7; its original commands require its accepted inputs. MEMORY.md owns the frontier."
 ---
+
+At clean6392b8a6512a639265d150acb11b0e9a8451ea3d, the current460-line
+CHANGES root crosses mandatory rollover with its complete four-line record.
+Actual --check rejects; the production roller creates exact clean-Git suffix
+lines238–460 as segment4963-b73a804020d0:223 lines/36819 bytes. The old routing
+gate then rejects the new member and manifest growth. Generation grants no
+capacity; exact staged canonical admission is still required before landing.
+
+ADR0134 admits only files49→50, manifest48→49 lines and27407→27983 bytes,
+and the sole new decision/index overhead: decision files134→135 and total
+lines13215→13250. Root, aggregate, per-file and unrelated controls remain exact.
+The current change root is239 lines/20160 bytes; no future member reserve is granted.
+All329 original array-end bindings/full claim fields remain historical at the
+clean activation, with actual accepted publisher baseline and mode/revision-only
+preservation. No prior runtime, book or CI observation is refreshed.
+
+The original applied producer duplicated the changes directory, leaving an
+incomplete180-file census. Its exact source, plan and reached observations remain
+retained. A separate late census repair verifies the omitted46 engineering-history
+files remain unchanged against accepted Git, producing the complete226-file census.
+The first correction equality rejected a mutant before its expected reason check;
+that failed reached envelope remains exact. Current readonly reconstruction orders
+field checks before correction equality and retires the original writer entrypoints.
+The first book producer similarly read the correct chapter but enumerated the old
+DSL basename; its independent reader rejected. Original capture/producer/reader and
+tool-return transcription remain exact; a separate corrected capture supplies the
+actual documentation chapter path. These drafts establish no complete acceptance.
+
+Current readonly proof retains unchanged production30 threshold/23 authority cases,
+actual reviewer/preservation corruptions with restoration and complete recursive book
+sources. The claim record supplies actual final results and precise evidence limits;
+the canonical receipt governs admission. Required hash-index callbacks resume next.
+
+The following ADR0132 body remains byte-for-byte historical.
 
 At clean activation 9085eb1e5075146ca00dab52304f85937cf7ea05, the change hot root
 is 58,706 bytes, 276 below mandatory rollover. The finite collection has 48 files;

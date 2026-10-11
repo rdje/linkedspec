@@ -1,0 +1,17 @@
+{
+  "args": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-review.py"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "base64": "RmluaXRlIGNoYW5nZS1oaXN0b3J5IGZ1bGwgcmV2aWV3IFBBU1M6MjI2IHByaW9yIGZpbGVzLzMyOSBwcmVzZXJ2ZWQ7MzAgdGhyZXNob2xkcy8yMyBhdXRob3JpdHkvNCByZXZpZXdlci8yIHByZXNlcnZhdGlvbiBSRURzOyBib29rODkvMzsgb3JpZ2luYWwgZmFpbGVkIGRyYWZ0cyByZXRhaW5lZAo=",
+    "bytes": 170,
+    "sha256": "02d3bf453d39ae2ff4543f2f37b798153f4a859dec02eb92fca652821c57eb67"
+  },
+  "stderr": {
+    "base64": "",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

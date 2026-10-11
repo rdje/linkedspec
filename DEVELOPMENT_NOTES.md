@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Finite change-history member capacity
+
+ADR0134 admits one archive member, exact manifest growth and sole decision overhead before required hash-index callbacks. Preserve all accepted immutable history and329 prior array-end publication inputs. Actual pressure/admission REDs, independent reconstruction, production authority controls and complete book rendering precede exact staged canonical admission.
+
 ## 2026-10-11 — Legacy array-end required capture preserves the actual returned payload argument slot, eager parser/extractor selection and structured results. Authority controls serialize the actual result explicitly; failed instrumentation stays retained. Full rationale: docs/knowledge/perl-method-ast-array-end-capture.md.
 
 ## 2026-10-11 — Required hash capture retains eager parser selection and actual shared call references without source annotation; splitter mutation and copy/family guards stay native. Full rationale: docs/knowledge/perl-array-receiver-required-capture.md.

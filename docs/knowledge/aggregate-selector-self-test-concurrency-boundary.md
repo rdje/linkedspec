@@ -7,11 +7,13 @@ answers:
   - "how are aggregate selector discovery self-tests made concurrency safe"
   - "where may the untracked aggregate selector probe be created"
   - "what scope must the aggregate selector scanner lock cover"
+  - "why are private array-end callback probes classified by exact path and hash"
+  - "did array-end required capture admit retired selectors as public syntax"
 date: 2026-07-22
 status: current
 tags: [ci, concurrency, aggregate-selectors, untracked-files, dart, scanner]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.2.3.0; tools/check_executable_aggregate_selector_sources.py; tools/check_public_aggregate_selector_surface.py; tools/run_dart_local.sh
-reverify: "bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py; cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed ."
+reverify: "bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py; bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-selector-proof.py; cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed ."
 ---
 
 The executable aggregate-selector scanner creates a positive untracked Dart source to prove that its
@@ -30,3 +32,24 @@ The public aggregate-selector admission checker runs a deterministic concurrency
 hold their probes for staggered intervals, must all succeed under serialization, and must leave no root or legacy
 `dart/test` probes. This preserves untracked-source discovery and positive-selector rejection; no probe namespace is
 excluded from the actual scan.
+
+## Exact private array-end fixture registration
+
+Canonical attempt02 of `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7` exits1 at
+aggregate-selector admission after the doctrines and reached runtime checks pass.
+The scanner finds three retired-selector string sites in each of the accepted
+array-end native probe and its compile-failed draft. Those fixtures call the
+private parser with injected callbacks; they do not establish public authoring
+acceptance. The existing exact path-and-SHA classification mechanism now registers
+only those two unchanged files. No classifier rule, public example, runtime or
+historical probe byte changes.
+
+The retained original scanner reports six positive occurrences. The real
+`scan_files` function classifies exactly six with the two registrations and
+rejects eleven edited/copied/appended-positive/wrong-hash/missing-entry/ordinary
+positive controls. Each edited fixture and registry entry restores exactly.
+Original380 live bindings/full publication and its actual pre-extension publisher
+PASS are preserved before the bounded publisher extension. The complete failed
+canonical log remains compressed with its byte count and SHA. This proof covers
+fixture classification; fresh composed public admission and exact canonical CI
+separately govern landing. Neither failed canonical attempt proves full CI.

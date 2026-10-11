@@ -1,0 +1,21 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7",
+  "drafts": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-draft-book.py": "00686adec9f994fd9760e1629233120b0523fa02aeada7c86f199c765c85c550",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-draft-book.json": "f79c029b6e280ec27504fd6ecb52b41988de244e104960e2b8fbc8eed57af0d3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-draft-book-review.py": "99ff0bd92c384ca30baa5e465acee95ebd7f029d71185d4ff59e8e5130a68bde"
+  },
+  "observed_tool_return": {
+    "exit_code": 1,
+    "output_base64": "Q29tcGxldGUgc3VwcGxpZWQgYm9vayBQQVNTOiA4OSBpbnB1dHM7IG1pc3Npbmctc3VtbWFyeSBjb21tYW5kLCBjaGFuZ2VkLWNoYXB0ZXIgcmVuZGVyZWQtbWFya2VyIGFuZCBtaXNzaW5nLWluY2x1ZGUgZXJyb3IgUkVEcyByZXRhaW5lZC4KVHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMS42LjctYm9vay1yZXZpZXcucHkiLCBsaW5lIDc0LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHJvd1snb3V0cHV0X2xvY2F0aW9ucyddID09IFsnb3V0cHV0L2RldmVsb3BtZW50L2RvY3VtZW50YXRpb24td29ya2Zsb3cuaHRtbCddCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+    "output_bytes": 507,
+    "output_sha256": "0304fed3d694ac381ede2c3a95716566d3a324432219520a7749fb6c73f72626"
+  },
+  "cause": "The copied capture changed target HTML and marker but retained the old dsl basename in rglob. It enumerated the actual separate dsl chapter while reading the desired development chapter. The independent reader rejected the mismatched actual path census.",
+  "repair": {
+    "old": "supplied.rglob('actionir-lowering-mental-model.html')",
+    "new": "supplied.rglob('documentation-workflow.html')",
+    "current_producer_sha256": "3268a38b87121444ba28f5c6a05b06a90ed32ffff3ab6b7f1041ff79fa0910c1"
+  },
+  "limits": "Original complete capture and reader bytes are retained unchanged. Its PASS flag does not establish output-census acceptance. Original external tool transport envelope and supplied temporary output are unavailable; the exact observed tool-return text is transcribed. A distinct corrected one-shot capture follows; no original observation/hash is refreshed."
+}

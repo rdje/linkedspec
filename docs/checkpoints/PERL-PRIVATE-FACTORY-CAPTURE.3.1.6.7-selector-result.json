@@ -1,0 +1,194 @@
+{
+  "result": "PASS",
+  "producer_sha256": "0ee35fff6ee87ecb0e095455aeb3aad810a54f2bda904d285f51a96f9fb0d70f",
+  "original380_claim_sha256": "e7791186aedfe22cd0638a9c55faec842e934657b9efbb07071e4909ddb9bafe",
+  "fixtures": {
+    "t/actionir_array_end_required_probe.pl": "d7c252a466ecee426ed0a8e0ab264b66d550419fffa7dcdf55d17b22a65e1d80",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl": "3c342cb0dc647a573922305d3d2e94e697de4cf18c504ad29eef25a1cbf75d36"
+  },
+  "rows": [
+    {
+      "name": "original-six-positive",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "current-six-private",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [],
+      "classified": 6
+    },
+    {
+      "name": "edited-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "copied-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl.copied.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl.copied.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl.copied.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl.copied.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "appended-positive-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};",
+        "t/actionir_array_end_required_probe.pl:194:my $positive = 'array(items)';"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "wrong-digest-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "missing-entry-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl"
+      ],
+      "positive": [
+        "t/actionir_array_end_required_probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "t/actionir_array_end_required_probe.pl:147:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "restored-t/actionir_array_end_required_probe.pl",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl"
+      ],
+      "positive": [],
+      "classified": 3
+    },
+    {
+      "name": "edited-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "copied-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl.copied.pl"
+      ],
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl.copied.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl.copied.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl.copied.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "appended-positive-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:192:my $positive = 'array(items)';"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "wrong-digest-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "missing-entry-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:119:['literal-array','[1].push_back(value)'],['legacy-array-selector','array(items).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:120:['spaced-array-selector','array ( items ).push_back(value)'],",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl:145:push @rows,{name=>'selector-target-'.$target->[0],target=>$target->[1],input=>'array(items).push_back(value)'};"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "restored-docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
+      "paths": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [],
+      "classified": 3
+    },
+    {
+      "name": "ordinary-positive",
+      "paths": [
+        "positive.pl"
+      ],
+      "positive": [
+        "positive.pl:1:my $positive = 'array(items)';"
+      ],
+      "classified": 0
+    },
+    {
+      "name": "final-restored",
+      "paths": [
+        "t/actionir_array_end_required_probe.pl",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl"
+      ],
+      "positive": [],
+      "classified": 6
+    }
+  ],
+  "scope": "Exact scanner classification only; both native probe bytes and all original380 logical inputs/full publication are preserved. Eleven strict positive/edited/copied/missing-entry/wrong-hash denials, original six-site RED and restored exact-byte controls execute the real scan_files function in same-volume supplied files. Original publisher ran successfully before its bounded extension; no fresh replay of that original uncommitted publication is claimed. Fresh whole-repository/concurrency/public admission and canonical CI are separate."
+}
