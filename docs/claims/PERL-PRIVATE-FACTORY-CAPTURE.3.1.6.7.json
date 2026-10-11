@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "CHANGES.md",
@@ -1982,7 +1982,8 @@
             "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae"
       }
     },
     {
@@ -2106,7 +2107,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl",
@@ -2168,7 +2169,8 @@
             "sha256": "13192919a930fee844103bbca5a7e88194540c4d98844337f0be7f790c37786e",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae"
       }
     }
   ]

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / required hash-index callback isolation next
+- Status: `active` / optional and direct callback isolation next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-11`
@@ -602,7 +602,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Handoff: Normal hooks govern ordinary landing from clean ae65603bc; clear brief and verify post-pointer/clean Git before P1 receiver .3.1.6.0 activation. No push or broader admission.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6`
-  Status: `active` / bounded correctness prerequisite and required receiver/parser children
+  Status: `done` / bounded routing children verified; original independent admission remains open
   Goal: Receiver/parser helpers required dependency boundaries; split further before writes if needed.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3`
   Owned paths: MethodLowering required seams in _normalize_array_receiver_value_chain_expr, _normalize_number_receiver_value_chain_expr, _normalize_string_receiver_value_chain_expr, _normalize_hash_receiver_value_chain_expr, _parse_array_end_mutation_method_statement, _parse_hash_index_assignment_operator_statement, _lower_hash_index_assignment_operator_statement; focused fixtures/proof/claim, Knowledge/book/continuity. Optional/direct calls remain .3.2.
@@ -798,7 +798,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4 - isolate required array-end parser callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7`
-  Status: `done` / verified proposal; exact canonical receipt governs landing
+  Status: `done` / canonical-admitted at557a7d9e5
   Goal: Admit only the next measured change-history rollover before required hash-index callbacks.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4`
   Owned paths: CHANGES root/manifest/one exact clean-Git suffix, finite registry and sole ADR0134/index overhead; bounded proof/claim, related Knowledge cards, book and continuity; bounded exact private-fixture scanner registration required by canonical admission. No runtime or immutable history rewrite.
@@ -817,17 +817,30 @@ quoted-first example do not change here. Other repositories and all submodules r
   Owned blocking admission defect / priority P1: Canonical attempt02 passes all10 doctrines and the reached runtime contracts, then exits1 at final public aggregate-selector retirement admission. Reproduction: `bash tools/run_ci_local.sh`; available report `.linkedspec-data/verification/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-canonical02.log` names the three retired-selector string sites in each of `t/actionir_array_end_required_probe.pl` and its exact compile-failed predecessor `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native-draft-probe.pl`. These private callback-control cases need classification review under the established scanner contract; no public selector acceptance or engine defect is inferred. Impact: canonical admission is blocked despite prior focused array-end proof. This leaf owns the root-cause investigation and bounded repair before hash-index. Preserve380 current bindings/full publication and every original probe/draft byte before any intersecting writes; do not weaken the positive public-selector oracle or refresh earlier measurements. Remaining Phase0/CLI/canonical receipt were not reached; no complete CI PASS is claimed.
   Verified admission repair: Retain all380 current logical inputs/full99480-byte publication, actual original publisher PASS, unchanged scanner/native probes and complete compressed canonical02 failure before the only intersecting publisher write. Add only two exact path/SHA private-fixture registrations; real scan_files original six-site RED/current six classified and11 strict denials/restorations pass. Original compile-failed/current probe bytes remain exact; no new public selector syntax or runtime admission. A bounded publication extension retains its original380 boundary rather than refreshing it and binds the complete supplement. Fresh composed admission and exact staged canonical receipt/normal hooks remain landing conditions. Defect is fixed under focused proof, pending canonical confirmation; failed attempts never count as full CI.
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7 - admit one finite change-history member`
+  Admission closure: Actual canonical attempt03 passes the complete gate, both66-case CLI environments and Phase0; all10 normal doctrine hooks/post-pointer pass. Commit557a7d9e533710c6aae211f905ca2f231a8aedae has a matching promoted canonical receipt, brief0 and clean Git before .5 activation. This confirms the exact private-fixture classification repair; neither failed attempt counts as complete CI.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5`
-  Status: `pending`
+  Status: `done` / focused proof verified; normal hooks govern landing
   Goal: Isolate hash-index parser/lowerer required callbacks while preserving actual native behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7`
   Owned paths: Only required resolver returns in _parse_hash_index_assignment_operator_statement and _lower_hash_index_assignment_operator_statement; bounded source-bound native/TAP/alias/error/effect/authority proof, consumers/book/claim/Knowledge/continuity. Optional/direct remain .3.2.
-  Planned tier: `focused`
-  Planned focused proof: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book.
-  Planned canonical boundary: none for bounded private resolver capture; original independent admissions remain separate.
-  Planned claim record: none: Planning only; declare measurement at activation.
+  Verification tier: `focused`
+  Focused checks: Actual acquisition order and invoked-role inventory, helper/AST controls and caller guards, aliases/context/error/fatal/maps/results; complete native/current ledgers, paired RED/GREEN, effective faults and supplied consumers/book; standard public Phase0 and ordinary doctrine/history/Knowledge/memory checks.
+  Canonical trigger: none for bounded private resolver capture; original independent admissions remain separate.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json`
+  Activation: Clean557a7d9e533710c6aae211f905ca2f231a8aedae, empty brief and post-commit pointer verified. Predecessor .7 completed canonical CI including both66-case CLI environments and Phase0, all10 normal hooks and matching committed receipt. Relevant roadmap, canonical assignment/AST cards, both actual owners/callers, prior supplied consumer/probe contracts and book reviewed. Preserve both intersecting live claims (392 primary inputs and12 selector inputs, full108215-byte record) and actual accepted publisher baseline before bound writes. Retain native observations before assertions or the two required resolver edits. Reuse assignment/capacity/selector cards; no Knowledge slot remains.
+  Owned native-instrument correction: First205-input native command completes0 with12 callback/96 branch/6 authority/3 public/four cold observations, but its no-diagnostics check exits1 because Perl warns that scalar slice @_[0] should be $_[0] at probe line107. Preserve exact original probe/native capture/producer and full channels; production remains unchanged. Correct only that scalar spelling, then separately capture a corrected supplied run proving byte-identical observation stdout and no warning. The first runtime observations remain authoritative and are never overwritten or refreshed; the diagnostic-only correction is separately owned here.
+  Owned comparison correction: The diagnostic-only corrected command completes0 with empty stderr, but its whole-stdout byte-equality assertion exits1. Exact recursive comparison identifies only ten required-diagnostic temporary directory prefixes and two stringified HASH addresses in controlled key/payload reference assembly rows. Retain that producer/result unchanged and retire its writer. A separate readonly reviewer validates sole spelling change, all205 inputs and complete raw channels, permitting only those exact ten location/two address representations while comparing every other observation. No production or first-runtime observation changes; stems/source lines, actual argument/returned-object identities and reference contents remain gated.
+  Owned reviewer predicate correction: Initial readonly reviewer overmatches parser-missing-value as a required dependency diagnostic and raises TypeError on its null native error before publishing any PASS. Retain its exact draft source and a separate actual readonly failure reproduction; replace only that predicate with the ten explicit dependency-control names. Original tool transport is not independently retained. All runtime captures and production stay unchanged; no native refresh.
+  Owned admission-reader correction: First complete reviewer fails before publishing PASS because literal_eval rejects the freezer WRITES set's named CLAIM constant. Retain exact draft source and original merged command log; separately reproduce the readonly ValueError and reconstruct the sole constant-resolution correction. Runtime captures, assertion fixture, source edits and all original fields stay unchanged. This is reviewer repair, not a runtime result refresh.
+  Owned reader argument correction: Corrected reader inherits its --capture flag into the imported readonly native-review component; that component's one-shot guard rejects the already retained native-review.json before any write. Preserve exact second reader source/merged failure log and original admission-repair source/result; its corrected-source binding now resolves to review-draft02.py without refreshing the record. Shield only the component argv under try/finally, then independently reconstruct both reader corrections and retain actual second-failure reproduction with unchanged native-review bytes. Evidence invocation before the missing complete-review report exits at preflight; no controls or result ran. Final readonly repair gate precedes the first accepted full review.
+  Focused implementation evidence: Both required resolver returns are privately bound. First205-input native12/branches96/authority6/public3/cold4 observations precede assertions and source edits. Paired413 names retain9 original isolation REDs/404 controls/all413 GREEN. Ten full syntax-valid source faults fail4/2/6/4/6 for parser and6/2/39/4/14 for lowerer. Supplied66 actual command paths/plans/207 inputs/13361 assertions, seven actual evidence RED/restorations and book89/three controls pass. Original392+12 bindings/full108215-byte record and actual accepted publisher baseline remain exact, with only two live mode/revision pairs becoming historical at557a7d9e5. Exact instrument/reader failures and sole repairs remain retained; only ten temporary prefixes/two HASH addresses normalize. Standard syntax/public Phase0 passes1035 with complete channels; focused publication and normal hooks govern landing. No optional/direct, full-private or independent admission is inferred.
+  Owned documentation splice correction: Change-history check rejects the first note insertion because its unanchored heading search matches the preamble's literal ## marker. Reconstruct the exact accepted557 preamble and suffix, preserve the new record bytes, and insert at the first line-anchored heading. Existing rollover and whitespace checks verify the correction; source/native/proof inputs stay unchanged.
   Acceptance: Preserve accepted predecessor bindings before bound writes. Split before unsafe expansion; commit before the next bounded family.
+
+  Signoff evidence: Required hash-index .3.1.6.5 binds two resolver returns with actual eager/nested selection, regex/parsed-slot effects and publication isolation. Native12/branches96/authority6/public3/cold4 precedes paired413:9 original isolation REDs/404 controls/all413 GREEN. Ten source faults, supplied66 suites/207 inputs/13361 assertions, seven evidence RED/restorations, book89/three controls and standard syntax/public Phase01035 pass. Guarded readonly350-input/84391-byte publication preserves all392+12 prior bindings/full108215-byte record. Exact instrument/reader failures and sole corrections remain retained without native refresh. Normal focused hooks govern landing before optional/direct .3.2.0; independent full-private/parent/canonical work and TYPE-REFERENCE-BOOK remain queued. Fixture registration .7 precedes pipeline .6.
+  Reverify: `bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5-publish-claim.py`; separately review.py, native-review.py, admission-final.py and evidence.py under the same prefix/wrapper. Defaults readonly; all writers retired one-shot.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5 - isolate required hash-index callbacks`
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2`
   Status: `pending`
@@ -914,15 +927,12 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` | `pending` | Required hash-index parser/lowerer callbacks follow accepted history prerequisite. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2` | `pending` | Optional/direct callbacks follow required bindings. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.0` | `pending` | Isolate the already owned reachable package-flow direct callback after required hash-index landing; preserve its actual package selection. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1` | `pending` | Remaining optional/direct families follow the package-flow boundary. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 5 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
 | 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
-
-
-
 
 ## Handoff
 

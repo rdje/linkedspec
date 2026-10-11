@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-11 — Hash-index selection and regex magic survive private capture
+
+The legacy parser selects trim once; the lowerer selects key lowering before trim, then its actual nested parser re-acquires trim. Replacing the public map from trim therefore affects that nested invocation while preserving earlier selections. The lowerer's local input mutation reaches fallback while AST receives the earlier trim return. Regex RHS mutation raises Perl's native read-only error even with SvREADONLY zero; key/payload helpers receive actual parsed slots. First observations stay immutable across a diagnostic-only scalar spelling correction and narrowly normalized host paths/addresses. Failed reader predicate/constant/argv instruments retain exact sources, available raw channels and separately gated sole corrections; original claim fields and bindings stay exact. Full native/counterfactual rationale: docs/knowledge/perl-method-ast-assignment-capture.md.
+
 ## 2026-10-11 — Finite change-history member capacity
 
 ADR0134 admits one archive member, exact manifest growth and sole decision overhead before required hash-index callbacks. Preserve all accepted immutable history and329 prior array-end publication inputs. Actual pressure/admission REDs, independent reconstruction, production authority controls and complete book rendering precede exact staged canonical admission.

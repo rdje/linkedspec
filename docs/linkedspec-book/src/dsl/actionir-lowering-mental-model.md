@@ -1336,6 +1336,43 @@ callback boundaries. Method grammar remains delegated to the supplied parser;
 they add no authored-language syntax. Public mutation behavior still returns
 an independent updated array, with pop discarding the removed element.
 
+The legacy hash-index parser and statement lowerer give each required callback
+its own private emission capture. The parser requires trim before checking its
+input. The lowerer requires key lowering, then trim, before input guards or AST
+dispatch. Missing or non-CODE callbacks keep their existing diagnostics. A
+callback publishing the same text as the final statement cannot donate that
+publication to the enclosing lowerer; known callbacks keep their actual identity.
+
+Selection follows the existing invocation boundaries. The parser keeps its
+selected trim callback for input, RHS and key trimming, even if trim replaces
+its entry in the public dependency map. The lowerer similarly keeps the key
+callback selected before its first trim. Its later legacy parser invocation
+acquires trim afresh, so that nested invocation can see a replacement. The
+public map retains the actual supplied callback references.
+
+For example, the lowerer trims `meta[key] = value` before AST dispatch. A custom
+trim returning the incoming text while appending `!` to its argument changes
+the lowerer's local input to `meta[key] = value!`. AST dispatch receives the
+returned text, while legacy fallback reparses the changed local input. The
+caller's original source scalar stays unchanged. This distinction preserves
+native callback effects; private capture does not normalize them away.
+
+The parser trims RHS before key and calls both trims before rejecting an empty
+or undefined result. Nonempty `0` remains valid. RHS trim receives Perl's regex
+capture argument: assigning through it raises the native read-only-value error
+even though `SvREADONLY` reports zero. Key lowering instead receives the actual
+key slot of the parser's returned hash. Appending `!` there changes that hash's
+key while an earlier returned lowered key still supplies the statement. Payload
+lowering likewise receives the parsed value slot.
+
+AST hash assignment retains first refusal, followed by a fresh parse for nested
+assignment. A nonempty AST result, including `0` or a reference, returns directly.
+Only undefined or empty results reach legacy parsing. Explicit AST, payload and
+assembly controls verify these owner boundaries; complete secondary helpers and
+AST grammar retain their own verification. Public `meta[key] = value` still uses
+the existing typed nested-write path. These captures add no assignment syntax or
+public mutation semantics.
+
 AST assignment key lowering now has a private capture boundary.
 The assignment owner uses its required key callback only on the hash-index
 fallback. It first checks the node and expected kind, validates the target name,

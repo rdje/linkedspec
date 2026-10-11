@@ -2,19 +2,20 @@
 
 ## Current Activity
 
-Full PNT: finite change-history prerequisite verified; exact canonical admission and normal hooks govern landing. Required hash-index callbacks resume next. TYPE-REFERENCE-BOOK remains queued after the private callback activity.
+Full PNT: required hash-index callback isolation verified; normal focused hooks govern landing before the optional/direct package-flow boundary. TYPE-REFERENCE-BOOK remains queued after the private callback activity.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7` — Finite change-history prerequisite .3.1.6.7 preserves the exact223-line/36819-byte clean6392b8a651 suffix as4963 and all226 prior history/decision files. ADR0134 admits only one member,576 manifest bytes/one line and sole decision/index35-line overhead. Actual pressure/old admission REDs, production30 thresholds/23 authority denials, four reviewer/two preservation REDs with exact restoration and book89/three controls pass. All329 accepted array-end bindings/full claim fields remain historical with actual accepted publisher baseline. Original incomplete180-file census,46-file late extension, failed reason expectation and wrong-book-census draft remain explicit without observation refresh. First369-input/94175-byte publication remains exact; original guarded380-input/99480-byte publication and two portable-evidence RED/restorations remain exact; current readonly392-input/108215-byte supplement preserves that boundary and verifies six private selector sites/11 strict denials. Composed public-selector admission passes after only two exact path/SHA registrations. Exact staged canonical CI/receipt and normal hooks govern landing before required hash-index .3.1.6.5; optional/direct, independent admissions and TYPE-REFERENCE-BOOK stay queued. Fixture registration .7 precedes pipeline .6.
+`PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` — Required hash-index .3.1.6.5 binds two resolver returns with actual eager/nested selection, regex/parsed-slot effects and publication isolation. Native12/branches96/authority6/public3/cold4 precedes paired413:9 original isolation REDs/404 controls/all413 GREEN. Ten source faults, supplied66 suites/207 inputs/13361 assertions, seven evidence RED/restorations, book89/three controls and standard syntax/public Phase01035 pass. Guarded readonly350-input/84391-byte publication preserves all392+12 prior bindings/full108215-byte record. Exact instrument/reader failures and sole corrections remain retained without native refresh. Normal focused hooks govern landing before optional/direct .3.2.0; independent full-private/parent/canonical work and TYPE-REFERENCE-BOOK remain queued. Fixture registration .7 precedes pipeline .6.
 
 ## Next Action
 
-Activate hash-index .3.1.6.5 from clean accepted Git. Preserve every live intersection before bound writes; retain native callbacks/alias/context/errors/maps/results before assertions and the two bounded required resolver edits.
+Activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.0 from clean accepted Git. Preserve every live intersection and actual accepted publication before bound writes; read relevant canonical facts/callers/tests/book and retain native package-callback selection/context/alias/errors/maps/results before assertions or the bounded direct-call edit.
 
 ## Recent Completions
 
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7` — exact4963/226 prior files/329 bindings; production30/23, reviewer4/preservation2 restored, book89/3; original369/380 exact/current392/108215/portable-evidence2/private-selector11 restored; failed drafts retained; canonical receipt governs landing.
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5` — native12/96/6/3/4; paired413/9 RED/404 controls; ten faults; supplied66/207/13361; evidence7/book89/3/original392+12/full108215; readonly350/84391; standard Phase01035; exact failed instruments retained.
+- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7` — exact4963/226 prior files/329 bindings; production30/23, reviewer4/preservation2 restored, book89/3; original369/380 exact/current392/108215/portable-evidence2/private-selector11 restored; failed drafts retained; canonical-admitted at557a7d9e5; matching receipt and10 hooks.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4` — native12/branches57/authority6/public4/cold2; paired325/9 RED/316 controls, faults9/3/36/9/18, supplied65/203/12948/evidence8/original321/book89/3; readonly329/78324; standard Phase01035; failed preflights explicit.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3` — native8/branches52/authority4/public2/cold2; paired308/6 RED/302 controls, faults6/2/4/5/8, supplied64/199/12623/evidence7/original115/book89/3; readonly321/75495; standard Phase01035.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1` — current pointer; original377/395 recovery/two REDs, current reviewer3 restored, book89/3, readonly115/121873; both draft failures retained.
@@ -29,7 +30,6 @@ Activate hash-index .3.1.6.5 from clean accepted Git. Preserve every live inters
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2` — required938/cold17/native27/branches60/public5/inverse9, paired27 RED/938 GREEN, supplied54/174/evidence5/original306/book89/3; readonly300/71043; public Phase01035/full channels.
 - `REPO-HYGIENE.15` — dated13433 parent rows/15594802423 bytes, separate Rust metadata, fresh OS/size/traversal/four channel controls, zero removals; historical commit projections repaired; readonly19/7303; public guidance unchanged.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1` — required574/cold15/native9/branches52/public9/inverse6, paired9 RED/574 GREEN, supplied52/172/evidence5/book89/3; original307 preserved; original instruments retained/replayed; public Phase01035/full channels.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0` — required455/cold11/native9/branches58/inverse6, paired9 RED/455 GREEN, supplied50/170/evidence5/book89/3; original299 preserved; flow16/169 diagnosis/repair scheduled; public Phase01035/full channels.
 
 ## History
 

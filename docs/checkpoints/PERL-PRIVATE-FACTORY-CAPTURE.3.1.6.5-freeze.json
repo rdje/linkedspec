@@ -1,0 +1,48 @@
+{
+  "base": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+  "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+  "before": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5-before-capacity.json",
+  "original_sha256": "c80d2d3b856a91ae6b5d78d9baf13d7e813232560a8bcce0a31ba78d2bce9dd5",
+  "after_sha256": "1ac3cc18f3043533ff7c98ea4f7893b182e37a49bfd513e5834f97721146b6f5",
+  "producer_sha256": "ba31af3e9631737dd17a0768d6e8d3b8efdc6cf76d6a9bef0e2196864147f3c3",
+  "planned_writes": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+    "docs/knowledge/aggregate-selector-self-test-concurrency-boundary.md",
+    "docs/knowledge/guarded-ast-change-history-capacity.md",
+    "docs/knowledge/perl-method-ast-assignment-capture.md",
+    "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "intersections": [
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "name": "finite-change-history-with-portable-evidence",
+      "bindings": 392,
+      "intersections": [
+        "CHANGES.md",
+        "DEVELOPMENT_NOTES.md",
+        "docs/knowledge/aggregate-selector-self-test-concurrency-boundary.md",
+        "docs/knowledge/guarded-ast-change-history-capacity.md",
+        "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md"
+      ]
+    },
+    {
+      "claim": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "name": "exact-private-array-end-selector-classification",
+      "bindings": 12,
+      "intersections": [
+        "docs/knowledge/aggregate-selector-self-test-concurrency-boundary.md"
+      ]
+    }
+  ],
+  "scope": "All392 primary and12 selector accepted bindings and full108215-byte four-claim publication stay exact. Only the two live mode/revision pairs become historical; both already historical claims stay unchanged. Actual accepted publisher baseline precedes bound writes. Every live record was checked for intersections."
+}

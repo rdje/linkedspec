@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-11 — PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5 — Isolate required hash-index callbacks
+
+Bind the parser/lowerer's two required resolver returns so child trim/key publication stays separate. Preserve eager key/trim selection, nested parser re-acquisition, actual regex/parsed-slot aliases, maps/context/errors and fatal/results. First native12/branches96 precedes paired413:9 original isolation REDs/404 controls/all413 GREEN. Ten source faults, supplied66 suites/207 inputs/13361 assertions, seven evidence RED/restorations and book89/three controls pass. All392+12 predecessor bindings/full108215-byte record remain exact; original instrument/reader failures and sole corrections are retained without refreshing native observations. Standard syntax/public Phase0 passes1035 with complete channels; readonly350-input/84391-byte publication and normal focused hooks govern landing. Scope and readonly proof: docs/knowledge/perl-method-ast-assignment-capture.md.
+
 ## 2026-10-11 — One finite change-history archive member
 
 ADR0134 admits one measured change-history archive member and its exact manifest growth. The next complete record crosses the line rollover threshold; production pressure and old admission reject before the finite proposal is admitted. All accepted immutable bytes and329 array-end publication bindings remain preserved. Independent reconstruction, production threshold/authority and evidence controls precede exact staged canonical admission; required hash-index callbacks follow. No future member reserve or root/aggregate increase is granted.
