@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/after-native-data.json.gz": "250e6dfb3638be6a6076d0dba44e6be6c78ee59152f920a701aa07ac720122a8",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/after-native-inputs.json.gz": "6534d3ba3bf0cab56354f339d48159aa9ca4f50c672ba353dccfa2091df1f920",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/after-native.json": "e7fd7bba0c0a4b653666c24977b832407f9a5fefa02d5acdb6e0c43d934210ea",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/before-native-data.json.gz": "e5d2f3f23f9a7c34e6c4870b291ce15ef9ae66699b002507b2cb28d6acee10b8",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/before-native-inputs.json.gz": "47b085423b1a8729bc0e22ae41aaa80ee0273a26479e93fbd48e28406cee12ce",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/current-native-order-failure.json": "632f66fc1ae4fc7764dfef8c3c7a3b356843282d404e32268daae13b2cc4f53e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/current-native-review.py": "8e8f8447439ec56599ad20fd3cf75e9fcc614c10dfa23ef3fdcb8f96a708f3fe",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/final-after.json": "0e2158ceac90f9fd83fdd1cb4b3eb954b410fca0bb17263383421a7b6fb9f176",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/observe-after.py": "33abc2acf44da1b68fb8017b04e8cf7346d9c8e7cf124a161a4e963c53be9de2"
+  },
+  "population": {
+    "inputs": 100,
+    "warm_rows": 27,
+    "cold_rows": 27,
+    "defaults": 9
+  },
+  "scope": "All original ordinary observations/contexts/map references/error/fatal effects remain exact. Complete cold raw recurrences and warm ordinary recurrences pass. Actual warm registration event orders differ and are retained; each required identity multiset is checked exactly once. No raw ordered warm recurrence, observation refresh or helper/public/private/parent/canonical admission is claimed."
+}

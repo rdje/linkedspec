@@ -1,0 +1,6 @@
+{
+  "returncode": 1,
+  "source_record": "after.json",
+  "producer_sha256": "cfb9c1c5461566cb2bb388843d1cf3d2f5bc2eff647df518a43107b0f56de9d4",
+  "scope": "First implementation run is unaccepted: nine fatal-scope assertions call the factory in void context but expect selection of a returned map. The original native trace proves build context is void and there is no returned map. Retain scalar results in this authority test; native void behavior remains separately tested unchanged. Dynamic facade enumeration also adds the newly defined private selector and changes403/402 TAP population; exclude that new selector from the original-definition population. Full original fixture/candidate/native bytes and channels remain exact in capsules. No production/oracle/native correction occurs."
+}

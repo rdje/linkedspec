@@ -56,7 +56,7 @@ sub _trace_flow_exit {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::build_dep_map(
+ return _with_default_emission_selection($pkg, sub { return LinkedSpec::OwnerDispatch::build_dep_map(
   __PACKAGE__,
   $pkg,
   [
@@ -70,7 +70,7 @@ sub default_deps_for_package {
    'parse_method_function_expr',
    'normalize_method_args_with_optional_scope',
   ],
- )
+ ) });
 }
 
 #------------------------------------------------------------------------------
@@ -544,6 +544,31 @@ sub _bind_emission_dependency {
 sub _bind_optional_emission_dependency {
  my ($selected, $native_call) = @_;
  return _bind_emission_dependency(ref($selected) eq 'CODE' ? $selected : $native_call);
+}
+
+# Keep the public factory's native context and every actual returned reference.
+# A void call has no returned map to select; it still performs the native build.
+sub _with_default_emission_selection {
+ my ($pkg, $build) = @_;
+ if (!defined wantarray) { $build->(); return }
+ if (wantarray) {
+  my @deps = $build->();
+  _select_default_emission_callbacks($pkg, $_) for @deps;
+  return @deps
+ }
+ my $deps = $build->();
+ return _select_default_emission_callbacks($pkg, $deps)
+}
+
+sub _select_default_emission_callbacks {
+ my ($pkg, $deps) = @_;
+ if (defined($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+  && ref($deps) eq 'HASH'
+  && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_flow_emission_callback) {
+  LinkedSpec::RuleIR::EmitContext::_register_builtin_flow_emission_callback($_)
+   for values %$deps;
+ }
+ return $deps
 }
 
 1;

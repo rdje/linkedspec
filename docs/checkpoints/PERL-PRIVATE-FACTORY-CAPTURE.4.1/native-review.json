@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "base": "98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/before-native-data.json.gz": "e5d2f3f23f9a7c34e6c4870b291ce15ef9ae66699b002507b2cb28d6acee10b8",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/before-native-inputs.json.gz": "47b085423b1a8729bc0e22ae41aaa80ee0273a26479e93fbd48e28406cee12ce",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/before-native.json": "db50523e72125d3a0d4c919714a2245814f91bb6ce9fd3fb97ca61052a57958e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/first-native-membership-failure.json": "244bb6160544121dbefa8312f0c5e647f70cffbc62d6fffba76136aaebf71c3a",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/native-review.py": "60e642ffd6ea51deb5dd2b23da8e671f77cc28c65780a7449875014f4e7f2176",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/observe.py": "2d0dcd576d63b85b477abd3b75a52fdd6c9855ea8aa9b060d416a1dc9ccce357"
+  },
+  "population": {
+    "inputs": 100,
+    "warm_rows": 27,
+    "cold_rows": 27,
+    "native_defaults": 9
+  },
+  "scope": "Original five commands/complete channels and100 supplied inputs pass unchanged. Original INC strings join explicitly to repository perl/ paths. The original writer failure remains retained; no observation, diagnostic, fixture or production correction/re-capture occurs. Runtime context is scalar/list/void exactly as requested; all original selections are absent, not accepted behavior."
+}

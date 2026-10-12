@@ -1,0 +1,6 @@
+{
+  "session_id": 78883,
+  "returncode": 1,
+  "consumer_record_sha256": "f1e0bfcd51a3477c36ee5e5662a55862bdddab9389e4ead0e97eb3967e126173",
+  "scope": "Complete79 suites/270 supplied inputs/20634 assertions reached. Only native diagnostic error-text controls351/384 fail; every preceding accepted consumer passes. Actual stderr localizes the difference to INC order: prove -Iperl exports the supplied absolute perl path through PERL5LIB, while the first native producer explicitly clears PERL5LIB. The child diagnostic inherits prove environment in the second fixture. Freeze all original/second fixture, paired/fault/consumer sources and channels. Set local child PERL5LIB/PERL5OPT explicitly to match the native producer, with no error/oracle or production change; distinct environment-run.py and final-consumers.py retain full original/current proof."
+}

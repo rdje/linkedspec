@@ -1,0 +1,119 @@
+{
+  "result": "PASS",
+  "producer_sha256": "093f5a77443e793e51e0106749cc7ecfdd358d078f87c3896f683b69a3f5e88e",
+  "capsule_sha256": "88aa3b96896fcdf9aa5d4d5170e2082e310fbafd102986c86cb1fafdc85a1265",
+  "data_sha256": "98d00789ade8168f4fcb2a5b524fc02419818700ae6339ed920bf5597b7c248a",
+  "controls": [
+    {
+      "name": "inverse",
+      "failures": 47,
+      "assertions": 402
+    },
+    {
+      "name": "missing-trim_action_ir_value",
+      "failures": 14,
+      "assertions": 402
+    },
+    {
+      "name": "missing-extract_array_symbol_name",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-extract_hash_symbol_name",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-extract_scalar_symbol_name",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-lower_method_value_expr",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-lower_primitive_literal_expr",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-lower_direct_nested_access_value_expr",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-parse_method_function_expr",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "missing-normalize_method_args_with_optional_scope",
+      "failures": 13,
+      "assertions": 402
+    },
+    {
+      "name": "custom-target-authority",
+      "failures": 18,
+      "assertions": 402
+    },
+    {
+      "name": "copied-name-authority",
+      "failures": 18,
+      "assertions": 402
+    },
+    {
+      "name": "method-union",
+      "failures": 1,
+      "assertions": 402
+    },
+    {
+      "name": "contract-union",
+      "failures": 1,
+      "assertions": 402
+    },
+    {
+      "name": "copied-public-map",
+      "failures": 45,
+      "assertions": 402
+    },
+    {
+      "name": "wrapped-public-callbacks",
+      "failures": 101,
+      "assertions": 402
+    },
+    {
+      "name": "scalar-list-build",
+      "failures": 10,
+      "assertions": 402
+    },
+    {
+      "name": "scalar-void-build",
+      "failures": 46,
+      "assertions": 402
+    },
+    {
+      "name": "localized-error-effect",
+      "failures": 6,
+      "assertions": 402
+    },
+    {
+      "name": "twice-only-build",
+      "failures": 52,
+      "assertions": 402
+    },
+    {
+      "name": "eager-emission-loading",
+      "failures": 1,
+      "assertions": 402
+    },
+    {
+      "name": "method-catalogue-borrow",
+      "failures": 24,
+      "assertions": 402
+    }
+  ],
+  "scope": "Twenty-two full two-module source variants, complete unchanged supplied input bytes/modes and separate raw syntax/TAP channels. Every semantic control reaches all402 assertions; full inverse reproduces original47 failure names/numbers. Live production remains unchanged; no private/parent/canonical admission."
+}

@@ -1,0 +1,2159 @@
+{
+  "version": 1,
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.4.2",
+  "claims": [
+    {
+      "name": "optional-flowexpr-kind-private-boundaries",
+      "statement": "Both optional kind invocations in FlowExpr emptiness lowering now have separate private boundaries. An actual unblessed CODE retains its own registration; native symbolic, blessed-CODE and amp-callable second selections stay opaque. Original two map reads, selection timing, name guards, match argument write rejection, scalar callback context under scalar/list/void owners, values, coercions, once-only effects, successful errors, fatal identity, public maps and cold loading remain exact. Original function and native diagnostic line locations remain unchanged. First100-input native captures retain150 warm/150 cold rows with exact fresh-process recurrences before expectations or edits. The final identical762 assertions have154 original authority REDs/608 controls and all GREEN. Fourteen complete-source faults are effective, including the exact154-failure inverse. All78 ordered supplied suites/263 inputs/20232 assertions pass. Six deeper artifact corruption controls reject and restore; their unchanged original reader replays with an exact captured pending overlay and two recovery-integrity controls. Full original451 bindings/112004-byte publication and actual readonly baseline are preserved at accepted708c1afa04bb10aeacbdaf0a8133a95f380df434. Complete Knowledge1485 Markdown/1349 facts/seven overlays retains8384530 bytes under unchanged8388608 and every member limit. Full book89 inputs/four controls pass. Supplemental strict-vars/standard syntax, public Phase01035 and composed public guard pass. Defaults and independent admissions remain open.",
+      "scope": "Two guarded FlowExpr::_lower_is_empty_expr invocation seams and one appended private selector only. Required callback bindings, default maps/EmitContext, dispatch, parser/output mapping and pipeline activation are unchanged. Every native row/recurrence, complete TAP name/number, full source fault, consumer header/plan, original publication/binding, Knowledge member/header/route and book input is independently joined. The first source candidate failed48 diagnostic-line comparisons; the second failed266 checks because its if-condition lexical was unavailable to the remaining condition. Both whole sources/producers/channels and strict-vars/minimal scope diagnostics remain immutable. Only Unicode test-name display changes between the original/final fixture; the same154 original failures are independently reproduced. The original artifact inventory conservatively included an in-flight compat.json which its actual preflight never read; its exact1169 pending bytes and original manifest are retained, and unchanged-reader supplied recovery is separate from the current completed standard proof. No runtime observation is refreshed. System Perl/stdlib and mdBook are reused read-only without an immutable portable toolchain claim. Standard Phase0 and composed guard lack complete transitive input capsules and are supplemental; complete helper/private Phase0/parent/canonical and other-backend admission retain their existing owners.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py (readonly default). review.py, book-review.py, validation.py and evidence-recovery.py under the same wrapper/prefix are readonly. The original evidence.py requires its exact supplied pending view. All capture, observation, paired, source-fault and preservation writers are retired.",
+        "granularity": "All300 first/current native rows and exact recurrences over100 complete parent inputs; identical final762 TAP/154 original RED/608 controls;14 complete syntax-valid source faults; complete78 ordered consumer plans/263 supplied inputs/20232 assertions; six actual deeper artifact denials/restorations plus unchanged reader supplied replay/two integrity controls; full accepted451 bindings/112004 publication and baseline; all1485 Knowledge sources/1349 facts/seven overlays/member and8384530 collection bytes under unchanged8388608; all89 book sources/four actual controls. Supplemental strict-vars/standard syntax/1035 public Phase0 and composed public guard.",
+        "result": "Both optional kind invocations in FlowExpr emptiness lowering now have separate private boundaries. An actual unblessed CODE retains its own registration; native symbolic, blessed-CODE and amp-callable second selections stay opaque. Original two map reads, selection timing, name guards, match argument write rejection, scalar callback context under scalar/list/void owners, values, coercions, once-only effects, successful errors, fatal identity, public maps and cold loading remain exact. Original function and native diagnostic line locations remain unchanged. First100-input native captures retain150 warm/150 cold rows with exact fresh-process recurrences before expectations or edits. The final identical762 assertions have154 original authority REDs/608 controls and all GREEN. Fourteen complete-source faults are effective, including the exact154-failure inverse. All78 ordered supplied suites/263 inputs/20232 assertions pass. Six deeper artifact corruption controls reject and restore; their unchanged original reader replays with an exact captured pending overlay and two recovery-integrity controls. Full original451 bindings/112004-byte publication and actual readonly baseline are preserved at accepted708c1afa04bb10aeacbdaf0a8133a95f380df434. Complete Knowledge1485 Markdown/1349 facts/seven overlays retains8384530 bytes under unchanged8388608 and every member limit. Full book89 inputs/four controls pass. Supplemental strict-vars/standard syntax, public Phase01035 and composed public guard pass. Defaults and independent admissions remain open."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An optional callback could inherit its parent frame or donate equal-text publication; names could receive actual CODE authority, or binding could alter two-read selection, native aliases/effects/errors/diagnostic lines, lazy loading or public maps. A coherent immediate rehash could conceal forged authority, inverse, consumer, book or source inputs.",
+        "oracle": "Unchanged first native complete observations and source, independently computed actual CODE-versus-opaque frame expectations and explicit parent/known-child packet oracles; same final fixture against accepted/current full source; exact original source inverse; fixed-Git whole original claim and runtime namespace, complete ordered consumer TAP, rendered book markers and exact Knowledge source/registry population.",
+        "red_control": "First762 TAP has154 authority REDs and608 passing compatibility controls. All14 full-source variants fail154/77/77/56/24/156/184/8/156/450/2/284/48/266 assertions; the sole full inverse exactly restores all original failure names/numbers. Both rejected implementation candidates are retained; current strict-vars compilation and all762 checks pass. Six coherently rehashed artifact forgeries reject for actual selected authority, hidden original inverse, whole publication, ordered consumer header, rendered teaching and substituted runtime-input reasons, then restore exact PASS. The unchanged original artifact reader rejects altered pending bytes and a missing real fixture in supplied recovery, then restores. Four book controls cover missing SUMMARY, both removed rendered markers and missing include."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".knowledge_map.conf",
+            "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+            "role": "input"
+          },
+          {
+            "path": "KNOWLEDGE_MAP.md",
+            "sha256": "dbbcd117753aa21db6369381f247164e65358be61768b84a8581f819816d02fa",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/uniform_binding_contract.json",
+            "sha256": "14961ba1dd96ff2d0c2c2e4ba609fcf945ab321b1a8de6ca2458476c5107d5ec",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2-native.json",
+            "sha256": "f8eab3fa5b90328e130baf07f174436424825546baf70de17922bb235291052b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
+            "sha256": "c086f46ae36b5ee58902de82cc5384fc77f91ece5282c98323e919cf5ed11e78",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-native.json",
+            "sha256": "aa7715e1222ca52821a0917eccbf1e9a0c92eb3f1860aecdb49abb02fbc1a332",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-native.json",
+            "sha256": "81740ebe6867ffc28b1ce160ae2c225ede06acdca2dbf06483eb22c0ae639ad7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-native.json",
+            "sha256": "5c21038277da2cb9fd7498d8e9f9f8148a44865982d239129cb60ee8c80b42ee",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native.json",
+            "sha256": "8d9fe6097b0715bc2b6a9b5959585c7c43610bde9c181cdb775e2e47dafb374d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5-native.json",
+            "sha256": "ea12172656170cd0522154ee0d01b59fcfe5fca19c0ddea5c2cc862e1c8c883b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0-native.json",
+            "sha256": "6daf00d4819292879df7445b1685c85eb4ab90baa85d5399c8b0a61aea497f08",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-native.json",
+            "sha256": "0644410d2e631f44e702a7dd94deffa36efef583264db1f281d5963dc192ee70",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-native.json",
+            "sha256": "b2773b604a1bf300b1917d671a13586844cb750d57e00ec8f3d5a968671ea73b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native-final.json",
+            "sha256": "c9e4b725f819324cee50643542a649124914bd4fe2d5f87a15a9e3bcc71a3c3d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native.json",
+            "sha256": "5e3767edd38ac22d14717842513b9536336507060b135afb00b9df617bfb3b03",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-symbolic-native.json",
+            "sha256": "b0fbe7d5561c4cb19e09325660bfcdedcb6d25d4e327ed0e6e9707d1807b7604",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-authority-native.json",
+            "sha256": "b315dd2518a65be3dbd9427c7adea3f85a6d7364ce3a01b237fbadf3680a3271",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-native.json",
+            "sha256": "525e601be6ad9188ec61f8b42ddd1af8f4b05f44e0ff5b78f5e16fd3d2f08eba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-native.json",
+            "sha256": "2f436bd138b51d660e542a1cdd0458f6599ffa6d077dc617b8e4a634eb033d69",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-native.json",
+            "sha256": "f2520dbecc75b901848c0d3ffe1b06af06b7789f4077e1ee576e4e7ebbbd157a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-before-native.json",
+            "sha256": "f4cdb6e2ac6fee4afe044d99ab25cf089f468e3b2c56e737602a66b6185b8b4d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-before-native.json",
+            "sha256": "24e743443215dd4114a1541e7dfdd386ac60daea6e4143c640f5cdc719712f28",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-before-native.json",
+            "sha256": "76ed28f005d9c70e234ee9041359e5e3a6abbde3cc0cf1bbc81f46a1e50d707c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-consumers.json",
+            "sha256": "6d465cdc29dc1632778a99dcda6c811ca640d132e748bcf9c465b936b3816ce8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-before-native-data.json.gz",
+            "sha256": "639a3eb83d03c2c7226daeae06478467af6dea02a63b30c47d443f7b6ba9a8a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers-channels.json.gz",
+            "sha256": "2f5d08bc7c64761c10f3e243a1fb396fa843cb6d381bbf8ba46e3a13fc5db354",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers.json",
+            "sha256": "eebdae887c030624786f6136bf8c16cc8d10bd005229507ff0abe1b321c070c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers.py",
+            "sha256": "582b4e93062d68d31eece26f868b1f2daf9c1f3b5673dacb41b74ae134b4ae52",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-observe.py",
+            "sha256": "15007b21f7533e4cb6106018d676b9f5781b0aeef9d6ca69817da8fd8e6bcaf1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/accepted-after-channels.json.gz",
+            "sha256": "1f731f850a24a05e2624d20cfa92c9475090e40acd18e6f3ab6083dc8df565e4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/accepted-after-inputs.json.gz",
+            "sha256": "f094174244c66092e7e810e823cca9b44ea6266d9d5097a856058732ad393ff7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/accepted-after.json",
+            "sha256": "791e50517e852e1f25f383a960cbf81ab66343bcded47b478b5dade6b727638e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/accepted-run.py",
+            "sha256": "8f79181688323e9ca6085f09ba42e83fde6644c28dcc15b1188e3bc19ae74c87",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after-channels.json.gz",
+            "sha256": "af2175a7fde50e579753f019e3dfa8b2713d5a16fb9a0975d7874f422250f111",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after-inputs.json.gz",
+            "sha256": "5fcf80c7269ec5b520bdca4e9ee72e549e76156a6b58c26e29392c5306545bcf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after-native-data.json.gz",
+            "sha256": "e6f40c20ba192d20b8227c29d745c03bf4e6bcc25c96a8fee64cf99733824edc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after-native-inputs.json.gz",
+            "sha256": "a1b2869d1d06e5daa9550644a57251c567bcca8a6480d87d8e18301f30c38254",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after-native.json",
+            "sha256": "2ac8eca11662008d40c82de054b3f41d718ec55ff34087459a5296746975912c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/after.json",
+            "sha256": "d7daf4e824d68683a29edf77baa1584e9b306a2d22a1e73e1186661f2ba5f2c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/baseline.json",
+            "sha256": "85b5360ee4098d2c7250a58833a1b3d393646421949b4a3c8807a8d5c0b04c76",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+            "sha256": "f05081e6d23ed5b7e1b903d6d8e8d90bdab496bcbd26dc653fd8bf6f1a599e13",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-channels.json.gz",
+            "sha256": "3abdcbe33d619248f1e700934d9493f94dffe99c30e89b0c87e11b426208ae83",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-inputs.json.gz",
+            "sha256": "7697baef6071f45d0bd36787117fe27c83797fedd8f69b8d01b8e3bbc2ee1978",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-native-data.json.gz",
+            "sha256": "67ce3bcbb6ac5aa904ad481568b01c32b440f74cd701bbc7ba3f66c613cca724",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-native-inputs.json.gz",
+            "sha256": "d798ff8f8ec6f91b6dda7781c830d16bba8682504d0f954a90f15a80b5c21a48",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before-native.json",
+            "sha256": "9595731855ccd0d13f994f0f3d3dab822c5b438729fab98db5c2c811ecd11798",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/before.json",
+            "sha256": "48f0b65c74fdb5747a8e43a190bf93e1d9eeef411f122d354b18a926fcf0f8f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/book-review.json",
+            "sha256": "1325e2fcdb52d4a00d3bd95edbe3b1bbc23c777fd2bb9a536fe0253ac6bfaca0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/book-review.py",
+            "sha256": "b466db3a8f78e1457dc45af2894c151b5a0d627a1e823bf532f75c56452cb7fa",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/book.json",
+            "sha256": "ca1fbd3b578645646a2b12763f986640e1530fd45e3c045eedd69665a412589e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/book.py",
+            "sha256": "16a889dcdd58682c27d33ff3de9169b7a6b331de2c4f040686f4ce08cf4bd7ed",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/compat.json",
+            "sha256": "768cb120a2ec399b321517d928b46fb085f83b7a3c830d9e5b77926ae6cd6e80",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/compat.py",
+            "sha256": "c07d2eb779afb8e07bf20935bd4149e0d4a6320af1c0115c20245a2f54444e94",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/consumers-channels.json.gz",
+            "sha256": "9a915d47040e4f1656ca44d2f93c3397b671cdcfb045980e6f3601dd666645d6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/consumers-inputs.json.gz",
+            "sha256": "636f6fe63a9a9563f99488edc42bff8aa3535312e045e53a53ce569593bef967",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/consumers.json",
+            "sha256": "5c5dd3e8387867d5521f4abb7147339a372586a9e7d7f77efdcfb89adf3aa53b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/consumers.py",
+            "sha256": "4816c4df66bd33c648f414f80f456cf2dc6a9ccbfaac8a2d2d75bae65827f0c7",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-compat-inflight.json",
+            "sha256": "971e53df636270469a44d0108358efa145cd89fb7c9724ed22342056611c0915",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-data.json.gz",
+            "sha256": "92bab1e60fb7ad1df6ac66f4dc6f642aa910a4441505058d920a1b8b36662a19",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-recovery.json",
+            "sha256": "6caec4bfbc474df1eedc49681b1e5156e31f3e6ed85a90d6318bd2855a213ca3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-recovery.py",
+            "sha256": "33153854ecc17ea3ab157ced5e4ea67343eb8c5b403078f7504246cdbbd521d2",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.json",
+            "sha256": "a469ca35821181b1e6823f1877c94ac5aacea80be78616139d8447632a7c8311",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py",
+            "sha256": "a2073e24e2af1b8b8e9c5af66bc0e0d6edb9b58929559909f511172c4989b758",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/faults-data.json.gz",
+            "sha256": "2f974062130d4b4e3273fef9d036509611bb4912b991137fd63e8858daba0766",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/faults-reached.json.gz",
+            "sha256": "26b724c6cb8d9fb71535babfb2584813a584f747f5ad1f09b5dc2ebbfc15e802",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/faults.json",
+            "sha256": "ea8de991e7df6aa4a41c83254972cf5829d85aa9a5392ff5f4c0af8774a3e60e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/faults.py",
+            "sha256": "d27bc8e6cea1ec3fe1c44696e6bd017fd638985a88ff0e4ec7f9c2122dddc361",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-after-channels.json.gz",
+            "sha256": "ec8fcae7008c75622519204b8e39e93e14b537d2911fabf3ed5bf06ec7592eb7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-after-inputs.json.gz",
+            "sha256": "6fbf5c011b6115cbaf0fe9749570a772d9be1604abe38d19d22477a4e037f994",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-after.json",
+            "sha256": "70d6433baf92b6deca04604ee40c6c0dee7dce82ba13411444cf9185066d9c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-before-channels.json.gz",
+            "sha256": "84d82e1dbd437c8105acd4b078f81d2b329744f2d9a45e610ad577491310841e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-before-inputs.json.gz",
+            "sha256": "d8f3191c7cd46f29d978993a5864907ec22e94ffb62a8244b9a052ac4d004dd1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-before.json",
+            "sha256": "b563be2dea7d5acf799d3ce22cade8279c77213cb1af2f9c2bbaa6e5509fa3ed",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/final-run.py",
+            "sha256": "79023601133688699a60d61384c4848f6ac4eda1c49b24b9834276225efe18e3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/first-after-failure.json",
+            "sha256": "3d3317de0d48ba156e9fb2a4584b1484ac0b2e4c317be743236891d4242eff4c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/knowledge-inputs.json.gz",
+            "sha256": "6eed978b1091550b122fac54245770f16f7f459886e94d7a0f0c47e0344ffdfa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/knowledge.json",
+            "sha256": "00a85c01bd21b39731ea89ac6fd197ba907f8030a09e38a82489291cddf0a61b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/knowledge.py",
+            "sha256": "1a5199842143982d1d8a88ff8d90df85bd4781010ab152863c2a7e996602c366",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/observe-after.py",
+            "sha256": "9839fb3a462fd5a4b3a9ecc873250453c2e9f6cb16188ba782349fa8a5586b37",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/observe.py",
+            "sha256": "226f9f362ba285a34249b029713822ba9e049ed8a7cf34757bce4d1c9d3427bf",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/preservation.json",
+            "sha256": "ba210700856af30fad8d90db2322b0d087d761b140fa19f15c152b991d0973a8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/preserve.py",
+            "sha256": "2d10723e71e1ad71030fffc352fdd82be2c23e7942b339f8763e9dc676aa804b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py",
+            "sha256": "37f41c2f31e7c7253120a45bea8f7c17f956673876aae67070f9359b6b072f47",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/review.json",
+            "sha256": "17d574ac5d65aef4434658c1f649e0e08ff6b1898b25d25826c935b28fe661fe",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/review.py",
+            "sha256": "b6fbad5472ac35b9c07587d4fcfa907e97e4cd11e0873058b48835ba93a03fba",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/run.py",
+            "sha256": "a309c6496bd3478d3a50aeb3f9fc1933a685bf052fef4f2b8378ef58adb25cd3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/second-after-failure.json",
+            "sha256": "c45bfb9e975f5059f1cfc8eacca337a2df5b4d50b19918f94122bd4fe26142fb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/validation.json",
+            "sha256": "e4adb08e5a7111d3c54ba9b193a138541c4cef6c5431f1d35f6254b78ff61355",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/validation.py",
+            "sha256": "d03a685cade7145203738cda8f165d55d31a786692bf96a2d02e1dbaa262974e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0-cases.json",
+            "sha256": "b68bf6894e2d7aaaa49a554af38f9c92e6188dbe5c77a46f6648a5ef3a647b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0-cases.json",
+            "sha256": "374360a42fdbd4e5bba0724fc15d6c800ffde78c267c974a16cf6b4c9b1255e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1-cases.json",
+            "sha256": "3dac3094d83e41c1577b2d0abf886c434c262cdda5966857f6304892882ee3a9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0-origin-fixture.t",
+            "sha256": "2cadc2c9ea66d6ead9c6c86ee9afec455a8ff1b70c3721bdce11ea65d7a436ae",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+            "sha256": "f113e6ed47ea2cd49bd28de8cef99a49f0b9b9ae5d81a192315f3ad5fd3635e6",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-factory-capture-framework.md",
+            "sha256": "c02aa60407bd743a752cd20a270b938ed3b523ff9a7ea0cbc5c6adfa63ce1e2a",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "sha256": "89d42b17842a9716e1f329fd3850aaaf3b432c00a4ac07ba63ebbddf7854880e",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-assignment-required-capture.md",
+            "sha256": "4df15a0b40c0d8450030554492be7eb2e67a08be00a9491b82f0067b69f1213c",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-ast-call-capture.md",
+            "sha256": "e1e528fb2ec65a3b6e6adfbbe4c329064c6cad09ba688c427bdbd8f039e935bf",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-block-component-capture.md",
+            "sha256": "8fe26d6ea2e2d7c691f015a12240411d2087a6ef7655ee500d826aab2d46e42c",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-trim-capture.md",
+            "sha256": "253b265f489f5c98ceac6d277e6a6cd590296faca44c512513557fe6e15825ec",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "sha256": "ed1bcb0dc5943704c2a20867d4a2554cfdd22e3262d597daa0caf020dd829b44",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/book.toml",
+            "sha256": "a95355e608b34cd5373cab0f0d98817457dd2151002d3bf9d7333d3f29f25f9d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/SUMMARY.md",
+            "sha256": "c03d98fa7402249761b77e240abcd7a8f634566088f6ea49640d1019f6736a6c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "sha256": "c114042e5cc8ac59097427a46a0f40821a0bb864f6aeac377aa2a2f41c3a0b19",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "sha256": "6d0f3df7130a07ae7003746ed8cbb9829c0c4a81b189eca0a200a993d035fdc1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/owner-tree.md",
+            "sha256": "1cb1d75f9ff0eb070495a702bf8215ee696212da21b15d099b388f32996e87a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+            "sha256": "61b767d93ce64b5f1019f0e51ee8f4f2e29ef0a4b5477e60b5035b4f34887359",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/compiled-state-model.md",
+            "sha256": "2665d8ae4968dd6fc81fc649b15240adbaf73793bde555f35a65b723bb508312",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+            "sha256": "09208db53ac8040f6acf8a424883401f628c7d8bcdc55d4861b4e4c5947b14d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+            "sha256": "c6a37d3f55e17e57379bff6537f8a26c67f44149bc07fa817b80ced01291b659",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "sha256": "fd1d79a452c3ad6de36883dee14bcd6c33b81d2c346c2c165b0004dafdad760e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md",
+            "sha256": "38c48a27c5efe81c82940d8cadf38e6382377c75dd93dac23059b018ddc6a667",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/codegen-inspector.md",
+            "sha256": "a695de68f3aa86242c7aeaba63d0981cdd268ee65fca2c6a17bf5bfef6eff81a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "6de2911adba3ba76b8df782478c4cdf622ff671801c57dfeffb2c1b1c7fd48ff",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/macos-rust-launch-latency.md",
+            "sha256": "fa7d0935c2f9ee4a3b9f2a0ab30ff1ac9efdbac5b899e362eec7c5e637e162d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/regression-fixtures.md",
+            "sha256": "8d31c1c58ec9b470b17a079f8d58f955b6cded9816d443f082f2ddb06cbae54e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+            "sha256": "9d1889cd9c5406e3b0b7f9d80a4b2868839d006fdbfe08de176d5d808ae1dba9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "sha256": "6afdb038d62efae53b9ed6e9d3bc3777dae5e5bbbbc0703bab64ee1cee45d688",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "134448f91d0f88a0a344d6ef379eac738f7fb028fba5c58e89742ae20b13a0d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/declaration-helper-reference.md",
+            "sha256": "3a3e2430de60f898ac2167d47612e1378f4f49e478cee8576816da28d9d4641a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md",
+            "sha256": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "d1cfd40958802d9a1af151e70e243e3cd640667188662f5629ac2476f578701f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md",
+            "sha256": "bd487fda54ddde7164b78c0d792b17f9fd4a7908409c875477e9fda8797931c0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/index.md",
+            "sha256": "0a129e808fb3fb6b21787091bc31a081d060c1ac0edc44f9645171a0ef254b23",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/design-rationale.md",
+            "sha256": "7f6cdde29a314bfbe0cbf740f2b9f8478848f5b7e9138ac2fd768468587e10f6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/documentation-layers.md",
+            "sha256": "575cf2ce303ca06292dd7a734ccf9f5f709f45ecd1b974c0d7663915bfc2b1ee",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "sha256": "29c8931cb431f9848ecd7e8e43db20c4f3cb0a02339715e660f284efed786772",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/what-is-linkedspec.md",
+            "sha256": "70d72dc417a0cf43bb2e14cdd8719f2c3dbad354fd2d7d9bbf25633e0d911fe1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "sha256": "1e957803415adaba23b15a32f2388a9d71a041716689e8045fa799b852d7cae0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "sha256": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-dart.md",
+            "sha256": "df759f1978df3df6c27b24e531dd4787a6f18e876d12ab2aff480c4ac1e42bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-julia.md",
+            "sha256": "b6c42ff4d60e18bd17beca4a27546276f15098d18a3370de5418f59f6d2559d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-lua.md",
+            "sha256": "5690eba8e4091900db2e6c94c004a4ac223396f0b1feefbad48913177a197d9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-perl.md",
+            "sha256": "5ec2f45ae024cf87cb8cae905fc6c3f15735a43bcc21874bd18c9ba1c8b9c441",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-rust.md",
+            "sha256": "958ead8127b47dd1a0ae494ce87ef19fa83451a083ff0523a388004799536442",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration.md",
+            "sha256": "641a5ea0ec4872b6ac436d8b62c9d1b6cab9c5e422b6fb47b0d87a6aa2b8241c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+            "sha256": "85ff1f9cebf91b54b68bb7155db5c89b9866e956c74dff9b83f31ce360a8d7f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/plugin-registry.md",
+            "sha256": "fe00a325064037455df8ffcdc611d5838df9001c5783a350c7900b1ab62ccff9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md",
+            "sha256": "f9f3710cb41e073ea64989fd296cff93c23c10bdc434c66859de8929d2b338e7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/trace-api.md",
+            "sha256": "831366abed5d75daa881e6f993ea2f695e6b919529ad6964c353f831c47d60c3",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/ebnf-spec-walkthrough.md",
+            "sha256": "e74d2266f2c28d1a5425a94c60718548eb26cc83ed700fe4478cd23593ab1868",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/lispish-spec-walkthrough.md",
+            "sha256": "06cc2056aaddd80631878f99b75922c062f3e441562eed9233592cbae60d3c55",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md",
+            "sha256": "01dab1b4c29b4085e69aac5bed1de8e66256b1dfaa34ce3c56c3f43d1ad0fd95",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/pplugin-spec-walkthrough.md",
+            "sha256": "ddd3d22ccd28927c24e2a34db15f0bee2a940f6a8c3518252af402b7d7eb6b33",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/sexpr-document-v1.md",
+            "sha256": "65fde45de06b3c18cad59a01cb02944ed8ff105b94e0d02b2f61f525b88f391e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md",
+            "sha256": "bd1667dd99133f5c6541eb9d6e127e8c529c05823b1e20829e78674d44ecad13",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md",
+            "sha256": "dfbe3a28ec0e9edb53d0ccd2af5a36c4bfb5521a258e7a7d1afd22b135edc982",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md",
+            "sha256": "cc8d62e530a80a2b317afbfe45950d42e11840844bf3f6565ed8f4d3735e9082",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/regex-in-spec.md",
+            "sha256": "82d2e6997eecdac97bd7213d186acd021b87fc522b58eb62e5a90999adf2ab82",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "sha256": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+            "sha256": "4705ecabaab5cb159245172adaf409031680f35538408d0fd0a2f9800b685d3f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "sha256": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md",
+            "sha256": "564008087999530f5087c497f7ea035b29368dd7ea337589335a9bd3cf8e6eea",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "3e95988d3f5a46cdd79f2b33fdd0c6377e3b217fc914b45068ff60fb929d031d",
+            "role": "input"
+          },
+          {
+            "path": "examples/compact-hash-keys.spec",
+            "sha256": "fc12ee11b384f06572e690882328c9266229ea5a573ab493adde623c789075a1",
+            "role": "input"
+          },
+          {
+            "path": "examples/direct-read-purity.spec",
+            "sha256": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67",
+            "role": "input"
+          },
+          {
+            "path": "examples/flat-bound-values.spec",
+            "sha256": "b0d4cc3fd2dd3651f98711c76df296d5db4dcd37b2d37c6b81dca4c6a1a30dff",
+            "role": "input"
+          },
+          {
+            "path": "examples/function-array-values.spec",
+            "sha256": "839d8d04d313e482a497fc009b23990437a22519e37df5da76d064f9cccca360",
+            "role": "input"
+          },
+          {
+            "path": "examples/indexed-value-reads.spec",
+            "sha256": "f3d00d0c87916737ab9ceda89168801300313781f6a2e28c2e5555b88ba77ef9",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse-words",
+            "sha256": "863a6d756f526f23344f9743c150c5800618aa44af96b557e2ebe9d3e46e7b4d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse_words.dart",
+            "sha256": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse-words",
+            "sha256": "59661a1e7e1cfa2de3ad640a26302ad1faa62682596c94d694b66d60ae528891",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse_words.jl",
+            "sha256": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/bin/parse_words.lua",
+            "sha256": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/diagnostics.spec",
+            "sha256": "3964804eb570446c031303119f45a6bb7665ab206b4531e175f430c2ab8e638d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse-words",
+            "sha256": "62af046e14e324ae32d831e7740bc8fb794eb73201c80c28ccc5b9dc4dccc8c2",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse_words.pl",
+            "sha256": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+            "role": "producer"
+          },
+          {
+            "path": "examples/integration/rust/Cargo.toml",
+            "sha256": "fb734fc06c36ac3e34f9184e7b854af6b71791a829662dafda75203a07fef1c5",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/settings.sexp",
+            "sha256": "b1ddfb81644a31e0d3636f0ca80a482e07a331dfad8c8d5347a3246d5be2e2f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/lispish_file.rs",
+            "sha256": "ec395937e62d5284fc0677d55b9ad373958ff6230b235cc5630a39f80c0fc403",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/sexpr_file.rs",
+            "sha256": "7419573fb67b52cded1206aa0fe86a84f83432e3516a57ac3ad59efd4cfff23a",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/main.rs",
+            "sha256": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/word.spec",
+            "sha256": "52205524e7d54bbd33de16e702b0cfb4edb2b51b2d21248149bdf19007dbb1e5",
+            "role": "input"
+          },
+          {
+            "path": "examples/numeric-array-values.spec",
+            "sha256": "5211bca340372b75724ab728c55b7f119db4b3f7af90dc05572409ac90f9ef58",
+            "role": "input"
+          },
+          {
+            "path": "knowledge-map/scripts/check_knowledge_map.sh",
+            "sha256": "753ba902389121abdee187e5f6dcb11ab1845fb9b43741ac5884d4feba8a0d73",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/gen_knowledge_map.sh",
+            "sha256": "9bfe23dc21334181ad9d641c536e18a16b9ef4d99a00c7abd2b69a50461d39b1",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/knowledge_map.conf",
+            "sha256": "48ae2897460c62de080523715ad808af71e991b0fa6c36615d437129b5d4756c",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedRE.pm",
+            "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec.pm",
+            "sha256": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST.pm",
+            "sha256": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST/Parser.pm",
+            "sha256": "16f8a9a8a04cf68a91d8a426f86e02ab7fbe808db2a1597fa2399075621fb30d",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ArrayPipeline.pm",
+            "sha256": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/BoundaryLabels.pm",
+            "sha256": "72957750deeb88a06ba0689015d46d5f8be30812c7a5be35b47c17e31063a87b",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents.pm",
+            "sha256": "fc8975090e33a9d0e85a3eec639d551304808d771827060c79f25beb49d53356",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm",
+            "sha256": "d383ed377f90dd04ce87c89bcc4f9a01426a99d655ae0405ba32eb3c361411a7",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "3be7560d2075870f124f2b746cebdc249c294362b23dca75decebda65abadd56",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ControlFlow.pm",
+            "sha256": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/DeclareMethod.pm",
+            "sha256": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Diagnostics.pm",
+            "sha256": "7c70160eabbe02356be04aad1bedf7ef76a7a9ce82ac8462e0077d670b63e933",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/FlowExpr.pm",
+            "sha256": "699b7173de0e0aa5fe881ba5505eccefe4aa518d6af9708972909834217ba8f6",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "29220e0c8fb8e87eff1da7d1e2dbb90bc4d6b741bfd4d90b77b5e97a77ae94ca",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "1ec3b041d0e4fa262f398f779ed27c222475ddecddc8d46fe82a9692ee239426",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+            "sha256": "f7b47a9ee060979fc14723cae3dc95eaac5f337f709246a8f6ab32c7b2e1d59e",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/RawDependencies.pm",
+            "sha256": "b9144cdd2cc1dfbe30186870972e4eade61db87b878567f59e2a9007edd54f55",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/RewritePipeline.pm",
+            "sha256": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner.pm",
+            "sha256": "dcea9045ada094e226b5394db96590e2f319270b38217fe01ac9d5e2a6adb622",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm",
+            "sha256": "25bb59b93b8ef9a65ee37f52a559c4eaa07ce8d6eb045a6568cdc3af35d4378c",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "e1ec94cf21418bc211637d2e7f5bc979cb0ae275a8a6f2904c39b953344d73bc",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm",
+            "sha256": "536c9f9127bbfa01ffb26eaa70574104f2cc6da5f2cd3a49041a72a4a51ca1df",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm",
+            "sha256": "623c7a2447d957859a7bed572ca00261cc951c8d0b04517873e3d2df73911e5a",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm",
+            "sha256": "2a54987504a2d9f38f13ee6fcc2497026633d45f8780ba1c613ddc803b14aaf0",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+            "sha256": "e301a561ee78289b33f52e27be10325aa8fc8fc52bc9b907ce2ee5d95c197332",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/SourceEmissions.pm",
+            "sha256": "584ec65abc8271786c42561c5047783c5f1bb540c8734ab3dfa60ad2aab5e276",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/SourceMembership.pm",
+            "sha256": "cbe84e2b3a99a31bd20ab2783d4cb835cc32e64fc5d9ed653b137971820efcbb",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/SourceOrigins.pm",
+            "sha256": "a006d2256b39c69d6faf0f04743ab729e3a2883a1eb6bd759d2a335b47cf7d50",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+            "sha256": "46ab2a3e2cc7964dad87916fbe7bfc4abff8b3e63d9e898532b64f7e130ad43f",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit.pm",
+            "sha256": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm",
+            "sha256": "03c5721b4c8fc56c9e90322bd7999b7ad6132376efb7200e3d7aea7ab15e9415",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm",
+            "sha256": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Trace.pm",
+            "sha256": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ValueExpr.pm",
+            "sha256": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/BindingRuntime.pm",
+            "sha256": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec.pm",
+            "sha256": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec/Core.pm",
+            "sha256": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/CallableContract.pm",
+            "sha256": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+            "sha256": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Compiler.pm",
+            "sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/CompilerState.pm",
+            "sha256": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/EntryRuleSelection.pm",
+            "sha256": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/GeneratedSource.pm",
+            "sha256": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/HandlerVariantEmitter.pm",
+            "sha256": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/InterMatchGapRuntime.pm",
+            "sha256": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContract.pm",
+            "sha256": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContractRuntime.pm",
+            "sha256": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPServer.pm",
+            "sha256": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPWire.pm",
+            "sha256": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Numeric.pm",
+            "sha256": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/OwnerDispatch.pm",
+            "sha256": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ParserFactory.pm",
+            "sha256": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginBridge.pm",
+            "sha256": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginRegistry.pm",
+            "sha256": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatch.pm",
+            "sha256": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm",
+            "sha256": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm",
+            "sha256": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransaction.pm",
+            "sha256": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionPolicy.pm",
+            "sha256": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionRuntime.pm",
+            "sha256": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RecursiveObservationPolicy.pm",
+            "sha256": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Resolver.pm",
+            "sha256": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR.pm",
+            "sha256": "25346e3cd52c5e43cd272794185f72ecc40c25f0fd14db89d3c61adfded0cdbe",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+            "sha256": "abe3da322820ec9de791e55887ab6377f4d5c4aac6381b73c2e0ce9c351b50d7",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Runtime.pm",
+            "sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeContext.pm",
+            "sha256": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeDiagnosticOutput.pm",
+            "sha256": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeLogical.pm",
+            "sha256": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeSemanticObservation.pm",
+            "sha256": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticCallProjection.pm",
+            "sha256": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticIndex.pm",
+            "sha256": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticQuery.pm",
+            "sha256": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticRuntimeProjection.pm",
+            "sha256": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticSourceMap.pm",
+            "sha256": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticStaticProjection.pm",
+            "sha256": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SourceLocation.pm",
+            "sha256": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecEntry.pm",
+            "sha256": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecLoader.pm",
+            "sha256": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichment.pm",
+            "sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm",
+            "sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJob.pm",
+            "sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJobPolicy.pm",
+            "sha256": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParserRegistry.pm",
+            "sha256": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Trace.pm",
+            "sha256": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeCaseMapping.pm",
+            "sha256": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeXIDContinue.pm",
+            "sha256": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/UserFunctionRegistry.pm",
+            "sha256": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/Validation.pm",
+            "sha256": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+            "role": "producer"
+          },
+          {
+            "path": "perl/PPlugin.pm",
+            "sha256": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+            "role": "producer"
+          },
+          {
+            "path": "perl/PathSearch.pm",
+            "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+            "role": "producer"
+          },
+          {
+            "path": "perl/env.conf",
+            "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+            "role": "input"
+          },
+          {
+            "path": "perl/gdcheck.pl",
+            "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+            "role": "producer"
+          },
+          {
+            "path": "perl/htmlcss_driver.pl",
+            "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+            "role": "producer"
+          },
+          {
+            "path": "perl/ptchange.pl",
+            "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+            "role": "producer"
+          },
+          {
+            "path": "specs/BNF.spec",
+            "sha256": "7e7436b5d4d5fc5e46a074303130bd809dcd741a082b2d168a6a02a9c941b3eb",
+            "role": "input"
+          },
+          {
+            "path": "specs/DT.spec",
+            "sha256": "4937f9848b7125bc095a414b7ec70cd150fcd9c4d3d08c8ef0195e063572533a",
+            "role": "input"
+          },
+          {
+            "path": "specs/Lispish.spec",
+            "sha256": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab",
+            "role": "input"
+          },
+          {
+            "path": "specs/SExprDocumentV1.spec",
+            "sha256": "01a781078d4282f832bdbff37d8194aef9ef688bdeffe874e159cfe4b26ca3c9",
+            "role": "input"
+          },
+          {
+            "path": "specs/ds_vhistory.spec",
+            "sha256": "86c24f62739cd6099b12be742511f77a12b128f3cbb2080f872157fb8ef26477",
+            "role": "input"
+          },
+          {
+            "path": "specs/ebnf.spec",
+            "sha256": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054",
+            "role": "input"
+          },
+          {
+            "path": "specs/hlink_substitution.spec",
+            "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e",
+            "role": "input"
+          },
+          {
+            "path": "specs/ifelse.spec",
+            "sha256": "a5dc04f47d03b8f405accb9b6e9d88c5f0ea1c1a19cf8d91f0d82bfe7ca151e5",
+            "role": "input"
+          },
+          {
+            "path": "specs/lib_reader.spec",
+            "sha256": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb",
+            "role": "input"
+          },
+          {
+            "path": "specs/operators_try.spec",
+            "sha256": "51da411557f83ff7ff9261752499132a65c8d246b89f74cb0b268f155ae6f811",
+            "role": "input"
+          },
+          {
+            "path": "specs/portmap.spec",
+            "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6",
+            "role": "input"
+          },
+          {
+            "path": "specs/pplugin.spec",
+            "sha256": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c",
+            "role": "input"
+          },
+          {
+            "path": "specs/regdef.spec",
+            "sha256": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192",
+            "role": "input"
+          },
+          {
+            "path": "specs/sdce.spec",
+            "sha256": "ff3ea59523287f2a1c2f761a1cdf056bde9db3111e97b3a8b276425b44fcd32d",
+            "role": "input"
+          },
+          {
+            "path": "specs/simenv.spec",
+            "sha256": "b0566013312ae33631de4a52166f8f81d944ef12b09f4bdedbeab62eed8d36fa",
+            "role": "input"
+          },
+          {
+            "path": "specs/spec.spec",
+            "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee",
+            "role": "input"
+          },
+          {
+            "path": "specs/tablegrep.spec",
+            "sha256": "39d232ce1f7f87f3ab2bbc226f864dcca487bc103b27c3e55ab4ac2334660882",
+            "role": "input"
+          },
+          {
+            "path": "specs/tclite.spec",
+            "sha256": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3",
+            "role": "input"
+          },
+          {
+            "path": "specs/tkgui.spec",
+            "sha256": "db1671535cf2747a46e1be80577de2155785b900bb41c5d4128768204a272465",
+            "role": "input"
+          },
+          {
+            "path": "specs/user_function_definition.spec",
+            "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae",
+            "role": "input"
+          },
+          {
+            "path": "specs/verilog.spec",
+            "sha256": "3d0a7dac512941503e6de4bd0ef1c747d61e555ca88df410346dc2dd80b7e134",
+            "role": "input"
+          },
+          {
+            "path": "specs/vhdl.spec",
+            "sha256": "1bd4b995847f6b1ade72fd6a9f3c7bd531218ac97d3cd643f9633d4671f167e6",
+            "role": "input"
+          },
+          {
+            "path": "t/actionir_array_end_required_capture.t",
+            "sha256": "08b5f9a3139694b1d2c13c4808ff29d53995dd1ea7bda43abb229745aaa20758",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_array_end_required_cold_probe.pl",
+            "sha256": "f29ee83446a6624f81c530f58e4cb1b54847efc0eddb84e0de7033ce43def02c",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_array_end_required_probe.pl",
+            "sha256": "d7c252a466ecee426ed0a8e0ab264b66d550419fffa7dcdf55d17b22a65e1d80",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_array_receiver_required_capture.t",
+            "sha256": "9e3347add8561bc989da1f6bddc576fa4a950f2234779345ac8e598071e3f7c4",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_array_receiver_required_cold_probe.pl",
+            "sha256": "893ce74b34bc3f9b44c9f47af0940cc68cc6d908155843b14df0cd5ba59fab9b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_array_receiver_required_probe.pl",
+            "sha256": "eaee6e9e7db635e2e7e31d314bc7914654452a6f55cd784d6ddbb0bada4a2667",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_constructions.t",
+            "sha256": "13ac95041d855d43069a0a06bf41df7696a34fcc9c2011a1639abc739345cc56",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_input_frames.t",
+            "sha256": "d97577199a81107a7782db97e0d45689d89e13a7e39a16f315568b491603c8bd",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_optional_capture.t",
+            "sha256": "87b3351585bbff7da4b8ba4176e947632a3e60d518edb4b2f590c50f68c7b906",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_optional_probe.pl",
+            "sha256": "f617e493bbc55a0df5cc4e33d8380a00a2fbbabf9d9c99ba17ce1b8e61d11737",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_optional_stable_probe.pl",
+            "sha256": "3c4769b3d56803d501facc37d7fc7e869d9c659aebac246d9e40b6e46fd913d5",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_ast_parser.t",
+            "sha256": "7a84dcda10f3b4a86ccaaa82157168291ae741a213e9ec269596a1c284e76413",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_compiler_source_membership.t",
+            "sha256": "f6d3bb1bba052903a3dec7b516b19bde3d553ebdb12edc6d87ceb3f02e0dea1b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_contract_dependency_capture.t",
+            "sha256": "6b4e74700bdd5a0d30ac3b6e8ea5a995a55c71445e3bbaff57939b9e07186933",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_contract_dependency_capture_cold.t",
+            "sha256": "0295c3d5c6a40d4f247786be7f1d9caa2cca7100efd9e441afcebd79781b4c73",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_contract_factory_capture.t",
+            "sha256": "368477fb8f47319f85e45c79be496627b51b58979fa20406df46f62ea83cc2b9",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_contract_factory_capture_cold.t",
+            "sha256": "2bc5635b5c3f09598e09961c5f2a3e1cc237a24b4359a0be69f28cdd0da6d3e0",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_dropped_trim_capture.t",
+            "sha256": "c5ff943acb853d34ca88100a1df8731de3b7071c8901f971df321c68a564343a",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_dropped_trim_cold_probe.pl",
+            "sha256": "b87a29dede874cb2726c48cb28b6fb9b8372dd9b665292a69fdf376a45a1bc0e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_dropped_trim_probe.pl",
+            "sha256": "c6c79ed43737802d5c337699c379dd191918fb456686d2465e34c2cd7c1af3db",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_emit_context_capture.t",
+            "sha256": "24759b3439840defe21ab7cd5cbca2984aa0ad245d6d191d97ec45da88e8645c",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_emit_context_capture_cold.t",
+            "sha256": "f80d4b1478665a30d3f94d9c6a1adee46fd91dfc8bda56c1a457b813ea3e973c",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_empty_expression_spans.t",
+            "sha256": "62f69dd044cf44265f1e4dc2c7e11e962d1f8233bc0b93a014adff5d3afaae88",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_event_input_grants.t",
+            "sha256": "589356a3e46f4b3ec79ecc8d71efa835947915a99ab4e767cdc972845412fb75",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_executable_source_membership.t",
+            "sha256": "fe06cfe56b0f5549c03303812d309bd54cd9ee9fa4e471d7779770f80ac3a1b9",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_factory_capture.t",
+            "sha256": "c345b24bba20e949723225d61242a70574b19fd6ff95b997d6efa375a1c8349d",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_flow_kind_capture.t",
+            "sha256": "45a1b6e42fbaca579d5064c47c88ecef2679a03635336f2a49d12f8c3a20045f",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_flow_kind_native.pl",
+            "sha256": "57bb6cb398b2883cc52aeedb3874acc60798d2b0f50faa7c1722cd40ce62f76f",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_flow_required_capture.t",
+            "sha256": "bf6e1009399d3a2b6f6a0f831212abca4a77f693c3b18a150e9fe59173971e89",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_flow_required_native.pl",
+            "sha256": "fdb3f5b40c4c333b8904d10f1b5af7fd8f6d6eaa1977da21317b91ed0a859c73",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_formal_trim_capture.t",
+            "sha256": "9cdf99cf8e192b9d86271cb7672662c4c0763250578eda1ff5345a220d9f3ec9",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_formal_trim_probe.pl",
+            "sha256": "e9261e2e6afaf3b30d6ca32ab617b807edc56c8169d970287253915e10d07d32",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_index_required_capture.t",
+            "sha256": "0084352e53326ba07e56c7c9da8de53e6d39cca91e34ebb97335bcc899422eed",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_index_required_cold_probe.pl",
+            "sha256": "f3b11e0ac693e12861c7ab3917a3f352cd4bbd142b721448332a815d618aab03",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_index_required_probe.pl",
+            "sha256": "1e35598757968f258cf554dfeb5888109509e914704ca4e2c1b6927d2dd631cf",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_receiver_required_capture.t",
+            "sha256": "04efac302ec2c5a8535ac1086cdbf042be6a27032d2c3fa0f490bbb2f9cb6d2e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_receiver_required_cold_probe.pl",
+            "sha256": "7761e83b5b3aff74a9994fef30e28e39ee78a9f8a9dc10f6dce94b568517da29",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_hash_receiver_required_probe.pl",
+            "sha256": "b9b5ba1185f156419e2d27f069cc43842eaad96403e837f7dd96a3e5ec5432d9",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_input_composition_acceptance.t",
+            "sha256": "06e42c323ac7fe6572dfa226be72f2448d0ac65ca616e875b67863ce7b7bfdd6",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_legacy_hash_kind_cold_probe.pl",
+            "sha256": "5644edfe5d5cb215111f74ed17f15b9a3c6e8ba135899c5f671401ccc60e0216",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_legacy_hash_kind_probe.pl",
+            "sha256": "16fbcf4f397ef2c032fd73bf5abb38d36dc2fbac0b82a61cda75f2ee3733075e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_argument_source_frames.t",
+            "sha256": "62fad6e8140f22719b62009ebf499ff59a007c1c37c88efc2a025da3f4dfa29f",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_assignment_required_capture.t",
+            "sha256": "46e2ea2edd6fe99255af1375725a10db4a90be291db8bcae07c6360d133d5505",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_assignment_required_capture_cold.t",
+            "sha256": "459678e9a064b38f5ae24bf31625021ed58f6725619e0f2b6fee2d3ad29a4621",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_array_end_capture.t",
+            "sha256": "7dbbd6475a46ecc94d2c18712c97b2737d7394258fb2ccde4181807bc6466dca",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_array_end_capture_cold.t",
+            "sha256": "e7fa8a902edb534b0dfc59d34ed793b82c972885968ae74a3e7869ae97204041",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_assignment_capture.t",
+            "sha256": "644adbf24e6214780a87d7b2b93c90a4b7465c28081f3c15b6ff5a9a7ac1167f",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_assignment_capture_cold.t",
+            "sha256": "3ae1c4d73722ff4d786fa7848375abafa62c3c42ac22dd44a994138cf7411776",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_call_capture.t",
+            "sha256": "371745bdd00d8395906a1430b03e3a3cd1610d042582aad5ee367155b30d5f5e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_call_capture_cold.t",
+            "sha256": "4887314f78f53a2a627e223812c7caa1d636d7e5ae7364d805a2af572279ed3c",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_hash_key_capture.t",
+            "sha256": "da1715f1950d83cd761d154166140b30d09b8850252d0ba6e6dc8908b3e2ed9c",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_ast_hash_key_capture_cold.t",
+            "sha256": "a8c2c00f70356e9674bc0af0df7895a5f5790e1a4927b6951fd50458e6ded53a",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_block_component_capture.t",
+            "sha256": "099ae0a6aed1c0cc37efeb11094b68ca3852d3f358309e8ec57cc975485303c3",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_block_component_capture_cold.t",
+            "sha256": "20714e2631157ec652d6c75d2eb102728db56f37e11466dca1a1c93eaf88f3ae",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_block_value_capture.t",
+            "sha256": "775743a505a091f8f9a67e3b9636f7f87dead8afc0379a395b6b2956dbaa328f",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_block_value_capture_cold.t",
+            "sha256": "67749b2aa380a7e08637aef9162be56188268c75055ec4993f1b989b1efac53d",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_default_capture.t",
+            "sha256": "be1e2838702bd8e9b0f8b9865d5a3a330f9d7171dd3dd971337121316ecc63a9",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_default_capture_cold.t",
+            "sha256": "ce1d0cc4b56d28e8dad05a9783668395c26b60c511179c14974ec5e220c1119d",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_general_return_capture.t",
+            "sha256": "79e1a62864441c368e76e393aac9a29907b82e1a28600e5429ec3c0ba99fb4bf",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_general_return_capture_cold.t",
+            "sha256": "654b95018a253086ac2685d0f2803161bc6f0fafc64eae6e74c5009b3d5a43c4",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_inference_capture.t",
+            "sha256": "a177b4c439d33b14e96b1c246beca022ba391c46c8f486132c2df7d94be32d38",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_inference_capture_cold.t",
+            "sha256": "b108c98fbd37064f2c36f5c094762acc28a163b19d943cdfde96ca116c9f1122",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_inline_capture.t",
+            "sha256": "0af60fa94848087178775ae0eafd55db041e6909d131529708f26174b73e6f60",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_inline_capture_cold.t",
+            "sha256": "a11c9523baef9f9036903ebe7a7462822390a24417fa612685d03574c093ae55",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_input_captures.t",
+            "sha256": "03624337c14405b039c5d8b2a229537f9e752b3dd2832dc73c894e2143e8a292",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_kind_authority_probe.pl",
+            "sha256": "c0fa01eff2f9c67a498aaff287fecbb9b925bf16d11de7529b1ccad176940f27",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_kind_capture.t",
+            "sha256": "620eee354b157778964710d244c1b846526531fe3376b93dd5d6fcabbaf14c3b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_kind_probe.pl",
+            "sha256": "2ed8c7987dd410e393b6a480748a416d6069db48359704a7e9789a103c9c05dd",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_local_return_capture.t",
+            "sha256": "ffc1b397471ebc0b0b2d023c0f8cc9a85ee58b7cae6a7f5566dd46a00984ad73",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_local_return_capture_cold.t",
+            "sha256": "d7084fa48afa6fcb9772b717374265b9777da97ca8a70a88b5c68dc1cbc323db",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_push_required_capture.t",
+            "sha256": "765c036df9bc0842d398221fc0a8f15aafc4398dfa81f5ad8b402c084e49c384",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_push_required_capture_cold.t",
+            "sha256": "e2684123f3a6de616427aff3e0e36690a829e3e97c381c33e2c7c563825f5e1b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_regex_undef_required_capture.t",
+            "sha256": "bf8a5d474a7ffdc618c5fd8d55e10597611d952e561d39179fd966aee3b11a74",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_regex_undef_required_capture_cold.t",
+            "sha256": "23fb0d7e480f5bc15221686f702e2636bde5dfde312e98336f08b5023b422a8a",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_regex_undef_required_probe.pl",
+            "sha256": "f00b94344814793713d4b6b4f02d44a8edbbe4f56e45ff0a1fccf40e87f54601",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_set_key_required_capture.t",
+            "sha256": "f065c51628152d04b137ac6bf5f66739653703f6b69d4d51cc0e194d5e1b6803",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_set_key_required_capture_cold.t",
+            "sha256": "f0b274aad8029a8c9de1f0f10f67bd66aa441e1f36c9cd0aa5fc559fdd20602b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_slot_capture.t",
+            "sha256": "4bfd984ed8cb5eab39f2daf18a17e4dd75dd3c0a18f0cb8fbdd9390352cd2347",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_slot_capture_cold.t",
+            "sha256": "46657bff74d3c2f21696db6e0583c414b5c6d583a51ed231223526733a9eebd0",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_trim_capture.t",
+            "sha256": "face9d754caef969fbdfd945d02d1f7ee75b230d8ea25187bf039671a188961a",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_trim_capture_cold.t",
+            "sha256": "5dc9a242a2ea3c7ee9699797a5b007533a6e1d91d688284dafd574faa9441b80",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_value_capture.t",
+            "sha256": "9e9e1d9ab525d387ae3d1689a1c1465dab08f39ecccb78868ad62cee6ed50269",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_method_value_capture_cold.t",
+            "sha256": "d749eeeb684834fb3c0b6ad7c26a23fae8fd729d250ad30f5c3dcc84446f0d3b",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_named_dispatch_capture.t",
+            "sha256": "42ea15b6cd86751ab11274140069b7be5e57768c2926f75681bdf4e63e358e8a",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_named_dispatch_probe.pl",
+            "sha256": "ade77d3b5481aea0fed6be783b4af4531e3b54ee6fb52e5dbaa578a12c156434",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_nested_block_source_spans.t",
+            "sha256": "2e7abc8180483def2876ca02a3805099d90ffcedd3ade7a8e9341fe88cfb368e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_package_flow_capture.t",
+            "sha256": "b34dd77e63322f80eec00bf46095d9fa2d5f2dcc5ae260ae2cde6e7339909f13",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_package_flow_cold_probe.pl",
+            "sha256": "57db1eae35136461901fdd062751b62df9560c2356ed538caf7e98c2d97a4347",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_package_flow_probe.pl",
+            "sha256": "6b2d09801ea20b68fd1d77a52617ab53487e72b3990d6fd14c46c4cc12f20ef0",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_receiver_scalar_copy.t",
+            "sha256": "8ce7600fbf8b16b67ede3af51fdf18d229dd46d9464e5aa47cbffefd5b5a9152",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_receiver_scalar_copy_probe.pl",
+            "sha256": "74aeb01dcb361501c682cecabadb8259bf20d25e6dcf1c55d63957acb4d2903d",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_scalar_receiver_required_capture.t",
+            "sha256": "899ad7d1068380b82dd072fc4dd8ce3c4d7d971eeb8fb4d065837ff981f6c727",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_scalar_receiver_required_cold_probe.pl",
+            "sha256": "061381f405ccdbcfe61b35975b9ea0ccdd0465e0f8f5b68f19a48bebf42d2ffc",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_scalar_receiver_required_probe.pl",
+            "sha256": "658847c8b913834c5069a59181812c64fe180dfde06f16aca71ac75351a14421",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_small_kind_capture.t",
+            "sha256": "050ea5f3080c8e3a79eb8004304a947ab483ad9340a0b55abbb58f558f8d5b73",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_small_kind_probe.pl",
+            "sha256": "c68299cd8fb21b1ccf79124a7bbdc74d080ec0e3a24a8bd4ac606f4d66398aa4",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_small_kind_reference_probe.pl",
+            "sha256": "87f6658e8e036cbdc6075f2b95e591e09322812a84803beae1799ae8eb9c8425",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_small_kind_symbolic_probe.pl",
+            "sha256": "8a7fd07c525a028f5d691a9a2b934f18c3791de83a8ce3ed682e36d469998033",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_source_assignment_kind_capture.t",
+            "sha256": "cff593511e74933836c2dd0af2917e14a33bb3ab6421853a72d6de1182b1f872",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_source_assignment_kind_probe.pl",
+            "sha256": "fcc8cc26c86597dc40d64df459e2d61f12849c9d84d954b8efbcd5f85f6899fa",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_source_emissions.t",
+            "sha256": "f654476b3e572786e4305ac11f77bb9b9c093a10dfdd0aed268a1f0815c59320",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_tracking_predicate_capture.t",
+            "sha256": "c7fd57327f31d8de41ddb0785fd2c646cdd37e848f35c63d21ff87413b357774",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_tracking_predicate_probe.pl",
+            "sha256": "ac3080113a42ffdd208dcca4ecc66ba307b1760d8be45c62fe573f7bc947c888",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_uniform_target.t",
+            "sha256": "3965d57337b249aceb8dd453f13c7efc9f606e80486ee4913ccf6722d7419511",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_uniform_target_probe.pl",
+            "sha256": "874b0be404db0d8d5d55c58186ecc5eac1b9eb228d12b542b2ac36a07f08a536",
+            "role": "producer"
+          },
+          {
+            "path": "t/canonical_event_occurrence_order.t",
+            "sha256": "22abdea36f95bdb48d758c1ab250764efc29247a696105a292cd8704036b29c2",
+            "role": "producer"
+          },
+          {
+            "path": "t/trace_actionir_method_lowering.t",
+            "sha256": "c64276dff722a5a662bc96ee78bec29294a8721673f0496ecb419589d25252cd",
+            "role": "producer"
+          },
+          {
+            "path": "t/trace_emit_context_bridge.t",
+            "sha256": "99518d360e5e5b143b724173872416b94309e53e2d1334c7a222f744a1e5335d",
+            "role": "producer"
+          },
+          {
+            "path": "t/uniform_binding_contract.t",
+            "sha256": "9a1107e0c5ff60cbcf3690192f1b6a56ade4dc7e176151e14aa2f3fbf50014aa",
+            "role": "producer"
+          },
+          {
+            "path": "tests/language-readiness/composed/normalization-calls.spec",
+            "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/grammar.spec",
+            "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/child.spec",
+            "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/parent.spec",
+            "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-segments/grammar.spec",
+            "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/grammar.spec",
+            "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_aggregate_selector_retirement.py",
+            "sha256": "28b026e2270fb58490910fa84491896cc8c906a4611957682c7cdf3b14eabf7c",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_capability_conformance.pl",
+            "sha256": "cfe410b5588301b005a123028371c341c2caeda89ec1d030e86b92480f6c54fb",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_executable_aggregate_selector_sources.py",
+            "sha256": "86075a472ddbb9c9a0f9020f4340a14d3feb5b949dc76947cd96304a3baaadaf",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_public_aggregate_selector_surface.py",
+            "sha256": "3ea76c18e902f45456ff41b564150cb0e0cb5eebe0402b2c0a4364890f431c67",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

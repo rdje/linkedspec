@@ -2068,7 +2068,7 @@ in list or void context. Successful error effects, undefined results, ordinary
 fallbacks and fatal exception objects keep their original behavior. A require-only
 consumer still loads neither SourceEmissions nor Trace through these bindings.
 The optional kind boundary is described below. Definition-owned registration of
-FlowExpr's native defaults remains separate. These bounded dependency changes
+FlowExpr's native defaults is described below. These bounded dependency changes
 establish no complete helper, pipeline, public language, other-backend, private
 Phase0 or parent admission.
 
@@ -2112,8 +2112,66 @@ also returns `outer`. The parent receives no child packet merely because the
 text agrees. A registered actual CODE child returning that same publication can
 retain its own packet, which later output assembly must compose explicitly.
 Require-only use still leaves the emission and Trace channels unloaded. Default
-registration, ControlFlow, pipeline composition and independent admissions retain
-their separate owners.
+registration is described below; ControlFlow, pipeline composition and independent
+admissions retain their separate owners.
+
+### FlowExpr native defaults
+
+`FlowExpr::default_deps_for_package` returns the exact map built by OwnerDispatch,
+with these nine callback keys and their actual public references:
+
+| Key | Compiler responsibility |
+| --- | --- |
+| `trim_action_ir_value` | Trim an action value before classification or lowering. |
+| `extract_array_symbol_name` | Recognize the existing array symbol form. |
+| `extract_hash_symbol_name` | Recognize the existing hash symbol form. |
+| `extract_scalar_symbol_name` | Recognize the existing scalar symbol form. |
+| `lower_method_value_expr` | Delegate method value lowering. |
+| `lower_primitive_literal_expr` | Delegate primitive literal lowering. |
+| `lower_direct_nested_access_value_expr` | Delegate direct nested access lowering. |
+| `parse_method_function_expr` | Parse the existing method-call representation. |
+| `normalize_method_args_with_optional_scope` | Normalize method arguments and optional scope. |
+
+These are internal compiler dependencies. The optional `bare_symbol_kind` hook is
+not part of this default map. The keys introduce no authored DSL methods.
+
+When the target is the built-in `LinkedSpec::RuleIR::EmitContext`, each returned
+callback can register only if it matches one of FlowExpr's nine definition-owned
+CODE references retained when EmitContext loads. Shared membership in a method or
+contract catalogue is insufficient. Replacing a public symbol keeps the actual
+replacement in the map and leaves it opaque, even if it copies the native name.
+The retained original native reference remains selectable. A custom target that
+aliases all nine native callbacks preserves those references but receives no
+registration through this factory.
+
+For example, scalar and list calls both retain their actual returned map:
+
+```perl
+my $deps = LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(
+    'LinkedSpec::RuleIR::EmitContext');
+my @maps = LinkedSpec::ActionIR::FlowExpr::default_deps_for_package(
+    'LinkedSpec::RuleIR::EmitContext');
+```
+
+The underlying factory receives the original scalar or list context. A void call
+performs the native build in void context and has no returned map to select.
+Ordinary values, successful `$@` effects, missing-target errors and fatal exception
+objects retain their native behavior. Existing FlowExpr diagnostic line numbers
+are preserved by keeping the original function body length unchanged.
+
+Registration belongs to the actual current source and producer scope. A nested
+scope with equal source text cannot borrow its enclosing registry. Successful or
+fatal scope exit restores the actual outer selection, and completed invocation
+registries release. Module-owned native facade references remain retained. The
+registry stores identities as a set: hash iteration may change registration event
+order, while each returned native callback registers once. Calls outside an
+eligible scope create no global authority. Cold factory use loads neither
+SourceEmissions nor Trace.
+
+Selection identifies a callback; it does not demonstrate that a helper published
+an emission packet. Later output assembly must still retain and compose actual
+child captures. ControlFlow, pipeline activation and independent complete private,
+parent and canonical admissions remain separately owned.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

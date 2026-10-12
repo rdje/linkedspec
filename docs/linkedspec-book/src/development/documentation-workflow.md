@@ -119,12 +119,12 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks optional FlowExpr dependency isolation,
-retains the complete accepted required-callback publication and its original Git
+The current verification entrypoint checks exact native FlowExpr default selection,
+retains the complete accepted optional-callback publication and its original Git
 inputs, and validates current Knowledge routing and the complete book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

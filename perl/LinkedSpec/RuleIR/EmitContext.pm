@@ -1236,6 +1236,31 @@ sub _register_builtin_method_emission_callback {
  return $callback
 }
 
+# FlowExpr has its own exact default population. Retain definition-owned CODE
+# references, including overlaps, without borrowing another owner's catalogue.
+my @builtin_flow_emission_callbacks = (
+ \&_trim_action_ir_value,
+ \&_extract_array_symbol_name,
+ \&_extract_hash_symbol_name,
+ \&_extract_scalar_symbol_name,
+ \&_lower_method_value_expr,
+ \&_lower_primitive_literal_expr,
+ \&_lower_direct_nested_access_value_expr,
+ \&_parse_method_function_expr,
+ \&_normalize_method_args_with_optional_scope,
+);
+
+sub _register_builtin_flow_emission_callback {
+ my ($callback) = @_;
+ return $callback unless ref($callback) eq 'CODE'
+  && defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer;
+ for my $builtin (@builtin_flow_emission_callbacks) {
+  return LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($callback)
+   if LinkedSpec::ActionIR::SourceEmissions::_same_reference($callback, $builtin);
+ }
+ return $callback
+}
+
 1;
 
 sub _lower_assign_method_statement {

@@ -7,11 +7,11 @@ answers:
   - "does EmitContext private callback selection load SourceEmissions or Trace"
   - "does EmitContext copy scalar arguments or forward caller aliases"
   - "can a resolved EmitContext owner or default factory donate nested publication"
-date: 2026-10-10
-status: bounded EmitContext and Contracts integration verified; other owners/pipeline open
+date: 2026-10-12
+status: EmitContext/Contracts and exact FlowExpr default selection verified; pipeline open
 tags: [perl, actionir, emitcontext, callbacks, identity, dependencies]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.0 retains345 main/five cold assertions,30 exact native/current observation ledgers,28 actual definition-owned callback selections,six opaque owner/factory publication modes,13 effective semantic source faults and19 direct suites in138 supplied files. Original233 framework bindings remain exact historically. The first duplicate-Trace preflight failure is retained separately from runtime observations."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current block-component integration and original242 inline preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Original EmitContext/Contracts producers require their recorded accepted Git inputs. Current exact FlowExpr defaults and complete supplied compatibility: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/publish.py. The full original card/header remains in accepted98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb; MEMORY.md and its task-tree frontier own current work. One-shot capture writers are retired."
 ---
 
 EmitContext retains actual native facade CODE references in a private lexical
@@ -42,19 +42,11 @@ owners, RewritePipeline scope activation and explicit output composition remain
 subsequent owners in docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Complete private
 Phase0, mapped replacement and independent canonical admission remain open.
 
-Contracts private dependency/default integration is now verified; see
-docs/knowledge/perl-contract-dependency-capture.md. Actual lower construction and
-pipeline activation remain subsequent owners.
 
-Current own-constructor registration is verified by .2.1.1; see
-docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
-require exactbe7d70719 historical inputs.
-
-MethodLowering defaults .3.0, required trim .3.1.0 and required inference
-.3.1.1 are accepted; inline .3.1.2.0 and block component .3.1.2.1 are accepted; local-return/value .3.1.2.2 and remaining required/optional families are next. Current rules/evidence live in
-docs/knowledge/perl-method-default-capture.md. Original owner reviews retain
-their recorded accepted input boundaries.
-
-Required inference .3.1.1 is accepted; current native/caller/isolation rules
-live in docs/knowledge/perl-method-inference-capture.md. Inline .3.1.2.0 and block component .3.1.2.1 are accepted; local-return/value .3.1.2.2
-is next; remaining required/optional and pipeline owners stay open.
+The exact FlowExpr default selector owns nine native facade references separately
+from the Contracts and MethodLowering catalogues. Shared references can belong to
+more than one catalogue; union membership and a public name are not FlowExpr
+selection criteria. The actual returned map, built-in target and actual reference
+are all required. Its own default-factory/native-context rules live in
+`docs/knowledge/perl-factory-capture-framework.md`. Historical integration records
+retain their accepted Git boundaries; current work belongs to MEMORY.md.
