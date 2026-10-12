@@ -124,7 +124,7 @@ retains the complete accepted optional-callback publication and its original Git
 inputs, and validates current Knowledge routing and the complete book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.0/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
@@ -559,3 +559,5 @@ bound inputs. Rechecking that historical publication requires its accepted
 the current proof uses a separate corrected parent-packet oracle and reviewer.
 
 The local CI runner selects the Knowledge header fixture and verifies that its source is tracked. Historical artifact audits admit that exact insertion by reversing it and comparing the complete original runner bytes. The managed-storage inventory also includes the fixture: its temporary files must use repository-derived scratch. Missing or duplicated registrations, changed commands, wrong allocator names and unrelated source edits fail the compatibility checks. The current review retains the first candidate and its observations, then checks the final source and documentation separately.
+
+The ControlFlow foundation proof preserves the complete accepted FlowExpr default publication at `aa88233432976a019b41d05578f8e6a5f6e3c082`. Its first native instrument and ordinary observations precede behavioral assertions and production edits; the native switch tag list context is retained alongside the scalar callback controls. Later ControlFlow children and independent admissions remain separately owned.

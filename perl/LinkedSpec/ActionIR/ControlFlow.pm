@@ -86,7 +86,7 @@ sub _lower_control_flow_value_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
@@ -170,7 +170,7 @@ sub _lower_switch_case_value_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
@@ -207,7 +207,7 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
@@ -1791,6 +1791,16 @@ sub _lower_exit_now_statement {
   ._runtime_diagnostic_string_literal($rule_label).', '
   .'$__ls_exit_status'
   .') }'
+}
+
+# Forward original argument aliases and native context without eager loading.
+sub _bind_emission_dependency {
+ my ($callback) = @_;
+ return sub {
+  return LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($callback, @_)
+   if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
+  return $callback->(@_)
+ }
 }
 
 1;

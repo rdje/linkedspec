@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: exact FlowExpr defaults .4.1 verified with current449-input/106177 publication. ControlFlow .5 follows its normal focused clean landing; no push.
+Full PNT: ControlFlow foundation .5.0 verified with current428-input/100775-byte publication. Branch plumbing .5.1 follows normal focused clean landing; no push.
 
 ## Latest Completed Slice
 
-`PERL-PRIVATE-FACTORY-CAPTURE.4.1` — FlowExpr defaults .4.1 selects exactly nine definition-owned callbacks through the built-in target/current scope, preserving actual public maps/references, scalar/list/void factory contexts, native errors/fatal effects and cold loading. Complete100-input native proof retains27 warm/27 cold rows; ordinary behavior recurs exactly, while retained warm registration orders are unordered identity sets. Final identical402 assertions reproduce47 original REDs/355 controls/all GREEN. All22 full-source faults,79 supplied suites/270 inputs/20634 assertions, six coherent artifact denials/restorations, Knowledge1485/1349/nine overlays and book89/four controls pass. Original426/full99413/baseline remains historical at98f8d5d7f. Three fixture identities and first inventory/recurrence/paired/consumer refusals stay exact; no native observation is refreshed. Knowledge8385408 stays under unchanged8388608. Supplemental syntax/public Phase01035/composed guard pass. Readonly449-input/106177-byte publication owns current routes. ControlFlow .5 is next, then fixture .7 before pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Complete helper/private/parent/canonical admissions remain open.
+`PERL-PRIVATE-FACTORY-CAPTURE.5.0` — ControlFlow foundation .5.0 isolates required dependencies in control value, switch case value and bare marker normalization: three validators and seven roles. Native scalar callbacks retain their own actual identity; the switch tag normalizer keeps its native list context with publication disabled. Public maps/references, eager selection, argument aliases, diagnostic lines, ordinary effects/errors/fatal objects and cold loading remain exact. Native100/176 warm/132 cold recurs exactly; all308 original ordinary rows match. Identical848 assertions retain198 original authority REDs/650 controls/all GREEN. Thirteen complete-source faults,80 supplied suites/277 inputs/21482 assertions, six coherent artifact denials/restorations, full Knowledge1485/1349/nine overlays and book89/four controls pass. Original449/full106177 and actual baseline remain historical at aa8823343. The first reader serialization failure remains immutable; the distinct final reader compares complete decoded records and binds both exact gzip identities. Knowledge8384946 stays within unchanged8388608. Supplemental strict-vars/standard syntax/public Phase01035/composed guard pass. Readonly428-input/100775-byte publication owns current routes. Branch plumbing .5.1 follows the clean focused landing; .5.2–.5.7 precede fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
 
 ## Next Action
 
-Activate ControlFlow .5 from clean Git. Read its canonical Knowledge/contracts, complete affected owner and book, then split into safe default/injected branch-family children if needed before any bound writes. Preserve accepted449/full106177 and actual readonly baseline before native-first implementation. Keep fixture .7 before pipeline .6, then metadata .12 and TYPE-REFERENCE-BOOK.
+Activate ControlFlow branch plumbing .5.1 from clean Git; split expansion, attached parser and single-statement paths into safe children before writes if needed. Preserve current428/full100775 and actual readonly baseline before bound writes; native-first context/alias/selection/AST observations precede expectations/source edits. Continue .5.2–.5.7, fixture .7 before pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.0` — native100/176/132 exact; three validators/seven roles; paired848/198 RED/650 controls;13 faults;80/277/21482; evidence6; original449/106177; Knowledge1485/1349/nine/8384946; book89/4; standard1035; readonly428/100775; branch plumbing .5.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.4.1` — native100/27/27/9; paired402/47 RED/355 controls;22 faults;79/270/20634; evidence6; original426/99413; Knowledge1485/1349/nine/8385408; book89/4; standard1035; readonly449/106177; ControlFlow .5 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.4.2` — native100/150/150 recurrence; paired762/154 RED/608 controls;14 faults;78/263/20232; evidence6/recovery2; original451/112004; Knowledge1485/1349/8384530; book89/4; standard1035; readonly426/99413; defaults .4.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.4.0` — native100/387/235 exact recurrences; paired1795/490 RED/1305 controls;13 faults;77/256/19470/evidence5;Knowledge1485/1349/7;book89/4;standard1035;original218/58582; first408/94719/replay2; headers7/8381805 under8MiB; final451/112004; EOF1/replay1917/controls3; optional kind .4.2 next.
@@ -29,7 +30,6 @@ Activate ControlFlow .5 from clean Git. Read its canonical Knowledge/contracts, 
 - `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2` — native18/105/6/cold9/symbolic42/object10; final1135/57 RED/1078 controls; nine faults; supplied69/223/15093/book89/3/original339/full78325; evidence6/standard1035/readonly366/85779 PASS.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1` — one trim call; native213/6/33/2/cold3; paired298/3 RED/295 controls; faults6/supplied68/215/13958/evidence6/book89/3/original339/full78574; readonly339/78325; standard Phase01035.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` — compiled108/218/812/207/17; six census controls; original355/full120239; unchanged211 runtime inputs; eight planned fix leaves; inline required trim .1 next.
 
 ## History
 

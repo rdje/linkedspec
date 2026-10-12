@@ -2209,6 +2209,60 @@ bash tools/project_data_run.sh prove -v -Iperl \
   t/actionir_compiler_source_membership.t
 ```
 
+### ControlFlow value and marker dependencies
+
+ControlFlow now isolates the required dependency calls in these three foundation
+helpers. This covers seven selected callback roles across three validators:
+
+| Internal helper | Required callbacks, in validation order |
+| --- | --- |
+| `_lower_control_flow_value_expr` | `lower_flow_composite_expr`, `lower_method_value_expr`, `trim_action_ir_value` |
+| `_lower_switch_case_value_expr` | `trim_action_ir_value`, `lower_flow_composite_expr`, `normalize_method_tag_expr` |
+| `_normalize_bare_zero_arg_flow_marker_expr` | `trim_action_ir_value` |
+
+All required references are selected and validated before the undefined-input
+guard. Missing or non-CODE callbacks retain their original error and source line.
+The private binding retains each selected actual reference without changing the
+caller's dependency map. A trim callback can replace the map's composite lowerer;
+the current invocation still calls the reference it selected before trimming.
+Argument aliases also stay native: trim receives the helper's local scalar copy,
+so mutating it affects subsequent local lowering without changing the caller's
+input scalar. Each callback runs once at its original call site.
+
+The native control value helper tries method value lowering when the trimmed
+input starts with a brace, then falls back to composite lowering if that result
+is undefined or empty. It passes its original local expression to the composite
+lowerer, including any mutation performed through trim. An empty expression still
+reaches composite lowering. The switch helper instead declines an empty trimmed
+value, recognizes a regex literal before composite lowering, and treats a bare
+case label as a literal tag after successful composite lowering. The boolean
+labels `true` and `false` retain their composite result. Marker normalization
+keeps `otherwise` as `else()` and adds parentheses to the existing zero-argument
+markers; other nonempty text passes through.
+
+The context of the actual callback site matters. Trim, composite lowering and
+method value lowering are scalar calls under scalar, list or void helper calls.
+The switch tag normalizer runs in list context inside the native hash constructor:
+
+```perl
+return {mode => 'eq', expr => $normalize_method_tag_expr->($trimmed)};
+```
+
+That list context is preserved. Its private boundary disables publication for the
+call, even if the callback is registered. Scalar callbacks use their actual CODE
+identity in separate captures and can retain only their own registration. An
+opaque dependency cannot borrow its parent or donate a nested equal-text packet
+to it. A known matching scalar child can keep its own packet; callers still need
+explicit packet composition. Ordinary results, successful `$@` effects, fatal
+exception objects, map replacements and lazy loading remain native. Cold use
+loads neither SourceEmissions nor Trace through these bindings.
+
+These are compiler injection contracts, not new authored DSL methods. Branch
+plumbing, statement families, output helpers, optional kind calls, direct calls
+and exact mixed-provider default selection have separate implementation owners.
+The existing AST condition/body bridge and branch semantics remain intact.
+Complete pipeline, private Phase0, parent and canonical admissions remain open.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

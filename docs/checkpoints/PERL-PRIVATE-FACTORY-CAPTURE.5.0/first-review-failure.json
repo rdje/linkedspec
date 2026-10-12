@@ -1,0 +1,12 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.5.0",
+  "outer_session": 76649,
+  "outer_returncode": 1,
+  "reported_merged_channel_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuMC9yZXZpZXcucHkiLCBsaW5lIDE3NywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByYXcoUFJFRklYKydmYXVsdHMtZGF0YS5qc29uLmd6Jyk9PXJhdyhQUkVGSVgrJ2ZhdWx0cy1yZWFjaGVkLmpzb24uZ3onKQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "channel_scope": "Exact reported exec/write_stdin merged output; separate stream identities were not captured.",
+  "original_reader_sha256": "3f4e4018ea7e070f9fc36e6f984e898ab879524ee435bfd539ac09ef4a7208d0",
+  "faults_data_sha256": "7eb0c3d7d9cda58876fea3fc7588c1bc4a2900f484cd68e77ef27fed3747af97",
+  "faults_reached_sha256": "ad3698451b410084ae991d99046d506fdd58638a6b5fc7068ff2d864d59485ff",
+  "root_cause": "The reached writer uses default JSON separators; final data uses compact separators before gzip. Complete decoded record populations are equal, while exact compressed byte identities differ. The reader borrowed a raw-equality assumption from a different producer. No native/source/fixture/fault observation changes.",
+  "repair": "Distinct review-final.py checks complete decoded JSON equality and independently binds both exact gzip byte identities; original reader and first failed channel stay immutable."
+}

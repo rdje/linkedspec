@@ -13,11 +13,13 @@ answers:
   - "how does FlowExpr preserve optional kind second selection and authority"
   - "how are actual FlowExpr default callbacks selected"
   - "does FlowExpr default construction preserve scalar list void factory contexts"
+  - "which ControlFlow foundation callbacks run in list context"
+  - "does ControlFlow retain selected lowerers after dependency map replacement"
 date: 2026-10-12
-status: framework and Contracts integrated; MethodLowering seventeen-site bounded closeout and FlowExpr required and optional kind bindings verified; FlowExpr defaults verified; ControlFlow and pipeline remain open
+status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Historical required .4.0 proof uses accepted708c1afa04bb10aeacbdaf0a8133a95f380df434 Git inputs. Historical optional .4.2 proof uses accepted98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb Git inputs. Current FlowExpr default proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.1/publish.py. Historical framework/Contracts/MethodLowering routes below require their recorded accepted Git inputs. One-shot preserve/observe/run/fault/consumer/book writers are retired. MEMORY.md and the active task-tree frontier own current selection."
+reverify: "Historical accepted .4.1 and earlier routes use aa88233432976a019b41d05578f8e6a5f6e3c082 Git inputs. Current ControlFlow foundation overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.0/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -129,3 +131,19 @@ stores an identity set: its event order is unspecified, while every actual nativ
 callback is registered once. Original/current ordinary observations and contexts
 remain exact; two retained warm registration orders differ without a raw-byte
 ordered recurrence claim. Registration does not itself produce or compose output.
+
+ControlFlow foundation .5.0 isolates required calls in control value, switch case
+value and bare zero-argument marker normalization (three validators/seven roles).
+Native-first observation locates the tag normalizer's list context in the switch
+hash constructor; SourceEmissions explicitly clears its list publication frame.
+Trim, method value and composite calls are scalar. Eager validation/reference
+selection precedes undefined guards; trim sees a local scalar alias and downstream
+map replacement cannot replace an already selected callback. All ordinary rows,
+errors/fatal objects and cold loading remain exact. Control value falls back from
+empty brace-method output to its original local expression; switch regex bypasses
+composite, bare tags normalize after successful composite, and marker aliases stay
+native. Source-bound proof retains308 original/current rows,848 paired assertions
+with198 original REDs/650 controls/all GREEN, and13 effective source faults. The
+original449-input/106177-byte default publication remains historical at aa8823343.
+ControlFlow defaults have a mixed provider: seven target callbacks and the fixed
+ValueExpr extract_array_symbol_name reference; later .5.7 owns exact selection.

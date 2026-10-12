@@ -1,0 +1,48 @@
+[memory-pointer] ok: pre-commit activation_commit aa88233432976a019b41d05578f8e6a5f6e3c082 resolves to current HEAD aa882334
+knowledge-map: wrote KNOWLEDGE_MAP.md (1349 facts, 10420 question keys)
+[document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: live_status current view heading order/shape mismatch
+[readme-routing] FAIL: surface change_history freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: live_status current view heading order/shape mismatch
+
+[readme-routing] FAIL: surface engineering_notes freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: live_status current view heading order/shape mismatch
+
+[readme-routing] FAIL: surface live_status freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: live_status current view heading order/shape mismatch
+
+[readme-routing] governed author-overflow destinations:
+[readme-routing] route_hint=AGENTS.md
+[readme-routing] route_hint=ARCHITECTURE_STATE.md
+[readme-routing] route_hint=CHANGES.md
+[readme-routing] route_hint=COMMIT.md
+[readme-routing] route_hint=LIVE_ACHIEVEMENT_STATUS.md
+[readme-routing] route_hint=MEMORY.md
+[readme-routing] route_hint=ROADMAP.md
+[readme-routing] route_hint=ROADMAP_V2.md
+[readme-routing] route_hint=SESSION_BOOTSTRAP.md
+[readme-routing] route_hint=TOOLBOX.md
+[readme-routing] route_hint=USER_GUIDE.md
+[readme-routing] route_hint=docs/TASK_TREE.md
+[readme-routing] route_hint=docs/decisions/
+[readme-routing] route_hint=docs/knowledge/
+[readme-routing] route_hint=docs/linkedspec-book/
+[readme-routing] route_hint=docs/linkedspec-book/src/development/local-ci-and-regression.md
+[readme-routing] route_hint=docs/tasks/
+[readme-routing] route_hint=git history
+[readme-routing] routing-pressure doctrine FAILED; repair the owning surface or route under README_POLICY.md
+[readme-stability] FAIL: routed-destination closure or pressure control failed
+
+================ DOCTRINE ENFORCEMENT REPORT ================
+  PASS  MEMORY-ARCH — durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md §9)
+  PASS  KNOWLEDGE-MAP — the derived Knowledge Map is in sync with its fact sources
+  PASS  TASK-TREE-METADATA — task metadata, partitions, and stable closed-capability anchors stay consistent
+  PASS  TASK-ACCEPTANCE — staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence
+  PASS  REPO-ROOT-PATHS — tracked repository paths and all five primary-command roots are relocation-safe
+  PASS  PROJECT-DATA-STORAGE — tracked project-storage defaults and documented outputs stay repository-filesystem rooted
+  FAIL  DOCUMENT-HISTORY — bounded current documentation views preserve exact repository-local queryable history
+  FAIL  README-STABILITY — README and every routed destination retain reviewed resulting-tree pressure controls
+  PASS  CLAIM-VERIFICATION — new claim declarations disclose three legs and records bind tracked producer/input identities
+  PASS  VERIFICATION-CADENCE — ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts
+============================================================
+doctrines: one or more doctrines FAILED — commit/merge blocked. Fix above; do not bypass.
