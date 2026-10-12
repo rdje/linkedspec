@@ -80,6 +80,35 @@ scalars `key: value`; inline lists `key: [a, b]`; block lists (`key:` then `  - 
 Use **plain or double-quoted** scalars; **no tabs** in values; questions containing a comma
 must use the block-list form. Copy `templates/FACT_TEMPLATE.md` to start.
 
+A block-list item belongs to a preceding key with an **empty value**. A scalar or
+inline list closes that association. For example, this is valid:
+
+```yaml
+tags:
+  - parser
+  - capture
+reverify: printf ok
+```
+
+This is malformed because the command is already the value of `reverify`:
+
+```yaml
+reverify: printf ok
+  - another command
+```
+
+`check_knowledge_map.sh` rejects orphan list items in facts and reports their
+source line numbers. An `answers` scalar followed by detached items is rejected
+rather than silently treated as an ordinary document. Valid scalar, inline-list,
+block-list and nonfact cases are exercised through the public generator/checker
+by `t/knowledge_map_header_lists.t` in LinkedSpec's canonical CI.
+
+Generation and validation are separate entrypoints: `gen_knowledge_map.sh`
+projects supported metadata into the map; `check_knowledge_map.sh` validates
+required fields, list association, unique IDs and synchronization. A freshly
+generated map alone does not prove that its source headers are valid. This list
+association check does not constitute a complete YAML parser or field-type validator.
+
 ---
 
 ## 3. The six properties LLMs need (why the format is shaped this way)

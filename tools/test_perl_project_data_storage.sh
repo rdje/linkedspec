@@ -145,9 +145,9 @@ mapfile -t perl_temp_owners < <(
   fi
  done < <(git -C "$REPO_ROOT" ls-files 't/*.t' 't/**/*.pm' 'tools/*.pl' 'perl/**/*.pm')
 )
-(( ${#perl_temp_owners[@]} == 28 )) ||
- fail "tracked Perl temporary-allocation inventory drifted from 28 to ${#perl_temp_owners[@]}"
-for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t; do
+(( ${#perl_temp_owners[@]} == 29 )) ||
+ fail "tracked Perl temporary-allocation inventory drifted from 29 to ${#perl_temp_owners[@]}"
+for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t t/knowledge_map_header_lists.t; do
  printf '%s\n' "${perl_temp_owners[@]}" | rg -Fqx "$owner" ||
   fail "registered regression allocator is absent: $owner"
 done
@@ -166,4 +166,4 @@ rg -q "logical_name.*'/tmp/leak\.spec'" "$REPO_ROOT/t/semantic_index_perl_founda
  fail 'inert private-path leak fixture was unexpectedly rewritten'
 
 printf '%s\n' \
- '[perl-project-data-test] PASS: 28 Perl allocators, traces, and CLI workspaces stay on repository storage'
+ '[perl-project-data-test] PASS: 29 Perl allocators, traces, and CLI workspaces stay on repository storage'

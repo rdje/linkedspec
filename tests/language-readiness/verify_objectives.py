@@ -152,15 +152,23 @@ SCALAR_RECEIVER_COPY_CI_INSERTIONS = (
      b"prove -Iperl t/actionir_receiver_scalar_copy.t\n"),
 )
 
+KNOWLEDGE_HEADER_GATE_OWNER = "PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11"
+KNOWLEDGE_HEADER_GATE_CI_INSERTIONS = (
+    (b'bash "$REPO_ROOT/scripts/check_doctrines.sh"\n\n',
+     b'log "checking Knowledge header list association through the public generator/checker"\n'
+     b'require_tracked_file t/knowledge_map_header_lists.t\n'
+     b'PERL5LIB= prove t/knowledge_map_header_lists.t\n\n'),
+)
+
 PERL_STORAGE_REPLACEMENTS = (
     (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
-     b"(( ${#perl_temp_owners[@]} == 28 )) ||\n"),
+     b"(( ${#perl_temp_owners[@]} == 29 )) ||\n"),
     (b' fail "tracked Perl temporary-allocation inventory drifted from 27 to ${#perl_temp_owners[@]}"\n',
-     b' fail "tracked Perl temporary-allocation inventory drifted from 28 to ${#perl_temp_owners[@]}"\n'),
+     b' fail "tracked Perl temporary-allocation inventory drifted from 29 to ${#perl_temp_owners[@]}"\n'),
     (b"for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t; do\n",
-     b"for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t; do\n"),
+     b"for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t t/knowledge_map_header_lists.t; do\n"),
     (b" '[perl-project-data-test] PASS: 27 Perl allocators, traces, and CLI workspaces stay on repository storage'\n",
-     b" '[perl-project-data-test] PASS: 28 Perl allocators, traces, and CLI workspaces stay on repository storage'\n"),
+     b" '[perl-project-data-test] PASS: 29 Perl allocators, traces, and CLI workspaces stay on repository storage'\n"),
 )
 
 
@@ -196,7 +204,7 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in (SCALAR_RECEIVER_COPY_CI_INSERTIONS + RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
+    for anchor, insertion in (KNOWLEDGE_HEADER_GATE_CI_INSERTIONS + SCALAR_RECEIVER_COPY_CI_INSERTIONS + RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
                               + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
@@ -211,6 +219,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             "artifact_recovery_owner": ARTIFACT_RECOVERY_OWNER,
             "raw_readiness_owner": RAW_READINESS_OWNER,
             "scalar_receiver_copy_owner": SCALAR_RECEIVER_COPY_OWNER,
+            "knowledge_header_gate_owner": KNOWLEDGE_HEADER_GATE_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -342,7 +351,8 @@ def verify_perl_storage_evolution(source, contents, historical_hash):
             f"unreviewed Perl storage drift: {source}")
     return {"path": source, "historical": historical_hash,
             "current": digest(contents), "owner": PUSH_REPAIR_OWNER,
-            "scope": "exact 27-to-28 census and new allocator membership; original bytes preserved"}
+            "knowledge_header_gate_owner": KNOWLEDGE_HEADER_GATE_OWNER,
+            "scope": "exact 27-to-29 census and two allocator memberships; original bytes preserved"}
 
 
 def restore_contract_factory_capture(source, contents):
@@ -616,6 +626,17 @@ def falsify(report):
                 current.replace(b"require_tracked_file t/actionir_receiver_scalar_copy_probe.pl\n", b"", 1),
                 current.replace(b"perl -c -Iperl t/actionir_receiver_scalar_copy_probe.pl\n", b"", 1),
             )
+            altered += tuple(current.replace(insertion, b"", 1)
+                             for _, insertion in KNOWLEDGE_HEADER_GATE_CI_INSERTIONS)
+            altered += tuple(current.replace(insertion, insertion * 2, 1)
+                             for _, insertion in KNOWLEDGE_HEADER_GATE_CI_INSERTIONS)
+            altered += (
+                current.replace(b"PERL5LIB= prove t/knowledge_map_header_lists.t\n",
+                                b"PERL5LIB= true t/knowledge_map_header_lists.t\n", 1),
+                current.replace(b"require_tracked_file t/knowledge_map_header_lists.t\n",
+                                b"require_tracked_file t/other_header_lists.t\n", 1),
+                current.replace(b"require_tracked_file t/knowledge_map_header_lists.t\n", b"", 1),
+            )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
         elif source == "tools/test_perl_project_data_storage.sh":
@@ -623,7 +644,11 @@ def falsify(report):
                 current.replace(replacement, historical, 1)
                 for historical, replacement in PERL_STORAGE_REPLACEMENTS
             ) + (current.replace(PERL_STORAGE_REPLACEMENTS[2][1],
-                                 PERL_STORAGE_REPLACEMENTS[2][1] * 2, 1),)
+                                 PERL_STORAGE_REPLACEMENTS[2][1] * 2, 1),
+                 current.replace(b" t/knowledge_map_header_lists.t; do\n", b"; do\n", 1),
+                 current.replace(b" t/knowledge_map_header_lists.t; do\n",
+                                 b" t/other_header_lists.t; do\n", 1),
+                 current.replace(b"== 29 ))", b"== 28 ))", 1))
             verify = verify_perl_storage_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":

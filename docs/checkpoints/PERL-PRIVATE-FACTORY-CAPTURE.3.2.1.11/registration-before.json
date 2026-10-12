@@ -1,0 +1,13 @@
+{
+  "audit_actual_session": 86026,
+  "audit_actual_returncode": 0,
+  "audit_report_sha256": "3eee918c94f2a8659b46d2bb77bd3e31cbac5b9d8f13e6091325d5a51a0fd1f5",
+  "audit_producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py",
+  "audit_producer_sha256": "10f6efdf8922cdf15f37bfd55979528fea729d38d8cbb38fa5be1ae91f831a3a",
+  "auditor_ci_only_sha256": "8b1fb15a71819aca3eceb69bfb108ee2dad01acac370b647c18dba55fea49153",
+  "storage_actual_session": 81087,
+  "storage_actual_returncode": 1,
+  "storage_before_sha256": "97449395da3fa5e5eda30ca5d5b55c52997f112495c9b4feaa15303352f2c03b",
+  "storage_log_base64": "W3BlcmwtcHJvamVjdC1kYXRhLXRlc3RdIEZpbGU6OlRlbXAgYWxsb2NhdGlvbiBzdGF5cyBpbiBtYW5hZ2VkIFNTRCBzY3JhdGNoCltwZXJsLXByb2plY3QtZGF0YS10ZXN0XSBleHBsaWNpdCB0cmFjZSBvdXRwdXQgc3RheXMgaW4gbWFuYWdlZCBTU0Qgc2NyYXRjaApbY2xpLWNvbmZvcm1hbmNlXSBQQVNTIHByb2plY3RfZGF0YV93b3Jrc3BhY2UKW2NsaS1jb25mb3JtYW5jZV0gMS8xIGNhc2UocykgcGFzc2VkIGZvciBQZXJsIHN0b3JhZ2UgY2hpbGQKW3BlcmwtcHJvamVjdC1kYXRhLXRlc3RdIEVSUk9SOiB0cmFja2VkIFBlcmwgdGVtcG9yYXJ5LWFsbG9jYXRpb24gaW52ZW50b3J5IGRyaWZ0ZWQgZnJvbSAyOCB0byAyOQo=",
+  "scope": "First CI-only historical inverse passes the unchanged public recovery producer; its source/full merged JSON are retained before storage registration. The independent direct storage check then rejects actual tracked29 against old28. No original producer/observation is refreshed."
+}

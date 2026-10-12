@@ -1,0 +1,113 @@
+{
+  "rows": [
+    {
+      "actual_tool_session": 93312,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-preserve.py",
+      "producer_sha256": "d9cf3fa799f33e4c42d637eaa884d6780e16a1b828546c76789f15e65eaf58fa",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-preservation.json",
+      "report_sha256": "685adff79b4ce0c4416406d885e2abe678bf43512e59fd8a6d7d911273c6b8f9",
+      "merged_log_base64": "S25vd2xlZGdlIGdhdGUgcHJlc2VydmF0aW9uIFBBU1M6IDEgaW50ZXJzZWN0aW5nIHJlY29yZHM7IDUzNCBwcmlvciBiaW5kaW5nczsgMTIzODEwIGZ1bGwgcHJpb3IgYnl0ZXM7IGFjdHVhbCByZWFkb25seSBiYXNlbGluZQo="
+    },
+    {
+      "actual_tool_session": 81705,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-population.py",
+      "producer_sha256": "fe73eb29882ec0814eb5df234f99446b5d9a684d9dd07023e29ab2887395eff7",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-population.json",
+      "report_sha256": "bc58eb31ea4418f0958c9dda0fe5585fad53b5b8994deee517c3c1dbea025721",
+      "merged_log_base64": "T3JpZ2luYWwgS25vd2xlZGdlIHBvcHVsYXRpb246IDE0ODUgTWFya2Rvd24gaW5wdXRzOyAxMzQ5IGZhY3RzOyAwIG9ycGhhbiBlbnRyaWVzOyA0MjQxNjE3IGNhcHN1bGUgYnl0ZXMK"
+    },
+    {
+      "actual_tool_session": 38523,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-run.py",
+      "producer_sha256": "cb7098d3acd03709c3ae86d7dd34140c0f9e222938f063bdb16c04c90ffd377e",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-before.json",
+      "report_sha256": "5c50ab943593e4f41c5e5490a9bb188fb2f55ec2f39ba481d0d8352a6257b7b0",
+      "merged_log_base64": "S25vd2xlZGdlIHB1YmxpYyBjaGVja2VyIGJlZm9yZSBQQVNTOiAyMCBjYXNlczsgODAgYXNzZXJ0aW9uczsgMTYgb2JzZXJ2ZWQgZmFpbHVyZXMK"
+    },
+    {
+      "actual_tool_session": 45991,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-run.py",
+      "producer_sha256": "cb7098d3acd03709c3ae86d7dd34140c0f9e222938f063bdb16c04c90ffd377e",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-after.json",
+      "report_sha256": "68fd0709af3f5100bb6edb9810e8dcf252594780ddf62addd480b11d2f668e37",
+      "merged_log_base64": "S25vd2xlZGdlIHB1YmxpYyBjaGVja2VyIGFmdGVyIFBBU1M6IDIwIGNhc2VzOyA4MCBhc3NlcnRpb25zOyAwIG9ic2VydmVkIGZhaWx1cmVzCg=="
+    },
+    {
+      "actual_tool_session": 58494,
+      "actual_returncode": 1,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-faults.py",
+      "producer_sha256": "dfbdf81103d0729262d08fcdca2e306f613a7198faecda24a72594cf5aa755d7",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-faults.json",
+      "report_sha256": "d521e9c6b95c18cb15c9ceaa34eb10baabd98d893e508e0de89f0e0ca0c1e3a9",
+      "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjExLWZhdWx0cy5weSIsIGxpbmUgNDEsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgY29tbWFuZHNbMl1bJ3JldHVybmNvZGUnXSAhPSAwIGFuZCBsZW4oZmFpbHVyZXMpID09IGNvdW50LCAobmFtZSwgZmFpbHVyZXMpCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiAoJ29ycGhhbi12ZXJkaWN0LWRpc2FibGVkJywgWygnMycsICdzY2FsYXIgcmVtYWlucyBhY2NlcHRlZCcpLCAoJzQnLCAnc2NhbGFyIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnNycsICdxdW90ZWQtc2NhbGFyIHJlbWFpbnMgYWNjZXB0ZWQnKSwgKCc4JywgJ3F1b3RlZC1zY2FsYXIgaGFzIHRoZSBleGFjdCBzdWNjZXNzIGRpYWdub3N0aWMnKSwgKCcxMScsICdpbmxpbmUtYW5zd2VycyByZW1haW5zIGFjY2VwdGVkJyksICgnMTInLCAnaW5saW5lLWFuc3dlcnMgaGFzIHRoZSBleGFjdCBzdWNjZXNzIGRpYWdub3N0aWMnKSwgKCcxNScsICdibG9jay10YWdzIHJlbWFpbnMgYWNjZXB0ZWQnKSwgKCcxNicsICdibG9jay10YWdzIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMTknLCAnaW5saW5lLXRhZ3MgcmVtYWlucyBhY2NlcHRlZCcpLCAoJzIwJywgJ2lubGluZS10YWdzIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMjMnLCAnYmxvY2stZXZpZGVuY2UgcmVtYWlucyBhY2NlcHRlZCcpLCAoJzI0JywgJ2Jsb2NrLWV2aWRlbmNlIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMjcnLCAnYmxvY2stcmV2ZXJpZnkgcmVtYWlucyBhY2NlcHRlZCcpLCAoJzI4JywgJ2Jsb2NrLXJldmVyaWZ5IGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMzEnLCAnYmxvY2stYWZ0ZXItY29tbWVudHMgcmVtYWlucyBhY2NlcHRlZCcpLCAoJzMyJywgJ2Jsb2NrLWFmdGVyLWNvbW1lbnRzIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMzUnLCAnY29tbWEtcXVlc3Rpb24gcmVtYWlucyBhY2NlcHRlZCcpLCAoJzM2JywgJ2NvbW1hLXF1ZXN0aW9uIGhhcyB0aGUgZXhhY3Qgc3VjY2VzcyBkaWFnbm9zdGljJyksICgnMzknLCAnb3JwaGFuLWFmdGVyLXJldmVyaWZ5IGlzIHJlamVjdGVkJyksICgnNDAnLCAnb3JwaGFuLWFmdGVyLXJldmVyaWZ5IHJlcG9ydHMgdGhlIGRpc3Rpbmd1aXNoaW5nIHJlYXNvbicpLCAoJzQzJywgJ29ycGhhbi1hZnRlci1ldmlkZW5jZSBpcyByZWplY3RlZCcpLCAoJzQ0JywgJ29ycGhhbi1hZnRlci1ldmlkZW5jZSByZXBvcnRzIHRoZSBkaXN0aW5ndWlzaGluZyByZWFzb24nKSwgKCc0NycsICdvcnBoYW4tYWZ0ZXItaW5saW5lLXRhZ3MgaXMgcmVqZWN0ZWQnKSwgKCc0OCcsICdvcnBoYW4tYWZ0ZXItaW5saW5lLXRhZ3MgcmVwb3J0cyB0aGUgZGlzdGluZ3Vpc2hpbmcgcmVhc29uJyksICgnNTEnLCAnb3JwaGFuLWJlZm9yZS1rZXkgaXMgcmVqZWN0ZWQnKSwgKCc1MicsICdvcnBoYW4tYmVmb3JlLWtleSByZXBvcnRzIHRoZSBkaXN0aW5ndWlzaGluZyByZWFzb24nKSwgKCc1NScsICdvcnBoYW4tYWZ0ZXItaW5saW5lLWFuc3dlcnMgaXMgcmVqZWN0ZWQnKSwgKCc1NicsICdvcnBoYW4tYWZ0ZXItaW5saW5lLWFuc3dlcnMgcmVwb3J0cyB0aGUgZGlzdGluZ3Vpc2hpbmcgcmVhc29uJyksICgnNTknLCAnb3JwaGFuLWFmdGVyLXNjYWxhci1hbnN3ZXJzIGlzIHJlamVjdGVkJyksICgnNjAnLCAnb3JwaGFuLWFmdGVyLXNjYWxhci1hbnN3ZXJzIHJlcG9ydHMgdGhlIGRpc3Rpbmd1aXNoaW5nIHJlYXNvbicpLCAoJzc1JywgJ2hpc3RvcmljYWwtcGVybC1tZXRob2QtYXN0LWNhbGwtY2FwdHVyZS5tZCBpcyByZWplY3RlZCcpLCAoJzc2JywgJ2hpc3RvcmljYWwtcGVybC1tZXRob2QtYXN0LWNhbGwtY2FwdHVyZS5tZCByZXBvcnRzIHRoZSBkaXN0aW5ndWlzaGluZyByZWFzb24nKSwgKCc3OScsICdoaXN0b3JpY2FsLXBlcmwtbWV0aG9kLWJsb2NrLWNvbXBvbmVudC1jYXB0dXJlLm1kIGlzIHJlamVjdGVkJyksICgnODAnLCAnaGlzdG9yaWNhbC1wZXJsLW1ldGhvZC1ibG9jay1jb21wb25lbnQtY2FwdHVyZS5tZCByZXBvcnRzIHRoZSBkaXN0aW5ndWlzaGluZyByZWFzb24nKV0pCg=="
+    },
+    {
+      "actual_tool_session": 86223,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-faults-final.py",
+      "producer_sha256": "7f7bf5f762e8c6220b4179519dd3f8fa8fcaf3bf46e8db7993aba31a0e6eddf1",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-faults-final.json",
+      "report_sha256": "9048768ca27ae7c1eb3604023c08d2437190f80e5b51bc3cc9fd89d9cccb046c",
+      "merged_log_base64": "S25vd2xlZGdlIHNvdXJjZSBjb250cm9scyBQQVNTOiAxNC8yLzE2IGFjdHVhbCBSRURzOyBmdWxsIDgwLWFzc2VydGlvbiBwbGFuczsgZXhhY3QgcmVzdG9yYXRpb24gR1JFRU4K"
+    },
+    {
+      "actual_tool_session": 80104,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-book.py",
+      "producer_sha256": "c017d34a36780b1286ae2b2f6d79a7d031c2223bd03fa116ee08e64cfe41e01f",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-book.json",
+      "report_sha256": "376d4733c63942027a1af0110da29661545eb122cbdbbc8b2d119f885caff59c",
+      "merged_log_base64": "Q29tcGxldGUgc3VwcGxpZWQgYm9vayBQQVNTOiA4OSBpbnB1dHM7IGZvdXIgY29udHJvbHM6IG1pc3Npbmctc3VtbWFyeSBjb21tYW5kLCBib3RoIGNoYW5nZWQgd29ya2Zsb3cgbWFya2VycyBhbmQgbWlzc2luZy1pbmNsdWRlIGVycm9yIFJFRHMgcmV0YWluZWQuCg=="
+    },
+    {
+      "actual_tool_session": null,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-book-review.py",
+      "producer_sha256": "edf7d751d02543965a10e2a46ba33a1f35f61a28d3eb8af5a437fb4643a2987b",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-book-review.json",
+      "report_sha256": "565024d3c1c1accc554afc4dc13d975ae8ccde38ce75eb1f6e49db6594938176",
+      "merged_log_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL2ZvdXIgYWN0dWFsIGNvbnRyb2xzOyBleGFjdCBpbnB1dCBhbmQgcmVuZGVyZWQgdGVhY2hpbmcgaWRlbnRpdGllcwo="
+    },
+    {
+      "actual_tool_session": 88244,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-metadata-lists.py",
+      "producer_sha256": "abeae0e34cdeae53dee42725e993c04a0d1d2a964ba8ea7852a52101abcaaf48",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-metadata-lists.json",
+      "report_sha256": "7d576863c559e86fc79bdf020f9d425e8d6ff54197661d7a9bd4b0693786b8ae",
+      "merged_log_base64": "TWV0YWRhdGEgbGlzdCBvbWlzc2lvbiByZXByb2R1Y2VkOiBldmlkZW5jZS9yZXZlcmlmeTsgUDMgLjMuMi4xLjEyIHNjaGVkdWxlZCBhZnRlciBmYWN0b3J5L3BpcGVsaW5lIGJlZm9yZSB0eXBlIHJlZmVyZW5jZQo="
+    },
+    {
+      "actual_tool_session": 11128,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-current.py",
+      "producer_sha256": "e46d8ee92c804f06ff4ab85e0b99fde16f9a43a9ea3ceee5b854df3b69cca72f",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-current.json",
+      "report_sha256": "ee454eddd4662cbb04b29ebb186028df3f57fc6b2399bcbba1c21dbc10802cd0",
+      "merged_log_base64": "Q3VycmVudCBjb21wbGV0ZSBLbm93bGVkZ2UgZ2F0ZSBQQVNTOiAxNDg1IE1hcmtkb3duIGlucHV0czsgc2l4IHJvdXRlIHVwZGF0ZXM7IGV4YWN0IG1hcCBhbmQgc291cmNlIGlkZW50aXRpZXMK"
+    },
+    {
+      "actual_tool_session": 92605,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-review.py",
+      "producer_sha256": "e2374c28775b984365b61ea3c0b047460ae356adf92b384dc4ec33d778409310",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-review.json",
+      "report_sha256": "331ef6c772259e4022da8a3e6e27c7facdb364f33c66851d7e29a4915f4ccb91",
+      "merged_log_base64": "S25vd2xlZGdlIGNvbXBvc2VkIHJldmlldyBQQVNTOiAyMC84MDsgMTYgb3JpZ2luYWwgUkVEczsgMTQvMi8xNiBzb3VyY2UgY29udHJvbHM7IGNvbXBsZXRlMTQ4NS8xMzQ5IHBvcHVsYXRpb247IHByaW9yNTM0L2Z1bGwxMjM4MTA7IGJvb2s4OS9mb3VyCg=="
+    },
+    {
+      "actual_tool_session": 60418,
+      "actual_returncode": 0,
+      "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-evidence.py",
+      "producer_sha256": "0e4a6c5c1dce551f3ec71b16a8619d080e53974c6285577d4bb0129faca211c8",
+      "report": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-evidence.json",
+      "report_sha256": "805b7b73842abe75e73076b95cc47d40b92c97559b8d5bda5ebbd06f0f24b150",
+      "merged_log_base64": "S25vd2xlZGdlIHNlbWFudGljIGV2aWRlbmNlIFBBU1M6IHR3byBhY3R1YWwgZGlzdGluZ3Vpc2hpbmcgZGVuaWFscyBhbmQgZXhhY3QgcmVzdG9yYXRpb25zCg=="
+    }
+  ],
+  "scope": "Actual observed tool completions and full merged logs. Native subprocess reports separately retain stdout/stderr. The first fault-control instrument fails1 and is preserved; its distinct corrected producer passes0."
+}

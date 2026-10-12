@@ -1,0 +1,9 @@
+{
+  "returncode": 1,
+  "producer_sha256": "b302f7e0be81eb94dc0053a07a94c5f13bf804f64acfa171af69698c669ae162",
+  "capsule_sha256": "e26e08f00859bc9b66c245c68f4705a3a2b0a7ff8cd1f60d158f83a4f9d24a7c",
+  "public_files": 70,
+  "diagnosed_count": 42,
+  "reason": "After replacing the target table, two additional negative mentions introduced by15197dfd leave42 references. The original checker stays40; the redundant private assignment note will use prose and its bare-binding teaching remains.",
+  "log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjExLWNhbm9uaWNhbDAzL2RvY3VtZW50LWZpbmFsLnB5IiwgbGluZSA1MCwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBjbGFzc2lmaWVyID09IHsncmV0dXJuY29kZSc6IDAsICdjb3VudCc6IDQwLCAnc3Rkb3V0JzogJycsICdzdGRlcnInOiAnJ30KICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK"
+}

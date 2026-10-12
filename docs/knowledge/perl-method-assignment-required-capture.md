@@ -21,7 +21,7 @@ status: two tracking predicates isolated under .3.2.1.6; original required and o
 tags: [perl, actionir, callbacks, capture, aliases, assignment]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
 evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 Only the required resolver returns in `_lower_assign_statement`,
@@ -153,3 +153,131 @@ without replacing the caller reference. Zero stays nonempty; native context,
 reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
 All17 sites from the original inventory now have their bounded repairs; full
 named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: perl-method-assignment-required-capture
+title: Assignment callbacks and tracking predicate capture boundaries
+answers:
+  - "which local target slot do receiver and nested write predicates receive"
+  - "does tracking predicate selection fetch a tied dependency map more than once"
+  - "how do tracking predicates convert returned values and overloaded booleans"
+  - "do tracking predicates run the real receiver guard and scalar assignment consumers"
+  - "when do source read and assignment select their optional kind callbacks"
+  - "does an optional kind mutation affect the source name or caller target"
+  - "which assignment callbacks have private capture boundaries"
+  - "does assignment validate every required callback before choosing its target"
+  - "why is the assignment initializer kind readonly"
+  - "which assignment callbacks share the local target scalar slot"
+  - "how many times do scalar assignment and array append trim their input"
+  - "does the assignment RHS helper receive the second trim scalar slot"
+  - "do private legacy assignment branches admit removed public selectors"
+  - "which readonly command reviews assignment required isolation"
+date: 2026-10-12
+status: two tracking predicates isolated under .3.2.1.6; original required and optional-kind proofs remain historical
+tags: [perl, actionir, callbacks, capture, aliases, assignment]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
+evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: perl-method-assignment-required-capture
+title: Assignment callbacks and tracking predicate capture boundaries
+answers:
+  - "which local target slot do receiver and nested write predicates receive"
+  - "does tracking predicate selection fetch a tied dependency map more than once"
+  - "how do tracking predicates convert returned values and overloaded booleans"
+  - "do tracking predicates run the real receiver guard and scalar assignment consumers"
+  - "when do source read and assignment select their optional kind callbacks"
+  - "does an optional kind mutation affect the source name or caller target"
+  - "which assignment callbacks have private capture boundaries"
+  - "does assignment validate every required callback before choosing its target"
+  - "why is the assignment initializer kind readonly"
+  - "which assignment callbacks share the local target scalar slot"
+  - "how many times do scalar assignment and array append trim their input"
+  - "does the assignment RHS helper receive the second trim scalar slot"
+  - "do private legacy assignment branches admit removed public selectors"
+  - "which readonly command reviews assignment required isolation"
+date: 2026-10-12
+status: two tracking predicates isolated under .3.2.1.6; original required and optional-kind proofs remain historical
+tags: [perl, actionir, callbacks, capture, aliases, assignment]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
+evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: perl-method-assignment-required-capture
+title: Assignment callbacks and tracking predicate capture boundaries
+answers:
+  - "which local target slot do receiver and nested write predicates receive"
+  - "does tracking predicate selection fetch a tied dependency map more than once"
+  - "how do tracking predicates convert returned values and overloaded booleans"
+  - "do tracking predicates run the real receiver guard and scalar assignment consumers"
+  - "when do source read and assignment select their optional kind callbacks"
+  - "does an optional kind mutation affect the source name or caller target"
+  - "which assignment callbacks have private capture boundaries"
+  - "does assignment validate every required callback before choosing its target"
+  - "why is the assignment initializer kind readonly"
+  - "which assignment callbacks share the local target scalar slot"
+  - "how many times do scalar assignment and array append trim their input"
+  - "does the assignment RHS helper receive the second trim scalar slot"
+  - "do private legacy assignment branches admit removed public selectors"
+  - "which readonly command reviews assignment required isolation"
+date: 2026-10-12
+status: two tracking predicates isolated under .3.2.1.6; original required and optional-kind proofs remain historical
+tags: [perl, actionir, callbacks, capture, aliases, assignment]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
+evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: perl-method-assignment-required-capture
+title: Assignment callbacks and tracking predicate capture boundaries
+answers:
+  - "which local target slot do receiver and nested write predicates receive"
+  - "does tracking predicate selection fetch a tied dependency map more than once"
+  - "how do tracking predicates convert returned values and overloaded booleans"
+  - "do tracking predicates run the real receiver guard and scalar assignment consumers"
+  - "when do source read and assignment select their optional kind callbacks"
+  - "does an optional kind mutation affect the source name or caller target"
+  - "which assignment callbacks have private capture boundaries"
+  - "does assignment validate every required callback before choosing its target"
+  - "why is the assignment initializer kind readonly"
+  - "which assignment callbacks share the local target scalar slot"
+  - "how many times do scalar assignment and array append trim their input"
+  - "does the assignment RHS helper receive the second trim scalar slot"
+  - "do private legacy assignment branches admit removed public selectors"
+  - "which readonly command reviews assignment required isolation"
+date: 2026-10-12
+status: two tracking predicates isolated under .3.2.1.6; original required and optional-kind proofs remain historical
+tags: [perl, actionir, callbacks, capture, aliases, assignment]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
+evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---

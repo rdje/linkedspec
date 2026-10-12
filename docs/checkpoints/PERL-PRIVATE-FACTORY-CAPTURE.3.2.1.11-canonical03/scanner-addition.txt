@@ -1,0 +1,17 @@
+    # Exact retained private callback probes/assertions and public rejection controls.
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t':
+        '50bb888f666f12b1ac1b6afb1e223b12a2a6328fe8d338593e0b44d74adc8f15',
+    'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py':
+        'fc566e989e964e4d71889a62480fbe6c42682dd84c2cdfc66339c7b428da6226',
+    't/actionir_small_kind_capture.t':
+        '050ea5f3080c8e3a79eb8004304a947ab483ad9340a0b55abbb58f558f8d5b73',
+    't/actionir_small_kind_probe.pl':
+        'c68299cd8fb21b1ccf79124a7bbdc74d080ec0e3a24a8bd4ac606f4d66398aa4',
+    't/actionir_small_kind_symbolic_probe.pl':
+        '8a7fd07c525a028f5d691a9a2b934f18c3791de83a8ce3ed682e36d469998033',
+    't/actionir_source_assignment_kind_capture.t':
+        'cff593511e74933836c2dd0af2917e14a33bb3ab6421853a72d6de1182b1f872',
+    't/actionir_source_assignment_kind_probe.pl':
+        'fcc8cc26c86597dc40d64df459e2d61f12849c9d84d954b8efbcd5f85f6899fa',
+    't/actionir_uniform_target_probe.pl':
+        '874b0be404db0d8d5d55c58186ecc5eac1b9eb228d12b542b2ac36a07f08a536',

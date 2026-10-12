@@ -1539,29 +1539,31 @@ donate a parent publication.
 
 The private target helper recognizes each wrapped target against the container
 argument of that invocation. Its interpolated regex no longer uses `/o`, which
-incorrectly cached the first container in a Perl process. When kind reports
-`scalar`, both orders now recognize both targets:
+incorrectly cached the first container in a Perl process. The illustrative labels
+`bag` and `record` below are literal strings passed directly to this private
+helper; they are not authored DSL container types. When kind reports `scalar`,
+both orders now recognize both targets:
 
 | Fresh-process call order | First result | Second result |
 |---|---|---|
-| `array(item)` with container `array`, then `hash(item)` with container `hash` | `item` | `item` |
-| `hash(item)` with container `hash`, then `array(item)` with container `array` | `item` | `item` |
+| `bag(item)` with container `bag`, then `record(item)` with container `record` | `item` | `item` |
+| `record(item)` with container `record`, then `bag(item)` with container `bag` | `item` | `item` |
 
-A mismatched target, such as `array(item)` with current container `hash`, declines
-before kind lookup even after an earlier array call. An empty current container
-also declines `array(item)`. Container text remains literal: `array.(item)` matches
-container `array.`, while `arrayX(item)` does not. This preserves the existing
+A mismatched target, such as `bag(item)` with current container `record`, declines
+before kind lookup even after an earlier bag call. An empty current container
+also declines `bag(item)`. Container text remains literal: `bag.(item)` matches
+container `bag.`, while `bagX(item)` does not. This preserves the existing
 private literal-matching contract without adding a container whitelist. A bare
 `item` returns directly without kind lookup; matching wrapped targets still require
 kind `scalar` and retain callback identity, arguments, effects and fatal objects.
 
 These examples describe internal helper calls. Public `.spec` authors use bare
-typed bindings: `push(item, "x")` and `set_key(item, "key", "x")`. Exact
-`array(item)` and `hash(item)` selectors remain rejected with
-`aggregate_selector_removed`. Actual Toolbox lowering and the neutral supported
-binding fixture, executed live and from independently loaded emitted source,
-produce identical observations and emitted bytes after either container warm-up.
-The repair establishes no new authored syntax or authored-language failure.
+typed bindings: `push(item, "x")` and `set_key(item, "key", "x")`. Removed one-name
+array/hash selectors remain rejected with `aggregate_selector_removed`. Actual
+Toolbox lowering and the neutral supported binding fixture, executed live and
+from independently loaded emitted source, produce identical observations and
+emitted bytes after either container warm-up. The repair establishes no new
+authored syntax or authored-language failure.
 
 ### Main method kind callbacks
 
@@ -1613,8 +1615,8 @@ Assignment validates all six required dependencies eagerly. It trims the target,
 handles retired `:items`, and handles ordinary bare targets before considering
 its optional kind selection. Its legacy wrapped-target branch selects kind only
 when that branch is reached. The table describes private compiler calls; public
-authors keep using bare typed bindings. Removed `array(items)` and `hash(items)`
-selectors remain rejected publicly.
+authors keep using bare typed bindings. Removed one-name array/hash selectors
+remain rejected publicly.
 
 Both kind calls receive writable local names. A callback mutation changes the
 name used by the resulting read or tracked assignment, while the caller's source

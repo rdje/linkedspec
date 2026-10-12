@@ -499,7 +499,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.3.1 `tools/test_perl_project_data_storage.sh` — Perl SSD-local storage oracle
 
-- **WHAT:** inventory the 28 tracked Perl temporary-allocation owners and execute default/named `File::Temp`,
+- **WHAT:** inventory the tracked Perl temporary-allocation owners and execute default/named `File::Temp`,
   explicit trace-file, and real CLI subprocess-workspace paths inside one managed run.
 - **WHEN:** changing Perl tests, trace/log destinations, the neutral CLI runner, oracle capture, primary-matrix
   routing, or project-data lifecycle.
@@ -719,7 +719,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHEN:** changing aggregate-selector migration teaching, public Markdown inventory, bare-binding examples,
   selector-retirement status, or the bounded historical-reference census.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py`.
-- **OUTPUT:** 67 public files / 35 classified historical references / zero current examples, five exact ordered
+- **OUTPUT:** 70 public files / 40 classified historical references / zero current examples, five exact ordered
   migration contrasts, eleven rejected contrast mutations, zero executable positives, and capability admission.
 - **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
   section. Executable `.spec` inputs and current examples remain selector-free.

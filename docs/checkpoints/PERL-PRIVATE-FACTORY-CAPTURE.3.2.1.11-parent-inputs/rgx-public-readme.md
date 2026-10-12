@@ -1,0 +1,271 @@
+# rgx — a programmable regex engine for Rust
+
+**rgx** is a high-performance, programmable regex engine. It does everything a traditional regex engine does — find, capture, replace, split — but it goes further: you can run code *inside* a match, steer the engine from callbacks, watch it work with structured events, suspend matching for async I/O, and tail files in real time.
+
+## Why rgx?
+
+```rust
+use rgx_core::*;
+
+// Familiar regex API
+let re = Regex::compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2}) (?P<level>ERROR|WARN)")?;
+for caps in re.captures_iter(log_text) {
+    println!("{}/{}/{}: {}", &caps["year"], &caps["month"], &caps["day"], &caps["level"]);
+}
+
+// ...with closure-based replacement
+let result = re.replace_all(log_text, |caps: &Captures| {
+    format!("[{}] {}", &caps["level"], &caps["year"])
+});
+
+// ...and tail a log file with OS-native watching (kqueue/inotify)
+let handle = re.tail_file("app.log", TailOptions::default(), |fm| {
+    eprintln!("line {}: {}", fm.line_number, fm.line);
+});
+
+// ...or run Lua inside the pattern
+let validator = Regex::with_mode(
+    r"(\d+)(?{lua:return tonumber(arg[1]) <= 100})",
+    ExecutionMode::Safe,
+)?;
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+## Highlights
+
+- **PCRE2 10.47 feature-family coverage ~98%** (hand-maintained matrix). **Ground-truth case-level pass rate against PCRE2's own `testinput1..29` corpus: 78.6%** (**11,218 cases parsed, 8,822 pass, 2,396 fail, 0 panic, 0 skip** — measured 2026-04-16 via `rgx-core/tests/pcre2_conformance.rs` against PGEN 1.1.26; the harness is now ratchet-gated so any regression fails CI). Every PCRE2 test case in the harnessed corpus — including those gated on features like `ucp`, `J`/`dupnames`, `U`/`ungreedy`, `literal`, `match_line`, `match_word`, non-default newline conventions, and non-UTF-8 subjects — is executed against RGX. No silent skips, no hidden asterisks — with one **declared** exception: `testinput15` (PCRE2's match-limiting stress file, 80 cases) is not in the harnessed set. It was excluded because those patterns hung the engine before the 2026-07-21 safety-limits fix; measured since, it runs clean at 68/80 with no hangs, and re-inclusion is tracked as the `CONFORMANCE-TESTINPUT15` task tree. See the Book → Testing Philosophy → "One PCRE2 corpus file is excluded" for the full breakdown. The feature-family percentage counts PCRE2 features as atomic check marks and is naturally optimistic; the case-level number is the honest differential against the authoritative oracle. Raise the case-level number as the bug-triage progresses.
+- **Programmable** — embed Lua, JavaScript, Rhai, WASM, or native Rust callbacks inside patterns
+- **6-layer host integration** — data exchange, predicates, steering, events, async I/O, file matching
+- **Production safety** — `set_max_steps`, `set_max_backtrack_frames`, `set_max_recursion_depth` prevent DoS
+- **Live file watching** — `tail_file` uses kqueue/inotify with zero idle CPU
+- **Multi-pattern matching** — `RegexSet` for routing/classification
+- **Idiomatic Rust API** — `Match`, `Captures`, lazy iterators, `Cow<str>` returns, fluent `RegexBuilder`
+- **PGEN-backed parser** — single source of truth for regex syntax
+- **Extensively tested** — 1000+ internal tests plus the full PCRE2 10.47 testdata conformance suite as an external oracle
+
+## Quick start
+
+```toml
+[dependencies]
+rgx-core = "0.1"
+```
+
+```rust
+use rgx_core::Regex;
+
+let re = Regex::compile(r"\d+")?;
+let m = re.find("answer is 42")?;
+assert_eq!(m.as_str(), "42");
+```
+
+## Documentation
+
+📖 **[Read The RGX Book](book/src/SUMMARY.md)** — 45 chapters covering every feature with examples. The book is the comprehensive reference: API, internals, design rationale, performance, sandboxing, and more. Build locally with `mdbook serve book`.
+
+CLI usage:
+```bash
+rgx --file app.log --follow 'ERROR|WARN'   # tail -f | grep
+rgx --color always '\d+' "answer is 42"     # colorized matches
+```
+
+---
+
+## For contributors
+
+`rgx` is a Rust regex engine project focused on a high-performance VM backend with a clean compile pipeline.
+
+### Project objective
+Build a robust, high-performance, extensible regex engine that:
+- compiles patterns through `lexer -> parser -> AST -> compiler -> VM`,
+- targets practical compatibility with mainstream regex behavior (with explicit known gaps),
+- supports strict observability/tracing for fast debugging and safe evolution.
+
+### Start here (fast ramp-up)
+If you are new to the repo, use this order:
+1. `README.md` (this file) for the full navigation map.
+2. **[The RGX Book](book/src/SUMMARY.md)** — comprehensive mdBook documentation covering every feature with examples. Read online at [rdje.github.io/rgx](https://rdje.github.io/rgx) (auto-deployed from `main` via `.github/workflows/book.yml` on every change under `book/**`) or build locally with `mdbook serve book`.
+3. [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) for user-facing usage and behavior.
+4. [`docs/CAPABILITY_MATRIX.md`](docs/CAPABILITY_MATRIX.md) for shipped vs scaffolded features.
+5. [`docs/PCRE2_COMPATIBILITY_MATRIX.md`](docs/PCRE2_COMPATIBILITY_MATRIX.md) for parity status and known gaps.
+6. [`ROADMAP.md`](ROADMAP.md) and [`RUST_CODEBASE_ANALYSIS.md`](RUST_CODEBASE_ANALYSIS.md) for roadmap intent versus validated Rust implementation status.
+7. [`LIVE_ACHIEVEMENT_STATUS.md`](LIVE_ACHIEVEMENT_STATUS.md) and [`docs/TASK_TREE.md`](docs/TASK_TREE.md) for the high-level status board and the task-tree execution ledger (read the active task files it names). [`MEMORY_ARCHITECTURE.md`](MEMORY_ARCHITECTURE.md) explains how memory/continuity is layered and enforced.
+8. [`DEVELOPMENT_NOTES.md`](DEVELOPMENT_NOTES.md) and [`MEMORY.md`](MEMORY.md) for current technical context and continuity.
+9. [`COMMIT.md`](COMMIT.md) before making/committing changes.
+10. [`CLAUDE.md`](CLAUDE.md) — non-negotiable project rules for AI assistants.
+
+## Repository path map (project files)
+### Workspace / crates
+- [`Cargo.toml`](Cargo.toml) — workspace manifest
+- [`rgx-core/`](rgx-core/) — engine core crate
+- [`rgx-cli/`](rgx-cli/) — command-line interface
+- [`rgx-bench/`](rgx-bench/) — benchmark/parity harnesses
+- [`rgx-wasm/`](rgx-wasm/) — wasm crate scaffold
+- [`docs/`](docs/) — focused technical/user documentation
+
+### Core engine code paths
+- [`rgx-core/src/lib.rs`](rgx-core/src/lib.rs) — public API (`Regex`, compile/match entry points)
+- [`rgx-core/src/lexer.rs`](rgx-core/src/lexer.rs) — lexical analysis
+- [`rgx-core/src/parser.rs`](rgx-core/src/parser.rs) — recursive-descent parser
+- [`rgx-core/src/ast.rs`](rgx-core/src/ast.rs) — AST definitions
+- [`rgx-core/src/token.rs`](rgx-core/src/token.rs) — lexer token model + positional types
+- [`rgx-core/src/parsing.rs`](rgx-core/src/parsing.rs) — parser abstraction and backend selection
+- [`rgx-core/src/compiler.rs`](rgx-core/src/compiler.rs) — AST-to-program compiler boundary
+- [`rgx-core/src/vm.rs`](rgx-core/src/vm.rs) — VM bytecode execution engine
+- [`rgx-core/src/engine.rs`](rgx-core/src/engine.rs) — runtime dispatch on compiled patterns
+- [`rgx-core/src/events.rs`](rgx-core/src/events.rs) — structured match events for debugging/profiling
+- [`rgx-core/src/file.rs`](rgx-core/src/file.rs) — file-backed matching (match_file, scan_file, line-oriented)
+- [`rgx-core/src/execution.rs`](rgx-core/src/execution.rs) — execution/callback runtime layer
+- [`rgx-core/src/log.rs`](rgx-core/src/log.rs) — structured tracing and verbosity control
+- [`rgx-core/src/error.rs`](rgx-core/src/error.rs) — error types
+- [`rgx-core/src/pattern.rs`](rgx-core/src/pattern.rs) — compiled pattern model
+
+### CLI / benchmark / parity paths
+- [`rgx-cli/src/main.rs`](rgx-cli/src/main.rs) — CLI argument handling and invocation path
+- [`rgx-bench/src/lib.rs`](rgx-bench/src/lib.rs) — shared benchmark fixtures and synthetic input generators
+- [`rgx-bench/src/bin/trend_capture.rs`](rgx-bench/src/bin/trend_capture.rs) — lightweight benchmark trend capture used by the local validation loop, including mode-scoped latest snapshots, timestamped history, same-mode delta reporting, rolling history summaries, a cross-mode overview with latest shared-pair context, label-paired quick/full summaries, rolling label-pair history with latest-pair callouts, optional capture labels, and explicit label-based baseline selection
+- [`rgx-bench/tests/pcre2_parity.rs`](rgx-bench/tests/pcre2_parity.rs) — differential parity checks vs PCRE2
+
+### CI / automation paths
+- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — GitHub Actions workflow
+- [`scripts/run-local-ci.sh`](scripts/run-local-ci.sh) — local-first CI entry point for explicit RGX package tests plus the `rgx-core` / `rgx-cli` feature-matrix validation path
+- [`scripts/check-ci-paths.sh`](scripts/check-ci-paths.sh) — CI path/tracked-file guardrails
+- [`scripts/capture-benchmark-trends.sh`](scripts/capture-benchmark-trends.sh) — quick benchmark trend capture wrapper that writes shared plus mode-scoped summaries, a cross-mode overview, label-paired quick/full summaries, rolling label-pair history, rolling history summaries, git-derived capture labels, forwards explicit baseline selection, and archives under `target/benchmark-trends/`
+
+## Documentation index (all `.md` files)
+### Root markdown files
+- [`README.md`](README.md) — single entry point and navigation hub
+- [`CLAUDE.md`](CLAUDE.md) — non-negotiable project rules for AI assistants (loaded automatically)
+- [`SESSION_BOOTSTRAP.md`](SESSION_BOOTSTRAP.md) — new-session bootstrap instructions for AI/LLM handoff
+- [`MEMORY_ARCHITECTURE.md`](MEMORY_ARCHITECTURE.md) — durable, harness-agnostic memory standard (4 layers A/B/C/D + E1–E4 enforcement); the system of record for how continuity works
+- [`DOCTRINE_ENFORCEMENT.md`](DOCTRINE_ENFORCEMENT.md) — **the doctrine-enforcement standard** (RGX's 4th portable architecture, adopted from PGEN 2026-07-21): every mechanizable doctrine is paired with a deterministic check, all run from one registry+driver ([`scripts/check_doctrines.sh`](scripts/check_doctrines.sh)) that the pre-commit hook (E3) and CI (E4) gate on. §10 is RGX's live registry of enforced doctrines.
+- [`KNOWLEDGE_MAP.md`](KNOWLEDGE_MAP.md) — **derived** question-keyed retrieval index over the fact cards in `docs/knowledge/` (+ `docs/decisions/`); grep it *before* re-deriving any logged fact. Auto-generated — never hand-edit.
+- [`knowledge-map/`](knowledge-map/) — the Knowledge Map bundle (standard `KNOWLEDGE_MAP_ARCHITECTURE.md`, FAQ, generator/checker scripts, fact template); makes archaeology a structural impossibility for facts logged once
+- [`CHANGES.md`](CHANGES.md) — authoritative change ledger
+- [`COMMIT.md`](COMMIT.md) — commit workflow contract and invariants
+- [`DEVELOPMENT_NOTES.md`](DEVELOPMENT_NOTES.md) — technical knowledge base
+- [`MEMORY.md`](MEMORY.md) — continuity memory across sessions
+- [`PGEN_REGEX_PARSER_INTEGRATION_COMPLAINT.md`](PGEN_REGEX_PARSER_INTEGRATION_COMPLAINT.md) — current RGX-side caveat list for the published PGEN regex integration contract
+- [`PGEN_REGEX_EMBEDDED_CODE_BLOCK_CONTRACT_PROPOSAL.md`](PGEN_REGEX_EMBEDDED_CODE_BLOCK_CONTRACT_PROPOSAL.md) — proposed embedded code-block contract shape to forward upstream
+- [`PROJECT_VISION.md`](PROJECT_VISION.md) — long-term project direction
+- [`ROADMAP.md`](ROADMAP.md) — execution roadmap (`Now`/`Next`/`Later`)
+- [`LIVE_ACHIEVEMENT_STATUS.md`](LIVE_ACHIEVEMENT_STATUS.md) — high-level status board linking roadmap lanes to active task trees
+- [`RUST_CODEBASE_ANALYSIS.md`](RUST_CODEBASE_ANALYSIS.md) — live roadmap-grounded Rust workspace analysis
+- [`WARP.md`](WARP.md) — Warp-specific repository guidance
+
+### `docs/` markdown files
+- [`docs/INTEGRATION.md`](docs/INTEGRATION.md) — **downstream consumer guide**: precisely how to build a fully featured RGX (+ PGEN regex parser) as a submodule / path dep / C ABI
+- [`docs/TASK_TREE_README.md`](docs/TASK_TREE_README.md) — task-tree tracking setup/usage guide (portable)
+- [`docs/TASK_TREE.md`](docs/TASK_TREE.md) — repo-local task-tree workflow spec, active-tree index, PNT rules, Code-Change Doctrine
+- [`docs/tasks/TEMPLATE.md`](docs/tasks/TEMPLATE.md) — copyable skeleton for a new task tree
+- [`docs/tasks/`](docs/tasks/) — one file per top-level task tree (the execution ledger)
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) — end-user guide
+- [`docs/CAPABILITY_MATRIX.md`](docs/CAPABILITY_MATRIX.md) — feature status matrix
+- [`docs/PCRE2_COMPATIBILITY_MATRIX.md`](docs/PCRE2_COMPATIBILITY_MATRIX.md) — PCRE2 parity matrix
+- [`docs/PARSER_CONTRACT.md`](docs/PARSER_CONTRACT.md) — parser interoperability contract
+- [`docs/TECHNICAL_DECISIONS.md`](docs/TECHNICAL_DECISIONS.md) — architecture/design decisions
+- [`docs/architecture.md`](docs/architecture.md) — architecture and data flow
+- [`docs/guide/`](docs/guide/) — **The RGX Guide** — comprehensive book-style documentation with chapters on every feature, loaded with examples
+- [`docs/HOST_INTEGRATION_GUIDE.md`](docs/HOST_INTEGRATION_GUIDE.md) — single-file quick reference for host integration
+- [`docs/HOST_INTEGRATION_ARCHITECTURE.md`](docs/HOST_INTEGRATION_ARCHITECTURE.md) — deep host-engine integration design (match steering, events, async I/O)
+- [`docs/CLI_GUIDE.md`](docs/CLI_GUIDE.md) — comprehensive CLI user guide with 20+ examples
+- [`docs/TESTING_PHILOSOPHY.md`](docs/TESTING_PHILOSOPHY.md) — hostile skepticism testing approach, known gaps, and process
+- [`docs/BACKLOG.md`](docs/BACKLOG.md) — complete inventory of remaining work (roadmap items, features to port, engineering improvements)
+- [`docs/PUBLISH_READINESS.md`](docs/PUBLISH_READINESS.md) — cross-cutting gates that must close before public release. Distinct from BACKLOG (per-feature work); this is the publication checklist itself.
+- [`docs/C2_NFA_DFA_DESIGN.md`](docs/C2_NFA_DFA_DESIGN.md) — SOTA design proposal for the NFA/DFA hybrid engine (C2). Sparse-set Pike-VM, lazy DFA, two-pass capture recovery, differential testing. **C2 shipped 2026-04-11** (steps 0–8 complete).
+- [`docs/C1_JIT_COMPILATION_DESIGN.md`](docs/C1_JIT_COMPILATION_DESIGN.md) — SOTA design proposal for the JIT compiler (C1). Cranelift-based code generator, JIT'd backtracking VM, runtime helper layer, 4-tier dispatch chain, cross-platform validation matrix, 9-step phased plan. Step 0 of the C1 active focus.
+## README maintenance policy
+`README.md` is the project’s single entry point and should be updated when it becomes stale, including changes to:
+- project objective/scope,
+- repository structure or important file paths,
+- markdown documentation inventory or onboarding order.
+
+It does **not** need to be updated on every commit—only when those entry-point concerns change.
+
+## Build, test, run
+
+**Simplest way — one command builds RGX and all its dependencies:**
+```bash
+make           # = make build: bootstraps PGEN's parser (once) then `cargo build`
+```
+`make` hides the PGEN bootstrap: it initializes the `subs/pgen` submodule if
+needed, generates PGEN's parser (the one-time step a plain `cargo build` can't do
+on a fresh checkout — see the Build note below), then builds. It is **idempotent**
+(re-running is a no-op once bootstrapped). Other targets: `make test`,
+`make gate` (full local CI), `make help`.
+
+**Using RGX as a git submodule?** Run the bootstrap once against the RGX checkout
+before building your own workspace — then your `cargo build` finds PGEN's parser:
+```bash
+make -C path/to/rgx bootstrap     # generates subs/pgen/generated/* (idempotent)
+```
+**Downstream/integration consumers:** the precise build & integration handoff
+guide (prerequisites, submodule topology, feature flags, the pgen-free option,
+the C ABI, troubleshooting) is **[`docs/INTEGRATION.md`](docs/INTEGRATION.md)**.
+
+Or drive cargo directly (after `make bootstrap` at least once):
+```bash
+cargo build
+cargo test -p rgx-core
+cargo test -p rgx-cli
+cargo test -p rgx-bench
+cargo test -p rgx-wasm
+cargo test -p rgx-core vm::
+cargo run --bin rgx -- "cat|dog" "I have a cat"
+```
+
+Run the same CI checks locally before pushing:
+```bash
+git submodule update --init --recursive
+./scripts/run-local-ci.sh
+```
+The default RGX build expects the committed `subs/pgen` submodule carrying the pinned PGEN regex **`1.1.106`** release (commit `d9d41c28`, integration contract **`1.1.109`**, adopted 2026-07-21). PGEN's `parser_embedding_api_contract()` reports these correctly (`REGEX_PARSER_RELEASE_VERSION="1.1.106"` / contract `"1.1.109"`). **RGX has zero open PGEN-RGX reports** — all 91 filed against this codebase (`0001`–`0091`) are closed, including the three fast-pin adoption blockers filed and closed on 2026-07-21: **`PGEN-RGX-0089`** (`(?[\b])` rejects-valid regression, fixed upstream as ledger `REGEX-0115`), **`0090`** (broken cold-clone bootstrap) and **`0091`** (version-constant drift). Each was re-verified against the adopted pin, not taken on trust.
+
+**Compile-time performance (the reason for this pin).** Raw PGEN regex parse is now geomean **2.81 µs** over the standard 8-pattern corpus — **26.3× faster** than the previous `1.1.81` pin, **8.64× vs PCRE2-10.47-no-JIT compile** and **1.20× vs PCRE2+JIT** (3 of 8 patterns parse faster than PCRE2 *compiles with JIT*). Measured on RGX's standard instrument (default allocator, release, p50/5000, same-session PCRE2 C baselines); bundle in `pgen-issues/artifacts/PGEN-RGX-0078/measurements/ratio_table_1.1.106_adopted.md`. **The compile bottleneck has consequently inverted:** raw parse is only ~4% of `Regex::compile`, and the dominant costs are now RGX-side — the AST-dump adapter boundary and the eager C2 build — tracked as `COMPILE-PERF-0078.3`/`.4`. The ROADMAP's `<5×` bar is therefore RGX's to close (ADR 0005). Adoption also absorbed PGEN's `REGEX-0098` boundary move: an unknown named reference (`\k<zzz>`, `(?&zzz)`, `(?P=zzz)`) is now rejected at parse time, PCRE2-faithfully, rather than by RGX's compiler — the patterns are rejected either way, and RGX's tests now match the diagnostic code rather than message prose. The AST shape was unaffected (`regex_ast_dump_schema_version` stays `1`). See Book → Performance → "Compile-time performance". A second submodule `subs/pcre2` tracks the PCRE2 upstream at the `pcre2-10.47` tag and supplies the full `testinput1..29` corpus for the differential conformance harness in `rgx-core/tests/pcre2_conformance.rs` (run with `cargo test --test pcre2_conformance -- --ignored --nocapture`). That harness enforces a **ratchet gate** at `PASS_BASELINE = 12_806` / `FAIL_BASELINE = 4` / `PANIC_BASELINE = 0` / `SKIP_BASELINE = 0` — **held (not rebaselined) across the rel-1.1.81 (`db6f8c68`) adoption**: closing 0088's `testinput10:218` re-exposes `testinput9:287` (`/(?i:A{1,}\6666666666)/` under `testinput9` = "8-bit library, `#forbid_utf`"), a 1↔1 swap. `testinput9:287` is a **permanent, by-design residual** — RGX is a Unicode/code-point engine with no 8-bit non-UTF mode, so it accepts `\666`=U+01B6 exactly as PCRE2-`,utf` does, while PCRE2's 8-bit library raises error 151; both are spec-correct for their model (not a 0088 reopen, not a PGEN bug, not an RGX defect — see Book → PCRE2 Conformance Residuals → Bucket 6 / Cluster 6A). RGX carries **zero known PGEN-tracked regressions**; the 4 residuals are all by-design / won't-fix. Any further regression fails CI; any improvement bumps the baselines in the same commit.
+
+Build note: `subs/pgen` no longer ships pre-generated parser artifacts (slice-5 release-engineering pivot, commit `0ed2b2ad`), so a fresh checkout has no parser until it is generated. The repo-root `make` / `make bootstrap` does this for you (recommended — it is the single command above). Under the hood it runs `make -C subs/pgen/rust SHELL=/bin/bash regex_parser_bootstrap` once after a fresh clone or after every PGEN submodule bump; the target is idempotent and uses the cold-clone bootstrap (`generated/ebnf.rs` seeded via the hand-written Rust EBNF frontend, no Perl required). True zero-step `cargo build` is not possible from RGX alone — cargo compiles the `pgen` dependency before RGX's own build script, and `subs/pgen` is read-only here; making `cargo build` work with no bootstrap would require PGEN's crate to self-generate via its own `build.rs` (a PGEN-upstream change).
+The quick benchmark capture path now keeps shared `latest.md` / `latest.tsv` plus mode-scoped `latest-quick.*` / `latest-full.*`, writes a cross-mode `overview.md` / `overview.tsv` that now also surfaces the newest shared quick/full label pair, writes label-paired quick/full summaries to `profile-pairs.md` / `profile-pairs.tsv`, writes rolling label-pair history to `profile-history.md` / `profile-history.tsv` with latest-pair improvement/regression callouts, writes rolling longitudinal summaries to `history-quick.*` / `history-full.*`, archives runs under `target/benchmark-trends/history/quick/` and `target/benchmark-trends/history/full/`, auto-compares only against the most recent archived capture from the same mode while still allowing an explicit archived baseline via `--compare-against` / `RGX_BENCHMARK_COMPARE_AGAINST`, accepts that explicit baseline as either a unix timestamp or `label:<text>`, and records an optional capture label via `--label` / `RGX_BENCHMARK_TREND_LABEL` that the wrapper defaults from the current git revision (`<short-sha>` or `<short-sha>-dirty`).
+
+That submodule-backed path now covers:
+- the default PGEN-backed RGX package test matrix (`rgx-core`, `rgx-cli`, `rgx-bench`, `rgx-wasm`)
+- `rgx-core` feature checks for `pgen-parser`, `lua`, `javascript`, `rhai`, and `wasm`
+- `rgx-cli` build/test coverage with `--features pgen-parser`
+- combined-language build coverage through `--features all-languages`
+- and it intentionally avoids the flakier umbrella `cargo test --workspace` path, which has shown intermittent hangs while rebuilding the submodule-backed `pgen` dependency
+
+Fresh clones should use `git clone --recurse-submodules ...` or run `git submodule update --init --recursive` before building.
+As of 2026-05-18 both `rdje/rgx` and the `rdje/pgen` submodule are **public**, so a plain `--recurse-submodules` clone works for everyone and hosted CI's default `GITHUB_TOKEN` can read `rdje/pgen`. The `RGX_SUBMODULES_TOKEN` secret is retained only as an optional fallback (the `.github/workflows/*` `token:` expressions prefer it when set, else fall back to `github.token`) and is no longer required.
+
+Tracing examples:
+```bash
+cargo run --bin rgx -- --verbosity low --trace-log "cat|dog" "I have a cat"
+cargo run --bin rgx -- --verbosity debug --trace-log "cat|dog" "I have a cat"
+cargo run --bin rgx -- --quiet --trace-log "cat|dog" "I have a cat"
+```
+
+CLI code-block examples:
+```bash
+cargo run --bin rgx --features javascript -- --mode safe --var env=prod '(?{js:vars.env === "prod"})' ""
+cargo run --bin rgx --features rhai -- --mode safe --show-details 'foo|cat(?{rhai:return 7;})' "cat"
+cargo run --bin rgx --features wasm -- --mode safe --wasm-module truthy=./truthy.wasm '(?{wasm:truthy:evaluate})' ""
+```
+
+Legacy CLI aliases:
+- `--debug` == `--verbosity high`
+- `--trace` == `--verbosity debug`
+
+## Current status snapshot
+Most mature path today is the VM/compiler pipeline in `rgx-core`, with public API and CLI integrated.
+Embedded code-block execution is now available on the public path for Lua, JavaScript, and Rhai code blocks in `ExecutionMode::Safe` / `ExecutionMode::Full` when the corresponding cargo feature is enabled, for registered wasm modules in `ExecutionMode::Safe` / `ExecutionMode::Full` with the `wasm` feature enabled, and for `native` callbacks in `ExecutionMode::Full` through the Rust API after registration on a compiled `Regex`.
+Host-provided execution variables can now be set on compiled regexes via `Regex::set_variable(...)` and are snapshotted into Lua, JavaScript, Rhai, native, and wasm code-block evaluation.
+The CLI now exposes that same host-variable slice through repeated `--var NAME=VALUE` flags for code-block-enabled patterns, can register named wasm modules through repeatable `--wasm-module NAME=PATH` when built with the `wasm` feature, and can surface top-level branch numbers plus winning-path `code_result` values through `--show-details` without changing the default plain-span output.
+Lua, JavaScript, and Rhai now all support either bare expression bodies or explicit `return ...` bodies on the shipped inline-language path.
+Lua and JavaScript source bodies now also expose `rgx.emit_numeric(...)` / `rgx.emit_replacement(...)`, while Rhai source bodies expose `emit_numeric(...)` / `emit_replacement(...)`, so statement-style code blocks can surface winning-path numeric or replacement payloads without relying only on direct return values.
+Lua, JavaScript, Rhai, native, and wasm code blocks can now also return first-slice richer non-boolean match metadata: `find_first` and `find_all` expose the last winning-path value through `MatchResult.code_result` / `CodeBlockValue`.
+The Rust API now also ships first dedicated numeric-result and replacement-oriented helpers on top of that slice: `find_first_numeric_with_code(...)` / `find_all_numeric_with_code(...)` collect winning-path `Numeric(f64)` payloads in match order, while `replace_first_with_code(...)` / `replace_all_with_code(...)` consume winning-path `Replacement(String)` payloads and preserve non-replacement matches unchanged.
+The current wasm slice keeps the stable `(?{wasm:module:function})` / exported `() -> i32` predicate surface while optionally exposing `rgx` imports for current position, current match start/end/length metadata, top-level branch number when available, full input text, numbered captures, named captures, host-provided variables, and initial richer-result emission through `emit_numeric(...)` / `emit_replacement(...)`.
+Unicode property classes, recursion/subroutine calls, numeric backreferences, and conditionals are now all shipped on the default regex path, including relative conditional-group references like `(?(+1)...)` / `(?(-1)...)`, recursion-condition forms like `(?(R)...)` / `(?(R1)...)` / `(?(R&name)...)`, and single-branch `DEFINE` blocks, plus compile-time rejection for invalid Unicode property names, invalid two-branch `DEFINE` forms, and missing recursive/backreference/conditional capture targets. The CLI now covers host variables, optional richer match-detail rendering, and file-backed wasm module registration for the shipped sandboxed code-block path, while native callback registration still remains Rust-API-only.
+The default parser path now drives a real PGEN-backed parser adapter in `rgx-core/src/parsing.rs`, with a one-constant local switch for forcing the recursive-descent reference backend when needed.
+Current PGEN regex integration review is intentionally constrained to the published `PGEN_REGEX_PARSER_INTEGRATION_CONTRACT.md` surface and its referenced contract documents.
+The current integration dependency is pinned as the `subs/pgen` submodule at PGEN **1.1.106** commit `d9d41c28` (integration contract **1.1.109**, adopted 2026-07-21; every PGEN-RGX report ever filed against this codebase — `0001`–`0091` — is closed). The integration consumes PGEN's typed-Json AST shapes per the regex parser book at `subs/pgen/docs/regex_parser_book/` — slices 11–42 of the typed-shape campaign progressively annotated `regex` / `pattern` / `concatenation` / `piece` / `quantifier` / `anchor` / `posix_class` / `backreference` (now with proper `\g`-bracket-form distinction per 0081) / typed `escape` / typed `atom` (capturing/named/atomic/branch-reset groups, lookarounds, alpha_lookaround, char_class, callout, code_block with preserved content per 0082, conditional, directive_verb, subroutine_call, inline_modifiers) / typed `class_item` (class_range with escape-typed endpoints, class_quoted_range_atom, class_quoted_literal). The walker dispatch backbone in `rgx-core/src/parsing.rs::convert_typed_atom_object` covers every typed shape; remaining un-typed branches fall through to the structural recursive-envelope walker.
+The quick benchmark validation slice is now a little more operationally useful: each local CI capture preserves mode-scoped benchmark history, keeps both shared and per-mode latest snapshots, writes an `overview.*` landing artifact that also exposes the newest shared quick/full label pair, writes rolling history summaries for the captured mode, writes `profile-pairs.*` summaries when quick/full captures share a label, writes `profile-history.*` so those shared-label quick/full pairs can be tracked longitudinally across revisions with latest-pair improvement/regression callouts, tags captures with a git-derived label by default, and summarizes ratio deltas without mixing quick-profile and full-profile baselines.
+Read SESSION_BOOTSTRAP.md and start from there.

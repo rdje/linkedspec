@@ -16,7 +16,7 @@ date: 2026-10-12
 status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind
@@ -168,3 +168,115 @@ without replacing the caller reference. Zero stays nonempty; native context,
 reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
 All17 sites from the original inventory now have their bounded repairs; full
 named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: perl-legacy-hash-kind-callback
+title: Native optional kind selection and private callback identity
+answers:
+  - "why does uniform binding target recognition depend on the first container"
+  - "which small optional kind helpers preserve actual tied map second selections"
+  - "can a tied bare_symbol_kind map select a symbolic call after a CODE check"
+  - "why must a non CODE optional kind selection remain opaque"
+  - "why did legacy hash receiver copy call an undefined package variable"
+  - "does legacy hash normalization use the injected bare_symbol_kind callback"
+  - "what happens when the legacy hash kind callback is missing or non CODE"
+  - "when does legacy hash normalization select its kind callback"
+  - "can the hash kind callback donate publication to its enclosing normalizer"
+  - "where is the legacy hash kind callback repair verified"
+date: 2026-10-12
+status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+tags: [perl, actionir, callbacks, receivers, hash, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: perl-legacy-hash-kind-callback
+title: Native optional kind selection and private callback identity
+answers:
+  - "why does uniform binding target recognition depend on the first container"
+  - "which small optional kind helpers preserve actual tied map second selections"
+  - "can a tied bare_symbol_kind map select a symbolic call after a CODE check"
+  - "why must a non CODE optional kind selection remain opaque"
+  - "why did legacy hash receiver copy call an undefined package variable"
+  - "does legacy hash normalization use the injected bare_symbol_kind callback"
+  - "what happens when the legacy hash kind callback is missing or non CODE"
+  - "when does legacy hash normalization select its kind callback"
+  - "can the hash kind callback donate publication to its enclosing normalizer"
+  - "where is the legacy hash kind callback repair verified"
+date: 2026-10-12
+status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+tags: [perl, actionir, callbacks, receivers, hash, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+The canonical public selector guard classifies each sentence or table paragraph locally. The private target-recognition table introduced at fc96936f and updated at61a73324 used retired public spellings without local historical context. The later rejection paragraph did not classify those earlier rows. The current book uses literal bag/record labels, verified directly through the real helper in both fresh-process orders; public authoring stays with bare typed bindings. The unchanged classifier and its population/count contract govern this correction.
+
+The composed executable-source guard distinguishes immutable private/negative probe bytes through HISTORICAL_DIAGNOSTIC_INPUTS in tools/check_executable_aggregate_selector_sources.py. Eight accepted .2/.4/.9 probe/assertion sources had14 unregistered selector-shaped lines. Their direct MethodLowering calls, original observation checks and explicit public rejection calls are now registered only at exact paths and SHA256s. The scanning algorithm is unchanged; copied paths, changed bytes and added selector lines reject in24 actual per-file controls. There is no public syntax allowance. The actual composed public gate then passes its original70-file/40-reference contract, source discovery/concurrency controls, five-backend retirement and capability admission.
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: perl-legacy-hash-kind-callback
+title: Native optional kind selection and private callback identity
+answers:
+  - "why does uniform binding target recognition depend on the first container"
+  - "which small optional kind helpers preserve actual tied map second selections"
+  - "can a tied bare_symbol_kind map select a symbolic call after a CODE check"
+  - "why must a non CODE optional kind selection remain opaque"
+  - "why did legacy hash receiver copy call an undefined package variable"
+  - "does legacy hash normalization use the injected bare_symbol_kind callback"
+  - "what happens when the legacy hash kind callback is missing or non CODE"
+  - "when does legacy hash normalization select its kind callback"
+  - "can the hash kind callback donate publication to its enclosing normalizer"
+  - "where is the legacy hash kind callback repair verified"
+date: 2026-10-12
+status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+tags: [perl, actionir, callbacks, receivers, hash, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: perl-legacy-hash-kind-callback
+title: Native optional kind selection and private callback identity
+answers:
+  - "why does uniform binding target recognition depend on the first container"
+  - "which small optional kind helpers preserve actual tied map second selections"
+  - "can a tied bare_symbol_kind map select a symbolic call after a CODE check"
+  - "why must a non CODE optional kind selection remain opaque"
+  - "why did legacy hash receiver copy call an undefined package variable"
+  - "does legacy hash normalization use the injected bare_symbol_kind callback"
+  - "what happens when the legacy hash kind callback is missing or non CODE"
+  - "when does legacy hash normalization select its kind callback"
+  - "can the hash kind callback donate publication to its enclosing normalizer"
+  - "where is the legacy hash kind callback repair verified"
+date: 2026-10-12
+status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+tags: [perl, actionir, callbacks, receivers, hash, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---

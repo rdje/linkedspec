@@ -1,0 +1,34 @@
+{
+  "result": "PASS",
+  "producer_sha256": "badabdb6c86893f08008935f753b2094b934d1d016c282fb910318962686ffd4",
+  "sources": {
+    "scripts/check_repo_root_path_portability.sh": "a29414d04f5a8457fb8d7962d3b261611de4bb6a928dcaf73d10d2a955784825",
+    "tools/check_public_aggregate_selector_surface.py": "3ea76c18e902f45456ff41b564150cb0e0cb5eebe0402b2c0a4364890f431c67",
+    "tools/check_executable_aggregate_selector_sources.py": "86075a472ddbb9c9a0f9020f4340a14d3feb5b949dc76947cd96304a3baaadaf",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/validation.py": "badabdb6c86893f08008935f753b2094b934d1d016c282fb910318962686ffd4"
+  },
+  "rows": [
+    {
+      "command": [
+        "bash",
+        "scripts/check_repo_root_path_portability.sh"
+      ],
+      "returncode": 0,
+      "stdout_base64": "cmVwby1yb290LXBhdGgtcG9ydGFiaWxpdHk6IE9LICh0cmFja2VkIHBhcmVudCB0ZXh0OyAxNCBjbGFzc2lmaWVyIGNhc2VzOyA1IHByaW1hcnkgYW5jaG9ycykK",
+      "stderr_base64": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_public_aggregate_selector_surface.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "ZXhlY3V0YWJsZS1hZ2dyZWdhdGUtc2VsZWN0b3ItY29uY3VycmVuY3k6IE9LICgzIHN0YWdnZXJlZCBjb25jdXJyZW50IHNjYW5zIHNlcmlhbGl6ZWQ7IHJlcG9zaXRvcnktcm9vdCBwcm9iZXMgY2xlYW5lZCkKZXhlY3V0YWJsZS1hZ2dyZWdhdGUtc2VsZWN0b3Itc2NhbjogT0sgKDAgcG9zaXRpdmU7IDY5IGNsYXNzaWZpZWQgaW1wbGVtZW50YXRpb24vcmVjb2duaXRpb24gb2NjdXJyZW5jZXM7IHNlcmlhbGl6ZWQgdHJhY2tlZCt1bnRyYWNrZWQgZGlzY292ZXJ5IHNlbGYtdGVzdCBwYXNzZWQpCmFnZ3JlZ2F0ZS1zZWxlY3Rvci1yZXRpcmVtZW50OiBPSyAoNSBiYWNrZW5kczsgNiBpbnZhbGlkIHNlbGVjdG9yczsgOCByZXRhaW5lZCBjbGFzc2VzOyBydW50aW1lIGNvbXBhdGliaWxpdHkgMCkKY2FwYWJpbGl0eS1jb25mb3JtYW5jZTogT0sgKHNjaGVtYSB2MjsgMjAgY2FwYWJpbGl0aWVzOyBiYWNrZW5kIHN0YXRlcyBwYXNzPTEwMCBwYXJ0aWFsPTAgZ2FwPTA7IDEgZXhjbHVzaW9uczsgMTkgZ292ZXJuYW5jZSBtdXRhdGlvbnM7IDIgbXV0YXRpb24gY2FwYWJpbGl0aWVzOyAxNiBtdXRhdGlvbi1hZG1pc3Npb24gbXV0YXRpb25zOyAxNyBtdXRhdGlvbi1yZWN1cnJpbmcgbXV0YXRpb25zOyA0IG11dGF0aW9uLXB1YmxpYy1nYXRlIG11dGF0aW9uczsgMTIgZ292ZXJuZWQgcHJvamVjdGlvbnM7IDYgcHVibGljIG11dGF0aW9uczsgNCBsYW5ndWFnZS1zdXJmYWNlIG11dGF0aW9uczsgMTUgZW50cnkvY3Vyc29yIG11dGF0aW9ucykKcHVibGljLWFnZ3JlZ2F0ZS1zZWxlY3Rvci1zdXJmYWNlOiBPSyAoNzAgcHVibGljIGZpbGVzOyA0MCBjbGFzc2lmaWVkIHJlbW92ZWQvaGlzdG9yeSByZWZlcmVuY2VzOyAwIGN1cnJlbnQgZXhhbXBsZXM7IDUgbWlncmF0aW9uIGNvbnRyYXN0czsgMTEgY29udHJhc3QgbXV0YXRpb25zOyBjYXBhYmlsaXR5IGFkbWl0dGVkKQo=",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Actual separate focused command channels. Exact portability serializer byte controls and complete public70-file population are independently retained by current review and original177-input supplied replay. Full composed-project dependencies require the separate exact staged canonical receipt; this is no new backend admission."
+}

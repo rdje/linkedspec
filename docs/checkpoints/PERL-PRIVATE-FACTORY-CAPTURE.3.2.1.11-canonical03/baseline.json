@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "RmluYWwgS25vd2xlZGdlIHB1YmxpY2F0aW9uIFBBU1M6IDMzNyBsaXZlIGlucHV0czsgNzkzMjkgYnl0ZXMK",
+  "stderr_base64": ""
+}

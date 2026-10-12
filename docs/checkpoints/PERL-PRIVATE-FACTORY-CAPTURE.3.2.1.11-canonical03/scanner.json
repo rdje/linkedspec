@@ -1,0 +1,263 @@
+{
+  "result": "PASS",
+  "producer_sha256": "c5082cebbb7365020167566f258740543f4f9a388e3088d4f95e812eac7b5216",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t": "50bb888f666f12b1ac1b6afb1e223b12a2a6328fe8d338593e0b44d74adc8f15",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py": "fc566e989e964e4d71889a62480fbe6c42682dd84c2cdfc66339c7b428da6226",
+    "t/actionir_small_kind_capture.t": "050ea5f3080c8e3a79eb8004304a947ab483ad9340a0b55abbb58f558f8d5b73",
+    "t/actionir_small_kind_probe.pl": "c68299cd8fb21b1ccf79124a7bbdc74d080ec0e3a24a8bd4ac606f4d66398aa4",
+    "t/actionir_small_kind_symbolic_probe.pl": "8a7fd07c525a028f5d691a9a2b934f18c3791de83a8ce3ed682e36d469998033",
+    "t/actionir_source_assignment_kind_capture.t": "cff593511e74933836c2dd0af2917e14a33bb3ab6421853a72d6de1182b1f872",
+    "t/actionir_source_assignment_kind_probe.pl": "fcc8cc26c86597dc40d64df459e2d61f12849c9d84d954b8efbcd5f85f6899fa",
+    "t/actionir_uniform_target_probe.pl": "874b0be404db0d8d5d55c58186ecc5eac1b9eb228d12b542b2ac36a07f08a536",
+    "tools/check_executable_aggregate_selector_sources.py": "86075a472ddbb9c9a0f9020f4340a14d3feb5b949dc76947cd96304a3baaadaf",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/scanner-before.py": "13192919a930fee844103bbca5a7e88194540c4d98844337f0be7f790c37786e",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/scanner.py": "c5082cebbb7365020167566f258740543f4f9a388e3088d4f95e812eac7b5216",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/scanner-addition.txt": "2f094b0922a03256e633a6e857290b1e8cbdbab6abfcc43b1e080f2214d4ca02",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/scanner-inputs.json.gz": "c1cbb784344030479879a4ce9313ea0dcce3cad80a5717238129989d0665df1e"
+  },
+  "old": {
+    "positive": [
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t:151:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py:83:for owner, line, caller in (('read', 6883, 'item'), ('assign', 7156, 'array(item)')):",
+      "t/actionir_small_kind_capture.t:157:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',",
+      "t/actionir_small_kind_probe.pl:37:: $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item',",
+      "t/actionir_small_kind_probe.pl:203:['normalized-empty', {normalized => []}], ['copy-array', {args => ['array(x)']}],",
+      "t/actionir_small_kind_probe.pl:204:['copy-hash', {args => ['hash(x)']}], ['copy-complex', {args => ['complex value']}],",
+      "t/actionir_small_kind_probe.pl:209:push @cases, ['bare-name', {input => 'item'}], ['wrong-container', {input => 'hash(item)'}],",
+      "t/actionir_small_kind_probe.pl:211:['spaced-name', {input => 'array ( item )'}], ['compound-target', {input => 'array(item.other)'}];",
+      "t/actionir_small_kind_symbolic_probe.pl:28:my $input = $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item';",
+      "t/actionir_source_assignment_kind_capture.t:82:is($callbacks{'assign/effect'}{caller_after}, 'array(item)', 'assignment name mutation leaves caller target unchanged');",
+      "t/actionir_source_assignment_kind_probe.pl:50:input => exists($options->{input}) ? $options->{input} : $owner eq 'read' ? 'item' : 'array(item)',",
+      "t/actionir_source_assignment_kind_probe.pl:199:['trim-mutation', {trim_mutation => $which eq 'read' ? 'changed' : 'hash(changed)'}],",
+      "t/actionir_source_assignment_kind_probe.pl:207:['hash-target', {input => 'hash(item)'}], ['wrapper-spaces', {input => ' hash ( item ) '}],",
+      "t/actionir_uniform_target_probe.pl:70:for my $action ('push(array(item), \"x\")', 'set_key(hash(item), \"key\", \"x\")',"
+    ],
+    "classified": 0
+  },
+  "current": {
+    "positive": [],
+    "classified": 14
+  },
+  "rows": [
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t",
+      "name": "copied-path",
+      "positive": [
+        "copy-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t:151:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t",
+      "name": "changed-byte",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t:151:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t",
+      "name": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t:151:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-fixture-first.t:201:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py",
+      "name": "copied-path",
+      "positive": [
+        "copy-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py:83:for owner, line, caller in (('read', 6883, 'item'), ('assign', 7156, 'array(item)')):"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py",
+      "name": "changed-byte",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py:83:for owner, line, caller in (('read', 6883, 'item'), ('assign', 7156, 'array(item)')):"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py",
+      "name": "added-selector",
+      "positive": [
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py:83:for owner, line, caller in (('read', 6883, 'item'), ('assign', 7156, 'array(item)')):",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-native-review.py:108:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_capture.t",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_small_kind_capture.t:157:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_capture.t",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_small_kind_capture.t:157:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_capture.t",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_small_kind_capture.t:157:is($row->{caller_after}, $row->{owner} eq 'infer' ? 'copy(item)' : $row->{owner} eq 'target' ? 'array(item)' : 'item',",
+        "t/actionir_small_kind_capture.t:207:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_probe.pl",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_small_kind_probe.pl:37:: $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item',",
+        "copy-actionir_small_kind_probe.pl:203:['normalized-empty', {normalized => []}], ['copy-array', {args => ['array(x)']}],",
+        "copy-actionir_small_kind_probe.pl:204:['copy-hash', {args => ['hash(x)']}], ['copy-complex', {args => ['complex value']}],",
+        "copy-actionir_small_kind_probe.pl:209:push @cases, ['bare-name', {input => 'item'}], ['wrong-container', {input => 'hash(item)'}],",
+        "copy-actionir_small_kind_probe.pl:211:['spaced-name', {input => 'array ( item )'}], ['compound-target', {input => 'array(item.other)'}];"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_probe.pl",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_small_kind_probe.pl:37:: $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item',",
+        "t/actionir_small_kind_probe.pl:203:['normalized-empty', {normalized => []}], ['copy-array', {args => ['array(x)']}],",
+        "t/actionir_small_kind_probe.pl:204:['copy-hash', {args => ['hash(x)']}], ['copy-complex', {args => ['complex value']}],",
+        "t/actionir_small_kind_probe.pl:209:push @cases, ['bare-name', {input => 'item'}], ['wrong-container', {input => 'hash(item)'}],",
+        "t/actionir_small_kind_probe.pl:211:['spaced-name', {input => 'array ( item )'}], ['compound-target', {input => 'array(item.other)'}];"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_probe.pl",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_small_kind_probe.pl:37:: $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item',",
+        "t/actionir_small_kind_probe.pl:203:['normalized-empty', {normalized => []}], ['copy-array', {args => ['array(x)']}],",
+        "t/actionir_small_kind_probe.pl:204:['copy-hash', {args => ['hash(x)']}], ['copy-complex', {args => ['complex value']}],",
+        "t/actionir_small_kind_probe.pl:209:push @cases, ['bare-name', {input => 'item'}], ['wrong-container', {input => 'hash(item)'}],",
+        "t/actionir_small_kind_probe.pl:211:['spaced-name', {input => 'array ( item )'}], ['compound-target', {input => 'array(item.other)'}];",
+        "t/actionir_small_kind_probe.pl:258:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_symbolic_probe.pl",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_small_kind_symbolic_probe.pl:28:my $input = $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item';"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_symbolic_probe.pl",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_small_kind_symbolic_probe.pl:28:my $input = $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item';"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_small_kind_symbolic_probe.pl",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_small_kind_symbolic_probe.pl:28:my $input = $owner eq 'infer' ? 'copy(item)' : $owner eq 'target' ? 'array(item)' : 'item';",
+        "t/actionir_small_kind_symbolic_probe.pl:81:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_capture.t",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_source_assignment_kind_capture.t:82:is($callbacks{'assign/effect'}{caller_after}, 'array(item)', 'assignment name mutation leaves caller target unchanged');"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_capture.t",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_source_assignment_kind_capture.t:82:is($callbacks{'assign/effect'}{caller_after}, 'array(item)', 'assignment name mutation leaves caller target unchanged');"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_capture.t",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_source_assignment_kind_capture.t:82:is($callbacks{'assign/effect'}{caller_after}, 'array(item)', 'assignment name mutation leaves caller target unchanged');",
+        "t/actionir_source_assignment_kind_capture.t:85:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_probe.pl",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_source_assignment_kind_probe.pl:50:input => exists($options->{input}) ? $options->{input} : $owner eq 'read' ? 'item' : 'array(item)',",
+        "copy-actionir_source_assignment_kind_probe.pl:199:['trim-mutation', {trim_mutation => $which eq 'read' ? 'changed' : 'hash(changed)'}],",
+        "copy-actionir_source_assignment_kind_probe.pl:207:['hash-target', {input => 'hash(item)'}], ['wrapper-spaces', {input => ' hash ( item ) '}],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_probe.pl",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_source_assignment_kind_probe.pl:50:input => exists($options->{input}) ? $options->{input} : $owner eq 'read' ? 'item' : 'array(item)',",
+        "t/actionir_source_assignment_kind_probe.pl:199:['trim-mutation', {trim_mutation => $which eq 'read' ? 'changed' : 'hash(changed)'}],",
+        "t/actionir_source_assignment_kind_probe.pl:207:['hash-target', {input => 'hash(item)'}], ['wrapper-spaces', {input => ' hash ( item ) '}],"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_source_assignment_kind_probe.pl",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_source_assignment_kind_probe.pl:50:input => exists($options->{input}) ? $options->{input} : $owner eq 'read' ? 'item' : 'array(item)',",
+        "t/actionir_source_assignment_kind_probe.pl:199:['trim-mutation', {trim_mutation => $which eq 'read' ? 'changed' : 'hash(changed)'}],",
+        "t/actionir_source_assignment_kind_probe.pl:207:['hash-target', {input => 'hash(item)'}], ['wrapper-spaces', {input => ' hash ( item ) '}],",
+        "t/actionir_source_assignment_kind_probe.pl:252:array(new_probe);"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_uniform_target_probe.pl",
+      "name": "copied-path",
+      "positive": [
+        "copy-actionir_uniform_target_probe.pl:70:for my $action ('push(array(item), \"x\")', 'set_key(hash(item), \"key\", \"x\")',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_uniform_target_probe.pl",
+      "name": "changed-byte",
+      "positive": [
+        "t/actionir_uniform_target_probe.pl:70:for my $action ('push(array(item), \"x\")', 'set_key(hash(item), \"key\", \"x\")',"
+      ],
+      "classified": 0
+    },
+    {
+      "path": "t/actionir_uniform_target_probe.pl",
+      "name": "added-selector",
+      "positive": [
+        "t/actionir_uniform_target_probe.pl:70:for my $action ('push(array(item), \"x\")', 'set_key(hash(item), \"key\", \"x\")',",
+        "t/actionir_uniform_target_probe.pl:94:array(new_probe);"
+      ],
+      "classified": 0
+    }
+  ],
+  "scope": "Existing immutable diagnostic mechanism only, eight exact private/negative source paths/full bytes.14 original positive lines become classified;24 path/byte/new-selector mutations still reject and each restoration passes. Whole scanner source differs only by the retained exact dictionary addition. Full repository scan remains a separate focused/canonical gate."
+}

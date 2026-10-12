@@ -25,7 +25,7 @@ date: 2026-10-12
 status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -253,3 +253,147 @@ without replacing the caller reference. Zero stays nonempty; native context,
 reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
 All17 sites from the original inventory now have their bounded repairs; full
 named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: perl-method-trim-capture
+title: Method dependency bindings and the compiled remaining-call inventory
+answers:
+  - "do formal dot trim callbacks receive writable substrings of a shared scalar"
+  - "does call trim execute before validating an empty receiver trim result"
+  - "can formal trim callbacks be symbolic or already bound"
+  - "when does the main method helper reselect its inner kind callback"
+  - "can a known kind callback donate a parent emission packet"
+  - "which MethodLowering required trim calls have private emission bindings"
+  - "can an opaque trim callback donate publication to a method tag or switch case"
+  - "does MethodLowering private dependency binding preserve native aliases and contexts"
+  - "what is the native RED GREEN proof for MethodLowering trim isolation"
+  - "why did the MethodLowering retention source fault stop its first capture harness"
+  - "what remains after MethodLowering required resolver and package flow isolation"
+  - "how many remaining MethodLowering dependency ingress sites are compiled"
+  - "why are two bare_symbol_kind names different lexical bindings"
+  - "why does the callback source regex overcount generated Perl strings"
+  - "where is the inline dropped value required trim gap owned"
+  - "which readonly command verifies the MethodLowering compiled call census"
+  - "why does dropped value trim read a tied dependency map twice"
+  - "does dropped value trim compare lowering with the returned slot after effects"
+  - "which readonly command verifies inline required dropped value trim isolation"
+date: 2026-10-12
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
+tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: perl-method-trim-capture
+title: Method dependency bindings and the compiled remaining-call inventory
+answers:
+  - "do formal dot trim callbacks receive writable substrings of a shared scalar"
+  - "does call trim execute before validating an empty receiver trim result"
+  - "can formal trim callbacks be symbolic or already bound"
+  - "when does the main method helper reselect its inner kind callback"
+  - "can a known kind callback donate a parent emission packet"
+  - "which MethodLowering required trim calls have private emission bindings"
+  - "can an opaque trim callback donate publication to a method tag or switch case"
+  - "does MethodLowering private dependency binding preserve native aliases and contexts"
+  - "what is the native RED GREEN proof for MethodLowering trim isolation"
+  - "why did the MethodLowering retention source fault stop its first capture harness"
+  - "what remains after MethodLowering required resolver and package flow isolation"
+  - "how many remaining MethodLowering dependency ingress sites are compiled"
+  - "why are two bare_symbol_kind names different lexical bindings"
+  - "why does the callback source regex overcount generated Perl strings"
+  - "where is the inline dropped value required trim gap owned"
+  - "which readonly command verifies the MethodLowering compiled call census"
+  - "why does dropped value trim read a tied dependency map twice"
+  - "does dropped value trim compare lowering with the returned slot after effects"
+  - "which readonly command verifies inline required dropped value trim isolation"
+date: 2026-10-12
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
+tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: perl-method-trim-capture
+title: Method dependency bindings and the compiled remaining-call inventory
+answers:
+  - "do formal dot trim callbacks receive writable substrings of a shared scalar"
+  - "does call trim execute before validating an empty receiver trim result"
+  - "can formal trim callbacks be symbolic or already bound"
+  - "when does the main method helper reselect its inner kind callback"
+  - "can a known kind callback donate a parent emission packet"
+  - "which MethodLowering required trim calls have private emission bindings"
+  - "can an opaque trim callback donate publication to a method tag or switch case"
+  - "does MethodLowering private dependency binding preserve native aliases and contexts"
+  - "what is the native RED GREEN proof for MethodLowering trim isolation"
+  - "why did the MethodLowering retention source fault stop its first capture harness"
+  - "what remains after MethodLowering required resolver and package flow isolation"
+  - "how many remaining MethodLowering dependency ingress sites are compiled"
+  - "why are two bare_symbol_kind names different lexical bindings"
+  - "why does the callback source regex overcount generated Perl strings"
+  - "where is the inline dropped value required trim gap owned"
+  - "which readonly command verifies the MethodLowering compiled call census"
+  - "why does dropped value trim read a tied dependency map twice"
+  - "does dropped value trim compare lowering with the returned slot after effects"
+  - "which readonly command verifies inline required dropped value trim isolation"
+date: 2026-10-12
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
+tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: perl-method-trim-capture
+title: Method dependency bindings and the compiled remaining-call inventory
+answers:
+  - "do formal dot trim callbacks receive writable substrings of a shared scalar"
+  - "does call trim execute before validating an empty receiver trim result"
+  - "can formal trim callbacks be symbolic or already bound"
+  - "when does the main method helper reselect its inner kind callback"
+  - "can a known kind callback donate a parent emission packet"
+  - "which MethodLowering required trim calls have private emission bindings"
+  - "can an opaque trim callback donate publication to a method tag or switch case"
+  - "does MethodLowering private dependency binding preserve native aliases and contexts"
+  - "what is the native RED GREEN proof for MethodLowering trim isolation"
+  - "why did the MethodLowering retention source fault stop its first capture harness"
+  - "what remains after MethodLowering required resolver and package flow isolation"
+  - "how many remaining MethodLowering dependency ingress sites are compiled"
+  - "why are two bare_symbol_kind names different lexical bindings"
+  - "why does the callback source regex overcount generated Perl strings"
+  - "where is the inline dropped value required trim gap owned"
+  - "which readonly command verifies the MethodLowering compiled call census"
+  - "why does dropped value trim read a tied dependency map twice"
+  - "does dropped value trim compare lowering with the returned slot after effects"
+  - "which readonly command verifies inline required dropped value trim isolation"
+date: 2026-10-12
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
+tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---

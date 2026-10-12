@@ -1,0 +1,7 @@
+{
+  "result": "FAIL",
+  "producer": "registration.py",
+  "outer_status": "session completion unavailable after compaction; retained command traceback ends in KeyError",
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjExL3JlZ2lzdHJhdGlvbi5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICByZWplY3RlZCgnb3JpZ2luYWwtc3RvcmFnZS1yZWdpc3RyYXRpb24nLCBiZWZvcmUudmVyaWZ5X3Blcmxfc3RvcmFnZV9ldm9sdXRpb24sIFNUT1JBR0UsIHN0b3JhZ2UsIG1pbGVzdG9uZVtTVE9SQUdFXSwgJ1Blcmwgc3RvcmFnZSByZWdpc3RyYXRpb24gbWlzbWF0Y2g6JykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfn5+fn5+fn5+Xl5eXl5eXl5eCktleUVycm9yOiAndG9vbHMvdGVzdF9wZXJsX3Byb2plY3RfZGF0YV9zdG9yYWdlLnNoJwo=",
+  "cause": "Storage source is absent from the selected milestone current_source_hashes; distinct final producer reads its historical hash from the actual CI-only full recovery report."
+}

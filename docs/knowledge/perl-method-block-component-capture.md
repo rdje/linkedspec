@@ -18,7 +18,7 @@ date: 2026-10-12
 status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -125,3 +125,119 @@ without replacing the caller reference. Zero stays nonempty; native context,
 reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
 All17 sites from the original inventory now have their bounded repairs; full
 named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: perl-method-block-component-capture
+title: Block component and AST pipeline callbacks retain native references and fallbacks
+answers:
+  - "when are the six named block helper references selected"
+  - "do selected block helpers receive writable local trimmed and deps slots"
+  - "does replacing a named block helper during iteration affect the current call"
+  - "which MethodLowering required calls have private emission bindings"
+  - "can block component side effect dependencies donate nested publication"
+  - "does an undefined primitive or direct access lowerer result still permit fallback"
+  - "can an undefined block side effect parser still reach component fallback"
+  - "why is the block component local lower_flow_composite_expr binding validated but never directly invoked"
+  - "does private block component binding preserve actual reference return identity"
+  - "what is the native RED GREEN proof for block component dependency capture"
+  - "does the optional AST pipeline callback mutate the actual node source and span slots"
+  - "how many map reads precede the optional AST pipeline CODE guard"
+date: 2026-10-12
+status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
+tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: perl-method-block-component-capture
+title: Block component and AST pipeline callbacks retain native references and fallbacks
+answers:
+  - "when are the six named block helper references selected"
+  - "do selected block helpers receive writable local trimmed and deps slots"
+  - "does replacing a named block helper during iteration affect the current call"
+  - "which MethodLowering required calls have private emission bindings"
+  - "can block component side effect dependencies donate nested publication"
+  - "does an undefined primitive or direct access lowerer result still permit fallback"
+  - "can an undefined block side effect parser still reach component fallback"
+  - "why is the block component local lower_flow_composite_expr binding validated but never directly invoked"
+  - "does private block component binding preserve actual reference return identity"
+  - "what is the native RED GREEN proof for block component dependency capture"
+  - "does the optional AST pipeline callback mutate the actual node source and span slots"
+  - "how many map reads precede the optional AST pipeline CODE guard"
+date: 2026-10-12
+status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
+tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: perl-method-block-component-capture
+title: Block component and AST pipeline callbacks retain native references and fallbacks
+answers:
+  - "when are the six named block helper references selected"
+  - "do selected block helpers receive writable local trimmed and deps slots"
+  - "does replacing a named block helper during iteration affect the current call"
+  - "which MethodLowering required calls have private emission bindings"
+  - "can block component side effect dependencies donate nested publication"
+  - "does an undefined primitive or direct access lowerer result still permit fallback"
+  - "can an undefined block side effect parser still reach component fallback"
+  - "why is the block component local lower_flow_composite_expr binding validated but never directly invoked"
+  - "does private block component binding preserve actual reference return identity"
+  - "what is the native RED GREEN proof for block component dependency capture"
+  - "does the optional AST pipeline callback mutate the actual node source and span slots"
+  - "how many map reads precede the optional AST pipeline CODE guard"
+date: 2026-10-12
+status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
+tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: perl-method-block-component-capture
+title: Block component and AST pipeline callbacks retain native references and fallbacks
+answers:
+  - "when are the six named block helper references selected"
+  - "do selected block helpers receive writable local trimmed and deps slots"
+  - "does replacing a named block helper during iteration affect the current call"
+  - "which MethodLowering required calls have private emission bindings"
+  - "can block component side effect dependencies donate nested publication"
+  - "does an undefined primitive or direct access lowerer result still permit fallback"
+  - "can an undefined block side effect parser still reach component fallback"
+  - "why is the block component local lower_flow_composite_expr binding validated but never directly invoked"
+  - "does private block component binding preserve actual reference return identity"
+  - "what is the native RED GREEN proof for block component dependency capture"
+  - "does the optional AST pipeline callback mutate the actual node source and span slots"
+  - "how many map reads precede the optional AST pipeline CODE guard"
+date: 2026-10-12
+status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
+tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---

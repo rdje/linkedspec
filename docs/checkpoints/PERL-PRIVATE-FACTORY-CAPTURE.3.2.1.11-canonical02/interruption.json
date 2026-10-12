@@ -1,0 +1,11 @@
+{
+  "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11",
+  "producer_sha256": "7781648e3f0854b6c4c2ee1d3d435ffbe2ae3405384a3a5c9a2c2e3fcdebcaa3",
+  "actual_tool_session": 1732,
+  "actual_returncode": 130,
+  "candidate_sha256": "d9e4695c7dec1199878be7f339b067790cbab6b57712bbcbc0c4e16047fd3b13",
+  "candidate_bytes": 29708014,
+  "log_sha256": "05be077e698660828900a9a5848708ecfa0ff85301d5123eedf49698135076c2",
+  "log_bytes": 6875785,
+  "reason": "Deliberately stopped the exact owned CI process group after discovering TOOLBOX.md still described28 storage owners. No full canonical PASS or receipt is claimed. Correct the unbound documentation description and rerun the exact final candidate; focused producers and observations remain unchanged."
+}

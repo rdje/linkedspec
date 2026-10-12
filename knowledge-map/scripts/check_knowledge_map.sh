@@ -4,7 +4,8 @@
 # Part of the Knowledge Map (KM) bundle. See ../KNOWLEDGE_MAP_ARCHITECTURE.md.
 # Exits NONZERO on any violation (wire it into pre-commit + CI). Checks:
 #   1. every KM fact (front-matter has `answers:`) carries the required fields
-#      (id, title, date, and at least one of evidence/reverify);
+#      (id, title, date, and at least one of evidence/reverify), and block-list
+#      items follow a key with an empty value rather than a scalar/inline list;
 #   2. fact ids are unique;
 #   3. the committed map equals a fresh regeneration (derive-and-diff — no drift possible).
 # Portable: POSIX shell + awk (BSD or GNU).
@@ -65,14 +66,20 @@ for d in $KM_SCAN_DIRS; do
   [ -d "$d" ] || continue
   while IFS= read -r f; do
     res="$(awk '
-      BEGIN { infm=0; started=0; hasans=0; curkey="" }
+      BEGIN { infm=0; started=0; hasans=0; anskey=0; curkey=""; orphan="" }
       NR==1 { if ($0 ~ /^---[ \t]*$/) { infm=1; started=1; next } }
       infm==1 && $0 ~ /^---[ \t]*$/ { infm=0; next }
       infm==1 {
-        if ($0 ~ /^[ \t]+-[ \t]+/) { if (curkey=="answers") hasans=1; next }
+        if ($0 ~ /^[ \t]+-[ \t]+/) {
+          if (curkey=="") orphan=orphan (orphan!="" ? ", " : "") NR
+          if (curkey=="answers") hasans=1
+          next
+        }
         if (match($0, /^[A-Za-z_][A-Za-z0-9_]*:/)) {
           key=substr($0,1,RLENGTH-1); rest=substr($0,RLENGTH+1)
-          gsub(/^[ \t]+/,"",rest); gsub(/[ \t]+$/,"",rest); curkey=key
+          gsub(/^[ \t]+/,"",rest); gsub(/[ \t]+$/,"",rest)
+          curkey=(rest=="" ? key : "")
+          if (key=="answers") anskey=1
           if (key=="answers" && rest ~ /\[.*[A-Za-z0-9].*\]/) hasans=1
           if (key=="id")       { gsub(/^"|"$/,"",rest); vid=rest }
           if (key=="title")    okt=1
@@ -83,21 +90,25 @@ for d in $KM_SCAN_DIRS; do
         next
       }
       END {
-        if (!started || !hasans) { print "NOTFACT"; exit }
+        # Keep malformed answers-plus-list headers visible to validation even
+        # though their detached items cannot constitute a valid answers list.
+        if (!started || (!hasans && !(anskey && orphan!=""))) { print "NOTFACT"; exit }
         miss=""
         if (vid=="") miss=miss " id"
         if (!okt)    miss=miss " title"
         if (!okd)    miss=miss " date"
         if (!oke && !okr) miss=miss " evidence-or-reverify"
-        print "FACT\t" vid "\t" miss
+        print "FACT\t" vid "\t" miss "\t" orphan
       }
     ' "$f")"
     case "$res" in
       FACT*)
         vid="$(printf '%s' "$res" | cut -f2)"
         miss="$(printf '%s' "$res" | cut -f3)"
+        orphan="$(printf '%s' "$res" | cut -f4)"
         [ -n "$vid" ] && printf '%s\t%s\n' "$vid" "$f" >> "$ids_file"
         [ -n "$(printf '%s' "$miss" | tr -d ' ')" ] && note "$f: KM fact missing required front-matter:$miss"
+        [ -n "$orphan" ] && note "$f: KM fact front-matter orphan list item at line $orphan (requires a key with an empty value)"
         ;;
       *) : ;;  # NOTFACT or empty — ignore non-fact markdown
     esac

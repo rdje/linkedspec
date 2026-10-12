@@ -112,12 +112,11 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current target-recognition and callback proof entrypoint checks its focused
-regressions, preserves earlier accepted publications and validates the current
-book:
+The current verification entrypoint checks Knowledge header regression evidence,
+preserves the accepted callback publication and validates the current book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
@@ -133,6 +132,43 @@ changed only clone FETCH order across unchanged-source runs. Its distinct sorted
 iterator input was observed twice before regression expectations or production
 edits. The reader checks complete native rows and byte-identical recurrence;
 it does not normalize or replace the original unordered observations.
+
+### Knowledge header lists
+
+Fact cards use a small documented YAML subset. A block list starts after a key
+whose value is empty; a scalar or inline list completes that key. For example:
+
+```yaml
+answers:
+  - where is capture authority checked
+tags: [parser, capture]
+reverify: printf ok
+```
+
+Adding an indented list item after that `reverify` scalar is malformed:
+
+```yaml
+reverify: printf ok
+  - another command
+```
+
+The Knowledge checker rejects the orphan item and names its line number. It also
+rejects a scalar `answers` field followed by detached questions, keeping that
+mistake visible to validation. Ordinary documents without a fact list remain
+outside the Knowledge Map.
+
+Run the gate and its public-interface regression fixture with:
+
+```bash
+bash knowledge-map/scripts/check_knowledge_map.sh
+bash tools/project_data_run.sh prove t/knowledge_map_header_lists.t
+```
+
+Canonical CI runs the fixture. Regenerating the derived index and validating its
+source headers serve separate purposes; both are required. The checker covers
+required fields, list association, unique IDs and map synchronization. The
+constrained format and its limits are documented in
+`knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`.
 
 ## Public book
 
@@ -513,3 +549,5 @@ publication, all490 bindings and its actual readonly baseline before changing
 bound inputs. Rechecking that historical publication requires its accepted
 `61a73324` logical inputs. Its original producers and observations remain exact;
 the current proof uses a separate corrected parent-packet oracle and reviewer.
+
+The local CI runner selects the Knowledge header fixture and verifies that its source is tracked. Historical artifact audits admit that exact insertion by reversing it and comparing the complete original runner bytes. The managed-storage inventory also includes the fixture: its temporary files must use repository-derived scratch. Missing or duplicated registrations, changed commands, wrong allocator names and unrelated source edits fail the compatibility checks. The current review retains the first candidate and its observations, then checks the final source and documentation separately.

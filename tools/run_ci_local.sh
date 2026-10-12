@@ -235,6 +235,10 @@ require_command julia
 log "running the general doctrine enforcer (DOCTRINE_ENFORCEMENT.md §5/§7 — E4 backstop): the registry driver runs every registered check (memory-architecture, Knowledge Map, ...)"
 bash "$REPO_ROOT/scripts/check_doctrines.sh"
 
+log "checking Knowledge header list association through the public generator/checker"
+require_tracked_file t/knowledge_map_header_lists.t
+PERL5LIB= prove t/knowledge_map_header_lists.t
+
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh

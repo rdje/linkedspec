@@ -17,7 +17,7 @@ date: 2026-10-12
 status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The
@@ -147,3 +147,115 @@ without replacing the caller reference. Zero stays nonempty; native context,
 reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
 All17 sites from the original inventory now have their bounded repairs; full
 named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: perl-method-ast-call-capture
+title: AST call callbacks retain native validation, aliases and separate publication
+answers:
+  - "which AST call statement callbacks have private emission boundaries"
+  - "when does AST call lowering validate hash key array and primitive callbacks"
+  - "does AST call normalization retain the source helper argument ARRAY"
+  - "does AST call trim retain original array slots versus scoped copies"
+  - "do AST call extractors and primitive callbacks receive local scalar copies"
+  - "does tagged return payload lowering retain actual array slice aliases"
+  - "what native RED GREEN proof covers AST call statement dependencies"
+  - "where are the original280 guarded hash key inputs preserved"
+  - "why do tied AST pipeline clone FETCH traces need deterministic probe iteration"
+  - "does optional AST assignment keep the normalized argument ARRAY slots"
+  - "can an AST assignment fallback thunk inherit a registered helper identity"
+date: 2026-10-12
+status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
+tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: perl-method-ast-call-capture
+title: AST call callbacks retain native validation, aliases and separate publication
+answers:
+  - "which AST call statement callbacks have private emission boundaries"
+  - "when does AST call lowering validate hash key array and primitive callbacks"
+  - "does AST call normalization retain the source helper argument ARRAY"
+  - "does AST call trim retain original array slots versus scoped copies"
+  - "do AST call extractors and primitive callbacks receive local scalar copies"
+  - "does tagged return payload lowering retain actual array slice aliases"
+  - "what native RED GREEN proof covers AST call statement dependencies"
+  - "where are the original280 guarded hash key inputs preserved"
+  - "why do tied AST pipeline clone FETCH traces need deterministic probe iteration"
+  - "does optional AST assignment keep the normalized argument ARRAY slots"
+  - "can an AST assignment fallback thunk inherit a registered helper identity"
+date: 2026-10-12
+status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
+tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: perl-method-ast-call-capture
+title: AST call callbacks retain native validation, aliases and separate publication
+answers:
+  - "which AST call statement callbacks have private emission boundaries"
+  - "when does AST call lowering validate hash key array and primitive callbacks"
+  - "does AST call normalization retain the source helper argument ARRAY"
+  - "does AST call trim retain original array slots versus scoped copies"
+  - "do AST call extractors and primitive callbacks receive local scalar copies"
+  - "does tagged return payload lowering retain actual array slice aliases"
+  - "what native RED GREEN proof covers AST call statement dependencies"
+  - "where are the original280 guarded hash key inputs preserved"
+  - "why do tied AST pipeline clone FETCH traces need deterministic probe iteration"
+  - "does optional AST assignment keep the normalized argument ARRAY slots"
+  - "can an AST assignment fallback thunk inherit a registered helper identity"
+date: 2026-10-12
+status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
+tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: perl-method-ast-call-capture
+title: AST call callbacks retain native validation, aliases and separate publication
+answers:
+  - "which AST call statement callbacks have private emission boundaries"
+  - "when does AST call lowering validate hash key array and primitive callbacks"
+  - "does AST call normalization retain the source helper argument ARRAY"
+  - "does AST call trim retain original array slots versus scoped copies"
+  - "do AST call extractors and primitive callbacks receive local scalar copies"
+  - "does tagged return payload lowering retain actual array slice aliases"
+  - "what native RED GREEN proof covers AST call statement dependencies"
+  - "where are the original280 guarded hash key inputs preserved"
+  - "why do tied AST pipeline clone FETCH traces need deterministic probe iteration"
+  - "does optional AST assignment keep the normalized argument ARRAY slots"
+  - "can an AST assignment fallback thunk inherit a registered helper identity"
+date: 2026-10-12
+status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
+tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---

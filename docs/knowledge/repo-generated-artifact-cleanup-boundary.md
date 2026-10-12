@@ -40,7 +40,7 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
 
 # Shared publication inputs and historical provenance
@@ -184,3 +184,214 @@ route; every original route is archived explicitly above. The original malformed
 header RED and corrected review are retained under .3.2.1.8-headers*. No original
 fact body is rewritten. Canonical gate hardening is owned by .3.2.1.11 immediately
 after .8; this bounded repair does not admit the full Knowledge grammar/gate.
+
+Historical .8 header route retained at accepted328b11c5ed1d5ffbc870f6785448e3a8249fe882:
+
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
+
+Knowledge header list association is enforced by knowledge-map/scripts/check_knowledge_map.sh. Only an empty-value key owns following block-list items; scalar and inline values close that association. Orphan lines reject even when the generated map is synchronized. Malformed scalar answers plus detached items remain visible to validation. The public t/knowledge_map_header_lists.t fixture covers the original affected headers, valid forms and precise denial reasons; canonical CI runs it. The generator remains a metadata projection, and this repair does not admit a complete YAML grammar or field-type validator. The prior .8 runtime publication and original fact bodies remain recoverable at328b11c5.
+
+Valid block-evidence and block-reverify inputs are accepted by the original checker but omitted from generated metadata. Two exact public generator reproductions and their original acceptance channels are retained in docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-metadata-lists.json. P3 .3.2.1.12 owns the field/projection contract and current affected-population census after the factory/pipeline activity, before TYPE-REFERENCE-BOOK. No full population count or remedy is inferred from these two named cases.
+
+
+# First uncommitted Knowledge gate candidate
+
+The complete first 136-input/35,512-byte publication and this original header are retained in the supplied-byte capsule. It is not an accepted Git revision. The current readonly publication verifies its isolated replay; original observations are unchanged.
+
+---
+id: repo-generated-artifact-cleanup-boundary
+title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
+answers:
+  - "why did historical Knowledge reverify routes disappear from the derived map"
+  - "which task rejects orphan list entries after a scalar reverify field"
+  - "why can a new maintenance claim break an older readonly review"
+  - "which task owns the fixed baseline claim namespace repair"
+  - "which commits admitted initial repository artifact ignores and local dirt policy"
+  - "why did old hygiene task commit fields still say pending"
+  - "which generated artifacts are safe to delete for disk cleanup"
+  - "can I delete rust target to recover space"
+  - "can I delete docs/linkedspec-book/book"
+  - "should cleanup delete rgx log files"
+  - "should cleanup delete rgx bin files"
+  - "which Julia generated artifacts are safe to delete"
+  - "can I delete Julia compiled caches"
+  - "can I delete the Julia depot"
+  - "where are Julia precompile artifacts stored"
+  - "can stale LinkedSpec logs under private tmp be deleted"
+  - "should cleanup delete all of private tmp"
+  - "why was private tmp using 46 gigabytes"
+  - "what did REPO-HYGIENE.3 remove"
+  - "what did REPO-HYGIENE.4 remove"
+  - "what did REPO-HYGIENE.5 remove"
+  - "is Dart dot dart tool safe to delete"
+  - "how much space did the July 17 artifact cleanup reclaim"
+  - "which live claims must be preserved before changing a shared book chapter"
+  - "why was the October10 hygiene claim preserved during ADR0133"
+  - "do historical checked claims need a tracked producer input"
+date: 2026-10-12
+status: accepted
+tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
+evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
+evidence_update_2026_10_02: "REPO-HYGIENE.7 corrects the maintained submodule-task permission statement against the newer director boundary. The archived census/review instruments and exact retained enumeration live in docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; no deletion or liveness/purge operation occurred."
+evidence_update_2026_10_03: "REPO-HYGIENE.8 retains the dated parent/Rust enumeration and tracked stdout-only census/read-only reviewer. Fresh metadata and per-file lstat controls pass; zero removals. Current metadata is time-dependent: default review checks the retained snapshot, --live records a new observation."
+evidence_update_2026_10_04: "REPO-HYGIENE.9 retains the October4 exact parent/Rust rows and actual full census/review channels with producer guards. Fresh scoped metadata and independent lstat agree, two metadata/four channel controls reject, zero removals. Original snapshots remain immutable; caches/proof data remain retained."
+evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/Rust metadata snapshot and actual full census/review channels with producer guards. Fresh scoped census and independent per-file lstat, metadata/channel/render controls verify the dated observation; zero removals. Previous snapshots remain immutable, and all evidence/caches remain retained."
+evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
+evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
+evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
+evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+The Knowledge gate fixture is a managed Perl temporary allocator. Its CI registration is admitted by an exact anchored inverse in tests/language-readiness/verify_objectives.py, and tools/test_perl_project_data_storage.sh registers 29 allocators including t/knowledge_map_header_lists.t. The inverse recovers the complete historical source, and omission, duplication, changed commands or unrelated source edits remain rejected. Original canonical and storage failures, two original-source REDs, twelve registration denials, complete isolated historical recovery and managed-storage GREEN are retained under the current publication. These are registration compatibility checks; historical runtime observations are not refreshed.
+
+
+# Second uncommitted Knowledge gate candidate
+
+The complete second337-input/full79329 publication and every input byte are frozen before this header route changes. Its actual supplied-byte replay and two corruption controls remain separate from the current documentation repair. This is not an accepted Git revision. The original header follows verbatim.
+
+---
+id: repo-generated-artifact-cleanup-boundary
+title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
+answers:
+  - "why did historical Knowledge reverify routes disappear from the derived map"
+  - "which task rejects orphan list entries after a scalar reverify field"
+  - "why can a new maintenance claim break an older readonly review"
+  - "which task owns the fixed baseline claim namespace repair"
+  - "which commits admitted initial repository artifact ignores and local dirt policy"
+  - "why did old hygiene task commit fields still say pending"
+  - "which generated artifacts are safe to delete for disk cleanup"
+  - "can I delete rust target to recover space"
+  - "can I delete docs/linkedspec-book/book"
+  - "should cleanup delete rgx log files"
+  - "should cleanup delete rgx bin files"
+  - "which Julia generated artifacts are safe to delete"
+  - "can I delete Julia compiled caches"
+  - "can I delete the Julia depot"
+  - "where are Julia precompile artifacts stored"
+  - "can stale LinkedSpec logs under private tmp be deleted"
+  - "should cleanup delete all of private tmp"
+  - "why was private tmp using 46 gigabytes"
+  - "what did REPO-HYGIENE.3 remove"
+  - "what did REPO-HYGIENE.4 remove"
+  - "what did REPO-HYGIENE.5 remove"
+  - "is Dart dot dart tool safe to delete"
+  - "how much space did the July 17 artifact cleanup reclaim"
+  - "which live claims must be preserved before changing a shared book chapter"
+  - "why was the October10 hygiene claim preserved during ADR0133"
+  - "do historical checked claims need a tracked producer input"
+date: 2026-10-12
+status: accepted
+tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
+evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
+evidence_update_2026_10_02: "REPO-HYGIENE.7 corrects the maintained submodule-task permission statement against the newer director boundary. The archived census/review instruments and exact retained enumeration live in docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; no deletion or liveness/purge operation occurred."
+evidence_update_2026_10_03: "REPO-HYGIENE.8 retains the dated parent/Rust enumeration and tracked stdout-only census/read-only reviewer. Fresh metadata and per-file lstat controls pass; zero removals. Current metadata is time-dependent: default review checks the retained snapshot, --live records a new observation."
+evidence_update_2026_10_04: "REPO-HYGIENE.9 retains the October4 exact parent/Rust rows and actual full census/review channels with producer guards. Fresh scoped metadata and independent lstat agree, two metadata/four channel controls reject, zero removals. Original snapshots remain immutable; caches/proof data remain retained."
+evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/Rust metadata snapshot and actual full census/review channels with producer guards. Fresh scoped census and independent per-file lstat, metadata/channel/render controls verify the dated observation; zero removals. Previous snapshots remain immutable, and all evidence/caches remain retained."
+evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
+evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
+evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
+evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Third uncommitted Knowledge gate candidate
+
+The whole177-input/full44317 publication retains its original logical inputs through unchanged files and ten complete supplied byte overlays. Only the two failure reports change diagnostic representation; decoded bytes are exact. The original header follows verbatim.
+
+---
+id: repo-generated-artifact-cleanup-boundary
+title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
+answers:
+  - "why did historical Knowledge reverify routes disappear from the derived map"
+  - "which task rejects orphan list entries after a scalar reverify field"
+  - "why can a new maintenance claim break an older readonly review"
+  - "which task owns the fixed baseline claim namespace repair"
+  - "which commits admitted initial repository artifact ignores and local dirt policy"
+  - "why did old hygiene task commit fields still say pending"
+  - "which generated artifacts are safe to delete for disk cleanup"
+  - "can I delete rust target to recover space"
+  - "can I delete docs/linkedspec-book/book"
+  - "should cleanup delete rgx log files"
+  - "should cleanup delete rgx bin files"
+  - "which Julia generated artifacts are safe to delete"
+  - "can I delete Julia compiled caches"
+  - "can I delete the Julia depot"
+  - "where are Julia precompile artifacts stored"
+  - "can stale LinkedSpec logs under private tmp be deleted"
+  - "should cleanup delete all of private tmp"
+  - "why was private tmp using 46 gigabytes"
+  - "what did REPO-HYGIENE.3 remove"
+  - "what did REPO-HYGIENE.4 remove"
+  - "what did REPO-HYGIENE.5 remove"
+  - "is Dart dot dart tool safe to delete"
+  - "how much space did the July 17 artifact cleanup reclaim"
+  - "which live claims must be preserved before changing a shared book chapter"
+  - "why was the October10 hygiene claim preserved during ADR0133"
+  - "do historical checked claims need a tracked producer input"
+date: 2026-10-12
+status: accepted
+tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
+evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
+evidence_update_2026_10_02: "REPO-HYGIENE.7 corrects the maintained submodule-task permission statement against the newer director boundary. The archived census/review instruments and exact retained enumeration live in docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; no deletion or liveness/purge operation occurred."
+evidence_update_2026_10_03: "REPO-HYGIENE.8 retains the dated parent/Rust enumeration and tracked stdout-only census/read-only reviewer. Fresh metadata and per-file lstat controls pass; zero removals. Current metadata is time-dependent: default review checks the retained snapshot, --live records a new observation."
+evidence_update_2026_10_04: "REPO-HYGIENE.9 retains the October4 exact parent/Rust rows and actual full census/review channels with producer guards. Fresh scoped metadata and independent lstat agree, two metadata/four channel controls reject, zero removals. Original snapshots remain immutable; caches/proof data remain retained."
+evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/Rust metadata snapshot and actual full census/review channels with producer guards. Fresh scoped census and independent per-file lstat, metadata/channel/render controls verify the dated observation; zero removals. Previous snapshots remain immutable, and all evidence/caches remain retained."
+evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
+evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
+evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
+evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
+
+
+# Fourth uncommitted Knowledge gate candidate
+
+The whole198-input/full51535 publication and eight complete original route/card/map overlays preserve its original logical inputs. The current claim binds the published RGX README through an exact parent-owned snapshot; the submodule and pin are unchanged. The original header follows verbatim.
+
+---
+id: repo-generated-artifact-cleanup-boundary
+title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
+answers:
+  - "why did historical Knowledge reverify routes disappear from the derived map"
+  - "which task rejects orphan list entries after a scalar reverify field"
+  - "why can a new maintenance claim break an older readonly review"
+  - "which task owns the fixed baseline claim namespace repair"
+  - "which commits admitted initial repository artifact ignores and local dirt policy"
+  - "why did old hygiene task commit fields still say pending"
+  - "which generated artifacts are safe to delete for disk cleanup"
+  - "can I delete rust target to recover space"
+  - "can I delete docs/linkedspec-book/book"
+  - "should cleanup delete rgx log files"
+  - "should cleanup delete rgx bin files"
+  - "which Julia generated artifacts are safe to delete"
+  - "can I delete Julia compiled caches"
+  - "can I delete the Julia depot"
+  - "where are Julia precompile artifacts stored"
+  - "can stale LinkedSpec logs under private tmp be deleted"
+  - "should cleanup delete all of private tmp"
+  - "why was private tmp using 46 gigabytes"
+  - "what did REPO-HYGIENE.3 remove"
+  - "what did REPO-HYGIENE.4 remove"
+  - "what did REPO-HYGIENE.5 remove"
+  - "is Dart dot dart tool safe to delete"
+  - "how much space did the July 17 artifact cleanup reclaim"
+  - "which live claims must be preserved before changing a shared book chapter"
+  - "why was the October10 hygiene claim preserved during ADR0133"
+  - "do historical checked claims need a tracked producer input"
+date: 2026-10-12
+status: accepted
+tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
+evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
+evidence_update_2026_10_02: "REPO-HYGIENE.7 corrects the maintained submodule-task permission statement against the newer director boundary. The archived census/review instruments and exact retained enumeration live in docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; no deletion or liveness/purge operation occurred."
+evidence_update_2026_10_03: "REPO-HYGIENE.8 retains the dated parent/Rust enumeration and tracked stdout-only census/read-only reviewer. Fresh metadata and per-file lstat controls pass; zero removals. Current metadata is time-dependent: default review checks the retained snapshot, --live records a new observation."
+evidence_update_2026_10_04: "REPO-HYGIENE.9 retains the October4 exact parent/Rust rows and actual full census/review channels with producer guards. Fresh scoped metadata and independent lstat agree, two metadata/four channel controls reject, zero removals. Original snapshots remain immutable; caches/proof data remain retained."
+evidence_update_2026_10_07: "REPO-HYGIENE.11 retains the October7 exact parent/Rust metadata snapshot and actual full census/review channels with producer guards. Fresh scoped census and independent per-file lstat, metadata/channel/render controls verify the dated observation; zero removals. Previous snapshots remain immutable, and all evidence/caches remain retained."
+evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/Rust snapshot and complete actual producer channels. Fresh metadata, independent lstat and effective size/traversal/evidence controls pass. All artifacts remain retained; current start-path guards reject symlink ancestors, nested repositories, mock submodules and outside-root starts before traversal. Earlier snapshots are immutable; no concurrent adversarial filesystem guarantee is inferred."
+evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
+evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
+evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+---
