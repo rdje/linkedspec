@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "producer_sha256": "04b80c55c8395e8c8b945edda6137822610f407d8f8f8b8c34c818ad41bbb285",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-publish-claim.py"
+  ],
+  "original_bindings": 408,
+  "original_claim_bytes": 94719,
+  "supplied_inputs": 1887,
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/original-claim.json": "e0fc2a4af04d658681fd4e9b6d54ab72e4d5dcdc970abb17b8f6a63d3a4b4938",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/original-inputs.json.gz": "eb9b0ac62f906a610f9a4d646aa689c624d962887c42ad1e77bf4d137f92d56d",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/preserve.py": "8d3dbab48d2cc3c0684123a87d2ad1c5c44a2da2c64024f24952a31d97723bad",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/preservation.json": "9e28d2399798e02e00b8b7197f682c5f85e15f3743ae9d4ae890ddddcbe03569",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/replay.py": "04b80c55c8395e8c8b945edda6137822610f407d8f8f8b8c34c818ad41bbb285"
+  },
+  "rows": [
+    {
+      "name": "unchanged-first-publication",
+      "returncode": 0,
+      "stdout_base64": "UmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24gUEFTUzogNDA4IGxpdmUgaW5wdXRzOyA5NDcxOSBieXRlcwo=",
+      "stderr_base64": "",
+      "unchanged": true
+    },
+    {
+      "name": "forged-whole-claim",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5yYUJnZEsvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLW5jN2xtdnRtL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtcHVibGlzaC1jbGFpbS5weSIsIGxpbmUgODgsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgVEFSR0VULnJlYWRfYnl0ZXMoKSA9PSByYXcsICdleGFjdCBjdXJyZW50IHJlYWRvbmx5IHB1YmxpY2F0aW9uJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBleGFjdCBjdXJyZW50IHJlYWRvbmx5IHB1YmxpY2F0aW9uCg==",
+      "unchanged": true
+    },
+    {
+      "name": "missing-actual-fixture",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5yYUJnZEsvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLW82YmlkandfL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtcHVibGlzaC1jbGFpbS5weSIsIGxpbmUgMTcsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgcHJvY2Vzcy5yZXR1cm5jb2RlID09IDAgYW5kIG5vdCBwcm9jZXNzLnN0ZGVyciwgKCdhY3R1YWwgcmVhZG9ubHkgcmVxdWlyZWQgRmxvd0V4cHIgcHJvb2YnLCB0YWlsLCBwcm9jZXNzLnN0ZGVycikKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiAoJ2FjdHVhbCByZWFkb25seSByZXF1aXJlZCBGbG93RXhwciBwcm9vZicsICdyZXZpZXcucHknLCBiJ1RyYWNlYmFjayAobW9zdCByZWNlbnQgY2FsbCBsYXN0KTpcbiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLnJhQmdkSy90bXAvZmxvdy1maXJzdC1jYW5kaWRhdGUtbzZiaWRqd18vZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMC1yZXZpZXcucHkiLCBsaW5lIDE3NCwgaW4gPG1vZHVsZT5cbiAgICBjYXAgPSBjYXBzdWxlKHN0YWdlICsgXCctaW5wdXRzLmpzb24uZ3pcJywgcmVjb3JkW1wnaW5wdXRzXCddLCBzdGFnZSA9PSBcJ2FmdGVyXCcpXG4gIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5yYUJnZEsvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLW82YmlkandfL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtcmV2aWV3LnB5IiwgbGluZSA0NSwgaW4gY2Fwc3VsZVxuICAgIGFzc2VydCByZXRhaW4ocCkgPT0gcmF3IGFuZCBpbnB1dHNbcF1bXCdtb2RlXCddID09IGl0ZW1bXCdtb2RlXCddLCAoXCdjdXJyZW50IHN1cHBsaWVkIGlucHV0XCcsIHApXG4gICAgICAgICAgIH5+fn5+fl5eXlxuICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjLy5saW5rZWRzcGVjLWRhdGEvc2NyYXRjaC9ydW5zL2NoZWNrb3V0LTE3ODUwODg3MjUtOTM0NTgtNjEyNzk3OTYvcnVuX3B5dGhvbl9wcm9qZWN0X2RhdGEuc2gucmFCZ2RLL3RtcC9mbG93LWZpcnN0LWNhbmRpZGF0ZS1vNmJpZGp3Xy9kb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNC4wLXJldmlldy5weSIsIGxpbmUgMjgsIGluIHJldGFpblxuICAgIHJhdyA9IHJlYWQocGF0aClcbiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLnJhQmdkSy90bXAvZmxvdy1maXJzdC1jYW5kaWRhdGUtbzZiaWRqd18vZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMC1yZXZpZXcucHkiLCBsaW5lIDIzLCBpbiA8bGFtYmRhPlxuICAgIHJlYWQgPSBsYW1iZGEgcGF0aDogKFJPT1QgLyBwYXRoKS5yZWFkX2J5dGVzKClcbiAgICAgICAgICAgICAgICAgICAgICAgIH5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fl5eXG4gIEZpbGUgIi9vcHQvaG9tZWJyZXcvQ2VsbGFyL3B5dGhvbkAzLjE0LzMuMTQuNy9GcmFtZXdvcmtzL1B5dGhvbi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4xNC9saWIvcHl0aG9uMy4xNC9wYXRobGliL19faW5pdF9fLnB5IiwgbGluZSA3NzcsIGluIHJlYWRfYnl0ZXNcbiAgICB3aXRoIHNlbGYub3Blbihtb2RlPVwncmJcJywgYnVmZmVyaW5nPTApIGFzIGY6XG4gICAgICAgICB+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5cbiAgRmlsZSAiL29wdC9ob21lYnJldy9DZWxsYXIvcHl0aG9uQDMuMTQvMy4xNC43L0ZyYW1ld29ya3MvUHl0aG9uLmZyYW1ld29yay9WZXJzaW9ucy8zLjE0L2xpYi9weXRob24zLjE0L3BhdGhsaWIvX19pbml0X18ucHkiLCBsaW5lIDc3MSwgaW4gb3BlblxuICAgIHJldHVybiBpby5vcGVuKHNlbGYsIG1vZGUsIGJ1ZmZlcmluZywgZW5jb2RpbmcsIGVycm9ycywgbmV3bGluZSlcbiAgICAgICAgICAgfn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXG5GaWxlTm90Rm91bmRFcnJvcjogW0Vycm5vIDJdIE5vIHN1Y2ggZmlsZSBvciBkaXJlY3Rvcnk6IFwnL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLnJhQmdkSy90bXAvZmxvdy1maXJzdC1jYW5kaWRhdGUtbzZiaWRqd18vdC9hY3Rpb25pcl9mbG93X3JlcXVpcmVkX2NhcHR1cmUudFwnXG4nKQo=",
+      "unchanged": true
+    },
+    {
+      "name": "restored-first-publication",
+      "returncode": 0,
+      "stdout_base64": "UmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24gUEFTUzogNDA4IGxpdmUgaW5wdXRzOyA5NDcxOSBieXRlcwo=",
+      "stderr_base64": "",
+      "unchanged": true
+    }
+  ],
+  "scope": "Unchanged complete first publisher/reader/evidence/validation/book-reader and every408 declared byte/mode, plus the complete1485 current Knowledge population recovered from its original nested capsule, are supplied in project-volume plain roots. The owning repository Git objects/index are reused only by read-only Git commands through runtime-derived GIT_DIR/GIT_WORK_TREE; no .git is created and no accepted revision is invented for the uncommitted candidate. Two actual semantic corruptions reject and exact restoration passes. No first native observation, fixture, runtime or original producer is refreshed. Readonly default validates retained replay and current artifact identities."
+}

@@ -94,6 +94,13 @@ command must not refresh an earlier observation or silently change its boundary.
 
 ### Historical claim populations
 
+Current Knowledge cards keep their factual explanation and one current verification
+route. Repeated historical route headers belong in the owning checkpoint archive,
+with exact original bytes and a readonly replay route. This keeps the bounded live-card
+collection useful without discarding earlier evidence or raising its size limits.
+A first uncommitted candidate is recovered from its supplied bytes; it must never
+be assigned an invented accepted Git revision.
+
 A review of an accepted claim population must enumerate files from that same Git
 boundary. Listing today's claim files and then reading each from an older commit
 fails as soon as an unrelated newer claim is added. Keep the historical population
@@ -112,11 +119,12 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks Knowledge header regression evidence,
-preserves the accepted callback publication and validates the current book:
+The current verification entrypoint preserves the complete first required FlowExpr
+publication, checks its supplied replay, and validates current Knowledge routing
+and the complete book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

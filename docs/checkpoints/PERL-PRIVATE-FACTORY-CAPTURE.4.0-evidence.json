@@ -1,0 +1,48 @@
+{
+  "result": "PASS",
+  "producer_sha256": "d57930b8b4f64bcb96fb31d2f3a31927e4f9a2050772df2d1cc72d378d1debaa",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-review.py"
+  ],
+  "data_sha256": "18d3ac711b1ccf7c96432e6ec0e18ab9787a64e3b918bd4811d211e0702b901a",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-after-native.json": "2d6feca03d9db165c83f1f896f0fde480da0f3609da5dd383a52392b3b67a520",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-after-native-data.json.gz": "794c2843d6ba7f17759a5524983f75a7252c0b8c7ed7e98cbd0e5567320b7b53",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-faults.json": "4da608fa5f945a35e2d5c90e06f156f100f57bc7fb407e1fe9796bad07673977",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-faults-data.json.gz": "a4bf77076a8e8561ccb17300d81179289a787823dff60bc47d7efebb317d6671",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-faults-reached.json.gz": "2eb5f21892b04f99628d929edb7b685edcf6643ad4cb79da00106b95ab3e935f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers.json": "eebdae887c030624786f6136bf8c16cc8d10bd005229507ff0abe1b321c070c6",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers-channels.json.gz": "2f5d08bc7c64761c10f3e243a1fb396fa843cb6d381bbf8ba46e3a13fc5db354",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-preservation.json": "5b0ba02f500db5ac348ebc4d42767a77e12143ec7b4eef63df7528f80d004d1d",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-before-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json": "2ca8d8f25e1cb6a8cb2ed2ea99f879e221075b4b3f698d8ff60530d8c0d91233",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-book.json": "d4378c613a72c45687a0cbf5ad5895c8c89e5e34ae2148caaef1a15295ed0733",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-review.py": "bb12f59c7e8530ae05c70ba776009a4a04e62d2f78bfe8141d5c6e802b1a23fc",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-review.json": "dd76a938547781c5d576364dd41beb285246af76e9eb58346cef3b67a85cc53f",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-book-review.py": "3d08ffe151adc58045714c5ddb091ef2a722f32ba42f3705676723748df562a9",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-evidence.py": "d57930b8b4f64bcb96fb31d2f3a31927e4f9a2050772df2d1cc72d378d1debaa"
+  },
+  "controls": [
+    {
+      "name": "rehashed-native-actual-identity",
+      "expected_reason": "actual callback identity and own eligibility"
+    },
+    {
+      "name": "hidden-full-inverse-red",
+      "expected_reason": "actual distinguishing semantic failure population"
+    },
+    {
+      "name": "forged-consumer-header",
+      "expected_reason": "complete ordered consumer header population"
+    },
+    {
+      "name": "forged-whole-original-publication",
+      "expected_reason": "complete original publication bytes"
+    },
+    {
+      "name": "removed-rendered-teaching",
+      "expected_reason": "wrong required FlowExpr rendered teaching oracle"
+    }
+  ],
+  "scope": "Five actual semantic forgeries update immediate hashes and coherent repeated native channels or paired artifact summaries. The unchanged independent reader rejects each for its named deeper reason; original full input bytes and modes are restored after each, then readonly acceptance passes exactly. Production and native instruments are never mutated. Default mode only reads retained controls and checks current identities."
+}

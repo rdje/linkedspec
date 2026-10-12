@@ -17,7 +17,7 @@ date: 2026-10-12
 status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+reverify: "Historical .11 proof requires recorded accepted81b356cef997ea2bb65a8fb120c77506fed9241e Git inputs: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Current FlowExpr required proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py. Older routes below retain their original accepted inputs; capture writers are retired."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The
@@ -259,3 +259,6 @@ tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
+
+
+Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-method-ast-call-capture). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.

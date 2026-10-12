@@ -1,0 +1,6 @@
+{
+  "actual_outer_returncode": 1,
+  "actual_stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIjxzdGRpbj4iLCBsaW5lIDM4LCBpbiA8bW9kdWxlPgpBc3NlcnRpb25FcnJvcgo=",
+  "failed_expression": "fields=line.split(' | ');assert len(fields)==5",
+  "scope": "First inline continuity writer fails on its own roadmap table field-count assumption after saving the owning task update. Full inline source was not separately retained; this record discloses that limit and retains the exact failed expression/channel. No code, native instrument, fixture, observation, producer or accepted claim is changed. Distinct corrected continuity writer follows actual table inspection."
+}

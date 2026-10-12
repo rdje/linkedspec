@@ -7,11 +7,14 @@ answers:
   - "can a known parent inherit an opaque dependency publication"
   - "why do two Perl factory calls return the same callback reference"
   - "does private factory capture preserve callback aliases and error objects"
-date: 2026-10-10
-status: framework and Contracts integration verified; other dependency owners/pipeline open
+  - "which required FlowExpr callbacks have separate private captures"
+  - "do FlowExpr normalizers retain parser argument array mutations"
+  - "does required FlowExpr capture preserve native validation line locations"
+date: 2026-10-12
+status: framework and Contracts integrated; MethodLowering seventeen-site bounded closeout and FlowExpr required bindings verified; optional kind/defaults and pipeline remain open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Historical commands below require the card's recorded accepted Git inputs; they do not run against later source/book edits. Original framework/EmitContext/dependency reviewers require accepted b21b3bb9/2d8784780/be7d70719 input boundaries respectively. Current block-component integration and original242 inline preservation are reviewed by docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1-review.py under tools/run_python_project_data.sh. One-shot writers are not resume commands. Local-return reviewer docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0-final-review.py requires accepted de3b50dd Git inputs under tools/run_python_project_data.sh. Current bounded proof and readonly entrypoints are named by MEMORY.md and its authority card."
+reverify: "Current bounded required FlowExpr proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py. Historical framework/Contracts/MethodLowering routes below require their recorded accepted Git inputs. One-shot preserve/observe/run/fault/consumer/book writers are retired. MEMORY.md and the active task-tree frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -44,7 +47,7 @@ lexical state; production bytes are identical before and after that correction.
 This is a measured local observation, not a universal cross-version closure rule.
 
 Contracts registration/call sites are verified in the linked children.
-Remaining MethodLowering required/optional dependencies, FlowExpr, ControlFlow and RewritePipeline remain later owners in
+MethodLowering's seventeen original ingress sites now have bounded repairs. FlowExpr's optional kind/default selection, ControlFlow and RewritePipeline remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
@@ -73,3 +76,21 @@ Correction dated2026-10-10 under .3.1.4: the previous paragraphs incorrectly
 called local-return/value .3.1.2.2 next after those children and later guarded
 AST children had already landed. Their historical evidence is unchanged; only
 the stale current projection is removed.
+
+
+Required FlowExpr callbacks, .4.0 (2026-10-12), use actual CODE identity in
+separate private captures through five required-validator returns. Validation,
+selection order and original diagnostic lines stay intact; public dependency maps
+retain their references. All622 native rows match before/after, with387 warm/235
+cold rows and exact fresh-process recurrences. Native callback sites are scalar
+under scalar/list/void owners. Local trim mutations leave the caller scalar intact;
+normalizer mutations reach the shared parser argument array. Successful errors,
+fatal objects, fallback values and require-only lazy loading remain native.
+Children cannot donate equal-text parent packets; a registered child retains its
+own matching packet. Identical1795 assertions retain490 original authority REDs,
+1305 controls and all current GREEN. Thirteen effective source faults include the
+exact original490-failure inverse. Complete input/channel capsules are retained.
+Optional bare_symbol_kind and actual default registration are separate .4.2/.4.1
+owners; this does not admit the complete helper/private/parent pipeline.
+
+Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-factory-capture-framework). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.

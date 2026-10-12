@@ -1,0 +1,28 @@
+{
+  "result": "PASS",
+  "producer_sha256": "24fc2c2caee1af95bbc081b2bc2c365da7562e3643846f88a9e61739777c85da",
+  "original_bindings": 438,
+  "original_claim_bytes": 105949,
+  "original_claim_sha256": "d612d17426f840742470638c7b2aa77cade41ba347d6c7fb9fd2956edde2623b",
+  "capsule_sha256": "7d97f21159b751d48695a8fc5b34c9271e1edd322503d21b7fa689e8d4c8244c",
+  "baseline": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py"
+    ],
+    "returncode": 0,
+    "stdout_base64": "RmluYWwgcmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24gUEFTUzogNDM4IGxpdmUgaW5wdXRzOyAxMDU5NDkgYnl0ZXM7b3JpZ2luYWw0MDgvZnVsbDk0NzE5IHJlbWFpbnMgZXhhY3QK",
+    "stderr_base64": ""
+  },
+  "whitespace_observation": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "actual_returncode": 2,
+    "diagnostic": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md:443: new blank line at EOF."
+  },
+  "scope": "Complete first438/full105949 uncommitted finite publication and every byte/mode remain immutable in supplied custody. Actual readonly baseline passes before any bound correction. The sole archive whitespace error is unrelated to native behavior or live-card size. No accepted Git revision is invented; all first producers/observations retain their original source identities."
+}

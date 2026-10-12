@@ -1092,8 +1092,10 @@ Its ordinary value survives; equal text supplies no selected emission packet.
 Native-reference selection is scoped to the actual source and producer invocation,
 so nested equal-source or producer scopes cannot borrow the enclosing selection.
 Cold default construction loads neither the private emission channel nor Trace.
-MethodLowering required trim bindings are described below; remaining required and
-optional calls precede other owners, pipeline scopes and explicit output composition.
+MethodLowering required trim bindings are described below. The later selected-dispatch
+closeout covers all seventeen original ingress sites; FlowExpr required bindings
+follow below. Static calls, pipeline scopes and explicit output composition retain
+their separate owners.
 Default selection alone makes no claim that a helper has published a packet.
 
 MethodLowering now isolates trim dependencies in three small value helpers.
@@ -1110,9 +1112,10 @@ the enclosing callback receives no donated publication. Inline switch-case
 normalization retains its existing two trim calls for that bare atom. Direct
 shape inference still delegates accepted shape values to the method/value owner.
 A known child's explicit capture can retain its own packet, while its enclosing
-callback receives only the ordinary value. Remaining required function families,
-optional/direct dependencies, other owners and pipeline/output composition stay
-separate integration steps. This private boundary changes no authored DSL form.
+callback receives only the ordinary value. Later sections describe the other bounded
+required/optional MethodLowering integrations and the seventeen-site closeout.
+Complete helper admission, other owners and pipeline/output composition remain
+separate steps. This private boundary changes no authored DSL form.
 
 MethodLowering also isolates assignment and declaration inference dependencies.
 The private required-callback boundaries cover assignment container inference,
@@ -2029,6 +2032,45 @@ The required callback capture prevents opaque child publication from reaching
 the enclosing normalizer and retains known-child authority by actual identity.
 Optional/direct dependencies and broader private/canonical admission remain
 separately owned.
+
+
+### Required FlowExpr callbacks
+
+The private FlowExpr dependency boundary now covers the required callbacks used
+by array-value inference, hash-value inference, emptiness lowering, defined-target
+lowering and composite flow-expression lowering. Each helper still validates all
+of its required dependencies before checking the input. Missing or non-CODE
+callbacks raise the original diagnostic at its original source line. Selection
+order and the actual selected references stay unchanged; replacing a dependency
+map entry during a callback does not replace a reference already selected by that
+helper invocation. The caller's map still contains its actual callback references.
+
+Each selected callback runs in its own private capture using that actual CODE
+reference. An opaque callback cannot borrow its enclosing callback's eligibility
+or donate a nested equal-text publication to it. A registered child can retain
+its own matching packet. The helper returns the ordinary value; output assembly
+must explicitly compose child packets. For example, the native probe uses a
+parent that returns the literal `outer` and a selected child that publishes
+`outer`. Equal text does not give the parent that child's publication, even when
+both callbacks have been registered in the current scope.
+
+The binding forwards original arguments. Trim receives the helper's local scalar
+copy, so an injected trim mutation does not modify the caller's input scalar.
+Parser-returned argument arrays are shared references. In the private probe,
+a parser recognizes `copy_leaf` as a copy call with the argument array `[inner]`.
+An injected normalizer appends `extra` to that same array; the caller's retained
+array and call object both see `[inner, extra]`. These are compiler callback
+injection examples, not additional authored DSL forms.
+
+Native callback contexts, values and effects are preserved. The actual required
+callback sites use scalar context even when their enclosing helper is invoked
+in list or void context. Successful error effects, undefined results, ordinary
+fallbacks and fatal exception objects keep their original behavior. A require-only
+consumer still loads neither SourceEmissions nor Trace through these bindings.
+The optional kind callback in emptiness lowering and definition-owned registration
+of FlowExpr's native defaults have separate following tasks. This required-only
+change establishes no complete helper, pipeline, public language, other-backend,
+private Phase0 or parent admission.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

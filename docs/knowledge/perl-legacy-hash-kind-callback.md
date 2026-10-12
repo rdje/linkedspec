@@ -16,7 +16,7 @@ date: 2026-10-12
 status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
-reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
+reverify: "Historical .11 proof requires recorded accepted81b356cef997ea2bb65a8fb120c77506fed9241e Git inputs: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Current FlowExpr required proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py. Older routes below retain their original accepted inputs; capture writers are retired."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind
@@ -280,3 +280,6 @@ tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
 ---
+
+
+Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-legacy-hash-kind-callback). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.

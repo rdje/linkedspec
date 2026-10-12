@@ -87,7 +87,7 @@ sub _looks_like_array_value_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
@@ -155,7 +155,7 @@ sub _looks_like_hash_value_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
@@ -226,7 +226,7 @@ sub _lower_is_empty_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $extract_array_symbol_name = $require_dep->('extract_array_symbol_name');
@@ -300,7 +300,7 @@ sub _lower_defined_target_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
@@ -367,7 +367,7 @@ sub _lower_flow_composite_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::FlowExpr::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_method_value_expr = $require_dep->('lower_method_value_expr');
@@ -526,6 +526,17 @@ sub _lower_flow_composite_expr {
  }
 
  return $finish->($trimmed, 'passthrough_unknown_method', { method => $method })
+}
+
+# Keep public dependency maps intact and invoke the retained actual callback.
+# Forward native argument aliases/context; require-only consumers stay lazy.
+sub _bind_emission_dependency {
+ my ($callback) = @_;
+ return sub {
+  return LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($callback, @_)
+   if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
+  return $callback->(@_)
+ }
 }
 
 1;

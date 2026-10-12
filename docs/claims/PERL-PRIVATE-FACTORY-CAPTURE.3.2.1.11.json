@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": ".knowledge_map.conf",
@@ -1112,7 +1112,8 @@
             "sha256": "8c07ce1c7f16480985c01ef2cbf953460af9ec0d3897a2062843b161d80c7c1a",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e"
       }
     }
   ]

@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "producer_sha256": "3578e84222cb2017bceaf22c0f49074cf2c32b3b359e52dfb51449f3b49ea4f4",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py"
+  ],
+  "original_bindings": 438,
+  "original_claim_bytes": 105949,
+  "supplied_inputs": 1917,
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/eof-original-claim.json": "d612d17426f840742470638c7b2aa77cade41ba347d6c7fb9fd2956edde2623b",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/eof-original-inputs.json.gz": "7d97f21159b751d48695a8fc5b34c9271e1edd322503d21b7fa689e8d4c8244c",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/eof-preserve.py": "24fc2c2caee1af95bbc081b2bc2c365da7562e3643846f88a9e61739777c85da",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/eof-preservation.json": "b8da71867a2627af4e3010345273da5c48d6dc326d8bd7270f672e54e8ca15ff",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/eof-replay.py": "3578e84222cb2017bceaf22c0f49074cf2c32b3b359e52dfb51449f3b49ea4f4"
+  },
+  "rows": [
+    {
+      "name": "unchanged-first-publication",
+      "returncode": 0,
+      "stdout_base64": "RmluYWwgcmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24gUEFTUzogNDM4IGxpdmUgaW5wdXRzOyAxMDU5NDkgYnl0ZXM7b3JpZ2luYWw0MDgvZnVsbDk0NzE5IHJlbWFpbnMgZXhhY3QK",
+      "stderr_base64": "",
+      "unchanged": true
+    },
+    {
+      "name": "forged-whole-claim",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5YN09PODAvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLWc4X3VkbnhqL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtY2FwYWNpdHkvcHVibGlzaC5weSIsIGxpbmUgNjcsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgVEFSR0VULnJlYWRfYnl0ZXMoKSA9PSByYXcsICdleGFjdCBmaW5hbCByZWFkb25seSByZXF1aXJlZCBGbG93RXhwciBwdWJsaWNhdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogZXhhY3QgZmluYWwgcmVhZG9ubHkgcmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24K",
+      "unchanged": true
+    },
+    {
+      "name": "missing-actual-fixture",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5YN09PODAvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLWV2YThzcnJpL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtY2FwYWNpdHkvcHVibGlzaC5weSIsIGxpbmUgMTYsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgcHJvY2Vzcy5yZXR1cm5jb2RlID09IDAgYW5kIG5vdCBwcm9jZXNzLnN0ZGVyciwgKCdhY3R1YWwgZmluYWwgcmVhZG9ubHkgcmVxdWlyZWQgRmxvd0V4cHIgcHJvb2YnLCB0YWlsLCBwcm9jZXNzLnN0ZGVycikKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiAoJ2FjdHVhbCBmaW5hbCByZWFkb25seSByZXF1aXJlZCBGbG93RXhwciBwcm9vZicsICdyZXZpZXcucHknLCBiJ1RyYWNlYmFjayAobW9zdCByZWNlbnQgY2FsbCBsYXN0KTpcbiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLlg3T084MC90bXAvZmxvdy1maXJzdC1jYW5kaWRhdGUtZXZhOHNycmkvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMC1jYXBhY2l0eS9yZXZpZXcucHkiLCBsaW5lIDE0NCwgaW4gPG1vZHVsZT5cbiAgICBpZiByZWFkKHBhdGgpICE9IGRlY29kZShpdGVtW1wnYnl0ZXNfYmFzZTY0XCddKTpcbiAgICAgICB+fn5+Xl5eXl5eXG4gIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5YN09PODAvdG1wL2Zsb3ctZmlyc3QtY2FuZGlkYXRlLWV2YThzcnJpL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS40LjAtY2FwYWNpdHkvcmV2aWV3LnB5IiwgbGluZSAyMSwgaW4gcmVhZFxuICAgIHJhdyA9IChST09UIC8gcGF0aCkucmVhZF9ieXRlcygpXG4gIEZpbGUgIi9vcHQvaG9tZWJyZXcvQ2VsbGFyL3B5dGhvbkAzLjE0LzMuMTQuNy9GcmFtZXdvcmtzL1B5dGhvbi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4xNC9saWIvcHl0aG9uMy4xNC9wYXRobGliL19faW5pdF9fLnB5IiwgbGluZSA3NzcsIGluIHJlYWRfYnl0ZXNcbiAgICB3aXRoIHNlbGYub3Blbihtb2RlPVwncmJcJywgYnVmZmVyaW5nPTApIGFzIGY6XG4gICAgICAgICB+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5cbiAgRmlsZSAiL29wdC9ob21lYnJldy9DZWxsYXIvcHl0aG9uQDMuMTQvMy4xNC43L0ZyYW1ld29ya3MvUHl0aG9uLmZyYW1ld29yay9WZXJzaW9ucy8zLjE0L2xpYi9weXRob24zLjE0L3BhdGhsaWIvX19pbml0X18ucHkiLCBsaW5lIDc3MSwgaW4gb3BlblxuICAgIHJldHVybiBpby5vcGVuKHNlbGYsIG1vZGUsIGJ1ZmZlcmluZywgZW5jb2RpbmcsIGVycm9ycywgbmV3bGluZSlcbiAgICAgICAgICAgfn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXG5GaWxlTm90Rm91bmRFcnJvcjogW0Vycm5vIDJdIE5vIHN1Y2ggZmlsZSBvciBkaXJlY3Rvcnk6IFwnL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLlg3T084MC90bXAvZmxvdy1maXJzdC1jYW5kaWRhdGUtZXZhOHNycmkvdC9hY3Rpb25pcl9mbG93X3JlcXVpcmVkX2NhcHR1cmUudFwnXG4nKQo=",
+      "unchanged": true
+    },
+    {
+      "name": "restored-first-publication",
+      "returncode": 0,
+      "stdout_base64": "RmluYWwgcmVxdWlyZWQgRmxvd0V4cHIgcHVibGljYXRpb24gUEFTUzogNDM4IGxpdmUgaW5wdXRzOyAxMDU5NDkgYnl0ZXM7b3JpZ2luYWw0MDgvZnVsbDk0NzE5IHJlbWFpbnMgZXhhY3QK",
+      "stderr_base64": "",
+      "unchanged": true
+    }
+  ],
+  "scope": "Unchanged complete first publisher/reader/evidence/validation/book-reader and every438 declared byte/mode, plus the complete1485 current Knowledge population recovered from its original nested capsule, are supplied in project-volume plain roots. The owning repository Git objects/index are reused only by read-only Git commands through runtime-derived GIT_DIR/GIT_WORK_TREE; no .git is created and no accepted revision is invented for the uncommitted candidate. Two actual semantic corruptions reject and exact restoration passes. No first native observation, fixture, runtime or original producer is refreshed. Readonly default validates retained replay and current artifact identities."
+}

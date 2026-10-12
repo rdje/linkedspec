@@ -1,0 +1,126 @@
+{
+  "producer_sha256": "8e950973e7e4315f384472786af51f5bc5ac56ff01d48256b39a0d8d5bdc2ae6",
+  "rows": [
+    {
+      "name": "preserve",
+      "actual_tool_session": 39679,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-preserve.py",
+      "producer_sha256": "7de51fcee13b370c2b37d11a57f1fcddc26dd89f5094132f5e1d44c0a14edff8",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-preservation.json",
+      "artifact_sha256": "5b0ba02f500db5ac348ebc4d42767a77e12143ec7b4eef63df7528f80d004d1d",
+      "merged_log_base64": "Rmxvd0V4cHIgcHJlc2VydmF0aW9uIFBBU1M6IDEgaW50ZXJzZWN0aW5nIHJlY29yZHM7IDIxOCBvcmlnaW5hbCBiaW5kaW5nczsgNTg1ODIgZnVsbCBwcmlvciBieXRlczsgYWN0dWFsIHJlYWRvbmx5IGJhc2VsaW5lCg=="
+    },
+    {
+      "name": "observe",
+      "actual_tool_session": 7081,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-observe.py",
+      "producer_sha256": "15007b21f7533e4cb6106018d676b9f5781b0aeef9d6ca69817da8fd8e6bcaf1",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-before-native.json",
+      "artifact_sha256": "7cd4da83f543ae55f45cf2c155d5e8f12bd8c2e08fd6ab560090f830d5079bbc",
+      "merged_log_base64": "Rmlyc3QgRmxvd0V4cHIgbmF0aXZlIGNhcHR1cmU6IDEwMCBjb21wbGV0ZSBwYXJlbnQgaW5wdXRzOyAzODcgd2FybSByb3dzOyAyMzUgY29sZCByb3dzOyBieXRlLWV4YWN0IHJlY3VycmVuY2VzCg=="
+    },
+    {
+      "name": "before",
+      "actual_tool_session": 83992,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-run.py",
+      "producer_sha256": "400c096a093e35b5ad07d377f0a0d317e18095e8fdd2514f88e1045cf7d5c433",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-before.json",
+      "artifact_sha256": "cbb54176c063d0a049bad728b5e071fc4ac0819ea6ab79b3758ee5281b4f1b39",
+      "merged_log_base64": "Rmxvd0V4cHIgcGFpcmVkIFJFRDogMTc5NSBjb21wbGV0ZSBhc3NlcnRpb25zOyA0OTAgZmFpbHVyZXM7IDEzMDUgY29udHJvbHM7IDEwNiBzdXBwbGllZCBpbnB1dHMK"
+    },
+    {
+      "name": "after",
+      "actual_tool_session": 80572,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-run.py",
+      "producer_sha256": "400c096a093e35b5ad07d377f0a0d317e18095e8fdd2514f88e1045cf7d5c433",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-after.json",
+      "artifact_sha256": "e8f8c903632a53b415883081871425f6f2e375ceefb006cce6647ec6ce099b62",
+      "merged_log_base64": "Rmxvd0V4cHIgcGFpcmVkIEdSRUVOOiAxNzk1IGNvbXBsZXRlIGFzc2VydGlvbnM7IDAgZmFpbHVyZXM7IDE3OTUgY29udHJvbHM7IDEwNiBzdXBwbGllZCBpbnB1dHMK"
+    },
+    {
+      "name": "observe-after",
+      "actual_tool_session": 43065,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-observe-after.py",
+      "producer_sha256": "8152e68e31d996757cdf2cbc1c3d90ae61973404f86e666d1cc319f0d72bb07e",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-after-native.json",
+      "artifact_sha256": "2d6feca03d9db165c83f1f896f0fde480da0f3609da5dd383a52392b3b67a520",
+      "merged_log_base64": "Q3VycmVudCBGbG93RXhwciBuYXRpdmUgY2FwdHVyZTogMTAwIGNvbXBsZXRlIHBhcmVudCBpbnB1dHM7IDM4NyB3YXJtIHJvd3M7IDIzNSBjb2xkIHJvd3M7IGJ5dGUtZXhhY3QgcmVjdXJyZW5jZXMK"
+    },
+    {
+      "name": "faults",
+      "actual_tool_session": 38856,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-faults.py",
+      "producer_sha256": "840c795267a98107ecc2b9903ee65976b3db8d66178707b8eb2718da307251bf",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-faults.json",
+      "artifact_sha256": "4da608fa5f945a35e2d5c90e06f156f100f57bc7fb407e1fe9796bad07673977",
+      "merged_log_base64": "Rmxvd0V4cHIgY29tcGxldGUtc291cmNlIGZhdWx0cyBQQVNTOiAxMyBlZmZlY3RpdmUgdmFyaWFudHM7IFs0OTAsIDExMSwgMTE5LCAxMTcsIDc0LCAxMjYsIDMzOCwgMTgsIDUyMiwgMTAxMiwgMiwgNjAyLCAxMDBdIGFjdHVhbCBmYWlsdXJlcwo="
+    },
+    {
+      "name": "consumers",
+      "actual_tool_session": 41833,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers.py",
+      "producer_sha256": "582b4e93062d68d31eece26f868b1f2daf9c1f3b5673dacb41b74ae134b4ae52",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-consumers.json",
+      "artifact_sha256": "eebdae887c030624786f6136bf8c16cc8d10bd005229507ff0abe1b321c070c6",
+      "merged_log_base64": "Rmxvd0V4cHIgc3VwcGxpZWQgY29uc3VtZXJzIFBBU1M6IDc3IHN1aXRlczsgMjU2IGNvbXBsZXRlIGlucHV0cwo="
+    },
+    {
+      "name": "compat",
+      "actual_tool_session": 91242,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-compat.py",
+      "producer_sha256": "b8fe07d3bca55f1e468c8658405e2d6e084c8f68a36ea9b33fa5c09497fb43a1",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-compat.json",
+      "artifact_sha256": "03e5b7e123c0e49c67fc24b70c7a10fffca0b4b05f9a5d5eaecd3b03e28637fc",
+      "merged_log_base64": "Rmxvd0V4cHIgcmVxdWlyZWQtY2FsbGJhY2sgc3VwcGxlbWVudGFsIHN0YW5kYXJkIHN5bnRheC9wdWJsaWMgUGhhc2UwIGNvbW1hbmRzIFBBU1MK"
+    },
+    {
+      "name": "book",
+      "actual_tool_session": 7677,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-book.py",
+      "producer_sha256": "519e33b3c1bfeff3c963a4841c673ad4d038c9dfa28213524506e9e170eb920c",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-book.json",
+      "artifact_sha256": "d4378c613a72c45687a0cbf5ad5895c8c89e5e34ae2148caaef1a15295ed0733",
+      "merged_log_base64": "Q29tcGxldGUgc3VwcGxpZWQgYm9vayBQQVNTOiA4OSBpbnB1dHM7IGZvdXIgY29udHJvbHM6IG1pc3Npbmctc3VtbWFyeSBjb21tYW5kLCBib3RoIGNoYW5nZWQgcmVuZGVyZWQgbWFya2VycyBhbmQgbWlzc2luZy1pbmNsdWRlIGVycm9yIFJFRHMgcmV0YWluZWQuCg=="
+    },
+    {
+      "name": "knowledge",
+      "actual_tool_session": 30369,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-knowledge.py",
+      "producer_sha256": "b2b0579272eb8bff20a96775d90a83b72ef3970a2acd7b56910104ee1f764d0d",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-knowledge.json",
+      "artifact_sha256": "dae105a446062bbc53f1903e6c84b3dd9c60150de74d9c9e06ffe3e9d8a467c3",
+      "merged_log_base64": "Q29tcGxldGUgRmxvd0V4cHIgS25vd2xlZGdlIGdhdGUgUEFTUzoxNDg1IE1hcmtkb3duIGlucHV0czsgc2V2ZW4gY2FyZCBvdmVybGF5czsgZnVsbCBvcmlnaW5hbC9jdXJyZW50IGN1c3RvZHkK"
+    },
+    {
+      "name": "review",
+      "actual_tool_session": 65530,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-review.py",
+      "producer_sha256": "bb12f59c7e8530ae05c70ba776009a4a04e62d2f78bfe8141d5c6e802b1a23fc",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-review.json",
+      "artifact_sha256": "dd76a938547781c5d576364dd41beb285246af76e9eb58346cef3b67a85cc53f",
+      "merged_log_base64": "Rmxvd0V4cHIgaW5kZXBlbmRlbnQgcmV2aWV3IFBBU1M6MTc5NSBwYWlyZWQvNDkwIG9yaWdpbmFsIFJFRDsxMyBmYXVsdHM7Nzcgc3VpdGVzLzI1NiBpbnB1dHMvMTk0NzAgYXNzZXJ0aW9uczs2MjIgbmF0aXZlIHJvd3M7b3JpZ2luYWwyMTgvZnVsbDU4NTgyO0tub3dsZWRnZTE0ODUvMTM0OTtib29rODkvNDsgc3VwcGxlbWVudGFsIFBoYXNlMDEwMzUK"
+    },
+    {
+      "name": "evidence",
+      "actual_tool_session": 66746,
+      "actual_returncode": 0,
+      "source": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-evidence.py",
+      "producer_sha256": "d57930b8b4f64bcb96fb31d2f3a31927e4f9a2050772df2d1cc72d378d1debaa",
+      "artifact": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-evidence.json",
+      "artifact_sha256": "79ecde52b1020baf8ff56ba82415711819626eecde1044349d447671e8dd98ed",
+      "merged_log_base64": "Rmxvd0V4cHIgc2VtYW50aWMgZXZpZGVuY2UgUEFTUzogZml2ZSByZWFzb24tc2Vuc2l0aXZlIGRlbmlhbHMgYW5kIGV4YWN0IHJlc3RvcmF0aW9ucwo="
+    }
+  ],
+  "scope": "Actual tool completions consumed in this session. Full inner native/paired/fault/consumer/Phase0/book/Knowledge/evidence channels remain in their original records. Initial normal prove55712/1 is retained separately in first-red.json.gz. Separate outer channels were not captured; these merged logs are exact, not reconstructed. All listed writers are retired."
+}
