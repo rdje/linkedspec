@@ -1722,11 +1722,48 @@ parent's packet.
 The focused proof executes both complete native helper bodies without stubs.
 Complete helper and language admission remain separate activities.
 
-After these capture repairs, one MethodLowering ingress site remains from the October11 compiled-source inventory:
+### Selected named-helper dispatch
 
-| Entry form | Sites | Native behavior the repair must preserve |
-|---|---:|---|
-| Selected named-helper CODE dispatch | 1 | Existing six-helper order, actual selected references and first nonempty result |
+The block side-effect owner now gives each selected CODE helper its own private
+capture boundary. It first tries AST assignment lowering, then parses the call
+and rejects `return` before the dispatch loop. The loop preserves this order:
+
+| Position | Selected helper |
+|---:|---|
+| 1 | Scalar assignment operator |
+| 2 | Array append operator |
+| 3 | Array end mutation method |
+| 4 | Hash index assignment operator |
+| 5 | `set_key` statement |
+| 6 | `push` statement |
+
+All six actual references are selected before the first iteration. Replacing a
+helper name during a callback leaves the current list intact and affects the
+next owner call. The boundary invokes the retained reference; a matching name
+does not establish publication authority. A caller's temporary Perl helper
+localization keeps its normal scope restoration, including after an exception.
+
+Each callback receives the owner's writable local trimmed expression and local
+dependency-reference slot. Changing `statement` to `statement!` reaches later
+helpers while leaving the caller's input unchanged. Updating the dependency
+hash contents is shared with the caller; assigning a different hash to the local
+dependency-reference argument reaches later helpers and fallback without
+replacing the caller's reference.
+
+Undefined and empty results try the next helper. `0` is a nonempty result and
+returns immediately, as do the native reference results. Calls remain scalar
+under list or void owner calls. If all six helpers fall through, the existing
+`set(...)` argument-normalization/assignment branch precedes component fallback.
+Native coercions, errors, fatal objects and cold loading retain their behavior.
+Registered actual CODE children remain eligible for their own packets, and
+child packets remain separate from parent publication.
+
+All17 sites from the October11 remaining-call inventory now have independently
+verified bounded repairs: one inline required trim, seven optional kind calls,
+two optional AST calls, two tracking predicates, four formal trim calls and this
+selected CODE dispatch. This closes that original site population; complete
+helper, static-call, FlowExpr/ControlFlow and independent private/pipeline/parent
+admissions retain their own owners.
 
 This is a compiled syntax inventory, not successful execution of every branch.
 It includes nested anonymous closures and resolves their lexical bindings: the

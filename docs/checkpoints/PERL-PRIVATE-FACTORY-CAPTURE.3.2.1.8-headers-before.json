@@ -1,0 +1,17 @@
+{
+  "producer_sha256": "bae94ed29e1328ca8aa6b00cfaced0547791965e8935688b5811af849eaa93b8",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-review.py",
+    "--preflight"
+  ],
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjgtaGVhZGVycy1yZXZpZXcucHkiLCBsaW5lIDU5LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IG5vdCBjdXJyZW50X29ycGhhbnMsICgnY3VycmVudCBLbm93bGVkZ2UgaGVhZGVyIGhhcyBvcnBoYW4gbGlzdCBlbnRyaWVzJywgY3VycmVudF9vcnBoYW5zKQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6ICgnY3VycmVudCBLbm93bGVkZ2UgaGVhZGVyIGhhcyBvcnBoYW4gbGlzdCBlbnRyaWVzJywgW3sncGF0aCc6ICdkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC1hc3QtY2FsbC1jYXB0dXJlLm1kJywgJ2xpbmUnOiAyMX0sIHsncGF0aCc6ICdkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC1hc3QtY2FsbC1jYXB0dXJlLm1kJywgJ2xpbmUnOiAyMn0sIHsncGF0aCc6ICdkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC1ibG9jay1jb21wb25lbnQtY2FwdHVyZS5tZCcsICdsaW5lJzogMTl9LCB7J3BhdGgnOiAnZG9jcy9rbm93bGVkZ2UvcGVybC1tZXRob2QtYmxvY2stY29tcG9uZW50LWNhcHR1cmUubWQnLCAnbGluZSc6IDIwfV0pCg==",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers.py": "5c2e712d4527cd1f90fa4980eda0f97f1eba047e9d77fdb030461d159b360a81",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json": "cee9c7ae0f04fe8d106197fc89bace7ab12cf2ebda24db1730904d0425017375",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-review.py": "3222a48336ee019e882a796092aa83119135b3ab4cfd14fe14093e545b345651"
+  },
+  "scope": "Actual original current-header RED before correction, with exact separate channels; no fact body or original observation is rewritten."
+}

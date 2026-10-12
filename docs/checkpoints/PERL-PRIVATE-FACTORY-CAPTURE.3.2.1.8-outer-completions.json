@@ -1,0 +1,23 @@
+{
+  "rows": [
+    {
+      "name": "after-native",
+      "actual_tool_session": 98898,
+      "actual_returncode": 0,
+      "merged_log_base64": "TmFtZWQtZGlzcGF0Y2ggYWZ0ZXIgbmF0aXZlIGNvbW1hbmRzIHJldGFpbmVkOiAyNDQgaW5wdXRzOyAyIGZyZXNoIHByb2Nlc3Nlcwo="
+    },
+    {
+      "name": "faults",
+      "actual_tool_session": 82991,
+      "actual_returncode": 0,
+      "merged_log_base64": "TmFtZWQtZGlzcGF0Y2ggaW52ZXJzZSBjb21wbGV0ZSBUQVA6IDQ4NyBhc3NlcnRpb25zOyAxMzIgUkVECk5hbWVkLWRpc3BhdGNoIG9wYXF1ZS1jb2RlIGNvbXBsZXRlIFRBUDogNDg3IGFzc2VydGlvbnM7IDYwIFJFRApOYW1lZC1kaXNwYXRjaCBjb3B5LXRyaW1tZWQgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgMjAzIFJFRApOYW1lZC1kaXNwYXRjaCBjb3B5LWRlcHMgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgMjA1IFJFRApOYW1lZC1kaXNwYXRjaCBsaXN0LWNvbnRleHQgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgMjM4IFJFRApOYW1lZC1kaXNwYXRjaCBib29sZWFuLXJlc3VsdCBjb21wbGV0ZSBUQVA6IDQ4NyBhc3NlcnRpb25zOyAxMiBSRUQKTmFtZWQtZGlzcGF0Y2ggZGVmaW5lZC1yZXN1bHQgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgNDEgUkVECk5hbWVkLWRpc3BhdGNoIHJldmVyc2Utb3JkZXIgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgMjY0IFJFRApOYW1lZC1kaXNwYXRjaCBsYXRlLW5hbWUtcmVzb2x1dGlvbiBjb21wbGV0ZSBUQVA6IDQ4NyBhc3NlcnRpb25zOyAyMjggUkVECk5hbWVkLWRpc3BhdGNoIGFzdC1ndWFyZCBjb21wbGV0ZSBUQVA6IDQ4NyBhc3NlcnRpb25zOyA3IFJFRApOYW1lZC1kaXNwYXRjaCByZXR1cm4tZ3VhcmQgY29tcGxldGUgVEFQOiA0ODcgYXNzZXJ0aW9uczsgMyBSRUQKTmFtZWQtZGlzcGF0Y2ggc2V0LWZhbGxiYWNrIGNvbXBsZXRlIFRBUDogNDg3IGFzc2VydGlvbnM7IDYgUkVECg=="
+    },
+    {
+      "name": "consumers",
+      "actual_tool_session": 6662,
+      "actual_returncode": 0,
+      "merged_log_base64": "TmFtZWQtZGlzcGF0Y2ggc3VwcGxpZWQgY29uc3VtZXJzIFBBU1M6IDc2IHN1aXRlczsgMjQ2IGlucHV0cwo="
+    }
+  ],
+  "scope": "All three actual outer0 completions were observed and their exact shell-merged logs retained; inner commands preserve separate full channels/statuses in the respective source/native records."
+}

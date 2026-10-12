@@ -2,6 +2,8 @@
 id: repo-generated-artifact-cleanup-boundary
 title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
 answers:
+  - "why did historical Knowledge reverify routes disappear from the derived map"
+  - "which task rejects orphan list entries after a scalar reverify field"
   - "why can a new maintenance claim break an older readonly review"
   - "which task owns the fixed baseline claim namespace repair"
   - "which commits admitted initial repository artifact ignores and local dirt policy"
@@ -26,7 +28,7 @@ answers:
   - "which live claims must be preserved before changing a shared book chapter"
   - "why was the October10 hygiene claim preserved during ADR0133"
   - "do historical checked claims need a tracked producer input"
-date: 2026-10-11
+date: 2026-10-12
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
@@ -38,13 +40,7 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
-  - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
-  - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
-  - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
-  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
-  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
 ---
 
 # Shared publication inputs and historical provenance
@@ -158,3 +154,33 @@ distinguish selection, local and substring aliases, call context and parsing.
 Named/blessed/amp-callable dispatch and already-bound nesting retain native
 behavior. One original named-helper dispatch ingress remains under .8; no
 complete helper/private/parent/canonical or other-backend admission is claimed.
+
+
+Historical header routes retained at accepted22132b2b:
+- Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults.
+- Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands.
+- Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged.
+- Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged.
+- Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged.
+- Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged.
+
+Selected named-helper dispatch .3.2.1.8 binds only invocation694. Exact244-input
+recurrence retains185 loaded/28 cold rows; only54 authority rows change afterward.
+The identical487 checks retain132 original authority REDs/355 controls/all GREEN.
+Twelve source faults and all76 supplied suites/246 inputs/17675 assertions pass.
+Six literal helper references are selected before iteration. Mid-call name
+replacement affects the next owner call; trimmed/deps helper-local scalar slots
+remain writable and separate from caller slots. Mutating map contents remains
+shared, while replacing the local deps scalar reaches later callbacks/fallback
+without replacing the caller reference. Zero stays nonempty; native context,
+reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
+All17 sites from the original inventory now have their bounded repairs; full
+named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.
+
+The bounded six-card header census retains four orphan list entries after scalar
+reverify fields in two cards. The portable generator clears its list key after
+a scalar and ignores those entries. Current headers now use one scalar readonly
+route; every original route is archived explicitly above. The original malformed
+header RED and corrected review are retained under .3.2.1.8-headers*. No original
+fact body is rewritten. Canonical gate hardening is owned by .3.2.1.11 immediately
+after .8; this bounded repair does not admit the full Knowledge grammar/gate.

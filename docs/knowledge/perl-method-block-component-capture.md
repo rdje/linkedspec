@@ -2,6 +2,9 @@
 id: perl-method-block-component-capture
 title: Block component and AST pipeline callbacks retain native references and fallbacks
 answers:
+  - "when are the six named block helper references selected"
+  - "do selected block helpers receive writable local trimmed and deps slots"
+  - "does replacing a named block helper during iteration affect the current call"
   - "which MethodLowering required calls have private emission bindings"
   - "can block component side effect dependencies donate nested publication"
   - "does an undefined primitive or direct access lowerer result still permit fallback"
@@ -12,12 +15,10 @@ answers:
   - "does the optional AST pipeline callback mutate the actual node source and span slots"
   - "how many map reads precede the optional AST pipeline CODE guard"
 date: 2026-10-12
-status: optional AST pipeline isolation verified; earlier block-component proof remains historical
+status: selected named-helper CODE dispatch isolated; earlier block-component and optional AST proofs remain historical
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
-  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
-  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -105,3 +106,22 @@ distinguish selection, local and substring aliases, call context and parsing.
 Named/blessed/amp-callable dispatch and already-bound nesting retain native
 behavior. One original named-helper dispatch ingress remains under .8; no
 complete helper/private/parent/canonical or other-backend admission is claimed.
+
+
+Historical header routes retained at accepted22132b2b:
+- Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture.
+- Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged.
+- Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged.
+
+Selected named-helper dispatch .3.2.1.8 binds only invocation694. Exact244-input
+recurrence retains185 loaded/28 cold rows; only54 authority rows change afterward.
+The identical487 checks retain132 original authority REDs/355 controls/all GREEN.
+Twelve source faults and all76 supplied suites/246 inputs/17675 assertions pass.
+Six literal helper references are selected before iteration. Mid-call name
+replacement affects the next owner call; trimmed/deps helper-local scalar slots
+remain writable and separate from caller slots. Mutating map contents remains
+shared, while replacing the local deps scalar reaches later callbacks/fallback
+without replacing the caller reference. Zero stays nonempty; native context,
+reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
+All17 sites from the original inventory now have their bounded repairs; full
+named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.

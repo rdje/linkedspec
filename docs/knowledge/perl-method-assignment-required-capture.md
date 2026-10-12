@@ -21,13 +21,7 @@ status: two tracking predicates isolated under .3.2.1.6; original required and o
 tags: [perl, actionir, callbacks, capture, aliases, assignment]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
 evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
-reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
-  - "After later source/book changes these assignment commands require accepted ea6926fefee33cbf77fe512a821d7ba2a4ffc14f Git inputs including the original live claim. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py; separately final-review.py and publish-claim.py under that wrapper. Readonly defaults; capture/freezer/--capture are one-shot writers. Earlier generalized-return proof requires accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including its original live claim. MEMORY.md owns the current frontier."
-  - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
-  - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
-  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
-  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
 ---
 
 Only the required resolver returns in `_lower_assign_statement`,
@@ -137,3 +131,25 @@ distinguish selection, local and substring aliases, call context and parsing.
 Named/blessed/amp-callable dispatch and already-bound nesting retain native
 behavior. One original named-helper dispatch ingress remains under .8; no
 complete helper/private/parent/canonical or other-backend admission is claimed.
+
+
+Historical header routes retained at accepted22132b2b:
+- Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults.
+- After later source/book changes these assignment commands require accepted ea6926fefee33cbf77fe512a821d7ba2a4ffc14f Git inputs including the original live claim. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py; separately final-review.py and publish-claim.py under that wrapper. Readonly defaults; capture/freezer/--capture are one-shot writers. Earlier generalized-return proof requires accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including its original live claim. MEMORY.md owns the current frontier.
+- Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged.
+- Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged.
+- Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged.
+- Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged.
+
+Selected named-helper dispatch .3.2.1.8 binds only invocation694. Exact244-input
+recurrence retains185 loaded/28 cold rows; only54 authority rows change afterward.
+The identical487 checks retain132 original authority REDs/355 controls/all GREEN.
+Twelve source faults and all76 supplied suites/246 inputs/17675 assertions pass.
+Six literal helper references are selected before iteration. Mid-call name
+replacement affects the next owner call; trimmed/deps helper-local scalar slots
+remain writable and separate from caller slots. Mutating map contents remains
+shared, while replacing the local deps scalar reaches later callbacks/fallback
+without replacing the caller reference. Zero stays nonempty; native context,
+reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
+All17 sites from the original inventory now have their bounded repairs; full
+named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.

@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "producer_sha256": "3222a48336ee019e882a796092aa83119135b3ab4cfd14fe14093e545b345651",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json": "cee9c7ae0f04fe8d106197fc89bace7ab12cf2ebda24db1730904d0425017375",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-review.py": "3222a48336ee019e882a796092aa83119135b3ab4cfd14fe14093e545b345651",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers.py": "5c2e712d4527cd1f90fa4980eda0f97f1eba047e9d77fdb030461d159b360a81",
+    "docs/knowledge/perl-legacy-hash-kind-callback.md": "001cd2863368f1eee1ab71ee892b54d121f0320d6ff62e60911ba44b5c758680",
+    "docs/knowledge/perl-method-assignment-required-capture.md": "2acdf0089c3a6aacbdf523d47f1f43485a90f1bd3678b8fe484ef460de390ee6",
+    "docs/knowledge/perl-method-ast-call-capture.md": "a67653eb272859fdc41384bead8c84684b93353f147996efd526c05a3abcd86d",
+    "docs/knowledge/perl-method-block-component-capture.md": "ca0fb7b09ec167c7e7e1cd6d00b8d310da972431e30f1432ea78530eb4a3401b",
+    "docs/knowledge/perl-method-trim-capture.md": "c030cb1266afaac7705d959e790410f1247069e02cf0a4d3b708c3aa28b1a008",
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md": "6942d099638d47c70a2dad7d0ddee08b142af8c062a468a7954039036df2d8e8",
+    "knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md": "0eada20c887206331e1dd76e023c13da85205b3d41b2cdecfd8efb028cc09853",
+    "knowledge-map/scripts/check_knowledge_map.sh": "900bd7addc82cf56b0f9818812e929f19438b224a1d0878ec723d0912d55458b",
+    "knowledge-map/scripts/gen_knowledge_map.sh": "9bfe23dc21334181ad9d641c536e18a16b9ef4d99a00c7abd2b69a50461d39b1"
+  },
+  "cards": 6,
+  "original_orphans": 4,
+  "current_orphans": 0,
+  "scope": "Six current headers have one scalar current readonly route and no orphan list entries. Exact accepted original headers/parser inputs and original fact bodies remain; every original route is explicitly historical in the body. The iterator route names its actual .5 accepted inputs. This bounded repair does not claim canonical gate/full Knowledge syntax admission; .11 owns enforcement."
+}

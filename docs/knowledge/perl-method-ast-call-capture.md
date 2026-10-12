@@ -17,9 +17,7 @@ date: 2026-10-12
 status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Iterator-review.py verifies the distinct native-first input repair. Historical six-role AST proof requires accepted9085eb1e5 logical inputs; .3.1.3.1-final-review.py/preservation-control.py/publish-claim.py remain readonly historical entrypoints. Hash-key requires2e9e5443e. Capture/freezer/--capture are one-shot writers; MEMORY.md owns the frontier."
-  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
-  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
+reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-publish-claim.py; review.py, native-review.py, book-review.py, headers-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical routes below require their accepted Git inputs; capture writers are retired."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The
@@ -127,3 +125,25 @@ distinguish selection, local and substring aliases, call context and parsing.
 Named/blessed/amp-callable dispatch and already-bound nesting retain native
 behavior. One original named-helper dispatch ingress remains under .8; no
 complete helper/private/parent/canonical or other-backend admission is claimed.
+
+
+Historical header routes retained at accepted22132b2b:
+- Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Iterator-review.py verifies the distinct native-first input repair. Historical six-role AST proof requires accepted9085eb1e5 logical inputs; .3.1.3.1-final-review.py/preservation-control.py/publish-claim.py remain readonly historical entrypoints. Hash-key requires2e9e5443e. Capture/freezer/--capture are one-shot writers; MEMORY.md owns the frontier.
+- Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged.
+- Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged.
+
+Historical iterator repair: docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-iterator-review.py requires accepted99f2939ac logical inputs.
+The former header ambiguously placed Iterator-review.py under the later current prefix; the archive above preserves that error, while this route names its actual producer and accepted inputs.
+
+Selected named-helper dispatch .3.2.1.8 binds only invocation694. Exact244-input
+recurrence retains185 loaded/28 cold rows; only54 authority rows change afterward.
+The identical487 checks retain132 original authority REDs/355 controls/all GREEN.
+Twelve source faults and all76 supplied suites/246 inputs/17675 assertions pass.
+Six literal helper references are selected before iteration. Mid-call name
+replacement affects the next owner call; trimmed/deps helper-local scalar slots
+remain writable and separate from caller slots. Mutating map contents remains
+shared, while replacing the local deps scalar reaches later callbacks/fallback
+without replacing the caller reference. Zero stays nonempty; native context,
+reference/coercion/error/fatal/guard/fallback/cold behavior remains exact.
+All17 sites from the original inventory now have their bounded repairs; full
+named helper, FlowExpr/ControlFlow, private/parent/canonical admissions remain open.

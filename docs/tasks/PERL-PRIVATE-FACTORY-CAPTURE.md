@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / remaining optional and direct callback isolation next
+- Status: `active` / Knowledge header gate .3.2.1.11 next before FlowExpr
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-12`
@@ -883,7 +883,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare measurements at activation.
   Acceptance: Commit each bounded family before FlowExpr and infer no separate parent admission.
 
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site. Readonly accepted-claim census repair .3.2.1.10 follows due hygiene before .9; it adds no runtime ingress site.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`, plus discovered repair `.3.2.1.11`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site. Readonly accepted-claim census repair .3.2.1.10 follows due hygiene before .9; it adds no runtime ingress site.
 
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
@@ -1104,16 +1104,39 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7 - isolate formal trim callback calls`; focused normal all10 doctrines, explicit memory, both history checks and whitespace govern landing from cleanb1133da42. Clear brief and verify post-pointer/post-memory/clean Git before .8; no push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`
-  Status: `pending`
+  Status: `done`
   Goal: Isolate selected named-helper CODE dispatch with a private emission boundary.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7`
   Owned paths: Only _lower_block_side_effect_statement lowerer dispatch loop in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
   Native contract: One dynamic site selecting six named helper CODE references in existing order. Keep selected reference/localization/replacement behavior, actual trimmed/deps argument slots, first nonempty return and undef/error/fatal restoration. No authority by helper name and no complete static helper admission.
-  Planned tier: `focused`
-  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
-  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
-  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Verification tier: `focused`
+  Focused checks: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Canonical trigger: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json`
   Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+  Activation: Clean22132b2b0eccb5ac38ef3c756f1b1e5b08992947 after .7 normal7850 actual0/all10 doctrines, explicit post-pointer/post-memory0, brief0 and clean Git, with no remaining job. Read current roadmap/task contracts, compiled inventory card, both immediate block/AST callers, real owner664-710, existing secondary controls and current book final-one table. Own only selected invocation694. Preserve all522 current bindings/full120245 publication and actual readonly baseline before bound writes. Six literal named CODE references are selected before iteration; native-first diagnostic must establish snapshot/replacement/localization, writable trimmed/deps slots versus caller copies, context, first defined nonempty result including zero, fallback/guards/coercion/errors/fatal/cold and actual identity. Complete named helper behavior and pipeline/private/parent/canonical admission remain separate.
+
+  Owned P3 continuity defect: During scoped recovery, perl-method-ast-call-capture.md and perl-method-block-component-capture.md (and any same-six-card affected member established by the bounded census) have orphan indented list items after scalar reverify fields. The constrained YAML contract permits scalar or block list, not both; actual gen_knowledge_map.sh clears curkey for scalar values and ignores these orphan historical routes. The prior all10 commit accepted this malformed input. Preserve .7 first, then fix current six-card headers without changing original bodies or observations. The AST header also ambiguously routes Iterator-review.py under the current prefix although the actual distinct iterator repair belongs to .5; point that historical route to its actual accepted inputs.
+
+  Owned P2 enforcement defect: check_knowledge_map.sh validates required-field presence but ignores malformed orphan list syntax, so the current defect passes its gate. Root mechanism is established by the actual awk scalar/list handling and accepted .7 output, against KNOWLEDGE_MAP_ARCHITECTURE.md section2. Schedule canonical repair .3.2.1.11 immediately after .8, before FlowExpr. Do not mix gate/infrastructure writes into this focused source slice. The two related findings are owned here and linked to .11 until verified closure.
+
+  Preservation70889 actual0: Every522 original binding/full120245 publication and actual readonly baseline0/empty stderr are verified before bound writes. Only .7 durability mode/revision becomes historical at22132b2b; complete original publication and producers/observations stay exact. First diagnostic is authored without behavioral expectations: actual owner body, six localized selected callbacks, controlled secondary AST/assignment/component, active-pad observation, local map/scalar alias effects, snapshot/name replacement and first-result/cold/guard/native value/error cases. Production/cards/book remain unchanged until native observations.
+
+  First native61054 actual0 and recurrence33043 actual0: Complete244 inputs/modes and both full command channels repeat byte-exactly. Warm185=72 callback/53 branch/60 authority; cold28=18 callback/10 branch. No addresses or unexpected instrument errors; only eager missing-required diagnostics669. Readonly B proves actual selected references, writable trimmed/deps helper-local argument slots, caller/local separation and native reference returns. Trimmed mutation reaches later helpers; shared map-content mutation reaches caller, while replacing the local deps scalar reaches later callbacks/fallback but leaves caller reference unchanged. Six references are selected before iteration: mid-call name replacement affects only the next owner call, and all six names restore after success/fatal. Zero is a defined nonempty result. AST-first, return guard, set normalizer/assignment fallback and cold behavior remain distinct. No source/card/book changes or behavior assertions preceded these observations. The original diagnostic/producer and actual first outer completion remain exact.
+
+  Original RED87574 actual0 producer: Identical487 fixture completes on unchanged accepted source with132 authority-only failures and355 passing native controls. All246 supplied inputs/modes, complete executed source/syntax/TAP/channels retained. No fixture/oracle/producer correction. Only after observed RED, bind invocation694 directly with the actual selected CODE reference. All other source bytes/global lines, eager requirements, six-reference snapshot, scalar context, writable local arguments, first nonempty results and fallback order remain unchanged.
+
+  Header repair: Original bounded six-card census retains four orphan entries in two scalar reverify headers; actual headers-before.py rejects that original current syntax before correction. Current six headers are normalized to one scalar readonly route, with every original route moved verbatim to an explicitly historical body appendix; original bodies remain prefixes. The iterator route explicitly names .5/accepted99f. One transient orchestration snippet failed JavaScript parsing before any nested command executed because Markdown quoting terminated its command string; no project file, native observation, fixture or producer changed in that failed attempt. Gate hardening remains canonical .11.
+
+  Verification: GREEN26127 actual0 retains487/zero RED. Native-after98898, fault loop82991 and full consumers6662 actual0, with exact merged outer logs and complete inner channels retained. All12 faults retain487 complete plans and failures132/60/203/205/238/12/41/264/228/7/3/6; inverse restores exactly132 original failure names/numbers. All76 ordered supplied headers/numeric plans/246 inputs/17675 assertions pass. Native review retains185/28 with only54 authority changes and byte-exact244-input original recurrence. Book75870 actual0/book-review0 retains89 inputs/four controls. Header original census6/four-orphan child RED and same header-review current6/zero orphan PASS retain exact original headers/routes/bodies. Standard84224 actual0 retains two syntax checks/public1035 as supplemental evidence without a complete transitive capsule. Composed82365 actual0, evidence85565 actual0/seven semantic REDs with exact restorations and publication92075 actual0/534 inputs/123810 bytes pass. Composed/native/book/header/evidence/publication reviewers are readonly by default.
+
+  Result: Selected named-helper dispatch .3.2.1.8 is verified: isolate only invocation694, preserving every other production byte/global line. Six-reference order/snapshot and actual CODE identity, writable local trimmed/deps slots, caller copies/shared maps/local reference replacement, scalar context, first nonempty/zero/reference results and native guards/fallback/coercion/errors/fatal/localization/cold remain exact. Native185 loaded/28 cold repeats byte-exactly before expectations/source edits; only54 authority rows change afterward. Identical487 has132 original authority REDs/355 controls/all GREEN. Twelve source faults, full76 supplied suites/246 inputs/17675 assertions, evidence7/book89/four controls and supplemental standard Phase01035 pass. Six current Knowledge headers have scalar readonly routes; original four-orphan RED, every old route and fact body remain exact. Original522/full120245/baseline stay historical at22132b2b. Readonly534-live-input/123810-byte publication passes. All17 original inventory sites have bounded repairs; full named-helper/private/parent/canonical admissions remain open. Canonical Knowledge gate repair .11 is next before FlowExpr. TYPE-REFERENCE-BOOK stays queued.
+
+  Closure: The selected dispatch gap and current header/iterator-routing defects are fixed and verified. Only invocation694 changes in production. No native observation, fixture, oracle or producer correction occurs; transient orchestration quoting failed before any nested command executed. Original first captures/outer receipts/full publication remain immutable. The permissive Knowledge gate defect is still owned under canonical .11, next before FlowExpr; no infrastructure or complete-helper admission is inferred here.
+
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8 - isolate selected named-helper dispatch`; focused normal all10 doctrines, explicit memory, both history checks and whitespace govern landing from clean22132b2b. Clear brief and verify post-pointer/post-memory/clean Git before .11; no push.
+  Final handoff review: The generated frontier repeated .11 in rows1/2. Removed the duplicate and renumbered the remaining five ordered entries before landing; the single next action remains .11.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9`
   Status: `done` / P2 native container-regex cache repair
@@ -1206,11 +1229,23 @@ quoted-first example do not change here. Other repositories and all submodules r
   Publication: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10-publish-claim.py (readonly default). First failed instruments, available outer channels, complete inner channels, first positive review and before-card bytes remain immutable.
   Landing: Normal focused all10 doctrine hooks, explicit memory architecture, derived Knowledge, both history-pressure and whitespace checks required; clear brief and confirm clean/post-pointer/post-memory before .9. No full-private/parent/canonical admission.
 
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11`
+  Status: `pending`
+  Goal: Reject malformed constrained Knowledge front matter, including orphan list items following scalar values, and retain strict current reverify routing.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`
+  Owned defect: P2 existing Knowledge gate accepts malformed scalar-plus-list headers and the generator silently drops historical reverify notes. Reproduce from accepted22132b2b headers and the actual awk parsers; preserve historical evidence. Impact: invalid fact syntax and silently missing retrieval metadata survive a claimed enforced doctrine.
+  Owned paths: Knowledge parser/checker and bounded fixture/read-only diagnosis, impacted current fact headers/derived map, local architecture documentation/book and continuity; no other-repository writes or runtime language change.
+  Planned tier: `canonical`
+  Planned focused proof: Retain complete bounded malformed-header census before fixes, actual gate RED on original acceptance of distinguishing malformed cases, valid scalar/inline/block-list controls and unsupported/malformed syntax denials with exact producer/input/channel identities. Preserve intersecting accepted claims before bound writes. Prove current full Knowledge population, generated index and existing architecture contracts; run ordinary doctrines plus exact staged canonical receipt before commit.
+  Planned canonical boundary: Existing doctrine/Knowledge enforcement infrastructure changes require canonical under ADR0073.
+  Planned claim record: none: Planning/scheduling only; declare the actual source-bound measurement at activation.
+  Acceptance: Fix and verify the gate gap immediately after .8 before FlowExpr; preserve historical claims/observations and current fact bodies. Follow COMMIT.md and clean handoff.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8` | `pending` | From clean HEAD preserve accepted .7 publication, then native-first proof for selected named-helper CODE dispatch. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11` | `pending` | Preserve accepted .8, reproduce and harden constrained Knowledge header validation with exact staged canonical proof. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
@@ -1903,3 +1938,13 @@ beside its stable ID; Git is the commit-identity authority.
 - [x] **ADDRESSED (verified)** — Identical507/144 original RED/363 controls/all GREEN; all14 syntax-valid faults distinguish authority, aliases, contexts and scan order. Four inverses cover exactly144 original failures, including disclosed dot whole-row overlap. Six semantic evidence corruptions reject beyond updated immediate hashes and restore exact PASS.
 - [x] **NO REGRESSION** — Every75 ordered supplied suite/243 input/17188 numeric-plan assertion passes. Complete230/68 native population changes only52 authority rows; unchanged-source recurrence is byte-exact. Supplemental standard syntax/public Phase01035 passes with actual channels, without a complete transitive capsule or admission.
 - [x] **LOCKSTEP** — Original519/full119936/baseline remains exact atb1133da42. Readonly522/120245 publication, book89/four controls, six Knowledge routes/map1349/10406, root projections, bounded histories and live/MEMORY pointers align. Normal focused hooks and clean handoff precede named dispatch .8; independent admissions remain open.
+
+
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8
+
+- [x] **REPRODUCE / ISSUE** — Complete185 loaded/28 cold rows and identical487 original fixture retain132 authority-only REDs/355 native controls. Original six-card header census retains four orphan entries and actual semantic header RED before correction. Bounded private integration and current documentation defects do not imply a shipped language defect.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Real dispatch invocation694 bypasses the child boundary. Readonly active pads expose actual selected CODE/local trimmed/deps argument slots and six-reference snapshot. Actual portable awk clears its list key after scalar reverify fields, ignoring the orphan entries; the existing gate checks field presence and accepts that malformed syntax.
+- [x] **FIX** — Bind only the retained selected CODE invocation. Normalize six current headers to scalar readonly routing, retaining every original route/body and actual .5 iterator inputs. Keep canonical gate hardening separately owned by .11 before FlowExpr.
+- [x] **ADDRESSED (verified)** — Identical487/132 original RED/355 controls/all GREEN; all12 syntax-valid source faults, exact inverse132 failure population and seven actual semantic evidence RED/restorations distinguish source/native/original/consumer/book/header forgeries beyond immediate hashes. Header current6/zero orphan passes the same original-RED reviewer.
+- [x] **NO REGRESSION** — Every76 ordered supplied suite/246 input/17675 numeric-plan assertion passes. Native185/28 changes only54 authority rows; original recurrence is byte-exact. Supplemental standard syntax/public Phase01035 passes with actual channels, without a full transitive capsule or admission. Six named helper implementations remain secondary controls.
+- [x] **LOCKSTEP** — Original522/full120245/baseline remains exact at22132b2b. Readonly534/123810 publication, book89/four controls, six scalar Knowledge routes/map1349/10411, root projections, bounded histories and live/MEMORY pointers align. Normal focused hooks and clean handoff precede canonical gate .11; independent admissions remain open.

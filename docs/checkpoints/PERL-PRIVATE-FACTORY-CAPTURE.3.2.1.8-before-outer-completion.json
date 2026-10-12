@@ -1,0 +1,8 @@
+{
+  "actual_tool_session": 61054,
+  "actual_returncode": 0,
+  "producer_sha256": "1b566f8a8b763e24ee29178217442c8896b0d00188a650498562bd3fcff25f15",
+  "native_sha256": "76ed28f005d9c70e234ee9041359e5e3a6abbde3cc0cf1bbc81f46a1e50d707c",
+  "merged_log_base64": "TmFtZWQtZGlzcGF0Y2ggYmVmb3JlIG5hdGl2ZSBjb21tYW5kcyByZXRhaW5lZDogMjQ0IGlucHV0czsgMiBmcmVzaCBwcm9jZXNzZXMK",
+  "scope": "First actual outer0 and exact shell-merged final log; both fresh inner command channels/statuses are retained independently, without refresh."
+}

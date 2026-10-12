@@ -691,7 +691,7 @@ sub _lower_block_side_effect_statement {
   \&_lower_set_key_statement,
   \&_lower_push_statement,
  ) {
-  my $lowered = $lowerer->($trimmed, $deps);
+  my $lowered = _bind_emission_dependency($lowerer)->($trimmed, $deps);
   return $lowered if defined($lowered) && length($lowered);
  }
 
