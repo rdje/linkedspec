@@ -1,0 +1,74 @@
+{
+  "result": "PASS",
+  "producer_sha256": "33153854ecc17ea3ab157ced5e4ea67343eb8c5b403078f7504246cdbbd521d2",
+  "sources": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py": "a2073e24e2af1b8b8e9c5af66bc0e0d6edb9b58929559909f511172c4989b758",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.json": "a469ca35821181b1e6823f1877c94ac5aacea80be78616139d8447632a7c8311",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-data.json.gz": "92bab1e60fb7ad1df6ac66f4dc6f642aa910a4441505058d920a1b8b36662a19",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-compat-inflight.json": "971e53df636270469a44d0108358efa145cd89fb7c9724ed22342056611c0915",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence-recovery.py": "33153854ecc17ea3ab157ced5e4ea67343eb8c5b403078f7504246cdbbd521d2"
+  },
+  "original_inputs": 1897,
+  "refused_live": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+    ],
+    "returncode": 1,
+    "stdout_base64": "",
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMi9ldmlkZW5jZS5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc2hhKChST09UIC8gcGF0aCkucmVhZF9ieXRlcygpKSA9PSBpdGVtWydzaGEyNTYnXQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK"
+  },
+  "rows": [
+    {
+      "name": "original",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "T3B0aW9uYWwgRmxvd0V4cHIgYXJ0aWZhY3QgY29udHJvbHMgUEFTUzogc2l4IGFjdHVhbCBkZWVwZXIgZGVuaWFscyBhbmQgZXhhY3QgcmVzdG9yYXRpb25zCg==",
+      "stderr_base64": ""
+    },
+    {
+      "name": "changed-pending",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5mREVhTDEvdG1wL2Zsb3cta2luZC1hcnRpZmFjdC1yZWFkZXItMHBmemI5cV8vZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMi9ldmlkZW5jZS5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc2hhKChST09UIC8gcGF0aCkucmVhZF9ieXRlcygpKSA9PSBpdGVtWydzaGEyNTYnXQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK"
+    },
+    {
+      "name": "restored-pending",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "T3B0aW9uYWwgRmxvd0V4cHIgYXJ0aWZhY3QgY29udHJvbHMgUEFTUzogc2l4IGFjdHVhbCBkZWVwZXIgZGVuaWFscyBhbmQgZXhhY3QgcmVzdG9yYXRpb25zCg==",
+      "stderr_base64": ""
+    },
+    {
+      "name": "missing-fixture",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5mREVhTDEvdG1wL2Zsb3cta2luZC1hcnRpZmFjdC1yZWFkZXItMHBmemI5cV8vZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMi9ldmlkZW5jZS5weSIsIGxpbmUgNDUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc2hhKChST09UIC8gcGF0aCkucmVhZF9ieXRlcygpKSA9PSBpdGVtWydzaGEyNTYnXQogICAgICAgICAgICAgICB+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5eXgogIEZpbGUgIi9vcHQvaG9tZWJyZXcvQ2VsbGFyL3B5dGhvbkAzLjE0LzMuMTQuNy9GcmFtZXdvcmtzL1B5dGhvbi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4xNC9saWIvcHl0aG9uMy4xNC9wYXRobGliL19faW5pdF9fLnB5IiwgbGluZSA3NzcsIGluIHJlYWRfYnl0ZXMKICAgIHdpdGggc2VsZi5vcGVuKG1vZGU9J3JiJywgYnVmZmVyaW5nPTApIGFzIGY6CiAgICAgICAgIH5+fn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgogIEZpbGUgIi9vcHQvaG9tZWJyZXcvQ2VsbGFyL3B5dGhvbkAzLjE0LzMuMTQuNy9GcmFtZXdvcmtzL1B5dGhvbi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4xNC9saWIvcHl0aG9uMy4xNC9wYXRobGliL19faW5pdF9fLnB5IiwgbGluZSA3NzEsIGluIG9wZW4KICAgIHJldHVybiBpby5vcGVuKHNlbGYsIG1vZGUsIGJ1ZmZlcmluZywgZW5jb2RpbmcsIGVycm9ycywgbmV3bGluZSkKICAgICAgICAgICB+fn5+fn5+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KRmlsZU5vdEZvdW5kRXJyb3I6IFtFcnJubyAyXSBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5OiAnL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy8ubGlua2Vkc3BlYy1kYXRhL3NjcmF0Y2gvcnVucy9jaGVja291dC0xNzg1MDg4NzI1LTkzNDU4LTYxMjc5Nzk2L3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoLmZERWFMMS90bXAvZmxvdy1raW5kLWFydGlmYWN0LXJlYWRlci0wcGZ6YjlxXy90L2FjdGlvbmlyX2Zsb3dfa2luZF9jYXB0dXJlLnQnCg=="
+    },
+    {
+      "name": "restored-fixture",
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/evidence.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "T3B0aW9uYWwgRmxvd0V4cHIgYXJ0aWZhY3QgY29udHJvbHMgUEFTUzogc2l4IGFjdHVhbCBkZWVwZXIgZGVuaWFscyBhbmQgZXhhY3QgcmVzdG9yYXRpb25zCg==",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Unchanged original artifact reader and all original input bytes/modes in a complete supplied root, using the exact captured pending compatibility overlay. The original preflight semantic controls never read that extra inventory file; their complete six observations stay immutable. Final compatibility is separately verified by the current full review. Two actual recovery-integrity controls reject a changed overlay and missing real fixture, then restore. No Git repo is created and no runtime observation is refreshed."
+}

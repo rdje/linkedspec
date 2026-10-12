@@ -1,0 +1,8 @@
+{
+  "actual_outer_session": 6194,
+  "actual_outer_returncode": 1,
+  "result": "REJECTED_FIRST_AFTER",
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMi9ydW4ucHkiLCBsaW5lIDg4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IG9ic2VydmF0aW9uc1sxXVsncmV0dXJuY29kZSddID09IDAgYW5kIG5vdCBmYWlsZWQgYW5kIG5vdCBzdGRlcnIKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "producer_sha256": "a309c6496bd3478d3a50aeb3f9fc1933a685bf052fef4f2b8378ef58adb25cd3",
+  "scope": "The first after.json result field is a declared target, not acceptance: the producer actually fails with48 native diagnostic-location mismatches. Original source/fixture and all105 inputs plus complete762 TAP/separate channels are retained in after-inputs.json.gz/after-channels.json.gz. Other714 checks pass. Native errors originate at the opening if statement line246/256; the new fallback closure was compiled on continuation247/257. Preserve those identities before correcting source placement. Unicode guard labels also expose Test2 wide-character channel warnings; correct display encoding without changing native observations or semantic assertions, retain original fixture, and capture a distinct final paired RED/GREEN against accepted/current source."
+}

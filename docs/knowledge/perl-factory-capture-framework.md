@@ -10,11 +10,12 @@ answers:
   - "which required FlowExpr callbacks have separate private captures"
   - "do FlowExpr normalizers retain parser argument array mutations"
   - "does required FlowExpr capture preserve native validation line locations"
+  - "how does FlowExpr preserve optional kind second selection and authority"
 date: 2026-10-12
-status: framework and Contracts integrated; MethodLowering seventeen-site bounded closeout and FlowExpr required bindings verified; optional kind/defaults and pipeline remain open
+status: framework and Contracts integrated; MethodLowering seventeen-site bounded closeout and FlowExpr required and optional kind bindings verified; defaults and pipeline remain open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Current bounded required FlowExpr proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py. Historical framework/Contracts/MethodLowering routes below require their recorded accepted Git inputs. One-shot preserve/observe/run/fault/consumer/book writers are retired. MEMORY.md and the active task-tree frontier own current selection."
+reverify: "Historical required .4.0 proof uses accepted708c1afa04bb10aeacbdaf0a8133a95f380df434 Git inputs. Current optional FlowExpr proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py. Historical framework/Contracts/MethodLowering routes below require their recorded accepted Git inputs. One-shot preserve/observe/run/fault/consumer/book writers are retired. MEMORY.md and the active task-tree frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -47,7 +48,7 @@ lexical state; production bytes are identical before and after that correction.
 This is a measured local observation, not a universal cross-version closure rule.
 
 Contracts registration/call sites are verified in the linked children.
-MethodLowering's seventeen original ingress sites now have bounded repairs. FlowExpr's optional kind/default selection, ControlFlow and RewritePipeline remain later owners in
+MethodLowering's seventeen original ingress sites now have bounded repairs. FlowExpr's default selection, ControlFlow and RewritePipeline remain later owners in
 `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`. Output construction, mapping, complete
 private Phase0 and canonical admission remain with the original self-containment
 owners. The quoted-first replacement defect is unchanged.
@@ -94,3 +95,17 @@ Optional bare_symbol_kind and actual default registration are separate .4.2/.4.1
 owners; this does not admit the complete helper/private/parent pipeline.
 
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-factory-capture-framework). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
+
+Optional FlowExpr kind .4.2 preserves the original first CODE check and second
+selection, both guarded invocation branches, native match aliases, scalar calls,
+coercion/error/fatal effects and lazy loading. Only an actual unblessed CODE
+selection carries its registration; native symbolic/blessed/amp-callable dispatch
+stays opaque. Native delegation occupies the original opening condition line.
+The first continuation-line candidate changes48 diagnostic comparisons; the next
+if-condition lexical candidate fails266 checks and actual strict-vars compilation.
+Both full sources/channels stay frozen. A completed lexical declaration before
+the condition fixes scope without changing the native diagnostic line. The final
+762 assertions retain154 original REDs/608 controls/all GREEN; all300 native rows
+and exact fresh-process recurrences stay unchanged. Fourteen full-source faults
+are effective, including the exact154-failure inverse. Defaults and independent
+admissions remain open; the task tree and current readonly proof own signoff.

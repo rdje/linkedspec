@@ -243,8 +243,8 @@ sub _lower_is_empty_expr {
  return undef unless defined($trimmed) && length($trimmed);
 
  if ($trimmed =~ /^array\s*\(/o) {
-  if ($trimmed =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
-   && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+  my $kind_callback = _bind_optional_emission_dependency($bare_symbol_kind, sub { $bare_symbol_kind->(@_) }); if ($trimmed =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+   && (($kind_callback->($1) // '') eq 'scalar')) {
    my $name = $1;
    return 'do { my $__ls_empty_array = $'.$name.'; (!defined($__ls_empty_array) || ref($__ls_empty_array) ne \'ARRAY\' || !@{$__ls_empty_array}) }';
   }
@@ -253,8 +253,8 @@ sub _lower_is_empty_expr {
  }
 
  if ($trimmed =~ /^hash\s*\(/o) {
-  if ($trimmed =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
-   && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
+  my $kind_callback = _bind_optional_emission_dependency($bare_symbol_kind, sub { $bare_symbol_kind->(@_) }); if ($trimmed =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
+   && (($kind_callback->($1) // '') eq 'scalar')) {
    my $name = $1;
    return 'do { my $__ls_empty_hash = $'.$name.'; (!defined($__ls_empty_hash) || ref($__ls_empty_hash) ne \'HASH\' || !scalar(keys %{$__ls_empty_hash})) }';
   }
@@ -537,6 +537,13 @@ sub _bind_emission_dependency {
    if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
   return $callback->(@_)
  }
+}
+
+# Only actual CODE identities carry registration. Other second selections use
+# the caller's native dispatch context and original invocation line.
+sub _bind_optional_emission_dependency {
+ my ($selected, $native_call) = @_;
+ return _bind_emission_dependency(ref($selected) eq 'CODE' ? $selected : $native_call);
 }
 
 1;

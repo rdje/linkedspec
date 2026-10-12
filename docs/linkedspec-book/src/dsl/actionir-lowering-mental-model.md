@@ -2067,10 +2067,53 @@ callback sites use scalar context even when their enclosing helper is invoked
 in list or void context. Successful error effects, undefined results, ordinary
 fallbacks and fatal exception objects keep their original behavior. A require-only
 consumer still loads neither SourceEmissions nor Trace through these bindings.
-The optional kind callback in emptiness lowering and definition-owned registration
-of FlowExpr's native defaults have separate following tasks. This required-only
-change establishes no complete helper, pipeline, public language, other-backend,
-private Phase0 or parent admission.
+The optional kind boundary is described below. Definition-owned registration of
+FlowExpr's native defaults remains separate. These bounded dependency changes
+establish no complete helper, pipeline, public language, other-backend, private
+Phase0 or parent admission.
+
+### Optional FlowExpr kind lookup
+
+Emptiness lowering selects its optional `bare_symbol_kind` before trimming the
+input. Its original selection has two map reads:
+
+```perl
+my $kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+    ? $deps->{bare_symbol_kind}
+    : sub { return undef };
+```
+
+This is an internal compiler injection example. A normal map selects its actual
+CODE reference. A missing or non-CODE first value selects the undefined-kind
+fallback. With a tied map, the value checked by the first read can differ from
+the value selected by the second. The private boundary preserves both reads,
+their order and that second selection. A trim callback that replaces the map
+entry does not replace the callback already selected for this invocation.
+
+Both wrapped-container branches consult kind only after their original name
+guard matches. The callback receives that existing match argument in scalar
+context, even when the enclosing helper is called in list or void context.
+Writing the argument still raises the native read-only-value error; the caller's
+input scalar stays unchanged. Undefined, empty and non-scalar kinds retain their
+existing container fallback. An overloaded kind result keeps its native coercion
+and shared object effects. Successful `$@` effects and fatal exception objects
+also retain their original behavior.
+
+An actual unblessed CODE second selection enters its own capture by that exact
+reference. Qualified and unqualified symbolic names, blessed CODE references and
+objects callable through `&{}` keep their native dispatch but remain opaque.
+Resolving a name does not confer registration. Invalid second selections retain
+their native error and original source location. The native delegation is kept
+on the opening condition's source line because Perl reports those errors from
+that statement; a continuation-line wrapper would change the diagnostic.
+
+For example, a selected child may publish `outer` while the enclosing callback
+also returns `outer`. The parent receives no child packet merely because the
+text agrees. A registered actual CODE child returning that same publication can
+retain its own packet, which later output assembly must compose explicitly.
+Require-only use still leaves the emission and Trace channels unloaded. Default
+registration, ControlFlow, pipeline composition and independent admissions retain
+their separate owners.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
 whitespace. For example, `parse_action_expr(q{  }, {base_start => 7})` returns an

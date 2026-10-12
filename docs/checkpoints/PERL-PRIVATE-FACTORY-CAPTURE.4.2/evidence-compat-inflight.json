@@ -1,0 +1,40 @@
+{
+  "result": "pending",
+  "producer_sha256": "c07d2eb779afb8e07bf20935bd4149e0d4a6320af1c0115c20245a2f54444e94",
+  "rows": [
+    {
+      "command": [
+        "perl",
+        "-Mstrict=vars",
+        "-c",
+        "-Iperl",
+        "perl/LinkedSpec/ActionIR/FlowExpr.pm"
+      ],
+      "returncode": 0,
+      "stdout_base64": "",
+      "stderr_base64": "cGVybC9MaW5rZWRTcGVjL0FjdGlvbklSL0Zsb3dFeHByLnBtIHN5bnRheCBPSwo="
+    },
+    {
+      "command": [
+        "perl",
+        "-c",
+        "perl/LinkedSpec.pm"
+      ],
+      "returncode": 0,
+      "stdout_base64": "",
+      "stderr_base64": "cGVybC9MaW5rZWRTcGVjLnBtIHN5bnRheCBPSwo="
+    },
+    {
+      "command": [
+        "perl",
+        "-c",
+        "-Iperl",
+        "t/phase0_regression.t"
+      ],
+      "returncode": 0,
+      "stdout_base64": "",
+      "stderr_base64": "dC9waGFzZTBfcmVncmVzc2lvbi50IHN5bnRheCBPSwo="
+    }
+  ],
+  "scope": "Supplemental standard commands with complete actual channels. No complete transitive input capsule or new full-private/parent/canonical admission; independent guarded private Phase0 acceptance remains with SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.5."
+}

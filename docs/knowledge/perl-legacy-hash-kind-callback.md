@@ -12,11 +12,12 @@ answers:
   - "when does legacy hash normalization select its kind callback"
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
+  - "why must FlowExpr optional callback delegation preserve the opening if line"
 date: 2026-10-12
-status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
-reverify: "Historical .11 proof requires recorded accepted81b356cef997ea2bb65a8fb120c77506fed9241e Git inputs: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Current FlowExpr required proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/publish.py. Older routes below retain their original accepted inputs; capture writers are retired."
+reverify: "Historical .11 proof requires recorded accepted81b356cef997ea2bb65a8fb120c77506fed9241e Git inputs: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-parent-inputs/publish.py. Historical required .4.0 proof uses accepted708c1afa04bb10aeacbdaf0a8133a95f380df434 Git inputs. Current optional FlowExpr proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py. Older routes below retain their original accepted inputs; capture writers are retired."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind
@@ -193,7 +194,7 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-12
-status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-publish-claim.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
@@ -219,7 +220,7 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-12
-status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
@@ -249,7 +250,7 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-12
-status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-canonical03/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
@@ -275,7 +276,7 @@ answers:
   - "can the hash kind callback donate publication to its enclosing normalizer"
   - "where is the legacy hash kind callback repair verified"
 date: 2026-10-12
-status: three small optional kind boundaries isolated; current-container guard repaired under .3.2.1.9
+status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-portability/publish.py. Prior runtime publication belongs to accepted328b11c5; historical routes below require their original Git inputs; capture writers are retired."
@@ -283,3 +284,15 @@ reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints
 
 
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-legacy-hash-kind-callback). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
+
+FlowExpr .4.2 retains150 first native warm and150 cold rows, exact recurrences
+and the two original optional map reads. A tied second selection can execute a
+qualified/unqualified symbol, blessed CODE or amp-callable object; those remain
+opaque even when their underlying actual callback is registered. GLOB/undefined/
+ARRAY/HASH second selections retain original fatal diagnostics at246/256. Actual
+CODE identity, once-only scalar calls, match write rejection, map replacement
+after selection, overloaded kind coercion and fatal object identity are preserved.
+The final762 paired assertions have154 original REDs/608 controls/all GREEN;14
+full-source controls include both rejected candidate mechanisms. Complete prior
+required proof451/full112004 remains historical at accepted708c1afa. No original
+native observation is refreshed; default registration and broader admissions stay open.

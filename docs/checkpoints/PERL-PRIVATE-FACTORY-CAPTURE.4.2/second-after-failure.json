@@ -1,0 +1,32 @@
+{
+  "actual_outer_session": 92369,
+  "actual_outer_returncode": 1,
+  "result": "REJECTED_SECOND_AFTER",
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjQuMi9maW5hbC1ydW4ucHkiLCBsaW5lIDEwMiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBvYnNlcnZhdGlvbnNbMV1bJ3JldHVybmNvZGUnXSA9PSAwIGFuZCBub3QgZmFpbGVkIGFuZCBub3Qgc3RkZXJyCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcgo=",
+  "producer_sha256": "79023601133688699a60d61384c4848f6ac4eda1c49b24b9834276225efe18e3",
+  "scope_probes": [
+    {
+      "command": [
+        "perl",
+        "-Mstrict=vars",
+        "-c",
+        "-Iperl",
+        "perl/LinkedSpec/ActionIR/FlowExpr.pm"
+      ],
+      "returncode": 255,
+      "stdout_base64": "",
+      "stderr_base64": "R2xvYmFsIHN5bWJvbCAiJGtpbmRfY2FsbGJhY2siIHJlcXVpcmVzIGV4cGxpY2l0IHBhY2thZ2UgbmFtZSAoZGlkIHlvdSBmb3JnZXQgdG8gZGVjbGFyZSAibXkgJGtpbmRfY2FsbGJhY2siPykgYXQgcGVybC9MaW5rZWRTcGVjL0FjdGlvbklSL0Zsb3dFeHByLnBtIGxpbmUgMjQ3LgpHbG9iYWwgc3ltYm9sICIka2luZF9jYWxsYmFjayIgcmVxdWlyZXMgZXhwbGljaXQgcGFja2FnZSBuYW1lIChkaWQgeW91IGZvcmdldCB0byBkZWNsYXJlICJteSAka2luZF9jYWxsYmFjayI/KSBhdCBwZXJsL0xpbmtlZFNwZWMvQWN0aW9uSVIvRmxvd0V4cHIucG0gbGluZSAyNTcuCnBlcmwvTGlua2VkU3BlYy9BY3Rpb25JUi9GbG93RXhwci5wbSBoYWQgY29tcGlsYXRpb24gZXJyb3JzLgo="
+    },
+    {
+      "command": [
+        "perl",
+        "-e",
+        "use strict; if ((my $callback = sub { return 1 }) && $callback->()) { print \"called\\n\" }"
+      ],
+      "returncode": 255,
+      "stdout_base64": "",
+      "stderr_base64": "R2xvYmFsIHN5bWJvbCAiJGNhbGxiYWNrIiByZXF1aXJlcyBleHBsaWNpdCBwYWNrYWdlIG5hbWUgKGRpZCB5b3UgZm9yZ2V0IHRvIGRlY2xhcmUgIm15ICRjYWxsYmFjayI/KSBhdCAtZSBsaW5lIDEuCkV4ZWN1dGlvbiBvZiAtZSBhYm9ydGVkIGR1ZSB0byBjb21waWxhdGlvbiBlcnJvcnMuCg=="
+    }
+  ],
+  "scope": "Second complete762-TAP candidate has266 failures. Full105 input bytes/modes and all channels remain in final-after artifacts. The final fixture display correction is quiet. In Perl, my declared within the if condition does not make that lexical available in the remaining condition; FlowExpr has no strict vars, so the call resolves to an undefined package variable. Actual strict-vars compilation and minimal isolated expression reject this exact mechanism. Fix the production lexical declaration as a completed statement before the condition, keeping its native delegation on original246/256. Original native instrument/oracles and both paired fixtures remain retained; final verification uses another distinct producer/output identity."
+}

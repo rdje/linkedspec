@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / optional FlowExpr kind .4.2 next
+- Status: `active` / FlowExpr defaults .4.1 next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-12`
@@ -1220,15 +1220,28 @@ quoted-first example do not change here. Other repositories and all submodules r
   Final EOF proof: Complete438/full105949 preservation27399/0 retains every input and actual readonly baseline before correction; distinct extraction-final removes exactly one LF. Unchanged finite publisher replays in1917 supplied inputs with two observed corruption REDs and exact restoration. Final reader2659/0 and evidence12053/0 verify unchanged first runtime/Knowledge/book proof and three semantic denials/restorations, including an added EOF LF after rehash. Final publication binds451 current inputs in112004 bytes; original full candidates/producers remain immutable. Normal focused hooks, explicit memory, both histories and whitespace complete this landing; .4.2 is the pending clean frontier.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.4.2`
-  Status: `pending`
+  Status: `done` / `focused-signoff-complete` (activated from clean `708c1afa04bb10aeacbdaf0a8133a95f380df434`)
   Goal: Isolate both optional kind invocations in FlowExpr emptiness lowering while preserving the original two-read selection and native callable/error behavior.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.4.0`
   Owned paths: FlowExpr::_lower_is_empty_expr optional bare_symbol_kind invocation sites and any bounded private forwarding helper; native/paired/fault/consumer/evidence/claim proof, Knowledge/book and continuity. No required/default-selection or public syntax changes.
-  Planned tier: `focused`
-  Planned focused proof: Preserve intersecting claims, retain first native ordinary/tied-map observations before assertions/source edits, actual CODE identity versus opaque non-CODE callable/error behavior, both wrapped-container branches/guards, two fetches and local selection, aliases/coercions/effects/errors/fatal/cold contexts; exact full-source faults, complete supplied consumers, evidence/book and composed public guard.
-  Planned canonical boundary: none for bounded private invocation changes; escalate before public/generated/mechanical changes. Complete private/parent admission remains open.
-  Planned claim record: none: Declare actual source-bound record at activation before publishing results.
+  Verification tier: `focused`
+  Focused checks: Preserve intersecting claims, retain first native ordinary/tied-map observations before assertions/source edits, actual CODE identity versus opaque non-CODE callable/error behavior, both wrapped-container branches/guards, two fetches and local selection, aliases/coercions/effects/errors/fatal/cold contexts; exact full-source faults, complete supplied consumers, evidence/book and composed public guard.
+  Canonical trigger: none for bounded private invocation changes; escalate before public/generated/mechanical changes. Complete private/parent admission remains open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json`
   Acceptance: Preserve original fetch order, native invocation locations and error identity. Keep actual CODE references selected independently from opaque caller-local invokers. Commit before .4.1.
+
+  Activation: Clean708c1afa04bb10aeacbdaf0a8133a95f380df434 after required .4.0 normal69611/0/all10 doctrines, brief0, explicit post-pointer/post-memory0 and clean Git. Scoped roadmap/task, native two-read optional-kind card, FlowExpr selection/guards/two invocation lines, SourceEmissions actual-CODE/opaque boundaries and earlier native symbolic probes reviewed. Required callbacks/defaults stay unchanged. First preserve the complete accepted .4.0 publication and its actual readonly baseline; accepted Git retains all original input bytes/modes without duplicating immutable nested capsules. Native probe and byte-exact recurrence must precede behavioral assertions and production edits.
+
+  First native/paired proof: Preservation32198 actual0 retains full .4.0/451/full112004 and accepted-Git recoverability plus actual readonly baseline. Unchanged native producer completes100 inputs/150 warm/150 cold rows with exact recurrence; all78 actual kind calls per mode are scalar, inherit enclosing eligibility and use no own callback frame. First paired11772/0 retains762 assertions/154 intended REDs/608 controls with105 supplied inputs. First source attempt6194 actual1 fixes all authority properties but fails48 native diagnostic-location comparisons: anonymous fallback calls compile on continuation247/257 while original if-statement diagnostics report246/256. Full first source/fixture/channels and producer remain frozen in first after artifacts, whose GREEN field was an unaccepted target. P2 owner .4.2 fixes this now by placing native delegation on the original opening statement line; retain unchanged native/semantic expectations. Unicode guard test names additionally warn in Test2 output; own a display-only ASCII label correction, preserve the whole first fixture and capture a distinct identical-semantic final RED/GREEN before acceptance.
+
+  Owned P2 second candidate: Final display-only fixture reproduces the same762/154 RED/608 controls against original Git. Second source candidate92369 actual1 retains266 failures in full final-after inputs/channels; an if-condition my declaration is not visible in the remainder of that condition. Because this module has no strict vars, the invocation resolves to an undefined package variable. Actual strict-vars compile and minimal same-expression probe reject the precise mechanism in second-after-failure.json. Complete declaration as its own statement on original opening246/256 before the if condition; preserve both rejected source candidates/producers and all original native observations. Fix now within .4.2 and require actual full quiet GREEN, independent recurrence/source faults and complete consumers.
+
+  Core proof: Accepted source46053 actual0 passes all762 assertions with quiet channels and strict-vars compile0; current native100/150/150 recurs exactly. Fourteen full-source faults81588/0 fail154/77/77/56/24/156/184/8/156/450/2/284/48/266, including both rejected mechanisms and the exact original inverse. Complete78/263/20232 consumers28324/0, Knowledge52356/0, book10743/0/book-reader0 and staged public guard93987/0 pass. Independent preflight7447/0 verifies every row/plan, complete451/full112004 predecessor, seven Knowledge overlays/1485/1349/8384530 within unchanged limits, and all89 book inputs/four controls.
+  Owned P3 proof population refinement: Six deeper semantic artifact controls80736/0 pass in complete supplied roots with exact restoration. The capture inventory conservatively includes the concurrently pending compat.json although its actual --preflight command exits before reading that file. Preserve its exact pending bytes against the original captured SHA in evidence-compat-inflight.json, then run the unchanged original evidence reader in that exact supplied view through a distinct current recovery reader. Original six controls/producers/observations remain immutable; final current compatibility proof is independently required by the full review. No product change or new runtime observation is needed.
+
+  Result: Optional FlowExpr .4.2 isolates both guarded kind calls while preserving the two-read selection, actual CODE versus opaque callable behavior, match aliases, scalar contexts, native effects/errors/diagnostic lines, public maps and cold loading. First100-input native proof retains150 warm/150 cold rows and exact recurrences. The final identical762 assertions have154 original REDs/608 controls/all GREEN;14 complete-source faults include the exact inverse. All78 supplied suites/263 inputs/20232 assertions pass. Six deeper artifact controls and unchanged-reader supplied replay/two integrity controls pass; both rejected source candidates and original observations remain immutable. Full accepted451 bindings/112004 publication remains historical at708c1afa. Knowledge1485/1349/seven overlays stays8384530 under unchanged8388608, and book89/four controls plus supplemental strict-vars/standard syntax/public Phase01035/composed public guard pass. Current readonly426-input/99413-byte publication owns the routes. Exact default registration .4.1 is next, then ControlFlow .5, fixture registration .7 before pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Complete helper/private/parent/canonical admissions remain open.
+  Final verification: Full independent review6555 actual0, evidence recovery44578 actual0 and publication55905 actual0 complete after supplemental standard79748 actual0. The original artifact reader replays unchanged with exact1169 pending bytes; changed-overlay/missing-fixture controls reject and restore, while the current full review independently checks completed Phase0. Capture writers and both rejected candidates retain their original executed identities. Current readonly command: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.2/publish.py. No producer or original observation is refreshed.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.4.2 - isolate optional FlowExpr kind calls`; normal focused all10 doctrines, explicit memory architecture, both histories and whitespace govern landing. Clear brief, verify post-pointer/post-memory and clean Git before .4.1. No push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.4.1`
   Status: `pending`
@@ -1343,12 +1356,11 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.4.2` | `pending` | Preserve and isolate optional two-read kind selection. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4.1` | `pending` | Select exact definition-owned defaults after isolated calls. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow follows the bounded .4.1 handoff. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection repair follows factory/pipeline, before TYPE-REFERENCE-BOOK. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.4.1` | `pending` | Select exact definition-owned defaults after isolated calls. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow follows the bounded .4.1 handoff. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline activation follows its registered fixtures. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection repair follows factory/pipeline, before TYPE-REFERENCE-BOOK. |
 
 ## Handoff
 
@@ -1372,6 +1384,15 @@ Projection repair `RUST-DEPENDENCY-WARNING-ZERO.8` is complete. No factory imple
 
 Exact implementation details and any necessary finer function-family splits belong to the next owner
 before its production writes. Artifact recovery/purge remains prohibited pending SESSION-STARTUP-READING.7.
+
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.4.2
+
+- [x] **REPRODUCE / ISSUE** — Unchanged100-input first native captures retain150 warm/150 cold rows and exact recurrences before assertions/edits. The identical final762 TAP has154 authority REDs/608 controls; first semantic failures are preserved exactly.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Both optional calls at the original246/256 statement boundaries execute in their enclosing publication frame. Tied maps separately check and select; callback names/blessed/native callable values cannot receive actual CODE authority. Native captures and strict-vars probes identify both rejected placement/scope candidates.
+- [x] **FIX** — Preserve two reads/selection and both name guards; use actual CODE identity or caller-local opaque delegation. Complete lexical setup on the original opening condition line, append the bounded private helper, and preserve all original function/diagnostic lines. Public maps, aliases, scalar contexts, values, once-only effects, errors/fatal objects and cold loading stay native. Only test-name display changes in the final fixture.
+- [x] **ADDRESSED (verified)** — All762 final assertions pass; all300 native compatibility rows and recurrences remain exact. Fourteen full-source faults fail154/77/77/56/24/156/184/8/156/450/2/284/48/266, with exact original inverse. Six deeper artifact denials and unchanged-reader replay/two integrity controls restore PASS; original sources/observations are immutable.
+- [x] **NO REGRESSION** — All78 supplied suites/263 complete inputs/20232 assertions pass, including required FlowExpr. Supplemental strict-vars/standard syntax/public Phase01035 and staged composed public guard pass. Full prior451 bindings/112004 publication and actual readonly baseline remain recoverable at708c1afa. Defaults and independent admissions stay open.
+- [x] **LOCKSTEP** — Full Knowledge1485/1349/seven overlays retains8384530 under unchanged8388608 and every member limit; book89/four controls passes. Current426/full99413 readonly publication, task/frontier, roadmaps/index, live/history/memory align. Normal focused hooks, explicit memory, both histories and whitespace govern clean handoff to .4.1.
 
 ## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.4.0
 
