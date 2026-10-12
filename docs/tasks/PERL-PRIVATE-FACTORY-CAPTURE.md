@@ -6,7 +6,7 @@
 - Status: `active` / remaining optional and direct callback isolation next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
-- Last updated: `2026-10-11`
+- Last updated: `2026-10-12`
 - Owner: LinkedSpec repo-local PNT
 - Parent: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3` in `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md`
 - Planning owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.3.0`
@@ -1030,16 +1030,46 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5 - isolate optional AST callbacks`; ordinary focused normal all10 doctrines, explicit memory, both histories and whitespace govern landing from clean15197dfd. Clear brief/post-pointer/post-memory/clean before .6; no push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6`
-  Status: `pending`
+  Status: `done`
   Goal: Isolate mutation and write predicates with a private emission boundary.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5`
   Owned paths: Only _receiver_mutation_target_is_tracked and _nested_write_target_is_tracked in MethodLowering; bounded fixtures/native and counterfactual/fault/consumer/evidence/claim proof, relevant Knowledge/book table and continuity.
   Native contract: Two sites; validate target before map lookup, keep selected actual predicate identity and target scalar alias, once-only effects, truthiness and boolean result/error/fatal behavior.
-  Planned tier: `focused`
-  Planned focused proof: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
-  Planned canonical boundary: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
-  Planned claim record: none: Declare the source-bound record at activation; .3.2.1.0 already owns this static site census.
+  Verification tier: `focused`
+  Focused checks: Preserve intersecting accepted bindings/full record and actual baseline first. Retain native selection/contexts/aliases/maps/values/effects/errors/fatal and cold observations before assertions/production edits; identical distinguishing RED/GREEN, effective full-source faults, complete supplied consumers and evidence controls, full book and standard compatibility. Register the resulting fixtures later under .7.
+  Canonical trigger: none for bounded private dependency bindings; escalate before public/API/format/mechanical changes. Independent full-private/parent/canonical admissions remain open.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json`
   Acceptance: Commit only this family before selecting the next. Update the book's remaining-site explanation accurately. Every encountered defect is owned; split further before writes if the family grows beyond a safe slice.
+
+  Activation: Clean99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc after .5 normal commit57528 actual0/all10 doctrines, explicit post-pointer/post-memory0/brief0/clean Git with no remaining job. Relevant roadmap/private residual requirements, original compiled17-site inventory, current book remaining table, both actual predicate helpers/callers and existing AST/assignment/value fixtures reviewed. Knowledge Map has no specific predicate native-contract pointer; establish and route the bounded fact in an existing card after first observations. Own only predicate invocation lines939/1268. Both helpers validate an ASCII target before one map read and CODE guarding, pass a writable local target copy and return boolean1/0. Preserve target aliases/caller copies, actual selected CODE identity, replacement timing, once-only effects, truthiness/context/coercion/errors/fatal/cold behavior and immediate real guard/assignment consumers. Existing focused fixtures stub these predicates; first fresh native observations precede assertions/source edits. Preserve current517 bindings/full119899 publication and actual readonly baseline before bound writes. No code/fixture/card/book change yet; split before writes if scope grows beyond two safe bindings.
+
+  First preservation instrument repair / P3: Producer5080 exits actual1 at its hardcoded expected byte count115170, while its retained original readonly publication baseline is actual0/517 inputs/119899 bytes. The generator globally replaced498 inside114980 before its byte replacement; both original producer and merged failure channels (base64, separate outer channels unavailable), first baseline and exact original full claim are retained in first-preservation-failure.json. Failure precedes claim mode/revision and owned source/card/book writes; original .5 publication remains live/exact. Distinct preserve-final.py derives count/bytes from the original full claim, verifies first retained inputs, obtains a fresh baseline-final.json and writes preservation-final.json only after successful validation. Fix and verify immediately before native fixture/source work; no original observation refresh.
+
+  Corrected preservation: Distinct final writer15816 completes actual0; all517 original bindings/full119899 and fresh readonly baseline-final0/empty stderr are verified before bound writes. Original first producer/actual1/base0/full original claim stay exact. Only current .5 mode/revision becomes historical at99f2939ac. First predicate diagnostic input now exercises both real validators/selections/calls/boolean returns and immediate real guard/scalar-assignment consumers without stubs. Readonly B active-pad inspection exposes helper-local target alias identity; no address is persisted. Deterministic tied iteration/ASCII JSON snapshots avoid the prior iterator/wide-character issues. No authored behavior expectations or production/card/book writes precede first native capture.
+
+  First native: Complete238-input snapshot retains actual0/empty stderr from both fresh commands; 280 loaded rows (56 callback/152 branch/72 authority) and16 cold callback rows. B observes actual local target slot identity1, caller-slot0 and caller preservation across all four real helper/consumer paths. Outer producer completion is evidenced by its final record and completed log; the transport session id was lost at compaction, so do not invent it. Distinct same-source recurrence runs before expectations/source edits and gates first producer/probe hashes. Production/cards/book remain unchanged.
+
+  Native recurrence93183 actual0: identical238 inputs/modes and both complete stdout/stderr/status populations match byte for byte. Only after this recurrence, author the regression from all280/16 original rows, distinct authority/CODE-identity expectations and explicit slot/single-FETCH/guard/truth/context/fatal/real-consumer checks. Original source is still exact; run the unchanged regression RED before two invocation-line edits.
+
+  First regression producer repair / P3: Actual81207 exits1 because both literal return-line constants include an absent semicolon. The guard stops before a supplied workspace/syntax/regression execution; no before.json exists and source/fixture/native remain exact. Retain original run.py and full actual merged failure channels in first-run-failure.json (separate outer channels unavailable). Distinct run-final.py corrects only the two literal constants before original-source RED. This instrument issue is fixed in .6, with no changed behavior oracle.
+
+  Original paired RED84500 actual0 producer: Identical516-assertion fixture completes with156 authority-only failures and360 passing controls on unchanged accepted source; full actual240-input/mode/source/syntax/TAP/channels retained. No behavior expectation correction. Bind only the two predicate invocation expressions at939/1268, keeping every other source byte and global line exact, then run the identical GREEN and complete native after capture.
+
+  Paired-count transcription repair / P3: The initial task note guessed124/392 before inspecting the tool output, whereas retained complete TAP proves156/360. Correct that live note immediately from actual rows; fixture, producer, source and original channels remain unchanged. No incorrect count is published as accepted evidence. All subsequent counts must be derived from complete actual TAP.
+
+  Focused verification: GREEN66251 actual0/all516. After-native90821 actual0 and native-review command actual0 retain280 loaded/16 cold, only64 complete authority-row changes, exact ordinary/cold behavior and first recurrence. Ten complete syntax-valid faults24854 actual0 fail78/78/72/198/56/24/40/230/76/80; independent inverses are disjoint and restore the156 original REDs. Full supplied consumers53184 actual0 reaches74 ordered suites/240 supplied inputs/16681 assertions. Complete book63919 actual0 and book-review53877 actual0 retain89 inputs/four command/render controls. Knowledge regeneration4551 actual0 yields1349 facts/10403 questions. Composed readonly preflight94308 actual0 verifies full original517/119899/baseline, retained first failed instruments and their distinct corrections, source variants, plans/native/book and six current card routes. Supplemental standard67910 is still running; composed capture/evidence/publication and normal commit follow actual completion.
+
+  Owned continuity repair / P3: Current task index status still says AST optional .5 next despite its own completed .5 summary and active .6 frontier. Reproduce by comparing docs/TASK_TREE.md factory status cell with MEMORY and this node. Correct the status cell to the next formal trim .7 during this leaf lockstep; retain historical .5 evidence. The task header date also advances to the current local date.
+
+  Outer-channel retention: The first native shell completion log was only ignored project-local data. Retain its exact original merged bytes in before-outer-completion.json and gate them in the not-yet-executed publisher. Outer session identity/independently observed outer exit are unavailable after compaction; no outer0 is invented. Both original inner commands retain actual0/full separate channels, and the distinct exact recurrence has independently observed outer0. No producer/native observation is refreshed.
+
+  Final proof: Supplemental standard67910 completes actual0; both syntax commands0 and public Phase01035 PASS with full channels retained. Composed capture63061 actual0 verifies the final source/input/plan/native/book/original publication population. Evidence37115 actual0 retains all six named semantic denials and exact healthy restorations, including native-after and unchanged-source recurrence alterations beyond immediate hashes. Publication98332 completes actual0:519 live inputs/full119936 bytes. Lockstep/normal focused commit follows.
+
+  Result: Tracking predicates .3.2.1.6 are verified: isolate only two invocation expressions, preserving target validation before one map read, actual selected CODE identity, writable helper-local target slots and native boolean1/0. Both real guard/assignment consumers execute without stubs. Native280 loaded/16 cold repeats byte-exactly before expectations/source edits; only64 complete authority rows change afterward. Identical516 has156 original authority REDs/360 controls/all GREEN. Ten whole-source faults, full74 supplied suites/240 inputs/16681 assertions, evidence6/book89/four controls and supplemental standard Phase01035 pass. Original517/full119899/baseline stay historical at99f2939ac; first failed instruments remain exact with distinct corrections. Readonly519-live-input/119936-byte publication passes. Normal focused hooks govern landing. Next formal trim .7; five ingress sites and independent private/parent/canonical admissions remain open. TYPE-REFERENCE-BOOK stays queued.
+
+  Closure: Both predicate isolation gaps and encountered instrument/transcription/index-continuity issues are fixed and verified. Current source differs only at939/1268. Original first native/recurrence/failed producers and full original publication are immutable. Complete composed/native/book/evidence reviewers and current publication have readonly defaults; no retired capture writer is a resume action.
+
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6 - isolate tracking predicate callbacks`; focused normal all10 doctrines, explicit memory, both history checks and whitespace govern landing from clean99f2939ac. Clear brief and verify post-pointer/post-memory/clean Git before .7; no push.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7`
   Status: `pending`
@@ -1160,7 +1190,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6` | `pending` | Preserve accepted .5 publication, then native-first bounded proof for mutation/write predicates. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7` | `pending` | From clean HEAD preserve accepted .6 publication, then native-first bounded proof for four formal trim calls. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.4` | `pending` | FlowExpr owner follows MethodLowering. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5` | `pending` | ControlFlow owner follows FlowExpr. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |

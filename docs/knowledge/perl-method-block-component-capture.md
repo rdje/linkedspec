@@ -15,7 +15,8 @@ date: 2026-10-12
 status: optional AST pipeline isolation verified; earlier block-component proof remains historical
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
+reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
+  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -84,3 +85,11 @@ CODE stays eligible, but its child packet cannot satisfy a parent capture.
 The full native148/six rows change only16 authority rows across both optional
 AST owners; secondary helpers remain explicit controls. The iterator fact in
 docs/knowledge/perl-method-ast-call-capture.md explains the distinct stable diagnostic input.
+
+
+Mutation/write predicate boundaries now follow the current .3.2.1.6 readonly
+publication route above. Native280 loaded/16 cold rows, exact unchanged-source
+recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
+selection, the writable helper-local target slot, boolean1/0, actual CODE
+identity and real guard/assignment consumers. Five original ingress sites remain
+under .7-.8; complete helper and independent admissions remain open.

@@ -936,7 +936,7 @@ sub _receiver_mutation_target_is_tracked {
  my ($target, $deps) = @_;
  return 0 unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  my $predicate = ref($deps) eq 'HASH' ? $deps->{receiver_mutation_target} : undef;
- return ref($predicate) eq 'CODE' && $predicate->($target) ? 1 : 0
+ return ref($predicate) eq 'CODE' && _bind_emission_dependency($predicate)->($target) ? 1 : 0
 }
 
 sub _receiver_write_guarded_expr {
@@ -1265,7 +1265,7 @@ sub _nested_write_target_is_tracked {
  my ($target, $deps) = @_;
  return 0 unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  my $predicate = (ref($deps) eq 'HASH') ? $deps->{nested_write_target} : undef;
- return ref($predicate) eq 'CODE' && $predicate->($target) ? 1 : 0
+ return ref($predicate) eq 'CODE' && _bind_emission_dependency($predicate)->($target) ? 1 : 0
 }
 
 sub _tracked_scalar_assignment_expr {

@@ -19,15 +19,16 @@ answers:
   - "does dropped value trim compare lowering with the returned slot after effects"
   - "which readonly command verifies inline required dropped value trim isolation"
 date: 2026-10-12
-status: inline required trim and seven optional kind sites isolated; two optional AST sites isolated; seven ingress sites remain under .3.2.1.6-.8
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; five ingress sites remain under .3.2.1.7-.8
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
 reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
   - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
   - "Historical .3.2.1.9 readonly commands require accepted61a73324 logical inputs/full original claim. Its original490 bindings/full113730-byte publication and actual baseline are preserved before .3 changes. Original .9/earlier producers and observations remain unchanged."
   - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
   - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
+  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -192,3 +193,11 @@ facts live in docs/knowledge/perl-method-assignment-required-capture.md. Seven
 optional kind sites from the original inventory are isolated; nine ingress sites
 remain under .5-.8. The original108 named/218 total CV/812 CODE/207 binding/17
 ingress census remains a dated snapshot, rather than a fresh runtime recensus.
+
+
+Mutation/write predicate boundaries now follow the current .3.2.1.6 readonly
+publication route above. Native280 loaded/16 cold rows, exact unchanged-source
+recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
+selection, the writable helper-local target slot, boolean1/0, actual CODE
+identity and real guard/assignment consumers. Five original ingress sites remain
+under .7-.8; complete helper and independent admissions remain open.

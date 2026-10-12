@@ -1,0 +1,7 @@
+{
+  "producer_sha256": "fa51c8fc4bcb89fed7dc0dd63bd3cd61b94d9ee208f4cf60c4281230f69ea167",
+  "native_sha256": "f4cdb6e2ac6fee4afe044d99ab25cf089f468e3b2c56e737602a66b6185b8b4d",
+  "merged_log_base64": "VHJhY2tpbmctcHJlZGljYXRlIGJlZm9yZSBuYXRpdmUgY29tbWFuZHMgcmV0YWluZWQ6IDIzOCBpbnB1dHM7IDIgZnJlc2ggcHJvY2Vzc2VzCg==",
+  "observed_outer_transport_exit": null,
+  "scope": "Exact original shell-merged completion log, retained without a runtime refresh. Outer transport session identity and independently observed outer exit were lost at compaction and are unavailable; no outer0 is asserted. Both inner commands have actual0/full separate channels in before-native.json. The distinct unchanged-source recurrence has an independently observed outer0."
+}

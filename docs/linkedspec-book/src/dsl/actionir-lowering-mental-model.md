@@ -1660,11 +1660,40 @@ Scalar context, result coercion, error effects, fatal object identity, fallback
 order and lazy loading retain their native behavior. Secondary lowering helpers
 are controlled in this bounded proof; full helper admission remains separate.
 
-After these capture repairs, seven MethodLowering ingress sites remain from the October11 compiled-source inventory:
+### Tracking predicates and their actual consumers
+
+Receiver mutation and nested scalar writes now isolate their selected tracking
+predicates. Each helper checks the complete ASCII binding name before reading
+its map once. It invokes only an actual CODE reference, preserving that selected
+identity. A missing entry, a named callable or a blessed CODE value keeps its
+existing false result. Callback replacement affects the next owner call.
+
+The callback receives a writable local target slot. For example, changing its
+argument from `item` to `item!` changes the helper's local copy; the caller's
+binding name remains `item`. This distinction also applies when the real
+receiver guard or scalar assignment helper calls the predicate.
+
+Predicate results use Perl's native boolean test and return `1` or `0`:
+
+| Predicate result | Tracking decision | Consumer example |
+|---|---|---|
+| Undefined, empty string or `0` | False | Receiver returns `INNER`; assignment returns `$item = INNER` |
+| `1`, the string `false` or an ordinary reference | True | Receiver emits `assert_receiver_writable`; assignment also records binding presence |
+| Object with boolean overload | Its boolean result, evaluated once | A false overload keeps the untracked expression |
+| Callback or boolean conversion throws | The same fatal object propagates | No successful lowering result is substituted |
+
+The callback remains in scalar boolean context when the owner is called in list
+or void context. Successful error effects, target coercion, source spans and cold
+loading keep their existing behavior. A registered actual CODE child remains
+eligible for its own publication, while every child packet stays separate from
+the parent's packet. The focused proof executes both real predicate helpers and
+their immediate real consumers; complete helper and language admission remain
+separate activities.
+
+After these capture repairs, five MethodLowering ingress sites remain from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Mutation/write predicates | 2 | Target validation before lookup and original truthiness |
 | Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |
 | Selected named-helper CODE dispatch | 1 | Existing six-helper order, actual selected references and first nonempty result |
 

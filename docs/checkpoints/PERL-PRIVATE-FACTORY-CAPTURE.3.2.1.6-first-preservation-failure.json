@@ -1,0 +1,15 @@
+{
+  "base": "99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc",
+  "actual_tool_session": 5080,
+  "actual_returncode": 1,
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-preserve.py",
+  "producer_sha256": "3ebae67d106691f0d56d0ad5c5b29ac87dd821b4a809aad46b3d97e5b8c75cbd",
+  "inputs": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-preserve.py": "3ebae67d106691f0d56d0ad5c5b29ac87dd821b4a809aad46b3d97e5b8c75cbd",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-baseline.json": "513f9431a575c61e8fbc268ef012426cb966795dbc8502d583050844907cacbe",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-before-PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json": "8b3a0038a057a093adf571354ad2a4be378ab14dbb2cac2f62850d157fb00747"
+  },
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjYtcHJlc2VydmUucHkiLCBsaW5lIDY2LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHByb2Nlc3Muc3Rkb3V0ID09IGInQVNUIG9wdGlvbmFsIHB1YmxpY2F0aW9uIFBBU1M6IDUxNyBsaXZlIGlucHV0czsgMTE1MTcwIGJ5dGVzXG4nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "separate_outer_channels": "unavailable; actual shell command redirected both channels to the retained merged log",
+  "scope": "Original preservation producer exits1 at its expected stdout byte count115170; the actual readonly original publication baseline passes0 with517/119899. Both first baseline/full original claim remain exact. No original claim mode/revision or owned source/card/book was written before this guard. Global numeric substitution changed114980 to115170 before the intended full-byte replacement; a distinct final writer derives counts from original claim bytes and retains this first failure."
+}

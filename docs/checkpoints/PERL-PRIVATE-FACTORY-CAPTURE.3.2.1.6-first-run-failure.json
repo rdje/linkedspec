@@ -1,0 +1,8 @@
+{
+  "actual_tool_session": 81207,
+  "actual_returncode": 1,
+  "producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-run.py",
+  "producer_sha256": "4be3cbe98ceeaeb353dbd38135dd4ad1ec5210044a542bf053345d4cba2761c2",
+  "merged_log_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjMuMi4xLjYtcnVuLnB5IiwgbGluZSA3NywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCAoUk9PVCAvIE1PRFVMRSkucmVhZF9ieXRlcygpID09IHZhcmlhbnQoc291cmNlLCAnYmVmb3JlJyBpZiBtb2RlID09ICdiZWZvcmUnIGVsc2UgJ2dyZWVuJykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS42LXJ1bi5weSIsIGxpbmUgMzQsIGluIHZhcmlhbnQKICAgIGFzc2VydCBvcmlnaW5hbC5jb3VudChPTEQpID09IDIKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "scope": "First run producer guard expected a semicolon absent from both original return expressions. It stops before a temporary workspace, syntax execution or regression execution; no before.json is produced and source/native/fixture remain exact. Separate outer channels unavailable because the shell merged them. Retain original failed producer; distinct run-final.py corrects only the two literal source-line constants."
+}

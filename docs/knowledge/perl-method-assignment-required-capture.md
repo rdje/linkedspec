@@ -1,7 +1,11 @@
 ---
 id: perl-method-assignment-required-capture
-title: Assignment required capture and optional source kind boundaries
+title: Assignment callbacks and tracking predicate capture boundaries
 answers:
+  - "which local target slot do receiver and nested write predicates receive"
+  - "does tracking predicate selection fetch a tied dependency map more than once"
+  - "how do tracking predicates convert returned values and overloaded booleans"
+  - "do tracking predicates run the real receiver guard and scalar assignment consumers"
   - "when do source read and assignment select their optional kind callbacks"
   - "does an optional kind mutation affect the source name or caller target"
   - "which assignment callbacks have private capture boundaries"
@@ -13,15 +17,16 @@ answers:
   - "do private legacy assignment branches admit removed public selectors"
   - "which readonly command reviews assignment required isolation"
 date: 2026-10-12
-status: source and assignment optional kind isolated under .3.2.1.4; original required proof historical at ea6926fef
+status: two tracking predicates isolated under .3.2.1.6; original required and optional-kind proofs remain historical
 tags: [perl, actionir, callbacks, capture, aliases, assignment]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
 evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
 reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
   - "After later source/book changes these assignment commands require accepted ea6926fefee33cbf77fe512a821d7ba2a4ffc14f Git inputs including the original live claim. Historical commands: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2-review.py; separately final-review.py and publish-claim.py under that wrapper. Readonly defaults; capture/freezer/--capture are one-shot writers. Earlier generalized-return proof requires accepted edc9165a4559ef8f0e3c34e2b6cc3623f2893feb Git inputs including its original live claim. MEMORY.md owns the current frontier."
   - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
   - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
+  - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
 ---
 
 Only the required resolver returns in `_lower_assign_statement`,
@@ -94,3 +99,29 @@ effects, result coercion, successful error state, fatal identity and cold loadin
 retain the complete first native observations. Only downstream assignment value
 and tracked-write helpers are explicit controls; complete helper and language
 behavior remain independently owned.
+
+
+The receiver mutation and nested write predicates each validate the complete ASCII
+binding name before reading their dependency map once. Only an actual unblessed
+CODE selection is invoked; named callables, blessed CODE and other values retain
+their native rejection. Each call now binds that actual selected reference,
+retaining known-child eligibility and keeping child publication separate from
+its parent. Replacement affects the next selection, including a tied map.
+
+The predicate argument is its helper's writable local target copy. The callback
+can change that slot from `item` to `item!`, while the caller's target stays
+`item`. Readonly core B active-pad observation distinguishes that original slot
+from a separately copied callback argument; no memory address is persisted.
+Both actual helper bodies and their real receiver-guard/scalar-assignment
+consumers execute without secondary stubs in this bounded proof.
+
+Callback results are evaluated once in scalar boolean context and converted to
+native1/0. Undefined, empty and zero are false; the word `false` and ordinary
+references are true. Boolean overload runs once, preserving its successful
+error effects and fatal object identity. An untracked receiver returns its inner
+expression; an untracked assignment stays plain. A tracked receiver emits its
+writable guard and a tracked assignment adds binding presence. The complete
+first238-input native280 loaded/16 cold rows repeat byte-exactly before authored
+assertions/source changes. The identical516 fixture fails156 original authority
+checks while360 controls pass; all516 current checks pass. Full helper/public
+language/private/parent/canonical admission remains independently owned.
