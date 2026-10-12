@@ -117,7 +117,7 @@ regressions, preserves earlier accepted publications and validates the current
 book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

@@ -15,8 +15,9 @@ date: 2026-10-12
 status: optional AST pipeline isolation verified; earlier block-component proof remains historical
 tags: [perl, actionir, methods, callbacks, dependencies, fallbacks, identity, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:18 original publication-isolation REDs,205 original controls pass, all223 current GREEN. Six invoked roles, one separate validation-only local flow binding and20 native/current ledgers match. Six effective source faults, cold4, supplied33/152, evidence5, original-binding RED/restoration and book57/two controls pass. All242 original inline bindings remain historical."
-reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
+reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Historical commands require their recorded accepted Git inputs: .3.1.2.1-review.py and preservation-control.py; original inline accepted65bd00faa; historical book .3.1.2.3-book-review.py acceptedcdc45f9cb; local-return .3.1.2.2.0-final-review.py acceptedde3b50dd. One-shot capture/freezer/publisher writers are retired after capture."
   - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
+  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
 ---
 
 MethodLowering required resolution now uses private lexical native-context bindings
@@ -93,3 +94,14 @@ recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
 selection, the writable helper-local target slot, boolean1/0, actual CODE
 identity and real guard/assignment consumers. Five original ingress sites remain
 under .7-.8; complete helper and independent admissions remain open.
+
+
+Formal trim .3.2.1.7 now binds the one brace and three dot invocation expressions.
+Complete230 loaded/68 cold native rows repeat byte-exactly before assertions;
+only20 actual-CODE authority and32 symbolic authority rows change afterward.
+The identical507 checks retain144 original authority REDs/363 controls/all GREEN;
+fourteen source faults and all75 supplied suites/243 inputs/17188 assertions
+distinguish selection, local and substring aliases, call context and parsing.
+Named/blessed/amp-callable dispatch and already-bound nesting retain native
+behavior. One original named-helper dispatch ingress remains under .8; no
+complete helper/private/parent/canonical or other-backend admission is claimed.

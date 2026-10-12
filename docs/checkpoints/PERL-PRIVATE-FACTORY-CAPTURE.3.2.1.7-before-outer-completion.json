@@ -1,0 +1,8 @@
+{
+  "actual_tool_session": 87948,
+  "actual_returncode": 0,
+  "producer_sha256": "140c881c5ef6aa6493772ab4e2da3d52b9aa8944eaa49f84299a7ac1bd5a3968",
+  "native_sha256": "24e743443215dd4114a1541e7dfdd386ac60daea6e4143c640f5cdc719712f28",
+  "merged_log_base64": "Rm9ybWFsLXRyaW0gYmVmb3JlIG5hdGl2ZSBjb21tYW5kcyByZXRhaW5lZDogMjQxIGlucHV0czsgMiBmcmVzaCBwcm9jZXNzZXMK",
+  "scope": "Original outer completion observed actual0; exact shell-merged log and both inner separate actual channels retained without refresh."
+}

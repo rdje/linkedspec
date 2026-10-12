@@ -313,7 +313,7 @@ sub _lower_value_binding_source_expr {
 sub _extract_outer_brace_payload {
  my ($expr, $trim_action_ir_value) = @_;
  return undef unless defined $expr;
- my $trimmed = $trim_action_ir_value->($expr);
+ my $trimmed = _bind_emission_dependency(ref($trim_action_ir_value) eq 'CODE' ? $trim_action_ir_value : sub { return $trim_action_ir_value->(@_) })->($expr);
  return undef unless defined($trimmed) && length($trimmed) >= 2;
  return undef unless substr($trimmed, 0, 1) eq '{';
 
@@ -7303,7 +7303,7 @@ sub _lower_array_append_operator_statement {
 sub _split_receiver_dot_method_expr {
  my ($expr, $trim_action_ir_value) = @_;
  return undef unless defined($expr) && length($expr);
- my $trimmed = $trim_action_ir_value->($expr);
+ my $trimmed = _bind_emission_dependency(ref($trim_action_ir_value) eq 'CODE' ? $trim_action_ir_value : sub { return $trim_action_ir_value->(@_) })->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
  my ($paren_depth, $bracket_depth, $brace_depth) = (0, 0, 0);
@@ -7338,8 +7338,8 @@ sub _split_receiver_dot_method_expr {
    next if $prev_ch =~ /\d/o && $next_ch =~ /\d/o;
   }
   next unless $paren_depth == 0 && $bracket_depth == 0 && $brace_depth == 0;
-  my $receiver = $trim_action_ir_value->(substr($trimmed, 0, $idx));
-  my $call_expr = $trim_action_ir_value->(substr($trimmed, $idx + 1));
+  my $receiver = _bind_emission_dependency(ref($trim_action_ir_value) eq 'CODE' ? $trim_action_ir_value : sub { return $trim_action_ir_value->(@_) })->(substr($trimmed, 0, $idx));
+  my $call_expr = _bind_emission_dependency(ref($trim_action_ir_value) eq 'CODE' ? $trim_action_ir_value : sub { return $trim_action_ir_value->(@_) })->(substr($trimmed, $idx + 1));
   return undef unless defined($receiver) && length($receiver);
   return undef unless defined($call_expr) && length($call_expr);
   return [$receiver, $call_expr];

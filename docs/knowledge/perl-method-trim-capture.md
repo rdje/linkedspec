@@ -2,6 +2,9 @@
 id: perl-method-trim-capture
 title: Method dependency bindings and the compiled remaining-call inventory
 answers:
+  - "do formal dot trim callbacks receive writable substrings of a shared scalar"
+  - "does call trim execute before validating an empty receiver trim result"
+  - "can formal trim callbacks be symbolic or already bound"
   - "when does the main method helper reselect its inner kind callback"
   - "can a known kind callback donate a parent emission packet"
   - "which MethodLowering required trim calls have private emission bindings"
@@ -19,16 +22,17 @@ answers:
   - "does dropped value trim compare lowering with the returned slot after effects"
   - "which readonly command verifies inline required dropped value trim isolation"
 date: 2026-10-12
-status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; five ingress sites remain under .3.2.1.7-.8
+status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; one named-helper dispatch ingress remains under .3.2.1.8
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
 reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
   - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
   - "Historical .3.2.1.9 readonly commands require accepted61a73324 logical inputs/full original claim. Its original490 bindings/full113730-byte publication and actual baseline are preserved before .3 changes. Original .9/earlier producers and observations remain unchanged."
   - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
   - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
   - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
+  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in
@@ -201,3 +205,35 @@ recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
 selection, the writable helper-local target slot, boolean1/0, actual CODE
 identity and real guard/assignment consumers. Five original ingress sites remain
 under .7-.8; complete helper and independent admissions remain open.
+
+
+The first .3.2.1.7 native capture at accepted b1133da42 observes one brace
+trim call and three dot trim calls before expectations or production changes.
+The first callback receives the helper-local expression slot, separate from the
+caller. Dot receiver and call arguments are writable `substr` lvalues of the
+same trimmed scalar. Appending `!` to receiver `item` changes that scalar to
+`item!.method()`; the later call trim receives `.method()` at the original index.
+Mutating the final call argument also changes the shared trimmed scalar. The
+call trim still executes when receiver trim returns undefined or empty, before
+receiver validation. Copying these arguments would change the native contract.
+
+These unguarded formal calls support the observed qualified/unqualified names,
+blessed CODE wrapper and amp-callable object; GLOB and invalid values retain
+native errors at316/7306. The helper-local callback snapshot survives caller
+replacement. Already-bound callbacks retain their existing nested isolation.
+Original241-input observations retain230 loaded/68 cold rows and complete
+channels under docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-before-native.json;
+its first instrument and producer remain exact. This is bounded private native
+behavior, not public language admission. Completion/reverify routing is owned
+by the .7 node and current header; retired capture writers are not resume commands.
+
+
+Formal trim .3.2.1.7 now binds the one brace and three dot invocation expressions.
+Complete230 loaded/68 cold native rows repeat byte-exactly before assertions;
+only20 actual-CODE authority and32 symbolic authority rows change afterward.
+The identical507 checks retain144 original authority REDs/363 controls/all GREEN;
+fourteen source faults and all75 supplied suites/243 inputs/17188 assertions
+distinguish selection, local and substring aliases, call context and parsing.
+Named/blessed/amp-callable dispatch and already-bound nesting retain native
+behavior. One original named-helper dispatch ingress remains under .8; no
+complete helper/private/parent/canonical or other-backend admission is claimed.

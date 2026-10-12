@@ -1690,11 +1690,42 @@ the parent's packet. The focused proof executes both real predicate helpers and
 their immediate real consumers; complete helper and language admission remain
 separate activities.
 
-After these capture repairs, five MethodLowering ingress sites remain from the October11 compiled-source inventory:
+### Formal trim and writable substring arguments
+
+The outer-brace parser and receiver-dot splitter now isolate each formal trim
+invocation. These callbacks are unguarded callable values: actual CODE references
+keep their identity, while named callables, blessed CODE wrappers and objects
+with callable overload keep native dispatch through an opaque local binding.
+Invalid callable values keep their native errors and original source locations.
+Already-bound trim callbacks retain their nested isolation.
+
+The first trim receives a writable helper-local expression slot; changing it
+does not change the caller's input. The dot splitter's next two arguments are
+writable `substr` lvalues of the same trimmed scalar. For example, appending `!`
+to receiver `item` changes `item.method()` to `item!.method()`. The final trim
+then receives `.method()` at the original split index. Returning the original
+receiver produces `['item', '.method()']`; returning the mutated receiver
+produces `['item!', '.method()']`. Changing the final call argument also changes
+the same backing scalar. These are internal Perl callback contracts.
+
+The call trim executes before the receiver result is validated, even when the
+receiver trim returned undefined or empty. Brace trim skips undefined input;
+dot trim skips undefined and empty input. Quotes, escapes, brace nesting and
+decimal dots retain their parsing rules: `1.25.round()` splits into `1.25` and
+`round()`. Callback calls stay in scalar context under list or void owner calls.
+Replacing the caller's callback affects its next helper call; the current helper
+keeps its local selection. Errors, fatal objects, reference identities and cold
+loading are unchanged. A known actual CODE child may publish its own packet;
+opaque callables cannot borrow that authority, and no child packet becomes its
+parent's packet.
+
+The focused proof executes both complete native helper bodies without stubs.
+Complete helper and language admission remain separate activities.
+
+After these capture repairs, one MethodLowering ingress site remains from the October11 compiled-source inventory:
 
 | Entry form | Sites | Native behavior the repair must preserve |
 |---|---:|---|
-| Trim passed as a formal argument | 4 | The supplied CODE reference, actual argument slots and brace/dot parsing |
 | Selected named-helper CODE dispatch | 1 | Existing six-helper order, actual selected references and first nonempty result |
 
 This is a compiled syntax inventory, not successful execution of every branch.

@@ -17,8 +17,9 @@ date: 2026-10-12
 status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Iterator-review.py verifies the distinct native-first input repair. Historical six-role AST proof requires accepted9085eb1e5 logical inputs; .3.1.3.1-final-review.py/preservation-control.py/publish-claim.py remain readonly historical entrypoints. Hash-key requires2e9e5443e. Capture/freezer/--capture are one-shot writers; MEMORY.md owns the frontier."
+reverify: "Current optional AST proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults. Iterator-review.py verifies the distinct native-first input repair. Historical six-role AST proof requires accepted9085eb1e5 logical inputs; .3.1.3.1-final-review.py/preservation-control.py/publish-claim.py remain readonly historical entrypoints. Hash-key requires2e9e5443e. Capture/freezer/--capture are one-shot writers; MEMORY.md owns the frontier."
   - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
+  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The
@@ -115,3 +116,14 @@ recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
 selection, the writable helper-local target slot, boolean1/0, actual CODE
 identity and real guard/assignment consumers. Five original ingress sites remain
 under .7-.8; complete helper and independent admissions remain open.
+
+
+Formal trim .3.2.1.7 now binds the one brace and three dot invocation expressions.
+Complete230 loaded/68 cold native rows repeat byte-exactly before assertions;
+only20 actual-CODE authority and32 symbolic authority rows change afterward.
+The identical507 checks retain144 original authority REDs/363 controls/all GREEN;
+fourteen source faults and all75 supplied suites/243 inputs/17188 assertions
+distinguish selection, local and substring aliases, call context and parsing.
+Named/blessed/amp-callable dispatch and already-bound nesting retain native
+behavior. One original named-helper dispatch ingress remains under .8; no
+complete helper/private/parent/canonical or other-backend admission is claimed.

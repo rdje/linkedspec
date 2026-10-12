@@ -17,12 +17,13 @@ status: three small optional kind boundaries isolated; current-container guard r
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
 reverify:
-  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
+  - "Current proof: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-publish-claim.py; review.py, native-review.py, book-review.py and evidence.py under the same wrapper/prefix have readonly defaults."
   - "Historical .3.2.1.10 readonly commands require accepted de02b83a1 logical inputs/full original claim. Its original422 bindings/full97759-byte publication and actual baseline are preserved before .9 changes. Earlier .2 and trim commands retain their recorded accepted input boundaries; never run retired capture/freezer/fault writers as resume commands."
   - "Historical .3.2.1.9 readonly commands require accepted61a73324 logical inputs/full original claim. Its original490 bindings/full113730-byte publication and actual baseline are preserved before .3 changes. Original .9/earlier producers and observations remain unchanged."
   - "Historical .3.2.1.3 readonly commands require accepted dd82f9cb logical inputs/full original claim. Original531 bindings/full125217-byte publication and actual baseline are preserved before .4 changes; original runtime/native/diagnostic producers and observations remain unchanged."
   - "Historical .3.2.1.4 readonly commands require accepted15197dfd logical inputs/full original claim. Original498 bindings/full114980 publication and actual baseline remain exact before .5; original producers/observations are unchanged."
   - "Historical .3.2.1.5 readonly commands require accepted99f2939ac logical inputs/full original claim. Original517 bindings/full119899 publication and actual baseline remain exact before .6; original producers/observations are unchanged."
+  - "Historical .3.2.1.6 readonly commands require accepted b1133da42 logical inputs/full original claim. Original519 bindings/full119936 publication and actual baseline remain exact before .7; original producers/observations are unchanged."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind
@@ -140,3 +141,14 @@ recurrence and the identical516/156/360 RED/GREEN proof retain single-FETCH
 selection, the writable helper-local target slot, boolean1/0, actual CODE
 identity and real guard/assignment consumers. Five original ingress sites remain
 under .7-.8; complete helper and independent admissions remain open.
+
+
+Formal trim .3.2.1.7 now binds the one brace and three dot invocation expressions.
+Complete230 loaded/68 cold native rows repeat byte-exactly before assertions;
+only20 actual-CODE authority and32 symbolic authority rows change afterward.
+The identical507 checks retain144 original authority REDs/363 controls/all GREEN;
+fourteen source faults and all75 supplied suites/243 inputs/17188 assertions
+distinguish selection, local and substring aliases, call context and parsing.
+Named/blessed/amp-callable dispatch and already-bound nesting retain native
+behavior. One original named-helper dispatch ingress remains under .8; no
+complete helper/private/parent/canonical or other-backend admission is claimed.
