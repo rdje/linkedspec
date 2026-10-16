@@ -1542,7 +1542,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 ## Handoff
 
-Expansion .5.1.0 is verified with current456/full108786 readonly publication. After its clean landing, perform the overdue separately owned artifact review, then activate attached parser .5.1.1. Preserve the current complete publication and actual readonly baseline before bound writes. Native-first AST/context/alias/selection observations precede expectations/source edits. Single statement .5.1.2 precedes .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK.
+Expansion .5.1.0 is committed at d432a955ca7a976ccbc3fa047f97bc5e3103ea76 with current456/full108786 readonly publication. Due artifact review REPO-HYGIENE.17 is verified: zero removals,22/full9417 and unchanged callback publication before/after. After the clean maintenance landing, activate attached parser .5.1.1. Preserve the current complete publication and actual readonly baseline before bound writes. Native-first AST/context/alias/selection observations precede expectations/source edits. Single statement .5.1.2 precedes .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK.
 
 After `.6`, independently accept the composed factory/input identity seams under
 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4`. The original

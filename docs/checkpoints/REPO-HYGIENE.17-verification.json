@@ -1,0 +1,40 @@
+{
+  "aggregate_inflation_rejected": true,
+  "ancestor_symlink_rejected": true,
+  "artifact_bytes": 17237976411,
+  "artifact_files": 16045,
+  "at_utc": "2026-10-16T21:30:30.876883+00:00",
+  "balanced_size_redistribution_rejected": true,
+  "excluded_fixture": [
+    "ordinary.txt",
+    ".git/excluded.log",
+    ".agents/excluded.log",
+    "rgx/excluded.log",
+    "nested/excluded.log"
+  ],
+  "fresh_metadata_census_matches": true,
+  "included_fixture": [
+    "kept.log",
+    "kept.bin",
+    ".DS_Store"
+  ],
+  "inputs": {
+    "docs/checkpoints/REPO-HYGIENE.17-artifact-review.json": "8833b9b4f4ec35e3fe9e0ec35564cd9c500d780fa7f66731b20e9ef7900dc57e",
+    "docs/checkpoints/REPO-HYGIENE.17-census.py": "71ed4791a2867401cd80610526349a9bcfee5e15eb438407290670a002752b08",
+    "docs/checkpoints/REPO-HYGIENE.17-review.py": "1f9348fc48eceec98e618c12502c74a587327197f9c846586361d361a218dbb9",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "limits": "Dated per-file metadata census, not content hash ownership or disposability proof. Retain all artifacts/caches; exclude submodules/nested repositories and managed runs; no deletion or liveness/purge guarantee.",
+  "live_metadata_checked": true,
+  "outside_root_rejected": true,
+  "owner": "REPO-HYGIENE.17",
+  "per_file_os_metadata_oracle_matches": true,
+  "removed_bytes": 0,
+  "removed_files": 0,
+  "result": "PASS",
+  "start_nested_repository_rejected": true,
+  "start_submodule_rejected": true,
+  "start_symlink_rejected": true
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py"
+  ],
+  "returncode": 0,
+  "inputs": {
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json": "74114c0bc1dc606ac9fb66c6f3b93d78a9a63e566a8d759a3f0f2668aebc2cda",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py": "835621b437f793e0b68418fe34b052f285080d74cf813792ed6abcf2d48d423d"
+  },
+  "producer_sha256": "565afa5a6e6c1001dd9a176ea43bd41af79d88d9be8c7e8236bf5aa1349f5dd3",
+  "stdout_base64": "Q29udHJvbEZsb3cgZXhwYW5zaW9uIHB1YmxpY2F0aW9uIFBBU1M6IDQ1NiBsaXZlIGlucHV0czsgMTA4Nzg2IGJ5dGVzCg==",
+  "stderr_base64": "",
+  "unchanged": true,
+  "scope": "Actual supplemental readonly callback publication at accepted d432a955c before adding the unrelated metadata claim. The full456-input/108786-byte claim retains every original producer/artifact identity. All original bindings are checked before execution and remain unchanged; no new runtime behavior or broader admission is inferred."
+}

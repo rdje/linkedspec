@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-11` (`REPO-HYGIENE.16`: due retained artifact review)
+- Last updated: `2026-10-16` (`REPO-HYGIENE.17`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -327,6 +327,24 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.16 - retain due artifact metadata review`.
   Handoff: Activate PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10 from clean HEAD; retain the actual new-claim refusal and original .2 publication before a new readonly repair. Then cache .9 and giant kind .3. Existing .2 byte bindings/observations remain unchanged here.
 
+- ID: `REPO-HYGIENE.17`
+  Status: `done`
+  Priority: P2 — overdue daily retained review after the clean branch-expansion handoff.
+  Goal: Retain a fresh exact parent/Rust artifact metadata snapshot; delete only exactly proved disposable files and preserve evidence/caches.
+  Activation: Clean d432a955ca7a976ccbc3fa047f97bc5e3103ea76 after expansion .5.1.0/26148/0/all10; post-pointer/post-memory0, brief0 and clean Git verified. Existing cleanup Knowledge boundary, .16 complete census/reviewer/capture/claim contracts, latest-only date, roadmap maintenance owner and unchanged public retention guidance reviewed. This dated observation adds no storage/runtime/public mechanism.
+  Reproduce: Latest cleanup 2026-10-11T18:33:20.336100+00:00 is over24 hours old on October16.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.17-* instruments/full actual channels and docs/claims/REPO-HYGIENE.17.json; latest-only docs/ARTIFACT_CLEANUP.md; this task/index, current callback handoff/roadmap maintenance projections, bounded resume/live/change history. Existing Knowledge, book and all456 current callback claim bindings remain unchanged. Fixtures remain under .linkedspec-data/scratch/hygiene17; exclude every prior hygiene fixture. No writes to other repositories or submodules.
+  Verification tier: `focused`
+  Focused checks: Fixed accepted Git claim namespace and original-input census before bound writes; actual current456/full108786 readonly baseline; non-following same-volume parent census and separate Rust release/incremental/deps log-bin metadata; fresh comparison and independent per-file lstat; aggregate/balanced-size/traversal fixtures; full guarded commands/exits/channels and four reason-sensitive evidence RED controls. Review unchanged book retention teaching; Knowledge/memory/history/claim/diff and all normal doctrines. Recheck current callback publication after adding this unrelated claim.
+  Canonical trigger: none for dated retained metadata; no public, runtime, storage/toolchain/gate mechanism changes.
+  Claim verification: `docs/claims/REPO-HYGIENE.17.json`
+  Acceptance: Preserve all original dated snapshots. Update the latest-only cleanup date only after actual census and live reviewer complete. Zero removals is valid when no exact disposable target is proved. SESSION-STARTUP-READING.7 prohibits recovery/purge; no liveness or deletion work is authorized by this review. Capture/freezer and --capture publication are one-shot; final reviewers/publication default readonly. No new structural fact or public behavior is introduced; existing Knowledge/book teaching stays accurate. Commit before resuming attached parser .5.1.1. No independent helper/private/parent/canonical admission.
+  Activation preparation: A first inline frontier sorter rejected the Markdown ruler before any file write. The corrected numeric-row selector sorts the existing13/14 display rows and creates this ownership record; no repository work or measured capture was lost or refreshed.
+
+  Verification: PASS — Freeze76729/0 proves zero live intersections; current callback baseline19017/0 retains456/full108786. Actual capture55582/0 and review59475/0/readonly35387/0 verify full census/live review and four channel controls. Dated snapshot 2026-10-16T21:30:30.876883+00:00 records16045/17237976411 parent, separate incremental483/2390810574, deps0, release absent; zero removals. Claim capture/readonly0 retains22/full9417. Existing callback readonly21211/0 still passes after new claim publication. All456 original bindings and current Knowledge/book bytes stay unchanged. Both history checks, memory/diff and normal all10 doctrines govern landing. No new engineering-notes record is needed: this repeats the established metadata/retention procedure without a new structural or causal conclusion.
+  Commit: `REPO-HYGIENE.17 - retain due artifact metadata review`; derive accepted hash from Git.
+  Handoff: Activate PERL-PRIVATE-FACTORY-CAPTURE.5.1.1 from the ensuing clean boundary; current callback456/full108786 and this22/full9417 claim retain their separate live input sets. Preserve every intersecting live claim before later book/Knowledge writes.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -343,8 +361,9 @@ the durable handoff state current.
 | 10 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
 | 11 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
 | 12 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
-| 14 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
 | 13 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
+| 14 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
+| 15 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
 
 ## Decisions
 
@@ -462,3 +481,12 @@ the durable handoff state current.
   18G `claude-501` tree, unknown temp trees, `rgx` corpus artifacts, and all tracked content.
 
 - `2026-10-10`: Due retained .15 metadata review passes with13433 parent rows/15594802423 bytes and three separate Rust locations; zero removals. Fresh per-file metadata, traversal and four channel controls pass; readonly19-input7303-byte claim/Knowledge1339/10272 align. A premature review rejected a missing capture before any verification write; final review follows capture completion. Targeted Git audit repairs .1/.2 original pending commit projections without changing dated proof. Normal hooks govern clean landing before assignment required .5.2.
+
+## Acceptance Checklist — REPO-HYGIENE.17
+
+- [x] Original fixed Git claim namespace reviewed before bound writes; zero live intersections.
+- [x] Actual predecessor readonly456/full108786 baseline retained; it still passes after adding the new claim.
+- [x] Full parent/Rust census, fresh comparison and independent lstat retained with guarded command exits and both channels.
+- [x] Size/traversal fixtures and four reason-sensitive actual-channel RED controls pass; zero removals and latest-only date updated.
+- [x] Book/Knowledge teaching reviewed and unchanged; existing evidence/caches and every repository boundary preserved.
+- [x] Readonly22/full9417 claim, chronology/memory/diff and normal doctrine hooks govern focused clean landing.
