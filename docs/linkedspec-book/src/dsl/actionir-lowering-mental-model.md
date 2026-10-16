@@ -2263,6 +2263,46 @@ and exact mixed-provider default selection have separate implementation owners.
 The existing AST condition/body bridge and branch semantics remain intact.
 Complete pipeline, private Phase0, parent and canonical admissions remain open.
 
+### ControlFlow branch expansion dependencies
+
+Branch expansion selects and validates `trim_action_ir_value`, then
+`split_action_ir_statements`, before checking the input. Both callbacks now have
+separate private invocation boundaries. They retain their actual references in
+the public dependency map and run in scalar context under scalar, list or void
+helper calls. Replacing the splitter during trimming leaves the already selected
+splitter in use for this invocation.
+
+The expansion rules keep their existing shapes:
+
+| Input or splitter result | Expansion result |
+| --- | --- |
+| Undefined input, or undefined/empty trim result | Undefined |
+| `plain` | A new one-element array containing `plain` |
+| `{ first; second }` with a normal splitter | The actual splitter array, without a copy |
+| `{}` with an empty splitter array | That same empty array |
+| Non-array or blessed-array splitter result | Undefined |
+| `{ first } extra` | One plain-text element; the whole input is not a block |
+
+Whitespace handling belongs to the trim callback. The standard trim removes it;
+an injected identity trim keeps spaces as one plain-text element. Expansion itself
+checks the callback's result for definedness and length.
+
+Trim receives the helper's local scalar copy. The splitter receives the original
+named match argument `$+{body}`. On the recorded Perl5.34.1, that argument reports
+a clear `Internals::SvREADONLY` flag but rejects assignment. Copying its text into
+a lexical scalar changes its write behavior. The regression therefore checks the
+actual write rejection as well as arguments, flags, values and reference identity.
+The retained independent lexical/literal/match/copied-match oracle explains why
+a flag-only check would miss this change.
+
+An opaque dependency cannot borrow enclosing eligibility or donate a nested
+equal-text packet to the parent. A registered scalar child can keep its own
+matching packet; composition remains a caller's explicit responsibility. The
+bindings preserve successful error effects, fatal objects, once-only calls and
+cold loading. Attached method parsing, single-statement lowering and later
+ControlFlow families remain separate owners; this slice does not admit the full
+pipeline or private Phase0.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

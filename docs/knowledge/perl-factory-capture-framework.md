@@ -16,10 +16,10 @@ answers:
   - "which ControlFlow foundation callbacks run in list context"
   - "does ControlFlow retain selected lowerers after dependency map replacement"
 date: 2026-10-12
-status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation verified; later ControlFlow and pipeline open
+status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Historical accepted .4.1 and earlier routes use aa88233432976a019b41d05578f8e6a5f6e3c082 Git inputs. Current ControlFlow foundation overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.0/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Historical accepted .5.0 and earlier routes use 9f9b47973f0d0be2ee5e048dd71a28f91e8016ed Git inputs. Current ControlFlow expansion overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -147,3 +147,13 @@ with198 original REDs/650 controls/all GREEN, and13 effective source faults. The
 original449-input/106177-byte default publication remains historical at aa8823343.
 ControlFlow defaults have a mixed provider: seven target callbacks and the fixed
 ValueExpr extract_array_symbol_name reference; later .5.7 owns exact selection.
+
+Branch expansion .5.1.0 isolates trim/split through one original required-validator
+return. Both actual callbacks stay scalar; validation/reference selection is eager.
+Plain text becomes one element, braces return the actual splitter array (including
+empty), and non-ARRAY/blessed results decline. The named body is a native match
+argument: its clear readonly flag still accompanies write rejection. Copying
+arguments loses that constraint; see perl-match-alias-writability. Original/current
+134 rows match;368 paired assertions retain82 original REDs/286 controls/all GREEN,
+and10 complete source faults reject. Full foundation428-input/100775-byte claim
+remains historical at9f9b47973. No later ControlFlow/pipeline admission is inferred.

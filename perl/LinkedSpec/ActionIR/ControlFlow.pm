@@ -777,7 +777,7 @@ sub _expand_flow_branch_action_exprs {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $split_action_ir_statements = $require_dep->('split_action_ir_statements');

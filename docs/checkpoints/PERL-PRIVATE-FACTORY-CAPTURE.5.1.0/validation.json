@@ -1,0 +1,21 @@
+{
+  "producer_sha256": "f5789574559c410146872066cea9a003c8f7529eb5e4db504a9dfab1f414bdc2",
+  "sources": {
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/validation.py": "f5789574559c410146872066cea9a003c8f7529eb5e4db504a9dfab1f414bdc2",
+    "tools/check_public_aggregate_selector_surface.py": "3ea76c18e902f45456ff41b564150cb0e0cb5eebe0402b2c0a4364890f431c67",
+    "tools/check_executable_aggregate_selector_sources.py": "86075a472ddbb9c9a0f9020f4340a14d3feb5b949dc76947cd96304a3baaadaf",
+    "tools/check_aggregate_selector_retirement.py": "28b026e2270fb58490910fa84491896cc8c906a4611957682c7cdf3b14eabf7c",
+    "tools/check_capability_conformance.pl": "cfe410b5588301b005a123028371c341c2caeda89ec1d030e86b92480f6c54fb",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "command": [
+    "python3",
+    "tools/check_public_aggregate_selector_surface.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "ZXhlY3V0YWJsZS1hZ2dyZWdhdGUtc2VsZWN0b3ItY29uY3VycmVuY3k6IE9LICgzIHN0YWdnZXJlZCBjb25jdXJyZW50IHNjYW5zIHNlcmlhbGl6ZWQ7IHJlcG9zaXRvcnktcm9vdCBwcm9iZXMgY2xlYW5lZCkKZXhlY3V0YWJsZS1hZ2dyZWdhdGUtc2VsZWN0b3Itc2NhbjogT0sgKDAgcG9zaXRpdmU7IDY5IGNsYXNzaWZpZWQgaW1wbGVtZW50YXRpb24vcmVjb2duaXRpb24gb2NjdXJyZW5jZXM7IHNlcmlhbGl6ZWQgdHJhY2tlZCt1bnRyYWNrZWQgZGlzY292ZXJ5IHNlbGYtdGVzdCBwYXNzZWQpCmFnZ3JlZ2F0ZS1zZWxlY3Rvci1yZXRpcmVtZW50OiBPSyAoNSBiYWNrZW5kczsgNiBpbnZhbGlkIHNlbGVjdG9yczsgOCByZXRhaW5lZCBjbGFzc2VzOyBydW50aW1lIGNvbXBhdGliaWxpdHkgMCkKY2FwYWJpbGl0eS1jb25mb3JtYW5jZTogT0sgKHNjaGVtYSB2MjsgMjAgY2FwYWJpbGl0aWVzOyBiYWNrZW5kIHN0YXRlcyBwYXNzPTEwMCBwYXJ0aWFsPTAgZ2FwPTA7IDEgZXhjbHVzaW9uczsgMTkgZ292ZXJuYW5jZSBtdXRhdGlvbnM7IDIgbXV0YXRpb24gY2FwYWJpbGl0aWVzOyAxNiBtdXRhdGlvbi1hZG1pc3Npb24gbXV0YXRpb25zOyAxNyBtdXRhdGlvbi1yZWN1cnJpbmcgbXV0YXRpb25zOyA0IG11dGF0aW9uLXB1YmxpYy1nYXRlIG11dGF0aW9uczsgMTIgZ292ZXJuZWQgcHJvamVjdGlvbnM7IDYgcHVibGljIG11dGF0aW9uczsgNCBsYW5ndWFnZS1zdXJmYWNlIG11dGF0aW9uczsgMTUgZW50cnkvY3Vyc29yIG11dGF0aW9ucykKcHVibGljLWFnZ3JlZ2F0ZS1zZWxlY3Rvci1zdXJmYWNlOiBPSyAoNzAgcHVibGljIGZpbGVzOyA0MCBjbGFzc2lmaWVkIHJlbW92ZWQvaGlzdG9yeSByZWZlcmVuY2VzOyAwIGN1cnJlbnQgZXhhbXBsZXM7IDUgbWlncmF0aW9uIGNvbnRyYXN0czsgMTEgY29udHJhc3QgbXV0YXRpb25zOyBjYXBhYmlsaXR5IGFkbWl0dGVkKQo=",
+  "stderr_base64": "",
+  "scope": "Supplemental focused composed public selector/capability guard against the staged new executable fixtures and current book. Full actual command channels and actual producers are retained. This is not a new source-bound cross-backend/runtime/canonical admission or a complete transitive input capsule. Existing public capability and independent self-containment owners retain those admissions."
+}

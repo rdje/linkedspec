@@ -7,11 +7,11 @@ answers:
   - "can copying a Perl match argument change callback behavior"
   - "how is the original Perl match slot distinguished from a copied scalar"
   - "where is match alias writability independently verified"
-date: 2026-10-11
+date: 2026-10-12
 status: observed with an independent four-case Perl oracle and an effective callback argument-copy fault
 tags: [perl, aliases, callbacks, native-oracle, readonly]
 evidence: "The source-bound pure-Perl oracle retains four actual rows on v5.34.1: lexical/literal/match/copied-match flags0/1/0/0 and actual-slot identity1/0/1/1. Lexical and copied-match writes succeed; literal and actual-match writes fail. The legacy callback argument-copy source fault is syntax-valid and causes nine regression failures, including the named actual readonly match-alias assertion. Original observations and full command channels are retained."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-review.py on its original accepted Git inputs. The match-alias.py capture is one-shot."
+reverify: "Historical four-case producer/channels remain under .3.1.6.0.1 at accepted9f9b47973. Current named-body application and original oracle custody: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py. Capture writers stay retired."
 ---
 
 The native legacy callback exposed a false fixture assumption: its match argument
@@ -34,3 +34,10 @@ constraint, so value equality or a flag-only test would miss the changed behavio
 Producers and results are retained under the
 `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-` prefix. The owning repair
 is `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1`.
+
+ControlFlow expansion .5.1.0 passes `$+{body}` directly to the splitter at the
+original ControlFlow line790. Its native mutation row has flag0 and raises the
+read-only-value error at probe line104. All134 ordinary rows remain exact after
+isolation. The actual complete-source copied-arguments fault fails the warm and
+cold mutation controls while the original flag remains clear. This is a new
+application of the same retained v5.34.1 oracle, not an internal-layout claim.
