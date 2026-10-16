@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: overdue artifact review .17 is verified with zero removals; attached parser .5.1.1 follows its clean landing. No push.
+Full PNT: attached parser .5.1.1 is verified; single statement .5.1.2 follows its clean landing. No push.
 
 ## Latest Completed Slice
 
-REPO-HYGIENE.17 retains the 2026-10-16T21:30:30.876883+00:00 parent/Rust metadata snapshot:16045 parent candidates/17237976411 bytes; Rust release absent, debug/deps0, and debug/incremental483 rows/2390810574 bytes measured separately. Guarded actual commands and both complete channels, fresh scoped comparison, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive evidence controls pass. Zero files removed; proof data/caches remain retained. The fixed accepted claim census has zero live intersections. Current branch-expansion456-input/108786-byte readonly publication passes before and after adding this unrelated claim; all original callback bindings remain exact. Readonly22-input/9417-byte retention publication passes. Existing Knowledge and public book retention teaching remain accurate and unchanged; no new structural fact, public behavior or storage mechanism is introduced. Attached parser .5.1.1 resumes after the clean maintenance landing.
+ControlFlow attached parser .5.1.1 isolates trim/parser dependencies through one required-validator return. Native100/188 warm/156 cold recurs exactly; all344 ordinary rows, scalar contexts, selected references, errors and cold loading stay native. The writable head LVALUE shares storage with the earlier parser argument; actual call/argument references, typed source_method reconstruction and truthy injected results remain exact. Identical920 assertions retain194 original authority REDs/726 controls/all GREEN. Ten fault cases/nine source variants,82 supplied suites/291 inputs/22770 assertions and eight coherent artifact denials/restorations pass. Both original publications/all478 bindings remain historical at a4a9e5c503. First invalid instrument/compiler channels, historical-overlay reader rejection and isolated449-file/78-missing-historical-read rejection remain retained; distinct accepted readers use Git custody. Full Knowledge1485/1349/ten overlays/8387239, book89/four controls, public guard and supplemental standard1035 pass. Readonly461-input/110981-byte publication owns current routes. Single statement .5.1.2 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
 
 ## Next Action
 
-Activate ControlFlow attached parser .5.1.1 from clean Git. Preserve both current callback456/full108786 and hygiene22/full9417 if their inputs intersect the planned writes. Native-first AST/context/alias/selection observations precede expectations and source edits.
+Activate ControlFlow single statement .5.1.2 from clean Git. Preserve current461-input/110981-byte publication and its actual readonly baseline before bound writes; native-first trim/context/alias/AST/selection observations precede expectations and source edits.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1` — native100/188/156 exact;920/194 RED/726 controls/all GREEN;10 cases/9 sources;82/291/22770; evidence8; original478 Git bindings; Knowledge1485/1349/8387239; book89/4; standard1035; readonly461/110981; single statement .5.1.2 next.
 - `REPO-HYGIENE.17` — dated16045/17237976411 parent; separate Rust483/2390810574; zero removals; four evidence controls; readonly22/9417; callback456/108786 exact before/after; attached parser .5.1.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.0` — native100/74/60 exact; one validator/two roles;368/82 RED/286 controls;10 faults;81/284/21850; evidence7; original428/100775; preserved436/445/450; Knowledge1485/1349/ten/8386277; book89/4; standard1035; readonly456/108786; artifact review then .5.1.1.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.0` — native100/176/132 exact; three validators/seven roles; paired848/198 RED/650 controls;13 faults;80/277/21482; evidence6; original449/106177; Knowledge1485/1349/nine/8384946; book89/4; standard1035; readonly428/100775; branch plumbing .5.1 next.
@@ -29,7 +30,6 @@ Activate ControlFlow attached parser .5.1.1 from clean Git. Preserve both curren
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — native91+36/cold6/20 authority changes, final229/50 RED/179 controls, nine faults, supplied71/230/15607/evidence5/book89/4/standard1035; original490/113730; first75-file511/119230/recovery512; final readonly531/125217.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — original390/full85779+9306, fixed Git population, recovery532/533/seven and maintenance25, evidence4/book89/3, readonly422/97759; first failures preserved; cache .9 next.
-- `REPO-HYGIENE.16` — dated14888/16643190359, separate Rust metadata, four channel controls/readonly24/9306, zero removals and preceding readonly baseline PASS; proof-routing repair .10 next.
 
 ## History
 

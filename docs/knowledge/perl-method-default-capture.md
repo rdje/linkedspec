@@ -11,7 +11,7 @@ date: 2026-10-10
 status: historical bounded default selection verified; current frontier belongs to MEMORY.md
 tags: [perl, actionir, methods, callbacks, identity, default-factory]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.0 retains426 main/six cold assertions,24 effective source faults and25 direct suites in144 supplied files. Two native/current19-callback map ledgers match. Every actual reference/same-name replacement/native alias and opaque equal-text publication control passes. Four actual reviewer corruptions and one original-binding corruption reject/restored PASS; complete57-source book/two controls pass. Original244 bindings remain historical. Initial30 all-GREEN captures/producer retained before prose-only scope correction and unchanged-input recapture."
-reverify: "Historical accepted .5.0 and earlier routes use 9f9b47973f0d0be2ee5e048dd71a28f91e8016ed Git inputs. Current ControlFlow expansion overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Historical accepted .5.1.0 and earlier routes use a4a9e5c503460a8bd7db06e57b827dd053724d00 Git inputs. Current ControlFlow attached-parser overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
 ---
 
 MethodLowering::default_deps_for_package keeps the actual OwnerDispatch map and

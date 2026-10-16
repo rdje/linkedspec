@@ -1,0 +1,24 @@
+{
+  "producer_sha256": "2b455c78c07a3bfd27eae0ca4b254afa64f6740684e9da56d20f8ef24713b90b",
+  "original_reader_sha256": "d966a3613596b29e64d66ef6c45254b373381d608ffa6931f4b5625cef9b6c88",
+  "first_outer_session": 53072,
+  "first_outer_returncode": 1,
+  "changed_unowned_inputs": {
+    "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json": {
+      "original_sha256": "74114c0bc1dc606ac9fb66c6f3b93d78a9a63e566a8d759a3f0f2668aebc2cda",
+      "current_sha256": "3dbcc934d64d36239ce135f27be4b4c7e34037bd89c086ae9a311b3ad706ee85"
+    }
+  },
+  "only_historical_mode_revision": true,
+  "replay": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/review.py",
+      "--preflight"
+    ],
+    "returncode": 1,
+    "stdout_base64": "",
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuMS4xL3Jldmlldy5weSIsIGxpbmUgOTEsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgc2hhKHJhdyhpdGVtWydwYXRoJ10pKSA9PSBpdGVtWydzaGEyNTYnXSwgJ3VuY2hhbmdlZCB1bm93bmVkIHByZWRlY2Vzc29yIGlucHV0JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IHVuY2hhbmdlZCB1bm93bmVkIHByZWRlY2Vzc29yIGlucHV0Cg=="
+  },
+  "scope": "The first tool-reported reader rejection was unchanged unowned predecessor input at line91; its original separate streams are unavailable. This distinct readonly replay retains fresh complete separate channels and reproduces that cause. The only such changed input is the callback claim bound by the historical hygiene publication; only its durability mode/revision changed, and both whole original records/all478 bindings remain recoverable at accepted Git. No original reader, producer, runtime observation, fixture, source fault or result is refreshed."
+}

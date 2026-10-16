@@ -1,0 +1,10 @@
+{
+  "producer_sha256": "13bf10c636d13ba5515614955235f9c867b32b1c658a7c9cac5b74be2f388bb7",
+  "original_path": "t/actionir_control_attached_native.pl",
+  "archive_path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/instrument-first.txt",
+  "source_sha256": "ca1c571b6e8474662d42180c3f08aff6ea9e2e5198452777b82bf61267badf65",
+  "source_bytes": 14896,
+  "mode": 420,
+  "original_capsule_sha256": "1a9d031e43242007a99ae87eafc142f741f03c10318537206328650721eec088",
+  "scope": "Exact original failed instrument bytes/mode are retained both in their original-path source capsule and this readable text archive. Only the verified untracked first test-path copy is removed, preventing invalid retired syntax from entering executable test discovery. The distinct fixed instrument and all original command/source/data records remain unchanged."
+}

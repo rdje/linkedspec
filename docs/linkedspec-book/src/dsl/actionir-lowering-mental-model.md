@@ -2303,6 +2303,59 @@ cold loading. Attached method parsing, single-statement lowering and later
 ControlFlow families remain separate owners; this slice does not admit the full
 pipeline or private Phase0.
 
+### ControlFlow attached parser dependencies
+
+The optional attached-block parser selects `trim_action_ir_value`, then
+`parse_method_function_expr`, before any input guard or AST reconstruction. The
+required validator now binds both actual references privately. The caller's map
+keeps those references, and a replacement made during trimming does not replace
+the parser already selected for the current invocation.
+
+The parser first reconstructs supported typed control nodes from their condition
+and body fields. Nested calls preserve a valid authored `source_method`, including
+current helpers such as `cat`. Original `source` text does not override those typed
+fields. This preserves the existing AST bridge; reconstruction does not register
+callbacks or grant source-emission authority.
+
+The callback sequence depends on whether the first parse succeeds:
+
+| Path | Native callback sequence |
+| --- | --- |
+| A direct method call | Marker trim, then parser on the complete normalized expression |
+| An attached block after the complete parse declines | Marker trim, complete parser attempt, head substring trim, head marker trim, then parser on the normalized head |
+| Undefined input or empty trim result | Required validation still happens; the later parser call is skipped |
+
+The two marker trims already have their own private boundaries. This change adds
+boundaries to the directly selected parser calls and the head trim. All these
+callbacks retain scalar context under scalar, list or void helper calls.
+
+For example, `if(true) { say("x") }` reaches the complete parser attempt before the
+fallback scanner separates `if(true)` from `{ say("x") }`. The result retains the
+actual call object and its argument array, together with the attached body string.
+An empty attached block remains an attached block. The scanner keeps its native
+handling of parentheses, brackets, quotes, escapes and a leading slash quote;
+malformed or trailing body text still declines on the same paths.
+
+The head trim receives the original `substr` argument. In the retained Perl5.34.1
+probe, its reference type is `LVALUE`, its readonly flag is clear, and it accepts writes.
+Writes through it change the same trimmed scalar held by the earlier parser call.
+Copying the argument into a new scalar loses that relationship even when its text
+and readonly flag match. The regression retains argument references and checks
+this shared mutation, as well as the callback values and result references.
+
+A truthy parser result is forwarded unchanged in the internal `call` field.
+This helper does not add a hash-type check: injected scalar, array, blessed and
+CODE results keep their original behavior. False results continue the native scan;
+later lowering consumers apply their existing call-shape guards.
+
+Opaque dependencies retain only their own invocation eligibility and cannot donate
+a nested equal-text packet to the enclosing callback. A registered matching scalar
+child can keep its own packet. Validation locations, once-only effects, successful
+error effects, fatal objects and cold loading remain native. Single-statement
+lowering, later statement families, direct dispatch/rule calls and mixed-provider
+default selection remain separately owned. Full pipeline/private/parent admission
+still requires those owners and explicit output composition.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

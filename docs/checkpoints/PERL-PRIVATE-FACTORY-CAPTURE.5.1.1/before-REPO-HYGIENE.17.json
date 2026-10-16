@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.17",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review",
+      "statement": "At 2026-10-16T21:30:30.876883+00:00, the scoped parent metadata census retains 16045 candidate rows/17237976411 bytes. Three explicit Rust release/incremental/deps log-bin locations are observed separately. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Guarded actual commands/exits/full channels and four reason-sensitive evidence RED controls verify. Zero files are removed; proof data and reusable caches remain retained. The actual current branch-expansion readonly456-input/108786-byte baseline passes before the unrelated new maintenance claim. The entire callback publication and all456 input bindings remain exact; the fixed accepted claim namespace has zero original live intersections. Existing Knowledge and public retention teaching stay unchanged.",
+      "scope": "Dated per-file metadata only. Size/age does not establish content ownership, disposal safety, reclaimed space, liveness, recovery/purge or global audit completion. Submodules/nested repositories, symlinks, other volumes, managed runs, reusable caches and all prior hygiene fixtures are excluded before traversal. Three explicit Rust paths are separate observations. Fixtures assume a quiescent filesystem; no adversarial concurrent-mutation guarantee. --live measures changing state; default review checks retained totals. Standard OS/Python/Git dependencies are reused read-only, and every project-owned output/fixture stays on the repository volume. No deletion or product/storage/public mechanism changes. Current book/Knowledge teaching remains accurate and unchanged; no new durable structural fact is introduced. Capture/freezer and --capture publication are one-shot writers; review-actual.py/claim.py defaults are readonly. Mutable continuity prose is not a measurement input. The supplemental preceding readonly baseline is retained at accepted d432a955c with its complete456-input/108786-byte claim, which retains every producer/artifact input identity rather than duplicating its list here. All original callback bindings are independently hash-checked. No new callback/runtime/helper/private/parent/canonical admission is inferred.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.17-review-actual.py; separately claim.py under that wrapper. Defaults readonly; capture.py/freeze.py and --capture publication are one-shot writers.",
+        "granularity": "Every dated parent/Rust candidate path, suffix and byte size; guarded actual commands/exits/full channels; boundary fixtures; retained instrument/input identities and latest date/disposition; fixed accepted claim namespace; actual preceding readonly baseline and complete unchanged callback claim/all456 bindings.",
+        "result": "At 2026-10-16T21:30:30.876883+00:00, the scoped parent metadata census retains 16045 candidate rows/17237976411 bytes. Three explicit Rust release/incremental/deps log-bin locations are observed separately. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Guarded actual commands/exits/full channels and four reason-sensitive evidence RED controls verify. Zero files are removed; proof data and reusable caches remain retained. The actual current branch-expansion readonly456-input/108786-byte baseline passes before the unrelated new maintenance claim. The entire callback publication and all456 input bindings remain exact; the fixed accepted claim namespace has zero original live intersections. Existing Knowledge and public retention teaching stay unchanged."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Aggregate totals hide altered per-file sizes, unsafe traversal, failed observations or forged producer/channel identities; new maintenance writes silently invalidate an existing callback publication.",
+        "oracle": "Independent OS lstat and fresh scoped census, fixed traversal fixtures, exact retained commands/source/channel identities and accepted Git claim namespace/current456 bindings.",
+        "red_control": "Aggregate inflation and balanced-size redistribution reject. Start/ancestor symlinks, nested repositories, mock submodules and outside-root starts reject. Four reason-sensitive actual-channel controls reject incomplete capture, forged producer, failed review and forged stdout. The original full callback publication and all456 inputs remain exact throughout this dated metadata slice."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitignore",
+            "sha256": "b61de7bd78fc7d317b44b9bec528665b632206a4c51d7a0c266a719af951b26c",
+            "role": "input"
+          },
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": "docs/ARTIFACT_CLEANUP.md",
+            "sha256": "127803aa350338141b636b01c533f12becba9ea56de667ea8ed270289bd5147b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py",
+            "sha256": "835621b437f793e0b68418fe34b052f285080d74cf813792ed6abcf2d48d423d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-actual-verification.json",
+            "sha256": "31a261b55445b5d858d0d47bc807e27e8b385b41e0417bb6619a3c0404f33592",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-actual.json",
+            "sha256": "8c97e09c0dc02cd46eee18ec59abce990ad969eda821e90df851ba8d812b7c46",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-artifact-review.json",
+            "sha256": "8833b9b4f4ec35e3fe9e0ec35564cd9c500d780fa7f66731b20e9ef7900dc57e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-capture.py",
+            "sha256": "3e70110aba1903aef7ec8dbdcfa0c40b574d4d89177f5ec9009099d4b5bd1cea",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-census.py",
+            "sha256": "71ed4791a2867401cd80610526349a9bcfee5e15eb438407290670a002752b08",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-claim.py",
+            "sha256": "d10e4dafb7e4fcc6258f866ea59b0d28d2254cbe0c3e737fef65308226adad04",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-freeze.json",
+            "sha256": "d8ae27a06d4fd69579b331e8c489cccfd8ec377af9bd69bd5d234fe8cf04a1be",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-freeze.py",
+            "sha256": "016c644eb225375924a86130e84afd2bd83c2a4e534e6aa7b7f5aa5c0401a91d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-review-actual.py",
+            "sha256": "6267386c88154f682f3098ac510258a9b4fe10ce75fc326e30eefd9b1e4af7aa",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-review-baseline.json",
+            "sha256": "7da25a9b9421b8116cf5bbe3ebaa374cbf215e826f8c8e38b350fb37ccba6a20",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-review-baseline.py",
+            "sha256": "565afa5a6e6c1001dd9a176ea43bd41af79d88d9be8c7e8236bf5aa1349f5dd3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-review.py",
+            "sha256": "1f9348fc48eceec98e618c12502c74a587327197f9c846586361d361a218dbb9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.17-verification.json",
+            "sha256": "a027517bce00441193ecbfdc2705a6d170897c9d0d6f887880acf9f6a3332354",
+            "role": "input"
+          },
+          {
+            "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+            "sha256": "74114c0bc1dc606ac9fb66c6f3b93d78a9a63e566a8d759a3f0f2668aebc2cda",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "71b64e7adfdebd2d0ebcc240cab62659a60ed6a3e26f5ff23fcc9dceed424c46",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -15,11 +15,13 @@ answers:
   - "does FlowExpr default construction preserve scalar list void factory contexts"
   - "which ControlFlow foundation callbacks run in list context"
   - "does ControlFlow retain selected lowerers after dependency map replacement"
-date: 2026-10-12
-status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion verified; later ControlFlow and pipeline open
+  - "which attached parser callbacks have separate private frames"
+  - "does attached parsing preserve its native substring lvalue"
+date: 2026-10-17
+status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Historical accepted .5.0 and earlier routes use 9f9b47973f0d0be2ee5e048dd71a28f91e8016ed Git inputs. Current ControlFlow expansion overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Historical accepted .5.1.0 and earlier routes use a4a9e5c503460a8bd7db06e57b827dd053724d00 Git inputs. Current ControlFlow attached-parser overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -157,3 +159,13 @@ arguments loses that constraint; see perl-match-alias-writability. Original/curr
 134 rows match;368 paired assertions retain82 original REDs/286 controls/all GREEN,
 and10 complete source faults reject. Full foundation428-input/100775-byte claim
 remains historical at9f9b47973. No later ControlFlow/pipeline admission is inferred.
+
+Attached parser .5.1.1 binds one required validator/two roles. Nested marker trims
+already have private frames; both direct parser calls and head trim gain their own.
+The retained v5.34.1 probe identifies the head substring argument as LVALUE, with
+clear readonly flag and writable shared storage. Its mutation changes the scalar
+held by the first parser call; copying arguments loses that alias and reference
+type. Actual call/argument-array references and typed source_method reconstruction
+stay native. Truthy injected parser results forward unchanged; false results
+continue the original attached-block scan. Registration still requires actual
+callback identity; reconstructed source fields alone grant no emission authority.
