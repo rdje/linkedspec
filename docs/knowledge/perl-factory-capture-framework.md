@@ -17,11 +17,12 @@ answers:
   - "does ControlFlow retain selected lowerers after dependency map replacement"
   - "which attached parser callbacks have separate private frames"
   - "does attached parsing preserve its native substring lvalue"
+  - "does single-statement trim preserve aliases and branch candidate state"
 date: 2026-10-17
-status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser verified; later ControlFlow and pipeline open
+status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser/single statement verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Historical accepted .5.1.0 and earlier routes use a4a9e5c503460a8bd7db06e57b827dd053724d00 Git inputs. Current ControlFlow attached-parser overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Historical accepted .5.1.1 and earlier routes use c7570b71642e1889ab03ee07c29273dabdf16989 Git inputs. Current ControlFlow single-statement overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -169,3 +170,11 @@ type. Actual call/argument-array references and typed source_method reconstructi
 stay native. Truthy injected parser results forward unchanged; false results
 continue the original attached-block scan. Registration still requires actual
 callback identity; reconstructed source fields alone grant no emission authority.
+
+Single-statement .5.1.2 binds its required trim through one validator. The actual
+callback stays scalar with a writable local slot; mutation leaves the caller intact.
+Validation, tied-map selection, closure prefixes, direct AST/control traversal and
+rule candidate state remain native. Candidates copy stack-entry hashes/counters,
+share nested references, and commit only defined nonempty changed outputs (`0`
+included). This preserves existing shallow-copy semantics, without admitting later
+direct/rule invocation owners or rollback of external effects.

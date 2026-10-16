@@ -124,7 +124,7 @@ the complete accepted expansion and dated hygiene publications, and validates
 current Knowledge routing and the complete book:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

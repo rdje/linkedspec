@@ -2356,6 +2356,47 @@ lowering, later statement families, direct dispatch/rule calls and mixed-provide
 default selection remain separately owned. Full pipeline/private/parent admission
 still requires those owners and explicit output composition.
 
+### ControlFlow single-statement trim boundary
+
+Single-statement branch lowering selects and validates `trim_action_ir_value`
+before its undefined-input guard. Trace entry still precedes validation. The
+selected actual callback now has its own private scalar frame; its public map
+entry keeps the original reference. A tied map cannot replace that already
+selected callback with a later lookup.
+
+The trim argument is a writable local scalar. A callback that changes `bare` to
+`bare!` changes the lowered path while the caller's original scalar stays `bare`.
+Undefined input skips trimming after validation; an undefined or empty trim result
+finishes before closures, direct control or rewrite rules. A defined `0` remains
+nonempty and continues through lowering.
+
+The existing traversal order stays intact:
+
+1. Trim the statement.
+2. Preserve an attached `elseif`/`else` continuation, or flush trailing implicit
+   `if` closures into a prefix.
+3. Try direct control-flow lowering, including the typed AST bridge.
+4. Try rewrite rules in their original order; otherwise retain the trimmed value.
+
+For example, two pending implicit closures followed by `bare` produce the internal
+statement text `} } bare`; an explicit outer closure remains on the stack. A
+successful rewrite uses the same prefix, such as `} accepted`. These are lowering
+results, not additional DSL syntax.
+
+Each rewrite rule receives its own candidate context. Stack-entry hashes and
+counters are copied, while the rule array and nested references remain shared.
+Rejected counter and stack-entry updates do not enter the next candidate; mutations
+through shared nested references remain visible. Only a defined, nonempty result
+that differs from the input commits the candidate. A rule result of `0` qualifies;
+undefined, empty and unchanged results continue to the next rule. This candidate
+copy does not roll back external effects.
+
+Callback errors, fatal objects, once-only effects and cold loading remain native.
+An opaque trim cannot donate an equal-text packet to its enclosing producer; an
+actually registered matching trim can retain its own packet. Direct dispatch and
+rule application calls remain separately owned, as do later ControlFlow families,
+default selection and full pipeline/private admission.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

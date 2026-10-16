@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-17 — PERL-PRIVATE-FACTORY-CAPTURE.5.1.2
+
+Writable local trim slots and shallow candidates stay native. Nonempty changed results commit, including `0`.
+
 ## 2026-10-17 — PERL-PRIVATE-FACTORY-CAPTURE.5.1.1 — Attached head alias
 
 The attached parser passes a writable `substr` LVALUE to head trimming. Mutation changes the scalar retained by the earlier complete parser call; copying arguments breaks this shared storage. Preserve actual call/argument references and truthy injected results. Historical claim inputs resolve at their accepted Git revision; check current mode/revision overlays separately. An isolated supplied replay exposed78 undeclared historical live reads in the first root-only PASS. Retain that failure and its producer; the distinct reader uses Git custody.

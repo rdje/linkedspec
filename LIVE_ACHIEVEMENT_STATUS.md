@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: attached parser .5.1.1 is verified; single statement .5.1.2 follows its clean landing. No push.
+Full PNT: single-statement trim .5.1.2 is verified; finite engineering-history prerequisite .5.1.3 follows its clean landing before .5.2. No push.
 
 ## Latest Completed Slice
 
-ControlFlow attached parser .5.1.1 isolates trim/parser dependencies through one required-validator return. Native100/188 warm/156 cold recurs exactly; all344 ordinary rows, scalar contexts, selected references, errors and cold loading stay native. The writable head LVALUE shares storage with the earlier parser argument; actual call/argument references, typed source_method reconstruction and truthy injected results remain exact. Identical920 assertions retain194 original authority REDs/726 controls/all GREEN. Ten fault cases/nine source variants,82 supplied suites/291 inputs/22770 assertions and eight coherent artifact denials/restorations pass. Both original publications/all478 bindings remain historical at a4a9e5c503. First invalid instrument/compiler channels, historical-overlay reader rejection and isolated449-file/78-missing-historical-read rejection remain retained; distinct accepted readers use Git custody. Full Knowledge1485/1349/ten overlays/8387239, book89/four controls, public guard and supplemental standard1035 pass. Readonly461-input/110981-byte publication owns current routes. Single statement .5.1.2 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
+ControlFlow single-statement .5.1.2 isolates its trim through one original required-validator return. Native100/87 warm/79 cold recurs exactly; all166 ordinary rows, scalar callbacks, writable local slots, selected references, errors and cold loading stay native. Closure prefixes, direct/typed fallback and shallow rule candidates remain exact; rejected counters/entry changes do not commit, nested references stay shared, and nonempty changed zero output commits. Identical439 assertions retain94 original authority REDs/345 controls/all GREEN. Ten fault cases/nine byte variants,83 supplied suites/298 inputs/23209 assertions and nine coherent artifact denials/restorations pass. Whole original461-input/110981-byte publication/all bindings remain historical at c7570b716 after its actual readonly baseline. Current fixed inventories use accepted Git for historical inputs. Full Knowledge1485/1349/ten overlays/8387900, book89/four controls, public guard and supplemental standard1035 pass. Readonly449-input/105765-byte publication owns current routes. Complete owner-explicit engineering note leaves58961 bytes; finite canonical rollover prerequisite .5.1.3 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
 
 ## Next Action
 
-Activate ControlFlow single statement .5.1.2 from clean Git. Preserve current461-input/110981-byte publication and its actual readonly baseline before bound writes; native-first trim/context/alias/AST/selection observations precede expectations and source edits.
+Activate finite engineering-history prerequisite .5.1.3 from clean Git. Preserve current449-input/105765-byte publication and actual readonly baseline before bound writes; derive one actual rollover, exact member/manifest/sole-authority overhead and old-cap RED. Exact staged canonical proof is required before .5.2; no runtime change or future capacity reserve.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2` — native100/87/79 exact;439/94 RED/345 controls/all GREEN;10 cases/9 sources;83/298/23209; evidence9/supplied443; original461 Git bindings; Knowledge1485/1349/8387900; book89/4; standard1035; readonly449/105765; finite continuity .5.1.3 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1` — native100/188/156 exact;920/194 RED/726 controls/all GREEN;10 cases/9 sources;82/291/22770; evidence8; original478 Git bindings; Knowledge1485/1349/8387239; book89/4; standard1035; readonly461/110981; single statement .5.1.2 next.
 - `REPO-HYGIENE.17` — dated16045/17237976411 parent; separate Rust483/2390810574; zero removals; four evidence controls; readonly22/9417; callback456/108786 exact before/after; attached parser .5.1.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.0` — native100/74/60 exact; one validator/two roles;368/82 RED/286 controls;10 faults;81/284/21850; evidence7; original428/100775; preserved436/445/450; Knowledge1485/1349/ten/8386277; book89/4; standard1035; readonly456/108786; artifact review then .5.1.1.
@@ -29,7 +30,6 @@ Activate ControlFlow single statement .5.1.2 from clean Git. Preserve current461
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4` — native156/six cold/20 changes; paired286/56 RED/230 controls, nine faults; supplied72/233/15893/evidence5/book89/4/standard1035; original531/125217; readonly498/114980.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — native91+36/cold6/20 authority changes, final229/50 RED/179 controls, nine faults, supplied71/230/15607/evidence5/book89/4/standard1035; original490/113730; first75-file511/119230/recovery512; final readonly531/125217.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10` — original390/full85779+9306, fixed Git population, recovery532/533/seven and maintenance25, evidence4/book89/3, readonly422/97759; first failures preserved; cache .9 next.
 
 ## History
 

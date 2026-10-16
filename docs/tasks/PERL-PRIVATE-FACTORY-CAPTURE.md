@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / single statement .5.1.2
+- Status: `active` / finite continuity .5.1.3
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-17`
@@ -1310,14 +1310,14 @@ quoted-first example do not change here. Other repositories and all submodules r
   Status: `active` / bounded plumbing children; independent admission open
   Goal: Isolate required branch expansion, attached parser and single-statement dependencies while preserving native AST/control contracts.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.0`
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.0`, `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1`, `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2`.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.0`, `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1`, `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2`; finite continuity prerequisite `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3`.
   Owned paths: Only the three original required-validator returns in the named ControlFlow plumbing helpers; focused proof/Knowledge/book/continuity. Actual direct dispatch and rule apply calls remain with .5.6.
   Split rationale: Expansion has a direct splitter/body/array-reference contract. Attached parsing traverses the native AST bridge and marker binding; single statements also traverse direct dispatch and candidate rewrite contexts. Capture and verify each actual dependency family independently before changing it.
   Planned tier: `focused`
   Planned focused proof: Preserve accepted publication first; native contexts/argument aliases/selected maps/guards/results/errors/cold loading; original RED/GREEN, full-source faults, supplied direct consumers, book/Knowledge/artifact/public controls and standard public Phase0.
   Planned canonical boundary: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
   Planned claim record: none: Child-specific claims own implementation measurements.
-  Acceptance: Commit each child before the next. .5.2 depends on the final .5.1.2 handoff; no independent aggregate/private/parent admission inferred.
+  Acceptance: Commit each child before the next. .5.2 follows the .5.1.2 runtime handoff and finite .5.1.3 continuity prerequisite; no independent aggregate/private/parent admission inferred.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.0`
   Status: `done` / focused verified
@@ -1377,21 +1377,56 @@ quoted-first example do not change here. Other repositories and all submodules r
   Outcome: ControlFlow attached parser .5.1.1 isolates trim/parser dependencies through one required-validator return. Native100/188 warm/156 cold recurs exactly; all344 ordinary rows, scalar contexts, selected references, errors and cold loading stay native. The writable head LVALUE shares storage with the earlier parser argument; actual call/argument references, typed source_method reconstruction and truthy injected results remain exact. Identical920 assertions retain194 original authority REDs/726 controls/all GREEN. Ten fault cases/nine source variants,82 supplied suites/291 inputs/22770 assertions and eight coherent artifact denials/restorations pass. Both original publications/all478 bindings remain historical at a4a9e5c503. First invalid instrument/compiler channels, historical-overlay reader rejection and isolated449-file/78-missing-historical-read rejection remain retained; distinct accepted readers use Git custody. Full Knowledge1485/1349/ten overlays/8387239, book89/four controls, public guard and supplemental standard1035 pass. Readonly461-input/110981-byte publication owns current routes. Single statement .5.1.2 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2`
-  Status: `pending`
+  Status: `done` / focused verified
   Goal: Single-statement trim dependency.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1`
   Owned paths: ControlFlow::_lower_flow_branch_single_statement required validator only. Preserve trace and AST/direct-control traversal, branch-context cloning/commit, closures and actual rule calls; direct dispatch/rule apply invocation boundaries stay with .5.6. Focused fixture/proof/claim, relevant Knowledge/book and continuity. No public syntax, default, parser implementation or unrelated family change.
-  Planned tier: `focused`
-  Planned focused proof: Native-first actual callbacks/contexts/aliases/selected maps/guards/AST/control/error behavior; original RED/GREEN, full-source faults, complete supplied consumers and book/Knowledge/artifact/public controls.
-  Planned canonical boundary: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
-  Planned claim record: none: No new measurement until activation.
+  Verification tier: `focused`
+  Focused checks: Native-first actual callbacks/contexts/aliases/selected maps/guards/AST/control/error behavior; original RED/GREEN, full-source faults, complete supplied consumers and book/Knowledge/artifact/public controls.
+  Canonical trigger: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json`
   Acceptance: Preserve actual public callback/map and returned reference identities, eager validation/selection and all original global diagnostic lines. Actual registration supplies only its own authority. Commit before the next child; no independent aggregate admission inferred.
 
+
+  Activation: Clean c7570b71642e1889ab03ee07c29273dabdf16989 after attached parser commit39699/0/all10, immediate brief0, explicit post-pointer/post-memory0 and clean Git. The next roadmap-aligned owner is only the single-statement required trim validator. Relevant callback framework, native single-statement/direct parser paths, trace/candidate-clone canonical card, compact trace fixture and public lowering/trace book sections are reviewed. Preserve the whole461-input/110981-byte publication and actual readonly baseline before bound writes. Native-first local aliases, scalar callback frames, trace/AST/direct/rule ordering, implicit closures, candidate rejection/commit, selected map reads, guards and errors decide the fixture before production edits. Direct dispatch and rule apply invocation boundaries remain .5.6. Engineering notes58796 leave186 bytes before rollover; use a complete concise note or own an actual finite capacity prerequisite if needed, never an automatic budget increase. Knowledge1349/no spare slot/1369-byte headroom requires finite framework/header edits only.
+
+  Preservation/native results: preserve62314/0 retains complete461/full110981 and its actual readonly baseline at c7570b716, then changes only durability mode/revision. First observe4955/0 retains100 inputs/87 warm/79 cold rows with exact fresh-process recurrences; all379 warm/355 cold supplied dependency calls are scalar. Trace stays lazy; cold SourceEmissions remains unloaded. Direct trim sees a writable local scalar, mutation affects its returned path but leaves caller input unchanged. The first original trim frame inherits the parent and can donate equal-text publication. Native closure prefix is `} } bare`; zero rule output is accepted; rejected candidates keep counters3/7 for the next rule while nested stack references remain shared. Tied dependency reads distinguish one eager original selection from later nested selections. The typed-empty case uses an injected whitespace splitter returning one blank statement: that declines nested action lowering and preserves the actual original typed reference; this is a bounded injected fallback observation, not a facade typed-lowering success claim. Direct/nonempty attached control, rule/fatal/guard/error and map effects remain separately visible in the complete ledger. Identical native-baseline fixture now owns independent actual-frame/own-registration/parent/child assertions; no production edit yet.
+
+  Original paired result: before16064/0 retains439 complete assertions/94 authority REDs/345 native controls and105 supplied inputs. Only the original required trim validator now returns the unchanged private binding. The identical positive run is in flight; no direct dispatch/rule application, AST, trace, closure, candidate copy/commit or other validator changes.
+
+  Current proof: Positive32569/0 passes all439. Native13508/0 retains all166 ordinary rows/100 inputs/87+79 exact recurrences. Fault39482/0 passes ten cases/nine source byte variants with94,94,86,18,156,250,2,6,160,4 failures; inverse reproduces all original94 names/numbers. Consumers77721 and standard51480 run. Documentation editor guards rejected two preflight attempts before any writes: the first selected nine headers because match-alias has distinct historical wording; the second incorrectly included ADR bytes in the Knowledge-card budget. Correct current-header selection covers all ten, and the registry's actual docs/knowledge/*.md collection defines the finite byte check. Original captures/producers remain unchanged.
+
+  Documentation acceptance: Knowledge58442/0 retains1485 Markdown/1349 facts/ten overlays/8387900 bytes with708 bytes headroom; one framework body changes, no card/budget grows. Book8630/0 and its actual reader pass89/four controls with rendered single-trim/zero/shallow teaching; public guard85865/0 passes. Consumers77721/0 pass83 suites/298 inputs/23209 assertions with accepted predecessor headers/plans/stderr exact. Independent preflight70386/0 passes; nine-artifact86125/0 passes all nine supplied corruptions and exact restorations; standard51480/0 completes all five commands/public Phase01035. Full independent review and publication remain before focused COMMIT.md. Complete169-byte engineering note gives58965 bytes; actual rollover check0/WARN stays below58982. Own the finite next-record capacity prerequisite as .5.1.3 before .5.2; this focused runtime slice changes no registry/authority/storage mechanism.
+
+  Final publication progress: Full independent review97136/0 passes442 inputs; standard51480/0 retains all five commands/public Phase01035. Publisher capture89826/0 passes449 live inputs/105765 bytes. Readonly repeat is in flight, followed by continuity/staging/focused hooks. The original169-byte engineering note/root58965 passed the pressure check; its final165-byte owner-explicit heading/body leaves58961 and is checked again. Original native/runtime/Knowledge/book/fault/artifact producers and inputs remain unchanged.
+
+  Final acceptance: Full independent97136/0 passes442 declared inputs; nine-artifact86125/0 passes443-file supplied baseline and all nine coherent deeper denials/exact restorations. Publisher capture89826/0 and readonly9378/0 pass449 live inputs/105765 bytes. All original native/paired/fault/consumer/Knowledge/book producers remain frozen. Standard51480/0 passes all five commands/public Phase01035; engineering notes382/58961 pass below58982. Normal focused all-doctrine hooks govern landing.
+
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — Native LinkedSpec::ActionIR::ControlFlow::_lower_flow_branch_single_statement instrument4955/0 and identical fixture16064/0 retain94 authority REDs/345 controls before edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Actual first-trim frame inherits the registered parent; original required validator return at ControlFlow.pm:986 supplies no independent CODE boundary. The complete100-input native capsule retains its exact mechanism and source.
+  - [x] **FIX** — Only the required trim validator return binds the actual selected CODE through the unchanged existing helper; direct/rule invocation and AST/trace/candidate/closure implementations stay exact.
+  - [x] **ADDRESSED (verified)** — Identical439 passes32569/0; current native13508/0 matches every166 original ordinary row; ten full-source faults include the exact94-name/number inverse.
+  - [x] **NO REGRESSION** — Complete83 supplied suites/298 inputs/23209 assertions preserve predecessor headers/plans/stderr; strict-vars/standard syntax and full public Phase051480/0 pass1035 to the true plan.
+  - [x] **LOCKSTEP** — Full Knowledge1485/1349/ten overlays, book89/four controls and nine artifact corruptions/restorations pass. Continuity/roadmaps/current task frontier agree; finite next-record capacity is owned by .5.1.3.
+  Outcome: ControlFlow single-statement .5.1.2 isolates its trim through one original required-validator return. Native100/87 warm/79 cold recurs exactly; all166 ordinary rows, scalar callbacks, writable local slots, selected references, errors and cold loading stay native. Closure prefixes, direct/typed fallback and shallow rule candidates remain exact; rejected counters/entry changes do not commit, nested references stay shared, and nonempty changed zero output commits. Identical439 assertions retain94 original authority REDs/345 controls/all GREEN. Ten fault cases/nine byte variants,83 supplied suites/298 inputs/23209 assertions and nine coherent artifact denials/restorations pass. Whole original461-input/110981-byte publication/all bindings remain historical at c7570b716 after its actual readonly baseline. Current fixed inventories use accepted Git for historical inputs. Full Knowledge1485/1349/ten overlays/8387900, book89/four controls, public guard and supplemental standard1035 pass. Readonly449-input/105765-byte publication owns current routes. Complete owner-explicit engineering note leaves58961 bytes; finite canonical rollover prerequisite .5.1.3 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
+
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3`
+  Status: `pending`
+  Goal: Finite engineering-history rollover prerequisite before the next implementation record.
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2`
+  Owned paths: Engineering-notes root/manifest/new immutable suffix and exactly required registry/accepted ADR/index authority; preservation proof, relevant Knowledge/book continuity and focused capacity controls. Preserve complete callback publication and actual readonly baseline before bound writes. No runtime change or speculative unrelated budget increase.
+  Planned tier: `canonical`
+  Planned focused proof: Actual next-record pressure/rollover candidate, exact complete-suffix/root/manifest reconstruction, finite resulting member/manifest/authority arithmetic, old-cap RED and unrelated-limit controls, claim preservation and exact staged canonical gate.
+  Planned canonical boundary: Documentation storage/registry/authority infrastructure.
+  Planned claim record: none: Scheduling only; activate with the actual measured candidate and owning claim.
+  Acceptance: Admit only the finite capacity proved necessary for one complete rollover, preserve exact accepted history/queryability and all original callback evidence, and commit canonical proof before .5.2.
+  Schedule evidence: .5.1.2's final owner-explicit165-byte note leaves engineering_notes58961 bytes, below the58982 trigger by21. The actual check passes WARN. Existing manifest/member collection is at its current accepted capacity; the next complete dated implementation note cannot fit below the trigger. Derive the real rollover and exact required overhead at clean activation rather than raising any limits here.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.2`
   Status: `pending`
   Goal: If and while family required callbacks.
-  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2`
+  Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3`
   Owned paths: Required validators in _lower_if_flow_statement, _lower_elseif_flow_statement, _lower_else_flow_statement, _lower_endif_flow_statement, _lower_inline_if_branch_expr and _lower_while_flow_statement. Preserve typed AST and native branch semantics. Focused fixture/proof/claim, relevant Knowledge/book and continuity.
   Planned tier: `focused`
   Planned focused proof: Native-first actual references, contexts, aliases, selected maps and ordinary effects/errors; distinguishing authority RED/GREEN, complete-source faults, supplied direct consumers and book/Knowledge/public/artifact controls.
@@ -1545,7 +1580,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2` | `pending` | Single-statement trim dependency. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3` | `pending` | Finite engineering-note rollover prerequisite before .5.2. |
 | 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5.2` | `pending` | If and while family required callbacks. |
 | 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5.3` | `pending` | Switch family required callbacks. |
 | 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5.4` | `pending` | Output family required callbacks. |
@@ -1558,7 +1593,7 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 ## Handoff
 
-ControlFlow attached parser .5.1.1 isolates trim/parser dependencies through one required-validator return. Native100/188 warm/156 cold recurs exactly; all344 ordinary rows, scalar contexts, selected references, errors and cold loading stay native. The writable head LVALUE shares storage with the earlier parser argument; actual call/argument references, typed source_method reconstruction and truthy injected results remain exact. Identical920 assertions retain194 original authority REDs/726 controls/all GREEN. Ten fault cases/nine source variants,82 supplied suites/291 inputs/22770 assertions and eight coherent artifact denials/restorations pass. Both original publications/all478 bindings remain historical at a4a9e5c503. First invalid instrument/compiler channels, historical-overlay reader rejection and isolated449-file/78-missing-historical-read rejection remain retained; distinct accepted readers use Git custody. Full Knowledge1485/1349/ten overlays/8387239, book89/four controls, public guard and supplemental standard1035 pass. Readonly461-input/110981-byte publication owns current routes. Single statement .5.1.2 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open. Activate ControlFlow single statement .5.1.2 from clean Git. Preserve current461-input/110981-byte publication and its actual readonly baseline before bound writes; native-first trim/context/alias/AST/selection observations precede expectations and source edits.
+ControlFlow single-statement .5.1.2 isolates its trim through one original required-validator return. Native100/87 warm/79 cold recurs exactly; all166 ordinary rows, scalar callbacks, writable local slots, selected references, errors and cold loading stay native. Closure prefixes, direct/typed fallback and shallow rule candidates remain exact; rejected counters/entry changes do not commit, nested references stay shared, and nonempty changed zero output commits. Identical439 assertions retain94 original authority REDs/345 controls/all GREEN. Ten fault cases/nine byte variants,83 supplied suites/298 inputs/23209 assertions and nine coherent artifact denials/restorations pass. Whole original461-input/110981-byte publication/all bindings remain historical at c7570b716 after its actual readonly baseline. Current fixed inventories use accepted Git for historical inputs. Full Knowledge1485/1349/ten overlays/8387900, book89/four controls, public guard and supplemental standard1035 pass. Readonly449-input/105765-byte publication owns current routes. Complete owner-explicit engineering note leaves58961 bytes; finite canonical rollover prerequisite .5.1.3 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open. Activate finite engineering-history prerequisite .5.1.3 from clean Git. Preserve current449-input/105765-byte publication and actual readonly baseline before bound writes; derive one actual rollover, exact member/manifest/sole-authority overhead and old-cap RED. Exact staged canonical proof is required before .5.2; no runtime change or future capacity reserve.
 
 After `.6`, independently accept the composed factory/input identity seams under
 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4`. The original
