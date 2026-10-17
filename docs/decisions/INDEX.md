@@ -166,6 +166,7 @@ changed* lives in git (layer D), not here.
 | [0132](0132-finite-change-history-member.md) | One finite change-history member and exact manifest/decision overhead | 2026-10-10 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 | [0133](0133-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-11 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 | [0134](0134-finite-change-history-member.md) | One finite change-history member and exact manifest/decision overhead | 2026-10-11 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0135](0135-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-17 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

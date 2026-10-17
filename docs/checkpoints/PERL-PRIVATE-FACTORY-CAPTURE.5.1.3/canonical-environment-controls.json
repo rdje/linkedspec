@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-p",
+    "(version 1) (allow default)",
+    "/usr/bin/true"
+  ],
+  "restricted": {
+    "tool_chunk": "681060",
+    "chunk_id": "681060",
+    "wall_time_seconds": 0,
+    "exit_code": 71,
+    "original_token_count": 14,
+    "output": "sandbox-exec: sandbox_apply: Operation not permitted\n"
+  },
+  "host": {
+    "tool_chunk": "c4a2c1",
+    "chunk_id": "c4a2c1",
+    "wall_time_seconds": 0.000006709,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "canonical_owner": "docs/knowledge/project-data-process-locality-proof.md",
+  "scope": "Actual no-op controls isolate the documented restricted-harness initialization prerequisite. Host execution keeps the existing test profile and all denials. These controls supply no canonical receipt."
+}

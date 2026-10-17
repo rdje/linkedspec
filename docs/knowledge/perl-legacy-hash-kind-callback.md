@@ -17,7 +17,7 @@ date: 2026-10-12
 status: small optional and FlowExpr kind boundaries isolated; current-container guard repaired under .3.2.1.9
 tags: [perl, actionir, callbacks, receivers, hash, aliases]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1 retains35 first-native cases:23 unchanged controls and12 intended selection/default repairs, plus two cold rows. Paired487 assertions have48 original REDs/439 controls/all487 current GREEN. Five syntax-valid faults reject48/3/9/5/3. Supplied61 suites/187 inputs/11664 assertions and full book89/three controls and six actual evidence RED/restorations pass. Supplemental standard syntax/public Phase0 passes1035; it has no full transitive input capsule. All546 predecessor bindings remain historical at770cffcc. Original draft/refused-wrapper observations are retained and their bounded corrections replay exactly."
-reverify: "Historical accepted .5.1.1 and earlier routes use c7570b71642e1889ab03ee07c29273dabdf16989 Git inputs. Current ControlFlow single-statement overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Readonly current review: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/publish.py. Complete accepted .5.1.2 and all earlier headers/inputs remain at736c6a43ef. Capture writers stay retired."
 ---
 
 The private legacy hash normalizer used an unbound package variable for its kind

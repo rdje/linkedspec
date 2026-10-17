@@ -119,12 +119,15 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks ControlFlow attached parsing, preserves
-the complete accepted expansion and dated hygiene publications, and validates
-current Knowledge routing and the complete book:
+The current verification entrypoint checks the finite engineering-history
+admission in ADR0135, preserves the complete accepted single-statement callback
+publication and its earlier evidence, and validates current Knowledge routing
+and the complete book. It admits one measured archive member and exact manifest
+and sole decision/index overhead. Existing root and aggregate budgets stay fixed;
+no future archive reserve follows:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

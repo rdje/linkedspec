@@ -1,0 +1,29 @@
+{
+  "observed_tool_chunk": "d7d461",
+  "exit_code": 1,
+  "producer_sha256": "ef2844f95bf861e677fc3f382a0200be47ac677639f75868ebdc0e9d2261da08",
+  "reached_data_sha256": "a7e2489cd8d4b5b4df384953fd3f9ccf2a90d3c200ede753e5e752c81dc0ee04",
+  "baseline_sha256": "4185248e1ab469bf6b24ee7ec4ee8a9577725bd9a4c0a072a108a2887400013f",
+  "last_name": "displaced-authority-index",
+  "actual_denial": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/final-review.py"
+    ],
+    "returncode": 1,
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuMS4zL2ZpbmFsLXJldmlldy5weSIsIGxpbmUgMjExLCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGNlbnN1cyA9PSBwbGFuWydtZWFzdXJlZCddIGFuZCBjZW5zdXNbJ2VuZ2luZWVyaW5nX25vdGVzJ10gPT0gZGljdChmaWxlcz00OCwgbGluZXM9Mjk1MDUsIGJ5dGVzPTMzMjA4MzkpCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+    "stdout_base64": ""
+  },
+  "restoration": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/final-review.py"
+    ],
+    "returncode": 0,
+    "stderr_base64": "",
+    "stdout_base64": "SW5kZXBlbmRlbnQgZmluaXRlIHJldmlldyBQQVNTOjIyOCBwcmlvciBmaWxlcy80NDkgY2FsbGJhY2sgYmluZGluZ3MvMTk3OCBjb21wbGV0ZSBpbnB1dHM7MzAgdGhyZXNob2xkcy8yMyBhdXRob3JpdHkgUkVEcztib29rODkvZm91cgo="
+  },
+  "scope": "First three semantic controls pass. The displaced-index counterfactual added one extra LF and was rejected earlier by exact census, so its intended reason check failed. Every original byte/mode was restored before the assertion. The distinct final-evidence.py removes the extra LF to hold census constant; its capture paths are separate. Original four reached rows/baseline/progress/source remain immutable.",
+  "old_base64": "Zm9yZ2VkID0gcmF3KElOREVYKS5yZXBsYWNlKGxpbmUsYicnLDEpICsgYidcbicgKyBsaW5l",
+  "new_base64": "Zm9yZ2VkID0gcmF3KElOREVYKS5yZXBsYWNlKGxpbmUsYicnLDEpICsgbGluZQ=="
+}

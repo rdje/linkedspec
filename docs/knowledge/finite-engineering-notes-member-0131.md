@@ -13,12 +13,33 @@ answers:
   - "where is the current ADR0133 readonly review command"
   - "how is the accepted ADR0133 publication recovered after its pointer repair"
   - "why can publication replay require historical inputs beyond live bindings"
-date: 2026-10-11
-status: ADR0131 and ADR0133 evidence historical; current review-command repair verified
+  - "which decision admits engineering notes segment 4960"
+  - "where is the current finite engineering history review"
+date: 2026-10-17
+status: ADR0135 finite engineering admission verified; prior accounts preserved
 tags: [documentation, history, capacity, verification]
-evidence: "ADR0133 owns the next finite rollover at clean d8418423e. All224 prior immutable history/decision files and337 accepted scalar publication inputs remain exact. Engineering notes47/29361/3280501, manifest46/27857 and decisions134/13215/980960 are independently reconstructed. Actual next-record and old admission REDs, production30 thresholds/23 authority denials, three reviewer and two preservation RED/restorations, full book89/3 precede exact staged canonical admission. ADR0131 original account remains below."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1/review.py (readonly default). Accepted admission instruments require their recorded Git inputs; current review retains their original publication and channels. One-shot capture/freezer writers are not resume commands."
+evidence: "PERL-PRIVATE-FACTORY-CAPTURE.5.1.3 retains actual rollover/old-cap channels, exact source suffix and228 prior files. ADR0135 grants one member, exact manifest growth and35 sole decision/index lines. Production30 thresholds/23 authority REDs precede canonical admission."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/publish.py. Original dated accounts and all earlier headers remain at736c6a43ef. Capture writers stay retired."
 ---
+
+## Current finite admission: ADR0135
+
+At clean736c6a43ef the next complete record reaches59506 bytes and the
+production roller requires rollover. One272-line clean-source suffix becomes
+segment4960; the hot shard retains113 lines/32492 bytes. Original caps reject
+files48/47 and manifest47/46 lines,28469/27857 bytes. ADR0135 admits only that
+member/manifest growth and its sole34-line decision plus one index row.
+Root, aggregate, per-file and unrelated budgets stay exact; no reserve follows.
+
+All228 old history/decision files and the whole449-input/105765-byte callback
+publication remain preserved. Two incomplete supplied-root replay failures stay
+retained; the complete1978-input original-project replay reproduces the exact
+old-cap channels while keeping the regression's own-Git-root guard. This is no
+claim of whole-gate portability. Independent reconstruction and actual unchanged
+production functions distinguish numeric/authority faults; exact staged canonical
+CI and normal hooks separately govern admission. Runtime/test/checker sources
+and dependency pins stay unchanged. Earlier dated bodies follow exactly.
+
 
 ## Current review-command repair
 

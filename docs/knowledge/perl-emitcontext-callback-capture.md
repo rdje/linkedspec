@@ -11,7 +11,7 @@ date: 2026-10-12
 status: EmitContext/Contracts and exact FlowExpr default selection verified; pipeline open
 tags: [perl, actionir, emitcontext, callbacks, identity, dependencies]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.0 retains345 main/five cold assertions,30 exact native/current observation ledgers,28 actual definition-owned callback selections,six opaque owner/factory publication modes,13 effective semantic source faults and19 direct suites in138 supplied files. Original233 framework bindings remain exact historically. The first duplicate-Trace preflight failure is retained separately from runtime observations."
-reverify: "Historical accepted .5.1.1 and earlier routes use c7570b71642e1889ab03ee07c29273dabdf16989 Git inputs. Current ControlFlow single-statement overlay and preserved complete historical population: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2/publish.py. Original capture writers/observations stay retired; MEMORY.md/task frontier own current selection."
+reverify: "Readonly current review: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/publish.py. Complete accepted .5.1.2 and all earlier headers/inputs remain at736c6a43ef. Capture writers stay retired."
 ---
 
 EmitContext retains actual native facade CODE references in a private lexical

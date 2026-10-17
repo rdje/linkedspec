@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: single-statement trim .5.1.2 is verified; finite engineering-history prerequisite .5.1.3 follows its clean landing before .5.2. No push.
+Full PNT: finite engineering-history prerequisite .5.1.3 completes before if/while .5.2. No push.
 
 ## Latest Completed Slice
 
-ControlFlow single-statement .5.1.2 isolates its trim through one original required-validator return. Native100/87 warm/79 cold recurs exactly; all166 ordinary rows, scalar callbacks, writable local slots, selected references, errors and cold loading stay native. Closure prefixes, direct/typed fallback and shallow rule candidates remain exact; rejected counters/entry changes do not commit, nested references stay shared, and nonempty changed zero output commits. Identical439 assertions retain94 original authority REDs/345 controls/all GREEN. Ten fault cases/nine byte variants,83 supplied suites/298 inputs/23209 assertions and nine coherent artifact denials/restorations pass. Whole original461-input/110981-byte publication/all bindings remain historical at c7570b716 after its actual readonly baseline. Current fixed inventories use accepted Git for historical inputs. Full Knowledge1485/1349/ten overlays/8387900, book89/four controls, public guard and supplemental standard1035 pass. Readonly449-input/105765-byte publication owns current routes. Complete owner-explicit engineering note leaves58961 bytes; finite canonical rollover prerequisite .5.1.3 follows before .5.2–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open.
+Finite engineering-history prerequisite .5.1.3 independently reconstructs one272-line clean-source suffix,113-line/32492-byte root and228 unchanged prior history/decision files. ADR0135 admits only engineering files48, manifest47/28469 and sole decision/index overhead35 lines (decisions136/13285); all other limits stay exact. Whole original449-input/105765-byte callback publication/baseline remain historical at736c. Complete1978-input original-project old-cap replay,30 production thresholds/23 authority REDs and five semantic artifact denials/exact restorations pass. Both copied-root failures, first reader failure and four-row artifact correction stay frozen. Full Knowledge1486/1349/eleven overlays/8387290 and book89/four pass; stale workflow prose is corrected. Readonly507-input/117862-byte publication owns current routes. No runtime/test/checker/pin change or future capacity reserve. Exact staged canonical CI/receipt and normal hooks govern landing; if/while .5.2 follows before .5.3–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent admissions remain open.
 
 ## Next Action
 
-Activate finite engineering-history prerequisite .5.1.3 from clean Git. Preserve current449-input/105765-byte publication and actual readonly baseline before bound writes; derive one actual rollover, exact member/manifest/sole-authority overhead and old-cap RED. Exact staged canonical proof is required before .5.2; no runtime change or future capacity reserve.
+Activate if/while required callbacks .5.2 from clean Git. Preserve the complete507-input/117862-byte finite-admission publication and actual readonly baseline before bound writes; establish native references, contexts, aliases, maps and ordinary effects/errors before the six required-validator edits. Keep engineering notes concise within existing aggregate pressure; no speculative budget growth.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3` — one272-line suffix/113-line root;228 old files/449 accepted bindings; exact finite ADR0135; complete1978 root replay;30/23 controls; five artifacts; Knowledge1486/1349/8387290; book89/4; readonly507/117862; canonical boundary; .5.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2` — native100/87/79 exact;439/94 RED/345 controls/all GREEN;10 cases/9 sources;83/298/23209; evidence9/supplied443; original461 Git bindings; Knowledge1485/1349/8387900; book89/4; standard1035; readonly449/105765; finite continuity .5.1.3 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1` — native100/188/156 exact;920/194 RED/726 controls/all GREEN;10 cases/9 sources;82/291/22770; evidence8; original478 Git bindings; Knowledge1485/1349/8387239; book89/4; standard1035; readonly461/110981; single statement .5.1.2 next.
 - `REPO-HYGIENE.17` — dated16045/17237976411 parent; separate Rust483/2390810574; zero removals; four evidence controls; readonly22/9417; callback456/108786 exact before/after; attached parser .5.1.1 next.
@@ -29,7 +30,6 @@ Activate finite engineering-history prerequisite .5.1.3 from clean Git. Preserve
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5` — native148/six/16 changes; stable235 recurrence/original234 iterator repair; paired272/44 RED/228 controls; eleven faults; full73/237/16165/evidence6/book89/4/standard1035; original498/114980; readonly517/119899.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4` — native156/six cold/20 changes; paired286/56 RED/230 controls, nine faults; supplied72/233/15893/evidence5/book89/4/standard1035; original531/125217; readonly498/114980.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3` — native91+36/cold6/20 authority changes, final229/50 RED/179 controls, nine faults, supplied71/230/15607/evidence5/book89/4/standard1035; original490/113730; first75-file511/119230/recovery512; final readonly531/125217.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9` — native224/40/26/public unchanged, legacy223/3/sole five-field row, paired285/98 RED/187 controls, faults98/8/67, supplied70/225/15378/evidence4/book89/4/standard1035; original422/97759; readonly490/113730.
 
 ## History
 
