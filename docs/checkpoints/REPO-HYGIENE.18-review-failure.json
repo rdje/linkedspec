@@ -1,0 +1,17 @@
+{
+  "owner": "REPO-HYGIENE.18",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/REPO-HYGIENE.18-review-actual.py",
+    "--capture"
+  ],
+  "exit_code": 1,
+  "tool_chunk": "d5c447",
+  "producer_sha256": "c6feb477b7d33947bad252f0aced191f31b736c20a4caeecc5fc7b2d20fb4324",
+  "combined_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTgtcmV2aWV3LWFjdHVhbC5weSIsIGxpbmUgODIsIGluIDxtb2R1bGU+CiAgICBpbnRlcnNlY3Rpb24gPSBzb3J0ZWQoc2V0KGZyZWV6ZVsnb3duZWRfYm91bmRfcGF0aHMnXSkgJiB7eFsncGF0aCddIGZvciB4IGluIGRbJ2lucHV0cyddfSkKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfl5eXl5eXl5eXl4KS2V5RXJyb3I6ICdpbnB1dHMnCg==",
+  "combined_output_sha256": "9fdd39752c92db5def644acd08f489fa93cc8f92d1cc523e504d66932df42725",
+  "old_base64": "ICAgICAgICBkID0gY2xhaW1bJ2R1cmFiaWxpdHknXQogICAgICAgIGludGVyc2VjdGlvbiA9IHNvcnRlZChzZXQoZnJlZXplWydvd25lZF9ib3VuZF9wYXRocyddKSAmIHt4WydwYXRoJ10gZm9yIHggaW4gZFsnaW5wdXRzJ119KQo=",
+  "new_base64": "ICAgICAgICBkID0gY2xhaW1bJ2R1cmFiaWxpdHknXQogICAgICAgIGlmIGQuZ2V0KCdtb2RlJykgIT0gJ2xpdmUnOgogICAgICAgICAgICBjb250aW51ZQogICAgICAgIGludGVyc2VjdGlvbiA9IHNvcnRlZChzZXQoZnJlZXplWydvd25lZF9ib3VuZF9wYXRocyddKSAmIHt4WydwYXRoJ10gZm9yIHggaW4gZFsnaW5wdXRzJ119KQo=",
+  "cause": "New reviewer accessed inputs before filtering non-live durability legs. The fixed accepted namespace contains a disclosed gap at SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0 claim1; public validator lines79-85 permit reason/repair_owner without inputs. Guard mode before inputs, preserving all original live-claim checks. No product defect, capture refresh or original source edit."
+}

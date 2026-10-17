@@ -10,6 +10,7 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-18 — REPO-HYGIENE.18 — Guard captured filesystem permissions separately from archive/Git modes; census: docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz.
 ## 2026-10-17 — PERL-PRIVATE-FACTORY-CAPTURE.5.1.3 — Finite history capacity
 
 The next complete engineering note crosses the existing rollover trigger. Measure the actual clean-source suffix and resulting member/manifest census before choosing exact registry and sole decision/index overhead. Preserve all old callback producers, observations and archive bytes; derive current facts from the measured inputs, retain observed old-cap rejection, and require exact staged canonical proof. No future reserve or runtime change is admitted here.

@@ -22,7 +22,7 @@ date: 2026-10-17
 status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser/single statement verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Readonly current review: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3/publish.py. Complete accepted .5.1.2 and all earlier headers/inputs remain at736c6a43ef. Capture writers stay retired."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.18-final-claim.py. Complete prior507/full117862 remain at e2ec1e96b; dated captures stay retired."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference

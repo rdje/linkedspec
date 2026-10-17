@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-18 — REPO-HYGIENE.18 — Retain due artifact metadata review
+
+Dated2026-10-17T22:08:22.691687+00:00 parent census retains16310 candidate rows/17449713515 bytes; three Rust locations are separate. Fresh census/independent lstat, size/traversal fixtures, four channel and three preservation controls pass; zero removals. Complete507-input/117862-byte finite-history publication and its actual readonly baseline remain historical at e2ec1e96b before shared writes. Full1486 Knowledge inputs retain eleven header-only routes and one dated mode-card update; first and final book89/four-control epochs remain separate. Original premature/gap-leg/tar-mode reader failures and sources stay retained. All1486 actual permissions remain0644, separately from archive0664 and Git100644; no chmod or runtime/dependency/gate/budget change. Commit before if/while .5.2.
+
 ## 2026-10-17 — PERL-PRIVATE-FACTORY-CAPTURE.5.1.3 — Finite engineering-history prerequisite
 
 One required engineering-history rollover is measured before selecting any finite allowance. Preserve the complete449-input callback publication and its actual readonly baseline, every accepted immutable history/decision byte and complete queryable source content. Exact source suffix, old-cap denial, sole indexed authority overhead, production controls and supplied evidence precede receipt-bound canonical admission. No runtime change or future archive reserve.

@@ -6,13 +6,12 @@ answers:
   - "must filesystem permissions equal recorded Git mode in evidence capture"
   - "how does the progressive contract checker recover actual-root input bytes"
   - "which observed permission differences caused the component capture RED"
+  - "why can Git archive permissions differ from checkout permissions"
 date: 2026-10-06
 status: historical mode correction hash-bound; current recognition input modes independently guarded
 tags: [claims, inputs, git, permissions, component-gate, provenance]
 evidence: "The .1.5.2 component instrument stops before running the checker when it compares complete stat permissions to Git mode. The complete observed census has36 readable differences, beginning noncore/AmbiTiming.pm0640 versus recorded100644, with zero executable-bit drift. Preserve both fields and guard actual permissions unchanged; no chmod is performed. Healthy component capture checks4638 actual-root inputs/five retained byte deltas. Independent exact three-edit repair/census/original RED and four effective evidence controls pass."
-reverify:
-  - "bash scripts/check_claim_verification.sh"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-review.py"
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.18-final-claim.py. Complete prior507/full117862 remain at e2ec1e96b; dated captures stay retired."
 ---
 
 The published progressive checker requires tracked-file metadata and runs in the
@@ -45,3 +44,5 @@ is reverified through its historical claim/input hashes at committed34f687;
 the current recognition comparison checks its own complete actual-root snapshot.
 The claim gate does not re-execute historical producers. Do not run the old
 current-source component comparison against later changed production bytes.
+
+The REPO-HYGIENE.18 dated archive-mode census retains all1486 Knowledge rows: tar permissions0664, recorded Git100644 and actual filesystem0644. These are separate representations. Guard actual permissions against their own captured field; do not equate full archive/Git permissions with the checkout. The first reader/failure and complete census remain in docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz and publication-failure.json. No chmod occurred.

@@ -1,0 +1,804 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.18",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review-and-current-custody",
+      "statement": "At 2026-10-17T22:08:22.691687+00:00, the scoped parent census retains16310 candidate rows/17449713515 bytes; Rust release/incremental/deps are separate observations. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Actual guarded commands/exits/full channels, four channel and three preservation RED controls pass. Zero files removed; all proof data/caches retained. Complete original507-input/117862-byte finite-history publication and its actual readonly baseline remain historical at e2ec1e96bc47633599f0935ed6828c1a0b99e40a with mode/revision-only projection; every original binding is verified against accepted Git. Full1486 Knowledge Markdown inputs retain eleven header-only overlays plus one dated mode-card update and8387213 card bytes under existing limits; derived map is synchronized. The actual malformed-preamble history refusal and full input are retained; exact accepted preamble restoration uses anchored headings. Both complete book89/four-control epochs verify the current entrypoint. Premature capture refusal and the first gap-leg reader failure/source remain retained; the first publication also rejects archive/filesystem mode equality. A distinct final reader preserves separate mode fields and both first/final input epochs; no chmod. No runtime, dependency, gate, storage or budget mechanism changes; if/while .5.2 follows the clean commit.",
+      "scope": "Dated per-file metadata only; no content ownership, disposal safety, reclaimed-space, liveness, recovery/purge, concurrent adversarial traversal or global audit claim. Other repositories/submodules, symlinks, other volumes, managed runs, reusable caches and every prior hygiene fixture are excluded before traversal; Rust locations are separate. Original507 inputs and complete prior publication remain recoverable at the recorded accepted Git revision and are independently hash-checked; current mutable documentation is not substituted for those historical inputs. Current Knowledge capsule retains every original/current byte and separate archive/filesystem mode field; eleven reverify headers and one dated existing mode-card update change. Complete first/final book source/config/includes and actual rendered controls are retained. Source/channel/input identities of both failed readers, the guard/output correction and distinct mode-aware final publisher are gated. Standard OS/Git/Python/mdBook are read-only environmental dependencies; no immutable toolchain or cross-version HTML claim. Capture/freezer/route/book writers and --capture publication are one-shot; this default and final actual/book readers are readonly. The existing mode-representation rule is re-derived; no callback/helper/private/parent/canonical admission or future capacity reserve. Runtime implementation stays unchanged; one complete dated engineering record explains the mode distinction.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.18-final-claim.py (readonly default). review-actual-final.py, book-first-review.py and book-final-review.py are readonly; original one-shot writers stay retired.",
+        "granularity": "Every dated candidate/Rust row and retained command/channel; fixed accepted claim namespace, whole original507-input/117862-byte publication/baseline and every binding; full1486 original/current Knowledge bytes/separate mode fields, eleven header overlays and one dated mode-card update; both full89 book epochs/four rendered controls each; exact original failed-reader sources, guard-only actual-reader correction and distinct final mode-aware publisher.",
+        "result": "At 2026-10-17T22:08:22.691687+00:00, the scoped parent census retains16310 candidate rows/17449713515 bytes; Rust release/incremental/deps are separate observations. Fresh census, independent per-file OS lstat, aggregate/balanced-size and traversal fixtures pass. Actual guarded commands/exits/full channels, four channel and three preservation RED controls pass. Zero files removed; all proof data/caches retained. Complete original507-input/117862-byte finite-history publication and its actual readonly baseline remain historical at e2ec1e96bc47633599f0935ed6828c1a0b99e40a with mode/revision-only projection; every original binding is verified against accepted Git. Full1486 Knowledge Markdown inputs retain eleven header-only overlays plus one dated mode-card update and8387213 card bytes under existing limits; derived map is synchronized. The actual malformed-preamble history refusal and full input are retained; exact accepted preamble restoration uses anchored headings. Both complete book89/four-control epochs verify the current entrypoint. Premature capture refusal and the first gap-leg reader failure/source remain retained; the first publication also rejects archive/filesystem mode equality. A distinct final reader preserves separate mode fields and both first/final input epochs; no chmod. No runtime, dependency, gate, storage or budget mechanism changes; if/while .5.2 follows the clean commit."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Aggregates conceal altered per-file sizes or unsafe traversal; source/channel metadata forges failed observations; shared documentation silently replaces accepted inputs; a gap leg is misread as a live durability input set; incomplete Knowledge/book populations conceal route drift.",
+        "oracle": "Independent OS lstat/fresh census and traversal fixtures; accepted Git namespace/original bytes; reason-sensitive full-channel/preservation controls; unchanged gap-leg schema; independent complete Knowledge archive/header comparison, separate full1486-mode census and first/final book source/include/rendered controls.",
+        "red_control": "Aggregate inflation and balanced-size redistribution reject. Start/ancestor symlinks, nested repositories, mock submodules and outside-root starts reject. Four controls reject incomplete capture, forged producer, failed review and forged stdout; three reject altered whole publication, non-projection claim edit and forged baseline stdout. Four book controls reject missing SUMMARY, removed rendered markers/current entrypoint and missing recursive include. Actual initial reader KeyError on the permitted disclosed gap is retained; only filtering non-live legs before inputs and writing a distinct output yields verified PASS without refreshing the census. Actual first publisher mode-equality RED distinguishes archive permissions from actual captured permissions; the final reader retains both fields and guards each independently. The actual history255 missing-manifest refusal precedes exact accepted-preamble restoration and anchored-heading verification."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitignore",
+            "sha256": "b61de7bd78fc7d317b44b9bec528665b632206a4c51d7a0c266a719af951b26c",
+            "role": "input"
+          },
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": ".knowledge_map.conf",
+            "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+            "role": "input"
+          },
+          {
+            "path": "CHANGES.md",
+            "sha256": "7a355580fbeee8063d95a0657af26a935184a84eb869c9cbc1f8aa300d2cb6e6",
+            "role": "input"
+          },
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "17cdcbd1aa1c8c0cdab6958eb7ddfaa7e0528251e6caecede8bfa0c0152bc804",
+            "role": "input"
+          },
+          {
+            "path": "KNOWLEDGE_MAP.md",
+            "sha256": "e69d76cd2fade6f59dbef5684b2af7038e84bc2bde7cf754971a0f7089351329",
+            "role": "input"
+          },
+          {
+            "path": "docs/ARTIFACT_CLEANUP.md",
+            "sha256": "4da3228a7510a923fff5d92c08fbc211d0c978ac8533948b112f1f59a09e5ec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-actual-final-verification.json",
+            "sha256": "8fe00ad1696236441e8ea25280fc1799c959eac7acf9c66a1553f1603f6f6c8d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-actual.json",
+            "sha256": "38c3fd3370aefc935527bc769cbe7b477121fadd91cc13f63837900de2cb748a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-artifact-review.json",
+            "sha256": "b16c4562e251facd3fc78b42a4fa2ee8d6307d1af1efdd302a2c3ea3dbaeea89",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-baseline-PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+            "sha256": "d716118130542deaff313b9d104b30a013dc8798317a26564c0d63996b47362e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-before-PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+            "sha256": "d992410f26cff2b1101e72ea337ae90e3cba221eee4f4a507eae3c45db9701d6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-final-review.json",
+            "sha256": "ff5d3c80a95356734ea588b4912b6e709a5f3b79e5af8f6733b2be7c91a4cea0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-final-review.py",
+            "sha256": "cfdae6e1a86a3590dd4743fedc42b7bcf39fc874edf9c3f2c232a28de3ad05d4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-final.json",
+            "sha256": "988cc906c2dd3d2bbc06ea5ade926a2fe5f1b39797c617d0987e9f5f591309b0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-final.py",
+            "sha256": "e4bb78eb27d464bb730e1f12d17103967d48e388482016b37632aa0613b7d146",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-first-review.json",
+            "sha256": "42776c03e91cf737d507185b36dd534ca47228db036c55f3b84feafdd3d67c30",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-first-review.py",
+            "sha256": "2207b114c90cfba7747eba7a58b0f7cffdf44a168a19ab8495fb5007e0ff3bde",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-review.json",
+            "sha256": "e6a4edd3a13f3871966175d728203e2e36bef9b65aa73973915fa96eea681cd3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book-review.py",
+            "sha256": "42f62035f4035e292af632e54e3efc2eecce4b07795c764d382b23fd4876bc71",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book.json",
+            "sha256": "a269a8a591f729dbc38d5224e68341953829b1c90b61eaf83d721957bf5ab7e1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-book.py",
+            "sha256": "1f5445b9ca91bf5ed174850a995fc9b9f17f71b6199f00428803d34d60c48629",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-capture.py",
+            "sha256": "a2943773df4520db193e85bdd6fb8d272cf0326a986672dd464a7052c8cad241",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-census.py",
+            "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-claim.py",
+            "sha256": "87d9f00b2f897ae88167637cd06f9bef386ab070369a4a9699dc3e31b7118d6f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-final-claim.py",
+            "sha256": "72e329ae9639481565a2f6d39df08a6165d86e493e11e779a38b63283ae4aa88",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-freeze.py",
+            "sha256": "1783959e0cc0ff30483b8d0e51fea96acdd15ea591f6258dac4f4a445d95c870",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-history-refusal.json.gz",
+            "sha256": "d8991a16a2859541eaeccb6b2557617b52cc5650e63d85a4ca000c0a15bf3c25",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-history-refusal.py",
+            "sha256": "97941559859c433b3678f1e3a04a04d797ae23e278f1310982a2b1d3c3f8886e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-knowledge-final-inputs.json.gz",
+            "sha256": "b76985d6379e78a61c6444c6ce9f663f41fba43314255af358a6de9c21672238",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-knowledge-inputs.json.gz",
+            "sha256": "2ab2b702939b62168399aa2de0da103cb274b8f58ac968f6019deb128130dd7a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz",
+            "sha256": "e187ed8cd24d90d05b8ca27d0b59c5f66d67c0f1b67e30049869ac902987789e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-mode-census.py",
+            "sha256": "a1b4e4f11507fb28db51ac5c9d91779acf145575e91ee123ce4896ab067d52e4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-preservation.json",
+            "sha256": "f69eccdd1503f076d1b6a9b2c3f4fb8e2a64b6e8c7c7c5786b54c3e5a0413cbf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-publication-failure.json",
+            "sha256": "90dbdba260ddd587ecbdabf594be59c56010e25a89efc169c720f2fb66849830",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-review-actual-final.py",
+            "sha256": "8ad10c4a009448ec4a58d14b41bbc03115f863f7f4a553960df402106f6b65a0",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-review-actual.py",
+            "sha256": "c6feb477b7d33947bad252f0aced191f31b736c20a4caeecc5fc7b2d20fb4324",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-review-failure.json",
+            "sha256": "baa75eb1be56b86afae8ab2305acb87e2a8b38023e17e075eefe728dae63a720",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-review-premature.json",
+            "sha256": "71e31a86d9694f1d6894152e91939dd9c9a031900e4a56726f919cfe1ac2f9d5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-review.py",
+            "sha256": "42d346dcbfcae0f4ab57e3048e4c8e09e2865139359f115dca40978349135c25",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-route-final.json",
+            "sha256": "e9308b528d83601861fb6153d616d2afbd4cec8de157f03759627bd82e356f76",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-route-final.py",
+            "sha256": "e190cd78532813974f8d19d46c2abf9865a92b76d9fc8c0fc53407edd8ac0d83",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-route.json",
+            "sha256": "5cd3fff987d82bdc49dde57cce1228ec52f0ee6b1c03c0d699009abff453d464",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-route.py",
+            "sha256": "13a1ab0c07eb0ec634428b2b60a86e6ea3666c88d2d18fa7597589067027071b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-verification.json",
+            "sha256": "71f88c50de3e54443218dc6060dfc2bee07b19e6a277885193fa00b036d807ab",
+            "role": "input"
+          },
+          {
+            "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+            "sha256": "c2b167ab5aa74b698d149dd23d1831a85af858d8cc9873bc096a5b3ee209fc6a",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/finite-engineering-notes-member-0131.md",
+            "sha256": "b47cf31e462bfda981cc058be1e0fb96722825fef2dd21f389cb361bb8ec4f78",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-emitcontext-callback-capture.md",
+            "sha256": "82324ec9a55f8abaee1ddfd7198e7cc8329e461db47bc36533a73e5a4e73c00c",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-factory-capture-framework.md",
+            "sha256": "6a784b9fb3bb30d3ab9d91bd1d516f947b36a044d64f9da869c368ebfc4cc2c8",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "sha256": "305ebd13383825abe7ca48b5f80bb88f45ef7db8fedd20607272a441ddedf633",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-match-alias-writability.md",
+            "sha256": "5aff1a0dce6c72fe2cb19e7ab27a7e24efba61d584d4aa05cd31af59040d7cef",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-assignment-required-capture.md",
+            "sha256": "80563511d0b4f5cf85112be0ed5912f3d6c238a2e2d30ec2d3d158f91e52a0b4",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-ast-call-capture.md",
+            "sha256": "7fb48d73678a93ce5367c2312676d7e87580b8262a1a08f4afdfb5013ba993d6",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-block-component-capture.md",
+            "sha256": "0264983c7f8018a27be321dbb2eadc6dca86158333b9f17f4b7df1cdfaeb0599",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-default-capture.md",
+            "sha256": "4a18b03d648ce8cfbac3670e3a937b78874e291db6c45a4d6ef272f42e53cccf",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-trim-capture.md",
+            "sha256": "8cef396684e07b38cbe82ff2e84f5560e1c247828cbcb4551e6f8d94fb5d4e61",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/project-root-evidence-filesystem-modes.md",
+            "sha256": "8771ee39629dc870106e13d63e89378f34fe44af587c1e27adf43f960b7c271c",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "sha256": "bba4dad4f8f4576a71d5dfe8fb9c57d6442cdf543066e1120282c72f63fecd92",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/book.toml",
+            "sha256": "a95355e608b34cd5373cab0f0d98817457dd2151002d3bf9d7333d3f29f25f9d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/SUMMARY.md",
+            "sha256": "c03d98fa7402249761b77e240abcd7a8f634566088f6ea49640d1019f6736a6c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "sha256": "c114042e5cc8ac59097427a46a0f40821a0bb864f6aeac377aa2a2f41c3a0b19",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "sha256": "6d0f3df7130a07ae7003746ed8cbb9829c0c4a81b189eca0a200a993d035fdc1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/owner-tree.md",
+            "sha256": "1cb1d75f9ff0eb070495a702bf8215ee696212da21b15d099b388f32996e87a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+            "sha256": "61b767d93ce64b5f1019f0e51ee8f4f2e29ef0a4b5477e60b5035b4f34887359",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/compiled-state-model.md",
+            "sha256": "2665d8ae4968dd6fc81fc649b15240adbaf73793bde555f35a65b723bb508312",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+            "sha256": "09208db53ac8040f6acf8a424883401f628c7d8bcdc55d4861b4e4c5947b14d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+            "sha256": "c6a37d3f55e17e57379bff6537f8a26c67f44149bc07fa817b80ced01291b659",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "sha256": "fd1d79a452c3ad6de36883dee14bcd6c33b81d2c346c2c165b0004dafdad760e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md",
+            "sha256": "38c48a27c5efe81c82940d8cadf38e6382377c75dd93dac23059b018ddc6a667",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/codegen-inspector.md",
+            "sha256": "a695de68f3aa86242c7aeaba63d0981cdd268ee65fca2c6a17bf5bfef6eff81a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "844c31b9964a7d36edc89d9fcf3f504bc9c1faa3b1b47ee9a7ad781f4675a698",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/macos-rust-launch-latency.md",
+            "sha256": "fa7d0935c2f9ee4a3b9f2a0ab30ff1ac9efdbac5b899e362eec7c5e637e162d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/regression-fixtures.md",
+            "sha256": "8d31c1c58ec9b470b17a079f8d58f955b6cded9816d443f082f2ddb06cbae54e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+            "sha256": "9d1889cd9c5406e3b0b7f9d80a4b2868839d006fdbfe08de176d5d808ae1dba9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "sha256": "6afdb038d62efae53b9ed6e9d3bc3777dae5e5bbbbc0703bab64ee1cee45d688",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "e58d5c8b4531073c99a70dd25cc0b72aab48ae5e2598e9aa6ccc0497df0c158f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/declaration-helper-reference.md",
+            "sha256": "3a3e2430de60f898ac2167d47612e1378f4f49e478cee8576816da28d9d4641a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md",
+            "sha256": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "d1cfd40958802d9a1af151e70e243e3cd640667188662f5629ac2476f578701f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md",
+            "sha256": "bd487fda54ddde7164b78c0d792b17f9fd4a7908409c875477e9fda8797931c0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/index.md",
+            "sha256": "0a129e808fb3fb6b21787091bc31a081d060c1ac0edc44f9645171a0ef254b23",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/design-rationale.md",
+            "sha256": "7f6cdde29a314bfbe0cbf740f2b9f8478848f5b7e9138ac2fd768468587e10f6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/documentation-layers.md",
+            "sha256": "575cf2ce303ca06292dd7a734ccf9f5f709f45ecd1b974c0d7663915bfc2b1ee",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "sha256": "29c8931cb431f9848ecd7e8e43db20c4f3cb0a02339715e660f284efed786772",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/what-is-linkedspec.md",
+            "sha256": "70d72dc417a0cf43bb2e14cdd8719f2c3dbad354fd2d7d9bbf25633e0d911fe1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "sha256": "1e957803415adaba23b15a32f2388a9d71a041716689e8045fa799b852d7cae0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "sha256": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-dart.md",
+            "sha256": "df759f1978df3df6c27b24e531dd4787a6f18e876d12ab2aff480c4ac1e42bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-julia.md",
+            "sha256": "b6c42ff4d60e18bd17beca4a27546276f15098d18a3370de5418f59f6d2559d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-lua.md",
+            "sha256": "5690eba8e4091900db2e6c94c004a4ac223396f0b1feefbad48913177a197d9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-perl.md",
+            "sha256": "5ec2f45ae024cf87cb8cae905fc6c3f15735a43bcc21874bd18c9ba1c8b9c441",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-rust.md",
+            "sha256": "958ead8127b47dd1a0ae494ce87ef19fa83451a083ff0523a388004799536442",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration.md",
+            "sha256": "641a5ea0ec4872b6ac436d8b62c9d1b6cab9c5e422b6fb47b0d87a6aa2b8241c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+            "sha256": "85ff1f9cebf91b54b68bb7155db5c89b9866e956c74dff9b83f31ce360a8d7f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/plugin-registry.md",
+            "sha256": "fe00a325064037455df8ffcdc611d5838df9001c5783a350c7900b1ab62ccff9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md",
+            "sha256": "f9f3710cb41e073ea64989fd296cff93c23c10bdc434c66859de8929d2b338e7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/trace-api.md",
+            "sha256": "831366abed5d75daa881e6f993ea2f695e6b919529ad6964c353f831c47d60c3",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/ebnf-spec-walkthrough.md",
+            "sha256": "e74d2266f2c28d1a5425a94c60718548eb26cc83ed700fe4478cd23593ab1868",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/lispish-spec-walkthrough.md",
+            "sha256": "06cc2056aaddd80631878f99b75922c062f3e441562eed9233592cbae60d3c55",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md",
+            "sha256": "01dab1b4c29b4085e69aac5bed1de8e66256b1dfaa34ce3c56c3f43d1ad0fd95",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/pplugin-spec-walkthrough.md",
+            "sha256": "ddd3d22ccd28927c24e2a34db15f0bee2a940f6a8c3518252af402b7d7eb6b33",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/sexpr-document-v1.md",
+            "sha256": "65fde45de06b3c18cad59a01cb02944ed8ff105b94e0d02b2f61f525b88f391e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md",
+            "sha256": "bd1667dd99133f5c6541eb9d6e127e8c529c05823b1e20829e78674d44ecad13",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md",
+            "sha256": "dfbe3a28ec0e9edb53d0ccd2af5a36c4bfb5521a258e7a7d1afd22b135edc982",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md",
+            "sha256": "cc8d62e530a80a2b317afbfe45950d42e11840844bf3f6565ed8f4d3735e9082",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/regex-in-spec.md",
+            "sha256": "82d2e6997eecdac97bd7213d186acd021b87fc522b58eb62e5a90999adf2ab82",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "sha256": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+            "sha256": "4705ecabaab5cb159245172adaf409031680f35538408d0fd0a2f9800b685d3f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "sha256": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md",
+            "sha256": "564008087999530f5087c497f7ea035b29368dd7ea337589335a9bd3cf8e6eea",
+            "role": "input"
+          },
+          {
+            "path": "examples/compact-hash-keys.spec",
+            "sha256": "fc12ee11b384f06572e690882328c9266229ea5a573ab493adde623c789075a1",
+            "role": "input"
+          },
+          {
+            "path": "examples/direct-read-purity.spec",
+            "sha256": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67",
+            "role": "input"
+          },
+          {
+            "path": "examples/flat-bound-values.spec",
+            "sha256": "b0d4cc3fd2dd3651f98711c76df296d5db4dcd37b2d37c6b81dca4c6a1a30dff",
+            "role": "input"
+          },
+          {
+            "path": "examples/function-array-values.spec",
+            "sha256": "839d8d04d313e482a497fc009b23990437a22519e37df5da76d064f9cccca360",
+            "role": "input"
+          },
+          {
+            "path": "examples/indexed-value-reads.spec",
+            "sha256": "f3d00d0c87916737ab9ceda89168801300313781f6a2e28c2e5555b88ba77ef9",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse-words",
+            "sha256": "863a6d756f526f23344f9743c150c5800618aa44af96b557e2ebe9d3e46e7b4d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse_words.dart",
+            "sha256": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse-words",
+            "sha256": "59661a1e7e1cfa2de3ad640a26302ad1faa62682596c94d694b66d60ae528891",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse_words.jl",
+            "sha256": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/bin/parse_words.lua",
+            "sha256": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/diagnostics.spec",
+            "sha256": "3964804eb570446c031303119f45a6bb7665ab206b4531e175f430c2ab8e638d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse-words",
+            "sha256": "62af046e14e324ae32d831e7740bc8fb794eb73201c80c28ccc5b9dc4dccc8c2",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse_words.pl",
+            "sha256": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+            "role": "producer"
+          },
+          {
+            "path": "examples/integration/rust/Cargo.toml",
+            "sha256": "fb734fc06c36ac3e34f9184e7b854af6b71791a829662dafda75203a07fef1c5",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/settings.sexp",
+            "sha256": "b1ddfb81644a31e0d3636f0ca80a482e07a331dfad8c8d5347a3246d5be2e2f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/lispish_file.rs",
+            "sha256": "ec395937e62d5284fc0677d55b9ad373958ff6230b235cc5630a39f80c0fc403",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/sexpr_file.rs",
+            "sha256": "7419573fb67b52cded1206aa0fe86a84f83432e3516a57ac3ad59efd4cfff23a",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/main.rs",
+            "sha256": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/word.spec",
+            "sha256": "52205524e7d54bbd33de16e702b0cfb4edb2b51b2d21248149bdf19007dbb1e5",
+            "role": "input"
+          },
+          {
+            "path": "examples/numeric-array-values.spec",
+            "sha256": "5211bca340372b75724ab728c55b7f119db4b3f7af90dc05572409ac90f9ef58",
+            "role": "input"
+          },
+          {
+            "path": "knowledge-map/scripts/check_knowledge_map.sh",
+            "sha256": "753ba902389121abdee187e5f6dcb11ab1845fb9b43741ac5884d4feba8a0d73",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/gen_knowledge_map.sh",
+            "sha256": "9bfe23dc21334181ad9d641c536e18a16b9ef4d99a00c7abd2b69a50461d39b1",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/knowledge_map.conf",
+            "sha256": "48ae2897460c62de080523715ad808af71e991b0fa6c36615d437129b5d4756c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/composed/normalization-calls.spec",
+            "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/grammar.spec",
+            "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/child.spec",
+            "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/parent.spec",
+            "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-segments/grammar.spec",
+            "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/grammar.spec",
+            "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "6533962258d74907b0b88a304f3419d985d41f7a3e680981e400fb7ff499b31d",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

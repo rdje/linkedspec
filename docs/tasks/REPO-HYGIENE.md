@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-16` (`REPO-HYGIENE.17`: due retained artifact review)
+- Last updated: `2026-10-18` (`REPO-HYGIENE.18`: due retained artifact review)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -345,6 +345,28 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.17 - retain due artifact metadata review`; derive accepted hash from Git.
   Handoff: Activate PERL-PRIVATE-FACTORY-CAPTURE.5.1.1 from the ensuing clean boundary; current callback456/full108786 and this22/full9417 claim retain their separate live input sets. Preserve every intersecting live claim before later book/Knowledge writes.
 
+- ID: `REPO-HYGIENE.18`
+  Status: `done`
+  Priority: P2 — due daily retained metadata review at the clean finite-history boundary.
+  Goal: Retain current parent/Rust artifact metadata and verify the existing retention boundary; delete only exactly proved disposable files.
+  Activation: Clean e2ec1e96bc47633599f0935ed6828c1a0b99e40a after finite-history .5.1.3, approved-host canonical PASS/1035 Phase0, all10 doctrines, promoted receipt, brief0 and explicit post-pointer/post-memory0. October16T21:30:30UTC cleanup is over24 hours old. The .17 census/review/capture contracts, current cleanup Knowledge boundary and book retention teaching are reviewed. Other repositories/submodules remain excluded and read-only. SESSION-STARTUP-READING.7 prohibits recovery/purge.
+  Owned paths: New docs/checkpoints/REPO-HYGIENE.18-* producers/full channels and docs/claims/REPO-HYGIENE.18.json; latest-only docs/ARTIFACT_CLEANUP.md; this tree/index, callback handoff and roadmap/current continuity/CHANGES.md; mode/revision-only projection of every intersecting accepted live claim; eleven current Knowledge reverify headers/derived map and the book workflow entrypoint. Preserve complete507-input/117862-byte .5.1.3 publication and actual readonly baseline before all bound writes. No runtime, gate, dependency, pin or budget change; previous snapshots/producers stay immutable.
+  Verification tier: `focused`
+  Focused checks: Fixed accepted claim namespace/all original bindings and actual readonly baseline before shared writes; non-following same-volume parent census plus separate Rust release/incremental/deps log-bin metadata; fresh comparison, independent lstat, size/traversal fixtures and four full-channel evidence controls. Verify historical publication/projection, exact Knowledge header-only overlays/full population, current book source/includes/rendered route, both chronology checks, memory/claim/diff and all normal doctrines.
+  Canonical trigger: none; a dated retention observation and current proof routes change no public/runtime/storage/toolchain/gate mechanism.
+  Claim verification: `docs/claims/REPO-HYGIENE.18.json`
+  Acceptance: Keep all dated evidence/caches; update the latest date only after actual census and live review. Zero removals is valid without an exactly proved disposable target. No liveness/recovery/purge or new callback/private/parent admission. Retire one-shot capture writers and provide a readonly current review. The retained mode-reader correction adds one complete dated engineering record; no other engineering chronology changes. Commit before if/while .5.2; no dirty pivot.
+  Next action: If/while .5.2 follows the clean focused landing; its first action preserves the current155/full40701 publication and actual readonly baseline before bound writes.
+  History insertion defect (P2, owned here): Focused history check catches the own new CHANGES record inserted at the inline ## example rather than a line-start heading, truncating its manifest preamble. Actual history-refusal e28ace/0 retains child255, both full channels and complete malformed root without rewriting it. Restore the exact accepted preamble and insert at an anchored multiline heading; the still-unexecuted final publisher uses the independent same boundary plus the unchanged public history gate. No archived history is modified.
+  Final mode repair scope: Existing canonical mode card is extended with the dated full1486-row census; one complete dated engineering record preserves the re-derived rule. Its original card has zero live intersections, and the entire .3 publication (including original engineering notes) was preserved before these writes. First route/book captures remain immutable; distinct final routes retain twelve overlays (eleven header-only and the mode card), with original/current mode representations separate. First/final book readers verify separate complete89-input epochs.
+  Publication reader defect (P2, owned here): First publication1a8108/1 falsely equated tar archive permissions with checkout permissions. Actual census ca0861 finds all1486 archive0664 versus Git100644/current0644 and zero current/Git drift. Existing project-root-evidence-filesystem-modes already separates these representations; preserve actual captured modes instead. Retain first publisher/full failure and all first Knowledge/book captures; distinct final publisher/current route/book captures must verify the correction. Additional owned card project-root-evidence-filesystem-modes has zero accepted live intersections (10531d/78533 census); record this re-derived representation rule there with exact source census. No chmod, project/runtime/toolchain change or budget increase.
+  Reader defect (P2, owned here): First actual-review d5c447/1 accessed inputs before filtering a disclosed gap leg. Accepted claim .3.1.1.0 claim1 has status gap/reason/repair_owner; tools/check_claim_verification.py:79-85 deliberately permits no inputs. Full original source/channel and exact guard correction remain in REPO-HYGIENE.18-review-failure.json. Distinct review-actual-final.py filters non-live legs first and writes a separate final verification; all original live507 custody checks remain. Verify this correction before closure; original capture is not rerun.
+  Orchestration refusal: Reviewer67d322/1 was launched before capture89220 completed; actual.json did not yet exist and no verification record was written. Full actual combined channel/source identity is retained in REPO-HYGIENE.18-review-premature.json. Own the ordering correction: await capture completion, then retry the identical reader; no producer or observation is changed.
+
+  Verification: PASS — freeze65397/0 preserves whole507/full117862 and actual baseline before all bound writes. Capture89220/0 retains dated16310/17449713515 parent, separate Rust483/2390810648/deps0/release absent; no files removed. Corrected actual reader63227/0 passes four channel/three preservation controls; first failures stay frozen. Mode census5513/0 retains all1486 archive0664/Git100644/filesystem0644 and zero additional live intersections; no chmod. First/final complete book89/four controls pass with distinct readers. Final routes58920/0 retain full1486/twelve overlays/8387213 bytes; final publication37924/0 owns155/full40701. History refusal e28ace/0 retains actual255 and entire malformed root; accepted preamble restored, both current pressure checks pass. Normal doctrines, explicit memory/diff and final readonly recurrence govern focused landing.
+  Commit: `REPO-HYGIENE.18 - retain due artifact review and input custody`; Git owns accepted identity.
+  Handoff: Commit, clear brief0 and verify clean/post-pointer state before activating if/while .5.2. No push; current155/full40701 remains the only intersecting live publication, with original507/full117862 historical at e2ec1e96b.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -364,6 +386,7 @@ the durable handoff state current.
 | 13 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
 | 14 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
 | 15 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
+| 16 | `REPO-HYGIENE.18` | `done` | Dated metadata and full historical custody verified; readonly155/full40701 passes; resume if/while .5.2 after clean commit. |
 
 ## Decisions
 
@@ -490,3 +513,12 @@ the durable handoff state current.
 - [x] Size/traversal fixtures and four reason-sensitive actual-channel RED controls pass; zero removals and latest-only date updated.
 - [x] Book/Knowledge teaching reviewed and unchanged; existing evidence/caches and every repository boundary preserved.
 - [x] Readonly22/full9417 claim, chronology/memory/diff and normal doctrine hooks govern focused clean landing.
+
+## Acceptance Checklist — REPO-HYGIENE.18
+
+- [x] **REPRODUCE / ISSUE** — October16 cleanup is over24h old at clean e2ec1e96b; complete original507/full117862 and actual readonly baseline are retained before shared writes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Dated metadata needs a new observation. New readers exposed premature ordering, unfiltered gap inputs, archive/filesystem mode equality and an inline heading insertion; exact original sources/full reached channels and malformed root remain retained.
+- [x] **FIX** — Retain all artifacts/caches and latest-only date; filter non-live legs, keep mode fields separate and restore exact accepted preamble with anchored headings. One existing mode card and one complete dated engineering note preserve the re-derived rule; all original bytes remain recoverable.
+- [x] **ADDRESSED (verified)** — Actual capture/live metadata/independent lstat/traversal and four channel/three preservation controls PASS; full1486-mode census, corrected readers and readonly155/full40701 PASS.
+- [x] **NO REGRESSION** — Runtime/dependencies/gates/budgets remain exact. Both complete book89/four-control epochs pass; knowledge-map/scripts/check_knowledge_map.sh and both public history pressure checks PASS. No chmod, deletion or recovery/purge.
+- [x] **LOCKSTEP** — Current Knowledge twelve overlays, book entrypoint, cleanup record, roads/task frontiers, bounded live/current pointer and git diff --check align; if/while .5.2 follows the clean focused boundary.

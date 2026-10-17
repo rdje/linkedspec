@@ -1,0 +1,15 @@
+{
+  "owner": "REPO-HYGIENE.18",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/REPO-HYGIENE.18-review-actual.py",
+    "--capture"
+  ],
+  "exit_code": 1,
+  "tool_chunk": "67d322",
+  "combined_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTgtcmV2aWV3LWFjdHVhbC5weSIsIGxpbmUgNDAsIGluIDxtb2R1bGU+CiAgICBhY3R1YWwgPSBqc29uLmxvYWRzKChST09UIC8gKFBSRUZJWCArICdhY3R1YWwuanNvbicpKS5yZWFkX2J5dGVzKCkpCiAgICAgICAgICAgICAgICAgICAgICAgIH5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Xl4KICBGaWxlICIvb3B0L2hvbWVicmV3L0NlbGxhci9weXRob25AMy4xNC8zLjE0LjcvRnJhbWV3b3Jrcy9QeXRob24uZnJhbWV3b3JrL1ZlcnNpb25zLzMuMTQvbGliL3B5dGhvbjMuMTQvcGF0aGxpYi9fX2luaXRfXy5weSIsIGxpbmUgNzc3LCBpbiByZWFkX2J5dGVzCiAgICB3aXRoIHNlbGYub3Blbihtb2RlPSdyYicsIGJ1ZmZlcmluZz0wKSBhcyBmOgogICAgICAgICB+fn5+fn5+fn5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KICBGaWxlICIvb3B0L2hvbWVicmV3L0NlbGxhci9weXRob25AMy4xNC8zLjE0LjcvRnJhbWV3b3Jrcy9QeXRob24uZnJhbWV3b3JrL1ZlcnNpb25zLzMuMTQvbGliL3B5dGhvbjMuMTQvcGF0aGxpYi9fX2luaXRfXy5weSIsIGxpbmUgNzcxLCBpbiBvcGVuCiAgICByZXR1cm4gaW8ub3BlbihzZWxmLCBtb2RlLCBidWZmZXJpbmcsIGVuY29kaW5nLCBlcnJvcnMsIG5ld2xpbmUpCiAgICAgICAgICAgfn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkZpbGVOb3RGb3VuZEVycm9yOiBbRXJybm8gMl0gTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeTogJy9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTgtYWN0dWFsLmpzb24nCg==",
+  "combined_output_sha256": "6621074c848d17866ae0dc2bb3cbfc7b7ca002b2f820c1ff8405d2153237bb69",
+  "producer_sha256": "c6feb477b7d33947bad252f0aced191f31b736c20a4caeecc5fc7b2d20fb4324",
+  "cause": "Dependent reviewer was launched while capture session89220 was still running, before actual.json existed. No verification output was created. Retain this refusal; retry the identical unchanged reader only after actual capture completion. No source correction or refreshed observation."
+}

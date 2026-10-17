@@ -1,0 +1,15 @@
+{
+  "owner": "REPO-HYGIENE.18",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/REPO-HYGIENE.18-claim.py",
+    "--capture"
+  ],
+  "exit_code": 1,
+  "tool_chunk": "1a8108",
+  "producer_sha256": "87d9f00b2f897ae88167637cd06f9bef386ab070369a4a9699dc3e31b7118d6f",
+  "combined_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTgtY2xhaW0ucHkiLCBsaW5lIDg5LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IChST09UL3BhdGgpLnN0YXQoKS5zdF9tb2RlJjBvNzc3Nz09aXRlbVsnbW9kZSddCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "combined_output_sha256": "b389f43a23693aacb1a2284911b5fd3be491cfde8773f51c8d6879ac88f72d9b",
+  "cause": "A new reader equated Git archive tar permissions with actual checkout permissions. Diagnostic ca0861 shows all1486 archive permissions0664, recorded Git100644/current0644 and zero current/Git differences. Existing canonical card project-root-evidence-filesystem-modes already requires separate mode representations; the actual current mode is already independently guarded against its captured filesystem mode. Retain the first publisher and all first Knowledge/book data; a distinct publisher removes the false equality, keeps the separate guards and uses distinct current route/book captures."
+}

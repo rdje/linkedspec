@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": ".gitattributes",
@@ -2557,7 +2557,8 @@
             "sha256": "ca6d627a30f92b7c9b94c89edff768e6a85d6194403bf94ee4bdc26d41a5a43c",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a"
       }
     }
   ]

@@ -1,0 +1,47 @@
+{
+  "owner": "REPO-HYGIENE.18",
+  "result": "PASS",
+  "controls": [
+    {
+      "name": "incomplete capture",
+      "rejected": true,
+      "reason": "complete actual capture"
+    },
+    {
+      "name": "forged producer",
+      "rejected": true,
+      "reason": "producer identity"
+    },
+    {
+      "name": "failed review",
+      "rejected": true,
+      "reason": "actual exit"
+    },
+    {
+      "name": "forged stdout",
+      "rejected": true,
+      "reason": "channel identity"
+    }
+  ],
+  "producer_sha256": "8ad10c4a009448ec4a58d14b41bbc03115f863f7f4a553960df402106f6b65a0",
+  "historical_publication_inputs": 507,
+  "historical_publication_bytes": 117862,
+  "preservation_controls": [
+    {
+      "name": "whole-publication bytes",
+      "rejected": true,
+      "reason": "accepted whole publication"
+    },
+    {
+      "name": "historical projection",
+      "rejected": true,
+      "reason": "mode/revision-only projection"
+    },
+    {
+      "name": "baseline stdout",
+      "rejected": true,
+      "reason": "actual baseline stdout"
+    }
+  ],
+  "limits": "Dated retained metadata and actual channels only; no content ownership, disposal safety, liveness, recovery/purge or concurrent adversarial traversal guarantee."
+}
