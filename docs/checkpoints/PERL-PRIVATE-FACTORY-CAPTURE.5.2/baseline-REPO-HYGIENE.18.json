@@ -1,0 +1,11 @@
+{
+  "claim": "docs/claims/REPO-HYGIENE.18.json",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/REPO-HYGIENE.18-final-claim.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "UmV0ZW50aW9uL2N1c3RvZHkgcHVibGljYXRpb24gUEFTUzogMTU1IGxpdmUgaW5wdXRzOyA0MDcwMSBieXRlcwpEYXRlZCBwYXJlbnQ6IDE2MzEwIDE3NDQ5NzEzNTE1IHJlbW92ZWQwOyBLbm93bGVkZ2UgY2FyZCBieXRlczogODM4NzIxMwo=",
+  "stderr_base64": ""
+}

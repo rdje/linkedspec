@@ -119,15 +119,15 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks the dated retained artifact review
-and current Knowledge routing and book inputs. It preserves the complete finite
-engineering-history publication at `e2ec1e96b`, including its accepted
-single-statement callback evidence. ADR0135 admits one measured archive member
-and exact manifest and sole decision/index overhead. Existing root and aggregate
-budgets stay fixed; no future archive reserve follows:
+The current verification entrypoint checks the bounded if/while callback repair,
+including unchanged ordinary observations, actual callback frames, full-source
+faults and supplied consumers. Its accepted predecessor is the complete155-input
+retained artifact publication at `a60764c11`; the full finite engineering-history
+publication remains at `e2ec1e96b`. No historical observation is refreshed. Existing
+root and aggregate budgets stay fixed:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.18-final-claim.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

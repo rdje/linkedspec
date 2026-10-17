@@ -2397,6 +2397,55 @@ actually registered matching trim can retain its own packet. Direct dispatch and
 rule application calls remain separately owned, as do later ControlFlow families,
 default selection and full pipeline/private admission.
 
+### ControlFlow if/while dependency boundaries
+
+If and while lowering now gives each selected required callback its own private
+frame. The public dependency map keeps its original references. Selection and
+CODE validation remain eager, including calls with undefined input; subsequent
+map replacement does not replace a callback already selected for the operation.
+
+| Lowering owner | Required callbacks with private frames |
+| --- | --- |
+| `if` | Method parser and scope argument normalizer |
+| `elseif`, `else`, `endif` | Scope argument normalizer |
+| Inline `if` branch | Scope argument normalizer |
+| `while` | Scope argument normalizer |
+
+These callbacks run in scalar context even when the lowering owner is called in
+list or void context. Actual callback identity determines its own registration.
+A parser returns its original hash and a normalizer returns its original array;
+these ordinary reference values cannot retain a scalar emission packet. An
+eligible callback therefore need not produce a packet. An opaque nested call
+cannot donate an equal-text publication to its enclosing producer.
+
+Argument aliases and existing state transitions remain significant:
+
+- Inline `if` normalizes the original parsed argument array. Its local second
+  parser call receives an alias to an element of that array. The inline-action
+  bypass instead makes a shallow argument-array copy.
+- Rebinding or changing a normalizer argument retains the original alias effects;
+  copying the returned array would change reference identity and later mutations.
+- `else` records that its branch has been seen before lowering an attached action.
+  If that action declines, the existing `else_seen` state stays set.
+- An accepted empty `while` body still allocates its guard. In the controlled
+  dependency probe, a starting counter of7 advances to8; nested loops allocate
+  inner8 and outer9. A splitter that returns a whitespace statement instead of
+  an empty array takes the existing decline path and does not advance the counter.
+
+For example, the internal truth condition for a constant true branch is:
+
+```perl
+do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }
+```
+
+That generated Perl is a lowering result. The controlled probe's injected parser,
+normalizer and splitter establish reference, alias and state contracts; they do
+not replace the public DSL examples or claim complete facade execution. Typed
+AST input still uses its structured method fields. Successful error effects,
+once-only calls, original fatal objects and cold loading remain native. Switch,
+output, direct/rule calls, mixed-provider defaults and full pipeline admission
+remain separate owners.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

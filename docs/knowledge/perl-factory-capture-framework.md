@@ -19,10 +19,10 @@ answers:
   - "does attached parsing preserve its native substring lvalue"
   - "does single-statement trim preserve aliases and branch candidate state"
 date: 2026-10-17
-status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser/single statement verified; later ControlFlow and pipeline open
+status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser/single statement and if/while required roles verified; later ControlFlow and pipeline open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.18-final-claim.py. Complete prior507/full117862 remain at e2ec1e96b; dated captures stay retired."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/publish.py. Prior155/full40701 remain at a60764c11; captures retired."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -178,3 +178,17 @@ rule candidate state remain native. Candidates copy stack-entry hashes/counters,
 share nested references, and commit only defined nonempty changed outputs (`0`
 included). This preserves existing shallow-copy semantics, without admitting later
 direct/rule invocation owners or rollback of external effects.
+
+If/while .5.2 binds six required validators/seven roles: local parser plus scope
+normalizer in if, and normalizer in elseif/else/endif/inline-if/while. Selection,
+validation and scalar contexts stay native. Parser hashes and normalizer arrays
+retain their references; neither ordinary return can retain a scalar emission
+packet, even when its actual callback is eligible. Inline-if normalizes the
+original parser array and its second parser call aliases its element; inline-action
+bypass shallow-copies the array. Else attached-action failure leaves else_seen set.
+Controlled empty-split while advances guard7 to8; nested while uses8 then9.
+The complete native probe has356 warm/314 cold rows. Identical1750 assertions
+retain294 original REDs/1456 controls/all GREEN;16 full-source faults reject.
+First350/308 observations remain frozen; only two overwritten case labels and a
+duplicate guard change in the complete instrument. These injected dependency
+observations do not claim facade execution or full pipeline admission.

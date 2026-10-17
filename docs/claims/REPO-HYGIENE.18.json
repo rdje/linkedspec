@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": ".gitignore",
@@ -797,7 +797,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80"
       }
     }
   ]

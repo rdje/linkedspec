@@ -1,0 +1,473 @@
+{
+  "stage": "after",
+  "result": "GREEN",
+  "producer_sha256": "b7c2414aa62382a39a8460ebd400fb64419d4963e33cd34eb349def58ea29945",
+  "inputs": {
+    ".knowledge_map.conf": {
+      "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-complete-native-data.json.gz": {
+      "sha256": "6036952279c99c4d9f47bd11fd65943dcac0ad2ded4795266a923b2511f4a202",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-complete-native-inputs.json.gz": {
+      "sha256": "072442a8ca30bc43a895598777ad7178f2e92632efee9be629e897e09b28504c",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-complete-native.json": {
+      "sha256": "41b1fc093a8cdb0055e331ac6091c57ba1951bfb622dd8466dd6ff3b45b98040",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-native-data.json.gz": {
+      "sha256": "fe74847677ab3e7d51f47a150d5f834af6db9b1207b9349be4c4834688eeaafb",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-native-inputs.json.gz": {
+      "sha256": "09fa6f3fe03a94f0fb3e25f0f95697f533e5162e8dabad2d180768513ddc1ebe",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/before-native.json": {
+      "sha256": "cf9cee430fdb6359fa606019a262b1712e23c91861c94d38c97c86654837f937",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/observe-complete.py": {
+      "sha256": "1722f1b08cfa501e9fe7f773343c172e1c17a2649dc07659b5b62ecf84a33d4e",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/observe.py": {
+      "sha256": "dc138364eecc2d64b5ead24e5eaeaed756c7b8d2b729a0728cbb3331a893db97",
+      "mode": 420
+    },
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/run.py": {
+      "sha256": "b7c2414aa62382a39a8460ebd400fb64419d4963e33cd34eb349def58ea29945",
+      "mode": 420
+    },
+    "perl/LinkedRE.pm": {
+      "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+      "mode": 416
+    },
+    "perl/LinkedSpec.pm": {
+      "sha256": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/AST.pm": {
+      "sha256": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": {
+      "sha256": "16f8a9a8a04cf68a91d8a426f86e02ab7fbe808db2a1597fa2399075621fb30d",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/ArrayPipeline.pm": {
+      "sha256": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/BoundaryLabels.pm": {
+      "sha256": "72957750deeb88a06ba0689015d46d5f8be30812c7a5be35b47c17e31063a87b",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/CanonicalEvents.pm": {
+      "sha256": "fc8975090e33a9d0e85a3eec639d551304808d771827060c79f25beb49d53356",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm": {
+      "sha256": "d383ed377f90dd04ce87c89bcc4f9a01426a99d655ae0405ba32eb3c361411a7",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Contracts.pm": {
+      "sha256": "3be7560d2075870f124f2b746cebdc249c294362b23dca75decebda65abadd56",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/ControlFlow.pm": {
+      "sha256": "d8610ec5734e4aa5c3a7b00358a7178f91c86f473713f65fc778b1f53475c8b9",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/DeclareMethod.pm": {
+      "sha256": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": {
+      "sha256": "7c70160eabbe02356be04aad1bedf7ef76a7a9ce82ac8462e0077d670b63e933",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/FlowExpr.pm": {
+      "sha256": "af9fb118bac1c950601c0d4d6353a312b067959a324f2d66cd5e6da37fa46d92",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/MethodExpr.pm": {
+      "sha256": "29220e0c8fb8e87eff1da7d1e2dbb90bc4d6b741bfd4d90b77b5e97a77ae94ca",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": {
+      "sha256": "1ec3b041d0e4fa262f398f779ed27c222475ddecddc8d46fe82a9692ee239426",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm": {
+      "sha256": "f7b47a9ee060979fc14723cae3dc95eaac5f337f709246a8f6ab32c7b2e1d59e",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/RawDependencies.pm": {
+      "sha256": "b9144cdd2cc1dfbe30186870972e4eade61db87b878567f59e2a9007edd54f55",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/RewritePipeline.pm": {
+      "sha256": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner.pm": {
+      "sha256": "dcea9045ada094e226b5394db96590e2f319270b38217fe01ac9d5e2a6adb622",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm": {
+      "sha256": "25bb59b93b8ef9a65ee37f52a559c4eaa07ce8d6eb045a6568cdc3af35d4378c",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm": {
+      "sha256": "e1ec94cf21418bc211637d2e7f5bc979cb0ae275a8a6f2904c39b953344d73bc",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm": {
+      "sha256": "536c9f9127bbfa01ffb26eaa70574104f2cc6da5f2cd3a49041a72a4a51ca1df",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm": {
+      "sha256": "623c7a2447d957859a7bed572ca00261cc951c8d0b04517873e3d2df73911e5a",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm": {
+      "sha256": "2a54987504a2d9f38f13ee6fcc2497026633d45f8780ba1c613ddc803b14aaf0",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/ScannerCore.pm": {
+      "sha256": "e301a561ee78289b33f52e27be10325aa8fc8fc52bc9b907ce2ee5d95c197332",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/SourceEmissions.pm": {
+      "sha256": "584ec65abc8271786c42561c5047783c5f1bb540c8734ab3dfa60ad2aab5e276",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/SourceMembership.pm": {
+      "sha256": "cbe84e2b3a99a31bd20ab2783d4cb835cc32e64fc5d9ed653b137971820efcbb",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/SourceOrigins.pm": {
+      "sha256": "a006d2256b39c69d6faf0f04743ab729e3a2883a1eb6bd759d2a335b47cf7d50",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/StagedParseJob.pm": {
+      "sha256": "46ab2a3e2cc7964dad87916fbe7bfc4abff8b3e63d9e898532b64f7e130ad43f",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/StatementSplit.pm": {
+      "sha256": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm": {
+      "sha256": "03c5721b4c8fc56c9e90322bd7999b7ad6132376efb7200e3d7aea7ab15e9415",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm": {
+      "sha256": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/Trace.pm": {
+      "sha256": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": {
+      "sha256": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+      "mode": 420
+    },
+    "perl/LinkedSpec/BindingRuntime.pm": {
+      "sha256": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+      "mode": 420
+    },
+    "perl/LinkedSpec/BootstrapSpec.pm": {
+      "sha256": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+      "mode": 420
+    },
+    "perl/LinkedSpec/BootstrapSpec/Core.pm": {
+      "sha256": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+      "mode": 420
+    },
+    "perl/LinkedSpec/CallableContract.pm": {
+      "sha256": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+      "mode": 420
+    },
+    "perl/LinkedSpec/CodeblockRuntime.pm": {
+      "sha256": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Compiler.pm": {
+      "sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+      "mode": 420
+    },
+    "perl/LinkedSpec/CompilerState.pm": {
+      "sha256": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+      "mode": 420
+    },
+    "perl/LinkedSpec/EntryRuleSelection.pm": {
+      "sha256": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+      "mode": 420
+    },
+    "perl/LinkedSpec/GeneratedSource.pm": {
+      "sha256": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+      "mode": 420
+    },
+    "perl/LinkedSpec/HandlerVariantEmitter.pm": {
+      "sha256": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+      "mode": 420
+    },
+    "perl/LinkedSpec/InterMatchGapRuntime.pm": {
+      "sha256": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+      "mode": 420
+    },
+    "perl/LinkedSpec/MCPContract.pm": {
+      "sha256": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+      "mode": 420
+    },
+    "perl/LinkedSpec/MCPContractRuntime.pm": {
+      "sha256": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+      "mode": 420
+    },
+    "perl/LinkedSpec/MCPServer.pm": {
+      "sha256": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+      "mode": 420
+    },
+    "perl/LinkedSpec/MCPWire.pm": {
+      "sha256": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Numeric.pm": {
+      "sha256": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+      "mode": 420
+    },
+    "perl/LinkedSpec/OwnerDispatch.pm": {
+      "sha256": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ParserFactory.pm": {
+      "sha256": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+      "mode": 420
+    },
+    "perl/LinkedSpec/PluginBridge.pm": {
+      "sha256": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+      "mode": 420
+    },
+    "perl/LinkedSpec/PluginRegistry.pm": {
+      "sha256": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ProgressiveSpanDispatch.pm": {
+      "sha256": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm": {
+      "sha256": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+      "mode": 420
+    },
+    "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm": {
+      "sha256": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RecognitionTransaction.pm": {
+      "sha256": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RecognitionTransactionPolicy.pm": {
+      "sha256": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RecognitionTransactionRuntime.pm": {
+      "sha256": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RecursiveObservationPolicy.pm": {
+      "sha256": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Resolver.pm": {
+      "sha256": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuleIR.pm": {
+      "sha256": "25346e3cd52c5e43cd272794185f72ecc40c25f0fd14db89d3c61adfded0cdbe",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": {
+      "sha256": "0577c9806370b07c2d6d2718c323424083a4ad733b7a0298b478e1705cbd3f33",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Runtime.pm": {
+      "sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuntimeContext.pm": {
+      "sha256": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuntimeDiagnosticOutput.pm": {
+      "sha256": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuntimeLogical.pm": {
+      "sha256": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+      "mode": 420
+    },
+    "perl/LinkedSpec/RuntimeSemanticObservation.pm": {
+      "sha256": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticCallProjection.pm": {
+      "sha256": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticIndex.pm": {
+      "sha256": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticQuery.pm": {
+      "sha256": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticRuntimeProjection.pm": {
+      "sha256": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticSourceMap.pm": {
+      "sha256": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SemanticStaticProjection.pm": {
+      "sha256": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SourceLocation.pm": {
+      "sha256": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SpecEntry.pm": {
+      "sha256": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+      "mode": 420
+    },
+    "perl/LinkedSpec/SpecLoader.pm": {
+      "sha256": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+      "mode": 420
+    },
+    "perl/LinkedSpec/StagedASTEnrichment.pm": {
+      "sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+      "mode": 420
+    },
+    "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": {
+      "sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+      "mode": 420
+    },
+    "perl/LinkedSpec/StagedParseJob.pm": {
+      "sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+      "mode": 420
+    },
+    "perl/LinkedSpec/StagedParseJobPolicy.pm": {
+      "sha256": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+      "mode": 420
+    },
+    "perl/LinkedSpec/StagedParserRegistry.pm": {
+      "sha256": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Trace.pm": {
+      "sha256": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+      "mode": 420
+    },
+    "perl/LinkedSpec/UnicodeCaseMapping.pm": {
+      "sha256": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+      "mode": 420
+    },
+    "perl/LinkedSpec/UnicodeXIDContinue.pm": {
+      "sha256": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+      "mode": 420
+    },
+    "perl/LinkedSpec/UserFunctionRegistry.pm": {
+      "sha256": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+      "mode": 420
+    },
+    "perl/LinkedSpec/Validation.pm": {
+      "sha256": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+      "mode": 420
+    },
+    "perl/PPlugin.pm": {
+      "sha256": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+      "mode": 420
+    },
+    "perl/PathSearch.pm": {
+      "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+      "mode": 416
+    },
+    "perl/env.conf": {
+      "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+      "mode": 416
+    },
+    "perl/gdcheck.pl": {
+      "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+      "mode": 416
+    },
+    "perl/htmlcss_driver.pl": {
+      "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+      "mode": 416
+    },
+    "perl/ptchange.pl": {
+      "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+      "mode": 488
+    },
+    "t/actionir_control_ifwhile_capture.t": {
+      "sha256": "d7fb2114e9deeaa8f7b9a916cfaad69647f725eb6cd427b05d527d69bbdfc4c4",
+      "mode": 420
+    },
+    "t/actionir_control_ifwhile_native.pl": {
+      "sha256": "d96287b25b9a813a2881cd7313ed7824714e0176aeb4615aa8f680f39a03954b",
+      "mode": 420
+    },
+    "t/actionir_control_ifwhile_native_complete.pl": {
+      "sha256": "bf3a89b53a36813b90c9e9a31cd5394d9731ce778a282ebcefcc225551156617",
+      "mode": 420
+    },
+    "tools/project_data_env.sh": {
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "mode": 493
+    },
+    "tools/project_data_run.sh": {
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+      "mode": 493
+    },
+    "tools/run_python_project_data.sh": {
+      "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "mode": 493
+    }
+  },
+  "capsule_sha256": "f8f756f65974b0f0b652f15f175abcf4c5119c7dc7bad7a781d7576a32343f9b",
+  "channels_sha256": "7cccaef059a309268212b94d60959ec4ce7c1dbd43c25419d6fb926ed5e96078",
+  "commands": [
+    {
+      "command": [
+        "perl",
+        "-c",
+        "-Iperl",
+        "t/actionir_control_ifwhile_capture.t"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "perl",
+        "-Iperl",
+        "t/actionir_control_ifwhile_capture.t"
+      ],
+      "returncode": 0
+    }
+  ],
+  "plan": 1750,
+  "assertions": 1750,
+  "failures": [],
+  "controls": 1750,
+  "scope": "Identical source-bound paired fixture; every complete native row/context/argument/slot/returned reference/map/value/effect/error and independent parser/normalizer callback/publication property is checked. These ordinary reference-valued roles do not retain scalar packets; first350/308 observations remain separate and current expectations use only the complete356/314 population. Full coherent TAP and separate raw channels are retained. The first complete paired RED is retained directly; no runtime/native oracle is refreshed."
+}

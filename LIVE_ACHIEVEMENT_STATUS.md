@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: due retained artifact review .18 completes; if/while .5.2 follows. No push.
+Full PNT: if/while .5.2 completes; switch .5.3 follows the clean focused commit. No push.
 
 ## Latest Completed Slice
 
-Due retained artifact review .18 verifies16310 parent candidate rows/17449713515 bytes and separate Rust metadata with zero removals. Complete507/full117862 finite-history publication and actual baseline remain historical at e2ec1e96b; every original binding stays exact. Full1486 Knowledge inputs retain eleven route-only overlays plus one dated existing mode-card update (8387213 bytes); first/final complete book89/four-control epochs pass separately. Four channel/three preservation controls and metadata/traversal checks pass. Premature/gap-leg/tar-mode/history refusals retain original sources/full reached inputs/channels; corrected readers keep mode representations and anchored headings distinct. Readonly155-input/40701-byte publication owns current routes. No runtime/dependency/gate/budget change. If/while .5.2 follows the clean focused commit; .5.3–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK remain scheduled; independent broader admissions stay open.
+If/while .5.2 binds seven required parser/normalizer roles through six original validator returns. All670 native rows and exact recurrences stay unchanged; identical1750 assertions retain294 original REDs/1456 controls and all GREEN. Sixteen complete-source faults,84 supplied suites/310 inputs/24959 assertions and nine coherent artifact denials/restorations pass. Whole original155/full40701 publication and actual baseline remain historical at a60764c11. First350/308 observations stay frozen; the complete356/314 instrument repairs two overwritten labels and adds a duplicate guard. Full Knowledge1486/1349/twelve overlays/8388171 bytes, book89/four controls, public guard and standard public Phase01035 pass. Readonly463-input/109061-byte publication owns current routes. No public contract, dependency, gate or budget changes. Switch .5.3 follows the clean focused commit; remaining ControlFlow .5.4–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK stay scheduled. Independent broader admissions remain open.
 
 ## Next Action
 
-Activate if/while required callbacks .5.2 from clean Git. Preserve the complete155-input/40701-byte retention/custody publication and actual readonly baseline before bound writes; establish native references, contexts, aliases, maps and ordinary effects/errors before the six required-validator edits. Original507/full117862 remains historical at e2ec1e96b. Keep engineering notes concise within current pressure; no speculative capacity growth.
+Activate switch required callbacks .5.3 from clean Git. Preserve the complete463-input/109061-byte current publication and actual readonly baseline before bound writes; establish native references, contexts, aliases, maps and ordinary effects/errors before its six required-validator edits. Original155/full40701 stays historical at a60764c11. Keep engineering notes concise within existing pressure.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.2` — six validators/seven roles; native105/356/314 exact;1750/294 RED/1456 controls/all GREEN;16 faults;84/310/24959; evidence9; original155/full40701; Knowledge1486/1349/twelve/8388171; book89/4; standard1035; readonly463/109061; switch .5.3 next.
 - `REPO-HYGIENE.18` — dated16310/17449713515 parent; separate Rust483/2390810648; zero removals; four channel/three preservation controls; original507 historical; full1486 Knowledge/12 overlays/8387213; two book89/four epochs; retained reader/history refusals; readonly155/40701; if/while .5.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3` — one272-line suffix/113-line root;228 old files/449 accepted bindings; exact finite ADR0135; complete1978 root replay;30/23 controls; five artifacts; Knowledge1486/1349/8387290; book89/4; readonly507/117862; canonical boundary; .5.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2` — native100/87/79 exact;439/94 RED/345 controls/all GREEN;10 cases/9 sources;83/298/23209; evidence9/supplied443; original461 Git bindings; Knowledge1485/1349/8387900; book89/4; standard1035; readonly449/105765; finite continuity .5.1.3 next.
@@ -29,7 +30,6 @@ Activate if/while required callbacks .5.2 from clean Git. Preserve the complete1
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7` — native230/68/52 changes; exact241 recurrence; paired507/144 RED/363 controls; fourteen faults; full75/243/17188/evidence6/book89/4/standard1035; original519/119936; readonly522/120245.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6` — native280/16/64 changes; exact238 recurrence; paired516/156 RED/360 controls; ten faults; full74/240/16681/evidence6/book89/4/standard1035; original517/119899; readonly519/119936.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5` — native148/six/16 changes; stable235 recurrence/original234 iterator repair; paired272/44 RED/228 controls; eleven faults; full73/237/16165/evidence6/book89/4/standard1035; original498/114980; readonly517/119899.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4` — native156/six cold/20 changes; paired286/56 RED/230 controls, nine faults; supplied72/233/15893/evidence5/book89/4/standard1035; original531/125217; readonly498/114980.
 
 ## History
 
