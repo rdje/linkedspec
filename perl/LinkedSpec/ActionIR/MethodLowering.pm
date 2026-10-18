@@ -159,7 +159,7 @@ sub default_deps_for_package {
  );
  # Both the target and the actual definition-owned reference must match.
  # Keep public map/callback identities and cold require-only behavior intact.
- if (defined($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+ if (defined($pkg) && !ref($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
   && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_method_emission_callback) {
   LinkedSpec::RuleIR::EmitContext::_register_builtin_method_emission_callback($_)
    for values %$deps;

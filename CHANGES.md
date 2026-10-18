@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.7 — Select mixed defaults
+
+Select seven target facade definitions and fixed ValueExpr extraction. Three noncoercing target guards preserve native package objects. Mixed445/53 and object444/100 RED/GREEN,28 source faults,91 suites/30394 assertions, standard1035 and ten artifact controls pass. Knowledge/book and565-input/129686-byte publication pass. Initial546/full127929 draft and actual2020-file replay stay preserved. Finite continuity .5.8 follows; broader admissions remain open.
+
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.6 — Isolate selected control callbacks
 
 Two invocation lines isolate direct lowerers and rule apply callbacks while retaining native contexts, one post-clone fetch, aliases, public references, effects/errors and diagnostic lines. All426 ordinary rows/recurrences stay exact, including original420; complete1290 assertions retain435 original REDs/855 controls/all GREEN. Fourteen full-source faults reject. Existing cardinality62/one RED distinguishes ambiguous publications from isolation. Full89 suites/349 inputs/29504 assertions, public diagnostics343/16 before/after, standard Phase01035, six artifact denials/restorations, Knowledge1486/1349/thirteen overlays/8388505 bytes, book89/four controls and public guard pass. Rendered candidate counters derive independently from native observations. Whole prior506-input/116166-byte claim and actual baseline stay historical at2b35b77ea; original failed reader and distinct correction remain retained. Readonly525-input/121708-byte publication passes. Current stale task-index label is repaired; normal focused hooks govern landing before mixed defaults .5.7.

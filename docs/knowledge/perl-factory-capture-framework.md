@@ -22,11 +22,13 @@ answers:
   - "which output helper callbacks have private emission frames"
   - "does print_each preserve optional kind two-read selection and match aliases"
   - "how do direct ControlFlow and rule apply calls preserve context and lookup order"
+  - "how does ControlFlow select mixed-provider default callback references"
+  - "how do default factories preserve package object overload effects"
 date: 2026-10-18
-status: framework and bounded Contracts/MethodLowering/FlowExpr/ControlFlow required families verified; optional kind and direct/rule boundaries verified; default/pipeline owners open
+status: framework and bounded Contracts/MethodLowering/FlowExpr/ControlFlow required families verified; optional/direct/rule and mixed-provider defaults verified; pipeline owners open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/publish.py. Prior inputs:2b35b77ea."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py. Prior inputs:ce9eaf32e."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -50,12 +52,9 @@ equal result does not inherit it. Later output builders must explicitly compose
 retained child captures. The ordinary-value helper does not expose that child
 capture as a new public return field.
 
-The initial framework fixture assumed separate no-lexical-state factory calls
-returned distinct references. Native probes instead observed a shared CODE
-reference; lexical-state closures supply distinct identities for those tests.
-The original four failed checks, first instrument and exact corrected fixture
-remain with .1. Production source was unchanged by this fixture correction;
-this is a local observation, not a universal cross-version closure rule.
+The initial no-lexical-state factory calls shared a native CODE reference;
+lexical-state closures supply distinct test identities. Original four failed
+checks and the corrected fixture remain with .1; this is not a cross-version rule.
 
 Contracts, MethodLowering, FlowExpr and bounded ControlFlow repairs have their
 individual owners below. Pipeline activation, output construction/mapping,
@@ -64,113 +63,59 @@ the quoted-first replacement defect is unchanged. EmitContext facade selection
 and resolved calls are owned by perl-emitcontext-callback-capture. Contracts
 construction is verified independently.
 
-The Contracts draft repeated that lifetime premise. Its original and corrected
-native probes remain with .2.1.0; only the fixture changed. See
-perl-contract-dependency-capture for the current integration boundary.
+Contracts construction and MethodLowering family proofs have their individual
+knowledge cards and task owners. Their initial closure-identity premise failures
+and scope corrections remain in accepted Git. MEMORY.md owns current selection;
+older named boundaries and complete original prose remain recoverable.
 
-Current own-constructor registration is verified by .2.1.1; see
-docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
-require exactbe7d70719 historical inputs.
-
-MethodLowering family evidence lives in the individual callback cards and
-docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Original owner reviews retain their
-recorded accepted Git input boundaries. MEMORY.md and that tree's frontier own
-current selection; this framework card does not duplicate a changing next leaf.
-
-Correction2026-10-10 (.3.1.4): remove the stale local-return/value next-leaf
-projection. Historical evidence stays in its original owner.
-
-Required FlowExpr .4.0 binds five required validators. Validation, eager
-reference selection, original diagnostic lines and public maps remain native.
-Callbacks stay scalar under scalar/list/void owners. Local trim mutation leaves
-the caller intact; normalizer writes reach the shared parser argument array.
-Opaque children cannot donate parent packets; a registered matching child keeps
-its own. Exact native, source-fault and supplied-consumer evidence stays with
-.4.0. Optional kind .4.2 and defaults .4.1 have separate accepted owners;
-complete helper/private/parent admissions remain open.
+Required FlowExpr .4.0 binds five validators, preserving eager selection,
+scalar context, public maps and diagnostic lines. Trim writes remain local;
+normalizer writes reach the shared parser array. Opaque children cannot donate
+parent packets; registered matching children keep their own. Exact proof and
+separate optional/default admissions remain in their task owners.
 
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-factory-capture-framework). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
 
-Optional FlowExpr kind .4.2 preserves the original first CODE check and second
-selection, both guarded invocation branches, native match aliases, scalar calls,
-coercion/error/fatal effects and lazy loading. Only an actual unblessed CODE
-selection carries its registration; native symbolic/blessed/amp-callable dispatch
-stays opaque. Native delegation occupies the original opening condition line.
-The first continuation-line candidate changes48 diagnostic comparisons; the next
-if-condition lexical candidate fails266 checks and actual strict-vars compilation.
-Both full sources/channels stay frozen. A completed lexical declaration before
-the condition fixes scope without changing the native diagnostic line. The final
-762 assertions retain154 original REDs/608 controls/all GREEN; all300 native rows
-and exact fresh-process recurrences stay unchanged. Fourteen full-source faults
-are effective, including the exact154-failure inverse. Defaults and independent
-admissions remain open; the task tree and current readonly proof own signoff.
+Optional FlowExpr .4.2 keeps guarded two-read selection, scalar calls, match
+aliases and opaque native non-CODE dispatch. Its completed lexical declaration
+occupies the original condition line; failed scope/location candidates remain
+retained beside native/source-control proof.
 
-FlowExpr defaults select a separate nine-reference definition-owned catalogue in
-EmitContext, through the built-in target and current actual source/producer scope.
-The public map and callbacks keep their original references. Equal names, copied
-names, custom target aliases and unrelated method/contract defaults cannot select
-new authority. Retained native references remain selectable after replacement.
-Nested scopes cannot borrow outer selection; normal/fatal exits restore the actual
-outer registry, and completed invocation registries release. Native facade CODE
-references remain module-owned; no universal native-reference release is claimed.
+FlowExpr defaults .4.1 selects its exact nine-reference EmitContext catalogue
+through built-in target, returned map and actual reference. Equal names, custom
+target aliases and other catalogues grant no authority. Retained definitions
+survive replacement. Nested scopes cannot borrow selection; normal/fatal exits
+restore and completed registries release. Module-owned native references remain
+retained. Native factory contexts, errors, fatal objects and actual maps stay
+unchanged; list selects returned maps, void selects none. Cold calls load neither
+private channel nor Trace. Registration is an unordered identity set, with raw
+orders retained separately; it does not produce or compose output.
 
-The default factory forwards native scalar/list/void build context, errors and
-fatal objects. Scalar/list returned maps select their actual native callbacks;
-a void call performs the native build and returns no map to select. Cold calls
-load neither SourceEmissions nor Trace. Registration iterates a Perl hash and
-stores an identity set: its event order is unspecified, while every actual native
-callback is registered once. Original/current ordinary observations and contexts
-remain exact; two retained warm registration orders differ without a raw-byte
-ordered recurrence claim. Registration does not itself produce or compose output.
+ControlFlow foundation .5.0 binds three validators/seven roles. Switch-tag
+normalization stays in native list context with parent publication disabled;
+trim/method/composite calls stay scalar. Eager selected references survive map
+replacement. Empty brace-method output falls back to the original expression;
+switch regex bypasses composite, and bare tags normalize after successful
+composite. Marker aliases remain. Exact proof stays with .5.0.
 
-ControlFlow foundation .5.0 binds three validators/seven roles in control value,
-switch case value and bare marker normalization. Switch tag normalization keeps
-its native list context in the hash constructor with parent publication disabled;
-trim, method value and composite stay scalar. Validation/selection precede guards;
-local trim and already selected references survive map replacement. Control value
-falls back from empty brace-method output to the original expression; switch
-regex bypasses composite, and bare tags normalize after successful composite.
-Native marker aliases remain. Exact proof stays with .5.0. The mixed default map
-has seven EmitContext references and fixed ValueExpr extraction; .5.7 owns selection.
+Branch expansion .5.1.0 binds eager scalar trim/split; text becomes one element,
+braces retain the splitter array and non-ARRAY/blessed results decline. The match
+body rejects writes despite a clear readonly flag; see perl-match-alias-writability.
+Attached parsing .5.1.1 binds both parser calls and head trim. Its native LVALUE
+substring is writable shared storage; mutation changes the first call scalar.
+Truthy parser results forward unchanged; false results continue the block scan.
+Single statements .5.1.2 bind scalar trim to a writable local slot, leaving the
+caller intact. Candidates copy stack-entry hashes/counters, share nested refs
+and commit nonempty changed results, including0. Source_method reconstruction
+and ordinary reference values alone grant no authority. Exact proofs remain in
+their owners; earlier full prose is retained in Git and the initial draft archive.
 
-Branch expansion .5.1.0 binds trim/split through one validator. Both stay scalar;
-validation and selection are eager. Plain text becomes one element, braces return
-the actual splitter array (including empty), and non-ARRAY/blessed results decline.
-The match-body argument rejects writes despite a clear readonly flag; copying
-loses that constraint. See perl-match-alias-writability. Exact native/source-fault/
-supplied proof remains with .5.1.0 and its accepted Git boundary.
-
-Attached parser .5.1.1 binds one required validator/two roles. Nested marker trims
-already have private frames; both direct parser calls and head trim gain their own.
-The retained v5.34.1 probe identifies the head substring argument as LVALUE, with
-clear readonly flag and writable shared storage. Its mutation changes the scalar
-held by the first parser call; copying arguments loses that alias and reference
-type. Actual call/argument-array references and typed source_method reconstruction
-stay native. Truthy injected parser results forward unchanged; false results
-continue the original attached-block scan. Registration still requires actual
-callback identity; reconstructed source fields alone grant no emission authority.
-
-Single-statement .5.1.2 binds its required trim through one validator. The actual
-callback stays scalar with a writable local slot; mutation leaves the caller intact.
-Validation, tied-map selection, closure prefixes, direct AST/control traversal and
-rule candidate state remain native. Candidates copy stack-entry hashes/counters,
-share nested references, and commit only defined nonempty changed outputs (`0`
-included). This preserves existing shallow-copy semantics, without admitting later
-direct/rule invocation owners or rollback of external effects.
-
-If/while .5.2 binds six required validators/seven roles: local parser plus scope
-normalizer in if, and normalizer in elseif/else/endif/inline-if/while. Selection,
-validation and scalar contexts stay native. Parser hashes and normalizer arrays
-retain their references; neither ordinary return can retain a scalar emission
-packet, even when its actual callback is eligible. Inline-if normalizes the
-original parser array and its second parser call aliases its element; inline-action
-bypass shallow-copies the array. Else attached-action failure leaves else_seen set.
-Controlled empty-split while advances guard7 to8; nested while uses8 then9.
-The complete native probe has356 warm/314 cold rows. Identical1750 assertions
-retain294 original REDs/1456 controls/all GREEN;16 full-source faults reject.
-First350/308 observations remain frozen; only two overwritten case labels and a
-duplicate guard change in the complete instrument. These injected dependency
-observations do not claim facade execution or full pipeline admission.
+If/while .5.2 binds six validators/seven roles. Scalar calls, parser references
+and shared normalizer arrays stay native; hash/array returns cannot retain scalar
+packets. Inline-if normalizes the original array and reparses its aliased element;
+inline-action bypass shallow-copies it. Else failure keeps else_seen; empty-split
+while advances its guard. Original overwritten-case observations and corrected
+complete inventory remain retained. These probes do not establish facade execution.
 
 Switch .5.3 binds six required normalizers. Scalar context, actual array references, aliases and native state remain exact. Inline branch detection bypasses the outer normalizer; branches still normalize. Failed default actions leave default_seen set. Endcase closes the active case; endswitch pops one state. Native333/297 rows recur exactly; identical1641 assertions retain273 original authority REDs/1368 controls/all GREEN. Later owners remain open.
 
@@ -182,12 +127,31 @@ CODE uses its own capture; opaque native-call thunks isolate other selections.
 Earlier framework prose is condensed on2026-10-18; original bodies and the first
 tied-map snapshot failure remain in Git/checkpoints.
 
-Direct/rule .5.6 gives selected direct CODE its own native tail-call context.
-Scalar calls use separate captures; list/void calls disable publication. Rule
-apply stays scalar and selects its field once after candidate construction.
-Actual CODE uses its own identity; other selections use an opaque native thunk
-at the original error line. Rejected rule mutation reaches the same trimmed slot
-seen by the next rule; candidate counters stay private while nested references
-remain shared. Tied-fetch side effects distinguish selection order. No function
-name installs registration. Earlier statistical prose is condensed on2026-10-18;
-its complete original bodies and measurements remain in accepted Git/task owners.
+Direct/rule .5.6 isolates selected CODE in native tail contexts; list/void
+disable publication. Rules fetch apply once after candidate construction and
+invoke scalar. Other callables use opaque native thunks at the original line.
+Rejected scalar mutation reaches the next rule; nested candidate refs stay shared.
+No name installs registration; exact original bodies remain in accepted Git.
+
+Mixed defaults .5.7 has two definition-owned providers: seven target EmitContext
+facades and ValueExpr's fixed native extractor. The built-in target selects its
+actual facade references; custom targets add no facade registration. The fixed extractor
+keeps its native provider for custom targets too. Same-name replacements remain
+opaque; retained definitions survive replacement. Each provider rejects its other
+definitions; there is no FlowExpr catalogue union. Factory contexts and actual
+returned maps remain native. List selects each map, scalar selects its actual
+result, and void selects none. Selection stays source/producer-local and lazy,
+restores after fatal exits and does not compose output. Original401/44 proof is
+frozen; extended445/53 adds fresh-void and disjoint multi-map controls. Complete
+three-owner source inverses and native ledgers remain with .5.7.
+
+Package-object repair .5.7 preserves native OwnerDispatch lookup and overload
+effects in ControlFlow, FlowExpr and MethodLowering. Test !ref($pkg) before
+comparing a built-in package name: object equality/string conversion must not
+run merely to choose private authority. Inherited native references or a forged
+equality result grant no new facade registration. Fixed ValueExpr extraction
+remains independent. Existing actual registrations survive custom-target reuse;
+no-new-grant does not mean revoking a reference already authorized in that scope.
+The published-builder oracle retains each owner's original construction context;
+MethodLowering builds scalar, while the other two forward. Original uncommitted
+546-input evidence is byte/mode preserved before repair and replayed from saved inputs.

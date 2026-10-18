@@ -1,0 +1,26 @@
+{
+  "result": "FAIL",
+  "producer_sha256": "e58197543837bacd2c3b53a07527ad498bf24cc7f5b87ff6a5d37d07901fd3ab",
+  "capsule_sha256": "09c546c06dfe4180bc7b1bb93152569eaaf4c631374bb770a1b693ff25d1399f",
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7/faults-builder-failure.py"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy9mYXVsdHMtYnVpbGRlci1mYWlsdXJlLnB5IiwgbGluZSA2NCwgaW4gPG1vZHVsZT4KICAgIHZhcmlhbnQoJ2FsbC1mYWNhZGUtY29kZS1hdXRob3JpemVkJywgRkFDQURFLAogICAgfn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCiAgICAgICAgYidpZiBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlRW1pc3Npb25zOjpfc2FtZV9yZWZlcmVuY2UoJGNhbGxiYWNrLCAkYnVpbHRpbik7JywgYidpZiAxOycpCiAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCiAgRmlsZSAiL1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy9kb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNS43L2ZhdWx0cy1idWlsZGVyLWZhaWx1cmUucHkiLCBsaW5lIDM0LCBpbiB2YXJpYW50CiAgICBhc3NlcnQgc291cmNlc1twYXRoXS5jb3VudChvbGQpID09IDEgYW5kIG9sZCAhPSBuZXcsIG5hbWUKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogYWxsLWZhY2FkZS1jb2RlLWF1dGhvcml6ZWQK"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7/faults.py"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy9mYXVsdHMucHkiLCBsaW5lIDg2LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbih2YXJpYW50cykgPT0gMTcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+    }
+  ],
+  "scope": "The retained original builder is rerun before any faults.json exists and rejects the repeated cross-catalogue predicate. The corrected producer targets the unique ControlFlow catalogue loop. These are actual retained rerun/correction channels; original tool-call channels are not reconstructed. Sources and every consumed supplied input remain recoverable."
+}

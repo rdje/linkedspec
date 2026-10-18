@@ -697,4 +697,16 @@ sub _strip_literal_delimiters {
  return $finish->($value, 'passthrough', { value => $value })
 }
 
+# ControlFlow's extractor has this fixed provider, regardless of its facade target.
+my $builtin_control_emission_callback = \&_extract_array_symbol_name;
+
+sub _register_builtin_control_emission_callback {
+ my ($callback) = @_;
+ return $callback unless ref($callback) eq 'CODE'
+  && defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer;
+ return LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($callback)
+  if LinkedSpec::ActionIR::SourceEmissions::_same_reference($callback, $builtin_control_emission_callback);
+ return $callback
+}
+
 1;

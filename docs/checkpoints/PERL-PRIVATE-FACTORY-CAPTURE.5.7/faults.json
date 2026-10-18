@@ -1,0 +1,99 @@
+{
+  "result": "PASS",
+  "producer_sha256": "37acb76198c34a67addb853cd0335ad48e722b481c6bc262ac921d538a1ee37d",
+  "positive_capsule_sha256": "b3fc3cdbf4ac81bf9d57ea7f08069df5e5e313e747aa3dd59f0202ac5a32abff",
+  "data_sha256": "db3598bc326495836f06e85eaedf14f48ea6283b957840920be7b3403257813c",
+  "variants": [
+    {
+      "name": "inverse",
+      "assertions": 445,
+      "failures": 53
+    },
+    {
+      "name": "facade-selection-bypass",
+      "assertions": 445,
+      "failures": 31
+    },
+    {
+      "name": "fixed-selection-bypass",
+      "assertions": 445,
+      "failures": 14
+    },
+    {
+      "name": "flow-catalogue-union",
+      "assertions": 445,
+      "failures": 1
+    },
+    {
+      "name": "wrong-fixed-definition",
+      "assertions": 445,
+      "failures": 17
+    },
+    {
+      "name": "dynamic-facade-lookup",
+      "assertions": 445,
+      "failures": 35
+    },
+    {
+      "name": "dynamic-fixed-lookup",
+      "assertions": 445,
+      "failures": 5
+    },
+    {
+      "name": "custom-facade-authority",
+      "assertions": 445,
+      "failures": 14
+    },
+    {
+      "name": "fixed-provider-target-confusion",
+      "assertions": 445,
+      "failures": 2
+    },
+    {
+      "name": "all-facade-code-authorized",
+      "assertions": 445,
+      "failures": 153
+    },
+    {
+      "name": "all-fixed-provider-code-authorized",
+      "assertions": 445,
+      "failures": 67
+    },
+    {
+      "name": "scalar-list-build",
+      "assertions": 445,
+      "failures": 21
+    },
+    {
+      "name": "scalar-void-build",
+      "assertions": 445,
+      "failures": 45
+    },
+    {
+      "name": "void-cached-selection",
+      "assertions": 445,
+      "failures": 4
+    },
+    {
+      "name": "copied-public-map",
+      "assertions": 445,
+      "failures": 44
+    },
+    {
+      "name": "localized-factory-error",
+      "assertions": 445,
+      "failures": 6
+    },
+    {
+      "name": "eager-private-channel",
+      "assertions": 445,
+      "failures": 1
+    },
+    {
+      "name": "twice-factory-effects",
+      "assertions": 445,
+      "failures": 55
+    }
+  ],
+  "scope": "Three complete actual owner sources, three syntax channels and full445-assertion semantic plan per supplied variant. All byte/mode inputs are preserved; live sources stay untouched. Exact three-owner inverse reproduces53 original failures by number/name. Exact provider populations, fixed/target distinction, retained actual definitions, contexts/returned maps, void no-selection, error/effects and lazy loading have distinguishing source controls. No exhaustive mutation or broader admission claim."
+}

@@ -2259,7 +2259,7 @@ loads neither SourceEmissions nor Trace through these bindings.
 
 These are compiler injection contracts, not new authored DSL methods. Branch
 plumbing, statement families, output helpers, optional kind calls, direct calls
-and exact mixed-provider default selection have separate implementation owners.
+and exact mixed-provider default selection are covered by their own sections below.
 The existing AST condition/body bridge and branch semantics remain intact.
 Complete pipeline, private Phase0, parent and canonical admissions remain open.
 
@@ -2353,8 +2353,8 @@ a nested equal-text packet to the enclosing callback. A registered matching scal
 child can keep its own packet. Validation locations, once-only effects, successful
 error effects, fatal objects and cold loading remain native. Single-statement
 lowering, later statement families, direct dispatch/rule calls and mixed-provider
-default selection remain separately owned. Full pipeline/private/parent admission
-still requires those owners and explicit output composition.
+default selection have their own bounded proofs below. Full pipeline/private/parent
+admission also requires explicit output composition.
 
 ### ControlFlow single-statement trim boundary
 
@@ -2443,8 +2443,8 @@ normalizer and splitter establish reference, alias and state contracts; they do
 not replace the public DSL examples or claim complete facade execution. Typed
 AST input still uses its structured method fields. Successful error effects,
 once-only calls, original fatal objects and cold loading remain native. Switch,
-output, direct/rule calls, mixed-provider defaults and full pipeline admission
-remain separate owners.
+output, direct/rule calls and mixed-provider defaults have separate proofs below;
+full pipeline admission remains open.
 
 ### ControlFlow switch dependency boundaries
 
@@ -2465,8 +2465,8 @@ case; `endswitch()` removes exactly the innermost switch and closes its case whe
 needed. A default branch records `default_seen` before lowering an attached action.
 If that action declines, the flag remains set. These are preserved lowering
 contracts, not newly introduced DSL behavior. Controlled dependency observations
-verify these boundaries; output helpers, direct/rule calls, default registration
-and pipeline activation remain separately owned.
+verify these boundaries; output helpers, direct/rule calls and defaults have their
+own sections below. Pipeline activation remains separately owned.
 
 ### ControlFlow output dependency boundaries
 
@@ -2494,8 +2494,8 @@ snapshot values before typed event delivery; `print_each` still snapshots its
 array and decorations once. Arity checks, quiet execution without a sink, sink
 failure identity and typed `exit_now` remain governed by the diagnostic-output
 contract. The dedicated Perl suite exercises live, independently emitted and
-primary-command routes alongside the controlled callback probe. Direct/rule
-invocation, default registration and full pipeline admission remain separate.
+primary-command routes alongside the controlled callback probe. Direct/rule calls
+and default registration have their own sections below; full pipeline admission remains open.
 
 ### ControlFlow optional kind boundary
 
@@ -2521,7 +2521,7 @@ callback. Neither route can donate a nested publication to the enclosing produce
 An actually registered CODE callback returning its published matching scalar can
 retain only its own packet. Returning `scalar` still selects ordinary scalar-value
 lowering; other or undefined kind results retain the existing array-target path.
-Default-provider registration and complete pipeline admission remain separate.
+The mixed-provider default rules are described below; complete pipeline admission remains open.
 
 ### ControlFlow selected callback boundaries
 
@@ -2538,7 +2538,8 @@ its own matching packet; list and void direct calls run with publication disable
 Other rule selections retain native symbolic, blessed or overloaded dispatch
 through an opaque thunk at the original call line. Caller maps, callback fields,
 argument aliases, errors and once-only effects retain their native behavior.
-Default-factory registration and complete pipeline admission have separate owners.
+The mixed-provider defaults below select actual definitions separately from these call boundaries.
+Complete pipeline admission remains open.
 
 Rejected rule mutation reaches the same trimmed scalar seen by the next rule.
 Candidates keep the existing shallow-copy behavior: rejected scalar counters
@@ -2565,6 +2566,75 @@ Packet checks also account for the existing ambiguity rule: a scalar frame needs
 exactly one publication to retain a packet. Two equal publications already leave
 that frame without a packet. Actual callback identities, invocation contexts and
 single-publication controls establish isolation alongside the packet checks.
+
+### ControlFlow mixed-provider defaults
+
+The default factory returns the same callback map that OwnerDispatch builds. It
+has two native providers with different target rules:
+
+| Provider | Default keys | Selection |
+| --- | --- | --- |
+| `LinkedSpec::RuleIR::EmitContext` | `trim_action_ir_value`, `split_action_ir_statements`, `normalize_method_tag_expr`, `lower_flow_composite_expr`, `parse_method_function_expr`, `normalize_method_args_with_optional_scope`, `lower_method_value_expr` | Plain built-in package name and actual retained definition |
+| `LinkedSpec::ActionIR::ValueExpr` | `extract_array_symbol_name` | Fixed provider and actual retained definition |
+
+For example, the built-in factory selects all eight native references in the
+current source/producer scope. A custom target supplies its own seven facade
+callbacks; aliases of native facade definitions add no new facade registration
+under that custom target. Its extractor still comes from the fixed ValueExpr provider, so
+that actual native reference remains selectable. The public map and every
+returned reference stay unchanged.
+
+```perl
+my $native = LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(
+ 'LinkedSpec::RuleIR::EmitContext',
+);
+my $custom = LinkedSpec::ActionIR::ControlFlow::default_deps_for_package(
+ 'MyEmitter',
+);
+# Both maps keep the native fixed ValueExpr extractor.
+# Each target supplies the other seven callback references.
+```
+
+An actual native reference already registered earlier in the same source/producer
+scope keeps its authority when a custom target returns it. A custom target does
+not revoke existing registration; it does not create new facade registration.
+Fresh-scope selection and retained authority are separate observations.
+
+Package objects keep their native callback lookup, return values, errors and
+overload effects. Private selection checks the reference type before comparing a
+built-in package name. It adds no equality call or string conversion to an object,
+even if the object inherits native callbacks or reports the built-in name. The
+fixed ValueExpr provider remains independent. MethodLowering retains its existing
+scalar construction under every owner context; FlowExpr and ControlFlow retain
+native scalar/list/void forwarding.
+
+| Factory | Added equality calls | Added string calls | Object facade selections |
+| --- | --- | --- | --- |
+| ControlFlow | 0 | 0 | 0 |
+| FlowExpr | 0 | 0 | 0 |
+| MethodLowering | 0 | 0 | 0 |
+
+The table compares actual factories with the published native builder using each
+owner's actual dependency specification and construction context. Separate
+equality and string-fallback probes distinguish added calls; fresh source/producer
+scopes distinguish a fixed-provider grant from forged facade authority.
+
+Each provider retains only its own exact definitions. Replacing a public symbol
+under the same name does not authorize the replacement; retaining the original
+reference remains sufficient for that provider's selector. Other FlowExpr,
+method and contract definitions do not join this population.
+
+The factory keeps scalar, list and void context when building dependencies.
+Scalar context selects its actual returned map; list context selects each actual
+returned map. A void invocation performs the native build and selects no map.
+A disjoint two-map control distinguishes selecting both list results from only
+the last result. Callback fields are never wrapped or rebound.
+
+Selection loads neither the private emission channel nor Trace. It grants no
+authority outside the current source/producer scope, cannot leak into nested
+scopes, restores the enclosing registry after fatal exits, and releases completed
+registries. Registration alone does not emit or compose a packet. Fixture
+registration, pipeline activation and full private acceptance remain separate.
 
 ### Original method argument boundaries
 

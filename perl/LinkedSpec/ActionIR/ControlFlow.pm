@@ -56,7 +56,7 @@ sub _trace_control_exit {
 #------------------------------------------------------------------------------
 sub default_deps_for_package {
  my ($pkg) = @_;
- return LinkedSpec::OwnerDispatch::build_dep_map(
+ return _with_default_emission_selection($pkg, sub { return LinkedSpec::OwnerDispatch::build_dep_map(
   __PACKAGE__,
   $pkg,
   [
@@ -69,7 +69,7 @@ sub default_deps_for_package {
    'lower_method_value_expr',
    { dep => 'extract_array_symbol_name', pkg => 'LinkedSpec::ActionIR::ValueExpr' },
   ],
- )
+ ) });
 }
 
 #------------------------------------------------------------------------------
@@ -1808,6 +1808,35 @@ sub _bind_emission_dependency {
 sub _bind_optional_emission_dependency {
  my ($selected, $native_call) = @_;
  return _bind_emission_dependency(ref($selected) eq 'CODE' ? $selected : $native_call);
+}
+
+# Select only callbacks returned by the native factory, preserving its context.
+sub _with_default_emission_selection {
+ my ($pkg, $build) = @_;
+ if (!defined wantarray) { $build->(); return }
+ if (wantarray) {
+  my @deps = $build->();
+  _select_default_emission_callbacks($pkg, $_) for @deps;
+  return @deps
+ }
+ my $deps = $build->();
+ return _select_default_emission_callbacks($pkg, $deps)
+}
+
+sub _select_default_emission_callbacks {
+ my ($pkg, $deps) = @_;
+ return $deps unless ref($deps) eq 'HASH';
+ if (defined($pkg) && !ref($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+  && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_control_emission_callback) {
+  LinkedSpec::RuleIR::EmitContext::_register_builtin_control_emission_callback($_)
+   for values %$deps;
+ }
+ # This provider is fixed by the dependency specification, including custom targets.
+ if (defined &LinkedSpec::ActionIR::ValueExpr::_register_builtin_control_emission_callback) {
+  LinkedSpec::ActionIR::ValueExpr::_register_builtin_control_emission_callback($_)
+   for values %$deps;
+ }
+ return $deps
 }
 
 1;

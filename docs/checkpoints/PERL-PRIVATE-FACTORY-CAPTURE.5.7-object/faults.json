@@ -1,0 +1,59 @@
+{
+  "result": "PASS",
+  "producer_sha256": "6622c89a60e83f60c9ffb796d5b4345932b8fbf146b02c64b967d7dc3db1e3d2",
+  "positive_capsule_sha256": "0cc08c1e84ddd895fad0636e24620f0196daed9c59e126bd725e6f10bd06df12",
+  "data_sha256": "70e10e660e30a8d2768176eadf61386a7e66bd8d05146c83cbfcdf0e61420f25",
+  "variants": [
+    {
+      "name": "inverse",
+      "assertions": 444,
+      "failures": 100
+    },
+    {
+      "name": "inverse-ControlFlow",
+      "assertions": 444,
+      "failures": 30
+    },
+    {
+      "name": "inverse-FlowExpr",
+      "assertions": 444,
+      "failures": 28
+    },
+    {
+      "name": "inverse-MethodLowering",
+      "assertions": 444,
+      "failures": 42
+    },
+    {
+      "name": "late-reference-guard",
+      "assertions": 444,
+      "failures": 86
+    },
+    {
+      "name": "inheritance-grants-target-authority",
+      "assertions": 444,
+      "failures": 42
+    },
+    {
+      "name": "fixed-provider-object-omission",
+      "assertions": 444,
+      "failures": 12
+    },
+    {
+      "name": "coerced-target-ControlFlow",
+      "assertions": 444,
+      "failures": 26
+    },
+    {
+      "name": "coerced-target-FlowExpr",
+      "assertions": 444,
+      "failures": 26
+    },
+    {
+      "name": "coerced-target-MethodLowering",
+      "assertions": 444,
+      "failures": 39
+    }
+  ],
+  "scope": "Ten complete three-selector source variants and full444 plans. Exact inverse restores every100 original failure name/number and the actual pre-repair sources. Individual owner inverses, late guards, coercion, inheritance-based grants and fixed-provider omission have distinguishing semantic witnesses. Complete sources, syntax/raw TAP channels and unchanged supplied byte/mode populations are retained. No live mutation, historical-revision fiction or exhaustive mutation claim."
+}

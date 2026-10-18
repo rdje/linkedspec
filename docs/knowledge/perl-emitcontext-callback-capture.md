@@ -7,11 +7,12 @@ answers:
   - "does EmitContext private callback selection load SourceEmissions or Trace"
   - "does EmitContext copy scalar arguments or forward caller aliases"
   - "can a resolved EmitContext owner or default factory donate nested publication"
-date: 2026-10-12
-status: EmitContext/Contracts and exact FlowExpr default selection verified; pipeline open
+  - "does a custom ControlFlow target change its fixed ValueExpr provider"
+date: 2026-10-18
+status: EmitContext/Contracts and exact FlowExpr/ControlFlow default selection verified; pipeline open
 tags: [perl, actionir, emitcontext, callbacks, identity, dependencies]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.2.0 retains345 main/five cold assertions,30 exact native/current observation ledgers,28 actual definition-owned callback selections,six opaque owner/factory publication modes,13 effective semantic source faults and19 direct suites in138 supplied files. Original233 framework bindings remain exact historically. The first duplicate-Trace preflight failure is retained separately from runtime observations."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/publish.py. Prior inputs:2b35b77ea."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py. Prior inputs:ce9eaf32e."
 ---
 
 EmitContext retains actual native facade CODE references in a private lexical
@@ -50,3 +51,16 @@ selection criteria. The actual returned map, built-in target and actual referenc
 are all required. Its own default-factory/native-context rules live in
 `docs/knowledge/perl-factory-capture-framework.md`. Historical integration records
 retain their accepted Git boundaries; current work belongs to MEMORY.md.
+
+ControlFlow .5.7 retains seven facade definitions independently; its eighth default
+is ValueExpr's definition-owned extractor. Custom targets add no facade registration but keep that fixed native provider. Each selector rejects other owner
+definitions and same-name replacements. Public maps/references stay exact; fresh
+void calls select none and list calls select both actual maps. Scope restoration
+and ordinary behavior stay native. The new private selector adds one exact foreign
+definition assertion to the dynamic FlowExpr fixture without enlarging its selected set.
+
+Only plain built-in package-name strings select facade defaults. Package objects
+keep native can/overload behavior without a new equality/string coercion. Native
+references already selected in the same source/producer scope retain authority;
+a custom target does not revoke them. Fresh-scope and carryover observations are
+distinct. The package-object repair has its own retained native/source controls.

@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "producer_sha256": "4e31debb69f7c5836c884ec681409e0950b4aa492642bcc90c9ec48cd9322ac7",
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/prepare-knowledge-over-budget.py"
+      ],
+      "producer_sha256": "3cfdc8f599cd3d65ad3d39987b728d7464fc743085a30958e394c7957bed6b70",
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy1maW5hbC9wcmVwYXJlLWtub3dsZWRnZS1vdmVyLWJ1ZGdldC5weSIsIGxpbmUgMTA4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbihlZGl0cykgPT0gMTMgYW5kIHNpemUgPD0gODM4ODYwOCwgKHNpemUsICdubyB3cml0ZXMgYmVmb3JlIGZ1bGwgcHJlZmxpZ2h0JykKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6ICg4Mzg4Nzg5LCAnbm8gd3JpdGVzIGJlZm9yZSBmdWxsIHByZWZsaWdodCcpCg=="
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/prepare-knowledge.py"
+      ],
+      "producer_sha256": "355dce7bfbe330220b7f8240430e23ec9d3bbf04867acb7317ae6f9159996e93",
+      "returncode": 0,
+      "stdout_base64": "S25vd2xlZGdlIHByZXBhcmF0aW9uIFBBU1M6IDgzODgyNDMgYnl0ZXM7MTMgb3ZlcmxheXM7IGZpeGVkOE1pQiBsaW1pdAo=",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Actual before-write budget rejection is retained under its unchanged source identity. Complete initial card bytes are recoverable from the546-input archive. A separate corrected producer further condenses prior framework chronology with original bodies retained; no budget or membership changes. The failed draft is not passing evidence."
+}

@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish-over-budget.py",
+    "--capture"
+  ],
+  "returncode": 1,
+  "producer_sha256": "5c55bfd1be76933eeb3de348d10a6a1f796e1e6d140ebf5862609b5df80a4acd",
+  "failed_source_sha256": "b0b66403af5d447922a8f6b494dc1bd0e143632a95fdc95da0015a6b5c6c4d93",
+  "unchanged_claim_sha256": "b239e379588b777a39abcaaa85e93d741eca3171a29a216603a19eb3d14b714d",
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy1maW5hbC9wdWJsaXNoLW92ZXItYnVkZ2V0LnB5IiwgbGluZSAxMTEsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgbGVuKHZhbHVlKTw9MTMxMDcyLChsZW4odmFsdWUpLGxlbihiaW5kaW5ncykpCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiAoMTMxMjY0LCA1NjApCg==",
+  "scope": "Actual rerun of the original failed publisher with unchanged claim and all560 inputs. The original size refusal precedes any canonical claim write. Final wording is condensed separately under the unchanged131072-byte limit."
+}

@@ -7,11 +7,12 @@ answers:
   - "how does the progressive contract checker recover actual-root input bytes"
   - "which observed permission differences caused the component capture RED"
   - "why can Git archive permissions differ from checkout permissions"
-date: 2026-10-06
+  - "why do raw Perl INC module names fail repository input membership"
+date: 2026-10-18
 status: historical mode correction hash-bound; current recognition input modes independently guarded
 tags: [claims, inputs, git, permissions, component-gate, provenance]
 evidence: "The .1.5.2 component instrument stops before running the checker when it compares complete stat permissions to Git mode. The complete observed census has36 readable differences, beginning noncore/AmbiTiming.pm0640 versus recorded100644, with zero executable-bit drift. Preserve both fields and guard actual permissions unchanged; no chmod is performed. Healthy component capture checks4638 actual-root inputs/five retained byte deltas. Independent exact three-edit repair/census/original RED and four effective evidence controls pass."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/publish.py. Prior inputs:2b35b77ea."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py. Prior inputs:ce9eaf32e."
 ---
 
 The published progressive checker requires tracked-file metadata and runs in the
@@ -46,3 +47,11 @@ The claim gate does not re-execute historical producers. Do not run the old
 current-source component comparison against later changed production bytes.
 
 The REPO-HYGIENE.18 dated archive-mode census retains all1486 Knowledge rows: tar permissions0664, recorded Git100644 and actual filesystem0644. These are separate representations. Guard actual permissions against their own captured field; do not equate full archive/Git permissions with the checkout. The first reader/failure and complete census remain in docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz and publication-failure.json. No chmod occurred.
+
+The .5.7 native writer reports raw %INC keys such as LinkedSpec/OwnerDispatch.pm,
+while supplied manifests name perl/LinkedSpec/OwnerDispatch.pm. Its post-capture
+membership check fails across those namespaces despite complete supplied sources
+and successful commands. Preserve that writer/data; normalize the repository
+prefix before comparison. Exact original predicate RED, normalized PASS and an
+unsupplied-module RED remain in .5.7/native-review.py. Original observations and
+failed review/builder sources retain their own identities and are not refreshed.

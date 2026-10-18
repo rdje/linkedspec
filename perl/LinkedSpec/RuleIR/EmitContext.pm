@@ -2762,4 +2762,26 @@ sub build_rule_ir_emit_context {
  return $emit_context
 }
 
+# ControlFlow selects its seven facade definitions independently of other owners.
+my @builtin_control_emission_callbacks = (
+ \&_trim_action_ir_value,
+ \&_split_action_ir_statements,
+ \&_normalize_method_tag_expr,
+ \&_lower_flow_composite_expr,
+ \&_parse_method_function_expr,
+ \&_normalize_method_args_with_optional_scope,
+ \&_lower_method_value_expr,
+);
+
+sub _register_builtin_control_emission_callback {
+ my ($callback) = @_;
+ return $callback unless ref($callback) eq 'CODE'
+  && defined &LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer;
+ for my $builtin (@builtin_control_emission_callbacks) {
+  return LinkedSpec::ActionIR::SourceEmissions::_register_emission_producer($callback)
+   if LinkedSpec::ActionIR::SourceEmissions::_same_reference($callback, $builtin);
+ }
+ return $callback
+}
+
 1;

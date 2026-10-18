@@ -1,0 +1,60 @@
+{
+  "base": "ce9eaf32e19002c5fe11e22e5de3c3094270843d",
+  "producer_sha256": "ac29dac6178f0d52447684e1d172e33813db629917f9f268abb14e25faeb2d67",
+  "knowledge_bytes": 8388133,
+  "cards": {
+    "docs/knowledge/finite-engineering-notes-member-0131.md": {
+      "original_sha256": "64488e13a4733a57c9bda21b027a9beedb12543ade48b7ec11d1beb9424d9020",
+      "current_sha256": "252aed4962a503c0cf249b9d2fddae883e39f206c9ec00a51b8c929c3806a418"
+    },
+    "docs/knowledge/perl-emitcontext-callback-capture.md": {
+      "original_sha256": "21b404c82f94cd53f7ac5347fc17627ae4a92c120e73b0c1f968c26024a155dd",
+      "current_sha256": "326871bdd46135d5c5692c21bfbd9a8d896eb74fbcf7688f786bde57b6120ec6"
+    },
+    "docs/knowledge/perl-factory-capture-framework.md": {
+      "original_sha256": "3a093214a5cff812cf639b69eead137fed7d29c084bb31b5a18c8f8c87028582",
+      "current_sha256": "0edd2a833b2a62aac03bc7667a771725216a0cce4181e26b3e2b2db044997a3b"
+    },
+    "docs/knowledge/perl-legacy-hash-kind-callback.md": {
+      "original_sha256": "e8990aa1dbc4a7a1c3b4cb22120b2651fa44b397bb343773ab96c063a67e7cc9",
+      "current_sha256": "ee74432a09636bcca396660551c0a56aeb16e22a0835a5dacf8ad9d0414ab22c"
+    },
+    "docs/knowledge/perl-match-alias-writability.md": {
+      "original_sha256": "603cab6330c5d2a07f30dc1bf8027e0d40c752efc8e4c29749493369431b3c92",
+      "current_sha256": "9885b20b5aca27baf78f4ba9ef05a1e125b0b6c6d538fb496e1523a3b635e078"
+    },
+    "docs/knowledge/perl-method-assignment-required-capture.md": {
+      "original_sha256": "f13c01009f6d625fb4c5c2e8b4a12b0d21f3794d2e794a6a2dc6ed1f2babd87d",
+      "current_sha256": "3f79d8bbb9fc6b5c43c53dbd36ca2253ff6e11cf74c172dafc8fdbd6114715f0"
+    },
+    "docs/knowledge/perl-method-ast-call-capture.md": {
+      "original_sha256": "c59cc67e23bb38c55d2c177c7e864e39117e3235089ff0874a5e89508a581510",
+      "current_sha256": "c372f404792caf9cc071499935fdf6faf3b9fc7841cbd6d80f6143a68f98ea02"
+    },
+    "docs/knowledge/perl-method-block-component-capture.md": {
+      "original_sha256": "f94e2feff4859c9b6b5318eda10665c7cace5fc538755da4c89f19f492bf4b85",
+      "current_sha256": "b4035e34904bd4dfb8c80c2628dfddc24382f91c3a39b038ef1c2c47a3c2a270"
+    },
+    "docs/knowledge/perl-method-default-capture.md": {
+      "original_sha256": "5c6930326c8c5661c4e725ee9fe0e3991dcac4875497d1b041cbeded6d8ebab3",
+      "current_sha256": "2fe4b10ddfc173c4f1e4f3cf89c234d182a76c625f7a40502163739b38f5d5dc"
+    },
+    "docs/knowledge/perl-method-trim-capture.md": {
+      "original_sha256": "0bfc99886aee1bf0fa329e99667ca07990d2ef965ec3dc95c7425e2da111d107",
+      "current_sha256": "6e2b6c653340d2e78007f5618693b57fbd98e50dc90cb749a189bceb1f2980e3"
+    },
+    "docs/knowledge/perl-private-emission-foundation.md": {
+      "original_sha256": "c65fe2f277fd83d8311949cc12cf5d54f95922329266cf1382dc7aeaf0e7da30",
+      "current_sha256": "4dc3eaf28156f1ba4595642caf6160314dfa0ecc671b57b80a10ee465e779c3d"
+    },
+    "docs/knowledge/project-root-evidence-filesystem-modes.md": {
+      "original_sha256": "822f97874a2379dde4d05f1a5a88804e18df27fb3e3260c2954ec7c85e60b46d",
+      "current_sha256": "c02868d4de7f5c9da21afe37051a67f1a2f138208bbd676cc5b44f1e56631315"
+    },
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md": {
+      "original_sha256": "bb64d5e93277b7af7c09d85a16efb51ffae720dc84140e63caf4c80ddc9a3a5d",
+      "current_sha256": "b9daf7051dcc7ad650b0bee1493b2b648f300d7885f5f9d938cb06db5bd5de76"
+    }
+  },
+  "scope": "Fixed13-card overlays, no new card or budget increase. Three bodies change; ten route-only bodies stay exact. Statistical chronology is condensed with complete original bodies retained in accepted Git and the whole prior publication. Every new causal fact has its actual runtime/source/predicate controls in this leaf. The earlier oversized draft failed preflight before any card write; it is not passing evidence."
+}

@@ -7,11 +7,11 @@ answers:
   - "does same name replacement inherit MethodLowering emission authority"
   - "does MethodLowering default construction preserve the actual OwnerDispatch map"
   - "does cold MethodLowering default construction load SourceEmissions"
-date: 2026-10-10
+date: 2026-10-18
 status: historical bounded default selection verified; current frontier belongs to MEMORY.md
 tags: [perl, actionir, methods, callbacks, identity, default-factory]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.0 retains426 main/six cold assertions,24 effective source faults and25 direct suites in144 supplied files. Two native/current19-callback map ledgers match. Every actual reference/same-name replacement/native alias and opaque equal-text publication control passes. Four actual reviewer corruptions and one original-binding corruption reject/restored PASS; complete57-source book/two controls pass. Original244 bindings remain historical. Initial30 all-GREEN captures/producer retained before prose-only scope correction and unchanged-input recapture."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/publish.py. Prior inputs:2b35b77ea."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py. Prior inputs:ce9eaf32e."
 ---
 
 MethodLowering::default_deps_for_package keeps the actual OwnerDispatch map and
@@ -54,3 +54,11 @@ that a successful helper has published or composed a packet.
 
 Current block-component rules/evidence live in docs/knowledge/perl-method-block-component-capture.md.
 All282 original default-selection bindings are historical at89a4ede6f.
+
+The .5.7 object-target repair checks plain package-name strings before comparing
+the built-in target. Accepted package objects retain native lookup, returns,
+errors and overload effects; inherited definitions or forged equality add no
+facade grant. MethodLowering retains its existing scalar build under scalar,
+list and void owners. Already-authorized actual references keep their scoped
+identity. All original observations remain historical; current object proof is
+separately captured and source-falsified.

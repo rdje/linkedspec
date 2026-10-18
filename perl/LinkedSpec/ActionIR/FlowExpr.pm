@@ -562,7 +562,7 @@ sub _with_default_emission_selection {
 
 sub _select_default_emission_callbacks {
  my ($pkg, $deps) = @_;
- if (defined($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
+ if (defined($pkg) && !ref($pkg) && $pkg eq 'LinkedSpec::RuleIR::EmitContext'
   && ref($deps) eq 'HASH'
   && defined &LinkedSpec::RuleIR::EmitContext::_register_builtin_flow_emission_callback) {
   LinkedSpec::RuleIR::EmitContext::_register_builtin_flow_emission_callback($_)

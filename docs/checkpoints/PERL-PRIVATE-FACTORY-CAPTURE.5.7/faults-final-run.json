@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "producer_sha256": "eae602fc8a73957503ca2a8bf5423689a7d1fd9e87e5eba3d7eb7aa7c73bf69f",
+  "capsule_sha256": "ea59b6041c874402315c5173decad717b8fe78a931c4cc90e62f0775c6c746c4",
+  "rows": [
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7/faults.py"
+      ],
+      "returncode": 1,
+      "stdout_base64": "",
+      "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy9mYXVsdHMucHkiLCBsaW5lIDg2LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbih2YXJpYW50cykgPT0gMTcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg=="
+    },
+    {
+      "command": [
+        "python3",
+        "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7/faults-final.py"
+      ],
+      "returncode": 0,
+      "stdout_base64": "TWl4ZWQtZGVmYXVsdCBzb3VyY2UgZmF1bHRzIFBBU1M6IDE4IGVmZmVjdGl2ZSB2YXJpYW50czsgWzUzLCAzMSwgMTQsIDEsIDE3LCAzNSwgNSwgMTQsIDIsIDE1MywgNjcsIDIxLCA0NSwgNCwgNDQsIDYsIDEsIDU1XQo=",
+      "stderr_base64": ""
+    }
+  ],
+  "scope": "Both prior failed sources/reports remain exact. This records an actual rerun of the retained count-preflight failure before faults.json exists, then the separately identified one-constant correction. All actual channels and supplied inputs are retained; no failed report is changed to PASS."
+}
