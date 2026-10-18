@@ -2523,6 +2523,49 @@ retain only its own packet. Returning `scalar` still selects ordinary scalar-val
 lowering; other or undefined kind results retain the existing array-target path.
 Default-provider registration and complete pipeline admission remain separate.
 
+### ControlFlow selected callback boundaries
+
+ControlFlow also isolates its selected direct lowerer and each rewrite rule's
+`apply` callback while keeping their native selection and call behavior:
+
+| Site | Invocation context | Selection |
+| --- | --- | --- |
+| Direct control lowerer | The enclosing scalar, list or void context | The actual CODE reference selected from the local dispatch table |
+| Rewrite rule `apply` | Scalar under every enclosing context | One field fetch after constructing that rule's candidate context |
+
+Scalar calls use their actual callback identity. A registered callback can retain
+its own matching packet; list and void direct calls run with publication disabled.
+Other rule selections retain native symbolic, blessed or overloaded dispatch
+through an opaque thunk at the original call line. Caller maps, callback fields,
+argument aliases, errors and once-only effects retain their native behavior.
+Default-factory registration and complete pipeline admission have separate owners.
+
+Rejected rule mutation reaches the same trimmed scalar seen by the next rule.
+Candidates keep the existing shallow-copy behavior: rejected scalar counters
+stay private, while nested references remain shared. Accepted nonempty changed
+results, including `0`, commit their candidate.
+
+A controlled tied-field probe makes the selection order visible. It starts with
+a root counter of 3, adds 100 when `apply` is fetched, and adds 10 to the candidate
+inside the callback:
+
+| Step | Root counter | Candidate counter |
+| --- | --- | --- |
+| Initial | 3 | — |
+| Candidate cloned | 3 | 3 |
+| Apply fetched | 103 | 3 |
+| Callback completes | 103 | 13 |
+| Candidate accepted | 13 | 13 |
+
+Fetching before cloning changes the observed candidate and committed values; the
+focused source control rejects that order. Publication isolation preserves these
+existing mutations and acceptance rules.
+
+Packet checks also account for the existing ambiguity rule: a scalar frame needs
+exactly one publication to retain a packet. Two equal publications already leave
+that frame without a packet. Actual callback identities, invocation contexts and
+single-publication controls establish isolation alongside the packet checks.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

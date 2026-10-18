@@ -956,7 +956,7 @@ sub _lower_flow_branch_direct_control_flow_statement {
 
  my $lower = $dispatch{$method};
  return undef unless ref($lower) eq 'CODE';
- return $lower->($expr, $ctx, $deps)
+ return _bind_emission_dependency($lower)->($expr, $ctx, $deps)
 }
 
 sub _lower_flow_branch_single_statement {
@@ -1015,7 +1015,7 @@ sub _lower_flow_branch_single_statement {
 
  foreach my $rule (@$rules) {
   my $candidate_ctx = _clone_flow_branch_rewrite_ctx($branch_ctx);
-  my $lowered = $rule->{apply}->($trimmed, $candidate_ctx);
+  my $apply_callback = $rule->{apply}; my $lowered = _bind_optional_emission_dependency($apply_callback, sub { $apply_callback->(@_) })->($trimmed, $candidate_ctx);
   next unless defined($lowered) && length($lowered);
   next if $lowered eq $trimmed;
   %$branch_ctx = %$candidate_ctx;

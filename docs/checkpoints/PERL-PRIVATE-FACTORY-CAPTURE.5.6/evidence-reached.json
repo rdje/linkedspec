@@ -1,0 +1,166 @@
+{
+  "baseline": {
+    "command": [
+      "python3",
+      "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+    ],
+    "returncode": 0,
+    "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+    "stderr_base64": ""
+  },
+  "controls": [
+    {
+      "name": "native-argument-change",
+      "expected_reason": "complete native ordinary ledger",
+      "changed": {
+        "after-native.json": "fd6fc6c79d5529d3a3a1dda8480a6925f46763d4246c2041aafef7dc1095e1df",
+        "after-native-data.json.gz": "9c2bad38b13e876a2b45b1ef10dca696ad9d5f5ecd7bf781281d59defe8e08bb"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDEzOSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBbclsnbmF0aXZlJ10gZm9yIHIgaW4gb3JpZ2luYWxbaV1bJ29ic2VydmF0aW9uJ11bJ3Jvd3MnXV0gPT0gW3JbJ25hdGl2ZSddIGZvciByIGluIGN1cnJlbnRbaV1bJ29ic2VydmF0aW9uJ11bJ3Jvd3MnXV0sICdjb21wbGV0ZSBuYXRpdmUgb3JkaW5hcnkgbGVkZ2VyJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogY29tcGxldGUgbmF0aXZlIG9yZGluYXJ5IGxlZGdlcgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "parent-donation",
+      "expected_reason": "no parent donation",
+      "changed": {
+        "after-native.json": "2a7c88328781891080db504e0c1f72d55b6ff266884c89496e37671a1cddf035",
+        "after-native-data.json.gz": "94dbd1410c773c8e8a702bf6ff3e277ae01391b97fcef711112891263a9b1367"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDE1NCwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByb3dbJ2F1dGhvcml0eSddWydwYXJlbnRfcGFja2V0J10gPT0gMCwgJ25vIHBhcmVudCBkb25hdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogbm8gcGFyZW50IGRvbmF0aW9uCg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "matching-packet-loss",
+      "expected_reason": "matching own packet",
+      "changed": {
+        "after-native.json": "94aff885cd5c2317eb76970bbd78d62930740e9bd17b1d34cabacd280bf3de55",
+        "after-native-data.json.gz": "247428f63d056902787194cf75ddc45afb8c0e0954796a3279270f4c528a6b28"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDE1NiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByb3dbJ2F1dGhvcml0eSddWydjaGlsZF9wYWNrZXRzJ10gPT0gaW50KGJvb2wobWF0Y2hpbmcpKSwgJ21hdGNoaW5nIG93biBwYWNrZXQnCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IG1hdGNoaW5nIG93biBwYWNrZXQK"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "whole-prior-claim",
+      "expected_reason": "whole prior publication custody",
+      "changed": {
+        "before-PERL-PRIVATE-FACTORY-CAPTURE.5.5.json": "ef468daee6723b91d9e86f98c29fb80369f8ab4424e3c79ab95724220d6b3678"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDk0LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHJhdyhQUkVGSVggKyAnYmVmb3JlLVBFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNS41Lmpzb24nKSA9PSBwYXlsb2FkLCAnd2hvbGUgcHJpb3IgcHVibGljYXRpb24gY3VzdG9keScKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogd2hvbGUgcHJpb3IgcHVibGljYXRpb24gY3VzdG9keQo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "missing-consumer",
+      "expected_reason": "complete supplied suite selection",
+      "changed": {
+        "consumers.json": "e34cf12b440d7daf5196c31a33fcf4026ada33051b47cd96a348aa6859d666f4"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDIxNiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBjb25zdW1lcnNbJ2NvbW1hbmQnXSA9PSBzZWVkWydjb21tYW5kJ10gKyBbRklYVFVSRV0sICdjb21wbGV0ZSBzdXBwbGllZCBzdWl0ZSBzZWxlY3Rpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBjb21wbGV0ZSBzdXBwbGllZCBzdWl0ZSBzZWxlY3Rpb24K"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "rendered-candidate-value",
+      "expected_reason": "native-derived candidate table",
+      "changed": {
+        "book.json": "5f73d4058afb2225ddc337af337821bc24785a0fd9d1b9096d1916d7a03b175a"
+      },
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9yZXZpZXcucHkiLCBsaW5lIDI3NywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByZXN1bHQucmV0dXJuY29kZSA9PSAwIGFuZCBub3QgcmVzdWx0LnN0ZGVyciwgKCdyZWFkb25seSBjb21wb25lbnQnLCBuYW1lLCByZXN1bHQuc3RkZXJyKQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiAoJ3JlYWRvbmx5IGNvbXBvbmVudCcsICdib29rLXJldmlldy5weScsIGInVHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOlxuICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS41LjYvYm9vay1yZXZpZXcucHkiLCBsaW5lIDE0OCwgaW4gPG1vZHVsZT5cbiAgICBhc3NlcnQgdGFibGVzLnJvd3Nbb2Zmc2V0ICsgMTpvZmZzZXQgKyA2XSA9PSBleHBlY3RlZF90YWJsZSwgXCduYXRpdmUtZGVyaXZlZCBjYW5kaWRhdGUgdGFibGVcJ1xuICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXG5Bc3NlcnRpb25FcnJvcjogbmF0aXZlLWRlcml2ZWQgY2FuZGlkYXRlIHRhYmxlXG4nKQo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RGlyZWN0L3J1bGUgcmV2aWV3IFBBU1M6IDUxOSBpbnB1dHM7MTI5MCBhc3NlcnRpb25zOzQzNSBvcmlnaW5hbCBSRURzOzE0IHNvdXJjZSBmYXVsdHM7ODkgc3VwcGxpZWQgc3VpdGVzCg==",
+        "stderr_base64": ""
+      }
+    }
+  ]
+}
