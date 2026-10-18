@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / switch .5.3 next
+- Status: `active` / output .5.4 next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-18`
@@ -1477,15 +1477,28 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.5.2 - isolate if/while required callbacks`.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Switch family required callbacks.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.2`
   Owned paths: Required validators in _lower_switch_flow_statement, _lower_case_flow_statement, _lower_default_flow_statement, _lower_endcase_flow_statement, _lower_endswitch_flow_statement and _lower_inline_switch_branch_expr. Focused fixture/proof/claim, relevant Knowledge/book and continuity.
-  Planned tier: `focused`
-  Planned focused proof: Native-first actual references, contexts, aliases, selected maps and ordinary effects/errors; distinguishing authority RED/GREEN, complete-source faults, supplied direct consumers and book/Knowledge/public/artifact controls.
-  Planned canonical boundary: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
-  Planned claim record: none: No new measurement until child activation.
+  Verification tier: `focused`
+  Focused checks: Native-first actual references, contexts, aliases, selected maps and ordinary effects/errors; distinguishing authority RED/GREEN, complete-source faults, supplied direct consumers and book/Knowledge/public/artifact controls; standard syntax/public Phase0, both history-pressure checks and normal doctrine hooks.
+  Canonical trigger: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json`
+  Activation: Clean09000223f; director reaffirmed compiler integration toward .spec self-containment. Six switch normalizer validators only; preserve full prior publication before bound writes. No public switch defect or aggregate admission claimed.
+  Proof limitation: First full-source fault loop retains all sixteen actual variants/channels, then rejects its final expected-effectiveness assertion: copied-normalizer-array-return has no observed witness in this switch fixture. Other fifteen variants reject. Native callbacks record their own returned arrays, but subsequent switch value lowering does not expose the outer returned-array container identity. Preserve the original producer/reached data; distinct readonly adjudication reports this limitation instead of claiming sixteen effective faults. Existing helper forwards references and is unchanged; six exact validator edits remain the implementation contract.
+  Reader correction: Original readonly review.py stops at an obsolete complete_paths name from the preceding owner before reporting acceptance. Keep its source unchanged; review-final.py uses the actual first_paths inventory. Native/paired/fault/consumer observations are not rerun or changed.
+  Implementation: Exactly six original validator returns use the existing _bind_emission_dependency helper. The helper, defaults, algorithms, line count, public maps and generated switch text remain unchanged. Required normalizers stay scalar and their own callback identity controls eligibility; opaque nested publication cannot enter the parent packet.
+  Verified focused behavior: Original100-input and current105-input native captures each retain333 warm/297 cold rows and byte-exact fresh-process recurrences; every630 ordinary row remains exact. All504 required-normalizer calls are scalar. The same1641 assertions retain273 original authority REDs/1368 controls and all current GREEN. Original/current complete fixture bytes/modes match. Fifteen complete-source faults reject with273,48,57,42,33,36,66,237,446,570,843,2,12,594,24 failures; the sixteenth copied-array variant has no witness. Whole-source inverse restores every original RED name/number. All85 supplied suites/317 inputs/26600 assertions pass, preserving predecessor84 headers/plans/stderr.
+  State contract: Inline branch detection shallow-copies the outer switch arguments and bypasses only its normalizer; both branches still normalize. Marker switch allocates counter4 from3 and pushes one state. A rejected attached default action leaves default_seen set. Endcase clears open_case; endswitch pops exactly one state and emits both closing braces when appropriate.
+  Custody/docs: Whole original463-input/109061-byte publication and actual readonly baseline remain historical at09000223f before bound writes. Full1486 Knowledge Markdown/1349 facts/twelve overlays/8388218 card bytes and book89/four actual source/render controls pass. Eleven card bodies remain exact; framework records current switch facts. No budget, gate, public contract or dependency changes. All five standard syntax/public Phase01035 commands and readonly480-input/111654-byte publication pass. Normal focused hooks and explicit memory/post-pointer/clean-state checks govern landing.
   Acceptance: Preserve public maps/callback references and ordinary behavior. Actual identity carries only its own scope authority. Commit before the next child; no aggregate admission inferred.
+
+  Book correction: Review caught the workflow chapter still describing if/while and the earlier155 publication after its command moved to switch. The complete first465-input proof snapshot is frozen before correcting that paragraph. Separate book-current producers/captures verify current switch/predecessor teaching; original book/control observations replay from their own supplied bytes. Runtime and native observations do not change.
+
+  Result: All six selected normalizers have their own actual frames and native switch behavior remains exact. Readonly publisher composes the unchanged original465-input proof and both complete book epochs, with complete original failed-reader/fault-loop tool outputs retained. Output .5.4 is next after the clean commit.
+  Publication: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/publish.py (readonly default); every capture writer is retired.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.5.3 - isolate switch required callbacks`.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.4`
   Status: `pending`
@@ -1622,18 +1635,17 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.3` | `pending` | Switch family required callbacks. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5.4` | `pending` | Output family required callbacks. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5.5` | `pending` | Optional print_each kind invocation. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5.6` | `pending` | Direct selected lowerer and rule apply invocations. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.5.7` | `pending` | Exact mixed-provider default references. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline follows registered fixtures. |
-| 8 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection before TYPE-REFERENCE-BOOK. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.4` | `pending` | Output family required callbacks. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5.5` | `pending` | Optional print_each kind invocation. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5.6` | `pending` | Direct selected lowerer and rule apply invocations. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5.7` | `pending` | Exact mixed-provider default references. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline follows registered fixtures. |
+| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection before TYPE-REFERENCE-BOOK. |
 
 ## Handoff
 
-If/while .5.2 binds seven required parser/normalizer roles through six original validator returns. All670 native rows and exact recurrences stay unchanged; identical1750 assertions retain294 original REDs/1456 controls and all GREEN. Sixteen complete-source faults,84 supplied suites/310 inputs/24959 assertions and nine coherent artifact denials/restorations pass. Whole original155/full40701 publication and actual baseline remain historical at a60764c11. First350/308 observations stay frozen; the complete356/314 instrument repairs two overwritten labels and adds a duplicate guard. Full Knowledge1486/1349/twelve overlays/8388171 bytes, book89/four controls, public guard and standard public Phase01035 pass. Readonly463-input/109061-byte publication owns current routes. No public contract, dependency, gate or budget changes. Switch .5.3 follows the clean focused commit; remaining ControlFlow .5.4–.5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK stay scheduled. Independent broader admissions remain open. Activate switch .5.3 from clean Git and preserve the complete current463/full109061 publication and actual readonly baseline before bound writes. Keep complete engineering notes concise within current pressure; no speculative capacity increase.
+Switch .5.3 binds six required normalizers through six original validator returns. All630 ordinary native rows/recurrences remain exact; identical1641 assertions retain273 original authority REDs/1368 controls and all GREEN. All85 supplied suites/317 inputs/26600 assertions and standard public Phase01035 pass. Fifteen complete-source faults reject; the copied-array variant has no observed witness and stays outside the sensitivity claim. Nine artifact denials/restorations pass. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. First465-input proof stays frozen and replays before the single workflow-paragraph correction; both full book89/four-control epochs pass. Knowledge1486/1349/twelve overlays/8388218 bytes and public guard pass. Readonly480-input/111654-byte publication owns current routes. No public contract, dependency, gate or budget changes. Output .5.4 follows clean focused landing, then optional kind .5.5, dispatch/rule .5.6, defaults .5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent broader admissions stay open. Activate .5.4 from clean Git and preserve the whole480/full111654 current publication and actual readonly baseline before bound writes. No speculative capacity increase.
 
 After `.6`, independently accept the composed factory/input identity seams under
 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4`. The original
@@ -1963,6 +1975,8 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 
 ## Verification Log
 
+- `2026-10-18`, `.5.3`: Switch .5.3 binds six required normalizers through six original validator returns. All630 ordinary native rows/recurrences remain exact; identical1641 assertions retain273 original authority REDs/1368 controls and all GREEN. All85 supplied suites/317 inputs/26600 assertions and standard public Phase01035 pass. Fifteen complete-source faults reject; the copied-array variant has no observed witness and stays outside the sensitivity claim. Nine artifact denials/restorations pass. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. First465-input proof stays frozen and replays before the single workflow-paragraph correction; both full book89/four-control epochs pass. Knowledge1486/1349/twelve overlays/8388218 bytes and public guard pass. Readonly480-input/111654-byte publication owns current routes. No public contract, dependency, gate or budget changes. Output .5.4 follows clean focused landing, then optional kind .5.5, dispatch/rule .5.6, defaults .5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent broader admissions stay open. Normal all-doctrine hooks govern focused landing; no canonical admission claimed.
+
 - 2026-10-12 — PERL-PRIVATE-FACTORY-CAPTURE.5.0: ControlFlow foundation .5.0 isolates required dependencies in control value, switch case value and bare marker normalization: three validators and seven roles. Native scalar callbacks retain their own actual identity; the switch tag normalizer keeps its native list context with publication disabled. Public maps/references, eager selection, argument aliases, diagnostic lines, ordinary effects/errors/fatal objects and cold loading remain exact. Native100/176 warm/132 cold recurs exactly; all308 original ordinary rows match. Identical848 assertions retain198 original authority REDs/650 controls/all GREEN. Thirteen complete-source faults,80 supplied suites/277 inputs/21482 assertions, six coherent artifact denials/restorations, full Knowledge1485/1349/nine overlays and book89/four controls pass. Original449/full106177 and actual baseline remain historical at aa8823343. The first reader serialization failure remains immutable; the distinct final reader compares complete decoded records and binds both exact gzip identities. Knowledge8384946 stays within unchanged8388608. Supplemental strict-vars/standard syntax/public Phase01035/composed guard pass. Readonly428-input/100775-byte publication owns current routes. Branch plumbing .5.1 follows the clean focused landing; .5.2–.5.7 precede fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open. Actual standard48734/0, independent review32918/0, evidence1960/0 and publication42597/0 complete. Normal focused commit hooks govern landing.
 
 - `2026-10-11`, `.3.2.1.2`: Native18/105/6/cold9, symbolic42/object10; first1135/58 retains one wrong oracle, final1135/57 RED/1078 controls/allGREEN. Nine faults15/15/27/7/29/34/19/12/70; supplied69/223/15093, evidence6/book89/3/original339/full78325/standard1035 and readonly366/85779 PASS. Three owned bindings only; warning/oracle/census first failures/sole repairs exact. Normal focused hooks govern landing; due hygiene then P2 cache .9 before .3.
@@ -2030,6 +2044,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.5.3`: `PERL-PRIVATE-FACTORY-CAPTURE.5.3 - isolate switch required callbacks`, activated from clean09000223f; all focused proof and standard Phase0 complete; normal hooks and post-clean checks govern landing. No push.
+
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.0 - isolate ControlFlow foundation callbacks` — focused COMMIT.md landing; activation aa8823343, actual source-bound proof complete. Clear brief and check post-pointer/post-memory/clean Git before the next leaf.
 
 - `.3.2.1.2`: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2 - isolate three optional kind callbacks`, from clean61cca1ccc; ordinary focused proof/standard compatibility verified, normal hooks govern landing.
@@ -2083,6 +2099,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- 2026-10-18 — .5.3: Six switch normalizer boundaries; unchanged native behavior; explicit15-effective/one-unobserved source-fault limit; complete prior/source/book proof retained; output .5.4 next.
 
 - 2026-10-12 — PERL-PRIVATE-FACTORY-CAPTURE.5.0: native-first ControlFlow foundation, bounded .5 children, private actual scalar/list boundaries, full focused proof, retained reader correction and public book.
 
@@ -2407,3 +2425,12 @@ beside its stable ID; Git is the commit-identity authority.
 - [x] **ADDRESSED (behavior)** — Identical1750 assertions are GREEN; all670 complete native rows and exact recurrences remain unchanged. Sixteen syntax-valid complete-source variants reject; the exact inverse reproduces every294 original failure name/number. First overwritten-case instrument/source/350/308 observations remain frozen beside the exact complete-inventory correction.
 - [x] **NO REGRESSION (focused)** — All84 supplied suites/310 inputs/24959 assertions pass with accepted83 headers/plans/stderr exact. Public guard and full1486 Knowledge/1349 facts/twelve overlays/8388171 bytes pass. Full89-source book renders and its four actual controls and independent rendered-semantic review pass.
 - [x] **LOCKSTEP / LANDING** — All nine artifact denials/restorations and standard syntax/public Phase01035 pass. Readonly463/109061 publication, live pointers/roadmap and current Knowledge/book align. Normal all10 doctrines, explicit memory/history/diff checks and clean/post-pointer/post-memory verification govern landing before switch .5.3. Independent admissions stay open.
+
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.5.3
+
+- [x] **REPRODUCE / ISSUE** — The retained native LinkedSpec::ActionIR::ControlFlow/MethodExpr probe and run.py before show273 actual callback/parent-publication REDs in complete1641 TAP;1368 ordinary controls pass. This is the planned private compiler mechanism, not a demonstrated public switch bug.
+- [x] **ROOT CAUSE (WHY + WHERE)** — t/actionir_control_switch_native.pl records the real selected normalizer under the parent SourceEmissions::_call at six unbound required validators in perl/LinkedSpec/ActionIR/ControlFlow.pm. Actual callback identity is absent from that frame; an opaque dependency can donate matching text to the enclosing packet. The original native channels and exact six-line source oracle distinguish this mechanism.
+- [x] **FIX** — Six original required-validator return lines use the existing _bind_emission_dependency helper. Public map selection, aliases, references, errors, state, helper/default bytes and diagnostic line count stay native; no new DSL syntax or .spec content.
+- [x] **ADDRESSED (verified)** — Identical1641 assertions pass; original273 failure names/numbers are restored exactly by the full-source inverse. All630 ordinary native rows and recurrences remain exact. Fifteen source faults have witnesses; the copied-return variant has none and is excluded from the effectiveness claim. All85 supplied suites/317 inputs/26600 assertions pass.
+- [x] **NO REGRESSION** — All five standard syntax/public Phase0 commands complete successfully with full channels in compat.json, including the actual1035-assertion PASS and true stop. Full85 supplied suites and exact readonly composition/publication pass. Normal doctrine hooks and explicit memory/post-pointer/clean-state checks govern landing.
+- [x] **LOCKSTEP** — Book switch boundaries and corrected current workflow teaching each render under complete89-input/four-control captures. The complete original465-input proof replays from its frozen source before the single workflow paragraph correction. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. Full Knowledge1486/1349/twelve/8388218 and public guard pass; live continuity is owned here. USER_GUIDE needs no new DSL teaching because ordinary switch syntax/behavior is unchanged.

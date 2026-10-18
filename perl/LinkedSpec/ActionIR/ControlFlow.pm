@@ -1145,7 +1145,7 @@ sub _lower_inline_switch_branch_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -1325,7 +1325,7 @@ sub _lower_switch_flow_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -1428,7 +1428,7 @@ sub _lower_case_flow_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -1507,7 +1507,7 @@ sub _lower_default_flow_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -1560,7 +1560,7 @@ sub _lower_endcase_flow_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 
@@ -1594,7 +1594,7 @@ sub _lower_endswitch_flow_statement {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::ControlFlow::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+  return _bind_emission_dependency($cb);
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
 

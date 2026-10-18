@@ -19,7 +19,7 @@ date: 2026-10-17
 status: ADR0135 finite engineering admission verified; prior accounts preserved
 tags: [documentation, history, capacity, verification]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.5.1.3 retains actual rollover/old-cap channels, exact source suffix and228 prior files. ADR0135 grants one member, exact manifest growth and35 sole decision/index lines. Production30 thresholds/23 authority REDs precede canonical admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.2/publish.py. Prior155/full40701 remain at a60764c11; captures retired."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/publish.py. Prior inputs:09000223f."
 ---
 
 ## Current finite admission: ADR0135

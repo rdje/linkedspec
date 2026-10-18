@@ -1,0 +1,13 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/review.py",
+    "--preflight"
+  ],
+  "tool_chunk_id": "c1fa2f",
+  "exit_code": 1,
+  "producer_sha256": "4105bca4829e024ea5a256e6e1e3f1b3aae9593e0ac359991a46b35c6a0b003c",
+  "tool_output_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuMy9yZXZpZXcucHkiLCBsaW5lIDI4MCwgaW4gPG1vZHVsZT4KICAgIGV4cGVjdGVkID0gc2V0KHNlZWRbJ2lucHV0cyddKSB8IGNvbXBsZXRlX3BhdGhzIHwge0ZJWFRVUkUsIFBSRUZJWCArICdiZWZvcmUtbmF0aXZlLWRhdGEuanNvbi5neicsIFNFRUQsIFNFRURfQ0hBTk5FTFMsIFBSRUZJWCArICdjb25zdW1lcnMucHknfQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXl5eXl5eXl5eXl5eXl4KTmFtZUVycm9yOiBuYW1lICdjb21wbGV0ZV9wYXRocycgaXMgbm90IGRlZmluZWQK",
+  "scope": "Complete combined output from the actual exec/write_stdin tool result; no separate stdout/stderr capture or fresh rerun is claimed. Raw diagnostic bytes are encoded because they contain the original checkout identity."
+}

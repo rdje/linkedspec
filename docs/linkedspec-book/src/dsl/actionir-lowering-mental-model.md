@@ -2446,6 +2446,28 @@ once-only calls, original fatal objects and cold loading remain native. Switch,
 output, direct/rule calls, mixed-provider defaults and full pipeline admission
 remain separate owners.
 
+### ControlFlow switch dependency boundaries
+
+The required argument normalizers in `switch`, `case`, `default`, `endcase`,
+`endswitch` and inline switch branches now run in their own private frames.
+They retain the actual callback and array references, scalar context, argument
+aliases, validation order, errors and native switch state. A reference-valued
+normalizer result does not itself retain a scalar emission packet.
+
+For example, `switch("a", case("a", print("matched")), default(print("other")))`
+uses the existing inline-branch shortcut: the outer argument array is shallow-copied
+without calling the outer normalizer. Each selected inline branch still normalizes
+its own arguments. Marker-form `switch("a")` normalizes before allocating a switch
+counter and pushing its state.
+
+The existing state transitions also remain intact. `endcase()` closes an open
+case; `endswitch()` removes exactly the innermost switch and closes its case when
+needed. A default branch records `default_seen` before lowering an attached action.
+If that action declines, the flag remains set. These are preserved lowering
+contracts, not newly introduced DSL behavior. Controlled dependency observations
+verify these boundaries; output helpers, direct/rule calls, default registration
+and pipeline activation remain separately owned.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

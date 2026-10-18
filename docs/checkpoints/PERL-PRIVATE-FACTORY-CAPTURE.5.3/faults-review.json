@@ -1,0 +1,110 @@
+{
+  "result": "PASS-with-disclosed-limit",
+  "producer_sha256": "91f11140ddaeaaf130318502df3bf334aa2c9f59cad9e12feb8abb0177366f5e",
+  "original_producer_sha256": "faea684e3f8831481c53397948e530e7f1207936389a93126309e1fafb1ba3e4",
+  "positive_capsule_sha256": "95d594cffe82c0e4b168c095fee6300c5a34b5c897bfc5cb74fd0fd8a4c1c806",
+  "data_sha256": "587f74437c4e670b7cc2ba8e6f6e8f5744bdc8d92c37da8e8aee5878106fd3d0",
+  "variants": [
+    {
+      "name": "inverse",
+      "assertions": 1641,
+      "failures": 273,
+      "module_sha256": "d8610ec5734e4aa5c3a7b00358a7178f91c86f473713f65fc778b1f53475c8b9"
+    },
+    {
+      "name": "bypass-_lower_switch_flow_statement",
+      "assertions": 1641,
+      "failures": 48,
+      "module_sha256": "1f1c48189f3b0ddd2a471f4982bd143b58f697fcf36c8570dd5b90102259cba6"
+    },
+    {
+      "name": "bypass-_lower_case_flow_statement",
+      "assertions": 1641,
+      "failures": 57,
+      "module_sha256": "0a1bf427cfe59fc0c788965ca47cffb2b6dce5eca8f18a3c8f8ea5bf5c6abeb4"
+    },
+    {
+      "name": "bypass-_lower_default_flow_statement",
+      "assertions": 1641,
+      "failures": 42,
+      "module_sha256": "ac272a158b00be88fa51f63a672d28608184c115544e9a237d8aa21f2403da0a"
+    },
+    {
+      "name": "bypass-_lower_endcase_flow_statement",
+      "assertions": 1641,
+      "failures": 33,
+      "module_sha256": "b985c2c4ef1d2fb6a92c78aa1a89c07da68819f3dfb61ce888dbee72daaa5d0c"
+    },
+    {
+      "name": "bypass-_lower_endswitch_flow_statement",
+      "assertions": 1641,
+      "failures": 36,
+      "module_sha256": "1b3d805143805e9e024da2527ad5ef33bbca0470d5b6aafdf9f9d688eff67538"
+    },
+    {
+      "name": "bypass-_lower_inline_switch_branch_expr",
+      "assertions": 1641,
+      "failures": 66,
+      "module_sha256": "332ff96f059b4d64a9110a9e36def6c4360d9711e8c162b139b5d048fbd4696a"
+    },
+    {
+      "name": "opaque-wrapper-identity",
+      "assertions": 1641,
+      "failures": 237,
+      "module_sha256": "b7e6fbfb33609e5009c15fa5ca3e55e56796dc34474e7c08745edd0f9e8d2613"
+    },
+    {
+      "name": "copied-argument-slots",
+      "assertions": 1641,
+      "failures": 446,
+      "module_sha256": "1d34cddb139fdbac52924bdaf5a32c65200f03d01e21d6793c8c5e91f9746f76"
+    },
+    {
+      "name": "localized-error-effects",
+      "assertions": 1641,
+      "failures": 570,
+      "module_sha256": "a8da41dce1c34821c11f1bfb98c2935f9048776ed9b4b58b5d4284148d18c52d"
+    },
+    {
+      "name": "twice-only-effects",
+      "assertions": 1641,
+      "failures": 843,
+      "module_sha256": "bda4fa9698911c7898878d280f4de0f33a4b06a95aca810cb424ebdd83eadc13"
+    },
+    {
+      "name": "eager-emission-loading",
+      "assertions": 1641,
+      "failures": 2,
+      "module_sha256": "b5c5edb704f8e06cd3c8f815ebe02cf0229c8716deac9ff2e47af9b976096718"
+    },
+    {
+      "name": "delayed-map-selection",
+      "assertions": 1641,
+      "failures": 12,
+      "module_sha256": "d6950b15f44199aa64db1e6949792fb98145ced4a699dc9924062e873086f842"
+    },
+    {
+      "name": "public-map-rebinding",
+      "assertions": 1641,
+      "failures": 594,
+      "module_sha256": "8077ea3c4e3406bd936974ae5826350621c048fc431d4de48e7dae7104485dbf"
+    },
+    {
+      "name": "disabled-required-validation",
+      "assertions": 1641,
+      "failures": 24,
+      "module_sha256": "36ab81a072a8d4376537f1770ecb7687d7c20cef7f87fb5d2466db4e45a5e978"
+    },
+    {
+      "name": "copied-normalizer-array-return",
+      "assertions": 1641,
+      "failures": 0,
+      "module_sha256": "4eadb5255cdb284c6045035c4f38d34e509d7446e4a12a0fb2a5d9f36ead1ce7"
+    }
+  ],
+  "effective": 15,
+  "unobserved": [
+    "copied-normalizer-array-return"
+  ],
+  "limit": "The original one-shot loop stops at its final effectiveness assertion. Every original variant and complete channel remains in faults-reached.json.gz. This unchanged fixture has no witness for copying the returned array container. No sixteen-effective-fault or exhaustive reference-identity claim is made. The production helper is unchanged; only six validator returns differ."
+}
