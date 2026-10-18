@@ -1725,9 +1725,9 @@ sub _lower_print_each_statement {
   ? $deps->{bare_symbol_kind}
   : sub { return undef };
  my $target_expr;
- if (defined($array_symbol) && length($array_symbol)
+ my $kind_callback = _bind_optional_emission_dependency($bare_symbol_kind, sub { $bare_symbol_kind->(@_) }); if (defined($array_symbol) && length($array_symbol)
   && $array_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
-  && (($bare_symbol_kind->($1) // '') ne 'scalar')) {
+  && (($kind_callback->($1) // '') ne 'scalar')) {
   $target_expr = '[@'.$array_symbol.']';
  } else {
   $target_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
@@ -1801,6 +1801,13 @@ sub _bind_emission_dependency {
    if defined &LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency;
   return $callback->(@_)
  }
+}
+
+# Keep native dispatch and its diagnostic line for non-CODE second selections.
+# Only an actual unblessed CODE reference can carry private registration.
+sub _bind_optional_emission_dependency {
+ my ($selected, $native_call) = @_;
+ return _bind_emission_dependency(ref($selected) eq 'CODE' ? $selected : $native_call);
 }
 
 1;

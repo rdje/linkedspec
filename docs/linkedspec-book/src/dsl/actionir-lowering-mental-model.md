@@ -2487,7 +2487,7 @@ by returning equal text.
 alias. Extraction receives the resulting local scalar and the actual dependency
 map. The current three-argument lowering form and legacy two-argument form retain
 their native rule labels, callback references, validation, effects and errors.
-The optional kind callback has a separate owner.
+The optional kind boundary below preserves its separate selection rules.
 
 This compiler integration preserves output behavior. `say` and `print` still
 snapshot values before typed event delivery; `print_each` still snapshots its
@@ -2496,6 +2496,32 @@ failure identity and typed `exit_now` remain governed by the diagnostic-output
 contract. The dedicated Perl suite exercises live, independently emitted and
 primary-command routes alongside the controlled callback probe. Direct/rule
 invocation, default registration and full pipeline admission remain separate.
+
+### ControlFlow optional kind boundary
+
+`print_each` selects the optional `bare_symbol_kind` hook after trimming and
+extracting its target. It retains the original two dependency-map reads: the
+first accepts an unblessed CODE reference, and the second supplies the value
+that native Perl will invoke. A missing or rejected first value selects the
+existing undefined-returning fallback. The public map and selected references
+are unchanged.
+
+The selected hook runs only when extraction returns a defined, nonempty symbol
+and the trimmed target is a bare identifier. For example, `print_each(items, "-")`
+can ask for the kind of `items`; `print_each([1, 2], "-")` bypasses this hook.
+The hook stays scalar even when the enclosing lowering call uses list or void
+context. Its argument is the native regex match alias: an attempted write fails,
+including on the observed Perl where its readonly flag is clear.
+
+An actual CODE second selection uses its own private identity and capture.
+Symbolic names, blessed CODE values and overloaded callables use an opaque
+native-call thunk. That thunk preserves native dispatch, fatal exception identity
+and the original error location; it cannot borrow registration from an underlying
+callback. Neither route can donate a nested publication to the enclosing producer.
+An actually registered CODE callback returning its published matching scalar can
+retain only its own packet. Returning `scalar` still selects ordinary scalar-value
+lowering; other or undefined kind results retain the existing array-target path.
+Default-provider registration and complete pipeline admission remain separate.
 
 ### Original method argument boundaries
 

@@ -20,11 +20,12 @@ answers:
   - "does single-statement trim preserve aliases and branch candidate state"
   - "which switch callbacks have private emission frames"
   - "which output helper callbacks have private emission frames"
+  - "does print_each preserve optional kind two-read selection and match aliases"
 date: 2026-10-18
-status: framework and bounded Contracts/MethodLowering/FlowExpr/ControlFlow required families verified; optional/direct/default/pipeline owners open
+status: framework and bounded Contracts/MethodLowering/FlowExpr/ControlFlow required families verified; optional kind verified; direct/default/pipeline owners open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.4/publish.py. Prior inputs:4a8e92aef."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.5/publish.py. Prior inputs:dadce45ac8."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -48,13 +49,12 @@ equal result does not inherit it. Later output builders must explicitly compose
 retained child captures. The ordinary-value helper does not expose that child
 capture as a new public return field.
 
-The initial fixture used an anonymous sub with no captured lexical state and
-assumed that separate factory calls returned distinct references. The actual
-retained native probe shows that this Perl returns one shared CODE reference for
-that factory; a factory with lexical state returns distinct closures. Four draft
-identity checks therefore tested the wrong premise. The corrected fixture adds
-lexical state; production bytes are identical before and after that correction.
-This is a measured local observation, not a universal cross-version closure rule.
+The initial framework fixture assumed separate no-lexical-state factory calls
+returned distinct references. Native probes instead observed a shared CODE
+reference; lexical-state closures supply distinct identities for those tests.
+The original four failed checks, first instrument and exact corrected fixture
+remain with .1. Production source was unchanged by this fixture correction;
+this is a local observation, not a universal cross-version closure rule.
 
 Contracts registration/call sites are verified in the linked children.
 MethodLowering's seventeen original ingress sites and FlowExpr's defaults/calls have bounded repairs. ControlFlow and RewritePipeline remain later owners in
@@ -66,12 +66,9 @@ EmitContext now owns its definition-bound facade selection and resolved-call
 prerequisite; see docs/knowledge/perl-emitcontext-callback-capture.md. Actual
 Contracts callback construction is verified separately; pipeline activation remains open.
 
-The same no-lexical-state lifetime premise recurred in the Contracts draft. Its
-exact original/current probe is retained under PERL-PRIVATE-FACTORY-CAPTURE.2.1.0;
-only the fixture changes, and lexical-state callbacks release on both boundaries.
-Current dependency integration and bounded original235 preservation are reviewed by
-that owner; see docs/knowledge/perl-contract-dependency-capture.md. The .2.0
-reviewer now requires its exact2d8784780 historical input boundary.
+The Contracts draft repeated that lifetime premise. Its original and corrected
+native probes remain with .2.1.0; only the fixture changed. See
+perl-contract-dependency-capture for the current integration boundary.
 
 Current own-constructor registration is verified by .2.1.1; see
 docs/knowledge/perl-contract-constructor-capture.md. Earlier .2.1.0 reviewers now
@@ -82,11 +79,8 @@ docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md. Original owner reviews retain their
 recorded accepted Git input boundaries. MEMORY.md and that tree's frontier own
 current selection; this framework card does not duplicate a changing next leaf.
 
-Correction dated2026-10-10 under .3.1.4: the previous paragraphs incorrectly
-called local-return/value .3.1.2.2 next after those children and later guarded
-AST children had already landed. Their historical evidence is unchanged; only
-the stale current projection is removed.
-
+Correction2026-10-10 (.3.1.4): remove the stale local-return/value next-leaf
+projection. Historical evidence stays in its original owner.
 
 Required FlowExpr callbacks, .4.0 (2026-10-12), use actual CODE identity in
 separate private captures through five required-validator returns. Validation,
@@ -198,3 +192,9 @@ observations do not claim facade execution or full pipeline admission.
 Switch .5.3 binds six required normalizers. Scalar context, actual array references, aliases and native state remain exact. Inline branch detection bypasses the outer normalizer; branches still normalize. Failed default actions leave default_seen set. Endcase closes the active case; endswitch pops one state. Native333/297 rows recur exactly; identical1641 assertions retain273 original authority REDs/1368 controls/all GREEN. Later owners remain open.
 
 Output .5.4 binds parser roles in all four helpers, plus print_each trim/extraction. Trim aliases the parsed argument cell. Matching registered scalar helpers retain their own packet; parser hashes cannot. Legacy labels stay native.
+
+Optional print_each kind .5.5 retains both reads, guarded scalar dispatch,
+match-alias write rejection, original errors/effects and lazy loading. Actual
+CODE uses its own capture; opaque native-call thunks isolate other selections.
+Earlier framework prose is condensed on2026-10-18; original bodies and the first
+tied-map snapshot failure remain in Git/checkpoints.
