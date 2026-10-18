@@ -1,0 +1,12 @@
+{
+  "pid_from_actual_warning": 29169,
+  "observed_at": "2026-10-18T01:05:57.901109+00:00",
+  "repair_owner": "SESSION-STARTUP-READING.7",
+  "producer_sha256": "4e840d5470d54773e632a3285f42555185e00b367306ca5b11e23bbffc786d6c",
+  "wrapper_sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+  "actual_launch_session": 21444,
+  "actual_launch_tool_output_base64": "L1ZvbHVtZXMvU1NEL0RvY3VtZW50cy9naXRodWIvbGlua2Vkc3BlYy90b29scy9wcm9qZWN0X2RhdGFfcnVuLnNoOiBjaGlsZCBzZXRwZ2lkICgyOTE2OSB0byAyOTE2OSk6IE9wZXJhdGlvbiBub3QgcGVybWl0dGVkCg==",
+  "scope": "A single changing-runtime observation of the numeric PID named by the actual warning. No target start-time identity, timing cause, general establishment or lifecycle guarantee, or cleanup authorization follows. Known mechanism and repair remain with the existing project-data-liveness-permission-denial card; no recovery/purge or source change occurs.",
+  "pgid": 29169,
+  "matches_warned_pid": true
+}

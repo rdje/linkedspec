@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / output .5.4 next
+- Status: `active` / optional kind .5.5 next
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-18`
@@ -1501,15 +1501,30 @@ quoted-first example do not change here. Other repositories and all submodules r
   Commit: `PERL-PRIVATE-FACTORY-CAPTURE.5.3 - isolate switch required callbacks`.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Output family required callbacks.
   Dependencies: `PERL-PRIVATE-FACTORY-CAPTURE.5.3`
   Owned paths: Required validators in _lower_say_statement, _lower_print_statement, _lower_print_each_statement and _lower_exit_now_statement. Optional kind remains separately owned. Focused fixture/proof/claim, relevant Knowledge/book and continuity.
-  Planned tier: `focused`
-  Planned focused proof: Native-first actual references, contexts, aliases, selected maps and ordinary effects/errors; distinguishing authority RED/GREEN, complete-source faults, supplied direct consumers and book/Knowledge/public/artifact controls.
-  Planned canonical boundary: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
-  Planned claim record: none: No new measurement until child activation.
+  Verification tier: `focused`
+  Focused checks: Native-first actual references, contexts, aliases, selected maps and ordinary effects/errors; distinguishing authority RED/GREEN, complete-source faults, supplied direct consumers and book/Knowledge/public/artifact controls.
+  Canonical trigger: none without public/generated/mechanical changes; reclassify before crossing those boundaries.
+  Claim verification: `docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json`
+  Activation: Clean4a8e92aef. Four validator returns/six required roles: parser in all four owners, plus trim/extract in print_each. Native-first references/contexts/argument slots, public diagnostic contract and uniform-binding suites, supplied predecessor consumers, Phase0, Knowledge/book/public/artifact checks. Optional print_each kind remains .5.5-owned. Review the complete book before freezing the combined proof; no new interface or runtime-output semantics are planned.
   Acceptance: Preserve public maps/callback references and ordinary behavior. Actual identity carries only its own scope authority. Commit before the next child; no aggregate admission inferred.
+
+  Native inventory guard: First original instrument passes syntax, then all four native invocations reject duplicate exit_now_zero before callback execution. Complete source/input/actual stderr remain frozen. The distinct complete instrument changes only that explicit label to exit_now_status_zero; the generic zero-input case and duplicate guard remain intact. No regression expectations or production edits precede the corrected first observation.
+
+  Existing wrapper recurrence: Standard job21444 launch reports child setpgid29169/Operation not permitted. Canonical project-data-liveness-permission-denial identifies the existing monitor-mode launch mechanism and SESSION-STARTUP-READING.7 repair. One read-only kernel sample returns PGID29169; target start-time identity, timing cause, general establishment/lifecycle and cleanup safety remain unassessed. Full original launch output and executed producer bytes/hash/mode are retained in group-observation.json/source archive. The executed writer is inert after verified archival; no raw checkout-dependent diagnostic becomes an operational project path. No wrapper change, recovery or purge occurs. Compiler work continues under the existing restriction.
+
+  Verified implementation: Exactly four required-validator return lines change; all22 required validators use the existing helper. The original helper, algorithms, defaults, formatting and line count remain exact. Native105-input/current110-input captures retain234 warm/198 cold rows and exact recurrences; all432 ordinary rows and1240 scalar callback calls stay unchanged. Identical1146 assertions retain264 original authority REDs/882 controls/all GREEN. Matching registered scalar trim/extractor calls retain one own packet; parser HASH returns retain none and no child donates a parent packet.
+  Verified native contracts: print_each trim argument aliases the actual parsed first-argument cell; extraction receives its local scalar and actual dependency-map reference. Legacy two-argument lowering keeps an empty rule label; current labels, undefined/ref-label handling, values, arrays, callback maps/references, error effects and fatal objects remain native. Optional kind selection is unchanged and separately owned.
+  Verified dependent proof: All87 supplied suites/332 inputs/27762 top-level assertions pass, retaining predecessor85 headers/plans/stderr. Dedicated public diagnostic before/after captures each supply329 inputs/16 top-level assertions; native/generated/CLI event delivery, quietness, typed exit, errors, arity and ordered effects pass. Thirteen complete-source faults fail264,57,48,108,51,228,238,408,672,2,36,410,24 assertions; exact inverse restores all264 original failure names/numbers. Full Knowledge1486 Markdown/1349 facts/twelve overlays/8388501 bytes, book89/four controls and public guard pass. All five standard syntax/public Phase01035 commands, nine artifact controls and readonly495-compiler-input/full117562-byte publication pass. Normal focused hooks and explicit post-pointer/memory/clean-state checks govern landing.
+
+  Result: Four required validators/six roles complete; public and controlled ordinary behavior remain exact. No optional-kind, default, direct/rule, complete private/parent or canonical admission follows. The second claim retains the known wrapper sample with falsification gap explicitly owned by startup.7; no original process identity or lifecycle guarantee is claimed.
+  Publication: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.4/publish.py (readonly default). All capture writers are retired; the executed historical kernel producer is recoverable from its verified inert source archive.
+  Commit: `PERL-PRIVATE-FACTORY-CAPTURE.5.4 - isolate output required callbacks`.
+
+  Session health: Agent flagged context fatigue under director section11 and asked asynchronously whether to hand off after the verified clean commit. No pause is presumed from elapsed time or silence; the current unit must land and post-clean checks finish first. PNT authorization remains unchanged unless the director answers otherwise.
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.5.5`
   Status: `pending`
@@ -1635,17 +1650,16 @@ quoted-first example do not change here. Other repositories and all submodules r
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.4` | `pending` | Output family required callbacks. |
-| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5.5` | `pending` | Optional print_each kind invocation. |
-| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5.6` | `pending` | Direct selected lowerer and rule apply invocations. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.5.7` | `pending` | Exact mixed-provider default references. |
-| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
-| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline follows registered fixtures. |
-| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection before TYPE-REFERENCE-BOOK. |
+| 1 | `PERL-PRIVATE-FACTORY-CAPTURE.5.5` | `pending` | Optional print_each kind invocation. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.5.6` | `pending` | Direct selected lowerer and rule apply invocations. |
+| 3 | `PERL-PRIVATE-FACTORY-CAPTURE.5.7` | `pending` | Exact mixed-provider default references. |
+| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.7` | `pending` | Complete focused fixture registration before pipeline activation. |
+| 5 | `PERL-PRIVATE-FACTORY-CAPTURE.6` | `pending` | Pipeline follows registered fixtures. |
+| 6 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` | `pending` | P3 metadata projection before TYPE-REFERENCE-BOOK. |
 
 ## Handoff
 
-Switch .5.3 binds six required normalizers through six original validator returns. All630 ordinary native rows/recurrences remain exact; identical1641 assertions retain273 original authority REDs/1368 controls and all GREEN. All85 supplied suites/317 inputs/26600 assertions and standard public Phase01035 pass. Fifteen complete-source faults reject; the copied-array variant has no observed witness and stays outside the sensitivity claim. Nine artifact denials/restorations pass. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. First465-input proof stays frozen and replays before the single workflow-paragraph correction; both full book89/four-control epochs pass. Knowledge1486/1349/twelve overlays/8388218 bytes and public guard pass. Readonly480-input/111654-byte publication owns current routes. No public contract, dependency, gate or budget changes. Output .5.4 follows clean focused landing, then optional kind .5.5, dispatch/rule .5.6, defaults .5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent broader admissions stay open. Activate .5.4 from clean Git and preserve the whole480/full111654 current publication and actual readonly baseline before bound writes. No speculative capacity increase.
+Output .5.4 binds six required roles through four validator returns; all22 required validators now use the existing private helper. All432 native rows/recurrences stay exact; identical1146 assertions retain264 original authority REDs/882 controls and all GREEN. Thirteen complete-source faults reject. All87 supplied suites/332 inputs/27762 top-level assertions and dedicated public diagnostics before/after329 inputs/16 top-level assertions pass. Standard public Phase01035, nine artifact controls, full Knowledge1486/1349/twelve overlays/8388501 bytes, book89/four controls and public guard pass. Whole prior480/full111654 publication/baseline stays historical at4a8e92aef. Original duplicate-label guard rejection and exact correction remain frozen. Readonly publication binds495 compiler inputs/full117562 bytes; its separate kernel sample explicitly leaves a falsification gap with existing startup.7. Wrapper source, recovery and purge are unchanged. Optional kind .5.5 follows clean landing, then direct/rule .5.6, mixed defaults .5.7, registration .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Broader admissions remain open. Preserve both whole claim objects and their actual baseline before bound writes. Keep source/history budgets fixed unless actual resulting pressure warrants a separately owned prerequisite.
 
 After `.6`, independently accept the composed factory/input identity seams under
 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.4`. The original
@@ -1975,6 +1989,8 @@ before its production writes. Artifact recovery/purge remains prohibited pending
 
 ## Verification Log
 
+- `2026-10-18`, `.5.4`: Output .5.4 binds six required roles through four validator returns; all22 required validators now use the existing private helper. All432 native rows/recurrences stay exact; identical1146 assertions retain264 original authority REDs/882 controls and all GREEN. Thirteen complete-source faults reject. All87 supplied suites/332 inputs/27762 top-level assertions and dedicated public diagnostics before/after329 inputs/16 top-level assertions pass. Standard public Phase01035, nine artifact controls, full Knowledge1486/1349/twelve overlays/8388501 bytes, book89/four controls and public guard pass. Whole prior480/full111654 publication/baseline stays historical at4a8e92aef. Original duplicate-label guard rejection and exact correction remain frozen. Readonly publication binds495 compiler inputs/full117562 bytes; its separate kernel sample explicitly leaves a falsification gap with existing startup.7. Wrapper source, recovery and purge are unchanged. Optional kind .5.5 follows clean landing, then direct/rule .5.6, mixed defaults .5.7, registration .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Broader admissions remain open. Normal all-doctrine hooks govern focused landing.
+
 - `2026-10-18`, `.5.3`: Switch .5.3 binds six required normalizers through six original validator returns. All630 ordinary native rows/recurrences remain exact; identical1641 assertions retain273 original authority REDs/1368 controls and all GREEN. All85 supplied suites/317 inputs/26600 assertions and standard public Phase01035 pass. Fifteen complete-source faults reject; the copied-array variant has no observed witness and stays outside the sensitivity claim. Nine artifact denials/restorations pass. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. First465-input proof stays frozen and replays before the single workflow-paragraph correction; both full book89/four-control epochs pass. Knowledge1486/1349/twelve overlays/8388218 bytes and public guard pass. Readonly480-input/111654-byte publication owns current routes. No public contract, dependency, gate or budget changes. Output .5.4 follows clean focused landing, then optional kind .5.5, dispatch/rule .5.6, defaults .5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent broader admissions stay open. Normal all-doctrine hooks govern focused landing; no canonical admission claimed.
 
 - 2026-10-12 — PERL-PRIVATE-FACTORY-CAPTURE.5.0: ControlFlow foundation .5.0 isolates required dependencies in control value, switch case value and bare marker normalization: three validators and seven roles. Native scalar callbacks retain their own actual identity; the switch tag normalizer keeps its native list context with publication disabled. Public maps/references, eager selection, argument aliases, diagnostic lines, ordinary effects/errors/fatal objects and cold loading remain exact. Native100/176 warm/132 cold recurs exactly; all308 original ordinary rows match. Identical848 assertions retain198 original authority REDs/650 controls/all GREEN. Thirteen complete-source faults,80 supplied suites/277 inputs/21482 assertions, six coherent artifact denials/restorations, full Knowledge1485/1349/nine overlays and book89/four controls pass. Original449/full106177 and actual baseline remain historical at aa8823343. The first reader serialization failure remains immutable; the distinct final reader compares complete decoded records and binds both exact gzip identities. Knowledge8384946 stays within unchanged8388608. Supplemental strict-vars/standard syntax/public Phase01035/composed guard pass. Readonly428-input/100775-byte publication owns current routes. Branch plumbing .5.1 follows the clean focused landing; .5.2–.5.7 precede fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent helper/private/parent/canonical admissions remain open. Actual standard48734/0, independent review32918/0, evidence1960/0 and publication42597/0 complete. Normal focused commit hooks govern landing.
@@ -2044,6 +2060,8 @@ Planning/routing verification belongs to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0
 
 ## Commit Log
 
+- `.5.4`: `PERL-PRIVATE-FACTORY-CAPTURE.5.4 - isolate output required callbacks`, activated from clean4a8e92aef; full focused/public diagnostic/standard proof passes; normal hooks and post-clean checks govern landing. No push.
+
 - `.5.3`: `PERL-PRIVATE-FACTORY-CAPTURE.5.3 - isolate switch required callbacks`, activated from clean09000223f; all focused proof and standard Phase0 complete; normal hooks and post-clean checks govern landing. No push.
 
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.0 - isolate ControlFlow foundation callbacks` — focused COMMIT.md landing; activation aa8823343, actual source-bound proof complete. Clear brief and check post-pointer/post-memory/clean Git before the next leaf.
@@ -2099,6 +2117,8 @@ beside its stable ID; Git is the commit-identity authority.
 - `.3.1.6.0.0`: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 - preserve scalar-bound receiver copy types`, from clean2b4e484a9; exact canonical receipt required, no push.
 
 ## Changelog
+
+- 2026-10-18 — .5.4: Four output validators/six roles; matching scalar own packets and reference-valued packet denial; public diagnostic before/after; known wrapper recurrence retained with explicit startup.7 gap; optional kind next.
 
 - 2026-10-18 — .5.3: Six switch normalizer boundaries; unchanged native behavior; explicit15-effective/one-unobserved source-fault limit; complete prior/source/book proof retained; output .5.4 next.
 
@@ -2434,3 +2454,12 @@ beside its stable ID; Git is the commit-identity authority.
 - [x] **ADDRESSED (verified)** — Identical1641 assertions pass; original273 failure names/numbers are restored exactly by the full-source inverse. All630 ordinary native rows and recurrences remain exact. Fifteen source faults have witnesses; the copied-return variant has none and is excluded from the effectiveness claim. All85 supplied suites/317 inputs/26600 assertions pass.
 - [x] **NO REGRESSION** — All five standard syntax/public Phase0 commands complete successfully with full channels in compat.json, including the actual1035-assertion PASS and true stop. Full85 supplied suites and exact readonly composition/publication pass. Normal doctrine hooks and explicit memory/post-pointer/clean-state checks govern landing.
 - [x] **LOCKSTEP** — Book switch boundaries and corrected current workflow teaching each render under complete89-input/four-control captures. The complete original465-input proof replays from its frozen source before the single workflow paragraph correction. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. Full Knowledge1486/1349/twelve/8388218 and public guard pass; live continuity is owned here. USER_GUIDE needs no new DSL teaching because ordinary switch syntax/behavior is unchanged.
+
+## Acceptance Checklist — PERL-PRIVATE-FACTORY-CAPTURE.5.4
+
+- [x] **REPRODUCE / ISSUE** — Retained native LinkedSpec::ActionIR::ControlFlow/MethodExpr output probe and run.py before show264 private authority failures in complete1146 TAP;882 original controls pass. Controlled callback results are distinguished from the separate public diagnostic suite.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Actual parser/trim/extractor callback frames in perl/LinkedSpec/ActionIR/ControlFlow.pm remain the parent at four raw required-validator returns. Native authority records identify each actual parser/trim/extractor reference, inherited eligibility, parent donation and absent matching own packets. The independently reconstructed four-line source delta names the precise mechanism and locations.
+- [x] **FIX** — Four original required-validator return lines use the existing _bind_emission_dependency helper. All22 required validators are bound; helper/defaults/algorithms/line count and public callback maps stay unchanged. Optional kind remains separately owned.
+- [x] **ADDRESSED (verified)** — Identical1146 assertions pass; exact inverse restores all264 original names/numbers. Thirteen syntax-valid full-source faults reject; all432 native ordinary rows/recurrences remain exact. Matching registered scalar trim/extractor returns retain only their own packet; parser references retain none; no parent donation occurs.
+- [x] **NO REGRESSION** — Full87 supplied suites/332 inputs/27762 top-level assertions pass with predecessor85 headers/plans/stderr preserved. Dedicated public diagnostic before/after329-input captures each pass16 top-level assertions across native/generated/CLI routes. All standard syntax commands and actual public Phase01035 reach their complete successful stop; normal doctrine hooks govern landing.
+- [x] **LOCKSTEP** — Full Knowledge1486/1349/twelve overlays/8388501 bytes and book89/four actual controls pass. Whole prior480/full111654 publication and actual baseline stay historical at4a8e92aef. First inventory rejection and exact one-label correction stay frozen; nine artifact denials/restorations and readonly495/full117562 pass. Existing wrapper warning and limited kernel sample retain explicit startup.7 ownership, source custody and falsification gap. USER_GUIDE has no new DSL semantics to document; current helper/event/exit behavior is preserved.

@@ -119,16 +119,17 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks the bounded switch callback integration,
-including unchanged ordinary observations, actual callback frames, full-source
-faults and supplied consumers. Its immediate predecessor is the complete463-input
-if/while publication at `09000223f`; the earlier155-input artifact publication
-remains at `a60764c11`, and the finite engineering-history publication remains at
-`e2ec1e96b`. No historical observation is refreshed. Existing root and aggregate
-budgets stay fixed:
+The current verification entrypoint checks the bounded output-helper callback
+integration, including unchanged ordinary observations, actual callback frames,
+full-source faults, supplied consumers and the public Perl diagnostic contract.
+Its immediate predecessor is the complete480-input switch publication at
+`4a8e92aef`; the complete463-input if/while publication remains at `09000223f`,
+the earlier155-input artifact publication at `a60764c11`, and the finite
+engineering-history publication at `e2ec1e96b`. No historical observation is
+refreshed. Existing root and aggregate budgets stay fixed:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.4/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

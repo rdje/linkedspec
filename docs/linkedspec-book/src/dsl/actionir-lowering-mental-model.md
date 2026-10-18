@@ -2468,6 +2468,35 @@ contracts, not newly introduced DSL behavior. Controlled dependency observations
 verify these boundaries; output helpers, direct/rule calls, default registration
 and pipeline activation remain separately owned.
 
+### ControlFlow output dependency boundaries
+
+Output lowering gives each required injected callback its own private frame:
+
+| Lowering owner | Required callbacks with private frames |
+| --- | --- |
+| `say`, `print`, `exit_now` | Method parser |
+| `print_each` | Method parser, trim and array-symbol extractor |
+
+These callbacks stay scalar under scalar, list and void lowering callers. The
+parser returns its actual hash; that reference value cannot retain a scalar
+emission packet. An actually registered trim or extractor can retain its own
+matching scalar packet. An enclosing producer cannot inherit either publication
+by returning equal text.
+
+`print_each` passes its parsed first argument directly to trim as an array-element
+alias. Extraction receives the resulting local scalar and the actual dependency
+map. The current three-argument lowering form and legacy two-argument form retain
+their native rule labels, callback references, validation, effects and errors.
+The optional kind callback has a separate owner.
+
+This compiler integration preserves output behavior. `say` and `print` still
+snapshot values before typed event delivery; `print_each` still snapshots its
+array and decorations once. Arity checks, quiet execution without a sink, sink
+failure identity and typed `exit_now` remain governed by the diagnostic-output
+contract. The dedicated Perl suite exercises live, independently emitted and
+primary-command routes alongside the controlled callback probe. Direct/rule
+invocation, default registration and full pipeline admission remain separate.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

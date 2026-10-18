@@ -18,11 +18,13 @@ answers:
   - "which attached parser callbacks have separate private frames"
   - "does attached parsing preserve its native substring lvalue"
   - "does single-statement trim preserve aliases and branch candidate state"
+  - "which switch callbacks have private emission frames"
+  - "which output helper callbacks have private emission frames"
 date: 2026-10-18
-status: framework, Contracts, MethodLowering and FlowExpr bounded owners verified; ControlFlow foundation/expansion/attached parser/single statement and if/while required roles verified; later ControlFlow and pipeline open
+status: framework and bounded Contracts/MethodLowering/FlowExpr/ControlFlow required families verified; optional/direct/default/pipeline owners open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.1 verifies224 assertions,30 native differential modes,11 effective semantic source faults and17 supplied suites in136 files. The initial four failed identity checks and actual native closure-reference probe are retained; only the fixture factory changed after that diagnosis. Complete book and reason-sensitive evidence controls are retained beside the owner."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/publish.py. Prior inputs:09000223f."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.4/publish.py. Prior inputs:4a8e92aef."
 ---
 
 `SourceEmissions::_register_emission_producer` retains the actual CODE reference
@@ -194,3 +196,5 @@ duplicate guard change in the complete instrument. These injected dependency
 observations do not claim facade execution or full pipeline admission.
 
 Switch .5.3 binds six required normalizers. Scalar context, actual array references, aliases and native state remain exact. Inline branch detection bypasses the outer normalizer; branches still normalize. Failed default actions leave default_seen set. Endcase closes the active case; endswitch pops one state. Native333/297 rows recur exactly; identical1641 assertions retain273 original authority REDs/1368 controls/all GREEN. Later owners remain open.
+
+Output .5.4 binds parser roles in all four helpers, plus print_each trim/extraction. Trim aliases the parsed argument cell. Matching registered scalar helpers retain their own packet; parser hashes cannot. Legacy labels stay native.

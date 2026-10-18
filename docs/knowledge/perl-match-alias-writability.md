@@ -11,7 +11,7 @@ date: 2026-10-12
 status: observed with an independent four-case Perl oracle and an effective callback argument-copy fault
 tags: [perl, aliases, callbacks, native-oracle, readonly]
 evidence: "The source-bound pure-Perl oracle retains four actual rows on v5.34.1: lexical/literal/match/copied-match flags0/1/0/0 and actual-slot identity1/0/1/1. Lexical and copied-match writes succeed; literal and actual-match writes fail. The legacy callback argument-copy source fault is syntax-valid and causes nine regression failures, including the named actual readonly match-alias assertion. Original observations and full command channels are retained."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.3/publish.py. Prior inputs:09000223f."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.4/publish.py. Prior inputs:4a8e92aef."
 ---
 
 The native legacy callback exposed a false fixture assumption: its match argument

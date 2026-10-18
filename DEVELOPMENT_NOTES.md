@@ -10,6 +10,7 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.4 — Four output validators isolate six required roles. print_each trim aliases a parsed argument cell; matching registered scalar trim/extraction can retain one own packet while parser hashes cannot. Existing wrapper warning recurs with a numeric PID/PGID match; cause/lifecycle/start-time proof remains startup.7-owned.
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.3 — Six switch normalizers gain actual private frames. Inline branch detection bypasses only the outer normalizer; failed default actions retain default_seen. The copied-return fault has no switch-fixture witness: report15 effective/one unobserved, preserve the original loop, and keep container-identity sensitivity outside the claim.
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.2 — Six if/while validators isolate seven roles; parser HASH/normalizer ARRAY returns retain references but cannot retain scalar packets. Inline-if parser call2 aliases a normalized argument element; inline-action bypass copies the array. Native facts and exact proof live in the owning task node.
 ## 2026-10-18 — REPO-HYGIENE.18 — Guard captured filesystem permissions separately from archive/Git modes; census: docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz.

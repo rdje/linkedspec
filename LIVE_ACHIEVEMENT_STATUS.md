@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: switch .5.3 completes; output helpers .5.4 follow the clean focused commit. No push.
+Full PNT: output .5.4 completes; optional print_each kind .5.5 follows the clean focused commit. No push.
 
 ## Latest Completed Slice
 
-Switch .5.3 binds six required normalizers through six original validator returns. All630 ordinary native rows/recurrences remain exact; identical1641 assertions retain273 original authority REDs/1368 controls and all GREEN. All85 supplied suites/317 inputs/26600 assertions and standard public Phase01035 pass. Fifteen complete-source faults reject; the copied-array variant has no observed witness and stays outside the sensitivity claim. Nine artifact denials/restorations pass. Whole prior463/full109061 publication and actual baseline stay historical at09000223f. First465-input proof stays frozen and replays before the single workflow-paragraph correction; both full book89/four-control epochs pass. Knowledge1486/1349/twelve overlays/8388218 bytes and public guard pass. Readonly480-input/111654-byte publication owns current routes. No public contract, dependency, gate or budget changes. Output .5.4 follows clean focused landing, then optional kind .5.5, dispatch/rule .5.6, defaults .5.7, fixture .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Independent broader admissions stay open.
+Output .5.4 binds six required roles through four validator returns; all22 required validators now use the existing private helper. All432 native rows/recurrences stay exact; identical1146 assertions retain264 original authority REDs/882 controls and all GREEN. Thirteen complete-source faults reject. All87 supplied suites/332 inputs/27762 top-level assertions and dedicated public diagnostics before/after329 inputs/16 top-level assertions pass. Standard public Phase01035, nine artifact controls, full Knowledge1486/1349/twelve overlays/8388501 bytes, book89/four controls and public guard pass. Whole prior480/full111654 publication/baseline stays historical at4a8e92aef. Original duplicate-label guard rejection and exact correction remain frozen. Readonly publication binds495 compiler inputs/full117562 bytes; its separate kernel sample explicitly leaves a falsification gap with existing startup.7. Wrapper source, recovery and purge are unchanged. Optional kind .5.5 follows clean landing, then direct/rule .5.6, mixed defaults .5.7, registration .7, pipeline .6, metadata .12 and TYPE-REFERENCE-BOOK. Broader admissions remain open.
 
 ## Next Action
 
-Activate output helpers .5.4 from clean Git. Preserve the complete480-input/111654-byte current publication and actual readonly baseline before bound writes; establish native callback behavior before the four required-validator edits. Keep first proof/book epochs and the explicitly unobserved array-copy variant unchanged.
+Activate optional print_each kind .5.5 from clean Git. Preserve the whole117562-byte two-claim publication (495 unique compiler inputs; kernel bindings/limits included) and actual readonly baseline before bound writes. Establish native first/second map selection, callability and argument aliases before the optional invocation change. Startup.7 retains process-group/liveness ownership and recovery/purge restrictions.
 
 ## Recent Completions
 
+- `PERL-PRIVATE-FACTORY-CAPTURE.5.4` — four validators/six roles;432 native rows exact;1146/264 RED/all GREEN;13 faults;87/332/27762; public diagnostics329/16 before/after; standard1035; evidence9; Knowledge8388501; book89/4; readonly495/117562 plus explicit kernel gap; optional kind .5.5 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.3` — six switch validators; native630 exact;1641/273 RED/all GREEN;15 effective faults/one unobserved;85/317/26600; standard1035; evidence9; original463/full109061; first465 replay; two book89/4 epochs; readonly480/111654; output .5.4 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.2` — six validators/seven roles; native105/356/314 exact;1750/294 RED/1456 controls/all GREEN;16 faults;84/310/24959; evidence9; original155/full40701; Knowledge1486/1349/twelve/8388171; book89/4; standard1035; readonly463/109061; switch .5.3 next.
 - `REPO-HYGIENE.18` — dated16310/17449713515 parent; separate Rust483/2390810648; zero removals; four channel/three preservation controls; original507 historical; full1486 Knowledge/12 overlays/8387213; two book89/four epochs; retained reader/history refusals; readonly155/40701; if/while .5.2 next.
@@ -29,7 +30,6 @@ Activate output helpers .5.4 from clean Git. Preserve the complete480-input/1116
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11` — public20/80/16 RED/64 controls; faults14/2/16/evidence2; full1485/1349; book89/4; prior534/123810; frozen136/35512/replay2; registration2 RED/12; storage29; frozen337/79329/replay2; public70/40/private20/scanner8/14/24/evidence3; frozen177/44317/replay2; diagnostics2/evidence2; frozen198/51535/replay2; parent snapshot1/evidence2; current218/58582; exact canonical landing required; FlowExpr next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8` — native185/28/54 changes; exact244 recurrence; paired487/132 RED/355 controls; twelve faults; full76/246/17675/evidence7/book89/4/standard1035; headers6/4 repaired; original522/120245; readonly534/123810.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7` — native230/68/52 changes; exact241 recurrence; paired507/144 RED/363 controls; fourteen faults; full75/243/17188/evidence6/book89/4/standard1035; original519/119936; readonly522/120245.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6` — native280/16/64 changes; exact238 recurrence; paired516/156 RED/360 controls; ten faults; full74/240/16681/evidence6/book89/4/standard1035; original517/119899; readonly519/119936.
 
 ## History
 
