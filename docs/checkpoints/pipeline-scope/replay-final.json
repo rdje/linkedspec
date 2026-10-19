@@ -1,0 +1,15 @@
+{
+ "command": [
+  "python3",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6/publish.py"
+ ],
+ "returncode": 0,
+ "stdout_base64": "UGlwZWxpbmUgaW52b2NhdGlvbiBwdWJsaWNhdGlvbiBQQVNTOiA2MjUgbGl2ZSBpbnB1dHM7IDEyMzQwMSBieXRlcwo=",
+ "stderr_base64": "",
+ "original_inputs_unchanged": true,
+ "input_count": 625,
+ "claim_sha256": "16a1dee80763508f85b7a6de8c84ee5be1171a481554376674565714effc8d3a",
+ "producer_sha256": "3e7de7d3a6b6a1b72f365b0f13768fd1b9db24b8535e88e1923ad7bcc4262fb8",
+ "common_sha256": "4cf5e716d717b4208efc211af3aeacc326f1621eeff81913bb96696b86ae8cee",
+ "scope": "Actual unchanged readonly original publisher and its readers; complete625 saved inputs/modes plus the real activation Perl/claim namespace. Read-only project Git object access uses runtime-derived GIT_DIR/GIT_WORK_TREE and disables optional locks. No native/capture writer or current runtime is executed."
+}

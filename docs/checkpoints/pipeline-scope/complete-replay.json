@@ -1,0 +1,21 @@
+{
+ "command": [
+  "python3",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6/publish.py"
+ ],
+ "returncode": 0,
+ "stdout_base64": "UGlwZWxpbmUgaW52b2NhdGlvbiBwdWJsaWNhdGlvbiBQQVNTOiA2MjUgbGl2ZSBpbnB1dHM7IDEyMzQwMSBieXRlcwo=",
+ "stderr_base64": "",
+ "original_declared_inputs": 625,
+ "supplied_namespace": 161,
+ "guarded_overlay_count": 786,
+ "fixed_git_scopes": [
+  "perl",
+  "docs/claims"
+ ],
+ "claim_sha256": "16a1dee80763508f85b7a6de8c84ee5be1171a481554376674565714effc8d3a",
+ "all_overlay_bytes_and_modes_unchanged": true,
+ "whole_claim_and_mode_unchanged": true,
+ "producer_sha256": "5087e3d2eb08dded4a7806e4632afb98700e1059e3767c7b6cddf810c1c4d26d",
+ "scope": "Actual unchanged original readonly publisher over complete supplied overlays and fixed real activation Git scopes. All786 overlay byte streams/actual modes and the original whole claim/mode are guarded after execution. No native writer or uncommitted-draft Git revision is used."
+}

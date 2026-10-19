@@ -1,0 +1,34 @@
+{
+ "result": "PASS",
+ "producer_sha256": "a999d86ab19a21651d51a93de861fe2444ffffdbdb100f995b03a75efef6f753",
+ "baseline": {
+  "command": [
+   "python3",
+   "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-artifacts/artifact.py",
+   "--parts-only"
+  ],
+  "returncode": 0,
+  "stdout_base64": "QXJ0aWZhY3QgcGFydHMgUEFTUzo0OyAxMjcxOTEwMzcgZXhhY3Qgb3JpZ2luYWwgYnl0ZXMK",
+  "stderr_base64": ""
+ },
+ "originals_sha256": "2415253a031b99d380036660f675590a04540512f70d921ee3404629e88f4215",
+ "reached_sha256": "859bc1fc5c4b452f7a75a6d9908bd8b08fb22053936c42243234d08989ea23ba",
+ "controls": [
+  {
+   "name": "corrupted-part",
+   "reason": "part byte identity",
+   "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-artifacts/counterfactual-part-000.bin"
+  },
+  {
+   "name": "omitted-part",
+   "reason": "complete part population",
+   "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-artifacts/counterfactual-missing.json.gz"
+  },
+  {
+   "name": "reordered-parts",
+   "reason": "ordered part population",
+   "retained": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-artifacts/counterfactual-order.json.gz"
+  }
+ ],
+ "scope": "Three actual whole-file counterfactual CLI denials and exact byte/mode restoration. The complete corrupted part and both complete altered manifests are retained; no native producer is run and no compatibility copy is created by these controls."
+}

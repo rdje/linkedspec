@@ -11,11 +11,12 @@ answers:
   - "how does the historical auditor admit receiver copy regression wiring"
   - does canonical CI select the supplied private factory fixture population
   - which supplied private factory helper scripts receive syntax checks
+  - "does canonical CI select the new pipeline scope fixture"
 date: 2026-10-19
-status: exact supplied fixture block and historical inverse verified; canonical receipt governs admission
+status: canonical .7 receipt retained; pipeline fixture extends the selected framework suite
 tags: [perl, ci, regression, copy, verification]
 evidence: "Leaf .7 inventories91 suites/363 exact supplied inputs and46 test helpers. Original direct selection omits86 suites and132/131 tracked/syntax paths. Actual selected Bash population and historical inverse pass with effective faults; complete originals and failed instruments remain retained. Exact staged CI governs admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/publish.py. Prior:858eba97c."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/pipeline-scope/publish.py. Prior:64b66167c."
 ---
 
 # Explicit Perl CI selection
@@ -29,3 +30,5 @@ The historical auditor reverses this exact block before its older insertions and
 Receiver-copy .3.1.6.0.0 earlier added three exact presence/syntax/execution blocks. Its interrupted first candidate has no receipt or independently retained starting read boundary; the second broke historical anchors. Corrected separate commands and exact inverses preserved the original CI hash. Complete older card/source/observation scope remains at858eba97c and in .7 preparation originals. Earlier observations are never relabeled as new runs.
 
 Exact staged canonical CI and normal hooks govern landing. Pipeline .6 and broader private/mapped/parent admissions remain separately owned. No runtime, fixture, dependency or budget change follows from selection.
+
+Pipeline .6 extends the already selected t/actionir_factory_capture.t to2065 assertions. The existing91-suite/46-helper selector stays unchanged. Its current focused supplied run passes91 suites/32235 assertions with13 effective runtime-source inverses. The canonical .7 receipt at64b66167c covers its dated30394-assertion population; .6 uses the focused tier. Whole603/full115985 and actual readonly baseline are preserved before this later runtime/test change. Broader private/mapped/parent admissions retain their owners.

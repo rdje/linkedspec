@@ -1,0 +1,39 @@
+{
+ "result": "PASS",
+ "producer_sha256": "08127f542edc3ca91d428e08f4303ad164fb9e6b5723a7841c1f45b838d898c8",
+ "complete_before_inputs": 696,
+ "original_claim_bytes": 117298,
+ "canonical_card": "docs/knowledge/project-root-evidence-filesystem-modes.md",
+ "removed_redundant_card": "docs/knowledge/pipeline-checkpoint-artifact-transport.md",
+ "original_reader": {
+  "command": [
+   "python3",
+   "docs/checkpoints/pipeline-scope/publish.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "Q3VycmVudCBwaXBlbGluZSBwdWJsaWNhdGlvbiBQQVNTOiA2OTYgbGl2ZSBpbnB1dHM7IDExNzI5OCBieXRlczsgb3JpZ2luYWw2MjUrMTYxIHN1cHBsaWVkCg==",
+  "stderr_base64": "",
+  "all696_bytes_modes_unchanged": true,
+  "whole_claim_mode_unchanged": true,
+  "compatibility_copy_removed": true
+ },
+ "part_controls": {
+  "command": [
+   "python3",
+   "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-artifacts/controls.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "QXJ0aWZhY3QgcGFydCBjb250cm9scyBQQVNTOjMgYWN0dWFsIGRlbmlhbHM7IGNvbXBsZXRlIGNvdW50ZXJmYWN0dWFsczsgZXhhY3QgcmVzdG9yYXRpb24K",
+  "stderr_base64": ""
+ },
+ "child": {
+  "command": [
+   "python3",
+   "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6-knowledge-route/review-docs.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "Q2Fub25pY2FsLWhvbWUgZG9jdW1lbnRhdGlvbiBQQVNTOjE0ODcvMTM0OS8xMDQ1Mzt1bmNoYW5nZWQ4OS9mb3VyIGNvbnRyb2xzO2FsbCBvbGQgdGFibGVzIGV4YWN0Cg==",
+  "stderr_base64": ""
+ },
+ "scope": "Every before696 byte/mode remains exactly recoverable; actual full readonly baseline before changes is retained without refreshing native measurements. All three artifact questions and complete body survive in the richer maintained canonical home. Current complete supplied graph/map and unchanged full book are independently checked; no registry/limit/measurement is refreshed. Compatibility input lifetime belongs to caller."
+}

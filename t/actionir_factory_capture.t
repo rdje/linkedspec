@@ -220,4 +220,12 @@ my (@outside_release, $outside_weak);
 ok(!defined($outside_weak), 'registration outside an eligible scope retains no callback');
 is_deeply(\@outside_release, ['released'], 'unregistered callback follows its native lexical lifetime');
 
+{
+ require File::Basename;
+ require File::Spec;
+ my $root = File::Spec->rel2abs(File::Basename::dirname(__FILE__).'/..');
+ require "$root/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6/pipeline-assertions-portable-final.pl";
+ require "$root/docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6/pipeline-composition-fixed.pl";
+}
+
 done_testing;

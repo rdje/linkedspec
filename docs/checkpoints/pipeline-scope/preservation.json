@@ -1,0 +1,17 @@
+{
+ "result": "PASS",
+ "input_count": 625,
+ "original_claim_bytes": 123401,
+ "claim_sha256": "16a1dee80763508f85b7a6de8c84ee5be1171a481554376674565714effc8d3a",
+ "capsule_sha256": "1474a6fc106fb72f1fc14d1235b9c5c6865d6653b7da6b6166c0ab6c5ab2676a",
+ "producer_sha256": "e4488945faa0ecb158233826f6194ecef0976cea46da953d87e39dd8e36888c9",
+ "baseline": {
+  "command": [
+   "python3",
+   "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.6/publish.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "UGlwZWxpbmUgaW52b2NhdGlvbiBwdWJsaWNhdGlvbiBQQVNTOiA2MjUgbGl2ZSBpbnB1dHM7IDEyMzQwMSBieXRlcwo=",
+  "stderr_base64": ""
+ }
+}

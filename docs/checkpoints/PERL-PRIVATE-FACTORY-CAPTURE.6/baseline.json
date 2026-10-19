@@ -1,0 +1,10 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/publish.py"
+  ],
+  "returncode": 0,
+  "stdout_base64": "U3VwcGxpZWQgZml4dHVyZSBhZG1pc3Npb24gcHVibGljYXRpb24gUEFTUzogNjAzIGxpdmUgaW5wdXRzOyAxMTU5ODUgYnl0ZXMK",
+  "stderr_base64": ""
+}

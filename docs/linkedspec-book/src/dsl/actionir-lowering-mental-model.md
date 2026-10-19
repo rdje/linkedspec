@@ -1021,7 +1021,7 @@ A known child captured explicitly retains its own packet. Returning that child's
 text does not transfer the packet to its parent; later output builders must
 compose the actual retained child capture. Public dependency maps and callback
 fields stay unchanged. The framework is verified independently. Current factory integration is
-described below; other dependency owners and pipeline activation remain open.
+described below; pipeline invocation scopes have their own section below, while output composition and complete private admission remain separate.
 
 EmitContext now selects definition-owned callback references for contract defaults.
 It snapshots the actual native facade references when the module loads. Replacing
@@ -1038,7 +1038,7 @@ return and exception identities, once-only effects and the actual factory map
 remain unchanged. The existing bridge copies scalar arguments before dispatch,
 shares referenced objects, and restores the caller's successful error state;
 private isolation preserves those existing rules. Contract construction is
-described below; other dependency owners and pipeline activation remain open.
+described below; pipeline invocation scopes have their own section below, while output composition and complete private admission remain separate.
 
 Contracts now isolate injected callbacks through private bindings.
 Their public default maps and returned callback fields keep the actual original
@@ -1076,7 +1076,7 @@ scope restores the enclosing selection. The producer scope retains its actual
 callbacks while eligible and releases those references at exit. Cold construction
 does not load the private emission channel or Trace. Registration selects a
 callback; later output builders must still publish and explicitly compose actual
-packets. Other dependency owners and pipeline activation remain open.
+packets. Pipeline invocation scopes are described below; output composition and complete private admission remain separate.
 
 MethodLowering defaults now select their actual native callback references.
 The built-in EmitContext target returns its original dependency map and callback
@@ -2170,7 +2170,7 @@ SourceEmissions nor Trace.
 
 Selection identifies a callback; it does not demonstrate that a helper published
 an emission packet. Later output assembly must still retain and compose actual
-child captures. ControlFlow, pipeline activation and independent complete private,
+child captures. ControlFlow and pipeline invocation scopes are described below; independent complete private,
 parent and canonical admissions remain separately owned.
 
 Whitespace-only expressions have an ordered zero-width interval after leading
@@ -2466,7 +2466,7 @@ needed. A default branch records `default_seen` before lowering an attached acti
 If that action declines, the flag remains set. These are preserved lowering
 contracts, not newly introduced DSL behavior. Controlled dependency observations
 verify these boundaries; output helpers, direct/rule calls and defaults have their
-own sections below. Pipeline activation remains separately owned.
+own sections below. The pipeline scope has its own section below.
 
 ### ControlFlow output dependency boundaries
 
@@ -2634,7 +2634,7 @@ Selection loads neither the private emission channel nor Trace. It grants no
 authority outside the current source/producer scope, cannot leak into nested
 scopes, restores the enclosing registry after fatal exits, and releases completed
 registries. Registration alone does not emit or compose a packet. Fixture
-registration, pipeline activation and full private acceptance remain separate.
+registration and pipeline invocation scopes have their own sections; full private acceptance remains separate.
 
 ### Original method argument boundaries
 
@@ -2701,6 +2701,50 @@ publish no new fields or callbacks.
 ### RewritePipeline
 
 `ActionIR::RewritePipeline` glues the scan, classify, and lower phases together. It orchestrates the flow: scan for contracts, split statements, produce canonical events, and dispatch to the appropriate lowering owner for each event.
+
+#### Invocation scopes and canonical apply
+
+Each rewrite now opens fresh private producer and input registries inside its
+existing original-source invocation, before it builds contracts. The nesting is:
+
+```text
+original-source invocation
+  producer registry
+    input registry
+      contracts -> helper events -> canonical events -> apply -> diagnostics
+```
+
+The actual source token identifies this invocation. Two invocations with equal
+text have different authority. Nested success or failure restores the enclosing
+registries and any existing outer builder; completed inner registries release.
+
+| Pipeline seam | Native call context | Private boundary |
+| --- | --- | --- |
+| Contract factory | Scalar | Actual factory callback; returned lower references stay unchanged |
+| Helper collection | Scalar | Its own actual callback capture |
+| Canonical-event construction | Scalar | Its own actual callback capture |
+| Canonical apply | Scalar | Actual selected CODE; other native callables remain opaque |
+| Unresolved-helper scan | Scalar | Its own actual callback capture |
+
+The caller still receives its existing list or scalar result, or only the normal
+effects in void context. Callback arguments, aliases, actual event/context/rule
+references, ordering, successful error effects and fatal objects keep their
+native behavior. Apply is fetched once after the current event is installed;
+native symbolic, blessed and overloaded callables retain their dispatch and
+diagnostic site. An opaque temporary callback releases before the next phase.
+
+Authority follows construction in the current registry. For example, a native
+contract factory can register the exact callback it returns. A supplied rule
+with the same ID and an equal-output callback still runs, but that description
+does not register its callback. Keeping a reference from another invocation
+cannot borrow the new invocation's authority. Likewise, an opaque child can
+emit and return `same` without donating a packet to a known outer callback.
+
+This wiring does not build mapped output. Native lowerers continue returning
+ordinary strings; later output builders must explicitly retain and compose
+actual child captures. The existing replacement algorithm and quoted-first
+defect remain with their repair owners. Complete private Phase 0, interval
+mapping and independent parent/canonical admission remain separate.
 
 At `debug` trace level, the Perl reference pipeline reports these stages with
 `actionir:<owner>:<phase>:<label>:<decision>` decisions. That trace can show scanner helper-event discovery,

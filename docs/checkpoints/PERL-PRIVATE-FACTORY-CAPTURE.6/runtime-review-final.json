@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "producer_sha256": "2f79e02642286335511954fd89aae693ed85e32a1e167aeb36af3f50b0b74e6f",
+  "population": {
+    "original_claim_inputs": 603,
+    "original_claim_bytes": 115985,
+    "native_rows": 96,
+    "supplemental_rows": 9,
+    "public_native_calls": 1,
+    "supplied_inputs": 426,
+    "focused_assertions": 2065,
+    "semantic_inverses": 13,
+    "direct_suites": 91,
+    "direct_assertions": 32235
+  },
+  "scope": "Readonly complete retained native/custody/semantic-TAP review; no capture or native writer is executed. Whole original claim and all artifact/capsule bytes/modes remain bound; prior missing-plan, mismatched-context and reader-effect epochs remain distinct."
+}

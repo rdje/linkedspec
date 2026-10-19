@@ -17,7 +17,7 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
 use LinkedSpec::ActionIR::SourceOrigins ();
-
+use LinkedSpec::ActionIR::SourceEmissions ();
 sub _retired_colon_scalar_slot_diagnostic_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }'
 }
@@ -486,7 +486,7 @@ sub _lower_action_code_from_canonical_ir {
   }
 
   local $lower_ctx->{event} = $event;
-  my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
+  my $lowered_stmt = do { my $apply = $rewrite_by_id{$contract_id}{apply}; _capture_canonical_apply($apply, sub { $apply->(@_) }, $source_stmt, $lower_ctx) };
   if (!(defined($lowered_stmt) && length($lowered_stmt)) || $lowered_stmt eq $source_stmt) {
    LinkedSpec::ActionIR::Trace::decision(
     owner => 'rewrite_pipeline',
@@ -607,7 +607,7 @@ sub _build_action_rewrite_rules {
   : undef;
  die "(LinkedSpec::ActionIR::RewritePipeline::_require_dep) -E- missing dependency callback 'build_action_lowering_contracts'"
   unless ref($build_action_lowering_contracts) eq 'CODE';
- my $contracts = $build_action_lowering_contracts->($label);
+ my $contracts = LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($build_action_lowering_contracts, $label);
  my $rules = [map {{
   id                 => $_->{id},
   ir_node            => $_->{ir_node},
@@ -640,7 +640,7 @@ sub _build_action_rewrite_rules {
 
 sub _rewrite_action_code_with_diagnostics {
  my ($label, $code, $rewrite_rules, $deps) = @_;
- return LinkedSpec::ActionIR::SourceOrigins::_with_source_origins($code, sub {
+ return LinkedSpec::ActionIR::SourceOrigins::_with_source_origins($code, sub { return _with_pipeline_emission_scopes(sub {
   my $scope = LinkedSpec::ActionIR::Trace::enter(
    package => __PACKAGE__,
    owner => 'rewrite_pipeline',
@@ -683,7 +683,7 @@ sub _rewrite_action_code_with_diagnostics {
     rewrite_rules_supplied => $rewrite_rules_supplied,
    },
   );
-  my $ir_diag = $collect_action_helper_ir_nodes->($code, $rewrite_rules);
+  my $ir_diag = LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($collect_action_helper_ir_nodes, $code, $rewrite_rules);
   LinkedSpec::ActionIR::Trace::decision(
    owner => 'rewrite_pipeline',
    phase => 'rewrite_action_code_with_diagnostics',
@@ -694,7 +694,7 @@ sub _rewrite_action_code_with_diagnostics {
     helper_action_ir_count => ref($ir_diag) eq 'HASH' ? ($ir_diag->{helper_action_ir_count} || 0) : 0,
    },
   );
-  my $canonical_ir_diag = $build_canonical_action_ir_events->($label, $code, $ir_diag->{helper_action_ir_events});
+  my $canonical_ir_diag = LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($build_canonical_action_ir_events, $label, $code, $ir_diag->{helper_action_ir_events});
   LinkedSpec::ActionIR::Trace::decision(
    owner => 'rewrite_pipeline',
    phase => 'rewrite_action_code_with_diagnostics',
@@ -707,7 +707,7 @@ sub _rewrite_action_code_with_diagnostics {
    },
   );
   my $rewritten = _lower_action_code_from_canonical_ir($label, $code, $rewrite_rules, $canonical_ir_diag);
-  my $diag = $find_unresolved_action_helpers->($rewritten, $rewrite_rules);
+  my $diag = LinkedSpec::ActionIR::SourceEmissions::_invoke_emission_dependency($find_unresolved_action_helpers, $rewritten, $rewrite_rules);
   LinkedSpec::ActionIR::Trace::decision(
    owner => 'rewrite_pipeline',
    phase => 'rewrite_action_code_with_diagnostics',
@@ -742,7 +742,24 @@ sub _rewrite_action_code_with_diagnostics {
    },
   );
   return ($rewritten, $result_diag)
+ }) })
+}
+
+# These helpers follow the original implementation so native callback errors
+# retain their existing source lines. The apply call's lexical block fetches
+# once and releases an opaque selected callable before the next pipeline phase.
+sub _with_pipeline_emission_scopes {
+ my ($work) = @_;
+ return LinkedSpec::ActionIR::SourceEmissions::_with_emission_producers([], sub {
+  return LinkedSpec::ActionIR::SourceEmissions::_with_source_inputs($work)
  })
+}
+
+sub _capture_canonical_apply {
+ my $callback = shift;
+ my $opaque = shift;
+ return LinkedSpec::ActionIR::SourceEmissions::_capture_emission(
+  ref($callback) eq 'CODE' ? $callback : $opaque, @_)->{value}
 }
 
 1;

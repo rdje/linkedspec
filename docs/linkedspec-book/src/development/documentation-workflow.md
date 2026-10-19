@@ -141,7 +141,7 @@ These counts describe literal tracked-file, syntax and prove commands; indirect
 coverage was not inventoried. The admitted block lists all 91 suites and 46 test
 helpers, checks each of the 137 paths through Git presence and Perl syntax, then
 runs all 91 suites. One suite is a historical checkpoint fixture. All 363 supplied
-input bytes and modes stay unchanged. The complete selected run passes 30394 assertions.
+input bytes and modes stay unchanged. The .7 canonical admission at `64b66167c` passes 30,394 assertions; the later focused pipeline extension is described below.
 
 | Actual selected-block experiment | Syntax paths | Suites | Shell exit | Population oracle |
 | --- | --- | --- | --- | --- |
@@ -171,6 +171,73 @@ A historical review command requires its original logical inputs.
 Use the current Knowledge card's readonly entrypoint when documents have changed;
 it should preserve and check the accepted publication separately. Updating a
 command must not refresh an earlier observation or silently change its boundary.
+
+### Pipeline scope proof
+
+The pipeline extension uses the already selected factory-capture suite, so the
+canonical selector remains 91 suites and 46 test helpers. Its focused proof keeps
+the earlier canonical admission's original inputs/results at `64b66167c` and
+preserves the complete publication (603 inputs, 115,985 bytes) before changing shared files.
+
+| Current focused observation | Retained population |
+| --- | --- |
+| Native context, aliases, ordering, values and errors | 96 original rows |
+| Callable, tied lookup and release behavior | 9 rows in distinct original/load-context epochs |
+| Positive pipeline fixture | 2,065 assertions |
+| Exact syntax-valid semantic source inverses | 13, each with the same plan of 2,065 assertions |
+| Complete supplied runtime inputs | 426 files with saved bytes and permissions |
+| All previously selected direct suites | 91 suites, 32,235 assertions |
+
+The source controls remove either scope, move it outside the original-source
+invocation, remove each actual callback boundary, duplicate an apply lookup,
+retain opaque callbacks, register supplied callbacks, move native non-CODE
+diagnostics or coerce body context. Same-source opaque publication, actual
+identities, independently authored Unicode argument intervals and complete
+native ledgers distinguish these faults. The public lowering facade selects an
+actual native callback with its source origin and matching invocation registries.
+
+Retain failed instruments too. The initial fixture require lacked a runtime root
+anchor; an initial assertion plan depended on observed captures. Separate native
+diagnostic epochs exposed the actual `prove` include conversion before imports,
+and a later oracle reader added its own line context until explicitly closed.
+Whole used sources, inputs, raw channels and exact repairs remain distinct.
+Portable comparison projects only the expected historical owned-module filename
+to the current verified module; actual errors and native lines remain exact.
+
+This is focused invocation/callback integration. Native output composition,
+mapping, the quoted-first replacement fix and complete private/parent admission
+keep their separate owners. No selector, public language or budget change follows.
+
+### Pipeline observation transport
+
+The native load-context record retains the actual include argument used by Perl.
+Its standard JSON transport escapes solidus characters without changing any
+decoded value. Exact original bytes, arguments and channels remain recoverable;
+the unchanged original readers verify a restored copy on repository storage.
+
+That restoration exposed an input declaration gap. The original draft declared
+625 bindings in 123,401 bytes, but its reader also inspected a fixed Git claim
+namespace. The current proof supplies all 161 missing claim inputs, including the
+actual prior-claim freeze, and retains the first failed replay. It gives no Git
+revision to the original uncommitted draft. Original runtime measurements keep
+their original sources and dates; the current factory suite also checks the
+decoded transport. Production code, the path gate and native observations stay
+unchanged by this representation repair.
+
+### Checkpoint artifact parts
+
+The original packed preservation has 127,191,037 bytes. GitHub's
+[ordinary Git file limit](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)
+is 100 MiB, so this checkpoint stores four exact parts, each at most 32 MiB. A manifest
+retains aggregate identity, permissions, the complete original 669-input claim and
+the before source images needed to recover its supplied context.
+
+The unchanged original reader executes against bytes recovered from those parts;
+every supplied input and the whole claim retain their bytes and permissions.
+Current verification assembles a compatibility copy during the command and
+removes that known copy afterward. The tracked parts retain every durable byte.
+No native observation, gate or repository history is rewritten, and no oversized
+push is attempted. Corrupted, missing or reordered parts must be rejected.
 
 ### Historical claim populations
 

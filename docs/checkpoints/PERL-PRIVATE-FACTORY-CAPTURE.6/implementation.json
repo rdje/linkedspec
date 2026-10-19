@@ -1,0 +1,45 @@
+{
+  "result": "bounded pipeline implementation",
+  "base": "64b66167c2277533c2393899e3754e14a74f0b31",
+  "path": "perl/LinkedSpec/ActionIR/RewritePipeline.pm",
+  "producer_sha256": "9cb62ff270e2757387065d8527358b51b47b612769b4b9bc886c7d6e5b49f3b2",
+  "before_sha256": "d9d44648ea1f91c76513f4952c423745ab9c5163ac44cdff97abce9895df4987",
+  "after_sha256": "23b5570368b5a7ffe4d0c54f5eb01bc805c5ed7da437495e90c0b76956d42901",
+  "mode": 420,
+  "replacements": [
+    {
+      "before_base64": "dXNlIExpbmtlZFNwZWM6OkFjdGlvbklSOjpTb3VyY2VPcmlnaW5zICgpOwoK",
+      "after_base64": "dXNlIExpbmtlZFNwZWM6OkFjdGlvbklSOjpTb3VyY2VPcmlnaW5zICgpOwp1c2UgTGlua2VkU3BlYzo6QWN0aW9uSVI6OlNvdXJjZUVtaXNzaW9ucyAoKTsK"
+    },
+    {
+      "before_base64": "ICBteSAkbG93ZXJlZF9zdG10ID0gJHJld3JpdGVfYnlfaWR7JGNvbnRyYWN0X2lkfXthcHBseX0tPigkc291cmNlX3N0bXQsICRsb3dlcl9jdHgpOw==",
+      "after_base64": "ICBteSAkbG93ZXJlZF9zdG10ID0gZG8geyBteSAkYXBwbHkgPSAkcmV3cml0ZV9ieV9pZHskY29udHJhY3RfaWR9e2FwcGx5fTsgX2NhcHR1cmVfY2Fub25pY2FsX2FwcGx5KCRhcHBseSwgc3ViIHsgJGFwcGx5LT4oQF8pIH0sICRzb3VyY2Vfc3RtdCwgJGxvd2VyX2N0eCkgfTs="
+    },
+    {
+      "before_base64": "IG15ICRjb250cmFjdHMgPSAkYnVpbGRfYWN0aW9uX2xvd2VyaW5nX2NvbnRyYWN0cy0+KCRsYWJlbCk7",
+      "after_base64": "IG15ICRjb250cmFjdHMgPSBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlRW1pc3Npb25zOjpfaW52b2tlX2VtaXNzaW9uX2RlcGVuZGVuY3koJGJ1aWxkX2FjdGlvbl9sb3dlcmluZ19jb250cmFjdHMsICRsYWJlbCk7"
+    },
+    {
+      "before_base64": "IHJldHVybiBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlT3JpZ2luczo6X3dpdGhfc291cmNlX29yaWdpbnMoJGNvZGUsIHN1YiB7",
+      "after_base64": "IHJldHVybiBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlT3JpZ2luczo6X3dpdGhfc291cmNlX29yaWdpbnMoJGNvZGUsIHN1YiB7IHJldHVybiBfd2l0aF9waXBlbGluZV9lbWlzc2lvbl9zY29wZXMoc3ViIHs="
+    },
+    {
+      "before_base64": "ICBteSAkaXJfZGlhZyA9ICRjb2xsZWN0X2FjdGlvbl9oZWxwZXJfaXJfbm9kZXMtPigkY29kZSwgJHJld3JpdGVfcnVsZXMpOw==",
+      "after_base64": "ICBteSAkaXJfZGlhZyA9IExpbmtlZFNwZWM6OkFjdGlvbklSOjpTb3VyY2VFbWlzc2lvbnM6Ol9pbnZva2VfZW1pc3Npb25fZGVwZW5kZW5jeSgkY29sbGVjdF9hY3Rpb25faGVscGVyX2lyX25vZGVzLCAkY29kZSwgJHJld3JpdGVfcnVsZXMpOw=="
+    },
+    {
+      "before_base64": "ICBteSAkY2Fub25pY2FsX2lyX2RpYWcgPSAkYnVpbGRfY2Fub25pY2FsX2FjdGlvbl9pcl9ldmVudHMtPigkbGFiZWwsICRjb2RlLCAkaXJfZGlhZy0+e2hlbHBlcl9hY3Rpb25faXJfZXZlbnRzfSk7",
+      "after_base64": "ICBteSAkY2Fub25pY2FsX2lyX2RpYWcgPSBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlRW1pc3Npb25zOjpfaW52b2tlX2VtaXNzaW9uX2RlcGVuZGVuY3koJGJ1aWxkX2Nhbm9uaWNhbF9hY3Rpb25faXJfZXZlbnRzLCAkbGFiZWwsICRjb2RlLCAkaXJfZGlhZy0+e2hlbHBlcl9hY3Rpb25faXJfZXZlbnRzfSk7"
+    },
+    {
+      "before_base64": "ICBteSAkZGlhZyA9ICRmaW5kX3VucmVzb2x2ZWRfYWN0aW9uX2hlbHBlcnMtPigkcmV3cml0dGVuLCAkcmV3cml0ZV9ydWxlcyk7",
+      "after_base64": "ICBteSAkZGlhZyA9IExpbmtlZFNwZWM6OkFjdGlvbklSOjpTb3VyY2VFbWlzc2lvbnM6Ol9pbnZva2VfZW1pc3Npb25fZGVwZW5kZW5jeSgkZmluZF91bnJlc29sdmVkX2FjdGlvbl9oZWxwZXJzLCAkcmV3cml0dGVuLCAkcmV3cml0ZV9ydWxlcyk7"
+    },
+    {
+      "before_base64": "ICByZXR1cm4gKCRyZXdyaXR0ZW4sICRyZXN1bHRfZGlhZykKIH0pCn0=",
+      "after_base64": "ICByZXR1cm4gKCRyZXdyaXR0ZW4sICRyZXN1bHRfZGlhZykKIH0pIH0pCn0="
+    }
+  ],
+  "helpers_base64": "IyBUaGVzZSBoZWxwZXJzIGZvbGxvdyB0aGUgb3JpZ2luYWwgaW1wbGVtZW50YXRpb24gc28gbmF0aXZlIGNhbGxiYWNrIGVycm9ycwojIHJldGFpbiB0aGVpciBleGlzdGluZyBzb3VyY2UgbGluZXMuIFRoZSBhcHBseSBjYWxsJ3MgbGV4aWNhbCBibG9jayBmZXRjaGVzCiMgb25jZSBhbmQgcmVsZWFzZXMgYW4gb3BhcXVlIHNlbGVjdGVkIGNhbGxhYmxlIGJlZm9yZSB0aGUgbmV4dCBwaXBlbGluZSBwaGFzZS4Kc3ViIF93aXRoX3BpcGVsaW5lX2VtaXNzaW9uX3Njb3BlcyB7CiBteSAoJHdvcmspID0gQF87CiByZXR1cm4gTGlua2VkU3BlYzo6QWN0aW9uSVI6OlNvdXJjZUVtaXNzaW9uczo6X3dpdGhfZW1pc3Npb25fcHJvZHVjZXJzKFtdLCBzdWIgewogIHJldHVybiBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlRW1pc3Npb25zOjpfd2l0aF9zb3VyY2VfaW5wdXRzKCR3b3JrKQogfSkKfQoKc3ViIF9jYXB0dXJlX2Nhbm9uaWNhbF9hcHBseSB7CiBteSAkY2FsbGJhY2sgPSBzaGlmdDsKIG15ICRvcGFxdWUgPSBzaGlmdDsKIHJldHVybiBMaW5rZWRTcGVjOjpBY3Rpb25JUjo6U291cmNlRW1pc3Npb25zOjpfY2FwdHVyZV9lbWlzc2lvbigKICByZWYoJGNhbGxiYWNrKSBlcSAnQ09ERScgPyAkY2FsbGJhY2sgOiAkb3BhcXVlLCBAXyktPnt2YWx1ZX0KfQoK",
+  "scope": "SourceOrigins remains outermost; fresh producer/input scopes precede factories. Four actual dependency callbacks and actual canonical apply have separate scalar captures. Non-CODE dispatch remains opaque at original line489 with one lookup and call-local lifetime. No public map/reference/algorithm/order or mapping changes."
+}
