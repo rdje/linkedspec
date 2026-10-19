@@ -1,0 +1,105 @@
+{
+  "result": "PASS",
+  "producer_sha256": "14108a6517463d1e9d51d4768ef9bf69353bfc4f2d30812bc50175d58cae75e9",
+  "originals_sha256": "0cd28ecf8183502f315c39005c73b80df58babc719900887308a97c81b8b462c",
+  "reached_sha256": "39e88b1090f22271e9a4703c3f2a862eedc16a6ca7afe18d6c2d59e02ed15509",
+  "controls": [
+    {
+      "name": "missing-namespace",
+      "path": "docs/checkpoints/REPO-HYGIENE.19/preservation.json",
+      "expected_reason": "complete accepted claim namespace",
+      "changed_sha256": "134d06b80ab65e39851c37704a02f72a2ff059ebf3887d4776d4e93bd928add4",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmV2aWV3LWZpbmFsLnB5IiwgbGluZSA0NSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBwcmVzZXJ2ZWRbJ2NlbnN1cyddPT1leHBlY3RlZCwnY29tcGxldGUgYWNjZXB0ZWQgY2xhaW0gbmFtZXNwYWNlJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBjb21wbGV0ZSBhY2NlcHRlZCBjbGFpbSBuYW1lc3BhY2UK"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UmV0YWluZWQgcmV2aWV3IFBBU1M6d2hvbGU1NTAvZnVsbDEyODQ1ODtLbm93bGVkZ2UxNDg3LzE0L29uZSBib2R5O21ldGFkYXRhMTY0NDM7d2FybmluZ3MyNDtib29rODkvZm91cgo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "coherent-whole-claim",
+      "path": "docs/checkpoints/REPO-HYGIENE.19/preservation.json",
+      "expected_reason": "whole accepted claim bytes",
+      "changed_sha256": "5a98ceb867ee19b471aee3af1ef19a1b060163ac69fda36666bac9ac2e60545c",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmV2aWV3LWZpbmFsLnB5IiwgbGluZSA0OSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBkZWNvZGUoY2hvc2VuWydvcmlnaW5hbF9iYXNlNjQnXSk9PW9yaWdpbmFsIGFuZCBjaG9zZW5bJ3NoYTI1NiddPT1zaGEob3JpZ2luYWwpLCd3aG9sZSBhY2NlcHRlZCBjbGFpbSBieXRlcycKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiB3aG9sZSBhY2NlcHRlZCBjbGFpbSBieXRlcwo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UmV0YWluZWQgcmV2aWV3IFBBU1M6d2hvbGU1NTAvZnVsbDEyODQ1ODtLbm93bGVkZ2UxNDg3LzE0L29uZSBib2R5O21ldGFkYXRhMTY0NDM7d2FybmluZ3MyNDtib29rODkvZm91cgo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "missing-original-binding",
+      "path": "docs/checkpoints/REPO-HYGIENE.19/preservation.json",
+      "expected_reason": "complete original binding population",
+      "changed_sha256": "be729f8a99042e7d72ad551e74a7a8fb70d5dad17656b9cb0b074cbb384a0901",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmV2aWV3LWZpbmFsLnB5IiwgbGluZSA1NSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBzZXQoaGl0WzBdWydiaW5kaW5ncyddKT09e3ZbJ3BhdGgnXSBmb3IgdiBpbiBiaW5kaW5nc30sJ2NvbXBsZXRlIG9yaWdpbmFsIGJpbmRpbmcgcG9wdWxhdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGNvbXBsZXRlIG9yaWdpbmFsIGJpbmRpbmcgcG9wdWxhdGlvbgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UmV0YWluZWQgcmV2aWV3IFBBU1M6d2hvbGU1NTAvZnVsbDEyODQ1ODtLbm93bGVkZ2UxNDg3LzE0L29uZSBib2R5O21ldGFkYXRhMTY0NDM7d2FybmluZ3MyNDtib29rODkvZm91cgo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "coherent-rendered-count",
+      "path": "docs/checkpoints/REPO-HYGIENE.19/book.json",
+      "expected_reason": "independently derived reported warning table",
+      "changed_sha256": "fcc050289840d35f8bc6383dd58afbabcc5980d098482994228299aa91cdd5d7",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/book-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYm9vay1yZXZpZXcucHkiLCBsaW5lIDE4MiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBjYXBhY2l0eS5yb3dzW29mZnNldCsxOm9mZnNldCszXT09d2FybmluZ190YWJsZSwgJ2luZGVwZW5kZW50bHkgZGVyaXZlZCByZXBvcnRlZCB3YXJuaW5nIHRhYmxlJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBpbmRlcGVuZGVudGx5IGRlcml2ZWQgcmVwb3J0ZWQgd2FybmluZyB0YWJsZQo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/book-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "Q29tcGxldGUgYm9vayByZXZpZXcgUEFTUzU3KzMyL2ZvdXIgYWN0dWFsIGNvbnRyb2xzOyBleGFjdCBpbnB1dCBhbmQgcmVuZGVyZWQgdGVhY2hpbmcgaWRlbnRpdGllcwo=",
+        "stderr_base64": ""
+      }
+    }
+  ],
+  "scope": "Four actual semantic denials: incomplete fixed accepted namespace, coherently rehashed whole claim, omitted original binding, and coherently repacked rendered warning count. Complete changed bytes and original modes, both actual channels and byte-exact restored PASS remain retained. No producer or original observation is refreshed."
+}

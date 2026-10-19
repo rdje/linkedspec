@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "base": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+  "producer_sha256": "2ec2629df46aca7ff26d230bc009272f5f7fed08c3600c11099ea720cd7e8886",
+  "parent_files": 16443,
+  "parent_bytes": 17576851726,
+  "at_utc": "2026-10-19T00:47:29.953626+00:00",
+  "rust": {
+    "rust/target/debug/deps": {
+      "files": 0,
+      "bytes": 0,
+      "exists": true
+    },
+    "rust/target/debug/incremental": {
+      "files": 483,
+      "bytes": 2390810573,
+      "exists": true
+    },
+    "rust/target/release": {
+      "files": 0,
+      "bytes": 0,
+      "exists": false
+    }
+  },
+  "inputs": {
+    "docs/ARTIFACT_CLEANUP.md": "b8b92e288d0ec1135a0d668ab8d5b7ae564d1a89be5885b51391dc53a6c63daa",
+    "docs/checkpoints/REPO-HYGIENE.18-census.py": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+    "docs/checkpoints/REPO-HYGIENE.19/actual-review.py": "2ec2629df46aca7ff26d230bc009272f5f7fed08c3600c11099ea720cd7e8886",
+    "docs/checkpoints/REPO-HYGIENE.19/actual.json": "a293143b6de29c09bc8f5b5bc26ea3764c1935ba282b456c216d90e19f841757",
+    "docs/checkpoints/REPO-HYGIENE.19/artifact-review.json": "e10d112cc9b68f825f80a9bf9ca3ccb40379378378bf2968180fb269031c255f",
+    "docs/checkpoints/REPO-HYGIENE.19/capture.py": "64ae8d44002f5a3652b5e7a014b9090950004af8b99404cce6ffaa28a58396e7",
+    "docs/checkpoints/REPO-HYGIENE.19/census.py": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+    "docs/checkpoints/REPO-HYGIENE.19/review.py": "d9524add11f46746351be76b1816ba24c3ab8744f2af16b81345b9d3b3989f3b",
+    "docs/checkpoints/REPO-HYGIENE.19/verification.json": "7005ca8210afe5db62cefd162d2904d28218eb5299aab79495e98cd65fe73e0f",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "scope": "Complete actual census/live-review commands, exits, both byte-exact channels and producer guards. Full dated parent/Rust rows and actual live fresh/lstat/size/traversal controls are retained. Defaults recheck dated custody only; no current filesystem stability, content ownership/disposability, concurrent adversarial traversal or liveness/recovery/purge claim. All artifacts/caches retained; zero removed."
+}

@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "producer_sha256": "9d4f82903df8e1b2564ec33cae2ad34810d1c60c6d631874c55fbac857664655",
+  "failed_source_sha256": "a6503ea41253e1a954aeb2e780b3ae0e2e27284ea8607646643d2611e186c308",
+  "unchanged_cards": {
+    "docs/knowledge/finite-engineering-notes-member-0131.md": "2a38ca042812162413813ea569144967d2072e1407e76f7c68919dfd4d75a154",
+    "docs/knowledge/perl-emitcontext-callback-capture.md": "55ffc28be7aa2c67299cbedb3813c2d939d38a0ed89b1c891a3538db1ee43d20",
+    "docs/knowledge/perl-factory-capture-framework.md": "6497fd20c3a8bf383b432debf24f023fdac3510f724cbd7844f7ed6478a68593",
+    "docs/knowledge/perl-legacy-hash-kind-callback.md": "babc737dda407a58e344ff235ac836247fe3461e508f58bc98cc229d6e4f8c43",
+    "docs/knowledge/perl-match-alias-writability.md": "f4661cf701f429242604c0b42dc81aa71f07aed8e5ccbbd17540e468a60637e6",
+    "docs/knowledge/perl-method-assignment-required-capture.md": "80a413c979b08519e3cb4d09a88b9fde41a8be766d7d71affc0ec9729f0e5876",
+    "docs/knowledge/perl-method-ast-call-capture.md": "8f595d8f8e709ec06aba45a37f058f8452a40acc5535795e640b01b31c6cc320",
+    "docs/knowledge/perl-method-block-component-capture.md": "37da8a1b0e4200b59d06bc158ba7b4a1f1686675e414718ba4495a711190a2e3",
+    "docs/knowledge/perl-method-default-capture.md": "937a2f8245964ae1c2e356500f7b215c09da22ff3dfbf6ccb327650740f28279",
+    "docs/knowledge/perl-method-trim-capture.md": "d8b049017db78b69648fad63f5e32c9fb3e54c4cc329df7cb08e5ddd1dc31d35",
+    "docs/knowledge/perl-private-emission-foundation.md": "033c4dc7c42ef4232aa94096587b22a54c337a157e89a064abe2c85aa885484c",
+    "docs/knowledge/project-root-evidence-filesystem-modes.md": "acfbe5adc6d9301ff4423b7802338577247973efc67c5ae647a7c764ede4cb0e",
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md": "a446e9aab1320fb4b5b823b7128ea5d8edcc22f1dccbc81e270b520130759248",
+    "docs/knowledge/rust-dependency-warning-baseline.md": "bcddf58aac746c035559d70b8f2f5e84471e9fae4d5accc9a73e02304459bb49"
+  },
+  "command": [
+    "python3",
+    "docs/checkpoints/REPO-HYGIENE.19/prepare-knowledge.py"
+  ],
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcHJlcGFyZS1rbm93bGVkZ2UucHkiLCBsaW5lIDY1LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHRvdGFsPD04Mzg4NjA4LCgncHJld3JpdGUgS25vd2xlZGdlIGJ1ZGdldCcsdG90YWwpCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6ICgncHJld3JpdGUgS25vd2xlZGdlIGJ1ZGdldCcsIDgzODg2NzMpCg==",
+  "scope": "Exact original producer refuses8388673 bytes before any card write under unchanged8388608 cap. All fourteen cards remain unchanged. A distinct concise evidence-header producer follows; no limit or previous source/report is rewritten."
+}

@@ -1,0 +1,33 @@
+{
+  "owner": "RUST-DEPENDENCY-WARNING-ZERO.1",
+  "context_owner": "PERL-PRIVATE-FACTORY-CAPTURE.5.8",
+  "observed_at_utc": "2026-10-18T23:09:13.900434+00:00",
+  "log": ".linkedspec-data/verification/PERL-PRIVATE-FACTORY-CAPTURE.5.8-canonical-attempt1.log",
+  "log_complete": false,
+  "summaries": [
+    {
+      "log_line": 70266,
+      "phase": "[ci] running exact Rust staged-AST enrichment admission consumer",
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 70485,
+      "phase": "[ci] running exact Rust staged-AST enrichment admission consumer",
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 139302,
+      "phase": "[ci] running exact Rust progressive span-dispatch admission consumer",
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 139304,
+      "phase": "[ci] running exact Rust progressive span-dispatch admission consumer",
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    }
+  ],
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2\n",
+  "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\n",
+  "status": "queued public-output census update after clean capacity boundary; existing non-blocking upstream-warning program retains ownership",
+  "limits": "Counts are per observed public command, not distinct bugs or internal causes. No dependency implementation inspected, no cargo fix/pin/source change. This temporary queue and complete ongoing log must be promoted into the next owned continuity slice; preserve historical1870/26 baseline as dated evidence."
+}

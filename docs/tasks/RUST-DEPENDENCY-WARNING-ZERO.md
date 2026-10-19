@@ -11,7 +11,7 @@ internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 - Status: `proposed` / non-blocking; intake `.0` focused-signoff-complete
 - Roadmap lane: `Repository quality / Rust dependency and generated-source hygiene`
 - Created: `2026-09-04`
-- Last updated: `2026-10-10`
+- Last updated: `2026-10-19`
 - Owner: repo-local workflow
 
 ## Goal
@@ -106,6 +106,7 @@ all contrary historical plans. No dependency implementation assumptions are reta
     source inspection; separate LinkedSpec-owned diagnostics for local repair.
   Verification: `pending`
   Commit: `RUST-DEPENDENCY-WARNING-ZERO.1 - census Rust warnings`
+  Warranted observation 2026-10-19: The successful canonical output admitted at e953f69a9 is retained byte-exact under docs/checkpoints/REPO-HYGIENE.19/canonical.log.gz with original staged/promoted receipts and separate partial/final observations. Independent raw-line/nearest-phase/crate/count and accepted parent/diff/tree review verifies24 compiler-summary occurrences:12 pgen reports7093 and12 rgx-core reports26. Eight actual artifact denials restore exact bytes/modes. The historical1870/26 account remains preserved as dated evidence; configurations, distinct diagnostics/bugs and internal cause are unassessed. This is a scoped public-output observation, not completion of the fuller census or upstream resolution. Keep .1 and .2 scheduled non-blocking behind active residual repair; prepare reports inside LinkedSpec without inspecting/writing dependency implementations, changing pins, suppressing warnings or executing cargo-fix suggestions. No new dependency build was run for this observation.
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.2`
   Status: `pending`

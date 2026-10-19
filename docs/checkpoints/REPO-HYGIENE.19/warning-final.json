@@ -1,0 +1,187 @@
+{
+  "owner": "RUST-DEPENDENCY-WARNING-ZERO.1",
+  "context_owner": "PERL-PRIVATE-FACTORY-CAPTURE.5.8",
+  "captured_at_utc": "2026-10-19T00:27:23.910171+00:00",
+  "log": ".linkedspec-data/verification/PERL-PRIVATE-FACTORY-CAPTURE.5.8-canonical-attempt1.log",
+  "log_complete": true,
+  "log_bytes": 42539296,
+  "log_sha256": "a26b1ca899855099216c0c147ee404ff759576a4037d5fef4ad6acd043e4d23f",
+  "archive": ".linkedspec-data/verification/PERL-PRIVATE-FACTORY-CAPTURE.5.8-canonical-attempt1.log.gz",
+  "archive_sha256": "19dafe119165bc1c8a73d5549935fbede3168fddc408d995e7805f42f5bdf492",
+  "staged_receipt": ".linkedspec-data/verification/PERL-PRIVATE-FACTORY-CAPTURE.5.8-staged-canonical.receipt",
+  "staged_receipt_sha256": "8d2c942d7efe21ce10626b13a6b10d9e18060debd816bc29aedaa33eb590755e",
+  "staged_receipt_base64": "dmVyc2lvbj0xCnN0YXRlPXN0YWdlZApoZWFkPTU0YmI1ZWI2NTE3OGE1N2FjNmU2MWU1MzMyNGM5MjkxODYzZTcxNmQKY29udGVudD03MDgzYmIzMWUwOGRhOGUxYTBlOTI2ZDcxNjdlYmUwZDYxNzkxMjIzY2FmMjMwZjdkNzllMDAzODlhMzcyMjVlCmdhdGU9dG9vbHMvcnVuX2NpX2xvY2FsLnNoCg==",
+  "summaries": [
+    {
+      "log_line": 70266,
+      "phase": "[ci] running exact Rust staged-AST enrichment admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 70485,
+      "phase": "[ci] running exact Rust staged-AST enrichment admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 139302,
+      "phase": "[ci] running exact Rust progressive span-dispatch admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 139304,
+      "phase": "[ci] running exact Rust progressive span-dispatch admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 208121,
+      "phase": "[ci] running exact Rust inter-match gap-capture admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 208123,
+      "phase": "[ci] running exact Rust inter-match gap-capture admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 276736,
+      "phase": "[ci] running exact Rust recognition transaction admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 276955,
+      "phase": "[ci] running exact Rust recognition transaction admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 345784,
+      "phase": "[ci] running exact Rust typed source-location value and projection admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 345786,
+      "phase": "[ci] running exact Rust typed source-location value and projection admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 414643,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 414644,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 483460,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 483461,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 552263,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 552265,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 621069,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 621070,
+      "phase": "[ci] running Rust MCP frozen-runtime, secure-registry, decoded-dispatch, strict-stdio, and exact-admission proof",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 689728,
+      "phase": "[ci] running composed Rust semantic-introspection admission consumer",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 689947,
+      "phase": "[ci] running composed Rust semantic-introspection admission consumer",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 758570,
+      "phase": "[ci] checking the SExprDocumentV1 authored contract across all six runtimes",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 758789,
+      "phase": "[ci] checking the SExprDocumentV1 authored contract across all six runtimes",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    },
+    {
+      "log_line": 827588,
+      "phase": "[ci] proving relocated named-spec execution across all five primary runtime anchors",
+      "crate": "pgen",
+      "reported_warnings": 7093,
+      "summary": "warning: `pgen` (lib) generated 7093 warnings (run `cargo fix --lib -p pgen` to apply 4761 suggestions)"
+    },
+    {
+      "log_line": 827807,
+      "phase": "[ci] proving relocated named-spec execution across all five primary runtime anchors",
+      "crate": "rgx-core",
+      "reported_warnings": 26,
+      "summary": "warning: `rgx-core` (lib) generated 26 warnings"
+    }
+  ],
+  "earlier_partial": ".linkedspec-data/verification/RUST-DEPENDENCY-WARNING-ZERO.1-canonical-observation.json",
+  "status": "queued for next retained-artifact continuity slice; existing non-blocking warning census retains ownership",
+  "limits": "Compiler-summary occurrences, not distinct defects, comparable configurations or internal causes. Final successful canonical output/receipt retained before promotion. No dependency implementation inspection, separate PGEN procedure, cargo fix, pin/source change or warning suppression. Earlier partial observation remains exact; promote complete data and a tracked rederiver into the next owned slice before ending the turn."
+}

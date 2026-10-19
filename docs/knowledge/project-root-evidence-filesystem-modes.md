@@ -12,7 +12,7 @@ date: 2026-10-18
 status: historical mode correction hash-bound; current recognition input modes independently guarded
 tags: [claims, inputs, git, permissions, component-gate, provenance]
 evidence: "The .1.5.2 component instrument stops before running the checker when it compares complete stat permissions to Git mode. The complete observed census has36 readable differences, beginning noncore/AmbiTiming.pm0640 versus recorded100644, with zero executable-bit drift. Preserve both fields and guard actual permissions unchanged; no chmod is performed. Healthy component capture checks4638 actual-root inputs/five retained byte deltas. Independent exact three-edit repair/census/original RED and four effective evidence controls pass."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/publish.py. Prior inputs:54bb5eb65."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.19/publish.py. Prior inputs:e953f69a9."
 ---
 
 The published progressive checker requires tracked-file metadata and runs in the

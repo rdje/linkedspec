@@ -1,0 +1,904 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.19",
+  "claims": [
+    {
+      "name": "dated-retained-metadata-public-warning-output",
+      "statement": "Dated parent16443/17576851726 and separate Rust incremental483/2390810573 metadata are retained with zero removals. Four actual channel, eight warning-artifact and four custody denials restore exact PASS. Complete canonical output has24 public compiler-summary occurrences:12 pgen reports7093 and12 rgx-core reports26. Whole550-input/128458-byte predecessor and actual baseline remain historical at e953f69a9. Complete Knowledge1487 Markdown/1349 facts/fourteen routes/one body/8388524 bytes and book89/four controls pass.",
+      "scope": "Metadata observation2026-10-19T00:47:29.953626UTC preserves all artifacts/caches; Rust release is absent and deps has zero log/bin rows. Full actual census/live-review commands, exits, channels, source guards, fresh/lstat/size/traversal controls remain captured. No current filesystem stability, content/disposability, liveness, concurrent adversarial traversal, recovery or purge claim. Compiler counts are reported summary occurrences, not distinct diagnostics/bugs, proven comparable configurations or an internal cause. Full accepted canonical log, partial/final observations, observed CLI identities and real staged/promoted receipts are retained; independent raw-line/phase/crate/count and parent/diff/tree derivation pass. Old1870/26 account remains whole at accepted Git and in tracked evidence. RUST-DEPENDENCY-WARNING-ZERO.1/.2 keep fuller census/upstream ownership open and non-blocking behind residual repair. No new Rust build, dependency implementation inspection, separate PGEN procedure, source/pin change, cargo fix or suppression. Fixed accepted claim namespace, every original binding byte/actual mode and whole publication match accepted Git; only durability mode/revision changes. Complete original/current Markdown bytes are bound in knowledge-inputs.json.gz and gated by the actual readonly reviewer; fourteen current overlays and other actual support/book inputs are separately bound. Thirteen card bodies and native teaching stay exact. First oversized Knowledge header is refused before writes; only concise evidence expression/report path changes. First reader wrongly requires equal physical expression line counts; original failure/source and exact expression-boundary correction stay retained. Existing limits, runtime, test/checker/CI mechanisms and dependencies stay exact. This focused dated observation grants no new canonical/private/pipeline/parent admission; startup.7 restrictions and fixture.7/pipeline.6/metadata.12 remain separately owned.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.19/publish.py (readonly default). review-final.py, actual-review.py, metadata-evidence.py, warning-review.py, warning-evidence.py, book-review.py and evidence.py defaults are readonly. All original capture/preparation/repair writers remain retired.",
+        "granularity": "Each dated parent/Rust metadata row, both actual commands/channels/guards and independent live controls; every24 summary line/phase/crate/count and two actual receipts; fixed accepted claim namespace,550 bindings/full128458 bytes; all1487 original/current Markdown bytes and separate archive/current modes, fourteen headers/thirteen exact bodies;89 complete book/include inputs and four rendered controls;4+8+4 full actual artifact denials/restorations.",
+        "result": "Dated parent16443/17576851726 and separate Rust incremental483/2390810573 metadata are retained with zero removals. Four actual channel, eight warning-artifact and four custody denials restore exact PASS. Complete canonical output has24 public compiler-summary occurrences:12 pgen reports7093 and12 rgx-core reports26. Whole550-input/128458-byte predecessor and actual baseline remain historical at e953f69a9. Complete Knowledge1487 Markdown/1349 facts/fourteen routes/one body/8388524 bytes and book89/four controls pass."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Incomplete claim/binding/summary populations, coherent immediate hashes or rehashed output could hide changed accepted custody, producer failure/missing channels, swapped counts/crates/phases, forged receipts or historical baseline, failed canonical outcome, or incorrect rendered teaching.",
+        "oracle": "Actual original Git namespace/bytes/modes and successful baseline; independent fresh OS metadata, complete channels and source guards; raw summary bytes/nearest public phase and actual accepted parent/diff/tree; separately derived rendered warning/native/capacity tables and complete recursive include graph.",
+        "red_control": "Actual live aggregate inflation/balanced redistribution and five traversal denials pass. Four actual metadata-channel, eight warning-artifact and four preservation/rendered-count forgeries reject for distinct observed reasons; full changed bytes/modes/channels and exact restored PASS are retained. Four actual book mutations have scoped rendered/source/error oracles. Original 8388673-byte header proposal is refused before writes under unchanged8MiB."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".knowledge_map.conf",
+            "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+            "role": "input"
+          },
+          {
+            "path": "KNOWLEDGE_MAP.md",
+            "sha256": "dc876414015868c4389193b96d851b2a4402d47b43f8d977fc0ca8d9f3aaa100",
+            "role": "input"
+          },
+          {
+            "path": "docs/ARTIFACT_CLEANUP.md",
+            "sha256": "b8b92e288d0ec1135a0d668ab8d5b7ae564d1a89be5885b51391dc53a6c63daa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/after-native-data.json.gz",
+            "sha256": "eb1e6880f7412b7ddf5dd704ab7dfdb9fddc76e0c13d761ffb56b785aadab26c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/after-native.json",
+            "sha256": "0ba088de132edad3fc369353eb58b346651ae96636cd52f2b658cb30c79137f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/after-native-data.json.gz",
+            "sha256": "4b0c3a3cc79e501c2877d38699d46571cbccc0aa7461ced5b61f4df2ef9a4cd6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/after-native.json",
+            "sha256": "68caf99b9c23450cd270ea6247bc185acc333e63539d912a02d62e5e9a000df7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-object/after-data.json.gz",
+            "sha256": "baf4243d6e2359e757c5d23146a6f97a893bf38e8c8d5bba7674eec083f0b867",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-object/after.json",
+            "sha256": "dcb5fade9530083fbefd8db756e2232306e1546c1012fd1a5d18c6a40e6623ef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/plan.json",
+            "sha256": "c658a86daaaaec6eca89feea0f1d102cdad46e65b5228731b51a8542d2d0c0df",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-census.py",
+            "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/actual-review.json",
+            "sha256": "ba5b4783c4bbb2c0aedace14bb2c050c770e388e36136b74dd89cbd21fe14d51",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/actual-review.py",
+            "sha256": "2ec2629df46aca7ff26d230bc009272f5f7fed08c3600c11099ea720cd7e8886",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/actual.json",
+            "sha256": "a293143b6de29c09bc8f5b5bc26ea3764c1935ba282b456c216d90e19f841757",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/artifact-review.json",
+            "sha256": "e10d112cc9b68f825f80a9bf9ca3ccb40379378378bf2968180fb269031c255f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/baseline.json",
+            "sha256": "9508af1bf98321492409eb422d81647a86aaaa8962e28b6f64385381cc9fcc90",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/book-preparation.json",
+            "sha256": "e02ca7d6be7dba85fe65ecde740106d8038cc598b1523d15ffd9124e98163156",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/book-review.json",
+            "sha256": "660111a636815ea1179807b57b3aa7e54cb4a151e2b0e87922a75dffaf8f2244",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/book-review.py",
+            "sha256": "76a04bcb3f7eb0c2f73982ed656834ba1f3fbb1e05b0020ac9a319904356e781",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/book.json",
+            "sha256": "ed4cf0c3d14997ed9b7d676c0554c027bcd685871e9aa42e71172efd60a18d52",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/book.py",
+            "sha256": "040880bc2a4f537ebd2220b1e8df242808c2eba345074f99287023235974512e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/canonical-committed.receipt",
+            "sha256": "2853d38c2275f1fe34e843671385ad1592aff61fcd2c0a2d3598823873c129b0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/canonical-staged.receipt",
+            "sha256": "8d2c942d7efe21ce10626b13a6b10d9e18060debd816bc29aedaa33eb590755e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/canonical.log.gz",
+            "sha256": "19dafe119165bc1c8a73d5549935fbede3168fddc408d995e7805f42f5bdf492",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/capture.py",
+            "sha256": "64ae8d44002f5a3652b5e7a014b9090950004af8b99404cce6ffaa28a58396e7",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/census.py",
+            "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/evidence-originals.json.gz",
+            "sha256": "0cd28ecf8183502f315c39005c73b80df58babc719900887308a97c81b8b462c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/evidence-reached.json.gz",
+            "sha256": "39e88b1090f22271e9a4703c3f2a862eedc16a6ca7afe18d6c2d59e02ed15509",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/evidence.json",
+            "sha256": "84022dc2d8a6b429dcaac55f756c630ffb67be2a1948b015a77adef8d3f4db80",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/evidence.py",
+            "sha256": "14108a6517463d1e9d51d4768ef9bf69353bfc4f2d30812bc50175d58cae75e9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge-inputs.json.gz",
+            "sha256": "b30fa333546884818e031c0bf1d06ae46a2a58fa0bbfb63965be57408ee707c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge-preflight.json",
+            "sha256": "e908ee89774a665688643d394a668c8ecc0026227d43196fdae8e242ec2ed6fa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge-preflight.py",
+            "sha256": "9d4f82903df8e1b2564ec33cae2ad34810d1c60c6d631874c55fbac857664655",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge-preparation-final.json",
+            "sha256": "3d313019a5e883e322887107d5d0a1b3064f8d07e6b6a6847e271c9d50a07a05",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge.json",
+            "sha256": "11bc359aa4b2ec0735c3576daae70c1c1a9acf209b898535cd33a0b392ba3732",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/knowledge.py",
+            "sha256": "20ff09ed4bb37cc729d38f241982af48e313a486f017ba3f198819bf4a27848d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence-original.json.gz",
+            "sha256": "fc5d8a285425e51a9c8f9b7c7dee8e414403af69b8aff9d7b325b6b9dbba489e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence-reached.json.gz",
+            "sha256": "410edb7128d481402da5e00a286cd8565ea1dfd6d62b1ab76f0af466e822b933",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence.json",
+            "sha256": "5fd9d6101f5153c8979eb99fdc27816931c7349cdb432412dc22f61b4519b13f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence.py",
+            "sha256": "8c1f45696bd1cc7a49f0701525b7ada85d6f1b34427cbdfc74d06cf71f0b9283",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/prepare-book.py",
+            "sha256": "d4b9747a6aba27b7cf033ffa510cb02ef94304095349e54515f293fa3e8a1c64",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/prepare-knowledge-final.py",
+            "sha256": "e9d05a7094d017e595f98b9d0cc168624ac1d907d3849a730dadbe8429a34aeb",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/prepare-knowledge.py",
+            "sha256": "a6503ea41253e1a954aeb2e780b3ae0e2e27284ea8607646643d2611e186c308",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/preservation.json",
+            "sha256": "9bf28a4c21446b4abc0797a95f2facdaafebd8d1ab0afd07a21cccabda6102a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/preserve.py",
+            "sha256": "2ec79024bff7bccc04b4f1fbdccae99495722a60d8d06fb088b9d8ff7b8b4c51",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/publish.py",
+            "sha256": "991c20a810982f5d13ef4ec96b0d81f68c355411ac6f28c56dfe33ae0e9ea39d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/repair-review.py",
+            "sha256": "c728e0063984bc8c6f1718dcba3e6269379454896d04b3a8ec4298aee35b7867",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/review-current.py",
+            "sha256": "cda35e3a89904deb7b2f640554f52a07fbb7df7ca09b493e2d9f672f7ad72ccf",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/review-final.json",
+            "sha256": "91fd828609db328e5b4227836720972f3b8fc637cde5d755dba52b82f6a89d58",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/review-final.py",
+            "sha256": "2870393263c0e5c6475d3a136f90c2d1498a7d76d3f9b74f50048cbb0fccad4a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/review-repair.json",
+            "sha256": "275dbea2e4e56dd5e46bfe787b8b841a8d04d20298970a87bf308b130b3a1c12",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/review.py",
+            "sha256": "d9524add11f46746351be76b1816ba24c3ab8744f2af16b81345b9d3b3989f3b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/verification.json",
+            "sha256": "7005ca8210afe5db62cefd162d2904d28218eb5299aab79495e98cd65fe73e0f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-evidence-originals.json.gz",
+            "sha256": "3764c6e258009dcbd7d1a42a3204aeb0688e88618e9060382530a31b5f030f9e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-evidence-reached.json.gz",
+            "sha256": "38443d635861c04c865044a13b9b5d05875d67909e4d0968e19e85c5038e5bf9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-evidence.json",
+            "sha256": "e77f376f30d155510d8d55cee39d0c16d1286f2f2c8699b3ce2d1862bbd6f7a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-evidence.py",
+            "sha256": "89b5c9a3425b1b86376c65e1b82d98573bedb1aa67fed8e56a5af31e0f9a2f49",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-final.json",
+            "sha256": "678624e495e27ce357c6c85e54e2c527e4e77bf9a0e97fc8dd44b75849587aee",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-historical-card.md",
+            "sha256": "bcddf58aac746c035559d70b8f2f5e84471e9fae4d5accc9a73e02304459bb49",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-partial.json",
+            "sha256": "166b40ee52110b88a068747108db24a0197f89a9e477eaa154046ad15b89f519",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-review.json",
+            "sha256": "91bd3a2ea5eacd381e49177f20d1865841ea1198923c1b295a7fd686547448ac",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning-review.py",
+            "sha256": "a6ef2ce409191af9c8163dc58a7987205746790be534b5c26280a6a449c33f4b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning.json",
+            "sha256": "91146c42dd476626bd9ca1d56d3c30a484c1665d8d329ea397674b3db76b6f76",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/warning.py",
+            "sha256": "3127e8ba06fd2e5646c8b935727d6cdacc5ba34baacc47529a1c988d95ea063a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+            "sha256": "0549affc00bbaefbf918d62dda980f81cf7566ed6ad2ff313a80802ce968fffd",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/finite-engineering-notes-member-0131.md",
+            "sha256": "1a3fe059ec120454dbc1fb8af9275e16e6812393f9901ec6b32a198069b832b4",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-emitcontext-callback-capture.md",
+            "sha256": "af15ecbed1739b5291fbbf53b6f8d1c9b9887ff163fb183fc22353c8978edc85",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-factory-capture-framework.md",
+            "sha256": "968854da936404a6a7afe07345856a0ca7452e6d3a1506fd5d9a52a308c1b9e4",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "sha256": "d14a77592490e1079a36ed0cafc06fbebec035b5525c0af1cdf4de86a86bd35a",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-match-alias-writability.md",
+            "sha256": "83e8c0eca0e38c722cf504d83d5e35d393815a90680bc2951abf8b9e4c02f21a",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-assignment-required-capture.md",
+            "sha256": "70699a7b576613a72e691c908a2f0a1fcf901a5e0c1f626fbb00e1f81fe050c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-ast-call-capture.md",
+            "sha256": "863315e2461ba9a6df5efedebba37fcb8f3a1a68b8c402b71089601e6482fb6e",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-block-component-capture.md",
+            "sha256": "6cdc88a7535e72f85b370a171abfcc92ee4d54aec5770ed100969804f41596e1",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-default-capture.md",
+            "sha256": "dcd25b59553c4be901316b4876fa943a2e046b23390a2d89d3ad77cb0eb1a8ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-method-trim-capture.md",
+            "sha256": "8e282c5e0dcfdb634e3755bf9a920f83a3ed7f43cf1fe2b4ead208b1ecf0ce40",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-private-emission-foundation.md",
+            "sha256": "f55dbcffe80552524afe431a4ea5f0f2c5d1b4d9021f9256c638ac07840962ad",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/project-root-evidence-filesystem-modes.md",
+            "sha256": "e4df13644797d16fa072899706ac57f52aee9747733fb888fdcb375fa5fbba5f",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "sha256": "cba53c22e01579b524c1f19ab067fa416e7e9abd8e1b09755d26911859395bce",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/rust-dependency-warning-baseline.md",
+            "sha256": "dbcfe09b6d494c737069d4221c07c792d5d929283aec6adeda43ae59bd302a10",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/book.toml",
+            "sha256": "a95355e608b34cd5373cab0f0d98817457dd2151002d3bf9d7333d3f29f25f9d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/SUMMARY.md",
+            "sha256": "c03d98fa7402249761b77e240abcd7a8f634566088f6ea49640d1019f6736a6c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "sha256": "c114042e5cc8ac59097427a46a0f40821a0bb864f6aeac377aa2a2f41c3a0b19",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+            "sha256": "6d0f3df7130a07ae7003746ed8cbb9829c0c4a81b189eca0a200a993d035fdc1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/owner-tree.md",
+            "sha256": "1cb1d75f9ff0eb070495a702bf8215ee696212da21b15d099b388f32996e87a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+            "sha256": "61b767d93ce64b5f1019f0e51ee8f4f2e29ef0a4b5477e60b5035b4f34887359",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/compiled-state-model.md",
+            "sha256": "2665d8ae4968dd6fc81fc649b15240adbaf73793bde555f35a65b723bb508312",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+            "sha256": "09208db53ac8040f6acf8a424883401f628c7d8bcdc55d4861b4e4c5947b14d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+            "sha256": "c6a37d3f55e17e57379bff6537f8a26c67f44149bc07fa817b80ced01291b659",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "sha256": "fd1d79a452c3ad6de36883dee14bcd6c33b81d2c346c2c165b0004dafdad760e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md",
+            "sha256": "38c48a27c5efe81c82940d8cadf38e6382377c75dd93dac23059b018ddc6a667",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/codegen-inspector.md",
+            "sha256": "a695de68f3aa86242c7aeaba63d0981cdd268ee65fca2c6a17bf5bfef6eff81a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "aafa99fef84e3ea3bd33a89dbcdc92fb04e588f1554fb3db20b93ee5f5419da5",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/macos-rust-launch-latency.md",
+            "sha256": "fa7d0935c2f9ee4a3b9f2a0ab30ff1ac9efdbac5b899e362eec7c5e637e162d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/regression-fixtures.md",
+            "sha256": "8d31c1c58ec9b470b17a079f8d58f955b6cded9816d443f082f2ddb06cbae54e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+            "sha256": "9d1889cd9c5406e3b0b7f9d80a4b2868839d006fdbfe08de176d5d808ae1dba9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+            "sha256": "6afdb038d62efae53b9ed6e9d3bc3777dae5e5bbbbc0703bab64ee1cee45d688",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "1b3fbcd8ff249c152c301b3f748ee3158474aeb4d0d70327de9549512ed21d94",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/declaration-helper-reference.md",
+            "sha256": "3a3e2430de60f898ac2167d47612e1378f4f49e478cee8576816da28d9d4641a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md",
+            "sha256": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "d1cfd40958802d9a1af151e70e243e3cd640667188662f5629ac2476f578701f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md",
+            "sha256": "bd487fda54ddde7164b78c0d792b17f9fd4a7908409c875477e9fda8797931c0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/index.md",
+            "sha256": "0a129e808fb3fb6b21787091bc31a081d060c1ac0edc44f9645171a0ef254b23",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/design-rationale.md",
+            "sha256": "7f6cdde29a314bfbe0cbf740f2b9f8478848f5b7e9138ac2fd768468587e10f6",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/documentation-layers.md",
+            "sha256": "575cf2ce303ca06292dd7a734ccf9f5f709f45ecd1b974c0d7663915bfc2b1ee",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "sha256": "29c8931cb431f9848ecd7e8e43db20c4f3cb0a02339715e660f284efed786772",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/overview/what-is-linkedspec.md",
+            "sha256": "70d72dc417a0cf43bb2e14cdd8719f2c3dbad354fd2d7d9bbf25633e0d911fe1",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "sha256": "1e957803415adaba23b15a32f2388a9d71a041716689e8045fa799b852d7cae0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "sha256": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-dart.md",
+            "sha256": "df759f1978df3df6c27b24e531dd4787a6f18e876d12ab2aff480c4ac1e42bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-julia.md",
+            "sha256": "b6c42ff4d60e18bd17beca4a27546276f15098d18a3370de5418f59f6d2559d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-lua.md",
+            "sha256": "5690eba8e4091900db2e6c94c004a4ac223396f0b1feefbad48913177a197d9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-perl.md",
+            "sha256": "5ec2f45ae024cf87cb8cae905fc6c3f15735a43bcc21874bd18c9ba1c8b9c441",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration-rust.md",
+            "sha256": "958ead8127b47dd1a0ae494ce87ef19fa83451a083ff0523a388004799536442",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/integration.md",
+            "sha256": "641a5ea0ec4872b6ac436d8b62c9d1b6cab9c5e422b6fb47b0d87a6aa2b8241c",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+            "sha256": "85ff1f9cebf91b54b68bb7155db5c89b9866e956c74dff9b83f31ce360a8d7f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/plugin-registry.md",
+            "sha256": "fe00a325064037455df8ffcdc611d5838df9001c5783a350c7900b1ab62ccff9",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md",
+            "sha256": "f9f3710cb41e073ea64989fd296cff93c23c10bdc434c66859de8929d2b338e7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/public-api/trace-api.md",
+            "sha256": "831366abed5d75daa881e6f993ea2f695e6b919529ad6964c353f831c47d60c3",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/ebnf-spec-walkthrough.md",
+            "sha256": "e74d2266f2c28d1a5425a94c60718548eb26cc83ed700fe4478cd23593ab1868",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/lispish-spec-walkthrough.md",
+            "sha256": "06cc2056aaddd80631878f99b75922c062f3e441562eed9233592cbae60d3c55",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md",
+            "sha256": "01dab1b4c29b4085e69aac5bed1de8e66256b1dfaa34ce3c56c3f43d1ad0fd95",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/pplugin-spec-walkthrough.md",
+            "sha256": "ddd3d22ccd28927c24e2a34db15f0bee2a940f6a8c3518252af402b7d7eb6b33",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/sexpr-document-v1.md",
+            "sha256": "65fde45de06b3c18cad59a01cb02944ed8ff105b94e0d02b2f61f525b88f391e",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md",
+            "sha256": "bd1667dd99133f5c6541eb9d6e127e8c529c05823b1e20829e78674d44ecad13",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md",
+            "sha256": "dfbe3a28ec0e9edb53d0ccd2af5a36c4bfb5521a258e7a7d1afd22b135edc982",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md",
+            "sha256": "cc8d62e530a80a2b317afbfe45950d42e11840844bf3f6565ed8f4d3735e9082",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/regex-in-spec.md",
+            "sha256": "82d2e6997eecdac97bd7213d186acd021b87fc522b58eb62e5a90999adf2ab82",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "sha256": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+            "sha256": "4705ecabaab5cb159245172adaf409031680f35538408d0fd0a2f9800b685d3f",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "sha256": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md",
+            "sha256": "564008087999530f5087c497f7ea035b29368dd7ea337589335a9bd3cf8e6eea",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-DEPENDENCY-WARNING-ZERO.md",
+            "sha256": "2a64b2f6c3e560e867c9ae51f7237e136816855d6a000e34ebec5a094aaf9e3a",
+            "role": "input"
+          },
+          {
+            "path": "examples/compact-hash-keys.spec",
+            "sha256": "fc12ee11b384f06572e690882328c9266229ea5a573ab493adde623c789075a1",
+            "role": "input"
+          },
+          {
+            "path": "examples/direct-read-purity.spec",
+            "sha256": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67",
+            "role": "input"
+          },
+          {
+            "path": "examples/flat-bound-values.spec",
+            "sha256": "b0d4cc3fd2dd3651f98711c76df296d5db4dcd37b2d37c6b81dca4c6a1a30dff",
+            "role": "input"
+          },
+          {
+            "path": "examples/function-array-values.spec",
+            "sha256": "839d8d04d313e482a497fc009b23990437a22519e37df5da76d064f9cccca360",
+            "role": "input"
+          },
+          {
+            "path": "examples/indexed-value-reads.spec",
+            "sha256": "f3d00d0c87916737ab9ceda89168801300313781f6a2e28c2e5555b88ba77ef9",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse-words",
+            "sha256": "863a6d756f526f23344f9743c150c5800618aa44af96b557e2ebe9d3e46e7b4d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/bin/parse_words.dart",
+            "sha256": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/dart/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse-words",
+            "sha256": "59661a1e7e1cfa2de3ad640a26302ad1faa62682596c94d694b66d60ae528891",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/bin/parse_words.jl",
+            "sha256": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/julia/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/bin/parse_words.lua",
+            "sha256": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/diagnostics.spec",
+            "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/lua/exit.spec",
+            "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/diagnostics.spec",
+            "sha256": "3964804eb570446c031303119f45a6bb7665ab206b4531e175f430c2ab8e638d",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse-words",
+            "sha256": "62af046e14e324ae32d831e7740bc8fb794eb73201c80c28ccc5b9dc4dccc8c2",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/perl/parse_words.pl",
+            "sha256": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+            "role": "producer"
+          },
+          {
+            "path": "examples/integration/rust/Cargo.toml",
+            "sha256": "fb734fc06c36ac3e34f9184e7b854af6b71791a829662dafda75203a07fef1c5",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/settings.sexp",
+            "sha256": "b1ddfb81644a31e0d3636f0ca80a482e07a331dfad8c8d5347a3246d5be2e2f0",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/lispish_file.rs",
+            "sha256": "ec395937e62d5284fc0677d55b9ad373958ff6230b235cc5630a39f80c0fc403",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/bin/sexpr_file.rs",
+            "sha256": "7419573fb67b52cded1206aa0fe86a84f83432e3516a57ac3ad59efd4cfff23a",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/rust/src/main.rs",
+            "sha256": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+            "role": "input"
+          },
+          {
+            "path": "examples/integration/word.spec",
+            "sha256": "52205524e7d54bbd33de16e702b0cfb4edb2b51b2d21248149bdf19007dbb1e5",
+            "role": "input"
+          },
+          {
+            "path": "examples/numeric-array-values.spec",
+            "sha256": "5211bca340372b75724ab728c55b7f119db4b3f7af90dc05572409ac90f9ef58",
+            "role": "input"
+          },
+          {
+            "path": "knowledge-map/scripts/check_knowledge_map.sh",
+            "sha256": "753ba902389121abdee187e5f6dcb11ab1845fb9b43741ac5884d4feba8a0d73",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/gen_knowledge_map.sh",
+            "sha256": "9bfe23dc21334181ad9d641c536e18a16b9ef4d99a00c7abd2b69a50461d39b1",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/knowledge_map.conf",
+            "sha256": "48ae2897460c62de080523715ad808af71e991b0fa6c36615d437129b5d4756c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/composed/normalization-calls.spec",
+            "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/grammar.spec",
+            "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/child.spec",
+            "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/parent.spec",
+            "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-segments/grammar.spec",
+            "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/grammar.spec",
+            "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

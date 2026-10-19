@@ -7,32 +7,23 @@ answers:
   - which task owns Rust dependency warning reports
   - may LinkedSpec patch RGX or PGEN warning causes
   - what git boundary owns rgx and pgen warning fixes
-date: 2026-10-10
-status: observable baseline retained; upstream implementation investigation and edits forbidden
+  - what does the current canonical output report for PGEN warnings
+  - does 7093 mean distinct PGEN defects
+date: 2026-10-19
+status: dated public summaries retained; fuller census/upstream work remains open
 tags: [rust, dependencies, warnings, public-contract, task-tree]
-evidence: "Repeated completed canonical build logs report 1870 pgen and26 rgx-core warnings. September20 director boundary restricts LinkedSpec to published dependency interfaces and upstream reports."
-reverify: "Observe ordinary documented build output when a build is otherwise warranted; retain exact command, versions and exit status. Do not inspect dependency source or run source-changing repair tools."
+evidence: "Canonical e953f69a9 retains 24 summary occurrences; exact raw-line/phase/count and Git-receipt review pass. Reported counts and dated1870/26 stay scoped in the preserved body."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.19/publish.py. Prior inputs:e953f69a9."
 ---
 
-**Direct dependency boundary:** LinkedSpec integrates only with RGX. RGX's
-published integration document, public APIs and contracts are the sole authority.
-RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
-internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+# Public warning-output account
 
-Completed Rust builds repeatedly reported 1,870 warnings for `pgen` and 26 for
-`rgx-core`. These are output counts for those runs, not a proven count of distinct
-bugs or a causal explanation. Do not suppress the warnings to claim a clean build.
+LinkedSpec integrates only with RGX through its published integration document, APIs and contracts. RGX owns PGEN/transitive preparation. Do not inspect or edit either implementation, reconstruct a separate PGEN procedure, change pins, execute source-changing cargo suggestions or suppress warnings to claim a clean build.
 
-`RUST-DEPENDENCY-WARNING-ZERO` retains ownership of the desired warning-clean
-outcome. For RGX/PGEN, its work is limited to public-interface reproduction,
-upstream reports and evaluation of upstream-published results. It does not permit
-reading dependency implementation, applying fixes, reconstructing generators or
-changing pins. LinkedSpec-owned code can be repaired in its own task-owned slices.
+The warranted canonical run admitted at e953f69a9 contains 24 summary-line occurrences: 12 report 7093 for pgen; 12 report 26 for rgx-core. The complete successful log, original staged and promoted receipts, separate partial/final observations and observed CLI tool identities are retained under docs/checkpoints/REPO-HYGIENE.19/. Independent review derives every raw line, nearest public phase, crate/count and actual accepted parent/diff/tree. Defaults read captured evidence; no new build is run.
 
-Published contracts and observable command results are the integration authority.
-The canonical task and this fact adopted that boundary on September20. Roadmap
-projections still retained contrary internal-repair and pin-change plans until
-`RUST-DEPENDENCY-WARNING-ZERO.8` corrected their current paragraphs and status rows.
-Those projections now share the public RGX/upstream boundary; the historical
-output baseline and non-blocking runtime program remain unchanged.
-Related: [[rust-ci-pgen-missing-input-rebuilds]], [[verification-cadence-policy]].
+These are compiler-reported summaries, not counts of distinct diagnostics/bugs, proven comparable configurations or an internal cause. The earlier dated account reported 1870/26; its whole original header/body remains at e953f69a9 and warning-historical-card.md. Preserve that history rather than relabeling it as a new run.
+
+RUST-DEPENDENCY-WARNING-ZERO.1 owns the fuller public census; .2 owns an upstream RGX report and evaluation of published results. This partial output account closes neither. Keep the program non-blocking behind active residual repair. Observe future counts only through otherwise warranted documented builds; retain command, identity, exit and full channels.
+
+The September20 boundary already governed the canonical task/card. RUST-DEPENDENCY-WARNING-ZERO.8 corrected contrary current roadmap internal-repair/pin plans on October10; no old output was refreshed. LinkedSpec-owned diagnostics may be repaired only in their own task-owned slices. Related: [[rust-ci-pgen-missing-input-rebuilds]], [[verification-cadence-policy]].

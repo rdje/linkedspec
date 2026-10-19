@@ -109,6 +109,24 @@ manifest. A separate census rejected both affected populations. The exact two-li
 correction then passed the real census, inclusive boundary observations and authority
 denials. Preserve that rejected source and output alongside the corrected producer.
 
+### Dated retention and reported-output example
+
+The current dated review retained 16443 parent artifact rows and 483 Rust incremental rows, with zero removals. Independent live
+census and per-file metadata checks ran before publication. Keep the dated snapshot,
+complete command channels and reusable caches; a retention review supplies no
+content-ownership, disposability or liveness permission.
+
+| Public compiler summary | Occurrences in captured log | Reported count per summary |
+| --- | --- | --- |
+| pgen | 12 | 7093 |
+| rgx-core | 12 | 26 |
+
+Each row records compiler reports from the warranted canonical run. Distinct
+diagnostics, defects, comparable configurations and internal causes remain unassessed.
+The earlier dated 1870/26 account stays preserved. The upstream-owned warning census
+and reporting tasks remain open; this observation introduces no new dependency build,
+implementation inspection, pin change or warning suppression.
+
 Preserve any live evidence that binds the root or book before changing them.
 Keep its original hashes at the accepted Git revision, then separately verify the
 new rollover against that revision. A healthy render also checks recursive local
@@ -146,12 +164,12 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks this finite continuity admission and
-preserves the complete 565-input mixed-default/package-object publication and its
-actual successful baseline at `54bb5eb65`. That accepted boundary retains native
-observations, exact definition-owned selection, full-source faults, supplied consumers
-and the public Perl diagnostic contract; administrative maintenance refreshes none
-of those observations.
+The current verification entrypoint checks this dated retention and reported-output
+review and preserves the complete 550-input finite-capacity publication and its actual
+successful baseline at `e953f69a9`. The complete 565-input mixed-default/package-object
+publication remains at `54bb5eb65`, retaining native observations, exact definition-owned
+selection, full-source faults, supplied consumers and the public Perl diagnostic contract.
+Administrative maintenance refreshes none of those observations.
 The complete initial546-input logical draft is preserved with every input byte/mode.
 Its actual original publisher replays from2020 supplied files; this is an uncommitted
 logical draft, not a historical Git revision or admission for object targets.
@@ -162,10 +180,11 @@ complete480-input switch publication remains at `4a8e92aef`, and the complete463
 if/while publication remains at `09000223f`,
 the earlier155-input artifact publication at `a60764c11`, and the finite
 engineering-history publication at `e2ec1e96b`. No historical observation is
-refreshed. Only the finite allowances above change; all other budgets stay fixed:
+refreshed. The finite example above changes only its listed allowances; this dated
+retention review changes no budget:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.19/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

@@ -1,0 +1,185 @@
+{
+  "result": "PASS",
+  "producer_sha256": "89b5c9a3425b1b86376c65e1b82d98573bedb1aa67fed8e56a5af31e0f9a2f49",
+  "originals_sha256": "3764c6e258009dcbd7d1a42a3204aeb0688e88618e9060382530a31b5f030f9e",
+  "reached_sha256": "38443d635861c04c865044a13b9b5d05875d67909e4d0968e19e85c5038e5bf9",
+  "controls": [
+    {
+      "name": "omitted-summary",
+      "expected_reason": "complete compiler-summary occurrence population",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDU0LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbihhY3R1YWwpPT1sZW4oZXhwZWN0ZWQpPT0yNCwnY29tcGxldGUgY29tcGlsZXItc3VtbWFyeSBvY2N1cnJlbmNlIHBvcHVsYXRpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBjb21wbGV0ZSBjb21waWxlci1zdW1tYXJ5IG9jY3VycmVuY2UgcG9wdWxhdGlvbgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "wrong-count",
+      "expected_reason": "raw compiler-summary crate/count association",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDU3LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlZnRbJ2NyYXRlJ109PXJpZ2h0WydjcmF0ZSddIGFuZCBsZWZ0WydyZXBvcnRlZF93YXJuaW5ncyddPT1yaWdodFsncmVwb3J0ZWRfd2FybmluZ3MnXSwncmF3IGNvbXBpbGVyLXN1bW1hcnkgY3JhdGUvY291bnQgYXNzb2NpYXRpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiByYXcgY29tcGlsZXItc3VtbWFyeSBjcmF0ZS9jb3VudCBhc3NvY2lhdGlvbgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "wrong-crate",
+      "expected_reason": "raw compiler-summary crate/count association",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDU3LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlZnRbJ2NyYXRlJ109PXJpZ2h0WydjcmF0ZSddIGFuZCBsZWZ0WydyZXBvcnRlZF93YXJuaW5ncyddPT1yaWdodFsncmVwb3J0ZWRfd2FybmluZ3MnXSwncmF3IGNvbXBpbGVyLXN1bW1hcnkgY3JhdGUvY291bnQgYXNzb2NpYXRpb24nCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiByYXcgY29tcGlsZXItc3VtbWFyeSBjcmF0ZS9jb3VudCBhc3NvY2lhdGlvbgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "wrong-phase",
+      "expected_reason": "nearest public phase association",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDU4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlZnRbJ3BoYXNlJ109PXJpZ2h0WydwaGFzZSddLCduZWFyZXN0IHB1YmxpYyBwaGFzZSBhc3NvY2lhdGlvbicKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogbmVhcmVzdCBwdWJsaWMgcGhhc2UgYXNzb2NpYXRpb24K"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "forged-committed-receipt",
+      "expected_reason": "actual committed canonical receipt",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDM4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGNvbW1pdHRlZD09ZGljdCh2ZXJzaW9uPScxJyxzdGF0ZT0nY29tbWl0dGVkJyxoZWFkPUJBU0UsY29udGVudD10cmVlLGdhdGU9J3Rvb2xzL3J1bl9jaV9sb2NhbC5zaCcpLCdhY3R1YWwgY29tbWl0dGVkIGNhbm9uaWNhbCByZWNlaXB0JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBhY3R1YWwgY29tbWl0dGVkIGNhbm9uaWNhbCByZWNlaXB0Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "changed-historical-baseline",
+      "expected_reason": "whole dated historical warning account",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDY4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IG9sZD09YWNjZXB0ZWQsJ3dob2xlIGRhdGVkIGhpc3RvcmljYWwgd2FybmluZyBhY2NvdW50JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IHdob2xlIGRhdGVkIGhpc3RvcmljYWwgd2FybmluZyBhY2NvdW50Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "changed-actual-log",
+      "expected_reason": "archive_sha256",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDI5LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IHNoYShwYWNrZWQpPT1maW5hbFsnYXJjaGl2ZV9zaGEyNTYnXSBhbmQgbGVuKGxvZyk9PXJlY29yZFsnbG9nX2J5dGVzJ109PWZpbmFsWydsb2dfYnl0ZXMnXQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "failed-canonical-outcome",
+      "expected_reason": "local CI gate passed",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1yZXZpZXcucHkiLCBsaW5lIDMxLCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxvZy5yc3RyaXAoKS5lbmRzd2l0aChiJ1tjaV0gbG9jYWwgQ0kgZ2F0ZSBwYXNzZWQnKQogICAgICAgICAgIH5+fn5+fn5+fn5+fn5+fn5+fn5+fl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcgo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/warning-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "UHVibGljIHdhcm5pbmcgcmV2aWV3IFBBU1M6IDI0IHJhdyBzdW1tYXJ5IG9jY3VycmVuY2VzO2FjdHVhbCByZWNlaXB0L3RyZWU7ZGF0ZWQgYmFzZWxpbmUgcmV0YWluZWQK",
+        "stderr_base64": ""
+      }
+    }
+  ],
+  "scope": "Eight actual bounded artifact denials with full changed bytes/modes, both channels and exact restoration. Seven semantic population/association/phase/Git-receipt/historical-account/outcome checks and one original-log custody hash check have distinct observed reasons. Coherent immediate report hashes cannot hide the stated alternatives. No dependency code or build is inspected/run."
+}

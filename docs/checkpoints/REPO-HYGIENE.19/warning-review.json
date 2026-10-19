@@ -1,0 +1,34 @@
+{
+  "result": "PASS",
+  "base": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+  "producer_sha256": "a6ef2ce409191af9c8163dc58a7987205746790be534b5c26280a6a449c33f4b",
+  "summary_occurrences": 24,
+  "reported_values": {
+    "pgen": [
+      7093
+    ],
+    "rgx-core": [
+      26
+    ]
+  },
+  "historical_reported_values": {
+    "pgen": 1870,
+    "rgx-core": 26
+  },
+  "counts_by_crate": {
+    "pgen": 12,
+    "rgx-core": 12
+  },
+  "inputs": {
+    "docs/checkpoints/REPO-HYGIENE.19/canonical-committed.receipt": "2853d38c2275f1fe34e843671385ad1592aff61fcd2c0a2d3598823873c129b0",
+    "docs/checkpoints/REPO-HYGIENE.19/canonical-staged.receipt": "8d2c942d7efe21ce10626b13a6b10d9e18060debd816bc29aedaa33eb590755e",
+    "docs/checkpoints/REPO-HYGIENE.19/canonical.log.gz": "19dafe119165bc1c8a73d5549935fbede3168fddc408d995e7805f42f5bdf492",
+    "docs/checkpoints/REPO-HYGIENE.19/warning-final.json": "678624e495e27ce357c6c85e54e2c527e4e77bf9a0e97fc8dd44b75849587aee",
+    "docs/checkpoints/REPO-HYGIENE.19/warning-historical-card.md": "bcddf58aac746c035559d70b8f2f5e84471e9fae4d5accc9a73e02304459bb49",
+    "docs/checkpoints/REPO-HYGIENE.19/warning-partial.json": "166b40ee52110b88a068747108db24a0197f89a9e477eaa154046ad15b89f519",
+    "docs/checkpoints/REPO-HYGIENE.19/warning-review.py": "a6ef2ce409191af9c8163dc58a7987205746790be534b5c26280a6a449c33f4b",
+    "docs/checkpoints/REPO-HYGIENE.19/warning.json": "91146c42dd476626bd9ca1d56d3c30a484c1665d8d329ea397674b3db76b6f76",
+    "docs/checkpoints/REPO-HYGIENE.19/warning.py": "3127e8ba06fd2e5646c8b935727d6cdacc5ba34baacc47529a1c988d95ea063a"
+  },
+  "scope": "Independent complete raw compiler-summary occurrence/line/crate/count/nearest-phase reconstruction. Both actual canonical receipts derive from the accepted parent/diff/tree, and separate partial/final observations remain exact. CLI versions are observed, not immutable compiler/configuration claims. Counts are reported summaries, not distinct warnings/bugs or established causes; no dependency implementation or new build is read/run."
+}

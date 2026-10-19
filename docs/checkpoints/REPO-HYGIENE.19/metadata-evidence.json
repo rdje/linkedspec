@@ -1,0 +1,101 @@
+{
+  "result": "PASS",
+  "producer_sha256": "8c1f45696bd1cc7a49f0701525b7ada85d6f1b34427cbdfc74d06cf71f0b9283",
+  "original_sha256": "fc5d8a285425e51a9c8f9b7c7dee8e414403af69b8aff9d7b325b6b9dbba489e",
+  "reached_sha256": "410edb7128d481402da5e00a286cd8565ea1dfd6d62b1ab76f0af466e822b933",
+  "controls": [
+    {
+      "name": "failed-producer",
+      "expected_reason": "actual producer exit",
+      "changed_sha256": "1acd0e9c721d33c25f4f83c70f4c9cf3058a43f2d03c3a8462e5ba44d57061ea",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYWN0dWFsLXJldmlldy5weSIsIGxpbmUgMzQsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgcm93WydleGl0J109PTAsJ2FjdHVhbCBwcm9kdWNlciBleGl0JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBhY3R1YWwgcHJvZHVjZXIgZXhpdAo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "QWN0dWFsIHJldGVudGlvbiByZXZpZXcgUEFTUzogMTY0NDMgZGF0ZWQgcGFyZW50IHJvd3M7ZnVsbCBjaGFubmVscy9saXZlIGNvbnRyb2xzO3plcm8gcmVtb3ZhbHMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "missing-channel",
+      "expected_reason": "both complete actual channels",
+      "changed_sha256": "454a2b0a21832a8b8ad32117b0d645e8b25b599a360a76b35626ecec4757d640",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYWN0dWFsLXJldmlldy5weSIsIGxpbmUgMzUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgeydzdGRvdXQnLCdzdGRlcnInfTw9c2V0KHJvdyksJ2JvdGggY29tcGxldGUgYWN0dWFsIGNoYW5uZWxzJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBib3RoIGNvbXBsZXRlIGFjdHVhbCBjaGFubmVscwo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "QWN0dWFsIHJldGVudGlvbiByZXZpZXcgUEFTUzogMTY0NDMgZGF0ZWQgcGFyZW50IHJvd3M7ZnVsbCBjaGFubmVscy9saXZlIGNvbnRyb2xzO3plcm8gcmVtb3ZhbHMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "coherent-stdout-forgery",
+      "expected_reason": "actual complete stdout artifact",
+      "changed_sha256": "134724d460561ed69603f2d09092235c747faf66f1f9d33111e81d74bff798e8",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYWN0dWFsLXJldmlldy5weSIsIGxpbmUgNDAsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgb3V0PT1yYXcodGFyZ2V0KSwnYWN0dWFsIGNvbXBsZXRlIHN0ZG91dCBhcnRpZmFjdCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBhY3R1YWwgY29tcGxldGUgc3Rkb3V0IGFydGlmYWN0Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "QWN0dWFsIHJldGVudGlvbiByZXZpZXcgUEFTUzogMTY0NDMgZGF0ZWQgcGFyZW50IHJvd3M7ZnVsbCBjaGFubmVscy9saXZlIGNvbnRyb2xzO3plcm8gcmVtb3ZhbHMK",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "coherent-producer-forgery",
+      "expected_reason": "actual producer source custody",
+      "changed_sha256": "9741bb78b7fc110a4fcdefa6129f0a6394c948ff7d86ba9f2d807033e409416b",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYWN0dWFsLXJldmlldy5weSIsIGxpbmUgMjgsIGluIDxtb2R1bGU+CiAgICBmb3IgcCxpZGVudGl0eSBpbiBhY3R1YWxbJ2lucHV0cyddLml0ZW1zKCk6YXNzZXJ0IHNoYShyYXcocCkpPT1pZGVudGl0eSwnYWN0dWFsIHByb2R1Y2VyIHNvdXJjZSBjdXN0b2R5JwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGFjdHVhbCBwcm9kdWNlciBzb3VyY2UgY3VzdG9keQo="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/REPO-HYGIENE.19/actual-review.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "QWN0dWFsIHJldGVudGlvbiByZXZpZXcgUEFTUzogMTY0NDMgZGF0ZWQgcGFyZW50IHJvd3M7ZnVsbCBjaGFubmVscy9saXZlIGNvbnRyb2xzO3plcm8gcmVtb3ZhbHMK",
+        "stderr_base64": ""
+      }
+    }
+  ],
+  "scope": "Four actual reader denials distinguish failed producers, lost complete channels, a coherently rehashed forged stdout and coherent initial/before/after producer hashes. Full changed bytes/channels and exact restoration are retained. Dated metadata and original census/live-review producers remain untouched."
+}
