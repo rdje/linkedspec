@@ -1,0 +1,12 @@
+{
+  "result": "RETAINED",
+  "command_returncode": 0,
+  "outer_exit_observed": 1,
+  "outer_combined_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjcvY2FwdHVyZS1hdWRpdC1maW5hbC5weSIsIGxpbmUgMjUsIGluIDxtb2R1bGU+CiAgICBhc3NlcnQgYWN0dWFsWydyZXN0b3JlZF9pbnB1dHMnXT09MTkyIGFuZCBhY3R1YWxbJ2lzb2xhdGVkX2RldGVybWluaXN0aWNfY2FwdHVyZSddIGlzIFRydWUKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcgo=",
+  "command_capture_producer": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/capture-audit-final.py",
+  "command_capture_producer_sha256": "d3b8a9132ed2826732f23e9506b036c338dc5f896b51b32cd8afe4f8cf081493",
+  "actual_channels_sha256": "46a295ce319f9628be1a254d4c78e0800cede58a4e8e48b859648ec510d2269f",
+  "observed_recovered": 134,
+  "incorrect_expected_recovered": 192,
+  "scope": "Complete actual historical proof succeeded and remains unchanged. Only the outer metadata guard confused the old supplied-closure count with recovered archive membership. Manifest and accepted canonical observation both derive134 recovered files. A distinct metadata producer finalizes closure without a native replay or producer relabeling."
+}

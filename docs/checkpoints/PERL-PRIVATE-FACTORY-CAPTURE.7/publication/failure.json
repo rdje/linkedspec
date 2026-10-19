@@ -1,0 +1,11 @@
+{
+  "result": "RETAINED",
+  "original_source_sha256": "7f035796de9f5e4ad1513cd130ae62e5f647859b3cd943af32ef940d8dab3c60",
+  "original_exit_observed": 1,
+  "original_combined_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjcvcHVibGlzaC5weSIsIGxpbmUgMTAwLCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbih2YWx1ZSk8PTEzMTA3MiwobGVuKHZhbHVlKSxsZW4oYmluZGluZ3MpKQogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogKDEzODU5OCwgNjE5KQo=",
+  "initial_bindings": 619,
+  "initial_bytes": 138598,
+  "recurrence_prefix_sha256": "1c985ac6ef4b9e32dfd12a9ef57f709614d1d44af88770b23b7541da709f5e3a",
+  "retained_draft_sha256": "5a51ddd770492aa573137b0e5ef91e73079eb98b65816567570e7dad60b589be",
+  "scope": "Initial in-memory draft was not serialized at the failing call. This distinct readonly pure-prefix recurrence runs while all inputs and original publisher remain unchanged, then retains the full619-input/138598-byte logical draft and original source. It executes no writer or native capture and invents no accepted Git revision. Original actual failure/transport scope stays explicit."
+}

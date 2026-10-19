@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "producer_sha256": "f15217c6d8e4c8be684457128b367e7e078a0097f147c2153d0cb0f4bc8b1904",
+  "original_source_sha256": "b8dc896d205dc6e99f4f0261d669b9ec672e8e2d70fa1dd0b9aa5478041e88d0",
+  "original_exit_observed": 1,
+  "original_combined_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjcvcmVnaXN0ZXIucHkiLCBsaW5lIDU5LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGF1ZGl0b3IuY291bnQob2xkKT09MTthdWRpdG9yPWF1ZGl0b3IucmVwbGFjZShvbGQsbmV3LDEpCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "old_base64": "b2xkPWInICAgICAgICAgICAgImtub3dsZWRnZV9oZWFkZXJfZ2F0ZV9vd25lciI6IEtOT1dMRURHRV9IRUFERVJfR0FURV9PV05FUixcbicK",
+  "new_base64": "b2xkPWInICAgICAgICAgICAgInNjYWxhcl9yZWNlaXZlcl9jb3B5X293bmVyIjogU0NBTEFSX1JFQ0VJVkVSX0NPUFlfT1dORVIsXG4gICAgICAgICAgICAia25vd2xlZGdlX2hlYWRlcl9nYXRlX293bmVyIjogS05PV0xFREdFX0hFQURFUl9HQVRFX09XTkVSLFxuJwo=",
+  "original_suffix_sha256": "9fb661fc43175bb0087272729bfbc64a80eef3a578d2482f71f2dac95a0e7de0",
+  "corrected_suffix_sha256": "a28883c697982036efb297dcd657223b7e44cf4d9846551daf2740f8c0eea194",
+  "scope": "Original metadata anchor occurs in two functions. The preceding scalar receiver-copy owner narrows it to the governance return. Resume the exact original suffix after runner insertion and saved baseline/RED; add this actual repair source/report to inputs. No original file/channel, runner insertion, fixture, runtime or limit is changed or replayed."
+}

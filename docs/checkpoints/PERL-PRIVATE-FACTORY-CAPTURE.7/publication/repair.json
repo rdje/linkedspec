@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "producer_sha256": "94643c99b3421a9bd38ef42e8cb6ac53b3b54dea3ffb4f3bc06d359dacc8a458",
+  "original_source_sha256": "7f035796de9f5e4ad1513cd130ae62e5f647859b3cd943af32ef940d8dab3c60",
+  "original_draft_sha256": "5a51ddd770492aa573137b0e5ef91e73079eb98b65816567570e7dad60b589be",
+  "original_bindings": 619,
+  "original_bytes": 138598,
+  "final_source_sha256": "85424ad94213e4b75935118d1e5fdfc2c56453e3e393535d1cabf9cc08d8c788",
+  "wrapper_sha256": "ee71dad16e8fbbed5d9efcc82933d36a89cb9fb3283c90e08916fb5737983bdd",
+  "scope": "Keep all original native observations and the entire uncommitted logical publication. One exact additional filter places29 retired prior checkpoint source paths in already bound complete capsules, preserving current invoked/audit sources and all new producers explicitly. Concise statement/scope retains the measured limits. Add every publication artifact as an input and retain indent2/cap131072. Stable entrypoint loads this source module; exact readonly recurrence and canonical admission remain required.",
+  "prose_refinement_producer_sha256": "53eedb1006c9dd07bc3df6beac7b6b85c889069f37229725d35f22658444855f",
+  "prepared_history_sha256": "1e9b5724bbf166eb95966caed21b8bf4801bf9118cce0df7c9dad2cfdcf8d534",
+  "refinement_scope": "Only repeated claim prose is shortened; no input selection, producer, native observation, limit or semantic predicate changes. Full prepared source/repair/logical draft and transcribed preflight remain in preparation-history.json.gz. Every publication file stays explicitly bound.",
+  "layout_producer_sha256": "c478cf43208c308977240b07728de73b6c3a6c3faaf667586707063ca73bb4cc",
+  "lineage_verifier_sha256": "bc9d09e55067b8a1382dc9bdcd2983394fa0063edfa912af20a212f3ef1a6767",
+  "before_layout_sha256": "bd0435c4ff37c5b8e35d61dc8658069976486f10910fd3b9f9c9b1b21c574b2a",
+  "layout_scope": "Schema/registry require strict bounded JSON and do not mandate indentation. Use readable indent1 with identical predicates/input selection/cap131072 and add whole logical-draft semantic verification. Preserve the exact prior sources/repairs/drafts/failures; no measurement or capacity changes."
+}

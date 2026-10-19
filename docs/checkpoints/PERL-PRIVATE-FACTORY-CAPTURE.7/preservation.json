@@ -1,0 +1,1780 @@
+{
+  "result": "PASS",
+  "base": "858eba97c89239d187765c4af9ad18057d28a1b0",
+  "producer_sha256": "c513e6122464b6795406e6afa5d2393eb4633b3d7210056d1ea2b4c6d1038cee",
+  "owned_bound_paths": [
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "KNOWLEDGE_MAP.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "docs/TASK_TREE.md",
+    "docs/knowledge/finite-engineering-notes-member-0131.md",
+    "docs/knowledge/perl-emitcontext-callback-capture.md",
+    "docs/knowledge/perl-factory-capture-framework.md",
+    "docs/knowledge/perl-legacy-hash-kind-callback.md",
+    "docs/knowledge/perl-match-alias-writability.md",
+    "docs/knowledge/perl-method-assignment-required-capture.md",
+    "docs/knowledge/perl-method-ast-call-capture.md",
+    "docs/knowledge/perl-method-block-component-capture.md",
+    "docs/knowledge/perl-method-default-capture.md",
+    "docs/knowledge/perl-method-trim-capture.md",
+    "docs/knowledge/perl-private-emission-foundation.md",
+    "docs/knowledge/perl-receiver-copy-canonical-selection.md",
+    "docs/knowledge/project-root-evidence-filesystem-modes.md",
+    "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+    "docs/knowledge/rust-dependency-warning-baseline.md",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "tests/language-readiness/verify_objectives.py",
+    "tools/run_ci_local.sh"
+  ],
+  "census": [
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "sha256": "02e72a86c291c445b8da96e313b41f0a6494e9f599290e3b44d5bdb685898f07",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "sha256": "92b6bb85061688a960d62d7d1bd44e4367794dee42304d23dce6beaf87ff4668",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "sha256": "27a03b0168c54db4d20f32aed8dafc78f55197c353776769e8d220806e101022",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "sha256": "0851f5c07bb6171ae5c7b89aac2dad629dfd5ac6e5a0dcf6ba7125609a3e40ee",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "sha256": "d5f01e96af3be2d5e435f39c6f2f98ec262a78b1bbc12470cc866799a662e04f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "sha256": "4732edfe9018dd6c9d85c883c6130d3ddb6ef1d2cd5f777d13113bc433b21452",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "sha256": "9bc82edf6f91b7a58e676fd1dcdd4f0a30587696500f6010a99dd1d4a3eec14a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "sha256": "d6443e30ad8665ca0d50415b98f54dee78b555975628692f27a55266a88eb170",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "sha256": "90c83317093cbca74aed756463149033b0f231b7c88b9c8ad079e2cb06d995b0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "sha256": "56c48ebf7bc995be72aa254254bf48ece9929a6773382ae7e3337267eae981c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "sha256": "2c3571b3ac4478b598892d170f5429cbd0d7f0142ab953d00a037c53ae739d69",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "sha256": "d83f64e08af2af3812c4665d11025612a036a504df70ff9e563ae5410e1ab69a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "sha256": "0634628b0ffc2b4940fbd9cee2d2bd216453aeef46a7c721ee569e061c70a6c1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "sha256": "a53600e0dcfdffe498060f50d8afd14f369c454a4de66e32359cde023148747f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "sha256": "c706071e163cc90037efd8355d2c26090d2f268977c513f8598368ad47e8e154",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "sha256": "71d1c563980b23c27a3834bf9991c27a95214af0739bd989ac61591e21ca4277",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "sha256": "39b07b917bec9fae542cf8423418675738f10385f1eb5ded9d47879f63b4458e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "sha256": "550c275df6cea6fc85fc7969b82de03e2bb0afde7447a160baa3d02136f17ac3",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "sha256": "21d22432a45b6e5e64ad0175e8de19b6c1d524985f82ca4aedb0bfa128b15af8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "sha256": "d1746ffad6d4ccaed646ebb6154f9202d7feb14ca97dc71ae9d50ede466668c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "sha256": "70f4cccfe1d444001e7a6055d595d2bebbe03e23247a03e4b13146a27bc731e1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "sha256": "137c92cabdb0c84984191ac2f891b407cd2dfb40ffdad343c3b6ee71b9eec35e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "sha256": "11c629d771223d5088441ff8964640deaf8015cf0094cfac1449f9d05c1ff5e3",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "sha256": "9818aae50fafbca97528cd779f2a9172dcdfd3762302416e2f8d422da0a90c1d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "sha256": "139c524a3140736a64590a41442669cb08e6f44ce4b3ea81e993250a3fcb7d60",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "sha256": "366be575ec187381a177aca1e9ff12f47115a615ce6fd486cc46eb3f3a2816fa",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "sha256": "d8af091e2ba9ad106195d7ba58ebb5b4b1862f0f8f87ee870aac992ed82b7464",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "sha256": "0c86d08ee2609fdac11e9e5d9a0eae572d262debc84ca4bde131d78cb3a46037",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "sha256": "5e27e8404d160b094365c1101742ce3ef010adeeb4a44f8e128e2ac9915b2756",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "sha256": "10cc07a2d9461cd13b1625cd08610ac74a2ff66bba9ee3fc323c7b271d76f539",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "sha256": "b488a350ab28c5b9131bf94596126491a09b37f93e70f52bb912975cc3f8aa64",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "sha256": "f0b67d819983ff7a387730641133e56b8c5225170d5d6c3f05c96b7420bd145c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "sha256": "9525afe9bd6c0af8fe82c524cb11b16f879d4f5591f185b9a395f432ba39155f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "sha256": "1ac3cc18f3043533ff7c98ea4f7893b182e37a49bfd513e5834f97721146b6f5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "sha256": "0470998fd64f215509b06deff2db3b6fc6468c3a4f1bed1edb2dccb693a40ab5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "sha256": "bea9edc02fafdffbefd463b00d51788268dc04fa08f78d2e58ca086e60960b40",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "sha256": "f9d270a13fd61a9a875899b3dbfe4a7d78f7b26d4c5326fade9f31d7d77e9f77",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "sha256": "8e25463fca1ecd601837694f78176d6bbc61b2562a93f329dcee7b153d35a539",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "sha256": "2c7d0e3630242c2273d3d81fd9fed8d09f549b5ebc1e0ca57e0cfc141e3f0510",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "sha256": "7baed10c98af4a74507972b96f5dac3ac8852343e4dfe337b94dee5c9efc50b9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "sha256": "584ce8cc82866f440267f5124bc9e9f13b3cf5eb345a675e0cc11787a44b9445",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.json",
+      "sha256": "2f74b74d44ccc4cc04755eb97c19f8df4579177599c0caead2df4bc26cafcdcc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json",
+      "sha256": "fc86abed2b8e426a8e97f37aff02aab62b4519ab03b80d54896f98b56b1e6f5d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json",
+      "sha256": "09a26e80dc02d4e6d71b43e7a748ee07a9c5038d669c68979ac55ba351133ca5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7.json",
+      "sha256": "3e5a14dfe86cd8cc709ed7791d8c8a792015d8e670badd8172efa5c5e930ef31",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json",
+      "sha256": "f3751487493f2c450829bb7d79c7e67378a5bd87b04341422de1185893e106da",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "sha256": "3eb6d43cf473fd797c2e39b804a6364ae19ed016bacf38f0723a0804b2cb1388",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+      "sha256": "f113e6ed47ea2cd49bd28de8cef99a49f0b9b9ae5d81a192315f3ad5fd3635e6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.1.json",
+      "sha256": "76f520c09088eb460a01ac6faa78d59a3ce2f93f4e11f239c71cc945b9d5ee49",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json",
+      "sha256": "d977b9b53857006f9d06e2d3668333453d0ad299218e6707a11de1487b422f72",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.0.json",
+      "sha256": "3ba14781f6c105b0e95d86ef3b131e77ce1bec9d602dd329e9fa347142b281d3",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+      "sha256": "3dbcc934d64d36239ce135f27be4b4c7e34037bd89c086ae9a311b3ad706ee85",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1.json",
+      "sha256": "606cdede2388abaa4333cc9718980adc179c52a2c9fbdb1a9c5c6074fa0350a2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json",
+      "sha256": "15b71e4890107943eba412bb300617ab5f5c55d25d4ad8b99ee5e3c363837615",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "sha256": "c2b167ab5aa74b698d149dd23d1831a85af858d8cc9873bc096a5b3ee209fc6a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.2.json",
+      "sha256": "a6383e9fcd26e2a4b84380911cecba67da80c6c3413576d0934eef5111b230b9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json",
+      "sha256": "9d160cab29af8ed66a83911452f68be3bd169313b61528ecffffcb442254c3c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json",
+      "sha256": "2b7e2725c684cd8eca3b076b7aa61759ef5be6e2450a52f67d802c4522a9e76c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.5.json",
+      "sha256": "52a69bf98a99a5edcb39eef048d5d4768d2e6be8ae03371fe586873c5d5bc716",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.6.json",
+      "sha256": "160df56ed9186b7ccb325cb185e912a3682a3ecc1098d080d148930937e91639",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.7.json",
+      "sha256": "b2b5ee7e9e37dd86a4527476cddbaab3d78503f10011eaf9d2b342fe4d0efd18",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "sha256": "0549affc00bbaefbf918d62dda980f81cf7566ed6ad2ff313a80802ce968fffd",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.10.json",
+      "sha256": "52bc0c809b169cfedbb58cbbcf1574017d3c351b910f136fbed674d27c85a8c1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.11.json",
+      "sha256": "fad0c5e2c0131682b56592d093568492feec9880af3f5f9f540eb93f97ff2efc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.13.json",
+      "sha256": "0f8dcc632434b5b153afa84c0c5587bb250dc1485a1cc8fd2b98037b365591b4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.14.json",
+      "sha256": "56c6e8c3b6720ac3ab3a0181d7b867f8ae3bc7cec382220c67c9a2bdd0de31a4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.15.json",
+      "sha256": "4b1ea443c41bdb9bbd31e982ba8787bfdba778cd412baefd33d05f39e5c25145",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.16.json",
+      "sha256": "ef38f269319f7ff917589b16a54df8f53f2a379b8fc650b217f8026b0f1a777c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.17.json",
+      "sha256": "6ee82fff3ea1549163199a03de71330fe53352dbe111e476269776ca18ecc488",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.18.json",
+      "sha256": "064c8fc32bd3a8dc27c94ca4fc2eb5f4287e49b934199d42a1479c2322f6026a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.19.json",
+      "sha256": "b6be13fed9b974bf08e9d580264734490dad7abcfb530001407ec106a2279b18",
+      "intersections": [
+        {
+          "claim_index": 0,
+          "overlap": [
+            "KNOWLEDGE_MAP.md",
+            "docs/knowledge/finite-engineering-notes-member-0131.md",
+            "docs/knowledge/perl-emitcontext-callback-capture.md",
+            "docs/knowledge/perl-factory-capture-framework.md",
+            "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "docs/knowledge/perl-match-alias-writability.md",
+            "docs/knowledge/perl-method-assignment-required-capture.md",
+            "docs/knowledge/perl-method-ast-call-capture.md",
+            "docs/knowledge/perl-method-block-component-capture.md",
+            "docs/knowledge/perl-method-default-capture.md",
+            "docs/knowledge/perl-method-trim-capture.md",
+            "docs/knowledge/perl-private-emission-foundation.md",
+            "docs/knowledge/project-root-evidence-filesystem-modes.md",
+            "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "docs/knowledge/rust-dependency-warning-baseline.md",
+            "docs/linkedspec-book/src/development/documentation-workflow.md"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.8.json",
+      "sha256": "554576fbf3ae1463f80d18cb4b2efba421206c685cb9bdcc19a63c853c088a0b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/REPO-HYGIENE.9.json",
+      "sha256": "09f4c298ec27702f75a5de33bb4de7dcd09c5d2f45694476d7ecf35311aede93",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SESSION-STARTUP-READING.87.2.json",
+      "sha256": "fede15f524188d76a833d1c84927e42f9ccf2e019cd973740f2549e31144d4d4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2.json",
+      "sha256": "8f11e527e9478b6b2ceab45206baf3dbb7b8ed4a8aa15c4e0f53f8480e552846",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0.json",
+      "sha256": "858c96f5b68736e7c1d123f3696c840c1c5b5d217641ca397a9108a65fae739e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1.json",
+      "sha256": "2c6b4e4c0d058e4dc23d92ba2e8c250d0bcace9e368b21c9aee266b101546780",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.json",
+      "sha256": "a4cc102fdb5a0b2d93ccf26e0b34924a634b3fc9ba8b6c02c31fb106aaa7c362",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0.json",
+      "sha256": "c03683ca89c18769b5f928e291348c712cdd1d4caaa71090320cb96262b1f50d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1.json",
+      "sha256": "c6a205a8b3a21a2d669447b9574e1866ebff3ebb97599b42c786e1dae0884957",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0.json",
+      "sha256": "fcb437f90833edd06bbe4142d77e1c9e5689ff790fd7cfaf6ca2af78a261ae32",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1.json",
+      "sha256": "2ae713a2d7f629bba15c5989270fb735159ebb3e35a8947484d1c4530d6c0d46",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0.json",
+      "sha256": "c0f7eb76f7bf0cc7ffa92a234035a0d4d12d7b3410d53c895b93c57d68895439",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1.json",
+      "sha256": "469828e0b1533d5261257cb423e32e45326eb42c9844d427fbe5c04679aa43e4",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2.json",
+      "sha256": "ca36ca48f7e5f7f61a0992e9a5a73cbf87885e6a171044582ad3ff61f1873ae6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3.json",
+      "sha256": "03806abc7016a8ec1dace96c7331d6ed5f27be84f8e21843917f38df7b2aa678",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4.json",
+      "sha256": "2af34b52788a9d6b88841298db638d3658066dec8921ae13d36698c631e758f7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5.json",
+      "sha256": "249e1c46cd832b943351c1e5c8dab9f272561c0a71fc0aede96663e757128b98",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6.json",
+      "sha256": "0358f494817468390dd34ad14459c30b50836d56d17b68ba143c8c567cbcdff8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0.json",
+      "sha256": "3728ddebad760f5edb37b945c703a40c06f41f749fa07e78bb93844077ab37c5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1.json",
+      "sha256": "c753d110cdf2332e02b9a48f4c2c7d41d54658ba5ceda34da85f32d132f91df7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0.json",
+      "sha256": "3e5d369f0a35f4c84f47f3330ad31ab6c9f37b37070441ce41ab55fc56b5fe88",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1.json",
+      "sha256": "2408411dc5c4acd20872ef42d4995d31701c8bb5ae4ef1ea7f983cd7e77e5d40",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1.json",
+      "sha256": "78d9e9849059b5a891c04431eb5770cbefc71ace4d0859e1b3c1723a43ba74e2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0.json",
+      "sha256": "d47113cdce756e3dce3b7e745af2be7d398ee66d5621d016a45b8c1acff2b92d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0.json",
+      "sha256": "2e114434711c815316afc09fa1a6c6a96727c67f82c0d24d26a8e852f11dca37",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0.json",
+      "sha256": "706aef8907707690c223c636e88d8fce8a924f03d7608bec8fe39d24cf5ca8f7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0.json",
+      "sha256": "a8174ca4112ecf6538d827819c9ae36dc9779dadf72ba38d4521fc3c54eadaa5",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1.json",
+      "sha256": "42fbdd807edab3cbf811c7bda01c16c5f4fed5fc1882d80a3edaf5666dc00d3c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2.json",
+      "sha256": "8d82bbcbf197d6e6ad39a18d3141a97bb60fefe2c6606b035e97dc93b10382e0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3.json",
+      "sha256": "6d7f46258c6b377dcc4035d4f23c63043bf4645df65d2d197101e016e2a6540b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0.json",
+      "sha256": "8b562402e76e534be9284d9fefac75195b22144eedca464f3ac60e0ee361824d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1.json",
+      "sha256": "003bc309941e62904b89443076e9cbcda1a6b5aad51409351ca3962fcb45fbd6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0.json",
+      "sha256": "c5f2abd9d4a859c1c31aba0a2074596688b3909c9dce06dbd8ae77e0e1b87094",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1.json",
+      "sha256": "133c6676930f360facf8e5ad3441e4ec21182b39426e9525d073573e973b0922",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0.json",
+      "sha256": "fccc9456cf566e610bb0ed6e388167d2bfb8461412e82bd81224cc24e635fe2e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0.json",
+      "sha256": "0fdac0382fdeb679ef54f504b2a65d74faf6cf6610ef9099e0a61fd1e0839023",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1.json",
+      "sha256": "337687206148eeae87b4b3b73dda14df350afa52862e0905bbc4717f7daa05dc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2.json",
+      "sha256": "f391bf4cb0a6d8993093cf2d0fb425470986a362089a7a26004b7977f4711308",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3.json",
+      "sha256": "b04081a18b5235222121632e38cec240835bad1a6c96f54386fd4a7f58f6475a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0.json",
+      "sha256": "41ae27a8078b1140eb30ee8666ab20376c5fa2af747aa5795f8c68575b7ee51a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1.json",
+      "sha256": "deb7e6aad856400b15837421daef87043d310834fcd6ffae557cc791931e7c58",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1.json",
+      "sha256": "5985b9f2cf1a65d83f298f26eaa71d6650e8b4aecfd3bae675acbe99dd5314fe",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.json",
+      "sha256": "1c16da896214dd9f21c90107c43310a818088036c82a4713ad9fd29dabde2c63",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1.json",
+      "sha256": "0793d756f3809f1df77e6c7b72ec162fbad9c1ad9ee4fa8418871abfe3a9b41f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3.json",
+      "sha256": "eb53c6e2ef0c273474bd96d521fbb67cb52018cbbbe59e593e8a61bdbb00015e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1.json",
+      "sha256": "79c71e36c59d0f49ccd248ebedb0058ed58e3fd8527bfb4ef851e54a0de9d25c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json",
+      "sha256": "8045ae24e2031c28ea09592e087ab800ab65ba925ea5ce3830a5648b541aa4b7",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.json",
+      "sha256": "75fd71f7e1d1885a0bf6e0ccebe24f5723528ea62c41a3dc24369e9dc1dce1bc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.json",
+      "sha256": "ea6b6f526b56b9bb5cf78c2d530b78dd8664094b1ed095f2fc9a0626a478116a",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1.json",
+      "sha256": "06f83174458799cee57e783d6f3675f51b9f204272e9a39d284994b71f8aea0d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2.json",
+      "sha256": "e7c57b98e69f92a1837cba096658e4f236735b5292d80ad87e7e0fdb252e8841",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3.json",
+      "sha256": "4c12ece52b840d7f93abd40b026638a2a8337ae049224dc1cbcb0f45dfde24bf",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4.json",
+      "sha256": "19af72a42ca6e145e8720ea6c1ba0d2614fcfa1854cab22baf3be59d02f00d65",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5.json",
+      "sha256": "a50f59e1461305f66572eed13b3065f746f521bfa4128aba343467ad2dd26d6d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6.json",
+      "sha256": "68b0c94a863f4b4eab0c40cfa8d6080c76f127f988dde813ba7fef39c9d36434",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "sha256": "ca0d5fca1f9483dc9211f04f52ce6491c71618c90bb6aa8189ea4293182bb8ea",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "sha256": "8b28e799b7719f643ab0cd92722c1b99f02640d2988f900278542b3231e5212f",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "sha256": "f4312127744b9d592961895960ea63d35d5196fabd850fc778f63807ce69d442",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "sha256": "3eb42566908dd46238c8a257f5666bf74cfee93ef09303c13cc600db63290d3e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "sha256": "df2a419815531dfe757aa9331a28684d7e3fe6f10f63ae7ce7d46eeedcf0feef",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "sha256": "e1c2994795e0d8ae2841fd91b35a05998ebed02126ac1a14ba3cf890dba5adfa",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "sha256": "2902e51663ce30eb009109fb583b5b4e04694ed84f3c072659db2a7f68251f81",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "sha256": "900911d9d8b1b7d0a9929680c41a4daedf86048ead5dfb649b9a6bfe2ad475d1",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "sha256": "e819d6419910606c253ddb751e9fd515df44e242268f562bdb9a6b83b9c623b2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "sha256": "16f86d9dd48175cb62759ef3fe4a03d15ffc3c5907f86adaea827547d9c2f672",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "sha256": "1781b160725930097ffa3f8ceb7064e6f6dfede740ae147f205798f65db7d53c",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "sha256": "256b373f8a59970554fac7b9ce22d26157c24f9bd7ff7b49b04012b7fa6770ff",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "sha256": "b5894f3080b4e2c7c6036410b37a78a0d4a790cf46f8c011421a1848d1644551",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "sha256": "ce49d3747ecefb16d4b1715432c6817c806638535da5c4f1296642504f57b135",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "sha256": "1aaff4f7ae1b65cdc1a47d9fc6ea051c4b003631a2a95190e6bc3834ea2b9db2",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "sha256": "4979b43bfea15922c2efb754e065c988fc731a5c4bc487065c2476a091e6e9ce",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "sha256": "1903ad33445bfed63ab18d312c74a295aa5e2e2b0eedf524a9f2db01a59ccd7d",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "sha256": "5eb729f109410be4e154f537425e51285c3c411ce84ee4e970649dac63d388f8",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+      "sha256": "13d228cf8d4768959f4cd6932c078dacd8ea9f19fbd29a378baae490a9dad41b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "sha256": "4b305b1bf131b8c38c24397a49cb26d850aea19f2c9736069e01954176eac4c9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.0.json",
+      "sha256": "8d3738ecd0ea7238012599176d5bfbcc72ad463e7e24fe9d09257298dcf3f6af",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1.json",
+      "sha256": "dcc5ee7edb26eb306e673bd269993d0c9ae46ad94c58729b7a1136b1b3cc02e9",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.0.json",
+      "sha256": "acaa888bcf4f3205f0a49e1f5f5ca83cd341510f7a98147949c12557db416cc6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.1.json",
+      "sha256": "82b0be3f2a28bc720d7824b3e3a4c4852ace2744764018d4a974065ad5e517ac",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.0.json",
+      "sha256": "e37a9963da054c9f5bdf5f51b4af004ec50bb1c3586ab779f91219bd4bcbdf13",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.1.json",
+      "sha256": "6a9c86044fa37b1611c42bf04e41ef41e2be142859f8959b5a85f6947c5451d6",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "sha256": "6adcbde2ba8272dedba0204a43ccb6613f27422e03df2189ceb10563bd136e9b",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "sha256": "30d734283956bd113a557694a490be8c57145c827c69e1131990ce82f252e377",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.4.json",
+      "sha256": "f2ed9bc68251be73169586f414773b2e063037d56c7da03df0fa8e2785bdbed0",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "sha256": "43bcb5bdac6e23be015759cfabca9d5ca27997843df525bad7d4e1ef75a70935",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+      "sha256": "3a98b634899a2f462ffb925d4b2c59f8fba6ecf70e8c942775f01fba6852cb50",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "sha256": "1db79185287b3238b5570145915a8dc178ae937d4d9d401ddd3beb372bd659dc",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "sha256": "45be885ec93081bf013e7e5220c3b434ab74acc5d91499179ba3dc6922c8120e",
+      "intersections": []
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "sha256": "7ac846a23ad2fd3ad7a8367c95229ce5ccfef9c561f447607c5ae4abdfafc08c",
+      "intersections": []
+    }
+  ],
+  "selected": [
+    {
+      "path": "docs/claims/REPO-HYGIENE.19.json",
+      "sha256": "b6be13fed9b974bf08e9d580264734490dad7abcfb530001407ec106a2279b18",
+      "bytes": 43696,
+      "original_base64": "ewogICJ2ZXJzaW9uIjogMSwKICAib3duZXIiOiAiUkVQTy1IWUdJRU5FLjE5IiwKICAiY2xhaW1zIjogWwogICAgewogICAgICAibmFtZSI6ICJkYXRlZC1yZXRhaW5lZC1tZXRhZGF0YS1wdWJsaWMtd2FybmluZy1vdXRwdXQiLAogICAgICAic3RhdGVtZW50IjogIkRhdGVkIHBhcmVudDE2NDQzLzE3NTc2ODUxNzI2IGFuZCBzZXBhcmF0ZSBSdXN0IGluY3JlbWVudGFsNDgzLzIzOTA4MTA1NzMgbWV0YWRhdGEgYXJlIHJldGFpbmVkIHdpdGggemVybyByZW1vdmFscy4gRm91ciBhY3R1YWwgY2hhbm5lbCwgZWlnaHQgd2FybmluZy1hcnRpZmFjdCBhbmQgZm91ciBjdXN0b2R5IGRlbmlhbHMgcmVzdG9yZSBleGFjdCBQQVNTLiBDb21wbGV0ZSBjYW5vbmljYWwgb3V0cHV0IGhhczI0IHB1YmxpYyBjb21waWxlci1zdW1tYXJ5IG9jY3VycmVuY2VzOjEyIHBnZW4gcmVwb3J0czcwOTMgYW5kMTIgcmd4LWNvcmUgcmVwb3J0czI2LiBXaG9sZTU1MC1pbnB1dC8xMjg0NTgtYnl0ZSBwcmVkZWNlc3NvciBhbmQgYWN0dWFsIGJhc2VsaW5lIHJlbWFpbiBoaXN0b3JpY2FsIGF0IGU5NTNmNjlhOS4gQ29tcGxldGUgS25vd2xlZGdlMTQ4NyBNYXJrZG93bi8xMzQ5IGZhY3RzL2ZvdXJ0ZWVuIHJvdXRlcy9vbmUgYm9keS84Mzg4NTI0IGJ5dGVzIGFuZCBib29rODkvZm91ciBjb250cm9scyBwYXNzLiIsCiAgICAgICJzY29wZSI6ICJNZXRhZGF0YSBvYnNlcnZhdGlvbjIwMjYtMTAtMTlUMDA6NDc6MjkuOTUzNjI2VVRDIHByZXNlcnZlcyBhbGwgYXJ0aWZhY3RzL2NhY2hlczsgUnVzdCByZWxlYXNlIGlzIGFic2VudCBhbmQgZGVwcyBoYXMgemVybyBsb2cvYmluIHJvd3MuIEZ1bGwgYWN0dWFsIGNlbnN1cy9saXZlLXJldmlldyBjb21tYW5kcywgZXhpdHMsIGNoYW5uZWxzLCBzb3VyY2UgZ3VhcmRzLCBmcmVzaC9sc3RhdC9zaXplL3RyYXZlcnNhbCBjb250cm9scyByZW1haW4gY2FwdHVyZWQuIE5vIGN1cnJlbnQgZmlsZXN5c3RlbSBzdGFiaWxpdHksIGNvbnRlbnQvZGlzcG9zYWJpbGl0eSwgbGl2ZW5lc3MsIGNvbmN1cnJlbnQgYWR2ZXJzYXJpYWwgdHJhdmVyc2FsLCByZWNvdmVyeSBvciBwdXJnZSBjbGFpbS4gQ29tcGlsZXIgY291bnRzIGFyZSByZXBvcnRlZCBzdW1tYXJ5IG9jY3VycmVuY2VzLCBub3QgZGlzdGluY3QgZGlhZ25vc3RpY3MvYnVncywgcHJvdmVuIGNvbXBhcmFibGUgY29uZmlndXJhdGlvbnMgb3IgYW4gaW50ZXJuYWwgY2F1c2UuIEZ1bGwgYWNjZXB0ZWQgY2Fub25pY2FsIGxvZywgcGFydGlhbC9maW5hbCBvYnNlcnZhdGlvbnMsIG9ic2VydmVkIENMSSBpZGVudGl0aWVzIGFuZCByZWFsIHN0YWdlZC9wcm9tb3RlZCByZWNlaXB0cyBhcmUgcmV0YWluZWQ7IGluZGVwZW5kZW50IHJhdy1saW5lL3BoYXNlL2NyYXRlL2NvdW50IGFuZCBwYXJlbnQvZGlmZi90cmVlIGRlcml2YXRpb24gcGFzcy4gT2xkMTg3MC8yNiBhY2NvdW50IHJlbWFpbnMgd2hvbGUgYXQgYWNjZXB0ZWQgR2l0IGFuZCBpbiB0cmFja2VkIGV2aWRlbmNlLiBSVVNULURFUEVOREVOQ1ktV0FSTklORy1aRVJPLjEvLjIga2VlcCBmdWxsZXIgY2Vuc3VzL3Vwc3RyZWFtIG93bmVyc2hpcCBvcGVuIGFuZCBub24tYmxvY2tpbmcgYmVoaW5kIHJlc2lkdWFsIHJlcGFpci4gTm8gbmV3IFJ1c3QgYnVpbGQsIGRlcGVuZGVuY3kgaW1wbGVtZW50YXRpb24gaW5zcGVjdGlvbiwgc2VwYXJhdGUgUEdFTiBwcm9jZWR1cmUsIHNvdXJjZS9waW4gY2hhbmdlLCBjYXJnbyBmaXggb3Igc3VwcHJlc3Npb24uIEZpeGVkIGFjY2VwdGVkIGNsYWltIG5hbWVzcGFjZSwgZXZlcnkgb3JpZ2luYWwgYmluZGluZyBieXRlL2FjdHVhbCBtb2RlIGFuZCB3aG9sZSBwdWJsaWNhdGlvbiBtYXRjaCBhY2NlcHRlZCBHaXQ7IG9ubHkgZHVyYWJpbGl0eSBtb2RlL3JldmlzaW9uIGNoYW5nZXMuIENvbXBsZXRlIG9yaWdpbmFsL2N1cnJlbnQgTWFya2Rvd24gYnl0ZXMgYXJlIGJvdW5kIGluIGtub3dsZWRnZS1pbnB1dHMuanNvbi5neiBhbmQgZ2F0ZWQgYnkgdGhlIGFjdHVhbCByZWFkb25seSByZXZpZXdlcjsgZm91cnRlZW4gY3VycmVudCBvdmVybGF5cyBhbmQgb3RoZXIgYWN0dWFsIHN1cHBvcnQvYm9vayBpbnB1dHMgYXJlIHNlcGFyYXRlbHkgYm91bmQuIFRoaXJ0ZWVuIGNhcmQgYm9kaWVzIGFuZCBuYXRpdmUgdGVhY2hpbmcgc3RheSBleGFjdC4gRmlyc3Qgb3ZlcnNpemVkIEtub3dsZWRnZSBoZWFkZXIgaXMgcmVmdXNlZCBiZWZvcmUgd3JpdGVzOyBvbmx5IGNvbmNpc2UgZXZpZGVuY2UgZXhwcmVzc2lvbi9yZXBvcnQgcGF0aCBjaGFuZ2VzLiBGaXJzdCByZWFkZXIgd3JvbmdseSByZXF1aXJlcyBlcXVhbCBwaHlzaWNhbCBleHByZXNzaW9uIGxpbmUgY291bnRzOyBvcmlnaW5hbCBmYWlsdXJlL3NvdXJjZSBhbmQgZXhhY3QgZXhwcmVzc2lvbi1ib3VuZGFyeSBjb3JyZWN0aW9uIHN0YXkgcmV0YWluZWQuIEV4aXN0aW5nIGxpbWl0cywgcnVudGltZSwgdGVzdC9jaGVja2VyL0NJIG1lY2hhbmlzbXMgYW5kIGRlcGVuZGVuY2llcyBzdGF5IGV4YWN0LiBUaGlzIGZvY3VzZWQgZGF0ZWQgb2JzZXJ2YXRpb24gZ3JhbnRzIG5vIG5ldyBjYW5vbmljYWwvcHJpdmF0ZS9waXBlbGluZS9wYXJlbnQgYWRtaXNzaW9uOyBzdGFydHVwLjcgcmVzdHJpY3Rpb25zIGFuZCBmaXh0dXJlLjcvcGlwZWxpbmUuNi9tZXRhZGF0YS4xMiByZW1haW4gc2VwYXJhdGVseSBvd25lZC4iLAogICAgICAicmVkZXJpdmUiOiB7CiAgICAgICAgInN0YXR1cyI6ICJjaGVja2VkIiwKICAgICAgICAiY29tbWFuZCI6ICJiYXNoIHRvb2xzL3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoIGRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3B1Ymxpc2gucHkgKHJlYWRvbmx5IGRlZmF1bHQpLiByZXZpZXctZmluYWwucHksIGFjdHVhbC1yZXZpZXcucHksIG1ldGFkYXRhLWV2aWRlbmNlLnB5LCB3YXJuaW5nLXJldmlldy5weSwgd2FybmluZy1ldmlkZW5jZS5weSwgYm9vay1yZXZpZXcucHkgYW5kIGV2aWRlbmNlLnB5IGRlZmF1bHRzIGFyZSByZWFkb25seS4gQWxsIG9yaWdpbmFsIGNhcHR1cmUvcHJlcGFyYXRpb24vcmVwYWlyIHdyaXRlcnMgcmVtYWluIHJldGlyZWQuIiwKICAgICAgICAiZ3JhbnVsYXJpdHkiOiAiRWFjaCBkYXRlZCBwYXJlbnQvUnVzdCBtZXRhZGF0YSByb3csIGJvdGggYWN0dWFsIGNvbW1hbmRzL2NoYW5uZWxzL2d1YXJkcyBhbmQgaW5kZXBlbmRlbnQgbGl2ZSBjb250cm9sczsgZXZlcnkyNCBzdW1tYXJ5IGxpbmUvcGhhc2UvY3JhdGUvY291bnQgYW5kIHR3byBhY3R1YWwgcmVjZWlwdHM7IGZpeGVkIGFjY2VwdGVkIGNsYWltIG5hbWVzcGFjZSw1NTAgYmluZGluZ3MvZnVsbDEyODQ1OCBieXRlczsgYWxsMTQ4NyBvcmlnaW5hbC9jdXJyZW50IE1hcmtkb3duIGJ5dGVzIGFuZCBzZXBhcmF0ZSBhcmNoaXZlL2N1cnJlbnQgbW9kZXMsIGZvdXJ0ZWVuIGhlYWRlcnMvdGhpcnRlZW4gZXhhY3QgYm9kaWVzOzg5IGNvbXBsZXRlIGJvb2svaW5jbHVkZSBpbnB1dHMgYW5kIGZvdXIgcmVuZGVyZWQgY29udHJvbHM7NCs4KzQgZnVsbCBhY3R1YWwgYXJ0aWZhY3QgZGVuaWFscy9yZXN0b3JhdGlvbnMuIiwKICAgICAgICAicmVzdWx0IjogIkRhdGVkIHBhcmVudDE2NDQzLzE3NTc2ODUxNzI2IGFuZCBzZXBhcmF0ZSBSdXN0IGluY3JlbWVudGFsNDgzLzIzOTA4MTA1NzMgbWV0YWRhdGEgYXJlIHJldGFpbmVkIHdpdGggemVybyByZW1vdmFscy4gRm91ciBhY3R1YWwgY2hhbm5lbCwgZWlnaHQgd2FybmluZy1hcnRpZmFjdCBhbmQgZm91ciBjdXN0b2R5IGRlbmlhbHMgcmVzdG9yZSBleGFjdCBQQVNTLiBDb21wbGV0ZSBjYW5vbmljYWwgb3V0cHV0IGhhczI0IHB1YmxpYyBjb21waWxlci1zdW1tYXJ5IG9jY3VycmVuY2VzOjEyIHBnZW4gcmVwb3J0czcwOTMgYW5kMTIgcmd4LWNvcmUgcmVwb3J0czI2LiBXaG9sZTU1MC1pbnB1dC8xMjg0NTgtYnl0ZSBwcmVkZWNlc3NvciBhbmQgYWN0dWFsIGJhc2VsaW5lIHJlbWFpbiBoaXN0b3JpY2FsIGF0IGU5NTNmNjlhOS4gQ29tcGxldGUgS25vd2xlZGdlMTQ4NyBNYXJrZG93bi8xMzQ5IGZhY3RzL2ZvdXJ0ZWVuIHJvdXRlcy9vbmUgYm9keS84Mzg4NTI0IGJ5dGVzIGFuZCBib29rODkvZm91ciBjb250cm9scyBwYXNzLiIKICAgICAgfSwKICAgICAgImZhbHNpZnkiOiB7CiAgICAgICAgInN0YXR1cyI6ICJjaGVja2VkIiwKICAgICAgICAiaHlwb3RoZXNpcyI6ICJJbmNvbXBsZXRlIGNsYWltL2JpbmRpbmcvc3VtbWFyeSBwb3B1bGF0aW9ucywgY29oZXJlbnQgaW1tZWRpYXRlIGhhc2hlcyBvciByZWhhc2hlZCBvdXRwdXQgY291bGQgaGlkZSBjaGFuZ2VkIGFjY2VwdGVkIGN1c3RvZHksIHByb2R1Y2VyIGZhaWx1cmUvbWlzc2luZyBjaGFubmVscywgc3dhcHBlZCBjb3VudHMvY3JhdGVzL3BoYXNlcywgZm9yZ2VkIHJlY2VpcHRzIG9yIGhpc3RvcmljYWwgYmFzZWxpbmUsIGZhaWxlZCBjYW5vbmljYWwgb3V0Y29tZSwgb3IgaW5jb3JyZWN0IHJlbmRlcmVkIHRlYWNoaW5nLiIsCiAgICAgICAgIm9yYWNsZSI6ICJBY3R1YWwgb3JpZ2luYWwgR2l0IG5hbWVzcGFjZS9ieXRlcy9tb2RlcyBhbmQgc3VjY2Vzc2Z1bCBiYXNlbGluZTsgaW5kZXBlbmRlbnQgZnJlc2ggT1MgbWV0YWRhdGEsIGNvbXBsZXRlIGNoYW5uZWxzIGFuZCBzb3VyY2UgZ3VhcmRzOyByYXcgc3VtbWFyeSBieXRlcy9uZWFyZXN0IHB1YmxpYyBwaGFzZSBhbmQgYWN0dWFsIGFjY2VwdGVkIHBhcmVudC9kaWZmL3RyZWU7IHNlcGFyYXRlbHkgZGVyaXZlZCByZW5kZXJlZCB3YXJuaW5nL25hdGl2ZS9jYXBhY2l0eSB0YWJsZXMgYW5kIGNvbXBsZXRlIHJlY3Vyc2l2ZSBpbmNsdWRlIGdyYXBoLiIsCiAgICAgICAgInJlZF9jb250cm9sIjogIkFjdHVhbCBsaXZlIGFnZ3JlZ2F0ZSBpbmZsYXRpb24vYmFsYW5jZWQgcmVkaXN0cmlidXRpb24gYW5kIGZpdmUgdHJhdmVyc2FsIGRlbmlhbHMgcGFzcy4gRm91ciBhY3R1YWwgbWV0YWRhdGEtY2hhbm5lbCwgZWlnaHQgd2FybmluZy1hcnRpZmFjdCBhbmQgZm91ciBwcmVzZXJ2YXRpb24vcmVuZGVyZWQtY291bnQgZm9yZ2VyaWVzIHJlamVjdCBmb3IgZGlzdGluY3Qgb2JzZXJ2ZWQgcmVhc29uczsgZnVsbCBjaGFuZ2VkIGJ5dGVzL21vZGVzL2NoYW5uZWxzIGFuZCBleGFjdCByZXN0b3JlZCBQQVNTIGFyZSByZXRhaW5lZC4gRm91ciBhY3R1YWwgYm9vayBtdXRhdGlvbnMgaGF2ZSBzY29wZWQgcmVuZGVyZWQvc291cmNlL2Vycm9yIG9yYWNsZXMuIE9yaWdpbmFsIDgzODg2NzMtYnl0ZSBoZWFkZXIgcHJvcG9zYWwgaXMgcmVmdXNlZCBiZWZvcmUgd3JpdGVzIHVuZGVyIHVuY2hhbmdlZDhNaUIuIgogICAgICB9LAogICAgICAiZHVyYWJpbGl0eSI6IHsKICAgICAgICAic3RhdHVzIjogImNoZWNrZWQiLAogICAgICAgICJtb2RlIjogImxpdmUiLAogICAgICAgICJpbnB1dHMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogIi5rbm93bGVkZ2VfbWFwLmNvbmYiLAogICAgICAgICAgICAic2hhMjU2IjogIjkxYTIyZjc3MDRkMWFhMzc0ZDM4ZWJlMmMwZjY1ZTcyNGExYmVmYjRiZTFhMGRiNjM2NzFlN2EwYWFkZjcxMWEiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogIktOT1dMRURHRV9NQVAubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImRjODc2NDE0MDE1ODY4YzQzODkxOTNiOTZkODUxYjJhNDQwMmQ0N2I0M2Y4ZDk3N2ZjMGNhOGQ5ZjNhYWExMDAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvQVJUSUZBQ1RfQ0xFQU5VUC5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYjhiOTJlMjg4ZDBlYzExMzVhMGQ2NjhhYjhkNWI3YWU1NjRkMWE4OWJlNTg4NWI1MTM5MWRjNTNhNmM2M2RhYSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNi9hZnRlci1uYXRpdmUtZGF0YS5qc29uLmd6IiwKICAgICAgICAgICAgInNoYTI1NiI6ICJlYjFlNjg4MGY3NDEyYjdkZGY1ZGQ3MDRhYjdkZmRiOWZkZGM3NmUwYzEzZDc2MWZmYjU2Yjc4NWFhZGFiMjZjIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNS42L2FmdGVyLW5hdGl2ZS5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIwYmEwODhkZTEzMmVkYWQzZmMzNjkzNTNlYjU4YjM0NjY1MWFlOTY2MzZjZDUyZjJiNjU4Y2IzMGM3OTEzN2YxIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNS43LWZpbmFsL2FmdGVyLW5hdGl2ZS1kYXRhLmpzb24uZ3oiLAogICAgICAgICAgICAic2hhMjU2IjogIjRiMGMzYTNjYzc5ZTUwMWMyODc3ZDM4Njk5ZDQ2NTcxY2JjY2MwYWE3NDYxY2VkNWI2MWY0ZGYyZWY5YTRjZDYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS41LjctZmluYWwvYWZ0ZXItbmF0aXZlLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjY4Y2FmOTliOWMyMzQ1MGNkMjcwZWE2MjQ3YmMxODVhY2MzMzNlNjM1MzlkOTEyYTAyZDYyZTVlOWEwMDBkZjciLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS41Ljctb2JqZWN0L2FmdGVyLWRhdGEuanNvbi5neiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYmFmNDI0M2Q2ZTIzNTllNzU3YzVkMjMxNDZhNmY5N2E4OTNiZjM4ZThjOGQ1YmJhNzY3NGVlYzA4M2YwYjg2NyIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuNy1vYmplY3QvYWZ0ZXIuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZGNiNWZhZGU5NTMwMDgzZmJlZmQ4ZGI3NTZlMjIzMjMwNmUxNTQ2YzEwMTJmZDFhNWQxOGM2YTQwZTY2MjNlZiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9wbGFuLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogImM2NThhODZkYWFhYWVjNmVjYTg5ZmVlYTBmMWQxMDJjZGFkNDZlNjViNTIyODczMWI1MWE4NTQyZDJkMGMwZGYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE4LWNlbnN1cy5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZjBiY2U1MGI1OGMyODhmYTAzMjRkMjBiOTM5MDMxMzFiNDFiMDBhM2ZkYzM2NjA2MWZhMzhhNGE4NWNjZWU3MCIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYWN0dWFsLXJldmlldy5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJiYTViNDc4M2M0YmJiMmMwYWVkYWNlMTRiYjJjMDUwYzc3MGUzODhlMzYxMzZiNzRkZDg5Y2JkMjFmZTE0ZDUxIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9hY3R1YWwtcmV2aWV3LnB5IiwKICAgICAgICAgICAgInNoYTI1NiI6ICIyZWMyNjI5ZGY0NmFjYTdmZjI2ZDIzMGJjMDA5MjcyZjVmN2ZlZDA4YzM2MDBjMTEwOTllYTcyMGNkN2U4ODg2IiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9hY3R1YWwuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYTI5MzE0M2I2ZGUyOWMwOWJjOGY1YjViYzI2ZWEzNzY0YzE5MzViYTI4MmI0NTZjMjE2ZDkwZTE5Zjg0MTc1NyIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYXJ0aWZhY3QtcmV2aWV3Lmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogImUxMGQxMTJjYzliNjhmODI1ZjgwYTliZjljYTNjY2I0MDM3OTM3ODM3OGJmMjk2ODE4MGZiMjY5MDMxYzI1NWYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2Jhc2VsaW5lLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjk1MDhhZjFiZjk4MzIxNDkyNDA5ZWI0MjJkODE2NDdhODZhYWFhODk2MmUyOGI2ZjY0Mzg1MzgxY2M5ZmNjOTAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2Jvb2stcHJlcGFyYXRpb24uanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZTAyY2E3ZDZiZTdkYmE4NWZlNjVlY2RlNzQwMTA2ZDgwMzhjYzU5OGIxNTIzZDE1ZmZkOTEyNGU5ODE2MzE1NiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYm9vay1yZXZpZXcuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNjYwMTExYTYzNjgxNWVhMTE3OTgwN2I1N2IzYWE3ZTU0Y2I0YTE1MWUyYjBlODc5MjJhNzVkZmZhZjhmMjI0NCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYm9vay1yZXZpZXcucHkiLAogICAgICAgICAgICAic2hhMjU2IjogIjc2YTA0YmNiM2Y3ZWIwYzJmNzM5ODJlZDY1NjgzNGJhMWYzZmJiMWUwNWIwMDIwYWM5YTMxOTkwNDM1NmU3ODEiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2Jvb2suanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZWQ0Y2YwYzNkMTQ5OTdlZDliN2Q2NzZjMDU1NGMwMjdiY2Q2ODU4NzFlOWFhNDJlNzExNzJlZmQ2MGExOGQ1MiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvYm9vay5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMDQwODgwYmMyYTRmNTM3ZWJkMjIyMGIxZThkZjI0MjgwOGMyZWJhMzQ1MDc0Zjk5Mjg3MDIzMjM1OTc0NTEyZSIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvY2Fub25pY2FsLWNvbW1pdHRlZC5yZWNlaXB0IiwKICAgICAgICAgICAgInNoYTI1NiI6ICIyODUzZDM4YzIyNzVmMWZlMzRlODQzNjcxMzg1YWQxNTkyYWZmNjFmY2QyYzBhMmQzNTk4ODIzODczYzEyOWIwIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9jYW5vbmljYWwtc3RhZ2VkLnJlY2VpcHQiLAogICAgICAgICAgICAic2hhMjU2IjogIjhkMmM5NDJkN2VmZTIxY2UxMDYyNmIxM2E2YjEwZDllMTgwNjBkZWJkODE2YmMyOWFlZGFhMzNlYjU5MDc1NWUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2Nhbm9uaWNhbC5sb2cuZ3oiLAogICAgICAgICAgICAic2hhMjU2IjogIjE5ZGFmZTExOTE2NWJjMWM4YTczZDU1NDk5MzVmYmVkZTMxNjhmZGRjNDA4ZDk5NWU3ODA1ZjQyZjViZGY0OTIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2NhcHR1cmUucHkiLAogICAgICAgICAgICAic2hhMjU2IjogIjY0YWU4ZDQ0MDAyZjVhMzY1MmI1ZTdhMDE0YjkwOTA5NTAwMDRhZjhiOTk0MDRjY2U2ZmZhYTI4YTU4Mzk2ZTciLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2NlbnN1cy5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNWY2YjRmMGRkMjJmNWU4ZGJhZjdjODBmNTNiOTliOWUxNThkNjc5NzRhZjJlYzg1YTZmZjViZmZmYjYyMGM0MyIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvZXZpZGVuY2Utb3JpZ2luYWxzLmpzb24uZ3oiLAogICAgICAgICAgICAic2hhMjU2IjogIjBjZDI4ZWNmODE4MzUwMmYzMTVjMzkwMDVjNzNiODBkZjU4YmFiYzcxOTkwMDg4NzMwOGE5N2M4MWI4YjQ2MmMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2V2aWRlbmNlLXJlYWNoZWQuanNvbi5neiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMzllODhiMTA5MGYyMjI3MWU5YTQ3MDNjM2YyYTg2MmVlZGMxNmE2Y2E3YWZlMThkNmMyZDU5ZTAyZWQxNTUwOSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvZXZpZGVuY2UuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODQwMjJkYzJkOGE2YjQyOWRjYWFjNTVmNzU2YzYzMGZmYjY3YmUyYTE5NDhiMDE1YTc3YWRlZjhkM2Y0ZGI4MCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvZXZpZGVuY2UucHkiLAogICAgICAgICAgICAic2hhMjU2IjogIjE0MTA4YTY1MTc0NjNkMWU5ZDUxZDQ3NjhlZjliZjY5MzUzYmZjNGYyZDMwODEyYmM1MDE3NWQ1OGNhZTc1ZTkiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2tub3dsZWRnZS1pbnB1dHMuanNvbi5neiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYjMwZmEzMzM1NDY4ODQ4MThlMDMxYzBiZjFkMDZhZTQ2YTJhNThmYTBiYmZiNjM5NjViZTU3NDA4ZWU3MDdjOSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkva25vd2xlZGdlLXByZWZsaWdodC5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJlOTA4ZWU4OTc3NGE2NjU2ODg2NDNkMzk0YTY2OGM4ZWNjMDAyNjIyN2Q0MzE5NmZkYWU4ZTI0MmVjMmVkNmZhIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9rbm93bGVkZ2UtcHJlZmxpZ2h0LnB5IiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5ZDRmODI5MDNkZjhlMWIyNTY0ZWMzM2NhZTJhZDM0ODEwZDFjNjBjNmQ2MzE4NzRjNTVmYmFjODU3NjY0NjU1IiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9rbm93bGVkZ2UtcHJlcGFyYXRpb24tZmluYWwuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiM2QzMTMwMTlhNWU4ODNlMzIyODg3MTA3ZDVkMGExYjMwNjRmOGQwN2U2YjZhNjg0N2UyNzFjOWQ1MGEwN2EwNSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkva25vd2xlZGdlLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjExYmMzNTlhYTRiMmVjMDczNWMzNTc2ZGFhZTcwYzFjMWE5YWNmMjA5Yjg5ODUzNWNkMzNhMGIzOTJiYTM3MzIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L2tub3dsZWRnZS5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMjBmZjA5ZWQ0YmIzN2NjNzI5ZDM4ZjI0MTk4MmFmNDhlMzEzYTQ4NmYwMTdiYTNmMTk4ODE5YmY0YTI3ODQ4ZCIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvbWV0YWRhdGEtZXZpZGVuY2Utb3JpZ2luYWwuanNvbi5neiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZmM1ZDhhMjg1NDI1ZTUxYTljOGY5YjdjN2RlZThlNDE0NDAzYWY2OWI4YWZmOWQ3YjMyNWI2YjlkYmJhNDg5ZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvbWV0YWRhdGEtZXZpZGVuY2UtcmVhY2hlZC5qc29uLmd6IiwKICAgICAgICAgICAgInNoYTI1NiI6ICI0MTBlZGI3MTI4ZDQ4MTQwMmRhNWUwMGEyODZjZDg1NjVlYTFkZmQ2ZDYyYjFhYjc2ZjBhZjQ2NmU4MjJiOTMzIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9tZXRhZGF0YS1ldmlkZW5jZS5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1ZmQ5ZDYxMDFmNTE1M2M4OTc5ZWI5OWZkYzI3ODE2OTMxYzczNDljZGI0MzI0MTJkYzIyZjYxYjQ1MTliMTNmIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9tZXRhZGF0YS1ldmlkZW5jZS5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiOGMxZjQ1Njk2YmQxY2M3YTQ5ZjA3MDE1MjViN2FkYTg1ZDZmMWIzNDQyN2NiZGZjNzRkMDZjZjcxZjBiOTI4MyIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcHJlcGFyZS1ib29rLnB5IiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkNGI5NzQ3YTZhYmEyN2I3Y2YwMzNmZmE1MTBjYjAyZWY5NDMwNDA5NTM0OWU1NDUxNWYyOTNmYTNlOGExYzY0IiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9wcmVwYXJlLWtub3dsZWRnZS1maW5hbC5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZTlkMDVhNzA5NGQwMTdlNTk1Zjk4YjlkMGNjMTY4NjI0YWMxZDkwN2QzODQ5YTczMGRhZGJlODQyOWEzNGFlYiIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcHJlcGFyZS1rbm93bGVkZ2UucHkiLAogICAgICAgICAgICAic2hhMjU2IjogImE2NTAzZWE0MTI1M2UxYTk1NGFlYjJlNzgwYjNhZTBlMmUyNzI4NGVhODYwNzY0NjY0M2QyNjExZTE4NmMzMDgiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3ByZXNlcnZhdGlvbi5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5YmYyOGE0YzIxNDQ2YjRhYmMwNzk3YTk1ZjJmYWNkYWFmZWJkOGQxYWIwYWZkMDdhMjFjY2NhYmRhNjEwMmE0IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9wcmVzZXJ2ZS5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMmVjNzkwMjRiZmY3YmNjYzA0YjRmMWZiZGNjYWU5OTQ5NTcyMmE2MGQ4ZDA2ZmIwODhiOWQ4ZmY3YjhiNGM1MSIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcHVibGlzaC5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiOTkxYzIwYTgxMDk4MmY1ZDEzZWY0ZWM5NmIwZDgxZjY4YzM1NTQxMWFjNmYyOGM1NmRmZTMzYWUwZTllYTM5ZCIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmVwYWlyLXJldmlldy5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYzcyOGUwMDYzOTg0YmM4YzZmMTcxOGRjYmEzZTYyNjkzNzk0NTQ4OTZkMDRiM2E4ZWM0Mjk4YWVlMzViNzg2NyIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmV2aWV3LWN1cnJlbnQucHkiLAogICAgICAgICAgICAic2hhMjU2IjogImNkYTM1ZTNhODk5MDRkZWI3YjJmNjQwNTU0ZjUyYTA3ZmJiN2RmN2NhMDliNDkzZTJkOWY2NzJmN2FkNzJjY2YiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3Jldmlldy1maW5hbC5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5MWZkODI4NjA5ZGIzMjhlNWI0MjI3ODM2NzIwOTcyZjNiOGZjNjM3Y2RlNWQ3NTVkYmE1MmI4MmY2YTg5ZDU4IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS9yZXZpZXctZmluYWwucHkiLAogICAgICAgICAgICAic2hhMjU2IjogIjI4NzAzOTMyNjNjMGU1YzY0NzVkM2ExMzZmOTBjMmQxNDk4YTdkNzZkM2Y5Yjc0ZjUwMDQ4Y2JiMGZjY2FkNGEiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3Jldmlldy1yZXBhaXIuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMjc1ZGJlYTJlNGU1NmRkNWU0NmJmZTc4N2I4Yjg0MWE4ZDA0ZDIwMjk4OTcwYTg3YmYzMDhiMTMwYjNhMWMxMiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvcmV2aWV3LnB5IiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkOTUyNGFkZDExZjQ2NzQ2MzUxYmU3NmIxODE2YmEyNGMzYWI4NzQ0ZjJhZjE2YjgxMzQ1YjlkM2IzOTg5ZjNiIiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS92ZXJpZmljYXRpb24uanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNzAwNWNhODIxMGFmZTVkYjYyY2VmZDE2MmQyOTA0ZDI4MjE4ZWI1Mjk5YWFiNzk0OTVlOThjZDY1ZmU3M2UwZiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1ldmlkZW5jZS1vcmlnaW5hbHMuanNvbi5neiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMzc2NGM2ZTI1ODAwOWRjYmQ3ZDFhNDJhMzIwNGFlYjA2ODhlODg2MThlOTA2MDM4MjUzMGEzMWI1ZjAzMGY5ZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1ldmlkZW5jZS1yZWFjaGVkLmpzb24uZ3oiLAogICAgICAgICAgICAic2hhMjU2IjogIjM4NDQzZDYzNTg2MWMwNGM4NjUwNDRhMTNiOWI1ZDA1ODc1ZDY3OTA5ZTRkMDk2OGUxOWU4NWM1MDM4ZTViZjkiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3dhcm5pbmctZXZpZGVuY2UuanNvbiIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZTc3ZjM3NmYzMGQxNTU1MTBkOGQ1NWNlZTM5ZDBjMTZkMTI4NmYyZjJjODY5OWIzY2UyZDE4NjJiYmQ2ZjdhNiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1ldmlkZW5jZS5weSIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODliNWM5YTM0MjViMWI4NjM3NmM2NWUxYjgyZDk4NTczYmVkYjFhYTY3ZmVkOGU1NmE1YWYzMWUwZjlhMmY0OSIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1maW5hbC5qc29uIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI2Nzg2MjRlNDk1ZTI3Y2UzNTdjNmM4NWU1NGUyYzUyN2U0ZTc3YmY5YTBlOTdmYzhkZDQ0Yjc1ODQ5NTg3YWVlIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS93YXJuaW5nLWhpc3RvcmljYWwtY2FyZC5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYmNkZGY1OGFhYzc0NmMwMzU1NTlkNzBiOGYyZjVlODQ0NzFlOWZhZTRkNWFjY2M5YTczZTAyMzA0NDU5YmI0OSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9jaGVja3BvaW50cy9SRVBPLUhZR0lFTkUuMTkvd2FybmluZy1wYXJ0aWFsLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjE2NmI0MGVlNTIxMTBiODhhMDY4NzQ3MTA4ZGIyNGEwMTk3Zjg5YTllNDc3ZWFhMTU0MDQ2YWQxNWI4OWY1MTkiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3dhcm5pbmctcmV2aWV3Lmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjkxYmQzYTJlYTVlYWNkMzgxZTQ5MTc3ZjIwZDE4NjU4NDFlYTExOTg5MjNjMWIyOTVhN2ZkNjg2NTQ3NDQ4YWMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3dhcm5pbmctcmV2aWV3LnB5IiwKICAgICAgICAgICAgInNoYTI1NiI6ICJhNmVmMmNlNDA5MTkxYWY5YzgxNjNkYzU4YTc5ODcyMDU3NDY3OTBiZTUzNGI1YzI2MjgwYTZhNDQ5YzMzZjRiIiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2NoZWNrcG9pbnRzL1JFUE8tSFlHSUVORS4xOS93YXJuaW5nLmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjkxMTQ2YzQyZGQ0NzY2MjZiZDljYTFkNTZkM2MzMGE0ODRjMTY2NWQ4ZDMyOWVhMzk3Njc0YjNkYjc2YjZmNzYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2hlY2twb2ludHMvUkVQTy1IWUdJRU5FLjE5L3dhcm5pbmcucHkiLAogICAgICAgICAgICAic2hhMjU2IjogIjMxMjdlOGJhMDZmZDJlNTY0NmM4YjkzNTcyN2Q2Y2RhY2M1YmEzNGJhYWNjNDc1MjlhMWM5ODhkOTVlYTA2M2EiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvY2xhaW1zL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuNS44Lmpzb24iLAogICAgICAgICAgICAic2hhMjU2IjogIjA1NDlhZmZjMDBiYmFlZmJmOTE4ZDYyZGRhOTgwZjgxY2Y3NTY2ZWQ2YWQyZmYzMTNhODA4MDJjZTk2OGZmZmQiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3Mva25vd2xlZGdlL2Zpbml0ZS1lbmdpbmVlcmluZy1ub3Rlcy1tZW1iZXItMDEzMS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMWEzZmUwNTllYzEyMDQ1NGRiYzFmYjhhZjkyNzVlMTZlNjgxMjM5M2Y5OTAxZWM2YjMyYTE5ODA2OWI4MzJiNCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcGVybC1lbWl0Y29udGV4dC1jYWxsYmFjay1jYXB0dXJlLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJhZjE1ZWNiZWQxNzM5YjUyOTFmYmJmNTNiNmY4ZDFjOWI5ODg3ZmYxNjNmYjE4M2ZjMjIzNTNjODk3OGVkYzg1IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2tub3dsZWRnZS9wZXJsLWZhY3RvcnktY2FwdHVyZS1mcmFtZXdvcmsubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjk2ODg1NGRhOTM2NDA0YTZhN2FmZTA3MzQ1ODU2YTBjYTc0NTJlNmQzYTE1MDZmZDVkOWE1MmEzMDhjMWI5ZTQiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3Mva25vd2xlZGdlL3BlcmwtbGVnYWN5LWhhc2gta2luZC1jYWxsYmFjay5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZDE0YTc3NTkyNDkwZTEwNzlhMzZlZDBjYWZjMDZmYmViZWMwMzViNTUyNWMwYWYxY2RmNGRlODZhODZiZDM1YSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcGVybC1tYXRjaC1hbGlhcy13cml0YWJpbGl0eS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODNlOGMwZWNhMGUzOGM3MjJjZjUwNGQ4M2Q1ZTM1ZDM5MzgxNWE5MDY4MGJjMjk1MWFiZjhiOWU0YzAyZjIxYSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcGVybC1tZXRob2QtYXNzaWdubWVudC1yZXF1aXJlZC1jYXB0dXJlLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI3MDY5OWE3YjU3NjYxM2E3MmU2OTFjOTA4YTJmMGExZmNmOTAxYTVlMGMxZjYyNmZiYjAwZTFmODFmZTA1MGM3IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC1hc3QtY2FsbC1jYXB0dXJlLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI4NjMzMTVlMjQ2MWJhOWE2ZGY1ZWZlZGViYmEzN2ZjYjhmM2ExYTY4YjhjNDAyYjcxMDg5NjAxZTY0ODJmYjZlIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC1ibG9jay1jb21wb25lbnQtY2FwdHVyZS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNmNkYzg4YTc1MzVlNzJmODViMzcwYTE3MWFiZmNjOTJlZTRkNTRhZWM1NzcwZWQxMDA5Njk4MDRmNDE1OTZlMSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcGVybC1tZXRob2QtZGVmYXVsdC1jYXB0dXJlLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkY2QyNWI1OTU1M2M0YmU5MDEzMTZiNDg3NmZhOTQzYTJlMDQ2YjIzMzkwYTJkODlkM2FkNzdjYjBlYjFhOGNhIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2tub3dsZWRnZS9wZXJsLW1ldGhvZC10cmltLWNhcHR1cmUubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjhlMjgyYzVlMGRjZmRiNjM0ZTM3NTViZjlhOTIwZjgzYTNlZDdmNDNjZjFmZTJiNGVhZDIwOGIxZWNmMGNlNDAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3Mva25vd2xlZGdlL3BlcmwtcHJpdmF0ZS1lbWlzc2lvbi1mb3VuZGF0aW9uLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmNTVkYmNmZmU4MDU1MjUyNGFmZTQzMWE0ZWE1ZjBmMmM1ZDFiNGQ5MDIxZjkyNTZjNjM4YWMwNzg0MDk2MmFkIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2tub3dsZWRnZS9wcm9qZWN0LXJvb3QtZXZpZGVuY2UtZmlsZXN5c3RlbS1tb2Rlcy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZTRkZjEzNjQ0Nzk3ZDE2ZmEwNzI4OTk3MDZhYzU3ZjUyYWVlOTc0NzczM2ZiODg4ZmRjYjM3NWZhNWZiYmE1ZiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcmVwby1nZW5lcmF0ZWQtYXJ0aWZhY3QtY2xlYW51cC1ib3VuZGFyeS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiY2JhNTNjMjJlMDE1NzliNTI0YzFmMTlhYjA2N2ZhNDE2ZTdlOWFiZDhlMWIwOTc1NWQyNjkxMTg1OTM5NWJjZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9rbm93bGVkZ2UvcnVzdC1kZXBlbmRlbmN5LXdhcm5pbmctYmFzZWxpbmUubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImRiY2ZlMDliNmQ0OTRjNzM3MDY5ZDQyMjFjMDdjNzkyZDVkOTI5MjgzYWVjNmFkZWRhNDNhZTU5YmQzMDJhMTAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL2Jvb2sudG9tbCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYTk1MzU1ZTYwOGIzNGNkNTM3M2NhYjBmMGQ5ODgxNzQ1N2RkMjE1MTAwMmQzYmY5ZDczMzNkM2YyOWYyNWY5ZCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL1NVTU1BUlkubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImMwM2Q5OGZhNzQwMjI0OTc2MWI3N2UyNDBhYmNkN2E4ZjYzNDU2NjA4OGY2ZWE0OTY0MGQxMDE5ZjY3MzZhNmMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9hcHBlbmRpeC9iYWNrZW5kLWhhbmRvZmYubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjliZWY3MWUxNzllMmUzZTllMTg0NzRkYWVhMjgxNGIwMjFhMTA1ZmVlOTk3ZGY3NTlkMjNkZjI0Mzg3YWM1ZTIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9hcHBlbmRpeC9mb3JtYWwtZ3JhbW1hci5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYzExNDA0MmU1Y2M4YWM1OTA5NzQyN2E0NmEwZjQwODIxYTBiYjg2NGY2YWVhYzM3N2FhMmEyZjQxYzNhMGIxOSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2FwcGVuZGl4L2hlbHBlci1jb250cmFjdC1jYXRhbG9nLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI2ZDBmM2RmNzEzMGEwN2FlNzAwMzc0NmVkOGNiYjk4MjljMGM0YTgxYjE4OWVjYTBhMjAwYTk5M2QwMzVmZGMxIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvYXBwZW5kaXgvcnVudGltZS1zZW1hbnRpY3MubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjcxNTk1NDQxYWMxNjY0ZTkwOTFjOGZlYzAzZDI5Nzg1MjFjZGIzMGYwMzI2M2YwZTE3OWZhMzVjMzhiMzk0NGMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9hcmNoaXRlY3R1cmUvb3duZXItdHJlZS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMWNiMWQ3NWY5ZmYwZWIwNzA0OTVhNzAyYmY4MjE1ZWU2OTYyMTJkYTIxYjE1ZDA5OWIzODhmMzI5OTZlODdhNCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2FyY2hpdGVjdHVyZS9zdHJ1Y3R1cmVkLWZvcm1hdC1wcm9ncmFtLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI2MWI3NjdkOTNjZTY0YjVmMTAxOWYwZTUxZWU4ZjRmMmUyOWVmMGE0YjU0NzdlNjBiNTAzNWI0ZjM0ODg3MzU5IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvY29tcGlsZXIvY29tcGlsZWQtc3RhdGUtbW9kZWwubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjI2NjVkOGFlNDk2OGRkNmZjODFmYzY0OWIxNTI0MGFkYmFmNzM3OTNiZGU1NTVmMzVhNjViNzIzYmI1MDgzMTIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9jb21waWxlci9kaWFnbm9zdGljcy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMDkyMDhkYjUzYWM4MDQwZjZhY2Y4YTQyNDg4MzQwMWY2MjhjN2Q4YmNkYzU1ZDQ4NjFiNGU0YzU5NDdiMTRkOCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2NvbXBpbGVyL2dlbmVyYXRlZC1oYW5kbGVycy1hbmQtZGlzcGF0Y2gubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImM2YTM3ZDNmNTVlMTdlNTczNzliZmY2NTM3ZjhhMjZjNjdmNDQxNDliYzA3ZmE4MTdiODBjZWQwMTI5MWI2NTkiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9jb21waWxlci9waXBlbGluZS1vdmVydmlldy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZmQxZDc5YTQ1MmMzYWQ2ZGUzNjg4M2RlZTE0YmNkNmMzM2I4MWQyYzM0NmMyYzE2NWIwMDA0ZGFmZGFkNzYwZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2NvbXBpbGVyL3N0YWdlZC1hc3QtZW5yaWNobWVudC5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMzhjNDhhMjdjNWVmZTgxYzgyOTQwZDhjYWRmMzhlNjM4MjM3N2M3NWRkOTNkYWMyMzA1OWIwMThkZGM2YTY2NyIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2RldmVsb3BtZW50L2NvZGVnZW4taW5zcGVjdG9yLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJhNjk1ZGU2OGYzYWE4NjI0MmM3YWVhYmE2M2QwOTgxY2RkMjY4ZWU2NWZjYTJjNmExN2JmNWJmZWY2ZWZmODFhIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZGV2ZWxvcG1lbnQvZG9jdW1lbnRhdGlvbi13b3JrZmxvdy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYWFmYTk5ZmVmODRlM2VhM2JkMzNhODlkYmNkYzkyZmIwNGU1ODhmMTU1NGZiM2RiMjBiOTNlZTVmNTQxOWRhNSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2RldmVsb3BtZW50L2xvY2FsLWNpLWFuZC1yZWdyZXNzaW9uLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIzN2NmMjE0OWUwMDczODQ3NWI4ODViYmJlN2I5ODRiYzA4MGMyN2JmMTk1OGY0OTRiNzUxYjYwMDY5MTIyOGE2IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZGV2ZWxvcG1lbnQvbWFjb3MtcnVzdC1sYXVuY2gtbGF0ZW5jeS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZmE3ZDA5MzVjMmY5ZWU0YTNiOWYyYTBhYjMwZmYxYWM5ZWZkYmFjNWI4OTllMzYyZWVjN2M1ZTYzN2UxNjJkMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2RldmVsb3BtZW50L3JlZ3Jlc3Npb24tZml4dHVyZXMubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjhkMzFjMWM1OGVjOWI0NzBiMTdhMDc5ZjhkNThmOTU1YjZjZGVkOTgxNmQ0NDNmMDgyZjJkZGIwNmNiYWU1NGUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9kc2wvYWN0aW9uLWFuZC1saWZlY3ljbGUtcGxhY2VtZW50Lm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5ZDE4ODljZDljNTQwNmUzYjBiN2Y5ZDgwYTRiMjg2ODgzOWQwMDZmZGJmZTA4ZGUxNzZkNWQ4MDhhZTFkYmE5IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL2FjdGlvbi1tb2RlbC1hbmQtaGVscGVyLXN1cmZhY2UubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjZhZmRiMDM4ZDYyZWZhZTUzYjllZDZlOWQzYmMzNzc3ZGFlNWU1YmJiYmMwNzAzYmFiNjRlZTFjZWU0NWQ2ODgiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9kc2wvYWN0aW9uaXItbG93ZXJpbmctbWVudGFsLW1vZGVsLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIxYjNmYmNkOGZmMjQ5YzE1MmMzMDFiM2Y3NDhlZTMxNTg0NzRhZWI0ZDBkNzAzMjdkZTk1NDk1MTJlZDIxZDk0IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL2NhcHR1cmUtbWFya3MtYW5kLXNvdXJjZS1sb2NhdGlvbnMubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjY4NzNjZDU1ZGQ2YTBjZjFmNmVlNDFkMmM0ZTk5YzdlYTE1NDRlMmJiODc1ZDcxNjg3ODIzYzAwZWI2MjA1YWYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9kc2wvZGVjbGFyYXRpb24taGVscGVyLXJlZmVyZW5jZS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiM2EzZTI0MzBkZTYwZjg5OGFjMjE2N2Q0NzYxMmUxMzc4ZjRmNDllNDc4Y2VlODU3NjgxNmRhMjhkOWQ0NjQxYSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2RzbC9mbHVlbnQtYW5kLWJsb2NrLWZvcm1zLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkZTRmMjc0ZjM3ZWFiYmI2MzJjYTk3NjcyNDZhNzQ0ZTY0Njg1MjBhZDViOGY3MDNlYjY4YzNiNjM2ZjYxZGFmIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL3NvdXJjZS1ib3VuZGFyeS1oZWxwZXItcmVmZXJlbmNlLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkMWNmZDQwOTU4ODAyZDlhMWFmMTUxZTcwZTI0M2UzY2Q2NDA2NjcxODg2NjJmNTYyOWFjMjQ3NmY1Nzg3MDFmIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvZHNsL3ZhbHVlLWNvbnRhaW5lci1mbG93LWhlbHBlci1yZWZlcmVuY2UubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImY2ODc0Mzc5ZDhmMzI5N2I2OGRhMzRmYjZiMzI1NTAzNzM0MGY0ODgyOTZmNzU4NzY1YjRlODNjNWVkMzFjYmUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9kc2wvdmFsdWVzLWNvbnRhaW5lcnMtYW5kLWZsb3ctaGVscGVycy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYmQ0ODdmZGE1NGRkZGU3MTY0Yjc4YzBkNzkyYjE3ZjlmZDRhNzkwODQwOWM4NzU0NzdlOWZkYTg3OTc5MzFjMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL2luZGV4Lm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIwYTEyOWU4MDhmYjNmYjZiMjE3ODcwOTFiYzMxYTA4MWQwNjBjMWFjMGVkYzQ0Zjk2NDUxNzFhMGVmMjU0YjIzIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvb3ZlcnZpZXcvZGVzaWduLXJhdGlvbmFsZS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiN2Y2Y2RkZTI5YTMxNGJmYmUwY2JmNzQwZjJiOWY4NDc4ODQ4ZjViN2U5MTM4YWMyZmQ3Njg0Njg1ODdlMTBmNiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL292ZXJ2aWV3L2RvY3VtZW50YXRpb24tbGF5ZXJzLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1NzVjZjJjZTMwM2NhMDYyOTJkZDdhNzM0Y2NmOWY1ZjcwOWY0NWVjZDFiOTc0YzBkNzY2MzkxNWJmYzJiMWVlIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvb3ZlcnZpZXcvcHJvamVjdC1zdGF0dXMubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjI5Yzg5MzFjYjQzMWY5ODQ4ZWNkN2U4ZTQzZGIyMGM0ZjNjYjBhMDIzMzk3MTVlNjYwZjI4NGVmZWQ3ODY3NzIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9vdmVydmlldy93aGF0LWlzLWxpbmtlZHNwZWMubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjcwZDcyZGM0MTdhMGNmNDNiYjJlMTRjZGQ4NzE5ZjJjM2RiYWQzNTRmZDJkN2Q5YmJmMjU2MzNlMGQ5MTFmZTEiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9wdWJsaWMtYXBpL2Rlc2NyaXB0b3ItaW50cm9zcGVjdGlvbi5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMWU5NTc4MDM0MTVhZGFiYTIzYjE1YTMyZjIzODhhOWQ3MWEwNDE3MTY2ODllODA0NWZhNzk5Yjg1MmQ3Y2FlMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3B1YmxpYy1hcGkvZ2V0LWFuZC1nZXQtcGFyc2VyLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIyYTYzNTY1N2NhMTllMzYwMmYxZmZmNzQyNTY0NTg5NDY4ZDFiMzQ3OWZmNTgxM2FlZWQ4NzI5NWMwYTU4NDY0IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9pbnRlZ3JhdGlvbi1kYXJ0Lm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkZjc1OWYxOTc4ZGYzZGY2YzI3YjI0ZTUzMWRkNDc4N2E2ZjE4ZTg3NmQxMmFiMmFmZjQ4MGM0YWMxZTQyYmQ3IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9pbnRlZ3JhdGlvbi1qdWxpYS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiYjZjNDJmZjRkNjBlMThiZDE3YmVjYTRhMjc1NDYyNzZmMTUwOThkMThhMzM3MGRlNTQxOGY1OWY2ZDI1NTlkMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3B1YmxpYy1hcGkvaW50ZWdyYXRpb24tbHVhLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1NjkwZWJhOGU0MDkxOTAwZGIyZTZjOTRjMDA0YTRhYzIyMzM5NmYwYjFmZWVmYmFkNDg5MTMxNzdhMTk3ZDliIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9pbnRlZ3JhdGlvbi1wZXJsLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1ZWMyZjQ1YWUwMjRjZjg3Y2I4Y2FlOTA1ZmM2YzNmMTU3MzVhNDNiY2MyMTg3NGJkMThjOWJhMWM4YjljNDQxIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9pbnRlZ3JhdGlvbi1ydXN0Lm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5NThlYWQ4MTI3YjQ3ZGQxYTBhZTQ5NGNlODdlZjE5ZmE4MzQ1MWEwODNmZjA1MjNhMzg4MDA0Nzk5NTM2NDQyIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9pbnRlZ3JhdGlvbi5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNjQxYTVlYTBlYzQ4NzJiNmFjNDM2ZDhiNjJjOWQxYjZjYWI5YzVlNDIyYjZmYjQ3YjBkODdhNmFhMmI4MjQxYyIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3B1YmxpYy1hcGkvbmF0aXZlLXNwZWMtbG9hZGluZy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODVmZjFmOWNlYmY5MWI1NGI2OGJiNzE1NWRiNWM4OWI5ODY2ZTk1NmM3NGRmZjliODNmMzFjZTM2MGE4ZDdmNSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3B1YmxpYy1hcGkvcGx1Z2luLXJlZ2lzdHJ5Lm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmZTAwYTMyNTA2NDAzNzQ1NWRmOGZmY2RjNjExZDU4MzhkZjkwMDFjNTc4M2EzNTBjNzkwMGIxYWI2MmNjZmY5IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS9zZW1hbnRpYy1pbnRyb3NwZWN0aW9uLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmOWYzNzEwY2I0MWUwNzNlYTY0OTg5ZmQyOTZjZmY5M2MyM2MxMGJkYzQzNGM2Njg1OWRlODkyOWQyYjMzOGU3IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvcHVibGljLWFwaS90cmFjZS1hcGkubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjgzMTM2NmFiZWQ1ZDc1ZGFhODgxZTZmOTkzZWEyZjY5NWU2YjkxOTUyOWFkNjk2NGMzNTNmODMxYzQ3ZDYwYzMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS9lYm5mLXNwZWMtd2Fsa3Rocm91Z2gubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImU3NGQyMjY2ZjJjMjhkMWE1NDI1YTk0YzYwNzE4NTQ4ZWIyNmNjODNlZDcwMGZlNDQ3OGNkMjM1OTNhYjE4NjgiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS9saXNwaXNoLXNwZWMtd2Fsa3Rocm91Z2gubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjA2Y2MyMDU2YWFkZGQ4MDYzMTg3OGY5OWI3NTkyMmMwNjJmM2U0NDE1NjJlZWQ5MjMzNTkyY2JhZTYwZDNjNTUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS9wb3J0bWFwLXNwZWMtd2Fsa3Rocm91Z2gubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjAxZGFiMWI0YzI5YjQwODVlNjlhYWM1YmVkMWRlOGU2NjI1NmIxZGZhYTM0Y2UzYzU2YzNmNDNkMWFkMGZkOTUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS9wcGx1Z2luLXNwZWMtd2Fsa3Rocm91Z2gubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImRkZDNkMjJjY2QyODkyN2MyNGUyYTM0ZGIxNWYwYmVlMmE5NDBmNmE4YzM1MTgyNTJhZjQwMmI3ZDdlYjZiMzMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS9zZXhwci1kb2N1bWVudC12MS5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNjVmZGU0NWRlMDZiM2MxOGNhZDU5YTAxY2IwMjk0NGVkOGZmMTA1Yjk0ZTBkMDJiMmY2MWY1MjViODhmMzkxZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3NwZWNzLWFuZC1jb3Jwb3JhL3NoaXBwZWQtc3BlY3MtYW5kLWNvcnBvcmEubWQiLAogICAgICAgICAgICAic2hhMjU2IjogImJkMTY2N2RkOTkxMzNmNWM2NTQxZWI5ZDZlMTI3ZThjNTI5YzA1ODIzYjFlMjA4MjllNzg2NzRkNDRlY2FkMTMiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy9zcGVjcy1hbmQtY29ycG9yYS90YWJsZWdyZXAtc3BlYy13YWxrdGhyb3VnaC5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZGZiZTNhMjhlYzBlOWVkYjUzZDBjY2QyYWY1YTM2YzRiZmI1NTIxYTI1OGU3YTdkMWFmZDIyYjEzNWVkYzk4MiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3VzZXItbW9kZWwvYmxpbmQtY2FsbHMtYW5kLXBhcnNlci1vcmNoZXN0cmF0aW9uLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJjYzhkNjJlNTMwYTgwYTJiMzE3YWZiZmU0NTk1MGQ0MmUxMTg0MDg0NGJmM2Y2NTY1ZWQ4ZjRkMzczNWU5MDgyIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvdXNlci1tb2RlbC9yZWdleC1pbi1zcGVjLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI4MmQyZTY5OTdlZWNkYWM5N2JkNzIxM2QxODZhY2QwMjFiODdmYzUyMmI1OGViNjJlNWE5MDk5OWFkZjJhYjgyIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvdXNlci1tb2RlbC9ydWxlLW1vZGVzLWFuZC1wYXJzZS1tb2Rlcy5tZCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiOGZlZDczNTJkMjI0ZjA0OWNiZjQ4YzA0MTZiNmFjNmM5ZDdkZjdjOTVjMzgzOTVhNDhmN2UyYzZkZTdjYjA1YiIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZG9jcy9saW5rZWRzcGVjLWJvb2svc3JjL3VzZXItbW9kZWwvcnVudGltZS1jb250ZXh0LWFuZC10cmFjaW5nLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI0NzA1ZWNhYmFhYjVjYjE1OTI0NTE3MmFkYWY0MDkwMzE2ODBmMzU1Mzg0MDhkMGZkMGEyZjk4MDBiNjg1ZDNmIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL2xpbmtlZHNwZWMtYm9vay9zcmMvdXNlci1tb2RlbC9zcGVjLWZpbGVzLWFuZC1ydWxlLXBhcmFncmFwaHMubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjkzNmI4Yjk0ZDU1ODQ2MzU2ZGNjMGUxODFmMTJhM2EwZmQzNWZkNGE2ZWU2NTkxYjU3NzdkOWNjODFhNjY3MTUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImRvY3MvbGlua2Vkc3BlYy1ib29rL3NyYy91c2VyLW1vZGVsL3dvcmtlZC1zcGVjLXdhbGt0aHJvdWdoLm1kIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1NjQwMDgwODc5OTk1MzBmNTA4N2M0OTdmN2VhMDM1YjI5MzY4ZGQ3ZWEzMzc1ODkzMzVhOWJkM2NmOGU2ZWVhIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJkb2NzL3Rhc2tzL1JVU1QtREVQRU5ERU5DWS1XQVJOSU5HLVpFUk8ubWQiLAogICAgICAgICAgICAic2hhMjU2IjogIjJhNjRiMmY2YzNlNTYwZTg2N2M5YWU1MWY3MjM3ZTEzNjgxNjg1NWQ2YTAwMGUzNGViZWM1YTA5NGFhZjllM2EiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2NvbXBhY3QtaGFzaC1rZXlzLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogImZjMTJlZTExYjM4NGYwNjU3MmU2OTA4ODIzMjhjOTI2NjIyOWVhNWE1NzNhYjQ5M2FkZGU2MjNjNzg5MDc1YTEiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2RpcmVjdC1yZWFkLXB1cml0eS5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmY2I4OWEyODZmMDJkYWVjZTViYzQ1Zjg1NjQ0Mzk1NDI3YjUyN2QwNGNjNTdiMzU4MDNiODQyYjExYzFlZTY3IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9mbGF0LWJvdW5kLXZhbHVlcy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJiMGQ0Y2MzZmQyZGQzNjUxZjk4NzExYzc2ZGYyOTZkNWRiNGRjZDM3YjJkMzdjNmI4MWRjYTRjNmExYTMwZGZmIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9mdW5jdGlvbi1hcnJheS12YWx1ZXMuc3BlYyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODM5ZDhkMDRkMzEzZTQ4MmE0OTdmYzAwOWIyMzk5MDQzN2EyMjUxOWUzN2RmNWRhNzZkMDY0ZjljY2NjYTM2MCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW5kZXhlZC12YWx1ZS1yZWFkcy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmM2QwMGQwYzg3OTE2NzM3YWI5Y2VkYTg5MTY4ODAxMzAwMzEzNzgxZjZhMmUyOGMyZTU1NTViODhiYTc3ZWY5IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9kYXJ0L2Jpbi9wYXJzZS13b3JkcyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiODYzYTZkNzU2ZjUyNmYyMzM0NGY5NzQzYzE1MGM1ODAwNjE4YWE0NGFmOTZiNTU3ZTJlYmU5ZDNlNDZlN2I0ZCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vZGFydC9iaW4vcGFyc2Vfd29yZHMuZGFydCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZTgxYjM5NjgzNTYyOWI4NTg2YjMwN2QzYWFlOGRmNDAzY2MxMWFhMmU1Yjk0MGZmODhjN2Y3N2U0NzNkYTAyYyIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vZGFydC9kaWFnbm9zdGljcy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkZjIzMDRiODkwMjgyYTMxYzNkOTc1MzAzYWI1NDA1ZjJiYWQzNWZhYTEzZjJlYWFkMGI1NzAxNWJlODM1ZTQ4IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9kYXJ0L2V4aXQuc3BlYyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMjgzYzI5MjFiYWMyNzkyNDRiNGRkZWJhYzBkOTNmNWVhYzY3NThiYjAwMDYxNWM5NDkwNmQ5NDRhZTRlNTlmMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vanVsaWEvYmluL3BhcnNlLXdvcmRzIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1OTY2MWExZTdlMWNmYTJkZTNhZDY0MGEyNjMwMmFkMWZhYTYyNjgyNTk2Yzk0ZDY5NGI2NmQ2MGFlNTI4ODkxIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9qdWxpYS9iaW4vcGFyc2Vfd29yZHMuamwiLAogICAgICAgICAgICAic2hhMjU2IjogIjM5YWY5NDlkMTgzNWY0MzE3N2ZiZDM5NWZiZTg0YzI5ZTI4NDNhOTU4MWFiNjQ0MGZmMjk3MGU0NTM3ZDAyZTAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL2p1bGlhL2RpYWdub3N0aWNzLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogImRmMjMwNGI4OTAyODJhMzFjM2Q5NzUzMDNhYjU0MDVmMmJhZDM1ZmFhMTNmMmVhYWQwYjU3MDE1YmU4MzVlNDgiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL2p1bGlhL2V4aXQuc3BlYyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMjgzYzI5MjFiYWMyNzkyNDRiNGRkZWJhYzBkOTNmNWVhYzY3NThiYjAwMDYxNWM5NDkwNmQ5NDRhZTRlNTlmMCIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vbHVhL2Jpbi9wYXJzZV93b3Jkcy5sdWEiLAogICAgICAgICAgICAic2hhMjU2IjogImM2ZDRmMTg2ZjEwZmMyMDY0Yjc1Yzc0ZTVlNjk4MjQwOTkzNjY3ODIwMGM4OWNjMGUxZDY5Mjc5MmVkMzkwN2IiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL2x1YS9kaWFnbm9zdGljcy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJkZjIzMDRiODkwMjgyYTMxYzNkOTc1MzAzYWI1NDA1ZjJiYWQzNWZhYTEzZjJlYWFkMGI1NzAxNWJlODM1ZTQ4IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9sdWEvZXhpdC5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIyODNjMjkyMWJhYzI3OTI0NGI0ZGRlYmFjMGQ5M2Y1ZWFjNjc1OGJiMDAwNjE1Yzk0OTA2ZDk0NGFlNGU1OWYwIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9wZXJsL2RpYWdub3N0aWNzLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogIjM5NjQ4MDRlYjU3MDQ0NmMwMzEzMDMxMTlmNDVhNmJiNzY2NWFiMjA2YjQ1MzFlMTc1ZjQzMGMyYWI4ZTYzOGQiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL3BlcmwvcGFyc2Utd29yZHMiLAogICAgICAgICAgICAic2hhMjU2IjogIjYyYWYwNDZlMTRlMzI0YWUzMmQ4MzFlNzc0MGJjOGZiNzk0ZWI3MzIwMWM4MGMyOGNjYzViOWRjNGRjY2M4YzIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL3BlcmwvcGFyc2Vfd29yZHMucGwiLAogICAgICAgICAgICAic2hhMjU2IjogImI1NjMzY2FlZjk3NDE4ZTg0ZmE4ZWIwYjkwMWFiYjllMzhmOTkwZDkyMDg3MGNiMGM1NGU0Mjc2M2U2YWMwNzkiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogImV4YW1wbGVzL2ludGVncmF0aW9uL3J1c3QvQ2FyZ28udG9tbCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiZmI3MzRmYzA2YzM2YWMzZTM0ZjkxODRlN2I4NTRhZjZiNzE3OTFhODI5NjYyZGFmZGE3NTIwM2EwN2ZlZjFjNSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vcnVzdC9zZXR0aW5ncy5zZXhwIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJiMWRkZmI4MTY0NGEzMWUwZDM2MzZmMGNhODBhNDgyZTA3YTMzMWRmYWQ4YzhkNTM0N2EzMjQ2ZDViZTJlMmYwIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9ydXN0L3NyYy9iaW4vbGlzcGlzaF9maWxlLnJzIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJlYzM5NTkzN2U2MmQ1Mjg0ZmMwNjc3ZDU1YjlhZDM3Mzk1OGZmNjIzMGIyMzVjYzU2MzBhMzlmODBjMGZjNDAzIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9pbnRlZ3JhdGlvbi9ydXN0L3NyYy9iaW4vc2V4cHJfZmlsZS5ycyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNzQxOTU3M2ZiNjdiNTJjZGVkMTIwNmFhMGZlODZhODRmODM0MzJlMzUxNmE1N2FjM2FkNTllZmQ0Y2ZmZjIzYSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vcnVzdC9zcmMvbWFpbi5ycyIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiMjFjNjYwZDVlMWZlNWM0NTNhODVlMDEzMGM1NDI4ZmY5MWJhNGMyNmY2Y2VmNzlhNjUxZTRlZDgwNzRlZjFhZSIsCiAgICAgICAgICAgICJyb2xlIjogImlucHV0IgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAiZXhhbXBsZXMvaW50ZWdyYXRpb24vd29yZC5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1MjIwNTUyNGU3ZDU0YmJkMzNkZTE2ZTcwMmIwY2ZiNGVkYjJiNTFiMmQyMTI0ODE0OWJkZjE5MDA3ZGJiMWU1IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJleGFtcGxlcy9udW1lcmljLWFycmF5LXZhbHVlcy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI1MjExYmNhMzQwMzcyYjc1NzI0YWI3MjhjNTViN2YxMTlkYjRiM2Y3YWY5MGRjMDU1NzI0MDlhYzkwZjllZjU4IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJrbm93bGVkZ2UtbWFwL3NjcmlwdHMvY2hlY2tfa25vd2xlZGdlX21hcC5zaCIsCiAgICAgICAgICAgICJzaGEyNTYiOiAiNzUzYmE5MDIzODkxMjFhYmRlZTE4N2U1ZjZkY2IxMWFiMTg0NWZiOWI0Mzc0MWFjNTg4NGQ0ZmViYThhMGQ3MyIsCiAgICAgICAgICAgICJyb2xlIjogInByb2R1Y2VyIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAgICAgICAgICAgInBhdGgiOiAia25vd2xlZGdlLW1hcC9zY3JpcHRzL2dlbl9rbm93bGVkZ2VfbWFwLnNoIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI5YmZlMjNkYzIxMzM0MTgxYWQ5ZDY0MWM1MzZlMThhMTZiOWVmNGQ5OWEwMGM3YWJkMmI2OWE1MDQ2MWQzOWIxIiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJrbm93bGVkZ2UtbWFwL3NjcmlwdHMva25vd2xlZGdlX21hcC5jb25mIiwKICAgICAgICAgICAgInNoYTI1NiI6ICI0OGFlMjg5NzQ2MGM2MmRlMDgwNTIzNzE1YWQ4MDhhZjcxZTk5MWIwZmE2YzM2NjE1ZDQzNzEyOWI1ZDQ3NTZjIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJ0ZXN0cy9sYW5ndWFnZS1yZWFkaW5lc3MvY29tcG9zZWQvbm9ybWFsaXphdGlvbi1jYWxscy5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICJmNGU0NTIxNWQ4OTNhM2MxNTllYjE0NmRkNGMzN2I1MDA4ZTY2NzBiYjUyZTE4MGUzZGVlYmQ4MTM5ZTZhODNlIiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJ0ZXN0cy9sYW5ndWFnZS1yZWFkaW5lc3MvY29udGV4dC1uYW1lcy9ncmFtbWFyLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogIjhmNDA4ZTgxZTI4NzFiM2I3NmMxYTdmYzdmOTllMDU5ZGFkMWMxOWRkMDNlOTE0NDlhMDVmYzliODhmZmY0YjAiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRlc3RzL2xhbmd1YWdlLXJlYWRpbmVzcy9sb3NzbGVzcy1jaGlsZC9jaGlsZC5zcGVjIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIzNGM1ZjEwOWQ0MDFmODNmYTYwMGEyMjU2ODI1OTlmZTkyNDk1N2ZkYmY0NWFkMjEzNmY1NTQ1MDI0OGJhZGQ5IiwKICAgICAgICAgICAgInJvbGUiOiAiaW5wdXQiCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAgICAgICAicGF0aCI6ICJ0ZXN0cy9sYW5ndWFnZS1yZWFkaW5lc3MvbG9zc2xlc3MtY2hpbGQvcGFyZW50LnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogIjhiMTkyOTlhNWQzNzE1Y2JhN2Y0NGRhYzI2Njk1NGU4YjM0NDk3OTIwYTMwOGY5NTZmNmUzNWIyODZhZTY0MzUiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRlc3RzL2xhbmd1YWdlLXJlYWRpbmVzcy9sb3NzbGVzcy1zZWdtZW50cy9ncmFtbWFyLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogIjhmMjBkMjQyYjBmMmVhMGVlZTFkNzBiNmYyODljZjk2MzYyY2RmM2I2NGVmNGNiY2M3N2Y1NjMxZmZlM2ViMzYiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRlc3RzL2xhbmd1YWdlLXJlYWRpbmVzcy9uZXN0ZWQtdHJlZS9ncmFtbWFyLnNwZWMiLAogICAgICAgICAgICAic2hhMjU2IjogIjQ5OGZmZGEzNWIwNTIyMjM4OGM2NGQ5OWIwYWNiMTMyYTU2OTk2ZTk3ZGUzZmZhOTMxMmY3ZGRhNmVlMGVkNzIiLAogICAgICAgICAgICAicm9sZSI6ICJpbnB1dCIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRvb2xzL3Byb2plY3RfZGF0YV9lbnYuc2giLAogICAgICAgICAgICAic2hhMjU2IjogImEzODk1MzNmZDFlODA3MzcwOTFhMTBlZWVhMDhlYzgwN2M0MjlmOWNlMjEyYTQyZjQ3YTRmMDJjOWI0Y2VmNzMiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRvb2xzL3Byb2plY3RfZGF0YV9ydW4uc2giLAogICAgICAgICAgICAic2hhMjU2IjogIjY1ZjJiNTI2YjM1NDdlMDBmYTU3YjExZGM5ZWYzZDExZTcxOWE0YWQ1ZGNjMzgzY2I1YTg3ZTMxMDRlOWI4MmYiLAogICAgICAgICAgICAicm9sZSI6ICJwcm9kdWNlciIKICAgICAgICAgIH0sCiAgICAgICAgICB7CiAgICAgICAgICAgICJwYXRoIjogInRvb2xzL3J1bl9weXRob25fcHJvamVjdF9kYXRhLnNoIiwKICAgICAgICAgICAgInNoYTI1NiI6ICIwYmMwM2JiOGY0Y2U1NTAzOTdkYTlmZGEwODYyMTVhMWQ5ZjZmNDUyZWM0MTM2MDVmYmNiODk3NmMwNmFmNjA0IiwKICAgICAgICAgICAgInJvbGUiOiAicHJvZHVjZXIiCiAgICAgICAgICB9CiAgICAgICAgXQogICAgICB9CiAgICB9CiAgXQp9Cg==",
+      "hits": [
+        {
+          "claim_index": 0,
+          "overlap": [
+            "KNOWLEDGE_MAP.md",
+            "docs/knowledge/finite-engineering-notes-member-0131.md",
+            "docs/knowledge/perl-emitcontext-callback-capture.md",
+            "docs/knowledge/perl-factory-capture-framework.md",
+            "docs/knowledge/perl-legacy-hash-kind-callback.md",
+            "docs/knowledge/perl-match-alias-writability.md",
+            "docs/knowledge/perl-method-assignment-required-capture.md",
+            "docs/knowledge/perl-method-ast-call-capture.md",
+            "docs/knowledge/perl-method-block-component-capture.md",
+            "docs/knowledge/perl-method-default-capture.md",
+            "docs/knowledge/perl-method-trim-capture.md",
+            "docs/knowledge/perl-private-emission-foundation.md",
+            "docs/knowledge/project-root-evidence-filesystem-modes.md",
+            "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+            "docs/knowledge/rust-dependency-warning-baseline.md",
+            "docs/linkedspec-book/src/development/documentation-workflow.md"
+          ],
+          "bindings": {
+            ".knowledge_map.conf": {
+              "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+              "bytes": 354,
+              "mode": 420
+            },
+            "KNOWLEDGE_MAP.md": {
+              "sha256": "dc876414015868c4389193b96d851b2a4402d47b43f8d977fc0ca8d9f3aaa100",
+              "bytes": 6685306,
+              "mode": 420
+            },
+            "docs/ARTIFACT_CLEANUP.md": {
+              "sha256": "b8b92e288d0ec1135a0d668ab8d5b7ae564d1a89be5885b51391dc53a6c63daa",
+              "bytes": 552,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/after-native-data.json.gz": {
+              "sha256": "eb1e6880f7412b7ddf5dd704ab7dfdb9fddc76e0c13d761ffb56b785aadab26c",
+              "bytes": 272109,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.6/after-native.json": {
+              "sha256": "0ba088de132edad3fc369353eb58b346651ae96636cd52f2b658cb30c79137f1",
+              "bytes": 18937,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/after-native-data.json.gz": {
+              "sha256": "4b0c3a3cc79e501c2877d38699d46571cbccc0aa7461ced5b61f4df2ef9a4cd6",
+              "bytes": 23223,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/after-native.json": {
+              "sha256": "68caf99b9c23450cd270ea6247bc185acc333e63539d912a02d62e5e9a000df7",
+              "bytes": 17363,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-object/after-data.json.gz": {
+              "sha256": "baf4243d6e2359e757c5d23146a6f97a893bf38e8c8d5bba7674eec083f0b867",
+              "bytes": 35679,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-object/after.json": {
+              "sha256": "dcb5fade9530083fbefd8db756e2232306e1546c1012fd1a5d18c6a40e6623ef",
+              "bytes": 16431,
+              "mode": 420
+            },
+            "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/plan.json": {
+              "sha256": "c658a86daaaaec6eca89feea0f1d102cdad46e65b5228731b51a8542d2d0c0df",
+              "bytes": 95256,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.18-census.py": {
+              "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+              "bytes": 4759,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/actual-review.json": {
+              "sha256": "ba5b4783c4bbb2c0aedace14bb2c050c770e388e36136b74dd89cbd21fe14d51",
+              "bytes": 2412,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/actual-review.py": {
+              "sha256": "2ec2629df46aca7ff26d230bc009272f5f7fed08c3600c11099ea720cd7e8886",
+              "bytes": 5963,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/actual.json": {
+              "sha256": "a293143b6de29c09bc8f5b5bc26ea3764c1935ba282b456c216d90e19f841757",
+              "bytes": 173413,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/artifact-review.json": {
+              "sha256": "e10d112cc9b68f825f80a9bf9ca3ccb40379378378bf2968180fb269031c255f",
+              "bytes": 3286362,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/baseline.json": {
+              "sha256": "9508af1bf98321492409eb422d81647a86aaaa8962e28b6f64385381cc9fcc90",
+              "bytes": 295,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/book-preparation.json": {
+              "sha256": "e02ca7d6be7dba85fe65ecde740106d8038cc598b1523d15ffd9124e98163156",
+              "bytes": 44416,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/book-review.json": {
+              "sha256": "660111a636815ea1179807b57b3aa7e54cb4a151e2b0e87922a75dffaf8f2244",
+              "bytes": 13449,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/book-review.py": {
+              "sha256": "76a04bcb3f7eb0c2f73982ed656834ba1f3fbb1e05b0020ac9a319904356e781",
+              "bytes": 17360,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/book.json": {
+              "sha256": "ed4cf0c3d14997ed9b7d676c0554c027bcd685871e9aa42e71172efd60a18d52",
+              "bytes": 693923,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/book.py": {
+              "sha256": "040880bc2a4f537ebd2220b1e8df242808c2eba345074f99287023235974512e",
+              "bytes": 6799,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/canonical-committed.receipt": {
+              "sha256": "2853d38c2275f1fe34e843671385ad1592aff61fcd2c0a2d3598823873c129b0",
+              "bytes": 148,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/canonical-staged.receipt": {
+              "sha256": "8d2c942d7efe21ce10626b13a6b10d9e18060debd816bc29aedaa33eb590755e",
+              "bytes": 169,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/canonical.log.gz": {
+              "sha256": "19dafe119165bc1c8a73d5549935fbede3168fddc408d995e7805f42f5bdf492",
+              "bytes": 1657634,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/capture.py": {
+              "sha256": "64ae8d44002f5a3652b5e7a014b9090950004af8b99404cce6ffaa28a58396e7",
+              "bytes": 2433,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/census.py": {
+              "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+              "bytes": 1483,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/evidence-originals.json.gz": {
+              "sha256": "0cd28ecf8183502f315c39005c73b80df58babc719900887308a97c81b8b462c",
+              "bytes": 776324,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/evidence-reached.json.gz": {
+              "sha256": "39e88b1090f22271e9a4703c3f2a862eedc16a6ca7afe18d6c2d59e02ed15509",
+              "bytes": 1007601,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/evidence.json": {
+              "sha256": "84022dc2d8a6b429dcaac55f756c630ffb67be2a1948b015a77adef8d3f4db80",
+              "bytes": 6115,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/evidence.py": {
+              "sha256": "14108a6517463d1e9d51d4768ef9bf69353bfc4f2d30812bc50175d58cae75e9",
+              "bytes": 5963,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge-inputs.json.gz": {
+              "sha256": "b30fa333546884818e031c0bf1d06ae46a2a58fa0bbfb63965be57408ee707c9",
+              "bytes": 11031705,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge-preflight.json": {
+              "sha256": "e908ee89774a665688643d394a668c8ecc0026227d43196fdae8e242ec2ed6fa",
+              "bytes": 2817,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge-preflight.py": {
+              "sha256": "9d4f82903df8e1b2564ec33cae2ad34810d1c60c6d631874c55fbac857664655",
+              "bytes": 1645,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge-preparation-final.json": {
+              "sha256": "3d313019a5e883e322887107d5d0a1b3064f8d07e6b6a6847e271c9d50a07a05",
+              "bytes": 293567,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge.json": {
+              "sha256": "11bc359aa4b2ec0735c3576daae70c1c1a9acf209b898535cd33a0b392ba3732",
+              "bytes": 262748,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/knowledge.py": {
+              "sha256": "20ff09ed4bb37cc729d38f241982af48e313a486f017ba3f198819bf4a27848d",
+              "bytes": 3526,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence-original.json.gz": {
+              "sha256": "fc5d8a285425e51a9c8f9b7c7dee8e414403af69b8aff9d7b325b6b9dbba489e",
+              "bytes": 153787,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence-reached.json.gz": {
+              "sha256": "410edb7128d481402da5e00a286cd8565ea1dfd6d62b1ab76f0af466e822b933",
+              "bytes": 615631,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence.json": {
+              "sha256": "5fd9d6101f5153c8979eb99fdc27816931c7349cdb432412dc22f61b4519b13f",
+              "bytes": 5458,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/metadata-evidence.py": {
+              "sha256": "8c1f45696bd1cc7a49f0701525b7ada85d6f1b34427cbdfc74d06cf71f0b9283",
+              "bytes": 5022,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/prepare-book.py": {
+              "sha256": "d4b9747a6aba27b7cf033ffa510cb02ef94304095349e54515f293fa3e8a1c64",
+              "bytes": 4430,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/prepare-knowledge-final.py": {
+              "sha256": "e9d05a7094d017e595f98b9d0cc168624ac1d907d3849a730dadbe8429a34aeb",
+              "bytes": 5780,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/prepare-knowledge.py": {
+              "sha256": "a6503ea41253e1a954aeb2e780b3ae0e2e27284ea8607646643d2611e186c308",
+              "bytes": 6062,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/preservation.json": {
+              "sha256": "9bf28a4c21446b4abc0797a95f2facdaafebd8d1ab0afd07a21cccabda6102a4",
+              "bytes": 338872,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/preserve.py": {
+              "sha256": "2ec79024bff7bccc04b4f1fbdccae99495722a60d8d06fb088b9d8ff7b8b4c51",
+              "bytes": 4518,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/publish.py": {
+              "sha256": "991c20a810982f5d13ef4ec96b0d81f68c355411ac6f28c56dfe33ae0e9ea39d",
+              "bytes": 8423,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/repair-review.py": {
+              "sha256": "c728e0063984bc8c6f1718dcba3e6269379454896d04b3a8ec4298aee35b7867",
+              "bytes": 2709,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/review-current.py": {
+              "sha256": "cda35e3a89904deb7b2f640554f52a07fbb7df7ca09b493e2d9f672f7ad72ccf",
+              "bytes": 10584,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/review-final.json": {
+              "sha256": "91fd828609db328e5b4227836720972f3b8fc637cde5d755dba52b82f6a89d58",
+              "bytes": 217271,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/review-final.py": {
+              "sha256": "2870393263c0e5c6475d3a136f90c2d1498a7d76d3f9b74f50048cbb0fccad4a",
+              "bytes": 10777,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/review-repair.json": {
+              "sha256": "275dbea2e4e56dd5e46bfe787b8b841a8d04d20298970a87bf308b130b3a1c12",
+              "bytes": 2165,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/review.py": {
+              "sha256": "d9524add11f46746351be76b1816ba24c3ab8744f2af16b81345b9d3b3989f3b",
+              "bytes": 4831,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/verification.json": {
+              "sha256": "7005ca8210afe5db62cefd162d2904d28218eb5299aab79495e98cd65fe73e0f",
+              "bytes": 1864,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-evidence-originals.json.gz": {
+              "sha256": "3764c6e258009dcbd7d1a42a3204aeb0688e88618e9060382530a31b5f030f9e",
+              "bytes": 1657104,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-evidence-reached.json.gz": {
+              "sha256": "38443d635861c04c865044a13b9b5d05875d67909e4d0968e19e85c5038e5bf9",
+              "bytes": 3322065,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-evidence.json": {
+              "sha256": "e77f376f30d155510d8d55cee39d0c16d1286f2f2c8699b3ce2d1862bbd6f7a6",
+              "bytes": 10398,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-evidence.py": {
+              "sha256": "89b5c9a3425b1b86376c65e1b82d98573bedb1aa67fed8e56a5af31e0f9a2f49",
+              "bytes": 8111,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-final.json": {
+              "sha256": "678624e495e27ce357c6c85e54e2c527e4e77bf9a0e97fc8dd44b75849587aee",
+              "bytes": 8828,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-historical-card.md": {
+              "sha256": "bcddf58aac746c035559d70b8f2f5e84471e9fae4d5accc9a73e02304459bb49",
+              "bytes": 2491,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-partial.json": {
+              "sha256": "166b40ee52110b88a068747108db24a0197f89a9e477eaa154046ad15b89f519",
+              "bytes": 1911,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-review.json": {
+              "sha256": "91bd3a2ea5eacd381e49177f20d1865841ea1198923c1b295a7fd686547448ac",
+              "bytes": 2046,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning-review.py": {
+              "sha256": "a6ef2ce409191af9c8163dc58a7987205746790be534b5c26280a6a449c33f4b",
+              "bytes": 5885,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning.json": {
+              "sha256": "91146c42dd476626bd9ca1d56d3c30a484c1665d8d329ea397674b3db76b6f76",
+              "bytes": 9661,
+              "mode": 420
+            },
+            "docs/checkpoints/REPO-HYGIENE.19/warning.py": {
+              "sha256": "3127e8ba06fd2e5646c8b935727d6cdacc5ba34baacc47529a1c988d95ea063a",
+              "bytes": 5450,
+              "mode": 420
+            },
+            "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json": {
+              "sha256": "0549affc00bbaefbf918d62dda980f81cf7566ed6ad2ff313a80802ce968fffd",
+              "bytes": 128528,
+              "mode": 420
+            },
+            "docs/knowledge/finite-engineering-notes-member-0131.md": {
+              "sha256": "1a3fe059ec120454dbc1fb8af9275e16e6812393f9901ec6b32a198069b832b4",
+              "bytes": 7169,
+              "mode": 420
+            },
+            "docs/knowledge/perl-emitcontext-callback-capture.md": {
+              "sha256": "af15ecbed1739b5291fbbf53b6f8d1c9b9887ff163fb183fc22353c8978edc85",
+              "bytes": 4770,
+              "mode": 420
+            },
+            "docs/knowledge/perl-factory-capture-framework.md": {
+              "sha256": "968854da936404a6a7afe07345856a0ca7452e6d3a1506fd5d9a52a308c1b9e4",
+              "bytes": 11479,
+              "mode": 420
+            },
+            "docs/knowledge/perl-legacy-hash-kind-callback.md": {
+              "sha256": "d14a77592490e1079a36ed0cafc06fbebec035b5525c0af1cdf4de86a86bd35a",
+              "bytes": 25771,
+              "mode": 420
+            },
+            "docs/knowledge/perl-match-alias-writability.md": {
+              "sha256": "83e8c0eca0e38c722cf504d83d5e35d393815a90680bc2951abf8b9e4c02f21a",
+              "bytes": 2992,
+              "mode": 420
+            },
+            "docs/knowledge/perl-method-assignment-required-capture.md": {
+              "sha256": "70699a7b576613a72e691c908a2f0a1fcf901a5e0c1f626fbb00e1f81fe050c7",
+              "bytes": 26116,
+              "mode": 420
+            },
+            "docs/knowledge/perl-method-ast-call-capture.md": {
+              "sha256": "863315e2461ba9a6df5efedebba37fcb8f3a1a68b8c402b71089601e6482fb6e",
+              "bytes": 21302,
+              "mode": 420
+            },
+            "docs/knowledge/perl-method-block-component-capture.md": {
+              "sha256": "6cdc88a7535e72f85b370a171abfcc92ee4d54aec5770ed100969804f41596e1",
+              "bytes": 20291,
+              "mode": 420
+            },
+            "docs/knowledge/perl-method-default-capture.md": {
+              "sha256": "dcd25b59553c4be901316b4876fa943a2e046b23390a2d89d3ad77cb0eb1a8ca",
+              "bytes": 4681,
+              "mode": 420
+            },
+            "docs/knowledge/perl-method-trim-capture.md": {
+              "sha256": "8e282c5e0dcfdb634e3755bf9a920f83a3ed7f43cf1fe2b4ead208b1ecf0ce40",
+              "bytes": 33973,
+              "mode": 420
+            },
+            "docs/knowledge/perl-private-emission-foundation.md": {
+              "sha256": "f55dbcffe80552524afe431a4ea5f0f2c5d1b4d9021f9256c638ac07840962ad",
+              "bytes": 3706,
+              "mode": 420
+            },
+            "docs/knowledge/project-root-evidence-filesystem-modes.md": {
+              "sha256": "e4df13644797d16fa072899706ac57f52aee9747733fb888fdcb375fa5fbba5f",
+              "bytes": 4636,
+              "mode": 420
+            },
+            "docs/knowledge/repo-generated-artifact-cleanup-boundary.md": {
+              "sha256": "cba53c22e01579b524c1f19ab067fa416e7e9abd8e1b09755d26911859395bce",
+              "bytes": 46886,
+              "mode": 420
+            },
+            "docs/knowledge/rust-dependency-warning-baseline.md": {
+              "sha256": "dbcfe09b6d494c737069d4221c07c792d5d929283aec6adeda43ae59bd302a10",
+              "bytes": 2899,
+              "mode": 420
+            },
+            "docs/linkedspec-book/book.toml": {
+              "sha256": "a95355e608b34cd5373cab0f0d98817457dd2151002d3bf9d7333d3f29f25f9d",
+              "bytes": 347,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/SUMMARY.md": {
+              "sha256": "c03d98fa7402249761b77e240abcd7a8f634566088f6ea49640d1019f6736a6c",
+              "bytes": 3870,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+              "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+              "bytes": 217436,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/appendix/formal-grammar.md": {
+              "sha256": "c114042e5cc8ac59097427a46a0f40821a0bb864f6aeac377aa2a2f41c3a0b19",
+              "bytes": 71918,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+              "sha256": "6d0f3df7130a07ae7003746ed8cbb9829c0c4a81b189eca0a200a993d035fdc1",
+              "bytes": 122598,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/appendix/runtime-semantics.md": {
+              "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c",
+              "bytes": 41970,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/architecture/owner-tree.md": {
+              "sha256": "1cb1d75f9ff0eb070495a702bf8215ee696212da21b15d099b388f32996e87a4",
+              "bytes": 45849,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/architecture/structured-format-program.md": {
+              "sha256": "61b767d93ce64b5f1019f0e51ee8f4f2e29ef0a4b5477e60b5035b4f34887359",
+              "bytes": 101833,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/compiler/compiled-state-model.md": {
+              "sha256": "2665d8ae4968dd6fc81fc649b15240adbaf73793bde555f35a65b723bb508312",
+              "bytes": 15178,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/compiler/diagnostics.md": {
+              "sha256": "09208db53ac8040f6acf8a424883401f628c7d8bcdc55d4861b4e4c5947b14d8",
+              "bytes": 12299,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md": {
+              "sha256": "c6a37d3f55e17e57379bff6537f8a26c67f44149bc07fa817b80ced01291b659",
+              "bytes": 31894,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/compiler/pipeline-overview.md": {
+              "sha256": "fd1d79a452c3ad6de36883dee14bcd6c33b81d2c346c2c165b0004dafdad760e",
+              "bytes": 44210,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md": {
+              "sha256": "38c48a27c5efe81c82940d8cadf38e6382377c75dd93dac23059b018ddc6a667",
+              "bytes": 61374,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/development/codegen-inspector.md": {
+              "sha256": "a695de68f3aa86242c7aeaba63d0981cdd268ee65fca2c6a17bf5bfef6eff81a",
+              "bytes": 2518,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/development/documentation-workflow.md": {
+              "sha256": "aafa99fef84e3ea3bd33a89dbcdc92fb04e588f1554fb3db20b93ee5f5419da5",
+              "bytes": 33560,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+              "sha256": "37cf2149e00738475b885bbbe7b984bc080c27bf1958f494b751b600691228a6",
+              "bytes": 148053,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/development/macos-rust-launch-latency.md": {
+              "sha256": "fa7d0935c2f9ee4a3b9f2a0ab30ff1ac9efdbac5b899e362eec7c5e637e162d0",
+              "bytes": 1686,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/development/regression-fixtures.md": {
+              "sha256": "8d31c1c58ec9b470b17a079f8d58f955b6cded9816d443f082f2ddb06cbae54e",
+              "bytes": 3190,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md": {
+              "sha256": "9d1889cd9c5406e3b0b7f9d80a4b2868839d006fdbfe08de176d5d808ae1dba9",
+              "bytes": 24890,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md": {
+              "sha256": "6afdb038d62efae53b9ed6e9d3bc3777dae5e5bbbbc0703bab64ee1cee45d688",
+              "bytes": 11189,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md": {
+              "sha256": "1b3fbcd8ff249c152c301b3f748ee3158474aeb4d0d70327de9549512ed21d94",
+              "bytes": 185195,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md": {
+              "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+              "bytes": 94118,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/declaration-helper-reference.md": {
+              "sha256": "3a3e2430de60f898ac2167d47612e1378f4f49e478cee8576816da28d9d4641a",
+              "bytes": 2612,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md": {
+              "sha256": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+              "bytes": 17560,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md": {
+              "sha256": "d1cfd40958802d9a1af151e70e243e3cd640667188662f5629ac2476f578701f",
+              "bytes": 37853,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+              "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe",
+              "bytes": 100507,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md": {
+              "sha256": "bd487fda54ddde7164b78c0d792b17f9fd4a7908409c875477e9fda8797931c0",
+              "bytes": 36013,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/index.md": {
+              "sha256": "0a129e808fb3fb6b21787091bc31a081d060c1ac0edc44f9645171a0ef254b23",
+              "bytes": 2239,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/overview/design-rationale.md": {
+              "sha256": "7f6cdde29a314bfbe0cbf740f2b9f8478848f5b7e9138ac2fd768468587e10f6",
+              "bytes": 16527,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/overview/documentation-layers.md": {
+              "sha256": "575cf2ce303ca06292dd7a734ccf9f5f709f45ecd1b974c0d7663915bfc2b1ee",
+              "bytes": 3020,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/overview/project-status.md": {
+              "sha256": "29c8931cb431f9848ecd7e8e43db20c4f3cb0a02339715e660f284efed786772",
+              "bytes": 381985,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/overview/what-is-linkedspec.md": {
+              "sha256": "70d72dc417a0cf43bb2e14cdd8719f2c3dbad354fd2d7d9bbf25633e0d911fe1",
+              "bytes": 6691,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/descriptor-introspection.md": {
+              "sha256": "1e957803415adaba23b15a32f2388a9d71a041716689e8045fa799b852d7cae0",
+              "bytes": 31584,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/get-and-get-parser.md": {
+              "sha256": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+              "bytes": 33830,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration-dart.md": {
+              "sha256": "df759f1978df3df6c27b24e531dd4787a6f18e876d12ab2aff480c4ac1e42bd7",
+              "bytes": 19477,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration-julia.md": {
+              "sha256": "b6c42ff4d60e18bd17beca4a27546276f15098d18a3370de5418f59f6d2559d0",
+              "bytes": 19977,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration-lua.md": {
+              "sha256": "5690eba8e4091900db2e6c94c004a4ac223396f0b1feefbad48913177a197d9b",
+              "bytes": 20032,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration-perl.md": {
+              "sha256": "5ec2f45ae024cf87cb8cae905fc6c3f15735a43bcc21874bd18c9ba1c8b9c441",
+              "bytes": 24658,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration-rust.md": {
+              "sha256": "958ead8127b47dd1a0ae494ce87ef19fa83451a083ff0523a388004799536442",
+              "bytes": 43022,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/integration.md": {
+              "sha256": "641a5ea0ec4872b6ac436d8b62c9d1b6cab9c5e422b6fb47b0d87a6aa2b8241c",
+              "bytes": 8654,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/native-spec-loading.md": {
+              "sha256": "85ff1f9cebf91b54b68bb7155db5c89b9866e956c74dff9b83f31ce360a8d7f5",
+              "bytes": 22448,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/plugin-registry.md": {
+              "sha256": "fe00a325064037455df8ffcdc611d5838df9001c5783a350c7900b1ab62ccff9",
+              "bytes": 3278,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/semantic-introspection.md": {
+              "sha256": "f9f3710cb41e073ea64989fd296cff93c23c10bdc434c66859de8929d2b338e7",
+              "bytes": 290974,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/public-api/trace-api.md": {
+              "sha256": "831366abed5d75daa881e6f993ea2f695e6b919529ad6964c353f831c47d60c3",
+              "bytes": 39386,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/ebnf-spec-walkthrough.md": {
+              "sha256": "e74d2266f2c28d1a5425a94c60718548eb26cc83ed700fe4478cd23593ab1868",
+              "bytes": 23758,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/lispish-spec-walkthrough.md": {
+              "sha256": "06cc2056aaddd80631878f99b75922c062f3e441562eed9233592cbae60d3c55",
+              "bytes": 13579,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md": {
+              "sha256": "01dab1b4c29b4085e69aac5bed1de8e66256b1dfaa34ce3c56c3f43d1ad0fd95",
+              "bytes": 4746,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/pplugin-spec-walkthrough.md": {
+              "sha256": "ddd3d22ccd28927c24e2a34db15f0bee2a940f6a8c3518252af402b7d7eb6b33",
+              "bytes": 5894,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/sexpr-document-v1.md": {
+              "sha256": "65fde45de06b3c18cad59a01cb02944ed8ff105b94e0d02b2f61f525b88f391e",
+              "bytes": 8301,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md": {
+              "sha256": "bd1667dd99133f5c6541eb9d6e127e8c529c05823b1e20829e78674d44ecad13",
+              "bytes": 17002,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md": {
+              "sha256": "dfbe3a28ec0e9edb53d0ccd2af5a36c4bfb5521a258e7a7d1afd22b135edc982",
+              "bytes": 4959,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md": {
+              "sha256": "cc8d62e530a80a2b317afbfe45950d42e11840844bf3f6565ed8f4d3735e9082",
+              "bytes": 13945,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/regex-in-spec.md": {
+              "sha256": "82d2e6997eecdac97bd7213d186acd021b87fc522b58eb62e5a90999adf2ab82",
+              "bytes": 14290,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md": {
+              "sha256": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+              "bytes": 39736,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md": {
+              "sha256": "4705ecabaab5cb159245172adaf409031680f35538408d0fd0a2f9800b685d3f",
+              "bytes": 25247,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md": {
+              "sha256": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+              "bytes": 13457,
+              "mode": 420
+            },
+            "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md": {
+              "sha256": "564008087999530f5087c497f7ea035b29368dd7ea337589335a9bd3cf8e6eea",
+              "bytes": 12718,
+              "mode": 420
+            },
+            "docs/tasks/RUST-DEPENDENCY-WARNING-ZERO.md": {
+              "sha256": "2a64b2f6c3e560e867c9ae51f7237e136816855d6a000e34ebec5a094aaf9e3a",
+              "bytes": 16497,
+              "mode": 420
+            },
+            "examples/compact-hash-keys.spec": {
+              "sha256": "fc12ee11b384f06572e690882328c9266229ea5a573ab493adde623c789075a1",
+              "bytes": 136,
+              "mode": 420
+            },
+            "examples/direct-read-purity.spec": {
+              "sha256": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67",
+              "bytes": 536,
+              "mode": 420
+            },
+            "examples/flat-bound-values.spec": {
+              "sha256": "b0d4cc3fd2dd3651f98711c76df296d5db4dcd37b2d37c6b81dca4c6a1a30dff",
+              "bytes": 287,
+              "mode": 420
+            },
+            "examples/function-array-values.spec": {
+              "sha256": "839d8d04d313e482a497fc009b23990437a22519e37df5da76d064f9cccca360",
+              "bytes": 214,
+              "mode": 420
+            },
+            "examples/indexed-value-reads.spec": {
+              "sha256": "f3d00d0c87916737ab9ceda89168801300313781f6a2e28c2e5555b88ba77ef9",
+              "bytes": 353,
+              "mode": 420
+            },
+            "examples/integration/dart/bin/parse-words": {
+              "sha256": "863a6d756f526f23344f9743c150c5800618aa44af96b557e2ebe9d3e46e7b4d",
+              "bytes": 1089,
+              "mode": 493
+            },
+            "examples/integration/dart/bin/parse_words.dart": {
+              "sha256": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+              "bytes": 1927,
+              "mode": 420
+            },
+            "examples/integration/dart/diagnostics.spec": {
+              "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+              "bytes": 152,
+              "mode": 420
+            },
+            "examples/integration/dart/exit.spec": {
+              "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+              "bytes": 195,
+              "mode": 420
+            },
+            "examples/integration/julia/bin/parse-words": {
+              "sha256": "59661a1e7e1cfa2de3ad640a26302ad1faa62682596c94d694b66d60ae528891",
+              "bytes": 1499,
+              "mode": 420
+            },
+            "examples/integration/julia/bin/parse_words.jl": {
+              "sha256": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+              "bytes": 2085,
+              "mode": 420
+            },
+            "examples/integration/julia/diagnostics.spec": {
+              "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+              "bytes": 152,
+              "mode": 420
+            },
+            "examples/integration/julia/exit.spec": {
+              "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+              "bytes": 195,
+              "mode": 420
+            },
+            "examples/integration/lua/bin/parse_words.lua": {
+              "sha256": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+              "bytes": 2785,
+              "mode": 420
+            },
+            "examples/integration/lua/diagnostics.spec": {
+              "sha256": "df2304b890282a31c3d975303ab5405f2bad35faa13f2eaad0b57015be835e48",
+              "bytes": 152,
+              "mode": 420
+            },
+            "examples/integration/lua/exit.spec": {
+              "sha256": "283c2921bac279244b4ddebac0d93f5eac6758bb000615c94906d944ae4e59f0",
+              "bytes": 195,
+              "mode": 420
+            },
+            "examples/integration/perl/diagnostics.spec": {
+              "sha256": "3964804eb570446c031303119f45a6bb7665ab206b4531e175f430c2ab8e638d",
+              "bytes": 158,
+              "mode": 420
+            },
+            "examples/integration/perl/parse-words": {
+              "sha256": "62af046e14e324ae32d831e7740bc8fb794eb73201c80c28ccc5b9dc4dccc8c2",
+              "bytes": 587,
+              "mode": 420
+            },
+            "examples/integration/perl/parse_words.pl": {
+              "sha256": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+              "bytes": 4148,
+              "mode": 420
+            },
+            "examples/integration/rust/Cargo.toml": {
+              "sha256": "fb734fc06c36ac3e34f9184e7b854af6b71791a829662dafda75203a07fef1c5",
+              "bytes": 414,
+              "mode": 420
+            },
+            "examples/integration/rust/settings.sexp": {
+              "sha256": "b1ddfb81644a31e0d3636f0ca80a482e07a331dfad8c8d5347a3246d5be2e2f0",
+              "bytes": 76,
+              "mode": 420
+            },
+            "examples/integration/rust/src/bin/lispish_file.rs": {
+              "sha256": "ec395937e62d5284fc0677d55b9ad373958ff6230b235cc5630a39f80c0fc403",
+              "bytes": 6513,
+              "mode": 420
+            },
+            "examples/integration/rust/src/bin/sexpr_file.rs": {
+              "sha256": "7419573fb67b52cded1206aa0fe86a84f83432e3516a57ac3ad59efd4cfff23a",
+              "bytes": 4582,
+              "mode": 420
+            },
+            "examples/integration/rust/src/main.rs": {
+              "sha256": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+              "bytes": 1713,
+              "mode": 420
+            },
+            "examples/integration/word.spec": {
+              "sha256": "52205524e7d54bbd33de16e702b0cfb4edb2b51b2d21248149bdf19007dbb1e5",
+              "bytes": 160,
+              "mode": 420
+            },
+            "examples/numeric-array-values.spec": {
+              "sha256": "5211bca340372b75724ab728c55b7f119db4b3f7af90dc05572409ac90f9ef58",
+              "bytes": 294,
+              "mode": 420
+            },
+            "knowledge-map/scripts/check_knowledge_map.sh": {
+              "sha256": "753ba902389121abdee187e5f6dcb11ab1845fb9b43741ac5884d4feba8a0d73",
+              "bytes": 5663,
+              "mode": 493
+            },
+            "knowledge-map/scripts/gen_knowledge_map.sh": {
+              "sha256": "9bfe23dc21334181ad9d641c536e18a16b9ef4d99a00c7abd2b69a50461d39b1",
+              "bytes": 6412,
+              "mode": 493
+            },
+            "knowledge-map/scripts/knowledge_map.conf": {
+              "sha256": "48ae2897460c62de080523715ad808af71e991b0fa6c36615d437129b5d4756c",
+              "bytes": 1468,
+              "mode": 420
+            },
+            "tests/language-readiness/composed/normalization-calls.spec": {
+              "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
+              "bytes": 916,
+              "mode": 420
+            },
+            "tests/language-readiness/context-names/grammar.spec": {
+              "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+              "bytes": 988,
+              "mode": 420
+            },
+            "tests/language-readiness/lossless-child/child.spec": {
+              "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+              "bytes": 516,
+              "mode": 420
+            },
+            "tests/language-readiness/lossless-child/parent.spec": {
+              "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+              "bytes": 909,
+              "mode": 420
+            },
+            "tests/language-readiness/lossless-segments/grammar.spec": {
+              "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+              "bytes": 669,
+              "mode": 420
+            },
+            "tests/language-readiness/nested-tree/grammar.spec": {
+              "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+              "bytes": 831,
+              "mode": 420
+            },
+            "tools/project_data_env.sh": {
+              "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+              "bytes": 9311,
+              "mode": 493
+            },
+            "tools/project_data_run.sh": {
+              "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+              "bytes": 11043,
+              "mode": 493
+            },
+            "tools/run_python_project_data.sh": {
+              "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+              "bytes": 1486,
+              "mode": 493
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "baseline": {
+    "command": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "docs/checkpoints/REPO-HYGIENE.19/publish.py"
+    ],
+    "returncode": 0,
+    "stdout_base64": "UmV0YWluZWQgbWV0YWRhdGEvb3V0cHV0IHB1YmxpY2F0aW9uIFBBU1M6IDE3NSBsaXZlIGlucHV0czsgNDM2OTYgYnl0ZXMK",
+    "stderr_base64": ""
+  },
+  "activation_only_unbound_paths": [
+    "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md"
+  ],
+  "scope": "Fixed accepted claim namespace, whole175-input/43696-byte publication and successful actual baseline before all bound writes. Every binding byte and actual mode matches accepted Git. Only durability mode/revision changes; original producers/observations stay at the real accepted boundary. Activation task edits are explicitly unbound; resume pointers are not measured inputs."
+}

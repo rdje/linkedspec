@@ -1,0 +1,589 @@
+{
+  "result": "PASS",
+  "producer_sha256": "d7ff869c02a8c6b3fea20ba5acf11598dd369c24c04d47d87fae22f8e955bf41",
+  "original_auditor_sha256": "1438705b8740236c9297503b6f0c83935aba045685ca24bb23fa693917e8d42e",
+  "corrected_auditor_sha256": "367c4ba74cdfbc941f951ebe3238cc41faae504b0599bd1bf34af44559aaaa38",
+  "first_capture_sha256": "9b1ef4ec3c09e031c951cf31425e37ac0385b2152f074eaab1550233721b5d72",
+  "final_capture_sha256": "d3b8a9132ed2826732f23e9506b036c338dc5f896b51b32cd8afe4f8cf081493",
+  "actual_failed_channels_sha256": "b023b58fb851a463b2bc41a75c50c6652fd9bf29b3ea4919cf54be721a5e5ecf",
+  "old_base64": "ICAgICAgICAgICAgZm9yIHBhdGggaW4gUFJJVkFURV9GQUNUT1JZX0ZJWFRVUkVfUEFUSFM6CiAgICAgICAgICAgICAgICBsaW5lID0gYiIgIiArIHBhdGguZW5jb2RlKCkgKyBiIlxuIgogICAgICAgICAgICAgICAgcmVxdWlyZShjdXJyZW50LmNvdW50KGxpbmUpID09IDEsICJwcml2YXRlIGZpeHR1cmUgcGF0aCBpcyBub3QgdW5pcXVlIikKICAgICAgICAgICAgICAgIGFsdGVyZWQgKz0gKGN1cnJlbnQucmVwbGFjZShsaW5lLCBiIiIsIDEpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VycmVudC5yZXBsYWNlKGxpbmUsIGxpbmUgKiAyLCAxKSkK",
+  "new_base64": "ICAgICAgICAgICAgYmxvY2sgPSBQUklWQVRFX0ZBQ1RPUllfRklYVFVSRV9DSV9JTlNFUlRJT05TWzBdWzFdCiAgICAgICAgICAgIGZvciBwYXRoIGluIFBSSVZBVEVfRkFDVE9SWV9GSVhUVVJFX1BBVEhTOgogICAgICAgICAgICAgICAgbGluZSA9IGIiICIgKyBwYXRoLmVuY29kZSgpICsgYiJcbiIKICAgICAgICAgICAgICAgIHJlcXVpcmUoYmxvY2suY291bnQobGluZSkgPT0gMSwgInByaXZhdGUgZml4dHVyZSBwYXRoIGlzIG5vdCB1bmlxdWUgaW4gaXRzIGJsb2NrIikKICAgICAgICAgICAgICAgIGFsdGVyZWQgKz0gKGN1cnJlbnQucmVwbGFjZShibG9jaywgYmxvY2sucmVwbGFjZShsaW5lLCBiIiIsIDEpLCAxKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJlbnQucmVwbGFjZShibG9jaywgYmxvY2sucmVwbGFjZShsaW5lLCBsaW5lICogMiwgMSksIDEpKQo=",
+  "path_census": {
+    "t/actionir_method_input_captures.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_argument_source_frames.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_empty_expression_spans.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_input_frames.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_constructions.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_parser.t": {
+      "whole_runner": 3,
+      "owned_block": 1
+    },
+    "t/actionir_source_emissions.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/canonical_event_occurrence_order.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_nested_block_source_spans.t": {
+      "whole_runner": 3,
+      "owned_block": 1
+    },
+    "t/actionir_compiler_source_membership.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_executable_source_membership.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/trace_actionir_method_lowering.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/trace_emit_context_bridge.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0-origin-fixture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_event_input_grants.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_input_composition_acceptance.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_factory_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_emit_context_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_emit_context_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_contract_dependency_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_contract_dependency_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_contract_factory_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_contract_factory_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_default_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_default_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_trim_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_trim_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_inference_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_inference_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_inline_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_inline_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_block_component_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_block_component_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_local_return_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_local_return_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_block_value_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_block_value_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_hash_key_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_hash_key_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_call_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_call_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_array_end_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_array_end_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/uniform_binding_contract.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_assignment_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_ast_assignment_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_value_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_value_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_slot_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_slot_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_general_return_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_general_return_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_assignment_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_assignment_required_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_set_key_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_set_key_required_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_push_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_push_required_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_regex_undef_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_regex_undef_required_capture_cold.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_receiver_scalar_copy.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/actionir_array_receiver_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_scalar_receiver_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_receiver_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_array_end_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_index_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_package_flow_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_dropped_trim_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_small_kind_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_uniform_target.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_kind_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_source_assignment_kind_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_optional_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_tracking_predicate_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_formal_trim_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_named_dispatch_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_required_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_kind_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_default_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_foundation_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_expansion_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_attached_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_single_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_ifwhile_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_switch_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/diagnostic_output_perl_contract.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/actionir_control_output_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_kind_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_calls_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_default_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_default_object_capture.t": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_array_end_required_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_array_end_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_array_receiver_required_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_array_receiver_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_optional_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_ast_optional_stable_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_attached_native_fixed.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_calls_native_complete.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_default_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_expansion_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_foundation_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_ifwhile_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_ifwhile_native_complete.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_kind_native_complete.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_output_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_output_native_complete.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_single_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_control_switch_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_default_object_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_dropped_trim_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_dropped_trim_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_default_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_kind_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_flow_required_native.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_formal_trim_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_index_required_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_index_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_receiver_required_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_hash_receiver_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_legacy_hash_kind_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_legacy_hash_kind_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_kind_authority_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_kind_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_method_regex_undef_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_named_dispatch_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_package_flow_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_package_flow_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_receiver_scalar_copy_probe.pl": {
+      "whole_runner": 3,
+      "owned_block": 1
+    },
+    "t/actionir_scalar_receiver_required_cold_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_scalar_receiver_required_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_small_kind_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_small_kind_reference_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_small_kind_symbolic_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_source_assignment_kind_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_tracking_predicate_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    },
+    "t/actionir_uniform_target_probe.pl": {
+      "whole_runner": 1,
+      "owned_block": 1
+    }
+  },
+  "collisions": {
+    "t/actionir_ast_parser.t": {
+      "whole_runner": 3,
+      "owned_block": 1
+    },
+    "t/actionir_nested_block_source_spans.t": {
+      "whole_runner": 3,
+      "owned_block": 1
+    },
+    "t/uniform_binding_contract.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/actionir_receiver_scalar_copy.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/diagnostic_output_perl_contract.t": {
+      "whole_runner": 4,
+      "owned_block": 1
+    },
+    "t/actionir_receiver_scalar_copy_probe.pl": {
+      "whole_runner": 3,
+      "owned_block": 1
+    }
+  },
+  "selection_sha256": "82402105adce9b7ae7485dd0d8e2fe30ebde42720f905ed81d2826b2bd734bdc",
+  "scope": "Full original registered auditor and actual failed complete-proof command/channels remain unchanged. Six path suffixes also occur in older commands; all137 occur once in the exact owned block. Replace only omission/duplication control generation with block-scoped replacements, preserving outside bytes. Selection capture completes first: it runs Bash and guards but never executes the provisional auditor. Final fresh canonical proof still governs admission; first and final complete-audit epochs stay separate."
+}

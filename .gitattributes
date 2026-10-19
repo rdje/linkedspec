@@ -2,3 +2,5 @@
 docs/history/**/segment-*.md whitespace=-blank-at-eol,-blank-at-eof
 # Preserve the exact recovery diff, including its blank-line context markers.
 docs/incidents/2026-09-27-archogen-82ee99a-reverse.patch whitespace=-blank-at-eol,-blank-at-eof
+# Retain the exact quoted producer fragment, including its insertion delimiter.
+docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/auditor-constant.py whitespace=-blank-at-eof

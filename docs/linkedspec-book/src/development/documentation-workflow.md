@@ -127,6 +127,41 @@ The earlier dated 1870/26 account stays preserved. The upstream-owned warning ce
 and reporting tasks remain open; this observation introduces no new dependency build,
 implementation inspection, pin change or warning suppression.
 
+### Explicit fixture selection
+
+The canonical runner selects an explicit supplied population. Adding a file alone
+does not add its test execution. The retained original direct-command inventory is:
+
+| Population | Paths | Original presence | Original syntax | Original direct prove |
+| --- | --- | --- | --- | --- |
+| Supplied suites | 91 | 4 | 5 | 5 |
+| Supplied test helpers | 46 | 1 | 1 | — |
+
+These counts describe literal tracked-file, syntax and prove commands; indirect
+coverage was not inventoried. The admitted block lists all 91 suites and 46 test
+helpers, checks each of the 137 paths through Git presence and Perl syntax, then
+runs all 91 suites. One suite is a historical checkpoint fixture. All 363 supplied
+input bytes and modes stay unchanged. The complete selected run passes 30394 assertions.
+
+| Actual selected-block experiment | Syntax paths | Suites | Shell exit | Population oracle |
+| --- | --- | --- | --- | --- |
+| Complete block | 137 | 91 | 0 | PASS |
+| Suite omitted | 136 | 90 | 0 | RED |
+| Helper omitted | 136 | 91 | 0 | RED |
+| Suite duplicated | 138 | 91 | 0 | RED |
+| Execution disabled | 137 | — | 0 | RED |
+
+Each row retains the actual Bash script and full command channels. A successful
+shell exit alone permits missing or extra work; independent ordered syntax and
+test-path populations plus the harness summary distinguish it. The recurring
+historical auditor removes only the exact 150-line insertion before its older
+inverses and still requires every original runner byte. Its per-path mutations
+operate within that block, because six names also occur in older commands.
+
+Keep future tests task-owned and explicitly registered. Exact staged canonical
+CI and normal hooks govern admission. Pipeline scope and broader private/mapped
+execution retain their separate owners.
+
 Preserve any live evidence that binds the root or book before changing them.
 Keep its original hashes at the accepted Git revision, then separately verify the
 new rollover against that revision. A healthy render also checks recursive local
@@ -164,9 +199,10 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks this dated retention and reported-output
-review and preserves the complete 550-input finite-capacity publication and its actual
-successful baseline at `e953f69a9`. The complete 565-input mixed-default/package-object
+The current verification entrypoint checks this explicit supplied fixture selection
+and preserves the complete 175-input retained-review publication and its actual successful
+baseline at `858eba97c`. That review retains the complete 550-input finite-capacity
+publication at `e953f69a9`. The complete 565-input mixed-default/package-object
 publication remains at `54bb5eb65`, retaining native observations, exact definition-owned
 selection, full-source faults, supplied consumers and the public Perl diagnostic contract.
 Administrative maintenance refreshes none of those observations.
@@ -181,10 +217,10 @@ if/while publication remains at `09000223f`,
 the earlier155-input artifact publication at `a60764c11`, and the finite
 engineering-history publication at `e2ec1e96b`. No historical observation is
 refreshed. The finite example above changes only its listed allowances; this dated
-retention review changes no budget:
+fixture admission changes no budget or DSL semantics:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.19/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`
