@@ -1250,18 +1250,19 @@ A valid `.spec` file must satisfy the following current portable checks:
 
 ## 11. Compatibility Surface
 
-The following are **legacy compatibility constructs** recognized for migration
-tracking but not recommended for new `.spec` authoring:
+The following list records **legacy migration spellings**. It does not grant
+runtime support: retired helpers can fall through as raw host code, and removed
+aggregate selectors are rejected. Use the current replacement when authoring `.spec` files:
 
 - Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
-- `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
+- `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im`, `return_array` — retired; use explicit `return(...)` payloads ([migration examples](../dsl/values-containers-and-flow-helpers.md#migrating-the-retired-tagged-returns))
 - `declare(...)` and declaration aliases — use auto-existing variables, assignment, and typed aggregate resets
 - `assign(...)` — use `target = value` or `set(target, value)`
 - `array_copy(...)`, `hash_copy(...)` — use `copy(...)`
 - former `concat` spelling — use `cat(...)`
 - `push_value(...)` — use `push(...)`
 - `push_nonempty(...)` — use an explicit `is_nonempty(...)` guard plus `push(...)`
-- `s(...)`, `a(...)`, `h(...)` — use bare scalar reads, `array(...)`, `hash(...)`
+- `s(...)`, `a(...)`, `h(...)` — read the bare current binding; `array(...)` and `hash(...)` construct values; aggregate selector forms are removed
 - `array_values(...)` — use `copy(...)`
 - `flatten(...)` — use `flat(...)`
 - `tail(...)` — use `drop_front(...)`

@@ -1,0 +1,15 @@
+{
+ "distinction": "Six cards retain multiple historical reverify lines in their bodies. Only the single current front-matter field may be rerouted. Original writer remains unchanged.",
+ "exact_recurrence": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-migrations/prepare-docs.py"
+  ],
+  "returncode": 1,
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy90eXBlLXJlZmVyZW5jZS1taWdyYXRpb25zL3ByZXBhcmUtZG9jcy5weSIsIGxpbmUgMTI3LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGNvdW50ID09IDEKICAgICAgICAgICBeXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yCg==",
+  "stdout_base64": ""
+ },
+ "no_documentation_written": true,
+ "result": "PASS",
+ "supplied_bytes_modes_unchanged": true
+}

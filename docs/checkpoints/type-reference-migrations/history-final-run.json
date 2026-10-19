@@ -1,0 +1,13 @@
+{
+ "run": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-migrations/history-supplement-final.py"
+  ],
+  "returncode": 1,
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy90eXBlLXJlZmVyZW5jZS1taWdyYXRpb25zL2hpc3Rvcnktc3VwcGxlbWVudC1maW5hbC5weSIsIGxpbmUgMTMsIGluIDxtb2R1bGU+CiAgICBzdGFydCA9IHZhbHVlLmluZGV4KCgnc3ViICcgKyBuYW1lICsgJyB7JykuZW5jb2RlKCkpClZhbHVlRXJyb3I6IHN1YnNlY3Rpb24gbm90IGZvdW5kCg==",
+  "stdout_base64": ""
+ },
+ "scope": "Distinct retained execution; the earlier combined invocation channels are unavailable.",
+ "unchanged": true
+}

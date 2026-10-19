@@ -1,0 +1,23 @@
+{
+ "all_supplied_bytes_modes_unchanged": true,
+ "distinguishing_public_red": {
+  "command": [
+   "python3",
+   "tools/check_public_aggregate_selector_surface.py"
+  ],
+  "returncode": 1,
+  "stderr_base64": "cHVibGljLWFnZ3JlZ2F0ZS1zZWxlY3Rvci1zdXJmYWNlOiBjbGFzc2lmaWVkIHJlZmVyZW5jZSBpbnZlbnRvcnkgaGFzIDQyIG9jY3VycmVuY2VzLCBleHBlY3RlZCA0MAo=",
+  "stdout_base64": ""
+ },
+ "readonly_baseline": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-migrations/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCBtaWdyYXRpb24gcHVibGljYXRpb24gUEFTUzogMzU1IGlucHV0czsgNjAzOTUgYnl0ZXM7MTcgcGF5bG9hZHM7Zml2ZSBjb250cm9scztwcmlvcjIwOC9mdWxsMzkxMTEK"
+ },
+ "result": "PASS",
+ "snapshot_sha256": "b490e334e1051be03fddc6bdf8ec7200a484d9441b3453507bae95a1d28c10c8"
+}

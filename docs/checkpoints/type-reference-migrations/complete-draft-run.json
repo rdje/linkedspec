@@ -1,0 +1,12 @@
+{
+ "run": {
+  "command": [
+   "python3",
+   ".linkedspec-data/replay-adapter.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCBtaWdyYXRpb24gcHVibGljYXRpb24gUEFTUzogMzU1IGlucHV0czsgNjAzOTUgYnl0ZXM7MTcgcGF5bG9hZHM7Zml2ZSBjb250cm9scztwcmlvcjIwOC9mdWxsMzkxMTEK"
+ },
+ "unchanged": true
+}

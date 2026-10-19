@@ -7,40 +7,48 @@ answers:
   - "what happened to return_a / return_m / return_ma / return_imatch / return_im / return_array"
   - "why do method_like phase0 tests asserting RETURN_A fail"
   - "what is the canonical replacement for the retired return_* helpers"
-date: 2026-06-21
+date: 2026-10-19
 status: current
 tags: [actionir, canonical-nodes, return, compat-alias-retirement, regression, phase0]
-evidence: "probe: a lifecycle/action spec with return(1)/return_undef() yields canonical_action_ir_nodes containing 'RETURN' (hits RETURN=>4), never 'RETURN_A'; a `.return_a().return_m()` chain lowers to canonical_action_ir_nodes ['RAW_PERL'] with fallback_count=2 and ACODE undef; call_spec_handler_subst('Top','return_array(...)'/'return_a()'/'return_m()') returns the input unchanged (unrecognized)"
-reverify: "perl -Iperl -e 'use LinkedSpec; my $s=qq{Top::&\\nI { return_undef() }\\n /a/ -> Top { return(1) }\\n}; my $d=LinkedSpec::Get(\\$s,return_descriptor=>1); use Data::Dumper; print Dumper($d->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes})'"
+evidence: "TYPE-REFERENCE-BOOK.1.1 public lowering/descriptor/value/generated-source observations retain current RETURN versus retired RAW_PERL and removed-selector controls. June triage descriptions remain dated history; current public descriptors do not prove code-slot equivalence."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
 ---
 
-In the current engine, a `return(...)` / `return_undef()` action or lifecycle statement lowers to the
-single canonical action-IR node **`RETURN`**. The historical accumulator/match-distinguished nodes
-**`RETURN_A`** (return-accumulator) and **`RETURN_M`** (return-match) are **retired** — the engine no
-longer emits them in `canonical_action_ir_nodes` / `canonical_action_ir_hits`.
+Current `return(...)` and `return_undef()` contribute the canonical ActionIR
+node `RETURN`. The demonstrated retired `return_a`, `return_m`, `return_ma`,
+`return_imatch`, `return_im` and `return_array` calls pass through the public
+lowering probe unchanged and contribute `RAW_PERL` fallback metadata. Their names
+are not supported modern return helpers.
 
-The companion return helpers **`return_a`, `return_m`, `return_ma`, `return_imatch`, `return_im`,
-`return_array`** were retired by COMPAT-ALIAS-RETIREMENT-V2 (2026-06-14). They are no longer
-recognized as helpers: in action/lifecycle code they fall through to a **`RAW_PERL` fallback**
-(`canonical_action_ir_fallback_count` rises, `ACODE`/`ICODE` is undef/raw), and
-`LinkedSpec::call_spec_handler_subst('Top', 'return_a()' | 'return_array(...)')` returns the input
-string **unchanged** (passthrough = unrecognized). Canonical replacements: **`return(...)`** for a
-scalar/expression return and **`return(array(...))`** for an array/tagged-list return.
+Use `return(value)` or `return(array(...))`, then verify both the exact payload
+and the actual descriptor. See [[retired-return-helpers-canonical-rewrite]] for
+current constructor/copy recipes and the corrected historical flat-group shape.
+Removed `array(IDENTIFIER)` selectors are compile errors; a recipe containing one
+cannot establish a canonical return-node result.
 
-Consequences for the back-half regression triage (PHASE0-BACKHALF-TRIAGE cluster B, 76 subtests):
-- **B2 (token re-bless, ~55+3 subtests):** assertions hard-coding `RETURN_A` in
-  `canonical_action_ir_nodes` membership greps (`grep { $_ eq 'RETURN_A' }`) or
-  `canonical_action_ir_hits` keys (`RETURN_A => N`) should be re-blessed `RETURN_A` → **`RETURN`**
-  (faithful rename — the node IS still produced, just renamed). Watch for hit-count hashes that carry
-  BOTH `RETURN` and `RETURN_A` keys (e.g. the "DECLARE/ASSIGN/RETURN/RETURN_A mix" fixtures): those
-  need the counts **merged** into one `RETURN` key, not two colliding keys.
-- **B1 (helper rewrite, ~18+3 subtests):** the spec body itself uses a retired `return_*` helper
-  (incl. fluent `.return_a()`), so the spec must be **rewritten** to the canonical helper first, then
-  any dependent node/hit assertions re-blessed — not a token swap.
+```perl
+my $s = "Top: /x/\n I { return(1) }\n";
+my $d = LinkedSpec::Get(\$s, return_descriptor => 1);
+my $nodes = $d->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes};
+```
 
-**Scope caveat:** `RETURN_A` also appears in (a) cluster-C `emit_context` white-box tests (a separate
-`.2.3` leaf) and (b) `helper_action_ir_hits` / `canonical_action_ir_events` `{kind}` sites (e.g.
-`t/phase0_regression.t` ~39526/39553/39581) that may legitimately still use `RETURN_A` as a
-*helper-event kind* and currently pass — so this rename is **NOT a global search-replace**; scope every
-edit to the specific failing cluster-B subtest. Related: [[blind-call-collection-shape]],
-[[actionir-lowering-stack]], [[method-like-dsl-migration-status]].
+The October19 proof checks current replacement nodes, zero fallbacks, parser
+values and independently loaded generated parsers. It does not infer emitted code
+from absent uppercase descriptor slots. Use `parser_source_ref => \$source` to
+capture source; [[phase0-code-slot-equivalence-observation-gap]] explains the
+older vacuous slot comparisons and their separate repair owner.
+
+## Dated triage context
+
+The June21 card described PHASE0-BACKHALF-TRIAGE cluster B (76 subtests), its
+B2 node-token assertions (~55+3), and B1 helper rewrites (~18+3). These remain
+historical triage descriptions, not a current population or automatic re-blessing
+recipe. Retired syntax must be rewritten first; merge expected RETURN hit counts
+only after observing the actual descriptor and distinguishable output.
+
+The older warning about cluster-C emit_context tests and helper-event kinds
+remains a scope limit: `RETURN_A` in an old helper-event record is not evidence
+that the canonical node is still admitted. Never perform a global token swap.
+Original dated bytes are retained at accepted `1a8b20201` and in this leaf's
+before-image. Related: [[blind-call-collection-shape]], [[actionir-lowering-stack]],
+[[method-like-dsl-migration-status]].

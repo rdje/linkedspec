@@ -8,43 +8,67 @@ answers:
   - "what is the canonical equivalent of return_a return_m return_array"
   - "how to migrate a spec body off the retired return_* helpers"
   - "does return_array drop its first label argument"
-date: 2026-06-21
+date: 2026-10-19
 status: current
 tags: [actionir, dsl, compat-alias-retirement, return, migration, phase0]
-evidence: "call_spec_handler_subst probes (post .2.2.1): retired forms pass through unchanged (RAW_PERL); return(array(\"semantic_annotation\", hash(\"items\", array(IMATCH_LIST)))) -> `return [\"semantic_annotation\", {\"items\" => [IMATCH_LIST]}]`; return(array(\"?Top:\", entry_group(0))) -> `return [\"?Top:\", do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }]`. return_a/_m/_ma original lowering recovered from COMPAT-ALIAS-RETIREMENT-V2.2 commit 4e92503 (_build_return_contracts)."
-reverify: "perl -Iperl -e 'use LinkedSpec; print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(array(\"semantic_annotation\", hash(\"items\", array(IMATCH_LIST))))})'"
+evidence: "TYPE-REFERENCE-BOOK.1.1 retains June originals, exact pre/post retirement source and isolated pure callback values. Current public lowering, descriptors, parser values and standalone generated execution distinguish removed selectors, flat/nested groups, whole match/first group, extra-value order and snapshots. No historical alias equivalence or full operation inventory."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
 ---
 
-The six return helpers retired by COMPAT-ALIAS-RETIREMENT-V2.2 (commit `4e92503`, 2026-06-14) are no
-longer recognized — in a spec body they fall to a **`RAW_PERL` fallback**, and
-`call_spec_handler_subst(...)` returns them unchanged. Their verified canonical-DSL replacements (all
-producing the single canonical node **`RETURN`**, never the retired `RETURN_A`/`RETURN_M`/`RETURN_MA`):
+The six helpers were removed by `4e9250390785b9a36ae3c48abc17fabc97b75ac0`
+(June14). Current public lowering leaves the demonstrated retired calls unchanged;
+their descriptors contain `RAW_PERL`, not a supported DSL return. Rewrite the
+payload explicitly and check the actual result, rather than renaming a node.
 
-| Retired helper | Original lowering (pre-retirement) | Canonical replacement |
+## Current migration recipes
+
+Here `L` is the old current-rule label; write its actual name in the new expression.
+Quote fixed tags. For the accumulator recipes, `copy(L)` is a snapshot of an array
+value; it is not the old live Perl array reference.
+
+| Old spelling | Current snapshot/value recipe | Shape |
 | --- | --- | --- |
-| `return_a(L)` / `return_a(L, X)` | `return ['?L:', \@L]` / `return ['?L:', (X), \@L]` (tag + optional arg **before** the accumulator ref) | `return(array("?L:", array_copy(array(L))))` / `return(array("?L:", X, array_copy(array(L))))` |
-| `return_m(L)` | `return ['?L:', \@IMATCH_LIST]` (tag + entry capture-group list) | `return(array("?L:", entry_groups()))` |
-| `return_ma(L)` | `return ['?L:', \@IMATCH_LIST, \@L]` (tag + groups + accumulator) | `return(array("?L:", entry_groups(), array_copy(array(L))))` |
-| `return_imatch(tag)` / `return_im(tag)` | `return [tag, $IMATCH]` (tag + entry-match **scalar**) | `return(array(tag, entry_text()))` |
-| `return_array(L, e1, e2, …)` | `return [e1, e2, …]` — **first arg `L` is the rule label and is DROPPED**; the rest are the array elements; barewords are auto-quoted | `return(array(<e1>, <e2>, …))` with any auto-quoted barewords made explicit strings (e.g. `semantic_annotation` → `"semantic_annotation"`) |
+| `return_a(L)` | `return(array("?L:", copy(L)))` | tag, nested accumulator |
+| `return_a(L, X)` | `return(array("?L:", X, copy(L)))` | optional value precedes accumulator |
+| `return_m(L)` | `return(array("?L:", flat_array(entry_groups())))` | tag, individual capture groups |
+| `return_ma(L)` | `return(array("?L:", flat_array(entry_groups()), copy(L)))` | tag, groups, nested accumulator |
+| `return_imatch("tag")` / `return_im("tag")` | `return(array("tag", entry_text()))` | tag, whole incoming match |
+| `return_array(L, "tag", payload)` | `return(array("tag", payload))` | optional old scope removed; tag retained |
 
-Load-bearing facts and pitfalls (each verified, not transcribed):
+The old `return_array` pattern accepts an optional bare scope before its tag and
+payload. A quoted leading tag in `return_array("tag", payload)` is already the
+tag: do not drop it. The historical callback constructs `[tag, payload]`; the old
+card's unconditional “drop the first argument” instruction was too broad. Complex
+payloads still need their own current value-expression and output verification.
 
-- **`entry_text()` = `$IMATCH`** (entry-match scalar, `SpecEntry.pm:104`); **`entry_groups()` = `@IMATCH_LIST`**
-  (entry capture-group list, `MethodLowering.pm:353-363`). **`imatch()`/`imatch_list()` are NOT valid
-  canonical helpers** — they themselves pass through to `RAW_PERL`. Do not use them.
-- **`array_copy(array(L))` → `[@L]`** (a *snapshot*); the originals returned a *live ref* `\@L`. JSON/output
-  parity is identical; only aliasing/mutation-after-return would differ (none in the spec corpus).
-- **`return_array` is a pure alias:** its old output equals the canonical `return(array(...))` output, so a
-  stale `is(call_spec_handler_subst('Top','return_array(L, …)'), 'return […]')` assertion needs **only the
-  input string rewritten** — the expected string is usually already canonical. The other five tag their
-  output with `"?L:"` and add `array_copy`/`entry_groups`, so they change the dumped shape and the dependent
-  `is_deeply` / node-coverage assertions must be **re-dumped and re-blessed**.
-- **`return_m`/`return_ma` shape choice:** `entry_groups()` keeps the capture groups as one **nested**
-  sub-array (the faithful `\@IMATCH_LIST` equivalent); `flat_array(entry_groups())` **splices** them into the
-  tag array. Choose per the exact output shape the stale test asserts.
+With an incoming match `abc` from `/(ab)(c)/` and `L` holding `["seed"]`, the
+current m recipe returns `["?L:","ab","c"]`; ma adds `["seed"]` as its final
+element. `entry_text()` returns `"abc"`; `entry_group(0)` returns `"ab"`.
+Without groups, m returns only the tag and ma retains the accumulator element.
+`entry_groups()` without `flat_array(...)` deliberately creates a nested group
+array. That is a different shape, not the historical m/ma shape.
 
-Used by PHASE0-BACKHALF-TRIAGE `.2.2.2` (cluster B1 rewrite): `.2.2.2.1` = the 17 `return_array` subtests
-(input-rewrite, mostly), `.2.2.2.2` = the 4 `return_a`/`return_m` subtests + the 3 BOTH (re-dump + re-bless).
-Related: [[actionir-return-node-retired-to-return]], [[medium-term-alias-retirement-deferred]],
-[[method-like-dsl-migration-status]].
+Do not retain `array_copy(...)`, `a(...)`, or removed `array(IDENTIFIER)` selectors.
+Use `copy(items)` to copy an existing value and `[items]` to construct one element
+from a bare binding. The old header's `array(IMATCH_LIST)` example is rejected with
+`aggregate_selector_removed`; use `entry_groups()` for the public group-list value:
+
+```text
+return(array("semantic_annotation", hash("items", entry_groups())))
+```
+
+## Historical correction and limits
+
+The June21 version is preserved in the accepted `1a8b20201` Git state and this
+leaf's before-image. Exact pre-retirement Contracts callbacks, independently run
+with explicit local arrays, emit `@IMATCH_LIST` in m/ma, **not** `\@IMATCH_LIST`.
+Their groups are spliced. a/ma retain a live `\@L`: appending to that original
+array after return changes the returned accumulator. Current snapshot recipes
+cannot promise this identity/alias behavior. No corpus-wide absence of later
+mutation, deep-copy guarantee, or full historical-engine parity is claimed.
+
+The dated PHASE0-BACKHALF-TRIAGE `.2.2.2` notes concern the original 17
+return_array, four a/m and three BOTH subtests; they are not current coverage
+counts. Compare actual values and current `RETURN` metadata for each migrated
+fixture. Related: [[actionir-return-node-retired-to-return]],
+[[medium-term-alias-retirement-deferred]], [[method-like-dsl-migration-status]].

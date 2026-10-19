@@ -1431,6 +1431,8 @@ table because its runtime behavior is to terminate the parser process.
 - **Behavior**: As a top-level action or lifecycle statement, writes the surrounding rule/action return channel. Inside an expression-valued block, it is block-local: it yields that block's value and skips later statements in the block.
 - **Edge cases**: `return(array(...))` returns an array value. A bare scalar source such as `return(count)` reads the working scalar `count`; primitive literals stay exact, so `return(true)` is the boolean literal and `return(undef)` is `undef`. A final non-`return(...)` statement in a lifecycle block is evaluated as a statement and is not an implicit rule return.
 
+For the retired tagged-return family, see [Migrating the retired tagged returns](../dsl/values-containers-and-flow-helpers.md#migrating-the-retired-tagged-returns). Its examples distinguish flat capture groups, nested arrays, and snapshot limits.
+
 ### `return_undef()`
 - **Signature**: `return_undef()`
 - **Returns**: undef.

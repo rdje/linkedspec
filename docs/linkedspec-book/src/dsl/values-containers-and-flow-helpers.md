@@ -180,6 +180,51 @@ example, `return(array_copy(array(Top)))` is rejected with
 backend. These examples describe the named forms; they are not an exhaustive
 inventory of return or container operations.
 
+### Migrating the retired tagged returns
+
+The old `return_m(L)` / `return_ma(L)` callbacks spliced capture groups into
+their outer array. Use `flat_array(entry_groups())` to retain that shape.
+`entry_groups()` alone instead creates one nested array. Here `L` denotes the
+old rule label; substitute the actual name and quote the fixed tag:
+
+| Old spelling | Current value or snapshot recipe |
+| --- | --- |
+| `return_a(L)` | `return(array("?L:", copy(L)))` |
+| `return_a(L, extra)` | `return(array("?L:", extra, copy(L)))` |
+| `return_m(L)` | `return(array("?L:", flat_array(entry_groups())))` |
+| `return_ma(L)` | `return(array("?L:", flat_array(entry_groups()), copy(L)))` |
+| `return_imatch("tag")` / `return_im("tag")` | `return(array("tag", entry_text()))` |
+| `return_array(L, "tag", payload)` | `return(array("tag", payload))` |
+
+The old array helper's scope argument was optional. In
+`return_array("tag", payload)`, the first argument is the tag and must remain.
+Do not mechanically discard every leading argument or treat a bare current
+identifier as an automatically quoted string.
+
+This complete example supplies a matched child entry, so its capture list is
+nonempty. With input `abc`, it returns `["?Top:","ab","c",["seed"]]`:
+
+```text
+Root::
+ -> Top .push
+ LX { return(first(Root)) }
+
+Top: /(ab)(c)/
+ I { set(Top, ["seed"]); return(array("?Top:", flat_array(entry_groups()), copy(Top))) }
+```
+
+Using `entry_groups()` without flattening instead returns
+`["?Top:",["ab","c"],["seed"]]`. `entry_text()` reads the whole incoming
+match (`"abc"`); `entry_group(0)` reads only its first capture (`"ab"`). With
+no capture groups, the flat m form contains just the tag and ma still includes
+the accumulator array.
+
+`copy(L)` gives a snapshot value. The old a/ma callbacks retained a live Perl
+array reference that could reflect subsequent mutation. These recipes preserve
+the demonstrated payload at return time; they do not promise reference identity,
+deep copying, or arbitrary old runtime behavior. Verify those requirements in
+the calling application before migrating an identity-sensitive use.
+
 Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use
 them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
 rules: a bare element such as `tag` reads scalar working variable `tag`, and a direct hash key is any accepted

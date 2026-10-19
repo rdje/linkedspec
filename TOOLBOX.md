@@ -126,7 +126,7 @@ edge, function/callable, and nested brace ownership. The durable audit and exact
 - **HOW:**
   ```bash
   perl -Iperl -MLinkedSpec -MJSON::PP -e '
-    my $s = "top::  -> word .push\nLX { return(array_copy(a(top))) }\n\nword : /(\w+)/  I.return(entry_group(0))\n";
+    my $s = "top::  -> word .push\nLX { return(copy(top)) }\n\nword : /(\w+)/  I.return(entry_group(0))\n";
     my $p = LinkedSpec::Get(\$s);                       # build
     print JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\"hello world")), "\n";'  # run
   ```
@@ -152,7 +152,7 @@ edge, function/callable, and nested brace ownership. The durable audit and exact
 - **HOW:**
   ```bash
   perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst("Top",
-    q{return(array("semantic_annotation", hash("items", array(IMATCH_LIST))))}), "\n";'
+    q{return(array("semantic_annotation", hash("items", entry_groups())))}), "\n";'
   ```
 
 ### 1.4 `LinkedSpec::build_compiled_rule_table` — low-level compile seam

@@ -20,7 +20,8 @@
    },
    "durability": {
     "status": "checked",
-    "mode": "live",
+    "mode": "historical",
+    "revision": "1a8b202018a387c87425442375f53c3ee5e820d4",
     "inputs": [
      {"path":".knowledge_map.conf","sha256":"91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a","role":"input"},
      {"path":"KNOWLEDGE_MAP.md","sha256":"0775535e6f9099d7f362653cb562fabb945b8e0ea36c9c997031329f14c32f33","role":"input"},

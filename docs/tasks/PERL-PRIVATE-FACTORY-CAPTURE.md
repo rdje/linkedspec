@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PERL-PRIVATE-FACTORY-CAPTURE`
-- Status: `active` / bounded frontier complete; original independent admissions open
+- Status: `active` / bounded callback handoff accepted; metadata QA .13 queued; original admissions open
 - Roadmap lane: `.spec language evolution / producer-bound residual repair`
 - Created: `2026-10-10`
 - Last updated: `2026-10-19`
@@ -883,7 +883,7 @@ quoted-first example do not change here. Other repositories and all submodules r
   Planned claim record: none: Planning only; declare measurements at activation.
   Acceptance: Commit each bounded family before FlowExpr and infer no separate parent admission.
 
-  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`, plus discovered repairs `.3.2.1.11` and deferred `.3.2.1.12`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site. Readonly accepted-claim census repair .3.2.1.10 follows due hygiene before .9; it adds no runtime ingress site. FlowExpr depends on the completed bounded .11 handoff; the aggregate remains open without a separate parent admission. P3 metadata projection .12 follows pipeline .6 and therefore does not block that runtime sequence.
+  Children: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0` through `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8`, plus discovered repairs `.3.2.1.11` and `.3.2.1.12`, and deferred metadata QA `.3.2.1.13`; inventory precedes eight independently committed implementation families. Discovered native container-cache guard repair .3.2.1.9 follows .2 before .3 and does not add an original inventory ingress site. Readonly accepted-claim census repair .3.2.1.10 follows due hygiene before .9; it adds no runtime ingress site. FlowExpr depends on the completed bounded .11 handoff; the aggregate remains open without a separate parent admission. P3 metadata projection .12 follows pipeline .6 and therefore does not block that runtime sequence.
 
 
 - ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0`
@@ -1902,11 +1902,23 @@ print('Exact metadata publication installed:196 inputs;35922 bytes')
 
   Owned canonical execution prerequisite / P1, resolved execution route: Actual canonical2 session31179 exits1 after all10 doctrines, header176, private91/32235 and preceding runtime/public/tool checks pass. Its unchanged process-locality driver fails71 at sandbox_apply before execution. The existing Knowledge Map card project-data-process-locality-proof already requires approved host execution from the start; the restricted launch was an avoidable execution mistake, not a new product or profile defect. No-op controls61963/15974 return71/0 inside/host, and unchanged full oracle9554 returns0 with all six families and original denials intact. docs/checkpoints/knowledge-fields-canonical2/ retains the exact uncommitted121-file candidate against real f7e8b292f, current208/full39111 claim/preflight, whole failed channels, before-root bytes and actual control/host evidence. These are supplementary canonical validation records; metadata producer/input bytes and its208-binding publication remain unchanged. Readonly retain.py --review and host-result.py gate their own retained source/data. A fresh fully staged approved-host canonical3 run and normal hooks remain mandatory; a targeted pass does not create a receipt. No tests, profile, gate, budget, recorded native observation or dependency source/pin changed.
 
+- ID: `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13`
+  Status: `pending` / P3 unconfirmed metadata literal-format question
+  Goal: Assess scalar evidence/reverify code-span rendering and repair only an observed loss of authored literal content.
+  Dependencies: `TYPE-REFERENCE-BOOK.1`, `TYPE-REFERENCE-BOOK.8`
+  Reproduce question: The accepted .12 preserves the existing scalar presentation while list items use adaptive code-span fences. Check actual scalar values containing backticks or boundary spaces through the published generator/checker and independent actual mdBook rendering. No new failing case, affected count or root-cause claim has been established.
+  Owned paths: Future bounded diagnostic fixtures/producer/reviewer/claim and, only after actual RED and preservation, the scalar presentation branch plus relevant Knowledge/book/continuity. Preserve every accepted .12 epoch and its complete publication before bound changes.
+  Schedule: After the first type-reference inventory and already-owned legacy status repair; raise priority if actual evidence establishes a blocker. No current metadata implementation pivot.
+  Planned tier: `focused` for diagnosis; require `canonical` before any generator/generated-format repair.
+  Claim verification: none: Unactivated qualitative question; declare actual source-bound measurement proof before execution/publication.
+  Acceptance: Resolve from native source/render evidence rather than a suspected Markdown mechanism. Retain distinguishing controls and exact original observations; either close with supported no-defect evidence or verify a bounded repair. No full YAML/type-validator or broader renderer guarantee.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1` | `pending` | From clean Git inventory actual type/operation contracts and book coverage; original private/mapping/admission owners stay open. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2` | `pending` | .1.1 current guidance is verified; clean activation starts complete inventory before .8 status reconciliation. |
+| 2 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed scalar literal-format question after Type .1/.8; original private/mapping/admission owners remain open. |
 
 ## Handoff
 

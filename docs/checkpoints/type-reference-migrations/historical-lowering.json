@@ -1,0 +1,12 @@
+{
+ "run": {
+  "command": [
+   "perl",
+   "docs/checkpoints/type-reference-migrations/historical-lowering.pl"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "W3siYWZ0ZXIiOlsiP1RvcDoiLFsic2VlZCIsImxhdGVyIl1dLCJiZWZvcmUiOlsiP1RvcDoiLFsic2VlZCJdXSwiYm9keSI6InJldHVybl9hKFRvcCkiLCJsb3dlcmVkIjoicmV0dXJuIFsnP1RvcDonLCBcXEBUb3BdIn0seyJhZnRlciI6WyI/VG9wOiIsImV4dHJhIixbInNlZWQiLCJsYXRlciJdXSwiYmVmb3JlIjpbIj9Ub3A6IiwiZXh0cmEiLFsic2VlZCJdXSwiYm9keSI6InJldHVybl9hKFRvcCwgXCJleHRyYVwiKSIsImxvd2VyZWQiOiJyZXR1cm4gWyc/VG9wOicsICggXCJleHRyYVwiKSwgXFxAVG9wXSJ9LHsiYWZ0ZXIiOlsiP1RvcDoiLCJhYiIsImMiXSwiYmVmb3JlIjpbIj9Ub3A6IiwiYWIiLCJjIl0sImJvZHkiOiJyZXR1cm5fbShUb3ApIiwibG93ZXJlZCI6InJldHVybiBbJz9Ub3A6JywgQElNQVRDSF9MSVNUXSJ9LHsiYWZ0ZXIiOlsiP1RvcDoiLCJhYiIsImMiLFsic2VlZCIsImxhdGVyIl1dLCJiZWZvcmUiOlsiP1RvcDoiLCJhYiIsImMiLFsic2VlZCJdXSwiYm9keSI6InJldHVybl9tYShUb3ApIiwibG93ZXJlZCI6InJldHVybiBbJz9Ub3A6JywgQElNQVRDSF9MSVNULCBcXEBUb3BdIn1dCg=="
+ },
+ "unchanged": true
+}
