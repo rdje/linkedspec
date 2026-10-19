@@ -1,0 +1,163 @@
+{
+  "result": "PASS",
+  "producer_sha256": "1f57c4126d9b3154b9f2a7ada9592fc9247abd74ebbba9cf7942db64c7da3ecf",
+  "originals_sha256": "17b1c24c7ae6d1c7ef7322195246ea9b77c968aee11c107f8260001994d181b2",
+  "reached_sha256": "19ccbd0734603c9e36a002d9f934cb757f4e5135781af88e16904760e5788c75",
+  "controls": [
+    {
+      "name": "missing-immutable-member",
+      "expected_reason": "complete prior immutable census",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDc4LCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IGxlbihwcmlvcik9PTIzMCBhbmQgc29ydGVkKG1lYXN1cmVtZW50WydwcmVzZXJ2ZWQnXSk9PXByaW9yLCdjb21wbGV0ZSBwcmlvciBpbW11dGFibGUgY2Vuc3VzJwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBjb21wbGV0ZSBwcmlvciBpbW11dGFibGUgY2Vuc3VzCg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "whole-accepted-claim",
+      "expected_reason": "whole accepted publication custody",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDUzLCBpbiA8bW9kdWxlPgogICAgYXNzZXJ0IG9yaWdpbmFsX2NsYWltPT1vbGQoQ0xBSU0pIGFuZCBsZW4ob3JpZ2luYWxfY2xhaW0pPT1zZWxlY3RlZFswXVsnYnl0ZXMnXT09MTI5Njg2LCd3aG9sZSBhY2NlcHRlZCBwdWJsaWNhdGlvbiBjdXN0b2R5JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiB3aG9sZSBhY2NlcHRlZCBwdWJsaWNhdGlvbiBjdXN0b2R5Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "extra-registry-reserve",
+      "expected_reason": "exact finite registry delta",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDE2NSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBkZWNvZGUocGxhblsnY2hhbmdlZCddW1JFR11bJ2J5dGVzX2Jhc2U2NCddKT09ZXhwZWN0ZWRfcmVnaXN0cnk9PXJhdyhSRUcpLCdleGFjdCBmaW5pdGUgcmVnaXN0cnkgZGVsdGEnCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXgpBc3NlcnRpb25FcnJvcjogZXhhY3QgZmluaXRlIHJlZ2lzdHJ5IGRlbHRhCg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "proposed-authority",
+      "expected_reason": "accepted sole authority",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDE2MiwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByZS5maW5kYWxsKHJiJ14tIFN0YXR1czooW15cbl0qKSQnLGFkcixyZS5NKT09W2InIGFjY2VwdGVkIGVuZ2luZWVyaW5nIG1haW50ZW5hbmNlIHVuZGVyIGBQRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOGA7IGV4YWN0IGNhbm9uaWNhbCBhZG1pc3Npb24gcmVxdWlyZWQnXSwnYWNjZXB0ZWQgc29sZSBhdXRob3JpdHknCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGFjY2VwdGVkIHNvbGUgYXV0aG9yaXR5Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "displaced-index",
+      "expected_reason": "exact sole index row placement",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDE3MSwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCByYXcoSU5ERVgpPT1vbGQoSU5ERVgpLnJlcGxhY2UobGFzdFswXSxsYXN0WzBdK2luZGV4X3JvdywxKSwnZXhhY3Qgc29sZSBpbmRleCByb3cgcGxhY2VtZW50JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBleGFjdCBzb2xlIGluZGV4IHJvdyBwbGFjZW1lbnQK"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "forged-source-coordinate",
+      "expected_reason": "exact source suffix/blob/range/digest",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDExMCwgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBtYW5pZmVzdFsxXT09c2VnbWVudCBhbmQgcmF3KG1lbWJlcik9PWFyY2hpdmUsJ2V4YWN0IHNvdXJjZSBzdWZmaXgvYmxvYi9yYW5nZS9kaWdlc3QnCiAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiBleGFjdCBzb3VyY2Ugc3VmZml4L2Jsb2IvcmFuZ2UvZGlnZXN0Cg=="
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    },
+    {
+      "name": "rendered-finite-allowance",
+      "expected_reason": "independently derived finite allowance table",
+      "rejection": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 1,
+        "stdout_base64": "",
+        "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXctZmluYWwucHkiLCBsaW5lIDE4MywgaW4gPG1vZHVsZT4KICAgIGFzc2VydCBydW4ucmV0dXJuY29kZT09MCBhbmQgbm90IHJ1bi5zdGRlcnIsKCdyZWFkb25seSBjb21wb25lbnQnLG5hbWUscnVuLnN0ZGVycikKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6ICgncmVhZG9ubHkgY29tcG9uZW50JywgJ2Jvb2stcmV2aWV3LnB5JywgYidUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6XG4gIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9ib29rLXJldmlldy5weSIsIGxpbmUgMTczLCBpbiA8bW9kdWxlPlxuICAgIGFzc2VydCBjYXBhY2l0eS5yb3dzW29mZnNldCsxOm9mZnNldCs3XT09Y2FwYWNpdHlfdGFibGUsIFwnaW5kZXBlbmRlbnRseSBkZXJpdmVkIGZpbml0ZSBhbGxvd2FuY2UgdGFibGVcJ1xuICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5cbkFzc2VydGlvbkVycm9yOiBpbmRlcGVuZGVudGx5IGRlcml2ZWQgZmluaXRlIGFsbG93YW5jZSB0YWJsZVxuJykK"
+      },
+      "restoration": {
+        "command": [
+          "python3",
+          "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review-final.py"
+        ],
+        "returncode": 0,
+        "stdout_base64": "RmluaXRlIGNvbnRpbnVpdHkgcmV2aWV3IFBBU1M6IDU0NCBpbnB1dHM7MjMwIHByaW9yIGZpbGVzOzI1Ny1saW5lIHN1ZmZpeDs2MCBudW1lcmljLzMxIGF1dGhvcml0eSBjb250cm9scwo=",
+        "stderr_base64": ""
+      }
+    }
+  ],
+  "scope": "Seven actual semantic artifact denials with complete changed counterfactual bytes/modes, channels and exact restoration. Whole original claim, finite numeric reserve, accepted/indexed authority, exact historical coordinates and independently derived rendered allowances are distinguished before final report identities. No runtime source changes."
+}

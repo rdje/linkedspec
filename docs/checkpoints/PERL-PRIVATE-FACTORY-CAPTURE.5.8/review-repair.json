@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "producer_sha256": "26c59c86ac3668e153a2328182b310cfeb26b1ed0e40b65fa94880ee4cd67f96",
+  "original_producer_sha256": "ced79eeef27f0bd38f47c81faf38c577bfec0c300aabbf16b2c8413726e0ebed",
+  "corrected_producer_sha256": "5c2656051822bb1ed58dd385c47fc0646561253706ca800e6fbef0b9e8d64071",
+  "old_base64": "Zm9yIHAgaW4gc3VwcG9ydDphc3NlcnQgZGVjb2RlKHN0YWdlX2RhdGFbJ29yaWdpbmFsJ11bcF1bJ2J5dGVzX2Jhc2U2NCddKT09b2xkKHApIGFuZCAoUk9PVC9wKS5yZWFkX2J5dGVzKCk9PW9sZChwKSwndW5jaGFuZ2VkIGFjdHVhbCBoZWxwZXIvY29uZmlnIHNvdXJjZSc=",
+  "new_base64": "Zm9yIHAgaW4gc3VwcG9ydDphc3NlcnQgZGVjb2RlKHN0YWdlX2RhdGFbJ29yaWdpbmFsJ11bcF1bJ2J5dGVzX2Jhc2U2NCddKT09b2xkKHApIGFuZCAocD09UkVHIG9yIChST09UL3ApLnJlYWRfYnl0ZXMoKT09b2xkKHApKSwndW5jaGFuZ2VkIGFjdHVhbCBoZWxwZXIvY29uZmlnIHNvdXJjZSc=",
+  "command": [
+    "python3",
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/review.py",
+    "--capture"
+  ],
+  "returncode": 1,
+  "stdout_base64": "",
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy9QRVJMLVBSSVZBVEUtRkFDVE9SWS1DQVBUVVJFLjUuOC9yZXZpZXcucHkiLCBsaW5lIDEzNCwgaW4gPG1vZHVsZT4KICAgIGZvciBwIGluIHN1cHBvcnQ6YXNzZXJ0IGRlY29kZShzdGFnZV9kYXRhWydvcmlnaW5hbCddW3BdWydieXRlc19iYXNlNjQnXSk9PW9sZChwKSBhbmQgKFJPT1QvcCkucmVhZF9ieXRlcygpPT1vbGQocCksJ3VuY2hhbmdlZCBhY3R1YWwgaGVscGVyL2NvbmZpZyBzb3VyY2UnCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiB1bmNoYW5nZWQgYWN0dWFsIGhlbHBlci9jb25maWcgc291cmNlCg==",
+  "changed_support": [
+    "doctrine/readme_stability/routes.jsonl"
+  ],
+  "scope": "Actual original reader rejects the intentionally changed registry because it classifies every parent-owned support path as unchanged. Original source/channels are retained; the exact correction exempts only REG from the unchanged-current helper assertion. Independent exact six-scalar registry reconstruction still governs that file. All original historical helper bytes remain checked. Other edits only identify/bind the new reader and this repair record."
+}

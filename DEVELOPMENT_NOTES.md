@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-19 — PERL-PRIVATE-FACTORY-CAPTURE.5.8 — Finite continuity capacity
+
+Required records exhaust the existing note aggregate and trigger change-history rollover. Measure actual complete-record retention and old-cap refusals before selecting exact finite growth. Preserve accepted compiler evidence, immutable history and all source coordinates. One bounded note envelope covers this maintenance, due artifact review, fixture admission, pipeline and metadata continuation with bounded child splits; no archive reserve follows.
+
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.7: Mixed defaults select seven target facades and fixed ValueExpr independently. Native package objects require !ref before name equality in three selectors; inherited names grant no new authority, while selected actual references retain scoped authority. Preserve the initial logical publication without a fake revision. Finite continuity follows under .5.8.
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.6: Select rule apply once after shallow cloning; native root3/FETCH103/candidate13/accepted13 counters distinguish ordering. Two equal publications already yield no packet; actual callback frames and single-publication controls establish isolation. Existing framework/foundation cards and native-derived rendered table retain the durable facts.
 ## 2026-10-18 — PERL-PRIVATE-FACTORY-CAPTURE.5.5 — Optional kind preserves both map reads, guarded match aliases and native error lines. Actual CODE has its own capture; other selections use an opaque native thunk. Initial tied-map snapshot and concurrent Knowledge-integrity failures stay retained.

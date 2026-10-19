@@ -82,6 +82,33 @@ member and manifest growth. Retain that rejection before adding the finite
 accepted decision and exact limits; then stage the whole proposal and run
 canonical CI. A successful generation alone grants no capacity.
 
+### Finite continuity example
+
+ADR0136 combines one measured change-history member with one finite engineering-note
+envelope. The roller preserves a complete 257-line suffix from the accepted source;
+the unchanged checker rejects the added member, manifest growth and exhausted note
+aggregate before any allowance changes.
+
+| Surface | Previous allowance | Finite allowance |
+| --- | --- | --- |
+| Change-history files | 50 | 51 |
+| Change-history manifest lines | 49 | 50 |
+| Change-history manifest bytes | 27983 | 28559 |
+| Engineering-note aggregate lines | 29512 | 30024 |
+| Decision files | 136 | 137 |
+| Decision aggregate lines | 13285 | 13326 |
+
+The 512-line note envelope covers the declared maintenance, due artifact review,
+fixture admission, pipeline and metadata continuation, including bounded child splits.
+The sole decision adds 40 physical lines and one index row. Root, byte, per-file and
+engineering membership/manifest limits stay fixed; this grants no future archive slot.
+
+Check the control instrument's actual population independently. In this example,
+the first instrument's arithmetic checks passed while it read the wrong history
+manifest. A separate census rejected both affected populations. The exact two-line
+correction then passed the real census, inclusive boundary observations and authority
+denials. Preserve that rejected source and output alongside the corrected producer.
+
 Preserve any live evidence that binds the root or book before changing them.
 Keep its original hashes at the accepted Git revision, then separately verify the
 new rollover against that revision. A healthy render also checks recursive local
@@ -119,10 +146,12 @@ A corrected reader has its own executed source and identity. A historical report
 continues to identify the producer that originally captured it; changing the reader
 must never relabel or refresh that observation.
 
-The current verification entrypoint checks the bounded mixed-provider default
-integration and its package-object preservation repair, including unchanged ordinary
-observations, exact definition-owned selection,
-full-source faults, supplied consumers and the public Perl diagnostic contract.
+The current verification entrypoint checks this finite continuity admission and
+preserves the complete 565-input mixed-default/package-object publication and its
+actual successful baseline at `54bb5eb65`. That accepted boundary retains native
+observations, exact definition-owned selection, full-source faults, supplied consumers
+and the public Perl diagnostic contract; administrative maintenance refreshes none
+of those observations.
 The complete initial546-input logical draft is preserved with every input byte/mode.
 Its actual original publisher replays from2020 supplied files; this is an uncommitted
 logical draft, not a historical Git revision or admission for object targets.
@@ -133,10 +162,10 @@ complete480-input switch publication remains at `4a8e92aef`, and the complete463
 if/while publication remains at `09000223f`,
 the earlier155-input artifact publication at `a60764c11`, and the finite
 engineering-history publication at `e2ec1e96b`. No historical observation is
-refreshed. Existing root and aggregate budgets stay fixed:
+refreshed. Only the finite allowances above change; all other budgets stay fixed:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py
+bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/publish.py
 ```
 
 Its default is readonly. The earlier fixed-population reader under `.3.2.1.10`

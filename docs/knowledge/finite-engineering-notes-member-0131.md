@@ -1,6 +1,6 @@
 ---
 id: finite-engineering-notes-member-0131
-title: Finite engineering-history admissions preserve exact archives and prior proof
+title: Finite continuity admissions preserve exact archives and prior proof
 answers:
   - "which decision admits engineering notes segment 4962"
   - "why does engineering notes allow 46 files and 45 manifest lines"
@@ -15,42 +15,45 @@ answers:
   - "why can publication replay require historical inputs beyond live bindings"
   - "which decision admits engineering notes segment 4960"
   - "where is the current finite engineering history review"
-date: 2026-10-17
-status: ADR0135 finite engineering admission verified; prior accounts preserved
+  - "which decision admits change history segment 4962"
+  - "why does engineering notes allow 30024 aggregate lines"
+date: 2026-10-19
+status: ADR0136 finite continuity proof; exact canonical receipt governs landing
 tags: [documentation, history, capacity, verification]
-evidence: "PERL-PRIVATE-FACTORY-CAPTURE.5.1.3 retains actual rollover/old-cap channels, exact source suffix and228 prior files. ADR0135 grants one member, exact manifest growth and35 sole decision/index lines. Production30 thresholds/23 authority REDs precede canonical admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.7-final/publish.py. Prior inputs:ce9eaf32e."
+evidence: "ADR0136 admits one measured change-history member/manifest, one512-line note envelope and41 sole decision/index lines. Whole565/129686 proof and230 prior files are preserved. Actual old-cap RED and corrected60/31 production controls precede canonical admission."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.5.8/publish.py. Prior inputs:54bb5eb65."
 ---
 
-## Current finite admission: ADR0135
+## Current finite continuity: ADR0136
 
-At clean736c6a43ef the next complete record reaches59506 bytes and the
-production roller requires rollover. One272-line clean-source suffix becomes
-segment4960; the hot shard retains113 lines/32492 bytes. Original caps reject
-files48/47 and manifest47/46 lines,28469/27857 bytes. ADR0135 admits only that
-member/manifest growth and its sole34-line decision plus one index row.
-Root, aggregate, per-file and unrelated budgets stay exact; no reserve follows.
+At clean54bb5eb65, required complete records cross change-history rollover and
+the exhausted engineering aggregate. Segment4962 preserves source lines109–365:
+257 lines/26898 bytes; the current root retains111 lines/32530 bytes. Unchanged
+limits reject the actual new member/manifest and29516 note lines.
 
-All228 old history/decision files and the whole449-input/105765-byte callback
-publication remain preserved. Two incomplete supplied-root replay failures stay
-retained; the complete1978-input original-project replay reproduces the exact
-old-cap channels while keeping the regression's own-Git-root guard. This is no
-claim of whole-gate portability. Independent reconstruction and actual unchanged
-production functions distinguish numeric/authority faults; exact staged canonical
-CI and normal hooks separately govern admission. Runtime/test/checker sources
-and dependency pins stay unchanged. Earlier dated bodies follow exactly.
+ADR0136 admits change-history files50→51, manifest49→50 lines/27983→28559 bytes,
+engineering aggregate29512→30024 lines and decisions136→137 files/13285→13326
+lines: one40-line ADR plus one index row. The512-line note envelope covers the
+declared maintenance, due artifact review, fixture .7, pipeline .6 and metadata
+continuation/bounded splits. Other limits remain exact; no archive reserve follows.
 
+All230 prior history/decision files and whole565-input/129686-byte compiler
+publication remain preserved with actual baseline at the real Git boundary.
+Original-project1980/1981 input snapshots retain actual rollover/old-cap channels.
+The first arithmetic/authority instrument used the wrong two census manifests;
+its passing output is independently rejected. Exact two-line correction has actual
+census equality,60 inclusive numeric observations/31 authority REDs and exact
+readonly output recurrence. Complete Knowledge/book and staged canonical receipt
+govern admission; no runtime, checker or dependency implementation changes.
 
-## Current review-command repair
+## Earlier current accounts
 
-ADR0133 was accepted at d95a25c8b with canonical CI and all normal hooks passing.
-Its old command selected an instrument that requires the original logical draft,
-so current notes failed its exact root check. The current reviewer checks the
-sole ADR pointer correction and related guidance, preserves the accepted claim
-at that Git boundary, and validates an actual supplied original-publication replay.
-That replay supplies the historical hygiene inputs read by the actual reviewer,
-alongside the live bindings; the initial omitted-input failure remains retained.
-The dated admission accounts below retain their original bodies and measurements.
+ADR0135 preserves segment4960's272-line suffix,113-line/32492-byte root and228
+prior files. Its member/manifest and35 decision/index lines grant no later reserve.
+ADR0133's pointer repair preserves the accepted d95a25c8b account and actual
+supplied publisher replay; old logical inputs remain required. Whole original
+headers/bodies are recoverable at54bb5eb65 and in this leaf's preparation record.
+The older dated bodies below remain exact.
 
 # The next finite admission: ADR0133
 
