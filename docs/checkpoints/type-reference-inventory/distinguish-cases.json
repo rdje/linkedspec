@@ -1,0 +1,13 @@
+[
+ {"id":"bare-scalar-across-call","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; return([marker, cb(), marker])"},
+ {"id":"rvalue-across-call","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; return([cat(marker,\"\"), cb(), marker])"},
+ {"id":"separate-binding-control","body":"marker = \"before\"; saved = marker; cb = {|| marker = \"inside\"; return(marker) }; return([saved, cb(), marker])"},
+ {"id":"array-helper-across-call","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; return(array(marker, cb(), marker))"},
+ {"id":"named-function-arguments","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; return(pair(marker, cb()))","functions":"fn pair(left, right) { return([left, right]) }\n\n"},
+ {"id":"codeblock-arguments","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; pair = {|left,right| return([left,right]) }; return(pair(marker, cb()))"},
+ {"id":"with-scoped-binding-direct","body":"cb = {|| return(\"yes\") }; return(cb.with() { return(value()) })"},
+ {"id":"with-copy-to-name-control","body":"cb = {|| return(\"yes\") }; return(cb.with() { local_callback = value; return(local_callback()) })"},
+ {"id":"with-known-outer-binding-control","body":"cb = {|| return(\"yes\") }; return(cb.with() { return(cb()) })"},
+ {"id":"with-explicit-parameter","body":"cb = {|| return(\"yes\") }; return(with(cb, {|callback| return(callback()) }))"},
+ {"id":"with-explicit-value-parameter","body":"cb = {|| return(\"yes\") }; return(with(cb, {|value| return(value()) }))"}
+]

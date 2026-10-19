@@ -16,7 +16,7 @@ date: 2026-10-19
 status: canonical .7 receipt retained; pipeline fixture extends the selected framework suite
 tags: [perl, ci, regression, copy, verification]
 evidence: "Leaf .7 inventories91 suites/363 exact supplied inputs and46 test helpers. Original direct selection omits86 suites and132/131 tracked/syntax paths. Actual selected Bash population and historical inverse pass with effective faults; complete originals and failed instruments remain retained. Exact staged CI governs admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
 ---
 
 # Explicit Perl CI selection

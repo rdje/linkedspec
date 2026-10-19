@@ -1,0 +1,14 @@
+[
+ {"id":"primitive-values","body":"return([\"text\", 42, 3.5, true, false, undef])"},
+ {"id":"one-binding-rebound","body":"slot = \"text\"; slot = [1, 2]; slot = {\"answer\":42}; slot = {|| return(\"called\") }; return(slot())"},
+ {"id":"containers","body":"return({\"array\":[1,2], \"harray\":{\"key\":\"v\"}})"},
+ {"id":"eager-block","body":"result = { marker = \"eager\"; 7 }; return([marker, result])"},
+ {"id":"deferred-caller-state","body":"marker = \"before\"; cb = {|| return(marker) }; marker = \"later\"; return(cb())"},
+ {"id":"deferred-effects","body":"marker = \"before\"; cb = {|| marker = \"inside\"; return(marker) }; return([marker, cb(), marker])"},
+ {"id":"boolean-scalar-receiver","body":"flag = false; return(flag.cat(\"q\"))"},
+ {"id":"boolean-generic-with","body":"flag = false; return(flag.with() { return(value) })"},
+ {"id":"yielded-array-receiver","body":"cb = {|| return([\"b\",\"a\"]) }; return(cb().sorted())"},
+ {"id":"codeblock-generic-with","body":"cb = {|| return(\"yes\") }; return(cb.with() { return(value()) })"},
+ {"id":"codeblock-array-method-question","body":"cb = {|| return([\"b\",\"a\"]) }; return(cb.sorted())"},
+ {"id":"numeric-input-boundaries","body":"return([num_add(42,0),num_add(3.5,0),num_add(\"007\",1),num_add(true,1),num_add(undef,1),cat(false,\"q\"),num_eq(2,2),and(true,true)])"}
+]

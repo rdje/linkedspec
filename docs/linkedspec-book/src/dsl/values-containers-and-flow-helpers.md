@@ -28,6 +28,36 @@ and `[value, value]` produce the same pair. See the
 [complete function example](value-container-flow-helper-reference.md#array-constructors-inside-functions),
 including a local assignment separated from its return by a newline.
 
+## Value kinds, numeric notation and callable results
+
+One working name holds one current value: scalar, array, harray (hash), or codeblock.
+Assigning a different kind replaces that binding. Integer and real notation describe
+numeric values, rather than separate variable namespaces. Strings, numbers, booleans
+and null (`undef`) remain observably different: numeric helpers accept finite numbers
+and their contracted decimal strings, reject boolean/null, and return numeric `1`/`0`
+for comparisons. Logical helpers return booleans. Scalar text normalization converts
+false to `"0"`, so `flag = false; return(flag.cat("q"))` returns `"0q"`.
+
+An eager expression block executes now; a deferred `{|parameters| ... }` codeblock
+executes when called and reads the caller's current working bindings. Receiver
+operations apply to the yielded value. For example, this returns `["a", "b"]`:
+
+```text
+Top: /x/
+ I { cb = {|| return(["b","a"]) }; return(cb().sorted()) }
+```
+
+This demonstrates an array operation on the call result. It supplies no separate
+codeblock method table or guarantee that every operation accepts every kind.
+
+Two Perl defects are currently owned for repair. In `[marker, cb(), marker]` (also
+`array(...)` and codeblock argument lists), a callback that rebinds `marker` can change
+the earlier element too. Save the earlier value in a separate binding before calling.
+An attached `cb.with() { return(value()) }` currently returns null because its scoped
+`value` call is not recognized. `with(cb, {|callback| return(callback()) })` works.
+These limits apply to the observed Perl parser and emitted source; they establish no
+cross-backend result. Complete per-operation reference coverage remains in progress.
+
 ## Per-rule default accumulator
 
 Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.

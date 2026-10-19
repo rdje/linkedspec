@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.1 is complete; activate .1.2 inventory from clean Git.
+TYPE-REFERENCE-BOOK.1.2.0 is complete; activate P1 scalar-evaluation repair .1.2.3 from clean Git.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.1 corrects the retired tagged-return recipes: exact historical m/ma callbacks splice groups, while current copy recipes have explicit snapshot/identity limits. Seventeen fixed parser/generated payloads, five alternate native-shape REDs and four module-identity REDs pass. Two Toolbox return examples and the complete89-input book/affected-page links pass; the actual worked source matches native execution. Whole prior208/full39111 and first uncommitted355/full60395 records, actual baselines and all inputs remain recoverable. Exact isolated original reader fails its absolute INC predicate; the distinct corrected predicate/full supplied context restores the whole original claim with identical channels. Redundant public42/40 references and executable negative capture sources are resolved without changing gates: exact original producers remain archived data with guarded stubs. Current Knowledge1487/1349/10455, all897 entries/248 fields, 8386601 bytes and map21249 fit unchanged controls. Current readonly publication binds396 inputs/full68960. No runtime, contract, budget, full alias/deep-copy, exhaustive type inventory or private/parent admission changes. Clean activation of .1.2 inventory follows; .8 legacy status repair and deferred metadata QA .13 remain owned.
+Authority/model .1.2.0 retains1300 owned inputs;14 descriptor/Get/generated cases include70 neutral scalar fields, and11 distinguishing cases isolate two owned P1 Perl defects. Actual private promotion has report0/strict RED/exact restoration. Current Knowledge1487/1349/10455, all897 list items/248 fields and8387566 bytes fit unchanged limits; complete89-input book and changed-heading control pass. Whole original396/full68960 replays with exact channels and bytes/modes unchanged. Only that accepted claim is frozen at real cf4dceccd; first no-write frontmatter writer failure and separate correction remain retained. No runtime, contract, gate, budget, complete operation inventory, cross-backend or private/parent admission. P1 scalar-evaluation .1.2.3 then scoped-with .1.2.4 precede complete enumeration .1.2.1.
 
 ## Next Action
 
-From clean Git activate TYPE-REFERENCE-BOOK.1.2. Preserve current396/full68960 and its actual readonly baseline before bound edits. Inventory the complete canonical contract/source/operation/spelling population and current book coverage; no exhaustive count from samples. Keep .8 legacy repair, deferred metadata .13 and private/parent owners explicit; continue full PNT without a dirty pivot or push.
+From clean Git activate TYPE-REFERENCE-BOOK.1.2.3 with canonical tier. Preserve the whole current inventory claim/inputs and actual readonly baseline before bound runtime/book/fact changes. Retain original model failures; correct scalar value timing with independent RED/GREEN, then repair scoped with .1.2.4 before full operation enumeration. Continue full PNT without a dirty pivot or push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.1` — historical flat groups/snapshot limits; native17/five controls; module4; prior208/full39111 + draft355/full60395 retained/replayed; Knowledge8386601/map21249/book89; readonly396/68960; inventory .1.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` — lists897/248; original80/RED38/GREEN176; faults10/artifact3; current1487/1349/10455; knowledge8386908/map21249/book89/4; readonly208/39111; TYPE-REFERENCE-BOOK.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.6` — scopes/five captures; original2065/13/91/32235; current2065/426;625 declaration+161 namespace/786 guarded; Knowledge8386222/book89/4; new artifact3+original8; readonly711/120239; metadata .12 next.
@@ -29,7 +30,6 @@ From clean Git activate TYPE-REFERENCE-BOOK.1.2. Preserve current396/full68960 a
 - `REPO-HYGIENE.18` — dated16310/17449713515 parent; separate Rust483/2390810648; zero removals; four channel/three preservation controls; original507 historical; full1486 Knowledge/12 overlays/8387213; two book89/four epochs; retained reader/history refusals; readonly155/40701; if/while .5.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3` — one272-line suffix/113-line root;228 old files/449 accepted bindings; exact finite ADR0135; complete1978 root replay;30/23 controls; five artifacts; Knowledge1486/1349/8387290; book89/4; readonly507/117862; canonical boundary; .5.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.1.2` — native100/87/79 exact;439/94 RED/345 controls/all GREEN;10 cases/9 sources;83/298/23209; evidence9/supplied443; original461 Git bindings; Knowledge1485/1349/8387900; book89/4; standard1035; readonly449/105765; finite continuity .5.1.3 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.1.1` — native100/188/156 exact;920/194 RED/726 controls/all GREEN;10 cases/9 sources;82/291/22770; evidence8; original478 Git bindings; Knowledge1485/1349/8387239; book89/4; standard1035; readonly461/110981; single statement .5.1.2 next.
 
 ## History
 

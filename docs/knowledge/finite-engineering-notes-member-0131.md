@@ -21,7 +21,7 @@ date: 2026-10-19
 status: ADR0136 finite continuity proof; exact canonical receipt governs landing
 tags: [documentation, history, capacity, verification]
 evidence: "ADR0136 admits one measured change-history member/manifest, one512-line note envelope and41 sole decision/index lines. Whole565/129686 proof and230 prior files are preserved. Actual old-cap RED and corrected60/31 production controls precede canonical admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
 ---
 
 ## Current finite continuity: ADR0136

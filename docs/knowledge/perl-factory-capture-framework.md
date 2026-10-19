@@ -33,7 +33,7 @@ date: 2026-10-19
 status: bounded factory/dependency and pipeline invocation scopes verified; output/mapping/parent admissions open
 tags: [perl, actionir, callbacks, contexts, identity, source-emission]
 evidence: "Leaf .6 preserves whole603/full115985 at64b66167c, original native96 plus distinct9-row callable/load-context epochs and failed instruments. Supplied426 inputs verify2065 assertions, 13 exact semantic source inverses and91 suites/32235 assertions. Actual public native return_general callback/origin/source/producer/input identities match. Output/mapping and complete private/parent admission remain separate."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
 ---
 
 Actual callbacks, inputs and publications have separate private authority.

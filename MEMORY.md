@@ -1,16 +1,17 @@
 # MEMORY
 
-- activation_commit: `1a8b202018a387c87425442375f53c3ee5e820d4` — clean TYPE-REFERENCE-BOOK.1.1 activation; Git owns latest identity.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.1` — corrected current migration guidance; focused proof and normal commit workflow.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2` (pending clean activation; complete inventory).
-- task_owner: `docs/tasks/TYPE-REFERENCE-BOOK.md`.
-- next_action: From clean Git activate .1.2; preserve current396/full68960 and actual readonly baseline through docs/checkpoints/type-reference-migrations/publish.py before bound edits, then inventory actual contracts/source/operations/spellings and book coverage.
+- activation_commit: `cf4dceccd24bc6642fc9c7d8d10b329e136849b6` — clean TYPE-REFERENCE-BOOK.1.2.0 activation; derive latest identity from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.0` — planned subject `TYPE-REFERENCE-BOOK.1.2.0 - reconcile authority population and value model`.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.0` (done; clean handoff). Activate P1 .1.2.3 from clean Git.
+- task_owner: `docs/tasks/TYPE-REFERENCE-BOOK.md`; full operation enumeration/book mapping remain .1.2.1/.1.2.2.
+- next_action: Activate P1 TYPE-REFERENCE-BOOK.1.2.3 with canonical tier; preserve the whole current inventory publication/inputs and actual readonly baseline before bound runtime/book/fact writes, then correct early scalar evaluation with independent RED/GREEN.
 - in_flight_uncommitted: none.
-- blockers: none requiring user input. No complete operation inventory, missing-method count or exhaustive reference admission exists. Toolbox2.2 capture recipes remain separately owned by CONFORMANCE-SOURCE-READING.2.11.
-- evidence: Historical m/ma groups are flat; current17 parser/generated payloads/five shape REDs, module4, complete Knowledge1487/1349/10455/all897 entries, knowledge8386601/map21249 and book89/rendered links/native example pass. Public binding/composed selector checks pass; gates remain unchanged.
-- custody: Whole prior208/full39111 and actual baseline/replay precede historical freeze at real1a8b20201. Whole uncommitted355/full60395/baseline and all raw inputs stay retained; actual original isolated failure and distinct complete predicate-corrected replay are separate. Retired producer bytes/modes recover exactly from guarded data/stubs.
-- canonical_environment: Launch canonical CI with approved host execution from the start. Existing nested-sandbox control is71 inside/0 host; never weaken or skip its profile. No new canonical receipt is claimed for this focused documentation leaf.
-- cleanup: Latest scoped cleanup2026-10-19T12:12:28.273239+00:00; prior full REPO-HYGIENE.19. No proof/cache disposal or purge authority is inferred.
-- deferred: Scalar metadata .3.2.1.13 remains an unconfirmed question after Type .1/.8. Original output/composition/mapping/quoted-first/private-parent admissions remain open.
-- standing_limit: Other repositories/submodules are read-only black boxes. Startup.7 wrapper/kernel gaps remain open; no lifecycle/recovery/purge admission.
-- sequence: .1.2 -> .1.3 -> .8 -> queued metadata QA, then inventory-backed type references. Full PNT continues; no push yet.
+- blockers: no director input required. Confirmed P1 scalar lvalue timing and scoped-with callable projection repairs precede complete inventory; no runtime fix has landed yet.
+- evidence: Source1300; native descriptor/Get/generated14 plus11 distinguishing controls; neutral scalar70; actual private promotion report0/strict RED/restoration; full Knowledge1487/1349/10455/897/248, 8387566 bytes and book89/heading control. Exact original396/full68960 replay passes with all supplied bytes/modes unchanged.
+- current_proof: docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json; readonly docs/checkpoints/type-reference-inventory/publish.py. One-shot captures/closeout are not resume entrypoints.
+- custody: Migration396/full68960 is historical at actual cf4dceccd; original208, draft355 and all earlier epochs remain immutable. Preserve the entire current claim and every input before its next freeze. Other live warning6/capacity14 guards remain unchanged.
+- canonical_environment: Canonical CI starts with approved host execution; nested sandbox controls are71 inside/0 host. Never weaken or skip the profile. Runtime P1 repairs require canonical staged receipts.
+- cleanup: Latest scoped2026-10-19T12:12:28.273239+00:00; full REPO-HYGIENE.19. No artifact disposal or purge authority is inferred.
+- deferred: Toolbox2.2 capture recipes remain CONFORMANCE-SOURCE-READING.2.11-owned. Metadata .3.2.1.13 is unconfirmed and follows Type .1/.8. Original output/composition/mapping/quoted-first/private-parent admissions remain open.
+- standing_limit: Other repositories/submodules are read-only black boxes; no dependency internals/build reconstruction/pin changes. Startup.7 lifecycle/kernel gaps remain open.
+- sequence: P1 .1.2.3 -> .1.2.4 -> .1.2.1 -> .1.2.2 -> .1.3 -> .8 -> metadata QA -> type references. Full PNT continues; no push yet.

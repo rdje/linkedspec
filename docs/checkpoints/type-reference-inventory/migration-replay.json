@@ -1,0 +1,16 @@
+{
+ "bytes_modes_unchanged": true,
+ "result": "PASS",
+ "run": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-migrations/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCBtaWdyYXRpb24gcHVibGljYXRpb24gUEFTUzogMzk2IGlucHV0czsgNjg5NjAgYnl0ZXM7MTcgcGF5bG9hZHM7Zml2ZSBjb250cm9scztwcmlvcjIwOC9mdWxsMzkxMTEK"
+ },
+ "supplied_context": 1866,
+ "whole_original_bytes": 68960,
+ "whole_original_inputs": 396
+}

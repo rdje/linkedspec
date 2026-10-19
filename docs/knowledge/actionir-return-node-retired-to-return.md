@@ -11,7 +11,7 @@ date: 2026-10-19
 status: current
 tags: [actionir, canonical-nodes, return, compat-alias-retirement, regression, phase0]
 evidence: "TYPE-REFERENCE-BOOK.1.1 public lowering/descriptor/value/generated-source observations retain current RETURN versus retired RAW_PERL and removed-selector controls. June triage descriptions remain dated history; current public descriptors do not prove code-slot equivalence."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-migrations/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
 ---
 
 Current `return(...)` and `return_undef()` contribute the canonical ActionIR

@@ -1,0 +1,33 @@
+{
+ "authority_inputs": 1300,
+ "book_inputs": 89,
+ "distinguishing_cases": 11,
+ "graph": {
+  "facts": 1349,
+  "list_fields": 248,
+  "list_items": 897,
+  "markdown": 1487,
+  "question_keys": 10455
+ },
+ "initial_cases": 14,
+ "knowledge_bytes": 8387566,
+ "limits": "Two runtime defects remain scheduled; vocabulary presence is not complete operations or semantics. No runtime change, cross-backend execution, private/parent or exhaustive book admission.",
+ "neutral_scalar_fields": 70,
+ "original_replay": {
+  "bytes_modes_unchanged": true,
+  "result": "PASS",
+  "run": {
+   "command": [
+    "python3",
+    "docs/checkpoints/type-reference-migrations/publish.py"
+   ],
+   "returncode": 0,
+   "stderr_base64": "",
+   "stdout_base64": "Q3VycmVudCBtaWdyYXRpb24gcHVibGljYXRpb24gUEFTUzogMzk2IGlucHV0czsgNjg5NjAgYnl0ZXM7MTcgcGF5bG9hZHM7Zml2ZSBjb250cm9scztwcmlvcjIwOC9mdWxsMzkxMTEK"
+  },
+  "supplied_context": 1866,
+  "whole_original_bytes": 68960,
+  "whole_original_inputs": 396
+ },
+ "result": "PASS"
+}

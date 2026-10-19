@@ -3,12 +3,12 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / inventory .1.2 next; prerequisite .1.1 complete
+- Status: `active` / .1.2.0 complete; P1 .1.2.3/.1.2.4 before enumeration
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-19`
 - Owner: LinkedSpec repo-local PNT
-- Priority: P2 documentation completeness; P3 legacy status repair
+- Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
 - Schedule: First documentation phase after the active private factory/callback implementation lane; before claiming the book supplies an exhaustive per-type reference.
 
@@ -100,12 +100,71 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2`
-  Status: `pending`
+  Status: `active` / bounded inventory children
   Goal: Reconcile the complete supported type/operation/spelling population with canonical authorities and actual book coverage.
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
-  Claim verification: none: Unactivated inventory; declare source-bound enumeration and coverage proof before measurements.
+  Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
+  Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.0`
+  Status: `done` / bounded authority/model prerequisite
+  Goal: Retain the complete relevant authority population and reconcile the actual public value/type model before counting operations.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.1`
+  Owned paths: New docs/checkpoints/type-reference-inventory/ source/contract/book captures and reviewers, its claim, relevant current Knowledge/book clarification and normal continuity. Preserve current396/full68960 and actual readonly baseline before any bound fact/book/map write. Other repositories/submodules remain read-only black boxes.
+  Verification tier: `focused`
+  Focused checks: Exact owned Git source/contract/book population and recoverable bytes/modes before producers; existing language-coverage and neutral type/callable/numeric authorities; public-tool probes where current acceptance is uncertain; independent completeness/category and distinguishing omission/private-promotion controls; changed Knowledge/book, histories, explicit memory and normal doctrines/hooks.
+  Canonical trigger: none for inventory/clarification of existing admitted behavior; split/reclassify before any runtime, public contract, generated format or mechanical owner change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json`
+  Acceptance: Produce a source-bound authority ledger and current type taxonomy with explicit admitted/private/retired and historical boundaries. Reconcile scalar/string/numeric integer-real and boolean/null distinctions, array/harray/codeblock bindings and yielded receiver dispatch without inventing separate method tables. Do not call the shared helper-name inventory a complete operation/spelling inventory. Commit this bounded prerequisite before .1.2.1.
+  Native diagnostic hold (owned; do not classify away): The initial14-case public Get/descriptor/independently loaded generated probe exits0 with all1300 source inputs unchanged. Two surprising values require distinguishing follow-up before taxonomy conclusions: deferred-effects returns ["inside","inside","inside"] for [marker, cb(), marker]; emitted source places the mutable $marker lvalue directly around CodeblockRuntime::invoke. codeblock-generic-with returns null; emitted source binds scoped $value but lowers value() to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:value, with zero reported fallback. Exact raw observations/source are retained in model-inputs/model-run capsules. Search found no matching direct-literal snapshot card; private compiler callback alias rules are a different interface. Determine normative mismatch and exact source location with the public tools; retain controls and assign verified repairs before continuing the operation inventory.
+  Custody progress: Accepted396/full68960 matches actual real cf4dceccd inputs/modes and its actual readonly baseline exits0. Only that live record intersects planned book/map writes; other live6/14 guards stay exact. The conservative1300-input owned authority/test/book superset is retained before inventory commands; this is capture, not full reading or an operation count. Capability README and initial combined ADR retrieval were truncated; bounded relevant scalar/callable sections and ADR0028-0032 are now read, with remaining relevant dependencies pulled as needed. No bound book/fact/map/runtime input has changed.
+  Current limit: No operation count, missing-method count or full reference admission exists. The July4 inventory's present-tense aliases/terminal wording must be checked before any current reuse; no new runtime defect is inferred from that dated text.
+
+  Diagnostic resolution and completion: Authority/model .1.2.0 retains1300 owned inputs;14 descriptor/Get/generated cases include70 neutral scalar fields, and11 distinguishing cases isolate two owned P1 Perl defects. Actual private promotion has report0/strict RED/exact restoration. Current Knowledge1487/1349/10455, all897 list items/248 fields and8387566 bytes fit unchanged limits; complete89-input book and changed-heading control pass. Whole original396/full68960 replays with exact channels and bytes/modes unchanged. Only that accepted claim is frozen at real cf4dceccd; first no-write frontmatter writer failure and separate correction remain retained. No runtime, contract, gate, budget, complete operation inventory, cross-backend or private/parent admission. P1 scalar-evaluation .1.2.3 then scoped-with .1.2.4 precede complete enumeration .1.2.1.
+  Verification: Current readonly source/model publication, exact whole prior replay, strict/private source controls, complete Knowledge and book/heading proof, uniform-binding and composed public selector checks PASS. Normal focused doctrines/history/memory/hooks govern landing.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.3`
+  Status: `pending` / P1 confirmed Perl evaluated-value defect
+  Goal: Preserve early scalar values across later mutating calls in array constructors and callable argument lists.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.0`
+  Reproduce: Retained distinguish cases bare-scalar-across-call, array-helper-across-call and codeblock-arguments. A callback changing marker from before to inside also changes the earlier bare marker argument; scalar-rvalue, saved-binding and registered named-function controls retain before. Both Get and fresh generated source agree.
+  Impact: Sibling evaluation changes already encountered scalar values, making constructor and callable behavior depend on Perl lvalue stack aliasing.
+  Root cause: Actual emitted source places $marker directly around invoke in a Perl list. MethodLowering array_literal and lower_ast_codeblock_variable_call_node join lowered expressions without sequential value temporaries; named-function arguments already use temporaries. Full source/channels precede conclusions in the inventory capsules.
+  Schedule: Immediately after .1.2.0 commits, before complete operation enumeration. This intake creates ownership, not a dirty runtime pivot.
+  Planned tier: `canonical`; evaluated-value/runtime semantics movement.
+  Claim verification: none: Confirmed intake is measured by .1.2.0; declare separate actual RED/GREEN and complete repair inputs at activation.
+  Acceptance: Distinguish scalar evaluation from intentional container aliases and dynamic caller mutations; repair every demonstrated route with precise once/order tests, independent fresh emitted proof and direct consumers. Split new failure families before writes, update book/facts and run canonical candidate proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.4`
+  Status: `pending` / P1 confirmed Perl scoped-callable defect
+  Goal: Make the scoped with value callable inside its attached codeblock without silent null lowering.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.3`
+  Reproduce: cb = {|| return("yes") }; return(cb.with() { return(value()) }) returns null through Get and fresh generated source. Copying value to a named local, calling cb directly, or supplying an explicit callback/value parameter returns yes. Fallback count remains zero in the failing case.
+  Impact: A public scoped binding loses callable behavior and hides unsupported lowering behind null.
+  Root cause: The attached with lowerer emits my $value but lowers its body with the original dependency vocabulary. _codeblock_variable_call_candidate cannot find that scalar-kind name and emits the unsupported-helper sentinel.
+  Schedule: After .1.2.3, before .1.2.1 enumeration.
+  Planned tier: `canonical`; scoped runtime/lowering behavior movement.
+  Claim verification: none: Confirmed intake is measured by .1.2.0; declare complete scoped repair inputs and RED/GREEN at activation.
+  Acceptance: Repair scoped dependency projection with nested scope/restoration, static helper/function precedence, false/null/noncallable and explicit-parameter controls; check actual unsupported-call diagnostics separately. Preserve existing call/with contracts, verify fresh emitted routes and direct consumers, document the fix and run canonical candidate proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1`
+  Status: `pending`
+  Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.4`
+  Planned tier: `focused`; reclassify before public/mechanical movement.
+  Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
+  Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.2`
+  Status: `pending`
+  Goal: Map the complete reconciled operation/spelling population to actual book coverage and proposed canonical per-type homes.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
+  Planned tier: `focused`; reclassify before public/mechanical movement.
+  Claim verification: none: Unactivated coverage mapping; declare complete source/book evidence before measurement.
+  Acceptance: Retain exact current entries/anchors/includes/examples/backend qualifications for every inventory item, mark precise depth/navigation gaps, preserve old anchors and schedule bounded family work. Close .1.2 only after all inventory children agree; independent layout review .1.3 follows. No exhaustive public-reference coverage claim from an inventory closeout.
 
 - ID: `TYPE-REFERENCE-BOOK.1.3`
   Status: `pending`
@@ -178,11 +237,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2` | `pending` | Clean activation: complete source/contract/spelling and book-coverage inventory after verified .1.1. |
-| 2 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 3 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile the owned legacy metadata contradictions from exact history. |
-| 4 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 5 | `TYPE-REFERENCE-BOOK.2` | `pending` | Then implement inventory-backed type-family references and independent .7 closeout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.3` | `pending` | P1 preserve evaluated scalar values across later callbacks; activate from clean .1.2.0. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `pending` | P1 restore callable scoped with value after scalar boundary repair. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
+| 5 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
+| 6 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
+| 7 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
+| 8 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
 
 ## Decisions
 
@@ -198,9 +260,11 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-None requiring director input. Inventory .1.2 activates only after the clean .1.1 commit.
+None requiring director input. .1.2.0 closes the bounded model; confirmed P1 .1.2.3/.1.2.4 block full operation enumeration and are scheduled next.
 
 ## Verification Log
+
+- `2026-10-19` — `.1.2.0`: Authority/model .1.2.0 retains1300 owned inputs;14 descriptor/Get/generated cases include70 neutral scalar fields, and11 distinguishing cases isolate two owned P1 Perl defects. Actual private promotion has report0/strict RED/exact restoration. Current Knowledge1487/1349/10455, all897 list items/248 fields and8387566 bytes fit unchanged limits; complete89-input book and changed-heading control pass. Whole original396/full68960 replays with exact channels and bytes/modes unchanged. Only that accepted claim is frozen at real cf4dceccd; first no-write frontmatter writer failure and separate correction remain retained. No runtime, contract, gate, budget, complete operation inventory, cross-backend or private/parent admission. P1 scalar-evaluation .1.2.3 then scoped-with .1.2.4 precede complete enumeration .1.2.1.
 
 - `2026-10-19` — `.1.1`: TYPE-REFERENCE-BOOK.1.1 corrects the retired tagged-return recipes: exact historical m/ma callbacks splice groups, while current copy recipes have explicit snapshot/identity limits. Seventeen fixed parser/generated payloads, five alternate native-shape REDs and four module-identity REDs pass. Two Toolbox return examples and the complete89-input book/affected-page links pass; the actual worked source matches native execution. Whole prior208/full39111 and first uncommitted355/full60395 records, actual baselines and all inputs remain recoverable. Exact isolated original reader fails its absolute INC predicate; the distinct corrected predicate/full supplied context restores the whole original claim with identical channels. Redundant public42/40 references and executable negative capture sources are resolved without changing gates: exact original producers remain archived data with guarded stubs. Current Knowledge1487/1349/10455, all897 entries/248 fields, 8386601 bytes and map21249 fit unchanged controls. Current readonly publication binds396 inputs/full68960. No runtime, contract, budget, full alias/deep-copy, exhaustive type inventory or private/parent admission changes. Clean activation of .1.2 inventory follows; .8 legacy status repair and deferred metadata QA .13 remain owned.
 
@@ -210,7 +274,7 @@ None requiring director input. Inventory .1.2 activates only after the clean .1.
 
 ## Commit Log
 
-Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Inventory .1.2 remains pending clean activation.
+Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 activates only from clean Git.
 
 ## Changelog
 
@@ -220,3 +284,7 @@ Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.
 - `2026-10-19`: Clean accepted metadata handoff activates .1.1; split stale guidance, full inventory and independent layout review into separately committed leaves. Queue the unconfirmed scalar-format question without redirecting reference work.
 
 - `2026-10-19`: Complete .1.1 with corrected historical flat groups, bounded snapshot guidance, preserved claims/producers, current rendered book and focused proof; hand off cleanly to .1.2.
+
+- `2026-10-19`: Activate .1.2 from clean cf4dceccd; split authority/type model, complete operation/spelling enumeration and book mapping into independently committed children. Current .1.2.0 owns the pre-measurement source population and preservation.
+
+- `2026-10-19`: Complete authority/model prerequisite; schedule both source-isolated P1 repairs before exhaustive operation enumeration.

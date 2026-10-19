@@ -1,0 +1,21 @@
+{
+ "corrected": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-inventory/prepare_docs_final.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "T25seSBhY2NlcHRlZCBtaWdyYXRpb24gY2xhaW0gZnJvemVuIGF0IHJlYWwgR2l0IEJBU0U7IGJvdW5kZWQgbW9kZWwgYW5kMTcgY3VycmVudCByb3V0ZXMgd3JpdHRlbgo="
+ },
+ "first_distinct_recurrence": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-inventory/prepare_docs.py"
+  ],
+  "returncode": 1,
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy90eXBlLXJlZmVyZW5jZS1pbnZlbnRvcnkvcHJlcGFyZV9kb2NzLnB5IiwgbGluZSA4NywgaW4gPG1vZHVsZT4KICAgIGZyb250LCBib2R5ID0gdGV4dC5zcGxpdCgnXG4tLS1cbicsIDEpCiAgICBeXl5eXl5eXl5eXgpWYWx1ZUVycm9yOiBub3QgZW5vdWdoIHZhbHVlcyB0byB1bnBhY2sgKGV4cGVjdGVkIDIsIGdvdCAxKQo=",
+  "stdout_base64": ""
+ },
+ "original_no_write_verified": true
+}
