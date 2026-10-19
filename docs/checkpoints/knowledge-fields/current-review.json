@@ -1,0 +1,54 @@
+{
+ "result": "PASS",
+ "producer_sha256": "bac852eb19184415a7e1d98d876cf396de94c390a1fd78df7182fb6f9c25925d",
+ "oracle_sha256": "ce98a8df95783d967dbe86e8b9a6ae8959600c233e1dd8b330724c8a398c1eb8",
+ "population": {
+  "markdown": 1487,
+  "facts": 1349,
+  "question_keys": 10455,
+  "list_fields": 248,
+  "list_items": 897
+ },
+ "knowledge_bytes": 8386908,
+ "map_lines": 21249,
+ "changed_facts": [
+  "docs/knowledge/finite-engineering-notes-member-0131.md",
+  "docs/knowledge/perl-emitcontext-callback-capture.md",
+  "docs/knowledge/perl-factory-capture-framework.md",
+  "docs/knowledge/perl-legacy-hash-kind-callback.md",
+  "docs/knowledge/perl-match-alias-writability.md",
+  "docs/knowledge/perl-method-assignment-required-capture.md",
+  "docs/knowledge/perl-method-ast-call-capture.md",
+  "docs/knowledge/perl-method-block-component-capture.md",
+  "docs/knowledge/perl-method-default-capture.md",
+  "docs/knowledge/perl-method-trim-capture.md",
+  "docs/knowledge/perl-private-emission-foundation.md",
+  "docs/knowledge/perl-receiver-copy-canonical-selection.md",
+  "docs/knowledge/project-root-evidence-filesystem-modes.md",
+  "docs/knowledge/repo-generated-artifact-cleanup-boundary.md",
+  "docs/knowledge/rust-dependency-warning-baseline.md"
+ ],
+ "book_inputs": 89,
+ "book_controls": 4,
+ "fresh_commands": [
+  {
+   "command": [
+    "bash",
+    "knowledge-map/scripts/gen_knowledge_map.sh"
+   ],
+   "returncode": 0,
+   "stdout_base64": "",
+   "stderr_base64": "a25vd2xlZGdlLW1hcDogd3JvdGUgZ2VuZXJhdGVkLW1hcC5tZCAoMTM0OSBmYWN0cywgMTA0NTUgcXVlc3Rpb24ga2V5cykK"
+  },
+  {
+   "command": [
+    "bash",
+    "knowledge-map/scripts/check_knowledge_map.sh"
+   ],
+   "returncode": 0,
+   "stdout_base64": "",
+   "stderr_base64": "a25vd2xlZGdlLW1hcDogT0sgKGZhY3RzIHZhbGlkLCBpZHMgdW5pcXVlLCBtYXAgaW4gc3luYykK"
+  }
+ ],
+ "scope": "Every current supplied source equals its actual declared original or exact authorized fifteen-card projection. Every897 metadata entry/order/multiplicity and all10455 question rows derive from source headers with an independent code-span decoder. Full current supplied graph is freshly regenerated/checked with complete source guards. All89 current book inputs and four actual source/command/render controls are independently reconstructed. Only .6 mode/revision is historicalized."
+}

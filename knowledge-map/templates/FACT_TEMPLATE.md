@@ -17,6 +17,10 @@ supersedes:                             # optional: id of the fact this replaces
 tags: [topic-a, topic-b]                # optional
 evidence: path/to/file.rs:123; docs/...  # REQUIRED (this OR reverify): what proves it
 reverify: grep -n "Symbol" path/to/file # REQUIRED (this OR evidence): ONE cheap re-check
+# evidence/reverify also accept inline or block lists of nonempty entries.
+# Items appear separately in authored order; question rows link to the full list.
+# Quote an evidence/reverify inline item containing a comma, or use a block list.
+# Metadata commands are never executed or combined by generation/validation.
 ---
 
 State the fact itself here, concisely — the distilled claim, not a narrative. This card is a

@@ -64,6 +64,9 @@ validate_output() {
 
 # --- one awk pass per fact file: parse the YAML front-matter subset, emit TSV rows ---
 # A file participates ONLY if its front-matter has a non-empty `answers:` list.
+# Metadata columns contain their Markdown presentation. Scalars keep their
+# existing code spans; lists keep separate item spans in the fact entry. A
+# question points to that complete list instead of repeating every command.
 # Emits:  Q<TAB>question<TAB>id<TAB>relpath<TAB>date<TAB>reverify   (one per answer)
 #         F<TAB>id<TAB>title<TAB>answers-joined<TAB>date<TAB>status<TAB>evidence<TAB>reverify<TAB>relpath
 extract_one() {
@@ -76,14 +79,18 @@ extract_one() {
       if ($0 ~ /^[ \t]+-[ \t]+/) {
         v=$0; sub(/^[ \t]+-[ \t]+/,"",v); v=strip(v)
         if (curkey=="answers" && v!="") ans[++nans]=v
+        else add_metadata(curkey,v)
         next
       }
       # key: value
       if (match($0, /^[A-Za-z_][A-Za-z0-9_]*:/)) {
         key=substr($0,1,RLENGTH-1); rest=strip(substr($0,RLENGTH+1)); curkey=key
         if (rest ~ /^\[.*\]$/) {                              # inline list
-          inner=substr(rest,2,length(rest)-2); n=split(inner,a,",")
-          for (i=1;i<=n;i++){ vv=strip(a[i]); if (vv!="" && key=="answers") ans[++nans]=vv }
+          inner=substr(rest,2,length(rest)-2)
+          if (key=="answers") {
+            n=split(inner,a,",")
+            for (i=1;i<=n;i++){ vv=strip(a[i]); if (vv!="") ans[++nans]=vv }
+          } else if (key=="evidence" || key=="reverify") metadata_list(inner,key)
           curkey=""
         } else if (rest!="") { vals[key]=rest; curkey="" }   # scalar
         next                                                  # empty value -> expect block list
@@ -93,9 +100,44 @@ extract_one() {
       if (!started || nans==0) exit 0                         # not a KM fact
       id=vals["id"]; if (id=="") id=rel
       joined=""; for (i=1;i<=nans;i++) joined=joined (i>1?" | ":"") ans[i]
-      for (i=1;i<=nans;i++) printf "Q\t%s\t%s\t%s\t%s\t%s\n", ans[i], id, rel, vals["date"], vals["reverify"]
+      reverify=metadata_count["reverify"] ? "[" metadata_count["reverify"] " " \
+        (metadata_count["reverify"]==1 ? "entry" : "entries") "](#" id ")" : display("reverify")
+      for (i=1;i<=nans;i++) printf "Q\t%s\t%s\t%s\t%s\t%s\n", ans[i], id, rel, vals["date"], reverify
       printf "F\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", \
-        id, vals["title"], joined, vals["date"], vals["status"], vals["evidence"], vals["reverify"], rel
+        id, vals["title"], joined, vals["date"], vals["status"], display("evidence"), display("reverify"), rel
+    }
+    function add_metadata(key,value) {
+      if ((key!="evidence" && key!="reverify") || value=="") return
+      metadata[key]=metadata[key] (metadata_count[key] ? " · " : "") code_span(value)
+      metadata_count[key]++
+    }
+    function display(key) {
+      return metadata_count[key] ? metadata[key] : (vals[key]!="" ? "`" vals[key] "`" : "")
+    }
+    function code_span(value, fence,pad,first,last) {
+      fence="`"; while (index(value,fence)) fence=fence "`"
+      first=substr(value,1,1); last=substr(value,length(value),1)
+      pad=(first=="`" || last=="`" || (first==" " && last==" " && value !~ /^ +$/)) ? " " : ""
+      return fence pad value pad fence
+    }
+    function metadata_list(value,key, i,start,quoted,escaped,seen,ch) {
+      # Only a double-quoted item protects a comma. Preserve the same outer
+      # quote treatment as scalar metadata, including literal escape bytes.
+      start=1; quoted=0; escaped=0; seen=0
+      for (i=1;i<=length(value);i++) {
+        ch=substr(value,i,1)
+        if (quoted) {
+          if (escaped) escaped=0
+          else if (ch=="\\") escaped=1
+          else if (ch=="\"") quoted=0
+        } else if (ch==",") {
+          add_metadata(key,strip(substr(value,start,i-start)))
+          start=i+1; seen=0
+        } else if (!seen && ch !~ /[ \t]/) {
+          seen=1; if (ch=="\"") quoted=1
+        }
+      }
+      add_metadata(key,strip(substr(value,start)))
     }
     function strip(s) { gsub(/^[ \t]+/,"",s); gsub(/[ \t]+$/,"",s); gsub(/^"/,"",s); gsub(/"$/,"",s); return s }
   ' "$2"
@@ -128,7 +170,7 @@ validate_output "$output_dir"
     printf '%s\n' "$rows" | awk -F'\t' '$1=="Q"{
       line="- \"" $2 "\" -> [" $3 "](" $4 ")"
       if ($5!="") line=line " · " $5
-      if ($6!="") line=line " · reverify: `" $6 "`"
+      if ($6!="") line=line " · reverify: " $6
       print line
     }' | LC_ALL=C sort -u
   else
@@ -137,11 +179,11 @@ validate_output "$output_dir"
   printf '\n## Facts (by id)\n'
   printf '%s\n' "$rows" | awk -F'\t' '$1=="F"' | LC_ALL=C sort -t"$TAB" -k2,2 | awk -F'\t' '{
     printf "\n### %s\n", $2
-    if ($3!="") printf "_%s_\n\n", $3
+    if ($3!="") printf "_%s_\n", $3
     printf "- **answers:** %s\n", $4
     printf "- **date:** %s · **status:** %s\n", ($5!=""?$5:"—"), ($6!=""?$6:"current")
-    if ($7!="") printf "- **evidence:** `%s`\n", $7
-    if ($8!="") printf "- **reverify:** `%s`\n", $8
+    if ($7!="") printf "- **evidence:** %s\n", $7
+    if ($8!="") printf "- **reverify:** %s\n", $8
     printf "- **source:** [`%s`](%s)\n", $9, $9
   }'
 } > "$KM_OUTPUT"

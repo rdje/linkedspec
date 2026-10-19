@@ -17,7 +17,7 @@ date: 2026-10-12
 status: optional AST assignment isolation and iterator repair verified; six-role proof remains historical
 tags: [perl, actionir, ast, methods, callbacks, dependencies, aliases, identity]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete assertion names:18 original isolation REDs,677 original passing controls/all695 current GREEN. Six roles/18 native-current callback ledgers,44 bounded branch ledgers, cold12 and three effective source faults. Supplied41/160, five actual reviewer REDs/restoration, original-binding RED/restoration and full book57+32/three controls. All280 original hash-key live bindings remain historical at2e9e5443e."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/pipeline-scope/publish.py. Prior:64b66167c."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/knowledge-fields/publish.py. Prior:f7e8b292f."
 ---
 
 Only the required resolver return in _lower_ast_call_statement changes. The

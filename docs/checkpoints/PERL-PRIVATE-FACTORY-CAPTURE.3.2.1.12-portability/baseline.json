@@ -1,0 +1,15 @@
+{
+ "all196_bytes_modes_unchanged": true,
+ "command": {
+  "command": [
+   "python3",
+   "docs/checkpoints/knowledge-fields/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "TWV0YWRhdGEgcHVibGljYXRpb24gUEFTUzogMTk2IGlucHV0czsgMzU5MjIgYnl0ZXM7MTQ4Ny8xMzQ5LzEwNDU1Ozg5Ny8yNDgK"
+ },
+ "original_sha256": "a5dca68911abc51bcebaf03d17c3ac60132ccf377544fa471a7f895d91a7d16b",
+ "result": "PASS",
+ "whole_claim_bytes_mode_unchanged": true
+}

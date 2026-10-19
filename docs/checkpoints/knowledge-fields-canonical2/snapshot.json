@@ -1,0 +1,17 @@
+{
+ "claim_bytes": 39111,
+ "encoding": "gzip-json",
+ "input_count": 208,
+ "log_bytes": 37384633,
+ "packed_bytes": 3197250,
+ "packed_sha256": "928cdcb14755b494bf0498a09e4fb514fd97d4826f7579bc723245d2415d4cdc",
+ "parts": [
+  {
+   "bytes": 3197250,
+   "path": "docs/checkpoints/knowledge-fields-canonical2/candidate-1.part",
+   "sha256": "928cdcb14755b494bf0498a09e4fb514fd97d4826f7579bc723245d2415d4cdc"
+  }
+ ],
+ "result": "CAPTURED",
+ "staged_files": 121
+}

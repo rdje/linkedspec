@@ -109,6 +109,23 @@ required fields, list association, unique IDs and synchronization. A freshly
 generated map alone does not prove that its source headers are valid. This list
 association check does not constitute a complete YAML parser or field-type validator.
 
+### Evidence and reverify values
+
+Both fields support a scalar, an inline list, or a block list. Nonempty list items
+appear in authored order, including repeated values, as separate code spans in
+the fact entry. Each question keeps its existing inline scalar command or links
+to the complete reverify list with an `N entries` label. Metadata is displayed;
+generation and validation never execute it or combine commands.
+
+For evidence/reverify inline lists, a double-quoted item can contain a comma or
+escaped quote. Existing outer-quote/literal-escape treatment is preserved. Block
+lists are convenient for complex commands. The existing answers-list restriction
+still applies: questions containing commas use the block form.
+
+Prefer one cheap re-check. When several commands or instructions are needed, keep
+them as separate authored entries and follow their stated context. List syntax
+does not make them a shell pipeline or an automatic execution sequence.
+
 ---
 
 ## 3. The six properties LLMs need (why the format is shaped this way)

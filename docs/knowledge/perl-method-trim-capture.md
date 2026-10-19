@@ -25,7 +25,7 @@ date: 2026-10-12
 status: inline required trim and seven optional kind sites isolated; two optional AST sites and two tracking predicates isolated; all seventeen original inventory ingress sites isolated; independent owners remain open
 tags: [perl, actionir, methods, callbacks, dependencies, identity, contexts]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.0 retains same-fixture255 complete assertions: eleven original semantic isolation REDs, other244 original controls pass, all255 current GREEN. Native15/caller9 JSON ledgers match; thirteen effective source faults and27 suites in146 supplied files pass. Cold5, evidence4, actual original-binding RED/restoration and complete book57/two controls pass. All282 original bindings stay historical. Partial18 captures and original matcher instrument remain; only two assertion labels change before unchanged-input recapture. Inline-required .3.2.1.1 retains native213/6 outcomes/33 guards/2 authority/3 cold, paired298/3 original isolation REDs/295 controls/all298 GREEN, six faults failing3/1/2/14/9/4, supplied68/215/13958 and full book89/3; original339/full78574 inventory publication and baseline stay exact."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/pipeline-scope/publish.py. Prior:64b66167c."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/knowledge-fields/publish.py. Prior:f7e8b292f."
 ---
 
 MethodLowering's private _bind_emission_dependency retains the actual callback in

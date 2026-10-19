@@ -1,0 +1,1278 @@
+{
+ "result": "PASS",
+ "producer_sha256": "dae4c95973cd8678180fd45f5bd2d8b9668b2bcdb83018c9ce47ad78c3bc1383",
+ "restored": {
+  "cards": 248,
+  "fields": 248,
+  "items": 897
+ },
+ "scalar_fields_exact": 2441,
+ "facts": 1349,
+ "question_rows": 10453,
+ "markdown": 1487,
+ "original80_exact": true,
+ "checked_fields": [
+  {
+   "path": "docs/knowledge/bounded-change-notes-history-contract.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/bounded-composed-objective-selection.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/bounded-live-document-store-contract.md",
+   "key": "reverify",
+   "items": 12
+  },
+  {
+   "path": "docs/knowledge/change-history-thirtieth-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/change-history-twenty-fifth-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/change-history-twenty-fourth-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/change-history-twenty-second-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/change-history-twenty-seventh-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/change-history-twenty-sixth-member-capacity.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/composed-objective-neutral-governance.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-component-gate-sdk-compatibility.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/dart-lossless-child-carrier-readiness.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/dart-primary-cli-trace-overflow.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/dart-progressive-span-dispatch-admission.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/dart-progressive-span-dispatch-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-progressive-span-dispatch-carriers.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/dart-progressive-span-dispatch-dormant-red.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/dart-public-facade-startup-reading.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/dart-reading-capacity-controls.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-recognition-effect-integration-gap.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/dart-semantic-runtime-observation-authority-map.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-staged-ast-enrichment-dormant-red.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-staged-ast-enrichment-marker-provenance.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/dart-staged-provenance-type-validation-gap.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/dart-staged-resource-boundary-gaps.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/dart-startup-reading-coverage.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/diagnosis-evidence-polyglot-path-gap.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/document-history-rollover-eof-separator.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/future-parity-task-partition-capacity.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/future-parity-task-partition-contract.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/gdcheck-signed-tolerance-duplicate-default-defects.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/general-staged-ast-current-boundary.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/general-staged-ast-enrichment-neutral-contract.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/general-staged-ast-enrichment-recomposition.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/grouped-edge-book-child-return-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/historical-objective-audit-input-recovery.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/historical-selector-diagnostic-classification.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/inter-match-gap-dart-implementation-plan.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/inter-match-gap-neutral-closeout.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/inter-match-gap-recurring-governance.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/julia-callable-selector-validation-gap.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/julia-contract-consumer-reading.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/julia-evidence-capacity-admission.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/julia-facade-action-model-reading.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/julia-function-projection-metadata-gaps.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/julia-lossless-child-carrier-readiness.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/julia-package-readme-reading.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-progressive-span-dispatch-admission.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/julia-progressive-span-dispatch-authority.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-progressive-span-dispatch-carriers.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/julia-progressive-span-dispatch-dormant-red.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-progressive-span-dispatch-recomposition.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/julia-reading-history-capacity-admission.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-reading-history-capacity-proposal.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-recognition-effect-integration-gap.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-semantic-runtime-observation-authority-map.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/julia-semantic-runtime-observation-derivation.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/julia-semantic-runtime-observation-direct-capture.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/julia-semantic-runtime-observation-generated-routes.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-staged-ast-enrichment-dormant-red.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/julia-startup-reading-coverage.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/language-closure-definition-reconciliation.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/language-closure-scoped-policy-freeze.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lossless-child-readiness-authority-plan.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-compiled-corpus-facade-reading.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-generated-mcp-first-byte-range-reading.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/lua-generated-mcp-payload-completion-reading.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-interpreter-callable-reading-and-child-false-gap.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-interpreter-json-reading-and-option-table-gap.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-lossless-child-carrier-readiness.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-mcp-decoded-server.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lua-mcp-implementation-admission.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-native-mcp-server-plan.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lua-native-readme-and-action-ast-reading.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-parser-authority-reading-and-member-omission.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-progressive-span-dispatch-admission.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-progressive-span-dispatch-carriers.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/lua-progressive-span-dispatch-recomposition.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/lua-reading-evidence-capacity-admission.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-reading-evidence-capacity-proposal.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-readme-reading-and-status-drift.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-introspection-admission-plan.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-introspection-admission.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-projector-reading-and-source-ownership-gaps.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-query-observation-reading-and-evidence-gaps.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-runtime-observation-authority-map.md",
+   "key": "reverify",
+   "items": 12
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-runtime-observation-derivation.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-runtime-observation-direct-capture.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-semantic-runtime-observation-generated-routes.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-dormant-red.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-recomposition.md",
+   "key": "reverify",
+   "items": 8
+  },
+  {
+   "path": "docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/lua-startup-reading-coverage.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md",
+   "key": "reverify",
+   "items": 7
+  },
+  {
+   "path": "docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/mcp-all-twenty-transport-blocker.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/mcp-implementation-admission-ledger.md",
+   "key": "reverify",
+   "items": 21
+  },
+  {
+   "path": "docs/knowledge/mcp-recurring-six-runtime-plan.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-all-producer-source-acceptance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-all-producer-source-composition.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-array-receiver-required-capture.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-basic-family-mixed-source-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-basic-regex-source-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-basic-statement-event-source-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-basic-statement-source-frames.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-boundary-call-lexical-serialization.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-callable-grouped-pattern-membership.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-codeblock-push-composition.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-compiler-source-membership.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-dedicated-family-source-acceptance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-dedicated-producer-source-diagnosis.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-dynamic-codeblock-receiver-guard-gap.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-empty-ast-trim-span.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-executable-source-membership.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-flow-recursive-source-provenance.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/perl-helper-scan-occurrence-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-helper-source-provenance-channel.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-lazy-trace-exception-state-drift.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-anonymous-capture-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-call-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-cursor-input-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-entry-match-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-family-source-acceptance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-mark-control-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-named-capture-source-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-legacy-source-producer-partition.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-lossless-child-composition-readiness.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-lossless-segmentation-readiness.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-mapped-replacement-nested-continuation.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-mcp-decoded-server.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/perl-method-ast-array-end-capture.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-native-mcp-server-plan.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-pipeline-regex-source-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-pipeline-source-provenance-diagnosis.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-pipeline-split-source-metadata.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-pipeline-statement-source-provenance.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-ast-constructions.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-ast-input-frames.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-input-authority-selection.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-method-argument-authority.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-method-input-captures.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-private-original-occurrence-handoff.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-private-statement-frame-channel.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-progressive-annotation-statement-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-progressive-span-dispatch-admission.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/perl-progressive-span-dispatch-authority.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/perl-progressive-span-dispatch-carriers.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-quoted-action-source-ownership.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-quoted-boundary-labels.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-quoted-primitive-rewrite-event-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-recognition-annotation-statement-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-recognition-token-lexical-order-drift.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-residual-lowering-producer-selection.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-residual-replacement-source-frames.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-source-membership-callable-signature-precedence.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-staged-annotation-statement-origins.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/perl-staged-ast-enrichment-carriers-admission.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-staged-ast-enrichment-current-depth-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/perl-staged-ast-enrichment-dormant-red.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-staged-ast-enrichment-marker-provenance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-typed-error-json-observation-boundary.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/phase0-compiler-scanner-mock-historical-inverse.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/portable-parse-job-public-authoring.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/private-consumer-artifact-binding-audit.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/progressive-span-dispatch-audit-plan.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/progressive-span-dispatch-public-no-drift.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/progressive-span-dispatch-recurring-gate.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/project-data-liveness-permission-denial.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/ptchange-spaced-input-shell-read-defect.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/python-replay-traceback-source-binding.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/readme-debt-retirement-governance.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/readme-debt-transition-owner-commit-boundary.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/readme-routing-pressure-closure-plan.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/readme-stability-policy.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/readme-test-input-layout-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/recognition-transaction-public-closeout.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/recognition-transaction-recurring-gate.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/recursive-observation-public-no-drift.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/recursive-observation-recurring-gate.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-bare-variable-newline-consumption.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/rust-coalesce-evaluation-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-generated-recognition-parse-adapter-gap.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/rust-generated-source-literal-encoding-gap.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/rust-lossless-child-carrier-readiness.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/rust-progressive-span-dispatch-admission.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-progressive-span-dispatch-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-progressive-span-dispatch-carriers.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-progressive-span-dispatch-dormant-red.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-recognition-token-variable-use-gap.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-regex-input-context-drift.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-semantic-repeated-binding-identity-gap.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-staged-ast-enrichment-carriers-admission.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/rust-staged-ast-enrichment-dormant-red.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-staged-ast-enrichment-marker-provenance.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/rust-staged-call-counter-saturation.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/rust-staged-returned-marker-validation-gaps.md",
+   "key": "reverify",
+   "items": 1
+  },
+  {
+   "path": "docs/knowledge/rust-typed-source-authority-materialization.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/scalar-numeric-unicode-digit-oracle-drift.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/scanner-rule-family-architecture.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/selected-consumer-fixed-input-capsule.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/semantic-call-signature-and-container-projection-gaps.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/semantic-grouped-edge-source-correlation-gaps.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/semantic-introspection-public-no-drift.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/semantic-introspection-recurring-gate-plan.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/semantic-introspection-recurring-gate.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/semantic-rule-calls-empty-function-gate.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/spec-language-closure-contract-plan.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/staged-ast-enrichment-recurring-gate.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/staged-consumer-current-projection-lockstep.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/staged-target-preparation-gaps.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/startup-codebase-reading-inventory.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/startup-public-teaching-checker-blind-spots.md",
+   "key": "reverify",
+   "items": 6
+  },
+  {
+   "path": "docs/knowledge/startup-task-chronology-compaction.md",
+   "key": "reverify",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/trace-emitcontext-owner-bridge-decisions.md",
+   "key": "evidence",
+   "items": 3
+  },
+  {
+   "path": "docs/knowledge/typed-authoring-model-public-no-drift.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/typed-lossless-gap-composition.md",
+   "key": "reverify",
+   "items": 4
+  },
+  {
+   "path": "docs/knowledge/typed-path-mutation-result-checker-root-kind.md",
+   "key": "reverify",
+   "items": 2
+  },
+  {
+   "path": "docs/knowledge/typed-source-location-recurring-gate.md",
+   "key": "reverify",
+   "items": 5
+  },
+  {
+   "path": "docs/knowledge/verification-cadence-policy.md",
+   "key": "reverify",
+   "items": 4
+  }
+ ],
+ "fresh_commands": [
+  {
+   "command": [
+    "bash",
+    "knowledge-map/scripts/gen_knowledge_map.sh"
+   ],
+   "returncode": 0,
+   "stdout_base64": "",
+   "stderr_base64": "a25vd2xlZGdlLW1hcDogd3JvdGUgZ2VuZXJhdGVkLW1hcC5tZCAoMTM0OSBmYWN0cywgMTA0NTMgcXVlc3Rpb24ga2V5cykK"
+  },
+  {
+   "command": [
+    "bash",
+    "knowledge-map/scripts/check_knowledge_map.sh"
+   ],
+   "returncode": 0,
+   "stdout_base64": "",
+   "stderr_base64": "a25vd2xlZGdlLW1hcDogT0sgKGZhY3RzIHZhbGlkLCBpZHMgdW5pcXVlLCBtYXAgaW4gc3luYykK"
+  }
+ ],
+ "supplied_source_count": 1494,
+ "scope": "Every897 original item is independently decoded from actual generated CommonMark code spans and compared in authored order/multiplicity with captured raw source. All248 fields, every scalar/absent field and all10453 question rows are checked. All nonmetadata fact bytes and original80 assertions remain exact. Actual generator/checker freshly re-derive the complete supplied1487-source graph using repaired source; no later live historical fact body is consulted."
+}

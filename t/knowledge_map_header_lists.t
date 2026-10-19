@@ -78,6 +78,36 @@ for my $row (@{$census->{rows}}) {
  my (undef, undef, $filename) = File::Spec->splitpath($row->{path});
  push @cases, ['historical-'.$filename, $text, 'orphan'];
 }
+my $marker = File::Spec->catfile($scratch, 'metadata-must-not-execute');
+my $relative_marker = File::Spec->abs2rel($marker, $root);
+my %projection = (
+ 'scalar' => {reverify => ['printf ok']},
+ 'quoted-scalar' => {reverify => ['printf ok']},
+ 'block-evidence' => {evidence => ['first.md', 'second.md']},
+ 'block-reverify' => {reverify => ['printf ok']},
+ 'inline-evidence' => {evidence => ['first.md', 'second.md']},
+ 'inline-reverify' => {reverify => ['printf first', 'printf second']},
+ 'multiple-reverify' => {reverify => ['printf first', 'printf second']},
+ 'quoted-inline-comma' => {evidence => ['first, second.md', 'third.md']},
+ 'quoted-inline-escape' => {reverify => ['printf \\"one, two\\"', 'printf second']},
+ 'unicode-block' => {evidence => ['source, Unicode β.md', 'second.md']},
+ 'backtick-block' => {reverify => ['printf `first`', 'printf second']},
+ 'repeated-zero-items' => {evidence => ['0', '0']},
+ 'metadata-not-executed' => {reverify => ["touch $relative_marker"]},
+ 'unknown-list-is-not-proof' => {evidence => ['source.md']},
+);
+my %list_projection = map { $_ => 1 } grep { $_ ne 'scalar' && $_ ne 'quoted-scalar' && $_ ne 'unknown-list-is-not-proof' } keys %projection;
+push @cases,
+ ['inline-evidence', $base.$answers."evidence: [first.md, second.md]\n", 'valid'],
+ ['inline-reverify', $base.$answers."reverify: [printf first, printf second]\n", 'valid'],
+ ['multiple-reverify', $base.$answers."reverify:\n  - printf first\n  - printf second\n", 'valid'],
+ ['quoted-inline-comma', $base.$answers."evidence: [\"first, second.md\", third.md]\n", 'valid'],
+ ['quoted-inline-escape', $base.$answers.'reverify: ["printf \\"one, two\\"", printf second]'."\n", 'valid'],
+ ['unicode-block', $base.$answers."evidence:\n  - \"source, Unicode β.md\"\n  - second.md\n", 'valid'],
+ ['backtick-block', $base.$answers."reverify:\n  - printf `first`\n  - printf second\n", 'valid'],
+ ['repeated-zero-items', $base.$answers."evidence: [0, 0]\n", 'valid'],
+ ['metadata-not-executed', $base.$answers."reverify: [touch $relative_marker]\n", 'valid'],
+ ['unknown-list-is-not-proof', $base.$answers."tags:\n  - must-not-appear-as-proof\nevidence: source.md\n", 'valid'];
 my @rows;
 for my $index (0 .. $#cases) {
  my ($name, $header, $kind) = @{$cases[$index]};
@@ -88,8 +118,13 @@ for my $index (0 .. $#cases) {
  local $ENV{KM_OUTPUT} = File::Spec->abs2rel(File::Spec->catfile($scratch, "map-$index.md"), $root);
  my $generate = command('bash', 'knowledge-map/scripts/gen_knowledge_map.sh');
  my $check = command('bash', 'knowledge-map/scripts/check_knowledge_map.sh');
+ open my $mapping, '<:raw', $ENV{KM_OUTPUT} or die "read generated map: $!";
+ my $map_bytes = do { local $/; <$mapping> };
+ close $mapping or die "close generated map: $!";
  push @rows, {name => $name, kind => $kind, header_base64 => encode_base64($header, ''),
-   generate => $generate, check => $check};
+   generate => $generate, check => $check, map_base64 => encode_base64($map_bytes, ''),
+   projection_base64 => {map { my $key = $_; ($key => [map { encode_base64($_, '') } @{$projection{$name}{$key}}]) } keys %{$projection{$name} || {}}},
+   list_projection => $list_projection{$name} ? 1 : 0};
 }
 if ($observe) {
  print $json->encode({rows => \@rows}), "\n";
@@ -110,4 +145,35 @@ for my $row (@rows) {
    "$name reports the distinguishing reason");
  }
 }
+for my $row (@rows) {
+ my $mapping = decode_base64($row->{map_base64});
+ for my $key (sort keys %{$row->{projection_base64}}) {
+  my @values = map { decode_base64($_) } @{$row->{projection_base64}{$key}};
+  my ($line) = grep { /^- \*\*\Q$key\E:\*\*/ } split /\n/, $mapping;
+  Test::More::ok(defined($line), "$row->{name} projects $key metadata into its fact");
+  my $position = 0;
+  for my $index (0 .. $#values) {
+   my $found = defined($line) ? index($line, $values[$index], $position) : -1;
+   Test::More::ok($found >= 0, "$row->{name} preserves $key item ".($index + 1).' in authored order');
+   $position = $found + length($values[$index]) if $found >= 0;
+  }
+  if ($key eq 'reverify') {
+   my @questions = grep { /^- ".*" -> \[sample\]/ } split /\n/, $mapping;
+   Test::More::is(scalar(@questions), 2, "$row->{name} keeps both question routes");
+   my $expected = $row->{list_projection}
+    ? '['.scalar(@values).' '.(@values == 1 ? 'entry' : 'entries').'](#sample)'
+    : '`'.$values[0].'`';
+   Test::More::ok(@questions == 2 && !(grep { !/ · reverify: \Q$expected\E$/ } @questions),
+    "$row->{name} gives each question its scalar command or complete fact-list pointer");
+  }
+ }
+ if ($row->{name} eq 'backtick-block') {
+  Test::More::like($mapping, qr/^- \*\*reverify:\*\* `` printf `first` `` · `printf second`$/m,
+   'backticks in a list item remain data inside a correctly delimited code span');
+ }
+ if ($row->{name} eq 'unknown-list-is-not-proof') {
+  Test::More::unlike($mapping, qr/must-not-appear-as-proof/, 'unrelated list metadata is not evidence or reverify output');
+ }
+}
+Test::More::ok(!-e $marker, 'generation and validation never execute metadata commands');
 Test::More::done_testing();

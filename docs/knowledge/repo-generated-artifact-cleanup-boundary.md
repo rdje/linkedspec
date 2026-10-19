@@ -28,6 +28,8 @@ answers:
   - "which live claims must be preserved before changing a shared book chapter"
   - "why was the October10 hygiene claim preserved during ADR0133"
   - "do historical checked claims need a tracked producer input"
+  - "why does accepted block metadata disappear from the Knowledge Map"
+  - "how are evidence and reverify lists displayed without executing commands"
 date: 2026-10-12
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
@@ -40,7 +42,7 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/pipeline-scope/publish.py. Prior:64b66167c."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/knowledge-fields/publish.py. Prior:f7e8b292f."
 ---
 
 # Shared publication inputs and historical provenance
@@ -191,7 +193,7 @@ reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints
 
 Knowledge header list association is enforced by knowledge-map/scripts/check_knowledge_map.sh. Only an empty-value key owns following block-list items; scalar and inline values close that association. Orphan lines reject even when the generated map is synchronized. Malformed scalar answers plus detached items remain visible to validation. The public t/knowledge_map_header_lists.t fixture covers the original affected headers, valid forms and precise denial reasons; canonical CI runs it. The generator remains a metadata projection, and this repair does not admit a complete YAML grammar or field-type validator. The prior .8 runtime publication and original fact bodies remain recoverable at328b11c5.
 
-Valid block-evidence and block-reverify inputs are accepted by the original checker but omitted from generated metadata. Two exact public generator reproductions and their original acceptance channels are retained in docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-metadata-lists.json. P3 .3.2.1.12 owns the field/projection contract and current affected-population census after the factory/pipeline activity, before TYPE-REFERENCE-BOOK. No full population count or remedy is inferred from these two named cases.
+At the .11 boundary, two named public reproductions showed accepted block evidence/reverify disappearing from the map; their original source/channels remain in docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11-metadata-lists.json. The October19 .12 capture independently checks all1487 source documents/1349 facts: the old generator omits897 entries in248 nonempty list fields while the checker accepts them. The repaired generator preserves authored order and duplicates, uses separate code spans, and links each reverify question to its complete fact list. Scalar field bytes remain unchanged. Commands are displayed, never executed or combined. A quoted evidence/reverify inline item protects commas; complex values can use block lists. The checker retains its documented presence/list association limits, without a full YAML/type-validation admission. Complete source-bound observations, failed instruments, compact-format/render proof and current readonly verification belong to docs/checkpoints/knowledge-fields/.
 
 
 # First uncommitted Knowledge gate candidate

@@ -1,0 +1,26 @@
+{
+ "all_supplied_bytes_modes_unchanged": true,
+ "command": {
+  "command": [
+   "python3",
+   "docs/checkpoints/knowledge-fields/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "TWV0YWRhdGEgcHVibGljYXRpb24gUEFTUzogMTk2IGlucHV0czsgMzU5MjIgYnl0ZXM7MTQ4Ny8xMzQ5LzEwNDU1Ozg5Ny8yNDgK"
+ },
+ "no_unexpected_source_files": true,
+ "original_input_count": 196,
+ "original_sha256": "a5dca68911abc51bcebaf03d17c3ac60132ccf377544fa471a7f895d91a7d16b",
+ "reader_sha256": "6a7bc75fcde3c49790bb44bd65cb6baaaaa6cce9951d0e3c5238247b39bf0fc9",
+ "replay_producer_sha256": "51ea9809497f5802afab3f4c9172caaddf912a7f95439078960da13c8aeaa79b",
+ "result": "PASS",
+ "runtime_temporary_files": {
+  ".linkedspec-data/tmp/xcrun_db": {
+   "base64": "WFIxTAIAAAC7AQAAAAAAAAAAAAAAAAAAYgAAAAAAAAAtAQAAAAAAAIsBAAAAAAAAL0xpYnJhcnkvRGV2ZWxvcGVyL0NvbW1hbmRMaW5lVG9vbHMvU0RLcy9NYWNPU1guc2RrfC9MaWJyYXJ5L0RldmVsb3Blci9Db21tYW5kTGluZVRvb2xzfDxtYW5wYXRoPgAvTGlicmFyeS9EZXZlbG9wZXIvQ29tbWFuZExpbmVUb29scy9TREtzL01hY09TWC5zZGsvdXNyL3NoYXJlL21hbjovTGlicmFyeS9EZXZlbG9wZXIvQ29tbWFuZExpbmVUb29scy91c3Ivc2hhcmUvbWFuOi9MaWJyYXJ5L0RldmVsb3Blci9Db21tYW5kTGluZVRvb2xzL1Rvb2xjaGFpbnMvWGNvZGVEZWZhdWx0LnhjdG9vbGNoYWluL3Vzci9zaGFyZS9tYW46AGdpdHwvTGlicmFyeS9EZXZlbG9wZXIvQ29tbWFuZExpbmVUb29scy9TREtzL01hY09TWC5zZGt8fC9MaWJyYXJ5L0RldmVsb3Blci9Db21tYW5kTGluZVRvb2xzfAAvTGlicmFyeS9EZXZlbG9wZXIvQ29tbWFuZExpbmVUb29scy91c3IvYmluL2dpdAA=",
+   "mode": 384,
+   "sha256": "4d62589acad172d2e1d4c689d2fb2a0c7381614fdf5df35a8bb7cc8fd51b1f64"
+  }
+ },
+ "whole_claim_bytes": 35922
+}

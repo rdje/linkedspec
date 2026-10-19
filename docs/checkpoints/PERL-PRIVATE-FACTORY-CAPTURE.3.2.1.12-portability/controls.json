@@ -1,0 +1,89 @@
+{
+ "baseline": {
+  "command": [
+   "python3",
+   "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+   "--transport-only"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "T3JpZ2luYWwxOTYgdHJhbnNwb3J0IFBBU1M6IGV4YWN0IGRyYWZ0O2RlY29kZWQgcmVjb3JkIGFuZCBpbnZlcnNlIGJ5dGVzIHVuY2hhbmdlZAo="
+ },
+ "inputs_sha256": "abbc5838c94ad407112e615c9496f17bfe5aad233b570fcb9e8058bd4e8764c1",
+ "producer_sha256": "a8f532e93542932966cbe795f383d126202e3e7a9f77cf9046022dbf06d352fe",
+ "result": "PASS",
+ "rows": [
+  {
+   "all_bytes_modes_restored": true,
+   "name": "unescaped-original-view",
+   "negative": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 1,
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5HWEZiTHkvdG1wL2tub3dsZWRnZS1maWVsZHMtdHJhbnNwb3J0LWNvbnRyb2xzLXh2MDluenJzL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4xMi1wb3J0YWJpbGl0eS9yZXZpZXcucHkiLCBsaW5lIDEzMSwgaW4gPG1vZHVsZT4KICAgIHRyYW5zcG9ydChyZWNvcmQpCiAgICB+fn5+fn5+fn5eXl5eXl5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5HWEZiTHkvdG1wL2tub3dsZWRnZS1maWVsZHMtdHJhbnNwb3J0LWNvbnRyb2xzLXh2MDluenJzL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4xMi1wb3J0YWJpbGl0eS9yZXZpZXcucHkiLCBsaW5lIDQyLCBpbiB0cmFuc3BvcnQKICAgIGFzc2VydCB2aWV3ID09IHJhdy5yZXBsYWNlKGInLycsIGInXFwvJyksICdleGFjdCBzdGFuZGFyZCBzb2xpZHVzIHRyYW5zcG9ydCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGV4YWN0IHN0YW5kYXJkIHNvbGlkdXMgdHJhbnNwb3J0Cg==",
+    "stdout_base64": ""
+   },
+   "restored": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 0,
+    "stderr_base64": "",
+    "stdout_base64": "T3JpZ2luYWwxOTYgdHJhbnNwb3J0IFBBU1M6IGV4YWN0IGRyYWZ0O2RlY29kZWQgcmVjb3JkIGFuZCBpbnZlcnNlIGJ5dGVzIHVuY2hhbmdlZAo="
+   }
+  },
+  {
+   "all_bytes_modes_restored": true,
+   "name": "changed-decoded-destination",
+   "negative": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 1,
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5HWEZiTHkvdG1wL2tub3dsZWRnZS1maWVsZHMtdHJhbnNwb3J0LWNvbnRyb2xzLXh2MDluenJzL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4xMi1wb3J0YWJpbGl0eS9yZXZpZXcucHkiLCBsaW5lIDEzMSwgaW4gPG1vZHVsZT4KICAgIHRyYW5zcG9ydChyZWNvcmQpCiAgICB+fn5+fn5+fn5eXl5eXl5eXgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5HWEZiTHkvdG1wL2tub3dsZWRnZS1maWVsZHMtdHJhbnNwb3J0LWNvbnRyb2xzLXh2MDluenJzL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4xMi1wb3J0YWJpbGl0eS9yZXZpZXcucHkiLCBsaW5lIDQyLCBpbiB0cmFuc3BvcnQKICAgIGFzc2VydCB2aWV3ID09IHJhdy5yZXBsYWNlKGInLycsIGInXFwvJyksICdleGFjdCBzdGFuZGFyZCBzb2xpZHVzIHRyYW5zcG9ydCcKICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4KQXNzZXJ0aW9uRXJyb3I6IGV4YWN0IHN0YW5kYXJkIHNvbGlkdXMgdHJhbnNwb3J0Cg==",
+    "stdout_base64": ""
+   },
+   "restored": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 0,
+    "stderr_base64": "",
+    "stdout_base64": "T3JpZ2luYWwxOTYgdHJhbnNwb3J0IFBBU1M6IGV4YWN0IGRyYWZ0O2RlY29kZWQgcmVjb3JkIGFuZCBpbnZlcnNlIGJ5dGVzIHVuY2hhbmdlZAo="
+   }
+  },
+  {
+   "all_bytes_modes_restored": true,
+   "name": "coherent-original-input-omission",
+   "negative": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 1,
+    "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvLmxpbmtlZHNwZWMtZGF0YS9zY3JhdGNoL3J1bnMvY2hlY2tvdXQtMTc4NTA4ODcyNS05MzQ1OC02MTI3OTc5Ni9ydW5fcHl0aG9uX3Byb2plY3RfZGF0YS5zaC5HWEZiTHkvdG1wL2tub3dsZWRnZS1maWVsZHMtdHJhbnNwb3J0LWNvbnRyb2xzLXh2MDluenJzL2RvY3MvY2hlY2twb2ludHMvUEVSTC1QUklWQVRFLUZBQ1RPUlktQ0FQVFVSRS4zLjIuMS4xMi1wb3J0YWJpbGl0eS9yZXZpZXcucHkiLCBsaW5lIDEzMCwgaW4gPG1vZHVsZT4KICAgIHJlY29yZCA9IG9yaWdpbmFsKCkKICBGaWxlICIvVm9sdW1lcy9TU0QvRG9jdW1lbnRzL2dpdGh1Yi9saW5rZWRzcGVjLy5saW5rZWRzcGVjLWRhdGEvc2NyYXRjaC9ydW5zL2NoZWNrb3V0LTE3ODUwODg3MjUtOTM0NTgtNjEyNzk3OTYvcnVuX3B5dGhvbl9wcm9qZWN0X2RhdGEuc2guR1hGYkx5L3RtcC9rbm93bGVkZ2UtZmllbGRzLXRyYW5zcG9ydC1jb250cm9scy14djA5bnpycy9kb2NzL2NoZWNrcG9pbnRzL1BFUkwtUFJJVkFURS1GQUNUT1JZLUNBUFRVUkUuMy4yLjEuMTItcG9ydGFiaWxpdHkvcmV2aWV3LnB5IiwgbGluZSAyMiwgaW4gb3JpZ2luYWwKICAgIGFzc2VydCBjLnNoYShyYXcpID09IHJlY29yZFsnY2xhaW0nXVsnc2hhMjU2J10gPT0gQU5DSE9SIGFuZCBsZW4ocmF3KSA9PSAzNTkyMiwgJ3dob2xlIG9yaWdpbmFsIGRyYWZ0IGlkZW50aXR5JwogICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eCkFzc2VydGlvbkVycm9yOiB3aG9sZSBvcmlnaW5hbCBkcmFmdCBpZGVudGl0eQo=",
+    "stdout_base64": ""
+   },
+   "restored": {
+    "command": [
+     "python3",
+     "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12-portability/review.py",
+     "--transport-only"
+    ],
+    "returncode": 0,
+    "stderr_base64": "",
+    "stdout_base64": "T3JpZ2luYWwxOTYgdHJhbnNwb3J0IFBBU1M6IGV4YWN0IGRyYWZ0O2RlY29kZWQgcmVjb3JkIGFuZCBpbnZlcnNlIGJ5dGVzIHVuY2hhbmdlZAo="
+   }
+  }
+ ]
+}

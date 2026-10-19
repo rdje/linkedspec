@@ -1,0 +1,28 @@
+{
+ "baseline": {
+  "command": [
+   "python3",
+   "docs/checkpoints/knowledge-fields/review-current.py",
+   "--semantic-only"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCBtZXRhZGF0YSBzZW1hbnRpYyByZXZpZXcgUEFTUzoxNDg3LzEzNDkvMTA0NTU7ODk3LzI0ODtib29rODkvZm91ciBjb250cm9scwo="
+ },
+ "controls": [
+  {
+   "name": "coherent-missing-entry"
+  },
+  {
+   "name": "coherent-wrong-pointer"
+  },
+  {
+   "name": "coherent-incomplete-graph"
+  }
+ ],
+ "inputs_sha256": "0618149daaf018150ee5165bb6c71f7355b4c9cf4ac0438b7cb8ea14e05a15c6",
+ "producer_sha256": "99528096c71a0e9d0cd747a79a98d204453806e758c12f524adb2257f89cfab9",
+ "reached_sha256": "d97ba726993c7fbd35cccfb4e950db633cfb269e875674092600f72dfd22064d",
+ "result": "PASS",
+ "scope": "Three actual coherent whole-file forgeries update the map and its report hash together, or omit a source and coherently update the report/capsule. The independent complete semantic reader rejects missing authored data, wrong question pointers and graph omission for named reasons. Exact original byte/mode restoration recurs after each case; native observations are unchanged."
+}

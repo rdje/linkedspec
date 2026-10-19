@@ -1,0 +1,19 @@
+{
+ "before_sha256": "7a3f5524cfa3f57d6e335171bcd38f670b8d7beb2c210fd5b1e643e3fe4dd810",
+ "claim_bytes": 39111,
+ "claim_sha256": "eeeb19437dd36c0fab2178fb1a8c45db8660d0149fbdd1d0c492bbf0f56ba4b5",
+ "input_count": 208,
+ "outputs": {
+  "CHANGES.md": "c6d1c9df7d3411a032a1b18f4ea437dfde17fad5bec43657a96e118c80b585d5",
+  "DEVELOPMENT_NOTES.md": "76c8edda557c079bedee902b1dc6e56ecbae3d47253f2007e9037003aad8d0c8",
+  "LIVE_ACHIEVEMENT_STATUS.md": "b5ce875225b7c6dc12ac8e10485855c491747d8a88b121246c6f0fc9b7d9eeaf",
+  "MEMORY.md": "7974de186d31eecd83a5f0215dd1736ab7fb1886513e792a31475a934fd2e6f8",
+  "ROADMAP.md": "14f0fda190f1669da11466f63fd3280a1618c4fcbb8bf3a190557a576563646e",
+  "ROADMAP_V2.md": "8dce136d58bbf26204110a277a136f003e17a56a4907adf8e974a82d32ecbe51",
+  "docs/TASK_TREE.md": "06527d66a95c61cf95bab4ab6c8bd3a77df059e7fc4663f398e71e53eda03143",
+  "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md": "f76cddc806810a6263c3cf3afe9c630e5f213342f568bbd6c8aa0f70300743b6"
+ },
+ "producer_sha256": "4a49e8b8ca95bce236c26f6f35b40de476cbbbd9131b4a0678238f0444009c78",
+ "result": "PASS",
+ "scope": "Root continuity remains deliberately unbound; original before bytes are bound. Staged docs describe COMMIT.md intended clean post-landing handoff. Canonical receipt required."
+}

@@ -1,0 +1,16 @@
+{
+ "command": {
+  "command": [
+   "/usr/bin/sandbox-exec",
+   "-p",
+   "(version 1) (allow default)",
+   "/usr/bin/true"
+  ],
+  "returncode": 71,
+  "stderr_base64": "c2FuZGJveC1leGVjOiBzYW5kYm94X2FwcGx5OiBPcGVyYXRpb24gbm90IHBlcm1pdHRlZAo=",
+  "stdout_base64": ""
+ },
+ "context": "restricted",
+ "producer_sha256": "cb4095d4c5d4eba835ecc7419bf483fdadb4ba15d2587f3f972ee2d89e7c9b05",
+ "sandbox_executable_sha256": "58839ef01b4eef8aac0d2aa8f9d1c074ae45aafe3533965b030672450064acc8"
+}

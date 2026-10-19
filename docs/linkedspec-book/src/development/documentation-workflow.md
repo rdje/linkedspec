@@ -341,6 +341,34 @@ required fields, list association, unique IDs and map synchronization. The
 constrained format and its limits are documented in
 `knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`.
 
+
+### Evidence and verification lists
+
+The map displays scalar and list values for `evidence` and `reverify`. Lists keep
+their authored order and repeated entries. For example:
+
+```yaml
+evidence: ["source, notes.md", tests/evidence.t]
+reverify:
+  - bash scripts/check_memory_architecture.sh
+  - bash knowledge-map/scripts/check_knowledge_map.sh
+```
+
+The fact entry shows each value in its own code span:
+
+```markdown
+- **evidence:** `source, notes.md` · `tests/evidence.t`
+- **reverify:** `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh`
+```
+
+Question rows link to the complete fact list with an `N entries` label. A scalar
+command keeps its existing inline presentation. Generation and validation display
+these commands without running or combining them; follow the context written in
+the fact when choosing a check. Code-span delimiters preserve backticks inside
+list values. Double-quoted evidence/reverify inline items can protect commas and
+escaped quotes; block lists keep complex commands readable. Questions containing
+commas continue to use the existing block-list form.
+
 ## Public book
 
 This book is for:
