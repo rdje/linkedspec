@@ -10,7 +10,8 @@ answers:
   - "are Perl one segment and multi segment writes one ActionIR node"
   - "does Perl nested write vivification work inside user functions"
   - "what typed errors does Perl nested write vivification throw"
-date: 2026-09-24
+  - "what VM state must a lowered nested write fragment fixture declare"
+date: 2026-10-19
 status: current on the Perl reference under FUTURE-PARITY-BACKLOG.19.2.1; portable capability admitted under .19.7
 tags: [dsl, actionir, assignment, autovivification, diagnostics, perl, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.2.1 unifies one- and many-segment bracket assignment as expression-bearing assign_nested_access, lowers evaluated segments left-to-right then RHS once, tracks absent versus explicitly bound null per rule/function invocation, and delegates isolated dense creation to LinkedSpec::BindingRuntime::nested_write. The runtime classifies evaluated strings as harray selectors, integer scalars as array selectors, and integral-valued number scalars as invalid numbers; it throws exact typed segment/kind/gap objects, snapshots after completed same-binding expression effects, commits no partial path, and returns detached updated roots. t/write_vivification_perl_contract.t projects all 5 AST and 7 syntax cases plus 11 success, 16 structural failure, dynamic-kind fidelity, detachment, evaluation, same-binding, both null-assignment spellings, exact live spans, and user-function boundaries from the frozen v1 fixture. Permanent ActionIR/trace/uniform suites pass 50 tests; a fresh exact-tree Phase 0 passes all 1,032 in 963 seconds after the earlier 12 stale source expectations were repaired. At this Perl-only milestone, Rust, Dart, Julia, and Lua retained their earlier behavior pending .19.3-.6; portable/public admission was outside its scope."
@@ -35,6 +36,11 @@ coerced; arrays may replace or append exactly at length but may not create a gap
 The rule/function lowering owns an invocation-local presence map because Perl `undef` alone cannot distinguish an
 unassigned lexical from an explicitly assigned null. User-function parameters begin present, including an `undef`
 argument, while a fresh local target begins absent on every call.
+
+October19 isolated-fragment reminder: declare `my %__ls_binding_presence`
+alongside value lexicals; a fixture with bound `meta = {}` marks meta present.
+Native rule/function bodies supply that invocation-local map. Three standalone
+compile failures are retained by TYPE-REFERENCE-BOOK.1.2.3 before its fixture repair.
 
 Invalid selectors, kind conflicts, and gaps throw
 `LinkedSpec::BindingRuntime::NestedWriteError` objects with the frozen codes, binding, failing segment, detached

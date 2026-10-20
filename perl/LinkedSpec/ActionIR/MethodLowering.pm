@@ -1253,6 +1253,15 @@ sub _actionir_ast_unsupported_helper_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
 }
 
+# Capture each operand before evaluating the next list member. A private array
+# preserves explicit flat splices and scalar kinds without deep-copying references.
+# Its initializer still resolves caller bindings, even if a rule uses the same name.
+sub _materialize_list_operand_expr {
+ my ($expr) = @_;
+ return undef unless defined($expr) && length($expr);
+ return 'do { my @__ls_evaluated_values = ('.$expr.'); @__ls_evaluated_values }'
+}
+
 sub _uniform_binding_array_push_expr {
  my ($target, $value_expr) = @_;
  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -2696,7 +2705,7 @@ sub _lower_method_value_expr {
    foreach my $item (@$items) {
     my $lowered_item = $lower_shape_member_expr->($item);
     return undef unless defined($lowered_item) && length($lowered_item);
-    push @lowered_items, $lowered_item;
+    push @lowered_items, _materialize_list_operand_expr($lowered_item);
    }
    return '['.join(', ', @lowered_items).']';
   }
@@ -2714,7 +2723,7 @@ sub _lower_method_value_expr {
    my $value_expr = $lower_shape_member_expr->($pair->[1]);
    return undef unless defined($key_expr) && length($key_expr);
    return undef unless defined($value_expr) && length($value_expr);
-   push @lowered_pairs, $key_expr.' => '.$value_expr;
+   push @lowered_pairs, _materialize_list_operand_expr($key_expr).' => '._materialize_list_operand_expr($value_expr);
   }
   return '{'.join(', ', @lowered_pairs).'}';
  };
@@ -3577,7 +3586,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return _actionir_ast_unsupported_helper_expr($name)
     unless defined($arg_expr) && length($arg_expr);
    $arg_expr = '+'.$arg_expr if $arg_expr =~ /^\s*\{/s;
-   push @lowered_args, $arg_expr;
+   push @lowered_args, _materialize_list_operand_expr($arg_expr);
   }
 
   my $bindings = _codeblock_runtime_binding_expr($deps, $name);
@@ -4196,7 +4205,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $lowered_item = $legacy_method_value_expr->($item->{source})
      unless defined($lowered_item) && length($lowered_item);
     return undef unless defined($lowered_item) && length($lowered_item);
-    push @lowered_items, $lowered_item;
+    push @lowered_items, _materialize_list_operand_expr($lowered_item);
    }
    return '['.join(', ', @lowered_items).']';
   }
@@ -4211,7 +4220,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      unless defined($value_expr) && length($value_expr);
     return undef unless defined($key_expr) && length($key_expr);
     return undef unless defined($value_expr) && length($value_expr);
-    push @lowered_pairs, $key_expr.' => '.$value_expr;
+    push @lowered_pairs, _materialize_list_operand_expr($key_expr).' => '._materialize_list_operand_expr($value_expr);
    }
    return '{'.join(', ', @lowered_pairs).'}';
   }
@@ -4355,7 +4364,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      if ($key->{name} eq 'flat') {
       my $flat = $lower_ast_value_node->($key, { bare_scalar_read => 1 });
       return undef unless defined($flat) && length($flat);
-      push @pairs, $flat;
+      push @pairs, _materialize_list_operand_expr($flat);
       ++$index;
       next;
      }
@@ -4367,7 +4376,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      }
      my $flat = $lower_flat_list_value_expr->($key->{name}.'('.join(', ', @flat_args).')');
      return undef unless defined($flat) && length($flat);
-     push @pairs, $flat;
+     push @pairs, _materialize_list_operand_expr($flat);
      ++$index;
      next;
     }
@@ -4380,7 +4389,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      unless defined($value_expr) && length($value_expr);
     return undef unless defined($key_expr) && length($key_expr);
     return undef unless defined($value_expr) && length($value_expr);
-    push @pairs, $key_expr.' => '.$value_expr;
+    push @pairs, _materialize_list_operand_expr($key_expr).' => '._materialize_list_operand_expr($value_expr);
     $index += 2;
    }
    return '{'.join(', ', @pairs).'}';
@@ -4448,7 +4457,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lower_scalar_bound_hash_snapshot_expr->($args->[0]{name}) if $method eq 'hash';
   }
 
-  return '['.join(', ', @arg_exprs).']'
+  return '['.join(', ', map { _materialize_list_operand_expr($_) } @arg_exprs).']'
    if $method eq 'array' && @arg_exprs != 1;
 
   return $legacy_method_value_expr->(
@@ -6792,7 +6801,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   for (my $i = 0; $i < @$args; ) {
    my $flat_pair_expr = $lower_flat_list_value_expr->($args->[$i]);
    if (defined($flat_pair_expr) && length($flat_pair_expr)) {
-    push @pairs, $flat_pair_expr;
+    push @pairs, _materialize_list_operand_expr($flat_pair_expr);
     ++$i;
     next;
    }
@@ -6805,7 +6814,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
     unless defined($val_expr) && length($val_expr);
    $val_expr = $trim_action_ir_value->($args->[$i + 1]) unless defined($val_expr) && length($val_expr);
    return undef unless defined($val_expr) && length($val_expr);
-   push @pairs, $key_expr.' => '.$val_expr;
+   push @pairs, _materialize_list_operand_expr($key_expr).' => '._materialize_list_operand_expr($val_expr);
    $i += 2;
   }
   return '{'.join(', ', @pairs).'}';
@@ -6835,7 +6844,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
     unless defined($lowered_arg) && length($lowered_arg);
    defined($lowered_arg) && length($lowered_arg) ? $lowered_arg : $_;
   } @$args;
-  return '['.join(', ', @lowered).']';
+  return '['.join(', ', map { _materialize_list_operand_expr($_) } @lowered).']';
  }
 
  if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o

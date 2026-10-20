@@ -9,11 +9,11 @@ answers:
   - "what scope must the aggregate selector scanner lock cover"
   - "why are private array-end callback probes classified by exact path and hash"
   - "did array-end required capture admit retired selectors as public syntax"
-date: 2026-07-22
+date: 2026-10-20
 status: current
 tags: [ci, concurrency, aggregate-selectors, untracked-files, dart, scanner]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.2.3.0; tools/check_executable_aggregate_selector_sources.py; tools/check_public_aggregate_selector_surface.py; tools/run_dart_local.sh
-reverify: "After subsequent source/book/card changes these .7 commands require accepted557a7d9e533710c6aae211f905ca2f231a8aedae Git inputs, including its original live four-claim publication. bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py; bash tools/run_python_project_data.sh docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7-selector-proof.py; cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed ."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Original .7 proof requires accepted557a7d9e533710c6aae211f905ca2f231a8aedae inputs."
 ---
 
 The executable aggregate-selector scanner creates a positive untracked Dart source to prove that its
@@ -53,3 +53,5 @@ PASS are preserved before the bounded publisher extension. The complete failed
 canonical log remains compressed with its byte count and SHA. This proof covers
 fixture classification; fresh composed public admission and exact canonical CI
 separately govern landing. Neither failed canonical attempt proves full CI.
+
+Current fixture revisions keep historical registrations and add exact owner/prior/current identities. Three fixtures retain their selector occurrences;28 denials and actual source faults9/6/3 distinguish edited or foreign admissions. See docs/checkpoints/type-values-selector/.

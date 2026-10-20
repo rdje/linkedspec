@@ -1,0 +1,528 @@
+{
+ "actual_raw_advisories": 2,
+ "goldens": [
+  {
+   "expected_json": "{\"value\":[\"A\",\"B\"],\"warnings\":[]}",
+   "label": "array(...) canonical wrapper rewrite preserves array constructor semantics"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\"},\"warnings\":[]}",
+   "label": "hash(...) canonical wrapper rewrite preserves hash constructor semantics"
+  },
+  {
+   "expected_json": "{\"value\":{\"parts_count\":2},\"warnings\":[]}",
+   "label": "typed slot/container lowering reuses the expected scalar/hash/array Perl shapes"
+  },
+  {
+   "expected_json": "{\"value\":[\"group_open\",[\"IMATCH\"]],\"warnings\":[]}",
+   "label": "return(array(...)) canonical helper preserves tagged return payload"
+  },
+  {
+   "expected_json": "{\"value\":[\"semantic_annotation\",[\"capture\",\"tail\"]],\"warnings\":[]}",
+   "label": "return(array(...)) canonical helper lowers entry/scalar-slot constructor payloads"
+  },
+  {
+   "expected_json": "{\"value\":[\"before\",[\"tag\",\"node\"]],\"warnings\":[]}",
+   "label": "push accepts wrapped target symbol and lowers nested array(...) value expression"
+  },
+  {
+   "expected_json": "{\"value\":{\"children\":[\"first\"],\"node_name\":\"branch\"},\"warnings\":[]}",
+   "label": "return(payload) snapshots a runtime-typed binding inside structured harray payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"children\":{\"child\":\"first\"},\"node_name\":\"branch\"},\"warnings\":[]}",
+   "label": "structured harray snapshot lowering is deterministic"
+  },
+  {
+   "expected_json": "{\"value\":[\"semantic\",{\"field\":\"node\"},[123,\"one\"]],\"warnings\":[]}",
+   "label": "general return(payload) lowers nested array/hash payload with scalar helpers"
+  },
+  {
+   "expected_json": "{\"value\":{\"chosen\":\"picked\",\"values\":[\"node\",123]},\"warnings\":[]}",
+   "label": "general return(payload) lowers projected field/index reads inside nested hash/list payload"
+  },
+  {
+   "expected_json": "{\"value\":{\"chosen\":\"one\"},\"warnings\":[]}",
+   "label": "general return(payload) lowers base[\"...\"][...] with hash-first path segments"
+  },
+  {
+   "expected_json": "{\"value\":{\"item\":\"picked\",\"kind\":\"node\",\"list\":[\"node\",123]},\"warnings\":[]}",
+   "label": "general return(payload) lowers hash(...) constructor payloads with nested helper values"
+  },
+  {
+   "expected_json": "{\"value\":[\"ALPHA\",\"APPLE\"],\"warnings\":[]}",
+   "label": "general return(payload) lowers nested array-pipeline composition inside array(...) payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"items\":[\"ALPHA\",\"APPLE\"]},\"warnings\":[]}",
+   "label": "nested hash payload values accept array-wrapped array-pipeline composition"
+  },
+  {
+   "expected_json": "{\"value\":[\"items\",[\"ALPHA\",\"APPLE\"]],\"warnings\":[]}",
+   "label": "nested array payload values accept array-wrapped array-pipeline composition"
+  },
+  {
+   "expected_json": "{\"value\":{\"A\":[\"ALPHA\",\"APPLE\"]},\"warnings\":[]}",
+   "label": "set(name, hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer"
+  },
+  {
+   "expected_json": "{\"value\":{\"A\":[\"BETA\"]},\"warnings\":[]}",
+   "label": "set(name, hash(... pipeline(...))) preserves the nested array typed value"
+  },
+  {
+   "expected_json": "{\"value\":[{\"items\":[\"ALPHA\",\"APPLE\"]}],\"warnings\":[]}",
+   "label": "push accepts hash payloads with nested collection-valued array-pipeline composition"
+  },
+  {
+   "expected_json": "{\"value\":[\"semantic_annotation\",{\"items\":[\"ALPHA\",\"APPLE\"]}],\"warnings\":[]}",
+   "label": "return(array(...)) accepts hash payloads with nested collection-valued array-pipeline composition"
+  },
+  {
+   "expected_json": "{\"value\":{\"content\":\"UNKNOWN\",\"parts\":[\"empty\"]},\"warnings\":[]}",
+   "label": "coalesce(...) lowers inside general return payloads for both scalar and aggregate fallback values"
+  },
+  {
+   "expected_json": "{\"value\":{\"content\":\"UNKNOWN\"},\"warnings\":[]}",
+   "label": "coalesce_nonempty(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "count(...) lowers array-valued fallback expressions into arrayref-size reducer form"
+  },
+  {
+   "expected_json": "{\"value\":{\"part_count\":1},\"warnings\":[]}",
+   "label": "count(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":0,\"warnings\":[]}",
+   "label": "contains(...) lowers array-valued fallback expressions into guarded membership checks"
+  },
+  {
+   "expected_json": "{\"value\":{\"has_kind\":1},\"warnings\":[]}",
+   "label": "contains(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"is_prefixed\":0},\"warnings\":[]}",
+   "label": "matches(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"has_fix\":1},\"warnings\":[]}",
+   "label": "contains_substr(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"normalized\":\"node_fix.txt\"},\"warnings\":[]}",
+   "label": "replace_substr(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"trimmed_prefix\":\"fix.txt\"},\"warnings\":[]}",
+   "label": "rm_prefix(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"trimmed_suffix\":\"node_fix.txt\"},\"warnings\":[]}",
+   "label": "rm_suffix(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"full_name\":\"node_fix.txt_parsed\"},\"warnings\":[]}",
+   "label": "cat(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"meta_nonempty\":1,\"values_empty\":0},\"warnings\":[\"Scalar value @__ls_drop{\\\"debug\\\"} better written as $__ls_drop{\\\"debug\\\"}\"]}",
+   "label": "is_empty(...) and is_nonempty(...) lower inside general return payloads as value helpers"
+  },
+  {
+   "expected_json": "{\"value\":null,\"warnings\":[]}",
+   "label": "index_of(...) lowers array-valued fallback expressions into guarded first-match index checks"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind_index\":0},\"warnings\":[]}",
+   "label": "index_of(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "count_keys(...) lowers hash-valued fallback expressions into hashref-size reducer form"
+  },
+  {
+   "expected_json": "{\"value\":{\"meta_key_count\":1},\"warnings\":[]}",
+   "label": "count_keys(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks"
+  },
+  {
+   "expected_json": "{\"value\":{\"has_kind\":1},\"warnings\":[]}",
+   "label": "has_key(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"fallback\"},\"warnings\":[]}",
+   "label": "merge_hash(...) lowers working hashes, constructor hashes, and fallback hash expressions into one composed hash payload"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "merge_hash(...) composes inside flow expressions through other hash/object helpers"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":null},\"warnings\":[]}",
+   "label": "merge_hash(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"token\",\"source\":\"fixture\",\"stage\":\"normalized\"},\"warnings\":[]}",
+   "label": "copy(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"fixture\",\"stage\":\"normalized\"},\"warnings\":[]}",
+   "label": "set_key(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"token\",\"source\":\"fixture\",\"stage\":\"normalized\"},\"warnings\":[]}",
+   "label": "rename_key(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"fixture\"},\"warnings\":[\"Scalar value @__ls_drop{\\\"debug\\\"} better written as $__ls_drop{\\\"debug\\\"}\"]}",
+   "label": "drop_keys(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"rule\"},\"warnings\":[]}",
+   "label": "pick_keys(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"keys\":[\"kind\",\"source\",\"stage\"]},\"warnings\":[]}",
+   "label": "sorted_keys(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":{\"values\":[\"token\",\"fixture\",\"normalized\"]},\"warnings\":[]}",
+   "label": "sorted_values(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":[1,3,11,\"kind\",\"source\",\"tail\"],\"warnings\":[]}",
+   "label": "concat_arrays(...) lowers direct arrays, projected arrays, and array constructors into one pure concatenated array value"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "concat_arrays(...) composes inside array reducers and numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":[1,3,11,\"kind\",\"source\",\"tail\"],\"warnings\":[]}",
+   "label": "concat_arrays(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":[1,11,3,\"alpha\",\"delta\"],\"warnings\":[]}",
+   "label": "sorted(...) lowers composed array-valued expressions into one deterministic lexical array value"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "sorted(...) composes inside array reducers and numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":[1,11,3,\"delta\"],\"warnings\":[]}",
+   "label": "sorted(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":[\"tail\",\"delta\",11,3,1],\"warnings\":[]}",
+   "label": "reversed(...) lowers composed array-valued expressions into one reversed array value"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "reversed(...) composes inside array reducers and numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":[\"delta\",11,3,1],\"warnings\":[]}",
+   "label": "reversed(...) lowers inside general return payloads"
+  },
+  {
+   "expected_json": "{\"value\":24,\"warnings\":[]}",
+   "label": "num_sum(...) lowers composed array-valued expressions into one numeric aggregate reducer"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "num_sum(...) composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":24,\"warnings\":[]}",
+   "label": "assign helper accepts num_sum(...) over composed array-valued expressions"
+  },
+  {
+   "expected_json": "{\"value\":24,\"warnings\":[]}",
+   "label": "return(payload) accepts num_sum(...) nested around composed array reducers"
+  },
+  {
+   "expected_json": "{\"value\":5.4,\"warnings\":[]}",
+   "label": "num_avg(...) lowers composed array-valued expressions into one numeric average reducer"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "num_avg(...) composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":5.4,\"warnings\":[]}",
+   "label": "assign helper accepts num_avg(...) over composed array-valued expressions"
+  },
+  {
+   "expected_json": "{\"value\":5.4,\"warnings\":[]}",
+   "label": "return(payload) accepts num_avg(...) nested around composed array reducers"
+  },
+  {
+   "expected_json": "{\"value\":6,\"warnings\":[]}",
+   "label": "num_median(...) lowers composed array-valued expressions into one numeric median reducer"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "num_median(...) composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":6,\"warnings\":[]}",
+   "label": "assign helper accepts num_median(...) over composed array-valued expressions"
+  },
+  {
+   "expected_json": "{\"value\":6,\"warnings\":[]}",
+   "label": "return(payload) accepts num_median(...) nested around composed array reducers"
+  },
+  {
+   "expected_json": "{\"value\":10,\"warnings\":[]}",
+   "label": "num_range(...) lowers composed array-valued expressions into one numeric span reducer"
+  },
+  {
+   "expected_json": "{\"value\":\"\",\"warnings\":[]}",
+   "label": "num_range(...) composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":10,\"warnings\":[]}",
+   "label": "assign helper accepts num_range(...) over composed array-valued expressions"
+  },
+  {
+   "expected_json": "{\"value\":10,\"warnings\":[]}",
+   "label": "return(payload) accepts num_range(...) nested around composed array reducers"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "num_min(...) accepts one composed array-valued source as a numeric minimum reducer"
+  },
+  {
+   "expected_json": "{\"value\":11,\"warnings\":[]}",
+   "label": "num_max(...) accepts one composed array-valued source as a numeric maximum reducer"
+  },
+  {
+   "expected_json": "{\"value\":\"\",\"warnings\":[]}",
+   "label": "num_min(...) unary array-reducer mode composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":\"\",\"warnings\":[]}",
+   "label": "num_max(...) unary array-reducer mode composes inside numeric flow comparisons"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "assign helper accepts unary-array num_min(...) over composed array-valued expressions"
+  },
+  {
+   "expected_json": "{\"value\":11,\"warnings\":[]}",
+   "label": "return(payload) accepts unary-array num_max(...) nested around composed array reducers"
+  },
+  {
+   "expected_json": "{\"value\":[\"?subprogram_declaration:\",\"alpha\",\"beta\"],\"warnings\":[]}",
+   "label": "flat_array(name) lowers array contents into surrounding array constructor list context"
+  },
+  {
+   "expected_json": "{\"value\":[\"semantic\",1,3,11,\"node\"],\"warnings\":[]}",
+   "label": "flat_array(name) lowers the bare typed array into surrounding array constructor list context"
+  },
+  {
+   "expected_json": "{\"value\":{\"item\":\"node\",\"kind\":\"node\",\"source\":\"extra\"},\"warnings\":[]}",
+   "label": "flat_hash(name) lowers hash contents into surrounding hash constructor list context"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"extra\"},\"warnings\":[]}",
+   "label": "flat_hash(name) lowers the bare typed harray into surrounding hash constructor list context"
+  },
+  {
+   "expected_json": "{\"value\":[\"keys\",\"kind\",\"source\"],\"warnings\":[]}",
+   "label": "flat_array(...) now flattens composed array-valued helper expressions into surrounding array constructors"
+  },
+  {
+   "expected_json": "{\"value\":[\"?Top:\",\"alpha\",\"beta\"],\"warnings\":[]}",
+   "label": "flat_array(...) flattens entry_groups() inside general return payloads instead of leaving a runtime helper call"
+  },
+  {
+   "expected_json": "{\"value\":[\"?Top:\",\"local\",\"groups\"],\"warnings\":[]}",
+   "label": "flat_array(...) flattens match_groups() inside general return payloads instead of leaving a runtime helper call"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"node\",\"source\":\"fixture\"},\"warnings\":[]}",
+   "label": "flat_hash(...) flattens a runtime-typed copied harray into surrounding hash constructors"
+  },
+  {
+   "expected_json": "{\"value\":{\"item\":\"node\",\"kind\":\"token\",\"stage\":\"normalized\"},\"warnings\":[]}",
+   "label": "flat_hash(...) composes with projected hash-valued helper expressions without raw Perl fallback"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "colon hash literal lowers bare key/value through scalar reads"
+  },
+  {
+   "expected_json": "{\"value\":{\"fixed\":[\"payload\"],\"kind\":{\"nested\":\"payload\"}},\"warnings\":[]}",
+   "label": "colon hash literal lowers quoted keys and nested shape values"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "direct assignment RHS accepts colon hash literals"
+  },
+  {
+   "expected_json": "{\"value\":{\"field\":{\"inner\":\"payload\"}},\"warnings\":[]}",
+   "label": "nested-write RHS accepts colon hash literals"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "expression-valued set accepts colon hash literals"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "single-equals value call accepts colon hash literals"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\",{\"kind\":\"payload\"}],\"warnings\":[]}",
+   "label": "colon hash literals compose inside array shape values"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "current colon hash literals still lower"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "array shape literal lowers a bare element as a scalar read"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "hash shape literal lowers bare key and value slots as scalar reads"
+  },
+  {
+   "expected_json": "{\"value\":[[\"payload\"]],\"warnings\":[]}",
+   "label": "array append RHS accepts a shape literal value expression"
+  },
+  {
+   "expected_json": "{\"value\":{\"field\":{\"field\":\"payload\"}},\"warnings\":[]}",
+   "label": "nested-write assignment RHS accepts a hash shape literal"
+  },
+  {
+   "expected_json": "{\"value\":[[\"payload\"]],\"warnings\":[]}",
+   "label": "push(target, shape) is explicit append, not all-bare child-call routing"
+  },
+  {
+   "expected_json": "{\"value\":{\"field\":[\"payload\"]},\"warnings\":[]}",
+   "label": "nested-write brackets stay statement syntax while RHS brackets are a value literal"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "non-empty array RHS binds a scalar-held array value"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "non-empty hash RHS binds a scalar-held hash value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "set(name, shape) follows scalar value-binding semantics"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "set(meta, shape) follows scalar value-binding semantics"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "explicit scalar target remains a scalar payload assignment boundary"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "direct shape RHS follows scalar-held value binding for bare targets"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "bare direct array RHS assignment returns the scalar-held array value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "set with bare direct array RHS returns the scalar-held array value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "operator-call direct array RHS returns the scalar-held array value"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "bare direct hash RHS assignment returns the scalar-held hash value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "temporary explicit array target returns the stored typed value"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "temporary explicit hash target returns the stored typed value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "explicit scalar target returns the scalar-held shape payload"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "double-quoted array wrapper argument remains a literal constructor payload"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "single-quoted array wrapper argument remains a literal constructor payload"
+  },
+  {
+   "expected_json": "{\"value\":[null],\"warnings\":[]}",
+   "label": "primitive undef remains a literal array constructor payload"
+  },
+  {
+   "expected_json": "{\"value\":2,\"warnings\":[]}",
+   "label": "multi-argument array(...) remains an array constructor"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "double-quoted hash wrapper key remains a literal constructor payload"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "single-quoted hash wrapper key remains a literal constructor payload"
+  },
+  {
+   "expected_json": "{\"value\":1,\"warnings\":[]}",
+   "label": "multi-argument hash(...) remains a hash constructor"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "set(payload, shape) keeps the direct-shape payload in the scalar-held value"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\",\"payload\"],\"warnings\":[]}",
+   "label": "legacy array(...) constructor lowers scalar-slot members"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\",\"payload\"],\"warnings\":[]}",
+   "label": "direct array shape lowers scalar-slot members"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "direct hash shape lowers scalar-slot keys and values"
+  },
+  {
+   "expected_json": "{\"value\":[\"payload\"],\"warnings\":[]}",
+   "label": "array-shaped initialization makes later bare items read the scalar-held array value"
+  },
+  {
+   "expected_json": "{\"value\":{\"field\":\"payload\"},\"warnings\":[]}",
+   "label": "hash-shaped initialization makes later bare meta read the scalar-held hash value"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "top-level hash-pair braces remain hash shape literals"
+  },
+  {
+   "expected_json": "{\"value\":{\"kind\":\"payload\"},\"warnings\":[]}",
+   "label": "hash-literal braces remain separate from trailing block arguments"
+  }
+ ],
+ "limits": "Finite compatibility fixtures only. Exactly two known syntax advisories are asserted as data, not silently suppressed. Eval id/line transport suffixes alone are normalized. No project warning gate or public diagnostic policy changes.",
+ "result": "PASS",
+ "value_cases": 130
+}

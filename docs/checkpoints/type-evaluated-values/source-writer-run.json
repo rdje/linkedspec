@@ -1,0 +1,21 @@
+{
+ "corrected": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-evaluated-values/strengthen_source_tests_final.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "QVNUIGFuZCB0cmFjZSBzb3VyY2UgY2hlY2tzIG5vdyBvYnNlcnZlIGV4ZWN1dGVkIHR5cGVkIHZhbHVlcyBpbnN0ZWFkIG9mIG9sZCB0ZW1wb3JhcnkgbGF5b3V0Cg=="
+ },
+ "original_no_write_verified": true,
+ "original_red": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-evaluated-values/strengthen_source_tests.py"
+  ],
+  "returncode": 1,
+  "stderr_base64": "VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy90eXBlLWV2YWx1YXRlZC12YWx1ZXMvc3RyZW5ndGhlbl9zb3VyY2VfdGVzdHMucHkiLCBsaW5lIDU1LCBpbiA8bW9kdWxlPgogICAgc291cmNlID0gYXNzZXJ0aW9uKHNvdXJjZSwgJ3NjYWxhciBhc3NpZ25tZW50IG9wZXJhdG9yIGxvd2VycyBSSFMgZnJvbSBBU1QgZmllbGRzJywgcicnJwogICAgaXNfZGVlcGx5KAogICAgLi4uPDMgbGluZXM+Li4uCiAgICApOwogICAgJycnKQogIEZpbGUgIi9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMvZG9jcy9jaGVja3BvaW50cy90eXBlLWV2YWx1YXRlZC12YWx1ZXMvc3RyZW5ndGhlbl9zb3VyY2VfdGVzdHMucHkiLCBsaW5lIDE4LCBpbiBhc3NlcnRpb24KICAgIGFzc2VydCBzdGFydHMKICAgICAgICAgICBeXl5eXl4KQXNzZXJ0aW9uRXJyb3IK",
+  "stdout_base64": ""
+ }
+}

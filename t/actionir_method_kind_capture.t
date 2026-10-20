@@ -1,5 +1,8 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+require './t/lib/LinkedSpecTest/EmittedValues.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -42,7 +45,7 @@ for my $surface (qw(observe cold-observe authority)) {
  my $actual = command(@command);
  is($actual->{status}, 0, "$surface diagnostic command succeeds");
  is($actual->{stderr}, '', "$surface diagnostic channel stays empty");
- $current{$surface} = $json->decode($actual->{stdout});
+ $current{$surface} = LinkedSpecTest::MethodLocations::original_coordinates($json->decode($actual->{stdout}));
 }
 for my $index (0, 1) {
  my $surface = $index ? 'cold-observe' : 'observe';
@@ -59,14 +62,23 @@ for my $index (0, 1) {
     $expected->{eligible} = [0] if $expected->{id} =~ /known-0$/;
     $expected->{parent_packet} = 0;
    }
-   is_deeply($actual->{$group}[$row], $expected,
+   my $observed = $actual->{$group}[$row];
+   if ($surface eq 'observe' && $group eq 'branches' && $expected->{id} eq 'inner/scalar') {
+    $expected->{value} = LinkedSpecTest::EmittedValues::invocation($expected->{value});
+    $observed = {%$observed, value => LinkedSpecTest::EmittedValues::invocation($observed->{value})};
+    is_deeply($observed->{value}, {value => 'observed invocation', calls => [{
+     callable => 1, args => [[1, 2], []], binding => 1, name => 'set', option => undef,
+     descriptor => 1, input => 1, match_info => 1,
+    }]}, 'inner/scalar emitted invocation preserves arguments, binding and caller context');
+   }
+   is_deeply($observed, $expected,
     "$surface/$group/$expected->{id} preserves complete native row with private authority");
   }
  }
 }
 my $authority = $json->decode(decode_base64($before_authority->{rows}[0]{stdout_base64}));
 my $actual_authority = $current{authority};
-is_deeply($json->decode($actual_authority->{original_replay}), $current{observe},
+is_deeply(LinkedSpecTest::MethodLocations::original_coordinates($json->decode($actual_authority->{original_replay})), $current{observe},
  'supplemental authority probe replays the original producer exactly');
 is_deeply([map {$_->{id}} @{$actual_authority->{rows}}], [map {$_->{id}} @{$authority->{rows}}],
  'supplemental authority complete ordered member population');

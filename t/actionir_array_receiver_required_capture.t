@@ -1,5 +1,8 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+require './t/lib/LinkedSpecTest/EmittedValues.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -10,7 +13,7 @@ open my $fh,'<',$path or die "$path: $!";
 my $capture=JSON::PP->new->decode(do {local $/;<$fh>});
 close $fh or die "$path: $!";
 my $native=JSON::PP->new->decode(decode_base64($capture->{stdout_base64}));
-my $current=ArrayReceiverRequiredProbe::observations();
+my $current=LinkedSpecTest::MethodLocations::original_coordinates(ArrayReceiverRequiredProbe::observations());
 is($capture->{returncode},0,'first native array probe completed');
 is(decode_base64($capture->{stderr_base64}),'','first native array probe has no diagnostics');
 is(scalar(keys %{$capture->{inputs}}),189,'complete first native supplied population');
@@ -73,7 +76,11 @@ for my $role (@{ArrayReceiverRequiredProbe::roles()}) {
 }
 is_deeply($current->{authority},[map {my $role=$_;map {ArrayReceiverRequiredProbe::authority($role,$_)} (0,1)} @{ArrayReceiverRequiredProbe::roles()}],
  'array observation authority rows equal independent repeated capture');
-is_deeply($current->{public},$native->{public},'both public Toolbox generated-source controls remain exact');
+my $public_observed = LinkedSpecTest::EmittedValues::public_rows($current->{public});
+is_deeply($public_observed, LinkedSpecTest::EmittedValues::public_rows($native->{public}),
+ 'both public Toolbox controls preserve executed values and complete row metadata');
+is_deeply([map {$_->{value}} @$public_observed], [{value => 1}, {value => 1}],
+ 'public generated expressions match independent value goldens');
 for my $row (@{$current->{public}}) {
  ok(defined($row->{value}) && length($row->{value}),"public $row->{name} has generated source");
  is($row->{error},undef,"public $row->{name} has no error");

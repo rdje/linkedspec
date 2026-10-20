@@ -1,0 +1,26 @@
+{
+ "actual": {
+  "complete_selection": true,
+  "loaded_method_lowering": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+  "passing": true,
+  "root_tests": 1035,
+  "scope": "Focused adapter only; excluded root subtests are explicit TAP SKIP. Ordinary full Phase0 requires canonical CI.",
+  "selected": 52,
+  "skipped": 982,
+  "wanted": 52
+ },
+ "inputs": 1651,
+ "limits": "Focused52 plus one startup assertion;982 explicit skipped roots. Missing selector control rejects all-skip false acceptance. Ordinary all1035 remains canonical admission.",
+ "missing_selector": {
+  "complete_selection": false,
+  "loaded_method_lowering": null,
+  "passing": true,
+  "root_tests": 1035,
+  "scope": "Focused adapter only; excluded root subtests are explicit TAP SKIP. Ordinary full Phase0 requires canonical CI.",
+  "selected": 0,
+  "skipped": 1034,
+  "wanted": 1
+ },
+ "overridden_inputs": 121,
+ "result": "PASS"
+}

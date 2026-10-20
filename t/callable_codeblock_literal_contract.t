@@ -588,4 +588,51 @@ subtest 'typed final-codeblock declaration and value failures stay explicit' => 
         'receiver typed rejection preserves the actual harray kind');
 };
 
+subtest 'constructed values and callable arguments retain evaluated values' => sub {
+    my $fixture_path = File::Spec->catfile(
+        $repo_root, 'tests', 'evaluated-values', 'cases.json',
+    );
+    open my $fixture_fh, '<:raw', $fixture_path
+        or die "Could not read $fixture_path: $!";
+    my $fixture = JSON::PP->new->utf8->decode(do { local $/; <$fixture_fh> });
+    close $fixture_fh or die "Could not close $fixture_path: $!";
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    my $index = 0;
+    foreach my $case (@{$fixture->{cases}}) {
+        my $package = 'EvaluatedValueOrder' . $index++;
+        subtest $case->{id} => sub {
+            my $source = ($case->{functions} // '')
+                . "Top: /x/\n I { $case->{body} }\n";
+            my ($actual, $context) = run_spec_with_context($source, 'x');
+            is($json->encode($actual), $json->encode($case->{expected}),
+                'native values and primitive kinds match the independent expectation');
+            ok(!defined($context->{last_error}), 'native execution has no runtime error');
+
+            my $emitted = eval {
+                LinkedSpec::emit_generated_source(
+                    \$source, source_identity => 'evaluated-value-order.spec',
+                );
+            };
+            ok(defined($emitted) && length($emitted), 'independent parser source emits');
+            diag($@) if $@;
+            my $loaded = defined($emitted) && eval "package $package; $emitted; 1";
+            ok($loaded, 'independently emitted parser source loads');
+            diag($@) if $@;
+            return unless $loaded;
+            my $input = 'x';
+            my $generated;
+            my $ok = eval {
+                no strict 'refs';
+                my $function = $package . '::Execute';
+                $generated = &{$function}(\$input);
+                1;
+            };
+            ok($ok, 'independently emitted parser executes without an error');
+            diag($@) unless $ok;
+            is($json->encode($generated), $json->encode($case->{expected}),
+                'generated values and primitive kinds match the independent expectation');
+        };
+    }
+};
+
 done_testing();

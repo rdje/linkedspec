@@ -1,0 +1,10 @@
+{
+ "main_inputs_bytes_modes_unchanged": true,
+ "mapper_bypass_failed_assertions": 198,
+ "native_controls": 14,
+ "native_inputs": 15,
+ "restored_assertions": 5001,
+ "result": "PASS",
+ "scope": "Actual mapper producer bypass restores exactly 198 coordinate failures; source value repairs remain healthy. Native callback/file/line, unmatched statement, non-error payload, flattened return and wrong value controls stay distinct.",
+ "supplied_bytes_modes_unchanged": true
+}

@@ -1,0 +1,16 @@
+{
+ "bytes_modes_unchanged": true,
+ "result": "PASS",
+ "run": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-inventory/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCB0eXBlIGF1dGhvcml0eS9tb2RlbCBwdWJsaWNhdGlvbiBQQVNTOiAzODggaW5wdXRzOyA2ODgxNCBieXRlczsgcnVudGltZSByZXBhaXJzMy80IHBlbmRpbmcK"
+ },
+ "supplied_context": 2706,
+ "whole_original_bytes": 68814,
+ "whole_original_inputs": 388
+}

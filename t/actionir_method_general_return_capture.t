@@ -306,11 +306,23 @@ for my $index (0..$#$cases) {
   is_deeply($row->{args_after}, ['Node!', 'payload!'], 'actual trim mutations survive in both parser array slots');
  }
 }
+sub public_return_observation {
+ my ($source) = @_;
+ my @Top = (1, 'two');
+ my $execute = eval 'sub { ' . $source . ' }';
+ return {error => "compile: $@"} unless ref($execute) eq 'CODE';
+ my $value;
+ my $ok = eval { $value = $execute->(); 1 };
+ return $ok ? {value => $value} : {error => "execute: $@"};
+}
 my @public = public_cases();
 for my $i (0..$#public) {
  my ($name, $source, $expected) = @{$public[$i]};
  my $row = $rows->{public}[$i];
- is($row->{value}, $expected, "$name public Toolbox keeps actual return surface");
+ if ($name eq 'current-copy') {
+  is_deeply(public_return_observation($row->{value}), {value => [[1, 'two']]},
+   'current-copy public Toolbox preserves the evaluated nested return value');
+ } else { is($row->{value}, $expected, "$name public Toolbox keeps actual return surface") }
  if ($name eq 'old-migration') {
   is($row->{error}, "aggregate_selector_removed surface=array identifier=Top replacement=Top\n", 'obsolete migration recipe has the exact current public selector diagnostic');
  } else {is($row->{error}, undef, "$name public Toolbox lowering completes")}

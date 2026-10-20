@@ -12,7 +12,7 @@ date: 2026-10-19
 status: current
 tags: [actionir, dsl, compat-alias-retirement, return, migration, phase0]
 evidence: "TYPE-REFERENCE-BOOK.1.1 retains June originals, exact pre/post retirement source and isolated pure callback values. Current public lowering, descriptors, parser values and standalone generated execution distinguish removed selectors, flat/nested groups, whole match/first group, extra-value order and snapshots. No historical alias equivalence or full operation inventory."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
 The six helpers were removed by `4e9250390785b9a36ae3c48abc17fabc97b75ac0`

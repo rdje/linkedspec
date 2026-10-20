@@ -1,0 +1,16 @@
+{
+ "composed_public_admission": true,
+ "concurrent_scans": 3,
+ "fixtures": 3,
+ "full_scan": true,
+ "healthy_controls": 6,
+ "inputs_bytes_modes_unchanged": true,
+ "producer_fault_unexpected_acceptances": [
+  9,
+  6,
+  3
+ ],
+ "rejected_controls": 28,
+ "result": "PASS",
+ "scope": "Original and current exact fixture bytes admit; edited, copied, appended, foreign-owner and wrong/missing hash registrations reject. Actual current/prior/owner producer-check removal is RED and exact restoration is GREEN. Selector regex, generic classifications and original historical registrations are unchanged."
+}

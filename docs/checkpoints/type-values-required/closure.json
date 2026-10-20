@@ -1,0 +1,231 @@
+{
+ "inputs": {
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-native.json": {
+   "mode": 420,
+   "sha256": "aa7715e1222ca52821a0917eccbf1e9a0c92eb3f1860aecdb49abb02fbc1a332"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-native.json": {
+   "mode": 420,
+   "sha256": "81740ebe6867ffc28b1ce160ae2c225ede06acdca2dbf06483eb22c0ae639ad7"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-native.json": {
+   "mode": 420,
+   "sha256": "5c21038277da2cb9fd7498d8e9f9f8148a44865982d239129cb60ee8c80b42ee"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native.json": {
+   "mode": 420,
+   "sha256": "8d9fe6097b0715bc2b6a9b5959585c7c43610bde9c181cdb775e2e47dafb374d"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5-native.json": {
+   "mode": 420,
+   "sha256": "ea12172656170cd0522154ee0d01b59fcfe5fca19c0ddea5c2cc862e1c8c883b"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-native.json": {
+   "mode": 420,
+   "sha256": "0644410d2e631f44e702a7dd94deffa36efef583264db1f281d5963dc192ee70"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-native.json": {
+   "mode": 420,
+   "sha256": "b2773b604a1bf300b1917d671a13586844cb750d57e00ec8f3d5a968671ea73b"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native-final.json": {
+   "mode": 420,
+   "sha256": "c9e4b725f819324cee50643542a649124914bd4fe2d5f87a15a9e3bcc71a3c3d"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native.json": {
+   "mode": 420,
+   "sha256": "5e3767edd38ac22d14717842513b9536336507060b135afb00b9df617bfb3b03"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-symbolic-native.json": {
+   "mode": 420,
+   "sha256": "b0fbe7d5561c4cb19e09325660bfcdedcb6d25d4e327ed0e6e9707d1807b7604"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-authority-native.json": {
+   "mode": 420,
+   "sha256": "b315dd2518a65be3dbd9427c7adea3f85a6d7364ce3a01b237fbadf3680a3271"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-native.json": {
+   "mode": 420,
+   "sha256": "525e601be6ad9188ec61f8b42ddd1af8f4b05f44e0ff5b78f5e16fd3d2f08eba"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-native.json": {
+   "mode": 420,
+   "sha256": "2f436bd138b51d660e542a1cdd0458f6599ffa6d077dc617b8e4a634eb033d69"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-native.json": {
+   "mode": 420,
+   "sha256": "f2520dbecc75b901848c0d3ffe1b06af06b7789f4077e1ee576e4e7ebbbd157a"
+  },
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-before-native.json": {
+   "mode": 420,
+   "sha256": "24e743443215dd4114a1541e7dfdd386ac60daea6e4143c640f5cdc719712f28"
+  },
+  "docs/checkpoints/type-values-required/apply.py": {
+   "mode": 420,
+   "sha256": "d9c7f9545c83854951440762a2276d176c5582f6d6fdfa107b6fd26776317f21"
+  },
+  "docs/checkpoints/type-values-required/baseline.json": {
+   "mode": 420,
+   "sha256": "6ae378ba82d5eabd2968583c04a413d8061be4bf5f81708789e3f5d6b24a162c"
+  },
+  "docs/checkpoints/type-values-required/capsule-recovery.json": {
+   "mode": 420,
+   "sha256": "4b13bfe38ba6878411d9155da1fd3d1fad044c3290583441abda142c6a30f080"
+  },
+  "docs/checkpoints/type-values-required/capsules.py": {
+   "mode": 420,
+   "sha256": "361cff38d1df8a6b7daf20d3d67842b81aa43187b59c549145886be6cc81cbb8"
+  },
+  "docs/checkpoints/type-values-required/capture.py": {
+   "mode": 420,
+   "sha256": "d77cfdcc68c3f36c9eb6aa3777ad5bc6a4bc994e3e44bab83900818ecc99420b"
+  },
+  "docs/checkpoints/type-values-required/capture_final.py": {
+   "mode": 420,
+   "sha256": "d984376657f71241245e664a9c3f0dd26f25bd80f5270abd3bf791943f4240a4"
+  },
+  "docs/checkpoints/type-values-required/close_controls.py": {
+   "mode": 420,
+   "sha256": "c0f8560416e9da8bec0dfc8f94fb8d0b7fd4131a2c07371990c30010cdfe0e0e"
+  },
+  "docs/checkpoints/type-values-required/close_inputs.py": {
+   "mode": 420,
+   "sha256": "1cc60d042fe6baf9e30c15ee603f5ce887bcab8c76aa2748ea30d708b3caae04"
+  },
+  "docs/checkpoints/type-values-required/compose-proposals.json.gz": {
+   "mode": 420,
+   "sha256": "0847ec1b0bddc0c97ae07eef7b170496723e8a9310833ca0a06ed878d9950345"
+  },
+  "docs/checkpoints/type-values-required/compose.py": {
+   "mode": 420,
+   "sha256": "662cb22f049fd3c1bdb898230042e3e70666f61f55c3dbecd0a9ee058ecef31b"
+  },
+  "docs/checkpoints/type-values-required/control-census-repair.json.gz": {
+   "mode": 420,
+   "sha256": "a5d358ce21938063bbbc71c21913c7c568a9c7b6348d5d22d4b20ca0de2a7a97"
+  },
+  "docs/checkpoints/type-values-required/control-repair.json.gz": {
+   "mode": 420,
+   "sha256": "43b3178596d051d7bac13afb88f7e8c3f12c004051f706f567e3791c367ef033"
+  },
+  "docs/checkpoints/type-values-required/control_capture.py": {
+   "mode": 420,
+   "sha256": "314d32dd305e3e0171b3e29e2db688c5ce0120cb616b4cb37069d04a26960691"
+  },
+  "docs/checkpoints/type-values-required/control_capture_complete.py": {
+   "mode": 420,
+   "sha256": "7c3a70e5dbed6b0af9320e9228921a2fa81ec6d95d99322bb342043763a58119"
+  },
+  "docs/checkpoints/type-values-required/control_capture_final.py": {
+   "mode": 420,
+   "sha256": "37bb29774c10643b2800d34a75778a1f4ab7b2de71afeb80b3f30231dd318626"
+  },
+  "docs/checkpoints/type-values-required/controls-complete-inputs.json.gz.ref.gz": {
+   "mode": 420,
+   "sha256": "ca85fc8549a70d22fd430d8e9e50eeb07e72a571994c3ebb00072f5e9231ce25"
+  },
+  "docs/checkpoints/type-values-required/controls-complete-review.json": {
+   "mode": 420,
+   "sha256": "5de9da1e15e2b6947407721c785ac3c32e4aa268eb0e436465033e15f932b604"
+  },
+  "docs/checkpoints/type-values-required/controls-complete-run.json.gz": {
+   "mode": 420,
+   "sha256": "869095f14783ef2fa3f2d5c0f067674350459cbe76e699d92b5a0fefdd16b05d"
+  },
+  "docs/checkpoints/type-values-required/controls-inputs.json.gz.ref.gz": {
+   "mode": 420,
+   "sha256": "87f7394f846fddec68139b30ec5e80d5d7403e82b095037976f4e9e63485ff12"
+  },
+  "docs/checkpoints/type-values-required/controls-run.json.gz": {
+   "mode": 420,
+   "sha256": "49a5947a3fd4d463b3d377a4c297c904f24b224a2b93595f24193b6b6d37946e"
+  },
+  "docs/checkpoints/type-values-required/controls.pl": {
+   "mode": 420,
+   "sha256": "a3a523a87d19749c4fe63b0f79743313cbd3e0357684121e1401f86801a8dc87"
+  },
+  "docs/checkpoints/type-values-required/controls_final.pl": {
+   "mode": 420,
+   "sha256": "4ed7cc8e0cc01f375b3859653d9d3feda7568f2c00c13edf0065fb5494ecab22"
+  },
+  "docs/checkpoints/type-values-required/docs-proposals.json.gz": {
+   "mode": 420,
+   "sha256": "63b6fdcc86e712e394ae986c75cabb917cc57975801d97716e908c8b96c6a1a2"
+  },
+  "docs/checkpoints/type-values-required/docs.py": {
+   "mode": 420,
+   "sha256": "61805c9313b9062889721845da60bd15fa495b2ca644803c71e83f1194eaad01"
+  },
+  "docs/checkpoints/type-values-required/fix_source.py": {
+   "mode": 420,
+   "sha256": "061143d41db87390f8c772c191fa7aacabbf638a3f569aad1e1a9004bbb856c0"
+  },
+  "docs/checkpoints/type-values-required/focused-final-inputs.json": {
+   "mode": 420,
+   "sha256": "86af181de851f20495379385572629ce7c3d11d4c0e83bba56c898aa10a006c1"
+  },
+  "docs/checkpoints/type-values-required/focused-final-review.json": {
+   "mode": 420,
+   "sha256": "0efad7f34fa299a0ec0f42c20be8eedd6857619f0d0826a2b99e2216e085bc0e"
+  },
+  "docs/checkpoints/type-values-required/focused-final-run.json.gz": {
+   "mode": 420,
+   "sha256": "f4c4407062099e116d909b98a34f648752e1ae2bfeba3b8c97138b1d0a266bbf"
+  },
+  "docs/checkpoints/type-values-required/focused-inputs.json": {
+   "mode": 420,
+   "sha256": "7354fa78c8c5fa1a07e0f4a03ad973d70ad93b01897f7ad1d38934a7098b6668"
+  },
+  "docs/checkpoints/type-values-required/focused-run.json.gz": {
+   "mode": 420,
+   "sha256": "37e612e14bbd63e438c3a1647135b3677005cbf77e1a85c9b8e683d595824d0a"
+  },
+  "docs/checkpoints/type-values-required/pack_capsules.py": {
+   "mode": 420,
+   "sha256": "a3cd7fa8909cd5cd38cf5e77a1e4bf3ca8fe2bbd8ca243921f49f7e0294a3b65"
+  },
+  "docs/checkpoints/type-values-required/preservation.json.gz": {
+   "mode": 420,
+   "sha256": "fd70785e53b808aaf2f260a284a95b5f3c3f7bf63a76a41a7c0168447ffb4f2a"
+  },
+  "docs/checkpoints/type-values-required/preserve.py": {
+   "mode": 420,
+   "sha256": "b08d9694dff8f90120fb26affb67b5bc98248d4ea424d3b22872bbd4de03ef0b"
+  },
+  "docs/checkpoints/type-values-required/proposals.json.gz": {
+   "mode": 420,
+   "sha256": "370e0e39480515aa54edfb8e00d79860a2efb0a48b4a87e988dd823e0b0bfad8"
+  },
+  "docs/checkpoints/type-values-required/repair_controls.py": {
+   "mode": 420,
+   "sha256": "0d4a594fd93717527728e6b68bb25df1e91ff82b9640e7890f6d6b0b0d4704b6"
+  },
+  "docs/checkpoints/type-values-required/source-fix.json.gz": {
+   "mode": 420,
+   "sha256": "23d2d7386f1327baccd6c8411b4d81d80bbc6bd42da23b69406aa720f26b97df"
+  }
+ },
+ "native_inputs": [
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native-final.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-reference-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2-symbolic-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-authority-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3-before-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4-before-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5-before-stable-native.json",
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7-before-native.json"
+ ],
+ "producer": {
+  "base64": "IiIiQmluZCBldmVyeSBuZXcgc3VwcG9ydGluZyBzb3VyY2UgYW5kIGFydGlmYWN0IHdpdGhvdXQgZHVwbGljYXRpbmcgb2xkIGRpcmVjdCBiaW5kaW5ncy4iIiIKaW1wb3J0IGd6aXAKaW1wb3J0IGpzb24KaW1wb3J0IHJlCmltcG9ydCBzeXMKZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgpST09UID0gUGF0aChfX2ZpbGVfXykucmVzb2x2ZSgpLnBhcmVudHNbM10Kc3lzLnBhdGguaW5zZXJ0KDAsIHN0cihST09UIC8gJ2RvY3MvY2hlY2twb2ludHMvdHlwZS1ldmFsdWF0ZWQtdmFsdWVzJykpCmltcG9ydCBjb21tb24gYXMgYwoKUCA9ICdkb2NzL2NoZWNrcG9pbnRzL3R5cGUtdmFsdWVzLXJlcXVpcmVkLycKcmVjb3ZlcnkgPSBqc29uLmxvYWRzKChST09UIC8gKFAgKyAnY2Fwc3VsZS1yZWNvdmVyeS5qc29uJykpLnJlYWRfYnl0ZXMoKSkKYXNzZXJ0IHJlY292ZXJ5WydyZXN1bHQnXSA9PSAnUEFTUycKYXNzZXJ0IGFsbChub3QgKFJPT1QgLyByb3dbJ3BhdGgnXSkuZXhpc3RzKCkgZm9yIHJvdyBpbiByZWNvdmVyeVsncm93cyddKQpzZWxlY3RlZCA9IGpzb24ubG9hZHMoKFJPT1QgLyAoUCArICdmb2N1c2VkLWZpbmFsLWlucHV0cy5qc29uJykpLnJlYWRfYnl0ZXMoKSlbJ3NlbGVjdGVkJ10KbmF0aXZlID0gc2V0KCkKZm9yIHBhdGggaW4gc2VsZWN0ZWQ6CiAgICBzb3VyY2UgPSAoUk9PVCAvIHBhdGgpLnJlYWRfdGV4dCgpCiAgICBuYXRpdmUudXBkYXRlKHJlLmZpbmRhbGwociJbJ1wiXShkb2NzL2NoZWNrcG9pbnRzL1teJ1wiXStcLmpzb24pWydcIl0iLCBzb3VyY2UpKQogICAgZm9yIHByZWZpeCBpbiByZS5maW5kYWxsKHIibXkgXCRwcmVmaXhccyo9XHMqJyhbXiddKyknIiwgc291cmNlKToKICAgICAgICBuYXRpdmUudXBkYXRlKHByZWZpeCArIG5hbWUgZm9yIG5hbWUgaW4gcmUuZmluZGFsbChyIlwkcHJlZml4XHMqXC5ccyonKFteJ10rXC5qc29uKSciLCBzb3VyY2UpKQphc3NlcnQgbGVuKG5hdGl2ZSkgPT0gMTUKcGF0aHMgPSBuYXRpdmUgfCB7c3RyKHBhdGgucmVsYXRpdmVfdG8oUk9PVCkpIGZvciBwYXRoIGluIChST09UIC8gUCkuaXRlcmRpcigpIGlmIHBhdGguaXNfZmlsZSgpfQppbnB1dHMgPSB7cGF0aDoge2tleTogYy5yZWFkKHBhdGgpW2tleV0gZm9yIGtleSBpbiAoJ3NoYTI1NicsICdtb2RlJyl9IGZvciBwYXRoIGluIHNvcnRlZChwYXRocyl9CmMud3JpdGVfbmV3KFAgKyAnY2xvc3VyZS5qc29uJywgZGljdChpbnB1dHM9aW5wdXRzLCBuYXRpdmVfaW5wdXRzPXNvcnRlZChuYXRpdmUpLAogICAgcHJvZHVjZXI9Yy5yZWFkKFAgKyAnY2xvc2VfaW5wdXRzLnB5JyksCiAgICBzY29wZT0nQ2xvc2VkIHN1cHBvcnQgbWFuaWZlc3QgaW5jbHVkZXMgZXZlcnkgbmV3IHNvdXJjZSwgbWVhc3VyZWQgYXJ0aWZhY3QsIGV4YWN0ICcKICAgICAgICAgICdyZWNvdmVyeSByZWZlcmVuY2UgYW5kIGFsbCAxNSBvcmlnaW5hbCBuYXRpdmUgSlNPTiBpbnB1dHMuIFRoZSBjdXJyZW50IHJlYWRlciAnCiAgICAgICAgICAnY2hlY2tzIGVhY2ggaGFzaCBhbmQgbW9kZTsgdGhlIGxpdmUgY2xhaW0gZGlyZWN0bHkgYmluZHMgdGhpcyBtYW5pZmVzdCBhbmQgJwogICAgICAgICAgJ3JldGFpbnMgYWxsODIzIHByaW9yIGRpcmVjdCBpbnB1dHMuIE5vIGNhcCBpbmNyZWFzZSBvciBwcmlvciBiaW5kaW5nIHJlbW92YWwuJykpCnByaW50KCdDbG9zZWQgc3VwcG9ydCBtYW5pZmVzdDonLCBsZW4oaW5wdXRzKSwgJ2lucHV0cyBpbmNsdWRpbmcxNSBmcm96ZW4gbmF0aXZlIGNhcHR1cmVzJykK",
+  "mode": 420,
+  "sha256": "1cc60d042fe6baf9e30c15ee603f5ce887bcab8c76aa2748ea30d708b3caae04"
+ },
+ "scope": "Closed support manifest includes every new source, measured artifact, exact recovery reference and all 15 original native JSON inputs. The current reader checks each hash and mode; the live claim directly binds this manifest and retains all823 prior direct inputs. No cap increase or prior binding removal."
+}

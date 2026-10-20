@@ -1,0 +1,13 @@
+{
+ "all_inputs_bytes_modes_unchanged": true,
+ "claim_unchanged": true,
+ "run": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-evaluated-values/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCBQZXJsIGV2YWx1YXRlZCB2YWx1ZXMgcHVibGljYXRpb24gUEFTUzogNTczIGlucHV0czsgOTI1NzMgYnl0ZXM7MjMgR1JFRU4vMTkgYmFzZWxpbmUgUkVECg=="
+ }
+}

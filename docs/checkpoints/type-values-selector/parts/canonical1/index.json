@@ -1,0 +1,81 @@
+{
+ "logical_path": "docs/checkpoints/type-values-admission/canonical1-candidate.patch.gz",
+ "mode": 420,
+ "parts": [
+  {
+   "file_sha256": "6784395f33bbac5da59a313be92076163319f13e85571b1e733e33ed522461e6",
+   "mode": 420,
+   "number": 0,
+   "offset": 0,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-000.json.gz",
+   "payload_sha256": "21f9603ab05c388e5727465b51ad6dc559c85fe48298630591f3c0fde2ac749c",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "33ee5c17fa6bd866841d79951dd4f30a4ef378db26a215d2371c38ca37150807",
+   "mode": 420,
+   "number": 1,
+   "offset": 16777216,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-001.json.gz",
+   "payload_sha256": "afa6590e19e7085e7dd0684ae9d33203adfca562f1db49d71c5633a8ae40d45e",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "13ca014210f5e165f21d9732b95169099069eaf2ba8f54fa574eb896404e22ff",
+   "mode": 420,
+   "number": 2,
+   "offset": 33554432,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-002.json.gz",
+   "payload_sha256": "994f80000dabc8b1843a6ae806e916a17182489a0647a6eb9bd30ba8abb3736a",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "a0787f5ef19cf525f12b49d93ba6c5c9fa28b7a23db1b24ef710c7a551a967fa",
+   "mode": 420,
+   "number": 3,
+   "offset": 50331648,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-003.json.gz",
+   "payload_sha256": "1863749aeed010789faff76686b75c627d9d57a321228b42c02f5b58ebf013f7",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "fd90f216c217b81ee80e5084f8987e3c70ca5a8fba46f9727e77bd08be6b7cb8",
+   "mode": 420,
+   "number": 4,
+   "offset": 67108864,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-004.json.gz",
+   "payload_sha256": "3e5c9376f010e7f640b13fbbd3c953361ceabe2a68c6e8fdd0a6ed8dcf752d8b",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "8bf52a18ed7b13488e13e05d161473b3539a81a76fb664de592a794062bfe0fd",
+   "mode": 420,
+   "number": 5,
+   "offset": 83886080,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-005.json.gz",
+   "payload_sha256": "940b5c6d5fa8a3949310beeddbc5de2fe54a3227cfb853962b58e331660dfbf1",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "0ae000f773850bfa2787c74154314ca7fdf4246c62cffd26bf799b1b6088bcce",
+   "mode": 420,
+   "number": 6,
+   "offset": 100663296,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-006.json.gz",
+   "payload_sha256": "83dcaf03f480068db14109f5d65418eb88e18b8f0e00facdbf84883a35f46794",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "08cdf5f805cfa04829507247cd94151ef1014154e4c45a45c1e215db78507462",
+   "mode": 420,
+   "number": 7,
+   "offset": 117440512,
+   "path": "docs/checkpoints/type-values-selector/parts/canonical1/part-007.json.gz",
+   "payload_sha256": "a493745ac8f2fcd05b83e3498971a0632d8c57f4c6fde1da1149c929ae733f9a",
+   "size": 13880564
+  }
+ ],
+ "sha256": "f49acc0fdc6691464d69adfb2d36d39119619ba69a9ed6ab325cf6a187d4476c",
+ "size": 131321076,
+ "version": 1
+}

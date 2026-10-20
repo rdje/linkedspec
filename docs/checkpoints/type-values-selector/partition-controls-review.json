@@ -1,0 +1,8 @@
+{
+ "actual_whole_hash_fault": 2,
+ "healthy_controls": 1,
+ "rejected_controls": 10,
+ "restoration": true,
+ "result": "PASS",
+ "scope": "Corruption, truncation, order, missing parts, mode, internally consistent changed payload, wrong whole checksum/size, traversal and identical-byte symlink controls reject. The actual whole-check bypass admits two wrong streams; the independent byte oracle rejects that producer and restoration passes."
+}

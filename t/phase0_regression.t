@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #==============================================================================
-# phase0_regression.t — LinkedSpec primary regression gate (989 subtests)
+# phase0_regression.t — LinkedSpec primary regression gate
 #
 # Test categories (in file order):
 #   1. Spec compilation + language-agnostic readiness  (lines ~30-100)
@@ -13721,13 +13721,17 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
         'bare-name exact statement stays passthrough; value positions own bare scalar reads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'array("A", "B")'),
-        q{["A", "B"]},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst($label, 'array("A", "B")'), q{},
+        ),
+        q#{"value":["A","B"],"warnings":[]}#,
         'array(...) canonical wrapper rewrite preserves array constructor semantics'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'hash("kind", "node")'),
-        q{{"kind" => "node"}},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst($label, 'hash("kind", "node")'), q{},
+        ),
+        q#{"value":{"kind":"node"},"warnings":[]}#,
         'hash(...) canonical wrapper rewrite preserves hash constructor semantics'
     );
     like(
@@ -15449,8 +15453,13 @@ SPEC
         'Top',
         'set(name, meta.pick_keys("kind").sorted_values().first()); return(hash("parts_count", count(parts)))'
     );
-    like($alias_rewrite, qr/\$name.*\$__ls_pick_source = \\\%meta.*\$__ls_first->\[0\].*\{"parts_count" => scalar\(\@parts\)\}/s,
-        'typed slot/container lowering reuses the expected scalar/hash/array Perl shapes');
+    is(
+        evaluate_lowered_json(
+            $alias_rewrite, q{my %meta = (kind => "node"); my @parts = qw(A B); my $name;},
+        ),
+        q#{"value":{"parts_count":2},"warnings":[]}#,
+        'typed slot/container lowering executes the constructor result'
+    );
 };
 
 subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
@@ -15923,8 +15932,10 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
     plan tests => 79;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", [IMATCH]))'),
-        'return ["group_open", [IMATCH]]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", [IMATCH]))'), q{no strict 'subs';},
+        ),
+        q#{"value":["group_open",["IMATCH"]],"warnings":[]}#,
         'return(array(...)) canonical helper preserves tagged return payload'
     );
     is(
@@ -16298,8 +16309,10 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'substr helper lowers slash-pattern regex substitution'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", array(entry_group(0), c)))'),
-        q#return ["semantic_annotation", [do { LinkedSpec::SourceLocation::Runtime::capture_group_text(scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef) }, $c]]#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", array(entry_group(0), c)))'), q{my @IMATCH_LIST = ("capture"); my $c = "tail";},
+        ),
+        q#{"value":["semantic_annotation",["capture","tail"]],"warnings":[]}#,
         'return(array(...)) canonical helper lowers entry/scalar-slot constructor payloads'
     );
 
@@ -16328,9 +16341,11 @@ subtest 'emit_context_lowers_push_method_contract' => sub {
         qr/BindingRuntime::push_value\(\$items, "items", \$retv\)/,
         'push(target, value) remains compatible over the uniform binding'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'push(items, array(tag, name))'),
-        qr/BindingRuntime::push_value\(\$items, "items", \[\$tag, \$name\]\)/,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'push(items, array(tag, name))'), q{my $items = ["before"]; my $tag = "tag"; my $name = "node";},
+        ),
+        q#{"value":["before",["tag","node"]],"warnings":[]}#,
         'push accepts wrapped target symbol and lowers nested array(...) value expression'
     );
     like(
@@ -16526,15 +16541,19 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         qr/^return do \{ my \$__ls_copy_value = \$items;.*ref\(\$__ls_copy_value\) eq 'ARRAY'.*ref\(\$__ls_copy_value\) eq 'HASH'/s,
         'return(payload) deterministically repeats the runtime-typed snapshot lowering'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(assigns) })'),
-        qr/^return \{\$name => \$block_namei, \$content => do \{ my \$__ls_copy_value = \$assigns;.*ref\(\$__ls_copy_value\) eq 'ARRAY'.*ref\(\$__ls_copy_value\) eq 'HASH'/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(assigns) })'), q{my $name = "node_name"; my $block_namei = "branch"; my $content = "children"; my $assigns = ["first"];},
+        ),
+        q#{"value":{"children":["first"],"node_name":"branch"},"warnings":[]}#,
         'return(payload) snapshots a runtime-typed binding inside structured harray payloads'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(assigns) })'),
-        qr/^return \{\$name => \$block_namei, \$content => do \{ my \$__ls_copy_value = \$assigns;.*ref\(\$__ls_copy_value\) eq 'ARRAY'.*ref\(\$__ls_copy_value\) eq 'HASH'/s,
-        'structured harray snapshot lowering is deterministic'
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(assigns) })'), q{my $name = "node_name"; my $block_namei = "branch"; my $content = "children"; my $assigns = { child => "first" };},
+        ),
+        q#{"value":{"children":{"child":"first"},"node_name":"branch"},"warnings":[]}#,
+        'structured harray snapshot preserves the copied harray kind'
     );
 
     my $spec_content = <<'SPEC';
@@ -16558,14 +16577,18 @@ SPEC
 subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => sub {
     plan tests => 12;
 
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key : name }, [123, foo_arr.drop_front(idx).first()]])'),
-        qr/^return \["semantic", \{\$key => \$name\}, \[123, do \{ my \$__ls_first = do \{ my \$__ls_tail_skip = \$idx;.*\@foo_arr.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key : name }, [123, foo_arr.drop_front(idx).first()]])'), q{my $key = "field"; my $name = "node"; my $idx = 1; my @foo_arr = qw(zero one two);},
+        ),
+        q#{"value":["semantic",{"field":"node"},[123,"one"]],"warnings":[]}#,
         'general return(payload) lowers nested array/hash payload with scalar helpers'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ item : foo_hash.pick_keys(key).sorted_values().first(), list : [name, 123] })'),
-        qr/^return \{\$item => do \{ my \$__ls_first = do \{ my \$__ls_sorted_values = do \{ my \$__ls_pick_source = \\%foo_hash;.*foreach my \$__ls_pick_key \(\$key\).*\$__ls_first->\[0\].*\$list => \[\$name, 123\]\}/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return({ item : foo_hash.pick_keys(key).sorted_values().first(), list : [name, 123] })'), q{my %foo_hash = (take => "picked", skip => "ignored"); my $key = "take"; my $name = "node"; my $item = "chosen"; my $list = "values";},
+        ),
+        q#{"value":{"chosen":"picked","values":["node",123]},"warnings":[]}#,
         'general return(payload) lowers projected field/index reads inside nested hash/list payload'
     );
     is(
@@ -16574,18 +16597,24 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
         'general return(payload) lowers base[...]["..."] with mixed index/key path segments'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ item : myref["A"][B]["C"][D] })'),
-        'return {$item => do { my $__ls_read_value = $myref; my $__ls_read_index; $__ls_read_index = "A"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $B; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "C"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $D; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return({ item : myref["A"][B]["C"][D] })'), q{my $item = "chosen"; my $myref = { A => [{ C => ["zero", "one"] }] }; my $B = 0; my $D = 1;},
+        ),
+        q#{"value":{"chosen":"one"},"warnings":[]}#,
         'general return(payload) lowers base["..."][...] with hash-first path segments'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind", "node", "item", foo_hash.pick_keys(key).sorted_values().first(), "list", array(name, 123)))'),
-        qr/^return \{"kind" => "node", "item" => do \{ my \$__ls_first = do \{ my \$__ls_sorted_values = do \{ my \$__ls_pick_source = \\%foo_hash;.*foreach my \$__ls_pick_key \(\$key\).*\$__ls_first->\[0\].*"list" => \[\$name, 123\]\}/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind", "node", "item", foo_hash.pick_keys(key).sorted_values().first(), "list", array(name, 123)))'), q{my %foo_hash = (take => "picked", skip => "ignored"); my $key = "take"; my $name = "node"; },
+        ),
+        q#{"value":{"item":"picked","kind":"node","list":["node",123]},"warnings":[]}#,
         'general return(payload) lowers hash(...) constructor payloads with nested helper values'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))'),
-        'return [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
+        ),
+        q#{"value":["ALPHA","APPLE"],"warnings":[]}#,
         'general return(payload) lowers nested array-pipeline composition inside array(...) payloads'
     );
     is(
@@ -16657,13 +16686,17 @@ subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub 
         'set(name, pipeline(...)) lowers the nested typed-binding pipeline source'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'),
-        'return {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
+        ),
+        q#{"value":{"items":["ALPHA","APPLE"]},"warnings":[]}#,
         'nested hash payload values accept array-wrapped array-pipeline composition'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'),
-        'return ["items", [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
+        ),
+        q#{"value":["items",["ALPHA","APPLE"]],"warnings":[]}#,
         'nested array payload values accept array-wrapped array-pipeline composition'
     );
 
@@ -16698,24 +16731,32 @@ SPEC
 subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     plan tests => 14;
 
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'),
-        qr/^\$by_name = \{"A" => \[\@IMATCH_LIST = grep .*UnicodeCaseMapping::uppercase/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);my $by_name;},
+        ),
+        q#{"value":{"A":["ALPHA","APPLE"]},"warnings":[]}#,
         'set(name, hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", filter_match(uniq(uppercase_each(items)), /^B/)))'),
-        qr/^\$by_name = \{"A" => do \{ require LinkedSpec::BindingRuntime;.*array_transform\(\$items, "items", "uppercase_each"\).*array_transform\(\$items, "items", "uniq"\).*array_transform\(\$items, "items", "filter_match"/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", filter_match(uniq(uppercase_each(items)), /^B/)))'), q{my $by_name; my $items = [qw(alpha beta beta)];},
+        ),
+        q#{"value":{"A":["BETA"]},"warnings":[]}#,
         'set(name, hash(... pipeline(...))) preserves the nested array typed value'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'push(events, hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'),
-        qr/BindingRuntime::push_value\(\$events, "events", \{"items" => \[\@IMATCH_LIST = grep/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'push(events, hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);my $events = [];},
+        ),
+        q#{"value":[{"items":["ALPHA","APPLE"]}],"warnings":[]}#,
         'push accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))))'),
-        'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @IMATCH_LIST }]}]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
+        ),
+        q#{"value":["semantic_annotation",{"items":["ALPHA","APPLE"]}],"warnings":[]}#,
         'return(array(...)) accepts hash payloads with nested collection-valued array-pipeline composition'
     );
 
@@ -35882,8 +35923,10 @@ subtest 'emit_context_lowers_coalesce_value_helpers' => sub {
         'coalesce(...) lowers scalar fallback chains into nested first-defined value expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce(retv["content"], entry_text(), "UNKNOWN"), "parts", coalesce(retv["parts"], ["empty"])))'),
-        q#return {"content" => do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }, "parts" => do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }}#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce(retv["content"], entry_text(), "UNKNOWN"), "parts", coalesce(retv["parts"], ["empty"])))'),
+        ),
+        q#{"value":{"content":"UNKNOWN","parts":["empty"]},"warnings":[]}#,
         'coalesce(...) lowers inside general return payloads for both scalar and aggregate fallback values'
     );
 };
@@ -35901,8 +35944,10 @@ subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
         'coalesce_nonempty(...) composes inside canonical flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN")))'),
-        q#return {"content" => do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }}#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN")))'),
+        ),
+        q#{"value":{"content":"UNKNOWN"},"warnings":[]}#,
         'coalesce_nonempty(...) lowers inside general return payloads'
     );
 };
@@ -36447,8 +36492,10 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
         'count(name) lowers array variables into scalar(@array) reducer form'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(retv["parts"], ["empty"]))'),
-        'do { my $__ls_count = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(retv["parts"], ["empty"]))'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'count(...) lowers array-valued fallback expressions into arrayref-size reducer form'
     );
     is(
@@ -36457,8 +36504,10 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
         'count(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("part_count", count(coalesce(retv["parts"], ["empty"]))))'),
-        'return {"part_count" => do { my $__ls_count = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("part_count", count(coalesce(retv["parts"], ["empty"]))))'),
+        ),
+        q#{"value":{"part_count":1},"warnings":[]}#,
         'count(...) lowers inside general return payloads'
     );
 };
@@ -36559,8 +36608,10 @@ subtest 'emit_context_lowers_contains_value_helpers' => sub {
         'contains(name, value) lowers working arrays into a boolean-like membership expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(retv["parts"], ["empty"]), entry_text())'),
-        'do { my $__ls_contains_array = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(retv["parts"], ["empty"]), entry_text())'),
+        ),
+        q#{"value":0,"warnings":[]}#,
         'contains(...) lowers array-valued fallback expressions into guarded membership checks'
     );
     is(
@@ -36569,8 +36620,10 @@ subtest 'emit_context_lowers_contains_value_helpers' => sub {
         'contains(...) composes inside flow conditions over projected arrays'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", contains(sorted_keys(meta), "kind")))'),
-        'return {"has_kind" => do { my $__ls_contains_array = [sort keys %meta]; my $__ls_contains_needle = "kind"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", contains(sorted_keys(meta), "kind")))'),
+        ),
+        q#{"value":{"has_kind":1},"warnings":[]}#,
         'contains(...) lowers inside general return payloads'
     );
 };
@@ -36593,8 +36646,10 @@ subtest 'emit_context_lowers_matches_value_helpers' => sub {
         'matches(...) composes inside flow conditions over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("is_prefixed", matches(lowercase(trim(raw_name)), /^pre/)))'),
-        'return {"is_prefixed" => do { my $__ls_matches_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^pre/) ? 1 : 0) : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("is_prefixed", matches(lowercase(trim(raw_name)), /^pre/)))'),
+        ),
+        q#{"value":{"is_prefixed":0},"warnings":[]}#,
         'matches(...) lowers inside general return payloads'
     );
 };
@@ -36617,8 +36672,10 @@ subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
         'contains_substr(...) composes inside flow conditions over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_fix", contains_substr(lowercase(trim(raw_name)), "fix")))'),
-        'return {"has_fix" => do { my $__ls_contains_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_contains_substr_needle = "fix"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_fix", contains_substr(lowercase(trim(raw_name)), "fix")))'),
+        ),
+        q#{"value":{"has_fix":1},"warnings":[]}#,
         'contains_substr(...) lowers inside general return payloads'
     );
 };
@@ -36641,8 +36698,10 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
         'replace_substr(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("normalized", replace_substr(lowercase(trim(raw_name)), "-", "_")))'),
-        'return {"normalized" => do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = "-"; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("normalized", replace_substr(lowercase(trim(raw_name)), "-", "_")))'),
+        ),
+        q#{"value":{"normalized":"node_fix.txt"},"warnings":[]}#,
         'replace_substr(...) lowers inside general return payloads'
     );
 };
@@ -36670,13 +36729,17 @@ subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
         'rm_suffix(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_prefix", rm_prefix(lowercase(trim(raw_name)), "node_")))'),
-        'return {"trimmed_prefix" => do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_prefix", rm_prefix(lowercase(trim(raw_name)), "node_")))'),
+        ),
+        q#{"value":{"trimmed_prefix":"fix.txt"},"warnings":[]}#,
         'rm_prefix(...) lowers inside general return payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_suffix", rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")))'),
-        'return {"trimmed_suffix" => do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("trimmed_suffix", rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")))'),
+        ),
+        q#{"value":{"trimmed_suffix":"node_fix.txt"},"warnings":[]}#,
         'rm_suffix(...) lowers inside general return payloads'
     );
 };
@@ -36699,8 +36762,10 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
         'cat(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", cat(lowercase(trim(raw_name)), "_", stage)))'),
-        q{return {"full_name" => do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = "$__ls_cat_part"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\A-0(?:\.0+)?\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }}},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", cat(lowercase(trim(raw_name)), "_", stage)))'),
+        ),
+        q#{"value":{"full_name":"node_fix.txt_parsed"},"warnings":[]}#,
         'cat(...) lowers inside general return payloads'
     );
 };
@@ -36723,8 +36788,10 @@ subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
         'existing flow lowering for is_empty(...) remains stable while value-layer support is added'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values_empty", is_empty(sorted_values(pick_keys(meta, "kind", "source"))), "meta_nonempty", is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))))'),
-        'return {"values_empty" => do { my $__ls_is_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }, "meta_nonempty" => do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values_empty", is_empty(sorted_values(pick_keys(meta, "kind", "source"))), "meta_nonempty", is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))))'),
+        ),
+        q#{"value":{"meta_nonempty":1,"values_empty":0},"warnings":["Scalar value @__ls_drop{\"debug\"} better written as $__ls_drop{\"debug\"}"]}#,
         'is_empty(...) and is_nonempty(...) lower inside general return payloads as value helpers'
     );
 };
@@ -36825,8 +36892,10 @@ subtest 'emit_context_lowers_index_of_value_helpers' => sub {
         'index_of(name, value) lowers working arrays into a first-match index expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(retv["parts"], ["empty"]), entry_text())'),
-        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(retv["parts"], ["empty"]), entry_text())'),
+        ),
+        q#{"value":null,"warnings":[]}#,
         'index_of(...) lowers array-valued fallback expressions into guarded first-match index checks'
     );
     is(
@@ -36835,8 +36904,10 @@ subtest 'emit_context_lowers_index_of_value_helpers' => sub {
         'index_of(...) composes inside numeric flow comparisons over projected arrays'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind_index", index_of(sorted_keys(meta), "kind")))'),
-        q{return {"kind_index" => do { my $__ls_index_of_array = [sort keys %meta]; my $__ls_index_of_needle = "kind"; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }}},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("kind_index", index_of(sorted_keys(meta), "kind")))'),
+        ),
+        q#{"value":{"kind_index":0},"warnings":[]}#,
         'index_of(...) lowers inside general return payloads'
     );
 };
@@ -36937,8 +37008,10 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
         'count_keys(name) lowers hash variables into scalar(keys %hash) reducer form'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(retv["meta"], hash("kind", "fallback")))'),
-        'do { my $__ls_count_keys = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(retv["meta"], hash("kind", "fallback")))'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'count_keys(...) lowers hash-valued fallback expressions into hashref-size reducer form'
     );
     is(
@@ -36947,8 +37020,10 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
         'count_keys(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("meta_key_count", count_keys(coalesce(retv["meta"], hash("kind", "fallback")))))'),
-        'return {"meta_key_count" => do { my $__ls_count_keys = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("meta_key_count", count_keys(coalesce(retv["meta"], hash("kind", "fallback")))))'),
+        ),
+        q#{"value":{"meta_key_count":1},"warnings":[]}#,
         'count_keys(...) lowers inside general return payloads'
     );
 };
@@ -37049,8 +37124,10 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
         'has_key(name, key) lowers working hashes into an exists(...) boolean-like expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks'
     );
     is(
@@ -37059,8 +37136,10 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
         'has_key(...) composes directly inside flow conditions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")))'),
-        'return {"has_kind" => do { my $__ls_has_key = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")))'),
+        ),
+        q#{"value":{"has_kind":1},"warnings":[]}#,
         'has_key(...) lowers inside general return payloads'
     );
 };
@@ -37156,18 +37235,24 @@ subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(meta, hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback")))'),
-        '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(meta, hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback")))'),
+        ),
+        q#{"value":{"kind":"node","source":"fallback"},"warnings":[]}#,
         'merge_hash(...) lowers working hashes, constructor hashes, and fallback hash expressions into one composed hash payload'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(merge_hash(meta, hash("kind", "node")), "kind")'),
-        'do { my $__ls_has_key = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(merge_hash(meta, hash("kind", "node")), "kind")'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'merge_hash(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(merge_hash(meta, hash("kind", "node"), hash("source", entry_text())))'),
-        q#return {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(merge_hash(meta, hash("kind", "node"), hash("source", entry_text())))'),
+        ),
+        q#{"value":{"kind":"node","source":null},"warnings":[]}#,
         'merge_hash(...) lowers inside general return payloads'
     );
     like(
@@ -37278,8 +37363,10 @@ subtest 'emit_context_lowers_hash_snapshot_value_helpers' => sub {
         'copy(...) composes inside aggregate emptiness flow checks without a source namespace selector'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(copy(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "source", "stage")))'),
-        'return do { my $__ls_hash_snapshot = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(copy(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "source", "stage")))'),
+        ),
+        q#{"value":{"kind":"token","source":"fixture","stage":"normalized"},"warnings":[]}#,
         'copy(...) lowers inside general return payloads'
     );
     like(
@@ -37390,8 +37477,10 @@ subtest 'emit_context_lowers_set_key_value_helpers' => sub {
         'set_key(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(set_key(merge_hash(meta, hash("kind", "node")), "stage", "normalized"))'),
-        'return do { my $__ls_set_key_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(set_key(merge_hash(meta, hash("kind", "node")), "stage", "normalized"))'),
+        ),
+        q#{"value":{"kind":"node","source":"fixture","stage":"normalized"},"warnings":[]}#,
         'set_key(...) lowers inside general return payloads'
     );
     like(
@@ -37502,8 +37591,10 @@ subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
         'rename_key(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(rename_key(merge_hash(meta, hash("old_stage", "normalized")), "old_stage", "stage"))'),
-        'return do { my $__ls_rename_key_source = {%meta, do { my $__ls_merge_hash = {"old_stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(rename_key(merge_hash(meta, hash("old_stage", "normalized")), "old_stage", "stage"))'),
+        ),
+        q#{"value":{"kind":"token","source":"fixture","stage":"normalized"},"warnings":[]}#,
         'rename_key(...) lowers inside general return payloads'
     );
     like(
@@ -37614,8 +37705,10 @@ subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
         'drop_keys(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(drop_keys(merge_hash(meta, hash("kind", "node"), hash("debug", 1)), "debug"))'),
-        'return do { my $__ls_drop_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(drop_keys(merge_hash(meta, hash("kind", "node"), hash("debug", 1)), "debug"))'),
+        ),
+        q#{"value":{"kind":"node","source":"fixture"},"warnings":["Scalar value @__ls_drop{\"debug\"} better written as $__ls_drop{\"debug\"}"]}#,
         'drop_keys(...) lowers inside general return payloads'
     );
     like(
@@ -37726,8 +37819,10 @@ subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
         'pick_keys(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(pick_keys(merge_hash(meta, hash("kind", "node"), hash("source", "rule"), hash("debug", 1)), "kind", "source"))'),
-        'return do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"source" => "rule"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = {"debug" => 1}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(pick_keys(merge_hash(meta, hash("kind", "node"), hash("source", "rule"), hash("debug", 1)), "kind", "source"))'),
+        ),
+        q#{"value":{"kind":"node","source":"rule"},"warnings":[]}#,
         'pick_keys(...) lowers inside general return payloads'
     );
     like(
@@ -37838,8 +37933,10 @@ subtest 'emit_context_lowers_sorted_keys_value_helpers' => sub {
         'sorted_keys(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("keys", sorted_keys(merge_hash(meta, hash("stage", "normalized")))))'),
-        'return {"keys" => do { my $__ls_sorted_keys = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("keys", sorted_keys(merge_hash(meta, hash("stage", "normalized")))))'),
+        ),
+        q#{"value":{"keys":["kind","source","stage"]},"warnings":[]}#,
         'sorted_keys(...) lowers inside general return payloads'
     );
     like(
@@ -37950,8 +38047,10 @@ subtest 'emit_context_lowers_sorted_values_value_helpers' => sub {
         'sorted_values(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values", sorted_values(merge_hash(meta, hash("stage", "normalized")))))'),
-        'return {"values" => do { my $__ls_sorted_values = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values", sorted_values(merge_hash(meta, hash("stage", "normalized")))))'),
+        ),
+        q#{"value":{"values":["token","fixture","normalized"]},"warnings":[]}#,
         'sorted_values(...) lowers inside general return payloads'
     );
     like(
@@ -38052,18 +38151,24 @@ subtest 'emit_context_lowers_concat_arrays_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat_arrays(parts, sorted_keys(meta), ["tail"])'),
-        q{[@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat_arrays(parts, sorted_keys(meta), ["tail"])'),
+        ),
+        q#{"value":[1,3,11,"kind","source","tail"],"warnings":[]}#,
         'concat_arrays(...) lowers direct arrays, projected arrays, and array constructors into one pure concatenated array value'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(concat_arrays(parts, take(sorted_keys(meta), 2), ["tail"])), 3)'),
-        q{(do { my $__ls_count = [@parts, do { my $__ls_concat_arrays = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(concat_arrays(parts, take(sorted_keys(meta), 2), ["tail"])), 3)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'concat_arrays(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(concat_arrays(parts, sorted_keys(meta), ["tail"]))'),
-        q{return [@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(concat_arrays(parts, sorted_keys(meta), ["tail"]))'),
+        ),
+        q#{"value":[1,3,11,"kind","source","tail"],"warnings":[]}#,
         'concat_arrays(...) lowers inside general return payloads'
     );
     like(
@@ -38160,18 +38265,24 @@ subtest 'emit_context_lowers_sorted_array_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('sorted(concat_arrays(parts, ["delta"], ["alpha"]))'),
-        q{do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('sorted(concat_arrays(parts, ["delta"], ["alpha"]))'),
+        ),
+        q#{"value":[1,11,3,"alpha","delta"],"warnings":[]}#,
         'sorted(...) lowers composed array-valued expressions into one deterministic lexical array value'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted(concat_arrays(parts, ["delta"], ["alpha"]))), 2)'),
-        q{(do { my $__ls_count = do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["alpha"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 2)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted(concat_arrays(parts, ["delta"], ["alpha"]))), 2)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'sorted(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(sorted(concat_arrays(parts, ["delta"])))'),
-        q{return do { my $__ls_sorted = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(sorted(concat_arrays(parts, ["delta"])))'),
+        ),
+        q#{"value":[1,11,3,"delta"],"warnings":[]}#,
         'sorted(...) lowers inside general return payloads'
     );
     like(
@@ -38268,18 +38379,24 @@ subtest 'emit_context_lowers_reversed_array_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('reversed(concat_arrays(parts, ["delta"], ["tail"]))'),
-        q{do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('reversed(concat_arrays(parts, ["delta"], ["tail"]))'),
+        ),
+        q#{"value":["tail","delta",11,3,1],"warnings":[]}#,
         'reversed(...) lowers composed array-valued expressions into one reversed array value'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(reversed(concat_arrays(parts, ["delta"], ["tail"]))), 2)'),
-        q{(do { my $__ls_count = do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 2)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(reversed(concat_arrays(parts, ["delta"], ["tail"]))), 2)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'reversed(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(reversed(concat_arrays(parts, ["delta"])))'),
-        q{return do { my $__ls_reversed = [@parts, do { my $__ls_concat_arrays = ["delta"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(reversed(concat_arrays(parts, ["delta"])))'),
+        ),
+        q#{"value":["delta",11,3,1],"warnings":[]}#,
         'reversed(...) lowers inside general return payloads'
     );
     like(
@@ -38376,23 +38493,31 @@ subtest 'emit_context_lowers_num_sum_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_sum(concat_arrays(parts, array(4, 5)))'),
-        q{do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_sum(concat_arrays(parts, array(4, 5)))'),
+        ),
+        q#{"value":24,"warnings":[]}#,
         'num_sum(...) lowers composed array-valued expressions into one numeric aggregate reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_sum(concat_arrays(parts, array(4, 5))), 10)'),
-        q{(do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } } > 10)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_sum(concat_arrays(parts, array(4, 5))), 10)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_sum(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(total, num_sum(concat_arrays(parts, array(4, 5))))'),
-        q{$total = do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(total, num_sum(concat_arrays(parts, array(4, 5))))'),
+        ),
+        q#{"value":24,"warnings":[]}#,
         'assign helper accepts num_sum(...) over composed array-valued expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(num_sum(concat_arrays(parts, array(4, 5))))'),
-        q{return do { my $__ls_num_sum_source = [@parts, do { my $__ls_concat_arrays = [4, 5]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(num_sum(concat_arrays(parts, array(4, 5))))'),
+        ),
+        q#{"value":24,"warnings":[]}#,
         'return(payload) accepts num_sum(...) nested around composed array reducers'
     );
 };
@@ -38484,23 +38609,31 @@ subtest 'emit_context_lowers_num_avg_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_avg(concat_arrays(parts, array(4, 8)))'),
-        q{do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_avg(concat_arrays(parts, array(4, 8)))'),
+        ),
+        q#{"value":5.4,"warnings":[]}#,
         'num_avg(...) lowers composed array-valued expressions into one numeric average reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_avg(concat_arrays(parts, array(4, 8))), 3)'),
-        q{(do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_avg(concat_arrays(parts, array(4, 8))), 3)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_avg(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(avg, num_avg(concat_arrays(parts, array(4, 8))))'),
-        q{$avg = do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(avg, num_avg(concat_arrays(parts, array(4, 8))))'),
+        ),
+        q#{"value":5.4,"warnings":[]}#,
         'assign helper accepts num_avg(...) over composed array-valued expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(num_avg(concat_arrays(parts, array(4, 8))))'),
-        q{return do { my $__ls_num_avg_source = [@parts, do { my $__ls_concat_arrays = [4, 8]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(num_avg(concat_arrays(parts, array(4, 8))))'),
+        ),
+        q#{"value":5.4,"warnings":[]}#,
         'return(payload) accepts num_avg(...) nested around composed array reducers'
     );
 };
@@ -38592,23 +38725,31 @@ subtest 'emit_context_lowers_num_median_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_median(concat_arrays(parts, array(4, 8, 10)))'),
-        q{do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_median(concat_arrays(parts, array(4, 8, 10)))'),
+        ),
+        q#{"value":6,"warnings":[]}#,
         'num_median(...) lowers composed array-valued expressions into one numeric median reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_median(concat_arrays(parts, array(4, 8, 10))), 4)'),
-        q{(do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } } > 4)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(num_median(concat_arrays(parts, array(4, 8, 10))), 4)'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_median(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(median, num_median(concat_arrays(parts, array(4, 8, 10))))'),
-        q{$median = do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(median, num_median(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":6,"warnings":[]}#,
         'assign helper accepts num_median(...) over composed array-valued expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(num_median(concat_arrays(parts, array(4, 8, 10))))'),
-        q{return do { my $__ls_num_median_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(num_median(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":6,"warnings":[]}#,
         'return(payload) accepts num_median(...) nested around composed array reducers'
     );
 };
@@ -38700,23 +38841,31 @@ subtest 'emit_context_lowers_num_range_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_range(concat_arrays(parts, array(4, 8, 10)))'),
-        q{do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_range(concat_arrays(parts, array(4, 8, 10)))'),
+        ),
+        q#{"value":10,"warnings":[]}#,
         'num_range(...) lowers composed array-valued expressions into one numeric span reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_range(concat_arrays(parts, array(4, 8, 10))), 6)'),
-        q{(do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } } == 6)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_range(concat_arrays(parts, array(4, 8, 10))), 6)'),
+        ),
+        q#{"value":"","warnings":[]}#,
         'num_range(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(span, num_range(concat_arrays(parts, array(4, 8, 10))))'),
-        q{$span = do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(span, num_range(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":10,"warnings":[]}#,
         'assign helper accepts num_range(...) over composed array-valued expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(num_range(concat_arrays(parts, array(4, 8, 10))))'),
-        q{return do { my $__ls_num_range_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(num_range(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":10,"warnings":[]}#,
         'return(payload) accepts num_range(...) nested around composed array reducers'
     );
 };
@@ -38808,33 +38957,45 @@ subtest 'emit_context_lowers_num_minmax_array_reducer_helpers' => sub {
     plan tests => 6;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_min(concat_arrays(parts, array(4, 8, 10)))'),
-        q{do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_min(concat_arrays(parts, array(4, 8, 10)))'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_min(...) accepts one composed array-valued source as a numeric minimum reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_max(concat_arrays(parts, array(4, 8, 10)))'),
-        q{do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('num_max(concat_arrays(parts, array(4, 8, 10)))'),
+        ),
+        q#{"value":11,"warnings":[]}#,
         'num_max(...) accepts one composed array-valued source as a numeric maximum reducer'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_min(concat_arrays(parts, array(4, 8, 10))), 4)'),
-        q{(do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } } == 4)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_min(concat_arrays(parts, array(4, 8, 10))), 4)'),
+        ),
+        q#{"value":"","warnings":[]}#,
         'num_min(...) unary array-reducer mode composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_max(concat_arrays(parts, array(4, 8, 10))), 10)'),
-        q{(do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } } == 10)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_eq(num_max(concat_arrays(parts, array(4, 8, 10))), 10)'),
+        ),
+        q#{"value":"","warnings":[]}#,
         'num_max(...) unary array-reducer mode composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(lowest, num_min(concat_arrays(parts, array(4, 8, 10))))'),
-        q{$lowest = do { my $__ls_num_min_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(lowest, num_min(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":1,"warnings":[]}#,
         'assign helper accepts unary-array num_min(...) over composed array-valued expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(num_max(concat_arrays(parts, array(4, 8, 10))))'),
-        q{return do { my $__ls_num_max_source = [@parts, do { my $__ls_concat_arrays = [4, 8, 10]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }]; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(num_max(concat_arrays(parts, array(4, 8, 10))))'),
+        ),
+        q#{"value":11,"warnings":[]}#,
         'return(payload) accepts unary-array num_max(...) nested around composed array reducers'
     );
 };
@@ -38926,23 +39087,31 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
     plan tests => 16;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
-        'return ["?subprogram_declaration:", @IMATCH_LIST]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("?subprogram_declaration:", flat_array(IMATCH_LIST)))'),
+        ),
+        q#{"value":["?subprogram_declaration:","alpha","beta"],"warnings":[]}#,
         'flat_array(name) lowers array contents into surrounding array constructor list context'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic", flat_array(parts), name))'),
-        'return ["semantic", @parts, $name]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic", flat_array(parts), name))'),
+        ),
+        q#{"value":["semantic",1,3,11,"node"],"warnings":[]}#,
         'flat_array(name) lowers the bare typed array into surrounding array constructor list context'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node", "item", name))'),
-        'return {%extra, "kind" => "node", "item" => $name}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node", "item", name))'),
+        ),
+        q#{"value":{"item":"node","kind":"node","source":"extra"},"warnings":[]}#,
         'flat_hash(name) lowers hash contents into surrounding hash constructor list context'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node"))'),
-        'return {%extra, "kind" => "node"}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(extra), "kind", "node"))'),
+        ),
+        q#{"value":{"kind":"node","source":"extra"},"warnings":[]}#,
         'flat_hash(name) lowers the bare typed harray into surrounding hash constructor list context'
     );
     is(
@@ -38951,23 +39120,31 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
         'return(payload) accepts flat_array(name) as a direct flat list payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("keys", flat_array(sorted_keys(meta))))'),
-        'return ["keys", do { my $__ls_flat_array = [sort keys %meta]; (defined($__ls_flat_array) && ref($__ls_flat_array) eq \'ARRAY\') ? @{$__ls_flat_array} : () }]',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("keys", flat_array(sorted_keys(meta))))'),
+        ),
+        q#{"value":["keys","kind","source"],"warnings":[]}#,
         'flat_array(...) now flattens composed array-valued helper expressions into surrounding array constructors'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(entry_groups())))'),
-        q#return ["?Top:", do { my $__ls_flat_array = do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@IMATCH_LIST]) }; (defined($__ls_flat_array) && ref($__ls_flat_array) eq 'ARRAY') ? @{$__ls_flat_array} : () }]#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(entry_groups())))'),
+        ),
+        q#{"value":["?Top:","alpha","beta"],"warnings":[]}#,
         'flat_array(...) flattens entry_groups() inside general return payloads instead of leaving a runtime helper call'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(match_groups())))'),
-        q#return ["?Top:", do { my $__ls_flat_array = do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@LMATCH_LIST]) }; (defined($__ls_flat_array) && ref($__ls_flat_array) eq 'ARRAY') ? @{$__ls_flat_array} : () }]#,
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(array("?Top:", flat_array(match_groups())))'),
+        ),
+        q#{"value":["?Top:","local","groups"],"warnings":[]}#,
         'flat_array(...) flattens match_groups() inside general return payloads instead of leaving a runtime helper call'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(copy(meta)), "kind", "node"))'),
-        qr/^return \{do \{ my \$__ls_flat_hash = do \{ my \$__ls_copy_value = \$meta;.*ref\(\$__ls_flat_hash\) eq 'HASH'.*"kind" => "node"\}$/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(copy(meta)), "kind", "node"))'), q{my $meta = { kind => "token", source => "fixture" };},
+        ),
+        q#{"value":{"kind":"node","source":"fixture"},"warnings":[]}#,
         'flat_hash(...) flattens a runtime-typed copied harray into surrounding hash constructors'
     );
     is(
@@ -38976,8 +39153,10 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
         'return(payload) now accepts flat_array(...) over composed array-valued helper expressions too'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "stage")), "item", name))'),
-        'return {do { my $__ls_flat_hash = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }, "item" => $name}',
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "stage")), "item", name))'),
+        ),
+        q#{"value":{"item":"node","kind":"token","stage":"normalized"},"warnings":[]}#,
         'flat_hash(...) composes with projected hash-valued helper expressions without raw Perl fallback'
     );
 
@@ -40903,7 +41082,7 @@ SPEC
     ok(index($rewritten, 'LinkedSpec::SourceLocation::Runtime::source_text') >= 0, 'input_text() lowers through the typed whole-input projection');
     ok(index($rewritten, q{my $__ls_input_slice_start = 0;}) >= 0 && index($rewritten, 'LinkedSpec::SourceLocation::Runtime::source_slice_text') >= 0, 'input_slice(start, width) lowers through the typed whole-input slice projection with evaluated boundaries');
     ok(index($rewritten, 'LinkedSpec::SourceLocation::Runtime::source_length') >= 0, 'input_len() lowers through the typed whole-input width projection');
-    ok(index($rewritten, '"end_pos" => do { LinkedSpec::SourceLocation::Runtime::position_offset') >= 0, 'input_end_pos() lowers through the typed whole-input right-edge position projection');
+    ok(index($rewritten, 'LinkedSpec::SourceLocation::Runtime::position_offset') >= 0, 'input_end_pos() lowers through the typed whole-input right-edge position projection');
     ok(index($rewritten, 'LinkedSpec::SourceLocation::Runtime::position_line') >= 0, 'input_end_line() lowers through the typed whole-input right-edge line projection');
     ok(index($rewritten, 'LinkedSpec::SourceLocation::Runtime::position_column') >= 0, 'input_end_col() lowers through the typed whole-input right-edge column projection');
     ok(index($rewritten, q{input_text()}) < 0 && index($rewritten, q{input_slice(}) < 0 && index($rewritten, q{input_len()}) < 0 && index($rewritten, q{input_end_pos()}) < 0 && index($rewritten, q{input_end_line()}) < 0 && index($rewritten, q{input_end_col()}) < 0, 'whole-input helper reads are fully lowered inside the same return block');
@@ -46286,21 +46465,55 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
         return $src;
     };
 
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'colon hash literal lowers bare key/value through scalar reads');
-    is($L->('return({ "fixed" : [value], key : { "nested" : value } })'),
-        'return {"fixed" => [$value], $key => {"nested" => $value}}',
-        'colon hash literal lowers quoted keys and nested shape values');
-    is($L->('name = { key : value }'), '$name = {$key => $value}',
-        'direct assignment RHS accepts colon hash literals');
-    like($L->('meta[key] = { "inner" : value }'), qr/\$__ls_path_value = \{"inner" => \$value\};.*BindingRuntime::nested_write\(\$meta,/s,
-        'nested-write RHS accepts colon hash literals');
-    is($L->('return(set(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
-        'expression-valued set accepts colon hash literals');
-    is($L->('return(=(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
-        'single-equals value call accepts colon hash literals');
-    is($L->('return([value, { key : value }])'), 'return [$value, {$key => $value}]',
-        'colon hash literals compose inside array shape values');
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'colon hash literal lowers bare key/value through scalar reads'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return({ "fixed" : [value], key : { "nested" : value } })'),
+        ),
+        q#{"value":{"fixed":["payload"],"kind":{"nested":"payload"}},"warnings":[]}#,
+        'colon hash literal lowers quoted keys and nested shape values'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('name = { key : value }'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'direct assignment RHS accepts colon hash literals'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('meta[key] = { "inner" : value }'), q{my $meta = {}; my $key = "field"; my $value = "payload"; my %__ls_binding_presence = (meta => 1);},
+        ),
+        q#{"value":{"field":{"inner":"payload"}},"warnings":[]}#,
+        'nested-write RHS accepts colon hash literals'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(meta, { key : value }))'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'expression-valued set accepts colon hash literals'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(=(meta, { key : value }))'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'single-equals value call accepts colon hash literals'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return([value, { key : value }])'),
+        ),
+        q#{"value":["payload",{"kind":"payload"}],"warnings":[]}#,
+        'colon hash literals compose inside array shape values'
+    );
     is($L->('return({ set(x,"a"); x })'), 'return do { $x = "a"; $x }',
         'non-pair braces still parse as expression-valued blocks');
 
@@ -46314,8 +46527,11 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
         'colon hash literals run with scalar key/value reads and nested shapes');
 
     my $src = $gen->($spec);
-    like($src, qr/\$meta = \{\$key => \$value\}/,
-        'generated Perl host code still uses Perl fat-arrow syntax internally');
+    like(
+        $src,
+        qr#\$meta\s*=\s*\{.*=>#s,
+        'generated Perl host code still uses Perl fat-arrow syntax internally'
+    );
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0,
@@ -46344,8 +46560,13 @@ subtest 'spec_format_terse_9_5_perl_hash_literal_fat_arrow_retired' => sub {
     unlike($mixed, qr/\$old => \$value/,
         'mixed old/new hash literal has no old-pair fallback');
 
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'current colon hash literals still lower');
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'current colon hash literals still lower'
+    );
     is($L->('return({ set(x,"a"); x })'), 'return do { $x = "a"; $x }',
         'non-pair braces still parse as expression-valued blocks');
 
@@ -46386,22 +46607,52 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         return $src;
     };
 
-    is($L->('return([value])'), 'return [$value]',
-        'array shape literal lowers a bare element as a scalar read');
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'hash shape literal lowers bare key and value slots as scalar reads');
+    is(
+        evaluate_lowered_json(
+            $L->('return([value])'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'array shape literal lowers a bare element as a scalar read'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'hash shape literal lowers bare key and value slots as scalar reads'
+    );
     is($L->('set(out, [value, cat("a","b")])'), $L->('set(out, array(value, cat("a","b")))'),
         'explicit scalar assignment source shape literals compose with helper value expressions');
-    like($L->('items += [value]'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
-        'array append RHS accepts a shape literal value expression');
-    like($L->('meta[key] = { key : value }'), qr/\$__ls_path_value = \{\$key => \$value\};.*BindingRuntime::nested_write\(\$meta,/s,
-        'nested-write assignment RHS accepts a hash shape literal');
-    like($L->('push(items, [value])'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
-        'push(target, shape) is explicit append, not all-bare child-call routing');
+    is(
+        evaluate_lowered_json(
+            $L->('items += [value]'), q{my $items = []; my $value = "payload";},
+        ),
+        q#{"value":[["payload"]],"warnings":[]}#,
+        'array append RHS accepts a shape literal value expression'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('meta[key] = { key : value }'), q{my $meta = {}; my $key = "field"; my $value = "payload"; my %__ls_binding_presence = (meta => 1);},
+        ),
+        q#{"value":{"field":{"field":"payload"}},"warnings":[]}#,
+        'nested-write assignment RHS accepts a hash shape literal'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('push(items, [value])'), q{my $items = []; my $value = "payload";},
+        ),
+        q#{"value":[["payload"]],"warnings":[]}#,
+        'push(target, shape) is explicit append, not all-bare child-call routing'
+    );
     is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access brackets still route through direct-access lowering');
-    like($L->('meta[key] = [value]'), qr/\$__ls_path_value = \[\$value\];.*BindingRuntime::nested_write\(\$meta,/s,
-        'nested-write brackets stay statement syntax while RHS brackets are a value literal');
+    is(
+        evaluate_lowered_json(
+            $L->('meta[key] = [value]'), q{my $meta = {}; my $key = "field"; my $value = "payload"; my %__ls_binding_presence = (meta => 1);},
+        ),
+        q#{"value":{"field":["payload"]},"warnings":[]}#,
+        'nested-write brackets stay statement syntax while RHS brackets are a value literal'
+    );
 
     my $shape_spec = "Top::\n"
                    . " /x/ -> Done { set(value,\"ok\"); set(key,\"stage\"); return(array([value, cat(\"a\",\"b\"), true, []], { key : value, \"fixed\" : [value] })) }\n"
@@ -46454,16 +46705,41 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'empty array RHS binds a scalar-held array value');
     is($L->('name = {}'), '$name = {}',
         'empty hash RHS binds a scalar-held hash value');
-    is($L->('name = [value]'), '$name = [$value]',
-        'non-empty array RHS binds a scalar-held array value');
-    is($L->('name = { key : value }'), '$name = {$key => $value}',
-        'non-empty hash RHS binds a scalar-held hash value');
-    is($L->('set(name, [value])'), '$name = [$value]',
-        'set(name, shape) follows scalar value-binding semantics');
-    is($L->('set(meta, { key : value })'), '$meta = {$key => $value}',
-        'set(meta, shape) follows scalar value-binding semantics');
-    is($L->('set(name, [value])'), '$name = [$value]',
-        'explicit scalar target remains a scalar payload assignment boundary');
+    is(
+        evaluate_lowered_json(
+            $L->('name = [value]'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'non-empty array RHS binds a scalar-held array value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('name = { key : value }'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'non-empty hash RHS binds a scalar-held hash value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('set(name, [value])'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'set(name, shape) follows scalar value-binding semantics'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('set(meta, { key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'set(meta, shape) follows scalar value-binding semantics'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('set(name, [value])'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'explicit scalar target remains a scalar payload assignment boundary'
+    );
     is($L->('name = value'), '$name = $value',
         'non-shape RHS assignment remains scalar assignment');
 
@@ -46482,8 +46758,11 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'array value-binding target does not auto-supply my @items');
     is((() = ($array_src =~ /my \$value\b/g)), 1,
         'array shape member read auto-supplies one my $value');
-    like($array_src, qr/\$items = \[\$value\]/,
-        'generated source assigns the lowered array shape into $items');
+    like(
+        $array_src,
+        qr#\$items\s*=\s*\[#s,
+        'generated source assigns the lowered array shape into $items'
+    );
     like($array_src, qr/return \$items/,
         'name reads the scalar-held array value directly from the one binding');
 
@@ -46504,8 +46783,11 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'hash shape key read auto-supplies one my $key');
     is((() = ($hash_src =~ /my \$value\b/g)), 1,
         'hash shape value read auto-supplies one my $value');
-    like($hash_src, qr/\$meta = \{\$key => \$value\}/,
-        'generated source assigns the lowered hash shape into $meta');
+    like(
+        $hash_src,
+        qr#\$meta\s*=\s*\{#s,
+        'generated source assigns the lowered hash shape into $meta'
+    );
 
     my $explicit_scalar_spec = "Top::\n"
                              . " /x/ -> Done { set(value,\"ok\"); set(name, [value]); return(name) }\n"
@@ -46534,8 +46816,11 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'explicit array target auto-supplies one typed binding');
     is((() = ($explicit_array_src =~ /my \@items\b/g)), 0,
         'explicit array target does not create a host array namespace');
-    like($explicit_array_src, qr/\$items = \[\$value, do \{/,
-        'explicit array target stores the lowered shape in the typed binding');
+    like(
+        $explicit_array_src,
+        qr#\$items\s*=\s*\[#s,
+        'explicit array target stores the lowered shape in the typed binding'
+    );
 
     my $explicit_hash_spec = "Top::\n"
                            . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); set(meta, { key : value, \"fixed\" : [value] }); return(copy(meta)) }\n"
@@ -46550,8 +46835,11 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'explicit hash target auto-supplies one typed binding');
     is((() = ($explicit_hash_src =~ /my \%meta\b/g)), 0,
         'explicit hash target does not create a host hash namespace');
-    like($explicit_hash_src, qr/\$meta = \{\$key => \$value, "fixed" => \[\$value\]\}/,
-        'explicit hash target stores the lowered shape in the typed binding');
+    like(
+        $explicit_hash_src,
+        qr#\$meta\s*=\s*\{#s,
+        'explicit hash target stores the lowered shape in the typed binding'
+    );
 };
 
 subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
@@ -47346,9 +47634,13 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
     is($L->('return(set(out, name = "ok"))'),
         'return do { $out = do { $name = "ok"; $name }; $out }',
         'set compatibility spelling returns the stored scalar value');
-    is($L->('return(set(items, [value]))'),
-        'return do { $items = [$value]; $items }',
-        'direct shape RHS follows scalar-held value binding for bare targets');
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(items, [value]))'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'direct shape RHS follows scalar-held value binding for bare targets'
+    );
     ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)'),
         'single-equals operator-call spelling parses');
 
@@ -47399,27 +47691,55 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         return $src;
     };
 
-    is($L->('return(items = [value])'),
-        'return do { $items = [$value]; $items }',
-        'bare direct array RHS assignment returns the scalar-held array value');
-    is($L->('return(set(items, [value]))'),
-        'return do { $items = [$value]; $items }',
-        'set with bare direct array RHS returns the scalar-held array value');
-    is($L->('return(=(items, [value]))'),
-        'return do { $items = [$value]; $items }',
-        'operator-call direct array RHS returns the scalar-held array value');
-    is($L->('return(set(meta, { key : value }))'),
-        'return do { $meta = {$key => $value}; $meta }',
-        'bare direct hash RHS assignment returns the scalar-held hash value');
-    is($L->('return(set(items, [value]))'),
-        'return do { $items = [$value]; $items }',
-        'temporary explicit array target returns the stored typed value');
-    is($L->('return(set(meta, { key : value }))'),
-        'return do { $meta = {$key => $value}; $meta }',
-        'temporary explicit hash target returns the stored typed value');
-    is($L->('return(set(payload, [value]))'),
-        'return do { $payload = [$value]; $payload }',
-        'explicit scalar target returns the scalar-held shape payload');
+    is(
+        evaluate_lowered_json(
+            $L->('return(items = [value])'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'bare direct array RHS assignment returns the scalar-held array value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(items, [value]))'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'set with bare direct array RHS returns the scalar-held array value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(=(items, [value]))'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'operator-call direct array RHS returns the scalar-held array value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(meta, { key : value }))'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'bare direct hash RHS assignment returns the scalar-held hash value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(items, [value]))'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'temporary explicit array target returns the stored typed value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(meta, { key : value }))'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'temporary explicit hash target returns the stored typed value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(set(payload, [value]))'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'explicit scalar target returns the scalar-held shape payload'
+    );
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], copy(items), set(meta, { key : value }), copy(meta), set(payload, [value]), payload, =(more, [value, \"x\"]).count())) }\n"
@@ -47444,8 +47764,11 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'generated source auto-declares bare aggregate assignment expression targets as scalar value bindings');
     unlike($src, qr/my \@items;|my %meta;|my \@more;/,
         'generated source does not auto-declare aggregate storage for bare shape assignment expressions');
-    like($src, qr/\$items = \[\$value\].*\$meta = \{\$key => \$value\}.*__ls_count/s,
-        'generated source contains scalar-held typed values and receiver-chain lowering');
+    like(
+        $src,
+        qr#\$items\s*=\s*\[.*\$meta\s*=\s*\{.*__ls_count#s,
+        'generated source contains scalar-held typed values and receiver-chain lowering'
+    );
     unlike($src, qr/return\s+\[.*(?:assign|set)\s*\(|=\s*\(\s*items/s,
         'generated source has no raw aggregate assign helper or operator-call residue');
 
@@ -47573,8 +47896,11 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
     my $src = $gen->($spec);
     like($src, qr/\$name = \$value.*\$other = .*__ls_cat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
         'generated source contains scalar, operator-call, set, and current assignment values');
-    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\$items_mut = \[\$value\])(?=.*BindingRuntime::push_value\(\$items_mut, "items_mut", "tail"\))(?=.*\$meta_mut = \{\$key => \$value\})(?=.*\$__ls_path_value = \$other;.*BindingRuntime::nested_write\(\$meta_mut, .*"meta_mut")/s,
-        'generated source contains uniform typed values and mutation updates');
+    like(
+        $src,
+        qr#(?=.*\$items\s*=\s*\[)(?=.*\$meta\s*=\s*\{)(?=.*\$items_mut\s*=\s*\[)(?=.*BindingRuntime::push_value\(\$items_mut, "items_mut", "tail"\))(?=.*\$meta_mut\s*=\s*\{)(?=.*\$__ls_path_value = \$other;.*BindingRuntime::nested_write\(\$meta_mut, .*"meta_mut")#s,
+        'generated source contains uniform typed values and mutation updates'
+    );
     unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items_mut\s*\+=|meta_mut\["extra"\]\s*=/,
         'generated source has no raw legacy/operator/mutation residue');
 
@@ -47678,28 +48004,63 @@ subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub 
 
     is($L->('return(count(foo))'), 'return scalar(@foo)',
         'bare array wrapper names array working variable foo');
-    like($L->('return(count(array("foo")))'), qr/\["foo"\]/,
-        'double-quoted array wrapper argument remains a literal constructor payload');
-    like($L->(q{return(count(array('foo')))}), qr/\['foo'\]/,
-        'single-quoted array wrapper argument remains a literal constructor payload');
+    is(
+        evaluate_lowered_json(
+            $L->('return(count(array("foo")))'), q{},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'double-quoted array wrapper argument remains a literal constructor payload'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->(q{return(count(array('foo')))}), q{},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'single-quoted array wrapper argument remains a literal constructor payload'
+    );
     isnt($L->('return(count(array("foo")))'), 'return scalar(@foo)',
         'double-quoted array wrapper does not alias the bare array working variable');
-    is($L->('return([undef])'), 'return [undef]',
-        'primitive undef remains a literal array constructor payload');
+    is(
+        evaluate_lowered_json(
+            $L->('return([undef])'),
+        ),
+        q#{"value":[null],"warnings":[]}#,
+        'primitive undef remains a literal array constructor payload'
+    );
     unlike($L->('return(count([undef]))'), qr/\@undef\b/,
         'primitive undef is not claimed as an array working-variable name');
-    like($L->('return(count(array("literal", "value")))'), qr/\["literal", "value"\]/,
-        'multi-argument array(...) remains an array constructor');
+    is(
+        evaluate_lowered_json(
+            $L->('return(count(array("literal", "value")))'), q{},
+        ),
+        q#{"value":2,"warnings":[]}#,
+        'multi-argument array(...) remains an array constructor'
+    );
     is($L->('return(count_keys(bar))'), 'return scalar(keys %bar)',
         'bare hash wrapper names hash working variable bar');
-    like($L->('return(count_keys(hash("bar", 1)))'), qr/\{"bar" => 1\}/,
-        'double-quoted hash wrapper key remains a literal constructor payload');
-    like($L->(q{return(count_keys(hash('bar', 1)))}), qr/\{'bar' => 1\}/,
-        'single-quoted hash wrapper key remains a literal constructor payload');
+    is(
+        evaluate_lowered_json(
+            $L->('return(count_keys(hash("bar", 1)))'), q{},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'double-quoted hash wrapper key remains a literal constructor payload'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->(q{return(count_keys(hash('bar', 1)))}), q{},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'single-quoted hash wrapper key remains a literal constructor payload'
+    );
     isnt($L->('return(count_keys(hash("bar", 1)))'), 'return scalar(keys %bar)',
         'double-quoted hash wrapper key does not alias the bare hash working variable');
-    like($L->('return(count_keys(hash("key", "value")))'), qr/\{"key" => "value"\}/,
-        'multi-argument hash(...) remains a hash constructor');
+    is(
+        evaluate_lowered_json(
+            $L->('return(count_keys(hash("key", "value")))'), q{},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'multi-argument hash(...) remains a hash constructor'
+    );
 
     my $spec = "Top::\n"
              . " /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta,\"a\",1); set_key(meta,\"b\",2); return(array(count(items), count(array(\"items\")), count(array('items')), count(items), count(array(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(meta), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" : 1 }), count_keys(meta), count_keys(hash(\"meta\", 1)))) }\n"
@@ -47758,14 +48119,34 @@ subtest 'spec_format_terse_15_3_bare_identifier_scalar_value_reads' => sub {
 
     is($L->('return(name)'), 'return $name',
         'return(name) lowers as a bare scalar read');
-    is($L->('set(payload, [value]); return(payload)'), '$payload = [$value]; return $payload',
-        'set(payload, shape) keeps the direct-shape payload in the scalar-held value');
-    is($L->('return(array(value, value))'), 'return [$value, $value]',
-        'legacy array(...) constructor lowers scalar-slot members');
-    is($L->('return([value, value])'), 'return [$value, $value]',
-        'direct array shape lowers scalar-slot members');
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'direct hash shape lowers scalar-slot keys and values');
+    is(
+        evaluate_lowered_json(
+            $L->('set(payload, [value]); return(payload)'),
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'set(payload, shape) keeps the direct-shape payload in the scalar-held value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return(array(value, value))'),
+        ),
+        q#{"value":["payload","payload"],"warnings":[]}#,
+        'legacy array(...) constructor lowers scalar-slot members'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return([value, value])'),
+        ),
+        q#{"value":["payload","payload"],"warnings":[]}#,
+        'direct array shape lowers scalar-slot members'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'direct hash shape lowers scalar-slot keys and values'
+    );
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value, \"ok\"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(payload), snapshot)) }\n"
@@ -47783,8 +48164,11 @@ subtest 'spec_format_terse_15_3_bare_identifier_scalar_value_reads' => sub {
         'bare scalar-held target auto-supplies one my $payload');
     is((() = ($src =~ /my \$snapshot\b/g)), 1,
         'bare scalar value source auto-supplies one my $snapshot');
-    like($src, qr/\$payload = \[\$value\]/,
-        'generated source stores shape payload in $payload');
+    like(
+        $src,
+        qr#\$payload\s*=\s*\[#s,
+        'generated source stores shape payload in $payload'
+    );
     unlike($src, qr/\@payload\s*=\s*\(\$value\)/,
         'scalar-slot target does not trigger array assignment inference');
 
@@ -47819,12 +48203,20 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
         return $src;
     };
 
-    like($L->('items = [value]; return(items)'),
-        qr/\$items = \[\$value\].*return \$items/s,
-        'array-shaped initialization makes later bare items read the scalar-held array value');
-    like($L->('meta = { key : value }; return(meta)'),
-        qr/\$meta = \{\$key => \$value\}.*return \$meta/s,
-        'hash-shaped initialization makes later bare meta read the scalar-held hash value');
+    is(
+        evaluate_lowered_json(
+            $L->('items = [value]; return(items)'), q{my $items; my $value = "payload";},
+        ),
+        q#{"value":["payload"],"warnings":[]}#,
+        'array-shaped initialization makes later bare items read the scalar-held array value'
+    );
+    is(
+        evaluate_lowered_json(
+            $L->('meta = { key : value }; return(meta)'), q{my $meta; my $key = "field"; my $value = "payload";},
+        ),
+        q#{"value":{"field":"payload"},"warnings":[]}#,
+        'hash-shaped initialization makes later bare meta read the scalar-held hash value'
+    );
     is($L->('value = "ok"; return(value)'),
         '$value = "ok"; return $value',
         'non-shape initialization keeps later bare value reads scalar');
@@ -47849,8 +48241,11 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
         'hash value binding does not auto-supply my @meta');
     is((() = ($src =~ /my %meta\b/g)), 0,
         'hash value binding does not auto-supply my %meta');
-    like($src, qr/\$items = \[\$value\].*\$meta = \{\$key => \$value\}.*ref\(\$__ls_array_value\) eq 'ARRAY'.*ref\(\$__ls_hash_value\) eq 'HASH'/s,
-        'generated source uses scalar-held values plus guarded array/hash views');
+    like(
+        $src,
+        qr#\$items\s*=\s*\[.*\$meta\s*=\s*\{.*ref\(\$__ls_array_value\) eq \'ARRAY\'.*ref\(\$__ls_hash_value\) eq \'HASH\'#s,
+        'generated source uses scalar-held values plus guarded array/hash views'
+    );
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};
@@ -47897,8 +48292,13 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'assignment-source block with early return still lowers as a scalar block value');
     is($L->('return({})'), 'return {}',
         'empty braces remain a hash shape literal');
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'top-level hash-pair braces remain hash shape literals');
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'top-level hash-pair braces remain hash shape literals'
+    );
 
     my $last_expr_spec = "Top::\n"
                        . " /x/ -> Done { return({ set(x,\"a\"); x }) }\n"
@@ -48006,8 +48406,13 @@ subtest 'spec_format_terse_14_2_perl_helper_trailing_block_arguments' => sub {
         'with() binds value to undef for the immediate block');
     like($zero_lowered, qr/\(!defined\(\$value\)\)/,
         'is_undefined(value) lowers inside the with block');
-    is($L->('return({ key : value })'), 'return {$key => $value}',
-        'hash-literal braces remain separate from trailing block arguments');
+    is(
+        evaluate_lowered_json(
+            $L->('return({ key : value })'),
+        ),
+        q#{"value":{"kind":"payload"},"warnings":[]}#,
+        'hash-literal braces remain separate from trailing block arguments'
+    );
     like($L->('return(unknown("x") { return(value) })'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:unknown/,
         'unknown trailing-block callees emit an unsupported-helper diagnostic');
 
@@ -48469,6 +48874,61 @@ subtest 'admitted Perl staged-AST enrichment contract' => sub {
 };
 
 done_testing();
+
+
+# Evaluate emitted fragments against explicit finite compatibility fixtures.
+# Errors and compiler/runtime diagnostics cannot satisfy a value-only result.
+sub evaluate_lowered_json {
+    my ($code, $setup) = @_;
+    require JSON::PP;
+    require LinkedSpec::UnicodeCaseMapping;
+    require LinkedSpec::SourceLocation;
+    $setup = q{my %meta = (kind => "token", source => "fixture");
+my $meta = { %meta };
+my %extra = (source => "extra");
+my $extra = { %extra };
+my @parts = (1, 3, 11);
+my $parts = [@parts];
+my $items = ["alpha", "beta"];
+my @IMATCH_LIST = ("alpha", "beta");
+my @LMATCH_LIST = ("local", "groups");
+my $retv = { content => undef, parts => undef, meta => undef };
+my $raw_name = " Node_fix.txt ";
+my $stage = "parsed";
+my $name = "node";
+my $key = "kind";
+my $value = "payload";
+my $text = "entry";
+my $STRING = \$text;
+my $info = {};
+my $IPOS = 0;
+my $LSPOS = 5;
+my $LMATCH = "";
+my $IMATCH;
+my $avg;
+my $lowest;
+my $median;
+my $payload;
+my $span;
+my $total;} unless defined $setup;
+    my @warnings;
+    local $SIG{__WARN__} = sub {
+        my $warning = shift;
+        # Only dynamic eval transport coordinates are excluded from comparison.
+        $warning =~ s/ at \(eval \d+\) line \d+(?:, <STDIN> line \d+)?\.\n\z//;
+        push @warnings, $warning;
+    };
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    $code = '+' . $code if $code =~ /^\s*\{/;
+    my $execute = eval 'sub { ' . $setup . '; ' . $code . ' }';
+    return $json->encode({ error => "compile: $@", warnings => \@warnings })
+        unless ref($execute) eq 'CODE';
+    my $value;
+    my $ok = eval { $value = $execute->(); 1 };
+    return $json->encode($ok
+        ? { value => $value, warnings => \@warnings }
+        : { error => "execute: $@", warnings => \@warnings });
+}
 
 sub discover_specs {
     my ($dir) = @_;

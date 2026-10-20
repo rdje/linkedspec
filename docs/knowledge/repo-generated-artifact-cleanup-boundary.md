@@ -2,6 +2,7 @@
 id: repo-generated-artifact-cleanup-boundary
 title: Rebuildable outputs may be removed only by an owned cleanup, while retained SSD caches stay available
 answers:
+  - "how are oversized checkpoints retained without large Git blobs"
   - "why did historical Knowledge reverify routes disappear from the derived map"
   - "which task rejects orphan list entries after a scalar reverify field"
   - "why can a new maintenance claim break an older readonly review"
@@ -30,7 +31,7 @@ answers:
   - "do historical checked claims need a tracked producer input"
   - "why does accepted block metadata disappear from the Knowledge Map"
   - "how are evidence and reverify lists displayed without executing commands"
-date: 2026-10-12
+date: 2026-10-20
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
@@ -42,7 +43,7 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
 # Shared publication inputs and historical provenance
@@ -400,3 +401,5 @@ reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints
 
 
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (repo-generated-artifact-cleanup-boundary). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
+
+Oversized checkpoints use bounded payload chunks with physical, payload and whole-stream hashes plus original modes. Verify exact recovery and actual retained-reader use before removing duplicate originals. Logical inputs survive; physical bindings change explicitly.

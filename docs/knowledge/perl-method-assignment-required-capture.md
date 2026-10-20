@@ -2,6 +2,7 @@
 id: perl-method-assignment-required-capture
 title: Assignment callbacks and tracking predicate capture boundaries
 answers:
+  - "how do recurring private tests survive MethodLowering line changes"
   - "which local target slot do receiver and nested write predicates receive"
   - "does tracking predicate selection fetch a tied dependency map more than once"
   - "how do tracking predicates convert returned values and overloaded booleans"
@@ -21,7 +22,7 @@ status: two tracking predicates isolated under .3.2.1.6; original required and o
 tags: [perl, actionir, callbacks, capture, aliases, assignment]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2 retains938 main/17 cold assertions,27 exact native-current callback outcomes,60 independently enumerated controlled branches and five public Toolbox observations. Identical938 TAP has27 original publication REDs/911 controls and all938 current GREEN. Nine syntax-valid source faults, supplied54 suites/174 files, five evidence corruptions, original306-binding corruption/restoration and full book57+32/three controls pass. Secondary helpers remain explicit controls; broader admissions are separate."
 evidence_optional_kind_2026_10_11: "First231-input loaded156/cold6 native observations precede assertions/source edits. Identical286 TAP has56 original isolation REDs/230 controls/all286 current GREEN; native20 complete authority-row changes only. Two invocation lines preserve native aliases/timing/errors6883/7156 and global lines. Nine syntax-valid faults fail28/28/8/52/37/8/6/75/18; Complete72 supplied suites/233 inputs/15893 assertions, full book89/four controls and supplemental standard syntax/public Phase01035 pass. Current readonly review/evidence/publication commands gate the retained records; no full-helper/private/parent/canonical admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
 Only the required resolver returns in `_lower_assign_statement`,
@@ -284,3 +285,5 @@ reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints
 
 
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (perl-method-assignment-required-capture). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
+
+Recurring tests map unchanged same-routine statements to c053 coordinates; raw captures stay frozen. Emitted values execute independently. Twelve suites pass5001 assertions; mapper bypass fails198 and restores. See docs/checkpoints/type-values-required/.

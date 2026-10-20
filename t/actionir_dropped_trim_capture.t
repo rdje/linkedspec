@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -22,7 +24,7 @@ my $err = do { local $/; <$stderr> // '' };
 waitpid($pid, 0);
 is($? >> 8, 0, 'dropped trim current probe completes');
 is($err, '', 'dropped trim current probe has no diagnostics');
-my $current = JSON::PP->new->decode($out);
+my $current = LinkedSpecTest::MethodLocations::original_coordinates(JSON::PP->new->decode($out));
 is($capture->{returncode}, 0, 'dropped trim first native capture completed');
 is(decode_base64($capture->{stderr_base64}), '', 'dropped trim first native capture has no diagnostics');
 is(scalar(keys %{$capture->{inputs}}), 213, 'dropped trim complete native supplied population');

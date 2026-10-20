@@ -1,0 +1,229 @@
+{
+ "cases": [
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return([marker, change(), marker])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "array-literal"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return(array(marker, change(), marker))",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "array-constructor"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; pair = {|left,right| return([left,right]) }; return(pair(marker, change()))",
+   "expected": [
+    "before",
+    "inside"
+   ],
+   "id": "codeblock-arguments"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return({\"first\":marker, \"call\":change(), \"last\":marker})",
+   "expected": {
+    "call": "inside",
+    "first": "before",
+    "last": "inside"
+   },
+   "id": "hash-literal-values"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return(hash(\"first\",marker,\"call\",change(),\"last\",marker))",
+   "expected": {
+    "call": "inside",
+    "first": "before",
+    "last": "inside"
+   },
+   "id": "hash-constructor-values"
+  },
+  {
+   "body": "key = \"before\"; change = {|| key = \"inside\"; return(7) }; return({key:change()})",
+   "expected": {
+    "before": 7
+   },
+   "id": "hash-dynamic-key"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return([[marker, change()], marker])",
+   "expected": [
+    [
+     "before",
+     "inside"
+    ],
+    "inside"
+   ],
+   "id": "nested-array"
+  },
+  {
+   "body": "marker = \"before\"; return([marker, { marker = \"inside\"; marker }, marker])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "eager-block"
+  },
+  {
+   "body": "marker = \"before\"; return([marker, marker = \"inside\", marker])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "assignment-value"
+  },
+  {
+   "body": "slot = 42; change = {|| slot = 3.5; return(slot) }; return([slot, change(), slot])",
+   "expected": [
+    42,
+    3.5,
+    3.5
+   ],
+   "id": "number-kind"
+  },
+  {
+   "body": "slot = false; change = {|next| slot = next; return(slot) }; return([slot, change(true), slot])",
+   "expected": [
+    false,
+    true,
+    true
+   ],
+   "id": "boolean-kind"
+  },
+  {
+   "body": "slot = undef; change = {|| slot = \"inside\"; return(slot) }; return([slot, change(), slot])",
+   "expected": [
+    null,
+    "inside",
+    "inside"
+   ],
+   "id": "null-kind"
+  },
+  {
+   "body": "slot = \"007\"; change = {|| slot = 7; return(slot) }; return([slot, change(), slot])",
+   "expected": [
+    "007",
+    7,
+    7
+   ],
+   "id": "numeric-string-kind"
+  },
+  {
+   "body": "slot = [\"old\"]; change = {|| slot = [\"new\"]; return(slot) }; return([slot, change(), slot])",
+   "expected": [
+    [
+     "old"
+    ],
+    [
+     "new"
+    ],
+    [
+     "new"
+    ]
+   ],
+   "id": "array-rebinding"
+  },
+  {
+   "body": "slot = {\"key\":\"old\"}; change = {|| slot = {\"key\":\"new\"}; return(slot) }; return([slot, change(), slot])",
+   "expected": [
+    {
+     "key": "old"
+    },
+    {
+     "key": "new"
+    },
+    {
+     "key": "new"
+    }
+   ],
+   "id": "harray-rebinding"
+  },
+  {
+   "body": "slot = {|| return(\"old\") }; change = {|| slot = {|| return(\"new\") }; return(\"changed\") }; saved = [slot, change(), slot]; early_callback = saved[0]; late_callback = saved[2]; return([early_callback(),late_callback()])",
+   "expected": [
+    "old",
+    "new"
+   ],
+   "id": "callable-rebinding"
+  },
+  {
+   "body": "slot = [\"old\"]; change = {|| push(slot,\"new\"); return(\"changed\") }; return([slot, change(), slot])",
+   "expected": [
+    [
+     "old"
+    ],
+    "changed",
+    [
+     "old",
+     "new"
+    ]
+   ],
+   "id": "array-mutation-question"
+  },
+  {
+   "body": "state = \"\"; step = {|piece| state = cat(state,piece); return(state) }; return([state, step(\"a\"), state, step(\"b\"), state])",
+   "expected": [
+    "",
+    "a",
+    "a",
+    "ab",
+    "ab"
+   ],
+   "id": "repeated-side-effects"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return([cat(marker,\"\"), change(), marker])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "rvalue-control"
+  },
+  {
+   "body": "marker = \"before\"; saved = marker; change = {|| marker = \"inside\"; return(marker) }; return([saved, change(), marker])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "saved-binding-control"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; return(pair(marker, change()))",
+   "expected": [
+    "before",
+    "inside"
+   ],
+   "functions": "fn pair(left,right) { return([left,right]) }\n",
+   "id": "named-function-control"
+  },
+  {
+   "body": "__ls_list_value = \"before\"; change = {|| __ls_list_value = \"inside\"; return(__ls_list_value) }; return([__ls_list_value, change(), __ls_list_value])",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "temporary-like-user-binding"
+  },
+  {
+   "body": "marker = \"before\"; change = {|| marker = \"inside\"; return(marker) }; outer = {|| return([marker, change(), marker]) }; return(outer())",
+   "expected": [
+    "before",
+    "inside",
+    "inside"
+   ],
+   "id": "nested-codeblock-body"
+  }
+ ],
+ "scope": "Evaluated-value regressions. push creates an updated binding, so the earlier value remains old. The rejected first plan confused late scalar-slot observation with shared-reference mutation. Independent saved-binding controls and the existing copy-on-write fact justify this one correction. Pure host reference-identity controls are separate. Boolean arguments avoid the existing literal-kind defect; cat state avoids the owned numeric-body helper gap."
+}

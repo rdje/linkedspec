@@ -50,13 +50,43 @@ Top: /x/
 This demonstrates an array operation on the call result. It supplies no separate
 codeblock method table or guarantee that every operation accepts every kind.
 
-Two Perl defects are currently owned for repair. In `[marker, cb(), marker]` (also
-`array(...)` and codeblock argument lists), a callback that rebinds `marker` can change
-the earlier element too. Save the earlier value in a separate binding before calling.
-An attached `cb.with() { return(value()) }` currently returns null because its scoped
-`value` call is not recognized. `with(cb, {|callback| return(callback()) })` works.
-These limits apply to the observed Perl parser and emitted source; they establish no
-cross-backend result. Complete per-operation reference coverage remains in progress.
+### Evaluated values and later side effects
+
+Perl retains each evaluated array element, hash key/value and callable argument
+before the next operand executes. A later assignment or mutation updates the
+working binding; earlier values retain what was read. This returns
+`["before","inside","inside"]`:
+
+```text
+Top: /x/
+ I { marker = "before"; change = {|| marker = "inside"; return(marker) }; return([marker, change(), marker]) }
+```
+
+The same rule covers `array(...)`, `hash(...)`, dynamic hash keys, eager blocks
+and assignment expressions. Explicit `flat`, `flat_array` and `flat_hash` splices
+keep their list behavior; ordinary container values stay nested.
+
+Array mutation creates an updated binding. For `items = ["old"]` and a callback
+that runs `push(items,"new")`, `[items, change(), items]` retains `["old"]` first
+and the updated `["old","new"]` last. A separately saved earlier binding also
+stays old. This follows the existing mutation contract; the evaluation boundary
+does not add recursive copying of arbitrary host objects.
+
+### Current Perl limits
+
+An attached `cb.with() { return(value()) }` currently returns null because its
+scoped call is not recognized. `with(cb, {|callback| return(callback()) })`
+works. A direct `num_add` inside a deferred body currently raises the typed
+`unknown_helper` diagnostic even though ordinary numeric helper calls work.
+Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean
+arguments passed into a codeblock retain their kind. These separately owned
+repairs remain pending. The observations establish no new cross-backend result,
+and complete per-operation reference coverage remains in progress.
+
+Loading generated Perl for `drop_keys(meta, "debug")` with one literal key
+currently emits a scalar hash-slice compiler advisory, while returning the
+correct harray. A caller that treats syntax warnings as fatal cannot load
+that generated parser. This known compiler-diagnostic repair is pending.
 
 ## Per-rule default accumulator
 

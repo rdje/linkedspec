@@ -1,0 +1,7 @@
+{
+ "actual_payload_guard_red": 1,
+ "current_worktree_read_preserved": true,
+ "denials": 4,
+ "restoration": true,
+ "result": "PASS"
+}

@@ -13,7 +13,7 @@ date: 2026-10-19
 status: dated public summaries retained; fuller census/upstream work remains open
 tags: [rust, dependencies, warnings, public-contract, task-tree]
 evidence: "Canonical e953f69a9 retains 24 summary occurrences; exact raw-line/phase/count and Git-receipt review pass. Reported counts and dated1870/26 stay scoped in the preserved body."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
 # Public warning-output account

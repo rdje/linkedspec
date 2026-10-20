@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -10,7 +12,7 @@ open my $fh,'<',$path or die "$path: $!";
 my $capture=JSON::PP->new->decode(do {local $/;<$fh>});
 close $fh or die "$path: $!";
 my $native=JSON::PP->new->decode(decode_base64($capture->{stdout_base64}));
-my $current=ArrayEndRequiredProbe::observations();
+my $current=LinkedSpecTest::MethodLocations::original_coordinates(ArrayEndRequiredProbe::observations());
 my $ordinary={method=>'push_back',receiver=>'items',target=>'items',value=>'value'};
 is($capture->{returncode},0,'first completed native array-end probe');
 is(decode_base64($capture->{stderr_base64}),'','native array-end probe has no diagnostics');

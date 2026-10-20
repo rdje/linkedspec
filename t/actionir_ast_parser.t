@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
+use JSON::PP ();
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::AST ();
@@ -13,6 +14,22 @@ sub parse_expr {
 sub parse_block {
     my ($code) = @_;
     return LinkedSpec::ActionIR::AST::parse_action_block($code);
+}
+
+
+# Observe the emitted behavior without making a private temporary layout public.
+# Lexicals cover the fixed poisoned-AST fixtures below; compile/runtime errors are
+# part of the single observation and cannot accidentally satisfy a value check.
+sub lowered_observation {
+    my ($code, $locals) = @_;
+    $locals ||= {};
+    my ($name, $items, $meta, $key, $value, $foo, $i, $start)
+        = @{$locals}{qw(name items meta key value foo i start)};
+    my $execute = eval 'sub { ' . $code . ' }';
+    return { error => "compile: $@" } unless ref($execute) eq 'CODE';
+    my $result;
+    my $ok = eval { $result = $execute->(); 1 };
+    return $ok ? { value => $result } : { error => "execute: $@" };
 }
 
 subtest 'calls literals variables and value-drop statements' => sub {
@@ -609,7 +626,11 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
         };
 
         my $scalar = LinkedSpec::call_spec_handler_subst('Top', q{name = [poison]});
-        is($scalar, '$name = [$value]', 'scalar assignment operator lowers RHS from AST fields');
+        is_deeply(
+            lowered_observation($scalar, { value => 'payload' }),
+            { value => ['payload'] },
+            'scalar assignment operator executes the typed AST RHS'
+        );
 
         my $append = LinkedSpec::call_spec_handler_subst('Top', q{items += poison});
         is(
@@ -619,10 +640,12 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
         );
 
         my $hash_assign = LinkedSpec::call_spec_handler_subst('Top', q{meta[poison_key] = { poison_key : poison_value }});
-        is(
-            $hash_assign,
-            'do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, {$key => $value}) }',
-            'hash-index assignment lowers key/RHS into the uniform binding mutation'
+        is_deeply(
+            lowered_observation($hash_assign, {
+                meta => { keep => 'retained' }, key => 'outer', value => 'payload',
+            }),
+            { value => { keep => 'retained', outer => { outer => 'payload' } } },
+            'hash-index assignment executes the typed key and nested RHS'
         );
 
         my $all = join("\n", $scalar, $append, $hash_assign);
@@ -712,15 +735,21 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         q{return do { $out = do { $name = "ok"; $name }; $out }},
         'set compatibility spelling returns the stored scalar value in value position'
     );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(set(items, [value]))}),
-        q{return do { $items = [$value]; $items }},
-        'direct array shape RHS assignment returns the stored scalar-held array value'
+    is_deeply(
+        lowered_observation(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(set(items, [value]))}),
+            { value => 'payload' },
+        ),
+        { value => ['payload'] },
+        'direct array shape RHS assignment returns its evaluated typed value'
     );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key : value }))}),
-        q{return do { $meta = {$key => $value}; $meta }},
-        'single-equals operator call returns the stored scalar-held hash value'
+    is_deeply(
+        lowered_observation(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key : value }))}),
+            { key => 'field', value => 'payload' },
+        ),
+        { value => { field => 'payload' } },
+        'single-equals operator call returns its evaluated typed hash'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(set(:payload, [value]))}),
@@ -804,7 +833,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         };
 
         my $assign = LinkedSpec::call_spec_handler_subst('Top', q{set(name, [poison])});
-        is($assign, '$name = [$value]', 'set statement lowers from AST call args');
+        is_deeply(
+            lowered_observation($assign, { value => 'payload' }),
+            { value => ['payload'] },
+            'set statement executes typed AST call arguments'
+        );
 
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(meta, poison_key, poison_value)});
         is(
@@ -814,7 +847,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         );
 
         my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
-        is($return, 'return [$value]', 'return statement lowers payload from AST call args');
+        is_deeply(
+            lowered_observation($return, { value => 'payload' }),
+            { value => ['payload'] },
+            'return statement executes typed AST call arguments'
+        );
 
         my $return_undef = LinkedSpec::call_spec_handler_subst('Top', q{return_undef(poison)});
         is($return_undef, 'return undef', 'return_undef statement lowers from AST call arity');
@@ -862,10 +899,12 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
             'Top',
             q{return([value, true, foo["a"][i], { key : value }])},
         );
-        is(
-            $shape,
-            q!return [$value, do { require JSON::PP; JSON::PP::true }, do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $i; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }, {$key => $value}]!,
-            'AST value lowering preserves shape, scalar-read, literal, and direct-access output',
+        is_deeply(
+            lowered_observation($shape, {
+                value => 'payload', key => 'field', foo => { a => ['first', 'second'] }, i => 1,
+            }),
+            { value => ['payload', JSON::PP::true(), 'second', { field => 'payload' }] },
+            'AST value lowering executes shapes, primitive kinds and nested reads'
         );
 
         my $block = LinkedSpec::call_spec_handler_subst('Top', q{return({ set(x,"a"); x })});
@@ -1027,7 +1066,7 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         };
 
         my $quoted_count = LinkedSpec::call_spec_handler_subst('Top', q{return(count(array("items")))});
-        like($quoted_count, qr/\["items"\]/, 'AST aggregate lowering preserves quoted array wrapper literal payloads');
+        is_deeply(lowered_observation($quoted_count), { value => 1 }, 'quoted array wrapper payload remains one literal element');
         unlike($quoted_count, qr/\@items\b/, 'AST aggregate lowering does not turn quoted wrapper payloads into array symbols');
 
         my $sum = LinkedSpec::call_spec_handler_subst('Top', q{return(num_sum(items))});
@@ -1048,7 +1087,7 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         like($has_key, qr/\$__ls_has_key/, 'AST aggregate lowering preserves has_key terminal output');
 
         my $constructed = LinkedSpec::call_spec_handler_subst('Top', q{return(hash("span",[start,trim(" x ")]))});
-        like($constructed, qr/"span" => \[\$start,/, 'hash constructor reads the typed shape variable');
+        is_deeply(lowered_observation($constructed, { start => 7 }), { value => { span => [7, 'x'] } }, 'hash constructor executes the typed shape variable and nested helper');
         like($constructed, qr/\$__ls_trim/, 'hash constructor preserves its nested helper');
 
         my $flattened = LinkedSpec::call_spec_handler_subst('Top', q{return(flat(meta))});
@@ -1334,7 +1373,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');
         like($payload, qr/__ls_cat_parts/, 'AST return payload lowers nested helper calls from typed nodes');
         like($payload, qr/do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = \$i;.*eq "ARRAY"/, 'AST return payload lowers nested access from typed nodes');
-        like($payload, qr/\{\$key => \$value\}/, 'AST return payload lowers hash literals from typed nodes');
+        is_deeply(lowered_observation($payload, { value => 'payload', key => 'field', foo => { a => ['first', 'second'] }, i => 1 }), { value => ['payload', JSON::PP::true(), 'ab', 'second', { field => 'payload' }] }, 'AST return payload executes nested typed hash values');
 
         my $bad_chain = LinkedSpec::call_spec_handler_subst('Top', q{return(["x", "abc".substr()])});
         unlike($bad_chain, qr/\bsubstr\s*\(/, 'unsupported covered return-payload chain helper does not leak as a host call');

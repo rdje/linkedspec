@@ -153,7 +153,15 @@ subtest 'MethodLowering traces assignment and mutation decisions' => sub {
 	  q{items.push_back(name)},
  );
 
- is($assign, q{$items = ["a", $name]}, 'bare direct-shape assignment stores the scalar-held value');
+ my $assigned = eval {
+  my ($items, $name) = (undef, 'caller');
+  my $execute = eval 'sub { ' . $assign . ' }';
+  die $@ unless ref($execute) eq 'CODE';
+  $execute->();
+  $items;
+ };
+ diag($@) if $@;
+ is_deeply($assigned, ['a', 'caller'], 'bare direct-shape assignment stores the evaluated typed value');
  like($assign_trace, qr/ENTER LinkedSpec::ActionIR::MethodLowering::lower_assign_statement:assignment/, 'trace reports lower_assign_statement enter scope');
  like($assign_trace, qr/DECISION actionir:method_lowering:lower_assign_statement:assignment:bare_value_target => TAKEN/, 'trace reports bare value-target assignment decision');
  like($assign_trace, qr/EXIT LinkedSpec::ActionIR::MethodLowering::lower_assign_statement:assignment/, 'trace reports lower_assign_statement exit scope');

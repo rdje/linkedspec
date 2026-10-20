@@ -1,0 +1,11 @@
+{
+ "run": {
+  "command": [
+   "perl",
+   "docs/checkpoints/type-evaluated-values/host_list.pl"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "eyJwZXJsIjoidjUuMzQuMSIsInZhbHVlcyI6eyJpbml0aWFsaXplcl9jYWxsZXJfcmVmZXJlbmNlIjpbImluc2lkZSIsImluc2lkZSJdLCJtYXRlcmlhbGl6ZWRfb3BlcmFuZCI6WyJiZWZvcmUiLCJpbnNpZGUiLCJpbnNpZGUiXSwicHJpbWl0aXZlX2tpbmRzIjpbZmFsc2UsbnVsbCwiMDA3Iiw0MiwzLjVdLCJyZWZlcmVuY2VfY29udGVudHMiOlsib2xkIiwiY2hhbmdlZCJdLCJyZWZlcmVuY2VfaWRlbnRpdHkiOjEsInNhbWVfbmFtZV9hcnJheV9pbml0aWFsaXplciI6WyJiZWZvcmUiLCJpbnNpZGUiLCJpbnNpZGUiXSwic3BsaWNlX3NoYXBlIjpbInRhZyIsImEiLCJiIiwidGFpbCJdfX0K"
+ }
+}

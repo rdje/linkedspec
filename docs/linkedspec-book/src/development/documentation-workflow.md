@@ -762,3 +762,50 @@ receiver methods and callable invocation distinct. Resolve surprising results wi
 public descriptor/emitted-source tools and distinguishing controls; give confirmed
 defects repair owners before publishing a healthy taxonomy. Preserve complete prior
 live claims before updating any of their bound documentation inputs.
+
+
+### Test inputs and rejected oracles
+
+An explicit suffix selection can be useful source custody while omitting `.t`
+scripts or fixture data in another tree. Before running a supplied test context,
+retain the actual selected scripts, their data dependencies and modes. A failed
+file lookup is not a behavioral RED. Keep that incomplete reconstruction and use
+a separate complete-input epoch.
+
+Likewise, a baseline observation is not automatically the intended behavior.
+Distinguish a late variable read from container mutation with a saved-binding
+control and the existing mutation contract before choosing the expected value.
+Retain rejected expectations and actual failures. When internal emitted text
+changes, execute the relevant AST-derived values while preserving poisoned-source
+denials and trace checks.
+
+Historical audits keep the original executable source hashes when test
+representations evolve. Give each reviewed delta an owning task and an exact
+inverse that recovers the complete original file. Keep the existing denial
+controls and add missing, duplicated, altered and unrelated-edit controls.
+Retain the inverse table as an explicit input to the recurring proof, then
+run that proof before retrying canonical CI. Preserve rejected instruments
+and their channels separately from behavioral RED evidence.
+
+Private diagnostic tests retain their original native captures when unrelated
+source insertions move a diagnostic. Translate only fresh error coordinates
+through byte-identical statements in the same named routine at an explicit
+Git anchor; preserve callback names, paths and all other row fields. Reject
+unmatched statements. For source formatting changes, execute the expression
+against an independent value expectation. A test invocation observer covers
+its declared argument and binding ABI; it does not establish runtime dispatch.
+Prove wrong callbacks, files and lines still differ, then bypass the actual
+mapper and observe failing assertions before restoring it.
+
+When maintained diagnostic tests change, retain their historical scanner registrations.
+An exact reviewed admission must identify its owner, original digest and current digest.
+Compare the old and new selector occurrences, then reject edited files, copies, extra
+selectors and wrong or missing registrations. Removing each admission check must expose
+false acceptances to the control probe.
+
+Large immutable checkpoints can retain their exact bytes as bounded payload chunks.
+Gate physical chunk hashes, decoded payload hashes, order, offsets, whole-stream hash,
+byte count and original mode. Copy and verify first, use the retained reader in its
+explicit original source context, then remove only the verified duplicate originals.
+Keep rejected attempts distinct. Record the physical input migration while preserving
+every original logical identity; an uncommitted draft has no historical Git revision.

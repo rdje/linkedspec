@@ -1,0 +1,15 @@
+{
+ "all_live_inputs_bytes_modes_unchanged": true,
+ "original_claim_unchanged": true,
+ "preservation_sha256": "30a0cb1e6214a6db1eb22c2770b8691052a982dcbd277ddf540130a69f9745eb",
+ "result": "PASS",
+ "run": {
+  "command": [
+   "python3",
+   "docs/checkpoints/type-reference-inventory/publish.py"
+  ],
+  "returncode": 0,
+  "stderr_base64": "",
+  "stdout_base64": "Q3VycmVudCB0eXBlIGF1dGhvcml0eS9tb2RlbCBwdWJsaWNhdGlvbiBQQVNTOiAzODggaW5wdXRzOyA2ODgxNCBieXRlczsgcnVudGltZSByZXBhaXJzMy80IHBlbmRpbmcK"
+ }
+}

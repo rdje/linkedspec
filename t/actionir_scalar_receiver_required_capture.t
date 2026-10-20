@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -10,7 +12,7 @@ open my $fh,'<',$path or die "$path: $!";
 my $capture=JSON::PP->new->decode(do {local $/;<$fh>});
 close $fh or die "$path: $!";
 my $native=JSON::PP->new->decode(decode_base64($capture->{stdout_base64}));
-my $current=ScalarReceiverRequiredProbe::observations();
+my $current=LinkedSpecTest::MethodLocations::original_coordinates(ScalarReceiverRequiredProbe::observations());
 is($capture->{returncode},0,'first native scalar probe completed');
 is(decode_base64($capture->{stderr_base64}),'','first native scalar probe has no diagnostics');
 is(scalar(keys %{$capture->{inputs}}),193,'complete first native supplied population');

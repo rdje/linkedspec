@@ -1,0 +1,11 @@
+{
+ "assertions": 5001,
+ "files": 12,
+ "inputs_bytes_modes_unchanged": true,
+ "new_independent_goldens": 3,
+ "original_assertions": 4998,
+ "production_module_unchanged": true,
+ "result": "PASS",
+ "scope": "198 diagnostic-coordinate and four emitted-source comparisons preserve their full original plans; three independent value/ABI goldens are additional. No historical observation refresh or runtime/private admission is inferred.",
+ "syntax_checks": 14
+}

@@ -89,6 +89,25 @@ HISTORICAL_DIAGNOSTIC_INPUTS = {
     't/actionir_method_value_capture.t':
         '9e9e1d9ab525d387ae3d1689a1c1465dab08f39ecccb78868ad62cee6ed50269',
 }
+# Exact owned revisions of maintained diagnostic consumers. Historical registrations
+# remain unchanged; edited bytes, copied paths and foreign owners do not qualify.
+REVIEWED_DIAGNOSTIC_EVOLUTIONS = {
+    't/actionir_method_general_return_capture.t': (
+        'TYPE-REFERENCE-BOOK.1.2.3',
+        '79e1a62864441c368e76e393aac9a29907b82e1a28600e5429ec3c0ba99fb4bf',
+        '1746611ef64bd17f61fc3fc18b896e2774499d1dbd5915f21088cf7c5f3e17e9',
+    ),
+    't/actionir_small_kind_capture.t': (
+        'TYPE-REFERENCE-BOOK.1.2.3',
+        '050ea5f3080c8e3a79eb8004304a947ab483ad9340a0b55abbb58f558f8d5b73',
+        '156ddf5e544e71824f53b55be716deb7481bc22c6b782117eb61c4e9adf58962',
+    ),
+    't/actionir_source_assignment_kind_capture.t': (
+        'TYPE-REFERENCE-BOOK.1.2.3',
+        'cff593511e74933836c2dd0af2917e14a33bb3ab6421853a72d6de1182b1f872',
+        'e02ae230fe639a79491943a1184640bb56c3f053dc9db5cafce31baf36feed69',
+    ),
+}
 SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_.])(?:array|hash)\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)"
 )
@@ -145,7 +164,14 @@ def classified_compatibility(path: str, line: str) -> bool:
         return True
     historical_digest = HISTORICAL_DIAGNOSTIC_INPUTS.get(path)
     if historical_digest is not None:
-        return hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == historical_digest
+        digest = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        if digest == historical_digest:
+            return True
+        evolved = REVIEWED_DIAGNOSTIC_EVOLUTIONS.get(path)
+        return (evolved is not None
+                and evolved[0] == 'TYPE-REFERENCE-BOOK.1.2.3'
+                and evolved[1] == historical_digest
+                and evolved[2] == digest)
     if "must be" in line and path in {
         "dart/lib/src/runtime/interpreter.dart",
         "julia/src/runtime/Interpreter.jl",

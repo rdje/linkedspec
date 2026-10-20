@@ -12,7 +12,7 @@ date: 2026-10-18
 status: standalone foundation verified; producer and mapping integration open
 tags: [perl, actionir, source-emission, callback, provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.0.1 verifies the recovered two-owner foundation with62 independent fixture assertions and16 effective production-source inverses. Initial ineffective/masked inverses and their corrected actual channels remain retained."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-reference-inventory/publish.py. Prior:1a8b20201."
+reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
 `perl/LinkedSpec/ActionIR/SourceEmissions.pm` retains construction packets in a

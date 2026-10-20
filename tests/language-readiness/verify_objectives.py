@@ -36,6 +36,10 @@ CONTRACT_CAPTURE_BEFORE = "2d878478028fc417ac5b7790c016543c18c1f48b"
 CONTRACT_CAPTURE_DEPENDENCIES = "be7d70719856e76b7cb5a427ad6061a7109028ea"
 CONTRACT_CAPTURE_AFTER = "33e57deee73e27b97e9c21116bc70942f3f33772"
 CONTRACT_CAPTURE_OWNERS = ("PERL-PRIVATE-FACTORY-CAPTURE.2.1.0", "PERL-PRIVATE-FACTORY-CAPTURE.2.1.1")
+EVALUATED_VALUES_OWNER = 'TYPE-REFERENCE-BOOK.1.2.3'
+EVALUATED_VALUES_TABLE = 'tests/language-readiness/evaluated-value-regression-evolution.json'
+EVALUATED_VALUES_TABLE_SHA256 = 'ad3bcdbd4615d2c0ecc5c30c692e19c6881a0f2c51cf2367330fe08ad7310030'
+EVALUATED_VALUES_BEFORE = 'c053c9dcf24a78cc8b551187f47cdb7aefb03eb3'
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -605,11 +609,41 @@ def restore_compiler_scanner_mock(source, contents):
     return contents.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_BEFORE, 1)
 
 
+
+def restore_evaluated_value_regressions(source, contents):
+    raw = read_relative(EVALUATED_VALUES_TABLE)
+    require(digest(raw) == EVALUATED_VALUES_TABLE_SHA256,
+            "evaluated-value inverse table identity mismatch: " + source)
+    table = json.loads(raw)
+    require(table["version"] == 1 and table["owner"] == EVALUATED_VALUES_OWNER and
+            table["source"] == source == "t/phase0_regression.t" and
+            table["before_revision"] == EVALUATED_VALUES_BEFORE,
+            "evaluated-value inverse owner mismatch: " + source)
+    before = git("show", f"{EVALUATED_VALUES_BEFORE}:{source}")
+    require(digest(before) == table["before_sha256"],
+            "evaluated-value inverse base mismatch: " + source)
+    rebuilt = before
+    for row in table["hunks"]:
+        old, new = row["before"].encode(), row["after"].encode()
+        require(old and new and old != new and rebuilt.count(old) == 1,
+                "evaluated-value inverse reconstruction mismatch: " + source)
+        rebuilt = rebuilt.replace(old, new, 1)
+    require(digest(rebuilt) == table["after_sha256"],
+            "evaluated-value inverse reconstruction mismatch: " + source)
+    for row in table["hunks"]:
+        old, new = row["before"].encode(), row["after"].encode()
+        require(contents.count(new) == 1,
+                "evaluated-value regression registration mismatch: " + source)
+        contents = contents.replace(new, old, 1)
+    return contents
+
+
 def verify_signature_regression_evolution(source, contents, historical_hash):
     require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     current_hash = digest(contents)
+    contents = restore_evaluated_value_regressions(source, contents)
     contents = restore_compiler_scanner_mock(source, contents)
     contents = restore_boundary_recurrence(source, contents)
     require(contents.count(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR) == 1,
@@ -628,12 +662,16 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
             "boundary_recurrence_before_revision": BOUNDARY_AFTER,
             "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
+            "evaluated_values_owner": EVALUATED_VALUES_OWNER,
+            "evaluated_values_input": EVALUATED_VALUES_TABLE,
+            "evaluated_values_table_sha256": EVALUATED_VALUES_TABLE_SHA256,
+            "evaluated_values_before_revision": EVALUATED_VALUES_BEFORE,
             "compiler_membership_owner": COMPILER_MEMBERSHIP_OWNER,
             "compiler_membership_reconciliation_owner": COMPILER_MEMBERSHIP_RECONCILIATION_OWNER,
             "compiler_membership_before_revision": COMPILER_MEMBERSHIP_BEFORE,
             "compiler_membership_after_revision": COMPILER_MEMBERSHIP_AFTER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
+            "scope": "exact owner-bound evaluated-value test inverse, committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -1001,10 +1039,20 @@ def falsify(report):
                 current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_AFTER.replace(b"sub {", b"sub { return;"), 1),
                 current.replace(COMPILER_SCAN_AFTER, COMPILER_SCAN_AFTER.replace(b"_scan_executable_contract_ir_events", b"_other_scan"), 1),
             )
+            inverse_table = json.loads(read_relative(EVALUATED_VALUES_TABLE))
+            for fragment_record in inverse_table["hunks"]:
+                fragment = fragment_record["after"].encode()
+                require(current.count(fragment) == 1,
+                        "evaluated-value control registration mismatch: " + source)
+                changed = bytes([fragment[0] ^ 1]) + fragment[1:]
+                altered += (current.replace(fragment, b"", 1),
+                            current.replace(fragment, fragment * 2, 1),
+                            current.replace(fragment, changed, 1))
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:",
-                       "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:")
+                       "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:",
+                       "evaluated-value regression registration mismatch:")
         elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
             altered = (
                 current + b"# unreviewed boundary contract edit\n",

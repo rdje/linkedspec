@@ -1,0 +1,51 @@
+{
+ "added_source_denials": 210,
+ "current_controls": {
+  "corrupted_inputs_rejected": [
+   "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json",
+   "perl/LinkedSpec/Runtime.pm",
+   ".linkedspec-data/scratch/nested-native-perl.log",
+   "tests/language-readiness/context-names/cases.json"
+  ],
+  "governance_mutations_by_source": {
+   "perl/LinkedSpec/ActionIR/Contracts.pm": 10,
+   "t/phase0_regression.t": 231,
+   "tools/check_public_aggregate_selector_surface.py": 6,
+   "tools/run_ci_local.sh": 322,
+   "tools/test_perl_project_data_storage.sh": 9
+  },
+  "governance_mutations_rejected": 578,
+  "outside_paths_rejected": 2
+ },
+ "fragments": 70,
+ "healthy_audit_guard": {
+  "original_log_attempts": 0,
+  "tracked_write_attempts": 0
+ },
+ "input_bytes_modes_unchanged": true,
+ "original_controls": {
+  "corrupted_inputs_rejected": [
+   "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json",
+   "perl/LinkedSpec/Runtime.pm",
+   ".linkedspec-data/scratch/nested-native-perl.log",
+   "tests/language-readiness/context-names/cases.json"
+  ],
+  "governance_mutations_by_source": {
+   "perl/LinkedSpec/ActionIR/Contracts.pm": 10,
+   "t/phase0_regression.t": 21,
+   "tools/check_public_aggregate_selector_surface.py": 6,
+   "tools/run_ci_local.sh": 322,
+   "tools/test_perl_project_data_storage.sh": 9
+  },
+  "governance_mutations_rejected": 368,
+  "outside_paths_rejected": 2
+ },
+ "original_verifier_red": "unreviewed signature-regression drift: t/phase0_regression.t",
+ "proof_inputs": 184,
+ "recovery_controls": 22,
+ "restored_bytes": 84613241,
+ "restored_inputs": 134,
+ "result": "PASS",
+ "scope": "Complete original historical bytes/hash recover after the exact owned inverse. Every original auditor control remains effective; three new actual source denials per fragment are additional. Archive membership, original log denial and tracked write denial retain their original population and outcomes. No old claim/hash/log or runtime result is refreshed.",
+ "table_identity_red": "evaluated-value inverse table identity mismatch: t/phase0_regression.t"
+}

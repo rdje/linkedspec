@@ -1,0 +1,216 @@
+{
+ "logical_path": "docs/checkpoints/type-values-selector/preservation.json.gz",
+ "mode": 420,
+ "parts": [
+  {
+   "file_sha256": "4fb60392a14c63e1b66b50a79e4d130088397223f7e2663b9fcbc0c07b2d3adc",
+   "mode": 420,
+   "number": 0,
+   "offset": 0,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-000.json.gz",
+   "payload_sha256": "c3db47caf8c66e3c5c45ee7956c927989a2cde904976d2f9bd6c060bff49840e",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "d210a21f3b4aa274fde2b6507d294bc4d5dc1006399c5b0dd91aee3b2ea26123",
+   "mode": 420,
+   "number": 1,
+   "offset": 16777216,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-001.json.gz",
+   "payload_sha256": "39815a856cc38178c496398568cf583efd03b444af22dca1c247cd173e40fb86",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "81969d1b5bd6f5e9b60cf1463d2ebd4522f04b6dee5b838ad765438e0713d16d",
+   "mode": 420,
+   "number": 2,
+   "offset": 33554432,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-002.json.gz",
+   "payload_sha256": "72558669d272bb6c69f162d17fd78377fa9eaabd87918821658303259e209940",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "4eb5442afe88026a5fd27a5da0b24f8ae45d28dfce30b0c480291769b5694ee4",
+   "mode": 420,
+   "number": 3,
+   "offset": 50331648,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-003.json.gz",
+   "payload_sha256": "4eb910c39a51b5d98a31732cf6f8a717f8aa5dff42fbd78e96b3fb6b3697a9dd",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "4395a6204485607ab203d9d124d0dfbf3b2aa9745067695a003cc648b5036661",
+   "mode": 420,
+   "number": 4,
+   "offset": 67108864,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-004.json.gz",
+   "payload_sha256": "d4a748b01635d3de2ba9c9894799c504e3ac7a7654d2ca6e259dec5424d746d4",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "a8641736bbee9a697f7f7b1705b37c7ff1c4cfa0e1b643b5f8fe096b90ea2c9a",
+   "mode": 420,
+   "number": 5,
+   "offset": 83886080,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-005.json.gz",
+   "payload_sha256": "b0f8261a443de356e078580c0fbc96b45610a4b12decd17c3c08b556b4818546",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "aa48ab80c7f8531d78f2706205d7e2f338418ea08fa368da1cd108b47e651df6",
+   "mode": 420,
+   "number": 6,
+   "offset": 100663296,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-006.json.gz",
+   "payload_sha256": "ca82f9751542b46715ce6c2a76257de894cf2ec6961b5e263e18b3a1aafcee1a",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "078c9278248f99be1d572a67fd4d857e2ab2d6525a5d61f2ffb1b75d5548480a",
+   "mode": 420,
+   "number": 7,
+   "offset": 117440512,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-007.json.gz",
+   "payload_sha256": "6a0d3691bce7cb93c4aa2e582953980b21963dbc14fe3fbe13955eb7560075aa",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "0c0905a317dff95ffd5266dfe43dd857b95116d00385d82a3dfd640ec077ece3",
+   "mode": 420,
+   "number": 8,
+   "offset": 134217728,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-008.json.gz",
+   "payload_sha256": "eba9502a5a413e5abfe7a20f883c7a9e14e9a4d907f1163b953f3a14f04810f4",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "c7b0518ac005fbd91c6075333a80bd18aa93f904887df0046be3cd398176390f",
+   "mode": 420,
+   "number": 9,
+   "offset": 150994944,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-009.json.gz",
+   "payload_sha256": "ef88909001c0ba08e571110a4762468471ef6e206282720644cf02cd2770cee6",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "b732b6a6f56d546ff1f1f88f77240173e163ff59b3965633389efba1fd044e1a",
+   "mode": 420,
+   "number": 10,
+   "offset": 167772160,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-010.json.gz",
+   "payload_sha256": "dab8c6788dcc91e55029764130a067b0a37a0ffa558d58d37b42698d7859e783",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "0d4006fc4f7f8cd0d7230fcb97bbef96934a2e62a2d5de648368356e2d58820d",
+   "mode": 420,
+   "number": 11,
+   "offset": 184549376,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-011.json.gz",
+   "payload_sha256": "cec15f07e7d6592b9ff0c7335b2b8ae714903e4eced617c0a81b85c7070cb524",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "dfc972cfc9dc1914f1e090bb4e152b4c60e728b925e23f12d8419767cf94ab40",
+   "mode": 420,
+   "number": 12,
+   "offset": 201326592,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-012.json.gz",
+   "payload_sha256": "77a6010c20b7f125e4aa00ba80fe18e5be29eca50d6a58b1f5f12d3a9cb1b792",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "04a2ded93c98220355c4f5e35ab22a40902ea5bceedf3a6c79a0c092328d18e7",
+   "mode": 420,
+   "number": 13,
+   "offset": 218103808,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-013.json.gz",
+   "payload_sha256": "d6473c8a0e74ff3b18591654a6a4e7a2ca480def2263b7d18605d38804096107",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "69246656f0ef5b2207a28a43cd3411855d6c098eb6ded78d5e676dc12c90bd0c",
+   "mode": 420,
+   "number": 14,
+   "offset": 234881024,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-014.json.gz",
+   "payload_sha256": "893a1c431b013405baad6a0ca8fefec840cdbaff520cf503339cccc24c62c7fb",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "5657e296bfb5bec38431daa272fb42ea78cb29056f5439b47d36763129cac6b6",
+   "mode": 420,
+   "number": 15,
+   "offset": 251658240,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-015.json.gz",
+   "payload_sha256": "faca0f507391377756620d89c73b2ce491af4d7a5b1f2f27844f78b1946678a2",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "82d794c1fbc7b4328794a003d1527e11a1a61e8cec393f1e6307f2a9a0f4b0f9",
+   "mode": 420,
+   "number": 16,
+   "offset": 268435456,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-016.json.gz",
+   "payload_sha256": "9d60fed5615bfd10dc88af68038140faf3901190780e68bf0ea0b1e19f8dfbaf",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "5f1c092725d8a245ff7d325736d8b6e093b270f9fe562008cd0d79d754c7587e",
+   "mode": 420,
+   "number": 17,
+   "offset": 285212672,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-017.json.gz",
+   "payload_sha256": "37025824dfd3fb019aafbc69af4e90a4ec3549a98f8e77b357193136a37a030c",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "2967202d4a533cc4a4f8523255634da4b711f29283ed1fe62bff40c19aca3a49",
+   "mode": 420,
+   "number": 18,
+   "offset": 301989888,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-018.json.gz",
+   "payload_sha256": "0a0dee3dc4d53dd5082567513909a6d5756572d8f1f22bd01bd7936fd536e322",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "610ab7550dfb722f57186ccd605e5b50368e2419b826ca04f0519474ed0ebec3",
+   "mode": 420,
+   "number": 19,
+   "offset": 318767104,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-019.json.gz",
+   "payload_sha256": "9910372cac714a1aa5d1fd2c0b64e41855acac5b2bfe0ab324f7b0e6aa782776",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "fd61e27c8ee85f83c743c795a85f06cb1ec8da5c510d8c1b43615ee3f05ebe72",
+   "mode": 420,
+   "number": 20,
+   "offset": 335544320,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-020.json.gz",
+   "payload_sha256": "89313749cb3cc24011d4fc71f45708a879fb0f0f8b5fc6fa3fb12ae067ef33c2",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "e0ac506be850f4e6959eb632015d94c6a41502ad3cba91857f234a6a5521c1fe",
+   "mode": 420,
+   "number": 21,
+   "offset": 352321536,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-021.json.gz",
+   "payload_sha256": "3294c53e346efb90c15ce39c4459ce6779cb6437505475741a6782960ae11a8f",
+   "size": 16777216
+  },
+  {
+   "file_sha256": "89180e941be0aba84866075f2395edc547dc587adbab45f60464d6b9a3c4467a",
+   "mode": 420,
+   "number": 22,
+   "offset": 369098752,
+   "path": "docs/checkpoints/type-values-selector/parts/preservation/part-022.json.gz",
+   "payload_sha256": "8aa7994b1a2c46376eb8fecfd696ed923a5e12ecf3383b28598f1ba012ac461a",
+   "size": 313975
+  }
+ ],
+ "sha256": "68b86c5f7e9e1af936e8ec115e4ee10a08e6500f690ff523a6a915c09fe0c07e",
+ "size": 369412727,
+ "version": 1
+}

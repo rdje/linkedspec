@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
+# Current diagnostics use bound original coordinates; frozen records stay unchanged.
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -27,7 +29,7 @@ sub current {
  is($capture->{returncode}, 0, "$label first native process completed");
  is(decode_base64($capture->{stderr_base64}), '', "$label accepted native process has no diagnostics");
  ok($capture->{unchanged}, "$label complete supplied input capsule stayed unchanged");
- return JSON::PP->new->decode($out);
+ return LinkedSpecTest::MethodLocations::original_coordinates(JSON::PP->new->decode($out));
 }
 my $first = read_json($prefix.'native.json');
 my $native = JSON::PP->new->decode(decode_base64($first->{stdout_base64}));
