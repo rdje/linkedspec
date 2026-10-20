@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-October20 current PNT boundary: TYPE-REFERENCE-BOOK.1.2.3 completes the evaluated Perl list-value repair with23 native/generated cases,5001 quiet recurring assertions and exact selector/storage admission controls. Fresh845-input publication, whole prior replay and complete source closure pass; exact canonical receipt governs landing. Scoped-with .1.2.4, numeric helpers .1.2.5 and generated-drop warning/FATAL repair .1.2.6 precede operation inventory .1.2.1 and book mapping .1.2.2. Complete reference admission remains pending.
+October20 current PNT boundary: TYPE-REFERENCE-BOOK.1.2.4 completes scoped callable/frame restoration and source-span repair after evaluated values .1.2.3. Thirty native/generated cases, six producer faults/restorations,14 suites/1924 TAP and complete book proof pass; exact canonical receipt governs landing. Numeric helpers .1.2.5 and generated-drop warning/FATAL repair .1.2.6 precede operation inventory .1.2.1 and book mapping .1.2.2. Complete reference admission remains pending.
 
 October20 type-reference work: [TYPE-REFERENCE-BOOK](docs/tasks/TYPE-REFERENCE-BOOK.md) has completed stale-guidance .1.1 and authority/model .1.2.0. The evaluated-value P1 repair is complete; correct scoped-with, the separately owned deferred numeric-helper gap and generated-drop compiler diagnostic before complete operation/spelling inventory, current book mapping and independent layout review .1.3. Legacy status .8 and deferred metadata QA remain owned; complete per-type references and coverage closeout remain pending.
 

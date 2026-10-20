@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / P1 scoped-callable .1.2.4 follows completed scalar evaluation; before enumeration
+- Status: `active` / numeric .1.2.5 follows completed scoped-callable repair; before enumeration
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-19`
+- Last updated: `2026-10-20`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -186,15 +186,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP** — Public book examples/current limits, Knowledge facts/map, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmap and task-tree align with the bounded Perl repair. Current complete book/heading control and Knowledge checks pass; git diff --check is clean. Separate scoped-with, numeric and generated-drop owners retain their sequence.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.4`
-  Status: `pending` / P1 confirmed Perl scoped-callable defect
+  Status: `done` / scoped callable repair; clean activation 2fca7d848
   Goal: Make the scoped with value callable inside its attached codeblock without silent null lowering.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.3`
   Reproduce: cb = {|| return("yes") }; return(cb.with() { return(value()) }) returns null through Get and fresh generated source. Copying value to a named local, calling cb directly, or supplying an explicit callback/value parameter returns yes. Fallback count remains zero in the failing case.
   Impact: A public scoped binding loses callable behavior and hides unsupported lowering behind null.
   Root cause: The attached with lowerer emits my $value but lowers its body with the original dependency vocabulary. _codeblock_variable_call_candidate cannot find that scalar-kind name and emits the unsupported-helper sentinel.
   Schedule: After .1.2.3, before .1.2.1 enumeration. Before creating new source files, run the current readonly publication from clean Git to ignored baseline logs; its exact scanner inventory treats added source files as a changed input population. Preserve that whole baseline before scoped writes.
-  Planned tier: `canonical`; scoped runtime/lowering behavior movement.
-  Claim verification: none: Confirmed intake is measured by .1.2.0; declare complete scoped repair inputs and RED/GREEN at activation.
+  Verification tier: `canonical`
+  Focused checks: Scoped descriptor/Get/fresh-source values and diagnostics, actual source faults, callable/with/direct consumers, Knowledge and rendered book.
+  Canonical trigger: Scoped callable lowering and runtime-frame movement; exact staged candidate.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.4.json`
+  Evidence: docs/checkpoints/type-scoped-with/;30 GREEN/19 RED/11 controls; source faults20/1/1/1/1 plus authored-span RED, all restored;14 suites/1924 TAP/549 inputs; book89/heading denial. Whole prior845/full130759 and clean readonly0 preserved at real2fca7d848. Publisher and exact canonical receipt govern landing. Canonical1 tier-spelling rejection and exact candidate remain in docs/checkpoints/type-scoped-with-admission/.
   Acceptance: Repair scoped dependency projection with nested scope/restoration, static helper/function precedence, false/null/noncallable and explicit-parameter controls; check actual unsupported-call diagnostics separately. Preserve existing call/with contracts, verify fresh emitted routes and direct consumers, document the fix and run canonical candidate proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.5`
@@ -310,7 +313,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.3` | `done` |23 GREEN/19 RED; focused52, observer129 RED/restoration; canonical landing boundary. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `pending` | P1 restore callable scoped with value after scalar boundary repair. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `done` | Scoped callable/frame/span repair; finite proof and canonical landing boundary. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `pending` | P2 deferred-body numeric helper gap after the two P1 repairs. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `pending` | P2 generated scalar-drop advisory/FATAL load failure before enumeration. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
@@ -350,7 +353,7 @@ None requiring director input. P1 evaluated-value .1.2.3 is complete; scoped-wit
 
 ## Commit Log
 
-Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 activates only from clean Git.
+Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 activates only from clean Git.
 
 ## Changelog
 
@@ -364,3 +367,5 @@ Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.
 - `2026-10-19`: Activate .1.2 from clean cf4dceccd; split authority/type model, complete operation/spelling enumeration and book mapping into independently committed children. Current .1.2.0 owns the pre-measurement source population and preservation.
 
 - `2026-10-19`: Complete authority/model prerequisite; schedule both source-isolated P1 repairs before exhaustive operation enumeration.
+
+- `2026-10-20`: Complete scoped callable .1.2.4 with typed errors, frame restoration and authored spans; numeric .1.2.5 is next.

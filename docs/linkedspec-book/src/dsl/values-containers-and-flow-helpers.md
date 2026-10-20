@@ -74,9 +74,7 @@ does not add recursive copying of arbitrary host objects.
 
 ### Current Perl limits
 
-An attached `cb.with() { return(value()) }` currently returns null because its
-scoped call is not recognized. `with(cb, {|callback| return(callback()) })`
-works. A direct `num_add` inside a deferred body currently raises the typed
+A direct `num_add` inside a deferred body currently raises the typed
 `unknown_helper` diagnostic even though ordinary numeric helper calls work.
 Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean
 arguments passed into a codeblock retain their kind. These separately owned
@@ -393,6 +391,38 @@ working-variable side effects are the same as the call site. Only the working bi
 scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare
 `with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
 general delayed callback are not current portable surfaces; explicit delayed callbacks use `{|params| ...}`.
+
+
+### Callable values in with
+
+In Perl, a scoped value that contains a codeblock can be invoked as value().
+The following expressions return "yes", ["first","second","first"], and
+["inner","outer"], respectively:
+
+```text
+cb = {|| return("yes") }; return(cb.with() { return(value()) })
+```
+
+```text
+first = {|| return("first") }; second = {|| return("second") }; return(with(first) { return([value(), with(second) { return(value()) }, value()]) })
+```
+
+```text
+value = {|| return("outer") }; cb = {|| return("inner") }; result = with(cb) { return(value()) }; return([result, value()])
+```
+
+The receiver evaluates once. Nested blocks restore the surrounding value;
+the same rule holds inside registered functions and while unwinding a callable
+error. A callback invoked inside the block reads the current scoped value
+through its dynamic caller context. Mutations to other caller bindings persist.
+Governed helpers and registered functions keep precedence over variables with
+the same names.
+
+Calling value() when the scoped value is false, null, a string, an array or a
+harray raises the typed value_not_callable cause. An unsupported call inside
+the invoked codeblock instead retains unknown_helper and the authored name.
+Explicit callback parameters remain supported, for example
+`with(cb, {|callback| return(callback()) })`.
 
 Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose

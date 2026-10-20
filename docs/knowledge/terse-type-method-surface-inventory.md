@@ -12,11 +12,11 @@ answers:
   - "do Perl hash keys and callable arguments retain evaluated values"
   - "can Perl num_add run inside a deferred codeblock"
   - "does Perl drop_keys warn for a single literal key"
-date: 2026-10-19
+date: 2026-10-20
 status: current value model and bounded Perl repair; full method inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
 evidence: "TYPE-REFERENCE-BOOK.1.2.3 retains the accepted-runtime RED and native/generated23 GREEN, complete test-input supplement and six effective source inverses. The first oracle, candidate and incomplete supplied test context remain retained; a saved-binding control and existing copy-on-write contract justify the corrected expectation."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py"
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-scoped-with/publish.py"
 ---
 
 # Current value model and evaluated-value boundary
@@ -46,8 +46,8 @@ accepted-runtime baseline rejects19 cases, the candidate matches all23, and six
 actual source inverses reject and restore. Host identity controls are separate
 and do not establish general DSL alias/deep-copy parity.
 
-Remaining Perl limits: attached with omits callable projection for scoped value
-(.1.2.4); num_add inside a deferred body reaches unknown_helper (.1.2.5).
+Scoped callable with is repaired under .1.2.4; [[perl-generic-final-codeblock-normalization]] owns its local vocabulary/frame mechanism.
+Remaining Perl limit: num_add inside a deferred body reaches unknown_helper (.1.2.5).
 [[perl-codeblock-boolean-literal-kind-drift]] remains owned by startup .35;
 explicit boolean arguments avoid that separate literal defect in this repair.
 

@@ -635,4 +635,116 @@ subtest 'constructed values and callable arguments retain evaluated values' => s
     }
 };
 
+subtest 'with exposes the current scoped value to callable dispatch' => sub {
+    my $path = File::Spec->catfile($repo_root, 'tests', 'scoped-with', 'cases.json');
+    open my $fh, '<:raw', $path or die "Could not read $path: $!";
+    my $fixture = JSON::PP->new->utf8->decode(do { local $/; <$fh> });
+    close $fh or die "Could not close $path: $!";
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    my $index = 0;
+    foreach my $case (@{$fixture->{cases}}) {
+        my $package = 'ScopedWithContract' . $index++;
+        subtest $case->{id} => sub {
+            my $source = ($case->{functions} // '') . "Top: /x/\n I { $case->{body} }\n";
+            my (%context, @warnings, $actual, $native_ok, $native_error, $output);
+            {
+                open my $capture, '>', \$output or die "Capture diagnostic output: $!";
+                local *STDOUT = $capture;
+                local $SIG{__WARN__} = sub { push @warnings, @_ };
+                $native_ok = eval {
+                    my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+                    die "Native parser did not build\n" unless ref($parser) eq 'CODE';
+                    my $input = 'x';
+                    $actual = $parser->(\$input);
+                    1;
+                };
+                $native_error = $@ unless $native_ok;
+            }
+            ok($native_ok, 'native parser builds and completes its public invocation');
+            diag($native_error) unless $native_ok;
+            my ($emitted, $generated, $generated_error, $generated_ok);
+            {
+                local $SIG{__WARN__} = sub { push @warnings, @_ };
+                $generated_ok = eval {
+                    $emitted = LinkedSpec::emit_generated_source(
+                        \$source, source_identity => 'scoped-with.spec',
+                    );
+                    eval "package $package; $emitted; 1" or die $@;
+                    my $input = 'x';
+                    no strict 'refs';
+                    $generated = &{$package . '::Execute'}(\$input);
+                    1;
+                };
+                $generated_error = $@ unless $generated_ok;
+            }
+            ok(defined($emitted) && length($emitted), 'fresh standalone parser source emits');
+            is_deeply(\@warnings, [], 'native and standalone routes preserve warning discipline');
+            if (exists $case->{expected}) {
+                ok(!defined($context{last_error}), 'native execution has no runtime error');
+                is($json->encode($actual), $json->encode($case->{expected}), 'native contract value');
+                ok($generated_ok, 'fresh standalone parser loads and executes');
+                diag($generated_error) unless $generated_ok;
+                is($json->encode($generated), $json->encode($case->{expected}), 'standalone contract value');
+                is($output // '', '', 'healthy native invocation emits no diagnostic output');
+            } else {
+                is($actual, undef, 'native invocation reports no successful value');
+                my $detail = $context{last_error}{detail};
+                isa_ok($detail, 'LinkedSpec::CodeblockRuntime::Error', 'native typed cause');
+                ok(!$generated_ok, 'standalone invocation rejects the invalid call');
+                is(ref($generated_error), 'HASH', 'standalone public error envelope');
+                is($generated_error->{code}, 'generated_execution_failed', 'standalone execution stage');
+                my $cause = $generated_error->{detail};
+                isa_ok($cause, 'LinkedSpec::CodeblockRuntime::Error', 'standalone typed cause');
+                foreach my $key (sort keys %{$case->{error}}) {
+                    is_deeply($detail->{$key}, $case->{error}{$key}, "native diagnostic $key");
+                    is_deeply($cause->{$key}, $case->{error}{$key}, "standalone diagnostic $key");
+                }
+            }
+        };
+    }
+};
+
+subtest 'with restores a function binding frame after a callable error' => sub {
+    require LinkedSpec::CodeblockRuntime;
+    my $invoke = \&LinkedSpec::CodeblockRuntime::invoke;
+    my $source = "fn apply(value) { return(with() { return(value()) }) }\n"
+        . "Top: /x/\n I { cb = {|| return(\"outer\") }; return(apply(cb)) }\n";
+    foreach my $route (qw(native generated)) {
+        my ($frame, $during, $error, $output);
+        {
+            open my $capture, '>', \$output or die "Capture diagnostic output: $!";
+            local *STDOUT = $capture;
+            no warnings 'redefine';
+            local *LinkedSpec::CodeblockRuntime::invoke = sub {
+                if (defined($_[3]) && $_[3] eq 'value') {
+                    $frame = $_[2];
+                    my $binding = $frame->{value};
+                    $during = $$binding;
+                }
+                return $invoke->(@_);
+            };
+            my $input = 'x';
+            if ($route eq 'native') {
+                my %context;
+                my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+                $parser->(\$input);
+                $error = $context{last_error}{detail};
+            } else {
+                my $emitted = LinkedSpec::emit_generated_source(\$source);
+                eval "package ScopedWithErrorRestoration; $emitted; 1" or die $@;
+                eval { ScopedWithErrorRestoration::Execute(\$input); 1 };
+                my $envelope = $@;
+                $error = ref($envelope) eq 'HASH' ? $envelope->{detail} : $envelope;
+            }
+        }
+        isa_ok($error, 'LinkedSpec::CodeblockRuntime::Error', "$route typed failure");
+        is($error->{code}, 'value_not_callable', "$route scoped null fails as a bound value");
+        ok(ref($frame) eq 'HASH', "$route observes the real invocation binding frame");
+        is($during, undef, "$route frame exposes the inner null during invocation");
+        my $restored = $frame->{value};
+        is($invoke->($$restored, [], {}, 'restored', undef, {}), 'outer',
+            "$route frame restores its outer callable after error unwinding");
+    }
+};
+
 done_testing();

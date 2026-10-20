@@ -1506,6 +1506,27 @@ sub _contextual_codeblock_runtime_record {
  return LinkedSpec::CallableContract::runtime_record_from_argument($node)
 }
 
+sub _with_value_body_deps {
+ my ($deps) = @_;
+ my $scoped = ref($deps) eq 'HASH' ? { %$deps } : {};
+ my $outer_kind = $scoped->{bare_symbol_kind};
+ $scoped->{bare_symbol_kind} = sub {
+  return 'scalar' if defined($_[0]) && $_[0] eq 'value';
+  return _bind_emission_dependency($outer_kind)->(@_) if ref($outer_kind) eq 'CODE';
+  return undef
+ };
+ my @names = ref($scoped->{bare_symbol_names}) eq 'ARRAY'
+  ? @{$scoped->{bare_symbol_names}} : ();
+ push @names, 'value' unless grep { defined($_) && $_ eq 'value' } @names;
+ $scoped->{bare_symbol_names} = \@names;
+ if (ref($scoped->{__user_function_scalar_value_names}) eq 'HASH') {
+  $scoped->{__user_function_scalar_value_names} = {
+   %{$scoped->{__user_function_scalar_value_names}}, value => 1,
+  };
+ }
+ return $scoped
+}
+
 sub _codeblock_variable_call_candidate { # A pure function cannot borrow callable names from its rule caller.
  my ($deps, $name) = @_;
  return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -2524,7 +2545,7 @@ sub _is_reserved_actionir_value_symbol {
 # Returns : Perl expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_method_value_expr {
- my ($expr, $deps) = @_;
+ my ($expr, $deps, $provided_ast) = @_;
  my $require_dep = sub {
   my ($name) = @_;
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
@@ -4112,6 +4133,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   my $block_kind = $block_node->{kind} // '';
+  my $bindings = _codeblock_runtime_binding_expr($deps, 'value');
+  my $shadow_value = ref($deps) eq 'HASH' && defined($deps->{__user_function_codeblock_binding_frame})
+   ? 'local '.$bindings.'->{"value"} = \\$value; ' : '';
   if ($block_kind eq 'codeblock_argument') {
    my $block_value = {
     kind => 'block_value',
@@ -4119,10 +4143,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
     source => $block_node->{source_text},
     source_span => $block_node->{source_span},
    };
-   my $block_expr = $lower_ast_block_value_node->($block_value);
+   # Lower the same typed body with its local vocabulary, retaining authored spans.
+   my $block_expr = _lower_method_value_expr(
+    $block_value->{source}, _with_value_body_deps($deps), $block_value,
+   );
    return _actionir_ast_unsupported_helper_expr('with')
     unless defined($block_expr) && length($block_expr);
-   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '.$block_expr.' }'
+   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
+    .$shadow_value.$block_expr.' }'
   }
 
   my $record_expr;
@@ -4141,9 +4169,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   my $invoke_args = $block_kind ne 'codeblock_argument' && @$args == 2
    ? '[$__ls_with_value]' : '[]';
-  my $bindings = _codeblock_runtime_binding_expr($deps, 'value');
-  my $shadow_value = ref($deps) eq 'HASH' && defined($deps->{__user_function_codeblock_binding_frame})
-   ? 'local '.$bindings.'->{"value"} = \\$value; ' : '';
   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
    .$shadow_value
    .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
@@ -5182,7 +5207,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
  unless (ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge}) {
-  my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
+  my $ast_node = ref($provided_ast) eq 'HASH'
+   ? $provided_ast : _parse_method_value_ast_expr($trimmed, $deps);
   if (ref($ast_node) eq 'HASH') {
    my $ast_kind = $ast_node->{kind} // '';
    if ($ast_kind ne 'raw_perl') {

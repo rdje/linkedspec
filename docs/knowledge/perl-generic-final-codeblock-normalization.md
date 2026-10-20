@@ -11,44 +11,43 @@ answers:
   - "what is a codeblock_argument"
   - "does Perl promote a harray in a codeblock parameter"
   - "does callback codeblock include an argument list"
-date: 2026-07-12
+  - "why can Perl call value inside with"
+  - "how does Perl with restore callable bindings"
+  - "does calling a non callable with value report a typed error"
+date: 2026-10-20
 status: current
 tags: [perl, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
-evidence: "FUTURE-PARITY-BACKLOG.11.3.3.2 adds LinkedSpec::CallableContract, typed final metadata, generic receiver parsing, metadata-governed normalization, typed validation, and live/standalone generated execution. Closeout .11.3.4 verifies byte-equivalent attached/parenthesized lowering, zero raw/fallback/compatibility/unresolved telemetry, no parser allowlist/captured environment/stored coderef, 100 focused tests, capability 60/0/0, CLI 61x2, and Phase 0 1..1030."
-reverify: "PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
+evidence: "Original generic normalization and dated closeout evidence remain in this same card at accepted Git 2fca7d8489038c226fe0454a105f12a2af696a1f. TYPE-REFERENCE-BOOK.1.2.4 owns the scoped callable repair and its complete proof under docs/checkpoints/type-scoped-with/."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-scoped-with/publish.py && bash tools/project_data_run.sh prove -q -Iperl t/callable_codeblock_literal_contract.t"
 ---
 
 # Perl Generic Final-Codeblock Normalization
 
-Perl user functions declare only a final value kind:
+LinkedSpec::CallableContract governs builtin helper, receiver and typed user-function final arguments.
+The parser recognizes attached receiver syntax without a method-name allowlist; callable metadata grants
+semantics. Attached and parenthesized contextual braces normalize to the same version-1 codeblock_argument,
+with zero positional parameters and typed body/source payload. Unknown receiver methods still fail validation.
 
-```text
-fn apply(value, callback: codeblock) { return(callback()) }
-```
+User functions declare only a final value kind, for example callback: codeblock. Definitions, staged bodies
+and staged parse jobs retain ordered params, exact arity and parameter_kinds. The declaration has no callback
+argument list; an explicit {|item, ...rest| ...} literal owns its invocation signature. Typed functions use
+the dynamic codeblock runtime. Immediate helpers retain their existing full-breadth block lowering.
+Harrays are never promoted: an invalid final value yields final_argument_not_codeblock. Non-final,
+nested-signature, nameless and unknown-type declarations fail before parser construction.
 
-The definition, staged body payload, and staged parse job preserve ordered `params`, exact `arity`, and
-`parameter_kinds => { callback => "codeblock" }`. The declaration contains no callback argument list. An explicit
-`{|item, ...rest| ...}` value continues to own and enforce its own invocation signature.
+Builtin contracts cover helper with and receiver with, walk_leaves, map_leaves and reduce_leaves.
+Contextual blocks read current dynamic values; explicit literals retain their own parameters.
+No lexical environment or stored host coderef is introduced. The original July normalization closeout
+and its exact historical measurements remain at the Git revision in evidence above; backend progress
+belongs to the task trees.
 
-`LinkedSpec::CallableContract` is the common acceptance seam for builtin helpers, receiver methods, and typed user
-functions. The ActionIR parser recognizes receiver attached-block syntax without a method-name allowlist; lowering
-then consults the callable contract. When the declared final argument is an immediate contextual `{ ... }` block,
-both attached and parenthesized spellings normalize to one version-1 `codeblock_argument` with an exact zero-
-positional signature and the same typed body/source payload.
-
-Typed user functions execute that record through the dynamic codeblock runtime in live and standalone generated
-source. Governed immediate helpers and receiver methods consume the same canonical node but retain their existing
-full-breadth immediate block lowering; normalization does not narrow previously supported block-body helpers.
-Contextual blocks read current dynamic values such as `value`; explicit literals retain their own parameters.
-Harray literals remain harrays and a typed final slot rejects them with `final_argument_not_codeblock`. Invalid
-non-final, nested-argument-list, missing-name, and unknown-type declarations fail before parser construction.
-
-Current builtin contracts cover helper `with` and receiver `with`, `walk_leaves`, `map_leaves`, and
-`reduce_leaves`. Unknown attached receiver methods may parse structurally but fail callable-contract validation;
-syntax recognition no longer grants semantics. Closeout `.11.3.4` found no raw-host fallback, stored coderef or
-captured environment, parser method allowlist, harray promotion, compatibility rewrite, or unresolved helper.
-Perl callable-codeblock behavior is closed under `.11.3.4`. Other backend implementations were future work
-at that milestone; this dated note does not report their current rollout state.
+October20 scoped repair: immediate with projects value as a scalar working binding only within its typed
+body and dynamic invocation vocabulary. A callable receiver can therefore run as value(), including nested
+with and registered-function bodies. The original AST retains authored spans. A function's shared binding
+frame temporarily points value at the local slot and restores it on success or error. Other caller effects
+remain visible. Helpers and registered functions retain static precedence; bound false/null/string/array/
+harray calls reach value_not_callable. Unsupported deferred calls retain their distinct unknown_helper cause.
+This finite Perl repair does not admit exhaustive methods or another backend.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[perl-final-codeblock-signature-declaration-gap]].

@@ -1,5 +1,7 @@
 # Perl evaluated-value repair
 
+Historical capture: TYPE-REFERENCE-BOOK.1.2.4 freezes this whole claim at accepted Git 2fca7d8489038c226fe0454a105f12a2af696a1f after an actual clean readonly pass. Recover the original bytes from that revision and full modes from its receipt in an isolated same-volume workspace when replaying it. The current scoped proof is docs/checkpoints/type-scoped-with/publish.py; its callable suite also retains evaluated-value regressions.
+
 Owner: TYPE-REFERENCE-BOOK.1.2.3; accepted baseline: c053c9dcf24a78cc8b551187f47cdb7aefb03eb3.
 
 Readonly current proof:

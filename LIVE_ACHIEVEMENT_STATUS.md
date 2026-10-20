@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.3 is complete; activate scoped-with P1 .1.2.4 from clean Git.
+TYPE-REFERENCE-BOOK.1.2.4 is complete; numeric helper .1.2.5 is next after clean landing.
 
 ## Latest Completed Slice
 
-Evaluated-list operands retain earlier values across later effects and preserve explicit splices. Accepted19 RED/four controls becomes23 native/fresh-generated GREEN; seven suites use277 declared test/data/bin inputs. Six emitter faults reject19/14/2/1/1/1 and restore. Focused52 preserves982 skips in1651 supplied files; ordinary all1035 passes separately. Observer129 RED/one null, missing-selector RED and restoration remain effective. Twelve recurring suites retain4998 assertions plus3 value/ABI goldens:5001 quiet PASS; mapper bypass fails198 and restores. Three exact owner/prior/current scanner admissions retain original registrations;28 denials and actual check-removal faults9/6/3 pass. Two oversized streams become31 bounded chunks with exact bytes/modes and retained-review use in explicit original scanner context;500733803 duplicate bytes are removed with residue0. Historical metadata has4 denials/actual guard RED1; current reads stay unchanged. Whole837/full130737 and actual readonly0 survive; one physical input becomes an index, preserving all original logical inputs. Fresh845/full130759 binds the complete4178-input closure including4163 scanner candidates, with no oversized files. Graph1487/1349/10462 preserves897 entries/248 fields at8388584 Knowledge bytes; book89/heading denial and whole388/full68814/2706 replay pass. Rejected/preparation epochs retain their original limits and bytes. Scoped-with4, numeric5 and generated-drop6 remain owned; no exhaustive type, cross-backend or private/parent admission. Exact staged canonical receipt and normal hooks govern landing; derive actual admission identity from Git.
+Scoped Perl with now exposes callable value and its dynamic frame, restores nested/function bindings on success or error, and preserves authored spans. Thirty descriptor/native/fresh-generated cases pass against19 pre-fix failures and11 controls. Six actual producer faults reject20/1/1/1/1 cases or authored spans and restore exactly. Fourteen direct suites pass1924 top-level TAP tests in549 declared inputs; complete book89/heading denial and Knowledge checks pass. Whole prior845/full130759 and actual clean readonly0 survive at accepted2fca7d848. Canonical exact-candidate receipt governs landing. Numeric5/generated-drop6 precede full inventory; no exhaustive, cross-backend or private-parent admission.
 
 ## Next Action
 
-From clean Git run the current readonly publication to ignored baseline logs before creating .1.2.4 source files. Preserve the whole845-input publication, inputs/modes and actual default0; then activate scoped-with4 with canonical tier. Numeric5 and generated-drop6 precede enumeration. Continue full PNT; no push yet.
+Run the current scoped readonly publication from clean Git before numeric .1.2.5 writes; preserve its complete claim/inputs/modes and actual baseline, then activate the bounded deferred numeric-family repair. Continue full PNT; generated-drop6 precedes exhaustive enumeration. No push yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.1` — historical flat groups/snapshot limits; native17/five controls; module4; prior208/full39111 + draft355/full60395 retained/replayed; Knowledge8386601/map21249/book89; readonly396/68960; inventory .1.2 next.
@@ -29,7 +30,6 @@ From clean Git run the current readonly publication to ignored baseline logs bef
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.3` — six switch validators; native630 exact;1641/273 RED/all GREEN;15 effective faults/one unobserved;85/317/26600; standard1035; evidence9; original463/full109061; first465 replay; two book89/4 epochs; readonly480/111654; output .5.4 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.2` — six validators/seven roles; native105/356/314 exact;1750/294 RED/1456 controls/all GREEN;16 faults;84/310/24959; evidence9; original155/full40701; Knowledge1486/1349/twelve/8388171; book89/4; standard1035; readonly463/109061; switch .5.3 next.
 - `REPO-HYGIENE.18` — dated16310/17449713515 parent; separate Rust483/2390810648; zero removals; four channel/three preservation controls; original507 historical; full1486 Knowledge/12 overlays/8387213; two book89/four epochs; retained reader/history refusals; readonly155/40701; if/while .5.2 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.1.3` — one272-line suffix/113-line root;228 old files/449 accepted bindings; exact finite ADR0135; complete1978 root replay;30/23 controls; five artifacts; Knowledge1486/1349/8387290; book89/4; readonly507/117862; canonical boundary; .5.2 next.
 
 ## History
 
