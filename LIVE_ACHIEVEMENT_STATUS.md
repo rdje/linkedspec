@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.5 completes scalar numeric calls and snapshots; generated-drop .1.2.6 is next after clean landing.
+TYPE-REFERENCE-BOOK.1.2.6 completes bounded generated-drop repair; deferred aggregates .1.2.7 is next from clean Git.
 
 ## Latest Completed Slice
 
-Perl deferred scalar numeric calls/aliases/receivers use the unchanged numeric contract; ordinary variadic operands retain evaluated values. Current318 cases pass;169 accepted-source failures/129 controls and a separate C1 mixed-chain9 failures remain retained. Thirteen actual source/observer faults reject and restore; final318 restoration passes. Direct17 suites/1962 TAP, neutral numeric/callable checks, selected Phase0 three roots and book89/three examples/heading control pass. Exact duplicate startup87.3 intake returns7 in both cases. Whole prior4/2179 and actual clean readonly0 survive; its original test-context completeness is qualified, with distinct accepted-source14/1924 replay in10000 captured inputs. Historical numeric inverse22 preserves578 controls and adds66; archive134/22 and two auditor faults pass. Whole second draft/readonly0 and exact source images survive. Exact staged canonical receipt governs landing. Deferred aggregates7, startup20/32/35/87.4 and full reference admission remain owned.
+Generated Perl drop_keys uses copied harrays and captured key lists, removing scalar syntax advisories and repairing explicit splices, callback key ordering and raw typed-key shapes. Fixed48 public cases retain the accepted failures; current34 desired values/14 diagnostic controls and four actual emitter faults/restorations pass. Direct9 suites/1322 TAP, five focused Phase0 roots with18 permanent assertions, book89/three executed examples/heading RED and Knowledge pass. Exact two-subtest historical inverse preserves644 old controls and adds6; archive134/84613241 bytes/22 controls/zero read-write escapes remain exact. Two auditor faults/table-byte denial restore. Whole numeric5/10202 publication and actual clean readonly0 survive. Rejected preparation epochs and hash-gated README draft recovery remain explicit. Final historical-card route correction retains whole first10304 draft/readonly0 and superseded canonical143. Exact final staged receipt governs landing. Aggregates7, startup20/32/35/87.4 and full reference admission remain owned.
 
 ## Next Action
 
-From clean Git, run the current numeric readonly publication before generated-drop .1.2.6 writes. Preserve its whole claim, manifest, full modes and actual baseline, then activate the bounded warning/FATAL generated-source repair. Continue full PNT through6,7 and complete inventory. No push yet.
+From clean Git, run the current drop readonly publication; preserve its whole claim, publication, manifest/full modes and actual baseline before aggregate7 writes. Continue full PNT through the reducer family, operation inventory and book mapping. No push yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.6` —34 value/14 diagnostic controls;4 faults;9/1322; five Phase0 roots/18 permanent;book89/3; historical644+6; aggregates7 next.
 - `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
@@ -29,7 +30,6 @@ From clean Git, run the current numeric readonly publication before generated-dr
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.5` — native176 exact;452/77 RED/all GREEN;12 source faults;88/339/28214; public336/16 before/after; standard1035; evidence5; Knowledge8388480/book89/4; readonly506/116166; direct/rule .5.6 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.4` — four validators/six roles;432 native rows exact;1146/264 RED/all GREEN;13 faults;87/332/27762; public diagnostics329/16 before/after; standard1035; evidence9; Knowledge8388501; book89/4; readonly495/117562 plus explicit kernel gap; optional kind .5.5 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.3` — six switch validators; native630 exact;1641/273 RED/all GREEN;15 effective faults/one unobserved;85/317/26600; standard1035; evidence9; original463/full109061; first465 replay; two book89/4 epochs; readonly480/111654; output .5.4 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.2` — six validators/seven roles; native105/356/314 exact;1750/294 RED/1456 controls/all GREEN;16 faults;84/310/24959; evidence9; original155/full40701; Knowledge1486/1349/twelve/8388171; book89/4; standard1035; readonly463/109061; switch .5.3 next.
 
 ## History
 

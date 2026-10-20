@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.6 — Materialize generated drop keys
+
+Perl drop_keys captures each key before the next operand runs, lowers explicit flat splices and typed shapes, and deletes a private key list from a copied harray. Scalar generated calls load without the old compiler advisory under normal/FATAL syntax profiles. The accepted48-case baseline retains10 native/28 normal/28 fatal desired-value failures; current34 desired values plus14 diagnostic controls pass, preserving source/arity/null behavior. Four actual emitter faults reject and restore;9 suites/1322 TAP, five focused Phase0 roots with18 permanent assertions and book89/3/heading control pass. Two exact subtest inverses precede numeric22/older70:644 old controls plus6, archive134/84613241 bytes/22 and zero healthy read/write escapes remain exact; two auditor faults/table-byte denial restore. Whole numeric publication/10202 inputs/actual clean readonly0 and all failed preparations remain retained; a missing untracked README before-image is recovered against its prior hash. Claim/checkpoint: docs/checkpoints/type-drop-generated/. Exact staged canonical receipt governs landing; aggregates7 remains next.
+
+Final review corrected the historical card's unqualified frozen numeric reverify and recorded drop-before-numeric normalization. Whole first drop publication/10304 inputs/full modes/actual readonly0 and exact staged images remain in admission/; its canonical run was deliberately superseded143 before bound changes. Current history reverify uses the composed producer, avoiding coupling to a frozen whole-project publisher.
+
 ## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.5 — Execute scalar numeric codeblocks
 
 Perl callable bodies now execute scalar numeric calls, word/symbol aliases and receiver methods through the existing numeric contract. Ordinary variadic numeric operands retain their evaluated values before later callbacks rebind source slots. Known invalid numeric shapes and comparison-terminal continuations yield null before effects; the single-input min/max overload-selection exception remains explicit. Arithmetic/coercion algorithms and neutral contracts are unchanged.

@@ -1,3 +1,7 @@
+Historical numeric publication at accepted 9fc95b0bd1167db110e91bf50a8939129485c960. Its complete claim,
+10202 closed input identities/full modes and actual clean readonly0 are preserved
+by docs/checkpoints/type-drop-generated/. No original observation is refreshed.
+
 # Scalar numeric calls, receivers and evaluated operands
 
 Owner: `TYPE-REFERENCE-BOOK.1.2.5`; clean activation

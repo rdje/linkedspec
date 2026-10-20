@@ -46,6 +46,11 @@ SCALAR_NUMERIC_TABLE = 'tests/language-readiness/scalar-numeric-regression-evolu
 SCALAR_NUMERIC_TABLE_SHA256 = '99e3bd544e304d48b1ae1da780fb749bbf2a02de34875610a881fa1b7d8890f9'
 SCALAR_NUMERIC_BEFORE = '203cde3159105cd9d96117015ff2dbbc24796a56'
 SCALAR_NUMERIC_MARKER = b'    my $numeric_setup = q{'
+DROP_GENERATED_OWNER = 'TYPE-REFERENCE-BOOK.1.2.6'
+DROP_GENERATED_TABLE = 'tests/language-readiness/drop-generated-regression-evolution.json.gz'
+DROP_GENERATED_TABLE_SHA256 = '939ec5469217ec76501ccc123e15feca956985e8d659ffb08a70f81cac1c299e'
+DROP_GENERATED_BEFORE = '9fc95b0bd1167db110e91bf50a8939129485c960'
+DROP_GENERATED_MARKER = b'my @__ls_drop_keys = ('
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -616,6 +621,40 @@ def restore_compiler_scanner_mock(source, contents):
 
 
 
+def drop_generated_table(source):
+    raw = read_relative(DROP_GENERATED_TABLE)
+    require(digest(raw) == DROP_GENERATED_TABLE_SHA256,
+            "drop inverse table identity mismatch: " + source)
+    table = json.loads(gzip.decompress(raw))
+    require(table["version"] == 1 and table["owner"] == DROP_GENERATED_OWNER and
+            table["source"] == source == "t/phase0_regression.t" and
+            table["before_revision"] == DROP_GENERATED_BEFORE and
+            len(table["hunks"]) == len({item["id"] for item in table["hunks"]}) == 2,
+            "drop inverse owner/population mismatch: " + source)
+    rebuilt = git("show", f"{DROP_GENERATED_BEFORE}:{source}")
+    require(digest(rebuilt) == table["before_sha256"], "drop inverse base mismatch: " + source)
+    for item in table["hunks"]:
+        old, new = item["before"].encode(), item["after"].encode()
+        require(old and new and old != new and rebuilt.count(old) == 1,
+                "drop inverse reconstruction mismatch: " + source)
+        rebuilt = rebuilt.replace(old, new, 1)
+    require(digest(rebuilt) == table["after_sha256"], "drop inverse reconstruction mismatch: " + source)
+    return table
+
+
+def restore_drop_generated_regressions(source, contents):
+    # Earlier-stage falsifiers deliberately supply pre-drop source. The final
+    # historical byte/hash comparison still rejects every unregistered edit.
+    if DROP_GENERATED_MARKER not in contents:
+        return contents
+    table = drop_generated_table(source)
+    for item in reversed(table["hunks"]):
+        old, new = item["before"].encode(), item["after"].encode()
+        require(contents.count(new) == 1, "drop regression registration mismatch: " + source)
+        contents = contents.replace(new, old, 1)
+    return contents
+
+
 def scalar_numeric_table(source):
     raw = read_relative(SCALAR_NUMERIC_TABLE)
     require(digest(raw) == SCALAR_NUMERIC_TABLE_SHA256,
@@ -686,6 +725,7 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     current_hash = digest(contents)
+    contents = restore_drop_generated_regressions(source, contents)
     contents = restore_scalar_numeric_regressions(source, contents)
     contents = restore_evaluated_value_regressions(source, contents)
     contents = restore_compiler_scanner_mock(source, contents)
@@ -706,6 +746,10 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
             "boundary_recurrence_before_revision": BOUNDARY_AFTER,
             "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
+            "drop_generated_owner": DROP_GENERATED_OWNER,
+            "drop_generated_input": DROP_GENERATED_TABLE,
+            "drop_generated_table_sha256": DROP_GENERATED_TABLE_SHA256,
+            "drop_generated_before_revision": DROP_GENERATED_BEFORE,
             "scalar_numeric_owner": SCALAR_NUMERIC_OWNER,
             "scalar_numeric_input": SCALAR_NUMERIC_TABLE,
             "scalar_numeric_table_sha256": SCALAR_NUMERIC_TABLE_SHA256,
@@ -1055,6 +1099,8 @@ def falsify(report):
             verify = verify_perl_storage_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":
+            drop_current = current
+            current = restore_drop_generated_regressions(source, current)
             numeric_current = current
             current = restore_scalar_numeric_regressions(source, current)
             before = git("show", f"{SIGNATURE_BEFORE}:{source}")
@@ -1108,12 +1154,23 @@ def falsify(report):
                 altered += (numeric_current.replace(fragment, b"", 1),
                             numeric_current.replace(fragment, fragment * 2, 1),
                             numeric_current.replace(fragment, changed, 1))
+            # All644 previous controls retain their exact pre-drop source stage.
+            # The two complete new subtests get omission/duplication/corruption.
+            for drop_hunk in drop_generated_table(source)["hunks"]:
+                fragment = drop_hunk["after"].encode()
+                require(drop_current.count(fragment) == 1,
+                        "drop control registration mismatch: " + source)
+                changed = bytes([fragment[0] ^ 1]) + fragment[1:]
+                altered += (drop_current.replace(fragment, b"", 1),
+                            drop_current.replace(fragment, fragment * 2, 1),
+                            drop_current.replace(fragment, changed, 1))
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:",
                        "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:",
                        "evaluated-value regression registration mismatch:",
-                       "numeric regression registration mismatch:")
+                       "numeric regression registration mismatch:",
+                       "drop regression registration mismatch:")
         elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
             altered = (
                 current + b"# unreviewed boundary contract edit\n",

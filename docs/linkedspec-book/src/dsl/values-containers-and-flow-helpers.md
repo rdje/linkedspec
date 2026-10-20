@@ -81,11 +81,6 @@ arguments passed into a codeblock retain their kind. These separately owned
 repairs remain pending. The observations establish no new cross-backend result,
 and complete per-operation reference coverage remains in progress.
 
-Loading generated Perl for `drop_keys(meta, "debug")` with one literal key
-currently emits a scalar hash-slice compiler advisory, while returning the
-correct harray. A caller that treats syntax warnings as fatal cannot load
-that generated parser. This known compiler-diagnostic repair is pending.
-
 ## Per-rule default accumulator
 
 Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.
@@ -851,6 +846,44 @@ public_fields = meta.drop_keys("debug").sorted_keys().join_values(",");
 ```
 
 These are especially useful when building AST nodes or diagnostics payloads.
+
+### Removing keys in Perl
+
+`drop_keys` returns a new harray. The source keeps its fields; missing keys and
+repeated keys are harmless. Free-call and receiver forms accept the same keys.
+One key loads quietly in generated Perl, including when the caller treats syntax
+warnings as fatal.
+
+This returns the original three-field harray followed by a copy containing only
+`kind` and `stage`:
+
+```text
+meta = {"kind":"node","debug":1,"stage":"parse"};
+cleaned = meta.drop_keys("debug");
+return([meta,cleaned]);
+```
+
+Pass an explicit splice to expand an array of keys. This returns `{"kind":"node"}`:
+
+```text
+meta = {"kind":"node","debug":1,"stage":"parse"};
+keys = ["debug","stage"];
+return(drop_keys(meta,flat_array(keys)));
+```
+
+`flat_array([])` removes no keys; a one-element splice removes one. An ordinary
+array argument stays one value. Each key operand is evaluated once, and its value
+is captured before the next operand runs. Here both evaluated keys are `"debug"`,
+even though the callback changes the binding to `"stage"`. The result is
+`[{"kind":"node","stage":"parse"},"stage"]`:
+
+```text
+meta = {"kind":"node","debug":1,"stage":"parse"};
+drop_key = "debug";
+other = {|| drop_key = "stage"; return("debug") };
+cleaned = drop_keys(meta,drop_key,other());
+return([cleaned,drop_key]);
+```
 
 ## Flow helpers
 

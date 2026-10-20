@@ -1127,6 +1127,13 @@ array-yielding expression-valued block can be the receiver too:
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.
 
+On Perl, `drop_keys(meta, "debug")` and `meta.drop_keys("debug")` leave `meta`
+unchanged and return a copy. Use `flat_array(keys)` to expand an array of keys;
+an empty splice removes none. Each key value is captured before the next key
+operand runs. Scalar-key generated parsers also load with fatal syntax warnings.
+See [Removing keys in Perl](values-containers-and-flow-helpers.md#removing-keys-in-perl)
+for complete copy, splice and callback-order examples.
+
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `count_keys(hash_expr)` | scalar count | count object keys; undefined hash expressions count as `0`. |

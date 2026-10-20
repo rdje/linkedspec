@@ -13,3 +13,6 @@ git_message_brief.txt
 dart/.dart_tool/
 dart/.packages
 dart/build/
+
+# Generated checkpoint Python caches
+docs/checkpoints/**/__pycache__/

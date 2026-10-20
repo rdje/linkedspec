@@ -6657,12 +6657,18 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   foreach my $arg (@{$drop_args}[1 .. $#$drop_args]) {
    my $key_expr = $trim_action_ir_value->($arg);
    return undef unless defined($key_expr) && length($key_expr);
-   my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+   my $key_lowered = $lower_flat_list_value_expr->($key_expr);
+   $key_lowered = $lower_shape_literal_value_expr->($key_expr)
+    unless defined($key_lowered) && length($key_lowered);
+   $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+    unless defined($key_lowered) && length($key_lowered);
    return undef unless defined($key_lowered) && length($key_lowered);
-   push @lowered_keys, $key_lowered;
+   push @lowered_keys, _materialize_list_operand_expr($key_lowered);
   }
 
-  return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{'.join(', ', @lowered_keys).'}; \%__ls_drop } else { {} } }';
+  # A named key list accepts zero/one/many explicit splice values without Perl's
+  # scalar hash-slice advisory. Materialize each operand before its next sibling.
+  return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = ('.join(', ', @lowered_keys).'); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'pick_keys') {
   my $pick_args = $normalize_collection_args->($method_call->{args} || [], 2, undef);

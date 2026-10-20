@@ -36833,7 +36833,7 @@ subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))'),
-        'do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }',
+        'do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }',
         'is_nonempty(...) lowers projected hash expressions into value-layer nonempty flags'
     );
     is(
@@ -36845,7 +36845,7 @@ subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(hash("values_empty", is_empty(sorted_values(pick_keys(meta, "kind", "source"))), "meta_nonempty", is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))))'),
         ),
-        q#{"value":{"meta_nonempty":1,"values_empty":0},"warnings":["Scalar value @__ls_drop{\"debug\"} better written as $__ls_drop{\"debug\"}"]}#,
+        q#{"value":{"meta_nonempty":1,"values_empty":0},"warnings":[]}#,
         'is_empty(...) and is_nonempty(...) lower inside general return payloads as value helpers'
     );
 };
@@ -37746,23 +37746,23 @@ SPEC
     );
 };
 subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
-    plan tests => 4;
+    plan tests => 6;
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('drop_keys(meta, "debug", "span")'),
-        'do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug", "span"}; \%__ls_drop } else { {} } }',
+        'do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ("span"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }',
         'drop_keys(...) lowers working hashes into a pure filtered hashref expression'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(drop_keys(meta, "debug"), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; delete @__ls_drop{"debug"}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        'do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'drop_keys(...) composes inside flow expressions through other hash/object helpers'
     );
     is(
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(drop_keys(merge_hash(meta, hash("kind", "node"), hash("debug", 1)), "debug"))'),
         ),
-        q#{"value":{"kind":"node","source":"fixture"},"warnings":["Scalar value @__ls_drop{\"debug\"} better written as $__ls_drop{\"debug\"}"]}#,
+        q#{"value":{"kind":"node","source":"fixture"},"warnings":[]}#,
         'drop_keys(...) lowers inside general return payloads'
     );
     like(
@@ -37770,6 +37770,13 @@ subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
         qr/^\$meta = .*__ls_drop_source.*__ls_drop/s,
         'drop_keys(...) lowers inside hash assignment sources'
     );
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $result = do './t/drop_keys_generated.t';
+die $@ if $@;
+die "drop-key regression did not load: $!" unless defined $result;
+PERL
+    is($exit_code, 0, 'permanent drop-key native/generated warning and key evaluation regression passes') or diag($err || $out);
+    like($out, qr/^1\.\.18$/m, 'all eighteen standalone drop-key assertions actually ran');
 };
 subtest 'method_like_fluent_and_structured_action_drop_keys_value_helpers_lower_equivalently' => sub {
     plan tests => 12;

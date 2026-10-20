@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.6 — Drop key evaluation and historical stages
+
+A named private key list avoids Perl's scalar hash-slice syntax advisory without changing warning policy. Materialize each operand independently: assigning the whole list only after evaluating its members retains Perl aliases and lets a later callback change an earlier key. Explicit flat splices need their list producer before scalar access lowering; typed hash shapes must not leak DSL colons to host Perl. Source copying still precedes key evaluation. Underlying invalid-source and uninitialized-key diagnostics remain separate from the repaired compiler advisory.
+
+Historical source normalization unwinds the two exact drop-containing subtests before numeric22 and evaluated70. Old644 reason-sensitive controls use the original pre-drop stage; six new denials exercise the two complete registrations. The actual isolated producer closes the new table, preserving original hashes/archive/read-write guards. Retain failed preparations, including the incomplete first selector, diagnostic-oracle assumptions and first raw-shape candidate. An existing explicit receiver-copy TAP JSON diagnostic is parsed whole, rather than suppressed or treated as a compiler warning. A sole missing untracked README draft is reconstructed by reversing its exact wording edit and matching its independently retained pre-edit SHA-256/mode. Current proof is docs/checkpoints/type-drop-generated/publish.py; no aggregate, portable key-coercion or exhaustive family admission follows.
+
+Final review corrected the historical card's unqualified frozen numeric reverify and recorded drop-before-numeric normalization. Whole first drop publication/10304 inputs/full modes/actual readonly0 and exact staged images remain in admission/; its canonical run was deliberately superseded143 before bound changes. Current history reverify uses the composed producer, avoiding coupling to a frozen whole-project publisher.
+
 ## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.5 — Numeric dispatch and evaluated operands
 
 Numeric owns one scalar whitelist/alias/arity adapter; CodeblockRuntime resolves registered functions first, validates known call shapes before effects and snapshots sequential operands. Fluent preflight covers mixed-family tails and preserves single-input min/max overload selection. MethodLowering materializes each variadic operand; rejected known receiver shapes are complete null expressions, distinct from an unhandled lowering result. Numeric algorithms and coercion remain unchanged.

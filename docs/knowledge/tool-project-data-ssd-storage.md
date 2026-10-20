@@ -4,6 +4,7 @@ title: Python, Knowledge Map, mdBook, and tool output stay on the repository fil
 answers:
   - how should a LinkedSpec Python checker be run
   - where does LinkedSpec store Python bytecode
+  - why is Python bytecode excluded from checkpoint staging
   - where do Unicode contract checkers create temporary files
   - can KM_OUTPUT point to another filesystem
   - how does Knowledge Map validate generated output
@@ -17,7 +18,7 @@ answers:
   - how many Python checker entrypoints exist
   - where do TAP and oracle capture artifacts go
   - what old tool data was deleted from private tmp
-date: 2026-10-02
+date: 2026-10-20
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
@@ -58,3 +59,6 @@ The old-root census found one missed disposable audit list,
 `/private/tmp/linkedspec-julia-reverify-cards.txt` (88 lines, 4,646 bytes). Metadata, content, and repository-reference
 checks proved it contained only derived knowledge-card path names; the exact file was deleted, and both frozen old
 temporary roots then contained zero exact LinkedSpec tool residue.
+
+Checkpoint `__pycache__` is ignored; drop6 retains its removed cache bytes under
+`docs/checkpoints/type-drop-generated/admission/`.

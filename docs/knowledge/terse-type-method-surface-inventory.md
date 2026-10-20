@@ -12,13 +12,15 @@ answers:
   - "do Perl hash keys and callable arguments retain evaluated values"
   - "can Perl num_add run inside a deferred codeblock"
   - "does Perl drop_keys warn for a single literal key"
+  - "why does Perl drop_keys ignore flat_array keys"
+  - "why can a later drop key callback change an earlier key"
   - "why can a later numeric operand change an earlier value"
   - "can Perl numeric comparison receivers continue into cat"
 date: 2026-10-20
-status: current bounded Perl value/numeric repairs; full operation inventory pending
+status: bounded Perl value/numeric/drop repairs; full inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "TYPE-REFERENCE-BOOK.1.2.3-.5 retain accepted-source public routes, saved-slot controls and exact producer/input records. Numeric5 owns dispatch, operand snapshots and receiver validation; its checkpoint discloses preparation epochs, original test-context qualification and separate repair owners."
-reverify: "bash tools/project_data_run.sh prove -q -Iperl t/scalar_numeric_contract.t"
+evidence: "TYPE-REFERENCE-BOOK.1.2.3-.6 retain accepted public epochs and producer/input custody. Drop6 owns list evaluation, warning/FATAL loading and exact historical recurrence; numeric5 owns scalar dispatch/snapshots."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-drop-generated/publish_final.py"
 ---
 
 # Current value model and bounded Perl numeric execution
@@ -42,13 +44,11 @@ push question wrongly conflated late reads with reference mutation; saved-slot
 controls and [[perl-uniform-binding-runtime]] establish copy-on-write binding
 updates. Original rejected oracles/candidates and their limits remain retained.
 
-CodeblockRuntime delegates the admitted scalar numeric names and word/symbol
-aliases to Numeric::scalar_helper_name/arity_is_valid/evaluate. Typed arguments
-retain their kinds; known invalid arity skips operand evaluation. Numeric receiver
-shapes and comparison terminals validate before receiver evaluation, including
-mixed chains. A separately saved comparison result may start another expression.
-MethodLowering rejects the same numeric shapes as complete undef expressions,
-preventing literal Perl fallthrough. Ordinary numeric lists snapshot each term.
+CodeblockRuntime uses Numeric::scalar_helper_name/arity_is_valid/evaluate for
+scalar names/aliases, preserving kinds and skipping invalid-arity effects. Numeric
+receiver shapes/terminals validate before effects, including mixed chains. A saved
+comparison may start a new expression. MethodLowering emits complete undef for
+invalid shapes instead of Perl fallthrough; numeric lists snapshot each term.
 
 Deferred aggregate reducers and array min/max remain unknown_helper, owned by
 TYPE-REFERENCE-BOOK.1.2.7 after generated-drop .1.2.6. Boolean body literals still
@@ -56,16 +56,18 @@ lose their kind under [[perl-codeblock-boolean-literal-kind-drift]] / startup35;
 typed callback parameters preserve it. Unicode numeric coercion remains startup20.
 No all-helper or cross-backend admission follows from this scalar repair.
 
-Single-key drop_keys is quiet through descriptor/Get but generated loading warns
-for delete @__ls_drop{"debug"}; a fatal syntax-warning caller rejects it. .1.2.6
-owns that producer. Numeric5 qualifies the prior scoped-with retained test-log
-context and adds a distinct complete-input accepted-source replay. No original
-observation is silently refreshed and no warning discipline is weakened.
+Perl drop_keys materializes each key operand, lowers explicit flat splices and
+typed shapes, then deletes a private key list from a copied harray. Scalar keys
+load without the old slice advisory under normal/FATAL syntax profiles; a later
+callback cannot change an earlier key. Source-kind execution errors and null-key
+uninitialized diagnostics remain. No portable reference-key coercion is admitted.
+The accepted failure, rejected shape/review preparations and actual fault controls
+survive in docs/checkpoints/type-drop-generated/.
 
-The complete old card is recoverable at accepted203cde315 and in the numeric
-doc proposal. Earlier detailed value/Phase0 adjudications stay under
-docs/checkpoints/type-evaluated-values/. The July4 method table, including later
-retired spellings, survives at c053c9dcf and its proposal capsule. It already
-listed substr and scalar/array/hash/number receiver families; use it as dated
-navigation. Full current enumeration remains .1.2.1 after scalar5/drop6/aggregate7,
-before book mapping/layout. Complete per-type reference coverage is not admitted.
+Numeric5 separately qualifies prior4's original retained-log context and adds a
+complete-input accepted-source replay; observations are never refreshed silently.
+Earlier value/Phase0 adjudications remain under type-evaluated-values/. Full old
+card bytes survive at accepted203cde315; the July4 inventory at c053c9dcf and its
+proposal capsule already listed substr and scalar/array/hash/number receivers.
+Those dated, partly retired spellings guide navigation; current enumeration .1.2.1
+follows aggregate7, before book mapping/layout. No complete per-type admission.

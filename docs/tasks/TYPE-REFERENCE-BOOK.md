@@ -218,17 +218,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP** — Book/facts/live docs; startup87.3 closed;6/7 remain.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.6`
-  Status: `pending` / P2 generated single-key drop diagnostic
-  Goal: Emit warning-free Perl for scalar-key drop while preserving hash-copy and multi-key semantics.
+  Status: `done` / bounded Perl drop producer repair
+  Goal: Quiet scalar-key generated loading with copied harrays and evaluated key lists.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.5`
-  Reproduce: Current public Top/x probe initializes meta={kind:node,debug:1} and returns drop_keys(meta,"debug"). Descriptor and Get succeed without warnings; fresh generated loading emits one scalar hash-slice advisory and still returns {kind:node}. The separate generated caller using warnings FATAL=>'syntax' fails to load with that exact advisory. Full inputs, route channels and source precede classification in phase0-warning-routes artifacts under the .1.2.3 checkpoint prefix.
-  Mechanism: Actual generated line49 contains delete @__ls_drop{"debug"}; MethodLowering.pm's drop_keys emission at the current line6625 always joins keys into a hash slice. The compiler explicitly requests scalar deletion for a known single key. Resolve actual accepted-input baseline and literal/computed/flat key cardinality before choosing a fix; do not infer a public pre-change observation merely from source similarity.
-  Impact: Exported Perl cannot load under a caller fatal syntax-warning profile for this otherwise valid operation.
-  Schedule: After scoped-with .1.2.4 and deferred numeric helpers .1.2.5, before complete operation enumeration .1.2.1.
-  Owned paths: Bounded drop_keys MethodLowering producer, existing selected receiver/hash/native/generated tests, public advisory/FATAL reproducer, two new Phase0 compatibility warning goldens, book/fact clarification and whole prior-publication preservation.
-  Planned tier: `canonical`; observable generated-source/compiler diagnostic correction.
-  Claim verification: none: Current diagnostic intake is retained by .1.2.3. Declare the complete source-bound accepted baseline, warning/FATAL RED, candidate and source controls at activation.
-  Acceptance: Verify ordinary/fresh generated values and zero unexpected warnings under ordinary and fatal caller profiles for one/multiple/computed keys, missing/empty keys and relevant aliases/receiver forms. Preserve independent copied results, explicit splices and actual invalid-kind/key diagnostics. Update the two explicitly retained compiler-advisory goldens only with the actual fix. No blanket hash-helper admission.
+  Evidence/custody: docs/checkpoints/type-drop-generated/README.md; accepted9fc95b0bd, whole prior10202/actual clean readonly0, exact draft bytes/full modes and rejected preparations retained. Same-producer splice/late-key/raw-shape defects are fixed; sole metadata before-image gap is hash-gated recovered.
+  Verification tier: `canonical`
+  Focused checks: Fixed48 descriptor/Get/lowering/fresh normal/FATAL routes;34 values/14 diagnostic controls;4 emitter faults;9 suites/1322 TAP; five real Phase0 roots with18 permanent assertions; book89/3/heading RED; exact historical644+6/134/22 and2 auditor faults/table denial; Knowledge.
+  Canonical trigger: Observable generated compiler diagnostic; exact staged-candidate receipt required before normal landing.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.6.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Accepted public warning/FATAL, splice and snapshot failures retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Toolbox output identifies MethodLowering drop list/scalar/shape producer.
+  - [x] **FIX** — Materialized private key list, explicit splice/shape lowering; copied source preserved.
+  - [x] **ADDRESSED (verified)** — Independent values, normal/FATAL syntax and four actual producer RED/restoration controls.
+  - [x] **NO REGRESSION** — Direct/Phase0/history proof; canonical receipt enforced for landing.
+  - [x] **LOCKSTEP** — Worked book examples/fact/live docs; source/arity/null diagnostics preserved. No portable key-coercion/family/backend admission.
+  Final admission: stale historical-fact route RED; drop inverse/current reader corrected. Whole first10304 draft/readonly0/source images and superseded canonical143 retained under admission/.
+  P3 cache cleanup: first-stage common.pyc is retained/removed; checkpoint ignore/source control and residue proof live in admission/.
+  Commit subject: `TYPE-REFERENCE-BOOK.1.2.6 - materialize generated drop keys`; next aggregate7 after clean readonly preservation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.7`
   Status: `pending` / deferred aggregate availability
@@ -329,7 +336,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | 1 | `TYPE-REFERENCE-BOOK.1.2.3` | `done` |23 GREEN/19 RED; focused52, observer129 RED/restoration; canonical landing boundary. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `done` | Scoped callable/frame/span repair; finite proof and canonical landing boundary. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `done` | Scalar numeric dispatch/snapshots;6/7 next. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `pending` | P2 generated scalar-drop advisory/FATAL load failure before enumeration. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `done` | Quiet generated drop, splices/key snapshots;7 next. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `pending` | Deferred aggregates before enumeration. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
 | 7 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |

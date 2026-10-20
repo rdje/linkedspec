@@ -7,39 +7,39 @@ answers:
   - "how is the compiler scanner mock delta reconciled without refreshing historical hashes"
   - "does historical Phase0 normalization allow unrelated source edits"
   - "how are numeric Phase0 value regressions reconciled with historical evidence"
+  - "how are drop key Phase0 regressions reconciled with historical evidence"
 date: 2026-10-20
 status: current
 tags: [historical-audit, phase0, source-evolution, compiler, claims]
-evidence: "Dated scanner admission .0.2.2 rejects committed .0.2.1; original auditor reproduces. Exact Git mock inverse,5 source controls, isolated134 inputs/84613241 bytes/22 recovery controls/60 evolution denials and zero healthy original-log/tracked writes. Numeric5 preserves578 controls and adds66; two actual auditor faults restore."
-reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/type-numeric-codeblocks/publish_recurrence.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py"
+evidence: "Scanner five source controls/60 dated denials; evaluated368+210, numeric578+66, drop644+6. Archive134/84613241/22 and zero log/write escapes; auditor faults/table identity restore."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py"
 ---
 
-`af5d19971a1682f6895901fb769ff41b69842672` changes one Phase0 mock from
-`scan_contract_ir_events` to `_scan_executable_contract_ir_events`; its parent is
-`31395e440a38acec7a6712d470a90a90a6567863`. The missing inverse stopped canonical
-acceptance before runtime CI.
+`af5d19971a1682f6895901fb769ff41b69842672` replaces the Phase0 mock
+`scan_contract_ir_events` with `_scan_executable_contract_ir_events`; parent
+`31395e440a38acec7a6712d470a90a90a6567863`. Its missing inverse stopped
+canonical admission before runtime CI. Entire Git blobs must differ by that one
+entry; require one registration, reverse it, then recover the original file/hash.
+Missing, duplicated, disabled, foreign and unrelated edits reject. Original auditor/candidate/gate/correction stay retained; .0.4 owns ledger work.
+[[historical-objective-audit-input-recovery]] fixes archive/guard invariants.
+Historical hashes, milestones, logs and runtime results never refresh.
 
-The compiler inverse proves the entire Git blobs differ by that entry, requires
-one registration, reverses it, then older inverses must recover the original
-file/hash. Missing, duplicated, disabled, foreign and unrelated edits reject.
-Historical hashes, milestones, logs, claims and Perl tests are never refreshed.
-The acceptance owner retains failed CI/candidate, original auditor and corrected
-proof; `.0.4` owns later ledger work. [[historical-objective-audit-input-recovery]]
-defines the unchanged archive/guard contract. This checks evidence, not old runtime.
+Evaluated owner3 inverses70 fragments from real c053 source:368 original controls
+plus210 denials and a valid-JSON whitespace identity fault. Its KeyError and
+two-reference correction remain under docs/checkpoints/type-values-signature/.
 
-Evaluated-value owner3 inverses70 reviewed fragments from real c053 source.
-All368 prior controls,210 added fragment denials and a valid-JSON whitespace
-identity fault remain effective. Its first KeyError/two-reference correction
-stays in docs/checkpoints/type-values-signature/.
+Numeric5 inverses21 value assertions/shared frame before old70 (hunk3 overlaps),
+from accepted203cde315 bytes. Each22-fragment
+registration occurs once. Keep578 controls on their pre-numeric stage; add66.
+Missing/blind inverse faults and semantically identical changed JSON reject and
+restore. The isolated producer closes the table; the numeric KeyError/correction
+retain exact source/channels. Its publisher is historical at accepted9fc95b0bd:
+restore its recorded Git inputs before invoking that older command.
 
-Numeric owner5 inverses21 value assertions plus their shared frame before old70,
-whose hunk3 overlaps. Reconstruction uses real accepted203cde315 before bytes;
-all22 current fragments must occur once. Preserve578 older controls on their
-pre-numeric stage; add66 current numeric denials. Missing-inverse/blind-restore
-producer faults reject and restore, as does semantically identical JSON with
-changed whitespace. The isolated producer explicitly closes the new table.
-Archive134/84613241 bytes,22 recovery controls and zero healthy original-log or
-tracked-write attempts remain exact. The separate numeric KeyError and correction
-retain full source/channels. Both reverify routes are readonly.
+Drop owner6 inverses two complete subtests before numeric22/evaluated70. Keep644
+controls on their pre-drop stage; add six omission/duplication/corruption denials.
+The actual producer closes the drop table; two auditor faults and semantic JSON
+byte-identity denial restore. Archive134/84613241 bytes,22 recovery controls and
+zero original-log/tracked writes stay exact. Reverify uses the composed producer,
+not old runtime. The stale-route RED and whole first drop draft/readonly0 survive
+under docs/checkpoints/type-drop-generated/admission/.

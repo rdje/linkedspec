@@ -1,4 +1,4 @@
 # Latest artifact cleanup
 
-- Date: 2026-10-20T04:06:20.726688+00:00
-- Summary: Removed only two verified duplicate checkpoint streams (500733803 bytes) after exact chunk recovery, actual retained-reader use and corruption controls;31 bounded chunks and all original logical hashes/modes remain. No caches or other repository data were removed.
+- Date: 2026-10-20T19:45:58.736082+00:00
+- Summary: TYPE-REFERENCE-BOOK.1.2.6 removed only its verified checkpoint common.cpython-314.pyc after whole-byte/mode and original-stage preservation; source and all historical proof bytes remain. Checkpoint caches are ignored; no other cache or repository data was removed.
