@@ -10,6 +10,7 @@ use Hash::Util::FieldHash qw(fieldhash);
 use LinkedSpec::RuntimeLogical ();
 use LinkedSpec::BindingRuntime ();
 use LinkedSpec::CallableContract ();
+use LinkedSpec::Numeric ();
 
 # Execute version-1 callable-codeblock records as typed data. Generated handlers
 # provide explicit references to caller working slots; this module never captures
@@ -360,6 +361,20 @@ sub _eval_call {
  my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
  return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
+ my $numeric = LinkedSpec::Numeric::scalar_helper_name($name);
+ if (defined($numeric)) {
+  my $array_overload = ($numeric eq 'num_min' || $numeric eq 'num_max') && @$args == 1;
+  return undef unless $array_overload || LinkedSpec::Numeric::arity_is_valid($numeric, scalar(@$args));
+  my @numbers;
+  foreach my $arg (@$args) {
+   my $value = _eval_expr($arg, $ctx);
+   push @numbers, $value;
+  }
+  # Array reducers remain a separately owned interpreter family.
+  _error('unknown_helper', name => $name) if $array_overload && ref($numbers[0]) eq 'ARRAY';
+  return LinkedSpec::Numeric::evaluate($numeric, @numbers)
+ }
+
  my @values = map { _eval_expr($_, $ctx) } @$args;
 
  # Governed helpers retain precedence over same-named codeblock variables.
@@ -417,13 +432,46 @@ sub _eval_call {
  )
 }
 
+sub _numeric_receiver_helper_name {
+ my ($method) = @_;
+ return undef unless defined($method) && $method =~ /\A[a-z]+\z/;
+ return LinkedSpec::Numeric::scalar_helper_name($method)
+}
+
 sub _eval_fluent_chain {
  my ($node, $ctx) = @_;
+ my $calls = $node->{calls} || [];
+ my @numeric = map { ref($_) eq 'HASH' ? _numeric_receiver_helper_name($_->{method}) : undef } @$calls;
+ # Validate numeric call shapes before any receiver or operands run, including
+ # comparison terminals followed by a different family. Single min/max selects
+ # its overload at runtime.
+ for (my $index = 0; $index < @$calls; ++$index) {
+  my $helper = $numeric[$index];
+  next unless defined($helper);
+  my $argc = 1 + @{$calls->[$index]{args} || []};
+  return undef if $helper =~ /\Anum_(?:eq|ne|gt|ge|lt|le)\z/ && $index < $#$calls;
+  next if ($helper eq 'num_min' || $helper eq 'num_max') && $argc == 1;
+  return undef unless LinkedSpec::Numeric::arity_is_valid($helper, $argc);
+ }
  my $value = _eval_expr($node->{receiver}, $ctx);
- foreach my $call (@{$node->{calls} || []}) {
+ foreach my $call (@$calls) {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
+  my $numeric = _numeric_receiver_helper_name($method);
+  if (defined($numeric)) {
+   my $args = $call->{args} || [];
+   my $array_overload = ($numeric eq 'num_min' || $numeric eq 'num_max') && !@$args;
+   return undef unless $array_overload || LinkedSpec::Numeric::arity_is_valid($numeric, 1 + @$args);
+   _error('unknown_helper', name => $method) if $array_overload && ref($value) eq 'ARRAY';
+   my @numbers = ($value);
+   foreach my $arg (@$args) {
+    my $operand = _eval_expr($arg, $ctx);
+    push @numbers, $operand;
+   }
+   $value = LinkedSpec::Numeric::evaluate($numeric, @numbers);
+   next;
+  }
   my @args = map { _eval_expr($_, $ctx) } @{$call->{args} || []};
   if ($method eq 'length' && !@args) {
    $value = ref($value) eq 'ARRAY' ? scalar(@$value)

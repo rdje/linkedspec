@@ -12,59 +12,60 @@ answers:
   - "do Perl hash keys and callable arguments retain evaluated values"
   - "can Perl num_add run inside a deferred codeblock"
   - "does Perl drop_keys warn for a single literal key"
+  - "why can a later numeric operand change an earlier value"
+  - "can Perl numeric comparison receivers continue into cat"
 date: 2026-10-20
-status: current value model and bounded Perl repair; full method inventory pending
+status: current bounded Perl value/numeric repairs; full operation inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "TYPE-REFERENCE-BOOK.1.2.3 retains the accepted-runtime RED and native/generated23 GREEN, complete test-input supplement and six effective source inverses. The first oracle, candidate and incomplete supplied test context remain retained; a saved-binding control and existing copy-on-write contract justify the corrected expectation."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-scoped-with/publish.py"
+evidence: "TYPE-REFERENCE-BOOK.1.2.3-.5 retain accepted-source public routes, saved-slot controls and exact producer/input records. Numeric5 owns dispatch, operand snapshots and receiver validation; its checkpoint discloses preparation epochs, original test-context qualification and separate repair owners."
+reverify: "bash tools/project_data_run.sh prove -q -Iperl t/scalar_numeric_contract.t"
 ---
 
-# Current value model and evaluated-value boundary
+# Current value model and bounded Perl numeric execution
 
-Uniform bindings hold scalar, array, harray or codeblock. Integer/real notation
-does not create separate binding namespaces. String, number, boolean and null
-remain distinct primitive values. Scalar numeric comparisons yield numeric 1/0;
-logical helpers yield booleans. False normalizes to "0" for scalar text and can
-pass through generic with as false. The July4 terminal-boolean statement is dated.
+Bindings hold scalar, array, harray or codeblock. Integer/real notation does not
+create namespaces. String, number, boolean and null remain distinct values;
+numeric comparisons yield numeric1/0 and logical helpers yield booleans. False
+normalizes to text "0" and can pass through generic with as false. The July4
+terminal-boolean statement is dated.
 
-Deferred codeblocks use current caller slots; eager blocks execute immediately.
-A called codeblock's array result may feed sorted(). That establishes an array
-operation on the result, not a separate codeblock method table.
+Deferred codeblocks use current caller slots; eager blocks run immediately.
+An array yielded by a callable can feed sorted(), without creating a distinct
+codeblock method table. Scoped callable with is repaired by .1.2.4;
+[[perl-generic-final-codeblock-normalization]] owns its vocabulary/frame mechanism.
 
-Perl now materializes each emitted list operand before later operands execute.
-Array/harray literals and constructors, dynamic hash keys and callable arguments
-retain earlier reads across later assignments or calls. A private list temporary
-preserves explicit flat splices and scalar kinds without adding a deep copy.
-The source owner is MethodLowering::_materialize_list_operand_expr; AST-to-DSL
-source rendering and deferred-body interpretation remain unchanged.
+Covered Perl constructors, dynamic hash keys, callable arguments and the four
+variadic scalar numeric producers materialize operands before later siblings
+run. MethodLowering::_materialize_list_operand_expr preserves explicit flat
+splices and scalar kinds. This does not add arbitrary deep copying. The earlier
+push question wrongly conflated late reads with reference mutation; saved-slot
+controls and [[perl-uniform-binding-runtime]] establish copy-on-write binding
+updates. Original rejected oracles/candidates and their limits remain retained.
 
-The first push question wrongly treated late slot observation as shared-reference
-mutation. Independent saved-binding controls and [[perl-uniform-binding-runtime]]
-show copy-on-write: push produces an updated binding while the earlier value
-stays old. The rejected oracle and first candidate remain intact; the corrected
-accepted-runtime baseline rejects19 cases, the candidate matches all23, and six
-actual source inverses reject and restore. Host identity controls are separate
-and do not establish general DSL alias/deep-copy parity.
+CodeblockRuntime delegates the admitted scalar numeric names and word/symbol
+aliases to Numeric::scalar_helper_name/arity_is_valid/evaluate. Typed arguments
+retain their kinds; known invalid arity skips operand evaluation. Numeric receiver
+shapes and comparison terminals validate before receiver evaluation, including
+mixed chains. A separately saved comparison result may start another expression.
+MethodLowering rejects the same numeric shapes as complete undef expressions,
+preventing literal Perl fallthrough. Ordinary numeric lists snapshot each term.
 
-Scoped callable with is repaired under .1.2.4; [[perl-generic-final-codeblock-normalization]] owns its local vocabulary/frame mechanism.
-Remaining Perl limit: num_add inside a deferred body reaches unknown_helper (.1.2.5).
-[[perl-codeblock-boolean-literal-kind-drift]] remains owned by startup .35;
-explicit boolean arguments avoid that separate literal defect in this repair.
+Deferred aggregate reducers and array min/max remain unknown_helper, owned by
+TYPE-REFERENCE-BOOK.1.2.7 after generated-drop .1.2.6. Boolean body literals still
+lose their kind under [[perl-codeblock-boolean-literal-kind-drift]] / startup35;
+typed callback parameters preserve it. Unicode numeric coercion remains startup20.
+No all-helper or cross-backend admission follows from this scalar repair.
 
-The complete original Phase0 run retains140 source-spelling assertion failures
-and one wrong-invocation volume failure; the temporary fixture cleanup passes.
-Separate source-bound historical/manual fixtures retain130 value goldens and
-two explicitly attributed compiler advisories. Their values are independent
-of the candidate lowering producer. Public descriptor/Get succeed quietly for
-single-key drop_keys; generated loading warns, and a caller fatal syntax
-profile rejects it. Actual emitted delete @__ls_drop{"debug"} maps to the
-MethodLowering drop_keys producer. TYPE-REFERENCE-BOOK.1.2.6 owns the separate
-repair after .1.2.4/.1.2.5 and before full enumeration. No warning gate changes.
+Single-key drop_keys is quiet through descriptor/Get but generated loading warns
+for delete @__ls_drop{"debug"}; a fatal syntax-warning caller rejects it. .1.2.6
+owns that producer. Numeric5 qualifies the prior scoped-with retained test-log
+context and adds a distinct complete-input accepted-source replay. No original
+observation is silently refreshed and no warning discipline is weakened.
 
-The complete July4 table, including later-retired spellings, is retained in the
-accepted c053c9dcf Git version and the inventory docs-proposals capsule. It already
-listed substr and the scalar/array/hash/number receiver families. Treat it as
-dated navigation. Current full operation/spelling enumeration is still owned by
-TYPE-REFERENCE-BOOK.1.2.1; no exhaustive method, backend or reference admission
-follows from this bounded repair. Full evidence/limits are under
-docs/checkpoints/type-evaluated-values/.
+The complete old card is recoverable at accepted203cde315 and in the numeric
+doc proposal. Earlier detailed value/Phase0 adjudications stay under
+docs/checkpoints/type-evaluated-values/. The July4 method table, including later
+retired spellings, survives at c053c9dcf and its proposal capsule. It already
+listed substr and scalar/array/hash/number receiver families; use it as dated
+navigation. Full current enumeration remains .1.2.1 after scalar5/drop6/aggregate7,
+before book mapping/layout. Complete per-type reference coverage is not admitted.

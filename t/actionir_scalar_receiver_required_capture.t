@@ -13,6 +13,9 @@ my $capture=JSON::PP->new->decode(do {local $/;<$fh>});
 close $fh or die "$path: $!";
 my $native=JSON::PP->new->decode(decode_base64($capture->{stdout_base64}));
 my $current=LinkedSpecTest::MethodLocations::original_coordinates(ScalarReceiverRequiredProbe::observations());
+open my $numeric_file, '<', 'tests/numeric-codeblocks/legacy-consumers.json' or die $!;
+my $numeric_contract = JSON::PP->new->decode(do { local $/; <$numeric_file> });
+close $numeric_file or die $!;
 is($capture->{returncode},0,'first native scalar probe completed');
 is(decode_base64($capture->{stderr_base64}),'','first native scalar probe has no diagnostics');
 is(scalar(keys %{$capture->{inputs}}),193,'complete first native supplied population');
@@ -49,6 +52,13 @@ for my $index (0..$#$branches) {
  my $row=$current->{branches}[$index];
  my $expected=$native->{branches}[$index];
  my $label='scalar branch '.$case->{name};
+ if (exists $numeric_contract->{scalar_shapes}{$case->{name}}) {
+  die 'numeric shape admission requires its original source/null result'
+   unless $expected->{caller_after} eq $numeric_contract->{scalar_shapes}{$case->{name}}
+    && !defined($expected->{value}) && !defined($expected->{error});
+  # A recognized invalid shape is a complete null expression, not unhandled.
+  $expected = {%$expected, value => 'undef'};
+ }
  if ($case->{missing} || $case->{noncode}) {
   $row={%$row};
   $expected={%$expected};
@@ -79,7 +89,22 @@ for my $family (@{ScalarReceiverRequiredProbe::families()}) {
 }
 is_deeply($current->{authority},[map {my $family=$_;map {my $role=$_;map {ScalarReceiverRequiredProbe::authority($family,$role,$_)} (0,1)} @{ScalarReceiverRequiredProbe::roles()}} @{ScalarReceiverRequiredProbe::families()}],
  'scalar observation authority rows equal independent repeated capture');
-is_deeply($current->{public},$native->{public},'four public Toolbox generated-source controls remain exact');
+require LinkedSpec::Numeric;
+require './t/lib/LinkedSpecTest/EmittedValues.pm';
+my $current_public = [map {+{%$_}} @{$current->{public}}];
+my $native_public = [map {+{%$_}} @{$native->{public}}];
+my @numeric_rows = grep { $native_public->[$_]{name} eq 'number-decimal' } 0..$#$native_public;
+die 'numeric public admission requires one exact frozen row' unless @numeric_rows == 1;
+my $numeric_index = $numeric_rows[0];
+die 'numeric public admission requires original source and metadata'
+ unless JSON::PP->new->canonical->encode($native_public->[$numeric_index])
+     eq JSON::PP->new->canonical->encode($numeric_contract->{scalar_public}{original});
+my $numeric_golden = {value => $numeric_contract->{scalar_public}{expected}};
+is_deeply(LinkedSpecTest::EmittedValues::return_value($native_public->[$numeric_index]{value}),
+ $numeric_golden, 'frozen numeric Toolbox source executes the independent value golden');
+$current_public->[$numeric_index]{value} = LinkedSpecTest::EmittedValues::return_value($current_public->[$numeric_index]{value});
+$native_public->[$numeric_index]{value} = $numeric_golden;
+is_deeply($current_public,$native_public,'four public Toolbox controls retain complete metadata and contractual results');
 for my $row (@{$current->{public}}) {
  ok(defined($row->{value}) && length($row->{value}),"public $row->{name} has generated source");
  is($row->{error},undef,"public $row->{name} has no error");

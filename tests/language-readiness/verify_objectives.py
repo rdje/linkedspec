@@ -5,6 +5,7 @@ the latest audited milestone. Exact owner-bound CI insertions must reconstruct
 the historical bytes; documentation remains revision-bound.
 """
 
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -40,6 +41,11 @@ EVALUATED_VALUES_OWNER = 'TYPE-REFERENCE-BOOK.1.2.3'
 EVALUATED_VALUES_TABLE = 'tests/language-readiness/evaluated-value-regression-evolution.json'
 EVALUATED_VALUES_TABLE_SHA256 = 'ad3bcdbd4615d2c0ecc5c30c692e19c6881a0f2c51cf2367330fe08ad7310030'
 EVALUATED_VALUES_BEFORE = 'c053c9dcf24a78cc8b551187f47cdb7aefb03eb3'
+SCALAR_NUMERIC_OWNER = 'TYPE-REFERENCE-BOOK.1.2.5'
+SCALAR_NUMERIC_TABLE = 'tests/language-readiness/scalar-numeric-regression-evolution.json.gz'
+SCALAR_NUMERIC_TABLE_SHA256 = '99e3bd544e304d48b1ae1da780fb749bbf2a02de34875610a881fa1b7d8890f9'
+SCALAR_NUMERIC_BEFORE = '203cde3159105cd9d96117015ff2dbbc24796a56'
+SCALAR_NUMERIC_MARKER = b'    my $numeric_setup = q{'
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -610,6 +616,43 @@ def restore_compiler_scanner_mock(source, contents):
 
 
 
+def scalar_numeric_table(source):
+    raw = read_relative(SCALAR_NUMERIC_TABLE)
+    require(digest(raw) == SCALAR_NUMERIC_TABLE_SHA256,
+            "numeric inverse table identity mismatch: " + source)
+    table = json.loads(gzip.decompress(raw))
+    require(table["version"] == 1 and table["owner"] == SCALAR_NUMERIC_OWNER and
+            table["source"] == source == "t/phase0_regression.t" and
+            table["before_revision"] == SCALAR_NUMERIC_BEFORE and
+            len(table["hunks"]) == len({row["id"] for row in table["hunks"]}) == 22,
+            "numeric inverse owner/population mismatch: " + source)
+    rebuilt = git("show", f"{SCALAR_NUMERIC_BEFORE}:{source}")
+    require(digest(rebuilt) == table["before_sha256"],
+            "numeric inverse base mismatch: " + source)
+    for row in table["hunks"]:
+        old, new = row["before"].encode(), row["after"].encode()
+        require(old and new and old != new and rebuilt.count(old) == 1,
+                "numeric inverse reconstruction mismatch: " + source)
+        rebuilt = rebuilt.replace(old, new, 1)
+    require(digest(rebuilt) == table["after_sha256"],
+            "numeric inverse reconstruction mismatch: " + source)
+    return table
+
+
+def restore_scalar_numeric_regressions(source, contents):
+    # Older-stage falsifiers deliberately supply pre-numeric source. The complete
+    # historical comparison still rejects every unregistered older-stage edit.
+    if SCALAR_NUMERIC_MARKER not in contents:
+        return contents
+    table = scalar_numeric_table(source)
+    for row in reversed(table["hunks"]):
+        old, new = row["before"].encode(), row["after"].encode()
+        require(contents.count(new) == 1,
+                "numeric regression registration mismatch: " + source)
+        contents = contents.replace(new, old, 1)
+    return contents
+
+
 def restore_evaluated_value_regressions(source, contents):
     raw = read_relative(EVALUATED_VALUES_TABLE)
     require(digest(raw) == EVALUATED_VALUES_TABLE_SHA256,
@@ -643,6 +686,7 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     current_hash = digest(contents)
+    contents = restore_scalar_numeric_regressions(source, contents)
     contents = restore_evaluated_value_regressions(source, contents)
     contents = restore_compiler_scanner_mock(source, contents)
     contents = restore_boundary_recurrence(source, contents)
@@ -662,6 +706,10 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
             "boundary_recurrence_before_revision": BOUNDARY_AFTER,
             "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
+            "scalar_numeric_owner": SCALAR_NUMERIC_OWNER,
+            "scalar_numeric_input": SCALAR_NUMERIC_TABLE,
+            "scalar_numeric_table_sha256": SCALAR_NUMERIC_TABLE_SHA256,
+            "scalar_numeric_before_revision": SCALAR_NUMERIC_BEFORE,
             "evaluated_values_owner": EVALUATED_VALUES_OWNER,
             "evaluated_values_input": EVALUATED_VALUES_TABLE,
             "evaluated_values_table_sha256": EVALUATED_VALUES_TABLE_SHA256,
@@ -1007,6 +1055,8 @@ def falsify(report):
             verify = verify_perl_storage_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":
+            numeric_current = current
+            current = restore_scalar_numeric_regressions(source, current)
             before = git("show", f"{SIGNATURE_BEFORE}:{source}")
             # Isolate the original signature controls from the new recurrence.
             owned = signature_subtest(current.replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
@@ -1048,11 +1098,22 @@ def falsify(report):
                 altered += (current.replace(fragment, b"", 1),
                             current.replace(fragment, fragment * 2, 1),
                             current.replace(fragment, changed, 1))
+            # Keep every older reason-sensitive control on its original source
+            # stage, then exercise each new numeric registration on current bytes.
+            for numeric_hunk in scalar_numeric_table(source)["hunks"]:
+                fragment = numeric_hunk["after"].encode()
+                require(numeric_current.count(fragment) == 1,
+                        "numeric control registration mismatch: " + source)
+                changed = bytes([fragment[0] ^ 1]) + fragment[1:]
+                altered += (numeric_current.replace(fragment, b"", 1),
+                            numeric_current.replace(fragment, fragment * 2, 1),
+                            numeric_current.replace(fragment, changed, 1))
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:",
                        "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:",
-                       "evaluated-value regression registration mismatch:")
+                       "evaluated-value regression registration mismatch:",
+                       "numeric regression registration mismatch:")
         elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
             altered = (
                 current + b"# unreviewed boundary contract edit\n",

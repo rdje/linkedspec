@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.5 — Execute scalar numeric codeblocks
+
+Perl callable bodies now execute scalar numeric calls, word/symbol aliases and receiver methods through the existing numeric contract. Ordinary variadic numeric operands retain their evaluated values before later callbacks rebind source slots. Known invalid numeric shapes and comparison-terminal continuations yield null before effects; the single-input min/max overload-selection exception remains explicit. Arithmetic/coercion algorithms and neutral contracts are unchanged.
+
+Current318 public cases pass against169 accepted-source failures/129 controls plus a distinct C1 mixed-chain20-case epoch with9 failures. Thirteen actual source/observer faults reject and restore, followed by full318 restoration. Seventeen direct suites pass1962 top-level TAP results in10006 captured regular inputs; neutral numeric/callable checks and three selected Phase0 roots pass. Twenty-one Phase0 spelling assertions and four AST assertions now execute independent value oracles; actual observer/selector controls remain effective. Exact legacy while/scalar-required successors preserve historical fixtures. The original malformed fragment, parsing advisory and all rejected preparation epochs survive.
+
+Prior4 whole2179/actual clean readonly0 is preserved at real203cde315. Its original14-suite context is explicitly qualified; a distinct fresh accepted-source replay passes14/1924 with10000 closed inputs and actual omitted-producer rejection/restoration. No original environment is invented. The current89-input book, three executed examples, heading rejection and Knowledge checks pass. Exact startup87.3 named/symbol reproducers both return7 through public/fresh-generated routes. Generated-drop6 and aggregates7 remain next; no exhaustive, other-backend or private-parent admission.
+
+Readonly proof: docs/checkpoints/type-numeric-codeblocks/publish_recurrence.py; claim: docs/claims/TYPE-REFERENCE-BOOK.1.2.5.json. Exact staged canonical receipt and normal hooks govern landing.
+
+Canonical1 correctly rejected formal verification declarations for both the implementation owner and its duplicate startup intake. Whole first10142-input uncommitted publication, actual readonly0 and exact rejected candidate survive in docs/checkpoints/type-numeric-admission/. The duplicate delegates to the one numeric5 owner; checker/runtime/book behavior are unchanged. Distinct final publication and canonical retry govern admission.
+
+Canonical2 reaches historical evidence recovery, exposing one overlapping Phase0 registration. Exact22-fragment numeric inversion precedes old70; all578 existing controls remain effective and66 new denials pass. Archive134/84613241 bytes,22 recovery controls and read/write guards stay exact. Two actual auditor faults restore. Whole second10162-input draft/readonly0 and10175 Git-verified staged source images survive. Runtime/book and historical observations are unchanged by this prerequisite.
+
 ## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.4 — Invoke callable scoped with values
 
 Scoped Perl with now exposes callable value and its dynamic frame, restores nested/function bindings on success or error, and preserves authored spans. Thirty descriptor/native/fresh-generated cases pass against19 pre-fix failures and11 controls. Six actual producer faults reject20/1/1/1/1 cases or authored spans and restore exactly. Fourteen direct suites pass1924 top-level TAP tests in549 declared inputs; complete book89/heading denial and Knowledge checks pass. Whole prior845/full130759 and actual clean readonly0 survive at accepted2fca7d848. Canonical exact-candidate receipt governs landing. Numeric5/generated-drop6 precede full inventory; no exhaustive, cross-backend or private-parent admission.

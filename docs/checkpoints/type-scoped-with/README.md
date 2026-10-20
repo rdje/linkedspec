@@ -1,3 +1,14 @@
+Input-scope correction: the original focused manifest omitted consumed
+checkpoint producers/fixtures and integration-book input. Retained14/1924
+TAP remains an original log metric. Numeric5 preserves that record and
+adds a distinct accepted-source replay with10000 captured regular tracked
+inputs and actual producer fault/restoration; see its README.
+
+Historical checkpoint at accepted 203cde3159105cd9d96117015ff2dbbc24796a56. The original readonly
+publisher describes that revision; current numeric work and proof are owned by
+docs/checkpoints/type-numeric-codeblocks/README.md. The whole original
+publication, closed inputs, full modes and actual clean replay survive there.
+
 # Perl scoped callable with
 
 Owner: TYPE-REFERENCE-BOOK.1.2.4. Accepted activation: 2fca7d8489038c226fe0454a105f12a2af696a1f.

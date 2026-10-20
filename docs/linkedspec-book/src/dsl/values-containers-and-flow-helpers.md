@@ -74,8 +74,8 @@ does not add recursive copying of arbitrary host objects.
 
 ### Current Perl limits
 
-A direct `num_add` inside a deferred body currently raises the typed
-`unknown_helper` diagnostic even though ordinary numeric helper calls work.
+Deferred numeric aggregate reducers, including array-form min/max and array
+reducer methods, still raise the typed `unknown_helper` diagnostic in Perl.
 Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean
 arguments passed into a codeblock retain their kind. These separately owned
 repairs remain pending. The observations establish no new cross-backend result,
@@ -392,6 +392,59 @@ scoped block parameter in this MVP; mutations to other variable names persist af
 `with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
 general delayed callback are not current portable surfaces; explicit delayed callbacks use `{|params| ...}`.
 
+
+### Scalar numeric helpers in codeblocks
+
+Perl callable bodies support the scalar numeric helpers, their word and symbol
+call aliases, and numeric receiver methods. Their argument and result rules are
+the same as [numeric value helpers](value-container-flow-helper-reference.md#numeric-value-helpers):
+comparisons return numeric `1`/`0`; invalid numeric input or arity returns `undef`.
+
+Caller bindings are read at each invocation. This counter returns `[1,2,2]`:
+
+```text
+counter = 0;
+cb = {||
+  counter = num_add(counter,1);
+  return(counter)
+};
+first = cb();
+second = cb();
+return([first,second,counter])
+```
+
+Number-returning receiver links compose inside a callback. This returns `18`:
+
+```text
+score = -3.2;
+cb = {|| return(score.abs().ceil().add(2).mul(3)) };
+out = cb();
+return(out)
+```
+
+Each numeric operand retains its evaluated value before a later operand can
+rebind its source slot. This returns `[5,9]`:
+
+```text
+value = 2;
+change = {|| value = 9; return(3) };
+out = num_add(value,change());
+return([out,value])
+```
+
+The same rule covers scalar `num_mul`, `num_min` and `num_max`; explicit flat
+splices keep their existing list behavior. It does not add recursive copying.
+An invalid numeric call shape or comparison-terminal continuation yields `undef`
+before the receiver or operands run. Comparison methods end their chain even
+when the following method belongs to another family. Save a comparison result
+in a binding to use it as the receiver of a separate expression.
+A one-argument min/max call evaluates its input to choose the array overload;
+scalar input then yields `undef`.
+
+Typed boolean parameters remain nonnumeric. Boolean literals evaluated inside
+a Perl callback have the separate [kind limitation](#current-perl-limits) above.
+Numeric array reducers remain outside this deferred scalar family. An executed unsupported
+call keeps its typed `unknown_helper` cause.
 
 ### Callable values in with
 

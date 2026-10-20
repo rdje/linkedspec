@@ -199,7 +199,7 @@ def main():
                    recovery.CENSUS_PREFIX + "census.py",
                    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json",
                    "docs/language-readiness/objective-reconciliation.md",
-                   audit.EVALUATED_VALUES_TABLE))
+                   audit.EVALUATED_VALUES_TABLE, audit.SCALAR_NUMERIC_TABLE))
     retained_inputs = {name: recovery.digest(recovery.read_input(name)) for name in sorted(inputs)}
     print(json.dumps({"version": 1, "owner": recovery.OWNER, "restored_inputs": len(recovered),
         "restored_bytes": sum(map(len, recovered.values())), "restored_hashes": restored_hashes,

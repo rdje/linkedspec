@@ -1559,8 +1559,9 @@ before body 10001. It retains `iteration_limit=10000`, `iterations_executed=1000
 typed while-node source span. Prior body effects remain visible. This matches the existing
 Perl direct-action guard order; that direct route retains its existing host diagnostic.
 
-This repair covers typed attached while in the private Perl executor. Numeric helpers inside
-callables remain owned by startup87.3; the examples use supported matching/string helpers.
+This repair covers typed attached while in the private Perl executor. Perl scalar
+numeric calls and receiver chains also execute in callable bodies; see the
+[numeric callable examples](../dsl/values-containers-and-flow-helpers.md#scalar-numeric-helpers-in-codeblocks).
 Portable `next()` and exact-limit Dart/Julia normalization retain backlog5 ownership.
 Boolean literal kind, function statement MVP, descriptor ordering/readiness, dispatcher/full
 execution and other-backend admission remain separate.

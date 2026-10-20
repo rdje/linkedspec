@@ -1606,15 +1606,15 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Final continuity metadata: Update the touched startup root Last updated field from its September27 partition handoff to October3; current frontier/status evidence and mutable index snapshot now describe this repair. Runtime/fixture/capture inputs are unchanged. Exact final pre-commit hooks recheck the staged documentation state.
 
 - ID: `SESSION-STARTUP-READING.87.3`
-  Status: `pending`
+  Status: `done` / duplicate intake resolved by TYPE-REFERENCE-BOOK.1.2.5
   Goal: Execute admitted numeric helpers and symbol aliases inside Perl callable bodies.
   Dependencies: .86.5 public context checkpoint; scalar-numeric and callable contracts; keep current scanner .86 first.
-  Planned tier: focused.
-  Planned focused proof: Ordinary/callable named/symbol arithmetic, parameter restoration and static precedence, exact numeric/error behavior, fresh emitted invocation and callable/numeric consumers.
-  Planned canonical boundary: Repair-group acceptance/push; no new arithmetic or callable contract.
+  Implementation owner: TYPE-REFERENCE-BOOK.1.2.5 supplies the canonical tier, focused proof and exact staged admission. This duplicate intake is not a second commit owner.
+  Evidence owner: docs/claims/TYPE-REFERENCE-BOOK.1.2.5.json;318 cases,13 source controls,17 suites/1962 and the exact two-source intake replay.
   Acceptance: Repair div(14,2) and /(14,2) callable bodies rejecting unknown_helper; preserve the numeric contract and genuine unknown-call diagnostics.
   Verification: .86.5-contexts nested_named_callable and nested_callable both fail rule_handler_eval with unknown_helper while direct named/receiver arithmetic returns7. CodeblockRuntime::_eval_call has no numeric route and falls through to the caller binding lookup.
-  Commit: `pending`
+  Resolution: TYPE-REFERENCE-BOOK.1.2.5 supplies the shared numeric route and preserves genuine unknown-call diagnostics. Its startup-inputs/startup-run capsules execute the exact original div(14,2) and /(14,2) lifecycle sources through descriptor/Get/fresh generated source, both7. Original dated intake above remains; grouping .87.4 is still open.
+  Commit: Implementation owner TYPE-REFERENCE-BOOK.1.2.5; derive identity from Git subject.
 - ID: `SESSION-STARTUP-READING.87.4`
   Status: `pending`
   Goal: Reconcile Perl parenthesized expression handling with the authored-expression contract.

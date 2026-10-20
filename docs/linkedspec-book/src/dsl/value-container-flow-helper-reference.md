@@ -863,14 +863,22 @@ Compatibility bridge status:
 
 ## Numeric value helpers
 
-Numeric helpers keep arithmetic and reducers explicit. They return `undef` when required numeric operands are missing or not numeric-looking.
+Under the scalar numeric contract, inputs are finite numbers or untrimmed decimal strings such as
+`".5"`, `"-.5"` and `"007"`. Typed booleans, null, arrays, harrays and codeblocks
+are invalid scalar numeric operands. Invalid input, arity, nonfinite results,
+zero divisors, fractional modulo operands and inverted clamp bounds return `undef`.
+Unary helpers take one operand; subtraction/division/modulo and comparisons take
+two; clamp takes three; addition/multiplication/scalar min/max take at least two.
+Comparisons return numeric `1`/`0`. Rounding uses halves away from zero; integer
+modulo is `a - floor(a/b)*b`, with a nonzero result having the divisor's sign.
+Array-form min/max and array reducers have their separate signatures below.
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
-| `num_abs(value)` | scalar number | absolute value. |
-| `num_floor(value)` | scalar number | round down to an integer. |
-| `num_ceil(value)` | scalar number | round up to an integer. |
-| `num_round(value)` | scalar number | round to nearest integer. |
+| `num_abs(value)` | scalar number or `undef` | absolute value. |
+| `num_floor(value)` | scalar number or `undef` | round down to an integer. |
+| `num_ceil(value)` | scalar number or `undef` | round up to an integer. |
+| `num_round(value)` | scalar number or `undef` | round to nearest integer. |
 | `num_sum(array_expr)` | scalar number or `undef` | sum numeric array items. |
 | `num_avg(array_expr)` | scalar number or `undef` | average numeric array items. |
 | `num_median(array_expr)` | scalar number or `undef` | median of numeric array items. |
@@ -902,11 +910,12 @@ On the current Perl backend, ordinary rule actions support the arithmetic calls
 above, including a final `/(14, 2)` before a block-closing brace. The
 [complete division example](../public-api/integration-perl.md#regex-and-division-in-action-code)
 also shows an action edge on the same line and explains current parsing limits.
-Two separately tracked boundaries remain:
+Perl callable bodies also execute the scalar names, word/symbol aliases and
+numeric receiver links described here. See the
+[callable examples](values-containers-and-flow-helpers.md#scalar-numeric-helpers-in-codeblocks)
+for caller effects, operand snapshots, terminal chains and the remaining
+boolean-literal and deferred aggregate limits. The separate grouping boundary remains:
 
-- A callable body such as `{|| return(div(14, 2)) }` or
-  `{|| return(/(14, 2)) }` fails with `unknown_helper` at runtime. Numeric callable
-  dispatch is tracked for repair under `SESSION-STARTUP-READING.87.3`.
 - Wrapping the entire call in extra parentheses, as in `out = (div(14, 2))`
   or `out = (/(14, 2))`, currently reaches a host-function or regex error.
   Use the direct call `out = div(14, 2)` in ordinary actions. The supported
@@ -954,7 +963,7 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `num_add(num_ceil(num_abs(score)), 2)`, and `3.5.floor().add(1)` maps to
 `num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
-`ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers are array-consuming: use
+`ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` and end the chain. Array reducers are array-consuming: use
 function form such as `num_sum(scores)` / `sum(scores)` or terminal array receiver form such as
 `scores.sum()` / `scores.avg()`. They are not scalar number receiver links, and reducer terminals do not
 continue through later array receiver methods. A number-yielding expression-valued block can be the receiver,

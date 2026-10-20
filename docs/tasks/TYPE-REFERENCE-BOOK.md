@@ -105,7 +105,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -197,20 +197,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Focused checks: Scoped descriptor/Get/fresh-source values and diagnostics, actual source faults, callable/with/direct consumers, Knowledge and rendered book.
   Canonical trigger: Scoped callable lowering and runtime-frame movement; exact staged candidate.
   Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.4.json`
-  Evidence: docs/checkpoints/type-scoped-with/;30 GREEN/19 RED/11 controls; source faults20/1/1/1/1 plus authored-span RED, all restored;14 suites/1924 TAP/549 inputs; book89/heading denial. Whole prior845/full130759 and clean readonly0 preserved at real2fca7d848. Publisher and exact canonical receipt govern landing. Canonical1 tier-spelling rejection and exact candidate remain in docs/checkpoints/type-scoped-with-admission/.
+  Evidence: docs/checkpoints/type-scoped-with/;30 GREEN/19 RED/11 controls; source faults20/1/1/1/1 plus authored-span RED, all restored;14 suites/1924 TAP/549 declared inputs; book89/heading denial. Whole prior845/full130759 and clean readonly0 preserved at real2fca7d848. Publisher and exact canonical receipt govern landing. Canonical1 tier-spelling rejection and exact candidate remain in docs/checkpoints/type-scoped-with-admission/.
   Acceptance: Repair scoped dependency projection with nested scope/restoration, static helper/function precedence, false/null/noncallable and explicit-parameter controls; check actual unsupported-call diagnostics separately. Preserve existing call/with contracts, verify fresh emitted routes and direct consumers, document the fix and run canonical candidate proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.5`
-  Status: `pending` / P2 confirmed deferred-body numeric helper gap
-  Goal: Resolve the observed Perl deferred-body num_add gap using the current scalar-numeric contract and a bounded complete family inventory.
+  Status: `done`
+  Goal: Repair scalar numeric calls and snapshots.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.4`
-  Reproduce: Impact repeated-side-effects calls counter = num_add(counter,1) inside a zero-parameter codeblock. Get records unknown_helper:name=num_add and returns null; fresh generated execution raises generated_execution_failed around the same typed error. Direct scalar numeric fixture calls work. Full inputs/raw channels/diagnostic prelude precede analysis under .1.2.3.
-  Root cause: CodeblockRuntime::_eval_call has selected helper branches, then only a callable-variable fallback; num_add reaches unknown_helper instead of the ordinary numeric evaluator. The published unknown-body-call error is behaving consistently; this is an owned body-helper availability gap, not a claim that every unknown call must work.
-  Impact: A current public numeric helper is unavailable in an ordinary deferred body. Vocabulary/fixture admission alone does not certify compositional helper availability.
-  Schedule: After the two P1 evaluated-value/scoped-callable repairs and before complete operation inventory.
-  Planned tier: `canonical`; deferred interpreter behavior/coverage movement.
-  Claim verification: none: Actual diagnostic intake belongs to .1.2.3; declare complete numeric-family source and RED/GREEN proof before repair.
-  Acceptance: Reconcile exact public scalar-numeric names/aliases, argument evaluation/kinds/arity/errors and current interpreter contracts; repair the bounded numeric family with ordinary outside/inside and native/generated controls. Preserve typed unsupported unknown-call behavior and the separately owned boolean-literal .35 defect. Split additional helper families before writes, update book/facts and run canonical proof; no blanket all-helper parity admission.
+  Evidence: docs/checkpoints/type-numeric-codeblocks/;318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restorations;17 suites/1962;book89/3. Prior4 qualified; admission/inverse22/66: type-numeric-admission/.
+  Verification tier: `canonical`
+  Focused checks: Native/fresh values/kinds/errors/effects, neutral contracts, direct consumers, source faults, book/Knowledge.
+  Canonical trigger: Interpreter/generated behavior; exact staged receipt.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.5.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Accepted dispatch/late-read failures retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Runtime dispatch and emitted scalar slots.
+  - [x] **FIX** — Shared numeric adapter; operand materialization; shape guards.
+  - [x] **ADDRESSED (verified)** —318 cases;13 source controls/restorations.
+  - [x] **NO REGRESSION** —17/1962; canonical receipt gates landing.
+  - [x] **LOCKSTEP** — Book/facts/live docs; startup87.3 closed;6/7 remain.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.6`
   Status: `pending` / P2 generated single-key drop diagnostic
@@ -225,10 +230,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Current diagnostic intake is retained by .1.2.3. Declare the complete source-bound accepted baseline, warning/FATAL RED, candidate and source controls at activation.
   Acceptance: Verify ordinary/fresh generated values and zero unexpected warnings under ordinary and fatal caller profiles for one/multiple/computed keys, missing/empty keys and relevant aliases/receiver forms. Preserve independent copied results, explicit splices and actual invalid-kind/key diagnostics. Update the two explicitly retained compiler-advisory goldens only with the actual fix. No blanket hash-helper admission.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.7`
+  Status: `pending` / deferred aggregate availability
+  Goal: Repair deferred aggregate numeric helpers/overloads and receivers.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.6`
+  Reproduce/impact: Numeric5 red-run retains unknown_helper for num_sum([1,2]), num_min([2,1]) and [2,1].min(); public reducers unavailable in callbacks.
+  Planned tier: `focused`; existing contracts.
+  Claim verification: none: Intake retained by5; bind complete family/RED before repair.
+  Acceptance: Reconcile reducer contract/spellings, overloads, kinds/empty/errors/effects and native/generated controls; preserve scalar5, update book/facts and direct consumers.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `pending`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.6`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.7`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
@@ -314,14 +328,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.3` | `done` |23 GREEN/19 RED; focused52, observer129 RED/restoration; canonical landing boundary. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `done` | Scoped callable/frame/span repair; finite proof and canonical landing boundary. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `pending` | P2 deferred-body numeric helper gap after the two P1 repairs. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `done` | Scalar numeric dispatch/snapshots;6/7 next. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `pending` | P2 generated scalar-drop advisory/FATAL load failure before enumeration. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
-| 7 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 8 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
-| 9 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 10 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `pending` | Deferred aggregates before enumeration. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
+| 8 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
+| 9 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
+| 10 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
+| 11 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
 
 ## Decisions
 
@@ -341,6 +356,8 @@ None requiring director input. P1 evaluated-value .1.2.3 is complete; scoped-wit
 
 ## Verification Log
 
+- `2026-10-20` — `.1.2.5`: See the complete numeric checkpoint above.
+
 - `2026-10-20` — `.1.2.3`: Evaluated-list operands retain earlier values across later effects and preserve explicit splices. Accepted19 RED/four controls becomes23 native/fresh-generated GREEN; seven suites use277 declared test/data/bin inputs. Six emitter faults reject19/14/2/1/1/1 and restore. Focused52 preserves982 skips in1651 supplied files; ordinary all1035 passes separately. Observer129 RED/one null, missing-selector RED and restoration remain effective. Twelve recurring suites retain4998 assertions plus3 value/ABI goldens:5001 quiet PASS; mapper bypass fails198 and restores. Three exact owner/prior/current scanner admissions retain original registrations;28 denials and actual check-removal faults9/6/3 pass. Two oversized streams become31 bounded chunks with exact bytes/modes and retained-review use in explicit original scanner context;500733803 duplicate bytes are removed with residue0. Historical metadata has4 denials/actual guard RED1; current reads stay unchanged. Whole837/full130737 and actual readonly0 survive; one physical input becomes an index, preserving all original logical inputs. Fresh845/full130759 binds the complete4178-input closure including4163 scanner candidates, with no oversized files. Graph1487/1349/10462 preserves897 entries/248 fields at8388584 Knowledge bytes; book89/heading denial and whole388/full68814/2706 replay pass. Rejected/preparation epochs retain their original limits and bytes. Scoped-with4, numeric5 and generated-drop6 remain owned; no exhaustive type, cross-backend or private/parent admission. Exact staged canonical receipt and normal hooks govern landing; derive actual admission identity from Git.
 
 - `2026-10-19` — `.1.2.0`: Authority/model .1.2.0 retains1300 owned inputs;14 descriptor/Get/generated cases include70 neutral scalar fields, and11 distinguishing cases isolate two owned P1 Perl defects. Actual private promotion has report0/strict RED/exact restoration. Current Knowledge1487/1349/10455, all897 list items/248 fields and8387566 bytes fit unchanged limits; complete89-input book and changed-heading control pass. Whole original396/full68960 replays with exact channels and bytes/modes unchanged. Only that accepted claim is frozen at real cf4dceccd; first no-write frontmatter writer failure and separate correction remain retained. No runtime, contract, gate, budget, complete operation inventory, cross-backend or private/parent admission. P1 scalar-evaluation .1.2.3 then scoped-with .1.2.4 precede complete enumeration .1.2.1.
@@ -353,7 +370,7 @@ None requiring director input. P1 evaluated-value .1.2.3 is complete; scoped-wit
 
 ## Commit Log
 
-Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 activates only from clean Git.
+Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 
 ## Changelog
 

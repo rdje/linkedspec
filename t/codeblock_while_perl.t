@@ -15,6 +15,16 @@ my $prefix = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-';
 open my $cases_file, '<', $prefix.'cases.json' or die $!;
 my $cases = JSON::PP->new->decode(do { local $/; <$cases_file> });
 close $cases_file or die $!;
+open my $successor_file, '<', 'tests/numeric-codeblocks/legacy-consumers.json' or die $!;
+my $successor = JSON::PP->new->decode(do { local $/; <$successor_file> })->{while_case};
+close $successor_file or die $!;
+unless (grep { $_ eq '--baseline' } @ARGV) {
+ my $json = JSON::PP->new->canonical;
+ my @matches = grep { $_->{id} eq $successor->{original}{id} } @$cases;
+ die 'numeric while successor requires the exact original case' unless @matches == 1
+  && $json->encode($matches[0]) eq $json->encode($successor->{original});
+ $cases = [map { $_->{id} eq $successor->{original}{id} ? $successor->{current} : $_ } @$cases];
+}
 open my $producer, '-|', $^X, '-Iperl', $prefix.'probe.pl', grep { $_ eq '--baseline' } @ARGV or die $!;
 my $bytes = do { local $/; <$producer> };
 close $producer or die 'public while producer failed';
@@ -22,7 +32,8 @@ my $observation = JSON::PP->new->decode($bytes);
 my %rows = map { $_->{id} => $_ } @{$observation->{cases}};
 is(scalar(keys %rows), scalar(@$cases), 'complete exact public source population');
 for my $case (@$cases) {
- subtest $case->{id} => sub {
+ my $case_name = $case->{current_name} // $case->{id};
+ subtest $case_name => sub {
   my $row = $rows{$case->{id}};
   is($row->{source}, $case->{source}, 'execute exact authored source');
   ok(length($row->{dump}), 'public parser source is retained');

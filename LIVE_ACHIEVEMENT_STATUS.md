@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.4 is complete; numeric helper .1.2.5 is next after clean landing.
+TYPE-REFERENCE-BOOK.1.2.5 completes scalar numeric calls and snapshots; generated-drop .1.2.6 is next after clean landing.
 
 ## Latest Completed Slice
 
-Scoped Perl with now exposes callable value and its dynamic frame, restores nested/function bindings on success or error, and preserves authored spans. Thirty descriptor/native/fresh-generated cases pass against19 pre-fix failures and11 controls. Six actual producer faults reject20/1/1/1/1 cases or authored spans and restore exactly. Fourteen direct suites pass1924 top-level TAP tests in549 declared inputs; complete book89/heading denial and Knowledge checks pass. Whole prior845/full130759 and actual clean readonly0 survive at accepted2fca7d848. Canonical exact-candidate receipt governs landing. Numeric5/generated-drop6 precede full inventory; no exhaustive, cross-backend or private-parent admission.
+Perl deferred scalar numeric calls/aliases/receivers use the unchanged numeric contract; ordinary variadic operands retain evaluated values. Current318 cases pass;169 accepted-source failures/129 controls and a separate C1 mixed-chain9 failures remain retained. Thirteen actual source/observer faults reject and restore; final318 restoration passes. Direct17 suites/1962 TAP, neutral numeric/callable checks, selected Phase0 three roots and book89/three examples/heading control pass. Exact duplicate startup87.3 intake returns7 in both cases. Whole prior4/2179 and actual clean readonly0 survive; its original test-context completeness is qualified, with distinct accepted-source14/1924 replay in10000 captured inputs. Historical numeric inverse22 preserves578 controls and adds66; archive134/22 and two auditor faults pass. Whole second draft/readonly0 and exact source images survive. Exact staged canonical receipt governs landing. Deferred aggregates7, startup20/32/35/87.4 and full reference admission remain owned.
 
 ## Next Action
 
-Run the current scoped readonly publication from clean Git before numeric .1.2.5 writes; preserve its complete claim/inputs/modes and actual baseline, then activate the bounded deferred numeric-family repair. Continue full PNT; generated-drop6 precedes exhaustive enumeration. No push yet.
+From clean Git, run the current numeric readonly publication before generated-drop .1.2.6 writes. Preserve its whole claim, manifest, full modes and actual baseline, then activate the bounded warning/FATAL generated-source repair. Continue full PNT through6,7 and complete inventory. No push yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
@@ -29,7 +30,6 @@ Run the current scoped readonly publication from clean Git before numeric .1.2.5
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.4` — four validators/six roles;432 native rows exact;1146/264 RED/all GREEN;13 faults;87/332/27762; public diagnostics329/16 before/after; standard1035; evidence9; Knowledge8388501; book89/4; readonly495/117562 plus explicit kernel gap; optional kind .5.5 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.3` — six switch validators; native630 exact;1641/273 RED/all GREEN;15 effective faults/one unobserved;85/317/26600; standard1035; evidence9; original463/full109061; first465 replay; two book89/4 epochs; readonly480/111654; output .5.4 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.2` — six validators/seven roles; native105/356/314 exact;1750/294 RED/1456 controls/all GREEN;16 faults;84/310/24959; evidence9; original155/full40701; Knowledge1486/1349/twelve/8388171; book89/4; standard1035; readonly463/109061; switch .5.3 next.
-- `REPO-HYGIENE.18` — dated16310/17449713515 parent; separate Rust483/2390810648; zero removals; four channel/three preservation controls; original507 historical; full1486 Knowledge/12 overlays/8387213; two book89/four epochs; retained reader/history refusals; readonly155/40701; if/while .5.2 next.
 
 ## History
 

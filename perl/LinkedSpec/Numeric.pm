@@ -13,6 +13,30 @@ my $NUMERIC_FLAGS = B::SVp_IOK() | B::SVp_NOK();
 my %UNARY_HELPER = map { $_ => 1 } qw(num_abs num_floor num_ceil num_round);
 my %VARIADIC_HELPER = map { $_ => 1 } qw(num_add num_mul num_min num_max);
 my %BINARY_HELPER = map { $_ => 1 } qw(num_sub num_div num_mod num_eq num_ne num_gt num_ge num_lt num_le);
+my %SYMBOL_HELPER = (
+ '+' => 'num_add', '-' => 'num_sub', '*' => 'num_mul', '/' => 'num_div', '%' => 'num_mod',
+ '==' => 'num_eq', '!=' => 'num_ne', '>' => 'num_gt', '>=' => 'num_ge', '<' => 'num_lt', '<=' => 'num_le',
+);
+
+sub scalar_helper_name {
+ my ($name) = @_;
+ return undef unless defined($name) && !ref($name);
+ my $helper = $SYMBOL_HELPER{$name} // $name;
+ $helper = 'num_'.$helper unless $helper =~ /\Anum_/;
+ return $helper if $UNARY_HELPER{$helper} || $VARIADIC_HELPER{$helper}
+  || $BINARY_HELPER{$helper} || $helper eq 'num_clamp';
+ return undef
+}
+
+sub arity_is_valid {
+ my ($helper, $argc) = @_;
+ return 0 unless defined($helper);
+ return $argc == 1 if $UNARY_HELPER{$helper};
+ return $argc >= 2 if $VARIADIC_HELPER{$helper};
+ return $argc == 2 if $BINARY_HELPER{$helper};
+ return $argc == 3 if $helper eq 'num_clamp';
+ return 0
+}
 
 sub scalar_number {
  my ($value) = @_;
@@ -38,13 +62,7 @@ sub _normalized {
 
 sub evaluate {
  my ($helper, @args) = @_;
- return undef unless defined($helper);
- return undef if $UNARY_HELPER{$helper} && @args != 1;
- return undef if $VARIADIC_HELPER{$helper} && @args < 2;
- return undef if $BINARY_HELPER{$helper} && @args != 2;
- return undef if $helper eq 'num_clamp' && @args != 3;
- return undef unless $UNARY_HELPER{$helper} || $VARIADIC_HELPER{$helper} || $BINARY_HELPER{$helper}
-  || $helper eq 'num_clamp';
+ return undef unless arity_is_valid($helper, scalar(@args));
 
  my @numbers;
  foreach my $arg (@args) {

@@ -23,8 +23,8 @@ sub parse_block {
 sub lowered_observation {
     my ($code, $locals) = @_;
     $locals ||= {};
-    my ($name, $items, $meta, $key, $value, $foo, $i, $start)
-        = @{$locals}{qw(name items meta key value foo i start)};
+    my ($name, $items, $meta, $key, $value, $foo, $i, $start, $acc, $depth)
+        = @{$locals}{qw(name items meta key value foo i start acc depth)};
     my $execute = eval 'sub { ' . $code . ' }';
     return { error => "compile: $@" } unless ref($execute) eq 'CODE';
     my $result;
@@ -677,24 +677,36 @@ subtest 'authored value arity outranks legacy optional scope fallback' => sub {
         qr/my \@__ls_cat_parts = \(\$key, "\@", \$depth\)/,
         'variadic cat preserves the authored bare first value'
     );
-    like(
-        $L->(q{num_add(acc,value,depth)}),
-        qr/my \@__ls_num_add_terms = \(\$acc, \$value, \$depth\)/,
+    is_deeply(
+        lowered_observation(
+            $L->(q{num_add(acc,value,depth)}),
+            { acc => 2, value => 3, depth => 4 },
+        ),
+        { value => 9 },
         'variadic num_add preserves the authored bare first value'
     );
-    like(
-        $L->(q{num_mul(acc,value,depth)}),
-        qr/my \@__ls_num_mul_terms = \(\$acc, \$value, \$depth\)/,
+    is_deeply(
+        lowered_observation(
+            $L->(q{num_mul(acc,value,depth)}),
+            { acc => 2, value => 3, depth => 4 },
+        ),
+        { value => 24 },
         'variadic num_mul preserves the authored bare first value'
     );
-    like(
-        $L->(q{num_min(acc,value)}),
-        qr/my \@__ls_num_min_terms = \(\$acc, \$value\)/,
+    is_deeply(
+        lowered_observation(
+            $L->(q{num_min(acc,value)}),
+            { acc => 2, value => 3, depth => 4 },
+        ),
+        { value => 2 },
         'variadic num_min preserves the authored bare first value'
     );
-    like(
-        $L->(q{num_max(acc,value)}),
-        qr/my \@__ls_num_max_terms = \(\$acc, \$value\)/,
+    is_deeply(
+        lowered_observation(
+            $L->(q{num_max(acc,value)}),
+            { acc => 2, value => 3, depth => 4 },
+        ),
+        { value => 3 },
         'variadic num_max preserves the authored bare first value'
     );
     like(

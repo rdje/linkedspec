@@ -4506,6 +4506,20 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   $calls = \@normalized_calls;
 
+  # Numeric shape errors are complete null expressions, including mixed chains.
+  # They must not reach the legacy Perl fallback or execute a receiver first.
+  for (my $index = 0; $index < @$calls; ++$index) {
+   my $call = $calls->[$index];
+   my $method = $call->{method} // '';
+   my $family = _number_receiver_value_chain_return_family($method);
+   next unless defined($family);
+   return 'undef' if $family eq 'terminal' && $index < $#$calls;
+   my $args = $call->{args} || [];
+   next if ($method eq 'min' || $method eq 'max') && !@$args;
+   my $helper = _number_receiver_method_helper_name($method);
+   return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
+  }
+
   my $receiver_expr;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
    if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
@@ -5787,7 +5801,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    my $term_expr = _lower_method_value_expr($arg, $deps);
    $term_expr = $trim_action_ir_value->($arg) unless defined($term_expr) && length($term_expr);
    return undef unless defined($term_expr) && length($term_expr);
-   push @lowered_terms, $term_expr;
+   push @lowered_terms, _materialize_list_operand_expr($term_expr);
   }
 
   return 'do { my @__ls_num_add_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_add\', @__ls_num_add_terms) }';
@@ -5815,7 +5829,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    my $term_expr = _lower_method_value_expr($arg, $deps);
    $term_expr = $trim_action_ir_value->($arg) unless defined($term_expr) && length($term_expr);
    return undef unless defined($term_expr) && length($term_expr);
-   push @lowered_terms, $term_expr;
+   push @lowered_terms, _materialize_list_operand_expr($term_expr);
   }
 
   return 'do { my @__ls_num_mul_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_mul\', @__ls_num_mul_terms) }';
@@ -5925,7 +5939,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    my $term_expr = _lower_method_value_expr($arg, $deps);
    $term_expr = $trim_action_ir_value->($arg) unless defined($term_expr) && length($term_expr);
    return undef unless defined($term_expr) && length($term_expr);
-   push @lowered_terms, $term_expr;
+   push @lowered_terms, _materialize_list_operand_expr($term_expr);
   }
 
   return 'do { my @__ls_num_min_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_min\', @__ls_num_min_terms) }';
@@ -5963,7 +5977,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    my $term_expr = _lower_method_value_expr($arg, $deps);
    $term_expr = $trim_action_ir_value->($arg) unless defined($term_expr) && length($term_expr);
    return undef unless defined($term_expr) && length($term_expr);
-   push @lowered_terms, $term_expr;
+   push @lowered_terms, _materialize_list_operand_expr($term_expr);
   }
 
   return 'do { my @__ls_num_max_terms = ('.join(', ', @lowered_terms).'); LinkedSpec::Numeric::evaluate(\'num_max\', @__ls_num_max_terms) }';
@@ -7612,13 +7626,13 @@ sub _normalize_number_receiver_value_chain_expr {
   return undef unless defined($helper) && length($helper);
 
   if ($method =~ /^(?:abs|floor|ceil|round)$/o) {
-   return undef unless @args == 0;
+   return 'undef' unless @args == 0;
   } elsif ($method =~ /^(?:sub|div|mod|eq|ne|gt|ge|lt|le)$/o) {
-   return undef unless @args == 1;
+   return 'undef' unless @args == 1;
   } elsif ($method eq 'clamp') {
-   return undef unless @args == 2;
+   return 'undef' unless @args == 2;
   } elsif ($method =~ /^(?:add|mul|min|max)$/o) {
-   return undef unless @args >= 1;
+   return ($method eq 'min' || $method eq 'max') ? undef : 'undef' unless @args >= 1;
   } else {
    return undef;
   }

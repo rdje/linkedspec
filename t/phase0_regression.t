@@ -15931,6 +15931,18 @@ SPEC
 subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
     plan tests => 79;
 
+    # Independent finite frame; goldens come from accepted frozen fragments.
+    my $numeric_setup = q{my @parts = (1, 3, 11);
+my $raw_name = " Node_fix.txt ";
+my $name = "node";
+my $offset = 2;
+my $factor = 3;
+my $limit = 4;
+my $divisor = 3;
+my $lower_limit = 0;
+my $upper_limit = 10;
+my ($total, $scaled, $floor_value, $bucket, $bounded);};
+
     is(
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(array("group_open", [IMATCH]))'), q{no strict 'subs';},
@@ -15979,93 +15991,129 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'length(...) composes inside coalesce(...) and numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, total, num_add(coalesce(length(trim(raw_name)), 0), 2, offset))}),
-        q{$total = do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, 2, $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, total, num_add(coalesce(length(trim(raw_name)), 0), 2, offset))}), $numeric_setup,
+        ),
+        q#{"value":16,"warnings":[]}#,
         'assign helper accepts num_add(...) over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(length(trim(raw_name)), 2, offset))}),
-        q{return do { my @__ls_num_add_terms = (do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }, 2, $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(length(trim(raw_name)), 2, offset))}), $numeric_setup,
+        ),
+        q#{"value":16,"warnings":[]}#,
         'return(payload) accepts num_add(...) with nested scalar helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_sub(num_add(count(parts), offset), 1))}),
-        q{return do { my $__ls_num_sub_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_sub_rhs = 1; LinkedSpec::Numeric::evaluate('num_sub', $__ls_num_sub_lhs, $__ls_num_sub_rhs) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_sub(num_add(count(parts), offset), 1))}), $numeric_setup,
+        ),
+        q#{"value":4,"warnings":[]}#,
         'return(payload) accepts num_sub(...) nested around num_add(...) reducers'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_add(coalesce(length(trim(name)), 0), offset), 3)}),
-        q{(do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_add(coalesce(length(trim(name)), 0), offset), 3)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_add(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_sub(num_add(count(parts), offset), 1), 4)}),
-        q{(do { my $__ls_num_sub_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_sub_rhs = 1; LinkedSpec::Numeric::evaluate('num_sub', $__ls_num_sub_lhs, $__ls_num_sub_rhs) } == 4)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_sub(num_add(count(parts), offset), 1), 4)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_sub(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, scaled, num_mul(coalesce(length(trim(raw_name)), 0), 2, factor))}),
-        q{$scaled = do { my @__ls_num_mul_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, 2, $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, scaled, num_mul(coalesce(length(trim(raw_name)), 0), 2, factor))}), $numeric_setup,
+        ),
+        q#{"value":72,"warnings":[]}#,
         'assign helper accepts num_mul(...) over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_mul(length(trim(raw_name)), 2, factor))}),
-        q{return do { my @__ls_num_mul_terms = (do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }, 2, $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_mul(length(trim(raw_name)), 2, factor))}), $numeric_setup,
+        ),
+        q#{"value":72,"warnings":[]}#,
         'return(payload) accepts num_mul(...) with nested scalar helpers'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_div(num_mul(count(parts), factor), 2))}),
-        q{return do { my $__ls_num_div_lhs = do { my @__ls_num_mul_terms = (scalar(@parts), $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) }; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_div(num_mul(count(parts), factor), 2))}), $numeric_setup,
+        ),
+        q#{"value":4.5,"warnings":[]}#,
         'return(payload) accepts num_div(...) nested around num_mul(...) reducers'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_mul(coalesce(length(trim(name)), 0), factor), 3)}),
-        q{(do { my @__ls_num_mul_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_mul(coalesce(length(trim(name)), 0), factor), 3)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_mul(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_div(num_mul(count(parts), factor), 2), 3)}),
-        q{(do { my $__ls_num_div_lhs = do { my @__ls_num_mul_terms = (scalar(@parts), $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) }; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) } == 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_div(num_mul(count(parts), factor), 2), 3)}), $numeric_setup,
+        ),
+        q#{"value":"","warnings":[]}#,
         'num_div(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, floor_value, num_min(coalesce(length(trim(raw_name)), 0), limit, 3)))}),
-        q{$floor_value = do { my @__ls_num_min_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $limit, 3); LinkedSpec::Numeric::evaluate('num_min', @__ls_num_min_terms) })},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, floor_value, num_min(coalesce(length(trim(raw_name)), 0), limit, 3))}), $numeric_setup,
+        ),
+        q#{"value":3,"warnings":[]}#,
         'assign helper accepts num_min(...) over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_max(num_add(count(parts), offset), 2, limit))}),
-        q{return do { my @__ls_num_max_terms = (do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }, 2, $limit); LinkedSpec::Numeric::evaluate('num_max', @__ls_num_max_terms) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_max(num_add(count(parts), offset), 2, limit))}), $numeric_setup,
+        ),
+        q#{"value":5,"warnings":[]}#,
         'return(payload) accepts num_max(...) nested around arithmetic reducers'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_max(coalesce(length(trim(name)), 0), limit, 2), 3)}),
-        q{(do { my @__ls_num_max_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, $limit, 2); LinkedSpec::Numeric::evaluate('num_max', @__ls_num_max_terms) } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_max(coalesce(length(trim(name)), 0), limit, 2), 3)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_max(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_min(num_add(count(parts), offset), limit, 10), 4)}),
-        q{(do { my @__ls_num_min_terms = (do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }, $limit, 10); LinkedSpec::Numeric::evaluate('num_min', @__ls_num_min_terms) } == 4)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_min(num_add(count(parts), offset), limit, 10), 4)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_min(...) composes inside numeric flow comparisons'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, bucket, num_mod(num_add(count(parts), offset), 3))}),
-        q{$bucket = do { my $__ls_num_mod_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_mod_rhs = 3; LinkedSpec::Numeric::evaluate('num_mod', $__ls_num_mod_lhs, $__ls_num_mod_rhs) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, bucket, num_mod(num_add(count(parts), offset), 3))}), $numeric_setup,
+        ),
+        q#{"value":2,"warnings":[]}#,
         'assign helper accepts num_mod(...) over integer-like arithmetic expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_mod(num_add(count(parts), offset), divisor))}),
-        q{return do { my $__ls_num_mod_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_mod_rhs = $divisor; LinkedSpec::Numeric::evaluate('num_mod', $__ls_num_mod_lhs, $__ls_num_mod_rhs) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_mod(num_add(count(parts), offset), divisor))}), $numeric_setup,
+        ),
+        q#{"value":2,"warnings":[]}#,
         'return(payload) accepts num_mod(...) nested around integer-like arithmetic reducers'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_mod(num_add(count(parts), offset), divisor), 1)}),
-        q{(do { my $__ls_num_mod_lhs = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_mod_rhs = $divisor; LinkedSpec::Numeric::evaluate('num_mod', $__ls_num_mod_lhs, $__ls_num_mod_rhs) } == 1)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_mod(num_add(count(parts), offset), divisor), 1)}), $numeric_setup,
+        ),
+        q#{"value":"","warnings":[]}#,
         'num_mod(...) composes inside numeric flow comparisons over integer-like values'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, bounded, num_clamp(num_add(count(parts), offset), lower_limit, 10))}),
-        q{$bounded = do { my $__ls_num_clamp_value = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_clamp_lower = $lower_limit; my $__ls_num_clamp_upper = 10; LinkedSpec::Numeric::evaluate('num_clamp', $__ls_num_clamp_value, $__ls_num_clamp_lower, $__ls_num_clamp_upper) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, bounded, num_clamp(num_add(count(parts), offset), lower_limit, 10))}), $numeric_setup,
+        ),
+        q#{"value":5,"warnings":[]}#,
         'assign helper accepts num_clamp(...) over nested numeric compositions'
     );
     is(
@@ -16074,8 +16122,10 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'return(payload) accepts num_clamp(...) around normalized scalar arithmetic'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_clamp(num_add(count(parts), offset), lower_limit, upper_limit), 5)}),
-        q{(do { my $__ls_num_clamp_value = do { my @__ls_num_add_terms = (scalar(@parts), $offset); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; my $__ls_num_clamp_lower = $lower_limit; my $__ls_num_clamp_upper = $upper_limit; LinkedSpec::Numeric::evaluate('num_clamp', $__ls_num_clamp_value, $__ls_num_clamp_lower, $__ls_num_clamp_upper) } == 5)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_eq(num_clamp(num_add(count(parts), offset), lower_limit, upper_limit), 5)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_clamp(...) composes inside numeric flow comparisons'
     );
     is(
@@ -16084,13 +16134,17 @@ subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_
         'num_floor(...) lowers nested numeric subtraction into a parser-oriented floor expression'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(num_ceil(num_div(num_mul(count(parts), factor), 2)))}),
-        q{return do { my $__ls_num_ceil_value = do { my $__ls_num_div_lhs = do { my @__ls_num_mul_terms = (scalar(@parts), $factor); LinkedSpec::Numeric::evaluate('num_mul', @__ls_num_mul_terms) }; my $__ls_num_div_rhs = 2; LinkedSpec::Numeric::evaluate('num_div', $__ls_num_div_lhs, $__ls_num_div_rhs) }; LinkedSpec::Numeric::evaluate('num_ceil', $__ls_num_ceil_value) }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(num_ceil(num_div(num_mul(count(parts), factor), 2)))}), $numeric_setup,
+        ),
+        q#{"value":5,"warnings":[]}#,
         'return(payload) accepts num_ceil(...) nested around reducer arithmetic'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_round(num_add(coalesce(length(trim(name)), 0), 0.5)), 3)}),
-        q{(do { my $__ls_num_round_value = do { my @__ls_num_add_terms = (do { my $__ls_coalesce = do { my $__ls_length = do { my $__ls_trim = $name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_coalesce) ? $__ls_coalesce : 0 }, 0.5); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }; LinkedSpec::Numeric::evaluate('num_round', $__ls_num_round_value) } > 3)},
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(num_round(num_add(coalesce(length(trim(name)), 0), 0.5)), 3)}), $numeric_setup,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'num_round(...) composes inside numeric flow comparisons over normalized scalar expressions'
     );
     is(
