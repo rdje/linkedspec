@@ -230,18 +230,72 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Portable verification:37 chunks/3 cold aliases/1171950805 exact bytes/full modes; five actual pre-root-guard faults, one metadata-only root RED and final-helper cold replay. Recovered inputs feed actual maintained readers before verified backup deletion/residue0. Whole third10540/images10543 and all earlier epochs survive. Current publish_portable.py, prospective physical-size checks and exact staged Git/canonical receipt govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.9`
-  Status: `pending` / P2 defect owned
+  Status: `done` / activation49ce3fb
   Goal: Execute deferred sorted/take aggregate pipelines.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.7`
-  Reproduce/impact: items.sorted().take(2).sum() yields4 for [3,1,8] outside; deferred raises unknown_helper:sorted. Source/error: type-aggregate-codeblocks/inspection.json.gz.
-  Schedule: Next after7, before inventory1. Fix supported sorted/take contracts with arity/effect/kind/terminal controls and worked book examples.
+  Reproduce/impact: items.sorted().take(2).sum() yields4 for [3,1,8] outside; deferred raises unknown_helper:sorted.
+  Scope/custody: docs/checkpoints/type-array-pipelines/; whole accepted7 claim/10608 physical/3 logical/full modes/10611 Git images and actual clean readonly0 precede changes.
+  Verification tier: `canonical`
+  Focused checks: Public descriptor/Get/dump/fresh routes; lexical sorting, take default/count/arity/kind/effects/copy/chain boundaries; aggregate/scalar/callable direct consumers; book/Knowledge/doctrines.
+  Canonical trigger: Public deferred helper availability and terminal composition admission; exact staged canonical receipt required.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.9.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Accepted deferred failures and ordinary healthy controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Toolbox mechanism and public contracts before owner inspection.
+  - [x] **FIX** — Sorted/take availability and canonical fluent-argument validation.
+  - [x] **ADDRESSED (verified)** — Values/arity/kind/effects/copy plus distinguishing source faults.
+  - [x] **NO REGRESSION** — Permanent tests/direct consumers/canonical receipt.
+  - [x] **LOCKSTEP** — Worked book, canonical fact and clean handoff; no complete inventory admission.
+
+  Verified scope:85 fixed values/41 actual accepted RED/44 controls; six retained pre-argument-guard source faults plus one final guard fault. Final14/1949 TAP/history650/scanner pass.85 new permanent/one advanced old expectation/75 malformed assertions. First14/1948 failure retains only the old intentional unknown sorted expectation; no other failure is discarded. Book89/3/anchor RED is rerun on final docs/source before publication.
+  Custody/admission: Whole accepted7 physical10608/logical3/images10611/full modes/actual clean readonly0 survives at real49ce. All rejected fixture/instrument/metadata epochs stay retained; closed publication/three artifact denials/actual validator fault and exact staged canonical receipt govern landing. No complete inventory/backend or kind13/95 admission.
+  Reporting admission: Whole first10716 unpublished claim/publication/10719 source images/full modes/actual source-readonly0 survive before correcting its console6 versus structured7. Final console derives fields from the reviewed result; final artifact4 controls and publication3 bind the actual publisher. Earlier artifact2/3 epochs and whole second publication remain frozen; a stale artifact2 task reference was corrected before canonical admission. Runtime/test/book epochs stay unchanged.
+  Commit subject: `TYPE-REFERENCE-BOOK.1.2.9 - execute deferred sorted take pipelines`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.13`
+  Status: `pending` / P1 defect owned
+  Goal: Preserve numeric kinds through lexical sorting and container copies.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.9`
+  Reproduce/impact: Actual ordinary/deferred sorted scalars retain IOK+POK; Storable cloning drops IOK and emits strings. Selected numeric indexes reject array writes. kind-investigation2.json.gz retains16 native/fresh rows and literal controls.
+  Schedule: Next after9, before10. Audit pure-sort/copy kind authority, fix source preservation and cloning, and verify flags, serialized kinds, public numeric indexes and direct consumers. Existing reducer95 stays separately owned.
+  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
   Planned tier: `canonical`
-  Claim verification: none: Intake only; bind actual producer/inputs before repair measurement.
+  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.10`
+  Status: `pending` / P2 defect owned
+  Goal: Execute deferred count/first array receiver helpers.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.13`
+  Reproduce/impact: Final9 separately confirms ordinary count2/first1 and deferred unknown_helper:count/first after sorted/take succeeds. followup-confirmation.json.gz and its full context retain all four actual routes; the original baseline stopped at sorted.
+  Schedule: After13, before11/inventory. Fix existing count/first forms with shape/empty/kind/terminal/effect controls.
+  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.11`
+  Status: `pending` / P2 defect owned
+  Goal: Repair registered sorted receiver pipelines and ordinary length continuation.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.10`
+  Reproduce/impact: Registered fn select_items marks sorted unresolved, returning[] ordinarily and user_function_body_unsupported from a codeblock. Ordinary sorted().take(2).length() stays raw and calls an undefined host sorted; deferred length works. candidate1/inspection retain sources.
+  Schedule: After10, before12/inventory. Use public lowering to identify both bounded owners; split at clean activation if necessary.
+  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.12`
+  Status: `pending` / P2 defect owned
+  Goal: Execute typed indexed writes inside deferred codeblocks.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.11`
+  Reproduce/impact: chosen[0]="changed" in a callable body raises unsupported_codeblock_actionir:assign_nested_access; ordinary caller-side indexed writes succeed. candidate2 retains the typed failures.
+  Schedule: After11, before inventory. Fix the typed write family with key validation, copy/alias/caller-slot/effect/malformed-record controls.
+  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `pending`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.9`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
@@ -330,13 +384,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `done` | Scalar numeric dispatch/snapshots;6/7 next. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `done` | Quiet generated drop, splices/key snapshots;7 next. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `done` | Bounded availability/portable evidence; owned pipeline9 next. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.9` | `pending` | Owned deferred sorted/take pipeline after7. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
-| 9 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 10 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
-| 11 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 12 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.9` | `done` | Callable sorted/take; bounded proof/typed argument guard; kind13 next. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.13` | `pending` | P1 sorted/copy scalar-kind repair next after9. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.10` | `pending` | Deferred count/first after13. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.11` | `pending` | Registered sorted/ordinary length after10. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.12` | `pending` | Deferred indexed writes before inventory. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
+| 13 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
+| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
+| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
+| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
 
 ## Decisions
 
@@ -352,7 +410,7 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-None requiring director input. P1 evaluated-value .1.2.3 is complete; scoped-with .1.2.4 is next from clean Git, then deferred numeric helpers .1.2.5 and generated-drop compiler diagnostic .1.2.6 before enumeration.
+No director input required. Pipeline9 selected proof is complete; exact canonical/normal landing is mandatory. P1 kind13 then10/11/12 precede complete inventory1. No dirty pivot.
 
 ## Verification Log
 

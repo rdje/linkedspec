@@ -22,40 +22,47 @@ answers:
   - "how is the generated mdBook search-index reference compared"
   - "why did checkpoint input snapshots grow recursively"
   - "how do checkpoint chunks restore data and reject nested Git roots"
+  - "can Perl sorted and take run inside a deferred codeblock"
+  - "why do sorted numbers become strings after a container copy"
+  - "which task owns deferred count first indexed writes and registered sorted"
+  - "why do malformed fluent arguments leak a Perl array-reference error"
 date: 2026-10-21
-status: bounded Perl value/numeric/drop/aggregate repairs; inventory pending
+status: bounded Perl helpers; sorted-kind13 and inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "TYPE-REFERENCE-BOOK.1.2.3-.7 retain actual source/fault epochs. Aggregate7 binds portable input custody;95/9 remain owned."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-aggregate-codeblocks/publish_portable.py"
+evidence: "Type3-.9 retain exact epochs;9 admits only callable sorted/take. kind13/10/11/12 remain owned."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-array-pipelines/publish.py"
 ---
 
 # Value model and bounded Perl helper execution
 
-Bindings hold scalar/array/harray/codeblock. Generic with passes false; deferred
-bodies read caller slots. Constructors/keys/arguments retain evaluated values;
-updates use copy-on-write. Scoped with: [[perl-generic-final-codeblock-normalization]].
+Bindings hold scalar/array/harray/codeblock; deferred bodies read caller slots.
+Constructors, keys and arguments retain evaluated values; updates use copy-on-write.
+Scoped with: [[perl-generic-final-codeblock-normalization]].
 
-Scalar and aggregate Numeric dispatch differ. Shape checks precede effects;
-comparisons/reducers terminate. Complete undef prevents emitted fallthrough.
-Aggregates take one array, receiver reducers no arguments. Explicit min/max
-operands evaluate before rejection. Perl checks every term with legacy decimal
-rules: empty sum0, othersundef; Rust filtering differs.
+Scalar/aggregate Numeric policies differ. Shape checks precede effects;
+comparisons/reducers terminate. Aggregates take one array; receiver reducers no
+operands. Explicit scalar min/max evaluates operands before rejection. Legacy
+Perl checks every decimal term: empty sum0, othersundef; Rust filtering differs.
+[[perl-numeric-reducer-string-result-kinds]] owns reducer95. Boolean35,
+Unicode20/constructor94 remain separate.
 
-[[perl-numeric-reducer-string-result-kinds]] owns selected-string defect95:
-numeric JSON can hide string-kind index rejection. Boolean35/Unicode20/
-constructor94 stay separate. Deferred sorted/take raises unknown_helper:sorted,
-owned next9; availability admits no whole family/backend.
+Perl callable sorted/take now execute free/receiver forms. Sort is lexical;
+take defaults1, integer spelling only, negative/invalid0, oversized counts clamp.
+Non-arrays yield[] and skip count; sources stay independent.13 owns sorted/copy
+kinds next: comparison adds POK; Storable
+clone drops numeric flags. Actual array-index writes reject.10 owns deferred
+count/first,11 registered sorted/ordinary length,12 deferred indexed writes.
+Serialized fluent args require arrays before preflight.
+No family/backend admission.
 
-drop_keys materializes private keys/splices from copied harrays, remains quiet
-under FATAL warnings and retains source/null diagnostics. Prior numeric/drop
-epochs survive. The dated c053c9dcf inventory included substr/typed receivers;
-inventory1 follows7/9, then mapping/layout. Rejected preparations stay retained.
+drop_keys copies keys/splices, stays FATAL-warning quiet and retains null
+diagnostics. c053c9dcf inventoried substr/typed receivers; references remain pending.
 
-The paired builds reproduce both measured pages exactly. Their only normalized
-HTML difference is the generated search-index filename. Decoded indexes differ
-only in15 chapter-body whitespace strings; all other fields match. The reader
-verifies these actual payloads before normalizing that single reference. The
-initial strict comparator rejection stays retained. This is a bounded observed
-reflow result, not permission to ignore arbitrary asset or search changes.
+Accepted7 builds reproduce both pages except their search-index reference.
+Decoded indexes differ only in15 body-whitespace strings; other fields match.
+The strict rejection survives. Verify payloads before normalizing that reference;
+this grants no general asset normalization.
 
-Context stopped embedding immutable gzip/chunks. Oversized drafts recover from37 verified32MiB parts into ignored local aliases; exact bytes/modes and nested-repository guards remain checked. Old recursive snapshots stay retained.
+Context hash-gates immutable gzip/chunks without embedding.37 verified32MiB parts
+restore three exact byte/mode aliases with nested-repository guards. Old recursive
+snapshots survive at accepted49ce.

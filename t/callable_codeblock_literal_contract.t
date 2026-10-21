@@ -767,4 +767,28 @@ subtest 'malformed fluent members preserve typed invocation errors and records' 
     }
 };
 
+subtest 'serialized fluent argument fields preserve typed errors and values' => sub {
+    require LinkedSpec::CodeblockRuntime;
+    my $json = JSON::PP->new->canonical;
+    foreach my $method (qw(sorted take sum)) {
+        foreach my $kind (qw(null number string hash missing)) {
+            my $record = parse_expr('{|| return(items.' . $method . '()) }');
+            my $call = $record->{body_ast}{statements}[0]{expr}{args}[0]{calls}[0];
+            if ($kind eq 'missing') { delete $call->{args} }
+            else { $call->{args} = $kind eq 'null' ? undef : $kind eq 'number' ? 1 : $kind eq 'string' ? 'bad' : {} }
+            my $before = $json->encode($record);
+            my $items = [3,1,8];
+            my $error;
+            eval { LinkedSpec::CodeblockRuntime::invoke($record, [], {items => \$items}, 'malformed-args'); 1 }
+                or $error = $@;
+            my $typed = ref($error) eq 'LinkedSpec::CodeblockRuntime::Error';
+            ok($typed, "$method/$kind reports a typed invocation error");
+            is($typed ? $error->{code} : undef, 'invalid_codeblock_body', 'body error code');
+            is($typed ? $error->{detail} : undef, 'fluent arguments must be an array', 'argument error detail');
+            is_deeply($items, [3,1,8], 'caller values remain unchanged');
+            is($json->encode($record), $before, 'record remains unchanged');
+        }
+    }
+};
+
 done_testing();

@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
+
+## 2026-10-21 — TYPE-REFERENCE-BOOK.1.2.9: callable sorted/take
+
+Perl codeblocks execute lexical sorted and integer-prefix take in free/receiver forms, with lazy count evaluation, independent arrays and compatible terminal reducers. Canonical fluent arguments require arrays and preserve typed errors/records/caller values. Final85 values/41 accepted RED/44 controls; six pre-guard faults plus one final guard fault;14/1949 TAP/history650/scanner;85 new permanent/one advanced expectation/75 malformed assertions;book89/3/anchor RED. Exact staged canonical receipt governs landing. Whole accepted7 and all rejected epochs remain recoverable; source-closed publication and actual artifact validator controls bind the result. P1 kind13 and10/11/12 stay owned. See docs/checkpoints/type-array-pipelines/README.md.
+
+Reporting correction preserves the whole first10716-input claim/publication/10719 source images/full modes/actual readonly0; only its console label undercounted six while the structured result listed seven. Final fields derive from the reviewed result, with fresh actual publisher artifact controls and separate publication2 outputs. Runtime/test/book observations remain unchanged.
+
 ## 2026-10-21 — TYPE-REFERENCE-BOOK.1.2.7 — Execute deferred array reducers
 
 Perl callable bodies execute sum/avg/median/range and array min/max through canonical/word calls and terminal receivers. Complete invalid receiver shapes avoid host fallthrough; malformed serialized calls preserve the typed invocation error. The corrected214 population passes212 values/two diagnostics against106 accepted-source failures/108 controls. Six retained aggregate faults plus a final guard-removal fault restore; final14 suites/1948 TAP,201 added permanent cases/3 advanced expectations/15 malformed assertions, book89/3/observed anchor RED and Knowledge pass. Historical650/134/84613241/22 and zero read/write escapes stay unchanged; ordinary Phase0 test source is unchanged. Whole accepted drop10334/full modes/clean readonly0 remains recoverable. Exact staged canonical receipt is required for landing.

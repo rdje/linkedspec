@@ -59,10 +59,60 @@ does not add recursive copying of arbitrary host objects.
 
 ### Current Perl limits
 
-The six numeric aggregate reducers execute inside Perl codeblocks. General array pipelines remain separate: `items.sorted().take(2).sum()` inside a deferred body
-currently raises `unknown_helper` at `sorted`. Prepare the array outside the body and pass it in until that owned pipeline repair is complete.
+The six numeric aggregate reducers and `sorted`/`take` execute inside Perl codeblocks. See the worked [selection examples](#sorting-and-taking-inside-perl-codeblocks).
+Other array helpers have separate availability limits: deferred `.count()` and `.first()` are not yet supported. Registered `fn` receiver pipelines containing `sorted` also remain limited; use the callable forms below.
 Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean arguments passed into a codeblock retain their kind. These separately owned
 repairs remain pending. The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
+
+### Sorting and taking inside Perl codeblocks
+
+`sorted(values)` returns a lexical sorted copy; `values.sorted()` is the receiver form.
+For numbers `[2,10,1]`, lexical order is `[1,10,2]`. This is not numeric sorting.
+`take(values,count)` and `values.take(count)` return a new array containing the first
+`count` elements. Omitting the count selects one element. Neither operation reorders
+or replaces the source binding.
+
+Here are complete action bodies for `Top: /x/` with `I { ... }`. The first returns
+`[4,[3,1,8]]`: the reducer consumes the first two sorted values and the input stays intact.
+
+```text
+items = [3,1,8];
+cb = {|| return(items.sorted().take(2).sum()) };
+return([cb(),items]);
+```
+
+The default count selects `"a"` and returns `["a"]`:
+
+```text
+cb = {|values| return(values.sorted().take()) };
+return(cb(["b","a","c"]));
+```
+
+Changing the selected array leaves the argument intact. This returns
+`[["changed","b"],["a","b","c"]]`:
+
+```text
+items = ["a","b","c"];
+cb = {|values| return(take(values,2)) };
+chosen = cb(items); chosen[0] = "changed";
+return([chosen,items]);
+```
+
+On Perl, an empty or non-array source produces `[]`. A supplied `take` count must
+match the existing integer spelling rule: decimal integers and integer strings
+such as `"2"` work; negative, fractional, null and nonnumeric counts select nothing.
+A count larger than the input returns all its elements. For a non-array source,
+the count expression is skipped. Otherwise source and count run once, in that order.
+These are Perl rules; they do not establish cross-backend count normalization.
+
+`sorted` requires one free-call argument and zero receiver arguments. `take`
+requires one or two free-call arguments and at most one receiver argument. Invalid
+shapes return `undef` before operands run. Malformed serialized fluent argument lists raise
+typed `invalid_codeblock_body` errors and preserve the record and caller values. Array reducers terminate a receiver
+chain: `items.sorted().take(2).sum()` works; adding `.abs()` returns `undef` before
+the receiver or count runs. A separately returned scalar can begin another chain.
+Numeric-looking selected terms retain existing scalar-kind caveats; use numeric
+arithmetic before using a selected term as a numeric write index.
 
 ## Per-rule default accumulator
 

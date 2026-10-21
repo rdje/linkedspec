@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-21 — deferred selection
+
+Perl sorted/take execute in codeblocks; malformed fluent lists fail with typed errors. Proof and kind13 follow-up: docs/checkpoints/type-array-pipelines/.
+
 ## 2026-10-21 — TYPE-REFERENCE-BOOK.1.2.7 — Aggregate dispatch, scalar kinds and source identity
 
 Array reducers keep Perl's legacy all-term decimal/empty/Boolean/selected-term policy, separate from scalar ADR0029. Scalar min/max operands evaluate before kind rejection; zero-argument array receivers terminate. Invalid emitted shapes return complete undef. One preflight skip preserves typed malformed-call errors and caller/record values.

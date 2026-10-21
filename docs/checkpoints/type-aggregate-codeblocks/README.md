@@ -104,3 +104,5 @@ there. Actual maintained readers use recovered bytes before exactly3 verified
 old backups are removed; residue0. Final physical-input and staged Git size
 checks plus exact canonical receipt govern landing. No Git history rewrite,
 capacity increase or outside project storage is required.
+
+Historical at accepted49ce3fb472b01dc6a7987b0038fae22686dee7cd after pipeline9 activation. Complete accepted custody and clean readonly baseline: docs/checkpoints/type-array-pipelines/prior.json.gz. Restore the recorded accepted Git inputs for historical replay.

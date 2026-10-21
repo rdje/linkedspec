@@ -361,6 +361,17 @@ sub _eval_call {
  my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
  return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
+ if ($name eq 'sorted' || $name eq 'take') {
+  return undef unless ($name eq 'sorted' ? @$args == 1 : @$args >= 1 && @$args <= 2);
+  my $value = _eval_expr($args->[0], $ctx);
+  return [] unless ref($value) eq 'ARRAY';
+  return LinkedSpec::BindingRuntime::array_transform($value, '<value>', 'sorted')
+   if $name eq 'sorted';
+  # Like the compiled helper, a non-array source skips the count operand.
+  my $count = @$args == 2 ? _eval_expr($args->[1], $ctx) : 1;
+  return _take_array($value, $count)
+ }
+
  my $aggregate = LinkedSpec::Numeric::array_helper_name($name);
  if (defined($aggregate) && ($aggregate !~ /\Anum_(?:min|max)\z/ || @$args == 1)) {
   return undef unless @$args == 1;
@@ -441,6 +452,15 @@ sub _numeric_receiver_helper_name {
  return LinkedSpec::Numeric::scalar_helper_name($method)
 }
 
+sub _take_array {
+ my ($value, $count) = @_;
+ # Keep the existing Perl selection policy, separate from numeric helpers.
+ $count = 0 unless defined($count) && $count =~ /\A-?\d+\z/;
+ return [] unless $count > 0 && @$value;
+ my $end = $count < @$value ? $count - 1 : $#$value;
+ return [@$value[0 .. $end]]
+}
+
 sub _eval_fluent_chain {
  my ($node, $ctx) = @_;
  my $calls = $node->{calls} || [];
@@ -451,7 +471,11 @@ sub _eval_fluent_chain {
  for (my $index = 0; $index < @$calls; ++$index) {
   next unless ref($calls->[$index]) eq 'HASH';
   my $method = $calls->[$index]{method} // '';
-  my $args = $calls->[$index]{args} || [];
+  my $args = $calls->[$index]{args};
+  _error('invalid_codeblock_body', detail => 'fluent arguments must be an array')
+   unless ref($args) eq 'ARRAY';
+  return undef if $method eq 'sorted' && @$args;
+  return undef if $method eq 'take' && @$args > 1;
   if ($method =~ /\A(?:sum|avg|median|range)\z/) {
    return undef if @$args || $index < $#$calls;
   }
@@ -468,6 +492,21 @@ sub _eval_fluent_chain {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
+  if ($method eq 'sorted') {
+   $value = ref($value) eq 'ARRAY'
+    ? LinkedSpec::BindingRuntime::array_transform($value, '<receiver>', 'sorted') : [];
+   next;
+  }
+  if ($method eq 'take') {
+   if (ref($value) eq 'ARRAY') {
+    my $args = $call->{args} || [];
+    my $count = @$args ? _eval_expr($args->[0], $ctx) : 1;
+    $value = _take_array($value, $count);
+   } else {
+    $value = [];
+   }
+   next;
+  }
   my $aggregate = $method =~ /\A[a-z]+\z/ ? LinkedSpec::Numeric::array_helper_name($method) : undef;
   if (defined($aggregate) && ($method !~ /\A(?:min|max)\z/ || !@{$call->{args} || []})) {
    return undef if @{$call->{args} || []};

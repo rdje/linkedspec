@@ -1129,6 +1129,8 @@ discards the removed element, and a continuation such as `.count()` consumes the
 array-yielding expression-valued block can be the receiver too:
 `{ [3, 1, 2] }.sorted().join_values(",")`.
 
+Perl callable bodies also support `sorted` and `take`, including their receiver forms and reducer continuations. See the [worked sorting and selection examples](values-containers-and-flow-helpers.md#sorting-and-taking-inside-perl-codeblocks) for count rules, copies, evaluation order and remaining callable limits.
+
 ## Hash helpers
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.
