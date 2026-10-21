@@ -1196,20 +1196,20 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 ### `num_round(x)`
 - **Signature**: `num_round(x: numeric)`
 - **Returns**: int
-- **Behavior**: Rounds to nearest integer (half-up).
+- **Behavior**: Rounds to nearest integer, with halves away from zero. For example, `num_round(-2.5)` returns `-3`.
 - **Example**: over `/([\d.]+)/`, `num_round(entry_group(0))` on `3.5` → `[4]`.
 
 ### `num_min(a, b)` / `num_min(arr)`
 - **Signature**: `num_min(a: numeric, b: numeric)` or `num_min(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the smaller of two numbers. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `["1"]` on current Perl (numeric-string result; see below).
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[1]` on the current Perl/JSON route (internal selected-kind limitation below).
 
 ### `num_max(a, b)` / `num_max(arr)`
 - **Signature**: `num_max(a: numeric, b: numeric)` or `num_max(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the larger. Array form: returns the maximum element.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `["8"]` on current Perl (numeric-string result; see below).
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[8]` on the current Perl/JSON route (internal selected-kind limitation below).
 
 ### `num_clamp(x, lo, hi)`
 - **Signature**: `num_clamp(x: numeric, lo: numeric, hi: numeric)`
@@ -1242,13 +1242,18 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `num_median(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Median of array elements after numeric sort. For even-length arrays, returns the average of the two middle elements. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `["3"]` on current Perl (sorted `1,2,3,4,5`; middle element).
+- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `[3]` on the current Perl/JSON route (sorted `1,2,3,4,5`; internal selected-kind limitation below).
 
 Current Perl type limitation: array-form `num_min`/`num_max` and odd-length
-`num_median` preserve the selected element's string kind when the array contains
-numeric text, including capture groups. Even-length median, sum, average and range
-perform arithmetic and return numbers. `SESSION-STARTUP-READING.95` owns correction
-of these numeric result kinds; the scalar two-argument min/max forms return numbers.
+`num_median` can retain a selected numeric string's internal kind. Current
+Perl5.34.1/JSON::PP4.06 renders the examples above as numbers, including when
+replaying the recorded sources with the older owned Perl library. The September
+quoted-JSON observations remain historical; their original process/instrument
+is not reconstructed. JSON alone is insufficient: these selected results still
+fail as array-write indexes with `nested_write_kind_conflict`, while scalar
+min/add controls work. `SESSION-STARTUP-READING.95` owns the internal-kind repair.
+See the [worked numeric-index conversion](../dsl/values-containers-and-flow-helpers.md#aggregate-numeric-helpers-in-codeblocks)
+for an arithmetic workaround. No result-kind fix is claimed by callback availability.
 
 ### `num_range(arr)`
 - **Signature**: `num_range(arr: array)`

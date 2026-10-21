@@ -28,6 +28,57 @@ sub scalar_helper_name {
  return undef
 }
 
+# Array reducers retain the existing Perl aggregate policy, independently of
+# CONTRACT_ID: every term must match the legacy decimal spelling. In particular,
+# this does not add scalar-number finite/boolean rules or normalize selected
+# original min/max/odd-median terms (the separate result-kind repair owns those).
+sub array_helper_name {
+ my ($name) = @_;
+ return undef unless defined($name) && !ref($name);
+ my $helper = $name =~ /\Anum_/ ? $name : 'num_'.$name;
+ return $helper if $helper =~ /\Anum_(?:sum|avg|median|range|min|max)\z/;
+ return undef
+}
+
+sub evaluate_array {
+ my ($helper, $source) = @_;
+ $helper = array_helper_name($helper);
+ return undef unless defined($helper) && ref($source) eq 'ARRAY';
+ foreach my $term (@$source) {
+  return undef unless defined($term) && $term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/;
+ }
+ if ($helper eq 'num_sum' || $helper eq 'num_avg') {
+  my $total = 0;
+  $total += $_ for @$source;
+  return $total if $helper eq 'num_sum';
+  return @$source ? $total / @$source : undef
+ }
+ return undef unless @$source;
+ if ($helper eq 'num_median') {
+  my @terms = sort { $a <=> $b } @$source;
+  my $middle = int(@terms / 2);
+  return @terms % 2 ? $terms[$middle] : ($terms[$middle - 1] + $terms[$middle]) / 2
+ }
+ if ($helper eq 'num_min' || $helper eq 'num_max') {
+  my $selected;
+  foreach my $term (@$source) {
+   $selected = $term if !defined($selected)
+    || ($helper eq 'num_min' ? $term < $selected : $term > $selected);
+  }
+  return $selected
+ }
+ my ($minimum, $maximum, $seen);
+ foreach my $term (@$source) {
+  if ($seen) {
+   $minimum = $term if $term < $minimum;
+   $maximum = $term if $term > $maximum;
+  } else {
+   ($minimum, $maximum, $seen) = ($term, $term, 1);
+  }
+ }
+ return $maximum - $minimum
+}
+
 sub arity_is_valid {
  my ($helper, $argc) = @_;
  return 0 unless defined($helper);

@@ -14,32 +14,23 @@ items
 meta
 ```
 
-These are DSL spellings. They are not Perl sigils. Public examples and migrated specs use the canonical
-forms above.
+These are DSL spellings. They are not Perl sigils. Public examples and migrated specs use the canonical forms above.
 
-`items` reads the array/list value currently bound to `items`, and `meta` reads the harray value currently bound
-to `meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
-payload containing the string `"items"`, and `hash("key", value)` constructs a key/value hash. Prefer direct
-shape literals (`["literal"]`, `{ "key" : value }`, `[]`, `{}`) as the terse constructor spellings in new
+`items` reads the array/list value currently bound to `items`, and `meta` reads the harray value currently bound to `meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
+payload containing the string `"items"`, and `hash("key", value)` constructs a key/value hash. Prefer direct shape literals (`["literal"]`, `{ "key" : value }`, `[]`, `{}`) as the terse constructor spellings in new
 examples.
 
-Multi-argument constructors read values inside user functions too: `array(value, value)`
-and `[value, value]` produce the same pair. See the
-[complete function example](value-container-flow-helper-reference.md#array-constructors-inside-functions),
-including a local assignment separated from its return by a newline.
+Multi-argument constructors read values inside user functions too: `array(value, value)` and `[value, value]` produce the same pair. See the
+[complete function example](value-container-flow-helper-reference.md#array-constructors-inside-functions), including a local assignment separated from its return by a newline.
 
 ## Value kinds, numeric notation and callable results
 
-One working name holds one current value: scalar, array, harray (hash), or codeblock.
-Assigning a different kind replaces that binding. Integer and real notation describe
-numeric values, rather than separate variable namespaces. Strings, numbers, booleans
-and null (`undef`) remain observably different: numeric helpers accept finite numbers
-and their contracted decimal strings, reject boolean/null, and return numeric `1`/`0`
-for comparisons. Logical helpers return booleans. Scalar text normalization converts
+One working name holds one current value: scalar, array, harray (hash), or codeblock. Assigning a different kind replaces that binding. Integer and real notation describe
+numeric values, rather than separate variable namespaces. Strings, numbers, booleans and null (`undef`) remain observably different: numeric helpers accept finite numbers
+and their contracted decimal strings, reject boolean/null, and return numeric `1`/`0` for comparisons. Logical helpers return booleans. Scalar text normalization converts
 false to `"0"`, so `flag = false; return(flag.cat("q"))` returns `"0q"`.
 
-An eager expression block executes now; a deferred `{|parameters| ... }` codeblock
-executes when called and reads the caller's current working bindings. Receiver
+An eager expression block executes now; a deferred `{|parameters| ... }` codeblock executes when called and reads the caller's current working bindings. Receiver
 operations apply to the yielded value. For example, this returns `["a", "b"]`:
 
 ```text
@@ -47,39 +38,31 @@ Top: /x/
  I { cb = {|| return(["b","a"]) }; return(cb().sorted()) }
 ```
 
-This demonstrates an array operation on the call result. It supplies no separate
-codeblock method table or guarantee that every operation accepts every kind.
+This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind.
 
 ### Evaluated values and later side effects
 
-Perl retains each evaluated array element, hash key/value and callable argument
-before the next operand executes. A later assignment or mutation updates the
-working binding; earlier values retain what was read. This returns
-`["before","inside","inside"]`:
+Perl retains each evaluated array element, hash key/value and callable argument before the next operand executes. A later assignment or mutation updates the
+working binding; earlier values retain what was read. This returns `["before","inside","inside"]`:
 
 ```text
 Top: /x/
  I { marker = "before"; change = {|| marker = "inside"; return(marker) }; return([marker, change(), marker]) }
 ```
 
-The same rule covers `array(...)`, `hash(...)`, dynamic hash keys, eager blocks
-and assignment expressions. Explicit `flat`, `flat_array` and `flat_hash` splices
+The same rule covers `array(...)`, `hash(...)`, dynamic hash keys, eager blocks and assignment expressions. Explicit `flat`, `flat_array` and `flat_hash` splices
 keep their list behavior; ordinary container values stay nested.
 
-Array mutation creates an updated binding. For `items = ["old"]` and a callback
-that runs `push(items,"new")`, `[items, change(), items]` retains `["old"]` first
-and the updated `["old","new"]` last. A separately saved earlier binding also
-stays old. This follows the existing mutation contract; the evaluation boundary
+Array mutation creates an updated binding. For `items = ["old"]` and a callback that runs `push(items,"new")`, `[items, change(), items]` retains `["old"]` first
+and the updated `["old","new"]` last. A separately saved earlier binding also stays old. This follows the existing mutation contract; the evaluation boundary
 does not add recursive copying of arbitrary host objects.
 
 ### Current Perl limits
 
-Deferred numeric aggregate reducers, including array-form min/max and array
-reducer methods, still raise the typed `unknown_helper` diagnostic in Perl.
-Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean
-arguments passed into a codeblock retain their kind. These separately owned
-repairs remain pending. The observations establish no new cross-backend result,
-and complete per-operation reference coverage remains in progress.
+The six numeric aggregate reducers execute inside Perl codeblocks. General array pipelines remain separate: `items.sorted().take(2).sum()` inside a deferred body
+currently raises `unknown_helper` at `sorted`. Prepare the array outside the body and pass it in until that owned pipeline repair is complete.
+Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean arguments passed into a codeblock retain their kind. These separately owned
+repairs remain pending. The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
 
 ## Per-rule default accumulator
 
@@ -114,8 +97,7 @@ Most helpers do not guess the current rule array. They can still read or mutate 
 
 ## Assignment
 
-Use `set(target, source)` or `target = source` to replace a target value. New examples
-should prefer the operator form when it is clear at a glance.
+Use `set(target, source)` or `target = source` to replace a target value. New examples should prefer the operator form when it is clear at a glance.
 
 Examples:
 
@@ -125,14 +107,10 @@ items = [];
 meta = { "kind" : "token", "line" : entry_line() };
 ```
 
-Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and assignment
-forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar and yield it. Direct shape
-assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and
-`meta = { key : value }` bind the array or hash as the current typed value of the bare target and yield that
-stored value. Mutation assignments also compose as values: `items += value` mutates the named array and yields the
-updated array snapshot, while `meta[key] = value` mutates the typed root selected by the evaluated key and yields
-the updated root snapshot. On all five backends, a string selects harray and a nonnegative integer selects array.
-These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
+Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and assignment forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar and yield it. Direct shape
+assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and `meta = { key : value }` bind the array or hash as the current typed value of the bare target and yield that
+stored value. Mutation assignments also compose as values: `items += value` mutates the named array and yields the updated array snapshot, while `meta[key] = value` mutates the typed root selected by the evaluated key and yields
+the updated root snapshot. On all five backends, a string selects harray and a nonnegative integer selects array. These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
 receiver chains.
 
 Nested value-path assignment uses the same direct bracket path on the left side:
@@ -143,18 +121,13 @@ payload["items"][0]["name"] = "new";
 payload["items"][1] = { "name" : "tail" };
 ```
 
-Nested writes mutate the typed array/harray value held by the bare variable. On all five backends, every bracket
-is evaluated as an ordinary value expression: a string selects an harray and a nonnegative integer selects a
-zero-based array. An absent root is created from the first selector, and a missing intermediate is created from
-the next selector. Existing null or another wrong kind is never coerced. Arrays remain dense: an existing index
-may be replaced and index `length` may append, while a larger gap fails. Segments evaluate once left-to-right,
-then the RHS once; isolated structural building begins afterward. Success commits and returns a detached updated
-root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path
-commit. Reads leave missing and null paths unchanged; see the executed
+Nested writes mutate the typed array/harray value held by the bare variable. On all five backends, every bracket is evaluated as an ordinary value expression: a string selects an harray and a nonnegative integer selects a
+zero-based array. An absent root is created from the first selector, and a missing intermediate is created from the next selector. Existing null or another wrong kind is never coerced. Arrays remain dense: an existing index
+may be replaced and index `length` may append, while a larger gap fails. Segments evaluate once left-to-right, then the RHS once; isolated structural building begins afterward. Success commits and returns a detached updated
+root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path commit. Reads leave missing and null paths unchanged; see the executed
 [read-purity examples and Perl evaluation details](value-container-flow-helper-reference.md#read-purity).
 
-This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path
-through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact
+This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact
 portable capability row, `.19.8` supplies exact six-runtime recurrence, and `.19.9` closes public no-drift.
 
 ### Nested-write creation, dense arrays, conflicts, and evaluation order
@@ -165,8 +138,7 @@ An absent root and all unambiguous intermediates can be created by one write:
 document["sections"][0]["title"] = "Intro";
 ```
 
-The result is `{ "sections" : [{ "title" : "Intro" }] }`. The string segment creates an harray, the integer
-segment creates a dense array, and the final string creates the leaf field. A write to an existing array may
+The result is `{ "sections" : [{ "title" : "Intro" }] }`. The string segment creates an harray, the integer segment creates a dense array, and the final string creates the leaf field. A write to an existing array may
 replace an element or append exactly at its current length:
 
 ```text
@@ -174,8 +146,7 @@ document = ["a"];
 document[1] = "b";
 ```
 
-That produces `["a", "b"]`. Starting again from `["a"]`, `document[2] = "gap"` fails with
-`nested_write_array_gap` and leaves `document` as `["a"]`; LinkedSpec never invents an element at index `1`.
+That produces `["a", "b"]`. Starting again from `["a"]`, `document[2] = "gap"` fails with `nested_write_array_gap` and leaves `document` as `["a"]`; LinkedSpec never invents an element at index `1`.
 Likewise, this fails with `nested_write_kind_conflict` and preserves the original scalar:
 
 ```text
@@ -183,10 +154,8 @@ document = { "item" : "scalar" };
 document["item"]["name"] = "new";
 ```
 
-For `document[first_segment()][second_segment()] = rhs_value()`, the two segment expressions run exactly once in
-left-to-right order, then the RHS runs exactly once. Only then does the runtime snapshot the target and validate
-the structure on an isolated copy. Completed expression side effects remain ordinary effects if validation later
-fails, but no partial container path is published. A successful assignment publishes once and yields a detached
+For `document[first_segment()][second_segment()] = rhs_value()`, the two segment expressions run exactly once in left-to-right order, then the RHS runs exactly once. Only then does the runtime snapshot the target and validate
+the structure on an isolated copy. Completed expression side effects remain ordinary effects if validation later fails, but no partial container path is published. A successful assignment publishes once and yields a detached
 updated-root value: later mutation of that result cannot alias the stored `document`.
 
 ## Pushing values
@@ -220,25 +189,18 @@ return(array("?node:", name, copy(children)));
 return({ "kind" : "token", "text" : entry_text(), "tags" : [tag, true] });
 ```
 
-`return_undef()` remains supported and lowers to an undefined return in the Perl
-reference backend. The retired spellings `return_a`, `return_m`, `return_ma`,
-`return_imatch`, `return_im`, and `return_array` are not current return helpers;
-the Perl helper rewriter leaves the demonstrated calls unchanged. Use the
+`return_undef()` remains supported and lowers to an undefined return in the Perl reference backend. The retired spellings `return_a`, `return_m`, `return_ma`,
+`return_imatch`, `return_im`, and `return_array` are not current return helpers; the Perl helper rewriter leaves the demonstrated calls unchanged. Use the
 generalized `return(...)` form for new structured payloads.
 
-When migrating an older recipe, also remove retired aggregate selectors. For
-example, `return(array_copy(array(Top)))` is rejected with
-`aggregate_selector_removed`. The selector-free constructor/copy expression
-`return(array(copy(Top)))` lowers to `return [[@Top]]` in the Perl reference
-backend. These examples describe the named forms; they are not an exhaustive
-inventory of return or container operations.
+When migrating an older recipe, also remove retired aggregate selectors. For example, `return(array_copy(array(Top)))` is rejected with
+`aggregate_selector_removed`. The selector-free constructor/copy expression `return(array(copy(Top)))` lowers to `return [[@Top]]` in the Perl reference
+backend. These examples describe the named forms; they are not an exhaustive inventory of return or container operations.
 
 ### Migrating the retired tagged returns
 
-The old `return_m(L)` / `return_ma(L)` callbacks spliced capture groups into
-their outer array. Use `flat_array(entry_groups())` to retain that shape.
-`entry_groups()` alone instead creates one nested array. Here `L` denotes the
-old rule label; substitute the actual name and quote the fixed tag:
+The old `return_m(L)` / `return_ma(L)` callbacks spliced capture groups into their outer array. Use `flat_array(entry_groups())` to retain that shape.
+`entry_groups()` alone instead creates one nested array. Here `L` denotes the old rule label; substitute the actual name and quote the fixed tag:
 
 | Old spelling | Current value or snapshot recipe |
 | --- | --- |
@@ -249,13 +211,10 @@ old rule label; substitute the actual name and quote the fixed tag:
 | `return_imatch("tag")` / `return_im("tag")` | `return(array("tag", entry_text()))` |
 | `return_array(L, "tag", payload)` | `return(array("tag", payload))` |
 
-The old array helper's scope argument was optional. In
-`return_array("tag", payload)`, the first argument is the tag and must remain.
-Do not mechanically discard every leading argument or treat a bare current
-identifier as an automatically quoted string.
+The old array helper's scope argument was optional. In `return_array("tag", payload)`, the first argument is the tag and must remain.
+Do not mechanically discard every leading argument or treat a bare current identifier as an automatically quoted string.
 
-This complete example supplies a matched child entry, so its capture list is
-nonempty. With input `abc`, it returns `["?Top:","ab","c",["seed"]]`:
+This complete example supplies a matched child entry, so its capture list is nonempty. With input `abc`, it returns `["?Top:","ab","c",["seed"]]`:
 
 ```text
 Root::
@@ -266,24 +225,17 @@ Top: /(ab)(c)/
  I { set(Top, ["seed"]); return(array("?Top:", flat_array(entry_groups()), copy(Top))) }
 ```
 
-Using `entry_groups()` without flattening instead returns
-`["?Top:",["ab","c"],["seed"]]`. `entry_text()` reads the whole incoming
-match (`"abc"`); `entry_group(0)` reads only its first capture (`"ab"`). With
-no capture groups, the flat m form contains just the tag and ma still includes
+Using `entry_groups()` without flattening instead returns `["?Top:",["ab","c"],["seed"]]`. `entry_text()` reads the whole incoming
+match (`"abc"`); `entry_group(0)` reads only its first capture (`"ab"`). With no capture groups, the flat m form contains just the tag and ma still includes
 the accumulator array.
 
-`copy(L)` gives a snapshot value. The old a/ma callbacks retained a live Perl
-array reference that could reflect subsequent mutation. These recipes preserve
-the demonstrated payload at return time; they do not promise reference identity,
-deep copying, or arbitrary old runtime behavior. Verify those requirements in
+`copy(L)` gives a snapshot value. The old a/ma callbacks retained a live Perl array reference that could reflect subsequent mutation. These recipes preserve
+the demonstrated payload at return time; they do not promise reference identity, deep copying, or arbitrary old runtime behavior. Verify those requirements in
 the calling application before migrating an identity-sensitive use.
 
-Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use
-them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
-rules: a bare element such as `tag` reads scalar working variable `tag`, and a direct hash key is any accepted
-value expression before the top-level `:`. A bare hash key such as `{ field : value }` reads scalar `field` as
-the runtime key; a computed form such as `{ cat(prefix, suffix) : value }` uses the helper result as the key.
-Quote fixed object field names:
+Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
+rules: a bare element such as `tag` reads scalar working variable `tag`, and a direct hash key is any accepted value expression before the top-level `:`. A bare hash key such as `{ field : value }` reads scalar `field` as
+the runtime key; a computed form such as `{ cat(prefix, suffix) : value }` uses the helper result as the key. Quote fixed object field names:
 
 ```text
 set(field, "kind");
@@ -309,8 +261,7 @@ set(array(items), [value]);
 set(hash(meta), { field : value });
 ```
 
-No tracked `.spec` or executable embedded source uses those shapes. New source uses a bare binding for reads,
-assignment, and mutation; a bare variable may hold an array or harray value:
+No tracked `.spec` or executable embedded source uses those shapes. New source uses a bare binding for reads, assignment, and mutation; a bare variable may hold an array or harray value:
 
 ```text
 set(payload, [value]);
@@ -331,10 +282,8 @@ return(payload);
 > selector forms are shown here only as migration examples. Every tracked `.spec` file and executable embedded
 > source is already selector-free.
 
-The Perl, Rust, Dart, Julia, and Lua backends now execute those selector-free replacements. Their
-bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
-fail an existing incompatible binding with `binding_kind_mismatch`. Mutation results are independent snapshots, so
-saving an earlier result does not let a later mutation retroactively change it:
+The Perl, Rust, Dart, Julia, and Lua backends now execute those selector-free replacements. Their bare array/harray mutations auto-create an absent target of the required kind, return the updated typed binding, and
+fail an existing incompatible binding with `binding_kind_mismatch`. Mutation results are independent snapshots, so saving an earlier result does not let a later mutation retroactively change it:
 
 ```text
 first = push(items, "a");          # first == ["a"]
@@ -345,28 +294,21 @@ split(stored_parts, "c,d", ",");  # mutable split; stored_parts == ["c", "d"]
 answer = set(saved, ["b", "a"]).sorted().first;  # answer == "a"
 ```
 
-Exact selector rejection intentionally followed backend enablement: all five backends execute the same bare forms,
-every tracked `.spec` file and executable embedded source has migrated, and all five structurally reject the
-removed `array(IDENTIFIER)` / `hash(IDENTIFIER)` forms. This ordering is migration safety, not an unresolved
-language decision.
+Exact selector rejection intentionally followed backend enablement: all five backends execute the same bare forms, every tracked `.spec` file and executable embedded source has migrated, and all five structurally reject the
+removed `array(IDENTIFIER)` / `hash(IDENTIFIER)` forms. This ordering is migration safety, not an unresolved language decision.
 
-Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
-returned or assigned:
+Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is returned or assigned:
 
 ```text
 set(payload, { set(kind, "token"); return({ "kind" : kind }); "unused" });
 return(payload);
 ```
 
-The `return(expr)` inside the block is block-local: it yields the block value and skips later statements in
-that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
-When a block is used as a receiver, its yielded value enters the same compatible receiver-dot helper family:
-`{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count`,
-`{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
-array, string, hash, and number contracts.
+The `return(expr)` inside the block is block-local: it yields the block value and skips later statements in that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
+When a block is used as a receiver, its yielded value enters the same compatible receiver-dot helper family: `{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count`,
+`{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing array, string, hash, and number contracts.
 
-Perl, Rust, Dart, Julia, and Lua currently accept trailing block arguments for helper-form `with(value) { ... }` and
-receiver-form `.with() { ... }`:
+Perl, Rust, Dart, Julia, and Lua currently accept trailing block arguments for helper-form `with(value) { ... }` and receiver-form `.with() { ... }`:
 
 ```text
 return(with(entry_group(0)) { return(cat(value, "!")) });
@@ -375,25 +317,18 @@ return(entry_group(0).with() { return(cat(value, "!")) });
 return(" a-b ".trim().with() { return(value.split("-")) }.count());
 ```
 
-`with(value) { ... }` evaluates the value, binds a scoped working value `value` for immediate block execution, and returns
-the block result. `with() { ... }` binds that scoped `value` to `undef`. Receiver `.with() { ... }` evaluates its
-receiver first, exposes that receiver value through the same scoped `value` binding, and yields the block result;
-the yielded result can be the terminal value or can feed later compatible receiver-family links. The binding is
-local to the block, so an outer working variable named `value` is visible again after the `with` expression
-finishes. The block is not a closure, assignable value, returnable value, or delayed callback. It runs in the
-caller's current action/runtime context: captures, `retv`, cursor state, helper/function visibility, and ordinary
-working-variable side effects are the same as the call site. Only the working binding `value` is portable as the
-scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare
-`with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
+`with(value) { ... }` evaluates the value, binds a scoped working value `value` for immediate block execution, and returns the block result. `with() { ... }` binds that scoped `value` to `undef`. Receiver `.with() { ... }` evaluates its
+receiver first, exposes that receiver value through the same scoped `value` binding, and yields the block result; the yielded result can be the terminal value or can feed later compatible receiver-family links. The binding is
+local to the block, so an outer working variable named `value` is visible again after the `with` expression finishes. The block is not a closure, assignable value, returnable value, or delayed callback. It runs in the
+caller's current action/runtime context: captures, `retv`, cursor state, helper/function visibility, and ordinary working-variable side effects are the same as the call site. Only the working binding `value` is portable as the
+scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare `with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
 general delayed callback are not current portable surfaces; explicit delayed callbacks use `{|params| ...}`.
 
 
 ### Scalar numeric helpers in codeblocks
 
-Perl callable bodies support the scalar numeric helpers, their word and symbol
-call aliases, and numeric receiver methods. Their argument and result rules are
-the same as [numeric value helpers](value-container-flow-helper-reference.md#numeric-value-helpers):
-comparisons return numeric `1`/`0`; invalid numeric input or arity returns `undef`.
+Perl callable bodies support the scalar numeric helpers, their word and symbol call aliases, and numeric receiver methods. Their argument and result rules are
+the same as [numeric value helpers](value-container-flow-helper-reference.md#numeric-value-helpers): comparisons return numeric `1`/`0`; invalid numeric input or arity returns `undef`.
 
 Caller bindings are read at each invocation. This counter returns `[1,2,2]`:
 
@@ -417,8 +352,7 @@ out = cb();
 return(out)
 ```
 
-Each numeric operand retains its evaluated value before a later operand can
-rebind its source slot. This returns `[5,9]`:
+Each numeric operand retains its evaluated value before a later operand can rebind its source slot. This returns `[5,9]`:
 
 ```text
 value = 2;
@@ -427,24 +361,64 @@ out = num_add(value,change());
 return([out,value])
 ```
 
-The same rule covers scalar `num_mul`, `num_min` and `num_max`; explicit flat
-splices keep their existing list behavior. It does not add recursive copying.
-An invalid numeric call shape or comparison-terminal continuation yields `undef`
-before the receiver or operands run. Comparison methods end their chain even
-when the following method belongs to another family. Save a comparison result
-in a binding to use it as the receiver of a separate expression.
-A one-argument min/max call evaluates its input to choose the array overload;
-scalar input then yields `undef`.
+The same rule covers scalar `num_mul`, `num_min` and `num_max`; explicit flat splices keep their existing list behavior. It does not add recursive copying.
+An invalid numeric call shape or comparison-terminal continuation yields `undef` before the receiver or operands run. Comparison methods end their chain even
+when the following method belongs to another family. Save a comparison result in a binding to use it as the receiver of a separate expression.
+A one-argument min/max call evaluates its input to choose the array overload; scalar input then yields `undef`.
 
-Typed boolean parameters remain nonnumeric. Boolean literals evaluated inside
-a Perl callback have the separate [kind limitation](#current-perl-limits) above.
-Numeric array reducers remain outside this deferred scalar family. An executed unsupported
-call keeps its typed `unknown_helper` cause.
+Typed boolean parameters remain nonnumeric. Boolean literals evaluated inside a Perl callback have the separate [kind limitation](#current-perl-limits) above.
+Array reducers use the separate [aggregate rules](#aggregate-numeric-helpers-in-codeblocks). Other executed unsupported calls keep their typed `unknown_helper` cause.
+
+### Aggregate numeric helpers in codeblocks
+
+Perl callbacks execute `num_sum`, `num_avg`, `num_median`, `num_range`, and single-array `num_min`/`num_max`. Their word aliases and terminal array methods
+`sum()`, `avg()`, `median()`, `range()`, `min()` and `max()` also work. Array parameters, direct reads and registered-function results are accepted sources.
+The source is evaluated once; the reducer does not reorder its array.
+
+These use the existing Perl aggregate checks, separately from the strict scalar numeric contract. Every item must match the legacy decimal spelling; a null or
+nonnumeric item invalidates the whole reduction. Empty `sum([])` is `0`; the other five empty reductions are `undef`. These older checks differ from the scalar finite-number and Boolean rules.
+Perl can accept typed Boolean items as `0`/`1`; for example, the minimum of `[and(1,1),3]` remains Boolean true. That input/result-kind boundary is part of
+the pending aggregate authority and result-kind audit, not a new scalar rule.
+
+This returns `[[12,4,3,7,1,8],0,null,null]`:
+
+```text
+items = [3,1,8];
+summary = {|values|
+  return([sum(values),values.avg(),median(values),values.range(),min(values),values.max()])
+};
+return([summary(items),sum([]),avg([]),sum([1,"bad"])]);
+```
+
+Free reducers take one array. Min/max with two or more operands use the scalar operation; a receiver min/max with an explicit operand follows those scalar
+operand rules. Scalar operands run before kind rejection. The array receiver forms take no arguments and end the chain. Invalid reducer arity or a continuation
+after an array reducer returns `undef` before receiver/operand effects. Save the result before starting a separate expression. This invalid continuation returns
+`[null,""]` without running `read`:
+
+```text
+trace = "";
+read = {|| trace = cat(trace,"r"); return([3,1,8]) };
+cb = {|| return(read().sum().abs()) };
+out = cb();
+return([out,trace]);
+```
+
+One existing Perl result-kind defect remains: min/max and odd median can select an original numeric string. Current JSON output can show `1` while its internal
+kind is still string. Using that result directly as an array-write index fails with `nested_write_kind_conflict`. Scalar arithmetic converts it to a numeric
+value; this example returns `["zero","changed"]`:
+
+```text
+items = ["zero","one"];
+index = add(min(["2","1"]),0);
+items[index] = "changed";
+return(items);
+```
+
+That conversion is a workaround, not the pending result-kind repair. Boolean body literals and deferred general array pipelines retain the limits above.
 
 ### Callable values in with
 
-In Perl, a scoped value that contains a codeblock can be invoked as value().
-The following expressions return "yes", ["first","second","first"], and
+In Perl, a scoped value that contains a codeblock can be invoked as value(). The following expressions return "yes", ["first","second","first"], and
 ["inner","outer"], respectively:
 
 ```text
@@ -459,27 +433,18 @@ first = {|| return("first") }; second = {|| return("second") }; return(with(firs
 value = {|| return("outer") }; cb = {|| return("inner") }; result = with(cb) { return(value()) }; return([result, value()])
 ```
 
-The receiver evaluates once. Nested blocks restore the surrounding value;
-the same rule holds inside registered functions and while unwinding a callable
-error. A callback invoked inside the block reads the current scoped value
-through its dynamic caller context. Mutations to other caller bindings persist.
-Governed helpers and registered functions keep precedence over variables with
-the same names.
+The receiver evaluates once. Nested blocks restore the surrounding value; the same rule holds inside registered functions and while unwinding a callable
+error. A callback invoked inside the block reads the current scoped value through its dynamic caller context. Mutations to other caller bindings persist.
+Governed helpers and registered functions keep precedence over variables with the same names.
 
-Calling value() when the scoped value is false, null, a string, an array or a
-harray raises the typed value_not_callable cause. An unsupported call inside
-the invoked codeblock instead retains unknown_helper and the authored name.
-Explicit callback parameters remain supported, for example
+Calling value() when the scoped value is false, null, a string, an array or a harray raises the typed value_not_callable cause. An unsupported call inside
+the invoked codeblock instead retains unknown_helper and the authored name. Explicit callback parameters remain supported, for example
 `with(cb, {|callback| return(callback()) })`.
 
-Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are
-scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
-signature accepts a final codeblock, the contract is that `call(args) { ... }` and
-`call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl, Rust, Dart, Julia, and Lua implement that equivalence for metadata-declared
-`with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua implementation is current on both
-ABIs. Five-backend callable recurring/public admission is complete; the same Lua file runs on PUC Lua and LuaJIT,
-so implementation and admitted governance now agree. ADR 0031 and completed
+Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
+signature accepts a final codeblock, the contract is that `call(args) { ... }` and `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
+functions, and receiver methods. Perl, Rust, Dart, Julia, and Lua implement that equivalence for metadata-declared `with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua implementation is current on both
+ABIs. Five-backend callable recurring/public admission is complete; the same Lua file runs on PUC Lua and LuaJIT, so implementation and admitted governance now agree. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -495,93 +460,55 @@ fn apply(value, callback: codeblock) {
 }
 ```
 
-Only the value kind is declared. `callback: codeblock(item)` is invalid because an explicit `{|item| ...}` value
-already owns and enforces its invocation signature. A contextual `{ ... }` final argument has no positional
+Only the value kind is declared. `callback: codeblock(item)` is invalid because an explicit `{|item| ...}` value already owns and enforces its invocation signature. A contextual `{ ... }` final argument has no positional
 parameters, is invoked with zero arguments, and reads the callable's current dynamic context.
 
-`{|| ...}` is the zero-parameter form and a final `...rest` follows ordinary callable-signature rules. Construction
-is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
-`return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
-eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, Julia, and Lua parse these
-literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
-and generated source. All five execute a bound value through `cb(args)`. Arguments evaluate once
-from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
-nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a
-final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
+`{|| ...}` is the zero-parameter form and a final `...rest` follows ordinary callable-signature rules. Construction is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
+`return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
+`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, Julia, and Lua parse these literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
+and generated source. All five execute a bound value through `cb(args)`. Arguments evaluate once from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
+nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
 only the result.
 
-The Perl deferred evaluator executes attached and marker `if`/`elseif`/`else` with once-only
-conditions, lazy selected bodies and local returns through nested branches. Marker groups close
-with `endif`; missing closure, later branches after fallback and reached orphans diagnose.
-A conditional statement itself yields null; a later expression may supply the implicit result.
-An eager expression block keeps its own return boundary. Value-form `if`/`else` selects only
-one payload lazily. `return()` and `return_undef()` now stop a callable with null and skip
-continuation; their returns propagate through selected branches and stay local to eager blocks.
-Attached while also executes with once-per-check conditions, local return propagation and
-the existing 10000-body guard. A final false check succeeds; exhaustion fails before another
-body and preserves preceding effects. `return(undef)` continues to work.
-The [architecture examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary)
-show exact working sources, results and remaining boundaries. Parameter slots restore on success
+The Perl deferred evaluator executes attached and marker `if`/`elseif`/`else` with once-only conditions, lazy selected bodies and local returns through nested branches. Marker groups close
+with `endif`; missing closure, later branches after fallback and reached orphans diagnose. A conditional statement itself yields null; a later expression may supply the implicit result.
+An eager expression block keeps its own return boundary. Value-form `if`/`else` selects only one payload lazily. `return()` and `return_undef()` now stop a callable with null and skip
+continuation; their returns propagate through selected branches and stay local to eager blocks. Attached while also executes with once-per-check conditions, local return propagation and
+the existing 10000-body guard. A final false check succeeds; exhaustion fails before another body and preserves preceding effects. `return(undef)` continues to work.
+The [architecture examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary) show exact working sources, results and remaining boundaries. Parameter slots restore on success
 and failure, and preceding nonparameter effects remain visible.
 
-Rust classifies exact `{|` before harray/eager braces, retains the same eight-field literal and fixed/rest
-signature with Unicode character-coordinate spans, and carries it through compiled JSON, user functions,
-generated plans, emitted source, and semantic `codeblock` descriptors. Construction never creates a host closure
-or executes the body. Dynamic execution uses that same reconstructed runtime state; it is not a generated-source
+Rust classifies exact `{|` before harray/eager braces, retains the same eight-field literal and fixed/rest signature with Unicode character-coordinate spans, and carries it through compiled JSON, user functions,
+generated plans, emitted source, and semantic `codeblock` descriptors. Construction never creates a host closure or executes the body. Dynamic execution uses that same reconstructed runtime state; it is not a generated-source
 special case.
 
-Dart has the same inert construction boundary. Its ActionIR parser carries one root source while recursively
-parsing nested expressions, so literal and body spans remain half-open Unicode-character coordinates even though
-the host indexes strings in UTF-16 code units. Runtime construction returns recursively copied plain map data;
-contract/dependency traversal does not enter the retained typed body. Compiled ActionIR JSON, user functions,
-generated-plan execution, normalized emitted `SpecFile` reconstruction, and semantic binding shapes preserve that
-same record without a Dart closure. Bound-variable fallback runs only after static callables. Dart reuses its
-existing scoped-variable snapshots for copied fixed/rest parameters while leaving all nonparameter stores live;
-an ordered active-name stack rejects direct and mutual recursion. One typed `value_access` ActionIR node lets a
-call result feed existing key/index lookup and then an ordinary receiver chain. Exact callable diagnostics expose
-arity, keyword count, non-callable kind, unknown name, and cycle fields. Native, reconstructed, generated-plan,
-and independently compiled emitted-source execution consume every neutral valid and invalid call. Dart now also
-retains exact final-only `parameter_kinds` through the shared shell, both staged sidecars, typed registry,
-semantic signature, and descriptor-v3 record. The parser records attached/parenthesized provenance first; one
-post-registry pass admits only metadata-declared final blocks, restores ordinary parenthesized blocks to eager
-values, and rejects unknown attached callees. Accepted contextual blocks become the same zero-positional
-`codeblock_argument` and reuse the dynamic evaluator above.
+Dart has the same inert construction boundary. Its ActionIR parser carries one root source while recursively parsing nested expressions, so literal and body spans remain half-open Unicode-character coordinates even though
+the host indexes strings in UTF-16 code units. Runtime construction returns recursively copied plain map data; contract/dependency traversal does not enter the retained typed body. Compiled ActionIR JSON, user functions,
+generated-plan execution, normalized emitted `SpecFile` reconstruction, and semantic binding shapes preserve that same record without a Dart closure. Bound-variable fallback runs only after static callables. Dart reuses its
+existing scoped-variable snapshots for copied fixed/rest parameters while leaving all nonparameter stores live; an ordered active-name stack rejects direct and mutual recursion. One typed `value_access` ActionIR node lets a
+call result feed existing key/index lookup and then an ordinary receiver chain. Exact callable diagnostics expose arity, keyword count, non-callable kind, unknown name, and cycle fields. Native, reconstructed, generated-plan,
+and independently compiled emitted-source execution consume every neutral valid and invalid call. Dart now also retains exact final-only `parameter_kinds` through the shared shell, both staged sidecars, typed registry,
+semantic signature, and descriptor-v3 record. The parser records attached/parenthesized provenance first; one post-registry pass admits only metadata-declared final blocks, restores ordinary parenthesized blocks to eager
+values, and rejects unknown attached callees. Accepted contextual blocks become the same zero-positional `codeblock_argument` and reuse the dynamic evaluator above.
 
-Julia has the same inert construction boundary. Exact `{|` recognition precedes harray/eager-block routing;
-the neutral eight-field record retains fixed/final-rest signature, typed body, exact source, and containing
-Unicode-character spans. Contract and removed-selector scans treat the body as a deferred leaf. Runtime state is
-a recursively copied plain dictionary, and normalized emitted `SpecFile` reconstruction runs through the ordinary
-compiler in a freshly loaded Julia module. User functions transport the record without executing it, nullable
-fixed signatures do not weaken the non-null variadic user-function invariant, and semantic bindings expose the
-exact `codeblock` signature. Julia's bound-name fallback runs only after controls, helpers, and registered user
-functions. It validates the plain record, evaluates positional arguments once from left to right, installs copied
-fixed/rest values through exception-safe scalar/array/harray snapshots, and leaves nonparameter caller stores
-live. The ordered active-name stack rejects direct and mutual recursion. Typed call-result access feeds existing
-key/index lookup and receiver chains. Native, reconstructed, generated-plan, and freshly loaded emitted-source
-execution share the same interpreter and exact portable failure fields. Julia also retains exact final-only
-definition/staged/registry/descriptor-v3 metadata. One post-registry contract pass normalizes only admitted helper,
-typed-user-function, receiver, and tree blocks to the same zero-positional `codeblock_argument`; parser spelling
-alone grants no semantics. Attached and parenthesized forms then reuse the dynamic evaluator across native,
-reconstructed, generated-plan, and freshly loaded emitted-source execution.
+Julia has the same inert construction boundary. Exact `{|` recognition precedes harray/eager-block routing; the neutral eight-field record retains fixed/final-rest signature, typed body, exact source, and containing
+Unicode-character spans. Contract and removed-selector scans treat the body as a deferred leaf. Runtime state is a recursively copied plain dictionary, and normalized emitted `SpecFile` reconstruction runs through the ordinary
+compiler in a freshly loaded Julia module. User functions transport the record without executing it, nullable fixed signatures do not weaken the non-null variadic user-function invariant, and semantic bindings expose the
+exact `codeblock` signature. Julia's bound-name fallback runs only after controls, helpers, and registered user functions. It validates the plain record, evaluates positional arguments once from left to right, installs copied
+fixed/rest values through exception-safe scalar/array/harray snapshots, and leaves nonparameter caller stores live. The ordered active-name stack rejects direct and mutual recursion. Typed call-result access feeds existing
+key/index lookup and receiver chains. Native, reconstructed, generated-plan, and freshly loaded emitted-source execution share the same interpreter and exact portable failure fields. Julia also retains exact final-only
+definition/staged/registry/descriptor-v3 metadata. One post-registry contract pass normalizes only admitted helper, typed-user-function, receiver, and tree blocks to the same zero-positional `codeblock_argument`; parser spelling
+alone grants no semantics. Attached and parenthesized forms then reuse the dynamic evaluator across native, reconstructed, generated-plan, and freshly loaded emitted-source execution.
 
-Lua now has the same construction and dynamic-invocation semantics. Exact brace-pipe forms create the neutral eight-field
-record with fixed/final-rest signatures, typed deferred bodies, and half-open containing Unicode-character spans.
-Copies retain those spans; ordinary user functions, compiled ActionIR JSON, generated-plan execution, emitted
-effective-`SpecFile` reconstruction, and semantic binding shapes preserve the value without running its body.
-Malformed forms retain all nine neutral codes, and deferred scans do not treat body calls or selectors as eager.
-After static callables, one executor invokes an ordinary bound codeblock with once-only left-to-right arguments,
-copied fixed/rest bindings, live caller nonparameters, local return/final result, and ordered recursion rejection.
-Typed `value_access` lets call results feed key/index lookup and receiver chains. Colon keyword calls are typed only
-for rejection; `name = value` stays positional. Exact arity/keyword/non-callable/unknown/cycle diagnostics agree on
-PUC Lua and LuaJIT. Native, canonical reconstruction, generated-plan, and fresh emitted-module execution compile
-and run the same record. Built-in final callbacks resolve before scoped `value`, so contextual, explicit, and
-bound helper/receiver/tree callbacks share that executor; nested anonymous helpers are not bound-name recursion,
-while a callback passed by variable retains that variable's recursion identity through helper dispatch.
-There is no Lua closure or second codec/executor.
+Lua now has the same construction and dynamic-invocation semantics. Exact brace-pipe forms create the neutral eight-field record with fixed/final-rest signatures, typed deferred bodies, and half-open containing Unicode-character spans.
+Copies retain those spans; ordinary user functions, compiled ActionIR JSON, generated-plan execution, emitted effective-`SpecFile` reconstruction, and semantic binding shapes preserve the value without running its body.
+Malformed forms retain all nine neutral codes, and deferred scans do not treat body calls or selectors as eager. After static callables, one executor invokes an ordinary bound codeblock with once-only left-to-right arguments,
+copied fixed/rest bindings, live caller nonparameters, local return/final result, and ordered recursion rejection. Typed `value_access` lets call results feed key/index lookup and receiver chains. Colon keyword calls are typed only
+for rejection; `name = value` stays positional. Exact arity/keyword/non-callable/unknown/cycle diagnostics agree on PUC Lua and LuaJIT. Native, canonical reconstruction, generated-plan, and fresh emitted-module execution compile
+and run the same record. Built-in final callbacks resolve before scoped `value`, so contextual, explicit, and bound helper/receiver/tree callbacks share that executor; nested anonymous helpers are not bound-name recursion,
+while a callback passed by variable retains that variable's recursion identity through helper dispatch. There is no Lua closure or second codec/executor.
 
-For example, callback lookup occurs before `with` installs its scoped binding, even when the callback itself is
-stored under the name `value`:
+For example, callback lookup occurs before `with` installs its scoped binding, even when the callback itself is stored under the name `value`:
 
 ```text
 value = {|item| return(cat(item, "!")) }
@@ -597,10 +524,8 @@ callback("x")
 # RuntimeInterpreterException: cycle ["callback", "callback"]
 ```
 
-On Perl, Rust, Dart, Julia, and Lua, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
-zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
-supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
-`{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
+On Perl, Rust, Dart, Julia, and Lua, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
+supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
 
 ```text
 state = ""
@@ -620,20 +545,14 @@ count = collector("p", "a", "b")["items"].length()
 # count == 2
 ```
 
-Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
-failures as typed runtime details. A governed helper/control or registered user function still wins over a
-same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are
-current on all five backends. Five-backend callable recurring/public admission is complete under `.11.8.4`;
+Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion failures as typed runtime details. A governed helper/control or registered user function still wins over a
+same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are current on all five backends. Five-backend callable recurring/public admission is complete under `.11.8.4`;
 Lua construction/invocation/emitted identity remain owned by `.11.8.1-.3`, and lexical capture remains outside v1.
 
-Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
-values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each
-leaf for side effects and returns the original hash tree. `map_leaves() { ... }` returns a new hash tree with each
-leaf replaced by the block result. `reduce_leaves(initial) { ... }` folds leaves into an accumulator and returns the
-final accumulator. Traversal is stable sorted-key depth-first order. The block gets scoped scalar bindings:
-`value` for the current leaf, `key` for the current key, `path` for an array of path segments from the root, `depth`
-for the number of path segments (so a root leaf has depth 1), and `acc` for `reduce_leaves` only. Those scoped
-bindings are restored after each callback.
+Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each
+leaf for side effects and returns the original hash tree. `map_leaves() { ... }` returns a new hash tree with each leaf replaced by the block result. `reduce_leaves(initial) { ... }` folds leaves into an accumulator and returns the
+final accumulator. Traversal is stable sorted-key depth-first order. The block gets scoped scalar bindings: `value` for the current leaf, `key` for the current key, `path` for an array of path segments from the root, `depth`
+for the number of path segments (so a root leaf has depth 1), and `acc` for `reduce_leaves` only. Those scoped bindings are restored after each callback.
 
 ```text
 tree = { "a" : "A", "b" : { "y" : "B" }, "arr" : ["u", "v"] };
@@ -654,13 +573,10 @@ return(tree.reduce_leaves(0) {
 });
 ```
 
-Calling one of these traversal methods on a non-hash receiver yields `undef` and does not execute the callback.
-`walk_leaves()` and `map_leaves()` take no parenthesized arguments; `reduce_leaves(initial)` requires exactly one
-initial accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later
-hash receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
+Calling one of these traversal methods on a non-hash receiver yields `undef` and does not execute the callback. `walk_leaves()` and `map_leaves()` take no parenthesized arguments; `reduce_leaves(initial)` requires exactly one
+initial accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later hash receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
 
-The same receiver block methods also work on array trees. Array roots and nested arrays are traversal nodes. Scalar
-and hash values are leaves, and hash leaves are not traversed recursively. Traversal is depth-first by zero-based
+The same receiver block methods also work on array trees. Array roots and nested arrays are traversal nodes. Scalar and hash values are leaves, and hash leaves are not traversed recursively. Traversal is depth-first by zero-based
 index. Callback blocks get scoped `value`, `index`, `path`, `depth`, and reduction-only `acc`.
 
 ```text
@@ -691,18 +607,13 @@ count = tree.map_leaves!() {
 }.count_keys();
 ```
 
-The callback result replaces the current leaf; after all callbacks succeed, `tree` is rebound once and the
-detached updated value feeds `.count_keys()`. Traversal uses the original shape and root kind, so replacement
-containers are not revisited. The block gets detached `value`, `path` (also `@path` on Perl), `depth`, and `key`
-or `index`.
+The callback result replaces the current leaf; after all callbacks succeed, `tree` is rebound once and the detached updated value feeds `.count_keys()`. Traversal uses the original shape and root kind, so replacement
+containers are not revisited. The block gets detached `value`, `path` (also `@path` on Perl), `depth`, and `key` or `index`.
 
-The exclamation mark authorizes this traversal operation to replace leaves. It does not let callback code mutate
-the receiver binding directly. Assignment, bracket write, nested bang, mutation helpers, array-end methods, and
-binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated
-bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
+The exclamation mark authorizes this traversal operation to replace leaves. It does not let callback code mutate the receiver binding directly. Assignment, bracket write, nested bang, mutation helpers, array-end methods, and
+binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
 
-Traversal follows the receiver's original root kind and shape. For an array root, this records the callback paths
-`0`, `1/0`, and `2`; the nested harray at index `2` is one opaque cross-kind leaf:
+Traversal follows the receiver's original root kind and shape. For an array root, this records the callback paths `0`, `1/0`, and `2`; the nested harray at index `2` is one opaque cross-kind leaf:
 
 ```text
 items = ["A", ["B"], { "opaque" : "C" }];
@@ -714,12 +625,10 @@ updated = items.map_leaves!() {
 };
 ```
 
-Each callback receives detached `value` and `path`, plus `depth` and `index` for this array-root traversal
-(`key` is supplied instead for an harray root). Returning a new array beneath an array root, or a new harray
+Each callback receives detached `value` and `path`, plus `depth` and `index` for this array-root traversal (`key` is supplied instead for an harray root). Returning a new array beneath an array root, or a new harray
 beneath an harray root, replaces the current leaf but does not add work to this invocation.
 
-The guard follows resolved binding identity. This example is rejected before the bracket segment or RHS can run,
-and `tree` remains exactly as it was before the bang call:
+The guard follows resolved binding identity. This example is rejected before the bracket segment or RHS can run, and `tree` remains exactly as it was before the bang call:
 
 ```text
 tree.map_leaves!() {
@@ -728,12 +637,10 @@ tree.map_leaves!() {
 };
 ```
 
-The same rollback applies when a callback itself fails after earlier leaf results were computed: no rebuilt leaf
-is committed, although ordinary effects already made to unrelated bindings remain. A same-spelling local or
+The same rollback applies when a callback itself fails after earlier leaf results were computed: no rebuilt leaf is committed, although ordinary effects already made to unrelated bindings remain. A same-spelling local or
 function parameter is a different binding identity and remains legal.
 
-The bang call returns a detached copy of the committed root. Consequently, mutating `updated` after this call
-does not mutate `tree` again:
+The bang call returns a detached copy of the committed root. Consequently, mutating `updated` after this call does not mutate `tree` again:
 
 ```text
 updated = tree.map_leaves!() {
@@ -742,8 +649,7 @@ updated = tree.map_leaves!() {
 updated["extra"] = "copy-only";
 ```
 
-Nested write-vivification composes inside the detached callback leaf value. For
-`tree = { "leaf" : [] }`, this calls the callback once, creates the replacement, and does not revisit it:
+Nested write-vivification composes inside the detached callback leaf value. For `tree = { "leaf" : [] }`, this calls the callback once, creates the replacement, and does not revisit it:
 
 ```text
 tree.map_leaves!() {
@@ -752,8 +658,7 @@ tree.map_leaves!() {
 };
 ```
 
-The committed result is `{ "leaf" : [{ "name" : "A" }] }`. Continuation begins only after that atomic commit
-and after guard release. In this exact boundary case, the later dense-array-gap failure does not undo the already
+The committed result is `{ "leaf" : [{ "name" : "A" }] }`. Continuation begins only after that atomic commit and after guard release. In this exact boundary case, the later dense-array-gap failure does not undo the already
 published leaf update:
 
 ```text
@@ -768,12 +673,9 @@ tree.map_leaves!() {
 
 The call reports `nested_write_array_gap`, while `tree` remains `{ "a" : "A!" }`.
 
-Only the exact `binding_name.map_leaves!() { block }` form is current. Function-form bang calls,
-temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
-accepted. Lua preserves the typed receiver, callback, and continuation through native, reconstructed,
-generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. `.19.7` admits the
-exact portable capability row, `.19.8` completes exact six-runtime recurrence, and `.19.9` closes the governed
-public surface without widening the syntax.
+Only the exact `binding_name.map_leaves!() { block }` form is current. Function-form bang calls, temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
+accepted. Lua preserves the typed receiver, callback, and continuation through native, reconstructed, generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. `.19.7` admits the
+exact portable capability row, `.19.8` completes exact six-runtime recurrence, and `.19.9` closes the governed public surface without widening the syntax.
 
 ## Reading and copying collections
 
@@ -798,24 +700,18 @@ split_tagged_records(identifier_list, /\s*,\s*/o, "?node:", type_name)
 
 This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
 
-Receiver-dot value chains are pure helper composition. Array receivers can flow through array helpers, hash
-receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`,
-string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers.
-`split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with
-array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or
-`join_values(delim)`. Numeric comparisons such as `count(parts).gt(0)` are terminal values; they do not
-continue into later number methods.
-Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the
+Receiver-dot value chains are pure helper composition. Array receivers can flow through array helpers, hash receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`,
+string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers. `split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with
+array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or `join_values(delim)`. Numeric comparisons such as `count(parts).gt(0)` are terminal values; they do not
+continue into later number methods. Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the
 selected helper family consumes the yielded value.
 
 ### Flattening bound and computed values
 
-`flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working
-binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated
+`flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated
 once. Arrays contribute their elements; harrays contribute key/value pairs. An empty container contributes nothing.
 
-This complete example runs on input `x` through the Perl native and fresh emitted parser tests, with both LF and
-CRLF source files:
+This complete example runs on input `x` through the Perl native and fresh emitted parser tests, with both LF and CRLF source files:
 
 ```text
 {{#include ../../../../examples/flat-bound-values.spec}}
@@ -827,10 +723,8 @@ The result is:
 {"fields":{"existing":1,"added":7},"items":[0,1,2,3],"kept":[[1,2]],"empty":[0,3]}
 ```
 
-`padded` splices the parameter's elements between `0` and `3`. The `kept` field has no flattening helper, so the
-array remains one nested value. `copy(items)` likewise remains nested unless it is explicitly wrapped in `flat`.
-Use `hash(flat(pairs))` with an array such as `["a",1,"b",2]` when its elements are key/value tokens; this produces
-`{"a":1,"b":2}`. The explicit `flat_array` and `flat_hash` forms remain available when the intended kind is clear.
+`padded` splices the parameter's elements between `0` and `3`. The `kept` field has no flattening helper, so the array remains one nested value. `copy(items)` likewise remains nested unless it is explicitly wrapped in `flat`.
+Use `hash(flat(pairs))` with an array such as `["a",1,"b",2]` when its elements are key/value tokens; this produces `{"a":1,"b":2}`. The explicit `flat_array` and `flat_hash` forms remain available when the intended kind is clear.
 Harray field order is not a sequence-order promise; use ordered array values when sequence order matters.
 
 
@@ -849,13 +743,10 @@ These are especially useful when building AST nodes or diagnostics payloads.
 
 ### Removing keys in Perl
 
-`drop_keys` returns a new harray. The source keeps its fields; missing keys and
-repeated keys are harmless. Free-call and receiver forms accept the same keys.
-One key loads quietly in generated Perl, including when the caller treats syntax
-warnings as fatal.
+`drop_keys` returns a new harray. The source keeps its fields; missing keys and repeated keys are harmless. Free-call and receiver forms accept the same keys.
+One key loads quietly in generated Perl, including when the caller treats syntax warnings as fatal.
 
-This returns the original three-field harray followed by a copy containing only
-`kind` and `stage`:
+This returns the original three-field harray followed by a copy containing only `kind` and `stage`:
 
 ```text
 meta = {"kind":"node","debug":1,"stage":"parse"};
@@ -871,10 +762,8 @@ keys = ["debug","stage"];
 return(drop_keys(meta,flat_array(keys)));
 ```
 
-`flat_array([])` removes no keys; a one-element splice removes one. An ordinary
-array argument stays one value. Each key operand is evaluated once, and its value
-is captured before the next operand runs. Here both evaluated keys are `"debug"`,
-even though the callback changes the binding to `"stage"`. The result is
+`flat_array([])` removes no keys; a one-element splice removes one. An ordinary array argument stays one value. Each key operand is evaluated once, and its value
+is captured before the next operand runs. Here both evaluated keys are `"debug"`, even though the callback changes the binding to `"stage"`. The result is
 `[{"kind":"node","stage":"parse"},"stage"]`:
 
 ```text

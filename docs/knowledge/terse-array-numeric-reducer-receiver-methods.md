@@ -47,10 +47,12 @@ inventory did not need additional backfill in this slice; mutating or ambiguous 
 The follow-up `SPEC-FORMAT-TERSE.7.4` sweep and `TRACE-OBSERVABILITY.4.5`
 are historical closures. Current work is selected from the active task-tree index.
 
-September reading `SESSION-STARTUP-READING.3.3.21` completes these helper arms:
+September Rust reading `SESSION-STARTUP-READING.3.3.21` completes these helper arms:
 num_min/max require every array item to pass scalar_numeric_value; sum/avg/median/
 range instead filter through generic as_number and return undef when no numbers
 remain. This records distinct current consumption paths, not a claim that all
 reducers share the scalar-numeric contract. The dated integration/corpus proof
 above is not rerun. Array-chain slicing also has an independent bounds defect:
 [[rust-array-slice-boundary-panics]], owned by startup `.60`.
+
+Those filtering paths describe Rust. Perl retains an all-terms decimal-spelling check; see [[terse-type-method-surface-inventory]].

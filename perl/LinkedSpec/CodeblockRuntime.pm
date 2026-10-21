@@ -361,17 +361,20 @@ sub _eval_call {
  my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
  return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
+ my $aggregate = LinkedSpec::Numeric::array_helper_name($name);
+ if (defined($aggregate) && ($aggregate !~ /\Anum_(?:min|max)\z/ || @$args == 1)) {
+  return undef unless @$args == 1;
+  return LinkedSpec::Numeric::evaluate_array($aggregate, _eval_expr($args->[0], $ctx))
+ }
+
  my $numeric = LinkedSpec::Numeric::scalar_helper_name($name);
  if (defined($numeric)) {
-  my $array_overload = ($numeric eq 'num_min' || $numeric eq 'num_max') && @$args == 1;
-  return undef unless $array_overload || LinkedSpec::Numeric::arity_is_valid($numeric, scalar(@$args));
+  return undef unless LinkedSpec::Numeric::arity_is_valid($numeric, scalar(@$args));
   my @numbers;
   foreach my $arg (@$args) {
    my $value = _eval_expr($arg, $ctx);
    push @numbers, $value;
   }
-  # Array reducers remain a separately owned interpreter family.
-  _error('unknown_helper', name => $name) if $array_overload && ref($numbers[0]) eq 'ARRAY';
   return LinkedSpec::Numeric::evaluate($numeric, @numbers)
  }
 
@@ -446,6 +449,13 @@ sub _eval_fluent_chain {
  # comparison terminals followed by a different family. Single min/max selects
  # its overload at runtime.
  for (my $index = 0; $index < @$calls; ++$index) {
+  next unless ref($calls->[$index]) eq 'HASH';
+  my $method = $calls->[$index]{method} // '';
+  my $args = $calls->[$index]{args} || [];
+  if ($method =~ /\A(?:sum|avg|median|range)\z/) {
+   return undef if @$args || $index < $#$calls;
+  }
+  return undef if ($method eq 'min' || $method eq 'max') && !@$args && $index < $#$calls;
   my $helper = $numeric[$index];
   next unless defined($helper);
   my $argc = 1 + @{$calls->[$index]{args} || []};
@@ -458,12 +468,17 @@ sub _eval_fluent_chain {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
+  my $aggregate = $method =~ /\A[a-z]+\z/ ? LinkedSpec::Numeric::array_helper_name($method) : undef;
+  if (defined($aggregate) && ($method !~ /\A(?:min|max)\z/ || !@{$call->{args} || []})) {
+   return undef if @{$call->{args} || []};
+   $value = LinkedSpec::Numeric::evaluate_array($aggregate, $value);
+   next;
+  }
   my $numeric = _numeric_receiver_helper_name($method);
   if (defined($numeric)) {
    my $args = $call->{args} || [];
    my $array_overload = ($numeric eq 'num_min' || $numeric eq 'num_max') && !@$args;
    return undef unless $array_overload || LinkedSpec::Numeric::arity_is_valid($numeric, 1 + @$args);
-   _error('unknown_helper', name => $method) if $array_overload && ref($value) eq 'ARRAY';
    my @numbers = ($value);
    foreach my $arg (@$args) {
     my $operand = _eval_expr($arg, $ctx);

@@ -16,3 +16,8 @@ dart/build/
 
 # Generated checkpoint Python caches
 docs/checkpoints/**/__pycache__/
+
+# Reconstructed exact checkpoint inputs; tracked32MiB chunks are authoritative.
+/docs/checkpoints/type-aggregate-codeblocks/admission/collection/pressure-final-inputs.json.gz
+/docs/checkpoints/type-aggregate-codeblocks/admission/collection/pressure-inputs.json.gz
+/docs/checkpoints/type-aggregate-codeblocks/admission/doc-inputs.json.gz

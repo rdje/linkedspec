@@ -2,18 +2,21 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.6 completes bounded generated-drop repair; deferred aggregates .1.2.7 is next from clean Git.
+TYPE-REFERENCE-BOOK.1.2.7 completes bounded Perl aggregate availability and portable evidence admission; deferred sorted/take9 follows clean Git.
 
 ## Latest Completed Slice
 
-Generated Perl drop_keys uses copied harrays and captured key lists, removing scalar syntax advisories and repairing explicit splices, callback key ordering and raw typed-key shapes. Fixed48 public cases retain the accepted failures; current34 desired values/14 diagnostic controls and four actual emitter faults/restorations pass. Direct9 suites/1322 TAP, five focused Phase0 roots with18 permanent assertions, book89/three executed examples/heading RED and Knowledge pass. Exact two-subtest historical inverse preserves644 old controls and adds6; archive134/84613241 bytes/22 controls/zero read-write escapes remain exact. Two auditor faults/table-byte denial restore. Whole numeric5/10202 publication and actual clean readonly0 survive. Rejected preparation epochs and hash-gated README draft recovery remain explicit. Final historical-card route correction retains whole first10304 draft/readonly0 and superseded canonical143. Exact final staged receipt governs landing. Aggregates7, startup20/32/35/87.4 and full reference admission remain owned.
+Perl callable bodies execute sum/avg/median/range and array min/max through canonical/word calls and terminal receivers. Complete invalid receiver shapes avoid host fallthrough; malformed serialized calls preserve the typed invocation error. The corrected214 population passes212 values/two diagnostics against106 accepted-source failures/108 controls. Six retained aggregate faults plus a final guard-removal fault restore; final14 suites/1948 TAP,201 added permanent cases/3 advanced expectations/15 malformed assertions, book89/3/observed anchor RED and Knowledge pass. Historical650/134/84613241/22 and zero read/write escapes stay unchanged; ordinary Phase0 test source is unchanged. Whole accepted drop10334/full modes/clean readonly0 remains recoverable. Book pressure49836/50000 passes after171 lossless prose-line reductions; complete normalized rendered content identity,15 whitespace-only search bodies and fresh89/3 are verified. Whole first10496/images10499/actual readonly0 remain recoverable. Whole third10540/images10543/actual readonly0 survives.37 chunks restore3 exact logical inputs; five pre-root-guard controls and final boundary/cold replay pass with zero backup residue. Exact staged Git-size/canonical receipt is required for landing.
+
+Kind95 remains owned: JSON can mask selected string flags; three real index failures/two controls are retained. Six aggregate faults stay at their exact pre-guard source epoch; final guard fault/current214/current14 suites cover the final producer. Invalid shadows and other preparation failures are explicit. Pipeline9 precedes complete inventory1/book mapping2; no push yet.
 
 ## Next Action
 
-From clean Git, run the current drop readonly publication; preserve its whole claim, publication, manifest/full modes and actual baseline before aggregate7 writes. Continue full PNT through the reducer family, operation inventory and book mapping. No push yet.
+From clean Git, run the aggregate publish_portable.py readonly publication and preserve its complete claim/publication/input manifest/full modes and actual baseline before activating TYPE-REFERENCE-BOOK.1.2.9. Repair the owned deferred sorted/take pipeline, then continue inventory/book mapping in full PNT. No push yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.7` —214/106 RED;7 faults;14/1948;201+3 permanent/15 malformed;book89/3;kind95/next9 owned.
 - `TYPE-REFERENCE-BOOK.1.2.6` —34 value/14 diagnostic controls;4 faults;9/1322; five Phase0 roots/18 permanent;book89/3; historical644+6; aggregates7 next.
 - `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
@@ -29,7 +32,6 @@ From clean Git, run the current drop readonly publication; preserve its whole cl
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.6` — native426 exact;1290/435 RED/all GREEN;14 faults;cardinality62/1;89/349/29504; public343/16 before/after; standard1035; evidence6; Knowledge8388505/book89/4; readonly525/121708; mixed defaults .5.7 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.5` — native176 exact;452/77 RED/all GREEN;12 source faults;88/339/28214; public336/16 before/after; standard1035; evidence5; Knowledge8388480/book89/4; readonly506/116166; direct/rule .5.6 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.4` — four validators/six roles;432 native rows exact;1146/264 RED/all GREEN;13 faults;87/332/27762; public diagnostics329/16 before/after; standard1035; evidence9; Knowledge8388501; book89/4; readonly495/117562 plus explicit kernel gap; optional kind .5.5 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.3` — six switch validators; native630 exact;1641/273 RED/all GREEN;15 effective faults/one unobserved;85/317/26600; standard1035; evidence9; original463/full109061; first465 replay; two book89/4 epochs; readonly480/111654; output .5.4 next.
 
 ## History
 

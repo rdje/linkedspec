@@ -4511,6 +4511,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
   for (my $index = 0; $index < @$calls; ++$index) {
    my $call = $calls->[$index];
    my $method = $call->{method} // '';
+   my $aggregate_args = $call->{args} || [];
+   if ($method =~ /\A(?:sum|avg|median|range)\z/) {
+    return 'undef' if @$aggregate_args || $index < $#$calls;
+   }
+   return 'undef' if ($method eq 'min' || $method eq 'max') && !@$aggregate_args && $index < $#$calls;
    my $family = _number_receiver_value_chain_return_family($method);
    next unless defined($family);
    return 'undef' if $family eq 'terminal' && $index < $#$calls;
@@ -4654,7 +4659,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'terminal'];
    }
    if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
-    return undef unless @$arg_exprs == 0;
+    return ['undef', 'terminal'] unless @$arg_exprs == 0;
     return [$method.'('.$current_expr.')', 'terminal'];
    }
    if (($method eq 'sorted' || $method eq 'reversed') && $current_expr =~ /^do\s*\{/s) {

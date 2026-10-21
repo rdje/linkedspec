@@ -52,3 +52,5 @@ readonly0 and exact staged images remain in admission/first.json.gz, with whole
 before-images for every corrected file. Original publication.json and its input
 manifest remain untouched draft evidence. Canonical143 was deliberately stopped
 before bound edits; publish_final.py and its exact receipt govern current landing.
+
+Historical at accepted efad62ba7a70e0b9d930b761f9cacaad87a0210c after aggregate7 activation. Restore its recorded Git inputs for readonly replay; current aggregate custody is docs/checkpoints/type-aggregate-codeblocks/.

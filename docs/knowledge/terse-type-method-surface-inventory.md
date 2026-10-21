@@ -16,58 +16,46 @@ answers:
   - "why can a later drop key callback change an earlier key"
   - "why can a later numeric operand change an earlier value"
   - "can Perl numeric comparison receivers continue into cat"
-date: 2026-10-20
-status: bounded Perl value/numeric/drop repairs; full inventory pending
+  - "can Perl sum run inside a deferred codeblock"
+  - "why does invalid aggregate receiver arity reach a host function"
+  - "why did prose reflow change otherwise identical rendered book HTML"
+  - "how is the generated mdBook search-index reference compared"
+  - "why did checkpoint input snapshots grow recursively"
+  - "how do checkpoint chunks restore data and reject nested Git roots"
+date: 2026-10-21
+status: bounded Perl value/numeric/drop/aggregate repairs; inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "TYPE-REFERENCE-BOOK.1.2.3-.6 retain accepted public epochs and producer/input custody. Drop6 owns list evaluation, warning/FATAL loading and exact historical recurrence; numeric5 owns scalar dispatch/snapshots."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-drop-generated/publish_final.py"
+evidence: "TYPE-REFERENCE-BOOK.1.2.3-.7 retain actual source/fault epochs. Aggregate7 binds portable input custody;95/9 remain owned."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-aggregate-codeblocks/publish_portable.py"
 ---
 
-# Current value model and bounded Perl numeric execution
+# Value model and bounded Perl helper execution
 
-Bindings hold scalar, array, harray or codeblock. Integer/real notation does not
-create namespaces. String, number, boolean and null remain distinct values;
-numeric comparisons yield numeric1/0 and logical helpers yield booleans. False
-normalizes to text "0" and can pass through generic with as false. The July4
-terminal-boolean statement is dated.
+Bindings hold scalar/array/harray/codeblock. Generic with passes false; deferred
+bodies read caller slots. Constructors/keys/arguments retain evaluated values;
+updates use copy-on-write. Scoped with: [[perl-generic-final-codeblock-normalization]].
 
-Deferred codeblocks use current caller slots; eager blocks run immediately.
-An array yielded by a callable can feed sorted(), without creating a distinct
-codeblock method table. Scoped callable with is repaired by .1.2.4;
-[[perl-generic-final-codeblock-normalization]] owns its vocabulary/frame mechanism.
+Scalar and aggregate Numeric dispatch differ. Shape checks precede effects;
+comparisons/reducers terminate. Complete undef prevents emitted fallthrough.
+Aggregates take one array, receiver reducers no arguments. Explicit min/max
+operands evaluate before rejection. Perl checks every term with legacy decimal
+rules: empty sum0, othersundef; Rust filtering differs.
 
-Covered Perl constructors, dynamic hash keys, callable arguments and the four
-variadic scalar numeric producers materialize operands before later siblings
-run. MethodLowering::_materialize_list_operand_expr preserves explicit flat
-splices and scalar kinds. This does not add arbitrary deep copying. The earlier
-push question wrongly conflated late reads with reference mutation; saved-slot
-controls and [[perl-uniform-binding-runtime]] establish copy-on-write binding
-updates. Original rejected oracles/candidates and their limits remain retained.
+[[perl-numeric-reducer-string-result-kinds]] owns selected-string defect95:
+numeric JSON can hide string-kind index rejection. Boolean35/Unicode20/
+constructor94 stay separate. Deferred sorted/take raises unknown_helper:sorted,
+owned next9; availability admits no whole family/backend.
 
-CodeblockRuntime uses Numeric::scalar_helper_name/arity_is_valid/evaluate for
-scalar names/aliases, preserving kinds and skipping invalid-arity effects. Numeric
-receiver shapes/terminals validate before effects, including mixed chains. A saved
-comparison may start a new expression. MethodLowering emits complete undef for
-invalid shapes instead of Perl fallthrough; numeric lists snapshot each term.
+drop_keys materializes private keys/splices from copied harrays, remains quiet
+under FATAL warnings and retains source/null diagnostics. Prior numeric/drop
+epochs survive. The dated c053c9dcf inventory included substr/typed receivers;
+inventory1 follows7/9, then mapping/layout. Rejected preparations stay retained.
 
-Deferred aggregate reducers and array min/max remain unknown_helper, owned by
-TYPE-REFERENCE-BOOK.1.2.7 after generated-drop .1.2.6. Boolean body literals still
-lose their kind under [[perl-codeblock-boolean-literal-kind-drift]] / startup35;
-typed callback parameters preserve it. Unicode numeric coercion remains startup20.
-No all-helper or cross-backend admission follows from this scalar repair.
+The paired builds reproduce both measured pages exactly. Their only normalized
+HTML difference is the generated search-index filename. Decoded indexes differ
+only in15 chapter-body whitespace strings; all other fields match. The reader
+verifies these actual payloads before normalizing that single reference. The
+initial strict comparator rejection stays retained. This is a bounded observed
+reflow result, not permission to ignore arbitrary asset or search changes.
 
-Perl drop_keys materializes each key operand, lowers explicit flat splices and
-typed shapes, then deletes a private key list from a copied harray. Scalar keys
-load without the old slice advisory under normal/FATAL syntax profiles; a later
-callback cannot change an earlier key. Source-kind execution errors and null-key
-uninitialized diagnostics remain. No portable reference-key coercion is admitted.
-The accepted failure, rejected shape/review preparations and actual fault controls
-survive in docs/checkpoints/type-drop-generated/.
-
-Numeric5 separately qualifies prior4's original retained-log context and adds a
-complete-input accepted-source replay; observations are never refreshed silently.
-Earlier value/Phase0 adjudications remain under type-evaluated-values/. Full old
-card bytes survive at accepted203cde315; the July4 inventory at c053c9dcf and its
-proposal capsule already listed substr and scalar/array/hash/number receivers.
-Those dated, partly retired spellings guide navigation; current enumeration .1.2.1
-follows aggregate7, before book mapping/layout. No complete per-type admission.
+Context stopped embedding immutable gzip/chunks. Oversized drafts recover from37 verified32MiB parts into ignored local aliases; exact bytes/modes and nested-repository guards remain checked. Old recursive snapshots stay retained.

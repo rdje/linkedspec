@@ -899,6 +899,12 @@ The non-comparison numeric helpers also accept terse function-form aliases:
 `mul`, `div`, `mod`, `clamp`, `min`, and `max`. They lower to the corresponding
 `num_*` helper and compose as ordinary nested calls.
 
+Perl callable bodies also execute the six array reducers and their terminal
+receiver forms. These retain the separate aggregate checks: every item must be
+decimal-looking; empty sum is `0` and the other empty reducers are `undef`.
+See [aggregate callback examples](values-containers-and-flow-helpers.md#aggregate-numeric-helpers-in-codeblocks)
+for parameters, effects, min/max overloads and the selected-string index limit.
+
 Arithmetic symbols are accepted as the equivalent call names for the binary or
 variadic arithmetic family: `+(a, b)` -> `num_add(a, b)`, `-(a, b)` ->
 `num_sub(a, b)`, `*(a, b)` -> `num_mul(a, b)`, `/(a, b)` -> `num_div(a, b)`,
@@ -914,7 +920,7 @@ Perl callable bodies also execute the scalar names, word/symbol aliases and
 numeric receiver links described here. See the
 [callable examples](values-containers-and-flow-helpers.md#scalar-numeric-helpers-in-codeblocks)
 for caller effects, operand snapshots, terminal chains and the remaining
-boolean-literal and deferred aggregate limits. The separate grouping boundary remains:
+boolean-literal and deferred pipeline limits. The separate grouping boundary remains:
 
 - Wrapping the entire call in extra parentheses, as in `out = (div(14, 2))`
   or `out = (/(14, 2))`, currently reaches a host-function or regex error.

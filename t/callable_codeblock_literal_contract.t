@@ -747,4 +747,24 @@ subtest 'with restores a function binding frame after a callable error' => sub {
     }
 };
 
+subtest 'malformed fluent members preserve typed invocation errors and records' => sub {
+    require LinkedSpec::CodeblockRuntime;
+    my $json = JSON::PP->new->canonical;
+    foreach my $bad (undef, 'not-a-call', []) {
+        my $record = parse_expr('{|| return(items.sum()) }');
+        $record->{body_ast}{statements}[0]{expr}{args}[0]{calls}[0] = $bad;
+        my $original = $json->encode($record);
+        my $items = [3,1,8];
+        my $error;
+        eval { LinkedSpec::CodeblockRuntime::invoke($record, [], {items => \$items}, 'malformed'); 1 }
+            or $error = $@;
+        my $typed = ref($error) eq 'LinkedSpec::CodeblockRuntime::Error';
+        ok($typed, 'malformed serialized member reports the public typed error');
+        is($typed ? $error->{code} : undef, 'invalid_codeblock_body', 'body error code stays exact');
+        is($typed ? $error->{detail} : undef, 'invalid fluent call', 'fluent member detail stays exact');
+        is_deeply($items, [3,1,8], 'failed invocation preserves caller values');
+        is($json->encode($record), $original, 'validation does not vivify or mutate the record');
+    }
+};
+
 done_testing();

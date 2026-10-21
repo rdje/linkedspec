@@ -1,20 +1,17 @@
 # MEMORY
 
-- activation_commit: `9fc95b0bd1167db110e91bf50a8939129485c960` — clean drop6 activation; derive latest identity from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.6` — subject `TYPE-REFERENCE-BOOK.1.2.6 - materialize generated drop keys`.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.7` (next; activate only from clean Git after the readonly drop baseline).
-- task_owner: `docs/tasks/TYPE-REFERENCE-BOOK.md`.
-- next_action: Run docs/checkpoints/type-drop-generated/publish_final.py readonly from clean Git to ignored baseline log/status; preserve its whole claim, publication, closed manifest/full modes and actual clean baseline before aggregate7 writes. Then reconcile and repair the deferred reducer family.
-- in_flight_uncommitted: none in the intended clean post-landing handoff; Git is authoritative.
-- blockers: no director input required; aggregates7 -> operation inventory1/book mapping2/layout3.
-- current_proof: docs/checkpoints/type-drop-generated/README.md; claim docs/claims/TYPE-REFERENCE-BOOK.1.2.6.json. Fixed48 public cases:34 desired values/14 diagnostic controls;4 actual emitter faults restored. Normal/FATAL syntax profiles remain enforced. Exact staged canonical receipt and normal hooks govern landing.
-- evidence: Direct9 suites/1322 TAP, five selected real Phase0 roots including18 permanent assertions; book89/three executed examples/heading RED; Knowledge in sync. Source/arity/null diagnostics survive; no portable reference-key coercion admission.
-- historical_admission: Exact two-subtest drop inverse precedes numeric22/older70; all644 prior controls plus6 pass. Archive134/84613241 bytes,22 recovery controls and zero original-log/tracked writes remain exact; two auditor faults and semantic table-byte denial restore.
-- custody: Whole numeric5/10202 inputs/full modes and actual clean readonly0 remain at real accepted9fc95b0bd. Failed shape/selector/oracle preparations, intentional receiver-copy TAP diagnostic and hash-gated missing README draft recovery are retained. No fictional draft Git revision or silently refreshed observation.
-- known_defects: Deferred aggregates7, startup20 numeric grammar,32 caller shadowing,35 callback boolean-literal kinds and87.4 grouping remain owned. Drop6 repairs warnings, splices, key snapshots and typed key shapes. No full family/backend/private-parent admission.
-- canonical_environment: Start CI/public quiet wrappers through approved host execution; never weaken or bypass the profile.
-- cleanup: Latest2026-10-20T19:45:58.736082+00:00; removed only the preserved checkpoint common.pyc. docs/ARTIFACT_CLEANUP.md owns the latest record; source and all original-stage bytes remain.
-- deferred: .1.2.7 -> operation inventory .1.2.1 -> book mapping .1.2.2 -> layout .1.3 -> legacy .8 -> metadata QA .13 -> remaining references/closeout.
-- standing_limit: Other repositories and RGX/PGEN remain read-only black boxes. All project data stays on this volume; no internal procedures or pin changes.
-- sequence: Full PNT continues, one normal commit per completed leaf. No push yet.
-- admission: Current historical-fact route uses its composed producer; first10304-input unpublished drop draft/actual readonly0 and exact staged images survive in admission/. Superseded canonical143 precedes bound edits; final publication/receipt govern landing.
+- activation_commit: `efad62ba7a70e0b9d930b761f9cacaad87a0210c` — derive current HEAD from Git; normal post-commit requires HEAD^1.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.7` — subject `TYPE-REFERENCE-BOOK.1.2.7 - execute deferred array reducers`.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.9` (pending clean activation); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.md.
+- next_action: Run aggregate publish_portable.py source-readonly; preserve its complete claim/publication/physical and logical input manifests/full modes and actual clean baseline before activating the owned deferred sorted/take pipeline9. Continue full PNT after each normal commit.
+- in_flight_uncommitted: none; intended clean post-landing handoff. No verification job belongs to the committed state.
+- current_proof:214/212 values/two diagnostics;106 accepted RED/108 controls;7 restored runtime faults;final14/1948;201+3 permanent/15 malformed;book89/3/heading RED;history650 unchanged. Exact staged Git-size/canonical receipt governs landing.
+- book_admission:50007/50000 RED ->49836 after171 lossless prose-line reductions; unchanged fences/rendered content and15 whitespace-only search bodies. Fact finding/questions merged into existing owner; no budget raised.
+- checkpoint: docs/checkpoints/type-aggregate-codeblocks/README.md; publish_portable.py is current source-readonly gateway; it rehydrates ignored logical aliases from tracked chunks. Claim docs/claims/TYPE-REFERENCE-BOOK.1.2.7.json.
+- portable_inputs:37 verified32MiB chunks/3 aliases/1171950805 exact bytes/full modes. Five chunk/alias faults retain pre-root-guard bytes; separate metadata-only nested-root RED/rejection and final cold replay cover the helper delta. Actual readers consume recovered inputs before verified backup deletion/residue0.
+- custody: Whole accepted drop10334 plus unpublished10496/images10499,10522/images10525 and10540/images10543/full modes/actual readonly0 survive. No draft Git revision invented; old publication outputs remain frozen. Canonical1/2 deliberately joined143 before bound changes; neither is claimed successful.
+- containment: Notes compact only the new record; provisional4959 outputs/failures survive and committed history stays unchanged. context.py hash-gates immutable gzip/chunks without recursive embedding; all prior logical bytes remain exact.
+- kind95: Three real selected-string index failures/two scalar controls/B flags remain owned despite numeric JSON. Actual old192-input library/65 loaded owners is verified/restored. Original95 instrument/environment remains unretained;95 follows94 before51 with Boolean audit.
+- next_owned:9 -> inventory1 -> book mapping2 -> layout3 -> legacy8 -> metadata QA13 -> references/closeout. Startup20/32/35/87.4 and constructor94 remain owned.
+- cleanup: Latest2026-10-20T19:45:58.736082+00:00; less than24h. Frozen inputs/chunks remain required. Reconstructed aliases are project-local generated data; the gateway verifies them.
+- standing_limit: Other repositories and RGX/PGEN remain read-only black boxes. Project data stays on this volume. Full CI before final clean push; no push yet.

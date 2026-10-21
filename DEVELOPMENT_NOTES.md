@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-21 — TYPE-REFERENCE-BOOK.1.2.7 — Aggregate dispatch, scalar kinds and source identity
+
+Array reducers keep Perl's legacy all-term decimal/empty/Boolean/selected-term policy, separate from scalar ADR0029. Scalar min/max operands evaluate before kind rejection; zero-argument array receivers terminate. Invalid emitted shapes return complete undef. One preflight skip preserves typed malformed-call errors and caller/record values.
+
+Numeric JSON can hide selected-string kind95: real index writes and B flags distinguish it.95 owns Boolean authority/result normalization. Actual old192-input library replay checks65 loaded owners; rejected shadows and the original unretained95 environment stay explicit. Parse the existing complete receiver-copy diagnostic rather than suppressing it.
+
+Book reflow preserves all fences and normalized rendered content. Verify the sole changed search-index URL against both actual payloads:15 body whitespace changes, all other fields equal. Merge the entire new finding/questions into the existing card to respect1350 files. Canonical1/failed pressure epochs remain retained. Provisional rollover4959 exceeded frozen archive capacity; its full outputs survive while final notes restore the old manifest and compact only this new record.
+
+Checkpoint context stops recursively embedding immutable gzip/chunks, retaining their byte/mode identities and whole plain-source packets. Three oversized draft inputs now recover from37 tracked32MiB chunks into ignored aliases. Five faults retain the pre-root-guard helper; a metadata-only boundary RED and final cold replay cover its sole delta. All old logical bytes/modes remain exact; changing an immutable input needs a before packet.
+
+Canonical source epochs, rejected preparations and before packets: docs/checkpoints/type-aggregate-codeblocks/. Current readonly command is publish_portable.py; exact canonical receipt governs landing. Pipeline9 and kind95 remain owned.
+
 ## 2026-10-20 — TYPE-REFERENCE-BOOK.1.2.6 — Drop key evaluation and historical stages
 
 A named private key list avoids Perl's scalar hash-slice syntax advisory without changing warning policy. Materialize each operand independently: assigning the whole list only after evaluating its members retains Perl aliases and lets a later callback change an earlier key. Explicit flat splices need their list producer before scalar access lowering; typed hash shapes must not leak DSL colons to host Perl. Source copying still precedes key evaluation. Underlying invalid-source and uninitialized-key diagnostics remain separate from the repaired compiler advisory.
