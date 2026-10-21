@@ -389,4 +389,73 @@ SPEC
  ok(!exists($ctx->{last_error}), 'selector-free compatibility result leaves structured runtime error clear');
 };
 
+subtest 'sorted scalar kinds survive lexical selection and cloning' => sub {
+ use utf8;
+ require B;
+ require Scalar::Util;
+ require Storable;
+ require LinkedSpec::BindingRuntime;
+
+ my $kind_json = JSON::PP->new->utf8->canonical->allow_nonref;
+
+ my $scalar_flags = sub {
+  my ($value) = @_;
+  return {kind => 'null'} unless defined $value;
+  return {kind => 'boolean'} if JSON::PP::is_bool($value);
+  my $flags = B::svref_2object(\$value)->FLAGS;
+  return {
+   iOK => ($flags & B::SVp_IOK()) ? 1 : 0,
+   nOK => ($flags & B::SVp_NOK()) ? 1 : 0,
+   pOK => ($flags & B::SVp_POK()) ? 1 : 0,
+  };
+ };
+
+ my $flags_for = sub {
+  my ($values) = @_;
+  return [map { $scalar_flags->($_) } @$values];
+ };
+
+ my @cases = (
+  {id => 'integers', input => [2,10,1], source => [2,10,1], expected => [1,10,2], order => [2,1,0]},
+  {id => 'decimals', input => [2.5,10.25,-1.5,0], source => [2.5,10.25,-1.5,0], expected => [-1.5,0,10.25,2.5], order => [2,3,1,0]},
+  {id => 'numeric strings', input => ['2','10','1'], source => ['2','10','1'], expected => ['1','10','2'], order => [2,1,0]},
+  {id => 'mixed scalar kinds', input => [2,'10',1,'2',10], source => [2,'10',1,'2',10], expected => [1,'10',10,2,'2'], order => [2,1,4,0,3]},
+  {id => 'null and empty string ties', input => [2,undef,'0',0,''], source => [2,undef,'0',0,''], expected => [undef,'','0',0,2], order => [1,4,2,3,0]},
+  {id => 'boolean and scalar ties', input => [JSON::PP::true(),JSON::PP::false(),1,0,'1','0'], source => [JSON::PP::true(),JSON::PP::false(),1,0,'1','0'], expected => [JSON::PP::false(),0,'0',JSON::PP::true(),1,'1'], order => [1,3,5,0,2,4]},
+  {id => 'Unicode text', input => ['é','A','🦀','a'], source => ['é','A','🦀','a'], expected => ['A','a','é','🦀'], order => [1,3,0,2]},
+  {id => 'empty array', input => [], source => [], expected => [], order => []},
+  {id => 'singleton', input => [7], source => [7], expected => [7], order => [0]},
+ );
+
+ foreach my $case (@cases) {
+  subtest $case->{id} => sub {
+   my $input = $case->{input};
+   my $before = $flags_for->($input);
+   my ($result, $copy, $source_flags, $result_flags, @warnings);
+   {
+    local $SIG{__WARN__} = sub { push @warnings, @_ };
+    $result = LinkedSpec::BindingRuntime::array_transform($input, 'items', 'sorted');
+    # Observe sort before cloning: Storable may cache private integer flags
+    # on floating-point input scalars without changing their numeric kind.
+    $source_flags = $flags_for->($input);
+    $result_flags = $flags_for->($result);
+    $copy = Storable::dclone($result);
+   }
+   is_deeply($source_flags, $before, 'sorting preserves source scalar flags');
+   is_deeply($result_flags, [map { $before->[$_] } @{$case->{order}}], 'sorted elements retain their original scalar flags');
+   isnt(Scalar::Util::refaddr($result), Scalar::Util::refaddr($input), 'sorting returns an independent array');
+   is($kind_json->encode($result), $kind_json->encode($case->{expected}), 'lexical order and observable scalar kinds');
+   is($kind_json->encode($copy), $kind_json->encode($case->{expected}), 'a container clone preserves the sorted scalar kinds');
+   is($kind_json->encode($input), $kind_json->encode($case->{source}), 'sorting leaves the source value intact');
+   is_deeply(\@warnings, [], 'sorting and cloning preserve warning discipline');
+   if (@$result) {
+    $result->[0] = 'changed';
+   } else {
+    push @$result, 'changed';
+   }
+   is($kind_json->encode($input), $kind_json->encode($case->{source}), 'changing the result leaves the source intact');
+  };
+ }
+};
+
 done_testing();

@@ -1,17 +1,12 @@
 # MEMORY
 
-- activation_commit: `49ce3fb472b01dc6a7987b0038fae22686dee7cd` — normal post-commit requires HEAD^1; derive current identity from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.9` — subject `TYPE-REFERENCE-BOOK.1.2.9 - execute deferred sorted take pipelines`.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.13` (pending clean activation); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.md.
-- next_action: Run docs/checkpoints/type-array-pipelines/publish.py source-readonly and preserve the complete accepted9 claim/publication/input manifest/full modes/actual clean baseline and Git images before any13-bound write. Then repair the already diagnosed sorted/copy scalar-kind P1. Continue full PNT after each normal commit.
-- in_flight_uncommitted: none; intended clean post-landing handoff. No verification job belongs to the committed state.
-- current_proof:85 final public values/41 accepted RED/44 controls; six pre-argument-guard faults plus separate final guard fault/15 typed cases. Final14/1949 TAP;85 new permanent/one advanced earlier expectation/75 malformed assertions. Book89/3/heading RED; exact canonical receipt and normal hooks govern landing.
-- checkpoint: docs/checkpoints/type-array-pipelines/README.md; claim docs/claims/TYPE-REFERENCE-BOOK.1.2.9.json. publish.py is the current source-readonly gateway; it verifies/reconstructs three ignored aggregate logical inputs from tracked chunks.
-- prior: Accepted7 whole claim/publication/10608 physical/3 logical/full modes/10611 Git-verified images and clean readonly0 survive before writes. Its claim is historical only at real49ce. Source contexts retain changed plain bytes, immutable gzip/chunk identities and real accepted Git recovery without recursive embedding.
-- rejected_epochs: Original88 has wrong child-push syntax, scalar-kind and separate helper gaps; second85 has unsupported body indexed writes. Both remain exact. First kind instrument fails blessed-error serialization; corrected16 rows diagnose flags/clone/real index failure. First14/1948 rejects only the old expected unknown sorted; final14 passes after that one expectation and the typed argument guard.
-- next_kind13: Lexical comparison adds POK alongside IOK; Storable cloning drops IOK and serializes strings. Numeric-literal controls retain IOK alone; ordinary/deferred selected numeric indexes reject array writes. Actual sources/16 rows are retained; no kind repair admitted by9. Keep reducer95 separate.
-- next_owned:13 P1 -> count/first10 -> registered sorted/ordinary length11 -> deferred indexed-write12 -> inventory1 -> book mapping2 -> layout3 -> legacy8 -> private metadata QA13 -> references/closeout. See findings.md for exact reproductions and schedule.
-- standing_defects: Startup20/32/35/87.4, constructor94 and reducer95 remain owned. No general pipeline, complete inventory, arbitrary host-object deep-copy or cross-backend admission.
-- cleanup: Latest2026-10-20T19:45:58.736082+00:00; less than24h at this slice. Frozen proof inputs/chunks are required; generated checkpoint caches stay ignored.
-- standing_limit: Other repositories and RGX/PGEN are read-only black boxes. All project data stays on the repository volume. No push until PNT is exhausted; full CI before every push.
-- report_epoch: Whole first10716 unpublished claim/publication/10719 full-mode source images/actual readonly0 retained. Structured7 was correct; console6 is corrected by deriving result fields. Current publication3/manifest3 and final artifact4 controls bind the same publish.py gateway; original outputs stay frozen.
+- activation_commit: `eff23e4894727205dc12b209baab7065180a08e5` — clean leaf13 base; derive current identity from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.13` — subject `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.13` (completed); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.md.
+- next_action: From the clean committed handoff, activate TYPE-REFERENCE-BOOK.1.2.10 and reproduce deferred count/first against the accepted public controls before its bounded repair.
+- in_flight_uncommitted: none — intended clean post-landing state; canonical receipt and normal hooks are mandatory admission.
+- proof: docs/checkpoints/type-sort-copy-kinds/publish.py;116 typed values/47 accepted RED/69 controls, six restored source faults,14/1950 TAP,16 public flag routes, nine direct cases/72 assertions, book89/5/heading RED and history650.
+- custody: Whole accepted9 physical10743/logical3/images10746/full modes/actual clean readonly0 survives at real eff23e489. Original UTF8, decimal-cache oracle, broad TAP-count and unstable-input epochs stay exact; distinct corrected proofs pass.
+- owners:10 deferred count/first ->11 registered sorted/ordinary length ->12 deferred indexed writes ->inventory1/mapping2/layout3/legacy8/private metadata QA/references. Reducer95 remains separate.
+- limits: No complete type/operation inventory, whole pipeline or cross-backend admission. Other repositories and RGX/PGEN remain read-only black boxes. Project data stays on the repository volume. No push until PNT is exhausted.
+- cleanup: Latest2026-10-20T19:45:58.736082+00:00; required frozen proof/chunks remain retained.

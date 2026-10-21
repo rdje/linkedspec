@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-21 - TYPE-REFERENCE-BOOK.1.2.13: preserve sorted scalar kinds
+
+Compare scalar copies in both generated sort paths and BindingRuntime. Lexical order and numeric-looking strings survive callable/container copies and typed indexes; cloning/index policy is unchanged. Fixed116: accepted47 RED/69 controls, six actual source faults/restoration,14/1950 TAP,16 public flag routes and nine direct cases/72 assertions pass. Book89/5 and heading RED pass. Whole accepted9 custody, original rejected observer/test epochs and three artifact denials/actual validator fault remain retained at docs/checkpoints/type-sort-copy-kinds/. Exact canonical receipt/normal hooks govern landing; count/first10 is next. No complete inventory/backend admission.
+
 ## 2026-10-21 — TYPE-REFERENCE-BOOK.1.2.9: callable sorted/take
 
 Perl codeblocks execute lexical sorted and integer-prefix take in free/receiver forms, with lazy count evaluation, independent arrays and compatible terminal reducers. Canonical fluent arguments require arrays and preserve typed errors/records/caller values. Final85 values/41 accepted RED/44 controls; six pre-guard faults plus one final guard fault;14/1949 TAP/history650/scanner;85 new permanent/one advanced expectation/75 malformed assertions;book89/3/anchor RED. Exact staged canonical receipt governs landing. Whole accepted7 and all rejected epochs remain recoverable; source-closed publication and actual artifact validator controls bind the result. P1 kind13 and10/11/12 stay owned. See docs/checkpoints/type-array-pipelines/README.md.

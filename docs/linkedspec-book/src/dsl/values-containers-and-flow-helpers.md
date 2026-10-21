@@ -111,8 +111,37 @@ shapes return `undef` before operands run. Malformed serialized fluent argument 
 typed `invalid_codeblock_body` errors and preserve the record and caller values. Array reducers terminate a receiver
 chain: `items.sorted().take(2).sum()` works; adding `.abs()` returns `undef` before
 the receiver or count runs. A separately returned scalar can begin another chain.
-Numeric-looking selected terms retain existing scalar-kind caveats; use numeric
-arithmetic before using a selected term as a numeric write index.
+#### Scalar kinds after sorting
+
+Sorting preserves each element's scalar kind through codeblock arguments and
+returned containers. Numbers stay numbers; numeric-looking strings stay strings.
+The selected numeric value below remains a valid array-write index. This returns
+`[[[1,10,2]],["zero","changed","two"],[2,10,1]]`:
+
+```text
+items = [2,10,1];
+keep = {|values| return([values]) };
+saved = keep(items.sorted());
+index = saved[0][0];
+target = ["zero","one","two"];
+target[index] = "changed";
+return([saved,target,items]);
+```
+
+For string inputs, the selected `"1"` remains an harray key. This returns
+`[[["1","10","2"]],{"1":"changed"},["2","10","1"]]`:
+
+```text
+items = ["2","10","1"];
+keep = {|values| return([values]) };
+saved = keep(items.sorted());
+key = saved[0][0];
+target = {"1":"old"};
+target[key] = "changed";
+return([saved,target,items]);
+```
+
+Regenerate saved Perl parser source after upgrading to use this sorting behavior.
 
 ## Per-rule default accumulator
 

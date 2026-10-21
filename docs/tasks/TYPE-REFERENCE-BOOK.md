@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / numeric .1.2.5 follows completed scoped-callable repair; before enumeration
+- Status: `active` / next deferred count/first .1.2.10; before enumeration
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-20`
+- Last updated: `2026-10-21`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -105,7 +105,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -253,14 +253,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit subject: `TYPE-REFERENCE-BOOK.1.2.9 - execute deferred sorted take pipelines`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.13`
-  Status: `pending` / P1 defect owned
+  Status: `done` / selected proof; exact canonical admission required
   Goal: Preserve numeric kinds through lexical sorting and container copies.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.9`
-  Reproduce/impact: Actual ordinary/deferred sorted scalars retain IOK+POK; Storable cloning drops IOK and emits strings. Selected numeric indexes reject array writes. kind-investigation2.json.gz retains16 native/fresh rows and literal controls.
-  Schedule: Next after9, before10. Audit pure-sort/copy kind authority, fix source preservation and cloning, and verify flags, serialized kinds, public numeric indexes and direct consumers. Existing reducer95 stays separately owned.
-  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+  Owned paths: docs/checkpoints/type-sort-copy-kinds/; MethodLowering sorted emitters, BindingRuntime sorted comparator, permanent numeric/kind tests, public book/fact and normal continuity. CodeblockRuntime cloning remains a direct consumer; reducer95 is separate.
+  Verification tier: `canonical`
+  Focused checks: Fixed native/Get-dump/descriptor/fresh values and typed-index errors; independent B flags, JSON and clone kinds; numeric-looking strings, null/boolean and lexical order; source/result independence, ordinary/deferred and implicit-accumulator paths; direct consumers, book/Knowledge/history/doctrines.
+  Canonical trigger: Observable Perl scalar-kind and pure-sort correction; exact staged canonical receipt required before normal landing.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.13.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Clean accepted9:16 flag/value routes and8 descriptor/Get/dump/emitted cases reproduce numeric-to-string clones and failed numeric indexes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Generated sorted comparators compare aliased operands; BindingRuntime array_transform does the same on copied elements. String flags then change Storable clone and typed nested-write behavior.
+  - [x] **FIX** — Preserve operand kinds without changing lexical/null ordering or coercing legitimate strings.
+  - [x] **ADDRESSED (verified)** — Fixed kind/index/copy population and distinguishing actual source faults/restoration.
+  - [x] **NO REGRESSION** — Permanent tests, direct consumers and exact canonical receipt.
+  - [x] **LOCKSTEP** — Worked book, canonical fact, roadmap and clean handoff; no inventory/backend admission.
+  Pre-write custody: Whole accepted9 physical10743/logical3/images10746/full modes, actual clean source-readonly0 and independently verified committed Git images survive at real eff23e489 before changes. All10746 inputs remain unchanged through the new16/8 public baseline.
+  Continuity intake owned/fixed here: The tree header still named numeric5/October20 and the parent child list omitted9/13/10/11/12. Align current metadata and child order during activation; detailed dated child evidence stays unchanged.
+  Observer correction owned here: First116-case run has unchanged inputs and exit0, but the old public observer prints unencoded wide-character JSON to byte stdout. Its exact warning rejects the strict transport check before loaded-source validation. Preserve all original channels/context; a distinct UTF-8 observer and accepted2 rerun repair transport without changing runtime or weakening diagnostics.
+  Direct-test intake owned/fixed here: checks-test-run retains an actual decimals flag RED with unchanged inputs: result gains private iOK while all value/clone kinds pass. Actual assignment/sort preserve flags; dclone adds private iOK to floating-point sources. Capture sort flags before clone; all nine cases/72 assertions then pass. Failed test/diagnosis and broad-count writer rejection remain exact.
+  Schedule: Finish13 before deferred count/first10, registered sorted/ordinary length11 and deferred indexed-write12. Keep reducer95 and complete operation inventory separately owned.
+
+  Verified:116 fixed values/47 accepted RED/69 controls; all GREEN. Three old comparator paths, numeric order/coercion and source mutation each reject and exactly restore. Mandatory14/1950/history650/scanner,16 public flag routes and book89/5/heading RED pass. First flag epoch changed a proof-source input and is rejected; flags2 is stable. Three artifact denials and actual validator fault restore.
+  Custody: Whole accepted9 and every supplied epoch recover; original transport/test/proof-writer failures stay retained. docs/checkpoints/type-sort-copy-kinds/publish.py is the readonly claim gateway; exact staged canonical receipt and normal hooks govern landing. Next10 only after clean handoff.
+  Commit subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.10`
   Status: `pending` / P2 defect owned
@@ -385,7 +401,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `done` | Quiet generated drop, splices/key snapshots;7 next. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `done` | Bounded availability/portable evidence; owned pipeline9 next. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.9` | `done` | Callable sorted/take; bounded proof/typed argument guard; kind13 next. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.13` | `pending` | P1 sorted/copy scalar-kind repair next after9. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.13` | `done` |116 values/47 RED/six faults/14-1950/book89-5; canonical admission mandatory. |
 | 8 | `TYPE-REFERENCE-BOOK.1.2.10` | `pending` | Deferred count/first after13. |
 | 9 | `TYPE-REFERENCE-BOOK.1.2.11` | `pending` | Registered sorted/ordinary length after10. |
 | 10 | `TYPE-REFERENCE-BOOK.1.2.12` | `pending` | Deferred indexed writes before inventory. |
@@ -410,9 +426,11 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-No director input required. Pipeline9 selected proof is complete; exact canonical/normal landing is mandatory. P1 kind13 then10/11/12 precede complete inventory1. No dirty pivot.
+No director input required. Kind13 selected proof is complete; exact canonical/normal landing is mandatory. Activate10 only after clean handoff; then11/12 before inventory1. No dirty pivot.
 
 ## Verification Log
+
+- `2026-10-21` — `.1.2.13`:116/47 RED/six faults;14/1950/history650;16 flag routes;9/72 direct;book89/5. Source-closed gateway and exact canonical receipt govern landing.
 
 - `2026-10-20` — `.1.2.5`: See the complete numeric checkpoint above.
 
@@ -427,6 +445,8 @@ No director input required. Pipeline9 selected proof is complete; exact canonica
   qualitative gap only. Exact legacy status contradictions are recorded above; no runtime or full coverage proof.
 
 ## Commit Log
+
+Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; derive its accepted identity from Git.
 
 Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 

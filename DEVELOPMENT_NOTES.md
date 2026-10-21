@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-21 - sort kinds13
+
+Compare scalar copies; measure flags before Storable caches. See docs/checkpoints/type-sort-copy-kinds/.
+
 ## 2026-10-21 — deferred selection
 
 Perl sorted/take execute in codeblocks; malformed fluent lists fail with typed errors. Proof and kind13 follow-up: docs/checkpoints/type-array-pipelines/.

@@ -1,0 +1,1 @@
+{"cases":[{"expected":[2,2,2],"id":"legacy/raw","source":"Top: /x/\n I { push(Number); push(Number); push(Number); return(sorted(Top)) }\nNumber: I { return(2) }\n"},{"expected":[2,2,2],"id":"legacy/argument-copy","source":"Top: /x/\n I { push(Number); push(Number); push(Number); keep = {|values| return(values) }; return(keep(sorted(Top))) }\nNumber: I { return(2) }\n"}]}

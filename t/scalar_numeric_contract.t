@@ -49,7 +49,7 @@ like(
 
 subtest 'scalar numeric calls and receivers compose inside deferred codeblocks' => sub {
     my @cases;
-    foreach my $name (qw(cases effects stability receiver-invalid terminals pipelines)) {
+    foreach my $name (qw(cases effects stability receiver-invalid terminals pipelines sort-kinds)) {
         my $path = File::Spec->catfile($repo_root, 'tests', 'numeric-codeblocks', $name . '.json');
         open my $fh, '<:raw', $path or die "Could not read $path: $!";
         my $fixture = JSON::PP->new->utf8->decode(do { local $/; <$fh> });
@@ -62,7 +62,8 @@ subtest 'scalar numeric calls and receivers compose inside deferred codeblocks' 
     foreach my $case (@{$fixture->{cases}}) {
         my $package = 'NumericCodeblockContract' . $index++;
         subtest $case->{id} => sub {
-            my $source = ($case->{functions} // '') . "Top: /x/\n I { $case->{body} }\n";
+            my $source = $case->{source}
+                // (($case->{functions} // '') . "Top: /x/\n I { $case->{body} }\n");
             my (%context, @warnings, $actual, $native_ok, $native_error, $output);
             {
                 open my $capture, '>', \$output or die "Capture diagnostic output: $!";

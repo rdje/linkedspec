@@ -27,10 +27,10 @@ answers:
   - "which task owns deferred count first indexed writes and registered sorted"
   - "why do malformed fluent arguments leak a Perl array-reference error"
 date: 2026-10-21
-status: bounded Perl helpers; sorted-kind13 and inventory pending
+status: bounded Perl helpers; kind13 fixed; inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "Type3-.9 retain exact epochs;9 admits only callable sorted/take. kind13/10/11/12 remain owned."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-array-pipelines/publish.py"
+evidence: "Type3-.13 retain exact epochs;13 verifies scalar kinds.10/11/12 remain owned."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-sort-copy-kinds/publish.py"
 ---
 
 # Value model and bounded Perl helper execution
@@ -46,22 +46,20 @@ Perl checks every decimal term: empty sum0, othersundef; Rust filtering differs.
 [[perl-numeric-reducer-string-result-kinds]] owns reducer95. Boolean35,
 Unicode20/constructor94 remain separate.
 
-Perl callable sorted/take now execute free/receiver forms. Sort is lexical;
-take defaults1, integer spelling only, negative/invalid0, oversized counts clamp.
-Non-arrays yield[] and skip count; sources stay independent.13 owns sorted/copy
-kinds next: comparison adds POK; Storable
-clone drops numeric flags. Actual array-index writes reject.10 owns deferred
+Perl callable sorted/take execute free/receiver forms. Sort is lexical;
+comparing copied operands preserves numeric/string kinds through clones/indexes.
+Storable may cache private iOK on floating-point sources; observe sort flags before
+cloning. Numeric/string JSON kinds remain distinct.
+take defaults1; integer spelling only, negative/invalid0, oversized counts clamp.
+Non-arrays yield[] and skip count; source/results stay independent.10 owns deferred
 count/first,11 registered sorted/ordinary length,12 deferred indexed writes.
-Serialized fluent args require arrays before preflight.
-No family/backend admission.
+Serialized fluent args require arrays before preflight. No family/backend admission.
 
 drop_keys copies keys/splices, stays FATAL-warning quiet and retains null
 diagnostics. c053c9dcf inventoried substr/typed receivers; references remain pending.
 
-Accepted7 builds reproduce both pages except their search-index reference.
-Decoded indexes differ only in15 body-whitespace strings; other fields match.
-The strict rejection survives. Verify payloads before normalizing that reference;
-this grants no general asset normalization.
+Accepted7 HTML differs only by its search-index reference: decoded payload changes
+are15 body-whitespace strings. Strict rejection remains; no general normalization.
 
 Context hash-gates immutable gzip/chunks without embedding.37 verified32MiB parts
 restore three exact byte/mode aliases with nested-repository guards. Old recursive

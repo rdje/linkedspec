@@ -2,20 +2,21 @@
 
 ## Current Activity
 
-Pipeline9 completes bounded Perl callable sorted/take and typed fluent-list validation. P1 sorted/copy kind13 is next after clean landing;10/11/12 precede complete inventory.
+TYPE-REFERENCE-BOOK.1.2.13 selected proof complete; canonical receipt and normal landing required. Next clean activation is deferred count/first10, then11/12 before complete inventory.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.9:85 final values through descriptor/native Get-dump/fresh generated execution;41 real accepted RED/44 controls. Six faults retain their pre-argument-guard source, and the final guard has a separate actual removal/restoration. Final14/1949 TAP/history650/scanner;85 new permanent/one advanced prior expectation/75 malformed assertions. Book89/3/heading RED, three artifact denials/actual validator fault, complete source custody and exact staged canonical receipt govern acceptance. Whole accepted7 physical10608/logical3/images10611/full modes/actual clean readonly0 survives.
+TYPE-REFERENCE-BOOK.1.2.13 preserves numeric/string kinds through lexical sorting, copies and typed indexes. Fixed116 has47 actual accepted RED/69 controls; all116 pass after three comparator fixes. Six actual source faults reject/restore. Direct14/1950,16 public flag routes, nine kind cases/72 assertions, history650 and book89/5/heading RED pass. Three artifact denials and actual validator fault restore; whole accepted9 physical10743/logical3/images10746/full modes/actual clean readonly0 survives at real eff23e489.
 
-Rejected88/85 and first kind/metadata writer epochs remain exact. The first14/1948 failure exposes only the intentional old unknown sorted expectation, advanced to independently verified4. Numeric sort/copy flags remain P1 kind13; missing count/first10, registered sorted/ordinary length11 and deferred indexed-write12 are owned and scheduled. No whole-family/backend,95 or complete reference admission.
+Original UTF8 transport, decimal flags observed after Storable cache effects, broad TAP-plan counting and the unstable first flag-input epoch remain exact. Distinct corrected proofs pass without production changes for those observer issues. No inventory/backend or reducer95 admission.
 
 ## Next Action
 
-From clean Git, run the pipeline publisher readonly and preserve its whole accepted claim/publication/physical and logical manifest/full modes/actual clean baseline and Git images before13. Repair sorted/copy scalar kinds, then continue full PNT through the remaining owned frontier. No push yet.
+Finish exact canonical/normal landing, then activate10 only from clean Git. Continue owned11/12 before inventory1/mapping2/layout3. No push yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.13` —116/47 accepted RED; six faults;14/1950;16 flag routes;9/72 direct;book89/5; count/first10 next.
 - `TYPE-REFERENCE-BOOK.1.2.9` —85/41 accepted RED;7 restored fault epochs;14/1949;85+1 permanent/75 malformed;book89/3;kind13 next.
 - `TYPE-REFERENCE-BOOK.1.2.7` —214/106 RED;7 faults;14/1948;201+3 permanent/15 malformed;book89/3;kind95/next9 owned.
 - `TYPE-REFERENCE-BOOK.1.2.6` —34 value/14 diagnostic controls;4 faults;9/1322; five Phase0 roots/18 permanent;book89/3; historical644+6; aggregates7 next.
@@ -31,7 +32,6 @@ From clean Git, run the pipeline publisher readonly and preserve its whole accep
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.8` — exact257-line suffix/230 old files; actual1980/1981 inputs; sole ADR0136/six scalars;60 numeric/31 authority REDs; evidence7; Knowledge8388337/book89/4; readonly550/128458; canonical boundary, then due artifact review.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.7` — native mixed26/26/object108/108;445/53+444/100 RED/all GREEN;28 faults;91/363/30394; diagnostics358/16; standard1035; evidence10; Knowledge8388255/book89/4; original546 preserved/replay2020; corrected565/129686; .5.8 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.5.6` — native426 exact;1290/435 RED/all GREEN;14 faults;cardinality62/1;89/349/29504; public343/16 before/after; standard1035; evidence6; Knowledge8388505/book89/4; readonly525/121708; mixed defaults .5.7 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.5` — native176 exact;452/77 RED/all GREEN;12 source faults;88/339/28214; public336/16 before/after; standard1035; evidence5; Knowledge8388480/book89/4; readonly506/116166; direct/rule .5.6 next.
 
 ## History
 

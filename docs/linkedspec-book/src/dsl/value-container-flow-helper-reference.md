@@ -1130,6 +1130,7 @@ array-yielding expression-valued block can be the receiver too:
 `{ [3, 1, 2] }.sorted().join_values(",")`.
 
 Perl callable bodies also support `sorted` and `take`, including their receiver forms and reducer continuations. See the [worked sorting and selection examples](values-containers-and-flow-helpers.md#sorting-and-taking-inside-perl-codeblocks) for count rules, copies, evaluation order and remaining callable limits.
+Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).
 
 ## Hash helpers
 

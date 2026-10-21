@@ -372,7 +372,12 @@ sub array_transform {
   my %seen;
   @values = grep { !$seen{defined($_) ? "D\0$_" : "U\0"}++ } @values;
  } elsif ($operation eq 'sorted') {
-  @values = sort { (defined($a) ? $a : '') cmp (defined($b) ? $b : '') } @values;
+  # String comparison caches text on its operands. Compare copies so the
+  # returned elements keep their original scalar kinds.
+  @values = sort {
+   my ($left, $right) = ($a, $b);
+   (defined($left) ? $left : '') cmp (defined($right) ? $right : '')
+  } @values;
  } elsif ($operation eq 'reversed') {
   @values = reverse @values;
  } elsif ($operation eq 'filter_match') {

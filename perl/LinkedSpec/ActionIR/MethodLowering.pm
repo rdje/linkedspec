@@ -6402,19 +6402,24 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   my $sorted_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $sorted_args;
 
+  # Compare scalar copies: cmp must not add string flags to stored elements.
+  my $sort_comparison = 'my ($__ls_sort_left, $__ls_sort_right) = ($a, $b); '
+   . '(defined($__ls_sort_left) ? $__ls_sort_left : "") cmp '
+   . '(defined($__ls_sort_right) ? $__ls_sort_right : "")';
+
   my $target_expr = $trim_action_ir_value->($sorted_args->[0]);
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
-   return '[sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @'.$array_symbol.']';
+   return '[sort { '.$sort_comparison.' } @'.$array_symbol.']';
   }
 
   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_sorted = '.$lowered_target.'; defined($__ls_sorted) && ref($__ls_sorted) eq \'ARRAY\' ? [sort { (defined($a) ? $a : "") cmp (defined($b) ? $b : "") } @{$__ls_sorted}] : [] }';
+  return 'do { my $__ls_sorted = '.$lowered_target.'; defined($__ls_sorted) && ref($__ls_sorted) eq \'ARRAY\' ? [sort { '.$sort_comparison.' } @{$__ls_sorted}] : [] }';
  }
  if ($method_call && $method_call->{method} eq 'reversed') {
   my $reversed_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
