@@ -1,0 +1,60 @@
+{
+ "after_sha256": "1e71120c6f238e85948faa8a970882c0c3a945bf812b094ed6a173d5f5692e70",
+ "before_revision": "a8bd8620a4e545b3e472561bfea90c656ab69923",
+ "before_sha256": "0b5ca7834fa5aef3eab2eded67c05f751d520e6fd84b400aefa09ec8a9aaba88",
+ "hunks": [
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16187"
+  },
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\\A-?\\d+\\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\\A-?\\d+\\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16202"
+  },
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16227"
+  },
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\\A-?\\d+\\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\\A-?\\d+\\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\\A-?\\d+\\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\\A-?\\d+\\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16252"
+  },
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\\A-?\\d+\\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\\A-?\\d+\\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16277"
+  },
+  {
+   "after": "        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\\A-?\\d+\\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "before": "        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\\A-?\\d+\\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},\n",
+   "id": "count-16302"
+  },
+  {
+   "after": "        q{$first_key = do { my $__ls_first = [sort keys %meta]; ref($__ls_first) eq 'ARRAY' && @{$__ls_first} ? $__ls_first->[0] : undef }},\n",
+   "before": "        q{$first_key = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }},\n",
+   "id": "first-16337"
+  },
+  {
+   "after": "        q{do { my $__ls_str_cmp_lhs = do { my $__ls_first = [sort keys %meta]; ref($__ls_first) eq 'ARRAY' && @{$__ls_first} ? $__ls_first->[0] : undef }; my $__ls_str_cmp_rhs = \"kind\"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},\n",
+   "before": "        q{do { my $__ls_str_cmp_lhs = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; my $__ls_str_cmp_rhs = \"kind\"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},\n",
+   "id": "first-16347"
+  },
+  {
+   "after": "        '(do { my $__ls_count = [sort keys %meta]; ref($__ls_count) eq \\'ARRAY\\' ? scalar(@{$__ls_count}) : 0 } > 1)',\n",
+   "before": "        '(do { my $__ls_count = [sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',\n",
+   "id": "count-37993"
+  },
+  {
+   "after": "        '(do { my $__ls_count = [map { $meta{$_} } sort keys %meta]; ref($__ls_count) eq \\'ARRAY\\' ? scalar(@{$__ls_count}) : 0 } > 1)',\n",
+   "before": "        '(do { my $__ls_count = [map { $meta{$_} } sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',\n",
+   "id": "count-38107"
+  }
+ ],
+ "owner": "TYPE-REFERENCE-BOOK.1.2.10",
+ "source": "t/phase0_regression.t",
+ "version": 1
+}

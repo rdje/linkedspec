@@ -51,6 +51,11 @@ DROP_GENERATED_TABLE = 'tests/language-readiness/drop-generated-regression-evolu
 DROP_GENERATED_TABLE_SHA256 = '939ec5469217ec76501ccc123e15feca956985e8d659ffb08a70f81cac1c299e'
 DROP_GENERATED_BEFORE = '9fc95b0bd1167db110e91bf50a8939129485c960'
 DROP_GENERATED_MARKER = b'my @__ls_drop_keys = ('
+COUNT_FIRST_OWNER = 'TYPE-REFERENCE-BOOK.1.2.10'
+COUNT_FIRST_TABLE = 'tests/language-readiness/count-first-regression-evolution.json'
+COUNT_FIRST_TABLE_SHA256 = '5169035f3fbab2b0f5a853b902a9c5ec2fba87ae10ab1cc834c3f8dfa9d6e814'
+COUNT_FIRST_BEFORE = 'a8bd8620a4e545b3e472561bfea90c656ab69923'
+COUNT_FIRST_MARKER = b'ref($__ls_count)'
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -642,6 +647,42 @@ def drop_generated_table(source):
     return table
 
 
+def count_first_table(source):
+    raw = read_relative(COUNT_FIRST_TABLE)
+    require(digest(raw) == COUNT_FIRST_TABLE_SHA256,
+            "count/first inverse table identity mismatch: " + source)
+    table = json.loads(raw)
+    require(table["version"] == 1 and table["owner"] == COUNT_FIRST_OWNER and
+            table["source"] == source == "t/phase0_regression.t" and
+            table["before_revision"] == COUNT_FIRST_BEFORE and
+            len(table["hunks"]) == len({item["id"] for item in table["hunks"]}) == 10,
+            "count/first inverse owner/population mismatch: " + source)
+    rebuilt = git("show", f"{COUNT_FIRST_BEFORE}:{source}")
+    require(digest(rebuilt) == table["before_sha256"],
+            "count/first inverse base mismatch: " + source)
+    for item in table["hunks"]:
+        old, new = item["before"].encode(), item["after"].encode()
+        require(old and new and old != new and rebuilt.count(old) == 1,
+                "count/first inverse reconstruction mismatch: " + source)
+        rebuilt = rebuilt.replace(old, new, 1)
+    require(digest(rebuilt) == table["after_sha256"],
+            "count/first inverse reconstruction mismatch: " + source)
+    return table
+
+
+def restore_count_first_regressions(source, contents):
+    # Older falsifiers intentionally supply their original pre-selection stage.
+    # The final historical comparison still rejects every unregistered edit.
+    if COUNT_FIRST_MARKER not in contents:
+        return contents
+    for item in reversed(count_first_table(source)["hunks"]):
+        old, new = item["before"].encode(), item["after"].encode()
+        require(contents.count(new) == 1,
+                "count/first regression registration mismatch: " + source)
+        contents = contents.replace(new, old, 1)
+    return contents
+
+
 def restore_drop_generated_regressions(source, contents):
     # Earlier-stage falsifiers deliberately supply pre-drop source. The final
     # historical byte/hash comparison still rejects every unregistered edit.
@@ -725,6 +766,7 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     current_hash = digest(contents)
+    contents = restore_count_first_regressions(source, contents)
     contents = restore_drop_generated_regressions(source, contents)
     contents = restore_scalar_numeric_regressions(source, contents)
     contents = restore_evaluated_value_regressions(source, contents)
@@ -746,6 +788,10 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "boundary_recurrence_owner": BOUNDARY_RECURRENCE_OWNER,
             "boundary_recurrence_before_revision": BOUNDARY_AFTER,
             "boundary_recurrence_after_revision": BOUNDARY_RECURRENCE_AFTER,
+            "count_first_owner": COUNT_FIRST_OWNER,
+            "count_first_input": COUNT_FIRST_TABLE,
+            "count_first_table_sha256": COUNT_FIRST_TABLE_SHA256,
+            "count_first_before_revision": COUNT_FIRST_BEFORE,
             "drop_generated_owner": DROP_GENERATED_OWNER,
             "drop_generated_input": DROP_GENERATED_TABLE,
             "drop_generated_table_sha256": DROP_GENERATED_TABLE_SHA256,
@@ -763,7 +809,7 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "compiler_membership_before_revision": COMPILER_MEMBERSHIP_BEFORE,
             "compiler_membership_after_revision": COMPILER_MEMBERSHIP_AFTER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact owner-bound evaluated-value test inverse, committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
+            "scope": "exact count/first guard-golden inverse followed by owner-bound evaluated-value test inverse, committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -1099,6 +1145,8 @@ def falsify(report):
             verify = verify_perl_storage_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":
+            count_first_current = current
+            current = restore_count_first_regressions(source, current)
             drop_current = current
             current = restore_drop_generated_regressions(source, current)
             numeric_current = current
@@ -1164,13 +1212,24 @@ def falsify(report):
                 altered += (drop_current.replace(fragment, b"", 1),
                             drop_current.replace(fragment, fragment * 2, 1),
                             drop_current.replace(fragment, changed, 1))
+            # Preserve all650 previous falsifiers at their original source stages.
+            # Each new complete guard line has independent absence/duplication/change.
+            for count_first_hunk in count_first_table(source)["hunks"]:
+                fragment = count_first_hunk["after"].encode()
+                require(count_first_current.count(fragment) == 1,
+                        "count/first control registration mismatch: " + source)
+                changed = bytes([fragment[0] ^ 1]) + fragment[1:]
+                altered += (count_first_current.replace(fragment, b"", 1),
+                            count_first_current.replace(fragment, fragment * 2, 1),
+                            count_first_current.replace(fragment, changed, 1))
             verify = verify_signature_regression_evolution
             reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:",
                        "boundary recurrence registration mismatch:", "compiler scanner mock registration mismatch:",
                        "evaluated-value regression registration mismatch:",
                        "numeric regression registration mismatch:",
-                       "drop regression registration mismatch:")
+                       "drop regression registration mismatch:",
+                       "count/first regression registration mismatch:")
         elif source == "perl/LinkedSpec/ActionIR/Contracts.pm":
             altered = (
                 current + b"# unreviewed boundary contract edit\n",

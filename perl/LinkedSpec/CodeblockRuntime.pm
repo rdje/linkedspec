@@ -361,6 +361,12 @@ sub _eval_call {
  my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
  return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
+ if ($name eq 'count' || $name eq 'first') {
+  return undef unless @$args == 1;
+  my $value = _eval_expr($args->[0], $ctx);
+  return _array_selection($name, $value)
+ }
+
  if ($name eq 'sorted' || $name eq 'take') {
   return undef unless ($name eq 'sorted' ? @$args == 1 : @$args >= 1 && @$args <= 2);
   my $value = _eval_expr($args->[0], $ctx);
@@ -446,6 +452,14 @@ sub _eval_call {
  )
 }
 
+# Both call spellings use the stored element unchanged, including false/null
+# and callable values. Invocation/container boundaries retain their own copying.
+sub _array_selection {
+ my ($name, $value) = @_;
+ return ref($value) eq 'ARRAY' ? scalar(@$value) : 0 if $name eq 'count';
+ return ref($value) eq 'ARRAY' && @$value ? $value->[0] : undef
+}
+
 sub _numeric_receiver_helper_name {
  my ($method) = @_;
  return undef unless defined($method) && $method =~ /\A[a-z]+\z/;
@@ -476,6 +490,9 @@ sub _eval_fluent_chain {
    unless ref($args) eq 'ARRAY';
   return undef if $method eq 'sorted' && @$args;
   return undef if $method eq 'take' && @$args > 1;
+  if ($method eq 'count' || $method eq 'first') {
+   return undef if @$args || $index < $#$calls;
+  }
   if ($method =~ /\A(?:sum|avg|median|range)\z/) {
    return undef if @$args || $index < $#$calls;
   }
@@ -492,6 +509,10 @@ sub _eval_fluent_chain {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
+  if ($method eq 'count' || $method eq 'first') {
+   $value = _array_selection($method, $value);
+   next;
+  }
   if ($method eq 'sorted') {
    $value = ref($value) eq 'ARRAY'
     ? LinkedSpec::BindingRuntime::array_transform($value, '<receiver>', 'sorted') : [];

@@ -65,3 +65,5 @@ Migration is `.1` live/history mechanism, `.2` task partition, `.3` changes/note
 unchanged recomposition/registry closure. All four stores are implemented and composition-closed. Every move is
 atomic from a clean Git boundary, accounts for the old source byte-for-byte, and rolls back only by the activation
 commit before landing or an explicit revert after.
+
+October21: task-file ceilings come from the route registry's `task_evidence`, never capture guards.

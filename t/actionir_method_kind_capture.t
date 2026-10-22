@@ -17,6 +17,19 @@ sub load_json {
  local $/;
  return $json->decode(<$file>);
 }
+# Evaluate a controlled VALUE operand independently of the emitted spelling.
+sub count_values {
+ my ($source) = @_;
+ return {error => 'expected one VALUE operand'} unless ($source =~ s/\bVALUE\b/\$item/g) == 1;
+ my $execute = eval 'sub { my ($item) = @_; ' . $source . ' }';
+ return {error => "compile: $@"} unless ref($execute) eq 'CODE';
+ my @values;
+ my $ok = eval {
+  push @values, $execute->($_) for ([], [undef, 7, []], undef, 7, 'x', {}, sub {die 'operand must not be called'});
+  1;
+ };
+ return $ok ? {values => \@values} : {error => "execute: $@"};
+}
 sub command {
  my (@command) = @_;
  my $error = gensym;
@@ -63,6 +76,14 @@ for my $index (0, 1) {
     $expected->{parent_packet} = 0;
    }
    my $observed = $actual->{$group}[$row];
+   if ($surface eq 'observe' && $group eq 'branches'
+       && $expected->{id} =~ m{^outer/(?:scalar|function-present|function-tied-bad)$}) {
+    is($expected->{value}, q~do { my $__ls_count = VALUE; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }~,
+     "$expected->{id} retains the original native count source");
+    $expected->{value} = q~do { my $__ls_count = VALUE; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }~;
+    is_deeply(count_values($observed->{value}), {values => [0, 3, 0, 0, 0, 0, 0]},
+     "$expected->{id} emitted count handles array and nonarray operands");
+   }
    if ($surface eq 'observe' && $group eq 'branches' && $expected->{id} eq 'inner/scalar') {
     $expected->{value} = LinkedSpecTest::EmittedValues::invocation($expected->{value});
     $observed = {%$observed, value => LinkedSpecTest::EmittedValues::invocation($observed->{value})};

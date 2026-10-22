@@ -340,8 +340,8 @@ the indexed-read repair.
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `name` | scalar value | read the working scalar `name`. |
-| `items.drop_front(index).first` | scalar value or `undef` | read one zero-based element from an array value. |
-| `meta.pick_keys(key).sorted_values().first` | scalar value or `undef` | read one field from a hash value. |
+| `items.drop_front(index).first` | stored value or `undef` | read one zero-based element from an array value. |
+| `meta.pick_keys(key).sorted_values().first` | stored value or `undef` | read one field from a hash value. |
 | `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
 | `array(...)` | array value | construct an empty or argument-list array payload; prefer `[...]` as the terse constructor spelling in new examples. |
 | `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" : undef }` for a one-field literal hash with no value. |
@@ -1131,6 +1131,7 @@ array-yielding expression-valued block can be the receiver too:
 
 Perl callable bodies also support `sorted` and `take`, including their receiver forms and reducer continuations. See the [worked sorting and selection examples](values-containers-and-flow-helpers.md#sorting-and-taking-inside-perl-codeblocks) for count rules, copies, evaluation order and remaining callable limits.
 Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).
+For Perl callable `count`/`first`, see the [worked selection, terminal and effect examples](values-containers-and-flow-helpers.md#counting-and-selecting-first-inside-perl-codeblocks).
 
 ## Hash helpers
 

@@ -13,10 +13,11 @@ answers:
   - "which exact Phase0 recurrence evolution preserves historical objective proof"
   - "why does the historical objective audit reject the quoted boundary decoder"
   - "how does the historical audit admit the nested boundary recurrence"
-date: 2026-10-06
+  - "how does count first preserve historical Phase0 evidence"
+date: 2026-10-21
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 reconciles the nesting/context/lossless milestones without promoting a new objective. The tracked audit verifies producing checkpoint/source/log identities, latest executable inputs and independently authored scalar spans. Retained parser recovery remains distinct from per-call isolation; lossless extraction is distinct from strict validation. Existing repair owners remain open."
+evidence: "Historical probes retain evidence, authoring costs and open defects; no completeness claim follows."
 reverify: "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py; consult each ledger for runtime reruns and run tools/run_ci_local.sh at canonical boundaries."
 ---
 
@@ -78,3 +79,7 @@ healthy forbidden read/write attempts. These are current historical-integrity
 checks, not fresh executions of the old runtime producers. The rollover leaf
 owns complete failed-candidate capture and fresh guarded proof; broader Legacy
 family acceptance remains .1.4.7-owned.
+
+Count/first10 reverses ten guard literals through its separately hash-gated table
+before older inverses. Prior controls retain their source stages. The table is an
+explicit audit input; type-array-count-first/ retains the proof. No runtime replay.

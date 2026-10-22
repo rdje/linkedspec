@@ -786,6 +786,13 @@ controls and add missing, duplicated, altered and unrelated-edit controls.
 Retain the inverse table as an explicit input to the recurring proof, then
 run that proof before retrying canonical CI. Preserve rejected instruments
 and their channels separately from behavioral RED evidence.
+For count/first, a separate table reverses ten generated guard expectations before
+the older inverses run. Earlier falsifiers keep their original source stages;
+the ten new hunks add omission, duplication and corruption controls. Table bytes
+are explicit audit inputs, with actual inverse and hash-check faults retained.
+Publish loader paths relative to the repository root. Preserve exact raw loader
+observations separately before normalization, and run the production portability
+check on the resulting summaries before canonical CI.
 
 Private diagnostic tests retain their original native captures when unrelated
 source insertions move a diagnostic. Translate only fresh error coordinates
@@ -794,6 +801,8 @@ Git anchor; preserve callback names, paths and all other row fields. Reject
 unmatched statements. For source formatting changes, execute the expression
 against an independent value expectation. A test invocation observer covers
 its declared argument and binding ABI; it does not establish runtime dispatch.
+For generated count guards, select only reviewed rows and execute both array
+and nonarray operands; retain the original capture and every other row field.
 Prove wrong callbacks, files and lines still differ, then bypass the actual
 mapper and observe failing assertions before restoring it.
 

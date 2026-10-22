@@ -1,6 +1,6 @@
 ---
 id: terse-type-method-surface-inventory
-title: "Value kinds and Perl evaluated-value boundaries; dated method inventory"
+title: "Perl value/helper contracts"
 answers:
   - "what receiver methods already exist in the terse type method surface"
   - "does string substr already work as a method"
@@ -22,45 +22,48 @@ answers:
   - "how is the generated mdBook search-index reference compared"
   - "why did checkpoint input snapshots grow recursively"
   - "how do checkpoint chunks restore data and reject nested Git roots"
+  - "can Perl count and first run inside deferred codeblocks"
   - "can Perl sorted and take run inside a deferred codeblock"
   - "why do sorted numbers become strings after a container copy"
-  - "which task owns deferred count first indexed writes and registered sorted"
+  - "which task owns deferred last count first indexed writes and registered sorted"
   - "why do malformed fluent arguments leak a Perl array-reference error"
-date: 2026-10-21
-status: bounded Perl helpers; kind13 fixed; inventory pending
+  - "why do private count captures expect old defined guards"
+date: 2026-10-22
+status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "Type3-.13 retain exact epochs;13 verifies scalar kinds.10/11/12 remain owned."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-sort-copy-kinds/publish.py"
+evidence: "Type epochs retained; count/first10 verified."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-array-count-first/publish.py"
 ---
 
 # Value model and bounded Perl helper execution
 
-Bindings hold scalar/array/harray/codeblock; deferred bodies read caller slots.
-Constructors, keys and arguments retain evaluated values; updates use copy-on-write.
-Scoped with: [[perl-generic-final-codeblock-normalization]].
+Scalar/array/harray/codeblock bindings retain evaluated constructor/key/argument
+values; deferred bodies read caller slots; updates use copy-on-write.
+See [[perl-generic-final-codeblock-normalization]].
 
 Scalar/aggregate Numeric policies differ. Shape checks precede effects;
-comparisons/reducers terminate. Aggregates take one array; receiver reducers no
-operands. Explicit scalar min/max evaluates operands before rejection. Legacy
-Perl checks every decimal term: empty sum0, othersundef; Rust filtering differs.
-[[perl-numeric-reducer-string-result-kinds]] owns reducer95. Boolean35,
-Unicode20/constructor94 remain separate.
+comparisons/reducers terminate. Aggregates take one array; receivers no operands.
+Scalar min/max evaluates operands before rejection. Perl checks each decimal
+term: empty sum0, othersundef; Rust filters differently. Reducer95:
+[[perl-numeric-reducer-string-result-kinds]]. Boolean35, Unicode20/constructor94
+remain separate.
 
-Perl callable sorted/take execute free/receiver forms. Sort is lexical;
-comparing copied operands preserves numeric/string kinds through clones/indexes.
-Storable may cache private iOK on floating-point sources; observe sort flags before
-cloning. Numeric/string JSON kinds remain distinct.
-take defaults1; integer spelling only, negative/invalid0, oversized counts clamp.
-Non-arrays yield[] and skip count; source/results stay independent.10 owns deferred
-count/first,11 registered sorted/ordinary length,12 deferred indexed writes.
-Serialized fluent args require arrays before preflight. No family/backend admission.
+Deferred sorted/take have free/receiver forms. Lexical sort preserves copied
+numeric/string kinds across clones/indexes; measure flags before Storable caches
+private iOK on floats.
+take defaults1; integer spelling only; negative/invalid0; oversized clamp.
+Nonarrays yield[] and skip count; sources/results stay independent.
+count/first execute deferred: free calls take one operand, terminal receivers none.
+Nonarrays yield0/undef; first preserves kinds/callables; invalid shapes skip effects.
+11 owns registered sorted/ordinary length,12 indexed writes,14 last.
+Fluent args require arrays before preflight. Three private count goldens retain
+native captures; current guards execute against arrays/nonarrays. No backend admission.
 
-drop_keys copies keys/splices, stays FATAL-warning quiet and retains null
-diagnostics. c053c9dcf inventoried substr/typed receivers; references remain pending.
+drop_keys copies keys/splices, keeps null diagnostics and FATAL-warning silence.
+c053c9dcf inventories substr/typed receivers; references pending.
 
-Accepted7 HTML differs only by its search-index reference: decoded payload changes
-are15 body-whitespace strings. Strict rejection remains; no general normalization.
+Accepted7 HTML: only the search-index reference differs; decoded changes are15
+body-whitespace strings. Strict rejection remains.
 
-Context hash-gates immutable gzip/chunks without embedding.37 verified32MiB parts
-restore three exact byte/mode aliases with nested-repository guards. Old recursive
-snapshots survive at accepted49ce.
+Context hash-gates gzip/37 verified32MiB chunks and three byte/mode aliases;
+nested-Git guards apply. Recursive originals:49ce.

@@ -18,13 +18,19 @@ answers:
   - "which decision admits change history segment 4962"
   - "why does engineering notes allow 30024 aggregate lines"
 date: 2026-10-19
-status: ADR0136 finite continuity proof; exact canonical receipt governs landing
+status: ADR0137; canonical admission required
 tags: [documentation, history, capacity, verification]
-evidence: "ADR0136 admits one measured change-history member/manifest, one512-line note envelope and41 sole decision/index lines. Whole565/129686 proof and230 prior files are preserved. Actual old-cap RED and corrected60/31 production controls precede canonical admission."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
+evidence: "ADR0137: two members; exact overhead; old-cap RED and source reconstruction retained."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-array-count-first/publish.py"
 ---
 
-## Current finite continuity: ADR0136
+## Current finite continuity: ADR0137
+
+At a8bd8620a, count/first10 rolls two history members with exact manifest and
+sole decision/index overhead. Prior bytes and root-LF reconstruction survive
+in type-array-count-first/. No future reserve.
+
+## Prior finite continuity: ADR0136
 
 At clean54bb5eb65, required complete records cross change-history rollover and
 the exhausted engineering aggregate. Segment4962 preserves source lines109–365:

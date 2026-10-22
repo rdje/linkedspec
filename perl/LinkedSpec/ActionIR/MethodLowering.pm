@@ -6136,7 +6136,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_count = '.$lowered_target.'; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }';
+  return 'do { my $__ls_count = '.$lowered_target.'; ref($__ls_count) eq \'ARRAY\' ? scalar(@{$__ls_count}) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'first') {
   my $first_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -6154,7 +6154,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_first = '.$lowered_target.'; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }';
+  return 'do { my $__ls_first = '.$lowered_target.'; ref($__ls_first) eq \'ARRAY\' && @{$__ls_first} ? $__ls_first->[0] : undef }';
  }
  if ($method_call && $method_call->{method} eq 'last') {
   my $last_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

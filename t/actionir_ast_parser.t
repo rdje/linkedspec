@@ -792,7 +792,7 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())}),
-        q{return do { my $__ls_count = do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }},
+        q{return do { my $__ls_count = do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }},
         'array append expression can feed an aggregate receiver chain'
     );
 };

@@ -16184,7 +16184,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(meta))), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_front(...) composes inside count(...) and numeric flow comparisons'
     );
     is(
@@ -16199,7 +16199,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_front(sorted_keys(meta), 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_front(..., count) composes inside count(...) and numeric flow comparisons'
     );
     like(
@@ -16224,7 +16224,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(take(sorted_keys(meta), 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take(..., count) composes inside count(...) and numeric flow comparisons'
     );
     like(
@@ -16249,7 +16249,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(slice(sorted_keys(meta), 1, 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'slice(..., start, count) composes inside count(...) and numeric flow comparisons'
     );
     like(
@@ -16274,7 +16274,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(take_last(sorted_keys(meta), 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take_last(..., count) composes inside count(...) and numeric flow comparisons'
     );
     like(
@@ -16299,7 +16299,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{num_gt(count(drop_back(sorted_keys(meta), 2)), 0)}),
-        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 0)},
+        q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_back(..., count) composes inside count(...) and numeric flow comparisons'
     );
     like(
@@ -16334,7 +16334,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{set(Top, first_key, first(sorted_keys(meta)))}),
-        q{$first_key = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }},
+        q{$first_key = do { my $__ls_first = [sort keys %meta]; ref($__ls_first) eq 'ARRAY' && @{$__ls_first} ? $__ls_first->[0] : undef }},
         'assign helper accepts first(projected-array-expression) source lowering'
     );
     is(
@@ -16344,7 +16344,7 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(first(sorted_keys(meta)), "kind")}),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_first = [sort keys %meta]; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; my $__ls_str_cmp_rhs = "kind"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_first = [sort keys %meta]; ref($__ls_first) eq 'ARRAY' && @{$__ls_first} ? $__ls_first->[0] : undef }; my $__ls_str_cmp_rhs = "kind"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'first(...) over projected arrays composes inside flow comparisons'
     );
     is(
@@ -37990,7 +37990,7 @@ subtest 'emit_context_lowers_sorted_keys_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted_keys(meta)), 1)'),
-        '(do { my $__ls_count = [sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',
+        '(do { my $__ls_count = [sort keys %meta]; ref($__ls_count) eq \'ARRAY\' ? scalar(@{$__ls_count}) : 0 } > 1)',
         'sorted_keys(...) composes inside array reducers and numeric flow comparisons'
     );
     is(
@@ -38104,7 +38104,7 @@ subtest 'emit_context_lowers_sorted_values_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('num_gt(count(sorted_values(meta)), 1)'),
-        '(do { my $__ls_count = [map { $meta{$_} } sort keys %meta]; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 } > 1)',
+        '(do { my $__ls_count = [map { $meta{$_} } sort keys %meta]; ref($__ls_count) eq \'ARRAY\' ? scalar(@{$__ls_count}) : 0 } > 1)',
         'sorted_values(...) composes inside array reducers and numeric flow comparisons'
     );
     is(

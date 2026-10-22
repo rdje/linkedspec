@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / next deferred count/first .1.2.10; before enumeration
+- Status: `active` / next registered pipeline .1.2.11; before enumeration
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-21`
@@ -105,7 +105,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -279,14 +279,44 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.10`
-  Status: `pending` / P2 defect owned
-  Goal: Execute deferred count/first array receiver helpers.
+  Status: `done` / selected proof; exact canonical admission required
+  Goal: Execute deferred count/first and align their free harray kind guards.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.13`
-  Reproduce/impact: Final9 separately confirms ordinary count2/first1 and deferred unknown_helper:count/first after sorted/take succeeds. followup-confirmation.json.gz and its full context retain all four actual routes; the original baseline stopped at sorted.
-  Schedule: After13, before11/inventory. Fix existing count/first forms with shape/empty/kind/terminal/effect controls.
-  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+  Owned paths: docs/checkpoints/type-array-count-first/; CodeblockRuntime count/first dispatch and MethodLowering free-call array guards, permanent consumers, worked book/fact and continuity. Registered sorted/ordinary length11 and indexed writes12 remain separate.
+  Verification tier: `canonical`
+  Focused checks: Public descriptor/Get-dump/native/fresh values and typed errors; free/receiver shape, empty/kind/continuation/effects, copy/index/source controls; direct consumers, book/Knowledge/history/doctrines.
+  Canonical trigger: Observable Perl callable helper availability; exact staged canonical receipt before normal landing.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.10.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Fresh accepted13 four-case public probe: ordinary2/1; native/fresh typed unknown_helper:count/first. Every10860 full-mode input stays unchanged.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public Get dumps and CodeblockRuntime::_eval_call/::_eval_fluent_chain show missing count/first dispatch. MethodLowering free harray count/first dereferences defined values without an ARRAY guard; accepted receiver forms give0/undef. The grid independently fixes terminal/arity/effect behavior.
+  - [x] **FIX** — Implement only the measured count/first contract without absorbing11/12.
+  - [x] **ADDRESSED (verified)** — Fixed typed value/effect population and distinguishing source faults/restoration.
+  - [x] **NO REGRESSION** — Mandatory tests/direct consumers and exact canonical receipt.
+  - [x] **LOCKSTEP** — Worked book, canonical fact, roadmap and clean handoff.
+  Pre-write custody: Whole accepted13 physical10857/logical3/images10860/full modes, independently Git-verified images and actual clean readonly0 survive at real a8bd8620a. Exact old intake/oracle and current public observer remain committed inputs.
+  Schedule: Finish10 before11/12, then inventory1/mapping2/layout3. Detailed proof lives in the checkpoint.
+  Additional defect owned/fixed here: ordinary count(items)/first(items), with items={"k":"v"}, leaks raw Not an ARRAY reference in native/fresh execution. Match the already quiet receiver0/undef and scalar/undefined controls with narrow array-kind guards.
+  Commit prerequisite owned here: Required complete change/note records trigger real history rollovers. Preserve every immutable member and exact clean-source suffix; ADR0137 admits only the two measured members/manifest overhead and its own decision/index lines. No runtime scope expansion or future archive reserve. Verification and claim include this prerequisite.
+  Diagnostic correction owned here: A reported65,536-byte tree ceiling came from the one-shot activation actor's capture guard. The task_evidence registry and collection checker use1,048,576 bytes, with no TYPE override. task-limit-review.json.gz retains the actual capture-guard RED and production collection/metadata GREEN on the same above-guard source. The incorrect capacity warning is closed; count/first scope/order stays unchanged.
+
+  Verified:232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED. Eight faults cover dispatch, arity, terminal effects, selection and both emitted kind guards. Permanent fixture is exact; full book/Knowledge follow current behavior.
+  Documentation defect fixed: two first-selection result rows called every result scalar. The nested/callable fixed cases and worked selection example demonstrate stored values; both rows now say stored value. Distinct final doc3 proof renders all89 inputs and executes all five bodies.
+  Corrections closed: duplicate-key plan/warning; shared fault marker; ordinary-only unused-interpreter loader; known root-LF reconstruction; rejected fact-budget proposal; reviewer keyword syntax; one stale AST emitted-source golden. Thirteen original suites pass; the sole AST source expectation is repaired and all23 AST groups independently pass. Production identities remain unchanged. Original sources and observations survive; distinct controls pass. First interrupted change apply channels were not retained; exact published state and later no-op/check channels reconstruct the real source without archive edits.
+  Custody/claim: docs/checkpoints/type-array-count-first/publish.py; full prior13 and all supplied epochs recover. ADR0137 is solely the measured commit-continuity prerequisite. Commit subject: `TYPE-REFERENCE-BOOK.1.2.10 - execute callable count and first`. Next11 only after clean canonical/normal landing.
+
+  Additional owned paths: t/phase0_regression.t guard literals, tests/language-readiness/count-first-regression-evolution.json, verify_objectives.py and the read-denied audit driver input closure. Canonical tier covers this exact inverse admission; older tables and runtime source stay unchanged.
+  Final pre-CI source search owns ten stale Phase0 emitted-source expectations (eight count/two first). Reproduce through the exact selected real roots, update only guard literals, and admit a separate hash-gated inverse before the unchanged historical layers. Preserve old tables, all650 controls and add omission/duplication/corruption controls for every new hunk. Whole unpublished draft1/11015 inputs/full modes/actual readonly0 survives; no acceptance revision is fabricated.
+
+  Final historical admission verified: 3 real Phase0 roots reject old expectations and pass all10 guard corrections;1031 roots explicitly skipped. The complete historical audit preserves650 older controls and adds30=680 denials. Actual inverse removal and table-byte/hash-check faults reject, admit under bypass, and restore exactly. The original unpublished draft1 remains whole and independently recoverable; publication2 governs this resulting tree. Older inverse tables and runtime producer bytes remain exact.
+
+  Defect owned: Canonical production path checker rejects two new Phase0 summaries because the observer copies an absolute loader path into plain JSON. Reproduce with scripts/check_repo_root_path_portability.sh. Runtime and raw loader verification pass. Preserve whole unpublished draft2 and actual readonly0/production RED, normalize only published paths, retain original raw/producer bytes, and require fresh book/artifact/path/canonical proof. Original failed gate was terminated143 after its reported denial; no successful canonical claim is made.
+
+  Portability defect verified fixed: both published Phase0 loader paths are repository-relative; exact raw outputs and original summaries remain in frozen draft2. The actual production path checker rejects the old candidate and passes the repair. Distinct doc4 re-renders89 inputs/executes five bodies with heading RED; artifact3 rejects missing/byte/mode declarations, admits them under an actual validator fault, and restores. Publication3 governs the resulting tree; prior publications stay immutable. Exact canonical receipt and normal hooks remain mandatory.
+
+  Defect owned: Canonical attempt2 completes1 with three stale count-source expectations in t/actionir_method_kind_capture.t (outer/scalar, outer/function-present, outer/function-tied-bad). All90 other private files pass. Preserve whole unpublished draft3/actual readonly0 and complete failed channels, keep native capture bytes exact, update only these current expected guards, and independently execute every affected emitted expression against arrays/nonarrays. Require actual translation-omission and matched old-guard semantic RED, exact restoration, new publication and exact canonical admission.
+
+  Private guard compatibility verified: three current expectations change only their reviewed count guards. Original native captures stay exact.236 assertions pass, including seven independent execution inputs per row. Actual expectation omission rejects; matched old guard/source expectations reject solely in behavior checks; exact production/test restoration passes. Draft3 retains11100 inputs/full modes, actual readonly0 and the completed canonical2 failure. Distinct doc5/artifact4/publication4 bind this candidate; all earlier publications remain immutable. Exact canonical receipt and normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.11`
   Status: `pending` / P2 defect owned
@@ -308,10 +338,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: `canonical`
   Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.14`
+  Status: `pending` / P2 defect owned
+  Goal: Execute deferred last array selectors.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
+  Reproduce/impact: Leaf10 contract-grid retains ordinary last(items)/items.last() returning1 for [2,10,1], while both deferred native/fresh routes report typed unknown_helper:last. Source bodies and loaded source identities survive in docs/checkpoints/type-array-count-first/.
+  Schedule: After11/12, before inventory1. Establish shape, kind, empty, terminal/effect and copy/index controls; do not extend current10.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `pending`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.14`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
@@ -402,15 +441,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 | 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `done` | Bounded availability/portable evidence; owned pipeline9 next. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.9` | `done` | Callable sorted/take; bounded proof/typed argument guard; kind13 next. |
 | 7 | `TYPE-REFERENCE-BOOK.1.2.13` | `done` |116 values/47 RED/six faults/14-1950/book89-5; canonical admission mandatory. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.10` | `pending` | Deferred count/first after13. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.10` | `done` |232/107 RED/eight faults; ten Phase0 goldens/history680; book/finite history0137; canonical admission mandatory. |
 | 9 | `TYPE-REFERENCE-BOOK.1.2.11` | `pending` | Registered sorted/ordinary length after10. |
 | 10 | `TYPE-REFERENCE-BOOK.1.2.12` | `pending` | Deferred indexed writes before inventory. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
-| 13 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
-| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after12; complete the owned selector gap before inventory. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
+| 14 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
+| 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
+| 16 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
+| 17 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
+
 
 ## Decisions
 
@@ -426,9 +467,11 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-No director input required. Kind13 selected proof is complete; exact canonical/normal landing is mandatory. Activate10 only after clean handoff; then11/12 before inventory1. No dirty pivot.
+No director input required. Count/first10 selected proof is complete; exact canonical/normal landing is mandatory. Activate11 only from clean Git, then12/14 before inventory1. No dirty pivot.
 
 ## Verification Log
+
+- `2026-10-21` — `.1.2.10`:232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; whole accepted13 custody; exact finite history0137 and artifact controls; canonical admission mandatory.
 
 - `2026-10-21` — `.1.2.13`:116/47 RED/six faults;14/1950/history650;16 flag routes;9/72 direct;book89/5. Source-closed gateway and exact canonical receipt govern landing.
 
@@ -445,6 +488,8 @@ No director input required. Kind13 selected proof is complete; exact canonical/n
   qualitative gap only. Exact legacy status contradictions are recorded above; no runtime or full coverage proof.
 
 ## Commit Log
+
+Count/first10 subject: `TYPE-REFERENCE-BOOK.1.2.10 - execute callable count and first`; derive its accepted identity from Git.
 
 Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; derive its accepted identity from Git.
 

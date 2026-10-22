@@ -60,9 +60,55 @@ does not add recursive copying of arbitrary host objects.
 ### Current Perl limits
 
 The six numeric aggregate reducers and `sorted`/`take` execute inside Perl codeblocks. See the worked [selection examples](#sorting-and-taking-inside-perl-codeblocks).
-Other array helpers have separate availability limits: deferred `.count()` and `.first()` are not yet supported. Registered `fn` receiver pipelines containing `sorted` also remain limited; use the callable forms below.
+Deferred `count` and `first` also execute; see [their selection contract](#counting-and-selecting-first-inside-perl-codeblocks). Deferred `.last()` remains unsupported. Registered `fn` receiver pipelines containing `sorted` also remain limited; use the callable forms below.
 Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean arguments passed into a codeblock retain their kind. These separately owned
 repairs remain pending. The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
+
+### Counting and selecting first inside Perl codeblocks
+
+`count(values)` / `values.count()` returns the array length. `first(values)` / `values.first()` returns the stored first element. Empty or non-array values yield `0` for count and `undef` for first, including harray inputs. Free calls take exactly one argument; receiver calls take none. Invalid arity returns `undef` before evaluating any receiver or arguments.
+
+Both helpers work in deferred bodies. This returns `[[2,1],[2,10,1]]`, preserving the source:
+
+```text
+items = [2,10,1];
+cb = {|| return([items.sorted().take(2).count(),items.sorted().take(2).first()]) };
+return([cb(),items]);
+```
+
+First preserves numbers, strings (including `"0"` and `""`), false, null, arrays, harrays and callable records. Existing invocation copying keeps the caller's array intact; this returns `[[9,1],[[2,1],[]]]`:
+
+```text
+items = [[2,1],[]];
+cb = {|values| return(values.first()) }; chosen = cb(items);
+chosen[0] = 9; return([chosen,items]);
+```
+
+Receiver count/first terminate a fluent chain. A continuation returns `undef`. A free-call result can start a new chain, or save a receiver result and operate on that binding separately. This returns `[null,3,null,"2!"]`:
+
+```text
+items = [2,10,1];
+cb = {|| return([items.count().abs(),count(items).abs(),items.first().cat("!"),first(items).cat("!")]) };
+return(cb());
+```
+
+Invalid receiver continuations skip receiver and operand effects. This returns `[null,""]`; a valid `tap(items).count()` would evaluate tap once:
+
+```text
+seen = ""; items = [2,10,1];
+tap = {|value| seen = cat(seen,"r"); return(value) };
+cb = {|| return(tap(items).count().abs()) };
+return([cb(),seen]);
+```
+
+Selecting a codeblock preserves its callable behavior. This returns `"picked"`:
+
+```text
+maker = {|| return("picked") }; items = [maker];
+cb = {|| return(first(items)) }; chosen = cb(); return(chosen());
+```
+
+Regenerate saved Perl parser source after upgrading. Registered-function and other backend availability follow their separately documented limits.
 
 ### Sorting and taking inside Perl codeblocks
 

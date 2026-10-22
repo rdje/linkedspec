@@ -40,3 +40,5 @@ Three missing/byte/mode declarations reject in the actual publisher; a return-on
 actual validator admits all three, then exact restoration rejects them again.
 No exhaustive operation inventory, general pipeline, backend or reducer95 admission.
 Next: owned count/first10, registered sorted/ordinary length11, indexed writes12.
+
+Historical boundary: accepted at a8bd8620a4e545b3e472561bfea90c656ab69923. Claim13 is frozen only there; after count/first10 activation the old readonly gateway requires complete accepted13 inputs. Current work follows MEMORY.md.
