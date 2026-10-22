@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-22 - REPO-HYGIENE.20: retain dated project artifacts
+
+Retain all artifacts and reusable caches after the due non-following review:22234 parent candidates/21703659874 bytes and483 Rust incremental candidates/2390835179 bytes. All six root/crate Rust locations and default Dart/Julia/Lua conventions are explicit. Two actual censuses, independent per-file metadata and traversal proof pass; four named reader faults reject. Whole accepted count/first10 and actual clean readonly0 survive at79c68715 before shared writes. Source-bound proof is under docs/checkpoints/REPO-HYGIENE.20/. No runtime, dependency, storage/gate policy or budget change; pipeline11 follows clean focused landing.
+
 ## 2026-10-21 - TYPE-REFERENCE-BOOK.1.2.10: callable count/first
 
 Execute deferred count/first with compatible arity, terminal/effect and stored-value semantics; guard ordinary free harray inputs. Fixed232 passes after107 accepted RED/125 controls. Permanent native/fresh cases, source faults and worked book examples are retained at docs/checkpoints/type-array-count-first/. Exact canonical receipt and normal hooks govern landing. Required lossless history rollovers use finite ADR0137;11/12/14 remain separate. Ten Phase0 guard goldens and a separate exact inverse preserve650 prior controls and add30; actual inverse/hash faults reject and restore. Published summaries use relative paths; exact raw observations and failed draft2 survive. Three private count goldens retain native captures;236 assertions and semantic RED pass.

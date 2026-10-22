@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-October21 current PNT boundary: TYPE-REFERENCE-BOOK.1.2.10 executes callable count/first and guards free harray inputs: 232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED;private236. Whole accepted13 custody survives at real a8bd8620a; finite history0137 preserves all prior bytes. Exact canonical receipt/normal hooks govern admission. Next11/12/14 before inventory; no complete pipeline/reference admission.
+October22 current PNT boundary: REPO-HYGIENE.20 completes the due dated artifact review at accepted count/first10 commit79c68715:22234 parent/483 Rust incremental candidates, zero removals; fresh/lstat/traversal proof and four named reader denials. Whole accepted10 and actual clean readonly0 remain preserved. Next TYPE-REFERENCE-BOOK.1.2.11 registered sorted/ordinary length, then12/14 before complete inventory/reference work. Focused normal landing governs this maintenance; no new runtime/backend admission.
 
 October21 type-reference direction: [TYPE-REFERENCE-BOOK](docs/tasks/TYPE-REFERENCE-BOOK.md) retains completed model/evaluated-value/scoped/numeric/drop/aggregate/selection work. After10 landing, continue the owned11/12/14 repairs, then operation/spelling inventory1, book mapping2 and independent layout3. Legacy metadata8 and private metadata QA remain owned; complete per-type references and coverage closeout remain pending.
 

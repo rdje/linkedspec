@@ -1,4 +1,4 @@
 # Latest artifact cleanup
 
-- Date: 2026-10-20T19:45:58.736082+00:00
-- Summary: TYPE-REFERENCE-BOOK.1.2.6 removed only its verified checkpoint common.cpython-314.pyc after whole-byte/mode and original-stage preservation; source and all historical proof bytes remain. Checkpoint caches are ignored; no other cache or repository data was removed.
+- Date: 2026-10-22T01:46:17.419099+00:00
+- Summary: REPO-HYGIENE.20 completed a non-following dated parent/Rust review; zero removals. All verification inputs, logs, reusable caches, package data and other repositories remain untouched. Full actual channels, independent metadata checks and falsifiers are retained under docs/checkpoints/REPO-HYGIENE.20/.

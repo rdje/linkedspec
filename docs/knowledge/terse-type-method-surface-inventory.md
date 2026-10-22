@@ -32,7 +32,7 @@ date: 2026-10-22
 status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
 evidence: "Type epochs retained; count/first10 verified."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-array-count-first/publish.py"
+reverify: "bash tools/project_data_run.sh prove -Iperl t/scalar_numeric_contract.t"
 ---
 
 # Value model and bounded Perl helper execution

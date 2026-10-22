@@ -81,3 +81,5 @@ omission rejects; a matched old guard/source expectation rejects only in behavio
 checks. Production and test restore exactly. Distinct doc5 and artifact4 bind the
 current book and publication validator. Exact staged canonical admission remains
 required; earlier publications, original observations and failed logs stay frozen.
+
+Historical boundary: accepted79c68715c04f06379bb18673b09d44dd90611439. Publication4 and claim10 require their complete accepted inputs; maintenance20 preserves the whole publication and actual clean readonly0 before shared writes. Current work follows MEMORY.md.

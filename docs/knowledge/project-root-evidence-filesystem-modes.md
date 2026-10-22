@@ -13,11 +13,12 @@ answers:
   - "why are captured pipeline draft bytes stored in several parts"
   - "how does pipeline proof recover its original whole input context"
   - "may readonly verification assemble a temporary compatibility artifact"
-date: 2026-10-18
+date: 2026-10-22
 status: historical mode correction hash-bound; current recognition input modes independently guarded
 tags: [claims, inputs, git, permissions, component-gate, provenance]
-evidence: "The .1.5.2 component instrument stops before running the checker when it compares complete stat permissions to Git mode. The complete observed census has36 readable differences, beginning noncore/AmbiTiming.pm0640 versus recorded100644, with zero executable-bit drift. Preserve both fields and guard actual permissions unchanged; no chmod is performed. Healthy component capture checks4638 actual-root inputs/five retained byte deltas. Independent exact three-edit repair/census/original RED and four effective evidence controls pass."
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
+evidence: ".1.5.2 rejects full-stat/Git equality before checker execution:36 permission differences, first noncore/AmbiTiming.pm0640/100644, no executable drift. Actual permissions stay guarded; no chmod. Healthy4638 inputs/five byte deltas, exact three-edit repair/original RED/four controls remain retained."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.20/review.py"
+evidence_update_2026_10_22: "Hygiene20 rechecks the existing distinction:35x0640/100644 and1x0750/100755. The rejected equality and overgeneralized preparation stay whole; distinct full-mode/Git-field checks and four actual denials pass without chmod."
 ---
 
 The published progressive checker requires tracked-file metadata and runs in the

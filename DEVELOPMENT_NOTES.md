@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-22 - REPO-HYGIENE.20: retain dated project artifacts
+
+Retain all artifacts and reusable caches after the due non-following review:22234 parent candidates/21703659874 bytes and483 Rust incremental candidates/2390835179 bytes. All six root/crate Rust locations and default Dart/Julia/Lua conventions are explicit. Two actual censuses, independent per-file metadata and traversal proof pass; four named reader faults reject. Whole accepted count/first10 and actual clean readonly0 survive at79c68715 before shared writes. Source-bound proof is under docs/checkpoints/REPO-HYGIENE.20/. No runtime, dependency, storage/gate policy or budget change; pipeline11 follows clean focused landing.
+
 ## 2026-10-21 - count/first10
 
 Preflight receiver terminal shape before effects; free calls require one argument. Preserve the stored first value. See docs/checkpoints/type-array-count-first/ for public contract, producer corrections and finite history proof. Ten Phase0 guard goldens and a separate exact inverse preserve650 prior controls and add30; actual inverse/hash faults reject and restore. Published summaries use relative paths; exact raw observations and failed draft2 survive. Three private count goldens retain native captures;236 assertions and semantic RED pass.

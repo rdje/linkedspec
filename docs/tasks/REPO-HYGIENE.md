@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `completed` / retained review .19 verified
+- Status: `completed` / retained review .20 verified
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-19` (`REPO-HYGIENE.19`: due retained review and public warning evidence)
+- Last updated: `2026-10-22` (`REPO-HYGIENE.20`: due artifact review after callable selection)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `done`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -384,10 +384,35 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.19 - retain artifact and compiler-summary evidence`; Git owns accepted identity.
   Next action: Verify normal-hook commit, clear brief0/post-pointer/memory and clean Git, then activate fixture .7; no push or dirty pivot.
 
+- ID: `REPO-HYGIENE.20`
+  Status: `done` / focused proof; normal landing required
+  Priority: P2 — overdue daily artifact review, before registered pipeline11.
+  Goal: Inspect dated parent/Rust artifact metadata and retained toolchain conventions; preserve evidence/caches unless an exact disposable target is proved safe; refresh the latest-only record.
+  Activation: Clean79c68715 after count/first10 canonical CI, private91/32246, Phase01035, all10 normal hooks, receipt promotion, explicit post-pointer/memory, brief0 and clean Git. Actual clean readonly publication4 and11129 physical inputs/11132 independently Git-verified full-mode images plus older logical aliases precede this first tracked write. Complete checked-live census finds no direct planned-surface intersections; accepted10 additionally binds its whole physical manifest and is preserved/retired only at79c68715.
+  Owned paths: docs/checkpoints/REPO-HYGIENE.20/; this task tree, latest-only docs/ARTIFACT_CLEANUP.md, normal live continuity/roadmap/index/history, artifact, helper and mode reverify headers/derived map and maintenance book guidance; mode/revision-only retirement of claim10 and its checkpoint boundary note. No runtime, permanent test, dependency, cache policy, storage/gate mechanism or budget change.
+  Verification tier: `focused`
+  Focused checks: Whole accepted10 custody and actual readonly baseline before tracked writes; non-following parent and explicit Rust log/bin census, fresh comparison and independent per-file lstat; retained Dart/Julia/Lua conventions; actual metadata/channel falsifiers and restoration; current source/claim binding, complete affected book render with effective marker control, core scalar numeric consumer, Knowledge, both bounded histories, memory/whitespace and all normal doctrines.
+  Canonical trigger: none — ordinary dated maintenance; the accepted10 canonical receipt is retained, with no new public/runtime/infrastructure admission.
+  Claim verification: `docs/claims/REPO-HYGIENE.20.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Latest record2026-10-20T19:45:58.736082+00:00 is over24h old; committed count/first10 is clean and admitted.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Scheduled maintenance is due; established non-following census excludes all other repositories, managed runs, retained caches and old fixtures. Metadata alone never authorizes deletion.
+  - [x] **FIX** — Complete the owned review and latest-only date/disposition without deleting proof or reusable data.
+  - [x] **ADDRESSED (verified)** — Retained full actual channels, independent metadata oracle and effective denials.
+  - [x] **NO REGRESSION** — Focused core/book/provenance/doctrines pass; accepted10 stays independently recoverable at its real revision.
+  - [x] **LOCKSTEP** — Current book/Knowledge/task/roadmap/handoff describe this maintenance scope and resume11.
+  Owned proof defect: Initial custody healthy/restored checks wrongly equate full filesystem permissions with Git mode. The existing canonical mode card already distinguishes them. All36 recorded differences (35x0640/100644,1x0750/100755) and original source/channels remain whole. The first repair preflight also overgeneralized the displayed subset and stops before source writes; its exact source/log remain retained. Correct with separate Git identity and captured full-mode checks, without chmod; test executable and other permission corruption in a distinct epoch.
+  Custody correction verified: real Git checks blob/mode identity separately; full filesystem permissions match the original manifest or three complete owned packets. Distinct healthy/restored checks and four actual missing-image/executable/other-permission/baseline denials pass. Original failed reviewer/preparation/data remain whole; no chmod. Complete89-input book and actual missing-marker RED pass. Focused scalar/Knowledge/history/doctrines and normal landing remain required.
+  Limits: Dated metadata, not content ownership/disposability or concurrent-adversarial/liveness/recovery/purge evidence. Zero removals is valid. Other repositories/submodules remain strictly read-only; reusable cache/package/compiler outputs remain retained by default. No push until PNT is exhausted.
+  Commit subject: `REPO-HYGIENE.20 - review retained project artifacts`.
+
+  Verified disposition: dated22234 parent candidates/21703659874 bytes;483 Rust incremental candidates/2390835179 bytes, with the other five explicit root/crate locations empty or absent. Retain every artifact/cache: zero removals. Actual two-census/fresh/per-file OS and six traversal controls pass; aggregate, coherent balanced-file, producer-channel and source-identity faults reject for their named reasons. Whole accepted10 and actual clean readonly0 remain bound to real79c68715. Complete book/core/Knowledge/history/doctrines and normal focused landing govern admission; no new runtime feature or dependency classification.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
+| 0 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
 | 1 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
 | 2 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
 | 3 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |

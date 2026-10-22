@@ -428,6 +428,8 @@ observation, while a read-only reviewer can still check the old recorded totals 
 For a retained daily snapshot, the review order is census completion, fresh scoped comparison,
 and independent per-file metadata checks. Save the actual producers, exit statuses and both
 output channels before advancing the latest date. A successful review may remove zero files.
+Complete fresh comparisons before printing a report whose own log belongs to the census.
+Keep the raw channels; later log growth belongs to a new dated observation.
 For example, the retained daily snapshot can be checked without recapturing changing state:
 
 ```bash
