@@ -49,7 +49,7 @@ like(
 
 subtest 'scalar numeric calls and receivers compose inside deferred codeblocks' => sub {
     my @cases;
-    foreach my $name (qw(cases effects stability receiver-invalid terminals pipelines sort-kinds count-first)) {
+    foreach my $name (qw(cases effects stability receiver-invalid terminals pipelines sort-kinds count-first registered-pipelines)) {
         my $path = File::Spec->catfile($repo_root, 'tests', 'numeric-codeblocks', $name . '.json');
         open my $fh, '<:raw', $path or die "Could not read $path: $!";
         my $fixture = JSON::PP->new->utf8->decode(do { local $/; <$fh> });

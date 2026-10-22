@@ -60,9 +60,25 @@ does not add recursive copying of arbitrary host objects.
 ### Current Perl limits
 
 The six numeric aggregate reducers and `sorted`/`take` execute inside Perl codeblocks. See the worked [selection examples](#sorting-and-taking-inside-perl-codeblocks).
-Deferred `count` and `first` also execute; see [their selection contract](#counting-and-selecting-first-inside-perl-codeblocks). Deferred `.last()` remains unsupported. Registered `fn` receiver pipelines containing `sorted` also remain limited; use the callable forms below.
+Deferred `count` and `first` also execute; see [their selection contract](#counting-and-selecting-first-inside-perl-codeblocks). Registered array pipelines and terminal `length` also work; see [the examples below](#registered-array-pipelines-and-length). Deferred `.last()` remains unsupported.
 Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean arguments passed into a codeblock retain their kind. These separately owned
 repairs remain pending. The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
+
+### Registered array pipelines and length
+
+On Perl, registered functions can sort and take array parameters, local bindings and rest arguments. Selection returns a copy; empty or non-array inputs yield `[]`. This complete parser returns `[[1,10],[1,10],2,[2,10,1]]` for input `x`:
+
+```text
+fn select_items(items) { return(items.sorted().take(2)) }
+Top: /x/
+ I { items = [2,10,1]; cb = {|| return(select_items(items)) }; return([select_items(items),cb(),items.sorted().take(2).length(),items]) }
+```
+
+`length(value)` / `value.length()` measures a string or array. The receiver takes no arguments and ends its chain. Invalid arity or a continuation returns `undef` before receiver or argument effects, including inside deferred bodies. A free-call result can start a new chain: `length([2,10,1]).abs()` returns `3`. This action body returns `[null,""]`:
+
+```text
+seen = ""; source = {|| seen = cat(seen,"s"); return([2,10,1]) }; cb = {|| return(source().sorted().take(2).length().abs()) }; return([cb(),seen]);
+```
 
 ### Counting and selecting first inside Perl codeblocks
 

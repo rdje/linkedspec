@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.11 is next after clean maintenance20 landing: registered sorted receiver pipelines and ordinary length continuation. Count/first10 is accepted at79c68715; no full inventory/reference admission.
+TYPE-REFERENCE-BOOK.1.2.12 is next after clean11 landing: deferred typed indexed writes. Registered pipelines/length and the owned proof-input closure are bounded; complete inventory/reference admission remains pending.
 
 ## Latest Completed Slice
 
-REPO-HYGIENE.20 retains dated22234 parent rows and483 Rust incremental rows, zero removals, full actual/fresh/lstat/traversal proof and four named reader denials. Whole accepted10/actual clean readonly0 precedes shared writes; runtime, proof and reusable caches remain unchanged. Focused proof and normal hooks govern landing.
+TYPE-REFERENCE-BOOK.1.2.11: 56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration. Whole unpublished714/actual readonly0 remains preserved; conservative full measured-input closure replaces the too-narrow watchset. The failed capture4 controller and11350 inputs remain preserved; shared normal-entrypoint preflight governs publication. Exact canonical receipt and normal hooks govern admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.11 from clean committed Git and reproduce its two registered-pipeline/length defects through public tools; commit every bounded slice before moving on.
+Activate TYPE-REFERENCE-BOOK.1.2.12 from clean committed Git; reproduce through public tools and follow existing typed-write/copy/key/effect contracts. Commit each bounded slice before moving on.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.11` —56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration; conservative closure/whole714; indexed-write12 next.
 - `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
 - `TYPE-REFERENCE-BOOK.1.2.10` —232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; finite history0137;11 next.
 - `TYPE-REFERENCE-BOOK.1.2.13` —116/47 accepted RED; six faults;14/1950;16 flag routes;9/72 direct;book89/5; count/first10 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.11 from clean committed Git and reproduce its t
 - `PERL-PRIVATE-FACTORY-CAPTURE.6` — scopes/five captures; original2065/13/91/32235; current2065/426;625 declaration+161 namespace/786 guarded; Knowledge8386222/book89/4; new artifact3+original8; readonly711/120239; metadata .12 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.7` — exact150-line/91 suites/46 helpers/363 inputs/30394; faults4; recovered134/22 controls/368 REDs (280 new); artifact6+lineage1; Knowledge8388024/book89/4; readonly603/115985; canonical boundary, then pipeline .6.
 - `REPO-HYGIENE.19` — retained16443 parent/483 Rust/zero removals; warnings24/raw log/actual receipts; controls4+8+4; Knowledge8388524/book89/4; whole550/128458 historical e953; fixture .7 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.5.8` — exact257-line suffix/230 old files; actual1980/1981 inputs; sole ADR0136/six scalars;60 numeric/31 authority REDs; evidence7; Knowledge8388337/book89/4; readonly550/128458; canonical boundary, then due artifact review.
 
 ## History
 

@@ -490,7 +490,7 @@ sub _eval_fluent_chain {
    unless ref($args) eq 'ARRAY';
   return undef if $method eq 'sorted' && @$args;
   return undef if $method eq 'take' && @$args > 1;
-  if ($method eq 'count' || $method eq 'first') {
+  if ($method eq 'count' || $method eq 'first' || $method eq 'length') {
    return undef if @$args || $index < $#$calls;
   }
   if ($method =~ /\A(?:sum|avg|median|range)\z/) {

@@ -28,42 +28,43 @@ answers:
   - "which task owns deferred last count first indexed writes and registered sorted"
   - "why do malformed fluent arguments leak a Perl array-reference error"
   - "why do private count captures expect old defined guards"
+  - "why did registered sorted pipelines lose function parameters"
 date: 2026-10-22
 status: bounded Perl; inventory pending
-tags: [spec-format-terse, method-chaining, receiver-dot, audit, mdbook, rust-parity]
-evidence: "Type epochs retained; count/first10 verified."
+tags: [spec-format-terse, method-chaining, mdbook]
+evidence: "Type checkpoints; pipelines11."
 reverify: "bash tools/project_data_run.sh prove -Iperl t/scalar_numeric_contract.t"
 ---
 
 # Value model and bounded Perl helper execution
 
-Scalar/array/harray/codeblock bindings retain evaluated constructor/key/argument
-values; deferred bodies read caller slots; updates use copy-on-write.
-See [[perl-generic-final-codeblock-normalization]].
+Bindings retain evaluated constructor keys/values and arguments. Deferred reads
+use caller slots; updates copy on write. [[perl-generic-final-codeblock-normalization]].
 
-Scalar/aggregate Numeric policies differ. Shape checks precede effects;
-comparisons/reducers terminate. Aggregates take one array; receivers no operands.
-Scalar min/max evaluates operands before rejection. Perl checks each decimal
-term: empty sum0, othersundef; Rust filters differently. Reducer95:
+Scalar/aggregate Numeric policies differ. Shapes precede effects; comparisons/
+reducers terminate. Aggregates take one array, receivers none. Scalar min/max
+evaluates before rejection. Perl checks each decimal: empty sum0, othersundef;
+Rust filters differently. Reducer95:
 [[perl-numeric-reducer-string-result-kinds]]. Boolean35, Unicode20/constructor94
 remain separate.
 
-Deferred sorted/take have free/receiver forms. Lexical sort preserves copied
-numeric/string kinds across clones/indexes; measure flags before Storable caches
-private iOK on floats.
+Deferred sorted/take have free/receiver forms. Lexical sort retains numeric/string
+kinds through clones/indexes; measure flags before Storable caches private float iOK.
 take defaults1; integer spelling only; negative/invalid0; oversized clamp.
-Nonarrays yield[] and skip count; sources/results stay independent.
-count/first execute deferred: free calls take one operand, terminal receivers none.
-Nonarrays yield0/undef; first preserves kinds/callables; invalid shapes skip effects.
-11 owns registered sorted/ordinary length,12 indexed writes,14 last.
+Nonarrays yield[], skip count; independent source/results.
+Deferred count/first: one free operand, no receiver args; receivers terminate.
+Nonarrays yield0/undef; first retains kinds/callables; bad shapes skip effects.
+Array chains reuse the bridge; emitted values avoid DSL reparsing.
+length takes no args and terminates; bad shapes/continuations skip effects.
+12 writes/14 last.
 Fluent args require arrays before preflight. Three private count goldens retain
 native captures; current guards execute against arrays/nonarrays. No backend admission.
 
 drop_keys copies keys/splices, keeps null diagnostics and FATAL-warning silence.
 c053c9dcf inventories substr/typed receivers; references pending.
 
-Accepted7 HTML: only the search-index reference differs; decoded changes are15
-body-whitespace strings. Strict rejection remains.
+Accepted7: only the search-index reference differs; decoded15 body-whitespace
+changes; strict rejection remains.
 
 Context hash-gates gzip/37 verified32MiB chunks and three byte/mode aliases;
-nested-Git guards apply. Recursive originals:49ce.
+nested-Git guards. Recursive originals:49ce.

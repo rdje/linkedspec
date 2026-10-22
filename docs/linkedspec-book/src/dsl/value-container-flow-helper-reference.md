@@ -745,7 +745,7 @@ These helpers produce scalar values and preserve parser intent inside the DSL ex
 | `rm_suffix(value, suffix)` | scalar | remove one literal suffix when present. |
 | `substr(value, start, length?)` | scalar | take a substring by zero-based character offset. |
 | `cat(value, value, ...)` | scalar | build one string from scalar fragments. |
-| `length(value)` | scalar number or `undef` | measure scalar string length. |
+| `length(value)` | scalar number or `undef` | measure string or array length; [Perl pipeline examples](values-containers-and-flow-helpers.md#registered-array-pipelines-and-length). |
 
 `lowercase` and `uppercase` are Unicode operations, not byte operations; UTF-8, UTF-16, and UTF-32 are only host
 representations. The canonical contract is Unicode 17.0.0 full Default Case Conversion, locale-independent, with

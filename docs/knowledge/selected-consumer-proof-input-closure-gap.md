@@ -6,11 +6,12 @@ answers:
   - "which inputs were omitted by the basic regex proof publisher"
   - "can continuity publishing change Phase0 input bytes after its run"
   - "who owns the selected consumer and book proof input closure repair"
-date: 2026-10-09
+  - "why did a scoped runtime claim miss checkpoint fixtures"
+date: 2026-10-22
 status: earlier gap superseded by .1.1.3.1; finite recent audit .2.1.2.5 verified
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
-evidence: "The final .1.1.0 review preserves the original claim/publisher as claim-initial.json/.py, separates the complete private/compiler measurement from consumer/render observations, and discloses broader falsification/durability gaps with an immediate P1 repair. The actual passing TAP and render streams are unchanged."
-reverify: "Read the source-backed selected input graph and actual remeasurement under .1.1.3 when it lands; initial producer/claim and observed streams remain under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-. Do not refresh their input hashes as if they captured a newer run."
+evidence: "Original sources/streams remain; finite repairs and pipeline11 recurrence retain complete epochs."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-registered-array-pipelines/publish5.py; historical boundaries remain in the body."
 ---
 
 # Selected passing consumer transcripts need transitive inputs and a stable document boundary
@@ -65,3 +66,8 @@ historical records, unchanged foundation and complete current recurrence/book
 live in `docs/knowledge/private-consumer-artifact-binding-audit.md`. It closes
 that finite correction; missing historical per-read bytes remain explicit and
 the broader startup audit stays open.
+
+October22 pipeline11 preserves whole unpublished714/actual readonly0 before
+repairing the same live-watchset gap. Its conservative regular-file closure uses
+the complete measured epoch and actual fixture omission/bypass/restoration. No
+minimal input graph or wider historical-audit closure is inferred.

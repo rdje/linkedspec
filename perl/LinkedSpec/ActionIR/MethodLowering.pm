@@ -4506,12 +4506,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   $calls = \@normalized_calls;
 
-  # Numeric shape errors are complete null expressions, including mixed chains.
-  # They must not reach the legacy Perl fallback or execute a receiver first.
+  # Invalid call shapes and terminal continuations are complete null
+  # expressions; reject them before lowering any receiver or operand effects.
   for (my $index = 0; $index < @$calls; ++$index) {
    my $call = $calls->[$index];
    my $method = $call->{method} // '';
    my $aggregate_args = $call->{args} || [];
+   return 'undef' if $method eq 'sorted' && @$aggregate_args;
+   return 'undef' if $method eq 'take' && @$aggregate_args > 1;
+   if ($method eq 'count' || $method eq 'first' || $method eq 'length') {
+    return 'undef' if @$aggregate_args || $index < $#$calls;
+   }
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args || $index < $#$calls;
    }
@@ -4650,7 +4655,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my ($current_expr, $call) = @_;
    my $method = $call->{method} // '';
    return undef if $method =~ /^(?:push_front|push_back|pop_front|pop_back)$/o;
-   return undef unless _is_array_receiver_value_chain_method($method);
+   return undef unless $method eq 'length' || _is_array_receiver_value_chain_method($method);
    my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
    return undef unless ref($arg_exprs) eq 'ARRAY';
 
@@ -5119,7 +5124,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
     ($current_expr, $current_family) = @$applied;
     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
    }
-   return $lower_synthetic_chain_expr->($current_expr)
+   # This composition can already contain emitted callback expressions.
+   # Consume it through the existing compatibility bridge without parsing
+   # host temporaries as new DSL expressions.
+   return $legacy_method_value_expr->($current_expr)
   }
 
   return undef
