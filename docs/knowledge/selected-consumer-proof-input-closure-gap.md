@@ -11,7 +11,7 @@ date: 2026-10-23
 status: earlier gap superseded by .1.1.3.1; finite recent audit .2.1.2.5 verified
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
 evidence: "Original sources/streams remain; finite repairs and pipeline11 recurrence retain complete epochs."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-deferred-indexed-writes/publish4.py; historical boundaries remain in the body."
+reverify: "Historical at 1e6096435 with original live claim: bash tools/run_python_project_data.sh docs/checkpoints/type-deferred-indexed-writes/publish4.py."
 ---
 
 # Selected passing consumer transcripts need transitive inputs and a stable document boundary

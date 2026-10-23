@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-23 — REPO-HYGIENE.21 — retain due artifact review
+
+Dated 2026-10-23T16:47:31.468358+00:00 parent 22830 candidates/22207314907 bytes; Rust incremental 483/2390835129, with all six locations recorded separately; zero removals. Fresh/lstat/traversal proof, four metadata/four custody/three input controls and actual book-marker RED pass. Whole accepted12 and actual clean readonly0 precede writes; complete book89 and unchanged scalar core pass. Normal focused doctrines/hooks govern landing; signed17 follows clean Git.
+
+The current book example and Knowledge reverify headers name the appropriate retained or historical boundary; questions and historical bodies remain exact. Reusable caches, package data, logs and all other repositories are untouched. No runtime, contract, storage policy or gate change.
+
 ## 2026-10-23 — TYPE-REFERENCE-BOOK.1.2.12 — atomic deferred indexed writes
 
 Perl callable bodies execute the existing typed nested-write contract through BindingRuntime. Every compiled caller scalar slot preserves presence independently of the callback source. Caller null presence survives separately forwarded callbacks through weak slot identity; fixed/rest parameter copies and original flags restore on every exit. Basic write carriers/operand headers validate before effects, receiver guards precede operands, keys then RHS evaluate once, and isolated publication returns detached roots. Worked book/guide and canonical retrieval stay aligned. Tracked scalar statements preserve assigned values without void warnings; unfinished raw-regex compatibility fragments retain their boundary. The rejected first canonical800/1034 and actual repair controls are retained; raw payload fidelity is separately owned21 and documented.

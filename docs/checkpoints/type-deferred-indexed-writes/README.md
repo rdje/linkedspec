@@ -16,3 +16,5 @@ Publication4/artifact5 retain actual identity denials and three independent requ
 Two LF subjects expose existing assigned raw-regex semicolon corruption on accepted/current native/fresh routes against an independent literal oracle. TYPE-REFERENCE-BOOK.1.2.21 owns repair after19 and before20/inventory. General raw-host fidelity is not admitted here. Requested [-n] = [size-n] when nonnegative belongs to director-priority17 after clean12 and due hygiene21; last14 and deferred with16 remain pending. No other-backend, complete inventory/reference or wider historical-audit admission.
 
 Capture/mutation writers are one-shot. Rerun only the current readonly publisher or permanent consumers. Exact staged canonical3 and normal commit hooks govern landing.
+
+Historical boundary: accepted 1e6096435e0ea14a8414a263939bbb75cb2b1310. Publication4 requires its complete accepted inputs and original live claim. Hygiene21 preserves whole publication4 and its actual clean readonly baseline before shared writes. Current selection follows MEMORY.md.

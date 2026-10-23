@@ -433,7 +433,7 @@ Keep the raw channels; later log growth belongs to a new dated observation.
 For example, the retained daily snapshot can be checked without recapturing changing state:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.11-review.py
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.21/review.py
 ```
 
 All other Git repositories and submodules are excluded before traversal. A project task or

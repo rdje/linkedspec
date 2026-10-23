@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Deferred-write12 is complete subject to exact staged canonical3 admission. Overdue artifact review REPO-HYGIENE.21 follows clean landing, then director-priority signed selectors TYPE-REFERENCE-BOOK.1.2.17. No signed-selector admission yet.
+Due artifact review21 is complete; director-priority signed selectors TYPE-REFERENCE-BOOK.1.2.17 is the next feature. Deferred-write12 is committed at1e6096435 with canonical proof. No signed-selector admission yet.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.12: 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls. Whole rejected canonical1/2 and publications remain retained. The private test qualifies only deliberate assignment emission, preserving original captures and all predicate fields. Exact canonical receipt and normal hooks govern landing.
+REPO-HYGIENE.21: Dated 2026-10-23T16:47:31.468358+00:00 parent 22830 candidates/22207314907 bytes; Rust incremental 483/2390835129, with all six locations recorded separately; zero removals. Fresh/lstat/traversal proof, four metadata/four custody/three input controls and actual book-marker RED pass. Whole accepted12 and actual clean readonly0 precede writes; complete book89 and unchanged scalar core pass. Normal focused doctrines/hooks govern landing; signed17 follows clean Git.
 
 ## Next Action
 
-From clean committed Git own/commit overdue artifact review21, then split and implement signed17 across shared contracts/backends. Continue14/16/19/raw-regex21/policy20 before complete inventory/reference work.
+From clean Git activate/split signed17 across shared contracts and owned backends; then14/16/19/raw-regex21/policy20 before complete inventory/reference work.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.21` — dated22830 parent/483 Rust incremental; zero removals; metadata4/custody4/input3/book89 marker RED/core PASS; whole accepted12 custody; signed17 next.
 - `TYPE-REFERENCE-BOOK.1.2.12` — 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; signed17 next feature.
 - `TYPE-REFERENCE-BOOK.1.2.11` —56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration; conservative closure/whole714; indexed-write12 next.
 - `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
@@ -29,7 +30,6 @@ From clean committed Git own/commit overdue artifact review21, then split and im
 - `TYPE-REFERENCE-BOOK.1.1` — historical flat groups/snapshot limits; native17/five controls; module4; prior208/full39111 + draft355/full60395 retained/replayed; Knowledge8386601/map21249/book89; readonly396/68960; inventory .1.2 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` — lists897/248; original80/RED38/GREEN176; faults10/artifact3; current1487/1349/10455; knowledge8386908/map21249/book89/4; readonly208/39111; TYPE-REFERENCE-BOOK.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.6` — scopes/five captures; original2065/13/91/32235; current2065/426;625 declaration+161 namespace/786 guarded; Knowledge8386222/book89/4; new artifact3+original8; readonly711/120239; metadata .12 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.7` — exact150-line/91 suites/46 helpers/363 inputs/30394; faults4; recovered134/22 controls/368 REDs (280 new); artifact6+lineage1; Knowledge8388024/book89/4; readonly603/115985; canonical boundary, then pipeline .6.
 
 ## History
 
