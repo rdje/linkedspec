@@ -16,6 +16,10 @@ use LinkedSpec::Numeric ();
 # provide explicit references to caller working slots; this module never captures
 # a lexical environment and never stores a host coderef in the record.
 fieldhash my %codeblock_origins;
+# A forwarded callable can introduce a working slot unknown to its compiled
+# caller. Its presence must survive the next invocation through that same slot.
+# Weak keys follow the slot lifetime without capturing a callable environment.
+fieldhash my %binding_presence_by_slot;
 
 sub _codeblock_origin {
  my ($record) = @_;
@@ -115,10 +119,38 @@ sub _binding_ref {
  _error('invalid_codeblock_binding', name => defined($name) ? $name : '')
   unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/;
  my $binding = $ctx->{bindings}{$name};
- return $binding if _is_scalar_binding_ref($binding);
+ if (_is_scalar_binding_ref($binding)) {
+  my $present = $ctx->{presence}{$name};
+  if (_is_scalar_binding_ref($present)) {
+   $binding_presence_by_slot{$binding} = $present;
+  } elsif (exists $binding_presence_by_slot{$binding}) {
+   $ctx->{presence}{$name} = $binding_presence_by_slot{$binding};
+  }
+  return $binding;
+ }
  my $value;
  $ctx->{bindings}{$name} = \$value;
+ # A compiled caller can know the presence flag before a deferred body
+ # introduces its value slot. Keep that shared flag rather than detaching it.
+ my $present = $ctx->{presence}{$name};
+ unless (_is_scalar_binding_ref($present)) {
+  my $absent = 0;
+  $present = \$absent;
+ }
+ $ctx->{presence}{$name} = $present;
+ $binding_presence_by_slot{$ctx->{bindings}{$name}} = $present;
  return $ctx->{bindings}{$name}
+}
+
+sub _presence_ref {
+ my ($ctx, $name) = @_;
+ my $present = $ctx->{presence}{$name};
+ return $present if _is_scalar_binding_ref($present);
+ my $value = 0;
+ $ctx->{presence}{$name} = \$value;
+ my $binding = $ctx->{bindings}{$name};
+ $binding_presence_by_slot{$binding} = \$value if _is_scalar_binding_ref($binding);
+ return $ctx->{presence}{$name}
 }
 
 sub _read_binding {
@@ -131,7 +163,66 @@ sub _write_binding {
  my ($ctx, $name, $value) = @_;
  my $binding = _binding_ref($ctx, $name);
  $$binding = $value;
+ ${_presence_ref($ctx, $name)} = 1;
  return $value
+}
+
+sub _write_operand_is_typed {
+ my ($node) = @_;
+ return ref($node) eq 'HASH' && defined($node->{kind})
+  && !ref($node->{kind}) && length($node->{kind}) ? 1 : 0
+}
+
+sub _write_span {
+ my ($span, $ctx) = @_;
+ _error('invalid_codeblock_body', detail => 'invalid nested write span')
+  unless ref($span) eq 'HASH'
+   && defined($span->{start}) && !ref($span->{start}) && $span->{start} =~ /\A\d+\z/
+   && defined($span->{end}) && !ref($span->{end}) && $span->{end} =~ /\A\d+\z/
+   && $span->{end} >= $span->{start};
+ return { source_id => $ctx->{invocation}{action_source_id} // 'action:<action>',
+  start => $span->{start}, end => $span->{end},
+  unit => 'unicode_scalar', provenance => 'authored' }
+}
+
+sub _eval_nested_write {
+ my ($node, $ctx) = @_;
+ my ($base, $segments) = @{$node}{qw(base segments)};
+ _error('invalid_codeblock_body', detail => 'invalid nested write')
+  unless defined($base) && !ref($base) && $base =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/
+   && ref($segments) eq 'ARRAY' && @$segments && _write_operand_is_typed($node->{value});
+ my $span = _write_span($node->{source_span}, $ctx);
+ my @spans;
+ foreach my $segment (@$segments) {
+  _error('invalid_codeblock_body', detail => 'invalid nested write segment')
+   unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment'
+    && _write_operand_is_typed($segment->{expression});
+  push @spans, _write_span($segment->{source_span}, $ctx);
+ }
+ my $binding = _binding_ref($ctx, $base);
+ LinkedSpec::BindingRuntime::assert_receiver_writable(
+  $binding, $base, 'nested_write', { %$span, end => $span->{start} + length($base) });
+ my @evaluated;
+ for (my $index = 0; $index < @$segments; ++$index) {
+  my $expression = $segments->[$index]{expression};
+  my $kind = $expression->{kind} // '';
+  my $hint = $kind eq 'string' ? 'string'
+   : $kind eq 'number' ? (defined($expression->{source})
+    && $expression->{source} =~ /\A-?\d+\z/ ? 'integer' : 'number')
+   : $kind eq 'boolean' ? 'boolean' : $kind eq 'undef' ? 'null'
+   : $kind eq 'array_literal' ? 'array' : $kind eq 'hash_literal' ? 'harray'
+   : $kind eq 'codeblock_literal' ? 'codeblock' : 'dynamic';
+  push @evaluated, { value => _eval_expr($expression, $ctx),
+   kind_hint => $hint, source_span => $spans[$index] };
+ }
+ my $rhs = _eval_expr($node->{value}, $ctx);
+ # Segment/RHS calls may rebind this slot. Snapshot only after their effects.
+ my $present = _presence_ref($ctx, $base);
+ my ($updated, $result) = LinkedSpec::BindingRuntime::nested_write(
+  $$binding, (defined($$binding) || $$present) ? 1 : 0, $base, \@evaluated, $rhs);
+ $$binding = $updated;
+ $$present = 1;
+ return $result
 }
 
 sub _scalar_text {
@@ -449,6 +540,7 @@ sub _eval_call {
   $name,
   $ctx->{active_codeblocks},
   $ctx->{invocation},
+  $ctx->{presence},
  )
 }
 
@@ -584,6 +676,7 @@ sub _eval_expr {
   my $value = _eval_expr($node->{value}, $ctx);
   return _write_binding($ctx, $node->{name}, $value)
  }
+ return _eval_nested_write($node, $ctx) if $kind eq 'assign_nested_access';
  if ($kind eq 'array_literal') {
   return [map { _copy_value(_eval_expr($_, $ctx)) } @{$node->{items} || []}]
  }
@@ -792,13 +885,24 @@ sub _execute_body {
 }
 
 sub invoke {
- my ($record, $args, $bindings, $identity, $active_codeblocks, $invocation) = @_;
+ my ($record, $args, $bindings, $identity, $active_codeblocks, $invocation, $presence) = @_;
  $args = [] unless defined $args;
  $bindings = {} unless defined $bindings;
  $identity = '<codeblock>' unless defined($identity) && length($identity);
  $invocation = {} unless defined $invocation;
  _error('invalid_codeblock_arguments') unless ref($args) eq 'ARRAY';
  _error('invalid_codeblock_bindings') unless ref($bindings) eq 'HASH';
+ if (!defined($presence)) {
+  # Explicit runtime callers supplied existing slots, including bound null.
+  # Generated callers instead supply references to their presence flags.
+  $presence = {};
+  foreach my $name (keys %$bindings) {
+   my $present = 1;
+   $presence->{$name} = \$present;
+  }
+ }
+ _error('invalid_codeblock_presence') unless ref($presence) eq 'HASH'
+  && !grep { !_is_scalar_binding_ref($_) } values %$presence;
  _error('invalid_codeblock_invocation_context') unless ref($invocation) eq 'HASH';
  $active_codeblocks = $invocation->{active_codeblocks} || [] unless defined $active_codeblocks;
  _error('value_not_callable', value_kind => _value_kind($record))
@@ -848,12 +952,14 @@ sub invoke {
    $bindings->{$name} = \$value;
    $binding = $bindings->{$name};
   }
-  push @saved, [$name, $binding];
+  push @saved, [$name, $binding, exists($presence->{$name}), $presence->{$name}];
   # A parameter shadows the caller slot rather than borrowing its identity.
   # Receiver guards therefore protect caller mutations without rejecting a
   # mutation of this independent, copied parameter value.
   my $parameter_value;
   $bindings->{$name} = \$parameter_value;
+  my $parameter_present = 1;
+  $presence->{$name} = \$parameter_present;
  }
 
  for (my $idx = 0; $idx < @{$signature->{positional_params}}; ++$idx) {
@@ -868,6 +974,7 @@ sub invoke {
   bindings => $bindings,
   active_codeblocks => \@active,
   invocation => $invocation,
+  presence => $presence,
  };
  my ($result, $failure);
  my $ok = eval {
@@ -877,6 +984,8 @@ sub invoke {
  $failure = $@ unless $ok;
  foreach my $saved (@saved) {
   $bindings->{$saved->[0]} = $saved->[1];
+  if ($saved->[2]) { $presence->{$saved->[0]} = $saved->[3] }
+  else { delete $presence->{$saved->[0]} }
  }
  die $failure unless $ok;
  return $result

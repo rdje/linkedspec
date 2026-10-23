@@ -1,0 +1,2 @@
+Use the documented `matches(subject, /pattern/)` helper for multiline patterns. Legacy raw Perl assignments such as `rx = /pattern/` can acquire a semicolon at a physical line break and match different text. This affects native and emitted Perl; repair is pending.
+

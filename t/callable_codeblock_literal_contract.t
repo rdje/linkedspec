@@ -4,6 +4,7 @@ use Test::More;
 use JSON::PP ();
 use File::Basename qw(dirname);
 use File::Spec ();
+use Scalar::Util ();
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::AST ();
@@ -70,6 +71,74 @@ sub run_spec_with_context {
     my $result = $parser->(\$runtime_input);
     return ($result, \%runtime_ctx);
 }
+
+subtest 'tracked scalar assignments preserve values and remain quiet in every context' => sub {
+    require LinkedSpec::ActionIR::MethodLowering;
+    my $expression = LinkedSpec::ActionIR::MethodLowering::_tracked_scalar_assignment_expr(
+        'value', 'do { ++$effects; $input }', {nested_write_target => sub { 1 }}, 0);
+    for my $context (qw(void value list)) {
+        my $operation = $context eq 'void' ? $expression . '; my $result;'
+            : $context eq 'value' ? 'my $result = ' . $expression . ';'
+            : 'my $result = [' . $expression . '];';
+        my $source = 'sub { my ($input) = @_; my $value; my $effects = 0;'
+            . ' my %__ls_binding_presence; ' . $operation
+            . ' return [$value, $result, $__ls_binding_presence{value}, $effects] }';
+        my (@warnings, $code, $error);
+        {
+            local $SIG{__WARN__} = sub { push @warnings, @_ };
+            $code = eval $source;
+            $error = $@;
+        }
+        is($error, '', "$context fragment compiles");
+        is_deeply(\@warnings, [], "$context fragment emits no warning");
+        next unless $code;
+        for my $input (0, '0', 'text', undef, [], {}) {
+            my $expected = $context eq 'void' ? undef
+                : $context eq 'value' ? $input : [$input];
+            my $actual = $code->($input);
+            is_deeply($actual, [$input, $expected, 1, 1],
+                "$context preserves value, presence, and single evaluation");
+            my $result = $context eq 'list' ? $actual->[1][0] : $actual->[1];
+            is(Scalar::Util::refaddr($result), Scalar::Util::refaddr($input),
+                "$context preserves assignment reference identity")
+                if ref($input) && $context ne 'void';
+        }
+    }
+};
+
+subtest 'allocating a deferred slot retains its supplied caller presence flag' => sub {
+    require LinkedSpec::CodeblockRuntime;
+    my (%bindings, $present);
+    $present = 0;
+    my $setter = parse_expr('{|| document = undef }');
+    LinkedSpec::CodeblockRuntime::invoke($setter, [], \%bindings, 'setter', undef, {},
+        {document => \$present});
+    is($present, 1, 'the caller flag observes the new null binding');
+    ok(exists($bindings{document}), 'the function frame retains the new slot');
+    my $writer = parse_expr('{|| document["x"] = 2 }');
+    my $ok = eval {
+        LinkedSpec::CodeblockRuntime::invoke($writer, [], \%bindings, 'writer', undef, {},
+            {document => \$present});
+        1;
+    };
+    my $failure = $@;
+    ok(!$ok, 'a separately supplied flag map retains bound null');
+    is(ref($failure), 'LinkedSpec::BindingRuntime::NestedWriteError', 'the error remains typed');
+    is(ref($failure) ? $failure->{code} : undef, 'nested_write_kind_conflict', 'null cannot vivify');
+    is($present, 1, 'the structural failure preserves caller presence');
+    ok(!defined(${$bindings{document}}), 'the structural failure preserves null');
+};
+
+subtest 'ordinary standalone lowering does not require a caller presence frame' => sub {
+    my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'item = 1');
+    my ($item, @warnings);
+    local $SIG{__WARN__} = sub { push @warnings, @_ };
+    my $ok = eval "$lowered; 1";
+    is($@, '', 'ordinary fragment compiles with only its authored binding');
+    ok($ok, 'ordinary fragment completes');
+    is($item, 1, 'ordinary fragment preserves the assigned value');
+    is_deeply(\@warnings, [], 'ordinary fragment emits no host warnings');
+};
 
 subtest 'neutral brace classification and valid literal AST records' => sub {
     my %perl_kind = (
@@ -788,6 +857,241 @@ subtest 'serialized fluent argument fields preserve typed errors and values' => 
             is_deeply($items, [3,1,8], 'caller values remain unchanged');
             is($json->encode($record), $before, 'record remains unchanged');
         }
+    }
+};
+
+subtest 'indexed writes execute through native and independently emitted public parsers' => sub {
+    my $path = File::Spec->catfile($repo_root, 'tests', 'numeric-codeblocks', 'indexed-writes.json');
+    open my $fh, '<:raw', $path or die "Could not read $path: $!";
+    my $plan = JSON::PP->new->utf8->decode(do { local $/; <$fh> });
+    close $fh or die "Could not close $path: $!";
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    my $index = 0;
+    for my $case (@{$plan->{cases}}) {
+        subtest $case->{id} => sub {
+            my $source = $case->{source} // ($case->{functions} // '') . "Top: /x/\n I { $case->{body} }\n";
+            my (%context, $native, $output, $failure);
+            {
+                open my $capture, '>', \$output or die "Capture diagnostic output: $!";
+                local *STDOUT = $capture;
+                eval {
+                    my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+                    die "No parser" unless ref($parser) eq 'CODE';
+                    my $input = 'x';
+                    $native = $parser->(\$input);
+                    1;
+                } or $failure = $@;
+            }
+            ok(!defined($failure), 'native parser builds and completes its runtime boundary');
+            my $generated = eval { LinkedSpec::emit_generated_source(\$source, source_identity => 'indexed-writes.spec') };
+            ok(defined($generated) && length($generated), 'independent source emits');
+            my $package = 'IndexedWrites' . $index++;
+            my $loaded = defined($generated) && eval "package $package; $generated; 1";
+            ok($loaded, 'independent source loads');
+            return unless $loaded;
+            my ($value, $error);
+            eval {
+                no strict 'refs';
+                my $input = 'x';
+                $value = &{$package . '::Execute'}(\$input);
+                1;
+            } or $error = $@;
+            if ($case->{error}) {
+                my $detail = $context{last_error}{detail};
+                is($detail->{code}, $case->{error}, 'native typed code');
+                is(ref($detail), $case->{error} eq 'receiver_mutation_reentrant'
+                    ? 'LinkedSpec::BindingRuntime::ReceiverMutationError'
+                    : 'LinkedSpec::BindingRuntime::NestedWriteError', 'native error class');
+                is(ref($error), 'HASH', 'generated execution reports its contract error');
+                is(ref($error) eq 'HASH' ? $error->{detail}{code} : undef,
+                    $case->{error}, 'generated nested typed code');
+            } else {
+                ok(!defined($context{last_error}), 'native execution has no runtime error');
+                is($json->encode($native), $json->encode($case->{expected}), 'native values and kinds');
+                ok(!defined($error), 'generated execution has no runtime error');
+                is($json->encode($value), $json->encode($case->{expected}), 'generated values and kinds');
+            }
+        };
+    }
+};
+
+subtest 'deferred indexed writes obey the frozen vivification cases' => sub {
+    require LinkedSpec::BindingRuntime;
+    my $path = File::Spec->catfile($repo_root, 'capability_conformance', 'write_vivification_contract.json');
+    open my $fh, '<:raw', $path or die "Could not read $path: $!";
+    my $fixture = JSON::PP->new->utf8->decode(do { local $/; <$fh> });
+    close $fh or die "Could not close $path: $!";
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    my $clone = sub { $json->decode($json->encode($_[0])) };
+    for my $case (@{$fixture->{success_cases}}, @{$fixture->{failure_cases}}) {
+        subtest $case->{id} => sub {
+            my $initial = $case->{initial_binding};
+            my $document = $initial->{present} ? $clone->($initial->{value}) : undef;
+            my $present = $initial->{present} ? 1 : 0;
+            my ($rhs, $key_name, $position) = ('value', 'key', 0);
+            my ($segment) = map { $_->{value} } grep { $_->{source} eq 'segment' } @{$case->{segments}};
+            $segment = parse_expr('{|| return(1) }')
+                if grep { ($_->{kind} // '') eq 'codeblock' } @{$case->{segments}};
+            my $mutate_value = parse_expr($case->{id} eq 'rhs_side_effect_survives_outer_gap'
+                ? '{|| document[0] = "rhs"; return("done") }'
+                : '{|| document["audit"][0] = "rhs"; return("done") }');
+            my $mutate_key = parse_expr('{|| document = {"seed":1}; return("value") }');
+            my $record = parse_expr('{|| ' . $case->{source} . ' }');
+            my $before = $json->encode($record);
+            my ($result, $error);
+            eval {
+                $result = LinkedSpec::CodeblockRuntime::invoke($record, [], {
+                    document => \$document, rhs => \$rhs, key_name => \$key_name,
+                    position => \$position, segment => \$segment,
+                    mutate_document_then_value => \$mutate_value,
+                    mutate_document_then_key => \$mutate_key,
+                }, $case->{id}, undef, {action_source_id => 'contract:' . $case->{id}},
+                    {document => \$present});
+                1;
+            } or $error = $@;
+            if (my $expected = $case->{expected_error}) {
+                ok(LinkedSpec::BindingRuntime::is_nested_write_error($error), 'structural error retains its class');
+                for my $field (qw(code segment_index path actual_kind expected_kind reason index length)) {
+                    next unless exists $expected->{$field};
+                    is_deeply($error->{$field}, $expected->{$field}, "frozen $field");
+                }
+                my $index = $expected->{segment_index};
+                my $ast = parse_expr($case->{source});
+                my $span = $ast->{segments}[$index]{source_span};
+                is_deeply($error->{source_span}, {
+                    source_id => 'contract:' . $case->{id}, start => $span->{start} + 4,
+                    end => $span->{end} + 4, unit => 'unicode_scalar', provenance => 'authored',
+                }, 'exact authored span survives deferred dispatch');
+                my $state = $case->{expected_binding};
+                is_deeply($document, $state->{present} ? $state->{value} : undef,
+                    'failure preserves the post-expression root');
+                is($present ? 1 : 0, $state->{present} ? 1 : 0, 'failure preserves presence');
+            } else {
+                ok(!defined($error), 'deferred write succeeds');
+                diag($error) if defined $error;
+                is_deeply($document, $case->{expected_binding}, 'frozen committed binding');
+                is_deeply($result, $case->{expected_result}, 'frozen returned root');
+                ok($present, 'success marks the binding present');
+                isnt(Scalar::Util::refaddr($result), Scalar::Util::refaddr($document),
+                    'returned and committed roots are detached');
+            }
+            is($json->encode($record), $before, 'execution preserves the callable record');
+        };
+    }
+    for my $case (@{$fixture->{evaluation_failure_cases}}) {
+        subtest $case->{id} => sub {
+            my $document = {};
+            my (@effects, $failure);
+            my %functions;
+            my @operands = (@{$case->{segments}}, $case->{rhs});
+            for my $index (0 .. $#operands) {
+                my $operand = $operands[$index];
+                my ($name) = $operand->{source} =~ /\A(\w+)\(\)\z/;
+                my $label = $index == $#operands ? 'rhs' : "segment:$index";
+                my $error = $operand->{evaluation_error};
+                my $exception = $error ? bless({%$error}, 'DeferredWriteFixtureError') : undef;
+                $failure = $exception if $error;
+                $functions{$name} = {
+                    signature => { positional_params => [], min_arity => 0, max_arity => 0 },
+                    call => sub {
+                        push @effects, $label;
+                        die $exception if $error;
+                        return $operand->{value};
+                    },
+                };
+            }
+            my $record = parse_expr('{|| ' . $case->{source} . ' }');
+            my $error;
+            eval { LinkedSpec::CodeblockRuntime::invoke($record, [], {document => \$document},
+                $case->{id}, undef, {registered_functions => \%functions}); 1 } or $error = $@;
+            is(Scalar::Util::refaddr($error), Scalar::Util::refaddr($failure), 'expression failure keeps identity');
+            is_deeply(\@effects, $case->{expected_effects}, 'later operands never execute after failure');
+            is_deeply($document, {}, 'expression failure publishes no path');
+        };
+    }
+};
+
+subtest 'deferred writes guard the resolved receiver before operand effects' => sub {
+    my $tree = {a => 'A'};
+    my $seen = '';
+    my $key = parse_expr('{|| seen = cat(seen,"k"); return("z") }');
+    my $rhs = parse_expr('{|| seen = cat(seen,"r"); return(2) }');
+    my $record = parse_expr('{|| tree[key()] = rhs() }');
+    my $error;
+    eval {
+        LinkedSpec::BindingRuntime::map_leaves_mutation(\$tree, 1, 'tree',
+            {source_id => 'guard', start => 0, end => 4, unit => 'unicode_scalar', provenance => 'authored'},
+            sub { LinkedSpec::CodeblockRuntime::invoke($record, [], {
+                tree => \$tree, seen => \$seen, key => \$key, rhs => \$rhs,
+            }, 'guarded-write') });
+        1;
+    } or $error = $@;
+    ok(LinkedSpec::BindingRuntime::is_receiver_mutation_error($error), 'resolved receiver guard retains its class');
+    is($error->{code}, 'receiver_mutation_reentrant', 'receiver guard wins before path validation');
+    is($seen, '', 'neither the segment nor RHS executes');
+    is_deeply($tree, {a => 'A'}, 'the original receiver remains unchanged');
+};
+
+subtest 'deferred write validation and parameter presence restore without effects' => sub {
+    my @corruptions = (
+        sub { delete $_[0]{base} },
+        sub { $_[0]{base} = [] },
+        sub { $_[0]{segments} = undef },
+        sub { $_[0]{segments} = [] },
+        sub { $_[0]{segments}[0] = 'bad' },
+        sub { $_[0]{segments}[0]{kind} = 'index' },
+        sub { delete $_[0]{segments}[0]{expression} },
+        sub { $_[0]{segments}[0]{expression} = [] },
+        sub { $_[0]{segments}[1]{expression} = {} },
+        sub { $_[0]{segments}[0]{expression}{kind} = [] },
+        sub { delete $_[0]{segments}[0]{source_span} },
+        sub { $_[0]{segments}[0]{source_span}{start} = -1 },
+        sub { $_[0]{segments}[0]{source_span}{end} = 0 },
+        sub { delete $_[0]{value} },
+        sub { $_[0]{value} = 'bad' },
+        sub { $_[0]{value} = {} },
+    );
+    my $json = JSON::PP->new->canonical;
+    for my $corrupt (@corruptions) {
+        my $record = parse_expr('{|| document[key()][key()] = rhs() }');
+        $corrupt->($record->{body_ast}{statements}[0]{expr});
+        my $before = $json->encode($record);
+        my ($document, $seen) = ({a => 'A'}, '');
+        my $key = parse_expr('{|| seen = "key"; return("x") }');
+        my $rhs = parse_expr('{|| seen = "rhs"; return(2) }');
+        my $error;
+        eval { LinkedSpec::CodeblockRuntime::invoke($record, [], {
+            document => \$document, seen => \$seen, key => \$key, rhs => \$rhs,
+        }, 'malformed-write'); 1 } or $error = $@;
+        isa_ok($error, 'LinkedSpec::CodeblockRuntime::Error');
+        is($error->{code}, 'invalid_codeblock_body', 'malformed carrier has a typed error');
+        is($seen, '', 'validation precedes segment and RHS effects');
+        is_deeply($document, {a => 'A'}, 'validation preserves caller data');
+        is($json->encode($record), $before, 'validation preserves serialized data');
+    }
+    for my $parameter (undef, {}) {
+        my $record = parse_expr('{|document| document["x"] = 1; return(document) }');
+        my $document;
+        my $flag = 0;
+        my $slot = \$document;
+        my $flag_slot = \$flag;
+        my $bindings = {document => $slot};
+        my $presence = {document => $flag_slot};
+        my ($result, $error);
+        eval { $result = LinkedSpec::CodeblockRuntime::invoke($record, [$parameter], $bindings,
+            'parameter-presence', undef, {}, $presence); 1 } or $error = $@;
+        if (defined $parameter) {
+            ok(!defined($error), 'independent parameter write succeeds');
+            is_deeply($result, {x => 1}, 'parameter receives its own written value');
+            is_deeply($parameter, {}, 'argument stays detached');
+        } else {
+            ok(LinkedSpec::BindingRuntime::is_nested_write_error($error), 'null parameter remains bound');
+            is($error->{actual_kind}, 'null', 'null parameter is never vivified');
+        }
+        is(Scalar::Util::refaddr($bindings->{document}), Scalar::Util::refaddr($slot), 'caller slot restores');
+        is(Scalar::Util::refaddr($presence->{document}), Scalar::Util::refaddr($flag_slot), 'presence slot restores');
+        is($flag, 0, 'caller absence survives success or failure');
+        ok(!defined($document), 'caller value survives success or failure');
     }
 };
 

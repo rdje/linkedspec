@@ -1285,8 +1285,19 @@ sub _tracked_scalar_assignment_expr {
   ? 'do { $'.$target.' = '.$value_expr.'; $'.$target.' }'
   : '$'.$target.' = '.$value_expr
   unless _nested_write_target_is_tracked($target, $deps);
- my $tail = $returns_value ? '; $'.$target : '';
- return 'do { $'.$target.' = '.$value_expr.'; $__ls_binding_presence{"'.$target.'"} = 1'.$tail.' }'
+ if (!$returns_value && $value_expr =~ /\A(\s*)\//o) {
+  my $slash = length($1);
+  require LinkedSpec::ActionIR::MethodExpr;
+  # The compatibility splitter can leave a naked regex open across physical
+  # lines. Its next source fragment supplies the close; inserting a flag inside
+  # that operand would change the pattern and truncate the surrounding block.
+  return '$'.$target.' = '.$value_expr
+   unless defined(LinkedSpec::ActionIR::MethodExpr::_slash_literal_end($value_expr, $slash))
+    || LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($value_expr, $slash, 1);
+ }
+ # Preserve the assignment value in expression contexts without a bare-variable
+ # warning when this same fragment is emitted as a statement.
+ return 'do { $'.$target.' = '.$value_expr.'; $__ls_binding_presence{"'.$target.'"} = 1; scalar($'.$target.') }'
 }
 
 sub _uniform_binding_target_symbol {
@@ -1509,6 +1520,7 @@ sub _contextual_codeblock_runtime_record {
 sub _with_value_body_deps {
  my ($deps) = @_;
  my $scoped = ref($deps) eq 'HASH' ? { %$deps } : {};
+ $scoped->{__codeblock_scoped_value_present} = 1;
  my $outer_kind = $scoped->{bare_symbol_kind};
  $scoped->{bare_symbol_kind} = sub {
   return 'scalar' if defined($_[0]) && $_[0] eq 'value';
@@ -1560,13 +1572,31 @@ sub _codeblock_runtime_binding_expr {
  return '{'.join(', ', map { _actionir_ast_quote_string_source($_).' => \\$'.$_ } sort keys %names).'}'
 }
 
+sub _codeblock_runtime_presence_expr {
+ my ($deps) = @_;
+ my @names = ref($deps) eq 'HASH' && ref($deps->{nested_write_target_names}) eq 'ARRAY'
+  ? @{$deps->{nested_write_target_names}} : ();
+ my $scoped_value = ref($deps) eq 'HASH' && $deps->{__codeblock_scoped_value_present};
+ @names = grep { defined($_) && !ref($_) && /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+  && !($scoped_value && $_ eq 'value') } @names;
+ my @entries = map { _actionir_ast_quote_string_source($_).' => \\$__ls_binding_presence{'
+  ._actionir_ast_quote_string_source($_).'}' } @names;
+ if ($scoped_value) {
+  push @entries, '"value" => \\$__ls_scoped_present';
+  return 'do { my $__ls_scoped_present = 1; {'.join(', ', @entries).'} }';
+ }
+ return '{'.join(', ', @entries).'}'
+}
+
 sub _codeblock_runtime_invocation_expr {
  my ($deps) = @_;
  return $deps->{__codeblock_runtime_invocation}
   if ref($deps) eq 'HASH' && defined($deps->{__codeblock_runtime_invocation});
  # The current rule context is supplied at invocation, never captured in the
  # plain codeblock record. It preserves ambiguous push(rule, destination).
- my $base = '{ descriptor => $descr, input => $STRING, match_info => $minfo }';
+ my $rule_label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
+ my $source_id = _actionir_ast_quote_string_source('action:'.($rule_label // '<action>'));
+ my $base = '{ descriptor => $descr, input => $STRING, match_info => $minfo, action_source_id => '.$source_id.' }';
  my $definitions = _user_function_registry_by_name($deps);
  return $base unless ref($definitions) eq 'HASH' && keys %$definitions;
 
@@ -1629,7 +1659,7 @@ sub _codeblock_runtime_invocation_expr {
  }
  my $active = _actionir_ast_plain_data_expr($deps->{__user_function_call_stack} || []);
  return 'do { my '.$context.' = { descriptor => $descr, input => $STRING, match_info => $minfo, '
-  .'active_functions => '.$active.' }; '.$context.'->{registered_functions} = { '
+  .'action_source_id => '.$source_id.', active_functions => '.$active.' }; '.$context.'->{registered_functions} = { '
   .join(', ', @entries).' }; '.$context.' }'
 }
 
@@ -1916,7 +1946,7 @@ sub _user_function_local_decl_statements {
   ? (@{$signature->{positional_params}}, defined($signature->{rest_param}) ? $signature->{rest_param} : ())
   : ();
  my %params = map { $_ => 1 } @binding_names;
- my $nested_write_targets = _user_function_nested_write_targets($definition);
+ my $nested_write_targets = _user_function_presence_targets($definition);
  my %decls;
  my $body_ast = $definition->{body_ast};
  if (ref($body_ast) eq 'HASH') {
@@ -1937,6 +1967,28 @@ sub _user_function_local_decl_statements {
   push @ordered, 'my %__ls_binding_presence'.$initializer.';';
  }
  return \@ordered
+}
+
+# A deferred body may arrive only at invocation, so a caller cannot infer all
+# writable names from that body's syntax. Track every scalar slot in this fresh
+# function frame, including null parameters, using the existing binding inventory.
+sub _user_function_presence_targets {
+ my ($definition) = @_;
+ my $targets = _user_function_nested_write_targets($definition);
+ my $signature = _user_function_call_signature($definition);
+ my @parameters = ref($signature) eq 'HASH'
+  ? (@{$signature->{positional_params}}, defined($signature->{rest_param}) ? $signature->{rest_param} : ())
+  : ();
+ my %parameters = map { $_ => 1 } @parameters;
+ $targets->{$_} = 1 for @parameters;
+ my %decls;
+ my $body = ref($definition) eq 'HASH' ? $definition->{body_ast} : undef;
+ if (ref($body) eq 'HASH') {
+  _user_function_collect_local_decls_from_node($_, \%decls, \%parameters)
+   for @{$body->{statements} || []};
+ }
+ $targets->{$_} = 1 for grep { $decls{$_}{sigil} eq '$' } keys %decls;
+ return $targets
 }
 
 sub _user_function_nested_write_targets {
@@ -3451,7 +3503,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my $body_deps = _user_function_deps_with_call($deps, $name);
   delete $body_deps->{__user_function_runtime_arguments};
-  my $nested_write_targets = _user_function_nested_write_targets($definition);
+  my $nested_write_targets = _user_function_presence_targets($definition);
   $body_deps->{nested_write_target} = sub {
    my ($target) = @_;
    return defined($target) && $nested_write_targets->{$target} ? 1 : 0;
@@ -3614,7 +3666,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return 'do { require LinkedSpec::CodeblockRuntime; '
    .'LinkedSpec::CodeblockRuntime::invoke($'.$name.', ['.join(', ', @lowered_args).'], '
    .$bindings.', '._actionir_ast_quote_string_source($name).', undef, '
-   ._codeblock_runtime_invocation_expr($deps).') }'
+   ._codeblock_runtime_invocation_expr($deps).', '._codeblock_runtime_presence_expr($deps).') }'
  };
  my $ast_string_source_node = sub {
   my ($node) = @_;
@@ -4173,7 +4225,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    .$shadow_value
    .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
    .$record_expr.', '.$invoke_args.', '.$bindings.', "with", undef, '
-   ._codeblock_runtime_invocation_expr($deps).') }'
+   ._codeblock_runtime_invocation_expr($deps).', '._codeblock_runtime_presence_expr(_with_value_body_deps($deps)).') }'
  };
  $lower_ast_value_node = sub {
   my ($node, $opts) = @_;

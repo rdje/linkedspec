@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-TYPE-REFERENCE-BOOK.1.2.12 is next after clean11 landing: deferred typed indexed writes. Registered pipelines/length and the owned proof-input closure are bounded; complete inventory/reference admission remains pending.
+Deferred-write12 is complete subject to exact staged canonical3 admission. Overdue artifact review REPO-HYGIENE.21 follows clean landing, then director-priority signed selectors TYPE-REFERENCE-BOOK.1.2.17. No signed-selector admission yet.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.11: 56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration. Whole unpublished714/actual readonly0 remains preserved; conservative full measured-input closure replaces the too-narrow watchset. The failed capture4 controller and11350 inputs remain preserved; shared normal-entrypoint preflight governs publication. Exact canonical receipt and normal hooks govern admission.
+TYPE-REFERENCE-BOOK.1.2.12: 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls. Whole rejected canonical1/2 and publications remain retained. The private test qualifies only deliberate assignment emission, preserving original captures and all predicate fields. Exact canonical receipt and normal hooks govern landing.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.12 from clean committed Git; reproduce through public tools and follow existing typed-write/copy/key/effect contracts. Commit each bounded slice before moving on.
+From clean committed Git own/commit overdue artifact review21, then split and implement signed17 across shared contracts/backends. Continue14/16/19/raw-regex21/policy20 before complete inventory/reference work.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.12` — 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; signed17 next feature.
 - `TYPE-REFERENCE-BOOK.1.2.11` —56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration; conservative closure/whole714; indexed-write12 next.
 - `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
 - `TYPE-REFERENCE-BOOK.1.2.10` —232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; finite history0137;11 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.12 from clean committed Git; reproduce through 
 - `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` — lists897/248; original80/RED38/GREEN176; faults10/artifact3; current1487/1349/10455; knowledge8386908/map21249/book89/4; readonly208/39111; TYPE-REFERENCE-BOOK.1 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.6` — scopes/five captures; original2065/13/91/32235; current2065/426;625 declaration+161 namespace/786 guarded; Knowledge8386222/book89/4; new artifact3+original8; readonly711/120239; metadata .12 next.
 - `PERL-PRIVATE-FACTORY-CAPTURE.7` — exact150-line/91 suites/46 helpers/363 inputs/30394; faults4; recovered134/22 controls/368 REDs (280 new); artifact6+lineage1; Knowledge8388024/book89/4; readonly603/115985; canonical boundary, then pipeline .6.
-- `REPO-HYGIENE.19` — retained16443 parent/483 Rust/zero removals; warnings24/raw log/actual receipts; controls4+8+4; Knowledge8388524/book89/4; whole550/128458 historical e953; fixture .7 next.
 
 ## History
 

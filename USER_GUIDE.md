@@ -74,6 +74,8 @@ result = apply("ready") { return(cat(value, "!")) }
 same = apply("ready", { return(cat(value, "!")) })
 ```
 
+Perl deferred bodies also execute bracket assignments such as `document["items"][0] = value`. They use the caller's current nonparameter slot, copied parameter values, dense arrays, typed key validation and atomic root publication. An assigned null stays present, including a null parameter. See the worked [deferred indexed-write examples](docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md#deferred-indexed-writes-in-perl) for copying, effect order and failures. In Perl, `with(...)` inside a deferred body remains unsupported; use it at the compiled call site.
+
 The declaration is only `callback: codeblock`; it does not repeat the callback's argument list. Both contextual
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic

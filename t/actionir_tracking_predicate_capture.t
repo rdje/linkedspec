@@ -33,6 +33,32 @@ sub command {
  return {status => $?, %bytes};
 }
 my $before = load_json($prefix.'before-native.json');
+
+# The immutable native rows predate the assignment-result repair in
+# TYPE-REFERENCE-BOOK.1.2.12. Project only that consumer's emitted source; retain
+# every predicate/authority observation, and never rewrite the captured rows.
+# The executable value/quietness oracle is in callable_codeblock_literal_contract.t.
+sub assignment_result_expectation {
+ my ($value) = @_;
+ if (ref($value) eq 'ARRAY') {
+  my (@projected, $extra_reads);
+  $extra_reads = 0;
+  for my $entry (@$value) {
+   my ($changed, $reads) = assignment_result_expectation($entry);
+   push @projected, $changed;
+   $extra_reads += $reads;
+  }
+  return (\@projected, $extra_reads);
+ }
+ if (defined($value) && !ref($value)
+  && $value =~ /\Ado \{ \$([A-Za-z_][A-Za-z0-9_]*) = (.*); \$__ls_binding_presence\{"\1"\} = 1(; \$\1)? \}\z/s) {
+  my ($name, $operand, $old_result) = ($1, $2, $3);
+  return ('do { $'.$name.' = '.$operand.'; $__ls_binding_presence{"'.$name.'"} = 1; scalar($'.$name.') }',
+   defined($old_result) ? 0 : 1);
+ }
+ return ($value, 0);
+}
+
 my %current;
 for my $index (0, 1) {
  my $surface = $index ? 'cold-observe' : 'observe';
@@ -52,6 +78,13 @@ for my $index (0, 1) {
    if ($group eq 'authority') {
     $expected->{eligible} = [$expected->{id} =~ m{/known-1$} ? 1 : 0] if @{$expected->{eligible}};
     $expected->{parent_packet} = 0;
+   }
+   if ($expected->{owner} eq 'nested' && $expected->{path} eq 'consumer') {
+    ($expected->{value}) = assignment_result_expectation($expected->{value});
+    my ($values, $extra_reads) = assignment_result_expectation($expected->{values});
+    $expected->{values} = $values;
+    # values has one entry per actual call; value repeats its last entry.
+    $expected->{target_coercions} += $extra_reads if $expected->{target_coercions};
    }
    my $observed = $actual->{$group}[$row];
    is_deeply($observed, $expected,

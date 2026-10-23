@@ -6,3 +6,5 @@ docs/incidents/2026-09-27-archogen-82ee99a-reverse.patch whitespace=-blank-at-eo
 docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.7/auditor-constant.py whitespace=-blank-at-eof
 # Portable proof chunks preserve exact binary bytes on every checkout.
 docs/checkpoints/type-aggregate-codeblocks/admission/portable/chunks/** -text
+# Verbatim mdBook paragraph overlay retains its following paragraph separator.
+docs/checkpoints/type-deferred-indexed-writes/book-compatibility-note.txt whitespace=-blank-at-eof

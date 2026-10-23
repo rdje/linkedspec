@@ -2619,6 +2619,10 @@ sub build_rule_ir_emit_context {
  my %presence_targets = (
   %{$write_targets->{nested_write}},
   %{$write_targets->{receiver_mutation}},
+  # Deferred callees can be supplied dynamically. Presence belongs to every
+  # scalar slot in this caller frame, independent of the callee's source.
+  map { $_ => 1 } grep { $__ls_current_bare_type_memory->{$_} eq 'scalar' }
+   keys %$__ls_current_bare_type_memory,
  );
  local $__ls_current_nested_write_targets = \%presence_targets;
  local $__ls_current_receiver_mutation_targets = $write_targets->{receiver_mutation};

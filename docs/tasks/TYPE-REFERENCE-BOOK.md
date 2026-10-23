@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / next registered pipeline .1.2.11; before enumeration
+- Status: `active` / signed-selector17 next after clean12 and due hygiene21
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-21`
+- Last updated: `2026-10-23`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -105,7 +105,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.17`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.16`, `TYPE-REFERENCE-BOOK.1.2.19`, `TYPE-REFERENCE-BOOK.1.2.21`, `TYPE-REFERENCE-BOOK.1.2.20`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -346,28 +346,96 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.12`
-  Status: `pending` / P2 defect owned
+  Status: `completed` / bounded deferred-write foundation; exact canonical receipt governs landing
   Goal: Execute typed indexed writes inside deferred codeblocks.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.11`
-  Reproduce/impact: chosen[0]="changed" in a callable body raises unsupported_codeblock_actionir:assign_nested_access; ordinary caller-side indexed writes succeed. candidate2 retains the typed failures.
-  Schedule: After11, before inventory. Fix the typed write family with key validation, copy/alias/caller-slot/effect/malformed-record controls.
-  Evidence: docs/checkpoints/type-array-pipelines/findings.md; whole source epochs remain retained.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; actual intake diagnosis is bound to claim9.
+  Verification tier: `canonical`
+  Focused checks: Public LinkedSpec::Get/return_descriptor/dump_parser_source/native/fresh indexed-write cases; frozen write fixtures; copied parameters/alias/null/effect/guard/malformed controls; permanent callable/multiline and direct dependents; complete mdBook; source faults and input/scope denials.
+  Canonical trigger: Public deferred typed-write availability; exact staged canonical CI and normal hooks required.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.12.json`
+  Activation: Clean 24e9c72a31b7eb31ce94b09beab9655ae85378cb. Whole accepted11 readonly replay and original live claims precede writes in prior-accepted.json.gz. Pipeline11 is frozen at this actual accepted Git revision with observations unchanged.
+  Completion: 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls. Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-deferred-indexed-writes/publish4.py.
+  Mechanism: CodeblockRuntime delegates assign_nested_access to BindingRuntime. Basic write/operand headers validate before effects; receiver guard precedes keys then RHS, each once; root snapshot follows their effects and publication is atomic with detached results. Caller scalar inventories pass presence independently of callback origin. Weak resolved-slot identity retains presence across separately forwarded callbacks. New slots reuse supplied flags. Copied fixed/rest parameters restore caller slots/flags on every exit. Standalone ordinary fragments keep their existing declaration contract.
+  Canonical compatibility repairs: The first exact staged candidate reached1035 and failed only800/1034. Broader tracking exposed a statement result replaced by flag=1; return scalar(value) while preserving presence and quiet void/value/list use. The legacy splitter passes incomplete naked regex fragments; leave those fragments intact instead of wrapping an unfinished pattern. Ten permanent lifecycle/value controls and independently emitted LF/CRLF escaped-brace controls preserve prior behavior. The final direct set includes the unchanged multiline consumer. Exact staged canonical proof remains a separate admission requirement.
+  Retained rejected epochs: rejected-canonical1.json.gz keeps the complete actual combined log, original unpublished claim/publication/manifest, exact source epoch, index/fingerprint and actual readonly PASS. It was never an accepted Git state. Every earlier attribution/fault/book/focused capture remains immutable; final9 sources earn current proof. First wrappers, fixture parentheses, negative-error adapter, wrong ordinary fault target, failed CODE serialization, allocation-fault marker, publication-preparation failure and mis-scoped fixture edit retain actual observations without successful-control credit. final-continuity-before.json.gz keeps the full preceding task narrative.
+  Instrument qualifications: The first raw-host probe required quietness without initializing Perl's default subject; actual accepted replay has the same warning. Explicit subject calibration passes both epochs without suppression. focused7 failed a fixture-adapter edit in the wrong similar loop; the scoped correction is retained. Its two new void warnings led to assignment-result-context-before.json.gz and the permanent scalar-context regression, not diagnostic filtering. Unsaved first fact-budget draft channels remain unavailable.
+  Additional defect owned: Two LF source/subject pairs on accepted and final current native/fresh routes match an inserted-semicolon raw regex rather than the authored pattern. An independent direct literal oracle distinguishes them. compatibility3 retains source/subjects/oracle and exact accepted rollback/restoration. P2 child21 owns payload repair after19 and before20/inventory. The book documents the bounded legacy limitation; general raw-regex fidelity is not admitted here.
+  Render evidence: Original book4 HTML reproduces exactly. The sole authored limitation paragraph is an explicit retained overlay before comparing the current reflowed page. After that overlay, all page/code/script/style/link tokens and complete search data agree except body whitespace; native JSON.parse calibrates both payloads. Actual heading/prose-source/URL corruptions reject. Existing Accepted7 retrieval was missed before re-derivation; it is reconciled with the original rule, not claimed as a novel result.
+  Durability/limits: publish4 watches the conservative complete regular main-repository superset, including the measured epoch floor and three independent named fixtures. Every capture retains its actual producer, sources and changing artifacts; final continuity is later authored state. No minimal I/O graph, recursive ActionIR-carrier admission, other-backend, signed17, last14, deferred-with16, complete inventory or broader historical-audit completion. System tools/public dependency outputs are read-only prerequisites; Gitlinks/symlinks/other repositories are excluded. Host process inspection was read-only and established active probes, not a performance cause.
+  Final staging hygiene: Git flags the exact paragraph fixture's two-newline separator. publication2-whitespace-boundary.json.gz retains the whole completed second publication, actual readonly PASS and source epoch before any change. A path-specific blank-at-eof attribute preserves the measured input bytes, matching existing verbatim-delimiter exceptions. publish3/artifacts4 refresh only publication closure and validator controls; functional/frozen/book/source-fault9 observations remain exact.
+  Canonical2 rejection owned here: The complete private population91/32246 fails only tracking_predicate_capture,26/516. Its old native consumer rows still expect a presence-only statement or a bare-variable result. The corrected statement now emits scalar(value); the overloaded target's source construction also stringifies one additional identifier occurrence. rejected-canonical2.json.gz keeps whole publication3, actual readonly PASS, complete log/source epoch and complete loaded/cold probe rows before writes. Compare every field and preserve original fixtures; qualify only the deliberate consumer-emission boundary, with independent executable value/quietness and actual inverse controls. Predicate selection, local aliases, tied fetches, boolean coercion/errors and private authority remain protected.
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/dump_parser_source native/fresh observations in attribution9 retain actual accepted-source typed-write failures; forwarded/caller/missing-slot and compatibility REDs remain separately retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Missing runtime dispatch, caller/forwarded/allocation presence loss, late operand validation, and statement/raw-fragment wrapping are isolated through public probes and actual source controls.
+  - [x] **FIX** — Atomic BindingRuntime delegation, pre-effect guard/headers, ordered operands, slot flags/parameter restoration, scalar assignment results and unfinished-pattern preservation.
+  - [x] **ADDRESSED (verified)** — Actual accepted rollback/reapplication, frozen independent write/error/evaluation controls and 16 syntax-valid restored source faults distinguish faulty implementations.
+  - [x] **NO REGRESSION** — 22 source-bound suites pass, including the complete516-check private consumer. Exact staged canonical3 and normal hooks govern admission; both prior failures remain retained.
+  - [x] **LOCKSTEP** — Worked book/guide, canonical facts/derived map, roadmap/index/live docs, source-bound claim and queued21 agree. Due hygiene21 then director-priority signed17 follow clean12.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.12 - execute deferred indexed writes atomically`
+
+  Private consumer completion: Complete296-row comparison isolates26 deliberate nested-consumer source changes and exactly one target conversion4->5; every other predicate/authority field stays exact. The original native JSON and probe match real clean Git. The test projects expected consumer source only, never observed rows. An actual syntax-valid old-result inverse rejects both this consumer and executable value/quietness assertions, then restores GREEN. Source9 is unchanged; earlier functional/fault/book observations retain their exact epochs. Focused10 adds the previously missed direct private consumer. Publication4/artifact5 independently require the original native fixture alongside the existing public/multiline fixtures. No distinct fault-family count is inflated by the extra inverse.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.14`
   Status: `pending` / P2 defect owned
   Goal: Execute deferred last array selectors.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17`
   Reproduce/impact: Leaf10 contract-grid retains ordinary last(items)/items.last() returning1 for [2,10,1], while both deferred native/fresh routes report typed unknown_helper:last. Source bodies and loaded source identities survive in docs/checkpoints/type-array-count-first/.
   Schedule: After11/12, before inventory1. Establish shape, kind, empty, terminal/effect and copy/index controls; do not extend current10.
   Planned tier: `canonical`
   Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.17`
+  Status: `pending` / director-priority signed array selectors
+  Goal: Admit tail-relative negative array selectors across ordinary/deferred reads and writes on every runtime.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
+  Director instruction (October23): For array size L, [-n] selects [L-n], valid only when L-n >= 0. Therefore -1 is the last element and -L the first; a more negative selector is out of range and never creates elements. This supersedes the frozen nonnegative-only write policy for existing arrays. Quoted strings remain hash keys; positive indexing and exact-length append retain their existing contract.
+  Schedule: First clean slice after deferred-write foundation12, before last14, deferred with16 and complete inventory1. Do not pivot or mutate shared contracts while12 is dirty. Foundation12 records the old nonnegative-only boundary as an explicitly pending transition and does not claim signed-selector support.
+  Acceptance: Establish current public ordinary/deferred/native/fresh behavior before repair; freeze a complete signed-index contract with empty/out-of-range, dynamic/literal, nested mixed paths, copy/alias, atomicity, effects and diagnostic controls. Implement and verify the same shared policy on Perl/Rust/Dart/Julia/PUC Lua/LuaJIT through their owned interfaces; update recurring/public guards and book examples without consulting dependency internals. Keep every historical source-bound claim recoverable; use child leaves and one commit per bounded contract/backend/admission slice.
+  Planned tier: `canonical`
+  Claim verification: none: Director policy intake and scheduling only; source-bound measurements belong to child leaves after the clean12 boundary.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.16`
+  Status: `pending` / P2 defect owned
+  Goal: Execute scoped with inside deferred callable bodies.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.14`
+  Reproduce/impact: cb = {|| value["x"] = 2 }; case_runner = {|| return(with(undef) { return(cb()) }) }; return(case_runner()) raises unknown_helper:with before the scoped callback. The equivalent compiled with call site reaches the expected typed null conflict.
+  Evidence: docs/checkpoints/type-deferred-indexed-writes/deferred-with-intake.json.gz retains the exact source, runtime producers and native/fresh channels after removing the original wrapper-name collision.
+  Schedule: After last14, before complete inventory1; establish scoped value/caller frames, null, nesting, error restoration, call shape, effects and native/fresh controls.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; measured intake will be bound to indexed-write12.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.19`
+  Status: `pending` / P2 grouped-assignment value defect intake
+  Goal: Resolve grouped indexed-assignment values against the supported mutation-expression contract.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.16`
+  Reproduce/impact: Initial indexed-write12 copy control out=(chosen[0][0]=2) produced generated compilation failure near chosen[. Exact source/native/fresh channels survive in baseline.json.gz, not silently reclassified as unsupported syntax. The canonical perl-raw-readiness-source-unit-provenance card admits balanced ordinary mutation receiver groups for reporting; stored assignment-value contexts require separate adjudication.
+  Schedule: After signed17/last14/with16, before inventory1. Establish Toolbox AST/lowering/source/runtime/effect/span evidence; fix supported value contexts or accurately document a contract exclusion with proof. Preserve prior reporting-only and deferred raw-group distinctions.
+  Planned tier: `canonical`
+  Claim verification: none: Diagnosis intake only; baseline observations remain owned by12, with no grouped-value admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.21`
+  Status: `pending` / P2 raw multiline regex payload defect
+  Goal: Preserve complete assigned raw-regex payloads across statement splitting and native/fresh Perl execution.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.19`
+  Reproduce/impact: rx = /(14,2) \\} followed by LF then tail/; return(rx), with explicit host subject x14,2 } followed by LF then tail. Both accepted24e9 compiler and current12 return false; a subject with an inserted semicolon returns true. Direct authored Perl regex gives the inverse. Generated handlers contain an added semicolon before the physical newline, changing match meaning without an error. Two subject controls and both native/fresh channels are retained in docs/checkpoints/type-deferred-indexed-writes/compatibility2.json.gz with raw_regex_oracle.pl and exact source rollback/restoration.
+  Schedule: After signed17/last14/with16/grouped19, before policy20 and complete inventory1. Coordinate the distinct bootstrap .54.1/unescaped-brace and attached-tail .9 owners; do not silently promote their exclusions.
+  Acceptance: Toolbox statement-boundary/source/pattern/value evidence identifies the exact producer. Preserve authored LF/CRLF, escapes, classes, delimiters and source spans; retain numeric slash calls and helper regex boundaries. Add independent match/mismatch and mutation controls, native/fresh recurrence and accurate legacy scope. No new portable raw-host capability is implied.
+  Planned tier: focused for a bounded existing-source-fidelity correction; reclassify before governed policy/carrier or infrastructure movement.
+  Claim verification: none: Scheduled intake only; actual observed source/oracle results remain part of12's bounded diagnosis, with no repair admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20`
+  Status: `pending` / policy update reconciliation
+  Goal: Reconcile the read-only shared live-document containment guide updates with local adoption.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.21`
+  Intake: October23 read-only external policy review found new general derived-state/local-doctrine/checker material in the partially adopted FSMGen guide (SHA256 8f77fa39c9bcb9cfc43166259a627a6ced64682030088400b727dccc5d674a53). README policy digest 882682fa1ace703ae68726b8532a4ad24fe2c8a271bae4e07b859bd197a621c9 and claim policy 9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd were checked; claim policy remains ADR0126's adopted source. No cross-repository write occurred.
+  Schedule: After21 and before inventory1. Compare exact source/local adoption, own any applicable changes under bounded containment children, copy adopted rules locally, and verify doctrines/public explanation. External repositories stay read-only and no build may depend on them.
+  Planned tier: `canonical`
+  Claim verification: none: Policy intake and queue only; the implementation comparison and adoption evidence belong to this future leaf.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `pending`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.14`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.20`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
@@ -451,24 +519,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.3` | `done` |23 GREEN/19 RED; focused52, observer129 RED/restoration; canonical landing boundary. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.4` | `done` | Scoped callable/frame/span repair; finite proof and canonical landing boundary. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.5` | `done` | Scalar numeric dispatch/snapshots;6/7 next. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.6` | `done` | Quiet generated drop, splices/key snapshots;7 next. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.7` | `done` | Bounded availability/portable evidence; owned pipeline9 next. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.9` | `done` | Callable sorted/take; bounded proof/typed argument guard; kind13 next. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.13` | `done` |116 values/47 RED/six faults/14-1950/book89-5; canonical admission mandatory. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.10` | `done` |232/107 RED/eight faults; ten Phase0 goldens/history680; book/finite history0137; canonical admission mandatory. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.11` | `pending` | Registered sorted/ordinary length after10. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.12` | `pending` | Deferred indexed writes before inventory. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after12; complete the owned selector gap before inventory. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
-| 13 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
-| 14 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
-| 16 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 17 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
-
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17` | `pending` | Director priority: tail-relative signed selectors; first clean slice after12. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after12; complete the owned selector gap before inventory. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14; exact diagnostic intake retained. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment-value adjudication/repair after16. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Restore raw assigned-regex payload fidelity after19, before policy20/inventory. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation after raw-regex21. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
+| 9 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
+| 10 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
+| 11 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
+| 12 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
 
 ## Decisions
 
@@ -484,9 +546,11 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-No director input required. Count/first10 selected proof is complete; exact canonical/normal landing is mandatory. Activate11 only from clean Git, then12/14 before inventory1. No dirty pivot.
+No director input required. Signed selectors17 follows the clean12 boundary, then14/16/19/raw-regex21/policy20 before inventory. No dirty pivot.
 
 ## Verification Log
+
+- `2026-10-23` — `.1.2.12`: 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; exact canonical receipt governs admission.
 
 - `2026-10-21` — `.1.2.10`:232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; whole accepted13 custody; exact finite history0137 and artifact controls; canonical admission mandatory.
 
@@ -506,6 +570,8 @@ No director input required. Count/first10 selected proof is complete; exact cano
 
 ## Commit Log
 
+Deferred-write12 subject: `TYPE-REFERENCE-BOOK.1.2.12 - execute deferred indexed writes atomically`; derive accepted identity from Git.
+
 Count/first10 subject: `TYPE-REFERENCE-BOOK.1.2.10 - execute callable count and first`; derive its accepted identity from Git.
 
 Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; derive its accepted identity from Git.
@@ -513,6 +579,8 @@ Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; der
 Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 
 ## Changelog
+
+- `2026-10-23`: Complete bounded deferred-write12, preserve caller presence and standalone compatibility; signed17 is next, then14/16/19/raw-regex21/policy20 before inventory.
 
 - `2026-10-10`: Queue inventory, five type-family reference slices, independent coverage closeout and the exact
   encountered legacy metadata repair without changing the active private callback frontier.

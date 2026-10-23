@@ -425,6 +425,7 @@ subtest 'final slash calls before physical-line-ending block closers' => sub {
 };
 
 subtest 'full-source slash retry preserves regexes and publishes only selected diagnostics' => sub {
+ my $emitted_index = 0;
  for my $separator ("\n", "\r\n") {
   for my $case (
    ['assigned brace', "rx = /(14,2) }\ntext/; return(7)", undef, undef],
@@ -450,6 +451,24 @@ subtest 'full-source slash retry preserves regexes and publishes only selected d
    is($parser ? $parser->(\$input) : undef, $expected, "$name retains its measured value");
    is(($context{last_error} || {})->{stage}, $stage, "$name retains its error owner");
    is($source, $original, "$name retains authored bytes");
+   if ($name eq 'escaped brace') {
+    my $emitted = eval { LinkedSpec::emit_generated_source(\$source) };
+    is($@, '', 'escaped brace source emits');
+    my $package = 'EscapedBracePresence' . ++$emitted_index;
+    my @warnings;
+    local $SIG{__WARN__} = sub { push @warnings, @_ };
+    my $loaded = defined($emitted) && eval "package $package; $emitted; 1";
+    ok($loaded, 'escaped brace source independently compiles') or diag($@);
+    if ($loaded) {
+     # This compatibility regex uses Perl's implicit subject, not a DSL helper.
+     local $_ = 'x';
+     my $input = 'x';
+     my $result = eval { $package->can('Execute')->(\$input) };
+     is($@, '', 'escaped brace emitted execution completes');
+     is($result, 7, 'escaped brace emitted execution retains its value');
+    }
+    is_deeply(\@warnings, [], 'explicit host subject keeps the raw regex route quiet');
+   }
   }
  }
 
