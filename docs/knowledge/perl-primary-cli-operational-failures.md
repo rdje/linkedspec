@@ -14,15 +14,25 @@ answers:
   - "why does Perl CLI print null for a typed invalid write"
   - "which task repairs Perl CLI context-only runtime failures"
 date: "2026-10-23"
-status: "stable phase protocol; context-only handler failure reporting is owned P1 child17.8"
+status: "context-reported primary CLI failures repaired; original rollout/intake remain historical"
 tags: [perl, cli, failures, diagnostics, stdout, trace, conformance, FUTURE-PARITY-BACKLOG]
-evidence: "Original operational rollout remains historical below. Intake17.0 retains twelve library write failures reported by Perl CLI as exit0/null; other five native routes exit1. A two-case established-protocol oracle is RED on Perl and GREEN on the other five. Child17.8 owns repair before signed contract17.1."
-reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
+evidence: "TYPE-REFERENCE-BOOK.1.2.17.8 retains11 source/input cases (10 source texts),22 quiet/routed CLI observations, Get/fresh proof and actual permanent source-inverse/restoration. Original intake and wrong no-match target remain exact and separately qualified; canonical proof governs admission."
+reverify: "Current CLI consumer: bash tools/project_data_run.sh prove -Iperl t/trace_cli.t; dated source-bound proof: bash tools/run_python_project_data.sh docs/checkpoints/type-cli-runtime-errors/publish.py"
 ---
 
-# Context-only handler failures (October23)
+# Context-reported handler failures (October23)
 
-`items=[10,20,30]; items[1.5]=99; return(items)` reports a typed error through public Get/runtime_ctx_ref and independently emitted execution. The primary command emits `null` plus LF, empty stderr and exit0. Its runtime context is already wired, but the invocation boundary checks only `$@`. This conceals failure from scripts. P1 TYPE-REFERENCE-BOOK.1.2.17.8 repairs both failure channels while preserving successful null/false/no-match results. Current evidence is a dated baseline, not a repaired-command claim.
+The invocation boundary checks both saved `$@` and `runtime_ctx.last_error`.
+An invalid fractional write, including a callable write, now exits1 with empty
+stdout and `linkedspec: parser invocation failed` plus LF on stderr. Routed
+trace ends in `invoke:error`; existing thrown errors keep the same protocol.
+Null, false, zero, initializer return and real self-edge matched/no-match
+results remain successful when both error channels are clear.
+
+The prior CLI's exit0/null observations remain in signed intake17.0. Repair17.8
+preserves every original control and qualifies its mistaken I-return target;
+canonical lifecycle semantics and real self-edge twins distinguish no-match.
+No library, selector or trace-protocol change is implied.
 
 # Original operational rollout (July10)
 

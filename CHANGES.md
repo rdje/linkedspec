@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-23 — TYPE-REFERENCE-BOOK.1.2.17.8 — propagate Perl CLI handler failures
+
+The primary Perl command checks runtime_ctx.last_error as well as immediately saved $@. Context-only ordinary/callable write failures now use the existing invocation-failure exit1, empty stdout, stable stderr heading and error trace. Legitimate falsey, initializer and real matched/no-match results remain successful. No library, selector or trace-schema change.
+
+Validation: 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits. Whole accepted signed intake/actual clean readonly0 and82 Git-verified images precede writes. Nine source epochs independently recover11504 Git blobs; the exact invocation predicate is the sole runtime overlay. Original nine-case baseline, wrong I-return target, failed original oracles/test and all source packets remain qualified without extra product RED credit. Current book examples/flow link, canonical CLI card/derived map and task continuity agree. Exact staged canonical CI and normal hooks govern landing; signed contract17.1 follows clean Git. Read-only: docs/checkpoints/type-cli-runtime-errors/publish.py.
+
 ## 2026-10-23 — TYPE-REFERENCE-BOOK.1.2.17.0 — freeze signed-selector baseline
 
 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.

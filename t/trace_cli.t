@@ -118,4 +118,57 @@ subtest 'unselected ambient trace cannot pollute operational failure channels' =
  ok(!-e $trace_path, 'unselected ambient trace does not create or reset a trace file');
 };
 
+subtest 'context-reported handler failures use the invocation-failure protocol' => sub {
+ my @actions = (
+  'items=[10,20,30]; items[1.5]=99; return(items)',
+  'items=[10,20,30]; cb={|| items[1.5]=99; return(items) }; return(cb())',
+  'items=[10]; items["x"]=99; return(items)',
+ );
+ for my $action (@actions) {
+  my ($exit, $stdout, $stderr) = _run_cmd(
+   @cli, '--inline-spec', "Top: /x/\n I { $action }\n", '--input', 'x',
+  );
+  is($exit, 1, 'recorded handler failure exits one');
+  is($stdout, '', 'recorded handler failure writes no JSON result');
+  is($stderr, "linkedspec: parser invocation failed\n", 'recorded failure has the stable invocation heading');
+ }
+};
+
+subtest 'context failure has the canonical routed error trace' => sub {
+ my $tmp = tempdir(CLEANUP => 1);
+ my $trace_path = File::Spec->catfile($tmp, 'handler.trace.log');
+ my ($exit, $stdout, $stderr) = _run_cmd(
+  @cli,
+  '--inline-spec', "Top: /x/\n I { items=[10]; items[1.5]=99; return(items) }\n",
+  '--input', 'x', '--trace', 'low', '--trace-file', $trace_path,
+  '--trace-mode', 'route', '--trace-reset',
+ );
+ is($exit, 1, 'routed handler failure exits one');
+ is($stdout, '', 'routed handler failure leaves stdout empty');
+ is($stderr, "linkedspec: parser invocation failed\n", 'routed failure keeps the stable stderr heading');
+ is(_slurp($trace_path), join('', map { "[linkedspec][low] $_\n" }
+  qw(compile:start compile:ok input:start input:ok invoke:start invoke:error)),
+  'context error emits the exact existing invocation-error phase sequence');
+};
+
+subtest 'falsey successful values and no-match remain successful' => sub {
+ my @cases = (
+  ["Top: /x/\n I { return(undef) }\n", 'x', "null\n"],
+  ["Top: /x/\n I { return(false) }\n", 'x', "false\n"],
+  ["Top: /x/\n I { return(0) }\n", 'x', "0\n"],
+  ["Top: /x/\n I { return(42) }\n", 'y', "42\n"],
+  ["Top::AND\n /x/ -> Top[0] { return(42) }\n", 'y', "null\n"],
+  ["Top::AND\n /x/ -> Top[0] { return(42) }\n", 'x', "42\n"],
+ );
+ for my $case (@cases) {
+  my ($source, $input, $expected) = @$case;
+  my ($exit, $stdout, $stderr) = _run_cmd(
+   @cli, '--inline-spec', $source, '--input', $input,
+  );
+  is($exit, 0, 'falsey, initializer or matched/no-match result exits zero');
+  is($stdout, $expected, 'result retains its canonical JSON value');
+  is($stderr, '', 'successful result has no error heading');
+ }
+};
+
 done_testing();

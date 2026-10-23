@@ -542,7 +542,7 @@ For `[10,20,30]`, the current `[-1]` library-read results are:
 | Rust ordinary/callable read | `10`, from its legacy index coercion |
 | Dart, Julia, PUC Lua and LuaJIT | `null` |
 
-These are implementation observations while the extension is pending. Negative writes remain rejected by the libraries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command limitation.
+These are implementation observations while the extension is pending. Negative writes remain rejected by the libraries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command failure protocol.
 
 The ordinary Perl example returns `[30,[10,20,30]]` with input `x`:
 

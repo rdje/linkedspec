@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / P1 CLI17.8 next before signed contract17.1
+- Status: `active` / signed contract17.1 next
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-23`
@@ -385,7 +385,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17`
-  Status: `active` / signed-selector transition; intake17.0 first
+  Status: `active` / intake17.0 and CLI17.8 complete; contract17.1 next
   Goal: Admit tail-relative negative array selectors across ordinary/deferred reads and writes on every runtime.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
   Director instruction (October23): For array size L, [-n] selects [L-n], valid only when L-n >= 0. Therefore -1 is the last element and -L the first; a more negative selector is out of range and never creates elements. This supersedes the frozen nonnegative-only write policy for existing arrays. Quoted strings remain hash keys; positive indexing and exact-length append retain their existing contract.
@@ -482,16 +482,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.8`
-  Status: `pending` / owned P1 public-command defect
+  Status: `completed` / P1 public-command defect repaired
   Goal: Report Perl library runtime failures through the primary CLI instead of successful null output.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.0`
-  Reproduce: Top: /x/ followed by I { items=[10,20,30]; items[1.5]=99; return(items) }. Public Get/runtime_ctx_ref and fresh emitted execution report nested_write_segment_invalid, but perl -Iperl bin/linkedspec --inline-spec SOURCE --input x exits0 with null plus LF and empty stderr. Twelve retained invalid-write sources have the same CLI success classification; all five other native runtime routes exit1 for those sources.
-  Impact: Scripts accept failed parsing/action execution as successful null data; the existing primary command invocation-failure protocol is violated independently of requested negative indexing.
-  Mechanism: bin/linkedspec already supplies runtime_ctx_ref, but its post-invocation branch checks only the exception in $@ and ignores context last_error when the library returns undef after a handler failure. Exact current source/complete channels are retained by intake0 and CLI-RUNTIME-ERROR.md.
-  Schedule: First clean leaf after intake17.0, before neutral contract17.1. Current diagnostic capture finishes unchanged and is committed before repair; no dirty pivot or silent baseline replacement.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; actual before observations belong to intake17.0.
+  Original reproduce at329cee31c: Top: /x/ followed by I { items=[10,20,30]; items[1.5]=99; return(items) }. Public Get/runtime_ctx_ref and fresh emitted execution report nested_write_segment_invalid, but perl -Iperl bin/linkedspec --inline-spec SOURCE --input x exits0 with null plus LF and empty stderr. Twelve retained invalid-write sources have the same CLI success classification; all five other native runtime routes exit1 for those sources.
+  Original impact: Scripts accept failed parsing/action execution as successful null data; the existing primary command invocation-failure protocol is violated independently of requested negative indexing.
+  Original mechanism: bin/linkedspec already supplies runtime_ctx_ref, but its post-invocation branch checks only the exception in $@ and ignores context last_error when the library returns undef after a handler failure. Exact current source/complete channels are retained by intake0 and CLI-RUNTIME-ERROR.md.
+  Schedule: First clean leaf after intake17.0, before neutral contract17.1. Intake17.0 finished unchanged and committed before this repair; no dirty pivot or silent baseline replacement.
+  Owned paths: bin/linkedspec, t/trace_cli.t, docs/checkpoints/type-cli-runtime-errors/, current Perl CLI Knowledge card/public integration book and the related DSL flow error-reporting link; normal task/roadmap/continuity. The explicit flow-link extension is checked against the complete live census before its first write. Other repositories/submodules and frozen selector authorities remain unchanged.
+  Verification tier: `canonical`
+  Focused checks: Public Get/descriptor/dump/native/fresh and exact CLI before/after/source-inverse channels; valid null/false/no-match controls; permanent trace/CLI consumers and shared manifest default/POSIX; current Knowledge/complete rendered book; artifact/scope falsifiers, memory/history/whitespace and normal doctrines.
+  Canonical trigger: Public primary-command runtime-error reporting repair; exact staged canonical CI and normal hooks before admission.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.8.json`
   Acceptance: Observe thrown and context-reported failures, preserve legitimate null/false/no-match results, emit the existing invocation-failure heading/exit and error trace, add distinguishing permanent CLI proof, retain actual before/after/source-inverse channels and all fixture inputs, update current book/Knowledge, and run exact canonical admission. Other repositories remain read-only.
+
+  Original control hold: baseline.json.gz preserves nine public/library sources, eighteen CLI commands and actual permanent RED before any CLI change. The provisional no-match source uses I{return(42)} and returns42 on input y; its expected null is wrong. Canonical top-rule-reads-own-match-with-match-family and rust-lifecycle-i-return-dispatch-parity explain that I executes before matching and return exits immediately. Get/native/fresh source has direct return42 in the handler. Qualify the original target/rows without replacing them; probe a genuine post-match/no-match source before revising the permanent test. No separate product defect or successful no-match/product-RED credit is earned by this mistaken control.
+
+  Control resolution: Complete Get/native/fresh alternative probes retain bare-rule0 and explicit self-edge input-y null/input-x42. The canonical action-and-lifecycle-placement chapter says selection alone does not test the selected rule's regex; an explicit incoming/self edge selects it. cases2/oracle2/baseline2 and the revised permanent controls are distinct from all original producers/targets/observations. Preserve I-return42 as a legitimate result and add both genuine matching twins. At that capture boundary no CLI/runtime change had occurred; only the three typed failures and their trace earn product RED credit. The original third permanent failure and original oracle's two no-match rows are instrument qualifications only.
+
+  Corrected baseline: baseline2.json.gz retains11 source/input cases (10 distinct source texts),22 quiet/routed CLI commands, complete public descriptor/Get/dump/fresh output and actual permanent RED at unchanged bin/linkedspec. The source-inverse repair actor checks the independent corrected oracle before its first CLI write. Original producers, targets, outputs and failed-control channels remain unchanged. This leaf does not implement negative selectors.
+
+  Activation: Clean 329cee31c566cfb054557b8a2ebab62bac015db1 after intake17.0/all10 hooks/post-pointer/brief0. Whole accepted intake publication/claim/manifest and actual readonly0 plus82 independently Git-verified images precede repair writes; complete checked-live census has zero planned-path intersections. Prior intake remains live/unchanged. Redundant standalone gate termination143 is qualified in activation evidence.
+
+  Completion: 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits. Read-only: bash tools/run_python_project_data.sh docs/checkpoints/type-cli-runtime-errors/publish.py. Full public scope is the separate green epoch; inverse/restored scope is the actual permanent consumer. Nine complete source epochs/11504 unique accepted Git blobs, exact one-condition source overlay, prior82-image custody, actual source packets/channels and qualified failures remain recoverable. No library/selector/trace-schema or wider backend admission. Exact canonical proof and normal hooks govern landing.
+  Final staging hygiene: The first unpublished publication/claim/manifest and actual readonly0 precede containment in publication1-whitespace-boundary.json.gz. The copied source-epoch helper had one redundant EOF blank; trim only trailing LF, prove identical Python AST and retain every old input/source/mode. Exact old output copies and whitespace-containment.json.gz preserve the boundary. Rebind publication after containment; no functional, book, inverse or artifact observation changes.
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/dump_parser_source/native/fresh identify three typed handler failures; corrected baseline22 CLI commands has six actual protocol RED observations.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Already supplied runtime_ctx_ref receives last_error while bin/linkedspec checked only saved $@. Canonical lifecycle teaching and exact dumps separately resolve the mistaken original no-match target.
+  - [x] **FIX** — Check either failure channel before invoke:ok/JSON, using the unchanged invocation error exit/heading/trace.
+  - [x] **ADDRESSED (verified)** — Full fixed11-pair public population passes. Actual exact old-predicate inverse restores two permanent failing groups; exact restoration passes all six. Identity3/scope2 and three actual book-source denials distinguish missing/stale proof.
+  - [x] **NO REGRESSION** — Seven clear-channel controls and the existing thrown error remain compatible; six permanent groups pass. Exact staged canonical CI and normal hooks are required for admission.
+  - [x] **LOCKSTEP** — Current book/two executed CLI commands/flow link, canonical card/derived map, roadmap/index/live pointer and source-bound claim agree. Signed contract17.1 follows clean landing.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.17.8 - report context-only Perl CLI runtime failures`
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.16`
   Status: `pending` / P2 defect owned
@@ -618,25 +640,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.8` | `pending` | Owned P1: Perl CLI loses context-reported runtime failures; first clean repair. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.1` | `pending` | Freeze new signed authority/checker with historical-v1 boundary. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 13 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 14 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 15 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 16 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
-| 17 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
-| 18 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 19 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.1` | `pending` | Freeze new signed authority/checker with historical-v1 boundary. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 14 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 15 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 16 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
+| 17 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 18 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
 
 ## Decisions
 
@@ -676,6 +697,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
 
 ## Commit Log
 
+CLI17.8 subject: `TYPE-REFERENCE-BOOK.1.2.17.8 - report context-only Perl CLI runtime failures`; derive accepted identity from Git.
+
 Signed intake17.0 subject: `TYPE-REFERENCE-BOOK.1.2.17.0 - record signed-index baseline and CLI repair priority`; derive accepted identity from Git.
 
 Deferred-write12 subject: `TYPE-REFERENCE-BOOK.1.2.12 - execute deferred indexed writes atomically`; derive accepted identity from Git.
@@ -687,6 +710,8 @@ Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; der
 Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 
 ## Changelog
+
+- `2026-10-23`: Complete P1 CLI17.8 with both error channels, permanent source inverse/restoration and accurate current book; preserve original control qualification and accepted intake. Signed contract17.1 is next.
 
 - `2026-10-23`: Complete bounded signed intake17.0; retain diagnostic/oracle/source/product/book proof and qualify instrument mistakes. P1 Perl CLI17.8 precedes signed contract17.1/backend/admission children.
 

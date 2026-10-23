@@ -393,7 +393,29 @@ the outer caller. Check the context before treating the value as a success.
 Conversely, a grammar that explicitly returns `undef` without an error is a
 successful undefined value; the example writes JSON `null`.
 
-The current Perl primary CLI has a reporting gap: it checks thrown exceptions but ignores a handler failure recorded only in `last_error`. Such a failure can print `null` and exit `0`, including an invalid fractional array write. The application adapter in this chapter checks both channels and reports these failures. CLI repair is pending; the successful-null rule above applies only when neither failure channel is set.
+### Primary CLI runtime failures
+
+The primary Perl command checks both failure channels too. A recorded handler failure exits `1`, writes no JSON to stdout, and prints the stable invocation-failure heading to stderr.
+
+For example, this invalid fractional array write reports `linkedspec: parser invocation failed` on stderr:
+
+```sh
+perl -Iperl bin/linkedspec --inline-spec 'Top: /x/
+ I { items=[10,20,30]; items[1.5]=99; return(items) }
+' --input x
+```
+
+A grammar that deliberately returns `undef` remains successful and prints `null` plus a newline with exit `0`:
+
+```sh
+perl -Iperl bin/linkedspec --inline-spec 'Top: /x/
+ I { return(undef) }
+' --input x
+```
+
+An explicit routed trace ends in `invoke:error` for a handler failure and `invoke:ok` for a successful null value. Primary CLI errors keep the portable heading; the application adapter below exposes selected structured context fields.
+
+### Native application adapter
 
 The standalone JSON adapter also selects `trace_level => -1` and an empty
 `route` destination, and clears inherited native trace settings within its work.

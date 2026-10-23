@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Signed-selector17 remains active; bounded intake17.0 is complete. P1 Perl CLI17.8 precedes neutral contract17.1 and owned backend children.
+Signed-selector17 remains active. P1 CLI17.8 is complete; neutral contract/checker17.1 is next before the owned backend/admission children.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.17.0: 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission. Whole hygiene21 custody precedes writes. Current book/Knowledge match dated observations; no runtime/contract/checker change.
+TYPE-REFERENCE-BOOK.1.2.17.8: 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits. Whole accepted intake custody precedes writes; original control mistake remains qualified. Exact staged canonical CI/normal hooks govern admission. No signed support is inferred.
 
 ## Next Action
 
-From clean Git activate/repair Perl CLI17.8 with both error channels and permanent null/false/no-match controls; run exact canonical candidate before landing. Signed17.1–7, then14/16/19/raw-regex21/policy20 precede complete inventory/reference work.
+From clean Git activate signed contract/checker17.1 with historical-v1 bytes preserved, then owned17.2–7. Deferred last14/with16, grouped assignment19, raw-regex21 and policy20 precede complete inventory/reference work.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
 - `TYPE-REFERENCE-BOOK.1.2.17.0` — 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
 - `REPO-HYGIENE.21` — dated22830 parent/483 Rust incremental; zero removals; metadata4/custody4/input3/book89 marker RED/core PASS; whole accepted12 custody; signed17 next.
 - `TYPE-REFERENCE-BOOK.1.2.12` — 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; signed17 next feature.
@@ -29,7 +30,6 @@ From clean Git activate/repair Perl CLI17.8 with both error channels and permane
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.1` — historical flat groups/snapshot limits; native17/five controls; module4; prior208/full39111 + draft355/full60395 retained/replayed; Knowledge8386601/map21249/book89; readonly396/68960; inventory .1.2 next.
-- `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12` — lists897/248; original80/RED38/GREEN176; faults10/artifact3; current1487/1349/10455; knowledge8386908/map21249/book89/4; readonly208/39111; TYPE-REFERENCE-BOOK.1 next.
 
 ## History
 

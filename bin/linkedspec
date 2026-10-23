@@ -365,7 +365,7 @@ _trace_emit($trace, 100, 'low', 'input:ok');
 _trace_emit($trace, 100, 'low', 'invoke:start');
 my $result = eval { $parser->(\$input) };
 my $parse_error = $@;
-if ($parse_error) {
+if ($parse_error || $runtime_ctx{last_error}) {
  _trace_emit($trace, 100, 'low', 'invoke:error');
  _runtime_error('parser invocation failed');
 }

@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-23 — Perl CLI errors are independent of returned value
+
+The invocation boundary already passes runtime_ctx_ref. A rule handler can catch its failure, set last_error and return undef without setting the outer $@. The CLI must check both channels before invoke:ok and JSON serialization. Checking return-value truthiness would reject legitimate null, false and zero; the permanent and public controls distinguish that error. The original predicate inverse reproduces the two handler-error groups and exact restoration returns GREEN.
+
+The first no-match fixture incorrectly used I{return(42)}. Canonical action-and-lifecycle-placement and existing top-rule/I-return cards already explain that selection does not match an own regex and I return exits before matching. Native/fresh dumps confirm direct return42. A distinct explicit self-edge source has y:null/x:42; retain both twins and the valid initializer return. Original targets, rows, test, oracles and their actual failures remain immutable; only cases2/oracle2 earn current qualified proof. Source epochs are complete conservative main-project images, not dependency implementation or minimal-I/O claims. The accepted prior intake stays live and unchanged; current feature proof is dated to real329cee31c plus the exact retained overlay.
+
 ## 2026-10-23 — signed-index baseline and both Perl failure channels
 
 A successful CLI null can conceal a handler failure. bin/linkedspec already supplies runtime_ctx_ref but checks only $@ after invocation; twelve invalid writes set last_error while the command exits0/null. The existing protocol oracle distinguishes this on two cases; five other native commands reject. Repair17.8 must check both channels while preserving legitimate null/false/no-match results. Do not reinterpret earlier successful null captures after repair.

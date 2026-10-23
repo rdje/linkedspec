@@ -1,0 +1,1 @@
+{"cases":[{"id":"bare-no-match","input":"y","source":"Top: /x/\n"},{"id":"post-no-match","input":"y","source":"Top::AND\n /x/ -> Top[0] { return(42) }\n"},{"id":"post-match","input":"x","source":"Top::AND\n /x/ -> Top[0] { return(42) }\n"}]}
