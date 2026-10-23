@@ -16,11 +16,12 @@ answers:
   - "do Perl deferred codeblocks support indexed writes"
   - "how does a deferred Perl assignment preserve caller null presence"
   - "why does a deferred with call raise unknown_helper"
-date: 2026-10-23
+  - "do ordinary and deferred Perl negative array reads currently agree"
+date: "2026-10-23"
 status: current on the Perl reference under FUTURE-PARITY-BACKLOG.19.2.1; portable capability admitted under .19.7
 tags: [dsl, actionir, assignment, autovivification, diagnostics, perl, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.2.1 and frozen v1 fixture; deferred extension TYPE-REFERENCE-BOOK.1.2.12. Prior card: git show 24e9c72a31b7eb31ce94b09beab9655ae85378cb:docs/knowledge/write-vivification-perl-reference.md."
-reverify: "env PERL5LIB= bash tools/project_data_run.sh prove -Iperl t/callable_codeblock_literal_contract.t t/write_vivification_perl_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/uniform_binding_contract.t && env PERL5LIB= bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
+reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
 ---
 
 # Perl reference write vivification
@@ -83,3 +84,7 @@ Other backends awaited .19.3-.6; the prior Git card above retains full scope.
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[uniform-binding-neutral-contract]], [[write-map-leaves-neutral-composition]], and ADR `0036`.
+
+## Signed-selector intake (October23)
+
+Ordinary Perl reads already select existing tail entries, including dynamic integer selectors, and preserve empty/underflow state. Callable array reads require digit-only indexes and return null for negatives; BindingRuntime rejects negative write selectors. Intake17.0 retains descriptor/Get-dump/fresh observations, the original sources and finite oracle REDs. Canonical child17.2 owns the requested extension; no signed write or portable admission is inferred.

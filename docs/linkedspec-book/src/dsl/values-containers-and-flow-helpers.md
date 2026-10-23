@@ -529,6 +529,35 @@ Use the documented `matches(subject, /pattern/)` helper for multiline patterns. 
 Perl callable bodies accept the same bracket assignments as ordinary actions. An unbound root can be created, but an explicitly assigned `undef` and an `undef` parameter remain present null values and cannot become containers. String selectors choose hashes, including quoted numeric strings; nonnegative integer selectors choose arrays. A literal boolean or null, a negative or fractional number, or an aggregate or codeblock cannot select a container and reports `nested_write_segment_invalid`. Existing wrong container kinds report `nested_write_kind_conflict`; an index beyond the exact append position reports `nested_write_array_gap`.
 The current frozen write boundary still rejects negative selectors. The next implementation slice applies tail-relative array indexes: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. This requested extension is pending; it will preserve dense arrays and reject out-of-range writes.
 
+#### Current negative-index read status
+
+Tail-relative indexing is being extended across the runtimes. For an existing array of size `L`, the requested rule is `[-n] = [L-n]` when `L-n >= 0`; negative selectors never create missing elements. The extension is not yet admitted portably.
+
+For `[10,20,30]`, the current `[-1]` library-read results are:
+
+| Runtime/context | Current result |
+| --- | --- |
+| Ordinary Perl action | `30` |
+| Perl callable body | `null` |
+| Rust ordinary/callable read | `10`, from its legacy index coercion |
+| Dart, Julia, PUC Lua and LuaJIT | `null` |
+
+These are implementation observations while the extension is pending. Negative writes remain rejected by the libraries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command limitation.
+
+The ordinary Perl example returns `[30,[10,20,30]]` with input `x`:
+
+```text
+{{#include ../../../../examples/negative-array-current-perl.spec}}
+```
+
+The callable example currently returns `[null,[10,20,30]]`:
+
+```text
+{{#include ../../../../examples/negative-array-current-callable-perl.spec}}
+```
+
+#### Existing parameter and effect behavior
+
 Nonparameter assignments update the caller's current slot. Fixed and rest parameters receive independent values, and their caller slots and presence state restore on success or failure:
 
 ```text

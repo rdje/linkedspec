@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-23 — TYPE-REFERENCE-BOOK.1.2.17.0 — freeze signed-selector baseline
+
+32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
+
+Whole accepted hygiene21 publication/claim and actual clean readonly0/55 Git-verified images precede writes. Retain all runtime observations, complete source epochs, Rust executable/Lua adapter bytes, independent oracles and public examples. Rust unsigned conversion clamps negative reads to zero; callable Perl requires digit-only reads. Perl CLI ignores context-only handler errors; P1 repair17.8 is first after clean intake, then signed neutral contract17.1. The original wrong bare-key comparison and rejected +947-byte document proposal remain qualified without product RED credit. Four cards preserve every question; current book explains dated backend differences and the CLI caveat. Frozen authorities/runtime/gates stay unchanged. Focused frozen-write/read consumers, Knowledge/history/memory/whitespace and normal hooks govern landing. Read-only: docs/checkpoints/signed-array-selectors/publish.py.
+
 ## 2026-10-23 — REPO-HYGIENE.21 — retain due artifact review
 
 Dated 2026-10-23T16:47:31.468358+00:00 parent 22830 candidates/22207314907 bytes; Rust incremental 483/2390835129, with all six locations recorded separately; zero removals. Fresh/lstat/traversal proof, four metadata/four custody/three input controls and actual book-marker RED pass. Whole accepted12 and actual clean readonly0 precede writes; complete book89 and unchanged scalar core pass. Normal focused doctrines/hooks govern landing; signed17 follows clean Git.

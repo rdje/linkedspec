@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / signed-selector17 next after clean12 and due hygiene21
+- Status: `active` / P1 CLI17.8 next before signed contract17.1
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-23`
@@ -385,7 +385,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17`
-  Status: `pending` / director-priority signed array selectors
+  Status: `active` / signed-selector transition; intake17.0 first
   Goal: Admit tail-relative negative array selectors across ordinary/deferred reads and writes on every runtime.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
   Director instruction (October23): For array size L, [-n] selects [L-n], valid only when L-n >= 0. Therefore -1 is the last element and -L the first; a more negative selector is out of range and never creates elements. This supersedes the frozen nonnegative-only write policy for existing arrays. Quoted strings remain hash keys; positive indexing and exact-length append retain their existing contract.
@@ -393,6 +393,105 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Establish current public ordinary/deferred/native/fresh behavior before repair; freeze a complete signed-index contract with empty/out-of-range, dynamic/literal, nested mixed paths, copy/alias, atomicity, effects and diagnostic controls. Implement and verify the same shared policy on Perl/Rust/Dart/Julia/PUC Lua/LuaJIT through their owned interfaces; update recurring/public guards and book examples without consulting dependency internals. Keep every historical source-bound claim recoverable; use child leaves and one commit per bounded contract/backend/admission slice.
   Planned tier: `canonical`
   Claim verification: none: Director policy intake and scheduling only; source-bound measurements belong to child leaves after the clean12 boundary.
+
+  Activation: Clean 92c98fb3de0f8392abde59043bd6f67ba0199452 after hygiene21 all10 normal hooks/post-pointer/brief0 and clean Git. Whole current bounded hygiene publication and actual readonly0 plus55 independently Git-verified images precede this first tracked write; no live claim intersects the explicit read/write/book plan. The unrelated private-capacity Knowledge card and its claim remain untouched.
+  Children: `TYPE-REFERENCE-BOOK.1.2.17.0`, `TYPE-REFERENCE-BOOK.1.2.17.1`, `TYPE-REFERENCE-BOOK.1.2.17.2`, `TYPE-REFERENCE-BOOK.1.2.17.3`, `TYPE-REFERENCE-BOOK.1.2.17.4`, `TYPE-REFERENCE-BOOK.1.2.17.5`, `TYPE-REFERENCE-BOOK.1.2.17.6`, `TYPE-REFERENCE-BOOK.1.2.17.7`, `TYPE-REFERENCE-BOOK.1.2.17.8`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.0`
+  Status: `completed`
+  Goal: Establish current signed-index behavior and a bounded v1 transition plan before changing runtime or shared authority.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`, `REPO-HYGIENE.21`
+  Owned paths: docs/checkpoints/signed-array-selectors/ public-interface observations/reviewers; four indexed-read/write/Perl-CLI Knowledge cards, DSL values/flow and public Perl integration book pages, two exact examples; normal continuity/roadmap/index. Full checked-live census and before packets precede these bounded documentation writes. All frozen authorities and other repositories/submodules stay unchanged/read-only.
+  Verification tier: `focused`
+  Focused checks: Actual clean prior publication and complete checked-live claim census; source-bound owned contracts/public producers before native/fresh probes; ordinary/deferred literal/dynamic negative/empty/range/read-purity/effect controls on six runtime routes through published interfaces; independent oracle/reader denials; Knowledge/book/history/memory/whitespace and normal doctrines.
+  Canonical trigger: none — diagnostic baseline and internal transition design only. Contract/checker, runtime, generated carrier and admission changes belong to canonical children.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.0.json`
+  Acceptance: Retain exact current behavior without inferring support from a host language. Reconcile v1 creation/diagnostic/evaluation/read-purity constraints with the director's existing-array tail-relative rule. Enumerate affected public guards/direct consumers and choose a safe backend transition. No runtime or portable admission.
+  Pre-write scope qualification: The first broad read-only proposal treats every Knowledge/book path as planned and correctly refuses an unrelated private-capacity-card live intersection before writes. This distinct explicit plan excludes that unrelated card; repeat baseline/full source/live census precede owner activation. Original whole first stdin/channels were not separately retained; its observed exit1/AssertionError identifies only that broad scope refusal, with no product/falsifier credit.
+
+  Diagnostic hold (owned here): The32-source descriptor/Get-dump/native/fresh Perl packet is retained before any SUT edits. Ordinary literal/dynamic negative array reads work; callable negative reads yield null, and valid negative writes report nested_write_segment_invalid. One comparison control, tree={"-1":"key"}; chosen_index="-1"; return(tree[chosen_index]), yields null on both routes while the quoted-literal twin returns key. Do not classify it from the provisional expected value: reconcile the separately governed read-key policy and exact Toolbox emitted mechanism/source location first. Frozen write-v1 only treats its own negative absent-root case; no new runtime or contract claim is admitted.
+
+  Diagnostic resolution: key-control-qualification.json preserves the original wrong target without changing any observed row. The canonical terse-direct-access-bare-path-atoms card classifies an ordinary bare variable as an array index. Get dump emits ValueExpr::_emit_guarded_direct_read_expr's ARRAY guard (ValueExpr.pm:504), so an harray receiver correctly yields null; the literal quoted-key twin yields key. No product defect is declared for that control. Existing-array ordinary negative reads use the retained Perl array cursor; CodeblockRuntime.pm:694/702 instead requires digit-only indexes, explaining callable null. BindingRuntime.pm:56 rejects negative integer write selectors. These exact source packets/observations are retained; the requested read/write repairs remain owned by canonical child17.2.
+
+  Native survey completion:32 exact sources execute through all six public primary commands with full channels, source unchanged, actual Rust executable and both Lua native-adapter inputs retained. Get/fresh identifies12 typed Perl failures that the Perl CLI reports as exit0/null; all five other routes report invocation failure. P1 repair17.8 is mandatory immediately after this intake clean commit. Rust negative reads return the first element even for underflow; actual public binary calibration/source packets identify the unsigned conversion and existing negative-coercion unit, owned by Rust child17.3. No backend signed admission is inferred.
+
+  Completion: 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission. Whole retained Rust/Lua products, eight complete source epochs, independent Git source review and complete actual channels remain recoverable. Read-only: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/publish.py. Original comparison/proposal failures are instrument qualifications, without product RED credit. Frozen-v1 and current runtimes are unchanged.
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/dump_parser_source plus native/fresh32 and six public CLI routes retain exact signed gaps and context-only errors.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Source-bound Perl guarded/digit-only/write-selector branches, Rust unsigned cast and CLI exception-only branch explain the observed differences.
+  - [x] **FIX** — Intake resolves the provisional key-control expectation, documents current limits and owns separate canonical contract/backend/P1 repair leaves; no runtime repair is claimed here.
+  - [x] **ADDRESSED (verified)** — Independent13-case director oracle and CLI-protocol oracle observe diagnostic RED; three actual book-source denials and input3/scope2 bypass/restoration distinguish missing evidence.
+  - [x] **NO REGRESSION** — Unchanged frozen authority/checker and focused typed-write/read consumers pass; Knowledge/history/memory/whitespace and normal hooks govern landing.
+  - [x] **LOCKSTEP** — Two executed book examples/current qualifications, four canonical cards/derived map, roadmap/index/live pointer and source-bound claim agree. P1 CLI17.8 is first clean next action.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.17.0 - record signed-index baseline and CLI repair priority`
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.1`
+  Status: `pending`
+  Goal: Freeze the signed neutral contract/checker and historical-v1 transition.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.0`, `TYPE-REFERENCE-BOOK.1.2.17.8`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.2`
+  Status: `pending`
+  Goal: Implement signed ordinary/deferred reads/writes on Perl.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.1`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.3`
+  Status: `pending`
+  Goal: Implement the same policy through Rust native/generated interfaces.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.2`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.4`
+  Status: `pending`
+  Goal: Implement the same policy through Dart native/generated interfaces.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.3`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.5`
+  Status: `pending`
+  Goal: Implement the same policy through Julia native/generated interfaces.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.4`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.6`
+  Status: `pending`
+  Goal: Implement the same policy on shared Lua, independently verified on PUC Lua and LuaJIT.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.5`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.7`
+  Status: `pending`
+  Goal: Admit the complete six-runtime policy, recurring compatibility and public examples; split capability/recurrence/public children before writes when needed.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.6`
+  Planned tier: `canonical`
+  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.17.8`
+  Status: `pending` / owned P1 public-command defect
+  Goal: Report Perl library runtime failures through the primary CLI instead of successful null output.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.0`
+  Reproduce: Top: /x/ followed by I { items=[10,20,30]; items[1.5]=99; return(items) }. Public Get/runtime_ctx_ref and fresh emitted execution report nested_write_segment_invalid, but perl -Iperl bin/linkedspec --inline-spec SOURCE --input x exits0 with null plus LF and empty stderr. Twelve retained invalid-write sources have the same CLI success classification; all five other native runtime routes exit1 for those sources.
+  Impact: Scripts accept failed parsing/action execution as successful null data; the existing primary command invocation-failure protocol is violated independently of requested negative indexing.
+  Mechanism: bin/linkedspec already supplies runtime_ctx_ref, but its post-invocation branch checks only the exception in $@ and ignores context last_error when the library returns undef after a handler failure. Exact current source/complete channels are retained by intake0 and CLI-RUNTIME-ERROR.md.
+  Schedule: First clean leaf after intake17.0, before neutral contract17.1. Current diagnostic capture finishes unchanged and is committed before repair; no dirty pivot or silent baseline replacement.
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; actual before observations belong to intake17.0.
+  Acceptance: Observe thrown and context-reported failures, preserve legitimate null/false/no-match results, emit the existing invocation-failure heading/exit and error trace, add distinguishing permanent CLI proof, retain actual before/after/source-inverse channels and all fixture inputs, update current book/Knowledge, and run exact canonical admission. Other repositories remain read-only.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.16`
   Status: `pending` / P2 defect owned
@@ -519,18 +618,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17` | `pending` | Director priority: tail-relative signed selectors; first clean slice after12. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after12; complete the owned selector gap before inventory. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14; exact diagnostic intake retained. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment-value adjudication/repair after16. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Restore raw assigned-regex payload fidelity after19, before policy20/inventory. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation after raw-regex21. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Enumerate complete supported operations/spellings after the owned P1 repairs. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every reconciled item to actual book coverage. |
-| 9 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independently review the complete inventory and bounded layout plan. |
-| 10 | `TYPE-REFERENCE-BOOK.8` | `pending` | Reconcile owned legacy metadata contradictions from exact history. |
-| 11 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred unconfirmed literal-rendering question after Type .1/.8. |
-| 12 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed type-family references and independent .7 closeout follow. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.8` | `pending` | Owned P1: Perl CLI loses context-reported runtime failures; first clean repair. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.1` | `pending` | Freeze new signed authority/checker with historical-v1 boundary. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 14 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 15 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 16 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 17 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
+| 18 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 19 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
 
 ## Decisions
 
@@ -570,6 +676,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
 
 ## Commit Log
 
+Signed intake17.0 subject: `TYPE-REFERENCE-BOOK.1.2.17.0 - record signed-index baseline and CLI repair priority`; derive accepted identity from Git.
+
 Deferred-write12 subject: `TYPE-REFERENCE-BOOK.1.2.12 - execute deferred indexed writes atomically`; derive accepted identity from Git.
 
 Count/first10 subject: `TYPE-REFERENCE-BOOK.1.2.10 - execute callable count and first`; derive its accepted identity from Git.
@@ -579,6 +687,8 @@ Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; der
 Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 
 ## Changelog
+
+- `2026-10-23`: Complete bounded signed intake17.0; retain diagnostic/oracle/source/product/book proof and qualify instrument mistakes. P1 Perl CLI17.8 precedes signed contract17.1/backend/admission children.
 
 - `2026-10-23`: Complete bounded deferred-write12, preserve caller presence and standalone compatibility; signed17 is next, then14/16/19/raw-regex21/policy20 before inventory.
 

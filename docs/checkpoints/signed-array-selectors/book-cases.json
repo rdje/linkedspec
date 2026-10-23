@@ -1,0 +1,1 @@
+{"cases":[{"id":"read-last","input":"x","source":"Top: /x/\n I { items=[10,20,30]; return([items[-1],items]) }\n"},{"id":"callable-read","input":"x","source":"Top: /x/\n I { items=[10,20,30]; runner={||return(items[-1])}; return([runner(),items]) }\n"}]}

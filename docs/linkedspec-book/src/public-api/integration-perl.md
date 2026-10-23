@@ -393,6 +393,8 @@ the outer caller. Check the context before treating the value as a success.
 Conversely, a grammar that explicitly returns `undef` without an error is a
 successful undefined value; the example writes JSON `null`.
 
+The current Perl primary CLI has a reporting gap: it checks thrown exceptions but ignores a handler failure recorded only in `last_error`. Such a failure can print `null` and exit `0`, including an invalid fractional array write. The application adapter in this chapter checks both channels and reports these failures. CLI repair is pending; the successful-null rule above applies only when neither failure channel is set.
+
 The standalone JSON adapter also selects `trace_level => -1` and an empty
 `route` destination, and clears inherited native trace settings within its work.
 Native level-zero tracing can otherwise print failure records on stdout; it is

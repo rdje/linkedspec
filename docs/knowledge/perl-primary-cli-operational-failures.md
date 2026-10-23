@@ -11,12 +11,20 @@ answers:
   - why did Perl CLI failure stdout contain timestamps
   - how many neutral CLI cases pass after operational failures
   - what did FUTURE-PARITY-BACKLOG.1.5.1.4 implement
-date: 2026-07-10
-status: current
+  - "why does Perl CLI print null for a typed invalid write"
+  - "which task repairs Perl CLI context-only runtime failures"
+date: "2026-10-23"
+status: "stable phase protocol; context-only handler failure reporting is owned P1 child17.8"
 tags: [perl, cli, failures, diagnostics, stdout, trace, conformance, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.4 adds four exact operational cases, below-none untraced trace configuration, stable one-line stderr, and ambient trace isolation; all 33 cases pass in default/POSIX environments."
-reverify: "perl -c bin/linkedspec && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
+evidence: "Original operational rollout remains historical below. Intake17.0 retains twelve library write failures reported by Perl CLI as exit0/null; other five native routes exit1. A two-case established-protocol oracle is RED on Perl and GREEN on the other five. Child17.8 owns repair before signed contract17.1."
+reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
 ---
+
+# Context-only handler failures (October23)
+
+`items=[10,20,30]; items[1.5]=99; return(items)` reports a typed error through public Get/runtime_ctx_ref and independently emitted execution. The primary command emits `null` plus LF, empty stderr and exit0. Its runtime context is already wired, but the invocation boundary checks only `$@`. This conceals failure from scripts. P1 TYPE-REFERENCE-BOOK.1.2.17.8 repairs both failure channels while preserving successful null/false/no-match results. Current evidence is a dated baseline, not a repaired-command claim.
+
+# Original operational rollout (July10)
 
 The Perl reference primary CLI has three exact operational stderr records:
 

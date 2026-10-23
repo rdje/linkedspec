@@ -8,11 +8,12 @@ answers:
   - "does direct-access bare path atom auto-declare my"
   - "what is the next leaf after SPEC-FORMAT-TERSE.1.2.3.3.3"
   - "does Rust accept direct-access bare path atoms after SPEC-FORMAT-TERSE.1.2.3.4"
-date: 2026-09-24
+  - "why does an ordinary Perl dynamic string hash read yield null"
+date: "2026-10-23"
 status: confirmed
 tags: [dsl, nested-access, variables, type-inference, channel-2, spec-format-terse, SPEC-FORMAT-TERSE, actionir, perl]
-evidence: "Historical lowering text, superseded by guarded Perl reads in SESSION-STARTUP-READING.89. SPEC-FORMAT-TERSE.1.2.3.3.3 landed on 2026-06-29. Perl `LinkedSpec::call_spec_handler_subst(\"Top\", q{return(foo[\"a\"][z])})` now returns `return $foo->{\"a\"}->[$z]`, identical to `return(foo[\"a\"][scalar(z)])`. The same direct-access value lowering composes through `set(out, foo[\"a\"][z])`, `items += foo[\"a\"][z]`, and `meta[key] = foo[\"a\"][z]`. `_collect_auto_working_var_decls` records accepted bare path atoms through `_lower_direct_nested_access_value_expr` as the acceptance oracle, so generated handlers supply exactly one `my $z` / `my $idx` / `my $pos` and skip reserved atoms such as `true` and `CAPTURE`. SPEC-FORMAT-TERSE.1.2.3.4 later landed Rust parser parity for bare direct-access path atoms using the existing `Expr::Variable` scalar read path. SCALAREF-RETIREMENT.4 later removed the old legacy helper comparison surface. Phase0 passed with 987 tests at the original leaf."
-reverify: "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/trace_actionir_compact_lowerers.t t/phase0_regression.t"
+evidence: "Historical bare-index/auto-declaration proof and later guarded reads remain unchanged; full original header/recipes: git show 92c98fb3de0f8392abde59043bd6f67ba0199452:docs/knowledge/terse-direct-access-bare-path-atoms.md. Signed intake17.0 retains the quoted-key/bare-index control and exact emitted ARRAY guard; the first provisional comparison target was wrong."
+reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
 ---
 
 # Direct-Access Bare Path Atoms
@@ -50,3 +51,7 @@ non-creating reads and retains each receiver through selector evaluation. Segmen
 classification and auto-declaration remain unchanged. The historical `scalar(z)`
 wrapper is retired; current source uses bare `z`. See
 [[perl-direct-read-autovivification-gap]] and [[perl-direct-read-selector-lifetime]].
+
+## October23 control qualification
+
+For `tree={"-1":"key"}; chosen_index="-1"; return(tree[chosen_index])`, current ordinary Perl selects the authored scalar-array-index branch and returns null for the harray receiver. The quoted literal twin returns `key`. Intake17.0 preserves the first wrong comparison target and every actual row; it changes no read policy.
