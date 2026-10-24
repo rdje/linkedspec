@@ -527,7 +527,7 @@ Use the documented `matches(subject, /pattern/)` helper for multiline patterns. 
 ### Deferred indexed writes in Perl
 
 Perl callable bodies accept the same bracket assignments as ordinary actions. An unbound root can be created, but an explicitly assigned `undef` and an `undef` parameter remain present null values and cannot become containers. String selectors choose hashes, including quoted numeric strings; nonnegative integer selectors choose arrays. A literal boolean or null, a negative or fractional number, or an aggregate or codeblock cannot select a container and reports `nested_write_segment_invalid`. Existing wrong container kinds report `nested_write_kind_conflict`; an index beyond the exact append position reports `nested_write_array_gap`.
-The current frozen write boundary still rejects negative selectors. The next implementation slice applies tail-relative array indexes: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. This requested extension is pending; it will preserve dense arrays and reject out-of-range writes.
+The current implementations still reject negative writes. A separate target contract now defines tail-relative array indexes: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. Backend implementation and portable admission remain pending; the frozen historical write-v1 authority stays unchanged.
 
 #### Current negative-index read status
 
@@ -555,6 +555,24 @@ The callable example currently returns `[null,[10,20,30]]`:
 ```text
 {{#include ../../../../examples/negative-array-current-callable-perl.spec}}
 ```
+
+#### Target signed-selector contract (backend implementation pending)
+
+The following table describes the target rule, rather than the current runtime results above. Its authority is `capability_conformance/signed_array_selector_contract.json`; it introduces no new assignment syntax.
+
+| Existing array | Selector | Target read | Target write |
+| --- | --- | --- | --- |
+| `[10,20,30]` | `[-1]` | `30` | Replace the last entry |
+| `[10,20,30]` | `[-2]` | `20` | Replace the middle entry |
+| `[10,20,30]` | `[-3]` | `10` | Replace the first entry |
+| `[10,20,30]` | `[-4]` | `null` | `nested_write_array_underflow` |
+| `[]` | `[-1]` | `null` | `nested_write_array_underflow` |
+
+A negative selector requires an existing array and an existing position. It cannot create an absent root, a missing child array, an append position or filler entries. A negative write aimed at missing state retains `nested_write_segment_invalid` with reason `negative_integer`. Present null or a wrong container kind retains `nested_write_kind_conflict`. Nonnegative replacement and exact-length append remain unchanged; quoted `"-1"` remains an harray key.
+
+Negative selectors resolve against the array encountered after selector and RHS evaluation. For example, if the RHS grows `[10,20]` to `[10,20,30]`, an outer `[-1]` write selects the new last position. Each encountered nested array supplies its own length. Failure discards the isolated structural attempt while completed expression effects remain. Returned roots, committed bindings, initial trees and aggregate RHS values remain detached.
+
+The active receiver identity guard still wins before expressions. Expression failures then precede invalid selector kinds; the structural walk reports its first kind conflict, positive gap, missing negative target or negative underflow. A negative integer is conditionally valid, so a later globally invalid boolean selector is reported before an earlier latent underflow. Underflow reports the authored negative `index`, encountered `length`, `resolved_index = length + index`, the zero-based failing segment, authored Unicode-scalar source span and detached authored-value path prefix. Unchanged v1 diagnostics retain their existing fields and wording. Unrelated read coercions and effectful read receiver ordering are outside this extension.
 
 #### Existing parameter and effect behavior
 

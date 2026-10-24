@@ -11,6 +11,8 @@ answers:
   - what task owns live document pressure containment
   - may a routed destination baseline refresh automatically
   - what implements README route closure
+  - "does the Knowledge directory README count toward its file limit"
+  - "does Knowledge Map generation use stderr on success"
 date: 2026-08-09
 status: implemented and independently recomposed; routing-pressure revision closed
 tags: [readme, documentation, routing, pressure, lifecycle, doctrine, containment, debt]
@@ -21,6 +23,7 @@ reverify:
   - "rg --files docs/tasks -g '*.md' | sort | xargs wc -lc"
   - "rg -n 'README-STABILITY-POLICY\\.4|LIVE-DOCUMENT-PRESSURE-CONTAINMENT' docs/tasks/README-STABILITY-POLICY.md docs/tasks/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.md docs/TASK_TREE.md"
   - "perl scripts/check_readme_routing_pressure.pl --report"
+  - "bash knowledge-map/scripts/gen_knowledge_map.sh"
 ---
 
 # README routing-pressure closure plan
@@ -43,3 +46,13 @@ The checker reads the staged resulting tree whenever an index change exists and 
 rejects a controlled staged/worktree split, derives all 39 README routes, five local-enforcement routes, 18 policy
 overflow routes, and 18 emitted hints independently, then requires exact registry equality. Its `--report` mode
 exposes deterministic per-surface counts without writing an artifact.
+
+The knowledge_cards collection matches `docs/knowledge/*.md`, including its README.
+Fact count and collection file count differ; use the registered resulting-tree
+report when adding a card. Reuse the canonical home and preserve lookup questions
+and exact historical images when containing that collection.
+
+The map generator sends its normal successful-write notice to stderr and exits0.
+Validate its exit and expected notice instead of requiring empty stderr. The
+October24 source/actual-channel qualification is retained in
+`docs/checkpoints/signed-array-contract-admission/knowledge-generation.json.gz`.

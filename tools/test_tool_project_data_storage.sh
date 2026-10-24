@@ -72,8 +72,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 42 )) ||
- fail "Python tool entrypoint inventory drifted from 42 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 43 )) ||
+ fail "Python tool entrypoint inventory drifted from 43 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -186,7 +186,7 @@ awk '
 if mcp_ci_topology_matches "$mcp_order_mutant"; then
  fail 'MCP canonical topology accepted binding-check-before-validator order'
 fi
-for checker in tools/check_callable_codeblock_contract.py tools/check_composed_objective_contract.py tools/check_claim_verification.py; do
+for checker in tools/check_callable_codeblock_contract.py tools/check_composed_objective_contract.py tools/check_claim_verification.py tools/check_signed_array_selector_contract.py; do
  checker_args=()
  [[ "$checker" == tools/check_claim_verification.py ]] && checker_args+=(--self-test)
 env \

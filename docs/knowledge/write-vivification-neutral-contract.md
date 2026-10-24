@@ -1,6 +1,6 @@
 ---
 id: write-vivification-neutral-contract
-title: "Future nested write vivification uses evaluated typed segments and one unified ActionIR node"
+title: "Frozen write-v1 and the separate signed-array target"
 answers:
   - "what is the neutral nested write vivification contract"
   - "does write vivification currently run on any backend"
@@ -16,22 +16,21 @@ answers:
   - "what diagnostics does nested write vivification use"
   - "why must current static key index lowering change"
   - "how are nested write source spans measured"
-date: 2026-09-07
-status: neutral contract frozen; implementation, admission, recurrence, and public closeout complete
+  - "which neutral authority defines tail-relative array selectors"
+  - "what diagnostic identifies signed array write underflow"
+  - "when does a negative write selector resolve its array length"
+  - "does the signed contract admit current backend support"
+  - "can identical validator outcomes establish which source epoch was imported"
+date: "2026-10-24"
+status: write-v1 portable; signed target frozen with implementation and admission separately owned
 tags: [dsl, actionir, assignment, autovivification, diagnostics, source-spans, mutation, FUTURE-PARITY-BACKLOG]
 evidence: "Historical neutral-freeze evidence from 2026-08-30; subsequent dated rollout updates below supersede its pending-backend wording. FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 adds linkedspec-write-map-leaves-composition-v1 as a shared fixture consumed by both existing checkers. This write checker now validates eight additional nested writes spanning detached callback value, unrelated global, same-spelling shadow local, active receiver guard, and post-commit receiver targets while retaining all 105 base mutations. No write behavior is admitted."
-evidence_update_2026_08_31_perl_reference: "FUTURE-PARITY-BACKLOG.19.2.1 implements the unchanged v1 contract on Perl only. One-/many-segment parsing, authored spans, exact typed syntax/runtime diagnostics, evaluated string/integer dispatch, absent-versus-bound-null presence, dense isolated creation, post-evaluation snapshots, detachment, and rule/function invocation state are exercised directly from the frozen fixture. Rust, Dart, Julia, and Lua remain non-vivifying; capability/public admission remains pending."
-evidence_update_2026_09_01_rust_reference: "FUTURE-PARITY-BACKLOG.19.3.1 implements the same unchanged v1 contract on Rust. Parsed, serialized, generated-plan, emitted-source, independently compiled emitted Rust, and native execution preserve one typed assign_nested_access node with expression-bearing path segments and Unicode-scalar spans. Runtime strings/nonnegative integers select harray/array, absent state is distinct from bound null, structural building is isolated and dense, typed errors fail closed, and fresh user-function locals/parameters retain their presence rules. Dart, Julia, and Lua remain non-vivifying; map_leaves! and portable/public admission remain pending on Rust."
-evidence_update_2026_09_01_rust_composition: "FUTURE-PARITY-BACKLOG.19.3.2 implements Rust map_leaves! and executes the frozen write/mutation composition. Callback-local, unrelated, active-receiver, shadow, and post-commit nested writes retain the unchanged write contract; Dart/Julia/Lua and portable/public admission remain pending."
-evidence_update_2026_09_02_dart_reference: "FUTURE-PARITY-BACKLOG.19.4.1 implements the unchanged v1 contract on Dart. One ActionWritePathSegment/ActionAssignNestedAccessExpr carrier preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile JSON reconstruction, generated plans, emitted source, an independently analyzed/executed caller package, and the primary CLI. Runtime evaluates all segments then RHS, snapshots afterward, creates dense selector-determined containers, detaches success values, emits exact typed structural fields, preserves expression failures, and rejects malformed typed carriers. Julia/Lua, Dart map_leaves!, and portable/public admission remain pending."
-evidence_update_2026_09_03_julia_reference: "FUTURE-PARITY-BACKLOG.19.5.1 implements the unchanged v1 contract on Julia. ActionWritePathSegment/ActionAssignNestedAccessExpr preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates segments then RHS, snapshots afterward, creates dense selector-determined containers on an isolated copy, detaches success values, preserves expression effects/failures, emits exact typed structural fields, keeps reads non-creating, and rejects malformed typed carriers. Julia map_leaves!, Lua, and portable/public admission remain pending."
-evidence_update_2026_09_04_lua_reference: "FUTURE-PARITY-BACKLOG.19.6.1 implements the unchanged v1 contract in shared Lua on PUC Lua and LuaJIT. ActionWritePathSegment plus assign_nested_access preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates segments then RHS, snapshots afterward, creates dense selector-determined containers on an isolated copy, detaches success values, preserves expression effects/failures, emits exact typed structural fields, keeps reads non-creating, and rejects malformed/reserved typed carriers. The permanent fixture consumer passes 436 assertions per ABI; Lua map_leaves! and portable/public admission remain pending."
-evidence_update_2026_09_04_lua_composition: "FUTURE-PARITY-BACKLOG.19.6.2 implements Lua map_leaves! without changing the nested-write contract. The adjacent permanent write consumer now passes 438 assertions per ABI after its pre-bang raw-syntax expectation was replaced by the frozen typed invalid-arguments diagnostic; all six callback and one continuation compositions execute through the separate 530-assertion bang suite. Portable/public admission remains pending."
 evidence_update_2026_09_04_portable_admission: "FUTURE-PARITY-BACKLOG.19.7 admits language.nested_write_vivification as one exact language-runtime capability across Perl, Rust, Dart, Julia, and shared Lua, with independent PUC Lua/LuaJIT execution recorded. The capability checker pins this neutral authority's ID, format, unchanged future-neutral status, canonical JSON digest, shared composition dependency, exact backend references, row order, and owner state through 16 dedicated admission mutations. Current census is 20 capabilities / 100 pass / 0 partial / 0 gap; recurrence remains .19.8 and public-current closeout remains .19.9."
 evidence_update_2026_09_05_recurring_proof: "FUTURE-PARITY-BACKLOG.19.8 runs this unchanged authority before exact consumers on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, then all three support ledgers. The recurring topology pins this file's historical status and canonical digest through 17 fail-closed mutations and exact-one canonical CI registration. Public-current closeout remains .19.9."
 evidence_update_2026_09_05_public_closeout: "FUTURE-PARITY-BACKLOG.19.9 binds current public creation, dense-array, conflict, and evaluation-order examples back to this unchanged authority. The public checker requires those example classes and exact policy text, rejects stale non-vivifying claims, and preserves this frozen JSON byte-for-byte."
-reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
+evidence_update_2026_10_24_history: "Seven repetitive per-backend rollout rows remain whole in Git 9dd5e35550036c5093a35986a2b3149f8ea79f9a:docs/knowledge/write-vivification-neutral-contract.md and docs/checkpoints/signed-array-contract-admission/knowledge-before.json.gz; current v1 semantics and all lookup questions remain here."
+reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_signed_array_selector_contract.py && bash tools/run_python_project_data.sh docs/checkpoints/signed-array-contract/import_epoch.py"
 ---
 
 # Future neutral write-vivification contract
@@ -97,3 +96,32 @@ Related: [[write-vivification-receiver-mutation-direction]], [[terse-nested-valu
 [[write-vivification-dart-runtime]], [[write-vivification-julia-runtime]], [[write-vivification-lua-runtime]],
 [[uniform-binding-neutral-contract]],
 [[write-map-leaves-neutral-composition]], and ADR `0036`.
+
+
+## Signed-array target (October24)
+
+TYPE-REFERENCE-BOOK.1.2.17.1 freezes a separate target in
+`capability_conformance/signed_array_selector_contract.json`
+and its owned checker. The v1 authorities, digests and historical proof stay exact.
+For integer i<0 on an existing length-L array, select L+i only in [0,L).
+Negative selectors cannot create or append; positive dense writes and quoted
+harray keys remain unchanged.
+
+Normalize during the isolated post-expression walk. Existing-array underflow
+uses `nested_write_array_underflow` with authored index, encountered length,
+resolved_index, segment, authored span and authored-value prefix. Missing
+negative targets retain v1's invalid-segment error. Identity guard precedes
+expressions; global invalid kinds precede structural checks. V1 atomicity,
+expression effects and detachment remain required.
+
+This is a neutral target. Backend implementation17.2–6 and portable admission17.7
+remain separately owned; unrelated read coercions and receiver order stay outside
+the extension. Retained proof: docs/checkpoints/signed-array-contract/.
+
+The freeze's original validator import predates its published reader. Both source
+epochs reproduce the same20 control outcomes; the captured source identity still
+rejects the later epoch. `docs/checkpoints/signed-array-contract/import_epoch.py`
+verifies the retained original bytes and four-module closure; the default
+publisher checks the40 actual replay outcomes. Equal results do not identify an
+instrument's imported source. Whole old state and actual producers remain in the
+validator-import packets and admission repair records.

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / signed contract17.1 next
+- Status: `active` / signed Perl17.2 next
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-23`
+- Last updated: `2026-10-24`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -385,7 +385,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17`
-  Status: `active` / intake17.0 and CLI17.8 complete; contract17.1 next
+  Status: `active` / intake17.0, CLI17.8 and target17.1 complete; Perl17.2 next
   Goal: Admit tail-relative negative array selectors across ordinary/deferred reads and writes on every runtime.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
   Director instruction (October23): For array size L, [-n] selects [L-n], valid only when L-n >= 0. Therefore -1 is the last element and -L the first; a more negative selector is out of range and never creates elements. This supersedes the frozen nonnegative-only write policy for existing arrays. Quoted strings remain hash keys; positive indexing and exact-length append retain their existing contract.
@@ -426,12 +426,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.17.0 - record signed-index baseline and CLI repair priority`
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.1`
-  Status: `pending`
+  Status: `completed` / neutral target, source custody and bounded storage enrollment
   Goal: Freeze the signed neutral contract/checker and historical-v1 transition.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.0`, `TYPE-REFERENCE-BOOK.1.2.17.8`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Owned paths: .gitignore (two exact regenerated recovery aliases); tools/test_tool_project_data_storage.sh; docs/knowledge/tool-project-data-ssd-storage.md; docs/linkedspec-book/src/development/local-ci-and-regression.md; capability_conformance/signed_array_selector_contract.json; tools/check_signed_array_selector_contract.py; docs/checkpoints/signed-array-contract/; canonical write and routing-pressure Knowledge cards, pending-extension book section and normal task/roadmap/continuity; docs/checkpoints/signed-array-contract-admission/ retains the canonical format qualification and bounded recovery chunks. Frozen v1 authorities/checkers/history and all runtime code remain unchanged.
+  Verification tier: `canonical`
+  Focused checks: Actual storage census/direct FAIL-PASS and signed-checker hostile-root wrapper execution; Source-bound neutral arithmetic/read/write/diagnostic/effect/identity/copy cases; full historical-v1 compatibility; actual finite oracle/source controls and input/scope denials; complete affected book render; memory/history/Knowledge/whitespace and all normal doctrines.
+  Canonical trigger: Separate cross-backend target contract/checker; exact staged canonical receipt before landing.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.1.json`
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+  Activation: Clean 9dd5e35550036c5093a35986a2b3149f8ea79f9a after CLI17.8 canonical/all10 hooks/post-pointer/brief0. Whole prior publication/manifest/claim and actual clean readonly0 plus independently Git-verified images precede first writes; complete checked-live census has no planned-path intersections. No runtime or signed capability admission.
+
+  Completion: 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission. Read-only: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-contract/publish.py. New underflow code/fields, conditional-negative structural ordering and authored-value path prefixes are frozen before backend writes. Missing negative targets keep the v1 diagnostic; exact historical authorities/checker remain unchanged. Three unpublished builder/capture/document mistakes retain whole original source and distinct exact-source reproduction channels without product RED credit. Whole prior CLI outputs/actual clean readonly0 and72 Git-verified images precede writes; no live intersections. Signed target facts/questions are consolidated into the existing canonical write card; the routing card records README membership. Derived map and target teaching stay within unchanged collection limits. Exact staged canonical CI and normal hooks govern landing.
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — Dependency intake17.0 retains LinkedSpec::Get/return_descriptor/dump_parser_source/native/fresh differences before runtime edits; this leaf defines their separately owned neutral target.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Frozen write-v1 rejects every negative selector; the separate signed model qualifies existing array positions during the post-expression structural walk while preserving all30 old outcomes.
+  - [x] **FIX** — Freeze a separate authority/checker with exact underflow/invalid/kind/gap/guard boundaries, arithmetic, read purity, effects and detachment. Runtime implementation remains17.2–6; portable admission remains17.7.
+  - [x] **ADDRESSED (verified)** — Five actual altered physical model sources exit1 at independent authored controls,122 fixture mutations reject, three changed book sources render but fail, and input3/scope2 controls distinguish actual bypass/restoration.
+  - [x] **NO REGRESSION** — All frozen-v1 outcome tuples and byte/digest identities agree; old write/map neutral checkers, current public-surface and capability consumers pass. Exact canonical receipt and normal hooks govern acceptance.
+  - [x] **LOCKSTEP** — Explicit target-only book table/status/snapshot teaching, canonical Knowledge card/map, source-bound claim, roadmap/index/task/live pointer agree. No backend or generated support is inferred.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.17.1 - freeze signed array selector target contract`
+
+  Canonical format qualification: The first exact staged attempt reports TASK-ACCEPTANCE because its checked LOCKSTEP line describes rollout with the forbidden literal. The canonical task-acceptance-evidence-gate-boundary card already documents this whole-file predicate. Retain the complete original staged binary diff, task/rule/card/producer and actual direct FAIL before wording repair; owned canonical job terminates143 with no PASS credit. Clarify only that checked line as target-only teaching, preserve open backend statuses, and observe the unchanged direct checker PASS. The neutral40-input publication stays live/unchanged before and after; final exact canonical candidate is separate. Evidence: docs/checkpoints/signed-array-contract-admission/.
+
+  Knowledge containment: Canonical attempt2 and the unchanged direct routing checker reject knowledge_cards1351/1350 because the new card adds one file and README also counts. Preserve the complete candidate, all original card bytes/questions, full census and actual failure before edits. Merge all four signed questions/facts into the canonical write card, route seven repetitive historical header rows to accepted Git/whole before image, document collection membership in the existing routing card and regenerate the map. The first containment actor rejects the generator's normal stderr success notice after writing the correct map; a distinct captured idempotent run and source-defined notice qualify that wrapper mistake, without original-channel credit. Actual unchanged routing checker PASS at1350 files; registry/caps and neutral40-input publication remain unchanged. Attempt2 terminates143 with no canonical PASS credit. Evidence: docs/checkpoints/signed-array-contract-admission/knowledge-before.json.gz, knowledge-generation.json.gz and knowledge-result.json.gz.
+
+  Owned custody issue / fix now before landing: artifact-controls-inputs records review.py SHA ea8c35069e44e70b25ca2485a61a75ff311fc46930eca272c96da0d8b1ed567d, but the later retained reader is0cdbc550a60c153ee0128d81d64aef508b31b97c0cd9f95d3b7106c1362f6240. The publisher imports review during the original validator runs. Removing the subsequently added artifact_detail helper/call recovers the exact recorded earlier bytes. Retain that epoch, all imported source modules and the actual recovery/replay producers; reject the later epoch by identity even when its unused added functions leave all control outcomes identical. Whole original40-input publication and actual readonly0 precede changes; canonical attempt3 is deliberately terminated143 without final PASS credit. No authority/model/runtime change or retargeting of old observations. This current leaf owns closure before the next staged canonical run.
+
+  Custody closure: Retain the exact recorded pre-artifact_detail reader (SHA ea8c35069e44e70b25ca2485a61a75ff311fc46930eca272c96da0d8b1ed567d), all four project-source modules, actual recovery/replay producers and complete original40-input state. Both module epochs reproduce20 original validator outcomes each (40 exact rc/stdout/stderr comparisons), while the source-identity oracle rejects the later epoch and restores the original. New default source/custody/floor checks and unchanged publisher pass with48 bounded inputs; old cases, targets, book/model/source-fault and validator observations remain unchanged. Original publication/manifest/claim copies are explicitly unpublished raw history, not retroactively accepted Git. Exact canonical candidate must be rerun after this evidence repair; no final credit from interrupted attempt3. Read-only: docs/checkpoints/signed-array-contract/import_epoch.py and the default publisher. Independent admission reader also verifies the original40-input archive and source reconstruction.
+
+  Owned storage integration defect / fix now: Canonical4 and a distinct direct run reject the exact Python-entrypoint census42/43 in tools/test_tool_project_data_storage.sh. The new signed checker is the sole added entrypoint; existing temporary-owner membership is unchanged. This blocks canonical landing. Retain the complete failed staged candidate, actual producer/source populations, log and direct failure before enrolling it in the census and hostile-root managed-wrapper controls. Evidence: docs/checkpoints/signed-array-contract-admission/storage-before.json.gz. No runtime or neutral authority change and no canonical PASS credit.
+
+  Storage integration closure: The actual unchanged direct oracle rejects42/43; independently accepted9dd5e3555 source bytes identify42 old entrypoints and the signed checker as the sole addition. Enroll43 and explicitly execute the new checker under hostile-root managed-wrapper controls. The full storage oracle exits0; four Python temporary owners and15 shell allocator owners remain unchanged. The source-bound reader rejects missing-checker, incomplete-population and relabelled-failure records. Full original canonical4 log/candidate, all Python/shell source images, actual actors/imports and before/after channels survive; the48-input neutral publication remains unchanged and passes. This is an integration correction, with no new runtime admission. Fresh exact staged canonical CI is required; canonical4 supplies no complete receipt. Original reader: docs/checkpoints/signed-array-contract-admission/storage_inventory.py.
+
+  Owned archive representation issue / fix now: The storage capture retains a190,794,162-byte full staged binary diff inside a191,179,508-byte gzip packet; its documentation input packet recursively copies that stream. These newly generated recovery files need the existing bounded-chunk convention before staging. Preserve exact raw gzip bytes, whole hashes/counts/modes and actual reader behavior; copy/verify/use the chunked representation before removing duplicate originals. Only two exact rehydratable aliases enter .gitignore. No measurement, source epoch or neutral publication is regenerated or reclassified.
+
+  Recovery representation closure: Both raw gzip streams retain exact whole bytes/counts/modes through24 bounded payload chunks and independent physical/payload/whole hashes. Three actually altered indexes reject and restore. Original aliases are moved aside before the unchanged retained reader executes through actual chunk reconstruction; complete output equals the original direct run. Only verified duplicate backups are removed afterward. Two exact ignored aliases are reproducible from committed chunks alone. The existing generic partition reader is retained at its original source identity; no old observation or producer is edited. Current review: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-contract-admission/review_storage.py. New input snapshots hash-gate immutable gzip/part inputs instead of recursively embedding them.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.2`
   Status: `pending`
@@ -640,13 +671,12 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.1` | `pending` | Freeze new signed authority/checker with historical-v1 boundary. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
 | 8 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
 | 9 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
 | 10 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |

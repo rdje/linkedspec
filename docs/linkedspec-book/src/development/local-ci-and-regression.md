@@ -1737,7 +1737,7 @@ The recurring proof is:
 $ bash tools/test_tool_project_data_storage.sh
 ```
 
-It freezes the actual Python temporary-owner, shell allocator and Python-entrypoint inventories. It creates
+It freezes the actual Python temporary-owner, shell allocator and Python-entrypoint inventories. A new Python checker entrypoint must be enrolled after comparing the complete source population with the previous accepted tree; temporary-owner membership is checked separately. The signed-array-selector checker also runs through the managed wrapper with hostile scratch/cache overrides, proving that its imports and output remain on repository storage. It creates
 real retained bytecode, Knowledge Map, fake-mdBook HTML, CLI workspace, and TAP artifacts on the repository device;
 locks both oracle subprocess captures to initialized `TMPDIR`; proves managed claim-test allocation/cleanup and rejects its hostile/symlink scratch; proves hostile Python, Knowledge Map, and mdBook
 destinations are rejected without creation; and works through the outside-cwd routing oracle. The only deliberate

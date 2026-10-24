@@ -18,7 +18,7 @@ answers:
   - how many Python checker entrypoints exist
   - where do TAP and oracle capture artifacts go
   - what old tool data was deleted from private tmp
-date: 2026-10-20
+date: 2026-10-24
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
@@ -33,6 +33,7 @@ evidence_update_2026_09_05_mutation_public_surface: "FUTURE-PARITY-BACKLOG.19.9 
 evidence_update_2026_10_01_closure_structure: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 adds tools/check_language_closure_contract.py through the repository-routed wrapper. Its structural/source/mutation proof reads project files and uses in-memory copies without a temporary allocator. The independently counted entrypoint census advances38-to39; three Python temporary owners and15 shell allocator owners remain unchanged."
 evidence_update_2026_10_02_composed_objectives: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 adds tools/check_composed_objective_contract.py through the managed Python wrapper and freezes40 entrypoints. It reads project files and mutates in-memory observations, without a temporary allocator; three Python temporary owners and15 shell allocator owners remain unchanged. The focused storage oracle explicitly invokes it with hostile external roots and passes."
 evidence_update_2026_10_02_claim_adoption: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 registers the fourth Python temporary owner and42 Python entrypoints after actual canonical inventory rejection. The alternate-index test allocates only in independently validated managed run scratch; its storage mode proves allocation/cleanup and rejects actual hostile and symlink roots. Shell allocator membership is unchanged. Current oracle/card/book/Toolbox descriptions delegate their changing inventory to the executable owner."
+evidence_update_2026_10_24_signed_array: "TYPE-REFERENCE-BOOK.1.2.17.1 enrolls the sole added signed checker after actual census42/43 rejection. The full storage oracle passes with explicit hostile-root wrapper execution; allocator memberships stay unchanged. Source/Git census and three record denials: docs/checkpoints/signed-array-contract-admission/review_storage.py; exact ignored recovery aliases rehydrate from bounded tracked chunks."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Signed-selector17 remains active. P1 CLI17.8 is complete; neutral contract/checker17.1 is next before the owned backend/admission children.
+Signed-selector17 remains active. Neutral target17.1 is complete after CLI17.8; Perl17.2 is next before Rust/Dart/Julia/Lua and independent portable admission.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.17.8: 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits. Whole accepted intake custody precedes writes; original control mistake remains qualified. Exact staged canonical CI/normal hooks govern admission. No signed support is inferred.
+TYPE-REFERENCE-BOOK.1.2.17.1: 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission. Whole prior CLI custody precedes writes; three instrument mistakes remain qualified. Validator source custody retains the original imported reader and40 matching replay outcomes; new48-input publication passes. Storage census enrollment and hostile-root execution pass with unchanged allocator membership. Fresh exact staged canonical CI/normal hooks govern admission.
 
 ## Next Action
 
-From clean Git activate signed contract/checker17.1 with historical-v1 bytes preserved, then owned17.2–7. Deferred last14/with16, grouped assignment19, raw-regex21 and policy20 precede complete inventory/reference work.
+From clean Git activate Perl17.2 under the separate signed authority, preserving frozen-v1 identity and current consumer coverage. Then17.3–7;14/16/19/21/20 and complete inventory/reference work remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
 - `TYPE-REFERENCE-BOOK.1.2.17.0` — 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
 - `REPO-HYGIENE.21` — dated22830 parent/483 Rust incremental; zero removals; metadata4/custody4/input3/book89 marker RED/core PASS; whole accepted12 custody; signed17 next.
@@ -29,7 +30,6 @@ From clean Git activate signed contract/checker17.1 with historical-v1 bytes pre
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
 - `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
-- `TYPE-REFERENCE-BOOK.1.1` — historical flat groups/snapshot limits; native17/five controls; module4; prior208/full39111 + draft355/full60395 retained/replayed; Knowledge8386601/map21249/book89; readonly396/68960; inventory .1.2 next.
 
 ## History
 

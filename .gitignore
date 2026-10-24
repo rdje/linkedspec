@@ -21,3 +21,5 @@ docs/checkpoints/**/__pycache__/
 /docs/checkpoints/type-aggregate-codeblocks/admission/collection/pressure-final-inputs.json.gz
 /docs/checkpoints/type-aggregate-codeblocks/admission/collection/pressure-inputs.json.gz
 /docs/checkpoints/type-aggregate-codeblocks/admission/doc-inputs.json.gz
+/docs/checkpoints/signed-array-contract-admission/storage-before.json.gz
+/docs/checkpoints/signed-array-contract-admission/storage-documentation-before.json.gz
