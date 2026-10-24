@@ -79,6 +79,22 @@ sub _is_scalar_binding_ref {
  return ($type eq 'SCALAR' || $type eq 'REF') ? 1 : 0
 }
 
+sub _read_array_entry {
+ my ($value, $key, $expression) = @_;
+ return undef unless defined $key;
+ # Number literals retain their spelling even when the serialized AST value
+ # has lost its float flag. Extend only integer negatives; preserve old reads.
+ my $integer_literal = ref($expression) ne 'HASH'
+  || ($expression->{kind} // '') ne 'number'
+  || (defined($expression->{source}) && $expression->{source} =~ /\A-?\d+\z/);
+ if ($integer_literal && LinkedSpec::BindingRuntime::_runtime_kind($key) eq 'integer' && $key < 0) {
+  my $position = @$value + $key;
+  return $position >= 0 ? $value->[$position] : undef;
+ }
+ return $value->[$key] if $key =~ /\A\d+\z/;
+ return undef
+}
+
 sub read_path {
  my ($value, $segments) = @_;
  _error('invalid_codeblock_access_path') unless ref($segments) eq 'ARRAY';
@@ -88,8 +104,8 @@ sub read_path {
    $value = $value->{$key};
    next;
   }
-  if (ref($value) eq 'ARRAY' && defined($key) && $key =~ /\A\d+\z/) {
-   $value = $value->[$key];
+  if (ref($value) eq 'ARRAY') {
+   $value = _read_array_entry($value, $key);
    next;
   }
   return undef;
@@ -695,7 +711,7 @@ sub _eval_expr {
   my $value = _read_binding($ctx, $node->{name});
   my $key = _eval_expr($node->{index}, $ctx);
   return undef unless defined $value;
-  return $value->[$key] if ref($value) eq 'ARRAY' && defined($key) && $key =~ /\A\d+\z/;
+  return _read_array_entry($value, $key, $node->{index}) if ref($value) eq 'ARRAY';
   return $value->{$key} if ref($value) eq 'HASH';
   return undef
  }
@@ -706,8 +722,8 @@ sub _eval_expr {
    my $key = ($segment->{kind} // '') eq 'key'
     ? $segment->{value}
     : _eval_expr($segment->{expr}, $ctx);
-   if (ref($value) eq 'ARRAY' && defined($key) && $key =~ /\A\d+\z/) {
-    $value = $value->[$key];
+   if (ref($value) eq 'ARRAY') {
+    $value = _read_array_entry($value, $key, $segment->{expr});
    } elsif (ref($value) eq 'HASH') {
     $value = $value->{$key};
    } else {

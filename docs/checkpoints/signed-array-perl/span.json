@@ -1,0 +1,1 @@
+{"cases":[{"id":"ordinary_gap","source":"Top: /x/\n I { tree=[10]; tree[2] = 99; return(tree) }\n"},{"id":"callable_gap","source":"Top: /x/\n I { tree=[10]; runner={|| tree[2] = 99; return(tree) }; return(runner()) }\n"},{"id":"unicode_gap","source":"Top: /x/\n I { tree={\"é\":[1]}; tree[\"é\"][2] = 99; return(tree) }\n"}]}

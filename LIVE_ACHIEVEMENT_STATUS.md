@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Signed-selector17 remains active. Neutral target17.1 is complete after CLI17.8; Perl17.2 is next before Rust/Dart/Julia/Lua and independent portable admission.
+Perl signed-selector17.2 is complete at the exact canonical commit boundary. P1 scalar literal-kind repair22 is next from clean Git, before Rust17.3; other backends and portable admission remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.17.1: 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission. Whole prior CLI custody precedes writes; three instrument mistakes remain qualified. Validator source custody retains the original imported reader and40 matching replay outcomes; new48-input publication passes. Storage census enrollment and hostile-root execution pass with unchanged allocator membership. Fresh exact staged canonical CI/normal hooks govern admission.
+TYPE-REFERENCE-BOOK.1.2.17.2: 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission. Whole accepted51-image custody precedes changes; all original instrument qualifications remain explicit. Current book/Knowledge and both roadmap companions agree. Exact staged canonical CI, normal hooks and post-commit pointer checks govern landing.
 
 ## Next Action
 
-From clean Git activate Perl17.2 under the separate signed authority, preserving frozen-v1 identity and current consumer coverage. Then17.3–7;14/16/19/21/20 and complete inventory/reference work remain owned.
+From clean Git activate scalar literal-kind repair22, then Rust17.3 and17.4–7 under the same frozen signed authority. Deferred last14/with16, grouped assignment19, raw-regex21, policy20 and complete inventory/reference work remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
 - `TYPE-REFERENCE-BOOK.1.2.17.0` — 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
@@ -29,7 +30,6 @@ From clean Git activate Perl17.2 under the separate signed authority, preserving
 - `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
 - `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
-- `TYPE-REFERENCE-BOOK.1.2.0` — source1300/native14+11/scalar70; private report0/strict RED; graph8387566/book89; whole396/68960 replay; P1 evaluation3/scoped-with4 next.
 
 ## History
 

@@ -53,7 +53,6 @@ sub _selector {
  my $kind = $hint eq 'dynamic' ? _runtime_kind($value) : $hint;
  return ('harray', "".$value, $kind, undef) if $kind eq 'string' && defined($value) && !ref($value);
  if ($kind eq 'integer' && defined($value) && !ref($value) && looks_like_number($value)) {
-  return (undef, $value, $kind, 'negative_integer') if $value < 0;
   return ('array', 0 + $value, $kind, undef) if int($value) == $value;
  }
  return (undef, $value, 'number', 'fractional_number') if $kind eq 'number';
@@ -68,6 +67,31 @@ sub _nested_write_error {
 sub is_nested_write_error {
  my ($value) = @_;
  return ref($value) eq 'LinkedSpec::BindingRuntime::NestedWriteError' ? 1 : 0
+}
+
+sub _invalid_write_selector {
+ my ($identifier, $index, $path, $actual, $reason, $span) = @_;
+ _nested_write_error(
+  code => 'nested_write_segment_invalid',
+  operation => 'nested_write_vivification',
+  binding => $identifier,
+  segment_index => $index,
+  path => _clone_value($path),
+  actual_kind => $actual,
+  reason => $reason,
+  source_span => _clone_value($span),
+  message => "nested write segment $index for binding '$identifier' must evaluate to a string or nonnegative integer; got $actual ($reason)",
+ );
+}
+
+sub _new_write_container {
+ my ($identifier, $selectors, $index, $path) = @_;
+ my $selector = $selectors->[$index];
+ if ($selector->{expected} eq 'array' && $selector->{key} < 0) {
+  _invalid_write_selector($identifier, $index, $path, 'integer', 'negative_integer',
+   $selector->{source_span});
+ }
+ return $selector->{expected} eq 'array' ? [] : {}
 }
 
 sub _receiver_mutation_error {
@@ -203,17 +227,8 @@ sub nested_write {
   die "nested write segment record is invalid\n" unless ref($segment) eq 'HASH';
   my ($expected, $key, $actual, $reason) = _selector($segment);
   if (defined $reason) {
-   _nested_write_error(
-    code => 'nested_write_segment_invalid',
-    operation => 'nested_write_vivification',
-    binding => $identifier,
-    segment_index => $index,
-    path => _clone_value(\@selector_path),
-    actual_kind => $actual,
-    reason => $reason,
-    source_span => _clone_value($segment->{source_span}),
-    message => "nested write segment $index for binding '$identifier' must evaluate to a string or nonnegative integer; got $actual ($reason)",
-   );
+   _invalid_write_selector($identifier, $index, \@selector_path, $actual, $reason,
+    $segment->{source_span});
   }
   push @selectors, { expected => $expected, key => _clone_value($key), source_span => $segment->{source_span} };
   push @selector_path, _clone_value($key);
@@ -221,7 +236,7 @@ sub nested_write {
 
  my $work = $present
   ? _clone_value($binding)
-  : ($selectors[0]{expected} eq 'array' ? [] : {});
+  : _new_write_container($identifier, \@selectors, 0, []);
  my $cursor = $work;
  my @prefix;
  my $rhs_value = _clone_value($rhs);
@@ -249,13 +264,28 @@ sub nested_write {
    if ($last) {
     $cursor->{$key} = _clone_value($rhs_value);
    } else {
-    $cursor->{$key} = $selectors[$index + 1]{expected} eq 'array' ? [] : {}
+    $cursor->{$key} = _new_write_container($identifier, \@selectors, $index + 1, [@prefix, $key])
      unless exists $cursor->{$key};
     $cursor = $cursor->{$key};
    }
   } else {
    my $length = scalar @$cursor;
-   if ($key > $length) {
+   my $position = $key < 0 ? $length + $key : $key;
+   if ($position < 0) {
+    _nested_write_error(
+     code => 'nested_write_array_underflow',
+     operation => 'nested_write_vivification',
+     binding => $identifier,
+     segment_index => $index,
+     path => _clone_value(\@prefix),
+     index => 0 + $key,
+     length => $length,
+     resolved_index => $position,
+     source_span => _clone_value($selector->{source_span}),
+     message => "nested write segment $index for binding '$identifier' cannot select array index $key at length $length (resolved index $position)",
+    );
+   }
+   if ($position > $length) {
     _nested_write_error(
      code => 'nested_write_array_gap',
      operation => 'nested_write_vivification',
@@ -269,14 +299,15 @@ sub nested_write {
     );
    }
    if ($last) {
-    if ($key == $length) {
+    if ($position == $length) {
      push @$cursor, _clone_value($rhs_value);
     } else {
-     $cursor->[$key] = _clone_value($rhs_value);
+     $cursor->[$position] = _clone_value($rhs_value);
     }
    } else {
-    push @$cursor, ($selectors[$index + 1]{expected} eq 'array' ? [] : {}) if $key == $length;
-    $cursor = $cursor->[$key];
+    push @$cursor, _new_write_container($identifier, \@selectors, $index + 1, [@prefix, $key])
+     if $position == $length;
+    $cursor = $cursor->[$position];
    }
   }
   push @prefix, _clone_value($key);

@@ -544,6 +544,8 @@ require_tracked_file lua/test/recursive_observation_contract_test.lua
 require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
+require_tracked_file t/signed_array_selector_perl_contract.t
+require_tracked_file tests/numeric-codeblocks/signed-array-selectors.json
 require_tracked_file t/uniform_binding_contract.t
 require_tracked_file t/actionir_receiver_scalar_copy.t
 require_tracked_file t/actionir_receiver_scalar_copy_probe.pl
@@ -721,6 +723,7 @@ perl -c -Iperl t/root_rule_selection_perl_core.t
 perl -c -Iperl t/root_rule_selection_perl_routes.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
+perl -c -Iperl t/signed_array_selector_perl_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
 perl -c -Iperl t/semantic_index_perl_foundation.t
 perl -c -Iperl t/semantic_index_perl_static_projection.t
@@ -1062,6 +1065,9 @@ PERL5LIB= prove -Iperl t/uniform_binding_contract.t
 
 log "running Perl callable-codeblock literal contract fixture"
 PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t
+
+log "running Perl signed-array selector contract and public route fixture"
+PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t
 
 log "running Perl deferred push composition and caller-identity fixture"
 PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t

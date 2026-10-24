@@ -17,11 +17,14 @@ answers:
   - "how does a deferred Perl assignment preserve caller null presence"
   - "why does a deferred with call raise unknown_helper"
   - "do ordinary and deferred Perl negative array reads currently agree"
-date: "2026-10-23"
+  - "which Perl readers govern negative array indexes"
+  - "why do whole floats assigned inside Perl callbacks become integer indexes"
+  - "why do deferred boolean literals become integer zero and one"
+date: "2026-10-24"
 status: current on the Perl reference under FUTURE-PARITY-BACKLOG.19.2.1; portable capability admitted under .19.7
 tags: [dsl, actionir, assignment, autovivification, diagnostics, perl, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.2.1 and frozen v1 fixture; deferred extension TYPE-REFERENCE-BOOK.1.2.12. Prior card: git show 24e9c72a31b7eb31ce94b09beab9655ae85378cb:docs/knowledge/write-vivification-perl-reference.md."
-reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/signed-array-perl/publish.py; current: prove -Iperl t/signed_array_selector_perl_contract.t; literal-kind intake: bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-number-intake/read.py. Perl scope only."
 ---
 
 # Perl reference write vivification
@@ -35,8 +38,8 @@ document[section_name][0]["title"] = title
 
 Each bracket evaluates once left-to-right, then the RHS. Strings select harrays;
 nonnegative integers select arrays. The runtime snapshots post-expression state,
-builds on an isolated copy, and infers absent roots/intermediates from selector
-kinds. Bound null/wrong kinds and gaps fail; arrays replace or append at length.
+builds on an isolated copy, and infers absent roots/intermediates only for
+eligible string/nonnegative selectors. Bound null/wrong kinds and gaps fail; arrays replace or append at length.
 
 The rule/function lowering owns an invocation-local presence map because Perl `undef` alone cannot distinguish an
 unassigned lexical from an explicitly assigned null. User-function parameters begin present, including an `undef`
@@ -85,6 +88,32 @@ Other backends awaited .19.3-.6; the prior Git card above retains full scope.
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[uniform-binding-neutral-contract]], [[write-map-leaves-neutral-composition]], and ADR `0036`.
 
-## Signed-selector intake (October23)
+## Signed array selectors on Perl (October24)
 
-Ordinary Perl reads already select existing tail entries, including dynamic integer selectors, and preserve empty/underflow state. Callable array reads require digit-only indexes and return null for negatives; BindingRuntime rejects negative write selectors. Intake17.0 retains descriptor/Get-dump/fresh observations, the original sources and finite oracle REDs. Canonical child17.2 owns the requested extension; no signed write or portable admission is inferred.
+TYPE-REFERENCE-BOOK.1.2.17.2 extends ordinary/deferred native and emitted Perl
+execution with existing-array L+index reads/writes. BindingRuntime admits
+negative integers globally, rejects missing required arrays, normalizes
+against each post-expression array and reports exact underflow fields.
+Raw authored prefixes, old diagnostics, effects, guard identity and detached
+copies remain governed by the frozen signed/v1 authorities.
+
+CodeblockRuntime::_read_array_entry serves indexed_var, nested_access and
+read_path. Literal number spelling distinguishes -1 from serialized -1.0;
+dynamic NV/string controls and ordinary bare-binding read coercions stay
+separate. The callable-result form pick()[-1].count() now selects the tail
+but retains compatibility marker1; no pure-source classification is added.
+The permanent consumer executes all33 frozen writes through real deferred
+callbacks, plus authored native/emitted programs and detachment controls;
+tools/run_ci_local.sh enrolls this Perl-only regression consumer.
+Historical before/after packets and two qualified infix-oracle mistakes
+remain under docs/checkpoints/signed-array-perl/. Other backend/portable
+admission and complete spelling inventory remain separately owned.
+
+Owned22: accepted/current native and emitted byte-shadow probes show
+CodeblockRuntime::_eval_expr erases whole-float and boolean literal kinds
+before return/assignment: 0+serialized number yields IV; native1/0 loses
+boolean identity. Compiled argument twins retain NV/boolean kinds. This
+pre-existing producer defect precedes integer selection. Repair22 is P1
+after clean17.2, before Rust17.3. Preliminary source/flags/INC review:
+docs/checkpoints/perl-literal-number-intake/read.py under the project
+Python wrapper. No repair/admission or historical environment replay.

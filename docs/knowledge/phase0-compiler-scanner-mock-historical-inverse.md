@@ -8,7 +8,8 @@ answers:
   - "does historical Phase0 normalization allow unrelated source edits"
   - "how are numeric Phase0 value regressions reconciled with historical evidence"
   - "how are drop key Phase0 regressions reconciled with historical evidence"
-date: 2026-10-20
+  - "why does adding a Perl CI test fail the historical governance registration audit"
+date: 2026-10-24
 status: current
 tags: [historical-audit, phase0, source-evolution, compiler, claims]
 evidence: "Scanner five source controls/60 dated denials; evaluated368+210, numeric578+66, drop644+6. Archive134/84613241/22 and zero log/write escapes; auditor faults/table identity restore."
@@ -43,3 +44,9 @@ byte-identity denial restore. Archive134/84613241 bytes,22 recovery controls and
 zero original-log/tracked writes stay exact. Reverify uses the composed producer,
 not old runtime. The stale-route RED and whole first drop draft/readonly0 survive
 under docs/checkpoints/type-drop-generated/admission/.
+
+CI17.2 registers exact signed input/syntax/execution insertions in
+verify_objectives.py. Strip these first to restore the earlier PUSH
+adjacency and original CI hash. Missing/duplicate/disabled registrations
+still reject. Proof: docs/checkpoints/signed-array-perl-ci/read.py.
+Its book containment removes12 empty heading separators; all90 output files stay byte/mode-identical.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / signed Perl17.2 next
+- Status: `active` / scalar literal-kind22 next; Rust17.3 follows
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-24`
@@ -105,7 +105,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.17`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.16`, `TYPE-REFERENCE-BOOK.1.2.19`, `TYPE-REFERENCE-BOOK.1.2.21`, `TYPE-REFERENCE-BOOK.1.2.20`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.17`, `TYPE-REFERENCE-BOOK.1.2.22`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.16`, `TYPE-REFERENCE-BOOK.1.2.19`, `TYPE-REFERENCE-BOOK.1.2.21`, `TYPE-REFERENCE-BOOK.1.2.20`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -465,17 +465,68 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Recovery representation closure: Both raw gzip streams retain exact whole bytes/counts/modes through24 bounded payload chunks and independent physical/payload/whole hashes. Three actually altered indexes reject and restore. Original aliases are moved aside before the unchanged retained reader executes through actual chunk reconstruction; complete output equals the original direct run. Only verified duplicate backups are removed afterward. Two exact ignored aliases are reproducible from committed chunks alone. The existing generic partition reader is retained at its original source identity; no old observation or producer is edited. Current review: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-contract-admission/review_storage.py. New input snapshots hash-gate immutable gzip/part inputs instead of recursively embedding them.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Implement signed ordinary/deferred reads/writes on Perl.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.1`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Owned paths: perl/LinkedSpec/BindingRuntime.pm; perl/LinkedSpec/CodeblockRuntime.pm; t/signed_array_selector_perl_contract.t; tests/numeric-codeblocks/signed-array-selectors.json; tools/run_ci_local.sh (register the focused Perl regression consumer); tests/language-readiness/verify_objectives.py (exact owned CI-registration inverse/denials only); docs/checkpoints/signed-array-perl/; docs/checkpoints/perl-literal-number-intake/ (late numeric-kind issue custody/intake only); docs/checkpoints/signed-array-perl-ci/ (canonical2 custody and bounded governance registration); docs/knowledge/write-vivification-perl-reference.md; docs/knowledge/phase0-compiler-scanner-mock-historical-inverse.md; current signed-selector and development CI book sections and new ordinary/callable write examples; normal task/roadmap/continuity including ROADMAP_V2.md. Frozen authorities/checkers, prior proof and other runtimes remain unchanged.
+  Verification tier: `canonical`
+  Focused checks: Public LinkedSpec::Get/return_descriptor/dump_parser_source/native and independently emitted execution before/after; frozen signed and historical-v1 fixtures; integer/string/coercion/read-purity, bounds, effects/order, identity, detachment, copied parameters and exact diagnostic spans; actual SUT inverse/source controls; direct Perl consumers, complete book, Knowledge/history/storage/whitespace and normal doctrines.
+  Canonical trigger: Public Perl ordinary/deferred signed-selector semantics; exact staged canonical receipt and normal hooks before landing.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.2.json`
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+
+  Activation: Clean ed658fb839184ddaad2c7ebc8566616024a0fd18 after17.1 exact canonical/all10 hooks/post-pointer/receipt promotion/brief0. The complete checked-live census has no planned runtime/test/book/card intersections. Retain the accepted51-image neutral publication and actual read-only success before production edits. Activation changes task metadata first; source-bound baseline/custody follows before runtime changes. Use source epochs with whole mutable overlays and immutable byte/mode identities, without recursively embedding old archives.
+
+  Before-change mechanism / owned read-path gap: At unchanged ed658fb83 runtime sources, nine public sources run through separate descriptor/native/generated processes. Bare-binding negative reads work; callable reads return null. pick()[-1].count() returns0 while the positive twin returns1; both native dump and emitted source explicitly invoke CodeblockRuntime::read_path. This third array reader shares the digit-only restriction with indexed_var/nested_access. Child17.2 owns all three read routes now. The callable-result form retains its pre-existing raw-dependency marker1, with no fallback count; repairing its negative selection does not claim a new pure-source classification. Inventory1.2.1 must preserve that distinction. Float negative selectors remain null with NV-only return flags; dynamic-string array and harray-collision behaviors are separate preserved controls. Inputs/channels: docs/checkpoints/signed-array-perl/explore-inputs.json.gz and explore-runs.json.gz. Read-only: review_explore.py under the project Python wrapper. No production source has changed at this baseline.
+
+  Regression enrollment: Extend ownership to the permanent public-source fixture and exact Perl CI consumer registration. A complete additional live-claim census reports no intersections for tools/run_ci_local.sh or tests/numeric-codeblocks/signed-array-selectors.json before either edit. The new test uses in-process emitted packages and introduces no new temporary allocator or Python tool entrypoint.
+
+  Instrument qualification: The original120-source before/after epochs and full permanent channels remain unchanged. The first implementation meets118 public targets per route and all33 projected writes,14 shared-path reads,12 arithmetic and detachment controls. Two effect-oracle programs mistakenly use unsupported infix trail*10+n; LinkedSpec::Get dump retains raw_perl nodes and unsupported_codeblock_actionir before the write. Qualify only those instrument sources to established cat(trail,"n") calls and independently authored string1234, retaining original bytes/channels and distinct corrected epochs. They earn no product RED. No additional language/arithmetic repair is claimed.
+
+  Verification interruption qualification: A coordinator edit to the newly added read-only reviewer overlaps the original nested-reader restoration epoch. The conservative all-input unchanged check correctly rejects that run; an independent complete mismatch census identifies only review.py, and both runtime sources restore exactly in finally. Preserve the whole original actor/epochs/channels and both reviewer versions; do not count the partial suite as completed proof. A distinct verified-prefixed entire eight-variant actor runs next without concurrent edits. No product defect or new source-fault credit is inferred from this interruption.
+
+  Actual implementation proof: Corrected120 authored sources pass native/emitted, with zero fallback and unchanged four compatibility marker1 cases. Nine direct suites pass781 top-level tests; all33 frozen writes execute actual deferred callbacks/guards and detachment probes. The distinct full eight-variant physical run catches inverse55 per route, each reader, literal-float widening, wrong underflow fields, missing-array creation and shared binding/result roots; every restored oracle passes. Seven variants fail public targets; aliasing is caught by the independent host-mutation consumer. Complete actual rerun producer bytes precede commands in its whole epoch; a bridge resolves its inherited convenience field pointing to the original controller, without replacing any packet/observation. Book synchronization/render and canonical CI follow.
+
+  Completion: 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission. Read-only publication validates the dated complete source/input population; exact staged canonical receipt and normal hooks govern this commit. No optional whole-backend matrices or portable signed admission are inferred.
+
+  Owned continuity defect / verified repair: At accepted ed65, ROADMAP_V2.md still points to hygiene21 (last edit92c98fb3) while ROADMAP.md names17.1. This can misdirect a resumed session. The complete additional live-claim census precedes writes and has no intersections. Synchronize both bounded current paragraphs to verified Perl17.2/next Rust17.3 in this leaf; roadmap-census.json.gz retains both original files, exact Git history query and all live records.
+
+  Review qualification: Sorted-key packet transport reorders map-field failure reasons. The first reader's order-sensitive comparison rejects; every case/reason membership and multiplicity is independently identical across all eight variants. Preserve the original reader/log and normalize only derived field-name reports. Actual outcomes, typed diagnostics and authored effect/case order are unchanged.
+
+  Acceptance checklist:
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/dump_parser_source retains original53 genuine public signed failures per route, plus separately qualified two invalid instrument sources.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — BindingRuntime.pm::_selector rejects negative writes; CodeblockRuntime.pm::indexed_var/nested_access/read_path use digit-only reads. Actual Get dump names the callable-result reader; serialized number spelling explains the float boundary.
+  - [x] **FIX** — Shared bounded callable lookup and encountered-array write normalization preserve missing/underflow distinctions and all earlier evaluation/copy/guard interfaces; enroll the permanent Perl consumer.
+  - [x] **ADDRESSED (verified)** — Corrected120 native/emitted GREEN, actual inverse55 RED per route, eight physical variants and exact restored controls; all33 frozen writes execute real deferred callbacks and host detachment mutations.
+  - [x] **NO REGRESSION** — Ten focused suites/789 top-level TAP pass, including old write/map contracts; exact staged canonical Phase0/local-CI receipt is required at commit.
+  - [x] **LOCKSTEP** — Book93/four native-emitted examples/three source denials and executed wrong selector, Knowledge/history/live pointers and both roadmaps agree; frozen authority bytes remain unchanged.
+
+  Late issue intake: Current/accepted byte-shadow native/emitted observations prove pre-existing whole-float and boolean literal kind erasure in _eval_expr before selectors. Own P1 repair22 immediately after this clean commit, before Rust17.3. Preserve the sealed118-input finite signed publication unchanged. Canonical1 is deliberately superseded143; exact original129-file candidate/fingerprint and full actual log are retained in perl-literal-number-intake/candidate-before.json.gz. This intake admits no producer repair; child22 owns fresh source-bound signoff. Current book now states the limitation.
+
+  Owned CI enrollment defect / fix now: Canonical2 passes all10 doctrines, header176, syntax, capability/closure/composed checks, then exits1 in the isolated historical recovery producer. The new signed consumer sits between the callable fixture and its exact protected PUSH_CI_INSERTIONS suffix; verify_objectives.py:525 correctly rejects the missing adjacency before any historical hash comparison. Extend only its named owned insertion inverse and distinguishing registration denials, stripping the later signed addition first so every earlier anchor and historical byte/hash remains exact. A complete additional live-claim census has no intersections for the auditor, canonical fact card or CI book page before edits. Preserve the exact143-file candidate/fingerprint, whole actual log, original auditor and direct before rejection. No gate or historical observation is weakened/refreshed; fresh canonical proof remains required.
+
+  CI enrollment closure: Three exact owned insertion pairs cover tracked test/fixture inputs, syntax and execution. The unchanged full isolated recovery producer passes134 inputs/84613241 bytes/22 recovery controls and690 evolution denials. Independent14 CI inputs admit only healthy; inverse verifier source rejects healthy, bypass source admits13 bad inputs, and actual restored source rejects all13 again. Original canonical2 candidate143/fingerprint179d413b1 and full exit1 log remain retained. The sealed118-input signed publication is unchanged; fresh exact canonical proof and normal hooks govern landing.
+
+  Owned book pressure / fix now: Canonical3 correctly rejects the newly expanded CI chapter2057/2048 lines and public-reference aggregate50006/50000. Stop/join that candidate with exit143 and no canonical credit; preserve its exact161-file staged images/fingerprintd2056c827 and whole actual log before edits. Remove only redundant blank separators before headings, outside code fences, and require complete before/after rendered-page byte equality plus an effective changed-heading control before writing the candidate. Existing route, content, examples, and line/byte ceilings remain unchanged. Run the focused README routing-pressure check before starting fresh canonical CI.
+
+  Pressure closure: Twelve empty heading separators are removed after actual complete renders prove all90 files/21277844 bytes and modes identical; a changed-heading source produces different output. Only then write the candidate. Chapter2045 and public-reference49994 fit unchanged2048/50000 ceilings. Full original output is retained once, the after manifest matches it exactly, and the original failed161-file candidate/log stay recoverable. Read-only signed-array-perl-ci/read.py verifies the actual source/control/output records; no semantic text, example, route or policy-cap change.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.22`
+  Status: `pending`
+  Goal: Preserve authored whole-float and boolean literal kinds through deferred evaluation and assignment before continuing signed backend work.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.2`
+  Planned tier: `canonical`
+  Claim verification: none: Pending repair; preliminary public-tool observations and superseded candidate custody belong to17.2 intake. Source-bound before/after/falsification admission belongs here after clean activation.
+  Reproduce: With items=[10,20,30], cb={|| chosen=-1.0; return([items[chosen],chosen]) }; return(cb()) returns [30,-1] with integer-only B flags. Direct callable items[-1.0] and passing -1.0 as a compiled argument both return null. Get dump retains source -1.0 with serialized numeric value -1; CodeblockRuntime.pm::_eval_expr number uses 0+value and loses authored floating kind before assignment.
+  Impact: Whole-float and boolean literals inside deferred bodies lose kind before assignment, return or container construction. Assigned1.0/false can incorrectly enter integer-only write selectors, while literal typed-write twins reject. Assigned-1.0 becomes an integer before negative selection. The signed runtime-kind contract is implemented; the preceding scalar producers need separate repair and broader numeric/boolean compatibility proof.
+  Root-cause verification: Sixteen exact public sources complete descriptor/current native/emitted and accepted-runtime-byte-shadow native/emitted routes. Accepted ed65 sources already return integral-float literals as integer-only scalars and boolean literals as integer0/1; compiled argument twins preserve NV/boolean kinds. _eval_expr number uses0+serialized value and boolean uses native1/0. Actual INC confirms preloaded accepted sources; no historical environment reconstruction is claimed. Intake: docs/checkpoints/perl-literal-number-intake/read.py. No producer repair/admission yet.
+  Schedule: P1 immediately after clean17.2 commit and before Rust17.3. Do not pivot while17.2 is dirty. Preserve the sealed118-input signed publication and every original outcome; repair and admit this producer in a distinct committed slice.
+  Acceptance: Preserve supported integer/float/boolean source kind through deferred literal values, assignments, copied parameters/containers and helper operands; independently test negative selectors, scalar flags, direct literal and compiled-argument controls. Keep general numeric values/ranges, string/boolean/null, effects/copy/guard and frozen old/signed contracts intact. Add distinguishing actual producer inverse/restoration, current book teaching and exact canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.3`
   Status: `pending`
   Goal: Implement the same policy through Rust native/generated interfaces.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.2`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.2`, `TYPE-REFERENCE-BOOK.1.2.22`
   Planned tier: `canonical`
   Claim verification: none: Pending transition child; declare source-bound measurements before activation.
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
@@ -671,23 +722,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.2` | `pending` | Perl ordinary/deferred implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.22` | `pending` | P1 deferred scalar literal kinds before further signed backends. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 13 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 14 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 15 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
-| 16 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
-| 17 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 18 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 14 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
+| 16 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 17 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
 
 ## Decisions
 

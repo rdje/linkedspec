@@ -107,6 +107,17 @@ PUSH_CI_INSERTIONS = (
      b'\nlog "running Perl deferred push composition and caller-identity fixture"\n'
      b"PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t\n"),
 )
+SIGNED_ARRAY_SELECTOR_OWNER = "TYPE-REFERENCE-BOOK.1.2.17.2"
+SIGNED_ARRAY_SELECTOR_CI_INSERTIONS = (
+    (b"require_tracked_file t/callable_codeblock_literal_contract.t\n",
+     b"require_tracked_file t/signed_array_selector_perl_contract.t\n"
+     b"require_tracked_file tests/numeric-codeblocks/signed-array-selectors.json\n"),
+    (b"perl -c -Iperl t/callable_codeblock_literal_contract.t\n",
+     b"perl -c -Iperl t/signed_array_selector_perl_contract.t\n"),
+    (b"PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t\n",
+     b'\nlog "running Perl signed-array selector contract and public route fixture"\n'
+     b"PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t\n"),
+)
 NORMALIZATION_CI_INSERTIONS = (
     (b"require_tracked_file tests/language-readiness/composed/normalization.spec\n",
      b"require_tracked_file tests/language-readiness/composed/normalization-calls.spec\n"
@@ -520,8 +531,19 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in (PRIVATE_FACTORY_FIXTURE_CI_INSERTIONS + KNOWLEDGE_HEADER_GATE_CI_INSERTIONS + SCALAR_RECEIVER_COPY_CI_INSERTIONS + RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
-                              + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
+    insertions = (
+        SIGNED_ARRAY_SELECTOR_CI_INSERTIONS
+        + PRIVATE_FACTORY_FIXTURE_CI_INSERTIONS
+        + KNOWLEDGE_HEADER_GATE_CI_INSERTIONS
+        + SCALAR_RECEIVER_COPY_CI_INSERTIONS
+        + RAW_READINESS_CI_INSERTIONS
+        + ARTIFACT_CI_INSERTIONS
+        + NORMALIZATION_CI_INSERTIONS
+        + PUSH_CI_INSERTIONS
+        + COMPOSED_CI_INSERTIONS
+        + CI_INSERTIONS
+    )
+    for anchor, insertion in insertions:
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
         normalized = normalized.replace(anchor + insertion, anchor, 1)
@@ -537,6 +559,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             "scalar_receiver_copy_owner": SCALAR_RECEIVER_COPY_OWNER,
             "knowledge_header_gate_owner": KNOWLEDGE_HEADER_GATE_OWNER,
             "private_factory_fixture_owner": PRIVATE_FACTORY_FIXTURE_OWNER,
+            "signed_array_selector_owner": SIGNED_ARRAY_SELECTOR_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -1129,6 +1152,20 @@ def falsify(report):
                                 b' true "$private_factory_input"', 1),
                 current.replace(b" t/actionir_default_object_capture.t\n",
                                 b" t/other_private_fixture.t\n", 1),
+            )
+            altered += tuple(current.replace(insertion, b"", 1)
+                             for _, insertion in SIGNED_ARRAY_SELECTOR_CI_INSERTIONS)
+            altered += tuple(current.replace(insertion, insertion * 2, 1)
+                             for _, insertion in SIGNED_ARRAY_SELECTOR_CI_INSERTIONS)
+            altered += (
+                current.replace(b"PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t\n",
+                                b"PERL5LIB= true t/signed_array_selector_perl_contract.t\n", 1),
+                current.replace(b"perl -c -Iperl t/signed_array_selector_perl_contract.t\n",
+                                b"true t/signed_array_selector_perl_contract.t\n", 1),
+                current.replace(b"require_tracked_file t/signed_array_selector_perl_contract.t\n",
+                                b"true t/signed_array_selector_perl_contract.t\n", 1),
+                current.replace(b"require_tracked_file tests/numeric-codeblocks/signed-array-selectors.json\n",
+                                b"require_tracked_file tests/numeric-codeblocks/missing-signed-array-selectors.json\n", 1),
             )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")

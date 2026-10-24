@@ -9,7 +9,6 @@ This is not incidental. LinkedSpec is being refactored while it remains a workin
 > `tools/run_ci_local.sh`). A backend in another language has its own build/test gate,
 > but every backend must pass the shared, language-neutral test corpus that defines
 > `.spec` compliance (see [Backend Handoff](../appendix/backend-handoff.md)).
-
 ## Main local gate
 
 Run:
@@ -19,7 +18,6 @@ bash tools/run_ci_local.sh
 ```
 
 This is the canonical regression gate for local development. For snippet-level lowering evidence, see [Inspecting `.spec` Code Generation](codegen-inspector.md).
-
 ## Verification tiers
 
 The canonical gate is deliberately not the default after every ordinary commit. LinkedSpec uses two tiers so
@@ -47,7 +45,6 @@ it matches, otherwise it runs the complete gate once.
 This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks
 remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a
 claim of literal impossibility.
-
 ### README and routed-document pressure
 
 The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed.
@@ -70,7 +67,6 @@ remain historical facts rather than reusable growth allowances.
 
 Historical admission and unchanged-closeout evidence, including exact commits and runtime results,
 lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`. See [accepted decision authority](documentation-workflow.md#accepted-decision-authority) for the Status rule and examples.
-
 #### Bounded views over exact history
 
 ADR `0066` defines bounded views over verified stores for live status, task evidence and the two author histories.
@@ -142,7 +138,6 @@ metadata doctrine composes both registered partition validators and the reposito
 The tools derive the repository root from their script location, so their behavior is independent of the
 caller's working directory. Archives and task history are positive historical evidence, never current-state
 denials or append targets.
-
 ### Neutral typed source-location contract
 
 The default gate requires and runs the backend-neutral typed source-location checker through repository-managed
@@ -159,7 +154,6 @@ recursive and zero/one/two-regex structural cases; and rejects all 189 registere
 In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
 that same proof pass. A RED result is therefore planned evidence, not a claim that the committed project is broken.
-
 ### Neutral progressive span-dispatch contract
 
 Canonical CI always runs the repository-routed neutral checker plus every admitted private runtime consumer; the shared Lua carrier runs once per ABI, while its separate authority proof remains focused and dormant:
@@ -632,7 +626,6 @@ The GitHub workflow is intentionally kept as a thin wrapper around the same comm
 ```
 
 That means local validation and hosted validation are intentionally not two separate systems when hosted CI is enabled.
-
 ## Primary CLI conformance fixtures
 
 The primary command has a separate backend-neutral, byte-exact fixture runner:
@@ -871,7 +864,6 @@ on the full rerun.
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.
-
 ## Five-Backend Primary CLI Matrix
 
 Run the complete exact-interface proof from the repository root:
@@ -922,7 +914,6 @@ bash tools/check_punctuation_light_five_backend.sh
 # or as an optional local-CI leg
 LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1 bash tools/run_ci_local.sh
 ```
-
 ## Capability Census Gate
 
 The exact CLI and interpreter corpus are necessary but do not enumerate every public API and mdBook contract.
@@ -978,7 +969,6 @@ recurrence is current, but it does not convert the dedicated intrinsic into a pu
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
 typed-source contract without inflating the common 250-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.
-
 ## Focused Rust Gate
 
 Run the repo-owned Rust gate from the repository root:
@@ -1012,7 +1002,6 @@ The canonical shared gate does not require a Rust toolchain by default. Opt in o
 ```bash
 LINKEDSPEC_RUN_RUST=1 bash tools/run_ci_local.sh
 ```
-
 ### Rust mutation testing (planned)
 
 ADR `0039` adopts `cargo-mutants` as a separate test-strength tool, not another commit gate. Mutation execution
@@ -1026,7 +1015,6 @@ will receive a separate disposition; true test gaps gain behavior-focused tests.
 table is the initial narrow exclusion because its generator, exact-byte regeneration, neutral contract, and
 runtime proof already own correctness. `RUST-MUTATION-TESTING` owns the future safe manual command and pilot. No
 mutation command is admitted yet, and no mutation score is currently claimed.
-
 ## Optional Dart Gate
 
 The Dart backend has its own focused local gate:
@@ -1198,6 +1186,16 @@ recursive top-rule, structural child-push, statement mutation, and public-parser
 independent mechanism. `.6.2.4.6` now permanently runs that full window and locks its counts, endpoints, zero
 failures, and exact outputs. Julia has since closed the routed top-level function fixtures under `.6.2.5` and the
 complete 99/99 manifest gate under `.6.3`; `.6.4` has since added the focused gate and optional shared-CI wiring.
+
+### Perl signed-array selector regression
+
+Canonical CI requires the signed-selector consumer and its public JSON fixture to be tracked, syntax-checks the consumer, and executes its frozen/ordinary/callable native and emitted cases:
+
+```bash
+prove -Iperl t/signed_array_selector_perl_contract.t
+```
+
+The historical objective auditor records exact input, syntax and execution insertions for this registration. It removes that later insertion before the earlier callable/push registration, then requires the original historical CI hash. Missing, duplicated, disabled or relocated commands and changed fixture inputs reject; historical observations and hashes stay unchanged. This is a Perl regression extension; portable signed-selector admission remains separate.
 
 ### Callable-codeblock five-backend recurring proof
 
