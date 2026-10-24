@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-24 — REPO-HYGIENE.22 — dated artifact retention review
+
+Dated 2026-10-24T20:34:23.372982+00:00 review retains 23966 parent candidates/23129277530 bytes and six explicit Rust locations; zero artifact removals. Independent population/lstat, traversal controls and five metadata denials pass; book95/actual missing-marker RED and three actual input denials/bypass/restoration pass. Actual final reader channels and exact input-control source recovery remain retained under docs/checkpoints/REPO-HYGIENE.22/. All caches and verification evidence stay available; metadata grants no deletion authority or runtime admission.
+
+Updated the latest-only cleanup record, current Knowledge header and rendered maintenance example. Corrected the duplicate archival frontier display rank introduced by planning1. Focused book/Perl syntax, history/memory/whitespace and normal doctrine hooks govern landing; Rust signed-selector17.3 is next.
+
 ## 2026-10-24 — OPENAI-TOOL-API.1 — deferred tools and UI plan
 
 Recorded the director's DBIQNP request as an indexed, deferred LinkedSpec task-tree: structured tools driven by ChatGPT/Codex, a grammar/sample/result/error/trace front end in ChatGPT, and separate verification of the selected Codex client's UI. The plan owns foundation decisions, contracts, execution hosting, client connections, UI, proof and delivery. Existing native semantic-only MCP authority remains explicit; no implementation or integration admission is claimed.

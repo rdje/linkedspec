@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-24 — REPO-HYGIENE.22 — independent population and dated metadata
+
+The retained os.walk census is checked against a separate scandir population and per-file lstat. A coherent omitted candidate can preserve aggregate and selected-row agreement; its actual corrupted-record command now rejects at the independent population check. Complete bounded producer/wrapper sources, actual Gitlink enumeration and dated metadata are retained. Artifact contents are outside this metadata question and are not classified as disposable.
+
+The actual input-control epoch remains byte/full-mode recoverable; its sole faulty publisher is retained and exactly restored. Supplied book sources/configuration/includes and actual healthy/missing-example renders retain the maintenance teaching. Readers check dated proof without recapturing current filesystem state. Old prefixes/claims stay unchanged; the current artifact fact header points to this review without growing its historical body.
+
 ## 2026-10-24 — OPENAI-TOOL-API.1 — preserve execution and host boundaries
 
 The future conversational interface is a structured tool API: the assistant interprets the conversation while LinkedSpec receives explicit operations. The requested ChatGPT UI is a future front end to those operations. Shared tool packaging does not establish embedded UI support in the selected Codex client; that has its own compatibility leaf.

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `active` / due review .22 queued
+- Status: `completed` / retained review .22 verified
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-24` (queue due .22 after the requested API planning intake)
+- Last updated: `2026-10-24` (`REPO-HYGIENE.22`: due retained review before Rust17.3)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,7 +38,7 @@ the durable handoff state current.
 ## Task Tree
 
 - ID: `REPO-HYGIENE`
-  Status: `active`
+  Status: `done`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
   Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`, `REPO-HYGIENE.21`, `REPO-HYGIENE.22`
 
@@ -433,38 +433,51 @@ the durable handoff state current.
   Commit subject: `REPO-HYGIENE.21 - review retained project artifacts`.
 
 - ID: `REPO-HYGIENE.22`
-  Status: `pending`
+  Status: `done`
   Goal: Perform the next due same-volume artifact review after API planning1, then resume Rust signed-selector17.3.
-  Schedule: The latest cleanup record is dated2026-10-23T16:47:31Z; the24-hour boundary passed during literal-kind22 verification. Activate only after the clean API planning commit.
-  Planned tier: focused maintenance; declare exact verification fields and any measured claim at activation.
+  Schedule: At activation the prior cleanup record was dated2026-10-23T16:47:31Z; the24-hour boundary passed during literal-kind22 verification. Activation followed the clean API planning commit.
+  Activation: Clean `d6446ce991c6141838a9fa80396e3890bce274e0`; API planning1 passed all10 normal hooks and post-pointer checks, brief0 and clean Git verified. No required job remains from the preceding leaf.
+  Owned paths: docs/checkpoints/REPO-HYGIENE.22/; docs/claims/REPO-HYGIENE.22.json; latest cleanup record; this tree, index, roadmaps and live continuity; current artifact Knowledge header and maintenance book example. Previous sealed proofs and all runtime/gate/storage policy stay unchanged.
+  Verification tier: `focused`
+  Focused checks: Non-following parent/six-location Rust census, repeated actual channels and independent per-file/population metadata; traversal and corrupted-record RED controls; retained producer/input identities; book rendering and focused Perl syntax; history, memory, whitespace and all normal doctrine hooks.
+  Canonical trigger: none: Dated maintenance and retention only; no runtime, public contract, dependency, storage policy or gate change.
+  Claim verification: `docs/claims/REPO-HYGIENE.22.json`
+  Acceptance Checklist
+  - [x] REPRODUCE / ISSUE — The latest October23 cleanup record is over24h old.
+  - [x] ROOT CAUSE (WHY + WHERE) — Daily review is due; inspect metadata through the admitted non-following census boundary.
+  - [x] FIX — Complete the dated review and retain every unproved deletion target.
+  - [x] ADDRESSED (verified) — Preserve actual channels, independent metadata and effective RED controls with complete bounded producer inputs.
+  - [x] NO REGRESSION — Focused book/syntax/provenance and normal doctrines; prior sealed proofs remain unchanged.
+  - [x] LOCKSTEP — Latest record, book, current pointers and clean commit workflow agree before Rust17.3.
   Acceptance: Read existing hygiene/knowledge authorities; guard every other Git repository/submodule, symlink, volume and active process boundary. Review parent artifacts and documented Rust/Dart/Julia/Lua locations. Delete only exact proved-disposable project-owned targets, preserving every proof, required log and useful cache otherwise. Capture actual disposition and independent controls before claims; overwrite the latest-only cleanup record after completion. Update book/live pointers and commit before Rust17.3. No recovery/purge or global-cache deletion is authorized by this queue entry.
-  Verification: pending
-  Commit: pending
+  Verification: Dated 2026-10-24T20:34:23.372982+00:00 review retains 23966 parent candidates/23129277530 bytes and six explicit Rust locations; zero artifact removals. Independent population/lstat, traversal controls and five metadata denials pass; book95/actual missing-marker RED and three actual input denials/bypass/restoration pass. Actual final reader channels and exact34-input control epoch are retained; current book render and Perl syntax PASS. History/memory/whitespace and normal doctrine hooks govern the focused landing. Prior sealed proofs remain unchanged.
+  Commit: `REPO-HYGIENE.22 - review retained artifacts with independent population checks`.
+  Tracking repair: API planning1 inserted an archival frontier row with order1 already used by .20. Reproduce in the prior committed Current Frontier table; impact is ambiguous display ordering only. Renumber the existing rows in place; statuses and original evidence stay unchanged.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 0 | `REPO-HYGIENE.22` | `pending` | Due daily review after API planning1; Rust17.3 follows its clean commit. |
+| 0 | `REPO-HYGIENE.22` | `done` | Dated retention review verified; Rust17.3 follows clean landing. |
 | 1 | `REPO-HYGIENE.21` | `done` | Previous dated retained review; original proof remains unchanged. |
-| 1 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
-| 2 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
-| 3 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
-| 4 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
-| 5 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
-| 6 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
-| 7 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
-| 8 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
-| 9 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
-| 10 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
-| 11 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
-| 12 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
-| 13 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
-| 14 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
-| 15 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
-| 16 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
-| 17 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
-| 18 | `REPO-HYGIENE.18` | `done` | Dated metadata and full historical custody verified; readonly155/full40701 passes; resume if/while .5.2 after clean commit. |
+| 2 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
+| 3 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
+| 4 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
+| 5 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
+| 6 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
+| 7 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
+| 8 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
+| 9 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
+| 10 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
+| 11 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
+| 12 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
+| 13 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
+| 14 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
+| 15 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
+| 16 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
+| 17 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
+| 18 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
+| 19 | `REPO-HYGIENE.18` | `done` | Dated metadata and full historical custody verified; readonly155/full40701 passes; resume if/while .5.2 after clean commit. |
 
 ## Decisions
 
@@ -511,6 +524,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-24` | `REPO-HYGIENE.22` | Dated 2026-10-24T20:34:23.372982+00:00 review retains 23966 parent candidates/23129277530 bytes and six explicit Rust locations; zero artifact removals. Independent population/lstat, traversal controls and five metadata denials pass; book95/actual missing-marker RED and three actual input denials/bypass/restoration pass. | PASS — current book/Perl syntax and final readers; normal focused hooks govern landing. |
 | `2026-10-11` | `REPO-HYGIENE.16` | Guarded actual census/fresh lstat, size/traversal/four channel controls, preceding readonly baseline; histories/Knowledge/memory/claims/diff/hooks | PASS — dated retained snapshot/zero removals; source-established proof-routing repair .10 next. |
 | `2026-10-10` | `REPO-HYGIENE.15` | Guarded actual parent/Rust census, fresh per-file lstat, size/traversal/four channel controls, Git attribution audit; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals; two commit projections repaired. |
 | `2026-10-09` | `REPO-HYGIENE.14` | Guarded actual census/review, independent metadata and size/boundary/channel controls; memory/Knowledge/history/claims/diff/hooks | PASS — dated retained snapshot; zero removals. |
@@ -532,6 +546,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.22` | `REPO-HYGIENE.22 - review retained artifacts with independent population checks` | Dated retention only; Rust17.3 follows clean landing. |
 | `REPO-HYGIENE.16` | `REPO-HYGIENE.16 - retain due artifact metadata review` | Dated actual metadata/zero removals and preceding readonly baseline; .10 before cache .9. |
 | `REPO-HYGIENE.15` | `REPO-HYGIENE.15 - retain due artifact review and repair commit pointers` | Dated metadata/full channels, zero removals, old attribution repaired; resume assignment required .5.2. |
 | `REPO-HYGIENE.12` | `REPO-HYGIENE.12 - qualify historical Phase0 measurements` | Dated observations preserved; private replacement handoff resumes after capacity check. |
@@ -548,6 +563,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `d07ee79ea073823c06711b0cc2cf3516d0f172b6` | Original ignore/untracking admission; later hash-sync commits are historical pointer refreshes, superseded by ADR0065. |
 
 ## Changelog
+
+- `2026-10-24`: .22 completes the due retained metadata review with independent population checks; zero removals. The current book/Knowledge and latest-only date agree; Rust17.3 follows clean Git.
 
 - `2026-10-23`: .21 completes the due retained review, accepted12 custody and current book example; no removals. Resume director-priority signed17.
 

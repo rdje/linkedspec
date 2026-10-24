@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-The requested tool/API/UI planning intake is complete and implementation stays deferred. Due artifact review REPO-HYGIENE.22 is next; Rust signed-selector17.3 follows its clean commit.
+The due artifact review REPO-HYGIENE.22 is complete. Resume the type-reference frontier with Rust signed-selector17.3 from clean Git. OPENAI-TOOL-API implementation stays deferred.
 
 ## Latest Completed Slice
 
-OPENAI-TOOL-API.1 records the deferred LinkedSpec tool API and ChatGPT UI task-tree, separate Codex UI verification, execution/transport contracts and phased delivery owners. Book rendering and semantic public-document checks passed; normal focused commit checks govern landing. Literal-kind22 remains committed with canonical proof at844a19b9e7fa. No plugin implementation or client admission is claimed.
+REPO-HYGIENE.22: Dated 2026-10-24T20:34:23.372982+00:00 review retains 23966 parent candidates/23129277530 bytes and six explicit Rust locations; zero artifact removals. Independent population/lstat, traversal controls and five metadata denials pass; book95/actual missing-marker RED and three actual input denials/bypass/restoration pass. Complete actual final reader channels and input epoch remain retained. Current book and Perl syntax passed; normal focused hooks govern landing.
 
 ## Next Action
 
-Activate REPO-HYGIENE.22 from clean Git, perform the due same-volume artifact review and commit it. Then resume Rust signed-selector17.3, followed by17.4–7, last14/with16, grouped assignment19, raw-regex21/policy20 and complete inventory/reference work.
+Activate TYPE-REFERENCE-BOOK.1.2.17.3 from the next clean HEAD. Read its canonical signed-selector contract, Knowledge/toolbox pointers, affected Rust paths/tests and relevant book sections before changes. Continue17.4–7, last14/with16, grouped assignment19, raw-regex21/policy20 and complete inventory/reference work.
 
 ## Recent Completions
 
+- `REPO-HYGIENE.22` — dated23966 parent candidates/six Rust locations, zero removals; independent population/lstat, five metadata denials, book95/marker RED, input3/bypass/restoration and actual reader channels; Rust17.3 next.
 - `OPENAI-TOOL-API.1` — deferred structured tools/ChatGPT UI plan indexed; Codex UI separately verified later; book and semantic-document checks pass; hygiene22 then Rust17.3.
 - `TYPE-REFERENCE-BOOK.1.2.22` — Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
 - `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
@@ -29,7 +30,6 @@ Activate REPO-HYGIENE.22 from clean Git, perform the due same-volume artifact re
 - `TYPE-REFERENCE-BOOK.1.2.9` —85/41 accepted RED;7 restored fault epochs;14/1949;85+1 permanent/75 malformed;book89/3;kind13 next.
 - `TYPE-REFERENCE-BOOK.1.2.7` —214/106 RED;7 faults;14/1948;201+3 permanent/15 malformed;book89/3;kind95/next9 owned.
 - `TYPE-REFERENCE-BOOK.1.2.6` —34 value/14 diagnostic controls;4 faults;9/1322; five Phase0 roots/18 permanent;book89/3; historical644+6; aggregates7 next.
-- `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 
 ## History
 
