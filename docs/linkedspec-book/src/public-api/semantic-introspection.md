@@ -303,6 +303,10 @@ This decision was made before server code. The official final revision was relea
 the decision. Selecting it now prevents five native implementations from acquiring an obsolete handshake and
 session state machine before LinkedSpec has shipped an MCP surface.
 
+Future integration is tracked separately in `OPENAI-TOOL-API`: a structured tool API for ChatGPT/Codex, with a ChatGPT interface for grammar/sample input, results, errors and traces.
+[OpenAI's guide](https://developers.openai.com/plugins/build/app-quickstart) describes shared MCP tools and an optional ChatGPT UI; Codex embedded-UI support remains client-specific verification work.
+This plan is deferred behind existing PNT priorities. It requires separately owned execution-host and protocol/transport contracts; the semantic-only stdio server described here retains its current boundary.
+
 ### Normative machine artifacts
 
 Every implementation consumes one root-relative, backend-neutral bundle:

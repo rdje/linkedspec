@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-24 — OPENAI-TOOL-API.1 — deferred tools and UI plan
+
+Recorded the director's DBIQNP request as an indexed, deferred LinkedSpec task-tree: structured tools driven by ChatGPT/Codex, a grammar/sample/result/error/trace front end in ChatGPT, and separate verification of the selected Codex client's UI. The plan owns foundation decisions, contracts, execution hosting, client connections, UI, proof and delivery. Existing native semantic-only MCP authority remains explicit; no implementation or integration admission is claimed.
+
+The book attributes the platform documentation and distinguishes the proposal from the delivered stdio server. Both roadmaps preserve the existing engineering order: due REPO-HYGIENE.22, then Rust signed-selector17.3. Validation: book build and rendered-section review; semantic public-document contract; bounded-history, whitespace, memory and normal doctrine commit checks. Qualitative planning only; no measured claim record.
+
 ## 2026-10-24 — TYPE-REFERENCE-BOOK.1.2.22 — Perl deferred literal fidelity
 
 Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.

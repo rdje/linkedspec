@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-24 — OPENAI-TOOL-API.1 — preserve execution and host boundaries
+
+The future conversational interface is a structured tool API: the assistant interprets the conversation while LinkedSpec receives explicit operations. The requested ChatGPT UI is a future front end to those operations. Shared tool packaging does not establish embedded UI support in the selected Codex client; that has its own compatibility leaf.
+
+ADR0054/0055 and the existing canonical MCP fact remain authoritative. The admitted native semantic server exposes registered immutable indexes; the plan does not add parser compilation/execution, path loading or UI resources to it. Future execution-host and protocol/transport authority need explicit contracts and actual client proof. This is deferred planning at the clean boundary after literal-kind22, with hygiene22 and Rust17.3 preserving the PNT implementation order. No new runtime fact or integration measurement is published.
+
 ## 2026-10-24 — TYPE-REFERENCE-BOOK.1.2.22 — Perl deferred literal fidelity
 
 Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.

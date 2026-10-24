@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `completed` / retained review .21 verified
+- Status: `active` / due review .22 queued
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-23` (`REPO-HYGIENE.21`: due artifact review after deferred writes)
+- Last updated: `2026-10-24` (queue due .22 after the requested API planning intake)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,9 +38,9 @@ the durable handoff state current.
 ## Task Tree
 
 - ID: `REPO-HYGIENE`
-  Status: `done`
+  Status: `active`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`, `REPO-HYGIENE.21`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`, `REPO-HYGIENE.21`, `REPO-HYGIENE.22`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -432,11 +432,21 @@ the durable handoff state current.
   Engineering notes: unchanged; this repeats the established dated metadata/retention procedure without a new structural or causal conclusion.
   Commit subject: `REPO-HYGIENE.21 - review retained project artifacts`.
 
+- ID: `REPO-HYGIENE.22`
+  Status: `pending`
+  Goal: Perform the next due same-volume artifact review after API planning1, then resume Rust signed-selector17.3.
+  Schedule: The latest cleanup record is dated2026-10-23T16:47:31Z; the24-hour boundary passed during literal-kind22 verification. Activate only after the clean API planning commit.
+  Planned tier: focused maintenance; declare exact verification fields and any measured claim at activation.
+  Acceptance: Read existing hygiene/knowledge authorities; guard every other Git repository/submodule, symlink, volume and active process boundary. Review parent artifacts and documented Rust/Dart/Julia/Lua locations. Delete only exact proved-disposable project-owned targets, preserving every proof, required log and useful cache otherwise. Capture actual disposition and independent controls before claims; overwrite the latest-only cleanup record after completion. Update book/live pointers and commit before Rust17.3. No recovery/purge or global-cache deletion is authorized by this queue entry.
+  Verification: pending
+  Commit: pending
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 0 | `REPO-HYGIENE.21` | `done` | Due retained review verified; signed17 follows clean landing. |
+| 0 | `REPO-HYGIENE.22` | `pending` | Due daily review after API planning1; Rust17.3 follows its clean commit. |
+| 1 | `REPO-HYGIENE.21` | `done` | Previous dated retained review; original proof remains unchanged. |
 | 1 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
 | 2 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
 | 3 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
