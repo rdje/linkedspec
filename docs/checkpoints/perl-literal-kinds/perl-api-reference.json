@@ -1,0 +1,7 @@
+{
+  "source": "https://perldoc.perl.org/perlguts#What's-Really-Stored-in-an-SV?",
+  "accessed": "2026-10-24",
+  "purpose": "Read-only primary toolchain API documentation for interpreting observed B scalar flags; no dependency implementation is inspected or modified.",
+  "paraphrase": "Private scalar flags may mark cached conversions that lost precision. A floating value converted lossily to an integer can have private integer and floating caches while its public integer-validity flag remains unset. Classifying an integer from the private cache alone can therefore be wrong.",
+  "limits": "The retained runtime probes establish the exact behavior of this installed Perl. The documentation does not itself establish LinkedSpec behavior or exhaustive compatibility."
+}

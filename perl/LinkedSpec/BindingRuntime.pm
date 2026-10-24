@@ -36,10 +36,11 @@ sub _runtime_kind {
  return 'harray' if ref($value) eq 'HASH';
  return 'scalar' if ref($value);
  my $flags = B::svref_2object(\$value)->FLAGS;
- return 'string' if $flags & B::SVp_POK();
+ # Private flags can describe lossy conversion caches, rather than valid kinds.
+ return 'string' if $flags & B::SVf_POK();
  if (looks_like_number($value)) {
-  return 'integer' if $flags & B::SVp_IOK();
-  return 'number' if $flags & B::SVp_NOK();
+  return 'integer' if $flags & B::SVf_IOK();
+  return 'number' if $flags & B::SVf_NOK();
   return 'integer' if int($value) == $value;
   return 'number';
  }

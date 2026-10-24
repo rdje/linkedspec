@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-24 — TYPE-REFERENCE-BOOK.1.2.22 — Perl deferred literal fidelity
+
+Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
+
+Decimal reconstruction uses admitted source spelling, preserving legacy fallback for absent/unsupported records. Memoized plain-container copying avoids Storable source/copy kind changes; opaque fallback remains. BindingRuntime uses public SVf validity. The original private-cache oracle, import setup failure and first reviewer Git/full-permission equality remain explicitly qualified, with no product RED credit or chmod. Existing startup35 closes through this owner; old signed and numeric producers/proofs remain unchanged. Current Knowledge and book explain actual behavior. Exact canonical CI/normal hooks govern the landing.
+
 ## 2026-10-24 — qualify negative Perl selectors at the encountered array
 
 BindingRuntime accepts negative integer selector kinds before structural validation. A missing-container helper preserves the old invalid-segment diagnostic instead of inferring an array for a negative index; existing arrays use a separate resolved position and retain raw diagnostic keys. Global invalid-kind precedence, the existing post-expression snapshot and isolated commit/copy geometry stay unchanged.

@@ -1,76 +1,51 @@
 ---
 id: perl-codeblock-boolean-literal-kind-drift
-title: "Dynamic Perl codeblock boolean literals become numeric results"
+title: "Perl deferred literal kinds, precision and scalar validity"
 answers:
   - "why does a Perl codeblock return 1 instead of true"
   - "do dynamic Perl codeblocks preserve boolean literal types"
   - "does a boolean argument remain typed through a Perl codeblock"
   - "where does Perl codeblock evaluation lose boolean literal identity"
   - "which task owns dynamic codeblock boolean result parity"
-date: 2026-09-06
-status: confirmed-open
+  - "why did deferred large fractional Perl literals lose numeric precision"
+  - "why did Storable change whole float kinds in copied codeblocks"
+  - "can a private Perl integer cache admit a fractional array selector"
+  - "which scalar validity flags classify Perl nested write selectors"
+date: 2026-10-24
+status: repaired on Perl; finite literal-kind22 proof
 tags: [perl, codeblock, literal, boolean, actionir, SESSION-STARTUP-READING]
-evidence: "SESSION-STARTUP-READING.3.2.34: six public Get controls, emitted record decoding, and CodeblockRuntime.pm 219–231. The typed AST retains kind=boolean, but _eval_expr returns numeric 1/0."
-reverify: "Run the managed public and emitted-record probes below; inspect JSON shape, JSON::PP::is_bool, and context_error."
+evidence: "TYPE-REFERENCE-BOOK.1.2.22 executes startup35 acceptance; source epochs and original September6 diagnosis retained in docs/checkpoints/perl-literal-kinds/."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-kinds/publish.py; current: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t t/scalar_numeric_contract.t"
 ---
 
-# Dynamic codeblock boolean literal kind loss
+# Perl deferred literal fidelity
 
-The typed-literal contract is [[terse-primitive-literal-parity]]. On 2026-09-06, fresh public Perl `Get`
-invocations of `Top:: /x/ -> Top { ... }` over input `x` produce:
+The September6 startup35 controls returned typed true/false directly and numeric1/0
+through deferred literal bodies, including arrays; passed booleans stayed typed.
+The AST retained kind=boolean. CodeblockRuntime returned native1/0 instead of
+JSON::PP booleans. Original six controls, emitted-record diagnosis and old card
+remain byte-exact in activation-inputs.json.gz and Git; they are dated history.
 
-| Action | JSON result | Scalar boolean? | Context error? |
-| --- | --- | --- | --- |
-| `return(true)` | `true` | Yes | No |
-| `cb = {\|\| return(true) }; return(cb())` | `1` | No | No |
-| `return(false)` | `false` | Yes | No |
-| `cb = {\|\| return(false) }; return(cb())` | `0` | No | No |
-| `cb = {\|value\| return(value) }; return(cb(true))` | `true` | Yes | No |
-| `cb = {\|\| return([true,false]) }; return(cb())` | `[1,0]` | Array of numbers | No |
+October24 repair22 reconstructs admitted ASCII decimal tokens using the parser's
+0+source conversion and creates typed JSON booleans. A fresh substring avoids
+retained conversion caches; absent/unsupported source records keep payload fallback.
+The large fraction1000000000000000.5 previously lost its half in the serialized
+numeric payload before reporting, while its source survived. Direct compiled
+hexadecimal twins distinguish this from JSON display rounding.
 
-The parameter control shows that passing an existing typed boolean preserves it on this path. The literal-array
-case shows that the mismatch also occurs within a container; checking only truthiness would miss it.
+Storable's installed public API changes whole-float kinds in both source and clone.
+CodeblockRuntime now copies plain arrays/harrays by scalar assignment with memoized
+aliases/cycles and callable origins; opaque references keep their existing fallback.
+BindingRuntime classifies public SVf validity, not private SVp conversion caches.
+An accepted-runtime native callback with computed-0.5 previously selected the tail;
+its private integer cache was set but public integer validity was unset. Emitted and
+compiled-argument controls rejected it. These are Perl5.34.1 measurements, not a
+claim about every Perl release. Primary explanation: https://perldoc.perl.org/perlguts#What's-Really-Stored-in-an-SV?
 
-`call_spec_handler_subst` emits a JSON-encoded `codeblock_literal`. Decoding its record shows the two array items
-still have `kind: "boolean"`, source `true`/`false`, and their normal AST payloads `1`/`0`. The kind tag is
-present before interpretation. `CodeblockRuntime::_eval_expr` handles that kind by returning `$node->{value} ? 1 : 0`,
-whereas ordinary ValueExpr lowering emits `JSON::PP::true`/`JSON::PP::false`. The runtime branch loses semantic
-boolean identity; AST numeric payload storage by itself is not the defect.
-
-[[SESSION-STARTUP-READING]] `.35` owns the repair after full reading and policy review, including focused
-live/generated, nested/argument/contextual, and independently justified neutral proof. The existing
-`t/callable_codeblock_literal_contract.t` and `t/inter_match_gap_capture_perl_contract.t` pass a combined
-134 top-level tests in this checkpoint; that finite success does not close this independently measured defect.
-Other runtimes and independently loaded generated-parser executions were not measured for these controls.
-Receiver-guard defect [[perl-dynamic-codeblock-receiver-guard-gap]] remains separately owned by `.19`.
-
-## Public control
-
-```sh
-bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
-use strict;use warnings;my $json=JSON::PP->new->canonical->allow_nonref;
-for my $case (
- ['direct_true','return(true)'],['dynamic_true','cb = {|| return(true) }; return(cb())'],
- ['direct_false','return(false)'],['dynamic_false','cb = {|| return(false) }; return(cb())'],
- ['argument_true','cb = {|value| return(value) }; return(cb(true))'],
- ['dynamic_array','cb = {|| return([true,false]) }; return(cb())']
-){my ($name,$body)=@$case;my $spec="Top::\n /x/ -> Top { $body }\n";my %ctx;my $src='';
-my $p=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx,dump_parser_source=>1,parser_source_ref=>\$src);
-my $input='x';my $got=ref($p)eq'CODE'?$p->(\$input):undef;
-print $json->encode({case=>$name,result=>$got,value_class=>ref($got),boolean=>JSON::PP::is_bool($got)?1:0,context_error=>defined($ctx{last_error})?1:0}),"\n";
-}
-PERL
-```
-
-## Emitted typed-record control
-
-```sh
-bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
-use strict;use warnings;
-my $lowered=LinkedSpec::call_spec_handler_subst('Top','cb = {|| return([true,false]) }; return(cb())');
-my ($hex)=$lowered =~ /pack\("H\*", "([0-9a-f]+)"\)/;die 'missing emitted record' unless defined $hex;
-my $record=JSON::PP->new->utf8->decode(pack('H*',$hex));
-my $items=$record->{body_ast}{statements}[0]{expr}{args}[0]{items};
-print JSON::PP->new->canonical->encode({record_kind=>$record->{kind},literals=>[map {{kind=>$_->{kind},source=>$_->{source},value=>$_->{value}}} @$items]}),"\n";
-PERL
-```
+Corrected37-program native/emitted proof observes kinds before final serialization,
+including precision, fixed/rest/contextual calls, copied containers, typed writes,
+source-less fallback and numeric/logical controls. Raw caches remain recorded.
+Three first-after comparisons overconstrained private caches and earn no product
+RED credit. The dated archive, physical faults/restorations and current permanent
+consumer have separate roles. [[terse-primitive-literal-parity]] remains the typed
+contract. No other-runtime parity or portable signed admission is inferred.

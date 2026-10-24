@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `ed658fb839184ddaad2c7ebc8566616024a0fd18` — clean Perl17.2 base; derive current HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.17.2` — bounded signed reads/writes; exact canonical workflow governs landing.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.22`; task_owner: docs/tasks/TYPE-REFERENCE-BOOK.md.
-- next_action: From clean Git activate P1 deferred scalar literal-kind repair22 before Rust17.3. Read docs/checkpoints/perl-literal-number-intake/read.py and its16 current/accepted byte-shadow cases; preserve whole-float/boolean kinds with wider numeric/copy/typed-selector proof. Then resume17.3–7.
-- in_flight_uncommitted: none; no background job. Never rerun historical capture writers.
-- proof: docs/checkpoints/signed-array-perl/publish.py reviews120 native/emitted,12 arithmetic/14 read/33 actual deferred writes,10 suites/789 top-level TAP,eight physical faulty/restored variants,book93/four examples/three rendered denials and input3/scope2 controls. Original infix/epoch/controller-pointer/reason-order qualifications remain explicit. Whole accepted51-image neutral custody precedes changes; frozen authorities stay exact. No optional whole-backend or portable signed admission.
-- steering: [-n]=[size-n] when size-n>=0; negative selectors never create. After signed17 come14/16/19/raw-regex21/policy20 and complete inventory/references.
-- limits: Other repositories/submodules read-only black boxes; all project data on-volume. No push until PNT exhausted. Canonical1 superseded143; canonical2 insertion audit repaired; canonical3 budget rejection superseded143. Exact CI inverse/13 denials/history690 and blank-only90-file byte/mode equality pass. Fresh exact canonical receipt and hooks remain mandatory.
+- activation_commit: `3c8f69c88992d7d3aacccf701eecf602f6544e07` — clean literal-kind22 base; derive current HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.22` — preserve Perl deferred literal kinds and precision; exact canonical receipt and normal hooks govern landing.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.17.3`; task_owner: docs/tasks/TYPE-REFERENCE-BOOK.md.
+- next_action: From clean Git create/commit the explicitly requested deferred LinkedSpec tool-API planning tree, without activating implementation. Then check24h hygiene (last2026-10-23T16:47:31Z), complete due cleanup under its own leaf and activate Rust signed-selector17.3.22/35 are complete.
+- in_flight_uncommitted: none; no required background work remains after the commit workflow.
+- proof: docs/checkpoints/perl-literal-kinds/publish.py reviews37 programs/74 native-emitted observations, corrected47 RED/74 GREEN, complete callable28, eight required runtime faults/nine restored consumers, compatibility11/784 and corrected numeric10/1008, book95/six examples/three denials and actual input3/scope2 controls. Original failed candidates and cache/import/mode qualifications remain retained. Frozen signed/intake/old numeric proof stays unchanged. This is finite Perl5.34.1 evidence; no other-runtime/portable admission.
+- steering: [-n]=[size-n] when size-n>=0; negatives never create. Continue17.3–7,14/16/19/raw-regex21/policy20 and complete inventory/references. DBIQNP plugin proposal/structured tool-API clarification is retained in22 task-tree; no implementation priority change.
+- limits: Other repositories/submodules read-only black boxes; all project data on-volume. No push until PNT exhausted. Every new slice owns fresh proof and a separate commit; never rerun sealed one-shot writers.

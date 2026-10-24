@@ -654,9 +654,10 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.35`
-  Status: `pending`
+  Status: `done` / repaired through TYPE-REFERENCE-BOOK.1.2.22
   Goal: Preserve typed boolean literals during dynamic Perl codeblock evaluation.
-  Dependencies: `.3`/`.4`/`.5`.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.22; original diagnosis .3.2.34. ADR0123 supersedes the former blanket .3/.4/.5 reading sequence.
+  Execution update: TYPE-REFERENCE-BOOK.1.2.22 implements this existing defect immediately after clean signed-selector17.2. Its October24 intake re-verifies the September6 finding; it is not a second new boolean issue. ADR0123 supersedes the blanket full-reading sequencing prerequisite. Preserve the acceptance below and the original diagnosis; close this issue only after22 verifies its returned/assigned/container/fixed/rest/contextual boolean cases and compatibility checks. Whole-float kind loss remains the distinct new component owned by22.
   Acceptance: Reproduce public direct versus dynamic true/false results and inspect the typed AST and
     CodeblockRuntime boolean branch. Preserve JSON boolean identity for returned, assigned, nested-container,
     fixed/rest-argument, and contextual-final-block literals without changing numeric 0/1 or string values.
@@ -664,9 +665,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     before claiming parity. Reconcile primitive-literal/codeblock teaching and Knowledge, render the book, and
     run direct-dependent callable/logical/value checks plus required public signoff. Keep `.19` receiver-guard
     repair separate; neither defect is closed by the existing callable suite passing.
-  Verification: `pending` — `.3.2.34` public controls return true/false directly but 1/0 through cb() literals;
-    a true argument stays typed while a dynamic literal array returns [1,0], all without context errors.
-  Commit: `pending`
+  Verification: Original September6 diagnosis is retained byte-exact in22 activation. Corrected native/emitted literals preserve returned/assigned/nested/fixed/rest/contextual booleans; integer/string/null, numeric/logical and direct-dependent controls pass. Complete current book renders and examples execute. Exact claim, original REDs, qualifications and canonical acceptance belong solely to TYPE-REFERENCE-BOOK.1.2.22; no other-runtime parity is claimed.
+  Commit: TYPE-REFERENCE-BOOK.1.2.22 - preserve Perl deferred literal kinds and precision; derive accepted identity from Git.
 
 - ID: `SESSION-STARTUP-READING.36`
   Status: `pending`

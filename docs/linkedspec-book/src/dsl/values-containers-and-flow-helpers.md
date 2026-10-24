@@ -3,7 +3,6 @@
 This chapter gives the public mental model for LinkedSpec’s value and control-flow helpers.
 
 For the method-by-method public reference, read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter. This chapter explains how to think about the surface before diving into exact helper choices.
-
 ## Typed values and constructors
 
 The core typed working-value reads are bare identifiers:
@@ -20,7 +19,6 @@ These are DSL spellings. They are not Perl sigils. Public examples and migrated 
 
 Multi-argument constructors read values inside user functions too: `array(value, value)` and `[value, value]` produce the same pair. See the
 [complete function example](value-container-flow-helper-reference.md#array-constructors-inside-functions), including a local assignment separated from its return by a newline.
-
 ## Value kinds, numeric notation and callable results
 
 One working name holds one current value: scalar, array, harray (hash), or codeblock. Assigning a different kind replaces that binding. Integer and real notation describe numeric values, rather than separate variable namespaces. Strings, numbers, booleans and null (`undef`) remain observably different: numeric helpers accept finite numbers and their contracted decimal strings, reject boolean/null, and return numeric `1`/`0` for comparisons. Logical helpers return booleans. Scalar text normalization converts false to `"0"`, so `flag = false; return(flag.cat("q"))` returns `"0q"`.
@@ -34,7 +32,6 @@ Top: /x/
 ```
 
 This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind.
-
 ### Evaluated values and later side effects
 
 Perl retains each evaluated array element, hash key/value and callable argument before the next operand executes. A later assignment or mutation updates the working binding; earlier values retain what was read. This returns `["before","inside","inside"]`:
@@ -47,11 +44,9 @@ Top: /x/
 The same rule covers `array(...)`, `hash(...)`, dynamic hash keys, eager blocks and assignment expressions. Explicit `flat`, `flat_array` and `flat_hash` splices keep their list behavior; ordinary container values stay nested.
 
 Array mutation creates an updated binding. For `items = ["old"]` and a callback that runs `push(items,"new")`, `[items, change(), items]` retains `["old"]` first and the updated `["old","new"]` last. A separately saved earlier binding also stays old. This follows the existing mutation contract; the evaluation boundary does not add recursive copying of arbitrary host objects.
-
 ### Current Perl limits
 
-The six numeric aggregate reducers and `sorted`/`take` execute inside Perl codeblocks. See the worked [selection examples](#sorting-and-taking-inside-perl-codeblocks). Deferred `count` and `first` also execute; see [their selection contract](#counting-and-selecting-first-inside-perl-codeblocks). Registered array pipelines and terminal `length` also work; see [the examples below](#registered-array-pipelines-and-length). Deferred `.last()` remains unsupported. Boolean literals inside deferred bodies still yield numeric `1`/`0`; boolean arguments passed into a codeblock retain their kind. These separately owned repairs remain pending. The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
-
+The six numeric aggregate reducers and `sorted`/`take` execute inside Perl codeblocks. See the worked [selection examples](#sorting-and-taking-inside-perl-codeblocks). Deferred `count` and `first` also execute; see [their selection contract](#counting-and-selecting-first-inside-perl-codeblocks). Registered array pipelines and terminal `length` also work; see [the examples below](#registered-array-pipelines-and-length). Deferred `.last()` remains unsupported. Deferred booleans and floating literals retain their kinds; see [literal examples](#literal-kinds-inside-perl-codeblocks). The observations establish no new cross-backend result, and complete per-operation reference coverage remains in progress.
 ### Registered array pipelines and length
 
 On Perl, registered functions can sort and take array parameters, local bindings and rest arguments. Selection returns a copy; empty or non-array inputs yield `[]`. This complete parser returns `[[1,10],[1,10],2,[2,10,1]]` for input `x`:
@@ -67,7 +62,6 @@ Top: /x/
 ```text
 seen = ""; source = {|| seen = cat(seen,"s"); return([2,10,1]) }; cb = {|| return(source().sorted().take(2).length().abs()) }; return([cb(),seen]);
 ```
-
 ### Counting and selecting first inside Perl codeblocks
 
 `count(values)` / `values.count()` returns the array length. `first(values)` / `values.first()` returns the stored first element. Empty or non-array values yield `0` for count and `undef` for first, including harray inputs. Free calls take exactly one argument; receiver calls take none. Invalid arity returns `undef` before evaluating any receiver or arguments.
@@ -113,7 +107,6 @@ cb = {|| return(first(items)) }; chosen = cb(); return(chosen());
 ```
 
 Regenerate saved Perl parser source after upgrading. Registered-function and other backend availability follow their separately documented limits.
-
 ### Sorting and taking inside Perl codeblocks
 
 `sorted(values)` returns a lexical sorted copy; `values.sorted()` is the receiver form. For numbers `[2,10,1]`, lexical order is `[1,10,2]`. This is not numeric sorting. `take(values,count)` and `values.take(count)` return a new array containing the first `count` elements. Omitting the count selects one element. Neither operation reorders or replaces the source binding.
@@ -172,7 +165,6 @@ return([saved,target,items]);
 ```
 
 Regenerate saved Perl parser source after upgrading to use this sorting behavior.
-
 ## Per-rule default accumulator
 
 Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.
@@ -203,7 +195,6 @@ if(is_nonempty(child_text)) { push(children, child_text) }
 ```
 
 Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `Parent`, `push(Parent, value)`, or `return(hash("children", copy(Parent)))`.
-
 ## Assignment
 
 Use `set(target, source)` or `target = source` to replace a target value. New examples should prefer the operator form when it is clear at a glance.
@@ -230,7 +221,6 @@ Nested writes mutate the typed array/harray value held by the bare variable. On 
 [read-purity examples and Perl evaluation details](value-container-flow-helper-reference.md#read-purity).
 
 This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact portable capability row, `.19.8` supplies exact six-runtime recurrence, and `.19.9` closes public no-drift.
-
 ### Nested-write creation, dense arrays, conflicts, and evaluation order
 
 An absent root and all unambiguous intermediates can be created by one write:
@@ -254,7 +244,6 @@ document["item"]["name"] = "new";
 ```
 
 For `document[first_segment()][second_segment()] = rhs_value()`, the two segment expressions run exactly once in left-to-right order, then the RHS runs exactly once. Only then does the runtime snapshot the target and validate the structure on an isolated copy. Completed expression side effects remain ordinary effects if validation later fails, but no partial container path is published. A successful assignment publishes once and yields a detached updated-root value: later mutation of that result cannot alias the stored `document`.
-
 ## Pushing values
 
 Use `push(target, value)` when you want to append.
@@ -273,7 +262,6 @@ set(items, child);
 ```
 
 That replaces the whole array. It does not append to it.
-
 ## Returning payloads
 
 Use `return(payload)` for modern structured returns.
@@ -289,7 +277,6 @@ return({ "kind" : "token", "text" : entry_text(), "tags" : [tag, true] });
 `return_undef()` remains supported and lowers to an undefined return in the Perl reference backend. The retired spellings `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_im`, and `return_array` are not current return helpers; the Perl helper rewriter leaves the demonstrated calls unchanged. Use the generalized `return(...)` form for new structured payloads.
 
 When migrating an older recipe, also remove retired aggregate selectors. For example, `return(array_copy(array(Top)))` is rejected with `aggregate_selector_removed`. The selector-free constructor/copy expression `return(array(copy(Top)))` lowers to `return [[@Top]]` in the Perl reference backend. These examples describe the named forms; they are not an exhaustive inventory of return or container operations.
-
 ### Migrating the retired tagged returns
 
 The old `return_m(L)` / `return_ma(L)` callbacks spliced capture groups into their outer array. Use `flat_array(entry_groups())` to retain that shape. `entry_groups()` alone instead creates one nested array. Here `L` denotes the old rule label; substitute the actual name and quote the fixed tag:
@@ -401,7 +388,6 @@ return(" a-b ".trim().with() { return(value.split("-")) }.count());
 `with(value) { ... }` evaluates the value, binds a scoped working value `value` for immediate block execution, and returns the block result. `with() { ... }` binds that scoped `value` to `undef`. Receiver `.with() { ... }` evaluates its receiver first, exposes that receiver value through the same scoped `value` binding, and yields the block result; the yielded result can be the terminal value or can feed later compatible receiver-family links. The binding is local to the block, so an outer working variable named `value` is visible again after the `with` expression finishes. The block is not a closure, assignable value, returnable value, or delayed callback. It runs in the caller's current action/runtime context: captures, `retv`, cursor state, helper/function visibility, and ordinary working-variable side effects are the same as the call site. Only the working binding `value` is portable as the scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare `with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
 general delayed callback are not current portable surfaces; explicit delayed callbacks use `{|params| ...}`.
 
-
 ### Scalar numeric helpers in codeblocks
 
 Perl callable bodies support the scalar numeric helpers, their word and symbol call aliases, and numeric receiver methods. Their argument and result rules are the same as [numeric value helpers](value-container-flow-helper-reference.md#numeric-value-helpers): comparisons return numeric `1`/`0`; invalid numeric input or arity returns `undef`.
@@ -439,8 +425,7 @@ return([out,value])
 
 The same rule covers scalar `num_mul`, `num_min` and `num_max`; explicit flat splices keep their existing list behavior. It does not add recursive copying. An invalid numeric call shape or comparison-terminal continuation yields `undef` before the receiver or operands run. Comparison methods end their chain even when the following method belongs to another family. Save a comparison result in a binding to use it as the receiver of a separate expression. A one-argument min/max call evaluates its input to choose the array overload; scalar input then yields `undef`.
 
-Typed boolean parameters remain nonnumeric. Boolean literals evaluated inside a Perl callback have the separate [kind limitation](#current-perl-limits) above. Array reducers use the separate [aggregate rules](#aggregate-numeric-helpers-in-codeblocks). Other executed unsupported calls keep their typed `unknown_helper` cause.
-
+Typed boolean literals and parameters remain nonnumeric, including inside Perl callbacks. See [literal examples](#literal-kinds-inside-perl-codeblocks). Array reducers use the separate [aggregate rules](#aggregate-numeric-helpers-in-codeblocks). Other executed unsupported calls keep their typed `unknown_helper` cause.
 ### Aggregate numeric helpers in codeblocks
 
 Perl callbacks execute `num_sum`, `num_avg`, `num_median`, `num_range`, and single-array `num_min`/`num_max`. Their word aliases and terminal array methods `sum()`, `avg()`, `median()`, `range()`, `min()` and `max()` also work. Array parameters, direct reads and registered-function results are accepted sources. The source is evaluated once; the reducer does not reorder its array.
@@ -477,7 +462,6 @@ return(items);
 ```
 
 That conversion is a workaround, not the pending result-kind repair. Boolean body literals and deferred general array pipelines retain the limits above.
-
 ### Callable values in with
 
 In Perl, a scoped value that contains a codeblock can be invoked as value(). The following expressions return "yes", ["first","second","first"], and
@@ -523,12 +507,10 @@ parameters, is invoked with zero arguments, and reads the callable's current dyn
 `linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, Julia, and Lua parse these literals and preserve their signature/body/source/span record through assignment, user functions, serialization, and generated source. All five execute a bound value through `cb(args)`. Arguments evaluate once from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails; nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards only the result.
 
 Use the documented `matches(subject, /pattern/)` helper for multiline patterns. Legacy raw Perl assignments such as `rx = /pattern/` can acquire a semicolon at a physical line break and match different text. This affects native and emitted Perl; repair is pending.
-
 ### Deferred indexed writes in Perl
 
 Perl callable bodies accept the same bracket assignments as ordinary actions. An unbound root can be created, but an explicitly assigned `undef` and an `undef` parameter remain present null values and cannot become containers. String selectors choose hashes, including quoted numeric strings. Integer selectors choose arrays: nonnegative indexes can replace or append at the exact length; negative indexes can replace an existing position. A literal boolean or null, a floating-point selector (including `-1.0`), or an aggregate or codeblock cannot select a container and reports `nested_write_segment_invalid`. Existing wrong container kinds report `nested_write_kind_conflict`; an index beyond the exact append position reports `nested_write_array_gap`.
 Perl native and independently emitted execution implement tail-relative reads and writes in ordinary actions and callable bodies: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. The frozen historical write-v1 authority stays unchanged. Other backend implementations and portable admission remain separately owned.
-
 #### Signed array selectors in Perl
 
 For an existing array of size `L`, a supported negative integer selector resolves to `L + index`. In a nonempty array, `[-1]` is the last entry, `[-2]` the one before it when present, and `[-L]` the first. Reads outside the array return `null` without creating state. The extension is available on Perl; it is not yet admitted portably.
@@ -588,9 +570,25 @@ The callable write uses each nested array's own length and returns `{"rows":[[1]
 
 For example, writing `[-2]` into `[10]` fails with `nested_write_array_underflow`, `index = -2`, `length = 1` and `resolved_index = -1`; the binding stays `[10]`. Writing `[-1]` into an absent binding instead reports the existing invalid-segment diagnostic. A dynamic negative integer works like the literal; a dynamic string or a negative float retains its earlier read coercion behavior and is not promoted to an integer selector.
 
-#### Current callable literal-kind limitation
+<a id="current-callable-literal-kind-limitation"></a>
 
-A deferred body currently loses the kind of whole-float and boolean literals before assignment, return or container construction. For example, a callable returning `[false,true]` currently returns integer `[0,1]`. A variable assigned `-1.0` inside that body becomes an integer and can then select the last array entry; the direct `[-1.0]` read and a float passed from an ordinary action remain outside the supported negative-integer path. Compiled float/boolean argument controls preserve their kinds. This pre-existing producer defect is scheduled for repair before the next backend slice.
+#### Literal kinds inside Perl codeblocks
+
+Boolean literals retain typed booleans. Floating literals retain their numeric value and floating kind through assignments, returned containers and copied fixed/rest parameters. Strings and null keep their own kinds; numeric helpers reject booleans.
+
+This parser returns `[false,true,null,-1]` for input `x`:
+
+```text
+{{#include ../../../../examples/deferred-literal-kinds-perl.spec}}
+```
+
+The assigned `-1.0` remains a float, so it cannot select an entry through the negative-integer extension. JSON number formatting may omit the decimal point.
+
+Large fractional literals also retain the ordinary numeric value through a deferred call. This parser returns `0.5` for input `x`:
+
+```text
+{{#include ../../../../examples/deferred-literal-precision-perl.spec}}
+```
 
 #### Existing parameter and effect behavior
 

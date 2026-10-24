@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl signed-selector17.2 is complete at the exact canonical commit boundary. P1 scalar literal-kind repair22 is next from clean Git, before Rust17.3; other backends and portable admission remain separately owned.
+Literal-kind22 closes the Perl primitive producer defects and existing startup35; Rust17.3 is next after clean Git and due hygiene. Other backends and portable admission remain owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.17.2: 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission. Whole accepted51-image custody precedes changes; all original instrument qualifications remain explicit. Current book/Knowledge and both roadmap companions agree. Exact staged canonical CI, normal hooks and post-commit pointer checks govern landing.
+TYPE-REFERENCE-BOOK.1.2.22: Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only. Original failed candidates/instrument qualifications remain retained. Exact canonical CI, normal hooks and post-pointer checks govern landing.
 
 ## Next Action
 
-From clean Git activate scalar literal-kind repair22, then Rust17.3 and17.4–7 under the same frozen signed authority. Deferred last14/with16, grouped assignment19, raw-regex21, policy20 and complete inventory/reference work remain owned.
+From clean Git perform artifact hygiene if24h is due, then activate Rust signed-selector17.3. Continue17.4–7, last14/with16, grouped assignment19, raw-regex21/policy20 and complete inventory/reference work.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.22` — Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
 - `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
@@ -29,7 +30,6 @@ From clean Git activate scalar literal-kind repair22, then Rust17.3 and17.4–7 
 - `TYPE-REFERENCE-BOOK.1.2.6` —34 value/14 diagnostic controls;4 faults;9/1322; five Phase0 roots/18 permanent;book89/3; historical644+6; aggregates7 next.
 - `TYPE-REFERENCE-BOOK.1.2.5` —318 GREEN/169 accepted RED; C1 extra9 RED;13 faults/restoration;17/1962; prior4 qualified/replay14/1924;book89/3;drop6 next.
 - `TYPE-REFERENCE-BOOK.1.2.4` — scoped callable/frame/span repair;30 GREEN/19 RED;14 suites/1924 TAP; six faults/restoration; numeric5 next.
-- `TYPE-REFERENCE-BOOK.1.2.3` —23 GREEN/19 RED;5001 quiet; selector28/parts31; closure4178; fresh845/full130759; exact canonical admission; scoped-with4 next.
 
 ## History
 

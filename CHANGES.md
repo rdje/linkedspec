@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-24 — TYPE-REFERENCE-BOOK.1.2.22 — Perl deferred literal fidelity
+
+Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
+
+Decimal reconstruction uses admitted source spelling, preserving legacy fallback for absent/unsupported records. Memoized plain-container copying avoids Storable source/copy kind changes; opaque fallback remains. BindingRuntime uses public SVf validity. The original private-cache oracle, import setup failure and first reviewer Git/full-permission equality remain explicitly qualified, with no product RED credit or chmod. Existing startup35 closes through this owner; old signed and numeric producers/proofs remain unchanged. Current Knowledge and book explain actual behavior. Exact canonical CI/normal hooks govern the landing.
+
 ## 2026-10-24 — TYPE-REFERENCE-BOOK.1.2.17.2 — Perl signed array selectors
 
 Ordinary/deferred native and emitted Perl select existing array tails with L+index. Writes normalize against each encountered post-expression array, preserve authored negative prefixes, and distinguish underflow, missing arrays and wrong kinds. A shared callable reader covers single, nested and callable-result paths while preserving float/string coercion boundaries. Existing copy, atomicity, expression order, diagnostic spans and identity guards remain intact. The permanent frozen/public consumer is enrolled in local CI.

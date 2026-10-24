@@ -29,7 +29,9 @@ answers:
   - "why do malformed fluent arguments leak a Perl array-reference error"
   - "why do private count captures expect old defined guards"
   - "why did registered sorted pipelines lose function parameters"
-date: 2026-10-22
+  - "why does a reused book renderer import the wrong document module"
+  - "when are private Storable integer caches unsafe for scalar kind checks"
+date: 2026-10-24
 status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, mdbook]
 evidence: "Type checkpoints; pipelines11."
@@ -45,11 +47,12 @@ Scalar/aggregate Numeric policies differ. Shapes precede effects; comparisons/
 reducers terminate. Aggregates take one array, receivers none. Scalar min/max
 evaluates before rejection. Perl checks each decimal: empty sum0, othersundef;
 Rust filters differently. Reducer95:
-[[perl-numeric-reducer-string-result-kinds]]. Boolean35, Unicode20/constructor94
-remain separate.
+[[perl-numeric-reducer-string-result-kinds]]. Boolean35 is repaired through22;
+Unicode20/constructor94 remain separate.
 
 Deferred sorted/take have free/receiver forms. Lexical sort retains numeric/string
-kinds through clones/indexes; measure flags before Storable caches private float iOK.
+kinds through clones/indexes. Literal22 distinguishes public validity from private
+Storable caches: [[perl-codeblock-boolean-literal-kind-drift]].
 take defaults1; integer spelling only; negative/invalid0; oversized clamp.
 Nonarrays yield[], skip count; independent source/results.
 Deferred count/first: one free operand, no receiver args; receivers terminate.
@@ -68,3 +71,8 @@ changes; strict rejection remains.
 
 Context hash-gates gzip/37 verified32MiB chunks and three byte/mode aliases;
 nested-Git guards. Recursive originals:49ce.
+
+Book proof reuse: a historical renderer prepended its own directory and caused
+document to resolve to its older module. Literal22 retains the pre-epoch setup
+failure without product RED credit; preload local context and restore sys.path
+in finally when importing only pure render helpers.

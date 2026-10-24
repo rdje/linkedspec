@@ -24,7 +24,7 @@ date: "2026-10-24"
 status: current on the Perl reference under FUTURE-PARITY-BACKLOG.19.2.1; portable capability admitted under .19.7
 tags: [dsl, actionir, assignment, autovivification, diagnostics, perl, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.2.1 and frozen v1 fixture; deferred extension TYPE-REFERENCE-BOOK.1.2.12. Prior card: git show 24e9c72a31b7eb31ce94b09beab9655ae85378cb:docs/knowledge/write-vivification-perl-reference.md."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/signed-array-perl/publish.py; current: prove -Iperl t/signed_array_selector_perl_contract.t; literal-kind intake: bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-number-intake/read.py. Perl scope only."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/signed-array-perl/publish.py; current: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t; literal-kind repair: bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-kinds/publish.py. Perl scope only."
 ---
 
 # Perl reference write vivification
@@ -109,11 +109,9 @@ Historical before/after packets and two qualified infix-oracle mistakes
 remain under docs/checkpoints/signed-array-perl/. Other backend/portable
 admission and complete spelling inventory remain separately owned.
 
-Owned22: accepted/current native and emitted byte-shadow probes show
-CodeblockRuntime::_eval_expr erases whole-float and boolean literal kinds
-before return/assignment: 0+serialized number yields IV; native1/0 loses
-boolean identity. Compiled argument twins retain NV/boolean kinds. This
-pre-existing producer defect precedes integer selection. Repair22 is P1
-after clean17.2, before Rust17.3. Preliminary source/flags/INC review:
-docs/checkpoints/perl-literal-number-intake/read.py under the project
-Python wrapper. No repair/admission or historical environment replay.
+Repair22 preserves whole-float/boolean literal kinds and large-fraction values
+through deferred evaluation and typed copies. BindingRuntime uses public scalar
+validity rather than lossy private integer caches, excluding computed fractional
+selectors. [[perl-codeblock-boolean-literal-kind-drift]] owns source-bound causal
+facts and actual before/after/fault controls. Existing signed/v1 authorities and
+original17.2 observations stay unchanged; no other-backend admission is added.

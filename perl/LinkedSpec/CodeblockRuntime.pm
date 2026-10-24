@@ -7,6 +7,7 @@ use warnings;
 use Scalar::Util qw(blessed reftype refaddr);
 use Storable qw(dclone);
 use Hash::Util::FieldHash qw(fieldhash);
+use JSON::PP ();
 use LinkedSpec::RuntimeLogical ();
 use LinkedSpec::BindingRuntime ();
 use LinkedSpec::CallableContract ();
@@ -55,12 +56,31 @@ sub _error {
 }
 
 sub _copy_value {
- my ($value) = @_;
+ my ($value, $copies) = @_;
  return $value unless ref($value);
- my $copy = dclone($value);
- # Weak AST keys carry only an opaque identity marker. Copies remain the
- # same callable, while independently constructed equal records stay distinct.
- _copy_codeblock_origins($value, $copy, {});
+ $copies ||= {};
+ my $identity = refaddr($value);
+ return $copies->{$identity} if exists $copies->{$identity};
+ my $kind = ref($value);
+ my $copy;
+ if ($kind eq 'ARRAY' || $kind eq 'HASH') {
+  # Storable can normalize whole floats and populate caches in the source.
+  # Copy typed scalar leaves directly, retaining aliases and cycles by identity.
+  $copy = $kind eq 'ARRAY' ? [] : {};
+  $copies->{$identity} = $copy;
+  if ($kind eq 'ARRAY') {
+   push @$copy, _copy_value($_, $copies) for @$value;
+  } else {
+   $copy->{$_} = _copy_value($value->{$_}, $copies) for keys %$value;
+   _inherit_codeblock_origin($value, $copy)
+    if ($value->{kind} // '') eq 'codeblock_literal';
+  }
+ } else {
+  # Keep the existing copy behavior for opaque host references.
+  $copy = dclone($value);
+  $copies->{$identity} = $copy;
+  _copy_codeblock_origins($value, $copy, {});
+ }
  return $copy
 }
 
@@ -679,10 +699,18 @@ sub _eval_expr {
   unless ref($node) eq 'HASH';
  my $kind = $node->{kind} // '';
 
- return 0 + $node->{value} if $kind eq 'number';
+ if ($kind eq 'number') {
+  # JSON can round a literal's numeric payload and erase its floating flag.
+  # Reconstruct supported decimal tokens with the AST parser's conversion.
+  # Older source-less records retain their numeric-payload fallback.
+  my $source = $node->{source};
+  return 0 + substr($source, 0) if defined($source) && !ref($source)
+   && $source =~ /\A-?[0-9]+(?:\.[0-9]+)?\z/;
+  return 0 + $node->{value};
+ }
  return $node->{value} if $kind eq 'string';
  return undef if $kind eq 'undef';
- return $node->{value} ? 1 : 0 if $kind eq 'boolean';
+ return $node->{value} ? JSON::PP::true : JSON::PP::false if $kind eq 'boolean';
  return _read_binding($ctx, $node->{name}) if $kind eq 'variable';
  return dclone($node) if $kind eq 'codeblock_literal';
  _error($node->{code} // 'invalid_codeblock_literal')

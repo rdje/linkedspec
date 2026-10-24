@@ -5,6 +5,8 @@ use JSON::PP ();
 use File::Basename qw(dirname);
 use File::Spec ();
 use Scalar::Util ();
+use B ();
+use Storable ();
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::AST ();
@@ -1093,6 +1095,252 @@ subtest 'deferred write validation and parameter presence restore without effect
         is($flag, 0, 'caller absence survives success or failure');
         ok(!defined($document), 'caller value survives success or failure');
     }
+};
+
+sub deferred_literal_flags {
+    my ($value) = @_;
+    return {kind => 'null'} unless defined $value;
+    return {kind => 'boolean'} if JSON::PP::is_bool($value);
+    return {kind => 'array', items => [map { deferred_literal_flags($_) } @$value]}
+        if ref($value) eq 'ARRAY';
+    return {kind => 'harray', entries => {map { $_ => deferred_literal_flags($value->{$_}) } keys %$value}}
+        if ref($value) eq 'HASH';
+    return {kind => ref($value)} if ref($value);
+    my $bits = B::svref_2object(\$value)->FLAGS;
+    # Compare public value kinds, allowing harmless additional conversion caches.
+    my @valid = map { ($bits & $_) ? 1 : 0 } (B::SVf_IOK(), B::SVf_NOK(), B::SVf_POK());
+    my @flags = $valid[2] ? (0,0,1) : $valid[0] ? (1,0,0) : $valid[1] ? (0,1,0) : (0,0,0);
+    # Compare numeric zero by value; hexadecimal payloads distinguish nonzero precision.
+    return {kind => 'scalar', flags => \@flags,
+        ($flags[0] || $flags[1]) && !$flags[2]
+            ? (numeric_payload => $value == 0 ? 'zero' : sprintf('%a', $value)) : ()};
+}
+
+sub deferred_literal_storage {
+    my ($value) = @_;
+    return {kind => 'null'} unless defined $value;
+    return {kind => 'boolean'} if JSON::PP::is_bool($value);
+    return {kind => 'array', items => [map { deferred_literal_storage($_) } @$value]}
+        if ref($value) eq 'ARRAY';
+    return {kind => 'harray', entries => {map { $_ => deferred_literal_storage($value->{$_}) } keys %$value}}
+        if ref($value) eq 'HASH';
+    return {kind => ref($value)} if ref($value);
+    my $bits = B::svref_2object(\$value)->FLAGS;
+    return {public => [map { ($bits & $_) ? 1 : 0 } (B::SVf_IOK(), B::SVf_NOK(), B::SVf_POK())],
+        private => [map { ($bits & $_) ? 1 : 0 } (B::SVp_IOK(), B::SVp_NOK(), B::SVp_POK())]};
+}
+
+subtest 'deferred primitive literals retain kinds and numeric payloads on public routes' => sub {
+    my @cases = (
+        ['negative_whole_float', 'cb={|| return(-1.0) }; return(cb())', -1.0],
+        ['positive_whole_float', 'cb={|| return(1.0) }; return(cb())', 1.0],
+        ['positive_float_zero', 'cb={|| return(0.0) }; return(cb())', 0.0],
+        ['negative_float_zero', 'cb={|| return(-0.0) }; return(cb())', -0.0],
+        ['fractional_float', 'cb={|| return(-1.25) }; return(cb())', -1.25],
+        ['large_whole_float', 'cb={|| return(9007199254740992.0) }; return(cb())', 9007199254740992.0],
+        ['rounded_whole_float', 'cb={|| return(9007199254740993.0) }; return(cb())', 9007199254740993.0],
+        ['large_fractional_value', 'cb={|| return(1000000000000000.5) }; return(cb())', 1000000000000000.5],
+        ['visible_fractional_difference', 'cb={|| return(num_sub(1000000000000000.5,1000000000000000)) }; return(cb())', 0.5],
+        ['negative_fractional_difference', 'cb={|| return(num_sub(-1000000000000000.5,-1000000000000000)) }; return(cb())', -0.5],
+        ['integer_control', 'cb={|| return(-1) }; return(cb())', -1],
+        ['large_integer_control', 'cb={|| return(9007199254740993) }; return(cb())', 9007199254740993],
+        ['literal_true', 'cb={|| return(true) }; return(cb())', JSON::PP::true],
+        ['literal_false', 'cb={|| return(false) }; return(cb())', JSON::PP::false],
+        ['assigned_literals', 'cb={|| flag=false; index=-1.0; return([flag,index]) }; return(cb())',
+            [JSON::PP::false, -1.0]],
+        ['nested_literals', 'cb={|| return({"values":[false,true,-1.0,0.0,1.25,-1,0,undef,"false","0"]}) }; return(cb())',
+            {values => [JSON::PP::false, JSON::PP::true, -1.0, 0.0, 1.25, -1, 0, undef, 'false', '0']}],
+        ['fixed_forwarding', 'relay={|value| return(value) }; cb={|| return(relay(false)) }; return(cb())', JSON::PP::false],
+        ['rest_forwarding', 'relay={|...values| return(values) }; cb={|| return(relay(false,-1.0,true,0.0)) }; return(cb())',
+            [JSON::PP::false, -1.0, JSON::PP::true, 0.0]],
+        ['copied_argument', 'edit={|value| value[0]=true; return(value) }; cb={|| original=[false,-1.0]; edited=edit(original); return([original,edited]) }; return(cb())',
+            [[JSON::PP::false, -1.0], [JSON::PP::true, -1.0]]],
+        ['registered_forwarding', 'cb={|| return(reflect(false)) }; return(cb())', JSON::PP::false,
+            'fn reflect(value) { return(value) }'],
+        ['registered_rest', 'cb={|| return(collect(false,-1.0)) }; return(cb())', [JSON::PP::false, -1.0],
+            'fn collect(...values) { return(values) }'],
+        ['contextual_attached', 'return(apply(7) { return(false) })', JSON::PP::false,
+            'fn apply(value, callback: codeblock) { return(callback()) }'],
+        ['contextual_parenthesized', 'return(apply(7,{ return(true) }))', JSON::PP::true,
+            'fn apply(value, callback: codeblock) { return(callback()) }'],
+        ['numeric_boolean_rejection', 'cb={|| return([num_add(true,1),num_add(false,1),num_eq(1,1)]) }; return(cb())',
+            [undef, undef, 1]],
+        ['logical_boolean_results', 'cb={|| return([and(true,false),or(false,true),not(false),not("0")]) }; return(cb())',
+            [JSON::PP::false, JSON::PP::true, JSON::PP::true, JSON::PP::false]],
+        ['false_text', 'cb={|| return(cat(false,"q")) }; return(cb())', '0q'],
+        ['string_and_null_controls', 'cb={|| return(["-1","1.0","false","0",undef]) }; return(cb())',
+            ['-1', '1.0', 'false', '0', undef]],
+        ['negative_float_selector', 'items=[10,20,30]; cb={|| index=-1.0; return([items[index],index]) }; return(cb())',
+            [undef, -1.0]],
+        ['compiled_float_argument', 'items=[10,20,30]; cb={|index| return([items[index],index]) }; return(cb(-1.0))',
+            [undef, -1.0]],
+        ['literal_float_selector_control', 'items=[10,20,30]; cb={|| return(items[-1.0]) }; return(cb())', undef],
+        ['negative_integer_selector_control', 'items=[10,20,30]; cb={|| index=-1; return([items[index],index]) }; return(cb())',
+            [30, -1]],
+        ['positive_float_read_compatibility', 'items=[10,20,30]; cb={|| index=1.0; return([items[index],index]) }; return(cb())',
+            [20, 1.0]],
+        ['compiled_boolean_argument', 'cb={|value| return(value) }; return(cb(false))', JSON::PP::false],
+        ['direct_precision_control', 'return(1000000000000000.5)', 1000000000000000.5],
+        ['direct_boolean_control', 'return(false)', JSON::PP::false],
+        ['computed_fractional_selector', 'items=[10,20,30]; cb={|| index=num_sub(-1.5,-1); return([index,items[index]]) }; return(cb())',
+            [-0.5, undef]],
+        ['compiled_fractional_argument', 'items=[10,20,30]; cb={|index| return([index,items[index]]) }; return(cb(num_sub(-1.5,-1)))',
+            [-0.5, undef]],
+    );
+    my $serial = 0;
+    my $json = JSON::PP->new->canonical->allow_nonref;
+    for my $case (@cases) {
+        my ($id, $body, $expected, $definitions) = @$case;
+        subtest $id => sub {
+            my $source = ($definitions // '') . "\nTop: /x/\n I { $body }\n";
+            my $expected_flags = deferred_literal_flags($expected);
+            for my $route (qw(native generated)) {
+                my (%context, @warnings, $value, $dump, $emitted, $output, $exception);
+                my $completed;
+                {
+                    open my $capture, '>', \$output or die "Capture literal output: $!";
+                    local *STDOUT = $capture;
+                    local $SIG{__WARN__} = sub { push @warnings, @_ };
+                    $completed = eval {
+                        if ($route eq 'native') {
+                            my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context,
+                                dump_parser_source => 1, parser_source_ref => \$dump);
+                            die 'Native literal parser did not build' unless ref($parser) eq 'CODE';
+                            my $input = 'x';
+                            $value = $parser->(\$input);
+                        } else {
+                            $emitted = LinkedSpec::emit_generated_source(\$source,
+                                source_identity => 'deferred-literal-kinds.spec');
+                            my $package = 'DeferredLiteralKindsGenerated' . $serial++;
+                            eval "package $package; $emitted; 1" or die $@;
+                            my $input = 'x';
+                            no strict 'refs';
+                            $value = &{"${package}::Execute"}(\$input);
+                        }
+                        1;
+                    };
+                    $exception = $@ unless $completed;
+                }
+                my $raw_storage = deferred_literal_storage($value);
+                my $actual_flags = deferred_literal_flags($value);
+                ok($completed, "$route execution completes");
+                diag("$exception") if defined $exception;
+                ok(!defined($context{last_error}), "$route has no runtime error");
+                is_deeply(\@warnings, [], "$route is warning-free");
+                is($output // '', '', "$route is quiet");
+                is_deeply($actual_flags, $expected_flags, "$route retains pre-serialization kinds and exact numeric payloads");
+                is_deeply($value, $expected, "$route retains values");
+                if ($ENV{LINKEDSPEC_LITERAL_KIND_OBSERVE}) {
+                    note('LITERAL_KIND_OBSERVATION ' . $json->encode({id => $id, route => $route,
+                        instrument => 'public-validity-v2', raw_storage => $raw_storage,
+                        source => $source, completed => $completed ? JSON::PP::true : JSON::PP::false,
+                        flags => $actual_flags, expected_flags => $expected_flags, value => $value,
+                        expected => $expected, warnings => \@warnings, stdout => $output // '',
+                        exception => defined($exception) ? "$exception" : undef,
+                        runtime_error => defined($context{last_error}) ? "$context{last_error}" : undef,
+                        codeblock_runtime => $INC{'LinkedSpec/CodeblockRuntime.pm'},
+                        defined($dump) ? (dump => $dump) : (), defined($emitted) ? (emitted => $emitted) : ()}));
+                }
+            }
+        };
+    }
+};
+
+subtest 'assigned literal kinds reject writes after RHS effects without changing the receiver' => sub {
+    for my $case (
+        ['false', JSON::PP::false, 'boolean', 'kind_not_path_selector'],
+        ['true', JSON::PP::true, 'boolean', 'kind_not_path_selector'],
+        ['1.0', 1.0, 'number', 'fractional_number'],
+        ['-1.0', -1.0, 'number', 'fractional_number'],
+        ['0.0', 0.0, 'number', 'fractional_number'],
+    ) {
+        my ($literal, $expected, $kind, $reason) = @$case;
+        my ($items, $chosen, $seen) = ([10,20,30], undef, '');
+        my $initial_identity = Scalar::Util::refaddr($items);
+        my $rhs = parse_expr('{|| seen=cat(seen,"r"); return(99) }');
+        my $record = parse_expr('{|| chosen=' . $literal . '; items[chosen]=rhs() }');
+        my $expected_flags = deferred_literal_flags($expected);
+        my $error;
+        eval { LinkedSpec::CodeblockRuntime::invoke($record, [], {
+            items => \$items, chosen => \$chosen, seen => \$seen, rhs => \$rhs,
+        }, 'literal-write'); 1 } or $error = $@;
+        my $actual_flags = deferred_literal_flags($chosen);
+        ok(LinkedSpec::BindingRuntime::is_nested_write_error($error), "$literal reports a typed selector failure");
+        my $fields = (Scalar::Util::reftype($error) // '') eq 'HASH' ? {%$error} : {};
+        is($fields->{code}, 'nested_write_segment_invalid', "$literal has the invalid-segment diagnostic");
+        is($fields->{actual_kind}, $kind, "$literal retains its selector kind");
+        is($fields->{reason}, $reason, "$literal retains its invalid-kind reason");
+        is_deeply($actual_flags, $expected_flags, "$literal assignment retains its scalar kind");
+        is($seen, 'r', "$literal RHS runs exactly once before kind validation");
+        is_deeply($items, [10,20,30], "$literal preserves receiver values on failure");
+        is(Scalar::Util::refaddr($items), $initial_identity, "$literal preserves receiver identity on failure");
+    }
+};
+
+subtest 'source-less and nonliteral numeric records retain their payload fallback' => sub {
+    for my $source (undef, '', '.5', '1e3', '+1', '0x10', '1_0', '1.0; die "bad"', {}) {
+        my $record = parse_expr('{|| return(7) }');
+        my $number = $record->{body_ast}{statements}[0]{expr}{args}[0];
+        $number->{value} = 7;
+        if (defined $source) {
+            $number->{source} = $source;
+        } else {
+            delete $number->{source};
+        }
+        my (@warnings, $value, $error);
+        {
+            local $SIG{__WARN__} = sub { push @warnings, @_ };
+            eval { $value = LinkedSpec::CodeblockRuntime::invoke($record, [], {}, 'number-fallback'); 1 }
+                or $error = $@;
+        }
+        ok(!defined($error), 'legacy numeric record still executes');
+        is_deeply(\@warnings, [], 'source fallback is warning-free');
+        is($value, 7, 'unsupported or absent source keeps its prior numeric payload');
+    }
+};
+
+subtest 'typed container copying preserves scalar kinds, aliases and cycles' => sub {
+    my $leaf = [-1.0];
+    my $input = [$leaf, $leaf];
+    push @$input, $input;
+    my $before = deferred_literal_flags($leaf->[0]);
+    my $copy = LinkedSpec::CodeblockRuntime::_copy_value($input);
+    isnt(Scalar::Util::refaddr($copy), Scalar::Util::refaddr($input), 'copied root is independent');
+    isnt(Scalar::Util::refaddr($copy->[0]), Scalar::Util::refaddr($leaf), 'copied child is independent');
+    is(Scalar::Util::refaddr($copy->[0]), Scalar::Util::refaddr($copy->[1]), 'internal alias is preserved');
+    is(Scalar::Util::refaddr($copy->[2]), Scalar::Util::refaddr($copy), 'internal cycle is preserved');
+    is_deeply(deferred_literal_flags($leaf->[0]), $before, 'copying preserves the source scalar kind');
+    is_deeply(deferred_literal_flags($copy->[0][0]), $before, 'copying preserves the destination scalar kind');
+    $copy->[0][0] = 5;
+    is($copy->[1][0], 5, 'copied aliases share their independent child');
+    is($leaf->[0], -1.0, 'copied mutation preserves the original');
+    pop @$input;
+    pop @$copy;
+    my $scalar = 7;
+    my $opaque = bless \$scalar, 'LinkedSpec::LiteralOpaqueControl';
+    my $opaque_copy = LinkedSpec::CodeblockRuntime::_copy_value($opaque);
+    isa_ok($opaque_copy, 'LinkedSpec::LiteralOpaqueControl');
+    isnt(Scalar::Util::refaddr($opaque_copy), Scalar::Util::refaddr($opaque), 'opaque fallback remains detached');
+    $$opaque_copy = 8;
+    is($$opaque, 7, 'opaque fallback preserves its source');
+};
+
+subtest 'lossy integer caches cannot promote fractional selectors' => sub {
+    my $carrier = [-0.5];
+    my $unused = Storable::dclone($carrier);
+    my $index = $carrier->[0];
+    is(LinkedSpec::BindingRuntime::_runtime_kind($index), 'number', 'fraction retains numeric kind after caching');
+    ok(!defined(LinkedSpec::CodeblockRuntime::_read_array_entry([10,20,30], $index)),
+        'fractional negative read stays outside the integer extension');
+    my $error;
+    eval { LinkedSpec::BindingRuntime::nested_write([10,20,30], 1, 'items', [
+        {value => $index, kind_hint => 'dynamic', source_span => {source_id => 'cache-control',
+            start => 0, end => 1, unit => 'unicode_scalar', provenance => 'authored'}},
+    ], 99); 1 } or $error = $@;
+    ok(LinkedSpec::BindingRuntime::is_nested_write_error($error), 'fractional write has a typed error');
+    my $fields = (Scalar::Util::reftype($error) // '') eq 'HASH' ? {%$error} : {};
+    is($fields->{actual_kind}, 'number', 'fractional write reports its valid numeric kind');
+    is($fields->{reason}, 'fractional_number', 'fractional write reports the numeric exclusion');
 };
 
 done_testing();
