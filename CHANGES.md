@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.19 — lower ordinary grouped assignment values
+
+Balanced ordinary assignment groups now reach existing typed value lowering, including stored RHS and helper compatibility operands. Function-local discovery sees the grouped assignment; inner offsets and detached-root semantics use existing nodes. Public AST/reporting and deferred raw-group rejection remain unchanged. Module/callable-suite syntax and t/grouped_assignment_value_contract.t native/fresh checks pass after observed compilation RED. Book/canonical grouping fact/map/live docs agree. Director-required focused cadence defers full suites, exhaustive proof and global hook scans; no portable admission or new measurement.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.16 — deferred scoped with
 
 Implement metadata-approved with helper/receiver execution inside Perl callable bodies. Temporarily scope value and its presence flag, preserve caller effects, normalize contextual blocks and reuse explicit callback invocation. Syntax and the small ordinary/deferred/native/fresh regression pass, including typed-error restoration. Book/Knowledge agree; broad verification stays deferred. Grouped assignment19 is next.

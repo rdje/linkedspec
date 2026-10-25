@@ -750,13 +750,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.16 - execute scoped with inside deferred codeblocks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.19`
-  Status: `pending` / P2 grouped-assignment value defect intake
+  Status: `done` / ordinary grouped assignment values
+  Activation commit: `224754044cf11733a3918889723c440bc6022e7f`
   Goal: Resolve grouped indexed-assignment values against the supported mutation-expression contract.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.16`
   Reproduce/impact: Initial indexed-write12 copy control out=(chosen[0][0]=2) produced generated compilation failure near chosen[. Exact source/native/fresh channels survive in baseline.json.gz, not silently reclassified as unsupported syntax. The canonical perl-raw-readiness-source-unit-provenance card admits balanced ordinary mutation receiver groups for reporting; stored assignment-value contexts require separate adjudication.
   Schedule: After signed17/last14/with16, before inventory1. Establish Toolbox AST/lowering/source/runtime/effect/span evidence; fix supported value contexts or accurately document a contract exclusion with proof. Preserve prior reporting-only and deferred raw-group distinctions.
-  Planned tier: `canonical`
-  Claim verification: none: Diagnosis intake only; baseline observations remain owned by12, with no grouped-value admission.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm; t/grouped_assignment_value_contract.t; t/callable_codeblock_literal_contract.t; canonical grouping fact, derived Knowledge Map, book and live continuity documents.
+  Verification tier: `focused`
+  Focused checks: Module/test syntax and one small grouped-value native/fresh regression; book render and fast continuity checks. Exhaustive suites/global scans stay deferred under director instruction.
+  Canonical trigger: None for this bounded implementation phase; broad validation follows feature coverage.
+  Claim verification: none: Deterministic lowering repair and a small regression; no quantified corpus, exhaustive or portable-admission measurement.
+  Completion: Balanced ordinary assignment groups reach existing typed lowering, including compatibility-bridge helper operands. Inner parsing preserves offsets and function-local declaration/presence discovery follows the assignment; AST/reporting/deferred execution are unchanged.
+  Focused command: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/grouped_assignment_value_contract.t` passes after reproducing native/fresh handler compilation failures. Module and callable-suite syntax pass; book render and fast continuity checks pass. Full suites remain deferred.
+  - [x] **REPRODUCE / ISSUE** — Public AST/Get/substitution probes expose raw grouped RHS and emitted chosen[ syntax errors; focused regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering's top-level raw bypass and compatibility-bridge bypass omit typed group lowering; function declaration discovery also cannot see the raw assignment.
+  - [x] **FIX** — Balanced assignment-only decomposition feeds existing value lowering and local discovery without altering deferred ASTs.
+  - [x] **ADDRESSED (verified)** — Small native/fresh regression and module/callable-suite syntax pass.
+  - [x] **NO REGRESSION** — Quick scalar/append/hash/nested, copy, ordering, receiver/argument/local and deferred-rejection controls pass; exhaustive verification is deferred.
+  - [x] **LOCKSTEP** — Book, canonical grouping fact, map and live handoff agree; raw-regex21 is next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.19 - lower ordinary grouped assignment values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.21`
   Status: `pending` / P2 raw multiline regex payload defect

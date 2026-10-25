@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Deferred with16 is implemented and targeted-checked; grouped indexed-assignment19 is next. Continue toward100% feature coverage with compilation and a quick targeted check per commit. Broad suites/exhaustive proof/global registry scans remain deferred.
+Ordinary grouped assignment19 is implemented and targeted-checked; raw multiline regex21 is next. Continue toward100% feature coverage with compilation and a quick targeted check per commit. Broad suites/exhaustive proof/global registry scans remain deferred.
 
 ## Latest Completed Slice
 
-Perl deferred with helper/receiver execution now uses callable metadata, normalizes contextual blocks and temporarily scopes value/presence slots. Explicit callbacks retain the existing invocation ABI. Syntax and the small ordinary/deferred/native/fresh regression pass, including caller frames, nesting, call shapes, effects and typed-null error restoration. Book and canonical with/write facts agree; no exhaustive admission is claimed.
+Perl balanced assignment groups reach existing typed lowering, including stored RHS values and helper compatibility operands. Local declaration discovery follows the grouped assignment. Syntax and the small native/fresh regression pass for scalar/append/hash/nested values, detached snapshots, order and function/argument/receiver contexts; deferred raw grouping is unchanged. Book and canonical grouping fact agree; no exhaustive admission is claimed.
 
 ## Next Action
 
-Activate grouped assignment19 from clean Git; establish the supported mutation-expression contract with public tools, implement its missing behavior, compile/run a small targeted check and commit. Raw-regex21 follows; broad validation and maintenance remain deferred.
+Activate raw-regex21 from clean Git; use public source/lowering/match probes, repair the assigned multiline regex payload, compile/run one small targeted check and commit. Broad validation and maintenance remain deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
 - `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
 - `TYPE-REFERENCE-BOOK.1.2.14` — deferred last free/receiver support, syntax and native/fresh regression pass; deferred with16 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
@@ -29,7 +30,6 @@ Activate grouped assignment19 from clean Git; establish the supported mutation-e
 - `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
 - `TYPE-REFERENCE-BOOK.1.2.17.0` — 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
-- `REPO-HYGIENE.21` — dated22830 parent/483 Rust incremental; zero removals; metadata4/custody4/input3/book89 marker RED/core PASS; whole accepted12 custody; signed17 next.
 
 ## History
 

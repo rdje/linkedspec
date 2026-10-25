@@ -17,11 +17,11 @@ answers:
   - "why are supported legacy wrappers raw in the AST but readiness canonical"
   - "does a canonical return cover unsupported inner operands"
   - "are grouped assignment receivers raw inside deferred codeblocks"
-date: 2026-10-23
+date: 2026-10-25
 status: verified source-unit reporting and compatibility at363c79109; quoted/comment/marker successors remain open
 tags: [perl, actionir, readiness, blind-call, provenance]
-evidence: "Historical .7.1 proof: git show 24e9c72a31b7eb31ce94b09beab9655ae85378cb:docs/knowledge/perl-raw-readiness-source-unit-provenance.md. Exact admission remains363c79109; current grouped-value intake belongs to TYPE-REFERENCE-BOOK.1.2.19."
-reverify: "Full .7.1 evidence is frozen at363c79109ea8498252927547438ade47117ae71e: run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-review.py at that revision or through historical replay, without refreshing captures after newer documentation/compiler changes. Current permanent proof: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t. Complete census uses census-source.py, never failed file-route variants."
+evidence: "Historical .7.1 proof: git show 24e9c72a31b7eb31ce94b09beab9655ae85378cb:docs/knowledge/perl-raw-readiness-source-unit-provenance.md. Exact admission remains363c79109; grouped values are repaired by TYPE-REFERENCE-BOOK.1.2.19."
+reverify: "Current grouped values: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/grouped_assignment_value_contract.t. Reporting proof remains frozen at363c79109; use its historical checkpoint review there, without refreshing captures. Metadata tests: t/actionir_raw_dependency_{metadata,provenance,compatibility}.t and t/actionir_nested_block_source_spans.t."
 ---
 
 The authored control is:
@@ -125,7 +125,7 @@ authored offsets; return i+1 reports its inner i+1, not a false whole-statement
 dependency or a blanket waiver. Additional diagnostic parsing preserves caller
 $@ and retains raw source when parsing fails.
 
-Ordinary balanced assignment groups are decomposed only to existing typed
+At the reporting revision, ordinary balanced assignment groups decompose to existing typed
 assign_scalar/assign_array_append/assign_hash_index/assign_nested_access nodes,
 whose children remain scanned. Published ordinary mutation receiver lowering
 already supports these nodes. Deferred codeblock descendants are never
@@ -155,4 +155,4 @@ receipt is promoted. Optional environment-selected gates are skipped, without a
 broader optional-coverage claim. `.0.7.2.0` freezes the focused claim at that
 revision and routes quoted-data diagnosis `.0.7.2.1` before implementation.
 
-October23: TYPE-REFERENCE-BOOK.1.2.19 owns out=(chosen[0][0]=2) compile failure from indexed-write12 baseline.json.gz. Stored assignment values require separate contract/runtime adjudication from the ordinary mutation-receiver readiness groups above; no new syntax admission follows.
+October25: TYPE-REFERENCE-BOOK.1.2.19 repairs ordinary stored grouped assignments. MethodLowering skipped raw whole-expression ASTs, including the compatibility bridge used by helper operands. It now unwraps only balanced assignment groups into existing typed nodes, preserving inner offsets; function-local declaration discovery follows the same nodes. Native/fresh focused checks cover stored snapshots, arguments, receivers, locals and ordered effects. Parser schema/reporting and deferred raw-group rejection remain unchanged. No broad or portable admission is claimed.

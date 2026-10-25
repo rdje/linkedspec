@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.19 — grouped values through compatibility operands
+
+The grouped RHS already parses as a raw node and ordinary nested lowering has assignment-value machinery. Top-level raw bypass omitted it; helper operand lowering also runs with a compatibility-bridge flag that suppresses typed parsing. A balanced assignment-only classifier now admits those nodes at both paths and in local declaration discovery. It strips complete outer groups while carrying inner offsets, leaving parser/deferred AST behavior unchanged. The small source vector covers stored/scalar/append/hash/nested roots, helper/receiver/local contexts, copy isolation and selector/RHS order in native/fresh execution. Syntax and focused regression pass; exhaustive suites remain deferred by director instruction.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.16 — localize slots for with
 
 With shadows binding references rather than overwriting caller storage. Localizing both value and its presence slot restores identity on return or exception and keeps undef present, so nested writes raise the existing kind conflict. Contextual blocks execute in the current frame; explicit callbacks retain their own signatures and ordinary invocation guards. The targeted check covers direct and registered caller frames without a broad suite.

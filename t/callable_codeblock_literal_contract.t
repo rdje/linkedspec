@@ -1351,4 +1351,8 @@ subtest 'deferred with focused contract' => sub {
     do File::Spec->catfile($repo_root, 't', 'deferred_with_contract.t') or die $@ || $!;
 };
 
+subtest 'ordinary grouped assignment focused contract' => sub {
+    do File::Spec->catfile($repo_root, 't', 'grouped_assignment_value_contract.t') or die $@ || $!;
+};
+
 done_testing();

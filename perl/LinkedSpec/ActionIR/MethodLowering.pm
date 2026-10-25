@@ -900,6 +900,27 @@ sub _parse_method_value_ast_expr {
  return LinkedSpec::ActionIR::AST::parse_action_expr($expr, { deps => $deps || {} })
 }
 
+sub _ordinary_grouped_assignment_node {
+ my ($node, $deps) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'raw_perl';
+ my $source = $node->{source};
+ return undef unless defined($source);
+ my $start = ref($node->{source_span}) eq 'HASH' ? ($node->{source_span}{start} // 0) : 0;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+ return undef unless LinkedSpec::ActionIR::AST::Parser::_outer_delimiter_is_balanced($source, '(', ')');
+ while (LinkedSpec::ActionIR::AST::Parser::_outer_delimiter_is_balanced($source, '(', ')')) {
+  $source = substr($source, 1, length($source) - 2);
+  ++$start;
+  $start += length($1) if $source =~ /\A(\s*)/;
+  $source =~ s/\A\s+|\s+\z//g;
+ }
+ my $inner = LinkedSpec::ActionIR::AST::parse_action_expr($source,
+  { deps => $deps || {}, base_start => $start });
+ return undef unless ref($inner) eq 'HASH'
+  && ($inner->{kind} // '') =~ /\Aassign_(?:scalar|array_append|hash_index|nested_access)\z/;
+ return $inner
+}
+
 sub _actionir_ast_quote_string_source {
  my ($value, $quote) = @_;
  $quote = '"' unless defined($quote) && ($quote eq '"' || $quote eq "'");
@@ -1769,6 +1790,12 @@ sub _user_function_collect_local_decls_from_node {
  my ($node, $decls, $params) = @_;
  return unless ref($node) eq 'HASH';
  my $kind = $node->{kind} // '';
+
+ if ($kind eq 'raw_perl') {
+  my $assignment = _ordinary_grouped_assignment_node($node);
+  _user_function_collect_local_decls_from_node($assignment, $decls, $params) if $assignment;
+  return;
+ }
 
  if ($kind eq 'variable') {
   _user_function_record_local_decl($decls, $params, '$', $node->{name});
@@ -4244,6 +4271,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
    if $kind eq 'boolean';
   if ($kind eq 'raw_perl') {
+   my $assignment = _ordinary_grouped_assignment_node($node, $deps);
+   return $lower_ast_scalar_assignment_value_node->($assignment) if $assignment;
    my $source = $node->{source};
    if (defined($source) && $source =~ /^\((.*)\)$/s) {
     my $inner = $trim_action_ir_value->($1);
@@ -5285,10 +5314,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
- unless (ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge}) {
-  my $ast_node = ref($provided_ast) eq 'HASH'
-   ? $provided_ast : _parse_method_value_ast_expr($trimmed, $deps);
+ my $compat_bridge = ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge};
+ # Compatibility helpers still receive authored grouped assignment operands.
+ # Admit only those typed assignments; retain the bridge for other raw forms.
+ my $ast_node = ref($provided_ast) eq 'HASH' ? $provided_ast
+  : (!$compat_bridge || $trimmed =~ /\A\(/) ? _parse_method_value_ast_expr($trimmed, $deps) : undef;
+ my $grouped_assignment = _ordinary_grouped_assignment_node($ast_node, $deps);
+ unless ($compat_bridge && !$grouped_assignment) {
   if (ref($ast_node) eq 'HASH') {
+   $ast_node = $grouped_assignment || $ast_node;
    my $ast_kind = $ast_node->{kind} // '';
    if ($ast_kind ne 'raw_perl') {
     my $ast_lowered = $lower_ast_value_node->($ast_node);
