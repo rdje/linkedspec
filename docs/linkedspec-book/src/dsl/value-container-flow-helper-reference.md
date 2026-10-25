@@ -1390,16 +1390,15 @@ FieldList: /([A-Za-z_, ]+)/
 Nested composition is useful when the transformation reads naturally as one expression:
 
 ```text
-set(public_fields, filter_match(uniq(uppercase_each(fields)), /^[A-Z_]+$/));
-lowercase_each(public_fields);
+public_count = count(filter_match(fields, /^[A-Z_]+$/));
 ```
 
 When `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`,
 `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` appears as a standalone statement, it writes the
 transformed items back to that explicit working array. In a value expression or receiver chain, the same helper
 returns a transformed array value and does not mutate its input. This statement/value distinction is the reference
-contract. Perl and Lua currently implement all seven statement forms; Rust, Dart, and Julia currently omit
-write-back for `split_each`, `filter_match`, and `uniq`, with repair owned by `FUTURE-PARITY-BACKLOG.5`.
+contract. Perl, Rust, Dart, Julia and Lua implement the statement forms; broader validation remains
+owned by `FUTURE-PARITY-BACKLOG.5.3.4` after feature coverage.
 
 Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
 
@@ -1408,11 +1407,9 @@ set(public_fields, fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
 public_csv = fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_values(",");
 ```
 
-Perl currently has an additional function-position gap: the direct expression
-`return(filter_match(["ax", "by"], /^a/))` falls through to an undefined host
-function. Its receiver equivalent `return(["ax", "by"].filter_match(/^a/))`
-returns `["ax"]`. This direct-return discrepancy from the pure-function contract
-is owned by `SESSION-STARTUP-READING.87.1`.
+Ordinary Perl actions support `return(filter_match(["ax", "by"], /^a/))` and its receiver equivalent; both return `["ax"]`. Named/computed arrays, user-function parameters, nested helper arguments and compatible receiver continuations use the same pure filter behavior. Standalone bare-target calls retain write-back.
+Quoted text follows the existing Perl receiver policy: `filter_match(["a.b","axb"], "a.b")` returns `["a.b"]`; slash regex literals retain their flags, such as `/^a/i`.
+A separate known issue remains: nested `uniq(uppercase_each(fields))` rebinds `fields` on Perl. `FUTURE-PARITY-BACKLOG.5.4.1` owns the immediate repair; use pure receiver composition or `count(filter_match(...))` meanwhile. Deferred codeblocks retain their separately qualified helper vocabulary.
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 

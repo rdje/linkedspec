@@ -1573,16 +1573,33 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Status: `active`
   Goal: Repair existing Perl helper-execution gaps and reconcile grouped-expression lowering, without adding a regex value type.
   Children: `SESSION-STARTUP-READING.87.1`, `SESSION-STARTUP-READING.87.2`, `SESSION-STARTUP-READING.87.3`, `SESSION-STARTUP-READING.87.4`
-  Dependencies: .86.4.2.4 public/lowered diagnostic and docs/knowledge/action-regex-operands-and-runtime-kinds.md. Scanner .86 is closed; .87.2 is the selected feature prerequisite, while .87.1/.3/.4 retain their owners.
+  Dependencies: .86.4.2.4 public/lowered diagnostic and docs/knowledge/action-regex-operands-and-runtime-kinds.md. Scanner .86 is closed and .87.2 is implemented; ordinary filter_match87.1 is selected under feature-first steering, while .87.3/.4 retain their owners.
 - ID: `SESSION-STARTUP-READING.87.1`
-  Status: `pending`
+  Status: `done`
   Goal: Make documented function-position filter_match return its transformed array on Perl.
-  Planned tier: focused.
+  Activation commit: `18c68a05d63369d7a58aa065c26ffa1683f4a39b`
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm; t/filter_match_value_contract.t and callable-suite registration; existing action-regex fact/map, affected book helper/reference/integration guidance; indexed task part/root, nested-pipeline defect intake under FUTURE-PARITY-BACKLOG.5.4 and its index, and normal continuity.
+  Verification tier: `focused`
+  Focused checks: Perl module/test compilation and one small native/fresh direct/nested/receiver/statement/function regression, book render and fast continuity checks. Broad suites/global scans remain deferred.
+  Canonical trigger: None for existing documented pure-helper implementation under director cadence; shared-contract/admission/broad acceptance remain separate.
+  Claim verification: none: Deterministic helper implementation with a small regression; no quantified corpus/exhaustive/portable admission measurement.
   Planned focused proof: Public/lowered/emitted direct, nested, receiver and statement forms; named/shape/computed arrays, string/literal patterns, once-only evaluation and nonmutation in value position; direct-dependent pipeline tests and book.
   Planned canonical boundary: Final repair-group acceptance/push; broaden if shared contract changes.
   Acceptance: Repair filter_match(["ax","by"], /^a/) falling through as an undefined host function; retain the working receiver form. Reconcile the full affected lowering path before changing it; coordinate FUTURE-PARITY-BACKLOG.5's broader pipeline normalization.
   Verification: .86.4.2.4 public and independent lowered execution fail; receiver returns ["ax"]. MethodLowering's receiver route synthesizes __array_value_filter_match, while the failing direct form remains an unlowered host call. The book promises pure function composition.
-  Commit: `pending`
+  Commit: `SESSION-STARTUP-READING.87.1 - lower Perl filter_match value calls`
+  Current baseline: Public Get reports rule_handler_eval/undefined host filter_match and null; call_spec_handler_subst leaves the call raw. The working receiver synthesizes __array_value_filter_match; ordinary aggregate AST lowering recognizes filter_match arity but returns it to an unimplemented legacy free-call path.
+  Owned documentation drift: The second array-pipeline reference paragraph still lists Rust/Dart/Julia statement omissions after5.3.1-.3 implementations, while the catalog is current. Correct that related duplicate during this slice; no new runtime change is implied.
+  Discovered P1 defect and next owner: Public Get plus substitution shows fields=["a","b"]; out=uniq(uppercase_each(fields)); return([out,fields]) returns [["A","B"],["A","B"]], whereas receiver fields.uppercase_each().uniq() keeps fields lowercase. The nested filter variant also mutates fields, with no last_error. This reproduces without filter_match, isolating the older pure-function pipeline route. Generated source assigns fields through BindingRuntime::array_transform. FUTURE-PARITY-BACKLOG.5.4.1 owns the immediate next repair after this leaf's clean commit; broad proof remains deferred.
+  Completion: Recognize ordinary filter_match calls in the same value pipeline lowerer as the private pure receiver helper. Read bare typed slots before legacy aggregate-source inference so named bindings and function parameters remain valid arrays. Existing statement mutation dispatch stays unchanged; this does not add deferred helper vocabulary or a regex value type.
+  Focused command: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/filter_match_value_contract.t` passes native/fresh direct/nested/receiver/statement/function, named/computed source, quoted text/flag and snapshot/effect controls. Module/registration syntax, book and fast continuity checks pass. Full suites/global scans remain deferred.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get, runtime_ctx_ref and call_spec_handler_subst show null/undefined-host-call and an unlowered filter_match; the new focused native/fresh regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering's pure value pipeline admits only private __array_value_* names, leaving the public free helper raw; named parameter arrays also need typed source-slot reads.
+  - [x] **FIX** — Canonicalize public filter_match to the existing private pure implementation and read typed bare sources before legacy inference.
+  - [x] **ADDRESSED (verified)** — Module/registration syntax and the small native/fresh regression PASS.
+  - [x] **NO REGRESSION** — Quick nested helpers, functions, receiver continuations, literal/string patterns, flags, once-only source effects, snapshots and explicit statement mutation pass. Separate nested-transform impurity is isolated/owned next5.4.1; no broad purity admission.
+  - [x] **LOCKSTEP** — Book reference/integration guidance, canonical regex fact/map and indexed/live handoff agree; duplicate stale transform omissions corrected, P1 nested purity5.4.1 is the next feature.
 - ID: `SESSION-STARTUP-READING.87.2`
   Status: `done`
   Goal: Execute the existing matches helper in Perl callable codeblock bodies with string and literal pattern operands.

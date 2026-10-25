@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## SESSION-STARTUP-READING.87.1 — lower ordinary Perl filter_match values
+
+Route function-position filter_match through existing pure receiver lowering; typed source-slot reads retain named bindings/function parameters. Small native/fresh regression and module/registration syntax pass for direct/nested/receiver/statement/function forms, computed sources, quoted text/flags, snapshots and source effects. Book reference/integration guidance and the duplicate stale Rust/Dart/Julia transform-omission paragraph are corrected. A separate P1 defect is isolated by public Get/substitution: uniq(uppercase_each(fields)) rebinds fields even without filter_match, while its receiver twin stays pure. Existing parity parent5 owns immediate next repair5.4.1; current book qualification is explicit. Broad suites/global scans/maintenance remain deferred.
+
 ## FUTURE-PARITY-BACKLOG.5.3.3 — rebind Julia standalone array transforms
 
 Remove Julia's split_each/filter_match/uniq statement exclusion. Validate the target before operands, copy arguments left-to-right and reuse pure helper dispatch and local-store for writeback. Pure/receiver forms remain unchanged. Package loading/compilation and small native/generated-plan/fresh-emitted checks pass for snapshot/type, absent/wrong-kind targets and once-only effects after actual runtime RED. Register the small test in runtests; book/Julia fact/map/live/indexed tasks agree. All three missing implementations are present; broad5.3.4 stays deferred while helper inventory selects further features.

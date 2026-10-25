@@ -2,6 +2,7 @@
 id: action-regex-operands-and-runtime-kinds
 title: Regex helper operands do not establish a portable regex runtime type
 answers:
+  - why do nested Perl array helper functions rebind the input
   - is regex a builtin variable type in spec action code
   - does rx equals slash pattern create a reusable regex object
   - why does a regex AST node not imply a regex value kind
@@ -11,12 +12,16 @@ answers:
   - does callable matches skip pattern effects for an undefined subject
   - how are literal regex flags handled by callable matches
   - which task owns function position filter_match on Perl
-date: 2026-10-03
-status: bounded callable matches repair verified; original audit observations remain historical; independent helpers remain open
+date: 2026-10-25
+status: ordinary filter87.1 implemented; nested purity5.4.1 open; audit observations historical
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
-evidence: "SESSION-STARTUP-READING.86.4.2.4 reads the neutral binding contract, relevant mdBook sections and first-party AST/evaluator owners. The tracked diagnostic measures thirteen action cases plus an AST probe on accepted production at 7c318569. Source inspection of other backends is not a fresh five-backend execution claim."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl; inspect values, generated source and both error channels, not process exit alone."
+evidence: "Historical type audit .86.4.2.4 at7c318569; callable matches .87.2; ordinary filters .87.1."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/filter_match_value_contract.t"
 ---
+
+October25: .87.1 maps ordinary filter_match values to the existing __array_value_filter_match pure lowerer and reads typed bindings/parameters. Native/fresh checks cover values/receivers/statements, typed/computed sources, flags, text, snapshots and effects. No deferred-helper or regex-type admission.
+
+Public Get/substitution also confirms uniq(uppercase_each(fields)) rebinds fields without filter_match; its receiver twin stays pure. Legacy value lowering emits array_transform assignments. P1 FUTURE-PARITY-BACKLOG.5.4.1 owns the immediate next repair; .87.1 does not claim that broader purity fix.
 
 ## Contract and syntax
 
@@ -114,7 +119,7 @@ In particular, the formal grammar excludes comments inside rule paragraphs;
 the comment counterexample proved observed Perl compatibility, not an admitted
 portable comment/regex ambiguity.
 
-`.87.1` owns the direct `filter_match` failure: the receiver route synthesizes
+At the audit baseline, `.87.1` owned the direct `filter_match` failure: the receiver route synthesizes
 `__array_value_filter_match`, but the failing direct form is left as a host call.
 Coordinate the pre-existing pipeline caveats and `FUTURE-PARITY-BACKLOG.5`.
 `.87.2` owns `matches` in callable bodies: `CodeblockRuntime::_eval_expr` has no
@@ -124,17 +129,7 @@ callable fixtures do not cover them.
 
 ## Recommendation discussed with the director
 
-Do not add a first-class regex type without a concrete unmet use case. Its possible
-benefits are carrying pattern and flags together, validating at construction, and
-reusing a compiled representation when a backend permits it. Those are potential
-design benefits, not measured performance claims or current behavior guarantees.
-Caching does not inherently require a public value type. The cost includes shared
-flag semantics, copying, equality, serialization, callable transport and five-backend
-conformance. Strings and documented helper operands cover the examples established
-here. A type would not itself resolve lexical slash ambiguity.
-
-This is an engineering recommendation in response to the September23 discussion,
-not approval, roadmap admission, or a new implementation task.
+September23 recommendation: add a first-class regex type only for a concrete unmet use case; no approval or roadmap admission. Potential benefits are carrying pattern/flags, construction validation and reusable backend compilation, not measured performance. Caching itself needs no public type. Costs include shared flags, copy/equality/serialization, callable transport and cross-backend conformance. Strings and contextual operands cover observed uses; a type would not settle lexical slash ambiguity.
 
 ## October 3 callable matches repair
 

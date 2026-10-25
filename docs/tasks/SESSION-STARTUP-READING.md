@@ -20,6 +20,8 @@
 
 ## Current Frontier
 
+Current feature selection (October25): `.87.1` ordinary Perl filter_match values are implemented/targeted-checked; next is nested pure-pipeline defect `FUTURE-PARITY-BACKLOG.5.4.1`. Existing known helper gaps precede continued type inventory; full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
 after the clean numeric commit. Portable text policy remains `.55.2`; `.55.3`

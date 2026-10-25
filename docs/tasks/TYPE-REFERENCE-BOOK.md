@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / helper inventory after transform implementations5.3.1-.3
+- Status: `active` / nested pipeline purity5.4.1 before further inventory
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -968,22 +968,24 @@ Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACK
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases select the next known implementation gap. |
-| 2 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua signed selectors targeted-checked on PUC/LuaJIT. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors targeted-checked. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/fresh targeted checks pass. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with native/fresh targeted checks pass. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map inventory to book after method-gap implementation. |
-| 11 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent inventory/layout review. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Policy maintenance deferred until feature coverage. |
-| 13 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Broad verification deferred until feature coverage. |
-| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Legacy metadata maintenance deferred. |
-| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed reference families and closeout. |
+| 1 | `FUTURE-PARITY-BACKLOG.5.4.1` | `pending` | Fix confirmed nested function-position transforms rebinding their source. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Helper/alias inventory continues after known bounded feature repairs. |
+| 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua signed selectors targeted-checked on PUC/LuaJIT. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors targeted-checked. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/fresh targeted checks pass. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with native/fresh targeted checks pass. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map inventory to book after method-gap implementation. |
+| 12 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent inventory/layout review. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Policy maintenance deferred until feature coverage. |
+| 14 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Broad verification deferred until feature coverage. |
+| 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Legacy metadata maintenance deferred. |
+| 16 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 17 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed reference families and closeout. |
+
 
 
 ## Decisions

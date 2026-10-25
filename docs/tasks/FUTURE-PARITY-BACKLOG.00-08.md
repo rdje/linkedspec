@@ -2105,7 +2105,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `active`
   Goal: Normalize or permanently document helper caveats.
-  Children: `.5.1`, `.5.2`, `.5.3`
+  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`
   Acceptance: Own the array split/pipeline return-shape caveats (`SPEC-LANG-REFERENCE.5.3.1`) and
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
@@ -3140,6 +3140,34 @@
   Schedule: Deferred broad validation; not a prerequisite for the next feature under director instruction.
   Planned tier: Determine at activation; portable admission requires canonical proof.
   Claim verification: none: Unactivated broad verification; no admission claim.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.4`
+  Status: `active` / P1 pure function pipeline defect intake
+  Goal: Prevent ordinary Perl value-position array transforms from rebinding their named source while preserving explicit standalone statement writeback.
+  Children: `.5.4.1`, `.5.4.2`
+  Intake owner: `SESSION-STARTUP-READING.87.1`; observed while checking the existing book nested-function recipe, not inferred solely from a grep.
+  Schedule: Immediate next feature after87.1 is committed clean; helper inventory remains open. This is a documented existing purity contract, not a new helper/type.
+  Claim verification: none: Qualitative defect intake and explicit source/value controls, no aggregate completeness/parity measurement.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.4.1`
+  Status: `pending`
+  Goal: Route ordinary Perl value-position split_each/trim_each/filter_nonempty/lowercase_each/uppercase_each/uniq through pure array values; keep standalone mutation separate.
+  Dependencies: `SESSION-STARTUP-READING.87.1`
+  Reproduce: Top:: I { fields=["a","b"]; out=uniq(uppercase_each(fields)); return([out,fields]) } returns [["A","B"],["A","B"]] with no last_error. Expected [["A","B"],["a","b"]]. Receiver control fields.uppercase_each().uniq() produces that expected result. Adding outer filter_match(...,/^A/) returns [["A"],["A","B"]], confirming that the nested helper route owns the mutation.
+  Root cause: MethodLowering's public value pipeline path chooses legacy array_pipeline mutation and emits fields=BindingRuntime::array_transform(...) for the inner calls; private __array_value_* receiver lowering produces pure snapshots. Existing declarations include the pure helper contracts.
+  Impact: Silent source rebinding breaks value-expression composition, stored snapshots and the book's nonmutation guarantee. P1; fix next rather than leave an unscheduled complaint.
+  Planned tier: `focused`
+  Planned checks: One small native/fresh regression contrasting value/nested/receiver/statement forms, named/shape/computed/function sources, snapshots and once-only operand effects; module/test compilation and book/fast continuity checks. No full package suite under director cadence.
+  Acceptance: Reuse pure implementation without changing explicit standalone writeback, typed values or current quoted/literal pattern policy. Preserve args/order/shape guards and isolate any additional policy question rather than silently expand scope.
+  Claim verification: none: Unactivated repair; no new quantified measurement.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.4.2`
+  Status: `pending`
+  Goal: Broader pipeline-purity recurrence and public no-drift after feature coverage.
+  Dependencies: `FUTURE-PARITY-BACKLOG.5.4.1`
+  Schedule: Deferred broad verification, not a blocker for the next implementation feature.
+  Planned tier: Determine at activation from admission scope.
+  Claim verification: none: No admission measurement yet.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`

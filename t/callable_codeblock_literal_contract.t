@@ -1355,4 +1355,8 @@ subtest 'ordinary grouped assignment focused contract' => sub {
     do File::Spec->catfile($repo_root, 't', 'grouped_assignment_value_contract.t') or die $@ || $!;
 };
 
+subtest 'ordinary filter_match value contract' => sub {
+    do File::Spec->catfile($repo_root, 't', 'filter_match_value_contract.t') or die $@ || $!;
+};
+
 done_testing();

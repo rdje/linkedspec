@@ -3146,6 +3146,7 @@ sub _lower_method_value_expr {
   my ($call) = @_;
   return undef unless $call;
   my $method = $call->{method} // '';
+  $method = '__array_value_filter_match' if $method eq 'filter_match';
   return undef unless $method =~ /^__array_value_(split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
   my $op = $1;
 
@@ -3165,7 +3166,9 @@ sub _lower_method_value_expr {
   if ($op eq 'filter_match') {
    my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
    return undef unless $effective_args;
-   my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
+   my $source_expr = _lower_source_slot_bare_scalar_read_expr($effective_args->[0], $deps);
+   $source_expr = $lower_array_value_source_expr->($effective_args->[0])
+    unless defined($source_expr) && length($source_expr);
    my $pattern_expr = $normalize_array_value_regex_expr->($effective_args->[1]);
    return undef unless defined($source_expr) && length($source_expr);
    return undef unless defined($pattern_expr) && length($pattern_expr);
