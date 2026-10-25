@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-HYGIENE`
-- Status: `pending` / director-requested disk review .23 after clean Dart17.4
+- Status: `active` / .24 backlog after signed-selector feature admission17.7
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-25` (`REPO-HYGIENE.23`: disk-note review scheduled before Julia17.5)
+- Last updated: `2026-10-25` (`REPO-HYGIENE.23`: safe cleanup verified; .24 prevents recurring growth)
 - Owner: repo-local workflow
 
 ## Goal
@@ -38,23 +38,44 @@ the durable handoff state current.
 ## Task Tree
 
 - ID: `REPO-HYGIENE`
-  Status: `pending`
+  Status: `in_progress`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`, `REPO-HYGIENE.21`, `REPO-HYGIENE.22`, `REPO-HYGIENE.23`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`, `REPO-HYGIENE.11`, `REPO-HYGIENE.12`, `REPO-HYGIENE.13`, `REPO-HYGIENE.14`, `REPO-HYGIENE.15`, `REPO-HYGIENE.16`, `REPO-HYGIENE.17`, `REPO-HYGIENE.18`, `REPO-HYGIENE.19`, `REPO-HYGIENE.20`, `REPO-HYGIENE.21`, `REPO-HYGIENE.22`, `REPO-HYGIENE.23`, `REPO-HYGIENE.24`
 
 - ID: `REPO-HYGIENE.23`
-  Status: `pending`
+  Status: `done` (2026-10-25)
   Goal: Re-measure the director-supplied disk notes and reclaim only proven disposable LinkedSpec artifacts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.4`
   Priority / scheduling: Director-requested maintenance immediately after clean Dart17.4 and before Julia17.5. Planning and read-only source intake do not pivot the active dirty leaf. Activate only from clean Git with all prior jobs joined.
   Owned paths: Parent-owned cleanup producers/evidence under docs/checkpoints/REPO-HYGIENE.23/, exact individually approved generated outputs, docs/ARTIFACT_CLEANUP.md, relevant existing Knowledge/book maintenance guidance, and normal task/live continuity. Other repositories, submodules, source, sealed checkpoints and unresolved run evidence remain excluded.
-  Planned tier: `canonical`
-  Planned checks: Retain the complete supplied index/LinkedSpec note before use; re-measure allocated sizes and free space; inspect exact tracked/ignored ownership, published retention obligations and permitted process/run liveness before any removal; retain actual commands/exits/channels and before/after per-item and parent/volume measurements. Inspect scratch per concluded experiment with recoverable inputs/results, never infer disposal permission from ignore status. Prefer native Cargo/Git tools; do not expire reflogs or unreachable objects merely because the old note suggests immediate pruning. Verify no current writer and any Git maintenance lease before compaction; preserve all active and retained proof consumers. Run applicable doctrine, history, Knowledge, book and canonical gates before the separate maintenance commit.
-  Planned canonical trigger: Owned cleanup/retention and Git-storage maintenance boundary.
-  Planned claim: docs/claims/REPO-HYGIENE.23.json for actual dated observations; intake makes no new size, reproducibility or reclaim claim.
-  Claim verification: none: Pending planning and exact authorized input preservation only; declare the dated measurement claim before cleanup execution.
+  Activation: Clean c2c4ab05de1e08de56bee77fd6671724720728c8 after Dart17.4 canonical PASS (Phase0 1035; both CLI66), all10 normal hooks, post-memory PASS, brief0 and exact committed receipt check. All previous jobs are joined. The post-commit hook already promoted the receipt; a redundant manual promotion correctly refused and the exact-HEAD check then passed. No receipt or runtime defect is inferred. User reiterates priority for unused .linkedspec-data artifacts and rust/target before further feature work; supplied size estimates remain unverified until this leaf's census.
+  Verification tier: `focused`
+  Focused checks: Retain the complete supplied index/LinkedSpec note before use; re-measure allocated sizes and free space; inspect exact tracked/ignored ownership, published retention obligations and permitted process/run liveness before any removal; retain actual commands/exits/channels and before/after per-item and parent/volume measurements. Inspect scratch per concluded experiment with recoverable inputs/results, never infer disposal permission from ignore status. Prefer native Cargo/Git tools; do not expire reflogs or unreachable objects merely because the old note suggests immediate pruning. Verify no current writer and any Git maintenance lease before compaction; preserve all active and retained proof consumers. Completed focused cleanup/reader/Rust/book checks, history pressure, Knowledge, memory/task-pointer and diff checks govern landing. The director explicitly defers broad suites and global registry scans until after feature coverage is complete.
+  Canonical trigger: None for this commit after the director explicitly defers broader verification to feature implementation. Changed tracked paths are maintenance evidence/docs only; no shared storage policy, runtime, wrapper, hook, gate or dependency changes. Completed focused safety proof and fast manual continuity checks govern landing. The broad pre-commit registry scan is deferred explicitly under the director’s latest policy; post-commit pointer verification remains enabled. Full validation follows feature completion.
+  Claim verification: `docs/claims/REPO-HYGIENE.23.json`
   Intake: Read the user-authorized external Desktop disk-notes index and LinkedSpec note in full on 2026-10-25, read-only. Exact source packets are retained in docs/checkpoints/REPO-HYGIENE.23/input-notes.json.gz; intake.py verifies the copy before removing only duplicate untracked project copies. External originals are unchanged. Those 2026-10-21 estimates are historical inputs, not current measurements. The latest cleanup record .22 retains artifacts, with no disposal authorization. Known process-inspection restrictions require permitted evidence, not guessed quiescence.
   Acceptance: Report actual bytes reclaimed per item, current parent total/free space and exact retained items/reasons. No blanket deletion, no dependency implementation inspection, no sibling-repository writes and no concurrent cleanup/build. If a candidate cannot be proved safe, retain it and finish the safe subset with its specific blocked disposition recorded.
+  Safety boundary: Read current cleanup and descendant/permission-denied Knowledge authorities before census. Do not invoke managed --recover/--purge-failed: startup7 still owns denied/unknown liveness and group-establishment repair. Independent permitted process/cwd/open-file checks must establish candidate quiescence. Skip nested repositories/submodules before metadata traversal and never follow symlinks or cross filesystem boundaries. Retain every candidate whose provenance, liveness or evidence obligations are unresolved; complete proved-safe removals within this leaf.
+  Verified progress: Original target114886914048 allocated bytes was quarantined reversibly, then locked/offline primary rebuild and all four typed public examples passed. Whole actual executable/source inputs survive. Native Cargo clean removes only the old quarantine after permitted empty lsof rechecks; fresh target1917575168 bytes remains, yielding112969338880 allocated bytes reduction. The history source1702740 entries/1533599 files/163401 directories/5740 symlinks occupies119213043712 allocated bytes; its whole deduplicated archive55259061 bytes passes full payload/metadata verification and both actual restored public readers preserve original stdout. Complete source metadata/population and permitted open files are rechecked before descriptor-based removal; both leases are closed, source/quarantine absent. Redundant ignored archive staging copies are also removed after hash/use proof. Independent decoding and six reason-sensitive actual reviewer denials reject corrupt/missing/mode/totals/value/denied-liveness variants; healthy/restored pass. The initial reviewer nested-field error is retained as an instrument correction, not product RED. Complete supplied book rendering passes. After-census passes: parent scoped482253152256 ->250070880256 allocated bytes (remaining data236752314368), retaining archive55263232 allocated bytes. After-volume available2639087056 KiB is observed separately. Knowledge/diff/history and complete book checks pass; the first pressure check rejects50003/50000 book lines, then wrapping-only correction preserves all words and restores49999. Both renders and the original refusal survive. The completed focused proof and fast manual checks govern landing; broad CI/global registry verification are deferred under the latest director instruction.
+  Retained disposition: LS004 scratch contains a protected nested repository; do not delete its ancestor or inspect its implementation. Remaining unique/unassessed experiment evidence, project package stores, dependency outputs, Git objects/reflogs and sealed checkpoints stay retained. No managed recovery/purge, Git pruning, dependency bootstrap or other-repository write. Scope qualification: global scans exclude Git/protected repositories and fixed proof/verification prefixes but include observer wrapper metadata. They are non-atomic aggregates without independent global per-file custody; volume delta includes other projects and is not causal reclaim.
+  Owned growth finding: tools/test_document_history_rollover.py creates original-/repaired- views with tempfile.mkdtemp beneath the fixed history-rollover-eof scratch root and has no successful-run removal before returning. These views use this project's read-only Git metadata through GIT_DIR/GIT_WORK_TREE; the source explicitly says they are ordinary files, not new repositories. The successful ordinary regression prints its report but retains each generated view. Historical book capture writers similarly leave book- render trees after archiving source/selected outputs. Inventory and per-experiment custody/liveness proof must determine safe current disposal; recurring producer repair remains owned under P2 hygiene24 after signed feature admission17.7, per the director’s latest feature-first instruction. Do not replay or edit retired capture writers.
+
+  Director steering / gate lifecycle: The director requests feature implementation directly after cleanup and explicitly permits broader verification afterward. Candidate1/session35723 is deliberately stopped143 to correct its handoff; candidate2/session56587 is stopped143 to defer broader CI as instructed. Neither has an accepted receipt or product/test failure. All measured proof bytes remain fixed. This evidence/docs-only leaf is focused-eligible under the registry. Normal commit attempt/session3033 is deliberately stopped1 during the broad registry scan, under the director’s subsequent explicit lightweight policy. Completed full claim-check PASS187/246 and targeted cleanup proof remain valid; the retry uses --no-verify after fast manual pointer/memory/cadence/diff checks. Post-commit pointer verification remains enabled; hook code is unchanged. Julia17.5 resumes after clean23;24 remains scheduled after17.7.
+  Commit: `REPO-HYGIENE.23 - reclaim verified Rust and history fixture artifacts`.
+
+- ID: `REPO-HYGIENE.24`
+  Status: `pending`
+  Goal: Prevent the recurring document-history regression from accumulating completed disposable fixture views.
+  Dependencies: `REPO-HYGIENE.23`, `TYPE-REFERENCE-BOOK.1.2.17.7`
+  Priority / scheduling: P2 after signed-selector feature admission17.7, before complete operation inventory1.2.1. Director explicitly requests focus on feature implementation; the verified cleanup leaves ample capacity. Keep this repair owned, with no maintenance detour before Julia/Lua/admission17.5–7.
+  Reproduce / root cause: The current tools/test_document_history_rollover.py source creates run_tree using tempfile.mkdtemp at the fixed history-rollover-eof root, then reaches report/return with no cleanup. Run the public successful regression under its existing managed wrapper and compare named fixture directories before/after; retain actual proof before changing it. No claim that every historical tree is disposable follows from source alone.
+  Impact: Routine canonical/doctrine invocations accumulate completed fixture copies outside the normal per-run automatic cleanup. Confirm the exact created byte population with actual commands; do not infer sizes from old notes.
+  Owned paths: tools/test_document_history_rollover.py and its direct lifecycle/retention consumers, required exact historical source-evolution admission if affected, new bounded proof under docs/checkpoints/REPO-HYGIENE.24/, and normal Knowledge/book/live/task continuity. Preserve all original immutable evidence and retired capture producers.
+  Planned tier: `canonical`
+  Planned checks: Actual public before/after creation/removal and explicit report preservation; distinguishing cleanup inverse and exact restoration; normal/injected-failure behavior and source/destination/symlink/other-repository guards; document-history/doctrine/direct dependent proof and exact staged canonical acceptance. Keep necessary failure diagnosis under an explicit bounded retention policy rather than deleting unknown data.
+  Planned canonical trigger: Recurring proof producer and runtime-created fixture storage lifecycle change.
+  Claim verification: none: Source-established growth intake and scheduled ownership only; declare actual measurements before activation.
+  Acceptance: A normal successful invocation preserves required durable reports and leaves no disposable fixture root, historical results remain unchanged, failure/retention semantics are explicit and verified, and the independent current cleanup23 disposition stays immutable.
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -472,27 +493,28 @@ the durable handoff state current.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 0 | `REPO-HYGIENE.23` | `pending` | Director-requested measured safe cleanup after clean Dart17.4; before Julia17.5. |
-| 1 | `REPO-HYGIENE.22` | `done` | Dated retention review verified; Rust17.3 follows clean landing. |
-| 2 | `REPO-HYGIENE.21` | `done` | Previous dated retained review; original proof remains unchanged. |
-| 3 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
-| 4 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
-| 5 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
-| 6 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
-| 7 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
-| 8 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
-| 9 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
-| 10 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
-| 11 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
-| 12 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
-| 13 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
-| 14 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
-| 15 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
-| 16 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
-| 17 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
-| 18 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
-| 19 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
-| 20 | `REPO-HYGIENE.18` | `done` | Dated metadata and full historical custody verified; readonly155/full40701 passes; resume if/while .5.2 after clean commit. |
+| 0 | `REPO-HYGIENE.24` | `pending` | Owned P2 after feature admission17.7; current PNT returns directly to Julia17.5. |
+| 1 | `REPO-HYGIENE.23` | `done` | Verified allocated Rust105.2GiB/history111.0GiB removal, lossless archive52.7MiB; protected evidence retained. |
+| 2 | `REPO-HYGIENE.22` | `done` | Dated retention review verified; Rust17.3 follows clean landing. |
+| 3 | `REPO-HYGIENE.21` | `done` | Previous dated retained review; original proof remains unchanged. |
+| 4 | `REPO-HYGIENE.20` | `done` | Due retained review at clean79c68715; resume pipeline11 after normal landing. |
+| 5 | `REPO-HYGIENE.19` | `done` | Retained metadata/public-output review; fixture .7 follows clean landing. |
+| 6 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
+| 7 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
+| 8 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
+| 9 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
+| 10 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
+| 11 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
+| 12 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
+| 13 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
+| 14 | `REPO-HYGIENE.11` | `done` | Due October7 review after clean compiler membership; retain proof/cache data and fix maintenance pointers before canonical .0.2.2. |
+| 15 | `REPO-HYGIENE.12` | `done` | Historical observations qualified; check history capacity before private handoff. |
+| 16 | `REPO-HYGIENE.13` | `done` | Due dated metadata review; preserve proof data and resume residual-producer diagnosis. |
+| 17 | `REPO-HYGIENE.14` | `done` | Due dated retained review at the clean foundation boundary. |
+| 18 | `REPO-HYGIENE.15` | `done` | Due October10 metadata review retains evidence/caches and repairs historical commit pointers; resume assignment required .5.2. |
+| 19 | `REPO-HYGIENE.16` | `done` | Due October11 retained review verified; readonly claim-census .3.2.1.10 precedes cache .9 and giant kind .3. |
+| 20 | `REPO-HYGIENE.17` | `done` | October16 metadata/full channels/zero removals verified; attached parser .5.1.1 follows. |
+| 21 | `REPO-HYGIENE.18` | `done` | Dated metadata and full historical custody verified; readonly155/full40701 passes; resume if/while .5.2 after clean commit. |
 
 ## Decisions
 

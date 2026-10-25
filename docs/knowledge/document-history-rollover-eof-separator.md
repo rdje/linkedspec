@@ -2,6 +2,7 @@
 id: document-history-rollover-eof-separator
 title: Rollover preserves source separators and pending segment ID string identity
 answers:
+  - "why does history rollover scratch keep growing"
   - "why does a governed CHANGES rollover fail blank line at EOF"
   - "does rollover preserve the last retained record separator"
   - "how was the boundary repair history EOF normalized without archive edits"
@@ -11,7 +12,7 @@ answers:
   - "how does rollover reject contradictory pending metadata"
   - "why is lexical Path.is_relative_to insufficient for report destinations"
   - "which guard protects the rollover regression report path"
-date: 2026-10-06
+date: 2026-10-25
 status: EOF and pending recovery producer repairs verified; canonical landing receipt required
 tags: [history, whitespace, rollover, continuity, defect]
 evidence: "Rollover preserves exact history source/suffix/rows while normalizing mutable EOF separators and restoring string generation identity. Both formats retain91 inputs/36 public commands per epoch, original RED12/final GREEN41 and153 evidence denials. The historical audit recovers only committed Contracts/Phase0 boundary deltas, preserving24 checkpoints/257 historical references/149 selected sources and134 archived inputs/84613241 bytes. Complete conservative source/fixture guards, 22 recovery/56 evolution/20 audit-evidence denials and46 fresh boundary groups pass. Book58/17/four chapters/28 denials and31-hash freeze pass. Both failed canonical candidates and all narrower/corrected preflights are retained. Exact new staged canonical receipt remains required before landing; history bytes, capacities and original runtime claims are unchanged."
@@ -74,3 +75,7 @@ The first canonical candidate exits1 only for literal pending in checked-label e
 The second exact candidate passes all10 doctrines, then exposes unrecognized Contracts decoder evolution. The149-source census has only that route plus previously admitted CI/storage/Phase0 families. After exact Contracts inversion, the current audit exposes the committed18-line nested Phase0 recurrence. Only these known source deltas are normalized, with six effective denials each. Current isolated recovery preserves24 checkpoints/257 historical references/149 selected sources and134 original inputs/84,613,241 bytes, with22 recovery and56 evolution denials. It does not re-execute historical runtime producers. See [[three-objective-language-readiness]].
 
 Fresh public boundary proof initially used only the historical input set, which omitted its new decoder and two literal fixtures. Final guards include the complete regular committed parent perl/t/specs population, both actual fixture files and wrappers, excluding Gitlinks and nonregular metadata without payload reads. This conservative supplied boundary is not minimal observed I/O. Three complete actual commands retain original RED, repaired isolated GREEN and46 boundary groups;20 effective evidence denials distinguish missing source/fixture inputs and false acceptance. All original/count/subset instruments and results remain retained.
+
+## Successful fixture retention
+
+The current tools/test_document_history_rollover.py creates original-/repaired- trees with mkdtemp under .linkedspec-data/scratch/history-rollover-eof and returns without removing successful views. They use the parent read-only Git metadata, not new repositories. Hygiene23 archives all original bytes/metadata before disposal; P2 REPO-HYGIENE.24 owns lifecycle reproduction/repair after signed admission17.7; the director prioritizes Julia/Lua features first. Retired historical writers stay unchanged.

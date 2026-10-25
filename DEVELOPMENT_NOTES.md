@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — REPO-HYGIENE.23 — allocation and fixture custody
+
+Cargo clean reports363.1GiB logical deletion, while native allocated target reduction is105.2GiB; preserve that distinction. The history fixture tree repeats enough source content that all original1533599 files plus path metadata fit a55259061-byte lossless archive. Every unique payload/manifest entry decodes, and two actual restored public readers preserve original stdout. Full original metadata and hardlink/symlink relationships survive; a partial sample may copy an outside-sample hardlink.
+
+The original global-census scope phrase about active scratch is qualified: only the fixed verification directory is excluded, while managed observer metadata remains included. Scans are dated/non-atomic and cannot attribute other projects' volume activity. The history regression's mkdtemp views have no success cleanup; P2 hygiene24 owns lifecycle repair after signed admission17.7; the director requests Julia/Lua features directly after cleanup. The director’s feature-completion policy defers exhaustive suites/global registry scans; fast manual continuity checks accompany compile/quick-targeted feature checks and scoped pre-commit bypass. Post-commit pointer verification remains. All old sealed proofs and dependency internals remain untouched.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.4 — array lengths and carrier boundaries
 
 Dart admits only actual int values for the signed extension. _indexValue retains the evaluated receiver and old float/string/Map coercions. The write classifier admits conditionally valid negative ints; the isolated post-expression walk resolves encountered lengths. Missing-container construction rejects negative selectors before publishing. Globally invalid selector kinds and active binding identities retain their priority. One complete interpreter image covers reads, writes and resolved_index forwarding.

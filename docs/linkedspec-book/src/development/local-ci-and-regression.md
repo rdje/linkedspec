@@ -20,8 +20,8 @@ bash tools/run_ci_local.sh
 This is the canonical regression gate for local development. For snippet-level lowering evidence, see [Inspecting `.spec` Code Generation](codegen-inspector.md).
 ## Verification tiers
 
-The canonical gate is deliberately not the default after every ordinary commit. LinkedSpec uses two tiers so
-small, coherent slices keep moving without weakening the batch boundary:
+During the director’s feature-completion phase, compile and run a quick targeted check, commit, then implement the next feature.
+Broad suites, exhaustive proof and global registry scans are deferred until feature coverage is complete; the baseline automated tiers remain:
 
 - A **focused commit** runs the tests for the changed behavior, its direct dependents, the relevant backend or
   component gate, all repository doctrines, documentation-history pressure checks, and diff hygiene. Book changes

@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — REPO-HYGIENE.23 — measured safe artifact cleanup
+
+Reclaim112969338880 allocated Rust bytes after fresh locked/offline primary build and four typed public examples; preserve its complete executable and sources. Losslessly deduplicate1702740 history entries, verify all payloads/metadata and two restored public readers, then remove119213043712 allocated bytes while retaining55259061 archive bytes. Permitted candidate-specific lsof, topology and unchanged-source rechecks precede removal. Nested repositories, caches, Git history and unresolved experiment evidence remain retained; no managed recovery/purge runs.
+
+Independent decoding/native du, six actual reason-sensitive denials/restored GREEN, complete book rendering and retained before/after scope qualify the claim. Global metadata excludes Git/protected repositories and includes observer records; volume movement is not causal reclaim. Completed focused safety proof and fast continuity checks govern landing; the director defers broader CI/global registry scans until feature coverage is complete. Director prioritizes Julia17.5 features directly after clean landing; P2 fixture repair24 remains scheduled after signed admission17.7.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.4 — Dart signed array selectors
 
 Dart integer selectors now address existing tail-relative positions through native, reconstructed, validated-plan, emitted and CLI carriers. Writes resolve encountered arrays after selector/RHS effects, preserve authored paths/spans and reject missing negative targets without creation. Underflow adds resolved_index on supported typed embedding routes. Existing coercions, identity guards, copies and public error protocols remain.

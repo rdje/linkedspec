@@ -31,7 +31,7 @@ answers:
   - "do historical checked claims need a tracked producer input"
   - "why does accepted block metadata disappear from the Knowledge Map"
   - "how are evidence and reverify lists displayed without executing commands"
-date: 2026-10-24
+date: 2026-10-25
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "Hygiene3-.5 established the historical rebuildable-output boundary. SSD-rooting2.0-.2.6 retains reusable caches and runtime-derived scratch on the 4TB repository filesystem; off-volume project output rejects. tools/test_tool_project_data_storage.sh proves scoped output boundaries."
@@ -43,8 +43,9 @@ evidence_update_2026_10_08: "REPO-HYGIENE.13 retains the dated October8 parent/R
 evidence_update_2026_10_09: "REPO-HYGIENE.14 retains the dated October9 parent/Rust metadata snapshot and actual guarded command channels. Fresh per-file OS metadata, size/traversal fixtures and four evidence controls pass. Zero removals; all proof inputs and reusable caches stay retained. No liveness, recovery/purge or concurrent adversarial traversal guarantee is inferred."
 evidence_update_2026_10_10: "REPO-HYGIENE.15 retains the October10 dated parent/Rust metadata and guarded actual channels: 13433 parent candidate rows/15594802423 bytes; zero removals. Fresh census, independent per-file lstat, size/traversal fixtures and four reason-sensitive evidence controls pass. Every prior hygiene fixture stays excluded. Dated proof is retained; default review-actual.py/claim.py are readonly. Historical commit placeholders are repaired to original .1 d07ee79ea073823c06711b0cc2cf3516d0f172b6 and .2 cf0df422097d55aaf2379cac8907319107406e6b after targeted Git subject/stat/parent metadata/task-diff audit; no old runtime recurrence or pin change. Original commits introduced those placeholders, and later .1 hash-sync commits were pointer refreshes superseded by ADR0065."
 evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust metadata and guarded actual channels:14888 parent candidates/16643190359 bytes; zero removals. Fresh scoped census, independent per-file lstat, aggregate/balanced-size/traversal fixtures and four reason-sensitive actual-channel controls pass. All prior hygiene fixtures stay excluded. The actual predecessor optional-kind readonly publication baseline is retained before introducing the new maintenance claim. The new claim also exposes a source-established current-namespace/fixed-baseline review risk, owned by .3.2.1.10 before cache .9. No product regression is inferred."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.22/review.py"
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.23/review.py"
 evidence_update_2026_10_24: "Hygiene22 retains the dated parent/Rust review with zero removals; independent population/lstat and five metadata denials pass. Metadata grants no disposal authority."
+evidence_update_2026_10_25: "Hygiene23 removes112969338880 allocated Rust bytes after fresh offline build/four examples, and119213043712 history-fixture bytes after complete deduplicated custody/restored readers. Archive55259061 bytes remains. Nested repos/caches/unresolved evidence stay protected; volume delta is not causal reclaim."
 ---
 
 # Shared publication inputs and historical provenance

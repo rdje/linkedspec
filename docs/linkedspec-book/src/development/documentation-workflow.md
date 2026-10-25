@@ -417,23 +417,23 @@ Examples:
 - `MEMORY.md`
 - `COMMIT.md`
 
-The latest artifact-maintenance date and disposition live in `docs/ARTIFACT_CLEANUP.md`.
-An owned census may retain every artifact: reusable caches, dependency data and
-verification evidence are preserved unless an exact deletion is proved safe.
-The task tree records the census scope and exclusions; the date record is overwritten
-after each cleanup rather than accumulating another history log.
-A dated census records file metadata at that moment; it does not prove content ownership
-or authorize deletion. Keep the retained snapshot immutable. A later live census is a new
-observation, while a read-only reviewer can still check the old recorded totals and inputs.
-For a retained daily snapshot, the review order is census completion, fresh scoped comparison,
-and independent per-file metadata checks. Save the actual producers, exit statuses and both
-output channels before advancing the latest date. A successful review may remove zero files.
-Complete fresh comparisons before printing a report whose own log belongs to the census.
-Keep the raw channels; later log growth belongs to a new dated observation.
-For example, the retained daily snapshot can be checked without recapturing changing state:
+The latest artifact-maintenance date and disposition live in `docs/ARTIFACT_CLEANUP.md`. Each cleanup has a task-tree owner, exact targets, retained evidence and permitted
+process/open-file checks. Ignored status, age and size alone never authorize removal. Preserve reusable dependency caches and every unresolved experiment. Never follow
+symlinks or traverse another Git repository; an inaccessible liveness check means retain. For rebuildable Rust output, quarantine only the parent target on the same filesystem,
+build a fresh locked/offline primary executable, and run public examples before using native Cargo clean on the old quarantine. Preserve the new usable target and package store.
+For repeated fixture trees, copy all unique file bytes and per-path metadata first;
+verify every payload, restore a sample and run its actual public readers before deletion.
+The October25 cleanup removed 112,969,338,880 allocated bytes of old Rust output and
+119,213,043,712 allocated bytes of history fixtures, retaining a 55,259,061-byte archive.
+Those are dated per-target measurements. Cargo's larger logical deletion summary and
+the volume's free-space movement are different quantities; other projects may use that volume.
+The remaining large scratch area containing a nested repository stays protected.
+The successful history regression's recurring fixture accumulation has a separately
+owned repair, `REPO-HYGIENE.24`; the cleanup itself does not prevent future growth.
+Review the retained cleanup without rerunning any capture or removal command:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.22/review.py
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.23/review.py
 ```
 
 All other Git repositories and submodules are excluded before traversal. A project task or
