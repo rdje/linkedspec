@@ -335,6 +335,33 @@ sub _eval_registered_function {
  return $entry->{call}->(\@values, $ctx->{invocation})
 }
 
+sub _with_callback_node {
+ my ($args, $surface) = @_;
+ my $contract = LinkedSpec::CallableContract::builtin_contract($surface, 'with');
+ return undef unless ref($args) eq 'ARRAY' && @$args
+  && LinkedSpec::CallableContract::accepts_argument_count($contract, $#$args);
+ my $callback = $args->[-1];
+ return undef unless ref($callback) eq 'HASH';
+ return LinkedSpec::CallableContract::contextual_argument_from_block($callback)
+  if ($callback->{kind} // '') eq 'block_value';
+ return $callback
+}
+
+sub _eval_with_callback {
+ my ($value, $callback, $pass_value, $ctx) = @_;
+ # Shadow slots, not their contents: callers and their presence flags survive
+ # nested scopes and exceptions, while other working-name effects remain live.
+ my $present = 1;
+ local $ctx->{bindings}{value} = \$value;
+ local $ctx->{presence}{value} = \$present;
+ if (($callback->{kind} // '') eq 'codeblock_argument') {
+  return _execute_body($callback->{body_ast}, $ctx)
+ }
+ my $record = require_codeblock_value(_eval_expr($callback, $ctx));
+ return invoke($record, $pass_value ? [$value] : [], $ctx->{bindings}, 'with',
+  undef, $ctx->{invocation}, $ctx->{presence})
+}
+
 sub _eval_if_value {
  my ($node, $ctx) = @_;
  my $args = $node->{args};
@@ -399,6 +426,12 @@ sub _eval_call {
   unless ref($args) eq 'ARRAY';
 
  return _eval_if_value($node, $ctx) if $name eq 'if';
+ if ($name eq 'with') {
+  my $callback = _with_callback_node($args, 'helper');
+  return undef unless $callback;
+  my $value = @$args == 2 ? _eval_expr($args->[0], $ctx) : undef;
+  return _eval_with_callback($value, $callback, @$args == 2, $ctx)
+ }
 
  if ($name eq 'matches') {
   _error('helper_arity_mismatch', helper_name => $name,
@@ -619,6 +652,7 @@ sub _eval_fluent_chain {
    unless ref($args) eq 'ARRAY';
   return undef if $method eq 'sorted' && @$args;
   return undef if $method eq 'take' && @$args > 1;
+  return undef if $method eq 'with' && !_with_callback_node($args, 'receiver');
   if ($method eq 'count' || $method eq 'first' || $method eq 'last' || $method eq 'length') {
    return undef if @$args || $index < $#$calls;
   }
@@ -638,6 +672,11 @@ sub _eval_fluent_chain {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
+  if ($method eq 'with') {
+   my $callback = _with_callback_node($call->{args}, 'receiver');
+   $value = _eval_with_callback($value, $callback, 1, $ctx);
+   next;
+  }
   if ($method eq 'count' || $method eq 'first' || $method eq 'last') {
    $value = _array_selection($method, $value);
    next;

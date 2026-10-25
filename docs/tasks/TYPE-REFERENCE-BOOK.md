@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / deferred with16 after last14
+- Status: `active` / grouped assignment19 after with16
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -727,14 +727,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.17.8 - report context-only Perl CLI runtime failures`
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.16`
-  Status: `pending` / P2 defect owned
+  Status: `completed`
   Goal: Execute scoped with inside deferred callable bodies.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.14`
-  Reproduce/impact: cb = {|| value["x"] = 2 }; case_runner = {|| return(with(undef) { return(cb()) }) }; return(case_runner()) raises unknown_helper:with before the scoped callback. The equivalent compiled with call site reaches the expected typed null conflict.
-  Evidence: docs/checkpoints/type-deferred-indexed-writes/deferred-with-intake.json.gz retains the exact source, runtime producers and native/fresh channels after removing the original wrapper-name collision.
-  Schedule: After last14, before complete inventory1; establish scoped value/caller frames, null, nesting, error restoration, call shape, effects and native/fresh controls.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; measured intake will be bound to indexed-write12.
+  Activation: Cleand5142f0292645e72f28209b89d1189860025771e after last14, post-pointer PASS/brief0. Director's compile/quick-targeted/commit cadence applies; broad verification stays deferred.
+  Owned paths: perl/LinkedSpec/CodeblockRuntime.pm; t/deferred_with_contract.t and callable_codeblock_literal_contract.t registration; current with book and canonical Perl final-codeblock card; normal task/roadmap/live continuity.
+  Verification tier: `focused`
+  Focused checks: Module syntax and one small public ordinary/deferred/native/emitted with regression, plus scoped binding/presence restoration on a typed error. Cover metadata-approved helper/receiver/contextual/explicit forms, nesting, caller context and shape/effect guards. Build book and run fast manual continuity checks; no full suite/corpus/exhaustive proof/global registry scan.
+  Canonical trigger: None for this implementation leaf under director feature-completion policy; broad validation is deferred.
+  Claim verification: none: Deterministic implementation/docs and a quick regression; no quantified corpus, benchmark, exhaustive or portable-admission measurement is published.
+  Reproduce/impact: Public Get on canonical Top:: I returns[7,outer] for immediate with but records typed unknown_helper:with inside a callable. ActionIR inspection shows metadata-normalizable block_value final arguments. The existing runtime lacks with dispatch, while ordinary lowering scopes value and restores caller slots.
+  Acceptance: Metadata-approved helper/receiver forms execute in caller context with temporary present value binding, correct block-local return and restoration on success/error. Reject unsupported shapes before effects; retain explicit callback invocation rules and unrelated caller effects. Quick syntax/native/emitted checks pass.
+
+  Completion: Helper/receiver with now consults CallableContract metadata and normalizes contextual final blocks. The runtime evaluates the input before temporarily shadowing value and presence slots; contextual bodies keep caller context, and explicit callbacks use the existing invocation ABI. Perl localization restores both slots on normal/error exits. Syntax and the small ordinary/deferred/native/fresh-emitted regression pass, including registered caller frames, nesting, null, shape/effect guards and the original typed-null-write conflict. Broad suites/admission remain deferred.
+  Focused command: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/deferred_with_contract.t`.
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/ActionIR inspection shows valid contextual with and immediate[7,outer], while deferred with reports unknown_helper.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — perl/LinkedSpec/CodeblockRuntime.pm lacked with helper/receiver dispatch; ordinary MethodLowering already defines metadata and scoped-value behavior.
+  - [x] **FIX** — Metadata-based callback normalization, temporary binding/presence slots and existing block/callback execution add deferred with without changing its syntax.
+  - [x] **ADDRESSED (verified)** — Module syntax and the focused ordinary/deferred/native/fresh regression pass.
+  - [x] **NO REGRESSION** — Quick caller/nesting/explicit-callback/null/shape/effect and error-restoration controls pass. Full suites remain deferred under director instruction.
+  - [x] **LOCKSTEP** — Book and canonical with/write facts, derived map, task/roadmap/live handoff agree; grouped assignment19 is next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.16 - execute scoped with inside deferred codeblocks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.19`
   Status: `pending` / P2 grouped-assignment value defect intake
@@ -887,11 +900,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Next feature: execute deferred scoped with; quick targeted checks. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Next feature: grouped indexed-assignment value; quick targeted checks. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua compiles/targeted-checks on PUC Lua and LuaJIT. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors compiled/targeted-checked. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/emitted checks pass. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with syntax and focused native/emitted checks pass. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
 | 7 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
 | 8 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.16 — localize slots for with
+
+With shadows binding references rather than overwriting caller storage. Localizing both value and its presence slot restores identity on return or exception and keeps undef present, so nested writes raise the existing kind conflict. Contextual blocks execute in the current frame; explicit callbacks retain their own signatures and ordinary invocation guards. The targeted check covers direct and registered caller frames without a broad suite.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.14 — reuse the array selector
 
 CodeblockRuntime already centralizes count/first dispatch and receiver preflight. Last now uses those same guards and selects the stored tail element without adding coercion or copying inside the selector. Invocation boundaries retain their established copies. The small regression covers native/fresh execution and is also enrolled in the existing callable suite for later broad validation.

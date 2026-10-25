@@ -2,6 +2,7 @@
 id: perl-generic-final-codeblock-normalization
 title: "Perl normalizes contextual final blocks through callable metadata"
 answers:
+  - "can Perl with run inside deferred codeblocks"
   - "does Perl support attached final codeblock arguments"
   - "does Perl support parenthesized contextual codeblock arguments"
   - "how does Perl declare that a callable accepts a final codeblock"
@@ -14,11 +15,11 @@ answers:
   - "why can Perl call value inside with"
   - "how does Perl with restore callable bindings"
   - "does calling a non callable with value report a typed error"
-date: 2026-10-20
+date: 2026-10-25
 status: current
 tags: [perl, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
-evidence: "Original generic normalization and dated closeout evidence remain in this same card at accepted Git 2fca7d8489038c226fe0454a105f12a2af696a1f. TYPE-REFERENCE-BOOK.1.2.4 owns the scoped callable repair and its complete proof under docs/checkpoints/type-scoped-with/."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/type-scoped-with/publish.py && bash tools/project_data_run.sh prove -q -Iperl t/callable_codeblock_literal_contract.t"
+evidence: "Original generic normalization and dated closeout evidence remain in this same card at accepted Git 2fca7d8489038c226fe0454a105f12a2af696a1f. TYPE-REFERENCE-BOOK.1.2.4 owns immediate scopes;16 adds metadata-governed deferred with."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/deferred_with_contract.t"
 ---
 
 # Perl Generic Final-Codeblock Normalization
@@ -46,7 +47,7 @@ body and dynamic invocation vocabulary. A callable receiver can therefore run as
 with and registered-function bodies. The original AST retains authored spans. A function's shared binding
 frame temporarily points value at the local slot and restores it on success or error. Other caller effects
 remain visible. Helpers and registered functions retain static precedence; bound false/null/string/array/
-harray calls reach value_not_callable. Unsupported deferred calls retain their distinct unknown_helper cause.
+harray calls reach value_not_callable. Deferred with16 uses the same callable metadata, temporary value/presence slots and caller context; both slots restore on success/error. Contextual bodies execute immediately; explicit callbacks use the existing invocation ABI.
 This finite Perl repair does not admit exhaustive methods or another backend.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[callable-codeblock-literal-contract]],

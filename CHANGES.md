@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.16 — deferred scoped with
+
+Implement metadata-approved with helper/receiver execution inside Perl callable bodies. Temporarily scope value and its presence flag, preserve caller effects, normalize contextual blocks and reuse explicit callback invocation. Syntax and the small ordinary/deferred/native/fresh regression pass, including typed-error restoration. Book/Knowledge agree; broad verification stays deferred. Grouped assignment19 is next.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.14 — deferred last
 
 Implement last(array)/array.last() inside Perl deferred codeblocks using the shared array-selection dispatcher. Preserve stored kinds, empty/nonarray results, terminal/arity effect guards and copied invocation results. Module syntax and a small native/fresh-emitted regression pass. Book and Knowledge include last; broad verification remains deferred. Deferred with16 is next.

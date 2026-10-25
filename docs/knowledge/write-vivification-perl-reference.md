@@ -75,8 +75,7 @@ All compiled caller scalar slots carry presence independently of body source. Fi
 separate flags and restore caller slots/flags on every exit. Keys then RHS run
 once before the root snapshot. Guards precede operands; structural failures
 publish nothing. Returned roots stay detached. Invalid write headers reject before effects. Native/fresh and frozen write cases run in
-t/callable_codeblock_literal_contract.t. Deferred with still raises
-unknown_helper:with; TYPE-REFERENCE-BOOK.1.2.16 owns repair after last14.
+t/callable_codeblock_literal_contract.t. Deferred with16 now scopes value/presence and restores caller slots; a scoped null retains the typed kind conflict.
 Only this bounded Perl extension is admitted.
 Tracked statements yield scalar(value), retaining assignment results and quiet void/value/list use; a presence flag must not replace the result.
 Incomplete raw-regex fragments retain their compatibility source boundary; [[perl-multiline-helper-pattern-validation]] owns the precise limitations.
