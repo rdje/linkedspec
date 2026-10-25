@@ -3085,11 +3085,29 @@
   Commit: `FUTURE-PARITY-BACKLOG.5.3.1 - rebind Rust standalone array transforms`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.3.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a0dde7bb477babfe0af52ee84f259eac21c4a2f4`
   Goal: Add the same already documented standalone transform writeback on Dart; preserve pure forms and typed target/effect rules.
   Dependencies: `FUTURE-PARITY-BACKLOG.5.3.1`
-  Planned tier: `focused`; one compile and small regression under director cadence.
-  Claim verification: none: Unactivated implementation; no new measurement.
+  Owned paths: dart/lib/src/runtime/interpreter.dart; dart/test/array_transform_writeback_test.dart; existing Dart array fact/book; indexed task part/root and normal continuity.
+  Verification tier: `focused`
+  Focused checks: Changed-source Dart analysis/compilation and one small native/restored/generated-plan regression, plus book and fast continuity checks. No full package suite.
+  Canonical trigger: None for existing statement-contract alignment in this director-authorized implementation phase; broad5.3.4 follows feature coverage.
+  Claim verification: none: Deterministic implementation and small regression; no quantified corpus/exhaustive/portable admission measurement.
+  Reproduce/impact: _executeArrayStringTransformStatement already recognizes the three arities and receiver mutation attempts, but an allowlist returns false before dispatch/rebinding for split_each/filter_match/uniq. Their pure results are discarded by statement execution.
+  Acceptance: Reuse pure array-helper evaluation, validate target kind before remaining operands, then replace the array. Preserve type/copy/once/purity and absent/wrong-kind boundaries with a small targeted check.
+
+  Completion: Remove the explicit three-helper exclusion and validate the bare array kind before evaluating pattern/delimiter expressions. Existing pure array-helper evaluation and replacement perform writeback; value/receiver forms are unchanged.
+  Focused commands: `cd dart && bash ../tools/run_dart_project_data.sh test test/array_transform_writeback_test.dart` and the same wrapper `analyze --fatal-infos --fatal-warnings lib/src/runtime/interpreter.dart test/array_transform_writeback_test.dart` pass. Native/restored/generated-plan values and wrong-kind controls pass; format/book/fast continuity checks pass. No full package suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Targeted LinkedSpecRuntimeEngine execution retains original arrays and accepts a scalar target; the focused regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — interpreter.dart::_executeArrayStringTransformStatement recognizes arity/receiver attempts but explicitly returns false for the three transforms, discarding their pure result.
+  - [x] **FIX** — Remove that exclusion, prevalidate the target and reuse existing array-helper evaluation/replacement.
+  - [x] **ADDRESSED (verified)** — Focused Dart native/restored/generated-plan regression and two-file analysis PASS.
+  - [x] **NO REGRESSION** — Quick pure/receiver, snapshot/type, absent/wrong-kind and once-only operand controls pass. Full suites remain deferred by director instruction.
+  - [x] **LOCKSTEP** — Book, Dart fact/map and indexed ownership/live handoff agree; Julia5.3.3 is next and broad5.3.4 remains deferred.
+  Owned documentation drift fixed: The current Dart array card still used retired split(array(target),source,delimiter); replace it with the uniform-binding bare target spelling. No selector re-admission.
+  Commit: `FUTURE-PARITY-BACKLOG.5.3.2 - rebind Dart standalone array transforms`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.3.3`
   Status: `pending`

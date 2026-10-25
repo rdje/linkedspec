@@ -5243,18 +5243,8 @@ final class LinkedSpecRuntimeEngine {
       'helper:$helperName',
       call.sourceSpan,
     );
-    if (!const {
-      'trim_each',
-      'filter_nonempty',
-      'lowercase_each',
-      'uppercase_each',
-    }.contains(helperName)) {
-      // FUTURE-PARITY-BACKLOG.5 owns Dart write-back for split_each,
-      // filter_match, and uniq. They are still binding-target mutation
-      // attempts for active-receiver guard precedence, but their ordinary
-      // behavior remains unchanged until that separately owned repair.
-      return false;
-    }
+    // Reject an existing wrong kind before delimiter/pattern effects run.
+    _bareArrayForMutation(context, bareTarget);
     final transformed = _callArrayHelperFromExpressions(
       helperName,
       args,

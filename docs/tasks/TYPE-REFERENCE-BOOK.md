@@ -968,7 +968,7 @@ Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACK
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.5.3.2` | `pending` | Rust standalone transforms are implemented; Dart then Julia follow. |
+| 1 | `FUTURE-PARITY-BACKLOG.5.3.3` | `pending` | Rust/Dart standalone transforms implemented; Julia follows. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases remain open after known feature gap repairs. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |

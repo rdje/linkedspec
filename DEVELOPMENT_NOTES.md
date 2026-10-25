@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — FUTURE-PARITY-BACKLOG.5.3.2 — remove Dart statement exclusion
+
+Dart already recognizes the three transforms' arities and receiver mutation attempts, but an explicit four-helper allowlist returns false before writeback. Removing that block lets existing pure array-helper evaluation produce the replacement; prevalidate the bare kind before extra operands to preserve target-error precedence. The small native/restored/generated-plan regression and two-file analyzer pass, including purity, snapshots, typed selection/deduplication and absent/wrong-kind targets. Empty expected arrays use explicit Object? element types to satisfy analysis. The current Dart card's old namespace wrapper was also corrected under uniform binding; no new helper/type/selector contract is introduced.
+
 ## 2026-10-25 — FUTURE-PARITY-BACKLOG.5.3.1 — reuse pure transforms for statements
 
 The current catalog already documents bare-array statement writeback and names the Rust/Dart/Julia omissions. Feature-first steering selects that bounded existing gap from clean syntax-inventory15cdc6997, without claiming the complete helper/method inventory is done. Rust execute_array_string_transform_statement had only four transforms; omitted calls fell through to pure evaluation and discarded results. Enroll the three missing shapes, preserve target validation and snapshot ordering, evaluate remaining arguments once and call the existing helper dispatcher before array replacement. A small native/restored/generated-plan regression and wrong-kind controls pass; the initial missing generated-runner contract argument was a corrected test setup error, not runtime RED. No new public helper/type or dependency internals are introduced.

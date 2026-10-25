@@ -2,6 +2,7 @@
 id: dart-runtime-array-helpers
 title: Dart runtime executes array helper family and receiver chains
 answers:
+  - do Dart standalone split_each filter_match and uniq update arrays
   - does Dart runtime support array receiver chains
   - does Dart runtime support sorted drop_front first
   - does Dart runtime support split_each trim_each filter_nonempty
@@ -9,11 +10,11 @@ answers:
   - does Dart runtime support push_back statement only
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
-date: 2026-07-09
-status: current
+date: 2026-10-25
+status: transforms5.3.2 implemented; ordering/slice owners remain open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.4.3.3 adds array pipelines and originally locks statement-only end mutations. Later FUTURE-PARITY-BACKLOG.12.1.4 supersedes that result boundary under linkedspec-uniform-binding-v1: array-end mutations return independent updated arrays and may feed receiver continuations. Current focused uniform-binding tests cover the adopted behavior."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh test test/action_contracts_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
+evidence: "Dart array4.3.3; end results12.1.4; transform regression5.3.2."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/array_transform_writeback_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -32,7 +33,7 @@ The supported array helper slice includes count/select/order/membership helpers,
 `concat_arrays`, `split_tagged_records`, delimiter-first `join_values`, and
 terminal array numeric reducers such as `array(2, 4, 6).sum()` / `.avg()`.
 
-`split(array(target), source, delimiter)` replaces the named working array.
+`split(target, source, delimiter)` replaces the named array; the old exact array(target) selector is removed.
 Regex delimiters and regex filters use Dart `RegExp` over the stored regex
 literal pattern. Adjacent delimiters preserve empty fields; `filter_nonempty`
 remains the explicit cleanup step.
@@ -59,3 +60,5 @@ a wrapped RangeError, while offset zero and small widths succeed. The same mecha
 affects scalar substr; [[dart-slice-end-overflow]] and .2.14 retain six exact paired
 controls and own safe bounds/carrier proof. This is not the separately owned negative
 count policy. Reading .1.20 changes no executable behavior.
+
+5.3.2 enables standalone transforms in _executeArrayStringTransformStatement: validate target kind, evaluate operands with pure helpers, replace the array. Focused native/restored/generated-plan and analysis pass; value/receiver forms stay pure. Julia5.3.3/broad5.3.4 remain open.
