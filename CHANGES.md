@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.14 — deferred last
+
+Implement last(array)/array.last() inside Perl deferred codeblocks using the shared array-selection dispatcher. Preserve stored kinds, empty/nonarray results, terminal/arity effect guards and copied invocation results. Module syntax and a small native/fresh-emitted regression pass. Book and Knowledge include last; broad verification remains deferred. Deferred with16 is next.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.6 — Lua signed selectors
 
 Implement existing-array negative reads/writes in shared Lua on PUC Lua and LuaJIT. Preserve invalid-read handling, missing-target rejection, copied post-expression writes and typed underflow fields. Both ABI wrappers compile/load and pass the small native/generated/emitted regression. Book/Knowledge now describe implementation on all six runtimes; portable admission and exhaustive verification remain deferred. Deferred last14 is next.

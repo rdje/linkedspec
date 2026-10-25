@@ -2,6 +2,7 @@
 id: terse-type-method-surface-inventory
 title: "Perl value/helper contracts"
 answers:
+  - "can Perl last run inside deferred codeblocks"
   - "what receiver methods already exist in the terse type method surface"
   - "does string substr already work as a method"
   - "which helpers should remain function only or statement only"
@@ -36,6 +37,7 @@ status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, mdbook]
 evidence: "Type checkpoints; pipelines11."
 reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/deferred_last_contract.t"
   - "bash tools/project_data_run.sh prove -Iperl t/scalar_numeric_contract.t"
   - "bash tools/run_python_project_data.sh docs/checkpoints/rust-numeric-boundaries/review_book.py"
 ---
@@ -57,11 +59,11 @@ kinds through clones/indexes. Literal22 distinguishes public validity from priva
 Storable caches: [[perl-codeblock-boolean-literal-kind-drift]].
 take defaults1; integer spelling only; negative/invalid0; oversized clamp.
 Nonarrays yield[], skip count; independent source/results.
-Deferred count/first: one free operand, no receiver args; receivers terminate.
-Nonarrays yield0/undef; first retains kinds/callables; bad shapes skip effects.
+Deferred count/first/last: one free operand, no receiver args; receivers terminate.
+Nonarrays yield0/undef; first/last retain kinds/callables; bad shapes skip effects.
 Array chains reuse the bridge; emitted values avoid DSL reparsing.
 length takes no args and terminates; bad shapes/continuations skip effects.
-12 writes/14 last.
+12 writes and14 last are implemented.
 Fluent args require arrays before preflight. Three private count goldens retain
 native captures; current guards execute against arrays/nonarrays. No backend admission.
 

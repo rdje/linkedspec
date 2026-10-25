@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / deferred last14 after Lua17.6
+- Status: `active` / deferred with16 after last14
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -385,13 +385,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Private consumer completion: Complete296-row comparison isolates26 deliberate nested-consumer source changes and exactly one target conversion4->5; every other predicate/authority field stays exact. The original native JSON and probe match real clean Git. The test projects expected consumer source only, never observed rows. An actual syntax-valid old-result inverse rejects both this consumer and executable value/quietness assertions, then restores GREEN. Source9 is unchanged; earlier functional/fault/book observations retain their exact epochs. Focused10 adds the previously missed direct private consumer. Publication4/artifact5 independently require the original native fixture alongside the existing public/multiline fixtures. No distinct fault-family count is inflated by the extra inverse.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.14`
-  Status: `pending` / P2 defect owned
+  Status: `completed`
   Goal: Execute deferred last array selectors.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.6`
-  Reproduce/impact: Leaf10 contract-grid retains ordinary last(items)/items.last() returning1 for [2,10,1], while both deferred native/fresh routes report typed unknown_helper:last. Source bodies and loaded source identities survive in docs/checkpoints/type-array-count-first/.
-  Schedule: After signed implementations17.6, without waiting for deferred broad admission17.7; before inventory1. Establish shape, kind, empty, terminal/effect and copy/index controls; do not extend current10.
-  Planned tier: `canonical`
-  Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
+  Activation: Clean0a9d3a560c2bd07391777d29bf37cec5734c8bf0 after Lua17.6, post-pointer PASS and brief0. Follow compile/quick targeted check/commit/next-feature policy; broad validation stays deferred.
+  Owned paths: perl/LinkedSpec/CodeblockRuntime.pm; t/deferred_last_contract.t and its callable_codeblock_literal_contract.t registration; current count/first/last book and existing terse type Knowledge; normal roadmap/task/live continuity.
+  Verification tier: `focused`
+  Focused checks: perl module syntax and one small public LinkedSpec::Get/native/emitted last regression, covering value/empty/kind, free/receiver shape, terminal effects and copied nested results. Build changed book and run fast continuity checks. No full Phase0/package/corpus/proof matrix or global registry scan.
+  Canonical trigger: None for this implementation leaf under director's explicit feature-completion policy; exhaustive verification is deferred.
+  Claim verification: none: Deterministic helper implementation/docs and a quick regression only; no quantified corpus, benchmark or exhaustive admission measurement is published.
+  Reproduce/impact: Canonical public Top:: I probe returns ordinary last/receiver values, while the deferred probe records typed unknown_helper with name last. Source dispatch currently enrolls count/first only. The initial multiline E probe did not execute the intended action and supplies no feature evidence.
+  Acceptance: Match existing ordinary free/receiver arity, array/nonarray/empty results, stored-value kinds and terminal/effect/copy behavior. Quick syntax/native/emitted checks pass; comprehensive verification stays deferred.
+
+  Completion: Deferred free/receiver dispatch now enrolls last alongside count/first. The shared selector returns the stored tail value unchanged; receiver last shares the existing arity/terminal preflight so rejected shapes skip effects. Perl syntax and the standalone native/fresh-emitted regression pass. The existing callable suite includes this focused test; broad suite execution remains deferred.
+  Focused command: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/deferred_last_contract.t`.
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get on canonical Top:: I reports unknown_helper:last in the deferred route; ordinary last/receiver return the final stored value.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — perl/LinkedSpec/CodeblockRuntime.pm::_eval_call and _apply_methods enroll count/first only; the element-selection fallback chooses index0.
+  - [x] **FIX** — Enroll last in free/receiver dispatch and terminal preflight; choose index-1 through the shared selector.
+  - [x] **ADDRESSED (verified)** — Module syntax and the small public native/fresh-emitted regression pass.
+  - [x] **NO REGRESSION** — Targeted empty/kind/copy/arity/effect controls pass; full Phase0/compatibility matrices remain explicitly deferred.
+  - [x] **LOCKSTEP** — Current book/examples, canonical method card/map, roadmaps/task/live handoff agree; next feature is deferred with16.
+  Continuity: Required engineering-notes rollover preserves the committed suffix in docs/history/development-notes/segment-4958-e8e03c2de937.md plus its manifest row; bounded history checks pass.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.14 - execute last inside deferred Perl codeblocks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17`
   Status: `active` / six-runtime implementation complete; broad admission17.7 deferred
@@ -872,10 +887,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Next feature: execute deferred last; quick focused checks, broad validation later. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Next feature: execute deferred scoped with; quick targeted checks. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua compiles/targeted-checks on PUC Lua and LuaJIT. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors compiled/targeted-checked. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/emitted checks pass. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
 | 7 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |

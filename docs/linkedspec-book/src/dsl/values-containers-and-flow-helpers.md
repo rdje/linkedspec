@@ -83,19 +83,20 @@ Top: /x/
 ```text
 seen = ""; source = {|| seen = cat(seen,"s"); return([2,10,1]) }; cb = {|| return(source().sorted().take(2).length().abs()) }; return([cb(),seen]);
 ```
-### Counting and selecting first inside Perl codeblocks
+<a id="counting-and-selecting-first-inside-perl-codeblocks"></a>
+### Counting and selecting first/last inside Perl codeblocks
 
-`count(values)` / `values.count()` returns the array length. `first(values)` / `values.first()` returns the stored first element. Empty or non-array values yield `0` for count and `undef` for first, including harray inputs. Free calls take exactly one argument; receiver calls take none. Invalid arity returns `undef` before evaluating any receiver or arguments.
+`count(values)` / `values.count()` returns the array length. `first(values)` / `values.first()` returns the stored first element; `last(values)` / `values.last()` returns the stored last element. Empty or non-array values yield `0` for count and `undef` for either selection, including harray inputs. Free calls take exactly one argument; receiver calls take none. Invalid arity returns `undef` before evaluating any receiver or arguments.
 
-Both helpers work in deferred bodies. This returns `[[2,1],[2,10,1]]`, preserving the source:
+All three helpers work in deferred bodies. This returns `[[2,1,10],[2,10,1]]`, preserving the source:
 
 ```text
 items = [2,10,1];
-cb = {|| return([items.sorted().take(2).count(),items.sorted().take(2).first()]) };
+cb = {|| return([items.sorted().take(2).count(),items.sorted().take(2).first(),items.sorted().take(2).last()]) };
 return([cb(),items]);
 ```
 
-First preserves numbers, strings (including `"0"` and `""`), false, null, arrays, harrays and callable records. Existing invocation copying keeps the caller's array intact; this returns `[[9,1],[[2,1],[]]]`:
+First and last preserve numbers, strings (including `"0"` and `""`), false, null, arrays, harrays and callable records. Existing invocation copying keeps the caller's array intact; this returns `[[9,1],[[2,1],[]]]`:
 
 ```text
 items = [[2,1],[]];
@@ -103,11 +104,11 @@ cb = {|values| return(values.first()) }; chosen = cb(items);
 chosen[0] = 9; return([chosen,items]);
 ```
 
-Receiver count/first terminate a fluent chain. A continuation returns `undef`. A free-call result can start a new chain, or save a receiver result and operate on that binding separately. This returns `[null,3,null,"2!"]`:
+Receiver count/first/last terminate a fluent chain. A continuation returns `undef`. A free-call result can start a new chain, or save a receiver result and operate on that binding separately. This returns `[null,3,null,"2!",null,"1!"]`:
 
 ```text
 items = [2,10,1];
-cb = {|| return([items.count().abs(),count(items).abs(),items.first().cat("!"),first(items).cat("!")]) };
+cb = {|| return([items.count().abs(),count(items).abs(),items.first().cat("!"),first(items).cat("!"),items.last().cat("!"),last(items).cat("!")]) };
 return(cb());
 ```
 

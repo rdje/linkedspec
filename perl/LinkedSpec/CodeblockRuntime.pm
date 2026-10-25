@@ -488,7 +488,7 @@ sub _eval_call {
  my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
  return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
- if ($name eq 'count' || $name eq 'first') {
+ if ($name eq 'count' || $name eq 'first' || $name eq 'last') {
   return undef unless @$args == 1;
   my $value = _eval_expr($args->[0], $ctx);
   return _array_selection($name, $value)
@@ -585,7 +585,8 @@ sub _eval_call {
 sub _array_selection {
  my ($name, $value) = @_;
  return ref($value) eq 'ARRAY' ? scalar(@$value) : 0 if $name eq 'count';
- return ref($value) eq 'ARRAY' && @$value ? $value->[0] : undef
+ return ref($value) eq 'ARRAY' && @$value
+  ? $value->[$name eq 'last' ? -1 : 0] : undef
 }
 
 sub _numeric_receiver_helper_name {
@@ -618,7 +619,7 @@ sub _eval_fluent_chain {
    unless ref($args) eq 'ARRAY';
   return undef if $method eq 'sorted' && @$args;
   return undef if $method eq 'take' && @$args > 1;
-  if ($method eq 'count' || $method eq 'first' || $method eq 'length') {
+  if ($method eq 'count' || $method eq 'first' || $method eq 'last' || $method eq 'length') {
    return undef if @$args || $index < $#$calls;
   }
   if ($method =~ /\A(?:sum|avg|median|range)\z/) {
@@ -637,7 +638,7 @@ sub _eval_fluent_chain {
   _error('invalid_codeblock_body', detail => 'invalid fluent call')
    unless ref($call) eq 'HASH';
   my $method = $call->{method} // '';
-  if ($method eq 'count' || $method eq 'first') {
+  if ($method eq 'count' || $method eq 'first' || $method eq 'last') {
    $value = _array_selection($method, $value);
    next;
   }

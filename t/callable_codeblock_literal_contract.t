@@ -1343,4 +1343,8 @@ subtest 'lossy integer caches cannot promote fractional selectors' => sub {
     is($fields->{reason}, 'fractional_number', 'fractional write reports the numeric exclusion');
 };
 
+subtest 'deferred last focused contract' => sub {
+    do File::Spec->catfile($repo_root, 't', 'deferred_last_contract.t') or die $@ || $!;
+};
+
 done_testing();
