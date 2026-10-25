@@ -190,8 +190,7 @@ if(false); return("unreachable"); else; return("reachable"); endif
 
 ### Regex patterns and variable values
 
-Regex is not a separate builtin variable type in the shared value model. A
-slash-delimited pattern is supported as an operand of regex-aware helpers:
+Regex is not a separate builtin variable type in the shared value model. A slash-delimited pattern is supported as an operand of regex-aware helpers:
 
 ```text
 return(matches("abc", /b/));
@@ -206,11 +205,16 @@ pattern = "b";
 return(matches("abc", pattern));
 ```
 
-The variable holds a string and `matches` returns a scalar truth result. Do not
-use `pattern = /b/` to create a portable reusable regex object: no such value
-contract is defined. Current Perl evaluates that standalone expression as a match
-against its implicit host subject; Rust evaluates it to the pattern string.
-Parser recognition of regex syntax does not make those behaviors equivalent.
+The variable holds a string and `matches` returns a scalar truth result. Do not use `pattern = /b/` to create a portable reusable regex object: no such value contract is defined. Current Perl evaluates that standalone expression as a match against its implicit host subject; Rust evaluates it to the pattern string. Parser recognition of regex syntax does not make those behaviors equivalent.
+
+Legacy Perl raw assignments preserve a complete multiline slash payload when its first physical line is an incomplete raw expression. LF/CRLF, escapes and character classes remain authored; helper-looking pattern text does not execute DSL effects. For example, this matches an implicit host subject containing `14,2 }`, a newline and `tail`:
+
+```text
+rx = /(14,2) \}
+tail/; return(rx)
+```
+
+A complete first-line DSL expression keeps its existing boundary: `out = /(14,2)` followed by a newline computes `7`; it does not become a multiline pattern. Other bootstrap validation exclusions remain unchanged.
 
 Perl callable bodies now execute this same helper with literal and string patterns:
 
@@ -225,12 +229,7 @@ public regression; physical multiline subjects avoid the separate string-escape 
 
 The subject evaluates once first. An undefined subject returns `0` and skips the
 pattern operand, including its effects. Otherwise the pattern evaluates once after
-the subject. Wrong arity rejects before operand work. Invalid dynamic patterns retain
-a typed `invalid_matches_pattern` error with the regex reason and operand source span;
-failures restore actual caller parameter slots.
-The helper takes precedence over a same-named callable variable. Literal handling is
-limited to this pattern position: returning a bare regex from a deferred body still
-raises `unsupported_codeblock_actionir`/`regex`, without adding a regex value type.
+the subject. Wrong arity rejects before operand work. Invalid dynamic patterns retain a typed `invalid_matches_pattern` error with the regex reason and operand source span; failures restore actual caller parameter slots. The helper takes precedence over a same-named callable variable. Literal handling is limited to this pattern position: returning a bare regex from a deferred body still raises `unsupported_codeblock_actionir`/`regex`, without adding a regex value type.
 
 The [Perl integration guide](../public-api/integration-perl.md#regex-and-division-in-action-code)
 also gives working multiline match/substitution patterns and quoted subjects,

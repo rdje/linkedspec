@@ -325,6 +325,22 @@ sub _span_contains_line_break {
  return 0
 }
 
+sub _is_assigned_raw_multiline_pattern {
+ my ($state, $code, $idx) = @_;
+ return 0 unless $state->{statement} =~ /\A\s*[A-Za-z_][A-Za-z0-9_]*\s*=\s*\z/o;
+ my $tail = substr($code, $idx);
+ return 0 unless $tail =~ /\A([^\r\n]*)[\r\n]/;
+ my $first_line = $1;
+ _require_method_expr_pkg();
+ my $end = LinkedSpec::ActionIR::MethodExpr::_slash_literal_end($tail, 0);
+ return 0 unless defined($end) && $end > length($first_line);
+ # A complete first-line DSL expression keeps its established newline boundary,
+ # especially /(14,2) followed by a quote operator on the next line.
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+ my $first = LinkedSpec::ActionIR::AST::parse_action_expr($first_line);
+ return ref($first) eq 'HASH' && ($first->{kind} // '') eq 'raw_perl' ? 1 : 0
+}
+
 sub _should_split_on_method_boundary {
  my ($state, $chars, $idx, $trim_action_ir_value) = @_;
  return 0 if $state->{paren_depth} || $state->{brace_depth} || $state->{bracket_depth};
@@ -483,15 +499,16 @@ sub split_action_ir_statements {
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_double_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_backtick_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_line_comment($state, $char)) { next; }
-  # Naked regex operands belong to argument syntax. Keep assignment-position
-  # slash interpretation unchanged, and let the expression parser distinguish
-  # a numeric slash call from a regex beginning with a parenthesized pattern.
+  # Protect helper patterns and incomplete raw assignment payloads. Complete
+  # first-line DSL expressions retain their existing slash/newline precedence.
   my $helper_pattern = 0;
   if ($char eq '/' && $state->{paren_depth} > 0
       && $state->{statement} =~ /[(,]\s*$/o) {
    _require_method_expr_pkg();
    $helper_pattern = !LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($code, $idx);
   }
+  $helper_pattern ||= _is_assigned_raw_multiline_pattern($state, $code, $idx)
+   if $char eq '/' && !$state->{paren_depth};
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char, $helper_pattern)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_angle_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_pipe_quote($state, $char)) { next; }

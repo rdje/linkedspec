@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary grouped assignment19 is implemented and targeted-checked; raw multiline regex21 is next. Continue toward100% feature coverage with compilation and a quick targeted check per commit. Broad suites/exhaustive proof/global registry scans remain deferred.
+Grouped19 and raw-regex21 are implemented and targeted-checked; inventory1 selects the next fluent method gaps under23. Continue toward100% feature coverage with compilation and a quick targeted check per commit. Maintenance and broad verification remain deferred.
 
 ## Latest Completed Slice
 
-Perl balanced assignment groups reach existing typed lowering, including stored RHS values and helper compatibility operands. Local declaration discovery follows the grouped assignment. Syntax and the small native/fresh regression pass for scalar/append/hash/nested values, detached snapshots, order and function/argument/receiver contexts; deferred raw grouping is unchanged. Book and canonical grouping fact agree; no exhaustive admission is claimed.
+Perl incomplete raw assignment patterns retain their complete multiline payload. Complete first-line DSL expressions retain existing boundaries and numeric slash division. Syntax and the small native/fresh authored-oracle regression pass for LF/CRLF, exact payloads, quote continuations and helper-looking contents without binding effects. No regex type or portable raw-host admission is claimed. Book, canonical regex fact/map and task frontier agree.
 
 ## Next Action
 
-Activate raw-regex21 from clean Git; use public source/lowering/match probes, repair the assigned multiline regex payload, compile/run one small targeted check and commit. Broad validation and maintenance remain deferred.
+Activate inventory1 from clean Git using the retained authority index and canonical method/type records; enumerate current operations and select bounded fluent implementation gaps. Policy20, hygiene24 and exhaustive17.7 remain deferred until feature coverage.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.21` — raw multiline assignment payload fidelity, unchanged typed first-line division; syntax/native/fresh targeted checks pass; inventory1 next.
 - `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
 - `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
 - `TYPE-REFERENCE-BOOK.1.2.14` — deferred last free/receiver support, syntax and native/fresh regression pass; deferred with16 next.
@@ -29,7 +30,6 @@ Activate raw-regex21 from clean Git; use public source/lowering/match probes, re
 - `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
-- `TYPE-REFERENCE-BOOK.1.2.17.0` — 32 exact sources/192 native observations plus Perl descriptor/Get/fresh; eight signed-oracle RED routes; Perl CLI protocol RED/five other GREEN; book91/two native-fresh examples/three actual source denials; identity3/scope2 bypass-restoration; Knowledge -1824 bytes; no signed admission.
 
 ## History
 

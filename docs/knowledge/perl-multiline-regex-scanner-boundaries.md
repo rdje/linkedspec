@@ -11,20 +11,22 @@ answers:
   - can division and multiline regex interpretations both compile with different values
   - why does a slash inside a comment require a Perl precedence decision
   - which task owns the Perl division versus multiline regex precedence choice
-date: 2026-09-24
-status: .86.4.2.4 supersedes precedence premise; measured .86.4.3/.86.4.6/.86.4.7 repairs verified; grouped operands .86.4.8.2 verified
+date: 2026-10-25
+status: bounded raw-assignment payload repair21 targeted-checked; historical helper/precedence scopes remain
 tags: [perl, regex, actionir, validation, newline]
-evidence: "SESSION-STARTUP-READING.86.4.1 separates validation from action segmentation. Resumed .86.4.2.1 compares exact accepted source and the archived lexical candidate: two public Get and independent lowered-action results change from7 to empty string with no last_error. Both rejected candidates remain evidence only; production/tests are restored."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl; expected accepted public/action values are7 for both sources. Those task proposals are superseded by .86.4.2.4; use its separate helper-operand diagnostic for the current repair."
+evidence: "TYPE-REFERENCE-BOOK.1.2.21; t/assigned_raw_regex_payload.t covers native/fresh payloads and numeric-slash controls. Historical .86 observations remain below."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/assigned_raw_regex_payload.t; historical .86 captures stay frozen."
 ---
 
-Current repair: [[perl-multiline-helper-pattern-validation]] records .86.4.3's
+TYPE-REFERENCE-BOOK.1.2.21: Core split an incomplete raw assignment; RewritePipeline inserted a semicolon before its raw tail. Core now protects a complete multiline slash token only for a raw first-line expression. Complete typed first lines, including /(14,2), keep division/newline precedence. Quote state preserves authored bytes; literal ownership prevents payload helper effects. Small LF/CRLF native/fresh/oracle and quote-continuation checks pass. No regex type, portable raw-host admission or validator expansion.
+
+Earlier helper repair: [[perl-multiline-helper-pattern-validation]] records .86.4.3's
 validation view, .86.4.6's repaired helper splitting and .86.4.7's quoted-subject repair. The scanner
 observations and rejected patches below retain their historical baseline.
 [[perl-grouped-regex-operand-boundaries]] records verified `.86.4.8.2`
 repair of the grouped operand gap, without reviving assignment regex preference.
 
-Current authority: `.86.4.2.4` corrects the premise of this investigation.
+September24 authority: `.86.4.2.4` corrects the premise of this investigation.
 [[action-regex-operands-and-runtime-kinds]] establishes that regex helper operands
 are documented, but a first-class regex-variable contract is absent. The earlier
 precedence question `.86.4.2.2` and assignment-position splitter expansion

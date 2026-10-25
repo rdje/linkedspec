@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.21 — preserve assigned raw multiline patterns
+
+StatementSplit protects complete multiline slash payloads after a bare assignment when the first physical line remains raw/incomplete. Complete typed first lines retain their established boundary and numeric slash division. Existing quote consumption retains bytes and literal ownership protects helper-looking text. Changed module/registration syntax and t/assigned_raw_regex_payload.t pass for native/fresh LF/CRLF payloads, independent authored match/mismatch oracle, quote continuations and binding effects. Book/canonical regex fact/map/live docs agree; stale frontier19 is corrected. Feature-first direction defers policy maintenance20 until implementation coverage; inventory1/fluent23 follow. Broad suites/global hook scans remain deferred; no new regex type or portable raw-host admission.
+
 ## TYPE-REFERENCE-BOOK.1.2.19 — lower ordinary grouped assignment values
 
 Balanced ordinary assignment groups now reach existing typed value lowering, including stored RHS and helper compatibility operands. Function-local discovery sees the grouped assignment; inner offsets and detached-root semantics use existing nodes. Public AST/reporting and deferred raw-group rejection remain unchanged. Module/callable-suite syntax and t/grouped_assignment_value_contract.t native/fresh checks pass after observed compilation RED. Book/canonical grouping fact/map/live docs agree. Director-required focused cadence defers full suites, exhaustive proof and global hook scans; no portable admission or new measurement.

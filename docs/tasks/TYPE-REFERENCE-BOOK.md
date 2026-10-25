@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / grouped assignment19 after with16
+- Status: `active` / feature inventory after grouped19 and raw-regex21
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -772,28 +772,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.19 - lower ordinary grouped assignment values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.21`
-  Status: `pending` / P2 raw multiline regex payload defect
+  Status: `done` / raw multiline regex source-fidelity repair
+  Activation commit: `28ce9b3e897efe3e1453d474c7b555b57465ed5b`
   Goal: Preserve complete assigned raw-regex payloads across statement splitting and native/fresh Perl execution.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.19`
   Reproduce/impact: rx = /(14,2) \\} followed by LF then tail/; return(rx), with explicit host subject x14,2 } followed by LF then tail. Both accepted24e9 compiler and current12 return false; a subject with an inserted semicolon returns true. Direct authored Perl regex gives the inverse. Generated handlers contain an added semicolon before the physical newline, changing match meaning without an error. Two subject controls and both native/fresh channels are retained in docs/checkpoints/type-deferred-indexed-writes/compatibility2.json.gz with raw_regex_oracle.pl and exact source rollback/restoration.
   Schedule: After signed17/last14/with16/grouped19, before policy20 and complete inventory1. Coordinate the distinct bootstrap .54.1/unescaped-brace and attached-tail .9 owners; do not silently promote their exclusions.
   Acceptance: Toolbox statement-boundary/source/pattern/value evidence identifies the exact producer. Preserve authored LF/CRLF, escapes, classes, delimiters and source spans; retain numeric slash calls and helper regex boundaries. Add independent match/mismatch and mutation controls, native/fresh recurrence and accurate legacy scope. No new portable raw-host capability is implied.
-  Planned tier: focused for a bounded existing-source-fidelity correction; reclassify before governed policy/carrier or infrastructure movement.
-  Claim verification: none: Scheduled intake only; actual observed source/oracle results remain part of12's bounded diagnosis, with no repair admission.
+  Owned paths: First-party action statement splitting/lowering and a small focused test; canonical regex fact, derived map, book and live continuity documents. No submodule or external-repository writes.
+  Verification tier: `focused`
+  Focused checks: Compile the changed module and run a small source/match regression; fast continuity checks and book render. Broad verification stays deferred under director instruction.
+  Canonical trigger: None for bounded source-fidelity implementation; stop/re-scope before a new slash-precedence or runtime-type contract.
+  Claim verification: none: Bounded deterministic repair/diagnosis; no quantified corpus or portable raw-host capability admission.
+  Completion: StatementSplit::Core protects a complete multiline slash token after a bare assignment only when its first physical line is still a raw expression. Complete typed first-line expressions retain their prior boundary, including numeric slash division. Existing quote state retains payload bytes and whole-literal ownership prevents DSL effects inside the pattern; no new value type or validator expansion.
+  Focused command: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/assigned_raw_regex_payload.t` passes after observed RED; changed module/test syntax, book render and fast continuity checks pass. Full verification remains deferred.
+  - [x] **REPRODUCE / ISSUE** — Public splitter/substitution/descriptor probes show partial assignment, RAW_PERL tail and an inserted semicolon; authored host literal oracle and native/fresh test reproduce the mismatch.
+  Producer: RewritePipeline::_insert_pending_newline_terminator.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — StatementSplit::Core splits the unprotected raw newline; RewritePipeline newline-terminator insertion adds syntax before the raw tail.
+  - [x] **FIX** — Protect complete multiline raw assignment tokens without changing complete first-line DSL expression precedence.
+  - [x] **ADDRESSED (verified)** — Focused native/fresh exact-payload and authored match/mismatch check passes, with syntax/book checks.
+  - [x] **NO REGRESSION** — Small LF/CRLF, escapes/classes/helper-looking text, binding-effect and numeric slash/quote continuation controls pass; full suites remain deferred.
+  - [x] **LOCKSTEP** — Book, canonical regex fact/map and live handoff agree. Correct stale frontier19 status against its committed done node; inventory1 is next.
+  Continuity defect owned/fixed here: frontier19 still said pending after28ce9b3e8 despite its done node and MEMORY next21; the table now agrees and no completed feature is reopened.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.21 - preserve assigned raw multiline regex payloads`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20`
   Status: `pending` / policy update reconciliation
   Goal: Reconcile the read-only shared live-document containment guide updates with local adoption.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.21`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Intake: October23 read-only external policy review found new general derived-state/local-doctrine/checker material in the partially adopted FSMGen guide (SHA256 8f77fa39c9bcb9cfc43166259a627a6ced64682030088400b727dccc5d674a53). README policy digest 882682fa1ace703ae68726b8532a4ad24fe2c8a271bae4e07b859bd197a621c9 and claim policy 9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd were checked; claim policy remains ADR0126's adopted source. No cross-repository write occurred.
-  Schedule: After21 and before inventory1. Compare exact source/local adoption, own any applicable changes under bounded containment children, copy adopted rules locally, and verify doctrines/public explanation. External repositories stay read-only and no build may depend on them.
+  Schedule: Deferred maintenance until feature coverage under the latest director instruction; do not block inventory1 or implementation23. Compare exact source/local adoption, own any applicable changes under bounded containment children, copy adopted rules locally, and verify doctrines/public explanation. External repositories stay read-only and no build may depend on them.
   Planned tier: `canonical`
   Claim verification: none: Policy intake and queue only; the implementation comparison and adoption evidence belong to this future leaf.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `pending`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.20`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.21`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness. Include the complete per-type fluent/result-type matrix inputs required by .23, and distinguish current methods from missing useful families; do not equate enumerating implemented names with a comprehensive API.
@@ -913,21 +928,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Next feature: grouped indexed-assignment value; quick targeted checks. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua compiles/targeted-checks on PUC Lua and LuaJIT. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors compiled/targeted-checked. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/emitted checks pass. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with syntax and focused native/emitted checks pass. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 11 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Deferred broad validation after feature coverage; does not block implementation. |
-| 13 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
-| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Inventory current operations to select the next bounded feature gaps. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua signed selectors targeted-checked on PUC/LuaJIT. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors targeted-checked. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/fresh targeted checks pass. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with native/fresh targeted checks pass. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map inventory to book after method-gap implementation. |
+| 10 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent inventory/layout review. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Policy maintenance deferred until feature coverage. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Broad verification deferred until feature coverage. |
+| 13 | `TYPE-REFERENCE-BOOK.8` | `pending` | Legacy metadata maintenance deferred. |
+| 14 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 15 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed reference families and closeout. |
 
 ## Decisions
 
@@ -943,9 +958,11 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 
 ## Blockers
 
-No director input required. Signed selectors17 follows the clean12 boundary, then14/16/19/raw-regex21/policy20 before inventory. No dirty pivot.
+No director input required. Implemented17 backends/14/16/19/21 lead to inventory1 and fluent gaps23. Latest feature-first steering defers policy20, hygiene24 and exhaustive17.7 until feature coverage. No dirty pivot.
 
 ## Verification Log
+
+- `2026-10-25` — `.1.2.19` and `.1.2.21`: module/registration syntax, small native/fresh regressions, book rendering and fast memory/task/cadence/history/diff checks pass. Broad suites/global scans remain deferred by director instruction.
 
 - `2026-10-25` — `.1.2.17.4`: Public113/452, private51+arithmetic12, emitted113/CLI214 and package636/CLI66x2/corpus105/storage25 pass. Five physical runtime inverses/restored452/0, exact historical134/84613241/22, nine primary/five support/four direct denials and actual auditor faults/restoration pass. Book95/90/four denials, readonly172/180/181 custody and physical input4/bypass/restoration pass. Existing SDK format1/analysis2 stays disclosed. Exact staged canonical receipt/normal hooks govern landing; hygiene23 precedes Julia17.5.
 
@@ -970,6 +987,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
   qualitative gap only. Exact legacy status contradictions are recorded above; no runtime or full coverage proof.
 
 ## Commit Log
+
+Grouped19: `28ce9b3e897efe3e1453d474c7b555b57465ed5b`. Raw-regex21 subject: `TYPE-REFERENCE-BOOK.1.2.21 - preserve assigned raw multiline regex payloads`; derive identity from Git.
 
 Dart signed17.4 subject: `TYPE-REFERENCE-BOOK.1.2.17.4 - support signed Dart array selectors`; derive accepted identity from Git.
 

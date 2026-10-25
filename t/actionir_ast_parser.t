@@ -1484,4 +1484,11 @@ subtest 'block-value lowering consumes AST action statements' => sub {
     ok($parse_calls >= 1, 'block-value lowering entered through the AST parser');
 };
 
+subtest 'assigned raw multiline regex payload' => sub {
+    require File::Basename;
+    require File::Spec;
+    do File::Spec->catfile(File::Basename::dirname(__FILE__), 'assigned_raw_regex_payload.t')
+        or die $@ || $!;
+};
+
 done_testing();

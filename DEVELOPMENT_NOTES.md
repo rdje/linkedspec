@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.21 — protect incomplete raw patterns only
+
+Public splitter/descriptor/substitution probes show scalar_assignment_operator on the first raw pattern fragment, RAW_PERL on its tail, then RewritePipeline newline-terminator insertion. Protecting every assignment slash would revive rejected precedence changes. Instead, Core retains a complete multiline token only when the first physical line still parses raw; complete typed first lines keep their old boundary, including /(14,2) before later quote operators. Existing slash state consumes the unchanged payload, allowing ordinary literal ownership to shield helper-looking contents. Small native/fresh/oracle checks and syntax pass; full verification remains deferred. Inventory proceeds before policy maintenance under the latest feature-first direction.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.19 — grouped values through compatibility operands
 
 The grouped RHS already parses as a raw node and ordinary nested lowering has assignment-value machinery. Top-level raw bypass omitted it; helper operand lowering also runs with a compatibility-bridge flag that suppresses typed parsing. A balanced assignment-only classifier now admits those nodes at both paths and in local declaration discovery. It strips complete outer groups while carrying inner offsets, leaving parser/deferred AST behavior unchanged. The small source vector covers stored/scalar/append/hash/nested roots, helper/receiver/local contexts, copy isolation and selector/RHS order in native/fresh execution. Syntax and focused regression pass; exhaustive suites remain deferred by director instruction.
