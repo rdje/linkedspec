@@ -61,6 +61,7 @@ final class RuntimeDiagnostic {
     this.expectedKind,
     this.arrayIndex,
     this.length,
+    this.resolvedIndex,
     this.sourceSpan,
   });
 
@@ -101,6 +102,7 @@ final class RuntimeDiagnostic {
   final String? expectedKind;
   final int? arrayIndex;
   final int? length;
+  final int? resolvedIndex;
   final Map<String, Object?>? sourceSpan;
 
   JsonObject toJson() => {
@@ -141,6 +143,7 @@ final class RuntimeDiagnostic {
     if (expectedKind != null) 'expected_kind': expectedKind,
     if (arrayIndex != null) 'index': arrayIndex,
     if (length != null) 'length': length,
+    if (resolvedIndex != null) 'resolved_index': resolvedIndex,
     if (sourceSpan != null) 'source_span': _copyValue(sourceSpan),
   };
 }
@@ -805,6 +808,7 @@ final class LinkedSpecRuntimeEngine {
     String? expectedKind,
     int? arrayIndex,
     int? length,
+    int? resolvedIndex,
     Map<String, Object?>? sourceSpan,
   }) {
     final effectiveRule = ruleLabel ?? topRule;
@@ -850,6 +854,7 @@ final class LinkedSpecRuntimeEngine {
       expectedKind: expectedKind,
       arrayIndex: arrayIndex,
       length: length,
+      resolvedIndex: resolvedIndex,
       sourceSpan: sourceSpan,
     );
   }
@@ -8799,6 +8804,7 @@ final class _RuntimeExecutionContext {
     String? expectedKind,
     int? arrayIndex,
     int? length,
+    int? resolvedIndex,
     Map<String, Object?>? sourceSpan,
   }) {
     final effectiveRule = ruleLabel ?? currentRuleLabel ?? topRule;
@@ -8835,6 +8841,7 @@ final class _RuntimeExecutionContext {
       expectedKind: expectedKind,
       arrayIndex: arrayIndex,
       length: length,
+      resolvedIndex: resolvedIndex,
       sourceSpan: sourceSpan,
     );
   }
@@ -9626,13 +9633,15 @@ Object? _indexValue(Object? collection, Object? indexValue) {
   final index = indexValue is num
       ? indexValue.toInt()
       : int.tryParse('$indexValue');
-  if (collection is List &&
-      index != null &&
-      index >= 0 &&
-      index < collection.length) {
-    return collection[index];
-  }
-  return null;
+  if (collection is! List || index == null) return null;
+  // Only actual integers gain tail-relative selection. Keep the existing
+  // float/string coercions and the caller's retained receiver unchanged.
+  final resolvedIndex = indexValue is int && index < 0
+      ? collection.length + index
+      : index;
+  return resolvedIndex >= 0 && resolvedIndex < collection.length
+      ? collection[resolvedIndex]
+      : null;
 }
 
 Object? _assignHashIndex(
@@ -9825,7 +9834,7 @@ Object? _writeNested(
   final selectors = _classifyWriteSelectors(context, base, evaluatedSegments);
   final root = rootStorage.present
       ? _copyValue(rootStorage.value)
-      : _emptyContainer(selectors.first);
+      : _emptyContainer(context, base, selectors, 0);
   _assignVivifiedNestedValue(context, base, root, selectors, storedValue);
   rootStorage.store(context, root);
   return _copyValue(root);
@@ -9862,7 +9871,7 @@ void _assignVivifiedNestedValue(
         continue;
       }
       if (!node.containsKey(key)) {
-        final child = _emptyContainer(segments[index + 1]);
+        final child = _emptyContainer(context, base, segments, index + 1);
         node[key] = child;
         node = child;
       } else {
@@ -9871,9 +9880,23 @@ void _assignVivifiedNestedValue(
       continue;
     }
 
-    final listIndex = segment.index!;
     if (node is! List<Object?>) {
       _throwNestedWriteKindConflict(context, base, index, path, segment, node);
+    }
+    final authoredIndex = segment.index!;
+    final listIndex = authoredIndex < 0
+        ? node.length + authoredIndex
+        : authoredIndex;
+    if (listIndex < 0) {
+      _throwNestedWriteArrayUnderflow(
+        context,
+        base,
+        index,
+        path,
+        segment,
+        node.length,
+        listIndex,
+      );
     }
     if (listIndex > node.length) {
       _throwNestedWriteArrayGap(
@@ -9894,7 +9917,7 @@ void _assignVivifiedNestedValue(
       continue;
     }
     if (listIndex == node.length) {
-      final child = _emptyContainer(segments[index + 1]);
+      final child = _emptyContainer(context, base, segments, index + 1);
       node.add(child);
       node = child;
     } else {
@@ -9935,41 +9958,105 @@ List<_WriteSelector> _classifyWriteSelectors(
       selectors.add(_WriteSelector.key(value, segment.sourceSpan));
       continue;
     }
-    if (value is int && value >= 0) {
+    if (value is int) {
       selectors.add(_WriteSelector.index(value, segment.sourceSpan));
       continue;
     }
-    final actualKind = _nestedWriteValueKind(value);
-    final reason = value is int && value < 0
-        ? 'negative_integer'
-        : value is num
-        ? 'fractional_number'
-        : 'kind_not_path_selector';
-    final message =
-        "nested write segment $index for binding '$base' must evaluate "
-        'to a string or nonnegative integer; got $actualKind ($reason)';
-    throw RuntimeInterpreterException(
-      message,
-      diagnostic: context.diagnostic(
-        stage: 'runtime_execution',
-        summary: 'Dart nested write failed',
-        detail: message,
-        code: 'nested_write_segment_invalid',
-        operation: 'nested_write_vivification',
-        binding: base,
-        segmentIndex: index,
-        path: [for (final selector in selectors) selector.pathValue],
-        actualKind: actualKind,
-        reason: reason,
-        sourceSpan: _nestedWriteSourceSpan(segment.sourceSpan),
-      ),
+    _throwNestedWriteSegmentInvalid(
+      context,
+      base,
+      index,
+      [for (final selector in selectors) selector.pathValue],
+      segment.sourceSpan,
+      _nestedWriteValueKind(value),
+      value is num ? 'fractional_number' : 'kind_not_path_selector',
     );
   }
   return selectors;
 }
 
-Object _emptyContainer(_WriteSelector selector) {
+Object _emptyContainer(
+  _RuntimeExecutionContext context,
+  String base,
+  List<_WriteSelector> segments,
+  int segmentIndex,
+) {
+  final selector = segments[segmentIndex];
+  if (selector.index case final index? when index < 0) {
+    _throwNestedWriteSegmentInvalid(
+      context,
+      base,
+      segmentIndex,
+      [for (final segment in segments.take(segmentIndex)) segment.pathValue],
+      selector.sourceSpan,
+      'integer',
+      'negative_integer',
+    );
+  }
   return selector.key != null ? <String, Object?>{} : <Object?>[];
+}
+
+Never _throwNestedWriteSegmentInvalid(
+  _RuntimeExecutionContext context,
+  String base,
+  int segmentIndex,
+  List<Object?> path,
+  ActionSourceSpan span,
+  String actualKind,
+  String reason,
+) {
+  final message =
+      "nested write segment $segmentIndex for binding '$base' must evaluate "
+      'to a string or nonnegative integer; got $actualKind ($reason)';
+  throw RuntimeInterpreterException(
+    message,
+    diagnostic: context.diagnostic(
+      stage: 'runtime_execution',
+      summary: 'Dart nested write failed',
+      detail: message,
+      code: 'nested_write_segment_invalid',
+      operation: 'nested_write_vivification',
+      binding: base,
+      segmentIndex: segmentIndex,
+      path: path,
+      actualKind: actualKind,
+      reason: reason,
+      sourceSpan: _nestedWriteSourceSpan(span),
+    ),
+  );
+}
+
+Never _throwNestedWriteArrayUnderflow(
+  _RuntimeExecutionContext context,
+  String base,
+  int segmentIndex,
+  List<Object?> path,
+  _WriteSelector selector,
+  int length,
+  int resolvedIndex,
+) {
+  final index = selector.index!;
+  final message =
+      "nested write segment $segmentIndex for binding '$base' cannot "
+      'select array index $index at length $length '
+      '(resolved index $resolvedIndex)';
+  throw RuntimeInterpreterException(
+    message,
+    diagnostic: context.diagnostic(
+      stage: 'runtime_execution',
+      summary: 'Dart nested write failed',
+      detail: message,
+      code: 'nested_write_array_underflow',
+      operation: 'nested_write_vivification',
+      binding: base,
+      segmentIndex: segmentIndex,
+      path: path,
+      arrayIndex: index,
+      length: length,
+      resolvedIndex: resolvedIndex,
+      sourceSpan: _nestedWriteSourceSpan(selector.sourceSpan),
+    ),
+  );
 }
 
 Never _throwNestedWriteKindConflict(

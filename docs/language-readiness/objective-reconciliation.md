@@ -92,7 +92,7 @@ readiness gate and optional EBNF-like profile remain open.
 
 Run `bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py`.
 The tracked read-only audit verifies producing checkpoint blobs, their historical
-source identities, latest executable inputs and retained log hashes. Exact owner-bound Rust numeric source evolution retains the prior signed-selector admission as a checked predecessor; original source identities and runtime results stay historical. Fresh Rust nesting/context/lossless parent and emitted consumers provide the separate compatibility check. Successively
+source identities, latest executable inputs and retained log hashes. Exact owner-bound Rust numeric source evolution retains the prior signed-selector admission as a checked predecessor. Dart signed-selector admission permits only its reviewed whole interpreter image from clean activation; both runtime owners preserve all original source identities and historical results. Fresh Rust and Dart nesting/context/lossless consumers provide separate compatibility checks. Successively
 updated documentation is recorded separately with both hashes. It enumerates each
 original oracle in both directions, independently checks scalar bounds/text slices
 and lossless adjacency, and verifies retained recovery arithmetic from authored

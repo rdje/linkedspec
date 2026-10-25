@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.4 — Dart signed array selectors
+
+Dart integer selectors now address existing tail-relative positions through native, reconstructed, validated-plan, emitted and CLI carriers. Writes resolve encountered arrays after selector/RHS effects, preserve authored paths/spans and reject missing negative targets without creation. Underflow adds resolved_index on supported typed embedding routes. Existing coercions, identity guards, copies and public error protocols remain.
+
+Public113/452, private51+arithmetic12, fresh emitted113/CLI214 and package636/CLI66x2/corpus105/storage25 pass. Five physical runtime faults restore452/0. Exact Dart admission preserves historical134 streams/84613241 bytes/22 controls and prior Rust images/support guards. Actual unregistered/auditor faults and restoration distinguish that boundary. Book95/90/four denials and readonly172/180/181 custody retain16 complete actual AOT artifacts; four physical publication faults/bypass/restoration pass. Existing SDK format1/analyzer2 debt remains separately owned; no full component PASS, Julia/Lua or portable admission. Exact canonical receipt and normal hooks govern landing. Recovery self-review corrects the queued maintenance frontier before acceptance; the first canonical run is intentionally stopped during doctrine checks, and the corrected candidate requires a fresh full run.
+
+The director's disk notes were read in full, verified and retained as inert exact packets under REPO-HYGIENE.23. Historical estimates grant no disposal authority. Measured safe cleanup activates after this clean commit, before Julia17.5; external originals, current experiment artifacts, caches and Git objects remain untouched by that intake.
+
 ## 2026-10-25 — SESSION-STARTUP-READING.55.1 — Rust numeric value transport
 
 Rust preserves finite binary64 values across JSON, numeric text/length/Display and serialized/generated parsers. Checked signed/unsigned integer projection replaces saturation; wider finite values remain floating JSON, negative zero retains its JSON sign, and nonfinite JSON remains null. The serde_json float_roundtrip feature preserves the two representable neighbors inside the i64 limits without a dependency-version change. Positive nested-write indexes and both integer metadata readers check the exclusive host bound. Legacy read/count coercions, signed selectors, the scalar-text authority and the binary64 model remain.

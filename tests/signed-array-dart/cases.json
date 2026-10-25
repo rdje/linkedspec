@@ -1,0 +1,5095 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.17.4",
+  "authority": "capability_conformance/signed_array_selector_contract.json",
+  "authority_sha256": "6ab1e8faedbb74a92afb88ff879495541f825d5e427a2695ef9ee687c489ea33",
+  "cases": [
+    {
+      "id": "read/last/ordinary",
+      "kind": "read",
+      "neutral_id": "last",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; observed=tree[-1]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; observed=tree[-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          30
+        ]
+      }
+    },
+    {
+      "id": "read/first/ordinary",
+      "kind": "read",
+      "neutral_id": "first",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; observed=tree[-3]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; observed=tree[-3]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          10
+        ]
+      }
+    },
+    {
+      "id": "read/underflow/ordinary",
+      "kind": "read",
+      "neutral_id": "underflow",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; observed=tree[-4]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; observed=tree[-4]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/empty/ordinary",
+      "kind": "read",
+      "neutral_id": "empty",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[]; observed=tree[-1]; return([tree,observed]) }\n",
+      "body": "tree=[]; observed=tree[-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/absent/ordinary",
+      "kind": "read",
+      "neutral_id": "absent",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { observed=tree[-1]; return([tree,observed]) }\n",
+      "body": "observed=tree[-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/null/ordinary",
+      "kind": "read",
+      "neutral_id": "null",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=undef; observed=tree[-1]; return([tree,observed]) }\n",
+      "body": "tree=undef; observed=tree[-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/wrong_kind/ordinary",
+      "kind": "read",
+      "neutral_id": "wrong_kind",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; observed=tree[-1]; return([tree,observed]) }\n",
+      "body": "tree={}; observed=tree[-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {},
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/positive/ordinary",
+      "kind": "read",
+      "neutral_id": "positive",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; observed=tree[1]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; observed=tree[1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          20
+        ]
+      }
+    },
+    {
+      "id": "read/positive_outside/ordinary",
+      "kind": "read",
+      "neutral_id": "positive_outside",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; observed=tree[3]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; observed=tree[3]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/dynamic_negative/ordinary",
+      "kind": "read",
+      "neutral_id": "dynamic_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; chosen_index=-2; observed=tree[chosen_index]; return([tree,observed]) }\n",
+      "body": "tree=[10,20,30]; chosen_index=-2; observed=tree[chosen_index]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          20
+        ]
+      }
+    },
+    {
+      "id": "read/mixed_nested/ordinary",
+      "kind": "read",
+      "neutral_id": "mixed_nested",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={\"rows\":[[1],[2,3]]}; observed=tree[\"rows\"][-1][-2]; return([tree,observed]) }\n",
+      "body": "tree={\"rows\":[[1],[2,3]]}; observed=tree[\"rows\"][-1][-2]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          2
+        ]
+      }
+    },
+    {
+      "id": "read/quoted_negative_key/ordinary",
+      "kind": "read",
+      "neutral_id": "quoted_negative_key",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={\"-1\":\"key\"}; observed=tree[\"-1\"]; return([tree,observed]) }\n",
+      "body": "tree={\"-1\":\"key\"}; observed=tree[\"-1\"]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {
+            "-1": "key"
+          },
+          "key"
+        ]
+      }
+    },
+    {
+      "id": "read/missing_nested/ordinary",
+      "kind": "read",
+      "neutral_id": "missing_nested",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; observed=tree[\"rows\"][-1]; return([tree,observed]) }\n",
+      "body": "tree={}; observed=tree[\"rows\"][-1]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {},
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/negative_zero/ordinary",
+      "kind": "read",
+      "neutral_id": "negative_zero",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; observed=tree[-0]; return([tree,observed]) }\n",
+      "body": "tree=[10]; observed=tree[-0]; return([tree,observed])",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10
+          ],
+          10
+        ]
+      }
+    },
+    {
+      "id": "write/last/ordinary",
+      "kind": "write",
+      "neutral_id": "last",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/first/ordinary",
+      "kind": "write",
+      "neutral_id": "first",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99,
+            20,
+            30
+          ],
+          [
+            99,
+            20,
+            30
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99,
+            20,
+            30
+          ]
+        },
+        "result": [
+          99,
+          20,
+          30
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/dynamic_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "dynamic_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; chosen_index=-2; updated = (tree[{ say(\"segment:0\"); chosen_index }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10,20,30]; chosen_index=-2; updated = (tree[{ say(\"segment:0\"); chosen_index }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            99,
+            30
+          ],
+          [
+            10,
+            99,
+            30
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            99,
+            30
+          ]
+        },
+        "result": [
+          10,
+          99,
+          30
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/mixed_nested/ordinary",
+      "kind": "write",
+      "neutral_id": "mixed_nested",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={\"rows\":[[1],[2,3]]}; updated = (tree[{ say(\"segment:0\"); \"rows\" }][{ say(\"segment:1\"); -1 }][{ say(\"segment:2\"); -2 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree={\"rows\":[[1],[2,3]]}; updated = (tree[{ say(\"segment:0\"); \"rows\" }][{ say(\"segment:1\"); -1 }][{ say(\"segment:2\"); -2 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          },
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          }
+        },
+        "result": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_then_create/ordinary",
+      "kind": "write",
+      "neutral_id": "negative_then_create",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[{}]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[{}]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "new": [
+                99
+              ]
+            }
+          ],
+          [
+            {
+              "new": [
+                99
+              ]
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "new": [
+                99
+              ]
+            }
+          ]
+        },
+        "result": [
+          {
+            "new": [
+              99
+            ]
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_append/ordinary",
+      "kind": "write",
+      "neutral_id": "positive_append",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; updated = (tree[{ say(\"segment:0\"); 1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10]; updated = (tree[{ say(\"segment:0\"); 1 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            99
+          ],
+          [
+            10,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            99
+          ]
+        },
+        "result": [
+          10,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_replace/ordinary",
+      "kind": "write",
+      "neutral_id": "positive_replace",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/absent_positive/ordinary",
+      "kind": "write",
+      "neutral_id": "absent_positive",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { updated = (tree[{ say(\"segment:0\"); 0 }][{ say(\"segment:1\"); \"x\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "updated = (tree[{ say(\"segment:0\"); 0 }][{ say(\"segment:1\"); \"x\" }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "x": 99
+            }
+          ],
+          [
+            {
+              "x": 99
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "x": 99
+            }
+          ]
+        },
+        "result": [
+          {
+            "x": 99
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/quoted_negative_key/ordinary",
+      "kind": "write",
+      "neutral_id": "quoted_negative_key",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; updated = (tree[{ say(\"segment:0\"); \"-1\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree={}; updated = (tree[{ say(\"segment:0\"); \"-1\" }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "-1": 99
+          },
+          {
+            "-1": 99
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "-1": 99
+          }
+        },
+        "result": {
+          "-1": 99
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/dynamic_negative_string_key/ordinary",
+      "kind": "write",
+      "neutral_id": "dynamic_negative_string_key",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; chosen_key=\"-1\"; updated = (tree[{ say(\"segment:0\"); chosen_key }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree={}; chosen_key=\"-1\"; updated = (tree[{ say(\"segment:0\"); chosen_key }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "-1": 99
+          },
+          {
+            "-1": 99
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "-1": 99
+          }
+        },
+        "result": {
+          "-1": 99
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_zero/ordinary",
+      "kind": "write",
+      "neutral_id": "negative_zero",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/selector_resize/ordinary",
+      "kind": "write",
+      "neutral_id": "selector_resize",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20]; updated = (tree[{ say(\"segment:0\"); tree=[10,20,30]; -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10,20]; updated = (tree[{ say(\"segment:0\"); tree=[10,20,30]; -1 }] = { say(\"rhs\"); 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/rhs_resize/ordinary",
+      "kind": "write",
+      "neutral_id": "rhs_resize",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); tree=[10,20,30]; 99 }); return([tree,updated]) }\n",
+      "body": "tree=[10,20]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); tree=[10,20,30]; 99 }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/underflow/ordinary",
+      "kind": "write",
+      "neutral_id": "underflow",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10,20,30]; tree[{ say(\"segment:0\"); -4 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[10,20,30]; tree[{ say(\"segment:0\"); -4 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 22,
+            "end": 46,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            30
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:underflow",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/empty/ordinary",
+      "kind": "write",
+      "neutral_id": "empty",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 14,
+            "end": 38,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": []
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:empty",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/absent_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "absent_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "start": 5,
+            "end": 29,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": false
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "source_id": "contract:absent_negative",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/missing_nested_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "missing_nested_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "start": 43,
+            "end": 67,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "source_id": "contract:missing_nested_negative",
+            "start": 12,
+            "end": 14,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/null/ordinary",
+      "kind": "write",
+      "neutral_id": "null",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=undef; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=undef; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "start": 17,
+            "end": 41,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": null
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "source_id": "contract:null",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/wrong_kind/ordinary",
+      "kind": "write",
+      "neutral_id": "wrong_kind",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree={}; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "source_span": {
+            "start": 14,
+            "end": 38,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "source_span": {
+            "source_id": "contract:wrong_kind",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/nested_null/ordinary",
+      "kind": "write",
+      "neutral_id": "nested_null",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[undef]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[undef]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "start": 45,
+            "end": 69,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            null
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "source_id": "contract:nested_null",
+            "start": 9,
+            "end": 11,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_gap/ordinary",
+      "kind": "write",
+      "neutral_id": "positive_gap",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree[{ say(\"segment:0\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[10]; tree[{ say(\"segment:0\"); 2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "start": 16,
+            "end": 39,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "source_id": "contract:positive_gap",
+            "start": 5,
+            "end": 6,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/gap_after_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "gap_after_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); 2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "start": 44,
+            "end": 67,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            [
+              10
+            ]
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "source_id": "contract:gap_after_negative",
+            "start": 9,
+            "end": 10,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/underflow_after_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "underflow_after_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 44,
+            "end": 68,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            [
+              10
+            ]
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:underflow_after_negative",
+            "start": 9,
+            "end": 11,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_after_underflow/ordinary",
+      "kind": "write",
+      "neutral_id": "invalid_after_underflow",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "start": 40,
+            "end": 66,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": []
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "source_id": "contract:invalid_after_underflow",
+            "start": 9,
+            "end": 13,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_before_conflict/ordinary",
+      "kind": "write",
+      "neutral_id": "invalid_before_conflict",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=undef; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=undef; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "start": 17,
+            "end": 44,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": null
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "source_id": "contract:invalid_before_conflict",
+            "start": 5,
+            "end": 9,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/fractional/ordinary",
+      "kind": "write",
+      "neutral_id": "fractional",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree[{ say(\"segment:0\"); -1.5 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[10]; tree[{ say(\"segment:0\"); -1.5 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "source_span": {
+            "start": 16,
+            "end": 42,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "source_span": {
+            "source_id": "contract:fractional",
+            "start": 5,
+            "end": 9,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/segment_failure/ordinary",
+      "kind": "write",
+      "neutral_id": "segment_failure",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[10]; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0"
+      ],
+      "expected": {
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        },
+        "effects": [
+          "segment:0"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "segment:0",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/rhs_failure/ordinary",
+      "kind": "write",
+      "neutral_id": "rhs_failure",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); undef }; return(undef) }\n",
+      "body": "tree=[10]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); undef }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "rhs",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/failure_keeps_rhs_effect/ordinary",
+      "kind": "write",
+      "neutral_id": "failure_keeps_rhs_effect",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); tree=[10,20]; 99 }; return(undef) }\n",
+      "body": "tree=[10]; tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); tree=[10,20]; 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 16,
+            "end": 40,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:failure_keeps_rhs_effect",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/guard_precedes_evaluation/ordinary",
+      "kind": "write",
+      "neutral_id": "guard_precedes_evaluation",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; tree.map_leaves!() { tree[{ say(\"segment:0\"); undef }] = { say(\"rhs\"); 99 } }; return(undef) }\n",
+      "body": "tree=[10]; tree.map_leaves!() { tree[{ say(\"segment:0\"); undef }] = { say(\"rhs\"); 99 } }; return(undef)",
+      "effects": [],
+      "expected": {
+        "error": {
+          "code": "receiver_mutation_reentrant",
+          "operation": "map_leaves_mutation",
+          "binding": "tree",
+          "method": "map_leaves",
+          "attempt": "nested_write",
+          "source_span": {
+            "start": 32,
+            "end": 36,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "receiver_mutation_reentrant",
+          "operation": "map_leaves_mutation",
+          "binding": "tree",
+          "method": "map_leaves",
+          "attempt": "nested_write",
+          "source_span": {
+            "source_id": "contract:guard_precedes_evaluation",
+            "start": 0,
+            "end": 4,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"
+        },
+        "effects": []
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "segment:0",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/distinct_identity/ordinary",
+      "kind": "write",
+      "neutral_id": "distinct_identity",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[10]; worker={|tree| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(tree) }; outer=tree.map_leaves!() { return(worker([value])) }; return([outer[0],outer[0]]) }\n",
+      "body": "tree=[10]; worker={|tree| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(tree) }; outer=tree.map_leaves!() { return(worker([value])) }; return([outer[0],outer[0]])",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/aggregate_detachment/ordinary",
+      "kind": "write",
+      "neutral_id": "aggregate_detachment",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[{\"keep\":[1]}]; payload=[2]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }] = { say(\"rhs\"); payload }); return([tree,updated]) }\n",
+      "body": "tree=[{\"keep\":[1]}]; payload=[2]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }] = { say(\"rhs\"); payload }); return([tree,updated])",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ],
+          [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ]
+        },
+        "result": [
+          {
+            "keep": [
+              1
+            ],
+            "new": [
+              2
+            ]
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/unicode_span/ordinary",
+      "kind": "write",
+      "neutral_id": "unicode_span",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 48,
+            "end": 72,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "é": [
+              1
+            ]
+          }
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:unicode_span",
+            "start": 10,
+            "end": 12,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "read/last/callable",
+      "kind": "read",
+      "neutral_id": "last",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; observed=tree[-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; observed=tree[-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          30
+        ]
+      }
+    },
+    {
+      "id": "read/first/callable",
+      "kind": "read",
+      "neutral_id": "first",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; observed=tree[-3]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; observed=tree[-3]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          10
+        ]
+      }
+    },
+    {
+      "id": "read/underflow/callable",
+      "kind": "read",
+      "neutral_id": "underflow",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; observed=tree[-4]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; observed=tree[-4]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/empty/callable",
+      "kind": "read",
+      "neutral_id": "empty",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[]; observed=tree[-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[]; observed=tree[-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/absent/callable",
+      "kind": "read",
+      "neutral_id": "absent",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| observed=tree[-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| observed=tree[-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/null/callable",
+      "kind": "read",
+      "neutral_id": "null",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=undef; observed=tree[-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=undef; observed=tree[-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/wrong_kind/callable",
+      "kind": "read",
+      "neutral_id": "wrong_kind",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; observed=tree[-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; observed=tree[-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {},
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/positive/callable",
+      "kind": "read",
+      "neutral_id": "positive",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; observed=tree[1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; observed=tree[1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          20
+        ]
+      }
+    },
+    {
+      "id": "read/positive_outside/callable",
+      "kind": "read",
+      "neutral_id": "positive_outside",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; observed=tree[3]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; observed=tree[3]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/dynamic_negative/callable",
+      "kind": "read",
+      "neutral_id": "dynamic_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; chosen_index=-2; observed=tree[chosen_index]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; chosen_index=-2; observed=tree[chosen_index]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          20
+        ]
+      }
+    },
+    {
+      "id": "read/mixed_nested/callable",
+      "kind": "read",
+      "neutral_id": "mixed_nested",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={\"rows\":[[1],[2,3]]}; observed=tree[\"rows\"][-1][-2]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree={\"rows\":[[1],[2,3]]}; observed=tree[\"rows\"][-1][-2]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          2
+        ]
+      }
+    },
+    {
+      "id": "read/quoted_negative_key/callable",
+      "kind": "read",
+      "neutral_id": "quoted_negative_key",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={\"-1\":\"key\"}; observed=tree[\"-1\"]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree={\"-1\":\"key\"}; observed=tree[\"-1\"]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {
+            "-1": "key"
+          },
+          "key"
+        ]
+      }
+    },
+    {
+      "id": "read/missing_nested/callable",
+      "kind": "read",
+      "neutral_id": "missing_nested",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; observed=tree[\"rows\"][-1]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; observed=tree[\"rows\"][-1]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          {},
+          null
+        ]
+      }
+    },
+    {
+      "id": "read/negative_zero/callable",
+      "kind": "read",
+      "neutral_id": "negative_zero",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; observed=tree[-0]; return([tree,observed]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; observed=tree[-0]; return([tree,observed]) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "ok": [
+          [
+            10
+          ],
+          10
+        ]
+      }
+    },
+    {
+      "id": "write/last/callable",
+      "kind": "write",
+      "neutral_id": "last",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/first/callable",
+      "kind": "write",
+      "neutral_id": "first",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; updated = (tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99,
+            20,
+            30
+          ],
+          [
+            99,
+            20,
+            30
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99,
+            20,
+            30
+          ]
+        },
+        "result": [
+          99,
+          20,
+          30
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/dynamic_negative/callable",
+      "kind": "write",
+      "neutral_id": "dynamic_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; chosen_index=-2; updated = (tree[{ say(\"segment:0\"); chosen_index }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; chosen_index=-2; updated = (tree[{ say(\"segment:0\"); chosen_index }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            99,
+            30
+          ],
+          [
+            10,
+            99,
+            30
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            99,
+            30
+          ]
+        },
+        "result": [
+          10,
+          99,
+          30
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/mixed_nested/callable",
+      "kind": "write",
+      "neutral_id": "mixed_nested",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={\"rows\":[[1],[2,3]]}; updated = (tree[{ say(\"segment:0\"); \"rows\" }][{ say(\"segment:1\"); -1 }][{ say(\"segment:2\"); -2 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree={\"rows\":[[1],[2,3]]}; updated = (tree[{ say(\"segment:0\"); \"rows\" }][{ say(\"segment:1\"); -1 }][{ say(\"segment:2\"); -2 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          },
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "rows": [
+              [
+                1
+              ],
+              [
+                99,
+                3
+              ]
+            ]
+          }
+        },
+        "result": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_then_create/callable",
+      "kind": "write",
+      "neutral_id": "negative_then_create",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[{}]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[{}]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "new": [
+                99
+              ]
+            }
+          ],
+          [
+            {
+              "new": [
+                99
+              ]
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "new": [
+                99
+              ]
+            }
+          ]
+        },
+        "result": [
+          {
+            "new": [
+              99
+            ]
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_append/callable",
+      "kind": "write",
+      "neutral_id": "positive_append",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            99
+          ],
+          [
+            10,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            99
+          ]
+        },
+        "result": [
+          10,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_replace/callable",
+      "kind": "write",
+      "neutral_id": "positive_replace",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/absent_positive/callable",
+      "kind": "write",
+      "neutral_id": "absent_positive",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| updated = (tree[{ say(\"segment:0\"); 0 }][{ say(\"segment:1\"); \"x\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| updated = (tree[{ say(\"segment:0\"); 0 }][{ say(\"segment:1\"); \"x\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "x": 99
+            }
+          ],
+          [
+            {
+              "x": 99
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "x": 99
+            }
+          ]
+        },
+        "result": [
+          {
+            "x": 99
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/quoted_negative_key/callable",
+      "kind": "write",
+      "neutral_id": "quoted_negative_key",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; updated = (tree[{ say(\"segment:0\"); \"-1\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; updated = (tree[{ say(\"segment:0\"); \"-1\" }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "-1": 99
+          },
+          {
+            "-1": 99
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "-1": 99
+          }
+        },
+        "result": {
+          "-1": 99
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/dynamic_negative_string_key/callable",
+      "kind": "write",
+      "neutral_id": "dynamic_negative_string_key",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; chosen_key=\"-1\"; updated = (tree[{ say(\"segment:0\"); chosen_key }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; chosen_key=\"-1\"; updated = (tree[{ say(\"segment:0\"); chosen_key }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          {
+            "-1": 99
+          },
+          {
+            "-1": 99
+          }
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "-1": 99
+          }
+        },
+        "result": {
+          "-1": 99
+        },
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_zero/callable",
+      "kind": "write",
+      "neutral_id": "negative_zero",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; updated = (tree[{ say(\"segment:0\"); 0 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/selector_resize/callable",
+      "kind": "write",
+      "neutral_id": "selector_resize",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20]; updated = (tree[{ say(\"segment:0\"); tree=[10,20,30]; -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20]; updated = (tree[{ say(\"segment:0\"); tree=[10,20,30]; -1 }] = { say(\"rhs\"); 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/rhs_resize/callable",
+      "kind": "write",
+      "neutral_id": "rhs_resize",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); tree=[10,20,30]; 99 }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20]; updated = (tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); tree=[10,20,30]; 99 }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            99
+          ]
+        },
+        "result": [
+          10,
+          20,
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/underflow/callable",
+      "kind": "write",
+      "neutral_id": "underflow",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10,20,30]; tree[{ say(\"segment:0\"); -4 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10,20,30]; tree[{ say(\"segment:0\"); -4 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 29,
+            "end": 53,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20,
+            30
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:underflow",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/empty/callable",
+      "kind": "write",
+      "neutral_id": "empty",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 21,
+            "end": 45,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": []
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:empty",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/absent_negative/callable",
+      "kind": "write",
+      "neutral_id": "absent_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "start": 12,
+            "end": 36,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": false
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "source_id": "contract:absent_negative",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/missing_nested_negative/callable",
+      "kind": "write",
+      "neutral_id": "missing_nested_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "start": 50,
+            "end": 74,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "source_span": {
+            "source_id": "contract:missing_nested_negative",
+            "start": 12,
+            "end": 14,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/null/callable",
+      "kind": "write",
+      "neutral_id": "null",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=undef; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=undef; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "start": 24,
+            "end": 48,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": null
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "source_id": "contract:null",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/wrong_kind/callable",
+      "kind": "write",
+      "neutral_id": "wrong_kind",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "source_span": {
+            "start": 21,
+            "end": 45,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "source_span": {
+            "source_id": "contract:wrong_kind",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/nested_null/callable",
+      "kind": "write",
+      "neutral_id": "nested_null",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[undef]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[undef]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "start": 52,
+            "end": 76,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            null
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "source_span": {
+            "source_id": "contract:nested_null",
+            "start": 9,
+            "end": 11,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/positive_gap/callable",
+      "kind": "write",
+      "neutral_id": "positive_gap",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree[{ say(\"segment:0\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree[{ say(\"segment:0\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "start": 23,
+            "end": 46,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "source_id": "contract:positive_gap",
+            "start": 5,
+            "end": 6,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/gap_after_negative/callable",
+      "kind": "write",
+      "neutral_id": "gap_after_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); 2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "start": 51,
+            "end": 74,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            [
+              10
+            ]
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "source_span": {
+            "source_id": "contract:gap_after_negative",
+            "start": 9,
+            "end": 10,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/underflow_after_negative/callable",
+      "kind": "write",
+      "neutral_id": "underflow_after_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[[10]]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 51,
+            "end": 75,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            [
+              10
+            ]
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:underflow_after_negative",
+            "start": 9,
+            "end": 11,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_after_underflow/callable",
+      "kind": "write",
+      "neutral_id": "invalid_after_underflow",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "start": 47,
+            "end": 73,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": []
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "source_id": "contract:invalid_after_underflow",
+            "start": 9,
+            "end": 13,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_before_conflict/callable",
+      "kind": "write",
+      "neutral_id": "invalid_before_conflict",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=undef; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=undef; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "start": 24,
+            "end": 51,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": null
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "source_span": {
+            "source_id": "contract:invalid_before_conflict",
+            "start": 5,
+            "end": 9,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/fractional/callable",
+      "kind": "write",
+      "neutral_id": "fractional",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree[{ say(\"segment:0\"); -1.5 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree[{ say(\"segment:0\"); -1.5 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "source_span": {
+            "start": 23,
+            "end": 49,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "source_span": {
+            "source_id": "contract:fractional",
+            "start": 5,
+            "end": 9,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/segment_failure/callable",
+      "kind": "write",
+      "neutral_id": "segment_failure",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree[{ say(\"segment:0\"); undef }][{ say(\"segment:1\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0"
+      ],
+      "expected": {
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        },
+        "effects": [
+          "segment:0"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "segment:0",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/rhs_failure/callable",
+      "kind": "write",
+      "neutral_id": "rhs_failure",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); undef }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); undef }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "fixture_evaluation_failed",
+          "message": "stop here"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "rhs",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/failure_keeps_rhs_effect/callable",
+      "kind": "write",
+      "neutral_id": "failure_keeps_rhs_effect",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); tree=[10,20]; 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree[{ say(\"segment:0\"); -3 }] = { say(\"rhs\"); tree=[10,20]; 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 23,
+            "end": 47,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10,
+            20
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:failure_keeps_rhs_effect",
+            "start": 5,
+            "end": 7,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/guard_precedes_evaluation/callable",
+      "kind": "write",
+      "neutral_id": "guard_precedes_evaluation",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; tree.map_leaves!() { tree[{ say(\"segment:0\"); undef }] = { say(\"rhs\"); 99 } }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; tree.map_leaves!() { tree[{ say(\"segment:0\"); undef }] = { say(\"rhs\"); 99 } }; return(undef) }; return(cb())",
+      "effects": [],
+      "expected": {
+        "error": {
+          "code": "receiver_mutation_reentrant",
+          "operation": "map_leaves_mutation",
+          "binding": "tree",
+          "method": "map_leaves",
+          "attempt": "nested_write",
+          "source_span": {
+            "start": 39,
+            "end": 43,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            10
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "receiver_mutation_reentrant",
+          "operation": "map_leaves_mutation",
+          "binding": "tree",
+          "method": "map_leaves",
+          "attempt": "nested_write",
+          "source_span": {
+            "source_id": "contract:guard_precedes_evaluation",
+            "start": 0,
+            "end": 4,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"
+        },
+        "effects": []
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target.",
+      "injection": {
+        "marker": "segment:0",
+        "code": "fixture_evaluation_failed",
+        "message": "stop here"
+      }
+    },
+    {
+      "id": "write/distinct_identity/callable",
+      "kind": "write",
+      "neutral_id": "distinct_identity",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[10]; worker={|tree| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(tree) }; outer=tree.map_leaves!() { return(worker([value])) }; return([outer[0],outer[0]]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[10]; worker={|tree| tree[{ say(\"segment:0\"); -1 }] = { say(\"rhs\"); 99 }; return(tree) }; outer=tree.map_leaves!() { return(worker([value])) }; return([outer[0],outer[0]]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            99
+          ],
+          [
+            99
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            99
+          ]
+        },
+        "result": [
+          99
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/aggregate_detachment/callable",
+      "kind": "write",
+      "neutral_id": "aggregate_detachment",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[{\"keep\":[1]}]; payload=[2]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }] = { say(\"rhs\"); payload }); return([tree,updated]) }; return(cb()) }\n",
+      "body": "cb={|| tree=[{\"keep\":[1]}]; payload=[2]; updated = (tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }] = { say(\"rhs\"); payload }); return([tree,updated]) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "ok": [
+          [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ],
+          [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ]
+        ]
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                2
+              ]
+            }
+          ]
+        },
+        "result": [
+          {
+            "keep": [
+              1
+            ],
+            "new": [
+              2
+            ]
+          }
+        ],
+        "error": null,
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/unicode_span/callable",
+      "kind": "write",
+      "neutral_id": "unicode_span",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 55,
+            "end": 79,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "é": [
+              1
+            ]
+          }
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:unicode_span",
+            "start": 10,
+            "end": 12,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/partial_creation_then_negative/ordinary",
+      "kind": "write",
+      "neutral_id": "partial_creation_then_negative",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); 0 }][{ say(\"segment:2\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); 0 }][{ say(\"segment:2\"); -1 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 2,
+          "path": [
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 2 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "start": 68,
+            "end": 92,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 2,
+          "path": [
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 2 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:partial_creation_then_negative",
+            "start": 15,
+            "end": 17,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_prefix_then_creation/ordinary",
+      "kind": "write",
+      "neutral_id": "negative_prefix_then_creation",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=[{}]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }][{ say(\"segment:3\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=[{}]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }][{ say(\"segment:3\"); -2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "segment:3",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 3,
+          "path": [
+            -1,
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 3 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "start": 96,
+            "end": 120,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {}
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 3,
+          "path": [
+            -1,
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 3 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:negative_prefix_then_creation",
+            "start": 19,
+            "end": 21,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "segment:3",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_after_negative_wrong_root/ordinary",
+      "kind": "write",
+      "neutral_id": "invalid_after_negative_wrong_root",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { tree=\"scalar\"; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "tree=\"scalar\"; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)",
+          "source_span": {
+            "start": 46,
+            "end": 72,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": "scalar"
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)",
+          "source_span": {
+            "source_id": "contract:invalid_after_negative_wrong_root",
+            "start": 9,
+            "end": 13,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/astral_prefix/ordinary",
+      "kind": "write",
+      "neutral_id": "unicode_span+astral_prefix",
+      "context": "ordinary",
+      "source": "Top::\n /x/\n E { pad=\"🧭\"; tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }\n",
+      "body": "pad=\"🧭\"; tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef)",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 57,
+            "end": 81,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "é": [
+              1
+            ]
+          }
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:unicode_span",
+            "start": 10,
+            "end": 12,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/partial_creation_then_negative/callable",
+      "kind": "write",
+      "neutral_id": "partial_creation_then_negative",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); 0 }][{ say(\"segment:2\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree={}; tree[{ say(\"segment:0\"); \"new\" }][{ say(\"segment:1\"); 0 }][{ say(\"segment:2\"); -1 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 2,
+          "path": [
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 2 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "start": 75,
+            "end": 99,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 2,
+          "path": [
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 2 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:partial_creation_then_negative",
+            "start": 15,
+            "end": 17,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/negative_prefix_then_creation/callable",
+      "kind": "write",
+      "neutral_id": "negative_prefix_then_creation",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=[{}]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }][{ say(\"segment:3\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=[{}]; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); \"new\" }][{ say(\"segment:2\"); 0 }][{ say(\"segment:3\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "segment:2",
+        "segment:3",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 3,
+          "path": [
+            -1,
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 3 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "start": 103,
+            "end": 127,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {}
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 3,
+          "path": [
+            -1,
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 3 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:negative_prefix_then_creation",
+            "start": 19,
+            "end": 21,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "segment:3",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/invalid_after_negative_wrong_root/callable",
+      "kind": "write",
+      "neutral_id": "invalid_after_negative_wrong_root",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| tree=\"scalar\"; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| tree=\"scalar\"; tree[{ say(\"segment:0\"); -1 }][{ say(\"segment:1\"); true }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)",
+          "source_span": {
+            "start": 53,
+            "end": 79,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": "scalar"
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)",
+          "source_span": {
+            "source_id": "contract:invalid_after_negative_wrong_root",
+            "start": 9,
+            "end": 13,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "write/astral_prefix/callable",
+      "kind": "write",
+      "neutral_id": "unicode_span+astral_prefix",
+      "context": "callable",
+      "source": "Top::\n /x/\n E { cb={|| pad=\"🧭\"; tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb()) }\n",
+      "body": "cb={|| pad=\"🧭\"; tree={\"é\":[1]}; tree[{ say(\"segment:0\"); \"é\" }][{ say(\"segment:1\"); -2 }] = { say(\"rhs\"); 99 }; return(undef) }; return(cb())",
+      "effects": [
+        "segment:0",
+        "segment:1",
+        "rhs"
+      ],
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 64,
+            "end": 88,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "private_expected": {
+        "binding": {
+          "present": true,
+          "value": {
+            "é": [
+              1
+            ]
+          }
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "source_id": "contract:unicode_span",
+            "start": 10,
+            "end": 12,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      },
+      "geometry": "Constructed Unicode-scalar offsets in the authored action source; no backend AST supplies the target."
+    },
+    {
+      "id": "book/negative-array-current-perl",
+      "kind": "book",
+      "source": "Top: /x/\n I { items=[10,20,30]; return([items[-1],items]) }\n",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "book/negative-array-current-callable-perl",
+      "kind": "book",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={||return(items[-1])}; return([runner(),items]) }\n",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "book/negative-array-write-perl",
+      "kind": "book",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-2]=99; return([items[-1],items]) }\n",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            99,
+            30
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "book/negative-array-write-callable-perl",
+      "kind": "book",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; edit={|| tree[\"rows\"][-1][-2]=99; return(tree) }; return(edit()) }\n",
+      "expected": {
+        "ok": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        }
+      },
+      "effects": []
+    },
+    {
+      "id": "function/read",
+      "kind": "function",
+      "source": "fn tail(items) { return(items[-2]) }\n\nTop::\n /x/\n E { return(tail([10,20,30])) }\n",
+      "expected": {
+        "ok": 20
+      },
+      "effects": []
+    },
+    {
+      "id": "function/write",
+      "kind": "function",
+      "source": "fn update(items) { items[-1]=99; return(items) }\n\nTop::\n /x/\n E { initial=[10,20,30]; updated=update(initial); return([initial,updated]) }\n",
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            30
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "function/nested",
+      "kind": "function",
+      "source": "fn update(items) { items[-1][-2]=99; return(items) }\n\nTop::\n /x/\n E { return(update([[1],[2,3]])) }\n",
+      "expected": {
+        "ok": [
+          [
+            1
+          ],
+          [
+            99,
+            3
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "control/read-coercions",
+      "kind": "control",
+      "source": "Top::\n /x/\n E { items=[10,20,30]; return([items[-1.0],items[-1.5],items[\"-1\"],items[true],items[-0.0]]) }\n",
+      "expected": {
+        "ok": [
+          null,
+          null,
+          null,
+          null,
+          10
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "control/map-coercion",
+      "kind": "control",
+      "source": "Top::\n /x/\n E { tree={\"-1\":\"key\"}; return([tree[-1],tree[\"-1\"]]) }\n",
+      "expected": {
+        "ok": [
+          "key",
+          "key"
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "control/retained-read-receiver",
+      "kind": "control",
+      "source": "Top::\n /x/\n E { tree=[10,20]; got=tree[{ tree=[30,40,50]; -1 }]; return([got,tree]) }\n",
+      "expected": {
+        "ok": [
+          20,
+          [
+            30,
+            40,
+            50
+          ]
+        ]
+      },
+      "effects": []
+    },
+    {
+      "id": "control/detached-copy",
+      "kind": "control",
+      "source": "Top::\n /x/\n E { original=[{\"keep\":[1]}]; tree=original; payload=[2]; updated=(tree[-1][\"new\"]=payload); original[0][\"keep\"][0]=11; payload[0]=22; tree[-1][\"new\"][0]=33; updated[-1][\"keep\"][0]=44; return([original,payload,tree,updated]) }\n",
+      "expected": {
+        "ok": [
+          [
+            {
+              "keep": [
+                11
+              ]
+            }
+          ],
+          [
+            22
+          ],
+          [
+            {
+              "keep": [
+                1
+              ],
+              "new": [
+                33
+              ]
+            }
+          ],
+          [
+            {
+              "keep": [
+                44
+              ],
+              "new": [
+                2
+              ]
+            }
+          ]
+        ]
+      },
+      "effects": []
+    }
+  ],
+  "private_extended": [
+    {
+      "id": "partial_creation_then_negative",
+      "binding": "tree",
+      "initial_binding": {
+        "present": true,
+        "value": {}
+      },
+      "segments": [
+        {
+          "source": "\"new\"",
+          "kind": "string",
+          "value": "new"
+        },
+        {
+          "source": "0",
+          "kind": "integer",
+          "value": 0
+        },
+        {
+          "source": "-1",
+          "kind": "integer",
+          "value": -1
+        }
+      ],
+      "rhs": {
+        "source": "99",
+        "value": 99
+      },
+      "guard": null,
+      "source": "tree[\"new\"][0][-1] = 99",
+      "expected": {
+        "binding": {
+          "present": true,
+          "value": {}
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 2,
+          "path": [
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 2 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:partial_creation_then_negative",
+            "start": 15,
+            "end": 17,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "rhs"
+        ]
+      }
+    },
+    {
+      "id": "negative_prefix_then_creation",
+      "binding": "tree",
+      "initial_binding": {
+        "present": true,
+        "value": [
+          {}
+        ]
+      },
+      "segments": [
+        {
+          "source": "-1",
+          "kind": "integer",
+          "value": -1
+        },
+        {
+          "source": "\"new\"",
+          "kind": "string",
+          "value": "new"
+        },
+        {
+          "source": "0",
+          "kind": "integer",
+          "value": 0
+        },
+        {
+          "source": "-2",
+          "kind": "integer",
+          "value": -2
+        }
+      ],
+      "rhs": {
+        "source": "99",
+        "value": 99
+      },
+      "guard": null,
+      "source": "tree[-1][\"new\"][0][-2] = 99",
+      "expected": {
+        "binding": {
+          "present": true,
+          "value": [
+            {}
+          ]
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 3,
+          "path": [
+            -1,
+            "new",
+            0
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 3 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)",
+          "source_span": {
+            "source_id": "contract:negative_prefix_then_creation",
+            "start": 19,
+            "end": 21,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "segment:2",
+          "segment:3",
+          "rhs"
+        ]
+      }
+    },
+    {
+      "id": "invalid_after_negative_wrong_root",
+      "binding": "tree",
+      "initial_binding": {
+        "present": true,
+        "value": "scalar"
+      },
+      "segments": [
+        {
+          "source": "-1",
+          "kind": "integer",
+          "value": -1
+        },
+        {
+          "source": "true",
+          "kind": "boolean",
+          "value": true
+        }
+      ],
+      "rhs": {
+        "source": "99",
+        "value": 99
+      },
+      "guard": null,
+      "source": "tree[-1][true] = 99",
+      "expected": {
+        "binding": {
+          "present": true,
+          "value": "scalar"
+        },
+        "result": null,
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)",
+          "source_span": {
+            "source_id": "contract:invalid_after_negative_wrong_root",
+            "start": 9,
+            "end": 13,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          }
+        },
+        "effects": [
+          "segment:0",
+          "segment:1",
+          "rhs"
+        ]
+      }
+    }
+  ],
+  "limits": "Native/spec/validated-engine paths compare declared typed fields; the existing public generated wrapper exposes generic metadata/detail. Public failures do not establish post-failure binding state; private boundary observation is separate. No portable admission or numeric-range expansion."
+}

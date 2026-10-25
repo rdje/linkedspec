@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / Dart signed17.4 next
+- Status: `active` / Julia signed17.5 after director-requested hygiene23
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -594,11 +594,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Admission repair verified: Complete failed215-file candidate (17 whole mutable images/198 sealed references) and gate1 survive. The auditor permits only the exact historical/current Rust engine pair and reports its owner separately, preserving every historical identity/result. Unchanged isolated recovery retains134 streams/84613241 bytes/22 controls, byte-exact archive reconstruction and original guard0. Three source mutations/four direct path/history/image denials reject. Actual old-auditor rollback reproduces RED; physical hash-guard removal admits drift and the original driver rejects it; exact bytes/mode restoration returns the identical healthy report. Fresh unchanged Rust nesting/context/lossless/child consumers pass parent6/emitted4/4/3 with actual source/workspace/executable custody; no old runtime is rerun. Current book95 and actual changed admission statement reject correctly. New readonly49 and input4/bypass/restoration pass; the original unpublished claim remains unchanged within the combined record, which adds58 admission inputs. Canonical facts/ledger/book and continuation agree. No dependency implementation, old checkpoint or sealed prefix changes. Exact staged canonical receipt and normal hooks govern landing; numeric55.1 is next from clean Git.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.4`
-  Status: `pending`
+  Status: `done` / exact canonical receipt and normal hooks govern landing
   Goal: Implement the same policy through Dart native/generated interfaces.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.3`, `SESSION-STARTUP-READING.55.1`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Activation: Clean 4e6ece603bbdf7c77b83a2e8c1f79946e7da0490 after numeric55.1 exact canonical receipt, all10 normal hooks, post-memory/receipt promotion/check-head, brief0 and clean Git. No pending numeric job or source lease. Current signed authority (12 arithmetic/14 read/33 write targets), write-v1/map composition, affected book and Dart public native/compiled/generated interfaces are reviewed. Implementation source diagnosis follows actual public probes, not source-only guesses.
+  Owned paths: Dart signed-selector read/write producers and diagnostic projection identified by public probes; affected permanent Dart consumers and required public examples/book; exact Dart historical source evolution in tests/language-readiness/verify_objectives.py and its ledger/readonly recovery proof; docs/checkpoints/signed-array-dart/, this leaf's claim, canonical Knowledge and normal live continuity. Preserve every sealed predecessor, frozen authority, backend admission status, dependency pin and other repository.
+  Verification tier: `canonical`
+  Focused checks: Retain complete first-party producer/fixture inputs and actual public RED/GREEN channels; independent signed arithmetic/value/diagnostic targets; ordinary/callable, native/SpecFile/compiled/generated-plan/fresh emitted/CLI carriers; exact guards/effects/copies/Unicode spans and source inverses/restoration; unchanged write/map/binding/callable/direct dependents, complete Dart package tests and non-writing format/strict-analysis observations; current book/executed examples, Knowledge/history/memory/doctrine checks.
+  Canonical trigger: Planned backend signed-selector implementation boundary; exact staged approved-host canonical CI and normal hooks before landing. Keep the canonical process sandbox intact; no push during PNT.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.4.json`
+  Component baseline boundary: docs/knowledge/dart-component-gate-sdk-compatibility.md already owns six formatter changes and two deprecated SDK-interface analysis warnings under DART-STARTUP-READING.2.24/.2.25. Reverify with non-writing commands; do not run the old mutating formatter over unrelated sources or imply a green complete component gate. Those repairs keep their scheduled owners. Temporary-owner inventory remains exact if any new allocator is required.
+  Public baseline: Retained SDK3.13.3/compiler/CLI help and stable full first-party Dart/specification inputs precede an actual AOT executable archived before execution. Ten authored programs produce30 native/SpecFile-JSON/generated-plan observations:21 independently targeted,12 signed read/write mismatches,9 passing positive/quoted-key/missing-read controls and9 separately qualified coercion/error calibrations. All ten sources compile. No Dart production source changed. Complete source AST/compiled JSON and channels are retained under signed-array-dart/.
+  Root cause / boundary: Public compiled nodes retain signed integer values in indexed_var and expression-bearing assign_nested_access. interpreter.dart::_indexValue (9622) excludes all negative coerced offsets; _classifyWriteSelectors (9930) rejects negative int before structural walking. Preserve old Map/string/float coercions, receiver ordering, legacy programmatic hash-index carriers and the nonnegative-only child-push overload gate. Writes accept int, while double -1.0 retains fractional_number rejection. New signed positions normalize only in existing arrays after effects, with raw negative path prefixes.
+  First implementation/instrument boundary: Integer-only reads now resolve against the retained array; typed write ints normalize during the post-expression structural walk, missing negative targets preserve invalid-segment errors, and RuntimeDiagnostic forwards resolved_index. Changed-file format and strict analysis pass. First after1 actual source/AOT run has all21 targeted outcomes correct and preserves read/float-write calibrations, but its observer assumes native diagnostic objects for the generated wrapper and stops with KeyError. Complete actual packets/traceback are retained in generated-error-qualification.json.gz. Existing generated_source_error metadata/detail is the supported wrapper contract; qualify its fields separately and rerun after2 without changing runtime source. No product-RED credit or completed wide/carrier proof from that observer failure.
+  Required historical admission (P1, same leaf): Numeric55.1's retained final report lists dart/lib/src/runtime/interpreter.dart among exact latest_source_inputs. Before production edits preserve whole current claim namespace and this boundary. Retain actual unregistered-candidate rejection, then admit only reviewed before/after whole Dart images with owner17.4 and unchanged historical identities. Actual old-auditor/guard-bypass denials and exact restored recovery must accompany fresh Dart readiness; never refresh an old checkpoint or broaden the Rust exceptions. This is admission work required by the signed slice, not a new implementation direction.
+  Director steering 2026-10-25: Read the authorized external disk-notes index and LinkedSpec note. REPO-HYGIENE.23 owns exact source intake and measured safe cleanup at the next clean boundary, before Julia17.5. Finish and commit this dirty Dart leaf before activating maintenance; no current experiment, cache, Git object or dependency artifact is deleted on the strength of the old estimates.
+  Verified proof: Initial public21 targets/12 signed RED/9 controls become113 programs/452 public observations and114 permanent tests passing. Private51 plus arithmetic12 uses41 exact first-party library copies and a separate observer suffix, adding no production export. Fresh113 emitted modules and107 CLI programs/214 quiet-trace runs pass. All16 actual AOT artifacts and full producer/source/fixture inputs are retained before execution. Five physical production inverses fail244/32/36/24/8 and exact source/mode restoration returns452/0. Native/SpecFile/validated-engine typed diagnostics, generic generated runtime errors, preserved caller exceptions and generic CLI phase failures are separately qualified.
+  Compatibility / admission: Original package discovery636, primary CLI66x2, corpus105 and storage25 pass; changed-file strict analysis passes while existing SDK non-writing format1/analysis2 debt stays separately owned. Actual unregistered Dart source and old-auditor rollback reject. Exact whole-image admission preserves134 historical streams/84613241 bytes/22 controls and every Rust admission; nine primary/five support/four direct denials, actual guard bypass and exact restored healthy report pass. Book95/90 preserves aliases and four executed examples; four actual rendered-source denials pass. Original v1/signed/map/composition authorities and dependency pins are unchanged.
+  Publication: Readonly publish.py re-derives all retained channels and whole binary/source identities. Four physical missing/byte/mode/required-omission faults reject, discarded actual validation admits each, exact restoration rejects each and restores identical healthy channels. Closed172 base/180 final custody/181 claim inputs retain all provisional compile/observer/namespace/mode qualifications without product-RED credit. Every source/auditor/input lease is closed. Canonical CI and normal hooks must accept the exact staged candidate before this completed state lands; then hygiene23, not a dirty pivot to Julia.
+  Handoff correction: Recovery review found that the newly queued hygiene23 node/index/pointer existed while its Current Frontier table still listed only completed leaves. Add its pending frontier row and preserve distinct ordering before landing this slice. Canonical1 survived the daemon restart but was intentionally stopped during doctrine checks, before any acceptance receipt; its original log/watch refusal stay in project-local verification data. Rerun canonical2 for the corrected exact candidate. This is an owned continuity repair, with no runtime, book, authority, sealed181-input proof or measured result changes.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Complete clean140-file Dart/spec Git contents and actual original AOT channels show12 signed failures among21 targets, preserving9 controls; three coercion/error calibrations stay separate.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public AST/value probes locate _indexValue's nonnegative bound and _classifyWriteSelectors' blanket negative rejection. Existing Map/string/float reads, retained read receivers, guarded child-push overload and historical programmatic carriers remain bounded.
+  - [x] **FIX** — Existing integer positions normalize during the post-expression isolated walk; missing negatives retain legacy invalid errors, underflow adds exact resolved_index, and all original write-v1/map boundaries remain.
+  - [x] **ADDRESSED (verified)** — Independent public/private/arithmetic/emitted/CLI targets, exact native diagnostics, effects/copies/identity/Unicode geometry and five physical source inverses/restored452/0 pass.
+  - [x] **NO REGRESSION** — Complete636 package tests, CLI66x2, corpus105/storage25 and exact historical integrity/fault/restoration pass. Existing SDK format/analyzer debt is explicit; exact canonical receipt and normal hooks govern landing.
+  - [x] **LOCKSTEP** — Current book95/90/four denials, canonical Knowledge, claim181, task/roadmap/handoff and four actual publication-input controls agree. Portable17.7 and Julia/Lua remain open; hygiene23 activates only from clean committed Git.
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.5`
@@ -820,20 +841,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory; no current Rust pivot. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 13 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
-| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation after clean hygiene23. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 12 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 13 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
 | 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
 | 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
 
@@ -854,6 +874,8 @@ These are evidence questions owned by `.1`, not blockers requiring a director de
 No director input required. Signed selectors17 follows the clean12 boundary, then14/16/19/raw-regex21/policy20 before inventory. No dirty pivot.
 
 ## Verification Log
+
+- `2026-10-25` — `.1.2.17.4`: Public113/452, private51+arithmetic12, emitted113/CLI214 and package636/CLI66x2/corpus105/storage25 pass. Five physical runtime inverses/restored452/0, exact historical134/84613241/22, nine primary/five support/four direct denials and actual auditor faults/restoration pass. Book95/90/four denials, readonly172/180/181 custody and physical input4/bypass/restoration pass. Existing SDK format1/analysis2 stays disclosed. Exact staged canonical receipt/normal hooks govern landing; hygiene23 precedes Julia17.5.
 
 - `2026-10-25` — `.1.2.17.3`: Original40/160 has104 RED/56 controls; corrected137/822 on six routes and actual final restoration pass. Five physical runtime variants reject320/24/32/8/4; eight direct suites443 retain actual pre/post binaries. Book95/four executed examples/three source denials and old/new alias denials pass. Readonly195 and input4/bypass/restoration pass; claim198 preserves every qualified epoch and first-party include closure. Exact staged canonical receipt/normal hooks govern landing. Next clean owner55.1 precedes Dart17.4.
 
@@ -877,6 +899,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
 
 ## Commit Log
 
+Dart signed17.4 subject: `TYPE-REFERENCE-BOOK.1.2.17.4 - support signed Dart array selectors`; derive accepted identity from Git.
+
 Rust signed17.3 subject: `TYPE-REFERENCE-BOOK.1.2.17.3 - support signed Rust array selectors`; derive accepted identity from Git.
 
 CLI17.8 subject: `TYPE-REFERENCE-BOOK.1.2.17.8 - report context-only Perl CLI runtime failures`; derive accepted identity from Git.
@@ -892,6 +916,8 @@ Kind13 subject: `TYPE-REFERENCE-BOOK.1.2.13 - preserve sorted scalar kinds`; der
 Intake landed under `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`. TYPE-REFERENCE-BOOK.1.1 is the first completed child; derive its accepted commit by subject from Git. Authority/model .1.2.0 is complete; derive its accepted commit by subject. P1 .1.2.3 completes the evaluated-value repair; derive its accepted commit by subject. Scoped-with .1.2.4 completes its finite repair; derive its accepted commit by subject. Numeric .1.2.5 completes scalar calls/snapshots; derive its commit by subject.
 
 ## Changelog
+
+- `2026-10-25`: Complete bounded Dart signed implementation and exact historical admission; retain whole source/actual executable custody. Director disk notes are read and preserved exactly; hygiene23 activates only after clean landing, before Julia17.5.
 
 - `2026-10-23`: Complete P1 CLI17.8 with both error channels, permanent source inverse/restoration and accurate current book; preserve original control qualification and accepted intake. Signed contract17.1 is next.
 

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.4 — array lengths and carrier boundaries
+
+Dart admits only actual int values for the signed extension. _indexValue retains the evaluated receiver and old float/string/Map coercions. The write classifier admits conditionally valid negative ints; the isolated post-expression walk resolves encountered lengths. Missing-container construction rejects negative selectors before publishing. Globally invalid selector kinds and active binding identities retain their priority. One complete interpreter image covers reads, writes and resolved_index forwarding.
+
+Public typed diagnostics, generic generated runtime errors, preserved caller-sink exceptions and generic CLI invocation failures are distinct established interfaces. Failed observers and corrected epochs remain retained without product RED credit. Private proof uses41 byte-exact library copies plus a separate suffix, without production exports. Actual before sources match140 clean Git blobs/executable classes; complete filesystem permissions have their own guards, following the existing mode card after a false equality refusal. Private namespaced IDs are compared separately from unchanged authority fields.
+
+Exact historical source admission is separate from fresh compatibility. Original134 streams and Rust images/support guards stay fixed; the original recovery driver detects unregistered/rolled-back/bypassed guards and exact restoration. Readonly publication re-derives raw typed results, private binding/effects/copy targets, actual executable streams, rendered boundaries and physical input controls. Capture/fixture/fault/seal/custody/claim writers are retired after acceptance. Director-requested disk cleanup activates at the next clean boundary; ignored scratch is not disposal authority.
+
 ## 2026-10-25 — SESSION-STARTUP-READING.55.1 — exact integer domains and source admission
 
 Use exclusive powers of two at f64/host-integer boundaries: an integer MAX cast to f64 can round upward and admit a saturating conversion. The numeric helper separates exact signed64, unsigned64 and finite-floating JSON. Exact JSON tokens and bit-level round trips are independent targets; converting an incorrect i64-max token back to f64 would hide its identity at2^63. Shared numeric text/Display/length fixes outward consumers without choosing the portable cat spelling policy. The real recursive child bridge and actual function-definition/staged-body producers are covered separately from private huge metadata tests.

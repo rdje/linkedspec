@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust numeric55.1 is verified; exact canonical receipt and normal hooks govern landing. Next clean activity is Dart signed-selector17.4, then Julia/Lua/admission17.5–7. Fluent23 and OPENAI-TOOL-API implementation remain deferred.
+Dart signed17.4 is verified; exact canonical receipt and normal hooks govern landing. Director-requested REPO-HYGIENE.23 measured disk cleanup follows clean Git before Julia/Lua/admission17.5–7. Fluent23 and OPENAI-TOOL-API implementation remain deferred.
 
 ## Latest Completed Slice
 
-SESSION-STARTUP-READING.55.1 preserves finite binary64 transport and checked host-integer boundaries. Core36/runtime212+metadata23/bridge66/emitted49+4/CLI52 cases104 channels+function4 pass. Five physical source faults restore exact bytes and fresh GREEN; suites260/libraries189+202/types8 and fresh readiness6/emitted4/4/3 pass. Book95/90 and actual source/semantic controls preserve examples and aliases. Historical134/84613241/22, six primary/five support/nine direct denials and three actual auditor faults/restoration pass. Final readonly publication binds whole proof inputs and requires physical input4/bypass/restoration. No portable spelling or other-backend closeout is claimed.
+TYPE-REFERENCE-BOOK.1.2.17.4 supports integer negative array reads/writes across native, reconstructed, validated-plan, emitted and CLI carriers. Public113/452, private51+arithmetic12, emitted113/CLI214, package636/CLI66x2/corpus105/storage25 pass. Five physical runtime faults restore452/0. Exact Dart historical admission preserves134 streams/84613241 bytes/22 controls and prior Rust images; source/auditor/input faults and restoration pass. Book95/90/four denials and closed181-input claim retain whole source/actual executable custody. Existing SDK format1/analysis2 remains separately owned; portable signed admission is open.
 
 ## Next Action
 
-From clean committed Git activate TYPE-REFERENCE-BOOK.1.2.17.4. Recover its Dart leaf and signed authority, verify current observations and implement one bounded native/generated slice. Continue the existing frontier; never rerun sealed capture writers or pivot dirty.
+From clean committed Git activate REPO-HYGIENE.23. Read its exact supplied note packets, re-measure parent-owned candidates and prove quiescence/retention before cleanup; report actual per-item reclaimed bytes and current parent/free-space totals. Preserve unresolved run evidence and every other repository. Then resume Julia17.5. Never rerun sealed Dart capture writers or pivot dirty.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
 - `SESSION-STARTUP-READING.55.1` — finite Rust transport/core36/runtime212/bridge66/emitted53/CLI104; five source faults restored, suites260/readiness6+4/4/3, book95/90, exact historical admission and physical input4; Dart17.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.3` — Rust137/822/6, five actual faults/restoration, eight direct suites443; exact diagnostics, book95/CLI4/aliases, readonly195/input4 actual bypass/restoration and claim198; numeric55.1 next.
 - `REPO-HYGIENE.22` — dated23966 parent candidates/six Rust locations, zero removals; independent population/lstat, five metadata denials, book95/marker RED, input3/bypass/restoration and actual reader channels; Rust17.3 next.
@@ -29,7 +30,6 @@ From clean committed Git activate TYPE-REFERENCE-BOOK.1.2.17.4. Recover its Dart
 - `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
 - `TYPE-REFERENCE-BOOK.1.2.10` —232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; finite history0137;11 next.
 - `TYPE-REFERENCE-BOOK.1.2.13` —116/47 accepted RED; six faults;14/1950;16 flag routes;9/72 direct;book89/5; count/first10 next.
-- `TYPE-REFERENCE-BOOK.1.2.9` —85/41 accepted RED;7 restored fault epochs;14/1949;85+1 permanent/75 malformed;book89/3;kind13 next.
 
 ## History
 

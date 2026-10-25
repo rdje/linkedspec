@@ -13,7 +13,7 @@ answers:
   - "why are captured pipeline draft bytes stored in several parts"
   - "how does pipeline proof recover its original whole input context"
   - "may readonly verification assemble a temporary compatibility artifact"
-date: 2026-10-22
+date: 2026-10-25
 status: historical mode correction hash-bound; current recognition input modes independently guarded
 tags: [claims, inputs, git, permissions, component-gate, provenance]
 evidence: ".1.5.2 rejects full-stat/Git equality before checker execution:36 permission differences, first noncore/AmbiTiming.pm0640/100644, no executable drift. Actual permissions stay guarded; no chmod. Healthy4638 inputs/five byte deltas, exact three-edit repair/original RED/four controls remain retained."
@@ -53,6 +53,8 @@ The claim gate does not re-execute historical producers. Do not run the old
 current-source component comparison against later changed production bytes.
 
 The REPO-HYGIENE.18 dated archive-mode census retains all1486 Knowledge rows: tar permissions0664, recorded Git100644 and actual filesystem0644. These are separate representations. Guard actual permissions against their own captured field; do not equate full archive/Git permissions with the checkout. The first reader/failure and complete census remain in docs/checkpoints/REPO-HYGIENE.18-mode-census.json.gz and publication-failure.json. No chmod occurred.
+
+Signed Dart17.4 caught the same false equality in its readonly baseline reviewer: specs/ifelse.spec has identical committed/captured bytes with Git100644 and actual0640. The complete reached failed reader/channels and actual Git observations are retained in docs/checkpoints/signed-array-dart/review-mode-qualification.json.gz. Compare original byte content and executable class separately from the captured complete filesystem permissions; do not chmod to satisfy a mistaken oracle. No new full-mode census or product defect is inferred.
 
 The .5.7 native writer reports raw %INC keys such as LinkedSpec/OwnerDispatch.pm,
 while supplied manifests name perl/LinkedSpec/OwnerDispatch.pm. Its post-capture

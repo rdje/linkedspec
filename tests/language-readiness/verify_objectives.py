@@ -60,6 +60,11 @@ RUST_SIGNED_OWNER = 'TYPE-REFERENCE-BOOK.1.2.17.3'
 RUST_SIGNED_SOURCE = 'rust/linkedspec-runtime/src/engine.rs'
 RUST_SIGNED_BEFORE = '5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009'
 RUST_SIGNED_AFTER = '0a5a6e7091e2daef5f84942db839829ce98e5a60f62c3d83ce204538c95a5772'
+DART_SIGNED_OWNER = 'TYPE-REFERENCE-BOOK.1.2.17.4'
+DART_SIGNED_SOURCE = 'dart/lib/src/runtime/interpreter.dart'
+DART_SIGNED_ACTIVATION = '4e6ece603bbdf7c77b83a2e8c1f79946e7da0490'
+DART_SIGNED_BEFORE = '0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24'
+DART_SIGNED_AFTER = '9f0ee7637d28e63592bfcf0968431e17d0465e4f45ef7d6390d896e678971823'
 RUST_NUMERIC_OWNER = 'SESSION-STARTUP-READING.55.1'
 RUST_NUMERIC_ACTIVATION = 'f0d974aa1b337bbf2ee16e51c0297182e1e94f82'
 RUST_NUMERIC_IMAGES = {
@@ -932,6 +937,21 @@ def verify_rust_signed_evolution(source, contents, historical_hash):
             "scope": "exact signed-selector source image; historical runtime results unchanged; fresh Rust readiness compatibility is separately retained"}
 
 
+def verify_dart_signed_evolution(source, contents, historical_hash):
+    require(source == DART_SIGNED_SOURCE, f"unapproved Dart runtime source: {source}")
+    require(historical_hash == DART_SIGNED_BEFORE,
+            f"Dart runtime historical boundary mismatch: {source}")
+    activation = git("show", f"{DART_SIGNED_ACTIVATION}:{source}")
+    require(digest(activation) == DART_SIGNED_BEFORE,
+            f"Dart runtime activation boundary mismatch: {source}")
+    require(digest(contents) == DART_SIGNED_AFTER,
+            f"unreviewed Dart runtime drift: {source}")
+    return {"path": source, "historical": historical_hash,
+            "activation_commit": DART_SIGNED_ACTIVATION,
+            "current": digest(contents), "owner": DART_SIGNED_OWNER,
+            "scope": "exact whole Dart signed-selector source image; historical runtime results unchanged; fresh Dart compatibility is separately retained"}
+
+
 def verify_rust_numeric_evolution(source, contents, historical_hash, read=None):
     require(source in RUST_NUMERIC_IMAGES, f"unapproved Rust numeric source: {source}")
     historical, activation, accepted = RUST_NUMERIC_IMAGES[source]
@@ -1016,6 +1036,10 @@ def audit_evidence(read=read_relative):
     for source, row in sources.items():
         current = digest(read(source))
         if current != row["sha256"]:
+            if source == DART_SIGNED_SOURCE:
+                runtime_source_updates.append(verify_dart_signed_evolution(
+                    source, read(source), row["sha256"]))
+                continue
             if source in RUST_NUMERIC_IMAGES:
                 runtime_source_updates.append(verify_rust_numeric_evolution(
                     source, read(source), row["sha256"], read=read))
@@ -1387,9 +1411,17 @@ def falsify(report):
     for row in report.get("runtime_source_updates", []):
         source = row["path"]
         current = read_relative(source)
-        verifier = verify_rust_numeric_evolution if row["owner"] == RUST_NUMERIC_OWNER \
-            else verify_rust_signed_evolution
-        if source == 'rust/Cargo.toml':
+        verifier = {RUST_NUMERIC_OWNER: verify_rust_numeric_evolution,
+                    RUST_SIGNED_OWNER: verify_rust_signed_evolution,
+                    DART_SIGNED_OWNER: verify_dart_signed_evolution}[row["owner"]]
+        if row["owner"] == DART_SIGNED_OWNER:
+            altered = (
+                current + b"\n// unreviewed Dart runtime edit\n",
+                current.replace(b"collection.length + index", b"collection.length - index", 1),
+                current.replace(b"Object get pathValue => key ?? index!;",
+                                b"Object get pathValue => key ?? 0;", 1),
+            )
+        elif source == 'rust/Cargo.toml':
             altered = (
                 current + b"\n# unreviewed numeric edit\n",
                 current.replace(b'"float_roundtrip"', b'"arbitrary_precision"', 1),
@@ -1410,8 +1442,9 @@ def falsify(report):
             try:
                 verifier(source, candidate, row["historical"])
             except ValueError as error:
+                language = 'Dart' if row["owner"] == DART_SIGNED_OWNER else 'Rust'
                 expected = 'numeric' if row["owner"] == RUST_NUMERIC_OWNER else 'runtime'
-                require(str(error) == f"unreviewed Rust {expected} drift: {source}",
+                require(str(error) == f"unreviewed {language} {expected} drift: {source}",
                         "unrelated error substituted for runtime rejection")
             else:
                 raise ValueError("runtime corruption control did not reject")
