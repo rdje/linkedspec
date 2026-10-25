@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-October25 current PNT boundary: Julia signed17.5 implements negative Integer reads/writes through native/generated execution, with missing-target protection and typed underflow. Compilation and a small targeted regression pass; Lua17.6 is next. Director policy: implement, compile, quick targeted check, commit, continue until100% feature coverage. Broad suites/exhaustive proof/global registry scans and portable admission17.7 are deferred. Cleanup23 is committed96ce970; repair24 stays deferred.
+October25 current PNT boundary: Lua signed17.6 implements negative whole-number reads/writes in shared native/generated execution, with missing-target protection and typed underflow. Small compile/regression checks pass on PUC Lua and LuaJIT; all six runtime implementations are in. Deferred last14 is next. Director policy: implement, compile, quick targeted check, commit, continue until100% feature coverage. Broad validation17.7/exhaustive proof/global registry scans and maintenance remain deferred.
 
 October24 type-reference work: Deferred-write12, signed intake17.0, CLI17.8, neutral target17.1, Perl17.2, literal-kind22, Rust17.3, numeric55.1 and Dart17.4 are complete. Julia/Lua and admission17.5–7, deferred last14/with16, grouped assignment19, raw-regex21 and policy20 precede complete operation/spelling inventory1.2.1, mapping1.2.2 and layout1.3. Full per-type references and structured-format campaign admission remain unclaimed.
 

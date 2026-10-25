@@ -300,6 +300,7 @@ runtime_diagnostic = function(engine, fields)
     "expected_kind",
     "index",
     "length",
+    "resolved_index",
   }) do
     if fields[name] ~= nil then diagnostic[name] = fields[name] end
   end
@@ -611,8 +612,11 @@ local function runtime_access_index(value)
   elseif type(value) == "boolean" then
     number = value and 1 or 0
   end
-  if number == nil or number ~= number or number == math.huge or number == -math.huge or number < 0 then
-    return -1
+  if number == nil or number ~= number or number == math.huge or number == -math.huge then
+    return nil
+  end
+  if number < 0 and (type(value) ~= "number" or number % 1 ~= 0) then
+    return nil
   end
   return math.floor(number)
 end
@@ -620,8 +624,10 @@ end
 local function read_index(root, key)
   local kind = json.kind(root)
   if kind == "array" then
-    if type(key) ~= "number" or key % 1 ~= 0 or key < 0 then return json.null end
-    local value = root[key + 1]
+    if type(key) ~= "number" or key % 1 ~= 0 then return json.null end
+    local index = key < 0 and #root + key or key
+    if index < 0 or index >= #root then return json.null end
+    local value = root[index + 1]
     return value == nil and json.null or copy_value(value)
   elseif kind == "harray" then
     local value = root[tostring(key)]
@@ -713,8 +719,28 @@ function callable_codeblock.nested_write.failure(engine, ctx, message, fields)
     expected_kind = fields.expected_kind,
     index = fields.index,
     length = fields.length,
+    resolved_index = fields.resolved_index,
   })
   fail(message, fields)
+end
+
+function callable_codeblock.nested_write.invalid_segment(engine, ctx, base, selectors, position, value, source_span)
+  local actual_kind = callable_codeblock.nested_write.value_kind(value)
+  local reason = type(value) == "number" and value % 1 == 0 and value < 0 and
+    "negative_integer" or
+    (type(value) == "number" and "fractional_number" or "kind_not_path_selector")
+  local segment_index = position - 1
+  local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
+    "' must evaluate to a string or nonnegative integer; got " .. actual_kind .. " (" .. reason .. ")"
+  callable_codeblock.nested_write.failure(engine, ctx, message, {
+    code = "nested_write_segment_invalid",
+    binding = base,
+    segment_index = segment_index,
+    path = callable_codeblock.nested_write.path(selectors, position - 1),
+    actual_kind = actual_kind,
+    reason = reason,
+    source_span = callable_codeblock.nested_write.source_span(source_span),
+  })
 end
 
 function callable_codeblock.nested_write.classify_selectors(engine, ctx, base, evaluated)
@@ -723,31 +749,24 @@ function callable_codeblock.nested_write.classify_selectors(engine, ctx, base, e
     local value = segment.value
     if type(value) == "string" then
       selectors[index] = { kind = "harray", key = value, source_span = segment.source_span }
-    elseif type(value) == "number" and value % 1 == 0 and value >= 0 then
+    elseif type(value) == "number" and value % 1 == 0 then
       selectors[index] = { kind = "array", index = value, source_span = segment.source_span }
     else
-      local actual_kind = callable_codeblock.nested_write.value_kind(value)
-      local reason = type(value) == "number" and value % 1 == 0 and value < 0 and
-        "negative_integer" or
-        (type(value) == "number" and "fractional_number" or "kind_not_path_selector")
-      local segment_index = index - 1
-      local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
-        "' must evaluate to a string or nonnegative integer; got " .. actual_kind .. " (" .. reason .. ")"
-      callable_codeblock.nested_write.failure(engine, ctx, message, {
-        code = "nested_write_segment_invalid",
-        binding = base,
-        segment_index = segment_index,
-        path = callable_codeblock.nested_write.path(selectors, index - 1),
-        actual_kind = actual_kind,
-        reason = reason,
-        source_span = callable_codeblock.nested_write.source_span(segment.source_span),
-      })
+      callable_codeblock.nested_write.invalid_segment(
+        engine, ctx, base, selectors, index, value, segment.source_span
+      )
     end
   end
   return selectors
 end
 
-function callable_codeblock.nested_write.empty_container(selector)
+function callable_codeblock.nested_write.empty_container(engine, ctx, base, selectors, position)
+  local selector = selectors[position]
+  if selector.kind == "array" and selector.index < 0 then
+    callable_codeblock.nested_write.invalid_segment(
+      engine, ctx, base, selectors, position, selector.index, selector.source_span
+    )
+  end
   return selector.kind == "array" and json.array() or json.harray()
 end
 
@@ -784,6 +803,24 @@ function callable_codeblock.nested_write.array_gap(engine, ctx, base, selectors,
   })
 end
 
+function callable_codeblock.nested_write.array_underflow(engine, ctx, base, selectors, position, array_length, resolved_index)
+  local selector = selectors[position]
+  local segment_index = position - 1
+  local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
+    "' cannot select array index " .. json.encode(selector.index) .. " at length " ..
+    json.encode(array_length) .. " (resolved index " .. json.encode(resolved_index) .. ")"
+  callable_codeblock.nested_write.failure(engine, ctx, message, {
+    code = "nested_write_array_underflow",
+    binding = base,
+    segment_index = segment_index,
+    path = callable_codeblock.nested_write.path(selectors, position - 1),
+    index = selector.index,
+    length = array_length,
+    resolved_index = resolved_index,
+    source_span = callable_codeblock.nested_write.source_span(selector.source_span),
+  })
+end
+
 function callable_codeblock.nested_write.assign_value(engine, ctx, base, root, selectors, stored_value)
   local node = root
   for position, selector in ipairs(selectors) do
@@ -795,7 +832,7 @@ function callable_codeblock.nested_write.assign_value(engine, ctx, base, root, s
       if is_last then
         node[selector.key] = copy_value(stored_value)
       elseif node[selector.key] == nil then
-        local child = callable_codeblock.nested_write.empty_container(selectors[position + 1])
+        local child = callable_codeblock.nested_write.empty_container(engine, ctx, base, selectors, position + 1)
         node[selector.key] = child
         node = child
       else
@@ -806,16 +843,25 @@ function callable_codeblock.nested_write.assign_value(engine, ctx, base, root, s
         callable_codeblock.nested_write.kind_conflict(engine, ctx, base, selectors, position, node)
       end
       local array_length = #node
-      if selector.index > array_length then
+      local index = selector.index
+      if index < 0 then
+        index = array_length + index
+        if index < 0 then
+          callable_codeblock.nested_write.array_underflow(
+            engine, ctx, base, selectors, position, array_length, index
+          )
+        end
+      end
+      if index > array_length then
         callable_codeblock.nested_write.array_gap(engine, ctx, base, selectors, position, array_length)
       elseif is_last then
-        node[selector.index + 1] = copy_value(stored_value)
-      elseif selector.index == array_length then
-        local child = callable_codeblock.nested_write.empty_container(selectors[position + 1])
-        node[selector.index + 1] = child
+        node[index + 1] = copy_value(stored_value)
+      elseif index == array_length then
+        local child = callable_codeblock.nested_write.empty_container(engine, ctx, base, selectors, position + 1)
+        node[index + 1] = child
         node = child
       else
-        node = node[selector.index + 1]
+        node = node[index + 1]
       end
     end
   end
@@ -3757,7 +3803,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     local stored_value = copy_value(evaluate_expr(engine, expr.value, ctx, accumulator, edge_state))
     local selectors = callable_codeblock.nested_write.classify_selectors(engine, ctx, expr.base, evaluated)
     local current, storage = lookup_binding(ctx, expr.base)
-    local root = storage == nil and callable_codeblock.nested_write.empty_container(selectors[1]) or copy_value(current)
+    local root = storage == nil and
+      callable_codeblock.nested_write.empty_container(engine, ctx, expr.base, selectors, 1) or copy_value(current)
     callable_codeblock.nested_write.assign_value(engine, ctx, expr.base, root, selectors, stored_value)
     return store_binding(ctx, expr.base, storage, root)
   end
@@ -5601,6 +5648,7 @@ function M.to_json(value)
       "expected_kind",
       "index",
       "length",
+      "resolved_index",
     }) do
       if value[name] ~= nil then diagnostic[name] = value[name] end
     end

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia signed selectors17.5 are implemented and targeted-checked; shared Lua17.6 is next. The director prioritizes100% feature implementation: compile, quick targeted check, commit, continue. Broad suites, exhaustive matrices/proof and global registry scans are deferred until feature coverage is complete.
+Lua signed selectors17.6 are implemented and targeted-checked on PUC Lua and LuaJIT. All signed backend implementations are in; deferred last14 is next. Director policy remains implement, compile, quick targeted check, commit, continue toward100% feature coverage. Broad validation17.7/global scans remain deferred.
 
 ## Latest Completed Slice
 
-Julia native/generated and emitted callable execution now resolve negative Integer reads/writes against each existing array’s length. Missing arrays remain invalid, existing underflow has authored index/path plus resolved_index, and expression order/copied results/positive append/quoted keys are preserved. Package compilation and the dedicated small regression pass. Book and Knowledge reflect Julia support. Comprehensive validation/portable admission remain open.
+Shared Lua now resolves whole-number negative reads/writes against existing arrays, preserves invalid-read coercions, rejects missing negative targets and reports typed underflow with resolved_index. Dedicated module compilation/native/generated/emitted checks pass on both ABIs. Book/current Lua Knowledge match implemented support; comprehensive portable admission remains open.
 
 ## Next Action
 
-Activate Lua17.6 from clean Git, implement the shared runtime policy and run a small targeted check on PUC Lua and LuaJIT. Commit, then continue implementation. Broad admission17.7 and repair24 remain deferred.
+Activate deferred last14 from clean Git; implement its missing deferred helper, compile/run a small targeted check and commit. Continue feature implementation rather than running admission17.7 or maintenance.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
 - `REPO-HYGIENE.23` — Rust105.2GiB/history111.0GiB allocated cleanup; lossless52.7MiB archive/two restored readers/four fresh Rust examples; six reviewer denials and scoped before/after census; Julia17.5 next; repair24 after17.7.
 - `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
@@ -29,7 +30,6 @@ Activate Lua17.6 from clean Git, implement the shared runtime policy and run a s
 - `REPO-HYGIENE.21` — dated22830 parent/483 Rust incremental; zero removals; metadata4/custody4/input3/book89 marker RED/core PASS; whole accepted12 custody; signed17 next.
 - `TYPE-REFERENCE-BOOK.1.2.12` — 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; signed17 next feature.
 - `TYPE-REFERENCE-BOOK.1.2.11` —56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration; conservative closure/whole714; indexed-write12 next.
-- `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
 
 ## History
 

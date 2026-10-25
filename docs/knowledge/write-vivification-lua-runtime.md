@@ -2,6 +2,8 @@
 id: write-vivification-lua-runtime
 title: Lua nested writes use evaluated typed paths and one isolated dense publication on both ABIs
 answers:
+  - does Lua support negative array selectors
+  - why do invalid Lua access indexes use nil
   - how does Lua implement nested write vivification
   - what Lua AST node owns document key position assignment
   - does Lua nested assignment create missing containers
@@ -9,12 +11,13 @@ answers:
   - do Lua emitted parsers preserve nested write path expressions
   - does Lua map_leaves bang exist yet
   - where is the Lua write vivification regression test
-date: 2026-09-04
-status: current; Lua nested writes and map_leaves bang implemented on both ABIs; portable capability admitted under .19.7
+date: 2026-10-25
+status: implemented on both ABIs; signed selectors targeted-checked, comprehensive admission deferred
 tags: [lua, luajit, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.6.1 replaces Lua's authored key/index-tagged assignment lowering with ActionWritePathSegment plus assign_nested_access. Parser/compiler/runtime/static-contract/source-emitter owners carry typed expressions and Unicode-scalar spans through native, public SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes on PUC Lua and LuaJIT. Runtime evaluates every segment then RHS, snapshots afterward, distinguishes absent from bound null, builds selector-determined dense harray/array state on an isolated copy, publishes once, preserves completed expression effects and exact expression failures, and returns detached values. lua/test/write_vivification_contract_test.lua consumes the unchanged 5/7/11/16/3/3 neutral fixture, rejects malformed and reserved carriers, and permanently proves map_leaves! remains unadmitted at 436 assertions on each ABI. The complete Lua gate, CLI 66x2, corpus 105/105, and project-data storage proof pass."
 evidence_update_2026_09_04_lua_map_leaves: "FUTURE-PARITY-BACKLOG.19.6.2 implements the separate typed receiver-mutation carrier and identity-guarded copy-on-write runtime without changing nested-write semantics. The 530-assertion permanent suite passes on both ABIs and composes callback-local, unrelated, same-receiver, shadow, and post-commit nested writes across native, public SpecFile reconstruction, generated-plan, emitted-module, primary-CLI, and user-function-body routes. The adjacent write fixture now passes 438 assertions after replacing its stale raw-syntax expectation with the frozen typed invalid-arguments diagnostic."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua && bash tools/run_lua_local.sh"
+evidence_update_2026_10_25: "Lua17.6 resolves whole numeric negatives once in read_index and each existing write array. Invalid computed indexes use nil, not the now-valid -1. Missing negative arrays reject; underflow preserves authored paths/resolved_index. Targeted native/generated/emitted checks pass on both ABIs."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/signed_array_selector_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/signed_array_selector_test.lua"
 ---
 
 # Lua write-vivification runtime
@@ -26,9 +29,8 @@ longer decides harray versus array behavior.
 
 The runtime evaluates all segment expressions from left to right and then the RHS
 exactly once. Only afterward does it inspect binding presence and copy the current
-root. Evaluated strings select harrays, exact nonnegative integers select zero-based
-arrays, and a missing root or child is created only when the current or next selector
-determines its kind. Present null and existing wrong-kind values fail rather than being
+root. Strings select harrays; whole numbers select arrays, with negatives requiring
+an existing position. Only string/nonnegative selectors may create a missing container. Present null and existing wrong-kind values fail rather than being
 coerced; arrays may replace or append at exactly `length`, but never create a gap.
 
 Structural work mutates only the copied root. Success publishes once and returns an

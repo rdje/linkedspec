@@ -11,7 +11,7 @@ answers:
   - does Lua current-edge retv dispatch the child
   - which entry and match helpers execute in Lua
   - what do Lua match helpers return when no match exists
-date: 2026-07-13
+date: 2026-10-25
 status: current
 tags: [lua, runtime, values, stores, access, captures, positions, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.1 extends lua/src/linkedspec/interpreter.lua with runtime_value_kind, defensive four-kind copies, scalar/array/harray binding, checked direct/nested access and assignment, current-edge retv dispatch, and all entry_*/match_* reads. FUTURE-PARITY-BACKLOG.12.1.6 later routes every public bare mutation/read through one observable typed binding, and .12.1.8.5 hard-rejects exact aggregate selectors."
@@ -40,13 +40,7 @@ value)` can hold any kind; a write replaces competing slots. Exact
 copied local stores and restore their caller's stores on exit. `retv` inside an
 action edge dispatches that edge child before reading.
 
-DSL array indexes are zero-based; harray keys are strings. Direct and mixed
-nested reads return null for missing/wrong-kind paths. Nested writes are
-copy-on-write, permit an array write only within `[0, length]`, and never create
-missing intermediate containers. Parsed key segments can traverse only harrays;
-index expressions normalize to finite nonnegative integers and can traverse only
-arrays. Assignment evaluates every segment expression in order, then the RHS,
-before path validation, and stores the copied root only after complete success.
+DSL indexes are zero-based. Signed reads/writes and selector-driven missing-container creation are current under [[write-vivification-lua-runtime]]. Negative selectors require existing array positions; reads remain noncreating and writes publish an isolated copy after evaluating segments then RHS. Explicit key steps select harrays. Invalid computed indexes use nil so they cannot be mistaken for the valid tail selector -1.
 
 The complete `entry_*` and `match_*` family exposes text, zero-based compact
 groups, named values/presence/maps, Unicode character lengths/start/end, and

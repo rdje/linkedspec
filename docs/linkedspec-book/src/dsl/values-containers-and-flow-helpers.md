@@ -523,12 +523,12 @@ Use the documented `matches(subject, /pattern/)` helper for multiline patterns. 
 ### Deferred indexed writes in Perl
 
 Perl callable bodies accept the same bracket assignments as ordinary actions. An unbound root can be created, but an explicitly assigned `undef` and an `undef` parameter remain present null values and cannot become containers. String selectors choose hashes, including quoted numeric strings. Integer selectors choose arrays: nonnegative indexes can replace or append at the exact length; negative indexes can replace an existing position. A literal boolean or null, a floating-point selector (including `-1.0`), or an aggregate or codeblock cannot select a container and reports `nested_write_segment_invalid`. Existing wrong container kinds report `nested_write_kind_conflict`; an index beyond the exact append position reports `nested_write_array_gap`.
-Perl, Rust, Dart and Julia native and independently emitted execution implement tail-relative reads and writes in ordinary actions and callable bodies: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. The frozen historical write-v1 authority stays unchanged. Lua implementation and portable admission remain separately owned.
+Perl, Rust, Dart, Julia and shared Lua native and independently emitted execution implement tail-relative reads and writes in ordinary actions and callable bodies: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. The frozen historical write-v1 authority stays unchanged. All six runtimes are implemented; comprehensive portable admission remains deferred.
 <a id="signed-array-selectors-in-perl"></a>
-<a id="signed-array-selectors-in-perl-and-rust"></a><a id="signed-array-selectors-in-perl-rust-and-dart"></a>
-#### Signed array selectors in Perl, Rust, Dart and Julia
+<a id="signed-array-selectors-in-perl-and-rust"></a><a id="signed-array-selectors-in-perl-rust-and-dart"></a><a id="signed-array-selectors-in-perl-rust-dart-and-julia"></a>
+#### Signed array selectors
 
-For an existing array of size `L`, a supported negative integer selector resolves to `L + index`. In a nonempty array, `[-1]` is the last entry, `[-2]` the one before it when present, and `[-L]` the first. Reads outside the array return `null` without creating state. The extension is available on Perl, Rust, Dart and Julia; it is not yet admitted portably.
+For an existing array of size `L`, a supported negative integer selector resolves to `L + index`. In a nonempty array, `[-1]` is the last entry, `[-2]` the one before it when present, and `[-L]` the first. Reads outside the array return `null` without creating state. The extension is available on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT; it is not yet admitted portably.
 
 For `[10,20,30]`, the current `[-1]` library-read results are:
 
@@ -538,11 +538,11 @@ For `[10,20,30]`, the current `[-1]` library-read results are:
 | Perl callable body | `30` |
 | Rust ordinary/callable read | `30` |
 | Dart and Julia ordinary/callable read | `30` |
-| PUC Lua and LuaJIT | `null` |
+| PUC Lua and LuaJIT ordinary/callable read | `30` |
 
-Lua rows retain the dated transition observations until their backend slice lands. Perl, Rust, Dart and Julia negative writes replace existing array entries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command failure protocol.
+All six runtimes implement negative writes to existing positions; comprehensive cross-runtime validation remains deferred. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command failure protocol.
 
-The ordinary example runs on Perl, Rust, Dart and Julia and returns `[30,[10,20,30]]` with input `x`:
+The ordinary example runs on all six runtimes and returns `[30,[10,20,30]]` with input `x`:
 
 ```text
 {{#include ../../../../examples/negative-array-current-perl.spec}}
@@ -555,7 +555,7 @@ The callable example also returns `[30,[10,20,30]]`:
 ```
 #### Signed-selector contract and write examples
 
-Perl, Rust, Dart and Julia implement the following rule from `capability_conformance/signed_array_selector_contract.json`. The same rule governs the pending backend slices; it introduces no new assignment syntax.
+All six runtimes implement the following rule from `capability_conformance/signed_array_selector_contract.json`. The same rule governs the pending backend slices; it introduces no new assignment syntax.
 
 | Existing array | Selector | Target read | Target write |
 | --- | --- | --- | --- |
@@ -583,7 +583,7 @@ The callable write uses each nested array's own length and returns `{"rows":[[1]
 {{#include ../../../../examples/negative-array-write-callable-perl.spec}}
 ```
 
-For example, writing `[-2]` into `[10]` fails with `nested_write_array_underflow`, `index = -2`, `length = 1` and `resolved_index = -1`; the binding stays `[10]`. Writing `[-1]` into an absent binding instead reports the existing invalid-segment diagnostic. A dynamic negative integer works like the literal. Perl retains its separate integer/float distinction. Rust uses finite whole `f64` values, so `-1.0` also selects the last entry; fractional negatives and strings retain Rust's existing read coercions. Dart and Julia admit actual integer negative selectors; negative floating values such as `-1.0` and numeric strings keep their previous read behavior, and floating write selectors remain invalid. This extension does not expand the numeric range or admit portable coercions. Rebuild saved or emitted parsers after updating the runtime.
+For example, writing `[-2]` into `[10]` fails with `nested_write_array_underflow`, `index = -2`, `length = 1` and `resolved_index = -1`; the binding stays `[10]`. Writing `[-1]` into an absent binding instead reports the existing invalid-segment diagnostic. A dynamic negative integer works like the literal. Perl retains its separate integer/float distinction. Rust uses finite whole `f64` values, so `-1.0` also selects the last entry; fractional negatives and strings retain Rust's existing read coercions. Dart and Julia admit actual integer negative selectors; negative floating values such as `-1.0` and numeric strings keep their previous read behavior, and floating write selectors remain invalid. Shared Lua accepts finite whole negative numbers, including `-1.0`, on PUC Lua and LuaJIT; fractional negatives stay invalid. This extension does not expand the numeric range or admit portable coercions. Rebuild saved or emitted parsers after updating the runtime.
 
 <a id="current-callable-literal-kind-limitation"></a>
 #### Literal kinds inside Perl codeblocks

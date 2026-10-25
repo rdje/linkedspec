@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / Lua signed17.6 after Julia17.5
+- Status: `active` / deferred last14 after Lua17.6
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -387,14 +387,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.14`
   Status: `pending` / P2 defect owned
   Goal: Execute deferred last array selectors.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.6`
   Reproduce/impact: Leaf10 contract-grid retains ordinary last(items)/items.last() returning1 for [2,10,1], while both deferred native/fresh routes report typed unknown_helper:last. Source bodies and loaded source identities survive in docs/checkpoints/type-array-count-first/.
-  Schedule: After11/12, before inventory1. Establish shape, kind, empty, terminal/effect and copy/index controls; do not extend current10.
+  Schedule: After signed implementations17.6, without waiting for deferred broad admission17.7; before inventory1. Establish shape, kind, empty, terminal/effect and copy/index controls; do not extend current10.
   Planned tier: `canonical`
   Claim verification: none: Pending repair; actual source-bound intake belongs to10, with no last admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17`
-  Status: `active` / intake17.0, CLI17.8 and target17.1 complete; Perl17.2 next
+  Status: `active` / six-runtime implementation complete; broad admission17.7 deferred
   Goal: Admit tail-relative negative array selectors across ordinary/deferred reads and writes on every runtime.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.12`
   Director instruction (October23): For array size L, [-n] selects [L-n], valid only when L-n >= 0. Therefore -1 is the last element and -L the first; a more negative selector is out of range and never creates elements. This supersedes the frozen nonnegative-only write policy for existing arrays. Quoted strings remain hash keys; positive indexing and exact-length append retain their existing contract.
@@ -646,12 +646,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.17.5 - support signed Julia array selectors`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.6`
-  Status: `pending`
-  Goal: Implement the same policy on shared Lua, independently verified on PUC Lua and LuaJIT.
+  Status: `completed`
+  Goal: Implement the signed-array policy in shared Lua for PUC Lua and LuaJIT.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.5`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
-  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+  Activation: Cleanceb92c320d20faeb287eba1f3935d55785605be7 after Julia17.5, post-commit pointer PASS and brief0. Follow director's compile/quick targeted check/commit/next-feature cadence; broad verification remains deferred.
+  Owned paths: lua/src/linkedspec/interpreter.lua shared read/write and diagnostic helpers; lua/test/signed_array_selector_test.lua and lua/test/run.lua registration; signed-selector book and existing Lua write/core Knowledge; normal task/roadmap/live continuity. Frozen contracts, prior evidence, dependencies and other backends stay fixed.
+  Verification tier: `focused`
+  Focused checks: Compile/load the shared module and run the small signed-selector regression through tools/run_lua_project_data.sh on puc and luajit. Cover native/generated/emitted values and immediate missing/underflow/coercion controls; build changed book and run fast manual continuity checks. No full gate/corpus/exhaustive matrices/global registry scan.
+  Canonical trigger: None for this implementation leaf under the director's explicit feature-completion policy. Broad validation belongs to deferred17.7 after feature coverage.
+  Claim verification: none: Deterministic implementation/docs and a quick regression only; no quantified corpus/benchmark, exhaustive or portable-admission measurement is published.
+  Acceptance: Existing-array negative selectors use L+index without creating missing arrays or gaps. Preserve positive/key, copy, atomicity/effect, diagnostic and guard behavior. Compile/targeted checks pass on both Lua ABIs; portable admission remains open.
+
+  Completion: Shared Lua read normalization and isolated writes now support existing-position negatives; invalid computed read indexes use nil rather than the newly valid -1. Checked creation preserves missing-negative rejection, raw paths remain authored and underflow fields survive diagnostic serialization. Module compilation and the dedicated native/generated/emitted regression pass on PUC Lua and LuaJIT. The first test used an unavailable root to_json alias; correcting it to the existing interpreter.to_json public module API resolves that test-only error. No full suite/corpus/portable admission is claimed.
+  Focused commands: `bash tools/run_lua_project_data.sh puc lua/test/signed_array_selector_test.lua`; same command with `luajit`.
+  - [x] **REPRODUCE / ISSUE** — Public Lua runtime_parse on the shared read example returned null for[-1] before implementation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — lua/src/linkedspec/interpreter.lua read_index/global write classification rejected negatives; nested/value reads also used -1 as an invalid-index sentinel.
+  - [x] **FIX** — Single existing-array normalization, conditionally valid write selectors, checked container creation and underflow diagnostic forwarding implement the target policy.
+  - [x] **ADDRESSED (verified)** — Both ABI wrappers compile/load and pass the dedicated native/generated/emitted regression.
+  - [x] **NO REGRESSION** — Quick copy/RHS/positive/key/coercion and typed-failure controls pass. Broad validation remains deferred by director instruction; assurance is scoped.
+  - [x] **LOCKSTEP** — Book, current Lua Knowledge/map, roadmap/frontier and handoff describe implemented support with portable admission open.
+  Continuity: Required change-history rollover archives the committed suffix as docs/history/changes/segment-4960-dc390426c51b.md with its manifest row; the new feature record stays hot. History checks pass afterward.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.17.6 - support signed selectors on Lua and LuaJIT`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.7`
   Status: `pending`
@@ -857,9 +872,9 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Next feature: shared Lua signed selectors, quick PUC/LuaJIT checks. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia implementation compiled and targeted native/generated/emitted check passed. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Next feature: execute deferred last; quick focused checks, broad validation later. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua compiles/targeted-checks on PUC Lua and LuaJIT. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors compiled/targeted-checked. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
 | 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |

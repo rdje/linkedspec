@@ -9509,6 +9509,10 @@ test("inter-match gap capture runs the admitted contract", function()
   gap_chunk()
 end)
 
+test("signed array selectors", function()
+  dofile("lua/test/signed_array_selector_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

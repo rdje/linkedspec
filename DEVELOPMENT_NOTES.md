@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.6 — Lua invalid-index sentinel
+
+Lua nested/value reads previously used -1 for invalid computed indexes. It is now a valid tail selector, so invalid coercions must use nil and read_index must normalize exactly once. Negative whole-number write selectors pass global kind validation; missing-container and underflow checks happen during the isolated structural walk. Diagnostic construction/serialization forwards optional resolved_index. The small regression passes on both ABIs; no broad validation is claimed.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.5 — shared Julia index resolution
 
 Read normalization extends actual negative integers while preserving older float/string coercions. Negative write selectors are conditionally valid: global kind validation stays first, then checked container creation rejects missing required arrays and the isolated walk resolves each existing array’s offset. Raw authored selectors stay in diagnostic paths; optional resolved_index appears only on underflow. Fast native/generated/emitted regression and package compilation pass; exhaustive validation remains deferred.
