@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / Julia signed17.5 after director-requested hygiene23
+- Status: `active` / Lua signed17.6 after Julia17.5
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -623,12 +623,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.5`
-  Status: `pending`
-  Goal: Implement the same policy through Julia native/generated interfaces.
+  Status: `completed`
+  Goal: Implement the same signed-array policy through Julia native/generated interfaces.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.4`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
-  Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+  Activation: Clean96ce9700460a2f18d6938c647032e08a872d12fa after cleanup23, post-commit pointer PASS and brief0. Director prioritizes100% feature implementation: compile, quick targeted check, commit, next feature. Exhaustive suites/matrices/proof and global registry scans are deferred until feature coverage is complete; repair24 stays deferred.
+  Owned paths: julia/src/runtime/Interpreter.jl read/write helpers and any direct Julia interface forwarding required by those helpers; julia/test/signed_array_selector_test.jl and its runtests.jl registration; current signed-selector book/Julia guide and existing Julia write Knowledge; normal task/roadmap/live continuity. Frozen neutral contracts, prior evidence, dependencies and other backends stay fixed.
+  Verification tier: `focused`
+  Focused checks: Load/compile LinkedSpecJulia through tools/run_julia_project_data.sh and run one small signed-selector regression covering native/generated reads/writes, underflow/missing target and positive/quoted-key controls. Build the changed book; fast manual memory/task/diff checks before commit. No full suite, corpus, exhaustive fault matrix or global registry scan for this feature.
+  Canonical trigger: None for this implementation leaf under the director's explicit feature-completion policy. Broad validation belongs to the deferred validation phase; no portable admission is claimed here.
+  Claim verification: none: Deterministic implementation/docs and a small regression check; no quantified corpus, benchmark, exhaustive or portable-admission measurement is published. Later comprehensive verification stays owned by17.7.
+  Acceptance: Existing-array negative selectors resolve against each encountered array's length. Preserve positive/quoted-key, kind/copy, atomicity/effect, diagnostic and guard contracts; negative selectors never create gaps or missing arrays. Compile and focused regression pass before committing; full portable admission stays open.
+
+  Completion: Shared Interpreter read normalization and nested-write traversal now resolve actual Integer negatives against each encountered array. Missing negative arrays retain invalid-segment errors, existing underflow reports authored index/path plus length/resolved_index, and optional diagnostic serialization leaves older shapes unchanged. Native/generated and a fresh emitted callable regression pass; package load compiles successfully. The check also covers copied results, RHS growth, positive append/quoted keys and typed failure precedence. No full package/corpus/fault matrix or portable admission is claimed.
+  Focused command: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, Test; include("julia/test/signed_array_selector_test.jl")'`.
+  Root cause / Toolbox: The public Julia primary read example returned null for[-1]; _runtime_index_value called _runtime_nonnegative_int, and _runtime_write_selectors rejected negative integers globally. Native/generated actions share these Interpreter helpers; the quick regression exercises their corrected public paths.
+  - [x] **REPRODUCE / ISSUE** — Public Julia primary probe on examples/negative-array-current-perl.spec returned null for[-1] before implementation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — julia/src/runtime/Interpreter.jl::_runtime_index_value used _runtime_nonnegative_int; _runtime_write_selectors rejected negative integers globally.
+  - [x] **FIX** — Shared read arithmetic, conditionally valid write selectors, checked missing-container creation and isolated underflow diagnostics implement the signed contract.
+  - [x] **ADDRESSED (verified)** — LinkedSpecJulia package compilation and the dedicated signed_array_selector_test.jl native/generated/emitted regression pass.
+  - [x] **NO REGRESSION** — Quick positive append/quoted-key/copy/effect controls pass. Full package/corpus and exhaustive verification are explicitly deferred by the director; this is scoped assurance only.
+  - [x] **LOCKSTEP** — Current book support, Julia write Knowledge/derived map, task/frontier/roadmaps and live handoff agree; portable admission remains open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.17.5 - support signed Julia array selectors`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.6`
   Status: `pending`
@@ -642,6 +657,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `pending`
   Goal: Admit the complete six-runtime policy, recurring compatibility and public examples; split capability/recurrence/public children before writes when needed.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.6`
+  Schedule: Deferred comprehensive validation after100% feature implementation, per the director. Continue implementation after17.6 rather than running a broad verification campaign here.
   Planned tier: `canonical`
   Claim verification: none: Pending transition child; declare source-bound measurements before activation.
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
@@ -841,18 +857,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation after clean hygiene23. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 12 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Next feature: shared Lua signed selectors, quick PUC/LuaJIT checks. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia implementation compiled and targeted native/generated/emitted check passed. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 11 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Deferred broad validation after feature coverage; does not block implementation. |
 | 13 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
 | 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
 | 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-REPO-HYGIENE.23 completes director-requested safe disk cleanup after committed Dart17.4. Latest director steering returns directly to Julia/Lua/admission17.5–7; recurring fixture repair24 remains owned afterward. Fluent23 and OPENAI-TOOL-API implementation remain deferred.
+Julia signed selectors17.5 are implemented and targeted-checked; shared Lua17.6 is next. The director prioritizes100% feature implementation: compile, quick targeted check, commit, continue. Broad suites, exhaustive matrices/proof and global registry scans are deferred until feature coverage is complete.
 
 ## Latest Completed Slice
 
-Rust allocated reduction112969338880 bytes follows a fresh offline primary/four typed examples. History scratch119213043712 allocated bytes is removed after complete1702740-entry custody and two actual restored public readers; archive55259061 bytes remains. Candidate-specific permitted liveness/source rechecks, six reason-sensitive reviewer denials/restoration, complete book and scoped before/after census pass. Global parent482253152256 ->250070880256 excludes Git/protected repositories/proof prefixes and includes observer metadata. Volume free movement is separate. Protected nested repositories, caches and unresolved evidence remain. Completed focused checks and fast continuity guards govern landing; the director defers broad suites/global registry scans until feature coverage is complete.
+Julia native/generated and emitted callable execution now resolve negative Integer reads/writes against each existing array’s length. Missing arrays remain invalid, existing underflow has authored index/path plus resolved_index, and expression order/copied results/positive append/quoted keys are preserved. Package compilation and the dedicated small regression pass. Book and Knowledge reflect Julia support. Comprehensive validation/portable admission remain open.
 
 ## Next Action
 
-Activate Julia signed selectors17.5 directly from clean Git, retain baseline RED and implement the shared native/generated policy with permanent regression/book verification. Director requests feature focus; repair24 is scheduled after signed admission17.7. Cleanup23 writers are retired; original sealed proofs and all other repositories stay untouched.
+Activate Lua17.6 from clean Git, implement the shared runtime policy and run a small targeted check on PUC Lua and LuaJIT. Commit, then continue implementation. Broad admission17.7 and repair24 remain deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
 - `REPO-HYGIENE.23` — Rust105.2GiB/history111.0GiB allocated cleanup; lossless52.7MiB archive/two restored readers/four fresh Rust examples; six reviewer denials and scoped before/after census; Julia17.5 next; repair24 after17.7.
 - `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
 - `SESSION-STARTUP-READING.55.1` — finite Rust transport/core36/runtime212/bridge66/emitted53/CLI104; five source faults restored, suites260/readiness6+4/4/3, book95/90, exact historical admission and physical input4; Dart17.4 next.
@@ -29,7 +30,6 @@ Activate Julia signed selectors17.5 directly from clean Git, retain baseline RED
 - `TYPE-REFERENCE-BOOK.1.2.12` — 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; signed17 next feature.
 - `TYPE-REFERENCE-BOOK.1.2.11` —56 cases/31 accepted RED/25 controls;compatibility4;8 restored faults;15/2186 TAP;book89/2+inline2;artifact3;fixture omission/bypass/restoration; conservative closure/whole714; indexed-write12 next.
 - `REPO-HYGIENE.20` — dated22234 parent/483 Rust incremental; zero removals; four reader denials and accepted10 custody; pipeline11 next.
-- `TYPE-REFERENCE-BOOK.1.2.10` —232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; finite history0137;11 next.
 
 ## History
 

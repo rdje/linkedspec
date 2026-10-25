@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.5 — Julia signed selectors
+
+Implement negative Integer array reads and existing-position writes through Julia’s shared runtime, including callable/generated execution. Preserve missing-target rejection, post-expression lengths, detached results and positive/quoted-key behavior; add typed underflow diagnostics with resolved_index. Package compilation and the small dedicated regression pass. Book/Knowledge track current Julia support; broad verification is deferred under the director’s feature-completion policy. Lua17.6 is next.
+
 ## 2026-10-25 — REPO-HYGIENE.23 — measured safe artifact cleanup
 
 Reclaim112969338880 allocated Rust bytes after fresh locked/offline primary build and four typed public examples; preserve its complete executable and sources. Losslessly deduplicate1702740 history entries, verify all payloads/metadata and two restored public readers, then remove119213043712 allocated bytes while retaining55259061 archive bytes. Permitted candidate-specific lsof, topology and unchanged-source rechecks precede removal. Nested repositories, caches, Git history and unresolved experiment evidence remain retained; no managed recovery/purge runs.

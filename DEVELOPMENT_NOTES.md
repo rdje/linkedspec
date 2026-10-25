@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.5 — shared Julia index resolution
+
+Read normalization extends actual negative integers while preserving older float/string coercions. Negative write selectors are conditionally valid: global kind validation stays first, then checked container creation rejects missing required arrays and the isolated walk resolves each existing array’s offset. Raw authored selectors stay in diagnostic paths; optional resolved_index appears only on underflow. Fast native/generated/emitted regression and package compilation pass; exhaustive validation remains deferred.
+
 ## 2026-10-25 — REPO-HYGIENE.23 — allocation and fixture custody
 
 Cargo clean reports363.1GiB logical deletion, while native allocated target reduction is105.2GiB; preserve that distinction. The history fixture tree repeats enough source content that all original1533599 files plus path metadata fit a55259061-byte lossless archive. Every unique payload/manifest entry decodes, and two actual restored public readers preserve original stdout. Full original metadata and hardlink/symlink relationships survive; a partial sample may copy an outside-sample hardlink.

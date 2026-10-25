@@ -37,6 +37,7 @@ struct RuntimeDiagnostic
     reason::Union{Nothing,String}
     index::Union{Nothing,Int}
     length::Union{Nothing,Int}
+    resolved_index::Union{Nothing,Int}
     source_span::Union{Nothing,Dict{String,Any}}
 end
 
@@ -79,6 +80,7 @@ function RuntimeDiagnostic(;
     reason = nothing,
     index = nothing,
     length = nothing,
+    resolved_index = nothing,
     source_span = nothing,
 )
     optional_string(value) = value === nothing ? nothing : String(value)
@@ -122,6 +124,7 @@ function RuntimeDiagnostic(;
         optional_string(reason),
         index === nothing ? nothing : Int(index),
         length === nothing ? nothing : Int(length),
+        resolved_index === nothing ? nothing : Int(resolved_index),
         source_span === nothing ? nothing : Dict{String,Any}(
             String(key) => deepcopy(value) for (key, value) in pairs(source_span)
         ),
@@ -8508,8 +8511,12 @@ function _runtime_index_value(collection, index_value)
     if collection isa AbstractDict
         return get(collection, _runtime_string(index_value), nothing)
     elseif collection isa AbstractVector
-        index = _runtime_nonnegative_int(index_value)
-        if index !== nothing && index < length(collection)
+        index = if index_value isa Integer && !(index_value isa Bool) && index_value < 0
+            length(collection) + Int(index_value)
+        else
+            _runtime_nonnegative_int(index_value)
+        end
+        if index !== nothing && 0 <= index < length(collection)
             return collection[index + 1]
         end
     end
@@ -8657,7 +8664,7 @@ function _assign_runtime_nested!(
     )
     storage_kind, root = _runtime_store_for_write(context, base)
     updated_root = if storage_kind === nothing
-        _runtime_empty_write_container(first(selectors))
+        _runtime_empty_write_container(engine, context, base, selectors, 1, rule_label)
     else
         _runtime_copy(root)
     end
@@ -8685,42 +8692,16 @@ function _runtime_write_selectors(engine, context, base, segments, rule_label)
         if value isa AbstractString
             push!(selectors, _RuntimeWriteSelector(String(value), nothing, segment.source_span))
             continue
-        elseif value isa Integer && !(value isa Bool) && value >= 0
+        elseif value isa Integer && !(value isa Bool)
             push!(selectors, _RuntimeWriteSelector(nothing, Int(value), segment.source_span))
             continue
         end
 
-        actual_kind = _runtime_nested_write_value_kind(value)
-        reason = if value isa Integer && !(value isa Bool) && value < 0
-            "negative_integer"
-        elseif value isa Number && !(value isa Bool)
-            "fractional_number"
-        else
-            "kind_not_path_selector"
-        end
-        segment_index = position - 1
-        message = "nested write segment $segment_index for binding '$base' must " *
-                  "evaluate to a string or nonnegative integer; got $actual_kind " *
-                  "($reason)"
-        throw(RuntimeInterpreterException(
-            message;
-            diagnostic = _runtime_context_diagnostic(
-                engine,
-                context;
-                stage = "runtime_execution",
-                summary = "Julia nested write failed",
-                detail = message,
-                code = "nested_write_segment_invalid",
-                operation = "nested_write_vivification",
-                binding = base,
-                segment_index = segment_index,
-                path = Any[_runtime_write_selector_value(item) for item in selectors],
-                actual_kind = actual_kind,
-                reason = reason,
-                source_span = _runtime_nested_write_source_span(segment.source_span),
-                rule_label = rule_label,
-            ),
-        ))
+        _throw_runtime_nested_write_segment_invalid(
+            engine, context, base, position - 1,
+            Any[_runtime_write_selector_value(item) for item in selectors],
+            value, segment.source_span, rule_label,
+        )
     end
     return selectors
 end
@@ -8731,8 +8712,50 @@ _runtime_write_selector_value(selector::_RuntimeWriteSelector) =
 _runtime_write_selector_kind(selector::_RuntimeWriteSelector) =
     selector.key === nothing ? "array" : "harray"
 
-_runtime_empty_write_container(selector::_RuntimeWriteSelector) =
-    selector.key === nothing ? Any[] : Dict{String,Any}()
+function _runtime_empty_write_container(engine, context, base, selectors, position, rule_label)
+    selector = selectors[position]
+    if selector.index !== nothing && selector.index < 0
+        path = Any[_runtime_write_selector_value(selectors[index]) for index in 1:(position - 1)]
+        _throw_runtime_nested_write_segment_invalid(
+            engine, context, base, position - 1, path,
+            selector.index, selector.source_span, rule_label,
+        )
+    end
+    return selector.key === nothing ? Any[] : Dict{String,Any}()
+end
+
+function _throw_runtime_nested_write_segment_invalid(
+    engine, context, base, segment_index, path, value, source_span, rule_label,
+)
+    actual_kind = _runtime_nested_write_value_kind(value)
+    reason = if value isa Integer && !(value isa Bool) && value < 0
+        "negative_integer"
+    elseif value isa Number && !(value isa Bool)
+        "fractional_number"
+    else
+        "kind_not_path_selector"
+    end
+    message = "nested write segment $segment_index for binding '$base' must " *
+              "evaluate to a string or nonnegative integer; got $actual_kind ($reason)"
+    throw(RuntimeInterpreterException(
+        message;
+        diagnostic = _runtime_context_diagnostic(
+            engine, context;
+            stage = "runtime_execution",
+            summary = "Julia nested write failed",
+            detail = message,
+            code = "nested_write_segment_invalid",
+            operation = "nested_write_vivification",
+            binding = base,
+            segment_index = segment_index,
+            path = path,
+            actual_kind = actual_kind,
+            reason = reason,
+            source_span = _runtime_nested_write_source_span(source_span),
+            rule_label = rule_label,
+        ),
+    ))
+end
 
 function _assign_runtime_vivified_value!(
     engine,
@@ -8767,7 +8790,9 @@ function _assign_runtime_vivified_value!(
             if is_last
                 node[key] = _runtime_copy(stored_value)
             elseif !haskey(node, key)
-                child = _runtime_empty_write_container(selectors[position + 1])
+                child = _runtime_empty_write_container(
+                    engine, context, base, selectors, position + 1, rule_label,
+                )
                 node[key] = child
                 node = child
             else
@@ -8789,6 +8814,15 @@ function _assign_runtime_vivified_value!(
             )
         end
         index = selector.index
+        if index < 0
+            index = length(node) + index
+            if index < 0
+                _throw_runtime_nested_write_array_underflow(
+                    engine, context, base, segment_index, path, selector,
+                    length(node), index, rule_label,
+                )
+            end
+        end
         if index > length(node)
             _throw_runtime_nested_write_array_gap(
                 engine,
@@ -8807,7 +8841,9 @@ function _assign_runtime_vivified_value!(
                 node[index + 1] = _runtime_copy(stored_value)
             end
         elseif index == length(node)
-            child = _runtime_empty_write_container(selectors[position + 1])
+            child = _runtime_empty_write_container(
+                engine, context, base, selectors, position + 1, rule_label,
+            )
             push!(node, child)
             node = child
         else
@@ -8846,6 +8882,33 @@ function _throw_runtime_nested_write_kind_conflict(
             path = path,
             expected_kind = expected_kind,
             actual_kind = actual_kind,
+            source_span = _runtime_nested_write_source_span(selector.source_span),
+            rule_label = rule_label,
+        ),
+    ))
+end
+
+function _throw_runtime_nested_write_array_underflow(
+    engine, context, base, segment_index, path, selector, array_length, resolved_index, rule_label,
+)
+    index = selector.index
+    message = "nested write segment $segment_index for binding '$base' cannot " *
+              "select array index $index at length $array_length (resolved index $resolved_index)"
+    throw(RuntimeInterpreterException(
+        message;
+        diagnostic = _runtime_context_diagnostic(
+            engine, context;
+            stage = "runtime_execution",
+            summary = "Julia nested write failed",
+            detail = message,
+            code = "nested_write_array_underflow",
+            operation = "nested_write_vivification",
+            binding = base,
+            segment_index = segment_index,
+            path = path,
+            index = index,
+            length = array_length,
+            resolved_index = resolved_index,
             source_span = _runtime_nested_write_source_span(selector.source_span),
             rule_label = rule_label,
         ),
@@ -9087,6 +9150,7 @@ function _runtime_diagnostic(
     reason = nothing,
     index = nothing,
     length = nothing,
+    resolved_index = nothing,
     source_span = nothing,
 )
     effective_rule = rule_label === nothing ? top_rule : rule_label
@@ -9131,6 +9195,7 @@ function _runtime_diagnostic(
         reason = reason,
         index = index,
         length = length,
+        resolved_index = resolved_index,
         source_span = source_span,
     )
 end
@@ -9165,6 +9230,7 @@ function _runtime_context_diagnostic(
     reason = nothing,
     index = nothing,
     length = nothing,
+    resolved_index = nothing,
     source_span = nothing,
 )
     return _runtime_diagnostic(
@@ -9197,6 +9263,7 @@ function _runtime_context_diagnostic(
         reason = reason,
         index = index,
         length = length,
+        resolved_index = resolved_index,
         source_span = source_span,
     )
 end
@@ -9243,6 +9310,7 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "reason" => diagnostic.reason,
         "index" => diagnostic.index,
         "length" => diagnostic.length,
+        "resolved_index" => diagnostic.resolved_index,
         "source_span" => diagnostic.source_span,
     )
     for (key, field_value) in optional_fields
