@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Known standalone array-transform gap5.3 remains selected under feature-first steering. Rust5.3.1 and Dart5.3.2 are implemented/targeted-checked; Julia5.3.3 follows. Small compile/regression checks and a commit per implementation; maintenance and broad verification stay deferred.
+The missing standalone array-transform implementations on Rust/Dart/Julia are done with targeted checks. Helper/alias inventory1.2 selects the next bounded feature gap. Keep compile/quick-regression/commit cadence; maintenance and broad verification remain deferred.
 
 ## Latest Completed Slice
 
-Dart standalone split_each/filter_match/uniq now pass through existing array-helper evaluation/replacement after receiver and target-kind guards. Stored/receiver forms remain pure. Small native/restored/generated-plan regression and changed-file analysis pass for snapshots, element kinds, absent/wrong-kind targets and once-only operands. Book, canonical Dart array fact/map and indexed task ownership agree; obsolete selector guidance is corrected. No broad parity/API admission.
+Julia standalone split_each/filter_match/uniq now validate the target before operands, copy arguments left-to-right and use existing pure dispatch/local-store for writeback. Stored/receiver forms remain pure. Package loading/compilation and small native/generated-plan/fresh-emitted checks pass for snapshots, types, absent/wrong-kind targets and once-only operands. Book, canonical Julia fact/map and indexed tasks agree; broad5.3.4 remains deferred.
 
 ## Next Action
 
-Activate Julia5.3.3 from clean Git, implement the same documented statement writeback, compile/run one small regression and commit. Then resume feature selection/helper inventory; full suites, policy and cleanup maintenance remain deferred.
+Resume helper/alias inventory1.2 from clean Git using current canonical contracts and tiny public probes to select the next missing implementation. Complete inventory/API admission, full suites, policy and storage maintenance remain open/deferred.
 
 ## Recent Completions
 
+- `FUTURE-PARITY-BACKLOG.5.3.3` — Julia standalone transforms rebind arrays; package compile/native/generated-plan/fresh-emitted targeted checks pass; feature/helper selection resumes.
 - `FUTURE-PARITY-BACKLOG.5.3.2` — Dart standalone transforms rebind arrays; native/restored/generated-plan targeted checks and two-file analysis pass; Julia5.3.3 next.
 - `FUTURE-PARITY-BACKLOG.5.3.1` — Rust standalone split_each/filter_match/uniq rebind named arrays; compile/native/restored/generated-plan targeted checks pass; Dart5.3.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.1.1` — non-call syntax/result/effect/context catalog and quick AST probe; helper/alias1.2 next.
@@ -29,7 +30,6 @@ Activate Julia5.3.3 from clean Git, implement the same documented statement writ
 - `TYPE-REFERENCE-BOOK.1.2.17.3` — Rust137/822/6, five actual faults/restoration, eight direct suites443; exact diagnostics, book95/CLI4/aliases, readonly195/input4 actual bypass/restoration and claim198; numeric55.1 next.
 - `REPO-HYGIENE.22` — dated23966 parent candidates/six Rust locations, zero removals; independent population/lstat, five metadata denials, book95/marker RED, input3/bypass/restoration and actual reader channels; Rust17.3 next.
 - `OPENAI-TOOL-API.1` — deferred structured tools/ChatGPT UI plan indexed; Codex UI separately verified later; book and semantic-document checks pass; hygiene22 then Rust17.3.
-- `TYPE-REFERENCE-BOOK.1.2.22` — Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
 
 ## History
 

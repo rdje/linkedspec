@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — FUTURE-PARITY-BACKLOG.5.3.3 — Julia transform operands and rebinding
+
+Julia already recognizes the three transform arities and receiver attempts, then rejects them through a four-helper allowlist. Enable them by validating the bare target before operands and evaluating a copied argument vector left-to-right, replacing the old one-argument path. Existing pure helper dispatch, local-binding tracking and store handle the new statement forms. The targeted test runs native/generated-plan plus freshly emitted source and wrong-kind controls; package compilation succeeds. Existing pure value/receiver semantics and later target-kind/store checks remain in place. Broad all-backend recurrence is separately owned by5.3.4 and deferred under feature-first steering.
+
 ## 2026-10-25 — FUTURE-PARITY-BACKLOG.5.3.2 — remove Dart statement exclusion
 
 Dart already recognizes the three transforms' arities and receiver mutation attempts, but an explicit four-helper allowlist returns false before writeback. Removing that block lets existing pure array-helper evaluation produce the replacement; prevalidate the bare kind before extra operands to preserve target-error precedence. The small native/restored/generated-plan regression and two-file analyzer pass, including purity, snapshots, typed selection/deduplication and absent/wrong-kind targets. Empty expected arrays use explicit Object? element types to satisfy analysis. The current Dart card's old namespace wrapper was also corrected under uniform binding; no new helper/type/selector contract is introduced.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.3.3 — rebind Julia standalone array transforms
+
+Remove Julia's split_each/filter_match/uniq statement exclusion. Validate the target before operands, copy arguments left-to-right and reuse pure helper dispatch and local-store for writeback. Pure/receiver forms remain unchanged. Package loading/compilation and small native/generated-plan/fresh-emitted checks pass for snapshot/type, absent/wrong-kind targets and once-only effects after actual runtime RED. Register the small test in runtests; book/Julia fact/map/live/indexed tasks agree. All three missing implementations are present; broad5.3.4 stays deferred while helper inventory selects further features.
+
 ## FUTURE-PARITY-BACKLOG.5.3.2 — rebind Dart standalone array transforms
 
 Remove the explicit split_each/filter_match/uniq statement exclusion. Validate the bare array kind before pattern/delimiter effects, then reuse existing pure helper evaluation and array replacement. Stored/receiver forms remain pure. Small native/restored/generated-plan regression, changed-file analysis, format/book and fast continuity checks pass for snapshots, typed elements, absent/wrong-kind targets and once-only operands. Book/Dart fact/map/live/indexed tasks agree; the Dart card's retired split(array(target),...) recipe is corrected to a bare target. Julia5.3.3 follows; broad verification and maintenance stay deferred.

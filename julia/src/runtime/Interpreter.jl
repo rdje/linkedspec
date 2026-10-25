@@ -6591,19 +6591,17 @@ function _execute_runtime_array_transform_statement!(
         call_span,
         rule_label,
     )
-    if !(helper_name in ("trim_each", "filter_nonempty", "lowercase_each", "uppercase_each"))
-        # Their ordinary function-form write-back remains independently owned,
-        # but they are still binding-target attempts for guard precedence.
-        return false
-    end
-    value = _runtime_copy(_evaluate_runtime_action_expr!(
-        engine,
-        only(args),
-        context,
-        rule_label,
-        current_edge,
-    ))
-    transformed = _call_runtime_array_helper(helper_name, Any[value])
+    _runtime_array_binding_for_mutation(context, target)
+    values = Any[
+        _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )) for arg in args
+    ]
+    transformed = _call_runtime_array_helper(helper_name, values)
     _runtime_array_binding_for_mutation(context, target)
     _record_runtime_rule_local_binding!(context, target)
     _store_runtime_bare_binding!(context, target, transformed)

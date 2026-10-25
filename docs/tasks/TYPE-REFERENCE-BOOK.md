@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / documented transform gap5.3 before further helper inventory
+- Status: `active` / helper inventory after transform implementations5.3.1-.3
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -968,8 +968,8 @@ Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACK
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.5.3.3` | `pending` | Rust/Dart standalone transforms implemented; Julia follows. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases remain open after known feature gap repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases select the next known implementation gap. |
+| 2 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |

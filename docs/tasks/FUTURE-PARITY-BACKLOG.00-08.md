@@ -3110,11 +3110,28 @@
   Commit: `FUTURE-PARITY-BACKLOG.5.3.2 - rebind Dart standalone array transforms`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.3.3`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `27017fddcfa1580efe3fe8fd08369f242736caf9`
   Goal: Add the same already documented standalone transform writeback on Julia; preserve pure forms and typed target/effect rules.
   Dependencies: `FUTURE-PARITY-BACKLOG.5.3.2`
-  Planned tier: `focused`; one compile and small regression under director cadence.
-  Claim verification: none: Unactivated implementation; no new measurement.
+  Owned paths: julia/src/runtime/Interpreter.jl; julia/test/array_transform_writeback_test.jl and runtests registration; existing Julia array fact/book; indexed task part/root and normal continuity.
+  Verification tier: `focused`
+  Focused checks: Julia package loading/compilation and one small native/generated-plan/fresh-emitted regression, plus book and fast continuity checks. No full package suite.
+  Canonical trigger: None for existing statement-contract alignment in this director-authorized implementation phase; broad5.3.4 follows feature coverage.
+  Claim verification: none: Deterministic implementation and small regression; no quantified corpus/exhaustive/portable admission measurement.
+  Reproduce/impact: _execute_runtime_array_transform_statement! recognizes the three arities and receiver mutation attempts, then an explicit allowlist returns false for split_each/filter_match/uniq. Their pure statement result is discarded.
+  Acceptance: Reuse existing pure array-helper behavior with left-to-right copied operands and target-kind validation before extra effects; record/rebind the named array. Preserve pure/receiver, element/copy and absent/wrong-kind boundaries.
+
+  Completion: Remove the three-helper exclusion, validate the target kind before operands, copy all arguments left-to-right and reuse _call_runtime_array_helper before the existing local-binding record/store. Pure/receiver forms stay unchanged.
+  Focused command: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/array_transform_writeback_test.jl")'` loads/compiles the package and passes native/generated-plan/fresh-emitted values plus wrong-kind controls after actual runtime RED. Book and fast continuity checks pass; no full package suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Targeted runtime_execute and fresh generated execution retain original arrays and accept a scalar target; the small regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Interpreter.jl::_execute_runtime_array_transform_statement! recognizes arities/receiver attempts but explicitly excludes these transforms before writeback.
+  - [x] **FIX** — Remove the exclusion, validate before extra operands, evaluate/copy all args and reuse pure helper dispatch plus local-binding/store machinery.
+  - [x] **ADDRESSED (verified)** — Targeted Julia package load/compilation and native/generated-plan/fresh-emitted checks PASS.
+  - [x] **NO REGRESSION** — Quick pure/receiver, snapshot/type, absent/wrong-kind and once-only operand controls pass. Full suites remain deferred by director instruction.
+  - [x] **LOCKSTEP** — Book, Julia fact/map and indexed tasks/live handoff agree. All three implementations are present; broad5.3.4 is deferred while feature/helper inventory continues.
+  Commit: `FUTURE-PARITY-BACKLOG.5.3.3 - rebind Julia standalone array transforms`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.3.4`
   Status: `pending`

@@ -1,7 +1,8 @@
 ---
 id: julia-runtime-array-helpers
-title: Julia runtime executes copied array pipelines and updated-value end mutations
+title: Julia array helpers and standalone transform writeback
 answers:
+  - do Julia standalone split_each filter_match and uniq update arrays
   - does Julia runtime support array receiver chains
   - does Julia runtime support sorted drop_front first
   - does Julia runtime support split_each trim_each filter_nonempty
@@ -12,11 +13,11 @@ answers:
   - does Julia runtime support split array target replacement
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
-date: 2026-07-10
-status: current
+date: 2026-10-25
+status: transforms5.3.3 implemented; broad checks deferred
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.3.3 adds copied array pipelines and originally locks statement-only end mutations. Later FUTURE-PARITY-BACKLOG.12.1.5 supersedes that result boundary under linkedspec-uniform-binding-v1: named/scalar-held array-end mutations return independent updated arrays and may feed receiver continuations. Current native/generated uniform-binding tests cover the adopted behavior."
-reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
+evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/array_transform_writeback_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -49,8 +50,10 @@ Julia .1.17 reads Interpreter6116-7615. Array-end mutation validates the target
 before evaluating operands and returns an independent updated array. Split validates
 its bare target before source/delimiter evaluation and replaces the named binding.
 Pure aggregate operations retain copied inputs and explicit one-level splicing.
-Statement writeback remains implemented for trim_each/filter_nonempty/lower_each/
-upper_each; the source marks split_each/filter_match/uniq_each writeback pending.
+At that reading only four transforms rebound. 5.3.3 adds split_each/filter_match/uniq:
+validate target, copy operands left-to-right, dispatch pure helpers and store.
+Native/generated-plan/fresh-emitted checks cover type/copy, absent/wrong-kind and
+once-only operands. Pure forms stay unchanged; broad5.3.4 is deferred.
 
 Passing bounded examples does not establish all count arithmetic:
 [[julia-large-number-and-slice-boundaries]] confirms drop_front overflow and wrong
