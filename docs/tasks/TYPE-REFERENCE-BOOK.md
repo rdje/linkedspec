@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / P1 numeric55.1 then Dart17.4
+- Status: `active` / Dart signed17.4 next
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -22,7 +22,7 @@ Director clarification (October24, DBIQNP): every supported type needs a compreh
 family, including chains that change type. The motivating journey is string -> regex split -> array of strings
 -> available array operations -> selected entry -> string operations. Inventory must identify and own missing
 method families or broken transitions; documenting only today's registered names cannot establish completeness.
-This is future acceptance work under .1.2.23, with no pivot from the active Rust signed-selector leaf.
+This is future acceptance work under .1.2.23; the current signed-selector backend sequence remains selected.
 
 ## Verified intake and limits
 
@@ -820,23 +820,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.55.1` | `pending` | Existing P1 Rust numeric repair; activate only after the clean Rust17.3 commit, before Dart. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory; no current Rust pivot. |
-| 13 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
-| 14 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
-| 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
-| 16 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 17 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory; no current Rust pivot. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
+| 13 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
+| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
+| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed family references and closeout. |
 
 ## Decisions
 

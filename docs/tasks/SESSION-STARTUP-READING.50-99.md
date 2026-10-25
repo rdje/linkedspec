@@ -141,15 +141,34 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Additional evidence: Julia .1.32 isolates three compact regex-brace inputs with full retained action source and identical quiet/traced balance rejection. JULIA-STARTUP-READING.2.21.3 owns downstream Validator437-460 repair; existing .2.21.2 now requires it as well as .2.21.1. Exact evidence: docs/knowledge/julia-function-projection-metadata-gaps.md.
   Additional evidence: Lua .1.22 confirms plain/grouped regex outer truncation and a complete compact regex expression rejected by quote-only lifecycle balancing. LUA-STARTUP-READING.2.24.3/.4 own separate parser/validator repairs and .2.24.6 carrier proof. Compact quoted parentheses/spaces succeed; a quoted string passed as matches pattern correctly returns false under Lua's typed-regex contract. Exact evidence: docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md.
 - ID: `SESSION-STARTUP-READING.55`
-  Status: `pending`
+  Status: `in_progress`
   Goal: Preserve large finite numeric values and reconcile their portable text spelling.
   Dependencies: `.3`/`.4`/`.5`; coordinate scalar authority `.20`, cat arity `.51` and public teaching `.28.5`.
   Children: `.55.1`, `.55.2`, `.55.3`
   Acceptance: Keep numeric value preservation distinct from number-to-text spelling. Do not silently clamp
     finite values at a host integer boundary or declare portable spelling from a small fixture alone.
 - ID: `SESSION-STARTUP-READING.55.1`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Rust finite integral-number saturation at JSON and related conversion boundaries.
+  Activation: Clean f0d974aa1b337bbf2ee16e51c0297182e1e94f82; Rust signed17.3 committed with all10 hooks, post-memory check, brief0 and exact committed canonical receipt. Existing P1 .55.1 precedes Dart signed17.4. ADR0123 separates targeted repair from the older full-reading prerequisites. Numeric Knowledge, public direct-value API, signed-write policy and affected book/neutral scalar-text sections are reviewed; reconfirm current public observations before source diagnosis.
+  Owned paths: LinkedSpec-owned Rust numeric conversion producers and actual direct-dependent tests identified by the audit; docs/checkpoints/rust-numeric-boundaries/ and this leaf's claim; canonical numeric Knowledge/book, this mutable part/index and normal continuity. Preserve all sealed predecessors, frozen scalar-text authority, dependency pins and other repositories. .55.2 retains portable numeric text spelling and .55.3 broad closeout.
+  Verification tier: `canonical`
+  Focused checks: Public Rust CLI and Perl Get/current native controls; complete conversion/consumer inventory before selecting the bounded representation; positive/negative large finite values, adjacent host limits, fractions, signed zero/nonfinite controls, nested/helper/key uses and native/reconstructed/generated/emitted round trips. Own actual source faults/restoration, direct-dependent suites, whole producer/input/executable custody, book render/examples and normal history/memory/Knowledge/doctrine checks.
+  Canonical trigger: Public numeric-value preservation and checked integer conversion boundaries; exact staged canonical receipt and normal hooks before landing. Launch canonical CI with approved host execution from the start, per docs/knowledge/project-data-process-locality-proof.md; never weaken or skip its own sandbox profile.
+  Claim verification: `docs/claims/SESSION-STARTUP-READING.55.1.json`
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Reconfirm the recorded value loss and rounded usize boundary through current public APIs; retain complete inputs and channels.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Native value/JSON and Toolbox evidence delimit every actual conversion producer/consumer before choosing the coherent repair; source-only inventories earn no new failure credit.
+  - [x] **FIX** — Preserve supported finite values and small integer behavior; check host-integer ranges explicitly while retaining nonfinite/signed-zero policy and separate scalar-text authority.
+  - [x] **ADDRESSED (verified)** — Independent numeric/bit-level targets, actual native/generated/emitted observations and effective physical source faults/restoration.
+  - [x] **NO REGRESSION** — Direct-dependent numeric, binding, source-record/registry and signed-selector contracts; historical source integrity and exact canonical admission.
+  - [x] **LOCKSTEP** — Current book, canonical facts, live pointers, task frontier and clean committed handoff agree without claiming .55.2/.55.3 or other backends complete.
+  Verification: Core36, native/spec/compiled/plan212 and public metadata23 pass; actual progressive bridge66, emitted49+function4, primary CLI52/104 plus4 function controls and private AST77 checks pass. Exact JSON integer tokens and independent IEEE bits distinguish value preservation. Runtime/core libraries189/202 and core types8 pass; eight direct suites260 and fresh unchanged readiness parent6/emitted4/4/3 pass with actual source/workspace/executable custody.
+  Physical controls: Five production faults distinguish saturation, exclusive host bound, raw-serde parsing, signed zero and the private AST guard. Each actually fails, restores exact bytes/mode and passes fresh GREEN. The pair-only admission gap is reproduced during the helper fault and repaired with five support bindings; six primary/five support/nine direct denials and actual auditor rollback/two bypasses reject. Exact restoration reproduces original134 streams/84613241 bytes/22 controls without refreshing historical runtime.
+  Documentation/custody: Book95 inputs/90 outputs, two executed examples, five source/two semantic denials pass. Neutral containment changes four search bodies only in whitespace and source lines decrease by one. Existing numeric/book Knowledge routes are bounded and directly reverify the proof. Final publish.py requires exact whole source/executable/input custody and four physical missing/bytes/mode/required-omission denials, actual validator bypasses and exact restoration. Claim and normal doctrine/canonical receipt gates govern landing.
+  Qualifications: Complete pre-final task/live bytes are retained in live-documents-before.json.gz. Checkpoint README/AUDIT and original epochs preserve the overstrict wide-text oracle, initial helper-custody omission, invalid dispatch/key probes, correction parse failure, book capacity/search-reference rejections, invalid compatibility target and wrong readiness-wrapper path without false product RED. No arbitrary precision,32-bit execution, other-backend admission or portable55.2 spelling decision. Sealed signed predecessors and all other repositories remain unchanged.
+  Canonical1 document correction: The original numeric proof is sealed409 claim inputs. The staged gate finds a cross-tree-only startup frontier row; its metadata/routing failures and intentional143 termination are retained separately in rust-numeric-frontier/. Actual unchanged validator RED1 becomes GREEN0 after only that root row names queued55.2; overall Dart17.4 handoff stays explicit. The canonical Knowledge retrieval is extended; no numeric source, original claim item or sealed checkpoint is refreshed. Run a fresh exact-staged approved-host canonical gate before landing.
+  Next boundary: Commit this leaf cleanly before Dart signed17.4. Numeric55.2/55.3 and comprehensive fluent23 retain their independent owners. Exact staged approved-host canonical CI and normal hooks are mandatory before acceptance; keep the process sandbox intact and do not push during PNT.
   Acceptance: Lock direct positive/negative 1e20 output against 42 and independent native value controls.
     Avoid unchecked f64-to-i64 conversion outside its exact supported range; review to_json, to_str, len, Display,
     nested values, helper/key uses and every actual outward/generated consumer before selecting one coherent
@@ -162,7 +181,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     Include the nested-write classifier's f64-to-usize boundary: compare the first out-of-range power of two
     and adjacent representable values with ordinary dense append/gap controls; reject or preserve their
     identity explicitly instead of silently saturating the diagnostic path/index through a rounded maximum.
-  Verification: `pending` repair — Rust CLI returns 9223372036854775807 for 100000000000000000000 and
+  Historical verification (pre-repair): Rust CLI returns 9223372036854775807 for 100000000000000000000 and
     -9223372036854775808 for its negative, with compile:ok/invoke:ok and no stderr. Perl public Get preserves
     positive/negative 1e20; both return 42 for the control. Engine direct execution calls RuntimeValue::to_json,
     whose finite integral branch casts to i64 before serde JSON construction.
@@ -170,7 +189,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     exact f64 value 18446744073709551616 reports a gap at changed index 18446744073709551615; the next
     representable larger value rejects as an invalid selector. The probe exits 0 with empty stderr;
     existing CLI controls expose only generic invocation failure. Exact artifacts and cause are in the numeric Knowledge card.
-  Commit: `pending`
+  Commit: `SESSION-STARTUP-READING.55.1 - preserve Rust numeric values at conversion boundaries`
 - ID: `SESSION-STARTUP-READING.55.2`
   Status: `pending`
   Goal: Reconcile scalar-text scientific/decimal spelling outside the existing small numeric fixture.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust signed-selector TYPE-REFERENCE-BOOK.1.2.17.3 is implemented and focus-verified; exact canonical receipt/normal hooks govern landing. Next clean activity is existing P1 SESSION-STARTUP-READING.55.1, before Dart17.4. Comprehensive fluent23 and OPENAI-TOOL-API implementation remain deferred.
+Rust numeric55.1 is verified; exact canonical receipt and normal hooks govern landing. Next clean activity is Dart signed-selector17.4, then Julia/Lua/admission17.5–7. Fluent23 and OPENAI-TOOL-API implementation remain deferred.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.17.3: Rust native/reconstructed/generated/emitted signed reads/writes retain exact underflow integers, post-expression normalization, guards, effects and detached values. Original40/160 has104 RED/56 controls; corrected137/822/6 and final restoration pass. Five physical runtime faults reject320/24/32/8/4; eight direct suites443 verify actual pre/post binaries. Book95/CLI4/wrong selector/three source denials and old/new alias controls pass. Readonly195/input4 and the original claim198 remain exact. Separate admission preserves failed215-file canonical1, exact historical runtime evolution, unchanged134/84613241/22/guard0 and actual auditor faults/restoration. Fresh Rust readiness parent6/emitted4/4/3 and new book/input controls pass; the combined claim adds58 inputs. Canonical CI and normal commit workflow are mandatory admission gates.
+SESSION-STARTUP-READING.55.1 preserves finite binary64 transport and checked host-integer boundaries. Core36/runtime212+metadata23/bridge66/emitted49+4/CLI52 cases104 channels+function4 pass. Five physical source faults restore exact bytes and fresh GREEN; suites260/libraries189+202/types8 and fresh readiness6/emitted4/4/3 pass. Book95/90 and actual source/semantic controls preserve examples and aliases. Historical134/84613241/22, six primary/five support/nine direct denials and three actual auditor faults/restoration pass. Final readonly publication binds whole proof inputs and requires physical input4/bypass/restoration. No portable spelling or other-backend closeout is claimed.
 
 ## Next Action
 
-From clean committed Git activate SESSION-STARTUP-READING.55.1: recover its stable leaf and canonical numeric facts, reproduce broad Rust conversion/positive-index boundary defects, then implement one owned safe slice. Continue Dart/Julia/Lua/admission17.4–7 and the type-reference frontier afterward. Never rerun sealed proof writers or pivot while dirty.
+From clean committed Git activate TYPE-REFERENCE-BOOK.1.2.17.4. Recover its Dart leaf and signed authority, verify current observations and implement one bounded native/generated slice. Continue the existing frontier; never rerun sealed capture writers or pivot dirty.
 
 ## Recent Completions
 
+- `SESSION-STARTUP-READING.55.1` — finite Rust transport/core36/runtime212/bridge66/emitted53/CLI104; five source faults restored, suites260/readiness6+4/4/3, book95/90, exact historical admission and physical input4; Dart17.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.3` — Rust137/822/6, five actual faults/restoration, eight direct suites443; exact diagnostics, book95/CLI4/aliases, readonly195/input4 actual bypass/restoration and claim198; numeric55.1 next.
 - `REPO-HYGIENE.22` — dated23966 parent candidates/six Rust locations, zero removals; independent population/lstat, five metadata denials, book95/marker RED, input3/bypass/restoration and actual reader channels; Rust17.3 next.
 - `OPENAI-TOOL-API.1` — deferred structured tools/ChatGPT UI plan indexed; Codex UI separately verified later; book and semantic-document checks pass; hygiene22 then Rust17.3.
@@ -29,7 +30,6 @@ From clean committed Git activate SESSION-STARTUP-READING.55.1: recover its stab
 - `TYPE-REFERENCE-BOOK.1.2.10` —232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; finite history0137;11 next.
 - `TYPE-REFERENCE-BOOK.1.2.13` —116/47 accepted RED; six faults;14/1950;16 flag routes;9/72 direct;book89/5; count/first10 next.
 - `TYPE-REFERENCE-BOOK.1.2.9` —85/41 accepted RED;7 restored fault epochs;14/1949;85+1 permanent/75 malformed;book89/3;kind13 next.
-- `TYPE-REFERENCE-BOOK.1.2.7` —214/106 RED;7 faults;14/1948;201+3 permanent/15 malformed;book89/3;kind95/next9 owned.
 
 ## History
 

@@ -7,12 +7,21 @@ answers:
   - "which startup task source ranges belong to each semantic part"
   - "does moving historical task verification metadata require another receipt"
   - "which consumers must change for startup task partitioning"
-date: 2026-09-24
+  - "why does the startup root frontier require its own stable child status row"
+date: 2026-10-25
 status: implemented under containment .16.2; exact staged canonical acceptance required before landing
 tags: [task-tree, continuity, containment, retrieval, verification]
 evidence: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1; docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1-plan.json; clean 567b583f7535c6fac643b27d44e24ba5b729f5a8"
 reverify: "Run perl scripts/check_startup_task_partitions.pl and perl tools/check_task_verification_fields.pl --self-test, then the independent pinned source/range replay below."
 ---
+
+Current frontier contract (numeric55.1, October25): the startup validator
+requires at least one table row naming a stable child of this same tree,
+with the exact status in its semantic part. A cross-tree next action belongs
+in the surrounding handoff prose and MEMORY.md. Naming Dart17.4 alone in
+the startup table fails `root frontier lacks a stable child/status row`;
+the queued startup55.2 row passes while Dart remains the overall next action.
+Readonly dated proof: `docs/checkpoints/rust-numeric-frontier/review.py`.
 
 ## Applied migration
 

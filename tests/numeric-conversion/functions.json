@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "owner": "SESSION-STARTUP-READING.55.1",
+  "cases": [
+    {
+      "id": "function/small-positive",
+      "pointer_width": null,
+      "input": "x",
+      "source": "fn numeric_value_0() { return(42) }\nTop: /x/\n I { return(numeric_value_0()) }\n",
+      "expected": {
+        "ok": {
+          "binary64": "4045000000000000",
+          "json_kind": "signed_integer",
+          "integer": "42"
+        }
+      }
+    },
+    {
+      "id": "function/large-positive",
+      "pointer_width": null,
+      "input": "x",
+      "source": "fn numeric_value_1() { return(100000000000000000000) }\nTop: /x/\n I { return(numeric_value_1()) }\n",
+      "expected": {
+        "ok": {
+          "binary64": "4415af1d78b58c40",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      }
+    },
+    {
+      "id": "function/large-negative",
+      "pointer_width": null,
+      "input": "x",
+      "source": "fn numeric_value_2() { return(-100000000000000000000) }\nTop: /x/\n I { return(numeric_value_2()) }\n",
+      "expected": {
+        "ok": {
+          "binary64": "c415af1d78b58c40",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      }
+    },
+    {
+      "id": "function/i64-high-below",
+      "pointer_width": null,
+      "input": "x",
+      "source": "fn numeric_value_3() { return(9223372036854774784) }\nTop: /x/\n I { return(numeric_value_3()) }\n",
+      "expected": {
+        "ok": {
+          "binary64": "43dfffffffffffff",
+          "json_kind": "signed_integer",
+          "integer": "9223372036854774784"
+        }
+      }
+    }
+  ]
+}

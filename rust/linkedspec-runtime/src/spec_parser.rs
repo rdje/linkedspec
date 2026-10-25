@@ -962,7 +962,9 @@ fn usize_field(object: &Map<String, Value>, field: &str, idx: usize) -> Result<u
     }
     if let Some(n) = value.as_f64() {
         if n.is_finite() && n >= 0.0 && n.fract() == 0.0 {
-            return Ok(n as usize);
+            return linkedspec_core::numeric::nonnegative_integer_to_usize(n).ok_or_else(|| {
+                format!("function_definition node {idx} field '{field}' is too large")
+            });
         }
     }
     Err(format!(
@@ -1019,4 +1021,50 @@ fn is_identifier(value: &str) -> bool {
     };
     (first.is_ascii_alphabetic() || first == '_')
         && chars.all(|ch| ch.is_ascii_alphanumeric() || ch == '_')
+}
+
+#[cfg(test)]
+mod numeric_boundary_tests {
+    use super::usize_field;
+    use serde_json::{Value, json};
+
+    #[test]
+    fn definition_ast_integer_fields_check_both_json_number_branches() {
+        // This exercises the private AST reader. It does not claim that the
+        // real grammar can produce a source with 2^usize::BITS characters.
+        let upper = 2.0_f64.powi(usize::BITS as i32);
+        for field in [
+            "version",
+            "arity",
+            "min_arity",
+            "start",
+            "end",
+            "line_start",
+            "line_end",
+        ] {
+            for value in [json!(0), json!(42), json!(42.0), json!(-0.0)] {
+                let object = serde_json::Map::from_iter([(field.to_owned(), value)]);
+                assert!(usize_field(&object, field, 0).is_ok());
+            }
+            for value in [
+                json!(upper),
+                json!(f64::from_bits(upper.to_bits() + 1)),
+                json!(-1),
+                json!(1.5),
+                Value::Null,
+                json!("42"),
+            ] {
+                let object = serde_json::Map::from_iter([(field.to_owned(), value.clone())]);
+                let actual = usize_field(&object, field, 0);
+                println!(
+                    "NUMERIC_PRIVATE_AST\t{}",
+                    json!({"field":field,
+                    "input":value,"error":actual.as_ref().err()})
+                );
+                assert!(actual.is_err(), "{field}: {value}");
+            }
+            let object = serde_json::Map::from_iter([(field.to_owned(), json!(u64::MAX))]);
+            assert_eq!(usize_field(&object, field, 0).is_ok(), usize::BITS == 64);
+        }
+    }
 }

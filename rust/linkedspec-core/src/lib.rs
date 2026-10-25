@@ -17,6 +17,7 @@ pub mod descriptor;
 pub mod entry_rule;
 pub mod error;
 pub mod expr;
+pub mod numeric;
 pub mod parser;
 pub mod trace;
 pub mod types;

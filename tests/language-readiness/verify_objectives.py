@@ -60,6 +60,24 @@ RUST_SIGNED_OWNER = 'TYPE-REFERENCE-BOOK.1.2.17.3'
 RUST_SIGNED_SOURCE = 'rust/linkedspec-runtime/src/engine.rs'
 RUST_SIGNED_BEFORE = '5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009'
 RUST_SIGNED_AFTER = '0a5a6e7091e2daef5f84942db839829ce98e5a60f62c3d83ce204538c95a5772'
+RUST_NUMERIC_OWNER = 'SESSION-STARTUP-READING.55.1'
+RUST_NUMERIC_ACTIVATION = 'f0d974aa1b337bbf2ee16e51c0297182e1e94f82'
+RUST_NUMERIC_IMAGES = {
+    'rust/Cargo.toml': (
+        '4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81',
+        '4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81',
+        '412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8'),
+    RUST_SIGNED_SOURCE: (
+        RUST_SIGNED_BEFORE, RUST_SIGNED_AFTER,
+        'b1c327a23ba03a6d345fe13002a2bacc9c5c67580551fd9d135e6c581247b3cf'),
+}
+RUST_NUMERIC_SUPPORT = {
+    'rust/linkedspec-core/src/numeric.rs': '65ad021924defd8dd6a623edf5adc7dcdd43d32fc4dad65460b01944035f8072',
+    'rust/linkedspec-core/src/types.rs': '836a7fd0de6fdf1d351283476074a63cb16d1cb7a6c9ca1d3d7428735dac0ced',
+    'rust/linkedspec-core/src/lib.rs': 'c2cca39ba3ec0e03606737486361b24d0255566167020f4ebeb0df1469e986a3',
+    'rust/linkedspec-runtime/src/spec_parser.rs': 'd25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560',
+    'rust/linkedspec-runtime/src/staged_parser_registry.rs': '8fdd3a75fbb411a1783d19201678b4c5df66f9f7198b8b469c475366770b1a89',
+}
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -914,6 +932,31 @@ def verify_rust_signed_evolution(source, contents, historical_hash):
             "scope": "exact signed-selector source image; historical runtime results unchanged; fresh Rust readiness compatibility is separately retained"}
 
 
+def verify_rust_numeric_evolution(source, contents, historical_hash, read=None):
+    require(source in RUST_NUMERIC_IMAGES, f"unapproved Rust numeric source: {source}")
+    historical, activation, accepted = RUST_NUMERIC_IMAGES[source]
+    require(historical_hash == historical,
+            f"Rust numeric historical boundary mismatch: {source}")
+    before = git("show", f"{RUST_NUMERIC_ACTIVATION}:{source}")
+    require(digest(before) == activation,
+            f"Rust numeric activation boundary mismatch: {source}")
+    predecessors = []
+    if source == RUST_SIGNED_SOURCE:
+        predecessors.append(verify_rust_signed_evolution(source, before, historical_hash))
+    require(digest(contents) == accepted,
+            f"unreviewed Rust numeric drift: {source}")
+    read = read or read_relative
+    for support, expected in RUST_NUMERIC_SUPPORT.items():
+        require(digest(read(support)) == expected,
+                f"unreviewed Rust numeric support drift: {support}")
+    return {"path": source, "historical": historical_hash,
+            "activation_commit": RUST_NUMERIC_ACTIVATION, "activation": activation,
+            "current": digest(contents), "owner": RUST_NUMERIC_OWNER,
+            "predecessors": predecessors,
+            "support_sources": dict(RUST_NUMERIC_SUPPORT),
+            "scope": "exact numeric source image; original historical and signed-selector results unchanged; fresh runtime/readiness compatibility is separately retained"}
+
+
 def audit_evidence(read=read_relative):
     checkpoints, sources, logs, milestones = {}, {}, {}, {}
     references = 0
@@ -973,6 +1016,10 @@ def audit_evidence(read=read_relative):
     for source, row in sources.items():
         current = digest(read(source))
         if current != row["sha256"]:
+            if source in RUST_NUMERIC_IMAGES:
+                runtime_source_updates.append(verify_rust_numeric_evolution(
+                    source, read(source), row["sha256"], read=read))
+                continue
             if source == RUST_SIGNED_SOURCE:
                 runtime_source_updates.append(verify_rust_signed_evolution(
                     source, read(source), row["sha256"]))
@@ -1340,28 +1387,59 @@ def falsify(report):
     for row in report.get("runtime_source_updates", []):
         source = row["path"]
         current = read_relative(source)
-        altered = (
-            current + b"\n// unreviewed runtime edit\n",
-            current.replace(b"fn negative_array_index(", b"fn unreviewed_negative_array_index(", 1),
-            current.replace(b"resolved_index: items.len() as i128 + index,",
-                            b"resolved_index: (items.len() as f64 + *index as f64) as i128,", 1),
-        )
+        verifier = verify_rust_numeric_evolution if row["owner"] == RUST_NUMERIC_OWNER \
+            else verify_rust_signed_evolution
+        if source == 'rust/Cargo.toml':
+            altered = (
+                current + b"\n# unreviewed numeric edit\n",
+                current.replace(b'"float_roundtrip"', b'"arbitrary_precision"', 1),
+                current.replace(b'{ version = "1", features = ["float_roundtrip"] }', b'"1"', 1),
+            )
+        else:
+            altered = (
+                current + b"\n// unreviewed runtime edit\n",
+                current.replace(b"fn negative_array_index(", b"fn unreviewed_negative_array_index(", 1),
+                current.replace(b"linkedspec_core::numeric::nonnegative_integer_to_usize(*number)",
+                                b"Some(*number as usize)", 1) if row["owner"] == RUST_NUMERIC_OWNER
+                    else current.replace(b"resolved_index: items.len() as i128 + index,",
+                                         b"resolved_index: (items.len() as f64 + *index as f64) as i128,", 1),
+            )
         require(all(candidate != current for candidate in altered),
                 "runtime controls must change actual bytes")
         for candidate in altered:
             try:
-                verify_rust_signed_evolution(source, candidate, row["historical"])
+                verifier(source, candidate, row["historical"])
             except ValueError as error:
-                require(str(error) == f"unreviewed Rust runtime drift: {source}",
+                expected = 'numeric' if row["owner"] == RUST_NUMERIC_OWNER else 'runtime'
+                require(str(error) == f"unreviewed Rust {expected} drift: {source}",
                         "unrelated error substituted for runtime rejection")
             else:
                 raise ValueError("runtime corruption control did not reject")
         runtime_controls[source] = len(altered)
+    support_controls = []
+    numeric = next((row for row in report.get("runtime_source_updates", [])
+                    if row["owner"] == RUST_NUMERIC_OWNER), None)
+    if numeric:
+        for support in RUST_NUMERIC_SUPPORT:
+            contents = read_relative(support)
+            changed = contents + b"\n// unreviewed numeric support edit\n"
+            def support_reader(path):
+                return changed if path == support else read_relative(path)
+            try:
+                verify_rust_numeric_evolution(numeric["path"], read_relative(numeric["path"]),
+                                              numeric["historical"], read=support_reader)
+            except ValueError as error:
+                require(str(error) == f"unreviewed Rust numeric support drift: {support}",
+                        "unrelated error substituted for support rejection")
+            else:
+                raise ValueError("numeric support corruption control did not reject")
+            support_controls.append(support)
     return {"corrupted_inputs_rejected": list(targets), "outside_paths_rejected": 2,
             "governance_mutations_rejected": governance_controls,
             "governance_mutations_by_source": controls_by_source,
             "runtime_source_mutations_rejected": sum(runtime_controls.values()),
-            "runtime_source_mutations_by_source": runtime_controls}
+            "runtime_source_mutations_by_source": runtime_controls,
+            "numeric_support_mutations_rejected": support_controls}
 
 
 def verify_summary(report, text):

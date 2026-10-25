@@ -703,7 +703,8 @@ fn usize_field(object: &Map<String, Value>, field: &str) -> Result<usize, String
     }
     if let Some(n) = value.as_f64() {
         if n.is_finite() && n >= 0.0 && n.fract() == 0.0 {
-            return Ok(n as usize);
+            return linkedspec_core::numeric::nonnegative_integer_to_usize(n)
+                .ok_or_else(|| format!("staged parse job field '{field}' is too large"));
         }
     }
     Err(format!(

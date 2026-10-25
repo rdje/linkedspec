@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-10-03`
+- Last updated: `2026-10-25`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 - Partition authority: `docs/decisions/0125-startup-task-partitions.md`
@@ -20,14 +20,14 @@
 
 ## Current Frontier
 
-The self-containment deferred-control diagnosis selects existing `.87.2` as a bounded
-feature prerequisite from clean52763. Matches literal/string repair is complete under `.87.2`;
-return after its clean commit to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`. Other startup order
-.94/.95/.51/.96 and the separate reading audit retain their ownership and priority.
+Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
+and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
+after the clean numeric commit. Portable text policy remains `.55.2`; `.55.3`
+owns the broader numeric closeout. Other startup repairs retain their schedule.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.87.2` | `done` | Bounded prerequisite verified; return to self-containment attached .0.5.1. |
+| 1 | `SESSION-STARTUP-READING.55.2` | `pending` | Next startup numeric child remains queued; overall PNT returns to Dart17.4 before this separate spelling work. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.
@@ -58,7 +58,7 @@ This current root is capped at 256 lines / 32768 bytes; each part at 5000 / 7864
 - LS-004 is verified and published at fd3e328d5; the bounded local report activity is closed.
   ARCHOGEN owns downstream acceptance and any changes in its read-only repository.
 - Startup .7 still owns the process-liveness repair. Recovery/purge remain prohibited.
-- Keep all confirmed defects task-owned through repair; .89/.90/.91, census .93 and fallback verification .92 are verified; .94/.95/.51/.96 remain queued behind the director-selected feature work.
+- Keep all confirmed defects task-owned through repair; .89/.90/.91, census .93 and fallback verification .92 are verified. Numeric .55.1 is verified; .94/.95/.51/.96 and independent helper repairs retain their existing owners.
 - Formal book/codebase reconciliation .4 and the separate reading audit remain open.
   Focused feature repairs keep their affected book sections and executable examples aligned.
 

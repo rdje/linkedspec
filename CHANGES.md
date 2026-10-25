@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-10-25 — SESSION-STARTUP-READING.55.1 — Rust numeric value transport
+
+Rust preserves finite binary64 values across JSON, numeric text/length/Display and serialized/generated parsers. Checked signed/unsigned integer projection replaces saturation; wider finite values remain floating JSON, negative zero retains its JSON sign, and nonfinite JSON remains null. The serde_json float_roundtrip feature preserves the two representable neighbors inside the i64 limits without a dependency-version change. Positive nested-write indexes and both integer metadata readers check the exclusive host bound. Legacy read/count coercions, signed selectors, the scalar-text authority and the binary64 model remain.
+
+Independent retained checks pass36 core cases,212 runtime observations/23 metadata controls,66 real bridge observations,49+4 actual emitted entries,52 CLI cases/104 quiet-trace channels and4 function CLI controls. Five physical source faults fail and restore exact source/fresh GREEN. Eight direct suites pass260 tests; libraries189/202 and core types8 pass. Fresh unchanged readiness passes parent6/emitted4/4/3. Complete book95/90, two executed examples, five source and two semantic controls pass; containment changes four search bodies in whitespace only and decreases source lines by one.
+
+Exact historical admission preserves134 streams/84613241 bytes/22 controls and the signed predecessor. The observed pair-only admission gap is repaired with five support images: six primary/five support/nine direct denials and actual rollback/two bypasses reject; exact restoration returns the identical report. Readonly publication requires whole retained source/executable/input custody and four physical input denials/bypasses/restoration. All provisional instruments remain qualified in the checkpoint README; no old proof is refreshed. Exact staged canonical CI and normal hooks govern landing. Dart signed17.4 is next; numeric spelling55.2, broad closeout55.3 and fluent23 remain open.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.3 — signed Rust array selectors
 
 Rust native, reconstructed, generated-plan and independently compiled emitted execution support existing-position negative array reads and writes. `[-1]` selects the last entry; writes resolve each nested array after selector/RHS effects, preserve authored negative diagnostic paths and never create missing negative targets. Typed serialization preserves exact underflow integers without changing Cargo features or the scalar value model. Existing coercions, guard identities, copies and v1 diagnostics remain.

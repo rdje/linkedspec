@@ -1,0 +1,726 @@
+{
+  "version": 3,
+  "owner": "SESSION-STARTUP-READING.55.1",
+  "cases": [
+    {
+      "id": "value/zero",
+      "source": "Top: /x/\n I { return(0) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "0000000000000000",
+          "json_kind": "signed_integer",
+          "integer": "0"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-zero",
+      "source": "Top: /x/\n I { return(-0.0) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "8000000000000000",
+          "json_kind": "negative_zero",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/small-positive",
+      "source": "Top: /x/\n I { return(42) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "4045000000000000",
+          "json_kind": "signed_integer",
+          "integer": "42"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/small-negative",
+      "source": "Top: /x/\n I { return(-42) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c045000000000000",
+          "json_kind": "signed_integer",
+          "integer": "-42"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/one",
+      "source": "Top: /x/\n I { return(1) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "3ff0000000000000",
+          "json_kind": "signed_integer",
+          "integer": "1"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-one",
+      "source": "Top: /x/\n I { return(-1) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "bff0000000000000",
+          "json_kind": "signed_integer",
+          "integer": "-1"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/fraction",
+      "source": "Top: /x/\n I { return(1.25) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "3ff4000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-fraction",
+      "source": "Top: /x/\n I { return(-1.25) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "bff4000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/tenth",
+      "source": "Top: /x/\n I { return(0.1000000000000000055511151231257827021181583404541015625) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "3fb999999999999a",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/large-positive",
+      "source": "Top: /x/\n I { return(100000000000000000000) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "4415af1d78b58c40",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "nested/large-positive",
+      "source": "Top: /x/\n I { return({\"rows\":[100000000000000000000]}) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "object": {
+            "rows": {
+              "array": [
+                {
+                  "binary64": "4415af1d78b58c40",
+                  "json_kind": "finite_float",
+                  "integer": null
+                }
+              ]
+            }
+          }
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "text-consumer/large-positive",
+      "source": "Top: /x/\n I { return([trim(100000000000000000000),length(100000000000000000000),hash(100000000000000000000,7)]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            "100000000000000000000",
+            21,
+            {
+              "100000000000000000000": 7
+            }
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/large-negative",
+      "source": "Top: /x/\n I { return(-100000000000000000000) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c415af1d78b58c40",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "nested/large-negative",
+      "source": "Top: /x/\n I { return({\"rows\":[-100000000000000000000]}) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "object": {
+            "rows": {
+              "array": [
+                {
+                  "binary64": "c415af1d78b58c40",
+                  "json_kind": "finite_float",
+                  "integer": null
+                }
+              ]
+            }
+          }
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "text-consumer/large-negative",
+      "source": "Top: /x/\n I { return([trim(-100000000000000000000),length(-100000000000000000000),hash(-100000000000000000000,7)]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            "-100000000000000000000",
+            22,
+            {
+              "-100000000000000000000": 7
+            }
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-low-below",
+      "source": "Top: /x/\n I { return(-9223372036854777856) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3e0000000000001",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-low",
+      "source": "Top: /x/\n I { return(-9223372036854775808) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3e0000000000000",
+          "json_kind": "signed_integer",
+          "integer": "-9223372036854775808"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-low-above",
+      "source": "Top: /x/\n I { return(-9223372036854774784) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3dfffffffffffff",
+          "json_kind": "signed_integer",
+          "integer": "-9223372036854774784"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-high-below",
+      "source": "Top: /x/\n I { return(9223372036854774784) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43dfffffffffffff",
+          "json_kind": "signed_integer",
+          "integer": "9223372036854774784"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-high",
+      "source": "Top: /x/\n I { return(9223372036854775808) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43e0000000000000",
+          "json_kind": "unsigned_integer",
+          "integer": "9223372036854775808"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "nested/i64-high",
+      "source": "Top: /x/\n I { return({\"rows\":[9223372036854775808]}) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "object": {
+            "rows": {
+              "array": [
+                {
+                  "binary64": "43e0000000000000",
+                  "json_kind": "unsigned_integer",
+                  "integer": "9223372036854775808"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "text-consumer/i64-high",
+      "source": "Top: /x/\n I { return([trim(9223372036854775808),length(9223372036854775808),hash(9223372036854775808,7)]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            "9223372036854775808",
+            19,
+            {
+              "9223372036854775808": 7
+            }
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/i64-high-above",
+      "source": "Top: /x/\n I { return(9223372036854777856) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43e0000000000001",
+          "json_kind": "unsigned_integer",
+          "integer": "9223372036854777856"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/u64-high-below",
+      "source": "Top: /x/\n I { return(18446744073709549568) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43efffffffffffff",
+          "json_kind": "unsigned_integer",
+          "integer": "18446744073709549568"
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "nested/u64-high-below",
+      "source": "Top: /x/\n I { return({\"rows\":[18446744073709549568]}) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "object": {
+            "rows": {
+              "array": [
+                {
+                  "binary64": "43efffffffffffff",
+                  "json_kind": "unsigned_integer",
+                  "integer": "18446744073709549568"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "text-consumer/u64-high-below",
+      "source": "Top: /x/\n I { return([trim(18446744073709549568),length(18446744073709549568),hash(18446744073709549568,7)]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            "18446744073709549568",
+            20,
+            {
+              "18446744073709549568": 7
+            }
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/u64-high",
+      "source": "Top: /x/\n I { return(18446744073709551616) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43f0000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/u64-high-above",
+      "source": "Top: /x/\n I { return(18446744073709555712) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "43f0000000000001",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-u64-high-below",
+      "source": "Top: /x/\n I { return(-18446744073709555712) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3f0000000000001",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-u64-high",
+      "source": "Top: /x/\n I { return(-18446744073709551616) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3f0000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-u64-high-above",
+      "source": "Top: /x/\n I { return(-18446744073709549568) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c3efffffffffffff",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/wide-positive",
+      "source": "Top: /x/\n I { return(1000000000000000019884624838656) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "46293e5939a08cea",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/wide-negative",
+      "source": "Top: /x/\n I { return(-1000000000000000019884624838656) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "c6293e5939a08cea",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/very-wide-positive",
+      "source": "Top: /x/\n I { return(10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815104) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "54b249ad2594c37d",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/very-wide-negative",
+      "source": "Top: /x/\n I { return(-10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815104) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "d4b249ad2594c37d",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/maximum-positive",
+      "source": "Top: /x/\n I { return(179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "7fefffffffffffff",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/maximum-negative",
+      "source": "Top: /x/\n I { return(-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "ffefffffffffffff",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/minimum-normal",
+      "source": "Top: /x/\n I { return(0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002225073858507201383090232717332404064219215980462331830553327416887204434813918195854283159012511020564067339731035811005152434161553460108856012385377718821130777993532002330479610147442583636071921565046942503734208375250806650616658158948720491179968591639648500635908770118304874799780887753749949451580451605050915399856582470818645113537935804992115981085766051992433352114352390148795699609591288891602992641511063466313393663477586513029371762047325631781485664350872122828637642044846811407613911477062801689853244110024161447421618567166150540154285084716752901903161322778896729707373123334086988983175067838846926092773977972858659654941091369095406136467568702398678315290680984617210924625396728515625) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "0010000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-minimum-normal",
+      "source": "Top: /x/\n I { return(-0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002225073858507201383090232717332404064219215980462331830553327416887204434813918195854283159012511020564067339731035811005152434161553460108856012385377718821130777993532002330479610147442583636071921565046942503734208375250806650616658158948720491179968591639648500635908770118304874799780887753749949451580451605050915399856582470818645113537935804992115981085766051992433352114352390148795699609591288891602992641511063466313393663477586513029371762047325631781485664350872122828637642044846811407613911477062801689853244110024161447421618567166150540154285084716752901903161322778896729707373123334086988983175067838846926092773977972858659654941091369095406136467568702398678315290680984617210924625396728515625) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "8010000000000000",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/minimum-subnormal",
+      "source": "Top: /x/\n I { return(0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004940656458412465441765687928682213723650598026143247644255856825006755072702087518652998363616359923797965646954457177309266567103559397963987747960107818781263007131903114045278458171678489821036887186360569987307230500063874091535649843873124733972731696151400317153853980741262385655911710266585566867681870395603106249319452715914924553293054565444011274801297099995419319894090804165633245247571478690147267801593552386115501348035264934720193790268107107491703332226844753335720832431936092382893458368060106011506169809753078342277318329247904982524730776375927247874656084778203734469699533647017972677717585125660551199131504891101451037862738167250955837389733598993664809941164205702637090279242767544565229087538682506419718265533447265625) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "0000000000000001",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "value/negative-minimum-subnormal",
+      "source": "Top: /x/\n I { return(-0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004940656458412465441765687928682213723650598026143247644255856825006755072702087518652998363616359923797965646954457177309266567103559397963987747960107818781263007131903114045278458171678489821036887186360569987307230500063874091535649843873124733972731696151400317153853980741262385655911710266585566867681870395603106249319452715914924553293054565444011274801297099995419319894090804165633245247571478690147267801593552386115501348035264934720193790268107107491703332226844753335720832431936092382893458368060106011506169809753078342277318329247904982524730776375927247874656084778203734469699533647017972677717585125660551199131504891101451037862738167250955837389733598993664809941164205702637090279242767544565229087538682506419718265533447265625) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "binary64": "8000000000000001",
+          "json_kind": "finite_float",
+          "integer": null
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "write/32/below",
+      "source": "Top: /x/\n I { items=[]; items[4294967295.999999523162841796875]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "fractional_number"
+        }
+      },
+      "pointer_width": 32
+    },
+    {
+      "id": "write/32/first-outside",
+      "source": "Top: /x/\n I { items=[]; items[4294967296]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "kind_not_path_selector"
+        }
+      },
+      "pointer_width": 32
+    },
+    {
+      "id": "write/32/above",
+      "source": "Top: /x/\n I { items=[]; items[4294967296]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "kind_not_path_selector"
+        }
+      },
+      "pointer_width": 32
+    },
+    {
+      "id": "write/64/below",
+      "source": "Top: /x/\n I { items=[]; items[18446744073709549568]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "index": 18446744073709549568,
+          "length": 0
+        }
+      },
+      "pointer_width": 64
+    },
+    {
+      "id": "write/64/first-outside",
+      "source": "Top: /x/\n I { items=[]; items[18446744073709551616]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "kind_not_path_selector"
+        }
+      },
+      "pointer_width": 64
+    },
+    {
+      "id": "write/64/above",
+      "source": "Top: /x/\n I { items=[]; items[18446744073709555712]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "kind_not_path_selector"
+        }
+      },
+      "pointer_width": 64
+    },
+    {
+      "id": "write/append",
+      "source": "Top: /x/\n I { items=[]; items[0]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            9
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "write/gap",
+      "source": "Top: /x/\n I { items=[]; items[1]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "index": 1,
+          "length": 0
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "write/signed",
+      "source": "Top: /x/\n I { items=[10,20]; items[-1]=9; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            10,
+            9
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "bounded/take",
+      "source": "Top: /x/\n I { return(take([1,2],100000000000000000000)) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": [
+            1,
+            2
+          ]
+        }
+      },
+      "pointer_width": null
+    },
+    {
+      "id": "bounded/read",
+      "source": "Top: /x/\n I { items=[1,2]; return(items[100000000000000000000]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "exact": null
+        }
+      },
+      "pointer_width": null
+    }
+  ],
+  "scope": "Independent authored scalar, nested, helper/key, dense/signed/bounded and architecture-specific positive-write cases. Source decimal expansions identify binary64 values, not arbitrary-precision integer promises. Native, textual AST/compiled reconstruction, generated-plan and independently compiled emitted routes consume this exact fixture."
+}

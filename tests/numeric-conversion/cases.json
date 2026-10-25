@@ -1,0 +1,295 @@
+{
+  "version": 2,
+  "owner": "SESSION-STARTUP-READING.55.1",
+  "cases": [
+    {
+      "id": "zero",
+      "bits": "0000000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "0",
+      "expected_text": "0"
+    },
+    {
+      "id": "negative-zero",
+      "bits": "8000000000000000",
+      "finite": true,
+      "json_kind": "negative_zero",
+      "integer": null,
+      "expected_text": "0"
+    },
+    {
+      "id": "small-positive",
+      "bits": "4045000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "42",
+      "expected_text": "42"
+    },
+    {
+      "id": "small-negative",
+      "bits": "c045000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "-42",
+      "expected_text": "-42"
+    },
+    {
+      "id": "one",
+      "bits": "3ff0000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "1",
+      "expected_text": "1"
+    },
+    {
+      "id": "negative-one",
+      "bits": "bff0000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "-1",
+      "expected_text": "-1"
+    },
+    {
+      "id": "fraction",
+      "bits": "3ff4000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": "1.25"
+    },
+    {
+      "id": "negative-fraction",
+      "bits": "bff4000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": "-1.25"
+    },
+    {
+      "id": "tenth",
+      "bits": "3fb999999999999a",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": "0.1"
+    },
+    {
+      "id": "large-positive",
+      "bits": "4415af1d78b58c40",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": "100000000000000000000"
+    },
+    {
+      "id": "large-negative",
+      "bits": "c415af1d78b58c40",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": "-100000000000000000000"
+    },
+    {
+      "id": "i64-low-below",
+      "bits": "c3e0000000000001",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "i64-low",
+      "bits": "c3e0000000000000",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "-9223372036854775808",
+      "expected_text": "-9223372036854775808"
+    },
+    {
+      "id": "i64-low-above",
+      "bits": "c3dfffffffffffff",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "-9223372036854774784",
+      "expected_text": "-9223372036854774784"
+    },
+    {
+      "id": "i64-high-below",
+      "bits": "43dfffffffffffff",
+      "finite": true,
+      "json_kind": "signed_integer",
+      "integer": "9223372036854774784",
+      "expected_text": "9223372036854774784"
+    },
+    {
+      "id": "i64-high",
+      "bits": "43e0000000000000",
+      "finite": true,
+      "json_kind": "unsigned_integer",
+      "integer": "9223372036854775808",
+      "expected_text": "9223372036854775808"
+    },
+    {
+      "id": "i64-high-above",
+      "bits": "43e0000000000001",
+      "finite": true,
+      "json_kind": "unsigned_integer",
+      "integer": "9223372036854777856",
+      "expected_text": "9223372036854777856"
+    },
+    {
+      "id": "u64-high-below",
+      "bits": "43efffffffffffff",
+      "finite": true,
+      "json_kind": "unsigned_integer",
+      "integer": "18446744073709549568",
+      "expected_text": "18446744073709549568"
+    },
+    {
+      "id": "u64-high",
+      "bits": "43f0000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "u64-high-above",
+      "bits": "43f0000000000001",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "negative-u64-high-below",
+      "bits": "c3f0000000000001",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "negative-u64-high",
+      "bits": "c3f0000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "negative-u64-high-above",
+      "bits": "c3efffffffffffff",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "wide-positive",
+      "bits": "46293e5939a08cea",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "wide-negative",
+      "bits": "c6293e5939a08cea",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "very-wide-positive",
+      "bits": "54b249ad2594c37d",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "very-wide-negative",
+      "bits": "d4b249ad2594c37d",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "maximum-positive",
+      "bits": "7fefffffffffffff",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "maximum-negative",
+      "bits": "ffefffffffffffff",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "minimum-normal",
+      "bits": "0010000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "negative-minimum-normal",
+      "bits": "8010000000000000",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "minimum-subnormal",
+      "bits": "0000000000000001",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "negative-minimum-subnormal",
+      "bits": "8000000000000001",
+      "finite": true,
+      "json_kind": "finite_float",
+      "integer": null,
+      "expected_text": null
+    },
+    {
+      "id": "positive-infinity",
+      "bits": "7ff0000000000000",
+      "finite": false,
+      "json_kind": "null",
+      "integer": null,
+      "expected_text": "inf"
+    },
+    {
+      "id": "negative-infinity",
+      "bits": "fff0000000000000",
+      "finite": false,
+      "json_kind": "null",
+      "integer": null,
+      "expected_text": "-inf"
+    },
+    {
+      "id": "nan",
+      "bits": "7ff8000000000000",
+      "finite": false,
+      "json_kind": "null",
+      "integer": null,
+      "expected_text": "NaN"
+    }
+  ],
+  "scope": "Authored binary64 input population. Python supplies exact integer tokens inside signed/unsigned64 and exact input bits elsewhere. Wider finite text must round-trip its value with consistent Display/length, without selecting the portable spelling owned by .55.2. The existing +/-1e20 full-decimal to_str control is retained. Negative zero remains floating JSON and scalar text zero; nonfinite JSON remains null. Raw serde checks numeric values only, not aggregate-kind identity."
+}

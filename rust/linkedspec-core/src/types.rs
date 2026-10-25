@@ -96,13 +96,15 @@ impl RuntimeValue {
             Self::Undef => serde_json::Value::Null,
             Self::Scalar(s) => serde_json::Value::String(s.clone()),
             Self::Number(n) => {
-                if n.fract() == 0.0 && n.is_finite() {
-                    serde_json::Value::Number(serde_json::Number::from(*n as i64))
-                } else {
+                let number = if *n == 0.0 && n.is_sign_negative() {
                     serde_json::Number::from_f64(*n)
-                        .map(serde_json::Value::Number)
-                        .unwrap_or(serde_json::Value::Null)
-                }
+                } else {
+                    crate::numeric::integral_json_number(*n)
+                        .or_else(|| serde_json::Number::from_f64(*n))
+                };
+                number
+                    .map(serde_json::Value::Number)
+                    .unwrap_or(serde_json::Value::Null)
             }
             Self::Bool(b) => serde_json::Value::Bool(*b),
             Self::Array(arr) => serde_json::Value::Array(arr.iter().map(|v| v.to_json()).collect()),
@@ -150,17 +152,11 @@ impl RuntimeValue {
         }
     }
 
-    /// Coerce to a string, returning empty string for undef/non-string.
+    /// Coerce scalar values to text; undef and aggregates produce empty text.
     pub fn to_str(&self) -> String {
         match self {
             Self::Scalar(s) => s.clone(),
-            Self::Number(n) => {
-                if n.fract() == 0.0 {
-                    format!("{}", *n as i64)
-                } else {
-                    format!("{n}")
-                }
-            }
+            Self::Number(n) => crate::numeric::number_text(*n),
             Self::Bool(b) => (if *b { "1" } else { "0" }).to_string(),
             Self::Undef => String::new(),
             Self::Array(_) | Self::Hash(_) | Self::Codeblock(_) => String::new(),
@@ -218,13 +214,7 @@ impl RuntimeValue {
         match self {
             Self::Undef => 0,
             Self::Scalar(s) => s.len(),
-            Self::Number(n) => {
-                if n.fract() == 0.0 {
-                    format!("{}", *n as i64).len()
-                } else {
-                    format!("{n}").len()
-                }
-            }
+            Self::Number(n) => crate::numeric::number_text(*n).len(),
             Self::Bool(_) => 1,
             Self::Array(a) => a.len(),
             Self::Hash(h) => h.len(),
@@ -244,13 +234,7 @@ impl std::fmt::Display for RuntimeValue {
         match self {
             Self::Undef => write!(f, "undef"),
             Self::Scalar(s) => write!(f, "{s}"),
-            Self::Number(n) => {
-                if n.fract() == 0.0 {
-                    write!(f, "{}", *n as i64)
-                } else {
-                    write!(f, "{n}")
-                }
-            }
+            Self::Number(n) => write!(f, "{}", crate::numeric::number_text(*n)),
             Self::Bool(b) => write!(f, "{b}"),
             Self::Array(a) => {
                 write!(f, "[")?;

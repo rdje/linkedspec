@@ -4896,15 +4896,13 @@ impl Engine {
         for (segment_index, (segment, value)) in authored.iter().zip(values).enumerate() {
             let classified = match value {
                 RuntimeValue::Scalar(key) => EvaluatedAccessSegment::Key(key.clone()),
-                RuntimeValue::Number(number)
-                    if number.is_finite()
-                        && *number >= 0.0
-                        && number.fract() == 0.0
-                        && *number <= usize::MAX as f64 =>
-                {
-                    EvaluatedAccessSegment::Index(*number as usize)
-                }
                 RuntimeValue::Number(number) => {
+                    if let Some(index) =
+                        linkedspec_core::numeric::nonnegative_integer_to_usize(*number)
+                    {
+                        evaluated.push(EvaluatedAccessSegment::Index(index));
+                        continue;
+                    }
                     if let Some(index) = Self::negative_array_index(*number) {
                         evaluated.push(EvaluatedAccessSegment::NegativeIndex(index));
                         continue;

@@ -31,11 +31,13 @@ answers:
   - "why did registered sorted pipelines lose function parameters"
   - "why does a reused book renderer import the wrong document module"
   - "when are private Storable integer caches unsafe for scalar kind checks"
-date: 2026-10-24
+date: 2026-10-25
 status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, mdbook]
 evidence: "Type checkpoints; pipelines11."
-reverify: "bash tools/project_data_run.sh prove -Iperl t/scalar_numeric_contract.t"
+reverify:
+  - "bash tools/project_data_run.sh prove -Iperl t/scalar_numeric_contract.t"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/rust-numeric-boundaries/review_book.py"
 ---
 
 # Value model and bounded Perl helper execution
@@ -66,8 +68,13 @@ native captures; current guards execute against arrays/nonarrays. No backend adm
 drop_keys copies keys/splices, keeps null diagnostics and FATAL-warning silence.
 c053c9dcf inventories substr/typed receivers; references pending.
 
-Accepted7: only the search-index reference differs; decoded15 body-whitespace
-changes; strict rejection remains.
+Accepted7 retains its15 body-whitespace differences. Current numeric55.1
+reverification retains90 outputs/four body-whitespace differences and verifies
+both HTML and searcher fallback references against the complete decoded index.
+Decoder: `docs/checkpoints/type-deferred-indexed-writes/search_data.py`.
+Readonly proof: `docs/checkpoints/rust-numeric-boundaries/review_book.py`;
+only document-body whitespace is normalized; all other fields/URLs and
+literal code/script/style remain checked. Semantic/URL controls reject.
 
 Context hash-gates gzip/37 verified32MiB chunks and three byte/mode aliases;
 nested-Git guards. Recursive originals:49ce.

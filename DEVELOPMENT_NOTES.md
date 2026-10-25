@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — SESSION-STARTUP-READING.55.1 — exact integer domains and source admission
+
+Use exclusive powers of two at f64/host-integer boundaries: an integer MAX cast to f64 can round upward and admit a saturating conversion. The numeric helper separates exact signed64, unsigned64 and finite-floating JSON. Exact JSON tokens and bit-level round trips are independent targets; converting an incorrect i64-max token back to f64 would hide its identity at2^63. Shared numeric text/Display/length fixes outward consumers without choosing the portable cat spelling policy. The real recursive child bridge and actual function-definition/staged-body producers are covered separately from private huge metadata tests.
+
+Enabling serde_json float_roundtrip fixes a distinct raw-serde parser loss, proven by same-source feature control and a physical inverse. Numeric reads/bounded counts/child-push overloads retain their contracts. No arbitrary precision,32-bit execution, alternate backend admission or reachable huge grammar source is claimed.
+
+Primary Cargo/Engine image checks initially admitted an actual mutated helper. Retained same-fault evidence distinguishes the repaired five-support guard, which uses the supplied guarded reader and retains the signed predecessor. Original134 historical streams and results remain immutable; fresh readiness is separate. Actual old-auditor rollback and primary/support guard bypasses fail, and exact restoration reproduces the same recovery report.
+
+The first wide-text oracle, incomplete helper custody, invalid dispatch/key probes, correction parse failure, book capacity assumptions, generated-search references, invalid compatibility target and missing readiness-wrapper path remain explicit provisional instruments. Corrected epochs retain whole source, actual executable bytes/modes and channels. Readonly publish.py binds the final namespace; capture/seal writers stay retired. Existing book retrieval now points directly to its canonical decoder and current90-output proof; no collection budget grows.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.17.3 — signed positions and exact diagnostic transport
 
 The writer keeps authored negative positions as checked i128 values and resolves them only during its isolated post-expression structural walk. Missing negative containers retain the old invalid-segment reason; present wrong kinds remain conflicts. A private typed serde payload emits index/path/arithmetic directly into the original String error channel, preserving wide integers and existing v1 field order/messages. Rust's finite whole f64 selectors include -1.0; unrelated fractional/string read coercions and the single-index versus nested receiver-order distinction stay explicit.
