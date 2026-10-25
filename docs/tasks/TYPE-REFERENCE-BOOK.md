@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / scalar literal-kind22 next; Rust17.3 follows
+- Status: `active` / P1 numeric55.1 then Dart17.4
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-24`
+- Last updated: `2026-10-25`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -17,6 +17,12 @@
 Give readers one clearly navigable canonical section for every supported value/type family, and a thorough,
 example-rich entry for every currently supported operation. Inventory actual contracts and supported spellings
 before deciding headings, moving text or asserting completeness. The bounded callback handoff is accepted at 1a8b202018a387c87425442375f53c3ee5e820d4; its stale-recipe prerequisite is complete; full inventory .1.2 is next.
+
+Director clarification (October24, DBIQNP): every supported type needs a comprehensive, coherent fluent method
+family, including chains that change type. The motivating journey is string -> regex split -> array of strings
+-> available array operations -> selected entry -> string operations. Inventory must identify and own missing
+method families or broken transitions; documenting only today's registered names cannot establish completeness.
+This is future acceptance work under .1.2.23, with no pivot from the active Rust signed-selector leaf.
 
 ## Verified intake and limits
 
@@ -51,6 +57,9 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   complete supported-operation reference, using the actual type model established by inventory.
 - Each entry describes accepted signatures/arguments, result type/value, mutation/aliasing, empty/missing/error
   cases, chaining and callback behavior where applicable, supported backend limits and worked executable examples.
+- Every supported type has an assessed fluent method family, and an explicit result-type transition matrix
+  covers cross-type chaining. Missing useful operations/transitions are owned and resolved before family closeout;
+  legitimate semantic exclusions are explained rather than hidden by an implemented-name-only inventory.
 - Every inventory item is covered, cross-links resolve, former anchors remain usable, and complete rendered-book
   review confirms navigation and content. Declare actual measured proof records before publishing coverage counts.
 - Ordinary leaves use focused proof; public contract or mechanical infrastructure movement requires canonical
@@ -105,7 +114,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.1`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Parent tracking only; separately committed children own source population/type model, operation/spelling enumeration and complete book mapping. No aggregate completeness admission yet.
-  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.17`, `TYPE-REFERENCE-BOOK.1.2.22`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.16`, `TYPE-REFERENCE-BOOK.1.2.19`, `TYPE-REFERENCE-BOOK.1.2.21`, `TYPE-REFERENCE-BOOK.1.2.20`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.2`.
+  Children: `TYPE-REFERENCE-BOOK.1.2.0`, `TYPE-REFERENCE-BOOK.1.2.3`, `TYPE-REFERENCE-BOOK.1.2.4`, `TYPE-REFERENCE-BOOK.1.2.5`, `TYPE-REFERENCE-BOOK.1.2.6`, `TYPE-REFERENCE-BOOK.1.2.7`, `TYPE-REFERENCE-BOOK.1.2.9`, `TYPE-REFERENCE-BOOK.1.2.13`, `TYPE-REFERENCE-BOOK.1.2.10`, `TYPE-REFERENCE-BOOK.1.2.11`, `TYPE-REFERENCE-BOOK.1.2.12`, `TYPE-REFERENCE-BOOK.1.2.17`, `TYPE-REFERENCE-BOOK.1.2.22`, `TYPE-REFERENCE-BOOK.1.2.14`, `TYPE-REFERENCE-BOOK.1.2.16`, `TYPE-REFERENCE-BOOK.1.2.19`, `TYPE-REFERENCE-BOOK.1.2.21`, `TYPE-REFERENCE-BOOK.1.2.20`, `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.23`, `TYPE-REFERENCE-BOOK.1.2.2`.
   Acceptance: Retain the complete source/contract population, distinguish literals/constructors/operators/helpers/methods/aliases/invocation, reconcile integer/real and boolean/null semantics, and map every item and backend limit to current/proposed canonical sections. No completeness claim from sampled tables.
   Activation: Clean cf4dceccd24bc6642fc9c7d8d10b329e136849b6; .1.1 normal all10 hooks, post-pointer/post-memory and brief0 pass, all required jobs joined. July4 type-method and dated gap implementation cards are navigation/history pointers, not fresh complete inventories. The current gap card explicitly points beyond its old122 boundary; progressive/staged private intrinsics must not be promoted by name discovery alone.
 
@@ -550,17 +559,44 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing checks: Actual readonly publication, final Knowledge regeneration, both bounded-history checks, whitespace and routing/README pressure pass. The pressure gate overlapped the final metadata-only reverify-wrapper correction; exact staged canonical CI rechecks the resulting documents before normal commit hooks. No sealed proof file changed after publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.3`
-  Status: `pending`
+  Status: `done` / selected and admission proof; exact canonical receipt governs landing
   Goal: Implement the same policy through Rust native/generated interfaces.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.2`, `TYPE-REFERENCE-BOOK.1.2.22`
-  Planned tier: `canonical`
-  Claim verification: none: Pending transition child; declare source-bound measurements before activation.
+  Activation: Clean `691d2d87690ce3f9052c1d032a3e862ee5d76211`; hygiene22 all10 hooks/post-pointer, brief0 and clean Git verified. API planning1 is committed and implementation stays deferred. Native typed-binding/write Knowledge, signed target, relevant ADR0036 guard/evaluation rules and current book transition section reviewed; inspect current public Rust observations before runtime source diagnosis.
+  Owned paths: Rust runtime/direct-dependent tests, permanent signed consumer, docs/checkpoints/signed-array-rust/, signed-array-rust-admission/ and this leaf's claim; verify_objectives.py exact engine evolution and canonical historical-audit Knowledge/ledger/book explanation; current Rust Knowledge/book/examples and normal continuity. Preserve every sealed predecessor prefix, frozen authority, submodule/pin and unrelated read-coercion contract.
+  Verification tier: `canonical`
+  Focused checks: Source-bound Rust public CLI/trace and typed native/generated consumers against the frozen signed target; changed behavior RED/GREEN, actual runtime fault/restoration, direct write/receiver/copy/numeric compatibility, independent emitted compilation, retained producer/input controls, executable book examples/render and normal history/memory/Knowledge/doctrine checks. Resolve exact affected suites from the current interfaces before runtime edits.
+  Canonical trigger: Rust runtime/generated behavior and the new typed underflow diagnostic; run exact staged-candidate canonical CI before the normal commit workflow. Portable admission stays with17.7.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.17.3.json`
+  Acceptance Checklist
+  - [x] REPRODUCE / ISSUE — Reconfirm the dated Rust negative-to-zero coercion and rejected writes through public interfaces, retaining actual producer inputs and complete channels.
+  - [x] ROOT CAUSE (WHY + WHERE) — Use the native tools/trace and canonical facts to identify read and isolated-write mechanisms before changes.
+  - [x] FIX — Normalize supported negative integers against each encountered existing post-expression array; preserve missing-target, type, evaluation, guard and detachment boundaries.
+  - [x] ADDRESSED (verified) — Independent target, exact native/generated/emitted observations and actual source inverses/restoration; no stronger scope than retained proof.
+  - [x] NO REGRESSION — Positive/quoted-key/coercion, diagnostics, copies/effects/guards and frozen predecessors pass direct checks; fresh readiness parent6/emitted4/4/3 and isolated historical proof pass. Exact canonical receipt required before landing.
+  - [x] LOCKSTEP — Current book examples/backend row, Knowledge, roadmaps/frontier and clean commit handoff agree before numeric55.1 then Dart17.4.
+  Continuity repair: The root still labelled completed scalar22 as next. This activation corrects that stale label and advances the eligible frontier after the committed hygiene review; no historical result changes.
+  Numeric boundary finding / owned plan: Current source confirms the already tracked .55.1 finite Number-to-i64 JSON saturation and rounded positive usize boundary; that broad repair stays with its existing owner. Signed underflow must retain authored index and exact encountered-length arithmetic. Use a checked signed internal index and explicitly owned exact JSON-integer support if required, without changing the DSL's f64 value model or expanding selector range. Add distinguishing signed-boundary controls and broad serde/carrier compatibility before any dependency-feature decision; record actual observations rather than inferring them from normal-sized cases.
+  Fixture setup qualification: The first inline fixture draft assumed every non-write-error intake case had requested_value. The old read-underflow row deliberately has none, so AssertionError read-underflow stops before directory/file creation; no runtime or test change occurs. The original whole inline stdin was not separately retained. This earns no product/control RED credit; retain a named final builder with explicit read-underflow/empty expectations instead of inferring them from the old optional field.
+  Before-runtime evidence: Public CLI32 and fresh calibration reproduce [-2,10,10,10,10]. The unchanged runtime then completes40 authored cases across native, SpecFile JSON, CompiledSpec JSON and generated-plan routes:160 observations,104 independent-target mismatches and56 controls. All original Rust images match real691d2d876 Git bytes/executable status, separately from full filesystem permissions; actual executables and complete channels are retained. review_before.py re-derives the original population without rerunning historical producers. Four unsigned-magnitude observer rows coarsen the expected resolved_index under the original JSON configuration; their product mismatch is independently the wrong error code, with no pre-fix numeric-field precision credit. A new direct JSON-token control isolates that observer boundary before dependency/runtime changes.
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
+  Numeric boundary resolution: The generic Value SDK-token proposal coarsens a wide integer; this is an observer/configuration limit, not a separate engine defect. Its original failed control/source/channels are retained. The corrected typed i128 serde token control passes all three exact tokens before runtime changes. Native diagnostics and generated failures retain original error strings, so typed nested-write serialization supplies exact index/path/arithmetic without a Cargo feature or scalar-value-model change. Corrected fixture markers decode to exactly the original targets.
+  Candidate1: Add a checked signed index, preserve raw authored negative prefixes, reject missing negative containers, resolve existing arrays after expression effects, and serialize exact typed diagnostic integers. Keep positive classification and unrelated read coercions/order. run_test.py after1 completes all160 semantic rows and the exact typed SDK controls. The extended after2 consumer fails to build because the installed digest output does not implement LowerHex; no emitted runtime observation or product RED is claimed. Its source/build channels are retained. Render each digest byte as two hexadecimal digits, then run a fresh after3 epoch for independent emitted compilation; no repaired/admitted Rust claim yet.
+  Candidate continuation: Fresh after3 builds and runs all40 cases across six routes (240 exact observations), including independently compiled emitted source and exact typed JSON tokens; source/executable custody and independent Python raw-integer review pass. Five added private boundary tests pass within all187 runtime unit tests. Expanded137 authored cases add all14 frozen read and29 write projections in both ordinary/callable forms, exact Unicode diagnostics, distinct parameter identity, snapshots/copies and four shared book examples. The supplied95-input book renders and rejects three actual rendered source faults. Expanded1/2 stop at an invalid public dispatch_span probe; they also expose the observer's omission of Rust's existing named callable error prefix. Whole source/channels and the failed first qualifier survive. Independent qualification confirms131 reached cases/524 rows with60 context-only observer mismatches and no target-payload mismatch; no full or emitted success is credited. Expanded2 was inadvertently launched after qualifier failure and is explicitly redundant. A valid effectful guard and exact named-context decoder replace those instruments; unreached quoted-key coercion expectations are calibrated publicly without changing runtime policy. Expanded3 reaches685 rows across five routes; its five mismatches are solely the Unicode span oracle counting one trimmed outer padding character. A source-derived26..28 scalar expectation, separate byte28/padded27 controls and permanent three-padding public AST probe correct the instrument. Expanded4 then passes all137 cases through six routes (822 observations), exact raw-integer review and actual emitted binary custody. Five actual runtime variants reject320/24/32/8/4 observations; each exact engine source/mode restores, and restored-final completes six routes with exit0. Late first-party include custody retains63 unchanged accepted-Git inputs without inventing earlier permission observations; final epochs explicitly enroll them. Independent restored review passes. First focused attempt captures a no-run batch, then Cargo --lib rebuilds the same binary path; its real188-test success is provisional and the driver correctly stops on changed SHA. Preserve original code/build/run/old bytes and the qualification; no complete compatibility or executed-binary custody credit. New focused_resume.py captures current executables immediately before direct execution in package cwd, reuses earlier archives only after exact current identity confirmation, and verifies post-run bytes/mode. Corrected direct compatibility passes all eight suites/443 top-level tests with exact pre/post executable identities (188 runtime units,5 write,15 receiver,1 numeric,18 callable,16 bindings,197 integration,3 corpus). CLI four exact examples and actual wrong selector, formatting, both model checkers and current95-input book pass. Both public book fragments are preserved with original missing/actual changed-alias denials. Actual readonly publication passes195 bound physical inputs. Four physical input controls are in flight; canonical admission remains required.
+  Documentation regression ownership: The current heading rename changes the old public signed-array-selectors-in-perl fragment. Preserve that anchor alongside the new Perl/Rust heading before landing, even without a current internal backlink. This is a current-leaf compatibility repair, not a new campaign; retain original missing-anchor render, whole updated inputs and an actual changed-alias render denial.
+  Existing numeric defect schedule: P1 SESSION-STARTUP-READING.55.1 is the sole owner of broad finite-number saturation and the pre-existing rounded positive index boundary. It is first after this clean Rust17.3 commit and before Dart17.4; no dirty pivot or partial .55.1 completion credit. The focused typed diagnostic path does not close that broader repair.
+
+  Root cause / tooling: The public CLI calibration retains [-2,10,10,10,10] before source diagnosis. Legacy negative-to-usize reads and blanket negative write rejection are replaced at rust/linkedspec-runtime/src/engine.rs:5388 (array_selector_value), :4875/:4889 (checked negative classification), :4810/:4987 (post-expression isolated walk) and :413/:523 (exact typed diagnostic String serialization). No parser format, Cargo feature or dependency pin changes.
+  Verified closure: Five runtime faults, restored822/6, eight direct suites443,95-input book/CLI and alias proof, readonly195/input4 actual bypass/restoration all pass. Claim198 is docs/claims/TYPE-REFERENCE-BOOK.1.2.17.3.json. Every provisional source/observer/capture-order limit remains durable. Exact staged canonical receipt and normal hooks are mandatory landing gates; derive admission identity from Git.
+
+  Canonical blocker / owned repair: canonical1 passes all10 doctrines and early structural/model checks, then isolated historical-artifact recovery rejects current executable evidence drift at rust/linkedspec-runtime/src/engine.rs (verify_objectives.py audit_evidence). Reproduce with the unchanged canonical gate and retained signed-rust-canonical1.log; impact is blocked admission of the verified Rust change. Preserve the exact failed215-file staged candidate/actual channels before implementation edits, investigate the canonical historical-source boundary, and repair its replay/integration with independent before/reapply controls. New admission evidence belongs to docs/checkpoints/signed-array-rust-admission/ under this same leaf; every existing sealed prefix stays unchanged. P1 blocking, fixed before landing; no numeric55.1 pivot.
+
+  Admission repair verified: Complete failed215-file candidate (17 whole mutable images/198 sealed references) and gate1 survive. The auditor permits only the exact historical/current Rust engine pair and reports its owner separately, preserving every historical identity/result. Unchanged isolated recovery retains134 streams/84613241 bytes/22 controls, byte-exact archive reconstruction and original guard0. Three source mutations/four direct path/history/image denials reject. Actual old-auditor rollback reproduces RED; physical hash-guard removal admits drift and the original driver rejects it; exact bytes/mode restoration returns the identical healthy report. Fresh unchanged Rust nesting/context/lossless/child consumers pass parent6/emitted4/4/3 with actual source/workspace/executable custody; no old runtime is rerun. Current book95 and actual changed admission statement reject correctly. New readonly49 and input4/bypass/restoration pass; the original unpublished claim remains unchanged within the combined record, which adds58 admission inputs. Canonical facts/ledger/book and continuation agree. No dependency implementation, old checkpoint or sealed prefix changes. Exact staged canonical receipt and normal hooks govern landing; numeric55.1 is next from clean Git.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.17.4`
   Status: `pending`
   Goal: Implement the same policy through Dart native/generated interfaces.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.3`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.17.3`, `SESSION-STARTUP-READING.55.1`
   Planned tier: `canonical`
   Claim verification: none: Pending transition child; declare source-bound measurements before activation.
   Acceptance: Preserve positive/quoted-key, copy, atomicity, effect, diagnostic and guard contracts. Negative selectors require an existing in-range array position and never create gaps. No full portable admission before child7.
@@ -667,15 +703,51 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.20`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
-  Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness.
+  Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness. Include the complete per-type fluent/result-type matrix inputs required by .23, and distinguish current methods from missing useful families; do not equate enumerating implemented names with a comprehensive API.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
   Goal: Map the complete reconciled operation/spelling population to actual book coverage and proposed canonical per-type homes.
-  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.23`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated coverage mapping; declare complete source/book evidence before measurement.
   Acceptance: Retain exact current entries/anchors/includes/examples/backend qualifications for every inventory item, mark precise depth/navigation gaps, preserve old anchors and schedule bounded family work. Close .1.2 only after all inventory children agree; independent layout review .1.3 follows. No exhaustive public-reference coverage claim from an inventory closeout.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23`
+  Status: `pending`
+  Goal: Establish comprehensive fluent method families for every supported type and complete inter-type chaining.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.1`, `TYPE-REFERENCE-BOOK.1.2.23.2`, `TYPE-REFERENCE-BOOK.1.2.23.3`, `TYPE-REFERENCE-BOOK.1.2.23.4`.
+  Schedule: Director's October24 DBIQNP requirement; follows the complete existing-operation inventory and precedes final coverage mapping. Current Rust17.3 and its existing prerequisites continue unchanged.
+  Acceptance: Assess useful semantic operation families as well as implemented names. Own and resolve missing fluent operations/transitions before declaring a type complete. Dispatch each chain continuation by its returned value's actual type; preserve container element types, mutation/detachment, callback/error/empty behavior and backend limits. Do not invent a new type or meaningless method merely for symmetry.
+  Planned tier: Select per child; new public methods/contracts and final admission require canonical proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
+  Status: `pending`
+  Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
+  Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
+  Planned tier: Focused source/contract audit; declare measurements at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
+  Status: `pending`
+  Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
+  Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
+  Planned tier: Select from actual contract scope; freeze new public authority before code.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
+  Status: `pending`
+  Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
+  Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
+  Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
+  Status: `pending`
+  Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
+  Acceptance: Reconcile expected families and every transition in both directions against actual native/generated consumers and individual mdBook examples. Reject deliberate missing-method, wrong-return-type and continuation-dispatch faults; include empty/missing/error and backend controls. No family's final reference leaf .2-.6 or aggregate .7 closes over an unresolved assigned fluent gap. Keep scope exclusions explicit; publish no completeness claim from samples alone.
+  Planned tier: Canonical admission; declare exact source-bound claim records before execution.
 
 - ID: `TYPE-REFERENCE-BOOK.1.3`
   Status: `pending`
@@ -748,18 +820,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.22` | `done` | P1 deferred scalar literal kinds; execute existing boolean issue35 before further signed backends. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.17.3` | `pending` | Rust native/generated implementation. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
-| 10 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 1 | `SESSION-STARTUP-READING.55.1` | `pending` | Existing P1 Rust numeric repair; activate only after the clean Rust17.3 commit, before Dart. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.17.4` | `pending` | Dart native/generated implementation. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `pending` | Julia native/generated implementation. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `pending` | Shared Lua; independently verify PUC and LuaJIT. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Recurring compatibility/public admission after all backends. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.14` | `pending` | Deferred last after signed17. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.16` | `pending` | Deferred scoped with after14. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.19` | `pending` | Grouped indexed assignment value after16. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.21` | `pending` | Raw assigned-regex payload fidelity after19. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Shared containment policy update reconciliation. |
+| 11 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Complete supported operations/spellings. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent families and returned-type transitions after full inventory; no current Rust pivot. |
 | 13 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map every item to actual book coverage. |
 | 14 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent complete inventory/layout review. |
 | 15 | `TYPE-REFERENCE-BOOK.8` | `pending` | Relevant legacy metadata repair. |
@@ -784,6 +856,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
 
 ## Verification Log
 
+- `2026-10-25` — `.1.2.17.3`: Original40/160 has104 RED/56 controls; corrected137/822 on six routes and actual final restoration pass. Five physical runtime variants reject320/24/32/8/4; eight direct suites443 retain actual pre/post binaries. Book95/four executed examples/three source denials and old/new alias denials pass. Readonly195 and input4/bypass/restoration pass; claim198 preserves every qualified epoch and first-party include closure. Exact staged canonical receipt/normal hooks govern landing. Next clean owner55.1 precedes Dart17.4.
+
 - `2026-10-23` — `.1.2.12`: 84 public cases/54 accepted-source RED/30 controls; 16 source-fault9 controls plus the actual private-consumer inverse; 22 suites/3098 top-level TAP; private 296 rows/26 deliberate consumer changes; book 89 inputs/4 executed examples with heading/prose/URL denials; three identity denials and 3 required-fixture omission/bypass/restoration controls; exact canonical receipt governs admission.
 
 - `2026-10-21` — `.1.2.10`:232 fixed cases/107 accepted RED/125 controls;8 restored source faults;14/1950 TAP;history680;book89/5 and actual heading RED; whole accepted13 custody; exact finite history0137 and artifact controls; canonical admission mandatory.
@@ -803,6 +877,8 @@ No director input required. Signed selectors17 follows the clean12 boundary, the
   qualitative gap only. Exact legacy status contradictions are recorded above; no runtime or full coverage proof.
 
 ## Commit Log
+
+Rust signed17.3 subject: `TYPE-REFERENCE-BOOK.1.2.17.3 - support signed Rust array selectors`; derive accepted identity from Git.
 
 CLI17.8 subject: `TYPE-REFERENCE-BOOK.1.2.17.8 - report context-only Perl CLI runtime failures`; derive accepted identity from Git.
 

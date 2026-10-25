@@ -354,24 +354,19 @@ impl ExecutionOptions {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
+#[serde(untagged)]
 enum EvaluatedAccessSegment {
     Key(String),
     Index(usize),
+    NegativeIndex(i128),
 }
 
 impl EvaluatedAccessSegment {
-    fn to_json(&self) -> Value {
-        match self {
-            Self::Key(key) => Value::String(key.clone()),
-            Self::Index(index) => json!(index),
-        }
-    }
-
     fn expected_container_kind(&self) -> &'static str {
         match self {
             Self::Key(_) => "harray",
-            Self::Index(_) => "array",
+            Self::Index(_) | Self::NegativeIndex(_) => "array",
         }
     }
 }
@@ -390,6 +385,51 @@ enum NestedWriteFailure {
         index: usize,
         length: usize,
     },
+    ArrayUnderflow {
+        index: i128,
+        length: usize,
+        resolved_index: i128,
+    },
+}
+
+#[derive(serde::Serialize)]
+#[serde(untagged)]
+enum NestedWriteDiagnosticIndex {
+    Unsigned(usize),
+    Signed(i128),
+}
+
+#[derive(serde::Serialize)]
+struct NestedWriteDiagnosticSpan {
+    end: usize,
+    provenance: &'static str,
+    start: usize,
+    unit: &'static str,
+}
+
+// Field order preserves the established canonical JSON spelling. Typed serde
+// writes signed diagnostic integers exactly without a generic Value conversion.
+#[derive(serde::Serialize)]
+struct NestedWritePayload<'a> {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    actual_kind: Option<&'static str>,
+    binding: &'a str,
+    code: &'static str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    expected_kind: Option<&'static str>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    index: Option<NestedWriteDiagnosticIndex>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    length: Option<usize>,
+    message: String,
+    operation: &'static str,
+    path: &'a [EvaluatedAccessSegment],
+    #[serde(skip_serializing_if = "Option::is_none")]
+    reason: Option<&'static str>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    resolved_index: Option<i128>,
+    segment_index: usize,
+    source_span: NestedWriteDiagnosticSpan,
 }
 
 /// Typed internal diagnostic for the neutral nested-write boundary.
@@ -406,74 +446,84 @@ struct NestedWriteError {
 }
 
 impl NestedWriteError {
-    fn payload(&self) -> Value {
-        let path = self
-            .path
-            .iter()
-            .map(EvaluatedAccessSegment::to_json)
-            .collect::<Vec<_>>();
-        let source_span = json!({
-            "start": self.source_span.start,
-            "end": self.source_span.end,
-            "unit": "unicode_scalar",
-            "provenance": "authored",
-        });
+    fn payload(&self) -> NestedWritePayload<'_> {
+        let mut payload = NestedWritePayload {
+            actual_kind: None,
+            binding: &self.binding,
+            code: "",
+            expected_kind: None,
+            index: None,
+            length: None,
+            message: String::new(),
+            operation: "nested_write_vivification",
+            path: &self.path,
+            reason: None,
+            resolved_index: None,
+            segment_index: self.segment_index,
+            source_span: NestedWriteDiagnosticSpan {
+                end: self.source_span.end,
+                provenance: "authored",
+                start: self.source_span.start,
+                unit: "unicode_scalar",
+            },
+        };
         match &self.failure {
             NestedWriteFailure::InvalidSegment {
                 actual_kind,
                 reason,
-            } => json!({
-                "code": "nested_write_segment_invalid",
-                "operation": "nested_write_vivification",
-                "binding": self.binding,
-                "segment_index": self.segment_index,
-                "path": path,
-                "actual_kind": actual_kind,
-                "reason": reason,
-                "source_span": source_span,
-                "message": format!(
+            } => {
+                payload.code = "nested_write_segment_invalid";
+                payload.actual_kind = Some(actual_kind);
+                payload.reason = Some(reason);
+                payload.message = format!(
                     "nested write segment {} for binding '{}' must evaluate to a string or nonnegative integer; got {} ({})",
                     self.segment_index, self.binding, actual_kind, reason,
-                ),
-            }),
+                );
+            }
             NestedWriteFailure::KindConflict {
                 expected_kind,
                 actual_kind,
-            } => json!({
-                "code": "nested_write_kind_conflict",
-                "operation": "nested_write_vivification",
-                "binding": self.binding,
-                "segment_index": self.segment_index,
-                "path": path,
-                "expected_kind": expected_kind,
-                "actual_kind": actual_kind,
-                "source_span": source_span,
-                "message": format!(
+            } => {
+                payload.code = "nested_write_kind_conflict";
+                payload.actual_kind = Some(actual_kind);
+                payload.expected_kind = Some(expected_kind);
+                payload.message = format!(
                     "nested write segment {} for binding '{}' requires {}; found {}",
                     self.segment_index, self.binding, expected_kind, actual_kind,
-                ),
-            }),
-            NestedWriteFailure::ArrayGap { index, length } => json!({
-                "code": "nested_write_array_gap",
-                "operation": "nested_write_vivification",
-                "binding": self.binding,
-                "segment_index": self.segment_index,
-                "path": path,
-                "index": index,
-                "length": length,
-                "source_span": source_span,
-                "message": format!(
+                );
+            }
+            NestedWriteFailure::ArrayGap { index, length } => {
+                payload.code = "nested_write_array_gap";
+                payload.index = Some(NestedWriteDiagnosticIndex::Unsigned(*index));
+                payload.length = Some(*length);
+                payload.message = format!(
                     "nested write segment {} for binding '{}' cannot create array index {} at length {}",
                     self.segment_index, self.binding, index, length,
-                ),
-            }),
+                );
+            }
+            NestedWriteFailure::ArrayUnderflow {
+                index,
+                length,
+                resolved_index,
+            } => {
+                payload.code = "nested_write_array_underflow";
+                payload.index = Some(NestedWriteDiagnosticIndex::Signed(*index));
+                payload.length = Some(*length);
+                payload.resolved_index = Some(*resolved_index);
+                payload.message = format!(
+                    "nested write segment {} for binding '{}' cannot select array index {} at length {} (resolved index {})",
+                    self.segment_index, self.binding, index, length, resolved_index,
+                );
+            }
         }
+        payload
     }
 }
 
 impl std::fmt::Display for NestedWriteError {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(formatter, "{}", self.payload())
+        let encoded = serde_json::to_string(&self.payload()).map_err(|_| std::fmt::Error)?;
+        formatter.write_str(&encoded)
     }
 }
 
@@ -4782,7 +4832,8 @@ impl Engine {
         let mut root = if root_was_present {
             ctx.get_bare_value(base)
         } else {
-            Self::empty_container_for(&evaluated_segments[0])
+            Self::empty_container_for(base, &evaluated_segments[0], &segments[0], 0, &[])
+                .map_err(|error| error.to_string())?
         };
         let mut path = Vec::new();
         Self::assign_nested_runtime_value(
@@ -4821,6 +4872,20 @@ impl Engine {
         Ok(evaluated)
     }
 
+    fn negative_array_index(number: f64) -> Option<i128> {
+        if !number.is_finite()
+            || number >= 0.0
+            || number.fract() != 0.0
+            || number < -(usize::MAX as f64)
+        {
+            return None;
+        }
+        // The float guard bounds conversion well inside i128. Recheck the exact
+        // platform bound after conversion because usize::MAX may round upward.
+        let index = number as i128;
+        (index >= -(usize::MAX as i128)).then_some(index)
+    }
+
     fn classify_write_path_segments(
         base: &str,
         authored: &[WritePathSegment],
@@ -4840,6 +4905,10 @@ impl Engine {
                     EvaluatedAccessSegment::Index(*number as usize)
                 }
                 RuntimeValue::Number(number) => {
+                    if let Some(index) = Self::negative_array_index(*number) {
+                        evaluated.push(EvaluatedAccessSegment::NegativeIndex(index));
+                        continue;
+                    }
                     let (actual_kind, reason) =
                         if number.is_finite() && number.fract() == 0.0 && *number < 0.0 {
                             ("integer", "negative_integer")
@@ -4892,10 +4961,26 @@ impl Engine {
         }
     }
 
-    fn empty_container_for(segment: &EvaluatedAccessSegment) -> RuntimeValue {
+    fn empty_container_for(
+        base: &str,
+        segment: &EvaluatedAccessSegment,
+        authored: &WritePathSegment,
+        segment_index: usize,
+        path: &[EvaluatedAccessSegment],
+    ) -> Result<RuntimeValue, NestedWriteError> {
         match segment {
-            EvaluatedAccessSegment::Key(_) => RuntimeValue::Hash(Vec::new()),
-            EvaluatedAccessSegment::Index(_) => RuntimeValue::Array(Vec::new()),
+            EvaluatedAccessSegment::Key(_) => Ok(RuntimeValue::Hash(Vec::new())),
+            EvaluatedAccessSegment::Index(_) => Ok(RuntimeValue::Array(Vec::new())),
+            EvaluatedAccessSegment::NegativeIndex(_) => Err(NestedWriteError {
+                binding: base.to_string(),
+                segment_index,
+                path: path.to_vec(),
+                source_span: authored.source_span,
+                failure: NestedWriteFailure::InvalidSegment {
+                    actual_kind: "integer",
+                    reason: "negative_integer",
+                },
+            }),
         }
     }
 
@@ -4939,10 +5024,16 @@ impl Engine {
 
                 let child_index = entries.iter().position(|(candidate, _)| candidate == key);
                 if child_index.is_none() {
-                    entries.push((
-                        key.clone(),
-                        Self::empty_container_for(&segments[segment_index + 1]),
-                    ));
+                    let mut child_path = path.clone();
+                    child_path.push(segment.clone());
+                    let child = Self::empty_container_for(
+                        base,
+                        &segments[segment_index + 1],
+                        &authored[segment_index + 1],
+                        segment_index + 1,
+                        &child_path,
+                    )?;
+                    entries.push((key.clone(), child));
                 }
                 let child_index = child_index.unwrap_or(entries.len() - 1);
                 path.push(segment.clone());
@@ -4958,7 +5049,7 @@ impl Engine {
                 path.pop();
                 result
             }
-            EvaluatedAccessSegment::Index(index) => {
+            EvaluatedAccessSegment::Index(_) | EvaluatedAccessSegment::NegativeIndex(_) => {
                 let RuntimeValue::Array(items) = current else {
                     return Err(NestedWriteError {
                         binding: base.to_string(),
@@ -4971,34 +5062,65 @@ impl Engine {
                         },
                     });
                 };
-                if *index > items.len() {
+                let index = match segment {
+                    EvaluatedAccessSegment::Index(index) => *index,
+                    EvaluatedAccessSegment::NegativeIndex(index) => {
+                        let resolved = usize::try_from(index.unsigned_abs())
+                            .ok()
+                            .and_then(|distance| items.len().checked_sub(distance));
+                        let Some(resolved) = resolved else {
+                            return Err(NestedWriteError {
+                                binding: base.to_string(),
+                                segment_index,
+                                path: path.clone(),
+                                source_span,
+                                failure: NestedWriteFailure::ArrayUnderflow {
+                                    index: *index,
+                                    length: items.len(),
+                                    resolved_index: items.len() as i128 + index,
+                                },
+                            });
+                        };
+                        resolved
+                    }
+                    EvaluatedAccessSegment::Key(_) => unreachable!("array selector branch"),
+                };
+                if index > items.len() {
                     return Err(NestedWriteError {
                         binding: base.to_string(),
                         segment_index,
                         path: path.clone(),
                         source_span,
                         failure: NestedWriteFailure::ArrayGap {
-                            index: *index,
+                            index,
                             length: items.len(),
                         },
                     });
                 }
                 if last {
-                    if *index == items.len() {
+                    if index == items.len() {
                         items.push(value);
                     } else {
-                        items[*index] = value;
+                        items[index] = value;
                     }
                     return Ok(());
                 }
 
-                if *index == items.len() {
-                    items.push(Self::empty_container_for(&segments[segment_index + 1]));
+                if index == items.len() {
+                    let mut child_path = path.clone();
+                    child_path.push(segment.clone());
+                    items.push(Self::empty_container_for(
+                        base,
+                        &segments[segment_index + 1],
+                        &authored[segment_index + 1],
+                        segment_index + 1,
+                        &child_path,
+                    )?);
                 }
                 path.push(segment.clone());
                 let result = Self::assign_nested_runtime_value(
                     base,
-                    &mut items[*index],
+                    &mut items[index],
                     segments,
                     authored,
                     segment_index + 1,
@@ -5263,6 +5385,26 @@ impl Engine {
         }
     }
 
+    fn array_selector_value(value: &RuntimeValue, selector: &RuntimeValue) -> RuntimeValue {
+        let RuntimeValue::Array(values) = value else {
+            return RuntimeValue::Undef;
+        };
+        let index = match selector {
+            RuntimeValue::Number(number)
+                if number.is_finite() && *number < 0.0 && number.fract() == 0.0 =>
+            {
+                Self::negative_array_index(*number)
+                    .and_then(|index| usize::try_from(index.unsigned_abs()).ok())
+                    .and_then(|distance| values.len().checked_sub(distance))
+            }
+            _ => Some(selector.as_number().unwrap_or(0.0) as usize),
+        };
+        index
+            .and_then(|index| values.get(index))
+            .cloned()
+            .unwrap_or(RuntimeValue::Undef)
+    }
+
     fn scalar_held_array_snapshot(ctx: &RuntimeContext, name: &str) -> Option<Vec<RuntimeValue>> {
         if ctx.descriptor_scalar_bare_read(name) {
             return None;
@@ -5310,16 +5452,8 @@ impl Engine {
                     _ => RuntimeValue::Undef,
                 },
                 AccessSegment::Index { expr } => {
-                    let index = self
-                        .eval_expr(expr, ctx, rule_label)?
-                        .as_number()
-                        .unwrap_or(0.0) as usize;
-                    match current {
-                        RuntimeValue::Array(items) => {
-                            items.into_iter().nth(index).unwrap_or(RuntimeValue::Undef)
-                        }
-                        _ => RuntimeValue::Undef,
-                    }
+                    let index = self.eval_expr(expr, ctx, rule_label)?;
+                    Self::array_selector_value(&current, &index)
                 }
             };
         }
@@ -5754,8 +5888,10 @@ impl Engine {
             Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
-                let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
-                Ok(Self::array_index_value(&ctx.get_bare_value(name), idx))
+                Ok(Self::array_selector_value(
+                    &ctx.get_bare_value(name),
+                    &idx_val,
+                ))
             }
             Expr::NestedAccess { base, segments } => {
                 self.eval_access_value(ctx.get_bare_value(base), segments, ctx, rule_label)
@@ -10305,14 +10441,19 @@ mod tests {
     #[test]
     fn indexed_var_preserves_existing_read_index_coercion() {
         let engine = Engine::new(compile(&parse_spec("Top:\n").unwrap()).unwrap());
-        // These are the existing Rust read rules, not the stricter write selectors.
+        // Whole negative numbers select from the tail; other existing read
+        // coercions remain distinct from the stricter write selectors.
         for (index, expected) in [
             (RuntimeValue::Number(0.0), serde_json::json!("a")),
             (RuntimeValue::Number(1.0), serde_json::json!("b")),
             (RuntimeValue::Number(9.0), Value::Null),
-            (RuntimeValue::Number(-1.0), serde_json::json!("a")),
+            (RuntimeValue::Number(-1.0), serde_json::json!("b")),
+            (RuntimeValue::Number(-2.0), serde_json::json!("a")),
+            (RuntimeValue::Number(-3.0), Value::Null),
+            (RuntimeValue::Number(-1.5), serde_json::json!("a")),
             (RuntimeValue::Number(1.9), serde_json::json!("b")),
             (RuntimeValue::Scalar("1".into()), serde_json::json!("b")),
+            (RuntimeValue::Scalar("-1".into()), serde_json::json!("a")),
             (RuntimeValue::Scalar("bad".into()), serde_json::json!("a")),
             (RuntimeValue::Undef, serde_json::json!("a")),
         ] {
@@ -12621,6 +12762,218 @@ Boundary: /END/
                 RuntimeValue::Hash(Vec::new())
             );
         }
+    }
+
+    #[test]
+    fn signed_array_frozen_arithmetic_read_and_write_boundaries() {
+        let authority: Value = serde_json::from_str(include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../capability_conformance/signed_array_selector_contract.json"
+        )))
+        .unwrap();
+        let engine = nested_write_test_engine();
+        for case in authority["arithmetic_cases"].as_array().unwrap() {
+            let length = case["length"].as_u64().unwrap() as usize;
+            let index = case["index"].as_i64().unwrap();
+            let original = RuntimeValue::Array(
+                (0..length)
+                    .map(|index| RuntimeValue::Number(index as f64))
+                    .collect(),
+            );
+            let mut ctx = RuntimeContext::new("x");
+            ctx.set_scalar("tree", original.clone());
+            let read = receiver_mutation_expr(&format!("tree[{index}]"));
+            let actual = engine.eval_expr(&read, &mut ctx, "Top").unwrap();
+            let expected = if case["expected"]["readable"] == true {
+                RuntimeValue::Number(case["expected"]["resolved_index"].as_f64().unwrap())
+            } else {
+                RuntimeValue::Undef
+            };
+            assert_eq!(actual, expected, "{} read", case["id"]);
+            assert_eq!(ctx.get_bare_value("tree"), original, "read is pure");
+            let write = receiver_mutation_expr(&format!("tree[{index}] = 99"));
+            let result = engine.eval_expr(&write, &mut ctx, "Top");
+            if case["expected"]["writable"] == true {
+                let mut expected = original.clone();
+                let RuntimeValue::Array(values) = &mut expected else {
+                    unreachable!()
+                };
+                let resolved = case["expected"]["resolved_index"].as_u64().unwrap() as usize;
+                if resolved == length {
+                    values.push(RuntimeValue::Number(99.0));
+                } else {
+                    values[resolved] = RuntimeValue::Number(99.0);
+                }
+                assert_eq!(result.unwrap(), expected, "{} write", case["id"]);
+                assert_eq!(ctx.get_bare_value("tree"), expected);
+            } else {
+                let payload: Value = serde_json::from_str(&result.unwrap_err()).unwrap();
+                assert_eq!(payload["index"], index);
+                assert_eq!(payload["length"], length);
+                assert_eq!(
+                    payload["code"],
+                    if index < 0 {
+                        "nested_write_array_underflow"
+                    } else {
+                        "nested_write_array_gap"
+                    }
+                );
+                assert_eq!(ctx.get_bare_value("tree"), original);
+            }
+        }
+    }
+
+    #[test]
+    fn signed_write_unicode_diagnostic_is_exact() {
+        let engine = nested_write_test_engine();
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash(
+            "tree",
+            vec![(
+                "é".into(),
+                RuntimeValue::Array(vec![RuntimeValue::Number(1.0)]),
+            )],
+        );
+        let error = engine
+            .eval_expr(
+                &receiver_mutation_expr(r#"tree["é"][-2] = 99"#),
+                &mut ctx,
+                "Top",
+            )
+            .unwrap_err();
+        let payload: Value = serde_json::from_str(&error).unwrap();
+        assert_eq!(
+            payload,
+            json!({
+                "code": "nested_write_array_underflow", "operation": "nested_write_vivification",
+                "binding": "tree", "segment_index": 1, "path": ["é"], "index": -2,
+                "length": 1, "resolved_index": -1,
+                "source_span": {"start": 10, "end": 12, "unit": "unicode_scalar", "provenance": "authored"},
+                "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+            })
+        );
+    }
+
+    #[test]
+    #[cfg(target_pointer_width = "64")]
+    fn signed_write_invalid_later_segment_retains_exact_wide_authored_prefix() {
+        #[derive(serde::Deserialize)]
+        struct Diagnostic {
+            code: String,
+            path: Vec<i128>,
+            segment_index: usize,
+        }
+        let engine = nested_write_test_engine();
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_array("tree", vec![RuntimeValue::Number(10.0)]);
+        let error = engine
+            .eval_expr(
+                &receiver_mutation_expr("tree[-18446744073709549568][true] = 99"),
+                &mut ctx,
+                "Top",
+            )
+            .unwrap_err();
+        let diagnostic: Diagnostic = serde_json::from_str(&error).unwrap();
+        assert_eq!(diagnostic.code, "nested_write_segment_invalid");
+        assert_eq!(diagnostic.segment_index, 1);
+        assert_eq!(diagnostic.path, vec![-18446744073709549568i128]);
+        assert_eq!(ctx.get_bare_value("tree").to_json(), json!([10]));
+    }
+
+    #[test]
+    fn signed_write_failures_keep_effects_without_partial_paths() {
+        let engine = nested_write_test_engine();
+        for (source, expected_audit, expected_tree, code) in [
+            (
+                r#"tree[{ push(audit,"first"); dispatch_span() }][{ push(audit,"later"); -1 }] = { push(audit,"rhs"); 99 }"#,
+                json!(["first"]),
+                json!([10]),
+                "progressive_span_binding_required",
+            ),
+            (
+                r#"tree[{ push(audit,"first"); -1 }] = { push(audit,"rhs"); dispatch_span() }"#,
+                json!(["first", "rhs"]),
+                json!([10]),
+                "progressive_span_binding_required",
+            ),
+            (
+                r#"tree[-1]["new"][-1] = { push(audit,"rhs"); tree=[{}]; 99 }"#,
+                json!(["rhs"]),
+                json!([{}]),
+                "nested_write_segment_invalid",
+            ),
+            (
+                r#"tree[-3] = { push(audit,"rhs"); tree=[10,20]; 99 }"#,
+                json!(["rhs"]),
+                json!([10, 20]),
+                "nested_write_array_underflow",
+            ),
+        ] {
+            let mut ctx = RuntimeContext::new("x");
+            ctx.set_array("tree", vec![RuntimeValue::Number(10.0)]);
+            let error = engine
+                .eval_expr(&receiver_mutation_expr(source), &mut ctx, "Top")
+                .unwrap_err();
+            assert!(error.contains(code), "{source}: {error}");
+            assert_eq!(ctx.get_bare_value("audit").to_json(), expected_audit);
+            assert_eq!(ctx.get_bare_value("tree").to_json(), expected_tree);
+        }
+    }
+
+    #[test]
+    fn signed_write_guard_precedes_selector_and_rhs_effects() {
+        let engine = nested_write_test_engine();
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_array("tree", vec![RuntimeValue::Number(10.0)]);
+        let error = engine.eval_expr(&receiver_mutation_expr(
+            r#"tree.map_leaves!() { tree[{ push(audit,"selector"); -1 }] = { push(audit,"rhs"); 99 }; return(value) }"#,
+        ), &mut ctx, "Top").unwrap_err();
+        let payload: Value = serde_json::from_str(&error).unwrap();
+        assert_eq!(payload["code"], "receiver_mutation_reentrant");
+        assert_eq!(payload["attempt"], "nested_write");
+        assert!(!ctx.has_bare_binding("audit"));
+        assert_eq!(ctx.get_bare_value("tree").to_json(), json!([10]));
+    }
+
+    #[test]
+    fn signed_write_all_aggregate_boundaries_are_independently_detached() {
+        let engine = nested_write_test_engine();
+        let mut initial =
+            RuntimeValue::Array(vec![RuntimeValue::Array(vec![RuntimeValue::Number(1.0)])]);
+        let mut rhs = RuntimeValue::Array(vec![RuntimeValue::Number(2.0)]);
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_scalar("tree", initial.clone());
+        ctx.set_scalar("payload", rhs.clone());
+        let mut result = engine
+            .eval_expr(
+                &receiver_mutation_expr("tree[-1] = payload"),
+                &mut ctx,
+                "Top",
+            )
+            .unwrap();
+        fn replace_nested(value: &mut RuntimeValue, replacement: f64) {
+            let RuntimeValue::Array(outer) = value else {
+                panic!("outer array")
+            };
+            let RuntimeValue::Array(inner) = &mut outer[0] else {
+                panic!("inner array")
+            };
+            inner[0] = RuntimeValue::Number(replacement);
+        }
+        replace_nested(&mut initial, 11.0);
+        let RuntimeValue::Array(values) = &mut rhs else {
+            panic!("RHS array")
+        };
+        values[0] = RuntimeValue::Number(22.0);
+        ctx.set_scalar("payload", rhs.clone());
+        replace_nested(&mut result, 33.0);
+        let mut committed = ctx.get_bare_value("tree");
+        replace_nested(&mut committed, 44.0);
+        ctx.set_scalar("tree", committed);
+        assert_eq!(initial.to_json(), json!([[11]]));
+        assert_eq!(ctx.get_bare_value("payload").to_json(), json!([22]));
+        assert_eq!(result.to_json(), json!([[33]]));
+        assert_eq!(ctx.get_bare_value("tree").to_json(), json!([[44]]));
     }
 
     #[test]

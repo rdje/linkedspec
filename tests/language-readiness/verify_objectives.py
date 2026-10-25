@@ -1,8 +1,8 @@
 """Reconcile historical objective evidence without claiming fresh runtime execution.
 
-Run with tools/run_python_project_data.sh. Current runtime/test inputs must match
-the latest audited milestone. Exact owner-bound CI insertions must reconstruct
-the historical bytes; documentation remains revision-bound.
+Run with tools/run_python_project_data.sh. Runtime/test inputs must match the
+latest audited milestone or an exact owner-bound source evolution. Historical
+hashes and executions stay fixed; current runtime proof is separately owned.
 """
 
 import gzip
@@ -56,6 +56,10 @@ COUNT_FIRST_TABLE = 'tests/language-readiness/count-first-regression-evolution.j
 COUNT_FIRST_TABLE_SHA256 = '5169035f3fbab2b0f5a853b902a9c5ec2fba87ae10ab1cc834c3f8dfa9d6e814'
 COUNT_FIRST_BEFORE = 'a8bd8620a4e545b3e472561bfea90c656ab69923'
 COUNT_FIRST_MARKER = b'ref($__ls_count)'
+RUST_SIGNED_OWNER = 'TYPE-REFERENCE-BOOK.1.2.17.3'
+RUST_SIGNED_SOURCE = 'rust/linkedspec-runtime/src/engine.rs'
+RUST_SIGNED_BEFORE = '5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009'
+RUST_SIGNED_AFTER = '0a5a6e7091e2daef5f84942db839829ce98e5a60f62c3d83ce204538c95a5772'
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -896,6 +900,20 @@ def verify_boundary_contract_evolution(source, contents, historical_hash):
             "scope": "exact two committed whole-file factory/dependency changes, then decoder import and quoted-boundary loop inverse; original historical bytes recovered; no fresh objective execution"}
 
 
+def verify_rust_signed_evolution(source, contents, historical_hash):
+    require(source == RUST_SIGNED_SOURCE, f"unapproved Rust runtime source: {source}")
+    require(historical_hash == RUST_SIGNED_BEFORE,
+            f"Rust runtime historical boundary mismatch: {source}")
+    # This is a whole-source admission, not a wildcard or blind replacement.
+    # Both images are retained by the owner's actual native/generated proof;
+    # any further executable or test-byte change needs its own reviewed owner.
+    require(digest(contents) == RUST_SIGNED_AFTER,
+            f"unreviewed Rust runtime drift: {source}")
+    return {"path": source, "historical": historical_hash,
+            "current": digest(contents), "owner": RUST_SIGNED_OWNER,
+            "scope": "exact signed-selector source image; historical runtime results unchanged; fresh Rust readiness compatibility is separately retained"}
+
+
 def audit_evidence(read=read_relative):
     checkpoints, sources, logs, milestones = {}, {}, {}, {}
     references = 0
@@ -951,10 +969,14 @@ def audit_evidence(read=read_relative):
                 require(logs[log] == expected, f"conflicting log digest: {log}")
             logs[log] = expected
 
-    documentation_updates, governance_updates = [], []
+    documentation_updates, governance_updates, runtime_source_updates = [], [], []
     for source, row in sources.items():
         current = digest(read(source))
         if current != row["sha256"]:
+            if source == RUST_SIGNED_SOURCE:
+                runtime_source_updates.append(verify_rust_signed_evolution(
+                    source, read(source), row["sha256"]))
+                continue
             if source == "tools/run_ci_local.sh":
                 governance_updates.append(verify_governance_evolution(
                     source, read(source), row["sha256"]))
@@ -1044,6 +1066,7 @@ def audit_evidence(read=read_relative):
             "latest_source_inputs": sources, "retained_log_hashes": logs,
             "documentation_updates": documentation_updates,
             "governance_updates": governance_updates, "corpora": corpora,
+            "runtime_source_updates": runtime_source_updates,
             "matrices": matrices,
             "limits": "Evidence integrity and independent scalar slicing; runtime execution is historical per-leaf proof. No new capability or objective promotion."}
 
@@ -1313,9 +1336,32 @@ def falsify(report):
                 controls_by_source[source] += 1
             else:
                 raise ValueError("governance corruption control did not reject")
+    runtime_controls = {}
+    for row in report.get("runtime_source_updates", []):
+        source = row["path"]
+        current = read_relative(source)
+        altered = (
+            current + b"\n// unreviewed runtime edit\n",
+            current.replace(b"fn negative_array_index(", b"fn unreviewed_negative_array_index(", 1),
+            current.replace(b"resolved_index: items.len() as i128 + index,",
+                            b"resolved_index: (items.len() as f64 + *index as f64) as i128,", 1),
+        )
+        require(all(candidate != current for candidate in altered),
+                "runtime controls must change actual bytes")
+        for candidate in altered:
+            try:
+                verify_rust_signed_evolution(source, candidate, row["historical"])
+            except ValueError as error:
+                require(str(error) == f"unreviewed Rust runtime drift: {source}",
+                        "unrelated error substituted for runtime rejection")
+            else:
+                raise ValueError("runtime corruption control did not reject")
+        runtime_controls[source] = len(altered)
     return {"corrupted_inputs_rejected": list(targets), "outside_paths_rejected": 2,
             "governance_mutations_rejected": governance_controls,
-            "governance_mutations_by_source": controls_by_source}
+            "governance_mutations_by_source": controls_by_source,
+            "runtime_source_mutations_rejected": sum(runtime_controls.values()),
+            "runtime_source_mutations_by_source": runtime_controls}
 
 
 def verify_summary(report, text):

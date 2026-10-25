@@ -11,14 +11,53 @@ answers:
   - "when does Rust evaluate nested write segments and RHS"
   - "does Rust nested write distinguish absent binding and null"
   - "are Rust nested write results detached"
-date: 2026-09-08
-status: implemented under FUTURE-PARITY-BACKLOG.19.3.1; portable capability admitted under .19.7
+  - "how does Rust preserve signed diagnostic integers beyond i64"
+  - "why do Rust callable nested-write errors have a codeblock prefix"
+  - "are Rust action error spans relative to outer brace padding"
+date: 2026-10-25
+status: v1 admitted under FUTURE-PARITY-BACKLOG.19.7; signed extension implemented under TYPE-REFERENCE-BOOK.1.2.17.3, portable extension pending17.7
 tags: [rust, dsl, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "Historical native milestone evidence from 2026-09-01; the September 7 updates below are reading and neutral verification only. FUTURE-PARITY-BACKLOG.19.3.1 replaces Rust's static key/index split with WritePathSegment and one AssignNestedAccess node for one or many authored segments. Direct Engine entry validates typed nodes; supported generated carriers validate through emission and decoded compiled state before engine execution. Runtime proof covers the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure contract, evaluation order/failure, absent versus bound-null state, fresh user functions, dense arrays, post-evaluation snapshots, rollback, reads, detachment, and exact typed diagnostic fields. The 105-fixture corpus and 197-test runtime integration suite pass."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test write_vivification_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test integration_test && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test corpus_oracle"
 ---
 
-# Rust write-vivification runtime
+# Current signed Rust extension
+
+Child17.3 preserves the v1 node/carriers and adds conditionally valid negative integer
+segments. `NegativeIndex(i128)` retains the authored value; the isolated walk checks
+array kind and resolves each position against its encountered post-expression length.
+Missing negative roots/children retain invalid-segment/negative_integer; present null
+and wrong kinds remain conflicts. Underflow carries exact index, length, resolved_index
+and authored prefix. Negative selectors never append, create arrays or invent fillers.
+All segments then RHS evaluate once before classification/walk; global invalid kinds
+precede structural failures, and existing guard identity, effects, atomicity and copies
+remain. The `usize` magnitude check is repeated after exact conversion because the float
+representation of usize::MAX can round upward. Broader positive-index/Number saturation
+remains P1 startup55.1, next after this leaf; this path does not close that defect.
+
+Nested-write diagnostics serialize a private typed payload directly to the original
+String channel. Its signed fields/path use serde i128 without a generic Value round-trip
+or Cargo feature change. Generic JSON Value observation can coarsen wide integers;
+the regression consumes original strings with typed fields, and Python independently
+decodes exact integer tokens. Existing alphabetical v1 field order/messages remain.
+Callable invocation still prefixes a nested failure with `codeblock 'name': `; the
+observer requires the explicitly expected name before examining the inner JSON, keeping
+the complete original error. No runtime envelope policy changes here.
+
+Public rule parsing trims outer action whitespace into the CodeBlock source before
+compilation. Nested-write spans are Unicode-scalar positions in that action source,
+not full-spec bytes or brace padding. The Unicode probe distinguishes scalar26 from
+byte28 and rejected padded scalar27, and varies leading/trailing spaces and newlines.
+Standalone ActionIR retains its own containing source coordinates.
+
+Current consumers: `rust/linkedspec-runtime/tests/signed_array_selector_contract.rs`
+and `tests/signed-array-rust/cases.json`; retained dated proof and qualifications:
+`docs/checkpoints/signed-array-rust/`. Reverify through the Cargo consumer and readonly
+`publish.py`; exact staged canonical CI is the admission boundary. Other backends and
+portable signed admission stay separately owned. Installed SDK/OS and public prepared
+RGX outputs are prerequisites; no dependency-internal or whole-SDK replay is claimed.
+
+# Historical v1 runtime and reading checkpoints
 
 Rust now consumes the unchanged `linkedspec-write-vivification-v1` authority. `WritePathSegment` retains each
 segment's ordinary expression, exact source text, and half-open Unicode-scalar span. One- and many-segment writes
@@ -55,75 +94,33 @@ counts above remain the 2026-09-01 milestone evidence and are not rerun by this 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[write-vivification-perl-reference]], [[write-map-leaves-neutral-composition]], and ADR `0036`.
 
-## September 7 diagnostic-definition reading
+## Dated reading checkpoints
 
-`SESSION-STARTUP-READING.3.3.15` reads the complete `NestedWriteError` formatter
-in the engine window. Its three failure variants serialize binding, evaluated
-path, segment index and authored Unicode-scalar source span, adding the exact
-kind/reason or index/length fields for that failure. Display emits deterministic
-JSON through the existing String channel. This is diagnostic-definition proof;
-assignment evaluation, snapshot and commit implementations remain later reading.
-Fresh neutral write proof again passes 5/7 syntax, 11 successes, 16 structural
-failures, three evaluation failures, three read exclusions, eight compositions
-and 105 mutations. The native milestone counts above are not freshly rerun.
+The exact previous card, including every original reading window and repeated neutral
+result, remains `git show 691d2d87690ce3f9052c1d032a3e862ee5d76211:docs/knowledge/write-vivification-rust-runtime.md`.
+These checkpoints establish source/assertion definitions, with no fresh native milestone
+rerun. Their neutral proof retains5 AST/7 syntax,11 success/16 structural failures,
+3 evaluation failures/3 read exclusions,8 compositions and105 mutations.
 
-`SESSION-STARTUP-READING.3.3.16` confirms the direct entry checks in engine lines
-2631–2669 and, as supporting bounded inspection, source-emitter lines 355–420 and
-997–1030: emission and decoded generated state both validate nested writes and
-receiver mutations. This qualifies validation ownership, without claiming that every
-low-level engine method independently rejects arbitrary unvalidated compiled input.
-
-Checkpoint `SESSION-STARTUP-READING.3.3.17` reads the assignment coordinator and
-segment classifier. It rejects an empty segment list, evaluates all segments left to
-right and then RHS, classifies selectors, and only then reads binding presence/kind
-and its current value. String selectors remain keys; the numeric predicate checks
-finite/nonnegative/integral form, compares with `usize::MAX as f64`, then casts to
-`usize`. The exact rounded upper boundary is under `.55.1` review. Invalid selectors preserve
-their authored span and the already-classified path prefix.
-
-After recursive construction succeeds, the coordinator preserves an existing private
-array/hash store or writes the scalar-held root and returns that root. The recursive
-construction body begins at the next owned window, so its internal traversal and
-rollback details are not newly proved here. Fresh neutral write proof remains
-5/7 syntax, 11 successes, 16 structural failures and 105 mutations.
-
-Checkpoint `SESSION-STARTUP-READING.3.3.18` completes that recursive body at
-engine lines 4888–4986. Harray selection replaces or inserts the final key; an
-absent intermediate is created from the following selector. Array selection
-rejects index greater than length before indexing, appends at length, and replaces
-an existing final slot. Existing intermediates recurse without null replacement,
-so a wrong kind reports the current path prefix and authored segment span.
-The coordinator's detached root is published only after successful recursion.
-Read access separately coerces numeric indices and returns undef for absent or
-wrong-kind values; it neither invokes this writer nor creates containers.
-Fresh neutral proof retains the counts above; no native carrier suite is rerun.
-
-## September 7 engine-test suffix reading
-
-`SESSION-STARTUP-READING.3.3.23` reads the engine tests through EOF. Unlike value-only smoke tests,
-these assert the exact segment-0/segment-1/RHS audit order, a structural failure's code/path/index/length,
-and preservation of an RHS rebind without publishing a partial path. The detachment test independently
-mutates initial, RHS, returned and stored aggregates. Three expression-failure positions assert exactly
-the completed audit prefix and unchanged target; three read controls check absent binding, missing child
-and wrong-kind state without creation. This is assertion-definition evidence; the native suites were
-not rerun. Fresh neutral proof passes the same 105 mutations and frozen cases above.
-
-## September 8 write-vivification consumer reading
-
-`SESSION-STARTUP-READING.3.3.66` reconciles all 592 lines of
-`rust/linkedspec-runtime/tests/write_vivification_contract.rs`. Five parent tests
-cover frozen typed AST/syntax cases, native successful writes, exact structural
-failure fields, fresh function-local presence and one composed carrier fixture.
-The carrier fixture reconstructs both SpecFile and CompiledSpec, executes native
-and validated generated-plan routes, and rejects a corrupt path-segment kind at
-native entry and generated validation.
-
-That fixture also independently compiles an emitted module whose child test checks
-a computed string path producing `{"sections":[{"title":"Intro"}]}`. The temporary
-Cargo manifest uses the repository-relative `../../../linkedspec-runtime`
-dependency; the offline child must report successful termination. This is a real
-emitted compilation route for that fixture, not a claim that all frozen cases run
-through every carrier. The child workspace is removed by its owned Drop helper.
-Fresh neutral proof retains 5/7 AST/syntax, eleven successes, sixteen structural
-failures, three evaluation failures, three read exclusions, eight compositions and
-105 mutations. No native or child Cargo suite is freshly rerun by this checkpoint.
+- Startup3.3.15 reads the three v1 formatter variants: exact binding/path/segment/span,
+  kind/reason or index/length, deterministic String JSON; no traversal proof yet.
+- Startup3.3.16 reads engine2631–2669 and supporting emitter355–420/997–1030:
+  validated entry/emission/decode reject malformed nodes; raw low-level generated
+  contexts rely on caller validation rather than independently repeating it.
+- Startup3.3.17 reads ordered segments then RHS, classification, post-expression
+  presence/kind snapshot and store-preserving single commit. Its positive numeric
+  `<= usize::MAX as f64` cast has the separately owned55.1 rounded-boundary risk.
+- Startup3.3.18 completes engine4888–4986 recursion: replace/insert harray keys,
+  create absent children from the next selector, reject positive gaps, append at
+  exact length, preserve null/wrong-kind conflicts and publish only after success.
+  The old pure numeric read cast is superseded by signed17.3 above.
+- Startup3.3.23 reads tests through EOF: exact segment0/segment1/RHS audit,
+  structural fields and RHS-rebind preservation, independently mutated aggregate
+  boundaries, three expression-stop positions and three noncreating read controls.
+- Startup3.3.66 reconciles all592 lines of the original write consumer. Five parent
+  tests cover frozen AST/syntax, native successes/failures, fresh function presence
+  and one composed carrier. That carrier reconstructs SpecFile/CompiledSpec,
+  validates native/generated-plan state and rejects corrupt segment kind. Its
+  separately compiled emitted child checks one computed path yielding
+  `{"sections":[{"title":"Intro"}]}`, using relative `../../../linkedspec-runtime`
+  and an owned Drop workspace. It does not run every frozen case on every carrier.

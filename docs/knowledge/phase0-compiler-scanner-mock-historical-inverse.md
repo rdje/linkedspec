@@ -9,7 +9,8 @@ answers:
   - "how are numeric Phase0 value regressions reconciled with historical evidence"
   - "how are drop key Phase0 regressions reconciled with historical evidence"
   - "why does adding a Perl CI test fail the historical governance registration audit"
-date: 2026-10-24
+  - "why does the historical objective audit reject Rust engine changes"
+date: 2026-10-25
 status: current
 tags: [historical-audit, phase0, source-evolution, compiler, claims]
 evidence: "Scanner five source controls/60 dated denials; evaluated368+210, numeric578+66, drop644+6. Archive134/84613241/22 and zero log/write escapes; auditor faults/table identity restore."
@@ -50,3 +51,10 @@ verify_objectives.py. Strip these first to restore the earlier PUSH
 adjacency and original CI hash. Missing/duplicate/disabled registrations
 still reject. Proof: docs/checkpoints/signed-array-perl-ci/read.py.
 Its book containment removes12 empty heading separators; all90 output files stay byte/mode-identical.
+
+Rust17.3 admits only the exact engine source pair pinned in verify_objectives.py,
+with its owner recorded separately from unchanged historical hashes/results.
+Unreviewed source bytes reject; actual guard removal admits drift and the original
+recovery driver catches it. Three source mutations/four direct denials restore.
+Fresh unchanged Rust readiness passes parent6 and emitted4/4/3 tests with actual
+source/executable custody. Dated evidence: docs/checkpoints/signed-array-rust-admission/.

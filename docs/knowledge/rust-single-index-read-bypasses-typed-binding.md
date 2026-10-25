@@ -1,6 +1,6 @@
 ---
 id: rust-single-index-read-bypasses-typed-binding
-title: "Rust single-index reads use current typed array bindings after startup .88"
+title: "Rust indexed reads preserve typed bindings and support signed array positions"
 answers:
   - "why does Rust items[0] return null after items is assigned an array"
   - "why does an indexed Rust hash key become an empty string"
@@ -9,49 +9,42 @@ answers:
   - "do Rust array index reads observe rebinding and saved array snapshots"
   - "why does Rust items[-1] return its first entry"
   - "which existing Rust negative index coercion test must the signed transition replace"
-date: "2026-10-23"
-status: "typed-binding repair preserved; legacy negative coercion awaits signed child17.3"
+date: "2026-10-25"
+status: "signed implementation; portable admission remains child17.7"
 tags: [rust, bindings, arrays, indexed-read, hash, SESSION-STARTUP-READING]
-evidence: "Original startup88 sources, seventeen before/after pairs, binary identities and complete dated proof remain retained; full original card: git show 92c98fb3de0f8392abde59043bd6f67ba0199452:docs/knowledge/rust-single-index-read-bypasses-typed-binding.md. Intake17.0 retains32 native sources, the actual Rust CLI binary and a direct negative-value/index calibration. No new portable selector admission."
-reverify: "Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission."
+evidence: "Startup88 and intake17.0 remain dated evidence. TYPE-REFERENCE-BOOK.1.2.17.3 retains complete old/new Rust sources, actual native/emitted executables, raw diagnostic channels, independent target readers and explicit existing read-order/coercion controls under docs/checkpoints/signed-array-rust/."
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test signed_array_selector_contract; dated evidence: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-rust/publish.py"
 ---
 
-# Rust indexed reads: typed bindings and pending signed selectors
+# Rust indexed reads
 
-Before startup .88, `IndexedVar` read the private array map while ordinary
-assignment stored the typed value in the scalar map. Consequently `items=["a"];
-return(items[0])` returned null, and an indexed value used as a computed hash key
-became an empty string. Bare binding and `first()` controls agreed with Perl.
+`IndexedVar` resolves the current typed array binding after evaluating its selector.
+The older startup88 repair replaced a private-array-map read that missed scalar-held
+arrays: `items=["a"]; items[0]` returned null and a computed harray key became empty.
+Assignment, set, append, split and rebinding now observe the typed value; stale private
+storage cannot override it. Missing/non-array reads are pure Undef. Saved snapshots
+are detached. The public positive example is `examples/indexed-value-reads.spec`.
 
-The .88 repair reads `ctx.get_bare_value(name)` and selects a cloned element from
-that current typed array. It observes assignment, set, append, split and later
-rebinding; stale private storage cannot override the value. Missing/non-array
-reads return Undef and create no state. The index expression still runs before
-the binding is resolved. Saved binding snapshots remain detached.
+Signed child17.3 routes both single and nested/value-result array reads through
+`array_selector_value`: a supported finite whole negative number selects `length+index`
+only within the existing array, otherwise Undef. `[-1]` selects the last entry.
+Single-index receiver lookup still follows selector effects; nested/value access retains
+its earlier receiver snapshot. Fractions, evaluated strings, null and other unrelated
+coercions retain their existing Rust behavior. Explicit quoted key access stays a key.
+Rust's `f64` model does not distinguish `-1` from `-1.0` as selector kinds.
 
-The original17-source before/after proof, five unchanged controls, complete
-runtime/emitted/book checks, command recipes, binary identities and historical
-counts remain unchanged in the startup88 checkpoints. The complete original
-card is `git show 92c98fb3de0f8392abde59043bd6f67ba0199452:docs/knowledge/rust-single-index-read-bypasses-typed-binding.md`.
-The positive public example remains `examples/indexed-value-reads.spec`.
-Rust grouped receiver access was a separate control; Perl grouped postfix
-remains separately owned by startup .87.4. No AST or serialized format changed.
+The original intake calibration `[-2,10,10,10,10]` described the old negative-to-usize
+cast, including underflow selecting element0. Its 32 sources, actual CLI binary and
+trace remain immutable. The permanent coercion test now expects tail selection for
+negative integers while preserving its fractional/string/undefined controls. Rebuild
+saved/emitted parsers after runtime updates. Portable signed admission remains17.7;
+Perl grouped postfix remains startup87.4, with no AST format change here.
 
-## October23 signed-index intake
+Exact former card and all startup88/intake reading details:
+`git show 691d2d87690ce3f9052c1d032a3e862ee5d76211:docs/knowledge/rust-single-index-read-bypasses-typed-binding.md`.
+That card points to the complete startup88 record at92c98fb3de0f8392abde59043bd6f67ba0199452,
+including its seventeen source pairs, five unchanged controls and runtime/emitted/book
+proof. Those historical counts are not new reruns.
 
-The retained public calibration returns `[-2,10,10,10,10]`: the variable remains
-negative, but negative selectors, including underflow, select element0.
-`IndexedVar` and `eval_access_value` convert evaluated numbers to `usize`.
-The existing `indexed_var_preserves_existing_read_index_coercion` test explicitly
-expects the first entry for -1. Its fractional, numeric-string, nonnumeric and
-undefined controls are existing Rust behavior, not a portable read policy.
-
-TYPE-REFERENCE-BOOK.1.2.17.3 owns replacing that negative behavior under the
-director's in-range tail rule, preserving unrelated coercion scope and the
-original evidence. Intake17.0 retains the source, actual CLI binary, full trace
-and native outcomes; it admits no signed support. Regenerate/rebuild emitted
-parsers after a runtime repair.
-
-Related: [[uniform-binding-neutral-contract]],
-[[terse-rust-duck-typed-assignment-parity]],
-[[rust-hash-separator-and-cat-arity-defects]].
+Related: [[uniform-binding-neutral-contract]], [[terse-rust-duck-typed-assignment-parity]],
+[[write-vivification-rust-runtime]], [[rust-hash-separator-and-cat-arity-defects]].

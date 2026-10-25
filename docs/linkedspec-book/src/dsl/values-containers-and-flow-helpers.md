@@ -510,10 +510,12 @@ Use the documented `matches(subject, /pattern/)` helper for multiline patterns. 
 ### Deferred indexed writes in Perl
 
 Perl callable bodies accept the same bracket assignments as ordinary actions. An unbound root can be created, but an explicitly assigned `undef` and an `undef` parameter remain present null values and cannot become containers. String selectors choose hashes, including quoted numeric strings. Integer selectors choose arrays: nonnegative indexes can replace or append at the exact length; negative indexes can replace an existing position. A literal boolean or null, a floating-point selector (including `-1.0`), or an aggregate or codeblock cannot select a container and reports `nested_write_segment_invalid`. Existing wrong container kinds report `nested_write_kind_conflict`; an index beyond the exact append position reports `nested_write_array_gap`.
-Perl native and independently emitted execution implement tail-relative reads and writes in ordinary actions and callable bodies: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. The frozen historical write-v1 authority stays unchanged. Other backend implementations and portable admission remain separately owned.
-#### Signed array selectors in Perl
+Perl and Rust native and independently emitted execution implement tail-relative reads and writes in ordinary actions and callable bodies: for size `L`, `[-n]` selects `[L-n]` when `L-n >= 0`. The frozen historical write-v1 authority stays unchanged. Other backend implementations and portable admission remain separately owned.
+<a id="signed-array-selectors-in-perl"></a>
 
-For an existing array of size `L`, a supported negative integer selector resolves to `L + index`. In a nonempty array, `[-1]` is the last entry, `[-2]` the one before it when present, and `[-L]` the first. Reads outside the array return `null` without creating state. The extension is available on Perl; it is not yet admitted portably.
+#### Signed array selectors in Perl and Rust
+
+For an existing array of size `L`, a supported negative integer selector resolves to `L + index`. In a nonempty array, `[-1]` is the last entry, `[-2]` the one before it when present, and `[-L]` the first. Reads outside the array return `null` without creating state. The extension is available on Perl and Rust; it is not yet admitted portably.
 
 For `[10,20,30]`, the current `[-1]` library-read results are:
 
@@ -521,12 +523,12 @@ For `[10,20,30]`, the current `[-1]` library-read results are:
 | --- | --- |
 | Ordinary Perl action | `30` |
 | Perl callable body | `30` |
-| Rust ordinary/callable read | `10`, from its legacy index coercion |
+| Rust ordinary/callable read | `30` |
 | Dart, Julia, PUC Lua and LuaJIT | `null` |
 
-The other-runtime rows retain the dated transition observations until their backend slices land. Perl negative writes now replace existing array entries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command failure protocol.
+Dart and Lua/Julia rows retain the dated transition observations until their backend slices land. Perl and Rust negative writes replace existing array entries. See [Perl error reporting](../public-api/integration-perl.md#handle-runtime-outcomes-explicitly) for the primary-command failure protocol.
 
-The ordinary Perl example returns `[30,[10,20,30]]` with input `x`:
+The ordinary example runs on Perl and Rust and returns `[30,[10,20,30]]` with input `x`:
 
 ```text
 {{#include ../../../../examples/negative-array-current-perl.spec}}
@@ -540,7 +542,7 @@ The callable example also returns `[30,[10,20,30]]`:
 
 #### Signed-selector contract and write examples
 
-Perl implements the following rule from `capability_conformance/signed_array_selector_contract.json`. The same rule governs the pending backend slices; it introduces no new assignment syntax.
+Perl and Rust implement the following rule from `capability_conformance/signed_array_selector_contract.json`. The same rule governs the pending backend slices; it introduces no new assignment syntax.
 
 | Existing array | Selector | Target read | Target write |
 | --- | --- | --- | --- |
@@ -568,7 +570,7 @@ The callable write uses each nested array's own length and returns `{"rows":[[1]
 {{#include ../../../../examples/negative-array-write-callable-perl.spec}}
 ```
 
-For example, writing `[-2]` into `[10]` fails with `nested_write_array_underflow`, `index = -2`, `length = 1` and `resolved_index = -1`; the binding stays `[10]`. Writing `[-1]` into an absent binding instead reports the existing invalid-segment diagnostic. A dynamic negative integer works like the literal; a dynamic string or a negative float retains its earlier read coercion behavior and is not promoted to an integer selector.
+For example, writing `[-2]` into `[10]` fails with `nested_write_array_underflow`, `index = -2`, `length = 1` and `resolved_index = -1`; the binding stays `[10]`. Writing `[-1]` into an absent binding instead reports the existing invalid-segment diagnostic. A dynamic negative integer works like the literal. Perl retains its separate integer/float distinction. Rust uses finite whole `f64` values, so `-1.0` also selects the last entry; fractional negatives and strings retain Rust's existing read coercions. This extension does not expand the numeric range or admit portable coercions. Rebuild saved or emitted parsers after updating the runtime.
 
 <a id="current-callable-literal-kind-limitation"></a>
 

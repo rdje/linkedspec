@@ -275,7 +275,7 @@ the Rust compiler to pick up parser fixes.
 
 Single-level reads such as `items[0]` use the current typed array binding on Perl
 and Rust. This applies after assignment, `set`, append, and split, including a
-later replacement of the binding. Use nonnegative integer indexes for portable
+later replacement of the binding. Perl and Rust support existing-position tail reads such as `items[-1]`; see [signed selectors](values-containers-and-flow-helpers.md#signed-array-selectors-in-perl-and-rust). Use nonnegative integer indexes for portable
 array reads; a bare index variable or an expression such as `items[add(0,1)]`
 selects an element too. An out-of-range element is `undef` (JSON `null`).
 

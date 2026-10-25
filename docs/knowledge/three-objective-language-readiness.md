@@ -14,7 +14,7 @@ answers:
   - "why does the historical objective audit reject the quoted boundary decoder"
   - "how does the historical audit admit the nested boundary recurrence"
   - "how does count first preserve historical Phase0 evidence"
-date: 2026-10-21
+date: 2026-10-25
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
 evidence: "Historical probes retain evidence, authoring costs and open defects; no completeness claim follows."
@@ -36,10 +36,10 @@ in-document repair. Need for indentation or additional staged operands remains
 unassessed; private dispatch is not a public helper.
 
 The audit's proof is current evidence integrity over historical runtime executions.
-It fails on latest executable drift and deliberately corrupted evidence, while
-recording documentation evolution separately. Its complete enumeration and input
+It rejects unreviewed executable drift and corrupted evidence; exact reviewed
+source evolution and documentation changes are reported separately. Its complete enumeration and input
 hashes are frozen in the owning checkpoint. This audit is an on-demand instrument,
-not an additional automatic runtime admission gate. Changed runtime inputs require
+run inside canonical artifact recovery, not a fresh runtime objective gate. Changed runtime inputs require
 the relevant ledger's fresh execution before a current claim advances.
 
 Subsequent `.1.2.2` registers a new structural checker in canonical CI. The audit

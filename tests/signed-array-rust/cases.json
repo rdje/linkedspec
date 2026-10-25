@@ -1,0 +1,2098 @@
+{
+  "authority": "capability_conformance/signed_array_selector_contract.json",
+  "scope": "Rust signed selectors; explicit existing read-order/coercion adjudications. Exact signed diagnostic expectations do not promise arbitrary-precision DSL arithmetic. Expanded public projections: all14 read cases and29 expression/structural write cases in ordinary/callable contexts; four guard/evaluation/identity cases have separate private/public probes. Perl-specific span projections are deliberately excluded; Rust exact Unicode source geometry is checked independently. The original40 before/after population is unchanged as a retained epoch.",
+  "adjudications": {
+    "read-receiver-retention": "Single IndexedVar preserves post-selector binding lookup; negative last selects92.",
+    "read-positive-receiver-retention": "Preserve post-selector lookup and index0 result91.",
+    "read-dynamic-quoted-key": "Preserve unrelated single-index hash coercion, returning null."
+  },
+  "cases": [
+    {
+      "id": "read-last",
+      "source": "Top: /x/\n I { items=[10,20,30]; return([items[-1],items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "read-first",
+      "source": "Top: /x/\n I { items=[10,20,30]; return(items[-3]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 10
+      }
+    },
+    {
+      "id": "read-before-last",
+      "source": "Top: /x/\n I { items=[10,20,30]; return(items[-2]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 20
+      }
+    },
+    {
+      "id": "read-dynamic",
+      "source": "Top: /x/\n I { items=[10,20,30]; chosen_index=-2; return(items[chosen_index]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 20
+      }
+    },
+    {
+      "id": "read-underflow",
+      "source": "Top: /x/\n I { items=[10,20,30]; return([items[-4],items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "read-empty",
+      "source": "Top: /x/\n I { items=[]; return([items[-1],items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          []
+        ]
+      }
+    },
+    {
+      "id": "read-mixed",
+      "source": "Top: /x/\n I { tree={\"rows\":[{\"v\":1},{\"v\":2}]}; return(tree[\"rows\"][-1][\"v\"]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 2
+      }
+    },
+    {
+      "id": "read-quoted-key",
+      "source": "Top: /x/\n I { tree={\"-1\":\"key\"}; return(tree[\"-1\"]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": "key"
+      }
+    },
+    {
+      "id": "read-positive",
+      "source": "Top: /x/\n I { items=[10,20,30]; return(items[0]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 10
+      }
+    },
+    {
+      "id": "read-negative-zero",
+      "source": "Top: /x/\n I { items=[10,20,30]; return(items[-0]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 10
+      }
+    },
+    {
+      "id": "write-last",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-1]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      }
+    },
+    {
+      "id": "write-first",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-3]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99,
+          20,
+          30
+        ]
+      }
+    },
+    {
+      "id": "write-dynamic",
+      "source": "Top: /x/\n I { items=[10,20,30]; chosen_index=-2; items[chosen_index]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          99,
+          30
+        ]
+      }
+    },
+    {
+      "id": "write-underflow",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-4]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1
+        }
+      }
+    },
+    {
+      "id": "write-empty",
+      "source": "Top: /x/\n I { items=[]; items[-1]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1
+        }
+      }
+    },
+    {
+      "id": "write-absent",
+      "source": "Top: /x/\n I { items[-1]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "negative_integer"
+        }
+      }
+    },
+    {
+      "id": "write-null",
+      "source": "Top: /x/\n I { items=undef; items[-1]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "expected_kind": "array",
+          "actual_kind": "null"
+        }
+      }
+    },
+    {
+      "id": "write-mixed",
+      "source": "Top: /x/\n I { tree={\"rows\":[{\"v\":1},{\"v\":2}]}; tree[\"rows\"][-1][\"v\"]=9; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "rows": [
+            {
+              "v": 1
+            },
+            {
+              "v": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "write-quoted-key",
+      "source": "Top: /x/\n I { tree={\"-1\":\"key\"}; tree[\"-1\"]=\"new\"; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "-1": "new"
+        }
+      }
+    },
+    {
+      "id": "write-append",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[3]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          30,
+          99
+        ]
+      }
+    },
+    {
+      "id": "callable-read",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={||return(items[-1])}; return([runner(),items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "callable-write",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={||items[-1]=99; return(items)}; result=runner(); return([result,items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            99
+          ]
+        ]
+      }
+    },
+    {
+      "id": "callable-parameter-read",
+      "source": "Top: /x/\n I { runner={|data_items|return(data_items[-1])}; return(runner([10,20,30])) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 30
+      }
+    },
+    {
+      "id": "callable-positive-write",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={||items[0]=99; return(items)}; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99,
+          20,
+          30
+        ]
+      }
+    },
+    {
+      "id": "read-selector-effect",
+      "source": "Top: /x/\n I { items=[10,20,30]; audit=\"\"; choose={||audit=cat(audit,\"key\"); return(-1)}; selected=items[choose()]; return([selected,audit,items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          "key",
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "read-receiver-retention",
+      "source": "Top: /x/\n I { items=[10,20,30]; choose={||items=[91,92]; return(-1)}; selected=items[choose()]; return([selected,items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          92,
+          [
+            91,
+            92
+          ]
+        ]
+      }
+    },
+    {
+      "id": "read-positive-receiver-retention",
+      "source": "Top: /x/\n I { items=[10,20,30]; choose={||items=[91,92]; return(0)}; selected=items[choose()]; return([selected,items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          91,
+          [
+            91,
+            92
+          ]
+        ]
+      }
+    },
+    {
+      "id": "write-positive-effects",
+      "source": "Top: /x/\n I { items=[10,20,30]; audit=\"\"; choose={||audit=cat(audit,\"key\"); return(1)}; supply={||audit=cat(audit,\"rhs\"); return(99)}; items[choose()]=supply(); return([items,audit]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          [
+            10,
+            99,
+            30
+          ],
+          "keyrhs"
+        ]
+      }
+    },
+    {
+      "id": "read-dynamic-quoted-key",
+      "source": "Top: /x/\n I { tree={\"-1\":\"key\"}; chosen_index=\"-1\"; return(tree[chosen_index]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": null
+      }
+    },
+    {
+      "id": "callable-copied-parameter-write",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={|data_items|data_items[-1]=99; return(data_items)}; return([runner(items),items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          [
+            10,
+            20,
+            99
+          ],
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "write-fractional",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[1.5]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "reason": "fractional_number"
+        }
+      }
+    },
+    {
+      "id": "write-string-negative-on-array",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[\"-1\"]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "expected_kind": "harray",
+          "actual_kind": "array"
+        }
+      }
+    },
+    {
+      "id": "rhs-resize",
+      "source": "Top: /x/\n I { items=[10,20]; items[-1]={ items.push_back(30); 99 }; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      }
+    },
+    {
+      "id": "selector-resize",
+      "source": "Top: /x/\n I { items=[10,20]; items[{ items.push_back(30); -1 }]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      }
+    },
+    {
+      "id": "negative-then-create",
+      "source": "Top: /x/\n I { document=[{}]; document[-1][\"new\"][0]=99; return(document) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "new": [
+              99
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "underflow-after-negative",
+      "source": "Top: /x/\n I { document=[[1]]; document[-1][-2]=99; return(document) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1
+        }
+      }
+    },
+    {
+      "id": "missing-after-negative",
+      "source": "Top: /x/\n I { document=[{}]; document[-1][\"missing\"][-1]=99; return(document) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "segment_index": 2,
+          "path": [
+            -1,
+            "missing"
+          ],
+          "reason": "negative_integer"
+        }
+      }
+    },
+    {
+      "id": "global-invalid-before-underflow",
+      "source": "Top: /x/\n I { items=[10]; items[-2][true]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "segment_index": 1,
+          "path": [
+            -2
+          ],
+          "actual_kind": "boolean"
+        }
+      }
+    },
+    {
+      "id": "signed-minimum-underflow",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-9223372036854775808]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "index": -9223372036854775808,
+          "length": 3,
+          "resolved_index": -9223372036854775805
+        }
+      },
+      "pointer_width": 64
+    },
+    {
+      "id": "unsigned-magnitude-underflow",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-18446744073709549568]=99; return(items) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "index": {
+            "exact_integer": "-18446744073709549568"
+          },
+          "length": 3,
+          "resolved_index": {
+            "exact_integer": "-18446744073709549565"
+          }
+        }
+      },
+      "pointer_width": 64
+    },
+    {
+      "id": "authority/read/ordinary/last",
+      "source": "Top: /x/\n I { tree=[10,20,30]; return([tree[-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "last"
+    },
+    {
+      "id": "authority/read/callable/last",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| return([tree[-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "last"
+    },
+    {
+      "id": "authority/read/ordinary/first",
+      "source": "Top: /x/\n I { tree=[10,20,30]; return([tree[-3],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "first"
+    },
+    {
+      "id": "authority/read/callable/first",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| return([tree[-3],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "first"
+    },
+    {
+      "id": "authority/read/ordinary/underflow",
+      "source": "Top: /x/\n I { tree=[10,20,30]; return([tree[-4],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "underflow"
+    },
+    {
+      "id": "authority/read/callable/underflow",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| return([tree[-4],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "underflow"
+    },
+    {
+      "id": "authority/read/ordinary/empty",
+      "source": "Top: /x/\n I { tree=[]; return([tree[-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          []
+        ]
+      },
+      "authority_case": "empty"
+    },
+    {
+      "id": "authority/read/callable/empty",
+      "source": "Top: /x/\n I { tree=[]; runner={|| return([tree[-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          []
+        ]
+      },
+      "authority_case": "empty"
+    },
+    {
+      "id": "authority/read/ordinary/absent",
+      "source": "Top: /x/\n I { return([tree[-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      },
+      "authority_case": "absent"
+    },
+    {
+      "id": "authority/read/callable/absent",
+      "source": "Top: /x/\n I { runner={|| return([tree[-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      },
+      "authority_case": "absent"
+    },
+    {
+      "id": "authority/read/ordinary/null",
+      "source": "Top: /x/\n I { tree=undef; return([tree[-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      },
+      "authority_case": "null"
+    },
+    {
+      "id": "authority/read/callable/null",
+      "source": "Top: /x/\n I { tree=undef; runner={|| return([tree[-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          null
+        ]
+      },
+      "authority_case": "null"
+    },
+    {
+      "id": "authority/read/ordinary/wrong_kind",
+      "source": "Top: /x/\n I { tree={}; return([tree[-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          {}
+        ]
+      },
+      "authority_case": "wrong_kind"
+    },
+    {
+      "id": "authority/read/callable/wrong_kind",
+      "source": "Top: /x/\n I { tree={}; runner={|| return([tree[-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          {}
+        ]
+      },
+      "authority_case": "wrong_kind"
+    },
+    {
+      "id": "authority/read/ordinary/positive",
+      "source": "Top: /x/\n I { tree=[10,20,30]; return([tree[1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          20,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "positive"
+    },
+    {
+      "id": "authority/read/callable/positive",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| return([tree[1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          20,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "positive"
+    },
+    {
+      "id": "authority/read/ordinary/positive_outside",
+      "source": "Top: /x/\n I { tree=[10,20,30]; return([tree[3],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "positive_outside"
+    },
+    {
+      "id": "authority/read/callable/positive_outside",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| return([tree[3],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "positive_outside"
+    },
+    {
+      "id": "authority/read/ordinary/dynamic_negative",
+      "source": "Top: /x/\n I { tree=[10,20,30]; chosen_index=-2; return([tree[chosen_index],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          20,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "dynamic_negative"
+    },
+    {
+      "id": "authority/read/callable/dynamic_negative",
+      "source": "Top: /x/\n I { tree=[10,20,30]; chosen_index=-2; runner={|| return([tree[chosen_index],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          20,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      },
+      "authority_case": "dynamic_negative"
+    },
+    {
+      "id": "authority/read/ordinary/mixed_nested",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; return([tree[\"rows\"][-1][-2],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          2,
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          }
+        ]
+      },
+      "authority_case": "mixed_nested"
+    },
+    {
+      "id": "authority/read/callable/mixed_nested",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; runner={|| return([tree[\"rows\"][-1][-2],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          2,
+          {
+            "rows": [
+              [
+                1
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          }
+        ]
+      },
+      "authority_case": "mixed_nested"
+    },
+    {
+      "id": "authority/read/ordinary/quoted_negative_key",
+      "source": "Top: /x/\n I { tree={\"-1\":\"key\"}; return([tree[\"-1\"],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          "key",
+          {
+            "-1": "key"
+          }
+        ]
+      },
+      "authority_case": "quoted_negative_key"
+    },
+    {
+      "id": "authority/read/callable/quoted_negative_key",
+      "source": "Top: /x/\n I { tree={\"-1\":\"key\"}; runner={|| return([tree[\"-1\"],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          "key",
+          {
+            "-1": "key"
+          }
+        ]
+      },
+      "authority_case": "quoted_negative_key"
+    },
+    {
+      "id": "authority/read/ordinary/missing_nested",
+      "source": "Top: /x/\n I { tree={}; return([tree[\"rows\"][-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          {}
+        ]
+      },
+      "authority_case": "missing_nested"
+    },
+    {
+      "id": "authority/read/callable/missing_nested",
+      "source": "Top: /x/\n I { tree={}; runner={|| return([tree[\"rows\"][-1],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          null,
+          {}
+        ]
+      },
+      "authority_case": "missing_nested"
+    },
+    {
+      "id": "authority/read/ordinary/negative_zero",
+      "source": "Top: /x/\n I { tree=[10]; return([tree[-0],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          [
+            10
+          ]
+        ]
+      },
+      "authority_case": "negative_zero"
+    },
+    {
+      "id": "authority/read/callable/negative_zero",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| return([tree[-0],tree]) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          [
+            10
+          ]
+        ]
+      },
+      "authority_case": "negative_zero"
+    },
+    {
+      "id": "authority/write/ordinary/last",
+      "source": "Top: /x/\n I { tree=[10,20,30]; tree[-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "last"
+    },
+    {
+      "id": "authority/write/callable/last",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| tree[-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "last"
+    },
+    {
+      "id": "authority/write/ordinary/first",
+      "source": "Top: /x/\n I { tree=[10,20,30]; tree[-3] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99,
+          20,
+          30
+        ]
+      },
+      "authority_case": "first"
+    },
+    {
+      "id": "authority/write/callable/first",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| tree[-3] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99,
+          20,
+          30
+        ]
+      },
+      "authority_case": "first"
+    },
+    {
+      "id": "authority/write/ordinary/dynamic_negative",
+      "source": "Top: /x/\n I { tree=[10,20,30]; chosen_index=-2; tree[chosen_index] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          99,
+          30
+        ]
+      },
+      "authority_case": "dynamic_negative"
+    },
+    {
+      "id": "authority/write/callable/dynamic_negative",
+      "source": "Top: /x/\n I { tree=[10,20,30]; chosen_index=-2; runner={|| tree[chosen_index] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          99,
+          30
+        ]
+      },
+      "authority_case": "dynamic_negative"
+    },
+    {
+      "id": "authority/write/ordinary/mixed_nested",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; tree[\"rows\"][-1][-2] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        }
+      },
+      "authority_case": "mixed_nested"
+    },
+    {
+      "id": "authority/write/callable/mixed_nested",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; runner={|| tree[\"rows\"][-1][-2] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        }
+      },
+      "authority_case": "mixed_nested"
+    },
+    {
+      "id": "authority/write/ordinary/negative_then_create",
+      "source": "Top: /x/\n I { tree=[{}]; tree[-1][\"new\"][0] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "new": [
+              99
+            ]
+          }
+        ]
+      },
+      "authority_case": "negative_then_create"
+    },
+    {
+      "id": "authority/write/callable/negative_then_create",
+      "source": "Top: /x/\n I { tree=[{}]; runner={|| tree[-1][\"new\"][0] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "new": [
+              99
+            ]
+          }
+        ]
+      },
+      "authority_case": "negative_then_create"
+    },
+    {
+      "id": "authority/write/ordinary/positive_append",
+      "source": "Top: /x/\n I { tree=[10]; tree[1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          99
+        ]
+      },
+      "authority_case": "positive_append"
+    },
+    {
+      "id": "authority/write/callable/positive_append",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| tree[1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          99
+        ]
+      },
+      "authority_case": "positive_append"
+    },
+    {
+      "id": "authority/write/ordinary/positive_replace",
+      "source": "Top: /x/\n I { tree=[10]; tree[0] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99
+        ]
+      },
+      "authority_case": "positive_replace"
+    },
+    {
+      "id": "authority/write/callable/positive_replace",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| tree[0] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99
+        ]
+      },
+      "authority_case": "positive_replace"
+    },
+    {
+      "id": "authority/write/ordinary/absent_positive",
+      "source": "Top: /x/\n I { tree[0][\"x\"] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "x": 99
+          }
+        ]
+      },
+      "authority_case": "absent_positive"
+    },
+    {
+      "id": "authority/write/callable/absent_positive",
+      "source": "Top: /x/\n I { runner={|| tree[0][\"x\"] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "x": 99
+          }
+        ]
+      },
+      "authority_case": "absent_positive"
+    },
+    {
+      "id": "authority/write/ordinary/quoted_negative_key",
+      "source": "Top: /x/\n I { tree={}; tree[\"-1\"] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "-1": 99
+        }
+      },
+      "authority_case": "quoted_negative_key"
+    },
+    {
+      "id": "authority/write/callable/quoted_negative_key",
+      "source": "Top: /x/\n I { tree={}; runner={|| tree[\"-1\"] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "-1": 99
+        }
+      },
+      "authority_case": "quoted_negative_key"
+    },
+    {
+      "id": "authority/write/ordinary/dynamic_negative_string_key",
+      "source": "Top: /x/\n I { tree={}; chosen_key=\"-1\"; tree[chosen_key] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "-1": 99
+        }
+      },
+      "authority_case": "dynamic_negative_string_key"
+    },
+    {
+      "id": "authority/write/callable/dynamic_negative_string_key",
+      "source": "Top: /x/\n I { tree={}; chosen_key=\"-1\"; runner={|| tree[chosen_key] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "-1": 99
+        }
+      },
+      "authority_case": "dynamic_negative_string_key"
+    },
+    {
+      "id": "authority/write/ordinary/negative_zero",
+      "source": "Top: /x/\n I { tree=[10]; tree[-0] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99
+        ]
+      },
+      "authority_case": "negative_zero"
+    },
+    {
+      "id": "authority/write/callable/negative_zero",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| tree[-0] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          99
+        ]
+      },
+      "authority_case": "negative_zero"
+    },
+    {
+      "id": "authority/write/ordinary/selector_resize",
+      "source": "Top: /x/\n I { tree=[10,20]; resize={|| tree=[10,20,30]; return(-1) }; tree[resize()] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "selector_resize"
+    },
+    {
+      "id": "authority/write/callable/selector_resize",
+      "source": "Top: /x/\n I { tree=[10,20]; resize={|| tree=[10,20,30]; return(-1) }; runner={|| tree[resize()] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "selector_resize"
+    },
+    {
+      "id": "authority/write/ordinary/rhs_resize",
+      "source": "Top: /x/\n I { tree=[10,20]; resize={|| tree=[10,20,30]; return(99) }; tree[-1] = resize(); return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "rhs_resize"
+    },
+    {
+      "id": "authority/write/callable/rhs_resize",
+      "source": "Top: /x/\n I { tree=[10,20]; resize={|| tree=[10,20,30]; return(99) }; runner={|| tree[-1] = resize(); return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          10,
+          20,
+          99
+        ]
+      },
+      "authority_case": "rhs_resize"
+    },
+    {
+      "id": "authority/write/ordinary/underflow",
+      "source": "Top: /x/\n I { tree=[10,20,30]; tree[-4] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        }
+      },
+      "authority_case": "underflow"
+    },
+    {
+      "id": "authority/write/callable/underflow",
+      "source": "Top: /x/\n I { tree=[10,20,30]; runner={|| tree[-4] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -4,
+          "length": 3,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -4 at length 3 (resolved index -1)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "underflow"
+    },
+    {
+      "id": "authority/write/ordinary/empty",
+      "source": "Top: /x/\n I { tree=[]; tree[-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        }
+      },
+      "authority_case": "empty"
+    },
+    {
+      "id": "authority/write/callable/empty",
+      "source": "Top: /x/\n I { tree=[]; runner={|| tree[-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -1,
+          "length": 0,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -1 at length 0 (resolved index -1)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "empty"
+    },
+    {
+      "id": "authority/write/ordinary/absent_negative",
+      "source": "Top: /x/\n I { tree[-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "authority_case": "absent_negative"
+    },
+    {
+      "id": "authority/write/callable/absent_negative",
+      "source": "Top: /x/\n I { runner={|| tree[-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "absent_negative"
+    },
+    {
+      "id": "authority/write/ordinary/missing_nested_negative",
+      "source": "Top: /x/\n I { tree={}; tree[\"new\"][-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        }
+      },
+      "authority_case": "missing_nested_negative"
+    },
+    {
+      "id": "authority/write/callable/missing_nested_negative",
+      "source": "Top: /x/\n I { tree={}; runner={|| tree[\"new\"][-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "new"
+          ],
+          "actual_kind": "integer",
+          "reason": "negative_integer",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got integer (negative_integer)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "missing_nested_negative"
+    },
+    {
+      "id": "authority/write/ordinary/null",
+      "source": "Top: /x/\n I { tree=undef; tree[-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        }
+      },
+      "authority_case": "null"
+    },
+    {
+      "id": "authority/write/callable/null",
+      "source": "Top: /x/\n I { tree=undef; runner={|| tree[-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "message": "nested write segment 0 for binding 'tree' requires array; found null"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "null"
+    },
+    {
+      "id": "authority/write/ordinary/wrong_kind",
+      "source": "Top: /x/\n I { tree={}; tree[-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        }
+      },
+      "authority_case": "wrong_kind"
+    },
+    {
+      "id": "authority/write/callable/wrong_kind",
+      "source": "Top: /x/\n I { tree={}; runner={|| tree[-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "expected_kind": "array",
+          "actual_kind": "harray",
+          "message": "nested write segment 0 for binding 'tree' requires array; found harray"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "wrong_kind"
+    },
+    {
+      "id": "authority/write/ordinary/nested_null",
+      "source": "Top: /x/\n I { tree=[undef]; tree[-1][-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        }
+      },
+      "authority_case": "nested_null"
+    },
+    {
+      "id": "authority/write/callable/nested_null",
+      "source": "Top: /x/\n I { tree=[undef]; runner={|| tree[-1][-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_kind_conflict",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "expected_kind": "array",
+          "actual_kind": "null",
+          "message": "nested write segment 1 for binding 'tree' requires array; found null"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "nested_null"
+    },
+    {
+      "id": "authority/write/ordinary/positive_gap",
+      "source": "Top: /x/\n I { tree=[10]; tree[2] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "authority_case": "positive_gap"
+    },
+    {
+      "id": "authority/write/callable/positive_gap",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| tree[2] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": 2,
+          "length": 1,
+          "message": "nested write segment 0 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "positive_gap"
+    },
+    {
+      "id": "authority/write/ordinary/gap_after_negative",
+      "source": "Top: /x/\n I { tree=[[10]]; tree[-1][2] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        }
+      },
+      "authority_case": "gap_after_negative"
+    },
+    {
+      "id": "authority/write/callable/gap_after_negative",
+      "source": "Top: /x/\n I { tree=[[10]]; runner={|| tree[-1][2] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_gap",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": 2,
+          "length": 1,
+          "message": "nested write segment 1 for binding 'tree' cannot create array index 2 at length 1"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "gap_after_negative"
+    },
+    {
+      "id": "authority/write/ordinary/underflow_after_negative",
+      "source": "Top: /x/\n I { tree=[[10]]; tree[-1][-2] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "authority_case": "underflow_after_negative"
+    },
+    {
+      "id": "authority/write/callable/underflow_after_negative",
+      "source": "Top: /x/\n I { tree=[[10]]; runner={|| tree[-1][-2] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "underflow_after_negative"
+    },
+    {
+      "id": "authority/write/ordinary/invalid_after_underflow",
+      "source": "Top: /x/\n I { tree=[]; tree[-1][true] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        }
+      },
+      "authority_case": "invalid_after_underflow"
+    },
+    {
+      "id": "authority/write/callable/invalid_after_underflow",
+      "source": "Top: /x/\n I { tree=[]; runner={|| tree[-1][true] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            -1
+          ],
+          "actual_kind": "boolean",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 1 for binding 'tree' must evaluate to a string or nonnegative integer; got boolean (kind_not_path_selector)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "invalid_after_underflow"
+    },
+    {
+      "id": "authority/write/ordinary/invalid_before_conflict",
+      "source": "Top: /x/\n I { tree=undef; tree[null][-1] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        }
+      },
+      "authority_case": "invalid_before_conflict"
+    },
+    {
+      "id": "authority/write/callable/invalid_before_conflict",
+      "source": "Top: /x/\n I { tree=undef; runner={|| tree[null][-1] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "null",
+          "reason": "kind_not_path_selector",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got null (kind_not_path_selector)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "invalid_before_conflict"
+    },
+    {
+      "id": "authority/write/ordinary/fractional",
+      "source": "Top: /x/\n I { tree=[10]; tree[-1.5] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        }
+      },
+      "authority_case": "fractional"
+    },
+    {
+      "id": "authority/write/callable/fractional",
+      "source": "Top: /x/\n I { tree=[10]; runner={|| tree[-1.5] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_segment_invalid",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "actual_kind": "number",
+          "reason": "fractional_number",
+          "message": "nested write segment 0 for binding 'tree' must evaluate to a string or nonnegative integer; got number (fractional_number)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "fractional"
+    },
+    {
+      "id": "authority/write/ordinary/failure_keeps_rhs_effect",
+      "source": "Top: /x/\n I { tree=[10]; resize={|| tree=[10,20]; return(99) }; tree[-3] = resize(); return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        }
+      },
+      "authority_case": "failure_keeps_rhs_effect"
+    },
+    {
+      "id": "authority/write/callable/failure_keeps_rhs_effect",
+      "source": "Top: /x/\n I { tree=[10]; resize={|| tree=[10,20]; return(99) }; runner={|| tree[-3] = resize(); return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 0,
+          "path": [],
+          "index": -3,
+          "length": 2,
+          "resolved_index": -1,
+          "message": "nested write segment 0 for binding 'tree' cannot select array index -3 at length 2 (resolved index -1)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "failure_keeps_rhs_effect"
+    },
+    {
+      "id": "authority/write/ordinary/aggregate_detachment",
+      "source": "Top: /x/\n I { tree=[{\"keep\":[1]}]; payload=[2]; tree[-1][\"new\"] = payload; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "keep": [
+              1
+            ],
+            "new": [
+              2
+            ]
+          }
+        ]
+      },
+      "authority_case": "aggregate_detachment"
+    },
+    {
+      "id": "authority/write/callable/aggregate_detachment",
+      "source": "Top: /x/\n I { tree=[{\"keep\":[1]}]; payload=[2]; runner={|| tree[-1][\"new\"] = payload; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          {
+            "keep": [
+              1
+            ],
+            "new": [
+              2
+            ]
+          }
+        ]
+      },
+      "authority_case": "aggregate_detachment"
+    },
+    {
+      "id": "authority/write/ordinary/unicode_span",
+      "source": "Top: /x/\n I { tree={\"é\":[1]}; tree[\"é\"][-2] = 99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      },
+      "authority_case": "unicode_span"
+    },
+    {
+      "id": "authority/write/callable/unicode_span",
+      "source": "Top: /x/\n I { tree={\"é\":[1]}; runner={|| tree[\"é\"][-2] = 99; return(tree) }; return(runner()) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        },
+        "codeblock_contexts": [
+          "runner"
+        ]
+      },
+      "authority_case": "unicode_span"
+    },
+    {
+      "id": "book/examples/negative-array-current-perl.spec",
+      "source": "Top: /x/\n I { items=[10,20,30]; return([items[-1],items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "book/examples/negative-array-current-callable-perl.spec",
+      "source": "Top: /x/\n I { items=[10,20,30]; runner={||return(items[-1])}; return([runner(),items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            20,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "book/examples/negative-array-write-perl.spec",
+      "source": "Top: /x/\n I { items=[10,20,30]; items[-2]=99; return([items[-1],items]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            10,
+            99,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "book/examples/negative-array-write-callable-perl.spec",
+      "source": "Top: /x/\n I { tree={\"rows\":[[1],[2,3]]}; edit={|| tree[\"rows\"][-1][-2]=99; return(tree) }; return(edit()) }\n",
+      "input": "x",
+      "expected": {
+        "ok": {
+          "rows": [
+            [
+              1
+            ],
+            [
+              99,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "distinct-parameter-identity",
+      "source": "Top: /x/\n I { tree=[10]; edit={|tree| tree[-1]=99; return(tree) }; return(tree.map_leaves!() { return(edit([1])) }) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          [
+            99
+          ]
+        ]
+      }
+    },
+    {
+      "id": "signed-guard-before-expression-effects",
+      "source": "Top: /x/\n I { tree=[10]; return(tree.map_leaves!() { tree[{ push(audit,\"selector\"); -1 }]= { push(audit,\"rhs\"); 99 }; return(value) }) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "receiver_mutation_reentrant",
+          "attempt": "nested_write",
+          "binding": "tree"
+        }
+      }
+    },
+    {
+      "id": "value-result-negative",
+      "source": "Top: /x/\n I { pick={|| return([[10],[20,30]]) }; return(pick()[-1][-2]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": 20
+      }
+    },
+    {
+      "id": "native-float-kind",
+      "source": "Top: /x/\n I { tree=[10,20]; chosen=\"-1\"; return([tree[-1.0],tree[-1.5],tree[chosen],tree[\"-1\"]]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          20,
+          10,
+          10,
+          null
+        ]
+      }
+    },
+    {
+      "id": "read-access-receiver-snapshot",
+      "source": "Top: /x/\n I { tree=[[10],[20,30]]; return([tree[{ tree=[[90],[91,92,93]]; -1 }][-1],tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          30,
+          [
+            [
+              90
+            ],
+            [
+              91,
+              92,
+              93
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": "detached-public-boundaries",
+      "source": "Top: /x/\n I { initial=[[1]]; tree=initial; payload=[2]; result=(tree[-1]=payload); initial[-1][0]=11; payload[0]=22; result[-1][0]=33; tree[-1][0]=44; return([initial,payload,result,tree]) }\n",
+      "input": "x",
+      "expected": {
+        "ok": [
+          [
+            [
+              11
+            ]
+          ],
+          [
+            22
+          ],
+          [
+            [
+              33
+            ]
+          ],
+          [
+            [
+              44
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": "unicode-exact-public",
+      "source": "Top: /x/\n I { tree={\"é\":[1]}; tree[\"é\"][-2]=99; return(tree) }\n",
+      "input": "x",
+      "expected": {
+        "error": {
+          "code": "nested_write_array_underflow",
+          "operation": "nested_write_vivification",
+          "binding": "tree",
+          "segment_index": 1,
+          "path": [
+            "é"
+          ],
+          "index": -2,
+          "length": 1,
+          "resolved_index": -1,
+          "source_span": {
+            "start": 26,
+            "end": 28,
+            "unit": "unicode_scalar",
+            "provenance": "authored"
+          },
+          "message": "nested write segment 1 for binding 'tree' cannot select array index -2 at length 1 (resolved index -1)"
+        }
+      }
+    }
+  ]
+}
