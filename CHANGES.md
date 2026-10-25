@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.5.1 — evaluate dynamic split_each value delimiters
+
+Ordinary Perl split_each values and receivers evaluate variable/computed scalar delimiters once after snapshotting the source. Quote runtime metacharacters literally; preserve authored quoted/regex paths and trailing-field behavior. The small existing native/fresh pipeline vector is RED before repair and GREEN afterward, including nested/function/receiver, order/empty-input/effect and literal/flag controls. Syntax/book/fast continuity checks pass. Existing fact chronology is contained with an exact Git pointer; map/book/index/live handoff agree. Standalone5.5.2 is next; full suites remain deferred.
+
 ## FUTURE-PARITY-BACKLOG.5.4.1 — preserve Perl pipeline values and kinds
 
 Route ordinary split_each/trim_each/filter_nonempty/lowercase_each/uppercase_each/uniq values through existing pure operations with typed/scoped source snapshots. Preserve standalone writeback. Copy predicate operands before string comparison, regex matching or length so retained numeric items stay numeric selectors; resolve metadata-known emitted function slots in nested calls. Small native/fresh pipeline and direct-filter tests, syntax/book and fast continuity checks pass after actual mutation/kind/context RED. Register the test and replace the book's temporary impurity caveat with a working example. Current fact/map/indexed/live docs agree; broad5.4.2 and source-capture documentation defect5.4.3 stay deferred.

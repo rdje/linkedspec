@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.5.1 — delimiter source versus value
+
+strip_literal_delimiters returns unquoted source unchanged, so the array value normalizer escaped variable or codeblock text and skipped its effects. Distinguish authored literal/regex operands from dynamic values; lower the latter once after the source snapshot and use runtime literal quoting outside the map. The extended existing pipeline regression passes natively and freshly generated, with once/order/empty/function/receiver controls. Explicit standalone normalization remains separately owned by next5.5.2. No new regex value kind, deferred helper admission or exhaustive verification.
+
 ## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.4.1 — pure pipeline routing and scalar validity
 
 Public value calls previously reached mutable array_pipeline lowering; normalize them to the existing private pure operations and read typed bare source snapshots. The focused check also exposes predicate stringification of aliased numeric items: uniq/filter_match/filter_nonempty turn selected2 into a string key, while plain first works. Compare temporary scalar copies and retain the original values; typed selector controls now pass without changing BindingRuntime validity policy. Exact generated source isolates the remaining function context as trim_each($values); recover only metadata-known emitted function slots before reading the DSL binding. Pipeline and direct-filter native/fresh tests pass. Standalone mutation, source AST/readiness and quoted/literal pattern policy remain unchanged. A faulty TOOLBOX source-capture example is owned as deferred5.4.3; explicit scalar capture unblocks diagnostics.

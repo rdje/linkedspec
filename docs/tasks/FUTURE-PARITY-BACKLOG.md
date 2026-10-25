@@ -105,7 +105,7 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Current implementation (2026-10-26):** Rust `.5.3.1`, Dart `.5.3.2` and Julia `.5.3.3` standalone transform writeback are implemented/targeted-checked; Perl ordinary filter87.1 and nested pipeline purity/kinds `.5.4.1` are implemented/targeted-checked; type/helper inventory selects further features. Selected from the documented existing gap after clean type syntax inventory1.1; broad recurrence `.5.3.4` stays deferred until feature coverage. Other rollout history below retains its dated scope.
+**Current implementation (2026-10-26):** Rust/Dart/Julia standalone transforms5.3.1-.3 and Perl pure pipelines5.4.1 are implemented with targeted checks. Dynamic Perl split_each value delimiters5.5.1 are implemented; standalone5.5.2 is next. Helper inventory remains open; broad recurrence5.3.4/5.4.2 and maintenance stay deferred until feature coverage.
 
 **Authoritative frontier (2026-08-27):** progressive `.14.6` is closed at six-runtime private behavior,
 recurrence, and public no-drift. Staged audit/diagnostic/neutral `.14.7.0-.2` are committed; Perl `.3`, Rust `.4`,

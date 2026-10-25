@@ -817,10 +817,9 @@ dispatch rule.
 ### `split_each(arr, delim)`
 - **Signature**: `split_each(arr: array, delim: regex-or-scalar)`
 - **Returns**: array
-- **Behavior**: Splits each element with the governed literal/regex split policy. Results are concatenated into a
-  single flat array.
-- **Example**: after `set(items, ["a:b", "c:d"])`, `return(items.split_each(":"))`
-  yields `[["a","b","c","d"]]`.
+- **Behavior**: Splits each element and flattens the pieces. In ordinary Perl value/receiver forms, scalar delimiters may be variables or expressions: the array is snapshotted first, then the delimiter evaluates once, even for an empty array. Runtime scalar text splits literally; slash regex literals retain flags and existing trailing-field behavior.
+- **Example**: `items=["a:b","c:d"]; delimiter=":"; return(items.split_each(delimiter))` returns `["a","b","c","d"]` and preserves `items`.
+- **Current Perl boundary**: standalone dynamic delimiter writeback is owned by `FUTURE-PARITY-BACKLOG.5.5.2`; use an authored literal there until implemented.
 
 ### `trim_each(arr)`
 - **Signature**: `trim_each(arr: array)`

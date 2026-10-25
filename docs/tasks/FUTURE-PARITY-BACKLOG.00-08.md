@@ -3196,6 +3196,44 @@
   Planned tier: `focused`; one small public capture example and syntax/book/continuity checks as applicable.
   Claim verification: none: Qualitative executable-doc defect intake; no coverage measurement.
 
+- ID: `FUTURE-PARITY-BACKLOG.5.5`
+  Status: `active` / P1 dynamic array delimiter implementation
+  Goal: Honor the existing split_each regex-or-scalar delimiter argument when the scalar comes from a variable or computed expression.
+  Children: `.5.5.1`, `.5.5.2`
+  Intake: Public Get returns unchanged ["a:b","c:d"] for delimiter=":"; split_each(items,delimiter), and computed delimiter effects remain0. Literal ":" and pure split("a:b",delimiter) controls succeed. Silent wrong output and skipped operand effects break composition; own and fix now under feature-first cadence.
+  Claim verification: none: Qualitative existing-contract defect, no exhaustive admission measurement.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.5.1`
+  Status: `done`
+  Activation commit: `a1c6202c364dd12b7e2923a6a49b02959469d512`
+  Goal: Evaluate dynamic scalar delimiters once in ordinary Perl split_each values and receiver chains.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm; small pipeline regression and registration; current helper book/fact/map; indexed task parts/root and live continuity.
+  Verification tier: `focused`
+  Focused checks: Module/test syntax and one small native/fresh delimiter regression with source order, effects, parameters, empty input and literal/regex controls; book and fast continuity/history checks only.
+  Canonical trigger: None for bounded existing scalar-delimiter alignment under director phase policy; broad verification follows feature coverage.
+  Claim verification: none: Deterministic implementation with targeted regression, no quantified corpus/exhaustive/portable admission measurement.
+  Root cause: MethodLowering's static normalizer quotemetas every non-slash source after strip_literal_delimiters; that helper returns unquoted expressions unchanged, so variable/code source becomes regex text and never evaluates.
+  Acceptance: Snapshot source before delimiter evaluation; evaluate dynamic strings once even for an empty source, quote runtime metacharacters literally, preserve existing static literal/regex flags, trailing-field and standalone policies. No first-class regex type or deferred callable admission.
+
+  Completion: Distinguish authored quoted/regex operands from dynamic scalar expressions. Lower and evaluate the dynamic value once after the source snapshot, then quote runtime text inside each split. Preserve the existing literal path, flags and trailing-field behavior.
+  Focused result: Module syntax and t/array_pipeline_value_contract.t PASS on final production for native/fresh execution after the same targeted vector failed before repair. Book build and fast continuity/history checks pass; no full suites.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public variable/computed delimiter probes return unchanged arrays and skip effects; ordinary split control succeeds. The extended native/fresh regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering's static array pattern normalizer escapes unquoted source instead of evaluating it; source/value controls isolate that branch.
+  - [x] **FIX** — Lower dynamic scalar operands once outside the per-item map after snapshotting the source, quoting runtime text literally.
+  - [x] **ADDRESSED (verified)** — Targeted native/fresh pipeline regression and module/test compilation PASS.
+  - [x] **NO REGRESSION** — Existing pipeline purity/kinds/standalone controls remain in the same small vector; dynamic function/receiver/nested, empty-array/effect-order, metacharacter and regex-flag controls pass. Broader suites remain deferred.
+  - [x] **LOCKSTEP** — Public examples, contained canonical fact/derived map, indexed ownership and live handoff agree; standalone5.5.2 is next.
+  Containment: Condense old callable-matches proof chronology in the existing fact to its owning leaf and exact prechange Git identity; preserve current causal contracts. No frozen proof producer is replayed or altered and changed inputs have no live claim intersections.
+  Commit: `FUTURE-PARITY-BACKLOG.5.5.1 - evaluate dynamic split_each value delimiters`.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.5.2`
+  Status: `pending`
+  Goal: Implement dynamic scalar delimiters in explicit standalone Perl split_each writeback, using its existing target guards and once-only operand policy.
+  Dependencies: `FUTURE-PARITY-BACKLOG.5.5.1`
+  Schedule: Next feature after clean5.5.1. ArrayPipeline has the same static-source normalization; confirm through public statement probe before repair. Keep literal/regex compatibility and other helper behavior separate.
+  Claim verification: none: Scheduled implementation, no measurement.
+
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`
   Goal: Decide the fate of Perl legacy plugin machinery.

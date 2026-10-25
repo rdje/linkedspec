@@ -10,6 +10,13 @@ my $body = <<'BODY';
  trimmed=trim_each(source); nonempty=filter_nonempty(source);
  lower=lowercase_each(source); upper=uppercase_each(source); unique=uniq(source);
  parts_source=["a:b","c:d"]; parts=split_each(parts_source,":");
+ delimiter=":"; dynamic=split_each(parts_source,delimiter);
+ dynamic_receiver=parts_source.split_each(delimiter); dynamic_nested=count(split_each(parts_source,delimiter));
+ dynamic_function=divide(parts_source,delimiter); delimiter_effects=0; order="";
+ dynamic_computed=split_each({order=cat(order,"S"); ["x.y","z."]},
+   {order=cat(order,"D"); delimiter_effects=num_add(delimiter_effects,1); "."});
+ dynamic_empty=split_each([], {delimiter_effects=num_add(delimiter_effects,1); ":"});
+ regex_parts=split_each(["aXb","cxd"],/x/i);
  letters=["a","b","a"];
  nested=uniq(uppercase_each(letters));
  filtered=filter_match(uniq(uppercase_each(letters)),/^A/);
@@ -26,15 +33,17 @@ my $body = <<'BODY';
  trim_each(mut); filter_nonempty(mut); split_each(mut,":");
  lowercase_each(mut); uppercase_each(mut); uniq(mut);
  return([trimmed,nonempty,lower,upper,unique,parts,source,saved,parts_source,
+   dynamic,dynamic_receiver,dynamic_nested,dynamic_function,dynamic_computed,dynamic_empty,delimiter_effects,order,regex_parts,
    letters,nested,filtered,receiver,function,computed,effects,typed,typed_result,typed_index,
    typed_filtered,filtered_index,typed_nonempty,nonempty_index,indexed,mut]);
 BODY
-my $source = "fn clean(values) { return(uniq(trim_each(values))) }\nTop:: I { $body }";
+my $source = "fn clean(values) { return(uniq(trim_each(values))) }\nfn divide(values,delimiter) { return(split_each(values,delimiter)) }\nTop:: I { $body }";
 my $original = [' a:A ','',' B:B ',' a:A '];
 my $expected = [
     ['changed','','B:B','a:A'], [' a:A ',' B:B ',' a:A '],
     [' a:a ','',' b:b ',' a:a '], [' A:A ','',' B:B ',' A:A '],
     [' a:A ','',' B:B '], ['a','b','c','d'], $original, $original, ['a:b','c:d'],
+    ['a','b','c','d'], ['a','b','c','d'], 4, ['a','b','c','d'], ['x','y','z'], [], 2, 'SD', ['a','b','c','d'],
     ['a','b','a'], ['A','B'], ['A'], ['A','B'], ['a:A','','B:B'], ['z','y'], 1,
     [2,'2','x'], [9,'x'], 2, [2,'2'], 2, [2], 2, ['zero','one','selected'], ['A','B'],
 ];

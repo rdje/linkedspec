@@ -3166,8 +3166,18 @@ sub _lower_method_value_expr {
    my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
    return undef unless $effective_args;
    my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
-   my $delimiter_expr = $normalize_array_value_regex_expr->($effective_args->[1]);
    return undef unless defined($source_expr) && length($source_expr);
+   my $delimiter_source = $trim_action_ir_value->($effective_args->[1]);
+   return undef unless defined($delimiter_source) && length($delimiter_source);
+   # Keep authored literal/regex compatibility; dynamic scalar operands are values,
+   # not pattern source. Evaluate once after the source snapshot, outside the map.
+   unless ($delimiter_source =~ m{^/(?:\\.|[^/])*/[a-z]*$}io
+     || $delimiter_source =~ /\A(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')\z/s) {
+    my $delimiter_value = _lower_method_value_expr($delimiter_source, $deps);
+    return undef unless defined($delimiter_value) && length($delimiter_value);
+    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; my $__ls_array_pipeline_delimiter = '.$delimiter_value.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\' && defined($__ls_array_pipeline_delimiter)) ? [map { split /\Q$__ls_array_pipeline_delimiter\E/, (defined($_) ? $_ : \'\') } @{$__ls_array_pipeline_source}] : [] }';
+   }
+   my $delimiter_expr = $normalize_array_value_regex_expr->($delimiter_source);
    return undef unless defined($delimiter_expr) && length($delimiter_expr);
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { split '.$delimiter_expr.', (defined($_) ? $_ : \'\') } @{$__ls_array_pipeline_source}] : [] }';
   }

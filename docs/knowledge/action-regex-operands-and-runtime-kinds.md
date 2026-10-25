@@ -2,6 +2,7 @@
 id: action-regex-operands-and-runtime-kinds
 title: Regex operands and pure array helper values
 answers:
+  - does Perl split_each evaluate variable or computed scalar delimiters
   - why do Perl array filters turn numeric entries into string selectors
   - why do nested Perl array helper functions rebind the input
   - is regex a builtin variable type in spec action code
@@ -132,40 +133,8 @@ callable fixtures do not cover them.
 
 September23 recommendation: add a first-class regex type only for a concrete unmet use case; no approval or roadmap admission. Potential benefits are carrying pattern/flags, construction validation and reusable backend compilation, not measured performance. Caching itself needs no public type. Costs include shared flags, copy/equality/serialization, callable transport and cross-backend conformance. Strings and contextual operands cover observed uses; a type would not settle lexical slash ambiguity.
 
-## October 3 callable matches repair
+## Callable matches and dynamic array delimiters
 
-`SESSION-STARTUP-READING.87.2` adds only helper dispatch and contextual literal pattern
-handling in `CodeblockRuntime::_eval_call`. Subject evaluation occurs once before pattern
-evaluation; an undefined subject returns numeric0 without evaluating the pattern. Otherwise
-string patterns evaluate once, or the existing typed regex payload/flags supply a private
-pattern. No generic `_eval_expr(regex)` arm or new runtime value/record field is introduced.
-Static helper dispatch precedes a same-named callable slot. Arity rejects before actual operand
-effects; invalid compiled string patterns raise typed `invalid_matches_pattern`, while an
-operand's existing typed failure is rethrown unchanged. Caller parameter slots restore.
+`SESSION-STARTUP-READING.87.2` added contextual regex operands and matches dispatch to CodeblockRuntime::_eval_call, without a generic regex value kind. Subject evaluation precedes pattern evaluation; undefined subjects return numeric0 and skip the pattern. Other string patterns evaluate once, while literals retain payload/flags. Static helper dispatch precedes same-named callable slots; arity rejects before effects. Invalid string patterns report invalid_matches_pattern; existing operand exceptions retain identity and caller parameters restore. The owning leaf retains its finite native/fresh matrix, observed RED and capsules. Detailed historical proof chronology remains in Git at a1c6202c364dd12b7e2923a6a49b02959469d512; no new admission is inferred. Physical LF controls leave separately owned quoted-escape fidelity unchanged.
 
-The38-source native/fresh matrix includes16 direct/deferred pairs, copied parameters and
-four rejection controls plus an operand-failure control. Literal/string true/false, dynamic
-caller patterns, i/m/s/x/g, escaped slash, empty/undefined subject, ordered effects and
-same-named slot controls retain exact numeric0/1 or complete values. Public invoke observers
-check actual original reference/error identity and deliberately distinct equal-value slots.
-The new regression passes39 tests. The read-only reviewer loads the exact activation module
-for matched RED on both routes; it does not replace working production. Full source/generated
-bytes and raw observations survive in red.json/green.json; only anchored failure-trace dates
-project for equality, and residual metadata ordering stays with self-containment .0.6.
-
-The first flag controls used textual \n in a quoted subject. After helper repair only those
-two deferred values differed: typed AST stores backslash+n, while inline compiled Perl expands
-LF. This is the previously documented SUPPORTING-SOURCE-READING.2.4 string-fidelity defect.
-Initial cases/red and repaired failure logs remain retained; final paired flag controls use
-physical LF and leave decoding untouched. Attached/marker/value conditionals, numeric helpers,
-readiness/metadata, dispatcher/full16 and other backends remain independently owned.
-
-The prelanding portability gate found a host module location in the new regex compiler
-error detail. Final diagnostics retain the regex reason and existing operand source span,
-removing only the exact current module suffix and optional fresh-child filehandle line.
-Both public routes prove the selected22..25 span and retain thrown-object identity.
-Six self-describing capsules preserve original complete streams byte-exact in memory;
-old reviewer/claim hashes independently cross-check their links, and three actual
-byte/metadata/path corruptions reject. Observed historical paths are opaque data and
-never filesystem operands. Raw TAP trailing spaces survive in those capsules; current
-tracked text passes whitespace and relocation checks.
+`FUTURE-PARITY-BACKLOG.5.5.1` evaluates dynamic scalar split_each delimiters once after snapshotting the array source, even when empty. Runtime text is quoted literally; authored quoted/slash literals retain their existing path and trailing-field behavior. Native/fresh regression covers direct/receiver/nested/function parameters, source-before-delimiter effects, metacharacters and flags. The former static normalizer escaped expression source and skipped effects. Standalone dynamic delimiter writeback remains next5.5.2; this does not admit regex variables or deferred helpers.

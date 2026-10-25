@@ -1397,7 +1397,7 @@ Standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(na
 In a value expression or receiver chain, the operation returns a transformed array and preserves its input binding.
 Perl, Rust, Dart, Julia and Lua implement the statement forms; broader validation remains owned by `FUTURE-PARITY-BACKLOG.5.3.4` after feature coverage.
 
-Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
+Receiver-dot form is equivalent for a named array or array-valued expression. Ordinary Perl values also accept dynamic scalar delimiters: `delimiter="."; return(split_each(["a.b","c.d"],delimiter))` returns `["a","b","c","d"]`. The source is snapshotted before the delimiter evaluates once; runtime scalar text is literal. Standalone dynamic delimiter support remains separately owned by `FUTURE-PARITY-BACKLOG.5.5.2`:
 
 ```text
 set(public_fields, fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
