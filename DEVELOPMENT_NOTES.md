@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.1.1 — separate syntax roles before methods
+
+Split operation inventory into independently committed syntax, free-helper/alias, receiver/result and reconciliation children. The syntax index reuses the admitted authority/model ledger and canonical binding/callable contracts instead of repeating the old whole-source census. It records grouped ordinary/deferred and raw regex limits, signed implementation versus deferred admission, harray dynamic keys and callback scope. A tiny AST role probe avoids confusing eager blocks, deferred values and raw groups. No method-count/complete API or backend-execution claim follows from a syntax entry; focus remains selecting bounded implementation gaps.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.21 — protect incomplete raw patterns only
 
 Public splitter/descriptor/substitution probes show scalar_assignment_operator on the first raw pattern fragment, RAW_PERL on its tail, then RewritePipeline newline-terminator insertion. Protecting every assignment slash would revive rejected precedence changes. Instead, Core retains a complete multiline token only when the first physical line still parses raw; complete typed first lines keep their old boundary, including /(14,2) before later quote operators. Existing slash state consumes the unchanged payload, allowing ordinary literal ownership to shield helper-looking contents. Small native/fresh/oracle checks and syntax pass; full verification remains deferred. Inventory proceeds before policy maintenance under the latest feature-first direction.

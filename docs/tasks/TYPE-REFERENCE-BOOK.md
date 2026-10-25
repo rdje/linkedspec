@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / feature inventory after grouped19 and raw-regex21
+- Status: `active` / helper inventory after syntax1.1
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -806,12 +806,50 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Policy intake and queue only; the implementation comparison and adoption evidence belong to this future leaf.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
-  Status: `pending`
+  Status: `active` / bounded operation inventory children
+  Children: `TYPE-REFERENCE-BOOK.1.2.1.1`, `TYPE-REFERENCE-BOOK.1.2.1.2`, `TYPE-REFERENCE-BOOK.1.2.1.3`, `TYPE-REFERENCE-BOOK.1.2.1.4`
   Goal: Enumerate every supported operation and spelling from the retained authority population, grouped by actual type and syntax role.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.21`
   Planned tier: `focused`; reclassify before public/mechanical movement.
   Claim verification: none: Unactivated enumeration; declare actual source-bound proof before counting.
   Acceptance: Distinguish literals, constructors, operators, free helpers, receiver methods, aliases, callable invocation, generic and type-specific operations, plus private/retired recognition. Record signatures/arity, result/mutation/aliasing, callback/chain boundaries and backend limits; use public probes for uncertainty. Treat registered-name counts as one input, not completeness. Include the complete per-type fluent/result-type matrix inputs required by .23, and distinguish current methods from missing useful families; do not equate enumerating implemented names with a comprehensive API.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.1`
+  Status: `done`
+  Activation commit: `cedc5420dd26af910946a0c5fa573ce6a4ca81db`
+  Goal: Index non-call value syntax, binding/path operators and callable forms against canonical authorities, without confusing syntax roles with methods or promoting raw host forms.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.21`
+  Owned paths: docs/checkpoints/type-operation-inventory/syntax.md; existing per-type gap fact/map; public book value-model explanation and normal live/task continuity.
+  Verification tier: `focused`
+  Focused checks: One small public AST syntax probe for representative role boundaries; existing contracts/grammar and current signed/group/raw limits. Book render and fast continuity/history/diff checks only.
+  Canonical trigger: None; existing syntax index, no runtime/public contract change or exhaustive admission.
+  Claim verification: none: Qualitative source-linked syntax catalog, not a measured method count, coverage claim or backend execution census.
+  Acceptance: Each syntax family records authored shape, role, result/mutation/callback/alias boundaries and canonical source; helpers, receiver methods, compatibility and private syntax remain separate. Leave helper/method enumeration to the next children and own encountered ambiguities instead of guessing support.
+
+  Completion: syntax.md separates primitive/container literals, eager/deferred blocks, bare reads, typed paths/signed selectors, binding/append/path writes, grouped values, definitions/invocation/callbacks/receivers and separators. Each records result/effect/context boundaries and canonical authority; retired/private/raw compatibility stays qualified. Helper/method populations and actual missing transitions are not declared complete.
+  Verification: A small LinkedSpec::ActionIR::AST::parse_action_expr probe confirms representative literal/container/eager/deferred/group boundaries. Book render and fast memory/cadence/history/diff checks pass; no full suite or exhaustive source census is run.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.1.1 - index value syntax and operation roles`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.2`
+  Status: `pending`
+  Goal: Enumerate current free-helper and alias spellings with canonical families, signatures, results, mutation/callback contracts and source links. Separate private/retired/compatibility-only names.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.1`
+  Planned tier: `focused`; use source/metadata checks, not a full runtime matrix.
+  Claim verification: none: Not yet activated; declare measurement scope before publishing aggregate completeness/counts.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.3`
+  Status: `pending`
+  Goal: Index actual receiver methods by input and returned type, chain/terminal behavior, argument and callback shapes, mutation/copy rules and backend limits; route actual missing methods/transitions to23.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.2`
+  Planned tier: `focused`; use tiny public probes only where current contracts are uncertain.
+  Claim verification: none: Not yet activated; no complete fluent API claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4`
+  Status: `pending`
+  Goal: Reconcile the syntax/helper/receiver inventories against current authority roles, then select bounded implementation gaps under23. Broad semantic validation remains deferred until feature coverage.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.3`
+  Planned tier: `focused`; no full suite for inventory closeout under the current director policy.
+  Claim verification: none: Not yet activated; declare any aggregate population measurement before publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
@@ -928,7 +966,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1` | `pending` | Inventory current operations to select the next bounded feature gaps. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases; receiver/result inventory follows to select feature gaps. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
@@ -962,6 +1000,8 @@ No director input required. Implemented17 backends/14/16/19/21 lead to inventory
 
 ## Verification Log
 
+- `2026-10-25` — `.1.2.1.1`: source-linked non-call syntax index and small public AST role probe; book render and fast continuity/history checks pass. No exhaustive method/behavior admission; helper1.2 then receiver1.3 follow.
+
 - `2026-10-25` — `.1.2.19` and `.1.2.21`: module/registration syntax, small native/fresh regressions, book rendering and fast memory/task/cadence/history/diff checks pass. Broad suites/global scans remain deferred by director instruction.
 
 - `2026-10-25` — `.1.2.17.4`: Public113/452, private51+arithmetic12, emitted113/CLI214 and package636/CLI66x2/corpus105/storage25 pass. Five physical runtime inverses/restored452/0, exact historical134/84613241/22, nine primary/five support/four direct denials and actual auditor faults/restoration pass. Book95/90/four denials, readonly172/180/181 custody and physical input4/bypass/restoration pass. Existing SDK format1/analysis2 stays disclosed. Exact staged canonical receipt/normal hooks govern landing; hygiene23 precedes Julia17.5.
@@ -987,6 +1027,8 @@ No director input required. Implemented17 backends/14/16/19/21 lead to inventory
   qualitative gap only. Exact legacy status contradictions are recorded above; no runtime or full coverage proof.
 
 ## Commit Log
+
+Syntax inventory1.1 subject: `TYPE-REFERENCE-BOOK.1.2.1.1 - index value syntax and operation roles`; derive identity from Git.
 
 Grouped19: `28ce9b3e897efe3e1453d474c7b555b57465ed5b`. Raw-regex21 subject: `TYPE-REFERENCE-BOOK.1.2.21 - preserve assigned raw multiline regex payloads`; derive identity from Git.
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.1.1 — index non-call value syntax
+
+Add a source-linked working syntax catalog separating literal/container/block values, reads/paths/signed selectors, binding/append/path/grouped assignments, callable structure and receiver/separator roles. Record result/effect/copy/context boundaries and current retired/private/raw limits without admitting methods by name discovery. Clarify syntax roles in the book and refresh the existing per-type gap fact/map/live handoff. A small public AST probe, book render and fast continuity/history/diff checks pass. Helper/alias1.2 then receiver/result1.3 select fluent implementation gaps; broad verification and maintenance remain deferred.
+
 ## TYPE-REFERENCE-BOOK.1.2.21 — preserve assigned raw multiline patterns
 
 StatementSplit protects complete multiline slash payloads after a bare assignment when the first physical line remains raw/incomplete. Complete typed first lines retain their established boundary and numeric slash division. Existing quote consumption retains bytes and literal ownership protects helper-looking text. Changed module/registration syntax and t/assigned_raw_regex_payload.t pass for native/fresh LF/CRLF payloads, independent authored match/mismatch oracle, quote continuations and binding effects. Book/canonical regex fact/map/live docs agree; stale frontier19 is corrected. Feature-first direction defers policy maintenance20 until implementation coverage; inventory1/fluent23 follow. Broad suites/global hook scans remain deferred; no new regex type or portable raw-host admission.

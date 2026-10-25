@@ -30,7 +30,7 @@ Top: /x/
  I { cb = {|| return(["b","a"]) }; return(cb().sorted()) }
 ```
 
-This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind.
+This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind. Literals, bare reads, direct indexing, assignment, eager blocks and deferred literals are distinct syntax roles; helper calls and receiver methods are separate operations.
 ### Rust numeric transport
 
 Rust numeric values use binary64 precision. Large finite values keep that value through JSON output and serialized/generated parsers; this does not provide arbitrary-precision integer arithmetic.

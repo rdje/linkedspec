@@ -7,26 +7,33 @@ answers:
   - "which task owns the per-type language reference gap"
   - "is codeblock documentation directly navigable as a type section"
   - "which owner repairs contradictory legacy documentation task statuses"
-date: 2026-10-10
-status: current qualitative gap; owned scheduled follow-up
+date: 2026-10-25
+status: syntax inventory indexed; helper/receiver inventory and comprehensive fluent gaps pending
 tags: [documentation, mdbook, types, methods, continuity]
-evidence: "October10 DBIQNP book review: current SUMMARY and scalar/string, numeric, array/hash/pipeline headings plus Values codeblock prose and sampled table entries. No complete implementation-to-book inventory was performed. TYPE-REFERENCE-BOOK owns inventory and per-type repair; .8 owns the exact legacy status contradictions. Current AST callback work continues."
-reverify: "Read docs/tasks/TYPE-REFERENCE-BOOK.md; inspect docs/linkedspec-book/src/SUMMARY.md, docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md headings, and docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md Returning payloads section. Complete source/contract reconciliation belongs to TYPE-REFERENCE-BOOK.1 before claiming exhaustive coverage."
+evidence: "TYPE-REFERENCE-BOOK.1.2.1.1 indexes existing syntax/contract roles; a small public AST probe confirms representative literal/block/group boundaries. No complete method inventory or parity claim."
+reverify: "Read docs/checkpoints/type-operation-inventory/syntax.md and TYPE-REFERENCE-BOOK.1.2.1 children; follow each canonical contract before inferring a method or runtime type."
 ---
 
-The book already contains substantial scalar/string, numeric, array/hash and codeblock material. Its current
-navigation follows general DSL/usage chapters; numeric integer/real distinctions are grouped, array/hash
-construction, mutation, pipelines and traversal are distributed, and detailed codeblock prose is under Returning
-payloads rather than a dedicated navigable type section. Several sampled operations have brief table entries and
-shared examples. This supports an organization/depth gap, not a complete missing-method inventory or count.
+The book has substantial scalar/string, numeric, array/harray and codeblock material,
+but the October10 review established navigation/depth gaps rather than a complete
+missing-method count. Integer/real notation does not establish separate binding
+namespaces or method tables; callback invocation and methods on a yielded value
+are distinct roles.
 
-TYPE-REFERENCE-BOOK schedules canonical per-type sections and complete individual operation entries after the
-active private callback lane. Inventory actual contracts first, including constructors, operators, helpers,
-receiver methods, aliases, invocation and backend limits. Preserve the actual type model: do not invent separate
-integer/real types or codeblock dot-methods from headings alone. Each verified operation needs arguments,
-results/mutation, edge cases, chaining/callback behavior and worked examples.
+`docs/checkpoints/type-operation-inventory/syntax.md` now indexes non-call value
+forms, binding/path operators, eager/deferred blocks and callable structure, with
+result/effect/copy/context boundaries and root-relative canonical authorities.
+It preserves current signed-index, grouped-value, raw-regex and retirement limits.
+Free-helper/alias enumeration and actual receiver/result transitions remain the
+next inventory children. A syntax entry does not establish backend execution,
+parity, complete documentation coverage or a comprehensive fluent family.
 
-Three legacy documentation task files contain explicit completion-status contradictions. TYPE-REFERENCE-BOOK.8
-owns the precise reproductions and relevant Git reconciliation before correction. These findings are scheduled
-through verified repair; they do not redirect the active AST callback task. This card publishes no numerical
-coverage claim and does not supersede dated historical book verification.
+TYPE-REFERENCE-BOOK.1.2.23 owns useful missing methods and inter-type transitions,
+including string split -> array methods -> selected string -> string methods.
+Every verified operation needs arguments, results/mutation, edge cases,
+chaining/callback semantics and worked examples. Inventory today's names and
+missing useful families separately before declaring a type complete.
+
+The precise legacy task-status contradictions encountered in October10 intake
+remain owned by TYPE-REFERENCE-BOOK.8; relevant Git/dates must be reconciled before
+repair. Feature-first direction defers that maintenance and broad verification.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Grouped19 and raw-regex21 are implemented and targeted-checked; inventory1 selects the next fluent method gaps under23. Continue toward100% feature coverage with compilation and a quick targeted check per commit. Maintenance and broad verification remain deferred.
+Syntax inventory1.1 is indexed; helper/alias1.2 and receiver/result1.3 select bounded fluent implementation gaps under23. Continue toward100% feature coverage with small checks and a commit per slice. Maintenance and broad verification remain deferred.
 
 ## Latest Completed Slice
 
-Perl incomplete raw assignment patterns retain their complete multiline payload. Complete first-line DSL expressions retain existing boundaries and numeric slash division. Syntax and the small native/fresh authored-oracle regression pass for LF/CRLF, exact payloads, quote continuations and helper-looking contents without binding effects. No regex type or portable raw-host admission is claimed. Book, canonical regex fact/map and task frontier agree.
+A source-linked syntax catalog separates literals, eager/deferred blocks, bare reads, direct paths, signed selectors, binding/append/path/grouped assignments and callable/receiver structure. Result/effect/copy/context boundaries and current legacy limits stay explicit. A small public AST role probe, book render and fast continuity checks pass. No complete method/API/parity claim.
 
 ## Next Action
 
-Activate inventory1 from clean Git using the retained authority index and canonical method/type records; enumerate current operations and select bounded fluent implementation gaps. Policy20, hygiene24 and exhaustive17.7 remain deferred until feature coverage.
+Activate helper/alias inventory1.2 from clean Git, using the retained authority ledger and current registries/contracts/catalog. Receiver/result1.3 follows, then bounded fluent gaps23. Keep broad verification, policy20 and hygiene24 deferred until feature coverage.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.1` — non-call syntax/result/effect/context catalog and quick AST probe; helper/alias1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.21` — raw multiline assignment payload fidelity, unchanged typed first-line division; syntax/native/fresh targeted checks pass; inventory1 next.
 - `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
 - `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
@@ -29,7 +30,6 @@ Activate inventory1 from clean Git using the retained authority index and canoni
 - `TYPE-REFERENCE-BOOK.1.2.22` — Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
 - `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
 - `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
-- `TYPE-REFERENCE-BOOK.1.2.17.8` — 11 source/input cases/10 source texts,22 quiet/routed commands;6 corrected-baseline CLI RED; 7 successful controls and unchanged thrown-error protocol;6 permanent groups GREEN, actual old-predicate inverse2 failed groups/restored GREEN;book91/two executed commands/three source denials; identity3/scope2 bypass-restoration;Knowledge +263 bytes within unchanged limits.
 
 ## History
 
