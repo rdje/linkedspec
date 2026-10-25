@@ -1413,7 +1413,7 @@ fields = ["a", "b", "a"]; out = uniq(uppercase_each(fields));
 return([out, fields]);
 ```
 
-This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
+This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds in both value/receiver and standalone writeback forms: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 

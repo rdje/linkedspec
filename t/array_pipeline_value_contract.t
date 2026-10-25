@@ -32,6 +32,13 @@ my $body = <<'BODY';
  typed=[2,"2","x"]; typed_result=uniq(typed); typed_index=first(typed_result);
  typed_filtered=filter_match(typed,/^2$/); filtered_index=first(typed_filtered);
  typed_nonempty=filter_nonempty([2,"",undef]); nonempty_index=first(typed_nonempty);
+ statement_unique=[2,"2",undef,""]; statement_unique_saved=copy(statement_unique); uniq(statement_unique);
+ statement_filter=[2,"2","x"]; filter_match(statement_filter,/^2$/);
+ statement_nonempty=[2,"",undef,"0"]; filter_nonempty(statement_nonempty);
+ statement_indexed=["zero","one","two"];
+ statement_indexed[first(statement_unique)]="unique";
+ statement_indexed[first(statement_filter)]="filtered";
+ statement_indexed[first(statement_nonempty)]="selected";
  indexed=["zero","one","two"]; indexed[typed_index]="unique";
  indexed[filtered_index]="filtered"; indexed[nonempty_index]="selected"; typed_result[0]=9;
  trimmed[0]="changed";
@@ -42,7 +49,8 @@ my $body = <<'BODY';
    dynamic,dynamic_receiver,dynamic_nested,dynamic_function,dynamic_computed,dynamic_empty,delimiter_effects,order,regex_parts,
    statement_dynamic,statement_computed,statement_saved,statement_empty,statement_absent,statement_effects,statement_function,
    letters,nested,filtered,receiver,function,computed,effects,typed,typed_result,typed_index,
-   typed_filtered,filtered_index,typed_nonempty,nonempty_index,indexed,mut]);
+   typed_filtered,filtered_index,typed_nonempty,nonempty_index,indexed,mut,
+   statement_unique,statement_unique_saved,statement_filter,statement_nonempty,statement_indexed]);
 BODY
 my $source = "fn clean(values) { return(uniq(trim_each(values))) }\nfn divide(values,delimiter) { return(split_each(values,delimiter)) }\nfn divide_inplace(values,delimiter) { split_each(values,delimiter); return(values) }\nTop:: I { $body }";
 my $original = [' a:A ','',' B:B ',' a:A '];
@@ -54,6 +62,7 @@ my $expected = [
     ['a','b','c','d'], ['a','b','c'], ['a.b','c.'], [], [], 3, ['a','b','c','d'],
     ['a','b','a'], ['A','B'], ['A'], ['A','B'], ['a:A','','B:B'], ['z','y'], 1,
     [2,'2','x'], [9,'x'], 2, [2,'2'], 2, [2], 2, ['zero','one','selected'], ['A','B'],
+    [2,undef,''], [2,'2',undef,''], [2,'2'], [2,'0'], ['zero','one','selected'],
 ];
 my $json = JSON::PP->new->canonical;
 my %context;

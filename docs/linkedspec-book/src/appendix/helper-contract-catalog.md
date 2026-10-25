@@ -831,21 +831,21 @@ dispatch rule.
 ### `filter_nonempty(arr)`
 - **Signature**: `filter_nonempty(arr: array)`
 - **Returns**: array
-- **Behavior**: Returns a new array with empty/undef elements removed.
+- **Behavior**: Returns a new array with empty/undef elements removed. Kept entries retain their original kinds, including numeric entries used later as array indices; standalone writeback preserves the same kinds.
 - **Example**: after `set(items, ["a", "", undef, "0", "b"])`,
   `return(items.filter_nonempty())` yields `[["a","0","b"]]`.
 
 ### `filter_match(arr, /pattern/)`
 - **Signature**: `filter_match(arr: array, pattern: regex)`
 - **Returns**: array
-- **Behavior**: Returns elements matching the regex pattern.
+- **Behavior**: Returns elements matching the regex pattern. Retains the original entry kinds in value/receiver and standalone writeback forms.
 - **Example**: after `set(items, ["alpha", "beta", "atom"])`,
   `return(items.filter_match(/^a/))` yields `[["alpha","atom"]]`.
 
 ### `uniq(arr)`
 - **Signature**: `uniq(arr: array)`
 - **Returns**: array
-- **Behavior**: Returns a new array with duplicates removed. Order of first occurrence is preserved.
+- **Behavior**: Returns a new array with duplicates removed. The first occurrence and its original value kind are preserved in value/receiver and standalone writeback forms. On Perl, `items=[2,"2",undef,""]; uniq(items)` leaves `[2,undef,""]`; entry0 remains a numeric array index and null stays distinct from empty text.
 - **Example**: after `set(items, ["a", "b", "a", "c", "b"])`,
   `return(items.uniq())` yields `[["a","b","c"]]`.
 

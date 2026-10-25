@@ -401,7 +401,7 @@ sub array_transform {
  if ($operation eq 'trim_each') {
   @values = map { my $value = defined($_) ? $_ : ''; $value =~ s/^\s+|\s+$//g; $value } @values;
  } elsif ($operation eq 'filter_nonempty') {
-  @values = grep { defined($_) && length($_) } @values;
+  @values = grep { my $candidate = $_; defined($candidate) && length($candidate) } @values;
  } elsif ($operation eq 'lowercase_each') {
   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::UnicodeCaseMapping');
   @values = map { LinkedSpec::UnicodeCaseMapping::lowercase($_) } @values;
@@ -410,7 +410,7 @@ sub array_transform {
   @values = map { LinkedSpec::UnicodeCaseMapping::uppercase($_) } @values;
  } elsif ($operation eq 'uniq') {
   my %seen;
-  @values = grep { !$seen{defined($_) ? "D\0$_" : "U\0"}++ } @values;
+  @values = grep { my $candidate = $_; !$seen{defined($candidate) ? "D\0$candidate" : "U\0"}++ } @values;
  } elsif ($operation eq 'sorted') {
   # String comparison caches text on its operands. Compare copies so the
   # returned elements keep their original scalar kinds.
@@ -423,7 +423,7 @@ sub array_transform {
  } elsif ($operation eq 'filter_match') {
   my $pattern = $args[0];
   die "binding array filter requires a regex pattern\n" unless ref($pattern) eq 'Regexp';
-  @values = grep { defined($_) && $_ =~ $pattern } @values;
+  @values = grep { my $candidate = $_; defined($candidate) && $candidate =~ $pattern } @values;
  } elsif ($operation eq 'split_each') {
   my $delimiter = $args[0];
   my @split_values;

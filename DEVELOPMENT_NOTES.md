@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.4.4 — retained statement values
+
+BindingRuntime::array_transform retained the same alias-stringification mechanism previously fixed in pure value pipelines: interpolation, matching and length mark retained numeric items as string-valid, so a later typed array write selects harray. Public probes reproduce all three statement helpers. Compare temporary scalar copies without changing the kept entries, uniqueness keys or typed selector classifier. The targeted native/fresh pipeline vector now passes numeric writes, null/empty-text and string0 controls while preserving existing pure/dynamic/statement cases. Broad recurrence remains separately deferred; resume helper inventory rather than expanding proof.
+
 ## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.5.2 — snapshot before delimiter effects
 
 ArrayPipeline previously compiled unquoted variable/block source into regex text. Only split_each now lowers dynamic scalars through the existing value callback. New internal BindingRuntime::array_snapshot validates/copies before effects; existing array_transform performs the split/rebind. Source-first snapshot and once-only pattern capture also cover the legacy list plan. Native/fresh targeted pipeline checks pass, including function parameters, empty/absent targets and a wrong-kind target before failing delimiter evaluation. Other static helper paths are unchanged. The same source review finds retained predicate kind risk in statement filters;5.4.4 owns the next public probe/repair, separate from broad recurrence.

@@ -23,7 +23,7 @@ reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/array_pip
 
 October26:87.1 added ordinary filter values;5.4.1 routes other pipeline values to pure lowering. Typed bare/emitted function slots supply values; standalone calls still rebind. The old value path emitted source assignments.
 
-Copied predicate operands preserve numeric selectors. Native/fresh tests cover nested/function/computed/receiver/statement values and source effects. Broader5.4.2 remains open; no deferred-helper or regex-type admission.
+Copied predicate operands preserve numeric selectors in pure5.4.1 and standalone BindingRuntime::array_transform5.4.4. Uniqueness, regex matching and length compare temporary scalars while retaining the original entry. Null/empty-text distinction and numeric/string equality retain existing semantics. Native/fresh tests cover nested/function/computed/receiver/statement values and source effects. Broader5.4.2 remains open; no deferred-helper or regex-type admission.
 
 ## Contract and syntax
 

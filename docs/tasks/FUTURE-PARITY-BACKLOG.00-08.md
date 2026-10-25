@@ -3197,11 +3197,31 @@
   Claim verification: none: Qualitative executable-doc defect intake; no coverage measurement.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.4.4`
-  Status: `pending` / P1 retained numeric-kind implementation
+  Status: `done` / P1 retained numeric-kind implementation
+  Activation commit: `4aa0f077d12fe9bf0aa3cea10bd04d1aab54b499`
+  Owned paths: perl/LinkedSpec/BindingRuntime.pm; existing small pipeline regression; current array book/fact/map; indexed/task/live continuity.
+  Verification tier: `focused`
+  Focused checks: BindingRuntime/test syntax and one small native/fresh pipeline regression extended with standalone retained numeric selectors and null/string controls; book and fast continuity/history checks only.
+  Canonical trigger: None for bounded existing retained-value kind repair under director feature policy; broad5.4.2 stays deferred.
+  Reproduce: Public Get for items=[2,"2","x"]; uniq(items); index=first(items); indexed=["zero","one","two"]; indexed[index]="selected" reports nested_write_kind_conflict expected harray/found array. Separate filter_match(items,/^2$/) and filter_nonempty([2,"",undef]) statements reproduce the same typed failure; pure controls are already GREEN from5.4.1.
+  Root cause: BindingRuntime::array_transform stringifies aliased retained values in the uniqueness key, regex match and length predicates. The resulting public string-validity flag changes selector kind. Preserve operands by comparing scalar copies; do not relax typed selector classification.
+  Acceptance: Preserve original numeric/string/null entries and stable dedup/filter behavior, binding writeback, retained snapshots and selected numeric use through later typed writes.
   Goal: Preserve numeric item kinds in explicit standalone uniq/filter_match/filter_nonempty writeback.
   Intake: BindingRuntime::array_transform still compares aliased retained values with interpolation, regex matching and length; the same pure-value mechanism was reproduced/fixed in5.4.1. Confirm standalone behavior with a tiny public selector/write probe, then repair copied predicate operands if reproduced.
   Schedule: Next bounded feature after5.5.2; independent of deferred broad5.4.2. Own this causal recurrence without a full matrix.
-  Claim verification: none: Source-confirmed risk intake, runtime conclusion not yet observed.
+  Claim verification: none: Deterministic retained-kind implementation with focused regression; no quantified corpus/exhaustive/portable admission measurement.
+
+  Completion: Copy each scalar predicate operand before length, regex matching or uniqueness-key interpolation and retain original entries in the result. No selector/classifier, dedup-key or target-mutation policy changes.
+  Focused result: BindingRuntime/test syntax and t/array_pipeline_value_contract.t PASS on final production for native/fresh execution after the same regression fails with typed selector errors before repair. Book/fast continuity/history checks pass; no full suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Separate public Get probes for each statement helper report nested_write_kind_conflict on the selected numeric index; the added small native/fresh regression is RED before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — BindingRuntime::array_transform stringifies retained aliased scalars while checking uniqueness, regex matching or nonempty length, changing public value validity.
+  - [x] **FIX** — Compare copied scalar operands and retain the original entries, preserving the existing uniqueness key and filter predicates.
+  - [x] **ADDRESSED (verified)** — Changed-module/test syntax and targeted native/fresh pipeline regression PASS.
+  - [x] **NO REGRESSION** — Selected numeric values write array index2; numeric/string dedup retains numeric2, null differs from empty text, nonempty retains string0, and saved inputs/pure/dynamic/statement controls pass. Broad suites stay deferred.
+  - [x] **LOCKSTEP** — Helper examples/current kind guarantee, canonical fact/map, indexed ownership and live handoff agree. Resume helper inventory1.2; no complete API admission.
+  Probe note: The initial JSON diagnostic tried serializing the nested blessed error; rerun with string-safe diagnostic fields. Actual public error traces identify the same typed failure for all three helpers; no defect credit for the diagnostic serializer setup error.
+  Commit: `FUTURE-PARITY-BACKLOG.5.4.4 - preserve standalone filter element kinds`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.5`
   Status: `active` / implementations targeted-checked; broader recurrence remains with5.4.2

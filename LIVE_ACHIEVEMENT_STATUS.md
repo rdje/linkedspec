@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dynamic Perl split_each value/standalone delimiters5.5.1-.2 are implemented with targeted checks. Retained numeric kinds in standalone filters5.4.4 are next; helper inventory stays open. Keep compile/quick-regression/commit cadence; broad verification and maintenance remain deferred.
+Standalone filter numeric kinds5.4.4 and dynamic split_each delimiters5.5.1-.2 are implemented with targeted checks. Helper/alias inventory1.2 selects the next bounded feature. Keep compile/quick-regression/commit cadence; broad verification and maintenance remain deferred.
 
 ## Latest Completed Slice
 
-Standalone split_each lowers dynamic scalar operands and validates/snapshots its target before delimiter effects. The delimiter evaluates once even on empty/absent arrays; wrong kinds reject first. Existing literal/regex behavior stays on its prior path. Changed-module/test syntax and small native/fresh pipeline regression pass, with book/fast continuity checks. Current fact/map/indexed/live handoff agree.
+Standalone uniq/filter_match/filter_nonempty compare scalar copies and retain original numeric kinds. Separate public probes and the small native/fresh regression show actual typed selector RED before repair and GREEN afterward. Numeric writes, null/empty-text/string0 distinctions, snapshots and pure/dynamic/statement controls pass. Module/test syntax, book and fast continuity checks pass; current helper examples/fact/map/indexed/live handoff agree.
 
 ## Next Action
 
-Confirm the source-observed retained numeric-kind risk in BindingRuntime statement filters with a tiny public selector/write probe, then implement under5.4.4 if reproduced. Keep this bounded feature separate from broad recurrence; resume helper inventory afterward.
+Resume bounded helper/alias inventory1.2 from canonical contracts/source links, selecting further missing implementations without a runtime census. Complete method/result-type coverage remains open; broad recurrence, policy and storage maintenance stay deferred until feature coverage.
 
 ## Recent Completions
 
+- `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
 - `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
 - `FUTURE-PARITY-BACKLOG.5.5.1` — dynamic Perl split_each value delimiters, once/order/function/receiver controls; syntax/native/fresh targeted checks pass; standalone5.5.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.1` — pure Perl pipeline values, scoped parameters and preserved numeric kinds; targeted pipeline/filter native/fresh checks pass; helper selection resumes.
@@ -29,7 +30,6 @@ Confirm the source-observed retained numeric-kind risk in BindingRuntime stateme
 - `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
 - `REPO-HYGIENE.23` — Rust105.2GiB/history111.0GiB allocated cleanup; lossless52.7MiB archive/two restored readers/four fresh Rust examples; six reviewer denials and scoped before/after census; Julia17.5 next; repair24 after17.7.
-- `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
 
 ## History
 

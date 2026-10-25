@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.4.4 — preserve standalone filter element kinds
+
+Standalone Perl uniq/filter_match/filter_nonempty compare scalar copies while retaining original entries, so selected numbers remain numeric array indices. Keep stable dedup keys, null/empty-text distinctions and existing writeback behavior. Separate public probes and the small native/fresh regression fail before repair and pass afterward, including numeric typed writes and saved/pure/dynamic controls. Module/test syntax, book and fast continuity/history checks pass. Current helper examples/fact/map/indexed/live handoff agree; helper selection resumes and broad suites stay deferred.
+
 ## FUTURE-PARITY-BACKLOG.5.5.2 — evaluate standalone split_each delimiters
 
 Perl standalone split_each now lowers dynamic scalar operands, validates/snapshots the target before effects, evaluates the delimiter once and writes back the transformed array. Runtime text is literal; authored literals/regexes retain their paths. The legacy list route also captures its pattern outside the map. Changed-module/test syntax and the small native/fresh pipeline regression pass after actual RED, including function/empty/absent/effect and wrong-target controls. Book/fact/map/indexed/live handoff agree; standalone numeric-kind repair5.4.4 is next. Broad verification remains deferred.
