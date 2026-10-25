@@ -4377,11 +4377,12 @@ impl Engine {
         let Expr::Call { name, args } = expr else {
             return Ok(false);
         };
-        if !matches!(
-            name.as_str(),
-            "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
-        ) || args.len() != 1
-        {
+        let arity = match name.as_str() {
+            "split_each" | "filter_match" => 2,
+            "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq" => 1,
+            _ => return Ok(false),
+        };
+        if args.len() != arity || args.iter().any(|arg| !matches!(arg, Arg::Positional(_))) {
             return Ok(false);
         }
         let (target, bare_target) = match args.first() {
@@ -4416,7 +4417,18 @@ impl Engine {
         } else {
             ctx.get_array(target)
         };
-        let transformed = if name == "filter_nonempty" {
+        let transformed = if matches!(name.as_str(), "split_each" | "filter_match" | "uniq") {
+            let mut values = vec![RuntimeValue::Array(source)];
+            for arg in args.iter().skip(1) {
+                values.push(self.eval_expr(arg.value(), ctx, rule_label)?);
+            }
+            let RuntimeValue::Array(transformed) =
+                self.call_helper(name, args, &values, ctx, rule_label)?
+            else {
+                return Err(format!("array transform '{name}' did not return an array"));
+            };
+            transformed
+        } else if name == "filter_nonempty" {
             source
                 .into_iter()
                 .filter(RuntimeValue::is_nonempty)

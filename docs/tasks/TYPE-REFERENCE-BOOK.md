@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / helper inventory after syntax1.1
+- Status: `active` / documented transform gap5.3 before further helper inventory
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-25`
@@ -964,23 +964,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
+Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACKLOG.5 now owns bounded Rust/Dart/Julia transform writeback children5.3. The catalog explicitly names this gap; helper inventory1.2/receiver1.3 and comprehensive23 remain open. No complete inventory/method claim or dirty pivot.
+
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases; receiver/result inventory follows to select feature gaps. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
-| 3 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
-| 4 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
-| 5 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua signed selectors targeted-checked on PUC/LuaJIT. |
-| 6 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors targeted-checked. |
-| 7 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/fresh targeted checks pass. |
-| 8 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with native/fresh targeted checks pass. |
-| 9 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map inventory to book after method-gap implementation. |
-| 10 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent inventory/layout review. |
-| 11 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Policy maintenance deferred until feature coverage. |
-| 12 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Broad verification deferred until feature coverage. |
-| 13 | `TYPE-REFERENCE-BOOK.8` | `pending` | Legacy metadata maintenance deferred. |
-| 14 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
-| 15 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed reference families and closeout. |
+| 1 | `FUTURE-PARITY-BACKLOG.5.3.2` | `pending` | Rust standalone transforms are implemented; Dart then Julia follow. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Current free helpers/aliases remain open after known feature gap repairs. |
+| 3 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
+| 4 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |
+| 5 | `TYPE-REFERENCE-BOOK.1.2.21` | `completed` | Raw multiline assignment payload and division controls targeted-checked. |
+| 6 | `TYPE-REFERENCE-BOOK.1.2.17.6` | `completed` | Shared Lua signed selectors targeted-checked on PUC/LuaJIT. |
+| 7 | `TYPE-REFERENCE-BOOK.1.2.17.5` | `completed` | Julia signed selectors targeted-checked. |
+| 8 | `TYPE-REFERENCE-BOOK.1.2.14` | `completed` | Deferred last native/fresh targeted checks pass. |
+| 9 | `TYPE-REFERENCE-BOOK.1.2.16` | `completed` | Deferred with native/fresh targeted checks pass. |
+| 10 | `TYPE-REFERENCE-BOOK.1.2.2` | `pending` | Map inventory to book after method-gap implementation. |
+| 11 | `TYPE-REFERENCE-BOOK.1.3` | `pending` | Independent inventory/layout review. |
+| 12 | `TYPE-REFERENCE-BOOK.1.2.20` | `pending` | Policy maintenance deferred until feature coverage. |
+| 13 | `TYPE-REFERENCE-BOOK.1.2.17.7` | `pending` | Broad verification deferred until feature coverage. |
+| 14 | `TYPE-REFERENCE-BOOK.8` | `pending` | Legacy metadata maintenance deferred. |
+| 15 | `PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.13` | `pending` | Deferred literal-rendering question. |
+| 16 | `TYPE-REFERENCE-BOOK.2` | `pending` | Inventory-backed reference families and closeout. |
+
 
 ## Decisions
 

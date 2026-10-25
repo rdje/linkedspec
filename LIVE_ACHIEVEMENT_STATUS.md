@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Syntax inventory1.1 is indexed; helper/alias1.2 and receiver/result1.3 select bounded fluent implementation gaps under23. Continue toward100% feature coverage with small checks and a commit per slice. Maintenance and broad verification remain deferred.
+Known standalone array-transform gap5.3 is selected before further helper inventory under feature-first steering. Rust5.3.1 is implemented/targeted-checked; Dart5.3.2 then Julia5.3.3 follow. Small compile/regression checks and a commit per implementation; maintenance and broad verification stay deferred.
 
 ## Latest Completed Slice
 
-A source-linked syntax catalog separates literals, eager/deferred blocks, bare reads, direct paths, signed selectors, binding/append/path/grouped assignments and callable/receiver structure. Result/effect/copy/context boundaries and current legacy limits stay explicit. A small public AST role probe, book render and fast continuity checks pass. No complete method/API/parity claim.
+Rust standalone split_each/filter_match/uniq now validate/snapshot the target, evaluate remaining operands once through existing pure behavior and replace the named array. Stored results and receiver forms remain pure. Locked/offline compilation and small native/restored/generated-plan checks pass for snapshots, element kinds, absent/wrong-kind targets and operand evaluation. Book, canonical array fact/map and indexed task ownership agree; no broad parity/API admission.
 
 ## Next Action
 
-Activate helper/alias inventory1.2 from clean Git, using the retained authority ledger and current registries/contracts/catalog. Receiver/result1.3 follows, then bounded fluent gaps23. Keep broad verification, policy20 and hygiene24 deferred until feature coverage.
+Activate Dart5.3.2 from clean Git, implement the same documented statement writeback, compile/run one small regression and commit; Julia5.3.3 follows. Full helper/receiver inventory, comprehensive fluent gaps and later broad validation remain open.
 
 ## Recent Completions
 
+- `FUTURE-PARITY-BACKLOG.5.3.1` — Rust standalone split_each/filter_match/uniq rebind named arrays; compile/native/restored/generated-plan targeted checks pass; Dart5.3.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.1.1` — non-call syntax/result/effect/context catalog and quick AST probe; helper/alias1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.21` — raw multiline assignment payload fidelity, unchanged typed first-line division; syntax/native/fresh targeted checks pass; inventory1 next.
 - `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
@@ -29,7 +30,6 @@ Activate helper/alias inventory1.2 from clean Git, using the retained authority 
 - `OPENAI-TOOL-API.1` — deferred structured tools/ChatGPT UI plan indexed; Codex UI separately verified later; book and semantic-document checks pass; hygiene22 then Rust17.3.
 - `TYPE-REFERENCE-BOOK.1.2.22` — Perl deferred literals preserve boolean/whole-float kinds and large-fraction payloads; typed copies retain source kinds, and private integer caches cannot admit fractional selectors. Corrected47/74 RED becomes74/74 GREEN, callable28; eight required runtime inverses/nine restored GREEN; compatibility11/784 with the single startup35 expectation corrected and affected10/1008 GREEN; book95/six examples/three denials; actual input3/scope2 controls. Finite Perl scope only.
 - `TYPE-REFERENCE-BOOK.1.2.17.2` — 120 authored native/emitted programs; 12 arithmetic/14 read/33 actual deferred write records; 10 direct suites/789 top-level tests; eight physical source faults with restored controls; book93/four executed examples/three rendered denials and executed wrong-selector RED; input3/scope2 actual bypass/restoration. Perl scope only; no portable admission.
-- `TYPE-REFERENCE-BOOK.1.2.17.1` — 12 arithmetic/14 read/33 write targets,30 exact historical write outcomes,122 fixture denials; five actual physical source faults with healthy/restored controls;book91/three source denials;input3/scope2 bypass/restoration; no backend admission.
 
 ## History
 

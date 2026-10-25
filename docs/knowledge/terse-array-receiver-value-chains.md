@@ -1,7 +1,8 @@
 ---
 id: terse-array-receiver-value-chains
-title: SPEC-FORMAT-TERSE.2.3.5.1 array receiver-dot value chains
+title: Array pure receiver chains and named statement transforms
 answers:
+  - "why do Rust standalone split_each filter_match and uniq update arrays"
   - "how do array receiver-dot value chains work"
   - "does items.sorted().drop_front().first() work"
   - "does items.uniq().join_values work"
@@ -10,11 +11,11 @@ answers:
   - "does items.join_values keep delimiter first"
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
-date: 2026-07-01
-status: current
+date: 2026-10-25
+status: pure chains current; Rust statement transforms5.3.1 targeted-checked; Dart/Julia pending
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
-evidence: "SPEC-FORMAT-TERSE.2.3.5.1 landed pure array receiver-dot value chains on Perl and Rust. The original slice preserved the then-current statement-only end-mutation boundary. FUTURE-PARITY-BACKLOG.12.1.1-.6 later supersede that result boundary across all five backends: named end mutations return independent updated arrays and may feed compatible continuations."
-reverify: "prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_5_1 --quiet && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture"
+evidence: "Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust statement repair:5.3.1."
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback"
 ---
 
 Array receiver-dot value chains are pure helper composition over compatible array helpers.
@@ -36,4 +37,6 @@ that boundary: `items.push_back(value)`, `items.push_front(value)`, `items.pop_b
 mutate and return updated arrays; pop discards the removed element. See
 [[uniform-binding-array-end-result-supersession]].
 
-The next return-family leaf is `SPEC-FORMAT-TERSE.2.3.5.2` for hash receiver-dot value chains.
+Historical hash sibling: `SPEC-FORMAT-TERSE.2.3.5.2`.
+
+Rust5.3.1 enrolls standalone split_each/filter_match/uniq in execute_array_string_transform_statement. Validate the array target, snapshot it, evaluate remaining operands once and reuse call_helper before rebinding. Existing wrong kinds fail; absent targets initialize. Pure value/receiver calls stay unchanged. Native/restored/generated-plan focused checks pass; Dart5.3.2, Julia5.3.3 and broad5.3.4 remain open.

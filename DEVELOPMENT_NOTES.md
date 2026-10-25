@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-25 — FUTURE-PARITY-BACKLOG.5.3.1 — reuse pure transforms for statements
+
+The current catalog already documents bare-array statement writeback and names the Rust/Dart/Julia omissions. Feature-first steering selects that bounded existing gap from clean syntax-inventory15cdc6997, without claiming the complete helper/method inventory is done. Rust execute_array_string_transform_statement had only four transforms; omitted calls fell through to pure evaluation and discarded results. Enroll the three missing shapes, preserve target validation and snapshot ordering, evaluate remaining arguments once and call the existing helper dispatcher before array replacement. A small native/restored/generated-plan regression and wrong-kind controls pass; the initial missing generated-runner contract argument was a corrected test setup error, not runtime RED. No new public helper/type or dependency internals are introduced.
+
 ## 2026-10-25 — TYPE-REFERENCE-BOOK.1.2.1.1 — separate syntax roles before methods
 
 Split operation inventory into independently committed syntax, free-helper/alias, receiver/result and reconciliation children. The syntax index reuses the admitted authority/model ledger and canonical binding/callable contracts instead of repeating the old whole-source census. It records grouped ordinary/deferred and raw regex limits, signed implementation versus deferred admission, harray dynamic keys and callback scope. A tiny AST role probe avoids confusing eager blocks, deferred values and raw groups. No method-count/complete API or backend-execution claim follows from a syntax entry; focus remains selecting bounded implementation gaps.

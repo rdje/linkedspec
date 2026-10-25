@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.3.1 — rebind Rust standalone array transforms
+
+Implement already documented standalone split_each/filter_match/uniq writeback on named Rust arrays. Validate/snapshot the target before remaining operands, reuse call_helper for unchanged pure semantics, then replace the array. Stored/receiver results stay pure. Locked/offline compilation and a small native/restored/generated-plan regression pass for snapshot isolation, typed elements, absent/wrong-kind targets and once-only operands after actual runtime RED. Rustfmt, book and fast continuity checks pass. Existing parity parent5 owns Rust/Dart/Julia children5.3; choose this known feature gap before further helper inventory. Broad verification and policy/storage maintenance stay deferred.
+
 ## TYPE-REFERENCE-BOOK.1.2.1.1 — index non-call value syntax
 
 Add a source-linked working syntax catalog separating literal/container/block values, reads/paths/signed selectors, binding/append/path/grouped assignments, callable structure and receiver/separator roles. Record result/effect/copy/context boundaries and current retired/private/raw limits without admitting methods by name discovery. Clarify syntax roles in the book and refresh the existing per-type gap fact/map/live handoff. A small public AST probe, book render and fast continuity/history/diff checks pass. Helper/alias1.2 then receiver/result1.3 select fluent implementation gaps; broad verification and maintenance remain deferred.

@@ -2105,7 +2105,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `active`
   Goal: Normalize or permanently document helper caveats.
-  Children: `.5.1`, `.5.2`
+  Children: `.5.1`, `.5.2`, `.5.3`
   Acceptance: Own the array split/pipeline return-shape caveats (`SPEC-LANG-REFERENCE.5.3.1`) and
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
@@ -3049,6 +3049,62 @@
     Canonical local CI passes reference CLI 63x2, Phase 0 `1..1031` in 640 seconds, and the registered logical
     all-toolchain leg. No runtime implementation changed and no implementation mutation campaign ran.
   Commit: `FUTURE-PARITY-BACKLOG.5.2.9 - close logical-helper public no-drift`
+
+- ID: `FUTURE-PARITY-BACKLOG.5.3`
+  Status: `active`
+  Goal: Implement the already documented standalone bare-array writeback for split_each, filter_match and uniq on Rust, Dart and Julia, preserving pure value/receiver forms.
+  Children: `.5.3.1`, `.5.3.2`, `.5.3.3`, `.5.3.4`
+  Authority: Helper Catalog No Mutation Guarantee explicitly defines standalone transform writeback and names the three backend omissions; the parent5 and existing runtime Knowledge cards own the defect. This is alignment to an existing contract, not a new helper or type.
+  Schedule: Selected after clean TYPE-REFERENCE-BOOK.1.2.1.1 under director feature-first steering. Full type/helper inventory remains open; implement this known bounded gap before continuing it.
+  Acceptance: Each backend enrolls the three statement forms with correct argument/target handling, copied result/rebinding, target errors and operand effects. Pure helper/receiver calls stay nonmutating. Compile/run a small focused check and commit per backend; broad recurrence/admission follows feature coverage.
+  Claim verification: none: Parent scheduling only; no complete backend/helper admission.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.3.1`
+  Status: `done`
+  Activation commit: `15cdc6997a100d7f8ee89780dbac47c340eb3747`
+  Goal: Add Rust standalone split_each/filter_match/uniq bare-array writeback using existing pure operation behavior.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.1`
+  Owned paths: rust/linkedspec-runtime/src/engine.rs and a focused integration test; existing array-helper fact/book; FUTURE-PARITY-BACKLOG mutable part/root/index, TYPE cross-reference and normal continuity.
+  Verification tier: `focused`
+  Focused checks: Locked/offline compilation and one small Rust native/reconstructed or emitted regression covering the three statements and pure/guard controls; book and fast continuity checks. Broad verification is deferred.
+  Canonical trigger: None for alignment with existing statement contract in this director-authorized implementation phase; broad admission is separately scheduled.
+  Claim verification: none: Deterministic implementation and focused regression, no quantified corpus/exhaustive/portable admission measurement.
+  Reproduce/impact: Engine::execute_array_string_transform_statement currently accepts only trim_each/filter_nonempty/lowercase_each/uppercase_each. The three omitted calls fall through to pure evaluation and their result is discarded, leaving the bare target unchanged.
+  Acceptance: Preserve result element kinds, left-to-right operands and typed target guards; initialize an absent valid target consistently and reject wrong kinds. Stored results/receiver chains must remain pure, and later effects must not mutate retained snapshots.
+
+  Completion: The Rust statement dispatcher enrolls split_each/filter_match with two positional arguments and uniq with one. Existing target-kind validation/snapshot precedes remaining operand evaluation; call_helper supplies unchanged pure operation behavior, then the named array is replaced. Stored/receiver forms remain pure.
+  Focused command: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback` compiles and passes native/restored/generated-plan values plus wrong-kind controls. Rustfmt and book/fast continuity checks pass; broad suites remain deferred.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Targeted Rust Engine execution leaves bare arrays unchanged and accepts a scalar target; corrected focused regression is RED before the runtime repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Engine::execute_array_string_transform_statement omits these three names, so statement evaluation falls through to pure helpers and discards the result.
+  - [x] **FIX** — Enroll correct shapes and reuse existing target validation, call_helper evaluation and array replacement.
+  - [x] **ADDRESSED (verified)** — cargo test --test array_transform_writeback compiles and passes for native/restored/generated-plan execution.
+  - [x] **NO REGRESSION** — Quick stored/receiver purity, snapshots, typed elements, absent/wrong-kind targets and once-only operands pass. Full suites remain deferred by director instruction.
+  - [x] **LOCKSTEP** — Book, canonical array fact/map, indexed task parts and live handoff agree; Dart5.3.2 is next and complete inventory/API admission remains open.
+  Harness note: Initial test compilation omitted the generated runner's contract argument; corrected before runtime RED, with no product-defect credit for that setup error.
+  Commit: `FUTURE-PARITY-BACKLOG.5.3.1 - rebind Rust standalone array transforms`.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.3.2`
+  Status: `pending`
+  Goal: Add the same already documented standalone transform writeback on Dart; preserve pure forms and typed target/effect rules.
+  Dependencies: `FUTURE-PARITY-BACKLOG.5.3.1`
+  Planned tier: `focused`; one compile and small regression under director cadence.
+  Claim verification: none: Unactivated implementation; no new measurement.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.3.3`
+  Status: `pending`
+  Goal: Add the same already documented standalone transform writeback on Julia; preserve pure forms and typed target/effect rules.
+  Dependencies: `FUTURE-PARITY-BACKLOG.5.3.2`
+  Planned tier: `focused`; one compile and small regression under director cadence.
+  Claim verification: none: Unactivated implementation; no new measurement.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.3.4`
+  Status: `pending`
+  Goal: Broadly verify/reconcile statement writeback across the existing backends and retire the documented omission after feature coverage.
+  Dependencies: `FUTURE-PARITY-BACKLOG.5.3.3`
+  Schedule: Deferred broad validation; not a prerequisite for the next feature under director instruction.
+  Planned tier: Determine at activation; portable admission requires canonical proof.
+  Claim verification: none: Unactivated broad verification; no admission claim.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`
