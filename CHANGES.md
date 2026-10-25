@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.5.2 — evaluate standalone split_each delimiters
+
+Perl standalone split_each now lowers dynamic scalar operands, validates/snapshots the target before effects, evaluates the delimiter once and writes back the transformed array. Runtime text is literal; authored literals/regexes retain their paths. The legacy list route also captures its pattern outside the map. Changed-module/test syntax and the small native/fresh pipeline regression pass after actual RED, including function/empty/absent/effect and wrong-target controls. Book/fact/map/indexed/live handoff agree; standalone numeric-kind repair5.4.4 is next. Broad verification remains deferred.
+
 ## FUTURE-PARITY-BACKLOG.5.5.1 — evaluate dynamic split_each value delimiters
 
 Ordinary Perl split_each values and receivers evaluate variable/computed scalar delimiters once after snapshotting the source. Quote runtime metacharacters literally; preserve authored quoted/regex paths and trailing-field behavior. The small existing native/fresh pipeline vector is RED before repair and GREEN afterward, including nested/function/receiver, order/empty-input/effect and literal/flag controls. Syntax/book/fast continuity checks pass. Existing fact chronology is contained with an exact Git pointer; map/book/index/live handoff agree. Standalone5.5.2 is next; full suites remain deferred.

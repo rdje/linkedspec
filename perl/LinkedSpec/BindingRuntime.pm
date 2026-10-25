@@ -384,6 +384,14 @@ sub index_set {
  return $binding
 }
 
+# Validate and snapshot a target before evaluating effectful transform operands.
+sub array_snapshot {
+ my ($binding, $identifier) = @_;
+ $binding = [] unless defined $binding;
+ _kind_mismatch($identifier, 'array', $binding) unless ref($binding) eq 'ARRAY';
+ return [@$binding]
+}
+
 sub array_transform {
  my ($binding, $identifier, $operation, @args) = @_;
  $binding = [] unless defined $binding;

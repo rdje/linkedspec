@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.5.2 — snapshot before delimiter effects
+
+ArrayPipeline previously compiled unquoted variable/block source into regex text. Only split_each now lowers dynamic scalars through the existing value callback. New internal BindingRuntime::array_snapshot validates/copies before effects; existing array_transform performs the split/rebind. Source-first snapshot and once-only pattern capture also cover the legacy list plan. Native/fresh targeted pipeline checks pass, including function parameters, empty/absent targets and a wrong-kind target before failing delimiter evaluation. Other static helper paths are unchanged. The same source review finds retained predicate kind risk in statement filters;5.4.4 owns the next public probe/repair, separate from broad recurrence.
+
 ## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.5.1 — delimiter source versus value
 
 strip_literal_delimiters returns unquoted source unchanged, so the array value normalizer escaped variable or codeblock text and skipped its effects. Distinguish authored literal/regex operands from dynamic values; lower the latter once after the source snapshot and use runtime literal quoting outside the map. The extended existing pipeline regression passes natively and freshly generated, with once/order/empty/function/receiver controls. Explicit standalone normalization remains separately owned by next5.5.2. No new regex value kind, deferred helper admission or exhaustive verification.

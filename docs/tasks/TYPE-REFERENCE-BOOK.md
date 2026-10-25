@@ -832,7 +832,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.2`
   Status: `pending`
-  Current implementation selection: Dynamic split_each scalar delimiters are owned by FUTURE-PARITY-BACKLOG.5.5; value5.5.1 is implemented and standalone5.5.2 is next. Return here afterward; full enumeration is not complete.
+  Current implementation selection: Dynamic split_each scalar delimiters are owned by FUTURE-PARITY-BACKLOG.5.5; value/standalone5.5.1-.2 are implemented and retained standalone numeric kinds5.4.4 are next. Return here afterward; full enumeration is not complete.
   Goal: Enumerate current free-helper and alias spellings with canonical families, signatures, results, mutation/callback contracts and source links. Separate private/retired/compatibility-only names.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.1`
   Planned tier: `focused`; use source/metadata checks, not a full runtime matrix.

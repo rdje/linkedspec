@@ -17,6 +17,12 @@ my $body = <<'BODY';
    {order=cat(order,"D"); delimiter_effects=num_add(delimiter_effects,1); "."});
  dynamic_empty=split_each([], {delimiter_effects=num_add(delimiter_effects,1); ":"});
  regex_parts=split_each(["aXb","cxd"],/x/i);
+ statement_dynamic=copy(parts_source); split_each(statement_dynamic,delimiter);
+ statement_effects=0; statement_computed=["a.b","c."]; statement_saved=copy(statement_computed);
+ split_each(statement_computed,{statement_effects=num_add(statement_effects,1); "."});
+ statement_empty=[]; split_each(statement_empty,{statement_effects=num_add(statement_effects,1); ":"});
+ split_each(statement_absent,{statement_effects=num_add(statement_effects,1); ":"});
+ statement_function=divide_inplace(parts_source,delimiter);
  letters=["a","b","a"];
  nested=uniq(uppercase_each(letters));
  filtered=filter_match(uniq(uppercase_each(letters)),/^A/);
@@ -34,16 +40,18 @@ my $body = <<'BODY';
  lowercase_each(mut); uppercase_each(mut); uniq(mut);
  return([trimmed,nonempty,lower,upper,unique,parts,source,saved,parts_source,
    dynamic,dynamic_receiver,dynamic_nested,dynamic_function,dynamic_computed,dynamic_empty,delimiter_effects,order,regex_parts,
+   statement_dynamic,statement_computed,statement_saved,statement_empty,statement_absent,statement_effects,statement_function,
    letters,nested,filtered,receiver,function,computed,effects,typed,typed_result,typed_index,
    typed_filtered,filtered_index,typed_nonempty,nonempty_index,indexed,mut]);
 BODY
-my $source = "fn clean(values) { return(uniq(trim_each(values))) }\nfn divide(values,delimiter) { return(split_each(values,delimiter)) }\nTop:: I { $body }";
+my $source = "fn clean(values) { return(uniq(trim_each(values))) }\nfn divide(values,delimiter) { return(split_each(values,delimiter)) }\nfn divide_inplace(values,delimiter) { split_each(values,delimiter); return(values) }\nTop:: I { $body }";
 my $original = [' a:A ','',' B:B ',' a:A '];
 my $expected = [
     ['changed','','B:B','a:A'], [' a:A ',' B:B ',' a:A '],
     [' a:a ','',' b:b ',' a:a '], [' A:A ','',' B:B ',' A:A '],
     [' a:A ','',' B:B '], ['a','b','c','d'], $original, $original, ['a:b','c:d'],
     ['a','b','c','d'], ['a','b','c','d'], 4, ['a','b','c','d'], ['x','y','z'], [], 2, 'SD', ['a','b','c','d'],
+    ['a','b','c','d'], ['a','b','c'], ['a.b','c.'], [], [], 3, ['a','b','c','d'],
     ['a','b','a'], ['A','B'], ['A'], ['A','B'], ['a:A','','B:B'], ['z','y'], 1,
     [2,'2','x'], [9,'x'], 2, [2,'2'], 2, [2], 2, ['zero','one','selected'], ['A','B'],
 ];
@@ -65,6 +73,14 @@ if ($loaded) {
     is($json->encode($fresh_value),
         $json->encode($expected), 'fresh parser preserves pure/nested/function/receiver/statement boundaries');
 }
+
+# A wrong target must fail before evaluating the delimiter's failing expression.
+my $invalid_source = 'Top:: I { bad=7; split_each(bad,{num_div(1,0)}); return(bad) }';
+my %invalid_context;
+my $invalid_parser = LinkedSpec::Get(\$invalid_source, runtime_ctx_ref => \%invalid_context);
+my $invalid_input = 'x';
+$invalid_parser->(\$invalid_input);
+like($invalid_context{last_error}{detail} // '', qr/binding_kind_mismatch.*expected_kind=array/, 'wrong target rejects before delimiter evaluation');
 
 done_testing() unless caller;
 1;

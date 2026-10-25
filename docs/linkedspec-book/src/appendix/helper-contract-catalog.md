@@ -819,7 +819,7 @@ dispatch rule.
 - **Returns**: array
 - **Behavior**: Splits each element and flattens the pieces. In ordinary Perl value/receiver forms, scalar delimiters may be variables or expressions: the array is snapshotted first, then the delimiter evaluates once, even for an empty array. Runtime scalar text splits literally; slash regex literals retain flags and existing trailing-field behavior.
 - **Example**: `items=["a:b","c:d"]; delimiter=":"; return(items.split_each(delimiter))` returns `["a","b","c","d"]` and preserves `items`.
-- **Current Perl boundary**: standalone dynamic delimiter writeback is owned by `FUTURE-PARITY-BACKLOG.5.5.2`; use an authored literal there until implemented.
+- **Statement form**: `split_each(items,delimiter)` writes the pieces back to `items`. On Perl the target is validated and snapshotted before the delimiter evaluates once, including for empty/absent arrays; an existing wrong kind fails before delimiter effects. Stored results and receiver chains preserve their inputs.
 
 ### `trim_each(arr)`
 - **Signature**: `trim_each(arr: array)`

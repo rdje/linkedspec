@@ -3144,7 +3144,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.5.4`
   Status: `active` / P1 pure function pipeline defect intake
   Goal: Prevent ordinary Perl value-position array transforms from rebinding their named source while preserving explicit standalone statement writeback.
-  Children: `.5.4.1`, `.5.4.2`, `.5.4.3`
+  Children: `.5.4.1`, `.5.4.2`, `.5.4.3`, `.5.4.4`
   Intake owner: `SESSION-STARTUP-READING.87.1`; observed while checking the existing book nested-function recipe, not inferred solely from a grep.
   Schedule: Immediate next feature after87.1 is committed clean; helper inventory remains open. This is a documented existing purity contract, not a new helper/type.
   Claim verification: none: Qualitative defect intake and explicit source/value controls, no aggregate completeness/parity measurement.
@@ -3196,8 +3196,15 @@
   Planned tier: `focused`; one small public capture example and syntax/book/continuity checks as applicable.
   Claim verification: none: Qualitative executable-doc defect intake; no coverage measurement.
 
+- ID: `FUTURE-PARITY-BACKLOG.5.4.4`
+  Status: `pending` / P1 retained numeric-kind implementation
+  Goal: Preserve numeric item kinds in explicit standalone uniq/filter_match/filter_nonempty writeback.
+  Intake: BindingRuntime::array_transform still compares aliased retained values with interpolation, regex matching and length; the same pure-value mechanism was reproduced/fixed in5.4.1. Confirm standalone behavior with a tiny public selector/write probe, then repair copied predicate operands if reproduced.
+  Schedule: Next bounded feature after5.5.2; independent of deferred broad5.4.2. Own this causal recurrence without a full matrix.
+  Claim verification: none: Source-confirmed risk intake, runtime conclusion not yet observed.
+
 - ID: `FUTURE-PARITY-BACKLOG.5.5`
-  Status: `active` / P1 dynamic array delimiter implementation
+  Status: `active` / implementations targeted-checked; broader recurrence remains with5.4.2
   Goal: Honor the existing split_each regex-or-scalar delimiter argument when the scalar comes from a variable or computed expression.
   Children: `.5.5.1`, `.5.5.2`
   Intake: Public Get returns unchanged ["a:b","c:d"] for delimiter=":"; split_each(items,delimiter), and computed delimiter effects remain0. Literal ":" and pure split("a:b",delimiter) controls succeed. Silent wrong output and skipped operand effects break composition; own and fix now under feature-first cadence.
@@ -3228,11 +3235,31 @@
   Commit: `FUTURE-PARITY-BACKLOG.5.5.1 - evaluate dynamic split_each value delimiters`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.5.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `5eaff6564dc9317f689e5ecff7a712c5b1753910`
+  Owned paths: ArrayPipeline.pm and BindingRuntime.pm; targeted pipeline regression; current helper book/fact/map and indexed/live continuity.
+  Verification tier: `focused`
+  Focused checks: Changed-module/test syntax and one small native/fresh pipeline regression plus a wrong-target control; book and fast continuity/history checks only.
+  Canonical trigger: None for bounded existing statement-contract alignment under director feature phase; broad suites follow feature coverage.
+  Reproduce: Public Get leaves ["a:b","c:d"] unchanged for delimiter=":"; split_each(items,delimiter), and computed delimiter calls remain0. call_spec_handler_subst emits qr/delimiter/ and escaped block text. Static literal and pure dynamic5.5.1 controls work.
+  Root cause: ArrayPipeline::_normalize_split_delimiter_expr treats unquoted operand source as static regex text. BindingRuntime can already split on runtime literal/regex operands, but the statement lowering must validate/snapshot its target before evaluating the new dynamic operand.
+  Acceptance: Lower only split_each dynamic scalar delimiters through the existing value callback; preserve literal/regex policy. Validate/copy target first, evaluate delimiter once even on empty/absent arrays, then atomically replace target. Preserve function parameters, snapshots and wrong-kind rejection without evaluating later effects.
   Goal: Implement dynamic scalar delimiters in explicit standalone Perl split_each writeback, using its existing target guards and once-only operand policy.
   Dependencies: `FUTURE-PARITY-BACKLOG.5.5.1`
   Schedule: Next feature after clean5.5.1. ArrayPipeline has the same static-source normalization; confirm through public statement probe before repair. Keep literal/regex compatibility and other helper behavior separate.
   Claim verification: none: Scheduled implementation, no measurement.
+
+  Completion: ArrayPipeline lowers dynamic split_each delimiters through the existing value callback. BindingRuntime::array_snapshot validates/copies the target before delimiter effects, then existing array_transform applies the compiled literal runtime text and replaces the binding. The legacy list path captures source and pattern outside its map. Static literals/regexes and other helpers retain their paths.
+  Focused result: ArrayPipeline/BindingRuntime/test syntax and t/array_pipeline_value_contract.t PASS on final production for native/fresh execution, including the wrong-target control; book and fast continuity/history checks pass. No full suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public Get/substitution show qr/delimiter/ and escaped block source with skipped effects; the small native/fresh vector fails before repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — ArrayPipeline's static normalization treats dynamic source as pattern text. Capturing validated source before new effects prevents changes to the target from changing the selected input.
+  - [x] **FIX** — Add scoped value lowering for split_each delimiters, validate/copy the target, then evaluate the operand once outside the per-item loop and replace the result.
+  - [x] **ADDRESSED (verified)** — Changed-module/test compilation and the targeted native/fresh pipeline regression PASS.
+  - [x] **NO REGRESSION** — Pure/literal/flag/purity/kind controls remain green; explicit function/empty/absent/effect/retained-snapshot controls pass and a wrong target rejects before failing delimiter evaluation. Broad suites stay deferred.
+  - [x] **LOCKSTEP** — Remove the temporary dynamic-statement limitation from book/fact; map/indexed/live handoff agree. Retained numeric-kind feature5.4.4 is next; inventory remains open.
+  Harness correction: The first wrong-target assertion stringified the structured last_error hash. Use its established detail field; the corrected pre-repair vector is RED on the actual two value assertions and the preexisting wrong-target control passes. No product-defect credit for that assertion setup error.
+  Commit: `FUTURE-PARITY-BACKLOG.5.5.2 - evaluate standalone split_each delimiters`.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`

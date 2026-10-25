@@ -67,6 +67,7 @@ sub default_deps_for_package {
    'parse_method_function_expr',
    'is_bare_method_scope_token',
    'extract_scalar_symbol_name',
+   'lower_method_value_expr',
   ],
  )
 }
@@ -98,6 +99,27 @@ sub _normalize_split_delimiter_expr {
  return undef unless defined $literal;
  my $quoted = quotemeta($literal);
  return '/'.$quoted.'/'
+}
+
+# Keep static literal compatibility; dynamic scalar delimiters are evaluated once
+# by the enclosing pipeline, not as source text or once for every array item.
+sub _lower_split_each_delimiter_expr {
+ my ($delimiter, $deps) = @_;
+ my $source = $deps->{trim_action_ir_value}->($delimiter // '');
+ return undef unless defined($source) && length($source);
+ if ($source =~ m{^/(?:\\.|[^/])*/[a-z]*$}io
+   || $source =~ /\A(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')\z/s) {
+  my $expr = _normalize_split_delimiter_expr($source, $deps);
+  return defined($expr) ? { expression => $expr, dynamic => 0 } : undef;
+ }
+ my $lower = $deps->{lower_method_value_expr};
+ return undef unless ref($lower) eq 'CODE';
+ my $value = $lower->($source);
+ return undef unless defined($value) && length($value);
+ return {
+  expression => 'do { my $__ls_split_each_delimiter = '.$value.'; qr/\Q$__ls_split_each_delimiter\E/ }',
+  dynamic => 1,
+ };
 }
 
 #------------------------------------------------------------------------------
@@ -225,13 +247,14 @@ sub _build_array_pipeline_plan_from_expr {
   my $pipeline = _build_array_pipeline_plan_from_expr($effective_args[0], $deps);
   return $finish->(undef, 'split_each_target_failed', {}) unless $pipeline;
 
-  my $delimiter_expr = _normalize_split_delimiter_expr($effective_args[1], $deps);
-  return $finish->(undef, 'split_each_delimiter_failed', {}) unless defined $delimiter_expr;
+  my $delimiter = _lower_split_each_delimiter_expr($effective_args[1], $deps);
+  return $finish->(undef, 'split_each_delimiter_failed', {}) unless $delimiter;
   push @{$pipeline->{ops}}, {
-   op             => 'split_each',
-   delimiter_expr => $delimiter_expr,
+   op                => 'split_each',
+   delimiter_expr    => $delimiter->{expression},
+   dynamic_delimiter => $delimiter->{dynamic},
   };
-  return $finish->($pipeline, 'append_split_each_op', { delimiter_expr => $delimiter_expr })
+  return $finish->($pipeline, 'append_split_each_op', { delimiter_expr => $delimiter->{expression} })
  }
 
  if ($method eq 'filter_match') {
@@ -349,6 +372,12 @@ sub _lower_array_pipeline_expr {
      .$op->{source_expr}.', '.$delimiter_expr.')';
     next;
    }
+   if ($name eq 'split_each' && $op->{dynamic_delimiter}) {
+    push @statements,
+     '$'.$target_symbol.' = do { my $__ls_split_each_source = LinkedSpec::BindingRuntime::array_snapshot($'.$target_symbol.', "'.$target_symbol.'"); '
+     .'LinkedSpec::BindingRuntime::array_transform($__ls_split_each_source, "'.$target_symbol.'", "split_each", '.$op->{delimiter_expr}.') }';
+    next;
+   }
    my @args;
    if ($name eq 'split_each') {
     my $delimiter_expr = $op->{delimiter_expr};
@@ -388,7 +417,10 @@ sub _lower_array_pipeline_expr {
   if ($name eq 'split') {
    $list_expr = 'split '.$op->{delimiter_expr}.', '.$op->{source_expr};
   } elsif ($name eq 'split_each') {
-   $list_expr = 'map { split '.$op->{delimiter_expr}.', $_ } '.$list_expr;
+   my $delimiter_expr = $op->{delimiter_expr};
+   $delimiter_expr = 'qr'.$delimiter_expr
+    if $delimiter_expr =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+   $list_expr = 'do { my @__ls_split_each_source = ('.$list_expr.'); my $__ls_split_each_pattern = '.$delimiter_expr.'; map { split $__ls_split_each_pattern, $_ } @__ls_split_each_source }';
   } elsif ($name eq 'trim_each') {
    $list_expr = 'map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } '.$list_expr;
   } elsif ($name eq 'filter_nonempty') {

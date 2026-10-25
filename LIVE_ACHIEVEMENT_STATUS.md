@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dynamic Perl split_each scalar value delimiters5.5.1 are implemented with targeted checks; standalone writeback5.5.2 is next. Helper inventory remains open. Keep compile/quick-regression/commit cadence; broad verification and maintenance stay deferred.
+Dynamic Perl split_each value/standalone delimiters5.5.1-.2 are implemented with targeted checks. Retained numeric kinds in standalone filters5.4.4 are next; helper inventory stays open. Keep compile/quick-regression/commit cadence; broad verification and maintenance remain deferred.
 
 ## Latest Completed Slice
 
-Ordinary value/receiver split_each evaluates variable/computed scalar delimiters once after the source snapshot. Runtime metacharacters split literally; existing static literals/flags/trailing fields remain unchanged. The small native/fresh pipeline regression passes after observed RED, with syntax/book/fast continuity checks. Current book/fact/map/indexed/live handoff agree; historical fact chronology is contained without replaying frozen producers.
+Standalone split_each lowers dynamic scalar operands and validates/snapshots its target before delimiter effects. The delimiter evaluates once even on empty/absent arrays; wrong kinds reject first. Existing literal/regex behavior stays on its prior path. Changed-module/test syntax and small native/fresh pipeline regression pass, with book/fast continuity checks. Current fact/map/indexed/live handoff agree.
 
 ## Next Action
 
-Implement explicit standalone Perl split_each dynamic delimiter writeback under5.5.2 after a tiny public reproduction. Preserve target validation, once-only operands and literal/regex policy. Commit before returning to helper selection. Broad suites, policy and storage maintenance stay deferred.
+Confirm the source-observed retained numeric-kind risk in BindingRuntime statement filters with a tiny public selector/write probe, then implement under5.4.4 if reproduced. Keep this bounded feature separate from broad recurrence; resume helper inventory afterward.
 
 ## Recent Completions
 
+- `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
 - `FUTURE-PARITY-BACKLOG.5.5.1` — dynamic Perl split_each value delimiters, once/order/function/receiver controls; syntax/native/fresh targeted checks pass; standalone5.5.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.1` — pure Perl pipeline values, scoped parameters and preserved numeric kinds; targeted pipeline/filter native/fresh checks pass; helper selection resumes.
 - `SESSION-STARTUP-READING.87.1` — ordinary filter_match values, typed sources and native/fresh targeted checks; separate P1 nested purity5.4.1 next.
@@ -29,7 +30,6 @@ Implement explicit standalone Perl split_each dynamic delimiter writeback under5
 - `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
 - `REPO-HYGIENE.23` — Rust105.2GiB/history111.0GiB allocated cleanup; lossless52.7MiB archive/two restored readers/four fresh Rust examples; six reviewer denials and scoped before/after census; Julia17.5 next; repair24 after17.7.
 - `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
-- `SESSION-STARTUP-READING.55.1` — finite Rust transport/core36/runtime212/bridge66/emitted53/CLI104; five source faults restored, suites260/readiness6+4/4/3, book95/90, exact historical admission and physical input4; Dart17.4 next.
 
 ## History
 
