@@ -1393,12 +1393,9 @@ Nested composition is useful when the transformation reads naturally as one expr
 public_count = count(filter_match(fields, /^[A-Z_]+$/));
 ```
 
-When `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`,
-`lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` appears as a standalone statement, it writes the
-transformed items back to that explicit working array. In a value expression or receiver chain, the same helper
-returns a transformed array value and does not mutate its input. This statement/value distinction is the reference
-contract. Perl, Rust, Dart, Julia and Lua implement the statement forms; broader validation remains
-owned by `FUTURE-PARITY-BACKLOG.5.3.4` after feature coverage.
+Standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)` and `uniq(name)` write their transformed items back to that working array.
+In a value expression or receiver chain, the operation returns a transformed array and preserves its input binding.
+Perl, Rust, Dart, Julia and Lua implement the statement forms; broader validation remains owned by `FUTURE-PARITY-BACKLOG.5.3.4` after feature coverage.
 
 Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
 
@@ -1409,7 +1406,14 @@ public_csv = fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_value
 
 Ordinary Perl actions support `return(filter_match(["ax", "by"], /^a/))` and its receiver equivalent; both return `["ax"]`. Named/computed arrays, user-function parameters, nested helper arguments and compatible receiver continuations use the same pure filter behavior. Standalone bare-target calls retain write-back.
 Quoted text follows the existing Perl receiver policy: `filter_match(["a.b","axb"], "a.b")` returns `["a.b"]`; slash regex literals retain their flags, such as `/^a/i`.
-A separate known issue remains: nested `uniq(uppercase_each(fields))` rebinds `fields` on Perl. `FUTURE-PARITY-BACKLOG.5.4.1` owns the immediate repair; use pure receiver composition or `count(filter_match(...))` meanwhile. Deferred codeblocks retain their separately qualified helper vocabulary.
+Pure nested function composition preserves the source:
+
+```text
+fields = ["a", "b", "a"]; out = uniq(uppercase_each(fields));
+return([out, fields]);
+```
+
+This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 

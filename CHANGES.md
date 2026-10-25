@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## FUTURE-PARITY-BACKLOG.5.4.1 — preserve Perl pipeline values and kinds
+
+Route ordinary split_each/trim_each/filter_nonempty/lowercase_each/uppercase_each/uniq values through existing pure operations with typed/scoped source snapshots. Preserve standalone writeback. Copy predicate operands before string comparison, regex matching or length so retained numeric items stay numeric selectors; resolve metadata-known emitted function slots in nested calls. Small native/fresh pipeline and direct-filter tests, syntax/book and fast continuity checks pass after actual mutation/kind/context RED. Register the test and replace the book's temporary impurity caveat with a working example. Current fact/map/indexed/live docs agree; broad5.4.2 and source-capture documentation defect5.4.3 stay deferred.
+
 ## SESSION-STARTUP-READING.87.1 — lower ordinary Perl filter_match values
 
 Route function-position filter_match through existing pure receiver lowering; typed source-slot reads retain named bindings/function parameters. Small native/fresh regression and module/registration syntax pass for direct/nested/receiver/statement/function forms, computed sources, quoted text/flags, snapshots and source effects. Book reference/integration guidance and the duplicate stale Rust/Dart/Julia transform-omission paragraph are corrected. A separate P1 defect is isolated by public Get/substitution: uniq(uppercase_each(fields)) rebinds fields even without filter_match, while its receiver twin stays pure. Existing parity parent5 owns immediate next repair5.4.1; current book qualification is explicit. Broad suites/global scans/maintenance remain deferred.

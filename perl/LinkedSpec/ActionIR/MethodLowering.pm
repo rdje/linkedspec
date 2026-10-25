@@ -3135,8 +3135,16 @@ sub _lower_method_value_expr {
    return '[@'.$array_symbol.']';
   }
 
-  return undef unless $looks_like_array_value_expr->($target_expr);
-  my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  # Nested calls can serialize an already emitted function slot. Recover only
+  # bindings known to this function's scalar-value scope before reading it.
+  my ($scalar_slot) = $target_expr =~ /^\$([A-Za-z_][A-Za-z0-9_]*)$/o;
+  my $source_name = defined($scalar_slot) && _user_function_scalar_value_name($deps, $scalar_slot)
+   ? $scalar_slot : $target_expr;
+  my $lowered_target = _lower_source_slot_bare_scalar_read_expr($source_name, $deps);
+  unless (defined($lowered_target) && length($lowered_target)) {
+   return undef unless $looks_like_array_value_expr->($target_expr);
+   $lowered_target = _lower_method_value_expr($target_expr, $deps);
+  }
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3146,7 +3154,8 @@ sub _lower_method_value_expr {
   my ($call) = @_;
   return undef unless $call;
   my $method = $call->{method} // '';
-  $method = '__array_value_filter_match' if $method eq 'filter_match';
+  $method = '__array_value_'.$method
+   if $method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
   return undef unless $method =~ /^__array_value_(split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
   my $op = $1;
 
@@ -3166,13 +3175,11 @@ sub _lower_method_value_expr {
   if ($op eq 'filter_match') {
    my $effective_args = $normalize_method_args_with_optional_scope->($args, 2, 2);
    return undef unless $effective_args;
-   my $source_expr = _lower_source_slot_bare_scalar_read_expr($effective_args->[0], $deps);
-   $source_expr = $lower_array_value_source_expr->($effective_args->[0])
-    unless defined($source_expr) && length($source_expr);
+   my $source_expr = $lower_array_value_source_expr->($effective_args->[0]);
    my $pattern_expr = $normalize_array_value_regex_expr->($effective_args->[1]);
    return undef unless defined($source_expr) && length($source_expr);
    return undef unless defined($pattern_expr) && length($pattern_expr);
-   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { defined($_) && $_ =~ '.$pattern_expr.' } @{$__ls_array_pipeline_source}] : [] }';
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && $__ls_array_pipeline_candidate =~ '.$pattern_expr.' } @{$__ls_array_pipeline_source}] : [] }';
   }
 
   my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, 1);
@@ -3184,7 +3191,7 @@ sub _lower_method_value_expr {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : \'\'; $__ls_array_pipeline_item =~ s/^\s+|\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'filter_nonempty') {
-   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { defined($_) && length($_) } @{$__ls_array_pipeline_source}] : [] }';
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && length($__ls_array_pipeline_candidate) } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'lowercase_each') {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::lowercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
@@ -3193,7 +3200,7 @@ sub _lower_method_value_expr {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::uppercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }';
   }
   if ($op eq 'uniq') {
-   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_key = defined($_) ? "S$_" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
+   return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_candidate = $_; my $__ls_array_pipeline_key = defined($__ls_array_pipeline_candidate) ? "S$__ls_array_pipeline_candidate" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
  }
 
  return undef

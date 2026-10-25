@@ -1,7 +1,8 @@
 ---
 id: action-regex-operands-and-runtime-kinds
-title: Regex helper operands do not establish a portable regex runtime type
+title: Regex operands and pure array helper values
 answers:
+  - why do Perl array filters turn numeric entries into string selectors
   - why do nested Perl array helper functions rebind the input
   - is regex a builtin variable type in spec action code
   - does rx equals slash pattern create a reusable regex object
@@ -12,16 +13,16 @@ answers:
   - does callable matches skip pattern effects for an undefined subject
   - how are literal regex flags handled by callable matches
   - which task owns function position filter_match on Perl
-date: 2026-10-25
-status: ordinary filter87.1 implemented; nested purity5.4.1 open; audit observations historical
+date: 2026-10-26
+status: ordinary pure pipelines implemented; broad recurrence deferred; audit observations historical
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "Historical type audit .86.4.2.4 at7c318569; callable matches .87.2; ordinary filters .87.1."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/filter_match_value_contract.t"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/array_pipeline_value_contract.t"
 ---
 
-October25: .87.1 maps ordinary filter_match values to the existing __array_value_filter_match pure lowerer and reads typed bindings/parameters. Native/fresh checks cover values/receivers/statements, typed/computed sources, flags, text, snapshots and effects. No deferred-helper or regex-type admission.
+October26:87.1 added ordinary filter values;5.4.1 routes other pipeline values to pure lowering. Typed bare/emitted function slots supply values; standalone calls still rebind. The old value path emitted source assignments.
 
-Public Get/substitution also confirms uniq(uppercase_each(fields)) rebinds fields without filter_match; its receiver twin stays pure. Legacy value lowering emits array_transform assignments. P1 FUTURE-PARITY-BACKLOG.5.4.1 owns the immediate next repair; .87.1 does not claim that broader purity fix.
+Copied predicate operands preserve numeric selectors. Native/fresh tests cover nested/function/computed/receiver/statement values and source effects. Broader5.4.2 remains open; no deferred-helper or regex-type admission.
 
 ## Contract and syntax
 

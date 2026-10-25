@@ -3144,22 +3144,40 @@
 - ID: `FUTURE-PARITY-BACKLOG.5.4`
   Status: `active` / P1 pure function pipeline defect intake
   Goal: Prevent ordinary Perl value-position array transforms from rebinding their named source while preserving explicit standalone statement writeback.
-  Children: `.5.4.1`, `.5.4.2`
+  Children: `.5.4.1`, `.5.4.2`, `.5.4.3`
   Intake owner: `SESSION-STARTUP-READING.87.1`; observed while checking the existing book nested-function recipe, not inferred solely from a grep.
   Schedule: Immediate next feature after87.1 is committed clean; helper inventory remains open. This is a documented existing purity contract, not a new helper/type.
   Claim verification: none: Qualitative defect intake and explicit source/value controls, no aggregate completeness/parity measurement.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Route ordinary Perl value-position split_each/trim_each/filter_nonempty/lowercase_each/uppercase_each/uniq through pure array values; keep standalone mutation separate.
   Dependencies: `SESSION-STARTUP-READING.87.1`
   Reproduce: Top:: I { fields=["a","b"]; out=uniq(uppercase_each(fields)); return([out,fields]) } returns [["A","B"],["A","B"]] with no last_error. Expected [["A","B"],["a","b"]]. Receiver control fields.uppercase_each().uniq() produces that expected result. Adding outer filter_match(...,/^A/) returns [["A"],["A","B"]], confirming that the nested helper route owns the mutation.
   Root cause: MethodLowering's public value pipeline path chooses legacy array_pipeline mutation and emits fields=BindingRuntime::array_transform(...) for the inner calls; private __array_value_* receiver lowering produces pure snapshots. Existing declarations include the pure helper contracts.
   Impact: Silent source rebinding breaks value-expression composition, stored snapshots and the book's nonmutation guarantee. P1; fix next rather than leave an unscheduled complaint.
-  Planned tier: `focused`
+  Activation commit: `1088e94261ae50058563ce95cf109a5095888c3a`
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm; t/array_pipeline_value_contract.t and callable-suite registration; existing action-regex/purity fact/map and current book reference; indexed task/root and normal continuity.
+  Verification tier: `focused`
+  Focused checks: Perl module/test compilation and small native/fresh pipeline value/statement/receiver regression plus the direct-dependent filter test; book and fast continuity/history checks only.
+  Canonical trigger: None for this bounded existing-purity-contract repair under director phase policy; broad5.4.2 stays deferred.
   Planned checks: One small native/fresh regression contrasting value/nested/receiver/statement forms, named/shape/computed/function sources, snapshots and once-only operand effects; module/test compilation and book/fast continuity checks. No full package suite under director cadence.
   Acceptance: Reuse pure implementation without changing explicit standalone writeback, typed values or current quoted/literal pattern policy. Preserve args/order/shape guards and isolate any additional policy question rather than silently expand scope.
-  Claim verification: none: Unactivated repair; no new quantified measurement.
+  Claim verification: none: Deterministic purity implementation and focused regressions; no quantified corpus/exhaustive/portable admission measurement.
+
+  Additional owned P1 kind-loss subtask (October26; blocks this leaf): Numeric item2 returned by uniq, filter_match or filter_nonempty becomes a string-kind selector. Reproduce typed=[2,"2","x"]; result=uniq(typed); index=first(result); indexed=["zero","one","two"]; indexed[index]="selected". Get reports nested_write_kind_conflict expected harray/found array; filter_match(typed,/^2$/) and filter_nonempty([2,"",undef]) reproduce it. Plain first(typed) succeeds with numeric index2, isolating predicate processing.
+  Mechanism/impact: The shared private pure predicates stringify their aliased $_ element (uniqueness key interpolation, regex matching, length), changing public scalar validity/kind before retaining the original item. This breaks array -> selected numeric value -> typed array write. The canonical literal-kind card establishes that BindingRuntime intentionally uses public SV validity. Preserve items by comparing copied scalar operands; no classifier relaxation or new selector policy. Complete this blocking kind repair inside the same value-pipeline slice before landing.
+  Function-parameter context: Exact captured generated source shows clean(values)'s nested trim_each argument serialized as $values, then left as trim_each($values) by the legacy array-source recognizer. A direct standalone trim_each(mut) control still lowers/mutates correctly. Resolve only metadata-known function scalar slots back to their DSL binding when reading a pure array source; preserve source AST/readiness and unsupported raw-host distinctions.
+  Completion (October26): Public pipeline value calls normalize to existing private pure operations. Shared source lowering reads typed bare values and metadata-known emitted function slots, with array snapshots. Standalone statement dispatch remains separate. Filtering/deduplication predicates compare scalar copies so selected numbers retain public numeric validity; the selector classifier is unchanged.
+  Focused commands: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/array_pipeline_value_contract.t` and the same wrapper for `t/filter_match_value_contract.t` both PASS on final production. Module/new-test/registration syntax and book/fast continuity checks pass; no full suite or matrix.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/call_spec_handler_subst show nested functions rebinding fields; receiver controls stay pure. The new focused regression is RED before repair; separate typed selector controls reject predicate-retained numbers before the copy fix.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering routes public value helpers into mutable array_pipeline; private predicates stringify aliased elements, and nested function serialization supplies known Perl scalar slots that legacy source inference misses. Exact generated source identifies trim_each($values) in clean.
+  - [x] **FIX** — Normalize value helpers to pure operations, snapshot typed/scoped sources and compare copied scalar operands; preserve standalone mutation and original source AST/readiness rules.
+  - [x] **ADDRESSED (verified)** — Focused native/fresh pipeline regression and direct-dependent filter regression PASS; three public numeric selector controls pass after original typed RED.
+  - [x] **NO REGRESSION** — Quick nested/function/receiver/statement, named/shape/computed sources, snapshots, source effects and numeric/string selection controls pass. Broad5.4.2 remains deferred under director instruction.
+  - [x] **LOCKSTEP** — Book examples/current semantics, canonical fact/map, indexed task parts and live handoff agree. Tool capture example defect5.4.3 is owned/deferred; helper inventory selects further features.
+  Commit: `FUTURE-PARITY-BACKLOG.5.4.1 - preserve Perl pipeline values and element kinds`.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.4.2`
   Status: `pending`
@@ -3168,6 +3186,15 @@
   Schedule: Deferred broad verification, not a blocker for the next implementation feature.
   Planned tier: Determine at activation from admission scope.
   Claim verification: none: No admission measurement yet.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.4.3`
+  Status: `pending` / P3 tooling documentation defect
+  Goal: Correct TOOLBOX.md section2.2's generated-source capture example.
+  Reproduce/impact: The documented Get(dump_parser_source=>1,runtime_ctx_ref=>ctx) example dereferences ctx.parser_source_chunks_ref as a scalar; current Get prints source to stdout and does not populate that caller field as shown. The example produces no usable captured scalar and can flood diagnostic output. Public generated_source_contract.t uses the working generate_only/dump_parser_source/parser_source_ref scalar combination.
+  Repair: Use explicit parser_source_ref scalar capture and print that scalar; check the exact example against the public API. RuntimeContext joins its internal array of chunks before flushing the supplied scalar; no implementation change is required.
+  Schedule: Documentation maintenance after feature coverage; current5.4.1 debugging is unblocked by explicit scalar capture. Other repositories remain read-only.
+  Planned tier: `focused`; one small public capture example and syntax/book/continuity checks as applicable.
+  Claim verification: none: Qualitative executable-doc defect intake; no coverage measurement.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`

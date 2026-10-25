@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-10-25`
+- Last updated: `2026-10-26`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 - Partition authority: `docs/decisions/0125-startup-task-partitions.md`
@@ -20,7 +20,7 @@
 
 ## Current Frontier
 
-Current feature selection (October25): `.87.1` ordinary Perl filter_match values are implemented/targeted-checked; next is nested pure-pipeline defect `FUTURE-PARITY-BACKLOG.5.4.1`. Existing known helper gaps precede continued type inventory; full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October25): `.87.1` ordinary Perl filter_match values are implemented/targeted-checked; nested pure-pipeline defect `FUTURE-PARITY-BACKLOG.5.4.1` is also implemented/targeted-checked; helper inventory resumes. Existing known helper gaps precede continued type inventory; full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
 
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only

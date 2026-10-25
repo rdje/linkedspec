@@ -1359,4 +1359,8 @@ subtest 'ordinary filter_match value contract' => sub {
     do File::Spec->catfile($repo_root, 't', 'filter_match_value_contract.t') or die $@ || $!;
 };
 
+subtest 'ordinary array pipeline value contract' => sub {
+    do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;
+};
+
 done_testing();

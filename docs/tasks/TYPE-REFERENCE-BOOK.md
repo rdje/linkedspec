@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / nested pipeline purity5.4.1 before further inventory
+- Status: `active` / helper inventory after pure pipeline5.4.1
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-10-25`
+- Last updated: `2026-10-26`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -968,8 +968,8 @@ Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACK
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.5.4.1` | `pending` | Fix confirmed nested function-position transforms rebinding their source. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Helper/alias inventory continues after known bounded feature repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Helper/alias inventory and tiny probes select the next bounded feature. |
+| 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.19` | `completed` | Grouped assignment native/fresh quick regression and syntax pass. |

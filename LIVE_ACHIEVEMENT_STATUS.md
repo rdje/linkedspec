@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary Perl filter_match values87.1 are implemented/targeted-checked. A distinct P1 nested-transform impurity is confirmed and owned by5.4.1 as the next feature. Keep compile/quick-regression/commit cadence; maintenance and broad verification remain deferred.
+Ordinary Perl pipeline values5.4.1 preserve their sources and selected element kinds with targeted checks. Helper/alias inventory1.2 selects the next bounded implementation. Keep compile/quick-regression/commit cadence; maintenance and broad verification remain deferred.
 
 ## Latest Completed Slice
 
-Ordinary filter_match calls use the existing pure receiver lowerer, with typed source-slot reads for named bindings/parameters. Module/registration syntax and small native/fresh checks pass for direct/nested/function/receiver/statement forms, computed arrays, quoted text/flags, snapshots and source effects. The book reference/integration guidance and stale transform-omission duplicate are corrected. Public controls isolate older uniq(uppercase_each(fields)) rebinding without filter_match; its receiver twin stays pure. P1 repair5.4.1 is scheduled immediately; no broad purity admission.
+Value-position pipeline helpers now use pure operations and typed/scoped snapshots, while standalone statements keep write-back. Predicate scalar copies preserve numeric items through later typed writes; known emitted function slots support nested parameter calls. Native/fresh pipeline and direct-dependent filter regressions pass, with syntax/book/fast continuity checks. Book examples and canonical fact/map/indexed/live handoff agree. Broad5.4.2 and the source-capture doc defect5.4.3 remain separately owned/deferred.
 
 ## Next Action
 
-Activate nested pure-pipeline5.4.1 from clean Git. Preserve value-position source bindings and explicit statement writeback, compile/run one small regression and commit. Complete helper/receiver inventory and broad validation remain open.
+Resume helper/alias inventory1.2 from clean Git using canonical contracts and tiny public probes. Begin with split_each dynamic string delimiter/effect behavior to select the next feature; no result is inferred yet. Full inventory/API admission, broad suites, policy and storage maintenance remain open.
 
 ## Recent Completions
 
+- `FUTURE-PARITY-BACKLOG.5.4.1` — pure Perl pipeline values, scoped parameters and preserved numeric kinds; targeted pipeline/filter native/fresh checks pass; helper selection resumes.
 - `SESSION-STARTUP-READING.87.1` — ordinary filter_match values, typed sources and native/fresh targeted checks; separate P1 nested purity5.4.1 next.
 - `FUTURE-PARITY-BACKLOG.5.3.3` — Julia standalone transforms rebind arrays; package compile/native/generated-plan/fresh-emitted targeted checks pass; feature/helper selection resumes.
 - `FUTURE-PARITY-BACKLOG.5.3.2` — Dart standalone transforms rebind arrays; native/restored/generated-plan targeted checks and two-file analysis pass; Julia5.3.3 next.
@@ -29,7 +30,6 @@ Activate nested pure-pipeline5.4.1 from clean Git. Preserve value-position sourc
 - `TYPE-REFERENCE-BOOK.1.2.17.4` — Dart113/452/private51+12/emitted113/CLI214, five faults/restoredGREEN, package636, exact historical admission, book95/90 and input4/claim181; hygiene23 then Julia17.5.
 - `SESSION-STARTUP-READING.55.1` — finite Rust transport/core36/runtime212/bridge66/emitted53/CLI104; five source faults restored, suites260/readiness6+4/4/3, book95/90, exact historical admission and physical input4; Dart17.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.3` — Rust137/822/6, five actual faults/restoration, eight direct suites443; exact diagnostics, book95/CLI4/aliases, readonly195/input4 actual bypass/restoration and claim198; numeric55.1 next.
-- `REPO-HYGIENE.22` — dated23966 parent candidates/six Rust locations, zero removals; independent population/lstat, five metadata denials, book95/marker RED, input3/bypass/restoration and actual reader channels; Rust17.3 next.
 
 ## History
 
