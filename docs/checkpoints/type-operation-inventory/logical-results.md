@@ -134,3 +134,15 @@ Fifteen focused native/restored/plan/new/direct/default tests, format and fatal
 selected analysis pass. Shared source effects retain LR/LRC/S and skip consumer
 operands; five malformed logical calls keep typed errors. No standalone or
 complete domain/context/portable admission. Julia17.4 is next.
+
+## Bounded Julia implementation
+
+17.4 independently confirms real Bool/typed truth/strict numeric-null producers,
+valid source/default/bridge flow and all typed source errors. Shared/rejected-
+effect/actual selected-block-literal controls expose[] boundaries andSA on
+native/plan/fresh. Initial and post-result Bool scalar tracking repairs these,
+retaining actual-container release and existing free/named-context policies.
+214 focused assertions (new100/direct defaults9/three neutral fixtures105) pass
+with strict compilation and explicit Bool identity/Number-not-Bool counters.
+LR/LRC/S effects and skipped consumer operands hold; no full suite/portable
+admission or callback-identity repair is claimed. Safe Lua17.5 next.

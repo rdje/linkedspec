@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.4 — guard Julia logical Boolean results
+
+Julia logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after result selection.214 focused native/plan/fresh producer/shared/rejected-effect/selected-block-literal/source-error/default/exact neutral assertions and strict compilation pass after container[]/SA RED, with explicit Bool identity and Number-not-Bool counters. LR/LRC/S, typed errors, defaults and named-context/free/truth/numeric policies remain. Book/facts/task/live align; safe Lua17.5 next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.3 — guard Dart logical Boolean results
 
 Dart logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after each result. Fifteen focused native/restored/plan producer/shared/rejected-effect/selected-block-literal/source-error/default/named neutral tests and format/fatal selected analysis pass after container[]/SA effect RED. LR/LRC/S, real Bool/default/bridge/source kinds and typed errors remain; named container-context normalization/free/truth/numeric policies unchanged. Book/facts/task/live align; Julia17.4 next, full admission separate.

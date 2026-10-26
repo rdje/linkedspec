@@ -83,3 +83,8 @@ native/restored/plan/direct tests and fatal analysis pass after container[]/SA
 operand-effect RED. LR/LRC/S, source typed errors, real Bool and strict numeric
 rejection remain; named container-context normalization is unchanged. Julia/
 Lua17.4-.5 independently assess next; full admission stays separate.
+
+Julia17.4 adds matching actual-Bool tracking after the same[]/SA RED;214 strict
+native/plan/fresh/direct assertions pass, explicitly checking Bool identity and
+Number-not-Bool counters. Logical/free/named-context/error policies remain;
+safe Lua17.5 independently assesses next.

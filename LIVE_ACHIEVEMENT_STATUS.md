@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
+Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
 
 ## Latest Completed Slice
 
-Dart logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after each result. Fifteen focused native/restored/plan producer/shared/rejected-effect/selected-block-literal/source-error/default/named neutral tests and format/fatal selected analysis pass after container[]/SA effect RED. LR/LRC/S, real Bool/default/bridge/source kinds and typed errors remain; named container-context normalization/free/truth/numeric policies unchanged. Book/facts/task/live align; Julia17.4 next, full admission separate.
+Julia logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after result selection.214 focused native/plan/fresh producer/shared/rejected-effect/selected-block-literal/source-error/default/exact neutral assertions and strict compilation pass after container[]/SA RED, with explicit Bool identity and Number-not-Bool counters. LR/LRC/S, typed errors, defaults and named-context/free/truth/numeric policies remain. Book/facts/task/live align; safe Lua17.5 next, full admission separate.
 
 ## Next Action
 
-Independently assess Julia logical Boolean producer/shared/rejected-effect/actual-kind/source-error flow17.4 under logical-results.md before production. Preserve real Bool identity (not Number lookalikes), eager typed truthiness/strict numeric rejection/free and named-context policies, source snapshots and typed arity errors. Reuse actual-value dispatch; fix confirmed guards only, native/plan/fresh and small direct checks/strict compile/docs/commit, then safe Lua17.5. No full suite/matrix/new logical methods.
+Independently assess Lua logical Bool producer/shared/rejected-effect/actual-kind/source-error flow17.5 on safe PUC5.5.1/LuaJIT under logical-results.md before production. Preserve real Bool/eager typed truth/strict numeric rejection/free and named-context policies, source snapshots/typed arity errors. Reuse actual-value dispatch; repair confirmed guards only with native/plan/fresh and small direct neutral/default/named checks, source loads/docs/commit. No full runner/malformed native patterns/declared5.4 claim; then next helper-spine feature assessment.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` — Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
@@ -29,7 +30,6 @@ Independently assess Julia logical Boolean producer/shared/rejected-effect/actua
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` — Julia numeric comparison scalar/shape guards implemented;42 strict focused assertions and compilation pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` — Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` — Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 
 ## History
 

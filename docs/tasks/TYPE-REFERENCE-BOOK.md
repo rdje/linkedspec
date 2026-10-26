@@ -3578,7 +3578,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5 - guard Lua scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17`
-  Status: `active` / Perl/Rust/Dart targeted-checked; Julia/Lua next
+  Status: `active` / Perl/Rust/Dart/Julia targeted-checked; Lua next
   Goal: Complete bounded ordinary logical Boolean result continuation and clean scalar boundaries while retaining eager typed producer/error contracts.
   Dependencies: .23.2.17 frozen logical-results.md.
   Children: `.23.3.17.1`, `.23.3.17.2`, `.23.3.17.3`, `.23.3.17.4`, `.23.3.17.5`.
@@ -3702,7 +3702,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Continuity defect owned/fixed: Current Frontier paragraph still schedules assessment14 after its completed rollout and later15/16 work, despite the correct17.3 row. Prior slices advanced the row but accumulated stale summary prose. Replace the paragraph with a bounded current family/admission view; Git preserves the old chronology.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary logical Boolean result continuations.
   Dependencies: .23.3.17.3.
   Acceptance: Follow logical-results.md, preserving actual Bool/strict numeric rejection, eager typed truthiness/source snapshots/free signatures, defaults/explicit Array-Hash bridges/scalar boundaries and pre-effect typed source arity errors. Public producer-first native/generated RED/GREEN and small direct checks/docs/commit; full admission separate.
@@ -3711,6 +3711,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
 
+
+  Activation: clean `40cc7b4581a8826200c65f04b9fa1622515042d8`; Dart logical results committed, brief0/tree clean.
+  Owned paths: Julia independently confirmed actual Boolean result/scalar guards, retained native/plan/fresh producer/shared/rejected-effect/selection/source-error test and runner registration, scoped book/facts/task/live docs. Preserve Bool identity/eager typed truth/numeric rejection/free/context/error policies.
+  Verification tier: `focused`
+  Focused checks: Public producer-first RED/GREEN and small direct neutral/default fixtures with explicit Bool/Number identity, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Initialize scalar_result from actual Bool and retain it after any Bool-yielding link, reusing existing selected dispatch and container release. Register strict native/plan/fresh producer/shared/rejected-effects/actual-Bool/source-error regression. All logical/free/numeric/named-context policies stay unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent producer/valid shared flow and source errors already pass. Nine native/plan/fresh RED assertions expose container[] andSA incompatible-operand effects plus selected/block/literal Bool sorted fallthrough. Raw Bool/eager truth/strict numeric-null/default/source fields remain healthy.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! starts scalar_result=false and omits actual Bool after result selection, so container dispatch/operands run despite a Boolean actual value. Logical evaluator/source snapshots/error validator already work.
+  - [x] FIX: Initial and post-result Bool tracking, preserving actual container release, named normalization and all typed truth/arity/free/numeric/producer behavior. No new method/parser/schema or callback ABI change; register the retained test.
+  - [x] ADDRESSED (verified): New100 assertions pass native/plan/fresh canonical Bool/typed truth/numeric-null/shared source/default/bridge/boundary/rejected-effect and five source-error cases. Explicit Bool identity/raw/meta/flag and Number-not-Bool counter checks avoid Julia equality lookalikes. LR/LRC/S remain, takeA skipped; selected/block/literal boundaries give null.
+  - [x] NO REGRESSION:214 focused assertions total include direct defaults9 and three exact neutral logical fixtures105, preserving with/lazy controls and producer policies. Strict compilation passes. No whole suite, full context/portable admission or separately owned callback-identity repair.
+  - [x] LOCKSTEP: New test/runner, frozen contract/current examples and compacted canonical Julia fact with exact prior Git pointer plus neutral fact/map/task/live/resume align. Current frontier paragraph/row advance together. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua17.5 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.4 - guard Julia logical Boolean results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.5`
   Status: `pending`
@@ -3817,11 +3834,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and recorded direct repairs are targeted-checked on their documented hosts. Aggregate-null/snapshot14, numeric comparison15 and scalar arithmetic16 bounded children are targeted-checked; complete domain/context/portable admission remains23.4. Logical Boolean17 now has Perl17.1 (including rejected-source-effect follow-up17.1.1), Rust17.2 and Dart17.3 targeted-checked. Julia17.4 is the precise next leaf, followed by safe Lua17.5. Preserve existing typed producer/free/named-context/overload boundaries; explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence. See each family node for exact retained evidence and open owners; this paragraph is current state, not chronology.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and recorded direct repairs are targeted-checked on their documented hosts. Aggregate-null/snapshot14, numeric comparison15 and scalar arithmetic16 bounded children are targeted-checked; complete domain/context/portable admission remains23.4. Logical Boolean17 now has Perl17.1 (including rejected-source-effect follow-up17.1.1), Rust17.2 and Dart17.3 plus Julia17.4 targeted-checked. Safe Lua17.5 is the precise next leaf. Preserve existing typed producer/free/named-context/overload boundaries; explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence. See each family node for exact retained evidence and open owners; this paragraph is current state, not chronology.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` | `pending` | Independently assess and implement Julia logical Boolean result continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.5` | `pending` | Independently assess and implement Lua logical Boolean results on safe available hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

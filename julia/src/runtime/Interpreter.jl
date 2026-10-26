@@ -5908,7 +5908,7 @@ function _evaluate_runtime_fluent_chain!(
         rule_label,
         current_edge,
     )
-    scalar_result = false
+    scalar_result = value isa Bool
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
         # Scalar producer results cannot feed array/hash-only consumers. An actual
@@ -5958,8 +5958,8 @@ function _evaluate_runtime_fluent_chain!(
             rule_label,
             current_edge,
         )
-        scalar_result = (scalar_result || may_produce_scalar) &&
-            !(value isa AbstractVector || value isa AbstractDict)
+        scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
+            !(value isa AbstractVector || value isa AbstractDict))
     end
     return value
 end
