@@ -9,15 +9,15 @@ answers:
   - does Dart runtime support array receiver chains
   - does Dart runtime support sorted drop_front first
   - does Dart runtime support split_each trim_each filter_nonempty
-  - does Dart runtime support join_values delimiter first
+  - does Dart runtime support join_values delimiter first and joined String continuations
   - does Dart runtime support push_back statement only
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
 date: 2026-10-26
-status: selected/count/aggregate values confirmed; shape/scalar guards; ordering/slice owners open
+status: selected/count/aggregate/join values confirmed; shape/scalar guards; ordering/slice owners open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
-evidence: "Dart array4.3.3; end results12.1.4; transform5.3.2; selected-value23.3.1.3; copy-arity23.3.2.2."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/aggregate_numeric_receivers_test.dart test/count_length_receivers_test.dart"
+evidence: "Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/joined_string_receivers_test.dart test/aggregate_numeric_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -64,4 +64,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3.1.3/23.3.2.2 confirm selected/copy flow and arity.23.3.3.3 guards Count/Length extras and makes Count List-only; Length retains wider domains.23.3.4.3 guards canonical aggregate extras and shares _evaluateFluentCallsWithValue across ordinary/mutating sources, retaining scalar boundaries until actual container output. Public/retained RED and native/restored/generated-plan/direct checks plus fatal analysis pass; full admission stays open.
+23.3 selected/copy/Count/Length/aggregate fixtures retain actual values and arity; Count is List-only, Length wider. _evaluateFluentCallsWithValue shares ordinary/mutating scalar boundaries.23.3.5.3 adds joins and exact one-delimiter guards. Native/restored/generated-plan, direct aggregate and fatal analysis pass after shape/domain RED; full admission stays open.

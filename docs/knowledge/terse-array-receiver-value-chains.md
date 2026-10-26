@@ -20,7 +20,7 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: Perl/Rust joined results implemented; other backend assessment/full admission open
+status: Perl/Rust/Dart joined results implemented; other backend assessment/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length23.2.2; join result contract23.2.4."
 reverify:
@@ -36,4 +36,4 @@ Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []
 
 Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md. Other mechanisms: [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]], [[lua-runtime-array-transform-pipelines]].
 
-23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Rust23.3.5.2 shares is_scalar_result_receiver_method and sends named mutation tails through the guarded loop after a distinguishing []-versus-null RED. Focused checks pass; source domains/vocabulary stay unchanged and other backends require assessment.
+23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Rust23.3.5.2 uses is_scalar_result_receiver_method and guarded mutation tails after []-versus-null RED. Dart23.3.5.3 guards existing flow ([[dart-runtime-array-helpers]]). Focused checks pass; domains/vocabulary stay unchanged; others require assessment.

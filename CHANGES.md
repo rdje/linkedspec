@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.5.3 — guard Dart joined String boundaries
+
+Dart retains correct joined flow and adds one-delimiter/scalar-boundary guards. Native/restored/generated-plan joined and direct aggregate tests plus fatal analysis/format pass after RED; named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls pass. Producer/source/copy behavior stays unchanged; Julia assessment is next and full admission remains separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.5.2 — continue Rust joined String results
 
 Include join in shared scalar-result handoff and exact one-delimiter preflight. Reuse guarded continuation for named Array-end tails after a distinguishing candidate regression, preserving old incompatible nulls. Public/fixture RED precedes small native/restored/generated-plan joined and direct aggregate GREEN, compilation/rustfmt/book and fast continuity checks. Function/selected/pipeline/hash/String/mutating sources, Unicode, split/length bridges, SDAN order and snapshots pass. Sync public/current records; Dart assessment next, broad admission open.

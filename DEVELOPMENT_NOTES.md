@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.3 — guard existing joined flow
+
+Dart retains correct joined flow and adds one-delimiter/scalar-boundary guards. Native/restored/generated-plan joined and direct aggregate tests plus fatal analysis/format pass after RED; named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls pass. Producer/source/copy behavior stays unchanged; Julia assessment is next and full admission remains separate. Container-default transition assessment23.2.5 is scheduled after bounded joins; no current-task pivot.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.2 — joined scalars use one continuation loop
 
 Rust join is absent from result handoff and arity preflight. Generalize the private classifier to is_scalar_result_receiver_method, include join and retain scalar compatibility until container output. The named Array-end tail had a separate generic loop; an added public fixture shows a valid join passing but incompatible sorted returning [] instead of null. Reuse the existing guarded loop for this ordinary route and retain the negative. Final native/restored/generated-plan joined and direct aggregate tests pass after both REDs, including named mutations, Unicode, explicit bridges, SDAN order and snapshots. Compilation/rustfmt/book/continuity checks pass; existing helper/source/null/copy/serialized contracts and callable vocabulary stay unchanged. Dart is next, complete admission separate.

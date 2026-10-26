@@ -3704,10 +3704,13 @@ final class LinkedSpecRuntimeEngine {
           statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
-        // These methods take no arguments. Reject before receiver or operand
-        // effects while keeping valid value chains dynamic.
+        // Reject invalid receiver arities before source/operand effects while
+        // keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
+          if (helper == 'join_values') {
+            return call.args.length != 1;
+          }
           return (helper == 'first' ||
                   helper == 'last' ||
                   helper == 'copy' ||
@@ -5086,15 +5089,17 @@ final class LinkedSpecRuntimeEngine {
     var scalarResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Array reducers yield scalars. Only a helper returning a container
-      // releases this boundary for later array/hash consumers.
+      // Array scalar producers retain this boundary until a container result
+      // permits later array/hash consumers.
       if (scalarResult &&
           (_arrayOnlyReceiverHelpers.contains(helper) ||
               _hashOnlyReceiverHelpers.contains(helper))) {
         return null;
       }
-      final reduced =
-          value is List && _numericAggregateHelperNames.contains(helper);
+      final scalarProducer =
+          value is List &&
+          (_numericAggregateHelperNames.contains(helper) ||
+              helper == 'join_values');
       value = _evaluateFluentCall(
         value,
         call,
@@ -5103,7 +5108,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       scalarResult =
-          (scalarResult || reduced) && value is! List && value is! Map;
+          (scalarResult || scalarProducer) && value is! List && value is! Map;
     }
     return value;
   }

@@ -114,3 +114,10 @@ Native/restored/generated-plan and direct aggregate checks pass, including
 named mutations, Unicode, split/length bridges, SDAN order, snapshots and shapes.
 Helper/source/null/copy behavior and callable vocabulary stay unchanged; Dart and
 later backends require individual assessment, with full admission separate.
+
+Dart `.23.3.5.3` preserves already-correct joined-result/snapshot behavior, adds
+one-delimiter preflight and includes joins in shared scalar-producer tracking.
+Native/restored/generated-plan and direct aggregate checks pass after RED,
+including named mutation boundaries, Unicode, split/length bridges, SDAN order,
+snapshots and shapes; changed-file fatal analysis passes. Julia/Lua require
+individual assessment. Container-default transitions are separately scheduled23.2.5.
