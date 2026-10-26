@@ -5961,13 +5961,17 @@ impl Engine {
                 if calls.iter().any(|call| match call.method.as_str() {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
-                    | "is_undefined" | "abs" | "floor" | "ceil" | "round" => !call.args.is_empty(),
+                    | "is_undefined" | "abs" | "floor" | "ceil" | "round" | "trim"
+                    | "lowercase" | "uppercase" => !call.args.is_empty(),
                     "join_values" | "contains" | "index_of" | "has_key" | "starts_with"
                     | "ends_with" | "contains_substr" | "matches" | "str_eq" | "str_ne"
                     | "str_gt" | "str_ge" | "str_lt" | "str_le" | "eq" | "ne" | "gt" | "ge"
-                    | "lt" | "le" | "sub" | "div" | "mod" => call.args.len() != 1,
-                    "clamp" => call.args.len() != 2,
-                    "add" | "mul" | "coalesce" => call.args.is_empty(),
+                    | "lt" | "le" | "sub" | "div" | "mod" | "rm_prefix" | "rm_suffix" => {
+                        call.args.len() != 1
+                    }
+                    "clamp" | "replace_substr" => call.args.len() != 2,
+                    "substr" => !(1..=2).contains(&call.args.len()),
+                    "add" | "mul" | "coalesce" | "cat" => call.args.is_empty(),
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7502,6 +7506,14 @@ impl Engine {
                 | "max"
                 | "join_values"
                 | "coalesce"
+                | "trim"
+                | "lowercase"
+                | "uppercase"
+                | "replace_substr"
+                | "rm_prefix"
+                | "rm_suffix"
+                | "substr"
+                | "cat"
                 | "contains"
                 | "index_of"
                 | "has_key"
@@ -8757,16 +8769,33 @@ impl Engine {
                 if name == "regex_subst" {
                     return Ok(RuntimeValue::Undef);
                 }
+                // Explicit null operands belong to ordinary value slicing;
+                // the dedicated named-target mutation route has already returned.
+                if matches!(args.len(), 2 | 3)
+                    && args
+                        .iter()
+                        .any(|value| matches!(value, RuntimeValue::Undef))
+                {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let offset = |value: &RuntimeValue| {
+                    value
+                        .as_number()
+                        .filter(|number| {
+                            number.is_finite() && *number >= 0.0 && number.fract() == 0.0
+                        })
+                        .unwrap_or(0.0) as usize
+                };
                 // Char-based (Perl `substr`): start/len are character offsets, so
                 // byte-slicing would panic on a multibyte boundary and diverge.
                 if args.len() >= 3 {
                     let s = args[0].to_str();
-                    let start = args[1].as_number().unwrap_or(0.0) as usize;
-                    let len = args[2].as_number().unwrap_or(0.0) as usize;
+                    let start = offset(&args[1]);
+                    let len = offset(&args[2]);
                     Ok(RuntimeValue::Scalar(char_substr(&s, start, len)))
                 } else if args.len() == 2 {
                     let s = args[0].to_str();
-                    let start = args[1].as_number().unwrap_or(0.0) as usize;
+                    let start = offset(&args[1]);
                     Ok(RuntimeValue::Scalar(char_substr_from(&s, start)))
                 } else {
                     Ok(RuntimeValue::Scalar(

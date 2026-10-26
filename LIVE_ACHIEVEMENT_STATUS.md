@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
+Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
 
 ## Latest Completed Slice
 
-Perl19.1 completes eight scalar String-helper result/scalar/shape flow through existing typed actual-value/host dispatch, preserving dedicated mutation/traversal routes and authored Hash checks. Affix matching inspects copies, repairing pre-existing free/fluent/named identity Number indices; flags now retain IOK-only numbers versus POK-only String0. Shared new7/direct scalar-text7/nonempty-default5 native/fresh checks and syntax pass, retaining eight texts/bridges/bounds/empty/null/Unicode/source roots, identity/matched kinds, SONC-SC-selectedS snapshots/eager null operands, rejected prefix effects and12 malformed no-effects. Book/frozen/facts/task/live align; no free/selector/Unicode/callback or reducer95 change. Rust19.2 next.
+Rust19.2 preserves independently healthy producers and adds eight scalar-result/precise receiver-shape metadata through existing dispatch. Shared/native/restored/plan GREEN suppresses SCA/selectedSA/[] and malformed effects while retaining kinds/indices/Unicode/SONC-SC snapshots. Independent ordinary substr null/fraction defects match retained primary Perl bounds after local guards/whole offsets, preserving Boolean/omitted-width/free unary-extra behavior and dedicated mutation aliases. New4/direct null-predicate-default3 tests pass with offline compile/rustfmt/probe syntax. Book/frozen/facts/task/live align; no global numeric/free/domain/Unicode/callback or standalone/portable admission. Dart19.3 next.
 
 ## Next Action
 
-Activate Rust19.2 and independently assess public free/nested scalar String-helper producers and frozen actual result/identity/scalar/shape flow before production. Preserve eight helper domains/null/Unicode/strict cat, Number/Bool/String identities and typed selector distinctions, source-first snapshots and eager operands. Shared native/restored/plan and quick direct String/default/compile/docs/commit; no full matrix/standalone Rust admission.
+Activate Dart19.3 and independently assess public free/nested scalar String producers, frozen result/identity/scalar/shape flow and observed substring boundaries before production. Preserve eight helper domains/Unicode/strict cat/identity kinds, eager snapshots and dedicated mutation/free arity; include null/fraction/negative/provided-width controls against retained primary facts. Shared native/restored/plan plus quick direct String/default/compile/docs/commit; no full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` — Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.19` — Scalar String-helper result contract19 frozen; stale cat null teaching corrected, Perl19.1 owns flow and affix identity kind repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.5` — Lua defined-only default result18.5 targeted-checked; all five bounded backends complete, pure String result assessment19 next.
@@ -29,7 +30,6 @@ Activate Rust19.2 and independently assess public free/nested scalar String-help
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` — Perl logical Boolean result flow and typed source error repairs targeted-checked; Rust independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.17` — Logical Boolean result contract frozen; confirmed Perl bridge/scalar/diagnostic repairs next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.16.5` — All five bounded arithmetic result implementations targeted-checked; logical Boolean result assessment next.
 
 ## History
 

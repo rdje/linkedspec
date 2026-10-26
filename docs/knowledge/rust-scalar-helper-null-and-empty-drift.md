@@ -2,6 +2,8 @@
 id: rust-scalar-helper-null-and-empty-drift
 title: "Rust scalar null and empty-input boundaries"
 answers:
+  - "does Rust substr preserve null source start and provided length"
+  - "why does Rust substr truncate fractional offsets instead of normalizing zero"
   - "does Rust length preserve undef"
   - "why does Rust trim undef return an empty string"
   - "do lowercase uppercase replace_substr rm_prefix and rm_suffix preserve null"
@@ -10,10 +12,10 @@ answers:
   - "is null an undefined literal in the LinkedSpec DSL"
   - "which task owns scalar helper null and empty semantics"
 date: 2026-10-27
-status: bounded null/empty repairs61.1/.61.2 complete; broad61.3 admission open
+status: bounded null/empty61.1/.61.2 and slice19.2 repairs targeted-checked; broad61.3 admission open
 tags: [rust, perl, scalar, string, undef, null, helpers, parity]
 evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3 compares five scalar vectors on primary Rust and public Perl Get, captures all lowering/generated text and descriptors, and independently checks exact result kinds and error absence. Literal undef and unbound name null reproduce the same differences; the empty-string transformation control agrees."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation --test scalar_predicate_boundaries"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_string_results --test scalar_null_propagation --test scalar_predicate_boundaries"
 ---
 
 Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves observed values for empty old/prefix/suffix and unmatched affixes; TYPE23.2.19 distinguishes a Perl affix identity kind defect from that JSON projection, now repaired by Perl19.1 copy inspection. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
@@ -110,3 +112,15 @@ public flags/typed Array writes and Hash String-key controls pass native/fresh.
 String scalar/shape/default/text direct19 checks and syntax pass. This resolves
 the bounded affix defect; broad61.3 and reducer95 remain open, with no Rust/null
 or frozen scalar-text policy change.
+
+TYPE23.3.19.2 independently finds ordinary Rust substr null source/start return
+empty/abc and fractional offsets truncate, despite published normalization.
+Retained primary probe substring_bounds gives native/fresh Perl[null,null,abc,a,
+empty,empty,bc,null], including provided-null width and existing Boolean offset
+compatibility. After the dedicated named-target regex mutation exits, ordinary
+arity2/3 now rejects explicit null operands before conversion and normalizes
+nonnegative whole offsets locally. Missing optional width/free unary-extra
+arity behavior stays; no global numeric/domain/Unicode policy change. New4/
+direct3 native/restored/in-process plan tests pass with offline compile/rustfmt,
+including eager SIL, null/fraction/negative/Boolean controls and both named-
+target mutation aliases. Other backend/full61.3 admission remains separate.

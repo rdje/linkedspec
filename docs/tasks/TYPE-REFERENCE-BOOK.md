@@ -4053,7 +4053,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5 - guard Lua defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19`
-  Status: `active` / Perl scalar String-helper flow targeted-checked; other implementations pending
+  Status: `active` / Perl/Rust scalar String-helper flow targeted-checked; other implementations pending
   Goal: Complete bounded actual scalar String-helper results, identity kinds and clean scalar/shape boundaries.
   Dependencies: .23.2.19 frozen scalar-string-results.md.
   Children: `.23.3.19.1`, `.23.3.19.2`, `.23.3.19.3`, `.23.3.19.4`, `.23.3.19.5`.
@@ -4088,7 +4088,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.1 - preserve Perl scalar String result kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust ordinary scalar String-helper result flow and boundaries.
   Dependencies: .23.3.19.1.
   Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
@@ -4096,6 +4096,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `ea6f82c2ac8e216bcfd721a42d10b713a24c5dc1`; Perl scalar String flow/affix identity repair committed, brief0/tree clean.
+  Owned paths: Rust independently confirmed scalar String-helper actual-result/scalar/shape flow and retained native/restored/in-process generated-plan public producer/shared/selector regression, scoped book/facts/task/live docs. Preserve free domains/null/Unicode/strict cat/callbacks and compiled formats; no standalone Rust admission.
+  Verification tier: `focused`
+  Focused checks: Producer-first public native/restored/plan and shared result RED/GREEN, direct scalar-null/predicate/default checks as warranted, offline compile/rustfmt and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Independent intake: Producer-first native/restored/plan free values/Unicode/identity selectors/order pass before code. Shared native RED preserves basic outputs/bridges/identities/Unicode but runs rejected SCA/selected SA, returns selected[] and malformed values with SASSSASSSSSSSSC. Null source substr also yields emptyString rather than the catalog's null; isolate free explicit-null source/start and eager operand order before classifying/repairing this additional source boundary. Own confirmed null defect here with the result/shape changes, without inferring other backend failure.
+
+  Additional source defect: Independent Rust free/fluent null source/start test returns[empty,abc,empty,abc,SIL] instead ofnulls/SIL. The ordinary substr arm textifies undef and defaults its null start before guarding; dedicated regex mutation exits earlier and must stay untouched. Public Perl native boundary control also confirms fractional start/width normalize0, Boolean true keeps its existing offset1 compatibility, and provided-null width returnsnull. Retain the reference in the public probe and extend the independent Rust control before narrowing the ordinary slice fix. Preserve free unary/extra-arity policy and dedicated mutation; no global numeric normalization.
+
+  Completion: Mark all eight String-helper results scalar in existing selected-result dispatch and add precise ordinary receiver shapes to common preflight. Independently confirmed ordinary substr source/start/provided-width null and fractional start/width defects now guard null before coercion and normalize nonnegative whole offsets, after dedicated regex mutation exits. Retain optional omitted width, Boolean offset compatibility, free unary/extra arity and named-target mutation policies.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Producer-first native/restored/plan free values/Unicode/identity selectors/order pass. Shared native RED preserves valid output but runs rejected SCA/selected SA, returns selected[] and malformed nonnull/effects; null substr yields emptyString. Independent free/fluent null test gives[empty,abc,empty,abc,SIL], and expanded bounds RED truncates fractional start/width instead of normalizing0.
+  - [x] ROOT CAUSE (WHY + WHERE): engine scalar-result list omits the eight methods and common preflight lacks their ordinary shapes; String loop evaluates incompatible operands before rejecting. Ordinary substr converts undef with to_str/as_number before guards and casts fractional numbers directly to usize. Retained public Perl native/fresh bounds return null/null/abc/a/empty/empty/bc/null, distinguishing the correct source/start/width/fraction/negative/Boolean rules. Regex mutation returns earlier in its dedicated arm.
+  - [x] FIX: Existing scalar/result tracking and precise receiver preflight; ordinary two/three-operand null guard plus local whole-offset normalization after dedicated mutation dispatch. No global numeric/selector/Unicode/free-arity/schema/callback normalization or affix producer change.
+  - [x] ADDRESSED (verified): Shared native/restored/in-process plan GREEN preserves all eight outputs/bridges/empty/null/Unicode/source roots, exact identity/matched keys/Array indices, scalar/generic/numeric flow, SONC/SC/selectedS snapshots/eager null operands, prefix effects/skipped incompatible operands and12 malformed no-effects. Independent substring null/fraction/negative/Boolean/optional-width controls retain SIL; both named-target substr/regex_subst mutation controls return xbx/yba.
+  - [x] NO REGRESSION: New4/direct scalar-null1/scalar-predicate1/nonempty-default1 tests pass, seven focused tests, with offline compile/rustfmt and probe syntax. No broad suite/matrix, standalone Rust or complete portable/domain admission; old unary-cat/large-number/reducer95/callback owners remain separate.
+  - [x] LOCKSTEP: Retained test/primary probe, frozen contract/current qualified catalog/guide and canonical String/null facts/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart19.3 independently assesses next, including observed substring boundaries.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.2 - guard Rust scalar String results and slices`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.3`
   Status: `pending`
@@ -4141,11 +4162,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1 scalar/shape flow and affix identity Number-kind repair are targeted-checked; Rust19.2 next owns independent implementation before19.3-.5. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1/Rust19.2 scalar/shape flow and the recorded affix/slice repairs are targeted-checked; Dart19.3 next owns independent implementation before19.4-.5. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` | `pending` | Independently assess and implement frozen Rust scalar String-helper result flow and identity kinds. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` | `pending` | Independently assess and implement frozen Dart scalar String-helper flow and observed substring boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

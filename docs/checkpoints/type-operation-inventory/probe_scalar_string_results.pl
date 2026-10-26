@@ -29,6 +29,7 @@ sub error_snapshot {
 }
 
 my @cases = (
+ [substring_bounds=>q{return([substr(undef,0),substr("abc",undef),substr("abc",1.5),substr("abc",-1,1),substr("abc",0,1.5),substr("abc",0,-1),substr("abc",true),substr("abc",0,undef)])}],
  [kind_flags=>q{return([rm_prefix(0,"x"),rm_suffix(0,"x"),replace_substr(0,"","X"),0,"0"]) }],
  [boundary_plain=>q{return([" a ".trim().sorted(),"a".uppercase().sorted_values()])}],
  [identity_values=>q{return([0.replace_substr("","X"),0.rm_prefix("x"),false.rm_suffix("x"),0.rm_prefix("x").add(1),"0".rm_prefix("x")])}],

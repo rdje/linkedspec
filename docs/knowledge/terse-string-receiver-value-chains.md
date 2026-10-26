@@ -14,10 +14,11 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
 date: 2026-10-27
-status: Perl scalar String19.1 and five-backend predicates targeted-checked; full admission open
+status: Perl/Rust scalar String19 and five-backend predicates targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
 reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_string_results --test scalar_null_propagation --test scalar_predicate_boundaries --test default_selected_receivers"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/scalar_string_result_receiver_contract.t t/scalar_text_contract.t t/default_selected_receiver_contract.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/string_predicate_result_receiver_contract.t t/emptiness_result_receiver_contract.t"
 ---
@@ -52,3 +53,13 @@ source roots, identity kinds, SONC-SC-selectedS snapshots, eager null operands,
 rejected prefix effects/skipped operands and12 malformed no-effects. Syntax
 passes; no Unicode/free/selector/callback policy change or reducer95 repair.
 Current book limitation is removed; Rust19.2 independently assesses next.
+
+TYPE23.3.19.2 confirms Rust producers, then repairs eight result/shape metadata
+omissions through existing selected dispatch. Shared RED has SCA/selectedSA/[]
+and malformed effects; native/restored/plan GREEN retains complete bounded data.
+Ordinary substring null/fractional source/index defects are independently
+reproduced against retained native/fresh Perl controls and repaired after
+mutation dispatch; details: [[rust-scalar-helper-null-and-empty-drift]]. New4/
+direct3 focused tests plus offline compile/rustfmt/probe syntax pass, including
+SIL and both named-target mutation aliases. No standalone/portable admission;
+Dart19.3 independently assesses next.

@@ -127,3 +127,22 @@ Authored retired Hash arrows still reject. Current book identity limitations are
 removed after this fix; new Perl test registration23.4.1 remains required. No
 full matrix/portable admission or reducer95/unary-cat/large-number/callback
 repair. Rust19.2 independently assesses its producers before changing them.
+
+## Bounded Rust implementation
+
+19.2 independently confirms producer values/Unicode/identity indices/order.
+Shared RED exposes SCA/selected-SA and selected[] plus malformed values/effects;
+plain container boundaries already return null. Mark the eight methods scalar
+in existing result dispatch and add precise common receiver shapes. Producers,
+identity/free/domain/Unicode/callback/format policies remain unchanged.
+
+A separate ordinary substr defect textifies null and truncates fractional
+start/width. Retained public Perl native/fresh substring_bounds confirms
+[null,null,abc,a,empty,empty,bc,null] for source/start/fraction/negative/Boolean/
+provided-null-width controls. Guard explicit null operands only in ordinary
+arity2/3 after dedicated regex mutation; normalize whole nonnegative offsets
+locally. Omitted width/free unary-extra arities/Boolean compatibility stay.
+New4/direct null-predicate-default3 native/restored/in-process plan tests pass,
+seven focused tests plus offline compile/rustfmt/probe syntax. Independent SIL
+and both named-target mutation controls pass; no standalone/full admission.
+Dart19.3 independently assesses results and these concrete slice boundaries.

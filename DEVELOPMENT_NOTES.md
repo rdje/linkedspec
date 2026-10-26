@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.19.2 — guard Rust scalar String results and slices
+
+Rust19.2 preserves independently healthy producers and adds eight scalar-result/precise receiver-shape metadata through existing dispatch. Shared/native/restored/plan GREEN suppresses SCA/selectedSA/[] and malformed effects while retaining kinds/indices/Unicode/SONC-SC snapshots. Independent ordinary substr null/fraction defects match retained primary Perl bounds after local guards/whole offsets, preserving Boolean/omitted-width/free unary-extra behavior and dedicated mutation aliases. New4/direct null-predicate-default3 tests pass with offline compile/rustfmt/probe syntax. Book/frozen/facts/task/live align; no global numeric/free/domain/Unicode/callback or standalone/portable admission. Dart19.3 next.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.19.1 — preserve Perl scalar String result kinds
 
 Perl19.1 completes eight scalar String-helper result/scalar/shape flow through existing typed actual-value/host dispatch, preserving dedicated mutation/traversal routes and authored Hash checks. Affix matching inspects copies, repairing pre-existing free/fluent/named identity Number indices; flags now retain IOK-only numbers versus POK-only String0. Shared new7/direct scalar-text7/nonempty-default5 native/fresh checks and syntax pass, retaining eight texts/bridges/bounds/empty/null/Unicode/source roots, identity/matched kinds, SONC-SC-selectedS snapshots/eager null operands, rejected prefix effects and12 malformed no-effects. Book/frozen/facts/task/live align; no free/selector/Unicode/callback or reducer95 change. Rust19.2 next.
