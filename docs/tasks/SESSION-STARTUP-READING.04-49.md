@@ -206,6 +206,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     generated/loaded routes plus the direct-dependent backend contract. Update mdBook/Knowledge and commit.
   Verification: `pending` — `.3.2.21` public Get returns empty for literal `"0"`, nonempty for its bound twin.
   Commit: `pending`
+  Bounded overlap: Bounded ordinary value helpers are repaired/targeted-checked under TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1 (t/emptiness_value_expression_contract.t); native/fresh typed literals/bindings/blocks/nested/functions and SA snapshots pass. FlowExpr conditional/attached/context acceptance and full closeout remain here.
+
 - ID: `SESSION-STARTUP-READING.16.2`
   Status: `pending`
   Goal: Prevent numeric and keyword literal tokens from becoming generated host scalar references.
@@ -216,6 +218,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     generated diagnostics, and supported emitted/loaded behavior; run direct-dependent proof and update book.
   Verification: `pending` — `.3.2.21` lowering emits `$0` for literal 0 through the permissive scalar extractor.
   Commit: `pending`
+  Bounded overlap: TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1 typed ordinary value operands avoid host literal-slot lookup and pass two program-name states on native/fresh routes. Global scalar-symbol recognition, conditional surfaces and remaining direct-consumer audit are unchanged/pending; no full closeout.
+
 - ID: `SESSION-STARTUP-READING.17`
   Status: `pending`
   Goal: Make wrong-kind collection helpers independent of same-named Perl host slots.

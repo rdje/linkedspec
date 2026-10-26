@@ -3298,6 +3298,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   matches          => [2, 2],
   coalesce         => [2, undef],
   coalesce_nonempty => [2, undef],
+  is_empty         => [1, 1],
+  is_nonempty      => [1, 1],
   is_defined       => [1, 1],
   is_undefined     => [1, 1],
   num_abs          => [1, 1],
@@ -4414,6 +4416,22 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
+
+  if ($method eq 'is_empty' || $method eq 'is_nonempty') {
+   my $value = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+   $value = $legacy_method_value_expr->($args->[0]{source})
+    unless defined($value) && length($value);
+   return undef unless defined($value) && length($value);
+   # Emptiness depends on the yielded value, never Perl reference truthiness
+   # or a literal token interpreted as a host scalar name.
+   my $empty = 'do { my $__ls_is_empty_value = '.$value.'; '
+    .'(!defined($__ls_is_empty_value) '
+    .'|| (ref($__ls_is_empty_value) eq \'ARRAY\' && !@{$__ls_is_empty_value}) '
+    .'|| (ref($__ls_is_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_is_empty_value})) '
+    .'|| (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq \'\')) ? 1 : 0 }';
+   return $empty if $method eq 'is_empty';
+   return 'do { my $__ls_is_nonempty_empty = '.$empty.'; $__ls_is_nonempty_empty ? 0 : 1 }';
+  }
 
   if ($method eq 'coalesce' || $method eq 'coalesce_nonempty') {
    my @values;

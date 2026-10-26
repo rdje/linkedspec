@@ -53,3 +53,13 @@ handoff. Rust2/Dart3/Julia4/Lua5 each independently assess before changing code.
 Use compile/small native/generated/direct checks/docs/commit. Preserve published
 source/empty/null/String0 rules, track existing16 overlap explicitly, and keep
 broader condition/selector/domain/admission work separate.
+
+## Bounded Perl value producer repair
+
+23.3.9.1.1 registers existing emptiness helpers on typed value calls, completing
+their operand before once-only actual-kind emptiness emission. Native/fresh
+producer tests pass after raw function-host-call RED and the retained block/String0
+failures: literal/bound/nested/function/block values, inverse helpers, empty String/
+Array/Hash/undef, String0/numeric0/false as data, two host-program-name states and
+1!/SA/one-call snapshots. Direct has_key producer compatibility passes. FlowExpr/
+global scalar recognition remain with SESSION16; receiver/result flow1.2 follows.

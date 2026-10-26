@@ -778,13 +778,13 @@ dispatch rule.
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the actual Array or Hash has zero elements. Perl currently stops `[].is_empty().cat("!")` at undef; nested `cat(is_empty([]),"!")` returns `"1!"`. A tracked producer defect also treats some computed empty-container blocks by host truthiness; its repair precedes result chaining. The canonical rule uses the yielded value, with String `"0"` preserved as data. Broader literal/conditional repairs remain tracked.
+- **Behavior**: Returns true for an actual empty Array/Hash/String or undef. Perl ordinary free-helper values now inspect the yielded kind once: `cat(is_empty({[]}),"!")` → `"1!"`, including blocks, nested reads and function results. String `"0"`, numeric0 and false remain data. `[].is_empty().cat("!")` still stops at undef; result chaining is next. Broader FlowExpr conditional/literal-slot repairs remain tracked.
 - **Edge cases**: Returns true for undef (treated as empty).
 
 ### `is_nonempty(arr)`
 - **Signature**: `is_nonempty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Logical inverse of `is_empty`. True if the aggregate has at least one element. Perl nested `cat(is_nonempty(["a"]),"!")` returns `"1!"`, while `["a"].is_nonempty().cat("!")` currently stops at undef; compatible result continuation is tracked alongside the producer caveat above.
+- **Behavior**: Logical inverse of `is_empty`. True if the aggregate has at least one element. Perl nested `cat(is_nonempty(["a"]),"!")` returns `"1!"`, while `["a"].is_nonempty().cat("!")` currently stops at undef; compatible receiver/result continuation is tracked; ordinary free-helper `is_nonempty("0")` now agrees with a binding holding `"0"` and returns1. The broader conditional caveat above still applies.
 
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`

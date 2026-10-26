@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1 — evaluate typed emptiness values
+
+Perl ordinary is_empty/is_nonempty value helpers lower typed operands completely and inspect actual undef/empty String/Array/Hash values once. Native/fresh producer tests pass after function-host-call RED and the retained block/String0 diagnostic failures, covering inverse helpers, zero/false as data, literals/bindings/nested/function values, host-program-name independence and1!/SA/one-call snapshots. Direct has_key producer compatibility and syntax/book/fast checks pass. Broader SESSION16 conditions/global selectors stay open; result flow1.2 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.8 — freeze emptiness result continuations
 
 Public native/fresh probes show stopped fluent emptiness results versus working nested1!, plus the existing producer defect: literal0 text differs from its binding and an empty-Array-yielding block gives wrong0!/SA. MethodLowering marks predicates terminal and its general producer fallback tests host truthiness. Freeze canonical value-based emptiness/result targets, schedule bounded producer repair before flow and independent backend assessments, retaining SESSION16 broader ownership. Production unchanged; syntax/book/fast checks pass.
