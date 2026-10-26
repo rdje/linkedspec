@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.16.4 — guard Julia scalar arithmetic results
+
+Julia valid arithmetic producer/result/prefix/default flow already works. Added scalar marking/common unambiguous pre-effect shape guards after scalar-container[]/28-effect RED.69 focused native/plan/fresh arithmetic/comparison/aggregate/default assertions and strict compilation pass, including Number/not-Bool raw/alias/symbol/counter kinds, numeric selectors, copied defaults and SOC/ASO. Numeric adapters/free signatures/min-max modes unchanged; book/facts/task/live align. Safe Lua16.5 next; full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.16.3 — guard Dart scalar arithmetic results
 
 Dart arithmetic valid producer/result/prefix/default flow already works. Added scalar-result marking and unambiguous pre-effect shape guards after scalar-container [] and28-effect RED. Eleven focused native/restored/plan producer/shared/selector/prefix/comparison/aggregate/default tests plus format/fatal selected analysis pass, preserving numeric kinds/domains/min-max modes, copied containers and SOC/ASO. Book/facts/task/live align; Julia16.4 next, full admission separate.

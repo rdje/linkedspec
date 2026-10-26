@@ -15,62 +15,42 @@ answers:
 date: 2026-10-26
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
-evidence: "String/numeric4.3.2; predicate10.4/definedness11.4/numeric-comparison15.4 focused proof. Prior full fact and its historical replay/source pointer at Git03f0036a8093e87db4af7c82ef6518448c9d9ee7."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/numeric_comparison_results_test.jl\"); include(\"julia/test/string_comparison_result_receivers_test.jl\")'"
+evidence: "String/numeric4.3.2; comparison15.4/arithmetic16.4 focused proof. Prior full fact/guard and dated replay details at Gitbec537d5b05ebfdd7750930bfb13ca1588a4da5e."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/scalar_arithmetic_results_test.jl\"); include(\"julia/test/numeric_comparison_results_test.jl\")'"
 ---
 
-Julia string/scalar and numeric helper execution lives in
-`julia/src/runtime/Interpreter.jl`.
+Interpreter.jl canonical_action_helper_name shares pure implementations across
+function/word/symbol/receiver forms: strings include case/trim/cat/length/substr,
+predicates, literal/regex split/replace, lazy defaults and generic predicates;
+numeric includes arithmetic/rounding/min-max/clamp/reducers/comparisons. Numeric
+conversion rejects Bool/containers/invalid inputs and returns Number or nothing;
+normalization and strict domains remain unchanged by result dispatch work.
 
-Function-form calls and receiver methods canonicalize through
-`canonical_action_helper_name(...)` before sharing one pure-helper dispatcher.
-The string/scalar surface includes concatenation, trimming and case transforms,
-character length/substrings, literal prefix/suffix/contains/replace operations,
-literal and regex splitting, regex matching with retained flags, lazy coalesce
-variants, definedness/emptiness predicates, and explicit lexical `str_*`
-comparisons.
+Predicate10.4 fixes null needles/scalar/one-RHS guards while preserving numeric
+text flags/Bool matches and SOC. Definedness11.4 preserves Bool/false0!/SC with
+zero-RHS/scalar guards. Comparison15.4 adds six canonical names to one-RHS/scalar
+tuples; valid flow already worked but scalar Array[]/24 effects did not. Strict
+native/plan/fresh tests assert Number && !Bool, numeric selector kinds and SOC.
+Full prior lists/replay/guard detail remain at the exact Git pointer above.
 
-The numeric surface includes arithmetic folds, integer modulo, unary rounding,
-min/max/clamp, sum/average/median/range reducers, numeric comparisons, terse word
-aliases, and arithmetic/comparison symbol callees. Runtime numeric conversion
-accepts finite numbers and numeric-looking strings, rejects booleans and
-aggregate values, normalizes integral results to Julia `Int`, and returns
-`nothing` for invalid operands, bounds, modulo, failed integral conversions, or
-zero divisors. This describes covered conversion paths, not safe arithmetic at
-every magnitude; the September qualification below supersedes that broader inference.
+Arithmetic16.4 independently confirms canonical/word/symbol/nested producers,
+selector and String prefixes. Shared RED has scalar-container[] and28 malformed
+effects; valid twelve/variadic/domain/default/copy/bridge/SOC/ASO already works.
+Common unambiguous unary/binary/clamp/add-mul guards and arithmetic scalar tuple
+repair both, preserving min/max modes.69 focused assertions across new arithmetic
+and direct comparison/aggregate/default tests compile/pass native/plan/fresh;
+strict raw/alias/symbol/counter kinds reject Bool lookalikes. Full admission open.
 
-Compatible string and number receiver chains prepend the current receiver to
-the same helper call; receiver shapes and result boundaries still need independent guards. Array-aware
-continuations and mutations remain owned by `JULIA-BACKEND-PARITY.4.3.3`.
+## Numeric and slice qualifications
 
-Related facts: [[julia-runtime-core-value-capture-helpers]], [[julia-runtime-array-helpers]],
-[[julia-runtime-rule-interpreter]], [[dart-runtime-string-numeric-helpers]],
-[[terse-string-receiver-value-chains]], [[terse-number-receiver-value-chains]],
-[[terse-string-comparison-bridge-contract]], [[terse-numeric-comparison-symbol-callees]].
+September11 .1.17 strict diagnostic establishes arithmetic wrap before
+normalization, out-of-Int-range integral Float64 -> nothing, and integer literal
+parse throws. [[julia-large-number-and-slice-boundaries]] retains128 native/
+reconstructed and64 Perl assertions; Julia2.9 owns these defects,2.10 owns unsafe
+substring/count arithmetic. Large float text uses BigInt decimal spelling;
+startup55.2 retains Perl scientific-spelling comparison. No all-magnitude claim.
+Regex handling preserves imsx (g/o ignored), guarded substitution/captures;
+this slice closes no separate regex/domain repair.
 
-## 2026-09-11 — numeric conversion and slice limits
-
-Julia .1.17 physically reads Interpreter6116-7615. Strict numeric adapters reject
-booleans/aggregates, but arithmetic can wrap before normalization, and integral
-Float64 results outside Int range become nothing. Integer-literal parsing can
-throw before runtime. [[julia-large-number-and-slice-boundaries]] preserves 128
-native/reconstructed and 64 Perl assertions; Julia .2.9 owns these defects.
-The same paired diagnostic proves unsafe substring/count arithmetic under .2.10.
-Large float scalar text preserves magnitude via BigInt but uses decimal spelling;
-startup .55.2 retains its comparison with Perl scientific spelling.
-
-Existing text5/numeric4/string-numeric14 and adjacent aggregate/uniform/mutation
-suites remain green. Exact selected replay is in [[julia-runtime-array-helpers]].
-Regex handling retains imsx flags (g/o ignored), guarded substitution writeback
-and capture expansion; this reading closes no pending regex or numeric repair.
-
-Historical September11 replay and full10.4/11.4 guard detail are recoverable at
-the Git pointer above. Predicate10.4 preserves numeric text flags/Bool matches
-and SOC/SC while fixing null needles/scalar boundaries/one-operand effects.
-Definedness11.4 keeps Bool identity/false0!/SC with zero-operand/scalar guards.
-
-Numeric comparison15.4 adds six names to common one-RHS/scalar tuples only.
-Independent producer/valid flow already works; scalar Array[]/24 effects fail.
-Native/plan/fresh and direct lexical/aggregate42 strict assertions now pass,
-including explicit Number/not-Bool guards, numeric selector kinds and source
-SOC/copy. Numeric adapters/domains/aliases stay unchanged; full admission open.
+Related: [[julia-runtime-array-helpers]], [[julia-runtime-core-value-capture-helpers]],
+[[terse-number-receiver-value-chains]], [[terse-string-comparison-bridge-contract]].

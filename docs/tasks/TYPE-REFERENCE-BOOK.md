@@ -3502,10 +3502,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.3 - guard Dart scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary scalar arithmetic result continuations.
   Dependencies: .23.3.16.3.
   Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `bec537d5b05ebfdd7750930bfb13ca1588a4da5e`; Dart arithmetic committed, brief0/tree clean.
+  Owned paths: Julia confirmed arithmetic scalar/shape gaps, native/plan/fresh producer/shared/selector/prefix regression and runner registration, scoped book/facts/task/live docs. Preserve strict Number/not-Bool/null kinds and numeric/free/min-max/source/default policies.
+  Verification tier: `focused`
+  Focused checks: Independent producer-first RED/GREEN, direct comparison/aggregate/default tests with strict Number/not-Bool checks, compilation and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Extend common unambiguous arithmetic arity preflight and scalar marking tuples, reusing existing canonical actual-value dispatcher and unchanged numeric adapters/min-max modes. Retain/register strict native/plan/fresh producer/shared/selector/prefix regression.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent canonical/word/symbol/nested producer and selector/prefix cases pass before production. Shared RED has incompatible/after_text [] instead ofnull and28 source/operand effects; valid twelve/variadic/source/domain/default/bridge/SOC/ASO fields already hold on all three routes.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! omits arithmetic scalar marking and unambiguous common arity preflight. Canonical pure helper/actual-value source and default dispatch already satisfy retained valid controls; do not infer numeric producer defects.
+  - [x] FIX: Add unary/sub-div-mod/clamp/add-mul guards and twelve arithmetic canonical names to scalar tuple; preserve min/max overload shape handling. No parser/schema/helper/domain/free signature changes. Register the new retained test in runtests.jl.
+  - [x] ADDRESSED (verified): Thirty new assertions pass native/plan/fresh twelve/variadic/strict-domain/aliases/symbols/selector/prefix and shared source/zero/default/copy/actual Array-Hash/bridge/generic/comparison flow. Explicit Number && !Bool guards protect raw/alias/symbol/counter kinds. SOC/ASO and fourteen malformed zero-effects hold.
+  - [x] NO REGRESSION:69 focused assertions across new arithmetic, direct numeric comparison, aggregate and selected-default tests pass with strict Julia compilation. No whole suite, known large-magnitude/slice repair or complete portable admission claim.
+  - [x] LOCKSTEP: Retained test/runner, contract/current progress and book examples, compacted canonical Julia fact with exact prior Git history pointer and Number fact/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua16.5 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.4 - guard Julia scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5`
   Status: `pending`
@@ -3610,7 +3627,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` | `pending` | Independently assess and implement Julia scalar arithmetic result continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.5` | `pending` | Independently assess and implement Lua scalar arithmetic result continuations on safe available hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

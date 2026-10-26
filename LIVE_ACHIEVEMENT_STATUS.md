@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
+Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
 
 ## Latest Completed Slice
 
-Dart arithmetic valid producer/result/prefix/default flow already works. Added scalar-result marking and unambiguous pre-effect shape guards after scalar-container [] and28-effect RED. Eleven focused native/restored/plan producer/shared/selector/prefix/comparison/aggregate/default tests plus format/fatal selected analysis pass, preserving numeric kinds/domains/min-max modes, copied containers and SOC/ASO. Book/facts/task/live align; Julia16.4 next, full admission separate.
+Julia valid arithmetic producer/result/prefix/default flow already works. Added scalar marking/common unambiguous pre-effect shape guards after scalar-container[]/28-effect RED.69 focused native/plan/fresh arithmetic/comparison/aggregate/default assertions and strict compilation pass, including Number/not-Bool raw/alias/symbol/counter kinds, numeric selectors, copied defaults and SOC/ASO. Numeric adapters/free signatures/min-max modes unchanged; book/facts/task/live align. Safe Lua16.5 next; full admission separate.
 
 ## Next Action
 
-Independently assess Julia scalar-numeric-v1 twelve-method arithmetic producers/aliases and result/shape/default/bridge/overload flow under16.4. Preserve Number/not-Bool/null kinds, strict domains/free signatures/min-max modes and captured snapshots. Reuse actual dispatcher; repair only confirmed gaps with native/plan/fresh and small direct tests/strict compile/docs/commit; then safe Lua16.5, no full suite/matrix now.
+Independently assess Lua scalar-numeric-v1 twelve-method producers/aliases and result/shape/default/bridge/overload flow under16.5 on safe PUC5.5.1/LuaJIT. Preserve strict Number/null kinds, numeric domains/free signatures/min-max modes and captured snapshots; fix confirmed guards/dispatch only. Native/plan/fresh and small direct/named checks, docs/commit; no unsafe malformed native regex/full runner/declared5.4 claim. Then select next helper-spine feature.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` — Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
@@ -29,7 +30,6 @@ Independently assess Julia scalar-numeric-v1 twelve-method arithmetic producers/
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
 
 ## History
 

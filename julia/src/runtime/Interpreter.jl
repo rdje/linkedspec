@@ -5881,16 +5881,22 @@ function _evaluate_runtime_fluent_chain!(
     # scalar min/max overloads retain their ordinary operands.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
+        if (helper_name == "num_clamp" && length(call.args) != 2) ||
+            (helper_name in ("num_add", "num_mul") && isempty(call.args))
+            return nothing
+        end
         if helper_name in (
             "join_values", "contains", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
             "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le",
+            "num_sub", "num_div", "num_mod",
         ) && length(call.args) != 1
             return nothing
         end
         if helper_name in (
             "first", "last", "copy", "count", "count_keys", "length", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "num_sum", "num_avg", "num_median", "num_range",
+            "num_abs", "num_floor", "num_ceil", "num_round",
         ) && !isempty(call.args)
             return nothing
         end
@@ -5921,6 +5927,8 @@ function _evaluate_runtime_fluent_chain!(
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
             "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le",
+            "num_abs", "num_floor", "num_ceil", "num_round", "num_add", "num_sub",
+            "num_mul", "num_div", "num_mod", "num_clamp", "num_min", "num_max",
         ) ||
             (value isa AbstractVector && helper_name in (
                 "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",

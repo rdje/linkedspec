@@ -106,3 +106,14 @@ guards repair both, preserving min/max modes and all numeric adapters. Eleven
 focused arithmetic/comparison/aggregate/default tests plus format/fatal selected
 analysis pass. Shared strict kinds/default copies/SOC/ASO and14 no-effect bad
 shapes hold; full domain/context/portable admission remains separate.
+
+## Bounded Julia implementation
+
+23.3.16.4 confirms existing producers, selectors, numeric prefixes and valid
+shared flow before repair. Scalar->container[] and28 bad-shape effects are the
+only shared RED fields. Arithmetic scalar marking/common unambiguous preflight
+guards repair both without changing adapters/free signatures/min-max modes.
+69 focused assertions across arithmetic/comparison/aggregate/default native/
+plan/fresh tests pass with explicit Number/not-Bool raw/alias/symbol/counter
+checks. Strict domains, copied defaults, SOC/ASO and14 no-effect bad shapes hold;
+full domain/context/portable admission remains separate.
