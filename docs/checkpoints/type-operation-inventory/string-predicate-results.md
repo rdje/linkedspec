@@ -121,3 +121,12 @@ and null-operand RED; kinds/flags/SOC/SC unchanged. Updated old matches/length
 terminal assertions. Whole regex helper case passes on JIT; PUC re-enters known
 malformed-pattern crash LUA-STARTUP-READING.2.3 and is excluded from passes.
 Native repair/declared5.4/full admission separate; P1 Dart regex6 follows.
+
+## Complete Dart grouped dotted literal priority
+
+23.3.10.6 recognizes complete slash literals before assignment/fluent scanners.
+Public /(?s)^a.b$/ AST and native/restored/plan matches pass alongside symbolic
+division/ordinary receiver controls; direct parser checks and fatal analysis pass.
+Broader grouped-brace scanner/validator/collector repair remains
+DART-STARTUP-READING.2.2.1/.2.2.2. No x/unknown mode or general regex admission.
+Definedness assessment23.2.10 follows.

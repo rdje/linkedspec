@@ -119,6 +119,14 @@ final class _ActionParser {
   }
 
   ActionExpr _parseExpr(String text, int start) {
+    // Complete slash literals own their punctuation before assignment/fluent
+    // scanners; symbolic division calls and receiver chains are not literals.
+    if (text.startsWith('/')) {
+      final literal = _parseLiteral(text, start);
+      if (literal is ActionRegexLiteralExpr) {
+        return literal;
+      }
+    }
     final assignment = _parseAssignment(text, start);
     if (assignment != null) {
       return assignment;

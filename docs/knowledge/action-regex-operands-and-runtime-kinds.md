@@ -74,11 +74,7 @@ Owners: `perl/LinkedSpec/ActionIR/AST/Parser.pm`,
 `rust/linkedspec-core/src/{expr,types}.rs`,
 `rust/linkedspec-runtime/src/engine.rs`, `dart/lib/src/runtime/interpreter.dart`,
 `julia/src/runtime/Interpreter.jl`, and `lua/src/linkedspec/interpreter.lua`.
-Four retained-native Rust CLI controls additionally confirm the two revised book
-examples return7, standalone `/b/` returns string `b`, and a string pattern in
-`matches` returns true. Executable SHA-256:
-`bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d`.
-The other native backends were inspected, not executed in this audit.
+Historical Rust CLI controls/hash and audit limits remain at Git5bf0009e421a35f99aaa4b4fae5c08c2e5f8bf74 for this path; that audit did not execute other backends.
 
 Private carriers are implementation details, not evidence of a common public
 regex-variable contract. No dependency implementation was inspected.
@@ -103,7 +99,7 @@ callable fixtures do not cover them.
 
 ## Recommendation discussed with the director
 
-September23 recommendation: add a first-class regex type only for a concrete unmet use case; no approval or roadmap admission. Potential benefits are carrying pattern/flags, construction validation and reusable backend compilation, not measured performance. Caching itself needs no public type. Costs include shared flags, copy/equality/serialization, callable transport and cross-backend conformance. Strings and contextual operands cover observed uses; a type would not settle lexical slash ambiguity.
+A first-class regex type remains unadmitted. The September23 recommendation, use cases and tradeoffs remain at the Git pointer above; existing contextual operands do not establish public regex-variable transport/copy semantics.
 
 ## Callable matches and dynamic array delimiters
 
@@ -113,4 +109,4 @@ September23 recommendation: add a first-class regex type only for a concrete unm
 
 Rust23.3.10.2: Core parse_regex consumed suffix flags but kept only body; free /^a/i and /^a/ serialized identically, while public inline imsx controls worked. Encode imsx as leading modes in the existing pattern string, deduplicate modes, ignore go and encode unknown flags as an invalid pattern for existing helper failure handling. Runtime regex values remain Scalar(pattern); no first-class type/schema field or dependency change. Native/restored/plan match/split/filter controls pass after RED, preserving actual Bool matches. Recompile old derived artifacts from source to recover intended modes; historical artifacts retain original recorded patterns/results. Full regex/context admission remains separate.
 
-Dart23.3.10.3 preserves literal i/m/s suffixes as inline modes in the existing pattern string, including contextual array-helper operands. AST flags were already serialized; evaluation previously discarded them. Native/restored/plan matches/split/filter controls pass after RED. The existing inline bridge remains unchanged; no public type/schema change. Grouped /(?s)^a.b$/ still becomes invalid_fluent_chain: scanner _looksLikeRegexStart rejects slash followed by (, exposing its dot before literal recognition. P1 repair23.3.10.6 follows Julia/Lua flow; full x/unknown-mode admission is not established here.
+Dart23.3.10.3 preserves literal i/m/s suffixes as inline modes in the existing pattern string, including contextual array-helper operands. AST flags were already serialized; evaluation previously discarded them. Native/restored/plan matches/split/filter controls pass after RED. The existing inline bridge remains unchanged; no public type/schema change. 23.3.10.6 recognizes complete slash literals before assignment/fluent scanning, fixing grouped /(?s)^a.b$/ invalid_fluent_chain. Public AST/native/restored/plan, symbolic division/ordinary receiver and direct parser checks pass after RED. Broader grouped-brace scanner/validator/collector repairs remain DART-STARTUP-READING.2.2.1/.2.2.2; x/unknown-mode admission separate.

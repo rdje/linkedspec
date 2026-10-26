@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
+Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
 
 ## Latest Completed Slice
 
-Lua removes four predicate terminal fences, marks scalar results, preflights one operand and rejects null text operands. Shared native/plan/fresh, direct emptiness and direct String case pass on PUC5.5.1/LuaJIT after null/SO/S/12-effect and null-operand RED; kinds/flags/SOC/SC unchanged. Updated matches/length terminal assertions and registered fixture. JIT whole regex case passes; PUC hits known native invalid-pattern formatter crash2.3 and that case is excluded from PUC passes. Book/fast checks pass; P1 Dart regex6 next.
+Dart recognizes complete slash regex literals before assignment/fluent scanners. Grouped dotted /(?s)^a.b$/ now passes public AST/native/restored/plan beside symbolic division and ordinary receiver controls after ActionRawExpr RED. Shared predicate/mode and direct parser tests pass10 targeted tests; fatal selected-file analysis passes. No global slash classification, validator/collector, regex type or x/unknown-mode change. Broader DART-STARTUP-READING.2.2.1/.2.2.2 stay open. Book/fast checks pass; definedness assessment23.2.10 next.
 
 ## Next Action
 
-Repair P1 Dart grouped dotted regex scanning under23.3.10.6 before further families: public /(?s)^a.b$/ becomes invalid_fluent_chain because slash-before-( is rejected. Preserve division/receiver boundaries and regex modes; focused public AST/native/restored/plan/direct checks/docs/commit. Known Lua native malformed-pattern crash remains LUA-STARTUP-READING.2.3 with2.2 runtime/header prerequisite.
+Assess/freeze ordinary is_defined/is_undefined result flow under23.2.10 before code: read helper inventory/catalog and canonical facts, compare public Perl native/fresh producers/fluent/nested/null/defined-kind/source/effect cases, freeze bounded contract and schedule independent backend children. Small targeted checks/docs/commit; no exhaustive suite. Broader Dart scanner2.2.1/.2.2.2 and Lua native malformed-pattern crash2.3 remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.5` — Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` — Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
@@ -29,7 +30,6 @@ Repair P1 Dart grouped dotted regex scanning under23.3.10.6 before further famil
 - `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 
 ## History
 

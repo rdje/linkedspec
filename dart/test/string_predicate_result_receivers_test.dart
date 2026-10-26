@@ -63,4 +63,21 @@ void main() {
       input: 'a\nb',
     );
   });
+  test('complete grouped regex literals precede fluent dot splitting', () {
+    final literal = parseActionExpression(r'/(?s)^a.b$/');
+    expect(literal, isA<ActionRegexLiteralExpr>());
+    expect((literal as ActionRegexLiteralExpr).pattern, r'(?s)^a.b$');
+    final division = parseActionExpression('/(8, 2)');
+    expect(division, isA<ActionCallExpr>());
+    expect((division as ActionCallExpr).name, '/');
+    expect(
+      parseActionExpression('"a.b".uppercase()'),
+      isA<ActionFluentChainExpr>(),
+    );
+    assertConsumers(
+      r'''Top:: I { return([matches(input_text(),/(?s)^a.b$/),input_text().matches(/(?s)^a.b$/).cat("!"),matches("AbC",/(Ab.C|AbC)/),/(8,2),"a.b".uppercase()]) }''',
+      [true, '1!', true, 4, 'A.B'],
+      input: 'a\nb',
+    );
+  });
 }
