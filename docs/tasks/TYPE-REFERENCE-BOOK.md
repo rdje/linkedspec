@@ -3113,11 +3113,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.1 - preserve captured Rust aggregate operands`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Evaluate Perl has_key key after captured null sources.
   Dependencies: .23.3.14.1; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Public dump shows typed and legacy key expression nested inside defined(hash), suppressing valid key effects on a null source; result remains0 while key mutations must run once.
   Acceptance: Move key evaluation before source-validity ternary in typed/legacy ordinary lowering, preserving source snapshot/output kinds/domain/warnings and one-key guard. Native/fresh source-null/effect/valid source/malformed and direct has_key/contains checks. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `03ceddd1f251f41a1de9bc82d3f6b71fc027e39a`; Rust cached-source repair committed, brief0/tree clean.
+  Owned paths: Perl typed/legacy has_key value lowering key temporaries, public native/fresh source-null/absent/effect/valid source/shape fixture and direct has_key/contains checks/docs. Source/output kinds/free arity and key domain remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution/dump source-null RED/GREEN, shared native/fresh key ordering/once-only/source/result snapshot fixture, direct has_key/contains fixtures, source/test syntax and book/history/diff/final staged continuity guards.
+  Canonical trigger: None for bounded existing ordinary evaluation-contract repair under director feature-first cadence; complete contexts/domains/portable23.4 separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Completion: In typed and legacy conditional has_key value builders, capture source then key in separate lexical temporaries before defined(source)/exists. Null-source output stays numeric0, with key effects no longer suppressed. Key expressions remain untouched and evaluated once; no source/key domain/coercion/arity change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public dump located key in the defined(hash) ternary. After correcting a new fixture filename setup error (not semantic RED), native/fresh regression genuinely fails key effects: free/literal/missing calls stay0, source bindings remainnull, receiver orderSC/keycalls0. Valid/empty source controls and malformed guards already pass.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering.pm typed4501/4511 and legacy6840/6863 emit key inside exists on the true branch of defined(source). The existing source-then-key ordinary value contract requires key evaluation before this presence decision, including null/missing sources.
+  - [x] FIX: Add one key temporary to each conditional builder and use that value in exists; source captured first, presence tested last. No try/catch or key rewriting, so actual operand behavior is retained. Existing named direct-hash branch already evaluates key and is unchanged.
+  - [x] ADDRESSED (verified): Native/fresh exact expected passes free/literal/absent/null-source key once and binding effects, receiver0!/SKC/source1/key1, valid captured-source1/SK and empty-source0 despite later binding creation. Missing/extra receiver calls remain null with zero effects.
+  - [x] NO REGRESSION: Direct has_key and contains fixtures pass;18 assertions across three focused files, source/test syntax pass. Both builders are updated; no claim of exhaustive independent legacy-route, exception, full-domain or portable admission.
+  - [x] LOCKSTEP: New source/expected/test, frozen contract/current book example and canonical source/null fact/map align with TYPE/FUTURE5.7/index/live/resume. Book/history/diff/final staged memory/cadence/diagnosis checked before commit; Rust null-key14.3 next. Mandatory Perl fixture registration23.4.1 remains open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.2 - evaluate Perl has_key keys before source guards`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.3`
   Status: `pending`
@@ -3244,7 +3261,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` | `pending` | Evaluate Perl has_key key once after captured null sources. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` | `pending` | Distinguish Rust null from empty in contains/index_of/uniq while preserving defined coercion. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

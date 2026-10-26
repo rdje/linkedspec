@@ -10683,7 +10683,7 @@ _Active task-tree authoritative prose can drift because the metadata doctrine ch
 ### aggregate-operand-snapshots-and-null-keys
 _Captured aggregate operands and null-distinct Array keys_
 - **answers:** why does Rust index_of see a rebound Array | why does Rust has_key see a rebound Hash | why does Rust merge_hash use a later binding value | why does Rust flat_hash of a scalar name return an empty Hash | why does Perl has_key skip key effects for null source | why does uniq drop empty text beside null on Rust | what is the null membership and index_of reference policy | which task owns aggregate source and null-key repairs
-- **date:** 2026-10-26 · **status:** Rust source snapshots repaired; Perl key/null-key work open
+- **date:** 2026-10-26 · **status:** Rust source and Perl key evaluation repaired; null-key work open
 - **evidence:** `TYPE23.2.14 public Get/dump/native/fresh and Engine native/restored/plan; README reference, uniform binding policy.read, has_key/index source contracts and catalog uniq null distinction.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_operand_snapshots.pl` · `bash tools/run_cargo_local.sh run --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --example operand_snapshot_probe`
 - **source:** [`docs/knowledge/aggregate-operand-snapshots-and-null-keys.md`](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md)

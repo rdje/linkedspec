@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
+Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 
 ## Latest Completed Slice
 
-Rust aggregate value adapters now consume evaluated typed arguments instead of re-reading ctx after later operands, preserving existing named wrong-kind/absent empty-container fallback. Native/restored/plan source/append/merge/null snapshots and typed/default controls pass after RED; seven focused snapshot/direct contains/index/has_key/uniform tests with offline compilation/rustfmt pass. Literal/concat controls, target/lazy resolvers, invalid-domain shapes and null-key equality remain unchanged. Book/fact/FUTURE5.7/current docs align; Perl has_key key-evaluation14.2 next, null-key backends14.3-.6 separate.
+Perl has_key typed/legacy value builders now capture the key after the source and before defined/exists, preserving numeric0 on null sources while executing key effects once. Native/fresh literal/bound/missing-source and receiver0!/SKC/source1/key1 controls, valid/empty captured sources and no-effect malformed guards pass after key-suppression RED. Direct has_key/contains bring focused proof to18 assertions; source/test syntax pass. No key/domain/arity/exception rewriting or exhaustive legacy/full admission claim. Book/fact/FUTURE5.7/current docs align; Rust null-key14.3 next, mandatory Perl registration23.4.1 separate.
 
 ## Next Action
 
-Repair Perl ordinary has_key key suppression under23.3.14.2. Public dump locates key inside defined(hash) ternary in typed4501/4511 and legacy6840/6863; capture source then evaluate key once before validity check, retaining output0 for null source and existing one-key guard. Native/fresh null-source/effect/valid-source/malformed and direct has_key/contains checks plus syntax/docs/commit; then Rust null-key14.3. Cached Rust aggregate adapters are already targeted-checked; full admission separate.
+Implement Rust null-distinct Array keys under23.3.14.3/frozen contract: contains/index_of match Undef only to Undef, uniq retains a distinct null key, defined to_str coercions and source/value/kinds/order stay unchanged. Use private collision-free key representation; preserve malformed free-helper defaults and receiver arity guards. Update contains and snapshot expected artifacts intentionally; native/restored/plan and small direct/format checks/docs/commit. Then Dart14.4. Rust cached sources and Perl key effects are already targeted-checked; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.5` — Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
@@ -29,7 +30,6 @@ Repair Perl ordinary has_key key suppression under23.3.14.2. Public dump locates
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.2` — Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
 
 ## History
 

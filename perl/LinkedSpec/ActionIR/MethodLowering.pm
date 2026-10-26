@@ -4508,7 +4508,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     push @values, $value;
    }
    # Keep completed function/Hash operands out of the DSL compatibility parser.
-   return 'do { my $__ls_has_key = '.$values[0].'; defined($__ls_has_key) ? ((exists $__ls_has_key->{'.$values[1].'}) ? 1 : 0) : 0 }';
+   return 'do { my $__ls_has_key = '.$values[0].'; my $__ls_has_key_key = '.$values[1].'; defined($__ls_has_key) ? ((exists $__ls_has_key->{$__ls_has_key_key}) ? 1 : 0) : 0 }';
   }
 
   if ($method eq 'flat' && @$args == 1 && ref($args->[0]) eq 'HASH') {
@@ -6860,7 +6860,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_has_key = '.$lowered_target.'; defined($__ls_has_key) ? ((exists $__ls_has_key->{'.$key_lowered.'}) ? 1 : 0) : 0 }';
+  return 'do { my $__ls_has_key = '.$lowered_target.'; my $__ls_has_key_key = '.$key_lowered.'; defined($__ls_has_key) ? ((exists $__ls_has_key->{$__ls_has_key_key}) ? 1 : 0) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'merge_hash') {
   my $merge_args = $normalize_collection_args->($method_call->{args} || [], 1, undef);

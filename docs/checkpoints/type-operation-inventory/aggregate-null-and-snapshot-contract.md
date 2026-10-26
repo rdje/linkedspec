@@ -56,3 +56,14 @@ captured values; literal/concat/typed/default controls stay passing. Seven focus
 snapshot/direct result/uniform tests and compilation/rustfmt pass after source
 RED. Existing null-key equality and lazy/target resolvers are unchanged. Perl key
 effects14.2 follows; no full domain/context/portable admission.
+
+## Perl key evaluation implementation
+
+23.3.14.2 moves key expressions into lexical temporaries after source capture,
+before defined(source)/exists in both conditional typed/legacy value builders.
+Source-null result remains0; native/fresh literal/bound/missing-source key effects
+now run once, receiver order isSKC/source1/key1/result0!, valid/empty sources keep
+captured results, malformed receiver arities still reject before effects. Eighteen
+focused assertions with direct has_key/contains and source/test syntax pass after
+key-suppression RED. Exhaustive legacy/context/domain admission remains separate;
+Rust null comparison/uniqueness14.3 follows.

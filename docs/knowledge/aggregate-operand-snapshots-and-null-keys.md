@@ -11,7 +11,7 @@ answers:
   - what is the null membership and index_of reference policy
   - which task owns aggregate source and null-key repairs
 date: 2026-10-26
-status: Rust source snapshots repaired; Perl key/null-key work open
+status: Rust source and Perl key evaluation repaired; null-key work open
 tags: [array, hash, source, snapshot, equality, null, perl, rust, task-tree]
 evidence: "TYPE23.2.14 public Get/dump/native/fresh and Engine native/restored/plan; README reference, uniform binding policy.read, has_key/index source contracts and catalog uniq null distinction."
 reverify:
@@ -23,4 +23,4 @@ Perl contains/index_of explicitly match null only to null; uniq retains null and
 
 Rust23.3.14.1 now consumes cached typed arguments in array_consuming_arg/hash_consuming_arg instead of later ctx names. Prior named wrong-kind/absent empty fallback remains (flat_hash returns Hash{}). Native/restored/plan index/has_key/append/merge and absent-source controls now use captured values; seven snapshot/direct/uniform tests pass after RED. Literal/concat controls and target/lazy resolvers are unchanged.
 
-Perl absent-source has_key returns0 but skips key effects. Dumped typed4501/4511 and legacy6840/6863 put key inside defined(hash) ternary. Frozen ordinary source-then-key contract requires key once even when source null; result stays0. Separate source/Perl-key/null-backend repairs are TYPE23.3.14.1-.6, Rust snapshots are repaired; Perl key14.2 and null-key14.3-.6 remain pending. Initial comparison/key baseline above is historical for repaired source fields; full admission23.4 stays open.
+Perl23.3.14.2 now captures source then key before defined/exists in typed/legacy conditional builders. Null/missing-source output remains0 while key effects run once; native/fresh0!/SKC/source1/key1, valid/empty sources and guards pass18 focused assertions/syntax. Prior dump located the suppressed key inside the ternary. Rust source14.1 and Perl key14.2 are repaired; null-key14.3-.6/full admission remain open.

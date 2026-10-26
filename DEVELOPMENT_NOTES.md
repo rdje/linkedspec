@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.14.2 — evaluate Perl has_key keys before source guards
+
+Perl has_key typed/legacy value builders now capture the key after the source and before defined/exists, preserving numeric0 on null sources while executing key effects once. Native/fresh literal/bound/missing-source and receiver0!/SKC/source1/key1 controls, valid/empty captured sources and no-effect malformed guards pass after key-suppression RED. Direct has_key/contains bring focused proof to18 assertions; source/test syntax pass. No key/domain/arity/exception rewriting or exhaustive legacy/full admission claim. Book/fact/FUTURE5.7/current docs align; Rust null-key14.3 next, mandatory Perl registration23.4.1 separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.14.1 — preserve captured Rust aggregate operands
 
 Rust aggregate value adapters now consume evaluated typed arguments instead of re-reading ctx after later operands, preserving existing named wrong-kind/absent empty-container fallback. Native/restored/plan source/append/merge/null snapshots and typed/default controls pass after RED; seven focused snapshot/direct contains/index/has_key/uniform tests with offline compilation/rustfmt pass. Literal/concat controls, target/lazy resolvers, invalid-domain shapes and null-key equality remain unchanged. Book/fact/FUTURE5.7/current docs align; Perl has_key key-evaluation14.2 next, null-key backends14.3-.6 separate.
