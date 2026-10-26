@@ -88,3 +88,9 @@ Julia17.4 adds matching actual-Bool tracking after the same[]/SA RED;214 strict
 native/plan/fresh/direct assertions pass, explicitly checking Bool identity and
 Number-not-Bool counters. Logical/free/named-context/error policies remain;
 safe Lua17.5 independently assesses next.
+
+Lua17.5 adds actual-Boolean tracking after shared[] RED on PUC5.5.1/LuaJIT.
+Strict native/plan/fresh producer/source-error/shared/rejected-effect/selection
+and direct neutral/default checks pass; LR/LRC/S and skipped consumer operands
+hold without new module locals or helper/truth policies. All five bounded
+implementations are targeted-checked; declared5.4/full admission remain open.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.5 — guard Lua logical Boolean results
+
+Lua logical producers/valid flow/source errors already work; actual Boolean tracking now protects scalar boundaries at entry/after results with no new module locals. Both PUC5.5.1/LuaJIT strict native/plan/fresh producer/source-error/shared/rejected-effect/selected-block-literal/exact neutral/default checks and source loads pass after shared Array[] RED. LR/LRC/S, real Bool/false/default/source kinds and free/context/truth/numeric policies remain. All five bounded logical implementations are targeted-checked, including Perl rejected-source repair; book/facts/task/live align. Defined-only coalesce assessment18 next; declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.4 — guard Julia logical Boolean results
 
 Julia logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after result selection.214 focused native/plan/fresh producer/shared/rejected-effect/selected-block-literal/source-error/default/exact neutral assertions and strict compilation pass after container[]/SA RED, with explicit Bool identity and Number-not-Bool counters. LR/LRC/S, typed errors, defaults and named-context/free/truth/numeric policies remain. Book/facts/task/live align; safe Lua17.5 next, full admission separate.

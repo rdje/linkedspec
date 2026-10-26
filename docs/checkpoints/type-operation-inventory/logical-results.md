@@ -146,3 +146,18 @@ retaining actual-container release and existing free/named-context policies.
 with strict compilation and explicit Bool identity/Number-not-Bool counters.
 LR/LRC/S effects and skipped consumer operands hold; no full suite/portable
 admission or callback-identity repair is claimed. Safe Lua17.5 next.
+
+## Bounded Lua implementation
+
+17.5 independently confirms canonical Bool/nested/eager LRC/numeric-null and
+five typed source errors native/plan/fresh on PUC5.5.1/LuaJIT before code. Shared
+RED has container[] at scalar boundaries; valid flow/snapshots already work.
+Actual Boolean tracking at entry/after results repairs this with no new module
+locals, preserving container release and free/named-context/truth/error policy.
+Strict canonical JSON/shared/default/bridge/rejected LR-LRC-S/no-consumer-
+operand/actual selected-block-literal controls and three exact neutral fixtures,
+direct defaults and source loads pass both hosts. All five bounded logical
+implementations are targeted-checked; no full runner/malformed native patterns,
+declared5.4 or complete domain/context/portable admission. Next helper-spine
+assessment23.2.18 owns defined-only coalesce receiver/result breadth, retaining
+this contract and older nonempty-default exclusions until a separate freeze.

@@ -3409,7 +3409,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   accumulator,
   edge_state
 )
-  local scalar_result = false
+  local scalar_result = type(value) == "boolean"
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3523,7 +3523,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
     end
     local result_kind = json.kind(value)
-    scalar_result = scalar_result and result_kind ~= "array" and result_kind ~= "harray"
+    scalar_result = (scalar_result or type(value) == "boolean") and
+      result_kind ~= "array" and result_kind ~= "harray"
   end
   return value
 end
