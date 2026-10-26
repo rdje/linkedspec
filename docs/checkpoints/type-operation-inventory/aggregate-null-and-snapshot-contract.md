@@ -80,3 +80,15 @@ assertions. Numeric/text/default/Array-to-count consumers and source/shape guard
 remain correct. Current Rust contains/snapshot artifacts adopt the selected
 reference. No global scalar conversion/arity/schema/source-policy change; Dart
 index/uniq assessment14.4 follows, full admission remains23.4.
+
+## Dart null-key implementation
+
+23.3.14.4 independently confirms index/uniq null-empty collisions. A private const
+Object key distinguishes actual null from String and unsupported projections.
+Defined scalar conversion stays intact; uniq retains its prior empty fallback,
+first copied values/kinds and order. Native/restored/plan shared reference and
+null-versus-container controls now pass after RED; defined-only and absent-free-
+needle controls already passed and remain unchanged. Nine null/contains/index/
+standalone-transform tests, format and fatal analysis pass. Current contains
+artifacts select the reference; numeric/default/count/text consumers and source
+captures remain correct. Julia14.5 follows; full admission remains separate.

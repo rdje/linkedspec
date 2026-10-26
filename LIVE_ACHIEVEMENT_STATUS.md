@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
+Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 
 ## Latest Completed Slice
 
-Rust contains/index_of/uniq now use private null-distinct Option<String> keys while preserving all defined to_str conversion, raw kinds, first values/order, source/arity and absent free-helper defaults. Shared native/restored/plan regression repairs false membership/positions and lost empty-text uniq values across value/receiver/standalone forms; numeric/default/count/selection consumers pass. Six focused Rust tests plus six independent Perl reference assertions pass with offline compilation/rustfmt. Contains/snapshot expected artifacts intentionally adopt the selected reference. Book/facts/FUTURE5.7/current docs align; Dart14.4 independent index/uniq assessment next, full admission separate.
+Dart contains/index_of/uniq now distinguish actual null with a private Object token while preserving defined scalar/container projections, uniq fallback, copied first values/kinds/order and free defaults. Shared native/restored/plan null/reference and null-versus-container tests pass after RED; defined-only preservation controls stay passing. Nine focused null/contains/index/standalone-transform tests, compilation, format and fatal analysis pass. Current contains artifacts intentionally adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Julia14.5 independent assessment next; full admission separate.
 
 ## Next Action
 
-Independently assess Dart contains/index_of/uniq null and defined-value conversion under14.4 using the shared null_array_key_values reference fixture and captured-source controls. Preserve actual defined conversions/kinds/first order/free defaults; make only null distinct from empty and unsupported key projections, without a string sentinel collision. Existing .text.json contains expectations must switch intentionally to selected reference only when confirmed. Native/restored/plan/direct tests/fatal analysis/docs/commit, then Julia14.5. Rust source/null keys and Perl key effects are targeted-checked; full admission separate.
+Independently assess Julia contains/index_of/uniq null and defined conversion under14.5 using shared null_array_key_values, preserving actual defined conversions/kinds/order/free defaults. Distinguish actual null with a collision-free internal key, update current contains expected only against selected reference, use Number and not Bool raw guards. Native/plan/fresh/direct strict small checks/docs/commit, then Lua14.6 safe PUC/JIT named fixtures; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
@@ -29,7 +30,6 @@ Independently assess Dart contains/index_of/uniq null and defined-value conversi
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.4` — Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.12.2` — Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
 
 ## History
 

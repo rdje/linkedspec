@@ -3161,11 +3161,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.3 - distinguish Rust null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Distinguish Dart null Array comparison and uniqueness keys.
   Dependencies: .23.3.14.3; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Contains null/empty merging confirmed; index/uniq still require public controls. No new producer defect inferred before assessment.
   Acceptance: Independently assess index/uniq against public Perl authority, preserve defined conversions, implement null-only matching/own uniq key and current contains fixture expectations. Native/restored/plan and direct small checks/fatal analysis. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `2fedae957ba9a5e6765a2d7780976bf5c768b218`; Rust null-key child committed, brief0/tree clean.
+  Owned paths: Dart contains/index_of/uniq null-distinct keys, shared-reference and defined-conversion preservation tests, current contains expected updates and synchronized book/facts/task/live docs.
+  Verification tier: `focused`
+  Focused checks: Native/restored/plan RED/GREEN, direct contains/index/standalone transforms, fatal analysis/format and book/history/staged continuity guards.
+  Canonical trigger: None for this bounded reference-contract repair under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions and preservation controls; no population/completeness measurement.
+
+  Completion: A private const Object token distinguishes actual null from every defined String key and unsupported/nonfinite projection. contains/index_of retain each defined scalar projection; uniq keeps its existing fallback-to-empty projection, copied first values/kinds and source order. No user String can collide with the token.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Dart native shared-reference RED shows merged membership, wrong index0, lost empty uniq entries, 1!/numeric3/default1/count3. Null versus defined-container projection RED is[1,1,0,0,[[]]] instead of[0,0,null,null,[[],null]]. Independent defined conversion/free-missing controls already pass native/restored/plan.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart _callArrayContains/_callIndexOf compare _scalarString(nullAsEmpty:true), while _callUniq stores that projection with empty fallback. Null, empty and defined containers all project to empty. Actual-null token separation fixes only the selected reference defect without redefining defined-container or numeric/Bool comparisons.
+  - [x] FIX: Private _arrayScalarKey token projection used in three helpers; preserve defined conversion and uniqueness fallback, result kinds, copied values, source capture and free defaults. Existing contains raw/shared expected intentionally switches from old text merging to selected Perl reference. No parser/schema/arity/global conversion changes.
+  - [x] ADDRESSED (verified): Three new native/restored/plan tests pass shared positions/null/empty/number-string/Bool controls, value/receiver/standalone uniq, original source/kinds/order, numeric/default/count/last/text consumers and NC/one needle. Null stays distinct from defined-container projections; old defined-only comparison/uniq/free-default controls stay passing.
+  - [x] NO REGRESSION: Nine tests across null keys/direct contains/index/standalone transforms pass with compilation, format and fatal analysis of changed runtime/tests. No exhaustive suite, strict equality policy or full context/portable admission.
+  - [x] LOCKSTEP: Shared reference/current contains selection, scoped catalog examples, aggregate contract and contains/source-null facts/map, TYPE/FUTURE5.7/index/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. Julia14.5 follows.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.4 - distinguish Dart null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.5`
   Status: `pending`
@@ -3278,7 +3295,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` | `pending` | Independently assess Dart index/uniq and repair null-distinct Array keys. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` | `pending` | Independently assess Julia index/uniq and repair null-distinct Array keys. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

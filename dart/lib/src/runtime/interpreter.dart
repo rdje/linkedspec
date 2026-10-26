@@ -7154,15 +7154,19 @@ Object? _callSlice(List<Object?> values) {
   return [for (final item in items.sublist(start, end)) _copyValue(item)];
 }
 
+const _nullArrayScalarKey = Object();
+
+Object? _arrayScalarKey(Object? value) => value == null
+    ? _nullArrayScalarKey
+    : _scalarString(value, nullAsEmpty: true);
+
 Object? _callArrayContains(List<Object?> values) {
   final items = _arrayItems(values.isEmpty ? null : values.first);
   if (items == null || values.length < 2) {
     return 0;
   }
-  final needle = _scalarString(values[1], nullAsEmpty: true);
-  return items.any((item) => _scalarString(item, nullAsEmpty: true) == needle)
-      ? 1
-      : 0;
+  final needle = _arrayScalarKey(values[1]);
+  return items.any((item) => _arrayScalarKey(item) == needle) ? 1 : 0;
 }
 
 Object? _callIndexOf(List<Object?> values) {
@@ -7170,9 +7174,9 @@ Object? _callIndexOf(List<Object?> values) {
   if (items == null || values.length < 2) {
     return null;
   }
-  final needle = _scalarString(values[1], nullAsEmpty: true);
+  final needle = _arrayScalarKey(values[1]);
   for (final (index, item) in items.indexed) {
-    if (_scalarString(item, nullAsEmpty: true) == needle) {
+    if (_arrayScalarKey(item) == needle) {
       return index;
     }
   }
@@ -7234,10 +7238,10 @@ Object? _callFilterMatch(List<Object?> values) {
 
 Object? _callUniq(List<Object?> values) {
   return _arrayTransform(values, (items) {
-    final seen = <String>{};
+    final seen = <Object>{};
     final result = <Object?>[];
     for (final item in items) {
-      final key = _scalarString(item, nullAsEmpty: true) ?? '';
+      final key = _arrayScalarKey(item) ?? '';
       if (seen.add(key)) {
         result.add(_copyValue(item));
       }

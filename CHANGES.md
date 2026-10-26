@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.14.4 — distinguish Dart null Array comparison keys
+
+Dart contains/index_of/uniq now distinguish actual null with a private Object token while preserving defined scalar/container projections, uniq fallback, copied first values/kinds/order and free defaults. Shared native/restored/plan null/reference and null-versus-container tests pass after RED; defined-only preservation controls stay passing. Nine focused null/contains/index/standalone-transform tests, compilation, format and fatal analysis pass. Current contains artifacts intentionally adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Julia14.5 independent assessment next; full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.14.3 — distinguish Rust null Array comparison keys
 
 Rust contains/index_of/uniq now use private null-distinct Option<String> keys while preserving all defined to_str conversion, raw kinds, first values/order, source/arity and absent free-helper defaults. Shared native/restored/plan regression repairs false membership/positions and lost empty-text uniq values across value/receiver/standalone forms; numeric/default/count/selection consumers pass. Six focused Rust tests plus six independent Perl reference assertions pass with offline compilation/rustfmt. Contains/snapshot expected artifacts intentionally adopt the selected reference. Book/facts/FUTURE5.7/current docs align; Dart14.4 independent index/uniq assessment next, full admission separate.
