@@ -5963,7 +5963,8 @@ impl Engine {
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
                     | "is_undefined" => !call.args.is_empty(),
                     "join_values" | "index_of" | "has_key" | "starts_with" | "ends_with"
-                    | "contains_substr" | "matches" => call.args.len() != 1,
+                    | "contains_substr" | "matches" | "str_eq" | "str_ne" | "str_gt" | "str_ge"
+                    | "str_lt" | "str_le" => call.args.len() != 1,
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -6395,7 +6396,17 @@ impl Engine {
     fn is_string_receiver_terminal_method(method: &str) -> bool {
         matches!(
             method,
-            "length" | "starts_with" | "ends_with" | "contains_substr" | "matches"
+            "length"
+                | "starts_with"
+                | "ends_with"
+                | "contains_substr"
+                | "matches"
+                | "str_eq"
+                | "str_ne"
+                | "str_gt"
+                | "str_ge"
+                | "str_lt"
+                | "str_le"
         )
     }
 
@@ -7491,6 +7502,12 @@ impl Engine {
                 | "ends_with"
                 | "contains_substr"
                 | "matches"
+                | "str_eq"
+                | "str_ne"
+                | "str_gt"
+                | "str_ge"
+                | "str_lt"
+                | "str_le"
         )
     }
 

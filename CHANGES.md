@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.12.2 — add Rust explicit String comparison receivers
+
+Rust adds six String comparison names to String/scalar/one-operand lists only. Public Bool/null/zero/text/default producer control and shared native/restored/plan/direct definedness pass four targeted tests after receiver-null/24-effect RED. Six raw/true/false pairs, source families, retained0!/generic/bridges/scalar guards, twelve malformed no-effects and existing1!/SOC/once-only/final-null snapshots pass. No producer/parser/schema/domain/numeric-alias change. Formatting/book/fast checks align; Dart3 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.12.1 — add Perl explicit String comparison receivers
 
 Perl adds six explicit String comparison names to one-operand/scalar-result lists only. Native/fresh shared/direct definedness pass12 focused assertions after raw/compile RED: all six true/false/raw numeric1/0, null/empty/zero twins, source families, retained0!/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null snapshots; null-source control0!/SO. Free zero-text producer already works. Legacy undef warnings/domains/numeric aliases unchanged. Six worked method examples/book/fast checks align; Rust2 next.

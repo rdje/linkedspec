@@ -58,3 +58,13 @@ retained0!, generic/bridges/scalar guards, twelve malformed no-effect controls
 and1!/SOC/once-only/final-null snapshots. Free zero-text control already works;
 producer/domain/numeric aliases unchanged. Undef retains legacy uninitialized
 warnings when enabled. Rust2 follows.
+
+## Bounded Rust counterparts
+
+23.3.12.2 adds the six names to String/scalar/one-operand lists only. Native free
+producer control first confirms Bool flags, undef-as-empty/zero compatibility,
+retained0! and eager SO. Shared native/restored/plan and direct definedness pass
+after receiver-null/24-effect RED. All six pairs/raw kinds, source families,
+false/generic/bridges/scalar guards,12 malformed no-effects and existing
+1!/SOC/once-only/final-null snapshots pass. .json preserves Bool versus Perl's
+.perl.json numeric flags. No producer/domain/numeric alias change; Dart3 follows.
