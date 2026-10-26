@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.10.1 — continue Perl String predicate results
+
+Perl marks existing starts_with/ends_with/contains_substr/matches results scalar_result and preflights one receiver operand. Native/fresh shared predicate and direct emptiness checks pass after fluent-null RED, covering true/false/null/empty/regex-i boundaries, source families, false retention/generic predicates, explicit bridges/scalar nulls, zero malformed effects and SOC/SC/once-only snapshots. Producers/actual kinds/regex/source/copy domains unchanged. Syntax/book/fast checks pass; Rust independently assessed next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.9 — freeze String predicate result handoff
 
 Public Perl native/fresh producers agree on[1,1,1,1,0,0], null/empty text boundaries and nested1!/SOC/zzztail snapshots. Fluent starts_with/ends_with/contains_substr/matches chains stop at null because the String return-family table marks them terminal. Freeze compatible scalar/text handoff and one-operand receiver shape, preserve correct producers/domains/regex policies, and schedule independent backend children. Refresh stale String fact Length/retired-syntax statements with exact history pointer. Production unchanged; syntax/book/fast checks pass.

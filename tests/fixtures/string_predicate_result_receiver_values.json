@@ -1,0 +1,67 @@
+{
+  "after_text": null,
+  "bad": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "boundaries": [
+    "0!",
+    "0!",
+    "0!",
+    "0!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "bridged": "X",
+  "default": "1!",
+  "effected": "1!",
+  "false_data": "0!",
+  "function": "1!",
+  "hash": "1!",
+  "incompatible": null,
+  "invalid_effects": 0,
+  "join": "1!",
+  "meta": {
+    "a": "abc"
+  },
+  "negative": [
+    "0!",
+    "0!",
+    "0!",
+    "0!"
+  ],
+  "nested": [
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "operand_calls": 1,
+  "order": "SOC",
+  "pipeline": "1!",
+  "positive": [
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "predicate_again": "1!",
+  "regex_effected": "1!",
+  "regex_order": "SC",
+  "regex_source": "changed",
+  "retained": "0!",
+  "selected": "1!",
+  "source": "zzztail",
+  "source_calls": 1,
+  "split": "1!",
+  "word": "abc"
+}

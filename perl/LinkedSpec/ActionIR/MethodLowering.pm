@@ -4686,7 +4686,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
-   return 'undef' if $method =~ /^(?:index_of|has_key)$/o && @$aggregate_args != 1;
+   return 'undef' if $method =~ /^(?:index_of|has_key|starts_with|ends_with|contains_substr|matches)$/o && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
@@ -7709,7 +7709,7 @@ sub _string_receiver_value_chain_return_family {
  return 'selected' if $method eq 'length';
  return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o;
  return 'array' if $method =~ /^(?:split)$/o;
- return 'terminal' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches)$/o;
+ return 'scalar_result' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches)$/o;
  return undef
 }
 

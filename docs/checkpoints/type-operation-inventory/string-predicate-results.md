@@ -62,3 +62,19 @@ independent native/generated assessment before classification. Compile and small
 changed-surface/direct checks/docs/commit; no broad suite. Preserve actual result
 kinds, source/operand domains and correct producer behavior. Declared Lua5.4 and
 complete regex/context/domain/portable admission remain separate.
+
+## Bounded Perl result handoff
+
+23.3.10.1 marks these four String predicate results scalar_result and preflights
+exactly one operand. Native/fresh shared result/direct emptiness fixtures pass
+after fluent-null RED, retaining producer kinds/domains/regex policies, true/
+false/null/empty/regex-i boundaries, source families, false retention/repeated
+generic predicates, explicit bridges/scalar nulls, eight malformed no-effect
+controls and SOC/SC/once-only source/operand/result snapshots. Rust assessment
+follows; complete regex/domain/context/portable admission remains separate.
+
+Canonical selection is a separate admission prerequisite23.4.1: the runner selects
+Perl suites explicitly, and adding these new t files alone does not register them.
+The named predicate/emptiness/has_key no-match controls are owned there; inventory
+and actual canonical registration/receipt must land before admission/final push.
+Current focused direct runs are not relabeled as canonical coverage.

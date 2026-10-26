@@ -351,7 +351,7 @@ dispatch rule.
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation. Perl currently stops `"abc".matches(/^a/).cat("!")` at undef; nested `cat(matches("abc",/^a/),"!")` returns `"1!"`. Compatible result continuation is tracked; regex/producer policies stay unchanged.
+- **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation. Perl now supports `"abc".matches(/^a/).cat("!")` → `"1!"`, and `"abc".matches(/^z/).coalesce_nonempty("late").cat("!")` → `"0!"`. `"abc".matches(/^a/).cat(",x").split(",").last().uppercase()` → `"X"`; the split explicitly produces an Array. `.matches(/^a/).sorted()` returns undef. One pattern is required before effects; regex/producer policies stay unchanged. Other backends/full regex admission are assessed separately.
 - **Regex flags**: `i`, `m`, `s`, and `x` affect compilation. Operation-only `g` and Perl compile-once `o` are
   accepted compile-time no-ops. Unknown flags or invalid patterns return false.
 - **Edge cases**: Returns false for undef input.
@@ -360,19 +360,19 @@ dispatch rule.
 ### `starts_with(s, prefix)`
 - **Signature**: `starts_with(value: scalar, prefix: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text. Perl currently stops `"abc".starts_with("a").cat("!")` at undef, while `cat(starts_with("abc","a"),"!")` returns `"1!"`. The same result-flow gap affects `ends_with`, `contains_substr`, and `matches`; their producers and nested source/operand/consumer snapshots already work.
+- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text. Perl supports `"abc".starts_with("a").cat("!")` → `"1!"` and the equivalent nested form. These predicate results feed compatible scalar/text methods, retaining false and source/operand/result snapshots; one operand is required before effects. Other backends/full admission remain separate.
 - **Example**: over `/(\S+)/`, `starts_with(entry_group(0), "foo")` on `foobar` → `[1]`.
 
 ### `ends_with(s, suffix)`
 - **Signature**: `ends_with(value: scalar, suffix: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value ends with the exact suffix string. Undefined value or suffix returns false; an empty suffix matches every defined value, including empty text.
+- **Behavior**: Returns true if the value ends with the exact suffix string. Undefined value or suffix returns false; an empty suffix matches every defined value, including empty text. On Perl, `"abc".ends_with("c").cat("!")` → `"1!"` and `"abc".ends_with("z").cat("!")` → `"0!"`; this predicate family also has targeted selected/pipeline/function/default String coverage.
 - **Example**: over `/(\S+)/`, `ends_with(entry_group(0), "bar")` on `foobar` → `[1]`.
 
 ### `contains_substr(s, needle)`
 - **Signature**: `contains_substr(value: scalar, needle: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value contains the needle as a substring. Undefined value or needle returns false; an empty needle matches every defined value, including empty text.
+- **Behavior**: Returns true if the value contains the needle as a substring. Undefined value or needle returns false; an empty needle matches every defined value, including empty text. On Perl, `"abc".contains_substr("b").cat("!")` → `"1!"` and `"abc".contains_substr("z").coalesce_nonempty("late").cat("!")` → `"0!"`: false remains present data. The source is captured before its operand, and the predicate before later consumer operands, so their mutations do not recompute the result.
 - **Example**: over `/(\S+)/`, `contains_substr(entry_group(0), "oob")` on `foobar` → `[1]`.
 
 ### `replace_substr(s, old, new)`
@@ -1901,7 +1901,7 @@ Receiver-dot methods are available for the value families that have a typed rece
 
 - **String/scalar** receivers support pure string links such as `trim`, `lowercase`, `uppercase`,
   `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`; `split(delim)`
-  bridges to array chains; `length` feeds scalar/number methods. `starts_with`, `ends_with`, `contains_substr`, and `matches` retain their predicate endpoints.
+  bridges to array chains; `length` feeds scalar/number methods. Perl `starts_with`, `ends_with`, `contains_substr`, and `matches` feed compatible scalar/text methods; other-backend assessment/full admission remain open.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Count/Length results feed compatible scalar/number methods. Terminal
   links include `contains`; Perl/Rust/Dart/Julia/Lua `is_empty`/`is_nonempty` results feed compatible scalar/text methods on recorded hosts; full admission remains open. Perl/Rust/Dart/Julia/Lua `index_of` feeds compatible scalar/number methods on recorded hosts; full admission stays open;
