@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.1 — carry scalar results without array fallback
+
+MethodLowering’s ordinary preflight and append_array_chain_call stopped reducers; initial numeric dispatch also claimed zero-extra min/max. Remove continuation stops, retain producer arity and route zero-extra min/max to Array handling. Reuse the selected dispatcher with scalar_result metadata propagated across scalar/number helpers until split returns an Array. The first generic handoff passed valid chains but changed old incompatible consumers to empty arrays; public substitution exposed fallback, and the retained null controls now pass. Small native/fresh and direct Count/Length tests cover six producers, overloads, empty/null, selected/pipeline/function values, even median, text/Array bridge, SA effects and snapshots. Syntax passes; separate deferred evaluation and reducer-kind95 remain unchanged. Book/contract/fact/map/task/live align; Rust starts with public probes next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.3 — bounded aggregate result flow
 
 Public Perl fluent/nested pairs yield [null,13,null,5,null,5,null,5,null,3,null,7] without last_error; substitution emits return undef. Ordinary preflight and array terminal classification stop existing numeric results. Freeze compatible pure continuations while preserving zero-extra aggregates, scalar min/max overloads, selected kinds, order/snapshots and separately owned reducer-kind95/deferred scope. Retain the public diagnostic, update the reducer fact with exact historical Git recovery and correct missed Count/Length book summary rows. No production change; Perl23.3.4.1 follows before individual backend assessment and eventual full admission.

@@ -1379,4 +1379,8 @@ subtest 'ordinary count and length receiver results' => sub {
     do File::Spec->catfile($repo_root, 't', 'count_length_receiver_contract.t') or die $@ || $!;
 };
 
+subtest 'ordinary aggregate numeric receiver results' => sub {
+    do File::Spec->catfile($repo_root, 't', 'aggregate_numeric_receiver_contract.t') or die $@ || $!;
+};
+
 done_testing();

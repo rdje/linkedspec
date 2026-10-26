@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded ordinary Count/Length implementations are targeted-checked. Aggregate numeric reducer result contract23.2.3 is frozen; Perl23.3.4.1 implementation is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded ordinary Count/Length implementations are targeted-checked. Perl aggregate numeric result flow23.3.4.1 is implemented/targeted-checked; Rust23.3.4.2 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Public Get/substitution and retained diagnostic distinguish six stopped ordinary reducer-result additions from working nested helpers. Freeze compatible pure result flow with inherited source/kind/overload/null/error/effect boundaries, separate deferred scope and existing kind95 owner. Correct stale Count/Length family summaries. Book and fast continuity checks pass; no production or portable completeness claim.
+Perl reducer results now continue through compatible scalar/number methods while scalar_result metadata preserves incompatible Array boundaries until an explicit split. Zero-extra Array min/max and scalar overloads retain their routes. Small native/fresh and direct Count/Length tests pass after actual RED, including six producers, empty/null, even median, function/selected/pipeline values, text/Array bridge, SA effects and mutation snapshots. Syntax/book and fast continuity checks pass; deferred and kind95 policies stay unchanged.
 
 ## Next Action
 
-Implement the frozen six-reducer result flow on Perl using existing selected-value dispatch. Preserve aggregate/scalar min-max selection, source snapshots, once-only order, empty/null and deferred boundaries. Small native/fresh and direct Count/Length checks, syntax/docs/commit before Rust assessment; no broad suite.
+Publicly assess Rust reducer result chains and nested controls, preserving existing correct behavior and callable vocabulary. Repair only observed gaps; retain scalar/Array boundaries, overloads, nulls, shapes, order and snapshots in a small native/restored/generated-plan fixture plus direct Count/Length checks. Compile/docs/commit before the next backend; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` — Perl six-reducer results continue through scalar/number methods with preserved boundaries; focused native/fresh and Count/Length checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
@@ -29,7 +30,6 @@ Implement the frozen six-reducer result flow on Perl using existing selected-val
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.3` — Rust copy arity rejects before effects; focused native/restored/generated-plan and direct selected-value checks pass; actual scalar/depth book boundaries corrected.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.2` — Dart copy arity rejects before effects; native/restored/generated-plan, direct selected-value and changed-file analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.1` — Julia copy arity rejects before effects; focused native/generated-plan/fresh-emitted and direct selected-value checks pass.
-- `SESSION-STARTUP-READING.61.2` — Rust null operand/predicate guards and original-value empty replacement/removal; public Perl and focused native/restored/generated-plan controls pass.
 
 ## History
 

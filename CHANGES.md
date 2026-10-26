@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.4.1 — continue Perl aggregate numeric results
+
+Continue six ordinary reducer results through existing scalar/number methods, with scalar-result metadata retaining old incompatible-array boundaries until an explicit split bridge. Preserve zero-extra aggregates and scalar min/max overloads, actual helper domains/kinds/nulls/deferred behavior, source/operand order and mutation snapshots. Small native/fresh aggregate and direct Count/Length regressions pass after actual RED; changed module/test/registration syntax passes. Register regression, update worked book/fact/contract/current records and select Rust assessment next; broad admission stays open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.3 — define aggregate numeric result continuations
 
 Freeze six ordinary aggregate reducer results feeding existing compatible scalar/number methods, preserving source domains, min/max overloads, effects/snapshots, null/empty/error and separate deferred/kind95 boundaries. Public Get/substitution and retained probe distinguish stopped chains from working nested controls; schedule Perl23.3.4.1 before code. Correct stale Count/Length family summaries to current implementations. Book and fast continuity checks pass; no implementation or portable completeness claim.

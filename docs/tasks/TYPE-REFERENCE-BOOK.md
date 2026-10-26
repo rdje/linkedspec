@@ -1392,21 +1392,44 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
-  Status: `pending`
+  Status: `active` / Perl implemented; individual backend assessment follows
   Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.3.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`; assess later backends individually after clean implementation commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`; assess later backends individually after clean implementation commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `a71e0a0fe293783d27881cf131476fb30c42a6f6`.
   Goal: Continue ordinary Perl six aggregate reducer results through existing compatible pure scalar/number methods.
   Dependencies: .23.2.3.
   Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm, small native/fresh regression and suite registration, helper reference/reducer fact/map/task/live records.
-  Planned tier: `focused`; module/test compilation and small direct consumer checks before commit.
-  Claim verification: none: Unactivated bounded implementation; declare deterministic proof at activation.
+  Verification tier: `focused`
+  Focused checks: Small native/fresh aggregate_numeric_receiver_contract and direct count_length_receiver_contract tests after actual RED, changed-module/test/registration syntax, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation under director feature-first cadence; full signatures/context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Boundary finding / repair: Initial selected-value handoff passes valid results but changes old incompatible .sum().drop_front()/.min().sorted() null controls to empty arrays. Public substitution shows generic array fallback applied to the scalar reducer result. Preserve the frozen boundary with scalar_result flow metadata, restricted scalar/number consumers and propagation until an explicit string-to-array bridge. Do not relax those controls.
   Acceptance: Preserve zero-extra aggregate arity and scalar min/max overloads, actual source/results, null/error/empty policy, once-only ordered operands and mutation snapshots. Supersede only compatible ordinary reducer terminal controls, keep deferred and reducer-kind95 policies separately owned, and use small native/fresh plus direct Count/Length checks. Commit before assessing Rust; no full replay.
+
+  Completion: Reuse selected-value continuation machinery with scalar_result metadata until an explicit string-to-array bridge. Remove ordinary reducer continuation stops, retain zero-extra shape checks and route zero-extra initial min/max through array handling while scalar overloads keep their numeric path. No helper implementation or separate deferred evaluator change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public probe and native/fresh fixture RED show stopped six-producer results, skipped source/consumer effects and missing mutations. Working scalar min/max controls distinguish overloads. An intermediate handoff exposes [] for old incompatible-array null controls; substitution identifies generic array fallback.
+  - [x] ROOT CAUSE (WHY + WHERE): Ordinary MethodLowering preflight rejects nonfinal reducers; append_array_chain_call marks results terminal, while initial numeric dispatch claims zero-extra min/max. Generic selected dispatch needs a scalar boundary to preserve old incompatible consumers.
+  - [x] FIX: Keep producer arity, hand reducer values to scalar_result flow using the existing selected dispatcher, propagate scalar metadata and release it only through an explicit Array bridge. Preserve scalar min/max operands and zero-extra Array min/max classification across all six loops.
+  - [x] ADDRESSED (verified): Small native/fresh aggregate_numeric_receiver_contract PASS after actual RED for six direct/selected/pipeline/function results, even median, text/Array bridge, empty/null, scalar overloads, SA order, later mutation snapshots and invalid-shape suppression.
+  - [x] NO REGRESSION: Direct count_length_receiver_contract and changed-module/new-test/registration syntax PASS. Old incompatible-array results and separate deferred reducer continuation remain null; existing source domains/kind95 remain unchanged. No broad suite or portable admission.
+  - [x] LOCKSTEP: Register regression, update helper/guide/contract examples and stale guide Length summary, retain scalar-boundary fact/map and current task/live records; book and fast continuity/history/diff checks pass.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1 - continue Perl aggregate numeric results`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Rust.
+  Dependencies: .23.3.4.1.
+  Owned paths: Rust engine if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
+  Planned tier: `focused`; declare public probes and exact small regression at activation.
+  Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
+  Acceptance: Preserve correct existing dispatch, helper domains and scalar min/max overloads. Check six valid producer-result chains publicly before classifying defects; retain scalar-only boundaries until an explicit Array bridge, order/snapshots/nulls/empty shapes and existing callable vocabulary. Compile and focused/direct checks, docs/commit before the next backend; no broad replay or complete admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1490,7 +1513,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` | `pending` | Implement frozen ordinary aggregate numeric result flow on Perl, preserving source/overload/context domains. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Rust after targeted-checked Perl implementation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

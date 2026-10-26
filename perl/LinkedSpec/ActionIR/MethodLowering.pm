@@ -4618,9 +4618,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
-    return 'undef' if @$aggregate_args || $index < $#$calls;
+    return 'undef' if @$aggregate_args;
    }
-   return 'undef' if ($method eq 'min' || $method eq 'max') && !@$aggregate_args && $index < $#$calls;
    my $family = _number_receiver_value_chain_return_family($method);
    next unless defined($family);
    return 'undef' if $family eq 'terminal' && $index < $#$calls;
@@ -4766,7 +4765,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
    if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
     return ['undef', 'terminal'] unless @$arg_exprs == 0;
-    return [$method.'('.$current_expr.')', 'terminal'];
+    return [$method.'('.$current_expr.')', 'scalar_result'];
    }
    if (($method eq 'sorted' || $method eq 'reversed') && $current_expr =~ /^do\s*\{/s) {
     return undef unless @$arg_exprs == 0;
@@ -4784,14 +4783,22 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $array_chain_return_family->($method),
    ]
   };
-  # Extraction and count/length links yield values for compatible helpers.
+  # Extraction and numeric producer links yield values for compatible helpers.
   # Preserve each helper's runtime domain and null behavior instead of
   # retaining the original receiver family.
   my $append_selected_value_chain_call = sub {
-   my ($current_expr, $call) = @_;
+   my ($current_expr, $call, $receiver_family) = @_;
    my $method = $call->{method} // '';
    my $source_args = $call->{args} || [];
    return undef unless ref($source_args) eq 'ARRAY';
+   # Reducers yield scalars. Keep array-only consumers invalid until an
+   # explicit scalar-to-array bridge changes the result family.
+   if (($receiver_family // '') eq 'scalar_result') {
+    return ['undef', 'terminal']
+     unless _is_string_receiver_value_chain_method($method)
+      || _is_number_receiver_value_chain_method($method);
+    return ['undef', 'terminal'] if $method =~ /^(?:min|max)$/o && !@$source_args;
+   }
    if ($method eq 'copy') {
     return undef if @$source_args;
     return ['copy('.$current_expr.')', 'selected'];
@@ -4823,7 +4830,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return undef unless defined($ast_value_only_call_method->($helper, 1 + @$args));
    }
    my $expression = $helper.'('.join(', ', ($current_expr, @$args)).')';
-   $return_family = 'selected' if $return_family eq 'string' || $return_family eq 'number';
+   if (($receiver_family // '') eq 'scalar_result') {
+    $return_family = 'scalar_result'
+     if $return_family eq 'string' || $return_family eq 'number' || $return_family eq 'selected';
+   } else {
+    $return_family = 'selected' if $return_family eq 'string' || $return_family eq 'number';
+   }
    return [$expression, $return_family];
   };
   my $lower_synthetic_chain_expr = sub {
@@ -4976,8 +4988,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5075,8 +5087,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 1; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5117,8 +5129,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5177,8 +5189,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5220,7 +5232,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lower_synthetic_chain_expr->($current_expr)
   }
 
-  if (_is_number_receiver_value_chain_method($first_method)) {
+  # Zero-extra min/max are array reducers; scalar overloads need an operand.
+  if (_is_number_receiver_value_chain_method($first_method)
+   && !(($first_method eq 'min' || $first_method eq 'max') && !@$first_args)) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
     label => 'fluent_chain',
@@ -5233,8 +5247,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5289,8 +5303,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return 'undef' if $current_family eq 'terminal';
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected') {
-     my $applied = $append_selected_value_chain_call->($current_expr, $call);
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;

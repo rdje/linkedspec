@@ -90,3 +90,15 @@ Implement Perl first; publicly assess each later backend independently and
 preserve correct existing behavior. Commit each bounded backend slice after
 compilation and small direct checks. Full method/context/portable admission stays
 `.23.4`, and existing reducer-kind repair95 remains separately owned.
+
+## Current implementation
+
+Perl `.23.3.4.1` implements ordinary pure result continuation through existing
+selected-value machinery with scalar_result flow metadata. Scalar results reject
+array-only consumers until an explicit string-to-array bridge; old incompatible
+consumer negatives remain null. Zero-extra initial min/max uses Array dispatch,
+while scalar overloads retain their numeric operands. Native/fresh and direct
+Count/Length checks pass after RED, including six producers, empty/null/shape,
+selected/pipeline/function values, scalar overloads, even median, text/Array bridge,
+order and mutation snapshots. Helper domains/kind95 and the separate deferred
+evaluator remain unchanged. Rust and later backends require individual assessment.

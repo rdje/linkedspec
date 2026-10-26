@@ -785,8 +785,8 @@ helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(raw))`, and
 (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`, and
 `coalesce_nonempty`) can keep chaining through string helpers. `split(delim)` is the explicit bridge from a
 string chain into the array receiver family, so `raw.trim().split("-").trim_each().join_values("|")` is
-portable. Scalar terminals such as `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` end
-the chain. A string-yielding expression-valued block can be the receiver, for example
+portable. `length` feeds compatible scalar/number methods, for example `"abcd".length().add(2)` returns `6`; predicate links `starts_with`, `ends_with`, `contains_substr`, and `matches` retain
+their endpoint boundaries. A string-yielding expression-valued block can be the receiver, for example
 `{ " a-b " }.trim().split("-").count()`.
 
 Rationale:
@@ -969,9 +969,9 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
 `ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` and end the chain. Array reducers are array-consuming: use
-function form such as `num_sum(scores)` / `sum(scores)` or terminal array receiver form such as
-`scores.sum()` / `scores.avg()`. They are not scalar number receiver links, and reducer terminals do not
-continue through later array receiver methods. A number-yielding expression-valued block can be the receiver,
+function form such as `num_sum(scores)` / `sum(scores)` or array receiver form such as
+`scores.sum()` / `scores.avg()`. Ordinary Perl results continue through compatible scalar/number methods: `[2,4,6].sum().add(1)` returns `13`, `[].sum().add(1)` returns `1`, and `[].avg().add(1)` returns null.
+Reducers are not scalar number receiver links; array-only consumers stay invalid until an explicit string-to-array bridge. Other backends require individual assessment. A number-yielding expression-valued block can be the receiver,
 for example `{ 3.5 }.floor().add(2)`.
 
 ### Numeric reducers consume array values

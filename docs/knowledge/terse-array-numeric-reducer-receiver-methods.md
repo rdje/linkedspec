@@ -8,21 +8,22 @@ answers:
   - "does scores.range() work"
   - "does scores.min() work on arrays"
   - "does scores.max() work on arrays"
+  - "why do Perl reducer results reject array methods until an explicit split bridge"
   - "what contract lets numeric reducer results feed scalar methods"
   - "are array numeric reducers terminal receiver methods"
   - "are sum and avg number receiver methods"
   - "what did SPEC-FORMAT-TERSE.7.3 backfill"
   - "which task follows SPEC-FORMAT-TERSE.7.3"
 date: 2026-10-26
-status: ordinary result contract frozen; Perl implementation next
+status: ordinary Perl reducer results implemented; other backend assessment open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, number, reducers, actionir, rust-parity, oracle, mdbook]
 evidence: "Historical reducer7.3; contract TYPE23.2.3 distinguishes six stopped Perl chains from working nested controls."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_reducer_results.pl"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/aggregate_numeric_receiver_contract.t t/count_length_receiver_contract.t"
 ---
 
 Historical7.3 adds array sum/avg/median/range/min/max receiver forms after compatible array pipelines, with blanket terminal policy. Exact historical evidence and broad replay commands remain in this card at Git80d9809216282d1f077e1eac1b302cd608f75ae9; do not replay them for ordinary feature work.
 
-TYPE23.2.3 freezes ordinary reducer results feeding existing compatible scalar/number methods. Public Perl Get returns [null,13,null,5,null,5,null,5,null,3,null,7] for six fluent/nested addition pairs; substitution emits return undef. MethodLowering preflight and array return-family classification stop the results. Perl implementation23.3.4.1 follows. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md.
+TYPE23.2.3 freezes ordinary reducer results feeding existing compatible scalar/number methods. Activation Get/substitution distinguished six stopped chains from nested controls. Perl23.3.4.1 removes the ordinary stop and uses scalar_result flow in the shared selected dispatcher: only scalar/number consumers until an explicit split returns an Array. Intermediate generic handoff produced [] for old incompatible consumers; substitution located array fallback, and retained null controls now pass. Zero-extra initial min/max takes Array dispatch; scalar operands keep their numeric path. Focused native/fresh and direct Count/Length tests plus syntax pass. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md.
 
 Preserve zero-extra aggregate forms and scalar min/max overloads, actual values, source/operand order and snapshots. No scalar sum, new source domain, callback/deferred or complete admission is implied. Older incompatible array-consumer controls remain invalid by their helper domains. Ordinary Count/Length already continues under23.3.3; only earlier blanket terminal policy for compatible reducer consumers is advanced here.
 
