@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded selected-value backend children are implemented/targeted-checked on recorded hosts. Remaining P1 Rust scalar61.1/.61.2 repairs are next, then copy-arity23.3.2/signature inventory. Lua declared5.4 proof and complete fluent/scalar admission remain open. Keep feature/compile/quick-check/commit cadence.
+Rust scalar source-null61.1 is implemented and targeted-checked. Next is61.2 predicates/empty-old replacement, then copy-arity23.3.2 and helper signatures. Feature/compile/quick-check/commit cadence continues; broad61.3 and full fluent admission remain open.
 
 ## Latest Completed Slice
 
-Lua’s existing dynamic selected-value flow is confirmed; early first/last arity rejection suppresses receiver/operand effects and preserves json.null slots. Fresh matching native builds and syntax/native/generated-plan/fresh-emitted fixture pass on available PUC5.5.1/LuaJIT after actual arity RED. The fixture is registered without running the full suite. Book/facts/map/contract/task/live handoff align, with stale transform omissions corrected and declared5.4 qualification explicit.
+Guard seven Rust scalar transformations before undefined source coercion, retaining existing defined-value policies and eager argument effects. Authored native/restored/generated-plan regression and direct selected-value test pass after actual RED; compilation/rustfmt/book and fast continuity checks pass. Canonical fact/map, task index and public/live docs agree.
 
 ## Next Action
 
-Split and implement remaining Rust null-propagation61.1 from current canonical facts/contracts; trim is already fixed. Use a small public native/restored/generated-plan vector distinguishing null/empty/zero/false/Unicode/array cardinality, compile and commit. Then61.2 predicates/empty-old replacement, scheduled copy-arity and signature inventory. No broad suite or historical replay.
+Implement61.2 using a small public fixture and Perl controls for null predicates and empty-old literal replacement. Commit before copy-arity23.3.2 and continued signature inventory. No broad suites or historical replay.
 
 ## Recent Completions
 
+- `SESSION-STARTUP-READING.61.1` — Rust scalar source-null propagation, defined controls and eager order; focused native/restored/generated-plan and selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` — existing Julia selected values confirmed; extraction arity guard, package/native/generated/emitted and transform checks pass; Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` — existing Dart selected-value flow confirmed; extraction arity guard, focused tests and changed-file analysis pass; Julia next.
@@ -29,7 +30,6 @@ Split and implement remaining Rust null-propagation61.1 from current canonical f
 - `SESSION-STARTUP-READING.87.1` — ordinary filter_match values, typed sources and native/fresh targeted checks; separate P1 nested purity5.4.1 next.
 - `FUTURE-PARITY-BACKLOG.5.3.3` — Julia standalone transforms rebind arrays; package compile/native/generated-plan/fresh-emitted targeted checks pass; feature/helper selection resumes.
 - `FUTURE-PARITY-BACKLOG.5.3.2` — Dart standalone transforms rebind arrays; native/restored/generated-plan targeted checks and two-file analysis pass; Julia5.3.3 next.
-- `FUTURE-PARITY-BACKLOG.5.3.1` — Rust standalone split_each/filter_match/uniq rebind named arrays; compile/native/restored/generated-plan targeted checks pass; Dart5.3.2 next.
 
 ## History
 

@@ -441,24 +441,31 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Verification: `pending`
   Commit: `pending`
 - ID: `SESSION-STARTUP-READING.61`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve scalar helper null and empty-input semantics across runtime dispatch.
-  Dependencies: prerequisite .3/.4/.5; retain scalar-text/numeric authority boundaries.
+  Dependencies: Retain scalar-text/numeric authority boundaries. October26 targeted/feature-first direction selects diagnosed .61.1/.61.2 now; the older .3/.4/.5 reading/audit prerequisites remain separately owned, not blockers for these bounded implementations.
   Children: `.61.1`, `.61.2`, `.61.3`
   Acceptance: Scalar transformations must not convert documented undef results to empty text or zero.
 - ID: `SESSION-STARTUP-READING.61.1`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `e70394173418bca8d7cbe43bc380520bc3c3e425`; remaining six source-null transformations, with repaired trim as a control.
+  Verification tier: `focused`
+  Focused checks: Locked/offline Rust scalar_null_propagation test (native/restored/generated-plan), direct selected_value_receivers test, first-party rustfmt, book rendering and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded deterministic implementation under the director feature-first phase; broad scalar admission remains .61.3 and the eventual clean push boundary.
+  Claim verification: none: deterministic authored contract regression; no quantified corpus, exhaustive or portable admission measurement.
   Goal: Repair Rust null propagation for the seven measured scalar transformations.
   Acceptance: Cover length, trim, lowercase, uppercase, replace_substr, rm_prefix and rm_suffix in helper
     and receiver forms; preserve empty-string/zero/false distinctions, Unicode mapping and array cardinality.
     Guard null before text coercion without broad changes to unrelated dynamic conversion semantics.
-  Verification: `pending` remaining repairs — historical September7 seven-value controls using literal undef and unbound name null
-    both return seven nulls on Perl but [0,"","","","","",""] on Rust. Empty-string controls agree.
-    engine.rs 9371 onward converts undef through to_str before producing values; the current helper catalog
-    explicitly promises undef for these inputs. null is not the authored undefined literal; undef is.
-  Partial implementation (October26): TYPE-REFERENCE-BOOK.1.2.23.3.1.2 fixes trim(undef) and empty-selection trim null propagation as a blocking helper case. Direct undef/empty and selected-value native/restored/generated-plan controls pass; this does not refresh the historical seven-helper vector or close the remaining helpers/typed/Unicode/array/carrier scope.
-  Schedule: P1 remaining helper implementations after selected-value23.3.1 native rollout, before complete scalar/fluent admission; keep focused feature cadence and defer broad61.3 proof.
-  Commit: Remaining scope open; trim subpart lands with `TYPE-REFERENCE-BOOK.1.2.23.3.1.2 - continue Rust selected receiver values`.
+  Verification: PASS October26 authored scalar_null_propagation vector on native/restored/generated-plan execution and direct selected_value_receivers regression; locked/offline Cargo compilation and rustfmt pass. Historical September7 comparison remains dated evidence, not a new replay. Broader admission remains .61.3; adjacent predicates/empty-old repair is .61.2.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public Rust fixture returns zero/empty strings for six undefined-source transformations; repaired trim is already null. Defined empty/zero/false/Unicode/array controls agree with authored expectations. Actual cargo test RED is retained in project-local scalar61.1-red.log.
+  - [x] ROOT CAUSE (WHY + WHERE): Engine::call_helper scalar-transform match arms call RuntimeValue::to_str before checking source null; the conversion erases undefined identity. The current helper catalog promises null propagation.
+  - [x] FIX: Add a shared guarded match arm for seven source-null transformations before text coercion. Keep non-null conversion, array length, Unicode mappings, helper arity and already-evaluated argument effects unchanged.
+  - [x] ADDRESSED (verified): New native/restored/generated-plan fixture returns null for literal-undef helpers and absent-value receivers. Null replacement still evaluates source/needle/replacement once in SNR order. Locked/offline cargo test PASS.
+  - [x] NO REGRESSION: Empty text, numeric zero/false text, Unicode casing/replacement/length, array cardinality and direct selected_value_receivers regression PASS; no broad suite or source-fault campaign.
+  - [x] LOCKSTEP: Public examples, canonical fact/map, selected-value contract, indexed task frontier and live handoff updated; book and fast continuity/history/diff guards pass before landing.
+  Commit: `SESSION-STARTUP-READING.61.1 - preserve Rust scalar source nulls`; trim prerequisite remains TYPE-REFERENCE-BOOK.1.2.23.3.1.2.
 - ID: `SESSION-STARTUP-READING.61.2`
   Status: `pending`
   Goal: Audit and repair adjacent scalar predicate and empty-pattern boundaries.

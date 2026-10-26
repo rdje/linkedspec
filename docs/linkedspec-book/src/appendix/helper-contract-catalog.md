@@ -318,7 +318,7 @@ dispatch rule.
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes leading and trailing whitespace. Returns undef if input is undef.
-- **Edge cases**: A string of only whitespace becomes `""`.
+- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -346,7 +346,7 @@ dispatch rule.
 - **Signature**: `length(value: scalar|array)`
 - **Returns**: int
 - **Behavior**: Returns the character length of a string or the element count of an array. Returns undef for undef input.
-- **Example**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`.
+- **Examples**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`; `length(undef)` and `undef.length()` → undef, `length("")` → `0`, `length(0)` → `1`, `length([1,2])` → `2`, `length("🙂")` → `1`.
 
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`

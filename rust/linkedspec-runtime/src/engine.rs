@@ -9596,6 +9596,14 @@ impl Engine {
                 Ok(RuntimeContext::project_capture_group_map(&ctx.match_named))
             }
             // ── Scalar transforms ──
+            // These helpers propagate an undefined source before text coercion.
+            // Arguments have already been evaluated, preserving their effects.
+            "length" | "trim" | "lowercase" | "uppercase" | "replace_substr" | "rm_prefix"
+            | "rm_suffix"
+                if matches!(args.first(), Some(RuntimeValue::Undef)) =>
+            {
+                Ok(RuntimeValue::Undef)
+            }
             "length" => {
                 if let Some(arg) = args.first() {
                     let length = match arg {

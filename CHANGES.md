@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## SESSION-STARTUP-READING.61.1 — preserve Rust scalar source nulls
+
+Guard undefined sources before text conversion for length/trim/case conversion/literal replacement/prefix and suffix removal. Defined empty text, zero/false, Unicode and array length keep their behavior; argument effects still run once in order. A small authored native/restored/generated-plan regression reproduces the six remaining failures before repair and passes afterward, alongside selected-value coverage. Locked/offline compilation, rustfmt, book and fast continuity checks pass. Predicates/empty-old61.2 is next; broad61.3 proof stays deferred.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.5 — guard Lua extraction arity
 
 Confirm existing Lua selected-value dispatch and add pre-effect first/last arity rejection with preserved json.null slots. Register the focused fixture in the normal runner and syntax-load it without the full suite. Fresh matching native products and native/generated-plan/fresh-emitted checks pass on available PUC5.5.1/LuaJIT after actual arity RED. Book/facts/map/contract/live handoff align, including corrected historical transform omissions and explicit declared5.4 qualification. P1 Rust scalar61.1/.61.2 repairs are next; full fluent/target admission remains open.

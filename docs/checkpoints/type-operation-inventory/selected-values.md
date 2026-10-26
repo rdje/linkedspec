@@ -95,8 +95,8 @@ implementation, not complete fluent families, other-backend or `.23.4` admission
 Rust `.23.3.1.2` implements the same bounded transitions via its existing dynamic
 receiver dispatcher and retains actual selected kinds/copy. Native/restored/
 generated-plan focused controls pass; trim null propagation is repaired as a
-blocking helper case. Other known scalar-null gaps retain61.1/.61.2 ownership
-and prevent complete scalar/fluent admission. Dart/Julia/Lua remain next.
+blocking helper case. Remaining scalar source-null transformations are repaired under61.1; predicate/empty-old gaps retain61.2 ownership
+and prevent complete scalar/fluent admission. Bounded Dart/Julia/Lua implementation results follow.
 
 Dart `.23.3.1.3` already routes each fluent result dynamically; the targeted
 public native/restored/generated-plan fixture confirms scalar/container/copy

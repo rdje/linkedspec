@@ -10,13 +10,13 @@ answers:
   - "is null an undefined literal in the LinkedSpec DSL"
   - "which task owns scalar helper null and empty semantics"
 date: 2026-10-26
-status: trim null repaired under23.3.1.2; remaining61.1-.61.3 scope open
+status: seven source-null transformations repaired under61.1; predicates/empty-old61.2 and broad61.3 open
 tags: [rust, perl, scalar, string, undef, null, helpers, parity]
 evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3 compares five scalar vectors on primary Rust and public Perl Get, captures all lowering/generated text and descriptors, and independently checks exact result kinds and error absence. Literal undef and unbound name null reproduce the same differences; the empty-string transformation control agrees."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test selected_value_receivers"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation"
 ---
 
-Current: TYPE-REFERENCE-BOOK.1.2.23.3.1.2 fixes trim(undef) and empty-selection trim to return null; empty text stays empty. Focused native/restored/generated-plan controls pass. Other transformations/predicates below retain61.1/.61.2 ownership and block complete scalar admission.
+Current: SESSION-STARTUP-READING.61.1 guards undefined sources before text coercion for all seven transformations (trim was repaired under23.3.1.2). The retained scalar_null_propagation fixture distinguishes null/empty/zero/false, Unicode/array length and eager argument order on native/restored/generated-plan execution. Predicates/empty-old61.2 and broad61.3 remain open. Historical vectors below are unchanged.
 
 # Historical September 7 inputs and outputs
 
@@ -61,8 +61,8 @@ transformations, false `matches` for undefined input, and an unchanged value whe
 `replace_substr` receives an empty old string. The public Perl controls establish
 the other three predicates' undefined-input behavior.
 
-Rust `engine.rs:9371` onward uses `RuntimeValue::to_str` before string
-operations. Undefined becomes empty text; length becomes zero; empty-prefix,
+Rust `Engine::call_helper` historically used `RuntimeValue::to_str` before these
+operations. Undefined became empty text and length zero; still-open empty-prefix,
 empty-suffix, empty-substring and `/^$/` predicates then succeed.
 The replacement arm calls host `str::replace` with an empty old string,
 which inserts the replacement at character boundaries. This helper behavior is
@@ -95,4 +95,4 @@ in that card's rust-cli/perl-results files. Additional data is:
 | perl-extra-results.jsonl | 299 | bff6d510b6133e64ce5c4e15f576a16657fa557b2c51aa94a38f59ea4f42ce8f |
 | perl-undefined-results.jsonl | 316 | 24cd8eecc3a09993cd2bc4200defbc846a3c5c0fd1898e4d8758c7f29b51a07f |
 
-The current reverify regresses selected values and repaired trim nulls; the historical five-vector comparison is not refreshed.
+The current reverify checks source-null transformations; it does not refresh the historical five-vector comparison or close broader admission.
