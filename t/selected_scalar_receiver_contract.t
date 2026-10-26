@@ -19,13 +19,13 @@ my $body = <<'BODY';
  nested=uppercase(trim(first(split(" a :b ",/:/))));
  invalid_effects=0;
  invalid={invalid_effects=num_add(invalid_effects,1); [" a "]}.first({invalid_effects=num_add(invalid_effects,1); 1}).trim();
- terminal=[1].count().uppercase();
+ count_text=[1].count().uppercase();
  return([first_string,last_string,first_number,last_number,pipeline,key,
-   function,empty,effected,source_effects,argument_effects,nested,parts,saved,meta,invalid,invalid_effects,terminal]);
+   function,empty,effected,source_effects,argument_effects,nested,parts,saved,meta,invalid,invalid_effects,count_text]);
 BODY
 my $source = "fn clean(values) { return(values.first().trim().uppercase()) }\nTop:: I { $body }";
 my $expected = ['A','b',6,11,'A','B','A :X',undef,'a!',1,1,'A',
-    [' a :x',' b :y'], [' a :x',' b :y'], {a=>1,b=>2},undef,0,undef];
+    [' a :x',' b :y'], [' a :x',' b :y'], {a=>1,b=>2},undef,0,'1'];
 my $json = JSON::PP->new->canonical;
 my %context;
 my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.3.1 — continue Perl count and length results
+
+Route ordinary count/count_keys/length results through existing selected-value scalar/number dispatch and preserve zero-extra producer shape checks before effects. Valid chains now feed arithmetic/string methods, including selected and earlier pipeline values, while helpers and deferred count behavior stay unchanged. Small native/fresh count/length and direct selected-scalar/container tests pass after actual RED; syntax/book and fast continuity checks pass. Update the deliberately superseded count-uppercase control, register the regression and publish working examples/status. Rust assessment is next; broad admission remains open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.2 — define count and length result continuations
 
 Freeze ordinary count/count_keys/length results feeding existing compatible pure scalar/number methods, with zero-extra producer arity, actual values, once-only order and inherited domains/copy/null/error rules. Public Perl Get/substitution distinguishes failing count/length chains from working nested5/6 controls; isolated hash controls locate an unlowered count_keys chain while free/single-step count_keys works. Correct the initial compound-probe attribution, disclose current book gaps/workarounds and schedule Perl23.3.3.1 before code. No runtime implementation or complete family/matrix admission is claimed; book and fast continuity checks pass.

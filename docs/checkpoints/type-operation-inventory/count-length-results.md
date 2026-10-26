@@ -88,3 +88,12 @@ MethodLowering classifies these results as terminal in the array, hash and strin
 return-family callbacks. Perl implementation is first; assess each other backend
 individually and preserve correct existing behavior. Commit each bounded backend
 slice after compilation and small direct checks. Broad admission remains `.23.4`.
+
+## Current implementation
+
+Perl `.23.3.3.1` implements the bounded result flow and zero-extra producer guard
+through existing selected-value dispatch. A small native/fresh fixture covers
+direct/selected/pipeline values, Unicode and array length, source/operand order,
+later mutations, invalid shapes and unchanged deferred count behavior. Direct
+selected-scalar/container regressions pass. Other backends remain individually
+unassessed here; no complete family or portable admission is claimed.

@@ -18,12 +18,12 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: selected values implemented; count/length contract frozen, implementation open
+status: ordinary Perl count/length results implemented; other backend assessment/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length contract23.2.2."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers"
-  - "Read-only count/length contract: docs/checkpoints/type-operation-inventory/count-length-results.md; public Perl Get/substitution probes are recorded in TYPE-REFERENCE-BOOK.1.2.23.2.2. Implementation is not admitted yet."
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/count_length_receiver_contract.t"
 ---
 
 Pure array chains compose existing helpers: items.sorted().drop_front(2).first(),
@@ -44,9 +44,10 @@ Rust23.3.2.3 rejects copy extra arguments before effects. Public controls retain
 Perl/Rust scalar/missing empty-array fallback; Perl nested references remain shared
 ([[perl-scalar-bound-receiver-copy]]). The book qualifies copy domains/depths.
 
-23.2.2 freezes ordinary count/count_keys/length results feeding existing compatible
-pure scalar/number methods before code. Perl count/length chains return null beside
-working nested5/6 controls. Isolated hash probes show free/single count_keys works;
-only chained addition retains DSL and reaches a host call. Terminal return-family
-classification is the mechanism. Perl23.3.3.1 is next; other backends are unassessed,
-and complete methods/transitions/admission remain open.
+23.2.2 freezes ordinary count/count_keys/length numeric-result flow. Perl23.3.3.1
+replaces terminal classification with selected-value dispatch and guards zero-extra
+producer shapes. Native/fresh tests retain direct/selected/pipeline results, Unicode,
+once-only order, later mutations and unchanged deferred scope after actual RED.
+The earlier chained-hash host failure was a result-flow gap; free count_keys worked.
+docs/checkpoints/type-operation-inventory/count-length-results.md owns the contract/status. Other backends remain unassessed;
+complete methods/transitions/admission stay open.

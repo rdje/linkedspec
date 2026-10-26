@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.1 — selected numeric producer results
+
+The ordinary preflight blocked nonfinal count/length, while array/hash/string callbacks marked all three count/length producers terminal. Replace those classifications with existing selected-value flow, including length in array pipelines, and retain zero-extra shape rejection for count/count_keys/length. Existing loops/helper evaluation supply the rest; no callback evaluator change is needed. The retained native/fresh fixture passes direct/selected/pipeline/function values, Unicode/array length, empty/null, SALHK effects, mutation snapshots and invalid shapes after actual RED. Its deferred-count control remains null. Direct selected-scalar/container tests and changed-file syntax pass; the old ordinary count-uppercase expectation is intentionally updated under23.2.2. Current contract/book/fact/map/task/live records agree; Rust starts with a public probe next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.2 — numeric results are current values
 
 Perl classifies count/count_keys/length as terminal in three return-family callbacks. Count/length chains lower to undef beside working nested numeric controls. A combined hash probe initially misattributed an undefined host call to free count_keys; five isolated Get/substitution controls reject that hypothesis: only chained hash-count addition retains raw DSL, while free/single-step/nested forms work. Freeze the bounded result contract before code, including compatibility with scalar consumers, valid empty/null behavior, once-only evaluation and explicit supersession of the earlier ordinary count-uppercase negative control. Deferred/callback contexts, other producers and broad admission remain separate. Public book and canonical/current records agree; confirmed Perl23.3.3.1 is next.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Count/count_keys/length result contract23.2.2 is frozen after bounded helper/selected/copy work. Confirmed Perl23.3.3.1 implementation is next, then individual backend assessment. Keep feature/compile/quick-check/docs/commit cadence; complete signatures/matrices/admission remain open.
+Perl count/count_keys/length result rollout23.3.3.1 is implemented and targeted-checked. Rust23.3.3.2 starts with public probes next, then later backends individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Freeze numeric count/length results feeding existing compatible pure scalar/number methods, preserving actual values, zero-extra shape, once-only order and inherited domains/copy/null/error rules. Public Perl count/length chains fail beside working nested controls; isolated hash probes distinguish a raw chained-count failure from working free/single-step/nested forms. Reject the initial compound-probe attribution. Book gaps/workarounds, canonical fact/map and current/task/live records align; book and fast continuity checks pass. No runtime implementation claim.
+Ordinary Perl count/length producers now feed existing selected-value scalar/number dispatch, preserving zero-extra arity before effects. Small native/fresh and direct selected-scalar/container tests pass after actual RED for direct/selected/pipeline/function values, Unicode/array length, empty/null, SALHK order, later mutation snapshots and invalid shapes. Deferred count stays null; syntax/book and fast continuity checks pass. Register the test, explicitly advance the old ordinary count-uppercase expectation and synchronize contract/book/fact/map/current records.
 
 ## Next Action
 
-Implement Perl23.3.3.1 through existing selected-value dispatch, with small native/fresh count/length tests, explicit old count-uppercase expectation update, source/arity/effect controls and syntax. Commit before the next backend; no broad suite or historical replay.
+Probe Rust count/count_keys/length chains beside nested helpers; implement/confirm frozen23.2.2 with a small native/restored/generated-plan regression and direct checks, then commit before the next backend. Preserve existing helper domains/copy/callable vocabulary; no broad replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.2` — count/count_keys/length result contract frozen; public Perl/substitution distinctions, book and fast continuity checks pass; Perl implementation next.
 - `SESSION-STARTUP-READING.62.2.3` — Perl nonempty exhaustion and selected numeric kinds; native/fresh regression, direct selected-scalar and changed-file syntax checks pass.
 - `SESSION-STARTUP-READING.62.2.2` — Rust documented receiver lazy defaults; native/restored/generated-plan order/skipped-error and ordinary default-helper checks pass; Perl final-tail repair owned next.
@@ -29,7 +30,6 @@ Implement Perl23.3.3.1 through existing selected-value dispatch, with small nati
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` — existing Julia selected values confirmed; extraction arity guard, package/native/generated/emitted and transform checks pass; Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` — existing Dart selected-value flow confirmed; extraction arity guard, focused tests and changed-file analysis pass; Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` — Rust selected scalar/container dispatch and trim-null blocker; targeted native/restored/generated-plan and array-transform checks pass; Dart next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` — selected Perl array/harray methods and runtime-kind copy; focused native/fresh/scalar/pipeline checks pass; Rust23.3.1.2 next.
 
 ## History
 

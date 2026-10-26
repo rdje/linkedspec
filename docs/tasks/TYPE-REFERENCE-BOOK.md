@@ -1253,22 +1253,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `active` / count and length result rollout
   Goal: Implement the frozen count/count_keys/length result contract on ordinary backends, preserving correct existing behavior.
   Dependencies: .23.2.2.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`; assess later backends individually after the clean Perl implementation commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`; assess later backends individually after each clean implementation commit.
   Schedule: Feature/compile/quick-check/docs/commit per backend; full signatures/matrix/admission stays open and deferred.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `4666667d09d3c133cd5e07a725fb08f718f533a5`.
   Goal: Implement Perl count/count_keys/length result continuations using existing selected-value scalar/number dispatch.
   Dependencies: .23.2.2.
   Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm, targeted t/count_length_receiver_contract.t and existing suite registration, book/fact/task/live records.
-  Planned tier: `focused`; declare actual proof at activation.
-  Claim verification: none: Future bounded deterministic implementation, no new measurement.
+  Verification tier: `focused`
+  Focused checks: Small native/fresh count_length_receiver_contract and direct selected_scalar_receiver_contract/selected_container_receiver_contract tests, changed-module/new-test/registration syntax, book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded frozen feature under director feature-first cadence; full signatures/matrix/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored result/order/arity/scope regression; no quantified corpus, exhaustive or portable admission measurement.
   Acceptance: Cover three producers after direct/selected/earlier pipeline sources, compatible scalar/number consumers, empty/null and source/argument order. Guard zero-extra producer shapes before effects, explicitly update the old ordinary count-uppercase terminal expectation, preserve helper domains/copy/deferred/callback boundaries and keep raw hash-chain DSL out of valid lowering. Small native/fresh checks and syntax, then commit before assessing the next backend.
+  Completion: Route array count/length, string length and hash count_keys results through existing selected-value dispatch; replace the ordinary count/length continuation preflight stop with zero-extra shape validation, including count_keys. Existing helper implementations and the separate CodeblockRuntime evaluator are unchanged.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Authored native/fresh fixture fails before repair, including stopped numeric chains and unlowered hash-chain syntax/host failures. Earlier isolated public count/length/hash controls distinguish the result-flow gap from working helper implementations.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering's ordinary fluent preflight rejects nonfinal count/length, and three return-family callbacks classify the producers as terminal. Hash rejection falls through with DSL residue; existing selected-value branches already support the required consumers.
+  - [x] FIX: Preserve zero-extra arity but remove the producer continuation stop; classify count/count_keys/length as selected values and reuse all existing continuation loops. Explicitly supersede the ordinary count-uppercase negative control; keep deferred count behavior and other terminal families separate.
+  - [x] ADDRESSED (verified): Small native/fresh count_length_receiver_contract PASS after actual RED for direct/selected/pipeline and ordinary function results, Unicode/array lengths, scalar conversion, empty/null and invalid-shape effects.
+  - [x] NO REGRESSION: Count/length/key-count source/operand order is SALHK; later mutations retain the previously computed values and saved snapshots. Deferred count control stays null; direct selected-scalar/container tests and changed-module/new-test/registration syntax checks PASS. No full suite.
+  - [x] LOCKSTEP: Register the regression; public working examples, contract status, canonical fact/map, current frontier and live handoff agree. Book and fast continuity/history/diff checks pass before landing; next Rust leaf begins with a public probe, not an assumed defect.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1 - continue Perl count and length results`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on Rust.
+  Dependencies: .23.3.3.1.
+  Owned paths: rust/linkedspec-runtime/src/engine.rs if repair is needed, focused Rust count/length receiver test and synchronized book/fact/task/live records.
+  Planned tier: `focused`; declare actual selected proof at activation.
+  Claim verification: none: Future deterministic implementation/confirmation; no measured defect or parity claim yet.
+  Acceptance: Begin with public Engine/primary-CLI controls beside nested helper equivalents, preserve already-correct behavior and claim no false RED. Cover three producers on direct/selected/earlier pipelines (including array length), numeric/scalar consumers, empty/null, source/operand effects and zero-extra shape rejection. Reuse existing helper domains/copy and callable vocabulary; run compilation plus a small native/restored/generated-plan check and direct dependents, then commit before the next backend.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and Perl23.3.3.1 is next.
-  Known admission prerequisite: Rust scalar-null/operand repairs61.1/.61.2 are implemented and targeted-checked, with broad61.3 open. Copy-arity23.3.2 requires individual backend assessment after the Julia repair; selected-value implementation does not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
+  Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Acceptance: Reconcile expected families and every transition in both directions against actual native/generated consumers and individual mdBook examples. Reject deliberate missing-method, wrong-return-type and continuation-dispatch faults; include empty/missing/error and backend controls. No family's final reference leaf .2-.6 or aggregate .7 closes over an unresolved assigned fluent gap. Keep scope exclusions explicit; publish no completeness claim from samples alone.
@@ -1343,11 +1364,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; confirmed Perl23.3.3.1 implementation is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; Perl23.3.3.1 is implemented/targeted-checked and Rust23.3.3.2 assessment is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` | `pending` | Implement the frozen count/count_keys/length result continuations on Perl using existing selected-value dispatch, then assess other backends. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` | `pending` | Publicly assess/implement Rust count/count_keys/length result continuations after the clean targeted-checked Perl slice. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

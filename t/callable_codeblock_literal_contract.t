@@ -1375,4 +1375,8 @@ subtest 'coalesce_nonempty exhaustion and selected kinds' => sub {
     do File::Spec->catfile($repo_root, 't', 'coalesce_nonempty_exhaustion.t') or die $@ || $!;
 };
 
+subtest 'ordinary count and length receiver results' => sub {
+    do File::Spec->catfile($repo_root, 't', 'count_length_receiver_contract.t') or die $@ || $!;
+};
+
 done_testing();

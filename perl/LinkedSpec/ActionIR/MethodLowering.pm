@@ -4616,10 +4616,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $aggregate_args = $call->{args} || [];
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
-   return 'undef' if ($method eq 'first' || $method eq 'last') && @$aggregate_args;
-   if ($method eq 'count' || $method eq 'length') {
-    return 'undef' if @$aggregate_args || $index < $#$calls;
-   }
+   return 'undef' if $method =~ /^(?:first|last|count|count_keys|length)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args || $index < $#$calls;
    }
@@ -4749,7 +4746,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
 	  my $array_chain_return_family = sub {
 	   my ($method) = @_;
-	   return 'selected' if defined($method) && $method =~ /^(?:first|last)$/o;
+	   return 'selected' if defined($method) && $method =~ /^(?:first|last|count|length)$/o;
 	   return 'array' if defined($method)
 	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
    return 'terminal'
@@ -4787,9 +4784,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $array_chain_return_family->($method),
    ]
   };
-  # Extraction yields a value, not a terminal predicate. Compose compatible
-  # helpers over that payload, preserving each helper's runtime domain and null
-  # behavior instead of retaining the source array's receiver family.
+  # Extraction and count/length links yield values for compatible helpers.
+  # Preserve each helper's runtime domain and null behavior instead of
+  # retaining the original receiver family.
   my $append_selected_value_chain_call = sub {
    my ($current_expr, $call) = @_;
    my $method = $call->{method} // '';
@@ -7625,9 +7622,10 @@ sub _is_array_receiver_value_chain_method {
 sub _hash_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
+ return 'selected' if $method eq 'count_keys';
  return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
- return 'terminal' if $method =~ /^(?:count_keys|has_key|reduce_leaves)$/o;
+ return 'terminal' if $method =~ /^(?:has_key|reduce_leaves)$/o;
  return undef
 }
 
@@ -7645,9 +7643,10 @@ sub _is_tree_traversal_receiver_method {
 sub _string_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
+ return 'selected' if $method eq 'length';
  return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat|coalesce_nonempty)$/o;
  return 'array' if $method =~ /^(?:split)$/o;
- return 'terminal' if $method =~ /^(?:length|starts_with|ends_with|contains_substr|matches)$/o;
+ return 'terminal' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches)$/o;
  return undef
 }
 
