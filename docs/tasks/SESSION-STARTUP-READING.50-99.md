@@ -452,11 +452,13 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Acceptance: Cover length, trim, lowercase, uppercase, replace_substr, rm_prefix and rm_suffix in helper
     and receiver forms; preserve empty-string/zero/false distinctions, Unicode mapping and array cardinality.
     Guard null before text coercion without broad changes to unrelated dynamic conversion semantics.
-  Verification: `pending` repair — exact seven-value controls using literal undef and unbound name null
+  Verification: `pending` remaining repairs — historical September7 seven-value controls using literal undef and unbound name null
     both return seven nulls on Perl but [0,"","","","","",""] on Rust. Empty-string controls agree.
     engine.rs 9371 onward converts undef through to_str before producing values; the current helper catalog
     explicitly promises undef for these inputs. null is not the authored undefined literal; undef is.
-  Commit: `pending`
+  Partial implementation (October26): TYPE-REFERENCE-BOOK.1.2.23.3.1.2 fixes trim(undef) and empty-selection trim null propagation as a blocking helper case. Direct undef/empty and selected-value native/restored/generated-plan controls pass; this does not refresh the historical seven-helper vector or close the remaining helpers/typed/Unicode/array/carrier scope.
+  Schedule: P1 remaining helper implementations after selected-value23.3.1 native rollout, before complete scalar/fluent admission; keep focused feature cadence and defer broad61.3 proof.
+  Commit: Remaining scope open; trim subpart lands with `TYPE-REFERENCE-BOOK.1.2.23.3.1.2 - continue Rust selected receiver values`.
 - ID: `SESSION-STARTUP-READING.61.2`
   Status: `pending`
   Goal: Audit and repair adjacent scalar predicate and empty-pattern boundaries.

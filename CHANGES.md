@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.2 — continue Rust selected receiver values
+
+Rust first/last results continue through existing dynamic scalar/container dispatch instead of stopping in the original array/string/hash family. Preserve actual selected/copy kinds and reject invalid extraction arity before effects. Fix the blocking known trim-null case; direct undef stays null and empty text stays empty. Locked/offline native/restored/generated-plan selected-value regression and direct-dependent array-transform test pass after observed RED; first-party rustfmt/book/fast continuity checks pass. Current examples/contract/facts/map, indexed61.1 partial repair and live handoff agree; Dart23.3.1.3 is next. Remaining scalar61.1/.61.2 and full admission stay open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2 — continue selected container receivers
 
 Ordinary Perl first/last results now continue through existing pure array/harray helpers as well as scalar methods. Generic copy preserves an extracted result’s runtime array/harray kind; pipeline sources evaluate actual expressions rather than requiring a static family guess. Distinguish min/max reducer/operand shapes and preserve repeated transitions, snapshots, empty results and once-only effects. Small native/fresh container and direct scalar/pipeline regressions pass after observed RED; syntax/book/fast continuity checks pass. Book/contract/fact/map/task/live handoff agree; Rust confirmation/implementation23.3.1.2 is next and broad admission stays open.

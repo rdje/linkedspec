@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.2 — reuse dynamic selected dispatch
+
+Rust already dispatches dynamic receiver values for callable/mutation results. Reuse that path after first/last in native outer-family loops and exempt extraction from the dynamic array terminal check. Preserve pre-effect extraction arity validation and actual RuntimeValue kind rather than duplicate type dispatch. The initial frozen-example probe is RED; after transition repair only empty-selection trim fails because the already tracked helper converts null to empty text. Add its null guard here and cross-link the partial61.1 repair; other scalar helpers remain independently open. The focused native/restored/generated-plan regression covers exact book copy recipes, dynamic function copies, repeated transitions, snapshots and effects; direct array-transform checks pass without a full crate suite.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2 — selected runtime container kinds
 
 A selected item has no reliable container kind in its source spelling. Route existing array/harray methods through the selected dispatcher; preserve generic copy as a dynamic selected value. Pure pipeline sources lower once and runtime-check ARRAY; generic copy’s expression fallback snapshots actual ARRAY/HASH just like its existing bare-value path. This supports the same function copying either kind, repeated extraction and ordinary pipeline/hash bridges without a new type or readiness waiver. Array argument lowering stays with its existing owner. Native/fresh container and direct scalar/pipeline tests pass with source/value order, copy/snapshot/null and min/max controls; other backends and full family admission remain open.

@@ -91,3 +91,9 @@ pure helper semantics, generic runtime-kind copy, repeated extraction, earlier
 pipeline/hash bridges, function/computed sources, empty values and once-only
 effects. Focused native/fresh checks cover the named examples. This is bounded
 implementation, not complete fluent families, other-backend or `.23.4` admission.
+
+Rust `.23.3.1.2` implements the same bounded transitions via its existing dynamic
+receiver dispatcher and retains actual selected kinds/copy. Native/restored/
+generated-plan focused controls pass; trim null propagation is repaired as a
+blocking helper case. Other known scalar-null gaps retain61.1/.61.2 ownership
+and prevent complete scalar/fluent admission. Dart/Julia/Lua remain next.

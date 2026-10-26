@@ -1016,11 +1016,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2 - continue selected container receiver values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `5e442f518deecfb657acd10bda8f983a7cd6e66e`
   Goal: Confirm/implement the same selected-value transition on Rust via public Engine and generated-plan execution.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1`
-  Planned tier: `focused`; compile and small targeted regression only.
-  Claim verification: none: No measurement yet.
+  Owned paths: rust/linkedspec-runtime/src/engine.rs if repair is needed; rust/linkedspec-runtime/tests/selected_value_receivers.rs; current book/array fact/map and TYPE/live continuity. Blocking trim-null correction also owns the current rust-scalar-helper-null-and-empty-drift fact and indexed61.1 partial-repair cross-reference; existing61.1/.61.2 scope remains open.
+  Verification tier: `focused`
+  Focused checks: Locked/offline compilation and a small public Engine/restored/generated-plan selected-value regression; book and fast continuity/history checks only. No full crate suite or corpus matrix.
+  Canonical trigger: None for bounded existing pure-helper result composition under director feature-first phase; full23.4 admission remains deferred.
+  Claim verification: none: Deterministic implementation/confirmation with targeted regression, no quantified corpus/exhaustive/portable admission measurement.
+  Acceptance: Probe the frozen examples through public parse/validate/compile/Engine interfaces first; reuse correct existing behavior and claim no false RED. Preserve actual selected kinds, dynamic copy, repeated transitions, null/empty, existing domain/arity rules, snapshots and once-only evaluation on native/restored/generated-plan routes. Other repositories/submodules remain read-only.
+
+  Blocking helper subtask: After transition repair all nonempty frozen examples pass, but [].first().trim() returns empty text instead of null. Existing canonical rust-scalar-helper-null-and-empty-drift and SESSION-STARTUP-READING.61.1 already own this mechanism: call_helper's trim arm converts RuntimeValue::Undef with to_str before trimming. Fix this one helper's null propagation here, with direct undef/empty controls; do not silently change the expected contract. Remaining61.1/.61.2 helpers keep their existing owners and block full scalar/fluent admission.
+
+  Completion: Existing array/string/hash outer-family loops hand first/last results to the existing dynamic value dispatcher, preserving the actual selected kind through compatible scalar/container operations and copy. Dynamic array dispatch no longer ends first/last results; extraction arity rejects before receiver/operand effects. The blocking trim-null guard preserves null while empty text remains empty;61.1 cross-references that partial repair.
+  Focused result: Locked/offline cargo test --test selected_value_receivers compiles and PASSes public native/restored/generated-plan assertions after actual six-example RED. Direct-dependent --test array_transform_writeback PASSes; first-party rustfmt, book and fast continuity/history checks pass. No full crate suite or corpus matrix.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — The initial public Engine frozen-example vector returns null for every nonempty journey. After transition repair, the empty-selection trim control independently exposes the known null-to-empty helper defect.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Static array/string/hash family loops and the dynamic array terminal check stop extraction before the next family. Existing trim coerces RuntimeValue::Undef with to_str before trimming, as documented by the canonical61.1 fact.
+  - [x] **FIX** — Reuse dynamic receiver dispatch for the selected tail, preserve first/last arity boundaries and add the small trim-null guard. No dependency/submodule, schema, value type or broad helper-domain change.
+  - [x] **ADDRESSED (verified)** — Locked/offline compilation and targeted public Engine/restored/generated-plan regression PASS; direct array-transform regression PASS.
+  - [x] **NO REGRESSION** — Dynamic array/harray copy under one function, repeated transitions, min/max shape, snapshots, source/value effects, invalid extraction arity and direct trim undef/empty controls pass. Broader scalar61.1/.61.2 scope remains open.
+  - [x] **LOCKSTEP** — Current Perl/Rust recipes, bounded contract, canonical array/null facts/map, indexed61.1 cross-reference and task/live handoff agree. Dart23.3.1.3 is next; no full fluent-family/portable admission.
+  Scope note: The trim edit was saved before an edit-script assertion stopped adding the intended extra test fields; those controls were then added and the final target rerun successfully. No false GREEN is attributed to unadded controls or any unrelated helper.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2 - continue Rust selected receiver values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3`
   Status: `pending`
@@ -1045,6 +1064,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
+  Known admission prerequisite: Remaining Rust scalar-null/empty semantics61.1/.61.2 stay open; selected-value implementation does not override those helper defects or establish complete scalar families.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Acceptance: Reconcile expected families and every transition in both directions against actual native/generated consumers and individual mdBook examples. Reject deliberate missing-method, wrong-return-type and continuation-dispatch faults; include empty/missing/error and backend controls. No family's final reference leaf .2-.6 or aggregate .7 closes over an unresolved assigned fluent gap. Keep scope exclusions explicit; publish no completeness claim from samples alone.
@@ -1119,11 +1139,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar/container23.3.1.1.1-.2 are implemented and Rust23.3.1.2 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar/container23.3.1.1.1-.2 and Rust23.3.1.2 are implemented; Dart23.3.1.3 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` | `pending` | Confirm/implement selected-value transitions on Rust through public Engine/generated-plan interfaces; Perl ordinary subset is implemented. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` | `pending` | Confirm/implement selected-value transitions on Dart; bounded Perl/Rust subsets are implemented. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -5950,6 +5950,13 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
+                // Extraction has no method arguments. Reject before receiver or
+                // operand effects, just as the other governed arity boundaries do.
+                if calls.iter().any(|call| {
+                    matches!(call.method.as_str(), "first" | "last") && !call.args.is_empty()
+                }) {
+                    return Ok(RuntimeValue::Undef);
+                }
                 if let Some(first) = calls.first()
                     && Self::is_statement_only_array_end_mutation_method(&first.method)
                 {
@@ -7315,7 +7322,10 @@ impl Engine {
         let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
         let next =
             self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
-        if !Self::is_array_receiver_array_returning_method(&call.method) && !is_last {
+        if !Self::is_array_receiver_array_returning_method(&call.method)
+            && !matches!(call.method.as_str(), "first" | "last")
+            && !is_last
+        {
             return Ok(RuntimeValue::Undef);
         }
         Ok(next)
@@ -7411,6 +7421,28 @@ impl Engine {
         Ok(next)
     }
 
+    // Once extraction selects an entry, each continuation consumes that actual
+    // value through the existing dynamic dispatcher, not the original family.
+    fn eval_selected_receiver_value_chain(
+        &self,
+        mut current: RuntimeValue,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        for (index, call) in calls.iter().enumerate() {
+            current = self.eval_receiver_dynamic_value_chain_call(
+                current,
+                call,
+                calls.get(index + 1),
+                index + 1 == calls.len(),
+                ctx,
+                rule_label,
+            )?;
+        }
+        Ok(current)
+    }
+
     fn eval_array_receiver_value_chain(
         &self,
         receiver: &linkedspec_core::expr::Expr,
@@ -7469,6 +7501,14 @@ impl Engine {
 
             current =
                 self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+            if matches!(call.method.as_str(), "first" | "last") {
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index + 1..],
+                    ctx,
+                    rule_label,
+                );
+            }
             family = match call.method.as_str() {
                 "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
                 | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
@@ -7575,6 +7615,14 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
+                    if matches!(call.method.as_str(), "first" | "last") {
+                        return self.eval_selected_receiver_value_chain(
+                            current,
+                            &calls[index + 1..],
+                            ctx,
+                            rule_label,
+                        );
+                    }
                     family = match call.method.as_str() {
                         "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
                         | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
@@ -7679,6 +7727,14 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
+                    if matches!(call.method.as_str(), "first" | "last") {
+                        return self.eval_selected_receiver_value_chain(
+                            current,
+                            &calls[index + 1..],
+                            ctx,
+                            rule_label,
+                        );
+                    }
                     family = match call.method.as_str() {
                         "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
                         | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
@@ -9553,11 +9609,10 @@ impl Engine {
                     Ok(RuntimeValue::Number(0.0))
                 }
             }
-            "trim" => Ok(RuntimeValue::Scalar(
-                args.first()
-                    .map(|a| a.to_str().trim().to_string())
-                    .unwrap_or_default(),
-            )),
+            "trim" => Ok(match args.first() {
+                None | Some(RuntimeValue::Undef) => RuntimeValue::Undef,
+                Some(value) => RuntimeValue::Scalar(value.to_str().trim().to_string()),
+            }),
             "lowercase" => Ok(RuntimeValue::Scalar(
                 args.first()
                     .map(|a| crate::unicode_case_mapping::lowercase(&a.to_str()))

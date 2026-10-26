@@ -9,14 +9,16 @@ answers:
   - "do string predicates and matches reject undefined input"
   - "is null an undefined literal in the LinkedSpec DSL"
   - "which task owns scalar helper null and empty semantics"
-date: 2026-09-07
-status: confirmed bounded discrepancies; SESSION-STARTUP-READING.61.1-.61.3 pending
+date: 2026-10-26
+status: trim null repaired under23.3.1.2; remaining61.1-.61.3 scope open
 tags: [rust, perl, scalar, string, undef, null, helpers, parity]
 evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3 compares five scalar vectors on primary Rust and public Perl Get, captures all lowering/generated text and descriptors, and independently checks exact result kinds and error absence. Literal undef and unbound name null reproduce the same differences; the empty-string transformation control agrees."
-reverify: "bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py && rg -n '__ls_length|__ls_replace_substr_value|__ls_starts_with' perl/LinkedSpec/ActionIR/MethodLowering.pm"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test selected_value_receivers"
 ---
 
-# Exact inputs and outputs
+Current: TYPE-REFERENCE-BOOK.1.2.23.3.1.2 fixes trim(undef) and empty-selection trim to return null; empty text stays empty. Focused native/restored/generated-plan controls pass. Other transformations/predicates below retain61.1/.61.2 ownership and block complete scalar admission.
+
+# Historical September 7 inputs and outputs
 
 Use the same `Top::` I-block / `/x/ -> Done` / `Done: /[a-z]+/` scaffold
 and `xhello` input as [[rust-array-slice-boundary-panics]], returning each
@@ -44,12 +46,7 @@ Rust returns `["XaXbX",1,1,1,true]`; Perl returns `["ab",0,0,0,0]`.
 The Rust regex result is a JSON boolean and the three substring predicates
 are numeric flags; assertions preserve that observed distinction.
 
-Two initial twins use unbound identifier `null` instead of `undef`:
-`nullable_transforms` and `scalar_predicate_boundaries`. They reproduce the
-same results because the unbound variable evaluates to undefined. **The DSL
-undefined literal is `undef`; `null` is an identifier.** Perl's lowered initial
-text contains `$null`, while literal-undef text does not.
-See [[terse-primitive-literal-parity]].
+`null` is an identifier, not the null literal `undef`. The historical unbound-name twins nullable_transforms/scalar_predicate_boundaries agree with the undef vectors; see [[terse-primitive-literal-parity]].
 
 All five Rust commands exit 0 with empty stderr. Perl creates all five parsers,
 has empty build/call exception strings and warning lists, returns without
@@ -98,5 +95,4 @@ in that card's rust-cli/perl-results files. Additional data is:
 | perl-extra-results.jsonl | 299 | bff6d510b6133e64ce5c4e15f576a16657fa557b2c51aa94a38f59ea4f42ce8f |
 | perl-undefined-results.jsonl | 316 | 24cd8eecc3a09993cd2bc4200defbc846a3c5c0fd1898e4d8758c7f29b51a07f |
 
-The reverify field checks the separate numeric invariant and retrieves Perl
-guards; it does not rerun this five-vector native comparison.
+The current reverify regresses selected values and repaired trim nulls; the historical five-vector comparison is not refreshed.

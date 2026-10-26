@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl ordinary selected scalar/container continuations23.3.1.1.1-.2 are implemented. Rust23.3.1.2 confirmation/implementation is next, followed by Dart/Julia/Lua. Full signature/transition inventory and admission stay open; retain feature/compile/quick-check/commit cadence.
+Bounded Perl/Rust selected-value continuations are implemented. Dart23.3.1.3 is next, then Julia/Lua. Remaining Rust scalar61.1/.61.2 repairs are scheduled after this native rollout; full signature/transition inventory and admission remain open. Keep feature/compile/quick-check/commit cadence.
 
 ## Latest Completed Slice
 
-Selected array/harray methods now compose existing pure helpers after first/last. Generic copy preserves runtime container kind; pipeline sources evaluate expressions once and check actual ARRAY kind. Native/fresh container and direct scalar/pipeline regressions pass after observed RED, including dynamic copy under one function, repeated extraction, snapshots, empty values, min/max shape and source/value effects. Syntax/book/fast continuity pass; contract/fact/map/task/live handoff agree.
+Rust first/last tails reuse existing dynamic receiver dispatch, preserving actual selected scalar/container/copy kinds and pre-effect extraction arity. The focused public Engine/restored/generated-plan regression and direct array-transform checks pass after actual RED. The blocking known trim-null helper case is fixed with direct undef/empty controls; indexed61.1 retains remaining helpers. First-party format/book/fast continuity pass; current facts/map/task/live handoff agree.
 
 ## Next Action
 
-Confirm/implement the frozen selected-value contract on Rust23.3.1.2 through public Engine/generated-plan interfaces. Begin with a tiny journey probe; reuse existing correct behavior. Run compilation and a small focused regression, update book/docs and commit before Dart/Julia/Lua. Full matrices, policy/storage maintenance and portable admission remain deferred.
+Confirm/implement Dart selected-value journeys through public runtime/restored/generated-plan interfaces. Probe the frozen examples first, reuse correct existing behavior and run a small focused check plus selected analysis. Commit before Julia/Lua. Broad matrices, policy/storage maintenance and complete fluent/scalar admission remain deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` — Rust selected scalar/container dispatch and trim-null blocker; targeted native/restored/generated-plan and array-transform checks pass; Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` — selected Perl array/harray methods and runtime-kind copy; focused native/fresh/scalar/pipeline checks pass; Rust23.3.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1` — selected Perl scalar methods, native/fresh and pipeline checks pass; selected containers1.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
@@ -29,7 +30,6 @@ Confirm/implement the frozen selected-value contract on Rust23.3.1.2 through pub
 - `TYPE-REFERENCE-BOOK.1.2.1.1` — non-call syntax/result/effect/context catalog and quick AST probe; helper/alias1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.21` — raw multiline assignment payload fidelity, unchanged typed first-line division; syntax/native/fresh targeted checks pass; inventory1 next.
 - `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
-- `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
 
 ## History
 
