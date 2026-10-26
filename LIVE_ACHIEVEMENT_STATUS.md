@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
+Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 
 ## Latest Completed Slice
 
-Perl registers generic definedness scalar/zero-operand routes and numeric-prefix handoff. Public dumps exposed synthetic bare names/raw first and split-bridge helpers; actual-value typed operands and a legacy definedness branch repair them while preserving1/empty-string. Native/fresh shared fixture and direct String compatibility pass after RED, including null/defined kinds, source/copy families, false text/fallback/generic/bridges/scalar guards and1!/SC/one source call. Syntax/book/fast checks pass; Rust2 next; mandatory canonical Perl registration23.4.1 stays separate.
+Rust adds Bool/null literals to existing postfix parsing and extends generic/scalar/zero-operand receiver classification to definedness. Public compile and null/four-effect RED become passing native/restored/plan shared results, native Bool/text/default/literal controls and direct String tests. Strengthened shared consumer changes source to null while earlier result staystrue/SC/one call; same Perl native/fresh check passes. Original Bool vs Perl empty-string/default behavior and schema stay unchanged. Formatting/book/fast checks pass; Dart3 next.
 
 ## Next Action
 
-Independently assess Rust ordinary is_defined/is_undefined under23.3.11.2: public actual producer kinds/text/default and generic receiver/source/shape behavior, then repair confirmed gaps only. Shared source has explicit Perl expected variant preserving1/empty-text; derive Rust expectations without normalization. Small native/restored/plan/direct compilation checks/docs/commit, then Dart3. No broad suite/admission now.
+Independently assess Dart is_defined/is_undefined result/source/shape behavior under23.3.11.3 using shared source and actual Bool/text/default controls. Preserve actual producer kinds/domain/source/copy semantics; repair confirmed ordinary gaps, small native/restored/plan/direct checks and fatal selected-file analysis/docs/commit, then Julia4. Shared fixture consumer now changes source to null to distinguish captured true result. No broad suite/admission now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
@@ -29,7 +30,6 @@ Independently assess Rust ordinary is_defined/is_undefined under23.3.11.2: publi
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` — Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
 
 ## History
 

@@ -5960,9 +5960,8 @@ impl Engine {
                 // Reject invalid receiver arities before source/operand effects.
                 if calls.iter().any(|call| match call.method.as_str() {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
-                    | "avg" | "median" | "range" | "is_empty" | "is_nonempty" => {
-                        !call.args.is_empty()
-                    }
+                    | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
+                    | "is_undefined" => !call.args.is_empty(),
                     "join_values" | "index_of" | "has_key" | "starts_with" | "ends_with"
                     | "contains_substr" | "matches" => call.args.len() != 1,
                     _ => false,
@@ -6000,10 +5999,10 @@ impl Engine {
                         .eval_receiver_with_trailing_block_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls.first().is_some_and(|call| {
-                    Self::is_emptiness_receiver_method(&call.method)
+                    Self::is_generic_receiver_predicate(&call.method)
                         || (call.method == "copy"
                             && calls.get(1).is_some_and(|next| {
-                                Self::is_emptiness_receiver_method(&next.method)
+                                Self::is_generic_receiver_predicate(&next.method)
                             }))
                 }) {
                     let current = self.eval_expr(receiver, ctx, rule_label)?;
@@ -7257,7 +7256,7 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         let method = call.method.as_str();
 
-        if Self::is_emptiness_receiver_method(method) {
+        if Self::is_generic_receiver_predicate(method) {
             let (raw_args, values) = self.receiver_call_args(current, call, ctx, rule_label)?;
             return self.call_helper_with_args(method, &raw_args, &values, ctx, rule_label);
         }
@@ -7465,8 +7464,11 @@ impl Engine {
             || Self::is_scalar_result_receiver_method(method)
     }
 
-    fn is_emptiness_receiver_method(method: &str) -> bool {
-        matches!(method, "is_empty" | "is_nonempty")
+    fn is_generic_receiver_predicate(method: &str) -> bool {
+        matches!(
+            method,
+            "is_empty" | "is_nonempty" | "is_defined" | "is_undefined"
+        )
     }
 
     fn is_scalar_result_receiver_method(method: &str) -> bool {
@@ -7483,6 +7485,8 @@ impl Engine {
                 | "has_key"
                 | "is_empty"
                 | "is_nonempty"
+                | "is_defined"
+                | "is_undefined"
                 | "starts_with"
                 | "ends_with"
                 | "contains_substr"
@@ -7504,7 +7508,7 @@ impl Engine {
             // Scalar producers retain the incompatible-array boundary
             // until a compatible helper explicitly returns a container.
             if scalar_result
-                && !Self::is_emptiness_receiver_method(&call.method)
+                && !Self::is_generic_receiver_predicate(&call.method)
                 && !Self::is_string_receiver_value_chain_method(&call.method)
                 && !Self::is_number_receiver_value_chain_method(&call.method)
             {
@@ -7551,7 +7555,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_emptiness_receiver_method(&call.method) {
+            if Self::is_generic_receiver_predicate(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -7646,7 +7650,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_emptiness_receiver_method(&call.method) {
+            if Self::is_generic_receiver_predicate(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -7773,7 +7777,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_emptiness_receiver_method(&call.method) {
+            if Self::is_generic_receiver_predicate(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -7918,7 +7922,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_emptiness_receiver_method(&call.method) {
+            if Self::is_generic_receiver_predicate(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],

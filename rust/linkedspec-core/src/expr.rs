@@ -2736,7 +2736,7 @@ impl<'a> Parser<'a> {
                         && after.chars().next().unwrap() != '_'
                 {
                     self.advance(5);
-                    Ok(Expr::Undef)
+                    self.parse_fluent_chain(Expr::Undef)
                 } else {
                     self.parse_var_or_call()
                 }
@@ -2748,7 +2748,7 @@ impl<'a> Parser<'a> {
                         && after.chars().next().unwrap() != '_'
                 {
                     self.advance(4);
-                    Ok(Expr::BooleanLiteral { value: true })
+                    self.parse_fluent_chain(Expr::BooleanLiteral { value: true })
                 } else {
                     self.parse_var_or_call()
                 }
@@ -2760,7 +2760,7 @@ impl<'a> Parser<'a> {
                         && after.chars().next().unwrap() != '_'
                 {
                     self.advance(5);
-                    Ok(Expr::BooleanLiteral { value: false })
+                    self.parse_fluent_chain(Expr::BooleanLiteral { value: false })
                 } else {
                     self.parse_var_or_call()
                 }

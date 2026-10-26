@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.11.2 — carry Rust definedness and literal receiver chains
+
+Rust adds Bool/null literals to existing postfix parsing and extends generic/scalar/zero-operand receiver classification to definedness. Public compile and null/four-effect RED become passing native/restored/plan shared results, native Bool/text/default/literal controls and direct String tests. Strengthened shared consumer changes source to null while earlier result staystrue/SC/one call; same Perl native/fresh check passes. Original Bool vs Perl empty-string/default behavior and schema stay unchanged. Formatting/book/fast checks pass; Dart3 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.11.1 — add Perl generic definedness receiver flow
 
 Perl registers generic definedness scalar/zero-operand routes and numeric-prefix handoff. Public dumps exposed synthetic bare names/raw first and split-bridge helpers; actual-value typed operands and a legacy definedness branch repair them while preserving1/empty-string. Native/fresh shared fixture and direct String compatibility pass after RED, including null/defined kinds, source/copy families, false text/fallback/generic/bridges/scalar guards and1!/SC/one source call. Syntax/book/fast checks pass; Rust2 next; mandatory canonical Perl registration23.4.1 stays separate.

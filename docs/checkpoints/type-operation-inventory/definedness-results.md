@@ -55,3 +55,14 @@ The shared source fixture has an explicit .perl.json expected variant to preserv
 checks pass after RED, including source families, true/false/null/empty, copied
 sources, explicit bridges/scalar guards, malformed no-effects and1!/SC/one call.
 Other backends must retain independently observed producer kinds; Rust2 next.
+
+## Bounded Rust implementation
+
+23.3.11.2 extends existing generic/scalar/zero-operand lists. Core true/false/undef
+now enter the fluent parser; previously false.is_defined() prevented compilation.
+After that repair, native receiver null/four malformed effects expose missing
+runtime generic classification. Shared native/restored/plan, Bool/text/default/
+literal producer and direct String checks pass after RED. Bool false renders0!
+and survives coalesce_nonempty; .json differs intentionally from .perl.json.
+Source/copy and1!/SC/one-call snapshots remain; the consumer now changes source to null, distinguishing an earlier true result from a later binding read. The same strengthened input passes Perl native/fresh too. Word checks and AST/schema stay
+unchanged; no full domain/admission. Dart3 follows.

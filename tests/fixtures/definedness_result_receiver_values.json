@@ -1,0 +1,56 @@
+{
+  "positive": [
+    "1!",
+    "1!"
+  ],
+  "negative": [
+    "0!",
+    "0!"
+  ],
+  "nested": [
+    "1!",
+    "1!"
+  ],
+  "boundaries": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "0!",
+    "1!"
+  ],
+  "selected": "1!",
+  "pipeline": "1!",
+  "numeric": "1!",
+  "named": [
+    "1!",
+    "1!"
+  ],
+  "copied": [
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "function": "1!",
+  "default": "1!",
+  "retained": "0!",
+  "bridged": "X",
+  "predicate_again": "1!",
+  "false_empty": "0!",
+  "incompatible": null,
+  "after_text": null,
+  "effected": "1!",
+  "order": "SC",
+  "calls": 1,
+  "source": null,
+  "bad": [
+    null,
+    null
+  ],
+  "invalid_effects": 0,
+  "word": "abc",
+  "items": [],
+  "meta": {}
+}

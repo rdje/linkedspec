@@ -16,7 +16,7 @@ Top:: I {
  predicate_again=missing.is_defined().is_defined().cat("!"); false_empty=missing.is_defined().is_empty().cat("!");
  incompatible=word.is_defined().sorted(); after_text=missing.is_undefined().cat("!").sorted_values();
  source="abc";order="";calls=0;
- effected={calls=num_add(calls,1);order=cat(order,"S");source}.is_defined().cat({order=cat(order,"C");source="changed";"!"});
+ effected={calls=num_add(calls,1);order=cat(order,"S");source}.is_defined().cat({order=cat(order,"C");source=[].first();"!"});
  invalid_effects=0;
  bad=[{invalid_effects=num_add(invalid_effects,1);word}.is_defined({invalid_effects=num_add(invalid_effects,1);"extra"}).cat("!"),{invalid_effects=num_add(invalid_effects,1);missing}.is_undefined({invalid_effects=num_add(invalid_effects,1);"extra"}).cat("!")];
  return({"positive":positive,"negative":negative,"nested":nested,"boundaries":boundaries,"selected":selected,"pipeline":pipeline,"numeric":numeric,"named":named,"copied":copied,"function":from_function,"default":from_default,"retained":retained,"bridged":bridged,"predicate_again":predicate_again,"false_empty":false_empty,"incompatible":incompatible,"after_text":after_text,"effected":effected,"order":order,"calls":calls,"source":source,"bad":bad,"invalid_effects":invalid_effects,"word":word,"items":items,"meta":meta});
