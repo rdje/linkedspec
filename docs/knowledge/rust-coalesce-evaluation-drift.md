@@ -12,11 +12,11 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: Perl flow/literals targeted-checked; backend/full admission open
+status: Perl/Rust flow targeted-checked; remaining backend/admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
 evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1/.1.2 native/fresh/direct checks; backend/broad admission open."
 reverify:
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test default_selected_receivers --test joined_string_receivers --test coalesce_receiver_values"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_literal_operand_contract.t t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t"
 ---
 
@@ -74,14 +74,10 @@ audit = "unset"; result = H(undef, audit = "selected", audit = "late"); return([
 
 For both helpers Rust returns `["first","late"]` then `["selected","late"]`;
 Perl returns `["first","unset"]` then `["selected","selected"]`.
-All five Rust executions exit 0 with empty stderr. All Perl parsers are created,
-build/call errors are empty, warnings are empty and last_error is null. The corrected
-collector preserves JSON booleans; its original stringified-false output is an observer
-artifact documented in [[perl-typed-error-json-observation-boundary]].
-
-Five descriptors report ready=1/unresolved=0. Actual lowered and generated source retains
-the conditional structure, including the nested selected assignment before any late operand.
-These generated captures were inspected, not independently executed.
+Historical channels/descriptors and inspect-only emitted captures are exact at
+Git949790b510f8ad29b744730ac379a8952d987d9f for this path. The original observer's
+boolean correction is [[perl-typed-error-json-observation-boundary]]; no replay
+or new emitted-route admission is inferred here.
 
 ## Current selected-result findings
 
@@ -91,7 +87,10 @@ TYPE23.2.5 probes distinguish stopped consumers from nested A-B/X:Y.
 fat-arrow reparsing. Use bare_scalar_read for these operands; generic value-only
 argument reconstruction still contains authored bindings/calls. Native/fresh and
 direct compatibility checks pass after RED: lazy order, kinds, snapshots and
-retired authored syntax remain intact. Other backends/domain admission stay open.
+retired authored syntax remain intact. Rust23.3.6.2 additionally hands direct
+String defaults to eval_selected_receiver_value_chain with actual-kind scalar
+guards; native/restored/plan and direct checks pass after RED. Remaining backend/
+domain admission stays open.
 Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
 
 Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.

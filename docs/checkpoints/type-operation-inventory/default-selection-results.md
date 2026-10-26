@@ -93,3 +93,13 @@ checks pass after RED, preserving kinds, lazy SDK order and genuine retired synt
 rejection. Generic value-only intermediates are not fully lowered operands; do not
 emit their authored bindings/calls directly. Other backends and complete domain/
 admission remain unassessed here.
+
+## Bounded Rust implementation
+
+`.23.3.6.2` preserves already-correct joined selections and repairs direct String
+selection: its local String loop now hands the actual result to the existing
+shared dynamic continuation, with scalar guarding until a container is returned.
+Native/restored/generated-plan default and direct joined/default-receiver checks
+pass after direct Array/Hash RED. The shared authored fixture retains lazy SDJ
+order, snapshots, empty/null/zero/false and incompatible retained-scalar nulls.
+Dart/Julia/Lua assessment and full domain/portable admission remain separate.

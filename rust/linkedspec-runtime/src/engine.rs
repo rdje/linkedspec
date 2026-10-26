@@ -7725,7 +7725,15 @@ impl Engine {
                     ctx,
                     rule_label,
                 )?;
-                continue;
+                let scalar_result =
+                    !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index + 1..],
+                    scalar_result,
+                    ctx,
+                    rule_label,
+                );
             }
 
             let evaluated_call_args: Vec<RuntimeValue> = call

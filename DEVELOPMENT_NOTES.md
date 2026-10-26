@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.2 — hand direct defaults to dynamic continuation
+
+Rust direct String nonempty defaults now hand selected values to the existing dynamic continuation with actual-kind scalar guards. Preserve already-correct joined selections and helper/lazy/copy behavior. Small native/restored/generated-plan default plus direct joined/default-receiver checks pass after direct Array/Hash RED, including empty/null/zero/false, scalar incompatible nulls, skipped arms and SDJ snapshots. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next and full domain/admission stays separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2 — avoid reparsing lowered Hash source
 
 Perl lazy defaults preserve valid direct Hash literal operands for both coalesce helpers, including nested typed values and fluent selected results. Complete typed operands feed a shared lazy host builder, avoiding host-fat-arrow reparsing while preserving coalesce tail and nonempty numeric-kind semantics. Native/fresh literal and direct selected-default/exhaustion checks pass after RED; lazy SDK order, zero/false and genuine retired syntax rejection pass. Bounded Perl repairs complete; Rust default-result assessment2 is next, full domain/portable admission separate.

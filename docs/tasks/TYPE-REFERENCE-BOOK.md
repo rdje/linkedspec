@@ -1757,12 +1757,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2 - preserve typed lazy default operands`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Publicly assess and implement/confirm ordinary Rust default-selection result flow.
   Dependencies: .23.3.6.1.
   Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic regression, no measured admission.
+  Activation: clean `3fbd7be94e36e50241fd2665b97ddf520a59f4bb`; bounded Perl repairs committed, brief empty, tree clean.
+  Owned paths: Rust public receiver dispatcher only for confirmed gaps, one focused native/restored/generated-plan fixture and direct default/join compatibility, public/current docs.
+  Verification tier: `focused`
+  Focused checks: Public CLI fluent/nested selected-default controls; small native/restored/generated-plan default regression plus direct joined/default-receiver checks, compilation/rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; full domain/portable admission23.4 and eventual clean push remain separate.
+  Claim verification: none: deterministic authored value/order regression; no quantified corpus or portable measurement.
+  Public finding / owned repair: Rust public CLI returns null for direct String-selected Array continuation while joined/nested Array and joined Hash controls give A-B/X:Y with correct SDJ snapshots. eval_string_receiver_value_chain handles coalesce_nonempty then continues its original String-family loop. Route that selected result through existing dynamic continuation with actual scalar/container boundary; retain correct joined/default helpers. Shared authored fixture adds a direct Hash counterpart.
+
+  Completion: After direct String coalesce_nonempty selection, return through eval_selected_receiver_value_chain with scalar guarding derived from the actual selected kind. Preserve existing joined/default helper behavior and source snapshots.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public CLI shows direct String-selected Array null beside working joined/nested controls. New shared authored fixture RED independently shows direct Array/Hash null with all other values unchanged.
+  - [x] ROOT CAUSE (WHY + WHERE): eval_string_receiver_value_chain's coalesce_nonempty special branch continues its local String family after selection rather than handing off the selected result.
+  - [x] FIX: Reuse existing dynamic continuation and set scalar guarding from actual Array/Hash versus scalar/null output; no helper, copy, lazy or serialized policy changes.
+  - [x] ADDRESSED (verified): Small native/restored/generated-plan default fixture PASS after RED, including direct/joined Array/Hash, scalar incompatible nulls, empty/null/zero/false, skipped arms and SDJ snapshots.
+  - [x] NO REGRESSION: Direct joined and default-receiver fixtures plus compilation/rustfmt PASS. Existing selected-null and source/helper differences remain unchanged; no broad suite/admission claim.
+  - [x] LOCKSTEP: Shared fixture, contract/catalog, canonical defaults fact/map and live/task/resume docs align; book and fast memory/cadence/diagnosis/history/diff checks pass. Dart assessment3 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.2 - continue Rust selected default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.3`
   Status: `pending`
@@ -1866,11 +1881,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow23.3.6.1.1 and valid Hash literal fallback1.2 are implemented/targeted-checked on Perl; Rust2 assessment is next, then other backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 assessment is next, then other backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` | `pending` | Assess/implement Rust selected-default result flow after bounded Perl repairs; broad proof deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` | `pending` | Assess/implement Dart selected-default result flow after bounded Perl/Rust repairs; broad proof deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.6.2 — continue Rust selected default results
+
+Rust direct String nonempty defaults now hand selected values to the existing dynamic continuation with actual-kind scalar guards. Preserve already-correct joined selections and helper/lazy/copy behavior. Small native/restored/generated-plan default plus direct joined/default-receiver checks pass after direct Array/Hash RED, including empty/null/zero/false, scalar incompatible nulls, skipped arms and SDJ snapshots. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next and full domain/admission stays separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2 — preserve typed lazy default operands
 
 Perl lazy defaults preserve valid direct Hash literal operands for both coalesce helpers, including nested typed values and fluent selected results. Complete typed operands feed a shared lazy host builder, avoiding host-fat-arrow reparsing while preserving coalesce tail and nonempty numeric-kind semantics. Native/fresh literal and direct selected-default/exhaustion checks pass after RED; lazy SDK order, zero/false and genuine retired syntax rejection pass. Bounded Perl repairs complete; Rust default-result assessment2 is next, full domain/portable admission separate.

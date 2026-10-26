@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Perl default result/literal repairs are implemented/targeted-checked. Rust selected-default assessment23.3.6.2 is next, then the remaining backends. Feature/compile/small-check/docs/commit cadence continues; full admission stays separate.
+Bounded Perl/Rust default result repairs are implemented/targeted-checked. Dart selected-default assessment23.3.6.3 is next, then remaining backends. Keep feature/compile/small-check/docs/commit cadence; full admission stays separate.
 
 ## Latest Completed Slice
 
-Perl lazy defaults preserve valid direct Hash literal operands for both coalesce helpers, including nested typed values and fluent selected results. Complete typed operands feed a shared lazy host builder, avoiding host-fat-arrow reparsing while preserving coalesce tail and nonempty numeric-kind semantics. Native/fresh literal and direct selected-default/exhaustion checks pass after RED; lazy SDK order, zero/false and genuine retired syntax rejection pass. Bounded Perl repairs complete; Rust default-result assessment2 is next, full domain/portable admission separate.
+Rust direct String nonempty defaults now hand selected values to the existing dynamic continuation with actual-kind scalar guards. Preserve already-correct joined selections and helper/lazy/copy behavior. Small native/restored/generated-plan default plus direct joined/default-receiver checks pass after direct Array/Hash RED, including empty/null/zero/false, scalar incompatible nulls, skipped arms and SDJ snapshots. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next and full domain/admission stays separate.
 
 ## Next Action
 
-Publicly assess Rust selected defaults against nested helpers and frozen actual-kind/lazy/snapshot boundaries before repair. Small native/restored/generated and direct compatibility checks, docs/commit; no broad suite or domain normalization.
+Publicly assess Dart selected defaults with the shared authored fixture before repair. Preserve actual kinds, lazy prefix, scalar guards and SDJ snapshots. Small native/restored/generated/direct compatibility checks, fatal analysis/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
@@ -29,7 +30,6 @@ Publicly assess Rust selected defaults against nested helpers and frozen actual-
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.3` — Dart existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` — Rust six-reducer results continue with scalar boundaries, early arity guards and empty sum zero; focused native/restored/generated-plan checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` — Perl six-reducer results continue through scalar/number methods with preserved boundaries; focused native/fresh and Count/Length checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
 
 ## History
 
