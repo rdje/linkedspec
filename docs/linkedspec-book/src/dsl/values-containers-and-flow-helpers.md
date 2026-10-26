@@ -30,7 +30,7 @@ Top: /x/
  I { cb = {|| return(["b","a"]) }; return(cb().sorted()) }
 ```
 
-This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind. Literals, bare reads, direct indexing, assignment, eager blocks and deferred literals are distinct syntax roles; helper calls and receiver methods are separate operations.
+This demonstrates an array operation on the call result. It supplies no separate codeblock method table or guarantee that every operation accepts every kind. Literals, bare reads, direct indexing, assignment, eager blocks and deferred literals are distinct syntax roles; helper calls and receiver methods are separate operations. Use each helper’s signature to choose its inputs and continuations: `split` reads a string and produces an array, while a parser-state statement has different rules from a pure value method. A recognized helper name alone does not establish a receiver method or support in every callable context.
 ### Rust numeric transport
 
 Rust numeric values use binary64 precision. Large finite values keep that value through JSON output and serialized/generated parsers; this does not provide arbitrary-precision integer arithmetic.

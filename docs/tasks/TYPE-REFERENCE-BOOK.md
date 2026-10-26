@@ -831,15 +831,47 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.1.1 - index value syntax and operation roles`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.2`
-  Status: `pending`
+  Status: `active`
+  Children: `TYPE-REFERENCE-BOOK.1.2.1.2.1`, `TYPE-REFERENCE-BOOK.1.2.1.2.2`
   Current implementation selection: Dynamic split_each scalar delimiters are owned by FUTURE-PARITY-BACKLOG.5.5; value/standalone5.5.1-.2 and retained standalone numeric kinds5.4.4 are implemented. Resume bounded helper enumeration/selection here; full enumeration is not complete.
   Goal: Enumerate current free-helper and alias spellings with canonical families, signatures, results, mutation/callback contracts and source links. Separate private/retired/compatibility-only names.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.1`
   Planned tier: `focused`; use source/metadata checks, not a full runtime matrix.
-  Claim verification: none: Not yet activated; declare measurement scope before publishing aggregate completeness/counts.
+  Claim verification: none: Spelling child is indexed; semantic mapping remains open and no aggregate completeness/counts are published.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.2.1`
+  Status: `done`
+  Activation commit: `63d1735d0561046bd6a5610ba0dabcdfb53c07da`
+  Goal: Index current helper spellings by source resolver family, canonical/compatibility alias mapping and dedicated/private syntax roles. Establish a usable source spine before per-helper signature/effect mapping.
+  Owned paths: docs/checkpoints/type-operation-inventory/helpers.md; current book inventory boundary and existing per-type/array facts/map; TYPE task and normal live continuity.
+  Verification tier: `focused`
+  Focused checks: Source-linked spelling/alias consistency check against the actual Dart registry and checker classifications; book build and fast continuity/history checks. No runtime census.
+  Canonical trigger: None; qualitative source index only, no new language/runtime/helper admission or complete semantic coverage claim.
+  Claim verification: none: Qualitative name/role index of explicit current source registries, not measured execution parity, API completeness, per-type coverage or corpus census.
+  Acceptance: Preserve overloaded roles and source-family limits; canonicalize aliases without promoting source-only compatibility or private/dedicated forms. Keep signatures/results/effects with next1.2.1.2.2, receiver transitions with1.2.1.3/.23. Correct the encountered stale array fact's Dart/Julia pending wording against already committed5.3.2/.3; no replay of old producers.
+
+  Completion: helpers.md indexes actual registry spellings by resolver category and canonical numeric/current/source-boundary alias mapping, with explicit reverse-check exclusions. Source categories are not input types/method admission; book/reference-only spellings and semantic mapping remain open. Correct the array card's stale Dart/Julia pending wording using accepted5.3.2/.3 records.
+  Focused result: An exact source-spelling/alias consistency check passes: primary spellings appear in the index, alias targets are primary, compatibility names remain separate and dedicated diagnostics are not promoted. Book and fast continuity/history checks pass; no runtime census or old producer replay.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Existing syntax index delegates call spellings to this owner; no current helper spine existed. Array fact still labels accepted Dart/Julia implementations as pending.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Registry sets mix resolver categories and syntax roles; old fact status was not advanced after5.3.2/.3. Current source/accepted task records distinguish those roles and dates.
+  - [x] **FIX** — Index current spellings/aliases/exclusions with precise authority and semantic limits; correct stale fact status and advance the precise child frontier.
+  - [x] **ADDRESSED (verified)** — Focused source consistency and book rendering PASS.
+  - [x] **NO REGRESSION** — No runtime/contract changes; aliases keep their canonical and marker/attached restrictions, while private/compatibility names are not admitted as public methods.
+  - [x] **LOCKSTEP** — Book explanation, contained current facts/derived map, task frontier and live handoff agree. Signature/effect child1.2.1.2.2 follows; comprehensive fluent/runtime validation stays open.
+  Extraction note: The initial read-only extractor assumed every set ended on its own line and stopped at the inline output set before writing. The corrected source check accepts both layouts; no product defect or false runtime RED is claimed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.1.2.1 - index helper spellings and syntax roles`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.2.2`
+  Status: `pending`
+  Goal: Map each indexed free helper to its actual signature/arity, input/result kinds, mutation/copy/callback boundaries and backend limits; select missing implementations as bounded feature leaves. Do not equate resolver families with input types or mark a method complete from a name.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.2.1`
+  Planned tier: `focused`; source/contract mapping and tiny public probes for uncertainty only. Broad semantic census follows feature coverage.
+  Claim verification: none: No complete method coverage measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.3`
   Status: `pending`
+  Owned reconciliation: Current Helper Catalog still says booleans/flow results are terminal, while the authority/model ledger records generic false.with()/cat observations. Confirm current behavior with a tiny public probe and repair the per-method wording here; do not promote a stale blanket statement or historical observation to a complete method table.
   Goal: Index actual receiver methods by input and returned type, chain/terminal behavior, argument and callback shapes, mutation/copy rules and backend limits; route actual missing methods/transitions to23.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.2`
   Planned tier: `focused`; use tiny public probes only where current contracts are uncertain.
@@ -965,11 +997,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first selection after clean15cdc6997: existing parent FUTURE-PARITY-BACKLOG.5 now owns bounded Rust/Dart/Julia transform writeback children5.3. The catalog explicitly names this gap; helper inventory1.2/receiver1.3 and comprehensive23 remain open. No complete inventory/method claim or dirty pivot.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spelling child1.2.1.2.1 is indexed; signature/effect child1.2.1.2.2 selects the next bounded missing implementation. Receiver1.2.1.3 and comprehensive23 remain open; no complete method/parity claim.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2` | `pending` | Helper/alias inventory and tiny probes select the next bounded feature. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2.2` | `pending` | Map helper signatures/effects from the indexed spellings and select the next bounded feature. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

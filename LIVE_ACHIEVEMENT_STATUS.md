@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Standalone filter numeric kinds5.4.4 and dynamic split_each delimiters5.5.1-.2 are implemented with targeted checks. Helper/alias inventory1.2 selects the next bounded feature. Keep compile/quick-regression/commit cadence; broad verification and maintenance remain deferred.
+Helper spelling/role index1.2.1.2.1 is complete at its source-only scope. Signature/effect child1.2.1.2.2 selects further bounded implementations; existing pipeline/delimiter/kind features are committed. Keep quick targeted checks; broad verification and maintenance remain deferred.
 
 ## Latest Completed Slice
 
-Standalone uniq/filter_match/filter_nonempty compare scalar copies and retain original numeric kinds. Separate public probes and the small native/fresh regression show actual typed selector RED before repair and GREEN afterward. Numeric writes, null/empty-text/string0 distinctions, snapshots and pure/dynamic/statement controls pass. Module/test syntax, book and fast continuity checks pass; current helper examples/fact/map/indexed/live handoff agree.
+helpers.md separates primary resolver spellings, numeric/current aliases, source-boundary compatibility and excluded dedicated/internal diagnostics. Source consistency, book and fast continuity checks pass. Public explanation distinguishes signatures/results from mere names; the stale Dart/Julia pending fact and precise child frontier are corrected. No runtime/helper/API completeness or parity admission.
 
 ## Next Action
 
-Resume bounded helper/alias inventory1.2 from canonical contracts/source links, selecting further missing implementations without a runtime census. Complete method/result-type coverage remains open; broad recurrence, policy and storage maintenance stay deferred until feature coverage.
+Map actual helper signatures/results/effects and backend limits from the spelling spine, starting with scalar/string and array bridges. Use canonical contracts and tiny public probes for uncertainty; select missing implementations rather than run a broad runtime census. Receiver/result transitions and comprehensive23 remain open.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.2.1` — helper spellings/aliases/roles indexed; source consistency and book pass; signatures/effects1.2.1.2.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
 - `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
 - `FUTURE-PARITY-BACKLOG.5.5.1` — dynamic Perl split_each value delimiters, once/order/function/receiver controls; syntax/native/fresh targeted checks pass; standalone5.5.2 next.
@@ -29,7 +30,6 @@ Resume bounded helper/alias inventory1.2 from canonical contracts/source links, 
 - `TYPE-REFERENCE-BOOK.1.2.14` — deferred last free/receiver support, syntax and native/fresh regression pass; deferred with16 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
-- `REPO-HYGIENE.23` — Rust105.2GiB/history111.0GiB allocated cleanup; lossless52.7MiB archive/two restored readers/four fresh Rust examples; six reviewer denials and scoped before/after census; Julia17.5 next; repair24 after17.7.
 
 ## History
 

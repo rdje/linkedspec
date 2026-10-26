@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.1.2.1 — spelling is not a signature
+
+The current Dart registry explicitly separates primary names, numeric/control aliases and source-boundary compatibility. Its family classification describes dispatch grouping: split is array-classified despite reading a string; copy/traversals span container kinds. Perl reverse checking uses diag_name and explicit dedicated/internal exclusions; callbacks and missing per-helper rows prevent treating that structure as a complete JSON method catalog. helpers.md records those roles and source pointers without promoting compatibility/private forms. Per-helper signatures/effects, book-only spellings and result transitions remain the next source-mapping work. Array fact Dart/Julia pending text was stale against completed5.3.2/.3 and is corrected.
+
 ## 2026-10-26 — FUTURE-PARITY-BACKLOG.5.4.4 — retained statement values
 
 BindingRuntime::array_transform retained the same alias-stringification mechanism previously fixed in pure value pipelines: interpolation, matching and length mark retained numeric items as string-valid, so a later typed array write selects harray. Public probes reproduce all three statement helpers. Compare temporary scalar copies without changing the kept entries, uniqueness keys or typed selector classifier. The targeted native/fresh pipeline vector now passes numeric writes, null/empty-text and string0 controls while preserving existing pure/dynamic/statement cases. Broad recurrence remains separately deferred; resume helper inventory rather than expanding proof.

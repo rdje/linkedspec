@@ -11,10 +11,10 @@ answers:
   - "does items.join_values keep delimiter first"
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
-date: 2026-10-25
-status: pure chains current; Rust statement transforms5.3.1 targeted-checked; Dart/Julia pending
+date: 2026-10-26
+status: pure chains current; Rust/Dart/Julia statements5.3.1-.3 targeted-checked; broad recurrence deferred
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
-evidence: "Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust statement repair:5.3.1."
+evidence: "Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback"
 ---
 
@@ -39,4 +39,4 @@ mutate and return updated arrays; pop discards the removed element. See
 
 Historical hash sibling: `SPEC-FORMAT-TERSE.2.3.5.2`.
 
-Rust5.3.1 enrolls standalone split_each/filter_match/uniq in execute_array_string_transform_statement. Validate the array target, snapshot it, evaluate remaining operands once and reuse call_helper before rebinding. Existing wrong kinds fail; absent targets initialize. Pure value/receiver calls stay unchanged. Native/restored/generated-plan focused checks pass; Dart5.3.2, Julia5.3.3 and broad5.3.4 remain open.
+Rust5.3.1 enrolls standalone split_each/filter_match/uniq in execute_array_string_transform_statement. Validate the array target, snapshot it, evaluate remaining operands once and reuse call_helper before rebinding. Existing wrong kinds fail; absent targets initialize. Pure value/receiver calls stay unchanged. Rust/Dart/Julia5.3.1-.3 are implemented with focused native/restored/generated-plan checks. Broad5.3.4 remains deferred until feature coverage. The earlier pending Dart/Julia wording was stale, not an unimplemented feature.

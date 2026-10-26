@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.1.2.1 — index helper spellings and roles
+
+Add a source-linked helper spine separating primary resolver spellings, numeric/current aliases, source-boundary compatibility and reverse-check non-generic syntax diagnostics. Resolver families do not establish input types, receiver methods or semantic execution. Exact spelling/alias consistency and book/fast continuity checks pass, with no runtime census. Clarify the public signature/result distinction, correct the stale Dart/Julia pending fact and advance the precise signature/effect child frontier. No complete helper/API/parity admission; feature selection continues under1.2.1.2.2.
+
 ## FUTURE-PARITY-BACKLOG.5.4.4 — preserve standalone filter element kinds
 
 Standalone Perl uniq/filter_match/filter_nonempty compare scalar copies while retaining original entries, so selected numbers remain numeric array indices. Keep stable dedup keys, null/empty-text distinctions and existing writeback behavior. Separate public probes and the small native/fresh regression fail before repair and pass afterward, including numeric typed writes and saved/pure/dynamic controls. Module/test syntax, book and fast continuity/history checks pass. Current helper examples/fact/map/indexed/live handoff agree; helper selection resumes and broad suites stay deferred.
