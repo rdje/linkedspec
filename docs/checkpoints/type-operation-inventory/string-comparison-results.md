@@ -74,8 +74,18 @@ false/generic/bridges/scalar guards,12 malformed no-effects and existing
 23.3.12.3 adds six names to scalar/one-operand lists only. Free public producers
 return Bool for defined scalar comparisons and null when either operand is null;
 false/default texts remain0!/0!, with eager SO. This differs from Perl/Rust
-undef-as-empty compatibility: .dart.json pins null boundaries/null_effected.
+undef-as-empty compatibility: .null.json pins null boundaries/null_effected.
 Shared native/restored/plan and direct definedness pass after empty-Array scalar
 guard/24-effect RED. All six pairs, source families, false/generic/bridge/shape
 and existing1!/SOC/once-only/final-null snapshots pass. Producer/Unicode order
 unchanged; DART2.13 still owns its UTF-16 gap, full admission23.4 stays separate.
+
+## Bounded Julia counterparts
+
+23.3.12.4 adds six names to scalar/one-operand lists only. Public native/plan/fresh
+free controls independently confirm Bool/null propagation, empty/zero, false0!
+and eager SO. Shared .null.json agrees with Dart; explicit isa Bool checks
+reject numeric lookalikes. Twelve comparison and nine direct definedness
+assertions pass after three shared empty-Array/24-effect REDs. Six pairs, source
+families, scalar/bridge/shape and existing1!/SOC/once-only/final-null are retained;
+no producer/domain/numeric-alias change or full admission claim.

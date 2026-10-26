@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
+Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
 
 ## Latest Completed Slice
 
-Dart adds six comparison names to one-operand/scalar lists only. Free Bool/null/zero/text/default producers and eager SO are preserved. Native/restored/plan shared and direct definedness pass four targeted tests after empty-Array/24-effect RED; all six pairs, snapshots, scalar/shape guards and no-effects pass. Selected-file fatal analysis/formatting pass. Dart null golden and book/fact/current docs align; Unicode ordering DART2.13/full admission stay open. Julia4 next.
+Julia adds six comparison names to one-operand/scalar lists only. Independent native/plan/fresh producers preserve Bool/null/zero/text and eager SO; explicit isa Bool distinguishes numeric lookalikes. Shared receiver RED gives empty Arrays/24 effects; after repair twelve comparison and nine direct definedness assertions pass with strict compilation. Dart two comparison tests pass after .null.json shared golden rename. Book/fact/current docs align; Lua5 next, full admission separate.
 
 ## Next Action
 
-Independently assess Julia six str_* producers/kinds/null/scalar compatibility and ordinary receiver/result/source/shape behavior under23.3.12.4. Derive expectations from public existing producers; small native/restored/fresh/direct checks/docs/commit, then Lua5. Residual Dart mode assessment23.2.12 follows counterparts; full admission stays separate.
+Independently assess Lua six str_* producers/kinds/null/scalar compatibility and ordinary receiver/result/source/shape behavior under23.3.12.5. Use public native/plan/fresh and direct definedness checks on available PUC5.5.1/LuaJIT; never re-enter known malformed-pattern native crash. Small checks/docs/commit, then residual Dart regex-mode assessment23.2.12 before another family; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.12.4` — Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.2` — Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
@@ -29,7 +30,6 @@ Independently assess Julia six str_* producers/kinds/null/scalar compatibility a
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` — Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.2` — Rust predicate flow/literal flags pass focused checks; Dart assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` — Perl String predicate handoff passes native/fresh/direct checks; Rust assessment next.
 
 ## History
 

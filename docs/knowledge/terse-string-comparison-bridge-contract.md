@@ -11,17 +11,18 @@ answers:
   - "what is next after SPEC-FORMAT-TERSE.3.2.3.1"
   - "should docs use str_eq now"
 date: 2026-10-26
-status: Perl/Rust/Dart ordinary counterparts checked; other backends/full admission open
+status: Perl/Rust/Dart/Julia ordinary counterparts checked; other backends/full admission open
 tags: [spec-format-terse, comparisons, string-helpers, helper-aliases, task-tree, mdbook]
 evidence: "Historical bridge3.2.3.1/.2 and numeric migration3.2.3.3/.4; assessment TYPE23.2.11 and Perl23.3.12.1. Prior chronology at Gitd9d81fa9a491380ca6d7b2a24cca727c581399ba."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/string_comparison_result_receiver_contract.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test string_comparison_result_receivers"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/string_comparison_result_receivers_test.dart"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/string_comparison_result_receivers_test.jl\")'"
 ---
 
 str_eq/str_ne/str_gt/str_ge/str_lt/str_le compare lexical text; bare eq/ne/gt/ge/lt/le and symbols remain numeric. TYPE23.2.11 freezes one-RHS ordinary receivers. Prior full records: this path at Gita9f7b0bb766934ba25fe0c4cc106d5df2486fe7d and the earlier history above.
 
-Perl23.3.12.1 extends preflight/scalar registration; Rust2 adds String/scalar/preflight lists; Dart3 adds scalar/preflight lists. Producers stay Perl numeric1/0 versus Rust/Dart Bool. False renders0! and survives coalesce_nonempty. Perl/Rust retain undef-as-empty comparison (Perl legacy warnings); Dart propagates null operands. No portable null/Unicode-domain normalization; Dart UTF-16 gap stays DART2.13.
+Perl23.3.12.1 extends preflight/scalar registration; Rust2 adds String/scalar/preflight lists; Dart3/Julia4 add scalar/preflight lists. Producers stay Perl numeric1/0 versus Rust/Dart/Julia Bool. False renders0! and survives coalesce_nonempty. Perl/Rust retain undef-as-empty comparison (Perl legacy warnings); Dart/Julia propagate null operands. No portable null/Unicode-domain normalization; Dart UTF-16 gap stays DART2.13.
 
-Native/fresh Perl and native/restored/plan Rust/Dart shared plus direct definedness checks pass after raw/compile, receiver-null or empty-Array/24-effect RED. Six pairs/raw kinds, null/empty/zero twins, source families, false/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null pass. Producers/snapshots already worked. Contract/probe: string-comparison-results.md/probe_string_comparison_results.pl; .perl.json numeric, .json Bool, .dart.json null-boundary variant. Full admission23.4/Perl selection23.4.1 remain open.
+Native/fresh Perl and native/restored/plan Rust/Dart/Julia shared plus direct definedness checks pass after raw/compile, receiver-null or empty-Array/24-effect RED. Six pairs/raw kinds, null/empty/zero twins, source families, false/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null pass. Producers/snapshots already worked; Julia checks raw isa Bool. Contract/probe: string-comparison-results.md/probe_string_comparison_results.pl; .perl.json numeric, .json Bool, .null.json Dart/Julia null-boundary variant. Full admission23.4/Perl selection23.4.1 remain open.

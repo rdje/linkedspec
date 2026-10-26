@@ -823,7 +823,7 @@ endif()
 
 These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, and many can be assigned or returned. Ordinary Perl definedness receivers now continue: `"abc".is_defined().cat("!")` returns `"1!"`; `[].first().is_defined().coalesce_nonempty("late").cat("!")` returns `"late!"` because its existing false result is empty text. Rust/Dart/Julia/Lua support this bounded family with Boolean results (Lua: PUC5.5.1/LuaJIT; declared5.4 proof remains separate): `[].first().is_defined().coalesce_nonempty("late").cat("!")` retains `"0!"`; `false.is_defined()` and `undef.is_undefined()` return true. Empty text/Array/Hash, false and zero themselves are defined; these predicates test null rather than emptiness.
 
-| Helper | Meaning; Perl/Rust/Dart receiver examples with `word="abc"` |
+| Helper | Meaning; Perl/Rust/Dart/Julia receiver examples with `word="abc"` |
 | --- | --- |
 | `str_eq(lhs, rhs)` | string equality; `word.str_eq("abc").cat("!")` → `"1!"`; `word.str_eq("z").cat("!")` → `"0!"`. |
 | `str_ne(lhs, rhs)` | string inequality; `word.str_ne("z").cat("!")` → `"1!"`; `word.str_ne("abc").cat("!")` → `"0!"`. |
@@ -858,7 +858,7 @@ Compatibility bridge status:
   preferred for lexical text comparisons.
 - The bare helpers `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are numeric comparison aliases. They are no longer
   lexical string comparisons.
-- The `str_*` names are not numeric helpers or comparison-symbol calls. Current Perl/Rust/Dart free/nested and ordinary receiver counterparts work: `cat(str_eq("a","a"),"!")` and `"a".str_eq("a").cat("!")` both return `"1!"`. All six methods take one operand before effects; compatible scalar/generic consumers see the comparison result. `"a".str_eq("a").cat(",x").split(",").last().uppercase()` bridges to Array and returns `"X"`; container-only consumers directly after a comparison return undef. Other-backend/full admission remains separate. False renders `"0!"` and remains present through `coalesce_nonempty`. Perl/Rust currently compare undef as empty text; preserve this compatibility without inferring a portable null domain. Dart propagates null operands instead; its tracked UTF-16 ordering limitation is unchanged.
+- The `str_*` names are not numeric helpers or comparison-symbol calls. Current Perl/Rust/Dart/Julia free/nested and ordinary receiver counterparts work: `cat(str_eq("a","a"),"!")` and `"a".str_eq("a").cat("!")` both return `"1!"`. All six methods take one operand before effects; compatible scalar/generic consumers see the comparison result. `"a".str_eq("a").cat(",x").split(",").last().uppercase()` bridges to Array and returns `"X"`; container-only consumers directly after a comparison return undef. Other-backend/full admission remains separate. False renders `"0!"` and remains present through `coalesce_nonempty`. Perl/Rust currently compare undef as empty text; preserve this compatibility without inferring a portable null domain. Dart/Julia propagate null operands instead; Dart’s tracked UTF-16 ordering limitation is unchanged.
 
 ## Numeric value helpers
 

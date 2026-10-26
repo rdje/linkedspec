@@ -5883,6 +5883,7 @@ function _evaluate_runtime_fluent_chain!(
         helper_name = canonical_action_helper_name(call.method)
         if helper_name in (
             "join_values", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
+            "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
         ) && length(call.args) != 1
             return nothing
         end
@@ -5917,6 +5918,7 @@ function _evaluate_runtime_fluent_chain!(
         may_produce_scalar = helper_name in (
             "coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
+            "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
         ) ||
             (value isa AbstractVector && helper_name in (
                 "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",

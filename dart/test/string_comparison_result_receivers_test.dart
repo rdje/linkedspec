@@ -64,7 +64,7 @@ void main() {
     assertConsumers(
       fixture('string_comparison_result_receiver_values', 'spec'),
       jsonDecode(
-        fixture('string_comparison_result_receiver_values', 'dart.json'),
+        fixture('string_comparison_result_receiver_values', 'null.json'),
       ),
     );
   });
