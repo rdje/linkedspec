@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.3 — bounded aggregate result flow
+
+Public Perl fluent/nested pairs yield [null,13,null,5,null,5,null,5,null,3,null,7] without last_error; substitution emits return undef. Ordinary preflight and array terminal classification stop existing numeric results. Freeze compatible pure continuations while preserving zero-extra aggregates, scalar min/max overloads, selected kinds, order/snapshots and separately owned reducer-kind95/deferred scope. Retain the public diagnostic, update the reducer fact with exact historical Git recovery and correct missed Count/Length book summary rows. No production change; Perl23.3.4.1 follows before individual backend assessment and eventual full admission.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.5 — remove only numeric producer endpoints
 
 Shared Lua already continues Count results correctly. evaluate_fluent_calls stops Length through TERMINAL_STRING_HELPERS and key-count through an explicit hash fence; remove those two restrictions and extend evaluate_expr zero-extra preflight to all three producers. Keep predicates, reducers, Count source domain and existing per-value dispatch unchanged. Public/fixture RED precedes small native/generated-plan/fresh-emitted and direct selected-value GREEN on available PUC5.5.1/LuaJIT with matching native products. Runner/interpreter loadfile checks pass; contract/book/facts/task/live records align. Bounded Count/Length rollout is targeted-checked; declared5.4/full admission stays separate and aggregate numeric result flow is the next feature assessment.

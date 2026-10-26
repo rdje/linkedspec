@@ -666,11 +666,11 @@ dispatch rule.
 - **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
-- **Allowed terminal links**: `count`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
+- **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Other terminal links include `contains`, `index_of`, `is_empty`, `is_nonempty`,
   `join_values`, `sum`, `avg`, `median`, `range`, `min`, and `max`. Receiver-dot
   `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
   `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
-  array-consuming terminal links over the same numeric aggregate helper family.
+  array-consuming links over the same numeric aggregate helpers. Their compatible numeric-result continuations are the next implementation target; current Perl still stops `scores.sum().add(1)` at null, while `num_add(num_sum(scores),1)` works.
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
   string being split. Numeric reducer terminals do not continue through later array methods; compose the helper
   form explicitly when another numeric operation is needed. Named end mutations (`push_back`, `push_front`,
@@ -1036,7 +1036,7 @@ dispatch rule.
   `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
-  compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
+  compatible array receiver helpers. `count_keys` feeds scalar/number methods; `has_key` retains its boolean endpoint.
   Field reads from a named working hash use `name.pick_keys(key).sorted_values().first()` after storing
   expression receivers in a named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref
   payloads, not working-hash value reads.
@@ -1221,7 +1221,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
   See the [complete six-reducer example](../dsl/value-container-flow-helper-reference.md#numeric-reducers-consume-array-values), including empty arrays and receiver form.
 - **Signature**: `num_sum(arr: array)`
 - **Returns**: numeric
-- **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources.
+- **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources. Numeric-result continuation target: `[2,4,6].sum().add(1)` → `13`; current Perl requires `num_add(num_sum([2,4,6]),1)`. The same target applies to avg/median/range/array min/max, preserving their input and empty policies.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -1901,14 +1901,14 @@ Receiver-dot methods are available for the value families that have a typed rece
 
 - **String/scalar** receivers support pure string links such as `trim`, `lowercase`, `uppercase`,
   `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`; `split(delim)`
-  bridges to array chains; `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` are terminal.
+  bridges to array chains; `length` feeds scalar/number methods. `starts_with`, `ends_with`, `contains_substr`, and `matches` retain their predicate endpoints.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
-  `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
-  links include `count`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
+  `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Count/Length results feed compatible scalar/number methods. Terminal
+  links include `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
   `sum`, `avg`, `median`, `range`, `min`, and `max`. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
-  and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
+  feeds compatible scalar/number methods; `has_key` retains its endpoint. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
   `reduce_leaves` are immediate block-bearing links with their own scoped callback bindings.
 - **Array-tree traversal** uses the same block-bearing receiver method names on array-valued receivers, with
   Perl reference support from `SPEC-FORMAT-TERSE.13.2`, Rust/oracle parity from `SPEC-FORMAT-TERSE.13.3`, and

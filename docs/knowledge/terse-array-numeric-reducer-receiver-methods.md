@@ -8,51 +8,22 @@ answers:
   - "does scores.range() work"
   - "does scores.min() work on arrays"
   - "does scores.max() work on arrays"
+  - "what contract lets numeric reducer results feed scalar methods"
   - "are array numeric reducers terminal receiver methods"
   - "are sum and avg number receiver methods"
   - "what did SPEC-FORMAT-TERSE.7.3 backfill"
   - "which task follows SPEC-FORMAT-TERSE.7.3"
-date: 2026-09-07
-status: current
+date: 2026-10-26
+status: ordinary result contract frozen; Perl implementation next
 tags: [spec-format-terse, method-chaining, receiver-dot, array, number, reducers, actionir, rust-parity, oracle, mdbook]
-evidence: "SPEC-FORMAT-TERSE.7.3 backfilled numeric aggregate reducers as pure terminal methods on array/list receivers: `scores.sum()`, `scores.avg()`, `scores.median()`, `scores.range()`, `scores.min()`, and `scores.max()`. Perl lowers them through the existing numeric aggregate helper family, including sorted/take/uniq array-chain inputs. Rust accepts the same receiver methods and also supports the documented single-array `num_min(array_expr)` / `num_max(array_expr)` and word-alias `min(array_expr)` / `max(array_expr)` forms. Reducer receiver methods are terminal; invalid continuations such as `scores.sum().drop_front(1)` return `undef` / JSON `null`. Scalar number receiver methods remain the `.2.3.5.4` `num_*` first-argument family, so reducers are not scalar number receiver links. Hash receiver methods from `.7.1` already covered the useful pure hash surface; mutating/ambiguous helpers remain explicit statement/function forms. Locked by Perl phase0, Rust integration tests, oracle fixture `terse_7_3_array_numeric_reducer_receiver_methods`, mdBook examples, and KM regeneration."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_7_3 --quiet && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
+evidence: "Historical reducer7.3; contract TYPE23.2.3 distinguishes six stopped Perl chains from working nested controls."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_reducer_results.pl"
 ---
 
-`SPEC-FORMAT-TERSE.7.3` is the array/list backfill for numeric aggregate receiver methods.
+Historical7.3 adds array sum/avg/median/range/min/max receiver forms after compatible array pipelines, with blanket terminal policy. Exact historical evidence and broad replay commands remain in this card at Git80d9809216282d1f077e1eac1b302cd608f75ae9; do not replay them for ordinary feature work.
 
-Accepted terminal array receiver reducers:
+TYPE23.2.3 freezes ordinary reducer results feeding existing compatible scalar/number methods. Public Perl Get returns [null,13,null,5,null,5,null,5,null,3,null,7] for six fluent/nested addition pairs; substitution emits return undef. MethodLowering preflight and array return-family classification stop the results. Perl implementation23.3.4.1 follows. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md.
 
-- `scores.sum()` -> `num_sum(scores)`
-- `scores.avg()` -> `num_avg(scores)`
-- `scores.median()` -> `num_median(scores)`
-- `scores.range()` -> `num_range(scores)`
-- `scores.min()` -> array-form `num_min(scores)`
-- `scores.max()` -> array-form `num_max(scores)`
+Preserve zero-extra aggregate forms and scalar min/max overloads, actual values, source/operand order and snapshots. No scalar sum, new source domain, callback/deferred or complete admission is implied. Older incompatible array-consumer controls remain invalid by their helper domains. Ordinary Count/Length already continues under23.3.3; only earlier blanket terminal policy for compatible reducer consumers is advanced here.
 
-They compose after array-returning receiver links:
-
-```text
-scores.sorted().take(3).avg()
-scores.uniq().sum()
-```
-
-They are terminal receiver values. `scores.sum().drop_front(1)` and `scores.min().sorted()` return
-`undef` / JSON `null` rather than generating host-language receiver residue.
-
-This does not add scalar number receiver reducer links. Number receivers still use the first-argument numeric
-helper family (`score.abs().ceil().add(2)`, `score.min(3)`, etc.). Hash receiver methods from the `.7.1`
-inventory did not need additional backfill in this slice; mutating or ambiguous helpers stay explicit.
-
-The follow-up `SPEC-FORMAT-TERSE.7.4` sweep and `TRACE-OBSERVABILITY.4.5`
-are historical closures. Current work is selected from the active task-tree index.
-
-September Rust reading `SESSION-STARTUP-READING.3.3.21` completes these helper arms:
-num_min/max require every array item to pass scalar_numeric_value; sum/avg/median/
-range instead filter through generic as_number and return undef when no numbers
-remain. This records distinct current consumption paths, not a claim that all
-reducers share the scalar-numeric contract. The dated integration/corpus proof
-above is not rerun. Array-chain slicing also has an independent bounds defect:
-[[rust-array-slice-boundary-panics]], owned by startup `.60`.
-
-Those filtering paths describe Rust. Perl retains an all-terms decimal-spelling check; see [[terse-type-method-surface-inventory]].
+Rust September reading3.3.21 distinguishes min/max scalar_numeric_value validation from sum/avg/median/range generic as_number filtering; Perl checks all decimal spellings. Selected numeric-string result kinds/Boolean inputs remain [[perl-numeric-reducer-string-result-kinds]], startup95. [[rust-array-slice-boundary-panics]] retains source slicing repair60. No such repair is claimed by result continuation.

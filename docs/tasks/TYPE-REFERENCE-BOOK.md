@@ -965,13 +965,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.3`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `80d9809216282d1f077e1eac1b302cd608f75ae9`.
   Goal: Publicly assess and freeze bounded ordinary aggregate numeric reducer result continuations.
   Dependencies: .23.3.3.5.
-  Owned paths: type-operation-inventory contract, helper/numeric reference, canonical reducer facts/map and task/live records; no production edit in this assessment leaf.
-  Planned tier: `focused`; declare exact small proof at activation.
-  Claim verification: none: Unactivated normative feature assessment; no completeness/parity measurement.
+  Owned paths: type-operation-inventory contract/public diagnostic probe, helper/numeric reference including stale Count/Length family summaries, canonical reducer facts/map and task/live records; no production edit in this assessment leaf.
+  Verification tier: `focused`
+  Focused checks: Existing six reducer/public helper contracts, public Perl Get/substitution distinguishing fluent/nested results, book build and fast continuity/history/diff guards; no runtime census or full replay.
+  Canonical trigger: None for bounded normative freeze under director feature-first phase; implementation per backend and complete portable/public admission remain separate.
+  Claim verification: none: Normative bounded result contract and qualitative public observations; no quantified corpus, completeness or portable admission measurement.
   Acceptance: Read existing six aggregate helper domains and callable boundaries, compare reducer-result fluent arithmetic/string methods with nested public Perl controls, and isolate any actual gap before choosing code. Preserve min/max array/scalar overloads, null/error/source rules, argument order, copy and deferred boundaries. Freeze only meaningful existing pure consumer transitions, supersede old terminal policy explicitly, then schedule per-backend implementation children. Keep broad signatures/matrices/admission separate.
+  Documentation defect / ownership: Helper catalog Array/Hash and Receiver-Dot Method Families summaries still classify ordinary count/count_keys/length as terminal despite23.3.3 implementations and corrected individual entries. Reconcile only those stale summaries to current public examples in this leaf; preserve unrelated predicate/control policies.
+  Public finding: Six fluent/nested addition pairs return [null,13,null,5,null,5,null,5,null,3,null,7] with no last_error; substitution emits return undef for sum-result addition. Retained public diagnostic probe reproduces the same distinction.
+  Completion: aggregate-numeric-results.md freezes ordinary pure reducer-result continuations, preserving existing source/result/overload/deferred boundaries and reducer-kind owner95. Schedule Perl23.3.4.1 first; independently assess later backends. Reconcile stale Count/Length summary rows to completed23.3.3 without changing unrelated endpoint policy.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/substitution and retained diagnostic distinguish six stopped fluent results from working nested helpers. Catalog family summaries contradict current Count/Length entries and targeted-checked implementations.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering's ordinary reducer preflight rejects nonfinal calls and array return-family defaults to terminal. Old book summary classifications were not advanced with individual Count/Length entries.
+  - [x] FIX: Freeze the bounded reducer-result contract before production edits, explicitly supersede compatible ordinary terminal policy and schedule per-backend implementation; correct existing Count/Length summaries.
+  - [x] ADDRESSED (verified): Retained public probe agrees with observed activation values; helper/overload/source-kind authorities and worked normative examples agree. Book and fast continuity/history/diff checks pass.
+  - [x] NO REGRESSION: No production/schema/type change, blanket input normalization or new callback/deferred admission. Existing reducer-kind95 and comprehensive matrices/admission remain separately owned.
+  - [x] LOCKSTEP: New contract/retained diagnostic, current helper reference, bounded reducer fact/map and task/live frontier identify the same next Perl slice and limitations.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.3 - define aggregate numeric result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -1377,6 +1391,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Public examples/contract, Lua/central facts/map, tasks/live records, book and fast continuity/history/diff checks align. Next source-backed feature selection is aggregate numeric result flow23.2.3, before exhaustive signatures/matrices.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
+  Status: `pending`
+  Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
+  Dependencies: .23.2.3.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`; assess later backends individually after clean implementation commits.
+  Planned tier: Focused bounded children; complete context/portable admission remains23.4.
+  Claim verification: none: Unactivated implementation family; no support/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`
+  Status: `pending`
+  Goal: Continue ordinary Perl six aggregate reducer results through existing compatible pure scalar/number methods.
+  Dependencies: .23.2.3.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm, small native/fresh regression and suite registration, helper reference/reducer fact/map/task/live records.
+  Planned tier: `focused`; module/test compilation and small direct consumer checks before commit.
+  Claim verification: none: Unactivated bounded implementation; declare deterministic proof at activation.
+  Acceptance: Preserve zero-extra aggregate arity and scalar min/max overloads, actual source/results, null/error/empty policy, once-only ordered operands and mutation snapshots. Supersede only compatible ordinary reducer terminal controls, keep deferred and reducer-kind95 policies separately owned, and use small native/fresh plus direct Count/Length checks. Commit before assessing Rust; no full replay.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -1459,7 +1490,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.3` | `pending` | Assess/freeze aggregate numeric reducer result flow after bounded Count/Length rollout; preserve existing helper/overload/context domains. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` | `pending` | Implement frozen ordinary aggregate numeric result flow on Perl, preserving source/overload/context domains. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
