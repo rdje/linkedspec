@@ -109,3 +109,9 @@ producer guards and repairs count's documented array-only domain. Public probes
 and retained native/restored/generated-plan plus direct selected-value checks
 pass after arity/domain RED; changed-file analysis passes. Length's Unicode and
 existing source domains remain unchanged. Julia/Lua still require assessment.
+
+Julia `.23.3.3.4` likewise preserves existing flow, guards extra producer operands
+and repairs array-only count without changing Length. Native/generated-plan/
+fresh-emitted and direct selected-value checks pass after actual arity/domain
+RED, including a Julia1.12 strict world-age check for the focused harnesses.
+Shared Lua remains unassessed; no broad or portable admission is claimed.

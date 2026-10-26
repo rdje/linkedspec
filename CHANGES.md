@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.3.4 — guard Julia count and length producers
+
+Preserve existing result flow, reject extra count/count_keys/length receiver operands before effects and restore count’s array-only domain. Small native/generated-plan/fresh-emitted and direct selected-value tests pass after public/retained arity/domain RED; package compilation and strict Julia1.12 focused harness checks pass. General Length, Unicode, order and snapshots stay intact. Register regression, synchronize book/facts/current records; shared Lua assessment is next and broad admission stays open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.3.3 — guard Dart count and length producers
 
 Preserve correct numeric result continuations; reject extra count/count_keys/length receiver operands before effects and restore count’s documented array-only domain. Public probes and retained native/restored/generated-plan fixture show arity/domain RED before repair and GREEN afterward, with direct selected-value tests, changed-file fatal analysis/format, book and fast continuity checks passing. Source/argument order, snapshots and Unicode length stay intact. Julia assessment is next; broad admission remains open.

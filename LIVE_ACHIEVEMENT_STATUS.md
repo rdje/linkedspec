@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust/Dart count/count_keys/length result implementations are targeted-checked. Julia23.3.3.4 starts with public probes next, then Lua individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Perl/Rust/Dart/Julia count/count_keys/length result implementations are targeted-checked. Shared Lua23.3.3.5 starts with public probes next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Dart valid count/length chains already work. Extend zero-extra producer preflight and restore count's documented array-only domain after public/retained arity/domain RED. Small native/restored/generated-plan and direct selected-value tests, fatal analysis/format, book and fast continuity checks pass, including actual values, Unicode length, SALHK order, snapshots and zero invalid effects. Contract/fact/map/task/live records align.
+Julia preserves already-correct result dispatch, guards extra count/count_keys/length operands and restores count's array-only domain after public/retained RED. Small native/generated-plan/fresh-emitted and direct selected-value tests pass, including Unicode, SALHK effects, snapshots and zero invalid effects. Package compilation and strict Julia1.12 focused harness checks pass. Public/canonical/task/live records agree.
 
 ## Next Action
 
-Probe Julia valid count/length result chains and invalid producer shapes independently; preserve correct existing behavior and repair observed gaps with a small native/generated-plan/fresh-emitted fixture and package compilation. Commit before Lua; no broad suite or historical replay.
+Probe shared Lua valid count/length chains and invalid producer shapes independently. Preserve correct behavior and repair observed gaps with small native/generated-plan/fresh-emitted/direct checks on available PUC5.5.1/LuaJIT. Keep declared5.4 proof separately owned; commit before selecting the next feature.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
@@ -29,7 +30,6 @@ Probe Julia valid count/length result chains and invalid producer shapes indepen
 - `SESSION-STARTUP-READING.61.2` — Rust null operand/predicate guards and original-value empty replacement/removal; public Perl and focused native/restored/generated-plan controls pass.
 - `SESSION-STARTUP-READING.61.1` — Rust scalar source-null propagation, defined controls and eager order; focused native/restored/generated-plan and selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` — existing Julia selected values confirmed; extraction arity guard, package/native/generated/emitted and transform checks pass; Lua next.
 
 ## History
 

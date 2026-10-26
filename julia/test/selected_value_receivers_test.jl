@@ -33,5 +33,5 @@ Top::
     host = Module(gensym(:SelectedValueGenerated))
     Base.include_string(host, emit_julia_source_v2(compiled, "selected-value-receivers.spec"))
     parser = Base.invokelatest(getfield, host, :LinkedSpecGeneratedParser)
-    @test Base.invokelatest(getfield(parser, :execute), "x") == expected
+    @test Base.invokelatest(Base.invokelatest(getfield, parser, :execute), "x") == expected
 end

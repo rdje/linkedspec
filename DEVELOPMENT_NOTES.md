@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.4 — narrow count without changing length
+
+Julia already dispatches numeric producer results by actual value. Chain preflight omitted zero-extra count/count_keys/length and count reused wider _runtime_value_length. Public/retained RED distinguishes both defects; guard extras and use AbstractVector length only. Native/generated-plan/fresh-emitted and direct selected-value checks pass, preserving Unicode, SALHK order and snapshots. The focused emitted harnesses now fetch execute through invokelatest to satisfy Julia1.12 strict world-age checks. Register the new test, align public/canonical/current records and independently assess Lua next. Full context/portable admission remains separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.3 — keep count distinct from length
 
 Dart already dispatches valid producer results by actual value. Its fluent preflight omitted count/count_keys/length, so ignored extras ran effects; add those zero-extra methods. _callArrayHelper count also reused general _lengthValue, giving string/hash/scalar counts instead of the documented zero. Public Dart/Perl controls and retained RED distinguish the domain defect; use List length only without changing Length. Small native/restored/generated-plan and direct selected-value tests, fatal analysis and format pass. Contract/book/fact/map/task/live records align; Julia starts independently next, with full admission deferred.

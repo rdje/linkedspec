@@ -1253,7 +1253,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `active` / count and length result rollout
   Goal: Implement the frozen count/count_keys/length result contract on ordinary backends, preserving correct existing behavior.
   Dependencies: .23.2.2.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`; assess later backends individually after each clean implementation commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.5`; assess later backends individually after each clean implementation commit.
   Schedule: Feature/compile/quick-check/docs/commit per backend; full signatures/matrix/admission stays open and deferred.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`
@@ -1321,13 +1321,37 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.3 - guard Dart count and length producers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `bc7ae21edd999bee8217ce35b6fa990512d70633`.
   Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on Julia.
   Dependencies: .23.3.3.3.
   Owned paths: julia public runtime, small count/length receiver test and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Julia value/arity probes, small native/generated-plan/fresh-emitted count/length and direct selected-value tests, package compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen feature implementation/confirmation under director feature-first cadence; full context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public reproduction / owned defects: Valid producer pairs return [5,5,6,6,5,5]; count(extra) returns1 with two effects. Retained native/generated-plan/fresh-emitted RED confirms all three invalid producers return2 with six effects, and non-array count returns [2,1,1,1,0,2] instead of documented/public Perl [0,0,0,0,0,2]. Chain preflight omits producers; array count delegates to wider _runtime_value_length. Both bounded defects are owned and repaired in this leaf.
+  Focused harness repair: Julia1.12 warns when the emitted parser execute binding is fetched outside invokelatest. Resolve that binding through invokelatest in the new/direct selected-value fixtures; verify both with --depwarn=error. Broader old fixture compatibility remains part of23.4 admission.
+  Acceptance: Preserve correct existing value dispatch, probe valid chains and zero-extra shape/effect boundaries publicly, and repair only observed defects. Use a small native/generated-plan/fresh-emitted fixture plus direct selected-value checks, package compilation and docs; commit before Lua. Full context/portable admission stays separate.
+
+  Completion: Preserve existing value continuations, extend producer arity preflight and restrict count to AbstractVectors; leave general length unchanged. Register the focused test and fetch fresh emitted execute bindings through invokelatest in new/direct fixtures.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public valid pairs pass, but count(extra) returns1/two effects. Native/generated-plan/fresh-emitted fixture RED confirms ignored extras/six effects and non-array count [2,1,1,1,0,2] beside the documented/public Perl oracle.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! omits count/count_keys/length from zero-extra validation; _call_runtime_array_helper count reuses wider _runtime_value_length. Julia1.12 separately diagnoses fresh emitted binding access outside invokelatest in the focused harnesses.
+  - [x] FIX: Guard producer extras before source/operand evaluation, count only AbstractVectors and preserve existing dynamic dispatch/Length. Fetch emitted execute bindings through invokelatest in both focused fixtures.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted count/length and array-domain checks PASS after RED, retaining direct/selected/pipeline/function values, Unicode, SALHK effects, snapshots, nulls and zero invalid effects.
+  - [x] NO REGRESSION: Package compilation and direct selected-value checks PASS; strict --depwarn=error rerun passes. Broader old harness compatibility and full portable admission remain23.4.
+  - [x] LOCKSTEP: Public examples/contract, Julia/central fact/map, task/live records, book and fast continuity/history/diff checks align.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.4 - guard Julia count and length producers`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on shared Lua.
+  Dependencies: .23.3.3.4.
+  Owned paths: lua public interpreter, small count/length receiver test and synchronized book/fact/task/live records.
   Planned tier: `focused`; assess actual changed surfaces at activation.
   Claim verification: none: Unactivated bounded implementation assessment; declare focused evidence at activation.
-  Acceptance: Preserve correct existing value dispatch, probe valid chains and zero-extra shape/effect boundaries publicly, and repair only observed defects. Use a small native/generated-plan/fresh-emitted fixture plus direct selected-value checks, package compilation and docs; commit before Lua. Full context/portable admission stays separate.
+  Acceptance: Preserve correct value dispatch, probe valid chains and zero-extra shape/effect boundaries through the public runtime, and repair only observed defects. Use small native/generated-plan/fresh-emitted and direct selected-value checks on available PUC5.5.1/LuaJIT with matching native products. Keep declared5.4 proof with LUA-STARTUP-READING.2.2 and full context/portable admission with23.4; commit before selecting the next feature.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1407,11 +1431,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; Perl23.3.3.1 is implemented/targeted-checked and Rust23.3.3.2 is implemented/targeted-checked and Dart23.3.3.3 is implemented/targeted-checked; Julia23.3.3.4 assessment is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; Perl23.3.3.1 is implemented/targeted-checked and Rust23.3.3.2 is implemented/targeted-checked and Dart23.3.3.3 is implemented/targeted-checked; Julia23.3.3.4 is implemented/targeted-checked; Lua23.3.3.5 assessment is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` | `pending` | Publicly assess/implement Julia count/count_keys/length result continuations after targeted-checked Perl/Rust/Dart slices. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` | `pending` | Publicly assess/implement shared Lua count/count_keys/length result continuations after targeted-checked Perl/Rust/Dart/Julia slices. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

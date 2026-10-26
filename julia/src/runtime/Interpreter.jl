@@ -5877,11 +5877,12 @@ function _evaluate_runtime_fluent_chain!(
     current_edge,
     statement_context::Bool,
 )
-    # Extraction and copy take no method arguments. Reject before receiver or operand
-    # effects while retaining the existing dynamic result-value loop.
+    # Extraction, copy and count/length take no method arguments. Reject before
+    # receiver or operand effects; retain the dynamic result-value loop.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
-        if helper_name in ("first", "last", "copy") && !isempty(call.args)
+        if helper_name in ("first", "last", "copy", "count", "count_keys", "length") &&
+           !isempty(call.args)
             return nothing
         end
     end
@@ -6706,7 +6707,8 @@ function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "contains"
         return _call_runtime_array_contains(values)
     elseif helper_name == "count"
-        return something(_runtime_value_length(isempty(values) ? nothing : first(values)), 0)
+        value = isempty(values) ? nothing : first(values)
+        return value isa AbstractVector ? length(value) : 0
     elseif helper_name == "drop_back"
         return _call_runtime_array_drop(values, false)
     elseif helper_name == "drop_front"
