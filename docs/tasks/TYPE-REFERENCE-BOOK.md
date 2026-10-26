@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -1039,6 +1039,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Probe syntax, book rendering and fast continuity/history/diff checks pass. No exhaustive suite, other-backend failure, full signature/portable or final admission claim.
   - [x] LOCKSTEP: Contract/probes, qualified catalog, canonical default fact/map and live/task/resume records align. Next23.3.6.1.1 after clean commit; literal repair scheduled next, not merely reported.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.5 - freeze selected default result flow`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.6`
+  Status: `pending`
+  Goal: Assess ordinary index_of integer/null results continuing through compatible scalar/numeric methods.
+  Dependencies: .23.3.6.5.
+  Schedule: Next bounded producer-result feature after default rollout, before exhaustive signature/matrix work.
+  Existing authority: Catalog index_of(arr,needle) returns the first matching zero-based index, including numeric0, or undef for missing/non-array/no-match. Do not invent -1 sentinel behavior or change equality/domain policies.
+  Public reproduction target: Compare ["a","b"].index_of("b").add(1) with num_add(index_of(["a","b"],"b"),1); include zero/empty/no-match/null, scalar boundaries and source/needle/consumer effects. Read actual public results before classifying a backend gap.
+  Owned paths: Bounded result contract/public probes, current array/index facts and task/live planning; production children only after findings.
+  Planned tier: `focused` under director feature-first cadence; exact checks declared at clean activation.
+  Claim verification: none: unactivated qualitative transition assessment, no support/completeness measurement.
+  Acceptance: Freeze a bounded actual-result transition if needed, preserve existing helper/needle/source/snapshot/once-only/arity/null policies, schedule backend repairs and commit. Full domain/portable admission remains23.4.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -1694,7 +1706,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5 - continue Lua joined String results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6`
-  Status: `active` / bounded Perl repairs targeted-checked; backend assessments remain
+  Status: `active` / bounded default rollout targeted-checked on recorded hosts; full admission open
   Goal: Implement/confirm bounded actual-kind default-selection continuations across maintained backends.
   Dependencies: .23.2.5.
   Children: `.23.3.6.1`, `.23.3.6.2`, `.23.3.6.3`, `.23.3.6.4`, `.23.3.6.5`.
@@ -1826,12 +1838,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.4 - guard Julia scalar default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Publicly assess and implement/confirm ordinary Lua default-selection result flow.
   Dependencies: .23.3.6.4.
   Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic regression, no measured admission.
+  Activation: clean `e8bd3f389fe1ceb79c43d9fd702fa19a68865dfa`; Julia committed, brief empty, tree clean.
+  Owned paths: Shared Lua fluent dispatcher only for confirmed gaps, focused native/generated-plan/fresh-emitted fixture and runner registration, direct joined compatibility and public/current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/generated-plan/fresh-emitted shared selected-default and direct Scalar controls, existing default-receiver fixture plus direct joined test on available PUC5.5.1/LuaJIT with matching products, loadfile, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; declared5.4/full domain/portable admission23.4 and eventual clean push remain separate.
+  Claim verification: none: deterministic authored value/order regression; no quantified corpus or portable measurement.
+  Public findings / owned repair: Shared actual Array/Hash selections pass on native/generated-plan/fresh-emitted routes on both available hosts. Direct retained/fallback String sorted/sorted_values returns [] instead of null on native controls. evaluate_fluent_calls handles lazy coalesce without activating scalar_result; set the existing guard for nonempty selection and let the existing actual array/harray result check release it.
+
+  Completion: Preserve correct actual container flow and activate scalar_result after nonempty selection; the existing array/harray result-kind check releases it for actual containers. Keep lazy/copy/helper semantics unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared Array/Hash selections already pass; direct retained/fallback String sorted/sorted_values independently RED as [] instead of null on both available hosts.
+  - [x] ROOT CAUSE (WHY + WHERE): typed_source.receiver_mutation.evaluate_fluent_calls handles coalesce selection without activating scalar_result. Its existing result-kind check can already release that guard for actual array/harray output.
+  - [x] FIX: Activate the existing guard for coalesce_nonempty and preserve the shared actual-kind release. Generic coalesce/deferred/helper policies remain unchanged.
+  - [x] ADDRESSED (verified): Focused native/generated-plan/fresh-emitted default fixture PASS after boundary RED on available PUC5.5.1/LuaJIT, including direct scalar nulls, actual Array/Hash, empty/null/zero/false, lazy skipped arms and SDJ snapshots.
+  - [x] NO REGRESSION: Existing default receiver fixture, direct joined fixture and interpreter/runner loadfile checks PASS on both hosts with matching native products. No broad suite, source normalization, declared5.4 or full admission claim.
+  - [x] LOCKSTEP: Register fixture, align contract/catalog/default and Lua facts/map plus live/task/resume records; book and fast memory/cadence/diagnosis/history/diff checks pass. Bounded default rollout targeted-checked; index_of result assessment23.2.6 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.5 - guard Lua scalar default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1911,11 +1938,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 and Julia4 scalar-default boundaries are repaired/targeted-checked too; Lua5 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Bounded index_of result assessment23.2.6 is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` | `pending` | Assess/implement Lua selected-default flow on available hosts; declared5.4/full proof stays separate. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.6` | `pending` | Assess index_of integer/null result continuation after bounded default rollout; full domain/portable proof deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

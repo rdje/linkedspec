@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.5 — guard actual scalar selections
+
+Lua preserves correct selected Array/Hash default flow and activates scalar guarding after nonempty selection, releasing it for actual array/harray output. Direct retained/fallback scalars now reject container-only consumers with null after [] RED. Small native/generated-plan/fresh-emitted default and existing receiver/join checks pass on available PUC5.5.1/LuaJIT, retaining lazy SDJ snapshots, empty/null/zero/false and copy policies. Loadfile/book/fast continuity checks pass. Bounded default rollout is targeted-checked on recorded hosts; index_of result assessment23.2.6 is next, declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.4 — keep actual scalar default boundaries
 
 Julia retains correct selected Array/Hash default flow and adds direct nonempty scalar guarding until actual AbstractVector/AbstractDict output. Retained/fallback scalars reject container-only consumers with null instead of empty Arrays. Small strict native/generated-plan/fresh-emitted default and existing receiver/join checks pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy policies. Package compilation, book and fast continuity checks pass. Lua assessment5 is next; declared5.4/full domain/admission remain separate.

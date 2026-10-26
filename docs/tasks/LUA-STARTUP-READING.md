@@ -2298,7 +2298,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` | `pending` | Assess Lua selected defaults on available hosts; declared5.4/full domain admission stays separate. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.6` | `pending` | Assess index_of integer/null result continuation; bounded defaults checked, declared5.4/full admission separate. |
 
 The earlier integration-guide frontier is historical and byte-recoverable at Git5856cfcb630f08df2ff9532241c38a78e6138de1. Current MEMORY/AGENTS and feature-first directives govern resumption; no historical dependency-build assumptions override the RGX/PGEN black-box boundary.
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.6.5 — guard Lua scalar default results
+
+Lua preserves correct selected Array/Hash default flow and activates scalar guarding after nonempty selection, releasing it for actual array/harray output. Direct retained/fallback scalars now reject container-only consumers with null after [] RED. Small native/generated-plan/fresh-emitted default and existing receiver/join checks pass on available PUC5.5.1/LuaJIT, retaining lazy SDJ snapshots, empty/null/zero/false and copy policies. Loadfile/book/fast continuity checks pass. Bounded default rollout is targeted-checked on recorded hosts; index_of result assessment23.2.6 is next, declared5.4/full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.6.4 — guard Julia scalar default results
 
 Julia retains correct selected Array/Hash default flow and adds direct nonempty scalar guarding until actual AbstractVector/AbstractDict output. Retained/fallback scalars reject container-only consumers with null instead of empty Arrays. Small strict native/generated-plan/fresh-emitted default and existing receiver/join checks pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy policies. Package compilation, book and fast continuity checks pass. Lua assessment5 is next; declared5.4/full domain/admission remain separate.

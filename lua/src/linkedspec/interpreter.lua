@@ -3488,6 +3488,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       flow("return", returned)
     elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
       value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
+      -- Preserve a scalar selection's boundary; actual containers release it below.
+      if canonical_name == "coalesce_nonempty" then scalar_result = true end
     elseif canonical_name == "copy" and #call.args == 0 then
       value = copy_value(value)
     elseif is_pure_string_helper(canonical_name) then

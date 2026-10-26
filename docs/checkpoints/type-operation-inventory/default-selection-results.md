@@ -121,3 +121,14 @@ output releases it; direct Scalar sorted/sorted_values returns null after the
 empty-Array RED. Strict native/generated-plan/fresh-emitted shared/default/join
 controls pass, retaining SDJ snapshots and empty/null/zero/false. Full admission
 and Lua assessment remain separate.
+
+## Bounded Lua implementation
+
+`.23.3.6.5` preserves correct container selections and activates scalar_result
+for nonempty defaults. Actual array/harray output releases it; direct Scalar
+container-only consumers now return null after the [] RED. Small native/generated-
+plan/fresh-emitted default and direct joined checks pass on available PUC5.5.1/
+LuaJIT, preserving lazy copies, SDJ snapshots and empty/null/zero/false. Interpreter/
+runner loadfile checks pass; declared5.4 and full domain/admission stay open.
+The bounded rollout is targeted-checked on recorded hosts; no exhaustive family
+or portable support claim follows. Next bounded producer assessment is index_of.

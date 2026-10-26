@@ -9533,6 +9533,10 @@ test("mutable split preserves false delimiters", function()
   dofile("lua/test/mutable_split_false_delimiter_test.lua")
 end)
 
+test("selected default receiver continuations", function()
+  dofile("lua/test/default_selected_receivers_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)
