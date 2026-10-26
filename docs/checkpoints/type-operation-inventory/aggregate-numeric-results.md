@@ -124,3 +124,12 @@ unambiguous producer shape checks plus scalar-result boundaries in its existing
 loop. Native/generated-plan/fresh-emitted and direct Count/Length checks pass after
 RED under strict Julia1.12 harness execution, including named mutations, explicit
 Array bridge, order and snapshots. Shared Lua remains individually unassessed.
+
+Shared Lua `.23.3.4.5` removes the reducer endpoint stop, retains scalar boundaries
+(including case maps routed through String dispatch) and rejects unambiguous
+producer extras before effects. Small native/generated-plan/fresh-emitted and
+direct Count/Length checks pass after RED on available PUC5.5.1/LuaJIT with matching
+native products, retaining empty helpers, min/max overloads, named mutations,
+Array bridge, order and snapshots. Declared5.4 proof remains separately owned.
+Bounded implementations are targeted-checked; full context/portable admission
+stays23.4. Next feature assessment is ordinary join_values result flow23.2.4.

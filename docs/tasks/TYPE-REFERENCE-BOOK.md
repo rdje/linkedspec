@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / aggregate numeric result assessment after bounded count/length rollout
+- Status: `active` / joined String result assessment after bounded numeric result rollout
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -986,6 +986,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: No production/schema/type change, blanket input normalization or new callback/deferred admission. Existing reducer-kind95 and comprehensive matrices/admission remain separately owned.
   - [x] LOCKSTEP: New contract/retained diagnostic, current helper reference, bounded reducer fact/map and task/live frontier identify the same next Perl slice and limitations.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.3 - define aggregate numeric result continuations`.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.4`
+  Status: `pending`
+  Goal: Publicly assess and freeze ordinary Array join_values result continuations into existing compatible String methods.
+  Dependencies: .23.3.4.5.
+  Owned paths: type-operation-inventory contract/public diagnostic if needed, helper/String reference, canonical Array result facts/map and task/live records; no production edit in this assessment leaf.
+  Planned tier: `focused`; declare exact public probes and small proof at activation.
+  Claim verification: none: Unactivated normative feature assessment; no support/completeness measurement.
+  Acceptance: Read existing join_values delimiter-first free/receiver signatures, source/argument/effect/null/empty and domain rules. Compare ordinary joined-result chains with nested public Perl controls, including selected/pipeline/hash-view sources, before classifying a gap. Freeze only compatible existing pure result continuations and explicitly supersede old join-terminal policy; retain invalid-shape, copy/deferred and complete admission boundaries. Schedule per-backend implementation after concrete findings; no broad matrix/replay.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -1392,7 +1402,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
-  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua assessment follows
+  Status: `active` / bounded implementations complete; full admission remains23.4
   Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.3.
   Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.5`; assess later backends individually after clean implementation commits.
@@ -1494,13 +1504,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.4 - guard Julia aggregate result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `629cdf0337d8a4847f9459f68db3139177acb558`.
   Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on shared Lua.
   Dependencies: .23.3.4.4.
   Owned paths: Lua public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records.
-  Planned tier: `focused`; declare public probes and exact small regression at activation.
-  Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
+  Verification tier: `focused`
+  Focused checks: Public Lua producer/shape/domain probes; small native/generated-plan/fresh-emitted aggregate and direct Count/Length tests on available PUC5.5.1/LuaJIT with matching native products, loadfile compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; declared5.4 and complete context/portable admission remain separately owned plus eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / ownership: Fresh PUC pairs are [null,13,null,5,null,5,null,5,null,3,null,7]; invalid sum(extra) already returns null but runs two effects. Empty helpers and old incompatible consumers already pass. evaluate_fluent_calls has a blanket reducer endpoint stop; remove it for compatible scalar consumers, retain scalar boundaries (including lowercase_each/uppercase_each routed via String helpers) and guard unambiguous canonical aggregate shapes before effects.
   Acceptance: Preserve correct dispatch, source domains and scalar min/max overloads. Probe six result chains, unambiguous zero-extra shapes, scalar boundaries until an explicit Array bridge and empty helper controls before classifying defects. Use small native/generated-plan/fresh-emitted and direct Count/Length checks on available PUC5.5.1/LuaJIT with matching products, loadfile compilation, docs/commit. Keep declared5.4 proof with LUA-STARTUP-READING.2.2 and full context/portable admission separate; no broad replay.
+
+  Completion: Remove the reducer endpoint stop, retain scalar-result compatibility until actual container output and guard canonical unambiguous aggregate extras before effects. Preserve correct empty identity/min-max/domain behavior and old incompatible consumers, including Array case maps routed through String helpers. Register the fixture.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public PUC six pairs and retained fixture are RED for stopped results, skipped operands and ignored-argument effects. Empty helpers and old incompatible consumers already pass; preserve them. Invalid shapes mutate named arrays and run eight effects before repair.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_fluent_calls unconditionally stops after evaluate_numeric_reducer_values; evaluate_expr preflight omits canonical aggregate shapes. Generic consumers need a scalar boundary when the endpoint stop is removed; lowercase_each/uppercase_each live in String dispatch.
+  - [x] FIX: Carry reducer results through compatible Scalar/Number consumers and release scalar boundaries only on actual container output. Include Array case maps in compatibility guards; reject num_sum/avg/median/range extras before source/operand effects.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted aggregate fixture PASS after RED on available PUC5.5.1/LuaJIT, with six producers, overloads, empty helpers, named mutation suppression, explicit split, SA order, snapshots and old incompatible nulls.
+  - [x] NO REGRESSION: Direct Count/Length fixture and interpreter/runner loadfile compilation PASS with matching fresh native products on both hosts. Existing source domains, empty sum and callable vocabulary remain unchanged; declared5.4/full admission stay separately owned.
+  - [x] LOCKSTEP: Register fixture; update worked helper/guide/contract, Lua/reducer facts/map and current task/live records; book and fast continuity/history/diff checks pass. Join-result assessment23.2.4 is next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1584,7 +1608,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on shared Lua after earlier targeted-checked implementations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.4` | `pending` | Assess/freeze ordinary joined String result continuations after bounded aggregate result rollout. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

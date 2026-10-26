@@ -3414,6 +3414,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   accumulator,
   edge_state
 )
+  local scalar_result = false
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3423,6 +3424,13 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       source_span = call.source_span,
     }
     local canonical_name = action_contracts.canonical_action_helper_name(call.method)
+    -- Reducers yield scalars; array/hash-only consumers remain invalid until
+    -- a compatible helper produces a container. Case maps live with string helpers.
+    if scalar_result and (PURE_ARRAY_HELPERS[canonical_name] or PURE_HASH_HELPERS[canonical_name] or
+        canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
+        (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name))) then
+      return json.null
+    end
     if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
       local block_expr = final_codeblock_argument(canonical_name, "receiver", call.args)
       if canonical_name == "with" then
@@ -3494,7 +3502,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
         canonical_name,
         value
       )
-      if index < #calls then return json.null end
+      scalar_result = true
     elseif scalar_numeric.supports(canonical_name) then
       value = evaluate_scalar_numeric_values(
         engine,
@@ -3517,6 +3525,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     else
       value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
     end
+    local result_kind = json.kind(value)
+    scalar_result = scalar_result and result_kind ~= "array" and result_kind ~= "harray"
   end
   return value
 end
@@ -3879,12 +3889,14 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "fluent_chain" then
-    -- Extraction, copy and count/length take no method arguments. Reject before source/operand
-    -- effects while retaining the existing dynamic value dispatcher.
+    -- Reject unambiguous zero-extra shapes before source/operand effects;
+    -- scalar min/max overloads keep their existing operands.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
       if (name == "first" or name == "last" or name == "copy" or
-          name == "count" or name == "count_keys" or name == "length") and #(call.args or {}) > 0 then
+          name == "count" or name == "count_keys" or name == "length" or
+          name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
+          #(call.args or {}) > 0 then
         return json.null
       end
     end

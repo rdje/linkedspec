@@ -667,13 +667,13 @@ dispatch rule.
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
 - **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Other terminal links include `contains`, `index_of`, `is_empty`, `is_nonempty`,
-  `join_values`, `sum`, `avg`, `median`, `range`, `min`, and `max`. Receiver-dot
+  `join_values`. The six numeric reducers feed compatible scalar/number methods. Receiver-dot
   `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
   `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
-  array-consuming links over the same numeric aggregate helpers. Ordinary Perl/Rust/Dart/Julia results continue into compatible scalar/number methods: `scores.sum().add(1)` equals `num_add(num_sum(scores),1)`. Other backends require individual assessment.
+  array-consuming links over the same numeric aggregate helpers. Ordinary Perl/Rust/Dart/Julia/Lua results continue into compatible scalar/number methods: `scores.sum().add(1)` equals `num_add(num_sum(scores),1)`. Lua checks use available PUC5.5.1/LuaJIT; declared5.4/full admission remains open.
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
-  string being split. Numeric reducer results on ordinary Perl/Rust/Dart/Julia feed scalar/number methods; array-only consumers stay invalid until an explicit String split
-  produces an array. Other backends can use nested helpers pending individual assessment. Named end mutations (`push_back`, `push_front`,
+  string being split. Numeric reducer results on ordinary Perl/Rust/Dart/Julia/Lua feed scalar/number methods; array-only consumers stay invalid until an explicit String split
+  produces an array. Full context/portable admission remains open; existing helper source domains stay unchanged. Named end mutations (`push_back`, `push_front`,
   `pop_back`, `pop_front`) update their binding and may feed a compatible continuation from the returned array.
   They are not pure links over arbitrary temporary array receivers. The portable contract does not
   promise every possible pipeline-to-pure continuation; use verified chains such as
@@ -1202,13 +1202,13 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `num_min(a: numeric, b: numeric)` or `num_min(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the smaller of two numbers. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[1]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia result chaining: `[2,4,6].min().add(1)` → `3`; `[2,4].sum().min(3).add(1)` → `4` keeps the scalar overload.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[1]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].min().add(1)` → `3`; `[2,4].sum().min(3).add(1)` → `4` keeps the scalar overload.
 
 ### `num_max(a, b)` / `num_max(arr)`
 - **Signature**: `num_max(a: numeric, b: numeric)` or `num_max(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the larger. Array form: returns the maximum element.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[8]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia result chaining: `[2,4,6].max().add(1)` → `7`.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[8]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].max().add(1)` → `7`.
 
 ### `num_clamp(x, lo, hi)`
 - **Signature**: `num_clamp(x: numeric, lo: numeric, hi: numeric)`
@@ -1221,7 +1221,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
   See the [complete six-reducer example](../dsl/value-container-flow-helper-reference.md#numeric-reducers-consume-array-values), including empty arrays and receiver form.
 - **Signature**: `num_sum(arr: array)`
 - **Returns**: numeric
-- **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources. Ordinary Perl/Rust/Dart/Julia `[2,4,6].sum().add(1)` → `13` and `[1,2].sum().cat(" total").uppercase()` → `"3 TOTAL"`. Other backends can use nested helpers pending assessment. Source snapshots and the sum are computed before later consumer operands; subsequent source mutation does not recompute the result.
+- **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources. Ordinary Perl/Rust/Dart/Julia/Lua `[2,4,6].sum().add(1)` → `13` and `[1,2].sum().cat(" total").uppercase()` → `"3 TOTAL"`. Lua checks use available PUC5.5.1/LuaJIT; declared5.4/full admission remains open. Source snapshots and the sum are computed before later consumer operands; subsequent source mutation does not recompute the result.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -1235,13 +1235,13 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `num_avg(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Arithmetic mean of array elements. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: over `/(\d+),(\d+),(\d+)/`, `num_avg(array(entry_group(0), entry_group(1), entry_group(2)))` on `2,4,6` → `[4]`. Ordinary Perl/Rust/Dart/Julia result chaining: `[2,4,6].avg().add(1)` → `5`.
+- **Example**: over `/(\d+),(\d+),(\d+)/`, `num_avg(array(entry_group(0), entry_group(1), entry_group(2)))` on `2,4,6` → `[4]`. Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].avg().add(1)` → `5`.
 
 ### `num_median(arr)`
 - **Signature**: `num_median(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Median of array elements after numeric sort. For even-length arrays, returns the average of the two middle elements. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `[3]` on the current Perl/JSON route (sorted `1,2,3,4,5`; internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia result chaining: `[2,4,6].median().add(1)` → `5`; `[4,1,3,2].median().mul(2)` → `5`.
+- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `[3]` on the current Perl/JSON route (sorted `1,2,3,4,5`; internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].median().add(1)` → `5`; `[4,1,3,2].median().mul(2)` → `5`.
 
 Current Perl type limitation: array-form `num_min`/`num_max` and odd-length
 `num_median` can retain a selected numeric string's internal kind. Current
@@ -1258,7 +1258,7 @@ for an arithmetic workaround. No result-kind fix is claimed by callback availabi
 - **Signature**: `num_range(arr: array)`
 - **Returns**: numeric
 - **Behavior**: `max - min` of array elements. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: over `/(\d+),(\d+),(\d+),(\d+)/`, `num_range(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `3,9,1,7` → `[8]` (`9 - 1`). Ordinary Perl/Rust/Dart/Julia result chaining: `[2,4,6].range().add(1)` → `5`.
+- **Example**: over `/(\d+),(\d+),(\d+),(\d+)/`, `num_range(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `3,9,1,7` → `[8]` (`9 - 1`). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].range().add(1)` → `5`.
 
 ## 6. Control Flow Helpers
 
@@ -1904,8 +1904,8 @@ Receiver-dot methods are available for the value families that have a typed rece
   bridges to array chains; `length` feeds scalar/number methods. `starts_with`, `ends_with`, `contains_substr`, and `matches` retain their predicate endpoints.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Count/Length results feed compatible scalar/number methods. Terminal
-  links include `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
-  `sum`, `avg`, `median`, `range`, `min`, and `max` on backends awaiting individual assessment; ordinary Perl/Rust/Dart/Julia reducers feed compatible scalar/number methods. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
+  links include `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`;
+  ordinary Perl/Rust/Dart/Julia/Lua reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) feed compatible scalar/number methods. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   feeds compatible scalar/number methods; `has_key` retains its endpoint. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and

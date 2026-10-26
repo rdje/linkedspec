@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Count/Length implementations are targeted-checked. Perl/Rust/Dart/Julia aggregate numeric result flow is implemented/targeted-checked; shared Lua23.3.4.5 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded Count/Length and aggregate numeric result implementations are targeted-checked on recorded hosts. Joined String result assessment23.2.4 is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/portable admission remain open.
 
 ## Latest Completed Slice
 
-Julia retains correct reducer flow/empty identity, rejects extra producer operands before effects and guards scalar-result boundaries until actual container output. Small native/generated-plan/fresh-emitted and direct Count/Length checks pass after RED, including overloads, named mutation suppression, split bridge, SA effects, snapshots and incompatible nulls. Strict Julia1.12 harness/package compilation, book and fast continuity checks pass.
+Lua reducer results now continue through compatible scalar/number methods with scalar boundaries until containers and early unambiguous producer shape guards. Small native/generated-plan/fresh-emitted and direct Count/Length fixtures pass after RED on available PUC5.5.1/LuaJIT, including empty identity, overloads, named mutation suppression, explicit split, SA order, snapshots and incompatible Array case maps. Loadfile/book and fast continuity checks pass; declared5.4/full admission remain separate.
 
 ## Next Action
 
-Publicly assess Lua reducer chains, shapes, scalar/Array boundaries and empty helpers independently. Preserve correct behavior and repair only observed gaps with small native/generated-plan/fresh-emitted/direct checks on available PUC5.5.1/LuaJIT and matching native products. Docs/commit; declared5.4 and full admission remain separate.
+Assess/freeze ordinary join_values result flow into existing String methods against public nested Perl controls. Read delimiter-first signatures/effect order and source/domain/null/empty rules, preserve deferred/copy/invalid boundaries and schedule implementation only after findings. No broad suite or matrix campaign.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` — Lua six-reducer result flow, scalar/shape guards and focused available-host checks pass; join-result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.4` — Julia existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/generated/emitted and strict harness checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.3` — Dart existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` — Rust six-reducer results continue with scalar boundaries, early arity guards and empty sum zero; focused native/restored/generated-plan checks pass.
@@ -29,7 +30,6 @@ Publicly assess Lua reducer chains, shapes, scalar/Array boundaries and empty he
 - `SESSION-STARTUP-READING.62.2.2` — Rust documented receiver lazy defaults; native/restored/generated-plan order/skipped-error and ordinary default-helper checks pass; Perl final-tail repair owned next.
 - `SESSION-STARTUP-READING.62.2.1` — Rust ordinary nonempty lazy selection; authored native/restored/generated-plan value/order/skipped-error and direct coalesce tests pass.
 - `SESSION-STARTUP-READING.62.1` — Rust ordinary first-defined lazy selection; authored native/restored/generated-plan values/order/skipped-error and direct selected-value checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.2.4` — Lua copy arity rejects before effects on available PUC5.5.1/LuaJIT; focused native/generated/emitted and direct selected-value checks pass; Perl already correct.
 
 ## History
 

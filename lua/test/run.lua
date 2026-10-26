@@ -9522,6 +9522,9 @@ end)
 test("count and length receiver continuations", function()
   dofile("lua/test/count_length_receivers_test.lua")
 end)
+test("aggregate numeric receiver continuations", function()
+  dofile("lua/test/aggregate_numeric_receivers_test.lua")
+end)
 
 io.stdout:write("1..", total, "\n")
 if failed > 0 then

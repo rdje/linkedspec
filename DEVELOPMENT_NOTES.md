@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.5 — scalar reducers cross the endpoint
+
+Lua evaluate_fluent_calls stops after every array reduction; remove the stop and retain scalar compatibility until a helper returns an actual container. Array lowercase_each/uppercase_each live in String dispatch, so guard them explicitly alongside Array/Hash-only consumers. Extend canonical num_sum/avg/median/range preflight; preserve existing helper domains, scalar min/max, empty identity and callable vocabulary. Public/fixture RED precedes small native/generated-plan/fresh-emitted and direct Count/Length GREEN on available PUC5.5.1/LuaJIT, including named mutation suppression, explicit split, SA order, snapshots and old incompatible nulls. Register fixture and sync book/contract/facts/map/current records; joined String result assessment follows. Declared5.4/full admission stay separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.4 — guard existing Julia aggregate flow
 
 Julia valid pairs/empty helpers already pass. Chain preflight lacks canonical aggregate shapes and generic dispatch permits scalar results into Array fallbacks. Add early num_sum/avg/median/range guards and scalar-result tracking in the existing loop until a compatible helper returns a container. Keep helper domains, min/max overloads, named end mutation behavior and empty identity. Small native/generated-plan/fresh-emitted and direct Count/Length fixtures pass after RED, with strict Julia1.12 binding access, six producers, named mutation suppression, explicit split, SA order and snapshots. Register the fixture and align book/contract/facts/map/task/live. Lua is next; complete admission remains separate.

@@ -2,6 +2,7 @@
 id: lua-runtime-array-transform-pipelines
 title: Lua copied array transform and join pipelines
 answers:
+  - "why do Lua reducer scalar guards include uppercase_each from String dispatch"
   - "can Lua count length and count_keys results continue into scalar methods"
   - "can Lua first and last continue through selected scalar and container methods"
   - "does Lua support join_values delimiter first"
@@ -11,10 +12,10 @@ answers:
   - "what does Lua join_values return for a missing array"
   - "which backends rebind dropped split_each filter_match and uniq calls"
 date: 2026-10-26
-status: selected/count values confirmed; zero-extra arity guarded; declared5.4 proof open
+status: selected/count/aggregate values confirmed; shape/scalar guards; declared5.4 open
 tags: [lua, runtime, arrays, transforms, regex, join, uniform-binding, LUA-BACKEND-PARITY]
-evidence: "Historical transform slice4.3.4.3; current selected-value23.3.1.5 on measured PUC5.5.1/LuaJIT. Declared5.4 proof remains LUA-STARTUP-READING.2.2."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/count_length_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/count_length_receivers_test.lua"
+evidence: "Transform4.3.4.3; selected/count/aggregate23.3 on available PUC5.5.1/LuaJIT; declared5.4 remains LUA-STARTUP-READING.2.2."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/aggregate_numeric_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/aggregate_numeric_receivers_test.lua"
 ---
 
 Lua implements delimiter-first `join_values(delimiter, array)` and receiver-equivalent
@@ -34,4 +35,4 @@ Related facts: [[lua-runtime-array-selection]], [[lua-pure-split-bridge]],
 [[six-variant-unicode-17-case-parity]], [[array-helper-return-shape-caveats]],
 [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]].
 
-23.3.1.5 confirms selected-value dispatch/extraction arity.23.3.3.5 preserves Count flow, removes Length/key-count endpoint stops and guards producer extras before effects. Small native/generated-plan/fresh-emitted and direct selected-value fixtures pass after RED on available PUC5.5.1/LuaJIT with matching native products, retaining kinds, Unicode, SALHK order and snapshots. Runner/interpreter compile; declared5.4/full admission stay open.
+23.3.1.5/23.3.3.5 implement selected/count continuations and arity.23.3.4.5 removes the reducer endpoint stop, guards canonical extras and retains scalar boundaries until containers; case maps require explicit guards because String dispatch owns them. Focused native/generated-plan/fresh-emitted and direct Count/Length checks pass after RED on available PUC5.5.1/LuaJIT with matching products. Runner/interpreter compile; declared5.4/full admission stay open.

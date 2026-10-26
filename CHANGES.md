@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.4.5 — continue Lua aggregate numeric results
+
+Remove the reducer endpoint stop, preserve scalar boundaries until container results and reject unambiguous extra producer operands before effects. Small native/generated-plan/fresh-emitted aggregate and direct Count/Length fixtures pass after public/retained RED on available PUC5.5.1/LuaJIT with matching products. Six producers, overloads, empty identity, named mutation suppression, explicit split, SA order, snapshots and incompatible case-map nulls pass; loadfile/book/continuity checks pass. Sync public/current records; joined String result assessment23.2.4 is next, declared5.4/full admission open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.4.4 — guard Julia aggregate result boundaries
 
 Preserve correct result flow/empty identity; reject unambiguous extra producer operands before effects and retain scalar boundaries until an actual container result. Public/retained shape/domain RED precedes small native/generated-plan/fresh-emitted and direct Count/Length GREEN, package compilation and strict Julia1.12 harness checks. Six producers, overloads, named mutation guards, explicit split, SA order, snapshots and incompatible nulls pass. Register fixture, sync book/facts/current records; Lua assessment next, broad admission open.

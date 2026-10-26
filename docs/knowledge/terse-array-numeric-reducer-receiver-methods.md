@@ -16,7 +16,7 @@ answers:
   - "what did SPEC-FORMAT-TERSE.7.3 backfill"
   - "which task follows SPEC-FORMAT-TERSE.7.3"
 date: 2026-10-26
-status: ordinary Perl/Rust/Dart/Julia reducer results implemented; other backend assessment open
+status: bounded ordinary reducers targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, number, reducers, actionir, rust-parity, oracle, mdbook]
 evidence: "Historical reducer7.3; contract TYPE23.2.3 distinguishes six stopped Perl chains from working nested controls."
 reverify:
@@ -28,7 +28,7 @@ Historical7.3 adds array sum/avg/median/range/min/max receiver forms after compa
 
 TYPE23.2.3 freezes ordinary reducers feeding existing scalar/number methods. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md. Perl23.3.4.1 uses scalar_result flow in the selected dispatcher until an explicit split returns an Array; initial zero-extra min/max uses Array dispatch, scalar overloads keep operands. Generic handoff initially exposed array fallback; retained incompatible nulls now pass. Native/fresh and direct Count/Length checks pass.
 
-Dart23.3.4.3/Julia23.3.4.4 preserve correct flow/empty identity and guard aggregate shapes/scalar boundaries. [[dart-runtime-array-helpers]]/[[julia-runtime-array-helpers]] own proof.
+Dart23.3.4.3/Julia23.3.4.4 guard existing flow; [[dart-runtime-array-helpers]]/[[julia-runtime-array-helpers]] own proof. Lua23.3.4.5 removes its endpoint stop and guards shapes/scalars on available5.5/JIT; [[lua-runtime-array-transform-pipelines]] owns details.
 
 Preserve zero-extra aggregate forms and scalar min/max overloads, actual values, source/operand order and snapshots. No scalar sum, new source domain, callback/deferred or complete admission is implied. Older incompatible array-consumer controls remain invalid by their helper domains. Ordinary Count/Length already continues under23.3.3; only earlier blanket terminal policy for compatible reducer consumers is advanced here.
 
