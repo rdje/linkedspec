@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.5 — Lua shape before value evaluation
+
+Lua already delegates each fluent result dynamically. Reject extra first/last method arguments at interpreter.evaluate_expr before evaluating the receiver; return the codec’s null sentinel so array positions survive. The expanded public fixture distinguishes invalid-shape effect suppression from already-correct selected scalar/container/copy paths. Published targeted wrappers rebuild matching native products and pass native/generated-plan/fresh-emitted controls on available PUC5.5.1/LuaJIT. The ordinary runner enrolls the fixture; only syntax is loaded here. Preserve the declared5.4 proof owner rather than relabel an unversioned pass. Remaining Rust helper domains and full admission stay open.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.4 — preserve Julia value dispatch
 
 Julia’s fluent loop already dispatches on each prior result. Its source evaluation precedes helper processing, however, so extra first/last operands were evaluated and ignored. Prevalidate these zero-argument shapes before the receiver, preserving the dynamic loop and existing helper semantics. The public native/generated-plan/fresh-emitted fixture and direct transform checks pass after actual arity RED. Current reference tables now distinguish selection from terminal predicates. Exact historical Julia replay chronology remains at prechange Git; current reverify is small. A separate source-observed copy-arity risk is scheduled after the native rollout/P1 scalar work, without a runtime defect claim or dirty pivot.

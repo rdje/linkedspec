@@ -948,7 +948,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
-  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua confirmation/repair next
+  Status: `active` / all bounded backend implementations targeted-checked; helper/target admission remains open
   Goal: Implement the frozen first/last selected-value continuation contract in ordinary native/generated actions, one bounded backend leaf per commit.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Children: `.23.3.1.1` Perl, `.23.3.1.2` Rust, `.23.3.1.3` Dart, `.23.3.1.4` Julia, `.23.3.1.5` Lua.
@@ -1097,11 +1097,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4 - guard Julia selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5`
-  Status: `pending`
-  Goal: Confirm/implement the same selected-value transition on Lua via published native/generated interfaces, preserving the shared interpreter contract.
+  Status: `done`
+  Activation commit: `3764311f3575cb3a5df369a32ab12aa5476060c6`
+  Goal: Confirm/implement selected-value transitions via Lua's public native/generated APIs on the available PUC/LuaJIT pair, retaining declared-target qualification.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
-  Planned tier: `focused`; compile and small targeted regression on supported interpreters only.
-  Claim verification: none: No measurement yet.
+  Owned paths: lua/src/linkedspec/interpreter.lua if needed; lua/test/selected_value_receivers_test.lua and lua/test/run.lua registration; current book/Lua/array facts/map and TYPE/live continuity. Project-local disposable native builds use the published targeted wrapper.
+  Verification tier: `focused`
+  Focused checks: Fresh matching native products, source syntax and one small public native/generated-plan/fresh-emitted fixture per available ABI; directly affected compatibility check only when needed; book and fast continuity/history checks. No full Lua suite/corpus.
+  Canonical trigger: None for bounded implementation/confirmation under director feature-first phase; full23.4 admission remains deferred.
+  Claim verification: none: Deterministic implementation/confirmation and targeted regression, no quantified corpus/exhaustive/portable admission measurement.
+  Environment: Direct lua/luajit banners and matching pkg-config report PUC5.5.1, LuaJIT2.1.1788460057 and PCRE2 10.48, consistent with the public integration guide. Declared PUC5.4.8 proof remains LUA-STARTUP-READING.2.2; no unversioned pass establishes5.4 conformance. Toolchain/native-formatter repairs are not silently closed here.
+  Acceptance: Probe frozen journeys through public APIs first, reuse correct behavior, preserve selected kinds/copy/repeated transitions/null/empty/arity/effects and source snapshots. Check both available hosts with exact identity limits. Correct the Lua fact's stale Rust/Dart/Julia transform omissions against accepted5.3.1-.3; full admission remains separate.
+
+  Reproduce/impact: Frozen selected journeys PASS on available PUC5.5.1 and LuaJIT through native/generated-plan/fresh-emitted routes before production edits. Expanded valid cases agree, but an extra first argument returns a with two effects instead of null and zero effects on both hosts.
+  Root cause: interpreter.evaluate_expr's fluent_chain branch evaluates the receiver before typed_source.receiver_mutation.evaluate_fluent_calls; helper processing evaluates and ignores extra extraction operands. Validate first/last shapes before evaluating the receiver; preserve the existing per-value dispatcher.
+
+  Completion: Preserve Lua's existing dynamic selected-value dispatcher and add first/last arity rejection before receiver/operand effects. Retain json.null slots, register the small fixture in lua/test/run.lua and syntax-load the interpreter/runner without executing the full package suite.
+  Focused result: Published targeted wrappers build fresh ABI-matching native products and PASS the fixture on available PUC5.5.1 and LuaJIT. Native/generated-plan/fresh-emitted results agree, including dynamic function copies, repeated transitions, exact recipes, min/max, snapshots, nulls and effects. Book and fast continuity/history checks pass; no PUC5.4/full suite claim.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Frozen journeys PASS before production changes on both available hosts. The expanded fixture is RED for ignored first arguments, returning a and two effects instead of null and zero effects.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — interpreter.evaluate_expr evaluates fluent_chain receivers before delegating to the dynamic call loop; helper processing evaluates and ignores extra extraction values without prevalidation.
+  - [x] **FIX** — Validate first/last call shape before receiver/operand evaluation, preserve the existing dynamic dispatcher and json.null representation, and enroll the focused producer in the normal runner.
+  - [x] **ADDRESSED (verified)** — Fresh matching native builds, syntax loads and public native/generated-plan/fresh-emitted fixture PASS on available PUC5.5.1/LuaJIT.
+  - [x] **NO REGRESSION** — Valid selected scalar/container/copy kinds, repeated extraction, functions/computed sources, snapshots, empty values, min/max and once-only effects pass. No full Lua suite/corpus or unsupported target claim.
+  - [x] **LOCKSTEP** — Current five-backend implementation recipes include Lua host qualification; stale transform omissions are corrected in its fact. Contract/facts/map/task/live handoff agree; P1 Rust61.1/.61.2 repairs are next and full admission stays open.
+  Harness note: Initial Lua long-string delimiters collided with nested array closing brackets and failed syntax before runtime. Use levelled long strings; no product-defect credit for that fixture setup error.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5 - guard Lua selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
   Status: `pending` / P2 receiver copy arity intake
@@ -1114,7 +1135,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Known admission prerequisite: Remaining Rust scalar-null/empty semantics61.1/.61.2 stay open; selected-value implementation does not override those helper defects or establish complete scalar families.
+  Known admission prerequisite: Remaining Rust scalar-null/empty semantics61.1/.61.2 and copy-arity risk23.3.2 stay open; selected-value implementation does not override them or establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Acceptance: Reconcile expected families and every transition in both directions against actual native/generated consumers and individual mdBook examples. Reject deliberate missing-method, wrong-return-type and continuation-dispatch faults; include empty/missing/error and backend controls. No family's final reference leaf .2-.6 or aggregate .7 closes over an unresolved assigned fluent gap. Keep scope exclusions explicit; publish no completeness claim from samples alone.
@@ -1189,11 +1210,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl/Rust/Dart/Julia selected-value implementations are targeted-checked; Lua23.3.1.5 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; All selected-value backend children are targeted-checked on recorded hosts. P1 Rust scalar61.1/.61.2 repairs follow; Lua declared5.4 target and full admission remain open. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` | `pending` | Confirm/implement selected-value transitions on Lua; bounded Perl/Rust/Dart/Julia subsets are implemented. |
+| 1 | `SESSION-STARTUP-READING.61.1` | `pending` | Remaining P1 Rust scalar null propagation after bounded native selected-value rollout; trim subpart is already fixed. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

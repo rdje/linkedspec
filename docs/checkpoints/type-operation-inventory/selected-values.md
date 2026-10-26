@@ -109,3 +109,10 @@ flow on native/generated-plan/fresh-emitted routes. An early first/last arity
 guard rejects extra arguments before effects. Focused controls cover dynamic
 function copies, repeated transitions, snapshots, empty values and effects;
 Lua/full admission and the separately scheduled copy-arity risk remain open.
+
+Lua `.23.3.1.5` confirms existing dynamic selected-value flow and adds an early
+first/last arity guard. Focused native/generated-plan/fresh-emitted checks use
+fresh matching products on available PUC5.5.1 and LuaJIT; the fixture is enrolled
+in the ordinary runner without executing its full suite here. The declared
+PUC5.4 proof remains LUA-STARTUP-READING.2.2. Bounded backend implementations do
+not close remaining helper domains, copy-arity risk or full fluent admission.

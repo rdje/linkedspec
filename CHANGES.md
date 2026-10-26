@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.5 — guard Lua extraction arity
+
+Confirm existing Lua selected-value dispatch and add pre-effect first/last arity rejection with preserved json.null slots. Register the focused fixture in the normal runner and syntax-load it without the full suite. Fresh matching native products and native/generated-plan/fresh-emitted checks pass on available PUC5.5.1/LuaJIT after actual arity RED. Book/facts/map/contract/live handoff align, including corrected historical transform omissions and explicit declared5.4 qualification. P1 Rust scalar61.1/.61.2 repairs are next; full fluent/target admission remains open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.4 — guard Julia extraction arity
 
 Confirm Julia’s existing selected scalar/container/copy flow and add only the missing pre-effect first/last arity guard. The expanded fixture is RED for ignored extra arguments; package compilation and native/generated-plan/fresh-emitted selected-value plus direct transform checks pass after repair. Cover dynamic function copies, repeated transitions, exact recipes, snapshots, empty values, min/max and effects without a full suite. Align current string/array reference classifications, contain historical Julia replay prose with an exact Git pointer, and update facts/map/task/live handoff. Lua23.3.1.5 is next; copy-arity source risk23.3.2 and complete admission stay open.
