@@ -1083,7 +1083,7 @@ Array helpers return either scalar information about an array or a new array val
 | `first(array_expr)` | scalar value or `undef` | read the first item. |
 | `last(array_expr)` | scalar value or `undef` | read the last item. |
 | `index_of(array_expr, needle)` | scalar index or `undef` | find the first matching item by zero-based index. |
-| `contains(array_expr, needle)` | `1` or `0` | test exact array membership. |
+| `contains(array_expr, needle)` | `1` or `0` | test exact array membership. Perl `["a"].contains("a").cat("!")` → `"1!"`; false survives `coalesce_nonempty` as `"0!"`. One needle is required before effects; scalar results reject container-only consumers until an explicit bridge. |
 | `drop_front(array_expr)` | array value | drop the first item. |
 | `drop_front(array_expr, count)` | array value | drop the first `count` items. |
 | `take(array_expr)` | array value | keep the first item. |

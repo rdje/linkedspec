@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.13.1 — continue Perl Array contains results
+
+Perl contains adds two list entries: exactly-one-operand preflight and Array scalar-result classification. Numeric1/0 producers/equality/null/zero and correct snapshots remain unchanged. Shared native/fresh plus direct String comparison pass12 assertions after malformed-body compile RED; source families, false/generic/bridges/scalar guards and1!/SOC/once-only/final-null pass. Nested malformed missing twins/extra now return null before effects without host fallthrough. Syntax/book/facts/FUTURE5.6/current docs align; Rust2 independent producer/calibration assessment next. Full admission/Perl fixture selection23.4.1 separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.13 — freeze Array contains result transitions
 
 Freeze ordinary Array contains result handoff and activate existing required-needle normalization as FUTURE5.6, coordinated with five backend children23.3.13.1-.5. Public Perl native/fresh/substitution controls show numeric1/0 producers and correct nested/source snapshots versus terminal null continuations; direct malformed null/no-effects but nested malformed host-call leak is immediately owned by Perl1. Canonical one-needle and punctuation-light alias policy reconciled before production changes; old four-backend missing0 is explicitly scheduled for replacement with named calibration updates. No runtime changes or portable/full-domain claim.

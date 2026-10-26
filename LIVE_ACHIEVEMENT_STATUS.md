@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
+Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 
 ## Latest Completed Slice
 
-Freeze ordinary Array contains result handoff and activate existing required-needle normalization as FUTURE5.6, coordinated with five backend children23.3.13.1-.5. Public Perl native/fresh/substitution controls show numeric1/0 producers and correct nested/source snapshots versus terminal null continuations; direct malformed null/no-effects but nested malformed host-call leak is immediately owned by Perl1. Canonical one-needle and punctuation-light alias policy reconciled before production changes; old four-backend missing0 is explicitly scheduled for replacement with named calibration updates. No runtime changes or portable/full-domain claim.
+Perl contains adds two list entries: exactly-one-operand preflight and Array scalar-result classification. Numeric1/0 producers/equality/null/zero and correct snapshots remain unchanged. Shared native/fresh plus direct String comparison pass12 assertions after malformed-body compile RED; source families, false/generic/bridges/scalar guards and1!/SOC/once-only/final-null pass. Nested malformed missing twins/extra now return null before effects without host fallthrough. Syntax/book/facts/FUTURE5.6/current docs align; Rust2 independent producer/calibration assessment next. Full admission/Perl fixture selection23.4.1 separate.
 
 ## Next Action
 
-Implement Perl ordinary contains result and one-needle guards under23.3.13.1/contains-results.md; original arity-normalization owner FUTURE5.6 is active. Fix nested malformed host-call fallthrough immediately, preserve actual numeric producer/equality/null/zero and correct snapshots. Native/fresh/shared/direct comparison checks plus syntax/docs/commit, then independent Rust2 with its calibration expectation update.
+Independently assess Rust contains producer kinds/equality/null/zero and ordinary result/source behavior under23.3.13.2. Preserve actual producers/snapshots, implement one-needle no-effects under activated FUTURE5.6 and update its named punctuation-light missing-needle calibration from old0 to null with identical twins. Small native/restored/plan/direct checks/docs/commit, then Dart3; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
@@ -29,7 +30,6 @@ Implement Perl ordinary contains result and one-needle guards under23.3.13.1/con
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
 
 ## History
 

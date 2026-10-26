@@ -4690,7 +4690,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
-   return 'undef' if $method =~ /^(?:index_of|has_key|starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o && @$aggregate_args != 1;
+   return 'undef' if $method =~ /^(?:contains|index_of|has_key|starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty|is_defined|is_undefined)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
@@ -4825,7 +4825,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
 	  my $array_chain_return_family = sub {
 	   my ($method) = @_;
-	   return 'scalar_result' if defined($method) && $method =~ /^(?:index_of|is_empty|is_nonempty|is_defined|is_undefined)$/o;
+	   return 'scalar_result' if defined($method) && $method =~ /^(?:contains|index_of|is_empty|is_nonempty|is_defined|is_undefined)$/o;
 	   return 'selected' if defined($method) && $method =~ /^(?:first|last|count|length)$/o;
 	   return 'array' if defined($method)
 	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;

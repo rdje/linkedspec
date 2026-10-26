@@ -2937,11 +2937,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Independently preserve actual producer kinds/equality/null/empty/source snapshots; implement compatible scalar/generic/explicit-container flow and one authored needle before effects. Normalize old four-backend missing-needle0 only under activated original owner5.6; update named punctuation-light tests and preserve both zero-argument twins. No free helper/equality/full-domain/deferred/portable admission inference.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement Perl ordinary Array contains result handoff and required-needle guards.
   Dependencies: .23.2.13; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
   Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
   Immediate defect: Malformed contains nested in an Array currently emits raw items.contains() and fails an undefined host subroutine on native/fresh; eliminate this fallthrough with guard before effects. Valid free/nested/named source snapshots already work.
+
+  Activation: clean `299a3f67a30b991aa07b1d38922d8582a321146d`; contains assessment/explicit FUTURE5.6 activation committed, brief0/tree clean.
+  Owned paths: Perl contains ordinary result/scalar/shape routing and nested malformed host-call leak, shared native/fresh fixture and direct comparison compatibility/docs; producer/equality/snapshot semantics preserved.
+  Verification tier: `focused`
+  Focused checks: Public shared native/fresh RED/GREEN with existing producer values, direct String comparison fixture, source/test syntax and book/history/diff/final staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; complete domains/portable23.4 and mandatory Perl fixture selection23.4.1 separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Completion: Add contains only to global exactly-one-operand preflight and Array scalar-result return-family map. Existing numeric1/0 membership/equality/null/empty/zero/source snapshots remain unchanged. Global guard also removes malformed nested host-call/complex-block syntax fallthrough.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Assessment public native/fresh producer/nested controls work while valid result chains lower undef. Shared RED produces native/fresh handler compilation errors from complex malformed bodies and raw contains fallthrough; no valid snapshot defect is inferred from wholly skipped receiver continuation.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering.pm global one-operand list and array_chain_return_family omit contains. The terminal classification rejects compatible later methods; malformed nested operands can fall through source text rather than a complete null expression. Existing free producer captures source before needle and computes before consumer.
+  - [x] FIX: Extend only the two lists, using existing dynamic scalar/result dispatch and preflight. No producer/parser/schema/equality/free-arity change. Required receiver policy follows activated FUTURE5.6; Perl direct baseline already rejected missing/extra.
+  - [x] ADDRESSED (verified): Native/fresh exact shared numeric JSON passes hit/miss/raw kinds, empty/null/zero, literal/named/selected/split/concat/Hash/function/default/copied Arrays, false retention/generic/bridge/scalar guards,1!/SOC/once-only/final-null. Missing bare/parenthesized and extra no-effects now work inside Arrays too, without host calls or compile failures.
+  - [x] NO REGRESSION: Direct String comparison fixture passes;12 assertions/two files and source/test syntax pass. Existing enabled undef-comparison warnings remain. No broad suite/full domain/portable admission.
+  - [x] LOCKSTEP: Shared source/Perl expected/test, contract/book/guide, canonical contains/arity facts/map and TYPE/FUTURE5.6/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Rust2 independent producer/calibration assessment next; new Perl fixture selection remains mandatory23.4.1.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.13.1 - continue Perl Array contains results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.2`
   Status: `pending`
@@ -3064,7 +3081,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` | `pending` | Implement Perl contains result/shape flow; original arity normalization is activated as FUTURE5.6. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` | `pending` | Independently assess Rust contains results and normalize required-needle twins under FUTURE5.6. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

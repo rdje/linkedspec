@@ -38,3 +38,13 @@ Array missing aliases both emit raw items.contains() and fail an undefined host
 subroutine; immediate Perl1 owns that fallthrough and valid result routing.
 Other backends need independent producer-kind/domain assessment, not a uniform
 Boolean assumption. Full domains/context/deferred/portable admission remains23.4.
+
+## Bounded Perl implementation
+
+23.3.13.1 adds contains to global one-operand and Array scalar-result lists only.
+Shared native/fresh and direct comparison pass12 assertions after malformed-body
+compile RED. Actual numeric/equality/null/empty/zero producers stay unchanged;
+hit/miss, source families, false/generic/bridges/scalar guards and1!/SOC/once-only/
+final-null pass. Nested malformed bare/parenthesized and extra calls now return
+null before effects, eliminating host-code fallthrough. Free signatures unchanged;
+Rust2 must assess its actual producer and update required-needle calibration.

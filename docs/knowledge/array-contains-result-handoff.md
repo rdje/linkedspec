@@ -8,14 +8,14 @@ answers:
   - why does contains nested in a Perl Array emit a host call
   - does contains snapshot its source before needle effects
 date: 2026-10-26
-status: bounded contract frozen; implementations pending
+status: Perl ordinary handoff targeted-checked; other backends/admission open
 tags: [array, contains, fluent, predicate, arity, task-tree]
 evidence: "TYPE23.2.13 public native/fresh/substitution probe; contains-results.md; existing function[2,2] and punctuation-light contract; FUTURE5.6 explicitly activated."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t"
 ---
 
-Perl free membership returns numeric1/0 with null distinct from empty and zero/false scalar compatibility. Nested cat true1! works; ordinary receiver continuation lowers return undef because MethodLowering.pm array return-family marks contains terminal. Source/operand/consumer nested snapshot already1!/SOC/final-null; null-source0/SO; named source remains captured before needle rebinding. Preserve these producers, not a uniform Boolean policy.
+Perl free membership retains numeric1/0, null distinct from empty and zero/false compatibility. TYPE23.3.13.1 adds contains only to one-operand preflight and Array scalar-result map. Shared native/fresh and direct comparison pass12 assertions after malformed-body/host-call compile RED. Hit/miss/raw kinds, source families, false/generic/bridge/scalar guards and1!/SOC/once-only/final-null pass. Existing nested and named source snapshots already worked; no producer/equality repair inferred.
 
-Direct malformed contains returns unsupported-helper undef before effects; nested Array missing forms both emit items.contains() and fail an undefined host helper. Missing bare and parenthesized forms agree within each context. TYPE23.3.13.1 owns this immediate fallthrough/result fix.
+Direct malformed calls already rejected. Nested missing bare/parenthesized and extra calls now uniformly return null before effects, eliminating raw items.contains() host fallthrough. Exact prior assessment/probe is retained in this path at Git299a3f67a30b991aa07b1d38922d8582a321146d and contains-results.md.
 
-FUTURE-PARITY-BACKLOG.5.6 explicitly owns one-authored-needle ordinary receiver guards, coordinated with TYPE23.3.13.1-.5 and actual calibration-test updates. Prior four-backend missing-needle0 is intentionally replaced by null/no-effects, preserving alias equivalence and free signatures/equality. Other backends require independent raw-kind/domain assessment. Full context/domain/portable admission23.4 remains open; no repairs claimed at freeze.
+Original FUTURE-PARITY-BACKLOG.5.6 coordinates one-needle ordinary guards with TYPE23.3.13.1-.5 and actual calibration updates. Four non-reference backends’ prior missing0 is scheduled for replacement by null/no-effects; independent producer-kind/domain assessment remains required. Free signatures/equality/full domain and portable admission23.4 remain separate.
