@@ -2,6 +2,8 @@
 id: action-regex-operands-and-runtime-kinds
 title: Regex operands and pure array helper values
 answers:
+  - why did Dart action regex literal suffix flags disappear
+  - which task owns Dart grouped dotted regex rejection
   - why did Rust action regex literal suffix flags disappear
   - how are Rust literal flags carried without a new regex value type
   - does Perl split_each evaluate variable or computed scalar delimiters
@@ -53,43 +55,9 @@ An AST node called `regex` or `RegexLiteral` identifies source syntax, not the
 kind of runtime value produced. Assignment can also store the scalar result of
 an expression containing regex syntax; that alone does not add a value type.
 
-## Measured Perl behavior
+## Historical Perl audit
 
-`docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl` runs public `Get` on a
-zero-regex `Top:: -> Done` parent with matching `Done: /x/`, records
-`runtime_ctx_ref->{last_error}`, and independently executes the generated action
-with host `$_` set to `abc` and `zzz`. Each case has fresh state.
-
-| Action | Observed result |
-| --- | --- |
-| `return(matches("abc", /b/))` | `1`; the helper explicitly matches its first argument |
-| `rx = "b"; return(matches("abc", rx))` | `1`; a reusable string pattern works |
-| `return(split("a,b", /,/))` | `["a","b"]` |
-| `return(["ax","by"].filter_match(/^a/))` | `["ax"]` |
-| `text = "abc"; regex_subst(text, /b/, "B", g); return(text)` | `"aBc"` |
-| `rx = /b/; return(rx)` or `return(/b/)` | Independent action returns `1` for host `abc`, `""` for `zzz`; public case returns `""`. No regex object is returned. |
-| `rx = /b/; return(matches("abc", rx))` | Independent action returns `0`/`1` for those host subjects: it reuses the match result, not the pattern |
-| `return(filter_match(["ax","by"], /^a/))` | Undefined host subroutine; receiver twin succeeds |
-| Callable body `return(matches(text, /b/))` | `unsupported_codeblock_actionir` |
-| Callable body `return(matches(text, "b"))` | `unknown_helper`; changing only the operand spelling does not fix it |
-
-`MethodLowering.pm` preserves bare `/.../` in standalone value positions, which
-Perl executes as a match against implicit `$_`. Its `matches` branch instead
-emits an explicit subject `=~` pattern operation. `BindingRuntime::_kind` has
-only the four binding categories. The AST probe records `kind=regex`, pattern
-`b` and source span `0..3`; it does not change that runtime contract.
-
-The `matches_multiline` case is a supported helper use:
-
-```text
-return(matches(cat("x", "\n", "y"), /(x)
-y/))
-```
-
-At the audit baseline, independent lowering executed to `1`, but public validation
-rejected the following `Done:` rule as if the action were still open. Verified
-`.86.4.3` repairs that case. It does not require regex-valued variables or a new
-division-versus-regex precedence decision.
+Exact public Get/fresh-action rows, AST/source probes and multiline reproducer at Gitd42199d00ee1f5a4712a3d8151c9dc8d1e9a2d1a for this path. Ordinary matches/split/filter/substitution operands worked; bare regex values executed against implicit host $_ rather than creating regex objects. The audit distinguished callable helper gaps and standalone filter dispatch, subsequently repaired by87.1/87.2 as recorded below. Physical multiline validation repairs86.4.3/.7 and grouped operands86.4.8.2 remain separately owned; no public regex type was introduced.
 
 ## First-party backend representations
 
@@ -144,3 +112,5 @@ September23 recommendation: add a first-class regex type only for a concrete unm
 `FUTURE-PARITY-BACKLOG.5.5.1` evaluates dynamic scalar split_each delimiters once after snapshotting the array source, even when empty. Runtime text is quoted literally; authored quoted/slash literals retain their existing path and trailing-field behavior. Native/fresh regression covers direct/receiver/nested/function parameters, source-before-delimiter effects, metacharacters and flags. The former static normalizer escaped expression source and skipped effects. Standalone5.5.2 uses the value callback for dynamic delimiter lowering and BindingRuntime::array_snapshot to validate/copy before effects. Empty/absent targets still evaluate the operand once; wrong kinds reject first. The legacy list path also captures the delimiter outside its per-item map. This does not admit regex variables or deferred helpers.
 
 Rust23.3.10.2: Core parse_regex consumed suffix flags but kept only body; free /^a/i and /^a/ serialized identically, while public inline imsx controls worked. Encode imsx as leading modes in the existing pattern string, deduplicate modes, ignore go and encode unknown flags as an invalid pattern for existing helper failure handling. Runtime regex values remain Scalar(pattern); no first-class type/schema field or dependency change. Native/restored/plan match/split/filter controls pass after RED, preserving actual Bool matches. Recompile old derived artifacts from source to recover intended modes; historical artifacts retain original recorded patterns/results. Full regex/context admission remains separate.
+
+Dart23.3.10.3 preserves literal i/m/s suffixes as inline modes in the existing pattern string, including contextual array-helper operands. AST flags were already serialized; evaluation previously discarded them. Native/restored/plan matches/split/filter controls pass after RED. The existing inline bridge remains unchanged; no public type/schema change. Grouped /(?s)^a.b$/ still becomes invalid_fluent_chain: scanner _looksLikeRegexStart rejects slash followed by (, exposing its dot before literal recognition. P1 repair23.3.10.6 follows Julia/Lua flow; full x/unknown-mode admission is not established here.

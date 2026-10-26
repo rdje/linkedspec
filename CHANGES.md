@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.10.3 — carry Dart predicate results and literal modes
+
+Dart scalar/one-operand guards, null text operands and literal i/m/s pattern carriage are repaired. Shared native/restored/plan JSON, mode/split/filter controls, direct emptiness and fatal selected-file analysis pass after null-operand/flag-loss/12-effect RED. Actual producer kinds and SOC/SC snapshots remain unchanged; no new type/schema or broad regex admission. P1 grouped dotted regex parsing is owned23.3.10.6 immediately after Julia/Lua. Book/fast checks pass; Julia next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.10.2 — carry Rust predicate results and regex flags
 
 Rust adds the four String predicates to scalar-result/one-operand dispatch. The shared fixture exposed discarded literal suffix flags: Core parse_regex stored /^a/i exactly like /^a/, while public inline imsx controls worked. Preserve modes in the existing pattern payload, ignore go and fail unknown flags through existing invalid-pattern handling. Native/restored/plan result, flag/split/filter and direct boundary checks plus18 focused Core regex tests pass after null/SO/S/12-effect and flag-loss RED. Existing numeric/Bool kinds/schema unchanged; regenerate old artifacts from source. Book/fast checks pass; Dart next.

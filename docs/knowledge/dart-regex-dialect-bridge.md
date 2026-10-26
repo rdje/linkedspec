@@ -8,7 +8,7 @@ answers:
   - "what does DART-BACKEND-PARITY.6.2.4.1 prove"
   - "why do Dart regex FormatExceptions remain after the regex bridge"
   - "which Dart leaf closed the structural regex FormatExceptions"
-date: 2026-07-09
+date: 2026-10-26
 status: current
 tags: [dart, regex, corpus, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.6.2.4.1 adds compileRuntimeRegex(...) in dart/lib/src/runtime/matching.dart and routes helper regex compilation through it from interpreter.dart. The bridge normalizes POSIX character classes, inline i/m/s flag groups, scoped flag groups by lowering them to non-capturing groups plus Dart RegExp flags, possessive quantifier markers, lower-bound {,n} quantifiers, and Python-style named captures before Dart RegExp compilation. Focused runtime matching and interpreter tests lock the behavior. The final shipped-smoke window still had FormatExceptions only for deeper PCRE structural constructs such as \\K, (?&name), and (?(DEFINE)...), routed to DART-BACKEND-PARITY.6.2.4.6. That later leaf closes those exact shipped structural forms with bounded matchers, not a broad regex engine replacement."
@@ -46,3 +46,5 @@ authored native and SpecFile-JSON parsers execute the altered pattern. Actual
 a{,2} support remains a successful bridge control. Gated .2.16 owns lexical repair
 and carrier/public proof; this finding changes neither the documented scoped-flag/
 possessive limits nor the separately owned regex-brace scanners.
+
+Action literal suffix i/m/s modes now enter this existing bridge via the pattern string (TYPE23.3.10.3); serialized AST flags already existed. Contextual filter/split_each paths use the same normalization. Focused reverify: cd dart && bash ../tools/run_dart_project_data.sh test test/string_predicate_result_receivers_test.dart test/emptiness_result_receivers_test.dart. Grouped dotted action regex parsing remains P1 TYPE23.3.10.6; see [[action-regex-operands-and-runtime-kinds]].

@@ -93,3 +93,13 @@ filter), direct boundary tests and18 focused Core regex tests pass after RED.
 Regenerate previously compiled/emitted Rust artifacts from original source to pick
 up the corrected modes; old regex nodes retain their recorded pattern data. Do not
 rewrite immutable historical evidence. Dart/full regex/domain/admission separate.
+
+## Bounded Dart handoff
+
+23.3.10.3 adds scalar/one-operand guards; restores null text operand false and
+literal i/m/s through the existing pattern-string/inline bridge, including
+contextual helper patterns. Native/restored/plan shared and mode/split/filter
+checks plus direct emptiness and fatal selected-file analysis pass after RED.
+Producer kinds and correct SOC/SC snapshots remain unchanged. Public inline
+/(?s)^a.b$/ exposes a separate scanner rejection; P1 owned23.3.10.6 follows
+Julia/Lua result implementation. Full x/unknown flags/domain/admission separate.

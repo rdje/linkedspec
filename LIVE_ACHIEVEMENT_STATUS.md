@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust predicate flow/literal flags pass focused checks; Dart assessment next.
+Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 
 ## Latest Completed Slice
 
-Rust adds the four String predicates to scalar-result/one-operand dispatch. The shared fixture exposed discarded literal suffix flags: Core parse_regex stored /^a/i exactly like /^a/, while public inline imsx controls worked. Preserve modes in the existing pattern payload, ignore go and fail unknown flags through existing invalid-pattern handling. Native/restored/plan result, flag/split/filter and direct boundary checks plus18 focused Core regex tests pass after null/SO/S/12-effect and flag-loss RED. Existing numeric/Bool kinds/schema unchanged; regenerate old artifacts from source. Book/fast checks pass; Dart next.
+Dart scalar/one-operand guards, null text operands and literal i/m/s pattern carriage are repaired. Shared native/restored/plan JSON, mode/split/filter controls, direct emptiness and fatal selected-file analysis pass after null-operand/flag-loss/12-effect RED. Actual producer kinds and SOC/SC snapshots remain unchanged; no new type/schema or broad regex admission. P1 grouped dotted regex parsing is owned23.3.10.6 immediately after Julia/Lua. Book/fast checks pass; Julia next.
 
 ## Next Action
 
-Independently assess Dart starts_with/ends_with/contains_substr/matches result/source/shape behavior under23.3.10.3 using shared fixture. Preserve actual producer kinds/null/empty/regex/source/copy policies; repair confirmed ordinary gaps only, small native/restored/plan/direct checks and fatal selected-file analysis/docs/commit.
+Independently assess Julia starts_with/ends_with/contains_substr/matches under23.3.10.4 using shared fixture; preserve actual kinds/source/operand/copy policies, repair confirmed ordinary gaps, small native/restored/plan/direct checks/docs/commit. Lua5 then P1 Dart grouped regex6 before further families.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.2` — Rust predicate flow/literal flags pass focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` — Perl String predicate handoff passes native/fresh/direct checks; Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.9` — String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
@@ -29,7 +30,6 @@ Independently assess Dart starts_with/ends_with/contains_substr/matches result/s
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` — Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` — Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
 
 ## History
 

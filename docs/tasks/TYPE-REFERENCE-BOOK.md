@@ -2382,7 +2382,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10`
   Status: `active` / bounded String predicate implementation planned
   Goal: Compatible result handoff for existing starts_with/ends_with/contains_substr/matches under string-predicate-results.md.
-  Children: `.23.3.10.1`, `.23.3.10.2`, `.23.3.10.3`, `.23.3.10.4`, `.23.3.10.5`.
+  Children: `.23.3.10.1`, `.23.3.10.2`, `.23.3.10.3`, `.23.3.10.4`, `.23.3.10.5`, `.23.3.10.6`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.1`
   Status: `completed`
@@ -2435,10 +2435,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.2 - carry Rust predicate results and regex flags`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Dart ordinary String predicate result handoff.
   Dependencies: .23.3.10.2.
   Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+  Activation: clean `d42199d00ee1f5a4712a3d8151c9dc8d1e9a2d1a`; Rust committed, brief empty, tree clean; final staged checks passed.
+  Owned paths: Confirmed Dart ordinary String predicate dispatch/shape gaps only; shared native/restored/generated-plan fixture, direct emptiness compatibility, selected-file analysis and current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/restored/generated-plan shared predicate fixture before/after repair, direct emptiness fixture, fatal selected-file analysis, book/history/diff and final staged memory/cadence/diagnosis checks.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full regex/domain/portable admission23.4, mandatory Perl registration23.4.1 and final clean push separate.
+  Claim verification: none: deterministic authored values/order regression, no quantified population or portable measurement.
+
+  Newly confirmed P1 producer defects / own now: Native shared RED renders null suffix/needle operands1! instead of0!, regex /^a/i0! instead of1!, container negatives[] and malformed shapes execute12 effects. _callStringPredicate explicitly coerces null operands to empty text; ActionRegexLiteralExpr retains flags in AST/JSON but interpreter evaluation and contextual pattern conversion drop them. Restore null handling and existing inline i/m/s modes without changing producer kinds or introducing a public regex type. Other regex dialect/flag admission remains separate.
+
+  Completion: Add four existing predicates to scalar/one-operand guards; stop null text operand coercion; retain literal i/m/s suffix modes in existing pattern strings/contextual helper operands using the existing inline bridge. No new type/schema or producer-kind normalization.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Native shared RED has null suffix/needle1! instead of0!, regex-i0! instead of1!, container negatives[] and12 malformed effects. Valid result flow and SOC/SC snapshots already work.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart scalar/shape lists omit four predicates; _callStringPredicate sets nullAsEmpty; regex literal evaluation/contextual conversion return body without already-serialized flags. Extra inline grouped/dotted control fails separately because action_parser.dart rejects slash before (, exposing its dot as a fluent separator; owned P1 sibling6.
+  - [x] FIX: Extend only existing guards; preserve null operands; encode suffix i/m/s for existing runtime bridge in action/contextual pattern conversion. Preserve numeric substring/Boolean matches and eager source/operand snapshots; no regex bridge/domain expansion.
+  - [x] ADDRESSED (verified): Shared native/restored/plan expected JSON passes source families, all four true/false pairs, null/empty/regex-i, false retention/generic/bridges/scalar guards, SOC/SC/once-only effects and malformed no-effects. Added i/m/s no-flag/inline controls, duplicatei and flagged split/filter pass on all three routes.
+  - [x] NO REGRESSION: Direct emptiness fixture and fatal selected-file analysis pass; three targeted tests. Added flag control initially had one extra expected Boolean after extracting the separately owned grouped-pattern case; corrected expected vector to authored eleven values, with all distinguishing false/true controls retained. No full suite or broad regex/comparison/contains admission.
+  - [x] LOCKSTEP: Contract/book/String+regex facts/map and task/live/resume align. Book/history/diff and final staged memory/cadence/diagnosis checks pass; canonical coverage not claimed. Julia4 next after clean commit; P1 grouped Dart regex6 follows Julia/Lua before further families.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.3 - carry Dart predicate results and literal modes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.4`
   Status: `pending`
@@ -2451,6 +2470,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Independently assess and implement/confirm Lua ordinary String predicate result handoff.
   Dependencies: .23.3.10.4.
   Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.6`
+  Status: `pending`
+  Priority: P1; owned Dart grouped-regex action scanner repair, immediately after Julia4/Lua5 result handoff and before further family/admission work.
+  Goal: Repair the newly reproduced grouped literal/dot parsing boundary without confusing division or receiver syntax.
+  Reproduction: Public native execution of Top:: I { return(matches(input_text(),/(?s)^a.b$/)) } raises unsupported raw action expression for /(?s)^a.b$/; same mode as /^a.b$/s executes. Additional mode control failed in string-predicate-dart-green.log while the shared String fixture/direct emptiness passed.
+  Root cause: action_parser.dart _looksLikeRegexStart explicitly rejects slash followed by open parenthesis; _splitTopLevelFluentSegments consequently sees the pattern's dot, and _parseFluentChain emits ActionRawExpr(reason invalid_fluent_chain) before _parseLiteral can recognize it. Existing matching.dart supports inline i/m/s; do not classify this as an engine limitation.
+  Acceptance: Focused public AST/native/restored/plan grouped/dotted and slash/division/receiver controls, minimal lexical repair, direct predicate compatibility and current book/fact/task/live docs. Assess extended x/unknown suffix modes independently before claiming full catalog support; current i/m/s repair is bounded. No dependency implementation inspection, public regex type or full gate.
+  Planned verification tier: focused; declare exact checks and no-measurement rationale at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -2545,11 +2573,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is implemented/targeted-checked; Rust2 result/shape and literal-flag repair are targeted-checked; independent Dart3 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is implemented/targeted-checked; Rust2 result/shape and literal-flag repair are targeted-checked; Dart3 scalar/shape/null-operand and i/m/s repair is targeted-checked; independent Julia4 assessment follows, then Lua5 and P1 grouped Dart regex6. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` | `pending` | Independent Dart String predicate result/source/shape assessment. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` | `pending` | Independent Julia String predicate result/source/shape assessment. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -3410,8 +3410,8 @@ final class LinkedSpecRuntimeEngine {
         return value;
       case ActionBooleanLiteralExpr(:final value):
         return value;
-      case ActionRegexLiteralExpr(:final pattern):
-        return pattern;
+      case ActionRegexLiteralExpr():
+        return _regexLiteralPattern(expr);
       case ActionUndefExpr():
         return null;
       case ActionVariableExpr(:final name):
@@ -3710,7 +3710,11 @@ final class LinkedSpecRuntimeEngine {
           final helper = canonicalActionHelperName(call.method);
           if (helper == 'join_values' ||
               helper == 'index_of' ||
-              helper == 'has_key') {
+              helper == 'has_key' ||
+              helper == 'starts_with' ||
+              helper == 'ends_with' ||
+              helper == 'contains_substr' ||
+              helper == 'matches') {
             return call.args.length != 1;
           }
           return (helper == 'first' ||
@@ -5108,6 +5112,10 @@ final class LinkedSpecRuntimeEngine {
           helper == 'coalesce_nonempty' ||
           helper == 'index_of' ||
           helper == 'has_key' ||
+          helper == 'starts_with' ||
+          helper == 'ends_with' ||
+          helper == 'contains_substr' ||
+          helper == 'matches' ||
           helper == 'is_empty' ||
           helper == 'is_nonempty' ||
           (value is List &&
@@ -6192,7 +6200,7 @@ final class LinkedSpecRuntimeEngine {
     _CurrentActionEdge? currentEdge,
   ) {
     if (arg is ActionRegexLiteralExpr) {
-      return _RuntimeRegexPattern(arg.pattern);
+      return _RuntimeRegexPattern(_regexLiteralPattern(arg));
     }
     return _evaluateExpression(
       arg,
@@ -7417,7 +7425,7 @@ Object? _callStringPredicate(
     return 0;
   }
   final value = _scalarString(values[0]);
-  final needle = _scalarString(values[1], nullAsEmpty: true);
+  final needle = _scalarString(values[1]);
   if (value == null || needle == null) {
     return 0;
   }
@@ -7850,6 +7858,11 @@ RegExp? _regexFromValue(Object? value) {
     return null;
   }
   return _compileRegex(pattern);
+}
+
+String _regexLiteralPattern(ActionRegexLiteralExpr literal) {
+  final modes = ['i', 'm', 's'].where(literal.flags.contains).join();
+  return modes.isEmpty ? literal.pattern : '(?$modes)${literal.pattern}';
 }
 
 RegExp? _compileRegex(String pattern, {String flags = ''}) {
