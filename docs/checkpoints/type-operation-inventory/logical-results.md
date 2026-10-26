@@ -89,3 +89,23 @@ retired Hash fat-arrow validation still rejects in the new composition route.
 26 top-level checks across new logical results, existing logical contract and
 literal-default fixtures plus module/test syntax pass after retained RED. New
 Perl test requires explicit23.4.1 canonical registration; full admission open.
+
+## Bounded Rust implementation and rejected-effect follow-up
+
+23.3.17.2 independently confirms raw Bool/typed truth/strict numeric-null,
+nested/LRC and source arity diagnostics; shared valid bridges already work.
+Only direct logical->sorted returns[] rather than scalar null. Known logical
+call receivers now evaluate once into shared selected scalar-result dispatch,
+after existing trailing-block handling. Six focused tests across new producer/
+shared/error/rejected-effects and direct default/named neutral consumers pass
+native/restored/in-process plan with offline compilation/rustfmt; no fresh
+standalone emitted Rust claim.
+
+A direct-dependent check finds Perl17.1's new terminal return drops its current
+source expression: effectful and(...).sorted() yields[null,0] versus nested free
+[[],1]. The difference concerns source evaluation, not a new free-helper result
+normalization. Retained probe_logical_rejection_effects.pl/public substitution
+and logical_rejected_consumer_effects spec/JSON show the mechanism and expected
+LR/LRC/S/null/no-consumer-operand controls, already passing Rust. Immediate P1
+Perl17.1.1 repairs this newly introduced regression before Dart17.3. Existing
+valid-chain fixture remains passing; it omitted effects before rejected tails.

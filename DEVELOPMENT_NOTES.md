@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.2 — guard Rust logical Boolean results
+
+Rust logical producers, bridges, eager Bool/strict numeric-null and typed errors already work. Known logical call sources now enter shared selected scalar dispatch after Array[] boundary RED. Six focused native/restored/in-process-plan producer/shared/error/rejected-effect/default/named neutral tests and offline compilation/rustfmt pass. Dependent public check found newly introduced Perl17.1 dropping source effects before incompatible tails; retained probe/shared LR-LRC-S fixture and immediate P1 Perl17.1.1 own repair next. Book/facts/task/live align; full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.17.1 — continue Perl logical Boolean results
 
 Perl logical sources now validate arity before unknown-operand scanning, enter typed scalar actual-result dispatch and finish each composed helper through the existing emitted-host compatibility bridge.26 focused native/fresh shared/source/typed-error/direct logical/literal-default checks and syntax pass after bridge/raw-DSL/diagnostic RED. All three Boolean-text-Array bridgesX, clean scalar boundaries, raw Bool/false/default recovery and eager LRC/SC snapshots hold; retired Hash arrows still reject. Book/facts/task/live align; independent Rust17.2 next, full admission separate.

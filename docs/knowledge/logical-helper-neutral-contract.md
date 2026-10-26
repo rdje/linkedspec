@@ -69,3 +69,9 @@ checks and syntax pass: all three bridgesX, clean boundaries, real Bool/default
 copies, eager LRC/SC and typed source errors remain. Retired authored Hash arrows
 still reject. Rust/Dart/Julia/Lua17.2-.5 independently assess next; no new logical
 methods/truth policy or reopened historical5.2 projection admission.
+
+Rust17.2 adds logical-call scalar dispatch after[]-boundary RED; six focused
+native/restored/plan/direct tests pass without producer/error changes. Its
+rejected-effect control also catches Perl17.1 skipping valid sources before
+incompatible tails; immediate P1 Perl17.1.1 owns LR/LRC/S preservation before
+Dart17.3. No complete result-family admission is claimed.

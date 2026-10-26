@@ -11,60 +11,47 @@ answers:
   - "what fields are in a Rust logical arity diagnostic"
   - "does Rust logical parity activate explicit codeblock literals"
   - "does the current Rust logical consumer execute the codeblock truth row"
-date: 2026-09-07
+date: 2026-10-26
 status: current
 tags: [rust, logical, truthiness, arity, runtime, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.5.2.3 changes RuntimeValue::as_bool to the ADR 0043 typed truth table and adds validate_logical_helper_arity before eager operand collection in engine.rs. rust/linkedspec-runtime/tests/logical_helper_contract.rs consumes linkedspec-logical-helper-v1 across all representable truth rows, values, ordered effects, receivers, lazy controls, four invalid calls, native compiled, serialized reconstruction, direct value, generated plan, and an offline compiled standalone emitted crate. Complete Rust package, Perl-oracle corpus, generated manifest, 197 integration, and 62x2 Rust primary proof pass; that slice advanced rollout to 2 complete / 6 pending before Dart."
-reverify: "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core runtime_value_as_bool && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test logical_helper_contract && rg -n 'validate_logical_helper_arity|validate_eager_helper_arity|fn as_bool|helper_arity_mismatch' rust/linkedspec-core/src/types.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/runtime.rs"
+evidence: "TYPE23.3.17.2 public producer/shared/error/rejected-effects native-restored-plan and direct neutral/default focused proof. Full prior July/September record, reading/replay and emitted admission details at Gita56732abcbf2af5968510246e23472c49d2fcadf for this path."
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test logical_result_receivers --test default_selected_receivers"
+
 ---
 
-`RuntimeValue::as_bool` is Rust's one language-truth boundary. It makes undef, false, numeric zero (including
-negative zero), the empty string, and empty arrays/harrays false. Every other finite number, every nonempty string
-including `"0"` and `"false"`, and every nonempty aggregate are true. Scalar display and numeric parsing remain
-separate operations.
+RuntimeValue::as_bool owns typed truthiness for helpers and if/while conditions:
+null/false/zero/empty String/Array/Hash are false; other finite numbers, every
+nonempty String including "0"/"false", and nonempty aggregates are true. Scalar
+text and numeric parsing stay separate; switch compares coerced case Strings.
+and/or/not validate positional arity before operands, then evaluate once left
+to right and return actual Bool. Native diagnostics retain helper/actual/expected
+arity and rule; generated errors preserve deterministic tokens. Unknown calls
+try bound codeblocks before their ordinary warning/undef behavior; invalid
+logical arity still precedes unknown or effectful operands.
 
-`and`, `or`, and `not` validate authored positional arity before the engine evaluates any operand: `and`/`or`
-require one or more and `not` requires exactly one. Valid operands then evaluate once left-to-right before boolean
-composition. The helper dispatcher repeats the validation defensively, but the expression-boundary check is what
-guarantees no invalid-call effects. Native `RuntimeDiagnostic` records `code`, `helper_name`, `actual_arity`, and
-`expected_arity`; generated execution preserves the same tokens in its deterministic detail.
+Logical17.2 independently confirms producer/strict numeric-null/nested/LRC,
+shared valid bridges/default/source kinds and typed source errors before code.
+Only logical->sorted yields Array[] instead of clean scalar null. engine.rs
+now evaluates known logical call receivers once and enters existing selected
+scalar-result dispatch after dedicated trailing-block normalization. No typed
+truthiness/free/numeric/helper-error change. Six focused tests across four new
+native/restored/plan producer/shared/error/rejected-effect controls, direct
+defaults and the actual named neutral logical consumer pass with offline
+compilation/rustfmt. All three split bridgesX, Bool/false kinds, copied defaults,
+LRC/SC snapshots and skipped incompatible consumer operands remain. Current
+proof is in-process generated-plan, not fresh standalone emitted Rust.
 
-Eager helpers and lazy `if`/`while` conditions call the same `as_bool` seam.
-Switch selects a string-coerced subject against literal/dynamic case labels; it does
-not use truthiness to compare cases. Controls evaluate only the selected branch or
-loop body. Serialized compiled specs, generated plans, direct-value execution, and emitted
-modules all route back through this runtime owner rather than reimplementing truthiness.
+A dependent reference check catches Perl17.1 dropping eager logical source
+side effects on incompatible consumer rejection: public probe gives[null,0]
+versus nested free[[],1]. New retained logical_rejected_consumer_effects fixtures
+pass Rust LR/LRC/S/null/no-consumer-operand controls; immediate P1 Perl17.1.1
+owns repair before Dart17.3. No other backend failure inferred.
 
-At the initial July 17 logical-helper admission, Rust had no first-class codeblock value and its neutral source
-fixture omitted that inert-codeblock truth row. Later `FUTURE-PARITY-BACKLOG.11.4.1` introduced the inert, truthy
-`RuntimeValue::Codeblock`; dynamic invocation followed in `.11.4.2`. The current construction and value authority
-is [[rust-callable-codeblock-literal-state]]. The earlier limitation is historical, not a current enum boundary.
+Historical July logical admission predates inert RuntimeValue::Codeblock;
+construction/invocation now have [[rust-callable-codeblock-literal-state]]. The
+old neutral consumer still skips its model-only codeblock row and asserts that
+it is the sole skipped row. That consumer's standalone workspace and September
+source-reading facts remain at the exact Git pointer above; current narrow
+checks do not establish its codeblock coverage or repair startup55 number loss.
 
-Reading checkpoint `SESSION-STARTUP-READING.3.3.13` reads the complete 222-line core type-test file. Its truth
-assertions distinguish nonempty strings (including `"0"` and `"false"`), numeric zero, booleans, and aggregate
-emptiness. They do not exercise a codeblock value or establish exhaustive serialization across every variant.
-The managed locked/offline core `types_test` target freshly passes all eight tests, with no ignored or
-filtered cases, in 0.00 test seconds. This includes the selected serde, small-number JSON, truth, number,
-nonempty and length examples; it does not cover `.55`'s large-number loss.
-The fresh neutral checker passes 17 truthiness, ten helper, and three effect cases with 26 rejected mutations.
-These bounded checks do not replace the separate logical-runtime and callable-carrier owners.
-
-Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
-[[cross-backend-condition-truthiness-drift]].
-
-Reading `SESSION-STARTUP-READING.3.3.21` completes the helper dispatcher:
-and/or inspect already-evaluated operands, whereas if/elseif/switch/while explicitly
-evaluate selected raw expressions. While evaluates the condition before enforcing
-the iteration ceiling. Unknown helpers first try a bound codeblock; active-codeblock
-failure is typed, while ordinary unknown helpers warn and return undef. The neutral
-logical checker passes 17 truthiness/10 helper/3 effect cases and 26 mutations;
-this update does not rerun native generated logical consumers.
-
-## September 8 complete consumer reading
-
-Startup `.3.3.54` reads all 496 lines / 18,335 baseline-identical bytes of the logical consumer.
-The current truth adapter still returns None for the codeblock row and verifies that this is the only
-skipped row. Later callable construction/invocation proof remains separately owned; this consumer
-does not itself exercise that row. Its four-module emitted workspace asserts child-process success,
-as does the completed fifteen-module gap consumer. These are source-reading facts, not fresh native
-or emitted execution results.
+Related: [[logical-helper-neutral-contract]], [[cross-backend-condition-truthiness-drift]].

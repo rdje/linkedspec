@@ -6002,6 +6002,13 @@ impl Engine {
                     return self
                         .eval_receiver_with_trailing_block_chain(receiver, calls, ctx, rule_label);
                 }
+                if matches!(receiver.as_ref(), Expr::Call { name, .. }
+                    if matches!(name.as_str(), "and" | "or" | "not"))
+                {
+                    let current = self.eval_expr(receiver, ctx, rule_label)?;
+                    return self
+                        .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
+                }
                 if calls.first().is_some_and(|call| {
                     Self::is_generic_receiver_predicate(&call.method)
                         || (call.method == "copy"
