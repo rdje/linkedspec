@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
+Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 
 ## Latest Completed Slice
 
-Lua contains adds scalar/one-operand guards only and updates actual named missing-needle calibration0->null with identical aliases. Native/plan/fresh numeric/text-key/source producer already works on PUC5.5.1/LuaJIT; shared empty-Array/five-effect RED is repaired, direct comparison and exact named alias contract pass on both. No malformed native pattern/full suite/declared5.4 admission. All five bounded contains result/shape implementations are targeted-checked; original FUTURE5.6 tracks complete admission separately. Actual four-backend null/empty mismatch and sibling snapshot assessment23.2.14 is immediate next. Book/facts/current docs align.
+Freeze six bounded aggregate/null repairs under original FUTURE5.7. Public Perl native/fresh versus Rust native/restored/plan controls confirm null/empty merging in contains/index/uniq and stale named index/has_key/append/merge sources; concat already works. get_bare_value captures typed clones but aggregate adapters re-read ctx. Separate Perl source-null key suppression is traced by dump to typed/legacy defined(hash) ternaries and owned next. Existing reference/null/source authority selected; defined coercion/kinds/first occurrence and wrong-kind fallback stay unchanged. Retained public producers/contracts/book/facts/current docs align; Rust snapshot14.1 next. No runtime repair or full-domain claim at assessment.
 
 ## Next Action
 
-Assess P1 membership null/empty reference mismatch and remaining aggregate-consuming snapshots under23.2.14 immediately, before another family. Read canonical scalar/membership/null authority and original FUTURE5 caveat owner. Retain distinguishing public producer/selection and source-before-operand controls before selecting bounded first-party repairs; Rust contains already captures args.first(), siblings remain unassessed. Four non-reference contains producers merge null/empty versus Perl distinction; no new equality policy without reconciliation. Small targeted checks/docs/commit; full admission remains separate.
+Repair Rust aggregate-consuming named-source re-reads under23.3.14.1 using cached typed arguments in array_consuming_arg/hash_consuming_arg. Preserve prior named wrong-kind/absent empty-container fallback without later ctx lookup; mutation-target/lazy resolvers untouched. Retained public source/probes show index/has_key/append/merge failures, concat control passes. Native/restored/plan and small direct contains/index/has_key/uniform checks/docs/commit. Then Perl key14.2, then null-key Rust/Dart/Julia/Lua14.3-.6. Full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.5` — Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.4` — Julia contains scalar/shape and calibration are targeted-checked; Lua rollout is next, then P1 equality/sibling snapshot assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.3` — Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
@@ -29,7 +30,6 @@ Assess P1 membership null/empty reference mismatch and remaining aggregate-consu
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
 
 ## History
 

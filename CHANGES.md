@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.14 — freeze aggregate operand and null-key repairs
+
+Freeze six bounded aggregate/null repairs under original FUTURE5.7. Public Perl native/fresh versus Rust native/restored/plan controls confirm null/empty merging in contains/index/uniq and stale named index/has_key/append/merge sources; concat already works. get_bare_value captures typed clones but aggregate adapters re-read ctx. Separate Perl source-null key suppression is traced by dump to typed/legacy defined(hash) ternaries and owned next. Existing reference/null/source authority selected; defined coercion/kinds/first occurrence and wrong-kind fallback stay unchanged. Retained public producers/contracts/book/facts/current docs align; Rust snapshot14.1 next. No runtime repair or full-domain claim at assessment.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.13.5 — guard Lua Array contains result receivers
 
 Lua contains adds scalar/one-operand guards only and updates actual named missing-needle calibration0->null with identical aliases. Native/plan/fresh numeric/text-key/source producer already works on PUC5.5.1/LuaJIT; shared empty-Array/five-effect RED is repaired, direct comparison and exact named alias contract pass on both. No malformed native pattern/full suite/declared5.4 admission. All five bounded contains result/shape implementations are targeted-checked; original FUTURE5.6 tracks complete admission separately. Actual four-backend null/empty mismatch and sibling snapshot assessment23.2.14 is immediate next. Book/facts/current docs align.

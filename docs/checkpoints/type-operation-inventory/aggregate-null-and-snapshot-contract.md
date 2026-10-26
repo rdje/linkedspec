@@ -1,0 +1,47 @@
+# Aggregate operands and null Array keys
+
+Owner: TYPE-REFERENCE-BOOK.1.2.23.2.14; implementations23.3.14.1-.6; original
+helper caveat coordination FUTURE-PARITY-BACKLOG.5.7.
+
+README makes Perl the behavioral reference. The frozen uniform-binding read
+policy evaluates a bare identifier to its current typed value. Pure helper value
+operands capture that value before later operands; a later binding replacement
+or mutation cannot replace an earlier input. Existing named wrong-kind/absent
+empty-container fallback remains unchanged. Do not alter reference/lvalue target
+resolvers, lazy control helpers, diagnostics, or unrelated invalid domains.
+Rust get_bare_value already clones Array/Hash values; aggregate-consuming
+adapters must use evaluated arguments rather than re-read current ctx names.
+
+Ordinary has_key captures source, evaluates key once, then tests presence.
+Move Perl’s key expression out of its defined(hash) ternary, including typed
+and legacy value lowering. Null-source output remains0; key effects still run.
+One-key preflight rejects malformed receiver arities before effects as before.
+
+Perl contains/index_of explicitly distinguish an undefined needle/entry from
+empty text; catalog uniq already promises the same distinction. Retain that
+existing authority in contains/index_of/uniq: null matches only null and has a
+distinct internal uniqueness key. Defined scalar conversion remains unchanged,
+as do numeric flags/index kinds and first occurrence/value/kind/source order.
+No new strict Boolean/number/container/callable equality, regex type, serialized
+field or general conversion policy. New null-key controls must include empty,
+mixed null/empty positions, numeric/string defined controls and nonmutation.
+Complete scalar/container/domain/context admission remains23.4.
+
+Retained operand-snapshot-membership.spec and public Perl/Rust probes expose the
+pre-repair distinctions. Perl native/fresh membership is[1,0,0,1,1,1,0,1,1],
+indexes[0,null,null,0,1,1,null,0,0], uniq[null,"",0]. Rust native/restored/plan
+merges null/empty, picks index0 instead of1 and drops empty from uniq[null,0].
+Other variants’ contains merging is confirmed; assess their index/uniq before
+classification. Preserve defined-value coercion rather than broadening this
+normalization into another equality policy.
+
+Rust named index after needle rebinding isnull versus0, has_key0 versus1,
+appended index1 versusnull, merged{z,b} versus{a,b}. Concat control already works.
+Absent named Array/Hash sources become later values, contrary to initial literal
+null controls. Perl has_key source-null returns0 but suppresses key assignment,
+leaving finalnull. Public dump locates key inside defined ternary at typed
+MethodLowering4501/4511 and legacy6840/6863. These are separate owned repairs,
+not a reason to copy one host’s whole output as a universal expected object.
+
+Run focused native/generated/direct checks and commit each bounded repair; no
+exhaustive matrix or full backend gate in ordinary feature slices.

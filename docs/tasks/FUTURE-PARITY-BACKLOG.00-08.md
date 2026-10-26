@@ -2105,7 +2105,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `active`
   Goal: Normalize or permanently document helper caveats.
-  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`, `.5.6`
+  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`, `.5.6`, `.5.7`
   Acceptance: Own the array split/pipeline return-shape caveats (`SPEC-LANG-REFERENCE.5.3.1`) and
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
@@ -2163,6 +2163,8 @@
   Commit: `pending`
 
   Required receiver-arity execution: .5.6 is activated by TYPE23.2.13; five bounded contains implementation children23.3.13.1-.5 own native/generated missing/extra no-effect and punctuation-light twin locks. This changes only receiver contains shape, preserving free helper signatures/equality and other caveats.
+
+  Captured-source/null-key execution: .5.7 is activated by TYPE23.2.14 and delegates six bounded repairs23.3.14.1-.6. Align existing Perl null distinction for contains/index_of/uniq while preserving defined coercion; cached aggregate source values and eager ordinary Perl has_key key evaluation follow existing typed-read/source contracts.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1`
   Status: `done`
@@ -3296,6 +3298,19 @@
   Planned claim verification: none: existing signature and deterministic authored regression contract, no population/completeness measurement.
   Verification: Perl TYPE23.3.13.1 is implemented/targeted-checked: shared native/fresh hit/miss/numeric/source snapshots and nested missing-twin/extra no-effects pass; direct comparison and syntax pass12 assertions. Perl existing direct invalid-arity policy is preserved; nested host-call fallthrough is fixed. Rust TYPE23.3.13.2 is implemented/targeted-checked too: native/restored/plan source/result/shape checks and named alias calibration now enforce null/no-effects; Dart TYPE23.3.13.3 is targeted-checked too: numeric producer/correct snapshots retained, scalar/required-needle lists and named null-alias calibration pass five tests/fatal analysis; Julia TYPE23.3.13.4 is targeted-checked too: raw Number/not-Bool producer and correct captures retained; guard/named calibration/consumer checks pass with strict compilation. Lua TYPE23.3.13.5 is targeted-checked too: numeric/captured producer retained; native/plan/fresh shared/direct comparison and exact named null-alias contract pass on PUC5.5.1/LuaJIT. All five ordinary implementations are targeted-checked; complete domain/portable/declared5.4 admission remains TYPE23.4. Rust named-source rebinding was repaired using evaluated operands. Actual Rust/Dart/Julia/Lua null/empty membership reference mismatch and unassessed sibling aggregate re-read seams are P1 TYPE23.2.14 immediately after rollout; no equality normalization is inferred here.
   Commit: `pending`; five implementation commits own actual repairs.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.7`
+  Status: `active` / coordinated bounded repairs
+  Goal: Repair cached aggregate operand reads, Perl has_key key evaluation and null-distinct Array comparison/uniqueness.
+  Dependencies: TYPE23.2.14 frozen aggregate-null-and-snapshot-contract.md; execution TYPE23.3.14.1-.6 in order.
+  Authority: README behavioral reference; uniform_binding_contract policy.read; existing index/has_key source-before-operand contracts; explicit Perl contains/index_of undef branches and catalog uniq null/empty distinction. No new strict Boolean/number/container/callable equality or source/target namespace policy.
+  Acceptance: Rust pure aggregate adapters use cached typed arguments with prior named wrong-kind/absent empty fallback preserved; Perl ordinary has_key evaluates source then key once even for source-null before testing presence. contains/index_of/uniq keep null distinct from empty while preserving defined conversions, first source value/kind/order, arity and copy/source contracts. Independent backend/native/generated checks and current expected artifacts/docs; complete domain/portable admission remains TYPE23.4.
+  Planned verification tier: focused
+  Planned focused checks: Per bounded execution leaf, public changed-surface/direct consumer and small compile/format checks, docs and commit; no full gate per ordinary slice.
+  Planned canonical trigger: Complete admission/final clean push remain separate under feature-first cadence.
+  Planned claim verification: none: deterministic authored contract/regression controls, no population/completeness measurement.
+  Verification: `pending`; assessment confirms actual Rust stale sources and null-key mismatches, plus Perl source-null key suppression; no repair claimed at activation.
+  Commit: `pending`; six implementation commits own actual repairs.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`

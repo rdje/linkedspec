@@ -1250,7 +1250,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.13 - freeze Array contains result transitions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.14`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 immediately after contains23.3.13.5, before another family/full admission.
   Goal: Reconcile membership null/empty equality and aggregate-consuming source snapshots with the Perl reference and typed value contracts.
   Dependencies: Bounded contains rollout23.3.13.1-.5 committed; coordinate FUTURE-PARITY-BACKLOG.5 caveat authority.
@@ -1258,9 +1258,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Resolve accepted scalar/null/equality authority before normalization; independently compare actual membership/index selection and remaining array/hash consumer source/operand effects. Fix confirmed bounded first-party defects with small producer/direct checks and explicit original-owner coordination, preserve unrelated source kinds/equality/copy/arity and published caveats. No broad census or portable admission from samples.
   Planned verification tier: focused; declare exact metadata at activation.
 
+  Activation: clean `0b474336c4bc96977edb5fd3e6316f4b4095a58d`; five contains slices committed, brief0/tree clean.
+  Owned paths: Bounded public membership/null selection and named Array/Hash source/operand controls, existing scalar/null/reference authority, original FUTURE5 coordination and retained producers. Split confirmed repairs into bounded subsequent leaves before code; no production changes in this assessment.
+  Verification tier: `focused`
+  Focused checks: Retained public Perl Get/native/fresh and Rust Engine producer probes, canonical typed values/membership/selection/source snapshot contracts, source syntax/book/history/diff/final staged continuity guards. No corpus/full verification.
+  Canonical trigger: None for bounded assessment under director feature-first cadence; complete portable/context/domain admission23.4 separate.
+  Claim verification: none: deterministic authored distinctions and bounded contract reconciliation, no population/completeness measurement.
+
+  Decision / authority: README behavioral reference and explicit Perl contains/index_of undef branches select null-only matches for a null needle; defined scalar text coercion stays unchanged. Catalog uniq already explicitly retains undef distinct from empty. Treat null as a distinct internal Array comparison/uniqueness key for contains/index_of/uniq only, preserving first value/kind/order and all defined-value conversion behavior. No new strict Boolean/number/container/callable equality policy. Uniform binding read plus frozen index/has_key source-before-operand rules require cached typed operands; preserve existing named wrong-kind/absent empty-container fallback without re-reading later bindings. Ordinary has_key must evaluate its key once after source capture even when source null; move key expression before validity check in both typed/legacy lowering. These bounded original-helper repairs are activated as FUTURE5.7 and implementations23.3.14.1-.6.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Retained shared spec/public Perl Get+dumps/native/fresh and Rust Engine native/restored/plan agree within carriers. Perl membership=[1,0,0,1,1,1,0,1,1], indexes=[0,null,null,0,1,1,null,0,0], uniq=[null,"",0]; Rust merges null/empty, indexes picks0 instead of1, uniq=[null,0]. Other variants’ contains merging is already independently confirmed; index/uniq require each backend assessment.
+  - [x] ROOT CAUSE (WHY + WHERE): Rust contains/index_of/uniq use to_str keys merging Undef/empty. array_consuming_arg/hash_consuming_arg replace evaluated typed args with current named bindings. Public named index result null vs reference0, has_key0 vs1, appended index1 vsnull and merged{z,b} vs{a,b} distinguish re-read; concat control already preserves[a,b] Array values. get_bare_value in runtime.rs already captures typed Array/Hash clones, and uniform_binding_contract policy.read is authoritative.
+  - [x] FIX: Freeze aggregate-null-and-snapshot-contract.md and six bounded implementation leaves, activating original FUTURE5.7. First Rust adapters consume cached typed arguments while preserving prior named wrong-kind/absent empty fallback; then Perl key evaluation; then Rust/Dart/Julia/Lua null-key primitives. No production changes in assessment.
+  - [x] ADDRESSED (verified): Source-null controls distinguish output policy from effects. Rust named absent index returns0 despite literal absent controlnull, absent has_key1 despite control0; both rebind sources during operands. Perl absent has_key returns0 but skips key binding (finalnull). dump_parser_source and typed4501/4511 plus legacy6840/6863 show key expression inside defined(hash) ternary: own repair23.3.14.2; do not bless or obscure that suppression.
+  - [x] NO REGRESSION: Public probes compile/execute exact source with no diagnostics; no runtime edits. Source/test syntax, book/history/diff/final staged memory/cadence/diagnosis checked. Defined coercion/invalid-kind/copy/target-mutation/lazy-control/deferred contexts and complete portable admission remain separately owned.
+  - [x] LOCKSTEP: Retained source/Perl producer/Rust public example, frozen contract, known book limitations, new canonical source/null fact and current pure-pipeline/history qualifier align with TYPE/FUTURE5.7/index/live/resume. Rust snapshot1 is next after clean commit; no fixed-behavior claim at this freeze.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.14 - freeze aggregate operand and null-key repairs`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -3063,6 +3080,54 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Shared Lua fixture/registration/actual calibration, contract/book/guide, current contains/arity/Lua selection facts/map and TYPE/FUTURE5.6/index/live/resume align. Historical July93/93 is qualified and full unsafe reverify replaced by this safe changed surface; no historical version evidence reclassified as current. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. P1 .23.2.14 next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.13.5 - guard Lua Array contains result receivers`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14`
+  Status: `active` / bounded aggregate/null repairs; full admission23.4 separate
+  Goal: Implement frozen aggregate-null-and-snapshot-contract.md under original helper-caveat owner FUTURE-PARITY-BACKLOG.5.7.
+  Children: `.23.3.14.1`, `.23.3.14.2`, `.23.3.14.3`, `.23.3.14.4`, `.23.3.14.5`, `.23.3.14.6`.
+  Acceptance: Cached pure aggregate value operands; eager Perl has_key key effects; null distinct from empty in contains/index_of/uniq, original kinds/first occurrence/source snapshots retained. Preserve existing defined-scalar coercion, malformed arity, invalid-kind fallback, target mutation and lazy controls; bounded per-backend commits/quick checks. Full domain/portable admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.1`
+  Status: `pending`
+  Goal: Repair Rust aggregate-consuming named-source snapshots.
+  Dependencies: .23.2.14; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Rust source re-read is confirmed on all three carriers; contains already has a local fix. Mutation-target resolvers and lazy helpers stay untouched.
+  Acceptance: Use cached typed get_bare_value arguments in array_consuming_arg/hash_consuming_arg; preserve existing named wrong-kind/absent empty-container fallback without reading later ctx bindings. Public native/restored/plan index/has_key/append/merge and literal/null/concat controls plus direct contains/index/has_key/uniform checks; no null equality change. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.2`
+  Status: `pending`
+  Goal: Evaluate Perl has_key key after captured null sources.
+  Dependencies: .23.3.14.1; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Public dump shows typed and legacy key expression nested inside defined(hash), suppressing valid key effects on a null source; result remains0 while key mutations must run once.
+  Acceptance: Move key evaluation before source-validity ternary in typed/legacy ordinary lowering, preserving source snapshot/output kinds/domain/warnings and one-key guard. Native/fresh source-null/effect/valid source/malformed and direct has_key/contains checks. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.3`
+  Status: `pending`
+  Goal: Distinguish Rust null Array comparison and uniqueness keys.
+  Dependencies: .23.3.14.2; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Public membership/index/uniq null-empty reference mismatch is confirmed; raw numeric flags and first value/kind/order stay unchanged.
+  Acceptance: Preserve defined to_str conversion, but null matches only null in contains/index_of and has its own uniq key. Native/restored/plan literals/variables/receivers/nested consumers and existing contains expected updates; source adapters from1 stay correct. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.4`
+  Status: `pending`
+  Goal: Distinguish Dart null Array comparison and uniqueness keys.
+  Dependencies: .23.3.14.3; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Contains null/empty merging confirmed; index/uniq still require public controls. No new producer defect inferred before assessment.
+  Acceptance: Independently assess index/uniq against public Perl authority, preserve defined conversions, implement null-only matching/own uniq key and current contains fixture expectations. Native/restored/plan and direct small checks/fatal analysis. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.5`
+  Status: `pending`
+  Goal: Distinguish Julia null Array comparison and uniqueness keys.
+  Dependencies: .23.3.14.4; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Contains null/empty merging confirmed; index/uniq still require public controls. Preserve copied values and current source effects.
+  Acceptance: Independently assess index/uniq, preserve defined conversions, implement null-only matching/own uniq key and current contains expectations with explicit Number/not-Bool guards. Native/plan/fresh strict small checks. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.6`
+  Status: `pending`
+  Goal: Distinguish Lua null Array comparison and uniqueness keys.
+  Dependencies: .23.3.14.5; original helper owner FUTURE-PARITY-BACKLOG.5.7.
+  Intake: Contains null/empty merging confirmed; index/uniq still require controls. Known malformed native patterns remain excluded; declared5.4/full admission separate.
+  Acceptance: Independently assess index/uniq, preserve defined conversions, implement null-only matching/own uniq key and current contains expectations. Native/plan/fresh/direct checks on PUC5.5.1/LuaJIT, safe named fixtures only. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`; remaining admission leaves split at activation.
@@ -3160,7 +3225,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.14` | `pending` | Reconcile confirmed membership null/empty mismatch and remaining aggregate-consuming source snapshots. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` | `pending` | Repair confirmed Rust aggregate operand re-reads; preserve existing wrong-kind fallback. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
