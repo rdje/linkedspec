@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.5 — guard Lua Array contains result receivers
+
+Lua contains adds scalar/one-operand guards only and updates actual named missing-needle calibration0->null with identical aliases. Native/plan/fresh numeric/text-key/source producer already works on PUC5.5.1/LuaJIT; shared empty-Array/five-effect RED is repaired, direct comparison and exact named alias contract pass on both. No malformed native pattern/full suite/declared5.4 admission. All five bounded contains result/shape implementations are targeted-checked; original FUTURE5.6 tracks complete admission separately. Actual four-backend null/empty mismatch and sibling snapshot assessment23.2.14 is immediate next. Book/facts/current docs align.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.4 — guard Julia Array contains result receivers
 
 Julia contains adds two guard-list entries only and updates actual missing-needle calibration0->nothing with identical twins. Independent native/plan/fresh producer and Number/not-Bool raw checks preserve numeric/text-key equality and already-correct Array/absent-source capture; shared three empty-Array/five-effect REDs are repaired. Twelve membership/twelve direct comparison and55 small changed punctuation-light assertions pass with strict compilation. Actual Julia null/empty reference mismatch joins P1 assessment23.2.14 after Lua rollout. Book/facts/registration/FUTURE5.6/current docs align; Lua5 next, known malformed native patterns excluded.

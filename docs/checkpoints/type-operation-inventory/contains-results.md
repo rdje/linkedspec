@@ -80,3 +80,14 @@ absent-source values. Three shared empty-Array/five-effect REDs become passing
 result/source/shape controls. Twelve membership, twelve direct comparison and55
 small changed alias-fixture assertions pass with strict compilation. No producer/
 equality change; P1 .23.2.14 includes actual Julia null/empty merging. Lua5 next.
+
+## Bounded Lua implementation
+
+23.3.13.5 adds contains to scalar/one-operand lists and updates actual named
+missing-needle calibration0->json.null. Native/plan/fresh producers already preserve numeric flags, text-key equality
+and source captures on PUC5.5.1/LuaJIT; shared .text.json, direct comparison and
+exact named alias checks now pass after
+empty-Array/five-effect RED. No producer/equality changes or malformed native
+pattern probe. All five bounded result/receiver guards are targeted-checked; P1
+.23.2.14 now reconciles actual null/empty mismatch and sibling aggregate snapshots.
+Declared5.4/full domain/portable admission remain separate.

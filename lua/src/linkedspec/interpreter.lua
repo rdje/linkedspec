@@ -3513,7 +3513,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       if scalar_numeric.is_comparison(canonical_name) and index < #calls then return json.null end
     elseif PURE_ARRAY_HELPERS[canonical_name] then
       value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
-      if canonical_name == "join_values" or canonical_name == "index_of" then scalar_result = true end
+      if canonical_name == "join_values" or canonical_name == "index_of" or
+          canonical_name == "contains" then scalar_result = true end
     elseif PURE_HASH_HELPERS[canonical_name] then
       value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "has_key" then scalar_result = true end
@@ -3888,7 +3889,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     -- scalar min/max overloads keep their existing operands.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
-      if (name == "join_values" or name == "index_of" or name == "has_key" or
+      if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or
           name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches" or
           is_string_comparison(name)) and
           #(call.args or {}) ~= 1 then return json.null end

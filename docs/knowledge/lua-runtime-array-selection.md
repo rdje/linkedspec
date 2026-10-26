@@ -7,11 +7,11 @@ answers:
   - "does Lua support reversed contains index_of and uniq"
   - "what do Lua array selection helpers return for missing inputs"
   - "do Lua pure array helpers mutate their source"
-date: 2026-07-12
-status: current
+date: 2026-10-26
+status: historical array milestone; current contains guards checked
 tags: [lua, runtime, arrays, selection, ordering, membership, uniqueness, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.4.2 extends PURE_ARRAY_HELPERS and evaluate_array_helper in lua/src/linkedspec/interpreter.lua. The focused runtime copied array selection fixture in lua/test/run.lua covers all 13 governed helpers through bare, literal, function, and receiver/chained forms. PUC Lua 5.4 and LuaJIT both pass 93/93 through tools/run_lua_local.sh."
-reverify: "bash tools/run_lua_local.sh && rg -n 'nonnegative_array_count|runtime copied array selection' lua/src/linkedspec/interpreter.lua lua/test/run.lua"
+evidence: "July12 LUA4.3.4.2 array milestone93/93 per ABI; exact prior record at Git7bb011b4eea5129faf334a57c50871d695ffb92c. TYPE23.3.13.5 currently checks contains producer/result/shape on available PUC5.5.1/LuaJIT; declared5.4 remains separate."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/contains_result_receivers_test.lua"
 ---
 
 Lua returns fresh arrays from `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed`, and
@@ -20,13 +20,11 @@ beyond the source returns an empty array. Non-array selection/order inputs retur
 and a missing `index_of` result return null; `count` returns zero for a non-array value.
 
 `contains` returns numeric `1` or `0`, while `index_of` returns the first zero-based index. Both compare through the
-portable scalar-to-text boundary. `uniq` uses that same key and preserves the first occurrence's source order.
+current scalar-to-text key, merging null/empty unlike Perl (P1 TYPE23.2.14). `uniq` uses that same key and preserves the first occurrence's source order.
 Function and receiver forms share the dispatcher, so `items.sorted().drop_front(2).first()` composes without
 mutating `items`.
 
-Lua clamps a valid negative count to zero for safety. Dart does the same, Julia treats a negative as invalid and
-falls back to the helper default, and Rust's current signed-to-unsigned path can yield an oversized count.
-`FUTURE-PARITY-BACKLOG.5` owns normalization of that pre-existing cross-backend caveat.
+July12 also recorded cross-backend negative-count differences. Exact dated observations remain at the Git pointer above; FUTURE-PARITY-BACKLOG.5 owns normalization. No current count-domain closeout follows from these contains checks.
 
 Related facts: [[lua-runtime-array-construction]], [[lua-numeric-aggregate-reducers]],
 [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]].

@@ -7261,7 +7261,7 @@ test("punctuation-light zero-argument contract is exact", function()
     uniform_binding_action_source('values = ["a", "b"]; return(values.contains())')
   )
   assert_equal(bare_contains, parenthesized_contains, "contains spellings")
-  assert_equal(bare_contains, 0, "existing missing contains needle result")
+  assert_equal(bare_contains, json.null, "required missing contains needle result")
 
   local parsed = linkedspec.parse_spec(contract.future_fixture.spec_source)
   local serialized = json.encode(linkedspec.spec_ast.to_json(parsed))
@@ -9559,6 +9559,10 @@ end)
 
 test("String comparison result receiver continuations", function()
   dofile("lua/test/string_comparison_result_receivers_test.lua")
+end)
+
+test("Array contains result receiver continuations", function()
+  dofile("lua/test/contains_result_receivers_test.lua")
 end)
 
 io.stdout:write("1..", total, "\n")
