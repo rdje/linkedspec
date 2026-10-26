@@ -3725,6 +3725,8 @@ final class LinkedSpecRuntimeEngine {
                   helper == 'length' ||
                   helper == 'is_empty' ||
                   helper == 'is_nonempty' ||
+                  helper == 'is_defined' ||
+                  helper == 'is_undefined' ||
                   helper == 'num_sum' ||
                   helper == 'num_avg' ||
                   helper == 'num_median' ||
@@ -5118,6 +5120,8 @@ final class LinkedSpecRuntimeEngine {
           helper == 'matches' ||
           helper == 'is_empty' ||
           helper == 'is_nonempty' ||
+          helper == 'is_defined' ||
+          helper == 'is_undefined' ||
           (value is List &&
               (_numericAggregateHelperNames.contains(helper) ||
                   helper == 'join_values'));

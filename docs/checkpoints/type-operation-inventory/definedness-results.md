@@ -66,3 +66,12 @@ literal producer and direct String checks pass after RED. Bool false renders0!
 and survives coalesce_nonempty; .json differs intentionally from .perl.json.
 Source/copy and1!/SC/one-call snapshots remain; the consumer now changes source to null, distinguishing an earlier true result from a later binding read. The same strengthened input passes Perl native/fresh too. Word checks and AST/schema stay
 unchanged; no full domain/admission. Dart3 follows.
+
+## Bounded Dart implementation
+
+23.3.11.3 adds the two methods to scalar-result and zero-operand guards only.
+Native valid flow and all native/restored/plan free Bool/text/default/literal
+controls already pass; container[] and four malformed effects are the failures.
+Shared three-route result and direct String tests plus fatal selected-file
+analysis pass after guards. Bool false/0! retention, source/copy/domain and
+1!/SC/one-call/final-null snapshot remain; no producer/parser repair. Julia4 next.

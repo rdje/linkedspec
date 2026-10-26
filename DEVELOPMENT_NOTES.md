@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.11.3 — guard Dart definedness result boundaries
+
+Dart adds definedness to scalar-result and zero-operand lists only. Valid flow, Bool/text/default/literal controls and1!/SC/one-call/final-null snapshot already work; container[] and four malformed effects become null/no-effects after guards. Shared native/restored/plan and free producer controls plus direct String/mode/grouped-literal checks pass five targeted tests; fatal selected-file analysis passes. Producer/parser/schema/domains unchanged. Book/fast checks pass; Julia4 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.11.2 — carry Rust definedness and literal receiver chains
 
 Rust adds Bool/null literals to existing postfix parsing and extends generic/scalar/zero-operand receiver classification to definedness. Public compile and null/four-effect RED become passing native/restored/plan shared results, native Bool/text/default/literal controls and direct String tests. Strengthened shared consumer changes source to null while earlier result staystrue/SC/one call; same Perl native/fresh check passes. Original Bool vs Perl empty-string/default behavior and schema stay unchanged. Formatting/book/fast checks pass; Dart3 next.

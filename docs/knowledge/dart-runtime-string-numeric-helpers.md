@@ -2,50 +2,23 @@
 id: dart-runtime-string-numeric-helpers
 title: Dart runtime executes current string/scalar and numeric helper families
 answers:
+  - why do Dart definedness results need scalar and zero operand guards
   - does Dart runtime support trim lowercase substr split
   - does Dart runtime support string receiver chains
   - does Dart runtime support numeric helpers
   - does Dart runtime support numeric aliases and symbol callees
   - does Dart runtime support number receiver chains
   - does Dart runtime support str_eq string comparisons
-date: 2026-07-09
+date: 2026-10-26
 status: current
 tags: [dart, runtime, helpers, string, numeric, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.4.3.2 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove string/scalar helpers, explicit str_* lexical comparisons, numeric arithmetic/reducer/comparison helpers, numeric aliases, arithmetic/comparison symbol callees, and string/number receiver chains."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
+evidence: "String/numeric4.3.2; generic definedness23.3.11.3 focused native/restored/plan/direct proof. Historical method lists/replays at Git01e9d8aae02e76ead8575468c743490a431926a7 for this path."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/definedness_result_receivers_test.dart test/string_predicate_result_receivers_test.dart"
 ---
 
-Dart runtime string/scalar and numeric helper execution lives in
-`dart/lib/src/runtime/interpreter.dart`.
+Dart's interpreter.dart canonicalActionHelperName dispatch shares implementations across helper/receiver/word/symbol forms. Pure strings cover cat, trim/case/length/substr, literal/regex predicates, replacement/removal/split, coalescing and generic definedness/emptiness; lexical str_* remain distinct. Numeric arithmetic/rounding/reducer/clamp/comparison aliases use the same dispatcher. Compatible raw.trim().lowercase() and score.abs().ceil() compose. Array/Hash breadth: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]]. Detailed historical lists/commands/related pointers remain at the Git record above.
 
-`LinkedSpecRuntimeEngine` canonicalizes helper names with
-`canonicalActionHelperName(...)` before pure-helper dispatch, so current helper
-aliases and symbol callees reuse the same runtime implementation path.
-
-The string/scalar surface now includes `cat`, `trim`, `lowercase`,
-`uppercase`, `length`, `matches`, `starts_with`, `ends_with`,
-`contains_substr`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`,
-`split`, `coalesce`, `coalesce_nonempty`, `is_defined`, `is_undefined`,
-`is_empty`, `is_nonempty`, and the explicit lexical comparison helpers
-`str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`, and `str_le`. Compatible
-string receiver chains such as `raw.trim().lowercase()` execute through the
-same helper dispatcher.
-
-The numeric surface now includes arithmetic, unary, reducer, clamp, and
-comparison helpers, plus word aliases such as `add`, `avg`, and `gt`, and
-symbol callees such as `+(...)`, `*(...)`, and `<=(...)`. Compatible number
-receiver chains such as `17.mod(5)` and `3.5.round()` execute as first-argument
-helper calls. Invalid numeric input or invalid arithmetic such as divide-by-zero
-returns `null`.
-
-`DART-BACKEND-PARITY.4.3.3` has since landed the broader array helper family,
-array receiver chains, and array mutation behavior. `DART-BACKEND-PARITY.4.3.4`
-has since landed hash helper breadth and hash receiver/mutation behavior.
-
-Related facts: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]],
-[[dart-runtime-core-value-capture-helpers]],
-[[terse-string-scalar-receiver-chains]], [[terse-number-receiver-dot-value-chains]],
-[[terse-numeric-comparison-symbol-callees]], [[terse-string-comparison-bridge]].
+23.3.11.3 adds is_defined/is_undefined to scalar-result and zero-operand lists only. Baseline valid flow, Bool/text/default/literal controls and1!/SC/one-call/final-null snapshot already pass; container[] and four malformed effects fail. Native/restored/plan shared and free producer controls plus direct String tests/fatal selected-file analysis pass after guards. Bool false renders0! and stays present through coalesce_nonempty, preserving source/copy/domain/producer semantics. No new methods/type/schema or full admission; Julia4 next.
 
 ## 2026-09-09 — large values, Unicode ordering and substring bounds
 

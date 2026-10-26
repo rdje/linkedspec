@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
+Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
 
 ## Latest Completed Slice
 
-Rust adds Bool/null literals to existing postfix parsing and extends generic/scalar/zero-operand receiver classification to definedness. Public compile and null/four-effect RED become passing native/restored/plan shared results, native Bool/text/default/literal controls and direct String tests. Strengthened shared consumer changes source to null while earlier result staystrue/SC/one call; same Perl native/fresh check passes. Original Bool vs Perl empty-string/default behavior and schema stay unchanged. Formatting/book/fast checks pass; Dart3 next.
+Dart adds definedness to scalar-result and zero-operand lists only. Valid flow, Bool/text/default/literal controls and1!/SC/one-call/final-null snapshot already work; container[] and four malformed effects become null/no-effects after guards. Shared native/restored/plan and free producer controls plus direct String/mode/grouped-literal checks pass five targeted tests; fatal selected-file analysis passes. Producer/parser/schema/domains unchanged. Book/fast checks pass; Julia4 next.
 
 ## Next Action
 
-Independently assess Dart is_defined/is_undefined result/source/shape behavior under23.3.11.3 using shared source and actual Bool/text/default controls. Preserve actual producer kinds/domain/source/copy semantics; repair confirmed ordinary gaps, small native/restored/plan/direct checks and fatal selected-file analysis/docs/commit, then Julia4. Shared fixture consumer now changes source to null to distinguish captured true result. No broad suite/admission now.
+Independently assess Julia is_defined/is_undefined under23.3.11.4 using shared source/Boolean expected and actual producer/text/default/literal controls. Preserve actual domains/source/copy and null-mutating snapshot; repair confirmed ordinary gaps only. Small native/generated-plan/fresh and direct String checks with strict compilation/docs/commit, then Lua5. No broad suite/admission now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
@@ -29,7 +30,6 @@ Independently assess Dart is_defined/is_undefined result/source/shape behavior u
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` — Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
 
 ## History
 
