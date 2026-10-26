@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
+Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 
 ## Latest Completed Slice
 
-Perl contains adds two list entries: exactly-one-operand preflight and Array scalar-result classification. Numeric1/0 producers/equality/null/zero and correct snapshots remain unchanged. Shared native/fresh plus direct String comparison pass12 assertions after malformed-body compile RED; source families, false/generic/bridges/scalar guards and1!/SOC/once-only/final-null pass. Nested malformed missing twins/extra now return null before effects without host fallthrough. Syntax/book/facts/FUTURE5.6/current docs align; Rust2 independent producer/calibration assessment next. Full admission/Perl fixture selection23.4.1 separate.
+Rust contains adds scalar/one-operand guards and uses its already-evaluated typed source, fixing named rebinding during needle evaluation (RED0/O/[z] -> captured1; absent source stays0/O/[a]). Native/restored/plan producer/shared plus direct comparison and named punctuation-light calibration pass five targeted Rust tests/offline compilation/rustfmt. Actual numeric flags and null/empty text equality remain preserved in .rust.json; that reference mismatch and unassessed sibling re-read seams are owned P1 assessment23.2.14 immediately after rollout. Required-needle twins now null/no-effects under FUTURE5.6. Book/facts/current docs align; Dart3 next.
 
 ## Next Action
 
-Independently assess Rust contains producer kinds/equality/null/zero and ordinary result/source behavior under23.3.13.2. Preserve actual producers/snapshots, implement one-needle no-effects under activated FUTURE5.6 and update its named punctuation-light missing-needle calibration from old0 to null with identical twins. Small native/restored/plan/direct checks/docs/commit, then Dart3; full admission separate.
+Independently assess Dart contains producer kinds/equality/null/zero and source snapshots under23.3.13.3. Preserve actual producers/domains; fix any confirmed source re-read, implement one-needle guards under FUTURE5.6 and update named punctuation-light missing0 calibration to null with identical twins. Small native/restored/plan/direct checks/fatal analysis/docs/commit, then Julia4. After Lua5, P1 null/equality/aggregate snapshot assessment23.2.14 precedes another family; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` — Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
@@ -29,7 +30,6 @@ Independently assess Rust contains producer kinds/equality/null/zero and ordinar
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
 
 ## History
 

@@ -169,10 +169,9 @@ fn terminal_alias_preserves_existing_rust_method_resolution() {
         .execute_value("xx", &ExecutionOptions::new())
         .expect("parenthesized contains retains authoritative zero-argument behavior");
     assert_eq!(bare_value, parenthesized_value);
-    // Rust already defaults the absent contains needle to empty text instead
-    // of enforcing the Perl-reference arity. FUTURE-PARITY-BACKLOG.5 owns
-    // that pre-existing helper drift; this syntax leaf must preserve it.
-    assert_eq!(bare_value, Value::from(0));
+    // FUTURE-PARITY-BACKLOG.5.6 / TYPE23.3.13.2 enforce the existing required
+    // needle contract; the bare alias still preserves its parenthesized twin.
+    assert_eq!(bare_value, Value::Null);
 }
 
 #[test]

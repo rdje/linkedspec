@@ -1,0 +1,62 @@
+{
+  "positive": "1!",
+  "nested": "1!",
+  "literal": "1!",
+  "selected": "1!",
+  "split": "1!",
+  "concat": "1!",
+  "hash": "1!",
+  "function": "1!",
+  "default": "1!",
+  "copied": "1!",
+  "generic": "1!",
+  "effected": "1!",
+  "negative": "0!",
+  "raw": [
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "boundaries": [
+    "0!",
+    "0!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "retained": "0!",
+  "false_data": "0!",
+  "bridged": "X",
+  "incompatible": null,
+  "after_text": null,
+  "order": "SOC",
+  "source_calls": 1,
+  "needle_calls": 1,
+  "source": null,
+  "bad": [
+    null,
+    null,
+    null
+  ],
+  "invalid_effects": 0,
+  "missing_twins": [
+    null,
+    null
+  ],
+  "items": [
+    "a",
+    "b"
+  ],
+  "meta": {
+    "a": "a",
+    "b": "b"
+  }
+}

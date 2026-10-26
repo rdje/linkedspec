@@ -5962,9 +5962,9 @@ impl Engine {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
                     | "is_undefined" => !call.args.is_empty(),
-                    "join_values" | "index_of" | "has_key" | "starts_with" | "ends_with"
-                    | "contains_substr" | "matches" | "str_eq" | "str_ne" | "str_gt" | "str_ge"
-                    | "str_lt" | "str_le" => call.args.len() != 1,
+                    "join_values" | "contains" | "index_of" | "has_key" | "starts_with"
+                    | "ends_with" | "contains_substr" | "matches" | "str_eq" | "str_ne"
+                    | "str_gt" | "str_ge" | "str_lt" | "str_le" => call.args.len() != 1,
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7492,6 +7492,7 @@ impl Engine {
                 | "min"
                 | "max"
                 | "join_values"
+                | "contains"
                 | "index_of"
                 | "has_key"
                 | "is_empty"
@@ -10237,8 +10238,8 @@ impl Engine {
                 }
             }
             "contains" => {
-                if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
-                {
+                // Arguments already capture typed values before later operand effects.
+                if let Some(RuntimeValue::Array(items)) = args.first() {
                     let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
                     Ok(RuntimeValue::Number(
                         if items.iter().any(|v| v.to_str() == needle) {

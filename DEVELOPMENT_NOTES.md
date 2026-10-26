@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.2 — capture Rust contains sources and continue results
+
+Rust contains adds scalar/one-operand guards and uses its already-evaluated typed source, fixing named rebinding during needle evaluation (RED0/O/[z] -> captured1; absent source stays0/O/[a]). Native/restored/plan producer/shared plus direct comparison and named punctuation-light calibration pass five targeted Rust tests/offline compilation/rustfmt. Actual numeric flags and null/empty text equality remain preserved in .rust.json; that reference mismatch and unassessed sibling re-read seams are owned P1 assessment23.2.14 immediately after rollout. Required-needle twins now null/no-effects under FUTURE5.6. Book/facts/current docs align; Dart3 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.1 — continue Perl Array contains results
 
 Perl contains adds two list entries: exactly-one-operand preflight and Array scalar-result classification. Numeric1/0 producers/equality/null/zero and correct snapshots remain unchanged. Shared native/fresh plus direct String comparison pass12 assertions after malformed-body compile RED; source families, false/generic/bridges/scalar guards and1!/SOC/once-only/final-null pass. Nested malformed missing twins/extra now return null before effects without host fallthrough. Syntax/book/facts/FUTURE5.6/current docs align; Rust2 independent producer/calibration assessment next. Full admission/Perl fixture selection23.4.1 separate.

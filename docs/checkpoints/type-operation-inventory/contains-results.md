@@ -48,3 +48,15 @@ hit/miss, source families, false/generic/bridges/scalar guards and1!/SOC/once-on
 final-null pass. Nested malformed bare/parenthesized and extra calls now return
 null before effects, eliminating host-code fallthrough. Free signatures unchanged;
 Rust2 must assess its actual producer and update required-needle calibration.
+
+## Bounded Rust implementation
+
+23.3.13.2 adds contains to scalar/one-operand lists, and fixes its producer’s
+named-source re-read: use already-evaluated args[0], captured before the needle.
+Public native RED showed0/O/[z] instead of source snapshot1; native/restored/plan
+now confirm1/O/[z] and absent-source0/O/[a]. Shared .rust.json retains numeric
+flags and the existing null/empty merging text equality, unlike Perl. Terminal
+null/five-effect RED becomes all result/source/shape controls passing, plus
+direct comparison and named punctuation-light null-twin calibration (five Rust
+tests). P1 assessment23.2.14 immediately after rollout owns that actual equality
+mismatch and unassessed sibling aggregate re-read seams. No broad normalization.

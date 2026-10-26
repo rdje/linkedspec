@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1350** facts · **10603** question keys.
+> **1350** facts · **10605** question keys.
 
 ## Questions → fact
 
@@ -2813,6 +2813,7 @@
 - "does constructing a Lua codeblock execute its body" -> [lua-callable-codeblock-literal-state](docs/knowledge/lua-callable-codeblock-literal-state.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh`
 - "does constructing a Perl codeblock execute its body" -> [perl-callable-codeblock-literal-record](docs/knowledge/perl-callable-codeblock-literal-record.md) · 2026-07-12 · reverify: `prove -v -Iperl t/callable_codeblock_literal_contract.t && prove -q -Iperl t/actionir_ast_parser.t`
 - "does constructing a Rust codeblock execute its body" -> [rust-callable-codeblock-literal-state](docs/knowledge/rust-callable-codeblock-literal-state.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract`
+- "does contains distinguish null from empty text" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - "does contains return a Boolean or numeric flag" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - "does contains snapshot its source before needle effects" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - "does context-name readiness admit XML or the structured-format campaign" -> [context-names-readiness-reconciliation](docs/knowledge/context-names-readiness-reconciliation.md) · 2026-09-27 · reverify: `Read docs/language-readiness/context-names.md and the .1.1.3.2.1-.7 checkpoints; rerun the documented per-backend commands for changed sources. Run tools/run_ci_local.sh at the next canonical boundary.`
@@ -10028,6 +10029,7 @@
 - "why does README mention test_input" -> [readme-test-input-layout-drift](docs/knowledge/readme-test-input-layout-drift.md) · 2026-08-09 · reverify: [3 entries](#readme-test-input-layout-drift)
 - "why does Rust accept an invalid suffix only on a rule header line" -> [rust-body-parser-lexical-boundary-defects](docs/knowledge/rust-body-parser-lexical-boundary-defects.md) · 2026-09-07 · reverify: `Run the four repository-managed diagnostic commands below. Their pre-repair results are observations, not green repair acceptance criteria.`
 - "why does Rust action source lose CRLF before compilation" -> [rust-outer-action-source-fidelity](docs/knowledge/rust-outer-action-source-fidelity.md) · 2026-09-23 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test action_source_fidelity; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test action_source_fidelity --test map_leaves_mutation_contract; bash tools/run_rust_local.sh`
+- "why does Rust contains see a rebound Array" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - "why does Rust contains without a needle return zero" -> [punctuation-light-receiver-arity-calibration](docs/knowledge/punctuation-light-receiver-arity-calibration.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl missing`
 - "why does Rust empty Array sum return zero while invalid filtered sources remain null" -> [terse-array-numeric-reducer-receiver-methods](docs/knowledge/terse-array-numeric-reducer-receiver-methods.md) · 2026-10-26 · reverify: [2 entries](#terse-array-numeric-reducer-receiver-methods)
 - "why does Rust fixed lookbehind fail at a nonzero cursor" -> [rust-regex-input-context-drift](docs/knowledge/rust-regex-input-context-drift.md) · 2026-09-24 · reverify: [4 entries](#rust-regex-input-context-drift)
@@ -10751,8 +10753,8 @@ _ARCHOGEN can use Rust native loading with explicit Lispish and dependency prepa
 
 ### array-contains-result-handoff
 _Array contains result handoff and required-needle ownership_
-- **answers:** why does contains cat return undef on Perl | does contains return a Boolean or numeric flag | which task normalizes contains missing needle | why does contains nested in a Perl Array emit a host call | does contains snapshot its source before needle effects
-- **date:** 2026-10-26 · **status:** Perl ordinary handoff targeted-checked; other backends/admission open
+- **answers:** why does contains cat return undef on Perl | does contains return a Boolean or numeric flag | which task normalizes contains missing needle | why does contains nested in a Perl Array emit a host call | does contains snapshot its source before needle effects | why does Rust contains see a rebound Array | does contains distinguish null from empty text
+- **date:** 2026-10-26 · **status:** Perl/Rust ordinary handoff targeted-checked; others/admission open
 - **evidence:** `TYPE23.2.13 public native/fresh/substitution probe; contains-results.md; existing function[2,2] and punctuation-light contract; FUTURE5.6 explicitly activated.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - **source:** [`docs/knowledge/array-contains-result-handoff.md`](docs/knowledge/array-contains-result-handoff.md)
@@ -18405,7 +18407,7 @@ _A public Gitlink README needs a tracked exact snapshot for parent claim durabil
 ### punctuation-light-receiver-arity-calibration
 _A terminal bare receiver supplies zero authored arguments; arity examples must subtract the implicit receiver from function-form helper arity._
 - **answers:** why does the punctuation light contract use contains instead of drop_front | does drop_front require an authored receiver argument | how is receiver method authored arity derived from helper arity | which receiver method demonstrates missing argument rejection | does Rust reject contains with no receiver argument | why does Rust contains without a needle return zero | why does Dart contains without a needle return zero | why does Julia contains without a needle return zero | why does Lua contains without a needle return zero
-- **date:** 2026-10-26 · **status:** reference arity confirmed; four-backend normalization5.6 active
+- **date:** 2026-10-26 · **status:** Perl/Rust one-needle guards checked; Dart/Julia/Lua normalization active
 - **evidence:** `July13 canonical function arity and alias calibration; exact prior multi-backend and September reading records at Git39d8f85ebe9f954bc716d083083850604624e86f for this path. TYPE23.2.13 activates FUTURE5.6 normalization.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl missing`
 - **source:** [`docs/knowledge/punctuation-light-receiver-arity-calibration.md`](docs/knowledge/punctuation-light-receiver-arity-calibration.md)
