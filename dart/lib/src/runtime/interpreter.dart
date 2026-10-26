@@ -3708,6 +3708,12 @@ final class LinkedSpecRuntimeEngine {
         // keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
+          if (helper == 'num_clamp') {
+            return call.args.length != 2;
+          }
+          if (helper == 'num_add' || helper == 'num_mul') {
+            return call.args.isEmpty;
+          }
           if (helper == 'join_values' ||
               helper == 'contains' ||
               helper == 'index_of' ||
@@ -3722,6 +3728,9 @@ final class LinkedSpecRuntimeEngine {
               helper == 'str_ge' ||
               helper == 'str_lt' ||
               helper == 'str_le' ||
+              helper == 'num_sub' ||
+              helper == 'num_div' ||
+              helper == 'num_mod' ||
               _numericComparisonHelperNames.contains(helper)) {
             return call.args.length != 1;
           }
@@ -3738,7 +3747,11 @@ final class LinkedSpecRuntimeEngine {
                   helper == 'num_sum' ||
                   helper == 'num_avg' ||
                   helper == 'num_median' ||
-                  helper == 'num_range') &&
+                  helper == 'num_range' ||
+                  helper == 'num_abs' ||
+                  helper == 'num_floor' ||
+                  helper == 'num_ceil' ||
+                  helper == 'num_round') &&
               call.args.isNotEmpty;
         })) {
           return null;
@@ -5134,6 +5147,7 @@ final class LinkedSpecRuntimeEngine {
           helper == 'str_lt' ||
           helper == 'str_le' ||
           _numericComparisonHelperNames.contains(helper) ||
+          _numericArithmeticHelperNames.contains(helper) ||
           helper == 'is_empty' ||
           helper == 'is_nonempty' ||
           helper == 'is_defined' ||
@@ -6908,6 +6922,21 @@ const _numericComparisonHelperNames = <String>{
   'num_ge',
   'num_lt',
   'num_le',
+};
+
+const _numericArithmeticHelperNames = <String>{
+  'num_abs',
+  'num_floor',
+  'num_ceil',
+  'num_round',
+  'num_add',
+  'num_sub',
+  'num_mul',
+  'num_div',
+  'num_mod',
+  'num_clamp',
+  'num_min',
+  'num_max',
 };
 
 const _numericAggregateHelperNames = <String>{

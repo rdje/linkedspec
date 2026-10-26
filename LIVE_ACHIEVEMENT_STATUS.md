@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
+Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 
 ## Latest Completed Slice
 
-Rust twelve short arithmetic methods now use shared scalar actual-value continuation; String prefixes hand Number methods to that dispatcher before their String whitelist. Common unambiguous arity guards reject malformed effects while preserving min/max modes, strict numeric adapters/free signatures and source snapshots. Eleven focused native/restored/plan producer/shared/selector/prefix/direct/named integration tests and compilation/rustfmt pass after result/shape/prefix RED. Shared defaults/copy/Array/Hash bridges and SOC/ASO hold; book/facts/task/live align. Dart16.3 next, full admission separate.
+Dart arithmetic valid producer/result/prefix/default flow already works. Added scalar-result marking and unambiguous pre-effect shape guards after scalar-container [] and28-effect RED. Eleven focused native/restored/plan producer/shared/selector/prefix/comparison/aggregate/default tests plus format/fatal selected analysis pass, preserving numeric kinds/domains/min-max modes, copied containers and SOC/ASO. Book/facts/task/live align; Julia16.4 next, full admission separate.
 
 ## Next Action
 
-Independently assess Dart scalar-numeric-v1 twelve-method arithmetic producers/aliases and result/shape/default/bridge/overload flow under16.3, using scalar_arithmetic_result_receiver_values after producer confirmation. Preserve Number/null kinds, strict domains/free signatures/min-max modes and captured source/argument/default snapshots. Reuse actual dispatcher; fix only confirmed scalar/arity/flow gaps, native/restored/plan and small direct tests/format/fatal analysis/docs/commit. Then Julia/Lua16.4-.5; no full suite/matrix now.
+Independently assess Julia scalar-numeric-v1 twelve-method arithmetic producers/aliases and result/shape/default/bridge/overload flow under16.4. Preserve Number/not-Bool/null kinds, strict domains/free signatures/min-max modes and captured snapshots. Reuse actual dispatcher; repair only confirmed gaps with native/plan/fresh and small direct tests/strict compile/docs/commit; then safe Lua16.5, no full suite/matrix now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
@@ -29,7 +30,6 @@ Independently assess Dart scalar-numeric-v1 twelve-method arithmetic producers/a
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 
 ## History
 

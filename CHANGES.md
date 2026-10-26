@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.16.3 — guard Dart scalar arithmetic results
+
+Dart arithmetic valid producer/result/prefix/default flow already works. Added scalar-result marking and unambiguous pre-effect shape guards after scalar-container [] and28-effect RED. Eleven focused native/restored/plan producer/shared/selector/prefix/comparison/aggregate/default tests plus format/fatal selected analysis pass, preserving numeric kinds/domains/min-max modes, copied containers and SOC/ASO. Book/facts/task/live align; Julia16.4 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.16.2 — continue Rust scalar arithmetic results
 
 Rust twelve short arithmetic methods now use shared scalar actual-value continuation; String prefixes hand Number methods to that dispatcher before their String whitelist. Common unambiguous arity guards reject malformed effects while preserving min/max modes, strict numeric adapters/free signatures and source snapshots. Eleven focused native/restored/plan producer/shared/selector/prefix/direct/named integration tests and compilation/rustfmt pass after result/shape/prefix RED. Shared defaults/copy/Array/Hash bridges and SOC/ASO hold; book/facts/task/live align. Dart16.3 next, full admission separate.

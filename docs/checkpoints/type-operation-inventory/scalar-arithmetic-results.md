@@ -95,3 +95,14 @@ whitelist: direct prefix RED[null,null,null] becomes[5!,1!,8], retaining strict
 arithmetic/comparison/invalid domains. Eleven focused numeric/direct/named cases
 and offline compilation/rustfmt pass. Shared Array/Hash/default copy and SOC/ASO
 controls pass without Perl's host-staging mechanism; full admission stays23.4.
+
+## Bounded Dart implementation
+
+23.3.16.3 independently confirms canonical/word/symbol producers, native/
+restored/plan arithmetic, selector and numeric String-prefix controls. Valid
+shared flow already works; RED exposes scalar->container [] and28 malformed
+source/operand effects. Arithmetic scalar marking and unambiguous common shape
+guards repair both, preserving min/max modes and all numeric adapters. Eleven
+focused arithmetic/comparison/aggregate/default tests plus format/fatal selected
+analysis pass. Shared strict kinds/default copies/SOC/ASO and14 no-effect bad
+shapes hold; full domain/context/portable admission remains separate.

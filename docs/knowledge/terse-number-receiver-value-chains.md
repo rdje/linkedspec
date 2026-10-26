@@ -14,7 +14,7 @@ answers:
   - "can scalar arithmetic results feed text methods"
   - "which task owns ordinary numeric arithmetic result flow"
 date: 2026-10-26
-status: comparison checked; Perl/Rust arithmetic result extensions implemented
+status: comparison checked; Perl/Rust/Dart arithmetic result extensions implemented
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl"
@@ -46,7 +46,9 @@ Phase0 named cases and syntax pass; source/expected/tests retain the controls.
 Rust16.2 shares Number scalar dispatch and adds unambiguous shape guards; eleven
 producer/shared/prefix/direct/named tests pass native/restored/plan after RED. Its
 String loop also needed handoff before the String whitelist, fixing arithmetic/
-comparison prefix[null,null,null] to[5!,1!,8]. Dart/Julia/Lua remain independent;
+comparison prefix[null,null,null] to[5!,1!,8]. Dart16.3 adds scalar marking/common shape guards:11 focused tests and fatal
+analysis pass after scalar[]/28-effect RED; valid flow already worked.
+Julia/Lua remain independent;
 no numeric/free/min-max/Array
 reducer95/deferred policy expansion. Canonical num_* method names stay outside
 this short-method scope.

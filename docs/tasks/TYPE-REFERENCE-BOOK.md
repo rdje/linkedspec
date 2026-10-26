@@ -3479,10 +3479,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.2 - continue Rust scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Dart ordinary scalar arithmetic result continuations.
   Dependencies: .23.3.16.2.
   Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `392b181b5865c5e424a85d8a863d3243bce5073b`; Rust arithmetic committed, brief0/tree clean.
+  Owned paths: Dart independently confirmed arithmetic scalar/shape gaps, retained native/restored/plan producer/shared/selector/prefix controls, scoped book/facts/task/live docs. Preserve numeric adapters/free signatures/min-max modes and source/default snapshots.
+  Verification tier: `focused`
+  Focused checks: Producer-first public RED/GREEN and direct comparison/aggregate/default fixtures, format/fatal selected analysis and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Add canonical arithmetic scalar-result marking and common unambiguous unary/sub-div-mod/clamp/add-mul arity guards. Existing actual-value dispatcher already handles valid arithmetic/prefix/default/bridge flow; preserve numeric producers/free signatures/min-max modes.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent canonical/word/symbol producer, selector and String-prefix controls pass before production. Shared native RED has incompatible/after_text [] instead ofnull and28 malformed source/operand effects; valid twelve-method/variadic/source/default/bridge/SOC/ASO fields already pass.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart mayProduceScalar omits arithmetic methods, permitting scalar fallthrough into container helpers; common fluent preflight omits their unambiguous arities. Canonical numeric evaluator and captured source/default dispatch are already correct for this fixture.
+  - [x] FIX: Add _numericArithmeticHelperNames to scalar marking and shape checks before source/operand evaluation. Leave min/max global shape handling unchanged for Array/scalar overloads. No new method/parser/schema/numeric adapter/free signature or domain normalization.
+  - [x] ADDRESSED (verified): Four new native/restored/plan cases preserve raw twelve/alias/symbol kinds and strict invalid/rounding/modulo, text/variadic/source/numeric selector/prefix paths, zero/default/copy/Array/Hash/bridge/generic boundaries and SOC/ASO; fourteen malformed calls now have zero effects.
+  - [x] NO REGRESSION: Eleven focused tests across arithmetic, numeric comparison, aggregate numeric and selected default fixtures pass. Format and fatal selected source/new-test analysis pass. No whole suite, large-magnitude repair or full portable admission claim.
+  - [x] LOCKSTEP: Retained regression, frozen contract/current backend progress, worked catalog/guide and canonical Dart/Number facts/map plus live/task/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Julia16.4 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.3 - guard Dart scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.4`
   Status: `pending`
@@ -3593,7 +3610,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` | `pending` | Independently assess and implement Dart scalar arithmetic result continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` | `pending` | Independently assess and implement Julia scalar arithmetic result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
