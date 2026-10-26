@@ -948,7 +948,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
-  Status: `pending`
+  Status: `active` / Perl implemented; native backend confirmations/repairs next
   Goal: Implement the frozen first/last selected-value continuation contract in ordinary native/generated actions, one bounded backend leaf per commit.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Children: `.23.3.1.1` Perl, `.23.3.1.2` Rust, `.23.3.1.3` Dart, `.23.3.1.4` Julia, `.23.3.1.5` Lua.
@@ -956,7 +956,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Implementation scheduling, no measured parity.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1`
-  Status: `active`
+  Status: `done` / bounded ordinary implementation targeted-checked; full23.4 admission remains open
   Children: `.23.3.1.1.1` selected scalar methods; `.23.3.1.1.2` selected container methods.
   Slicing: Commit string/numeric continuations first, then the array/harray result cases; do not claim the whole frozen contract from the first subset.
   Goal: Add ordinary Perl first/last result continuations using selected-values.md and existing helper/value-kind semantics; preserve source snapshots and evaluate each step once.
@@ -991,11 +991,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1 - continue selected scalar receiver values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `7b5b29b6ff69a6cc65168317c386991f95d9fa15`
+  Owned paths: MethodLowering.pm; small native/fresh selected-container regression and suite registration; current contract/book/array fact/map and TYPE/live continuity.
+  Verification tier: `focused`
+  Focused checks: Changed-module/test/registration syntax and one small native/fresh selected-container regression plus the direct-dependent scalar regression; book and fast continuity/history checks only.
+  Canonical trigger: None for this bounded director-authorized implementation; complete native/public matrices and23.4 admission remain after feature coverage.
+  Reproduce: Public Get/call_spec_handler_subst at7b5b returns7 for num_add(last(sorted(first([[3,1],[2]]))),4) and B for uppercase(last(sorted_keys(first([{"b":2,"a":1}])))). Fluent twins fail as an unlowered first call or harray syntax in generated host code. Scalar selection is already implemented.
+  Root cause: The selected-result dispatcher only composes scalar methods; container operations and ambiguous copy lack a value-flow path. Pipeline source recognition and copy lowering also infer container type from source spelling, which cannot determine an extracted item's runtime kind.
+  Acceptance: Compose existing pure array/harray helpers over selected values, keep generic copy's runtime kind and actual source snapshot, preserve repeated extraction/type transitions, arity/domain/null/copy and once-only evaluation. No first-class type, raw readiness waiver or extra callback/mutation admission.
+  Claim verification: none: Deterministic implementation and small targeted regression, no quantified corpus/exhaustive/portable admission measurement.
   Goal: Complete the frozen Perl selected array/harray continuations and repeated result-kind transitions using existing helper/copy/domain policies; preserve the scalar subset and avoid inferring selected content kind from the original array.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1`
-  Planned tier: `focused`; compile and small native/fresh regression. Full23.4 admission stays deferred.
-  Claim verification: none: No measurement yet.
+
+  Completion: The selected-value dispatcher composes existing array/harray methods, preserving dynamic copy as a selected value and distinguishing min/max reducer arity from numeric operand forms. Pure pipeline sources lower actual expressions and check runtime array kind; generic copy evaluates unknown-kind expression results once and snapshots their actual array/harray kind. Reuse existing helper domain/null/copy behavior, with no new value type or callback/mutation admission.
+  Focused result: MethodLowering/test/registration syntax and t/selected_container_receiver_contract.t PASS on final production after native/fresh RED. Direct-dependent scalar and pipeline regressions PASS; book and fast continuity/history checks pass. No full suite or portable admission.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public fluent container journeys fail as raw host calls/syntax while nested helpers return7/B. The new native/fresh regression is RED before repair, including failed generated compilation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — The selected dispatcher excludes container operations; pipeline source/copy branches infer kind from spelling and cannot determine extracted item types. Exact public substitution and MethodLowering branches identify both constraints.
+  - [x] **FIX** — Compose existing container helpers over selected values, retain runtime-kind copy, read expression array sources once with runtime guards and preserve scalar/arity dispatch. Array arguments are lowered by their existing owner once.
+  - [x] **ADDRESSED (verified)** — Changed-module/test/registration syntax and small native/fresh selected-container regression PASS.
+  - [x] **NO REGRESSION** — Direct scalar/pipeline regressions PASS; selected array/harray copy under one function, repeated extraction, named/computed/function sources, snapshots, empty results, min/max shape and once-only source/value effects pass. No broad suite.
+  - [x] **LOCKSTEP** — Ordinary Perl scalar/container examples and bounded contract status, canonical fact/map, task/live handoff agree. Rust23.3.1.2 is next; other backends/full family admission remain open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2 - continue selected container receiver values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
   Status: `pending`
@@ -1101,11 +1119,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar23.3.1.1.1 is implemented and selected containers23.3.1.1.2 are next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar/container23.3.1.1.1-.2 are implemented and Rust23.3.1.2 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` | `pending` | Complete Perl selected array/harray continuations after the committed scalar subset, then native backend children. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` | `pending` | Confirm/implement selected-value transitions on Rust through public Engine/generated-plan interfaces; Perl ordinary subset is implemented. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

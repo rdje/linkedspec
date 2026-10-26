@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2 — continue selected container receivers
+
+Ordinary Perl first/last results now continue through existing pure array/harray helpers as well as scalar methods. Generic copy preserves an extracted result’s runtime array/harray kind; pipeline sources evaluate actual expressions rather than requiring a static family guess. Distinguish min/max reducer/operand shapes and preserve repeated transitions, snapshots, empty results and once-only effects. Small native/fresh container and direct scalar/pipeline regressions pass after observed RED; syntax/book/fast continuity checks pass. Book/contract/fact/map/task/live handoff agree; Rust confirmation/implementation23.3.1.2 is next and broad admission stays open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1 — continue selected scalar receivers
 
 Ordinary Perl first/last results now continue through existing pure string/numeric methods, including earlier string/pipeline/hash steps. Keep zero-argument extraction validation, remove the unconditional first-terminal preflight and route selected results in every outer-family loop. Small native/fresh scalar regression and direct-dependent pipeline regression pass after actual RED; module/test/registration syntax, book and fast continuity checks pass. Examples/fact/map/partial contract/live handoff agree. Selected array/harray1.1.2 and other backends remain open; no complete fluent admission or full suite.

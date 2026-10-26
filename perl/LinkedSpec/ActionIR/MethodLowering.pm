@@ -3142,7 +3142,8 @@ sub _lower_method_value_expr {
    ? $scalar_slot : $target_expr;
   my $lowered_target = _lower_source_slot_bare_scalar_read_expr($source_name, $deps);
   unless (defined($lowered_target) && length($lowered_target)) {
-   return undef unless $looks_like_array_value_expr->($target_expr);
+   # An extracted or computed value can be an array without a static source
+   # family. Lower the value once; the snapshot below checks its runtime kind.
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
   }
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
@@ -4786,14 +4787,32 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $array_chain_return_family->($method),
    ]
   };
-  # Extraction yields a value, not a terminal predicate. Compose scalar links
-  # through existing helpers, preserving the selected payload's domain and null
+  # Extraction yields a value, not a terminal predicate. Compose compatible
+  # helpers over that payload, preserving each helper's runtime domain and null
   # behavior instead of retaining the source array's receiver family.
-  my $append_selected_scalar_chain_call = sub {
+  my $append_selected_value_chain_call = sub {
    my ($current_expr, $call) = @_;
    my $method = $call->{method} // '';
-   my $args = $chain_arg_exprs->($call->{args} || []);
+   my $source_args = $call->{args} || [];
+   return undef unless ref($source_args) eq 'ARRAY';
+   if ($method eq 'copy') {
+    return undef if @$source_args;
+    return ['copy('.$current_expr.')', 'selected'];
+   }
+   # min/max without extra operands are array reducers; scalar forms take
+   # another operand. Other array methods have an unambiguous helper shape.
+   if (_is_array_receiver_value_chain_method($method)
+     && !($method =~ /^(?:min|max)$/o && @$source_args)) {
+    return $append_array_chain_call->($current_expr, $call);
+   }
+   my $args = $chain_arg_exprs->($source_args);
    return undef unless ref($args) eq 'ARRAY';
+   my $hash_family = _hash_receiver_value_chain_return_family($method);
+   if (defined($hash_family) && !_is_tree_traversal_receiver_method($method)) {
+    my $helper = $method eq 'flat_hash' ? 'copy' : $method;
+    my $expression = $helper.'('.join(', ', ($current_expr, @$args)).')';
+    return [$expression, $hash_family eq 'hash' ? 'selected' : $hash_family];
+   }
    my $return_family = _string_receiver_value_chain_return_family($method);
    my $helper = $method;
    if (defined($return_family)) {
@@ -4961,7 +4980,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5060,7 +5079,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5102,7 +5121,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5162,7 +5181,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5218,7 +5237,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -5274,7 +5293,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected') {
-     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     my $applied = $append_selected_value_chain_call->($current_expr, $call);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
@@ -7014,7 +7033,11 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    return undef unless defined($lowered_container) && length($lowered_container);
    return 'do { my $__ls_hash_snapshot = '.$lowered_container.'; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }';
   }
-  return undef;
+  my $lowered_container = _lower_method_value_expr($container_expr, $deps);
+  return undef unless defined($lowered_container) && length($lowered_container);
+  return 'do { my $__ls_copy_value = '.$lowered_container.'; '
+   .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'ARRAY\') ? [@{$__ls_copy_value}] : '
+   .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'HASH\') ? { %{$__ls_copy_value} } : [] }';
  }
  my $pipeline_expr = $lower_array_pipeline_expr->(
   $trimmed,

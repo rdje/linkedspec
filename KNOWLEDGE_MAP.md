@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1349** facts · **10545** question keys.
+> **1349** facts · **10546** question keys.
 
 ## Questions → fact
 
@@ -658,6 +658,7 @@
 - "can copied foreign or transformed recognition callbacks borrow source coordinates" -> [perl-recognition-annotation-statement-origins](docs/knowledge/perl-recognition-annotation-statement-origins.md) · 2026-10-06 · reverify: [2 entries](#perl-recognition-annotation-statement-origins)
 - "can copied foreign or transformed staged callbacks borrow original source coordinates" -> [perl-staged-annotation-statement-origins](docs/knowledge/perl-staged-annotation-statement-origins.md) · 2026-10-06 · reverify: [2 entries](#perl-staged-annotation-statement-origins)
 - "can copied or foreign parser results borrow argument source authority" -> [perl-private-method-argument-authority](docs/knowledge/perl-private-method-argument-authority.md) · 2026-10-05 · reverify: [2 entries](#perl-private-method-argument-authority)
+- "can copy preserve selected array or harray values" -> [terse-array-receiver-value-chains](docs/knowledge/terse-array-receiver-value-chains.md) · 2026-10-26 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback`
 - "can copying a Perl match argument change callback behavior" -> [perl-match-alias-writability](docs/knowledge/perl-match-alias-writability.md) · 2026-10-12 · reverify: `Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201.`
 - "can corpus and status commands be in the primary CLI" -> [user-observable-backend-cli-parity-contract](docs/knowledge/user-observable-backend-cli-parity-contract.md) · 2026-07-19 · reverify: `sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md`
 - "can correct callable return values hide a grouped-pattern membership defect" -> [perl-callable-grouped-pattern-membership](docs/knowledge/perl-callable-grouped-pattern-membership.md) · 2026-10-08 · reverify: [3 entries](#perl-callable-grouped-pattern-membership)
@@ -20324,8 +20325,8 @@ _SPEC-FORMAT-TERSE.7.3 array numeric reducer receiver methods_
 
 ### terse-array-receiver-value-chains
 _Array pure receiver chains and named statement transforms_
-- **answers:** can first or last continue through selected string methods | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
-- **date:** 2026-10-26 · **status:** Perl selected scalars implemented; containers/other backend transitions open
+- **answers:** can first or last continue through selected string methods | can copy preserve selected array or harray values | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
+- **date:** 2026-10-26 · **status:** Perl selected scalar/container methods implemented; other backend transitions open
 - **evidence:** `Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3.`
 - **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback`
 - **source:** [`docs/knowledge/terse-array-receiver-value-chains.md`](docs/knowledge/terse-array-receiver-value-chains.md)

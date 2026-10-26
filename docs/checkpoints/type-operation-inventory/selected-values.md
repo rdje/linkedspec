@@ -85,8 +85,9 @@ complete family matrices, source-fault campaigns and portable admission remain
 with `.23.4` after feature coverage. The full signature/effect inventory remains
 open and resumes after this concrete requested transition is implemented.
 
-Current implementation: Perl scalar subset `.23.3.1.1.1` supports first/last
-continuations through existing string/numeric methods, including earlier pure
-pipeline/hash bridges, function/computed sources, empty selection and once-only
-effects. Selected array/harray continuation remains `.23.3.1.1.2`; this partial
-implementation does not close the frozen contract, other backends or `.23.4`.
+Current implementation: Perl ordinary scalar/container subsets
+`.23.3.1.1.1` and `.23.3.1.1.2` support the selected-value journeys with existing
+pure helper semantics, generic runtime-kind copy, repeated extraction, earlier
+pipeline/hash bridges, function/computed sources, empty values and once-only
+effects. Focused native/fresh checks cover the named examples. This is bounded
+implementation, not complete fluent families, other-backend or `.23.4` admission.
