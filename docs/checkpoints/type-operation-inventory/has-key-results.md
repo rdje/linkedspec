@@ -75,3 +75,13 @@ Native/fresh shared result and direct producer tests pass after RED, covering
 presence/false retention, selected/pipeline/literal/function/default sources,
 String keys/Array bridge, scalar nulls, no malformed effects and K/SK/SKA snapshots.
 Rust assessment follows; full domain/portable admission remains separate.
+
+## Bounded Rust result handoff
+
+23.3.8.2 adds has_key to existing scalar-result classification and exact-one-key
+preflight. Public native RED shows fluent null versus nested1!, SK-only order
+and four malformed effects. Native/restored/generated-plan shared result and
+direct index tests pass after repair with presence/false retention, String keys,
+source families, explicit bridge/scalar nulls, zero malformed effects and K/SK/SKA
+snapshots. Numeric1/0 presence helper/source/copy policy stays unchanged. Dart
+assessment/full admission remain separate.

@@ -38,7 +38,7 @@ I {
 
 For ordinary helper statements, both styles lower to the same action model. The choice between them is
 readability: use fluent chains for short action edges and structured blocks when the action needs multiple
-updates or branch logic. Pure receiver results can change family: on Perl, `{"a":false}.has_key("a").cat(",x").split(",").last().uppercase()` returns `"X"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` keeps the false result and returns `"0!"`. The presence result reaches existing scalar/text helpers, then the explicit split produces an Array. A direct Hash-only consumer such as `.has_key("a").sorted_values()` returns undef. Other backends/full fluent admission remain separate.
+updates or branch logic. Pure receiver results can change family: on Perl/Rust, `{"a":false}.has_key("a").cat(",x").split(",").last().uppercase()` returns `"X"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` keeps the false result and returns `"0!"`. The presence result reaches existing scalar/text helpers, then the explicit split produces an Array. A direct Hash-only consumer such as `.has_key("a").sorted_values()` returns undef. Other backends/full fluent admission remain separate.
 
 Compact lifecycle receiver chains are useful when the lifecycle hook is short:
 

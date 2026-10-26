@@ -2080,10 +2080,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2 - continue has_key scalar results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust has_key result/key/shape targets.
   Dependencies: .23.3.8.1.2.
   Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+  Activation: clean `ce4372bdef73e4db1b61a0a16c0d2ab54cdca2bb`; Perl committed, brief empty, tree clean.
+  Owned paths: Confirmed Rust has_key fluent scalar/arity gaps only; shared native/restored/generated-plan fixture, direct index compatibility and current docs.
+  Verification tier: `focused`
+  Focused checks: Public Engine native/restored/generated-plan has_key fixture before/after repair, direct index fixture, targeted offline Cargo compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored value/order regression, no quantified corpus or portable measurement.
+
+  Completion: Include has_key in existing scalar-result classification and exact-one-operand fluent preflight; existing Number1/0 presence helper untouched.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Engine native fixture RED shows fluent null, nested1!, SK-only order and four malformed effects; producer keys still run.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs hash dynamic dispatcher stops terminal has_key unless selected-result; scalar-result classifier and one-operand preflight omit it.
+  - [x] FIX: Add has_key to existing scalar-result classifier and preflight; no helper/domain/source/copy normalization.
+  - [x] ADDRESSED (verified): Native/restored/generated-plan result fixture passes presence/false retention, literal/variable/helper/block String keys, selected/pipeline/literal/function/default sources, explicit bridge/scalar nulls, zero malformed effects and K/SK/SKA snapshots.
+  - [x] NO REGRESSION: Direct native/restored/generated-plan index fixture and targeted offline Cargo compilation pass. No broad suite, new methods or serialized-format change.
+  - [x] LOCKSTEP: Contract/worked catalog/guide, hash fact/map and task/live/resume updated; book and fast memory/cadence/diagnosis/history/diff pass. Dart3 assessment next after clean commit; full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.2 - continue Rust has_key scalar results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.3`
   Status: `pending`
@@ -2181,11 +2198,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; independent Rust2 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; independent Dart3 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` | `pending` | Independent Rust has_key result/key/shape assessment after bounded Perl repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` | `pending` | Independent Dart has_key result/key/shape assessment after bounded Rust repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
+Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 
 ## Latest Completed Slice
 
-Perl has_key uses scalar_result and exact-one-key fluent preflight. Complete typed operands and preserve authored receiver calls until lowering, avoiding function Hash operands reparsed as DSL. Native/fresh result/key-producer checks pass after raw-DSL and function-null RED: presence/false retention, selected/pipeline/default/function sources, String/Array bridge, scalar nulls, no malformed effects and K/SK/SKA snapshots. Syntax/book/fast continuity pass; Rust independently assessed next, full admission separate.
+Rust has_key joins the existing scalar-result classifier and exact-one-operand fluent preflight. Native/restored/generated-plan shared result and direct index checks pass after native fluent-null/SK-only/four-effect RED. Existing numeric presence helper remains unchanged; false/null stored values, String keys, selected/function/default sources, false retention, explicit bridges/scalar guards and K/SK/SKA snapshots pass. Targeted offline compilation/book/fast continuity pass; Dart assessment next, full admission separate.
 
 ## Next Action
 
-Independently assess Rust has_key result/key/shape behavior under23.3.8.2 with the frozen shared fixture; repair confirmed ordinary gaps only, preserve actual producer kind/domains/snapshots, compile/small direct checks/docs/commit.
+Independently assess Dart has_key result/key/shape behavior under23.3.8.3 using shared fixture, preserving actual producer kinds/domains/snapshots. Repair only confirmed ordinary gaps; compile/small direct checks, fatal selected-file analysis, docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` — Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` — Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.7` — has_key contract frozen, P1 key-block and result-flow gaps owned; public native/fresh controls retained.
@@ -29,7 +30,6 @@ Independently assess Rust has_key result/key/shape behavior under23.3.8.2 with t
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 
 ## History
 
