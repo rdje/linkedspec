@@ -1415,7 +1415,7 @@ return([out, fields]);
 
 This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds in both value/receiver and standalone writeback forms: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
 
-Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
+Ordinary Perl selection can bridge back to scalar methods: `parts=[" A "," B "]; return(parts.last().trim().lowercase())` returns `"b"` and preserves `parts`. Similarly, `return([2,3].last().mul(4).sub(1))` returns `11`. Function parameters and computed sources use the same boundary, evaluated once; `[].first().trim()` returns `undef`. Selected container continuations and remaining backend admission are tracked separately. Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 
 Use `split_tagged_records(...)` when a comma-separated identifier list should become repeated tagged payload rows:
 

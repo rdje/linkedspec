@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded first/last selected-value continuation contract23.2.1 is frozen before code; Perl23.3.1.1 is next, followed by separate native backend leaves. Helper signatures/full transition inventory remain open. Keep feature/compile/quick-check/commit cadence; broad verification and maintenance stay deferred.
+Perl selected string/numeric continuations23.3.1.1.1 are implemented; selected array/harray23.3.1.1.2 is next. Other native backend children and full signature/transition inventory remain open. Keep feature/compile/quick-check/commit cadence; broad verification and maintenance stay deferred.
 
 ## Latest Completed Slice
 
-selected-values.md specifies selected actual kinds and compatible pure continuations using existing helper/null/invalid/effect/copy semantics. Public Perl Get/substitution returns null for fluent first/last string journeys beside a working nested helper control. Book discloses the gap/workaround; fact/map/task/live handoff agree. Book and fast continuity checks pass; no runtime or cross-backend admission is claimed.
+first/last preserve selected-result flow through existing string/numeric methods. Remove the unconditional first-terminal preflight while retaining extraction arity; route results through every outer-family loop. Small native/fresh scalar regression and direct-dependent pipeline checks pass after actual RED, including function/computed sources, empty selection, earlier pipeline/hash steps, snapshots and once-only effects. Syntax/book/fast continuity pass; partial contract/fact/map/live frontier agree.
 
 ## Next Action
 
-Implement ordinary Perl first/last selected-value continuations under23.3.1.1 with a small native/fresh regression, then confirm/implement Rust/Dart/Julia/Lua children. Preserve existing helper domains and once-only source/argument evaluation. Signature inventory resumes afterward; complete fluent matrices/admission remain deferred.
+Complete Perl selected array/harray continuations23.3.1.1.2, preserving existing helper copy/domain behavior and the scalar subset. Use the frozen contract and one small native/fresh regression; then confirm/implement Rust/Dart/Julia/Lua children. No complete fluent/matrix/backend admission yet.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1` — selected Perl scalar methods, native/fresh and pipeline checks pass; selected containers1.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.1.2.1` — helper spellings/aliases/roles indexed; source consistency and book pass; signatures/effects1.2.1.2.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
@@ -29,7 +30,6 @@ Implement ordinary Perl first/last selected-value continuations under23.3.1.1 wi
 - `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
 - `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
 - `TYPE-REFERENCE-BOOK.1.2.14` — deferred last free/receiver support, syntax and native/fresh regression pass; deferred with16 next.
-- `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
 
 ## History
 

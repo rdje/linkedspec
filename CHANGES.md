@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1 — continue selected scalar receivers
+
+Ordinary Perl first/last results now continue through existing pure string/numeric methods, including earlier string/pipeline/hash steps. Keep zero-argument extraction validation, remove the unconditional first-terminal preflight and route selected results in every outer-family loop. Small native/fresh scalar regression and direct-dependent pipeline regression pass after actual RED; module/test/registration syntax, book and fast continuity checks pass. Examples/fact/map/partial contract/live handoff agree. Selected array/harray1.1.2 and other backends remain open; no complete fluent admission or full suite.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.1 — define selected-value continuations
 
 Freeze ordinary first/last results as inputs to compatible pure methods under existing helper semantics, with actual selected kinds and inherited null/invalid/effect/copy limits. Public Perl Get/substitution show fluent string journeys return null while nested helpers return the expected string. Book discloses the current gap/workaround; current fact/map/task/live handoff name separate backend implementations, beginning with Perl23.3.1.1. No runtime fix or cross-backend admission is claimed. Book and fast continuity checks pass; broad matrices remain deferred under feature-first direction.

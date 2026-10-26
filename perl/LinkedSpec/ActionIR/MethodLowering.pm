@@ -4615,7 +4615,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $aggregate_args = $call->{args} || [];
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
-   if ($method eq 'count' || $method eq 'first' || $method eq 'length') {
+   return 'undef' if ($method eq 'first' || $method eq 'last') && @$aggregate_args;
+   if ($method eq 'count' || $method eq 'length') {
     return 'undef' if @$aggregate_args || $index < $#$calls;
    }
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
@@ -4747,6 +4748,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
 	  my $array_chain_return_family = sub {
 	   my ($method) = @_;
+	   return 'selected' if defined($method) && $method =~ /^(?:first|last)$/o;
 	   return 'array' if defined($method)
 	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
    return 'terminal'
@@ -4783,6 +4785,30 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $method.'('.join(', ', ($current_expr, @$arg_exprs)).')',
     $array_chain_return_family->($method),
    ]
+  };
+  # Extraction yields a value, not a terminal predicate. Compose scalar links
+  # through existing helpers, preserving the selected payload's domain and null
+  # behavior instead of retaining the source array's receiver family.
+  my $append_selected_scalar_chain_call = sub {
+   my ($current_expr, $call) = @_;
+   my $method = $call->{method} // '';
+   my $args = $chain_arg_exprs->($call->{args} || []);
+   return undef unless ref($args) eq 'ARRAY';
+   my $return_family = _string_receiver_value_chain_return_family($method);
+   my $helper = $method;
+   if (defined($return_family)) {
+    return undef if $method =~ /^(?:trim|lowercase|uppercase|length)$/o && @$args;
+    return undef if $method eq 'cat' && !@$args;
+   } else {
+    $return_family = _number_receiver_value_chain_return_family($method);
+    return undef unless defined($return_family);
+    $helper = _number_receiver_method_helper_name($method);
+    return undef unless defined($helper) && length($helper);
+    return undef unless defined($ast_value_only_call_method->($helper, 1 + @$args));
+   }
+   my $expression = $helper.'('.join(', ', ($current_expr, @$args)).')';
+   $return_family = 'selected' if $return_family eq 'string' || $return_family eq 'number';
+   return [$expression, $return_family];
   };
   my $lower_synthetic_chain_expr = sub {
    my ($current_expr) = @_;
@@ -4934,6 +4960,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     my $is_last = ($idx == $#$calls) ? 1 : 0;
     return 'undef' if $current_family eq 'terminal' && !$is_last;
 
@@ -5026,6 +5059,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 1; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     if (_is_tree_traversal_receiver_method($method)) {
      my $return_family = $tree_receiver_return_family->($method, $current_expr, $calls, $idx);
      my $applied = $lower_tree_receiver_block_call->($method, $current_expr, $call, $return_family);
@@ -5061,6 +5101,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
     return undef unless ref($arg_exprs) eq 'ARRAY';
     my $is_last = ($idx == $#$calls) ? 1 : 0;
@@ -5114,6 +5161,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
     return undef unless ref($arg_exprs) eq 'ARRAY';
     my $is_last = ($idx == $#$calls) ? 1 : 0;
@@ -5163,6 +5217,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
     return undef unless ref($arg_exprs) eq 'ARRAY';
     my $is_last = ($idx == $#$calls) ? 1 : 0;
@@ -5212,6 +5273,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return 'undef' if $current_family eq 'terminal';
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
+    if ($current_family eq 'selected') {
+     my $applied = $append_selected_scalar_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
     if (_is_tree_traversal_receiver_method($method)) {
      my $return_family = $tree_receiver_return_family->($method, $current_expr, $calls, $idx);
      my $applied = $lower_tree_receiver_block_call->($method, $current_expr, $call, $return_family);

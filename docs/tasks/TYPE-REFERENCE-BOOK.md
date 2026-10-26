@@ -853,7 +853,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Completion: helpers.md indexes actual registry spellings by resolver category and canonical numeric/current/source-boundary alias mapping, with explicit reverse-check exclusions. Source categories are not input types/method admission; book/reference-only spellings and semantic mapping remain open. Correct the array card's stale Dart/Julia pending wording using accepted5.3.2/.3 records.
   Focused result: An exact source-spelling/alias consistency check passes: primary spellings appear in the index, alias targets are primary, compatibility names remain separate and dedicated diagnostics are not promoted. Book and fast continuity/history checks pass; no runtime census or old producer replay.
   Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — Existing syntax index delegates call spellings to this owner; no current helper spine existed. Array fact still labels accepted Dart/Julia implementations as pending.
+  - [x] **REPRODUCE / ISSUE** — Existing syntax index delegates call spellings to this owner; no current helper spine existed. Array fact still labels accepted Dart/Julia implementations as unimplemented.
   - [x] **ROOT CAUSE (WHY + WHERE)** — Registry sets mix resolver categories and syntax roles; old fact status was not advanced after5.3.2/.3. Current source/accepted task records distinguish those roles and dates.
   - [x] **FIX** — Index current spellings/aliases/exclusions with precise authority and semantic limits; correct stale fact status and advance the precise child frontier.
   - [x] **ADDRESSED (verified)** — Focused source consistency and book rendering PASS.
@@ -956,11 +956,46 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Implementation scheduling, no measured parity.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.23.3.1.1.1` selected scalar methods; `.23.3.1.1.2` selected container methods.
+  Slicing: Commit string/numeric continuations first, then the array/harray result cases; do not claim the whole frozen contract from the first subset.
   Goal: Add ordinary Perl first/last result continuations using selected-values.md and existing helper/value-kind semantics; preserve source snapshots and evaluate each step once.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Planned tier: `focused`; module compilation and one small native/fresh regression, current book/fact and fast continuity checks. Broader23.4 admission follows feature coverage.
   Claim verification: none: No implementation measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1`
+  Status: `done`
+  Activation commit: `b54f0ab291c15de2461f3350e215780d8d3a41b4`
+  Goal: Continue ordinary Perl first/last results through existing pure string and numeric methods, preserving scalar helper semantics, source/effect order and earlier array/hash/string paths.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm; one small native/fresh scalar-selection regression and callable-suite registration; current book/array fact/map and TYPE/live continuity.
+  Verification tier: `focused`
+  Focused checks: Changed-module/test/registration syntax and one small native/fresh selected-string/numeric regression with named/function/computed sources, compatible earlier pipeline/hash bridges, null and once-only effects; book and fast continuity/history checks only.
+  Canonical trigger: None for this bounded director-authorized feature implementation; full selected-container/matrix/portable admission remains separately owned.
+  Claim verification: none: Deterministic implementation and focused regression, no quantified corpus/exhaustive/portable admission measurement.
+  Reproduce/root cause: Frozen23.2.1's public Get/substitution shows fluent first/last string null beside working nested helpers; the array return-family callback and each outer-family loop treat extraction as terminal. Separate selected-value flow from terminal predicates; preserve existing helper arity/domain rules.
+  Acceptance: No repeated receiver/argument evaluation or original-family reuse. Ordinary first/last scalar results continue through existing string/numeric methods; earlier pure string/array/hash chains and unsupported mutation/callback boundaries remain governed. Selected array/harray continuation work is next1.1.2 and must stay explicitly open.
+
+  Completion: first/last carry a selected-value flow state instead of terminal; preflight retains zero-argument validation without rejecting first continuations. Each outer-family loop routes selected results through existing pure string/numeric helper composition, preserving actual payload/domain/null/effect semantics and compatible prior pipeline/hash steps. Register the small regression; selected array/harray cases remain next1.1.2.
+  Focused result: MethodLowering/new-test/registration syntax and t/selected_scalar_receiver_contract.t PASS on final production after actual native/fresh RED. Direct-dependent t/array_pipeline_value_contract.t, book and fast continuity/history checks pass; no full suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public fluent/nested controls and the focused native/fresh regression fail before repair. A hash-to-array extraction continuation also leaks an unlowered sorted_keys call on that failing path, covered by this selected-result repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Fluent preflight unconditionally rejects a nonfinal first; array return classification marks first/last terminal and outer-family loops cannot route their results. The captured substitution and exact preflight/loop locations identify these mechanisms.
+  - [x] **FIX** — Preserve extraction arity validation, mark selected-result flow and compose existing scalar helpers after extraction in every outer-family loop. No runtime value type, raw readiness waiver or new scalar-domain policy.
+  - [x] **ADDRESSED (verified)** — Module/test/registration syntax and focused native/fresh scalar-selection regression PASS.
+  - [x] **NO REGRESSION** — Direct-dependent pipeline regression PASS; function/computed/named sources, scalar arithmetic, empty selection, earlier pipeline/hash steps, retained snapshots and once-only receiver/argument effects pass. Invalid first arity suppresses receiver/argument effects and existing count terminal behavior stays null; these guard controls cover the changed preflight. Broad suites remain deferred.
+  - [x] **LOCKSTEP** — Public scalar recipes, partial contract status, canonical fact/map and live/task frontier agree; selected array/harray1.1.2 and other backend children remain explicitly open.
+  Continuity guard correction: The earlier completed spelling-index checklist used a reserved unfinished-state word to describe historical stale text; rephrase it as unimplemented. The whole-file evidence checker now recognizes the already completed checklist without altering historical behavior or checker policy.
+  Edit-script note: An initial loop-layout assertion stopped before production writes; account for the root array loop's early terminal guard. The accidental unchanged-source rerun is not GREEN evidence; final GREEN uses the actual six-loop edit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1 - continue selected scalar receiver values`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2`
+  Status: `pending`
+  Goal: Complete the frozen Perl selected array/harray continuations and repeated result-kind transitions using existing helper/copy/domain policies; preserve the scalar subset and avoid inferring selected content kind from the original array.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1`
+  Planned tier: `focused`; compile and small native/fresh regression. Full23.4 admission stays deferred.
+  Claim verification: none: No measurement yet.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
   Status: `pending`
@@ -1066,11 +1101,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen and Perl23.3.1.1 is next; signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar23.3.1.1.1 is implemented and selected containers23.3.1.1.2 are next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.1` | `pending` | Implement frozen first/last selected-value continuations on Perl, then native backend children; signature inventory resumes afterward. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` | `pending` | Complete Perl selected array/harray continuations after the committed scalar subset, then native backend children. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

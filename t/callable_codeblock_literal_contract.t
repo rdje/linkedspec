@@ -1363,4 +1363,8 @@ subtest 'ordinary array pipeline value contract' => sub {
     do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;
 };
 
+subtest 'selected scalar receiver result contract' => sub {
+    do File::Spec->catfile($repo_root, 't', 'selected_scalar_receiver_contract.t') or die $@ || $!;
+};
+
 done_testing();

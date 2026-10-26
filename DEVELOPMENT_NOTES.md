@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1 — selected scalar flow
+
+The first/last gap has an earlier guard as well as terminal return classification: fluent preflight rejects any nonfinal first before receiver lowering. Preserve zero-argument checks without that rejection, distinguish selected-result flow and route its subsequent string/numeric steps through existing helper composition. Cover every outer-family loop, including hash-to-array and array-end result paths, without adding a runtime type or domain policy. The focused native/fresh scalar vector and direct-dependent pipeline controls pass with parameters, computed sources, empty selection, snapshots and once-only source/argument effects. Selected containers remain next and the full contract is not closed.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.1 — extraction is a result boundary
 
 The exact requested string -> split -> array -> selected string -> string-method journey is blocked on Perl by terminal classification, although the corresponding nested helpers already work. first/last return arbitrary item kinds, so continuation must consume that value rather than reuse the original array/string family. Freeze the bounded pure-value contract before code; inherit each helper's existing null/invalid/coercion and copy rules instead of inventing a new universal domain rule. Addressable mutation and extra callback admission remain outside scope. Native backend leaves follow the Perl repair; complete inventory/matrices/admission stay open and broad proof remains deferred.

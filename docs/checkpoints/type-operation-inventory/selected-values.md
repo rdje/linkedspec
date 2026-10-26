@@ -84,3 +84,9 @@ separate focused leaves. Each runs compilation and a small targeted regression;
 complete family matrices, source-fault campaigns and portable admission remain
 with `.23.4` after feature coverage. The full signature/effect inventory remains
 open and resumes after this concrete requested transition is implemented.
+
+Current implementation: Perl scalar subset `.23.3.1.1.1` supports first/last
+continuations through existing string/numeric methods, including earlier pure
+pipeline/hash bridges, function/computed sources, empty selection and once-only
+effects. Selected array/harray continuation remains `.23.3.1.1.2`; this partial
+implementation does not close the frozen contract, other backends or `.23.4`.

@@ -20325,7 +20325,7 @@ _SPEC-FORMAT-TERSE.7.3 array numeric reducer receiver methods_
 ### terse-array-receiver-value-chains
 _Array pure receiver chains and named statement transforms_
 - **answers:** can first or last continue through selected string methods | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
-- **date:** 2026-10-26 · **status:** ordinary first/last result gap owned; transforms targeted-checked; full transitions open
+- **date:** 2026-10-26 · **status:** Perl selected scalars implemented; containers/other backend transitions open
 - **evidence:** `Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3.`
 - **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback`
 - **source:** [`docs/knowledge/terse-array-receiver-value-chains.md`](docs/knowledge/terse-array-receiver-value-chains.md)
