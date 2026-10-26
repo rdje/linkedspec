@@ -33,7 +33,7 @@ Array function calls and receiver methods share a copied-value dispatcher for
 count/select/order/membership, take/drop/slice, string transforms and filters,
 stable uniqueness, regex filtering, split-and-flatten pipelines, delimiter-first
 joining, one-level flatten/concatenation, and tagged record construction. Array
-numeric receiver terminals reuse the canonical numeric reducer implementation.
+numeric receiver methods reuse the canonical numeric reducer implementation.
 
 `array(...)` splices only values explicitly produced by `flat(...)` or
 `flat_array(...)`; ordinary arrays and `copy(array(...))` stay nested. Pure
@@ -69,4 +69,4 @@ separate from scalar numeric magnitude preservation under .2.9.
 
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-23.3 guards retain AbstractVector Count; join/index/has_key take one operand, emptiness zero. Defaults/index/has_key/emptiness stay scalar until actual AbstractVector/AbstractDict output; generic emptiness consumers stay allowed.23.3.9.4 retains Bool flow/source/copy/1!/SA, fixing container[]/bad1!/0!/four effects; strict native/plan/fresh/direct has_key and compilation pass. Full admission open.
+23.3 guards retain AbstractVector Count; join/index/has_key/contains take one operand, emptiness zero. Defaults/index/has_key/contains/emptiness stay scalar until actual AbstractVector/AbstractDict output; generic emptiness consumers stay allowed.23.3.9.4 retains Bool flow/source/copy/1!/SA, fixing container[]/bad1!/0!/four effects; strict native/plan/fresh/direct has_key and compilation pass. Full admission open.

@@ -70,3 +70,13 @@ Array/five-effect RED is repaired; five Dart comparison/membership/named-alias
 tests and fatal analysis pass. .text.json is shared after independent agreement;
 Rust two contains tests pass after rename. Actual snapshots/equality are unchanged,
 and P1 .23.2.14 includes the confirmed Dart null/empty mismatch. Julia4 follows.
+
+## Bounded Julia implementation
+
+23.3.13.4 adds contains to scalar/one-operand lists and updates missing-needle
+calibration0->nothing. Public producer and raw Number/not-Bool identity already
+pass native/plan/fresh with .text.json-compatible equality and captured Array/
+absent-source values. Three shared empty-Array/five-effect REDs become passing
+result/source/shape controls. Twelve membership, twelve direct comparison and55
+small changed alias-fixture assertions pass with strict compilation. No producer/
+equality change; P1 .23.2.14 includes actual Julia null/empty merging. Lua5 next.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.13.4 — guard Julia Array contains result receivers
+
+Julia contains adds two guard-list entries only and updates actual missing-needle calibration0->nothing with identical twins. Independent native/plan/fresh producer and Number/not-Bool raw checks preserve numeric/text-key equality and already-correct Array/absent-source capture; shared three empty-Array/five-effect REDs are repaired. Twelve membership/twelve direct comparison and55 small changed punctuation-light assertions pass with strict compilation. Actual Julia null/empty reference mismatch joins P1 assessment23.2.14 after Lua rollout. Book/facts/registration/FUTURE5.6/current docs align; Lua5 next, known malformed native patterns excluded.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.13.3 — guard Dart Array contains result receivers
 
 Dart contains adds two guard entries only, preserving numeric1/0/text-key equality and already-correct Array/absent-source snapshots. Native/restored/plan producer/shared and direct comparison plus named alias calibration pass five Dart tests/fatal analysis after empty-Array/five-effect RED. Missing/extra and both missing aliases now null/no-effects under FUTURE5.6. Rust two contains tests pass after independently shared .text.json rename. Actual Dart null/empty reference mismatch joins scheduled P1 assessment23.2.14 after rollout; no equality/source repair inferred. Book/facts/current docs align; Julia4 next.

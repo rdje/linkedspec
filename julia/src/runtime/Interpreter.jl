@@ -5882,7 +5882,7 @@ function _evaluate_runtime_fluent_chain!(
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
         if helper_name in (
-            "join_values", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
+            "join_values", "contains", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
         ) && length(call.args) != 1
             return nothing
@@ -5916,7 +5916,7 @@ function _evaluate_runtime_fluent_chain!(
         # Scalar producers and defaults retain this boundary until an actual
         # container output permits later array/hash-only consumers.
         may_produce_scalar = helper_name in (
-            "coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty",
+            "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
         ) ||

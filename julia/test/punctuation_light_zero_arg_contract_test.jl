@@ -124,9 +124,9 @@ end
             "xx",
         )
         @test bare_result.value == parenthesized_result.value
-        # Julia already returns 0 for the missing contains needle. Backlog .5
-        # owns that helper-arity drift; this syntax leaf preserves the twin.
-        @test bare_result.value == 0
+        # FUTURE5.6 / TYPE23.3.13.4 enforce the required needle; the alias
+        # preserves its parenthesized twin before operand effects.
+        @test bare_result.value === nothing
     end
 
     @testset "neutral fixture matches native and generated Julia paths" begin

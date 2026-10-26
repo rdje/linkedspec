@@ -9,19 +9,20 @@ answers:
   - does contains snapshot its source before needle effects
   - why does Rust contains see a rebound Array
   - does contains distinguish null from empty text
+  - why do Julia contains checks reject Bool lookalikes
 date: 2026-10-26
-status: Perl/Rust/Dart ordinary handoff targeted-checked; others/admission open
+status: Perl/Rust/Dart/Julia ordinary handoff targeted-checked; others/admission open
 tags: [array, contains, fluent, predicate, arity, task-tree]
 evidence: "TYPE23.2.13 public native/fresh/substitution probe; contains-results.md; existing function[2,2] and punctuation-light contract; FUTURE5.6 explicitly activated."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test contains_result_receivers"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/contains_result_receivers_test.dart"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/contains_result_receivers_test.jl\")'"
 ---
 
-Perl free membership retains numeric1/0, null distinct from empty and zero/false compatibility. TYPE23.3.13.1 adds contains only to one-operand preflight and Array scalar-result map. Shared native/fresh and direct comparison pass12 assertions after malformed-body/host-call compile RED. Hit/miss/raw kinds, source families, false/generic/bridge/scalar guards and1!/SOC/once-only/final-null pass. Existing nested and named source snapshots already worked; no producer/equality repair inferred.
+TYPE23.3.13.1-.4 implement ordinary contains scalar-result/one-operand guards on Perl/Rust/Dart/Julia. Raw producers remain numeric1/0, false renders0! and survives coalesce_nonempty. Perl distinguishes null from empty; Rust/Dart/Julia text keys merge them (.text.json versus .perl.json). P1 TYPE23.2.14 immediately after Lua5 owns that actual reference mismatch and unassessed sibling aggregate re-read seams; no sibling failure/equality repair inferred here.
 
-Direct malformed calls already rejected. Nested missing bare/parenthesized and extra calls now uniformly return null before effects, eliminating raw items.contains() host fallthrough. Exact prior assessment/probe is retained in this path at Git299a3f67a30b991aa07b1d38922d8582a321146d and contains-results.md.
+Rust additionally fixes named-source re-read: consume evaluated args.first() rather than array_consuming_arg’s current ctx binding after needle effects. Native RED0/O/[z] becomes captured1/O/[z]; absent-source stays0/O/[a]. Perl/Dart/Julia captures already worked. Shared native/fresh Perl, native/restored/plan Rust/Dart and native/plan/fresh Julia retain1!/SOC/once-only/final-null, source families, false/generic/bridges/scalar guards and raw kinds. Julia requires Number and not Bool because == accepts lookalikes. Direct changed-surface checks pass; full domain/portable admission23.4 stays open.
 
-Original FUTURE-PARITY-BACKLOG.5.6 coordinates one-needle ordinary guards with TYPE23.3.13.1-.5 and actual calibration updates. Rust2 now enforces null/no-effects with named alias calibration; Dart3 is targeted-checked too; Julia/Lua missing0 normalization remains pending. Independent producer-kind/domain assessment remains required. Free signatures/equality/full domain and portable admission23.4 remain separate.
-
-Rust23.3.13.2 adds scalar/one-operand lists and fixes contains named-source re-read: args.first() retains the typed value captured before needle effects; array_consuming_arg otherwise prefers current ctx. Native RED gave0/O/[z], now native/restored/plan gives1/O/[z] and absent-source0/O/[a]. Shared/direct comparison and named alias checks pass five tests. Rust retains numeric flags and null/empty merging (.text.json), an actual Perl mismatch owned P1 TYPE23.2.14 after rollout along with unassessed sibling array/hash re-read seams. No sibling failure or equality repair is claimed.
-
-Dart23.3.13.3 adds only scalar/one-operand lists and updates named alias calibration0->null. Its numeric/text-key producer and Array/null snapshots already pass native/restored/plan. Shared empty-Array/five-effect RED is repaired; five Dart tests/fatal analysis and Rust two tests after .text.json rename pass. No source/equality change; confirmed Dart null/empty mismatch joins P1 .23.2.14.
+Original FUTURE5.6 owns required-needle normalization: missing/extra before effects, both bare/parenthesized aliases identical. Perl’s nested malformed host-call/compile fallthrough is fixed; Rust/Dart/Julia actual calibration tests replace old missing0 with null. Lua5 remains pending. Free signatures/equality are unchanged. Full prior assessment/source/replay records remain in this path at Git10e1005299b9a3b24ecdc08870b3046bbd5a22cd and contains-results.md/probe_contains_results.pl.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
+Julia contains scalar/shape and calibration are targeted-checked; Lua rollout is next, then P1 equality/sibling snapshot assessment.
 
 ## Latest Completed Slice
 
-Dart contains adds two guard entries only, preserving numeric1/0/text-key equality and already-correct Array/absent-source snapshots. Native/restored/plan producer/shared and direct comparison plus named alias calibration pass five Dart tests/fatal analysis after empty-Array/five-effect RED. Missing/extra and both missing aliases now null/no-effects under FUTURE5.6. Rust two contains tests pass after independently shared .text.json rename. Actual Dart null/empty reference mismatch joins scheduled P1 assessment23.2.14 after rollout; no equality/source repair inferred. Book/facts/current docs align; Julia4 next.
+Julia contains adds two guard-list entries only and updates actual missing-needle calibration0->nothing with identical twins. Independent native/plan/fresh producer and Number/not-Bool raw checks preserve numeric/text-key equality and already-correct Array/absent-source capture; shared three empty-Array/five-effect REDs are repaired. Twelve membership/twelve direct comparison and55 small changed punctuation-light assertions pass with strict compilation. Actual Julia null/empty reference mismatch joins P1 assessment23.2.14 after Lua rollout. Book/facts/registration/FUTURE5.6/current docs align; Lua5 next, known malformed native patterns excluded.
 
 ## Next Action
 
-Independently assess Julia contains producer kinds/equality/null/zero and source snapshots under23.3.13.4. Explicitly assert numeric raw flags are Number and not Bool (Julia == accepts lookalikes); preserve actual producer domains. Implement result/one-needle guards under FUTURE5.6 and update exact named missing0 alias calibration to null. Small native/plan/fresh/direct strict checks/docs/commit, then Lua5. P1 equality/sibling snapshots23.2.14 follows rollout before another family; full admission separate.
+Independently assess Lua contains producer kinds/equality/null/zero and captured sources under23.3.13.5. Preserve actual producers/domains; implement one-needle/scalar guards under FUTURE5.6 and update its actual named missing0 punctuation-light calibration to null with identical aliases. Public native/plan/fresh and direct comparison on available PUC5.5.1/LuaJIT only; never run known malformed-native-pattern groups. Small checks/docs/commit, then P1 equality/sibling snapshot assessment23.2.14 before another family; full admission/declared5.4 separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.13.4` — Julia contains scalar/shape and calibration are targeted-checked; Lua rollout is next, then P1 equality/sibling snapshot assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.3` — Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` — Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
@@ -29,7 +30,6 @@ Independently assess Julia contains producer kinds/equality/null/zero and source
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
 
 ## History
 
