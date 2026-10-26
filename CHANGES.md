@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.4.2 — continue Rust aggregate numeric results
+
+Hand six reducers to existing actual-value continuation with scalar boundaries until a container bridge. Reject unambiguous extra producer operands before effects, preserve min/max overloads and repair zero for actually empty Array sum without changing nonempty filtering. Public/fixture RED precedes small native/restored/generated-plan and direct Count/Length GREEN, compilation/rustfmt/book and fast continuity checks. Values, empty helpers, old incompatible consumers, SA order and snapshots pass. Sync reference/current records; Dart assessment is next, broad admission open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.4.1 — continue Perl aggregate numeric results
 
 Continue six ordinary reducer results through existing scalar/number methods, with scalar-result metadata retaining old incompatible-array boundaries until an explicit split bridge. Preserve zero-extra aggregates and scalar min/max overloads, actual helper domains/kinds/nulls/deferred behavior, source/operand order and mutation snapshots. Small native/fresh aggregate and direct Count/Length regressions pass after actual RED; changed module/test/registration syntax passes. Register regression, update worked book/fact/contract/current records and select Rust assessment next; broad admission stays open.

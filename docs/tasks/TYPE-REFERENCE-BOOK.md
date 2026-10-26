@@ -1392,10 +1392,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
-  Status: `active` / Perl implemented; individual backend assessment follows
+  Status: `active` / Perl/Rust implemented; individual backend assessment follows
   Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.3.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`; assess later backends individually after clean implementation commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`; assess later backends individually after clean implementation commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
@@ -1423,13 +1423,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1 - continue Perl aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `e08a85b291554c98fd5636907104057246ab777e`.
   Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Rust.
   Dependencies: .23.3.4.1.
   Owned paths: Rust engine if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Fresh public Rust CLI fluent/nested producer probes; locked/offline small aggregate_numeric_receivers and direct count_length_receivers native/restored/generated-plan tests, first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; complete context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / ownership: Fresh CLI returns [null,13,null,5,null,5,null,5,null,3,null,7]. Static Array-family loops classify reducers as terminal, dynamic endpoint checks exclude them from selected-result handoff, and the chain preflight lacks unambiguous aggregate zero-extra guards. Implement observed result-flow/shape gaps here, preserving source domains and old incompatible-array null boundaries.
+  Empty-sum defect / owned repair: Public compiled CLI returns [null,null,null,null] for [num_sum([]),num_add(num_sum([]),1),num_sum(["bad"]),num_avg([])] instead of [0,1,null,null]. The shared num_sum/avg/median/range arm rejects every empty numeric list before considering sum; return zero only for an actually empty Array sum. Keep nonempty filtering/domain differences unchanged. Retain the direct helper control in this fixture.
+  Edit-script note: A Rustfmt-layout assertion stopped the first edit before production writes; the resulting unchanged-source rerun is retained as RED, never GREEN evidence. The corrected edit validates all matches before writing.
+  Acceptance: Preserve correct existing dispatch, helper domains and scalar min/max overloads. Check six valid producer-result chains publicly before classifying defects; retain scalar-only boundaries until an explicit Array bridge, order/snapshots/nulls/empty shapes and existing callable vocabulary. Compile and focused/direct checks, docs/commit before the next backend; no broad replay or complete admission.
+
+  Completion: Include six reducers in existing result handoff/static/dynamic endpoint exemptions, carry scalar-result boundaries until an actual container bridge, and guard zero-extra sum/avg/median/range before effects. Preserve scalar min/max overloads and callable vocabulary. Repair empty Array sum to zero without changing nonempty filtering.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Fresh public CLI six pairs and authored fixture are RED for stopped result flow and ignored-argument effects. Independent public empty helper probe returns [null,null,null,null] beside normative [0,1,null,null].
+  - [x] ROOT CAUSE (WHY + WHERE): Engine static/dynamic endpoints exclude reducers from selected-result flow; Expr::FluentChain guard omits unambiguous aggregates. The shared numeric arm rejects empty terms before sum can return its additive identity.
+  - [x] FIX: Share reducer result classification across existing handoffs, retain scalar-only consumer validation and clear it when a helper produces a container. Add early shape guards and the actually-empty-Array sum identity; keep other helper domains/callable vocabulary/serialized formats unchanged.
+  - [x] ADDRESSED (verified): Locked/offline aggregate_numeric_receivers native/restored/generated-plan PASS after actual RED for six producers, overloads, empty/direct helpers, nulls, selected/pipeline/function values, even median, text/Array bridge, SA effects, source mutation snapshots and zero invalid effects.
+  - [x] NO REGRESSION: Direct count_length_receivers, compilation and first-party rustfmt PASS; old incompatible consumers remain null. Nonempty generic filtering, existing callback vocabulary and broad context/portable admission stay separately owned.
+  - [x] LOCKSTEP: Public helper/guide/contract examples, canonical reducer fact/map, tasks/live records, book and fast continuity/history/diff checks align. Dart assessment follows after this clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.2 - continue Rust aggregate numeric results`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Dart.
+  Dependencies: .23.3.4.2.
+  Owned paths: Dart public interpreter if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
   Planned tier: `focused`; declare public probes and exact small regression at activation.
   Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
-  Acceptance: Preserve correct existing dispatch, helper domains and scalar min/max overloads. Check six valid producer-result chains publicly before classifying defects; retain scalar-only boundaries until an explicit Array bridge, order/snapshots/nulls/empty shapes and existing callable vocabulary. Compile and focused/direct checks, docs/commit before the next backend; no broad replay or complete admission.
+  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six producer results, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/restored/generated-plan and direct Count/Length checks, changed-file analysis/format, docs/commit before Julia; no broad replay or complete admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1513,7 +1538,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Rust after targeted-checked Perl implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.3` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Dart after targeted-checked Perl/Rust implementations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

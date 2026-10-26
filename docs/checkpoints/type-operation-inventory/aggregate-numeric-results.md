@@ -102,3 +102,12 @@ Count/Length checks pass after RED, including six producers, empty/null/shape,
 selected/pipeline/function values, scalar overloads, even median, text/Array bridge,
 order and mutation snapshots. Helper domains/kind95 and the separate deferred
 evaluator remain unchanged. Rust and later backends require individual assessment.
+
+Rust `.23.3.4.2` implements result handoff and scalar consumer boundaries through
+existing static/dynamic paths, with early unambiguous aggregate shape guards.
+It also repairs documented zero for actually empty Array sum; nonempty filtering
+and other helper domains stay unchanged. Native/restored/generated-plan and
+direct Count/Length fixtures pass after RED, including explicit Array bridge,
+overloads, empty helper controls, order and snapshots. Existing callable vocabulary
+is reused; no complete context/portable admission. Dart and later backends require
+individual assessment.

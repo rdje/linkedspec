@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded ordinary Count/Length implementations are targeted-checked. Perl aggregate numeric result flow23.3.4.1 is implemented/targeted-checked; Rust23.3.4.2 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded Count/Length implementations are targeted-checked. Perl/Rust aggregate numeric result flow is implemented/targeted-checked; Dart23.3.4.3 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Perl reducer results now continue through compatible scalar/number methods while scalar_result metadata preserves incompatible Array boundaries until an explicit split. Zero-extra Array min/max and scalar overloads retain their routes. Small native/fresh and direct Count/Length tests pass after actual RED, including six producers, empty/null, even median, function/selected/pipeline values, text/Array bridge, SA effects and mutation snapshots. Syntax/book and fast continuity checks pass; deferred and kind95 policies stay unchanged.
+Rust reducer results now use existing actual-value handoff with scalar boundaries until a container bridge, early unambiguous producer arity guards and documented empty-sum zero. Small native/restored/generated-plan and direct Count/Length checks pass after public/fixture RED, including overloads, empty helpers, old incompatible consumers, explicit split, SA effects and snapshots. Nonempty filtering/callable vocabulary stay unchanged. Compilation/rustfmt/book and fast continuity checks pass.
 
 ## Next Action
 
-Publicly assess Rust reducer result chains and nested controls, preserving existing correct behavior and callable vocabulary. Repair only observed gaps; retain scalar/Array boundaries, overloads, nulls, shapes, order and snapshots in a small native/restored/generated-plan fixture plus direct Count/Length checks. Compile/docs/commit before the next backend; no broad suite.
+Publicly assess Dart reducer result chains, zero-extra shapes, scalar/Array boundaries and empty helpers independently. Preserve correct behavior and repair only observed gaps with small native/restored/generated-plan/direct checks and changed-file analysis. Docs/commit before Julia; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` — Rust six-reducer results continue with scalar boundaries, early arity guards and empty sum zero; focused native/restored/generated-plan checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` — Perl six-reducer results continue through scalar/number methods with preserved boundaries; focused native/fresh and Count/Length checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
@@ -29,7 +30,6 @@ Publicly assess Rust reducer result chains and nested controls, preserving exist
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.4` — Lua copy arity rejects before effects on available PUC5.5.1/LuaJIT; focused native/generated/emitted and direct selected-value checks pass; Perl already correct.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.3` — Rust copy arity rejects before effects; focused native/restored/generated-plan and direct selected-value checks pass; actual scalar/depth book boundaries corrected.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.2` — Dart copy arity rejects before effects; native/restored/generated-plan, direct selected-value and changed-file analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.2.1` — Julia copy arity rejects before effects; focused native/generated-plan/fresh-emitted and direct selected-value checks pass.
 
 ## History
 

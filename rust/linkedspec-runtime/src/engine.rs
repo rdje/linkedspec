@@ -5962,7 +5962,16 @@ impl Engine {
                 if calls.iter().any(|call| {
                     matches!(
                         call.method.as_str(),
-                        "first" | "last" | "copy" | "count" | "count_keys" | "length"
+                        "first"
+                            | "last"
+                            | "copy"
+                            | "count"
+                            | "count_keys"
+                            | "length"
+                            | "sum"
+                            | "avg"
+                            | "median"
+                            | "range"
                     ) && !call.args.is_empty()
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7447,18 +7456,32 @@ impl Engine {
 
     fn is_selected_receiver_result_method(method: &str) -> bool {
         matches!(method, "first" | "last" | "count" | "count_keys" | "length")
+            || Self::is_numeric_reducer_receiver_method(method)
     }
 
-    // Selection and count/length continuations consume the actual result value
+    fn is_numeric_reducer_receiver_method(method: &str) -> bool {
+        matches!(method, "sum" | "avg" | "median" | "range" | "min" | "max")
+    }
+
+    // Producer continuations consume the actual result value
     // through the existing dynamic dispatcher, not the original receiver family.
     fn eval_selected_receiver_value_chain(
         &self,
         mut current: RuntimeValue,
         calls: &[linkedspec_core::expr::FluentCall],
+        mut scalar_result: bool,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         for (index, call) in calls.iter().enumerate() {
+            // Reducers yield scalars. Retain the incompatible-array boundary
+            // until a compatible helper explicitly returns a container.
+            if scalar_result
+                && !Self::is_string_receiver_value_chain_method(&call.method)
+                && !Self::is_number_receiver_value_chain_method(&call.method)
+            {
+                return Ok(RuntimeValue::Undef);
+            }
             current = self.eval_receiver_dynamic_value_chain_call(
                 current,
                 call,
@@ -7467,6 +7490,9 @@ impl Engine {
                 ctx,
                 rule_label,
             )?;
+            scalar_result = (scalar_result
+                || Self::is_numeric_reducer_receiver_method(&call.method))
+                && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
         }
         Ok(current)
     }
@@ -7534,6 +7560,7 @@ impl Engine {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index + 1..],
+                    Self::is_numeric_reducer_receiver_method(&call.method),
                     ctx,
                     rule_label,
                 );
@@ -7624,6 +7651,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
+                            Self::is_numeric_reducer_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7657,6 +7685,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
+                            Self::is_numeric_reducer_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7666,11 +7695,6 @@ impl Engine {
                         | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
                         | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq"
                         | "filter_match" => ReceiverFamily::Array,
-                        "sum" | "avg" | "median" | "range" | "min" | "max"
-                            if index + 1 != calls.len() =>
-                        {
-                            return Ok(RuntimeValue::Undef);
-                        }
                         _ => ReceiverFamily::Terminal,
                     };
                 }
@@ -7756,6 +7780,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
+                            Self::is_numeric_reducer_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7789,6 +7814,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
+                            Self::is_numeric_reducer_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7798,11 +7824,6 @@ impl Engine {
                         | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
                         | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq"
                         | "filter_match" => ReceiverFamily::Array,
-                        "sum" | "avg" | "median" | "range" | "min" | "max"
-                            if index + 1 != calls.len() =>
-                        {
-                            return Ok(RuntimeValue::Undef);
-                        }
                         _ => ReceiverFamily::Terminal,
                     };
                 }
@@ -10015,6 +10036,9 @@ impl Engine {
             "num_sum" | "num_avg" | "num_median" | "num_range" => {
                 if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
                 {
+                    if name == "num_sum" && items.is_empty() {
+                        return Ok(RuntimeValue::Number(0.0));
+                    }
                     let nums: Vec<f64> = items.iter().filter_map(|v| v.as_number()).collect();
                     if nums.is_empty() {
                         return Ok(RuntimeValue::Undef);
