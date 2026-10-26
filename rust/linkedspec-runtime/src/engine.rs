@@ -5967,7 +5967,7 @@ impl Engine {
                     | "str_gt" | "str_ge" | "str_lt" | "str_le" | "eq" | "ne" | "gt" | "ge"
                     | "lt" | "le" | "sub" | "div" | "mod" => call.args.len() != 1,
                     "clamp" => call.args.len() != 2,
-                    "add" | "mul" => call.args.is_empty(),
+                    "add" | "mul" | "coalesce" => call.args.is_empty(),
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -6395,6 +6395,7 @@ impl Engine {
                 | "rm_suffix"
                 | "substr"
                 | "cat"
+                | "coalesce"
                 | "coalesce_nonempty"
         )
     }
@@ -7413,11 +7414,12 @@ impl Engine {
             return Ok(RuntimeValue::Undef);
         }
 
-        if call.method == "coalesce_nonempty" {
-            if Self::coalesce_accepts(&current, true) {
+        if matches!(call.method.as_str(), "coalesce" | "coalesce_nonempty") {
+            let skip_empty = call.method == "coalesce_nonempty";
+            if Self::coalesce_accepts(&current, skip_empty) {
                 return Ok(current);
             }
-            return self.eval_coalesce_args(&call.args, true, ctx, rule_label);
+            return self.eval_coalesce_args(&call.args, skip_empty, ctx, rule_label);
         }
 
         let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
@@ -7499,6 +7501,7 @@ impl Engine {
                 | "min"
                 | "max"
                 | "join_values"
+                | "coalesce"
                 | "contains"
                 | "index_of"
                 | "has_key"
@@ -7814,7 +7817,9 @@ impl Engine {
                 );
             }
 
-            if family == ReceiverFamily::String && call.method == "coalesce_nonempty" {
+            if family == ReceiverFamily::String
+                && matches!(call.method.as_str(), "coalesce" | "coalesce_nonempty")
+            {
                 current = self.eval_string_receiver_dynamic_value_call(
                     current,
                     call,

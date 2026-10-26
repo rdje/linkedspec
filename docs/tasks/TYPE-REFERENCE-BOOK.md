@@ -3869,7 +3869,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Qualitative contradiction intake only; any new historical census or measured repair proof is declared before publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18`
-  Status: `active` / Perl targeted-checked; other backend implementations pending
+  Status: `active` / Perl and Rust targeted-checked; other backend implementations pending
   Goal: Add bounded ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.2.18 frozen defined-default-results.md.
   Children: `.23.3.18.1`, `.23.3.18.2`, `.23.3.18.3`, `.23.3.18.4`, `.23.3.18.5`.
@@ -3906,7 +3906,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.1 - add Perl defined-only default receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.3.18.1.
   Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
@@ -3914,6 +3914,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `1ad4335927d71adb22e331d61ebe7df2fd578046`; Perl defined-default receivers committed, brief0/tree clean.
+  Owned paths: Rust independently confirmed defined-only receiver admission/lazy actual-result/scalar/shape flow and retained native/restored/in-process generated-plan public producer/shared regression, scoped book/fact/task/live docs. Preserve free signatures/domains/callbacks and compiled formats; no standalone emitted Rust admission.
+  Verification tier: `focused`
+  Focused checks: Producer-first public native/restored/plan and shared receiver RED/GREEN, direct selected/nonempty defaults as warranted, offline compile/rustfmt and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Independent intake: Native/restored/plan free/nested producer controls pass strict defined kinds/laziness/copies/Number selector writes before production. Shared receiver RED reaches a deliberately unused typed nested-write failure, proving eager evaluation of a fallback. engine fluent String admission/lazy handling only knows coalesce_nonempty, so coalesce falls to generic eager helper invocation without receiver normalization. Add only the frozen counterpart metadata/lazy/scalar/pre-effect-shape handling; no free helper change.
+
+  Completion: Admit coalesce alongside nonempty defaults in String/dynamic receiver dispatch, select the existing lazy default policy by helper spelling, hand actual selections to shared continuation and mark the new method's scalar results until a container is returned. Common zero-RHS preflight precedes source/consumer effects. No free helper/producer/domain/schema/callback change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent native/restored/plan free/nested producer controls pass strict defined empty/zero/false/null/container values, skipped effects/failure, copies and numeric selector writes. Shared native RED reaches the deliberately unused nested_write_kind_conflict failure before returning a value; other pre-change shared fields are not inferred.
+  - [x] ROOT CAUSE (WHY + WHERE): engine fluent String method admission, dynamic lazy branch and actual-selection handoff include only coalesce_nonempty. coalesce falls through generic eager helper invocation without the source operand. Common preflight and selected-result scalar tracking also lack the new counterpart's shape/result metadata.
+  - [x] FIX: Add the bounded counterpart to existing String/lazy/result dispatch and one-or-more receiver preflight; reuse eval_coalesce_args/coalesce_accepts and selected actual-value flow. Preserve all free signatures/truth/numeric/context/copy policies and compiled formats.
+  - [x] ADDRESSED (verified): Shared native/restored/in-process plan GREEN preserves exact scalar/container kinds, all source families, empty containers, SDC/SC/Hash-C snapshots, chosen copies/Number indices, skipped supported runtime errors and rejected-prefix/operand effects. Extra selected/named/Boolean/malformed controls give fournull/emptyorder, with no forbidden source or consumer effect.
+  - [x] NO REGRESSION: New3 and direct nonempty/selected default3 tests pass, six focused tests total, with offline compilation and rustfmt. No broad suite/full matrix, standalone emitted Rust or complete portable domain/context admission.
+  - [x] LOCKSTEP: Retained public producer/shared/selected controls, frozen contract/current qualified catalog/guide and canonical default fact/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart18.3 independently assesses next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.2 - add Rust defined-only default receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.3`
   Status: `pending`
@@ -3959,11 +3978,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1 is targeted-checked and Rust18.2 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1/Rust18.2 are targeted-checked and Dart18.3 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` | `pending` | Independently assess and implement frozen Rust defined-only coalesce receiver/result flow. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` | `pending` | Independently assess and implement frozen Dart defined-only coalesce receiver/result flow. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

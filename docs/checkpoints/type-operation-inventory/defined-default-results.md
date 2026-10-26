@@ -106,3 +106,20 @@ supported runtime failure and incompatible-consumer operands, valid rejected
 prefix effects and malformed zero-RHS no-effects. Authored retired Hash syntax
 still rejects. Rust18.2 independently assesses next; no full admission or new
 portable aggregate domain. Explicit Perl test registration23.4.1 stays required.
+
+## Bounded Rust implementation
+
+18.2 independently confirms free/nested defined kinds, lazy skipped runtime
+failure/effects, copies and Number indices before production. The new receiver
+instead reaches an unused typed write failure: missing String admission falls
+through generic eager helper dispatch without a receiver operand. Add the
+counterpart to existing String/dynamic lazy selection and actual-result handoff;
+mark its scalar results until an actual container releases the boundary. Guard
+zero fallbacks before source/consumer effects. Existing free/producer/context/
+numeric/callback/compiled-format contracts remain unchanged.
+
+New producer/shared/selected three tests plus direct selected/nonempty three
+pass native/restored/in-process plan, offline compilation and rustfmt. Shared
+strict kinds/SDC-SC-HashC/copies/indices/skipped failures and selected/malformed
+no-effects hold; no standalone emitted Rust or complete portable admission.
+Dart18.3 independently assesses next.
