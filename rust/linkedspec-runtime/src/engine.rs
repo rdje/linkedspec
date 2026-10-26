@@ -7372,6 +7372,13 @@ impl Engine {
             return Ok(RuntimeValue::Undef);
         }
 
+        if call.method == "coalesce_nonempty" {
+            if Self::coalesce_accepts(&current, true) {
+                return Ok(current);
+            }
+            return self.eval_coalesce_args(&call.args, true, ctx, rule_label);
+        }
+
         let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
         let next =
             self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
@@ -7673,6 +7680,17 @@ impl Engine {
         for (index, call) in calls.iter().enumerate() {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
+            }
+
+            if family == ReceiverFamily::String && call.method == "coalesce_nonempty" {
+                current = self.eval_string_receiver_dynamic_value_call(
+                    current,
+                    call,
+                    index + 1 == calls.len(),
+                    ctx,
+                    rule_label,
+                )?;
+                continue;
             }
 
             let evaluated_call_args: Vec<RuntimeValue> = call
@@ -8283,6 +8301,22 @@ impl Engine {
         }
     }
 
+    fn eval_coalesce_args(
+        &self,
+        args: &[linkedspec_core::expr::Arg],
+        require_nonempty: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        for arg in args {
+            let value = self.eval_expr(arg.value(), ctx, rule_label)?;
+            if Self::coalesce_accepts(&value, require_nonempty) {
+                return Ok(value);
+            }
+        }
+        Ok(RuntimeValue::Undef)
+    }
+
     /// Dispatch a lazy control or default-selection call.
     ///
     /// These calls receive unevaluated arg AST nodes; the handler evaluates
@@ -8301,13 +8335,7 @@ impl Engine {
             TraceLevel::FULL,
         );
         if matches!(name, "coalesce" | "coalesce_nonempty") {
-            for arg in args {
-                let value = self.eval_expr(arg.value(), ctx, rule_label)?;
-                if Self::coalesce_accepts(&value, name == "coalesce_nonempty") {
-                    return Ok(value);
-                }
-            }
-            return Ok(RuntimeValue::Undef);
+            return self.eval_coalesce_args(args, name == "coalesce_nonempty", ctx, rule_label);
         }
         let empty_vals: Vec<RuntimeValue> = Vec::new();
         self.call_helper(name, args, &empty_vals, ctx, rule_label)

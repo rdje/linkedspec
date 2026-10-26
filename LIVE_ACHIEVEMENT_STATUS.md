@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary Rust coalesce/nonempty62.1/62.2.1 are implemented and targeted-checked. Documented receiver62.2.2 is next, then continued helper signatures. Keep feature/compile/quick-check/docs/commit cadence; broad62.3/.62.4 remains deferred.
+Rust ordinary and documented receiver default-selection repairs are implemented and targeted-checked. Discovered Perl exhausted-tail62.2.3 is immediate next before continued signatures. Keep feature/compile/quick-check/docs/commit cadence; broader proof remains deferred.
 
 ## Latest Completed Slice
 
-Rust coalesce_nonempty now enters lazy selection and skips only undef/empty text, preserving actual zero/false and reference-compatible values. Shared public Perl and authored native/restored/generated-plan value/order/skipped-error controls agree after actual RED; direct coalesce_lazy_values stays green. Compilation/rustfmt/book and fast continuity checks pass. Canonical fact/map and indexed/current/live records align; aggregate controls do not broaden the scalar signature.
+Rust static/selected-value nonempty receiver paths now reuse lazy prefix evaluation, preserving actual receiver values and skipping later writes/errors. Authored native/restored/generated-plan and direct ordinary default tests pass after actual RED; compilation/rustfmt/book and fast continuity checks pass. Public Perl confirms lazy order but exposes a final-empty exhaustion defect; Get/substitution shows an unconditional generated tail. The book/fact/task/live handoff qualifies and owns its immediate62.2.3 repair.
 
 ## Next Action
 
-Publicly reproduce and repair documented receiver/value-block default selection62.2.2, preserving identity/kinds, once-only evaluation and diagnostics; commit before continued signature inventory. No broad suites or historical replay.
+Repair Perl nonempty exhaustion62.2.3 with a small native/fresh regression and focused syntax/dependent checks. Preserve null oracle, zero/false and once-only lazy effects; commit before continued helper signatures. No broad suites or historical replay.
 
 ## Recent Completions
 
+- `SESSION-STARTUP-READING.62.2.2` — Rust documented receiver lazy defaults; native/restored/generated-plan order/skipped-error and ordinary default-helper checks pass; Perl final-tail repair owned next.
 - `SESSION-STARTUP-READING.62.2.1` — Rust ordinary nonempty lazy selection; authored native/restored/generated-plan value/order/skipped-error and direct coalesce tests pass.
 - `SESSION-STARTUP-READING.62.1` — Rust ordinary first-defined lazy selection; authored native/restored/generated-plan values/order/skipped-error and direct selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.4` — Lua copy arity rejects before effects on available PUC5.5.1/LuaJIT; focused native/generated/emitted and direct selected-value checks pass; Perl already correct.
@@ -29,7 +30,6 @@ Publicly reproduce and repair documented receiver/value-block default selection6
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` — selected Perl array/harray methods and runtime-kind copy; focused native/fresh/scalar/pipeline checks pass; Rust23.3.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1` — selected Perl scalar methods, native/fresh and pipeline checks pass; selected containers1.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
-- `TYPE-REFERENCE-BOOK.1.2.1.2.1` — helper spellings/aliases/roles indexed; source consistency and book pass; signatures/effects1.2.1.2.2 next.
 
 ## History
 

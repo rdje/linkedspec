@@ -529,7 +529,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Commit: `SESSION-STARTUP-READING.62.1 - lazily select Rust first-defined values`.
 - ID: `SESSION-STARTUP-READING.62.2`
   Status: `active`
-  Children: `.62.2.1`, `.62.2.2`
+  Children: `.62.2.1`, `.62.2.2`, `.62.2.3`
   Goal: Reconcile coalesce_nonempty and receiver/value-block dispatch with the reference.
   Dependencies: .62.1.
   Acceptance: Probe and repair later-operand effects for coalesce_nonempty and documented receiver forms;
@@ -538,7 +538,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Historical September verification: Two fresh coalesce_nonempty pairs also showed Rust executes the late
     audit assignment after first/fallback selection; Perl preserves unset/selected respectively. Both use
     eager Rust operand collection versus nested Perl conditionals. Receiver/value-block proof remains open.
-  Partial implementation October26: Ordinary nonempty helper laziness/selection is repaired and targeted-checked under .62.2.1. Documented receiver/value-block paths remain .62.2.2-owned and are the next implementation, separate from broad62.3/.62.4.
+  Partial implementation October26: Ordinary nonempty and documented Rust receiver/value-block laziness are implemented/targeted-checked under .62.2.1-.2. Public comparison exposes the separate Perl exhausted-tail defect .62.2.3, immediate next before continued signatures; broad62.3/.62.4 stays deferred.
   Commit: Per-child implementation commits; broader admission remains .62.3/.62.4.
 - ID: `SESSION-STARTUP-READING.62.2.1`
   Status: `done`
@@ -558,13 +558,35 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   - [x] LOCKSTEP: Public nonempty examples, canonical fact/map, indexed/current task frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Receiver .62.2.2 is next.
   Commit: `SESSION-STARTUP-READING.62.2.1 - lazily select Rust nonempty defaults`.
 - ID: `SESSION-STARTUP-READING.62.2.2`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `04c9d093fdeded96771cd803de3eba3fb3fb7703`.
+  Owned paths: rust/linkedspec-runtime/src/engine.rs, coalesce_receiver_values test/shared fixture and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Shared public Perl receiver fixture; locked/offline Rust coalesce_receiver_values plus direct ordinary coalesce/nonempty regressions on native/restored/generated-plan; first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded documented receiver implementation under director feature-first cadence; broader62.3/.62.4 and eventual clean push admission stay separate.
+  Claim verification: none: deterministic authored receiver/value/order/skipped-error regression; no quantified corpus, exhaustive or portable admission measurement.
   Goal: Repair documented receiver default-selection laziness and value-block transitions.
   Dependencies: .62.2.1.
   Schedule: Next focused implementation after .62.2.1, before continued helper signatures; broad62.3/.62.4 remains deferred.
-  Planned tier: `focused`; declare actual changed paths/proof at activation.
-  Claim verification: none: Future deterministic receiver implementation, no new measurement.
   Acceptance: Publicly reproduce documented receiver forms before repair; preserve receiver identity/kind, once-only prefix evaluation, zero/false/empty/null distinctions and failure/argument behavior across actual native/generated consumers. Do not infer unadvertised method admission.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Shared public fixture preserves values but Rust order is AXBCDXEXFXXXX instead of ABCDEF; safe static/selected receivers still run a later typed-write conflict. Public Perl confirms lazy order and exposes an independent all-empty final-tail defect, owned immediately under .62.2.3 rather than changing the authored null oracle.
+  - [x] ROOT CAUSE (WHY + WHERE): eval_string_receiver_value_chain and eval_string_receiver_dynamic_value_call eagerly evaluate method operands before call_helper selection. Ordinary lazy dispatch62.2.1 cannot repair these receiver paths.
+  - [x] FIX: Reuse shared eval_coalesce_args/coalesce_accepts for dynamic nonempty receivers, and route static string-family nonempty links there before eager argument collection. Preserve actual current values and existing method classification; add no unadvertised coalesce receiver method.
+  - [x] ADDRESSED (verified): Locked/offline coalesce_receiver_values native/restored/generated-plan tests PASS after actual order/skipped-error RED, including block/selected/earlier-string paths, zero/false, empty/null and once-only effects.
+  - [x] NO REGRESSION: Needed typed-write conflicts still error; direct ordinary coalesce_lazy_values/coalesce_nonempty_values tests and first-party rustfmt PASS. No full crate suite or broad target admission.
+  - [x] LOCKSTEP: Public receiver examples/Perl exception, canonical fact/map, indexed/current frontier and live handoff agree; book and fast continuity/history/diff checks pass. Historical detail remains byte-recoverable at the named Git boundary; Perl .62.2.3 is next.
+  Commit: `SESSION-STARTUP-READING.62.2.2 - lazily select Rust receiver defaults`.
+- ID: `SESSION-STARTUP-READING.62.2.3`
+  Status: `pending`
+  Priority: P1; immediate next implementation after clean Rust receiver62.2.2 commit.
+  Goal: Repair Perl coalesce_nonempty exhaustion when the final rejected operand is empty text.
+  Reproduction: The shared receiver fixture returns empty text for "".coalesce_nonempty(undef,"") on public Perl Get, while the catalog and authored oracle require undef when every operand is undef/empty. Rust already returns null for this case; do not weaken the Rust oracle to match the discrepancy.
+  Impact: An exhausted default selection incorrectly appears defined and can feed later string operations; ordinary helper and fresh-emitted paths need tool-backed isolation.
+  Tool-backed root cause: Public four-value helper/receiver controls return ["","",null,""] with no last_error. call_spec_handler_subst("Top", return(coalesce_nonempty(undef,""))) emits a guarded first operand with an unconditional empty-string tail. MethodLowering.pm's build_coalesce_nonempty_expr returns the final part without validating it; the same base shape is valid for first-defined coalesce but wrong for nonempty selection. Keep the Rust all-empty null oracle unchanged.
+  Planned tier: `focused`; declare exact public diagnosis/changed paths/proof at activation.
+  Claim verification: none: Owned deterministic boundary defect, no quantified/exhaustive measurement.
+  Acceptance: Use LinkedSpec public substitution/generated-source tools to find the exact mechanism before changes; fix ordinary/receiver exhaustion while preserving zero/false, selected values and lazy once-only effects. Retain the scalar signature and separate broader admission.
 - ID: `SESSION-STARTUP-READING.62.3`
   Status: `pending`
   Goal: Add permanent default-selection and effect-order recurrence across supported carriers.

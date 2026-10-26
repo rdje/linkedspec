@@ -1,26 +1,30 @@
 ---
 id: rust-coalesce-evaluation-drift
-title: "Rust lazy default helpers and remaining receiver boundaries"
+title: "Lazy default-selection boundaries on Rust and Perl"
 answers:
+  - "does Perl coalesce_nonempty return undef when all operands are empty"
   - "does Rust coalesce preserve a defined empty string"
   - "does Rust coalesce short circuit operand evaluation"
   - "does coalesce_nonempty skip later assignment effects"
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: ordinary coalesce/nonempty62.1/62.2.1 repaired; receiver62.2.2 and broad admission open
+status: bounded Rust defaults62.1/62.2.1-.2 repaired; Perl exhaustion62.2.3 and broad admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
-evidence: "SESSION-STARTUP-READING.3.3.22: five paired existing-primary Rust/live Perl Get controls, five ready descriptors and inspected lowered/generated sources; .62.1-.62.4 own repair and carrier/public closure."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values"
+evidence: "Historical .3.3.22 paired controls; current .62.1/.62.2.1-.2 public fixtures and retained Rust regressions; Perl empty-tail root isolated through Get/substitution and owned by .62.2.3. Broad .62.3/.62.4 remains open."
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
 ---
 
-Current62.1/62.2.1: both ordinary helpers enter call_helper_lazy and select only
-the needed operand prefix. Shared coalesce_accepts rejects undef, plus empty
-Scalar text for nonempty selection; zero/false and aggregate compatibility values
-retain identity without text coercion. Native/restored/generated-plan fixtures
-distinguish exact order and needed/skipped typed-write errors; public Perl agrees.
-Aggregate controls do not broaden the scalar signature. Receiver62.2.2 and
-broader62.3/.62.4 remain open.
+Current62.1/62.2.1-.2: ordinary defaults and documented Rust nonempty receivers
+share eval_coalesce_args/coalesce_accepts and evaluate only the needed prefix.
+Reject undef, plus empty Scalar text for nonempty mode; preserve actual values.
+Native/restored/generated-plan value/order/skipped-error fixtures pass. Aggregate
+compatibility controls do not broaden the scalar signature; broad62.3/.62.4 stays open.
+
+Perl exhaustion62.2.3 is immediate next: public helper/receiver controls ending in
+empty text return "" instead of undef. call_spec_handler_subst confirms an
+unconditional final operand in build_coalesce_nonempty_expr. The Rust all-empty
+null oracle is retained; the book qualifies the current Perl defect.
 
 # Historical September7 default-selection findings
 
@@ -87,25 +91,13 @@ serialized, generated, emitted and standalone consumers belong to `.62.3`. Other
 receiver/value-block routes, all-undef and invalid argument cases were not executed here.
 That reading slice claimed no repair or whole-project signoff; current bounded repair is recorded above.
 
-The historical Rust CLI identity is SHA-256
-`ad45555750489b78f7835457a09ecfa174d56b7ebf6242a4db5850570797c81a`;
-its source was unchanged from the reading baseline. No compiler ran in that reading slice.
+## Retained historical provenance
 
-## Retained evidence
+Exact September7 CLI identity, scratch manifest (40 files/158,215 bytes), file
+hash table and original commands remain byte-recoverable at Git
+04c9d093fdeded96771cd803de3eba3fb3fb7703 for this path. Those historical capture
+commands are not current startup/feature commands; use the focused reverify above.
 
-All paths derive from `.linkedspec-data/scratch/startup81-coalesce-boundaries/`.
-The manifest covers 40 files / 158,215 bytes excluding itself, including the exact specs,
-probe scripts, result streams, lowered/generated source, descriptors and empty execution logs.
-The manifest is 8,659 bytes, SHA-256
-`af5a1031717134cb9872f1d98b9f1f55c6efb5c4e3a7c12ca53b84dd6170d927`.
-
-| File | Bytes | SHA-256 |
-| --- | ---: | --- |
-| `rust-cli.jsonl` | 339 | `3fcab59812d41ad9fd86e13b100a60e0c05da85e64a54a22238fcc130694a35e` |
-| `rust-cli-nonempty.jsonl` | 196 | `99b32df485ad3c76c09c8b513a3f75851d790ad680b8d0319f09424c28254d1a` |
-| `perl-typed-results.jsonl` | 467 | `c290981158f09e90b74fdb65525195b778a5d7bc72e98b03b56601a0cacddcdd` |
-| `perl-nonempty-results.jsonl` | 303 | `558427a45f98dfd2af1369723d4e47f89f840490962cb36bfa83ec291b0d1ff8` |
-
-The task-tree is the current repair authority: `SESSION-STARTUP-READING.62.1-.62.4`
-in the indexed SESSION-STARTUP-READING tree. The October26 feature-first phase selects
-bounded62.1/.62.2 repairs now; broader reading/policy/admission stays separately owned.
+Current repair ownership is SESSION-STARTUP-READING.62 in its indexed task tree.
+The October26 feature-first phase selects bounded implementations now; broader
+reading/policy/admission stays separately owned.
