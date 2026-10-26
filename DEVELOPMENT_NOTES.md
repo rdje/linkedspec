@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.11.1 — add Perl generic definedness receiver flow
+
+Perl registers generic definedness scalar/zero-operand routes and numeric-prefix handoff. Public dumps exposed synthetic bare names/raw first and split-bridge helpers; actual-value typed operands and a legacy definedness branch repair them while preserving1/empty-string. Native/fresh shared fixture and direct String compatibility pass after RED, including null/defined kinds, source/copy families, false text/fallback/generic/bridges/scalar guards and1!/SC/one source call. Syntax/book/fast checks pass; Rust2 next; mandatory canonical Perl registration23.4.1 stays separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.10 — freeze generic definedness receiver results
 
 Definedness23.2.10 freezes the generic receiver/result contract and schedules five backend children after public Get/substitution/fresh assessment. Perl free/nested producers are1/empty-text: false cat gives! and coalesce_nonempty selects fallback. Ordinary receiver forms stay raw DSL/host-helper or compile failures; nested snapshot control is1!/SC/changed and must be preserved. Corrected two condition-only catalog entries; broader SESSION28.5 cat/checker admission stays open. Probe syntax/book/fast checks pass; Perl23.3.11.1 next.

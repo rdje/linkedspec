@@ -821,7 +821,7 @@ endif()
 
 ## Scalar predicates and string comparisons
 
-These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, but many of them can also be assigned or returned as boolean-like scalar values.
+These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, and many can be assigned or returned. Ordinary Perl definedness receivers now continue: `"abc".is_defined().cat("!")` returns `"1!"`; `[].first().is_defined().coalesce_nonempty("late").cat("!")` returns `"late!"` because its existing false result is empty text. Empty text/Array/Hash, false and zero themselves are defined; these predicates test null rather than emptiness.
 
 | Helper | Meaning |
 | --- | --- |

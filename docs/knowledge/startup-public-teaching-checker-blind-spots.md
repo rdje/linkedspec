@@ -21,7 +21,7 @@ status: dated diagnostic evidence; repair state belongs to the owning task-tree
 tags: ["startup-reading","book","contracts","verification"]
 evidence: "SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.28. No implementation repair or whole-project signoff is claimed."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_definedness_results.pl"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/definedness_result_receiver_contract.t t/string_predicate_result_receiver_contract.t"
   - "Historical checker commands/repair protocols: this path at Gitdb751b4ea97a786f7205b75ea8547fa24808c1b0; broad current proof remains with individual owners."
 ---
 
@@ -129,6 +129,6 @@ No TOOLBOX, checker, contract, or public-book edit is part of this reading check
 Reverify with `bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py`
 and the exact public lifecycle matrix in [[perl-semantic-inline-header-lifecycle-loss]].
 
-## Current ordinary definedness assessment
+## Current ordinary definedness flow
 
-TYPE23.2.10 rechecks native/fresh producer1/empty-string and returned/nested use, correcting condition-only catalog entries. Free false renders"!" with cat and selects coalesce_nonempty fallback; preserve actual kinds. Fluent definedness remains unregistered in MethodLowering's String return-family map, producing raw DSL/host-helper or compile failure. Nested source/result control returns[1!,SC,changed]; no snapshot repair inferred. Contract/probe definedness-results.md/probe_definedness_results.pl own current facts; implementation23.3.11.1-.5 follows. Broad SESSION28.5 admission remains open.
+TYPE23.2.10 native/fresh producer1/empty-string and returned/nested use corrected condition-only catalog claims. False renders"!" with cat and selects coalesce_nonempty fallback; preserve actual kinds.23.3.11.1 registers generic receivers/scalar/zero-operand guards and numeric-prefix handoff. Registration exposed synthetic defined(word)/defined(first(...)) and raw bridge calls: typed actual-value operands and a matching legacy definedness branch now finish lowering. Native/fresh shared fixture and direct String checks pass after raw-host/compile/operand RED, retaining1!/SC/one source call, null/defined kinds, false/default and bridges. Broad SESSION28.5 admission remains open; Rust2 independently assessed next. Contract/probe: definedness-results.md/probe_definedness_results.pl; regression: definedness_result_receiver_contract.t.

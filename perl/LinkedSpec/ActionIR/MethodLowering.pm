@@ -4430,6 +4430,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
 
+  if ($method eq 'is_defined' || $method eq 'is_undefined') {
+   my $value = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+   $value = $legacy_method_value_expr->($args->[0]{source})
+    unless defined($value) && length($value);
+   return undef unless defined($value) && length($value);
+   return $method eq 'is_defined' ? 'defined('.$value.')' : '(!defined('.$value.'))';
+  }
+
   if ($method eq 'is_empty' || $method eq 'is_nonempty') {
    my $value = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
    $value = $legacy_method_value_expr->($args->[0]{source})
@@ -4480,10 +4488,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
    push @lowered_args, $lowered_arg;
   }
 
-	 return 'defined('.$lowered_args[0].')'
-	  if $method eq 'is_defined';
-	 return '(!defined('.$lowered_args[0].'))'
-	  if $method eq 'is_undefined';
 	 return $legacy_method_value_expr->($method.'('.join(', ', @lowered_args).')')
 	};
 	$lower_ast_aggregate_call_node = sub {
@@ -4687,7 +4691,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:index_of|has_key|starts_with|ends_with|contains_substr|matches)$/o && @$aggregate_args != 1;
-   return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty)$/o && @$aggregate_args;
+   return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty|is_defined|is_undefined)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
    }
@@ -4741,7 +4745,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   $receiver_expr = $receiver->{source}
    if !(defined($receiver_expr) && length($receiver_expr))
    && ($receiver->{kind} // '') eq 'call'
-   && ($calls->[0]{method} // '') =~ /^(?:has_key|is_empty|is_nonempty)$/o;
+   && ($calls->[0]{method} // '') =~ /^(?:has_key|is_empty|is_nonempty|is_defined|is_undefined)$/o;
   $receiver_expr = $ast_expr_source_node->($receiver)
    unless defined($receiver_expr) && length($receiver_expr);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
@@ -4821,7 +4825,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
 	  my $array_chain_return_family = sub {
 	   my ($method) = @_;
-	   return 'scalar_result' if defined($method) && $method =~ /^(?:index_of|is_empty|is_nonempty)$/o;
+	   return 'scalar_result' if defined($method) && $method =~ /^(?:index_of|is_empty|is_nonempty|is_defined|is_undefined)$/o;
 	   return 'selected' if defined($method) && $method =~ /^(?:first|last|count|length)$/o;
 	   return 'array' if defined($method)
 	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
@@ -4882,10 +4886,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $expression = $lower_synthetic_chain_expr->($expression);
     return undef unless defined($source_expr) && defined($expression);
     my $array_method = _is_array_receiver_value_chain_method($method)
-     && $method !~ /^(?:is_empty|is_nonempty)$/o
+     && $method !~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o
      && !($method =~ /^(?:min|max)$/o && @$source_args);
     my $hash_method = defined(_hash_receiver_value_chain_return_family($method))
-     && $method !~ /^(?:is_empty|is_nonempty)$/o
+     && $method !~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o
      && !_is_tree_traversal_receiver_method($method);
     if ($method ne 'copy' && ($array_method || $hash_method)) {
      my $kind = $array_method ? 'ARRAY' : 'HASH';
@@ -4899,7 +4903,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    # explicit scalar-to-array bridge changes the result family.
    if (($receiver_family // '') eq 'scalar_result') {
     return ['undef', 'terminal']
-     unless $method =~ /^(?:is_empty|is_nonempty)$/o
+     unless $method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o
       || _is_string_receiver_value_chain_method($method)
       || _is_number_receiver_value_chain_method($method);
     return ['undef', 'terminal'] if $method =~ /^(?:min|max)$/o && !@$source_args;
@@ -4960,7 +4964,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 0 if defined($remembered_kind) && $remembered_kind eq 'array';
    if (ref($candidate_calls) eq 'ARRAY' && @$candidate_calls > 1) {
     my $next_method = $candidate_calls->[1]{method} // '';
-    return 0 if $next_method =~ /^(?:is_empty|is_nonempty)$/o;
+    return 0 if $next_method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o;
     return 1 if defined(_hash_receiver_value_chain_return_family($next_method));
     return 0 if _is_array_receiver_value_chain_method($next_method);
    }
@@ -5216,7 +5220,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (_is_hash_receiver_value_chain_method($first_method)
-   && $first_method !~ /^(?:is_empty|is_nonempty)$/o
+   && $first_method !~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o
    && ($first_method ne 'copy' || $copy_starts_hash_receiver_chain->($receiver_expr, $calls))) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
@@ -5283,7 +5287,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lower_synthetic_chain_expr->($current_expr)
   }
 
-  if (_is_string_receiver_value_chain_method($first_method)) {
+  if (_is_string_receiver_value_chain_method($first_method)
+   && $first_method !~ /^(?:is_defined|is_undefined)$/o) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
     label => 'fluent_chain',
@@ -5368,6 +5373,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return 'undef' if $current_family eq 'terminal';
     return undef unless $current_family eq 'number';
 
+    if ($method =~ /^(?:is_defined|is_undefined)$/o) {
+     my $applied = $append_selected_value_chain_call->($current_expr, $call, 'scalar_result');
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
+     next;
+    }
+
     my $return_family = _number_receiver_value_chain_return_family($method);
     return undef unless defined($return_family);
     my $helper = _number_receiver_method_helper_name($method);
@@ -5400,13 +5412,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
     taken => 1,
    context => { first_method => $first_method, steps => scalar(@$calls) },
   );
-  my $generic_emptiness = $first_method =~ /^(?:is_empty|is_nonempty)$/o
+  my $generic_predicate = $first_method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o
    || ($first_method eq 'copy' && @$calls > 1
-       && ($calls->[1]{method} // '') =~ /^(?:is_empty|is_nonempty)$/o);
-  return undef if !$generic_emptiness && defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
+       && ($calls->[1]{method} // '') =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined)$/o);
+  return undef if !$generic_predicate && defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
   my $current_expr = $receiver_expr;
   $current_expr = 'array('.$current_expr.')'
-   if !$generic_emptiness && ($receiver->{kind} // '') eq 'variable'
+   if !$generic_predicate && ($receiver->{kind} // '') eq 'variable'
    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   my $current_family = 'array';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
@@ -5433,7 +5445,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     ($current_expr, $current_family) = @$applied;
     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
    }
-   return $lower_synthetic_chain_expr->($current_expr) if $generic_emptiness;
+   return $lower_synthetic_chain_expr->($current_expr) if $generic_predicate;
    # This composition can already contain emitted callback expressions.
    # Consume it through the existing compatibility bridge without parsing
    # host temporaries as new DSL expressions.
@@ -6389,6 +6401,14 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
   return 'do { my $__ls_matches_value = '.$value_expr.'; defined($__ls_matches_value) ? (($__ls_matches_value =~ '.$pattern_expr.') ? 1 : 0) : 0 }';
  }
+ if ($method_call && ($method_call->{method} eq 'is_defined' || $method_call->{method} eq 'is_undefined')) {
+  my $args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $args;
+  my $value = _lower_method_value_expr($args->[0], $deps);
+  $value = $trim_action_ir_value->($args->[0]) unless defined($value) && length($value);
+  return undef unless defined($value) && length($value);
+  return $method_call->{method} eq 'is_defined' ? 'defined('.$value.')' : '(!defined('.$value.'))';
+ }
  if ($method_call && ($method_call->{method} eq 'is_empty' || $method_call->{method} eq 'is_nonempty')) {
   my $args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $args;
@@ -7338,7 +7358,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:array|hash|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:array|hash|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|is_defined|is_undefined|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  _trace_method_decision(
   phase => 'lower_return_payload_expr',
@@ -7367,7 +7387,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:and|or|not|copy|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:and|or|not|copy|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|is_defined|is_undefined|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -7677,7 +7697,7 @@ sub _split_receiver_dot_method_expr {
 sub _is_array_receiver_value_chain_method {
  my ($method) = @_;
  return 0 unless defined $method;
- return $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values|sum|avg|median|range|min|max)$/o ? 1 : 0
+ return $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|is_defined|is_undefined|join_values|sum|avg|median|range|min|max)$/o ? 1 : 0
 }
 
 sub _hash_receiver_value_chain_return_family {
@@ -7686,7 +7706,7 @@ sub _hash_receiver_value_chain_return_family {
  return 'selected' if $method eq 'count_keys';
  return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
- return 'scalar_result' if $method =~ /^(?:has_key|is_empty|is_nonempty)$/o;
+ return 'scalar_result' if $method =~ /^(?:has_key|is_empty|is_nonempty|is_defined|is_undefined)$/o;
  return 'terminal' if $method eq 'reduce_leaves';
  return undef
 }
@@ -7709,7 +7729,7 @@ sub _string_receiver_value_chain_return_family {
  return 'selected' if $method eq 'length';
  return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o;
  return 'array' if $method =~ /^(?:split)$/o;
- return 'scalar_result' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches)$/o;
+ return 'scalar_result' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches|is_defined|is_undefined)$/o;
  return undef
 }
 

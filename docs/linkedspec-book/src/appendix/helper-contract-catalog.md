@@ -297,7 +297,7 @@ dispatch rule.
 - **Behavior**: Returns true if the value is not undef. Accepts any expression type.
 - **Edge cases**: Empty string, `0`, and empty arrays are defined.
 - **Usage**: Supports condition, returned and nested expression forms on current Perl; `cat(is_defined("abc"),"!")` returns `"1!"`.
-  Perl false is empty text: `cat(is_defined(undef),"!")` returns `"!"`; a following `coalesce_nonempty("late")` selects `"late"`. Ordinary `value.is_defined()` receiver registration is a tracked gap; use the free helper form.
+  Perl false is empty text: `cat(is_defined(undef),"!")` returns `"!"`; a following `coalesce_nonempty("late")` selects `"late"`. Ordinary Perl receivers now work: `"abc".is_defined().cat("!")` → `"1!"`, `[].first().is_defined().cat("!")` → `"!"`, and `1.add(1).is_defined().cat("!")` → `"1!"`. Zero operands are required before effects; compatible scalar/generic methods consume the actual result, and container-only methods return undef until an explicit bridge produces a container.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -311,7 +311,7 @@ dispatch rule.
 - **Signature**: `is_undefined(value: expr)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is undef. Logical inverse of `is_defined`.
-- **Usage**: Condition, returned and nested expression forms work on current Perl: `cat(is_undefined(undef),"!")` returns `"1!"`. Ordinary `value.is_undefined()` receiver registration is a tracked gap. Preserve actual truth/text kinds; other-backend/domain admission is assessed separately.
+- **Usage**: Condition, returned and nested expression forms work on current Perl: `cat(is_undefined(undef),"!")` returns `"1!"`. Ordinary Perl receivers now work: `[].first().is_undefined().cat("!")` → `"1!"` and `"abc".is_undefined().cat("!")` → `"!"`; named/literal/selected/default/function/copy sources retain existing kinds and once-only source/result snapshots. Preserve actual truth/text kinds; other-backend/domain admission is assessed separately.
 - **Example**: over `/(\w+)/`, `if (is_undefined(array(entry_group(0))[9])) { return("missing") } else { return("present") }` on `hi` → `["missing"]` (index 9 is out of range, so the read is undef).
 
 ### `trim(s)`

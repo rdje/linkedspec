@@ -42,3 +42,16 @@ existing producer/order. Do not relabel unsupported fluent compile failures as a
 snapshot bug. Freeze this contract, then implement/confirm Perl/Rust/Dart/Julia/Lua
 in separate committed children. Small targeted checks only; full admission23.4,
 Perl canonical registration23.4.1 and Lua declared5.4 remain separate.
+
+## Bounded Perl implementation
+
+23.3.11.1 registers the two generic receiver methods and their scalar/zero-operand
+guards, preserves actual source kind through copy/default/selected paths and
+admits definedness after existing numeric prefixes. Synthetic paths also need
+actual-value typed operands and a legacy definedness branch; generated dumps
+first exposed defined(word)/defined(first(...)) and raw split-bridge helpers.
+The shared source fixture has an explicit .perl.json expected variant to preserve
+1/empty-string truth/text/default behavior. Native/fresh shared and direct String
+checks pass after RED, including source families, true/false/null/empty, copied
+sources, explicit bridges/scalar guards, malformed no-effects and1!/SC/one call.
+Other backends must retain independently observed producer kinds; Rust2 next.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
+Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 
 ## Latest Completed Slice
 
-Definedness23.2.10 freezes the generic receiver/result contract and schedules five backend children after public Get/substitution/fresh assessment. Perl free/nested producers are1/empty-text: false cat gives! and coalesce_nonempty selects fallback. Ordinary receiver forms stay raw DSL/host-helper or compile failures; nested snapshot control is1!/SC/changed and must be preserved. Corrected two condition-only catalog entries; broader SESSION28.5 cat/checker admission stays open. Probe syntax/book/fast checks pass; Perl23.3.11.1 next.
+Perl registers generic definedness scalar/zero-operand routes and numeric-prefix handoff. Public dumps exposed synthetic bare names/raw first and split-bridge helpers; actual-value typed operands and a legacy definedness branch repair them while preserving1/empty-string. Native/fresh shared fixture and direct String compatibility pass after RED, including null/defined kinds, source/copy families, false text/fallback/generic/bridges/scalar guards and1!/SC/one source call. Syntax/book/fast checks pass; Rust2 next; mandatory canonical Perl registration23.4.1 stays separate.
 
 ## Next Action
 
-Implement frozen Perl is_defined/is_undefined generic receivers/results under23.3.11.1. Public free/nested producers already work as1/empty-text; receiver methods remain raw DSL because return-family registration omits them. Preserve false text/default behavior, source/result snapshots and actual kinds; zero receiver operands before effects, scalar/generic consumers/explicit bridges/scalar guards. Small native/fresh and direct String checks/docs/commit, then independent Rust2.
+Independently assess Rust ordinary is_defined/is_undefined under23.3.11.2: public actual producer kinds/text/default and generic receiver/source/shape behavior, then repair confirmed gaps only. Shared source has explicit Perl expected variant preserving1/empty-text; derive Rust expectations without normalization. Small native/restored/plan/direct compilation checks/docs/commit, then Dart3. No broad suite/admission now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.5` — Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
@@ -29,7 +30,6 @@ Implement frozen Perl is_defined/is_undefined generic receivers/results under23.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` — Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 
 ## History
 
