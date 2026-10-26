@@ -14,7 +14,7 @@ answers:
   - "can scalar arithmetic results feed text methods"
   - "which task owns ordinary numeric arithmetic result flow"
 date: 2026-10-26
-status: comparison checked; Perl/Rust/Dart/Julia arithmetic result extensions implemented
+status: comparison checked; arithmetic result extensions targeted-checked on all current backends implemented
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl"
@@ -49,7 +49,9 @@ String loop also needed handoff before the String whitelist, fixing arithmetic/
 comparison prefix[null,null,null] to[5!,1!,8]. Dart16.3 adds scalar marking/common shape guards:11 focused tests and fatal
 analysis pass after scalar[]/28-effect RED; valid flow already worked.
 Julia16.4 adds matching guards after scalar[]/28-effect RED;69 strict
-native/plan/fresh assertions pass with Number/not-Bool kinds. Lua remains independent;
+native/plan/fresh assertions pass with Number/not-Bool kinds. Lua16.5 marks all scalar numeric results and adds common shape guards;
+both available hosts pass native/plan/fresh and direct/named checks after
+scalar[]/28-effect RED. All five bounded implementations are targeted-checked;
 no numeric/free/min-max/Array
 reducer95/deferred policy expansion. Canonical num_* method names stay outside
 this short-method scope.

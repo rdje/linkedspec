@@ -3511,7 +3511,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
         canonical_name,
         value
       )
-      if scalar_numeric.is_comparison(canonical_name) then scalar_result = true end
+      scalar_result = true
     elseif PURE_ARRAY_HELPERS[canonical_name] then
       value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "join_values" or canonical_name == "index_of" or
@@ -3890,15 +3890,22 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     -- scalar min/max overloads keep their existing operands.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
+      local argument_count = #(call.args or {})
+      if (name == "num_clamp" and argument_count ~= 2) or
+          ((name == "num_add" or name == "num_mul") and argument_count == 0) then
+        return json.null
+      end
       if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or
           name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches" or
-          is_string_comparison(name) or scalar_numeric.is_comparison(name)) and
-          #(call.args or {}) ~= 1 then return json.null end
+          is_string_comparison(name) or scalar_numeric.is_comparison(name) or
+          name == "num_sub" or name == "num_div" or name == "num_mod") and
+          argument_count ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
           name == "is_empty" or name == "is_nonempty" or name == "is_defined" or name == "is_undefined" or
-          name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
-          #(call.args or {}) > 0 then
+          name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range" or
+          name == "num_abs" or name == "num_floor" or name == "num_ceil" or name == "num_round") and
+          argument_count > 0 then
         return json.null
       end
     end

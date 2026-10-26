@@ -9573,6 +9573,10 @@ test("numeric comparison result receiver continuations", function()
   dofile("lua/test/numeric_comparison_results_test.lua")
 end)
 
+test("scalar arithmetic result receiver continuations", function()
+  dofile("lua/test/scalar_arithmetic_results_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

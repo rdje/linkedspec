@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`, `TYPE-REFERENCE-BOOK.1.2.23.2.15`, `TYPE-REFERENCE-BOOK.1.2.23.2.16`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`, `TYPE-REFERENCE-BOOK.1.2.23.2.15`, `TYPE-REFERENCE-BOOK.1.2.23.2.16`, `TYPE-REFERENCE-BOOK.1.2.23.2.17`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -1331,6 +1331,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Retained public baseline/independent source/invalid controls execute/load healthy routes and expose expected unimplemented transition compile/eval diagnostics; source syntax passes. No runtime/parser/numeric-helper/free-arity changes, broad matrix or complete portable admission.
   - [x] LOCKSTEP: Retained probe/frozen contract/per-backend tasks, corrected current comparison overview prose and canonical Number result fact/map plus live/resume align. Prior complete comparison rollout detail remains behind exact Git pointer; no cap raise. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl16.1 next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.16 - freeze scalar arithmetic result continuations`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.17`
+  Status: `pending`
+  Goal: Assess ordinary logical-helper Boolean result continuations from the helper spelling/role spine and existing logical-helper-v1 authority.
+  Dependencies: Bounded scalar arithmetic23.3.16.1-.5 committed.
+  Authority: ADR0043, capability_conformance/logical_helper_contract.json and canonical logical-helper-neutral-contract/public-no-drift records. Existing and/or/not eager evaluation, typed truthiness, real Bool results and pre-effect typed arity errors remain authoritative; do not invent receiver counterparts from resolver categories.
+  Acceptance: Use small public producer/nested/fluent native/fresh distinctions for all three logical helper results, valid eager effects/snapshots, false/default/generic/numeric/text/explicit-container boundaries and selected Boolean sources. Preserve existing errors, free signatures, lazy-control contrast, callbacks and admitted behavior. Freeze only needed compatible actual-value transitions and schedule bounded backend children after concrete observations; no full matrix/replay or new truthiness policy.
+  Planned verification tier: focused
+  Planned focused checks: Existing canonical fact/neutral contract and public producer/nested/result distinctions, small syntax/direct logical checks, current book/task/live continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -3420,7 +3431,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.5 - continue Lua numeric comparison results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16`
-  Status: `active` / scalar arithmetic result rollout; full admission separate
+  Status: `active` / all bounded arithmetic backends targeted-checked; full admission separate
   Goal: Extend ordinary scalar numeric arithmetic results into compatible scalar/text/generic/explicit-container continuations.
   Dependencies: .23.2.16 frozen scalar-arithmetic-results.md.
   Children: `.23.3.16.1`, `.23.3.16.2`, `.23.3.16.3`, `.23.3.16.4`, `.23.3.16.5`.
@@ -3525,10 +3536,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.4 - guard Julia scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Lua ordinary scalar arithmetic result continuations.
   Dependencies: .23.3.16.4.
   Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate. Safe PUC5.5.1/LuaJIT named fixtures only; malformed native patterns/declared5.4 remain separately owned.
+
+  Activation: clean `a4385a108eac4c9c73e8b85c68f6710d52a3ba68`; Julia arithmetic committed, brief0/tree clean.
+  Owned paths: Lua confirmed arithmetic scalar/shape gaps, native/plan/fresh producer/shared/selector/prefix regression and safe runner registration, scoped book/facts/task/live docs. Numeric adapters/free signatures/min-max modes/source/default snapshots remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Producer-first public RED/GREEN on PUC5.5.1/LuaJIT, direct comparison/aggregate/default fixtures and actual affected safe numeric calibration, source loads and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; declared5.4/full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Mark all scalar_numeric fluent results scalar and extend common unambiguous unary/sub-div-mod/clamp/add-mul preflight. Reuse actual-value dispatcher, preserving min/max reducer/scalar modes and every numeric adapter/free signature. Register the safe retained producer/shared/selector/prefix fixture.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent PUC5.5.1/LuaJIT canonical/word/symbol/nested producers pass native/plan/fresh before production. Shared native RED exposes incompatible/after_text [] and28 malformed source/operand effects; valid arithmetic/source/default/copy/bridge/SOC/ASO already holds.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_fluent_calls marks only numeric comparisons scalar, leaving arithmetic fallthrough into container helpers; common fluent preflight lacks arithmetic shapes. Strict scalar_numeric evaluator and captured snapshots already satisfy valid controls.
+  - [x] FIX: All scalar_numeric branch results set scalar_result=true; common unambiguous unary/binary/clamp/add-mul arity checks precede source/operand evaluation. min/max shape selection unchanged. Register new safe fixture; no parser/schema/numeric/domain/free signature changes.
+  - [x] ADDRESSED (verified): Native/plan/fresh canonical JSON on both hosts distinguishes Number/Bool/String/null across producer aliases/symbols and twelve/variadic shared fields. Selector/prefix/default copy/actual Array-Hash/bridge/generic/comparison/source boundaries, SOC/ASO and fourteen malformed no-effects pass.
+  - [x] NO REGRESSION: Both hosts pass direct numeric comparison/aggregate/default fixtures, exact affected safe named numeric calibration and interpreter/runner source loads. No full runner, malformed native regex, declared5.4 or complete portable admission claim.
+  - [x] LOCKSTEP: Retained fixture/runner, frozen contract/all-five bounded progress and qualified catalog/guide, canonical Lua/Number facts/map plus live/task/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Next logical result assessment23.2.17 is owned before any new probe/change.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5 - guard Lua scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -3627,7 +3655,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.5` | `pending` | Independently assess and implement Lua scalar arithmetic result continuations on safe available hosts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.17` | `pending` | Assess logical-helper Boolean result continuations without changing eager/typed/error policies. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

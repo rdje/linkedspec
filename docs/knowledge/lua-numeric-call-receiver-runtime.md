@@ -7,10 +7,10 @@ answers:
   - "are Lua numeric comparison receiver methods terminal"
   - "how does Lua distinguish division symbol calls from regex literals"
 date: 2026-10-26
-status: comparison results targeted-checked on available hosts; full admission open
+status: comparison/arithmetic results targeted-checked on available hosts; full admission open
 tags: [lua, luajit, numeric, aliases, symbols, receivers, LUA-BACKEND-PARITY]
-evidence: "TYPE23.3.15.5 safe public producer/shared/selector/direct/named-calibration native/plan/fresh checks. Full July4.3.3.2 record/91-per-ABI historical proof at Git564157d106c526a7a3c6062744381ffc821cb2c5 for this path."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/numeric_comparison_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/numeric_comparison_results_test.lua"
+evidence: "TYPE23.3.15.5/16.5 safe public producer/shared/selector/direct/named-calibration native/plan/fresh checks. Full July4.3.3.2 record/91-per-ABI historical proof at Git564157d106c526a7a3c6062744381ffc821cb2c5 for this path."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/scalar_arithmetic_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/scalar_arithmetic_results_test.lua"
 ---
 
 Canonical numeric calls, word/symbol aliases and Number receivers share the
@@ -31,5 +31,12 @@ current reverify excludes known malformed native paths owned by
 
 Array reducers have separate dispatch/current result contracts:
 [[terse-array-numeric-reducer-receiver-methods]]. Ordinary scalar arithmetic
-inter-type breadth is next TYPE23.2.16; declared Lua5.4 and full domain/context/
+inter-type16.5 marks every scalar_numeric result scalar and adds common
+unambiguous unary/binary/clamp/add-mul guards before source/operand effects.
+Public producers/shared flow already work; scalar-container[]/28-effect RED
+now passes native/plan/fresh strict canonical JSON, including fourteen bad
+shapes/no-effects, selector/prefix/default copy/SOC/ASO. Both available hosts
+pass direct comparison/aggregate/default and the actual safe named numeric
+calibration; free signatures/numeric adapters/min-max modes stay unchanged.
+Declared Lua5.4 and full domain/context/
 portable admission remain separate from available-host focused checks.

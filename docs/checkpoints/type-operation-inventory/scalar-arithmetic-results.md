@@ -117,3 +117,17 @@ guards repair both without changing adapters/free signatures/min-max modes.
 plan/fresh tests pass with explicit Number/not-Bool raw/alias/symbol/counter
 checks. Strict domains, copied defaults, SOC/ASO and14 no-effect bad shapes hold;
 full domain/context/portable admission remains separate.
+
+## Bounded Lua implementation
+
+23.3.16.5 independently confirms existing canonical/word/symbol/nested producers
+on PUC5.5.1/LuaJIT. Valid shared flow already works; scalar->container[] and28
+malformed effects fail. Marking every scalar_numeric result scalar and common
+unambiguous unary/binary/clamp/add-mul guards repair both. Native/plan/fresh
+strict canonical JSON, numeric selector/prefix/shared source/default/copy/SOC/
+ASO controls, direct comparison/aggregate/default and the actual safe named
+numeric calibration pass on both hosts. min/max modes/numeric adapters/free
+signatures stay unchanged. All five bounded implementations are targeted-
+checked; no full runner, malformed native patterns, declared5.4 or complete
+portable/domain/context admission. Logical-helper result assessment23.2.17 is
+next from the same helper spine, retaining its existing eager Boolean contract.

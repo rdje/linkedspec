@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.16.5 — guard Lua scalar arithmetic results
+
+Lua arithmetic valid producers/shared flow already work; all scalar_numeric results now mark scalar and common unambiguous shape guards reject before effects. Both PUC5.5.1/LuaJIT native/plan/fresh canonical JSON, shared/selector/prefix and direct comparison/aggregate/default plus actual safe numeric calibration pass after scalar-container[]/28-effect RED. Numeric domains/free signatures/min-max modes/default copies/SOC/ASO remain unchanged. All five bounded arithmetic implementations are targeted-checked; book/facts/task/live align. Logical result assessment23.2.17 next; declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.16.4 — guard Julia scalar arithmetic results
 
 Julia valid arithmetic producer/result/prefix/default flow already works. Added scalar marking/common unambiguous pre-effect shape guards after scalar-container[]/28-effect RED.69 focused native/plan/fresh arithmetic/comparison/aggregate/default assertions and strict compilation pass, including Number/not-Bool raw/alias/symbol/counter kinds, numeric selectors, copied defaults and SOC/ASO. Numeric adapters/free signatures/min-max modes unchanged; book/facts/task/live align. Safe Lua16.5 next; full admission separate.

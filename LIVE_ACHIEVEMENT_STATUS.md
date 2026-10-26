@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
+All five bounded arithmetic result implementations targeted-checked; logical Boolean result assessment next.
 
 ## Latest Completed Slice
 
-Julia valid arithmetic producer/result/prefix/default flow already works. Added scalar marking/common unambiguous pre-effect shape guards after scalar-container[]/28-effect RED.69 focused native/plan/fresh arithmetic/comparison/aggregate/default assertions and strict compilation pass, including Number/not-Bool raw/alias/symbol/counter kinds, numeric selectors, copied defaults and SOC/ASO. Numeric adapters/free signatures/min-max modes unchanged; book/facts/task/live align. Safe Lua16.5 next; full admission separate.
+Lua arithmetic valid producers/shared flow already work; all scalar_numeric results now mark scalar and common unambiguous shape guards reject before effects. Both PUC5.5.1/LuaJIT native/plan/fresh canonical JSON, shared/selector/prefix and direct comparison/aggregate/default plus actual safe numeric calibration pass after scalar-container[]/28-effect RED. Numeric domains/free signatures/min-max modes/default copies/SOC/ASO remain unchanged. All five bounded arithmetic implementations are targeted-checked; book/facts/task/live align. Logical result assessment23.2.17 next; declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Lua scalar-numeric-v1 twelve-method producers/aliases and result/shape/default/bridge/overload flow under16.5 on safe PUC5.5.1/LuaJIT. Preserve strict Number/null kinds, numeric domains/free signatures/min-max modes and captured snapshots; fix confirmed guards/dispatch only. Native/plan/fresh and small direct/named checks, docs/commit; no unsafe malformed native regex/full runner/declared5.4 claim. Then select next helper-spine feature.
+Assess ordinary logical-helper Boolean result continuations under23.2.17 from helper spine, ADR0043/neutral contract and canonical facts before production. Public producer/nested/fluent native/fresh controls must preserve eager once-only typed truthiness/real Bool/pre-effect arity errors and existing free signatures. Freeze only needed actual-value transitions and own backend children after observations; small direct checks/docs/commit, no full matrix or new logical method assumption.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.16.5` — All five bounded arithmetic result implementations targeted-checked; logical Boolean result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` — Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
@@ -29,7 +30,6 @@ Independently assess Lua scalar-numeric-v1 twelve-method producers/aliases and r
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 
 ## History
 
