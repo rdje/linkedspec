@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.5 — remove only numeric producer endpoints
+
+Shared Lua already continues Count results correctly. evaluate_fluent_calls stops Length through TERMINAL_STRING_HELPERS and key-count through an explicit hash fence; remove those two restrictions and extend evaluate_expr zero-extra preflight to all three producers. Keep predicates, reducers, Count source domain and existing per-value dispatch unchanged. Public/fixture RED precedes small native/generated-plan/fresh-emitted and direct selected-value GREEN on available PUC5.5.1/LuaJIT with matching native products. Runner/interpreter loadfile checks pass; contract/book/facts/task/live records align. Bounded Count/Length rollout is targeted-checked; declared5.4/full admission stays separate and aggregate numeric result flow is the next feature assessment.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.3.4 — narrow count without changing length
 
 Julia already dispatches numeric producer results by actual value. Chain preflight omitted zero-extra count/count_keys/length and count reused wider _runtime_value_length. Public/retained RED distinguishes both defects; guard extras and use AbstractVector length only. Native/generated-plan/fresh-emitted and direct selected-value checks pass, preserving Unicode, SALHK order and snapshots. The focused emitted harnesses now fetch execute through invokelatest to satisfy Julia1.12 strict world-age checks. Register the new test, align public/canonical/current records and independently assess Lua next. Full context/portable admission remains separate.

@@ -9519,6 +9519,9 @@ end)
 test("receiver copy arity before effects", function()
   dofile("lua/test/receiver_copy_arity_test.lua")
 end)
+test("count and length receiver continuations", function()
+  dofile("lua/test/count_length_receivers_test.lua")
+end)
 
 io.stdout:write("1..", total, "\n")
 if failed > 0 then

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / count and length result rollout after bounded helper repairs
+- Status: `active` / aggregate numeric result assessment after bounded count/length rollout
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -962,6 +962,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: No runtime/type/schema/format change; reducers, predicate/control outputs, deferred/callback contexts and mutation remain separately owned. No broad suite.
   - [x] LOCKSTEP: Public gap/workarounds, canonical array fact/map, task/current frontier and live handoff agree; next child names exact first-party scope. No complete fluent-family claim.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.2 - define count and length result continuations`.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.3`
+  Status: `pending`
+  Goal: Publicly assess and freeze bounded ordinary aggregate numeric reducer result continuations.
+  Dependencies: .23.3.3.5.
+  Owned paths: type-operation-inventory contract, helper/numeric reference, canonical reducer facts/map and task/live records; no production edit in this assessment leaf.
+  Planned tier: `focused`; declare exact small proof at activation.
+  Claim verification: none: Unactivated normative feature assessment; no completeness/parity measurement.
+  Acceptance: Read existing six aggregate helper domains and callable boundaries, compare reducer-result fluent arithmetic/string methods with nested public Perl controls, and isolate any actual gap before choosing code. Preserve min/max array/scalar overloads, null/error/source rules, argument order, copy and deferred boundaries. Freeze only meaningful existing pure consumer transitions, supersede old terminal policy explicitly, then schedule per-backend implementation children. Keep broad signatures/matrices/admission separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -1250,7 +1260,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Retain per-backend domain/depth distinctions, reject wrong shapes before effects through supported consumers, restore the declared Lua target and close the bounded parent without inferring complete fluent families.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3`
-  Status: `active` / count and length result rollout
+  Status: `active` / bounded implementations complete; full admission remains23.4
   Goal: Implement the frozen count/count_keys/length result contract on ordinary backends, preserving correct existing behavior.
   Dependencies: .23.2.2.
   Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.5`; assess later backends individually after each clean implementation commit.
@@ -1345,17 +1355,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.4 - guard Julia count and length producers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `f61b2eaace135b711e2c300f2689de1d4a2857ec`.
   Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on shared Lua.
   Dependencies: .23.3.3.4.
   Owned paths: lua public interpreter, small count/length receiver test and synchronized book/fact/task/live records.
-  Planned tier: `focused`; assess actual changed surfaces at activation.
-  Claim verification: none: Unactivated bounded implementation assessment; declare focused evidence at activation.
+  Verification tier: `focused`
+  Focused checks: Public Lua value/arity probes; small native/generated-plan/fresh-emitted count/length and direct selected-value tests on available PUC5.5.1/LuaJIT with matching native products, loadfile compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; declared5.4 and full context/portable admission remain separately owned plus eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public reproduction / owned defects: Available PUC public pairs return [5,5,null,6,null,5], so count already continues but length/hash-count stop beside working nested controls. count(extra) returns1 with two effects. Shared evaluate_fluent_calls rejects nonfinal length through TERMINAL_STRING_HELPERS and count_keys through an explicit hash endpoint fence; chain preflight guards extraction/copy only. Repair these observed gaps here, preserving Count’s existing array-only domain and other endpoint policies.
   Acceptance: Preserve correct value dispatch, probe valid chains and zero-extra shape/effect boundaries through the public runtime, and repair only observed defects. Use small native/generated-plan/fresh-emitted and direct selected-value checks on available PUC5.5.1/LuaJIT with matching native products. Keep declared5.4 proof with LUA-STARTUP-READING.2.2 and full context/portable admission with23.4; commit before selecting the next feature.
+
+  Completion: Keep correct Count and actual-value dispatch; remove only length/count_keys endpoint stops and extend zero-extra preflight. Retain other predicates/reducer/control boundaries and existing source domains. Register one small test.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public PUC pairs [5,5,null,6,null,5] distinguish stopped length/key-count from working Count and nested helpers. Retained fixture RED shows stopped values, skipped required operands, SAH order and six invalid effects.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_fluent_calls stops Length through TERMINAL_STRING_HELPERS and count_keys through a hash endpoint fence. evaluate_expr fluent preflight omits all three producers; later helper collection runs ignored extras.
+  - [x] FIX: Remove only Length and key-count endpoint restrictions, retain existing Count/domain/dispatcher and add producer shape guards before receiver/operand effects.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted fixture PASS after RED on available PUC5.5.1/LuaJIT, including direct/selected/pipeline/function values, Unicode, SALHK effects, later-mutation snapshots, array-only Count and zero invalid effects.
+  - [x] NO REGRESSION: Direct selected-value fixture and loadfile compilation of interpreter/runner pass with fresh matching native products on both available hosts. Declared5.4 proof remains LUA-STARTUP-READING.2.2; full method/context/portable admission stays23.4.
+  - [x] LOCKSTEP: Public examples/contract, Lua/central facts/map, tasks/live records, book and fast continuity/history/diff checks align. Next source-backed feature selection is aggregate numeric result flow23.2.3, before exhaustive signatures/matrices.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and Perl23.3.3.1 is next.
+  Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
@@ -1435,7 +1459,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` | `pending` | Publicly assess/implement shared Lua count/count_keys/length result continuations after targeted-checked Perl/Rust/Dart/Julia slices. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.3` | `pending` | Assess/freeze aggregate numeric reducer result flow after bounded Count/Length rollout; preserve existing helper/overload/context domains. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

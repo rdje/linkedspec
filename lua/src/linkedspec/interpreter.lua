@@ -974,7 +974,6 @@ local TERMINAL_STRING_HELPERS = {
   is_empty = true,
   is_nonempty = true,
   is_undefined = true,
-  length = true,
   matches = true,
   starts_with = true,
 }
@@ -3512,7 +3511,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       if canonical_name == "join_values" and index < #calls then return json.null end
     elseif PURE_HASH_HELPERS[canonical_name] then
       value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
-      if (canonical_name == "count_keys" or canonical_name == "has_key") and index < #calls then
+      if canonical_name == "has_key" and index < #calls then
         return json.null
       end
     else
@@ -3880,11 +3879,12 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "fluent_chain" then
-    -- Extraction and copy take no method arguments. Reject before source/operand
+    -- Extraction, copy and count/length take no method arguments. Reject before source/operand
     -- effects while retaining the existing dynamic value dispatcher.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
-      if (name == "first" or name == "last" or name == "copy") and #(call.args or {}) > 0 then
+      if (name == "first" or name == "last" or name == "copy" or
+          name == "count" or name == "count_keys" or name == "length") and #(call.args or {}) > 0 then
         return json.null
       end
     end

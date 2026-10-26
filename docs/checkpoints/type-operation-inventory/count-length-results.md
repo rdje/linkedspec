@@ -115,3 +115,11 @@ and repairs array-only count without changing Length. Native/generated-plan/
 fresh-emitted and direct selected-value checks pass after actual arity/domain
 RED, including a Julia1.12 strict world-age check for the focused harnesses.
 Shared Lua remains unassessed; no broad or portable admission is claimed.
+
+Shared Lua `.23.3.3.5` preserves already-working Count flow, removes Length/key-count
+endpoint stops and guards producer extras. Small native/generated-plan/fresh-
+emitted and direct selected-value fixtures pass after RED on available PUC5.5.1/
+LuaJIT with matching native products, retaining array-only Count and Unicode/order/
+snapshot controls. Declared5.4 proof remains LUA-STARTUP-READING.2.2. The bounded
+backend rollout is targeted-checked; complete contexts/methods/portable admission
+remain23.4. Next feature assessment is aggregate numeric result flow23.2.3.

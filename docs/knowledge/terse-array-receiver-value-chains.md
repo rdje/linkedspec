@@ -19,7 +19,7 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: ordinary Perl/Rust/Dart/Julia count/length results implemented; other backend assessment/admission open
+status: bounded ordinary count/length implementations targeted-checked; full admission open; other backend assessment/admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length contract23.2.2."
 reverify:
@@ -53,4 +53,4 @@ Zero-extra shapes reject before effects. Focused native/fresh/restored/generated
 plan fixtures retain values, Unicode, once-only order and later-mutation snapshots.
 The earlier Perl hash-chain host failure was result flow; free count_keys worked.
 docs/checkpoints/type-operation-inventory/count-length-results.md owns status.
-Dart23.3.3.3/Julia23.3.3.4 preserve dynamic flow and guard arity; [[dart-runtime-array-helpers]]/[[julia-runtime-array-helpers]] own count-domain repairs. Lua/full admission stay open.
+Dart23.3.3.3/Julia23.3.3.4 preserve dynamic flow and guard arity; [[dart-runtime-array-helpers]]/[[julia-runtime-array-helpers]] own count-domain repairs. Lua23.3.3.5 repairs Length/key-count endpoints and arity on available PUC5.5.1/LuaJIT; [[lua-runtime-array-transform-pipelines]] owns details. Declared5.4/full admission stay open.

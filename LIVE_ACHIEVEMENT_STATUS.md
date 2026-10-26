@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust/Dart/Julia count/count_keys/length result implementations are targeted-checked. Shared Lua23.3.3.5 starts with public probes next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded ordinary Count/Length result implementations are targeted-checked on all recorded hosts. Aggregate numeric reducer result-flow assessment23.2.3 is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/portable admission remain open.
 
 ## Latest Completed Slice
 
-Julia preserves already-correct result dispatch, guards extra count/count_keys/length operands and restores count's array-only domain after public/retained RED. Small native/generated-plan/fresh-emitted and direct selected-value tests pass, including Unicode, SALHK effects, snapshots and zero invalid effects. Package compilation and strict Julia1.12 focused harness checks pass. Public/canonical/task/live records agree.
+Shared Lua retains correct Count flow, removes Length/key-count endpoint stops and guards extra producer operands before effects. Small native/generated-plan/fresh-emitted and direct selected-value checks pass after public/fixture RED on available PUC5.5.1/LuaJIT, including Unicode, array-only Count, SALHK order and snapshots. Interpreter/runner compilation, book and fast continuity checks pass. Declared5.4 proof remains separately owned.
 
 ## Next Action
 
-Probe shared Lua valid count/length chains and invalid producer shapes independently. Preserve correct behavior and repair observed gaps with small native/generated-plan/fresh-emitted/direct checks on available PUC5.5.1/LuaJIT. Keep declared5.4 proof separately owned; commit before selecting the next feature.
+Assess/freeze six aggregate numeric reducer result continuations against public nested Perl controls and existing domains/overloads before code. Preserve min/max kind/arity selection, source/null/error/copy/order/deferred boundaries, then schedule bounded implementation children. No full suites or matrix campaign.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
@@ -29,7 +30,6 @@ Probe shared Lua valid count/length chains and invalid producer shapes independe
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.1` — Julia copy arity rejects before effects; focused native/generated-plan/fresh-emitted and direct selected-value checks pass.
 - `SESSION-STARTUP-READING.61.2` — Rust null operand/predicate guards and original-value empty replacement/removal; public Perl and focused native/restored/generated-plan controls pass.
 - `SESSION-STARTUP-READING.61.1` — Rust scalar source-null propagation, defined controls and eager order; focused native/restored/generated-plan and selected-value checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
 
 ## History
 
