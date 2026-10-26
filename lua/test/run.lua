@@ -6792,7 +6792,7 @@ Top::
   assert_equal(result.value.str_null, json.null, "string comparison null propagation")
   assert_equal(result.value.chain, "name!", "string receiver composition")
   assert_equal(result.value.receiver_coalesce, "fallback", "lazy receiver coalesce composition")
-  assert_equal(result.value.terminal_continuation, json.null, "terminal string chain rejection")
+  assert_equal(result.value.terminal_continuation, "3", "length result feeds string receiver chains")
   assert_equal(result.value.trim_null, json.null, "trim null propagation")
   assert_equal(result.value.replace_null, json.null, "replace null propagation")
 end)
@@ -6853,7 +6853,7 @@ b", /^a.b$/s),
   assert_equal(result.value.unknown_flag, false, "unknown helper flag fails closed")
   assert_equal(result.value.invalid_pattern, false, "invalid helper pattern fails closed")
   assert_equal(result.value.receiver, true, "receiver matches uses the same adapter")
-  assert_equal(result.value.terminal_chain, json.null, "matches ends string receiver chains")
+  assert_equal(result.value.terminal_chain, "1", "matches result feeds string receiver chains")
 end)
 
 test("pure split preserves typed literal regex Unicode and receiver boundaries", function()
@@ -9547,6 +9547,10 @@ end)
 
 test("emptiness result receiver continuations", function()
   dofile("lua/test/emptiness_result_receivers_test.lua")
+end)
+
+test("String predicate result receiver continuations", function()
+  dofile("lua/test/string_predicate_result_receivers_test.lua")
 end)
 
 io.stdout:write("1..", total, "\n")

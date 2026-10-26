@@ -968,12 +968,8 @@ local PURE_STRING_HELPERS = {
 }
 
 local TERMINAL_STRING_HELPERS = {
-  contains_substr = true,
-  ends_with = true,
   is_defined = true,
   is_undefined = true,
-  matches = true,
-  starts_with = true,
 }
 
 local function is_string_comparison(name)
@@ -1572,7 +1568,7 @@ end
 local function string_predicate(values, predicate)
   if #values < 2 then return 0 end
   local value = scalar_string(values[1], false)
-  local needle = scalar_string(values[2], true)
+  local needle = scalar_string(values[2], false)
   if value == nil or needle == nil then return 0 end
   return predicate(value, needle) and 1 or 0
 end
@@ -3492,7 +3488,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       value = copy_value(value)
     elseif is_pure_string_helper(canonical_name) then
       value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
-      if canonical_name == "is_empty" or canonical_name == "is_nonempty" then scalar_result = true end
+      if canonical_name == "is_empty" or canonical_name == "is_nonempty" or
+          canonical_name == "starts_with" or canonical_name == "ends_with" or
+          canonical_name == "contains_substr" or canonical_name == "matches" then scalar_result = true end
       if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
           index < #calls then
         return json.null
@@ -3897,7 +3895,9 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     -- scalar min/max overloads keep their existing operands.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
-      if (name == "join_values" or name == "index_of" or name == "has_key") and #(call.args or {}) ~= 1 then return json.null end
+      if (name == "join_values" or name == "index_of" or name == "has_key" or
+          name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches") and
+          #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
           name == "is_empty" or name == "is_nonempty" or name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and

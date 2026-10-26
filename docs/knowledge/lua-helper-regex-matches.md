@@ -7,20 +7,15 @@ answers:
   - what does Lua matches return for invalid regex
   - does Lua receiver matches work
   - how are Lua helper regexes compiled
-date: 2026-07-12
-status: current
+date: 2026-10-26
+status: bounded flow checked; native malformed-pattern repair pending
 tags: [lua, runtime, regex, matches, flags, PCRE2, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.2.2.1 adds an internal RuntimeHelperRegex value and compile_helper_regex seam in lua/src/linkedspec/interpreter.lua. It applies deterministic imsx inline flags through lua/src/linkedspec/matching.lua's disposable native PCRE2 owner, treats g/o as predicate no-ops, rejects unknown flags, caches successful/failed compilation, and executes matches in function/terminal receiver form. lua/test/run.lua covers valid flags, actual-newline m/s behavior, x, null, non-regex, unknown/invalid, receiver equivalence, and terminal continuation. PUC Lua and LuaJIT pass 73/73."
-reverify: "bash tools/run_lua_local.sh"
+evidence: "Regex4.3.2.2.1 history at Git4584d0b41e12581a7bc68e9ad80336abf968d72f for this path; ordinary flow23.3.10.5."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/string_predicate_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/string_predicate_result_receivers_test.lua"
 ---
 
-## Fact
+Private helper regexes reuse the in-process PCRE2 owner without rule-register state. Compilation retains imsx, ignores go, rejects unknown flags and caches outcomes. Null/non-text subjects and non-regex operands are false. Pure split remains4.3.2.2.2; no public regex type.
 
-Lua helper regexes reuse the same in-process PCRE2 binding as rule matching without exposing rule-register state.
-Regex ActionIR becomes an internal typed value; helper compilation prepends deterministic `i/m/s/x` inline flags,
-ignores operation-only `g` and compile-once compatibility `o` for `matches`, and caches both success and failure.
+23.3.10.5 removes starts_with/ends_with/contains_substr/matches terminal fences, adds scalar/one-operand guards and rejects null text operands. Shared native/plan/fresh/direct emptiness and direct String cases pass on PUC5.5.1/JIT after null/SO/S/12-effect and null-operand RED. Kinds/flags/SOC/SC stay correct; old matches/length terminal assertions now reflect continuations.
 
-`matches(value, /pattern/flags)` searches the whole scalar value. It returns false for null/non-text input,
-non-regex patterns, unknown flags, and invalid patterns. Receiver form is equivalent, and because `matches` is a
-terminal string-family helper, a later string receiver call returns null. The behavior is identical on PUC Lua and
-LuaJIT. Pure regex/literal split has since landed under `.4.3.2.2.2`.
+Malformed-pattern PUC5.5.1 crashes remain LUA-STARTUP-READING.2.3 (luaL_error %lu);23.3.10.5 re-entered its known excluded helper group. That whole group passes on JIT, is excluded from PUC passes, and needs re-admission after repair. Declared5.4/full admission open: [[lua-native-readme-and-action-ast-reading]].

@@ -785,7 +785,7 @@ helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(raw))`, and
 (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`, and
 `coalesce_nonempty`) can keep chaining through string helpers. `split(delim)` is the explicit bridge from a
 string chain into the array receiver family, so `raw.trim().split("-").trim_each().join_values("|")` is
-portable. `length` feeds compatible scalar/number methods, for example `"abcd".length().add(2)` returns `6`; on Perl/Rust/Dart/Julia, `"abc".starts_with("a").cat("!")` returns `"1!"` and `"abc".matches(/^z/).coalesce_nonempty("late").cat("!")` returns `"0!"`. Predicates require one operand before effects; their scalar results reject container-only consumers until an explicit bridge produces a container.
+portable. `length` feeds compatible scalar/number methods, for example `"abcd".length().add(2)` returns `6`; on Perl/Rust/Dart/Julia/Lua, `"abc".starts_with("a").cat("!")` returns `"1!"` and `"abc".matches(/^z/).coalesce_nonempty("late").cat("!")` returns `"0!"`. Predicates require one operand before effects; their scalar results reject container-only consumers until an explicit bridge produces a container.
 A string-yielding expression-valued block can be the receiver, for example
 `{ " a-b " }.trim().split("-").count()`.
 

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
+Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
 
 ## Latest Completed Slice
 
-Julia adds four String predicates to scalar/one-operand guards and rejects null text operands. Shared native/generated-plan/fresh emitted fixture and direct emptiness pass with strict depwarn compilation after null suffix/needle1!, scalar[] and12 malformed-effect RED. Actual numeric/Bool kinds, regex modes and correct SOC/SC/once-only snapshots stay unchanged. New fixture registered; book/fast checks pass. Lua5 next, then P1 Dart grouped regex6.
+Lua removes four predicate terminal fences, marks scalar results, preflights one operand and rejects null text operands. Shared native/plan/fresh, direct emptiness and direct String case pass on PUC5.5.1/LuaJIT after null/SO/S/12-effect and null-operand RED; kinds/flags/SOC/SC unchanged. Updated matches/length terminal assertions and registered fixture. JIT whole regex case passes; PUC hits known native invalid-pattern formatter crash2.3 and that case is excluded from PUC passes. Book/fast checks pass; P1 Dart regex6 next.
 
 ## Next Action
 
-Independently assess Lua starts_with/ends_with/contains_substr/matches under23.3.10.5 on available hosts using shared fixture; preserve actual kinds/source/operand/copy policies, repair confirmed ordinary gaps, small native/plan/fresh/direct checks/docs/commit. P1 Dart grouped regex6 follows before further families.
+Repair P1 Dart grouped dotted regex scanning under23.3.10.6 before further families: public /(?s)^a.b$/ becomes invalid_fluent_chain because slash-before-( is rejected. Preserve division/receiver boundaries and regex modes; focused public AST/native/restored/plan/direct checks/docs/commit. Known Lua native malformed-pattern crash remains LUA-STARTUP-READING.2.3 with2.2 runtime/header prerequisite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.10.5` — Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` — Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.2` — Rust predicate flow/literal flags pass focused checks; Dart assessment next.
@@ -29,7 +30,6 @@ Independently assess Lua starts_with/ends_with/contains_substr/matches under23.3
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 
 ## History
 

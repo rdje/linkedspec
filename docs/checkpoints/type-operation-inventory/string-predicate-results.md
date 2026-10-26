@@ -111,3 +111,13 @@ coercion. Native/plan/fresh shared fixture and direct emptiness checks pass afte
 null suffix/needle1!, scalar[] and12 malformed-effect RED. Existing numeric text
 flags/Bool matches, retained regex modes and SOC/SC snapshots stay correct.
 Lua5 follows; P1 Dart grouped regex6/full regex/domain/admission stay separate.
+
+## Bounded Lua handoff
+
+23.3.10.5 removes four terminal fences, marks scalar results and preflights one
+operand; null text operands return false. Shared native/plan/fresh, direct
+emptiness and direct String cases pass on PUC5.5.1/LuaJIT after null/SO/S/12-effect
+and null-operand RED; kinds/flags/SOC/SC unchanged. Updated old matches/length
+terminal assertions. Whole regex helper case passes on JIT; PUC re-enters known
+malformed-pattern crash LUA-STARTUP-READING.2.3 and is excluded from passes.
+Native repair/declared5.4/full admission separate; P1 Dart regex6 follows.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.10.5 — continue Lua predicates and reject null operands
+
+Lua removes four predicate terminal fences, marks scalar results, preflights one operand and rejects null text operands. Shared native/plan/fresh, direct emptiness and direct String case pass on PUC5.5.1/LuaJIT after null/SO/S/12-effect and null-operand RED; kinds/flags/SOC/SC unchanged. Updated matches/length terminal assertions and registered fixture. JIT whole regex case passes; PUC hits known native invalid-pattern formatter crash2.3 and that case is excluded from PUC passes. Book/fast checks pass; P1 Dart regex6 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.10.4 — guard Julia predicate results and null operands
 
 Julia adds four String predicates to scalar/one-operand guards and rejects null text operands. Shared native/generated-plan/fresh emitted fixture and direct emptiness pass with strict depwarn compilation after null suffix/needle1!, scalar[] and12 malformed-effect RED. Actual numeric/Bool kinds, regex modes and correct SOC/SC/once-only snapshots stay unchanged. New fixture registered; book/fast checks pass. Lua5 next, then P1 Dart grouped regex6.
