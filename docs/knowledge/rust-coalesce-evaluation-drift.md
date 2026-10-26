@@ -12,12 +12,12 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: Perl selected-kind flow repaired; literal1.2/full admission open
+status: Perl flow/literals targeted-checked; backend/full admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
-evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1 native/fresh and direct compatibility checks. Literal1.2/broad admission open."
+evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1/.1.2 native/fresh/direct checks; backend/broad admission open."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_literal_operand_contract.t t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t"
 ---
 
 Current62.1/62.2.1-.3: Rust eval_coalesce_args/coalesce_accepts evaluates only
@@ -85,13 +85,14 @@ These generated captures were inspected, not independently executed.
 
 ## Current selected-result findings
 
-TYPE23.2.5 Get/substitution/fresh probes distinguish stopped Array/Hash consumers
-from working nested A-B/X:Y.23.3.6.1.1 adds default_result handoff: bind once,
-guard containers by actual kind and lower helpers before host do/guards. Native/
-fresh and direct compatibility checks pass after RED, preserving scalar nulls,
-zero/false, empty containers and lazy SDJ snapshots. Valid colon Hash defaults
-still emit hash_literal_use_colon through host-fat-arrow reparsing; named Hash
-works. P1 literal repair1.2 is next. Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
+TYPE23.2.5 probes distinguish stopped consumers from nested A-B/X:Y.
+23.3.6.1.1 adds once-bound default_result and actual-kind container guards.
+23.3.6.1.2 builds lazy selection from complete typed operands, avoiding host
+fat-arrow reparsing. Use bare_scalar_read for these operands; generic value-only
+argument reconstruction still contains authored bindings/calls. Native/fresh and
+direct compatibility checks pass after RED: lazy order, kinds, snapshots and
+retired authored syntax remain intact. Other backends/domain admission stay open.
+Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
 
 Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.
 

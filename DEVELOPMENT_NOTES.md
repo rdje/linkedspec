@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2 — avoid reparsing lowered Hash source
+
+Perl lazy defaults preserve valid direct Hash literal operands for both coalesce helpers, including nested typed values and fluent selected results. Complete typed operands feed a shared lazy host builder, avoiding host-fat-arrow reparsing while preserving coalesce tail and nonempty numeric-kind semantics. Native/fresh literal and direct selected-default/exhaustion checks pass after RED; lazy SDK order, zero/false and genuine retired syntax rejection pass. Bounded Perl repairs complete; Rust default-result assessment2 is next, full domain/portable admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1 — bind actual defaults before guarded consumers
 
 Perl nonempty-default results now continue through actual selected Array/Harray kinds while retained scalars keep incompatible-container nulls. Bind selection once and lower source/consumer helpers before host guards. Native/fresh focused regression and direct joined/default-exhaustion checks pass after RED; empty containers, zero/false, exhaustion, skipped fallbacks and SDJ snapshots pass. Valid Hash literal default repair1.2 is next; other backends/full domain/admission remain separate.

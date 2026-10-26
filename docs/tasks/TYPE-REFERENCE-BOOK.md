@@ -1694,18 +1694,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5 - continue Lua joined String results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6`
-  Status: `active` / Perl flow targeted-checked; literal/backend work remains
+  Status: `active` / bounded Perl repairs targeted-checked; backend assessments remain
   Goal: Implement/confirm bounded actual-kind default-selection continuations across maintained backends.
   Dependencies: .23.2.5.
   Children: `.23.3.6.1`, `.23.3.6.2`, `.23.3.6.3`, `.23.3.6.4`, `.23.3.6.5`.
   Acceptance: Existing ordinary nonempty default selections preserve actual kinds, lazy required-prefix effects and scalar/container boundaries per default-selection-results.md. Assess each backend publicly; full domain/portable admission remains23.4.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1`
-  Status: `active` / Perl flow targeted-checked; literal/backend work remains
+  Status: `completed` / bounded Perl flow/literal repairs targeted-checked
   Goal: Repair Perl default result flow and valid literal operand lowering in separate slices.
   Dependencies: .23.2.5.
   Children: `.23.3.6.1.1`, `.23.3.6.1.2`.
   Acceptance: Both bounded repairs committed/targeted-checked; broader signature/deferred/admission remains separate.
+  Completion: Children1.1/1.2 are committed separately with focused native/fresh/direct proof. Full helper-domain/deferred/portable admission remains23.4.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1`
   Status: `completed`
@@ -1732,14 +1733,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1 - continue selected Perl default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2`
-  Status: `pending` / owned P1 defect scheduled immediately after1.1
+  Status: `completed`
   Goal: Preserve valid Hash literal operands through Perl lazy default lowering.
   Dependencies: .23.3.6.1.1.
   Reproduce / impact: coalesce_nonempty("",{"b":"y","a":"x"}) returns null with hash_literal_use_colon marker despite valid source; named Hash and nested view controls succeed. The AST value-only lowerer passes lowered host fat arrows through legacy DSL parsing. This silently discards a valid chosen fallback; assess ordinary coalesce twin and typed nested values with public probes before repair.
   Owned paths: bounded lazy default AST/legacy bridge and native/fresh fixture, qualified book/default facts/current docs.
   Acceptance: Lower typed operands without reparsing host Hash syntax as DSL, preserve laziness/kinds/effects and genuine retired authored-fat-arrow rejection. Do not normalize unrelated helper domains or deferred evaluation. Compile/small checks/docs/commit.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic literal/lazy regression; no measured admission.
+  Activation: clean `e01bf90551f70b8e5648baea6eb0052eebb4f19c`; flow committed, brief empty, tree clean.
+  Verification tier: `focused`
+  Focused checks: Public direct coalesce/nonempty Hash twins and nested typed/lazy controls, retained native/fresh literal regression after RED, direct selected-default/exhaustion compatibility, MethodLowering/test syntax, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded existing typed operand repair under director feature-first cadence; full helper-domain/portable admission23.4 and final clean push remain separate.
+  Claim verification: none: deterministic authored literal/kind/order regression; no quantified or portable measurement.
+
+  Completion: Construct both lazy selectors from fully lowered typed operands via _lower_lazy_default_value_args. Reuse the same host-source builder from legacy paths, retaining original coalesce tail semantics and copied nonempty comparison. No host Hash source is reparsed as DSL.
+  Public findings / candidate correction: Native/fresh RED confirms direct coalesce and coalesce_nonempty Hash twins plus fluent literal fallback are null; nested Array, empty Hash, block Hash and SDK order already work. The first candidate reused generic value-only argument reconstruction, which intentionally leaves authored variable/call source for the legacy phase; native/fresh/direct compatibility exposes host join_values/bare-binding compile errors. Lower default operands completely with bare_scalar_read before the shared builder; do not pass that mixed intermediate directly to host emission.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Frozen public marker/named controls and t/default_literal_operand_contract.t RED distinguish direct valid Hash/default twins and fluent literal fallback from working typed nested/block controls.
+  - [x] ROOT CAUSE (WHY + WHERE): lower_ast_value_only_call_node feeds lowered Hash host fat arrows into legacy_method_value_expr, triggering hash_literal_use_colon. Its generic intermediate also retains authored source, requiring complete typed operand lowering for the direct builder.
+  - [x] FIX: Dedicated typed coalesce/nonempty operands plus shared lazy host builder avoid reparsing; legacy callers reuse the same selector construction after their existing normalization/lowering.
+  - [x] ADDRESSED (verified): New native/fresh fixture PASS after RED for coalesce/nonempty Hash twins, nested Hash/Array bound numbers/false, fluent selected literal, empty Hash, lazy SDK order, skipped arms and numeric/false preservation. Genuine authored retired fat-arrow literal still produces the rejection marker.
+  - [x] NO REGRESSION: Direct selected-default and nonempty-exhaustion fixtures plus MethodLowering/test compilation PASS. No broad suite, helper-domain normalization, callable vocabulary or serialized format change.
+  - [x] LOCKSTEP: Contract/catalog, default fact/map and live/task/resume records align; book and fast memory/cadence/diagnosis/history/diff checks pass. Bounded Perl parent complete; Rust assessment2 next after clean commit, full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2 - preserve typed lazy default operands`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.2`
   Status: `pending`
@@ -1851,11 +1866,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow23.3.6.1.1 is now implemented on Perl; valid Hash literal fallback1.2 is next, then independent backend assessments. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow23.3.6.1.1 and valid Hash literal fallback1.2 are implemented/targeted-checked on Perl; Rust2 assessment is next, then other backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` | `pending` | Repair valid Perl Hash literal defaults after targeted-checked flow, then backend assessments; broad proof deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` | `pending` | Assess/implement Rust selected-default result flow after bounded Perl repairs; broad proof deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

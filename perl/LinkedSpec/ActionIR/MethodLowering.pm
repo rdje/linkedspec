@@ -2611,6 +2611,26 @@ sub _is_reserved_actionir_value_symbol {
  return $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o ? 1 : 0
 }
 
+# Construct lazy selection from already-lowered values. Never reparse host
+# container syntax as authored DSL; preserve each operand's typed AST lowering.
+sub _lower_lazy_default_value_args {
+ my ($method, $args) = @_;
+ return undef unless defined($method) && $method =~ /\Acoalesce(?:_nonempty)?\z/o;
+ return undef unless ref($args) eq 'ARRAY' && @$args >= 2;
+ my @parts = @$args;
+ my $tail = $method eq 'coalesce' ? pop(@parts) : 'undef';
+ while (@parts) {
+  my $head = pop @parts;
+  if ($method eq 'coalesce') {
+   $tail = 'do { my $__ls_coalesce = '.$head.'; defined($__ls_coalesce) ? $__ls_coalesce : '.$tail.' }';
+  } else {
+   # Compare a copy so numeric selections retain their original validity.
+   $tail = 'do { my $__ls_coalesce_nonempty = '.$head.'; my $__ls_coalesce_nonempty_text = $__ls_coalesce_nonempty; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty_text ne \'\') ? $__ls_coalesce_nonempty : '.$tail.' }';
+  }
+ }
+ return $tail
+}
+
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
 # Purpose : Lower method DSL value expressions (`call(...)`, bare scalar reads,
@@ -4394,6 +4414,18 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
+
+  if ($method eq 'coalesce' || $method eq 'coalesce_nonempty') {
+   my @values;
+   foreach my $arg (@$args) {
+    my $value = $lower_ast_value_node->($arg, { bare_scalar_read => 1 });
+    $value = $legacy_method_value_expr->($arg->{source})
+     if !(defined($value) && length($value)) && defined($arg->{source});
+    return undef unless defined($value) && length($value);
+    push @values, $value;
+   }
+   return _lower_lazy_default_value_args($method, \@values);
+  }
 
   my @lowered_args;
   foreach my $arg (@$args) {
@@ -6978,17 +7010,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    push @lowered_args, $lowered_arg;
   }
 
-  my $build_coalesce_expr;
-  $build_coalesce_expr = sub {
-   my (@parts) = @_;
-   return $parts[0] if @parts == 1;
-
-   my $head = shift @parts;
-   my $tail_expr = $build_coalesce_expr->(@parts);
-   return 'do { my $__ls_coalesce = '.$head.'; defined($__ls_coalesce) ? $__ls_coalesce : '.$tail_expr.' }';
-  };
-
-  return $build_coalesce_expr->(@lowered_args);
+  return _lower_lazy_default_value_args('coalesce', \@lowered_args);
  }
  if ($method_call && $method_call->{method} eq 'coalesce_nonempty') {
   my $coalesce_nonempty_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
@@ -7002,16 +7024,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    push @lowered_args, $lowered_arg;
   }
 
-  my $build_coalesce_nonempty_expr;
-  $build_coalesce_nonempty_expr = sub {
-   my (@parts) = @_;
-   my $head = shift @parts;
-   my $tail_expr = @parts ? $build_coalesce_nonempty_expr->(@parts) : 'undef';
-   # Compare a scalar copy so numeric selections retain their original validity.
-   return 'do { my $__ls_coalesce_nonempty = '.$head.'; my $__ls_coalesce_nonempty_text = $__ls_coalesce_nonempty; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty_text ne \'\') ? $__ls_coalesce_nonempty : '.$tail_expr.' }';
-  };
-
-  return $build_coalesce_nonempty_expr->(@lowered_args);
+  return _lower_lazy_default_value_args('coalesce_nonempty', \@lowered_args);
  }
  my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
  return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);

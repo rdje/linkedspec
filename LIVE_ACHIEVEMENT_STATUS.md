@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl selected-default result flow23.3.6.1.1 is implemented/targeted-checked. Valid Hash literal fallback1.2 is next, then independent backend assessments. Keep feature/compile/small-check/docs/commit cadence; full admission stays separate.
+Bounded Perl default result/literal repairs are implemented/targeted-checked. Rust selected-default assessment23.3.6.2 is next, then the remaining backends. Feature/compile/small-check/docs/commit cadence continues; full admission stays separate.
 
 ## Latest Completed Slice
 
-Perl nonempty-default results now continue through actual selected Array/Harray kinds while retained scalars keep incompatible-container nulls. Bind selection once and lower source/consumer helpers before host guards. Native/fresh focused regression and direct joined/default-exhaustion checks pass after RED; empty containers, zero/false, exhaustion, skipped fallbacks and SDJ snapshots pass. Valid Hash literal default repair1.2 is next; other backends/full domain/admission remain separate.
+Perl lazy defaults preserve valid direct Hash literal operands for both coalesce helpers, including nested typed values and fluent selected results. Complete typed operands feed a shared lazy host builder, avoiding host-fat-arrow reparsing while preserving coalesce tail and nonempty numeric-kind semantics. Native/fresh literal and direct selected-default/exhaustion checks pass after RED; lazy SDK order, zero/false and genuine retired syntax rejection pass. Bounded Perl repairs complete; Rust default-result assessment2 is next, full domain/portable admission separate.
 
 ## Next Action
 
-Repair the bounded Perl Hash literal default AST/legacy bridge. Reverify coalesce twin/nested values and preserve lazy selection, kinds, effects and genuine retired syntax rejection. Small native/fresh/direct compatibility checks and commit; no broad suite.
+Publicly assess Rust selected defaults against nested helpers and frozen actual-kind/lazy/snapshot boundaries before repair. Small native/restored/generated and direct compatibility checks, docs/commit; no broad suite or domain normalization.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 - `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
@@ -29,7 +30,6 @@ Repair the bounded Perl Hash literal default AST/legacy bridge. Reverify coalesc
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` — Rust six-reducer results continue with scalar boundaries, early arity guards and empty sum zero; focused native/restored/generated-plan checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` — Perl six-reducer results continue through scalar/number methods with preserved boundaries; focused native/fresh and Count/Length checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
 
 ## History
 
