@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.3 — guard Dart generic emptiness results
+
+Dart retains correct Boolean emptiness flow/source kinds/copy bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain permitted on scalar results. Native/restored/generated-plan emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Existing producer/domains/source/copy stay unchanged; fatal selected-file analysis/book/fast checks pass. Julia assessment next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.2 — continue Rust generic emptiness results
 
 Rust preserves Boolean emptiness producers and adds scalar-result/zero-operand guards plus generic current-value dispatch at initial and ordinary family-prefix positions. Initial copy before a generic predicate also retains actual source kind. Native/restored/generated-plan emptiness and direct has_key checks pass after fluent-null/S-only/four-effect and copied-Hash1! RED, covering source kinds/copy bindings, false retention, repeated predicates, explicit bridges/scalar nulls and1!/SA/once-only snapshots. Targeted offline compilation/book/fast checks pass; Dart assessment next, full admission separate.

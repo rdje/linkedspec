@@ -3719,6 +3719,8 @@ final class LinkedSpecRuntimeEngine {
                   helper == 'count' ||
                   helper == 'count_keys' ||
                   helper == 'length' ||
+                  helper == 'is_empty' ||
+                  helper == 'is_nonempty' ||
                   helper == 'num_sum' ||
                   helper == 'num_avg' ||
                   helper == 'num_median' ||
@@ -5091,9 +5093,11 @@ final class LinkedSpecRuntimeEngine {
     var scalarResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Array scalar producers retain this boundary until a container result
-      // permits later array/hash consumers.
+      // Scalar results retain this boundary; generic emptiness predicates
+      // accept every value kind.
       if (scalarResult &&
+          helper != 'is_empty' &&
+          helper != 'is_nonempty' &&
           (_arrayOnlyReceiverHelpers.contains(helper) ||
               _hashOnlyReceiverHelpers.contains(helper))) {
         return null;
@@ -5104,6 +5108,8 @@ final class LinkedSpecRuntimeEngine {
           helper == 'coalesce_nonempty' ||
           helper == 'index_of' ||
           helper == 'has_key' ||
+          helper == 'is_empty' ||
+          helper == 'is_nonempty' ||
           (value is List &&
               (_numericAggregateHelperNames.contains(helper) ||
                   helper == 'join_values'));

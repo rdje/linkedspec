@@ -89,3 +89,14 @@ Native/restored/generated-plan result/direct has_key tests pass after fluent-nul
 S-only/four-effect and copied-Hash RED, preserving source kinds, false retention,
 repeated predicates/explicit bridges/scalar nulls and1!/SA/once-only snapshots.
 Targeted offline compilation passes; Dart/full admission remain separate.
+
+## Bounded Dart scalar/shape guards
+
+23.3.9.3 retains already correct Bool flow/source kinds/copy bindings/snapshots.
+Native RED shows container[], bad empty1!, bad nonempty0! and four effects.
+Zero-operand preflight and source-independent scalar tracking now include both
+predicates, while the generic predicates remain allowed as scalar consumers.
+Native/restored/generated-plan shared/direct has_key tests and fatal selected-file
+analysis pass, preserving producer/domain/source/copy policy and repeated
+predicates/false retention/bridges/scalar nulls/1!/SA snapshots. Julia/full
+admission remain separate.
