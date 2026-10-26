@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.5 — continue Lua generic emptiness results
+
+Lua removes the generic emptiness terminal fence, tracks its Boolean scalar results and preflights zero receiver operands. Native/generated-plan/fresh-emitted emptiness and direct has_key checks pass on available PUC5.5.1/LuaJIT after native fluent-null/S-only/four-effect RED. Producer/domains/source/copy unchanged; source kinds/copied bindings, repeated predicates, false retention, bridges/scalar nulls and1!/SA/once-only snapshots pass. Loadfile/book/fast checks pass; String-predicate result assessment23.2.9 next, declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.4 — guard Julia generic emptiness results
 
 Julia retains correct Boolean emptiness flow/source kinds/copied bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain allowed on scalar results. Strict native/generated-plan/fresh-emitted emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Producer/domain/source/copy policy unchanged; package compilation/book/fast checks pass. Lua assessment next, declared5.4/full admission separate.

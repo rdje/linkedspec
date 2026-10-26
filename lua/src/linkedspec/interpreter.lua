@@ -971,8 +971,6 @@ local TERMINAL_STRING_HELPERS = {
   contains_substr = true,
   ends_with = true,
   is_defined = true,
-  is_empty = true,
-  is_nonempty = true,
   is_undefined = true,
   matches = true,
   starts_with = true,
@@ -3494,6 +3492,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       value = copy_value(value)
     elseif is_pure_string_helper(canonical_name) then
       value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
+      if canonical_name == "is_empty" or canonical_name == "is_nonempty" then scalar_result = true end
       if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
           index < #calls then
         return json.null
@@ -3901,7 +3900,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       if (name == "join_values" or name == "index_of" or name == "has_key") and #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
-          name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
+          name == "is_empty" or name == "is_nonempty" or name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
           #(call.args or {}) > 0 then
         return json.null
       end

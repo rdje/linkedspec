@@ -111,3 +111,15 @@ native/generated-plan/fresh-emitted shared/direct has_key tests plus package
 compilation pass, retaining existing producer/domains/source/copy, repeated
 predicates/false retention/bridges/scalar nulls and no malformed effects. Lua/
 full admission remain separate.
+
+## Bounded Lua scalar/shape handoff
+
+23.3.9.5 removes the generic predicates from TERMINAL_STRING_HELPERS, marks their
+Boolean results scalar and adds zero-operand preflight. Both installed native
+hosts first show fluent null versus nested1!, S-only order and four effects.
+Native/generated-plan/fresh-emitted shared/direct has_key and interpreter/runner
+loadfile pass on PUC5.5.1/LuaJIT with matching products after repair, preserving
+producer/domains/source/copy, copied Array/Hash bindings, repeated predicates,
+false retention/bridges/scalar nulls and1!/SA/once-only snapshots. Bounded rollout
+is targeted-checked on recorded hosts; declared5.4/full admission separate.
+Next is String predicate result assessment23.2.9.

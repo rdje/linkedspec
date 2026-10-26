@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
+Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
 
 ## Latest Completed Slice
 
-Julia retains correct Boolean emptiness flow/source kinds/copied bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain allowed on scalar results. Strict native/generated-plan/fresh-emitted emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Producer/domain/source/copy policy unchanged; package compilation/book/fast checks pass. Lua assessment next, declared5.4/full admission separate.
+Lua removes the generic emptiness terminal fence, tracks its Boolean scalar results and preflights zero receiver operands. Native/generated-plan/fresh-emitted emptiness and direct has_key checks pass on available PUC5.5.1/LuaJIT after native fluent-null/S-only/four-effect RED. Producer/domains/source/copy unchanged; source kinds/copied bindings, repeated predicates, false retention, bridges/scalar nulls and1!/SA/once-only snapshots pass. Loadfile/book/fast checks pass; String-predicate result assessment23.2.9 next, declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Lua is_empty/is_nonempty result/source/shape behavior under23.3.9.5 on available PUC/LuaJIT with matching products and shared fixture. Preserve actual producer kinds/canonical domains/copy/source policies; small native/plan/fresh/direct/loadfile checks/docs/commit, declared5.4/full admission separate.
+Assess ordinary starts_with/ends_with/contains_substr/matches result continuation under23.2.9 using public fluent/nested pairs. Read canonical scalar/regex/null/empty/arity/scalar-text rules; preserve actual producer kinds, source/operand/consumer snapshots/order and source/helper domains. Freeze bounded targets/backend owners after observations; small checks/docs/commit. String-comparison receiver additions and contains calibration remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` — Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
@@ -29,7 +30,6 @@ Independently assess Lua is_empty/is_nonempty result/source/shape behavior under
 - `TYPE-REFERENCE-BOOK.1.2.23.2.7` — has_key contract frozen, P1 key-block and result-flow gaps owned; public native/fresh controls retained.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.5` — index scalar/null and shape guards; focused available-host native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` — index scalar/null and shape guards; strict native/plan/fresh/direct default checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` — index integer/null and shape guards; native/restored/plan/direct default and fatal analysis pass.
 
 ## History
 
