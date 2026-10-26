@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
+Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
 
 ## Latest Completed Slice
 
-Freeze six bounded aggregate/null repairs under original FUTURE5.7. Public Perl native/fresh versus Rust native/restored/plan controls confirm null/empty merging in contains/index/uniq and stale named index/has_key/append/merge sources; concat already works. get_bare_value captures typed clones but aggregate adapters re-read ctx. Separate Perl source-null key suppression is traced by dump to typed/legacy defined(hash) ternaries and owned next. Existing reference/null/source authority selected; defined coercion/kinds/first occurrence and wrong-kind fallback stay unchanged. Retained public producers/contracts/book/facts/current docs align; Rust snapshot14.1 next. No runtime repair or full-domain claim at assessment.
+Rust aggregate value adapters now consume evaluated typed arguments instead of re-reading ctx after later operands, preserving existing named wrong-kind/absent empty-container fallback. Native/restored/plan source/append/merge/null snapshots and typed/default controls pass after RED; seven focused snapshot/direct contains/index/has_key/uniform tests with offline compilation/rustfmt pass. Literal/concat controls, target/lazy resolvers, invalid-domain shapes and null-key equality remain unchanged. Book/fact/FUTURE5.7/current docs align; Perl has_key key-evaluation14.2 next, null-key backends14.3-.6 separate.
 
 ## Next Action
 
-Repair Rust aggregate-consuming named-source re-reads under23.3.14.1 using cached typed arguments in array_consuming_arg/hash_consuming_arg. Preserve prior named wrong-kind/absent empty-container fallback without later ctx lookup; mutation-target/lazy resolvers untouched. Retained public source/probes show index/has_key/append/merge failures, concat control passes. Native/restored/plan and small direct contains/index/has_key/uniform checks/docs/commit. Then Perl key14.2, then null-key Rust/Dart/Julia/Lua14.3-.6. Full admission separate.
+Repair Perl ordinary has_key key suppression under23.3.14.2. Public dump locates key inside defined(hash) ternary in typed4501/4511 and legacy6840/6863; capture source then evaluate key once before validity check, retaining output0 for null source and existing one-key guard. Native/fresh null-source/effect/valid-source/malformed and direct has_key/contains checks plus syntax/docs/commit; then Rust null-key14.3. Cached Rust aggregate adapters are already targeted-checked; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.5` — Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.4` — Julia contains scalar/shape and calibration are targeted-checked; Lua rollout is next, then P1 equality/sibling snapshot assessment.
@@ -29,7 +30,6 @@ Repair Rust aggregate-consuming named-source re-reads under23.3.14.1 using cache
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.2` — Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 
 ## History
 

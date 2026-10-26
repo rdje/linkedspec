@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1351** facts · **10613** question keys.
+> **1351** facts · **10614** question keys.
 
 ## Questions → fact
 
@@ -10037,6 +10037,7 @@
 - "why does Rust contains without a needle return zero" -> [punctuation-light-receiver-arity-calibration](docs/knowledge/punctuation-light-receiver-arity-calibration.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl missing`
 - "why does Rust empty Array sum return zero while invalid filtered sources remain null" -> [terse-array-numeric-reducer-receiver-methods](docs/knowledge/terse-array-numeric-reducer-receiver-methods.md) · 2026-10-26 · reverify: [2 entries](#terse-array-numeric-reducer-receiver-methods)
 - "why does Rust fixed lookbehind fail at a nonzero cursor" -> [rust-regex-input-context-drift](docs/knowledge/rust-regex-input-context-drift.md) · 2026-09-24 · reverify: [4 entries](#rust-regex-input-context-drift)
+- "why does Rust flat_hash of a scalar name return an empty Hash" -> [aggregate-operand-snapshots-and-null-keys](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md) · 2026-10-26 · reverify: [2 entries](#aggregate-operand-snapshots-and-null-keys)
 - "why does Rust generated compatibility return an array" -> [logical-helper-generated-primary-projection](docs/knowledge/logical-helper-generated-primary-projection.md) · 2026-07-18 · reverify: `prove -lv t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && bash ../tools/run_dart_project_data.sh test test/logical_helper_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/logical_helper_contract_test.jl && bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`
 - "why does Rust has_key see a rebound Hash" -> [aggregate-operand-snapshots-and-null-keys](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md) · 2026-10-26 · reverify: [2 entries](#aggregate-operand-snapshots-and-null-keys)
 - "why does Rust have two ActionIR block parse modes" -> [rust-generic-final-codeblock-normalization](docs/knowledge/rust-generic-final-codeblock-normalization.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --lib && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract`
@@ -10681,8 +10682,8 @@ _Active task-tree authoritative prose can drift because the metadata doctrine ch
 
 ### aggregate-operand-snapshots-and-null-keys
 _Captured aggregate operands and null-distinct Array keys_
-- **answers:** why does Rust index_of see a rebound Array | why does Rust has_key see a rebound Hash | why does Rust merge_hash use a later binding value | why does Perl has_key skip key effects for null source | why does uniq drop empty text beside null on Rust | what is the null membership and index_of reference policy | which task owns aggregate source and null-key repairs
-- **date:** 2026-10-26 · **status:** confirmed baseline; bounded repair contract frozen
+- **answers:** why does Rust index_of see a rebound Array | why does Rust has_key see a rebound Hash | why does Rust merge_hash use a later binding value | why does Rust flat_hash of a scalar name return an empty Hash | why does Perl has_key skip key effects for null source | why does uniq drop empty text beside null on Rust | what is the null membership and index_of reference policy | which task owns aggregate source and null-key repairs
+- **date:** 2026-10-26 · **status:** Rust source snapshots repaired; Perl key/null-key work open
 - **evidence:** `TYPE23.2.14 public Get/dump/native/fresh and Engine native/restored/plan; README reference, uniform binding policy.read, has_key/index source contracts and catalog uniq null distinction.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_operand_snapshots.pl` · `bash tools/run_cargo_local.sh run --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --example operand_snapshot_probe`
 - **source:** [`docs/knowledge/aggregate-operand-snapshots-and-null-keys.md`](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md)

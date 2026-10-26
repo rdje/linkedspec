@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.14.1 — preserve captured Rust aggregate operands
+
+Rust aggregate value adapters now consume evaluated typed arguments instead of re-reading ctx after later operands, preserving existing named wrong-kind/absent empty-container fallback. Native/restored/plan source/append/merge/null snapshots and typed/default controls pass after RED; seven focused snapshot/direct contains/index/has_key/uniform tests with offline compilation/rustfmt pass. Literal/concat controls, target/lazy resolvers, invalid-domain shapes and null-key equality remain unchanged. Book/fact/FUTURE5.7/current docs align; Perl has_key key-evaluation14.2 next, null-key backends14.3-.6 separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.14 — freeze aggregate operand and null-key repairs
 
 Freeze six bounded aggregate/null repairs under original FUTURE5.7. Public Perl native/fresh versus Rust native/restored/plan controls confirm null/empty merging in contains/index/uniq and stale named index/has_key/append/merge sources; concat already works. get_bare_value captures typed clones but aggregate adapters re-read ctx. Separate Perl source-null key suppression is traced by dump to typed/legacy defined(hash) ternaries and owned next. Existing reference/null/source authority selected; defined coercion/kinds/first occurrence and wrong-kind fallback stay unchanged. Retained public producers/contracts/book/facts/current docs align; Rust snapshot14.1 next. No runtime repair or full-domain claim at assessment.

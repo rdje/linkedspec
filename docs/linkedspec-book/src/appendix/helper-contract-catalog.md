@@ -773,7 +773,7 @@ dispatch rule.
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`
 - **Returns**: int or undef. Ordinary Perl/Rust/Dart/Julia/Lua compatible scalar/number continuations are targeted-checked (Lua: available PUC5.5.1/LuaJIT; declared5.4/full admission open): `["a","b"].index_of("b").add(1)` returns `2`, while `.index_of("b").cat("!")` returns `"1!"`. The receiver requires one needle; missing/extra shapes return undef before source/operand effects. Declared5.4/full continuation admission remains separate.
-- **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases. Rust free `index_of(items, needle_expr)` currently re-reads named `items` after needle effects; the tracked snapshot repair will align it with the receiver’s captured source.
+- **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases. Rust free `index_of(items, needle_expr)` also captures named `items` before needle effects: with `items=["a"]`, `index_of(items,{items=["z"];"a"})` returns `0` and leaves `items` as `["z"]`.
 
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
@@ -957,7 +957,7 @@ dispatch rule.
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
 - **Returns**: hash
-- **Behavior**: Merges `h2` into `h1`. Keys in `h2` override keys in `h1`. Neither input is mutated — returns a new hash. Rust currently re-reads an earlier named Hash after later operand effects; this source-snapshot defect is under repair.
+- **Behavior**: Merges `h2` into `h1`. Keys in `h2` override keys in `h1`. Neither input is mutated — returns a new hash. Rust captures earlier named Hash operands before later effects: with `base={"a":1}`, `merge_hash(base,{base={"z":2};{"b":3}})` returns `{"a":1,"b":3}` while `base` becomes `{"z":2}`.
 - **Bare bindings**: Both positions accept bare typed harray bindings, so `merge_hash(base, overlay)` is canonical.
   `merge_hash(copy(base), overlay)` is equivalent when an explicit source snapshot makes the intent clearer; no
   aggregate-selector wrapper is required or accepted.
@@ -1007,7 +1007,7 @@ dispatch rule.
 ### `has_key(h, key)`
 - **Signature**: `has_key(h: hash, key: string)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart/Julia/Lua accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Two free-helper boundaries are under repair: Rust re-reads a named source after key effects, and Perl skips key effects when that source is null. Focused Perl native/fresh, Rust/Dart native/restored/generated-plan and Julia/Lua native/plan/fresh-emitted checks cover selected, function and default sources too; Lua uses available PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
+- **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart/Julia/Lua accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Rust free `has_key(meta,key_expr)` also uses its captured named source, even when the key operand rebinds `meta`. Perl’s source-null key-effect suppression remains under repair. Focused Perl native/fresh, Rust/Dart native/restored/generated-plan and Julia/Lua native/plan/fresh-emitted checks cover selected, function and default sources too; Lua uses available PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
 
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`

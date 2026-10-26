@@ -3087,11 +3087,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Cached pure aggregate value operands; eager Perl has_key key effects; null distinct from empty in contains/index_of/uniq, original kinds/first occurrence/source snapshots retained. Preserve existing defined-scalar coercion, malformed arity, invalid-kind fallback, target mutation and lazy controls; bounded per-backend commits/quick checks. Full domain/portable admission remains23.4.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair Rust aggregate-consuming named-source snapshots.
   Dependencies: .23.2.14; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Rust source re-read is confirmed on all three carriers; contains already has a local fix. Mutation-target resolvers and lazy helpers stay untouched.
   Acceptance: Use cached typed get_bare_value arguments in array_consuming_arg/hash_consuming_arg; preserve existing named wrong-kind/absent empty-container fallback without reading later ctx bindings. Public native/restored/plan index/has_key/append/merge and literal/null/concat controls plus direct contains/index/has_key/uniform checks; no null equality change. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `97faac2f753201be9a7c13753a86ad4c86864951`; aggregate/null freeze and original FUTURE5.7 activation committed, brief0/tree clean.
+  Owned paths: Rust private aggregate-consuming value adapters, public native/restored/plan named source/append/merge/null snapshot regression, named valid/missing/wrong-kind defaults and direct contains/index/has_key/uniform checks/docs. Preserve null-key merging until14.3 and all target/lazy resolvers.
+  Verification tier: `focused`
+  Focused checks: Retained public source/native/restored/plan RED/GREEN plus named fallback controls, direct contains/index/has_key tests and one typed-constructor uniform control, offline compilation/rustfmt, book/history/diff/final staged continuity guards.
+  Canonical trigger: None for bounded existing value-contract repair under director feature-first cadence; complete domains/context/portable23.4 separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Baseline compatibility control: Initial empty-Array expectation for flat_hash(wrong/undef) was incorrect; actual pre-change output is empty Hash{}. Pin that observed shape instead, without normalizing its existing context-sensitive/invalid-domain behavior owned by FUTURE5. Main snapshot RED independently distinguishes stale sources; the fallback control guards against widening this fix into raw-kind normalization.
+
+  Completion: Replace live ctx reads in the two aggregate value adapters with already-evaluated typed arguments. Named wrong-kind/absent inputs still yield the prior empty Array/Hash fallback, preserving flat_hash’s observed empty Hash{} compatibility; nonvariable/literal inputs stay unchanged. Target/lazy resolvers and null-key equality untouched.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Retained public probes and snapshot fixture RED on native/restored/plan: named index null instead of0, has_key0 instead of1, appended index1 instead ofnull, merge{z,b} instead of{a,b}, absent source result replaced by later binding. Concat control already works. Fallback baseline control passes separately before production after correcting an unproved Array[] expectation to actual Hash{}.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs array_consuming_arg/hash_consuming_arg prefer current ctx named storage after all operands, replacing cached args. runtime.rs get_bare_value already captures typed Array/Hash clones. Preserve the old raw-variable wrong-kind empty fallback but never inspect later bindings; other mutation-target and lazy protocols use separate resolvers.
+  - [x] FIX: Both adapters return captured typed arguments, with only the prior named non-container fallback synthesized as empty. Keep call signatures/private context parameter unused, avoiding unrelated caller edits. No parser/schema/free signature/equality/target changes.
+  - [x] ADDRESSED (verified): Native/restored/plan exact expected source controls now return index0/has_key1, absent indexnull/has_key0 despite later rebinding, appended indexnull and merged{a,b}; source mutations remain visible in separate after fields. Literal/concat/null controls and named first/last/copy/sorted/default/flat_hash shapes pass. Existing null/empty merging is intentionally unchanged for14.3.
+  - [x] NO REGRESSION: Two snapshot/fallback tests, two direct contains, one index, one has_key and one retained typed-constructor uniform control pass (seven focused Rust tests), offline compilation/rustfmt. No full suite/standalone emitted/full domain/portable admission.
+  - [x] LOCKSTEP: Retained source/shared Rust expected/test, current book free index/has_key/merge examples, canonical source/null fact/map and TYPE/FUTURE5.7/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit; Perl key14.2 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.1 - preserve captured Rust aggregate operands`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.2`
   Status: `pending`
@@ -3225,7 +3244,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` | `pending` | Repair confirmed Rust aggregate operand re-reads; preserve existing wrong-kind fallback. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` | `pending` | Evaluate Perl has_key key once after captured null sources. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

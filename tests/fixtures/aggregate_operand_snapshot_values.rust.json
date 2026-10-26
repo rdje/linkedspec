@@ -1,0 +1,83 @@
+{
+  "absent_array": [
+    null,
+    [
+      "a"
+    ]
+  ],
+  "absent_controls": [
+    null,
+    0
+  ],
+  "absent_hash": [
+    0,
+    {
+      "a": 1
+    }
+  ],
+  "appended": [
+    null,
+    [
+      "a",
+      "b"
+    ]
+  ],
+  "array_snapshot": [
+    0,
+    "O",
+    [
+      "z"
+    ]
+  ],
+  "concatenated": [
+    [
+      "a",
+      "b"
+    ],
+    [
+      "z"
+    ]
+  ],
+  "hash_snapshot": [
+    1,
+    "O",
+    {
+      "z": 2
+    }
+  ],
+  "indexes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null,
+    0,
+    0
+  ],
+  "membership": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+  ],
+  "merged": [
+    {
+      "a": 1,
+      "b": 3
+    },
+    {
+      "z": 2
+    }
+  ],
+  "unique": [
+    null,
+    0
+  ]
+}

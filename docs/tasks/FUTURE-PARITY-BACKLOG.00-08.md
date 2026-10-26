@@ -3309,7 +3309,7 @@
   Planned focused checks: Per bounded execution leaf, public changed-surface/direct consumer and small compile/format checks, docs and commit; no full gate per ordinary slice.
   Planned canonical trigger: Complete admission/final clean push remain separate under feature-first cadence.
   Planned claim verification: none: deterministic authored contract/regression controls, no population/completeness measurement.
-  Verification: `pending`; assessment confirms actual Rust stale sources and null-key mismatches, plus Perl source-null key suppression; no repair claimed at activation.
+  Verification: Rust source adapters TYPE23.3.14.1 are implemented/targeted-checked: native/restored/plan index/has_key/append/merge and named wrong-kind/absent/typed controls plus direct result families and uniform constructor pass seven tests. Existing fallback shapes are preserved. Perl key14.2 and null-key Rust/Dart/Julia/Lua14.3-.6 remain pending; no complete-domain admission.
   Commit: `pending`; six implementation commits own actual repairs.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`

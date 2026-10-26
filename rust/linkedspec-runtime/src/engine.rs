@@ -8320,22 +8320,20 @@ impl Engine {
         raw_args: &[linkedspec_core::expr::Arg],
         args: &[RuntimeValue],
         index: usize,
-        ctx: &RuntimeContext,
+        _ctx: &RuntimeContext,
     ) -> RuntimeValue {
         use linkedspec_core::expr::{Arg, Expr};
 
+        // Typed arguments were captured before later operand effects. Keep the
+        // existing named wrong-kind/absent fallback without reading live bindings.
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
-        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
-            if let Some(values) = Self::scalar_held_hash_snapshot(ctx, name) {
-                return RuntimeValue::Hash(values);
-            }
-            return RuntimeValue::Hash(ctx.hash_snapshot(name));
+        if matches!(
+            raw_args.get(index),
+            Some(Arg::Positional(Expr::Variable { .. }))
+        ) && !matches!(evaluated, RuntimeValue::Hash(_))
+        {
+            return RuntimeValue::Hash(Vec::new());
         }
-
-        if matches!(evaluated, RuntimeValue::Hash(_)) {
-            return evaluated;
-        }
-
         evaluated
     }
 
@@ -8344,22 +8342,20 @@ impl Engine {
         raw_args: &[linkedspec_core::expr::Arg],
         args: &[RuntimeValue],
         index: usize,
-        ctx: &RuntimeContext,
+        _ctx: &RuntimeContext,
     ) -> RuntimeValue {
         use linkedspec_core::expr::{Arg, Expr};
 
+        // Typed arguments were captured before later operand effects. Keep the
+        // existing named wrong-kind/absent fallback without reading live bindings.
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
-        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
-            if let Some(values) = Self::scalar_held_array_snapshot(ctx, name) {
-                return RuntimeValue::Array(values);
-            }
-            return RuntimeValue::Array(ctx.array_snapshot(name));
+        if matches!(
+            raw_args.get(index),
+            Some(Arg::Positional(Expr::Variable { .. }))
+        ) && !matches!(evaluated, RuntimeValue::Array(_))
+        {
+            return RuntimeValue::Array(Vec::new());
         }
-
-        if matches!(evaluated, RuntimeValue::Array(_)) {
-            return evaluated;
-        }
-
         evaluated
     }
 

@@ -45,3 +45,14 @@ not a reason to copy one host’s whole output as a universal expected object.
 
 Run focused native/generated/direct checks and commit each bounded repair; no
 exhaustive matrix or full backend gate in ordinary feature slices.
+
+## Rust captured-source implementation
+
+23.3.14.1 removes live ctx named reads from array_consuming_arg/hash_consuming_arg.
+Use cached typed values; retain prior named wrong-kind/absent empty Array/Hash
+fallback (flat_hash controls return Hash{}, not an assumed Array[]). Native/
+restored/plan index/has_key/append/merge and absent-source results now follow
+captured values; literal/concat/typed/default controls stay passing. Seven focused
+snapshot/direct result/uniform tests and compilation/rustfmt pass after source
+RED. Existing null-key equality and lazy/target resolvers are unchanged. Perl key
+effects14.2 follows; no full domain/context/portable admission.

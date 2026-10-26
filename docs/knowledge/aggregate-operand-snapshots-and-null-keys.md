@@ -5,12 +5,13 @@ answers:
   - why does Rust index_of see a rebound Array
   - why does Rust has_key see a rebound Hash
   - why does Rust merge_hash use a later binding value
+  - why does Rust flat_hash of a scalar name return an empty Hash
   - why does Perl has_key skip key effects for null source
   - why does uniq drop empty text beside null on Rust
   - what is the null membership and index_of reference policy
   - which task owns aggregate source and null-key repairs
 date: 2026-10-26
-status: confirmed baseline; bounded repair contract frozen
+status: Rust source snapshots repaired; Perl key/null-key work open
 tags: [array, hash, source, snapshot, equality, null, perl, rust, task-tree]
 evidence: "TYPE23.2.14 public Get/dump/native/fresh and Engine native/restored/plan; README reference, uniform binding policy.read, has_key/index source contracts and catalog uniq null distinction."
 reverify:
@@ -18,8 +19,8 @@ reverify:
   - "bash tools/run_cargo_local.sh run --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --example operand_snapshot_probe"
 ---
 
-Perl contains/index_of explicitly match null only to null; uniq retains null and empty separately. Rust to_str keys merge them: retained public source gives membership[1,1,1,1,1,1,0,1,1], indexes[0,0,0,0,0,0,null,0,0], uniq[null,0] versus Perl[null,"",0]. Four non-reference contains mergers are confirmed; their index/uniq need independent controls. Defined scalar coercions/kinds/first occurrence stay unchanged under frozen aggregate-null-and-snapshot-contract.md / FUTURE5.7; no new strict or container/callable equality.
+Perl contains/index_of explicitly match null only to null; uniq retains null and empty separately. Rust to_str keys merge them: retained public source gives membership[1,1,1,1,1,1,0,1,1], indexes[0,0,0,0,0,0,null,0,0], uniq[null,0] versus Perl[null,"",0]. Dart/Julia/Lua contains merging is confirmed; their index/uniq still need controls. Defined scalar coercions/kinds/first occurrence stay unchanged under frozen aggregate-null-and-snapshot-contract.md / FUTURE5.7; no new strict or container/callable equality.
 
-Rust array_consuming_arg/hash_consuming_arg prefer current ctx names after operands, despite get_bare_value already capturing typed clones. Public index/has_key/append/merge controls show later values instead of captured sources; concat already works. Repair cached arguments with prior named wrong-kind/absent empty fallback preserved, leaving mutation-target and lazy-control resolvers alone.
+Rust23.3.14.1 now consumes cached typed arguments in array_consuming_arg/hash_consuming_arg instead of later ctx names. Prior named wrong-kind/absent empty fallback remains (flat_hash returns Hash{}). Native/restored/plan index/has_key/append/merge and absent-source controls now use captured values; seven snapshot/direct/uniform tests pass after RED. Literal/concat controls and target/lazy resolvers are unchanged.
 
-Perl absent-source has_key returns0 but skips key effects. Dumped typed4501/4511 and legacy6840/6863 put key inside defined(hash) ternary. Frozen ordinary source-then-key contract requires key once even when source null; result stays0. Separate source/Perl-key/null-backend repairs are TYPE23.3.14.1-.6, Rust snapshot first. This is pre-repair evidence, not a fixed-behavior claim; full admission23.4 stays open.
+Perl absent-source has_key returns0 but skips key effects. Dumped typed4501/4511 and legacy6840/6863 put key inside defined(hash) ternary. Frozen ordinary source-then-key contract requires key once even when source null; result stays0. Separate source/Perl-key/null-backend repairs are TYPE23.3.14.1-.6, Rust snapshots are repaired; Perl key14.2 and null-key14.3-.6 remain pending. Initial comparison/key baseline above is historical for repaired source fields; full admission23.4 stays open.
