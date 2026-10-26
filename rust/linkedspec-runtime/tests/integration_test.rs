@@ -3425,12 +3425,12 @@ fn terse_2_3_5_4_number_receiver_value_chains_run() {
 }
 
 #[test]
-fn terse_2_3_5_4_number_terminal_methods_end_chains() {
+fn terse_2_3_5_4_number_comparison_results_continue_chains() {
     let grammar = "Top::\n /x/ -> Done { return(array(5.gt(3).add(1), 5.eq(5).abs())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[null, null]]),
-        "number receiver comparison terminal values cannot continue into later receiver-dot methods"
+        serde_json::json!([[2, 1]]),
+        "number receiver comparison flags feed later compatible methods"
     );
 }
 

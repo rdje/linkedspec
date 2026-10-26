@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
+Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
 
 ## Latest Completed Slice
 
-Perl six short numeric comparison results now use scalar_result, preserving strict numeric1/0/invalid-null and one-RHS preflight. Shared native/fresh source/kind/false/default/numeric/String/Array/shape and selector checks pass after RED. Public dump exposed Number-to-Array and String-prefix-to-numeric handoff gaps; scoped shared dispatch fixes both.59 focused assertions including actual touched AST/Phase0 cases and updated ordinary callable rows pass; deferred/unknown-tail boundaries remain. Direct lexical/syntax and book/history/continuity checks align; Rust15.2 next, full admission separate.
+Rust six short numeric comparison results now feed shared scalar-result continuation, preserving contracted numeric1/0/strict invalid-null and source captures. Common one-RHS preflight rejects malformed shapes before effects; obsolete terminal fences/state are removed. Eight focused native/restored/plan/direct/named-calibration tests pass after continuation/shape RED, including numeric/default/String/Array/selector consumers and SOC snapshots. Canonical -0.5 literal corrects fixture setup while retaining String"-.5" control; twelve shared Perl assertions pass. Book/facts/live align; Dart15.3 next, full admission separate.
 
 ## Next Action
 
-Independently assess Rust scalar-numeric-v1 free numeric producers and ordinary six short eq/ne/gt/ge/lt/le result/shape/bridge transitions under15.2. Reuse shared numeric_comparison_result_receiver_values reference after producer confirmation; preserve strict numeric kinds/domains/free signatures/source snapshots. Update actual old terminal expectations intentionally, including named corpus/unit calibrations only when affected; native/restored/plan, quick direct compile/rustfmt/docs/commit. No full suite or transitive dependency inspection.
+Independently assess Dart scalar-numeric-v1 free producers/aliases and six short comparison result/shape/bridge transitions under15.3. Reuse shared numeric_comparison_result_receiver_values only after producer confirmation, retain actual numeric1/0/strict invalid-null/free signatures/source snapshots. Intentionally update any actual old terminal calibrations. Native/restored/plan and small direct compile/format/fatal-analysis/docs/commit; then Julia15.4 and safe Lua15.5. No full suite/matrix now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` — Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
@@ -29,7 +30,6 @@ Independently assess Rust scalar-numeric-v1 free numeric producers and ordinary 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` — Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
 
 ## History
 

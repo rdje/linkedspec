@@ -3293,10 +3293,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.1 - continue Perl numeric comparison results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust ordinary numeric comparison result continuations.
   Dependencies: .23.3.15.1.
   Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `7e47de7413c0ce0c84f33628921dddbc6473522f`; Perl comparison result child committed, brief0/tree clean.
+  Owned paths: Rust short comparison scalar-result/one-RHS dispatch and actual affected named number calibration, native/restored/plan producer/shared/selector regression, scoped book/facts/task/live docs. Numeric domains/free signatures and unrelated arithmetic guards stay unchanged.
+  Verification tier: `focused`
+  Focused checks: Producer-first native/restored/plan controls, shared RED/GREEN and direct String/aggregate result tests, exact touched number integration cases, offline compilation/rustfmt and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary result implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Producer setup correction: First Rust control used -.5 as a bare literal (not a JSON number) beside valid numeric String"-.5". Public Engine warns unknown helper5/returns null; Core primary parser recognizes negative numeric literals only when minus is followed by a digit. Use canonical -0.5 literal in shared fixture/probe while retaining String"-.5" conversion control. This is a source spelling correction, not numeric producer RED credit or a new leading-dot literal contract. Reconfirm the producer before runtime edits.
+
+  Completion: Rename the private comparison classifier to reflect its nonterminal role; classify six methods as scalar-result producers and hand Number-chain comparisons to shared actual-value continuation. Remove obsolete terminal state/fences, retaining numeric helper/arity/domain evaluation. Add exact-one-RHS global preflight before effects. Shared String/Array bridges already work through dynamic dispatch after handoff.
+  Verification:
+  - [x] REPRODUCE / ISSUE: After source spelling correction, independent native/restored/plan raw/canonical/word/symbol/strict-domain/nested/source producer and selector controls pass. Shared continuation RED returns null, SO/source3 instead of SOC/final-null, and twelve malformed effects. Initial -.5 bare literal setup is not numeric producer RED credit; use canonical -0.5 and keep String"-.5" control.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs dynamic Number helper and Number loop enforce comparison-terminal fences/state; is_scalar_result_receiver_method omits six comparisons. Common Expr::FluentChain preflight omits their one-RHS guard. Correct producers capture source and return numeric1/0/invalid-null; do not copy String-comparison Bool policy.
+  - [x] FIX: Reuse comparison classifier in scalar result selection, shared selected-value continuation and one-RHS preflight; remove obsolete private Terminal state/dynamic fence. Intentionally update actual integration comparison calibration from[null,null] to[2,1]. Canonical literal spelling only changes shared source/probe, not expected values; Perl reference rechecks pass. No parser/schema/numeric-adapter/free signature or unrelated arithmetic change.
+  - [x] ADDRESSED (verified): Native/restored/plan shared six pairs/Number flags/strict domains, source families, false/default8/definedness/numeric/selector and repeated-comparison consumers, String/Array bridgesX and scalar negatives pass. Valid and invalid-source SOC/once-only/final snapshots and twelve malformed no-effects pass. Free aliases/producer controls stay correct.
+  - [x] NO REGRESSION: Eight Rust tests across numeric producer/shared/selector, direct lexical/aggregate and two actual named number integration cases pass with offline compilation/rustfmt; twelve shared Perl reference assertions pass after literal spelling correction. No full suite, standalone emitted Rust, new leading-dot literal/strict equality or full domain/portable admission.
+  - [x] LOCKSTEP: Retained Rust tests/current calibration/shared canonical literal, frozen contract progress, scoped book/catalog/grammar and canonical number-chain/deferred qualifier facts/map, TYPE/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart15.3 independent producer/continuation assessment next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.2 - continue Rust numeric comparison results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.3`
   Status: `pending`
@@ -3413,7 +3432,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` | `pending` | Independently assess and implement Rust numeric comparison result continuation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` | `pending` | Independently assess and implement Dart numeric comparison result continuation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -32,7 +32,7 @@ answers:
   - "why did registered sorted pipelines lose function parameters"
   - "why does a reused book renderer import the wrong document module"
   - "when are private Storable integer caches unsafe for scalar kind checks"
-date: 2026-10-25
+date: 2026-10-26
 status: bounded Perl; inventory pending
 tags: [spec-format-terse, method-chaining, mdbook]
 evidence: "Type checkpoints; pipelines11."
@@ -47,8 +47,8 @@ reverify:
 Bindings retain evaluated constructor keys/values and arguments. Deferred reads
 use caller slots; updates copy on write. [[perl-generic-final-codeblock-normalization]].
 
-Scalar/aggregate Numeric policies differ. Shapes precede effects; comparisons/
-reducers terminate. Aggregates take one array, receivers none. Scalar min/max
+Scalar/aggregate Numeric policies differ. Shapes precede effects; deferred comparisons/
+reducers terminate. Ordinary comparison flow: [[terse-number-receiver-value-chains]]. Aggregates take one array, receivers none. Scalar min/max
 evaluates before rejection. Perl checks each decimal: empty sum0, othersundef;
 Rust filters differently. Reducer95:
 [[perl-numeric-reducer-string-result-kinds]]. Boolean35 is repaired through22;

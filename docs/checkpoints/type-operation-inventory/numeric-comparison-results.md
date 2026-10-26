@@ -65,3 +65,16 @@ calibration expose both; after repair59 focused shared/actual AST/Phase0/calibra
 assertions pass. Seven ordinary outer rows intentionally update to0x/1x/read-once;
 deferred and unknown-tail controls retain null/no-effects. Direct lexical/syntax
 checks pass; other backends and full domain/context/portable admission remain.
+
+## Bounded Rust implementation
+
+23.3.15.2 independently confirms numeric1/0/strict-domain producers, free aliases,
+nested SOC snapshots and numeric selector kinds on native/restored/plan. The
+shared fixture/probe uses canonical -0.5 numeric literal beside String"-.5";
+initial unsupported bare-.5 spelling was setup, not numeric producer RED.
+Terminal fences and missing common one-RHS preflight explain shared null/SO/
+twelve-effect RED. Comparisons now use existing scalar result/selected-value
+handoff; obsolete Terminal state is removed. Dynamic bridges and actual source
+captures remain correct. Eight focused numeric/direct/named-calibration Rust
+tests and twelve shared Perl assertions pass with compilation/rustfmt. Actual
+old integration expectation intentionally becomes[2,1]; full admission stays23.4.

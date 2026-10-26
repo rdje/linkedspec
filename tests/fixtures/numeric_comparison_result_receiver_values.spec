@@ -4,7 +4,7 @@ Top:: I {
  positive=[score.eq(2).cat("!"),score.ne(3).cat("!"),score.gt(1).cat("!"),score.ge(2).cat("!"),score.lt(3).cat("!"),score.le(2).cat("!")];negative=[score.eq(3).cat("!"),score.ne(2).cat("!"),score.gt(3).cat("!"),score.ge(3).cat("!"),score.lt(1).cat("!"),score.le(1).cat("!")];raw=[num_eq(score,2),num_ne(score,3),num_gt(score,1),num_ge(score,2),num_lt(score,3),num_le(score,2),num_eq(score,3),num_ne(score,2),num_gt(score,3),num_ge(score,3),num_lt(score,1),num_le(score,1)];
  nested=[cat(num_eq(2,2),"!"),cat(coalesce_nonempty(num_eq(2,3),"late"),"!"),num_add(num_eq(2,3),2),uppercase(last(split(cat(num_eq(2,2),",x"),",")))];
  numeric=[score.eq(2).add(2),score.eq(3).add(2),score.eq(2).eq(1).cat("!")];
- boundaries=["02".eq(2).cat("!"),"-.5".eq(-.5).cat("!"),0.eq(0).cat("!"),"2".gt("10").cat("!")];
+ boundaries=["02".eq(2).cat("!"),"-.5".eq(-0.5).cat("!"),0.eq(0).cat("!"),"2".gt("10").cat("!")];
  invalid=[undef.eq(0),true.eq(1),false.eq(0),"".eq(0),"x".eq(0),[].eq(0),{}.eq(0),2.eq(undef),2.eq(true),2.eq(false),2.eq("x")];
  defaults=["x".eq(2).coalesce_nonempty(7).add(1),undef.eq(0).is_undefined().cat("!")];
  selected=[2].first().eq(2).cat("!");pipeline=3.5.floor().sub(1).eq(2).cat("!");from_hash=meta.sorted_values().first().eq(2).cat("!");from_function=numeric_comparison_score().eq(2).cat("!");from_default=undef.coalesce_nonempty(2).eq(2).cat("!");from_count=["a","b"].count().eq(2).cat("!");from_length="aa".length().eq(2).cat("!");from_sum=[1,1].sum().eq(2).cat("!");from_join=["0","2"].join_values("").eq(2).cat("!");from_split="2,x".split(",").first().eq(2).cat("!");

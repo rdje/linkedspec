@@ -12,7 +12,7 @@ answers:
   - "is declare a number receiver method"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.4"
 date: 2026-10-26
-status: Perl comparison results implemented; other backends pending
+status: Perl/Rust comparison results implemented; Dart/Julia/Lua pending
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "SPEC-FORMAT-TERSE2.3.5.4 arithmetic; scalar_numeric_contract.json; TYPE23.2.15 public native/fresh/substitution and numeric-comparison-results.md."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_numeric_comparison_results.pl"
@@ -25,17 +25,17 @@ numbers/untrimmed decimal Strings and rejects Bool/null/containers/bad inputs.
 Comparison free functions return numeric1/0 or null, require two operands;
 short eq/ne/gt/ge/lt/le receiver methods supply the first from their source.
 
-TYPE23.2.15 freezes short comparison continuation as a new feature. Perl15.1
-now uses scalar_result in MethodLowering, with shared Array handoff after split
-and six numeric comparison handoffs from String prefixes. Family-only repair
-exposed raw bridge .eq/.gt compile residue; public dump located the missing
-Number->Array and String->numeric dispatch.59 shared/actual AST/Phase0/outer-
-calibration assertions pass native/fresh after RED, preserving numeric1/0,
-invalid-null/decimal rules, first source/SOC/once-only and defaults/bridges.
-Numeric flags remain valid Array write indexes; malformed shapes skip effects.
-Seven ordinary outer rows now0x/1x/read-once; deferred and unknown-tail boundaries
-stay unchanged. Rust15.2 then Dart/Julia/Lua need independent controls; full
-admission stays23.4. Canonical num_* method names are not added by this scope.
+TYPE23.2.15 freezes short comparison continuation. Perl15.1 uses scalar_result,
+Number->Array dispatch after split and String-prefix numeric handoff; raw .eq/.gt
+residue exposed missing bridges.59 shared/actual AST/Phase0/outer assertions pass;
+seven outer rows become0x/1x/read-once, deferred/unknown-tail boundaries unchanged.
+Rust15.2 removes dynamic/Number-loop terminal fences, uses shared scalar result
+handoff and one-RHS preflight; eight numeric/direct/calibration tests pass native/
+restored/plan after null/SO/twelve-effect RED. Producers retain numeric1/0/strict
+invalid-null; source/SOC/once-only, default8/bridges and Array index kinds pass.
+Canonical -0.5 literal replaces setup bare-.5, retaining String"-.5" control;
+twelve shared Perl assertions pass. Dart/Julia/Lua need independent controls;
+full admission23.4 separate. Canonical num_* method names are outside this scope.
 
 Array reducers have their own current result/arity contract:
 [[terse-array-numeric-reducer-receiver-methods]]. Statement/lifecycle declare is

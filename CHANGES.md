@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.15.2 — continue Rust numeric comparison results
+
+Rust six short numeric comparison results now feed shared scalar-result continuation, preserving contracted numeric1/0/strict invalid-null and source captures. Common one-RHS preflight rejects malformed shapes before effects; obsolete terminal fences/state are removed. Eight focused native/restored/plan/direct/named-calibration tests pass after continuation/shape RED, including numeric/default/String/Array/selector consumers and SOC snapshots. Canonical -0.5 literal corrects fixture setup while retaining String"-.5" control; twelve shared Perl assertions pass. Book/facts/live align; Dart15.3 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.15.1 — continue Perl numeric comparison results
 
 Perl six short numeric comparison results now use scalar_result, preserving strict numeric1/0/invalid-null and one-RHS preflight. Shared native/fresh source/kind/false/default/numeric/String/Array/shape and selector checks pass after RED. Public dump exposed Number-to-Array and String-prefix-to-numeric handoff gaps; scoped shared dispatch fixes both.59 focused assertions including actual touched AST/Phase0 cases and updated ordinary callable rows pass; deferred/unknown-tail boundaries remain. Direct lexical/syntax and book/history/continuity checks align; Rust15.2 next, full admission separate.

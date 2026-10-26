@@ -5964,7 +5964,8 @@ impl Engine {
                     | "is_undefined" => !call.args.is_empty(),
                     "join_values" | "contains" | "index_of" | "has_key" | "starts_with"
                     | "ends_with" | "contains_substr" | "matches" | "str_eq" | "str_ne"
-                    | "str_gt" | "str_ge" | "str_lt" | "str_le" => call.args.len() != 1,
+                    | "str_gt" | "str_ge" | "str_lt" | "str_le" | "eq" | "ne" | "gt" | "ge"
+                    | "lt" | "le" => call.args.len() != 1,
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -6533,7 +6534,7 @@ impl Engine {
 
     fn is_number_receiver_value_chain_method(method: &str) -> bool {
         Self::is_number_receiver_number_returning_method(method)
-            || Self::is_number_receiver_terminal_method(method)
+            || Self::is_number_receiver_comparison_method(method)
     }
 
     fn is_number_receiver_number_returning_method(method: &str) -> bool {
@@ -6554,7 +6555,7 @@ impl Engine {
         )
     }
 
-    fn is_number_receiver_terminal_method(method: &str) -> bool {
+    fn is_number_receiver_comparison_method(method: &str) -> bool {
         matches!(method, "eq" | "ne" | "gt" | "ge" | "lt" | "le")
     }
 
@@ -7426,7 +7427,7 @@ impl Engine {
         &self,
         current: RuntimeValue,
         call: &linkedspec_core::expr::FluentCall,
-        is_last: bool,
+        _is_last: bool,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
@@ -7464,9 +7465,6 @@ impl Engine {
 
         let next =
             self.call_helper_with_args(helper_name, &raw_args, &evaluated, ctx, rule_label)?;
-        if Self::is_number_receiver_terminal_method(&call.method) && !is_last {
-            return Ok(RuntimeValue::Undef);
-        }
         Ok(next)
     }
 
@@ -7509,7 +7507,7 @@ impl Engine {
                 | "str_ge"
                 | "str_lt"
                 | "str_le"
-        )
+        ) || Self::is_number_receiver_comparison_method(method)
     }
 
     // Producer continuations consume the actual result value
@@ -7927,24 +7925,16 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         use linkedspec_core::expr::{Arg, Expr};
 
-        #[derive(Clone, Copy, Eq, PartialEq)]
-        enum ReceiverFamily {
-            Number,
-            Terminal,
-        }
-
         let mut current = self.eval_expr(receiver, ctx, rule_label)?;
-        let mut family = ReceiverFamily::Number;
 
         for (index, call) in calls.iter().enumerate() {
-            if family == ReceiverFamily::Terminal {
-                return Ok(RuntimeValue::Undef);
-            }
-            if Self::is_generic_receiver_predicate(&call.method) {
+            if Self::is_generic_receiver_predicate(&call.method)
+                || Self::is_number_receiver_comparison_method(&call.method)
+            {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
-                    false,
+                    Self::is_number_receiver_comparison_method(&call.method),
                     ctx,
                     rule_label,
                 );
@@ -7955,9 +7945,7 @@ impl Engine {
 
             let valid_arity = match call.method.as_str() {
                 "abs" | "floor" | "ceil" | "round" => call.args.is_empty(),
-                "sub" | "div" | "mod" | "eq" | "ne" | "gt" | "ge" | "lt" | "le" => {
-                    call.args.len() == 1
-                }
+                "sub" | "div" | "mod" => call.args.len() == 1,
                 "clamp" => call.args.len() == 2,
                 "add" | "mul" | "min" | "max" => !call.args.is_empty(),
                 _ => false,
@@ -7985,14 +7973,6 @@ impl Engine {
 
             current =
                 self.call_helper_with_args(helper_name, &raw_args, &evaluated, ctx, rule_label)?;
-            if Self::is_number_receiver_terminal_method(&call.method) {
-                if index + 1 != calls.len() {
-                    return Ok(RuntimeValue::Undef);
-                }
-                family = ReceiverFamily::Terminal;
-            } else {
-                family = ReceiverFamily::Number;
-            }
         }
 
         Ok(current)
