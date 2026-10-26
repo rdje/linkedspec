@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.15.3 — guard Dart numeric comparison result flow
+
+Dart canonical numeric comparison producers and valid inter-type continuations already work. A shared private six-name set now supplies one-RHS and scalar-result guards, repairing incompatible Array[] fallback and24 malformed effects while preserving numeric1/0/strict invalid-null, aliases, source SOC and selector kinds. Six focused native/restored/plan numeric/direct lexical/aggregate tests, compilation, format and fatal analysis pass after guard RED. Book/facts/live/task align; Julia15.4 independent assessment next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.15.2 — continue Rust numeric comparison results
 
 Rust six short numeric comparison results now feed shared scalar-result continuation, preserving contracted numeric1/0/strict invalid-null and source captures. Common one-RHS preflight rejects malformed shapes before effects; obsolete terminal fences/state are removed. Eight focused native/restored/plan/direct/named-calibration tests pass after continuation/shape RED, including numeric/default/String/Array/selector consumers and SOC snapshots. Canonical -0.5 literal corrects fixture setup while retaining String"-.5" control; twelve shared Perl assertions pass. Book/facts/live align; Dart15.3 next, full admission separate.

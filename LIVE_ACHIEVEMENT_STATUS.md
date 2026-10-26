@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
+Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
 
 ## Latest Completed Slice
 
-Rust six short numeric comparison results now feed shared scalar-result continuation, preserving contracted numeric1/0/strict invalid-null and source captures. Common one-RHS preflight rejects malformed shapes before effects; obsolete terminal fences/state are removed. Eight focused native/restored/plan/direct/named-calibration tests pass after continuation/shape RED, including numeric/default/String/Array/selector consumers and SOC snapshots. Canonical -0.5 literal corrects fixture setup while retaining String"-.5" control; twelve shared Perl assertions pass. Book/facts/live align; Dart15.3 next, full admission separate.
+Dart canonical numeric comparison producers and valid inter-type continuations already work. A shared private six-name set now supplies one-RHS and scalar-result guards, repairing incompatible Array[] fallback and24 malformed effects while preserving numeric1/0/strict invalid-null, aliases, source SOC and selector kinds. Six focused native/restored/plan numeric/direct lexical/aggregate tests, compilation, format and fatal analysis pass after guard RED. Book/facts/live/task align; Julia15.4 independent assessment next, full admission separate.
 
 ## Next Action
 
-Independently assess Dart scalar-numeric-v1 free producers/aliases and six short comparison result/shape/bridge transitions under15.3. Reuse shared numeric_comparison_result_receiver_values only after producer confirmation, retain actual numeric1/0/strict invalid-null/free signatures/source snapshots. Intentionally update any actual old terminal calibrations. Native/restored/plan and small direct compile/format/fatal-analysis/docs/commit; then Julia15.4 and safe Lua15.5. No full suite/matrix now.
+Independently assess Julia scalar-numeric-v1 free producers/aliases and six short comparison result/shape/bridge transitions under15.4. Reuse shared numeric_comparison_result_receiver_values after producer confirmation, require explicit Number and not Bool checks for raw flags/aliases, preserve strict invalid-null/free signatures/source snapshots. Native/plan/fresh small direct checks/strict compilation/docs/commit, then safe Lua15.5. No full suite/matrix now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` — Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` — Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
@@ -29,7 +30,6 @@ Independently assess Dart scalar-numeric-v1 free producers/aliases and six short
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.3` — Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` — Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 
 ## History
 

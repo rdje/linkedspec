@@ -12,13 +12,19 @@ answers:
 date: 2026-10-26
 status: current
 tags: [dart, runtime, helpers, string, numeric, DART-BACKEND-PARITY]
-evidence: "String/numeric4.3.2; generic definedness23.3.11.3 focused native/restored/plan/direct proof. Historical method lists/replays at Git01e9d8aae02e76ead8575468c743490a431926a7 for this path."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/definedness_result_receivers_test.dart test/string_predicate_result_receivers_test.dart"
+evidence: "String/numeric4.3.2; definedness11.3 and numeric comparison15.3 focused proof. Prior full fact/11.3 detail and historical-list pointer at Git82635ca70466e0d475c31597c378a1bb2c7c2248."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/numeric_comparison_results_test.dart test/string_comparison_result_receivers_test.dart"
 ---
 
 Dart's interpreter.dart canonicalActionHelperName dispatch shares implementations across helper/receiver/word/symbol forms. Pure strings cover cat, trim/case/length/substr, literal/regex predicates, replacement/removal/split, coalescing and generic definedness/emptiness; lexical str_* remain distinct. Numeric arithmetic/rounding/reducer/clamp/comparison aliases use the same dispatcher. Compatible raw.trim().lowercase() and score.abs().ceil() compose. Array/Hash breadth: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]]. Detailed historical lists/commands/related pointers remain at the Git record above.
 
-23.3.11.3 adds is_defined/is_undefined to scalar-result and zero-operand lists only. Baseline valid flow, Bool/text/default/literal controls and1!/SC/one-call/final-null snapshot already pass; container[] and four malformed effects fail. Native/restored/plan shared and free producer controls plus direct String tests/fatal selected-file analysis pass after guards. Bool false renders0! and stays present through coalesce_nonempty, preserving source/copy/domain/producer semantics. No new methods/type/schema or full admission; backend progress is task-owned.
+Definedness11.3 retains Bool/false0!/SC snapshots with zero-operand/scalar guards;
+prior generic container[]/four-effect failure and full detail are at the Git
+pointer above. Numeric comparison15.3 shares a canonical six-name set between
+one-RHS and scalar guards: producer/valid native-restored-plan flow already works,
+while scalar Array[]/24 malformed effects now reject correctly. Six numeric/
+direct tests and fatal analysis pass; raw numeric1/0/strict invalid-null, aliases,
+source SOC/copy and numeric selector kinds remain. Full admission stays open.
 
 ## 2026-09-09 — large values, Unicode ordering and substring bounds
 

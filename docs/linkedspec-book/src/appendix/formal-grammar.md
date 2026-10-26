@@ -1059,7 +1059,7 @@ ge(a, b), lt(a, b), le(a, b)             — aliases for num_ge/num_lt/num_le
 >=(a, b), <(a, b), <=(a, b)              — aliases for num_ge/num_lt/num_le
 
 number_expr.abs().ceil().add(n).mul(n)  — receiver-dot number helper chain
-number_expr.gt(n)                       — numeric comparison; ordinary Perl/Rust results support compatible scalar/explicit-container continuations
+number_expr.gt(n)                       — numeric comparison; ordinary Perl/Rust/Dart results support compatible scalar/explicit-container continuations
 ```
 
 The terse function aliases above are ordinary calls, not infix operators, so

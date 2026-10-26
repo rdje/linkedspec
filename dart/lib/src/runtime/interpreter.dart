@@ -3721,7 +3721,8 @@ final class LinkedSpecRuntimeEngine {
               helper == 'str_gt' ||
               helper == 'str_ge' ||
               helper == 'str_lt' ||
-              helper == 'str_le') {
+              helper == 'str_le' ||
+              _numericComparisonHelperNames.contains(helper)) {
             return call.args.length != 1;
           }
           return (helper == 'first' ||
@@ -5132,6 +5133,7 @@ final class LinkedSpecRuntimeEngine {
           helper == 'str_ge' ||
           helper == 'str_lt' ||
           helper == 'str_le' ||
+          _numericComparisonHelperNames.contains(helper) ||
           helper == 'is_empty' ||
           helper == 'is_nonempty' ||
           helper == 'is_defined' ||
@@ -6897,6 +6899,15 @@ const _runtimePureHelperNames = <String>{
   'substr',
   'trim',
   'uppercase',
+};
+
+const _numericComparisonHelperNames = <String>{
+  'num_eq',
+  'num_ne',
+  'num_gt',
+  'num_ge',
+  'num_lt',
+  'num_le',
 };
 
 const _numericAggregateHelperNames = <String>{

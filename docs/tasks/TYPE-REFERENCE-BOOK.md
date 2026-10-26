@@ -3318,10 +3318,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.2 - continue Rust numeric comparison results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Dart ordinary numeric comparison result continuations.
   Dependencies: .23.3.15.2.
   Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `82635ca70466e0d475c31597c378a1bb2c7c2248`; Rust comparison result child committed, brief0/tree clean.
+  Owned paths: Dart confirmed numeric comparison result/shape guard gaps, native/restored/plan producer/shared/selector tests and synchronized book/facts/task/live docs. Preserve numeric adapters/domains/free signatures/source behavior and existing aliases.
+  Verification tier: `focused`
+  Focused checks: Producer-first native/restored/plan controls and shared RED/GREEN, direct lexical/aggregate result checks, format/fatal analysis and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary result implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls; no population/completeness measurement.
+
+  Completion: Share a private six-name canonical numeric comparison set between one-RHS preflight and possible scalar-result classification. Existing dynamic result/alias/producer dispatch already works; guard boundaries by actual result and reject bad shapes before effects.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent native/restored/plan free canonical/word/symbol producers, strict numeric domains, nested SOC/source snapshot and numeric selector control pass before production. Shared native valid continuations/bridges/defaults/SOC already work; scalar incompatible/after-text results are[] and twelve bad shapes run24 effects instead of null/zero effects.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart common ActionFluentChainExpr preflight omits canonical num_eq/ne/gt/ge/lt/le; _evaluateFluentCallsWithValue mayProduceScalar omits them too. NumericCompare already returns numeric1/0/invalid-null with correct conversion; no producer or source defect inferred.
+  - [x] FIX: Add private _numericComparisonHelperNames set used by both guards. Preserve every helper/alias conversion, shape-independent domain policy, raw kinds and current valid flows; no parser/schema/free signatures/arithmetic or calibration expectation change.
+  - [x] ADDRESSED (verified): Native/restored/plan shared six pairs/raw Number flags/strict invalid/decimal inputs, source families, false/default8/generic/numeric/selector and repeated-comparison consumers, String/Array bridgesX and scalar negatives pass. Valid/invalid-source SOC/once-only/final snapshots stay correct; twelve malformed no-effects now pass.
+  - [x] NO REGRESSION: Six tests across new numeric producer/shared/selector and direct lexical/aggregate result fixtures pass with compilation/format/fatal selected-file analysis. No full suite, new canonical method surface or complete domain/context/portable admission.
+  - [x] LOCKSTEP: New retained shared-reference consumer, frozen contract progress, scoped guide/catalog/grammar and canonical number/Dart numeric facts/map, TYPE/live/resume align. Relevant Dart fact compacts the prior full generic guard record behind exact Git pointer; no budget increase or unrelated cleanup. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Julia15.4 independent assessment next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.3 - guard Dart numeric comparison result flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.4`
   Status: `pending`
@@ -3432,7 +3449,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` | `pending` | Independently assess and implement Dart numeric comparison result continuation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` | `pending` | Independently assess and implement Julia numeric comparison result continuation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

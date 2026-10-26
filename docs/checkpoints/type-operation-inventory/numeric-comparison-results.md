@@ -78,3 +78,14 @@ handoff; obsolete Terminal state is removed. Dynamic bridges and actual source
 captures remain correct. Eight focused numeric/direct/named-calibration Rust
 tests and twelve shared Perl assertions pass with compilation/rustfmt. Actual
 old integration expectation intentionally becomes[2,1]; full admission stays23.4.
+
+## Bounded Dart implementation
+
+23.3.15.3 independently confirms native/restored/plan numeric1/0/strict-domain
+producers, free aliases, nested SOC and numeric selector kinds. Valid shared
+continuations/bridges/defaults/source captures already work; only scalar Array[]
+boundaries and24 malformed effects fail. A private canonical six-name set now
+feeds common one-RHS and mayProduceScalar guards. Six focused numeric/direct
+lexical/aggregate tests and fatal analysis/format pass after guard RED. Numeric
+adapters/domains/free signatures and current alias surfaces stay unchanged;
+Julia15.4 and complete domain/context/portable admission remain separate.
