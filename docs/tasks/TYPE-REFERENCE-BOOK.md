@@ -1225,12 +1225,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.12 - preserve Dart extended regex modes and helper failures`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.13`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess ordinary Array contains result handoff and compatible scalar/generic/explicit-container consumers.
   Dependencies: .23.2.12 and immediate grouped-invalid operand repair23.3.10.7 committed cleanly.
   Scope: Read membership/equality/element/needle contract and actual producers before classification; preserve source snapshots/result kinds and all published domains. Reconcile FUTURE-PARITY-BACKLOG.5's known missing-needle and punctuation-light twins explicitly before any receiver-arity change. No missing-needle/equality normalization inferred from prior index/has_key families.
   Acceptance: Retained public native/generated producer/fluent/nested/source/effect distinctions; freeze only observed-authorized ordinary result/shape transition and schedule independent backend children. Small compile/direct checks/docs/commit, full domain/portable admission separate. No current consumer failure or uniform terminal behavior claimed before assessment.
   Planned verification tier: focused; declare proof/no-measurement rationale at activation.
+
+  Activation: clean `39d8f85ebe9f954bc716d083083850604624e86f`; grouped scanner committed/brief0/tree clean.
+  Owned paths: Public Perl producer/fluent/nested/source/arity controls and generated-source mechanism; frozen ordinary contains result transition and explicitly reconciled FUTURE5 required-needle/punctuation-light policy, backend child ownership/docs. No runtime changes in assessment.
+  Verification tier: `focused`
+  Focused checks: Retained public LinkedSpec::Get/substitution/dump_parser_source/native/fresh controls and canonical membership/signature/arity owners, small syntax/doc/book/history/final staged continuity checks.
+  Canonical trigger: None for bounded assessment/freeze under director feature-first phase; complete domains/context/portable admission23.4 separate.
+  Claim verification: none: normative bounded contract and authored public distinction, no quantified population/completeness measurement.
+
+  Decision: Existing canonical contains function arity[2,2] and one authored receiver needle remain authority. Activate FUTURE-PARITY-BACKLOG.5.6 for bounded required-receiver-arity normalization coordinated by implementations23.3.13.1-.5: missing/extra ordinary receiver operands become null before effects, both bare/parenthesized missing forms identical. Free helper signatures, equality/null/empty/kinds and other helper caveats are unchanged. This intentionally replaces four-backend missing-needle0 drift; update each affected named calibration test in its backend slice.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Perl native/fresh free membership returns numeric[1,0,0,1,0,0,1,1,1] for hit/miss/empty/null-distinct/zero/false controls; nested cat1! works. Ordinary result chains return null (positive lowers return undef), including selected/bridge/generic; fluent blocks are wholly skipped. Native/fresh nested producer/consumer already yields1!/SOC/final-null, null-source0/SO, named-source snapshot1/O/[z]. Preserve those producers/snapshots.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering.pm array_chain_return_family omits contains and marks it terminal; global one-operand preflight omits it too. Public substitution direct missing/extra returns unsupported-helper undef before effects, but nested Array elements emit raw items.contains() and fail undefined host contains. Both bare/parenthesized nested forms do this, so no alias-only divergence is inferred.
+  - [x] FIX: Freeze contains-results.md and schedule five independent backend children. Activate original FUTURE5 required-needle owner as5.6; coordinate exact aliases, source/effect and named calibration changes before any production arity normalization. Perl child owns malformed nested host-call leak immediately.
+  - [x] ADDRESSED (verified): Retained public Get/substitution/native/fresh probe distinguishes raw producer kind, helper/result dispatch, source snapshots and direct-versus-nested malformed boundaries. No runtime repair or other-backend result-kind measurement claimed by this assessment.
+  - [x] NO REGRESSION: No runtime edits; probe syntax, book/history/diff/final staged memory/cadence/diagnosis checked. Full equality/domain/function-arity/portable admission and unrelated FUTURE5 caveats stay with existing owners.
+  - [x] LOCKSTEP: Frozen contract/retained probe, current nested book examples, new canonical contains fact and qualified arity history/map align with TYPE/FUTURE5.6/index/live/resume. Perl23.3.13.1 follows clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.13 - freeze Array contains result transitions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -2913,6 +2930,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Contract/book six examples/support and actual kind/null qualifications, canonical comparison fact/map and task/live/resume align. Qualify obsolete July Lua76/76 closeout as historical, preserving exact old record in Git; it is not current completeness or frontier. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Residual Dart mode assessment23.2.12 next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.12.5 - continue Lua String comparison result receivers`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13`
+  Status: `active` / bounded contains rollout; full admission23.4 separate
+  Goal: Ordinary contains receiver/result handoff and coordinated required-needle guards under contains-results.md and FUTURE-PARITY-BACKLOG.5.6.
+  Children: `.23.3.13.1`, `.23.3.13.2`, `.23.3.13.3`, `.23.3.13.4`, `.23.3.13.5`.
+  Acceptance: Independently preserve actual producer kinds/equality/null/empty/source snapshots; implement compatible scalar/generic/explicit-container flow and one authored needle before effects. Normalize old four-backend missing-needle0 only under activated original owner5.6; update named punctuation-light tests and preserve both zero-argument twins. No free helper/equality/full-domain/deferred/portable admission inference.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.1`
+  Status: `pending`
+  Goal: Independently assess and implement Perl ordinary Array contains result handoff and required-needle guards.
+  Dependencies: .23.2.13; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
+  Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
+  Immediate defect: Malformed contains nested in an Array currently emits raw items.contains() and fails an undefined host subroutine on native/fresh; eliminate this fallthrough with guard before effects. Valid free/nested/named source snapshots already work.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.2`
+  Status: `pending`
+  Goal: Independently assess and implement Rust ordinary Array contains result handoff and required-needle guards.
+  Dependencies: .23.3.13.1; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
+  Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.3`
+  Status: `pending`
+  Goal: Independently assess and implement Dart ordinary Array contains result handoff and required-needle guards.
+  Dependencies: .23.3.13.2; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
+  Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.4`
+  Status: `pending`
+  Goal: Independently assess and implement Julia ordinary Array contains result handoff and required-needle guards.
+  Dependencies: .23.3.13.3; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
+  Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.13.5`
+  Status: `pending`
+  Goal: Independently assess and implement Lua ordinary Array contains result handoff and required-needle guards.
+  Dependencies: .23.3.13.4; coordinate original arity owner FUTURE-PARITY-BACKLOG.5.6.
+  Acceptance: Frozen contains-results.md through public native/generated routes; actual kinds/equality/null/empty/source/eager snapshots unchanged. Hit/miss/false-retention/generic/bridge/scalar guards, source families and missing/extra no-effects, with both bare/parenthesized zero-arg aliases; update actual named calibration expectation after normalization. Small compile/direct checks/docs/commit; full domains/free signatures/portable admission and Lua declared5.4 remain separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`; remaining admission leaves split at activation.
@@ -3010,7 +3064,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.13` | `pending` | Assess Array contains result handoff and reconcile existing membership/arity policies. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` | `pending` | Implement Perl contains result/shape flow; original arity normalization is activated as FUTURE5.6. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

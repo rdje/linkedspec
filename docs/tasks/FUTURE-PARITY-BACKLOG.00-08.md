@@ -2105,7 +2105,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.5`
   Status: `active`
   Goal: Normalize or permanently document helper caveats.
-  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`
+  Children: `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`, `.5.6`
   Acceptance: Own the array split/pipeline return-shape caveats (`SPEC-LANG-REFERENCE.5.3.1`) and
     odd-arity `hash(...)` behavior (`SPEC-LANG-REFERENCE.5.4.1`) as explicit keep-or-normalize decisions; also
     reconcile direct/constructor-context and arity drift for `flat`, `flat_array`, and `concat_arrays`: Perl
@@ -2161,6 +2161,8 @@
     Finish with backend locks and mdBook/KM updates rather than silently selecting one host's behavior.
   Verification: `pending`
   Commit: `pending`
+
+  Required receiver-arity execution: .5.6 is activated by TYPE23.2.13; five bounded contains implementation children23.3.13.1-.5 own native/generated missing/extra no-effect and punctuation-light twin locks. This changes only receiver contains shape, preserving free helper signatures/equality and other caveats.
 
 - ID: `FUTURE-PARITY-BACKLOG.5.1`
   Status: `done`
@@ -3280,6 +3282,20 @@
   - [x] **LOCKSTEP** — Remove the temporary dynamic-statement limitation from book/fact; map/indexed/live handoff agree. Retained numeric-kind feature5.4.4 is next; inventory remains open.
   Harness correction: The first wrong-target assertion stringified the structured last_error hash. Use its established detail field; the corrected pre-repair vector is RED on the actual two value assertions and the preexisting wrong-target control passes. No product-defect credit for that assertion setup error.
   Commit: `FUTURE-PARITY-BACKLOG.5.5.2 - evaluate standalone split_each delimiters`.
+
+- ID: `FUTURE-PARITY-BACKLOG.5.6`
+  Status: `active` / coordinated bounded implementation
+  Goal: Normalize ordinary contains required receiver arity to canonical function[2,2], one authored needle.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.23.2.13 frozen contract; implementations TYPE23.3.13.1-.5 in order.
+  Authority: Existing helper signature and punctuation_light_zero_arg_contract.json method_contract_cases prescribe one required authored operand and identical rejection for bare and parenthesized zero-argument forms. Perl direct ordinary missing/extra already returns undef before effects. Rust/Dart/Julia/Lua prior missing-needle numeric0 is explicitly replaced by null/no-effects, with actual named calibration tests updated per backend commit.
+  Scope: Receiver contains only; preserve free helper arities, membership equality/kinds/null/empty semantics and all unrelated constructor/control/copy caveats. Perl nested malformed host-call fallthrough is fixed by TYPE23.3.13.1 as part of the guard.
+  Acceptance: All five ordinary backends enforce one needle before source/operand effects, identical bare/parenthesized missing results, direct/native/generated controls, compatible result handoff and synchronized book/fact/calibration teaching. Complete domain/portable admission remains TYPE23.4.
+  Planned verification tier: `focused`
+  Planned focused checks: Delegated per-backend public native/generated required-needle/twin/no-effect and direct punctuation-light calibration checks; small compile/docs/commit. No broad gate per ordinary slice.
+  Planned canonical trigger: None for existing bounded receiver signature repair under director feature-first phase; final admission/push separate.
+  Planned claim verification: none: existing signature and deterministic authored regression contract, no population/completeness measurement.
+  Verification: `pending`; no producer/arity repair claimed by activation.
+  Commit: `pending`; five implementation commits own actual repairs.
 
 - ID: `FUTURE-PARITY-BACKLOG.6`
   Status: `pending`

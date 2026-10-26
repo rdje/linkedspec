@@ -766,7 +766,7 @@ dispatch rule.
 
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
-- **Returns**: boolean
+- **Returns**: boolean; the current Perl producer uses numeric1/0. Nested compatible consumers work: `cat(contains(["a"],"a"),"!")` gives `"1!"`, and `cat(coalesce_nonempty(contains(["a"],"z"),"late"),"!")` gives `"0!"`. Ordinary fluent result counterparts are being implemented; use the nested forms until the backend-specific handoff is admitted.
 - **Behavior**: Returns true if the array contains the needle value. Works on direct arrays and projected expressions (`sorted_keys(...)`, `sorted_values(...)`).
 - **Edge cases**: Returns false for non-array or undef input.
 

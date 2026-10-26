@@ -11,52 +11,17 @@ answers:
   - "why does Dart contains without a needle return zero"
   - "why does Julia contains without a needle return zero"
   - "why does Lua contains without a needle return zero"
-date: 2026-07-13
-status: confirmed
+date: 2026-10-26
+status: reference arity confirmed; four-backend normalization5.6 active
 tags: [dsl, actionir, receiver, arity, contract, perl-reference, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.16.2.0 used LinkedSpec::call_spec_handler_subst plus perl/LinkedSpec/ActionIR/MethodLowering.pm's canonical %ast_aggregate_call_arity table. Function-form drop_front is [1,2], so its implicit receiver leaves zero or one authored arguments and values.drop_front() validly drops one. Function-form contains is [2,2], so its implicit receiver leaves exactly one authored argument and values.contains() takes the established Perl unsupported-helper rejection path. FUTURE-PARITY-BACKLOG.16.3 then proved pre-existing Rust drift: validation recognizes contains but does not enforce arity, and engine.rs defaults args[1] to empty text, so both values.contains and values.contains() return numeric 0 for [a,b]. FUTURE-PARITY-BACKLOG.16.4 proves Dart's _callArrayContains also returns numeric 0 when fewer than two values arrive; .16.5 proves Julia's _call_runtime_array_contains does the same; .16.6 proves Lua's pure array helper also returns 0 when values[2] is absent. Each syntax alias correctly preserves its parenthesized twin; FUTURE-PARITY-BACKLOG.5 owns helper normalization."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(values.drop_front())},q{return(values.contains())}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$s),qq{\\n} }' && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test punctuation_light_zero_arg_contract terminal_alias_preserves_existing_rust_method_resolution && (cd dart && bash ../tools/run_dart_project_data.sh test test/punctuation_light_zero_arg_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")' && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py"
+evidence: "July13 canonical function arity and alias calibration; exact prior multi-backend and September reading records at Git39d8f85ebe9f954bc716d083083850604624e86f for this path. TYPE23.2.13 activates FUTURE5.6 normalization."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl missing"
 ---
 
-# Receiver arity calibration
+A final .method supplies zero authored arguments, exactly like .method(). Subtract the implicit receiver from function arity: drop_front[1,2] allows0/1 authored arguments; contains[2,2] requires1. The punctuation-light contract never changes helper arity.
 
-Receiver methods consume the value to the left of the dot as an implicit first helper argument. Therefore the
-authored receiver arity is the canonical function-form arity minus that receiver slot.
+July calibration found direct Perl contains missing rejection (undef) versus numeric0 on Rust/Dart/Julia/Lua; both spellings preserved each host’s existing result. Those historical observations, test/reconstruction limits and exact commands remain at the Git pointer above; they are not a new type/arity policy.
 
-- `drop_front(array_expr[, count])` has function arity `[1,2]`, so `.drop_front()` is valid and defaults to one.
-- `contains(array_expr, value)` has function arity `[2,2]`, so `.contains()` is missing one authored argument.
+TYPE23.2.13 now explicitly activates original owner FUTURE-PARITY-BACKLOG.5.6: ordinary receiver contains missing/extra operands return null before effects, both missing aliases identical. TYPE23.3.13.1-.5 implement independently and update each backend’s actual named calibration expectation. Free helper signatures and membership equality/kinds stay unchanged. Native/fresh Perl direct aliases already return null, while nested Array aliases both leak raw items.contains() and fail; immediate Perl1 owns that malformed fallthrough. No four-backend repair is claimed by activation alone.
 
-The punctuation-light rule remains unchanged: a final `.method` supplies zero authored arguments and must behave
-exactly like `.method()`. The neutral contract uses `contains` only because it is a truthful required-argument
-example on the Perl reference; it does not add or remove a helper. Rust currently substitutes empty text when the
-second argument is absent, while Dart's `_callArrayContains`, Julia's `_call_runtime_array_contains`, and Lua's
-pure array helper return `0` when fewer than two values arrive. Thus `.contains()` returns `0` on all four
-non-reference backends for this case. Those pre-existing semantic differences are owned by
-`FUTURE-PARITY-BACKLOG.5`; the punctuation-light spelling preserves it rather than silently changing the helper.
-
-## Links
-
-- Contract: `capability_conformance/punctuation_light_zero_arg_contract.json`
-- Perl arity owner: `perl/LinkedSpec/ActionIR/MethodLowering.pm`
-- Dart runtime owner: `dart/lib/src/runtime/interpreter.dart`
-- Julia runtime owner: `julia/src/runtime/Interpreter.jl`
-- Lua runtime owner: `lua/src/linkedspec/interpreter.lua`
-- Tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md`, leaf `.16.2.0`
-- Related: [[punctuation-light-zero-argument-calls]]
-
-## September 8 Rust consumer reading
-
-Startup `.3.3.57` reads all 226 lines / 8,062 baseline-identical bytes. The named resolution test
-explicitly compares bare and parenthesized contains results and requires numeric zero; it does not
-claim the Perl-reference arity defect is fixed. The consumer also executes a generated plan and
-inspects emitted source, without compiling a standalone emitted child. No native test is rerun by
-this reading checkpoint; FUTURE-PARITY-BACKLOG.5 remains the existing helper-normalization owner.
-
-## September 10 Dart consumer reading
-
-`DART-STARTUP-READING.1.42` reads all 188 Dart consumer lines; its five tests pass within
-the selected 39-test suite. Standalone/terminal aliases compare typed semantic ASTs after
-removing source metadata, retain identifiers and reject excluded forms. Both missing-needle
-contains spellings are explicitly required to return zero; backlog .5 remains the repair
-owner. Native/generated-plan execution and reconstruction of emitted base64 state pass.
-This consumer does not independently analyze or execute emitted source, or invoke the CLI.
+Authorities: capability_conformance/punctuation_light_zero_arg_contract.json; perl/LinkedSpec/ActionIR/MethodLowering.pm; [[array-contains-result-handoff]]. Full portable admission remains TYPE23.4.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.13 — freeze Array contains result transitions
+
+Freeze ordinary Array contains result handoff and activate existing required-needle normalization as FUTURE5.6, coordinated with five backend children23.3.13.1-.5. Public Perl native/fresh/substitution controls show numeric1/0 producers and correct nested/source snapshots versus terminal null continuations; direct malformed null/no-effects but nested malformed host-call leak is immediately owned by Perl1. Canonical one-needle and punctuation-light alias policy reconciled before production changes; old four-backend missing0 is explicitly scheduled for replacement with named calibration updates. No runtime changes or portable/full-domain claim.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.10.7 — recognize complete Dart grouped regex operands
 
 Dart action scanning now recognizes complete grouped/whitespace slash literals at operand positions with escaped body/flags and a following delimiter/end after whitespace. Exact operand pattern/source/span and native/restored/plan grouped-invalid false/empty pass after raw-expression RED. Adjacent/nested/continued symbolic division, valid groups/classes/escaped delimiters and prior modes/String/direct parser pass44 focused tests/fatal analysis. Broader brace validators/scanner admission stays open. Book/facts/DART partial-owner/current docs align; contains result assessment23.2.13 next.

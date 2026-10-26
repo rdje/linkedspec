@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
+Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 
 ## Latest Completed Slice
 
-Dart action scanning now recognizes complete grouped/whitespace slash literals at operand positions with escaped body/flags and a following delimiter/end after whitespace. Exact operand pattern/source/span and native/restored/plan grouped-invalid false/empty pass after raw-expression RED. Adjacent/nested/continued symbolic division, valid groups/classes/escaped delimiters and prior modes/String/direct parser pass44 focused tests/fatal analysis. Broader brace validators/scanner admission stays open. Book/facts/DART partial-owner/current docs align; contains result assessment23.2.13 next.
+Freeze ordinary Array contains result handoff and activate existing required-needle normalization as FUTURE5.6, coordinated with five backend children23.3.13.1-.5. Public Perl native/fresh/substitution controls show numeric1/0 producers and correct nested/source snapshots versus terminal null continuations; direct malformed null/no-effects but nested malformed host-call leak is immediately owned by Perl1. Canonical one-needle and punctuation-light alias policy reconciled before production changes; old four-backend missing0 is explicitly scheduled for replacement with named calibration updates. No runtime changes or portable/full-domain claim.
 
 ## Next Action
 
-Assess ordinary Array contains result handoff under23.2.13. Read membership/equality and FUTURE-PARITY-BACKLOG.5/punctuation-light missing-needle policy before arity decisions; retain public producer/fluent/nested/source/effect distinctions and freeze only observed-authorized bounded transitions. Then independent backend implementation slices with small checks/docs/commit; full admission separate.
+Implement Perl ordinary contains result and one-needle guards under23.3.13.1/contains-results.md; original arity-normalization owner FUTURE5.6 is active. Fix nested malformed host-call fallthrough immediately, preserve actual numeric producer/equality/null/zero and correct snapshots. Native/fresh/shared/direct comparison checks plus syntax/docs/commit, then independent Rust2 with its calibration expectation update.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
@@ -29,7 +30,6 @@ Assess ordinary Array contains result handoff under23.2.13. Read membership/equa
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.10` — Generic definedness contract/probes frozen, actual Perl truth/text/default semantics preserved. Perl ordinary receiver registration/result implementation23.3.11.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.10.5` — Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
 
 ## History
 
