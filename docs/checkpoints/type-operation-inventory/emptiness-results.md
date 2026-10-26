@@ -77,3 +77,15 @@ wrapper/function and copy-kind RED, preserving String0/numeric0/false data, fals
 result retention, explicit bridges/scalar nulls, no malformed effects and1!/SA/
 once-only snapshots. FlowExpr/global scalar recognition stays with SESSION16;
 Rust assessment/full domain/portable admission remain separate.
+
+## Bounded Rust generic predicate handoff
+
+23.3.9.2 retains Bool producer values and existing RuntimeValue emptiness domains.
+It adds scalar-result/zero-operand guards and generic current-value dispatch for
+initial, ordinary Array/Hash/String/Number-prefix and selected continuations.
+Initial copy before a generic predicate uses the actual evaluated source too:
+static Array inference otherwise makes copied Hash bindings/pipelines wrong1!.
+Native/restored/generated-plan result/direct has_key tests pass after fluent-null/
+S-only/four-effect and copied-Hash RED, preserving source kinds, false retention,
+repeated predicates/explicit bridges/scalar nulls and1!/SA/once-only snapshots.
+Targeted offline compilation passes; Dart/full admission remain separate.

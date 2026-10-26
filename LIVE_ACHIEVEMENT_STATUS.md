@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
+Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 
 ## Latest Completed Slice
 
-Perl emptiness predicates use scalar-result/zero-operand preflight and shared actual-kind emission on typed/legacy ordinary paths. Generic receivers retain source kinds and pass scalar/default/Hash continuations; copied dynamic bindings no longer infer Hash from the next predicate. Native/fresh result and direct producer fixtures pass after terminal, host-truthiness, wrapper/function and copied-Array RED, including Array/Hash copy bindings, false retention, String/Array bridges, nulls, no malformed effects and1!/SA/once-only snapshots. Syntax/book/fast checks pass; Rust assessment next, broader SESSION16/full admission separate.
+Rust preserves Boolean emptiness producers and adds scalar-result/zero-operand guards plus generic current-value dispatch at initial and ordinary family-prefix positions. Initial copy before a generic predicate also retains actual source kind. Native/restored/generated-plan emptiness and direct has_key checks pass after fluent-null/S-only/four-effect and copied-Hash1! RED, covering source kinds/copy bindings, false retention, repeated predicates, explicit bridges/scalar nulls and1!/SA/once-only snapshots. Targeted offline compilation/book/fast checks pass; Dart assessment next, full admission separate.
 
 ## Next Action
 
-Independently assess Rust is_empty/is_nonempty result/source/shape behavior under23.3.9.2 with shared fixture; preserve canonical actual-value emptiness and actual producer kinds, repair confirmed ordinary gaps only. Targeted offline compile/native/restored/plan/direct checks/docs/commit; no contains calibration or broad admission.
+Independently assess Dart is_empty/is_nonempty result/source/shape behavior under23.3.9.3 using shared fixture. Preserve actual producer kinds/canonical domains and copy/source semantics; repair confirmed ordinary gaps only, small native/restored/plan/direct checks and fatal selected-file analysis/docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` — Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
@@ -29,7 +30,6 @@ Independently assess Rust is_empty/is_nonempty result/source/shape behavior unde
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` — index integer/null and shape guards; native/restored/plan/direct default and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.2` — index scalar handoff/one-needle preflight; native/restored/plan/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.1` — ordinary index scalar-result handoff and one-needle preflight; native/fresh/direct checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
 
 ## History
 

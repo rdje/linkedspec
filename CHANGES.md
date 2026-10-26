@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.9.2 — continue Rust generic emptiness results
+
+Rust preserves Boolean emptiness producers and adds scalar-result/zero-operand guards plus generic current-value dispatch at initial and ordinary family-prefix positions. Initial copy before a generic predicate also retains actual source kind. Native/restored/generated-plan emptiness and direct has_key checks pass after fluent-null/S-only/four-effect and copied-Hash1! RED, covering source kinds/copy bindings, false retention, repeated predicates, explicit bridges/scalar nulls and1!/SA/once-only snapshots. Targeted offline compilation/book/fast checks pass; Dart assessment next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2 — continue actual-value emptiness results
 
 Perl emptiness predicates use scalar-result/zero-operand preflight and shared actual-kind emission on typed/legacy ordinary paths. Generic receivers retain source kinds and pass scalar/default/Hash continuations; copied dynamic bindings no longer infer Hash from the next predicate. Native/fresh result and direct producer fixtures pass after terminal, host-truthiness, wrapper/function and copied-Array RED, including Array/Hash copy bindings, false retention, String/Array bridges, nulls, no malformed effects and1!/SA/once-only snapshots. Syntax/book/fast checks pass; Rust assessment next, broader SESSION16/full admission separate.

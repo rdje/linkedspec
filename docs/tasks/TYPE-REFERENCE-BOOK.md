@@ -2259,10 +2259,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2 - continue actual-value emptiness results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust ordinary emptiness result targets.
   Dependencies: .23.3.9.1.2.
   Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
+  Activation: clean `61dd294d9394cfffc52abf0648a3c0530ecfd91a`; Perl committed, brief empty, tree clean.
+  Owned paths: Confirmed Rust ordinary emptiness result/source/shape gaps only; shared native/restored/generated-plan fixture and direct has_key compatibility plus current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/restored/generated-plan emptiness fixture before/after repair, direct has_key fixture, targeted offline Cargo compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored value/order regression, no quantified population or portable measurement.
+  Confirmed findings / preservation: Public Engine native RED gives fluent null versus nested1!, S-only snapshot order and four malformed effects. Existing producer is Boolean-valued; preserve it. Add scalar-result/zero-operand shape handling and generic current-value dispatch, including ordinary family prefixes. First candidate then exposes copied Hash bindings/pipeline wrong1! versus0!: static Array inference from next is_empty loses a scalar-held Hash. Route initial copy followed by generic emptiness through evaluated actual-value dispatch, preserving the copy helper and retaining Array/Hash twins in the fixture.
+
+  Completion: Zero-operand preflight/scalar-result flags and generic evaluated-value predicate dispatch, including ordinary Array/Hash/String/Number prefixes. Initial copy before a predicate avoids static Array inference; helper/copy/RuntimeValue emptiness policy unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Engine native RED gives fluent null versus nested1!, S-only order and four malformed effects. First candidate then exposes copied Hash binding/pipeline1! rather than0! while other fields pass.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs omits predicates from scalar-result/shape handling, routes generic sources through family-specific snapshots/validation and uses next is_empty Array classification for initial copy. Existing call_helper returns Bool from RuntimeValue::is_nonempty; preserve it.
+  - [x] FIX: Classify scalar results, reject extra operands before effects, dispatch generic predicates by current evaluated value at initial/prefix/selected positions, and route initial copy before generic predicates the same way. No producer/copy/domain normalization or new vocabulary.
+  - [x] ADDRESSED (verified): Native/restored/generated-plan shared fixture passes Array/Hash/String/null/zero/selected/pipeline/default/function and copied dynamic Array/Hash bindings, false retention/repeated predicates, explicit bridge/scalar nulls, zero malformed effects and1!/SA/once-only snapshots after RED.
+  - [x] NO REGRESSION: Direct has_key native/restored/generated-plan fixture and targeted offline Cargo compilation pass; existing Boolean/Number0/false/data policy remains unchanged. No broad suite/format/source/copy changes.
+  - [x] LOCKSTEP: Contract/worked catalog/guide, array/emptiness facts/map and task/live/resume align; bounded-history rollover if required is part of this commit. Book and fast memory/cadence/diagnosis/history/diff pass. Dart3 next after clean commit; full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.9.2 - continue Rust generic emptiness results`.
+  Continuity: Required engineering-notes pressure rollover archived the clean committed suffix as docs/history/development-notes/segment-4956-d41121f01c2b.md with its manifest/root update; --apply and --check pass. No immutable old segment edited or runtime verification scope expanded.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.3`
   Status: `pending`
@@ -2360,11 +2379,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; independent Rust2 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; independent Dart3 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` | `pending` | Independent Rust emptiness result/source/shape assessment after bounded Perl rollout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` | `pending` | Independent Dart emptiness result/source/shape assessment after bounded Rust repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

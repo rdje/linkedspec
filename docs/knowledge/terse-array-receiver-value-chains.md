@@ -1,7 +1,8 @@
 ---
 id: terse-array-receiver-value-chains
-title: Pure receiver chains and scalar result contracts
+title: Pure receiver chains and result contracts
 answers:
+  - "can Rust emptiness results continue through scalar methods and retain copied Hash kinds"
   - "can index_of results continue into numeric methods"
   - "can join_values results continue into String methods or split back to Array"
   - "can count length and count_keys results continue into numeric methods"
@@ -21,12 +22,12 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: bounded index rollout checked; full admission open
+status: bounded index/Perl-Rust emptiness checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure/end/transform contracts; selected/scalar rollout23.3; index contract23.2.6 and bounded23.3.7.1-.5."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/index_result_receiver_contract.t"
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test index_result_receivers"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test emptiness_result_receivers --test has_key_result_receivers"
 ---
 
 Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_values, filter_match/count and split_each/filter/count. join_values keeps delimiter-first free-helper roles. End mutations retain [[uniform-binding-array-end-result-supersession]]. Rust/Dart/Julia5.3.1-.3 implement dropped transforms with validated snapshots/ordered operands; pure value forms stay pure and broad5.3.4 stays open.
@@ -35,8 +36,6 @@ Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_v
 
 Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []; Perl nested refs remain shared ([[perl-scalar-bound-receiver-copy]]).
 
-Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md.
+Count/Length/join/index23.3.3/.5/.7 bounded flow/shape guards pass on recorded hosts; contracts: docs/checkpoints/type-operation-inventory/count-length-results.md, joined-string-results.md and index-results.md. Preserve producer/equality/source/copy and explicit bridges. Current full prior details/commands remain exact at Git61dd294d9394cfffc52abf0648a3c0530ecfd91a for this path; earlier join history at Git05cd2f8074894f012d56c3410e9366eb67dd2f97. Full admission remains open.
 
-23.2.4 freezes joins: docs/checkpoints/type-operation-inventory/joined-string-results.md. Perl uses scalar_result/exact-one-operand handoff; Rust uses is_scalar_result_receiver_method and guarded mutation tails. Dart/Julia guard existing flow; Lua adds flow/guards/false repair. Focused checks pass; source/declared5.4/full admission stay open. Prior details and commands are exact at Git05cd2f8074894f012d56c3410e9366eb67dd2f97 for this path.
-
-Index23.2.6 contract: docs/checkpoints/type-operation-inventory/index-results.md. Perl23.3.7.1 uses scalar_result/one-needle preflight. Rust23.3.7.2 extends its scalar classifier and preflight after fluent-null/four-effect RED. Focused checks retain zero/null, selector use and snapshots. Producers/equality/source/copy stay unchanged. Dart23.3.7.3/Julia23.3.7.4 guard scalar/null outputs and shapes ([[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]]). Lua23.3.7.5 guards pass on5.5.1/JIT; full admission open. Probes remain in the contract.
+Emptiness23.3.9.2 preserves Rust Bool outputs/RuntimeValue::is_nonempty domains and adds scalar-result/zero-operand guards plus generic evaluated-value dispatch at initial/family-prefix/selected positions. Copy before a generic predicate must retain actual kind: static Array inference gave copied Hash1! versus0!. Native/restored/plan result/direct has_key tests pass after null/S/four-effect and copied-Hash RED, with actual source/copy kinds, false retention/repeated predicates/bridges/scalar nulls and1!/SA/once-only snapshots. Dart3/full admission open; bounded Perl details: [[perl-emptiness-expression-and-host-slot-drift]].

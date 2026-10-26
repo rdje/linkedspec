@@ -5960,7 +5960,9 @@ impl Engine {
                 // Reject invalid receiver arities before source/operand effects.
                 if calls.iter().any(|call| match call.method.as_str() {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
-                    | "avg" | "median" | "range" => !call.args.is_empty(),
+                    | "avg" | "median" | "range" | "is_empty" | "is_nonempty" => {
+                        !call.args.is_empty()
+                    }
                     "join_values" | "index_of" | "has_key" => call.args.len() != 1,
                     _ => false,
                 }) {
@@ -5995,6 +5997,18 @@ impl Engine {
                 {
                     return self
                         .eval_receiver_with_trailing_block_chain(receiver, calls, ctx, rule_label);
+                }
+                if calls.first().is_some_and(|call| {
+                    Self::is_emptiness_receiver_method(&call.method)
+                        || (call.method == "copy"
+                            && calls.get(1).is_some_and(|next| {
+                                Self::is_emptiness_receiver_method(&next.method)
+                            }))
+                }) {
+                    let current = self.eval_expr(receiver, ctx, rule_label)?;
+                    return self.eval_selected_receiver_value_chain(
+                        current, calls, false, ctx, rule_label,
+                    );
                 }
                 if calls.first().is_some_and(|call| {
                     Self::is_hash_receiver_value_chain_method(&call.method)
@@ -7242,6 +7256,11 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         let method = call.method.as_str();
 
+        if Self::is_emptiness_receiver_method(method) {
+            let (raw_args, values) = self.receiver_call_args(current, call, ctx, rule_label)?;
+            return self.call_helper_with_args(method, &raw_args, &values, ctx, rule_label);
+        }
+
         if method == "copy" {
             if matches!(current, RuntimeValue::Hash(_))
                 || next_call
@@ -7445,6 +7464,10 @@ impl Engine {
             || Self::is_scalar_result_receiver_method(method)
     }
 
+    fn is_emptiness_receiver_method(method: &str) -> bool {
+        matches!(method, "is_empty" | "is_nonempty")
+    }
+
     fn is_scalar_result_receiver_method(method: &str) -> bool {
         matches!(
             method,
@@ -7457,6 +7480,8 @@ impl Engine {
                 | "join_values"
                 | "index_of"
                 | "has_key"
+                | "is_empty"
+                | "is_nonempty"
         )
     }
 
@@ -7474,6 +7499,7 @@ impl Engine {
             // Scalar producers retain the incompatible-array boundary
             // until a compatible helper explicitly returns a container.
             if scalar_result
+                && !Self::is_emptiness_receiver_method(&call.method)
                 && !Self::is_string_receiver_value_chain_method(&call.method)
                 && !Self::is_number_receiver_value_chain_method(&call.method)
             {
@@ -7519,6 +7545,15 @@ impl Engine {
         for (index, call) in calls.iter().enumerate() {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
+            }
+            if Self::is_emptiness_receiver_method(&call.method) {
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index..],
+                    false,
+                    ctx,
+                    rule_label,
+                );
             }
             if Self::is_statement_only_array_end_mutation_method(&call.method)
                 || (!Self::is_array_receiver_value_chain_method(&call.method)
@@ -7605,6 +7640,15 @@ impl Engine {
         for (index, call) in calls.iter().enumerate() {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
+            }
+            if Self::is_emptiness_receiver_method(&call.method) {
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index..],
+                    false,
+                    ctx,
+                    rule_label,
+                );
             }
 
             let evaluated_call_args: Vec<RuntimeValue> = call
@@ -7723,6 +7767,15 @@ impl Engine {
         for (index, call) in calls.iter().enumerate() {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
+            }
+            if Self::is_emptiness_receiver_method(&call.method) {
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index..],
+                    false,
+                    ctx,
+                    rule_label,
+                );
             }
 
             if family == ReceiverFamily::String && call.method == "coalesce_nonempty" {
@@ -7859,6 +7912,15 @@ impl Engine {
         for (index, call) in calls.iter().enumerate() {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
+            }
+            if Self::is_emptiness_receiver_method(&call.method) {
+                return self.eval_selected_receiver_value_chain(
+                    current,
+                    &calls[index..],
+                    false,
+                    ctx,
+                    rule_label,
+                );
             }
             if !Self::is_number_receiver_value_chain_method(&call.method) {
                 return Ok(RuntimeValue::Undef);
