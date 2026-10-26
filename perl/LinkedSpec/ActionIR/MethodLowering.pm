@@ -4704,6 +4704,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
   }
 
+  my $logical_receiver = ($receiver->{kind} // '') eq 'call'
+   && ($receiver->{name} // '') =~ /\A(?:and|or|not)\z/;
+  if ($logical_receiver) {
+   my $args = $receiver->{args} || [];
+   my $valid = $receiver->{name} eq 'not' ? (@$args == 1) : (@$args >= 1);
+   # Source arity owns the error before an unknown invalid operand is scanned.
+   return $lower_ast_logical_call_node->($receiver) unless $valid;
+  }
+
   my $receiver_expr;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
    if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
@@ -5083,6 +5092,25 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my $first_method = $calls->[0]{method} // '';
   my $first_args = $calls->[0]{args} || [];
+  if ($logical_receiver) {
+   my $current_expr = $lower_ast_logical_call_node->($receiver);
+   return undef unless defined($current_expr) && length($current_expr);
+   my $current_family = 'scalar_result';
+   foreach my $call (@$calls) {
+    my $applied = $current_family eq 'array'
+     ? $append_array_chain_call->($current_expr, $call)
+     : $append_selected_value_chain_call->($current_expr, $call, $current_family);
+    return undef unless ref($applied) eq 'ARRAY';
+    ($current_expr, $current_family) = @$applied;
+    return 'undef' if $current_family eq 'terminal';
+    # The logical source is emitted host code. Finish each composed helper
+    # through its existing bridge before another link consumes that result.
+    $current_expr = $legacy_method_value_expr->($current_expr);
+    return undef unless defined($current_expr) && length($current_expr);
+   }
+   return $current_expr;
+  }
+
   if ($first_method eq 'copy' && @$calls == 1
    && ref($first_args) eq 'ARRAY' && @$first_args == 0
    && ($receiver->{kind} // '') eq 'variable'

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.17.1 — continue Perl logical Boolean results
+
+Perl logical sources now validate arity before unknown-operand scanning, enter typed scalar actual-result dispatch and finish each composed helper through the existing emitted-host compatibility bridge.26 focused native/fresh shared/source/typed-error/direct logical/literal-default checks and syntax pass after bridge/raw-DSL/diagnostic RED. All three Boolean-text-Array bridgesX, clean scalar boundaries, raw Bool/false/default recovery and eager LRC/SC snapshots hold; retired Hash arrows still reject. Book/facts/task/live align; independent Rust17.2 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.17 — freeze logical Boolean result continuations
 
 Frozen logical Boolean result contract after public producer/nested/fluent/source/effect/AST distinctions. Direct text/false selection/typed truthiness/eager LRC work; long Boolean-text-split bridge emits unsupported cat, Hash-only tail retains raw DSL and Array-only tail raises a binding-kind error. Unknown-call scanning hides invalid not arity behind null before its typed validator, while direct/nested/known-helper controls raise correctly. Eight existing logical subtests and new probe syntax pass. Confirmed repairs owned by immediate Perl17.1; five independent backend leaves scheduled. No production/neutral contract change or new logical method claim.

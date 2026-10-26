@@ -68,3 +68,24 @@ Direct logical contract fixture passes eight top-level subtests, including
 existing neutral values/effects/with receiver/lazy contrast and typed errors.
 Backend implementations must assess their own public producers before changing
 confirmed result/scalar/diagnostic gaps; no backend failure inferred from Perl.
+
+## Bounded Perl implementation
+
+23.3.17.1 validates malformed logical source arity before unknown-operand
+scanning, then materializes valid logical sources through existing typed
+RuntimeLogical lowering. Their ordinary chains use scalar actual-result
+classification and existing selected/Array dispatch; each emitted helper is
+finished through the established host-expression compatibility bridge before
+the next link. Dedicated with/traversal normalization stays on its prior route.
+No generic authored raw fallback or helper vocabulary is widened.
+
+Retained logical_result_receiver_values source/JSON and native/fresh test pass
+raw Bool/false defaults, six text/nested results, strict truthiness/numeric-null,
+all source families, all three split bridges, Number/Array/Hash defaults and
+clean incompatible boundaries. Eager and/or LRC and not SC/call counters/source
+snapshots hold. Five malformed source cases preserve typed helper/arity/zero-
+evaluated fields, including unknown fail and known print operands. Public
+retired Hash fat-arrow validation still rejects in the new composition route.
+26 top-level checks across new logical results, existing logical contract and
+literal-default fixtures plus module/test syntax pass after retained RED. New
+Perl test requires explicit23.4.1 canonical registration; full admission open.

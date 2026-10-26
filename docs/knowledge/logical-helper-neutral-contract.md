@@ -62,5 +62,10 @@ cat->split->last emits unsupported cat/null versus nestedX; String-first DSL
 composition lacks typed logical-result handoff. Hash-only tail leaves raw DSL;
 Array-only tail raises binding_kind_mismatch. Unknown-call scanning also hides
 invalid not arity behind unsupported fail/null, unlike direct/nested typed
-errors.23.3.17.1-.5 own immediate bounded independent backend repair; no new
-logical methods/truth policy or reopened historical5.2 projection claim.
+errors.23.3.17.1 now validates source arity before that scan, uses typed logical
+lowering/scalar dispatch and finishes each composed emitted helper through the
+existing compatibility bridge.26 focused native/fresh new/direct/literal-default
+checks and syntax pass: all three bridgesX, clean boundaries, real Bool/default
+copies, eager LRC/SC and typed source errors remain. Retired authored Hash arrows
+still reject. Rust/Dart/Julia/Lua17.2-.5 independently assess next; no new logical
+methods/truth policy or reopened historical5.2 projection admission.

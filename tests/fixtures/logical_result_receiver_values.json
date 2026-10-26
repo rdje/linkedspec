@@ -1,0 +1,69 @@
+{
+  "raw": [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false
+  ],
+  "text": [
+    "1!",
+    "0!",
+    "1!",
+    "0!",
+    "1!",
+    "0!"
+  ],
+  "nested": [
+    "1!",
+    "0!",
+    "1!",
+    "0!",
+    "1!",
+    "0!"
+  ],
+  "truthiness": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "0!",
+    "0!"
+  ],
+  "sources": [
+    "0!",
+    "1!",
+    "1!",
+    "0!",
+    "1!",
+    "1!",
+    "0!"
+  ],
+  "bridge": "X",
+  "or_bridge": "X",
+  "not_bridge": "X",
+  "nested_bridge": "X",
+  "retained": "0!",
+  "fallback_calls": 0,
+  "rejected_number": null,
+  "recovered": 8,
+  "array_default": "B",
+  "hash_default": "A",
+  "defined": "1!",
+  "empty": "0!",
+  "incompatible": null,
+  "after_text": null,
+  "effected": "0!",
+  "order": "LRC",
+  "calls": 2,
+  "source": null,
+  "or_effected": "1!",
+  "or_order": "LRC",
+  "not_effected": "1!",
+  "not_order": "SC",
+  "flag": false,
+  "meta": {
+    "flag": true
+  }
+}

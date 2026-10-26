@@ -3578,14 +3578,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5 - guard Lua scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17`
-  Status: `pending`
+  Status: `active` / Perl implemented; independent backend rollout next
   Goal: Complete bounded ordinary logical Boolean result continuation and clean scalar boundaries while retaining eager typed producer/error contracts.
   Dependencies: .23.2.17 frozen logical-results.md.
   Children: `.23.3.17.1`, `.23.3.17.2`, `.23.3.17.3`, `.23.3.17.4`, `.23.3.17.5`.
   Acceptance: Existing and/or/not free helper results remain actual Bool, typed truthiness/eager once-only operands unchanged. Compatible scalar/text/generic/default/explicit-container flow and source snapshots work; invalid logical source arity retains typed pre-effect errors. No new logical methods, numeric Bool coercion or full domain/context/portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary logical Boolean result continuations.
   Dependencies: .23.2.17.
   Acceptance: Follow logical-results.md, preserving actual Bool/strict numeric rejection, eager typed truthiness/source snapshots/free signatures, defaults/explicit Array-Hash bridges/scalar boundaries and pre-effect typed source arity errors. Public producer-first native/generated RED/GREEN and small direct checks/docs/commit; full admission separate.
@@ -3595,6 +3595,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
 
+
+  Activation: clean `00fd9896e17386782689b2cdb6484f38820aad4b`; logical result freeze committed, brief0/tree clean.
+  Owned paths: Perl logical-source typed scalar dispatch/bridge/scalar boundary and pre-effect source arity precedence, retained shared native/fresh logical result/error regression, scoped book/facts/task/live docs. Preserve existing logical/numeric/free/callback policies and emitted-host compatibility boundaries.
+  Verification tier: `focused`
+  Focused checks: Retained shared and typed source error RED/GREEN, direct logical/selected/default/arithmetic dependencies as warranted, syntax and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Validate malformed logical source arity before unknown-operand scanning. Materialize valid logical sources via the existing typed logical lowerer and scalar actual-result dispatcher; finish each composed helper through the established emitted-host compatibility bridge before a successor. Existing with/traversal normalization and all producer/free/numeric/typed truth policies stay unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New native/fresh shared regression RED fails compound handler compile on raw and residue and misses the typed invalid-not/unknown-operand error. Independent retained intake already distinguishes unsupported cat bridge/null versus nestedX, source families/direct text/false/default/eager controls and accidental Array BindingRuntime error.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering chooses dispatch by first consumer before materializing the logical actual result; rebuilding later Array DSL loses typed source ownership. first_unknown_value_call_name also walks invalid source operands before typed logical arity checking. Numeric/truthiness and source snapshots are already correct; no producer or emitter repair inferred.
+  - [x] FIX: Early malformed logical source arity validation, then a scoped logical-source loop reusing selected/Array/scalar families and existing compatibility finishing for already emitted logical host expressions. No broad raw fallback, new method, parser/schema/numeric/free signature or truth policy change.
+  - [x] ADDRESSED (verified): Retained shared source/JSON/native/fresh regression passes six raw real-Bool/text/nested values, typed truthiness and named/selected/Hash/block/function/literal sources. All and/or/not split bridges giveX; Bool remains invalid numeric input with explicit8/ArrayB/HashA recovery, false default stays0!, incompatible scalar consumers are cleannull. Eager and/or LRC and not SC/calls/source snapshots hold. Five malformed source cases retain typed helper/arity/zero-evaluated fields, including unknown fail and known print operands.
+  - [x] NO REGRESSION:26 current top-level checks across new12, direct logical8 and literal-default6 pass; source/new-test syntax clean. Existing logical with/typed sites/lazy contrast and default kinds remain. Additional new-route retired authored Hash-arrow assertion passes; no compatibility syntax widening or whole suite/portable admission.
+  - [x] LOCKSTEP: Shared spec/expected/new test, frozen contract/current qualified catalog and canonical logical fact/map plus task/live/resume align. New Perl fixture registration remains mandatory23.4.1 before admission/push. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Independent Rust17.2 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1 - continue Perl logical Boolean results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.2`
   Status: `pending`
@@ -3738,7 +3755,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` | `pending` | Repair confirmed Perl logical result staging/scalar/diagnostic gaps. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` | `pending` | Independently assess and implement Rust logical Boolean result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
