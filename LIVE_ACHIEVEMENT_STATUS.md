@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
+Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 
 ## Latest Completed Slice
 
-Julia contains/index_of/uniq now tag actual null beside the existing scalar projection, preserving defined conversions, uniq fallback, copied first values/kinds/order and free defaults. Independent shared/native-plan-fresh and null-versus-container controls pass after RED; defined-only preservation stays passing.63 strict focused assertions across null/contains/index/standalone transforms and package compilation pass, including explicit Number/not-Bool guards. Current contains artifacts adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Lua14.6 safe PUC/JIT assessment next; declared5.4/full admission separate.
+Lua contains/index_of/uniq now retain the opaque json.null key before unchanged defined scalar conversion/fallback. Independent native/plan/fresh shared null and null-versus-container controls pass after RED on PUC5.5.1/LuaJIT; defined projections/free defaults stay passing. Direct contains/index and source/runner loads pass, preserving numeric flags, positions, first copied values/kinds/order and scalar/Array consumers. All six aggregate/source/key bounded repairs are targeted-checked; book/facts/FUTURE5.7/live/resume align. Numeric-comparison result assessment23.2.15 follows; declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Lua contains/index_of/uniq null and defined conversion under14.6 using shared null_array_key_values and safe public native/plan/fresh fixtures on available PUC5.5.1/LuaJIT. Preserve defined conversions/first values/kinds/order/free defaults, distinguish actual null with collision-free internal key, intentionally update current contains reference. Exclude known malformed native patterns. Small direct checks/syntax/docs/commit, then select next roadmap-aligned fluent feature from TYPE inventory; declared5.4/full admission remain separate.
+Activate TYPE23.2.15 ordinary numeric-comparison result assessment after this clean commit: read canonical numeric producer/receiver/invalid-domain/arity owners and scoped book, then retain public Get/substitution/dump/native/fresh distinctions for num_eq/ne/gt/ge/lt/le and short receiver aliases. Preserve actual Number/Bool/null/false rendering, numeric conversion/free signatures/source order. Existing intentional terminal policy is not a defect until a bounded new result contract is frozen. Schedule independent backend children before production; quick syntax/direct checks/docs/commit, no full matrix/gate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
@@ -29,7 +30,6 @@ Independently assess Lua contains/index_of/uniq null and defined conversion unde
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.12.4` — Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
 
 ## History
 

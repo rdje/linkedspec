@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`, `TYPE-REFERENCE-BOOK.1.2.23.2.15`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -1274,6 +1274,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Public probes compile/execute exact source with no diagnostics; no runtime edits. Source/test syntax, book/history/diff/final staged memory/cadence/diagnosis checked. Defined coercion/invalid-kind/copy/target-mutation/lazy-control/deferred contexts and complete portable admission remain separately owned.
   - [x] LOCKSTEP: Retained source/Perl producer/Rust public example, frozen contract, known book limitations, new canonical source/null fact and current pure-pipeline/history qualifier align with TYPE/FUTURE5.7/index/live/resume. Rust snapshot1 is next after clean commit; no fixed-behavior claim at this freeze.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.14 - freeze aggregate operand and null-key repairs`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.15`
+  Status: `pending`
+  Goal: Assess ordinary numeric comparison receiver results and compatible inter-type continuations.
+  Dependencies: Six bounded aggregate/null repairs23.3.14.1-.6 committed.
+  Authority: Comprehensive-method directive and current helper spelling spine; existing num_eq/ne/gt/ge/lt/le and short eq/ne/gt/ge/lt/le receiver semantics, numeric conversion/invalid-input policies and intentional prior terminal boundaries remain authoritative until this bounded transition is frozen.
+  Acceptance: Publicly compare raw/free/nested/current fluent producers, Number/Bool/null kinds, true/false/default/numeric/String/Array bridges, literal/named/selected/pipeline/function/default sources, source/operand/consumer order and malformed receiver shapes. Preserve current numeric domains and free signatures; do not conflate numeric and lexical comparisons or invent strict Bool equality. Freeze only observed-authorized ordinary result transition and schedule independent backend implementation children before code. Small syntax/direct checks/docs/commit; full domain/context/portable admission separate.
+  Planned verification tier: focused
+  Planned focused checks: Retained public Get/substitution/dump/native/fresh and canonical numeric owners, bounded direct current consumers; no exhaustive matrix/full suite.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: bounded normative contract and deterministic authored distinctions; no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -3081,7 +3092,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.13.5 - guard Lua Array contains result receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14`
-  Status: `active` / bounded aggregate/null repairs; full admission23.4 separate
+  Status: `active` / six bounded repairs targeted-checked; full admission23.4 separate
   Goal: Implement frozen aggregate-null-and-snapshot-contract.md under original helper-caveat owner FUTURE-PARITY-BACKLOG.5.7.
   Children: `.23.3.14.1`, `.23.3.14.2`, `.23.3.14.3`, `.23.3.14.4`, `.23.3.14.5`, `.23.3.14.6`.
   Acceptance: Cached pure aggregate value operands; eager Perl has_key key effects; null distinct from empty in contains/index_of/uniq, original kinds/first occurrence/source snapshots retained. Preserve existing defined-scalar coercion, malformed arity, invalid-kind fallback, target mutation and lazy controls; bounded per-backend commits/quick checks. Full domain/portable admission remains23.4.
@@ -3209,11 +3220,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.5 - distinguish Julia null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.6`
-  Status: `pending`
+  Status: `completed`
   Goal: Distinguish Lua null Array comparison and uniqueness keys.
   Dependencies: .23.3.14.5; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Contains null/empty merging confirmed; index/uniq still require controls. Known malformed native patterns remain excluded; declared5.4/full admission separate.
   Acceptance: Independently assess index/uniq, preserve defined conversions, implement null-only matching/own uniq key and current contains expectations. Native/plan/fresh/direct checks on PUC5.5.1/LuaJIT, safe named fixtures only. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `e49ecee4bb0d7f4304f549930514cda1c315ace3`; Julia null child committed, brief0/tree clean.
+  Owned paths: Lua null-distinct scalar_array_key helper, shared/native-plan-fresh and defined-projection/free-default controls, safe fixture registration/current contains expected and synchronized book/facts/task/live docs.
+  Verification tier: `focused`
+  Focused checks: Independent safe public native/plan/fresh RED/GREEN and direct contains/index on available PUC5.5.1/LuaJIT, source/runner load checks and book/history/staged continuity guards.
+  Canonical trigger: None for bounded reference-contract repair under director feature-first cadence; malformed native patterns excluded, declared5.4/full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls; no population/completeness measurement.
+
+  Completion: scalar_array_key returns the existing json.null token for actual null before the unchanged defined scalar-to-text/fallback conversion. Its shared contains/index_of/uniq consumers now distinguish null without a String marker collision; output kinds/first copied values/order/free defaults stay unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent public PUC5.5.1/LuaJIT native RED confirms mixed null/empty membership, wrong index0, lost empty in value/receiver/standalone uniq, 1!/numeric3/default1/count3. Null-container RED[1,1,0,0,[[]]] versus[0,0,null,null,[[],null]]. Defined-only/free-default controls pass all three routes before production.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.lua scalar_array_key unconditionally uses scalar_string(value,true) or empty; json.null, empty and defined containers collapse. The existing opaque null token is a safe table key distinct from every defined String projection.
+  - [x] FIX: One null guard in the shared key helper; retain the entire defined conversion/fallback branch and all three existing callers. Intentionally select reference raw/shared contains expectations and register safe new fixture in run.lua. No parser/schema/global conversion/arity/source/free-default changes.
+  - [x] ADDRESSED (verified): Shared/native-plan-fresh null reference and null-versus-container checks pass on both hosts after RED; numeric/raw JSON kinds, mixed positions, value/receiver/standalone uniq, copied first values/order/nonmutation, numeric/default/count/last/text consumers and NC/one needle hold. Defined-only/container-projection/free-missing controls stay passing.
+  - [x] NO REGRESSION: Direct contains/index fixtures and interpreter/runner load checks pass on both hosts. Only safe named fixtures run; no malformed native pattern/full suite/declared5.4 or complete domain/portable admission.
+  - [x] LOCKSTEP: Shared/current reference selection, new fixture/registration, scoped catalog/current contract progress, source-null/contains/Lua-selection facts/map and TYPE/FUTURE5.7/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Six bounded repairs targeted-checked; next numeric-comparison result assessment23.2.15 is scheduled without presuming a defect or changing its prior intentional terminal policy yet.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.6 - distinguish Lua null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -3312,7 +3340,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` | `pending` | Independently assess Lua index/uniq and repair null keys on safe PUC/JIT paths. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.15` | `pending` | Assess numeric comparison result transitions without changing numeric domains. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

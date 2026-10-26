@@ -8,10 +8,10 @@ answers:
   - "what do Lua array selection helpers return for missing inputs"
   - "do Lua pure array helpers mutate their source"
 date: 2026-10-26
-status: historical array milestone; current contains guards checked
+status: historical milestone; current contains and null keys checked
 tags: [lua, runtime, arrays, selection, ordering, membership, uniqueness, LUA-BACKEND-PARITY]
 evidence: "July12 LUA4.3.4.2 array milestone93/93 per ABI; exact prior record at Git7bb011b4eea5129faf334a57c50871d695ffb92c. TYPE23.3.13.5 currently checks contains producer/result/shape on available PUC5.5.1/LuaJIT; declared5.4 remains separate."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/contains_result_receivers_test.lua"
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/null_array_keys_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/null_array_keys_test.lua"
 ---
 
 Lua returns fresh arrays from `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed`, and
@@ -19,8 +19,7 @@ Lua returns fresh arrays from `take`, `take_last`, `drop_front`, `drop_back`, `s
 beyond the source returns an empty array. Non-array selection/order inputs return empty arrays. `first`, `last`,
 and a missing `index_of` result return null; `count` returns zero for a non-array value.
 
-`contains` returns numeric `1` or `0`, while `index_of` returns the first zero-based index. Both compare through the
-current scalar-to-text key, merging null/empty unlike Perl (P1 TYPE23.2.14). `uniq` uses that same key and preserves the first occurrence's source order.
+`contains` returns numeric `1` or `0`, while `index_of` returns the first zero-based index. TYPE23.3.14.6 retains json.null as a distinct key before prior defined text/fallback conversion; `uniq` shares it and preserves first copied values/kinds/order. Native/plan/fresh null/defined/free-default controls and direct contains/index pass on PUC5.5.1/JIT after RED; full admission remains open.
 Function and receiver forms share the dispatcher, so `items.sorted().drop_front(2).first()` composes without
 mutating `items`.
 

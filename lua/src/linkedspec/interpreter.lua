@@ -1817,6 +1817,7 @@ local function nonnegative_array_count(value, default)
 end
 
 local function scalar_array_key(value)
+  if value == json.null then return json.null end
   return scalar_string(value, true) or ""
 end
 

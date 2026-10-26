@@ -91,3 +91,12 @@ empty-Array/five-effect RED. No producer/equality changes or malformed native
 pattern probe. All five bounded result/receiver guards are targeted-checked; P1
 .23.2.14 now reconciles actual null/empty mismatch and sibling aggregate snapshots.
 Declared5.4/full domain/portable admission remain separate.
+
+## Current null-key follow-up
+
+The13 rollout records above retain their original null-merging baseline.
+Aggregate/null follow-up23.3.14.3-.6 now distinguishes actual null from empty
+in Rust/Dart/Julia/Lua contains/index_of/uniq, preserving defined conversions.
+All five current contains fixtures select .perl.json; .text.json retains the
+historical baseline only. See aggregate-null-and-snapshot-contract.md for the
+independent controls and source/key repairs. Complete admission stays23.4.

@@ -9565,6 +9565,10 @@ test("Array contains result receiver continuations", function()
   dofile("lua/test/contains_result_receivers_test.lua")
 end)
 
+test("null Array comparison and uniqueness keys", function()
+  dofile("lua/test/null_array_keys_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

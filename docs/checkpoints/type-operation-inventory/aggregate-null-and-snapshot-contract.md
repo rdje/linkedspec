@@ -104,3 +104,14 @@ across null/contains/index/standalone transforms and package compilation pass,
 including Number/not-Bool guards and numeric/default/count/text consumers.
 Current contains artifacts adopt the selected reference. Lua14.6 follows;
 complete domain/context/portable admission stays separate.
+
+## Lua null-key implementation and bounded rollout
+
+23.3.14.6 independently confirms index/uniq collisions on PUC5.5.1/LuaJIT.
+scalar_array_key now retains the existing opaque json.null token before the
+unchanged defined text/fallback conversion. Shared native/plan/fresh and null-
+container controls pass after RED; defined-only/free-default controls remain
+passing. Direct contains/index and source/runner load checks pass on both hosts,
+including raw numeric kinds, first copied values/order and scalar/Array consumers.
+All six bounded implementations are targeted-checked. Declared Lua5.4 and complete
+domain/context/portable admission remain23.4; no full-suite claim follows.

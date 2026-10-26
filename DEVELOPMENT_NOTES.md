@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.14.6 — distinguish Lua null Array comparison keys
+
+Lua contains/index_of/uniq now retain the opaque json.null key before unchanged defined scalar conversion/fallback. Independent native/plan/fresh shared null and null-versus-container controls pass after RED on PUC5.5.1/LuaJIT; defined projections/free defaults stay passing. Direct contains/index and source/runner loads pass, preserving numeric flags, positions, first copied values/kinds/order and scalar/Array consumers. All six aggregate/source/key bounded repairs are targeted-checked; book/facts/FUTURE5.7/live/resume align. Numeric-comparison result assessment23.2.15 follows; declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.14.5 — distinguish Julia null Array comparison keys
 
 Julia contains/index_of/uniq now tag actual null beside the existing scalar projection, preserving defined conversions, uniq fallback, copied first values/kinds/order and free defaults. Independent shared/native-plan-fresh and null-versus-container controls pass after RED; defined-only preservation stays passing.63 strict focused assertions across null/contains/index/standalone transforms and package compilation pass, including explicit Number/not-Bool guards. Current contains artifacts adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Lua14.6 safe PUC/JIT assessment next; declared5.4/full admission separate.
