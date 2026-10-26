@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.12.3 — guard Dart String comparison result receivers
+
+Dart adds six comparison names to one-operand/scalar lists only. Free Bool/null/zero/text/default producers and eager SO are preserved. Native/restored/plan shared and direct definedness pass four targeted tests after empty-Array/24-effect RED; all six pairs, snapshots, scalar/shape guards and no-effects pass. Selected-file fatal analysis/formatting pass. Dart null golden and book/fact/current docs align; Unicode ordering DART2.13/full admission stay open. Julia4 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.12.2 — add Rust explicit String comparison receivers
 
 Rust adds six String comparison names to String/scalar/one-operand lists only. Public Bool/null/zero/text/default producer control and shared native/restored/plan/direct definedness pass four targeted tests after receiver-null/24-effect RED. Six raw/true/false pairs, source families, retained0!/generic/bridges/scalar guards, twelve malformed no-effects and existing1!/SOC/once-only/final-null snapshots pass. No producer/parser/schema/domain/numeric-alias change. Formatting/book/fast checks align; Dart3 next.

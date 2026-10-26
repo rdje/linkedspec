@@ -11,16 +11,17 @@ answers:
   - "what is next after SPEC-FORMAT-TERSE.3.2.3.1"
   - "should docs use str_eq now"
 date: 2026-10-26
-status: Perl/Rust ordinary counterparts checked; other backends/full admission open
+status: Perl/Rust/Dart ordinary counterparts checked; other backends/full admission open
 tags: [spec-format-terse, comparisons, string-helpers, helper-aliases, task-tree, mdbook]
-evidence: "Historical bridge3.2.3.1/.2 and numeric migration3.2.3.3/.4; assessment TYPE23.2.11 and Perl23.3.12.1. Full prior implementation/replay/assignment chronology at Gitd9d81fa9a491380ca6d7b2a24cca727c581399ba for this path."
+evidence: "Historical bridge3.2.3.1/.2 and numeric migration3.2.3.3/.4; assessment TYPE23.2.11 and Perl23.3.12.1. Prior chronology at Gitd9d81fa9a491380ca6d7b2a24cca727c581399ba."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/string_comparison_result_receiver_contract.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test string_comparison_result_receivers"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/string_comparison_result_receivers_test.dart"
 ---
 
-str_eq/str_ne/str_gt/str_ge/str_lt/str_le are lexical helpers. Bare eq/ne/gt/ge/lt/le and comparison symbols stay numeric. TYPE23.2.11 freezes one-RHS ordinary receiver counterparts under the comprehensive fluent directive. Detailed prior assessment/migration records remain in this path at Gite227e9e8199527dc358e81c588c49afe210a5ef3 and the earlier Git pointer above.
+str_eq/str_ne/str_gt/str_ge/str_lt/str_le compare lexical text; bare eq/ne/gt/ge/lt/le and symbols remain numeric. TYPE23.2.11 freezes one-RHS ordinary receivers. Prior full records: this path at Gita9f7b0bb766934ba25fe0c4cc106d5df2486fe7d and the earlier history above.
 
-Perl23.3.12.1 extends registration/preflight lists; Rust23.3.12.2 adds String/scalar/one-operand lists. Perl producers remain numeric1/0; Rust remains Bool. Both preserve false0! through coalesce_nonempty and existing undef-as-empty comparison compatibility. Perl retains enabled legacy warnings. No new portable null/scalar/Unicode domain or producer normalization.
+Perl23.3.12.1 extends preflight/scalar registration; Rust2 adds String/scalar/preflight lists; Dart3 adds scalar/preflight lists. Producers stay Perl numeric1/0 versus Rust/Dart Bool. False renders0! and survives coalesce_nonempty. Perl/Rust retain undef-as-empty comparison (Perl legacy warnings); Dart propagates null operands. No portable null/Unicode-domain normalization; Dart UTF-16 gap stays DART2.13.
 
-Native/fresh Perl and native/restored/plan Rust shared/direct definedness checks pass after raw/compile or null/24-effect RED. All six true/false/raw-kind pairs, null/empty/zero twins, source families, false/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null snapshots pass. Free producers/order already worked; no snapshot repair inferred. Contract/probe: string-comparison-results.md/probe_string_comparison_results.pl. Full admission23.4, mandatory Perl selection23.4.1 and Dart Unicode-order2.13 remain separately owned; other backends require independent assessment.
+Native/fresh Perl and native/restored/plan Rust/Dart shared plus direct definedness checks pass after raw/compile, receiver-null or empty-Array/24-effect RED. Six pairs/raw kinds, null/empty/zero twins, source families, false/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null pass. Producers/snapshots already worked. Contract/probe: string-comparison-results.md/probe_string_comparison_results.pl; .perl.json numeric, .json Bool, .dart.json null-boundary variant. Full admission23.4/Perl selection23.4.1 remain open.

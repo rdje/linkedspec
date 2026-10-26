@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
+Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
 
 ## Latest Completed Slice
 
-Rust adds six String comparison names to String/scalar/one-operand lists only. Public Bool/null/zero/text/default producer control and shared native/restored/plan/direct definedness pass four targeted tests after receiver-null/24-effect RED. Six raw/true/false pairs, source families, retained0!/generic/bridges/scalar guards, twelve malformed no-effects and existing1!/SOC/once-only/final-null snapshots pass. No producer/parser/schema/domain/numeric-alias change. Formatting/book/fast checks align; Dart3 next.
+Dart adds six comparison names to one-operand/scalar lists only. Free Bool/null/zero/text/default producers and eager SO are preserved. Native/restored/plan shared and direct definedness pass four targeted tests after empty-Array/24-effect RED; all six pairs, snapshots, scalar/shape guards and no-effects pass. Selected-file fatal analysis/formatting pass. Dart null golden and book/fact/current docs align; Unicode ordering DART2.13/full admission stay open. Julia4 next.
 
 ## Next Action
 
-Independently assess Dart six str_* producers/kinds/null/scalar compatibility and ordinary receiver/result/source/shape behavior under23.3.12.3. Shared source has Perl numeric and Rust Boolean expected variants; derive Dart expectations from public existing producers, retain accepted domains and coordinate known Unicode-order2.13 ownership. Small native/restored/plan/direct checks/fatal selected-file analysis/docs/commit, then Julia4. Residual mode assessment23.2.12 and full admission stay separate.
+Independently assess Julia six str_* producers/kinds/null/scalar compatibility and ordinary receiver/result/source/shape behavior under23.3.12.4. Derive expectations from public existing producers; small native/restored/fresh/direct checks/docs/commit, then Lua5. Residual Dart mode assessment23.2.12 follows counterparts; full admission stays separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.2` — Rust six String comparison receiver/result counterparts are implemented/targeted-checked with original Bool/null/text behavior. Dart3 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
@@ -29,7 +30,6 @@ Independently assess Dart six str_* producers/kinds/null/scalar compatibility an
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.2` — Rust predicate flow/literal flags pass focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` — Perl String predicate handoff passes native/fresh/direct checks; Rust assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.9` — String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
 
 ## History
 

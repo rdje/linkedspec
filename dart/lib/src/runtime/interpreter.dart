@@ -3714,7 +3714,13 @@ final class LinkedSpecRuntimeEngine {
               helper == 'starts_with' ||
               helper == 'ends_with' ||
               helper == 'contains_substr' ||
-              helper == 'matches') {
+              helper == 'matches' ||
+              helper == 'str_eq' ||
+              helper == 'str_ne' ||
+              helper == 'str_gt' ||
+              helper == 'str_ge' ||
+              helper == 'str_lt' ||
+              helper == 'str_le') {
             return call.args.length != 1;
           }
           return (helper == 'first' ||
@@ -5118,6 +5124,12 @@ final class LinkedSpecRuntimeEngine {
           helper == 'ends_with' ||
           helper == 'contains_substr' ||
           helper == 'matches' ||
+          helper == 'str_eq' ||
+          helper == 'str_ne' ||
+          helper == 'str_gt' ||
+          helper == 'str_ge' ||
+          helper == 'str_lt' ||
+          helper == 'str_le' ||
           helper == 'is_empty' ||
           helper == 'is_nonempty' ||
           helper == 'is_defined' ||
