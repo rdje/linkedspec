@@ -94,3 +94,13 @@ existing one-key preflight and source-independent scalar tracking; actual List/M
 output releases the guard. Native/restored/generated-plan shared result and direct
 index tests plus fatal selected-file analysis pass after repair. Number0/1 presence
 helper, String keys/source/copy policies stay unchanged. Julia/full admission separate.
+
+## Bounded Julia scalar/shape guards
+
+23.3.8.4 retains correct flow/snapshots and adds has_key to existing one-key
+preflight/source-independent scalar tracking. Native JSON exposes container[],
+missing0!, extra1! and four effects; native/plan/fresh all fail before repair.
+Strict native/generated-plan/fresh-emitted has_key and direct index tests plus
+package compilation pass after repair, retaining presence integer0/1, String
+keys, source families, false retention/explicit bridges and K/SK/SKA snapshots.
+Helper/domain/source/copy stay unchanged; Lua/full admission remain separate.

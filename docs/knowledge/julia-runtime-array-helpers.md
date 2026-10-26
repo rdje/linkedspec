@@ -2,6 +2,7 @@
 id: julia-runtime-array-helpers
 title: Julia array helpers and standalone transform writeback
 answers:
+  - why do Julia has_key results require scalar guarding before container methods
   - why do Julia direct default scalar results reject container consumers
   - how do Julia aggregate results retain scalar boundaries after named array mutations
   - why does Julia count reject nonarrays and extra receiver arguments
@@ -19,10 +20,10 @@ answers:
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
 date: 2026-10-26
-status: bounded value/default guards; full admission open
+status: bounded value/default/index/has_key guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
 evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/index_result_receivers_test.jl\"); include(\"julia/test/default_selected_receivers_test.jl\")'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/has_key_result_receivers_test.jl\"); include(\"julia/test/index_result_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -67,4 +68,4 @@ separate from scalar numeric magnitude preservation under .2.9.
 
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-23.3 value/arity fixtures retain AbstractVector Count and one-operand joins/index_of. _evaluate_runtime_fluent_chain! includes defaults/index_of in scalar tracking for any source until actual AbstractVector/AbstractDict output: Scalar/null sorted/sorted_values [] becomes null; container flow stays intact. Strict native/plan/fresh-emitted default/join checks pass; full admission open.
+23.3 ordinary guards retain AbstractVector Count; join/index/has_key take one operand. Defaults/index/has_key stay scalar until actual AbstractVector/AbstractDict output.23.3.8.4 retains correct flow/K/SK/SKA, fixing container[], missing0!/extra1! and four effects; strict native/plan/fresh/direct index plus compilation pass. Integer0/1 presence/source/copy unchanged; full admission open.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
+Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 
 ## Latest Completed Slice
 
-Dart retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Native/restored/generated-plan has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper Number0/1, false/null-valued keys, String key forms, source families, false retention and explicit bridges stay unchanged. Fatal selected-file analysis/book/fast continuity pass; Julia assessment next, full admission separate.
+Julia retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Strict native/generated-plan/fresh-emitted has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper integer0/1, false/null stored values, String keys, source families, false retention and explicit bridges stay unchanged. Package compilation/book/fast continuity pass; Lua assessment next, full admission separate.
 
 ## Next Action
 
-Independently assess Julia has_key result/key/shape behavior under23.3.8.4 with shared fixture; repair confirmed ordinary gaps only, preserve actual producer kinds/domains/snapshots. Strict compile/small native/plan/fresh/direct checks/docs/commit.
+Independently assess Lua has_key result/key/shape behavior under23.3.8.5 on available PUC/LuaJIT with matching products and shared fixture. Repair only confirmed ordinary gaps; small native/plan/fresh/direct/loadfile checks/docs/commit. Declared5.4/full admission stay separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` — Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
@@ -29,7 +30,6 @@ Independently assess Julia has_key result/key/shape behavior under23.3.8.4 with 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
 
 ## History
 

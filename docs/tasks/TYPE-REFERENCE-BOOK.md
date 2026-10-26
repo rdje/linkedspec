@@ -2126,10 +2126,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.3 - guard Dart has_key result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia has_key result/key/shape targets.
   Dependencies: .23.3.8.3.
   Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+  Activation: clean `99167513535ddb39eff8932e481f4744d8b0a076`; Dart committed, brief empty, tree clean.
+  Owned paths: Confirmed Julia has_key ordinary scalar/shape gaps only; native/generated-plan/fresh-emitted shared fixture, direct index compatibility and current docs.
+  Verification tier: `focused`
+  Focused checks: Strict Julia native/generated-plan/fresh-emitted has_key fixture before/after repair, direct index fixture, package compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored values/order, no quantified corpus or portable measurement.
+
+  Completion: Include has_key in existing exact-one-operand fluent preflight and source-independent may_produce_scalar; actual AbstractVector/AbstractDict output releases the guard.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native shared fixture JSON retains correct flow/order/snapshots but incompatible/after-text [], missing0!, extra1! and four effects; native/plan/fresh expectations all RED.
+  - [x] ROOT CAUSE (WHY + WHERE): Interpreter.jl _evaluate_runtime_fluent_chain! omits has_key from scalar producers and exact-one-operand preflight.
+  - [x] FIX: Add has_key to those existing checks independently of source kind; explicit container outputs release the guard. Integer0/1 presence helper remains unchanged.
+  - [x] ADDRESSED (verified): Strict native/generated-plan/fresh-emitted shared fixture passes presence/false retention, String keys, source families, scalar nulls/explicit bridge, zero malformed effects and K/SK/SKA snapshots after RED.
+  - [x] NO REGRESSION: Direct three-route index fixture and package compilation pass under startup/history disabled and depwarn=error;9 assertions total. No broad suite/helper/domain/source/copy/format change.
+  - [x] LOCKSTEP: Register fixture; contract/worked catalog/guide, Julia/hash facts/map and task/live/resume updated; book and fast memory/cadence/diagnosis/history/diff pass. Lua5 assessment next after clean commit; full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.4 - guard Julia has_key result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.5`
   Status: `pending`
@@ -2215,11 +2232,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; independent Julia4 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; independent Lua5 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` | `pending` | Independent Julia has_key result/key/shape assessment after bounded Dart repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` | `pending` | Independent Lua has_key result/key/shape assessment after bounded Julia repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
