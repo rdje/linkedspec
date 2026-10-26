@@ -47188,7 +47188,7 @@ subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
 
 subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.4: number receiver-dot value chains feed the
-    # receiver into the existing num_* helper family. Comparisons are terminal.
+    # receiver into the existing num_* helper family. Comparison results now support compatible scalar consumers.
     plan tests => 14;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47212,9 +47212,9 @@ subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
     like($L->('return(3.5.floor().add(1))'), qr/__ls_num_floor_value = 3\.5.*__ls_num_add/s,
         'decimal numeric literal receiver chains skip the decimal dot and lower through floor/add');
     like($L->('return(score.abs().gt(3))'), qr/__ls_num_abs.*LinkedSpec::Numeric::evaluate\('num_gt', \$__ls_num_cmp_lhs, \$__ls_num_cmp_rhs\)/s,
-        'number comparison terminals lower as scalar boolean values');
-    is($L->('return(5.gt(3).add(1))'), 'return undef',
-        'terminal number comparisons cannot continue through later receiver-dot calls');
+        'number comparisons lower as scalar numeric flags');
+    like($L->('return(5.gt(3).add(1))'), qr/(?=.*'num_gt')(?=.*__ls_num_add)/s,
+        'numeric comparison results continue through compatible receiver-dot calls');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(score, -3.7); return(array(score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12), 5.mod(2), 3.5.floor().add(1), 3.5.round(), score.abs().gt(3), score.abs().le(4))) }\n"
@@ -47223,16 +47223,16 @@ subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
     ok(ref($parser) eq 'CODE', 'number receiver value-chain spec compiles to a parser')
         or diag(normalize_error($@));
     is($run->($parser, 'xhello'), '[8.5,1,4,4,1,1]',
-        'number receiver value chains return numbers and comparison booleans');
+        'number receiver value chains return numbers and numeric comparison flags');
 
-    my $terminal_spec = "Top::\n"
+    my $comparison_spec = "Top::\n"
                       . " /x/ -> Done { return(array(5.gt(3).add(1), 5.eq(5).abs())) }\n"
                       . "\nDone::\n /[a-z]+/\n";
-    my $terminal_parser = eval { LinkedSpec::Get(\$terminal_spec) };
-    ok(ref($terminal_parser) eq 'CODE', 'terminal-continuation number receiver spec compiles to a parser')
+    my $comparison_parser = eval { LinkedSpec::Get(\$comparison_spec) };
+    ok(ref($comparison_parser) eq 'CODE', 'continued-comparison number receiver spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($terminal_parser, 'xhello'), '[null,null]',
-        'terminal number comparisons followed by later calls return undef');
+    is($run->($comparison_parser, 'xhello'), '[2,1]',
+        'numeric comparison flags feed arithmetic and unary methods');
 
     my $src = $gen->($spec);
     is((() = ($src =~ /my \$score\b/g)), 1,

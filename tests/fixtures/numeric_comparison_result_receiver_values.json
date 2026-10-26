@@ -1,0 +1,108 @@
+{
+  "positive": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "negative": [
+    "0!",
+    "0!",
+    "0!",
+    "0!",
+    "0!",
+    "0!"
+  ],
+  "raw": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "nested": [
+    "1!",
+    "0!",
+    2,
+    "X"
+  ],
+  "numeric": [
+    3,
+    2,
+    "1!"
+  ],
+  "boundaries": [
+    "1!",
+    "1!",
+    "1!",
+    "0!"
+  ],
+  "invalid": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "defaults": [
+    8,
+    "1!"
+  ],
+  "retained": "0!",
+  "bridged": "X",
+  "predicate_again": "1!",
+  "false_data": "0!",
+  "incompatible": null,
+  "after_text": null,
+  "effected": "1!",
+  "order": "SOC",
+  "source_calls": 1,
+  "operand_calls": 1,
+  "source": null,
+  "null_effected": 8,
+  "null_order": "SOC",
+  "bad": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "invalid_effects": 0,
+  "score": 2,
+  "meta": {
+    "n": 2
+  },
+  "selected": "1!",
+  "pipeline": "1!",
+  "hash": "1!",
+  "function": "1!",
+  "default": "1!",
+  "count": "1!",
+  "length": "1!",
+  "sum": "1!",
+  "join": "1!",
+  "split": "1!"
+}

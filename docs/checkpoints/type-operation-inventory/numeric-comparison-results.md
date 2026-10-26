@@ -51,3 +51,17 @@ probe before recording the successful baseline. Optional canonical_flow probes
 unpromised .num_* names and their current compile diagnostics; it is excluded
 from normal focused replay and does not establish a promised receiver defect.
 No production change or full backend/admission claim at this freeze.
+
+## Bounded Perl implementation
+
+23.3.15.1 classifies six short comparisons as scalar_result, keeping numeric
+helper mapping and shape checks. Native/fresh shared RED becomes passing for
+six pairs/numeric kinds, strict invalid inputs/defaults, source families and
+SOC/once-only/result snapshots. Numeric flags still work as Array write indexes.
+Two hidden bridge gaps also require shared dispatch: Number loop must consume
+actual Array after split, and String prefix must hand short comparisons to the
+scalar dispatcher. Public generated-handler residue and changed outer callback
+calibration expose both; after repair59 focused shared/actual AST/Phase0/calibration
+assertions pass. Seven ordinary outer rows intentionally update to0x/1x/read-once;
+deferred and unknown-tail controls retain null/no-effects. Direct lexical/syntax
+checks pass; other backends and full domain/context/portable admission remain.

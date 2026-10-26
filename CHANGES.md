@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.15.1 — continue Perl numeric comparison results
+
+Perl six short numeric comparison results now use scalar_result, preserving strict numeric1/0/invalid-null and one-RHS preflight. Shared native/fresh source/kind/false/default/numeric/String/Array/shape and selector checks pass after RED. Public dump exposed Number-to-Array and String-prefix-to-numeric handoff gaps; scoped shared dispatch fixes both.59 focused assertions including actual touched AST/Phase0 cases and updated ordinary callable rows pass; deferred/unknown-tail boundaries remain. Direct lexical/syntax and book/history/continuity checks align; Rust15.2 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.15 — freeze numeric comparison result continuations
 
 Frozen numeric-comparison-results.md extends existing short eq/ne/gt/ge/lt/le methods with compatible actual numeric/null result continuations under five independent backend children. Public Perl native/fresh/substitution controls retain numeric1/0, strict decimal/invalid-null, correct nested false/default/numeric/bridge and captured SOC behavior. Current intentional terminal methods lower continued expressions to undef before effects; no old promised defect or producer change claimed. Syntax and scoped book/fact/task/live updates align; Perl15.1 next with small direct checks, full domain/portable admission separate.

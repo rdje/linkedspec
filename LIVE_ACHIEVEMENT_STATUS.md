@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
+Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 
 ## Latest Completed Slice
 
-Frozen numeric-comparison-results.md extends existing short eq/ne/gt/ge/lt/le methods with compatible actual numeric/null result continuations under five independent backend children. Public Perl native/fresh/substitution controls retain numeric1/0, strict decimal/invalid-null, correct nested false/default/numeric/bridge and captured SOC behavior. Current intentional terminal methods lower continued expressions to undef before effects; no old promised defect or producer change claimed. Syntax and scoped book/fact/task/live updates align; Perl15.1 next with small direct checks, full domain/portable admission separate.
+Perl six short numeric comparison results now use scalar_result, preserving strict numeric1/0/invalid-null and one-RHS preflight. Shared native/fresh source/kind/false/default/numeric/String/Array/shape and selector checks pass after RED. Public dump exposed Number-to-Array and String-prefix-to-numeric handoff gaps; scoped shared dispatch fixes both.59 focused assertions including actual touched AST/Phase0 cases and updated ordinary callable rows pass; deferred/unknown-tail boundaries remain. Direct lexical/syntax and book/history/continuity checks align; Rust15.2 next, full admission separate.
 
 ## Next Action
 
-Activate TYPE23.3.15.1 from the clean freeze: add retained shared numeric-comparison result/source/arity/kind/bridge/invalid/default fixture, observe native/fresh RED, minimally continue Perl six short comparison results through existing scalar dispatch while preserving helper mapping/numeric domains/one-RHS preflight and source snapshots. Run small changed-surface/direct checks/syntax/docs/commit. Then independently assess Rust15.2, Dart15.3, Julia15.4 and safe Lua15.5; no full gate/matrix now.
+Independently assess Rust scalar-numeric-v1 free numeric producers and ordinary six short eq/ne/gt/ge/lt/le result/shape/bridge transitions under15.2. Reuse shared numeric_comparison_result_receiver_values reference after producer confirmation; preserve strict numeric kinds/domains/free signatures/source snapshots. Update actual old terminal expectations intentionally, including named corpus/unit calibrations only when affected; native/restored/plan, quick direct compile/rustfmt/docs/commit. No full suite or transitive dependency inspection.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
@@ -29,7 +30,6 @@ Activate TYPE23.3.15.1 from the clean freeze: add retained shared numeric-compar
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 
 ## History
 

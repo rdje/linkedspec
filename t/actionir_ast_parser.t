@@ -1286,14 +1286,15 @@ subtest 'fluent_chain value lowering consumes AST nodes' => sub {
         my $hash_array = LinkedSpec::call_spec_handler_subst('Top', q{return(meta.set_key("c",3).sorted_keys().join_values(","))});
         like($hash_array, qr/__ls_set_key_source.*__ls_sorted_keys.*__ls_join_values/s, 'AST fluent_chain lowering preserves hash-to-array receiver chains');
 
-        my $invalid_number_continuation = LinkedSpec::call_spec_handler_subst('Top', q{return(score.floor().gt(2).add(1))});
-        is($invalid_number_continuation, q{return undef}, 'AST fluent_chain lowering preserves terminal number-chain continuation behavior');
+        my $number_comparison_continuation = LinkedSpec::call_spec_handler_subst('Top', q{return(score.floor().gt(2).add(1))});
+        like($number_comparison_continuation, qr/(?=.*__ls_num_floor)(?=.*'num_gt')(?=.*__ls_num_add)/s,
+            'AST fluent_chain lowering continues the actual numeric comparison result');
 
         my $bad_substr = LinkedSpec::call_spec_handler_subst('Top', q{return("abc".substr())});
         unlike($bad_substr, qr/\breturn\s+substr\s*\(/, 'unsupported covered chain helper no longer lowers to a host substr call');
         like($bad_substr, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered chain helper leaves diagnostic sentinel');
 
-        my $all = join("\n", $numeric, $string_array, $block_array, $hash_array, $invalid_number_continuation, $bad_substr);
+        my $all = join("\n", $numeric, $string_array, $block_array, $hash_array, $number_comparison_continuation, $bad_substr);
         unlike($all, qr/__bad_/, 'AST fluent_chain lowering does not reuse fake chain, call, receiver, or argument source text');
     }
 

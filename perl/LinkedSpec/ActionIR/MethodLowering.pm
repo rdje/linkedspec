@@ -5313,6 +5313,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $is_last = ($idx == $#$calls) ? 1 : 0;
 
     if ($current_family eq 'string') {
+     if ($method =~ /^(?:eq|ne|gt|ge|lt|le)$/o) {
+      my $applied = $append_selected_value_chain_call->($current_expr, $call, 'scalar_result');
+      return undef unless ref($applied) eq 'ARRAY';
+      ($current_expr, $current_family) = @$applied;
+      next;
+     }
      my $return_family = _string_receiver_value_chain_return_family($method);
      return undef unless defined($return_family);
 
@@ -5364,6 +5370,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
      return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     next;
+    }
+    if ($current_family eq 'array') {
+     my $applied = $append_array_chain_call->($current_expr, $call);
+     return undef unless ref($applied) eq 'ARRAY';
+     ($current_expr, $current_family) = @$applied;
      next;
     }
     my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
@@ -7770,7 +7782,7 @@ sub _number_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
  return 'number' if $method =~ /^(?:abs|floor|ceil|round|add|sub|mul|div|mod|min|max|clamp)$/o;
- return 'terminal' if $method =~ /^(?:eq|ne|gt|ge|lt|le)$/o;
+ return 'scalar_result' if $method =~ /^(?:eq|ne|gt|ge|lt|le)$/o;
  return undef
 }
 

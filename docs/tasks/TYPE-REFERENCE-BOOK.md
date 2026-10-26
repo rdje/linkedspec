@@ -3268,10 +3268,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Independently preserve scalar-numeric-v1 producers, strict domains, one-RHS preflight, once-only source/RHS/consumer order and numeric/null scalar boundaries, compatible defaults/generic/String/explicit-container bridges. Small changed-surface/direct checks/docs/commit per backend; full domain/context/portable admission23.4 separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary numeric comparison result continuations.
   Dependencies: .23.2.15.
   Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `26454b71bbcd1e5bff5fcb457a7759531bc161de`; numeric result freeze committed, brief0/tree clean.
+  Owned paths: Perl ordinary numeric comparison result-family handoff, retained shared native/fresh result/type/shape/effect/selector fixture, intentional ordinary AST/Phase0/codeblock-outer expected updates and direct focused selectors, synchronized book/facts/task/live docs. Deferred callback vocabulary remains unchanged.
+  Verification tier: `focused`
+  Focused checks: Shared public native/fresh RED/GREEN, actual touched AST/Phase0 named cases and changed outer numeric-codeblock rows plus deferred preservation control; direct comparison, syntax/compile and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary result implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored results and preservation controls; no population/completeness measurement.
+
+  Implementation seams owned here: Initial result-family-only change makes ordinary numeric/text/default consumers work but exposes two frozen bridge gaps. Public generated handler retains score.eq(2).cat(...).split(...).last().uppercase() (compile error at .eq): Number loop cannot consume the actual Array after explicit split. Actual outside/cat-prefix-gt-tail fixture retains read().cat(...).gt(...), failing handler compile: String loop lacks the existing short numeric-comparison handoff. Add only the missing scoped actual-kind dispatches; retain deferred terminal policy and unsupported-tail no-effects.
+
+  Completion: Classify six short numeric comparisons as scalar_result and preserve existing strict numeric helper mapping/one-RHS preflight. Number chains now hand actual explicit split Arrays to the shared Array dispatcher; String prefixes can hand six existing numeric comparison methods to shared scalar dispatch. Producers and deferred runtime remain unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared native/fresh RED returns raw/nested/invalid producers correctly but every continued comparison null, effects skipped/source2. Selector-kind control already works. Initial family-only repair exposes public generated-handler raw bridge .eq and outside/cat-prefix .gt compile residue; own both frozen transition gaps in this leaf, without blessing null/compile errors.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering _number_receiver_value_chain_return_family marks comparisons terminal. Public dump shows score.eq(...).cat(...).split(...).last().uppercase() residue because Number loop lacks actual Array handoff; actual outer callback fixture read().cat(...).gt(...) remains raw because String loop lacks numeric comparison handoff. CodeblockRuntime has its own deliberate terminal preflight, retained unchanged.
+  - [x] FIX: scalar_result comparison classification plus scoped shared Array dispatch in Number loop and six-comparison scalar dispatch from String loop. Intentionally update actual AST poisoned-node/Phase0 ordinary comparison calibration and seven ordinary outer numeric-codeblock expectations; keep deferred/unknown-tail expectations and source/value policies.
+  - [x] ADDRESSED (verified): Shared native/fresh six true/false pairs, numeric1/0 and strict invalid-null/decimal controls, source families, false retention/default8/definedness/numeric consumers, repeated comparison, explicit String/Array bridgeX, scalar negatives, source1/operand1/SOC/final-null, invalid-source SOC/default8 and twelve malformed no-effects pass. Numeric flag still writes Array index1. Actual modified outer callable rows now produce0x/1x with one read, deferred and unknown-tail no-effects stay passing.
+  - [x] NO REGRESSION:59 assertions across shared fixture and exact actual AST/Phase0 named cases plus changed outer rows/deferred preservation pass after bridge repair. Direct lexical comparison, changed source/test syntax pass as recorded; no whole Phase0/parser/numeric suites, deferred vocabulary expansion or full admission.
+  - [x] LOCKSTEP: Shared source/expected/test and current calibration rows, frozen contract progress, scoped book/grammar examples and canonical number-chain fact/map, live/task/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Engineering hot-root reached59008/65536 bytes: normal rollover archived143 lines as segment4955, leaving199 lines/32488 bytes; immutable prior history untouched. New Perl fixture selection remains mandatory23.4.1. Rust15.2 independent producer/transition assessment follows.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.1 - continue Perl numeric comparison results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.2`
   Status: `pending`
@@ -3394,7 +3413,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` | `pending` | Implement Perl short numeric comparison result continuation under the frozen contract. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` | `pending` | Independently assess and implement Rust numeric comparison result continuation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
