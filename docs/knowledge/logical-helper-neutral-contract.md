@@ -77,3 +77,9 @@ incompatible tails. Perl17.1.1 now binds the prior source/prefix once in scalar
 context before null rejection;24 focused native/fresh checks retain LR/LRC/S,
 skip incompatible consumer operands and preserve malformed-shape preflight.
 Dart17.3 is next. No complete result-family admission is claimed.
+
+Dart17.3 tracks actual Bool at fluent entry and after selection:15 focused
+native/restored/plan/direct tests and fatal analysis pass after container[]/SA
+operand-effect RED. LR/LRC/S, source typed errors, real Bool and strict numeric
+rejection remain; named container-context normalization is unchanged. Julia/
+Lua17.4-.5 independently assess next; full admission stays separate.

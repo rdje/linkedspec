@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
+Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
 
 ## Latest Completed Slice
 
-Perl17.1.1 repairs its newly introduced discarded-source regression: terminal scalar rejection binds the previous emitted logical/prefix result once before returningnull, skipping incompatible consumer operands.24 focused native/fresh rejected-effect/current-result/error checks and syntax pass after LR/LRC/S RED. Malformed consumer preflight remains[null,0]; typed source errors, actual Bool/false/default/bridge/source kinds and retired Hash-arrow rejection stay green. Book/facts/task/live align; parent Perl17.1 closes and independent Dart17.3 is next. Full admission separate.
+Dart logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after each result. Fifteen focused native/restored/plan producer/shared/rejected-effect/selected-block-literal/source-error/default/named neutral tests and format/fatal selected analysis pass after container[]/SA effect RED. LR/LRC/S, real Bool/default/bridge/source kinds and typed errors remain; named container-context normalization/free/truth/numeric policies unchanged. Book/facts/task/live align; Julia17.4 next, full admission separate.
 
 ## Next Action
 
-Independently assess Dart logical Boolean producers/shared/rejected-effect/source-error flow17.3 under logical-results.md before production. Preserve real Bool/eager typed truthiness/strict numeric rejection/free signatures and typed source arity errors. Reuse actual-value dispatch; fix confirmed guards only with native/restored/plan producer/shared/error and LR/LRC/S fixtures plus small direct tests/format/fatal analysis/docs/commit; then Julia/Lua17.4-.5. No full suite/matrix or new logical methods.
+Independently assess Julia logical Boolean producer/shared/rejected-effect/actual-kind/source-error flow17.4 under logical-results.md before production. Preserve real Bool identity (not Number lookalikes), eager typed truthiness/strict numeric rejection/free and named-context policies, source snapshots and typed arity errors. Reuse actual-value dispatch; fix confirmed guards only, native/plan/fresh and small direct checks/strict compile/docs/commit, then safe Lua17.5. No full suite/matrix/new logical methods.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` — Perl logical Boolean result flow and typed source error repairs targeted-checked; Rust independent assessment next.
@@ -29,7 +30,6 @@ Independently assess Dart logical Boolean producers/shared/rejected-effect/sourc
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` — Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` — Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
 
 ## History
 

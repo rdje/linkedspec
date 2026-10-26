@@ -121,3 +121,16 @@ source effects.24 focused checks across rejected effects/current logical result
 and error regression plus module/test syntax pass; no truthiness/free/container
 helper normalization. Both new Perl logical tests require23.4.1 registration.
 The temporary rejected-effect limitation is repaired; Dart17.3 is next.
+
+## Bounded Dart implementation
+
+17.3 confirms producer/eager truth/numeric-null and typed source errors before
+production. Valid bridges/defaults already work; actual Boolean container
+fallthrough yields[] and executes an incompatible take operand (SA). Selected/
+block/literal Boolean controls also yield[] on sorted. Mark actual Bool scalar
+at fluent entry and after every result; existing container outputs release the
+boundary. Preserve free/named-context normalization and every logical adapter.
+Fifteen focused native/restored/plan/new/direct/default tests, format and fatal
+selected analysis pass. Shared source effects retain LR/LRC/S and skip consumer
+operands; five malformed logical calls keep typed errors. No standalone or
+complete domain/context/portable admission. Julia17.4 is next.

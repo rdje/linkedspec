@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.17.3 — guard Dart logical Boolean results
+
+Dart logical producers/valid flow/source errors already work; actual Bool now marks scalar at fluent entry and after each result. Fifteen focused native/restored/plan producer/shared/rejected-effect/selected-block-literal/source-error/default/named neutral tests and format/fatal selected analysis pass after container[]/SA effect RED. LR/LRC/S, real Bool/default/bridge/source kinds and typed errors remain; named container-context normalization/free/truth/numeric policies unchanged. Book/facts/task/live align; Julia17.4 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1 — preserve rejected logical source effects
 
 Perl17.1.1 repairs its newly introduced discarded-source regression: terminal scalar rejection binds the previous emitted logical/prefix result once before returningnull, skipping incompatible consumer operands.24 focused native/fresh rejected-effect/current-result/error checks and syntax pass after LR/LRC/S RED. Malformed consumer preflight remains[null,0]; typed source errors, actual Bool/false/default/bridge/source kinds and retired Hash-arrow rejection stay green. Book/facts/task/live align; parent Perl17.1 closes and independent Dart17.3 is next. Full admission separate.

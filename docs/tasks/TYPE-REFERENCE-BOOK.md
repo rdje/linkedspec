@@ -3578,7 +3578,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5 - guard Lua scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17`
-  Status: `active` / Perl implemented; independent backend rollout next
+  Status: `active` / Perl/Rust/Dart targeted-checked; Julia/Lua next
   Goal: Complete bounded ordinary logical Boolean result continuation and clean scalar boundaries while retaining eager typed producer/error contracts.
   Dependencies: .23.2.17 frozen logical-results.md.
   Children: `.23.3.17.1`, `.23.3.17.2`, `.23.3.17.3`, `.23.3.17.4`, `.23.3.17.5`.
@@ -3673,7 +3673,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.2 - guard Rust logical Boolean results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Dart ordinary logical Boolean result continuations.
   Dependencies: .23.3.17.2.
   Acceptance: Follow logical-results.md, preserving actual Bool/strict numeric rejection, eager typed truthiness/source snapshots/free signatures, defaults/explicit Array-Hash bridges/scalar boundaries and pre-effect typed source arity errors. Public producer-first native/generated RED/GREEN and small direct checks/docs/commit; full admission separate.
@@ -3682,6 +3682,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
 
+
+  Activation: clean `41b61a86bb51cdc872c71e3b6940f69bdec6f67d`; Perl rejection-effect follow-up committed, brief0/tree clean.
+  Owned paths: Dart independently confirmed logical Boolean actual-result guards, retained native/restored/plan producer/shared/rejected-effect/source-error regression, scoped book/facts/task/live docs. Preserve typed truth/eager Bool/numeric rejection/free signatures/named context normalization and snapshots.
+  Verification tier: `focused`
+  Focused checks: Public producer-first RED/GREEN, direct selected neutral logical/default tests, format/fatal selected analysis and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Mark actual Boolean fluent input and any resulting Boolean scalar, reusing existing value dispatcher/container release and preserving named context normalization, helper/error/truth/numeric policies. Retain producer/shared/rejected-effect/actual-Bool/source-error regression.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent canonical Bool/nested/eager LRC/strict numeric-null producer and five typed source-error cases pass before production. Shared RED has container[] instead ofnull; rejected take runsA (SA). Actual selected/block/literal Bool sorted controls yield three[] values. Correct producer and source evaluation are not blamed.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluateFluentCallsWithValue initializes scalarResult=false and never recognizes actual Bool selected from another helper. Existing scalar guard therefore permits container dispatch/operand effects, although actual-value source/error logic is correct.
+  - [x] FIX: Initialize scalar tracking from actual bool and retain it after Bool-yielding links; existing Array/Map results release the boundary. No method/parser/schema/eager truth/numeric/free signature, named container-context or typed source error changes.
+  - [x] ADDRESSED (verified): Nine new native/restored/plan cases retain strict raw Bool/nested/typed truth/numeric-null/shared sources/defaults/bridges and five typed source-arity errors with unknown/known operands. Actual selected/block/literal Boolean boundaries rejectnull; LR/LRC/S prefix effects survive while incompatible take operandA is skipped.
+  - [x] NO REGRESSION: Fifteen focused tests total include direct defaults and three actual named neutral logical native/normalized fixtures, preserving prior with/lazy controls. Format/fatal selected source/new-test analysis pass. No full suite, standalone emitted or full context/portable admission claim.
+  - [x] LOCKSTEP: Retained current tests, contract/qualified public examples and compacted canonical Dart fact with exact prior Git pointer plus neutral fact/map/task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Julia17.4 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.3 - guard Dart logical Boolean results`.
+  Continuity defect owned/fixed: Current Frontier paragraph still schedules assessment14 after its completed rollout and later15/16 work, despite the correct17.3 row. Prior slices advanced the row but accumulated stale summary prose. Replace the paragraph with a bounded current family/admission view; Git preserves the old chronology.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.4`
   Status: `pending`
@@ -3799,11 +3817,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is implemented/targeted-checked; Rust2 result/shape and literal-flag repair are targeted-checked; Dart3 scalar/shape/null-operand and i/m/s repair is targeted-checked; Julia4 scalar/shape/null-operand repair is targeted-checked; Lua5 terminal/scalar/shape/null-operand repair is targeted-checked on available hosts; P1 grouped Dart regex6 is targeted-checked for complete literal priority; broader scanner owners remain open. Definedness23.2.10 is frozen; Perl generic definedness23.3.11.1 is implemented/targeted-checked; Rust2 generic dispatch/shape and Boolean/null literal postfix repair is targeted-checked; Dart3 scalar/shape definedness repair is targeted-checked; Julia4 definedness scalar/shape repair is targeted-checked with explicit Bool identity; Lua5 definedness terminal/scalar/shape repair is targeted-checked on available hosts; String comparison23.2.11 is frozen; Perl six String comparison counterparts23.3.12.1 are implemented/targeted-checked; Rust2 six String comparison counterpart/result/shape implementation is targeted-checked; Dart3 receiver scalar/shape guards are repaired/targeted-checked with existing Boolean/null semantics; Julia4 scalar/shape guards are repaired/targeted-checked with Bool/null semantics; Lua5 comparison terminal/scalar/shape repair is targeted-checked on available PUC5.5.1/LuaJIT; residual Dart mode repair23.2.12 and complete grouped operand scanner23.3.10.7 are targeted-checked; contains23.2.13 is frozen, Perl23.3.13.1 and Rust2 result/required-needle repairs are targeted-checked (Rust named-source capture repaired), Dart3 contains scalar/shape guards are targeted-checked with existing numeric producers/snapshots; Julia4 guards/calibration are targeted-checked with explicit numeric identity and correct existing source captures; Lua5 scalar/shape/calibration is targeted-checked on available PUC5.5.1/LuaJIT; bounded contains rollout is targeted-checked. P1 membership equality/sibling snapshot assessment23.2.14 is scheduled immediately after this rollout. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and recorded direct repairs are targeted-checked on their documented hosts. Aggregate-null/snapshot14, numeric comparison15 and scalar arithmetic16 bounded children are targeted-checked; complete domain/context/portable admission remains23.4. Logical Boolean17 now has Perl17.1 (including rejected-source-effect follow-up17.1.1), Rust17.2 and Dart17.3 targeted-checked. Julia17.4 is the precise next leaf, followed by safe Lua17.5. Preserve existing typed producer/free/named-context/overload boundaries; explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence. See each family node for exact retained evidence and open owners; this paragraph is current state, not chronology.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` | `pending` | Independently assess and implement Dart logical Boolean result continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` | `pending` | Independently assess and implement Julia logical Boolean result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

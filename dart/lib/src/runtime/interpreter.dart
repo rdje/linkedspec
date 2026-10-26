@@ -5117,7 +5117,7 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
   }) {
-    var scalarResult = false;
+    var scalarResult = value is bool;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
       // Scalar results retain this boundary; generic emptiness predicates
@@ -5163,7 +5163,10 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       scalarResult =
-          (scalarResult || mayProduceScalar) && value is! List && value is! Map;
+          value is bool ||
+          ((scalarResult || mayProduceScalar) &&
+              value is! List &&
+              value is! Map);
     }
     return value;
   }
