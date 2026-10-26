@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.1 — reuse scalar continuation for joins
+
+append_array_chain_call marked join terminal, and ordinary preflight lacked exact one-delimiter rejection. Two production changes reuse scalar_result flow and suppress malformed source/operand effects. The retained native/fresh fixture passes after actual handler-compile/result RED, including hash-view lowering, direct/selected/pipeline/function/String sources, Unicode, empty join, split/length bridges, SDAN order and snapshots despite delimiter/consumer mutations. Direct aggregate and changed module/test/registration syntax pass. Existing join helper/source/copy/null behavior and separate deferred evaluator stay unchanged. Register fixture and align book/contract/Array fact/map/task/live; Rust starts with public probes next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.4 — join result flow without producer changes
 
 A compound probe returns null with structured last_error; isolate before attribution. Direct/selected chains stop beside nested A,B/A-B; hash-view continuation retains raw DSL and reaches host sorted_values, while its nested control returns X:Y. Public substitution confirms lowering fallthrough, not a missing free helper. Single-step computed/named receivers already preserve snapshots and SDN order. Invalid delimiter shapes leak handler compile errors. Freeze actual joined String continuation plus clean one-delimiter rejection, preserve existing helper/source/copy/deferred policies and retain all executed producers. Contract/book/Array fact/map/current records align; Perl23.3.5.1 implementation follows, with full admission/source normalization separately owned.

@@ -1543,21 +1543,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5`
-  Status: `pending`
+  Status: `active` / Perl implemented; individual backend assessment follows
   Goal: Implement the frozen ordinary joined String result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.4.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`; assess later backends individually after clean commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`; assess later backends individually after clean commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `6978191195862cb74c0f6bd20081c5b3dba28d86`.
   Goal: Continue ordinary Perl join_values String results through compatible pure methods using existing result dispatch.
   Dependencies: .23.2.4.
   Owned paths: MethodLowering.pm, small native/fresh regression and suite registration, helper/guide/contract/fact/map/task/live records.
-  Planned tier: `focused`; changed-module/test syntax and small direct consumer checks before commit.
-  Claim verification: none: Unactivated bounded implementation; declare deterministic proof at activation.
+  Verification tier: `focused`
+  Focused checks: Small native/fresh joined_string_receiver_contract after actual RED plus direct aggregate_numeric_receiver_contract, changed-module/test/registration syntax, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation under director feature-first cadence; complete public/context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
   Acceptance: Add joined-result flow and exact one-delimiter pre-effect shape rejection, remove raw DSL from the valid hash-view chain and preserve correct producer snapshots/SDN order. Check direct/selected/pipeline/hash/function and empty sources, actual String/length/split transitions, old incompatible/deferred boundaries and later mutations. Small native/fresh plus direct aggregate checks, syntax/docs/commit before Rust assessment; source-domain normalization and Lua false-delimiter repair stay separately owned.
+
+  Completion: Classify join_values as scalar_result using existing six-loop continuation handling and add exact one-delimiter preflight before effects. Preserve the join helper, free delimiter-first roles, existing snapshots/order/domains and separate deferred evaluator; no new formats/types.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public isolated Get/substitution confirms stopped direct/selected results and raw hash DSL/host sorted_values lookup. Retained native/fresh fixture RED exposes invalid-shape handler compile failure and stopped joined results.
+  - [x] ROOT CAUSE (WHY + WHERE): append_array_chain_call returns terminal for join_values; later loops stop or fall through to raw DSL. Ordinary preflight lacks an exact one-delimiter check.
+  - [x] FIX: Return scalar_result from the join handoff and reject other arities before lowering source/operand effects, reusing existing continuation/compatibility machinery.
+  - [x] ADDRESSED (verified): Small native/fresh joined_string_receiver_contract PASS after RED for named/literal/function/selected/pipeline/hash/String sources, empty/Unicode, split/length bridges, SDAN order, mutation snapshots, clean invalid-shape nulls/zero effects and incompatible Array nulls.
+  - [x] NO REGRESSION: Direct aggregate_numeric_receiver_contract and changed-module/new-test/registration syntax PASS. Existing join source domains/copy/null policies and separate deferred evaluation are unchanged; no additional context/portable admission.
+  - [x] LOCKSTEP: Register fixture; update helper/guide/contract examples, Array fact/map and current task/live records; book and fast continuity/history/diff checks pass. Rust assessment follows the clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1 - continue Perl joined String results`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary joined String result continuations on Rust.
+  Dependencies: .23.3.5.1.
+  Owned paths: Rust public engine if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
+  Planned tier: `focused`; declare exact public probes and small regression at activation.
+  Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
+  Acceptance: Preserve correct dispatch and join source/domains/snapshot behavior. Probe valid joined-result chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and receiver/delimiter/consumer order before classifying defects. Small native/restored/generated-plan and direct aggregate checks, compile/rustfmt/docs/commit before Dart. No new callable vocabulary, source-domain normalization or broad replay/admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1641,7 +1663,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` | `pending` | Implement frozen joined String result flow/one-delimiter guard on Perl, preserving producer snapshots and domains. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` | `pending` | Publicly assess/implement frozen joined String result flow on Rust after targeted-checked Perl slice. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

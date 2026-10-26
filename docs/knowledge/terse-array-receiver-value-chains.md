@@ -20,13 +20,12 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: join result contract frozen; Count/Length targeted-checked; full admission open
+status: Perl joined results implemented; other backend assessment/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length23.2.2; join result contract23.2.4."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test count_length_receivers"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/count_length_receiver_contract.t"
-  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_join_results_isolated.pl"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/joined_string_receiver_contract.t t/aggregate_numeric_receiver_contract.t"
 ---
 
 Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_values, filter_match/count and split_each/filter/count. join_values keeps delimiter-first free-helper roles. End mutations retain [[uniform-binding-array-end-result-supersession]]. Rust/Dart/Julia5.3.1-.3 implement dropped transforms with validated snapshots/ordered operands; pure value forms stay pure and broad5.3.4 stays open.
@@ -37,4 +36,4 @@ Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []
 
 Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md. Other mechanisms: [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]], [[lua-runtime-array-transform-pipelines]].
 
-23.2.4 freezes ordinary joined String continuations; contract: docs/checkpoints/type-operation-inventory/joined-string-results.md. Public Perl direct/selected chains stop beside nested controls. Hash-view continuation retains raw DSL and raises a host sorted_values call, while nested sorted_values works. append_array_chain_call marks join terminal. Existing single-step producer snapshots/SDN order already pass; preserve them. Missing/extra delimiter shapes need clean pre-effect null rejection. Perl23.3.5.1 is next; no portable implementation claim.
+23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Producer behavior/deferred scope stays unchanged; other backends require assessment.

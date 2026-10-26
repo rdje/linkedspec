@@ -1383,4 +1383,8 @@ subtest 'ordinary aggregate numeric receiver results' => sub {
     do File::Spec->catfile($repo_root, 't', 'aggregate_numeric_receiver_contract.t') or die $@ || $!;
 };
 
+subtest 'ordinary joined String receiver results' => sub {
+    do File::Spec->catfile($repo_root, 't', 'joined_string_receiver_contract.t') or die $@ || $!;
+};
+
 done_testing();

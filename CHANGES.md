@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.5.1 — continue Perl joined String results
+
+Use existing scalar_result handoff for join_values and reject non-one-delimiter shapes before effects. Small native/fresh joined-result and direct aggregate fixtures pass after RED, including working hash-view lowering, named/function/selected/pipeline/String sources, empty/Unicode, split/length bridges, SDAN order, mutation snapshots and incompatible Array nulls. Changed-file syntax/book and fast continuity checks pass. Register fixture and sync public/current records; Rust assessment next. Existing producer/domains/deferred scope remain unchanged; no broad admission.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.4 — define joined String result continuations
 
 Freeze ordinary join_values results feeding existing compatible String/Number methods, exact one-delimiter pre-effect shape rejection and explicit split/length bridges. Public isolated Get/substitution distinguishes stopped direct/selected chains and raw hash-view DSL/host lookup from working nested helpers; correct source snapshots/SDN order remain unchanged. Retain exact executed diagnostics and existing source/Lua false-delimiter/deferred owners. Update helper target/workaround and canonical/current records; book/continuity checks pass, Perl23.3.5.1 next. No production or portable completeness claim.

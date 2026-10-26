@@ -96,3 +96,13 @@ compile errors instead of clean pre-effect null values.
 its consumer. The retained public diagnostic scripts reproduce pairs, source
 snapshots, isolation and invalid shapes. Implement Perl first, then assess each
 backend individually; compile, quick-check, docs and commit per bounded slice.
+
+## Current implementation
+
+Perl `.23.3.5.1` uses existing scalar_result continuation and exact one-delimiter
+preflight. Native/fresh and direct aggregate checks pass after RED, covering
+named/literal/function/selected/pipeline/hash/String sources, empty/Unicode,
+String/length/split bridges, SDAN effects, later mutations, invalid arity and
+incompatible Array nulls. The join helper, source domains/null/copy behavior and
+separate deferred evaluator are unchanged. Rust and later backends require
+individual assessment; no complete context/portable admission is claimed.

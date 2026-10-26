@@ -4616,6 +4616,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $aggregate_args = $call->{args} || [];
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
+   return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
@@ -4761,7 +4762,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
    if ($method eq 'join_values') {
     return undef unless @$arg_exprs == 1;
-    return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'terminal'];
+    return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'scalar_result'];
    }
    if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
     return ['undef', 'terminal'] unless @$arg_exprs == 0;
