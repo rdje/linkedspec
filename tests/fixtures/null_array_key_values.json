@@ -1,0 +1,56 @@
+{
+  "membership": [
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+  ],
+  "indexes": [
+    0,
+    null,
+    null,
+    0,
+    1,
+    1,
+    null,
+    0,
+    0
+  ],
+  "unique": [
+    null,
+    "",
+    2
+  ],
+  "receiver_unique": [
+    null,
+    "",
+    2
+  ],
+  "dropped": [
+    null,
+    "",
+    2
+  ],
+  "items": [
+    null,
+    "",
+    null,
+    "",
+    2,
+    "2"
+  ],
+  "false_text": "0!",
+  "numeric": 2,
+  "missing_index": 8,
+  "found_index": 2,
+  "unique_count": 4,
+  "unique_last": 4,
+  "effected": "1!",
+  "order": "NC",
+  "needle_calls": 1
+}

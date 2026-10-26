@@ -11,7 +11,7 @@ use serde_json::Value;
 fn existing_contains_producer_domains() {
     let source = r#"Top:: I { items=["a","b"]; raw=[contains(["a","b"],"a"),contains(["a","b"],"z"),contains([],"a"),contains([undef],undef),contains([undef],""),contains([""],undef),contains([""],""),contains([0],"0"),contains([false],0)]; order=""; value=contains(items,{order=cat(order,"O");items=["z"];"a"});missing=[].first(); missing_order=""; missing_value=contains(missing,{missing_order=cat(missing_order,"O");missing=["a"];"a"});return({"raw":raw,"snapshot_absent":[missing_value,missing_order,missing],"snapshot":[value,order,items],"text":[cat(contains(["a"],"z"),"!"),cat(coalesce_nonempty(contains(["a"],"z"),"late"),"!")]}) }"#;
 
-    let expected = serde_json::json!({"raw":[1,0,0,1,1,1,1,1,1],"snapshot":[1,"O",["z"]],"snapshot_absent":[0,"O",["a"]],"text":["0!","0!"]});
+    let expected = serde_json::json!({"raw":[1,0,0,1,0,0,1,1,1],"snapshot":[1,"O",["z"]],"snapshot_absent":[0,"O",["a"]],"text":["0!","0!"]});
     assert_consumers(source, expected);
 }
 
@@ -19,7 +19,7 @@ fn existing_contains_producer_domains() {
 fn contains_results_preserve_kinds_shapes_and_operand_order() {
     let source = include_str!("../../../tests/fixtures/contains_result_receiver_values.spec");
     let expected: Value = serde_json::from_str(include_str!(
-        "../../../tests/fixtures/contains_result_receiver_values.text.json"
+        "../../../tests/fixtures/contains_result_receiver_values.perl.json"
     ))
     .expect("expected fixture");
     assert_consumers(source, expected);

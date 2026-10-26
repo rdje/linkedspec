@@ -8359,6 +8359,13 @@ impl Engine {
         evaluated
     }
 
+    fn array_scalar_key(value: &RuntimeValue) -> Option<String> {
+        match value {
+            RuntimeValue::Undef => None,
+            _ => Some(value.to_str()),
+        }
+    }
+
     fn is_list_context_splice_arg(raw_arg: &linkedspec_core::expr::Arg) -> bool {
         use linkedspec_core::expr::{Arg, Expr};
 
@@ -8944,7 +8951,7 @@ impl Engine {
                     let mut seen = std::collections::HashSet::new();
                     let uniq: Vec<RuntimeValue> = items
                         .iter()
-                        .filter(|v| seen.insert(v.to_str()))
+                        .filter(|v| seen.insert(Self::array_scalar_key(v)))
                         .cloned()
                         .collect();
                     Ok(RuntimeValue::Array(uniq))
@@ -10236,14 +10243,13 @@ impl Engine {
             "contains" => {
                 // Arguments already capture typed values before later operand effects.
                 if let Some(RuntimeValue::Array(items)) = args.first() {
-                    let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    Ok(RuntimeValue::Number(
-                        if items.iter().any(|v| v.to_str() == needle) {
-                            1.0
-                        } else {
-                            0.0
-                        },
-                    ))
+                    let needle = args.get(1).map(Self::array_scalar_key);
+                    let present = items.iter().any(|value| match &needle {
+                        Some(key) => Self::array_scalar_key(value) == *key,
+                        // Keep the legacy default for an absent free-helper needle.
+                        None => value.to_str().is_empty(),
+                    });
+                    Ok(RuntimeValue::Number(if present { 1.0 } else { 0.0 }))
                 } else {
                     Ok(RuntimeValue::Number(0.0))
                 }
@@ -10251,8 +10257,11 @@ impl Engine {
             "index_of" => {
                 if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
                 {
-                    let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    match items.iter().position(|v| v.to_str() == needle) {
+                    let needle = args.get(1).map(Self::array_scalar_key);
+                    match items.iter().position(|value| match &needle {
+                        Some(key) => Self::array_scalar_key(value) == *key,
+                        None => value.to_str().is_empty(),
+                    }) {
                         Some(i) => Ok(RuntimeValue::Number(i as f64)),
                         None => Ok(RuntimeValue::Undef),
                     }

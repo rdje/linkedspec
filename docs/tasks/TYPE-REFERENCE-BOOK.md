@@ -3137,11 +3137,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.2 - evaluate Perl has_key keys before source guards`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Distinguish Rust null Array comparison and uniqueness keys.
   Dependencies: .23.3.14.2; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Public membership/index/uniq null-empty reference mismatch is confirmed; raw numeric flags and first value/kind/order stay unchanged.
   Acceptance: Preserve defined to_str conversion, but null matches only null in contains/index_of and has its own uniq key. Native/restored/plan literals/variables/receivers/nested consumers and existing contains expected updates; source adapters from1 stay correct. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `d90c6d5634a39a1affd174d56ca156b21186395d`; Perl key evaluation committed, brief0/tree clean.
+  Owned paths: Rust private null-distinct Array keys for contains/index_of/uniq, retained reference native/fresh producer and native/restored/plan primitive/position/value/receiver/standalone/inter-type regressions, intentional current contains/snapshot expected updates/docs. Existing defined to_str/free-default/arity/source/value-kind semantics stay unchanged.
+  Verification tier: `focused`
+  Focused checks: Public Perl reference native/fresh and Rust native/restored/plan RED/GREEN, direct contains/index/snapshot fixtures, offline compilation/rustfmt and book/history/diff/final staged continuity guards. No broad equality/full suite.
+  Canonical trigger: None for bounded existing reference-contract repair under director feature-first cadence; complete source/domain/context/portable23.4 separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Completion: Add private collision-free Option<String> Array key projection: Undef=None, every defined value retains Some(to_str). Use it only in contains/index_of/uniq, preserving raw numeric flags, index/null outputs, first original value/kind/order and standalone writeback. Missing free needles retain the old empty-text default branch; receiver arity/source adapters unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New shared fixture passes six Perl native/fresh reference assertions. Rust RED merges null/empty, picks index0 where1 is correct, drops empty in value/receiver/standalone uniq, returns1!/numeric3/fallback1/count3 instead of0!/2/8/4. Input values, last numeric value and NC/one-needle control already work.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs contains/index_of compare to_str and uniq inserts to_str keys, making Undef and empty text indistinguishable. A typed internal absent key separates null from every String without changing public RuntimeValue or any defined conversion.
+  - [x] FIX: Add array_scalar_key and use projected keys in three helpers; keep absent free-helper legacy matching explicit. Update current contains producer/shared expected to Perl reference and snapshot expected membership/index/uniq fields, intentionally replacing the old null-merging expectations. No global to_str/parser/schema/arity/source/target changes.
+  - [x] ADDRESSED (verified): Native/restored/plan shared null keys pass mixed positions, empty/missing/defined number-string and bool controls, raw kinds/first values/source nonmutation, value/receiver/standalone uniq, false retention, numeric result2, absent/found index consumers8/2, count4/last4 and NC/one needle. Contains and aggregate snapshot consumers now agree with the selected reference; captured sources/fallbacks remain passing.
+  - [x] NO REGRESSION: Six focused Rust tests across null/contains/index/snapshot fixtures with offline compilation/rustfmt, plus six independent Perl reference assertions and source/test syntax pass. No full suite, general strict/container/callable equality, free-signature normalization or portable admission.
+  - [x] LOCKSTEP: Shared reference source/expected/test and Rust consumer updates, frozen contract/current scoped book examples, canonical contains/source-null facts/map and TYPE/FUTURE5.7/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart14.4 independent index/uniq assessment next; new Perl reference fixture selection remains mandatory23.4.1.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.3 - distinguish Rust null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.4`
   Status: `pending`
@@ -3261,7 +3278,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` | `pending` | Distinguish Rust null from empty in contains/index_of/uniq while preserving defined coercion. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` | `pending` | Independently assess Dart index/uniq and repair null-distinct Array keys. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

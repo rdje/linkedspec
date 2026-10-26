@@ -67,3 +67,16 @@ captured results, malformed receiver arities still reject before effects. Eighte
 focused assertions with direct has_key/contains and source/test syntax pass after
 key-suppression RED. Exhaustive legacy/context/domain admission remains separate;
 Rust null comparison/uniqueness14.3 follows.
+
+## Rust null-key implementation
+
+23.3.14.3 uses a private Option<String> key: null=None, defined values retain
+Some(to_str). contains/index_of compare keys and uniq retains first values/kinds
+in source order, including standalone writeback. Explicit null and empty text
+are distinct; missing free-helper needles keep their old empty-text default.
+Native/restored/plan null/reference and direct contains/index/snapshot fixtures
+pass six Rust tests after RED; independent Perl native/fresh reference passes six
+assertions. Numeric/text/default/Array-to-count consumers and source/shape guards
+remain correct. Current Rust contains/snapshot artifacts adopt the selected
+reference. No global scalar conversion/arity/schema/source-policy change; Dart
+index/uniq assessment14.4 follows, full admission remains23.4.

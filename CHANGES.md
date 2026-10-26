@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.14.3 — distinguish Rust null Array comparison keys
+
+Rust contains/index_of/uniq now use private null-distinct Option<String> keys while preserving all defined to_str conversion, raw kinds, first values/order, source/arity and absent free-helper defaults. Shared native/restored/plan regression repairs false membership/positions and lost empty-text uniq values across value/receiver/standalone forms; numeric/default/count/selection consumers pass. Six focused Rust tests plus six independent Perl reference assertions pass with offline compilation/rustfmt. Contains/snapshot expected artifacts intentionally adopt the selected reference. Book/facts/FUTURE5.7/current docs align; Dart14.4 independent index/uniq assessment next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.14.2 — evaluate Perl has_key keys before source guards
 
 Perl has_key typed/legacy value builders now capture the key after the source and before defined/exists, preserving numeric0 on null sources while executing key effects once. Native/fresh literal/bound/missing-source and receiver0!/SKC/source1/key1 controls, valid/empty captured sources and no-effect malformed guards pass after key-suppression RED. Direct has_key/contains bring focused proof to18 assertions; source/test syntax pass. No key/domain/arity/exception rewriting or exhaustive legacy/full admission claim. Book/fact/FUTURE5.7/current docs align; Rust null-key14.3 next, mandatory Perl registration23.4.1 separate.

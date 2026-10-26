@@ -22,7 +22,7 @@ reverify:
   - "bash tools/run_lua_project_data.sh puc lua/test/contains_result_receivers_test.lua"
 ---
 
-TYPE23.3.13.1-.5 implement ordinary contains scalar-result/one-operand guards on Perl/Rust/Dart/Julia/Lua. Raw producers remain numeric1/0, false renders0! and survives coalesce_nonempty. Perl distinguishes null from empty; Rust/Dart/Julia/Lua text keys merge them (.text.json versus .perl.json). P1 TYPE23.2.14 immediately after Lua5 owns that actual reference mismatch and unassessed sibling aggregate re-read seams; no sibling failure/equality repair inferred here.
+TYPE23.3.13.1-.5 implement ordinary contains scalar-result/one-operand guards on Perl/Rust/Dart/Julia/Lua. Raw producers remain numeric1/0, false renders0! and survives coalesce_nonempty. Perl/Rust now distinguish null from empty (Rust14.3 shares .perl.json); Dart/Julia/Lua text keys still merge them (.text.json). Original FUTURE5.7 / TYPE23.3.14 owns the remaining bounded null repairs; full domain/admission stays open.
 
 Rust additionally fixes named-source re-read: consume evaluated args.first() rather than array_consuming_arg’s current ctx binding after needle effects. Native RED0/O/[z] becomes captured1/O/[z]; absent-source stays0/O/[a]. Perl/Dart/Julia/Lua captures already worked. Shared native/fresh Perl, native/restored/plan Rust/Dart and native/plan/fresh Julia/Lua retain1!/SOC/once-only/final-null, source families, false/generic/bridges/scalar guards and raw kinds. Julia requires Number and not Bool because == accepts lookalikes. Direct changed-surface checks pass; full domain/portable admission23.4 stays open.
 
