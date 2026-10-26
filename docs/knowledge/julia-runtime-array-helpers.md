@@ -10,7 +10,7 @@ answers:
   - does Julia runtime support array receiver chains
   - does Julia runtime support sorted drop_front first
   - does Julia runtime support split_each trim_each filter_nonempty
-  - does Julia runtime support delimiter first join_values
+  - does Julia runtime support delimiter first join_values and joined String continuations
   - does Julia runtime support flat_array and concat_arrays
   - does Julia array constructor splice flat_array results
   - does Julia runtime support numeric reducers on array receivers
@@ -18,10 +18,10 @@ answers:
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
 date: 2026-10-26
-status: selected/count/aggregate values confirmed; shape/scalar guards; full admission open
+status: selected/count/aggregate/join values confirmed; shape/scalar guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate23.3 focused fixtures."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/aggregate_numeric_receivers_test.jl\"); include(\"julia/test/count_length_receivers_test.jl\")'"
+evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/joined_string_receivers_test.jl\"); include(\"julia/test/aggregate_numeric_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -66,4 +66,4 @@ separate from scalar numeric magnitude preservation under .2.9.
 
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-23.3.1.4/23.3.2.1 confirm selected/copy flow and arity;23.3.3.4 guards Count/Length extras and makes Count AbstractVector-only.23.3.4.4 guards canonical aggregates and scalar boundaries until actual container output in the existing loop. Strict native/generated-plan/fresh-emitted and Count/Length checks pass after RED; empty Sum/min-max already work. Emitted harnesses use invokelatest for Julia1.12; full admission stays open.
+23.3 selected/copy/Count/Length/aggregate fixtures retain values/arity; Count uses AbstractVectors.23.3.5.4 adds one-delimiter/join scalar tracking in the value loop. Strict native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED, retaining named mutations, Unicode, SDAN snapshots and split/length bridges. Helpers/empty identity stay unchanged; full admission open.

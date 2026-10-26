@@ -1017,7 +1017,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.5`
   Status: `pending`
   Goal: Assess container-valued default selections continuing through the actual returned kind.
-  Dependencies: .23.3.5 bounded implementations.
+  Dependencies: .23.3.5.5.
   Schedule: After bounded joined-result rollout, before exhaustive signatures/matrices; feature assessment, not a current-task pivot.
   Intake / latent risk: Perl String-family metadata classifies coalesce_nonempty as String, while the helper can select a container. Check whether scalar_result propagation blocks a valid later Array/Hash consumer. This is a source-backed assessment question, not an asserted runtime defect or new admission.
   Public reproduction target: Compare [].join_values(",").coalesce_nonempty(["a","b"]).join_values("-").uppercase() with the nested helper equivalent; expected actual-value flow is "A-B" if the existing helper admits that fallback. Include defined/empty/null and Hash fallback controls without assuming backend failures.
@@ -1556,10 +1556,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5`
-  Status: `active` / Perl/Rust/Dart implemented; individual backend assessment follows
+  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua assessment follows
   Goal: Implement the frozen ordinary joined String result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.4.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.4`; assess later backends individually after clean commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.5`; assess later backends individually after clean commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
@@ -1634,13 +1634,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.3 - guard Dart joined String boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.4`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `e84864bf19e2eec290f5163b6dc6506c923f71ad`.
   Goal: Publicly assess and implement/confirm ordinary joined String result continuations on Julia.
   Dependencies: .23.3.5.3.
   Owned paths: Julia public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Julia joined-result/shape probes, small native/generated-plan/fresh-emitted joined and direct aggregate fixtures, strict Julia1.12 harness/package compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; complete public/context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / owned boundaries: Julia valid direct/selected/hash joined-result pairs already agree; missing delimiter returns "a"/runs one effect, and sorted after joined String yields []. Preserve correct result/snapshot behavior; add exact one-delimiter preflight and include join_values in scalar-producer tracking within the existing loop.
+  Acceptance: Preserve correct dispatch, producer snapshots/order/source domains and inherited null/copy behavior. Probe joined chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and named mutation sources before classifying defects. Small native/generated-plan/fresh-emitted and direct aggregate checks with strict Julia1.12 harness/package compilation, docs/commit before Lua. No source normalization or broad replay/admission.
+
+  Completion: Preserve correct result/snapshot behavior and add one-delimiter preflight plus join_values scalar-producer tracking in the existing value loop. Register the focused fixture; no helper/domain/copy/format changes.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public valid direct/selected/hash pairs agree; missing delimiter runs one effect and incompatible sorted yields []. Native/generated-plan/fresh-emitted fixture RED confirms malformed arity and scalar-boundary differences.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! guards zero-extra methods and tracks numeric reductions only; joined String producers receive no arity/scalar-result boundary.
+  - [x] FIX: Reject non-one-delimiter shapes before effects and include join_values in scalar_producer tracking until actual container output. Keep existing helpers and producer behavior.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted joined fixture PASS after RED for named mutations, functions/selected/pipeline/hash/String sources, empty/Unicode, split/length bridges, SDAN order, snapshots, incompatible nulls and zero invalid effects.
+  - [x] NO REGRESSION: Direct aggregate fixture, package compilation and strict Julia1.12 --depwarn=error harness PASS. Existing source/null/copy behavior and callable vocabulary stay unchanged; complete context/portable admission remains separate.
+  - [x] LOCKSTEP: Register fixture and align worked helper/guide/contract, Julia/Array facts/map, current task/live records; book and fast continuity/history/diff checks pass. Lua assessment follows the clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.4 - guard Julia joined String boundaries`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary joined String result continuations on shared Lua.
+  Dependencies: .23.3.5.4.
+  Owned paths: Lua public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records, including any confirmed join-only update to the existing false-delimiter owner2.9.
   Planned tier: `focused`; declare exact public probes and small regression at activation.
   Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
-  Acceptance: Preserve correct dispatch, producer snapshots/order/source domains and inherited null/copy behavior. Probe joined chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and named mutation sources before classifying defects. Small native/generated-plan/fresh-emitted and direct aggregate checks with strict Julia1.12 harness/package compilation, docs/commit before Lua. No source normalization or broad replay/admission.
+  Acceptance: Preserve correct source/snapshots/null/copy behavior, probe joined chains, one-delimiter shapes, scalar boundaries and named mutations. Reverify the existing LUA-STARTUP-READING.2.9 join false-delimiter route and own a small confirmed join repair here; mutable split stays with its existing owner. Small native/generated-plan/fresh-emitted and direct aggregate checks on available PUC5.5.1/LuaJIT with matching products, loadfile/docs/commit. Declared5.4/full admission remain separate; no broad replay/source normalization.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1724,7 +1747,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` | `pending` | Publicly assess/implement frozen joined String result flow on Julia after earlier targeted-checked slices. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` | `pending` | Publicly assess/implement frozen joined String result flow on Lua and reverify its tracked false delimiter. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

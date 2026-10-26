@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.4 — extend existing scalar tracking
+
+Julia retains correct joined flow and adds one-delimiter/scalar-producer guards. Small native/generated-plan/fresh-emitted joined and direct aggregate tests pass after RED under strict Julia1.12 execution, including named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls. Helpers/source/copy behavior stay unchanged; Lua assessment is next, with declared5.4/full admission separate. Register the fixture and align book/contract/facts/map/current records; no broad replay.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.3 — guard existing joined flow
 
 Dart retains correct joined flow and adds one-delimiter/scalar-boundary guards. Native/restored/generated-plan joined and direct aggregate tests plus fatal analysis/format pass after RED; named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls pass. Producer/source/copy behavior stays unchanged; Julia assessment is next and full admission remains separate. Container-default transition assessment23.2.5 is scheduled after bounded joins; no current-task pivot.

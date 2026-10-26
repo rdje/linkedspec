@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Count/Length/aggregate results are targeted-checked. Perl/Rust/Dart joined String flow is implemented/targeted-checked; Julia23.3.5.4 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded Count/Length/aggregate results are targeted-checked. Perl/Rust/Dart/Julia joined String flow is implemented/targeted-checked; shared Lua23.3.5.5 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Dart retains correct joined flow and adds one-delimiter/scalar-boundary guards. Native/restored/generated-plan joined and direct aggregate tests plus fatal analysis/format pass after RED; named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls pass. Producer/source/copy behavior stays unchanged; Julia assessment is next and full admission remains separate.
+Julia retains correct joined flow and adds one-delimiter/scalar-producer guards. Small native/generated-plan/fresh-emitted joined and direct aggregate tests pass after RED under strict Julia1.12 execution, including named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls. Helpers/source/copy behavior stay unchanged; Lua assessment is next, with declared5.4/full admission separate.
 
 ## Next Action
 
-Publicly assess Julia joined chains, shapes, scalar/Array boundaries, snapshots/order and named mutation sources. Preserve correct behavior and repair observed gaps with small native/generated-plan/fresh-emitted/direct checks and strict Julia1.12 compilation. Docs/commit before Lua; container-default23.2.5 assessment follows bounded joins, with no current pivot.
+Publicly assess Lua joined chains/shapes/scalar boundaries and reverify its tracked false delimiter through the public runtime. Preserve correct producer/source behavior; small native/generated-plan/fresh-emitted/direct checks on available matching hosts, loadfile/docs/commit. Mutable split/declared5.4/full admission stay separate; container-default23.2.5 follows bounded joins.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` — Julia correct joined flow retained, one-delimiter/scalar guards added; focused native/generated/emitted and strict Julia1.12 checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.3` — Dart correct joined flow retained, one-delimiter/scalar guards added; focused native/restored/generated-plan and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` — Rust joined String flow/arity and guarded named-mutation tails; focused native/restored/generated-plan and aggregate checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
@@ -29,7 +30,6 @@ Publicly assess Julia joined chains, shapes, scalar/Array boundaries, snapshots/
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.2` — count/count_keys/length result contract frozen; public Perl/substitution distinctions, book and fast continuity checks pass; Perl implementation next.
 
 ## History
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.5.4 — guard Julia joined String boundaries
+
+Julia retains correct joined flow and adds one-delimiter/scalar-producer guards. Small native/generated-plan/fresh-emitted joined and direct aggregate tests pass after RED under strict Julia1.12 execution, including named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls. Helpers/source/copy behavior stay unchanged; Lua assessment is next, with declared5.4/full admission separate. Register the fixture and align book/contract/facts/map/current records; no broad replay.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.5.3 — guard Dart joined String boundaries
 
 Dart retains correct joined flow and adds one-delimiter/scalar-boundary guards. Native/restored/generated-plan joined and direct aggregate tests plus fatal analysis/format pass after RED; named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls pass. Producer/source/copy behavior stays unchanged; Julia assessment is next and full admission remains separate.

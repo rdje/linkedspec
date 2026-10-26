@@ -121,3 +121,9 @@ Native/restored/generated-plan and direct aggregate checks pass after RED,
 including named mutation boundaries, Unicode, split/length bridges, SDAN order,
 snapshots and shapes; changed-file fatal analysis passes. Julia/Lua require
 individual assessment. Container-default transitions are separately scheduled23.2.5.
+
+Julia `.23.3.5.4` preserves correct joined-result/snapshot behavior, adds
+one-delimiter preflight and tracks joins as scalar producers. Native/generated-
+plan/fresh-emitted and direct aggregate checks pass after RED under strict
+Julia1.12 harness execution, including named mutations, Unicode, split/length
+bridges, SDAN order and shapes. Shared Lua remains individually unassessed.
