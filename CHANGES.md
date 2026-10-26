@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.6.3 — guard Dart scalar default results
+
+Dart retains correct selected Array/Hash default flow and adds scalar guarding for direct nonempty selections. Actual List/Map output clears the guard; retained/fallback scalars reject container-only consumers with null instead of []. Small native/restored/generated-plan default and existing receiver/join tests pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy semantics. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; full domain/admission remains separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.6.2 — continue Rust selected default results
 
 Rust direct String nonempty defaults now hand selected values to the existing dynamic continuation with actual-kind scalar guards. Preserve already-correct joined selections and helper/lazy/copy behavior. Small native/restored/generated-plan default plus direct joined/default-receiver checks pass after direct Array/Hash RED, including empty/null/zero/false, scalar incompatible nulls, skipped arms and SDJ snapshots. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next and full domain/admission stays separate.

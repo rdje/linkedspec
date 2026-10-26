@@ -103,3 +103,12 @@ Native/restored/generated-plan default and direct joined/default-receiver checks
 pass after direct Array/Hash RED. The shared authored fixture retains lazy SDJ
 order, snapshots, empty/null/zero/false and incompatible retained-scalar nulls.
 Dart/Julia/Lua assessment and full domain/portable admission remain separate.
+
+## Bounded Dart implementation
+
+`.23.3.6.3` retains already-correct Array/Hash flow and lazy copy behavior. Direct
+String selections had no scalar-result flag and incorrectly let sorted/sorted_values
+return empty Arrays. Nonempty defaults now keep the scalar guard unless their
+actual result is List/Map. Native/restored/generated-plan controls pass after that
+RED, with shared SDJ snapshots, empty/null/zero/false and existing default/join
+compatibility; fatal selected-file analysis passes. Full admission stays open.

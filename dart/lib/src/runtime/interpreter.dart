@@ -5096,10 +5096,13 @@ final class LinkedSpecRuntimeEngine {
               _hashOnlyReceiverHelpers.contains(helper))) {
         return null;
       }
-      final scalarProducer =
-          value is List &&
-          (_numericAggregateHelperNames.contains(helper) ||
-              helper == 'join_values');
+      // Defaults may select either a scalar or a container; the actual result
+      // below determines whether later container-only consumers are permitted.
+      final mayProduceScalar =
+          helper == 'coalesce_nonempty' ||
+          (value is List &&
+              (_numericAggregateHelperNames.contains(helper) ||
+                  helper == 'join_values'));
       value = _evaluateFluentCall(
         value,
         call,
@@ -5108,7 +5111,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       scalarResult =
-          (scalarResult || scalarProducer) && value is! List && value is! Map;
+          (scalarResult || mayProduceScalar) && value is! List && value is! Map;
     }
     return value;
   }

@@ -2,6 +2,7 @@
 id: dart-runtime-array-helpers
 title: Dart runtime executes array helper family and receiver chains
 answers:
+  - why do Dart direct default scalar results reject container consumers
   - how do Dart aggregate results retain scalar boundaries after named array mutations
   - why does Dart count return zero for nonarrays and reject extra receiver operands
   - does Dart receiver copy reject extra arguments before effects
@@ -14,10 +15,10 @@ answers:
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
 date: 2026-10-26
-status: selected/count/aggregate/join values confirmed; shape/scalar guards; ordering/slice owners open
+status: bounded default/result guards; ordering/slice/admission open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/joined_string_receivers_test.dart test/aggregate_numeric_receivers_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/joined_string_receivers_test.dart test/default_selected_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -64,4 +65,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3 selected/copy/Count/Length/aggregate fixtures retain actual values and arity; Count is List-only, Length wider. _evaluateFluentCallsWithValue shares ordinary/mutating scalar boundaries.23.3.5.3 adds joins and exact one-delimiter guards. Native/restored/generated-plan, direct aggregate and fatal analysis pass after shape/domain RED; full admission stays open.
+23.3 value/arity fixtures pass; Count List-only, Length wider. _evaluateFluentCallsWithValue shares ordinary/mutation scalar guards; join requires one delimiter.23.3.6.3 marks nonempty defaults until actual List/Map output: container flow already works, direct Scalar sorted/sorted_values [] becomes null. Native/restored/plan plus default/join and fatal analysis pass; full admission open.

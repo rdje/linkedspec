@@ -2298,7 +2298,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` | `pending` | Bounded Lua delimiter and Perl/Rust default repairs are targeted-checked; Dart default assessment next. Declared/full Lua admission remains2.9.2. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` | `pending` | Assess Julia selected defaults after bounded Perl/Rust/Dart repairs; full Lua/domain admission stays separate. |
 
 The earlier integration-guide frontier is historical and byte-recoverable at Git5856cfcb630f08df2ff9532241c38a78e6138de1. Current MEMORY/AGENTS and feature-first directives govern resumption; no historical dependency-build assumptions override the RGX/PGEN black-box boundary.
 

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.3 — retain scalar guards across direct defaults
+
+Dart retains correct selected Array/Hash default flow and adds scalar guarding for direct nonempty selections. Actual List/Map output clears the guard; retained/fallback scalars reject container-only consumers with null instead of []. Small native/restored/generated-plan default and existing receiver/join tests pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy semantics. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; full domain/admission remains separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.2 — hand direct defaults to dynamic continuation
 
 Rust direct String nonempty defaults now hand selected values to the existing dynamic continuation with actual-kind scalar guards. Preserve already-correct joined selections and helper/lazy/copy behavior. Small native/restored/generated-plan default plus direct joined/default-receiver checks pass after direct Array/Hash RED, including empty/null/zero/false, scalar incompatible nulls, skipped arms and SDJ snapshots. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next and full domain/admission stays separate.

@@ -1780,12 +1780,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.2 - continue Rust selected default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Publicly assess and implement/confirm ordinary Dart default-selection result flow.
   Dependencies: .23.3.6.2.
   Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic regression, no measured admission.
+  Activation: clean `1a1e6ea6d37fa16ad174fd310332cc7373e35189`; Rust committed, brief empty, tree clean.
+  Owned paths: Dart public fluent dispatcher only for confirmed gaps, focused native/restored/generated-plan default fixture, direct joined compatibility and public/current docs.
+  Verification tier: `focused`
+  Focused checks: Public engine native/restored/generated-plan shared selected-default and direct retained-Scalar controls, existing default-receiver fixture plus direct joined test, selected-file fatal analysis/format, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; full domain/portable admission23.4 and eventual clean push remain separate.
+  Claim verification: none: deterministic authored value/order regression; no quantified corpus or portable measurement.
+  Public findings / owned repair: Shared direct/joined Array/Hash flow, lazy SDJ snapshots and the existing receiver fixture already pass. Direct retained/fallback String followed by sorted/sorted_values yields [] instead of frozen null. _evaluateFluentCallsWithValue starts scalarResult only for List reducers/join; a direct coalesce_nonempty scalar selection never activates it. Treat nonempty selection as a possible scalar producer, then retain/clear the guard by its actual output kind.
+
+  Completion: Retain already-correct actual container flow. Mark nonempty defaults as possible scalar results, then keep/clear the existing scalar guard from actual List/Map versus scalar/null output. Existing lazy/copy/helper policies stay unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared public native/restored/generated-plan values already pass; retained/fallback direct String sorted/sorted_values independently RED as [] instead of null.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluateFluentCallsWithValue only starts scalarResult for List reducers/join. Direct String nonempty selection does not activate the boundary, though _callCoalesceWithReceiver already selects lazily and copies actual values correctly.
+  - [x] FIX: Include coalesce_nonempty in mayProduceScalar and retain/clear guarding after evaluation according to actual List/Map output. Preserve the existing dispatcher and producer semantics.
+  - [x] ADDRESSED (verified): New native/restored/generated-plan regression PASS after boundary RED for direct scalar negatives; shared Array/Hash, empty/null/zero/false, skipped fallbacks and SDJ snapshots still pass.
+  - [x] NO REGRESSION: Existing default receiver fixture and direct joined test PASS; selected-file fatal analysis/format and compilation PASS. Generic coalesce/deferred/domain policies and generated formats stay unchanged; no broad suite.
+  - [x] LOCKSTEP: Register focused test via normal test discovery, align contract/catalog/default and Dart facts/map plus live/task/resume records; book and fast memory/cadence/diagnosis/history/diff checks pass. Julia assessment4 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.3 - guard Dart scalar default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.4`
   Status: `pending`
@@ -1881,11 +1896,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 assessment is next, then other backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 scalar-default boundaries are repaired/targeted-checked too; Julia4 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` | `pending` | Assess/implement Dart selected-default result flow after bounded Perl/Rust repairs; broad proof deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` | `pending` | Assess/implement Julia selected-default flow after bounded Perl/Rust/Dart repairs; broad proof deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

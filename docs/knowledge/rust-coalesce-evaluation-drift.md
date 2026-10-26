@@ -12,7 +12,7 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: Perl/Rust flow targeted-checked; remaining backend/admission open
+status: Perl/Rust/Dart flow targeted-checked; remaining backend/admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
 evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1/.1.2 native/fresh/direct checks; backend/broad admission open."
 reverify:
@@ -90,7 +90,7 @@ direct compatibility checks pass after RED: lazy order, kinds, snapshots and
 retired authored syntax remain intact. Rust23.3.6.2 additionally hands direct
 String defaults to eval_selected_receiver_value_chain with actual-kind scalar
 guards; native/restored/plan and direct checks pass after RED. Remaining backend/
-domain admission stays open.
+domain admission stays open. Dart: [[dart-runtime-array-helpers]].
 Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
 
 Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.
