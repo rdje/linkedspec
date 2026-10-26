@@ -5877,11 +5877,11 @@ function _evaluate_runtime_fluent_chain!(
     current_edge,
     statement_context::Bool,
 )
-    # Extraction takes no method arguments. Reject before receiver or operand
+    # Extraction and copy take no method arguments. Reject before receiver or operand
     # effects while retaining the existing dynamic result-value loop.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
-        if helper_name in ("first", "last") && !isempty(call.args)
+        if helper_name in ("first", "last", "copy") && !isempty(call.args)
             return nothing
         end
     end

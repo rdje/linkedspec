@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust source-null61.1 and adjacent operand/predicate/empty-pattern61.2 repairs are implemented and targeted-checked. Copy-arity23.3.2 is next, then helper signatures. Keep feature/compile/quick-check/commit cadence; broader scalar61.3 and fluent admission remain open.
+Julia receiver copy arity23.3.2.1 is implemented and targeted-checked after committed Rust scalar61.1/.61.2 repairs. Assess remaining copy backends individually next, then continue helper signatures. Feature/compile/quick-check/commit cadence continues; broad scalar/fluent admission remains open.
 
 ## Latest Completed Slice
 
-Rust now guards undefined scalar operands and null predicates before text conversion, and preserves the original source for empty old/prefix/suffix and unmatched affixes. A shared public Perl fixture confirms boundary values; authored Rust native/restored/generated-plan and direct source-null checks pass after actual RED. Compilation/rustfmt/book and fast continuity checks pass; public/canonical/task/live records agree.
+Extend Julia's existing zero-extra-operand chain preflight to copy, rejecting invalid direct/selected receiver shapes before effects. Public probe and small native/generated-plan/fresh-emitted regression are RED before repair and GREEN afterward; valid source detachment, scalar/null and once-only controls remain correct. Package compilation, direct selected-value test, book and fast continuity checks pass. Public/canonical/task/live records agree.
 
 ## Next Action
 
-Reproduce scheduled Julia copy-arity23.3.2 risk through the public interface, then split and repair confirmed backend cases with targeted checks. Commit each bounded implementation before continued helper signature inventory. No broad suites or historical replay.
+Use the tiny public copy-arity probe for each remaining backend; create and commit bounded implementation children only for actual defects. Continue helper signatures after copy shape assessment. No broad suites or historical replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.2.1` — Julia copy arity rejects before effects; focused native/generated-plan/fresh-emitted and direct selected-value checks pass.
 - `SESSION-STARTUP-READING.61.2` — Rust null operand/predicate guards and original-value empty replacement/removal; public Perl and focused native/restored/generated-plan controls pass.
 - `SESSION-STARTUP-READING.61.1` — Rust scalar source-null propagation, defined controls and eager order; focused native/restored/generated-plan and selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
@@ -29,7 +30,6 @@ Reproduce scheduled Julia copy-arity23.3.2 risk through the public interface, th
 - `FUTURE-PARITY-BACKLOG.5.5.1` — dynamic Perl split_each value delimiters, once/order/function/receiver controls; syntax/native/fresh targeted checks pass; standalone5.5.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.1` — pure Perl pipeline values, scoped parameters and preserved numeric kinds; targeted pipeline/filter native/fresh checks pass; helper selection resumes.
 - `SESSION-STARTUP-READING.87.1` — ordinary filter_match values, typed sources and native/fresh targeted checks; separate P1 nested purity5.4.1 next.
-- `FUTURE-PARITY-BACKLOG.5.3.3` — Julia standalone transforms rebind arrays; package compile/native/generated-plan/fresh-emitted targeted checks pass; feature/helper selection resumes.
 
 ## History
 

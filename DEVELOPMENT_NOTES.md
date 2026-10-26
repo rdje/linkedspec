@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.1 — copy shape before effects
+
+The public Julia probe confirms the source-observed risk: a selected copy with an extra operand returns the copied value after evaluating the receiver, and ignores the operand. Extending the existing first/last preflight to canonical copy rejects direct and selected invalid shapes before effects without touching _runtime_copy or dynamic continuation. The retained test covers native/generated-plan/fresh-emitted execution after actual RED, and valid detachment/scalar/null/once-only controls; the direct selected-value regression remains green. Book/current frontier and canonical Julia fact/map agree, including the now-implemented Rust scalar prerequisites. Other backends require their own public assessment under23.3.2; no family-wide admission is inferred.
+
 ## 2026-10-26 — SESSION-STARTUP-READING.61.2 — operand identity at empty boundaries
 
 Public Perl Get on the shared fixture confirms both undefined operand guards and source identity for empty old/prefix/suffix and unmatched affixes. Rust previously erased null with to_str and used host replacement, producing boundary insertions and text instead of numeric zero. Narrow helper guards and cloned-source empty branches repair those cases without changing regex admission, eager evaluation, numeric substring flags or boolean matches. The small authored Rust fixture passes native/restored/generated-plan execution after actual RED; the preceding source-null test stays green. Public examples and canonical/current records agree; broader carrier/backend admission remains61.3-owned and deferred while feature implementation continues.

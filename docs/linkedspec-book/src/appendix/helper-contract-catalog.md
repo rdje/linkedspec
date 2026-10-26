@@ -952,7 +952,7 @@ dispatch rule.
 - **Terse spelling**: `copy(h)` / receiver `.copy()` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Receiver boundary**: `value.copy()` evaluates `value` once, deep-copies that current runtime value, and keeps
   its array/hash/scalar kind available to later compatible receiver links. Missing `value` remains undefined/null.
-  Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
+  Receiver `copy()` takes zero extra operands; extra operands are invalid. Julia rejects that shape before receiver/operand effects. Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
@@ -1905,7 +1905,7 @@ Receiver-dot methods are available for the value families that have a typed rece
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
   links include `count`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
-  `sum`, `avg`, `median`, `range`, `min`, and `max`. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Full fluent-family admission and known remaining Rust scalar-null helper repairs61.1/.61.2 stay open.
+  `sum`, `avg`, `median`, `range`, `min`, and `max`. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and

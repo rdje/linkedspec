@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / selected first/last result transition implementation
+- Status: `active` / receiver copy arity implementation after selected-value rollout
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -1125,17 +1125,40 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5 - guard Lua selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
-  Status: `pending` / P2 receiver copy arity intake
+  Status: `active` / P2 receiver copy arity intake
+  Activation: clean `804f9657c47d62157e9f77b4f76749d24f11e7ab`; Rust scalar61.1/.61.2 repairs are committed. Start the distinguishing public Julia probe; create implementation children only for observed defects.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`; assess other backends individually after this clean feature commit.
+  Public finding (October26): Julia's proposed probe returns [["a"],1] instead of invalid-shape null with zero effects. The receiver is evaluated and extra argument ignored. Child .2.1 owns the confirmed repair; other backends remain unassessed.
   Planned tier: `focused`; public reproduction and bounded per-backend implementation children before writes.
   Goal: Confirm and repair extra-argument copy receiver shapes without changing valid copy/value-kind semantics.
   Intake: Julia's _evaluate_runtime_fluent_value_call! returns _runtime_copy(value) for copy without inspecting call.args. This is source-observed risk; no runtime conclusion is yet claimed. Similar dispatchers must be assessed individually, not assumed identical.
   Reproduce at activation: effects=0; out={effects=num_add(effects,1); [["a"]]}.first().copy({effects=num_add(effects,1); 1}); return([out,effects]). Receiver copy takes no extra operands; compare expected invalid-shape rejection/effect suppression against its actual public contract and observed output before repair.
-  Schedule: After selected-value23.3.1 native rollout and P1 Rust scalar61.1/.61.2 repairs, before complete fluent admission. Split per-backend implementation leaves only from actual public reproduction. Do not dirty-pivot from current Julia23.3.1.4.
-  Claim verification: none: Source-only risk intake with a distinguishing proposed probe; no measured runtime defect or parity claim.
+  Schedule: After selected-value23.3.1 native rollout and committed P1 Rust scalar61.1/.61.2 repairs, before complete fluent admission. Split per-backend implementation leaves only from actual public reproduction; commit each bounded repair before the next assessment.
+  Claim verification: none: Bounded deterministic invalid-shape reproduction/repair, not a quantified corpus, exhaustive or portable parity claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`
+  Status: `done`
+  Activation: clean `804f9657c47d62157e9f77b4f76749d24f11e7ab`.
+  Goal: Reject extra Julia copy receiver operands before receiver/operand effects while preserving valid runtime-kind deep copies.
+  Owned paths: julia/src/runtime/Interpreter.jl, targeted Julia test/registration and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public probe; Julia package compilation and small receiver_copy_arity test on native/generated-plan/fresh-emitted routes; direct selected_value_receivers test; book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded invalid receiver-shape repair under director feature-first cadence; complete fluent admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored shape/effect regression; no quantified corpus, exhaustive or portable admission measurement.
+  Acceptance: Require zero extra copy receiver arguments at any link before effects; keep valid array/harray/scalar copies, selected kind, nulls and source detachment. No helper vocabulary, function-copy or other-backend change without evidence.
+  Completion: Extend Julia's existing first/last chain preflight to copy. The existing dynamic copy remains unchanged; invalid direct/selected shapes return null before receiver/operand effects.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public Julia probe returns copied array/effects1; the retained receiver_copy_arity test fails all three execution assertions before repair (invalid copies/effects2). Authored invalid-shape expectations are null/null/effects0; valid controls already agree.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_value_call! copies the current value without inspecting call.args; _evaluate_runtime_fluent_chain! only preflights first/last, allowing copy receiver effects before ignoring operands.
+  - [x] FIX: Include canonical copy in the existing zero-extra-operand chain guard before evaluating the receiver. Preserve the actual deep-copy implementation and per-value continuation.
+  - [x] ADDRESSED (verified): Julia package precompilation and targeted receiver_copy_arity native/generated-plan/fresh-emitted checks PASS after actual RED.
+  - [x] NO REGRESSION: Valid array detachment, scalar continuation, missing/null and once-only receiver controls PASS; direct selected_value_receivers test PASS. No full package suite or broad matrix.
+  - [x] LOCKSTEP: Register the regression; public copy boundary, scalar duplicate status, Julia fact/map, current frontier and live handoff agree. Book and fast continuity/history/diff checks pass before landing.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1 - guard Julia receiver copy arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Known admission prerequisite: Remaining Rust scalar-null/empty semantics61.1/.61.2 and copy-arity risk23.3.2 stay open; selected-value implementation does not override them or establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
+  Known admission prerequisite: Rust scalar-null/operand repairs61.1/.61.2 are implemented and targeted-checked, with broad61.3 open. Copy-arity23.3.2 requires individual backend assessment after the Julia repair; selected-value implementation does not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Acceptance: Reconcile expected families and every transition in both directions against actual native/generated consumers and individual mdBook examples. Reject deliberate missing-method, wrong-return-type and continuation-dispatch faults; include empty/missing/error and backend controls. No family's final reference leaf .2-.6 or aggregate .7 closes over an unresolved assigned fluent gap. Keep scope exclusions explicit; publish no completeness claim from samples alone.
@@ -1210,11 +1233,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; All selected-value backend children are targeted-checked on recorded hosts. P1 Rust scalar61.1/.61.2 repairs follow; Lua declared5.4 target and full admission remain open. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has a confirmed Julia repair; individual remaining-backend assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.61.1` | `pending` | Remaining P1 Rust scalar null propagation after bounded native selected-value rollout; trim subpart is already fixed. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia copy-arity repair is targeted-checked; assess remaining backends individually from public reproduction before any implementation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

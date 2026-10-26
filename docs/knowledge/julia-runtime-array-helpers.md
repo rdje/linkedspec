@@ -16,10 +16,10 @@ answers:
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
 date: 2026-10-26
-status: selected values confirmed; extraction arity guarded; broad checks deferred
+status: selected values confirmed; extraction/copy arity guarded; broad checks deferred
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3; selected-value23.3.1.4."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/selected_value_receivers_test.jl\")'"
+evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3; selected-value23.3.1.4; copy-arity23.3.2.1."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/receiver_copy_arity_test.jl\"); include(\"julia/test/selected_value_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -66,4 +66,4 @@ Historical September11 reading/replay chronology, exact commands, source ranges 
 
 23.3.1.4 confirms existing per-value first/last scalar/container/copy dispatch and adds a pre-effect extraction arity guard. Native/generated-plan/fresh-emitted focused controls cover function/computed sources, repeated transitions, snapshots, empty values, min/max and once-only effects; direct transform checks pass. Full fluent admission and other helper boundaries remain open.
 
-A source-only copy-arity risk is owned by TYPE-REFERENCE-BOOK.1.2.23.3.2: the copy value-call branch does not inspect extra arguments. Its public reproduction/repair is scheduled after the native journey rollout and P1 Rust scalar work; no runtime defect result is claimed yet.
+23.3.2.1 confirms and repairs extra-argument receiver copy: public native/generated-plan/fresh-emitted controls were RED (copied value and receiver effects), then PASS after extending chain preflight to copy. Valid deep copies retain kinds, source detachment and once-only evaluation. Other backends require individual assessment under23.3.2; no broad admission.
