@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.12.5 — continue Lua String comparison result receivers
+
+Lua removes comparison-only terminal fence and reuses comparison classification for scalar/one-operand guards. Native/plan/fresh producer/shared and direct definedness pass on PUC5.5.1/LuaJIT after terminal-null/24-effect RED; six pairs/raw Bool, null/zero/text, bridges/scalar guards and1!/SOC/once-only/final-null pass. Producers/numeric aliases stay unchanged; declared5.4/full admission separate. Book/fact/current docs align; stale July milestone qualified as historical. Residual Dart regex-mode assessment23.2.12 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.12.4 — guard Julia String comparison result receivers
 
 Julia adds six comparison names to one-operand/scalar lists only. Independent native/plan/fresh producers preserve Bool/null/zero/text and eager SO; explicit isa Bool distinguishes numeric lookalikes. Shared receiver RED gives empty Arrays/24 effects; after repair twelve comparison and nine direct definedness assertions pass with strict compilation. Dart two comparison tests pass after .null.json shared golden rename. Book/fact/current docs align; Lua5 next, full admission separate.

@@ -9557,6 +9557,10 @@ test("definedness result receiver continuations", function()
   dofile("lua/test/definedness_result_receivers_test.lua")
 end)
 
+test("String comparison result receiver continuations", function()
+  dofile("lua/test/string_comparison_result_receivers_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

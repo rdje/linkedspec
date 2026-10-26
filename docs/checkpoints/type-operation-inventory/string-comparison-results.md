@@ -89,3 +89,13 @@ reject numeric lookalikes. Twelve comparison and nine direct definedness
 assertions pass after three shared empty-Array/24-effect REDs. Six pairs, source
 families, scalar/bridge/shape and existing1!/SOC/once-only/final-null are retained;
 no producer/domain/numeric-alias change or full admission claim.
+
+## Bounded Lua counterparts
+
+23.3.12.5 removes the comparison terminal fence and reuses is_string_comparison
+for scalar/one-operand guards. PUC5.5.1/LuaJIT public free controls confirm Bool,
+null propagation, empty/zero, false0! and eager SO. Shared native/plan/fresh
+.null.json and direct definedness pass on both after terminal-null/24-effect RED.
+All six pairs, source families, scalar/bridge/shape and1!/SOC/once-only/final-null
+pass; the prior fence stopped C, rather than proving a source capture defect.
+No producer/domain/numeric aliases changed. Declared5.4/full admission stays open.

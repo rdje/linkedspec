@@ -3486,10 +3486,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       if canonical_name == "is_empty" or canonical_name == "is_nonempty" or
           canonical_name == "is_defined" or canonical_name == "is_undefined" or
           canonical_name == "starts_with" or canonical_name == "ends_with" or
-          canonical_name == "contains_substr" or canonical_name == "matches" then scalar_result = true end
-      if is_string_comparison(canonical_name) and index < #calls then
-        return json.null
-      end
+          canonical_name == "contains_substr" or canonical_name == "matches" or
+          is_string_comparison(canonical_name) then scalar_result = true end
     elseif scalar_numeric.supports_reducer(canonical_name) and
         (json.kind(value) == "array" or not scalar_numeric.supports(canonical_name)) then
       value = evaluate_numeric_reducer_values(
@@ -3891,7 +3889,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
       if (name == "join_values" or name == "index_of" or name == "has_key" or
-          name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches") and
+          name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches" or
+          is_string_comparison(name)) and
           #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
