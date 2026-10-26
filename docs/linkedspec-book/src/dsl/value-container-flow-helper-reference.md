@@ -968,7 +968,7 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `num_add(num_ceil(num_abs(score)), 2)`, and `3.5.floor().add(1)` maps to
 `num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
-`ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` and end the chain. Array reducers are array-consuming: use
+`ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` or invalid-input `undef`; ordinary results feed compatible scalar or explicit-container continuations, as shown in [Numeric comparisons](#numeric-comparisons). Array reducers are array-consuming: use
 function form such as `num_sum(scores)` / `sum(scores)` or array receiver form such as
 `scores.sum()` / `scores.avg()`. Ordinary Perl/Rust/Dart/Julia/Lua results continue through compatible scalar/number methods: `[2,4,6].sum().add(1)` returns `13`, `[].sum().add(1)` returns `1`, and `[].avg().add(1)` returns null.
 Reducers are not scalar number receiver links; array-only consumers stay invalid until an explicit string-to-array bridge. Lua checks use available PUC5.5.1/LuaJIT; declared5.4/full admission remains open. A number-yielding expression-valued block can be the receiver,

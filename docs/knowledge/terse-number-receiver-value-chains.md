@@ -1,6 +1,6 @@
 ---
 id: terse-number-receiver-value-chains
-title: SPEC-FORMAT-TERSE.2.3.5.4 number receiver-dot value chains
+title: Number methods and ordinary numeric result continuations
 answers:
   - "how do number receiver-dot value chains work"
   - "does score.abs().ceil().add work"
@@ -11,42 +11,42 @@ answers:
   - "are declare methods terse receiver methods"
   - "is declare a number receiver method"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.4"
+  - "can scalar arithmetic results feed text methods"
+  - "which task owns ordinary numeric arithmetic result flow"
 date: 2026-10-26
-status: five bounded comparison result implementations checked
+status: comparison rollout checked; scalar arithmetic result extension frozen
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
-evidence: "SPEC-FORMAT-TERSE2.3.5.4 arithmetic; scalar_numeric_contract.json; TYPE23.2.15 public native/fresh/substitution and numeric-comparison-results.md."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_numeric_comparison_results.pl"
+evidence: "scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl"
 ---
 
-Number methods map short names to num_* helpers. Arithmetic chains compose:
-score.abs().ceil().add(2,3).mul(2).sub(1).div(2).clamp(0,20).max(5).min(12),
-5.mod(2),3.5.floor().add(1),3.5.round(). Scalar numeric policy accepts finite
-numbers/untrimmed decimal Strings and rejects Bool/null/containers/bad inputs.
-Comparison free functions return numeric1/0 or null, require two operands;
-short eq/ne/gt/ge/lt/le receiver methods supply the first from their source.
+Short Number methods map to num_* helpers. Finite numbers/contracted untrimmed
+decimal Strings are numeric; Bool/null/containers/bad inputs return null.
+Arithmetic abs/floor/ceil/round/add/sub/mul/div/mod/min/max/clamp composes:
+score.abs().ceil().add(2,3),5.mod(2),3.5.floor().add(1). Comparisons eq/ne/gt/ge/
+lt/le return numeric1/0/invalid-null. Statement/lifecycle declare is not a method;
+Array reducers have [[terse-array-numeric-reducer-receiver-methods]].
 
-TYPE23.2.15 freezes short comparison continuation. Perl15.1 uses scalar_result,
-Number->Array dispatch after split and String-prefix numeric handoff; raw .eq/.gt
-residue exposed missing bridges.59 shared/actual AST/Phase0/outer assertions pass;
-seven outer rows become0x/1x/read-once, deferred/unknown-tail boundaries unchanged.
-Rust15.2 removes dynamic/Number-loop terminal fences, uses shared scalar result
-handoff and one-RHS preflight; eight numeric/direct/calibration tests pass native/
-restored/plan after null/SO/twelve-effect RED. Producers retain numeric1/0/strict
-invalid-null; source/SOC/once-only, default8/bridges and Array index kinds pass.
-Canonical -0.5 literal replaces setup bare-.5, retaining String"-.5" control;
-twelve shared Perl assertions pass. Dart15.3 keeps correct producers/valid flow,
-fixing scalar Array[] and24 effects through common one-RHS/scalar guard set; six
-focused tests/fatal analysis pass. Julia15.4 independently fixes the same guards;
-42 strict numeric/direct assertions pass with Number/not-Bool identity. Lua15.5
-replaces the stop with scalar marking and RHS preflight; safe native/plan/fresh/
-direct/named-calibration checks pass on PUC5.5.1/JIT after null/SO/24-effect RED;
-full admission23.4 separate. Canonical num_* method names are outside this scope.
+Comparison15.1-.5 is targeted-checked on all five current backends: Perl scalar
+classification/String/Array handoffs, Rust selected-value dispatch, Dart/Julia
+guard lists and Lua scalar marking/preflight preserve numeric kinds, strict
+inputs, SOC/once-only, defaults/bridges and selector kinds. Declared Lua5.4/full
+admission remain separate. Complete prior structural/proof detail and July1
+historical pointer are preserved in this file at Git
+3bfda7204a4c6b19d8d9f5a6145399afff8d6168.
 
-Array reducers have their own current result/arity contract:
-[[terse-array-numeric-reducer-receiver-methods]]. Statement/lifecycle declare is
-not a Number method. Block/user-function results use their actual returned kind.
+Arithmetic16 freezes compatible ordinary result continuations as a new feature;
+prior Number-only scope was intentional. Public Perl free/nested twelve numeric
+results/texts, selected/call/count/reducer sources and min/max[3,4,ASO,5,4] already
+work. Plain arithmetic-to-text/bridge/default/effect chains retain DSL and fail
+handler compile; String-prefix arithmetic leaves raw trim. WHY: MethodLowering
+_number_receiver_value_chain_return_family yields number; Number loop stops at
+non-Number links, String numeric handoff only includes comparisons. Nested
+5!/SOC/null and malformed abs/add/clamp no-effects already work. Freeze:
+scalar-arithmetic-results.md; children23.3.16.1-.5, Perl first. No new numeric
+domain/free shape/min-max overload/Array reducer95/deferred vocabulary policy.
+Canonical num_* method names are outside this short-method result scope.
 
-Original July1 implementation, exact source/commands,999-test evidence and then-
-terminal comparison/reducer policy are preserved in this file at Git
-77a853d50d4cfbcd02d125b6e591cf987e2f2786. Historical next2.3.5.5 described block-yielded
-receiver work; current work follows MEMORY.md, not that old milestone pointer.
+Two stale comparison-terminal overview paragraphs were corrected at16 freeze.
+Block/user-function values dispatch on actual returned kind. Historical next
+2.3.5.5 described block-yielded receiver work; current work follows MEMORY.md.

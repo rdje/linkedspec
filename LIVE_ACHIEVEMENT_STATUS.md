@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua numeric comparison result flow implemented on both available hosts; all five bounded implementations targeted-checked, scalar arithmetic result assessment next.
+Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 
 ## Latest Completed Slice
 
-Lua numeric comparison producers retain numeric1/0/strict invalid-null. Comparison results now mark scalar instead of stopping; common one-RHS preflight rejects malformed effects. Shared native/plan/fresh result/shape/bridge/default/selector/source checks, direct lexical/aggregate and exact updated numeric calibration pass on PUC5.5.1/LuaJIT after null/SO/24-effect RED. All five bounded numeric comparison implementations are targeted-checked; book/facts/live/task align. Next ordinary scalar arithmetic result assessment23.2.16 preserves overload/domain authority; declared5.4/full admission separate.
+Frozen scalar-arithmetic-results.md extends twelve existing short Number methods into compatible scalar/text/generic/explicit-container continuations under five independent backend children. Public Perl native/fresh probes preserve correct raw/nested/selected/overload/invalid/arity/SOC controls and expose plain Number/String-prefix result handoff gaps. Prior Number-only scope is intentional; numeric domains/free/min-max/reducer/deferred policies stay unchanged. Two missed comparison-terminal overview paragraphs are corrected and tracked. Syntax/book/facts/task/live align; Perl16.1 next, full admission separate.
 
 ## Next Action
 
-Activate TYPE23.2.16 from this clean commit: read existing scalar numeric arithmetic/rounding/clamp/min/max and overloaded Array reducer owners, then retain public Get/substitution/dump/native/fresh raw/nested/fluent/effect/shape distinctions. Assess ordinary Number/null results feeding scalar/text/generic and explicit Array bridges; preserve strict domains/free signatures, scalar/Array min/max overloads and deferred vocabulary. Freeze bounded result contract/backend children before production. Small syntax/direct checks/docs/commit; no full matrix/gate now.
+Activate TYPE23.3.16.1 from the clean freeze: retain shared twelve-method arithmetic result/source/kind/shape/default/bridge/overload tests, observe public native/fresh RED, then minimally hand ordinary numeric/null results to shared scalar dispatch and expand String-prefix numeric handoff while preserving all Numeric adapters, unambiguous arities and scalar/Array min/max policies. Include lazy actual-container defaults and valid SOC snapshots; keep Array reducer95/deferred vocabulary separate. Small direct/syntax/docs/commit; then independently assess Rust/Dart/Julia/Lua16.2-.5, no full gate/matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.5` — Lua numeric comparison result flow implemented on both available hosts; all five bounded implementations targeted-checked, scalar arithmetic result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` — Julia numeric comparison scalar/shape guards implemented;42 strict focused assertions and compilation pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` — Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
@@ -29,7 +30,6 @@ Activate TYPE23.2.16 from this clean commit: read existing scalar numeric arithm
 - `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.5` — Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.4` — Julia contains scalar/shape and calibration are targeted-checked; Lua rollout is next, then P1 equality/sibling snapshot assessment.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.13.3` — Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
 
 ## History
 

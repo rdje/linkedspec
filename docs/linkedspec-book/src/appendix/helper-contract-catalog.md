@@ -1110,8 +1110,8 @@ Number receiver-dot value chains are pure value composition over this same famil
 names and map to `num_*`: `value.abs()` -> `num_abs(value)`, `value.add(2, 3)` -> `num_add(value, 2, 3)`,
 `value.clamp(0, 10)` -> `num_clamp(value, 0, 10)`, and `value.gt(3)` -> `num_gt(value, 3)`. Bare receiver
 identifiers read scalar working variables. Integer and float literal receivers are accepted (`5.mod(2)`,
-`3.5.floor().add(1)`). Comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) are terminal boolean values; a later
-receiver-dot call after a comparison returns `undef`/`null`. Statement and lifecycle methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
+`3.5.floor().add(1)`). Comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` or invalid-input `undef`; ordinary current-backend results feed compatible scalar and explicit-container continuations.
+See the examples below; Lua checks use available PUC5.5.1/LuaJIT and declared5.4/full admission stays separate. Statement and lifecycle methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
 receiver, for example `{ 3.5 }.floor().add(2)`.
 
 The same numeric family also has function-form word aliases:

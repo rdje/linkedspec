@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.16 — freeze scalar arithmetic result continuations
+
+Frozen scalar-arithmetic-results.md extends twelve existing short Number methods into compatible scalar/text/generic/explicit-container continuations under five independent backend children. Public Perl native/fresh probes preserve correct raw/nested/selected/overload/invalid/arity/SOC controls and expose plain Number/String-prefix result handoff gaps. Prior Number-only scope is intentional; numeric domains/free/min-max/reducer/deferred policies stay unchanged. Two missed comparison-terminal overview paragraphs are corrected and tracked. Syntax/book/facts/task/live align; Perl16.1 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.15.5 — continue Lua numeric comparison results
 
 Lua numeric comparison producers retain numeric1/0/strict invalid-null. Comparison results now mark scalar instead of stopping; common one-RHS preflight rejects malformed effects. Shared native/plan/fresh result/shape/bridge/default/selector/source checks, direct lexical/aggregate and exact updated numeric calibration pass on PUC5.5.1/LuaJIT after null/SO/24-effect RED. All five bounded numeric comparison implementations are targeted-checked; book/facts/live/task align. Next ordinary scalar arithmetic result assessment23.2.16 preserves overload/domain authority; declared5.4/full admission separate.

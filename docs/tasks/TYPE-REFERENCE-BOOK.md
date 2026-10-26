@@ -1304,7 +1304,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.15 - freeze numeric comparison result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.16`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess compatible scalar/text/generic/inter-type continuations of ordinary scalar numeric arithmetic results.
   Dependencies: Numeric comparison result implementations23.3.15.1-.5 committed.
   Authority: Comprehensive fluent directive; helper spine and scalar-numeric-v1 arithmetic/rounding/clamp/min/max conversions/arities. Existing Number methods abs/floor/ceil/round/add/sub/mul/div/mod/clamp/min/max and scalar-versus-Array min/max overloads stay authoritative until this bounded transition is frozen.
@@ -1314,9 +1314,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Complete admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: bounded normative transition and deterministic authored distinctions, no population/completeness measurement.
 
+  Activation: clean `3bfda7204a4c6b19d8d9f5a6145399afff8d6168`; five numeric comparison children committed, brief0/tree clean.
+  Owned paths: Retained public scalar arithmetic producer/result/overload/effect/shape probes and bounded ordinary result contract/backend scheduling, relevant numeric book/facts/task/live docs; no production change in assessment.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution/dump/native/fresh arithmetic/overload distinctions, canonical numeric contracts, small syntax/direct checks and book/history/staged continuity guards.
+  Canonical trigger: None for bounded contract selection under director feature-first cadence; complete domain/context/portable admission and clean push separate.
+  Claim verification: none: bounded normative transition and deterministic authored distinctions, no population/completeness measurement.
+  Owned documentation defect: Catalog numeric intro and guide Number-chain overview still say comparison methods terminate (catalog also calls them boolean), contradicting committed15.1-.5/current examples. Reproduce by reading helper-contract-catalog1095-1116 and value-container-flow-helper-reference970-984 against retained numeric comparison tests. Missed long summary sentences in prior focused search caused stale prose; correct both in this leaf and check all scoped comparison boundary wording. No code change is needed for that documentation defect.
+
+  Decision: Freeze scalar-arithmetic-results.md for twelve existing short arithmetic/rounding/clamp/scalar min/max methods. Actual Number/null results feed scalar/text/generic/explicit-container consumers, retaining strict scalar numeric contracts, helper/free names and overload semantics. Unambiguous malformed receiver shapes reject before effects; no global min/max or free-helper normalization. Five independent backend children16.1-.5 own implementation; prior Number-only scope is intentional, not an old promised consumer defect.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/substitution/dump/native/fresh twelve free producers give[3,3,4,3,5,3,6,3.5,1,10,3,5] and corresponding nested texts. Plain arithmetic-to-cat/bridge/default/effect chains fail handler compile with raw DSL residue; source-family group identifies String-prefix raw trim host failure. Independent canonical-call/first/count/reducer controls give four5! values; no source-family regression inferred wholesale.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering _number_receiver_value_chain_return_family yields number for arithmetic; Number loop accepts only Number links until a scalar producer. String loop's existing numeric handoff only covers six comparisons. Public substitution retains raw arithmetic .cat links; source error is undefined host trim. Existing source/effect helpers are correct: nested5!/SOC/final-null.
+  - [x] FIX: Freeze bounded actual-value result contract and five backend leaves; no production change. Own/fix missed catalog intro/guide overview comparison-terminal/boolean prose against committed15.1-.5 results; scoped comparison boundary wording is checked, and current examples remain accurate.
+  - [x] ADDRESSED (verified): Healthy controls preserve raw numeric/invalid-null, nested fallback8/zero0!, existing selected sources, Array/scalar min/max[3,4,ASO,5,4] and bad abs/add/clamp null/no-effects on native/fresh. Preserve overloaded invalid-kind/effect/copy rules and Array reducer95 defects; do not silently normalize them while adding flow.
+  - [x] NO REGRESSION: Retained public baseline/independent source/invalid controls execute/load healthy routes and expose expected unimplemented transition compile/eval diagnostics; source syntax passes. No runtime/parser/numeric-helper/free-arity changes, broad matrix or complete portable admission.
+  - [x] LOCKSTEP: Retained probe/frozen contract/per-backend tasks, corrected current comparison overview prose and canonical Number result fact/map plus live/resume align. Prior complete comparison rollout detail remains behind exact Git pointer; no cap raise. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl16.1 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.16 - freeze scalar arithmetic result continuations`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -3397,6 +3415,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: New retained consumer/registration/current calibration, frozen contract/all-five bounded progress, scoped guide/catalog/grammar/Lua handoff and canonical number/Lua numeric facts/map, TYPE/live/resume align. Old unsafe full-runner reverify replaced by safe current public fixture, dated July gate retained via exact Git pointer. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Next scalar arithmetic result assessment23.2.16 is scheduled from the same helper spine, preserving overload/domain authority before code.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.5 - continue Lua numeric comparison results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16`
+  Status: `active` / scalar arithmetic result rollout; full admission separate
+  Goal: Extend ordinary scalar numeric arithmetic results into compatible scalar/text/generic/explicit-container continuations.
+  Dependencies: .23.2.16 frozen scalar-arithmetic-results.md.
+  Children: `.23.3.16.1`, `.23.3.16.2`, `.23.3.16.3`, `.23.3.16.4`, `.23.3.16.5`.
+  Acceptance: Preserve scalar-numeric-v1 producer/input/arity rules and actual Number/null kinds, one-time source/operand/result snapshots, scalar/Array min/max overloads, current free/deferred boundaries and Array reducer defects. Independent backend small changed-surface/direct checks/docs/commit; full admission23.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary scalar arithmetic result continuations.
+  Dependencies: .23.2.16.
+  Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary scalar arithmetic result continuations.
+  Dependencies: .23.3.16.1.
+  Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary scalar arithmetic result continuations.
+  Dependencies: .23.3.16.2.
+  Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary scalar arithmetic result continuations.
+  Dependencies: .23.3.16.3.
+  Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary scalar arithmetic result continuations.
+  Dependencies: .23.3.16.4.
+  Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate. Safe PUC5.5.1/LuaJIT named fixtures only; malformed native patterns/declared5.4 remain separately owned.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`; remaining admission leaves split at activation.
@@ -3494,7 +3549,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.16` | `pending` | Assess scalar numeric arithmetic result transitions while preserving overload/domain policy. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` | `pending` | Implement Perl scalar arithmetic result continuations under the frozen contract. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
