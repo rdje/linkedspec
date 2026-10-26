@@ -12,7 +12,7 @@ answers:
   - "does testing a codeblock invoke it"
   - "which ADR defines LinkedSpec logical helpers"
   - "does the logical contract activate codeblock literals"
-date: 2026-07-16
+date: 2026-10-26
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 26 semantic/topology/public drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 consume and lock the unchanged target. Rollout is 8 complete / 0 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
@@ -52,3 +52,15 @@ Related facts: [[logical-helper-five-backend-audit]], [[callable-codeblock-liter
 [[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]],
 [[dart-logical-helper-neutral-runtime]], [[julia-logical-helper-execution]],
 [[logical-helper-recurring-five-backend-gate]], [[logical-helper-public-no-drift]].
+
+## Ordinary result breadth (2026-10-26)
+
+TYPE23.2.17 retains public native/fresh producer/nested/fluent/AST distinctions
+in probe_logical_results.pl and freezes logical-results.md. Direct text/false
+selection/named-selected/typed truth/eager LRC controls pass. Longer Boolean->
+cat->split->last emits unsupported cat/null versus nestedX; String-first DSL
+composition lacks typed logical-result handoff. Hash-only tail leaves raw DSL;
+Array-only tail raises binding_kind_mismatch. Unknown-call scanning also hides
+invalid not arity behind unsupported fail/null, unlike direct/nested typed
+errors.23.3.17.1-.5 own immediate bounded independent backend repair; no new
+logical methods/truth policy or reopened historical5.2 projection claim.

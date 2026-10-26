@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded arithmetic result implementations targeted-checked; logical Boolean result assessment next.
+Logical Boolean result contract frozen; confirmed Perl bridge/scalar/diagnostic repairs next.
 
 ## Latest Completed Slice
 
-Lua arithmetic valid producers/shared flow already work; all scalar_numeric results now mark scalar and common unambiguous shape guards reject before effects. Both PUC5.5.1/LuaJIT native/plan/fresh canonical JSON, shared/selector/prefix and direct comparison/aggregate/default plus actual safe numeric calibration pass after scalar-container[]/28-effect RED. Numeric domains/free signatures/min-max modes/default copies/SOC/ASO remain unchanged. All five bounded arithmetic implementations are targeted-checked; book/facts/task/live align. Logical result assessment23.2.17 next; declared5.4/full admission separate.
+Frozen logical Boolean result contract after public producer/nested/fluent/source/effect/AST distinctions. Direct text/false selection/typed truthiness/eager LRC work; long Boolean-text-split bridge emits unsupported cat, Hash-only tail retains raw DSL and Array-only tail raises a binding-kind error. Unknown-call scanning hides invalid not arity behind null before its typed validator, while direct/nested/known-helper controls raise correctly. Eight existing logical subtests and new probe syntax pass. Confirmed repairs owned by immediate Perl17.1; five independent backend leaves scheduled. No production/neutral contract change or new logical method claim.
 
 ## Next Action
 
-Assess ordinary logical-helper Boolean result continuations under23.2.17 from helper spine, ADR0043/neutral contract and canonical facts before production. Public producer/nested/fluent native/fresh controls must preserve eager once-only typed truthiness/real Bool/pre-effect arity errors and existing free signatures. Freeze only needed actual-value transitions and own backend children after observations; small direct checks/docs/commit, no full matrix or new logical method assumption.
+Implement Perl logical Boolean result flow17.1 from frozen logical-results.md and retained producer/AST/substitution/native/fresh distinctions. Reuse typed logical lowering and actual scalar dispatch; fix long bridge staging, clean scalar-container rejection and malformed logical source arity before unknown-operand scanning. Preserve existing Bool/eager truthiness/free signatures/default/source captures and callbacks. Add small native/fresh/shared/direct regression, syntax/docs/commit; then independently assess Rust/Dart/Julia/Lua.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.17` — Logical Boolean result contract frozen; confirmed Perl bridge/scalar/diagnostic repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.5` — All five bounded arithmetic result implementations targeted-checked; logical Boolean result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` — Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
@@ -29,7 +30,6 @@ Assess ordinary logical-helper Boolean result continuations under23.2.17 from he
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
 
 ## History
 

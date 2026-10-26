@@ -1299,7 +1299,7 @@ table because its runtime behavior is to terminate the parser process.
 
 ### `and(value, ...)`, `or(value, ...)`, and `not(value)`
 - **Target signatures**: `and` and `or` require at least one positional value; `not` requires exactly one.
-- **Target returns**: a real boolean. One-argument `and`/`or` are boolean projections.
+- **Target returns**: a real boolean. One-argument `and`/`or` are boolean projections. Ordinary Perl direct results support `and(true).cat("!")` → `"1!"`, `and(false).coalesce_nonempty("late").cat("!")` → `"0!"`, and `or(false).add(1).coalesce_nonempty(["a","b"]).last().uppercase()` → `"B"`; numeric helpers still reject Boolean input. Longer Boolean-to-text-to-Array continuations and clean container-only rejection remain bounded implementation work under `TYPE-REFERENCE-BOOK.1.2.23.3.17`, alongside preserving typed source arity errors. This qualification concerns broader ordinary chains beyond the historical logical contract projection below.
 - **Target evaluation**: after arity succeeds, every operand runs exactly once from left to right. Logical helpers
   do not short-circuit; `if`/`switch`/`while` remain the lazy mechanisms.
 - **Target truthiness**: null, false, numeric zero, the empty string, and empty arrays/harrays are false. Other

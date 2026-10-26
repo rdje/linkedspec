@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.17 — freeze logical Boolean result continuations
+
+Frozen logical Boolean result contract after public producer/nested/fluent/source/effect/AST distinctions. Direct text/false selection/typed truthiness/eager LRC work; long Boolean-text-split bridge emits unsupported cat, Hash-only tail retains raw DSL and Array-only tail raises a binding-kind error. Unknown-call scanning hides invalid not arity behind null before its typed validator, while direct/nested/known-helper controls raise correctly. Eight existing logical subtests and new probe syntax pass. Confirmed repairs owned by immediate Perl17.1; five independent backend leaves scheduled. No production/neutral contract change or new logical method claim.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.16.5 — guard Lua scalar arithmetic results
 
 Lua arithmetic valid producers/shared flow already work; all scalar_numeric results now mark scalar and common unambiguous shape guards reject before effects. Both PUC5.5.1/LuaJIT native/plan/fresh canonical JSON, shared/selector/prefix and direct comparison/aggregate/default plus actual safe numeric calibration pass after scalar-container[]/28-effect RED. Numeric domains/free signatures/min-max modes/default copies/SOC/ASO remain unchanged. All five bounded arithmetic implementations are targeted-checked; book/facts/task/live align. Logical result assessment23.2.17 next; declared5.4/full admission separate.
