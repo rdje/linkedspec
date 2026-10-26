@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded default result rollout is targeted-checked on recorded hosts. Index_of integer/null result assessment23.2.6 is next. Feature/compile/small-check/docs/commit cadence continues; declared5.4/full admission separate.
+Index result contract23.2.6 is frozen. Perl23.3.7.1 implementation is next, then independent backend assessments. Bounded defaults are targeted-checked; full admission stays separate under feature/compile/small-check/docs/commit cadence.
 
 ## Latest Completed Slice
 
-Lua preserves correct selected Array/Hash default flow and activates scalar guarding after nonempty selection, releasing it for actual array/harray output. Direct retained/fallback scalars now reject container-only consumers with null after [] RED. Small native/generated-plan/fresh-emitted default and existing receiver/join checks pass on available PUC5.5.1/LuaJIT, retaining lazy SDJ snapshots, empty/null/zero/false and copy policies. Loadfile/book/fast continuity checks pass. Bounded default rollout is targeted-checked on recorded hosts; index_of result assessment23.2.6 is next, declared5.4/full admission separate.
+Freeze ordinary index_of integer/null continuation after public Perl Get/substitution/native/fresh distinction: fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. The producer already preserves named/computed N/SN snapshots and nested SNA consumer order. Own bounded Perl23.3.7.1 next, then independent backend assessments. Preserve zero-based/null/equality/domain/copy behavior and one-needle shape; no production change or broad suite.
 
 ## Next Action
 
-Publicly compare index_of fluent integer/null continuations with nested helpers before classification. Preserve zero-based/missing/null and existing domain/effect/snapshot behavior; freeze bounded targets/owners if needed, small checks/docs/commit.
+Implement bounded Perl index_of result flow with one-needle preflight and retained scalar boundaries. Preserve the correct producer and snapshot/order controls. Small native/fresh/direct compatibility and syntax/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
@@ -29,7 +30,6 @@ Publicly compare index_of fluent integer/null continuations with nested helpers 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.4` — joined String result contract frozen; isolated lowering/shape findings and correct producer snapshots retained; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` — Lua six-reducer result flow, scalar/shape guards and focused available-host checks pass; join-result assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.4.4` — Julia existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/generated/emitted and strict harness checks pass.
 
 ## History
 

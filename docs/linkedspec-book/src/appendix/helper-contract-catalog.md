@@ -772,7 +772,7 @@ dispatch rule.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`
-- **Returns**: int or undef
+- **Returns**: int or undef. Ordinary Perl fluent numeric continuation currently needs repair; nested `num_add(index_of(["a","b"],"b"),1)` returns `2`. Other backend continuation assessment remains separate.
 - **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases.
 
 ### `is_empty(arr)`

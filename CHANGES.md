@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.6 — freeze index result continuations
+
+Freeze ordinary index_of integer/null continuation after public Perl Get/substitution/native/fresh distinction: fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. The producer already preserves named/computed N/SN snapshots and nested SNA consumer order. Own bounded Perl23.3.7.1 next, then independent backend assessments. Preserve zero-based/null/equality/domain/copy behavior and one-needle shape; no production change or broad suite.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.6.5 — guard Lua scalar default results
 
 Lua preserves correct selected Array/Hash default flow and activates scalar guarding after nonempty selection, releasing it for actual array/harray output. Direct retained/fallback scalars now reject container-only consumers with null after [] RED. Small native/generated-plan/fresh-emitted default and existing receiver/join checks pass on available PUC5.5.1/LuaJIT, retaining lazy SDJ snapshots, empty/null/zero/false and copy policies. Loadfile/book/fast continuity checks pass. Bounded default rollout is targeted-checked on recorded hosts; index_of result assessment23.2.6 is next, declared5.4/full admission separate.

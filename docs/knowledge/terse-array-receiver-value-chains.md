@@ -2,6 +2,7 @@
 id: terse-array-receiver-value-chains
 title: Pure receiver chains and scalar result contracts
 answers:
+  - "can index_of results continue into numeric methods"
   - "can join_values results continue into String methods or split back to Array"
   - "can count length and count_keys results continue into numeric methods"
   - "why can Rust array pipelines use length without changing initial string dispatch"
@@ -20,12 +21,12 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: bounded ordinary joined results targeted-checked; full admission open
+status: bounded results checked; index_of transition frozen, implementation next
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length23.2.2; join result contract23.2.4."
 reverify:
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test joined_string_receivers --test aggregate_numeric_receivers"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/joined_string_receiver_contract.t t/aggregate_numeric_receiver_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_index_results.pl"
+  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_index_results_fresh.pl"
 ---
 
 Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_values, filter_match/count and split_each/filter/count. join_values keeps delimiter-first free-helper roles. End mutations retain [[uniform-binding-array-end-result-supersession]]. Rust/Dart/Julia5.3.1-.3 implement dropped transforms with validated snapshots/ordered operands; pure value forms stay pure and broad5.3.4 stays open.
@@ -36,4 +37,6 @@ Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []
 
 Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md. Other mechanisms: [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]], [[lua-runtime-array-transform-pipelines]].
 
-23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Rust23.3.5.2 uses is_scalar_result_receiver_method and guarded mutation tails after []-versus-null RED. Dart23.3.5.3/Julia23.3.5.4 guard existing flow ([[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]]). Lua23.3.5.5 adds flow/guards and fixes false delimiters ([[lua-runtime-array-transform-pipelines]]). Focused checks pass; source normalization/declared5.4/full admission stay open.
+23.2.4 freezes joins: docs/checkpoints/type-operation-inventory/joined-string-results.md. Perl uses scalar_result/exact-one-operand handoff; Rust uses is_scalar_result_receiver_method and guarded mutation tails. Dart/Julia guard existing flow; Lua adds flow/guards/false repair. Focused checks pass; source/declared5.4/full admission stay open. Prior details and commands are exact at Git05cd2f8074894f012d56c3410e9366eb67dd2f97 for this path.
+
+Index23.2.6 freezes integer/null flow: docs/checkpoints/type-operation-inventory/index-results.md. Perl native/fresh fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. append_array_chain_call leaves index_of terminal. Named/computed producer snapshots N/SN and nested SNA effects are already correct; preserve them. Perl23.3.7.1 is next; other backends/admission remain unassessed.
