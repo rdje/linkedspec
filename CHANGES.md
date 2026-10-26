@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.5.2 — continue Rust joined String results
+
+Include join in shared scalar-result handoff and exact one-delimiter preflight. Reuse guarded continuation for named Array-end tails after a distinguishing candidate regression, preserving old incompatible nulls. Public/fixture RED precedes small native/restored/generated-plan joined and direct aggregate GREEN, compilation/rustfmt/book and fast continuity checks. Function/selected/pipeline/hash/String/mutating sources, Unicode, split/length bridges, SDAN order and snapshots pass. Sync public/current records; Dart assessment next, broad admission open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.5.1 — continue Perl joined String results
 
 Use existing scalar_result handoff for join_values and reject non-one-delimiter shapes before effects. Small native/fresh joined-result and direct aggregate fixtures pass after RED, including working hash-view lowering, named/function/selected/pipeline/String sources, empty/Unicode, split/length bridges, SDAN order, mutation snapshots and incompatible Array nulls. Changed-file syntax/book and fast continuity checks pass. Register fixture and sync public/current records; Rust assessment next. Existing producer/domains/deferred scope remain unchanged; no broad admission.

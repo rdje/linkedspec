@@ -20,11 +20,11 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: Perl joined results implemented; other backend assessment/full admission open
+status: Perl/Rust joined results implemented; other backend assessment/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length23.2.2; join result contract23.2.4."
 reverify:
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test count_length_receivers"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test joined_string_receivers --test aggregate_numeric_receivers"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/joined_string_receiver_contract.t t/aggregate_numeric_receiver_contract.t"
 ---
 
@@ -36,4 +36,4 @@ Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []
 
 Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md. Other mechanisms: [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]], [[lua-runtime-array-transform-pipelines]].
 
-23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Producer behavior/deferred scope stays unchanged; other backends require assessment.
+23.2.4 freezes joined String continuations: docs/checkpoints/type-operation-inventory/joined-string-results.md. At activation direct/selected chains stopped; hash-view raw DSL raised host sorted_values while nested helpers worked. Perl23.3.5.1 uses scalar_result handoff and exact one-delimiter preflight. Native/fresh and direct aggregate checks pass after RED, retaining Unicode, split/length bridges, SDAN snapshots, clean shapes and incompatible Array nulls. Rust23.3.5.2 shares is_scalar_result_receiver_method and sends named mutation tails through the guarded loop after a distinguishing []-versus-null RED. Focused checks pass; source domains/vocabulary stay unchanged and other backends require assessment.

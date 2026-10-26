@@ -106,3 +106,11 @@ String/length/split bridges, SDAN effects, later mutations, invalid arity and
 incompatible Array nulls. The join helper, source domains/null/copy behavior and
 separate deferred evaluator are unchanged. Rust and later backends require
 individual assessment; no complete context/portable admission is claimed.
+
+Rust `.23.3.5.2` extends existing scalar-result handoff/guards to join and adds
+exact one-delimiter rejection. Named Array-end tails now use the shared loop;
+a distinguishing candidate RED prevents wrong-kind empty-Array fallback there.
+Native/restored/generated-plan and direct aggregate checks pass, including
+named mutations, Unicode, split/length bridges, SDAN order, snapshots and shapes.
+Helper/source/null/copy behavior and callable vocabulary stay unchanged; Dart and
+later backends require individual assessment, with full admission separate.

@@ -5957,44 +5957,30 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
-                // These methods take zero extra operands. Reject before receiver or
-                // operand effects, just as the other governed arity boundaries do.
-                if calls.iter().any(|call| {
-                    matches!(
-                        call.method.as_str(),
-                        "first"
-                            | "last"
-                            | "copy"
-                            | "count"
-                            | "count_keys"
-                            | "length"
-                            | "sum"
-                            | "avg"
-                            | "median"
-                            | "range"
-                    ) && !call.args.is_empty()
+                // Reject invalid receiver arities before source/operand effects.
+                if calls.iter().any(|call| match call.method.as_str() {
+                    "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
+                    | "avg" | "median" | "range" => !call.args.is_empty(),
+                    "join_values" => call.args.len() != 1,
+                    _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
                 }
                 if let Some(first) = calls.first()
                     && Self::is_statement_only_array_end_mutation_method(&first.method)
                 {
-                    let Some(mut current) =
+                    let Some(current) =
                         self.eval_array_end_mutation_call(receiver, first, ctx, rule_label)?
                     else {
                         return Ok(RuntimeValue::Undef);
                     };
-                    for (index, call) in calls.iter().enumerate().skip(1) {
-                        current = self.eval_receiver_dynamic_value_chain_call(
-                            current,
-                            call,
-                            calls.get(index + 1),
-                            index + 1 == calls.len(),
-                            ctx,
-                            rule_label,
-                        )?;
-                    }
-                    return Ok(current);
+                    return self.eval_selected_receiver_value_chain(
+                        current,
+                        &calls[1..],
+                        false,
+                        ctx,
+                        rule_label,
+                    );
                 }
                 if calls
                     .iter()
@@ -7456,11 +7442,14 @@ impl Engine {
 
     fn is_selected_receiver_result_method(method: &str) -> bool {
         matches!(method, "first" | "last" | "count" | "count_keys" | "length")
-            || Self::is_numeric_reducer_receiver_method(method)
+            || Self::is_scalar_result_receiver_method(method)
     }
 
-    fn is_numeric_reducer_receiver_method(method: &str) -> bool {
-        matches!(method, "sum" | "avg" | "median" | "range" | "min" | "max")
+    fn is_scalar_result_receiver_method(method: &str) -> bool {
+        matches!(
+            method,
+            "sum" | "avg" | "median" | "range" | "min" | "max" | "join_values"
+        )
     }
 
     // Producer continuations consume the actual result value
@@ -7474,7 +7463,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         for (index, call) in calls.iter().enumerate() {
-            // Reducers yield scalars. Retain the incompatible-array boundary
+            // Scalar producers retain the incompatible-array boundary
             // until a compatible helper explicitly returns a container.
             if scalar_result
                 && !Self::is_string_receiver_value_chain_method(&call.method)
@@ -7490,8 +7479,7 @@ impl Engine {
                 ctx,
                 rule_label,
             )?;
-            scalar_result = (scalar_result
-                || Self::is_numeric_reducer_receiver_method(&call.method))
+            scalar_result = (scalar_result || Self::is_scalar_result_receiver_method(&call.method))
                 && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
         }
         Ok(current)
@@ -7560,7 +7548,7 @@ impl Engine {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index + 1..],
-                    Self::is_numeric_reducer_receiver_method(&call.method),
+                    Self::is_scalar_result_receiver_method(&call.method),
                     ctx,
                     rule_label,
                 );
@@ -7651,7 +7639,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
-                            Self::is_numeric_reducer_receiver_method(&call.method),
+                            Self::is_scalar_result_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7685,7 +7673,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
-                            Self::is_numeric_reducer_receiver_method(&call.method),
+                            Self::is_scalar_result_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7780,7 +7768,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
-                            Self::is_numeric_reducer_receiver_method(&call.method),
+                            Self::is_scalar_result_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );
@@ -7814,7 +7802,7 @@ impl Engine {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
-                            Self::is_numeric_reducer_receiver_method(&call.method),
+                            Self::is_scalar_result_receiver_method(&call.method),
                             ctx,
                             rule_label,
                         );

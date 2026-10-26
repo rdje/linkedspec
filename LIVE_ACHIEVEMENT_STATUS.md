@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Count/Length and aggregate results are targeted-checked. Perl joined String flow23.3.5.1 is implemented/targeted-checked; Rust23.3.5.2 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/portable admission remain open.
+Bounded Count/Length and aggregate results are targeted-checked. Perl/Rust joined String flow is implemented/targeted-checked; Dart23.3.5.3 assessment is next. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/portable admission remain open.
 
 ## Latest Completed Slice
 
-Perl joins now use existing scalar_result continuation and exact one-delimiter preflight. Small native/fresh joined-result and direct aggregate tests pass after RED, including hash-view lowering, named/function/selected/pipeline/String sources, empty/Unicode, split/length bridges, SDAN order, mutation snapshots and incompatible Array nulls. Changed-file syntax/book and fast continuity checks pass. Existing producer/source/deferred policies stay unchanged.
+Rust joins enter existing scalar-result continuation with exact one-delimiter validation. Named mutation tails now use the same guarded loop after a distinguishing candidate []-versus-null RED. Small native/restored/generated-plan joined and direct aggregate tests pass, including named/function/selected/pipeline/hash/String sources, Unicode, split/length bridges, SDAN effects and snapshots. Compilation/rustfmt/book and fast continuity checks pass; helper/source/vocabulary contracts stay unchanged.
 
 ## Next Action
 
-Publicly assess Rust joined-result chains, shapes, scalar/Array boundaries and source/delimiter/consumer order independently. Preserve correct behavior and repair only observed gaps with small native/restored/generated-plan/direct checks. Compile/rustfmt/docs/commit before Dart; no broad suite/source-normalization campaign.
+Publicly assess Dart joined chains, shapes, scalar/Array boundaries, snapshots/order and named mutation sources independently. Preserve correct behavior and repair only observed gaps with small native/restored/generated-plan/direct checks and changed-file analysis. Docs/commit before Julia; no broad suite/source-normalization campaign.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` — Rust joined String flow/arity and guarded named-mutation tails; focused native/restored/generated-plan and aggregate checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.4` — joined String result contract frozen; isolated lowering/shape findings and correct producer snapshots retained; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` — Lua six-reducer result flow, scalar/shape guards and focused available-host checks pass; join-result assessment next.
@@ -29,7 +30,6 @@ Publicly assess Rust joined-result chains, shapes, scalar/Array boundaries and s
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.2` — count/count_keys/length result contract frozen; public Perl/substitution distinctions, book and fast continuity checks pass; Perl implementation next.
 - `SESSION-STARTUP-READING.62.2.3` — Perl nonempty exhaustion and selected numeric kinds; native/fresh regression, direct selected-scalar and changed-file syntax checks pass.
-- `SESSION-STARTUP-READING.62.2.2` — Rust documented receiver lazy defaults; native/restored/generated-plan order/skipped-error and ordinary default-helper checks pass; Perl final-tail repair owned next.
 
 ## History
 

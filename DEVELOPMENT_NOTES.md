@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.2 — joined scalars use one continuation loop
+
+Rust join is absent from result handoff and arity preflight. Generalize the private classifier to is_scalar_result_receiver_method, include join and retain scalar compatibility until container output. The named Array-end tail had a separate generic loop; an added public fixture shows a valid join passing but incompatible sorted returning [] instead of null. Reuse the existing guarded loop for this ordinary route and retain the negative. Final native/restored/generated-plan joined and direct aggregate tests pass after both REDs, including named mutations, Unicode, explicit bridges, SDAN order and snapshots. Compilation/rustfmt/book/continuity checks pass; existing helper/source/null/copy/serialized contracts and callable vocabulary stay unchanged. Dart is next, complete admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.1 — reuse scalar continuation for joins
 
 append_array_chain_call marked join terminal, and ordinary preflight lacked exact one-delimiter rejection. Two production changes reuse scalar_result flow and suppress malformed source/operand effects. The retained native/fresh fixture passes after actual handler-compile/result RED, including hash-view lowering, direct/selected/pipeline/function/String sources, Unicode, empty join, split/length bridges, SDAN order and snapshots despite delimiter/consumer mutations. Direct aggregate and changed module/test/registration syntax pass. Existing join helper/source/copy/null behavior and separate deferred evaluator stay unchanged. Register fixture and align book/contract/Array fact/map/task/live; Rust starts with public probes next.

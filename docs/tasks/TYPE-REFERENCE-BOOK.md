@@ -1543,10 +1543,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5`
-  Status: `active` / Perl implemented; individual backend assessment follows
+  Status: `active` / Perl/Rust implemented; individual backend assessment follows
   Goal: Implement the frozen ordinary joined String result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.4.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`; assess later backends individually after clean commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.3`; assess later backends individually after clean commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
@@ -1573,13 +1573,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1 - continue Perl joined String results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `5581d074d63bb32824280fad9243407f0ed7847c`.
   Goal: Publicly assess and implement/confirm ordinary joined String result continuations on Rust.
   Dependencies: .23.3.5.1.
   Owned paths: Rust public engine if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Fresh public Rust joined-result/nested probe; locked/offline small joined_string_receivers and direct aggregate_numeric_receivers native/restored/generated-plan tests, first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; complete public/context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / owned repair: Fresh Rust CLI returns [null,"A,B",null,"A-B",null,"X:Y"] for direct/selected/hash-view fluent/nested pairs. Join is absent from result handoff classification and retains Array endpoint rejection; preflight validates zero-extra methods only. Assess exact shape effects/snapshots in the focused fixture and reuse existing scalar-result boundaries rather than weakening incompatible Array consumers.
+  Direct-dependent route / owned assessment: Expr::FluentChain’s named Array-end mutation tail iterates the generic dispatcher outside the scalar-result loop. The shared join handoff classifier affects this documented ordinary value route; add a valid mutating-source join and incompatible Array-consumer control before landing. Reuse the common continuation loop if the current candidate exposes a missing scalar boundary.
+  Candidate regression / verified root: The added public Engine fixture returns "A,B,C" correctly for named_parts.push_back("c").join_values(",").uppercase(), but push_back("d").join_values(",").sorted() returns [] instead of prior/frozen null. The named mutation tail bypasses scalar-result tracking, allowing generic wrong-kind Array fallback. Reuse eval_selected_receiver_value_chain with an initial non-scalar flag for that tail; keep the distinguishing negative intact and verify before landing.
+  Acceptance: Preserve correct dispatch and join source/domains/snapshot behavior. Probe valid joined-result chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and receiver/delimiter/consumer order before classifying defects. Small native/restored/generated-plan and direct aggregate checks, compile/rustfmt/docs/commit before Dart. No new callable vocabulary, source-domain normalization or broad replay/admission.
+
+  Completion: Include join_values in scalar-result classification/shared handoff and exact one-delimiter preflight. Generalize the private classifier to is_scalar_result_receiver_method and reuse selected continuation for named Array-end tails so they retain scalar guards. Preserve helper/source/copy/null behavior and callable vocabulary.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Fresh public CLI and authored native fixture RED show stopped direct/selected/hash joins, skipped consumer effects and four invalid-shape effects. Added named-mutation control exposes [] instead of null after the initial candidate; valid mutating join already passes.
+  - [x] ROOT CAUSE (WHY + WHERE): Join is excluded from result handoff/endpoint exemptions and exact arity preflight. The separate named mutation tail calls generic dispatch without scalar-result tracking, allowing wrong-kind Array fallback.
+  - [x] FIX: Share scalar-result classification for six reducers/joins, retain scalar boundaries until container output and guard one delimiter before effects. Route Array-end tails through the same existing continuation loop with an initial non-scalar value.
+  - [x] ADDRESSED (verified): Locked/offline joined_string_receivers native/restored/generated-plan PASS after initial/result and candidate-boundary RED, including named mutation sources, functions/selected/pipeline/hash/String sources, empty/Unicode, split/length bridges, SDAN order, snapshots, incompatible nulls and zero invalid effects.
+  - [x] NO REGRESSION: Direct aggregate_numeric_receivers, compilation and first-party rustfmt PASS. Existing helper/source/deferred vocabulary and serialized formats remain unchanged; no additional complete context/portable admission.
+  - [x] LOCKSTEP: Worked helper/guide/contract, Array fact/map and current task/live records align; book and fast continuity/history/diff checks pass. Dart assessment follows the clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.2 - continue Rust joined String results`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.3`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary joined String result continuations on Dart.
+  Dependencies: .23.3.5.2.
+  Owned paths: Dart public interpreter if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
   Planned tier: `focused`; declare exact public probes and small regression at activation.
   Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
-  Acceptance: Preserve correct dispatch and join source/domains/snapshot behavior. Probe valid joined-result chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and receiver/delimiter/consumer order before classifying defects. Small native/restored/generated-plan and direct aggregate checks, compile/rustfmt/docs/commit before Dart. No new callable vocabulary, source-domain normalization or broad replay/admission.
+  Acceptance: Preserve correct dispatch, producer snapshots/order/source domains and inherited null/copy behavior. Probe joined-result chains, exact one-delimiter shapes, scalar boundaries until explicit Array bridge and named-mutation sources before classifying defects. Small native/restored/generated-plan and direct aggregate checks, changed-file fatal analysis/format, docs/commit before Julia. No source normalization or broad replay/admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1663,7 +1688,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` | `pending` | Publicly assess/implement frozen joined String result flow on Rust after targeted-checked Perl slice. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.3` | `pending` | Publicly assess/implement frozen joined String result flow on Dart after targeted-checked Perl/Rust slices. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
