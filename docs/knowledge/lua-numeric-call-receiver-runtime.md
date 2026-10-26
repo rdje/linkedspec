@@ -6,23 +6,30 @@ answers:
   - "does Lua support integer and float number receiver chains"
   - "are Lua numeric comparison receiver methods terminal"
   - "how does Lua distinguish division symbol calls from regex literals"
-date: 2026-07-12
-status: current
-tags: [lua, luajit, numeric, aliases, symbols, receivers, regex, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.3.3.2 routes all 18 scalar numeric word aliases and 11 arithmetic/comparison symbol callees through scalar_numeric.lua. interpreter.lua injects integer/float/bare-scalar fluent receivers, composes numeric results, and terminates comparison continuations. action_parser.lua distinguishes a complete parenthesized slash callee from regex start after harray colons. The focused fixture plus grouped/class/zero-width/invalid regex regression cases remain green in the 91/91 PUC Lua and LuaJIT gates after .4.3.3.3 adds reducers."
-reverify: "bash tools/run_lua_local.sh && bash tools/check_scalar_numeric_six_runtime.sh"
+date: 2026-10-26
+status: comparison results targeted-checked on available hosts; full admission open
+tags: [lua, luajit, numeric, aliases, symbols, receivers, LUA-BACKEND-PARITY]
+evidence: "TYPE23.3.15.5 safe public producer/shared/selector/direct/named-calibration native/plan/fresh checks. Full July4.3.3.2 record/91-per-ABI historical proof at Git564157d106c526a7a3c6062744381ffc821cb2c5 for this path."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/numeric_comparison_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/numeric_comparison_results_test.lua"
 ---
 
-Direct numeric calls already canonicalized word and symbol names before `.4.3.3.2`; the missing runtime mechanism
-was fluent receiver injection. The numeric fluent branch now supplies the current value as argument one to the same
-strict scalar evaluator used by canonical calls. Integer literals, float literals, and bare scalar bindings work;
-number-returning methods compose; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` return numeric truth but reject any later
-receiver continuation with typed null.
+Canonical numeric calls, word/symbol aliases and Number receivers share the
+strict scalar_numeric evaluator; current value is operand one. Comparison
+producers retain numeric1/0/invalid-null with strict decimal/domain rules.
+TYPE23.3.15.5 replaces evaluate_fluent_calls' nonfinal-comparison stop with
+scalar_result marking and includes is_comparison in common one-RHS preflight.
+Public native/plan/fresh producer controls already work; shared null/SO/24-effect
+RED now passes scalar/numeric/default/Array-bridge/selector/source snapshots on
+PUC5.5.1/LuaJIT. Direct lexical/aggregate and exact numeric calibration pass;
+six historical terminal_* expected fields now2. No free/adapter/domain change.
 
-The focused all-spelling fixture exposed a separate parser ambiguity: after an harray `:`, `/` was always considered
-a possible regex opener, so nested `/(lhs, rhs)` became raw fallback even though the same call parsed alone.
-Slash-call recognition now requires a structurally complete parenthesized callee and leaves `/pattern/flags`
-literals—including grouped, character-class, zero-width, and deliberately invalid patterns—on the regex path.
+Slash after a Hash colon uses complete parenthesized symbol-call recognition;
+valid grouped/class regex AST controls in the named numeric calibration remain
+patterns. The historical July record includes deliberately invalid regex tests;
+current reverify excludes known malformed native paths owned by
+[[lua-native-readme-and-action-ast-reading]] / LUA-STARTUP-READING2.3.
 
-Aggregate `sum`/`avg`/`median`/`range` and one-array `min`/`max`, including array receiver terminals, are not scalar
-receiver behavior. `.4.3.3.3` therefore implements them through the distinct strict reducer entry point.
+Array reducers have separate dispatch/current result contracts:
+[[terse-array-numeric-reducer-receiver-methods]]. Ordinary scalar arithmetic
+inter-type breadth is next TYPE23.2.16; declared Lua5.4 and full domain/context/
+portable admission remain separate from available-host focused checks.

@@ -12,7 +12,7 @@ answers:
   - "is declare a number receiver method"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.4"
 date: 2026-10-26
-status: Perl/Rust/Dart/Julia comparison results checked; Lua pending
+status: five bounded comparison result implementations checked
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "SPEC-FORMAT-TERSE2.3.5.4 arithmetic; scalar_numeric_contract.json; TYPE23.2.15 public native/fresh/substitution and numeric-comparison-results.md."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_numeric_comparison_results.pl"
@@ -37,8 +37,9 @@ Canonical -0.5 literal replaces setup bare-.5, retaining String"-.5" control;
 twelve shared Perl assertions pass. Dart15.3 keeps correct producers/valid flow,
 fixing scalar Array[] and24 effects through common one-RHS/scalar guard set; six
 focused tests/fatal analysis pass. Julia15.4 independently fixes the same guards;
-42 strict numeric/direct assertions pass with Number/not-Bool identity. Lua
-needs independent controls;
+42 strict numeric/direct assertions pass with Number/not-Bool identity. Lua15.5
+replaces the stop with scalar marking and RHS preflight; safe native/plan/fresh/
+direct/named-calibration checks pass on PUC5.5.1/JIT after null/SO/24-effect RED;
 full admission23.4 separate. Canonical num_* method names are outside this scope.
 
 Array reducers have their own current result/arity contract:

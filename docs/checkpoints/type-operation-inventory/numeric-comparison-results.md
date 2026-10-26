@@ -100,3 +100,15 @@ additions implement common one-RHS and possible scalar-result guards.42 strict
 focused numeric/direct lexical/aggregate assertions and compilation pass, including
 explicit Number/not-Bool checks because Julia == accepts lookalikes. Numeric
 adapters/domains/free signatures stay unchanged; safe Lua15.5/full admission follow.
+
+## Bounded Lua implementation and rollout state
+
+23.3.15.5 independently confirms numeric1/0/strict-domain/canonical-word-symbol
+producers and nested SOC on PUC5.5.1/LuaJIT. The nonfinal-comparison fence and
+missing RHS preflight explain null/SO/24-effect shared RED. Mark actual results
+scalar and reuse is_comparison in one-RHS preflight; native/plan/fresh shared,
+numeric selector, direct lexical/aggregate and exact actual numeric calibration
+now pass on both hosts. Six former terminal_* values intentionally become2.
+All five bounded implementations are targeted-checked. The safe calibration
+parses valid grouped/class regex ASTs only; malformed native patterns/full
+runner/declared5.4 and complete domain/context/portable admission stay separate.

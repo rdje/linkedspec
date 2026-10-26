@@ -3511,7 +3511,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
         canonical_name,
         value
       )
-      if scalar_numeric.is_comparison(canonical_name) and index < #calls then return json.null end
+      if scalar_numeric.is_comparison(canonical_name) then scalar_result = true end
     elseif PURE_ARRAY_HELPERS[canonical_name] then
       value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "join_values" or canonical_name == "index_of" or
@@ -3892,7 +3892,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       local name = action_contracts.canonical_action_helper_name(call.method)
       if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or
           name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches" or
-          is_string_comparison(name)) and
+          is_string_comparison(name) or scalar_numeric.is_comparison(name)) and
           #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or

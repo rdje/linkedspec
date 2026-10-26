@@ -8378,8 +8378,8 @@ return({
   "symbol_mod": 1, "symbol_eq": 1, "symbol_ne": 1, "symbol_gt": 1,
   "symbol_ge": 1, "symbol_lt": 1, "symbol_le": 1,
   "integer_receiver": 1, "float_chain": 4, "bare_scalar_chain": 5,
-  "comparison_receiver": 1, "terminal_eq": null, "terminal_ne": null,
-  "terminal_gt": null, "terminal_ge": null, "terminal_lt": null, "terminal_le": null
+  "comparison_receiver": 1, "terminal_eq": 2, "terminal_ne": 2,
+  "terminal_gt": 2, "terminal_ge": 2, "terminal_lt": 2, "terminal_le": 2
 }
 ]])
   assert_json_equal(execute_uniform_binding_source(source), expected, "numeric call and receiver surfaces")
@@ -9567,6 +9567,10 @@ end)
 
 test("null Array comparison and uniqueness keys", function()
   dofile("lua/test/null_array_keys_test.lua")
+end)
+
+test("numeric comparison result receiver continuations", function()
+  dofile("lua/test/numeric_comparison_results_test.lua")
 end)
 
 io.stdout:write("1..", total, "\n")

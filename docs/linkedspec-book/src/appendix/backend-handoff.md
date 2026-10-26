@@ -1319,13 +1319,13 @@ array, harray, or codeblock. One neutral executable fixture covers the currently
 Rust, Dart, Julia, PUC Lua, and LuaJIT; the contract also fixes codeblock as non-text without claiming that the
 separately deferred explicit final-codeblock call syntax is already portable. Lua advances to 72/72 on both ABIs.
 
-Scalar numeric rollout uses a separate `linkedspec-scalar-numeric-v1` boundary. Perl, Rust, Dart, Julia, PUC Lua,
-and LuaJIT use dedicated strict helper adapters and pass the same 55 direct canonical calls: finite decimal
+The original scalar numeric rollout adopted `linkedspec-scalar-numeric-v1`. At that milestone Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT used dedicated strict adapters and passed the same 55 direct canonical calls: finite decimal
 numbers/strings, exact fixed or variadic arities, invalid-to-null results, numeric comparison truth, half-away
 rounding, division/clamp fences, and floor signed modulo. General-purpose scalar conversion paths remain unchanged.
 One composed checker proves the exact expected fixture value on all six runtime variants. Lua word aliases,
 arithmetic/comparison symbol callees, and integer/float/bare-scalar receiver chains now share the evaluator;
-number-returning links compose and comparison links are terminal. The focused gate is 90/90 on both ABIs.
+number-returning links compose; ordinary comparison results now also feed compatible scalar/explicit-container continuations under TYPE23.3.15.5. July90/90 was historical; current focused checks use PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
 Strict copied-array sum/avg/median/range/min/max now work through explicit, bare-binding, and terminal receiver
 forms on both Lua ABIs. Ordered `array(...)`/literal construction, explicit `flat`/`flat_array` call or terminal-
 receiver splicing, ordinary nested array preservation, copied concatenation, and saved-source isolation raise the
