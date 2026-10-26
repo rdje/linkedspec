@@ -351,7 +351,7 @@ dispatch rule.
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation.
+- **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation. Perl currently stops `"abc".matches(/^a/).cat("!")` at undef; nested `cat(matches("abc",/^a/),"!")` returns `"1!"`. Compatible result continuation is tracked; regex/producer policies stay unchanged.
 - **Regex flags**: `i`, `m`, `s`, and `x` affect compilation. Operation-only `g` and Perl compile-once `o` are
   accepted compile-time no-ops. Unknown flags or invalid patterns return false.
 - **Edge cases**: Returns false for undef input.
@@ -360,7 +360,7 @@ dispatch rule.
 ### `starts_with(s, prefix)`
 - **Signature**: `starts_with(value: scalar, prefix: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text.
+- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text. Perl currently stops `"abc".starts_with("a").cat("!")` at undef, while `cat(starts_with("abc","a"),"!")` returns `"1!"`. The same result-flow gap affects `ends_with`, `contains_substr`, and `matches`; their producers and nested source/operand/consumer snapshots already work.
 - **Example**: over `/(\S+)/`, `starts_with(entry_group(0), "foo")` on `foobar` → `[1]`.
 
 ### `ends_with(s, suffix)`

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
+String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
 
 ## Latest Completed Slice
 
-Lua removes the generic emptiness terminal fence, tracks its Boolean scalar results and preflights zero receiver operands. Native/generated-plan/fresh-emitted emptiness and direct has_key checks pass on available PUC5.5.1/LuaJIT after native fluent-null/S-only/four-effect RED. Producer/domains/source/copy unchanged; source kinds/copied bindings, repeated predicates, false retention, bridges/scalar nulls and1!/SA/once-only snapshots pass. Loadfile/book/fast checks pass; String-predicate result assessment23.2.9 next, declared5.4/full admission separate.
+Public Perl native/fresh producers agree on[1,1,1,1,0,0], null/empty text boundaries and nested1!/SOC/zzztail snapshots. Fluent starts_with/ends_with/contains_substr/matches chains stop at null because the String return-family table marks them terminal. Freeze compatible scalar/text handoff and one-operand receiver shape, preserve correct producers/domains/regex policies, and schedule independent backend children. Refresh stale String fact Length/retired-syntax statements with exact history pointer. Production unchanged; syntax/book/fast checks pass.
 
 ## Next Action
 
-Assess ordinary starts_with/ends_with/contains_substr/matches result continuation under23.2.9 using public fluent/nested pairs. Read canonical scalar/regex/null/empty/arity/scalar-text rules; preserve actual producer kinds, source/operand/consumer snapshots/order and source/helper domains. Freeze bounded targets/backend owners after observations; small checks/docs/commit. String-comparison receiver additions and contains calibration remain separate.
+Implement Perl ordinary starts_with/ends_with/contains_substr/matches result handoff23.3.10.1 under string-predicate-results.md. Preserve producers/actual kinds/null/empty/regex/source/copy domains and correct SOC snapshots; one-operand no-effect preflight, native/fresh/direct small checks/docs/commit. No String-comparison registration or contains calibration changes.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.9` — String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` — Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
@@ -29,7 +30,6 @@ Assess ordinary starts_with/ends_with/contains_substr/matches result continuatio
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` — Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.7` — has_key contract frozen, P1 key-block and result-flow gaps owned; public native/fresh controls retained.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.5` — index scalar/null and shape guards; focused available-host native/plan/fresh/direct default checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` — index scalar/null and shape guards; strict native/plan/fresh/direct default checks pass.
 
 ## History
 

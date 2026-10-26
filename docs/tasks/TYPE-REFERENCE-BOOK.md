@@ -1119,7 +1119,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.8 - freeze emptiness result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.9`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess ordinary String predicate results continuing through existing compatible scalar/text methods.
   Dependencies: .23.3.9.5.
   Schedule: Next bounded result-family feature after generic emptiness rollout, before exhaustive signatures/matrices.
@@ -1127,9 +1127,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Public reproduction target: Compare "abc".starts_with("a").cat("!") and equivalent ends_with/contains_substr/matches fluent/nested pairs; retain true/false/null/empty, selected/pipeline/default/function String sources, literal/computed operands, false retention, explicit bridges/scalar boundaries, source/operand/consumer snapshots/order and malformed-shape controls.
   Acceptance: Establish actual availability/value/kind/shape behavior before classification; freeze bounded compatible handoff/backend children if needed. Exact String comparison receiver additions require separate inventory/contract work; contains missing-needle calibration remains FUTURE-PARITY-BACKLOG.5. Full domain/fluent/portable admission stays23.4.
 
+  Activation: clean `e19f3ce83543d8befff3abc381d85a6b6285da15`; emptiness rollout committed, brief empty, tree clean.
+  Owned paths: Bounded public String predicate result probes/targets, scalar facts and current docs; production children only after findings.
+  Verification tier: `focused`
+  Focused checks: Canonical String/regex/scalar-text/arity rules and existing Rust61.2 boundary record; small public Get/substitution/native/fresh fluent/nested, false/null/empty, source/order/snapshot and shape probes; syntax/book/fast continuity/history/diff guards.
+  Canonical trigger: None for bounded diagnostic/freeze under director feature-first cadence; complete regex/domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored diagnostic values/order, no quantified population or portable measurement.
+
+  Completion: Freeze string-predicate-results.md and schedule ordinary backend children. Producers and nested SOC snapshots already work; preserve them.
+  Current-fact drift owned: July String receiver card still calls Length terminal and describes retired scalar()/concat syntax as current. Refresh this directly affected family card; retain exact original details at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for the path rather than replaying historical broad tests.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/fresh direct fluent starts cat null versus nested1!; native ends/contains_substr/matches pairs agree. Correct nested effects[1!,SOC,zzztail] versus stopped fluent[null,"",abc].
+  - [x] ROOT CAUSE (WHY + WHERE): call_spec_handler_subst emits return undef; MethodLowering _string_receiver_value_chain_return_family marks these four helpers terminal.
+  - [x] FIX: Freeze compatible scalar/text handoff/one-operand shapes and independent backend owners; no producer/domain/regex/copy normalization or new methods.
+  - [x] ADDRESSED (verified): Native/fresh producer vector[1,1,1,1,0,0], selected null/empty vector and nested SOC snapshots agree. Native malformed controls[null,""] have no effects. No other-backend failure inferred.
+  - [x] NO REGRESSION: Production unchanged; retained probe syntax/book/fast memory/cadence/diagnosis/history/diff pass. No full suite/admission or historical gate replay.
+  - [x] LOCKSTEP: Contract/probe, catalog gap/nested alternative, refreshed String fact/map and task/live/resume align. Perl23.3.10.1 next after clean commit; full regex/domain/portable admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.9 - freeze String predicate result handoff`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -2361,6 +2379,41 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Register fixture; contract/worked catalog/guide, Lua/array/emptiness facts/map and task/live/resume align. Book and fast memory/cadence/diagnosis/history/diff pass. Bounded emptiness rollout targeted-checked; String predicate assessment23.2.9 next after clean commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.9.5 - continue Lua generic emptiness results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10`
+  Status: `active` / bounded String predicate implementation planned
+  Goal: Compatible result handoff for existing starts_with/ends_with/contains_substr/matches under string-predicate-results.md.
+  Children: `.23.3.10.1`, `.23.3.10.2`, `.23.3.10.3`, `.23.3.10.4`, `.23.3.10.5`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary String predicate result handoff.
+  Dependencies: .23.2.9.
+  Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary String predicate result handoff.
+  Dependencies: .23.3.10.1.
+  Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary String predicate result handoff.
+  Dependencies: .23.3.10.2.
+  Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary String predicate result handoff.
+  Dependencies: .23.3.10.3.
+  Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary String predicate result handoff.
+  Dependencies: .23.3.10.4.
+  Acceptance: Frozen string-predicate-results.md through public native/generated routes; preserve correct producers, actual kinds, null/empty/regex/source/operand/copy domains and SOC snapshots. One receiver operand before effects, source families, false retention, explicit bridges/scalar nulls; compile/small direct checks/docs/commit. No String-comparison registration, contains calibration or broader admission; Lua declared5.4 separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -2439,11 +2492,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate assessment23.2.9 follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is next before independent backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.9` | `pending` | Assess existing String-predicate compatible result flow after bounded emptiness rollout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` | `pending` | Perl compatible String-predicate result handoff after frozen public assessment. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

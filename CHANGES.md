@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.9 — freeze String predicate result handoff
+
+Public Perl native/fresh producers agree on[1,1,1,1,0,0], null/empty text boundaries and nested1!/SOC/zzztail snapshots. Fluent starts_with/ends_with/contains_substr/matches chains stop at null because the String return-family table marks them terminal. Freeze compatible scalar/text handoff and one-operand receiver shape, preserve correct producers/domains/regex policies, and schedule independent backend children. Refresh stale String fact Length/retired-syntax statements with exact history pointer. Production unchanged; syntax/book/fast checks pass.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.9.5 — continue Lua generic emptiness results
 
 Lua removes the generic emptiness terminal fence, tracks its Boolean scalar results and preflights zero receiver operands. Native/generated-plan/fresh-emitted emptiness and direct has_key checks pass on available PUC5.5.1/LuaJIT after native fluent-null/S-only/four-effect RED. Producer/domains/source/copy unchanged; source kinds/copied bindings, repeated predicates, false retention, bridges/scalar nulls and1!/SA/once-only snapshots pass. Loadfile/book/fast checks pass; String-predicate result assessment23.2.9 next, declared5.4/full admission separate.
