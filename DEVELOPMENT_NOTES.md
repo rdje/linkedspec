@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.2 — numeric results are current values
+
+Perl classifies count/count_keys/length as terminal in three return-family callbacks. Count/length chains lower to undef beside working nested numeric controls. A combined hash probe initially misattributed an undefined host call to free count_keys; five isolated Get/substitution controls reject that hypothesis: only chained hash-count addition retains raw DSL, while free/single-step/nested forms work. Freeze the bounded result contract before code, including compatibility with scalar consumers, valid empty/null behavior, once-only evaluation and explicit supersession of the earlier ordinary count-uppercase negative control. Deferred/callback contexts, other producers and broad admission remain separate. Public book and canonical/current records agree; confirmed Perl23.3.3.1 is next.
+
 ## 2026-10-26 — SESSION-STARTUP-READING.62.2.3 — validate the tail without erasing kinds
 
 Public Get/substitution isolates an unconditional final operand in the nonempty builder. The typed-zero control also exposes the known scalar-validity mechanism: comparing the returned value with ne empty text makes a numeric selection a string selector. Build a guarded final operand with undef fallback and compare a separate scalar copy at every position. Keep head evaluation once and lazy ternary tails. Native/fresh tests now preserve exhaustion/nulls, zero/false, exact ABCDE effects and numeric prefix/tail/receiver indices after actual RED; direct selected-scalar and changed-file syntax checks pass. The initial test heredoc layout was corrected before runtime RED. Register the test, remove the temporary book qualification and synchronize canonical/current records. Next concrete inter-type probe is count/length result continuation; full signature/matrix/admission remains open.

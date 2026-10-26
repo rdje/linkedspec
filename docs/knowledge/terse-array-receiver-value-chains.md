@@ -1,7 +1,9 @@
 ---
 id: terse-array-receiver-value-chains
-title: Array pure receiver chains and named statement transforms
+title: Pure receiver chains and scalar result contracts
 answers:
+  - "can count length and count_keys results continue into numeric methods"
+  - "why does a chained count_keys addition reach a host call on Perl"
   - "does Rust receiver copy reject extra arguments before effects"
   - "does Rust receiver copy preserve scalar or missing values"
   - "can first or last continue through selected string methods"
@@ -16,31 +18,35 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: selected-value dispatch implemented; Lua5.4/full admission remain open
+status: selected values implemented; count/length contract frozen, implementation open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
-evidence: "Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers"
+evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length contract23.2.2."
+reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers"
+  - "Read-only count/length contract: docs/checkpoints/type-operation-inventory/count-length-results.md; public Perl Get/substitution probes are recorded in TYPE-REFERENCE-BOOK.1.2.23.2.2. Implementation is not admitted yet."
 ---
 
-Array receiver-dot value chains are pure helper composition over compatible array helpers.
+Pure array chains compose existing helpers: items.sorted().drop_front(2).first(),
+items.uniq().join_values(","), items.filter_match(/^a$/).count() and split_each/filter/count.
+join_values keeps its delimiter-first free-helper argument order. End mutations
+retain [[uniform-binding-array-end-result-supersession]]. Rust/Dart/Julia5.3.1-.3
+implement standalone transforms using validated snapshots and ordered operands;
+value/receiver forms stay pure and broad5.3.4 remains open.
 
-Examples:
+23.3.1 implements first/last actual-value continuations through compatible pure
+scalar/number/array/harray methods on all five ordinary backends. Runtime kind
+selects generic copy; min/max distinguish scalar from zero-extra array form.
+Focused fixtures retain snapshots and once-only effects. The full bounded
+contract/status lives in docs/checkpoints/type-operation-inventory/selected-values.md; Lua checks use PUC5.5.1/LuaJIT,
+with declared5.4/full admission open.
 
-```text
-items.sorted().drop_front(2).first()
-items.uniq().join_values(",")
-items.filter_match(/^a$/).count()
-phrases.split_each("-").filter_match(/^aa$/).count()
-```
+Rust23.3.2.3 rejects copy extra arguments before effects. Public controls retain
+Perl/Rust scalar/missing empty-array fallback; Perl nested references remain shared
+([[perl-scalar-bound-receiver-copy]]). The book qualifies copy domains/depths.
 
-The receiver becomes the array argument for the next helper. `join_values` is the special delimiter-first
-terminal: `items.join_values("|")` is the receiver-dot spelling for `join_values("|", items)`.
-
-Array end mutation/result supersession is governed by [[uniform-binding-array-end-result-supersession]]; this historical chain leaf does not redefine it.
-
-Rust/Dart/Julia5.3.1-.3 implement named standalone transforms using validated snapshots, ordered operands and existing pure helpers; focused native/restored/generated-plan checks pass. Broad5.3.4 stays deferred.
-
-
-At23.2.1, Perl extraction chains failed beside working nested controls. Repairs23.3.1.1.1-.2 preserve actual selected kinds through existing scalar/container helpers; copy dispatches on runtime container kind and min/max on scalar versus array shape. Rust23.3.1.2 reuses dynamic dispatch and fixes trim null. Dart/Julia/Lua23.3.1.3-.5 confirm dynamic values and guard extraction arity. Focused native/restored/generated/emitted controls retain snapshots and once-only effects; selected-values.md owns the bounded contract. Lua checks use available PUC5.5.1/LuaJIT; declared5.4 and full admission remain open.
-
-23.3.2.3 guards Rust copy arity before effects after public CLI RED. Native/restored/generated-plan copy and selected-value checks pass. Scalar/selected-scalar/missing/free-scalar copy controls return [] on Rust and Perl; this is existing behavior, not a new scalar-copy promise. Perl’s accepted [[perl-scalar-bound-receiver-copy]] also establishes shared nested references. The book now qualifies these domains/depths; complete copy-family reconciliation remains23.2/23.4-owned.
+23.2.2 freezes ordinary count/count_keys/length results feeding existing compatible
+pure scalar/number methods before code. Perl count/length chains return null beside
+working nested5/6 controls. Isolated hash probes show free/single count_keys works;
+only chained addition retains DSL and reaches a host call. Terminal return-family
+classification is the mechanism. Perl23.3.3.1 is next; other backends are unassessed,
+and complete methods/transitions/admission remain open.

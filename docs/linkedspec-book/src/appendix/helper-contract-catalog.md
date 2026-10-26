@@ -346,7 +346,7 @@ dispatch rule.
 - **Signature**: `length(value: scalar|array)`
 - **Returns**: int
 - **Behavior**: Returns the character length of a string or the element count of an array. Returns undef for undef input.
-- **Examples**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`; `length(undef)` and `undef.length()` → undef, `length("")` → `0`, `length(0)` → `1`, `length([1,2])` → `2`, `length("🙂")` → `1`.
+- **Examples**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`; `length(undef)` and `undef.length()` → undef, `length("")` → `0`, `length(0)` → `1`, `length([1,2])` → `2`, `length("🙂")` → `1`. Perl currently stops `"abcd".length().add(2)` at undef; use `num_add(length("abcd"),2)` → `6` until the count/length result backfill.
 
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
@@ -435,8 +435,8 @@ dispatch rule.
   `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`. The old `concat` spelling is retired.
 - **Allowed array bridge**: `split(delim)` returns an array and may continue through compatible array
   receiver helpers, for example `raw.trim().split("-").trim_each().lowercase_each().join_values("|")`.
-- **Allowed terminal links**: `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` return
-  number/boolean values and end the string-family chain.
+- **Numeric result link**: `length` returns a number; continuing that result is a count/length backfill target. On Perl use a nested helper until that rollout is implemented.
+- **Predicate links**: `starts_with`, `ends_with`, `contains_substr` and `matches` return number/boolean values. Their existing continuation boundaries are outside the bounded count/length update.
 - **Boundary**: `substr(value, start, length?)` here is the pure value substring helper. It is separate from
   any statement-style or host-language substitution idiom. A terminal string method followed by another
   receiver-dot call yields `undef` rather than a partially lowered host expression.
@@ -592,7 +592,7 @@ dispatch rule.
 ### `count(arr)`
 - **Signature**: `count(arr: array)`
 - **Returns**: int
-- **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input.
+- **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input. Perl currently returns undef for `items.count().add(3)`; use `num_add(count(items),3)` until the numeric-result continuation backfill. The target preserves the actual count for compatible following scalar/number methods.
 
 ### `first(arr)`
 - **Signature**: `first(arr: array)`
@@ -1012,7 +1012,7 @@ dispatch rule.
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
 - **Returns**: int
-- **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input.
+- **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. Perl's `meta.count_keys().add(3)` currently fails during handler execution; `num_add(count_keys(meta),3)` is the working nested form. Numeric-result continuation is a backfill target; single-step and free `count_keys` forms already work.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

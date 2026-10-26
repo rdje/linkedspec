@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.2 — define count and length result continuations
+
+Freeze ordinary count/count_keys/length results feeding existing compatible pure scalar/number methods, with zero-extra producer arity, actual values, once-only order and inherited domains/copy/null/error rules. Public Perl Get/substitution distinguishes failing count/length chains from working nested5/6 controls; isolated hash controls locate an unlowered count_keys chain while free/single-step count_keys works. Correct the initial compound-probe attribution, disclose current book gaps/workarounds and schedule Perl23.3.3.1 before code. No runtime implementation or complete family/matrix admission is claimed; book and fast continuity checks pass.
+
 ## SESSION-STARTUP-READING.62.2.3 — preserve Perl nonempty default boundaries
 
 Validate the final coalesce_nonempty operand and fall through to undef when all operands are undef/empty. Compare a scalar copy so selected numeric values remain numeric, including prefix/tail/receiver results used as array indices. Small native/fresh exhaustion/type/order regression and direct selected-scalar tests pass after actual RED; changed module/test/registration syntax, book and fast continuity checks pass. Register the regression and remove the book exception. Known default-helper implementations are complete at focused scope; next feature probe is count/length result continuation23.2.2. Broad admission remains deferred.

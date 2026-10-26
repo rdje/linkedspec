@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / known helper feature repairs after bounded selected/copy rollout
+- Status: `active` / count and length result rollout after bounded helper repairs
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -22,7 +22,7 @@ Director clarification (October24, DBIQNP): every supported type needs a compreh
 family, including chains that change type. The motivating journey is string -> regex split -> array of strings
 -> available array operations -> selected entry -> string operations. Inventory must identify and own missing
 method families or broken transitions; documenting only today's registered names cannot establish completeness.
-This is future acceptance work under .1.2.23; the current signed-selector backend sequence remains selected.
+This acceptance work belongs to .1.2.23; the precise current feature selection is recorded in the frontier below.
 
 ## Verified intake and limits
 
@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -940,17 +940,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.1 - define selected-value receiver continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.2`
-  Status: `pending`
-  Goal: Probe and freeze bounded count/length numeric-result receiver continuations before implementation.
+  Status: `done`
+  Activation: clean `b6f7029bc218d5dac33a92345a6584e7fd1a8869` after bounded scalar/default/copy implementations.
+  Public finding: Perl returns [null,5,null,6] for fluent count/length addition beside working nested controls, without last_error; public substitution emits return undef for both chains.
+  Hash-count intake correction: The failed combined control did not establish a free-helper defect. Five isolated public Get/substitution controls show meta.count_keys(), count_keys(meta), literal count_keys and num_add(meta.count_keys(),3) work (2/2/2/5). Only meta.count_keys().add(3) fails, retaining raw DSL and reaching an undefined host subroutine. The earlier free-helper attribution is rejected; this is a count_keys continuation gap in the same bounded feature, with no separate free-helper repair.
+  Goal: Probe and freeze bounded count/count_keys/length numeric-result receiver continuations before implementation.
+  Owned paths: docs/checkpoints/type-operation-inventory/count-length-results.md, public helper reference, canonical array fact/map and TYPE/live continuity.
   Schedule: Next feature-first selection after scalar/default helper repairs; precede exhaustive signature/matrix work with a concrete source-backed inter-type journey, as23.2.1 did for first/last.
   Reproduce at activation: For values=[1,2], compare values.count().add(3) with num_add(count(values),3), and "abcd".length().add(2) with num_add(length("abcd"),2). Nested controls should return5/6; establish actual fluent outcomes publicly before claiming a defect.
-  Planned tier: `focused`; freeze exact bounded scope before code under director feature-first direction. Full portable/family admission remains23.4 after feature coverage.
-  Claim verification: none: Unactivated bounded normative feature/probe owner; no implementation/parity/completeness measurement.
-  Acceptance: If the public probe confirms a gap, define count/length results feeding existing compatible pure scalar/number methods, actual value identity, once-only source/argument evaluation and inherited null/domain/error rules. Explicitly reconcile the earlier count-terminal control as the prior bounded policy. Add implementation children only after the contract/probe, commit per backend and retain comprehensive signatures/matrix, numeric reducer/boolean/control/mutation/callback scope separately.
+  Verification tier: `focused`
+  Focused checks: Public Perl Get/substitution distinctions for array/string/hash counts, existing helper and selected-value authorities, book build and fast continuity/history/diff guards. No runtime census.
+  Canonical trigger: None for freezing this bounded feature under director feature-first direction, following23.2.1; implementation/portable admission stays with23.3.3/23.4 after feature coverage.
+  Claim verification: none: Normative count/length contract and qualitative observed Perl gap, no implementation/parity/completeness measurement.
+  Acceptance: Define count/count_keys/length results feeding existing compatible pure scalar/number methods, actual value identity, once-only source/argument evaluation and inherited null/domain/error rules. Explicitly reconcile the earlier count-terminal control as prior bounded policy. Add implementation children only after the contract/probe, commit per backend and retain comprehensive signatures/matrix, numeric reducer/boolean/control/mutation/callback scope separately.
+  Completion: count-length-results.md freezes three numeric-result producers, zero-extra receiver arity, existing pure consumer/domain/copy rules and direct/selected/pipeline targets before code. Perl .23.3.3.1 is next; other backends require individual assessment.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public Get/substitution confirms count/length chains stop beside working nested5/6 controls. Isolated hash probes distinguish a raw chained-count host-call failure from working single-step/free count_keys controls; reject the initial incorrect free-helper attribution.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering's array chain return-family callback and hash/string return-family functions mark count/count_keys/length terminal. Loop rejection emits null or retains hash DSL instead of feeding the numeric result to the existing consumer.
+  - [x] FIX: Freeze the bounded ordinary result-flow contract, supersede the old ordinary count-terminal negative control explicitly, and schedule the confirmed Perl implementation before code. Preserve other terminal/admission boundaries.
+  - [x] ADDRESSED (verified): Normative examples and limits agree with existing helper signatures and independently working controls; book and fast continuity/history checks pass before landing. No runtime repair is claimed.
+  - [x] NO REGRESSION: No runtime/type/schema/format change; reducers, predicate/control outputs, deferred/callback contexts and mutation remain separately owned. No broad suite.
+  - [x] LOCKSTEP: Public gap/workarounds, canonical array fact/map, task/current frontier and live handoff agree; next child names exact first-party scope. No complete fluent-family claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.2 - define count and length result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -1234,8 +1249,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Future admission owner, no new measurement.
   Acceptance: Retain per-backend domain/depth distinctions, reject wrong shapes before effects through supported consumers, restore the declared Lua target and close the bounded parent without inferring complete fluent families.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3`
+  Status: `active` / count and length result rollout
+  Goal: Implement the frozen count/count_keys/length result contract on ordinary backends, preserving correct existing behavior.
+  Dependencies: .23.2.2.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`; assess later backends individually after the clean Perl implementation commit.
+  Schedule: Feature/compile/quick-check/docs/commit per backend; full signatures/matrix/admission stays open and deferred.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`
+  Status: `pending`
+  Goal: Implement Perl count/count_keys/length result continuations using existing selected-value scalar/number dispatch.
+  Dependencies: .23.2.2.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm, targeted t/count_length_receiver_contract.t and existing suite registration, book/fact/task/live records.
+  Planned tier: `focused`; declare actual proof at activation.
+  Claim verification: none: Future bounded deterministic implementation, no new measurement.
+  Acceptance: Cover three producers after direct/selected/earlier pipeline sources, compatible scalar/number consumers, empty/null and source/argument order. Guard zero-extra producer shapes before effects, explicitly update the old ordinary count-uppercase terminal expectation, preserve helper domains/copy/deferred/callback boundaries and keep raw hash-chain DSL out of valid lowering. Small native/fresh checks and syntax, then commit before assessing the next backend.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
+  Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and Perl23.3.3.1 is next.
   Known admission prerequisite: Rust scalar-null/operand repairs61.1/.61.2 are implemented and targeted-checked, with broad61.3 open. Copy-arity23.3.2 requires individual backend assessment after the Julia repair; selected-value implementation does not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3`
@@ -1311,11 +1343,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Next concrete inter-type probe is count/length numeric-result continuation23.2.2, before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; confirmed Perl23.3.3.1 implementation is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.2` | `pending` | Probe/freeze the next concrete inter-type feature: count/length results feeding compatible scalar/number methods. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` | `pending` | Implement the frozen count/count_keys/length result continuations on Perl using existing selected-value dispatch, then assess other backends. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
