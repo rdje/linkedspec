@@ -3479,7 +3479,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
       value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
       -- Preserve a scalar selection's boundary; actual containers release it below.
-      if canonical_name == "coalesce_nonempty" then scalar_result = true end
+      scalar_result = true
     elseif canonical_name == "copy" and #call.args == 0 then
       value = copy_value(value)
     elseif is_pure_string_helper(canonical_name) then
@@ -3893,7 +3893,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       local name = action_contracts.canonical_action_helper_name(call.method)
       local argument_count = #(call.args or {})
       if (name == "num_clamp" and argument_count ~= 2) or
-          ((name == "num_add" or name == "num_mul") and argument_count == 0) then
+          ((name == "num_add" or name == "num_mul" or name == "coalesce") and argument_count == 0) then
         return json.null
       end
       if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or

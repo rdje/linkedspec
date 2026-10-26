@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.18.5 — guard Lua defined-only default results
+
+Lua18.5 preserves independently confirmed defined-only lazy selection and repairs actual scalar-result/zero-RHS boundaries with no new module locals. Both safe PUC5.5.1/LuaJIT canonical JSON native/plan/fresh producer/shared/selected plus direct defaults/source loads pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/rejected-prefix effects and forbidden-operand suppression. All five bounded defined-only default implementations are targeted-checked; book/frozen/fact/task/live align. Declared5.4/full domain/context/portable admission separate. Pure String result assessment19 next.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.18.4 — guard Julia defined-only default results
 
 Julia18.4 preserves independently confirmed defined-only lazy selection and repairs actual scalar-result/zero-RHS shape boundaries. Registered new36/direct defaults9 native/plan/fresh assertions pass with strict compilation after scalar[]/SA/malformed SC RED, retaining false identity/Number-not-Bool kinds/counters, copies/indices/SDC-SC-HashC/skipped errors/rejected-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no full matrix/portable admission or callback-identity repair. Safe Lua18.5 next.

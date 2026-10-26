@@ -147,3 +147,16 @@ and direct defaults9 assertions pass under strict compilation, including false
 identity and Number-not-Bool results/counters, shared SDC-SC-HashC/skipped errors
 and selected/malformed fournull/emptyorder. No full matrix/portable admission or
 callback identity repair; safe available Lua18.5 independently assesses next.
+
+## Bounded Lua implementation
+
+18.5 independently confirms canonical JSON producers on PUC5.5.1/LuaJIT before
+code. Shared native RED has scalar[]/SA and malformed SC, while valid selection/
+snapshots/copies/indices/skipped runtime errors already hold. Mark both default
+selections scalar until actual containers release the boundary; add zero-RHS
+preflight. No new module locals/free/lazy/context/callback/format policy change.
+Safe registered native/plan/fresh producer/shared/selected controls, direct
+selected/nonempty defaults and interpreter/runner source loads pass both hosts.
+No full runner/malformed native patterns/declared5.4 or complete portable
+admission. All five bounded defined-only implementations are targeted-checked;
+next assessment23.2.19 owns ordinary pure String-producing result breadth.

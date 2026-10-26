@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`, `TYPE-REFERENCE-BOOK.1.2.23.2.15`, `TYPE-REFERENCE-BOOK.1.2.23.2.16`, `TYPE-REFERENCE-BOOK.1.2.23.2.17`, `TYPE-REFERENCE-BOOK.1.2.23.2.18`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`, `TYPE-REFERENCE-BOOK.1.2.23.2.9`, `TYPE-REFERENCE-BOOK.1.2.23.2.10`, `TYPE-REFERENCE-BOOK.1.2.23.2.11`, `TYPE-REFERENCE-BOOK.1.2.23.2.12`, `TYPE-REFERENCE-BOOK.1.2.23.2.13`, `TYPE-REFERENCE-BOOK.1.2.23.2.14`, `TYPE-REFERENCE-BOOK.1.2.23.2.15`, `TYPE-REFERENCE-BOOK.1.2.23.2.16`, `TYPE-REFERENCE-BOOK.1.2.23.2.17`, `TYPE-REFERENCE-BOOK.1.2.23.2.18`, `TYPE-REFERENCE-BOOK.1.2.23.2.19`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -1391,6 +1391,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: No parser/runtime/free/domain/callback/source contract changes. Lazy nested oracle explicitly captures selection before delimiter effects because free join_values evaluates delimiter first. No full matrix/replay/portable admission or callable/Regex/scoped receiver expansion.
   - [x] LOCKSTEP: Frozen contract, retained probe and backend tasks, qualified coalesce catalog and canonical default fact/map plus live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl18.1 is next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.18 - freeze defined-only default receivers`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.19`
+  Status: `pending`
+  Goal: Assess ordinary pure String-producing helper result continuations and scalar boundaries from the helper spelling/role spine.
+  Dependencies: Bounded defined-only default23.3.18.1-.5 committed.
+  Authority: Existing trim/lowercase/uppercase/replace_substr/rm_prefix/rm_suffix/substr/cat public contracts, String/numeric/Unicode/copy facts and actual-result flow owners. length/predicates/comparisons/defaults/split/statement regex substitution retain their existing separate contracts; no resolver category is a receiver guarantee.
+  Acceptance: Read canonical String helper signatures/semantics and relevant current book before public producer/nested/fluent/source/arity/effect native/fresh distinctions. Preserve actual String/null results, empty/Unicode/conversion/domain/arity policies, source-first once-only operands/snapshots and compatible scalar/generic/explicit Array bridges. Assess incompatible container consumers and malformed shapes without changing free helpers, known source-context differences or callbacks. Freeze only concrete bounded gaps/needed flow and schedule independent backend children after observations; small checks/docs/commit, no full matrix/replay.
+  Planned verification tier: focused
+  Planned focused checks: Canonical String facts/contracts and small public producer/nested/receiver distinctions with direct String checks/syntax/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -3869,7 +3880,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Qualitative contradiction intake only; any new historical census or measured repair proof is declared before publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18`
-  Status: `active` / Perl/Rust/Dart/Julia targeted-checked; Lua implementation pending
+  Status: `active` / all bounded defined-only default backends targeted-checked; full admission separate
   Goal: Add bounded ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.2.18 frozen defined-default-results.md.
   Children: `.23.3.18.1`, `.23.3.18.2`, `.23.3.18.3`, `.23.3.18.4`, `.23.3.18.5`.
@@ -3993,7 +4004,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.4 - guard Julia defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Lua ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.3.18.4.
   Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
@@ -4002,6 +4013,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `266ae756e44eeb672c6e8752b42dab7e23c5d272`; Julia defined-default results committed, brief0/tree clean.
+  Owned paths: Lua independently confirmed defined-only receiver actual-result/scalar/shape flow and safe retained native/plan/fresh public producer/shared/selected regression, safe named runner registration and scoped book/fact/task/live docs. Preserve free signatures/domains/callbacks/named-context/formats and module-local ceiling; no full runner or malformed native pattern execution.
+  Verification tier: `focused`
+  Focused checks: Producer-first public native/plan/fresh and shared receiver RED/GREEN plus direct selected/nonempty defaults/source loads on safe PUC5.5.1/LuaJIT, book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; declared5.4/full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Independent intake: Both safe available hosts pass canonical JSON native/plan/fresh free/nested producer controls before production. Shared native RED gives scalar rejected/after_text [] with reject_order SA and malformed SC; valid selection/source/snapshot/copy/index/skipped-error values remain. evaluate_fluent_calls already invokes defined-only evaluate_coalesce but marks only nonempty defaults scalar; common preflight lacks the new one-or-more shape. Repair only these metadata guards, with no new module locals/free helper changes.
+
+  Completion: Both coalesce receiver branches mark scalar_result before existing actual-container release; common zero-RHS preflight precedes source/consumer effects. Register safe retained producer/shared/selected checks, with no new module locals or helper/free/named-context/format/callback changes.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Both PUC5.5.1/LuaJIT pass canonical JSON native/plan/fresh producer-first controls before code. Shared native RED has scalar[]/SA and malformed SC; valid source/selection/SDC-SC-HashC/copies/indices/skipped-runtime-error fields already hold. No unobserved backend error is inferred.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_fluent_calls already calls defined-only evaluate_coalesce, but marks only nonempty defaults scalar, permitting incompatible container helpers/operands. Common fluent preflight lacks the new counterpart's one-or-more fallback shape. No producer/domain/free-signature repair is needed.
+  - [x] FIX: Mark both default selections scalar before actual Array/Harray release and add coalesce zero-RHS preflight. Retain existing lazy/copy/context/truth/numeric policies and module-local ceiling; register only a safe named test group.
+  - [x] ADDRESSED (verified): Both hosts pass canonical JSON native/plan/fresh producer/shared/selected controls, preserving real Bool/Number/String/null/container kinds, empty/zero/false/exhaustion, source families, chosen copies/indices/SDC-SC-HashC snapshots, skipped supported failures and incompatible operands, source/prefix effects before rejection and malformed no-effects.
+  - [x] NO REGRESSION: Direct existing selected/nonempty default fixtures and interpreter/runner source loads pass on both hosts. No full runner/malformed native patterns, declared5.4, broad matrix or complete portable domain/context admission claim.
+  - [x] LOCKSTEP: Retained test/safe runner, frozen contract/all-five bounded progress and qualified catalog/guide, canonical default fact/map plus task/live/resume align. Next pure String result assessment23.2.19 is owned before any new diagnostic/change. Book/history/diff/final staged memory/cadence/diagnosis checked before commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5 - guard Lua defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
@@ -4016,11 +4046,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1/Rust18.2/Dart18.3/Julia18.4 are targeted-checked and safe Lua18.5 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Next is separate pure String-producing helper result/scalar-boundary assessment23.2.19 from canonical signatures and public distinctions. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.5` | `pending` | Independently assess and implement frozen defined-only coalesce receiver/result flow on safe available Lua hosts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.19` | `pending` | Assess pure String-producing result continuations/scalar boundaries from canonical contracts before production. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

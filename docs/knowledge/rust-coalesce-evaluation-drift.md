@@ -17,12 +17,15 @@ answers:
   - "why does a Hash default sorted_values first uppercase return null"
   - "how do Array successors consume emitted default guard expressions"
 date: 2026-10-27
-status: bounded defaults checked; Perl/Rust/Dart/Julia defined-only receivers implemented
-tags: [rust, perl, helpers, defaults, projection, evaluation, startup-reading]
-evidence: "Defaults62.1/62.2/TYPE23.3.6; TYPE23.3.16.1 public Get/substitution/dump/native/fresh default_hash_projection regression."
+status: bounded defined-only defaults targeted-checked on five recorded backends
+tags: [rust, perl, dart, julia, lua, helpers, defaults, projection, evaluation, startup-reading]
+evidence: "Defaults62/TYPE23.3.6/16.1; TYPE23.3.18.1-.5 retained public producer/shared/selected/kind/effect native/generated controls; defined-default-results.md."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test defined_default_receivers --test default_selected_receivers --test coalesce_receiver_values"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/defined_default_receiver_contract.t t/default_hash_projection_contract.t t/default_selected_receiver_contract.t"
+  - "(cd dart && bash ../tools/run_dart_project_data.sh test test/defined_default_receivers_test.dart test/default_selected_receivers_test.dart)"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/defined_default_receivers_test.jl\");include(\"julia/test/default_selected_receivers_test.jl\")'"
+  - "bash tools/run_lua_project_data.sh puc lua/test/defined_default_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/defined_default_receivers_test.lua"
 ---
 
 Rust62.1/62.2 evaluates only needed operands with actual selected kinds;
@@ -73,8 +76,8 @@ retain strict kinds/copies/indices/lazy SDC-SC/skipped failures/source effects.
 The Hash consumer also reproduces free pick_keys block-key staging failure:
 legacy keys kept raw DSL in foreach. Lower actual key blocks through the existing
 typed block lowerer; native/fresh C/snapshot controls pass, ordinary key/free
-signatures stay. Authored retired arrows still reject. Rust/Dart/Julia progress follows below; Lua18.5 and full domain/context/
-portable admission remain open; see frozen defined contract.
+signatures stay. Authored retired arrows still reject. Other backend progress follows below; full domain/context/portable admission
+remains open; see frozen defined contract.
 
 TYPE23.3.18.2 independently confirms free Rust producers, then receiver RED
 reaches an unused typed write failure. Missing String admission selects generic
@@ -100,3 +103,11 @@ release/free/named-context/callback/format policy. Registered new36/direct9
 native/plan/fresh assertions pass with strict compilation, false identity and
 Number-not-Bool results/counters, shared SDC-SC-HashC/copies/indices/skipped errors
 and selected/malformed no-effects. Lua18.5/full admission remain separate.
+
+TYPE23.3.18.5 confirms Lua producers on safe PUC5.5.1/LuaJIT, then shared RED
+has scalar[]/SA and malformed SC. Both default receiver selections now mark
+scalar_result before actual container release; common zero-RHS preflight guards
+effects. No new module locals/free/lazy/context/callback/format changes. Strict
+native/plan/fresh producer/shared/selected and direct default/source loads pass
+both hosts. All five bounded counterparts are targeted-checked; declared5.4,
+full domain/context/portable admission and later canonical proof remain open.

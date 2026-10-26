@@ -9581,6 +9581,10 @@ test("logical Boolean result receiver continuations", function()
   dofile("lua/test/logical_result_receivers_test.lua")
 end)
 
+test("defined-only default receiver continuations", function()
+  dofile("lua/test/defined_default_receivers_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)
