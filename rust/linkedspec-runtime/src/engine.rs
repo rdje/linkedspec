@@ -5961,7 +5961,7 @@ impl Engine {
                 if calls.iter().any(|call| match call.method.as_str() {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
                     | "avg" | "median" | "range" => !call.args.is_empty(),
-                    "join_values" => call.args.len() != 1,
+                    "join_values" | "index_of" => call.args.len() != 1,
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7448,7 +7448,7 @@ impl Engine {
     fn is_scalar_result_receiver_method(method: &str) -> bool {
         matches!(
             method,
-            "sum" | "avg" | "median" | "range" | "min" | "max" | "join_values"
+            "sum" | "avg" | "median" | "range" | "min" | "max" | "join_values" | "index_of"
         )
     }
 

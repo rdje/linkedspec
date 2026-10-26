@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.7.2 — continue Rust index results
+
+Rust index_of now uses the shared scalar-result classifier/selected handoff and one-needle preflight. Fresh-current CLI independently exposes prior fluent-null, SN-only and four malformed-effect gaps. Native/restored/generated-plan index plus direct selected-default checks pass after RED, retaining numeric0 selector writes, zero/null, scalar guards, explicit bridges, shape no-effects and N/SN/SNA snapshots. Producer/equality/source/copy behavior stays unchanged. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.7.1 — continue Perl index results
 
 Perl index_of results now use existing scalar-result handoff, with one-needle validation before effects. Native/fresh focused regression and direct selected-default checks pass after RED: direct/selected/pipeline/hash/String/function/default sources, zero/no-match/null, numeric selector writes, explicit bridges, scalar guards, N/SN snapshots and SNA consumer order. Producer/equality/source/copy behavior remains unchanged. Syntax/book/fast continuity checks pass; fresh-current Rust assessment2 is next and full admission stays separate.

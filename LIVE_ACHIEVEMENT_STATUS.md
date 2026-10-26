@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl index-result continuation23.3.7.1 is implemented/targeted-checked. Rust assessment2 is next, then other backends. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
+Perl/Rust index-result continuations are implemented/targeted-checked. Dart assessment23.3.7.3 is next, then remaining backends. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
 
 ## Latest Completed Slice
 
-Perl index_of results now use existing scalar-result handoff, with one-needle validation before effects. Native/fresh focused regression and direct selected-default checks pass after RED: direct/selected/pipeline/hash/String/function/default sources, zero/no-match/null, numeric selector writes, explicit bridges, scalar guards, N/SN snapshots and SNA consumer order. Producer/equality/source/copy behavior remains unchanged. Syntax/book/fast continuity checks pass; fresh-current Rust assessment2 is next and full admission stays separate.
+Rust index_of now uses the shared scalar-result classifier/selected handoff and one-needle preflight. Fresh-current CLI independently exposes prior fluent-null, SN-only and four malformed-effect gaps. Native/restored/generated-plan index plus direct selected-default checks pass after RED, retaining numeric0 selector writes, zero/null, scalar guards, explicit bridges, shape no-effects and N/SN/SNA snapshots. Producer/equality/source/copy behavior stays unchanged. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next, full admission separate.
 
 ## Next Action
 
-Publicly assess fresh-current Rust index results before repair, preserving one-needle shape, zero/null, scalar boundaries and SNA snapshots. Small native/restored/generated/direct checks/rustfmt/docs/commit; no broad suite.
+Publicly assess Dart shared index results before repair, preserving zero/null, one-needle shape, scalar boundaries and N/SN/SNA snapshots. Small native/restored/generated/direct checks, fatal analysis/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.7.2` — index scalar handoff/one-needle preflight; native/restored/plan/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.1` — ordinary index scalar-result handoff and one-needle preflight; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
@@ -29,7 +30,6 @@ Publicly assess fresh-current Rust index results before repair, preserving one-n
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.3` — Dart correct joined flow retained, one-delimiter/scalar guards added; focused native/restored/generated-plan and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` — Rust joined String flow/arity and guarded named-mutation tails; focused native/restored/generated-plan and aggregate checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.4` — joined String result contract frozen; isolated lowering/shape findings and correct producer snapshots retained; Perl implementation next.
 
 ## History
 

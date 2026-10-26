@@ -80,3 +80,13 @@ sources, String/Array bridges, scalar boundaries, malformed shapes and N/SN/SNA
 snapshot/order controls. Direct selected-default compatibility passes; the index
 producer/equality/source/copy policy stays unchanged. Rust assessment is next;
 other backends and full domain/deferred/portable admission remain separate.
+
+## Bounded Rust implementation
+
+`.23.3.7.2` adds index_of to the shared scalar-result classifier/selected handoff
+and one-operand preflight. A freshly compiled public CLI independently shows the
+prior fluent-null/SN-only/four-effect gaps. The retained native/restored/generated-
+plan fixture then passes after RED, including numeric zero selector writes,
+scalar guards, shape no-effects and N/SN/SNA snapshots. Direct selected-default
+compatibility passes; helper/equality/source/copy policies stay unchanged. Dart/
+Julia/Lua assessment and full admission remain separate.

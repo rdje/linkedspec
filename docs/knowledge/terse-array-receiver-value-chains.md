@@ -21,11 +21,12 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: Perl index results targeted-checked; remaining backend/admission open
+status: Perl/Rust index results checked; remaining backend/admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length23.2.2; join result contract23.2.4."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/index_result_receiver_contract.t t/default_selected_receiver_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/index_result_receiver_contract.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test index_result_receivers"
 ---
 
 Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_values, filter_match/count and split_each/filter/count. join_values keeps delimiter-first free-helper roles. End mutations retain [[uniform-binding-array-end-result-supersession]]. Rust/Dart/Julia5.3.1-.3 implement dropped transforms with validated snapshots/ordered operands; pure value forms stay pure and broad5.3.4 stays open.
@@ -34,8 +35,8 @@ Pure Array chains compose existing helpers: sorted/drop_front/first, uniq/join_v
 
 Rust copy23.3.2.3 guards extras. Perl/Rust scalar/missing copy fallback stays []; Perl nested refs remain shared ([[perl-scalar-bound-receiver-copy]]).
 
-Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md. Other mechanisms: [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]], [[lua-runtime-array-transform-pipelines]].
+Count/Length23.3.3 is targeted-checked on recorded hosts. Perl selected dispatch leaves deferred evaluation unchanged; hash-chain lowering failed while free count_keys worked. Rust is_selected_receiver_result_method permits result handoff/local Array Length without altering initial String dispatch. Scope: docs/checkpoints/type-operation-inventory/count-length-results.md.
 
 23.2.4 freezes joins: docs/checkpoints/type-operation-inventory/joined-string-results.md. Perl uses scalar_result/exact-one-operand handoff; Rust uses is_scalar_result_receiver_method and guarded mutation tails. Dart/Julia guard existing flow; Lua adds flow/guards/false repair. Focused checks pass; source/declared5.4/full admission stay open. Prior details and commands are exact at Git05cd2f8074894f012d56c3410e9366eb67dd2f97 for this path.
 
-Index23.2.6 contract: docs/checkpoints/type-operation-inventory/index-results.md. Perl23.3.7.1 makes index_of scalar_result and preflights one needle. Native/fresh plus direct default checks pass after RED: direct/selected/pipeline/hash/String/default/function sources, zero/null, SNA order, N/SN snapshots, scalar guards and numeric selector writes. The producer remains unchanged. Other backends/admission remain unassessed; historical probes remain in that contract.
+Index23.2.6 contract: docs/checkpoints/type-operation-inventory/index-results.md. Perl23.3.7.1 uses scalar_result/one-needle preflight. Rust23.3.7.2 extends its scalar classifier and preflight after fluent-null/four-effect RED. Native/generated and direct default checks pass: zero/null, scalar guards, numeric selector writes and N/SN/SNA snapshots. Producers/equality/source/copy stay unchanged. Other backends/admission remain unassessed; historical probes are in the contract.
