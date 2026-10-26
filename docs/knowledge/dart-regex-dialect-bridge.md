@@ -11,8 +11,8 @@ answers:
 date: 2026-10-26
 status: current
 tags: [dart, regex, corpus, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.1 adds compileRuntimeRegex(...) in dart/lib/src/runtime/matching.dart and routes helper regex compilation through it from interpreter.dart. The bridge normalizes POSIX character classes, inline i/m/s flag groups, scoped flag groups by lowering them to non-capturing groups plus Dart RegExp flags, possessive quantifier markers, lower-bound {,n} quantifiers, and Python-style named captures before Dart RegExp compilation. Focused runtime matching and interpreter tests lock the behavior. The final shipped-smoke window still had FormatExceptions only for deeper PCRE structural constructs such as \\K, (?&name), and (?(DEFINE)...), routed to DART-BACKEND-PARITY.6.2.4.6. That later leaf closes those exact shipped structural forms with bounded matchers, not a broad regex engine replacement."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_matching_test[.]dart test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+evidence: "Basic normalizer DART6.2.4.1 and bounded structural6.2.4.6; TYPE23.2.12 adds literal x/unknown/invalid helper boundaries. Full prior record at Gitd08fb16f5d709964351903c32fce6cfadcaa4dbe for this path."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/action_regex_mode_boundaries_test.dart test/string_predicate_result_receivers_test.dart"
 ---
 
 The bridge is deliberately a dialect normalizer, not a replacement regex engine.
@@ -47,4 +47,6 @@ a{,2} support remains a successful bridge control. Gated .2.16 owns lexical repa
 and carrier/public proof; this finding changes neither the documented scoped-flag/
 possessive limits nor the separately owned regex-brace scanners.
 
-Action literal suffix i/m/s modes now enter this existing bridge via the pattern string (TYPE23.3.10.3); serialized AST flags already existed. Contextual filter/split_each paths use the same normalization. Focused reverify: cd dart && bash ../tools/run_dart_project_data.sh test test/string_predicate_result_receivers_test.dart test/emptiness_result_receivers_test.dart. Complete grouped dotted literals parse before fluent splitting under TYPE23.3.10.6; broader grouped-brace scanning stays DART-STARTUP-READING.2.2.1/.2.2.2; see [[action-regex-operands-and-runtime-kinds]].
+TYPE23.2.12 extends action suffix ims to x: class/escape/comment-aware ASCII preprocessing, go no-ops, unknown suffixes fail closed. _callMatches now catches FormatException like contextual split/filter. Native/restored/plan and direct String checks pass27 tests after lost-x/ignored-q/throwing-invalid RED; Unicode escaped-space and significant non-ASCII whitespace are distinguished. No inline-x/scoped semantics, public regex type or schema expansion.
+
+Complete grouped dotted literals have TYPE23.3.10.6 priority. Separate nested malformed /(/ becomes raw (scanner rejects slash-before-parenthesis), versus a** reaching regex compilation; the public probe in docs/checkpoints/type-operation-inventory/probe_dart_grouped_invalid_pattern.dart retains AST/source and division controls. P1 TYPE23.3.10.7 repairs next; broader grouped-brace scanner/validator DART2.2.1/.2.2.2 remain open.

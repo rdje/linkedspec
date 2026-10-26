@@ -7457,7 +7457,12 @@ Object? _callMatches(List<Object?> values) {
   if (value == null || pattern == null) {
     return false;
   }
-  return RuntimeRegexAlternation.compile([pattern]).seekMatch(value, 0) != null;
+  try {
+    return RuntimeRegexAlternation.compile([pattern]).seekMatch(value, 0) !=
+        null;
+  } on FormatException {
+    return false;
+  }
 }
 
 Object? _callReplaceSubstr(List<Object?> values) {
@@ -7877,8 +7882,53 @@ RegExp? _regexFromValue(Object? value) {
 }
 
 String _regexLiteralPattern(ActionRegexLiteralExpr literal) {
+  if (literal.flags.split('').any((flag) => !'imsxgo'.contains(flag))) {
+    // Reuse contextual helper invalid-pattern handling without a new value kind.
+    return '(';
+  }
+  final pattern = literal.flags.contains('x')
+      ? _extendedActionRegexPattern(literal.pattern)
+      : literal.pattern;
   final modes = ['i', 'm', 's'].where(literal.flags.contains).join();
-  return modes.isEmpty ? literal.pattern : '(?$modes)${literal.pattern}';
+  return modes.isEmpty ? pattern : '(?$modes)$pattern';
+}
+
+String _extendedActionRegexPattern(String pattern) {
+  final output = StringBuffer();
+  var inClass = false;
+  var escaped = false;
+  var inComment = false;
+  for (final code in pattern.codeUnits) {
+    if (inComment) {
+      if (code == 0x0a || code == 0x0d) inComment = false;
+      continue;
+    }
+    // Extended mode ignores only ASCII whitespace outside character classes.
+    final whitespace = code == 0x20 || (code >= 0x09 && code <= 0x0d);
+    if (escaped) {
+      // These characters become literal after extended-mode processing. Avoid
+      // identity escapes that Dart rejects in Unicode patterns.
+      if (!whitespace && code != 0x23) output.write(r'\');
+      output.writeCharCode(code);
+      escaped = false;
+      continue;
+    }
+    if (code == 0x5c) {
+      escaped = true;
+      continue;
+    }
+    if (!inClass && code == 0x23) {
+      inComment = true;
+      continue;
+    }
+    if (!inClass && whitespace) continue;
+    if (code == 0x5b) inClass = true;
+    if (code == 0x5d) inClass = false;
+    output.writeCharCode(code);
+  }
+  // Preserve a malformed terminal escape for the helper's compilation boundary.
+  if (escaped) output.write(r'\');
+  return output.toString();
 }
 
 RegExp? _compileRegex(String pattern, {String flags = ''}) {

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
+Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 
 ## Latest Completed Slice
 
-Lua removes comparison-only terminal fence and reuses comparison classification for scalar/one-operand guards. Native/plan/fresh producer/shared and direct definedness pass on PUC5.5.1/LuaJIT after terminal-null/24-effect RED; six pairs/raw Bool, null/zero/text, bridges/scalar guards and1!/SOC/once-only/final-null pass. Producers/numeric aliases stay unchanged; declared5.4/full admission separate. Book/fact/current docs align; stale July milestone qualified as historical. Residual Dart regex-mode assessment23.2.12 next.
+Dart ordinary literals now process suffix x before ims bridging, reject unknown modes through contextual invalid handling and return false on matches FormatException. Public authored native/restored/plan plus direct String controls pass27 tests/fatal analysis after lost-x/ignored-q/throwing-invalid RED; go/no-x, classes/escapes/comments/Unicode, split/filter and SO preserved. Nested malformed /(/ separately becomes raw before compilation; public AST probe/root cause retained and P1 scanner repair23.3.10.7 is immediate next before contains. No Regex kind/schema/inline-x/full dialect admission.
 
 ## Next Action
 
-Assess residual Dart literal x/go/unknown/invalid regex behavior under23.2.12, before another family. Reconcile published regex/context contracts and canonical known owners; use distinguishing public controls before selecting bounded repairs. No first-class Regex/schema or dependency implementation work. Then contains result assessment23.2.13; full admission remains separate.
+Repair complete grouped/whitespace-prefixed slash operand recognition under23.3.10.7 using retained public AST/native grouped-invalid probe. Preserve symbolic division and exact source spans, let invalid patterns reach false/empty helper boundaries; direct action-parser/mode/String checks/docs/commit. Broader DART2.2 scanner/validator stays open. Then contains result assessment23.2.13.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.4` — Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
@@ -29,7 +30,6 @@ Assess residual Dart literal x/go/unknown/invalid regex behavior under23.2.12, b
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.6` — Dart complete grouped dotted literal priority is repaired/targeted-checked. Next bounded family: generic definedness result assessment23.2.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.5` — Lua String predicate flow/scalar/shape/null-operand repair is targeted-checked on available hosts. P1 Dart grouped regex6 next; known Lua native crash remains owned2.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` — Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 
 ## History
 

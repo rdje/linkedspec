@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.12 — preserve Dart extended regex modes and helper failures
+
+Dart ordinary literals now process suffix x before ims bridging, reject unknown modes through contextual invalid handling and return false on matches FormatException. Public authored native/restored/plan plus direct String controls pass27 tests/fatal analysis after lost-x/ignored-q/throwing-invalid RED; go/no-x, classes/escapes/comments/Unicode, split/filter and SO preserved. Nested malformed /(/ separately becomes raw before compilation; public AST probe/root cause retained and P1 scanner repair23.3.10.7 is immediate next before contains. No Regex kind/schema/inline-x/full dialect admission.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.12.5 — continue Lua String comparison result receivers
 
 Lua removes comparison-only terminal fence and reuses comparison classification for scalar/one-operand guards. Native/plan/fresh producer/shared and direct definedness pass on PUC5.5.1/LuaJIT after terminal-null/24-effect RED; six pairs/raw Bool, null/zero/text, bridges/scalar guards and1!/SOC/once-only/final-null pass. Producers/numeric aliases stay unchanged; declared5.4/full admission separate. Book/fact/current docs align; stale July milestone qualified as historical. Residual Dart regex-mode assessment23.2.12 next.

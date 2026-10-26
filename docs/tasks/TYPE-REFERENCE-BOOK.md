@@ -1197,7 +1197,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.11 - freeze explicit String comparison receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.12`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 bounded residual regex-feature assessment; existing exclusions are now given an explicit frontier before full admission, not a newly measured failure claim.
   Goal: Assess remaining Dart action literal x/go/unknown suffix and invalid-pattern behavior against the documented matches/regex contracts.
   Dependencies: .23.3.12.5 committed cleanly.
@@ -1207,10 +1207,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Reconcile every stated exclusion with a bounded observed result/owner and implement missing documented features or correct unsupported-domain claims before admission. No public regex type, submodule internals, full suite or unmeasured failure classification.
   Planned verification tier: focused; declare exact proof/no-measurement rationale at activation.
 
+  Activation: clean `d08fb16f5d709964351903c32fce6cfadcaa4dbe`; five comparison counterparts committed, brief0/tree clean.
+  Owned paths: Public Dart action-literal mode/invalid matches assessment, bounded first-party normalization/failure-boundary repair where demonstrated, focused native/restored/plan/direct String checks/docs. Catalog matches355-356 and split801-802 prescribe imsx, go no-ops, unknown/invalid false or empty; inline x/scoped regex semantics and broader scanner owners are not inferred.
+  Verification tier: `focused`
+  Focused checks: Public authored distinguishing literal x/go/unknown/invalid and split/filter/effect controls native/restored/plan, existing String predicate fixture, selected-file fatal analysis/formatting, book/history/diff/final staged continuity guards.
+  Canonical trigger: None for bounded existing documented ordinary feature repair under director feature-first cadence; full regex/context/portable admission and final clean push separate.
+  Claim verification: none: deterministic authored regression decisions, no dialect population/completeness measurement.
+
+  Completion: Existing published ordinary literal mode/error contracts reconciled with public controls. _regexLiteralPattern rejects unknown suffixes via existing invalid-pattern handling and preprocesses suffix x with a class/escape/comment-aware ASCII scanner before existing i/m/s normalization; go remain no-ops. _callMatches catches only regex FormatException and returns false; operand errors and existing sequence remain unchanged. No public Regex kind/schema or inline-x/scoped-flag admission.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native RED distinguishes lost x (false/un-split/empty-filter), ignored q/iq (true/matches), and invalid text pattern FormatException. No-x and go controls already pass. Grouped malformed /(/ instead becomes raw action code before compilation; retained public AST/native probe distinguishes standalone RegexLiteral, raw nested call, ordinary invalid a** call and working symbolic division.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart _regexLiteralPattern selects only ims and ignores other flags; _callMatches compiles without FormatException handling while split/filter already catch it. Separate action_parser.dart _looksLikeRegexStart rejects next '(' and _findMatchingDelimiter counts pattern parentheses: P1 repair23.3.10.7 is immediate next; broader DART2.2.1/.2.2.2 stay open.
+  - [x] FIX: Add bounded literal x normalization, unknown-mode invalid sentinel and matches-only FormatException boundary. ASCII whitespace/comments removed only outside classes; escaped whitespace/hash become literals (including supplementary Unicode), non-ASCII spaces stay significant, terminal escapes remain invalid.
+  - [x] ADDRESSED (verified): Native/restored/plan targeted controls pass suffix x, duplicate/combined modes, class/escaped spaces/hash, comments, non-ASCII-space and supplementary controls, unchanged go/no-x, unknown free/receiver/split/filter, invalid a**/text free/receiver/split/filter and eager SO. Grouped malformed remains explicitly owned next; no promise of its acceptance here.
+  - [x] NO REGRESSION: Existing String predicate result/mode/grouped-complete controls pass;27 selected Dart tests, fatal analysis and formatting pass. No broad matching/corpus/full suite or engine/dialect inference.
+  - [x] LOCKSTEP: Public mode fixture and retained grouped probe, scoped book examples, canonical regex facts/map and task/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. Immediate next23.3.10.7 precedes contains23.2.13.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.12 - preserve Dart extended regex modes and helper failures`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.13`
   Status: `pending`
   Goal: Assess ordinary Array contains result handoff and compatible scalar/generic/explicit-container consumers.
-  Dependencies: .23.2.12 and any selected bounded residual-mode repairs committed cleanly.
+  Dependencies: .23.2.12 and immediate grouped-invalid operand repair23.3.10.7 committed cleanly.
   Scope: Read membership/equality/element/needle contract and actual producers before classification; preserve source snapshots/result kinds and all published domains. Reconcile FUTURE-PARITY-BACKLOG.5's known missing-needle and punctuation-light twins explicitly before any receiver-arity change. No missing-needle/equality normalization inferred from prior index/has_key families.
   Acceptance: Retained public native/generated producer/fluent/nested/source/effect distinctions; freeze only observed-authorized ordinary result/shape transition and schedule independent backend children. Small compile/direct checks/docs/commit, full domain/portable admission separate. No current consumer failure or uniform terminal behavior claimed before assessment.
   Planned verification tier: focused; declare proof/no-measurement rationale at activation.
@@ -2604,6 +2621,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Contract/book/String+regex facts/map and task/live/resume align. Book/history/diff and final staged memory/cadence/diagnosis pass. Definedness assessment23.2.10 next after clean commit; broader DART-STARTUP-READING.2.2.1/.2.2.2 and Lua native crash2.3 remain owned.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.6 - parse complete grouped regex literals before fluent dots`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.7`
+  Status: `pending`
+  Priority: P1 immediate next after23.2.12, before contains23.2.13.
+  Goal: Preserve complete grouped or whitespace-prefixed action regex literal boundaries inside ordinary helper calls, including invalid grouped regex reaching its helper failure boundary.
+  Dependencies: .23.2.12 committed cleanly; coordinate existing DART-STARTUP-READING.2.2.1/.2.2.2 without claiming their full scanner/validator closeout.
+  Reproduce: Public authored matches("abc",/(/), receiver matches(/(/), split/filter(/(/) become raw action expressions instead of reaching false/empty helper behavior. The same malformed text as a quoted runtime pattern reaches a FormatException;23.2.12 owns that helper boundary.
+  Root cause: action_parser.dart _looksLikeRegexStart rejects slash followed by opening parenthesis/whitespace; _findMatchingDelimiter therefore counts the regex's opening parenthesis as action syntax and misses the enclosing call end. Complete standalone /(/ still has literal priority. Retained public AST/native probe: docs/checkpoints/type-operation-inventory/probe_dart_grouped_invalid_pattern.dart.
+  Acceptance: Reconcile operand-position slash literals against symbolic /(8,2) and / (8,2), ordinary numeric division, escaped delimiters, classes and valid grouped patterns. Confirm exact AST/source spans and native/restored/plan false/empty invalid-group consumers; small direct parser/String checks and docs/commit. No global regex type, engine/dialect, unassessed brace-scanner/validator closure or full suite.
+  Planned verification tier: focused; declare metadata at activation.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11`
   Status: `active` / bounded children targeted-checked; broad admission23.4 separate
   Goal: Ordinary is_defined/is_undefined generic receiver/result handoff under definedness-results.md; preserve actual producer kinds/domains.
@@ -2966,7 +2993,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.12` | `pending` | Assess residual Dart x/go/unknown/invalid regex modes before another family. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` | `pending` | Repair grouped invalid regex operand scanning before contains. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
