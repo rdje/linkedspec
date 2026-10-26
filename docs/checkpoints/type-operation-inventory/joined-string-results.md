@@ -127,3 +127,12 @@ one-delimiter preflight and tracks joins as scalar producers. Native/generated-
 plan/fresh-emitted and direct aggregate checks pass after RED under strict
 Julia1.12 harness execution, including named mutations, Unicode, split/length
 bridges, SDAN order and shapes. Shared Lua remains individually unassessed.
+
+Shared Lua `.23.3.5.5` removes the join endpoint stop, enforces one delimiter and
+retains scalar boundaries. It also fixes the confirmed receiver false-delimiter
+fallback without changing scalar conversion: literal/computed false now agrees
+with free join and evaluates once. Native/generated-plan/fresh-emitted and direct
+aggregate checks pass after RED on available PUC5.5.1/LuaJIT, retaining named
+mutations, Unicode, bridges, SDAN order, snapshots and shapes. Mutable split remains
+LUA-STARTUP-READING.2.9.1.1; declared5.4/full admission stays separate. Bounded join
+implementations are targeted-checked; container-default23.2.5 follows that small repair.

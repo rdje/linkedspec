@@ -1,6 +1,6 @@
 ---
 id: lua-interpreter-helper-reading-and-false-delimiter-gap
-title: Lua helper reading confirms false delimiter loss in receiver join and mutable split
+title: Lua false delimiters: receiver join repaired, mutable split remains
 answers:
   - what did Lua startup reading group eight cover
   - does Lua receiver join_values preserve a false delimiter
@@ -9,17 +9,16 @@ answers:
   - why did the Lua sorted harray reading fixture collapse its keys
   - which focused controls support Lua helper and capture reading
   - why does the public selector checker reject the existing Julia example
-date: 2026-09-12
-status: exact group eight read; two delimiter routes owned by pending .2.9
+date: 2026-10-26
+status: join repaired on available hosts; mutable split2.9.1.1 and full admission open
 tags: [lua, reading, helpers, delimiter, arrays, strings, captures]
-evidence: "LUA-STARTUP-READING.1.8 reads 1500 fragments /52134 bytes from f80a2bde7684d31df9655273023b179e98d64e58. Corrected native controls pass22 per installed host; separate join and split false-delimiter observations confirm two fallback errors. Existing dynamic-key semantics explain the initially incorrect fixed-key fixture. .2.9 owns bounded repair and independent verification."
+evidence: "Historical reading1.8 at pinned Git below; TYPE23.3.5.5 fixes receiver join false with literal/computed focused controls. Mutable split remains2.9.1.1."
 reverify:
-  - "Run the exact managed native replay below on both installed Lua hosts and record their identities."
-  - "Run LUA_READING_COVERAGE in docs/knowledge/lua-startup-reading-coverage.md."
-  - "bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py"
-  - "bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py"
-  - "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
+  - "bash tools/run_lua_project_data.sh puc lua/test/joined_string_receivers_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/joined_string_receivers_test.lua"
 ---
+
+Current join repair defaults only for absent expressions, preserving evaluated false through scalar conversion and once-only evaluation. Focused native/generated-plan/fresh-emitted checks pass on available PUC5.5.1/LuaJIT; mutable split is the next owned repair. Declared5.4/full admission remain open. Historical reading/five replay commands are exact at Git5856cfcb630f08df2ff9532241c38a78e6138de1; the body below preserves September12 context, not ordinary-feature replay instructions.
 
 # Physical reading
 
@@ -73,7 +72,7 @@ Canonical homes were retrieved first: [[lua-runtime-lazy-inline-controls]],
 [[lua-array-split-mutation]] and [[hash-literal-dynamic-key-contract]]. Historical
 counts and former next-frontier statements remain dated evidence, not fresh claims.
 
-# Two confirmed false-delimiter differences
+# Historical false-delimiter observations — 2026-09-12
 
 | Route | Explicit false result | Equivalent pure function |
 | --- | --- | --- |

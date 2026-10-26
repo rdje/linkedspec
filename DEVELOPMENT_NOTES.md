@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.5 — join flow and explicit false
+
+Lua joined results now continue with one-delimiter/scalar guards and false-preserving delimiter evaluation. Small native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED on available PUC5.5.1/LuaJIT, including literal/computed false parity, named mutations, Unicode, bridges, SDAN order, snapshots and shapes. Loadfile/book/continuity checks pass. Remaining mutable split2.9.1.1 is next, then container-default23.2.5; declared5.4/full admission stay separate. Older omitted-receiver expectations are explicitly superseded by one-delimiter contract23.2.4; other route defaults stay unchanged.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.5.4 — extend existing scalar tracking
 
 Julia retains correct joined flow and adds one-delimiter/scalar-producer guards. Small native/generated-plan/fresh-emitted joined and direct aggregate tests pass after RED under strict Julia1.12 execution, including named mutations, Unicode, split/length bridges, SDAN order, snapshots and incompatible nulls. Helpers/source/copy behavior stay unchanged; Lua assessment is next, with declared5.4/full admission separate. Register the fixture and align book/contract/facts/map/current records; no broad replay.

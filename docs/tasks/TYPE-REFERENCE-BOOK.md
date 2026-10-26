@@ -1556,7 +1556,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5`
-  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua assessment follows
+  Status: `active` / bounded implementations complete; full admission remains23.4
   Goal: Implement the frozen ordinary joined String result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.4.
   Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.5.5`; assess later backends individually after clean commits.
@@ -1657,13 +1657,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.4 - guard Julia joined String boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `5856cfcb630f08df2ff9532241c38a78e6138de1`.
   Goal: Publicly assess and implement/confirm ordinary joined String result continuations on shared Lua.
   Dependencies: .23.3.5.4.
   Owned paths: Lua public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records, including any confirmed join-only update to the existing false-delimiter owner2.9.
-  Planned tier: `focused`; declare exact public probes and small regression at activation.
-  Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
+  Verification tier: `focused`
+  Focused checks: Public Lua joined-result/shape/false-delimiter probes; small native/generated-plan/fresh-emitted joined and direct aggregate fixtures on available PUC5.5.1/LuaJIT with matching products, loadfile compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; declared5.4 and complete public/context/portable admission remain separately owned plus eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public findings / owned repair: PUC direct/selected/hash fluent pairs stop beside working nested controls. Missing delimiter returns a/runs one effect. The tracked false-delimiter issue reproduces: free join gives a0b, receiver ab, nested uppercase A0B and joined continuation null. evaluate_array_values uses an and/evaluate/or-empty fallback, replacing evaluated false. Repair the join route here with literal/computed false controls; retain mutable split under LUA-STARTUP-READING.2.9.1 for its next bounded leaf.
   Acceptance: Preserve correct source/snapshots/null/copy behavior, probe joined chains, one-delimiter shapes, scalar boundaries and named mutations. Reverify the existing LUA-STARTUP-READING.2.9 join false-delimiter route and own a small confirmed join repair here; mutable split stays with its existing owner. Small native/generated-plan/fresh-emitted and direct aggregate checks on available PUC5.5.1/LuaJIT with matching products, loadfile/docs/commit. Declared5.4/full admission remain separate; no broad replay/source normalization.
+
+  Completion: Remove join endpoint rejection, retain scalar boundaries until container output and enforce one delimiter before effects. Replace the truthy evaluated-delimiter fallback with an explicit argument-presence branch, preserving false and once-only evaluation. Register the focused fixture; mutable split remains a separate next leaf.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public joined/nested pairs show stopped results; missing delimiter runs its receiver. Free false join gives a0b while receiver gives ab. Retained native fixture RED independently captures false loss, skipped consumers, malformed arity effects and named-mutation boundaries.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_fluent_calls stops after join and evaluate_expr lacks one-delimiter validation. evaluate_array_values uses expr.args[1] and evaluate_expr(...) or empty text, replacing an evaluated false before scalar conversion.
+  - [x] FIX: Carry joined scalars through compatible methods, validate arity before effects and default only for absent delimiter expressions. Preserve helper/source/copy semantics and retain scalar compatibility guards.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted joined fixture PASS after RED on available PUC5.5.1/LuaJIT, including literal/computed false equality and once-only effects, named mutations, functions/selected/pipeline/hash/String sources, Unicode, explicit bridges, SDAN order, snapshots and invalid shapes.
+  - [x] NO REGRESSION: Direct aggregate fixture and interpreter/runner loadfile compilation PASS with matching fresh products on both hosts. Source normalization, mutable split and declared5.4/full admission remain separately owned; no new callable vocabulary/format.
+  - [x] LOCKSTEP: Register fixture and align worked helper/guide/contract, current Lua/Array/false-delimiter facts/map, partial2.9 ownership and current task/live records; book and fast continuity/history/diff checks pass. Reverify/repair remaining mutable split next, then container-default23.2.5.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5 - continue Lua joined String results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1747,7 +1761,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` | `pending` | Publicly assess/implement frozen joined String result flow on Lua and reverify its tracked false delimiter. |
+| 1 | `LUA-STARTUP-READING.2.9.1.1` | `pending` | Reverify/repair remaining mutable-split false delimiter after clean joined-result rollout; container-default23.2.5 follows. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

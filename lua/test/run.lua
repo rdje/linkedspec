@@ -9525,6 +9525,9 @@ end)
 test("aggregate numeric receiver continuations", function()
   dofile("lua/test/aggregate_numeric_receivers_test.lua")
 end)
+test("joined String receiver continuations", function()
+  dofile("lua/test/joined_string_receivers_test.lua")
+end)
 
 io.stdout:write("1..", total, "\n")
 if failed > 0 then

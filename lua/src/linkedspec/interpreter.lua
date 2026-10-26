@@ -1972,8 +1972,11 @@ local function evaluate_array_values(engine, expr, ctx, accumulator, edge_state,
   local values = {}
   local name = action_contracts.canonical_action_helper_name(expr.name)
   if receiver ~= nil and name == "join_values" then
-    values[1] = expr.args[1] and
-      evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state) or ""
+    if expr.args[1] ~= nil then
+      values[1] = evaluate_expr(engine, argument_expr(expr.args[1]), ctx, accumulator, edge_state)
+    else
+      values[1] = ""
+    end
     values[2] = receiver
   else
     if receiver ~= nil then values[1] = receiver end
@@ -3516,7 +3519,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       if scalar_numeric.is_comparison(canonical_name) and index < #calls then return json.null end
     elseif PURE_ARRAY_HELPERS[canonical_name] then
       value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
-      if canonical_name == "join_values" and index < #calls then return json.null end
+      if canonical_name == "join_values" then scalar_result = true end
     elseif PURE_HASH_HELPERS[canonical_name] then
       value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "has_key" and index < #calls then
@@ -3889,10 +3892,11 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "fluent_chain" then
-    -- Reject unambiguous zero-extra shapes before source/operand effects;
+    -- Reject invalid receiver arities before source/operand effects;
     -- scalar min/max overloads keep their existing operands.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
+      if name == "join_values" and #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
           name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
