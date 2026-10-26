@@ -5722,12 +5722,18 @@ impl Engine {
                     );
                 }
                 validate_eager_helper_arity(name, args, args.len(), ctx, rule_label)?;
-                // Lazy-evaluation calls: if/switch/while/with/elseif/else/case/default
-                // Branch bodies must NOT be evaluated eagerly — they are
-                // evaluated only when their condition matches.
+                // Branch bodies and default-selection operands evaluate only
+                // the prefix required by the selected control helper.
                 let is_lazy = matches!(
                     name.as_str(),
-                    "if" | "switch" | "while" | "with" | "elseif" | "else" | "case" | "default"
+                    "if" | "switch"
+                        | "while"
+                        | "with"
+                        | "elseif"
+                        | "else"
+                        | "case"
+                        | "default"
+                        | "coalesce"
                 );
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
@@ -8268,7 +8274,7 @@ impl Engine {
         args.first().map(RuntimeValue::to_str)
     }
 
-    /// Dispatch a lazy-evaluation call (if/switch/while/elseif/else/case/default).
+    /// Dispatch a lazy control or first-defined default-selection call.
     ///
     /// These calls receive unevaluated arg AST nodes; the handler evaluates
     /// conditions and branch bodies lazily via `self.eval_expr()`.
@@ -8285,6 +8291,15 @@ impl Engine {
             format!("rule={rule_label} helper={name} arity={}", args.len()),
             TraceLevel::FULL,
         );
+        if name == "coalesce" {
+            for arg in args {
+                let value = self.eval_expr(arg.value(), ctx, rule_label)?;
+                if value.is_defined() {
+                    return Ok(value);
+                }
+            }
+            return Ok(RuntimeValue::Undef);
+        }
         let empty_vals: Vec<RuntimeValue> = Vec::new();
         self.call_helper(name, args, &empty_vals, ctx, rule_label)
     }
@@ -8451,7 +8466,7 @@ impl Engine {
             }
             "coalesce" => {
                 for a in args {
-                    if a.is_defined() && a.to_str() != "" {
+                    if a.is_defined() {
                         return Ok(a.clone());
                     }
                 }

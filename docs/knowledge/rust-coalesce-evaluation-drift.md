@@ -1,23 +1,28 @@
 ---
 id: rust-coalesce-evaluation-drift
-title: "Rust coalesce skips defined empty values and both default helpers evaluate later operands"
+title: "Rust first-defined coalesce repair and remaining nonempty/receiver boundaries"
 answers:
   - "does Rust coalesce preserve a defined empty string"
   - "does Rust coalesce short circuit operand evaluation"
   - "does coalesce_nonempty skip later assignment effects"
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
-date: 2026-09-07
-status: confirmed bounded discrepancy; repair pending
+date: 2026-10-26
+status: ordinary coalesce62.1 repaired; nonempty/receiver62.2 and broad admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
 evidence: "SESSION-STARTUP-READING.3.3.22: five paired existing-primary Rust/live Perl Get controls, five ready descriptors and inspected lowered/generated sources; .62.1-.62.4 own repair and carrier/public closure."
-reverify:
-  - "git diff baeb984e36a94a15951cd23d4c52def5064cdaca -- rust/linkedspec-runtime/src/engine.rs perl/LinkedSpec/ActionIR/MethodLowering.pm"
-  - "sed -n '5557,5562p;5624,5644p;8223,8231p;9510,9519p;10869,10880p' rust/linkedspec-runtime/src/engine.rs"
-  - "sed -n '6396,6446p' perl/LinkedSpec/ActionIR/MethodLowering.pm"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values"
 ---
 
-# Default selection and later operand effects
+Current62.1: ordinary coalesce enters call_helper_lazy, evaluates operands until
+the first defined RuntimeValue and returns it without text conversion. Retained
+native/restored/generated-plan tests distinguish empty/undef/zero/false, nested
+selection, exact order and skipped versus needed typed-write errors. Public Perl
+Get confirms the shared value fixture. Aggregate controls match reference
+definedness as compatibility observations; the public scalar signature is not
+silently broadened. Nonempty/receiver62.2 and broader62.3/.62.4 remain open.
+
+# Historical September7 default-selection findings
 
 At reading baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`, Rust's ordinary
 call path eagerly collects operand values. Its lazy selector includes if/switch/while
@@ -31,7 +36,7 @@ coalesce selection. Its signature is scalar arguments. Aggregate results below a
 reference observations; repair `.62.1` must reconcile that boundary explicitly before
 claiming normative aggregate admission.
 
-## Exact paired observations
+## Historical September7 paired observations
 
 Each body below uses this scaffold and input `xhello`:
 
@@ -73,18 +78,18 @@ Five descriptors report ready=1/unresolved=0. Actual lowered and generated sourc
 the conditional structure, including the nested selected assignment before any late operand.
 These generated captures were inspected, not independently executed.
 
-## Assertion and carrier limits
+## Historical assertion and carrier limits
 
 `helpers_5_2_coalesce_short_circuits` only checks that coalesce returns `"hello"` when
 a plain fallback string is available. It has no operand effect/error and cannot detect this
 eager-evaluation gap. Permanent value/effect/skipped-failure tests and supported native,
 serialized, generated, emitted and standalone consumers belong to `.62.3`. Other backends,
 receiver/value-block routes, all-undef and invalid argument cases were not executed here.
-No repair or whole-project signoff is claimed.
+That reading slice claimed no repair or whole-project signoff; current bounded repair is recorded above.
 
-The existing Rust CLI identity is SHA-256
+The historical Rust CLI identity is SHA-256
 `ad45555750489b78f7835457a09ecfa174d56b7ebf6242a4db5850570797c81a`;
-the current source is unchanged from the reading baseline. No compiler ran in this slice.
+its source was unchanged from the reading baseline. No compiler ran in that reading slice.
 
 ## Retained evidence
 
@@ -102,5 +107,5 @@ The manifest is 8,659 bytes, SHA-256
 | `perl-nonempty-results.jsonl` | 303 | `558427a45f98dfd2af1369723d4e47f89f840490962cb36bfa83ec291b0d1ff8` |
 
 The task-tree is the current repair authority: `SESSION-STARTUP-READING.62.1-.62.4`
-in `docs/tasks/SESSION-STARTUP-READING.md`. Prerequisite reading/alignment/policy work still
-precedes runtime repairs.
+in the indexed SESSION-STARTUP-READING tree. The October26 feature-first phase selects
+bounded62.1/.62.2 repairs now; broader reading/policy/admission stays separately owned.

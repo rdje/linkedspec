@@ -499,23 +499,34 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Verification: `pending`
   Commit: `pending`
 - ID: `SESSION-STARTUP-READING.62`
-  Status: `pending`
+  Status: `active`
   Goal: Restore coalesce defined-value selection and short-circuit evaluation.
-  Dependencies: prerequisite .3/.4/.5; coordinate scalar value and callable/receiver authorities.
+  Dependencies: Coordinate scalar value and callable/receiver authorities. October26 targeted/feature-first direction selects diagnosed .62.1/.62.2 now; older .3/.4/.5 reading/audit prerequisites remain separately owned, not blockers for these bounded implementations.
   Children: `.62.1`, `.62.2`, `.62.3`, `.62.4`
   Acceptance: A selected defined value prevents later operand effects; preserve zero/false/empty distinctions.
 - ID: `SESSION-STARTUP-READING.62.1`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `05d2dd14316a0413dab9cc0234169d30a40f857f` after bounded selected/copy implementations.
+  Verification tier: `focused`
+  Focused checks: Small public Perl control; locked/offline Rust coalesce_lazy_values native/restored/generated-plan regression and direct selected_value_receivers test; first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded diagnosed helper implementation under director feature-first cadence; broader62.3/.62.4 and eventual clean push admission stay separate.
+  Claim verification: none: deterministic authored value/order/skipped-error regression; no quantified corpus, exhaustive or portable admission measurement.
   Goal: Repair Rust coalesce definedness and lazy operand dispatch.
   Acceptance: Preserve defined empty strings, evaluate operands once left-to-right until selection, and skip
     later writes/errors. Cover undef fallthrough, all-undef, zero/false, selected values and nested calls.
     Reconcile aggregate acceptance explicitly against reference behavior and the public scalar signature;
     do not silently widen that signature or conflate coalesce with coalesce_nonempty.
-  Verification: `pending` repair — .3.3.22 probes show Rust replaces defined empty text with fallback and
-    executes a later audit assignment after either the first or fallback operand is selected. Perl returns
-    the empty string and skips those writes. Rust's lazy-call selector omits coalesce; the helper also tests
-    nonempty text. Perl emits nested defined-value ternaries. Existing short_circuits test checks value only.
-  Commit: `pending`
+  Verification: PASS October26 locked/offline coalesce_lazy_values and direct selected_value_receivers tests after actual value/order and skipped-typed-error RED. Public Perl Get agrees with the shared fixture. Native/restored/generated-plan execution, compilation/rustfmt/book and fast continuity guards pass; broader62.3/.62.4 remains deferred.
+  Aggregate decision: Select by RuntimeValue definedness, matching public Perl aggregate controls; retain the public scalar signature and describe aggregate cases as compatibility observations, not new general aggregate admission.
+  Setup correction: Initial num_div(1,0) control intentionally returns undef under the numeric contract, not an execution error. Replace it with a demonstrated nested_write_kind_conflict; the needed error control passes before asserting that an unneeded error is skipped. The initial bad error assertion is not product RED.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public authored fixture returns late text instead of defined empty text and order AXBCXXXX instead of ABC before repair; Perl Get confirms expected values. A needed typed-write conflict still fails, while an unneeded conflict wrongly executes before repair.
+  - [x] ROOT CAUSE (WHY + WHERE): Expr::Call's lazy selector omits coalesce, so normal eager collection runs every operand. Engine::call_helper's coalesce arm also excludes empty text via to_str instead of testing definedness alone.
+  - [x] FIX: Route ordinary coalesce to call_helper_lazy, evaluating each operand once until the first defined value. Keep needed errors and existing arity checks; use definedness in the evaluated-value arm too. Nonempty and receiver short-circuit work stays62.2-owned.
+  - [x] ADDRESSED (verified): Authored native/restored/generated-plan coalesce_lazy_values test PASS for empty/undef/zero/false, selected/nested/all-undef values, exact order and skipped versus needed runtime errors after actual RED.
+  - [x] NO REGRESSION: Direct selected_value_receivers test and first-party rustfmt PASS; public Perl fixture agrees, including bounded aggregate compatibility controls. No full crate suite or broad backend proof.
+  - [x] LOCKSTEP: Public examples, canonical coalesce fact/map, indexed/current task frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Historical observations remain dated.
+  Commit: `SESSION-STARTUP-READING.62.1 - lazily select Rust first-defined values`.
 - ID: `SESSION-STARTUP-READING.62.2`
   Status: `pending`
   Goal: Reconcile coalesce_nonempty and receiver/value-block dispatch with the reference.

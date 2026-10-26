@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## SESSION-STARTUP-READING.62.1 — lazily select Rust first-defined values
+
+Route ordinary coalesce through lazy AST evaluation and select the first defined value without text conversion. Preserve empty text, zero/false, needed error propagation and once-only left-to-right evaluation; skip later writes/errors. A small shared public Perl control agrees with authored values/order; native/restored/generated-plan regressions pass after actual RED, alongside direct selected-value checks. Compilation/rustfmt/book and fast continuity checks pass. Aggregate controls are bounded compatibility observations; the scalar signature is unchanged. Nonempty/receiver62.2 follows; broad proof remains deferred.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.2.4 — guard Lua receiver copy arity
 
 Reject extra copy receiver operands through existing chain preflight before effects. Fresh matching available PUC5.5.1/LuaJIT products and small native/generated-plan/fresh-emitted regression pass after actual RED, with valid copy detachment/scalar/null and once-only controls; direct selected-value checks pass. Perl already rejects invalid direct/selected copy shapes, confirmed natively and freshly emitted without runtime changes. Book/fact/map/current records agree. Broad target/copy admission remains deferred; next known implementation is Rust coalesce62.1/.62.2 before continued signatures.

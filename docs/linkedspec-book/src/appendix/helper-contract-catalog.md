@@ -281,8 +281,8 @@ dispatch rule.
 - **Signature**: `coalesce(values: scalar...)`
 - **Returns**: scalar
 - **Behavior**: Returns the first argument that is defined (not undef). Evaluates left-to-right, short-circuiting.
-- **Edge cases**: Returns `undef` if all arguments are undef.
-- **Example**: over `/(\w+)/`, `coalesce(array(entry_group(0))[5], "fallback")` on `hi` → `["fallback"]` (the index-5 read is out of range, so the literal default is used).
+- **Edge cases**: Returns `undef` if all arguments are undef. Empty text, numeric zero and false are defined: `coalesce("", "fallback")` → `""`, `coalesce(0, 7)` → `0`, `coalesce(false, true)` → `false`.
+- **Examples**: `coalesce([].first(), "fallback")` → `"fallback"`. With `audit="unset"`, `value=coalesce("first", { audit="late"; "fallback" })` leaves `audit` unchanged and returns `"first"`; later operand errors are also skipped. Nested selection keeps the same rule: `coalesce(undef, coalesce("", "late"))` → `""`.
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`

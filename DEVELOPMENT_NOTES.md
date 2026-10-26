@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — SESSION-STARTUP-READING.62.1 — first-defined prefix evaluation
+
+Rust omitted coalesce from lazy dispatch and used nonempty text in its eager arm. Admit it to call_helper_lazy, evaluate operands until the first defined RuntimeValue and return that value directly; the evaluated-value arm uses definedness too. The retained fixture distinguishes empty/undef/zero/false, nested/selected/all-undef values and exact ABC order; a needed typed-write conflict still errors while an unneeded one is skipped. Native/restored/generated-plan and direct selected-value tests pass after actual RED, and public Perl confirms bounded aggregate compatibility without widening the scalar signature. An initial division-by-zero error control was corrected because numeric helpers intentionally return undef; that setup assertion is not product RED. Canonical/current docs align;62.2 owns nonempty/receiver behavior next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.4 — Lua copy receiver versus explicit operand
 
 Only zero-argument fluent copy used copy_value(value); extra operands fell through to function copy, producing the operand after receiver and operand effects. Extend existing first/last preflight to canonical copy and preserve the correct valid-copy operation. The retained small fixture passes native/generated-plan/fresh-emitted and direct selected-value checks on available matching PUC5.5.1/LuaJIT products after actual RED. Perl public native/fresh direct/selected controls already agree, so no Perl fix is fabricated. Historical Lua copy metrics remain dated and byte-recoverable; the current fact reverify selects only focused tests. Declared PUC5.4 and broad copy admission remain separately owned; select diagnosed Rust coalesce62.1/.62.2 next under the feature-first phase.

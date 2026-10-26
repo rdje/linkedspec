@@ -20,7 +20,7 @@
 
 ## Current Frontier
 
-Current feature selection (October26): `.61.1` source-null and `.61.2` scalar operand/predicate/empty-pattern repairs are implemented/targeted-checked after selected-value backend rollout; copy-arity23.3.2 and signature inventory are next. Broad61.3, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Next is62.2 nonempty/receiver default selection before continued helper signatures. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
 
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
@@ -29,7 +29,7 @@ owns the broader numeric closeout. Other startup repairs retain their schedule.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.55.2` | `pending` | Next startup numeric child remains queued; overall PNT returns to Dart17.4 before this separate spelling work. |
+| 1 | `SESSION-STARTUP-READING.62.2` | `pending` | Known next helper implementation: nonempty and receiver lazy default selection after ordinary coalesce62.1. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded copy-arity implementations are complete: Julia/Dart/Rust/Lua repaired, Perl already correct. Broad target/canonical admission remains23.3.2.5-owned and deferred. Next known feature is Rust coalesce62.1/.62.2, then continued helper signatures. Keep compile/quick-check/docs/commit cadence.
+Ordinary Rust coalesce62.1 is implemented and targeted-checked after bounded scalar/selected/copy rollout. Next is62.2 nonempty/receiver lazy selection, then helper signatures. Keep feature/compile/quick-check/docs/commit cadence; broad62.3/.62.4 remains deferred.
 
 ## Latest Completed Slice
 
-Lua preflight rejects extra copy receiver operands before effects. Fresh matching available PUC5.5.1/LuaJIT products and small native/generated-plan/fresh-emitted regression pass after actual RED; syntax and direct selected-value controls pass. Perl native/fresh direct/selected controls already agree, with no runtime change. Book/canonical/task/live records align; declared5.4/full admission remains open.
+Rust coalesce now selects the first defined value through lazy operand evaluation. Authored native/restored/generated-plan tests pass after actual value/order and skipped-error RED; public Perl agrees on the shared value fixture. Empty/undef/zero/false, nested/selected/all-undef, exact ABC order and needed-error propagation stay correct. Direct selected-value, compilation/rustfmt/book and fast continuity checks pass. Canonical fact/map and indexed/current/live records agree.
 
 ## Next Action
 
-Implement known Rust first-defined lazy coalesce62.1 using a small public regression; commit before nonempty/receiver62.2 and continued signature inventory. Preserve qualified copy domains/depths; no broad suites or historical replay.
+Implement62.2 coalesce_nonempty and documented receiver/value-block laziness with a small public regression; commit before continued signature inventory. Preserve scalar/aggregate qualifications; no broad suites or historical replay.
 
 ## Recent Completions
 
+- `SESSION-STARTUP-READING.62.1` — Rust ordinary first-defined lazy selection; authored native/restored/generated-plan values/order/skipped-error and direct selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.4` — Lua copy arity rejects before effects on available PUC5.5.1/LuaJIT; focused native/generated/emitted and direct selected-value checks pass; Perl already correct.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.3` — Rust copy arity rejects before effects; focused native/restored/generated-plan and direct selected-value checks pass; actual scalar/depth book boundaries corrected.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.2` — Dart copy arity rejects before effects; native/restored/generated-plan, direct selected-value and changed-file analysis pass.
@@ -29,7 +30,6 @@ Implement known Rust first-defined lazy coalesce62.1 using a small public regres
 - `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.1.2.1` — helper spellings/aliases/roles indexed; source consistency and book pass; signatures/effects1.2.1.2.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
-- `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
 
 ## History
 
