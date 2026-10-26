@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.10.4 — guard Julia predicate results and null operands
+
+Julia adds four String predicates to scalar/one-operand guards and rejects null text operands. Shared native/generated-plan/fresh emitted fixture and direct emptiness pass with strict depwarn compilation after null suffix/needle1!, scalar[] and12 malformed-effect RED. Actual numeric/Bool kinds, regex modes and correct SOC/SC/once-only snapshots stay unchanged. New fixture registered; book/fast checks pass. Lua5 next, then P1 Dart grouped regex6.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.10.3 — carry Dart predicate results and literal modes
 
 Dart scalar/one-operand guards, null text operands and literal i/m/s pattern carriage are repaired. Shared native/restored/plan JSON, mode/split/filter controls, direct emptiness and fatal selected-file analysis pass after null-operand/flag-loss/12-effect RED. Actual producer kinds and SOC/SC snapshots remain unchanged; no new type/schema or broad regex admission. P1 grouped dotted regex parsing is owned23.3.10.6 immediately after Julia/Lua. Book/fast checks pass; Julia next.

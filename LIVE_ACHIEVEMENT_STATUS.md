@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
+Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
 
 ## Latest Completed Slice
 
-Dart scalar/one-operand guards, null text operands and literal i/m/s pattern carriage are repaired. Shared native/restored/plan JSON, mode/split/filter controls, direct emptiness and fatal selected-file analysis pass after null-operand/flag-loss/12-effect RED. Actual producer kinds and SOC/SC snapshots remain unchanged; no new type/schema or broad regex admission. P1 grouped dotted regex parsing is owned23.3.10.6 immediately after Julia/Lua. Book/fast checks pass; Julia next.
+Julia adds four String predicates to scalar/one-operand guards and rejects null text operands. Shared native/generated-plan/fresh emitted fixture and direct emptiness pass with strict depwarn compilation after null suffix/needle1!, scalar[] and12 malformed-effect RED. Actual numeric/Bool kinds, regex modes and correct SOC/SC/once-only snapshots stay unchanged. New fixture registered; book/fast checks pass. Lua5 next, then P1 Dart grouped regex6.
 
 ## Next Action
 
-Independently assess Julia starts_with/ends_with/contains_substr/matches under23.3.10.4 using shared fixture; preserve actual kinds/source/operand/copy policies, repair confirmed ordinary gaps, small native/restored/plan/direct checks/docs/commit. Lua5 then P1 Dart grouped regex6 before further families.
+Independently assess Lua starts_with/ends_with/contains_substr/matches under23.3.10.5 on available hosts using shared fixture; preserve actual kinds/source/operand/copy policies, repair confirmed ordinary gaps, small native/plan/fresh/direct checks/docs/commit. P1 Dart grouped regex6 follows before further families.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.10.4` — Julia String predicate scalar/shape/null-operand repair is targeted-checked; Lua5 next, then P1 Dart grouped regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` — Dart String predicate result/shape/null-operand and i/m/s repair is targeted-checked; Julia4 next, then Lua5 and P1 grouped Dart regex6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.2` — Rust predicate flow/literal flags pass focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` — Perl String predicate handoff passes native/fresh/direct checks; Rust assessment next.
@@ -29,7 +30,6 @@ Independently assess Julia starts_with/ends_with/contains_substr/matches under23
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` — Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
 
 ## History
 

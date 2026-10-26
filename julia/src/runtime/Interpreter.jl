@@ -5881,7 +5881,9 @@ function _evaluate_runtime_fluent_chain!(
     # scalar min/max overloads retain their ordinary operands.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
-        if helper_name in ("join_values", "index_of", "has_key") && length(call.args) != 1
+        if helper_name in (
+            "join_values", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
+        ) && length(call.args) != 1
             return nothing
         end
         if helper_name in (
@@ -5912,7 +5914,10 @@ function _evaluate_runtime_fluent_chain!(
         end
         # Scalar producers and defaults retain this boundary until an actual
         # container output permits later array/hash-only consumers.
-        may_produce_scalar = helper_name in ("coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty") ||
+        may_produce_scalar = helper_name in (
+            "coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty",
+            "starts_with", "ends_with", "contains_substr", "matches",
+        ) ||
             (value isa AbstractVector && helper_name in (
                 "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",
             ))
@@ -7053,7 +7058,7 @@ function _runtime_string_predicate(values, predicate)
         return 0
     end
     value = _runtime_scalar_string(values[1])
-    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    needle = _runtime_scalar_string(values[2])
     if value === nothing || needle === nothing
         return 0
     end

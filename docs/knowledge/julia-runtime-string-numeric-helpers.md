@@ -2,6 +2,7 @@
 id: julia-runtime-string-numeric-helpers
 title: Julia runtime executes current string/scalar and numeric helpers through one canonical dispatcher
 answers:
+  - why do Julia string predicates need scalar arity and null operand guards
   - does Julia runtime support trim lowercase substr split
   - does Julia runtime support regex flags in matches
   - does Julia runtime support explicit string comparisons
@@ -10,11 +11,11 @@ answers:
   - does Julia runtime return nothing for invalid numeric input
   - does Julia runtime support string receiver chains
   - does Julia runtime support number receiver chains
-date: 2026-07-10
+date: 2026-10-26
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.3.2 extends julia/src/runtime/Interpreter.jl with a canonical pure-helper dispatcher, internal regex pattern/flag values, lazy coalescing, current string/scalar transforms/predicates and str_* comparisons, numeric arithmetic/unary/reducer/comparison helpers, word and symbol aliases, JSON-number normalization, failure-to-nothing boundaries, and compatible fluent-chain evaluation. Two focused end-to-end cases in julia/test/runtests.jl and the full 556-assertion Pkg.test() run prove string and numeric function/receiver behavior."
-reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
+evidence: "String/numeric4.3.2; ordinary predicate23.3.10.4 shared/native/plan/fresh and direct emptiness checks. Historical replay/source ranges at Git860e231f93714da4076ab477d6934b75b5d5e0d8 for this path."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/string_predicate_result_receivers_test.jl\"); include(\"julia/test/emptiness_result_receivers_test.jl\")'"
 ---
 
 Julia string/scalar and numeric helper execution lives in
@@ -62,11 +63,6 @@ suites remain green. Exact selected replay is in [[julia-runtime-array-helpers]]
 Regex handling retains imsx flags (g/o ignored), guarded substitution writeback
 and capture expansion; this reading closes no pending regex or numeric repair.
 
-## September 11 complete main consumer reading (.1.43)
+Historical September11 complete-consumer replay remains at the Git pointer above; magnitude/slice repairs .2.9/.2.10 remain open.
 
-The suffix2465–2568 finishes the main string/numeric testset; all14 assertions
-pass. It covers explicit/default exit, regex substitution writeback/flags/capture
-expansion, unchanged pure substring receivers, numeric aliases and representative
-invalid operands. The prefix also proves eager logical arguments and diagnostic
-sink events. Scalar55/18 and logical8/0/26 checks pass; magnitude/slice repairs
-.2.9/.2.10 remain open. Replay: [[julia-runtime-array-helpers]], .1.43 below.
+23.3.10.4 adds starts_with/ends_with/contains_substr/matches to existing scalar/one-operand guards and removes null_as_empty from text predicate operands. Shared native/plan/fresh and direct emptiness checks pass after null suffix/needle1!, scalar[] and12 malformed-effect RED. Numeric text flags/Bool matches, regex modes and correct SOC/SC/once-only snapshots are preserved. No domain/regex expansion or full admission.

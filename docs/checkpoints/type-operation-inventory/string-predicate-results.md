@@ -103,3 +103,11 @@ checks plus direct emptiness and fatal selected-file analysis pass after RED.
 Producer kinds and correct SOC/SC snapshots remain unchanged. Public inline
 /(?s)^a.b$/ exposes a separate scanner rejection; P1 owned23.3.10.6 follows
 Julia/Lua result implementation. Full x/unknown flags/domain/admission separate.
+
+## Bounded Julia handoff
+
+23.3.10.4 adds four scalar/one-operand guards and removes null text operand
+coercion. Native/plan/fresh shared fixture and direct emptiness checks pass after
+null suffix/needle1!, scalar[] and12 malformed-effect RED. Existing numeric text
+flags/Bool matches, retained regex modes and SOC/SC snapshots stay correct.
+Lua5 follows; P1 Dart grouped regex6/full regex/domain/admission stay separate.
