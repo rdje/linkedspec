@@ -82,3 +82,16 @@ count/reducer/transform/selection successors, numeric selector and SDC snapshots
 AST/Phase0 numeric named cases and syntax pass; authored retired fat-arrow Hash
 still rejects. Original default62/TYPE23.3.6 owns its broader admission; new Perl
 fixtures require23.4.1 registration. Rust16.2/full admission remain separate.
+
+## Bounded Rust implementation
+
+23.3.16.2 independently confirms native/restored/plan canonical/word/symbol,
+strict-domain/nested/SOC and numeric selector producers. Shared RED stops most
+plain arithmetic results and runs14 bad-shape effects; selected/min/max paths
+already work. Number methods now use shared scalar actual-value continuation,
+removing duplicate Number-only evaluation. Common unambiguous shape guards leave
+min/max modes unchanged. String loop also needs numeric handoff before its own
+whitelist: direct prefix RED[null,null,null] becomes[5!,1!,8], retaining strict
+arithmetic/comparison/invalid domains. Eleven focused numeric/direct/named cases
+and offline compilation/rustfmt pass. Shared Array/Hash/default copy and SOC/ASO
+controls pass without Perl's host-staging mechanism; full admission stays23.4.

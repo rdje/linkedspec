@@ -5961,11 +5961,13 @@ impl Engine {
                 if calls.iter().any(|call| match call.method.as_str() {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
-                    | "is_undefined" => !call.args.is_empty(),
+                    | "is_undefined" | "abs" | "floor" | "ceil" | "round" => !call.args.is_empty(),
                     "join_values" | "contains" | "index_of" | "has_key" | "starts_with"
                     | "ends_with" | "contains_substr" | "matches" | "str_eq" | "str_ne"
                     | "str_gt" | "str_ge" | "str_lt" | "str_le" | "eq" | "ne" | "gt" | "ge"
-                    | "lt" | "le" => call.args.len() != 1,
+                    | "lt" | "le" | "sub" | "div" | "mod" => call.args.len() != 1,
+                    "clamp" => call.args.len() != 2,
+                    "add" | "mul" => call.args.is_empty(),
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7507,7 +7509,7 @@ impl Engine {
                 | "str_ge"
                 | "str_lt"
                 | "str_le"
-        ) || Self::is_number_receiver_comparison_method(method)
+        ) || Self::is_number_receiver_value_chain_method(method)
     }
 
     // Producer continuations consume the actual result value
@@ -7793,11 +7795,13 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_generic_receiver_predicate(&call.method) {
+            let numeric_method = family == ReceiverFamily::String
+                && Self::is_number_receiver_value_chain_method(&call.method);
+            if Self::is_generic_receiver_predicate(&call.method) || numeric_method {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
-                    false,
+                    numeric_method,
                     ctx,
                     rule_label,
                 );
@@ -7923,59 +7927,8 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::{Arg, Expr};
-
-        let mut current = self.eval_expr(receiver, ctx, rule_label)?;
-
-        for (index, call) in calls.iter().enumerate() {
-            if Self::is_generic_receiver_predicate(&call.method)
-                || Self::is_number_receiver_comparison_method(&call.method)
-            {
-                return self.eval_selected_receiver_value_chain(
-                    current,
-                    &calls[index..],
-                    Self::is_number_receiver_comparison_method(&call.method),
-                    ctx,
-                    rule_label,
-                );
-            }
-            if !Self::is_number_receiver_value_chain_method(&call.method) {
-                return Ok(RuntimeValue::Undef);
-            }
-
-            let valid_arity = match call.method.as_str() {
-                "abs" | "floor" | "ceil" | "round" => call.args.is_empty(),
-                "sub" | "div" | "mod" => call.args.len() == 1,
-                "clamp" => call.args.len() == 2,
-                "add" | "mul" | "min" | "max" => !call.args.is_empty(),
-                _ => false,
-            };
-            if !valid_arity {
-                return Ok(RuntimeValue::Undef);
-            }
-
-            let helper_name = match Self::number_receiver_helper_name(&call.method) {
-                Some(name) => name,
-                None => return Ok(RuntimeValue::Undef),
-            };
-            let evaluated_call_args: Vec<RuntimeValue> = call
-                .args
-                .iter()
-                .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
-                .collect::<Result<Vec<_>, _>>()?;
-
-            let mut raw_args = Vec::with_capacity(call.args.len() + 1);
-            raw_args.push(Arg::Positional(Expr::Undef));
-            raw_args.extend(call.args.clone());
-            let mut evaluated = Vec::with_capacity(evaluated_call_args.len() + 1);
-            evaluated.push(current);
-            evaluated.extend(evaluated_call_args);
-
-            current =
-                self.call_helper_with_args(helper_name, &raw_args, &evaluated, ctx, rule_label)?;
-        }
-
-        Ok(current)
+        let current = self.eval_expr(receiver, ctx, rule_label)?;
+        self.eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label)
     }
 
     fn eval_block_value(

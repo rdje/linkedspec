@@ -3298,6 +3298,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Children: `.23.3.15.1`, `.23.3.15.2`, `.23.3.15.3`, `.23.3.15.4`, `.23.3.15.5`.
   Acceptance: Independently preserve scalar-numeric-v1 producers, strict domains, one-RHS preflight, once-only source/RHS/consumer order and numeric/null scalar boundaries, compatible defaults/generic/String/explicit-container bridges. Small changed-surface/direct checks/docs/commit per backend; full domain/context/portable admission23.4 separate.
 
+  Follow-up: Rust String-prefix numeric comparison dispatch is independently repaired/tested with arithmetic16.2; existing numeric producer/domain policy is preserved.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.1`
   Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary numeric comparison result continuations.
@@ -3452,10 +3454,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.1 - continue Perl scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust ordinary scalar arithmetic result continuations.
   Dependencies: .23.3.16.1.
   Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `1d77f481bbe2222effd36bb946438a2d41093b37`; Perl arithmetic/default-projection slice committed, brief0/tree clean.
+  Owned paths: Rust confirmed arithmetic result/shape dispatch gaps, native/restored/plan canonical/alias/strict-domain/shared/selector regression, scoped book/facts/task/live docs. Numeric adapters/free signatures/min-max overload/source/reducer policies stay unchanged.
+  Verification tier: `focused`
+  Focused checks: Producer-first native/restored/plan RED/GREEN and direct numeric comparison/aggregate/default fixtures, actual named number integration cases, offline compilation/rustfmt and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Remaining prefix seam: Initial shared numeric result dispatch/shape repair passes every shared field except String trim->add, still null. Public Engine result and eval_string_receiver_value_chain show String loop validates its own whitelist before numeric result handoff; add focused arithmetic/comparison/invalid prefix controls and hand existing Number methods to shared dispatch before evaluating consumer operands. This also owns the same existing numeric-comparison prefix gap, without changing its producer/domain policy.
+
+  Completion: Classify existing Number methods as scalar-result producers and use shared actual-value dispatch for Number chains, removing duplicate Number-only evaluation. String prefixes hand existing Number methods to that dispatcher too. Extend common unambiguous arity preflight for unary/sub/div/mod/clamp/add/mul; min/max zero-extra Array and scalar variadic modes remain untouched.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent native/restored/plan canonical/word/symbol arithmetic producers, strict invalid/null/decimal controls, nested5!/SOC and numeric add/scalar-min selector controls pass before production. Shared RED stops ten literal arithmetic text/default/bridge flows, leaves SO/source9 and runs14 malformed effects. min/max text/variadic and selected/call/count/reducer sources already work; preserve them.
+  - [x] ROOT CAUSE (WHY + WHERE): engine.rs Number loop only accepts Number links, while scalar-result classification misses most arithmetic methods. Common fluent preflight lacks their shape checks. Initial shared dispatch repair fixes every field except String trim->add; String loop checks its whitelist before numeric handoff. Direct prefix RED independently returns[null,null,null] versus[5!,1!,8], covering existing numeric-comparison prefix too.
+  - [x] FIX: Shared Number-method scalar classification and Number-chain dispatch, scoped String-family numeric handoff before consumer-argument evaluation, and reference-matching unambiguous shape guards. Remove obsolete duplicate Number-loop helper/argument construction. Numeric adapters/free signatures/parser/schema/min-max/reducer/deferred vocabulary stay unchanged; no old expectations require normalization.
+  - [x] ADDRESSED (verified): Native/restored/plan shared twelve/variadic/domain/source/zero/default/copy/Array/Hash/bridge/selector/generic/comparison cases pass. Valid/invalid-source SOC, ASO overloads and fourteen malformed no-effects hold. Extra String prefix arithmetic/comparison/invalid-default controls now give5!/1!/8; existing source captures and numeric kinds remain.
+  - [x] NO REGRESSION: Eleven Rust tests across four new numeric producer/shared/selector/prefix cases, direct comparison/aggregate/default fixtures and two actual named number integration cases pass with offline compilation/rustfmt. No whole suite, standalone emitted Rust, numeric domain/free signature or full portable admission claim.
+  - [x] LOCKSTEP: New retained shared-reference/prefix consumer, frozen contract progress and comparison follow-up, current catalog/guide examples and canonical Number fact/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart16.3 independent producer/continuation assessment next; Perl host-staging repair remains separately evidenced.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.2 - continue Rust scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.3`
   Status: `pending`
@@ -3572,7 +3593,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` | `pending` | Independently assess and implement Rust scalar arithmetic result continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` | `pending` | Independently assess and implement Dart scalar arithmetic result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

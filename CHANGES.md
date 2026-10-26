@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.16.2 — continue Rust scalar arithmetic results
+
+Rust twelve short arithmetic methods now use shared scalar actual-value continuation; String prefixes hand Number methods to that dispatcher before their String whitelist. Common unambiguous arity guards reject malformed effects while preserving min/max modes, strict numeric adapters/free signatures and source snapshots. Eleven focused native/restored/plan producer/shared/selector/prefix/direct/named integration tests and compilation/rustfmt pass after result/shape/prefix RED. Shared defaults/copy/Array/Hash bridges and SOC/ASO hold; book/facts/task/live align. Dart16.3 next, full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.16.1 — continue Perl scalar arithmetic results
 
 Perl twelve short arithmetic methods now yield scalar_result and String prefixes reuse Number-method dispatch, preserving strict domains, unambiguous arities and scalar/Array min-max policies. Native/fresh twelve/variadic/source/zero/default/copy/bridge/selector/SOC controls pass after compile RED. A pre-existing default Hash projection successor bug is repaired through the established emitted-expression compatibility bridge, with dedicated regression and unchanged authored syntax rejection.29 focused arithmetic/projection/default assertions, actual AST/Phase0 named cases, projection smoke and syntax pass. Book/facts/live align; Rust16.2 next, full admission separate.

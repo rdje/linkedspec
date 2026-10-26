@@ -20686,7 +20686,7 @@ _SPEC-FORMAT-TERSE.11.4 - nested mixed value-path assignment across the current 
 ### terse-number-receiver-value-chains
 _Number methods and ordinary numeric result continuations_
 - **answers:** how do number receiver-dot value chains work | does score.abs().ceil().add work | does 5.mod(2) work | does 3.5.floor().add(1) work | are numeric comparison receiver methods terminal | can number terminal methods continue | are declare methods terse receiver methods | is declare a number receiver method | which task follows SPEC-FORMAT-TERSE.2.3.5.4 | can scalar arithmetic results feed text methods | which task owns ordinary numeric arithmetic result flow
-- **date:** 2026-10-26 · **status:** comparison rollout checked; Perl arithmetic result extension implemented
+- **date:** 2026-10-26 · **status:** comparison checked; Perl/Rust arithmetic result extensions implemented
 - **evidence:** `scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl`
 - **source:** [`docs/knowledge/terse-number-receiver-value-chains.md`](docs/knowledge/terse-number-receiver-value-chains.md)

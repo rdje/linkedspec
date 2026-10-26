@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
+Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
 
 ## Latest Completed Slice
 
-Perl twelve short arithmetic methods now yield scalar_result and String prefixes reuse Number-method dispatch, preserving strict domains, unambiguous arities and scalar/Array min-max policies. Native/fresh twelve/variadic/source/zero/default/copy/bridge/selector/SOC controls pass after compile RED. A pre-existing default Hash projection successor bug is repaired through the established emitted-expression compatibility bridge, with dedicated regression and unchanged authored syntax rejection.29 focused arithmetic/projection/default assertions, actual AST/Phase0 named cases, projection smoke and syntax pass. Book/facts/live align; Rust16.2 next, full admission separate.
+Rust twelve short arithmetic methods now use shared scalar actual-value continuation; String prefixes hand Number methods to that dispatcher before their String whitelist. Common unambiguous arity guards reject malformed effects while preserving min/max modes, strict numeric adapters/free signatures and source snapshots. Eleven focused native/restored/plan producer/shared/selector/prefix/direct/named integration tests and compilation/rustfmt pass after result/shape/prefix RED. Shared defaults/copy/Array/Hash bridges and SOC/ASO hold; book/facts/task/live align. Dart16.3 next, full admission separate.
 
 ## Next Action
 
-Independently assess Rust scalar-numeric-v1 arithmetic producers/aliases and twelve short Number result/shape/default/bridge/overload transitions under16.2. Reuse scalar_arithmetic_result_receiver_values after producer confirmation; preserve Number/null kinds, strict domains/free signatures/min-max modes/source snapshots and existing reducer95 exceptions. Native/restored/plan small direct checks, actual affected calibrations, compile/rustfmt/docs/commit. Perl-specific host-staging projection repair is tracked separately in default_hash_projection; do not infer other backend failure. Then Dart/Julia/Lua16.3-.5; no full gate/matrix now.
+Independently assess Dart scalar-numeric-v1 twelve-method arithmetic producers/aliases and result/shape/default/bridge/overload flow under16.3, using scalar_arithmetic_result_receiver_values after producer confirmation. Preserve Number/null kinds, strict domains/free signatures/min-max modes and captured source/argument/default snapshots. Reuse actual dispatcher; fix only confirmed scalar/arity/flow gaps, native/restored/plan and small direct tests/format/fatal analysis/docs/commit. Then Julia/Lua16.4-.5; no full suite/matrix now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.5` — Lua numeric comparison result flow implemented on both available hosts; all five bounded implementations targeted-checked, scalar arithmetic result assessment next.
@@ -29,7 +30,6 @@ Independently assess Rust scalar-numeric-v1 arithmetic producers/aliases and twe
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.1` — Rust cached aggregate sources are targeted-checked with existing fallbacks preserved; Perl has_key key effects is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.14` — Aggregate operand/null-key contract is frozen; Rust cached-source repair is next, followed by Perl key effects and bounded null-key backends.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.13.5` — Five bounded contains result/required-needle implementations are targeted-checked; P1 null/equality and sibling snapshot assessment is next.
 
 ## History
 
