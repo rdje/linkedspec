@@ -425,7 +425,7 @@ dispatch rule.
 
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`
-- **Returns**: the documented return value of the final helper in the chain.
+- **Returns**: the documented return value of the final helper. After `split`, ordinary Perl/Rust/Dart/Julia `first`/`last` select an entry whose actual kind can feed a compatible scalar/container method; Lua confirmation remains separate.
 - **Behavior**: A compatible string receiver feeds into the first pure string helper, and each helper's return
   value feeds the next compatible helper. A bare receiver such as `raw.trim()` reads the working value `raw`.
   String literals may
@@ -657,16 +657,16 @@ dispatch rule.
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
-- **Returns**: the documented return value of the final helper in the chain.
+- **Returns**: the documented return value of the final helper. `first`/`last` preserve the selected entry's kind; their ordinary compatible continuations are implemented on Perl, Rust, Dart and Julia, with Lua checked separately.
 - **Behavior**: A compatible array receiver feeds into verified array helper chains. Pure array links compose
-  through later pure links and terminals, for example `items.sorted().drop_front(2).first()` is equivalent to
+  through later pure links and selection, for example `items.sorted().drop_front(2).first()` is equivalent to
   `first(drop_front(sorted(items), 2))`. Pipeline links compose through pipeline/terminal continuations that are
   locked by the runtime, for example `items.uniq().join_values(",")` and
   `phrases.split_each("-").filter_match(/^aa$/).count()`.
 - **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
-- **Allowed terminal links**: `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
+- **Allowed terminal links**: `count`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
   `join_values`, `sum`, `avg`, `median`, `range`, `min`, and `max`. Receiver-dot
   `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
   `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
@@ -1905,7 +1905,7 @@ Receiver-dot methods are available for the value families that have a typed rece
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
   links include `count`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
-  `sum`, `avg`, `median`, `range`, `min`, and `max`. `first` and `last` select an entry. Ordinary Perl, Rust and Dart selected strings/numbers can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on ordinary Perl, Rust and Dart: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Julia/Lua support is checked separately; full fluent-family admission and known remaining Rust scalar-null helper repairs61.1/.61.2 stay open.
+  `sum`, `avg`, `median`, `range`, `min`, and `max`. `first` and `last` select an entry. Ordinary Perl, Rust, Dart and Julia selected strings/numbers can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on ordinary Perl, Rust, Dart and Julia: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua support is checked separately; full fluent-family admission and known remaining Rust scalar-null helper repairs61.1/.61.2 stay open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and

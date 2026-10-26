@@ -103,3 +103,9 @@ public native/restored/generated-plan fixture confirms scalar/container/copy
 journeys, repeated extraction, empty values, snapshots and once-only effects.
 The added early guard rejects extra first/last method arguments before effects.
 Selected-file analysis passes; Julia/Lua and full admission remain open.
+
+Julia `.23.3.1.4` confirms its existing per-value selected scalar/container/copy
+flow on native/generated-plan/fresh-emitted routes. An early first/last arity
+guard rejects extra arguments before effects. Focused controls cover dynamic
+function copies, repeated transitions, snapshots, empty values and effects;
+Lua/full admission and the separately scheduled copy-arity risk remain open.

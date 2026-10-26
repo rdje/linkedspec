@@ -2,6 +2,8 @@
 id: julia-runtime-array-helpers
 title: Julia array helpers and standalone transform writeback
 answers:
+  - can Julia first and last continue through selected scalar and container methods
+  - which task owns Julia receiver copy arity validation
   - do Julia standalone split_each filter_match and uniq update arrays
   - does Julia runtime support array receiver chains
   - does Julia runtime support sorted drop_front first
@@ -13,11 +15,11 @@ answers:
   - does Julia runtime support split array target replacement
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
-date: 2026-10-25
-status: transforms5.3.3 implemented; broad checks deferred
+date: 2026-10-26
+status: selected values confirmed; extraction arity guarded; broad checks deferred
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/array_transform_writeback_test.jl\")'"
+evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3; selected-value23.3.1.4."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/selected_value_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -60,59 +62,8 @@ Passing bounded examples does not establish all count arithmetic:
 array/string slices at a large valid count. Julia .2.10 owns that repair; this is
 separate from scalar numeric magnitude preservation under .2.9.
 
-Exact selected-suite replay (585 assertions plus one selection equality):
+Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-```bash
-bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_READING17'
-using LinkedSpecJulia, JSON3, Test
-const REPO_ROOT = pwd()
-const CORPUS_ROOT = joinpath(REPO_ROOT, "tests", "corpus")
-const selected = Set(["Neutral scalar-to-text contract", "Neutral scalar numeric contract", "Runtime string scalar and numeric helpers", "Runtime array helpers and mutations", "Runtime hash helpers and mutations", "Runtime hash and array tree traversal callbacks"])
-const seen = Set{String}()
-for expression in Meta.parseall(read("julia/test/runtests.jl", String)).args
-    expression isa Expr || continue
-    if expression.head == :function
-        Core.eval(Main, expression)
-    elseif expression.head == :macrocall && expression.args[1] == Symbol("@testset") && expression.args[3] in selected
-        Core.eval(Main, expression)
-        push!(seen, expression.args[3])
-    end
-end
-@test seen == selected
-include("julia/test/uniform_binding_contract_test.jl")
-include("julia/test/map_leaves_mutation_contract_test.jl")
-JULIA_READING17
-bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py
-bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
-```
+23.3.1.4 confirms existing per-value first/last scalar/container/copy dispatch and adds a pre-effect extraction arity guard. Native/generated-plan/fresh-emitted focused controls cover function/computed sources, repeated transitions, snapshots, empty values, min/max and once-only effects; direct transform checks pass. Full fluent admission and other helper boundaries remain open.
 
-## September 11 complete aggregate consumers and .1.43 replay
-
-Array2570–2663 and harray2665–2733 pass two and one aggregate assertions. They
-preserve copied pipelines, explicit flatten splicing, empty split fields and
-updated array-end mutation results. Harray statement set_key mutates its binding;
-value and receiver set_key return copies; explicit index assignment publishes
-an updated root. These intentionally different outcomes are checked together.
-
-The exact main reading range2465–3964 is1500 lines/47116 bytes. Sixteen complete
-testsets2345–3938 pass138 assertions: string14, array2, harray1, pure1, position1,
-zero-width1, marker1, captures2, marks3, controls6, functions9, tree2, cursor17,
-diagnostics7, native trace43 and frontend trace28. Fixtures named exhaustive are
-fixed governed examples, not exhaustive tests of all input values or magnitudes.
-Spec-parser3940–4119 is only read through3964 and excluded from this replay.
-
-The in-memory harness preserves source filename and line numbers, skips separate
-consumer includes and earlier main testsets, and uses existing helpers only.
-All temporary fixtures follow repository-routed storage. No complete component
-gate, other runtime execution or repair closure is claimed.
-
-```bash
-bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/runtests.jl"; keep=true); source[12:136].="\n"; source[471:2343].="\n"; include_string(Main, join(source[1:3938]), joinpath(pwd(),"julia/test/runtests.jl"))'
-bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py
-bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
-bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
-bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
-```
-
-Neutral scalar55 cases/18 helpers, binding11/7/6/8, typed14 complete/0 pending
-and231 drift controls, and logical8 complete/0 pending/26 drift controls pass.
+A source-only copy-arity risk is owned by TYPE-REFERENCE-BOOK.1.2.23.3.2: the copy value-call branch does not inspect extra arguments. Its public reproduction/repair is scheduled after the native journey rollout and P1 Rust scalar work; no runtime defect result is claimed yet.

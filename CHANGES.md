@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.4 — guard Julia extraction arity
+
+Confirm Julia’s existing selected scalar/container/copy flow and add only the missing pre-effect first/last arity guard. The expanded fixture is RED for ignored extra arguments; package compilation and native/generated-plan/fresh-emitted selected-value plus direct transform checks pass after repair. Cover dynamic function copies, repeated transitions, exact recipes, snapshots, empty values, min/max and effects without a full suite. Align current string/array reference classifications, contain historical Julia replay prose with an exact Git pointer, and update facts/map/task/live handoff. Lua23.3.1.5 is next; copy-arity source risk23.3.2 and complete admission stay open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.3 — guard Dart extraction arity
 
 Confirm Dart’s existing dynamic selected-value transitions through public native/restored/generated-plan execution. Fix the independently reproduced guard gap: first/last extra method arguments now reject before receiver/operand effects. The small selected-value and direct array-transform test files pass, and changed-file analysis/format/book/fast continuity checks pass. Dynamic function copies, repeated transitions, snapshots, empty values, min/max shape and exact public copy recipes are covered without a full package suite. Book/contract/Dart-array facts/map/live handoff agree; stale Julia transform wording is corrected and Julia23.3.1.4 is next.

@@ -940,15 +940,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.1 - define selected-value receiver continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
-  Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
+  Status: `active` / bounded selected-value rollout; full gap matrix remains open
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
   Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
-  Status: `active` / Perl/Rust/Dart implemented; Julia/Lua confirmations/repairs next
+  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua confirmation/repair next
   Goal: Implement the frozen first/last selected-value continuation contract in ordinary native/generated actions, one bounded backend leaf per commit.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Children: `.23.3.1.1` Perl, `.23.3.1.2` Rust, `.23.3.1.3` Dart, `.23.3.1.4` Julia, `.23.3.1.5` Lua.
@@ -1070,11 +1070,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3 - guard Dart selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `bdeae4121aaad3659f5c117e08f66e1dc3cdb931`
   Goal: Confirm/implement the same selected-value transition on Julia via public native/generated-plan/emitted execution.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3`
-  Planned tier: `focused`; package compile and small targeted regression only.
-  Claim verification: none: No measurement yet.
+  Owned paths: julia/src/runtime/Interpreter.jl if needed; julia/test/selected_value_receivers_test.jl and runtests registration; current book/Julia/array facts/map and TYPE/live continuity.
+  Verification tier: `focused`
+  Focused checks: Package compilation and one small native/generated-plan/fresh-emitted selected-value regression; direct compatibility check only when needed; book and fast continuity/history checks. No full Julia suite or historical selected-suite replay.
+  Canonical trigger: None for bounded implementation/confirmation under director feature-first phase; full23.4 admission remains deferred.
+  Claim verification: none: Deterministic implementation/confirmation and targeted regression, no quantified corpus/exhaustive/portable admission measurement.
+  Acceptance: Probe frozen examples through public parse/compile/runtime APIs before classifying a gap. Preserve actual selected kinds, copy, repeated transitions, empty/null/arity boundaries, snapshots and once-only effects. Reuse existing correct behavior. Contain redundant historical Julia fact replay chronology with an exact prechange Git pointer; never replay old captures as startup commands.
+
+  Reproduce/impact: Frozen examples PASS on native/generated-plan/fresh-emitted routes before production edits. Expanded valid transitions also agree, but an extra-argument first returns a and runs receiver/operand effects twice instead of null with zero effects; the same vector is RED on all three routes.
+  Root cause: _evaluate_runtime_fluent_chain! evaluates the receiver before iterating calls, and the array helper ignores the extra extraction operand after evaluating it. Validate first/last call shape before source evaluation while preserving the already correct per-value loop.
+
+  Completion: Preserve Julia's existing per-value fluent loop; validate first/last zero-method-argument shapes before evaluating the receiver. Register one small selected-value fixture in the normal Julia runner, with native/generated-plan/fresh-emitted routes and direct transform compatibility.
+  Focused result: Project-local package precompile succeeds; selected_value_receivers_test.jl and array_transform_writeback_test.jl PASS on final production after actual arity RED. Book and fast continuity/history checks pass; no full Julia suite or historical replay.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Frozen journeys PASS before source changes. The expanded public fixture is RED on all three routes for extra first arguments, producing a and two effects instead of null and zero effects.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — _evaluate_runtime_fluent_chain! evaluates the source before dispatch and the helper ignores extra extraction values; the dynamic selected-value loop itself is already correct.
+  - [x] **FIX** — Validate first/last shapes before source/operand evaluation and preserve ordinary dynamic dispatch. No new type, schema or callback/mutation admission.
+  - [x] **ADDRESSED (verified)** — Package compilation and focused native/generated-plan/fresh-emitted selected-value fixture PASS, with direct array-transform checks.
+  - [x] **NO REGRESSION** — Dynamic function copies, repeated transitions, exact copy recipes, source/value ordering, snapshots, empty values, min/max shape and invalid-arity suppression pass. No broad replay/suite.
+  - [x] **LOCKSTEP** — Current four-backend recipes, remaining terminal classifications in string/array reference, partial contract, contained Julia/array facts/map and task/live handoff agree. Lua23.3.1.5 is next; full admission remains open.
+  Containment: Preserve exact older Julia replay commands/ranges/totals at prechange Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931; retain current structural/boundary facts and point reverify to the small fixture. Copy-arity source risk is owned/scheduled under23.3.2 without a runtime conclusion or pivot.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4 - guard Julia selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5`
   Status: `pending`
@@ -1082,6 +1102,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
   Planned tier: `focused`; compile and small targeted regression on supported interpreters only.
   Claim verification: none: No measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
+  Status: `pending` / P2 receiver copy arity intake
+  Planned tier: `focused`; public reproduction and bounded per-backend implementation children before writes.
+  Goal: Confirm and repair extra-argument copy receiver shapes without changing valid copy/value-kind semantics.
+  Intake: Julia's _evaluate_runtime_fluent_value_call! returns _runtime_copy(value) for copy without inspecting call.args. This is source-observed risk; no runtime conclusion is yet claimed. Similar dispatchers must be assessed individually, not assumed identical.
+  Reproduce at activation: effects=0; out={effects=num_add(effects,1); [["a"]]}.first().copy({effects=num_add(effects,1); 1}); return([out,effects]). Receiver copy takes no extra operands; compare expected invalid-shape rejection/effect suppression against its actual public contract and observed output before repair.
+  Schedule: After selected-value23.3.1 native rollout and P1 Rust scalar61.1/.61.2 repairs, before complete fluent admission. Split per-backend implementation leaves only from actual public reproduction. Do not dirty-pivot from current Julia23.3.1.4.
+  Claim verification: none: Source-only risk intake with a distinguishing proposed probe; no measured runtime defect or parity claim.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1160,11 +1189,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl/Rust/Dart selected-value implementations are targeted-checked; Julia23.3.1.4 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl/Rust/Dart/Julia selected-value implementations are targeted-checked; Lua23.3.1.5 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` | `pending` | Confirm/implement selected-value transitions on Julia; bounded Perl/Rust/Dart subsets are implemented. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` | `pending` | Confirm/implement selected-value transitions on Lua; bounded Perl/Rust/Dart/Julia subsets are implemented. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

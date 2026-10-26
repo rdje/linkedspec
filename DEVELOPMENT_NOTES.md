@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.4 — preserve Julia value dispatch
+
+Julia’s fluent loop already dispatches on each prior result. Its source evaluation precedes helper processing, however, so extra first/last operands were evaluated and ignored. Prevalidate these zero-argument shapes before the receiver, preserving the dynamic loop and existing helper semantics. The public native/generated-plan/fresh-emitted fixture and direct transform checks pass after actual arity RED. Current reference tables now distinguish selection from terminal predicates. Exact historical Julia replay chronology remains at prechange Git; current reverify is small. A separate source-observed copy-arity risk is scheduled after the native rollout/P1 scalar work, without a runtime defect claim or dirty pivot.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.3 — retain dynamic Dart flow
 
 Dart already passes each fluent result to _evaluateFluentCall, so the frozen scalar/container journeys need no dispatch rewrite. The extra-argument extraction control instead exposes a missing pre-effect shape guard: first ignores an evaluated extra operand after receiver effects. Guard first/last at ActionFluentChainExpr entry, before either can run. The expanded fixture uses public parseSpecWithStagedUserFunctionDefinitions for function declarations; its earlier rule-only parser failure is setup, not a language defect. Native/restored/generated-plan and direct transform checks pass with changed-file analysis; keep Julia/Lua and full fluent admission open.
