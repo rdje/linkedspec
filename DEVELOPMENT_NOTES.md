@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.16.1 — continue Perl scalar arithmetic results
+
+Perl twelve short arithmetic methods now yield scalar_result and String prefixes reuse Number-method dispatch, preserving strict domains, unambiguous arities and scalar/Array min-max policies. Native/fresh twelve/variadic/source/zero/default/copy/bridge/selector/SOC controls pass after compile RED. A pre-existing default Hash projection successor bug is repaired through the established emitted-expression compatibility bridge, with dedicated regression and unchanged authored syntax rejection.29 focused arithmetic/projection/default assertions, actual AST/Phase0 named cases, projection smoke and syntax pass. Book/facts/live align; Rust16.2 next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.16 — freeze scalar arithmetic result continuations
 
 Frozen scalar-arithmetic-results.md extends twelve existing short Number methods into compatible scalar/text/generic/explicit-container continuations under five independent backend children. Public Perl native/fresh probes preserve correct raw/nested/selected/overload/invalid/arity/SOC controls and expose plain Number/String-prefix result handoff gaps. Prior Number-only scope is intentional; numeric domains/free/min-max/reducer/deferred policies stay unchanged. Two missed comparison-terminal overview paragraphs are corrected and tracked. Syntax/book/facts/task/live align; Perl16.1 next, full admission separate.

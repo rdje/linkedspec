@@ -14,7 +14,7 @@ answers:
   - "can scalar arithmetic results feed text methods"
   - "which task owns ordinary numeric arithmetic result flow"
 date: 2026-10-26
-status: comparison rollout checked; scalar arithmetic result extension frozen
+status: comparison rollout checked; Perl arithmetic result extension implemented
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl"
@@ -35,17 +35,17 @@ admission remain separate. Complete prior structural/proof detail and July1
 historical pointer are preserved in this file at Git
 3bfda7204a4c6b19d8d9f5a6145399afff8d6168.
 
-Arithmetic16 freezes compatible ordinary result continuations as a new feature;
-prior Number-only scope was intentional. Public Perl free/nested twelve numeric
-results/texts, selected/call/count/reducer sources and min/max[3,4,ASO,5,4] already
-work. Plain arithmetic-to-text/bridge/default/effect chains retain DSL and fail
-handler compile; String-prefix arithmetic leaves raw trim. WHY: MethodLowering
-_number_receiver_value_chain_return_family yields number; Number loop stops at
-non-Number links, String numeric handoff only includes comparisons. Nested
-5!/SOC/null and malformed abs/add/clamp no-effects already work. Freeze:
-scalar-arithmetic-results.md; children23.3.16.1-.5, Perl first. No new numeric
-domain/free shape/min-max overload/Array reducer95/deferred vocabulary policy.
-Canonical num_* method names are outside this short-method result scope.
+Arithmetic16 extends prior Number-only scope. Perl16.1 now classifies twelve
+methods scalar_result and hands String-prefix Number methods to shared dispatch.
+Native/fresh twelve/variadic/strict-domain/source/zero/default/bridge/selector
+checks pass after raw-DSL compile RED, preserving SOC/once-only, ASO overloads,
+copy and14 malformed no-effects. Hash default->Array view->successor additionally
+needed the existing compatibility bridge for emitted do expressions; see
+[[rust-coalesce-evaluation-drift]].29 current direct assertions, actual AST/
+Phase0 named cases and syntax pass; source/expected/tests retain the controls.
+Rust16.2 then Dart/Julia/Lua remain independent; no numeric/free/min-max/Array
+reducer95/deferred policy expansion. Canonical num_* method names stay outside
+this short-method scope.
 
 Two stale comparison-terminal overview paragraphs were corrected at16 freeze.
 Block/user-function values dispatch on actual returned kind. Historical next

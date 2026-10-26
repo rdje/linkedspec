@@ -11,97 +11,44 @@ answers:
   - "does coalesce_nonempty skip later assignment effects"
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
+  - "why does a Hash default sorted_values first uppercase return null"
+  - "how do Array successors consume emitted default guard expressions"
 date: 2026-10-26
-status: bounded default rollout checked; full admission open
-tags: [rust, perl, helpers, evaluation, startup-reading]
-evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1/.1.2 native/fresh/direct checks; backend/broad admission open."
+status: bounded defaults checked; Perl Hash projection successors repaired
+tags: [rust, perl, helpers, defaults, projection, evaluation, startup-reading]
+evidence: "Defaults62.1/62.2/TYPE23.3.6; TYPE23.3.16.1 public Get/substitution/dump/native/fresh default_hash_projection regression."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test default_selected_receivers --test joined_string_receivers --test coalesce_receiver_values"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_literal_operand_contract.t t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_hash_projection_contract.t t/default_selected_receiver_contract.t t/default_literal_operand_contract.t"
 ---
 
-Current62.1/62.2.1-.3: Rust eval_coalesce_args/coalesce_accepts evaluates only
-needed operands, preserving actual selected kinds. Native/restored/generated-plan
-checks pass. Perl validates every operand and compares a scalar copy, preserving
-numeric validity; native/fresh exhaustion/effect/index checks pass after RED.
-See [[action-regex-operands-and-runtime-kinds]]. Compatibility observations do not
-broaden the scalar signature; broad62.3/.62.4 remains open.
+Rust62.1/62.2 evaluates only needed operands with actual selected kinds;
+coalesce retains defined empty text. Perl validates operands, compares a scalar
+copy to preserve numeric kinds, and returns undef after nonempty exhaustion.
+TYPE23.3.6 binds default results once and guards container consumers by actual
+kind. Typed complete operands avoid reparsing emitted fat arrows; authored
+retired Hash syntax still rejects. Broader62.3/.62.4/domain admission stays open.
+[[action-regex-operands-and-runtime-kinds]] retains shared value boundaries.
 
-# Historical September7 default-selection findings
+TYPE23.3.16.1 exposes a pre-existing Hash default->sorted_values->first->uppercase
+bug: numeric-root, canonical-call-root and direct undef default all return null/
+unsupported-helper:first, while nested equivalent returns A. WHY: MethodLowering
+append_array_chain_call builds DSL calls over emitted default-guard do code;
+later typed lowering reparses that host expression. Finish Array calls through
+the existing compatibility bridge when source is do, preserving dedicated
+sorted/reversed and authored syntax checks. Native/fresh projection controls now
+cover first/last/count/join/contains/index, sum/transform/reverse/take, multiple
+root families, numeric index kinds and SDC/once-only/source snapshots. Arithmetic,
+selected/literal default direct checks pass too; full admission remains separate.
 
-At reading baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`, Rust's ordinary
-call path eagerly collects operand values. Its lazy selector includes if/switch/while
-and branch helpers, but omits both coalesce families. The `coalesce` helper additionally
-requires `is_defined() && to_str() != ""`, so it skips defined empty text. Perl lowering
-recursively nests ternaries: coalesce checks definedness; coalesce_nonempty adds `ne ''`.
-Each evaluates only the needed prefix.
-
-The public helper catalog explicitly promises first-defined, left-to-right short-circuit
-coalesce selection. Its signature is scalar arguments. Aggregate results below are bounded
-reference observations; repair `.62.1` must reconcile that boundary explicitly before
-claiming normative aggregate admission.
-
-## Historical September7 paired observations
-
-Each body below uses this scaffold and input `xhello`:
-
-```text
-Top::
- I { BODY }
- /x/ -> Done
-Done:
- /[a-z]+/
-```
-
-The value body is:
-
-```text
-return([coalesce(undef, "fallback"), coalesce("", "fallback"),
-        coalesce([], "fallback"), coalesce({}, "fallback"),
-        coalesce(0, "fallback"), coalesce(false, "fallback"),
-        coalesce_nonempty("", "fallback")])
-```
-
-Rust returns `["fallback","fallback","fallback","fallback",0,false,"fallback"]`.
-Perl returns `["fallback","",[],{},0,false,"fallback"]`.
-
-The four effect bodies use `H` equal to either `coalesce` or `coalesce_nonempty`:
-
-```text
-audit = "unset"; result = H("first", audit = "late"); return([result, audit])
-audit = "unset"; result = H(undef, audit = "selected", audit = "late"); return([result, audit])
-```
-
-For both helpers Rust returns `["first","late"]` then `["selected","late"]`;
-Perl returns `["first","unset"]` then `["selected","selected"]`.
-Historical channels/descriptors and inspect-only emitted captures are exact at
-Git949790b510f8ad29b744730ac379a8952d987d9f for this path. The original observer's
-boolean correction is [[perl-typed-error-json-observation-boundary]]; no replay
-or new emitted-route admission is inferred here.
-
-## Current selected-result findings
-
-TYPE23.2.5 probes distinguish stopped consumers from nested A-B/X:Y.
-23.3.6.1.1 adds once-bound default_result and actual-kind container guards.
-23.3.6.1.2 builds lazy selection from complete typed operands, avoiding host
-fat-arrow reparsing. Use bare_scalar_read for these operands; generic value-only
-argument reconstruction still contains authored bindings/calls. Native/fresh and
-direct compatibility checks pass after RED: lazy order, kinds, snapshots and
-retired authored syntax remain intact. Rust23.3.6.2 additionally hands direct
-String defaults to eval_selected_receiver_value_chain with actual-kind scalar
-guards; native/restored/plan and direct checks pass after RED. Remaining backend/
-domain admission stays open. Dart: [[dart-runtime-array-helpers]]; Julia: [[julia-runtime-array-helpers]]; Lua: [[lua-runtime-array-transform-pipelines]].
-Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
-
-Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.
-
-## Retained historical provenance
-
-Exact September7 CLI identity, scratch manifest (40 files/158,215 bytes), file
-hash table and original commands remain byte-recoverable at Git
-04c9d093fdeded96771cd803de3eba3fb3fb7703 for this path. Those historical capture
-commands are not current startup/feature commands; use the focused reverify above.
-
-Current repair ownership is SESSION-STARTUP-READING.62 in its indexed task tree.
-The October26 feature-first phase selects bounded implementations now; broader
-reading/policy/admission stays separately owned.
+Historical September7 mismatches were eager Rust coalesce evaluation, skipped
+defined empty text, and aggregate observations beyond the scalar signature.
+Historical controls distinguished empty-text/aggregate fallback behavior;
+current bounded repair does not publish a universal aggregate-domain policy.
+Full historical bodies/results, named-test/observer qualifications and exact
+capture manifests/producer pointers are preserved in this file at Git
+846a39094d1f0f1972169fc089098df43aad47d2. They are not current replay instructions;
+use focused reverify above. Current original repair ownership is
+SESSION-STARTUP-READING62, with selected-result scope TYPE23.3.6 and the direct
+projection follow-up16.1. Compatibility observations do not close broader
+signature/context/portable admission.

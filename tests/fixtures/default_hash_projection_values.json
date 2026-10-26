@@ -1,0 +1,33 @@
+{
+  "first": "A",
+  "last": "B",
+  "count": 3,
+  "joined": "A,B",
+  "present": "1!",
+  "position": 2,
+  "numeric": "A",
+  "call": "A",
+  "array": "A",
+  "string": "A",
+  "comparison": "A",
+  "nested": "A",
+  "slots": [
+    "zero",
+    "updated"
+  ],
+  "number": 1,
+  "effected": "a!",
+  "order": "SDC",
+  "calls": 1,
+  "fallback": {
+    "z": "z"
+  },
+  "snapshot": {
+    "a": "a",
+    "b": "b"
+  },
+  "sum": 4,
+  "upper": "A,B",
+  "reversed": 2,
+  "taken": "A"
+}

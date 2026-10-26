@@ -62,3 +62,23 @@ Two older numeric overview paragraphs still called comparisons terminal after
 15.1-.5. This assessment corrects the doc defect to actual numeric result flow;
 no implementation change is required for that correction. Arithmetic targets
 above remain planned until each bounded implementation is targeted-checked.
+
+## Bounded Perl implementation
+
+23.3.16.1 returns scalar_result for twelve arithmetic methods and hands Number
+methods from String prefixes to shared dispatch. Native/fresh shared and numeric
+selector controls pass twelve/variadic methods, strict domains, all source
+families, zero retention, defaults/copy/actual Array/Hash, bridges/scalar guards,
+SOC/once-only, ASO overloads and fourteen malformed no-effects after compile RED.
+
+Explicit Hash default->sorted_values->first->uppercase exposed an older staging
+defect even on direct undef defaults. Public lowering emits unsupported first
+when Array successors reparse an already emitted default guard do expression;
+nested form yields A. Array call finishing now uses the established compatibility
+bridge for do sources, preserving dedicated sort/reverse and authored validation.
+Retained direct projection RED/GREEN covers multiple roots, read/search/join/
+count/reducer/transform/selection successors, numeric selector and SDC snapshots.
+29 focused arithmetic/projection/selected/literal-default assertions, actual
+AST/Phase0 numeric named cases and syntax pass; authored retired fat-arrow Hash
+still rejects. Original default62/TYPE23.3.6 owns its broader admission; new Perl
+fixtures require23.4.1 registration. Rust16.2/full admission remain separate.

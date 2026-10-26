@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1351** facts · **10616** question keys.
+> **1351** facts · **10618** question keys.
 
 ## Questions → fact
 
@@ -3836,6 +3836,7 @@
 - "how do AND+ OR+ and bounded rule modes behave" -> [spec-rule-mode-semantics-map](docs/knowledge/spec-rule-mode-semantics-map.md) · 2026-07-08
 - "how do AST input frames authorize copying original compiler event source" -> [perl-original-event-input-grants](docs/knowledge/perl-original-event-input-grants.md) · 2026-10-10 · reverify: `bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2-review.py; current standalone PERL5LIB= prove -Iperl t/actionir_event_input_grants.t. Preserve original claim inputs at later compiler/document changes rather than refreshing historical captures.`
 - "how do ActionIR owners resolve their dependencies" -> [ownerdispatch-shared-seam](docs/knowledge/ownerdispatch-shared-seam.md) · 2026-09-21 · reverify: `grep -l 'OwnerDispatch' perl/LinkedSpec/*.pm perl/LinkedSpec/ActionIR/*.pm | wc -l`
+- "how do Array successors consume emitted default guard expressions" -> [rust-coalesce-evaluation-drift](docs/knowledge/rust-coalesce-evaluation-drift.md) · 2026-10-26 · reverify: [2 entries](#rust-coalesce-evaluation-drift)
 - "how do Dart AST types serialize to JSON" -> [dart-frontend-ast-json-contract](docs/knowledge/dart-frontend-ast-json-contract.md) · 2026-07-09 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/spec_ast_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings`
 - "how do Dart aggregate results retain scalar boundaries after named array mutations" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-10-26 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart`
 - "how do Dart diagnostic sink failures propagate" -> [dart-diagnostic-output-events](docs/knowledge/dart-diagnostic-output-events.md) · 2026-09-19 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/diagnostic_output_contract_test[.]dart test/runtime_interpreter_test[.]dart test/trace_test.dart && cd .. && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnosticOutputSink' dart/lib dart/test/diagnostic_output_contract_test.dart`
@@ -10081,6 +10082,7 @@
 - "why does a Dart attached else inside a marker value branch get skipped" -> [dart-mixed-control-value-block-gap](docs/knowledge/dart-mixed-control-value-block-gap.md) · 2026-09-09 · reverify: `Run DART_MIXED_CONTROLS, the managed Dart invocation and DART_MIXED_CONTROLS_VERIFY below; assertions describe pre-repair output.`
 - "why does a Dart character class unexpectedly accept zero" -> [dart-regex-quantifier-literal-corruption](docs/knowledge/dart-regex-quantifier-literal-corruption.md) · 2026-09-09 · reverify: `Run DART_REGEX_LITERAL and DART_REGEX_LITERAL_VERIFY below; assertions pin raw host, normalized bridge and both parser carriers plus Perl source evidence.`
 - "why does a Dart semantic callback expose RuntimeSemanticObservationSinkFailure" -> [dart-semantic-observer-action-failure-wrapping](docs/knowledge/dart-semantic-observer-action-failure-wrapping.md) · 2026-09-09 · reverify: `Run DART_OBSERVER_ACTION, the managed Dart invocation and DART_OBSERVER_ACTION_VERIFY below; assertions describe pre-repair output.`
+- "why does a Hash default sorted_values first uppercase return null" -> [rust-coalesce-evaluation-drift](docs/knowledge/rust-coalesce-evaluation-drift.md) · 2026-10-26 · reverify: [2 entries](#rust-coalesce-evaluation-drift)
 - "why does a Perl CLI failure write trace to stdout" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "why does a Perl codeblock return 1 instead of true" -> [perl-codeblock-boolean-literal-kind-drift](docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md) · 2026-10-24 · reverify: `bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-kinds/publish.py; current: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t t/scalar_numeric_contract.t`
 - "why does a Perl direct-read probe disagree with the compiled parser after a selector rebinds its receiver" -> [perl-direct-read-selector-lifetime](docs/knowledge/perl-direct-read-selector-lifetime.md) · 2026-09-24 · reverify: `env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t`
@@ -18857,10 +18859,10 @@ _RGX and PGEN integration uses published contracts and observable build results 
 
 ### rust-coalesce-evaluation-drift
 _Lazy defaults and selected result kinds_
-- **answers:** can coalesce_nonempty Array or Hash results continue by actual kind | why does a valid coalesce_nonempty Hash literal emit hash_literal_use_colon | why does coalesce_nonempty make numeric array indices fail on Perl | does Perl coalesce_nonempty return undef when all operands are empty | does Rust coalesce preserve a defined empty string | does Rust coalesce short circuit operand evaluation | does coalesce_nonempty skip later assignment effects | what does the coalesce_short_circuits native test actually assert | why do Perl and Rust coalesce disagree on empty aggregates
-- **date:** 2026-10-26 · **status:** bounded default rollout checked; full admission open
-- **evidence:** `Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1/.1.2 native/fresh/direct checks; backend/broad admission open.`
-- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test default_selected_receivers --test joined_string_receivers --test coalesce_receiver_values` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_literal_operand_contract.t t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t`
+- **answers:** can coalesce_nonempty Array or Hash results continue by actual kind | why does a valid coalesce_nonempty Hash literal emit hash_literal_use_colon | why does coalesce_nonempty make numeric array indices fail on Perl | does Perl coalesce_nonempty return undef when all operands are empty | does Rust coalesce preserve a defined empty string | does Rust coalesce short circuit operand evaluation | does coalesce_nonempty skip later assignment effects | what does the coalesce_short_circuits native test actually assert | why do Perl and Rust coalesce disagree on empty aggregates | why does a Hash default sorted_values first uppercase return null | how do Array successors consume emitted default guard expressions
+- **date:** 2026-10-26 · **status:** bounded defaults checked; Perl Hash projection successors repaired
+- **evidence:** `Defaults62.1/62.2/TYPE23.3.6; TYPE23.3.16.1 public Get/substitution/dump/native/fresh default_hash_projection regression.`
+- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test default_selected_receivers --test joined_string_receivers --test coalesce_receiver_values` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_hash_projection_contract.t t/default_selected_receiver_contract.t t/default_literal_operand_contract.t`
 - **source:** [`docs/knowledge/rust-coalesce-evaluation-drift.md`](docs/knowledge/rust-coalesce-evaluation-drift.md)
 
 ### rust-core-compilation-boundaries
@@ -20684,7 +20686,7 @@ _SPEC-FORMAT-TERSE.11.4 - nested mixed value-path assignment across the current 
 ### terse-number-receiver-value-chains
 _Number methods and ordinary numeric result continuations_
 - **answers:** how do number receiver-dot value chains work | does score.abs().ceil().add work | does 5.mod(2) work | does 3.5.floor().add(1) work | are numeric comparison receiver methods terminal | can number terminal methods continue | are declare methods terse receiver methods | is declare a number receiver method | which task follows SPEC-FORMAT-TERSE.2.3.5.4 | can scalar arithmetic results feed text methods | which task owns ordinary numeric arithmetic result flow
-- **date:** 2026-10-26 · **status:** comparison rollout checked; scalar arithmetic result extension frozen
+- **date:** 2026-10-26 · **status:** comparison rollout checked; Perl arithmetic result extension implemented
 - **evidence:** `scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_scalar_arithmetic_results.pl`
 - **source:** [`docs/knowledge/terse-number-receiver-value-chains.md`](docs/knowledge/terse-number-receiver-value-chains.md)

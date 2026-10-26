@@ -1992,6 +1992,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Children: `.23.3.6.1`, `.23.3.6.2`, `.23.3.6.3`, `.23.3.6.4`, `.23.3.6.5`.
   Acceptance: Existing ordinary nonempty default selections preserve actual kinds, lazy required-prefix effects and scalar/container boundaries per default-selection-results.md. Assess each backend publicly; full domain/portable admission remains23.4.
 
+  Follow-up: TYPE23.3.16.1 fixes the confirmed existing Hash-default->Array-view->successor staging gap via the established compatibility bridge. Direct/default/call/numeric/Array/String roots and first/last/count/join/contains/index/reducer/transform/selection plus SDC/numeric-kind controls are targeted-checked; original62/full admission stay separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1`
   Status: `completed` / bounded Perl flow/literal repairs targeted-checked
   Goal: Repair Perl default result flow and valid literal operand lowering in separate slices.
@@ -3423,10 +3425,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Preserve scalar-numeric-v1 producer/input/arity rules and actual Number/null kinds, one-time source/operand/result snapshots, scalar/Array min/max overloads, current free/deferred boundaries and Array reducer defects. Independent backend small changed-surface/direct checks/docs/commit; full admission23.4 separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary scalar arithmetic result continuations.
   Dependencies: .23.2.16.
   Acceptance: Follow scalar-arithmetic-results.md for twelve existing short Number methods, preserving raw Number/null/strict domains/free signatures/overload policies. Public producer-first/native-generated RED/GREEN, source families, zero/invalid/default/generic/scalar boundaries, numeric->text->Array->String bridges, lazy actual-container defaults and captured SOC/arity controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `846a39094d1f0f1972169fc089098df43aad47d2`; scalar arithmetic result freeze committed, brief0/tree clean.
+  Owned paths: Perl ordinary arithmetic scalar-result classification/String-prefix handoff, retained shared/native/fresh twelve-method/source/kind/shape/default/bridge/overload regression and selector control, scoped book/facts/task/live docs. Numeric adapters/free signatures/scalar-Array min-max/deferred/reducer95 policies stay unchanged.
+  Verification tier: `focused`
+  Focused checks: Public native/fresh shared RED/GREEN plus direct numeric comparison and actual named arithmetic AST/Phase0 cases, source/test syntax and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary result implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  In-flight owned bridge defect: Initial arithmetic scalar classification/String-prefix handoff passes every shared field except invalid numeric -> explicit Hash default -> sorted_values -> first -> uppercase, which is null instead of A on native/fresh. Array defaults/copy, numeric snapshots/overloads/shapes and direct comparison/actual arithmetic calibrations pass. Keep the Hash expectation; investigate with public substitution/Get/dump and distinguishing default-source controls before any further repair.
+
+  Hash bridge root/ownership: Public Get/substitution/dumps show numeric-root, canonical-call-root and direct undef.coalesce Hash projection all become unsupported-helper:first/null, while fully nested equivalent yields A. Once-bound default guards contain emitted host do expressions; later Array consumers reparse those as DSL. Repair the Array composition seam via the existing compatibility bridge only for already-emitted do sources, preserving the dedicated sorted/reversed path and authored syntax checks. Original default-selection62 / TYPE23.3.6 remain authoritative; this direct dependent repair/regression is owned here and fixes their confirmed projection-successor gap too.
+
+  Completion: All existing short Number methods yield scalar_result for compatible actual-value continuation; String prefixes hand existing numeric methods to that same dispatcher. Numeric adapters, overload rules and shape preflight stay unchanged. Also repair confirmed existing default Hash-view successor staging: Array call composition uses the existing compatibility bridge when its source already contains emitted host do code, keeping the dedicated sorted/reversed path. No authored syntax or unsupported-AST fallback is widened.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New shared native/fresh RED fails handler compile on raw arithmetic-to-text/default chains, while raw selector controls already work. Family/prefix change makes every field pass except Hash default sorted_values->first->uppercase. Independent numeric/call/direct-default public Get/substitution/dumps return unsupported-helper:first/null versus nested A; retained focused default projection fixture RED confirms the old staging defect.
+  - [x] ROOT CAUSE (WHY + WHERE): Number return-family metadata and String-prefix numeric dispatch prevent compatible arithmetic flow. The separate Hash-view bug is append_array_chain_call constructing DSL over an already emitted default guard do expression; later typed lowering reparses host output and emits first's unsupported sentinel. Existing legacy composition flag is the established bridge for generated host expressions, not an invitation to parse authored retired syntax.
+  - [x] FIX: Scalar arithmetic return family and existing Number-method handoff, plus local Array-call finishing through the compatibility bridge only for do-expression sources. Preserve sort/reverse's existing runtime route, all numeric/Array/default producers and free/deferred/overload policies. Add shared arithmetic and direct default-projection native/fresh regressions and numeric selector control; no public method/parser/schema changes.
+  - [x] ADDRESSED (verified): Twelve arithmetic methods and variadic forms retain numeric/text results, strict invalid/rounding/modulo cases, all source families, zero retention/skipped fallback, numeric/default8/generic/comparison consumers, String/Array/Hash defaults, copied chosen Array and bridgeX. Valid/invalid-source SOC/once-only and ASO min/max overloads hold; fourteen bad shapes run zero effects. Numeric add/scalar min outputs remain Array indexes. Default Hash projections now support first/last/count/join/contains/index, sum/transform/reverse/take successors, multiple root families, numeric index kinds and SDC/once-only/source snapshots.
+  - [x] NO REGRESSION:29 current focused assertions across arithmetic/projection/existing selected/literal default fixtures pass; the literal suite still rejects authored fat-arrow Hash syntax. Extended projection smoke and two actual AST/Phase0 numeric named cases pass, source/test syntax clean. Direct numeric comparison12 assertions already pass after arithmetic classification; final projection tests cover its affected Hash-root path. No whole suites, Array reducer95/deferred expansion or portable admission.
+  - [x] LOCKSTEP: Shared and default-projection source/expected/tests, frozen contract/old default-family follow-up, current worked book examples and canonical Number/default facts/map plus live/task/resume align. Normal gate registration of both new Perl files remains mandatory23.4.1. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Rust16.2 independently assesses its producers and transitions next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.16.1 - continue Perl scalar arithmetic results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.16.2`
   Status: `pending`
@@ -3549,7 +3572,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` | `pending` | Implement Perl scalar arithmetic result continuations under the frozen contract. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` | `pending` | Independently assess and implement Rust scalar arithmetic result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

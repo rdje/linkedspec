@@ -4840,13 +4840,22 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $arg_exprs = $chain_arg_exprs->($call->{args} || []);
    return undef unless ref($arg_exprs) eq 'ARRAY';
 
+   my $finish_array_call = sub {
+    my ($expression, $family) = @_;
+    # Default guards already contain emitted host expressions.
+    if ($current_expr =~ /^do\s*\{/s) {
+     $expression = $legacy_method_value_expr->($expression);
+     return undef unless defined($expression) && length($expression);
+    }
+    return [$expression, $family];
+   };
    if ($method eq 'join_values') {
     return undef unless @$arg_exprs == 1;
-    return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'scalar_result'];
+    return $finish_array_call->('join_values('.$arg_exprs->[0].', '.$current_expr.')', 'scalar_result');
    }
    if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
     return ['undef', 'terminal'] unless @$arg_exprs == 0;
-    return [$method.'('.$current_expr.')', 'scalar_result'];
+    return $finish_array_call->($method.'('.$current_expr.')', 'scalar_result');
    }
    if (($method eq 'sorted' || $method eq 'reversed') && $current_expr =~ /^do\s*\{/s) {
     return undef unless @$arg_exprs == 0;
@@ -4857,12 +4866,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
     ];
    }
    if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
-    return ['__array_value_'.$method.'('.join(', ', ($current_expr, @$arg_exprs)).')', 'array'];
+    return $finish_array_call->('__array_value_'.$method.'('.join(', ', ($current_expr, @$arg_exprs)).')', 'array');
    }
-   return [
+   return $finish_array_call->(
     $method.'('.join(', ', ($current_expr, @$arg_exprs)).')',
     $array_chain_return_family->($method),
-   ]
+   )
   };
   # Extraction and numeric producer links yield values for compatible helpers.
   # Preserve each helper's runtime domain and null behavior instead of
@@ -5313,7 +5322,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $is_last = ($idx == $#$calls) ? 1 : 0;
 
     if ($current_family eq 'string') {
-     if ($method =~ /^(?:eq|ne|gt|ge|lt|le)$/o) {
+     if (_is_number_receiver_value_chain_method($method)) {
       my $applied = $append_selected_value_chain_call->($current_expr, $call, 'scalar_result');
       return undef unless ref($applied) eq 'ARRAY';
       ($current_expr, $current_family) = @$applied;
@@ -7781,8 +7790,8 @@ sub _numeric_word_alias_helper_name {
 sub _number_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'number' if $method =~ /^(?:abs|floor|ceil|round|add|sub|mul|div|mod|min|max|clamp)$/o;
- return 'scalar_result' if $method =~ /^(?:eq|ne|gt|ge|lt|le)$/o;
+ # Numeric helpers yield scalars that feed compatible value consumers.
+ return 'scalar_result' if $method =~ /^(?:abs|floor|ceil|round|add|sub|mul|div|mod|min|max|clamp|eq|ne|gt|ge|lt|le)$/o;
  return undef
 }
 
