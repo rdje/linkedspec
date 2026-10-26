@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.7.1 — continue Perl index results
+
+Perl index_of results now use existing scalar-result handoff, with one-needle validation before effects. Native/fresh focused regression and direct selected-default checks pass after RED: direct/selected/pipeline/hash/String/function/default sources, zero/no-match/null, numeric selector writes, explicit bridges, scalar guards, N/SN snapshots and SNA consumer order. Producer/equality/source/copy behavior remains unchanged. Syntax/book/fast continuity checks pass; fresh-current Rust assessment2 is next and full admission stays separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.6 — freeze index result continuations
 
 Freeze ordinary index_of integer/null continuation after public Perl Get/substitution/native/fresh distinction: fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. The producer already preserves named/computed N/SN snapshots and nested SNA consumer order. Own bounded Perl23.3.7.1 next, then independent backend assessments. Preserve zero-based/null/equality/domain/copy behavior and one-needle shape; no production change or broad suite.

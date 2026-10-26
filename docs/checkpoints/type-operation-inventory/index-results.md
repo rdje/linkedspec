@@ -48,7 +48,7 @@ Retain named/literal/selected/pipeline/hash-view/String/default/function Array
 sources, numeric zero, no-match/empty/null, malformed-shape effects and actual
 numeric use in a later selector. Preserve existing producer and snapshot behavior.
 
-## Public Perl findings and concrete preservation controls
+## Public Perl activation findings and preservation controls
 
 `probe_index_results.pl` uses public Get and call_spec_handler_subst. Ordinary
 fluent add returns null while the nested `num_add(index_of(...),1)` returns2.
@@ -70,3 +70,13 @@ Assess each backend publicly; no failure is inferred from Perl. Use compile and
 small native/generated/direct checks, docs and one commit each. Full signatures,
 complete family/domain/portable admission remain `.23.4`; Lua declared5.4 remains
 separately owned. Existing source/copy differences are not normalized here.
+
+## Bounded Perl implementation
+
+`.23.3.7.1` uses scalar_result for index_of and exact-one-needle preflight. The
+native/fresh focused regression passes after RED, retaining zero/null, actual
+numeric selector use, direct/selected/pipeline/hash/String/function/default
+sources, String/Array bridges, scalar boundaries, malformed shapes and N/SN/SNA
+snapshot/order controls. Direct selected-default compatibility passes; the index
+producer/equality/source/copy policy stays unchanged. Rust assessment is next;
+other backends and full domain/deferred/portable admission remain separate.

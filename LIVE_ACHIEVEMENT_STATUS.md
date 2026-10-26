@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Index result contract23.2.6 is frozen. Perl23.3.7.1 implementation is next, then independent backend assessments. Bounded defaults are targeted-checked; full admission stays separate under feature/compile/small-check/docs/commit cadence.
+Perl index-result continuation23.3.7.1 is implemented/targeted-checked. Rust assessment2 is next, then other backends. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
 
 ## Latest Completed Slice
 
-Freeze ordinary index_of integer/null continuation after public Perl Get/substitution/native/fresh distinction: fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. The producer already preserves named/computed N/SN snapshots and nested SNA consumer order. Own bounded Perl23.3.7.1 next, then independent backend assessments. Preserve zero-based/null/equality/domain/copy behavior and one-needle shape; no production change or broad suite.
+Perl index_of results now use existing scalar-result handoff, with one-needle validation before effects. Native/fresh focused regression and direct selected-default checks pass after RED: direct/selected/pipeline/hash/String/function/default sources, zero/no-match/null, numeric selector writes, explicit bridges, scalar guards, N/SN snapshots and SNA consumer order. Producer/equality/source/copy behavior remains unchanged. Syntax/book/fast continuity checks pass; fresh-current Rust assessment2 is next and full admission stays separate.
 
 ## Next Action
 
-Implement bounded Perl index_of result flow with one-needle preflight and retained scalar boundaries. Preserve the correct producer and snapshot/order controls. Small native/fresh/direct compatibility and syntax/docs/commit; no broad suite.
+Publicly assess fresh-current Rust index results before repair, preserving one-needle shape, zero/null, scalar boundaries and SNA snapshots. Small native/restored/generated/direct checks/rustfmt/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.7.1` — ordinary index scalar-result handoff and one-needle preflight; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
@@ -29,7 +30,6 @@ Implement bounded Perl index_of result flow with one-needle preflight and retain
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` — Rust joined String flow/arity and guarded named-mutation tails; focused native/restored/generated-plan and aggregate checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.4` — joined String result contract frozen; isolated lowering/shape findings and correct producer snapshots retained; Perl implementation next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` — Lua six-reducer result flow, scalar/shape guards and focused available-host checks pass; join-result assessment next.
 
 ## History
 

@@ -1120,13 +1120,13 @@ csv = items.uniq().join_values(",");
 
 Array helpers are pure value helpers unless you use `set(...)` to store their result. For example, `sorted(parts)` does not sort `parts` in place. This is intentional: the rule text says when a working container changes.
 
-Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper
-argument, except `join_values`, where `items.join_values(delim)` maps to the canonical
-`join_values(delim, items)` contract. The named mutating end methods `items.push_back(value)`,
-`items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` return independent updated arrays; pop
-discards the removed element, and a continuation such as `.count()` consumes the update. An
-array-yielding expression-valued block can be the receiver too:
-`{ [3, 1, 2] }.sorted().join_values(",")`.
+Array receiver-dot value chains are accepted for the same pure array helpers. The receiver is the first helper argument, except `join_values`, where `items.join_values(delim)` maps to the canonical `join_values(delim, items)` contract. The named mutating end methods `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` return independent updated arrays; pop discards the removed element, and a continuation such as `.count()` consumes the update. An array-yielding expression-valued block can be the receiver too: `{ [3, 1, 2] }.sorted().join_values(",")`.
+
+Ordinary Perl index results continue: `["a","b"].index_of("b").add(1)` returns `2`,
+`["a","b"].index_of("a").add(1)` returns `1`, and `["a","b"].index_of("b").cat("!")` returns `"1!"`.
+A missing/empty result stays undef; `["a"].index_of("z").coalesce_nonempty(7).add(1)` returns `8`.
+The receiver takes one needle; malformed shapes return undef before effects. Source, needle and consumer operands run once in order.
+With `parts=["a"]`, `parts.index_of({parts+="b";"b"})` returns undef and leaves `parts` as `["a","b"]`. Other backend assessment remains open.
 
 Perl callable bodies also support `sorted` and `take`, including their receiver forms and reducer continuations. See the [worked sorting and selection examples](values-containers-and-flow-helpers.md#sorting-and-taking-inside-perl-codeblocks) for count rules, copies, evaluation order and remaining callable limits.
 Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).

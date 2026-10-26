@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.1 — reuse scalar handoff for search positions
+
+Perl index_of results now use existing scalar-result handoff, with one-needle validation before effects. Native/fresh focused regression and direct selected-default checks pass after RED: direct/selected/pipeline/hash/String/function/default sources, zero/no-match/null, numeric selector writes, explicit bridges, scalar guards, N/SN snapshots and SNA consumer order. Producer/equality/source/copy behavior remains unchanged. Syntax/book/fast continuity checks pass; fresh-current Rust assessment2 is next and full admission stays separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.6 — preserve the correct index producer
 
 Freeze ordinary index_of integer/null continuation after public Perl Get/substitution/native/fresh distinction: fluent add returns null beside nested2; Hash-view raw DSL reaches host sorted_values. The producer already preserves named/computed N/SN snapshots and nested SNA consumer order. Own bounded Perl23.3.7.1 next, then independent backend assessments. Preserve zero-based/null/equality/domain/copy behavior and one-needle shape; no production change or broad suite.
