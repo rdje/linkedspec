@@ -20,7 +20,7 @@
 
 ## Current Frontier
 
-Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Ordinary nonempty62.2.1 is also implemented/targeted-checked; documented Rust receiver62.2.2 is implemented too. Discovered Perl exhausted-tail/numeric-selection62.2.3 is repaired too. TYPE23.2.2 count/count_keys/length result contract is frozen; Perl23.3.3.1 implementation is targeted-checked and Rust23.3.3.2 is implemented too; Dart23.3.3.3 assessment is next before exhaustive signatures. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Ordinary nonempty62.2.1 is also implemented/targeted-checked; documented Rust receiver62.2.2 is implemented too. Discovered Perl exhausted-tail/numeric-selection62.2.3 is repaired too. TYPE23.2.2 count/count_keys/length result contract is frozen; Perl23.3.3.1 implementation is targeted-checked and Rust23.3.3.2 is implemented too; Dart23.3.3.3 is implemented/targeted-checked; Julia23.3.3.4 assessment is next before exhaustive signatures. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
 
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
@@ -29,7 +29,7 @@ owns the broader numeric closeout. Other startup repairs retain their schedule.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` | `pending` | Publicly assess/implement Dart count/count_keys/length result continuations; Perl/Rust/default-helper repairs are targeted-checked and broad proof remains deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` | `pending` | Publicly assess/implement Julia count/count_keys/length result continuations; Perl/Rust/Dart/default-helper repairs are targeted-checked and broad proof remains deferred. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

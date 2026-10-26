@@ -3704,11 +3704,16 @@ final class LinkedSpecRuntimeEngine {
           statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
-        // Extraction and copy take no method arguments. Reject before any
+        // Extraction, copy and count/length take no method arguments. Reject before any
         // receiver or operand effects, while keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
-          return (helper == 'first' || helper == 'last' || helper == 'copy') &&
+          return (helper == 'first' ||
+                  helper == 'last' ||
+                  helper == 'copy' ||
+                  helper == 'count' ||
+                  helper == 'count_keys' ||
+                  helper == 'length') &&
               call.args.isNotEmpty;
         })) {
           return null;
@@ -6947,7 +6952,10 @@ Object? _callArrayHelper(String helperName, List<Object?> values) {
   return switch (helperName) {
     'concat_arrays' => _callConcatArrays(values),
     'contains' => _callArrayContains(values),
-    'count' => _lengthValue(values.isEmpty ? null : values.first) ?? 0,
+    'count' => switch (values.isEmpty ? null : values.first) {
+      List<Object?> items => items.length,
+      _ => 0,
+    },
     'drop_back' => _callDrop(values, front: false),
     'drop_front' => _callDrop(values, front: true),
     'filter_match' => _callFilterMatch(values),

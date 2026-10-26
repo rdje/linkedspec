@@ -1253,7 +1253,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `active` / count and length result rollout
   Goal: Implement the frozen count/count_keys/length result contract on ordinary backends, preserving correct existing behavior.
   Dependencies: .23.2.2.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`; assess later backends individually after each clean implementation commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`; assess later backends individually after each clean implementation commit.
   Schedule: Feature/compile/quick-check/docs/commit per backend; full signatures/matrix/admission stays open and deferred.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.1`
@@ -1298,13 +1298,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.2 - continue Rust count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.3`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `d3f6fb4fc5eb63785e7b03f81a7fa9f724f27219`.
   Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on Dart.
   Dependencies: .23.3.3.2.
   Owned paths: dart/lib/src/runtime/interpreter.dart if needed, targeted count/length receiver test and synchronized book/fact/task/live records.
-  Planned tier: `focused`; declare actual proof at activation.
-  Claim verification: none: Future deterministic implementation/confirmation; no measured defect/parity claim yet.
+  Verification tier: `focused`
+  Focused checks: Public Dart producer/consumer and invalid-shape probes; small native/restored/generated-plan count/length plus direct selected-value tests, changed-file analysis/format, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen feature implementation/confirmation under director feature-first cadence; full signatures/matrix/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public reproduction / owned defects: Valid pairs return [5,5,6,6,5,5], so retain dynamic dispatch. count(extra) returns1 and runs receiver/operand effects twice instead of null/zero. Free count on [String,Hash,Number,Bool,undef,Array] returns [2,1,1,1,0,2], beside documented and public Perl [0,0,0,0,0,2]. Count incorrectly reuses _lengthValue; restrict Count to arrays while preserving Length and independent helper domains. Both small defects are owned and fixed in this leaf.
   Acceptance: Probe public valid producer/consumer pairs and preserve correct existing per-value dispatch. Independently check zero-extra shape/effect rejection; repair only observed defects. Cover direct/selected/earlier pipelines, values/kinds, Unicode/array length, source/argument snapshots and documented scope on native/restored/generated-plan consumers. Analyze/format changed files, compile/quick-check/docs/commit before the next backend.
+
+  Completion: Preserve existing actual-value continuations. Extend zero-extra producer preflight to count/count_keys/length and restrict free/receiver count to Lists instead of reusing general length. Length Unicode/scalar/container behavior stays unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public valid pairs pass; invalid count(extra) runs effects, and non-array free count disagrees with the documented/public Perl oracle. Retained fixture RED shows bad producers returning2 with six effects and domain [2,1,1,1,0,2].
+  - [x] ROOT CAUSE (WHY + WHERE): ActionFluentChainExpr guards extraction/copy only; helper argument collection evaluates ignored count/length extras. _callArrayHelper count delegates to _lengthValue, whose wider domains belong to length.
+  - [x] FIX: Include three zero-extra producers in preflight; count only List values. Reuse existing dynamic continuation and length logic.
+  - [x] ADDRESSED (verified): Small count_length_receivers native/restored/generated-plan fixture PASS after RED, including direct/selected/pipeline/function values, source snapshots, Unicode, SALHK order, nulls, zero invalid effects and array-only count.
+  - [x] NO REGRESSION: Direct selected_value_receivers, changed-file fatal analysis and format PASS; no broad suite or complete family/portable admission is inferred.
+  - [x] LOCKSTEP: Public examples/contract, Dart/central fact/map, current task/live records and bounded-history handling align; fast memory/cadence/diff/book checks pass.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.3 - guard Dart count and length producers`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.3.4`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm the frozen count/count_keys/length result contract on Julia.
+  Dependencies: .23.3.3.3.
+  Owned paths: julia public runtime, small count/length receiver test and synchronized book/fact/task/live records.
+  Planned tier: `focused`; assess actual changed surfaces at activation.
+  Claim verification: none: Unactivated bounded implementation assessment; declare focused evidence at activation.
+  Acceptance: Preserve correct existing value dispatch, probe valid chains and zero-extra shape/effect boundaries publicly, and repair only observed defects. Use a small native/generated-plan/fresh-emitted fixture plus direct selected-value checks, package compilation and docs; commit before Lua. Full context/portable admission stays separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1384,11 +1407,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; Perl23.3.3.1 is implemented/targeted-checked and Rust23.3.3.2 is implemented/targeted-checked and Dart23.3.3.3 assessment is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Count/count_keys/length result contract23.2.2 is frozen; Perl23.3.3.1 is implemented/targeted-checked and Rust23.3.3.2 is implemented/targeted-checked and Dart23.3.3.3 is implemented/targeted-checked; Julia23.3.3.4 assessment is next before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` | `pending` | Publicly assess/implement Dart count/count_keys/length result continuations after targeted-checked Perl/Rust slices. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` | `pending` | Publicly assess/implement Julia count/count_keys/length result continuations after targeted-checked Perl/Rust/Dart slices. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

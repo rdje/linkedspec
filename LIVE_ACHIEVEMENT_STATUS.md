@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust count/count_keys/length result implementations are targeted-checked. Dart23.3.3.3 starts with public probes next, then Julia/Lua individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Perl/Rust/Dart count/count_keys/length result implementations are targeted-checked. Julia23.3.3.4 starts with public probes next, then Lua individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Rust static/dynamic count/length results now enter existing actual-value dispatch, with local array-length support and zero-extra guards before effects. Fresh public CLI and authored native/restored/generated-plan regression pass after actual RED, including values/kinds, direct/selected/pipeline/function sources, Unicode/array length, SALHK order and mutation snapshots. Invalid-shape effects fall six to zero; direct selected-value, compilation/rustfmt/book and fast continuity checks pass. Public/canonical/task/live records agree.
+Dart valid count/length chains already work. Extend zero-extra producer preflight and restore count's documented array-only domain after public/retained arity/domain RED. Small native/restored/generated-plan and direct selected-value tests, fatal analysis/format, book and fast continuity checks pass, including actual values, Unicode length, SALHK order, snapshots and zero invalid effects. Contract/fact/map/task/live records align.
 
 ## Next Action
 
-Probe Dart valid count/length result chains and invalid producer shapes independently; preserve correct existing behavior and repair observed gaps with a small native/restored/generated-plan fixture and changed-file analysis. Commit before Julia/Lua; no broad suite or historical replay.
+Probe Julia valid count/length result chains and invalid producer shapes independently; preserve correct existing behavior and repair observed gaps with a small native/generated-plan/fresh-emitted fixture and package compilation. Commit before Lua; no broad suite or historical replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.2` — count/count_keys/length result contract frozen; public Perl/substitution distinctions, book and fast continuity checks pass; Perl implementation next.
@@ -29,7 +30,6 @@ Probe Dart valid count/length result chains and invalid producer shapes independ
 - `SESSION-STARTUP-READING.61.1` — Rust scalar source-null propagation, defined controls and eager order; focused native/restored/generated-plan and selected-value checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` — existing Julia selected values confirmed; extraction arity guard, package/native/generated/emitted and transform checks pass; Lua next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` — existing Dart selected-value flow confirmed; extraction arity guard, focused tests and changed-file analysis pass; Julia next.
 
 ## History
 

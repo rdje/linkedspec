@@ -2,6 +2,7 @@
 id: dart-runtime-array-helpers
 title: Dart runtime executes array helper family and receiver chains
 answers:
+  - why does Dart count return zero for nonarrays and reject extra receiver operands
   - does Dart receiver copy reject extra arguments before effects
   - do Dart standalone split_each filter_match and uniq update arrays
   - does Dart runtime support array receiver chains
@@ -12,10 +13,10 @@ answers:
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
 date: 2026-10-26
-status: selected values confirmed; extraction/copy arity guarded; ordering/slice owners open
+status: selected/count values confirmed; zero-extra arity guarded; ordering/slice owners open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "Dart array4.3.3; end results12.1.4; transform5.3.2; selected-value23.3.1.3; copy-arity23.3.2.2."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/receiver_copy_arity_test.dart test/selected_value_receivers_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/count_length_receivers_test.dart test/selected_value_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -62,4 +63,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3.1.3 confirms dynamic first/last scalar/container continuations, copy and extraction arity.23.3.2.2 extends pre-effect arity validation to copy after a public ignored-operand RED. Focused native/restored/generated-plan controls cover valid copies, detachment, nulls and once-only evaluation; changed-file analysis passes. Full fluent admission stays open.
+23.3.1.3/23.3.2.2 confirm selected-value continuations and extraction/copy arity.23.3.3.3 preserves count/length result flow, guards producer extras before effects and fixes count to accept Lists only; _lengthValue keeps broader length domains. Public arity/domain RED and focused native/restored/generated-plan, selected-value and analysis checks pass. Full admission stays open.

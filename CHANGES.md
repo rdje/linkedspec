@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.3.3 — guard Dart count and length producers
+
+Preserve correct numeric result continuations; reject extra count/count_keys/length receiver operands before effects and restore count’s documented array-only domain. Public probes and retained native/restored/generated-plan fixture show arity/domain RED before repair and GREEN afterward, with direct selected-value tests, changed-file fatal analysis/format, book and fast continuity checks passing. Source/argument order, snapshots and Unicode length stay intact. Julia assessment is next; broad admission remains open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.3.2 — continue Rust count and length results
 
 Hand count/count_keys/length results from static and dynamic array/hash/string paths to existing actual-value dispatch. Allow array-pipeline length while preserving initial string/scalar dispatch, and reject extra producer operands before effects. Fresh public CLI and small native/restored/generated-plan regression are RED before repair and GREEN afterward, including direct/selected/pipeline/function values, Unicode/array length, SALHK order, mutation snapshots and zero invalid-shape effects. Direct selected-value, compilation/rustfmt/book and fast continuity checks pass. Dart assessment is next; broad admission stays open.

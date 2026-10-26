@@ -103,3 +103,9 @@ string paths. Array pipelines accept length without changing initial string/scal
 dispatch. Native/restored/generated-plan and direct selected-value checks pass;
 zero-extra producer guards suppress effects. Existing callable vocabulary and
 serialized/generated formats stay unchanged; no full context/portable admission.
+
+Dart `.23.3.3.3` preserves already-correct actual-value flow, adds zero-extra
+producer guards and repairs count's documented array-only domain. Public probes
+and retained native/restored/generated-plan plus direct selected-value checks
+pass after arity/domain RED; changed-file analysis passes. Length's Unicode and
+existing source domains remain unchanged. Julia/Lua still require assessment.
