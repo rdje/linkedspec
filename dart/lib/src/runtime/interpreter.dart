@@ -3704,11 +3704,11 @@ final class LinkedSpecRuntimeEngine {
           statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
-        // Extraction takes no method arguments. Reject the shape before any
+        // Extraction and copy take no method arguments. Reject before any
         // receiver or operand effects, while keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
-          return (helper == 'first' || helper == 'last') &&
+          return (helper == 'first' || helper == 'last' || helper == 'copy') &&
               call.args.isNotEmpty;
         })) {
           return null;

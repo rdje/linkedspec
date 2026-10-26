@@ -1127,7 +1127,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
   Status: `active` / P2 receiver copy arity intake
   Activation: clean `804f9657c47d62157e9f77b4f76749d24f11e7ab`; Rust scalar61.1/.61.2 repairs are committed. Start the distinguishing public Julia probe; create implementation children only for observed defects.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`; assess other backends individually after this clean feature commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`; assess other backends individually after each clean feature commit.
+  Public Dart finding (October26): The same probe returns [["a"],1], confirming an ignored copy operand after receiver effects. Child .2.2 owns this repair; Julia .2.1 is committed at08098f3.
   Public finding (October26): Julia's proposed probe returns [["a"],1] instead of invalid-shape null with zero effects. The receiver is evaluated and extra argument ignored. Child .2.1 owns the confirmed repair; other backends remain unassessed.
   Planned tier: `focused`; public reproduction and bounded per-backend implementation children before writes.
   Goal: Confirm and repair extra-argument copy receiver shapes without changing valid copy/value-kind semantics.
@@ -1155,6 +1156,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Valid array detachment, scalar continuation, missing/null and once-only receiver controls PASS; direct selected_value_receivers test PASS. No full package suite or broad matrix.
   - [x] LOCKSTEP: Register the regression; public copy boundary, scalar duplicate status, Julia fact/map, current frontier and live handoff agree. Book and fast continuity/history/diff checks pass before landing.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1 - guard Julia receiver copy arity`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`
+  Status: `done`
+  Activation: clean `08098f3ef2075389279207e421cbc1b6986a2d5a`.
+  Goal: Reject extra Dart copy receiver operands before receiver/operand effects while preserving valid deep-copy and selected-value behavior.
+  Owned paths: dart/lib/src/runtime/interpreter.dart, dart/test/receiver_copy_arity_test.dart and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public probe; Dart receiver_copy_arity and direct selected_value_receivers tests (native/restored/generated-plan); changed-file analysis/format, book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded invalid receiver-shape repair under director feature-first cadence; full fluent admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored shape/effect regression; no quantified corpus, exhaustive or portable admission measurement.
+  Acceptance: Reject any extra copy receiver operands before effects at direct/selected links. Preserve valid copies/kinds, detachment, null/scalar continuation and once-only receiver evaluation; no unrelated helper or backend changes.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public Dart probe returns copied array/effects1. The retained regression returns two invalid copies/effects2 instead of null/null/effects0 before repair; valid controls already agree.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluateFluentCall's copy arm ignores call.args, while ActionFluentChainExpr only preflights first/last before receiver evaluation. The public runtime probe distinguishes this from correct deep-copy semantics.
+  - [x] FIX: Add canonical copy to existing zero-extra-operand preflight. Preserve _copyValue and valid per-value dispatch.
+  - [x] ADDRESSED (verified): Small native/restored/generated-plan receiver_copy_arity test PASS after actual RED; changed-file analyzer reports no issues and formatter passes.
+  - [x] NO REGRESSION: Valid copy detachment/kinds, scalar/null continuation and once-only controls plus direct selected_value_receivers test PASS. No full Dart suite.
+  - [x] LOCKSTEP: Public copy boundary, canonical Dart fact/map, current frontier and live handoff synchronized; book and fast continuity/history/diff checks pass before landing.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.2 - guard Dart receiver copy arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1233,11 +1253,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has a confirmed Julia repair; individual remaining-backend assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has confirmed Julia/Dart repairs; individual Rust/Lua/Perl assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia copy-arity repair is targeted-checked; assess remaining backends individually from public reproduction before any implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia/Dart copy-arity repairs are targeted-checked; assess Rust/Lua/Perl individually from public reproduction before any implementation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

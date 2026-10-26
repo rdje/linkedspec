@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.2.2 — guard Dart receiver copy arity
+
+Extend existing chain preflight to copy so invalid direct/selected shapes reject before receiver/operand effects. Preserve valid deep copies, kinds, detachment and null/scalar continuation. Public probe and small native/restored/generated-plan regression are RED before repair and GREEN afterward; direct selected-value checks, changed-file analysis/format, book and fast continuity checks pass. Rust/Lua/Perl assessment follows; broad fluent admission stays deferred.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.2.1 — guard Julia receiver copy arity
 
 Reject extra copy receiver operands before receiver or argument effects by extending the existing zero-extra-operand chain guard. Valid deep-copy/value-kind semantics remain unchanged. A small registered native/generated-plan/fresh-emitted regression fails before repair and passes afterward, including source detachment, scalar/null and once-only controls; the direct selected-value test also passes. Package compilation, book and fast continuity checks pass. Assess remaining backends individually next; full fluent admission stays open.

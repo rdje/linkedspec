@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.2 — Dart copy operand admission
+
+The public Dart probe independently confirms Julia’s ignored-copy-operand mechanism: _evaluateFluentCall returns _copyValue(receiver) without inspecting call.args after receiver evaluation. Include copy in the existing first/last preflight, retaining the correct copy and dynamic dispatch implementations. A small regression passes native/restored/generated-plan execution after actual RED, with valid detachment, scalar/null and once-only controls; direct selected-value and changed-file analyzer/formatter checks pass. Book/Dart fact/map and current records agree. Rust/Lua/Perl still require individual assessment; no cross-backend admission is inferred.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.1 — copy shape before effects
 
 The public Julia probe confirms the source-observed risk: a selected copy with an extra operand returns the copied value after evaluating the receiver, and ignores the operand. Extending the existing first/last preflight to canonical copy rejects direct and selected invalid shapes before effects without touching _runtime_copy or dynamic continuation. The retained test covers native/generated-plan/fresh-emitted execution after actual RED, and valid detachment/scalar/null/once-only controls; the direct selected-value regression remains green. Book/current frontier and canonical Julia fact/map agree, including the now-implemented Rust scalar prerequisites. Other backends require their own public assessment under23.3.2; no family-wide admission is inferred.

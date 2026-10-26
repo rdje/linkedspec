@@ -952,7 +952,7 @@ dispatch rule.
 - **Terse spelling**: `copy(h)` / receiver `.copy()` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Receiver boundary**: `value.copy()` evaluates `value` once, deep-copies that current runtime value, and keeps
   its array/hash/scalar kind available to later compatible receiver links. Missing `value` remains undefined/null.
-  Receiver `copy()` takes zero extra operands; extra operands are invalid. Julia rejects that shape before receiver/operand effects. Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
+  Receiver `copy()` takes zero extra operands; extra operands are invalid. Julia and Dart reject that shape before receiver/operand effects. Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
