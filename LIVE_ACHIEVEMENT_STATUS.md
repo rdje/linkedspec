@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded logical result implementations targeted-checked; defined-only coalesce receiver assessment next.
+Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
 
 ## Latest Completed Slice
 
-Lua logical producers/valid flow/source errors already work; actual Boolean tracking now protects scalar boundaries at entry/after results with no new module locals. Both PUC5.5.1/LuaJIT strict native/plan/fresh producer/source-error/shared/rejected-effect/selected-block-literal/exact neutral/default checks and source loads pass after shared Array[] RED. LR/LRC/S, real Bool/false/default/source kinds and free/context/truth/numeric policies remain. All five bounded logical implementations are targeted-checked, including Perl rejected-source repair; book/facts/task/live align. Defined-only coalesce assessment18 next; declared5.4/full admission separate.
+Defined-only coalesce assessment18 freezes a separate one-or-more-fallback ordinary receiver with lazy defined-only selection, actual scalar/container/copy/snapshot continuation and clean scalar/shape boundaries. Public native/fresh free/nested controls retain empty/zero/false, null exhaustion, numeric selector kind, independent Array/Hash copies, SDC/once-only and skipped supported runtime errors. Missing Perl receiver metadata leaves raw DSL; old nonempty scope explicitly excluded this spelling. Retained probe/frozen contract/five backend children/book/fact/map align; no production/free signature/domain change or portable admission. Syntax/direct defaults/book/history/staged continuity checked.
 
 ## Next Action
 
-Assess defined-only coalesce receiver/result breadth18 from helper spine, canonical default facts/contracts and old23.2.5 exclusion before production. Public producer/nested/current receiver native/fresh/AST/substitution distinctions must retain defined empty/zero/false, null exhaustion, lazy once-only selected copies/snapshots/skipped errors and existing scalar/container domains/free signatures. Freeze a bounded useful counterpart only after observations, then own backend children. Small direct checks/docs/commit; no full matrix/portable domain assumption.
+Activate Perl18.1 and implement frozen defined-default-results.md after retained public producer/AST controls. Add ordinary one-or-more-fallback coalesce receiver admission, lazy actual-result dispatch/shape guards and shared native/fresh kind/effect/copy/selector checks; preserve free/domain/callback/host compatibility. Quick direct defaults/compile/docs/commit; no full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.18` — Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.5` — All five bounded logical result implementations targeted-checked; defined-only coalesce receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` — Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
@@ -29,7 +30,6 @@ Assess defined-only coalesce receiver/result breadth18 from helper spine, canoni
 - `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.5` — Lua numeric comparison result flow implemented on both available hosts; all five bounded implementations targeted-checked, scalar arithmetic result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` — Julia numeric comparison scalar/shape guards implemented;42 strict focused assertions and compilation pass, Lua next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.15.3` — Dart numeric comparison scalar/shape guards implemented; six focused tests and fatal analysis pass, Julia next.
 
 ## History
 

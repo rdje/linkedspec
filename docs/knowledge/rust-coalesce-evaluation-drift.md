@@ -2,6 +2,8 @@
 id: rust-coalesce-evaluation-drift
 title: "Lazy defaults and selected result kinds"
 answers:
+  - "is there a defined-only coalesce fallback receiver method"
+  - "does empty text or false skip a coalesce receiver fallback"
   - "can coalesce_nonempty Array or Hash results continue by actual kind"
   - "why does a valid coalesce_nonempty Hash literal emit hash_literal_use_colon"
   - "why does coalesce_nonempty make numeric array indices fail on Perl"
@@ -52,3 +54,12 @@ use focused reverify above. Current original repair ownership is
 SESSION-STARTUP-READING62, with selected-result scope TYPE23.3.6 and the direct
 projection follow-up16.1. Compatibility observations do not close broader
 signature/context/portable admission.
+
+TYPE23.2.18 freezes a separate one-or-more-fallback ordinary coalesce receiver;
+old23.2.5 explicitly excluded it. defined-default-results.md and retained public
+probe record native/fresh free/nested defined empty/zero/false, actual containers,
+numeric selector writes, independent copies and SDC snapshots/skipped runtime
+errors. Receiver AST exists but lacks MethodLowering return-family admission,
+leaving raw host DSL. Free Perl coalesce(one) returnsnull; no identity receiver
+is inferred. Implement18.1-.5 independently; no free-signature or portable
+aggregate-domain promotion. Empty containers remain defined selected values.

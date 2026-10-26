@@ -1363,7 +1363,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.17 - freeze logical Boolean result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.18`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess useful ordinary defined-only coalesce receiver surface and actual selected-result continuations from the helper spelling/role spine.
   Dependencies: Bounded logical result23.3.17.1-.5 and Perl rejection-effect follow-up committed.
   Authority: Existing lazy coalesce public helper, scalar-text/default contracts and current default owner23.2.5/23.3.6; that older nonempty-default target explicitly excludes new coalesce receiver promises. Comprehensive fluent directive authorizes a separate assessment, not inferred method admission from a resolver category.
@@ -1373,9 +1373,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
 
+  Activation: clean `8e9f1b9936628a8b9c450a965303801401886688`; all bounded logical result implementations committed, brief0/tree clean.
+  Owned paths: Retained public defined-default producer/nested/receiver/domain/source/arity/effect assessment and any needed bounded counterpart contract/backend scheduling, scoped default book/facts/task/live docs. No production change before observations. Existing Perl value-only default arity metadata starts at2 total operands; verify public behavior rather than assuming a zero-RHS identity method.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution/dump/native/fresh distinctions and direct default contracts, syntax/book/history/staged continuity guards.
+  Canonical trigger: None for bounded feature assessment under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
+
+  Public intake: Free/nested native/fresh coalesce preserves defined empty String/zero/false and observed Array/Hash values, nested text[CHOSEN,!,1,0!,CHOSEN], retained aggregate controls[0,0,B,A] and explicit captured selection A:B/SDC/once-only. Current receiver counterparts retain raw DSL and fail host compilation; this is missing useful method scope, not a violation of the older explicitly excluded target. Initial combined stdout/stderr caused interleaved JSON in a failing diagnostic record; add autoflush/separate channels and rerun needed lazy/arity/exhaustion/AST cases before crediting them.
+
+  Decision: Freeze defined-default-results.md for a separate ordinary .coalesce(fallback,...) counterpart with one-or-more fallbacks, defined-only lazy selection, actual String/Number/Boolean/Array/Hash continuations and ordinary copies/snapshots. Preserve all free signatures and old nonempty-default scope; schedule independent backend18.1-.5 before production. No portable aggregate-domain promotion.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Intact public native/fresh producers/nested/retained/copy/selector controls preserve defined empty/zero/false, null exhaustion and actual containers/numeric indices. Current receiver chains retain raw DSL, causing host compile/eval errors; AST retains the intended chain. Explicit captured nested control gives[A:B,SDC,1,1,[z]], lazy controls[empty,false,0,safe,0].
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering already has complete lazy typed lowering and minimum-two free metadata for both defaults, but receiver return-family admission includes only coalesce_nonempty. Missing coalesce receiver dispatch is a new bounded method gap, not a breach of23.2.5's explicit exclusion. Free one-operand coalesce currently returnsnull on Perl; require a fallback for the new receiver rather than infer identity.
+  - [x] FIX: Retain corrected public producer/AST probe, frozen counterpart/result contract and independent backend children. No production edit. Copy controls preserve original selected Array/Hash after mutation; independent selector write proves actual numeric kind. Initial interleaved failing output is not credited; isolated reruns retain structured fresh errors.
+  - [x] ADDRESSED (verified): Public diagnostic/source syntax and direct existing default checks pass; ordinary preserved values/copies/SDC/skipped supported runtime error controls establish the bounded baseline. Preserve named/selected/Hash/block/function/prefix sources and source effects before incompatible consumers in implementation. No assumptions from emitter internals or inferred backend failures.
+  - [x] NO REGRESSION: No parser/runtime/free/domain/callback/source contract changes. Lazy nested oracle explicitly captures selection before delimiter effects because free join_values evaluates delimiter first. No full matrix/replay/portable admission or callable/Regex/scoped receiver expansion.
+  - [x] LOCKSTEP: Frozen contract, retained probe and backend tasks, qualified coalesce catalog and canonical default fact/map plus live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl18.1 is next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.18 - freeze defined-only default receivers`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -3849,6 +3868,64 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: `focused`
   Claim verification: none: Qualitative contradiction intake only; any new historical census or measured repair proof is declared before publication.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18`
+  Status: `active` / frozen counterpart; backend implementations pending
+  Goal: Add bounded ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.2.18 frozen defined-default-results.md.
+  Children: `.23.3.18.1`, `.23.3.18.2`, `.23.3.18.3`, `.23.3.18.4`, `.23.3.18.5`.
+  Acceptance: One-or-more fallbacks, defined-only lazy once-only selection, actual String/Number/Boolean/Array/Hash kinds/copies/snapshots, compatible consumers/explicit bridges and scalar boundaries. Preserve existing free signatures/domains/callbacks and old nonempty-default behavior; no complete domain/context/portable admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.2.18.
+  Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.3.18.1.
+  Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.3.18.2.
+  Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.3.18.3.
+  Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary defined-only coalesce receivers and actual selected-result continuations.
+  Dependencies: .23.3.18.4.
+  Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
+  Safety scope: Only safe available PUC5.5.1/LuaJIT fixtures; exclude malformed native patterns/full runner. Declared5.4 remains separately owned.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
@@ -3862,11 +3939,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Next is the separate defined-only coalesce receiver/result assessment23.2.18, preserving old nonempty-default exclusions until a bounded counterpart is frozen. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; backend18.1-.5 now own the bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.18` | `pending` | Assess defined-only coalesce receiver/result breadth before promising a counterpart. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` | `pending` | Implement frozen defined-only coalesce receiver/result flow on Perl after independent public intake. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.18 — freeze defined-only default receivers
+
+Defined-only coalesce assessment18 freezes a separate one-or-more-fallback ordinary receiver with lazy defined-only selection, actual scalar/container/copy/snapshot continuation and clean scalar/shape boundaries. Public native/fresh free/nested controls retain empty/zero/false, null exhaustion, numeric selector kind, independent Array/Hash copies, SDC/once-only and skipped supported runtime errors. Missing Perl receiver metadata leaves raw DSL; old nonempty scope explicitly excluded this spelling. Retained probe/frozen contract/five backend children/book/fact/map align; no production/free signature/domain change or portable admission. Syntax/direct defaults/book/history/staged continuity checked.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.17.5 — guard Lua logical Boolean results
 
 Lua logical producers/valid flow/source errors already work; actual Boolean tracking now protects scalar boundaries at entry/after results with no new module locals. Both PUC5.5.1/LuaJIT strict native/plan/fresh producer/source-error/shared/rejected-effect/selected-block-literal/exact neutral/default checks and source loads pass after shared Array[] RED. LR/LRC/S, real Bool/false/default/source kinds and free/context/truth/numeric policies remain. All five bounded logical implementations are targeted-checked, including Perl rejected-source repair; book/facts/task/live align. Defined-only coalesce assessment18 next; declared5.4/full admission separate.

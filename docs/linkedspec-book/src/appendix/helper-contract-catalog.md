@@ -279,10 +279,10 @@ dispatch rule.
 
 ### `coalesce(a, b, ...)`
 - **Signature**: `coalesce(values: scalar...)`
-- **Returns**: scalar
+- **Returns**: the selected value, preserving its kind; the published portable operand domain remains scalar.
 - **Behavior**: Returns the first argument that is defined (not undef). Evaluates left-to-right, short-circuiting.
 - **Edge cases**: Returns `undef` if all arguments are undef. Empty text, numeric zero and false are defined: `coalesce("", "fallback")` → `""`, `coalesce(0, 7)` → `0`, `coalesce(false, true)` → `false`.
-- **Examples**: `coalesce([].first(), "fallback")` → `"fallback"`. With `audit="unset"`, `value=coalesce("first", { audit="late"; "fallback" })` leaves `audit` unchanged and returns `"first"`; later operand errors are also skipped. Nested selection keeps the same rule: `coalesce(undef, coalesce("", "late"))` → `""`. Ordinary Perl also preserves a selected direct Hash literal: `coalesce(undef,{"items":[7,{"n":7}],"flag":false})` returns the Hash with nested numeric/boolean kinds intact; this compatibility observation does not broaden the published portable operand domain.
+- **Examples**: `coalesce([].first(), "fallback")` → `"fallback"`. With `audit="unset"`, `value=coalesce("first", { audit="late"; "fallback" })` leaves `audit` unchanged and returns `"first"`; later operand errors are also skipped. Nested selection keeps the same rule: `coalesce(undef, coalesce("", "late"))` → `""`. Ordinary Perl also preserves a selected direct Hash literal: `coalesce(undef,{"items":[7,{"n":7}],"flag":false})` returns the Hash with nested numeric/boolean kinds intact; this compatibility observation does not broaden the published portable operand domain. A separate bounded ordinary `value.coalesce(fallback, ...)` counterpart is frozen for implementation: one-or-more fallbacks, defined-only lazy selection and continuation by the selected scalar/Array/Hash kind. Targets include `"".coalesce("late").cat("!")` → `"!"` and `undef.coalesce(["a","b"]).last().uppercase()` → `"B"`; backend implementation and complete admission remain pending.
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
