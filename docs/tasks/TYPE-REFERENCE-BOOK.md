@@ -1015,20 +1015,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess container-valued default selections continuing through the actual returned kind.
   Dependencies: .23.3.5.5.
   Schedule: After bounded joined-result rollout, before exhaustive signatures/matrices; feature assessment, not a current-task pivot.
   Intake / latent risk: Perl String-family metadata classifies coalesce_nonempty as String, while the helper can select a container. Check whether scalar_result propagation blocks a valid later Array/Hash consumer. This is a source-backed assessment question, not an asserted runtime defect or new admission.
   Public reproduction target: Compare [].join_values(",").coalesce_nonempty(["a","b"]).join_values("-").uppercase() with the nested helper equivalent; expected actual-value flow is "A-B" if the existing helper admits that fallback. Include defined/empty/null and Hash fallback controls without assuming backend failures.
   Owned paths: bounded type-operation contract/public probes, canonical default/receiver facts and task/live planning; split production children only after findings.
-  Planned tier: `focused`; declare exact public assessment at activation.
-  Claim verification: none: Unactivated qualitative transition assessment; no support/completeness measurement.
+  Activation: clean `949790b510f8ad29b744730ac379a8952d987d9f`; Lua split committed, brief empty, tree clean before switch.
+  Verification tier: `focused`
+  Focused checks: Small public Get/substitution/native/fresh assessment of documented nonempty defaults and selected Array/Hash compatibility; preserve scalar/empty/null/lazy/effect controls, syntax, book and fast continuity/history/diff checks. No full suites or cross-backend campaign.
+  Canonical trigger: None for bounded diagnostic/frozen transition under director feature-first cadence; complete public/domain/portable admission remains23.4 and final clean push.
+  Claim verification: none: deterministic authored diagnostic value/order examples; no quantified corpus, support/completeness or portable measurement.
   Acceptance: Establish public actual behavior and domains before classification, retain laziness/once-only effects/copy/kinds, freeze a bounded transition if needed and schedule backend repairs. Preserve current joined-result scope and complete admission as separate.
+
+  Completion: Freeze bounded ordinary coalesce_nonempty selected-value flow in docs/checkpoints/type-operation-inventory/default-selection-results.md after public domain and nested distinctions. Existing scalar signatures stay qualified; no complete domain or cross-backend claim.
+  Findings / ownership: Joined Array/Hash continuations lower to undef; nested controls return A-B/X:Y. Direct String continuation reaches a host coalesce_nonempty error. Static String/scalar_result classification blocks actual containers. Own ordinary flow as23.3.6.1.1. Separately, direct valid colon Hash fallback emits hash_literal_use_colon/null; named Hash and nested views work. Value-only AST lowering reparses lowered host fat arrows through the legacy DSL path; own P1 repair23.3.6.1.2 immediately after flow, before backend rollout. The compound first effect probe is rejected as passing evidence; isolated joined versus nested SDJ controls establish the bounded effect gap.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Retained public probes print exact value/error/lowering distinctions for selected Arrays/Hashes, retained scalars, empty/null and lazy controls.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering return-family metadata and scalar_result propagation stop container flow. lower_ast_value_only_call_node reconstructs legacy helper input from lowered Hash host source; public marker identifies the separate literal boundary.
+  - [x] FIX: Freeze the actual-kind transition and schedule separate bounded flow/literal repairs; no production change in this diagnostic slice.
+  - [x] ADDRESSED (verified): Public native plus fresh emitted joined control return null beside nested A-B; fresh named Hash retains fields. Supported scalar/lazy/selected-null controls remain distinct from broken flow.
+  - [x] NO REGRESSION: Probe syntax, book rendering and fast continuity/history/diff checks pass. No exhaustive suite, other-backend failure, full signature/portable or final admission claim.
+  - [x] LOCKSTEP: Contract/probes, qualified catalog, canonical default fact/map and live/task/resume records align. Next23.3.6.1.1 after clean commit; literal repair scheduled next, not merely reported.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.5 - freeze selected default result flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.3`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -1679,6 +1693,72 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Register fixture and align worked helper/guide/contract, current Lua/Array/false-delimiter facts/map, partial2.9 ownership and current task/live records; book and fast continuity/history/diff checks pass. Reverify/repair remaining mutable split next, then container-default23.2.5.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.5.5 - continue Lua joined String results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6`
+  Status: `pending`
+  Goal: Implement/confirm bounded actual-kind default-selection continuations across maintained backends.
+  Dependencies: .23.2.5.
+  Children: `.23.3.6.1`, `.23.3.6.2`, `.23.3.6.3`, `.23.3.6.4`, `.23.3.6.5`.
+  Acceptance: Existing ordinary nonempty default selections preserve actual kinds, lazy required-prefix effects and scalar/container boundaries per default-selection-results.md. Assess each backend publicly; full domain/portable admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1`
+  Status: `pending`
+  Goal: Repair Perl default result flow and valid literal operand lowering in separate slices.
+  Dependencies: .23.2.5.
+  Children: `.23.3.6.1.1`, `.23.3.6.1.2`.
+  Acceptance: Both bounded repairs committed/targeted-checked; broader signature/deferred/admission remains separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1`
+  Status: `pending`
+  Goal: Continue ordinary Perl coalesce_nonempty results by their actual selected kind.
+  Dependencies: .23.2.5.
+  Reproduce: Direct String Array consumer reaches host helper; joined Array/Hash paths lower undef beside working nested A-B/X:Y. String-family metadata and scalar_result propagation retain the producer kind.
+  Owned paths: MethodLowering ordinary receiver flow, one focused native/fresh fixture, direct joined/default compatibility and public/current docs.
+  Acceptance: Reuse existing lazy helper semantics; preserve retained Scalar incompatible nulls, selected Array/Hash methods, empty/null/zero/false, source/default/consumer SDJ order, skipped late operands and snapshots. Small compile/targeted checks/docs/commit; no full suite.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic value/order regression; no measured admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2`
+  Status: `pending` / owned P1 defect scheduled immediately after1.1
+  Goal: Preserve valid Hash literal operands through Perl lazy default lowering.
+  Dependencies: .23.3.6.1.1.
+  Reproduce / impact: coalesce_nonempty("",{"b":"y","a":"x"}) returns null with hash_literal_use_colon marker despite valid source; named Hash and nested view controls succeed. The AST value-only lowerer passes lowered host fat arrows through legacy DSL parsing. This silently discards a valid chosen fallback; assess ordinary coalesce twin and typed nested values with public probes before repair.
+  Owned paths: bounded lazy default AST/legacy bridge and native/fresh fixture, qualified book/default facts/current docs.
+  Acceptance: Lower typed operands without reparsing host Hash syntax as DSL, preserve laziness/kinds/effects and genuine retired authored-fat-arrow rejection. Do not normalize unrelated helper domains or deferred evaluation. Compile/small checks/docs/commit.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic literal/lazy regression; no measured admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.2`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary Rust default-selection result flow.
+  Dependencies: .23.3.6.1.
+  Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic regression, no measured admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.3`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary Dart default-selection result flow.
+  Dependencies: .23.3.6.2.
+  Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic regression, no measured admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.4`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary Julia default-selection result flow.
+  Dependencies: .23.3.6.3.
+  Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic regression, no measured admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.5`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary Lua default-selection result flow.
+  Dependencies: .23.3.6.4.
+  Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
+  Planned tier: `focused` under director feature-first cadence.
+  Claim verification: none: unactivated deterministic regression, no measured admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -1761,7 +1841,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.5` | `pending` | Assess container-valued defaults after bounded joined and Lua mutable-split repairs; broad proof remains deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` | `pending` | Repair ordinary Perl default result flow, then literal fallback1.2 and backend assessments; broad proof remains deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

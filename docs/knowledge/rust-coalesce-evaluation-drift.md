@@ -1,7 +1,9 @@
 ---
 id: rust-coalesce-evaluation-drift
-title: "Lazy default-selection boundaries on Rust and Perl"
+title: "Lazy defaults and selected result kinds"
 answers:
+  - "can coalesce_nonempty Array or Hash results continue by actual kind"
+  - "why does a valid coalesce_nonempty Hash literal emit hash_literal_use_colon"
   - "why does coalesce_nonempty make numeric array indices fail on Perl"
   - "does Perl coalesce_nonempty return undef when all operands are empty"
   - "does Rust coalesce preserve a defined empty string"
@@ -10,7 +12,7 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: bounded Rust/Perl defaults62.1/62.2.1-.3 repaired; broad admission open
+status: bounded defaults repaired; Perl kind/literal repairs23.3.6 pending
 tags: [rust, perl, helpers, evaluation, startup-reading]
 evidence: "Historical .3.3.22 controls; current .62.1/.62.2.1-.3 public fixtures, Rust regressions and Perl Get/substitution/native/fresh proof. Broad .62.3/.62.4 remains open."
 reverify:
@@ -18,17 +20,12 @@ reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/coalesce_nonempty_exhaustion.t"
 ---
 
-Current62.1/62.2.1-.2: ordinary defaults and documented Rust nonempty receivers
-share eval_coalesce_args/coalesce_accepts and evaluate only the needed prefix.
-Reject undef, plus empty Scalar text for nonempty mode; preserve actual values.
-Native/restored/generated-plan value/order/skipped-error fixtures pass. Aggregate
-compatibility controls do not broaden the scalar signature; broad62.3/.62.4 stays open.
-
-Perl62.2.3 validates every operand, including the formerly unconditional final
-tail, and compares a scalar copy instead of the returned value. Native/fresh
-tests regress exhaustion, effects and numeric prefix/tail/receiver indices after
-actual RED. String comparisons had added text validity to numeric selections;
-see [[action-regex-operands-and-runtime-kinds]]. The book's exception is removed.
+Current62.1/62.2.1-.3: Rust eval_coalesce_args/coalesce_accepts evaluates only
+needed operands, preserving actual selected kinds. Native/restored/generated-plan
+checks pass. Perl validates every operand and compares a scalar copy, preserving
+numeric validity; native/fresh exhaustion/effect/index checks pass after RED.
+See [[action-regex-operands-and-runtime-kinds]]. Compatibility observations do not
+broaden the scalar signature; broad62.3/.62.4 remains open.
 
 # Historical September7 default-selection findings
 
@@ -86,14 +83,16 @@ Five descriptors report ready=1/unresolved=0. Actual lowered and generated sourc
 the conditional structure, including the nested selected assignment before any late operand.
 These generated captures were inspected, not independently executed.
 
-## Historical assertion and carrier limits
+## Current selected-result findings
 
-`helpers_5_2_coalesce_short_circuits` only checks that coalesce returns `"hello"` when
-a plain fallback string is available. It has no operand effect/error and cannot detect this
-eager-evaluation gap. Permanent value/effect/skipped-failure tests and supported native,
-serialized, generated, emitted and standalone consumers belong to `.62.3`. Other backends,
-receiver/value-block routes, all-undef and invalid argument cases were not executed here.
-That reading slice claimed no repair or whole-project signoff; current bounded repair is recorded above.
+TYPE23.2.5 Get/substitution/fresh probes distinguish joined Array/Hash consumers
+(undef) from nested A-B/X:Y. Direct String Array continuation reaches a raw host
+helper. String/scalar_result metadata blocks actual containers;23.3.6.1.1 owns
+flow/retained-scalar guards. Valid colon Hash default emits hash_literal_use_colon:
+the value-only AST/legacy bridge reparses host fat arrows as DSL. Named Hash works;
+P1 repair1.2 follows1.1. Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
+
+Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.
 
 ## Retained historical provenance
 

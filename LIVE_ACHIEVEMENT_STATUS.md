@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Count/Length/aggregate/joined results and Lua mutable-split delimiter repairs are targeted-checked on recorded hosts. Container-default TYPE23.2.5 is next; keep feature/compile/quick-check/docs/commit cadence, full admission separate.
+Bounded numeric/joined results and Lua delimiter repairs are targeted-checked. Default selected-kind contract23.2.5 is frozen; implement Perl flow23.3.6.1.1 next, then literal repair1.2 and backend assessments. Full admission stays separate.
 
 ## Latest Completed Slice
 
-Lua mutable split now preserves an evaluated false delimiter as text0, matching pure split. Small native/generated-plan/fresh-emitted mutable-split and direct joined checks pass after literal/computed false RED on available PUC5.5.1/LuaJIT, including ordered SD effects, target updates, detached results and true/zero/String/empty controls. Two-argument split remains pure; its corrected fixture oracle is not credited as a product defect. Catalog return semantics are qualified for Lua. Loadfile/book and fast continuity checks pass; declared5.4/full admission stays2.9.2 and container-default23.2.5 is next.
+Freeze selected default result flow after public Perl Get/substitution/native/fresh distinctions: joined Array/Hash consumers stop beside working nested A-B/X:Y, while retained scalar/lazy and selected-null controls work. Schedule bounded Perl flow23.3.6.1.1, then owned P1 valid Hash fallback lowering1.2, then independent backend assessments. Existing scalar signatures and full domain/portable admission remain qualified; no production change or broad suite.
 
 ## Next Action
 
-Assess container-valued defaults by public fluent/nested comparisons and existing helper domains before classification. Freeze a bounded transition/repair children if needed; no broad suite or admission campaign.
+Implement bounded Perl nonempty-default result continuation, retaining lazy prefix, actual kinds, scalar guards and SDJ snapshots. Small compile/native/fresh/direct checks/docs/commit. Valid literal repair1.2 is scheduled immediately afterward; no broad campaign.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 - `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` — Lua joined flow/arity/scalar guards and literal/computed false delimiter fix; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` — Julia correct joined flow retained, one-delimiter/scalar guards added; focused native/generated/emitted and strict Julia1.12 checks pass.
@@ -29,7 +30,6 @@ Assess container-valued defaults by public fluent/nested comparisons and existin
 - `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
 
 ## History
 

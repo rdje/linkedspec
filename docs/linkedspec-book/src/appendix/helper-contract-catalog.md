@@ -286,10 +286,10 @@ dispatch rule.
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
-- **Returns**: scalar
+- **Returns**: the selected value, preserving its kind. The published operand domain is scalar; current Array/named-Harray compatibility and bounded fluent targets are qualified below.
 - **Behavior**: Returns the first argument that is defined and not the empty string `""`, evaluating operands once from left to right until selection. Preserves numeric `0` and boolean `false`; it does not test truthiness.
 - **Edge cases**: Returns `undef` only if all arguments are undef or `""`. `coalesce_nonempty("", 0, "late")` → numeric `0`; `coalesce_nonempty(undef, false, "late")` → `false`. A selected numeric value retains its kind: `index=coalesce_nonempty(0,7)` remains numeric index zero for a later `values[index]` write.
-- **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `"first".coalesce_nonempty({ audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. `"".coalesce_nonempty(" fallback ").trim().uppercase()` → `"FALLBACK"`; helper and documented receiver forms on Perl/Rust preserve this lazy rule, and `"".coalesce_nonempty(undef, "")` returns undef.
+- **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `"first".coalesce_nonempty({ audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. `"".coalesce_nonempty(" fallback ").trim().uppercase()` → `"FALLBACK"`; helper and documented receiver forms on Perl/Rust preserve this lazy rule, and `"".coalesce_nonempty(undef, "")` returns undef. Ordinary Perl selects an Array or named Harray unchanged, but joined-String-to-container continuations need repair: nested `uppercase(join_values("-",coalesce_nonempty("",["a","b"])))` gives `"A-B"`. Direct valid Hash literal fallback lowering is separately under repair; no portable aggregate-domain claim follows.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`
