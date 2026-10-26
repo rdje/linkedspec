@@ -2622,7 +2622,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.6 - parse complete grouped regex literals before fluent dots`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.10.7`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 immediate next after23.2.12, before contains23.2.13.
   Goal: Preserve complete grouped or whitespace-prefixed action regex literal boundaries inside ordinary helper calls, including invalid grouped regex reaching its helper failure boundary.
   Dependencies: .23.2.12 committed cleanly; coordinate existing DART-STARTUP-READING.2.2.1/.2.2.2 without claiming their full scanner/validator closeout.
@@ -2630,6 +2630,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Root cause: action_parser.dart _looksLikeRegexStart rejects slash followed by opening parenthesis/whitespace; _findMatchingDelimiter therefore counts the regex's opening parenthesis as action syntax and misses the enclosing call end. Complete standalone /(/ still has literal priority. Retained public AST/native probe: docs/checkpoints/type-operation-inventory/probe_dart_grouped_invalid_pattern.dart.
   Acceptance: Reconcile operand-position slash literals against symbolic /(8,2) and / (8,2), ordinary numeric division, escaped delimiters, classes and valid grouped patterns. Confirm exact AST/source spans and native/restored/plan false/empty invalid-group consumers; small direct parser/String checks and docs/commit. No global regex type, engine/dialect, unassessed brace-scanner/validator closure or full suite.
   Planned verification tier: focused; declare metadata at activation.
+
+  Activation: clean `dc7b9950764bdf717b07de3429c7de9dd9336098`; modes committed, brief0/tree clean.
+  Owned paths: Complete grouped/whitespace-prefixed action operand recognition, exact public AST/source and native/restored/plan consumers, direct bounded parser/String checks and docs. Broader brace-scanner/validator admission remains DART2.2.
+  Verification tier: `focused`
+  Focused checks: Retained public grouped-invalid AST/native probe, exact operand AST/spans/division and native/restored/plan RED/GREEN, prior mode/String fixture, selected-file fatal analysis/formatting and book/history/diff/final staged continuity checks.
+  Canonical trigger: None for bounded ordinary syntax preservation under director feature-first cadence; broad scanner/validator/context admission remains separate.
+  Claim verification: none: deterministic authored parse/runtime regression controls, no grammar population/completeness measurement.
+
+  Completion: _looksLikeRegexStart accepts complete grouped/whitespace-prefixed slash operands only at existing operand-start positions. Reuse literal escape/body/flags shape with a following operand boundary after optional whitespace; no closing slash means symbolic division remains a call. Matching/statement/fluent scanners reuse this classification. No validator/dialect/schema change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public AST/native probe and new exact operand fixture RED: nested /(/ is ActionRawExpr and helper/receiver/split/filter are unsupported raw code. Five valid grouped/escaped/class/whitespace/division/quoted controls already pass. Standalone /(/ is RegexLiteral.
+  - [x] ROOT CAUSE (WHY + WHERE): action_parser.dart _looksLikeRegexStart unconditionally rejects next '(' or whitespace; _findMatchingDelimiter and shared _consumeScanChar then count regex punctuation as action syntax. A complete literal prefix must have escaped delimiters and a real following operand boundary, not just a slash somewhere later.
+  - [x] FIX: Add one compiled complete-prefix recognizer and retain existing preceding-operand classification. Right-boundary lookahead skips whitespace before requiring delimiter/end; this prevents a second spaced division call from closing a supposed regex over adjacent array entries. Preserve symbolic calls and source text/spans.
+  - [x] ADDRESSED (verified): Exact RegexLiteral operand pattern/source/span14-17 passes; native/restored/plan grouped invalid matches/receiver false and split/filter empty, valid escaped delimiter/class/whitespace groups and nested/adjacent/continued symbolic divisions pass. Retained probe now reports typed call/false and division4, with no new Regex kind.
+  - [x] NO REGRESSION: Prior mode/String fixtures and direct ActionIR parser controls pass;44 targeted Dart tests plus fatal selected-file analysis/formatting. No full suite, broad brace/scoped-regex/emitted admission or existing validator repair inferred.
+  - [x] LOCKSTEP: Book removes obsolete ordinary grouped-invalid caveat and teaches helper false/empty; canonical mode/operand/brace facts, DART2.2.1 partial repair note and current task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Contains23.2.13 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.7 - recognize complete Dart grouped regex operands`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11`
   Status: `active` / bounded children targeted-checked; broad admission23.4 separate
@@ -2993,7 +3010,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` | `pending` | Repair grouped invalid regex operand scanning before contains. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.13` | `pending` | Assess Array contains result handoff and reconcile existing membership/arity policies. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

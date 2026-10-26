@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.10.7 — recognize complete Dart grouped regex operands
+
+Dart action scanning now recognizes complete grouped/whitespace slash literals at operand positions with escaped body/flags and a following delimiter/end after whitespace. Exact operand pattern/source/span and native/restored/plan grouped-invalid false/empty pass after raw-expression RED. Adjacent/nested/continued symbolic division, valid groups/classes/escaped delimiters and prior modes/String/direct parser pass44 focused tests/fatal analysis. Broader brace validators/scanner admission stays open. Book/facts/DART partial-owner/current docs align; contains result assessment23.2.13 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.12 — preserve Dart extended regex modes and helper failures
 
 Dart ordinary literals now process suffix x before ims bridging, reject unknown modes through contextual invalid handling and return false on matches FormatException. Public authored native/restored/plan plus direct String controls pass27 tests/fatal analysis after lost-x/ignored-q/throwing-invalid RED; go/no-x, classes/escapes/comments/Unicode, split/filter and SO preserved. Nested malformed /(/ separately becomes raw before compilation; public AST probe/root cause retained and P1 scanner repair23.3.10.7 is immediate next before contains. No Regex kind/schema/inline-x/full dialect admission.

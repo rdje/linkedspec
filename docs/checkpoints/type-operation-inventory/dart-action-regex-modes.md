@@ -1,6 +1,6 @@
 # Dart ordinary action literal regex modes
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.2.12; follow-up23.3.10.7.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.2.12; bounded operand repair23.3.10.7.
 Catalog matches/split prescribe suffix imsx, go no-ops and false/empty on unknown
 or invalid patterns. Existing action AST flags serialize already; no Regex value
 kind or schema is introduced. Literal x normalization acts before existing ims
@@ -23,3 +23,11 @@ scanning counts pattern parentheses. The a** control reaches runtime compilation
 symbolic /(8,2) and / (8,2) remain numeric4. P1 TYPE23.3.10.7 repairs this next,
 before contains assessment23.2.13. Existing grouped-brace scanner/validator
 DART2.2.1/.2.2.2 remain separate; no closeout from these bounded controls.
+
+23.3.10.7 repairs that complete-literal classifier with existing preceding-operand
+and a following delimiter/end boundary after optional whitespace. Exact pattern/
+source/span14-17 and native/restored/plan grouped invalid false/empty consumers
+now pass; escaped delimiters/classes/valid groups and adjacent/nested/continued
+symbolic divisions remain correct. The retained probe now reports typed call
+and false for grouped invalid, division4;44 targeted parser/mode/String tests
+and fatal analysis pass. Broader brace validator/public admission stays open.

@@ -6,14 +6,18 @@ answers:
   - "why does Dart count a regex closing brace as an unmatched lifecycle brace"
   - "which tasks own Dart regex brace scanner repairs"
   - "does a programmatic Dart spec bypass regex brace validation failure"
-date: 2026-09-09
-status: confirmed defects; DART-STARTUP-READING.2.2.1/.2.2.2 pending behind startup gates
+date: 2026-10-26
+status: complete ordinary operands repaired; broader DART2.2.1/.2.2.2 admission open
 tags: [dart, actionir, regex, scanner, validation, startup, defect]
 evidence: "DART-STARTUP-READING.1.5 completes the action scanner tail and probes five public AST cases, four through programmatically constructed SpecFile compilation/execution. Standalone /(})/ is a regex; attached-if use becomes raw_perl. Lifecycle balance rejects both /}/ and /(})/ without involving the outer source collector. Ordinary grouped-regex and quoted-pattern controls execute true. All 55 selected existing tests pass despite the gaps."
-reverify: "Replay the DART_REGEX_PROBE recipe below from the repository root; its current failures are observations, not repaired acceptance criteria."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/grouped_regex_operand_scanning_test.dart; September replay at Gitdc7b9950764bdf717b07de3429c7de9dd9336098 is historical baseline."
 ---
 
-# Dart regex-brace scanner defects
+# Current bounded repair and September baseline
+
+TYPE23.3.10.7 repairs complete grouped/whitespace slash operand classification, with exact spans and native/restored/plan invalid-group false/empty plus division controls. Validator/outer-collector and full DART2.2.1/.2.2.2 admission stay open. The September observations below and exact replay in Git retain historical results; old raw-classifier assertions are superseded.
+
+## Historical September9 observations
 
 Two independent boundaries fail. The inner ActionIR parser accepts `/(})/`
 as a regex with pattern `(})` in isolation. Inside
@@ -56,17 +60,9 @@ collector defects. `.54.3` remains the single broad public/recurrence closeout
 and now coordinates the concrete Dart owners. These are pending repairs after
 startup `.3/.4/.5`; the passing 55-test selection does not close them.
 
-## Reproduce the observed state
+## Historical replay
 
-```sh
-bash tools/project_data_run.sh python3 - <<'DART_REGEX_PROBE'
-from pathlib import Path
-scratch = Path('.linkedspec-data/scratch')
-scratch.mkdir(parents=True, exist_ok=True)
-(scratch / 'dart15-regex-probe.dart').write_text('import \'dart:convert\';\nimport \'../../dart/lib/linkedspec_dart.dart\';\nvoid main() {\n  for (final source in [\n    r\'/(})/\',\n    r\'if(true) { return(matches("}", /}/)) }\',\n    r\'if(true) { return(matches("}", /(})/)) }\',\n    r\'if(true) { return(matches("x", /(x)/)) }\',\n    r\'if(true) { return(matches("}", "(})")) }\',\n  ]) {\n    final expr = parseActionExpression(source);\n    final row = <String,Object?>{\'source\': source, \'ast\': expr.toJson(),\n      \'resolution\': resolveActionExpressionContracts(expr).toJson()};\n    if (source.startsWith(\'if\')) {\n      final spec = SpecFile(rules: [Rule(\n        header: const RuleHeader(label: \'Top\', isTop: true,\n          mode: RuleMode.defaultMode, rest: \'\', line: 1),\n        body: [BodyElement(kind: CodeBlockBodyElementKind(lifecycle: \'E\', code: source),\n          source: source, line: 2)],\n      )]);\n      try { row[\'value\'] = LinkedSpecRuntimeEngine(compileSpec(spec)).parse(\'\').value; }\n      catch(e) { row[\'error\'] = e.toString(); }\n    }\n    print(jsonEncode(row));\n  }\n}\n')
-DART_REGEX_PROBE
-(cd dart && bash ../tools/run_dart_project_data.sh run ../.linkedspec-data/scratch/dart15-regex-probe.dart)
-```
+Exact September public AST/programmatic-spec recipe remains in this path at Gitdc7b9950764bdf717b07de3429c7de9dd9336098. Its old raw-classifier results are historical; use current grouped_regex_operand_scanning_test.dart for repaired ordinary operands.
 
 Related: [[dart-actionir-ast-parser]], [[dart-frontend-validation]],
 [[rust-body-parser-lexical-boundary-defects]], [[bootstrap-conditional-regex-delimiters]].

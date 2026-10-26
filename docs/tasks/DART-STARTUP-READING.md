@@ -983,7 +983,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Goal: Repair ActionIR regex-start classification so grouped regex braces cannot end an enclosing block.
   Dependencies: Startup `.3`, `.4` and `.5`; .2.2.2 validator repair precedes combined execution proof.
   Acceptance: Lock standalone versus nested /(})/ parsing with /}/, /(x)/, quoted patterns and symbolic division controls. Reconcile _looksLikeRegexStart and delimiter/scanner callers; preserve regex groups, escapes, classes, whitespace, exact source spans and malformed diagnostics without widening division into a regex. Add focused parser and supported execution-carrier proof after the validator repair permits normal compilation.
-  Verification: `pending`; current _looksLikeRegexStart returns false when slash is followed by opening parenthesis; _findMatchingDelimiter then counts the regex's closing brace as the enclosing block delimiter.
+  Verification: `pending` for this complete startup admission. Historical classifier failure is partially repaired by TYPE-REFERENCE-BOOK.1.2.23.3.10.7: complete grouped/whitespace-prefixed slash operands now retain literal boundaries, with exact operand spans, invalid-group helper decisions and symbolic division controls passing44 targeted Dart tests. Broader grouped-brace inventory/validator .2.2.2 and combined source/carrier/public proof remain open; no full .2.2.1 closeout is inferred.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.2.2`

@@ -2528,17 +2528,24 @@ bool _consumeQuotedOrRegex(
   return false;
 }
 
+final _completeActionRegexLiteralPrefix = RegExp(
+  r'/(?:\\.|[^/])*/[A-Za-z]*(?=\s*(?:$|[)\]},;.]))',
+  dotAll: true,
+);
+
 bool _looksLikeRegexStart(String text, int index) {
-  final next = index + 1 < text.length ? text[index + 1] : '';
-  if (next == '(' || next.trim().isEmpty) {
-    return false;
-  }
   var prevIndex = index - 1;
   while (prevIndex >= 0 && text[prevIndex].trim().isEmpty) {
     prevIndex -= 1;
   }
-  if (prevIndex < 0) {
-    return true;
+  if (prevIndex >= 0 && !'([{,=:'.contains(text[prevIndex])) {
+    return false;
   }
-  return '([{,=:'.contains(text[prevIndex]);
+  final next = index + 1 < text.length ? text[index + 1] : '';
+  if (next == '(' || next.trim().isEmpty) {
+    // A complete literal owns its punctuation, including invalid regex groups.
+    // Division calls /(8,2) and / (8,2) have no closing slash and stay calls.
+    return _completeActionRegexLiteralPrefix.matchAsPrefix(text, index) != null;
+  }
+  return true;
 }
