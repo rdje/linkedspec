@@ -2,6 +2,8 @@
 id: terse-array-receiver-value-chains
 title: Array pure receiver chains and named statement transforms
 answers:
+  - "does Rust receiver copy reject extra arguments before effects"
+  - "does Rust receiver copy preserve scalar or missing values"
   - "can first or last continue through selected string methods"
   - "can copy preserve selected array or harray values"
   - "why do Rust standalone split_each filter_match and uniq update arrays"
@@ -17,7 +19,7 @@ date: 2026-10-26
 status: selected-value dispatch implemented; Lua5.4/full admission remain open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test selected_value_receivers"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers"
 ---
 
 Array receiver-dot value chains are pure helper composition over compatible array helpers.
@@ -39,4 +41,6 @@ Array end mutation/result supersession is governed by [[uniform-binding-array-en
 Rust/Dart/Julia5.3.1-.3 implement named standalone transforms using validated snapshots, ordered operands and existing pure helpers; focused native/restored/generated-plan checks pass. Broad5.3.4 stays deferred.
 
 
-At23.2.1, Perl extraction chains failed beside working nested controls. Repairs23.3.1.1.1-.2 preserve selected-result flow through existing scalar/container helpers in every outer-family loop. Pipeline sources and generic copy read actual values once, checking runtime container kind instead of guessing extracted content from spelling. copy keeps selected array/harray kind; min/max distinguish scalar operands from zero-extra-operand array reducers. Native/fresh focused scalar/container and pipeline checks pass with snapshots and once-only effects. Rust23.3.1.2 reuses dynamic receiver dispatch after extraction, with native/restored/generated-plan checks and a trim-null blocker fix. Dart23.3.1.3 confirms existing dynamic value flow and adds pre-effect extraction arity validation. selected-values.md retains the contract; Julia23.3.1.4 confirms dynamic values and guards extraction arity on native/generated-plan/emitted routes; Lua23.3.1.5 confirms existing dynamic values and guards extraction arity on available PUC5.5.1/LuaJIT native/generated/emitted routes. Declared5.4 and full family admission remain open.
+At23.2.1, Perl extraction chains failed beside working nested controls. Repairs23.3.1.1.1-.2 preserve actual selected kinds through existing scalar/container helpers; copy dispatches on runtime container kind and min/max on scalar versus array shape. Rust23.3.1.2 reuses dynamic dispatch and fixes trim null. Dart/Julia/Lua23.3.1.3-.5 confirm dynamic values and guard extraction arity. Focused native/restored/generated/emitted controls retain snapshots and once-only effects; selected-values.md owns the bounded contract. Lua checks use available PUC5.5.1/LuaJIT; declared5.4 and full admission remain open.
+
+23.3.2.3 guards Rust copy arity before effects after public CLI RED. Native/restored/generated-plan copy and selected-value checks pass. Scalar/selected-scalar/missing/free-scalar copy controls return [] on Rust and Perl; this is existing behavior, not a new scalar-copy promise. Perl’s accepted [[perl-scalar-bound-receiver-copy]] also establishes shared nested references. The book now qualifies these domains/depths; complete copy-family reconciliation remains23.2/23.4-owned.

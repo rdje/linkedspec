@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia/Dart receiver copy arity repairs are implemented and targeted-checked after Rust scalar61.1/.61.2. Assess Rust/Lua/Perl copy shapes individually next, then continue helper signatures. Keep feature/compile/quick-check/commit cadence; broad admission remains open.
+Julia/Dart/Rust receiver copy arity repairs are implemented and targeted-checked. Lua/Perl assessment is next, then helper signatures. Current copy domains/depths are qualified in the book; complete copy/scalar/fluent admission remains open. Keep feature/compile/quick-check/commit cadence.
 
 ## Latest Completed Slice
 
-Dart now rejects extra copy receiver operands through existing preflight before effects. Public probe and small native/restored/generated-plan regression pass after actual RED; valid detachment, kinds, scalar/null and once-only controls plus direct selected-value tests remain correct. Changed-file analysis/format, book and fast continuity checks pass; public/canonical/task/live records agree.
+Rust preflight rejects extra copy receiver operands before effects. Public CLI and small native/restored/generated-plan regression pass after actual RED; container detachment, once-only evaluation and existing scalar/missing fallback stay correct, alongside direct selected-value checks. Tiny Rust/Perl controls and canonical Perl authority correct overbroad scalar/deep-copy book wording. Compilation/rustfmt/book and fast continuity checks pass; canonical/task/live records agree.
 
 ## Next Action
 
-Run the tiny public copy-arity effect probe on Rust/Lua/Perl individually; split and commit only confirmed repairs, then resume helper signatures. No broad suites or historical replay.
+Assess Lua/Perl copy arity individually through public effect probes; split and commit confirmed repairs, then resume helper signatures. Preserve current qualified copy domains; no broad suites or historical replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.2.3` — Rust copy arity rejects before effects; focused native/restored/generated-plan and direct selected-value checks pass; actual scalar/depth book boundaries corrected.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.2` — Dart copy arity rejects before effects; native/restored/generated-plan, direct selected-value and changed-file analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.2.1` — Julia copy arity rejects before effects; focused native/generated-plan/fresh-emitted and direct selected-value checks pass.
 - `SESSION-STARTUP-READING.61.2` — Rust null operand/predicate guards and original-value empty replacement/removal; public Perl and focused native/restored/generated-plan controls pass.
@@ -29,7 +30,6 @@ Run the tiny public copy-arity effect probe on Rust/Lua/Perl individually; split
 - `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
 - `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
 - `FUTURE-PARITY-BACKLOG.5.5.1` — dynamic Perl split_each value delimiters, once/order/function/receiver controls; syntax/native/fresh targeted checks pass; standalone5.5.2 next.
-- `FUTURE-PARITY-BACKLOG.5.4.1` — pure Perl pipeline values, scoped parameters and preserved numeric kinds; targeted pipeline/filter native/fresh checks pass; helper selection resumes.
 
 ## History
 

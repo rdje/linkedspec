@@ -950,9 +950,9 @@ dispatch rule.
 - **Behavior**: Shallow copy. The new hash has the same keys and values but is a distinct container.
 - **Compatibility status**: Retired on current runtimes.
 - **Terse spelling**: `copy(h)` / receiver `.copy()` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
-- **Receiver boundary**: `value.copy()` evaluates `value` once, deep-copies that current runtime value, and keeps
-  its array/hash/scalar kind available to later compatible receiver links. Missing `value` remains undefined/null.
-  Receiver `copy()` takes zero extra operands; extra operands are invalid. Julia and Dart reject that shape before receiver/operand effects. Function-form `copy(value)` evaluates and copies its explicit argument; zero-argument `copy()` remains undefined.
+- **Receiver boundary**: `value.copy()` evaluates `value` once and preserves array/harray kind for compatible links. Perl copies the outer container and shares nested references; Rust, Dart, Julia and Lua recursively copy containers.
+  Scalar/missing behavior differs: Perl and Rust currently return `[]`; Dart, Julia and Lua preserve scalar values and missing/null. Function-form `copy(value)` evaluates its explicit operand and has the same value-domain distinction.
+  Receiver `copy()` takes zero extra operands; extra operands are invalid. Julia, Dart and Rust reject that shape before receiver/operand effects. For portable use, copy arrays/harrays and treat Perl nested values as shared; full copy-family admission remains open.
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`

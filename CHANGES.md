@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.2.3 — guard Rust receiver copy arity
+
+Add copy to pre-effect chain shape validation, suppressing invalid direct/selected receiver and operand effects. Keep valid container copies and existing scalar/missing fallback. Fresh public CLI and small native/restored/generated-plan regression are RED before repair and GREEN afterward; direct selected-value checks, compilation/rustfmt/book and fast continuity checks pass. Correct the book’s universal scalar/deep-copy wording using public Rust/Perl controls and canonical Perl shallow-copy authority. Lua/Perl arity assessment follows; full copy/fluent admission remains open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.2.2 — guard Dart receiver copy arity
 
 Extend existing chain preflight to copy so invalid direct/selected shapes reject before receiver/operand effects. Preserve valid deep copies, kinds, detachment and null/scalar continuation. Public probe and small native/restored/generated-plan regression are RED before repair and GREEN afterward; direct selected-value checks, changed-file analysis/format, book and fast continuity checks pass. Rust/Lua/Perl assessment follows; broad fluent admission stays deferred.

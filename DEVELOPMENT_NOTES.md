@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.3 — Rust copy shape and actual domain
+
+Rust receiver_call_args evaluates ignored copy operands before call_helper copies the source; extending existing extraction preflight rejects those shapes before any effects. The small retained fixture passes native/restored/generated-plan execution after actual RED and retains container detachment, once-only evaluation and existing scalar/missing empty-array fallback. Direct selected-value checks stay green. Separate tiny public Rust/Perl controls and the accepted Perl copy fact expose overbroad book wording: Perl/Rust scalar copy returns [], and Perl nested references remain shared. Qualify the current reference without silently widening runtime semantics; complete copy-domain reconciliation stays23.2/23.4-owned. Canonical array fact/map and current records agree; Lua/Perl arity assessment is next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.2 — Dart copy operand admission
 
 The public Dart probe independently confirms Julia’s ignored-copy-operand mechanism: _evaluateFluentCall returns _copyValue(receiver) without inspecting call.args after receiver evaluation. Include copy in the existing first/last preflight, retaining the correct copy and dynamic dispatch implementations. A small regression passes native/restored/generated-plan execution after actual RED, with valid detachment, scalar/null and once-only controls; direct selected-value and changed-file analyzer/formatter checks pass. Book/Dart fact/map and current records agree. Rust/Lua/Perl still require individual assessment; no cross-backend admission is inferred.

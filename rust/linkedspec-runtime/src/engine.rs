@@ -5950,10 +5950,11 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
-                // Extraction has no method arguments. Reject before receiver or
+                // Extraction and copy have no method arguments. Reject before receiver or
                 // operand effects, just as the other governed arity boundaries do.
                 if calls.iter().any(|call| {
-                    matches!(call.method.as_str(), "first" | "last") && !call.args.is_empty()
+                    matches!(call.method.as_str(), "first" | "last" | "copy")
+                        && !call.args.is_empty()
                 }) {
                     return Ok(RuntimeValue::Undef);
                 }

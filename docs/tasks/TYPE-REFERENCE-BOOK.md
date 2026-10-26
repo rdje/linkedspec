@@ -1127,7 +1127,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
   Status: `active` / P2 receiver copy arity intake
   Activation: clean `804f9657c47d62157e9f77b4f76749d24f11e7ab`; Rust scalar61.1/.61.2 repairs are committed. Start the distinguishing public Julia probe; create implementation children only for observed defects.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`; assess other backends individually after each clean feature commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.3`; assess other backends individually after each clean feature commit.
+  Public Rust finding (October26): Fresh locked/offline public CLI probe returns [["a"],2], evaluating both receiver and extra operand. Child .2.3 owns early rejection. Tiny Rust/Perl controls return [[],[],[],[]] for scalar/selected-scalar/missing/free-scalar copy; canonical perl-scalar-bound-receiver-copy already documents scalar fallback and shallow container copies. The book's universal deep/scalar-copy wording is overbroad; .2.3 owns its correction, while complete copy-domain reconciliation remains23.2/23.4 scope.
   Public Dart finding (October26): The same probe returns [["a"],1], confirming an ignored copy operand after receiver effects. Child .2.2 owns this repair; Julia .2.1 is committed at08098f3.
   Public finding (October26): Julia's proposed probe returns [["a"],1] instead of invalid-shape null with zero effects. The receiver is evaluated and extra argument ignored. Child .2.1 owns the confirmed repair; other backends remain unassessed.
   Planned tier: `focused`; public reproduction and bounded per-backend implementation children before writes.
@@ -1175,6 +1176,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Valid copy detachment/kinds, scalar/null continuation and once-only controls plus direct selected_value_receivers test PASS. No full Dart suite.
   - [x] LOCKSTEP: Public copy boundary, canonical Dart fact/map, current frontier and live handoff synchronized; book and fast continuity/history/diff checks pass before landing.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.2 - guard Dart receiver copy arity`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2.3`
+  Status: `done`
+  Activation: clean `a929c92e8c3a4209375302d443792a306a5b1cf6`.
+  Goal: Reject extra Rust copy receiver operands before effects and document the actual valid copy-domain boundary.
+  Owned paths: rust/linkedspec-runtime/src/engine.rs, targeted receiver_copy_arity test and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Fresh public CLI probe; locked/offline Rust receiver_copy_arity and direct selected_value_receivers tests on native/restored/generated-plan; first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded invalid-shape repair/documentation correction under director feature-first cadence; complete copy/fluent admission stays23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored shape/effect and current-domain controls; no quantified corpus, exhaustive or portable admission measurement.
+  Acceptance: Reject extra copy receiver operands before receiver/argument effects; retain valid container copies/kinds, detachment and once-only evaluation. Retain existing scalar/missing empty-array fallback, qualify backend-specific scalar/depth book wording and preserve canonical Perl authority; no unrelated helper-domain change.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Fresh public CLI returns copied array/effects2; retained receiver_copy_arity test returns invalid copies/effects4 before repair. Expected shape is null/null/effects0. Tiny public Rust/Perl value controls confirm existing scalar/missing fallback instead of assuming universal copy semantics.
+  - [x] ROOT CAUSE (WHY + WHERE): Expr::FluentChain preflights first/last only; copy reaches receiver_call_args and call_helper, evaluating extra arguments and copying the source. The overbroad book paragraph conflates Lua/Dart/Julia scalar preservation with Perl/Rust container-oriented copy.
+  - [x] FIX: Add copy to existing pre-effect arity guard. Keep copy implementation/fallback unchanged; qualify the book using current public value controls and canonical Perl shallow-container authority.
+  - [x] ADDRESSED (verified): Locked/offline compilation and authored receiver_copy_arity native/restored/generated-plan regression PASS after actual RED.
+  - [x] NO REGRESSION: Valid container detachment, once-only receiver, selected copy and existing scalar/missing fallback plus direct selected_value_receivers test PASS; first-party rustfmt passes. No full crate suite.
+  - [x] LOCKSTEP: Public copy boundary, canonical array fact/map, task/current frontier and live handoff agree. Book and fast continuity/history/diff checks pass before landing; full copy-domain reconciliation remains23.2/23.4-owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.3 - guard Rust receiver copy arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1253,11 +1273,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has confirmed Julia/Dart repairs; individual Rust/Lua/Perl assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has confirmed Julia/Dart/Rust repairs; individual Lua/Perl assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia/Dart copy-arity repairs are targeted-checked; assess Rust/Lua/Perl individually from public reproduction before any implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia/Dart/Rust copy-arity repairs are targeted-checked; assess Lua/Perl individually from public reproduction before any implementation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
