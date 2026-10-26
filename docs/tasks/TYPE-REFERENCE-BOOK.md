@@ -1067,20 +1067,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.6 - freeze index result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.7`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess ordinary has_key truth-value results continuing through existing compatible scalar/text methods.
   Dependencies: .23.3.7.5.
   Schedule: Next bounded producer-result feature after index rollout, before exhaustive signature/matrix work.
   Existing authority: Catalog has_key(h:hash,key:string) returns boolean key presence. Reconcile actual return kind, key/arity and existing scalar-text rules before classification; preserve helper/domain/copy behavior and false/null stored-value presence. No new logical receiver vocabulary or numeric-Boolean normalization is inferred.
   Public reproduction target: Compare meta.has_key("a").cat("!") with cat(has_key(meta,"a"),"!"); include present/missing/false-valued/null-valued keys, retained actual kinds, scalar boundaries and source/key/consumer order/snapshots.
   Owned paths: Bounded result contract/public probes, canonical hash/scalar facts and task/live planning; production children only after findings.
-  Planned tier: `focused` under director feature-first cadence; exact checks declared at clean activation.
-  Claim verification: none: unactivated qualitative transition assessment, no support/completeness measurement.
+  Activation: clean `617eb85069719f32d36779e521a438ae595df088`; index rollout committed, brief empty, tree clean.
+  Verification tier: `focused`
+  Focused checks: Canonical hash/scalar-text/arity rules, small public Get/substitution/native/fresh has_key and nested/presence/snapshot/effect/shape controls; probe syntax, book and fast continuity/history/diff guards. No full suite or cross-backend campaign.
+  Canonical trigger: None for bounded diagnostic/frozen transition under director feature-first cadence; full domain/portable admission23.4 and final clean push remain separate.
+  Claim verification: none: deterministic authored diagnostic values/order; no quantified corpus, support/completeness or portable measurement.
   Acceptance: Establish public behavior/domains before classification, freeze bounded compatible result flow if needed and schedule repairs. Existing contains missing-needle calibration/helper normalization remains FUTURE-PARITY-BACKLOG.5; do not silently change it here. Full domain/portable admission remains23.4.
+  Confirmed P1 producer defect / schedule: A valid key block returning String remains raw inside exists ->{{DSL}}, causing native handler compilation failure even without a following consumer. has_key passes the authored block through lower_scalar_access_key_expr; complete it in the current MethodLowering context before host key emission. Own first as23.3.8.1.1, then separate result handoff23.3.8.1.2. Literal present/missing/false/null keys already return numeric1/0 correctly; preserve them. Nested effect controls are currently compile failures, not passing snapshot evidence.
+
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native/fresh direct fluent cat fails raw host dispatch while nested cat returns1!; valid String key blocks fail compilation even without chaining.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering has_key key delegation leaves authored blocks raw; _hash_receiver_value_chain_return_family marks has_key terminal.
+  - [x] FIX: Freeze bounded presence/result/key/shape targets; schedule P1 producer repair before result flow and independent backend assessments.
+  - [x] ADDRESSED (verified): Native/fresh literal/variable/helper String keys work; producer presence[1,0,1,1] agrees. Effect blocks are failing evidence, not passing snapshots.
+  - [x] NO REGRESSION: Probe syntax/book/fast continuity/history/diff checks pass; production unchanged, no broad admission or type normalization.
+  - [x] LOCKSTEP: Retain probes/contract; align catalog gap, hash fact/map and task/live/resume owners. Key-block23.3.8.1.1 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.7 - freeze has_key result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -2008,6 +2021,53 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Register fixture; align worked catalog/guide, contract, Lua/array facts/map and live/task/resume records. Book and fast memory/cadence/diagnosis/history/diff checks pass. Bounded index rollout targeted-checked; has_key result assessment23.2.7 next after clean commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.7.5 - guard Lua index result boundaries`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8`
+  Status: `active` / bounded implementation planned; full admission open
+  Goal: Implement frozen has_key result/key targets in has-key-results.md without changing producer kinds/domains.
+  Children: `.23.3.8.1`, `.23.3.8.2`, `.23.3.8.3`, `.23.3.8.4`, `.23.3.8.5`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1`
+  Status: `active` / Perl producer repair precedes flow
+  Goal: Repair confirmed Perl key-block producer compilation, then compatible result continuation.
+  Children: `.23.3.8.1.1`, `.23.3.8.1.2`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1`
+  Status: `pending`
+  Goal: Repair valid String key blocks failing has_key native/fresh compilation; priority P1.
+  Dependencies: .23.2.7.
+  Reproduction / impact: meta.has_key({order=cat(order,"K");"a"}) leaves raw DSL inside exists ->{{...}}, failing compilation even without chaining. Literal/variable/helper String keys already work.
+  Acceptance: Complete key lowering in its current context without disturbing generic callback contracts; establish once-only/source-before-key snapshots, false/null-valued presence and literal/variable/helper compatibility on native/fresh routes. Compile/small checks/docs/commit before result flow.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2`
+  Status: `pending`
+  Goal: Continue Perl has_key truth-valued results through existing compatible scalar/text methods.
+  Dependencies: .23.3.8.1.1.
+  Acceptance: Frozen has-key-results.md, actual kind retained, one-key preflight before effects, direct/selected/pipeline/default/function sources, explicit bridges/scalar boundaries and source/key/consumer snapshots; native/fresh/direct compatibility and docs/commit. No Boolean normalization/new vocabulary.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust has_key result/key/shape targets.
+  Dependencies: .23.3.8.1.2.
+  Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart has_key result/key/shape targets.
+  Dependencies: .23.3.8.2.
+  Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia has_key result/key/shape targets.
+  Dependencies: .23.3.8.3.
+  Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua has_key result/key/shape targets.
+  Dependencies: .23.3.8.4.
+  Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -2086,11 +2146,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Bounded has_key result assessment23.2.7 is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; P1 Perl key-block23.3.8.1.1 precedes result flow1.2 and independent backend assessment. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.7` | `pending` | Assess has_key truth-value result continuation after bounded index rollout; full admission separate. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` | `pending` | P1 valid String key-block compilation repair before result flow. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

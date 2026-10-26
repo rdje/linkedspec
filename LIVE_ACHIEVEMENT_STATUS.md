@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded index rollout is targeted-checked on recorded hosts. Has_key truth-value result assessment23.2.7 is next. Feature/compile/small-check/docs/commit cadence continues; declared5.4/full admission separate.
+Has_key contract frozen; P1 Perl key-block repair first, result flow and independent backends follow. Feature/compile/small-check/docs/commit cadence; full admission separate.
 
 ## Latest Completed Slice
 
-Lua retains index numeric flow and adds source-independent scalar guarding plus one-needle preflight. Native/generated-plan/fresh-emitted index and direct default checks pass after []/extra2/four-effect RED on available PUC5.5.1/LuaJIT, preserving integer/null boundaries, numeric0 selector use, explicit bridges and N/SN/SNA snapshots. Loadfile/book/fast continuity checks pass. Bounded index rollout is targeted-checked on recorded hosts; has_key truth-value result assessment23.2.7 is next, with declared5.4/full admission separate and producer/equality/source/copy unchanged.
+Public native/fresh probes distinguish raw host fluent failure from nested1!, and key-block compilation failure from working literal/variable/helper String keys. Presence is[1,0,1,1]; effect blocks are failing controls. Bounded contract and backend owners recorded; production unchanged. Syntax/book/fast continuity checks pass; P1 key-block repair precedes result flow, with full admission separate.
 
 ## Next Action
 
-Publicly assess has_key scalar/text continuations and actual presence/kind/arity policies before classification. Preserve existing helper/domain/copy/effect behavior; freeze bounded targets and owners if needed, small checks/docs/commit.
+Repair Perl has_key valid String key-block compilation under23.3.8.1.1; native/fresh RED/GREEN producer snapshots/order and direct literal/variable/helper compatibility, small checks/docs/commit before result handoff1.2.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.7` — has_key contract frozen, P1 key-block and result-flow gaps owned; public native/fresh controls retained.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.5` — index scalar/null and shape guards; focused available-host native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` — index scalar/null and shape guards; strict native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` — index integer/null and shape guards; native/restored/plan/direct default and fatal analysis pass.
@@ -29,7 +30,6 @@ Publicly assess has_key scalar/text continuations and actual presence/kind/arity
 - `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 - `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` — Lua joined flow/arity/scalar guards and literal/computed false delimiter fix; focused available-host checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` — Julia correct joined flow retained, one-delimiter/scalar guards added; focused native/generated/emitted and strict Julia1.12 checks pass.
 
 ## History
 

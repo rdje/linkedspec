@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.7 — separate key-block producer from result flow
+
+Public native/fresh probes distinguish raw host fluent failure from nested1!, and key-block compilation failure from working literal/variable/helper String keys. Presence is[1,0,1,1]; effect blocks are failing controls. Bounded contract and backend owners recorded; production unchanged. Syntax/book/fast continuity checks pass; P1 key-block repair precedes result flow, with full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.5 — retain index scalar boundaries across carriers
 
 Lua retains index numeric flow and adds source-independent scalar guarding plus one-needle preflight. Native/generated-plan/fresh-emitted index and direct default checks pass after []/extra2/four-effect RED on available PUC5.5.1/LuaJIT, preserving integer/null boundaries, numeric0 selector use, explicit bridges and N/SN/SNA snapshots. Loadfile/book/fast continuity checks pass. Bounded index rollout is targeted-checked on recorded hosts; has_key truth-value result assessment23.2.7 is next, with declared5.4/full admission separate and producer/equality/source/copy unchanged.

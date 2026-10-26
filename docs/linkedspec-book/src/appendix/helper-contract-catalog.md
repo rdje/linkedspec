@@ -1007,7 +1007,7 @@ dispatch rule.
 ### `has_key(h, key)`
 - **Signature**: `has_key(h: hash, key: string)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the hash contains the named key.
+- **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl currently supports literal, variable and helper-produced String keys, but a valid key block such as `meta.has_key({"a"})` fails compilation; its repair precedes fluent-result work. `cat(has_key(meta,"a"),"!")` works (`"1!"` for present, `"0!"` for absent), while `meta.has_key("a").cat("!")` currently reaches an invalid host call. Compatible result continuation and key-block repair are tracked; this is not full fluent/portable admission.
 
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
