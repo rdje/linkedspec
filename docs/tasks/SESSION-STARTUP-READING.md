@@ -20,7 +20,7 @@
 
 ## Current Frontier
 
-Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Ordinary nonempty62.2.1 is also implemented/targeted-checked; documented Rust receiver62.2.2 is implemented too. Discovered Perl exhausted-tail62.2.3 is immediate next before continued helper signatures. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Ordinary nonempty62.2.1 is also implemented/targeted-checked; documented Rust receiver62.2.2 is implemented too. Discovered Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Resume TYPE23.2.2 count/length result probing before continued exhaustive signatures. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
 
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
@@ -29,7 +29,7 @@ owns the broader numeric closeout. Other startup repairs retain their schedule.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.62.2.3` | `pending` | Immediate owned repair: Perl nonempty default selection returns final empty text instead of undef on exhaustion. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.2` | `pending` | Next feature selection: publicly probe count/length numeric results feeding compatible scalar/number methods before freezing a bounded contract. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

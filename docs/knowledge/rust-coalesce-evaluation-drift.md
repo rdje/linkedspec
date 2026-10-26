@@ -2,6 +2,7 @@
 id: rust-coalesce-evaluation-drift
 title: "Lazy default-selection boundaries on Rust and Perl"
 answers:
+  - "why does coalesce_nonempty make numeric array indices fail on Perl"
   - "does Perl coalesce_nonempty return undef when all operands are empty"
   - "does Rust coalesce preserve a defined empty string"
   - "does Rust coalesce short circuit operand evaluation"
@@ -9,10 +10,12 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: bounded Rust defaults62.1/62.2.1-.2 repaired; Perl exhaustion62.2.3 and broad admission open
+status: bounded Rust/Perl defaults62.1/62.2.1-.3 repaired; broad admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
-evidence: "Historical .3.3.22 paired controls; current .62.1/.62.2.1-.2 public fixtures and retained Rust regressions; Perl empty-tail root isolated through Get/substitution and owned by .62.2.3. Broad .62.3/.62.4 remains open."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
+evidence: "Historical .3.3.22 controls; current .62.1/.62.2.1-.3 public fixtures, Rust regressions and Perl Get/substitution/native/fresh proof. Broad .62.3/.62.4 remains open."
+reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/coalesce_nonempty_exhaustion.t"
 ---
 
 Current62.1/62.2.1-.2: ordinary defaults and documented Rust nonempty receivers
@@ -21,10 +24,11 @@ Reject undef, plus empty Scalar text for nonempty mode; preserve actual values.
 Native/restored/generated-plan value/order/skipped-error fixtures pass. Aggregate
 compatibility controls do not broaden the scalar signature; broad62.3/.62.4 stays open.
 
-Perl exhaustion62.2.3 is immediate next: public helper/receiver controls ending in
-empty text return "" instead of undef. call_spec_handler_subst confirms an
-unconditional final operand in build_coalesce_nonempty_expr. The Rust all-empty
-null oracle is retained; the book qualifies the current Perl defect.
+Perl62.2.3 validates every operand, including the formerly unconditional final
+tail, and compares a scalar copy instead of the returned value. Native/fresh
+tests regress exhaustion, effects and numeric prefix/tail/receiver indices after
+actual RED. String comparisons had added text validity to numeric selections;
+see [[action-regex-operands-and-runtime-kinds]]. The book's exception is removed.
 
 # Historical September7 default-selection findings
 

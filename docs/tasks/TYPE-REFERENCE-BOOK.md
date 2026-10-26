@@ -939,6 +939,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP** — Book discloses current Perl gap/workaround, canonical array fact/map and live frontier name the contract and next backend leaf. No portable implementation completeness claim.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.1 - define selected-value receiver continuations`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.2`
+  Status: `pending`
+  Goal: Probe and freeze bounded count/length numeric-result receiver continuations before implementation.
+  Schedule: Next feature-first selection after scalar/default helper repairs; precede exhaustive signature/matrix work with a concrete source-backed inter-type journey, as23.2.1 did for first/last.
+  Reproduce at activation: For values=[1,2], compare values.count().add(3) with num_add(count(values),3), and "abcd".length().add(2) with num_add(length("abcd"),2). Nested controls should return5/6; establish actual fluent outcomes publicly before claiming a defect.
+  Planned tier: `focused`; freeze exact bounded scope before code under director feature-first direction. Full portable/family admission remains23.4 after feature coverage.
+  Claim verification: none: Unactivated bounded normative feature/probe owner; no implementation/parity/completeness measurement.
+  Acceptance: If the public probe confirms a gap, define count/length results feeding existing compatible pure scalar/number methods, actual value identity, once-only source/argument evaluation and inherited null/domain/error rules. Explicitly reconcile the earlier count-terminal control as the prior bounded policy. Add implementation children only after the contract/probe, commit per backend and retain comprehensive signatures/matrix, numeric reducer/boolean/control/mutation/callback scope separately.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
   Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2`
@@ -1302,11 +1311,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; discovered Perl exhausted-tail62.2.3 is immediate next before continued signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Ordinary Rust coalesce62.1 is now implemented/targeted-checked; ordinary nonempty62.2.1 is also implemented; documented Rust receiver62.2.2 is implemented too; Perl exhausted-tail/numeric-selection62.2.3 is repaired too. Next concrete inter-type probe is count/length numeric-result continuation23.2.2, before exhaustive signature/matrix work. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.62.2.3` | `pending` | Immediate owned repair: Perl nonempty exhaustion returns final empty text instead of undef; Rust receiver repair is targeted-checked. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.2` | `pending` | Probe/freeze the next concrete inter-type feature: count/length results feeding compatible scalar/number methods. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — SESSION-STARTUP-READING.62.2.3 — validate the tail without erasing kinds
+
+Public Get/substitution isolates an unconditional final operand in the nonempty builder. The typed-zero control also exposes the known scalar-validity mechanism: comparing the returned value with ne empty text makes a numeric selection a string selector. Build a guarded final operand with undef fallback and compare a separate scalar copy at every position. Keep head evaluation once and lazy ternary tails. Native/fresh tests now preserve exhaustion/nulls, zero/false, exact ABCDE effects and numeric prefix/tail/receiver indices after actual RED; direct selected-scalar and changed-file syntax checks pass. The initial test heredoc layout was corrected before runtime RED. Register the test, remove the temporary book qualification and synchronize canonical/current records. Next concrete inter-type probe is count/length result continuation; full signature/matrix/admission remains open.
+
 ## 2026-10-26 — SESSION-STARTUP-READING.62.2.2 — receiver fallback prefixes
 
 Ordinary lazy helper dispatch did not cover static string loops or selected-value dynamic calls, both of which collected receiver operands eagerly. Extract eval_coalesce_args and reuse it with coalesce_accepts after testing the actual current receiver; route static nonempty links to that path before operand collection. The authored fixture now preserves ABCDEF order and skipped typed-write errors on native/restored/generated-plan execution, while ordinary coalesce/nonempty tests stay green. Public Perl agrees except exhausted final empty text: Get/substitution isolates an unconditional tail in build_coalesce_nonempty_expr. Own the immediate Perl62.2.3 fix without weakening the Rust null oracle. Book/current/canonical records align; historical manifest detail is byte-recoverable at the cited clean Git boundary.

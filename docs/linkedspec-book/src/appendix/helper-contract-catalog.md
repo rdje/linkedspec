@@ -288,8 +288,8 @@ dispatch rule.
 - **Signature**: `coalesce_nonempty(values: scalar...)`
 - **Returns**: scalar
 - **Behavior**: Returns the first argument that is defined and not the empty string `""`, evaluating operands once from left to right until selection. Preserves numeric `0` and boolean `false`; it does not test truthiness.
-- **Edge cases**: Returns `undef` only if all arguments are undef or `""`. `coalesce_nonempty("", 0, "late")` → numeric `0`; `coalesce_nonempty(undef, false, "late")` → `false`. Perl currently leaks a final empty string on exhaustion; tracked repair62.2.3 follows the Rust receiver repair.
-- **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `"first".coalesce_nonempty({ audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. `"".coalesce_nonempty(" fallback ").trim().uppercase()` → `"FALLBACK"`; ordinary Rust helper and documented receiver forms both preserve lazy evaluation.
+- **Edge cases**: Returns `undef` only if all arguments are undef or `""`. `coalesce_nonempty("", 0, "late")` → numeric `0`; `coalesce_nonempty(undef, false, "late")` → `false`. A selected numeric value retains its kind: `index=coalesce_nonempty(0,7)` remains numeric index zero for a later `values[index]` write.
+- **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `"first".coalesce_nonempty({ audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. `"".coalesce_nonempty(" fallback ").trim().uppercase()` → `"FALLBACK"`; helper and documented receiver forms on Perl/Rust preserve this lazy rule, and `"".coalesce_nonempty(undef, "")` returns undef.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`

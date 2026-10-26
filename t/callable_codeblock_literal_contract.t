@@ -1371,4 +1371,8 @@ subtest 'selected container receiver result contract' => sub {
     do File::Spec->catfile($repo_root, 't', 'selected_container_receiver_contract.t') or die $@ || $!;
 };
 
+subtest 'coalesce_nonempty exhaustion and selected kinds' => sub {
+    do File::Spec->catfile($repo_root, 't', 'coalesce_nonempty_exhaustion.t') or die $@ || $!;
+};
+
 done_testing();

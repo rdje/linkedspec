@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust ordinary and documented receiver default-selection repairs are implemented and targeted-checked. Discovered Perl exhausted-tail62.2.3 is immediate next before continued signatures. Keep feature/compile/quick-check/docs/commit cadence; broader proof remains deferred.
+Bounded Rust default-helper/receiver and discovered Perl nonempty repairs are implemented and targeted-checked. Next concrete inter-type feature probe is count/length result continuation23.2.2 before exhaustive signatures/matrices. Keep compile/quick-check/docs/commit cadence; broader admission remains deferred.
 
 ## Latest Completed Slice
 
-Rust static/selected-value nonempty receiver paths now reuse lazy prefix evaluation, preserving actual receiver values and skipping later writes/errors. Authored native/restored/generated-plan and direct ordinary default tests pass after actual RED; compilation/rustfmt/book and fast continuity checks pass. Public Perl confirms lazy order but exposes a final-empty exhaustion defect; Get/substitution shows an unconditional generated tail. The book/fact/task/live handoff qualifies and owns its immediate62.2.3 repair.
+Perl nonempty selection now validates the final operand with undef fallback and compares copies, preserving numeric validity. Small native/fresh exhaustion/type/order and direct selected-scalar tests pass after actual RED; changed module/test/registration syntax, book and fast continuity checks pass. Register the regression, remove the book exception and synchronize canonical fact/map and indexed/current/live records. Zero/false, lazy once-only effects and numeric prefix/tail/receiver selectors remain correct.
 
 ## Next Action
 
-Repair Perl nonempty exhaustion62.2.3 with a small native/fresh regression and focused syntax/dependent checks. Preserve null oracle, zero/false and once-only lazy effects; commit before continued helper signatures. No broad suites or historical replay.
+Publicly probe count/length numeric results feeding compatible scalar/number methods beside nested helper controls. If a gap is confirmed, freeze bounded23.2.2 authority before per-backend implementation and targeted checks. Keep comprehensive signatures/matrices and admission separately open; no broad replay.
 
 ## Recent Completions
 
+- `SESSION-STARTUP-READING.62.2.3` — Perl nonempty exhaustion and selected numeric kinds; native/fresh regression, direct selected-scalar and changed-file syntax checks pass.
 - `SESSION-STARTUP-READING.62.2.2` — Rust documented receiver lazy defaults; native/restored/generated-plan order/skipped-error and ordinary default-helper checks pass; Perl final-tail repair owned next.
 - `SESSION-STARTUP-READING.62.2.1` — Rust ordinary nonempty lazy selection; authored native/restored/generated-plan value/order/skipped-error and direct coalesce tests pass.
 - `SESSION-STARTUP-READING.62.1` — Rust ordinary first-defined lazy selection; authored native/restored/generated-plan values/order/skipped-error and direct selected-value checks pass.
@@ -29,7 +30,6 @@ Repair Perl nonempty exhaustion62.2.3 with a small native/fresh regression and f
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` — Rust selected scalar/container dispatch and trim-null blocker; targeted native/restored/generated-plan and array-transform checks pass; Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` — selected Perl array/harray methods and runtime-kind copy; focused native/fresh/scalar/pipeline checks pass; Rust23.3.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1` — selected Perl scalar methods, native/fresh and pipeline checks pass; selected containers1.1.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
 
 ## History
 

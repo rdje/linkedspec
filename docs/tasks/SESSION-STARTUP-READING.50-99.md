@@ -528,7 +528,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   - [x] LOCKSTEP: Public examples, canonical coalesce fact/map, indexed/current task frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Historical observations remain dated.
   Commit: `SESSION-STARTUP-READING.62.1 - lazily select Rust first-defined values`.
 - ID: `SESSION-STARTUP-READING.62.2`
-  Status: `active`
+  Status: `active` / bounded implementations complete; broad admission remains62.3/.62.4
   Children: `.62.2.1`, `.62.2.2`, `.62.2.3`
   Goal: Reconcile coalesce_nonempty and receiver/value-block dispatch with the reference.
   Dependencies: .62.1.
@@ -538,7 +538,7 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Historical September verification: Two fresh coalesce_nonempty pairs also showed Rust executes the late
     audit assignment after first/fallback selection; Perl preserves unset/selected respectively. Both use
     eager Rust operand collection versus nested Perl conditionals. Receiver/value-block proof remains open.
-  Partial implementation October26: Ordinary nonempty and documented Rust receiver/value-block laziness are implemented/targeted-checked under .62.2.1-.2. Public comparison exposes the separate Perl exhausted-tail defect .62.2.3, immediate next before continued signatures; broad62.3/.62.4 stays deferred.
+  Bounded implementation October26: Ordinary nonempty and documented Rust receiver/value-block laziness are implemented/targeted-checked under .62.2.1-.2. Discovered Perl exhaustion/numeric-selection defects are repaired under .62.2.3. Continue helper signature selection; broad62.3/.62.4 stays deferred.
   Commit: Per-child implementation commits; broader admission remains .62.3/.62.4.
 - ID: `SESSION-STARTUP-READING.62.2.1`
   Status: `done`
@@ -578,15 +578,28 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   - [x] LOCKSTEP: Public receiver examples/Perl exception, canonical fact/map, indexed/current frontier and live handoff agree; book and fast continuity/history/diff checks pass. Historical detail remains byte-recoverable at the named Git boundary; Perl .62.2.3 is next.
   Commit: `SESSION-STARTUP-READING.62.2.2 - lazily select Rust receiver defaults`.
 - ID: `SESSION-STARTUP-READING.62.2.3`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `92e119d8420c777d6685db58f6f35494a23b753a`.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodLowering.pm, t/coalesce_nonempty_exhaustion.t, existing callable suite registration and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution diagnosis; changed module/test syntax, small native/fresh coalesce_nonempty_exhaustion and direct selected_scalar_receiver_contract tests; book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded diagnosed helper repair under director feature-first cadence; broad default-selection/target admission remains62.3/.62.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored exhaustion/value/order/type regression; no quantified corpus, exhaustive or portable admission measurement.
   Priority: P1; immediate next implementation after clean Rust receiver62.2.2 commit.
   Goal: Repair Perl coalesce_nonempty exhaustion when the final rejected operand is empty text.
   Reproduction: The shared receiver fixture returns empty text for "".coalesce_nonempty(undef,"") on public Perl Get, while the catalog and authored oracle require undef when every operand is undef/empty. Rust already returns null for this case; do not weaken the Rust oracle to match the discrepancy.
   Impact: An exhausted default selection incorrectly appears defined and can feed later string operations; ordinary helper and fresh-emitted paths need tool-backed isolation.
   Tool-backed root cause: Public four-value helper/receiver controls return ["","",null,""] with no last_error. call_spec_handler_subst("Top", return(coalesce_nonempty(undef,""))) emits a guarded first operand with an unconditional empty-string tail. MethodLowering.pm's build_coalesce_nonempty_expr returns the final part without validating it; the same base shape is valid for first-defined coalesce but wrong for nonempty selection. Keep the Rust all-empty null oracle unchanged.
-  Planned tier: `focused`; declare exact public diagnosis/changed paths/proof at activation.
-  Claim verification: none: Owned deterministic boundary defect, no quantified/exhaustive measurement.
+  Typed-value intake: Public Get with index=coalesce_nonempty(0,7); values[index]="new" reports nested_write_kind_conflict (expected harray, actual array). Comparing the returned scalar with ne '' adds text validity; action-regex-operands-and-runtime-kinds already owns this predicate mechanism in filters. This leaf owns temporary-comparison guards for all coalesce_nonempty positions so selected zero stays numeric, including the newly validated final operand.
   Acceptance: Use LinkedSpec public substitution/generated-source tools to find the exact mechanism before changes; fix ordinary/receiver exhaustion while preserving zero/false, selected values and lazy once-only effects. Retain the scalar signature and separate broader admission.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Public Get/substitution isolates final empty-text leakage; valid native/fresh regression reproduces exhaustion and selected-zero array-index failure before repair. The test's initial heredoc layout error was corrected before collecting runtime RED and is not a product defect.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering.pm build_coalesce_nonempty_expr returns its last part unconditionally and compares selected scalars directly with ne ''. The first loses exhausted-null semantics; the second adds text validity to returned numeric values, matching the canonical predicate mechanism.
+  - [x] FIX: Validate every operand with an undef terminal fallback. Compare a separate scalar copy so returned values retain their original validity. Keep each operand expression in a once-only local and retain lazy ternary tails; ordinary coalesce and the selector classifier are unchanged.
+  - [x] ADDRESSED (verified): Small coalesce_nonempty_exhaustion native/fresh test PASS after actual RED for helper/receiver/nested exhaustion, zero/false, ABCDE order and numeric prefix/tail/receiver indices.
+  - [x] NO REGRESSION: Direct selected_scalar_receiver_contract test and changed-module/new-test/registration syntax checks PASS. Valid selections skip later effects; no full Phase0/callable suite or source-fault campaign.
+  - [x] LOCKSTEP: Register the regression; remove the book's Perl exception and document numeric identity. Canonical fact/map, indexed/current frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Broader62.3/.62.4 remains open.
+  Commit: `SESSION-STARTUP-READING.62.2.3 - preserve Perl nonempty default boundaries`.
 - ID: `SESSION-STARTUP-READING.62.3`
   Status: `pending`
   Goal: Add permanent default-selection and effect-order recurrence across supported carriers.

@@ -6968,11 +6968,10 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   my $build_coalesce_nonempty_expr;
   $build_coalesce_nonempty_expr = sub {
    my (@parts) = @_;
-   return $parts[0] if @parts == 1;
-
    my $head = shift @parts;
-   my $tail_expr = $build_coalesce_nonempty_expr->(@parts);
-   return 'do { my $__ls_coalesce_nonempty = '.$head.'; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne \'\') ? $__ls_coalesce_nonempty : '.$tail_expr.' }';
+   my $tail_expr = @parts ? $build_coalesce_nonempty_expr->(@parts) : 'undef';
+   # Compare a scalar copy so numeric selections retain their original validity.
+   return 'do { my $__ls_coalesce_nonempty = '.$head.'; my $__ls_coalesce_nonempty_text = $__ls_coalesce_nonempty; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty_text ne \'\') ? $__ls_coalesce_nonempty : '.$tail_expr.' }';
   };
 
   return $build_coalesce_nonempty_expr->(@lowered_args);
