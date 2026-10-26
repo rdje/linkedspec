@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.2.4 — guard Lua receiver copy arity
+
+Reject extra copy receiver operands through existing chain preflight before effects. Fresh matching available PUC5.5.1/LuaJIT products and small native/generated-plan/fresh-emitted regression pass after actual RED, with valid copy detachment/scalar/null and once-only controls; direct selected-value checks pass. Perl already rejects invalid direct/selected copy shapes, confirmed natively and freshly emitted without runtime changes. Book/fact/map/current records agree. Broad target/copy admission remains deferred; next known implementation is Rust coalesce62.1/.62.2 before continued signatures.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.2.3 — guard Rust receiver copy arity
 
 Add copy to pre-effect chain shape validation, suppressing invalid direct/selected receiver and operand effects. Keep valid container copies and existing scalar/missing fallback. Fresh public CLI and small native/restored/generated-plan regression are RED before repair and GREEN afterward; direct selected-value checks, compilation/rustfmt/book and fast continuity checks pass. Correct the book’s universal scalar/deep-copy wording using public Rust/Perl controls and canonical Perl shallow-copy authority. Lua/Perl arity assessment follows; full copy/fluent admission remains open.

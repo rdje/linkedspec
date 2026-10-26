@@ -3880,11 +3880,11 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "fluent_chain" then
-    -- Extraction takes no method arguments. Reject before source/operand
+    -- Extraction and copy take no method arguments. Reject before source/operand
     -- effects while retaining the existing dynamic value dispatcher.
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
-      if (name == "first" or name == "last") and #(call.args or {}) > 0 then
+      if (name == "first" or name == "last" or name == "copy") and #(call.args or {}) > 0 then
         return json.null
       end
     end

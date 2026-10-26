@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / receiver copy arity implementation after selected-value rollout
+- Status: `active` / known helper feature repairs after bounded selected/copy rollout
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -1125,9 +1125,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5 - guard Lua selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2`
-  Status: `active` / P2 receiver copy arity intake
+  Status: `active` / bounded copy-arity implementations complete; broad admission deferred
   Activation: clean `804f9657c47d62157e9f77b4f76749d24f11e7ab`; Rust scalar61.1/.61.2 repairs are committed. Start the distinguishing public Julia probe; create implementation children only for observed defects.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.3`; assess other backends individually after each clean feature commit.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.2.5`.
+  Public Lua/Perl findings (October26): Both available PUC5.5.1/LuaJIT return [1,2], copying the extra operand after both effects; .2.4 owns the confirmed Lua repair. Perl Get returns [null,0] for the selected misuse, already correct; direct/generated controls follow without a fabricated implementation defect.
   Public Rust finding (October26): Fresh locked/offline public CLI probe returns [["a"],2], evaluating both receiver and extra operand. Child .2.3 owns early rejection. Tiny Rust/Perl controls return [[],[],[],[]] for scalar/selected-scalar/missing/free-scalar copy; canonical perl-scalar-bound-receiver-copy already documents scalar fallback and shallow container copies. The book's universal deep/scalar-copy wording is overbroad; .2.3 owns its correction, while complete copy-domain reconciliation remains23.2/23.4 scope.
   Public Dart finding (October26): The same probe returns [["a"],1], confirming an ignored copy operand after receiver effects. Child .2.2 owns this repair; Julia .2.1 is committed at08098f3.
   Public finding (October26): Julia's proposed probe returns [["a"],1] instead of invalid-shape null with zero effects. The receiver is evaluated and extra argument ignored. Child .2.1 owns the confirmed repair; other backends remain unassessed.
@@ -1195,6 +1196,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Valid container detachment, once-only receiver, selected copy and existing scalar/missing fallback plus direct selected_value_receivers test PASS; first-party rustfmt passes. No full crate suite.
   - [x] LOCKSTEP: Public copy boundary, canonical array fact/map, task/current frontier and live handoff agree. Book and fast continuity/history/diff checks pass before landing; full copy-domain reconciliation remains23.2/23.4-owned.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.3 - guard Rust receiver copy arity`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2.4`
+  Status: `done`
+  Activation: clean `222db28a32a4047ca9fccba03927c3eb975a29bb`.
+  Goal: Reject extra Lua copy receiver operands before effects; confirm the already-correct bounded Perl copy-arity path.
+  Owned paths: lua/src/linkedspec/interpreter.lua, targeted Lua test/registration and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Lua/Perl probes; fresh matching available PUC5.5.1/LuaJIT native builds, Lua syntax and small receiver_copy_arity native/generated-plan/fresh-emitted test plus direct selected-value regression; Perl native/fresh controls, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded invalid-shape repair under director feature-first cadence; complete copy/fluent admission stays23.4 and eventual clean push proof. Declared PUC5.4 target proof remains LUA-STARTUP-READING.2.2.
+  Claim verification: none: deterministic authored shape/effect regression; no quantified corpus, exhaustive or portable admission measurement.
+  Acceptance: Reject extra copy operands before receiver/argument effects, preserve valid copy/kind/detachment/null/scalar behavior and once-only evaluation. Do not change Perl's already-correct public result; retain copy-domain/depth qualifications and Lua host limitations.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Both available Lua public probes return [1,2]; retained native fixture returns extra operand copies/effects4 instead of null/null/effects0. Perl Get independently returns the correct selected null/effects0; no false Perl RED.
+  - [x] ROOT CAUSE (WHY + WHERE): Lua fluent copy recognizes zero arguments only; extra-argument shapes fall through to function-copy evaluation and copy the operand. The chain preflight guards first/last only, after which receiver effects run.
+  - [x] FIX: Extend canonical zero-extra-operand preflight to copy before receiver evaluation; retain copy_value and dynamic continuation. Register the small Lua regression.
+  - [x] ADDRESSED (verified): Fresh matching available PUC5.5.1/LuaJIT products, syntax and authored native/generated-plan/fresh-emitted fixture PASS after actual RED.
+  - [x] NO REGRESSION: Valid container detachment, scalar/null, once-only and direct selected-value controls PASS on both hosts. Perl direct/selected invalid shapes plus valid copies PASS through native Get and fresh emitted execution without runtime edits. No full Lua/Perl suite.
+  - [x] LOCKSTEP: Public copy boundary, canonical Lua fact/map, task/current frontier and live handoff agree; book and fast continuity/history/diff checks pass. Declared5.4 and broader copy admission remain open under .2.5/23.4.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.2.4 - guard Lua receiver copy arity`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.2.5`
+  Status: `pending`
+  Goal: Admit bounded copy arity at the later supported-target/canonical boundary.
+  Dependencies: .2.1-.2.4; LUA-STARTUP-READING.2.2 for declared PUC5.4 proof.
+  Schedule: After feature coverage, compose existing targeted fixtures with23.4 admission and eventual clean push proof; do not launch duplicate broad suites during implementation.
+  Planned tier: `canonical`; declare actual receipt/claim scope at activation.
+  Claim verification: none: Future admission owner, no new measurement.
+  Acceptance: Retain per-backend domain/depth distinctions, reject wrong shapes before effects through supported consumers, restore the declared Lua target and close the bounded parent without inferring complete fluent families.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1273,11 +1302,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Receiver copy arity23.3.2 has confirmed Julia/Dart/Rust repairs; individual Lua/Perl assessments are next, then signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/delimiters and all bounded selected-value backend children with targeted checks. Rust scalar61.1/.61.2 repairs are committed; broad61.3 stays deferred. Bounded copy-arity implementations23.3.2.1-.4 are complete on recorded hosts; Perl is already correct, and broader .2.5 admission stays deferred. Next known feature gap is Rust coalesce62.1, then62.2 before continued signatures. Lua declared5.4 target and full receiver/comprehensive admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.2` | `active` | Julia/Dart/Rust copy-arity repairs are targeted-checked; assess Lua/Perl individually from public reproduction before any implementation. |
+| 1 | `SESSION-STARTUP-READING.62.1` | `pending` | Next known helper implementation: Rust first-defined lazy coalesce; follow with62.2 and then signature inventory. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

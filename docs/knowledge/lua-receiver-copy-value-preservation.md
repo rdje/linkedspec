@@ -1,44 +1,39 @@
 ---
 id: lua-receiver-copy-value-preservation
-title: Lua receiver copy deep-copies the already evaluated fluent value
+title: Lua receiver copy preserves values and rejects extra operands before effects
 answers:
+  - does Lua receiver copy reject extra arguments before effects
   - why did Lua meta copy flat hash count return zero
   - does Lua receiver copy preserve its receiver
   - does Lua receiver copy evaluate its receiver once
   - does Lua missing copy stay undefined
   - does Lua copy support harray array string and scalar continuations
   - how many Lua advanced corpus fixtures pass after receiver copy repair
-date: 2026-07-15
-status: current
-tags: [lua, runtime, receiver, copy, fluent-chain, harray, corpus, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.6.2.2 classifies zero-argument receiver .copy() in fluent evaluation and applies copy_value to the already evaluated current value. Focused proof covers one-time scalar receiver evaluation, nested harray/array isolation, harray, derived-harray, array, and string continuations, missing receiver null, and unchanged function copy(value)/copy(). PUC Lua and LuaJIT pass 164/164. The unchanged terse_2_3_5_2_hash_receiver_value_chains output is [[\"a,b,c\",9,2,0,2,2,0]] at endpoint 1; exact offsets 40-98 reach 57/59 on both ABIs."
-reverify: "bash tools/run_lua_local.sh"
+date: 2026-10-26
+status: copy arity repaired on available PUC5.5.1/LuaJIT; declared5.4/full admission open
+tags: [lua, runtime, receiver, copy, fluent-chain, harray, LUA-BACKEND-PARITY]
+evidence: "Value-copy repair LUA-BACKEND-PARITY.6.2.2; early arity repair TYPE-REFERENCE-BOOK.1.2.23.3.2.4."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/receiver_copy_arity_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/receiver_copy_arity_test.lua"
 ---
 
-# Lua Receiver Copy Value Preservation
+Receiver `value.copy()` copies the already evaluated current value recursively,
+retaining array/harray/scalar kind and nulls for compatible continuations.
+Function `copy(value)` copies its explicit operand; `copy()` stays null.
+The original6.2.2 fix prevented receiver copy from falling through to zero-argument
+function evaluation, which lost the receiver and reduced a later count to zero.
+Its public controls establish nested container detachment and once-only receiver
+evaluation; other backends have distinct domains/depths (see the book).
 
-Lua fluent chains evaluate their receiver once before processing method links. Most links
-have an explicit receiver evaluator, but `copy()` previously fell through to the ordinary
-function-call path. That made `meta.copy()` behave like zero-argument `copy()`: it returned
-null, then `flat_hash().count_keys()` reduced that lost receiver to zero.
+23.3.2.4 confirms extra receiver operands previously fell through to function
+copy: the public probe returns [1,2], copying the operand after both effects.
+Adding copy to existing first/last chain preflight returns null before either
+effect. The registered receiver_copy_arity fixture checks direct/selected invalid
+shapes and valid detachment/scalar/null/once-only controls on native/generated-plan/
+fresh-emitted routes; the direct selected-value fixture also passes. Fresh matching
+native products use available PUC5.5.1/LuaJIT, not declared PUC5.4.8; restoration
+remains LUA-STARTUP-READING.2.2. Full fluent/copy admission stays open.
 
-Zero-argument receiver `.copy()` now deep-copies the current fluent value directly. This
-keeps the two contracts separate:
-
-- `copy(value)` evaluates and copies its explicit function argument;
-- `value.copy()` copies the one already evaluated receiver;
-- `copy()` and `missing.copy()` remain null;
-- a copied value retains its runtime kind, so harray, array, string, and scalar-compatible
-  continuation families still dispatch normally.
-
-The copy is recursive for LinkedSpec arrays and harrays. Mutating nested fields of a stored
-receiver-copy result does not alter the earlier source snapshot. The focused scalar receiver
-also increments its evaluation counter once before `.copy().add(1)`, preventing a future
-implementation from re-evaluating the receiver while fixing the value path.
-
-At this leaf boundary, the advanced window passed 57/59 on both Lua ABIs. The independent
-PPlugin flat-array hash-splicing and history leading-trivia repairs subsequently closed
-`.6.2.3-.4` and brought the window to 59/59.
-
-Related facts: [[terse-hash-receiver-value-chains]],
-[[lua-advanced-corpus-residual-split]], [[lua-runtime-array-construction]].
+Historical July15 proof (not refreshed):6.2.2 passed164 focused checks and advanced
+57/59; subsequent6.2.3-.4 reached59/59. Exact original commands, offsets and record
+bytes remain at Git222db28a32a4047ca9fccba03927c3eb975a29bb for this path.
+Related: [[terse-array-receiver-value-chains]], [[terse-hash-receiver-value-chains]].

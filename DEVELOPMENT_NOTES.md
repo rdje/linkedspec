@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.4 — Lua copy receiver versus explicit operand
+
+Only zero-argument fluent copy used copy_value(value); extra operands fell through to function copy, producing the operand after receiver and operand effects. Extend existing first/last preflight to canonical copy and preserve the correct valid-copy operation. The retained small fixture passes native/generated-plan/fresh-emitted and direct selected-value checks on available matching PUC5.5.1/LuaJIT products after actual RED. Perl public native/fresh direct/selected controls already agree, so no Perl fix is fabricated. Historical Lua copy metrics remain dated and byte-recoverable; the current fact reverify selects only focused tests. Declared PUC5.4 and broad copy admission remain separately owned; select diagnosed Rust coalesce62.1/.62.2 next under the feature-first phase.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.2.3 — Rust copy shape and actual domain
 
 Rust receiver_call_args evaluates ignored copy operands before call_helper copies the source; extending existing extraction preflight rejects those shapes before any effects. The small retained fixture passes native/restored/generated-plan execution after actual RED and retains container detachment, once-only evaluation and existing scalar/missing empty-array fallback. Direct selected-value checks stay green. Separate tiny public Rust/Perl controls and the accepted Perl copy fact expose overbroad book wording: Perl/Rust scalar copy returns [], and Perl nested references remain shared. Qualify the current reference without silently widening runtime semantics; complete copy-domain reconciliation stays23.2/23.4-owned. Canonical array fact/map and current records agree; Lua/Perl arity assessment is next.
