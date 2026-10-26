@@ -2,6 +2,7 @@
 id: dart-runtime-array-helpers
 title: Dart runtime executes array helper family and receiver chains
 answers:
+  - why do Dart has_key results require scalar guarding before container methods
   - why do Dart direct default scalar results reject container consumers
   - how do Dart aggregate results retain scalar boundaries after named array mutations
   - why does Dart count return zero for nonarrays and reject extra receiver operands
@@ -15,10 +16,10 @@ answers:
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
 date: 2026-10-26
-status: scalar/default/index guards; ordering/slice/admission open
+status: scalar/default/index/has_key guards; ordering/slice/admission open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/index_result_receivers_test.dart test/default_selected_receivers_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/has_key_result_receivers_test.dart test/index_result_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -65,4 +66,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3 value/arity fixtures pass; Count List-only, Length wider. _evaluateFluentCallsWithValue shares ordinary/mutation scalar guards; join/index_of require one operand.23.3.6.3/23.3.7.3 mark nonempty defaults/index outputs until actual List/Map output: container flow already works, direct Scalar/null sorted/sorted_values [] becomes null. Native/restored/plan plus default/join and fatal analysis pass; full admission open.
+23.3 ordinary guards retain Count List-only/Length wider, nonempty defaults/index/has_key until actual List/Map output. Join/index/has_key take one fluent operand.23.3.8.3 retains correct has_key flow/K/SK/SKA snapshots, fixing container[], missing0!/extra1! and four malformed effects; native/restored/plan/direct index and fatal analysis pass. Presence helper Number0/1/source/copy stay unchanged; full admission open.

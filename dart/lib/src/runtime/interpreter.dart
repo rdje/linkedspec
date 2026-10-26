@@ -3708,7 +3708,9 @@ final class LinkedSpecRuntimeEngine {
         // keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
-          if (helper == 'join_values' || helper == 'index_of') {
+          if (helper == 'join_values' ||
+              helper == 'index_of' ||
+              helper == 'has_key') {
             return call.args.length != 1;
           }
           return (helper == 'first' ||
@@ -5101,6 +5103,7 @@ final class LinkedSpecRuntimeEngine {
       final mayProduceScalar =
           helper == 'coalesce_nonempty' ||
           helper == 'index_of' ||
+          helper == 'has_key' ||
           (value is List &&
               (_numericAggregateHelperNames.contains(helper) ||
                   helper == 'join_values'));

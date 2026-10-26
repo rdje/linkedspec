@@ -85,3 +85,12 @@ direct index tests pass after repair with presence/false retention, String keys,
 source families, explicit bridge/scalar nulls, zero malformed effects and K/SK/SKA
 snapshots. Numeric1/0 presence helper/source/copy policy stays unchanged. Dart
 assessment/full admission remain separate.
+
+## Bounded Dart scalar/shape guards
+
+23.3.8.3 retains already correct flow and snapshots. Native RED shows incompatible
+container[], missing0!, extra1! and four malformed effects. Include has_key in
+existing one-key preflight and source-independent scalar tracking; actual List/Map
+output releases the guard. Native/restored/generated-plan shared result and direct
+index tests plus fatal selected-file analysis pass after repair. Number0/1 presence
+helper, String keys/source/copy policies stay unchanged. Julia/full admission separate.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.3 — guard Dart has_key result boundaries
+
+Dart retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Native/restored/generated-plan has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper Number0/1, false/null-valued keys, String key forms, source families, false retention and explicit bridges stay unchanged. Fatal selected-file analysis/book/fast continuity pass; Julia assessment next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.2 — continue Rust has_key scalar results
 
 Rust has_key joins the existing scalar-result classifier and exact-one-operand fluent preflight. Native/restored/generated-plan shared result and direct index checks pass after native fluent-null/SK-only/four-effect RED. Existing numeric presence helper remains unchanged; false/null stored values, String keys, selected/function/default sources, false retention, explicit bridges/scalar guards and K/SK/SKA snapshots pass. Targeted offline compilation/book/fast continuity pass; Dart assessment next, full admission separate.

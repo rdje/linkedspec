@@ -1007,7 +1007,7 @@ dispatch rule.
 ### `has_key(h, key)`
 - **Signature**: `has_key(h: hash, key: string)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Focused Perl native/fresh and Rust native/restored/generated-plan checks cover selected, function and default sources too; other backends/full admission remain separate.
+- **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Focused Perl native/fresh and Rust/Dart native/restored/generated-plan checks cover selected, function and default sources too; other backends/full admission remain separate.
 
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
@@ -1036,7 +1036,7 @@ dispatch rule.
   `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
-  compatible array receiver helpers. `count_keys` feeds scalar/number methods; Perl/Rust `has_key` feed compatible scalar/text methods.
+  compatible array receiver helpers. `count_keys` feeds scalar/number methods; Perl/Rust/Dart `has_key` feed compatible scalar/text methods.
   Field reads from a named working hash use `name.pick_keys(key).sorted_values().first()` after storing
   expression receivers in a named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref
   payloads, not working-hash value reads.
@@ -1908,7 +1908,7 @@ Receiver-dot methods are available for the value families that have a typed rece
   `join_values` returns a String with ordinary Perl/Rust/Dart/Julia/Lua continuations on recorded hosts; full admission remains open. Ordinary Perl/Rust/Dart/Julia/Lua reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) feed compatible scalar/number methods. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
-  feeds compatible scalar/number methods; Perl/Rust `has_key` feed compatible scalar/text methods. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
+  feeds compatible scalar/number methods; Perl/Rust/Dart `has_key` feed compatible scalar/text methods. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
   `reduce_leaves` are immediate block-bearing links with their own scoped callback bindings.
 - **Array-tree traversal** uses the same block-bearing receiver method names on array-valued receivers, with
   Perl reference support from `SPEC-FORMAT-TERSE.13.2`, Rust/oracle parity from `SPEC-FORMAT-TERSE.13.3`, and
@@ -1917,7 +1917,7 @@ Receiver-dot methods are available for the value families that have a typed rece
   `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
   comparisons.
 
-Other predicate and flow-result continuations remain separately tracked; Perl/Rust has_key support the scalar/text handoff above. Expression-valued blocks and pure user-function returns do not
+Other predicate and flow-result continuations remain separately tracked; Perl/Rust/Dart has_key support the scalar/text handoff above. Expression-valued blocks and pure user-function returns do not
 have separate method tables: the yielded runtime value selects the compatible family above. Mutation forms,
 lifecycle/control helpers, parser-state readers (`entry_*`, `match_*`, capture/input/mark helpers), declaration
 helpers, and child-dispatch calls remain function, statement, or lifecycle surfaces unless a future task explicitly

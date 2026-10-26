@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
+Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 
 ## Latest Completed Slice
 
-Rust has_key joins the existing scalar-result classifier and exact-one-operand fluent preflight. Native/restored/generated-plan shared result and direct index checks pass after native fluent-null/SK-only/four-effect RED. Existing numeric presence helper remains unchanged; false/null stored values, String keys, selected/function/default sources, false retention, explicit bridges/scalar guards and K/SK/SKA snapshots pass. Targeted offline compilation/book/fast continuity pass; Dart assessment next, full admission separate.
+Dart retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Native/restored/generated-plan has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper Number0/1, false/null-valued keys, String key forms, source families, false retention and explicit bridges stay unchanged. Fatal selected-file analysis/book/fast continuity pass; Julia assessment next, full admission separate.
 
 ## Next Action
 
-Independently assess Dart has_key result/key/shape behavior under23.3.8.3 using shared fixture, preserving actual producer kinds/domains/snapshots. Repair only confirmed ordinary gaps; compile/small direct checks, fatal selected-file analysis, docs/commit.
+Independently assess Julia has_key result/key/shape behavior under23.3.8.4 with shared fixture; repair confirmed ordinary gaps only, preserve actual producer kinds/domains/snapshots. Strict compile/small native/plan/fresh/direct checks/docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` — Perl has_key result flow repaired; focused native/fresh result and producer checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` — Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
@@ -29,7 +30,6 @@ Independently assess Dart has_key result/key/shape behavior under23.3.8.3 using 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
 
 ## History
 
