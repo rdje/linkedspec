@@ -15,8 +15,8 @@ answers:
 date: 2026-10-26
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
-evidence: "String/numeric4.3.2; ordinary predicate23.3.10.4 shared/native/plan/fresh and direct emptiness checks. Historical replay/source ranges at Git860e231f93714da4076ab477d6934b75b5d5e0d8 for this path."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/definedness_result_receivers_test.jl\"); include(\"julia/test/string_predicate_result_receivers_test.jl\")'"
+evidence: "String/numeric4.3.2; predicate10.4/definedness11.4/numeric-comparison15.4 focused proof. Prior full fact and its historical replay/source pointer at Git03f0036a8093e87db4af7c82ef6518448c9d9ee7."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/numeric_comparison_results_test.jl\"); include(\"julia/test/string_comparison_result_receivers_test.jl\")'"
 ---
 
 Julia string/scalar and numeric helper execution lives in
@@ -40,7 +40,7 @@ zero divisors. This describes covered conversion paths, not safe arithmetic at
 every magnitude; the September qualification below supersedes that broader inference.
 
 Compatible string and number receiver chains prepend the current receiver to
-the same helper call, so function and fluent forms cannot drift. Array-aware
+the same helper call; receiver shapes and result boundaries still need independent guards. Array-aware
 continuations and mutations remain owned by `JULIA-BACKEND-PARITY.4.3.3`.
 
 Related facts: [[julia-runtime-core-value-capture-helpers]], [[julia-runtime-array-helpers]],
@@ -64,8 +64,13 @@ suites remain green. Exact selected replay is in [[julia-runtime-array-helpers]]
 Regex handling retains imsx flags (g/o ignored), guarded substitution writeback
 and capture expansion; this reading closes no pending regex or numeric repair.
 
-Historical September11 complete-consumer replay remains at the Git pointer above; magnitude/slice repairs .2.9/.2.10 remain open.
+Historical September11 replay and full10.4/11.4 guard detail are recoverable at
+the Git pointer above. Predicate10.4 preserves numeric text flags/Bool matches
+and SOC/SC while fixing null needles/scalar boundaries/one-operand effects.
+Definedness11.4 keeps Bool identity/false0!/SC with zero-operand/scalar guards.
 
-23.3.10.4 adds starts_with/ends_with/contains_substr/matches to existing scalar/one-operand guards and removes null_as_empty from text predicate operands. Shared native/plan/fresh and direct emptiness checks pass after null suffix/needle1!, scalar[] and12 malformed-effect RED. Numeric text flags/Bool matches, regex modes and correct SOC/SC/once-only snapshots are preserved. No domain/regex expansion or full admission.
-
-23.3.11.4 adds is_defined/is_undefined to scalar-result/zero-operand guards only. Native/plan/fresh shared and free producer controls pass after container[]/four-effect RED, with Bool false0!/default retention and1!/SC/one-call/final-null snapshot unchanged. Explicit isa Bool checks at producer-vector Boolean positions distinguish numeric lookalikes that == alone accepts. Nine definedness assertions and direct String checks/strict compilation pass; no producer/parser/schema expansion. Backend/admission progress belongs to the task tree.
+Numeric comparison15.4 adds six names to common one-RHS/scalar tuples only.
+Independent producer/valid flow already works; scalar Array[]/24 effects fail.
+Native/plan/fresh and direct lexical/aggregate42 strict assertions now pass,
+including explicit Number/not-Bool guards, numeric selector kinds and source
+SOC/copy. Numeric adapters/domains/aliases stay unchanged; full admission open.

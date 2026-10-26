@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.15.4 — guard Julia numeric comparison result flow
+
+Julia numeric comparison producers and valid inter-type flow already work. Two existing tuple additions supply common one-RHS/scalar guards, repairing scalar Array[] fallback and24 malformed effects while preserving numeric1/0/strict invalid-null, aliases, selector kinds and source SOC.42 strict focused native/plan/fresh numeric/direct lexical/aggregate assertions and compilation pass, including explicit Number/not-Bool guards. Book/facts/task/live align; safe Lua15.5 independent assessment next, declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.15.3 — guard Dart numeric comparison result flow
 
 Dart canonical numeric comparison producers and valid inter-type continuations already work. A shared private six-name set now supplies one-RHS and scalar-result guards, repairing incompatible Array[] fallback and24 malformed effects while preserving numeric1/0/strict invalid-null, aliases, source SOC and selector kinds. Six focused native/restored/plan numeric/direct lexical/aggregate tests, compilation, format and fatal analysis pass after guard RED. Book/facts/live/task align; Julia15.4 independent assessment next, full admission separate.

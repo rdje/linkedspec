@@ -3341,10 +3341,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.3 - guard Dart numeric comparison result flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary numeric comparison result continuations.
   Dependencies: .23.3.15.3.
   Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+  Activation: clean `03f0036a8093e87db4af7c82ef6518448c9d9ee7`; Dart comparison guard child committed, brief0/tree clean.
+  Owned paths: Julia confirmed numeric comparison result/shape gaps, native/plan/fresh producer/shared/selector tests with Number/not-Bool guards and fixture registration, synchronized scoped book/facts/task/live docs. Preserve numeric adapters/domains/free signatures and source/alias behavior.
+  Verification tier: `focused`
+  Focused checks: Independent producer-first native/plan/fresh RED/GREEN with raw numeric identity guards, direct lexical/aggregate result tests, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for bounded frozen ordinary result implementation under director feature-first cadence; complete domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regressions/preservation controls; no population/completeness measurement.
+
+  Completion: Add canonical num_eq/ne/gt/ge/lt/le to common exact-one-RHS and possible scalar-result lists. Existing numeric producer/alias/dynamic continuation already works; actual container outputs still release scalar guarding.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent native/plan/fresh canonical/word/symbol and strict numeric-domain producers, raw Number/not-Bool flags/aliases, nested SOC and selector kinds pass before production. Three shared route REDs preserve all valid continuation/default/bridge/SOC results but expose incompatible/after-text[] and24 malformed effects.
+  - [x] ROOT CAUSE (WHY + WHERE): Interpreter.jl _evaluate_runtime_fluent_chain! common one-operand and may_produce_scalar tuples omit canonical numeric comparisons. Existing numeric helper returns numeric1/0/invalid-nothing; shared helper implementation alone does not establish fluent shape/result guards.
+  - [x] FIX: Two scoped tuple additions plus retained regression/runner registration. Preserve all helper conversions/aliases/free signatures/source evaluation and existing actual-kind dispatch; no parser/schema/arithmetic or calibration expectation changes.
+  - [x] ADDRESSED (verified):27 new strict native/plan/fresh assertions pass six pairs/raw kinds/decimal and invalid inputs, source families, false/default8/generic/numeric/selector/repeated comparisons, String/Array bridgeX, scalar negatives and valid/invalid-source SOC/once-only/final snapshots. Explicit Number/not-Bool guards reject false passing from Julia ==; twelve malformed shapes now run zero effects.
+  - [x] NO REGRESSION:42 focused assertions across numeric/direct lexical/aggregate result fixtures and strict package precompilation pass. No whole suite, arithmetic/domain expansion or complete context/portable admission.
+  - [x] LOCKSTEP: New retained consumer/registration, frozen contract progress, scoped guide/catalog/grammar and canonical number/Julia numeric facts/map, TYPE/live/resume align. Qualify prior overly broad cannot-drift wording: helper reuse does not replace receiver guards; compact historical guard detail behind exact prior Git record. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua15.5 independent assessment next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.15.4 - guard Julia numeric comparison result flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.5`
   Status: `pending`
@@ -3449,7 +3466,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` | `pending` | Independently assess and implement Julia numeric comparison result continuation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.5` | `pending` | Independently assess and implement Lua numeric comparison results on safe PUC/JIT paths. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

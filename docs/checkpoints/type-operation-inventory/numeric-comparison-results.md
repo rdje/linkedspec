@@ -89,3 +89,14 @@ feeds common one-RHS and mayProduceScalar guards. Six focused numeric/direct
 lexical/aggregate tests and fatal analysis/format pass after guard RED. Numeric
 adapters/domains/free signatures and current alias surfaces stay unchanged;
 Julia15.4 and complete domain/context/portable admission remain separate.
+
+## Bounded Julia implementation
+
+23.3.15.4 independently confirms native/plan/fresh numeric1/0/strict-domain and
+canonical/word/symbol producers, numeric selector kinds and nested SOC. Valid
+shared continuations/bridges/defaults/source captures already work; three shared
+REDs expose scalar Array[] boundaries and24 malformed effects. Two existing tuple
+additions implement common one-RHS and possible scalar-result guards.42 strict
+focused numeric/direct lexical/aggregate assertions and compilation pass, including
+explicit Number/not-Bool checks because Julia == accepts lookalikes. Numeric
+adapters/domains/free signatures stay unchanged; safe Lua15.5/full admission follow.
