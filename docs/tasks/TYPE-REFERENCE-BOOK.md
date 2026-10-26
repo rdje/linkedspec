@@ -2056,10 +2056,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1 - lower has_key key blocks in context`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Continue Perl has_key truth-valued results through existing compatible scalar/text methods.
   Dependencies: .23.3.8.1.1.
   Acceptance: Frozen has-key-results.md, actual kind retained, one-key preflight before effects, direct/selected/pipeline/default/function sources, explicit bridges/scalar boundaries and source/key/consumer snapshots; native/fresh/direct compatibility and docs/commit. No Boolean normalization/new vocabulary.
+
+  Activation: clean `1cc204148d3053d07857c08ebc89c7873455b87e`; producer committed, brief empty, tree clean.
+  Owned paths: Shared ordinary has_key scalar-result classification/one-key preflight, focused native/fresh receiver fixture, contract/book/hash fact and live records.
+  Verification tier: `focused`
+  Focused checks: Native/fresh has_key result RED/GREEN, scalar/bridge/false retention, source/key/consumer snapshots and malformed no-effects; direct key producer compatibility, Perl syntax/book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen result implementation under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored values/order, no quantified population or portable measurement.
+  Additional owned flow defect: make_meta().has_key("a").cat("!") alone remains null after classifier repair while make_meta(), free has_key and single-step receiver return Hash/1/1. Public generated-source dump shows unsupported has_key inside cat. The generic aggregate bridge reparses an already lowered function Hash operand as DSL; complete typed has_key operands before host presence emission within this leaf.
+
+  Completion: scalar_result plus exact-one-key preflight; typed has_key aggregate operands, typed nested has_key arguments and preserved authored root calls prevent function Hash host output from being reparsed as DSL.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Native/fresh shared fixture RED with raw host DSL compilation errors. First scalar/shape change leaves only function result null on both routes; public Get returns Hash/1/1/null for function/free/single-step/chained forms.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering hash return-family marks has_key terminal; fluent shape lacks one-key guard. Generated source additionally shows unsupported has_key inside cat after ast_expr_source_node prematurely lowers a function Hash into compatibility DSL.
+  - [x] FIX: Reuse scalar_result, preflight exact one key and finish typed has_key operands/nested arguments while retaining authored root calls until that lowering. No producer Boolean/numeric normalization or new methods.
+  - [x] ADDRESSED (verified): Native/fresh shared fixture passes direct/selected/pipeline/literal/function/default and String keys, false retention, scalar boundaries/explicit bridge, zero malformed effects and K/SK/SKA snapshots after RED.
+  - [x] NO REGRESSION: Direct native/fresh key producer fixture and source/test syntax pass;12 checks across two fixtures. No broad suite/domain/deferred/copy/generated-format change.
+  - [x] LOCKSTEP: Contract/worked catalog/guide, hash fact/map and task/live/resume updated. Book and fast memory/cadence/diagnosis/history/diff pass. Rust2 assessment next after clean commit; full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2 - continue has_key scalar results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.2`
   Status: `pending`
@@ -2163,11 +2181,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 is repaired/targeted-checked; result flow1.2 and independent backend assessment follow. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; independent Rust2 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` | `pending` | Perl compatible has_key result handoff after key-block repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` | `pending` | Independent Rust has_key result/key/shape assessment after bounded Perl repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -28,7 +28,7 @@ Implementation targets (not current portable support claims):
 | `meta.has_key("false_valued").cat("!")` | `"1!"` |
 | `meta.has_key("null_valued").cat("!")` | `"1!"` |
 | `meta.has_key("missing").coalesce_nonempty("late").cat("!")` | `"0!"` |
-| `meta.has_key("present").cat(",x").split(",").last().upper()` | `"X"` |
+| `meta.has_key("present").cat(",x").split(",").last().uppercase()` | `"X"` |
 | `meta.has_key("present").sorted_values()` | undef/null |
 
 ## Public Perl findings
@@ -63,3 +63,15 @@ RED: literal/variable/helper keys, key once-only, false/null-valued presence and
 named/computed/free source snapshots with K/SK order. A key added while computing
 the key stays absent from the captured source. Direct index compatibility passes.
 Result continuation/shape repair1.2 and independent backends remain separate.
+
+## Bounded Perl result handoff
+
+23.3.8.1.2 uses scalar_result and exact-one-key preflight. Typed has_key operands,
+typed nested has_key arguments and preserved authored root calls keep completed
+function Hash output out of the DSL compatibility parser. Classifier-only repair
+left function sources null; public Get/function/free/single-step/chained controls
+and generated unsupported-has_key output isolated that additional flow gap.
+Native/fresh shared result and direct producer tests pass after RED, covering
+presence/false retention, selected/pipeline/literal/function/default sources,
+String keys/Array bridge, scalar nulls, no malformed effects and K/SK/SKA snapshots.
+Rust assessment follows; full domain/portable admission remains separate.

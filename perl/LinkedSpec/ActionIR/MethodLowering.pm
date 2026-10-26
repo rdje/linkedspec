@@ -4436,6 +4436,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
      if !(defined($lowered_arg) && length($lowered_arg)) && $arg->{trailing_block_arg};
     $lowered_arg = $lower_ast_value_only_call_node->($arg, $opts)
      unless defined($lowered_arg) && length($lowered_arg);
+    $lowered_arg = $lower_ast_aggregate_call_node->($arg)
+     if !(defined($lowered_arg) && length($lowered_arg)) && ($arg->{name} // '') eq 'has_key';
     $lowered_arg = $ast_expr_source_node->($arg)
      unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $arg->{source} unless defined($lowered_arg) && length($lowered_arg);
@@ -4469,6 +4471,19 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
+
+  if ($method eq 'has_key') {
+   my @values;
+   foreach my $arg (@$args) {
+    my $value = $lower_ast_value_node->($arg, { bare_scalar_read => 1 });
+    $value = $legacy_method_value_expr->($arg->{source})
+     unless defined($value) && length($value);
+    return undef unless defined($value) && length($value);
+    push @values, $value;
+   }
+   # Keep completed function/Hash operands out of the DSL compatibility parser.
+   return 'do { my $__ls_has_key = '.$values[0].'; defined($__ls_has_key) ? ((exists $__ls_has_key->{'.$values[1].'}) ? 1 : 0) : 0 }';
+  }
 
   if ($method eq 'flat' && @$args == 1 && ref($args->[0]) eq 'HASH') {
    my $value = $args->[0];
@@ -4649,7 +4664,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
-   return 'undef' if $method eq 'index_of' && @$aggregate_args != 1;
+   return 'undef' if $method =~ /^(?:index_of|has_key)$/o && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
@@ -4700,6 +4715,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
     }
    }
   }
+  # Preserve authored calls until has_key lowers its typed operands together.
+  $receiver_expr = $receiver->{source}
+   if !(defined($receiver_expr) && length($receiver_expr))
+   && ($receiver->{kind} // '') eq 'call' && ($calls->[0]{method} // '') eq 'has_key';
   $receiver_expr = $ast_expr_source_node->($receiver)
    unless defined($receiver_expr) && length($receiver_expr);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
@@ -7682,7 +7701,8 @@ sub _hash_receiver_value_chain_return_family {
  return 'selected' if $method eq 'count_keys';
  return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
- return 'terminal' if $method =~ /^(?:has_key|reduce_leaves)$/o;
+ return 'scalar_result' if $method eq 'has_key';
+ return 'terminal' if $method eq 'reduce_leaves';
  return undef
 }
 

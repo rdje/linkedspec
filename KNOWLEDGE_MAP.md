@@ -20548,9 +20548,9 @@ _SPEC-FORMAT-TERSE.2.3 split for fluent block chains, lifecycle values, composab
 ### terse-hash-receiver-value-chains
 _Hash receiver chains and has_key key/result contracts_
 - **answers:** why does has_key result cat fall through to a host call on Perl | why does a computed has_key String key block fail to compile | how do hash receiver-dot value chains work | does meta.set_key().count_keys work | does meta.sorted_keys().join_values work | what replaced receiver-dot scalaref in hash receiver chains | does receiver-dot set_key mutate a hash | does merge_hash later argument override earlier keys | which task follows SPEC-FORMAT-TERSE.2.3.5.2
-- **date:** 2026-10-26 · **status:** Perl key blocks repaired; has_key result flow open
+- **date:** 2026-10-26 · **status:** bounded Perl has_key repaired; other backends/full admission open
 - **evidence:** `Hash2.3.5.2/Lua copy6.2.2; prior details at Git617eb85069719f32d36779e521a438ae595df088 for this path. Has_key23.2.7 public native/fresh distinctions.`
-- **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_has_key_results.pl` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_key_expression_contract.t`
+- **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_result_receiver_contract.t` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_key_expression_contract.t`
 - **source:** [`docs/knowledge/terse-hash-receiver-value-chains.md`](docs/knowledge/terse-hash-receiver-value-chains.md)
 
 ### terse-helper-rename-lowering-sites

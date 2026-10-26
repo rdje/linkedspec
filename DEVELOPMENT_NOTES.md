@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2 — continue has_key scalar results
+
+Perl has_key uses scalar_result and exact-one-key fluent preflight. Complete typed operands and preserve authored receiver calls until lowering, avoiding function Hash operands reparsed as DSL. Native/fresh result/key-producer checks pass after raw-DSL and function-null RED: presence/false retention, selected/pipeline/default/function sources, String/Array bridge, scalar nulls, no malformed effects and K/SK/SKA snapshots. Syntax/book/fast continuity pass; Rust independently assessed next, full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1 — lower has_key key blocks in context
 
 Perl has_key completes key expressions in the current MethodLowering context before the existing scalar-key fallback. Native/fresh producer checks pass after raw-DSL compilation RED, preserving literal/variable/helper keys, present/absent/false/null presence, two key evaluations and named/computed/free source-before-key snapshots. Direct index compatibility and syntax/book/fast continuity checks pass; result handoff remains separate.

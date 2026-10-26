@@ -12,34 +12,14 @@ answers:
   - "does merge_hash later argument override earlier keys"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.2"
 date: 2026-10-26
-status: Perl key blocks repaired; has_key result flow open
+status: bounded Perl has_key repaired; other backends/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, hash, rust-parity, mdbook]
 evidence: "Hash2.3.5.2/Lua copy6.2.2; prior details at Git617eb85069719f32d36779e521a438ae595df088 for this path. Has_key23.2.7 public native/fresh distinctions."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_has_key_results.pl"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_result_receiver_contract.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_key_expression_contract.t"
 ---
 
-`SPEC-FORMAT-TERSE.2.3.5.2` is the hash-family implementation leaf for return-type method chaining.
+Hash2.3.5.2 chains are pure: set_key/count_keys composes a copied Hash, sorted_keys/values bridge to Array. Statement set_key(meta,key,value) and meta[key]=value mutate; receiver set_key is pure unless assigned back. Lua6.2.2 copy preserves the evaluated current kind once ([[lua-receiver-copy-value-preservation]]). Historical next leaf was2.3.5.3; original details/commands remain at Git617eb85069719f32d36779e521a438ae595df088 for this path.
 
-Hash receiver-dot chains are pure value composition. The receiver becomes the first hash helper argument, and
-each returned value feeds the next compatible helper:
-
-- `meta.set_key("stage", "normalized").count_keys()` derives a copied hash and counts its keys.
-- `meta.sorted_keys().join_values(",")` derives an array of keys and continues through the array receiver
-  family.
-- a field read from a derived harray value uses a named temporary followed by
-  `temp.pick_keys(key).sorted_values().first()`.
-
-Statement hash mutations remain separate. `set_key(meta, key, value)` and `meta[key] = value` mutate the
-named working hash. `meta.set_key(key, value)` is pure and mutates nothing unless the result is assigned back.
-
-Lua now follows the same receiver-value rule for zero-argument `.copy()`: it deep-copies
-the already evaluated current value once, preserves its runtime kind for later links, and
-does not change function-form `copy(value)`.
-
-The next historical task-tree leaf was `.2.3.5.3` for string/scalar receiver-dot value chains.
-
-Related: [[lua-receiver-copy-value-preservation]].
-
-Has_key23.2.7 found raw host fluent dispatch and raw key-block compilation failures.23.3.8.1.1 repairs keys by completing _lower_method_value_expr in MethodLowering before scalar-key fallback; native/fresh producer tests pass after RED, preserving presence[1,0,1,1], literal/variable/helper/block keys and K/SK source snapshots. Result-flow1.2 remains open: _hash_receiver_value_chain_return_family still marks has_key terminal; nested cat gives1! while fluent cat fails. Full domains/other backends stay separate.
+Has_key23.2.7 found raw host fluent dispatch and key-block compilation failures. Perl23.3.8.1.1 completes legacy keys in MethodLowering before scalar-key fallback.1.2 adds scalar_result/exact-one-key preflight and complete typed has_key operands/nested arguments with authored root calls preserved: otherwise function Hash output is reparsed as DSL and becomes unsupported has_key inside cat. Native/fresh result/producer fixtures pass after RED, preserving presence[1,0,1,1], literal/variable/helper/block keys, false retention, explicit bridges/scalar nulls, no malformed effects and K/SK/SKA snapshots. Rust2 assessment/full admission remain open.

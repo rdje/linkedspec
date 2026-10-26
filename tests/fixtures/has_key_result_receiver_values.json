@@ -1,0 +1,50 @@
+{
+  "after_text": null,
+  "bridged": "X",
+  "computed": {
+    "a": "x",
+    "late": "new"
+  },
+  "computed_order": "SK",
+  "computed_snapshot": "0!",
+  "default": "1!",
+  "direct": "1!",
+  "effected": "1!",
+  "extra": null,
+  "function": "1!",
+  "incompatible": null,
+  "invalid_effects": 0,
+  "keys": [
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "literal": "1!",
+  "meta": {
+    "a": "x",
+    "nil": null,
+    "off": false
+  },
+  "missing": null,
+  "named": {
+    "a": "x",
+    "late": "new"
+  },
+  "named_order": "K",
+  "named_snapshot": "0!",
+  "nested": "1!",
+  "order": "SKA",
+  "pipeline": "1!",
+  "presence": [
+    "0!",
+    "1!",
+    "1!"
+  ],
+  "retained": "0!",
+  "selected": "1!",
+  "source": {
+    "a": "x",
+    "last": "new",
+    "late": "new"
+  }
+}
