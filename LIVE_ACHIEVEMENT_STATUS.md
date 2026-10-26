@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
+Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 
 ## Latest Completed Slice
 
-Dart retains correct Boolean emptiness flow/source kinds/copy bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain permitted on scalar results. Native/restored/generated-plan emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Existing producer/domains/source/copy stay unchanged; fatal selected-file analysis/book/fast checks pass. Julia assessment next, full admission separate.
+Julia retains correct Boolean emptiness flow/source kinds/copied bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain allowed on scalar results. Strict native/generated-plan/fresh-emitted emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Producer/domain/source/copy policy unchanged; package compilation/book/fast checks pass. Lua assessment next, declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Julia is_empty/is_nonempty result/source/shape behavior under23.3.9.4 with shared fixture; preserve actual producer kinds/canonical domains and copy/source semantics. Repair confirmed ordinary gaps only; strict compile/small native/plan/fresh/direct checks/docs/commit.
+Independently assess Lua is_empty/is_nonempty result/source/shape behavior under23.3.9.5 on available PUC/LuaJIT with matching products and shared fixture. Preserve actual producer kinds/canonical domains/copy/source policies; small native/plan/fresh/direct/loadfile checks/docs/commit, declared5.4/full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
@@ -29,7 +30,6 @@ Independently assess Julia is_empty/is_nonempty result/source/shape behavior und
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.5` — index scalar/null and shape guards; focused available-host native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` — index scalar/null and shape guards; strict native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` — index integer/null and shape guards; native/restored/plan/direct default and fatal analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.7.2` — index scalar handoff/one-needle preflight; native/restored/plan/direct default checks pass.
 
 ## History
 

@@ -100,3 +100,14 @@ Native/restored/generated-plan shared/direct has_key tests and fatal selected-fi
 analysis pass, preserving producer/domain/source/copy policy and repeated
 predicates/false retention/bridges/scalar nulls/1!/SA snapshots. Julia/full
 admission remain separate.
+
+## Bounded Julia scalar/shape guards
+
+23.3.9.4 retains already correct Bool flow/source/copy kinds and1!/SA snapshots.
+Native JSON exposes container[], bad empty1!, bad nonempty0! and four effects;
+native/plan/fresh fail before repair. Include predicates in zero-operand preflight/
+source-independent scalar tracking, allowing generic predicate consumers. Strict
+native/generated-plan/fresh-emitted shared/direct has_key tests plus package
+compilation pass, retaining existing producer/domains/source/copy, repeated
+predicates/false retention/bridges/scalar nulls and no malformed effects. Lua/
+full admission remain separate.

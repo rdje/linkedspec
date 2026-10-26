@@ -5885,7 +5885,7 @@ function _evaluate_runtime_fluent_chain!(
             return nothing
         end
         if helper_name in (
-            "first", "last", "copy", "count", "count_keys", "length",
+            "first", "last", "copy", "count", "count_keys", "length", "is_empty", "is_nonempty",
             "num_sum", "num_avg", "num_median", "num_range",
         ) && !isempty(call.args)
             return nothing
@@ -5903,7 +5903,7 @@ function _evaluate_runtime_fluent_chain!(
         helper_name = canonical_action_helper_name(call.method)
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
-        if scalar_result && (
+        if scalar_result && !(helper_name in ("is_empty", "is_nonempty")) && (
             helper_name in _RUNTIME_ARRAY_HELPER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||
             helper_name in ("num_sum", "num_avg", "num_median", "num_range")
@@ -5912,7 +5912,7 @@ function _evaluate_runtime_fluent_chain!(
         end
         # Scalar producers and defaults retain this boundary until an actual
         # container output permits later array/hash-only consumers.
-        may_produce_scalar = helper_name in ("coalesce_nonempty", "index_of", "has_key") ||
+        may_produce_scalar = helper_name in ("coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty") ||
             (value isa AbstractVector && helper_name in (
                 "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",
             ))

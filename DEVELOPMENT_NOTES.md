@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.4 — guard Julia generic emptiness results
+
+Julia retains correct Boolean emptiness flow/source kinds/copied bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain allowed on scalar results. Strict native/generated-plan/fresh-emitted emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Producer/domain/source/copy policy unchanged; package compilation/book/fast checks pass. Lua assessment next, declared5.4/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.3 — guard Dart generic emptiness results
 
 Dart retains correct Boolean emptiness flow/source kinds/copy bindings and1!/SA snapshots, adding source-independent scalar-result tracking and zero-operand preflight. Generic predicates remain permitted on scalar results. Native/restored/generated-plan emptiness and direct has_key checks pass after native container[]/bad-empty1!/bad-nonempty0!/four-effect RED. Existing producer/domains/source/copy stay unchanged; fatal selected-file analysis/book/fast checks pass. Julia assessment next, full admission separate.

@@ -2307,10 +2307,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.9.3 - guard Dart generic emptiness results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary emptiness result targets.
   Dependencies: .23.3.9.3.
   Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
+  Activation: clean `10251b858e1fc20a3329d5bfc8e5fb9bbb6ec9f9`; Dart committed, brief empty, tree clean.
+  Owned paths: Confirmed Julia ordinary emptiness result/source/shape gaps only; shared native/generated-plan/fresh-emitted fixture/registration, direct has_key compatibility and current docs.
+  Verification tier: `focused`
+  Focused checks: Strict public native/generated-plan/fresh-emitted shared emptiness fixture before/after repair, direct has_key fixture, package compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored values/order regression, no quantified population or portable measurement.
+
+  Completion: Add predicates to zero-operand preflight/source-independent scalar tracking and permit these generic consumers on scalar results; existing Bool helpers/domains/source/copy unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native shared JSON RED retains correct flow/source kinds/copied bindings/order but incompatible/after-text [], bad empty1!, bad nonempty0! and four effects; native/plan/fresh all fail before repair.
+  - [x] ROOT CAUSE (WHY + WHERE): Interpreter.jl _evaluate_runtime_fluent_chain! omits predicates from zero-operand/scalar tracking and treats generic predicate consumers as array-only at the scalar guard.
+  - [x] FIX: Include predicates in those existing checks, independently of source, and exempt generic consumers from scalar container-only rejection. No Boolean normalization or helper/domain/source/copy change.
+  - [x] ADDRESSED (verified): Strict native/generated-plan/fresh-emitted shared fixture passes source kinds/copied Array/Hash bindings, repeated predicates, false retention/explicit bridge/scalar nulls, no malformed effects and1!/SA/once-only snapshots after RED.
+  - [x] NO REGRESSION: Direct has_key three-route fixture and package compilation pass under startup/history disabled and depwarn=error;6 assertions. No broad suite or generated-format change.
+  - [x] LOCKSTEP: Register fixture; contract/worked catalog/guide, Julia/array facts/map and task/live/resume align. Book and fast memory/cadence/diagnosis/history/diff pass. Lua5 next after clean commit; full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.9.4 - guard Julia generic emptiness results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.5`
   Status: `pending`
@@ -2396,11 +2413,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; independent Julia4 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; independent Lua5 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` | `pending` | Independent Julia emptiness result/source/shape assessment after bounded Dart repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` | `pending` | Independent Lua emptiness result/source/shape assessment after bounded Julia repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
