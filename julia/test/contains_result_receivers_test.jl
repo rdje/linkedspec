@@ -23,7 +23,7 @@ end
 
 @testset "Array contains result receiver boundaries" begin
     check_contains_result_consumers(raw"""Top:: I { items=["a","b"]; raw=[contains(["a","b"],"a"),contains(["a","b"],"z"),contains([],"a"),contains([undef],undef),contains([undef],""),contains([""],undef),contains([""],""),contains([0],"0"),contains([false],0)]; order=""; value=contains(items,{order=cat(order,"O");items=["z"];"a"});missing=[].first(); missing_order=""; missing_value=contains(missing,{missing_order=cat(missing_order,"O");missing=["a"];"a"});return({"raw":raw,"snapshot_absent":[missing_value,missing_order,missing],"snapshot":[value,order,items],"text":[cat(contains(["a"],"z"),"!"),cat(coalesce_nonempty(contains(["a"],"z"),"late"),"!")]}) }""",
-        JSON3.read(raw"""{"raw":[1,0,0,1,1,1,1,1,1],"snapshot":[1,"O",["z"]],"snapshot_absent":[0,"O",["a"]],"text":["0!","0!"]}""", Any))
+        JSON3.read(raw"""{"raw":[1,0,0,1,0,0,1,1,1],"snapshot":[1,"O",["z"]],"snapshot_absent":[0,"O",["a"]],"text":["0!","0!"]}""", Any))
     check_contains_result_consumers(contains_result_fixture("contains_result_receiver_values", "spec"),
-        JSON3.read(contains_result_fixture("contains_result_receiver_values", "text.json"), Any))
+        JSON3.read(contains_result_fixture("contains_result_receiver_values", "perl.json"), Any))
 end

@@ -92,3 +92,15 @@ needle controls already passed and remain unchanged. Nine null/contains/index/
 standalone-transform tests, format and fatal analysis pass. Current contains
 artifacts select the reference; numeric/default/count/text consumers and source
 captures remain correct. Julia14.5 follows; full admission remains separate.
+
+## Julia null-key implementation
+
+23.3.14.5 independently confirms index/uniq collisions and tags actual null
+beside the prior scalar projection. contains/index_of compare tagged keys;
+uniq retains its empty fallback and copied first values/kinds/order. Native/
+plan/fresh shared reference and null-container controls pass after RED;
+defined-only/free-default controls remain passing.63 strict focused assertions
+across null/contains/index/standalone transforms and package compilation pass,
+including Number/not-Bool guards and numeric/default/count/text consumers.
+Current contains artifacts adopt the selected reference. Lua14.6 follows;
+complete domain/context/portable admission stays separate.

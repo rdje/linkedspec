@@ -6921,13 +6921,16 @@ function _call_runtime_array_slice(values)
     return items[start + 1:stop]
 end
 
+_runtime_array_scalar_key(value) =
+    (value === nothing, _runtime_scalar_string(value; null_as_empty = true))
+
 function _call_runtime_array_contains(values)
     if length(values) < 2
         return 0
     end
-    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    needle = _runtime_array_scalar_key(values[2])
     present = any(
-        item -> _runtime_scalar_string(item; null_as_empty = true) == needle,
+        item -> _runtime_array_scalar_key(item) == needle,
         _runtime_array_items(values),
     )
     return present ? 1 : 0
@@ -6937,9 +6940,9 @@ function _call_runtime_array_index_of(values)
     if length(values) < 2
         return nothing
     end
-    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    needle = _runtime_array_scalar_key(values[2])
     for (index, item) in enumerate(_runtime_array_items(values))
-        if _runtime_scalar_string(item; null_as_empty = true) == needle
+        if _runtime_array_scalar_key(item) == needle
             return index - 1
         end
     end
@@ -6990,10 +6993,11 @@ function _call_runtime_array_filter_match(values)
 end
 
 function _call_runtime_array_uniq(values)
-    seen = Set{String}()
+    seen = Set{Tuple{Bool,String}}()
     result = Any[]
     for item in _runtime_array_items(values)
-        key = something(_runtime_scalar_string(item; null_as_empty = true), "")
+        null_key, text_key = _runtime_array_scalar_key(item)
+        key = (null_key, something(text_key, ""))
         if !(key in seen)
             push!(seen, key)
             push!(result, _runtime_copy(item))

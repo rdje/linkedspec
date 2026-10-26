@@ -3185,11 +3185,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.4 - distinguish Dart null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Distinguish Julia null Array comparison and uniqueness keys.
   Dependencies: .23.3.14.4; original helper owner FUTURE-PARITY-BACKLOG.5.7.
   Intake: Contains null/empty merging confirmed; index/uniq still require public controls. Preserve copied values and current source effects.
   Acceptance: Independently assess index/uniq, preserve defined conversions, implement null-only matching/own uniq key and current contains expectations with explicit Number/not-Bool guards. Native/plan/fresh strict small checks. Small compile/changed-surface/direct checks/docs/commit under feature-first cadence; complete domain/context/admission remains23.4.
+
+  Activation: clean `167ce311bad3f497bd500c775a401cc7cc2517eb`; Dart null child committed, brief0/tree clean.
+  Owned paths: Julia null-distinct contains/index_of/uniq keys, retained native/plan/fresh shared and defined-projection controls, fixture registration, current contains expected and book/facts/task/live docs.
+  Verification tier: `focused`
+  Focused checks: Public native/plan/fresh RED/GREEN with explicit Number/not-Bool guards, direct contains/index/standalone transforms, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for bounded reference-contract repair under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Completion: Private (actual-null tag, prior scalar text) keys distinguish null without changing defined projections. contains/index_of compare tagged keys; uniq keeps its old empty fallback in a typed (Bool,String) key and preserves copied first values/kinds/order. No user String sentinel can collide.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Julia native/plan/fresh RED returns merged membership, index0 instead of1, lost empty values in all uniq forms, 1!/numeric3/default1/count3. Null/container projection RED[1,1,0,0,[[]]] versus[0,0,null,null,[[],null]]. Defined-only/free-missing control passes before production changes. RED also exposed a test length-assumption error after lost entries; guard that assertion so it reports shape safely.
+  - [x] ROOT CAUSE (WHY + WHERE): Interpreter.jl _call_runtime_array_contains/index_of compare _runtime_scalar_string(null_as_empty=true); uniq inserts the same projection with empty fallback into Set{String}. The actual-null tag separates null while retaining every defined key and uniqueness fallback.
+  - [x] FIX: Add private tuple projection; compare it in two helpers, use typed tagged String keys in uniq. Intentionally select Perl reference in current contains producer/shared expected. Register the new retained fixture in runtests.jl. No parser/schema/global conversion/arity/source or free-default change.
+  - [x] ADDRESSED (verified):36 new native/plan/fresh assertions pass shared positions/null/empty/number-string/Bool controls, value/receiver/standalone uniq, original source/kinds/order, numeric/default/count/last/text consumers and NC/one needle. Explicit Number/not-Bool guards reject Boolean lookalikes; null stays separate from defined containers while their old projection remains.
+  - [x] NO REGRESSION:63 strict focused assertions across null keys/direct contains/index/standalone transforms pass with package precompilation and depwarn=error. No full suite, general equality or complete domain/context/portable admission.
+  - [x] LOCKSTEP: Shared/current reference selection, catalog examples, aggregate contract and contains/source-null facts/map, TYPE/FUTURE5.7/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Lua14.6 safe named PUC/JIT fixtures follow; declared5.4 admission stays separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.5 - distinguish Julia null Array comparison keys`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.14.6`
   Status: `pending`
@@ -3295,7 +3312,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` | `pending` | Independently assess Julia index/uniq and repair null-distinct Array keys. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` | `pending` | Independently assess Lua index/uniq and repair null keys on safe PUC/JIT paths. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

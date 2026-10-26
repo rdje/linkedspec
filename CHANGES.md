@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.14.5 — distinguish Julia null Array comparison keys
+
+Julia contains/index_of/uniq now tag actual null beside the existing scalar projection, preserving defined conversions, uniq fallback, copied first values/kinds/order and free defaults. Independent shared/native-plan-fresh and null-versus-container controls pass after RED; defined-only preservation stays passing.63 strict focused assertions across null/contains/index/standalone transforms and package compilation pass, including explicit Number/not-Bool guards. Current contains artifacts adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Lua14.6 safe PUC/JIT assessment next; declared5.4/full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.14.4 — distinguish Dart null Array comparison keys
 
 Dart contains/index_of/uniq now distinguish actual null with a private Object token while preserving defined scalar/container projections, uniq fallback, copied first values/kinds/order and free defaults. Shared native/restored/plan null/reference and null-versus-container tests pass after RED; defined-only preservation controls stay passing. Nine focused null/contains/index/standalone-transform tests, compilation, format and fatal analysis pass. Current contains artifacts intentionally adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Julia14.5 independent assessment next; full admission separate.

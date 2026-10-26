@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
+Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 
 ## Latest Completed Slice
 
-Dart contains/index_of/uniq now distinguish actual null with a private Object token while preserving defined scalar/container projections, uniq fallback, copied first values/kinds/order and free defaults. Shared native/restored/plan null/reference and null-versus-container tests pass after RED; defined-only preservation controls stay passing. Nine focused null/contains/index/standalone-transform tests, compilation, format and fatal analysis pass. Current contains artifacts intentionally adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Julia14.5 independent assessment next; full admission separate.
+Julia contains/index_of/uniq now tag actual null beside the existing scalar projection, preserving defined conversions, uniq fallback, copied first values/kinds/order and free defaults. Independent shared/native-plan-fresh and null-versus-container controls pass after RED; defined-only preservation stays passing.63 strict focused assertions across null/contains/index/standalone transforms and package compilation pass, including explicit Number/not-Bool guards. Current contains artifacts adopt selected reference; scoped book/facts/FUTURE5.7/live/resume align. Lua14.6 safe PUC/JIT assessment next; declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Julia contains/index_of/uniq null and defined conversion under14.5 using shared null_array_key_values, preserving actual defined conversions/kinds/order/free defaults. Distinguish actual null with a collision-free internal key, update current contains expected only against selected reference, use Number and not Bool raw guards. Native/plan/fresh/direct strict small checks/docs/commit, then Lua14.6 safe PUC/JIT named fixtures; full admission separate.
+Independently assess Lua contains/index_of/uniq null and defined conversion under14.6 using shared null_array_key_values and safe public native/plan/fresh fixtures on available PUC5.5.1/LuaJIT. Preserve defined conversions/first values/kinds/order/free defaults, distinguish actual null with collision-free internal key, intentionally update current contains reference. Exclude known malformed native patterns. Small direct checks/syntax/docs/commit, then select next roadmap-aligned fluent feature from TYPE inventory; declared5.4/full admission remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.3` — Rust null-distinct membership/index/uniq and inter-type consumers are targeted-checked; Dart null-key assessment/repair is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.2` — Perl has_key eager key evaluation is targeted-checked; Rust null-distinct membership/index/uniqueness keys are next.
@@ -29,7 +30,6 @@ Independently assess Julia contains/index_of/uniq null and defined conversion un
 - `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.12.4` — Julia comparison scalar/shape guards are targeted-checked; Lua ordinary counterparts next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.12.3` — Dart comparison scalar/shape guards are targeted-checked; Julia ordinary counterparts next.
 
 ## History
 
