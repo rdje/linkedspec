@@ -5888,7 +5888,7 @@ function _evaluate_runtime_fluent_chain!(
         end
         if helper_name in (
             "first", "last", "copy", "count", "count_keys", "length", "is_empty", "is_nonempty",
-            "num_sum", "num_avg", "num_median", "num_range",
+            "is_defined", "is_undefined", "num_sum", "num_avg", "num_median", "num_range",
         ) && !isempty(call.args)
             return nothing
         end
@@ -5916,7 +5916,7 @@ function _evaluate_runtime_fluent_chain!(
         # container output permits later array/hash-only consumers.
         may_produce_scalar = helper_name in (
             "coalesce_nonempty", "index_of", "has_key", "is_empty", "is_nonempty",
-            "starts_with", "ends_with", "contains_substr", "matches",
+            "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
         ) ||
             (value isa AbstractVector && helper_name in (
                 "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",

@@ -2,6 +2,7 @@
 id: julia-runtime-string-numeric-helpers
 title: Julia runtime executes current string/scalar and numeric helpers through one canonical dispatcher
 answers:
+  - why do Julia definedness result checks assert Bool identity
   - why do Julia string predicates need scalar arity and null operand guards
   - does Julia runtime support trim lowercase substr split
   - does Julia runtime support regex flags in matches
@@ -15,7 +16,7 @@ date: 2026-10-26
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
 evidence: "String/numeric4.3.2; ordinary predicate23.3.10.4 shared/native/plan/fresh and direct emptiness checks. Historical replay/source ranges at Git860e231f93714da4076ab477d6934b75b5d5e0d8 for this path."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/string_predicate_result_receivers_test.jl\"); include(\"julia/test/emptiness_result_receivers_test.jl\")'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/definedness_result_receivers_test.jl\"); include(\"julia/test/string_predicate_result_receivers_test.jl\")'"
 ---
 
 Julia string/scalar and numeric helper execution lives in
@@ -66,3 +67,5 @@ and capture expansion; this reading closes no pending regex or numeric repair.
 Historical September11 complete-consumer replay remains at the Git pointer above; magnitude/slice repairs .2.9/.2.10 remain open.
 
 23.3.10.4 adds starts_with/ends_with/contains_substr/matches to existing scalar/one-operand guards and removes null_as_empty from text predicate operands. Shared native/plan/fresh and direct emptiness checks pass after null suffix/needle1!, scalar[] and12 malformed-effect RED. Numeric text flags/Bool matches, regex modes and correct SOC/SC/once-only snapshots are preserved. No domain/regex expansion or full admission.
+
+23.3.11.4 adds is_defined/is_undefined to scalar-result/zero-operand guards only. Native/plan/fresh shared and free producer controls pass after container[]/four-effect RED, with Bool false0!/default retention and1!/SC/one-call/final-null snapshot unchanged. Explicit isa Bool checks at producer-vector Boolean positions distinguish numeric lookalikes that == alone accepts. Nine definedness assertions and direct String checks/strict compilation pass; no producer/parser/schema expansion. Backend/admission progress belongs to the task tree.

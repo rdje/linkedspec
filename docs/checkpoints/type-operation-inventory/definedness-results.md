@@ -75,3 +75,12 @@ controls already pass; container[] and four malformed effects are the failures.
 Shared three-route result and direct String tests plus fatal selected-file
 analysis pass after guards. Bool false/0! retention, source/copy/domain and
 1!/SC/one-call/final-null snapshot remain; no producer/parser repair. Julia4 next.
+
+## Bounded Julia implementation
+
+23.3.11.4 adds scalar-result/zero-operand entries only. Shared native/plan/fresh
+and free producer controls pass after container[]/four-effect RED, preserving
+Bool false0!/default retention and1!/SC/one-call/final-null snapshots. Producer
+Boolean positions explicitly assert isa Bool because == can accept integer
+lookalikes. Nine definedness assertions, direct String checks and strict
+compilation pass. No producer/parser/schema expansion; Lua5 follows.

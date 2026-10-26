@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.11.4 — guard Julia definedness scalar and arity flow
+
+Julia adds definedness to scalar-result and zero-operand lists only. Shared native/plan/fresh and free producer controls pass after container[]/four-effect RED, preserving Bool false0!/default retention and1!/SC/one-call/final-null snapshot. Explicit isa Bool assertions distinguish integer lookalikes; the same fixture passes9 assertions. Direct String3 and strict compilation pass. Registered fixture/book/fast checks align; Lua5 next, full admission/canonical registration separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.11.3 — guard Dart definedness result boundaries
 
 Dart adds definedness to scalar-result and zero-operand lists only. Valid flow, Bool/text/default/literal controls and1!/SC/one-call/final-null snapshot already work; container[] and four malformed effects become null/no-effects after guards. Shared native/restored/plan and free producer controls plus direct String/mode/grouped-literal checks pass five targeted tests; fatal selected-file analysis passes. Producer/parser/schema/domains unchanged. Book/fast checks pass; Julia4 next.
