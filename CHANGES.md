@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.4 — define joined String result continuations
+
+Freeze ordinary join_values results feeding existing compatible String/Number methods, exact one-delimiter pre-effect shape rejection and explicit split/length bridges. Public isolated Get/substitution distinguishes stopped direct/selected chains and raw hash-view DSL/host lookup from working nested helpers; correct source snapshots/SDN order remain unchanged. Retain exact executed diagnostics and existing source/Lua false-delimiter/deferred owners. Update helper target/workaround and canonical/current records; book/continuity checks pass, Perl23.3.5.1 next. No production or portable completeness claim.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.4.5 — continue Lua aggregate numeric results
 
 Remove the reducer endpoint stop, preserve scalar boundaries until container results and reject unambiguous extra producer operands before effects. Small native/generated-plan/fresh-emitted aggregate and direct Count/Length fixtures pass after public/retained RED on available PUC5.5.1/LuaJIT with matching products. Six producers, overloads, empty identity, named mutation suppression, explicit split, SA order, snapshots and incompatible case-map nulls pass; loadfile/book/continuity checks pass. Sync public/current records; joined String result assessment23.2.4 is next, declared5.4/full admission open.

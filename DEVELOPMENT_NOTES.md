@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.4 — join result flow without producer changes
+
+A compound probe returns null with structured last_error; isolate before attribution. Direct/selected chains stop beside nested A,B/A-B; hash-view continuation retains raw DSL and reaches host sorted_values, while its nested control returns X:Y. Public substitution confirms lowering fallthrough, not a missing free helper. Single-step computed/named receivers already preserve snapshots and SDN order. Invalid delimiter shapes leak handler compile errors. Freeze actual joined String continuation plus clean one-delimiter rejection, preserve existing helper/source/copy/deferred policies and retain all executed producers. Contract/book/Array fact/map/current records align; Perl23.3.5.1 implementation follows, with full admission/source normalization separately owned.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.5 — scalar reducers cross the endpoint
 
 Lua evaluate_fluent_calls stops after every array reduction; remove the stop and retain scalar compatibility until a helper returns an actual container. Array lowercase_each/uppercase_each live in String dispatch, so guard them explicitly alongside Array/Hash-only consumers. Extend canonical num_sum/avg/median/range preflight; preserve existing helper domains, scalar min/max, empty identity and callable vocabulary. Public/fixture RED precedes small native/generated-plan/fresh-emitted and direct Count/Length GREEN on available PUC5.5.1/LuaJIT, including named mutation suppression, explicit split, SA order, snapshots and old incompatible nulls. Register fixture and sync book/contract/facts/map/current records; joined String result assessment follows. Declared5.4/full admission stay separate.

@@ -789,7 +789,7 @@ dispatch rule.
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`
 - **Returns**: scalar
-- **Behavior**: Joins array elements into a string with the delimiter between each element. Accepts composed array-valued expressions.
+- **Behavior**: Joins array elements into a string with the delimiter between each element. Accepts composed array-valued expressions. Ordinary joined-result continuations are the next implementation target: `["a","b"].join_values(",").uppercase()` should produce `"A,B"`; current Perl requires `uppercase(join_values(",",["a","b"]))`. The receiver takes exactly one delimiter, preserves source snapshots and feeds the actual joined String into compatible methods; current Perl result chains and malformed delimiter shapes are not yet repaired.
 - **Edge cases**: Returns empty string for an empty array and undef for a missing/undef array on the reference and
   Lua backends. Do not rely on a non-array source: Perl/Lua and Rust/Dart/Julia currently differ, with normalization
   owned by `FUTURE-PARITY-BACKLOG.5`.

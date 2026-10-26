@@ -989,13 +989,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.4`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `185d26ed3fcafe3a26fe367b1a542ae94241c22a`.
   Goal: Publicly assess and freeze ordinary Array join_values result continuations into existing compatible String methods.
   Dependencies: .23.3.4.5.
   Owned paths: type-operation-inventory contract/public diagnostic if needed, helper/String reference, canonical Array result facts/map and task/live records; no production edit in this assessment leaf.
-  Planned tier: `focused`; declare exact public probes and small proof at activation.
-  Claim verification: none: Unactivated normative feature assessment; no support/completeness measurement.
+  Verification tier: `focused`
+  Focused checks: Existing join helper signatures/domains, public Perl Get/substitution fluent/nested and receiver snapshot/effect controls, book and fast continuity/history/diff guards; no runtime census or broad replay.
+  Canonical trigger: None for bounded normative freeze under director feature-first phase; implementation per backend and complete public/portable admission remain separate.
+  Claim verification: none: Normative bounded result contract and qualitative public observations; no quantified corpus, completeness or portable admission measurement.
+  Public intake / owned diagnosis: Single-step joined receivers preserve snapshot/order ["a,b","SDN",["a","b","c"],"x-y",["x","y","z"]]; do not change correct producer behavior. The combined continuation/nested six-expression probe returns null with structured last_error, while direct sum-style substitution emits return undef. Isolate expressions/error fields publicly before attributing the failure; own any confirmed join result-flow/lowering defect here and schedule immediate implementation after contract freeze.
+  Isolated result / attribution: Direct and selected chains return null beside nested "A,B"/"A-B" controls; only the hash-view chain raises an undefined host sorted_values call, while its nested control returns "X:Y". Public substitution retains the entire hash chain as DSL but fully lowers the nested equivalent. This is continuation lowering/fallthrough, not a free sorted_values helper defect. Preserve already-correct snapshot/order; assess exact one-delimiter shapes independently.
   Acceptance: Read existing join_values delimiter-first free/receiver signatures, source/argument/effect/null/empty and domain rules. Compare ordinary joined-result chains with nested public Perl controls, including selected/pipeline/hash-view sources, before classifying a gap. Freeze only compatible existing pure result continuations and explicitly supersede old join-terminal policy; retain invalid-shape, copy/deferred and complete admission boundaries. Schedule per-backend implementation after concrete findings; no broad matrix/replay.
+
+  Shape findings: Missing/extra delimiter shapes fail to lower and produce handler compile errors rather than clean null/effect results. Their accepted DSL block operands use the same grammar as the working snapshot control; own clean one-delimiter shape rejection in the implementation.
+  Completion: joined-string-results.md freezes actual joined String continuation, one delimiter, unchanged producer snapshots/order/domains and explicit split/length bridges. Preserve source normalization ownerFUTURE5 and dated Lua false-delimiter owner2.9. Exact copies of all three executed diagnostic producers are retained; isolated lowerings distinguish raw-DSL fallthrough from working free helpers. Schedule Perl23.3.5.1 before code.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/substitution isolates direct/selected stopped chains and a hash-view host error beside three working nested controls. Invalid arity emits handler compile errors; source snapshot/SDN control already passes.
+  - [x] ROOT CAUSE (WHY + WHERE): append_array_chain_call marks join terminal; Array/Hash loops stop or fail to lower following consumers. Public substitution leaves the failed hash DSL intact, causing host sorted_values lookup, while the nested helper fully lowers.
+  - [x] FIX: Freeze only the bounded result/one-delimiter contract and schedule implementation. Preserve correct receiver snapshots/effects, free delimiter-first roles, existing source/null/empty/copy policies and separate deferred/admission boundaries.
+  - [x] ADDRESSED (verified): Retained diagnostic scripts are byte-identical copies of the executed compound/order, isolated and shape producers; normative examples and existing helper authorities agree. Book and fast continuity/history/diff checks pass.
+  - [x] NO REGRESSION: No production/schema/type change or free-helper/domain normalization. Lua false-delimiter2.9, invalid sourceFUTURE5 and full context/portable admission23.4 remain separately owned.
+  - [x] LOCKSTEP: Contract/public diagnostics, helper target/workaround, condensed Array fact/map and current task/live frontier identify the same next Perl implementation and limits.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.4 - define joined String result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -1526,6 +1542,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Register fixture; update worked helper/guide/contract, Lua/reducer facts/map and current task/live records; book and fast continuity/history/diff checks pass. Join-result assessment23.2.4 is next after clean commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5 - continue Lua aggregate numeric results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5`
+  Status: `pending`
+  Goal: Implement the frozen ordinary joined String result contract on each backend, preserving correct existing behavior.
+  Dependencies: .23.2.4.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`; assess later backends individually after clean commits.
+  Planned tier: Focused bounded children; complete context/portable admission remains23.4.
+  Claim verification: none: Unactivated implementation family; no support/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.5.1`
+  Status: `pending`
+  Goal: Continue ordinary Perl join_values String results through compatible pure methods using existing result dispatch.
+  Dependencies: .23.2.4.
+  Owned paths: MethodLowering.pm, small native/fresh regression and suite registration, helper/guide/contract/fact/map/task/live records.
+  Planned tier: `focused`; changed-module/test syntax and small direct consumer checks before commit.
+  Claim verification: none: Unactivated bounded implementation; declare deterministic proof at activation.
+  Acceptance: Add joined-result flow and exact one-delimiter pre-effect shape rejection, remove raw DSL from the valid hash-view chain and preserve correct producer snapshots/SDN order. Check direct/selected/pipeline/hash/function and empty sources, actual String/length/split transitions, old incompatible/deferred boundaries and later mutations. Small native/fresh plus direct aggregate checks, syntax/docs/commit before Rust assessment; source-domain normalization and Lua false-delimiter repair stay separately owned.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -1608,7 +1641,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.4` | `pending` | Assess/freeze ordinary joined String result continuations after bounded aggregate result rollout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` | `pending` | Implement frozen joined String result flow/one-delimiter guard on Perl, preserving producer snapshots and domains. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
