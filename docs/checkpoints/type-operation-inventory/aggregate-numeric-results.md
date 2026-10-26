@@ -118,3 +118,9 @@ mutating-source iteration. Native/restored/generated-plan and direct Count/Lengt
 checks pass after shape/domain RED; changed-file fatal analysis passes. The small
 fixture also retains named-mutation sources and pre-effect invalid-shape rejection.
 Julia/Lua remain unassessed; full context/portable admission stays separate.
+
+Julia `.23.3.4.4` likewise preserves correct result flow/empty identity and adds
+unambiguous producer shape checks plus scalar-result boundaries in its existing
+loop. Native/generated-plan/fresh-emitted and direct Count/Length checks pass after
+RED under strict Julia1.12 harness execution, including named mutations, explicit
+Array bridge, order and snapshots. Shared Lua remains individually unassessed.

@@ -5877,12 +5877,14 @@ function _evaluate_runtime_fluent_chain!(
     current_edge,
     statement_context::Bool,
 )
-    # Extraction, copy and count/length take no method arguments. Reject before
-    # receiver or operand effects; retain the dynamic result-value loop.
+    # Unambiguous zero-extra methods reject shapes before source/operand effects;
+    # scalar min/max overloads retain their ordinary operands.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
-        if helper_name in ("first", "last", "copy", "count", "count_keys", "length") &&
-           !isempty(call.args)
+        if helper_name in (
+            "first", "last", "copy", "count", "count_keys", "length",
+            "num_sum", "num_avg", "num_median", "num_range",
+        ) && !isempty(call.args)
             return nothing
         end
     end
@@ -5893,8 +5895,21 @@ function _evaluate_runtime_fluent_chain!(
         rule_label,
         current_edge,
     )
+    scalar_result = false
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
+        # Reducer scalars cannot feed array/hash-only consumers. An actual
+        # container result from a compatible helper releases this boundary.
+        if scalar_result && (
+            helper_name in _RUNTIME_ARRAY_HELPER_NAMES ||
+            helper_name in _RUNTIME_HASH_HELPER_NAMES ||
+            helper_name in ("num_sum", "num_avg", "num_median", "num_range")
+        )
+            return nothing
+        end
+        reduced = value isa AbstractVector && helper_name in (
+            "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max",
+        )
         if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
             if call_index != 1
                 return nothing
@@ -5920,6 +5935,8 @@ function _evaluate_runtime_fluent_chain!(
             rule_label,
             current_edge,
         )
+        scalar_result = (scalar_result || reduced) &&
+            !(value isa AbstractVector || value isa AbstractDict)
     end
     return value
 end

@@ -1392,10 +1392,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
-  Status: `active` / Perl/Rust/Dart implemented; individual backend assessment follows
+  Status: `active` / Perl/Rust/Dart/Julia implemented; Lua assessment follows
   Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.3.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`; assess later backends individually after clean implementation commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.5`; assess later backends individually after clean implementation commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
@@ -1471,13 +1471,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.3 - guard Dart aggregate result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `b9c37c64c3653344dbcbde093026bdb5627873ee`.
   Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Julia.
   Dependencies: .23.3.4.3.
   Owned paths: Julia public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Julia producer/shape/domain probes, small native/generated-plan/fresh-emitted aggregate and direct Count/Length tests, strict Julia1.12 harness/package compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; complete context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / owned defects: Valid six fluent/nested pairs agree and empty helpers pass [0,1,null,null]. sum(extra) returns1/two effects; incompatible Array consumers yield []/[] instead of frozen null boundaries. Preserve correct value/min-max/empty behavior; guard canonical unambiguous aggregate shapes and retain scalar-result boundaries in the existing loop.
+  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six result chains, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/generated-plan/fresh-emitted and direct Count/Length checks with strict Julia1.12 harness/package compilation, docs/commit before Lua; no broad replay or complete admission.
+
+  Completion: Preserve correct result dispatch/empty identity, extend canonical unambiguous aggregate preflight and retain scalar reduction boundaries in the existing loop until a helper returns a container. Register the focused fixture; no helper implementation or public format changes.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public valid pairs and empty controls agree; sum(extra) runs two effects and incompatible Array consumers yield []/[]. Native/generated-plan/fresh-emitted fixture RED retains invalid named mutation/effects and scalar-boundary differences.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! omits canonical aggregate methods from shape preflight and carries no scalar-result boundary between calls; generic wrong-kind Array helpers supply empty arrays.
+  - [x] FIX: Guard num_sum/avg/median/range extras before source/operand effects and preserve scalar-only compatibility after actual Array reductions until a helper returns a container. Keep existing helper/domain/min-max/empty policies.
+  - [x] ADDRESSED (verified): Small native/generated-plan/fresh-emitted aggregate fixture PASS after RED for six producers, overloads, empty helpers, direct/selected/pipeline/function/named-mutation sources, explicit split, SA order, snapshots, incompatible nulls and zero invalid effects.
+  - [x] NO REGRESSION: Direct Count/Length tests, package compilation and strict Julia1.12 --depwarn=error harness checks PASS. Existing callable vocabulary and full context/portable admission remain separate.
+  - [x] LOCKSTEP: Register fixture; update worked helper/guide/contract examples, Julia/reducer facts/map and current task/live records; book and fast continuity/history/diff checks pass. Lua assessment follows the clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.4 - guard Julia aggregate result boundaries`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.5`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on shared Lua.
+  Dependencies: .23.3.4.4.
+  Owned paths: Lua public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records.
   Planned tier: `focused`; declare public probes and exact small regression at activation.
   Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
-  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six result chains, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/generated-plan/fresh-emitted and direct Count/Length checks with strict Julia1.12 harness/package compilation, docs/commit before Lua; no broad replay or complete admission.
+  Acceptance: Preserve correct dispatch, source domains and scalar min/max overloads. Probe six result chains, unambiguous zero-extra shapes, scalar boundaries until an explicit Array bridge and empty helper controls before classifying defects. Use small native/generated-plan/fresh-emitted and direct Count/Length checks on available PUC5.5.1/LuaJIT with matching products, loadfile compilation, docs/commit. Keep declared5.4 proof with LUA-STARTUP-READING.2.2 and full context/portable admission separate; no broad replay.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1561,7 +1584,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.4` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Julia after targeted-checked Perl/Rust/Dart implementations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on shared Lua after earlier targeted-checked implementations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

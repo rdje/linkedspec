@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.4 — guard existing Julia aggregate flow
+
+Julia valid pairs/empty helpers already pass. Chain preflight lacks canonical aggregate shapes and generic dispatch permits scalar results into Array fallbacks. Add early num_sum/avg/median/range guards and scalar-result tracking in the existing loop until a compatible helper returns a container. Keep helper domains, min/max overloads, named end mutation behavior and empty identity. Small native/generated-plan/fresh-emitted and direct Count/Length fixtures pass after RED, with strict Julia1.12 binding access, six producers, named mutation suppression, explicit split, SA order and snapshots. Register the fixture and align book/contract/facts/map/task/live. Lua is next; complete admission remains separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.3 — preserve existing flow and guard its boundaries
 
 Dart valid reducer pairs/empty helpers already pass, but ignored extra arguments run effects and array-only consumers turn scalar results into empty arrays. Extend canonical num_sum/avg/median/range preflight and share _evaluateFluentCallsWithValue across both ordinary and named-array-end paths. Track actual Array reductions as scalars until a helper returns a container, rejecting incompatible Array/Hash consumers. Existing helper domains, min/max selection and empty identity stay unchanged. Small native/restored/generated-plan and Count/Length tests, fatal analysis and format pass after RED, including named mutation/pre-effect guards, explicit split, SA order and snapshots. Book/contract/facts/map/current records align; Julia starts independently next.

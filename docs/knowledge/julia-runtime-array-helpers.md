@@ -2,6 +2,7 @@
 id: julia-runtime-array-helpers
 title: Julia array helpers and standalone transform writeback
 answers:
+  - how do Julia aggregate results retain scalar boundaries after named array mutations
   - why does Julia count reject nonarrays and extra receiver arguments
   - can Julia first and last continue through selected scalar and container methods
   - which task owns Julia receiver copy arity validation
@@ -17,10 +18,10 @@ answers:
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
 date: 2026-10-26
-status: selected/count values confirmed; zero-extra arity guarded; broad checks deferred
+status: selected/count/aggregate values confirmed; shape/scalar guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "Julia array4.3.3/end results12.1.5; statement repair5.3.3; selected-value23.3.1.4; copy-arity23.3.2.1."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/count_length_receivers_test.jl\"); include(\"julia/test/selected_value_receivers_test.jl\")'"
+evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate23.3 focused fixtures."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/aggregate_numeric_receivers_test.jl\"); include(\"julia/test/count_length_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -65,4 +66,4 @@ separate from scalar numeric magnitude preservation under .2.9.
 
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-23.3.1.4/23.3.2.1 confirm dynamic selected-value/copy flow and extraction/copy arity.23.3.3.4 preserves count/length continuations, guards extras and restricts count to AbstractVectors instead of general _runtime_value_length. Public/retained arity/domain RED precedes native/generated-plan/fresh-emitted GREEN; values, Unicode, order and snapshots pass. Focused emitted bindings use invokelatest for Julia1.12; strict/direct checks pass. Broad admission stays open.
+23.3.1.4/23.3.2.1 confirm selected/copy flow and arity;23.3.3.4 guards Count/Length extras and makes Count AbstractVector-only.23.3.4.4 guards canonical aggregates and scalar boundaries until actual container output in the existing loop. Strict native/generated-plan/fresh-emitted and Count/Length checks pass after RED; empty Sum/min-max already work. Emitted harnesses use invokelatest for Julia1.12; full admission stays open.
