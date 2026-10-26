@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `TYPE-REFERENCE-BOOK`
-- Status: `active` / helper inventory after delimiter/kind implementations
+- Status: `active` / selected first/last result transition implementation
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
 - Last updated: `2026-10-26`
@@ -893,11 +893,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Retain exact current entries/anchors/includes/examples/backend qualifications for every inventory item, mark precise depth/navigation gaps, preserve old anchors and schedule bounded family work. Close .1.2 only after all inventory children agree; independent layout review .1.3 follows. No exhaustive public-reference coverage claim from an inventory closeout.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23`
-  Status: `pending`
+  Status: `active` / selected first/last transition; complete family matrix remains open
   Goal: Establish comprehensive fluent method families for every supported type and complete inter-type chaining.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.1`, `TYPE-REFERENCE-BOOK.1.2.23.2`, `TYPE-REFERENCE-BOOK.1.2.23.3`, `TYPE-REFERENCE-BOOK.1.2.23.4`.
-  Schedule: Director's October24 DBIQNP requirement; follows the complete existing-operation inventory and precedes final coverage mapping. Current Rust17.3 and its existing prerequisites continue unchanged.
+  Schedule: Director's comprehensive-method requirement plus current feature-first steering selects the concrete first/last result transition before exhaustive inventory/matrix completion. Freeze that bounded contract, then implement native children; full inventory, transition matrix and final admission remain parent closeout dependencies. Do not resume superseded Rust17.3 work.
   Acceptance: Assess useful semantic operation families as well as implemented names. Own and resolve missing fluent operations/transitions before declaring a type complete. Dispatch each chain continuation by its returned value's actual type; preserve container element types, mutation/detachment, callback/error/empty behavior and backend limits. Do not invent a new type or meaningless method merely for symmetry.
   Planned tier: Select per child; new public methods/contracts and final admission require canonical proof.
 
@@ -908,18 +908,87 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: Focused source/contract audit; declare measurements at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
-  Status: `pending`
+  Status: `active` / bounded selection contract; full matrix remains open
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
   Planned tier: Select from actual contract scope; freeze new public authority before code.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
+  Status: `done`
+  Activation commit: `122da1d88acae6fc4412f2a31fef5d8314776ef3`
+  Goal: Freeze the bounded ordinary first/last selected-value continuation contract before code, using existing helper semantics and the director's exact inter-type journey.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.2.1`
+  Owned paths: docs/checkpoints/type-operation-inventory/selected-values.md; current array book/fact/map and TYPE/live continuity.
+  Verification tier: `focused`
+  Focused checks: Canonical existing first/last/string/numeric/container signatures and public Get/substitution distinction; book build and fast continuity/history checks only. No runtime census.
+  Canonical trigger: None for planning/freeze of this bounded feature under director feature-first phase; portable/public implementation admission remains with23.4 after feature coverage.
+  Claim verification: none: Normative selected-value contract and qualitative observed Perl gap, no implementation/parity/completeness measurement.
+  Reproduce: Public Get returns [null,"A",null] for [" a :b ".split(":").first().trim().uppercase(), uppercase(trim(first(split(" a :b ",":")))), [" A "," B "].last().trim().lowercase()]. Substitution emits undef for both receiver journeys while the nested helper control works without last_error.
+  Root cause: MethodLowering's array chain return-family callback marks every non-array-returning method terminal, including first/last, and the string/array fluent loops stop before the next compatible family. This is the requested extraction-to-result-method gap, not a missing trim/uppercase implementation.
+  Acceptance: Specify selection result kinds, source/argument evaluation, inherited wrong-kind/null/empty/copy behavior and pure continuation limits. Schedule bounded per-backend implementation children. Preserve full matrix/admission as open, with no new type or unsupported mutation/callback promise.
+
+  Completion: selected-values.md freezes first/last selection into existing compatible pure string/number/array/harray helper semantics, with null/invalid/effect/copy limits inherited from nested equivalents. It names expected journeys without claiming current cross-backend support. Perl implementation23.3.1.1 is next, with separate backend children and broad admission deferred.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public Get and substitution distinguish failing fluent first/last string journeys from a working nested helper result, with no runtime error.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering's array return-family classification and fluent-loop terminal guards stop the extraction result before its next compatible method.
+  - [x] **FIX** — Freeze the bounded normative contract and explicit implementation schedule before code; no runtime repair claimed in this leaf.
+  - [x] **ADDRESSED (verified)** — Contract examples/limits agree with existing helper signatures, and book render plus fast continuity checks PASS.
+  - [x] **NO REGRESSION** — No runtime/schema/type change; mutation/callback admission, existing helper domain policies and full matrices stay separately owned.
+  - [x] **LOCKSTEP** — Book discloses current Perl gap/workaround, canonical array fact/map and live frontier name the contract and next backend leaf. No portable implementation completeness claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.1 - define selected-value receiver continuations`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `pending`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
   Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
+  Status: `pending`
+  Goal: Implement the frozen first/last selected-value continuation contract in ordinary native/generated actions, one bounded backend leaf per commit.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
+  Children: `.23.3.1.1` Perl, `.23.3.1.2` Rust, `.23.3.1.3` Dart, `.23.3.1.4` Julia, `.23.3.1.5` Lua.
+  Schedule: Next after clean contract23.2.1 under feature-first direction. Probe each backend through its public interface; reuse existing correct behavior rather than invent a repair. Broader type/fluent matrices remain open.
+  Claim verification: none: Implementation scheduling, no measured parity.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1`
+  Status: `pending`
+  Goal: Add ordinary Perl first/last result continuations using selected-values.md and existing helper/value-kind semantics; preserve source snapshots and evaluate each step once.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
+  Planned tier: `focused`; module compilation and one small native/fresh regression, current book/fact and fast continuity checks. Broader23.4 admission follows feature coverage.
+  Claim verification: none: No implementation measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
+  Status: `pending`
+  Goal: Confirm/implement the same selected-value transition on Rust via public Engine and generated-plan execution.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.1`
+  Planned tier: `focused`; compile and small targeted regression only.
+  Claim verification: none: No measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3`
+  Status: `pending`
+  Goal: Confirm/implement the same selected-value transition on Dart via public runtime/restored/generated-plan execution.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
+  Planned tier: `focused`; selected analysis and small targeted regression only.
+  Claim verification: none: No measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
+  Status: `pending`
+  Goal: Confirm/implement the same selected-value transition on Julia via public native/generated-plan/emitted execution.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3`
+  Planned tier: `focused`; package compile and small targeted regression only.
+  Claim verification: none: No measurement yet.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.5`
+  Status: `pending`
+  Goal: Confirm/implement the same selected-value transition on Lua via published native/generated interfaces, preserving the shared interpreter contract.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
+  Planned tier: `focused`; compile and small targeted regression on supported interpreters only.
+  Claim verification: none: No measurement yet.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -997,11 +1066,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spelling child1.2.1.2.1 is indexed; signature/effect child1.2.1.2.2 selects the next bounded missing implementation. Receiver1.2.1.3 and comprehensive23 remain open; no complete method/parity claim.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen and Perl23.3.1.1 is next; signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.2.2` | `pending` | Map helper signatures/effects from the indexed spellings and select the next bounded feature. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.1` | `pending` | Implement frozen first/last selected-value continuations on Perl, then native backend children; signature inventory resumes afterward. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

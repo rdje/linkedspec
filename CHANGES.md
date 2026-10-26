@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.1 — define selected-value continuations
+
+Freeze ordinary first/last results as inputs to compatible pure methods under existing helper semantics, with actual selected kinds and inherited null/invalid/effect/copy limits. Public Perl Get/substitution show fluent string journeys return null while nested helpers return the expected string. Book discloses the current gap/workaround; current fact/map/task/live handoff name separate backend implementations, beginning with Perl23.3.1.1. No runtime fix or cross-backend admission is claimed. Book and fast continuity checks pass; broad matrices remain deferred under feature-first direction.
+
 ## TYPE-REFERENCE-BOOK.1.2.1.2.1 — index helper spellings and roles
 
 Add a source-linked helper spine separating primary resolver spellings, numeric/current aliases, source-boundary compatibility and reverse-check non-generic syntax diagnostics. Resolver families do not establish input types, receiver methods or semantic execution. Exact spelling/alias consistency and book/fast continuity checks pass, with no runtime census. Clarify the public signature/result distinction, correct the stale Dart/Julia pending fact and advance the precise signature/effect child frontier. No complete helper/API/parity admission; feature selection continues under1.2.1.2.2.

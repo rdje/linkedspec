@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1349** facts · **10544** question keys.
+> **1349** facts · **10545** question keys.
 
 ## Questions → fact
 
@@ -675,6 +675,7 @@
 - "can every nested source interval be consumed by an enclosing rewrite" -> [perl-mapped-replacement-nested-continuation](docs/knowledge/perl-mapped-replacement-nested-continuation.md) · 2026-10-08 · reverify: [1 entry](#perl-mapped-replacement-nested-continuation)
 - "can failed Lua function projection partially change a caller sidecar" -> [lua-function-projection-reading-and-boundary-gaps](docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: `Run LUA_FUNCTION_PROJECTION_READING_29 and its managed commands below. This is focused diagnostic reproduction, not a full gate or repair closure.`
 - "can final tool poll counts compare Phase0 output volume" -> [verification-output-chunk-boundary](docs/knowledge/verification-output-chunk-boundary.md) · 2026-10-10 · reverify: `Read docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2-output-diagnostic/stream_probe.py and chunk-results.json. Reproduce through exec_command with an early yield followed by write_stdin; inspect each actual response and concatenate its output. Other harnesses must check their own output contract.`
+- "can first or last continue through selected string methods" -> [terse-array-receiver-value-chains](docs/knowledge/terse-array-receiver-value-chains.md) · 2026-10-26 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback`
 - "can formal trim callbacks be symbolic or already bound" -> [perl-method-trim-capture](docs/knowledge/perl-method-trim-capture.md) · 2026-10-12 · reverify: `Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201.`
 - "can function calls be receiver chain receivers in Perl AST" -> [perl-actionir-ast-parser-seam](docs/knowledge/perl-actionir-ast-parser-seam.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`
 - "can function definition AST tests use a small spec file" -> [staged-prototype-function-body-selection](docs/knowledge/staged-prototype-function-body-selection.md) · 2026-07-02 · reverify: `rg -n 'STAGED-LINKED-PARSING\\.5\\.1|function-body|function body|function_definition|0016|implementation-language neutral' docs/tasks/STAGED-LINKED-PARSING.md docs/decisions docs/linkedspec-book/src ROADMAP_V2.md specs/spec.spec`
@@ -20323,8 +20324,8 @@ _SPEC-FORMAT-TERSE.7.3 array numeric reducer receiver methods_
 
 ### terse-array-receiver-value-chains
 _Array pure receiver chains and named statement transforms_
-- **answers:** why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
-- **date:** 2026-10-26 · **status:** pure chains current; Rust/Dart/Julia statements5.3.1-.3 targeted-checked; broad recurrence deferred
+- **answers:** can first or last continue through selected string methods | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
+- **date:** 2026-10-26 · **status:** ordinary first/last result gap owned; transforms targeted-checked; full transitions open
 - **evidence:** `Historical pure chains: SPEC-FORMAT-TERSE.2.3.5.1; end-result supersession: FUTURE-PARITY-BACKLOG.12.1.1-.6. Rust/Dart/Julia statement repairs:5.3.1-.3.`
 - **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test array_transform_writeback`
 - **source:** [`docs/knowledge/terse-array-receiver-value-chains.md`](docs/knowledge/terse-array-receiver-value-chains.md)

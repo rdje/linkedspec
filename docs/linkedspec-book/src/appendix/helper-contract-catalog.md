@@ -1905,7 +1905,7 @@ Receiver-dot methods are available for the value families that have a typed rece
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
   links include `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
-  `sum`, `avg`, `median`, `range`, `min`, and `max`.
+  `sum`, `avg`, `median`, `range`, `min`, and `max`. On current Perl, `first`/`last` also stop a chain before a following string method: use nested `uppercase(trim(first(parts)))` until the selected-value transition implementation lands. Its bounded contract and backend work are owned by `TYPE-REFERENCE-BOOK.1.2.23.3.1`; other backend support is checked separately.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and

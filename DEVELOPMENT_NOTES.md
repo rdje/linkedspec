@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.1 — extraction is a result boundary
+
+The exact requested string -> split -> array -> selected string -> string-method journey is blocked on Perl by terminal classification, although the corresponding nested helpers already work. first/last return arbitrary item kinds, so continuation must consume that value rather than reuse the original array/string family. Freeze the bounded pure-value contract before code; inherit each helper's existing null/invalid/coercion and copy rules instead of inventing a new universal domain rule. Addressable mutation and extra callback admission remain outside scope. Native backend leaves follow the Perl repair; complete inventory/matrices/admission stay open and broad proof remains deferred.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.1.2.1 — spelling is not a signature
 
 The current Dart registry explicitly separates primary names, numeric/control aliases and source-boundary compatibility. Its family classification describes dispatch grouping: split is array-classified despite reading a string; copy/traversals span container kinds. Perl reverse checking uses diag_name and explicit dedicated/internal exclusions; callbacks and missing per-helper rows prevent treating that structure as a complete JSON method catalog. helpers.md records those roles and source pointers without promoting compatibility/private forms. Per-helper signatures/effects, book-only spellings and result transitions remain the next source-mapping work. Array fact Dart/Julia pending text was stale against completed5.3.2/.3 and is corrected.

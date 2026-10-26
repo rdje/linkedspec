@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Helper spelling/role index1.2.1.2.1 is complete at its source-only scope. Signature/effect child1.2.1.2.2 selects further bounded implementations; existing pipeline/delimiter/kind features are committed. Keep quick targeted checks; broad verification and maintenance remain deferred.
+Bounded first/last selected-value continuation contract23.2.1 is frozen before code; Perl23.3.1.1 is next, followed by separate native backend leaves. Helper signatures/full transition inventory remain open. Keep feature/compile/quick-check/commit cadence; broad verification and maintenance stay deferred.
 
 ## Latest Completed Slice
 
-helpers.md separates primary resolver spellings, numeric/current aliases, source-boundary compatibility and excluded dedicated/internal diagnostics. Source consistency, book and fast continuity checks pass. Public explanation distinguishes signatures/results from mere names; the stale Dart/Julia pending fact and precise child frontier are corrected. No runtime/helper/API completeness or parity admission.
+selected-values.md specifies selected actual kinds and compatible pure continuations using existing helper/null/invalid/effect/copy semantics. Public Perl Get/substitution returns null for fluent first/last string journeys beside a working nested helper control. Book discloses the gap/workaround; fact/map/task/live handoff agree. Book and fast continuity checks pass; no runtime or cross-backend admission is claimed.
 
 ## Next Action
 
-Map actual helper signatures/results/effects and backend limits from the spelling spine, starting with scalar/string and array bridges. Use canonical contracts and tiny public probes for uncertainty; select missing implementations rather than run a broad runtime census. Receiver/result transitions and comprehensive23 remain open.
+Implement ordinary Perl first/last selected-value continuations under23.3.1.1 with a small native/fresh regression, then confirm/implement Rust/Dart/Julia/Lua children. Preserve existing helper domains and once-only source/argument evaluation. Signature inventory resumes afterward; complete fluent matrices/admission remain deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.1` — bounded first/last result continuation contract frozen; observed Perl gap disclosed; Perl23.3.1.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.1.2.1` — helper spellings/aliases/roles indexed; source consistency and book pass; signatures/effects1.2.1.2.2 next.
 - `FUTURE-PARITY-BACKLOG.5.4.4` — standalone filter numeric kinds preserved through typed writes; native/fresh targeted checks pass; helper inventory resumes.
 - `FUTURE-PARITY-BACKLOG.5.5.2` — standalone dynamic delimiters, validated snapshots and once-only effects; native/fresh targeted checks pass; numeric kinds5.4.4 next.
@@ -29,7 +30,6 @@ Map actual helper signatures/results/effects and backend limits from the spellin
 - `TYPE-REFERENCE-BOOK.1.2.16` — deferred scoped with, metadata/caller slots and typed error restoration; syntax/native/fresh targeted checks pass; grouped assignment19 next.
 - `TYPE-REFERENCE-BOOK.1.2.14` — deferred last free/receiver support, syntax and native/fresh regression pass; deferred with16 next.
 - `TYPE-REFERENCE-BOOK.1.2.17.6` — shared Lua signed reads/writes and typed underflow; small native/generated/emitted check passes on PUC Lua/LuaJIT; deferred last14 next.
-- `TYPE-REFERENCE-BOOK.1.2.17.5` — Julia signed reads/writes, typed underflow and copied post-expression behavior; compilation/targeted regression pass; Lua17.6 next.
 
 ## History
 
