@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.1.3 — guard Dart extraction arity
+
+Confirm Dart’s existing dynamic selected-value transitions through public native/restored/generated-plan execution. Fix the independently reproduced guard gap: first/last extra method arguments now reject before receiver/operand effects. The small selected-value and direct array-transform test files pass, and changed-file analysis/format/book/fast continuity checks pass. Dynamic function copies, repeated transitions, snapshots, empty values, min/max shape and exact public copy recipes are covered without a full package suite. Book/contract/Dart-array facts/map/live handoff agree; stale Julia transform wording is corrected and Julia23.3.1.4 is next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.1.2 — continue Rust selected receiver values
 
 Rust first/last results continue through existing dynamic scalar/container dispatch instead of stopping in the original array/string/hash family. Preserve actual selected/copy kinds and reject invalid extraction arity before effects. Fix the blocking known trim-null case; direct undef stays null and empty text stays empty. Locked/offline native/restored/generated-plan selected-value regression and direct-dependent array-transform test pass after observed RED; first-party rustfmt/book/fast continuity checks pass. Current examples/contract/facts/map, indexed61.1 partial repair and live handoff agree; Dart23.3.1.3 is next. Remaining scalar61.1/.61.2 and full admission stay open.

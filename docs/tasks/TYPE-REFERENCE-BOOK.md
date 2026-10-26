@@ -948,7 +948,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: Select for each bounded child; public contract/admission changes require canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1`
-  Status: `active` / Perl implemented; native backend confirmations/repairs next
+  Status: `active` / Perl/Rust/Dart implemented; Julia/Lua confirmations/repairs next
   Goal: Implement the frozen first/last selected-value continuation contract in ordinary native/generated actions, one bounded backend leaf per commit.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2.1`
   Children: `.23.3.1.1` Perl, `.23.3.1.2` Rust, `.23.3.1.3` Dart, `.23.3.1.4` Julia, `.23.3.1.5` Lua.
@@ -1042,11 +1042,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2 - continue Rust selected receiver values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `143198c356a7c7ecdf50c5d5c8f31d60068ebe84`
   Goal: Confirm/implement the same selected-value transition on Dart via public runtime/restored/generated-plan execution.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.3.1.2`
-  Planned tier: `focused`; selected analysis and small targeted regression only.
-  Claim verification: none: No measurement yet.
+  Owned paths: dart/lib/src/runtime/interpreter.dart if needed; dart/test/selected_value_receivers_test.dart; current book/Dart/array facts/map and TYPE/live continuity.
+  Verification tier: `focused`
+  Focused checks: One small public native/restored/generated-plan selected-value regression and selected-file Dart analysis/format; directly affected compatibility check only when needed; book and fast continuity/history checks. No full package suite.
+  Canonical trigger: None for bounded feature implementation/confirmation under director phase policy; full23.4 admission remains deferred.
+  Claim verification: none: Deterministic implementation/confirmation and targeted regression, no quantified corpus/exhaustive/portable admission measurement.
+  Acceptance: Probe the frozen journeys through public parseSpec/compileSpec/runtime interfaces before classifying a gap. Reuse correct existing behavior; preserve selected kinds, copy, repeated transitions, empty/null, existing arity/domain rules, snapshots and once-only effects. Correct the encountered stale Dart card's Julia5.3.3 pending wording against accepted work; no historical producer replay.
+
+  Reproduce/impact: Initial frozen journeys PASS natively/restored/generated-plan without production changes. The expanded public fixture shows an extra-argument first call returns trimmed a and runs receiver/argument effects twice instead of returning null with no effects. This violates the frozen zero-method-argument boundary.
+  Root cause: _evaluateExpression's fluent-chain branch evaluates its receiver and _evaluateFluentCall evaluates array helper arguments; the array helper then ignores the extra first/last values. Add a chain-level extraction arity guard before receiver/operand evaluation; do not rewrite the already correct dynamic value loop.
+
+  Completion: Reuse Dart's existing per-value fluent dispatch; add only an early first/last zero-method-argument guard in _evaluateExpression before receiver/operand effects. The focused fixture uses the public function-aware parser for its dynamic-copy function and retains native/restored/generated-plan assertions.
+  Focused result: Targeted selected-value and direct array-transform test files PASS; selected interpreter/test analysis with fatal infos/warnings reports no issues. Formatter/book/fast continuity/history checks pass. No full package suite.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Initial ordinary selected journeys PASS without production changes. The expanded function-aware public fixture is RED for invalid first arity, returning a and two effects instead of null and zero effects.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — _evaluateExpression's dynamic loop and _evaluateFluentCall already pass each result correctly; extra extraction operands are evaluated and ignored by array helper dispatch without a pre-effect shape guard.
+  - [x] **FIX** — Add a chain-level first/last arity guard before source/argument evaluation; retain existing dynamic value composition.
+  - [x] **ADDRESSED (verified)** — Focused native/restored/generated-plan regression and direct array-transform test PASS; changed-file analysis reports no issues.
+  - [x] **NO REGRESSION** — Selected scalar/container/copy kinds, repeated extraction, min/max shape, function/computed sources, snapshots, empty values and once-only effects pass. No full package suite.
+  - [x] **LOCKSTEP** — Perl/Rust/Dart book recipes, partial contract, contained Dart/array facts/map and task/live handoff agree. Correct stale Julia transform wording; Julia23.3.1.4 is next and full admission remains open.
+  Containment: Condense redundant historical milestone prose in the existing Dart card while retaining its current helper/ordering/slice facts and canonical links; keep the collection within its existing budget.
+  Harness note: The expanded function fixture initially used rule-only parseSpec and failed before runtime. Use public parseSpecWithStagedUserFunctionDefinitions as existing function tests do; no product-defect credit for that setup error.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.1.3 - guard Dart selected-value receiver arity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.1.4`
   Status: `pending`
@@ -1139,11 +1160,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl scalar/container23.3.1.1.1-.2 and Rust23.3.1.2 are implemented; Dart23.3.1.3 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
+Feature-first implementation has completed transform5.3.1-.3, pure/standalone kinds5.4.1/.4 and dynamic delimiter5.5.1-.2 with focused checks. Helper spellings are indexed; a tiny public journey probe selects the requested first/last result transition. Contract23.2.1 is frozen; Perl/Rust/Dart selected-value implementations are targeted-checked; Julia23.3.1.4 is next. Signature inventory resumes afterward. Full receiver/comprehensive matrices and admission remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` | `pending` | Confirm/implement selected-value transitions on Dart; bounded Perl/Rust subsets are implemented. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` | `pending` | Confirm/implement selected-value transitions on Julia; bounded Perl/Rust/Dart subsets are implemented. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

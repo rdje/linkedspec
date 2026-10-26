@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Perl/Rust selected-value continuations are implemented. Dart23.3.1.3 is next, then Julia/Lua. Remaining Rust scalar61.1/.61.2 repairs are scheduled after this native rollout; full signature/transition inventory and admission remain open. Keep feature/compile/quick-check/commit cadence.
+Bounded Perl/Rust/Dart selected-value work is implemented and targeted-checked. Julia23.3.1.4 is next, then Lua. Rust remaining scalar61.1/.61.2 repairs follow native rollout; full signature/transition inventory and admission remain open. Keep feature/compile/quick-check/commit cadence.
 
 ## Latest Completed Slice
 
-Rust first/last tails reuse existing dynamic receiver dispatch, preserving actual selected scalar/container/copy kinds and pre-effect extraction arity. The focused public Engine/restored/generated-plan regression and direct array-transform checks pass after actual RED. The blocking known trim-null helper case is fixed with direct undef/empty controls; indexed61.1 retains remaining helpers. First-party format/book/fast continuity pass; current facts/map/task/live handoff agree.
+Dart’s dynamic selected-value flow already works. An early first/last arity guard now rejects extra operands before source/argument effects. The public native/restored/generated-plan selected-value and direct transform tests pass, including function copies, repeated transitions, snapshots, empty values, min/max and exact copy recipes. Changed-file analysis/format/book/fast continuity pass; current contract/facts/map/task/live handoff agree and stale Julia transform wording is corrected.
 
 ## Next Action
 
-Confirm/implement Dart selected-value journeys through public runtime/restored/generated-plan interfaces. Probe the frozen examples first, reuse correct existing behavior and run a small focused check plus selected analysis. Commit before Julia/Lua. Broad matrices, policy/storage maintenance and complete fluent/scalar admission remain deferred.
+Confirm/implement Julia selected-value journeys through public native/generated-plan/emitted interfaces. Probe the frozen examples first, reuse correct behavior and check extraction arity/effects with one small regression. Commit before Lua. Broad matrices, policy/storage maintenance and complete fluent/scalar admission stay deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` — existing Dart selected-value flow confirmed; extraction arity guard, focused tests and changed-file analysis pass; Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` — Rust selected scalar/container dispatch and trim-null blocker; targeted native/restored/generated-plan and array-transform checks pass; Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.2` — selected Perl array/harray methods and runtime-kind copy; focused native/fresh/scalar/pipeline checks pass; Rust23.3.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.1.1` — selected Perl scalar methods, native/fresh and pipeline checks pass; selected containers1.1.2 next.
@@ -29,7 +30,6 @@ Confirm/implement Dart selected-value journeys through public runtime/restored/g
 - `FUTURE-PARITY-BACKLOG.5.3.1` — Rust standalone split_each/filter_match/uniq rebind named arrays; compile/native/restored/generated-plan targeted checks pass; Dart5.3.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.1.1` — non-call syntax/result/effect/context catalog and quick AST probe; helper/alias1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.21` — raw multiline assignment payload fidelity, unchanged typed first-line division; syntax/native/fresh targeted checks pass; inventory1 next.
-- `TYPE-REFERENCE-BOOK.1.2.19` — ordinary grouped assignment values, helper/local paths and detached-root effects; syntax/native/fresh targeted checks pass; raw-regex21 next.
 
 ## History
 

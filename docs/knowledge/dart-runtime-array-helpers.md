@@ -10,11 +10,11 @@ answers:
   - does Dart runtime support push_back statement only
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
-date: 2026-10-25
-status: transforms5.3.2 implemented; ordering/slice owners remain open
+date: 2026-10-26
+status: selected values confirmed; extraction arity guarded; ordering/slice owners open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
-evidence: "Dart array4.3.3; end results12.1.4; transform regression5.3.2."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/array_transform_writeback_test.dart"
+evidence: "Dart array4.3.3; end results12.1.4; transform regression5.3.2; selected-value23.3.1.3."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/selected_value_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -26,7 +26,7 @@ allows examples such as `items.sorted().drop_front(2).first()`,
 `items.uniq().join_values(",")`, `items.filter_match(/^a$/).count()`, and
 `phrases.split_each("-").filter_match(/^aa$/).count()`.
 
-The supported array helper slice includes count/select/order/membership helpers,
+Array methods cover count/select/order/membership,
 `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed`,
 `contains`, `index_of`, `trim_each`, `filter_nonempty`, `lowercase_each`,
 `uppercase_each`, `uniq`, `filter_match`, `split_each`, `flat_array`,
@@ -42,11 +42,9 @@ remains the explicit cleanup step.
 working arrays and return independent updated array snapshots. Pop discards the removed element. A compatible
 continuation such as `.count()` consumes the updated array; an unused result is silently dropped.
 
-`DART-BACKEND-PARITY.4.3.4` has since landed hash helper breadth and hash
-receiver/mutation behavior. `DART-BACKEND-PARITY.4.3.5` has since landed value
-blocks, structured controls, with-blocks, and tree traversal callback helpers.
+Hash helpers: DART-BACKEND-PARITY.4.3.4; controls/tree callbacks: .4.3.5.
 
-Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-value-control-tree-helpers]],
+Related: [[dart-runtime-hash-helpers]], [[dart-runtime-value-control-tree-helpers]],
 [[dart-runtime-string-numeric-helpers]],
 [[terse-array-receiver-value-chains]], [[array-helper-return-shape-caveats]],
 [[terse-array-numeric-reducer-receiver-methods]], [[terse-type-method-surface-inventory]].
@@ -59,6 +57,8 @@ slice([1,2,3],1,9223372036854775807) overflows start+length before clipping and 
 a wrapped RangeError, while offset zero and small widths succeed. The same mechanism
 affects scalar substr; [[dart-slice-end-overflow]] and .2.14 retain six exact paired
 controls and own safe bounds/carrier proof. This is not the separately owned negative
-count policy. Reading .1.20 changes no executable behavior.
+count policy.
 
-5.3.2 enables standalone transforms in _executeArrayStringTransformStatement: validate target kind, evaluate operands with pure helpers, replace the array. Focused native/restored/generated-plan and analysis pass; value/receiver forms stay pure. Julia5.3.3/broad5.3.4 remain open.
+5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
+
+23.3.1.3 confirms existing dynamic first/last continuations for selected strings/numbers/arrays/harrays and copy. An early extraction arity guard now rejects extra arguments before source/operand effects. Native/restored/generated-plan controls cover repeated transitions, function copies, snapshots, empty values and once-only effects; selected-file analysis passes. Full fluent admission stays open.

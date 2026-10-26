@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.3 — retain dynamic Dart flow
+
+Dart already passes each fluent result to _evaluateFluentCall, so the frozen scalar/container journeys need no dispatch rewrite. The extra-argument extraction control instead exposes a missing pre-effect shape guard: first ignores an evaluated extra operand after receiver effects. Guard first/last at ActionFluentChainExpr entry, before either can run. The expanded fixture uses public parseSpecWithStagedUserFunctionDefinitions for function declarations; its earlier rule-only parser failure is setup, not a language defect. Native/restored/generated-plan and direct transform checks pass with changed-file analysis; keep Julia/Lua and full fluent admission open.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.1.2 — reuse dynamic selected dispatch
 
 Rust already dispatches dynamic receiver values for callable/mutation results. Reuse that path after first/last in native outer-family loops and exempt extraction from the dynamic array terminal check. Preserve pre-effect extraction arity validation and actual RuntimeValue kind rather than duplicate type dispatch. The initial frozen-example probe is RED; after transition repair only empty-selection trim fails because the already tracked helper converts null to empty text. Add its null guard here and cross-link the partial61.1 repair; other scalar helpers remain independently open. The focused native/restored/generated-plan regression covers exact book copy recipes, dynamic function copies, repeated transitions, snapshots and effects; direct array-transform checks pass without a full crate suite.

@@ -97,3 +97,9 @@ receiver dispatcher and retains actual selected kinds/copy. Native/restored/
 generated-plan focused controls pass; trim null propagation is repaired as a
 blocking helper case. Other known scalar-null gaps retain61.1/.61.2 ownership
 and prevent complete scalar/fluent admission. Dart/Julia/Lua remain next.
+
+Dart `.23.3.1.3` already routes each fluent result dynamically; the targeted
+public native/restored/generated-plan fixture confirms scalar/container/copy
+journeys, repeated extraction, empty values, snapshots and once-only effects.
+The added early guard rejects extra first/last method arguments before effects.
+Selected-file analysis passes; Julia/Lua and full admission remain open.

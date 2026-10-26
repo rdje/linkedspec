@@ -3704,6 +3704,15 @@ final class LinkedSpecRuntimeEngine {
           statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
+        // Extraction takes no method arguments. Reject the shape before any
+        // receiver or operand effects, while keeping valid value chains dynamic.
+        if (calls.any((call) {
+          final helper = canonicalActionHelperName(call.method);
+          return (helper == 'first' || helper == 'last') &&
+              call.args.isNotEmpty;
+        })) {
+          return null;
+        }
         if (statementContext &&
             _executeArrayEndMutationStatement(
               expr,
