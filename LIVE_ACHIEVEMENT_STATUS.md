@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
+Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 
 ## Latest Completed Slice
 
-Julia adds definedness to scalar-result and zero-operand lists only. Shared native/plan/fresh and free producer controls pass after container[]/four-effect RED, preserving Bool false0!/default retention and1!/SC/one-call/final-null snapshot. Explicit isa Bool assertions distinguish integer lookalikes; the same fixture passes9 assertions. Direct String3 and strict compilation pass. Registered fixture/book/fast checks align; Lua5 next, full admission/canonical registration separate.
+Lua removes the last definedness terminal entries/empty private map and adds scalar/zero-operand guards. Native/plan/fresh shared/free producer and direct String checks pass on PUC5.5.1/LuaJIT after fluent-null/S/four-effect RED, preserving Bool false0!/default retention, actual source/copy and1!/SC/one-call/final-null snapshots. String comparison policy stays separate; named fixture/book/fast checks align. Native malformed regex2.3, declared5.4/full admission and Perl registration23.4.1 remain open. String comparison assessment23.2.11 next.
 
 ## Next Action
 
-Independently assess Lua is_defined/is_undefined under23.3.11.5 on available PUC5.5.1/LuaJIT using shared source/Boolean expected and producer/text/default/literal controls. Preserve actual domains/source/copy and null-mutating snapshot; repair confirmed ordinary gaps only. Small native/plan/fresh/direct String checks/loadfile/docs/commit. Do not select known malformed native-regex cases (LUA-STARTUP-READING.2.3); declared5.4/full admission remain separate.
+Assess/freeze ordinary receiver/result counterparts for six str_* String comparison helpers under23.2.11. Read canonical bridge/catalog and actual free producers; compare public Perl Get/substitution/native/fresh fluent/nested/source/operand/result and malformed controls before classification. Historical free-only bridge remains the baseline; comprehensive fluent directive authorizes bounded ordinary counterparts while numeric aliases/domain/Unicode policies stay unchanged. Small checks/docs/commit; no broad suite/admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
@@ -29,7 +30,6 @@ Independently assess Lua is_defined/is_undefined under23.3.11.5 on available PUC
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` — Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.9.2` — Rust generic emptiness result/source/shape repair passes focused checks; Dart assessment next.
 
 ## History
 

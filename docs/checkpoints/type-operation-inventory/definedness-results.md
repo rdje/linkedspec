@@ -84,3 +84,13 @@ Bool false0!/default retention and1!/SC/one-call/final-null snapshots. Producer
 Boolean positions explicitly assert isa Bool because == can accept integer
 lookalikes. Nine definedness assertions, direct String checks and strict
 compilation pass. No producer/parser/schema expansion; Lua5 follows.
+
+## Bounded Lua implementation
+
+23.3.11.5 removes the last two String terminal entries and the now-empty map,
+marks definedness results scalar and preflights zero operands. Native/plan/fresh
+shared/free producer and direct String checks pass on PUC5.5.1/LuaJIT after
+null/S/four-effect RED, preserving Bool false0!/default retention, actual source/
+copy kinds and1!/SC/one-call/final-null snapshots. Register the named fixture;
+String comparisons stay separate. Declared5.4/native malformed regex2.3/full
+admission stay open. Next bounded assessment: six existing str_* helpers23.2.11.

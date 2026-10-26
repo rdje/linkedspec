@@ -821,7 +821,7 @@ endif()
 
 ## Scalar predicates and string comparisons
 
-These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, and many can be assigned or returned. Ordinary Perl definedness receivers now continue: `"abc".is_defined().cat("!")` returns `"1!"`; `[].first().is_defined().coalesce_nonempty("late").cat("!")` returns `"late!"` because its existing false result is empty text. Rust/Dart/Julia support this bounded family with Boolean results: `[].first().is_defined().coalesce_nonempty("late").cat("!")` retains `"0!"`; `false.is_defined()` and `undef.is_undefined()` return true. Empty text/Array/Hash, false and zero themselves are defined; these predicates test null rather than emptiness.
+These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, and many can be assigned or returned. Ordinary Perl definedness receivers now continue: `"abc".is_defined().cat("!")` returns `"1!"`; `[].first().is_defined().coalesce_nonempty("late").cat("!")` returns `"late!"` because its existing false result is empty text. Rust/Dart/Julia/Lua support this bounded family with Boolean results (Lua: PUC5.5.1/LuaJIT; declared5.4 proof remains separate): `[].first().is_defined().coalesce_nonempty("late").cat("!")` retains `"0!"`; `false.is_defined()` and `undef.is_undefined()` return true. Empty text/Array/Hash, false and zero themselves are defined; these predicates test null rather than emptiness.
 
 | Helper | Meaning |
 | --- | --- |

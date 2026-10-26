@@ -2,6 +2,7 @@
 id: lua-runtime-array-transform-pipelines
 title: Lua copied array transform and join pipelines
 answers:
+  - "can Lua definedness receivers retain Boolean false through continuations"
   - "can Lua emptiness results continue through scalar methods with source kinds preserved"
   - "why do Lua direct default scalars reject container consumers"
   - "why do Lua reducer scalar guards include uppercase_each from String dispatch"
@@ -17,7 +18,7 @@ date: 2026-10-26
 status: bounded value/predicate guards; declared5.4/full admission open
 tags: [lua, runtime, arrays, transforms, regex, join, uniform-binding, LUA-BACKEND-PARITY]
 evidence: "Transform4.3.4.3/results23.3; focused PUC5.5.1/LuaJIT; declared5.4 remains LUA-STARTUP-READING.2.2."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/emptiness_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/emptiness_result_receivers_test.lua"
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/definedness_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/definedness_result_receivers_test.lua"
 ---
 
 Lua implements delimiter-first `join_values(delimiter, array)` and receiver-equivalent
@@ -37,4 +38,4 @@ Related facts: [[lua-runtime-array-selection]], [[lua-pure-split-bridge]],
 [[six-variant-unicode-17-case-parity]], [[array-helper-return-shape-caveats]],
 [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]].
 
-evaluate_fluent_calls guards defaults/index/has_key/emptiness results until actual array/harray output; generic emptiness consumers remain allowed. Join/index/has_key take one operand, emptiness zero.23.3.9.5 removes its terminal String-helper fence, preserving Bool/domain/source/copy policy. Native/plan/fresh/direct has_key pass after null/S/four-effect RED with source/copy kinds, false retention/repeated predicates/bridges/scalar nulls and1!/SA snapshots on5.5.1/JIT. Join false: [[lua-interpreter-helper-reading-and-false-delimiter-gap]]; declared5.4/full admission open.
+evaluate_fluent_calls guards defaults/index/has_key and all four generic predicate results until actual array/harray output; generic consumers remain allowed. Join/index/has_key take one operand, generic predicates zero. Emptiness23.3.9.5 and definedness23.3.11.5 remove their terminal fences, preserving Bool/domain/source/copy. The last two entries disappear, so the empty String terminal map is removed; comparison policy stays separate. Native/plan/fresh shared/free producer/direct String checks pass on5.5.1/JIT after null/S/four-effect RED, retaining false0!/default/generic/bridges/scalar guards and1!/SC/one-call/final-null snapshots. Join false: [[lua-interpreter-helper-reading-and-false-delimiter-gap]]; malformed native regex repair2.3 and declared5.4/full admission remain open. Prior emptiness proof/details at Git77dad432e0851e4071f09ad47bc36294526dbd39 for this path.

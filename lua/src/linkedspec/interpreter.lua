@@ -967,11 +967,6 @@ local PURE_STRING_HELPERS = {
   uppercase_each = true,
 }
 
-local TERMINAL_STRING_HELPERS = {
-  is_defined = true,
-  is_undefined = true,
-}
-
 local function is_string_comparison(name)
   return name == "str_eq" or name == "str_ne" or name == "str_gt" or name == "str_ge" or
     name == "str_lt" or name == "str_le"
@@ -3489,10 +3484,10 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     elseif is_pure_string_helper(canonical_name) then
       value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "is_empty" or canonical_name == "is_nonempty" or
+          canonical_name == "is_defined" or canonical_name == "is_undefined" or
           canonical_name == "starts_with" or canonical_name == "ends_with" or
           canonical_name == "contains_substr" or canonical_name == "matches" then scalar_result = true end
-      if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
-          index < #calls then
+      if is_string_comparison(canonical_name) and index < #calls then
         return json.null
       end
     elseif scalar_numeric.supports_reducer(canonical_name) and
@@ -3900,7 +3895,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
           #(call.args or {}) ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
           name == "count" or name == "count_keys" or name == "length" or
-          name == "is_empty" or name == "is_nonempty" or name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
+          name == "is_empty" or name == "is_nonempty" or name == "is_defined" or name == "is_undefined" or
+          name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range") and
           #(call.args or {}) > 0 then
         return json.null
       end

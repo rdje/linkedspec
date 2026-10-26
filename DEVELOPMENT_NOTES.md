@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.11.5 — continue Lua definedness receiver results
+
+Lua removes the last definedness terminal entries/empty private map and adds scalar/zero-operand guards. Native/plan/fresh shared/free producer and direct String checks pass on PUC5.5.1/LuaJIT after fluent-null/S/four-effect RED, preserving Bool false0!/default retention, actual source/copy and1!/SC/one-call/final-null snapshots. String comparison policy stays separate; named fixture/book/fast checks align. Native malformed regex2.3, declared5.4/full admission and Perl registration23.4.1 remain open. String comparison assessment23.2.11 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.11.4 — guard Julia definedness scalar and arity flow
 
 Julia adds definedness to scalar-result and zero-operand lists only. Shared native/plan/fresh and free producer controls pass after container[]/four-effect RED, preserving Bool false0!/default retention and1!/SC/one-call/final-null snapshot. Explicit isa Bool assertions distinguish integer lookalikes; the same fixture passes9 assertions. Direct String3 and strict compilation pass. Registered fixture/book/fast checks align; Lua5 next, full admission/canonical registration separate.
