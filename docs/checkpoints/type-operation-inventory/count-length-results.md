@@ -96,4 +96,10 @@ through existing selected-value dispatch. A small native/fresh fixture covers
 direct/selected/pipeline values, Unicode and array length, source/operand order,
 later mutations, invalid shapes and unchanged deferred count behavior. Direct
 selected-scalar/container regressions pass. Other backends remain individually
-unassessed here; no complete family or portable admission is claimed.
+unassessed at that checkpoint; no complete family or portable admission is claimed.
+
+Rust `.23.3.3.2` implements the same result flow on static and dynamic array/hash/
+string paths. Array pipelines accept length without changing initial string/scalar
+dispatch. Native/restored/generated-plan and direct selected-value checks pass;
+zero-extra producer guards suppress effects. Existing callable vocabulary and
+serialized/generated formats stay unchanged; no full context/portable admission.

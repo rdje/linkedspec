@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1349** facts · **10557** question keys.
+> **1349** facts · **10558** question keys.
 
 ## Questions → fact
 
@@ -9525,6 +9525,7 @@
 - "why can Perl call value inside with" -> [perl-generic-final-codeblock-normalization](docs/knowledge/perl-generic-final-codeblock-normalization.md) · 2026-10-25 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/deferred_with_contract.t`
 - "why can Perl false comparisons look like strings to B scalar flags" -> [perl-logical-truthiness-host-scalars](docs/knowledge/perl-logical-truthiness-host-scalars.md) · 2026-07-16 · reverify: `prove -Iperl t/logical_helper_perl_contract.t && perl -Iperl -MB -MLinkedSpec::RuntimeLogical -e 'my @empty; my $string = q{0}; my $ignored = 0 + $string; die unless !LinkedSpec::RuntimeLogical::truthy(scalar(@empty)); die unless !LinkedSpec::RuntimeLogical::truthy(1 == 2); die unless LinkedSpec::RuntimeLogical::truthy($string); print qq{perl-logical-host-scalars: OK\\n}'`
 - "why can Perl not use its host XID Continue property for slot names" -> [inter-match-gap-perl-implementation-plan](docs/knowledge/inter-match-gap-perl-implementation-plan.md) · 2026-09-06 · reverify: `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report`
+- "why can Rust array pipelines use length without changing initial string dispatch" -> [terse-array-receiver-value-chains](docs/knowledge/terse-array-receiver-value-chains.md) · 2026-10-26 · reverify: [2 entries](#terse-array-receiver-value-chains)
 - "why can Rust staged derived provenance panic in strictly_decreases" -> [rust-staged-returned-marker-validation-gaps](docs/knowledge/rust-staged-returned-marker-validation-gaps.md) · 2026-09-07 · reverify: [1 entry](#rust-staged-returned-marker-validation-gaps)
 - "why can Rust typed source projection not preserve all alias behavior unchanged" -> [rust-typed-source-compatibility-alias-gap](docs/knowledge/rust-typed-source-compatibility-alias-gap.md) · 2026-09-07 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_boundary_compatibility_aliases; bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`
 - "why can a Dart recognized child write a binding before rollback" -> [dart-recognition-effect-integration-gap](docs/knowledge/dart-recognition-effect-integration-gap.md) · 2026-09-09 · reverify: [3 entries](#dart-recognition-effect-integration-gap)
@@ -20336,10 +20337,10 @@ _SPEC-FORMAT-TERSE.7.3 array numeric reducer receiver methods_
 
 ### terse-array-receiver-value-chains
 _Pure receiver chains and scalar result contracts_
-- **answers:** can count length and count_keys results continue into numeric methods | why does a chained count_keys addition reach a host call on Perl | does Rust receiver copy reject extra arguments before effects | does Rust receiver copy preserve scalar or missing values | can first or last continue through selected string methods | can copy preserve selected array or harray values | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
-- **date:** 2026-10-26 · **status:** ordinary Perl count/length results implemented; other backend assessment/full admission open
+- **answers:** can count length and count_keys results continue into numeric methods | why can Rust array pipelines use length without changing initial string dispatch | why does a chained count_keys addition reach a host call on Perl | does Rust receiver copy reject extra arguments before effects | does Rust receiver copy preserve scalar or missing values | can first or last continue through selected string methods | can copy preserve selected array or harray values | why do Rust standalone split_each filter_match and uniq update arrays | how do array receiver-dot value chains work | does items.sorted().drop_front().first() work | does items.uniq().join_values work | does items.filter_match().count work | does split_each flatten in receiver-dot array chains | does items.join_values keep delimiter first | are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1 | which task follows SPEC-FORMAT-TERSE.2.3.5.1
+- **date:** 2026-10-26 · **status:** ordinary Perl/Rust count/length results implemented; other backend assessment/admission open
 - **evidence:** `Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length contract23.2.2.`
-- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/count_length_receiver_contract.t`
+- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test count_length_receivers --test receiver_copy_arity --test selected_value_receivers` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/count_length_receiver_contract.t`
 - **source:** [`docs/knowledge/terse-array-receiver-value-chains.md`](docs/knowledge/terse-array-receiver-value-chains.md)
 
 ### terse-assignment-expression-closure

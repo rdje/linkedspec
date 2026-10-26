@@ -3,6 +3,7 @@ id: terse-array-receiver-value-chains
 title: Pure receiver chains and scalar result contracts
 answers:
   - "can count length and count_keys results continue into numeric methods"
+  - "why can Rust array pipelines use length without changing initial string dispatch"
   - "why does a chained count_keys addition reach a host call on Perl"
   - "does Rust receiver copy reject extra arguments before effects"
   - "does Rust receiver copy preserve scalar or missing values"
@@ -18,11 +19,11 @@ answers:
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
 date: 2026-10-26
-status: ordinary Perl count/length results implemented; other backend assessment/full admission open
+status: ordinary Perl/Rust count/length results implemented; other backend assessment/admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure chains2.3.5.1; end results12.1.1-.6; transforms5.3.1-.3; selected23.3.1; Rust copy23.3.2.3; count/length contract23.2.2."
 reverify:
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test receiver_copy_arity --test selected_value_receivers"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test count_length_receivers --test receiver_copy_arity --test selected_value_receivers"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/count_length_receiver_contract.t"
 ---
 
@@ -44,10 +45,12 @@ Rust23.3.2.3 rejects copy extra arguments before effects. Public controls retain
 Perl/Rust scalar/missing empty-array fallback; Perl nested references remain shared
 ([[perl-scalar-bound-receiver-copy]]). The book qualifies copy domains/depths.
 
-23.2.2 freezes ordinary count/count_keys/length numeric-result flow. Perl23.3.3.1
-replaces terminal classification with selected-value dispatch and guards zero-extra
-producer shapes. Native/fresh tests retain direct/selected/pipeline results, Unicode,
-once-only order, later mutations and unchanged deferred scope after actual RED.
-The earlier chained-hash host failure was a result-flow gap; free count_keys worked.
-docs/checkpoints/type-operation-inventory/count-length-results.md owns the contract/status. Other backends remain unassessed;
-complete methods/transitions/admission stay open.
+23.2.2 freezes ordinary count/count_keys/length result flow. Perl23.3.3.1 reuses
+selected-value dispatch, retaining the separate deferred evaluator. Rust23.3.3.2
+uses is_selected_receiver_result_method across static/dynamic loops and allows
+length within array pipelines while preserving initial string/scalar dispatch.
+Zero-extra shapes reject before effects. Focused native/fresh/restored/generated-
+plan fixtures retain values, Unicode, once-only order and later-mutation snapshots.
+The earlier Perl hash-chain host failure was result flow; free count_keys worked.
+docs/checkpoints/type-operation-inventory/count-length-results.md owns status.
+Dart/Julia/Lua and complete methods/transitions/admission remain unassessed/open.

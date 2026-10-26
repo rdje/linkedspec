@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.3.2 — continue Rust count and length results
+
+Hand count/count_keys/length results from static and dynamic array/hash/string paths to existing actual-value dispatch. Allow array-pipeline length while preserving initial string/scalar dispatch, and reject extra producer operands before effects. Fresh public CLI and small native/restored/generated-plan regression are RED before repair and GREEN afterward, including direct/selected/pipeline/function values, Unicode/array length, SALHK order, mutation snapshots and zero invalid-shape effects. Direct selected-value, compilation/rustfmt/book and fast continuity checks pass. Dart assessment is next; broad admission stays open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.3.1 — continue Perl count and length results
 
 Route ordinary count/count_keys/length results through existing selected-value scalar/number dispatch and preserve zero-extra producer shape checks before effects. Valid chains now feed arithmetic/string methods, including selected and earlier pipeline values, while helpers and deferred count behavior stay unchanged. Small native/fresh count/length and direct selected-scalar/container tests pass after actual RED; syntax/book and fast continuity checks pass. Update the deliberately superseded count-uppercase control, register the regression and publish working examples/status. Rust assessment is next; broad admission remains open.

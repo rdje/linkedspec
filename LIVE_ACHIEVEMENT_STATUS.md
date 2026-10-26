@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl count/count_keys/length result rollout23.3.3.1 is implemented and targeted-checked. Rust23.3.3.2 starts with public probes next, then later backends individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Perl/Rust count/count_keys/length result implementations are targeted-checked. Dart23.3.3.3 starts with public probes next, then Julia/Lua individually. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
 
 ## Latest Completed Slice
 
-Ordinary Perl count/length producers now feed existing selected-value scalar/number dispatch, preserving zero-extra arity before effects. Small native/fresh and direct selected-scalar/container tests pass after actual RED for direct/selected/pipeline/function values, Unicode/array length, empty/null, SALHK order, later mutation snapshots and invalid shapes. Deferred count stays null; syntax/book and fast continuity checks pass. Register the test, explicitly advance the old ordinary count-uppercase expectation and synchronize contract/book/fact/map/current records.
+Rust static/dynamic count/length results now enter existing actual-value dispatch, with local array-length support and zero-extra guards before effects. Fresh public CLI and authored native/restored/generated-plan regression pass after actual RED, including values/kinds, direct/selected/pipeline/function sources, Unicode/array length, SALHK order and mutation snapshots. Invalid-shape effects fall six to zero; direct selected-value, compilation/rustfmt/book and fast continuity checks pass. Public/canonical/task/live records agree.
 
 ## Next Action
 
-Probe Rust count/count_keys/length chains beside nested helpers; implement/confirm frozen23.2.2 with a small native/restored/generated-plan regression and direct checks, then commit before the next backend. Preserve existing helper domains/copy/callable vocabulary; no broad replay.
+Probe Dart valid count/length result chains and invalid producer shapes independently; preserve correct existing behavior and repair observed gaps with a small native/restored/generated-plan fixture and changed-file analysis. Commit before Julia/Lua; no broad suite or historical replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.1` — Perl count/count_keys/length numeric results continue; native/fresh and direct selected-value tests plus syntax/book/continuity checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.2` — count/count_keys/length result contract frozen; public Perl/substitution distinctions, book and fast continuity checks pass; Perl implementation next.
 - `SESSION-STARTUP-READING.62.2.3` — Perl nonempty exhaustion and selected numeric kinds; native/fresh regression, direct selected-scalar and changed-file syntax checks pass.
@@ -29,7 +30,6 @@ Probe Rust count/count_keys/length chains beside nested helpers; implement/confi
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.5` — existing Lua selected values confirmed; extraction arity guard and focused available PUC5.5.1/LuaJIT checks pass; P1 Rust scalar repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.4` — existing Julia selected values confirmed; extraction arity guard, package/native/generated/emitted and transform checks pass; Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.1.3` — existing Dart selected-value flow confirmed; extraction arity guard, focused tests and changed-file analysis pass; Julia next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.1.2` — Rust selected scalar/container dispatch and trim-null blocker; targeted native/restored/generated-plan and array-transform checks pass; Dart next.
 
 ## History
 

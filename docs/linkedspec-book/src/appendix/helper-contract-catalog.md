@@ -346,7 +346,7 @@ dispatch rule.
 - **Signature**: `length(value: scalar|array)`
 - **Returns**: int
 - **Behavior**: Returns the character length of a string or the element count of an array. Returns undef for undef input.
-- **Examples**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`; `length(undef)` and `undef.length()` → undef, `length("")` → `0`, `length(0)` → `1`, `length([1,2])` → `2`, `length("🙂")` → `1`. On Perl, `"abcd".length().add(2)` → `6` and `["ab"].first().length().add(1)` → `3`; the actual numeric result feeds the next compatible method. Other backends are assessed separately.
+- **Examples**: over `/(\w+)/`, `length(entry_group(0))` on `hello` → `[5]`; `length(undef)` and `undef.length()` → undef, `length("")` → `0`, `length(0)` → `1`, `length([1,2])` → `2`, `length("🙂")` → `1`. On Perl/Rust, `"abcd".length().add(2)` → `6` and `["ab"].first().length().add(1)` → `3`; the actual numeric result feeds the next compatible method. Other backends are assessed separately.
 
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
@@ -435,7 +435,7 @@ dispatch rule.
   `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`. The old `concat` spelling is retired.
 - **Allowed array bridge**: `split(delim)` returns an array and may continue through compatible array
   receiver helpers, for example `raw.trim().split("-").trim_each().lowercase_each().join_values("|")`.
-- **Numeric result link**: `length` returns a number. Ordinary Perl chains can feed it to existing compatible scalar/number methods: `"abcd".length().add(2)` → `6`, equivalent to `num_add(length("abcd"),2)`.
+- **Numeric result link**: `length` returns a number. Ordinary Perl/Rust chains can feed it to existing compatible scalar/number methods: `"abcd".length().add(2)` → `6`, equivalent to `num_add(length("abcd"),2)`. Array-producing links also support length, such as `[2,1].sorted().length().add(1)` → `3`.
 - **Predicate links**: `starts_with`, `ends_with`, `contains_substr` and `matches` return number/boolean values. Their existing continuation boundaries are outside the bounded count/length update.
 - **Boundary**: `substr(value, start, length?)` here is the pure value substring helper. It is separate from
   any statement-style or host-language substitution idiom. A terminal string method followed by another
@@ -592,7 +592,7 @@ dispatch rule.
 ### `count(arr)`
 - **Signature**: `count(arr: array)`
 - **Returns**: int
-- **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input. Ordinary Perl chains preserve the numeric result for compatible scalar/number methods: `[1,2].count().add(3)` → `5`, `[].count().add(1)` → `1`, and `[1,2].count().cat(" items").uppercase()` → `"2 ITEMS"`. These count/length/key-count receiver methods take zero extra operands; Perl rejects invalid shapes before source/operand effects.
+- **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input. Ordinary Perl/Rust chains preserve the numeric result for compatible scalar/number methods: `[1,2].count().add(3)` → `5`, `[].count().add(1)` → `1`, and `[1,2].count().cat(" items").uppercase()` → `"2 ITEMS"`. These count/length/key-count receiver methods take zero extra operands; Perl/Rust reject invalid shapes before source/operand effects.
 
 ### `first(arr)`
 - **Signature**: `first(arr: array)`
@@ -1012,7 +1012,7 @@ dispatch rule.
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
 - **Returns**: int
-- **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. On Perl, `{"a":1,"b":2}.count_keys().mul(2)` → `4` and `{}.count_keys().add(1)` → `1`; the result feeds existing compatible scalar/number methods just like `num_add(count_keys(meta),3)`. Source evaluation and the count precede later operands, so their mutations do not recompute that count.
+- **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. On Perl/Rust, `{"a":1,"b":2}.count_keys().mul(2)` → `4` and `{}.count_keys().add(1)` → `1`; the result feeds existing compatible scalar/number methods just like `num_add(count_keys(meta),3)`. Source evaluation and the count precede later operands, so their mutations do not recompute that count.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

@@ -5957,11 +5957,13 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
-                // Extraction and copy have no method arguments. Reject before receiver or
+                // These methods take zero extra operands. Reject before receiver or
                 // operand effects, just as the other governed arity boundaries do.
                 if calls.iter().any(|call| {
-                    matches!(call.method.as_str(), "first" | "last" | "copy")
-                        && !call.args.is_empty()
+                    matches!(
+                        call.method.as_str(),
+                        "first" | "last" | "copy" | "count" | "count_keys" | "length"
+                    ) && !call.args.is_empty()
                 }) {
                     return Ok(RuntimeValue::Undef);
                 }
@@ -7322,7 +7324,8 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         if Self::is_statement_only_array_end_mutation_method(&call.method)
-            || !Self::is_array_receiver_value_chain_method(&call.method)
+            || (!Self::is_array_receiver_value_chain_method(&call.method)
+                && call.method != "length")
         {
             return Ok(RuntimeValue::Undef);
         }
@@ -7331,7 +7334,7 @@ impl Engine {
         let next =
             self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
         if !Self::is_array_receiver_array_returning_method(&call.method)
-            && !matches!(call.method.as_str(), "first" | "last")
+            && !Self::is_selected_receiver_result_method(&call.method)
             && !is_last
         {
             return Ok(RuntimeValue::Undef);
@@ -7354,7 +7357,10 @@ impl Engine {
         let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
         let next =
             self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
-        if Self::is_hash_receiver_terminal_method(&call.method) && !is_last {
+        if Self::is_hash_receiver_terminal_method(&call.method)
+            && !Self::is_selected_receiver_result_method(&call.method)
+            && !is_last
+        {
             return Ok(RuntimeValue::Undef);
         }
         Ok(next)
@@ -7382,7 +7388,10 @@ impl Engine {
         let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
         let next =
             self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
-        if Self::is_string_receiver_terminal_method(&call.method) && !is_last {
+        if Self::is_string_receiver_terminal_method(&call.method)
+            && !Self::is_selected_receiver_result_method(&call.method)
+            && !is_last
+        {
             return Ok(RuntimeValue::Undef);
         }
         Ok(next)
@@ -7436,8 +7445,12 @@ impl Engine {
         Ok(next)
     }
 
-    // Once extraction selects an entry, each continuation consumes that actual
-    // value through the existing dynamic dispatcher, not the original family.
+    fn is_selected_receiver_result_method(method: &str) -> bool {
+        matches!(method, "first" | "last" | "count" | "count_keys" | "length")
+    }
+
+    // Selection and count/length continuations consume the actual result value
+    // through the existing dynamic dispatcher, not the original receiver family.
     fn eval_selected_receiver_value_chain(
         &self,
         mut current: RuntimeValue,
@@ -7486,7 +7499,8 @@ impl Engine {
                 return Ok(RuntimeValue::Undef);
             }
             if Self::is_statement_only_array_end_mutation_method(&call.method)
-                || !Self::is_array_receiver_value_chain_method(&call.method)
+                || (!Self::is_array_receiver_value_chain_method(&call.method)
+                    && call.method != "length")
             {
                 return Ok(RuntimeValue::Undef);
             }
@@ -7516,7 +7530,7 @@ impl Engine {
 
             current =
                 self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
-            if matches!(call.method.as_str(), "first" | "last") {
+            if Self::is_selected_receiver_result_method(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index + 1..],
@@ -7606,6 +7620,14 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
+                    if Self::is_selected_receiver_result_method(&call.method) {
+                        return self.eval_selected_receiver_value_chain(
+                            current,
+                            &calls[index + 1..],
+                            ctx,
+                            rule_label,
+                        );
+                    }
                     if Self::is_hash_receiver_hash_returning_method(&call.method) {
                         family = ReceiverFamily::Hash;
                     } else if Self::is_hash_receiver_array_returning_method(&call.method) {
@@ -7619,7 +7641,8 @@ impl Engine {
                 }
                 ReceiverFamily::Array => {
                     if Self::is_statement_only_array_end_mutation_method(&call.method)
-                        || !Self::is_array_receiver_value_chain_method(&call.method)
+                        || (!Self::is_array_receiver_value_chain_method(&call.method)
+                            && call.method != "length")
                     {
                         return Ok(RuntimeValue::Undef);
                     }
@@ -7630,7 +7653,7 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
-                    if matches!(call.method.as_str(), "first" | "last") {
+                    if Self::is_selected_receiver_result_method(&call.method) {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
@@ -7729,6 +7752,14 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
+                    if Self::is_selected_receiver_result_method(&call.method) {
+                        return self.eval_selected_receiver_value_chain(
+                            current,
+                            &calls[index + 1..],
+                            ctx,
+                            rule_label,
+                        );
+                    }
                     if Self::is_string_receiver_string_returning_method(&call.method) {
                         family = ReceiverFamily::String;
                     } else if Self::is_string_receiver_array_returning_method(&call.method) {
@@ -7742,7 +7773,8 @@ impl Engine {
                 }
                 ReceiverFamily::Array => {
                     if Self::is_statement_only_array_end_mutation_method(&call.method)
-                        || !Self::is_array_receiver_value_chain_method(&call.method)
+                        || (!Self::is_array_receiver_value_chain_method(&call.method)
+                            && call.method != "length")
                     {
                         return Ok(RuntimeValue::Undef);
                     }
@@ -7753,7 +7785,7 @@ impl Engine {
                         ctx,
                         rule_label,
                     )?;
-                    if matches!(call.method.as_str(), "first" | "last") {
+                    if Self::is_selected_receiver_result_method(&call.method) {
                         return self.eval_selected_receiver_value_chain(
                             current,
                             &calls[index + 1..],
