@@ -1276,7 +1276,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.14 - freeze aggregate operand and null-key repairs`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.15`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess ordinary numeric comparison receiver results and compatible inter-type continuations.
   Dependencies: Six bounded aggregate/null repairs23.3.14.1-.6 committed.
   Authority: Comprehensive-method directive and current helper spelling spine; existing num_eq/ne/gt/ge/lt/le and short eq/ne/gt/ge/lt/le receiver semantics, numeric conversion/invalid-input policies and intentional prior terminal boundaries remain authoritative until this bounded transition is frozen.
@@ -1286,9 +1286,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: bounded normative contract and deterministic authored distinctions; no population/completeness measurement.
 
+  Activation: clean `77a853d50d4cfbcd02d125b6e591cf987e2f2786`; six aggregate/null child commits complete, brief0/tree clean.
+  Owned paths: Retained public numeric producer/result/source/arity probes, scoped existing numeric authority and frozen ordinary result contract, independent backend child scheduling and current book/facts/task/live docs. No production changes in assessment.
+  Verification tier: `focused`
+  Focused checks: Public Perl Get/substitution/dump/native/fresh probe and canonical numeric contract/receiver owners; syntax/direct current comparison checks, book/history/staged continuity guards.
+  Canonical trigger: None for bounded contract selection under director feature-first cadence; complete domain/context/portable admission and clean push separate.
+  Claim verification: none: normative bounded transition and deterministic authored distinctions, no population/completeness measurement.
+
+  Decision: Extend existing six short numeric comparison methods with compatible scalar result continuation under numeric-comparison-results.md. Keep scalar-numeric-v1 numeric1/0/invalid-null/strict decimal rules, free names/arities and lexical str_* separate. One receiver RHS before effects; actual null can feed existing defaults/definedness. Prior terminal boundary is intentional; this is a bounded new feature. Canonical .num_* receiver names are unpromised/outside this short-method scope.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Retained Get/substitution/dump/native/fresh probe confirms six true/false raw numeric pairs, decimal String and strict invalid controls. Nested consumers yield[1!,0!,2,X]; named/first/length/Hash/default/numeric String terminal producers work. Ordinary continued comparisons return null, source blocks skipped.
+  - [x] ROOT CAUSE (WHY + WHERE): Public substitution lowers each continued short comparison to undef; MethodLowering _number_receiver_value_chain_return_family returns terminal and common preflight rejects any following link. This is prior intentional scope, not an existing promised consumer defect. Numeric.pm already returns contracted numeric1/0 or null.
+  - [x] FIX: Freeze numeric-comparison-results.md and five independent implementation children23.3.15.1-.5. Require actual result-kind handoff, exact-one-RHS preflight, strict numeric domains, false/default/numeric/String/Array transitions and captured SOC values. No production change in assessment.
+  - [x] ADDRESSED (verified): Native/fresh nested effects already give1!/SOC/final-null; fluent givesnull/no-effects/original2, so do not infer a source re-read. Missing/extra short shapes already reject before effects. Corrected one extra nested-probe delimiter before successful replay; opt-in canonical .num_* diagnostic is unpromised, excluded from normal replay, not producer RED credit.
+  - [x] NO REGRESSION: Normal retained public probe executes/loads all authored native/fresh cases without diagnostics, source syntax passes. No numeric conversion/arity/producer/runtime change, broad suite or portable admission.
+  - [x] LOCKSTEP: Retained probe, frozen contract, per-backend tasks, current scoped book numeric kind/nested examples and canonical number-chain fact/map plus live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl15.1 next, then Rust/Dart/Julia/Lua independently.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.15 - freeze numeric comparison result continuations`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -3243,6 +3260,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Shared/current reference selection, new fixture/registration, scoped catalog/current contract progress, source-null/contains/Lua-selection facts/map and TYPE/FUTURE5.7/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Six bounded repairs targeted-checked; next numeric-comparison result assessment23.2.15 is scheduled without presuming a defect or changing its prior intentional terminal policy yet.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.14.6 - distinguish Lua null Array comparison keys`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15`
+  Status: `active` / numeric comparison result rollout; full admission separate
+  Goal: Extend existing six short numeric comparison methods with actual numeric/null result continuations.
+  Dependencies: .23.2.15 frozen numeric-comparison-results.md.
+  Children: `.23.3.15.1`, `.23.3.15.2`, `.23.3.15.3`, `.23.3.15.4`, `.23.3.15.5`.
+  Acceptance: Independently preserve scalar-numeric-v1 producers, strict domains, one-RHS preflight, once-only source/RHS/consumer order and numeric/null scalar boundaries, compatible defaults/generic/String/explicit-container bridges. Small changed-surface/direct checks/docs/commit per backend; full domain/context/portable admission23.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary numeric comparison result continuations.
+  Dependencies: .23.2.15.
+  Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary numeric comparison result continuations.
+  Dependencies: .23.3.15.1.
+  Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary numeric comparison result continuations.
+  Dependencies: .23.3.15.2.
+  Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary numeric comparison result continuations.
+  Dependencies: .23.3.15.3.
+  Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.15.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary numeric comparison result continuations.
+  Dependencies: .23.3.15.4.
+  Acceptance: Follow numeric-comparison-results.md for six short eq/ne/gt/ge/lt/le methods, preserve actual contracted numeric1/0/invalid-null and scalar numeric domains/free signatures. Native/generated producer-first RED/GREEN, six pairs, source families, strict invalid/default/generic/numeric/String/Array transitions, shape-before-effects and captured SOC controls. Small compile/direct checks/docs/commit; full admission separate. Lua available PUC5.5.1/LuaJIT safe named fixtures only; declared5.4 and malformed native patterns remain separately owned.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`; remaining admission leaves split at activation.
@@ -3340,7 +3394,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.15` | `pending` | Assess numeric comparison result transitions without changing numeric domains. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` | `pending` | Implement Perl short numeric comparison result continuation under the frozen contract. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1071,7 +1071,7 @@ Do not use `str_gt(...)` or `str_lt(...)` for counters. They are string comparis
 Numeric comparisons can use `num_eq`/`num_ne`/`num_gt`/`num_ge`/`num_lt`/`num_le`, bare word aliases such as
 `gt(...)`, symbol callees such as `>(...)`, or number receiver terminals such as
 `count(parts).gt(0)`. The explicit string bridge names are shipped as
-`str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; prefer those names in lexical string comparisons.
+`str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le`; prefer those names in lexical string comparisons. Numeric comparison functions return numeric `1`/`0`, or `undef` for invalid numeric inputs; `cat(num_eq(2,3),"!")` gives `"0!"` and `num_add(num_eq(2,3),2)` gives `2`. Compatible continuations after short receiver comparisons are being implemented separately; current Perl methods terminate at the comparison.
 
 ## Array helpers
 

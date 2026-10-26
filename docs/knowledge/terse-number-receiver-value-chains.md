@@ -11,28 +11,36 @@ answers:
   - "are declare methods terse receiver methods"
   - "is declare a number receiver method"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.4"
-date: 2026-07-01
-status: current
-tags: [spec-format-terse, method-chaining, receiver-dot, number, actionir, rust-parity, oracle, mdbook]
-evidence: "SPEC-FORMAT-TERSE.2.3.5.4 landed number receiver-dot value chains on Perl and Rust. Perl normalizes compatible receiver-dot numeric chains into pure `num_*` helper composition; bare numeric receivers are scalar working-variable reads, and decimal dots are skipped by the receiver splitter. Rust parses fluent chains after numeric literals without swallowing method dots as decimals, evaluates the same receiver family, and now consumes all supplied operands for `num_add` and `num_mul`. Locked examples include `score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`, `5.mod(2)`, `3.5.floor().add(1)`, and `3.5.round()`. Comparison links `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal; invalid continuations return `undef`/`null`. Numeric array reducers stayed explicit array-consuming helpers at the `.2.3.5.4` point; later `SPEC-FORMAT-TERSE.7.3` added terminal array/list receiver reducer methods (`scores.sum()`, `scores.avg()`, etc.) without making reducers scalar number receiver links. Statement/lifecycle calls such as `declare(...)` are not receiver methods. Phase0 passed with 999 tests for this leaf; the current corpus also contains the later `.7.3` reducer fixture."
-reverify: "prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_5_4 --quiet && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle -- --nocapture"
+date: 2026-10-26
+status: arithmetic current; numeric comparison result rollout frozen
+tags: [number, numeric, receiver, scalar, result, spec-format-terse]
+evidence: "SPEC-FORMAT-TERSE2.3.5.4 arithmetic; scalar_numeric_contract.json; TYPE23.2.15 public native/fresh/substitution and numeric-comparison-results.md."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_numeric_comparison_results.pl"
 ---
 
-`SPEC-FORMAT-TERSE.2.3.5.4` is the number-family implementation leaf for return-type method chaining.
+Number methods map short names to num_* helpers. Arithmetic chains compose:
+score.abs().ceil().add(2,3).mul(2).sub(1).div(2).clamp(0,20).max(5).min(12),
+5.mod(2),3.5.floor().add(1),3.5.round(). Scalar numeric policy accepts finite
+numbers/untrimmed decimal Strings and rejects Bool/null/containers/bad inputs.
+Comparison free functions return numeric1/0 or null, require two operands;
+short eq/ne/gt/ge/lt/le receiver methods supply the first from their source.
 
-Number receiver-dot chains are pure value composition. The receiver becomes the first numeric helper argument,
-and each number-returning helper feeds the next compatible helper:
+TYPE23.2.15 freezes compatible comparison result continuation as a new feature;
+prior terminal scope was intentional. Public Perl native/fresh gives six true/
+false numeric pairs, strict invalid-null and nested[1!,0!,2,X]. Continued methods
+currently lower to undef before effects, versus nested1!/SOC/final-null. WHY:
+MethodLowering _number_receiver_value_chain_return_family marks them terminal;
+preflight rejects later links. Missing/extra short calls already skip effects.
+Frozen numeric-comparison-results.md / implementations23.3.15.1-.5 preserve
+strict domains, raw numeric kinds, source order and defaults/bridges. Perl1 is
+next; other backends require independent controls, no inferred producer defect.
+Canonical num_* method names remain outside this short-method result scope.
 
-- `score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12)`
-- `5.mod(2)`
-- `3.5.floor().add(1)`
-- `3.5.round()`
+Array reducers have their own current result/arity contract:
+[[terse-array-numeric-reducer-receiver-methods]]. Statement/lifecycle declare is
+not a Number method. Block/user-function results use their actual returned kind.
 
-Comparison methods are terminal values. `score.abs().gt(3)` is valid, but `score.abs().gt(3).add(1)` returns
-`undef` / JSON `null`.
-
-`declare(...)` and other statement/lifecycle calls are not terse receiver methods. Numeric array reducers such
-as `num_sum(array(scores))` are array-consuming, not scalar receiver links. Later `SPEC-FORMAT-TERSE.7.3` added
-terminal array/list receiver spellings such as `scores.sum()` and `scores.min()` for that reducer family.
-
-The next task-tree leaf is `.2.3.5.5` for block-valued receiver chaining by yielded runtime type.
+Original July1 implementation, exact source/commands,999-test evidence and then-
+terminal comparison/reducer policy are preserved in this file at Git
+77a853d50d4cfbcd02d125b6e591cf987e2f2786. Historical next2.3.5.5 described block-yielded
+receiver work; current work follows MEMORY.md, not that old milestone pointer.

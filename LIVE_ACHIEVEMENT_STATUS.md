@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
+Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
 
 ## Latest Completed Slice
 
-Lua contains/index_of/uniq now retain the opaque json.null key before unchanged defined scalar conversion/fallback. Independent native/plan/fresh shared null and null-versus-container controls pass after RED on PUC5.5.1/LuaJIT; defined projections/free defaults stay passing. Direct contains/index and source/runner loads pass, preserving numeric flags, positions, first copied values/kinds/order and scalar/Array consumers. All six aggregate/source/key bounded repairs are targeted-checked; book/facts/FUTURE5.7/live/resume align. Numeric-comparison result assessment23.2.15 follows; declared5.4/full admission separate.
+Frozen numeric-comparison-results.md extends existing short eq/ne/gt/ge/lt/le methods with compatible actual numeric/null result continuations under five independent backend children. Public Perl native/fresh/substitution controls retain numeric1/0, strict decimal/invalid-null, correct nested false/default/numeric/bridge and captured SOC behavior. Current intentional terminal methods lower continued expressions to undef before effects; no old promised defect or producer change claimed. Syntax and scoped book/fact/task/live updates align; Perl15.1 next with small direct checks, full domain/portable admission separate.
 
 ## Next Action
 
-Activate TYPE23.2.15 ordinary numeric-comparison result assessment after this clean commit: read canonical numeric producer/receiver/invalid-domain/arity owners and scoped book, then retain public Get/substitution/dump/native/fresh distinctions for num_eq/ne/gt/ge/lt/le and short receiver aliases. Preserve actual Number/Bool/null/false rendering, numeric conversion/free signatures/source order. Existing intentional terminal policy is not a defect until a bounded new result contract is frozen. Schedule independent backend children before production; quick syntax/direct checks/docs/commit, no full matrix/gate.
+Activate TYPE23.3.15.1 from the clean freeze: add retained shared numeric-comparison result/source/arity/kind/bridge/invalid/default fixture, observe native/fresh RED, minimally continue Perl six short comparison results through existing scalar dispatch while preserving helper mapping/numeric domains/one-RHS preflight and source snapshots. Run small changed-surface/direct checks/syntax/docs/commit. Then independently assess Rust15.2, Dart15.3, Julia15.4 and safe Lua15.5; no full gate/matrix now.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.5` — Julia null Array comparison/uniqueness implemented;63 strict native/plan/fresh/direct assertions pass, Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.14.4` — Dart null Array comparison/uniqueness implemented; nine focused native/restored/plan/direct tests and fatal analysis pass, Julia next.
@@ -29,7 +30,6 @@ Activate TYPE23.2.15 ordinary numeric-comparison result assessment after this cl
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.7` — Dart grouped-invalid operand scanner is targeted-checked; Array contains result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.12` — Dart suffix-x/unknown/invalid helper boundaries are targeted-checked; grouped invalid operand scanner is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.12.5` — Five bounded String comparison receiver slices are targeted-checked; residual Dart regex modes next.
 
 ## History
 

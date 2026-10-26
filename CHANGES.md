@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.15 — freeze numeric comparison result continuations
+
+Frozen numeric-comparison-results.md extends existing short eq/ne/gt/ge/lt/le methods with compatible actual numeric/null result continuations under five independent backend children. Public Perl native/fresh/substitution controls retain numeric1/0, strict decimal/invalid-null, correct nested false/default/numeric/bridge and captured SOC behavior. Current intentional terminal methods lower continued expressions to undef before effects; no old promised defect or producer change claimed. Syntax and scoped book/fact/task/live updates align; Perl15.1 next with small direct checks, full domain/portable admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.14.6 — distinguish Lua null Array comparison keys
 
 Lua contains/index_of/uniq now retain the opaque json.null key before unchanged defined scalar conversion/fallback. Independent native/plan/fresh shared null and null-versus-container controls pass after RED on PUC5.5.1/LuaJIT; defined projections/free defaults stay passing. Direct contains/index and source/runner loads pass, preserving numeric flags, positions, first copied values/kinds/order and scalar/Array consumers. All six aggregate/source/key bounded repairs are targeted-checked; book/facts/FUTURE5.7/live/resume align. Numeric-comparison result assessment23.2.15 follows; declared5.4/full admission separate.
