@@ -124,3 +124,13 @@ source = Path('docs/checkpoints/type-operation-inventory/rust-index-probe.spec')
 subprocess.run(['rust/target/debug/linkedspec-rust', '--inline-spec', source, '--input', 'x'], check=True)
 INDEX_CLI
 ```
+
+## Bounded Lua implementation
+
+`.23.3.7.5` adds index_of to existing one-operand preflight and scalar-result
+tracking after Array helpers. Native/generated-plan/fresh-emitted index and direct
+default checks pass after native []/extra2/four-effect RED on available PUC5.5.1/
+LuaJIT, retaining integer/null boundaries, numeric selector writes, explicit bridges
+and N/SN/SNA snapshots. Loadfile checks pass; helpers/equality/source/copy stay
+unchanged. Bounded index rollout is targeted-checked on recorded hosts; declared5.4/
+full admission remains separate. Next producer assessment is has_key truth values.

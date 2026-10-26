@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.7.5 — guard Lua index result boundaries
+
+Lua retains index numeric flow and adds source-independent scalar guarding plus one-needle preflight. Native/generated-plan/fresh-emitted index and direct default checks pass after []/extra2/four-effect RED on available PUC5.5.1/LuaJIT, preserving integer/null boundaries, numeric0 selector use, explicit bridges and N/SN/SNA snapshots. Loadfile/book/fast continuity checks pass. Bounded index rollout is targeted-checked on recorded hosts; has_key truth-value result assessment23.2.7 is next, with declared5.4/full admission separate and producer/equality/source/copy unchanged.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.7.4 — guard Julia index result boundaries
 
 Julia retains index numeric flow and adds source-independent scalar guarding plus one-needle preflight. Strict native/generated-plan/fresh-emitted index and direct default checks pass after null-to-Array/extra2/four-effect RED, preserving integer/null boundaries, numeric0 selector use, explicit bridges and N/SN/SNA snapshots. Package compilation, book and fast continuity checks pass; exact earlier Rust CLI input is retained without a new run. Lua assessment5 is next, with declared5.4/full admission separate and producer/equality/source/copy unchanged.

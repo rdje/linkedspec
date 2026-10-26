@@ -666,7 +666,7 @@ dispatch rule.
 - **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
-- **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Perl/Rust/Dart/Julia `index_of` also feeds compatible scalar/number methods; other backend assessment remains separate. Other terminal links include `contains`, `is_empty`, `is_nonempty`.
+- **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Perl/Rust/Dart/Julia/Lua `index_of` also feeds compatible scalar/number methods on recorded hosts; declared5.4/full admission stays open. Other terminal links include `contains`, `is_empty`, `is_nonempty`.
   `join_values` returns a String; ordinary Perl/Rust/Dart/Julia/Lua continuations work on recorded hosts; declared5.4/full admission remain open. The six numeric reducers feed compatible scalar/number methods. Receiver-dot
   `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
   `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
@@ -772,7 +772,7 @@ dispatch rule.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`
-- **Returns**: int or undef. Ordinary Perl/Rust/Dart/Julia compatible scalar/number continuations are targeted-checked: `["a","b"].index_of("b").add(1)` returns `2`, while `.index_of("b").cat("!")` returns `"1!"`. The receiver requires one needle; missing/extra shapes return undef before source/operand effects. Other backend continuation assessment remains separate.
+- **Returns**: int or undef. Ordinary Perl/Rust/Dart/Julia/Lua compatible scalar/number continuations are targeted-checked (Lua: available PUC5.5.1/LuaJIT; declared5.4/full admission open): `["a","b"].index_of("b").add(1)` returns `2`, while `.index_of("b").cat("!")` returns `"1!"`. The receiver requires one needle; missing/extra shapes return undef before source/operand effects. Declared5.4/full continuation admission remains separate.
 - **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases.
 
 ### `is_empty(arr)`
@@ -1904,7 +1904,7 @@ Receiver-dot methods are available for the value families that have a typed rece
   bridges to array chains; `length` feeds scalar/number methods. `starts_with`, `ends_with`, `contains_substr`, and `matches` retain their predicate endpoints.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Count/Length results feed compatible scalar/number methods. Terminal
-  links include `contains`, `is_empty`, `is_nonempty`; Perl/Rust/Dart/Julia `index_of` feeds compatible scalar/number methods, with other backends under assessment;
+  links include `contains`, `is_empty`, `is_nonempty`; Perl/Rust/Dart/Julia/Lua `index_of` feeds compatible scalar/number methods on recorded hosts; full admission stays open;
   `join_values` returns a String with ordinary Perl/Rust/Dart/Julia/Lua continuations on recorded hosts; full admission remains open. Ordinary Perl/Rust/Dart/Julia/Lua reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) feed compatible scalar/number methods. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`

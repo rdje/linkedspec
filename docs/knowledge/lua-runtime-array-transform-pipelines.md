@@ -16,7 +16,7 @@ date: 2026-10-26
 status: bounded value/default guards; declared5.4/full admission open
 tags: [lua, runtime, arrays, transforms, regex, join, uniform-binding, LUA-BACKEND-PARITY]
 evidence: "Transform4.3.4.3/results23.3; focused PUC5.5.1/LuaJIT; declared5.4 remains LUA-STARTUP-READING.2.2."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/default_selected_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/default_selected_receivers_test.lua"
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/index_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/index_result_receivers_test.lua"
 ---
 
 Lua implements delimiter-first `join_values(delimiter, array)` and receiver-equivalent
@@ -36,4 +36,4 @@ Related facts: [[lua-runtime-array-selection]], [[lua-pure-split-bridge]],
 [[six-variant-unicode-17-case-parity]], [[array-helper-return-shape-caveats]],
 [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]].
 
-evaluate_fluent_calls guards nonempty defaults until actual array/harray output; direct Scalar container consumers return null after [] RED. Join takes one delimiter and preserves false: [[lua-interpreter-helper-reading-and-false-delimiter-gap]]. Native/plan/fresh-emitted default/join checks pass on5.5.1/JIT; declared5.4/full admission open.
+evaluate_fluent_calls guards defaults/index results until actual array/harray output; Scalar/null container consumers return null after [] RED. Join/index_of take one operand; join preserves false: [[lua-interpreter-helper-reading-and-false-delimiter-gap]]. Native/plan/fresh-emitted default/join checks pass on5.5.1/JIT; declared5.4/full admission open.
