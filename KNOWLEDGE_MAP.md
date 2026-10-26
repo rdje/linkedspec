@@ -10754,7 +10754,7 @@ _ARCHOGEN can use Rust native loading with explicit Lispish and dependency prepa
 ### array-contains-result-handoff
 _Array contains result handoff and required-needle ownership_
 - **answers:** why does contains cat return undef on Perl | does contains return a Boolean or numeric flag | which task normalizes contains missing needle | why does contains nested in a Perl Array emit a host call | does contains snapshot its source before needle effects | why does Rust contains see a rebound Array | does contains distinguish null from empty text
-- **date:** 2026-10-26 · **status:** Perl/Rust ordinary handoff targeted-checked; others/admission open
+- **date:** 2026-10-26 · **status:** Perl/Rust/Dart ordinary handoff targeted-checked; others/admission open
 - **evidence:** `TYPE23.2.13 public native/fresh/substitution probe; contains-results.md; existing function[2,2] and punctuation-light contract; FUTURE5.6 explicitly activated.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/contains_result_receiver_contract.t`
 - **source:** [`docs/knowledge/array-contains-result-handoff.md`](docs/knowledge/array-contains-result-handoff.md)
@@ -18407,7 +18407,7 @@ _A public Gitlink README needs a tracked exact snapshot for parent claim durabil
 ### punctuation-light-receiver-arity-calibration
 _A terminal bare receiver supplies zero authored arguments; arity examples must subtract the implicit receiver from function-form helper arity._
 - **answers:** why does the punctuation light contract use contains instead of drop_front | does drop_front require an authored receiver argument | how is receiver method authored arity derived from helper arity | which receiver method demonstrates missing argument rejection | does Rust reject contains with no receiver argument | why does Rust contains without a needle return zero | why does Dart contains without a needle return zero | why does Julia contains without a needle return zero | why does Lua contains without a needle return zero
-- **date:** 2026-10-26 · **status:** Perl/Rust one-needle guards checked; Dart/Julia/Lua normalization active
+- **date:** 2026-10-26 · **status:** Perl/Rust/Dart one-needle guards checked; Julia/Lua normalization active
 - **evidence:** `July13 canonical function arity and alias calibration; exact prior multi-backend and September reading records at Git39d8f85ebe9f954bc716d083083850604624e86f for this path. TYPE23.2.13 activates FUTURE5.6 normalization.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contains_results.pl missing`
 - **source:** [`docs/knowledge/punctuation-light-receiver-arity-calibration.md`](docs/knowledge/punctuation-light-receiver-arity-calibration.md)

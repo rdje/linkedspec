@@ -146,9 +146,9 @@ void main() {
       _compileSource(_actionSource('return(values.contains())')),
     ).parse('xx');
     expect(bare.value, parenthesized.value);
-    // Dart already returns 0 for the missing contains needle. Backlog .5 owns
-    // that helper-arity drift; this syntax leaf preserves the existing twin.
-    expect(bare.value, 0);
+    // FUTURE5.6 / TYPE23.3.13.3 enforce the required needle; both spellings
+    // still resolve identically before source or operand effects.
+    expect(bare.value, isNull);
   });
 
   test('neutral fixture matches native and generated Dart paths', () {

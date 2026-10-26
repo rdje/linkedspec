@@ -37,7 +37,7 @@ Array methods cover count/select/order/membership,
 `contains`, `index_of`, `trim_each`, `filter_nonempty`, `lowercase_each`,
 `uppercase_each`, `uniq`, `filter_match`, `split_each`, `flat_array`,
 `concat_arrays`, `split_tagged_records`, delimiter-first `join_values`, and
-terminal array numeric reducers such as `array(2, 4, 6).sum()` / `.avg()`.
+array numeric reducers such as `array(2, 4, 6).sum()` / `.avg()`.
 
 `split(target, source, delimiter)` replaces the named array; the old exact array(target) selector is removed.
 Regex delimiters and regex filters use Dart `RegExp` over the stored regex
@@ -67,4 +67,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3 ordinary guards retain Count List-only/Length wider; join/index/has_key take one operand, emptiness predicates zero. Defaults/index/has_key/emptiness results stay scalar until actual List/Map output; generic emptiness consumers remain allowed.23.3.9.3 retains Bool flow/source/copy kinds/1!/SA, fixing container[]/bad1!/0!/four effects. Native/restored/plan/direct has_key and fatal analysis pass. Domains/source/copy unchanged; full admission open.
+23.3 ordinary guards retain Count List-only/Length wider; join/index/has_key/contains take one operand, emptiness predicates zero. Defaults/index/has_key/contains/emptiness results stay scalar until actual List/Map output; generic emptiness consumers remain allowed.23.3.9.3 retains Bool flow/source/copy kinds/1!/SA, fixing container[]/bad1!/0!/four effects. Native/restored/plan/direct has_key and fatal analysis pass. Domains/source/copy unchanged; full admission open.

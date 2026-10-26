@@ -19,7 +19,7 @@ fn existing_contains_producer_domains() {
 fn contains_results_preserve_kinds_shapes_and_operand_order() {
     let source = include_str!("../../../tests/fixtures/contains_result_receiver_values.spec");
     let expected: Value = serde_json::from_str(include_str!(
-        "../../../tests/fixtures/contains_result_receiver_values.rust.json"
+        "../../../tests/fixtures/contains_result_receiver_values.text.json"
     ))
     .expect("expected fixture");
     assert_consumers(source, expected);

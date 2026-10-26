@@ -54,9 +54,19 @@ Rust2 must assess its actual producer and update required-needle calibration.
 23.3.13.2 adds contains to scalar/one-operand lists, and fixes its producer’s
 named-source re-read: use already-evaluated args[0], captured before the needle.
 Public native RED showed0/O/[z] instead of source snapshot1; native/restored/plan
-now confirm1/O/[z] and absent-source0/O/[a]. Shared .rust.json retains numeric
+now confirm1/O/[z] and absent-source0/O/[a]. Shared .text.json retains numeric
 flags and the existing null/empty merging text equality, unlike Perl. Terminal
 null/five-effect RED becomes all result/source/shape controls passing, plus
 direct comparison and named punctuation-light null-twin calibration (five Rust
 tests). P1 assessment23.2.14 immediately after rollout owns that actual equality
 mismatch and unassessed sibling aggregate re-read seams. No broad normalization.
+
+## Bounded Dart implementation
+
+23.3.13.3 adds contains to scalar/one-operand lists only. Public producer already
+passes native/restored/plan numeric flags, Rust-compatible null/empty text keys,
+named rebound1/O/[z], absent-source0/O/[a] and false/default0!/0!. Shared empty-
+Array/five-effect RED is repaired; five Dart comparison/membership/named-alias
+tests and fatal analysis pass. .text.json is shared after independent agreement;
+Rust two contains tests pass after rename. Actual snapshots/equality are unchanged,
+and P1 .23.2.14 includes the confirmed Dart null/empty mismatch. Julia4 follows.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.3 — guard Dart Array contains result receivers
+
+Dart contains adds two guard entries only, preserving numeric1/0/text-key equality and already-correct Array/absent-source snapshots. Native/restored/plan producer/shared and direct comparison plus named alias calibration pass five Dart tests/fatal analysis after empty-Array/five-effect RED. Missing/extra and both missing aliases now null/no-effects under FUTURE5.6. Rust two contains tests pass after independently shared .text.json rename. Actual Dart null/empty reference mismatch joins scheduled P1 assessment23.2.14 after rollout; no equality/source repair inferred. Book/facts/current docs align; Julia4 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.13.2 — capture Rust contains sources and continue results
 
 Rust contains adds scalar/one-operand guards and uses its already-evaluated typed source, fixing named rebinding during needle evaluation (RED0/O/[z] -> captured1; absent source stays0/O/[a]). Native/restored/plan producer/shared plus direct comparison and named punctuation-light calibration pass five targeted Rust tests/offline compilation/rustfmt. Actual numeric flags and null/empty text equality remain preserved in .rust.json; that reference mismatch and unassessed sibling re-read seams are owned P1 assessment23.2.14 immediately after rollout. Required-needle twins now null/no-effects under FUTURE5.6. Book/facts/current docs align; Dart3 next.

@@ -3709,6 +3709,7 @@ final class LinkedSpecRuntimeEngine {
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
           if (helper == 'join_values' ||
+              helper == 'contains' ||
               helper == 'index_of' ||
               helper == 'has_key' ||
               helper == 'starts_with' ||
@@ -5118,6 +5119,7 @@ final class LinkedSpecRuntimeEngine {
       // container output permits later array/hash-only consumers.
       final mayProduceScalar =
           helper == 'coalesce_nonempty' ||
+          helper == 'contains' ||
           helper == 'index_of' ||
           helper == 'has_key' ||
           helper == 'starts_with' ||

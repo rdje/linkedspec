@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
+Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
 
 ## Latest Completed Slice
 
-Rust contains adds scalar/one-operand guards and uses its already-evaluated typed source, fixing named rebinding during needle evaluation (RED0/O/[z] -> captured1; absent source stays0/O/[a]). Native/restored/plan producer/shared plus direct comparison and named punctuation-light calibration pass five targeted Rust tests/offline compilation/rustfmt. Actual numeric flags and null/empty text equality remain preserved in .rust.json; that reference mismatch and unassessed sibling re-read seams are owned P1 assessment23.2.14 immediately after rollout. Required-needle twins now null/no-effects under FUTURE5.6. Book/facts/current docs align; Dart3 next.
+Dart contains adds two guard entries only, preserving numeric1/0/text-key equality and already-correct Array/absent-source snapshots. Native/restored/plan producer/shared and direct comparison plus named alias calibration pass five Dart tests/fatal analysis after empty-Array/five-effect RED. Missing/extra and both missing aliases now null/no-effects under FUTURE5.6. Rust two contains tests pass after independently shared .text.json rename. Actual Dart null/empty reference mismatch joins scheduled P1 assessment23.2.14 after rollout; no equality/source repair inferred. Book/facts/current docs align; Julia4 next.
 
 ## Next Action
 
-Independently assess Dart contains producer kinds/equality/null/zero and source snapshots under23.3.13.3. Preserve actual producers/domains; fix any confirmed source re-read, implement one-needle guards under FUTURE5.6 and update named punctuation-light missing0 calibration to null with identical twins. Small native/restored/plan/direct checks/fatal analysis/docs/commit, then Julia4. After Lua5, P1 null/equality/aggregate snapshot assessment23.2.14 precedes another family; full admission separate.
+Independently assess Julia contains producer kinds/equality/null/zero and source snapshots under23.3.13.4. Explicitly assert numeric raw flags are Number and not Bool (Julia == accepts lookalikes); preserve actual producer domains. Implement result/one-needle guards under FUTURE5.6 and update exact named missing0 alias calibration to null. Small native/plan/fresh/direct strict checks/docs/commit, then Lua5. P1 equality/sibling snapshots23.2.14 follows rollout before another family; full admission separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.13.3` — Dart contains scalar/shape guards and alias calibration are targeted-checked; Julia numeric-kind/source assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.2` — Rust contains result/required-needle/source capture is targeted-checked; Dart next, P1 equality/sibling snapshot assessment queued after rollout.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.13.1` — Perl contains result/nested malformed guards are targeted-checked; Rust required-needle/result slice next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.13` — Contains result/required-needle contract is frozen; Perl implementation and malformed nested guard are next.
@@ -29,7 +30,6 @@ Independently assess Dart contains producer kinds/equality/null/zero and source 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.2` — Rust generic definedness and Boolean/null literal receiver handoff is implemented/targeted-checked. Dart3 independent assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` — Perl ordinary definedness receiver/result flow implemented/targeted-checked with original1/empty-string semantics. Rust2 independent assessment next.
 
 ## History
 
