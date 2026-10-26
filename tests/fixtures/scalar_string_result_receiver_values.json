@@ -1,0 +1,151 @@
+{
+  "raw": [
+    "a",
+    "ab",
+    "AB",
+    "a_b",
+    "a",
+    "a",
+    "bc",
+    "ab"
+  ],
+  "text": [
+    "a!",
+    "ab!",
+    "AB!",
+    "a_b!",
+    "a!",
+    "a!",
+    "bc!",
+    "ab!"
+  ],
+  "nested": [
+    "a!",
+    "ab!",
+    "AB!",
+    "a_b!",
+    "a!",
+    "a!",
+    "bc!",
+    "ab!"
+  ],
+  "bridges": [
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B"
+  ],
+  "boundaries": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "empty": [
+    "!",
+    "!",
+    "!",
+    "!",
+    "!",
+    "!",
+    "!",
+    "!"
+  ],
+  "nulls": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "unicode": [
+    "ος",
+    "STRASSE FFI",
+    "🙂!"
+  ],
+  "sources": [
+    "A",
+    "A",
+    "A",
+    "A",
+    "A",
+    "A",
+    "A",
+    "A"
+  ],
+  "numeric": [
+    5,
+    5,
+    1,
+    null
+  ],
+  "generic": [
+    "1!",
+    "1!"
+  ],
+  "identity": [
+    0,
+    0,
+    0,
+    false,
+    false,
+    "0",
+    "",
+    ""
+  ],
+  "prefix_items": [
+    "updated"
+  ],
+  "suffix_items": [
+    "updated"
+  ],
+  "replacement_items": [
+    "updated"
+  ],
+  "named_items": [
+    "updated"
+  ],
+  "keys": {
+    "0": "string",
+    "1": "matched",
+    "": "empty"
+  },
+  "effected": "a_b!",
+  "order": "SONC",
+  "calls": 1,
+  "source": null,
+  "null_effect": null,
+  "null_order": "SONC",
+  "null_cat": null,
+  "cat_order": "SC",
+  "rejected": null,
+  "reject_order": "SC",
+  "selected_rejected": null,
+  "selected_order": "S",
+  "malformed": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "malformed_order": ""
+}

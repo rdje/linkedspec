@@ -14,10 +14,12 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
 date: 2026-10-27
-status: bounded five-backend predicate flow checked; full admission open
+status: Perl scalar String19.1 and five-backend predicates targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/string_predicate_result_receiver_contract.t t/emptiness_result_receiver_contract.t"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/scalar_string_result_receiver_contract.t t/scalar_text_contract.t t/default_selected_receiver_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/string_predicate_result_receiver_contract.t t/emptiness_result_receiver_contract.t"
 ---
 
 String chains compose trim/case/replace/substr/cat and split-to-Array helpers; Length23.3.3 feeds scalar/number methods. Current bare bindings/cat supersede historical scalar()/concat. Original details and historical next2.3.5.4/block2.3.5.5 ownership remain at the Git pointer above.
@@ -38,3 +40,15 @@ and scalar flow/shapes before independent19.2-.5; reducer95 remains separate
 ([[perl-numeric-reducer-string-result-kinds]]). Existing free domains/Unicode/
 strict cat/null/callback policy stay. Frozen scalar-text rejects null; the stale
 catalog undef-as-empty line is corrected here, not a producer policy change.
+
+TYPE23.3.19.1 repairs Perl scalar result/shape composition through existing typed
+actual-value/host dispatch, retaining dedicated mutation/traversal routes and
+authored Hash checks. Affix inspection now copies the source before text tests,
+returning original identities or actual matched text. Public flags are IOK-only
+for numeric prefix/suffix/replacement/literal0 and POK-only for String0; strict
+free/fluent/named Array writes and Hash text keys pass. New7/direct12 focused
+checks retain eight helper results/bridges/scalar bounds/empty/null/Unicode,
+source roots, identity kinds, SONC-SC-selectedS snapshots, eager null operands,
+rejected prefix effects/skipped operands and12 malformed no-effects. Syntax
+passes; no Unicode/free/selector/callback policy change or reducer95 repair.
+Current book limitation is removed; Rust19.2 independently assesses next.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.19.1 — preserve Perl scalar String result kinds
+
+Perl19.1 completes eight scalar String-helper result/scalar/shape flow through existing typed actual-value/host dispatch, preserving dedicated mutation/traversal routes and authored Hash checks. Affix matching inspects copies, repairing pre-existing free/fluent/named identity Number indices; flags now retain IOK-only numbers versus POK-only String0. Shared new7/direct scalar-text7/nonempty-default5 native/fresh checks and syntax pass, retaining eight texts/bridges/bounds/empty/null/Unicode/source roots, identity/matched kinds, SONC-SC-selectedS snapshots/eager null operands, rejected prefix effects and12 malformed no-effects. Book/frozen/facts/task/live align; no free/selector/Unicode/callback or reducer95 change. Rust19.2 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.2.19 — freeze scalar String-helper result flow
 
 Scalar String-helper assessment19 freezes eight actual scalar result continuations and precise ordinary shapes. Public native/fresh valid texts/Array bridges/SONC/source/Unicode/identity JSON controls pass, while container/malformed tails retain raw DSL. Free/fluent/named unmatched numeric affix indices fail: source text inspection adds POK to original numeric IOK; replacement/literal0 controls pass. Perl19.1 owns the P1 kind repair and flow before independent19.2-.5. Correct stale cat null teaching against scalar-text-v1; direct7/probe syntax pass. Frozen/probe/book/canonical facts/task/live align; no production/free/domain/Unicode/selector change or full admission.

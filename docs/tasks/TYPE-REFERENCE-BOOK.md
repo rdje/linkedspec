@@ -4053,14 +4053,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5 - guard Lua defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19`
-  Status: `active` / frozen scalar String-helper flow; backend implementations pending
+  Status: `active` / Perl scalar String-helper flow targeted-checked; other implementations pending
   Goal: Complete bounded actual scalar String-helper results, identity kinds and clean scalar/shape boundaries.
   Dependencies: .23.2.19 frozen scalar-string-results.md.
   Children: `.23.3.19.1`, `.23.3.19.2`, `.23.3.19.3`, `.23.3.19.4`, `.23.3.19.5`.
   Acceptance: Preserve existing eight helper/free/Unicode/null/conversion domains and actual identity kinds; compatible scalar/generic/numeric/explicit Array flow, once-only snapshots/effects, clean scalar rejection and pre-effect ordinary shapes. No full domain/context/portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary scalar String-helper result flow and boundaries.
   Dependencies: .23.2.19.
   Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
@@ -4069,6 +4069,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `9eb55615dc568652ae3cd8882f27be7d1ab9234e`; scalar String freeze committed, brief0/tree clean.
+  Owned paths: Perl eight scalar String-helper actual-result/scalar/shape composition and affix identity copy inspection, retained shared native/fresh values/effects/Unicode/typed-selector regression and scoped book/facts/task/live docs. Preserve dedicated mutation/traversal/callback routes, authored Hash colon checks, typed selectors and free signatures.
+  Verification tier: `focused`
+  Focused checks: Public producer/AST/identity flag intake and retained shared native/fresh RED/GREEN, direct scalar-text/default/logical rejection checks as warranted, syntax and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Completion: Classify the eight scalar String helpers as scalar_result and validate ordinary receiver shapes through existing free arity metadata before effects. Ordinary transform chains reuse the established typed actual-result/emitted-host loop, preserving source/prefix effects before rejection and actual Array bridges. Dedicated mutation/traversal dispatch remains on its existing route. Affix matching inspects a scalar copy, returning the untouched original on identity and actual substring text on match.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New native/fresh shared RED fails compilation on raw boundary/malformed DSL. Retained public free/fluent/named prefix/suffix Number indices fail typed harray-vs-array; replacement/literal0 controls pass. Pre-JSON flags distinguish contaminated IOK+POK from numeric IOK-only and String POK-only.
+  - [x] ROOT CAUSE (WHY + WHERE): MethodLowering String metadata/composition lacks a scalar rejection boundary after transforms, while common preflight lacks their ordinary shapes. rm_prefix/rm_suffix inspect the original Number via index/length/substr, adding POK honored by BindingRuntime. This is producer contamination, not a selector-kind bug or Number/JSON encoding policy change.
+  - [x] FIX: Central scalar String helper classifier, existing arity metadata/typed result/host compatibility dispatch and once-bound scalar source; preserve dedicated routes and authored Hash colon checks. Inspect affix text copies and return original identities. No free signature/Unicode/null/strict cat/numeric/selector/callback normalization.
+  - [x] ADDRESSED (verified): New7 native/fresh shared checks pass all eight texts/nested/bridges/boundaries/empty/null, Unicode expansion/final-sigma/emoji substring, eight source roots, numeric/generic consumers, identity Number/Bool/String and matched text keys. Free/fluent/named Array writes pass; String0/matched/empty keys remain Hash keys. SONC/SC/selected-S/once-only snapshots, eager null operands, rejected-consumer operand skipping and12 malformed no-effects hold. Public flags now show IOK-only numeric affix identities and POK-only String0 on both routes.
+  - [x] NO REGRESSION: Direct scalar-text7/nonempty-default5 and new7 pass,19 focused top-level checks plus module/test/probe syntax. Authored retired Hash arrows still reject. No broad suite/matrix/portable admission, reducer95, large-number/unary-cat or mutation/callback admission claim. Every new Perl fixture still requires23.4.1 registration.
+  - [x] LOCKSTEP: Shared fixture/test, retained public flags/probe/frozen contract, current qualified catalog/guide and canonical String/null facts/map plus task/live/resume align. Remove the temporary identity limitation from current book; typed Array-index examples now work. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Rust19.2 independently assesses next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.1 - preserve Perl scalar String result kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.2`
   Status: `pending`
@@ -4116,7 +4133,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t and t/scalar_string_result_receiver_contract.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -4124,11 +4141,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1 first owns actual-result/scalar/shape flow and the affix identity Number-kind repair, followed by independent backend19.2-.5. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1 scalar/shape flow and affix identity Number-kind repair are targeted-checked; Rust19.2 next owns independent implementation before19.3-.5. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` | `pending` | Implement scalar String-helper flow and repair Perl affix identity Number kinds after public intake. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` | `pending` | Independently assess and implement frozen Rust scalar String-helper result flow and identity kinds. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

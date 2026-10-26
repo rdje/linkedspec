@@ -4691,6 +4691,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method eq 'coalesce' && !@$aggregate_args;
+   if (_is_scalar_string_receiver_value_chain_method($method)) {
+    return 'undef' unless defined($ast_value_only_call_method->($method, 1 + @$aggregate_args));
+   }
    return 'undef' if $method =~ /^(?:contains|index_of|has_key|starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty|is_defined|is_undefined)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
@@ -5094,15 +5097,20 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $first_method = $calls->[0]{method} // '';
   my $first_args = $calls->[0]{args} || [];
   my $defined_default_chain = grep { ($_->{method} // '') eq 'coalesce' } @$calls;
-  if ($logical_receiver || $defined_default_chain) {
+  # Keep dedicated mutation/traversal routes on their existing dispatchers.
+  my $scalar_string_chain = $first_method !~ /^(?:push_front|push_back|pop_front|pop_back)$/o
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
+   && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
+  my $emitted_result_chain = $defined_default_chain || $scalar_string_chain;
+  if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
     ? $lower_ast_logical_call_node->($receiver)
     : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 });
    return undef unless defined($current_expr) && length($current_expr);
    # Keep an already lowered Hash literal inside the emitted-host bridge.
    # Its fat arrows are host syntax, not retired authored Hash syntax.
-   $current_expr = 'do { my $__ls_default_source = '.$current_expr.'; $__ls_default_source }'
-    if $defined_default_chain && !$logical_receiver;
+   $current_expr = 'do { my $__ls_scalar_source = '.$current_expr.'; $__ls_scalar_source }'
+    if $emitted_result_chain && !$logical_receiver;
    my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
    foreach my $call (@$calls) {
     my $source_expr = $current_expr;
@@ -6019,7 +6027,7 @@ if ($method_call && $method_call->{method} eq 'rm_prefix') {
  $prefix_expr = $trim_action_ir_value->($rm_prefix_args->[1]) unless defined($prefix_expr) && length($prefix_expr);
  return undef unless defined($prefix_expr) && length($prefix_expr);
 
- return 'do { my $__ls_rm_prefix_value = '.$value_expr.'; my $__ls_rm_prefix_prefix = '.$prefix_expr.'; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }';
+ return 'do { my $__ls_rm_prefix_value = '.$value_expr.'; my $__ls_rm_prefix_prefix = '.$prefix_expr.'; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { my $__ls_rm_prefix_text = $__ls_rm_prefix_value; length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_text, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_text, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }';
 }
 if ($method_call && $method_call->{method} eq 'rm_suffix') {
  my $rm_suffix_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);
@@ -6033,7 +6041,7 @@ if ($method_call && $method_call->{method} eq 'rm_suffix') {
  $suffix_expr = $trim_action_ir_value->($rm_suffix_args->[1]) unless defined($suffix_expr) && length($suffix_expr);
  return undef unless defined($suffix_expr) && length($suffix_expr);
 
- return 'do { my $__ls_rm_suffix_value = '.$value_expr.'; my $__ls_rm_suffix_suffix = '.$suffix_expr.'; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }';
+ return 'do { my $__ls_rm_suffix_value = '.$value_expr.'; my $__ls_rm_suffix_suffix = '.$suffix_expr.'; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { my $__ls_rm_suffix_text = $__ls_rm_suffix_value; if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_text) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_text, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_text, 0, length($__ls_rm_suffix_text) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }';
 }
 if ($method_call && $method_call->{method} eq 'cat') {
  my $cat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef, 1);
@@ -7785,12 +7793,19 @@ sub _is_tree_traversal_receiver_method {
  return $method =~ /^(?:walk_leaves|map_leaves|reduce_leaves)$/o ? 1 : 0
 }
 
+# Identity branches may preserve Number/Boolean; all outputs remain scalar/null.
+sub _is_scalar_string_receiver_value_chain_method {
+ my ($method) = @_;
+ return 0 unless defined $method;
+ return $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o ? 1 : 0
+}
+
 sub _string_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
  return 'default_result' if $method eq 'coalesce' || $method eq 'coalesce_nonempty';
  return 'selected' if $method eq 'length';
- return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o;
+ return 'scalar_result' if _is_scalar_string_receiver_value_chain_method($method);
  return 'array' if $method =~ /^(?:split)$/o;
  return 'scalar_result' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|is_defined|is_undefined)$/o;
  return undef

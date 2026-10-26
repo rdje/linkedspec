@@ -105,3 +105,25 @@ failure inferred from another backend. Quick native/generated changed/direct
 checks, syntax/book/continuity and a commit per leaf; no full matrix/replay.
 New Perl tests require explicit23.4.1 canonical registration. Lua full runner/
 malformed native patterns stay excluded; declared5.4 has its separate owner.
+
+## Bounded Perl implementation
+
+19.1 marks eight helper results scalar and checks their ordinary shapes through
+existing arity metadata. Ordinary transform chains reuse existing typed actual-
+result/host composition; dedicated mutation/traversal dispatch stays separate.
+Affix inspection uses a copy, preserving the original on identity and returning
+text on match. The typed selector itself stays unchanged. Public pre-JSON flags
+now show IOK-only prefix/suffix/replacement/literal0 and POK-only String0 on
+native/fresh, matching successful free/fluent/named Array writes and Hash text
+keys. No numeric coercion is added to the preserved identity.
+
+New7/direct scalar-text7/nonempty-default5 checks pass,19 focused top-level
+checks plus module/test/probe syntax. Shared native/fresh data covers eight
+texts/nested/bridges/boundaries/empty/null, Unicode final-sigma/expansion/emoji,
+eight roots, Number/Bool/String identities/matched text keys and numeric/generic
+consumers. SONC/SC/selected-S snapshots, eager null operands, rejection preserving
+prefix effects/skipping consumer operands and12 malformed no-effects hold.
+Authored retired Hash arrows still reject. Current book identity limitations are
+removed after this fix; new Perl test registration23.4.1 remains required. No
+full matrix/portable admission or reducer95/unary-cat/large-number/callback
+repair. Rust19.2 independently assesses its producers before changing them.

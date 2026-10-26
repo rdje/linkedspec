@@ -16,7 +16,7 @@ evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation --test scalar_predicate_boundaries"
 ---
 
-Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves observed values for empty old/prefix/suffix and unmatched affixes; TYPE23.2.19 now distinguishes a Perl affix identity kind defect from that JSON projection. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
+Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves observed values for empty old/prefix/suffix and unmatched affixes; TYPE23.2.19 distinguishes a Perl affix identity kind defect from that JSON projection, now repaired by Perl19.1 copy inspection. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
 
 # Historical September 7 inputs and outputs
 
@@ -104,3 +104,9 @@ the original source with index/length/substr; Perl19.1 owns inspecting a copy
 while retaining original identity kinds. This qualifies broad kind wording from
 JSON-only controls; it does not reopen Rust null repairs or close61.3/reducer95.
 Canonical result contract/diagnostics: [[terse-string-receiver-value-chains]].
+
+Perl19.1 now preserves numeric affix identities by inspecting text copies;
+public flags/typed Array writes and Hash String-key controls pass native/fresh.
+String scalar/shape/default/text direct19 checks and syntax pass. This resolves
+the bounded affix defect; broad61.3 and reducer95 remain open, with no Rust/null
+or frozen scalar-text policy change.

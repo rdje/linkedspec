@@ -318,7 +318,7 @@ dispatch rule.
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes leading and trailing whitespace. Returns undef if input is undef.
-- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`.
+- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`. Ordinary Perl scalar String-helper results now feed compatible scalar/generic/numeric methods; `" a,b ".trim().split(",").last().uppercase()` gives `"B"`, while a scalar result followed by a container-only consumer returns undef without evaluating that consumer's operands. Malformed ordinary shapes reject before source effects; source/prefix effects before a valid incompatible tail remain. Other backend implementation/full admission is separate.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -385,13 +385,13 @@ dispatch rule.
 ### `rm_prefix(s, prefix)`
 - **Signature**: `rm_prefix(value: scalar, prefix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef. Perl currently serializes unmatched numeric identities correctly but their typed Array-index use fails; a bounded identity-kind repair is scheduled before further String result implementation.
+- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef. Perl native/fresh typed Array-index controls preserve numeric identity: `items=["zero"]; items[0.rm_prefix("x")]="updated"` updates entry zero. Matched removals produce text and a String `"0"` stays a String key.
 - **Example**: over `/(\S+)/`, `rm_prefix(entry_group(0), "lib")` on `libparser` → `["parser"]`.
 
 ### `rm_suffix(s, suffix)`
 - **Signature**: `rm_suffix(value: scalar, suffix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef. The same current Perl typed Array-index identity limitation applies.
+- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef. Perl native/fresh typed Array-index controls also preserve unmatched numeric suffix identities, while matched removals return text.
 - **Example**: over `/(\S+)/`, `rm_suffix(entry_group(0), ".spec")` on `parser.spec` → `["parser"]`.
 
 ### `substr(s, start, length?)`
