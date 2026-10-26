@@ -104,3 +104,15 @@ Strict native/generated-plan/fresh-emitted has_key and direct index tests plus
 package compilation pass after repair, retaining presence integer0/1, String
 keys, source families, false retention/explicit bridges and K/SK/SKA snapshots.
 Helper/domain/source/copy stay unchanged; Lua/full admission remain separate.
+
+## Bounded Lua result handoff
+
+23.3.8.5 replaces the explicit has_key terminal fence with scalar-result tracking
+and adds one-key preflight. Both available native hosts show fluent null versus
+nested1!, SK-only order and four malformed effects before repair. Native/generated-
+plan/fresh-emitted shared result/direct index and interpreter/runner loadfile pass
+after repair on PUC5.5.1/LuaJIT with matching products, preserving numeric0/1
+presence, String keys/source families, false retention, explicit bridges/scalar
+nulls, no malformed effects and K/SK/SKA snapshots. Bounded rollout is targeted-
+checked on recorded hosts; declared5.4/full admission separate. Next assessment
+is is_empty/is_nonempty result continuation23.2.8.

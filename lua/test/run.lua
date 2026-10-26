@@ -9541,6 +9541,10 @@ test("index result receiver continuations", function()
   dofile("lua/test/index_result_receivers_test.lua")
 end)
 
+test("has_key result receiver continuations", function()
+  dofile("lua/test/has_key_result_receivers_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

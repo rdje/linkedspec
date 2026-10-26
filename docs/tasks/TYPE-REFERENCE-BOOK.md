@@ -909,7 +909,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.2.1`, `TYPE-REFERENCE-BOOK.1.2.23.2.2`, `TYPE-REFERENCE-BOOK.1.2.23.2.3`, `TYPE-REFERENCE-BOOK.1.2.23.2.4`, `TYPE-REFERENCE-BOOK.1.2.23.2.5`, `TYPE-REFERENCE-BOOK.1.2.23.2.6`, `TYPE-REFERENCE-BOOK.1.2.23.2.7`, `TYPE-REFERENCE-BOOK.1.2.23.2.8`
   Goal: Define and verify the result-type transition matrix and cross-type fluent contracts.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Acceptance: Include the director's string -> regex split -> array<string> -> array methods -> selected string -> string methods journey, plus supported conversion/collection/callback results that return another family. Specify regex/Unicode/empty/no-match behavior, indexing or extraction, dynamic returned types, side effects and wrong-type rejection. A continuation must use the current returned value; do not retain the chain's original receiver family or silently stringify it.
@@ -1090,6 +1090,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Probe syntax/book/fast continuity/history/diff checks pass; production unchanged, no broad admission or type normalization.
   - [x] LOCKSTEP: Retain probes/contract; align catalog gap, hash fact/map and task/live/resume owners. Key-block23.3.8.1.1 next after clean commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.7 - freeze has_key result continuations`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.2.8`
+  Status: `pending`
+  Goal: Assess ordinary is_empty/is_nonempty predicate results continuing through existing compatible scalar/text methods.
+  Dependencies: .23.3.8.5.
+  Schedule: Next bounded result-family feature after has_key rollout, before exhaustive signatures/matrices.
+  Existing authority: Catalog is_empty(value:array|hash|expr) includes undef as empty; is_nonempty is its inverse. Reconcile actual kinds, source domains and arity before classifying flow. Preserve current source/null/String/false/zero/copy policies; no numeric-Boolean normalization or new logical vocabulary.
+  Public reproduction target: Compare [].is_empty().cat("!") and ["a"].is_nonempty().cat("!") with nested cat(is_empty(...),"!") / cat(is_nonempty(...),"!"). Include Array/Hash/String/null sources, selected/pipeline/default/function forms, false retention, scalar boundaries/explicit bridges and source/consumer snapshots/order.
+  Acceptance: Establish public results before classification; freeze bounded compatible handoff/shape targets and schedule independent backend children if needed. Existing contains missing-needle calibration remains FUTURE-PARITY-BACKLOG.5. Full domains/comprehensive/portable admission remains23.4.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
@@ -2027,7 +2036,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Children: `.23.3.8.1`, `.23.3.8.2`, `.23.3.8.3`, `.23.3.8.4`, `.23.3.8.5`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1`
-  Status: `active` / Perl producer repair precedes flow
+  Status: `active` / bounded Perl producer/result repairs targeted-checked; full admission open
   Goal: Repair confirmed Perl key-block producer compilation, then compatible result continuation.
   Children: `.23.3.8.1.1`, `.23.3.8.1.2`.
 
@@ -2149,10 +2158,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.4 - guard Julia has_key result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Lua has_key result/key/shape targets.
   Dependencies: .23.3.8.4.
   Acceptance: Public native/generated assessment before classification; repair only confirmed gaps under has-key-results.md, preserving actual producer kinds/domains/source/copy. One-key preflight, presence/false retention, scalar boundaries/bridges and ordered snapshots; compile/small checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 separate.
+
+  Activation: clean `07d65e85378ed248a0a324e307e0eee4eaafbb05`; Julia committed, brief empty, tree clean.
+  Owned paths: Confirmed Lua ordinary has_key scalar/shape gaps only; native/generated-plan/fresh-emitted shared fixture and runner registration, direct index compatibility and current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/generated-plan/fresh-emitted has_key before/after repair on available PUC5.5.1/LuaJIT with matching products, direct index fixture, interpreter/runner loadfile, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation under director feature-first cadence; declared5.4/full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored values/order regression, no quantified corpus or portable measurement.
+
+  Completion: Replace has_key terminal continuation fence with scalar_result tracking; add has_key to existing exact-one-operand fluent preflight. Actual container results still release the scalar guard.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native shared fixture RED on both available hosts shows fluent null versus nested1!, SK-only order and four malformed effects; full expected/actual JSON retained.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.lua evaluate_fluent_calls explicitly returns null after nonfinal has_key, and evaluate_expr fluent preflight omits its one-key shape.
+  - [x] FIX: Replace that fence with scalar_result=true and include has_key in one-key preflight; presence numeric0/1/helper/domain/source/copy unchanged.
+  - [x] ADDRESSED (verified): Both installed hosts pass native/generated-plan/fresh-emitted shared fixture after RED, preserving presence/false retention, String keys/source families, explicit bridge/scalar nulls, zero malformed effects and K/SK/SKA snapshots.
+  - [x] NO REGRESSION: Direct three-route index fixture and interpreter/runner loadfile pass on available PUC5.5.1/LuaJIT with matching products. No broad suite/new methods/generated-format change; declared5.4/full admission separate.
+  - [x] LOCKSTEP: Register fixture; contract/worked catalog/guide, Lua/hash facts/map and task/live/resume updated; book and fast memory/cadence/diagnosis/history/diff pass. Bounded has_key rollout targeted-checked; predicate assessment23.2.8 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.5 - continue Lua has_key scalar results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -2232,11 +2258,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; independent Lua5 assessment follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty assessment23.2.8 follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` | `pending` | Independent Lua has_key result/key/shape assessment after bounded Julia repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.8` | `pending` | Assess is_empty/is_nonempty compatible result flow after bounded has_key rollout. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

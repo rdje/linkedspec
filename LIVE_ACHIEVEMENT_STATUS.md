@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
+Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 
 ## Latest Completed Slice
 
-Julia retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Strict native/generated-plan/fresh-emitted has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper integer0/1, false/null stored values, String keys, source families, false retention and explicit bridges stay unchanged. Package compilation/book/fast continuity pass; Lua assessment next, full admission separate.
+Lua replaces the has_key terminal fence with scalar-result tracking and adds one-key preflight. Native/generated-plan/fresh-emitted has_key and direct index checks pass on available PUC5.5.1/LuaJIT after native fluent-null/SK-only/four-effect RED. Presence numeric0/1, false/null stored values, String keys, source families, false retention, explicit bridges/scalar nulls and K/SK/SKA snapshots pass unchanged. Loadfile/book/fast continuity pass; is_empty/is_nonempty assessment23.2.8 next, declared5.4/full admission separate.
 
 ## Next Action
 
-Independently assess Lua has_key result/key/shape behavior under23.3.8.5 on available PUC/LuaJIT with matching products and shared fixture. Repair only confirmed ordinary gaps; small native/plan/fresh/direct/loadfile checks/docs/commit. Declared5.4/full admission stay separate.
+Assess ordinary is_empty/is_nonempty result continuation under23.2.8 using public fluent/nested pairs. Read canonical predicate/domain/arity/scalar-text rules; preserve actual producer kinds and empty/null/String/container policies. Freeze bounded targets and backend owners only after observations; small checks/docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.2` — Rust has_key scalar/shape handoff repaired; focused result and direct index checks pass.
@@ -29,7 +30,6 @@ Independently assess Lua has_key result/key/shape behavior under23.3.8.5 on avai
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
 
 ## History
 

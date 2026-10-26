@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.8.5 — continue Lua has_key scalar results
+
+Lua replaces the has_key terminal fence with scalar-result tracking and adds one-key preflight. Native/generated-plan/fresh-emitted has_key and direct index checks pass on available PUC5.5.1/LuaJIT after native fluent-null/SK-only/four-effect RED. Presence numeric0/1, false/null stored values, String keys, source families, false retention, explicit bridges/scalar nulls and K/SK/SKA snapshots pass unchanged. Loadfile/book/fast continuity pass; is_empty/is_nonempty assessment23.2.8 next, declared5.4/full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.8.4 — guard Julia has_key result boundaries
 
 Julia retains correct has_key flow and K/SK/SKA snapshots, adding source-independent scalar guarding and one-key preflight. Strict native/generated-plan/fresh-emitted has_key and direct index checks pass after native container[]/missing0!/extra1!/four-effect RED. Presence helper integer0/1, false/null stored values, String keys, source families, false retention and explicit bridges stay unchanged. Package compilation/book/fast continuity pass; Lua assessment next, full admission separate.
