@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.11 — freeze explicit String comparison receivers
+
+String comparison23.2.11 freezes new ordinary receiver counterparts for six existing str_* free helpers. Public Get/substitution/native/fresh confirms six1/six0, raw unsupported receiver chains and working nested controls; Perl undef compares as empty text, false0! stays present, and existing blocks retain1!/SOC/final-null or0/SO for null source. No producer/snapshot repair inferred. Contract/probe/book/fact and five implementation children align; small syntax/book/fast checks pass. Perl23.3.12.1 next; explicit residual Dart regex assessment23.2.12 follows the family.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.11.5 — continue Lua definedness receiver results
 
 Lua removes the last definedness terminal entries/empty private map and adds scalar/zero-operand guards. Native/plan/fresh shared/free producer and direct String checks pass on PUC5.5.1/LuaJIT after fluent-null/S/four-effect RED, preserving Bool false0!/default retention, actual source/copy and1!/SC/one-call/final-null snapshots. String comparison policy stays separate; named fixture/book/fast checks align. Native malformed regex2.3, declared5.4/full admission and Perl registration23.4.1 remain open. String comparison assessment23.2.11 next.

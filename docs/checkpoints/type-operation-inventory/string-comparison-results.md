@@ -1,0 +1,50 @@
+# Explicit String comparison receiver counterparts and results
+
+Owner: TYPE-REFERENCE-BOOK.1.2.23.2.11; implementation23.3.12.
+Existing free helpers: str_eq/str_ne/str_gt/str_ge/str_lt/str_le. Historical
+bridge3.2.3.2 intentionally ships free calls only. The director's comprehensive
+fluent directive adds bounded ordinary receiver counterparts; this is a new
+feature, not a retroactive claim that earlier receivers were promised.
+
+The source is the helper's left operand; one receiver operand supplies its right
+operand. Compare lexical text, retaining the helper's actual result kind and
+existing scalar/null/empty/Unicode semantics. Numeric eq/ne/gt/ge/lt/le aliases
+and symbols remain numeric; no new String overload for them is introduced.
+Reject missing/extra ordinary receiver operands before source/operand effects.
+Free helper signatures stay unchanged. Evaluate source once, then operand once,
+compute the comparison before compatible consumer operands and preserve snapshots.
+
+The actual result feeds compatible scalar/text/generic methods; container-only
+consumers reject until an explicit operation yields a container. Targets include
+"a".str_eq("a").cat("!")->"1!", "a".str_eq("b").cat("!")->"0!" on Perl,
+and "a".str_eq("a").cat(",x").split(",").last().uppercase()->"X".
+Cover all six true/false pairs, empty/zero text, existing null compatibility,
+literal/named/selected/pipeline/Hash-view/split/function/default/join Strings,
+false retention/repeated generic predicates, bridges/scalar guards and SOC order.
+Deferred/callable contexts and full domain/portable admission remain23.4. Keep
+existing Dart Unicode-order repair2.13 and other source-kind defects with owners.
+
+## Public Perl baseline
+
+probe_string_comparison_results.pl retains Get/substitution and independent fresh
+emitted routes. Six true and six false free calls return[1,1,1,1,1,1,0,0,0,0,0,0]
+on native/fresh. Nested true renders1!, false renders0! and remains selected by
+coalesce_nonempty. Do not reuse definedness's distinct Perl empty-string false.
+
+Existing Perl lexical operators coerce undef to empty text: str_eq(undef,"") and
+str_eq("",undef) return1, as do empty/empty and text-zero equality. This is actual
+compatibility, not a new portable null-domain promise. Preserve it; other backends
+need independent producer/domain assessment and scoped expectations.
+
+Ordinary .str_* methods remain raw DSL and reach undefined host helpers; complex
+source blocks can fail handler compilation. Substitution leaves the direct .str_eq
+chain unchanged. MethodLowering's String return-family map intentionally omits
+these free-only helpers; typed/legacy free value lowering is already registered.
+Do not relabel that historical scope as an old promised receiver defect.
+
+Nested source/operand/consumer blocks return[1!,SOC,null] on native/fresh: source
+abc is captured before operand mutates the working value to zzz, then consumer
+sets it to null. Preserve this producer/snapshot behavior. Null-source control
+still evaluates both blocks once in SO order and returns0 against"a". Freeze
+before production and implement/confirm separate Perl/Rust/Dart/Julia/Lua children;
+small compile/direct checks/docs/commit only, full admission23.4 separate.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
+Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
 
 ## Latest Completed Slice
 
-Lua removes the last definedness terminal entries/empty private map and adds scalar/zero-operand guards. Native/plan/fresh shared/free producer and direct String checks pass on PUC5.5.1/LuaJIT after fluent-null/S/four-effect RED, preserving Bool false0!/default retention, actual source/copy and1!/SC/one-call/final-null snapshots. String comparison policy stays separate; named fixture/book/fast checks align. Native malformed regex2.3, declared5.4/full admission and Perl registration23.4.1 remain open. String comparison assessment23.2.11 next.
+String comparison23.2.11 freezes new ordinary receiver counterparts for six existing str_* free helpers. Public Get/substitution/native/fresh confirms six1/six0, raw unsupported receiver chains and working nested controls; Perl undef compares as empty text, false0! stays present, and existing blocks retain1!/SOC/final-null or0/SO for null source. No producer/snapshot repair inferred. Contract/probe/book/fact and five implementation children align; small syntax/book/fast checks pass. Perl23.3.12.1 next; explicit residual Dart regex assessment23.2.12 follows the family.
 
 ## Next Action
 
-Assess/freeze ordinary receiver/result counterparts for six str_* String comparison helpers under23.2.11. Read canonical bridge/catalog and actual free producers; compare public Perl Get/substitution/native/fresh fluent/nested/source/operand/result and malformed controls before classification. Historical free-only bridge remains the baseline; comprehensive fluent directive authorizes bounded ordinary counterparts while numeric aliases/domain/Unicode policies stay unchanged. Small checks/docs/commit; no broad suite/admission.
+Implement frozen ordinary Perl str_eq/str_ne/str_gt/str_ge/str_lt/str_le receiver/result counterparts under23.3.12.1. Existing free/nested producers1/0, undef-as-empty compatibility, eager lhs/rhs and1!/SOC/final-null snapshots work; preserve them. Add one-operand preflight, scalar handoff/generic consumers/explicit bridges and source families with small native/fresh/direct checks/docs/commit. Numeric aliases/Unicode/domain policies stay unchanged. Rust2 follows; residual Dart regex assessment23.2.12 after all five counterparts.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.3` — Dart generic definedness scalar/shape repair is targeted-checked with existing Bool semantics. Julia4 independent assessment next.
@@ -29,7 +30,6 @@ Assess/freeze ordinary receiver/result counterparts for six str_* String compari
 - `TYPE-REFERENCE-BOOK.1.2.23.2.9` — String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` — Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.9.3` — Dart generic emptiness scalar/shape guards pass focused checks; Julia assessment next.
 
 ## History
 

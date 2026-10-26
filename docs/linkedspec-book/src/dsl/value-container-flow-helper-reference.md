@@ -858,7 +858,7 @@ Compatibility bridge status:
   preferred for lexical text comparisons.
 - The bare helpers `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are numeric comparison aliases. They are no longer
   lexical string comparisons.
-- The `str_*` names are not numeric helpers and are not comparison-symbol calls.
+- The `str_*` names are not numeric helpers or comparison-symbol calls. Current Perl free/nested forms work, while ordinary receiver counterparts are planned: use `cat(str_eq("a","a"),"!")` → `"1!"` until `"a".str_eq("a").cat("!")` is implemented. False renders `"0!"` and remains present through `coalesce_nonempty`. Perl currently compares undef as empty text; preserve this compatibility without inferring a portable null domain.
 
 ## Numeric value helpers
 

@@ -1126,7 +1126,7 @@ remain ordinary `callee(args)` calls, so there is no operator precedence; write
 accepted as numeric aliases too: `==(a, b)`, `!=(a, b)`, `>(a, b)`, `>=(a, b)`,
 `<(a, b)`, and `<=(a, b)` map to the corresponding `num_*` comparison helpers.
 The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
-`str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons.
+`str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons. Current Perl free/nested forms work: `cat(str_eq("a","a"),"!")` returns `"1!"`; false results are numeric0 and render `"0!"`. Ordinary `"a".str_eq("a")` receiver counterparts are planned; use nested helpers until implemented. Existing Perl lexical compatibility compares undef as empty text, so `str_eq(undef,"")` returns1; no portable null-domain claim follows.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
