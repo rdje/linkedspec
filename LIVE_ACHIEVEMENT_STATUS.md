@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
+Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
 
 ## Latest Completed Slice
 
-String comparison23.2.11 freezes new ordinary receiver counterparts for six existing str_* free helpers. Public Get/substitution/native/fresh confirms six1/six0, raw unsupported receiver chains and working nested controls; Perl undef compares as empty text, false0! stays present, and existing blocks retain1!/SOC/final-null or0/SO for null source. No producer/snapshot repair inferred. Contract/probe/book/fact and five implementation children align; small syntax/book/fast checks pass. Perl23.3.12.1 next; explicit residual Dart regex assessment23.2.12 follows the family.
+Perl adds six explicit String comparison names to one-operand/scalar-result lists only. Native/fresh shared/direct definedness pass12 focused assertions after raw/compile RED: all six true/false/raw numeric1/0, null/empty/zero twins, source families, retained0!/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null snapshots; null-source control0!/SO. Free zero-text producer already works. Legacy undef warnings/domains/numeric aliases unchanged. Six worked method examples/book/fast checks align; Rust2 next.
 
 ## Next Action
 
-Implement frozen ordinary Perl str_eq/str_ne/str_gt/str_ge/str_lt/str_le receiver/result counterparts under23.3.12.1. Existing free/nested producers1/0, undef-as-empty compatibility, eager lhs/rhs and1!/SOC/final-null snapshots work; preserve them. Add one-operand preflight, scalar handoff/generic consumers/explicit bridges and source families with small native/fresh/direct checks/docs/commit. Numeric aliases/Unicode/domain policies stay unchanged. Rust2 follows; residual Dart regex assessment23.2.12 after all five counterparts.
+Independently assess Rust str_eq/str_ne/str_gt/str_ge/str_lt/str_le producer kinds/null/scalar compatibility and ordinary receiver/result/source/shape behavior under23.3.12.2. Shared source has explicit Perl numeric/null expected variant; derive Rust expectations from public existing producers without normalization. Repair confirmed gaps only, small native/restored/plan/direct checks/offline compile/docs/commit, then Dart3. Numeric aliases/full domains and residual Dart modes23.2.12 remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.12.1` — Perl six explicit String comparison receiver/result counterparts are implemented/targeted-checked. Rust2 independent producer/domain/receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.11` — Explicit String comparison receiver/result counterparts frozen under comprehensive fluent directive. Perl23.3.12.1 implementation next, preserving existing free semantics.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.5` — Lua definedness result/shape handoff is targeted-checked on available hosts. All five bounded definedness children are checked; String comparison assessment23.2.11 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.11.4` — Julia definedness scalar/shape repair and explicit producer Bool checks are targeted-checked. Lua5 independent assessment next.
@@ -29,7 +30,6 @@ Implement frozen ordinary Perl str_eq/str_ne/str_gt/str_ge/str_lt/str_le receive
 - `TYPE-REFERENCE-BOOK.1.2.23.3.10.1` — Perl String predicate handoff passes native/fresh/direct checks; Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.9` — String predicate handoff frozen; correct producers/SOC retained, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.5` — Lua generic emptiness rollout passes on installed hosts; next existing String-predicate result assessment.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.9.4` — Julia generic emptiness scalar/shape guards pass strict focused checks; Lua assessment next.
 
 ## History
 

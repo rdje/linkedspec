@@ -823,14 +823,14 @@ endif()
 
 These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expressions, and many can be assigned or returned. Ordinary Perl definedness receivers now continue: `"abc".is_defined().cat("!")` returns `"1!"`; `[].first().is_defined().coalesce_nonempty("late").cat("!")` returns `"late!"` because its existing false result is empty text. Rust/Dart/Julia/Lua support this bounded family with Boolean results (Lua: PUC5.5.1/LuaJIT; declared5.4 proof remains separate): `[].first().is_defined().coalesce_nonempty("late").cat("!")` retains `"0!"`; `false.is_defined()` and `undef.is_undefined()` return true. Empty text/Array/Hash, false and zero themselves are defined; these predicates test null rather than emptiness.
 
-| Helper | Meaning |
+| Helper | Meaning; Perl receiver examples with `word="abc"` |
 | --- | --- |
-| `str_eq(lhs, rhs)` | string equality. |
-| `str_ne(lhs, rhs)` | string inequality. |
-| `str_gt(lhs, rhs)` | string greater-than. |
-| `str_ge(lhs, rhs)` | string greater-than-or-equal. |
-| `str_lt(lhs, rhs)` | string less-than. |
-| `str_le(lhs, rhs)` | string less-than-or-equal. |
+| `str_eq(lhs, rhs)` | string equality; `word.str_eq("abc").cat("!")` → `"1!"`; `word.str_eq("z").cat("!")` → `"0!"`. |
+| `str_ne(lhs, rhs)` | string inequality; `word.str_ne("z").cat("!")` → `"1!"`; `word.str_ne("abc").cat("!")` → `"0!"`. |
+| `str_gt(lhs, rhs)` | string greater-than; `word.str_gt("aaa").cat("!")` → `"1!"`; `word.str_gt("zzz").cat("!")` → `"0!"`. |
+| `str_ge(lhs, rhs)` | string greater-than-or-equal; `word.str_ge("abc").cat("!")` → `"1!"`; `word.str_ge("zzz").cat("!")` → `"0!"`. |
+| `str_lt(lhs, rhs)` | string less-than; `word.str_lt("zzz").cat("!")` → `"1!"`; `word.str_lt("aaa").cat("!")` → `"0!"`. |
+| `str_le(lhs, rhs)` | string less-than-or-equal; `word.str_le("abc").cat("!")` → `"1!"`; `word.str_le("aaa").cat("!")` → `"0!"`. |
 | `starts_with(value, prefix)` | value begins with the literal prefix. |
 | `ends_with(value, suffix)` | value ends with the literal suffix. |
 | `contains_substr(value, needle)` | value contains the literal substring. |
@@ -858,7 +858,7 @@ Compatibility bridge status:
   preferred for lexical text comparisons.
 - The bare helpers `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are numeric comparison aliases. They are no longer
   lexical string comparisons.
-- The `str_*` names are not numeric helpers or comparison-symbol calls. Current Perl free/nested forms work, while ordinary receiver counterparts are planned: use `cat(str_eq("a","a"),"!")` → `"1!"` until `"a".str_eq("a").cat("!")` is implemented. False renders `"0!"` and remains present through `coalesce_nonempty`. Perl currently compares undef as empty text; preserve this compatibility without inferring a portable null domain.
+- The `str_*` names are not numeric helpers or comparison-symbol calls. Current Perl free/nested and ordinary receiver counterparts work: `cat(str_eq("a","a"),"!")` and `"a".str_eq("a").cat("!")` both return `"1!"`. All six methods take one operand before effects; compatible scalar/generic consumers see the comparison result. `"a".str_eq("a").cat(",x").split(",").last().uppercase()` bridges to Array and returns `"X"`; container-only consumers directly after a comparison return undef. Other-backend/full admission remains separate. False renders `"0!"` and remains present through `coalesce_nonempty`. Perl currently compares undef as empty text; preserve this compatibility without inferring a portable null domain.
 
 ## Numeric value helpers
 

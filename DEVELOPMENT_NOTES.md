@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.12.1 — add Perl explicit String comparison receivers
+
+Perl adds six explicit String comparison names to one-operand/scalar-result lists only. Native/fresh shared/direct definedness pass12 focused assertions after raw/compile RED: all six true/false/raw numeric1/0, null/empty/zero twins, source families, retained0!/generic/bridges/scalar guards,12 malformed no-effects and1!/SOC/once-only/final-null snapshots; null-source control0!/SO. Free zero-text producer already works. Legacy undef warnings/domains/numeric aliases unchanged. Six worked method examples/book/fast checks align; Rust2 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.11 — freeze explicit String comparison receivers
 
 String comparison23.2.11 freezes new ordinary receiver counterparts for six existing str_* free helpers. Public Get/substitution/native/fresh confirms six1/six0, raw unsupported receiver chains and working nested controls; Perl undef compares as empty text, false0! stays present, and existing blocks retain1!/SOC/final-null or0/SO for null source. No producer/snapshot repair inferred. Contract/probe/book/fact and five implementation children align; small syntax/book/fast checks pass. Perl23.3.12.1 next; explicit residual Dart regex assessment23.2.12 follows the family.

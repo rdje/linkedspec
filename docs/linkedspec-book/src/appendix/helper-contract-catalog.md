@@ -436,10 +436,10 @@ dispatch rule.
 - **Allowed array bridge**: `split(delim)` returns an array and may continue through compatible array
   receiver helpers, for example `raw.trim().split("-").trim_each().lowercase_each().join_values("|")`.
 - **Numeric result link**: `length` returns a number. Ordinary Perl/Rust/Dart/Julia/Lua chains can feed it to existing compatible scalar/number methods: `"abcd".length().add(2)` → `6`, equivalent to `num_add(length("abcd"),2)`. Array-producing links also support length, such as `[2,1].sorted().length().add(1)` → `3`.
-- **Predicate links**: `starts_with`, `ends_with`, `contains_substr` and `matches` return number/boolean values. Their existing continuation boundaries are outside the bounded count/length update.
+- **Predicate result links**: `starts_with`, `ends_with`, `contains_substr` and `matches` retain their number/boolean results and continue through compatible scalar/text/generic methods and explicit Array bridges on Perl/Rust/Dart/Julia/Lua. Generic definedness/emptiness also continue with the actual result kinds qualified in their entries. Perl additionally supports all six `str_*` receiver counterparts; other-backend/full admission stays separate.
 - **Boundary**: `substr(value, start, length?)` here is the pure value substring helper. It is separate from
-  any statement-style or host-language substitution idiom. A terminal string method followed by another
-  receiver-dot call yields `undef` rather than a partially lowered host expression.
+  any statement-style or host-language substitution idiom. Scalar results reject Array/Hash-only consumers
+  until an explicit operation yields a container; ordinary fixed receiver arities reject before effects.
 - **Block receivers**: An expression-valued block whose value is a string can be the receiver, for example
   `{ " a-b " }.trim().split("-").count()`.
 
@@ -666,7 +666,7 @@ dispatch rule.
 - **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
-- **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Perl/Rust/Dart/Julia/Lua `index_of` also feeds compatible scalar/number methods on recorded hosts; declared5.4/full admission stays open. Other terminal links include `contains`, `is_empty`, `is_nonempty`.
+- **Numeric result links**: `count`/`length` feed compatible scalar/number methods; `[1,2].count().add(3)` returns `5`. Perl/Rust/Dart/Julia/Lua `index_of` also feeds compatible scalar/number methods on recorded hosts; declared5.4/full admission stays open. Generic emptiness/definedness results also continue through compatible consumers with their existing result kinds.
   `join_values` returns a String; ordinary Perl/Rust/Dart/Julia/Lua continuations work on recorded hosts; declared5.4/full admission remain open. The six numeric reducers feed compatible scalar/number methods. Receiver-dot
   `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
   `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
@@ -1126,7 +1126,7 @@ remain ordinary `callee(args)` calls, so there is no operator precedence; write
 accepted as numeric aliases too: `==(a, b)`, `!=(a, b)`, `>(a, b)`, `>=(a, b)`,
 `<(a, b)`, and `<=(a, b)` map to the corresponding `num_*` comparison helpers.
 The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
-`str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons. Current Perl free/nested forms work: `cat(str_eq("a","a"),"!")` returns `"1!"`; false results are numeric0 and render `"0!"`. Ordinary `"a".str_eq("a")` receiver counterparts are planned; use nested helpers until implemented. Existing Perl lexical compatibility compares undef as empty text, so `str_eq(undef,"")` returns1; no portable null-domain claim follows.
+`str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons. Current Perl free/nested forms work: `cat(str_eq("a","a"),"!")` returns `"1!"`; false results are numeric0 and render `"0!"`. Ordinary Perl counterparts now work for all six names: `"a".str_eq("a").cat("!")` returns `"1!"`, `"a".str_eq("b").coalesce_nonempty("late").cat("!")` returns `"0!"`, and `"a".str_eq("a").cat(",x").split(",").last().uppercase()` returns `"X"`. One operand is required before effects; results reject container-only consumers until an explicit bridge yields a container. Source/operand/result snapshots and numeric aliases stay unchanged; other-backend/full admission stays separate. Existing Perl lexical compatibility compares undef as empty text with legacy uninitialized warnings when enabled, so `str_eq(undef,"")` returns1; no portable null-domain claim follows.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads

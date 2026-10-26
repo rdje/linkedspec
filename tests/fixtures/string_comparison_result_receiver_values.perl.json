@@ -1,0 +1,93 @@
+{
+  "positive": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "negative": [
+    "0!",
+    "0!",
+    "0!",
+    "0!",
+    "0!",
+    "0!"
+  ],
+  "nested": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "raw": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "boundaries": [
+    "1!",
+    "1!",
+    "1!",
+    "1!",
+    "0!"
+  ],
+  "zero": [
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "selected": "1!",
+  "pipeline": "1!",
+  "hash": "1!",
+  "split": "1!",
+  "function": "1!",
+  "default": "1!",
+  "join": "1!",
+  "retained": "0!",
+  "bridged": "X",
+  "predicate_again": "1!",
+  "false_data": "0!",
+  "incompatible": null,
+  "after_text": null,
+  "effected": "1!",
+  "order": "SOC",
+  "source_calls": 1,
+  "operand_calls": 1,
+  "source": null,
+  "null_effected": "0!",
+  "null_order": "SO",
+  "bad": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "invalid_effects": 0,
+  "word": "abc",
+  "meta": {
+    "a": "abc"
+  },
+  "zero_text": "0"
+}

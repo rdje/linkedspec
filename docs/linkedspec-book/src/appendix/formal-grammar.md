@@ -1068,7 +1068,7 @@ you need grouping. Comparison word aliases are numeric calls over the matching
 `num_*` helpers, and comparison symbol aliases are the same ordinary call shape.
 The task-tree-owned comparison migration also added the explicit
 string-comparison bridge names `str_eq`, `str_ne`, `str_gt`, `str_ge`, `str_lt`,
-and `str_le`; use those shipped names for lexical string comparisons.
+and `str_le`; use those shipped names for lexical string comparisons. Ordinary Perl receiver counterparts take one right operand and feed compatible scalar/text/generic consumers, for example `word.str_eq("abc").cat("!")`; numeric aliases stay unchanged and other-backend/full admission remains separate.
 
 ### 7.6 Control Flow Helpers
 ```

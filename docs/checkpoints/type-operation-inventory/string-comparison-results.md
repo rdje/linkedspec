@@ -48,3 +48,13 @@ sets it to null. Preserve this producer/snapshot behavior. Null-source control
 still evaluates both blocks once in SO order and returns0 against"a". Freeze
 before production and implement/confirm separate Perl/Rust/Dart/Julia/Lua children;
 small compile/direct checks/docs/commit only, full admission23.4 separate.
+
+## Bounded Perl counterparts
+
+23.3.12.1 adds the six names to existing one-operand/scalar-result lists only.
+Native/fresh shared and direct definedness pass after raw/compile RED: six true/
+false pairs and raw1/0, null/empty/zero literal/binding twins, source families,
+retained0!, generic/bridges/scalar guards, twelve malformed no-effect controls
+and1!/SOC/once-only/final-null snapshots. Free zero-text control already works;
+producer/domain/numeric aliases unchanged. Undef retains legacy uninitialized
+warnings when enabled. Rust2 follows.
