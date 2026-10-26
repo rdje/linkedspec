@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.18.3 — guard Dart defined-only default results
+
+Dart18.3 preserves independently confirmed lazy defined-only receiver selection and repairs actual scalar-result boundaries plus pre-effect zero-RHS shape guarding. New3/direct defaults3 native/restored/plan tests and format/fatal selected analysis pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/source-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no broad/standalone/portable admission. Julia18.4 next.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.18.2 — add Rust defined-only default receivers
 
 Rust18.2 preserves independently passing free producers and repairs new receiver eager fallback execution through existing String/lazy actual-value dispatch. New scalar-result metadata and pre-effect zero-RHS guard retain compatible scalar/container flow and forbidden-effect boundaries. Three new and three direct selected/nonempty tests pass native/restored/in-process plan with offline compilation/rustfmt, retaining strict kinds/copies/indices/SDC-SC-HashC/skipped errors/malformed no-effects. Shared/frozen/book/fact/task/live align; no free domain/schema/callback change or standalone/portable admission. Dart18.3 next.

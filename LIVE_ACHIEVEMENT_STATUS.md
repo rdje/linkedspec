@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
+Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
 
 ## Latest Completed Slice
 
-Rust18.2 preserves independently passing free producers and repairs new receiver eager fallback execution through existing String/lazy actual-value dispatch. New scalar-result metadata and pre-effect zero-RHS guard retain compatible scalar/container flow and forbidden-effect boundaries. Three new and three direct selected/nonempty tests pass native/restored/in-process plan with offline compilation/rustfmt, retaining strict kinds/copies/indices/SDC-SC-HashC/skipped errors/malformed no-effects. Shared/frozen/book/fact/task/live align; no free domain/schema/callback change or standalone/portable admission. Dart18.3 next.
+Dart18.3 preserves independently confirmed lazy defined-only receiver selection and repairs actual scalar-result boundaries plus pre-effect zero-RHS shape guarding. New3/direct defaults3 native/restored/plan tests and format/fatal selected analysis pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/source-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no broad/standalone/portable admission. Julia18.4 next.
 
 ## Next Action
 
-Activate Dart18.3 and independently assess public free/nested and frozen defined-only receiver source/result flow before production. Preserve lazy defined empty/zero/false/exhaustion, actual scalar/container/copy/index kinds, source-first snapshots and skipped runtime errors. Shared native/restored/plan and quick direct defaults/compile/docs/commit; no full matrix.
+Activate Julia18.4 and independently assess public free/nested and frozen defined-only receiver source/result flow before production. Preserve lazy defined empty/zero/false/exhaustion, actual scalar/container/copy/index kinds, source-first snapshots and skipped runtime errors. Shared native/plan/fresh with strict Bool/Number distinctions and quick direct defaults/compile/docs/commit; no full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` — Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` — Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` — Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.18` — Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
@@ -29,7 +30,6 @@ Activate Dart18.3 and independently assess public free/nested and frozen defined
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 
 ## History
 

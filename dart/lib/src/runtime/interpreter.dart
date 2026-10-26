@@ -3711,7 +3711,9 @@ final class LinkedSpecRuntimeEngine {
           if (helper == 'num_clamp') {
             return call.args.length != 2;
           }
-          if (helper == 'num_add' || helper == 'num_mul') {
+          if (helper == 'num_add' ||
+              helper == 'num_mul' ||
+              helper == 'coalesce') {
             return call.args.isEmpty;
           }
           if (helper == 'join_values' ||
@@ -5132,6 +5134,7 @@ final class LinkedSpecRuntimeEngine {
       // Scalar producers and defaults retain this boundary until an actual
       // container output permits later array/hash-only consumers.
       final mayProduceScalar =
+          helper == 'coalesce' ||
           helper == 'coalesce_nonempty' ||
           helper == 'contains' ||
           helper == 'index_of' ||

@@ -123,3 +123,15 @@ pass native/restored/in-process plan, offline compilation and rustfmt. Shared
 strict kinds/SDC-SC-HashC/copies/indices/skipped failures and selected/malformed
 no-effects hold; no standalone emitted Rust or complete portable admission.
 Dart18.3 independently assesses next.
+
+## Bounded Dart implementation
+
+18.3 independently confirms free/nested producers before production. Existing
+receiver selection, snapshots, SDC/SC/HashC, copies/indices and skipped runtime
+failures already work. Shared RED has[] at scalar boundaries andSA from an
+incompatible take operand; zero-RHS source/consumer SC also runs. Track coalesce
+in mayProduceScalar and common pre-effect one-or-more preflight, preserving
+actual List/Map release and existing free/named-context/format/callback policy.
+New3/direct defaults3 native/restored/plan tests, format and fatal selected
+analysis pass. Extra selected/malformed controls retain fournull/emptyorder.
+No full matrix/standalone/portable admission; Julia18.4 independently assesses.
