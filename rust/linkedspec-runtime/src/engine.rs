@@ -5734,6 +5734,7 @@ impl Engine {
                         | "case"
                         | "default"
                         | "coalesce"
+                        | "coalesce_nonempty"
                 );
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
@@ -8274,7 +8275,15 @@ impl Engine {
         args.first().map(RuntimeValue::to_str)
     }
 
-    /// Dispatch a lazy control or first-defined default-selection call.
+    fn coalesce_accepts(value: &RuntimeValue, require_nonempty: bool) -> bool {
+        match value {
+            RuntimeValue::Undef => false,
+            RuntimeValue::Scalar(text) if require_nonempty => !text.is_empty(),
+            _ => true,
+        }
+    }
+
+    /// Dispatch a lazy control or default-selection call.
     ///
     /// These calls receive unevaluated arg AST nodes; the handler evaluates
     /// conditions and branch bodies lazily via `self.eval_expr()`.
@@ -8291,10 +8300,10 @@ impl Engine {
             format!("rule={rule_label} helper={name} arity={}", args.len()),
             TraceLevel::FULL,
         );
-        if name == "coalesce" {
+        if matches!(name, "coalesce" | "coalesce_nonempty") {
             for arg in args {
                 let value = self.eval_expr(arg.value(), ctx, rule_label)?;
-                if value.is_defined() {
+                if Self::coalesce_accepts(&value, name == "coalesce_nonempty") {
                     return Ok(value);
                 }
             }
@@ -8466,7 +8475,7 @@ impl Engine {
             }
             "coalesce" => {
                 for a in args {
-                    if a.is_defined() {
+                    if Self::coalesce_accepts(a, false) {
                         return Ok(a.clone());
                     }
                 }
@@ -9782,7 +9791,7 @@ impl Engine {
             // ── Coalesce ──
             "coalesce_nonempty" => {
                 for a in args {
-                    if a.is_defined() && !a.to_str().is_empty() {
+                    if Self::coalesce_accepts(a, true) {
                         return Ok(a.clone());
                     }
                 }

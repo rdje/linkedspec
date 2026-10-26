@@ -287,9 +287,9 @@ dispatch rule.
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
 - **Returns**: scalar
-- **Behavior**: Returns the first argument that is defined and not the empty string `""`. Preserves `0` and other defined values.
-- **Edge cases**: Returns `undef` only if all arguments are undef or `""`.
-- **Example**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]` (the empty string is skipped).
+- **Behavior**: Returns the first argument that is defined and not the empty string `""`, evaluating operands once from left to right until selection. Preserves numeric `0` and boolean `false`; it does not test truthiness.
+- **Edge cases**: Returns `undef` only if all arguments are undef or `""`. `coalesce_nonempty("", 0, "late")` → numeric `0`; `coalesce_nonempty(undef, false, "late")` → `false`.
+- **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `coalesce_nonempty("first", { audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. Ordinary Rust helper calls implement this rule; receiver short-circuit repair is tracked separately under62.2.2.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`

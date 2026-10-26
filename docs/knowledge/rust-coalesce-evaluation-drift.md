@@ -1,6 +1,6 @@
 ---
 id: rust-coalesce-evaluation-drift
-title: "Rust first-defined coalesce repair and remaining nonempty/receiver boundaries"
+title: "Rust lazy default helpers and remaining receiver boundaries"
 answers:
   - "does Rust coalesce preserve a defined empty string"
   - "does Rust coalesce short circuit operand evaluation"
@@ -8,19 +8,19 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: ordinary coalesce62.1 repaired; nonempty/receiver62.2 and broad admission open
+status: ordinary coalesce/nonempty62.1/62.2.1 repaired; receiver62.2.2 and broad admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
 evidence: "SESSION-STARTUP-READING.3.3.22: five paired existing-primary Rust/live Perl Get controls, five ready descriptors and inspected lowered/generated sources; .62.1-.62.4 own repair and carrier/public closure."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values"
 ---
 
-Current62.1: ordinary coalesce enters call_helper_lazy, evaluates operands until
-the first defined RuntimeValue and returns it without text conversion. Retained
-native/restored/generated-plan tests distinguish empty/undef/zero/false, nested
-selection, exact order and skipped versus needed typed-write errors. Public Perl
-Get confirms the shared value fixture. Aggregate controls match reference
-definedness as compatibility observations; the public scalar signature is not
-silently broadened. Nonempty/receiver62.2 and broader62.3/.62.4 remain open.
+Current62.1/62.2.1: both ordinary helpers enter call_helper_lazy and select only
+the needed operand prefix. Shared coalesce_accepts rejects undef, plus empty
+Scalar text for nonempty selection; zero/false and aggregate compatibility values
+retain identity without text coercion. Native/restored/generated-plan fixtures
+distinguish exact order and needed/skipped typed-write errors; public Perl agrees.
+Aggregate controls do not broaden the scalar signature. Receiver62.2.2 and
+broader62.3/.62.4 remain open.
 
 # Historical September7 default-selection findings
 

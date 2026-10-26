@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## SESSION-STARTUP-READING.62.2.1 — lazily select Rust nonempty defaults
+
+Route ordinary coalesce_nonempty through lazy selection and share an identity-preserving predicate that skips undef and empty text while retaining zero/false. Evaluate only the needed prefix and skip later writes/errors. Shared public Perl controls agree with authored values/order; native/restored/generated-plan tests pass after actual RED, alongside the preceding coalesce regression. Compilation/rustfmt/book and fast continuity checks pass. Aggregate cases remain compatibility controls under the scalar signature. Receiver62.2.2 is next; broad admission stays deferred.
+
 ## SESSION-STARTUP-READING.62.1 — lazily select Rust first-defined values
 
 Route ordinary coalesce through lazy AST evaluation and select the first defined value without text conversion. Preserve empty text, zero/false, needed error propagation and once-only left-to-right evaluation; skip later writes/errors. A small shared public Perl control agrees with authored values/order; native/restored/generated-plan regressions pass after actual RED, alongside direct selected-value checks. Compilation/rustfmt/book and fast continuity checks pass. Aggregate controls are bounded compatibility observations; the scalar signature is unchanged. Nonempty/receiver62.2 follows; broad proof remains deferred.

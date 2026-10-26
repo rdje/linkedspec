@@ -528,16 +528,43 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   - [x] LOCKSTEP: Public examples, canonical coalesce fact/map, indexed/current task frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Historical observations remain dated.
   Commit: `SESSION-STARTUP-READING.62.1 - lazily select Rust first-defined values`.
 - ID: `SESSION-STARTUP-READING.62.2`
-  Status: `pending`
+  Status: `active`
+  Children: `.62.2.1`, `.62.2.2`
   Goal: Reconcile coalesce_nonempty and receiver/value-block dispatch with the reference.
   Dependencies: .62.1.
   Acceptance: Probe and repair later-operand effects for coalesce_nonempty and documented receiver forms;
     distinguish empty-string skipping from truthiness and aggregate coercion. Preserve callback binding
     identity, ordinary helpers, scalar flags and exact argument diagnostics through every admitted route.
-  Verification: `pending` repair — two fresh coalesce_nonempty pairs also show Rust executes the late
+  Historical September verification: Two fresh coalesce_nonempty pairs also showed Rust executes the late
     audit assignment after first/fallback selection; Perl preserves unset/selected respectively. Both use
     eager Rust operand collection versus nested Perl conditionals. Receiver/value-block proof remains open.
-  Commit: `pending`
+  Partial implementation October26: Ordinary nonempty helper laziness/selection is repaired and targeted-checked under .62.2.1. Documented receiver/value-block paths remain .62.2.2-owned and are the next implementation, separate from broad62.3/.62.4.
+  Commit: Per-child implementation commits; broader admission remains .62.3/.62.4.
+- ID: `SESSION-STARTUP-READING.62.2.1`
+  Status: `done`
+  Activation: clean `faa7245679c211ae70bcf83ac8deef44341da280`.
+  Goal: Make ordinary coalesce_nonempty select lazily without treating zero/false as empty or coercing aggregate controls to empty text.
+  Verification tier: `focused`
+  Focused checks: Shared public Perl fixture; locked/offline Rust coalesce_nonempty_values and direct coalesce_lazy_values tests on native/restored/generated-plan; first-party rustfmt, book and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded implementation under director feature-first cadence; receiver62.2.2 and broader62.3/.62.4 admission remain separate.
+  Claim verification: none: deterministic authored value/order/skipped-error regression; no quantified corpus, exhaustive or portable admission measurement.
+  Acceptance: Skip only undef and empty text, evaluate the needed operand prefix once, preserve zero/false and nested/selected/all-empty results, propagate needed errors and skip unneeded errors. Reconcile aggregate compatibility against public Perl without broadening the scalar signature; leave receiver paths for .62.2.2.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Shared public fixture returns order AXBCDXXXX instead of ABCD and falls through empty aggregates before repair. A selected safe value still triggers a later typed-write error. Perl Get confirms authored values/order and bounded aggregate compatibility.
+  - [x] ROOT CAUSE (WHY + WHERE): Expr::Call omits coalesce_nonempty from lazy dispatch; Engine::call_helper uses to_str to test nonemptiness, erasing aggregate identity. This is independent of the ordinary coalesce62.1 repair.
+  - [x] FIX: Route ordinary nonempty calls through existing lazy selection and share coalesce_accepts, rejecting undef and only empty Scalar text for nonempty mode. Preserve zero/false and actual values; keep the scalar signature and qualify aggregate controls.
+  - [x] ADDRESSED (verified): Locked/offline compilation and authored coalesce_nonempty_values native/restored/generated-plan value/order/needed-versus-skipped-error tests PASS after actual RED.
+  - [x] NO REGRESSION: Direct coalesce_lazy_values tests and first-party rustfmt PASS; all-empty, zero/false, nested/selected and bounded aggregate controls agree. No full crate suite or receiver admission claim.
+  - [x] LOCKSTEP: Public nonempty examples, canonical fact/map, indexed/current task frontier and live handoff agree; book and fast continuity/history/diff guards pass before landing. Receiver .62.2.2 is next.
+  Commit: `SESSION-STARTUP-READING.62.2.1 - lazily select Rust nonempty defaults`.
+- ID: `SESSION-STARTUP-READING.62.2.2`
+  Status: `pending`
+  Goal: Repair documented receiver default-selection laziness and value-block transitions.
+  Dependencies: .62.2.1.
+  Schedule: Next focused implementation after .62.2.1, before continued helper signatures; broad62.3/.62.4 remains deferred.
+  Planned tier: `focused`; declare actual changed paths/proof at activation.
+  Claim verification: none: Future deterministic receiver implementation, no new measurement.
+  Acceptance: Publicly reproduce documented receiver forms before repair; preserve receiver identity/kind, once-only prefix evaluation, zero/false/empty/null distinctions and failure/argument behavior across actual native/generated consumers. Do not infer unadvertised method admission.
 - ID: `SESSION-STARTUP-READING.62.3`
   Status: `pending`
   Goal: Add permanent default-selection and effect-order recurrence across supported carriers.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — SESSION-STARTUP-READING.62.2.1 — empty text versus truthiness
+
+Ordinary coalesce_nonempty previously evaluated every operand and tested to_str, which also erased aggregate identity. Add it to lazy dispatch and share coalesce_accepts with ordinary coalesce: undef is rejected, and nonempty mode additionally rejects only empty Scalar text. Zero/false and reference-compatible aggregate controls retain actual values without broadening the public scalar signature. The small retained fixture passes native/restored/generated-plan value/order/needed-versus-skipped-error checks after actual RED, while direct coalesce_lazy_values remains green. Public Perl agrees, including exact ABCD order. Canonical/current docs align; documented receiver62.2.2 remains the next focused implementation.
+
 ## 2026-10-26 — SESSION-STARTUP-READING.62.1 — first-defined prefix evaluation
 
 Rust omitted coalesce from lazy dispatch and used nonempty text in its eager arm. Admit it to call_helper_lazy, evaluate operands until the first defined RuntimeValue and return that value directly; the evaluated-value arm uses definedness too. The retained fixture distinguishes empty/undef/zero/false, nested/selected/all-undef values and exact ABC order; a needed typed-write conflict still errors while an unneeded one is skipped. Native/restored/generated-plan and direct selected-value tests pass after actual RED, and public Perl confirms bounded aggregate compatibility without widening the scalar signature. An initial division-by-zero error control was corrected because numeric helpers intentionally return undef; that setup assertion is not product RED. Canonical/current docs align;62.2 owns nonempty/receiver behavior next.
