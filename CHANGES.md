@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## LUA-STARTUP-READING.2.9.1.1 — preserve false mutable split delimiters
+
+Lua mutable split now preserves an evaluated false delimiter as text0, matching pure split. Small native/generated-plan/fresh-emitted mutable-split and direct joined checks pass after literal/computed false RED on available PUC5.5.1/LuaJIT, including ordered SD effects, target updates, detached results and true/zero/String/empty controls. Two-argument split remains pure; its corrected fixture oracle is not credited as a product defect. Catalog return semantics are qualified for Lua. Loadfile/book and fast continuity checks pass; declared5.4/full admission stays2.9.2 and container-default23.2.5 is next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.5.5 — continue Lua joined String results
 
 Lua joined results now continue with one-delimiter/scalar guards and false-preserving delimiter evaluation. Small native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED on available PUC5.5.1/LuaJIT, including literal/computed false parity, named mutations, Unicode, bridges, SDAN order, snapshots and shapes. Loadfile/book/continuity checks pass. Remaining mutable split2.9.1.1 is next, then container-default23.2.5; declared5.4/full admission stay separate. Older omitted-receiver expectations are explicitly superseded by one-delimiter contract23.2.4; other route defaults stay unchanged.

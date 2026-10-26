@@ -1761,7 +1761,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.2.9.1.1` | `pending` | Reverify/repair remaining mutable-split false delimiter after clean joined-result rollout; container-default23.2.5 follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.5` | `pending` | Assess container-valued defaults after bounded joined and Lua mutable-split repairs; broad proof remains deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

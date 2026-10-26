@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Count/Length/aggregate/joined results are targeted-checked on recorded hosts. Remaining Lua mutable-split false delimiter2.9.1.1 is next, then container-default TYPE23.2.5. Keep feature/compile/quick-check/docs/commit cadence; full signatures/matrices/admission remain open.
+Bounded Count/Length/aggregate/joined results and Lua mutable-split delimiter repairs are targeted-checked on recorded hosts. Container-default TYPE23.2.5 is next; keep feature/compile/quick-check/docs/commit cadence, full admission separate.
 
 ## Latest Completed Slice
 
-Lua joined results now continue with one-delimiter/scalar guards and false-preserving delimiter evaluation. Small native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED on available PUC5.5.1/LuaJIT, including literal/computed false parity, named mutations, Unicode, bridges, SDAN order, snapshots and shapes. Loadfile/book/continuity checks pass. Remaining mutable split2.9.1.1 is next, then container-default23.2.5; declared5.4/full admission stay separate.
+Lua mutable split now preserves an evaluated false delimiter as text0, matching pure split. Small native/generated-plan/fresh-emitted mutable-split and direct joined checks pass after literal/computed false RED on available PUC5.5.1/LuaJIT, including ordered SD effects, target updates, detached results and true/zero/String/empty controls. Two-argument split remains pure; its corrected fixture oracle is not credited as a product defect. Catalog return semantics are qualified for Lua. Loadfile/book and fast continuity checks pass; declared5.4/full admission stays2.9.2 and container-default23.2.5 is next.
 
 ## Next Action
 
-Publicly reverify and repair the remaining mutable-split delimiter fallback in its owning Lua tree after the clean joined commit. Preserve existing helper/source/default/copy behavior, use small matching-host native/generated/emitted/direct checks and commit before returning to container-default23.2.5. No broad suite/declared-target admission campaign.
+Assess container-valued defaults by public fluent/nested comparisons and existing helper domains before classification. Freeze a bounded transition/repair children if needed; no broad suite or admission campaign.
 
 ## Recent Completions
 
+- `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` — Lua joined flow/arity/scalar guards and literal/computed false delimiter fix; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` — Julia correct joined flow retained, one-delimiter/scalar guards added; focused native/generated/emitted and strict Julia1.12 checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.3` — Dart correct joined flow retained, one-delimiter/scalar guards added; focused native/restored/generated-plan and fatal analysis pass.
@@ -29,7 +30,6 @@ Publicly reverify and repair the remaining mutable-split delimiter fallback in i
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.3` — Dart correct result flow retained, producer arity and array-only count fixed; focused native/restored/generated-plan and analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.3.2` — Rust count/count_keys/length results continue; focused native/restored/generated-plan and direct selected-value checks pass, with early producer arity guards.
 
 ## History
 

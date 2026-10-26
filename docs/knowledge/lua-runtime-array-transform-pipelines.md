@@ -35,4 +35,4 @@ Related facts: [[lua-runtime-array-selection]], [[lua-pure-split-bridge]],
 [[six-variant-unicode-17-case-parity]], [[array-helper-return-shape-caveats]],
 [[dart-runtime-array-helpers]], [[julia-runtime-array-helpers]].
 
-23.3 selected/count/aggregate fixtures retain values/arity.23.3.5.5 adds joined String flow, one-delimiter/scalar guards and false-preserving argument evaluation. [[lua-interpreter-helper-reading-and-false-delimiter-gap]] owns that producer repair/remaining split. Native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED on available5.5.1/JIT; declared5.4/full admission remain open.
+23.3 selected/count/aggregate fixtures retain values/arity.23.3.5.5 adds joined String flow, one-delimiter/scalar guards and false-preserving argument evaluation. [[lua-interpreter-helper-reading-and-false-delimiter-gap]] owns both delimiter repairs. Native/generated-plan/fresh-emitted joined and direct aggregate checks pass after RED on available5.5.1/JIT; declared5.4/full admission remain open.

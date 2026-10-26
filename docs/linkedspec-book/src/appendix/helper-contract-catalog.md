@@ -417,9 +417,9 @@ dispatch rule.
 
 ### `split(target, source, delimiter)`
 - **Signature**: `split(target, source: scalar, delimiter: regex-or-scalar)`
-- **Returns**: no value; replaces the named explicit array target.
+- **Returns**: replaces the named explicit array target. Lua value-position calls also return an independent updated Array; other backend return forms remain under review.
 - **Behavior**: Uses the same literal, regex, Unicode-empty-delimiter, and empty-field policy as pure
-  `split(source, delimiter)`, then stores a copied typed array. The source scalar is not mutated.
+  `split(source, delimiter)`, then stores a copied typed array. The source scalar is not mutated. Lua preserves false as delimiter text "0", so `split(parts,"a0b",false)` stores `["a","b"]`.
 - **Boundary**: Three arguments select target mutation; two arguments remain the pure split expression. An
   ordinary dropped split call is simply a discarded pure expression.
 
@@ -808,11 +808,11 @@ dispatch rule.
 
 ### `split(target, source, delimiter)`
 - **Signature**: `split(target, source, delimiter: regex-or-scalar)`
-- **Returns**: no value; mutates the named array target.
+- **Returns**: replaces the named array target. Lua value-position calls also return an independent updated Array; other backend return forms remain under review.
 - **Behavior**: Splits `source` on `delimiter` and replaces `target` with the resulting list. Regex delimiters
-  split by regex match; scalar delimiters split literally.
+  split by regex match; scalar delimiters split literally. In Lua, false converts to "0": `parts=["old"]; updated=split(parts,"a0b",false); parts+="tail"` leaves `updated` as `["a","b"]` and `parts` as `["a","b","tail"]`. Source evaluates before the delimiter, once each.
 - **Boundary**: This statement-style array pipeline helper is separate from pure `split(value, delim)`, which
-  returns an array value for expression and receiver-chain use.
+  returns an array value for expression and receiver-chain use. Mutable split requires three arguments; a two-argument call remains pure and does not replace its first variable.
 
 ### `split_each(arr, delim)`
 - **Signature**: `split_each(arr: array, delim: regex-or-scalar)`

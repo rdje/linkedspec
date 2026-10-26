@@ -1,6 +1,6 @@
 ---
 id: lua-interpreter-helper-reading-and-false-delimiter-gap
-title: Lua false delimiters: receiver join repaired, mutable split remains
+title: Lua false delimiters: bounded join and mutable split repairs
 answers:
   - what did Lua startup reading group eight cover
   - does Lua receiver join_values preserve a false delimiter
@@ -10,15 +10,15 @@ answers:
   - which focused controls support Lua helper and capture reading
   - why does the public selector checker reject the existing Julia example
 date: 2026-10-26
-status: join repaired on available hosts; mutable split2.9.1.1 and full admission open
+status: bounded fixes checked on available hosts; declared/full admission open
 tags: [lua, reading, helpers, delimiter, arrays, strings, captures]
-evidence: "Historical reading1.8 at pinned Git below; TYPE23.3.5.5 fixes receiver join false with literal/computed focused controls. Mutable split remains2.9.1.1."
+evidence: "TYPE23.3.5.5 join and LUA2.9.1.1 split repairs; historical reading at pinned Git below."
 reverify:
-  - "bash tools/run_lua_project_data.sh puc lua/test/joined_string_receivers_test.lua"
-  - "bash tools/run_lua_project_data.sh luajit lua/test/joined_string_receivers_test.lua"
+  - "bash tools/run_lua_project_data.sh puc lua/test/mutable_split_false_delimiter_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/mutable_split_false_delimiter_test.lua"
 ---
 
-Current join repair defaults only for absent expressions, preserving evaluated false through scalar conversion and once-only evaluation. Focused native/generated-plan/fresh-emitted checks pass on available PUC5.5.1/LuaJIT; mutable split is the next owned repair. Declared5.4/full admission remain open. Historical reading/five replay commands are exact at Git5856cfcb630f08df2ff9532241c38a78e6138de1; the body below preserves September12 context, not ordinary-feature replay instructions.
+Both repairs preserve evaluated false (text0), once-only evaluation and copies. Focused native/generated-plan/fresh-emitted plus joined checks pass on available PUC5.5.1/LuaJIT. Mutable split requires3 arguments;2-argument split is pure. Its returned Array survives later target mutation. Declared5.4/full admission remains2.9.2. Historical reading/five replay commands are exact at Git5856cfcb630f08df2ff9532241c38a78e6138de1; below is September12 context, not replay instructions.
 
 # Physical reading
 

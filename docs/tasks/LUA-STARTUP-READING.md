@@ -1234,37 +1234,53 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.2.9`
-  Status: `active` / joined receiver repaired; mutable split/admission remain
+  Status: `active` / bounded delimiter repairs implemented; declared/full admission remains
   Goal: Preserve explicitly false delimiters in receiver join and mutable split as their pure function equivalents do.
   Evidence: Reading .1.8 runs both native hosts: join_values(false,["a","b"]) gives a0b while ["a","b"].join_values(false) gives ab; split("a0b",false) gives["a","b"] while split(parts,"a0b",false) stores["a","0","b"]. Matching true/0/string/empty controls agree. Interpreter1930-1931 and2260-2261 use an and/or empty-string fallback that replaces an evaluated false argument before shared scalar conversion. Canonical function/receiver and pure/mutable policies require the same delimiter semantics.
   Children: `.2.9.1`, `.2.9.2`
   Dependencies: Startup .3/.4/.5 and existing declared-runtime repair .2.2 for supported PUC proof.
   Acceptance: Default only for an absent delimiter expression, preserve false through scalar conversion, evaluate explicit delimiter expressions once and retain current pure/mutable/receiver result and copy behavior. Keep invalid iteration-option repair .2.8 separate because false is valid here.
-  Verification: Partial bounded join proof under TYPE-REFERENCE-BOOK.1.2.23.3.5.5 passes on available PUC5.5.1/LuaJIT; remaining mutable split and declared/full carrier admission stay open. Earlier plan: `pending`; exact native replay and paired controls are owned by docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md.
+  Verification: Bounded join TYPE23.3.5.5 and mutable split2.9.1.1 focused checks pass on available PUC5.5.1/LuaJIT; declared5.4/full carrier admission stays2.9.2. Earlier plan: `pending`; exact native replay and paired controls are owned by docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md.
   Commit: `pending`
-  Partial implementation: TYPE-REFERENCE-BOOK.1.2.23.3.5.5 fixes only receiver join false with literal/computed native/generated-plan/fresh-emitted controls. Ordinary join arity follows newer contract23.2.4 (exactly one delimiter); omitted-default preservation remains applicable to other existing routes. Director feature-first bounded proof does not satisfy the older declared-runtime/admission prerequisites.
+  Bounded implementation: TYPE23.3.5.5 repairs join and2.9.1.1 repairs mutable split, with literal/computed false native/generated-plan/fresh-emitted controls. Ordinary join requires one delimiter; mutable split requires three arguments and two-argument split remains pure. Director feature-first proof does not satisfy older declared-runtime/full admission prerequisites.
 
 - ID: `LUA-STARTUP-READING.2.9.1`
-  Status: `active` / joined receiver repaired; mutable split/admission remain
+  Status: `active` / bounded delimiter repairs implemented; declared/full admission remains
   Goal: Correct the two delimiter expression fallbacks without changing helper semantics.
   Scope: evaluate_array_values receiver join and evaluate_mutable_split in lua/src/linkedspec/interpreter.lua; focused function/receiver and pure/mutable tests plus user guidance.
   Dependencies: Parent .2.9 prerequisites.
   Acceptance: Show both false cases RED/GREEN on supported hosts; retain omitted/true/zero/string/empty delimiters, exact source/target values and detached results. Preserve single evaluation for a computed false delimiter and run interpreter syntax checks without adding top-level locals unnecessarily.
-  Verification: Partial bounded join proof under TYPE-REFERENCE-BOOK.1.2.23.3.5.5 passes on available PUC5.5.1/LuaJIT; remaining mutable split and declared/full carrier admission stay open. Earlier plan: `pending`
+  Verification: Bounded join TYPE23.3.5.5 and mutable split2.9.1.1 focused checks pass on available PUC5.5.1/LuaJIT; declared5.4/full carrier admission stays2.9.2. Earlier plan: `pending`
   Commit: `pending`
-  Partial implementation: TYPE-REFERENCE-BOOK.1.2.23.3.5.5 fixes only receiver join false with literal/computed native/generated-plan/fresh-emitted controls. Ordinary join arity follows newer contract23.2.4 (exactly one delimiter); omitted-default preservation remains applicable to other existing routes. Director feature-first bounded proof does not satisfy the older declared-runtime/admission prerequisites.
+  Bounded implementation: TYPE23.3.5.5 repairs join and2.9.1.1 repairs mutable split, with literal/computed false native/generated-plan/fresh-emitted controls. Ordinary join requires one delimiter; mutable split requires three arguments and two-argument split remains pure. Director feature-first proof does not satisfy older declared-runtime/full admission prerequisites.
   Children: `LUA-STARTUP-READING.2.9.1.1` owns the remaining mutable split fallback.
 
 - ID: `LUA-STARTUP-READING.2.9.1.1`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `a10eefb06da372e22ec0ec45696229eff09009b2`; joined slice is committed and the tree is clean before this task-tree switch.
   Goal: Reverify and repair the remaining mutable-split false-delimiter fallback on available hosts.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.5.5 committed cleanly.
   Schedule: Next small feature/defect slice before container-default TYPE23.2.5; parent declared-runtime/full admission prerequisites stay with2.9.2.
   Reproduction target: Compare split("a0b",false) with split(parts,"a0b",false); historical native result differs, while true/zero/String controls agree. Probe current public behavior before assuming it persists.
   Owned paths: Lua mutable split helper, one small public native/generated-plan/fresh-emitted fixture and runner registration, current delimiter guidance/fact/task/live records.
-  Planned tier: `focused`; declare exact public probe and small regression at activation.
-  Claim verification: none: Unactivated bounded repair assessment; no support/completeness measurement.
+  Verification tier: `focused`
+  Focused checks: Public Lua pure/mutable false delimiter probe, one small native/generated-plan/fresh-emitted mutable-split fixture plus direct joined fixture on available PUC5.5.1/LuaJIT with matching native products, loadfile compilation, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded implementation under director feature-first cadence; declared5.4 and full independent carrier admission remain2.9.2 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/copy regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public reproduction / root: Pure split("a0b",false) gives [a,b], while mutable result/target are [a,0,b]. evaluate_mutable_split uses expr.args[3] and evaluate_expr(...) or empty text after validating the target; evaluated false is replaced before shared scalar conversion. Own the remaining fallback repair here.
+  Documentation defect / scoped repair: The helper catalog says mutable split returns no value, but the public Lua value-position route returns the updated Array through store_array_mutation. Qualify the entry with observed Lua behavior and leave broader per-backend result reconciliation with TYPE-REFERENCE-BOOK.1.2.1.4; do not infer other backend results.
+  Fixture correction / rejected assumption: The first omitted-delimiter control incorrectly expected a two-argument split to mutate its first variable. Both original and fixed public results retain [old]; evaluate_call and execute_array_split_statement select mutable split only with three arguments, matching the catalog signature. Correct that oracle to unchanged target; do not credit it as product RED. Independent literal/computed false rows remain valid RED and turn GREEN after the fallback fix.
   Acceptance: Default only for absent delimiter expressions, retain explicit false and once-only source/delimiter effects, target replacement and detached returned arrays. Preserve pure/receiver/current join behavior and omitted/true/zero/String/empty controls. Match fresh native products on available PUC5.5.1/LuaJIT, compile/quick-check/docs/commit; full declared5.4/all-carrier admission stays separate.
+
+  Completion: Replace the evaluated truthy fallback with explicit argument presence; preserve false as delimiter text0 and once-only ordered evaluation. Register the focused public fixture; qualify Lua mutable result/copy semantics in the catalog.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public pure/mutable probe returns [a,b] versus [a,0,b]; retained literal/computed false rows fail before repair. The initially wrong two-argument oracle is corrected and receives no defect credit.
+  - [x] ROOT CAUSE (WHY + WHERE): evaluate_mutable_split replaces an evaluated false through and/or-empty before shared scalar conversion. Public mutable dispatch requires exactly three arguments.
+  - [x] FIX: Test expression presence explicitly and evaluate the delimiter once. Shared split and store_array_mutation remain unchanged.
+  - [x] ADDRESSED (verified): New mutable-split fixture PASS native/generated-plan/fresh-emitted on available PUC5.5.1/LuaJIT; literal/computed false agree with pure split, source precedes delimiter (SD), targets update and returned Arrays survive later target mutation.
+  - [x] NO REGRESSION: True/zero/String/empty delimiter, two-argument pure control, current joined String fixture and interpreter/runner loadfile checks PASS on both hosts with matching native products. Declared5.4/all-carrier admission remains2.9.2.
+  - [x] LOCKSTEP: Catalog, current delimiter/array facts and derived map, live/task/resume docs align; book and fast memory/cadence/diagnosis/history/diff checks pass. Commit before container-default23.2.5 activation.
+  Commit: `LUA-STARTUP-READING.2.9.1.1 - preserve false mutable split delimiters`.
 
 - ID: `LUA-STARTUP-READING.2.9.2`
   Status: `pending`
@@ -2282,7 +2298,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.2.9.1.1` | `pending` | Reverify/repair remaining mutable-split false delimiter after targeted-checked joined-result rollout. Full reading/declared-target admission stay separate. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.5` | `pending` | Bounded delimiter repairs are targeted-checked; assess container-valued defaults. Declared/full Lua admission remains2.9.2. |
 
 The earlier integration-guide frontier is historical and byte-recoverable at Git5856cfcb630f08df2ff9532241c38a78e6138de1. Current MEMORY/AGENTS and feature-first directives govern resumption; no historical dependency-build assumptions override the RGX/PGEN black-box boundary.
 

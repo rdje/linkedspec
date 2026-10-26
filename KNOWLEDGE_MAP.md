@@ -14691,11 +14691,11 @@ _Lua callable and statement reading isolates false whole-child push loss_
 - **source:** [`docs/knowledge/lua-interpreter-callable-reading-and-child-false-gap.md`](docs/knowledge/lua-interpreter-callable-reading-and-child-false-gap.md)
 
 ### lua-interpreter-helper-reading-and-false-delimiter-gap
-_Lua false delimiters: receiver join repaired, mutable split remains_
+_Lua false delimiters: bounded join and mutable split repairs_
 - **answers:** what did Lua startup reading group eight cover | does Lua receiver join_values preserve a false delimiter | does Lua mutable split preserve a false delimiter | which task fixes Lua false delimiter function receiver parity | why did the Lua sorted harray reading fixture collapse its keys | which focused controls support Lua helper and capture reading | why does the public selector checker reject the existing Julia example
-- **date:** 2026-10-26 · **status:** join repaired on available hosts; mutable split2.9.1.1 and full admission open
-- **evidence:** `Historical reading1.8 at pinned Git below; TYPE23.3.5.5 fixes receiver join false with literal/computed focused controls. Mutable split remains2.9.1.1.`
-- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/joined_string_receivers_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/joined_string_receivers_test.lua`
+- **date:** 2026-10-26 · **status:** bounded fixes checked on available hosts; declared/full admission open
+- **evidence:** `TYPE23.3.5.5 join and LUA2.9.1.1 split repairs; historical reading at pinned Git below.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/mutable_split_false_delimiter_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/mutable_split_false_delimiter_test.lua`
 - **source:** [`docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md`](docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md)
 
 ### lua-interpreter-json-reading-and-option-table-gap

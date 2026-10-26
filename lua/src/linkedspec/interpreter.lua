@@ -2305,8 +2305,10 @@ local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state
   typed_source.receiver_mutation.reject_write(engine, ctx, target.name, "helper:split", expr.source_span)
   array_binding_for_mutation(ctx, target.name)
   local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
-  local delimiter = expr.args[3] and
-    evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state) or ""
+  local delimiter = ""
+  if expr.args[3] ~= nil then
+    delimiter = evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state)
+  end
   local result = evaluate_pure_string_helper(engine, "split", { source, delimiter })
   local _, storage = lookup_binding(ctx, target.name)
   return store_array_mutation(ctx, target, storage, result)
