@@ -20,7 +20,7 @@
 
 ## Current Frontier
 
-Current feature selection (October26): `.61.1` Rust scalar source-null transformations are implemented/targeted-checked after the selected-value backend rollout; `.61.2` predicates/empty-old replacement is next, followed by copy-arity23.3.2 and signature inventory. Full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October26): `.61.1` source-null and `.61.2` scalar operand/predicate/empty-pattern repairs are implemented/targeted-checked after selected-value backend rollout; copy-arity23.3.2 and signature inventory are next. Broad61.3, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
 
 Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
 and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only

@@ -1,6 +1,6 @@
 ---
 id: rust-scalar-helper-null-and-empty-drift
-title: "Rust scalar helpers lose undefined values and apply host empty-string behavior"
+title: "Rust scalar null and empty-input boundaries"
 answers:
   - "does Rust length preserve undef"
   - "why does Rust trim undef return an empty string"
@@ -10,13 +10,13 @@ answers:
   - "is null an undefined literal in the LinkedSpec DSL"
   - "which task owns scalar helper null and empty semantics"
 date: 2026-10-26
-status: seven source-null transformations repaired under61.1; predicates/empty-old61.2 and broad61.3 open
+status: bounded null/empty repairs61.1/.61.2 complete; broad61.3 admission open
 tags: [rust, perl, scalar, string, undef, null, helpers, parity]
 evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3 compares five scalar vectors on primary Rust and public Perl Get, captures all lowering/generated text and descriptors, and independently checks exact result kinds and error absence. Literal undef and unbound name null reproduce the same differences; the empty-string transformation control agrees."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation --test scalar_predicate_boundaries"
 ---
 
-Current: SESSION-STARTUP-READING.61.1 guards undefined sources before text coercion for all seven transformations (trim was repaired under23.3.1.2). The retained scalar_null_propagation fixture distinguishes null/empty/zero/false, Unicode/array length and eager argument order on native/restored/generated-plan execution. Predicates/empty-old61.2 and broad61.3 remain open. Historical vectors below are unchanged.
+Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves original values/kinds for empty old/prefix/suffix and unmatched affixes. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
 
 # Historical September 7 inputs and outputs
 
@@ -62,9 +62,9 @@ transformations, false `matches` for undefined input, and an unchanged value whe
 the other three predicates' undefined-input behavior.
 
 Rust `Engine::call_helper` historically used `RuntimeValue::to_str` before these
-operations. Undefined became empty text and length zero; still-open empty-prefix,
+operations. Undefined became empty text and length zero; empty-prefix,
 empty-suffix, empty-substring and `/^$/` predicates then succeed.
-The replacement arm calls host `str::replace` with an empty old string,
+The old replacement arm called host `str::replace` with an empty old string,
 which inserts the replacement at character boundaries. This helper behavior is
 separate from the strict `cat` scalar-to-text authority.
 
@@ -79,7 +79,7 @@ array controls. `.61.2` owns predicates and empty-old replacement.
 `.61.3` owns supported carriers, remaining-backend probes, permanent recurrence
 and rendered public/canonical closure after prerequisites. Other argument
 positions, nonempty Unicode inputs and generated execution were not remeasured
-here. The three passing neutral checks (logical, scalar numeric, typed source)
+in that historical campaign. The three neutral checks (logical, scalar numeric, typed source)
 do not close these string-helper discrepancies.
 
 # Retained evidence

@@ -9596,13 +9596,25 @@ impl Engine {
                 Ok(RuntimeContext::project_capture_group_map(&ctx.match_named))
             }
             // ── Scalar transforms ──
-            // These helpers propagate an undefined source before text coercion.
+            // Reject undefined scalar operands before text coercion.
             // Arguments have already been evaluated, preserving their effects.
-            "length" | "trim" | "lowercase" | "uppercase" | "replace_substr" | "rm_prefix"
-            | "rm_suffix"
+            "length" | "trim" | "lowercase" | "uppercase"
                 if matches!(args.first(), Some(RuntimeValue::Undef)) =>
             {
                 Ok(RuntimeValue::Undef)
+            }
+            "replace_substr" | "rm_prefix" | "rm_suffix"
+                if args.iter().any(|arg| matches!(arg, RuntimeValue::Undef)) =>
+            {
+                Ok(RuntimeValue::Undef)
+            }
+            "starts_with" | "ends_with" | "contains_substr"
+                if args.iter().any(|arg| matches!(arg, RuntimeValue::Undef)) =>
+            {
+                Ok(RuntimeValue::Number(0.0))
+            }
+            "matches" if matches!(args.first(), Some(RuntimeValue::Undef)) => {
+                Ok(RuntimeValue::Bool(false))
             }
             "length" => {
                 if let Some(arg) = args.first() {
@@ -9636,7 +9648,11 @@ impl Engine {
                     let s = args[0].to_str();
                     let from = args[1].to_str();
                     let to = args[2].to_str();
-                    Ok(RuntimeValue::Scalar(s.replace(&from, &to)))
+                    Ok(if from.is_empty() {
+                        args[0].clone()
+                    } else {
+                        RuntimeValue::Scalar(s.replace(&from, &to))
+                    })
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
                 }
@@ -9645,9 +9661,12 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let prefix = args[1].to_str();
-                    Ok(RuntimeValue::Scalar(
-                        s.strip_prefix(&prefix).unwrap_or(&s).to_string(),
-                    ))
+                    Ok(match s.strip_prefix(&prefix) {
+                        Some(stripped) if !prefix.is_empty() => {
+                            RuntimeValue::Scalar(stripped.to_string())
+                        }
+                        _ => args[0].clone(),
+                    })
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
                 }
@@ -9656,9 +9675,12 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let suffix = args[1].to_str();
-                    Ok(RuntimeValue::Scalar(
-                        s.strip_suffix(&suffix).unwrap_or(&s).to_string(),
-                    ))
+                    Ok(match s.strip_suffix(&suffix) {
+                        Some(stripped) if !suffix.is_empty() => {
+                            RuntimeValue::Scalar(stripped.to_string())
+                        }
+                        _ => args[0].clone(),
+                    })
                 } else {
                     Ok(args.first().cloned().unwrap_or(RuntimeValue::Undef))
                 }

@@ -467,17 +467,28 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   - [x] LOCKSTEP: Public examples, canonical fact/map, selected-value contract, indexed task frontier and live handoff updated; book and fast continuity/history/diff guards pass before landing.
   Commit: `SESSION-STARTUP-READING.61.1 - preserve Rust scalar source nulls`; trim prerequisite remains TYPE-REFERENCE-BOOK.1.2.23.3.1.2.
 - ID: `SESSION-STARTUP-READING.61.2`
-  Status: `pending`
+  Status: `done`
+  Activation: clean `2c0a7c88e9961705f13f34a1d1297a3cb369e8d8`; focused null-subject predicates and empty-old replacement after61.1.
+  Verification tier: `focused`
+  Focused checks: Small public Perl boundary control; locked/offline Rust scalar_predicate_boundaries and direct scalar_null_propagation tests; first-party rustfmt, book rendering and fast continuity/history/diff guards.
+  Canonical trigger: None for this bounded implementation under the director feature-first phase; broader61.3 admission and eventual clean push proof remain separate.
+  Claim verification: none: deterministic authored boundary regression; no quantified corpus, exhaustive or portable admission measurement.
   Goal: Audit and repair adjacent scalar predicate and empty-pattern boundaries.
   Dependencies: .61.1.
   Acceptance: Compare documented null predicates and empty old/prefix/suffix behavior against public Perl,
     retaining exact boolean/numeric result kinds and failure/argument policies. Own bounded corrections
     before implementation; do not bless all values merely because a host string conversion accepts them.
-  Verification: `pending` repair — literal-undef and unbound-name twins return ["XaXbX",1,1,1,true] on Rust
-    versus ["ab",0,0,0,0] on Perl for empty-old replace_substr plus starts_with, ends_with, contains_substr
-    and matches against empty boundaries. Generated Perl retains defined guards and the empty-needle branch;
-    Rust coerces undef to empty text and delegates empty-old replacement directly to str::replace.
-  Commit: `pending`
+  Boundary intake: MethodLowering's public helper paths guard undefined needle/replacement/prefix/suffix operands too and return the original source for empty old/prefix/suffix. Include these adjacent boundaries in the small public fixture before deciding repairs; do not extend global coercion or regex admission.
+  Identity follow-up: The same literal-removal contract returns the original source when a nonempty affix does not match. Add numeric zero controls before closing this slice; the earlier61.1 local string-zero controls did not establish cross-backend identity.
+  Verification: PASS October26 locked/offline Rust scalar_predicate_boundaries and direct scalar_null_propagation tests after actual RED; public Perl Get independently confirms the shared boundary fixture's values. Rust retains numeric substring flags and boolean matches. Compilation/rustfmt/book/fast continuity checks pass; broad .61.3 remains deferred.
+  Acceptance Checklist:
+  - [x] REPRODUCE / ISSUE: Shared public fixture reproduces true null predicates, inserted empty-old replacements, lost undefined operands and numeric zero changed to text for empty removals. Public Perl Get returns authored boundary values with no last_error; retained project-local scalar61.2-red/perl logs distinguish these failures.
+  - [x] ROOT CAUSE (WHY + WHERE): Engine::call_helper erases undefined operands via to_str, then applies host string predicates/replacement/removal. MethodLowering's generated-source helper paths retain defined guards and empty-operand source identity.
+  - [x] FIX: Guard undefined required literal operands and null predicate subjects before coercion; preserve numeric versus boolean result kinds. Empty old/prefix/suffix and unmatched affixes return the original cloned source. Keep regex admission and global conversion unchanged.
+  - [x] ADDRESSED (verified): Authored native/restored/generated-plan fixture PASS for helper/receiver nulls, undefined extra operands, empty text/patterns and original numeric identity; matches stays boolean. The extra unmatched-affix numeric control is RED before repair and GREEN afterward; zero/false retain their original kinds. Eager SNR effects still run once.
+  - [x] NO REGRESSION: Defined Unicode/literal metacharacter, prefix/suffix and zero/false controls plus direct scalar_null_propagation cargo test PASS; no exhaustive matrix or dependency implementation inspection.
+  - [x] LOCKSTEP: Public boundary examples, canonical fact/map, selected-value contract, task index and live handoff synchronized; book/history/fast continuity/diff checks pass before landing.
+  Commit: `SESSION-STARTUP-READING.61.2 - preserve Rust scalar operand boundaries`.
 - ID: `SESSION-STARTUP-READING.61.3`
   Status: `pending`
   Goal: Close scalar-helper carrier recurrence and public no-drift.

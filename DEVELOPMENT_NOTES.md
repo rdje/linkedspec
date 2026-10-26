@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — SESSION-STARTUP-READING.61.2 — operand identity at empty boundaries
+
+Public Perl Get on the shared fixture confirms both undefined operand guards and source identity for empty old/prefix/suffix and unmatched affixes. Rust previously erased null with to_str and used host replacement, producing boundary insertions and text instead of numeric zero. Narrow helper guards and cloned-source empty branches repair those cases without changing regex admission, eager evaluation, numeric substring flags or boolean matches. The small authored Rust fixture passes native/restored/generated-plan execution after actual RED; the preceding source-null test stays green. Public examples and canonical/current records agree; broader carrier/backend admission remains61.3-owned and deferred while feature implementation continues.
+
 ## 2026-10-26 — SESSION-STARTUP-READING.61.1 — null before text conversion
 
 Engine::call_helper now shares a source-null guard across seven documented transformations before RuntimeValue::to_str can erase undefined identity. Trim was already repaired during selected-value dispatch. A retained authored vector distinguishes absent receiver/null helper sources from empty text and zero/false, checks Unicode/array counts and confirms eager SNR operand order. Native/restored/generated-plan and direct selected-value checks pass after actual RED; no global coercion change or exhaustive admission is claimed. Canonical scalar fact and current task/book/continuity records are synchronized; predicates and empty-old replacement remain the next bounded repair.

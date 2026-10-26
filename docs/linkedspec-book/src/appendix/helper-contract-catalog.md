@@ -355,43 +355,43 @@ dispatch rule.
 - **Regex flags**: `i`, `m`, `s`, and `x` affect compilation. Operation-only `g` and Perl compile-once `o` are
   accepted compile-time no-ops. Unknown flags or invalid patterns return false.
 - **Edge cases**: Returns false for undef input.
-- **Example**: over `/(\w+)/`, `matches(entry_group(0), /^\d+$/)` returns `[1]` on `123` and `[0]` on `abc`.
+- **Examples**: over `/(\w+)/`, `matches(entry_group(0), /^\d+$/)` returns `[1]` on `123` and `[0]` on `abc`; `matches(undef, /^$/)` is false, while `matches("", /^$/)` is true.
 
 ### `starts_with(s, prefix)`
 - **Signature**: `starts_with(value: scalar, prefix: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value starts with the exact prefix string.
+- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text.
 - **Example**: over `/(\S+)/`, `starts_with(entry_group(0), "foo")` on `foobar` → `[1]`.
 
 ### `ends_with(s, suffix)`
 - **Signature**: `ends_with(value: scalar, suffix: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value ends with the exact suffix string.
+- **Behavior**: Returns true if the value ends with the exact suffix string. Undefined value or suffix returns false; an empty suffix matches every defined value, including empty text.
 - **Example**: over `/(\S+)/`, `ends_with(entry_group(0), "bar")` on `foobar` → `[1]`.
 
 ### `contains_substr(s, needle)`
 - **Signature**: `contains_substr(value: scalar, needle: scalar)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the value contains the needle as a substring.
+- **Behavior**: Returns true if the value contains the needle as a substring. Undefined value or needle returns false; an empty needle matches every defined value, including empty text.
 - **Example**: over `/(\S+)/`, `contains_substr(entry_group(0), "oob")` on `foobar` → `[1]`.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`
 - **Returns**: scalar
-- **Behavior**: Replaces all literal occurrences of `old` with `new`. Returns undef if value is undef. This is a **literal** replacement, not a regex substitution.
-- **Edge cases**: If `old` is empty, returns the value unchanged.
+- **Behavior**: Replaces all literal occurrences of `old` with `new`. Returns undef if any operand is undef. This is a **literal** replacement, not a regex substitution.
+- **Edge cases**: If `old` is empty, returns the original value and kind: `replace_substr("ab", "", "X")` → `"ab"`, `replace_substr(0, "", "X")` → numeric `0`. Operands still evaluate once from left to right.
 - **Example**: over `/(\S+)/`, `replace_substr(entry_group(0), "-", "_")` on `a-b-c` → `["a_b_c"]`.
 
 ### `rm_prefix(s, prefix)`
 - **Signature**: `rm_prefix(value: scalar, prefix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the prefix from the value if present. Returns the value unchanged if the prefix does not match. Returns undef if value is undef.
+- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef.
 - **Example**: over `/(\S+)/`, `rm_prefix(entry_group(0), "lib")` on `libparser` → `["parser"]`.
 
 ### `rm_suffix(s, suffix)`
 - **Signature**: `rm_suffix(value: scalar, suffix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the suffix from the value if present. Returns the value unchanged if the suffix does not match. Returns undef if value is undef.
+- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef.
 - **Example**: over `/(\S+)/`, `rm_suffix(entry_group(0), ".spec")` on `parser.spec` → `["parser"]`.
 
 ### `substr(s, start, length?)`

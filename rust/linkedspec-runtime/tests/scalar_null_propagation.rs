@@ -36,7 +36,7 @@ fn scalar_transformations_preserve_null_and_defined_controls() {
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
         [0, "", "", "", "", "", ""],
-        [1, 1, "0", "0", "0", "zero", "0", "0"],
+        [1, 1, "0", "0", "0", "zero", 0, false],
         [2, 1, "ος", "STRASSE", "🙂-b-🙂", "fixe", "ca"],
         [null, "SNR"]
     ]);

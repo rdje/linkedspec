@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## SESSION-STARTUP-READING.61.2 — preserve Rust scalar operand boundaries
+
+Reject undefined operands in literal replacements/removals and substring predicates; matches rejects null subjects while retaining boolean results. Empty old/prefix/suffix and unmatched affixes preserve the original value and kind. A shared small public fixture agrees with Perl boundary controls and passes Rust native/restored/generated-plan execution after actual RED, including eager order and defined Unicode/literal/zero/false controls. Direct source-null regression, compilation/rustfmt/book and fast continuity checks pass. Copy-arity23.3.2 is next; broad61.3 remains deferred.
+
 ## SESSION-STARTUP-READING.61.1 — preserve Rust scalar source nulls
 
 Guard undefined sources before text conversion for length/trim/case conversion/literal replacement/prefix and suffix removal. Defined empty text, zero/false, Unicode and array length keep their behavior; argument effects still run once in order. A small authored native/restored/generated-plan regression reproduces the six remaining failures before repair and passes afterward, alongside selected-value coverage. Locked/offline compilation, rustfmt, book and fast continuity checks pass. Predicates/empty-old61.2 is next; broad61.3 proof stays deferred.
