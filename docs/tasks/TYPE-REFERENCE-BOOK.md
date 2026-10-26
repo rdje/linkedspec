@@ -3585,7 +3585,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Existing and/or/not free helper results remain actual Bool, typed truthiness/eager once-only operands unchanged. Compatible scalar/text/generic/default/explicit-container flow and source snapshots work; invalid logical source arity retains typed pre-effect errors. No new logical methods, numeric Bool coercion or full domain/context/portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1`
-  Status: `active` / primary implementation committed; rejection-effect follow-up17.1.1 pending
+  Status: `completed` / primary implementation and rejection-effect follow-up17.1.1 verified
   Goal: Independently assess and implement/confirm Perl ordinary logical Boolean result continuations.
   Dependencies: .23.2.17.
   Acceptance: Follow logical-results.md, preserving actual Bool/strict numeric rejection, eager typed truthiness/source snapshots/free signatures, defaults/explicit Array-Hash bridges/scalar boundaries and pre-effect typed source arity errors. Public producer-first native/generated RED/GREEN and small direct checks/docs/commit; full admission separate.
@@ -3612,10 +3612,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION:26 current top-level checks across new12, direct logical8 and literal-default6 pass; source/new-test syntax clean. Existing logical with/typed sites/lazy contrast and default kinds remain. Additional new-route retired authored Hash-arrow assertion passes; no compatibility syntax widening or whole suite/portable admission.
   - [x] LOCKSTEP: Shared spec/expected/new test, frozen contract/current qualified catalog and canonical logical fact/map plus task/live/resume align. New Perl fixture registration remains mandatory23.4.1 before admission/push. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Independent Rust17.2 next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1 - continue Perl logical Boolean results`.
-  Follow-up: Rust17.2 intake independently exposes discarded logical source effects on incompatible consumer rejection. Immediate P1 child17.1.1 owns the new17.1 regression; primary retained fixture remains valid but does not cover this rejected-effect path.
+  Follow-up repaired: Rust17.2 intake exposed discarded source effects before incompatible rejection. Child17.1.1 now retains LR/LRC/S with the new rejected-effect regression; primary shared result fixture stays green.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 immediate after clean Rust17.2, before Dart17.3.
   Goal: Preserve evaluated logical sources/prefix effects when a later incompatible container consumer rejects.
   Dependencies: Primary Perl17.1 implementation; finish/commit current Rust17.2 first.
@@ -3627,6 +3627,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public native/fresh RED/GREEN rejection-effects plus current logical result regression and syntax/docs/continuity checks.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regression, no population/completeness measurement.
+
+  Activation: clean `980c3c9ae171e7f4f17d885aaf78fca1759a44ee`; Rust17.2 committed, brief0/tree clean.
+  Verification tier: `focused`
+  Focused checks: Shared native/fresh rejection-effect RED/GREEN, existing logical result/error regression and Perl-only malformed consumer preflight control, syntax/book/history/staged continuity guards.
+  Canonical trigger: None for immediate bounded regression repair under director feature-first cadence; full admission separate.
+  Claim verification: none: deterministic authored regression/preservation controls, no population/completeness measurement.
+
+  Completion: Capture the prior current_expr before applying each link; terminal scalar rejection now evaluates that prior emitted source/prefix once in scalar context, then returnsundef. It does not lower/evaluate incompatible consumer operands. Malformed-shape preflight and typed logical source arity remain unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New shared native/fresh rejection regression RED returns empty order Strings instead ofLR/LRC/S; malformed sorted(1) control already gives[null,0]. Retained public comparison/substitution shows the whole chain becameundef, discarding source effects.
+  - [x] ROOT CAUSE (WHY + WHERE): Newly added17.1 logical loop overwrites current_expr with the selected dispatch rejection before returning a constantundef. The previous logical/cat prefix remains unevaluated. This is our new continuation branch, not RuntimeLogical or emitter behavior.
+  - [x] FIX: Preserve previous source_expr, bind it once in scalar context before terminal null rejection. No producer/truthiness/parser/schema/free-helper/domain or shared consumer-shape policy change.
+  - [x] ADDRESSED (verified): Native/fresh shared bad Array/Hash/take fields returnnull and preserve LR/LRC/S; incompatible take operandA is skipped. The valid source/prefix runs once with its prior captured result. Perl-only malformed sorted(1) retains source-effect0.
+  - [x] NO REGRESSION:24 focused top-level checks across new12 and current logical result/error12 pass; module/new-test syntax clean. Five malformed logical source cases retain typed pre-effect errors; raw Bool/false/default/bridge/source kinds and retired Hash-arrow assertion stay green. No whole suite/admission.
+  - [x] LOCKSTEP: New retained Perl consumer of already checked shared rejected-effects fixture, frozen current contract and qualified catalog, logical/Rust facts/map plus task/live/resume align. Both new Perl logical tests remain mandatory23.4.1 registration before admission/push. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Parent17.1 closes; Dart17.3 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1 - preserve rejected logical source effects`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.17.2`
   Status: `completed`
@@ -3787,7 +3803,7 @@ Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua deli
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` | `pending` | Preserve Perl logical source effects before incompatible consumer rejection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` | `pending` | Independently assess and implement Dart logical Boolean result continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

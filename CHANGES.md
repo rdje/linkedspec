@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1 — preserve rejected logical source effects
+
+Perl17.1.1 repairs its newly introduced discarded-source regression: terminal scalar rejection binds the previous emitted logical/prefix result once before returningnull, skipping incompatible consumer operands.24 focused native/fresh rejected-effect/current-result/error checks and syntax pass after LR/LRC/S RED. Malformed consumer preflight remains[null,0]; typed source errors, actual Bool/false/default/bridge/source kinds and retired Hash-arrow rejection stay green. Book/facts/task/live align; parent Perl17.1 closes and independent Dart17.3 is next. Full admission separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.17.2 — guard Rust logical Boolean results
 
 Rust logical producers, bridges, eager Bool/strict numeric-null and typed errors already work. Known logical call sources now enter shared selected scalar dispatch after Array[] boundary RED. Six focused native/restored/in-process-plan producer/shared/error/rejected-effect/default/named neutral tests and offline compilation/rustfmt pass. Dependent public check found newly introduced Perl17.1 dropping source effects before incompatible tails; retained probe/shared LR-LRC-S fixture and immediate P1 Perl17.1.1 own repair next. Book/facts/task/live align; full admission separate.

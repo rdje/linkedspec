@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
+Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 
 ## Latest Completed Slice
 
-Rust logical producers, bridges, eager Bool/strict numeric-null and typed errors already work. Known logical call sources now enter shared selected scalar dispatch after Array[] boundary RED. Six focused native/restored/in-process-plan producer/shared/error/rejected-effect/default/named neutral tests and offline compilation/rustfmt pass. Dependent public check found newly introduced Perl17.1 dropping source effects before incompatible tails; retained probe/shared LR-LRC-S fixture and immediate P1 Perl17.1.1 own repair next. Book/facts/task/live align; full admission separate.
+Perl17.1.1 repairs its newly introduced discarded-source regression: terminal scalar rejection binds the previous emitted logical/prefix result once before returningnull, skipping incompatible consumer operands.24 focused native/fresh rejected-effect/current-result/error checks and syntax pass after LR/LRC/S RED. Malformed consumer preflight remains[null,0]; typed source errors, actual Bool/false/default/bridge/source kinds and retired Hash-arrow rejection stay green. Book/facts/task/live align; parent Perl17.1 closes and independent Dart17.3 is next. Full admission separate.
 
 ## Next Action
 
-Fix immediate P1 Perl17.1.1: logical result loop currently returns undef on incompatible consumer and discards the valid source/prefix expression. Retained public probe gives[null,0] versus nested[[],1]. Evaluate the prior logical/prefix result once before null rejection; skip incompatible consumer operands and preserve malformed-shape/source-arity rules. Reuse logical_rejected_consumer_effects shared LR/LRC/S fixture (Rust passes), small native/fresh/current-result/syntax/docs/commit; then Dart17.3 independently.
+Independently assess Dart logical Boolean producers/shared/rejected-effect/source-error flow17.3 under logical-results.md before production. Preserve real Bool/eager typed truthiness/strict numeric rejection/free signatures and typed source arity errors. Reuse actual-value dispatch; fix confirmed guards only with native/restored/plan producer/shared/error and LR/LRC/S fixtures plus small direct tests/format/fatal analysis/docs/commit; then Julia/Lua17.4-.5. No full suite/matrix or new logical methods.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` — Perl logical Boolean result flow and typed source error repairs targeted-checked; Rust independent assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.17` — Logical Boolean result contract frozen; confirmed Perl bridge/scalar/diagnostic repairs next.
@@ -29,7 +30,6 @@ Fix immediate P1 Perl17.1.1: logical result loop currently returns undef on inco
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.2` — Rust numeric comparison result/shape flow implemented; eight focused tests and twelve shared Perl assertions pass, Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.1` — Perl short numeric comparison results and explicit inter-type bridges implemented;59 focused shared/actual calibration assertions pass, Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.15` — Numeric comparison result transition frozen from public producer/terminal distinctions; independent backend implementations scheduled, Perl next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.14.6` — Lua null Array keys implemented on both available hosts; six bounded source/key/null repairs targeted-checked, numeric comparison result assessment next.
 
 ## History
 

@@ -5097,12 +5097,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($current_expr) && length($current_expr);
    my $current_family = 'scalar_result';
    foreach my $call (@$calls) {
+    my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
      ? $append_array_chain_call->($current_expr, $call)
      : $append_selected_value_chain_call->($current_expr, $call, $current_family);
     return undef unless ref($applied) eq 'ARRAY';
     ($current_expr, $current_family) = @$applied;
-    return 'undef' if $current_family eq 'terminal';
+    return 'do { my $__ls_rejected_logical = '.$source_expr.'; undef }'
+     if $current_family eq 'terminal';
     # The logical source is emitted host code. Finish each composed helper
     # through its existing bridge before another link consumes that result.
     $current_expr = $legacy_method_value_expr->($current_expr);

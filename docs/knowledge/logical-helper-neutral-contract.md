@@ -73,5 +73,7 @@ methods/truth policy or reopened historical5.2 projection admission.
 Rust17.2 adds logical-call scalar dispatch after[]-boundary RED; six focused
 native/restored/plan/direct tests pass without producer/error changes. Its
 rejected-effect control also catches Perl17.1 skipping valid sources before
-incompatible tails; immediate P1 Perl17.1.1 owns LR/LRC/S preservation before
-Dart17.3. No complete result-family admission is claimed.
+incompatible tails. Perl17.1.1 now binds the prior source/prefix once in scalar
+context before null rejection;24 focused native/fresh checks retain LR/LRC/S,
+skip incompatible consumer operands and preserve malformed-shape preflight.
+Dart17.3 is next. No complete result-family admission is claimed.

@@ -109,3 +109,15 @@ and logical_rejected_consumer_effects spec/JSON show the mechanism and expected
 LR/LRC/S/null/no-consumer-operand controls, already passing Rust. Immediate P1
 Perl17.1.1 repairs this newly introduced regression before Dart17.3. Existing
 valid-chain fixture remains passing; it omitted effects before rejected tails.
+
+## Perl rejected-effect repair
+
+17.1.1 fixes the new17.1 regression: when a known incompatible consumer yields
+terminal rejection, bind the previous emitted logical/prefix expression once
+in scalar context before returningnull. Consumer operands remain untouched.
+Shared native/fresh rejection-effect RED loses LR/LRC/S; GREEN retains all three
+and skips take's A operand. Perl-only malformed sorted(1) still rejects before
+source effects.24 focused checks across rejected effects/current logical result
+and error regression plus module/test syntax pass; no truthiness/free/container
+helper normalization. Both new Perl logical tests require23.4.1 registration.
+The temporary rejected-effect limitation is repaired; Dart17.3 is next.

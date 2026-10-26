@@ -44,8 +44,8 @@ proof is in-process generated-plan, not fresh standalone emitted Rust.
 A dependent reference check catches Perl17.1 dropping eager logical source
 side effects on incompatible consumer rejection: public probe gives[null,0]
 versus nested free[[],1]. New retained logical_rejected_consumer_effects fixtures
-pass Rust LR/LRC/S/null/no-consumer-operand controls; immediate P1 Perl17.1.1
-owns repair before Dart17.3. No other backend failure inferred.
+pass Rust LR/LRC/S/null/no-consumer-operand controls. Perl17.1.1 also repairs
+that regression with24 focused native/fresh checks before Dart17.3. No other backend failure inferred.
 
 Historical July logical admission predates inert RuntimeValue::Codeblock;
 construction/invocation now have [[rust-callable-codeblock-literal-state]]. The
