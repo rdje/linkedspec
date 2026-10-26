@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.8 — freeze emptiness result continuations
+
+Public native/fresh probes show stopped fluent emptiness results versus working nested1!, plus the existing producer defect: literal0 text differs from its binding and an empty-Array-yielding block gives wrong0!/SA. MethodLowering marks predicates terminal and its general producer fallback tests host truthiness. Freeze canonical value-based emptiness/result targets, schedule bounded producer repair before flow and independent backend assessments, retaining SESSION16 broader ownership. Production unchanged; syntax/book/fast checks pass.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.5 — continue Lua has_key scalar results
 
 Lua replaces the has_key terminal fence with scalar-result tracking and adds one-key preflight. Native/generated-plan/fresh-emitted has_key and direct index checks pass on available PUC5.5.1/LuaJIT after native fluent-null/SK-only/four-effect RED. Presence numeric0/1, false/null stored values, String keys, source families, false retention, explicit bridges/scalar nulls and K/SK/SKA snapshots pass unchanged. Loadfile/book/fast continuity pass; is_empty/is_nonempty assessment23.2.8 next, declared5.4/full admission separate.

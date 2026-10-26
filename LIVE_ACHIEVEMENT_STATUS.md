@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
+Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
 
 ## Latest Completed Slice
 
-Lua replaces the has_key terminal fence with scalar-result tracking and adds one-key preflight. Native/generated-plan/fresh-emitted has_key and direct index checks pass on available PUC5.5.1/LuaJIT after native fluent-null/SK-only/four-effect RED. Presence numeric0/1, false/null stored values, String keys, source families, false retention, explicit bridges/scalar nulls and K/SK/SKA snapshots pass unchanged. Loadfile/book/fast continuity pass; is_empty/is_nonempty assessment23.2.8 next, declared5.4/full admission separate.
+Public native/fresh probes show stopped fluent emptiness results versus working nested1!, plus the existing producer defect: literal0 text differs from its binding and an empty-Array-yielding block gives wrong0!/SA. MethodLowering marks predicates terminal and its general producer fallback tests host truthiness. Freeze canonical value-based emptiness/result targets, schedule bounded producer repair before flow and independent backend assessments, retaining SESSION16 broader ownership. Production unchanged; syntax/book/fast checks pass.
 
 ## Next Action
 
-Assess ordinary is_empty/is_nonempty result continuation under23.2.8 using public fluent/nested pairs. Read canonical predicate/domain/arity/scalar-text rules; preserve actual producer kinds and empty/null/String/container policies. Freeze bounded targets and backend owners only after observations; small checks/docs/commit.
+Repair bounded Perl ordinary emptiness value producers23.3.9.1.1 before result flow: empty-Array/Hash-yielding blocks and String0 versus bindings, literal classification and once-only snapshots on native/fresh routes. Coordinate existing SESSION16 ownership; do not claim complete condition/global-selector repair. Compile/small direct checks/docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.4` — Julia has_key scalar/shape guards repaired; strict result/direct index checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.3` — Dart has_key scalar/shape guards repaired; focused result/direct index and fatal analysis pass.
@@ -29,7 +30,6 @@ Assess ordinary is_empty/is_nonempty result continuation under23.2.8 using publi
 - `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
 
 ## History
 

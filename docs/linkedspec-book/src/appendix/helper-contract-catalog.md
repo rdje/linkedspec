@@ -778,13 +778,13 @@ dispatch rule.
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Returns true if the array or hash has zero elements. Treats composed array-valued and hash-valued expressions as aggregates, not Perl references.
+- **Behavior**: Returns true if the actual Array or Hash has zero elements. Perl currently stops `[].is_empty().cat("!")` at undef; nested `cat(is_empty([]),"!")` returns `"1!"`. A tracked producer defect also treats some computed empty-container blocks by host truthiness; its repair precedes result chaining. The canonical rule uses the yielded value, with String `"0"` preserved as data. Broader literal/conditional repairs remain tracked.
 - **Edge cases**: Returns true for undef (treated as empty).
 
 ### `is_nonempty(arr)`
 - **Signature**: `is_nonempty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Logical inverse of `is_empty`. True if the aggregate has at least one element.
+- **Behavior**: Logical inverse of `is_empty`. True if the aggregate has at least one element. Perl nested `cat(is_nonempty(["a"]),"!")` returns `"1!"`, while `["a"].is_nonempty().cat("!")` currently stops at undef; compatible result continuation is tracked alongside the producer caveat above.
 
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`

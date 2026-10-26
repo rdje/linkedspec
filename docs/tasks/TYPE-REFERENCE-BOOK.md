@@ -1092,7 +1092,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.7 - freeze has_key result continuations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.8`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess ordinary is_empty/is_nonempty predicate results continuing through existing compatible scalar/text methods.
   Dependencies: .23.3.8.5.
   Schedule: Next bounded result-family feature after has_key rollout, before exhaustive signatures/matrices.
@@ -1100,9 +1100,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Public reproduction target: Compare [].is_empty().cat("!") and ["a"].is_nonempty().cat("!") with nested cat(is_empty(...),"!") / cat(is_nonempty(...),"!"). Include Array/Hash/String/null sources, selected/pipeline/default/function forms, false retention, scalar boundaries/explicit bridges and source/consumer snapshots/order.
   Acceptance: Establish public results before classification; freeze bounded compatible handoff/shape targets and schedule independent backend children if needed. Existing contains missing-needle calibration remains FUTURE-PARITY-BACKLOG.5. Full domains/comprehensive/portable admission remains23.4.
 
+  Activation: clean `e449e4c233ab4df02aa3e002ac1ece5614c0bcad`; has_key rollout committed, brief empty, tree clean.
+  Owned paths: Bounded public predicate result probes/targets and current docs; production children only after findings.
+  Verification tier: `focused`
+  Focused checks: Canonical emptiness/scalar-text/arity rules and existing producer defect owners16.1/.16.2; small public Get/substitution/native/fresh fluent/nested, domain/presence/effect/shape controls; syntax/book/fast continuity/history/diff guards.
+  Canonical trigger: None for bounded diagnostic/freeze under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored diagnostic values/order, no quantified population or portable measurement.
+  Known producer prerequisite: Knowledge card perl-emptiness-expression-and-host-slot-drift and SESSION-STARTUP-READING.16.1/.16.2 already own literal-zero/host-slot and general-expression truthiness defects. Inspect public current behavior before selecting producer/result repair ordering; do not silently preserve those defects as normative semantics or infer broad repair from a bounded result fixture.
+
+  Completion: Freeze emptiness-results.md before production. P1 bounded ordinary producer repair23.3.9.1.1 precedes result flow1.2; existing SESSION16 owns broader conditional/global literal-slot surfaces.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/fresh fluent empty cat null versus nested1!; literal0 text versus binding0!/1! and empty-Array block wrong0!/SA agree across native/fresh.
+  - [x] ROOT CAUSE (WHY + WHERE): Substitution return undef follows array_chain_return_family terminal default. MethodLowering producer general fallback emits host !($value), treating an empty Array reference as true; existing SESSION16 card owns related source-spelling/host-slot defects.
+  - [x] FIX: Freeze canonical actual-value emptiness and compatible scalar/text handoff; schedule producer before flow and independent backends. Do not normalize Boolean/numeric result or bless old wrong emptiness.
+  - [x] ADDRESSED (verified): Native/fresh basic Array/Hash producer vector[1,0,0,1,1,1] agrees; public extra-argument fluent control[null,""] has no effects. Wrong nested block result is failure evidence, not a passing snapshot.
+  - [x] NO REGRESSION: Production unchanged; probe syntax, book and fast memory/cadence/diagnosis/history/diff pass. No broad suite/portable admission.
+  - [x] LOCKSTEP: Contract/probe, catalog caveat/nested alternative, existing emptiness fact/map and task/live/resume updated. Producer1.1 next after clean commit; broader16 remains owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.8 - freeze emptiness result continuations`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -2180,6 +2198,53 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Register fixture; contract/worked catalog/guide, Lua/hash facts/map and task/live/resume updated; book and fast memory/cadence/diagnosis/history/diff pass. Bounded has_key rollout targeted-checked; predicate assessment23.2.8 next after clean commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.5 - continue Lua has_key scalar results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9`
+  Status: `active` / bounded emptiness implementation planned
+  Goal: Canonical actual-value emptiness and compatible predicate-result continuation under emptiness-results.md.
+  Children: `.23.3.9.1`, `.23.3.9.2`, `.23.3.9.3`, `.23.3.9.4`, `.23.3.9.5`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.1`
+  Status: `active` / bounded Perl producer before flow
+  Children: `.23.3.9.1.1`, `.23.3.9.1.2`.
+  Existing owner: SESSION-STARTUP-READING16.1/.16.2 retain broader conditions/global literal-slot acceptance; these children own only the ordinary value/result dependency and must record the exact overlap.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1`
+  Status: `pending`
+  Goal: Repair P1 bounded ordinary Perl emptiness value-producer expression/kind defects before chaining.
+  Dependencies: .23.2.8.
+  Reproduction / impact: Public nested cat(is_empty({order=cat(order,"S");parts}),consumer) gives0!/SA for parts=[]; literal String0 differs from its bound twin. Empty Array/Hash expression results and source spellings must obey canonical value-based emptiness.
+  Acceptance: Typed literal/binding/block/nested/function ordinary producers, empty/nonempty Array/Hash/String, undef and String0, inverse helpers/once-only/source snapshots; native/fresh/direct compatibility plus syntax/book/fast checks/commit. Update existing SESSION16 fact/owner overlap without claiming full conditional/global-selector repair.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2`
+  Status: `pending`
+  Goal: Continue Perl is_empty/is_nonempty results through existing compatible scalar/text methods.
+  Dependencies: .23.3.9.1.1.
+  Acceptance: Frozen emptiness-results.md, actual result kinds, zero-operand shape before effects, named/literal/selected/pipeline/default/function sources, false retention, scalar nulls/explicit bridge and source/consumer snapshots. Native/fresh/direct small checks/docs/commit; no new logic or contains calibration change.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary emptiness result targets.
+  Dependencies: .23.3.9.1.2.
+  Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary emptiness result targets.
+  Dependencies: .23.3.9.2.
+  Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary emptiness result targets.
+  Dependencies: .23.3.9.3.
+  Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.9.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary emptiness result targets.
+  Dependencies: .23.3.9.4.
+  Acceptance: Public native/generated assessment before classification; preserve actual producer kinds and canonical empty/null/String/container domains, zero receiver operands, false retention, scalar guards/explicit bridges and ordered snapshots. Repair only confirmed bounded gaps; compile/small direct checks/docs/commit. Full domain/portable admission23.4 and Lua declared5.4 remain separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
@@ -2258,11 +2323,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty assessment23.2.8 follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 precedes result flow and independent backends. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.8` | `pending` | Assess is_empty/is_nonempty compatible result flow after bounded has_key rollout. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` | `pending` | P1 bounded ordinary emptiness producer repair before result handoff. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

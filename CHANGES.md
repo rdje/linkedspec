@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.8 — freeze emptiness result continuations
+
+Public native/fresh probes show stopped fluent emptiness results versus working nested1!, plus the existing producer defect: literal0 text differs from its binding and an empty-Array-yielding block gives wrong0!/SA. MethodLowering marks predicates terminal and its general producer fallback tests host truthiness. Freeze canonical value-based emptiness/result targets, schedule bounded producer repair before flow and independent backend assessments, retaining SESSION16 broader ownership. Production unchanged; syntax/book/fast checks pass.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.8.5 — continue Lua has_key scalar results
 
 Lua replaces the has_key terminal fence with scalar-result tracking and adds one-key preflight. Native/generated-plan/fresh-emitted has_key and direct index checks pass on available PUC5.5.1/LuaJIT after native fluent-null/SK-only/four-effect RED. Presence numeric0/1, false/null stored values, String keys, source families, false retention, explicit bridges/scalar nulls and K/SK/SKA snapshots pass unchanged. Loadfile/book/fast continuity pass; is_empty/is_nonempty assessment23.2.8 next, declared5.4/full admission separate.
