@@ -85,3 +85,24 @@ emitted-host compatibility boundaries and helper/free/callback policies.
 Full matrices/canonical proof follow feature coverage; Perl test registration
 23.4.1 precedes later admission/push. Lua malformed native patterns/full runner
 remain excluded; declared5.4 restoration is independently owned.
+
+## Bounded Perl implementation
+
+18.1 admits the receiver as default_result and guards zero fallbacks before
+source effects. Its new chains compose through existing actual-value/host
+compatibility dispatch, preserving Hash/Array transitions and valid prefix
+effects before rejection. A scalar-bound initial source protects lowered Hash
+literals from host-arrow reparsing and bare-block ambiguity. The shared Hash
+consumer also exposes pre-existing free pick_keys block-key staging: the legacy
+key path now invokes the existing typed block lowerer only for actual key blocks.
+Direct native/fresh free-key controls confirm once-only C/captured original Hash
+before mutation; other key forms and free signatures remain unchanged.
+
+New13 native/fresh assertions plus existing selected-default5/logical-rejection12
+checks pass across retained runs, with module/test/probe syntax. Strict shared
+JSON preserves empty/zero/false/exhaustion, eight source families, actual scalar/
+container bridges, Number indices, independent copies, SDC/SC snapshots, skipped
+supported runtime failure and incompatible-consumer operands, valid rejected
+prefix effects and malformed zero-RHS no-effects. Authored retired Hash syntax
+still rejects. Rust18.2 independently assesses next; no full admission or new
+portable aggregate domain. Explicit Perl test registration23.4.1 stays required.

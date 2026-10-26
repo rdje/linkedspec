@@ -2,6 +2,7 @@
 id: rust-coalesce-evaluation-drift
 title: "Lazy defaults and selected result kinds"
 answers:
+  - "why does a pick_keys expression-valued key block fail Perl compilation"
   - "is there a defined-only coalesce fallback receiver method"
   - "does empty text or false skip a coalesce receiver fallback"
   - "can coalesce_nonempty Array or Hash results continue by actual kind"
@@ -15,13 +16,13 @@ answers:
   - "why do Perl and Rust coalesce disagree on empty aggregates"
   - "why does a Hash default sorted_values first uppercase return null"
   - "how do Array successors consume emitted default guard expressions"
-date: 2026-10-26
-status: bounded defaults checked; Perl Hash projection successors repaired
+date: 2026-10-27
+status: bounded defaults checked; Perl defined-only receivers and key blocks repaired
 tags: [rust, perl, helpers, defaults, projection, evaluation, startup-reading]
 evidence: "Defaults62.1/62.2/TYPE23.3.6; TYPE23.3.16.1 public Get/substitution/dump/native/fresh default_hash_projection regression."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test default_selected_receivers --test joined_string_receivers --test coalesce_receiver_values"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_hash_projection_contract.t t/default_selected_receiver_contract.t t/default_literal_operand_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/defined_default_receiver_contract.t t/default_hash_projection_contract.t t/default_selected_receiver_contract.t"
 ---
 
 Rust62.1/62.2 evaluates only needed operands with actual selected kinds;
@@ -63,3 +64,14 @@ errors. Receiver AST exists but lacks MethodLowering return-family admission,
 leaving raw host DSL. Free Perl coalesce(one) returnsnull; no identity receiver
 is inferred. Implement18.1-.5 independently; no free-signature or portable
 aggregate-domain promotion. Empty containers remain defined selected values.
+
+TYPE23.3.18.1 implements the bounded Perl counterpart with pre-effect zero-RHS
+rejection, existing actual-result/host bridge composition and once-bound scalar
+source. This preserves emitted Hash literal reference identity, avoiding both
+host-arrow reparsing and unbound bare-block ambiguity. New13/direct17 checks
+retain strict kinds/copies/indices/lazy SDC-SC/skipped failures/source effects.
+The Hash consumer also reproduces free pick_keys block-key staging failure:
+legacy keys kept raw DSL in foreach. Lower actual key blocks through the existing
+typed block lowerer; native/fresh C/snapshot controls pass, ordinary key/free
+signatures stay. Authored retired arrows still reject. Other backends18.2-.5 and
+full domain/context/portable admission remain open; see frozen defined contract.

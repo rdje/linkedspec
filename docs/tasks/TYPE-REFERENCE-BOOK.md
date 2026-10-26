@@ -3869,14 +3869,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Qualitative contradiction intake only; any new historical census or measured repair proof is declared before publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18`
-  Status: `active` / frozen counterpart; backend implementations pending
+  Status: `active` / Perl targeted-checked; other backend implementations pending
   Goal: Add bounded ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.2.18 frozen defined-default-results.md.
   Children: `.23.3.18.1`, `.23.3.18.2`, `.23.3.18.3`, `.23.3.18.4`, `.23.3.18.5`.
   Acceptance: One-or-more fallbacks, defined-only lazy once-only selection, actual String/Number/Boolean/Array/Hash kinds/copies/snapshots, compatible consumers/explicit bridges and scalar boundaries. Preserve existing free signatures/domains/callbacks and old nonempty-default behavior; no complete domain/context/portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Perl ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.2.18.
   Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
@@ -3884,6 +3884,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `c918f545af7c83b5ff0b93958a4ed141c849bc59`; defined-default freeze committed, brief0/tree clean.
+  Owned paths: Perl ordinary coalesce receiver admission/lazy actual-result flow/shape boundaries, retained shared native/fresh values/effects/kinds/copies/selectors test and scoped book/fact/task/live docs. Reuse existing typed lazy/default and emitted-host machinery, preserving authored Hash colon validation and free signatures.
+  Verification tier: `focused`
+  Focused checks: Independent retained public producer/AST intake, shared native/fresh RED/GREEN and direct selected/literal default checks, syntax and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Owned implementation findings: Metadata-only admission fixes most shared cases, but a Hash-returning pick_keys successor falls out of the String-first loop and emits unsupported sorted_values; a text-prefix rejected Hash consumer lowers to constantundef and loses SC. Public Get/substitution/native/fresh reproduce both. Complete this new receiver chain through the existing actual-value/host compatibility loop, preserving source effects before rejection and actual Hash results.
+  Additional P2 defect owned/scheduled: Public free pick_keys(chosen,{order=cat(order,"C");meta["a"]="z";"a"}) retains a raw DSL key block in emitted host foreach and fails handler/fresh compilation. A new explicit key-variable control separates this pre-existing free-key staging defect from receiver flow; The same key-block staging defect blocks the new fluent Hash snapshot consumer after dispatch repair, so repair it now within18.1 using the existing typed block lowerer and retain a direct free-key control; no separate18.1.1 pivot. The initial failing free-block expression is not a passing oracle.
+
+  Completion: Admit coalesce as default_result with a pre-effect one-or-more-fallback guard. Chains containing this new method share the established logical/actual-value dispatcher and emitted-host finishing, retaining actual Hash/Array transitions and source/prefix effects before scalar rejection. Bind the fully lowered source once in scalar context inside the host bridge, preserving valid direct Hash literal identity without reparsing host fat arrows as retired authored syntax. Lower actual pick_keys key blocks with the existing typed block bridge; ordinary key forms/free signatures remain unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared native/fresh RED has raw receiver DSL compile errors. Metadata-only admission exposes Hash successor unsupported sorted_values and dropped SC before a rejected scalar tail; public substitution retains both mechanisms. Direct free pick_keys key-block control fails host compilation with raw DSL foreach operand; it also blocks the new fluent Hash consumer.
+  - [x] ROOT CAUSE (WHY + WHERE): Missing receiver return family/shape metadata, String-first loop lacking Hash handoff and terminal constantundef discarding a valid prefix. The new scoped typed-source handoff initially reparses emitted Hash arrows, then an unbound bare Hash block loses reference kind; public AST/substitution distinguish authored hash_literal from emitted host syntax. pick_keys legacy key normalization lacks typed block lowering.
+  - [x] FIX: Scoped actual-result/host compatibility composition, scalar-bound source and pre-effect coalesce shape guard; existing typed block lowerer for pick_keys key operands. No raw authored fallback, parser/schema/free signature/numeric/truth/callback/domain normalization. Fix the blocking key defect in this leaf rather than defer an unworking Hash snapshot consumer.
+  - [x] ADDRESSED (verified): New13 native/fresh checks pass strict selected kinds, empty/zero/false/exhaustion, eight source families, String-to-Array bridge, numeric indices, chosen Array/Hash copies, SDC/SC/once-only snapshots, skipped effects/runtime error, Hash key C mutation/capture, rejected source/prefix effects and malformed zero-RHS no-effects. Retired authored Hash arrows still reject.
+  - [x] NO REGRESSION: Direct existing selected-default5 and logical rejected-effect12 checks pass; source/test/probe syntax and final changed fixture pass,30 focused top-level checks across retained runs. Later source wrapping only affects new coalesce receiver chains. No broad suites/full matrix/portable admission; every new Perl fixture needs explicit23.4.1 runner registration.
+  - [x] LOCKSTEP: Shared fixture/test, retained public Hash/prefix/AST controls, frozen contract/current qualified catalog/guide and canonical default fact/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Rust18.2 independently assesses its producer next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.1 - add Perl defined-only default receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.2`
   Status: `pending`
@@ -3931,7 +3951,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -3939,11 +3959,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; backend18.1-.5 now own the bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1 is targeted-checked and Rust18.2 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` | `pending` | Implement frozen defined-only coalesce receiver/result flow on Perl after independent public intake. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` | `pending` | Independently assess and implement frozen Rust defined-only coalesce receiver/result flow. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

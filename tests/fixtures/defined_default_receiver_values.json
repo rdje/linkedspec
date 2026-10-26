@@ -1,0 +1,113 @@
+{
+  "raw": [
+    "fallback",
+    "",
+    0,
+    false,
+    null,
+    [
+      2,
+      3
+    ],
+    {
+      "b": "b",
+      "a": "a"
+    }
+  ],
+  "text": [
+    "CHOSEN",
+    "!",
+    1,
+    "0!",
+    "CHOSEN"
+  ],
+  "nested": [
+    "CHOSEN",
+    "!",
+    1,
+    "0!",
+    "CHOSEN"
+  ],
+  "containers": [
+    "B",
+    "A"
+  ],
+  "retained": [
+    0,
+    0,
+    "B",
+    "A"
+  ],
+  "sources": [
+    "X",
+    "X",
+    "X",
+    "X",
+    "X",
+    8,
+    "!",
+    "0!"
+  ],
+  "bridge": "B",
+  "recovered": "B",
+  "exhausted": [
+    null,
+    null,
+    "1!"
+  ],
+  "defaults": [
+    "CHOSEN",
+    "B"
+  ],
+  "snapshot": "A:B",
+  "order": "SDC",
+  "calls": 1,
+  "source": 1,
+  "fallback": [
+    "z"
+  ],
+  "kept_snapshot": "A:B",
+  "kept_order": "SC",
+  "kept_source": [
+    "z"
+  ],
+  "hash_snapshot": "A",
+  "hash_order": "C",
+  "hash_source": {
+    "a": "z",
+    "b": "b"
+  },
+  "lazy": [
+    "",
+    false,
+    0,
+    "safe"
+  ],
+  "hits": 0,
+  "chosen_items": [
+    "a",
+    "b"
+  ],
+  "chosen_meta": {
+    "a": "a",
+    "b": "b"
+  },
+  "items": [
+    "z",
+    "b"
+  ],
+  "copy_meta": {
+    "a": "z",
+    "b": "b"
+  },
+  "values": [
+    "zero",
+    "updated"
+  ],
+  "rejected": null,
+  "reject_order": "S",
+  "after_text": null,
+  "prefix_order": "SC",
+  "malformed": null,
+  "malformed_order": ""
+}

@@ -282,7 +282,7 @@ dispatch rule.
 - **Returns**: the selected value, preserving its kind; the published portable operand domain remains scalar.
 - **Behavior**: Returns the first argument that is defined (not undef). Evaluates left-to-right, short-circuiting.
 - **Edge cases**: Returns `undef` if all arguments are undef. Empty text, numeric zero and false are defined: `coalesce("", "fallback")` → `""`, `coalesce(0, 7)` → `0`, `coalesce(false, true)` → `false`.
-- **Examples**: `coalesce([].first(), "fallback")` → `"fallback"`. With `audit="unset"`, `value=coalesce("first", { audit="late"; "fallback" })` leaves `audit` unchanged and returns `"first"`; later operand errors are also skipped. Nested selection keeps the same rule: `coalesce(undef, coalesce("", "late"))` → `""`. Ordinary Perl also preserves a selected direct Hash literal: `coalesce(undef,{"items":[7,{"n":7}],"flag":false})` returns the Hash with nested numeric/boolean kinds intact; this compatibility observation does not broaden the published portable operand domain. A separate bounded ordinary `value.coalesce(fallback, ...)` counterpart is frozen for implementation: one-or-more fallbacks, defined-only lazy selection and continuation by the selected scalar/Array/Hash kind. Targets include `"".coalesce("late").cat("!")` → `"!"` and `undef.coalesce(["a","b"]).last().uppercase()` → `"B"`; backend implementation and complete admission remain pending.
+- **Examples**: `coalesce([].first(), "fallback")` → `"fallback"`. With `audit="unset"`, `value=coalesce("first", { audit="late"; "fallback" })` leaves `audit` unchanged and returns `"first"`; later operand errors are also skipped. Nested selection keeps the same rule: `coalesce(undef, coalesce("", "late"))` → `""`. Ordinary Perl also preserves a selected direct Hash literal: `coalesce(undef,{"items":[7,{"n":7}],"flag":false})` returns the Hash with nested numeric/boolean kinds intact; this compatibility observation does not broaden the published portable operand domain. Ordinary Perl `value.coalesce(fallback, ...)` now requires one-or-more fallbacks and preserves defined-only lazy selection, actual scalar/Array/Hash kinds and compatible continuations. Examples include `"".coalesce("late").cat("!")` → `"!"` and `undef.coalesce(["a","b"]).last().uppercase()` → `"B"`; Perl native/fresh targeted checks cover copies, numeric indices, source-before-fallback/consumer snapshots, skipped unused runtime errors and zero-fallback rejection before effects. Other backend implementations and complete admission remain pending.
 
 ### `coalesce_nonempty(a, b, ...)`
 - **Signature**: `coalesce_nonempty(values: scalar...)`
@@ -1002,7 +1002,7 @@ dispatch rule.
 ### `pick_keys(h, k1, k2, ...)`
 - **Signature**: `pick_keys(h: hash, keys: string...)`
 - **Returns**: hash
-- **Behavior**: Returns a new hash containing only the named keys. Does not mutate the input.
+- **Behavior**: Returns a new hash containing only the named keys. Does not mutate the input. On Perl, expression-valued key blocks also run once after capturing the input Hash: `pick_keys(meta,{ audit="key"; "a" })` selects key `"a"`; a key block that reassigns `meta["a"]` does not change the previously captured value. The equivalent ordinary fluent key-block consumer follows the same rule.
 
 ### `has_key(h, key)`
 - **Signature**: `has_key(h: hash, key: string)`

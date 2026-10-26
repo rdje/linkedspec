@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.18.1 — add Perl defined-only default receivers
+
+Perl18.1 adds ordinary one-or-more-fallback coalesce receivers through existing typed lazy/default actual-result/host dispatch, preserving Hash/Array successors and source/prefix effects before rejection. Scalar-bound source preserves emitted direct Hash identity; authored retired arrows still reject. Blocking free/fluent pick_keys key-block staging is repaired using the existing block lowerer. New13 native/fresh and direct selected-default5/logical-rejection12 checks plus syntax pass across retained runs, retaining strict kinds/copies/indices/SDC-SC/skipped failures/malformed no-effects. Shared fixture/probe/book/fact/task/live align; explicit Perl runner registration/full admission separate. Rust18.2 next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.18 — freeze defined-only default receivers
 
 Defined-only coalesce assessment18 freezes a separate one-or-more-fallback ordinary receiver with lazy defined-only selection, actual scalar/container/copy/snapshot continuation and clean scalar/shape boundaries. Public native/fresh free/nested controls retain empty/zero/false, null exhaustion, numeric selector kind, independent Array/Hash copies, SDC/once-only and skipped supported runtime errors. Missing Perl receiver metadata leaves raw DSL; old nonempty scope explicitly excluded this spelling. Retained probe/frozen contract/five backend children/book/fact/map align; no production/free signature/domain change or portable admission. Syntax/direct defaults/book/history/staged continuity checked.

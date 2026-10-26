@@ -8,7 +8,8 @@ if (@ARGV && $ARGV[0] eq '--ast') {
  require LinkedSpec::ActionIR::AST;
  for my $source (q{undef.coalesce(" chosen ").trim().uppercase()},
                  q{2.div(0).coalesce(7).add(1)},
-                 q{[].first().coalesce(["a"]).last().uppercase()}) {
+                 q{[].first().coalesce(["a"]).last().uppercase()},
+                 q{{"b":"b","a":"a"}.coalesce({"late":1}).sorted_values().first().uppercase()}) {
   print JSON::PP->new->canonical->encode(LinkedSpec::ActionIR::AST::parse_action_expr($source)), "\n";
   print LinkedSpec::call_spec_handler_subst('Top', 'return('.$source.')'), "\n";
  }
@@ -22,6 +23,10 @@ sub error_snapshot {
 }
 
 my @cases = (
+ [hash_consumer_nested=>q{meta={"a":"a","b":"b"};order="";chosen=coalesce(undef,meta);key={order=cat(order,"C");meta["a"]="z";"a"};picked=pick_keys(chosen,key);value=uppercase(first(sorted_values(picked)));return([value,order,meta])}],
+ [hash_consumer=>q{meta={"a":"a","b":"b"};order="";value=undef.coalesce(meta).pick_keys({order=cat(order,"C");meta["a"]="z";"a"}).sorted_values().first().uppercase();return([value,order,meta])}],
+ [hash_consumer_nested_block=>q{meta={"a":"a","b":"b"};order="";chosen=coalesce(undef,meta);picked=pick_keys(chosen,{order=cat(order,"C");meta["a"]="z";"a"});value=uppercase(first(sorted_values(picked)));return([value,order,meta])}],
+ [prefix_effects=>q{order="";value={order=cat(order,"S");undef}.coalesce("kept").cat({order=cat(order,"C");"!"}).sorted_values();return([value,order])}],
  [copy_control=>q{items=["a","b"];meta={"a":"a","b":"b"};chosen_items=coalesce(undef,items);chosen_meta=coalesce(undef,meta);items[0]="z";meta["a"]="z";return([chosen_items,chosen_meta,items,meta])}],
  [free_selector=>q{values=["zero","one"];values[coalesce(undef,1)]="updated";return(values)}],
  [receiver_selector=>q{values=["zero","one"];values[undef.coalesce(1)]="updated";return(values)}],
@@ -55,7 +60,7 @@ for my $case (@cases) {
    route => 'native', label => $label, value => $value,
    error => $context{last_error}, thrown => "$@",
  }), "\n";
- if ($label eq 'fluent' || $label eq 'bridge' || $label eq 'effects' || $label =~ /^(?:arity|default|defined|incompatible|sources)/) {
+ if ($label eq 'fluent' || $label eq 'bridge' || $label eq 'effects' || $label =~ /^(?:arity|default|defined|incompatible|sources|hash_consumer|prefix_effects)/) {
   print 'LOWERED ', LinkedSpec::call_spec_handler_subst('Top', $body), "\n";
  }
  my $emitted = eval { LinkedSpec::emit_generated_source(\$source,

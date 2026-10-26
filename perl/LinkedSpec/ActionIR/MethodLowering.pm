@@ -4690,6 +4690,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
+   return 'undef' if $method eq 'coalesce' && !@$aggregate_args;
    return 'undef' if $method =~ /^(?:contains|index_of|has_key|starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le)$/o && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty|is_defined|is_undefined)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
@@ -5092,10 +5093,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my $first_method = $calls->[0]{method} // '';
   my $first_args = $calls->[0]{args} || [];
-  if ($logical_receiver) {
-   my $current_expr = $lower_ast_logical_call_node->($receiver);
+  my $defined_default_chain = grep { ($_->{method} // '') eq 'coalesce' } @$calls;
+  if ($logical_receiver || $defined_default_chain) {
+   my $current_expr = $logical_receiver
+    ? $lower_ast_logical_call_node->($receiver)
+    : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 });
    return undef unless defined($current_expr) && length($current_expr);
-   my $current_family = 'scalar_result';
+   # Keep an already lowered Hash literal inside the emitted-host bridge.
+   # Its fat arrows are host syntax, not retired authored Hash syntax.
+   $current_expr = 'do { my $__ls_default_source = '.$current_expr.'; $__ls_default_source }'
+    if $defined_default_chain && !$logical_receiver;
+   my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
    foreach my $call (@$calls) {
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
@@ -5103,9 +5111,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
      : $append_selected_value_chain_call->($current_expr, $call, $current_family);
     return undef unless ref($applied) eq 'ARRAY';
     ($current_expr, $current_family) = @$applied;
-    return 'do { my $__ls_rejected_logical = '.$source_expr.'; undef }'
+    return 'do { my $__ls_rejected_result = '.$source_expr.'; undef }'
      if $current_family eq 'terminal';
-    # The logical source is emitted host code. Finish each composed helper
+    # These sources are emitted host values. Finish each composed helper
     # through its existing bridge before another link consumes that result.
     $current_expr = $legacy_method_value_expr->($current_expr);
     return undef unless defined($current_expr) && length($current_expr);
@@ -7049,7 +7057,11 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   foreach my $arg (@{$pick_args}[1 .. $#$pick_args]) {
    my $key_expr = $trim_action_ir_value->($arg);
    return undef unless defined($key_expr) && length($key_expr);
-   my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+   my $key_node = _parse_method_value_ast_expr($key_expr, $deps);
+   my $key_lowered = _lower_block_value_expr($key_expr, $deps)
+    if ref($key_node) eq 'HASH' && ($key_node->{kind} // '') eq 'block_value';
+   $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+    unless defined($key_lowered) && length($key_lowered);
    return undef unless defined($key_lowered) && length($key_lowered);
    push @lowered_keys, $key_lowered;
   }
@@ -7776,7 +7788,7 @@ sub _is_tree_traversal_receiver_method {
 sub _string_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'default_result' if $method eq 'coalesce_nonempty';
+ return 'default_result' if $method eq 'coalesce' || $method eq 'coalesce_nonempty';
  return 'selected' if $method eq 'length';
  return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o;
  return 'array' if $method =~ /^(?:split)$/o;

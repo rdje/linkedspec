@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
+Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
 
 ## Latest Completed Slice
 
-Defined-only coalesce assessment18 freezes a separate one-or-more-fallback ordinary receiver with lazy defined-only selection, actual scalar/container/copy/snapshot continuation and clean scalar/shape boundaries. Public native/fresh free/nested controls retain empty/zero/false, null exhaustion, numeric selector kind, independent Array/Hash copies, SDC/once-only and skipped supported runtime errors. Missing Perl receiver metadata leaves raw DSL; old nonempty scope explicitly excluded this spelling. Retained probe/frozen contract/five backend children/book/fact/map align; no production/free signature/domain change or portable admission. Syntax/direct defaults/book/history/staged continuity checked.
+Perl18.1 adds ordinary one-or-more-fallback coalesce receivers through existing typed lazy/default actual-result/host dispatch, preserving Hash/Array successors and source/prefix effects before rejection. Scalar-bound source preserves emitted direct Hash identity; authored retired arrows still reject. Blocking free/fluent pick_keys key-block staging is repaired using the existing block lowerer. New13 native/fresh and direct selected-default5/logical-rejection12 checks plus syntax pass across retained runs, retaining strict kinds/copies/indices/SDC-SC/skipped failures/malformed no-effects. Shared fixture/probe/book/fact/task/live align; explicit Perl runner registration/full admission separate. Rust18.2 next.
 
 ## Next Action
 
-Activate Perl18.1 and implement frozen defined-default-results.md after retained public producer/AST controls. Add ordinary one-or-more-fallback coalesce receiver admission, lazy actual-result dispatch/shape guards and shared native/fresh kind/effect/copy/selector checks; preserve free/domain/callback/host compatibility. Quick direct defaults/compile/docs/commit; no full matrix.
+Activate Rust18.2 and independently assess public free/nested and frozen defined-only receiver source/result flow before production. Preserve lazy defined empty/zero/false/exhaustion, actual scalar/container/copy/index kinds, source-first snapshots and skipped runtime errors. Shared native/restored/plan and quick direct defaults/compile/docs/commit; no full matrix or standalone Rust admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` — Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.18` — Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.5` — All five bounded logical result implementations targeted-checked; defined-only coalesce receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` — Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
@@ -29,7 +30,6 @@ Activate Perl18.1 and implement frozen defined-default-results.md after retained
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.16` — Scalar arithmetic result transition frozen from public producer/flow/overload distinctions; stale comparison overview corrected, Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.15.5` — Lua numeric comparison result flow implemented on both available hosts; all five bounded implementations targeted-checked, scalar arithmetic result assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.15.4` — Julia numeric comparison scalar/shape guards implemented;42 strict focused assertions and compilation pass, Lua next.
 
 ## History
 
