@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.3 — index guards cover null as well as integers
+
+Dart retains correct index numeric flow and adds scalar guarding independently of source kind plus one-needle preflight. Integer/null results reject container-only consumers with null; malformed calls stop before effects. Small native/restored/generated-plan index and direct selected-default checks pass after []/extra2/four-effect RED, retaining numeric0 selector writes, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; producer/equality/source/copy and full admission stay unchanged/open.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.2 — extend the shared scalar classifier
 
 Rust index_of now uses the shared scalar-result classifier/selected handoff and one-needle preflight. Fresh-current CLI independently exposes prior fluent-null, SN-only and four malformed-effect gaps. Native/restored/generated-plan index plus direct selected-default checks pass after RED, retaining numeric0 selector writes, zero/null, scalar guards, explicit bridges, shape no-effects and N/SN/SNA snapshots. Producer/equality/source/copy behavior stays unchanged. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next, full admission separate.

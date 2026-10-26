@@ -1927,12 +1927,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.7.2 - continue Rust index results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.7.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Publicly assess and implement/confirm ordinary Dart index_of result continuation.
   Dependencies: .23.3.7.2.
   Acceptance: Follow index-results.md through current public/native/generated carriers. Preserve correct producer/equality/source/null/copy policies, exact-one-needle preflight before effects, zero/nonmatch, actual scalar kinds, snapshots and incompatible container nulls. Source/code children only for confirmed bounded gaps; compile/small checks/docs/commit. Lua declared5.4/full admission stays separate.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic value/order regression; no quantified or portable measurement.
+  Activation: clean `3f00457cac9a96b9a9b1bcc7f914f174db21d29c`; Rust committed, brief empty, tree clean.
+  Owned paths: Dart public fluent scalar/arity dispatch only for confirmed gaps, focused native/restored/generated-plan index fixture, direct default compatibility and public/current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/restored/generated-plan shared index fixture before/after repair and direct selected-default test; selected-file fatal analysis/format, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen ordinary implementation/confirmation under director feature-first cadence; full domain/portable admission23.4 and eventual clean push remain separate.
+  Claim verification: none: deterministic authored value/order regression; no quantified corpus or portable measurement.
+  Public findings / owned repair: Native shared values already carry numeric results and N/SN/SNA snapshots, but scalar consumers sorted/after-cat return [], extra shape returns2 and malformed shapes run four effects. A separate null-source index followed by sorted also returns []. Common fluent preflight only checks one join delimiter; mayProduceScalar omits index_of. Guard index results independently of source kind (the documented result is integer/null), and add one-needle preflight.
+
+  Completion: Preserve correct native numeric flow; include index_of in mayProduceScalar independently of source kind, and require one needle in common fluent preflight. Integer/null results retain scalar guarding until a compatible container output.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared native values expose [] scalar negatives, extra-shape result2 and four effects. A separate null-source index then sorted independently REDs as [] instead of null; retained native JSON reasons show the actual untruncated values.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluateFluentCallsWithValue omits index_of from mayProduceScalar; common ActionFluentChainExpr preflight checks one join delimiter but not one index needle. Correct integer/null flow and producer snapshots already work natively.
+  - [x] FIX: Guard index results regardless of source kind and reject missing/extra needles before effects. Preserve existing helper/equality/source/copy behavior and dynamic bridges.
+  - [x] ADDRESSED (verified): Small native/restored/generated-plan index regression PASS after RED, including integer/null scalar negatives, shape no-effects, zero selector use, direct/selected/pipeline/hash/String/function/default sources and N/SN/SNA snapshots.
+  - [x] NO REGRESSION: Direct selected-default regression plus selected-file fatal analysis/format and compilation PASS. No producer, equality/domain, generic/deferred or generated-format changes; no broad suite.
+  - [x] LOCKSTEP: Worked catalog/guide, contract, Dart/array facts/map and live/task/resume records align; book and fast memory/cadence/diagnosis/history/diff checks pass. Julia assessment4 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.7.3 - guard Dart index result boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.7.4`
   Status: `pending`
@@ -2028,11 +2043,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` | `pending` | Assess/implement Dart index_of results after bounded Perl/Rust handoff; broad proof deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` | `pending` | Assess/implement Julia index results after bounded Perl/Rust/Dart work; broad proof deferred. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

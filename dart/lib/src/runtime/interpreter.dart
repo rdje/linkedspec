@@ -3708,7 +3708,7 @@ final class LinkedSpecRuntimeEngine {
         // keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
-          if (helper == 'join_values') {
+          if (helper == 'join_values' || helper == 'index_of') {
             return call.args.length != 1;
           }
           return (helper == 'first' ||
@@ -5096,10 +5096,11 @@ final class LinkedSpecRuntimeEngine {
               _hashOnlyReceiverHelpers.contains(helper))) {
         return null;
       }
-      // Defaults may select either a scalar or a container; the actual result
-      // below determines whether later container-only consumers are permitted.
+      // Scalar producers and defaults retain this boundary until an actual
+      // container output permits later array/hash-only consumers.
       final mayProduceScalar =
           helper == 'coalesce_nonempty' ||
+          helper == 'index_of' ||
           (value is List &&
               (_numericAggregateHelperNames.contains(helper) ||
                   helper == 'join_values'));

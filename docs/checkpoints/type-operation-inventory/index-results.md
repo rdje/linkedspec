@@ -90,3 +90,12 @@ plan fixture then passes after RED, including numeric zero selector writes,
 scalar guards, shape no-effects and N/SN/SNA snapshots. Direct selected-default
 compatibility passes; helper/equality/source/copy policies stay unchanged. Dart/
 Julia/Lua assessment and full admission remain separate.
+
+## Bounded Dart implementation
+
+`.23.3.7.3` retains correct native numeric flow and adds one-needle preflight plus
+index scalar guarding independently of source kind. RED shows [] for integer/
+null container consumers, extra-shape2 and four effects; final native/restored/
+generated-plan index and direct default checks pass with zero/null, numeric
+selector use, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis
+passes; helpers/equality/source/copy and full admission remain unchanged/open.

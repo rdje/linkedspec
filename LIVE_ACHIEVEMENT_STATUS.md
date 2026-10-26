@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust index-result continuations are implemented/targeted-checked. Dart assessment23.3.7.3 is next, then remaining backends. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
+Perl/Rust/Dart index-result work is implemented/targeted-checked. Julia assessment23.3.7.4 is next, then Lua. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
 
 ## Latest Completed Slice
 
-Rust index_of now uses the shared scalar-result classifier/selected handoff and one-needle preflight. Fresh-current CLI independently exposes prior fluent-null, SN-only and four malformed-effect gaps. Native/restored/generated-plan index plus direct selected-default checks pass after RED, retaining numeric0 selector writes, zero/null, scalar guards, explicit bridges, shape no-effects and N/SN/SNA snapshots. Producer/equality/source/copy behavior stays unchanged. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next, full admission separate.
+Dart retains correct index numeric flow and adds scalar guarding independently of source kind plus one-needle preflight. Integer/null results reject container-only consumers with null; malformed calls stop before effects. Small native/restored/generated-plan index and direct selected-default checks pass after []/extra2/four-effect RED, retaining numeric0 selector writes, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; producer/equality/source/copy and full admission stay unchanged/open.
 
 ## Next Action
 
-Publicly assess Dart shared index results before repair, preserving zero/null, one-needle shape, scalar boundaries and N/SN/SNA snapshots. Small native/restored/generated/direct checks, fatal analysis/docs/commit; no broad suite.
+Publicly assess Julia shared index and null-result scalar controls before repair. Preserve one-needle shape, zero/null, scalar boundaries and N/SN/SNA snapshots. Small strict native/generated/fresh-emitted/direct default checks/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.7.3` — index integer/null and shape guards; native/restored/plan/direct default and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.2` — index scalar handoff/one-needle preflight; native/restored/plan/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.1` — ordinary index scalar-result handoff and one-needle preflight; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
@@ -29,7 +30,6 @@ Publicly assess Dart shared index results before repair, preserving zero/null, o
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.4` — Julia correct joined flow retained, one-delimiter/scalar guards added; focused native/generated/emitted and strict Julia1.12 checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.3` — Dart correct joined flow retained, one-delimiter/scalar guards added; focused native/restored/generated-plan and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.2` — Rust joined String flow/arity and guarded named-mutation tails; focused native/restored/generated-plan and aggregate checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.5.1` — Perl joined String continuations and one-delimiter rejection; focused native/fresh/aggregate checks and syntax pass.
 
 ## History
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.7.3 — guard Dart index result boundaries
+
+Dart retains correct index numeric flow and adds scalar guarding independently of source kind plus one-needle preflight. Integer/null results reject container-only consumers with null; malformed calls stop before effects. Small native/restored/generated-plan index and direct selected-default checks pass after []/extra2/four-effect RED, retaining numeric0 selector writes, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; producer/equality/source/copy and full admission stay unchanged/open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.7.2 — continue Rust index results
 
 Rust index_of now uses the shared scalar-result classifier/selected handoff and one-needle preflight. Fresh-current CLI independently exposes prior fluent-null, SN-only and four malformed-effect gaps. Native/restored/generated-plan index plus direct selected-default checks pass after RED, retaining numeric0 selector writes, zero/null, scalar guards, explicit bridges, shape no-effects and N/SN/SNA snapshots. Producer/equality/source/copy behavior stays unchanged. Compilation/rustfmt/book/fast continuity checks pass; Dart assessment3 is next, full admission separate.
