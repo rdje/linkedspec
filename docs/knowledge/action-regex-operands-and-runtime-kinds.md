@@ -2,6 +2,8 @@
 id: action-regex-operands-and-runtime-kinds
 title: Regex operands and pure array helper values
 answers:
+  - why did Rust action regex literal suffix flags disappear
+  - how are Rust literal flags carried without a new regex value type
   - does Perl split_each evaluate variable or computed scalar delimiters
   - why do Perl array filters turn numeric entries into string selectors
   - why do nested Perl array helper functions rebind the input
@@ -18,7 +20,9 @@ date: 2026-10-26
 status: ordinary pure pipelines implemented; broad recurrence deferred; audit observations historical
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "Historical type audit .86.4.2.4 at7c318569; callable matches .87.2; ordinary filters .87.1."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/array_pipeline_value_contract.t"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/array_pipeline_value_contract.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test string_predicate_result_receivers --test scalar_predicate_boundaries"
 ---
 
 October26:87.1 added ordinary filter values;5.4.1 routes other pipeline values to pure lowering. Typed bare/emitted function slots supply values; standalone calls still rebind. The old value path emitted source assignments.
@@ -138,3 +142,5 @@ September23 recommendation: add a first-class regex type only for a concrete unm
 `SESSION-STARTUP-READING.87.2` added contextual regex operands and matches dispatch to CodeblockRuntime::_eval_call, without a generic regex value kind. Subject evaluation precedes pattern evaluation; undefined subjects return numeric0 and skip the pattern. Other string patterns evaluate once, while literals retain payload/flags. Static helper dispatch precedes same-named callable slots; arity rejects before effects. Invalid string patterns report invalid_matches_pattern; existing operand exceptions retain identity and caller parameters restore. The owning leaf retains its finite native/fresh matrix, observed RED and capsules. Detailed historical proof chronology remains in Git at a1c6202c364dd12b7e2923a6a49b02959469d512; no new admission is inferred. Physical LF controls leave separately owned quoted-escape fidelity unchanged.
 
 `FUTURE-PARITY-BACKLOG.5.5.1` evaluates dynamic scalar split_each delimiters once after snapshotting the array source, even when empty. Runtime text is quoted literally; authored quoted/slash literals retain their existing path and trailing-field behavior. Native/fresh regression covers direct/receiver/nested/function parameters, source-before-delimiter effects, metacharacters and flags. The former static normalizer escaped expression source and skipped effects. Standalone5.5.2 uses the value callback for dynamic delimiter lowering and BindingRuntime::array_snapshot to validate/copy before effects. Empty/absent targets still evaluate the operand once; wrong kinds reject first. The legacy list path also captures the delimiter outside its per-item map. This does not admit regex variables or deferred helpers.
+
+Rust23.3.10.2: Core parse_regex consumed suffix flags but kept only body; free /^a/i and /^a/ serialized identically, while public inline imsx controls worked. Encode imsx as leading modes in the existing pattern string, deduplicate modes, ignore go and encode unknown flags as an invalid pattern for existing helper failure handling. Runtime regex values remain Scalar(pattern); no first-class type/schema field or dependency change. Native/restored/plan match/split/filter controls pass after RED, preserving actual Bool matches. Recompile old derived artifacts from source to recover intended modes; historical artifacts retain original recorded patterns/results. Full regex/context admission remains separate.

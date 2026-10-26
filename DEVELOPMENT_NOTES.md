@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.10.2 — carry Rust predicate results and regex flags
+
+Rust adds the four String predicates to scalar-result/one-operand dispatch. The shared fixture exposed discarded literal suffix flags: Core parse_regex stored /^a/i exactly like /^a/, while public inline imsx controls worked. Preserve modes in the existing pattern payload, ignore go and fail unknown flags through existing invalid-pattern handling. Native/restored/plan result, flag/split/filter and direct boundary checks plus18 focused Core regex tests pass after null/SO/S/12-effect and flag-loss RED. Existing numeric/Bool kinds/schema unchanged; regenerate old artifacts from source. Book/fast checks pass; Dart next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.10.1 — continue Perl String predicate results
 
 Perl marks existing starts_with/ends_with/contains_substr/matches results scalar_result and preflights one receiver operand. Native/fresh shared predicate and direct emptiness checks pass after fluent-null RED, covering true/false/null/empty/regex-i boundaries, source families, false retention/generic predicates, explicit bridges/scalar nulls, zero malformed effects and SOC/SC/once-only snapshots. Producers/actual kinds/regex/source/copy domains unchanged. Syntax/book/fast checks pass; Rust independently assessed next, full admission separate.

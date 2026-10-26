@@ -5963,7 +5963,8 @@ impl Engine {
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" => {
                         !call.args.is_empty()
                     }
-                    "join_values" | "index_of" | "has_key" => call.args.len() != 1,
+                    "join_values" | "index_of" | "has_key" | "starts_with" | "ends_with"
+                    | "contains_substr" | "matches" => call.args.len() != 1,
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -7482,6 +7483,10 @@ impl Engine {
                 | "has_key"
                 | "is_empty"
                 | "is_nonempty"
+                | "starts_with"
+                | "ends_with"
+                | "contains_substr"
+                | "matches"
         )
     }
 

@@ -3708,16 +3708,31 @@ impl<'a> Parser<'a> {
                 continue;
             }
             if ch == b'/' {
-                let pattern = self.src[start..self.pos].to_string();
+                let mut pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                // Skip only adjacent compatibility suffixes (/o, /i, /g, /x, etc.).
+                // Keep suffix modes in the existing regex pattern payload.
                 // Whitespace belongs to the surrounding expression or statement.
+                let flags_start = self.pos;
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
                     if c.is_ascii_alphabetic() {
                         self.advance(1);
                     } else {
                         break;
+                    }
+                }
+                let flags = &self.src[flags_start..self.pos];
+                if flags.bytes().any(|flag| !b"imsxgo".contains(&flag)) {
+                    // Keep unknown flags on the contextual helper's invalid-pattern
+                    // path without changing the AST shape. This group is unclosed.
+                    pattern = "(".to_string();
+                } else {
+                    let modes: String = ['i', 'm', 's', 'x']
+                        .into_iter()
+                        .filter(|mode| flags.contains(*mode))
+                        .collect();
+                    if !modes.is_empty() {
+                        pattern = format!("(?{modes}){pattern}");
                     }
                 }
                 return Ok(Expr::RegexLiteral { pattern });

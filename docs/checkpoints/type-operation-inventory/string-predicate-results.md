@@ -78,3 +78,18 @@ Perl suites explicitly, and adding these new t files alone does not register the
 The named predicate/emptiness/has_key no-match controls are owned there; inventory
 and actual canonical registration/receipt must land before admission/final push.
 Current focused direct runs are not relabeled as canonical coverage.
+
+## Bounded Rust handoff and literal flag repair
+
+23.3.10.2 adds the four methods to scalar-result and one-operand preflight lists.
+Native RED gives fluent null, SO/S-only order and12 effects. Dispatch then exposes
+regex-i0!: Core parse_regex discards suffix letters, storing /^a/i and /^a/ as
+identical ^a. Public inline imsx controls work; this is first-party flag loss.
+Encode supported modes in the existing pattern string, ignore go, and fail unknown
+flags through each helper's existing invalid-pattern path. No new regex value type
+or serialized field is introduced; numeric substring/Boolean regex results stay
+unchanged. Native/restored/plan result and literal-flag controls (including split/
+filter), direct boundary tests and18 focused Core regex tests pass after RED.
+Regenerate previously compiled/emitted Rust artifacts from original source to pick
+up the corrected modes; old regex nodes retain their recorded pattern data. Do not
+rewrite immutable historical evidence. Dart/full regex/domain/admission separate.
