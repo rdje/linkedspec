@@ -1,0 +1,41 @@
+{
+  "after_text": null,
+  "bad_empty": null,
+  "bad_nonempty": null,
+  "bridged": "X",
+  "calls": 1,
+  "copied_binding": "0!",
+  "copied_hash_binding": "0!",
+  "default": "1!",
+  "direct": "1!",
+  "effected": "1!",
+  "false_result": "0!",
+  "function": "1!",
+  "hash_pipeline": "0!",
+  "hashes": [
+    "1!",
+    "1!",
+    "0!"
+  ],
+  "incompatible": null,
+  "invalid_effects": 0,
+  "meta": {
+    "a": 1
+  },
+  "nested": "1!",
+  "nonempty": "1!",
+  "order": "SA",
+  "parts": [],
+  "pipeline": "1!",
+  "predicate_again": "1!",
+  "scalar_sources": [
+    "1!",
+    "1!",
+    "1!",
+    "1!"
+  ],
+  "selected": "1!",
+  "source": [
+    "x"
+  ]
+}

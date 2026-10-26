@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
+Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
 
 ## Latest Completed Slice
 
-Perl ordinary is_empty/is_nonempty value helpers lower typed operands completely and inspect actual undef/empty String/Array/Hash values once. Native/fresh producer tests pass after function-host-call RED and the retained block/String0 diagnostic failures, covering inverse helpers, zero/false as data, literals/bindings/nested/function values, host-program-name independence and1!/SA/one-call snapshots. Direct has_key producer compatibility and syntax/book/fast checks pass. Broader SESSION16 conditions/global selectors stay open; result flow1.2 next.
+Perl emptiness predicates use scalar-result/zero-operand preflight and shared actual-kind emission on typed/legacy ordinary paths. Generic receivers retain source kinds and pass scalar/default/Hash continuations; copied dynamic bindings no longer infer Hash from the next predicate. Native/fresh result and direct producer fixtures pass after terminal, host-truthiness, wrapper/function and copied-Array RED, including Array/Hash copy bindings, false retention, String/Array bridges, nulls, no malformed effects and1!/SA/once-only snapshots. Syntax/book/fast checks pass; Rust assessment next, broader SESSION16/full admission separate.
 
 ## Next Action
 
-Implement Perl is_empty/is_nonempty result handoff23.3.9.1.2 under emptiness-results.md. Check actual receiver kinds before classification, preserve canonical producer semantics, zero-operand no-effect shapes, false retention/scalar guards/explicit bridges and source/consumer snapshots; native/fresh/direct small checks/docs/commit.
+Independently assess Rust is_empty/is_nonempty result/source/shape behavior under23.3.9.2 with shared fixture; preserve canonical actual-value emptiness and actual producer kinds, repair confirmed ordinary gaps only. Targeted offline compile/native/restored/plan/direct checks/docs/commit; no contains calibration or broad admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2` — Perl ordinary emptiness source/result flow repaired; focused native/fresh checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1` — Perl typed ordinary emptiness producers repaired; native/fresh/direct checks pass, broader SESSION16 open.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.8` — Emptiness targets frozen; bounded producer before result flow, broader SESSION16 remains owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.8.5` — Lua has_key result/shape repair passes on available hosts; next is_empty/is_nonempty assessment.
@@ -29,7 +30,6 @@ Implement Perl is_empty/is_nonempty result handoff23.3.9.1.2 under emptiness-res
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.2` — index scalar handoff/one-needle preflight; native/restored/plan/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.1` — ordinary index scalar-result handoff and one-needle preflight; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.6` — index result targets frozen; native/fresh gap and correct producer snapshots retained, backend repairs owned.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` — direct default scalar boundaries repaired; focused available-host native/plan/fresh/default/join checks pass.
 
 ## History
 

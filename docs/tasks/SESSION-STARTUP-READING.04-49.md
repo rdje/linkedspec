@@ -208,6 +208,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Commit: `pending`
   Bounded overlap: Bounded ordinary value helpers are repaired/targeted-checked under TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1 (t/emptiness_value_expression_contract.t); native/fresh typed literals/bindings/blocks/nested/functions and SA snapshots pass. FlowExpr conditional/attached/context acceptance and full closeout remain here.
 
+  Receiver overlap: TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2 adds ordinary receiver/result flow and shared typed/legacy actual-value predicate emission, including dynamic copied Array/Hash kinds. Native/fresh focused tests pass; FlowExpr conditional/attached and full context acceptance remain pending here.
+
 - ID: `SESSION-STARTUP-READING.16.2`
   Status: `pending`
   Goal: Prevent numeric and keyword literal tokens from becoming generated host scalar references.

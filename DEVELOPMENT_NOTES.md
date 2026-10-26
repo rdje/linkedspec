@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.1.2 — continue actual-value emptiness results
+
+Perl emptiness predicates use scalar-result/zero-operand preflight and shared actual-kind emission on typed/legacy ordinary paths. Generic receivers retain source kinds and pass scalar/default/Hash continuations; copied dynamic bindings no longer infer Hash from the next predicate. Native/fresh result and direct producer fixtures pass after terminal, host-truthiness, wrapper/function and copied-Array RED, including Array/Hash copy bindings, false retention, String/Array bridges, nulls, no malformed effects and1!/SA/once-only snapshots. Syntax/book/fast checks pass; Rust assessment next, broader SESSION16/full admission separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.9.1.1 — evaluate typed emptiness values
 
 Perl ordinary is_empty/is_nonempty value helpers lower typed operands completely and inspect actual undef/empty String/Array/Hash values once. Native/fresh producer tests pass after function-host-call RED and the retained block/String0 diagnostic failures, covering inverse helpers, zero/false as data, literals/bindings/nested/function values, host-program-name independence and1!/SA/one-call snapshots. Direct has_key producer compatibility and syntax/book/fast checks pass. Broader SESSION16 conditions/global selectors stay open; result flow1.2 next.

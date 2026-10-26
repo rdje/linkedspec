@@ -2611,6 +2611,19 @@ sub _is_reserved_actionir_value_symbol {
  return $name =~ /^(?:undef|true|false|descr|STRING|info|minfo|IMATCH|IMATCH_LIST|IMATCH_HASH|IINDEX|IPOS|LMATCH|LMATCH_LIST|LMATCH_HASH|LINDEX|LSPOS|CAPTURE)$/o ? 1 : 0
 }
 
+# Test the evaluated value once, independently of source spelling or host truthiness.
+sub _lower_emptiness_value_test {
+ my ($method, $value) = @_;
+ return undef unless defined($value) && length($value);
+ my $empty = 'do { my $__ls_is_empty_value = '.$value.'; '
+  .'(!defined($__ls_is_empty_value) '
+  .'|| (ref($__ls_is_empty_value) eq \'ARRAY\' && !@{$__ls_is_empty_value}) '
+  .'|| (ref($__ls_is_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_is_empty_value})) '
+  .'|| (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq \'\')) ? 1 : 0 }';
+ return $empty if $method eq 'is_empty';
+ return 'do { my $__ls_is_nonempty_empty = '.$empty.'; $__ls_is_nonempty_empty ? 0 : 1 }';
+}
+
 # Construct lazy selection from already-lowered values. Never reparse host
 # container syntax as authored DSL; preserve each operand's typed AST lowering.
 sub _lower_lazy_default_value_args {
@@ -4421,16 +4434,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $value = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
    $value = $legacy_method_value_expr->($args->[0]{source})
     unless defined($value) && length($value);
-   return undef unless defined($value) && length($value);
-   # Emptiness depends on the yielded value, never Perl reference truthiness
-   # or a literal token interpreted as a host scalar name.
-   my $empty = 'do { my $__ls_is_empty_value = '.$value.'; '
-    .'(!defined($__ls_is_empty_value) '
-    .'|| (ref($__ls_is_empty_value) eq \'ARRAY\' && !@{$__ls_is_empty_value}) '
-    .'|| (ref($__ls_is_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_is_empty_value})) '
-    .'|| (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq \'\')) ? 1 : 0 }';
-   return $empty if $method eq 'is_empty';
-   return 'do { my $__ls_is_nonempty_empty = '.$empty.'; $__ls_is_nonempty_empty ? 0 : 1 }';
+   return _lower_emptiness_value_test($method, $value);
   }
 
   if ($method eq 'coalesce' || $method eq 'coalesce_nonempty') {
@@ -4683,7 +4687,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method =~ /^(?:index_of|has_key)$/o && @$aggregate_args != 1;
-   return 'undef' if $method =~ /^(?:first|last|count|count_keys|length)$/o && @$aggregate_args;
+   return 'undef' if $method =~ /^(?:first|last|count|count_keys|length|is_empty|is_nonempty)$/o && @$aggregate_args;
    if ($method =~ /\A(?:sum|avg|median|range)\z/) {
     return 'undef' if @$aggregate_args;
    }
@@ -4733,10 +4737,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
     }
    }
   }
-  # Preserve authored calls until has_key lowers its typed operands together.
+  # Preserve authored calls until typed value producers lower their operands together.
   $receiver_expr = $receiver->{source}
    if !(defined($receiver_expr) && length($receiver_expr))
-   && ($receiver->{kind} // '') eq 'call' && ($calls->[0]{method} // '') eq 'has_key';
+   && ($receiver->{kind} // '') eq 'call'
+   && ($calls->[0]{method} // '') =~ /^(?:has_key|is_empty|is_nonempty)$/o;
   $receiver_expr = $ast_expr_source_node->($receiver)
    unless defined($receiver_expr) && length($receiver_expr);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
@@ -4816,7 +4821,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
 	  my $array_chain_return_family = sub {
 	   my ($method) = @_;
-	   return 'scalar_result' if defined($method) && $method eq 'index_of';
+	   return 'scalar_result' if defined($method) && $method =~ /^(?:index_of|is_empty|is_nonempty)$/o;
 	   return 'selected' if defined($method) && $method =~ /^(?:first|last|count|length)$/o;
 	   return 'array' if defined($method)
 	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
@@ -4877,8 +4882,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $expression = $lower_synthetic_chain_expr->($expression);
     return undef unless defined($source_expr) && defined($expression);
     my $array_method = _is_array_receiver_value_chain_method($method)
+     && $method !~ /^(?:is_empty|is_nonempty)$/o
      && !($method =~ /^(?:min|max)$/o && @$source_args);
     my $hash_method = defined(_hash_receiver_value_chain_return_family($method))
+     && $method !~ /^(?:is_empty|is_nonempty)$/o
      && !_is_tree_traversal_receiver_method($method);
     if ($method ne 'copy' && ($array_method || $hash_method)) {
      my $kind = $array_method ? 'ARRAY' : 'HASH';
@@ -4892,7 +4899,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    # explicit scalar-to-array bridge changes the result family.
    if (($receiver_family // '') eq 'scalar_result') {
     return ['undef', 'terminal']
-     unless _is_string_receiver_value_chain_method($method)
+     unless $method =~ /^(?:is_empty|is_nonempty)$/o
+      || _is_string_receiver_value_chain_method($method)
       || _is_number_receiver_value_chain_method($method);
     return ['undef', 'terminal'] if $method =~ /^(?:min|max)$/o && !@$source_args;
    }
@@ -4952,6 +4960,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 0 if defined($remembered_kind) && $remembered_kind eq 'array';
    if (ref($candidate_calls) eq 'ARRAY' && @$candidate_calls > 1) {
     my $next_method = $candidate_calls->[1]{method} // '';
+    return 0 if $next_method =~ /^(?:is_empty|is_nonempty)$/o;
     return 1 if defined(_hash_receiver_value_chain_return_family($next_method));
     return 0 if _is_array_receiver_value_chain_method($next_method);
    }
@@ -5207,6 +5216,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (_is_hash_receiver_value_chain_method($first_method)
+   && $first_method !~ /^(?:is_empty|is_nonempty)$/o
    && ($first_method ne 'copy' || $copy_starts_hash_receiver_chain->($receiver_expr, $calls))) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
@@ -5390,10 +5400,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
     taken => 1,
    context => { first_method => $first_method, steps => scalar(@$calls) },
   );
-  return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
+  my $generic_emptiness = $first_method =~ /^(?:is_empty|is_nonempty)$/o
+   || ($first_method eq 'copy' && @$calls > 1
+       && ($calls->[1]{method} // '') =~ /^(?:is_empty|is_nonempty)$/o);
+  return undef if !$generic_emptiness && defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
   my $current_expr = $receiver_expr;
   $current_expr = 'array('.$current_expr.')'
-   if ($receiver->{kind} // '') eq 'variable'
+   if !$generic_emptiness && ($receiver->{kind} // '') eq 'variable'
    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   my $current_family = 'array';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
@@ -5420,6 +5433,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     ($current_expr, $current_family) = @$applied;
     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
    }
+   return $lower_synthetic_chain_expr->($current_expr) if $generic_emptiness;
    # This composition can already contain emitted callback expressions.
    # Consume it through the existing compatibility bridge without parsing
    # host temporaries as new DSL expressions.
@@ -6376,58 +6390,11 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_matches_value = '.$value_expr.'; defined($__ls_matches_value) ? (($__ls_matches_value =~ '.$pattern_expr.') ? 1 : 0) : 0 }';
  }
  if ($method_call && ($method_call->{method} eq 'is_empty' || $method_call->{method} eq 'is_nonempty')) {
-  my $emptiness_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
-  return undef unless $emptiness_args;
-
-  my $target_expr = $trim_action_ir_value->($emptiness_args->[0]);
-  return undef unless defined($target_expr) && length($target_expr);
-
-  my $empty_expr;
-  if ($target_expr =~ $array_container_prefix_re) {
-   if ($target_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
-    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
-    my $name = $1;
-    $empty_expr = 'do { my $__ls_is_empty_array = $'.$name.'; (!defined($__ls_is_empty_array) || ref($__ls_is_empty_array) ne \'ARRAY\' || !@{$__ls_is_empty_array}) ? 1 : 0 }';
-   } else {
-   my $array_symbol = $extract_array_symbol_name->($target_expr);
-   return undef unless defined($array_symbol) && length($array_symbol);
-   $empty_expr = '((!@'.$array_symbol.') ? 1 : 0)';
-   }
-  } elsif ($target_expr =~ $hash_container_prefix_re) {
-   if ($target_expr =~ /^hash\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o
-    && (($bare_symbol_kind->($1) // '') eq 'scalar')) {
-    my $name = $1;
-    $empty_expr = 'do { my $__ls_is_empty_hash = $'.$name.'; (!defined($__ls_is_empty_hash) || ref($__ls_is_empty_hash) ne \'HASH\' || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }';
-   } else {
-   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-   return undef unless defined($hash_symbol) && length($hash_symbol);
-   $empty_expr = '((!scalar(keys %'.$hash_symbol.')) ? 1 : 0)';
-   }
-  } else {
-   my $scalar_symbol = $extract_scalar_symbol_name->($target_expr);
-   if (defined($scalar_symbol) && length($scalar_symbol)) {
-    $empty_expr = 'do { my $__ls_is_empty_value = $'.$scalar_symbol.'; '
-     .'(!defined($__ls_is_empty_value) '
-     .'|| (ref($__ls_is_empty_value) eq \'ARRAY\' && !@{$__ls_is_empty_value}) '
-     .'|| (ref($__ls_is_empty_value) eq \'HASH\' && !scalar(keys %{$__ls_is_empty_value})) '
-     .'|| (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq \'\')) ? 1 : 0 }';
-   } else {
-    my $lowered_target = _lower_method_value_expr($target_expr, $deps);
-    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
-    return undef unless defined($lowered_target) && length($lowered_target);
-
-    if ($looks_like_array_value_expr->($target_expr)) {
-     $empty_expr = 'do { my $__ls_is_empty_array = '.$lowered_target.'; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }';
-    } elsif ($looks_like_hash_value_expr->($target_expr)) {
-     $empty_expr = 'do { my $__ls_is_empty_hash = '.$lowered_target.'; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }';
-    } else {
-     $empty_expr = 'do { my $__ls_is_empty_value = '.$lowered_target.'; (!($__ls_is_empty_value)) ? 1 : 0 }';
-    }
-   }
-  }
-
-  return $empty_expr if $method_call->{method} eq 'is_empty';
-  return 'do { my $__ls_is_nonempty_empty = '.$empty_expr.'; $__ls_is_nonempty_empty ? 0 : 1 }';
+  my $args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
+  return undef unless $args;
+  my $value = _lower_method_value_expr($args->[0], $deps);
+  $value = $trim_action_ir_value->($args->[0]) unless defined($value) && length($value);
+  return _lower_emptiness_value_test($method_call->{method}, $value);
  }
  if ($method_call && $method_call->{method} eq 'count') {
   my $count_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -7719,7 +7686,7 @@ sub _hash_receiver_value_chain_return_family {
  return 'selected' if $method eq 'count_keys';
  return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
- return 'scalar_result' if $method eq 'has_key';
+ return 'scalar_result' if $method =~ /^(?:has_key|is_empty|is_nonempty)$/o;
  return 'terminal' if $method eq 'reduce_leaves';
  return undef
 }

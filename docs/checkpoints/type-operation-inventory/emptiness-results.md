@@ -63,3 +63,17 @@ failures: literal/bound/nested/function/block values, inverse helpers, empty Str
 Array/Hash/undef, String0/numeric0/false as data, two host-program-name states and
 1!/SA/one-call snapshots. Direct has_key producer compatibility passes. FlowExpr/
 global scalar recognition remain with SESSION16; receiver/result flow1.2 follows.
+
+## Bounded Perl receiver/result handoff
+
+23.3.9.1.2 uses scalar-result/zero-operand preflight and shared actual-kind
+predicate emission for typed/legacy ordinary values. Generic initial sources
+avoid an Array wrapper, and scalar/default/Hash continuations admit the existing
+generic predicates. Typed root calls retain function context. Generic predicates
+no longer imply Hash in copy lookahead: a bound function Array otherwise produced
+wrong1! rather than0!. Both copied dynamic Array and Hash bindings now pass.
+Native/fresh receiver and direct producer checks pass after terminal, host-truthiness,
+wrapper/function and copy-kind RED, preserving String0/numeric0/false data, false
+result retention, explicit bridges/scalar nulls, no malformed effects and1!/SA/
+once-only snapshots. FlowExpr/global scalar recognition stays with SESSION16;
+Rust assessment/full domain/portable admission remain separate.

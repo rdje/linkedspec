@@ -778,13 +778,13 @@ dispatch rule.
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Returns true for an actual empty Array/Hash/String or undef. Perl ordinary free-helper values now inspect the yielded kind once: `cat(is_empty({[]}),"!")` → `"1!"`, including blocks, nested reads and function results. String `"0"`, numeric0 and false remain data. `[].is_empty().cat("!")` still stops at undef; result chaining is next. Broader FlowExpr conditional/literal-slot repairs remain tracked.
+- **Behavior**: Returns true for an actual empty Array/Hash/String or undef; String `"0"`, numeric0 and false remain data. Perl ordinary values and receivers inspect that yielded kind once: `[].is_empty().cat("!")` → `"1!"`; `{"a":1}.is_empty().cat("!")` → `"0!"`; `cat(is_empty({[]}),"!")` → `"1!"`. Selected, function, default and copied dynamic Array/Hash sources also work. The predicate runs before consumer operands: `parts=[]; text=parts.is_empty().cat({parts+="x";"!"})` keeps `text="1!"` and leaves `parts=["x"]`. Receiver form takes no operands before effects; `.is_empty().sorted()` returns undef. Other backends are assessed separately; broader FlowExpr conditional/literal-slot repairs remain tracked.
 - **Edge cases**: Returns true for undef (treated as empty).
 
 ### `is_nonempty(arr)`
 - **Signature**: `is_nonempty(value: array|hash|expr)`
 - **Returns**: boolean
-- **Behavior**: Logical inverse of `is_empty`. True if the aggregate has at least one element. Perl nested `cat(is_nonempty(["a"]),"!")` returns `"1!"`, while `["a"].is_nonempty().cat("!")` currently stops at undef; compatible receiver/result continuation is tracked; ordinary free-helper `is_nonempty("0")` now agrees with a binding holding `"0"` and returns1. The broader conditional caveat above still applies.
+- **Behavior**: Logical inverse of `is_empty`. On Perl, `["a"].is_nonempty().cat("!")` → `"1!"`, and `{}.is_nonempty().coalesce_nonempty("late").cat("!")` → `"0!"` because false remains present data. `["a"].is_empty().cat(",x").split(",").last().uppercase()` → `"X"`; the explicit split produces an Array for later methods. Generic predicate results may themselves use `.is_nonempty()`. Ordinary free-helper `is_nonempty("0")` agrees with a binding holding `"0"` and returns1. Other backend and broader conditional qualifications above still apply.
 
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`
@@ -1904,7 +1904,7 @@ Receiver-dot methods are available for the value families that have a typed rece
   bridges to array chains; `length` feeds scalar/number methods. `starts_with`, `ends_with`, `contains_substr`, and `matches` retain their predicate endpoints.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Count/Length results feed compatible scalar/number methods. Terminal
-  links include `contains`, `is_empty`, `is_nonempty`; Perl/Rust/Dart/Julia/Lua `index_of` feeds compatible scalar/number methods on recorded hosts; full admission stays open;
+  links include `contains`; Perl `is_empty`/`is_nonempty` results feed compatible scalar/text methods; other-backend emptiness assessment remains open. Perl/Rust/Dart/Julia/Lua `index_of` feeds compatible scalar/number methods on recorded hosts; full admission stays open;
   `join_values` returns a String with ordinary Perl/Rust/Dart/Julia/Lua continuations on recorded hosts; full admission remains open. Ordinary Perl/Rust/Dart/Julia/Lua reducers (`sum`, `avg`, `median`, `range`, `min`, `max`) feed compatible scalar/number methods. `first` and `last` select an entry. Ordinary selected strings/numbers on Perl, Rust, Dart, Julia and Lua can continue through existing scalar methods: `" a :b ".split(/:/).first().trim().uppercase()` returns `"A"`, and `[2,3].last().mul(4)` returns `12`. Empty selections follow the next helper’s null behavior. Selected arrays/harrays also continue on all five ordinary backends: `[[3,1],[2]].first().sorted().last().add(4)` returns `7`, and `[{"b":2,"a":1}].first().sorted_keys().last().uppercase()` returns `"B"`. A selected value’s `copy()` preserves its actual array/harray kind. Lua checks use matching available PUC5.5.1/LuaJIT products; declared PUC5.4 proof remains LUA-STARTUP-READING.2.2. Rust scalar-null/operand repairs61.1/.61.2 are implemented with targeted checks; full scalar/fluent admission remains open.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
@@ -1917,7 +1917,7 @@ Receiver-dot methods are available for the value families that have a typed rece
   `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
   comparisons.
 
-Other predicate and flow-result continuations remain separately tracked; Perl/Rust/Dart/Julia/Lua has_key support the scalar/text handoff above. Expression-valued blocks and pure user-function returns do not
+Perl ordinary is_empty/is_nonempty results also support compatible scalar/text continuation. Other predicate and flow-result continuations remain separately tracked; Perl/Rust/Dart/Julia/Lua has_key support the scalar/text handoff above. Expression-valued blocks and pure user-function returns do not
 have separate method tables: the yielded runtime value selects the compatible family above. Mutation forms,
 lifecycle/control helpers, parser-state readers (`entry_*`, `match_*`, capture/input/mark helpers), declaration
 helpers, and child-dispatch calls remain function, statement, or lifecycle surfaces unless a future task explicitly
