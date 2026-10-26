@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1 — bind actual defaults before guarded consumers
+
+Perl nonempty-default results now continue through actual selected Array/Harray kinds while retained scalars keep incompatible-container nulls. Bind selection once and lower source/consumer helpers before host guards. Native/fresh focused regression and direct joined/default-exhaustion checks pass after RED; empty containers, zero/false, exhaustion, skipped fallbacks and SDJ snapshots pass. Valid Hash literal default repair1.2 is next; other backends/full domain/admission remain separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.5 — distinguish selected kind and operand lowering
 
 Freeze selected default result flow after public Perl Get/substitution/native/fresh distinctions: joined Array/Hash consumers stop beside working nested A-B/X:Y, while retained scalar/lazy and selected-null controls work. Schedule bounded Perl flow23.3.6.1.1, then owned P1 valid Hash fallback lowering1.2, then independent backend assessments. Existing scalar signatures and full domain/portable admission remain qualified; no production change or broad suite.

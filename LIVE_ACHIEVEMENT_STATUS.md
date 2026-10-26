@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded numeric/joined results and Lua delimiter repairs are targeted-checked. Default selected-kind contract23.2.5 is frozen; implement Perl flow23.3.6.1.1 next, then literal repair1.2 and backend assessments. Full admission stays separate.
+Perl selected-default result flow23.3.6.1.1 is implemented/targeted-checked. Valid Hash literal fallback1.2 is next, then independent backend assessments. Keep feature/compile/small-check/docs/commit cadence; full admission stays separate.
 
 ## Latest Completed Slice
 
-Freeze selected default result flow after public Perl Get/substitution/native/fresh distinctions: joined Array/Hash consumers stop beside working nested A-B/X:Y, while retained scalar/lazy and selected-null controls work. Schedule bounded Perl flow23.3.6.1.1, then owned P1 valid Hash fallback lowering1.2, then independent backend assessments. Existing scalar signatures and full domain/portable admission remain qualified; no production change or broad suite.
+Perl nonempty-default results now continue through actual selected Array/Harray kinds while retained scalars keep incompatible-container nulls. Bind selection once and lower source/consumer helpers before host guards. Native/fresh focused regression and direct joined/default-exhaustion checks pass after RED; empty containers, zero/false, exhaustion, skipped fallbacks and SDJ snapshots pass. Valid Hash literal default repair1.2 is next; other backends/full domain/admission remain separate.
 
 ## Next Action
 
-Implement bounded Perl nonempty-default result continuation, retaining lazy prefix, actual kinds, scalar guards and SDJ snapshots. Small compile/native/fresh/direct checks/docs/commit. Valid literal repair1.2 is scheduled immediately afterward; no broad campaign.
+Repair the bounded Perl Hash literal default AST/legacy bridge. Reverify coalesce twin/nested values and preserve lazy selection, kinds, effects and genuine retired syntax rejection. Small native/fresh/direct compatibility checks and commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 - `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` — Lua joined flow/arity/scalar guards and literal/computed false delimiter fix; focused available-host checks pass.
@@ -29,7 +30,6 @@ Implement bounded Perl nonempty-default result continuation, retaining lazy pref
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.1` — Perl six-reducer results continue through scalar/number methods with preserved boundaries; focused native/fresh and Count/Length checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.3` — aggregate numeric result contract frozen, public distinction retained and stale Count/Length summaries repaired; Perl implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.3.5` — Lua Length/key-count results continue and producer extras reject before effects; focused available PUC5.5.1/LuaJIT checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.3.4` — Julia existing result flow retained, producer arity and array-only count repaired; focused native/generated/emitted and strict harness checks pass.
 
 ## History
 

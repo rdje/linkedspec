@@ -12,12 +12,12 @@ answers:
   - "what does the coalesce_short_circuits native test actually assert"
   - "why do Perl and Rust coalesce disagree on empty aggregates"
 date: 2026-10-26
-status: bounded defaults repaired; Perl kind/literal repairs23.3.6 pending
+status: Perl selected-kind flow repaired; literal1.2/full admission open
 tags: [rust, perl, helpers, evaluation, startup-reading]
-evidence: "Historical .3.3.22 controls; current .62.1/.62.2.1-.3 public fixtures, Rust regressions and Perl Get/substitution/native/fresh proof. Broad .62.3/.62.4 remains open."
+evidence: "Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1 native/fresh and direct compatibility checks. Literal1.2/broad admission open."
 reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values"
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/coalesce_nonempty_exhaustion.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t"
 ---
 
 Current62.1/62.2.1-.3: Rust eval_coalesce_args/coalesce_accepts evaluates only
@@ -85,12 +85,13 @@ These generated captures were inspected, not independently executed.
 
 ## Current selected-result findings
 
-TYPE23.2.5 Get/substitution/fresh probes distinguish joined Array/Hash consumers
-(undef) from nested A-B/X:Y. Direct String Array continuation reaches a raw host
-helper. String/scalar_result metadata blocks actual containers;23.3.6.1.1 owns
-flow/retained-scalar guards. Valid colon Hash default emits hash_literal_use_colon:
-the value-only AST/legacy bridge reparses host fat arrows as DSL. Named Hash works;
-P1 repair1.2 follows1.1. Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
+TYPE23.2.5 Get/substitution/fresh probes distinguish stopped Array/Hash consumers
+from working nested A-B/X:Y.23.3.6.1.1 adds default_result handoff: bind once,
+guard containers by actual kind and lower helpers before host do/guards. Native/
+fresh and direct compatibility checks pass after RED, preserving scalar nulls,
+zero/false, empty containers and lazy SDJ snapshots. Valid colon Hash defaults
+still emit hash_literal_use_colon through host-fat-arrow reparsing; named Hash
+works. P1 literal repair1.2 is next. Scope/producers: docs/checkpoints/type-operation-inventory/default-selection-results.md.
 
 Original assertion/carrier detail is exact at Git949790b510f8ad29b744730ac379a8952d987d9f for this path; not replayed here.
 

@@ -18796,9 +18796,9 @@ _RGX and PGEN integration uses published contracts and observable build results 
 ### rust-coalesce-evaluation-drift
 _Lazy defaults and selected result kinds_
 - **answers:** can coalesce_nonempty Array or Hash results continue by actual kind | why does a valid coalesce_nonempty Hash literal emit hash_literal_use_colon | why does coalesce_nonempty make numeric array indices fail on Perl | does Perl coalesce_nonempty return undef when all operands are empty | does Rust coalesce preserve a defined empty string | does Rust coalesce short circuit operand evaluation | does coalesce_nonempty skip later assignment effects | what does the coalesce_short_circuits native test actually assert | why do Perl and Rust coalesce disagree on empty aggregates
-- **date:** 2026-10-26 · **status:** bounded defaults repaired; Perl kind/literal repairs23.3.6 pending
-- **evidence:** `Historical .3.3.22 controls; current .62.1/.62.2.1-.3 public fixtures, Rust regressions and Perl Get/substitution/native/fresh proof. Broad .62.3/.62.4 remains open.`
-- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/coalesce_nonempty_exhaustion.t`
+- **date:** 2026-10-26 · **status:** Perl selected-kind flow repaired; literal1.2/full admission open
+- **evidence:** `Defaults62.1/62.2.1-.3; selected-result23.3.6.1.1 native/fresh and direct compatibility checks. Literal1.2/broad admission open.`
+- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test coalesce_lazy_values --test coalesce_nonempty_values --test coalesce_receiver_values` · `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/default_selected_receiver_contract.t t/joined_string_receiver_contract.t t/coalesce_nonempty_exhaustion.t`
 - **source:** [`docs/knowledge/rust-coalesce-evaluation-drift.md`](docs/knowledge/rust-coalesce-evaluation-drift.md)
 
 ### rust-core-compilation-boundaries

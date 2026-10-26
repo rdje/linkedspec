@@ -78,3 +78,13 @@ Do not infer their failures from Perl. Preserve deferred/callback vocabulary,
 serialized formats, free-helper argument roles and source-kind differences.
 Full signature reconciliation remains `.1.2.1.4`; complete fluent/public/portable
 admission remains `.23.4`, with Lua declared5.4 separately owned.
+
+## Bounded Perl implementation
+
+`.23.3.6.1.1` adds default_result handoff and guards container consumers by the
+once-bound selection's actual kind. Scalar helpers retain scalar boundaries.
+Source/consumer DSL helpers lower before entering host do/guard expressions.
+The native/fresh focused fixture passes after RED, including the named targets,
+empty containers, zero/false, exhaustion, lazy SDJ order and source snapshots.
+Direct joined/default-exhaustion checks pass. Valid direct Hash literals remain
+with `.1.2`; other backends and complete domain/admission remain unassessed here.

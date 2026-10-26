@@ -4787,11 +4787,36 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # Extraction and numeric producer links yield values for compatible helpers.
   # Preserve each helper's runtime domain and null behavior instead of
   # retaining the original receiver family.
-  my $append_selected_value_chain_call = sub {
+  my $lower_synthetic_chain_expr;
+  my $append_selected_value_chain_call;
+  $append_selected_value_chain_call = sub {
    my ($current_expr, $call, $receiver_family) = @_;
    my $method = $call->{method} // '';
    my $source_args = $call->{args} || [];
    return undef unless ref($source_args) eq 'ARRAY';
+   # A lazy default may select a container even when its source was scalar.
+   # Bind the selection once, then guard container consumers by its actual kind.
+   if (($receiver_family // '') eq 'default_result') {
+    my $value_expr = '$__ls_selected_default';
+    my $applied = $append_selected_value_chain_call->($value_expr, $call, 'selected');
+    return undef unless ref($applied) eq 'ARRAY';
+    my ($expression, $family) = @$applied;
+    # Finish DSL lowering before enclosing helpers in host guards/do blocks.
+    my $source_expr = $lower_synthetic_chain_expr->($current_expr);
+    $expression = $lower_synthetic_chain_expr->($expression);
+    return undef unless defined($source_expr) && defined($expression);
+    my $array_method = _is_array_receiver_value_chain_method($method)
+     && !($method =~ /^(?:min|max)$/o && @$source_args);
+    my $hash_method = defined(_hash_receiver_value_chain_return_family($method))
+     && !_is_tree_traversal_receiver_method($method);
+    if ($method ne 'copy' && ($array_method || $hash_method)) {
+     my $kind = $array_method ? 'ARRAY' : 'HASH';
+     $expression = "ref($value_expr) eq '$kind' ? ($expression) : undef";
+    } elsif ($method ne 'copy' && $method ne 'coalesce_nonempty') {
+     $family = 'scalar_result' if $family eq 'selected';
+    }
+    return ['do { my '.$value_expr.' = '.$source_expr.'; '.$expression.' }', $family];
+   }
    # Reducers yield scalars. Keep array-only consumers invalid until an
    # explicit scalar-to-array bridge changes the result family.
    if (($receiver_family // '') eq 'scalar_result') {
@@ -4839,7 +4864,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
    return [$expression, $return_family];
   };
-  my $lower_synthetic_chain_expr = sub {
+  $lower_synthetic_chain_expr = sub {
    my ($current_expr) = @_;
    my $lowered = _lower_method_value_expr($current_expr, $deps);
    return $lowered if defined($lowered) && length($lowered);
@@ -4989,7 +5014,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -5088,7 +5113,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 1; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -5130,7 +5155,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -5190,7 +5215,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -5248,7 +5273,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -5304,7 +5329,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return 'undef' if $current_family eq 'terminal';
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
-    if ($current_family eq 'selected' || $current_family eq 'scalar_result') {
+    if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
@@ -7658,8 +7683,9 @@ sub _is_tree_traversal_receiver_method {
 sub _string_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
+ return 'default_result' if $method eq 'coalesce_nonempty';
  return 'selected' if $method eq 'length';
- return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat|coalesce_nonempty)$/o;
+ return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)$/o;
  return 'array' if $method =~ /^(?:split)$/o;
  return 'terminal' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches)$/o;
  return undef
