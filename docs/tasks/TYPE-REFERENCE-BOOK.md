@@ -2032,11 +2032,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Children: `.23.3.8.1.1`, `.23.3.8.1.2`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair valid String key blocks failing has_key native/fresh compilation; priority P1.
   Dependencies: .23.2.7.
   Reproduction / impact: meta.has_key({order=cat(order,"K");"a"}) leaves raw DSL inside exists ->{{...}}, failing compilation even without chaining. Literal/variable/helper String keys already work.
   Acceptance: Complete key lowering in its current context without disturbing generic callback contracts; establish once-only/source-before-key snapshots, false/null-valued presence and literal/variable/helper compatibility on native/fresh routes. Compile/small checks/docs/commit before result flow.
+
+  Activation: clean `34167dfba3fbddec13ad4da8013d6cdd484117c6`; assessment committed, brief empty, tree clean.
+  Owned paths: Perl has_key current-context key lowering; focused native/fresh producer fixture and current contract/book/hash fact/live records.
+  Verification tier: `focused`
+  Focused checks: Native/fresh key-block producer RED/GREEN, literal/variable/helper presence and source/key snapshot/order controls; direct index compatibility, Perl syntax, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded producer repair under director feature-first cadence; full domain/portable admission23.4 and final clean push separate.
+  Claim verification: none: deterministic authored value/order regression, no quantified population or portable measurement.
+
+  Completion: Complete key expressions with _lower_method_value_expr before existing scalar-key fallback; no generic/private callback contract change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get/fresh key-block regression RED3/4 with raw DSL syntax errors near {{, while prior literal/variable/helper controls work.
+  - [x] ROOT CAUSE (WHY + WHERE): call_spec_handler_subst retains authored key blocks inside exists; MethodLowering has_key delegates only to scalar access key lowering.
+  - [x] FIX: Finish key lowering in current MethodLowering context, then retain original fallback. No producer kind/domain/copy policy change.
+  - [x] ADDRESSED (verified): Native/fresh fixture passes key once-only, literal/variable/helper presence, false/null stored values and named/computed/free snapshots with K/SK order. Later-added key stays absent from captured source.
+  - [x] NO REGRESSION: Direct native/fresh index fixture and Perl source/test syntax pass; no broad suite or result-flow change.
+  - [x] LOCKSTEP: Current contract/book/key fact/map and task/live/resume records updated; fast memory/cadence/diagnosis/history/diff and book pass. Result handoff1.2 next after clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1 - lower has_key key blocks in context`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2`
   Status: `pending`
@@ -2146,11 +2163,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; P1 Perl key-block23.3.8.1.1 precedes result flow1.2 and independent backend assessment. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 is repaired/targeted-checked; result flow1.2 and independent backend assessment follow. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` | `pending` | P1 valid String key-block compilation repair before result flow. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.2` | `pending` | Perl compatible has_key result handoff after key-block repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

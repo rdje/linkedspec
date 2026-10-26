@@ -1,6 +1,6 @@
 ---
 id: terse-hash-receiver-value-chains
-title: Hash receiver chains and has_key result/key-block gaps
+title: Hash receiver chains and has_key key/result contracts
 answers:
   - "why does has_key result cat fall through to a host call on Perl"
   - "why does a computed has_key String key block fail to compile"
@@ -12,12 +12,12 @@ answers:
   - "does merge_hash later argument override earlier keys"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.2"
 date: 2026-10-26
-status: has_key key-block/result repairs owned; full admission open
+status: Perl key blocks repaired; has_key result flow open
 tags: [spec-format-terse, method-chaining, receiver-dot, hash, rust-parity, mdbook]
 evidence: "Hash2.3.5.2/Lua copy6.2.2; prior details at Git617eb85069719f32d36779e521a438ae595df088 for this path. Has_key23.2.7 public native/fresh distinctions."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_has_key_results.pl"
-  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_has_key_results_fresh.pl"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/has_key_key_expression_contract.t"
 ---
 
 `SPEC-FORMAT-TERSE.2.3.5.2` is the hash-family implementation leaf for return-type method chaining.
@@ -42,4 +42,4 @@ The next historical task-tree leaf was `.2.3.5.3` for string/scalar receiver-dot
 
 Related: [[lua-receiver-copy-value-preservation]].
 
-Has_key23.2.7: native/fresh presence is [1,0,1,1] for present/missing/false/null fields; variable/helper String keys work. Fluent cat reaches raw host has_key while nested cat gives1!: _hash_receiver_value_chain_return_family marks has_key terminal. A key block remains raw inside exists ->{{DSL}} and fails compilation. has_key delegates it to lower_scalar_access_key_expr without completing it in its current lowering context. P1 key-block23.3.8.1.1 precedes result-flow1.2; effect/snapshot blocks are not passing evidence yet. Full domains/other backends stay separate.
+Has_key23.2.7 found raw host fluent dispatch and raw key-block compilation failures.23.3.8.1.1 repairs keys by completing _lower_method_value_expr in MethodLowering before scalar-key fallback; native/fresh producer tests pass after RED, preserving presence[1,0,1,1], literal/variable/helper/block keys and K/SK source snapshots. Result-flow1.2 remains open: _hash_receiver_value_chain_return_family still marks has_key terminal; nested cat gives1! while fluent cat fails. Full domains/other backends stay separate.

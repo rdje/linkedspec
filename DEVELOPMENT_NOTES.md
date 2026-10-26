@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1 — lower has_key key blocks in context
+
+Perl has_key completes key expressions in the current MethodLowering context before the existing scalar-key fallback. Native/fresh producer checks pass after raw-DSL compilation RED, preserving literal/variable/helper keys, present/absent/false/null presence, two key evaluations and named/computed/free source-before-key snapshots. Direct index compatibility and syntax/book/fast continuity checks pass; result handoff remains separate.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.2.7 — separate key-block producer from result flow
 
 Public native/fresh probes distinguish raw host fluent failure from nested1!, and key-block compilation failure from working literal/variable/helper String keys. Presence is[1,0,1,1]; effect blocks are failing controls. Bounded contract and backend owners recorded; production unchanged. Syntax/book/fast continuity checks pass; P1 key-block repair precedes result flow, with full admission separate.

@@ -6822,7 +6822,9 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
   return undef unless defined($key_expr) && length($key_expr);
 
-  my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+  my $key_lowered = _lower_method_value_expr($key_expr, $deps);
+  $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+   unless defined($key_lowered) && length($key_lowered);
   return undef unless defined($key_lowered) && length($key_lowered);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);

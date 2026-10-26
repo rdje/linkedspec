@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Has_key contract frozen; P1 Perl key-block repair first, result flow and independent backends follow. Feature/compile/small-check/docs/commit cadence; full admission separate.
+Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
 
 ## Latest Completed Slice
 
-Public native/fresh probes distinguish raw host fluent failure from nested1!, and key-block compilation failure from working literal/variable/helper String keys. Presence is[1,0,1,1]; effect blocks are failing controls. Bounded contract and backend owners recorded; production unchanged. Syntax/book/fast continuity checks pass; P1 key-block repair precedes result flow, with full admission separate.
+Perl has_key completes key expressions in the current MethodLowering context before the existing scalar-key fallback. Native/fresh producer checks pass after raw-DSL compilation RED, preserving literal/variable/helper keys, present/absent/false/null presence, two key evaluations and named/computed/free source-before-key snapshots. Direct index compatibility and syntax/book/fast continuity checks pass; result handoff remains separate.
 
 ## Next Action
 
-Repair Perl has_key valid String key-block compilation under23.3.8.1.1; native/fresh RED/GREEN producer snapshots/order and direct literal/variable/helper compatibility, small checks/docs/commit before result handoff1.2.
+Implement Perl has_key scalar/text result handoff23.3.8.1.2 under has-key-results.md; native/fresh RED/GREEN, one-key no-effect preflight, actual-kind/scalar/bridge and ordered snapshots, direct producer compatibility, small checks/docs/commit.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.8.1.1` — Perl has_key key blocks repaired with native/fresh producer snapshots; result handoff next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.7` — has_key contract frozen, P1 key-block and result-flow gaps owned; public native/fresh controls retained.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.5` — index scalar/null and shape guards; focused available-host native/plan/fresh/direct default checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.7.4` — index scalar/null and shape guards; strict native/plan/fresh/direct default checks pass.
@@ -29,7 +30,6 @@ Repair Perl has_key valid String key-block compilation under23.3.8.1.1; native/f
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.1` — selected Array/Hash defaults continue with scalar guards and lazy SDJ snapshots; native/fresh/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.5` — default selected-kind target frozen; Perl flow/literal defects owned and scheduled, backend assessments follow.
 - `LUA-STARTUP-READING.2.9.1.1` — mutable split retains false with detached results and ordered evaluation; focused available-host checks pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.5.5` — Lua joined flow/arity/scalar guards and literal/computed false delimiter fix; focused available-host checks pass.
 
 ## History
 

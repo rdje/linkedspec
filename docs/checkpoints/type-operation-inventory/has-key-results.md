@@ -54,3 +54,12 @@ result handoff and whole fluent shape preflight. Rust2/Dart3/Julia4/Lua5 each be
 with independent public assessment, repair only confirmed gaps and preserve the
 actual producer kind. Use compile/small direct checks/docs/commit; no broad suite,
 contains calibration change, new predicate vocabulary or portable admission.
+
+## Bounded Perl key-block repair
+
+23.3.8.1.1 completes key expressions in the current MethodLowering context before
+the existing scalar-key fallback. Native/fresh regression passes after compilation
+RED: literal/variable/helper keys, key once-only, false/null-valued presence and
+named/computed/free source snapshots with K/SK order. A key added while computing
+the key stays absent from the captured source. Direct index compatibility passes.
+Result continuation/shape repair1.2 and independent backends remain separate.
