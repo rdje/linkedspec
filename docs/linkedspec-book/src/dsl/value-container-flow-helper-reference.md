@@ -781,9 +781,9 @@ public = raw.trim().split("-").lowercase_each().join_values("_");
 
 String receiver-dot value chains are accepted for the pure scalar string helpers. The receiver is the first
 helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(raw))`, and
-`"abcdef".substr(1, 3).uppercase()` maps to `uppercase(substr("abcdef", 1, 3))`. String-returning links
+`"abcdef".substr(1, 3).uppercase()` maps to `uppercase(substr("abcdef", 1, 3))`. Scalar string-helper links
 (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, and `cat`)
-can keep chaining through string helpers. Defaults preserve the selected kind: ordinary Perl/Rust/Dart/Julia/Lua `undef.coalesce(["a","b"]).last().uppercase()` gives `"B"`, while `"".coalesce("late").cat("!")` retains `"!"`; one-or-more fallbacks are required, selection is lazy, and unused fallbacks stay skipped. Lua uses available PUC5.5.1/LuaJIT; declared5.4/full domain/context/portable admission remain separate. `split(delim)` is the explicit bridge from a
+can keep chaining through compatible helpers. Empty-old replacement and empty/unmatched affix removal preserve the original scalar kind; these operations need not produce String. A separate bounded result/boundary assessment is frozen; current Perl affix identity typed Array-index use still needs repair. Defaults preserve the selected kind: ordinary Perl/Rust/Dart/Julia/Lua `undef.coalesce(["a","b"]).last().uppercase()` gives `"B"`, while `"".coalesce("late").cat("!")` retains `"!"`; one-or-more fallbacks are required, selection is lazy, and unused fallbacks stay skipped. Lua uses available PUC5.5.1/LuaJIT; declared5.4/full domain/context/portable admission remain separate. `split(delim)` is the explicit bridge from a
 string chain into the array receiver family, so `raw.trim().split("-").trim_each().join_values("|")` is
 portable. `length` feeds compatible scalar/number methods, for example `"abcd".length().add(2)` returns `6`; on Perl/Rust/Dart/Julia/Lua, `"abc".starts_with("a").cat("!")` returns `"1!"` and `"abc".matches(/^z/).coalesce_nonempty("late").cat("!")` returns `"0!"`. Predicates require one operand before effects; their scalar results reject container-only consumers until an explicit bridge produces a container.
 A string-yielding expression-valued block can be the receiver, for example

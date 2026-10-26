@@ -16,7 +16,7 @@ answers:
   - "why does false Perl definedness select coalesce_nonempty fallback"
   - "does exit_now terminate the Perl host process"
   - "does cat treat a null argument as empty text"
-date: 2026-10-26
+date: 2026-10-27
 status: dated diagnostic evidence; repair state belongs to the owning task-tree
 tags: ["startup-reading","book","contracts","verification"]
 evidence: "SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.28. No implementation repair or whole-project signoff is claimed."
@@ -132,3 +132,8 @@ and the exact public lifecycle matrix in [[perl-semantic-inline-header-lifecycle
 ## Current ordinary definedness flow
 
 TYPE23.2.10 native/fresh producer1/empty-string and returned/nested use corrected condition-only catalog claims. False renders"!" with cat and selects coalesce_nonempty fallback; preserve actual kinds.23.3.11.1 registers generic receivers/scalar/zero-operand guards and numeric-prefix handoff. Registration exposed synthetic defined(word)/defined(first(...)) and raw bridge calls: typed actual-value operands and a matching legacy definedness branch now finish lowering. Native/fresh shared fixture and direct String checks pass after raw-host/compile/operand RED, retaining1!/SC/one source call, null/defined kinds, false/default and bridges. Broad SESSION28.5 admission remains open; Rust Bool preservation: [[terse-array-receiver-value-chains]]; other backend/admission progress is task-owned. Contract/probe: definedness-results.md/probe_definedness_results.pl; regression: definedness_result_receiver_contract.t.
+
+TYPE23.2.19 corrects the exact catalog cat undef-as-empty sentence using frozen
+scalar-text-v1, native/fresh cat(undef,"x")->null and direct scalar-text7 checks.
+This is a narrow current teaching repair; broad SESSION28.5 admission remains
+open. No null coercion, unary free-cat51 or large-number55.2 policy change.

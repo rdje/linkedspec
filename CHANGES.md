@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.19 — freeze scalar String-helper result flow
+
+Scalar String-helper assessment19 freezes eight actual scalar result continuations and precise ordinary shapes. Public native/fresh valid texts/Array bridges/SONC/source/Unicode/identity JSON controls pass, while container/malformed tails retain raw DSL. Free/fluent/named unmatched numeric affix indices fail: source text inspection adds POK to original numeric IOK; replacement/literal0 controls pass. Perl19.1 owns the P1 kind repair and flow before independent19.2-.5. Correct stale cat null teaching against scalar-text-v1; direct7/probe syntax pass. Frozen/probe/book/canonical facts/task/live align; no production/free/domain/Unicode/selector change or full admission.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.18.5 — guard Lua defined-only default results
 
 Lua18.5 preserves independently confirmed defined-only lazy selection and repairs actual scalar-result/zero-RHS boundaries with no new module locals. Both safe PUC5.5.1/LuaJIT canonical JSON native/plan/fresh producer/shared/selected plus direct defaults/source loads pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/rejected-prefix effects and forbidden-operand suppression. All five bounded defined-only default implementations are targeted-checked; book/frozen/fact/task/live align. Declared5.4/full domain/context/portable admission separate. Pure String result assessment19 next.

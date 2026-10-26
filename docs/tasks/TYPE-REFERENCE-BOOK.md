@@ -1393,19 +1393,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.18 - freeze defined-only default receivers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.19`
-  Status: `pending`
-  Goal: Assess ordinary pure String-producing helper result continuations and scalar boundaries from the helper spelling/role spine.
+  Status: `completed`
+  Goal: Assess ordinary scalar String-helper result continuations and scalar boundaries from the helper spelling/role spine.
   Dependencies: Bounded defined-only default23.3.18.1-.5 committed.
   Authority: Existing trim/lowercase/uppercase/replace_substr/rm_prefix/rm_suffix/substr/cat public contracts, String/numeric/Unicode/copy facts and actual-result flow owners. length/predicates/comparisons/defaults/split/statement regex substitution retain their existing separate contracts; no resolver category is a receiver guarantee.
-  Acceptance: Read canonical String helper signatures/semantics and relevant current book before public producer/nested/fluent/source/arity/effect native/fresh distinctions. Preserve actual String/null results, empty/Unicode/conversion/domain/arity policies, source-first once-only operands/snapshots and compatible scalar/generic/explicit Array bridges. Assess incompatible container consumers and malformed shapes without changing free helpers, known source-context differences or callbacks. Freeze only concrete bounded gaps/needed flow and schedule independent backend children after observations; small checks/docs/commit, no full matrix/replay.
+  Acceptance: Read canonical String helper signatures/semantics and relevant current book before public producer/nested/fluent/source/arity/effect native/fresh distinctions. Preserve actual scalar/null results, including original Number/Boolean kinds on identity replacement/removal, empty/Unicode/conversion/domain/arity policies, source-first once-only operands/snapshots and compatible scalar/generic/explicit Array bridges. Assess incompatible container consumers and malformed shapes without changing free helpers, known source-context differences or callbacks. Freeze only concrete bounded gaps/needed flow and schedule independent backend children after observations; small checks/docs/commit, no full matrix/replay.
   Planned verification tier: focused
   Planned focused checks: Canonical String facts/contracts and small public producer/nested/receiver distinctions with direct String checks/syntax/book/continuity.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
 
+  Activation: clean `cab79913dc53b0b810aa3308e9612a533a195b0c`; all bounded defined-only default implementations committed, brief0/tree clean.
+  Owned paths: Retained public scalar String-helper producer/nested/receiver/source/effect/kind/Unicode/shape assessment and any needed bounded contract/backend scheduling, scoped book/fact/task/live docs. No production change before observations. Canonical catalog preserves original kinds for empty-old replacement/unmatched or empty affix removal; do not infer every String helper always returns String.
+  Verification tier: `focused`
+  Focused checks: Canonical String facts/contracts and public Get/substitution/dump/native/fresh distinctions, small direct String checks/syntax/book/history/staged continuity guards.
+  Canonical trigger: None for bounded feature assessment under director feature-first cadence; full domain/context/portable admission separate.
+  Claim verification: none: normative bounded feature selection and deterministic authored distinctions, no population/completeness measurement.
+
+  Owned intake findings: Eight valid fluent/nested texts and all eight split-to-Array bridges pass native/fresh; direct/nested replacement captures SONC/once-only/final-null. Boundary/malformed compounds fail handler/fresh compilation with raw DSL blocks. Producer cat(undef,"x") returnsnull, correctly matching scalar-text-v1; current catalog's undef-as-empty sentence is a known stale teaching defect (SESSION28.5), repair its exact line here without changing the producer. Identity Number selector fails typed nested_write_kind_conflict; the first probe then tries serializing a blessed context error and stops. Correct instrumentation and isolate free/fluent/named producer/index controls plus AST/substitution before classifying or freezing that issue. Own any confirmed kind/staging defect immediately in the bounded implementation schedule.
+
+  Decision: Freeze scalar-string-results.md for eight existing ordinary scalar String-helper result flows, clean scalar boundaries and precise pre-effect shapes. Preserve actual identity Number/Boolean/String kinds, Unicode/null/strict cat/free/domain/callback policies. Schedule independent backend19.1-.5; Perl19.1 first owns the newly confirmed affix identity flag defect. Correct only the stale cat null teaching line here, leaving broad SESSION28.5/61.3 and reducer95 admission open.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native/fresh eight fluent/nested texts and all split bridges agree; direct/nested replacement SONC/once-only/final-null, selected/named/Hash/block/canonical sources, empty/null and Unicode controls pass. Container tails retain raw DSL, producing undefined host trim/compile failures; malformed compounds similarly fail compile.
+  - [x] ROOT CAUSE (WHY + WHERE): String-family metadata/composition lacks an actual scalar boundary after transforms. Separate public free/fluent/named affix identity selectors fail typed harray-vs-array; substitution inspects the original source with index/length/substr. B flags before JSON show prefix/suffix integer+string versus replacement/literal0 integer-only/String0 string-only; BindingRuntime correctly prioritizes POK. Inspect a copy in Perl19.1, without weakening selectors or fixing separate reducer95.
+  - [x] FIX: Frozen actual scalar/identity/shape/effect contract and five backend owners; no production change. Correct stale cat undef-as-empty catalog prose using scalar-text-v1/public controls and qualify identity selector limitation until19.1. Recursive diagnostic snapshots replace shallow error copying; incomplete records are not credited.
+  - [x] ADDRESSED (verified): Native/fresh identity JSON[0,0,false,1,String0] is distinguished from actual selector kind by failing affix/free/named writes and passing empty-old replacement control. Greek final sigma/STRASSE FFI/emoji substring and source/effect controls retain existing behavior. Direct scalar-text contract7 and probe syntax pass; unknown contexts/domains are not inferred.
+  - [x] NO REGRESSION: No parser/runtime/Unicode/conversion/free helper/typed selector or callback change. No full matrix/replay/portable admission; cat unary51/large-number55.2, source-null61.3, reducer95 and Lua declared5.4 remain separate.
+  - [x] LOCKSTEP: Retained probe/frozen contract/backend schedule, corrected current cat teaching/qualified identity limit and canonical String/null/teaching facts/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl19.1 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.19 - freeze scalar String-helper result flow`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -4033,6 +4052,65 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Retained test/safe runner, frozen contract/all-five bounded progress and qualified catalog/guide, canonical default fact/map plus task/live/resume align. Next pure String result assessment23.2.19 is owned before any new diagnostic/change. Book/history/diff/final staged memory/cadence/diagnosis checked before commit.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5 - guard Lua defined-only default results`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19`
+  Status: `active` / frozen scalar String-helper flow; backend implementations pending
+  Goal: Complete bounded actual scalar String-helper results, identity kinds and clean scalar/shape boundaries.
+  Dependencies: .23.2.19 frozen scalar-string-results.md.
+  Children: `.23.3.19.1`, `.23.3.19.2`, `.23.3.19.3`, `.23.3.19.4`, `.23.3.19.5`.
+  Acceptance: Preserve existing eight helper/free/Unicode/null/conversion domains and actual identity kinds; compatible scalar/generic/numeric/explicit Array flow, once-only snapshots/effects, clean scalar rejection and pre-effect ordinary shapes. No full domain/context/portable admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary scalar String-helper result flow and boundaries.
+  Dependencies: .23.2.19.
+  Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
+  Owned P1 defect: Free/fluent/named unmatched affix numeric identity loses typed Array-index kind despite numeric JSON; inspect a copy during index/length/substr tests, preserving original Number/Boolean/String value. Retain exact selector/B-flag distinctions and unchanged String-key rejection. Repair here before Rust; reducer95 remains separate.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary scalar String-helper result flow and boundaries.
+  Dependencies: .23.3.19.1.
+  Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary scalar String-helper result flow and boundaries.
+  Dependencies: .23.3.19.2.
+  Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary scalar String-helper result flow and boundaries.
+  Dependencies: .23.3.19.3.
+  Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary scalar String-helper result flow and boundaries.
+  Dependencies: .23.3.19.4.
+  Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
+  Safety scope: Only safe available PUC5.5.1/LuaJIT fixtures; exclude malformed native patterns/full runner. Declared5.4 remains separately owned.
+  Planned verification tier: focused
+  Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
+  Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
+  Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
@@ -4046,11 +4124,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Next is separate pure String-producing helper result/scalar-boundary assessment23.2.19 from canonical signatures and public distinctions. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1 first owns actual-result/scalar/shape flow and the affix identity Number-kind repair, followed by independent backend19.2-.5. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.19` | `pending` | Assess pure String-producing result continuations/scalar boundaries from canonical contracts before production. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` | `pending` | Implement scalar String-helper flow and repair Perl affix identity Number kinds after public intake. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -9,14 +9,14 @@ answers:
   - "do string predicates and matches reject undefined input"
   - "is null an undefined literal in the LinkedSpec DSL"
   - "which task owns scalar helper null and empty semantics"
-date: 2026-10-26
+date: 2026-10-27
 status: bounded null/empty repairs61.1/.61.2 complete; broad61.3 admission open
 tags: [rust, perl, scalar, string, undef, null, helpers, parity]
 evidence: "SESSION-STARTUP-READING.3.3.21 at 19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3 compares five scalar vectors on primary Rust and public Perl Get, captures all lowering/generated text and descriptors, and independently checks exact result kinds and error absence. Literal undef and unbound name null reproduce the same differences; the empty-string transformation control agrees."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test scalar_null_propagation --test scalar_predicate_boundaries"
 ---
 
-Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves original values/kinds for empty old/prefix/suffix and unmatched affixes. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
+Current:61.1 guards seven transformation sources before text coercion (trim first landed under23.3.1.2).61.2 guards null predicate/replacement/removal operands and preserves observed values for empty old/prefix/suffix and unmatched affixes; TYPE23.2.19 now distinguishes a Perl affix identity kind defect from that JSON projection. Retained scalar_null_propagation and scalar_predicate_boundaries tests cover native/restored/generated-plan execution, defined/null distinctions, Unicode/array counts and eager order. Public Perl Get confirms the shared boundary fixture, with Rust matches retaining JSON boolean results. Broad61.3 remains open; historical vectors below are unchanged.
 
 # Historical September 7 inputs and outputs
 
@@ -96,3 +96,11 @@ in that card's rust-cli/perl-results files. Additional data is:
 | perl-undefined-results.jsonl | 316 | 24cd8eecc3a09993cd2bc4200defbc846a3c5c0fd1898e4d8758c7f29b51a07f |
 
 The current reverify checks source-null transformations; it does not refresh the historical five-vector comparison or close broader admission.
+
+TYPE23.2.19 confirms Perl unmatched numeric affix identities serialize0 but
+retain POK alongside IOK and fail typed Array-index writes in free/fluent/named
+forms. Empty-old replacement passes the same consumer. MethodLowering inspects
+the original source with index/length/substr; Perl19.1 owns inspecting a copy
+while retaining original identity kinds. This qualifies broad kind wording from
+JSON-only controls; it does not reopen Rust null repairs or close61.3/reducer95.
+Canonical result contract/diagnostics: [[terse-string-receiver-value-chains]].

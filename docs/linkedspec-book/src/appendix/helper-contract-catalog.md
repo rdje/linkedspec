@@ -260,7 +260,7 @@ dispatch rule.
 ### `cat(args...)`
 - **Signature**: `cat(a: scalar, b: scalar, ...)`
 - **Returns**: scalar
-- **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
+- **Behavior**: Concatenates scalar text under `scalar-text-v1`. Strings are unchanged, booleans become `"1"`/`"0"`, and finite numbers use the established numeric text policy. An undef argument makes the whole result undef: `cat("a",undef,"b")` → undef, while `cat("a","","b")` → `"ab"`.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
 - **Argument boundary**: Every argument in an already-valid current value-helper call is an authored value. A bare
   first value is never consumed as a legacy scope label: `cat(key, "@", depth)` reads all three values. The same
@@ -385,13 +385,13 @@ dispatch rule.
 ### `rm_prefix(s, prefix)`
 - **Signature**: `rm_prefix(value: scalar, prefix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef.
+- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef. Perl currently serializes unmatched numeric identities correctly but their typed Array-index use fails; a bounded identity-kind repair is scheduled before further String result implementation.
 - **Example**: over `/(\S+)/`, `rm_prefix(entry_group(0), "lib")` on `libparser` → `["parser"]`.
 
 ### `rm_suffix(s, suffix)`
 - **Signature**: `rm_suffix(value: scalar, suffix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef.
+- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef. The same current Perl typed Array-index identity limitation applies.
 - **Example**: over `/(\S+)/`, `rm_suffix(entry_group(0), ".spec")` on `parser.spec` → `["parser"]`.
 
 ### `substr(s, start, length?)`
