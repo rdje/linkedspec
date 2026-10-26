@@ -1392,10 +1392,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.3.5 - continue Lua count and length results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4`
-  Status: `active` / Perl/Rust implemented; individual backend assessment follows
+  Status: `active` / Perl/Rust/Dart implemented; individual backend assessment follows
   Goal: Implement the frozen ordinary aggregate numeric reducer result contract on each backend, preserving correct existing behavior.
   Dependencies: .23.2.3.
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`; assess later backends individually after clean implementation commits.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`; assess later backends individually after clean implementation commits.
   Planned tier: Focused bounded children; complete context/portable admission remains23.4.
   Claim verification: none: Unactivated implementation family; no support/completeness measurement.
 
@@ -1448,13 +1448,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.2 - continue Rust aggregate numeric results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.3`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `f0596ea0430566608988500c04fd5ddf4da67e45`.
   Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Dart.
   Dependencies: .23.3.4.2.
   Owned paths: Dart public interpreter if needed, focused native/restored/generated-plan regression and synchronized book/fact/task/live records.
+  Verification tier: `focused`
+  Focused checks: Public Dart producer/shape/domain probes, small native/restored/generated-plan aggregate_numeric_receivers and direct Count/Length tests, changed-file fatal analysis/format, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; complete context/portable admission remains23.4 and eventual clean push proof.
+  Claim verification: none: deterministic authored value/order/arity regression; no quantified corpus, exhaustive or portable admission measurement.
+  Public finding / owned defects: Valid six fluent/nested pairs agree [13,13,5,5,5,5,5,5,3,3,7,7], and empty helper controls already pass [0,1,null,null]. sum(extra) returns1 with two effects; incompatible Array consumers yield []/[] instead of the frozen null boundary. Preserve existing valid dispatch/empty identity, guard unambiguous aggregate shape before effects and carry scalar-result validation across ordinary/mutating-source value loops.
+  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six producer results, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/restored/generated-plan and direct Count/Length checks, changed-file analysis/format, docs/commit before Julia; no broad replay or complete admission.
+
+  Completion: Keep valid result dispatch/empty identity, add canonical zero-extra num_sum/num_avg/num_median/num_range preflight and share ordinary/mutating-source continuation iteration. Track actual Array reduction results as scalars until a helper returns a container; reject array/hash-only consumers at that boundary.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public valid pairs/empty controls pass; sum(extra) runs two effects and incompatible Array consumers yield []/[]. Retained native fixture RED additionally shows invalid reducer operands mutate a named source and run eight effects.
+  - [x] ROOT CAUSE (WHY + WHERE): ActionFluentChainExpr preflight omits canonical aggregate helpers, and its two value loops call generic helper dispatch without retaining scalar reduction boundaries.
+  - [x] FIX: Extend zero-extra preflight and reuse _evaluateFluentCallsWithValue in both loops. Preserve existing helpers and dynamic min/max selection; retain scalar boundaries until actual container output.
+  - [x] ADDRESSED (verified): Small native/restored/generated-plan aggregate fixture PASS after RED for six producers, overloads, empty helpers, selected/pipeline/function and named-mutation sources, explicit split, SA order, snapshots, incompatible nulls and zero invalid effects.
+  - [x] NO REGRESSION: Direct count_length_receivers, changed-file fatal analysis and format PASS. Existing valid result flow, source domains/empty sum and callable vocabulary remain unchanged; full context/portable admission stays23.4.
+  - [x] LOCKSTEP: Worked helper/guide/contract examples, Dart/reducer facts/map, current task/live records, book and fast continuity/history/diff checks align; Julia assessment follows the clean commit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.4.3 - guard Dart aggregate result boundaries`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.4.4`
+  Status: `pending`
+  Goal: Publicly assess and implement/confirm ordinary aggregate numeric result continuations on Julia.
+  Dependencies: .23.3.4.3.
+  Owned paths: Julia public interpreter if needed, focused native/generated-plan/fresh-emitted regression and synchronized book/fact/task/live records.
   Planned tier: `focused`; declare public probes and exact small regression at activation.
   Claim verification: none: Unactivated bounded implementation assessment; no support/completeness measurement.
-  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six producer results, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/restored/generated-plan and direct Count/Length checks, changed-file analysis/format, docs/commit before Julia; no broad replay or complete admission.
+  Acceptance: Preserve correct dispatch, helper domains and scalar min/max overloads. Probe six result chains, unambiguous zero-extra shapes, scalar-only boundaries until an explicit Array bridge and empty helper controls before classifying defects. Small native/generated-plan/fresh-emitted and direct Count/Length checks with strict Julia1.12 harness/package compilation, docs/commit before Lua; no broad replay or complete admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
@@ -1538,7 +1561,7 @@ Feature-first implementation has completed transform5.3.1-.3, pipeline kinds/del
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.3` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Dart after targeted-checked Perl/Rust implementations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.4.4` | `pending` | Publicly assess/implement frozen aggregate numeric result flow on Julia after targeted-checked Perl/Rust/Dart implementations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

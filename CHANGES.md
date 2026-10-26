@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.4.3 — guard Dart aggregate result boundaries
+
+Preserve already-correct reducer result flow and empty sum; reject unambiguous extra producer operands before effects and retain scalar boundaries until a helper returns a container. Share value iteration for ordinary/mutating-source chains. Public/retained shape/domain RED precedes small native/restored/generated-plan and direct Count/Length GREEN, changed-file fatal analysis/format, book and fast continuity checks. Named-mutation sources, overloads, SA order, snapshots and incompatible nulls pass. Sync reference/current records; Julia assessment next, broad admission open.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.4.2 — continue Rust aggregate numeric results
 
 Hand six reducers to existing actual-value continuation with scalar boundaries until a container bridge. Reject unambiguous extra producer operands before effects, preserve min/max overloads and repair zero for actually empty Array sum without changing nonempty filtering. Public/fixture RED precedes small native/restored/generated-plan and direct Count/Length GREEN, compilation/rustfmt/book and fast continuity checks. Values, empty helpers, old incompatible consumers, SA order and snapshots pass. Sync reference/current records; Dart assessment is next, broad admission open.

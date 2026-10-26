@@ -970,7 +970,7 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
 `ne`, `gt`, `ge`, `lt`, `le`) return numeric `1`/`0` and end the chain. Array reducers are array-consuming: use
 function form such as `num_sum(scores)` / `sum(scores)` or array receiver form such as
-`scores.sum()` / `scores.avg()`. Ordinary Perl/Rust results continue through compatible scalar/number methods: `[2,4,6].sum().add(1)` returns `13`, `[].sum().add(1)` returns `1`, and `[].avg().add(1)` returns null.
+`scores.sum()` / `scores.avg()`. Ordinary Perl/Rust/Dart results continue through compatible scalar/number methods: `[2,4,6].sum().add(1)` returns `13`, `[].sum().add(1)` returns `1`, and `[].avg().add(1)` returns null.
 Reducers are not scalar number receiver links; array-only consumers stay invalid until an explicit string-to-array bridge. Other backends require individual assessment. A number-yielding expression-valued block can be the receiver,
 for example `{ 3.5 }.floor().add(2)`.
 

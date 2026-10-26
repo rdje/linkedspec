@@ -111,3 +111,10 @@ direct Count/Length fixtures pass after RED, including explicit Array bridge,
 overloads, empty helper controls, order and snapshots. Existing callable vocabulary
 is reused; no complete context/portable admission. Dart and later backends require
 individual assessment.
+
+Dart `.23.3.4.3` preserves already-correct numeric flow/empty identity and adds
+unambiguous producer arity plus scalar-result boundaries in shared ordinary/
+mutating-source iteration. Native/restored/generated-plan and direct Count/Length
+checks pass after shape/domain RED; changed-file fatal analysis passes. The small
+fixture also retains named-mutation sources and pre-effect invalid-shape rejection.
+Julia/Lua remain unassessed; full context/portable admission stays separate.

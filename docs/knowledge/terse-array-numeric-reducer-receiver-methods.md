@@ -16,7 +16,7 @@ answers:
   - "what did SPEC-FORMAT-TERSE.7.3 backfill"
   - "which task follows SPEC-FORMAT-TERSE.7.3"
 date: 2026-10-26
-status: ordinary Perl/Rust reducer results implemented; other backend assessment open
+status: ordinary Perl/Rust/Dart reducer results implemented; other backend assessment open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, number, reducers, actionir, rust-parity, oracle, mdbook]
 evidence: "Historical reducer7.3; contract TYPE23.2.3 distinguishes six stopped Perl chains from working nested controls."
 reverify:
@@ -26,7 +26,9 @@ reverify:
 
 Historical7.3 adds array sum/avg/median/range/min/max receiver forms after compatible array pipelines, with blanket terminal policy. Exact historical evidence and broad replay commands remain in this card at Git80d9809216282d1f077e1eac1b302cd608f75ae9; do not replay them for ordinary feature work.
 
-TYPE23.2.3 freezes ordinary reducer results feeding existing compatible scalar/number methods. Activation Get/substitution distinguished six stopped chains from nested controls. Perl23.3.4.1 removes the ordinary stop and uses scalar_result flow in the shared selected dispatcher: only scalar/number consumers until an explicit split returns an Array. Intermediate generic handoff produced [] for old incompatible consumers; substitution located array fallback, and retained null controls now pass. Zero-extra initial min/max takes Array dispatch; scalar operands keep their numeric path. Focused native/fresh and direct Count/Length tests plus syntax pass. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md.
+TYPE23.2.3 freezes ordinary reducers feeding existing scalar/number methods. Contract: docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md. Perl23.3.4.1 uses scalar_result flow in the selected dispatcher until an explicit split returns an Array; initial zero-extra min/max uses Array dispatch, scalar overloads keep operands. Generic handoff initially exposed array fallback; retained incompatible nulls now pass. Native/fresh and direct Count/Length checks pass.
+
+Dart23.3.4.3 preserves correct result flow/empty identity, guards canonical aggregate extras and shares ordinary/mutating-source value iteration with scalar boundaries. [[dart-runtime-array-helpers]] owns its current proof.
 
 Preserve zero-extra aggregate forms and scalar min/max overloads, actual values, source/operand order and snapshots. No scalar sum, new source domain, callback/deferred or complete admission is implied. Older incompatible array-consumer controls remain invalid by their helper domains. Ordinary Count/Length already continues under23.3.3; only earlier blanket terminal policy for compatible reducer consumers is advanced here.
 

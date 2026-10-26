@@ -3704,8 +3704,8 @@ final class LinkedSpecRuntimeEngine {
           statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
-        // Extraction, copy and count/length take no method arguments. Reject before any
-        // receiver or operand effects, while keeping valid value chains dynamic.
+        // These methods take no arguments. Reject before receiver or operand
+        // effects while keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
           return (helper == 'first' ||
@@ -3713,7 +3713,11 @@ final class LinkedSpecRuntimeEngine {
                   helper == 'copy' ||
                   helper == 'count' ||
                   helper == 'count_keys' ||
-                  helper == 'length') &&
+                  helper == 'length' ||
+                  helper == 'num_sum' ||
+                  helper == 'num_avg' ||
+                  helper == 'num_median' ||
+                  helper == 'num_range') &&
               call.args.isNotEmpty;
         })) {
           return null;
@@ -3751,16 +3755,13 @@ final class LinkedSpecRuntimeEngine {
           if (value == null) {
             return null;
           }
-          for (final call in calls.skip(1)) {
-            value = _evaluateFluentCall(
-              value,
-              call,
-              context,
-              ruleLabel,
-              currentEdge: currentEdge,
-            );
-          }
-          return value;
+          return _evaluateFluentCallsWithValue(
+            value,
+            calls.skip(1),
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
         }
         var value = _evaluateFluentReceiver(
           receiver,
@@ -3769,16 +3770,13 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel,
           currentEdge,
         );
-        for (final call in calls) {
-          value = _evaluateFluentCall(
-            value,
-            call,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          );
-        }
-        return value;
+        return _evaluateFluentCallsWithValue(
+          value,
+          calls,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
           block,
@@ -5076,6 +5074,38 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
     }
+  }
+
+  Object? _evaluateFluentCallsWithValue(
+    Object? value,
+    Iterable<ActionFluentCall> calls,
+    _RuntimeExecutionContext context,
+    String ruleLabel, {
+    required _CurrentActionEdge? currentEdge,
+  }) {
+    var scalarResult = false;
+    for (final call in calls) {
+      final helper = canonicalActionHelperName(call.method);
+      // Array reducers yield scalars. Only a helper returning a container
+      // releases this boundary for later array/hash consumers.
+      if (scalarResult &&
+          (_arrayOnlyReceiverHelpers.contains(helper) ||
+              _hashOnlyReceiverHelpers.contains(helper))) {
+        return null;
+      }
+      final reduced =
+          value is List && _numericAggregateHelperNames.contains(helper);
+      value = _evaluateFluentCall(
+        value,
+        call,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      scalarResult =
+          (scalarResult || reduced) && value is! List && value is! Map;
+    }
+    return value;
   }
 
   Object? _evaluateFluentCall(

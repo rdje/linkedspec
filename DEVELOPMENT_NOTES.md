@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.3 — preserve existing flow and guard its boundaries
+
+Dart valid reducer pairs/empty helpers already pass, but ignored extra arguments run effects and array-only consumers turn scalar results into empty arrays. Extend canonical num_sum/avg/median/range preflight and share _evaluateFluentCallsWithValue across both ordinary and named-array-end paths. Track actual Array reductions as scalars until a helper returns a container, rejecting incompatible Array/Hash consumers. Existing helper domains, min/max selection and empty identity stay unchanged. Small native/restored/generated-plan and Count/Length tests, fatal analysis and format pass after RED, including named mutation/pre-effect guards, explicit split, SA order and snapshots. Book/contract/facts/map/current records align; Julia starts independently next.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.4.2 — shared reducer handoff and empty identity
 
 Rust static/dynamic endpoints stop reducers. Include them in shared result handoff, retain scalar-only continuation until an actual container result, and add zero-extra sum/avg/median/range preflight. Preserve min/max overloads and callable vocabulary. Public free-helper controls also expose empty sum returning null; return zero only for an actual empty Array, preserving nonempty filtering. Small native/restored/generated-plan and direct Count/Length tests pass after RED, with overloads, empty helpers, old incompatible nulls, explicit split bridge, SA order and snapshots. Compilation/rustfmt/book and fast continuity checks pass. A layout assertion stopped an earlier edit before production writes; its unchanged-source rerun remains RED. Current book/contract/fact/map/task/live align; Dart is next, broad admission separate.

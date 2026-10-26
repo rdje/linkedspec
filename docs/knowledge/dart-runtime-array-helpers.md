@@ -2,6 +2,7 @@
 id: dart-runtime-array-helpers
 title: Dart runtime executes array helper family and receiver chains
 answers:
+  - how do Dart aggregate results retain scalar boundaries after named array mutations
   - why does Dart count return zero for nonarrays and reject extra receiver operands
   - does Dart receiver copy reject extra arguments before effects
   - do Dart standalone split_each filter_match and uniq update arrays
@@ -13,10 +14,10 @@ answers:
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
 date: 2026-10-26
-status: selected/count values confirmed; zero-extra arity guarded; ordering/slice owners open
+status: selected/count/aggregate values confirmed; shape/scalar guards; ordering/slice owners open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "Dart array4.3.3; end results12.1.4; transform5.3.2; selected-value23.3.1.3; copy-arity23.3.2.2."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/count_length_receivers_test.dart test/selected_value_receivers_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/aggregate_numeric_receivers_test.dart test/count_length_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -63,4 +64,4 @@ count policy.
 
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
-23.3.1.3/23.3.2.2 confirm selected-value continuations and extraction/copy arity.23.3.3.3 preserves count/length result flow, guards producer extras before effects and fixes count to accept Lists only; _lengthValue keeps broader length domains. Public arity/domain RED and focused native/restored/generated-plan, selected-value and analysis checks pass. Full admission stays open.
+23.3.1.3/23.3.2.2 confirm selected/copy flow and arity.23.3.3.3 guards Count/Length extras and makes Count List-only; Length retains wider domains.23.3.4.3 guards canonical aggregate extras and shares _evaluateFluentCallsWithValue across ordinary/mutating sources, retaining scalar boundaries until actual container output. Public/retained RED and native/restored/generated-plan/direct checks plus fatal analysis pass; full admission stays open.
