@@ -5910,9 +5910,12 @@ function _evaluate_runtime_fluent_chain!(
         )
             return nothing
         end
-        scalar_producer = value isa AbstractVector && helper_name in (
-            "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",
-        )
+        # Defaults can select either family; the actual output below controls
+        # whether later array/hash-only consumers remain compatible.
+        may_produce_scalar = helper_name == "coalesce_nonempty" ||
+            (value isa AbstractVector && helper_name in (
+                "num_sum", "num_avg", "num_median", "num_range", "num_min", "num_max", "join_values",
+            ))
         if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
             if call_index != 1
                 return nothing
@@ -5938,7 +5941,7 @@ function _evaluate_runtime_fluent_chain!(
             rule_label,
             current_edge,
         )
-        scalar_result = (scalar_result || scalar_producer) &&
+        scalar_result = (scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict)
     end
     return value

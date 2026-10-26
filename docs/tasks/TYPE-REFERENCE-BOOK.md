@@ -1803,12 +1803,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.3 - guard Dart scalar default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Publicly assess and implement/confirm ordinary Julia default-selection result flow.
   Dependencies: .23.3.6.3.
   Acceptance: Follow frozen default-selection-results.md with existing helper domains and actual-kind/lazy/effect/snapshot controls. Public native/generated distinguishing checks before repair; no inferred backend failure. Small compile/targeted checks/docs/commit; Lua declared5.4/full admission stays separate.
-  Planned tier: `focused` under director feature-first cadence.
-  Claim verification: none: unactivated deterministic regression, no measured admission.
+  Activation: clean `220c0a37d9a308eb07c7a0a6347f78c9a799ce44`; Dart committed, brief empty, tree clean.
+  Owned paths: Julia public fluent dispatcher only for confirmed gaps, focused native/generated-plan/fresh-emitted default fixture and runner registration, direct joined compatibility and public/current docs.
+  Verification tier: `focused`
+  Focused checks: Public native/generated-plan/fresh-emitted shared selected-default and direct Scalar controls, existing default-receiver fixture plus direct joined test under strict Julia flags, book and fast continuity/history/diff guards.
+  Canonical trigger: None for bounded frozen implementation/confirmation under director feature-first cadence; full domain/portable admission23.4 and eventual clean push remain separate.
+  Claim verification: none: deterministic authored value/order regression; no quantified corpus or portable measurement.
+  Public findings / owned repair: Shared direct/joined container and existing default receiver controls pass on native/generated-plan/fresh-emitted routes. Direct retained/fallback String sorted/sorted_values returns empty Arrays instead of null on all three routes. _evaluate_runtime_fluent_chain! only activates scalar_result for AbstractVector reducers/join; include nonempty selection as a possible scalar producer, clearing the guard for actual AbstractVector/AbstractDict output.
+
+  Completion: Preserve correct selected container flow and include nonempty defaults as possible scalar results. Retain/clear the existing guard using actual AbstractVector/AbstractDict output; keep lazy/copy/helper policies unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared/default-receiver controls already pass; direct retained/fallback String sorted/sorted_values returns empty Arrays instead of null on native/generated-plan/fresh-emitted routes.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! only activates scalar_result for AbstractVector reducers/join. Direct String default selection never activates it; _evaluate_runtime_fluent_value_call! already selects lazily and copies actual values.
+  - [x] FIX: Include coalesce_nonempty in may_produce_scalar, then keep/clear guarding from actual container output. Preserve shared dispatch and default semantics.
+  - [x] ADDRESSED (verified): Focused native/generated-plan/fresh-emitted default regression PASS after boundary RED, including direct scalar nulls, actual Array/Hash, empty/null/zero/false, skipped fallbacks and SDJ snapshots.
+  - [x] NO REGRESSION: Existing default receiver fixture and direct joined test PASS under startup/history disabled and depwarn=error; package compilation succeeds. Generic coalesce/deferred/domain policies and generated formats stay unchanged; no broad suite.
+  - [x] LOCKSTEP: Register fixture, align contract/catalog/default and Julia facts/map plus live/task/resume records; book and fast memory/cadence/diagnosis/history/diff checks pass. Lua assessment5 next after clean commit, declared5.4/full admission separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.6.4 - guard Julia scalar default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.6.5`
   Status: `pending`
@@ -1896,11 +1911,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 scalar-default boundaries are repaired/targeted-checked too; Julia4 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3 and Julia4 scalar-default boundaries are repaired/targeted-checked too; Lua5 assessment is next. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` | `pending` | Assess/implement Julia selected-default flow after bounded Perl/Rust/Dart repairs; broad proof deferred. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.6.5` | `pending` | Assess/implement Lua selected-default flow on available hosts; declared5.4/full proof stays separate. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.6.4 — guard Julia scalar default results
+
+Julia retains correct selected Array/Hash default flow and adds direct nonempty scalar guarding until actual AbstractVector/AbstractDict output. Retained/fallback scalars reject container-only consumers with null instead of empty Arrays. Small strict native/generated-plan/fresh-emitted default and existing receiver/join checks pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy policies. Package compilation, book and fast continuity checks pass. Lua assessment5 is next; declared5.4/full domain/admission remain separate.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.6.3 — guard Dart scalar default results
 
 Dart retains correct selected Array/Hash default flow and adds scalar guarding for direct nonempty selections. Actual List/Map output clears the guard; retained/fallback scalars reject container-only consumers with null instead of []. Small native/restored/generated-plan default and existing receiver/join tests pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy semantics. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; full domain/admission remains separate.

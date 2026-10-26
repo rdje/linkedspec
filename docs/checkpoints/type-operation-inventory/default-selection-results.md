@@ -112,3 +112,12 @@ return empty Arrays. Nonempty defaults now keep the scalar guard unless their
 actual result is List/Map. Native/restored/generated-plan controls pass after that
 RED, with shared SDJ snapshots, empty/null/zero/false and existing default/join
 compatibility; fatal selected-file analysis passes. Full admission stays open.
+
+## Bounded Julia implementation
+
+`.23.3.6.4` preserves correct container selection and lazy copies. Nonempty
+defaults now activate scalar guarding until actual AbstractVector/AbstractDict
+output releases it; direct Scalar sorted/sorted_values returns null after the
+empty-Array RED. Strict native/generated-plan/fresh-emitted shared/default/join
+controls pass, retaining SDJ snapshots and empty/null/zero/false. Full admission
+and Lua assessment remain separate.

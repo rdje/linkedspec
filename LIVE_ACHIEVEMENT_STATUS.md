@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Bounded Perl/Rust/Dart default result repairs are targeted-checked. Julia assessment23.3.6.4 is next, then Lua. Feature/compile/small-check/docs/commit cadence continues; full admission separate.
+Bounded Perl/Rust/Dart/Julia default result repairs are targeted-checked. Lua assessment23.3.6.5 is next on available hosts; declared5.4/full admission remain separate. Feature/compile/small-check/docs/commit cadence continues.
 
 ## Latest Completed Slice
 
-Dart retains correct selected Array/Hash default flow and adds scalar guarding for direct nonempty selections. Actual List/Map output clears the guard; retained/fallback scalars reject container-only consumers with null instead of []. Small native/restored/generated-plan default and existing receiver/join tests pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy semantics. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; full domain/admission remains separate.
+Julia retains correct selected Array/Hash default flow and adds direct nonempty scalar guarding until actual AbstractVector/AbstractDict output. Retained/fallback scalars reject container-only consumers with null instead of empty Arrays. Small strict native/generated-plan/fresh-emitted default and existing receiver/join checks pass after boundary RED, preserving lazy SDJ snapshots, empty/null/zero/false and copy policies. Package compilation, book and fast continuity checks pass. Lua assessment5 is next; declared5.4/full domain/admission remain separate.
 
 ## Next Action
 
-Publicly assess Julia shared selected defaults and direct scalar negatives, then repair confirmed bounded gaps. Small strict native/generated/fresh-emitted and direct compatibility checks/docs/commit; no broad suite.
+Publicly assess Lua shared selected defaults and direct scalar negatives, then repair confirmed bounded gaps. Small available-host native/generated/fresh-emitted and direct compatibility checks/loadfile/docs/commit; no broad suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.6.4` — direct default scalar boundaries repaired; strict native/plan/fresh/default/join checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.3` — direct default scalar boundaries repaired; native/restored/plan/default/join and fatal analysis pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.2` — direct String defaults use actual-kind continuation; focused native/restored/plan/direct checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.6.1.2` — typed literal defaults preserved for both helpers; native/fresh/direct checks and retired-syntax control pass.
@@ -29,7 +30,6 @@ Publicly assess Julia shared selected defaults and direct scalar negatives, then
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.5` — Lua six-reducer result flow, scalar/shape guards and focused available-host checks pass; join-result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.4` — Julia existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/generated/emitted and strict harness checks pass.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.4.3` — Dart existing reducer flow retained, producer shapes/scalar boundaries guarded; focused native/restored/generated-plan and analysis pass.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.4.2` — Rust six-reducer results continue with scalar boundaries, early arity guards and empty sum zero; focused native/restored/generated-plan checks pass.
 
 ## History
 
