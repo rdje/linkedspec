@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.2.10 — freeze generic definedness receiver results
+
+Definedness23.2.10 freezes the generic receiver/result contract and schedules five backend children after public Get/substitution/fresh assessment. Perl free/nested producers are1/empty-text: false cat gives! and coalesce_nonempty selects fallback. Ordinary receiver forms stay raw DSL/host-helper or compile failures; nested snapshot control is1!/SC/changed and must be preserved. Corrected two condition-only catalog entries; broader SESSION28.5 cat/checker admission stays open. Probe syntax/book/fast checks pass; Perl23.3.11.1 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.10.6 — parse complete grouped regex literals before fluent dots
 
 Dart recognizes complete slash regex literals before assignment/fluent scanners. Grouped dotted /(?s)^a.b$/ now passes public AST/native/restored/plan beside symbolic division and ordinary receiver controls after ActionRawExpr RED. Shared predicate/mode and direct parser tests pass10 targeted tests; fatal selected-file analysis passes. No global slash classification, validator/collector, regex type or x/unknown-mode change. Broader DART-STARTUP-READING.2.2.1/.2.2.2 stay open. Book/fast checks pass; definedness assessment23.2.10 next.

@@ -504,6 +504,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Verification: `pending` — returned/nested definedness works; cat with null returns null, not concatenated text.
   Commit: `pending`
 
+  Feature overlap23.2.10: Public native/fresh reverify returns numeric1/empty-string and supports returned/nested expressions. The two condition-only catalog entries now teach these bounded forms, cat's empty false text and coalesce_nonempty fallback. Probe/contract are docs/checkpoints/type-operation-inventory/probe_definedness_results.pl/definedness-results.md. Generic receiver registration/result implementation23.3.11.1-.5 is separately scheduled. This does not close the broader cat null/wrong-kind teaching/checker/coverage acceptance here.
+
 - ID: `SESSION-STARTUP-READING.28.6`
   Status: `pending`
   Goal: Replace the host-process termination claim with the actual typed exit_now control contract.

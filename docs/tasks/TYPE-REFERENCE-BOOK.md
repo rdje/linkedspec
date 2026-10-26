@@ -1146,17 +1146,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.9 - freeze String predicate result handoff`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2.10`
-  Status: `pending`
+  Status: `completed`
   Goal: Assess/freeze ordinary is_defined/is_undefined results and compatible continuations across actual supported value kinds.
   Dependencies: .23.3.10.6 committed cleanly.
   Schedule: Next bounded family from helpers.md generic-helper inventory; before broad fluent admission or comparison-receiver additions.
   Scope: Reconcile catalog and actual producers first; null versus defined empty/false/zero/scalar/Array/Hash, source families/copy, result kind, one source evaluation, malformed zero-operand receiver shapes before effects, scalar/generic consumers and explicit container bridges. Retain correct producer/definedness domains; no Boolean normalization or deferred/callable/full admission.
   Acceptance: Public Perl native/fresh producers and fluent/nested distinctions with exact source/effect mechanism before classifying gaps; freeze bounded contract/fixture and schedule independent backend implementation/confirmation children. Small checks/docs/commit, no broad matrix.
-  Planned verification tier: focused; declare checks/no-measurement rationale at activation.
+  Activation: clean `db751b4ea97a786f7205b75ea8547fa24808c1b0`; prior repair committed, brief empty/tree clean, post-commit pointer passed.
+  Owned paths: Bounded definedness result contract/public probes, relevant condition-only catalog teaching and canonical fact/task/live planning. Production only after assessment.
+  Verification tier: `focused`
+  Focused checks: Read generic inventory/catalog and canonical returned-definedness observation; public Get/substitution plus independent fresh emitted producer/fluent/nested/source/effect controls, probe syntax/book/history/diff and final staged memory/cadence/diagnosis.
+  Canonical trigger: None for bounded normative/result assessment under director feature-first cadence; independent backend implementation and complete public/domain/portable admission23.4/final push separate.
+  Claim verification: none: deterministic authored diagnostic values/order and bounded normative transition, no quantified population or portable completeness measurement.
+  Known overlap: startup-public-teaching-checker-blind-spots/SESSION-STARTUP-READING.28.5 already observe returned/nested Perl definedness1/empty-string despite condition-only catalog text. Reverify current public producer before changing prose; preserve actual result/text/default domains, not a numeric-Boolean normalization.
+
+  Completion: Freeze definedness-results.md and retained public probe before production; schedule generic receiver/result children23.3.11.1-.5. Correct only the catalog's unsupported condition-only denial, with scope-qualified actual Perl truth/text/default examples. Broad SESSION28.5 cat/checker admission remains open and cross-referenced.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public Get native/fresh free producer returns[empty-text,1,1,1,1,1,1,empty-text]; nested true returns1!, false renders! and selects late! fallback. Ordinary receiver emits raw DSL and reaches undefined host helpers; computed receiver blocks can fail handler compilation.
+  - [x] ROOT CAUSE (WHY + WHERE): call_spec_handler_subst leaves value.is_defined().cat(...) unchanged. MethodLowering _string_receiver_value_chain_return_family lacks definedness; typed free helpers already accept one expression and emit defined()/!defined(). Condition-only book text contradicts actual native/fresh contexts.
+  - [x] FIX: Freeze generic zero-operand receiver/result contract, schedule independent backend children and correct bounded current expression teaching. Preserve actual definedness/result kind, scalar/default semantics and correct producer behavior; no runtime change or portable encoding claim.
+  - [x] ADDRESSED (verified): Native/fresh producers and six empty/false/zero/Array/Hash/null boundary texts agree; nested source/result control is[1!,SC,changed]. Raw fluent compile failures do not establish a snapshot defect. Retained probe reproduces the distinctions independently of transcript.
+  - [x] NO REGRESSION: Probe syntax/book and fast continuity/history/diff checks pass. No full suite, other-backend finding or generic/codeblock/domain admission. Broad SESSION28.5 teaching/checker and full fluent23.4 remain separate.
+  - [x] LOCKSTEP: Contract/probe, catalog, canonical teaching fact/map, task/live/resume and SESSION28.5/index align. Perl23.3.11.1 next after clean commit; actual producer kind preservation is explicit.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.2.10 - freeze generic definedness receiver results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -2543,6 +2559,41 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] LOCKSTEP: Contract/book/String+regex facts/map and task/live/resume align. Book/history/diff and final staged memory/cadence/diagnosis pass. Definedness assessment23.2.10 next after clean commit; broader DART-STARTUP-READING.2.2.1/.2.2.2 and Lua native crash2.3 remain owned.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.10.6 - parse complete grouped regex literals before fluent dots`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11`
+  Status: `active` / bounded definedness rollout planned
+  Goal: Ordinary is_defined/is_undefined generic receiver/result handoff under definedness-results.md; preserve actual producer kinds/domains.
+  Children: `.23.3.11.1`, `.23.3.11.2`, `.23.3.11.3`, `.23.3.11.4`, `.23.3.11.5`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11.1`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Perl ordinary generic definedness receiver/result handoff.
+  Dependencies: .23.2.10.
+  Acceptance: Frozen definedness-results.md through public native/generated routes; preserve actual non-null definition, true/false kinds/text/default behavior and correct source/result snapshots. Zero receiver operands before effects, source families/all admitted value kinds, compatible scalar/generic consumers/explicit bridges and scalar guards. Small compile/direct check/docs/commit; full regex/domain/portable admission and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11.2`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Rust ordinary generic definedness receiver/result handoff.
+  Dependencies: .23.3.11.1.
+  Acceptance: Frozen definedness-results.md through public native/generated routes; preserve actual non-null definition, true/false kinds/text/default behavior and correct source/result snapshots. Zero receiver operands before effects, source families/all admitted value kinds, compatible scalar/generic consumers/explicit bridges and scalar guards. Small compile/direct check/docs/commit; full regex/domain/portable admission and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11.3`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Dart ordinary generic definedness receiver/result handoff.
+  Dependencies: .23.3.11.2.
+  Acceptance: Frozen definedness-results.md through public native/generated routes; preserve actual non-null definition, true/false kinds/text/default behavior and correct source/result snapshots. Zero receiver operands before effects, source families/all admitted value kinds, compatible scalar/generic consumers/explicit bridges and scalar guards. Small compile/direct check/docs/commit; full regex/domain/portable admission and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11.4`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Julia ordinary generic definedness receiver/result handoff.
+  Dependencies: .23.3.11.3.
+  Acceptance: Frozen definedness-results.md through public native/generated routes; preserve actual non-null definition, true/false kinds/text/default behavior and correct source/result snapshots. Zero receiver operands before effects, source families/all admitted value kinds, compatible scalar/generic consumers/explicit bridges and scalar guards. Small compile/direct check/docs/commit; full regex/domain/portable admission and Lua declared5.4 separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.11.5`
+  Status: `pending`
+  Goal: Independently assess and implement/confirm Lua ordinary generic definedness receiver/result handoff.
+  Dependencies: .23.3.11.4.
+  Acceptance: Frozen definedness-results.md through public native/generated routes; preserve actual non-null definition, true/false kinds/text/default behavior and correct source/result snapshots. Zero receiver operands before effects, source families/all admitted value kinds, compatible scalar/generic consumers/explicit bridges and scalar guards. Small compile/direct check/docs/commit; full regex/domain/portable admission and Lua declared5.4 separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`; remaining admission leaves split at activation.
@@ -2636,11 +2687,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is implemented/targeted-checked; Rust2 result/shape and literal-flag repair are targeted-checked; Dart3 scalar/shape/null-operand and i/m/s repair is targeted-checked; Julia4 scalar/shape/null-operand repair is targeted-checked; Lua5 terminal/scalar/shape/null-operand repair is targeted-checked on available hosts; P1 grouped Dart regex6 is targeted-checked for complete literal priority; broader scanner owners remain open. Definedness assessment23.2.10 follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
+Bounded selected/copy/Count/Length/aggregate/joined implementations and Lua delimiter repairs are targeted-checked on recorded hosts. Default selection flow/literal repairs are targeted-checked on Perl; Rust2 direct String selection flow is repaired/targeted-checked too. Dart3/Julia4/Lua5 scalar-default boundaries are repaired/targeted-checked too on recorded hosts. Index_of result contract23.2.6 is frozen; Perl23.3.7.1 is implemented/targeted-checked; Rust2 is implemented/targeted-checked too; Dart3 scalar/shape boundaries are repaired/targeted-checked too; Julia4/Lua5 scalar/shape boundaries are repaired/targeted-checked too on recorded hosts. Has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape implementation is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape implementation is targeted-checked on available hosts. Bounded has_key rollout is targeted-checked; is_empty/is_nonempty23.2.8 is frozen; bounded Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts. Bounded emptiness rollout is targeted-checked; String predicate23.2.9 is frozen; Perl23.3.10.1 handoff is implemented/targeted-checked; Rust2 result/shape and literal-flag repair are targeted-checked; Dart3 scalar/shape/null-operand and i/m/s repair is targeted-checked; Julia4 scalar/shape/null-operand repair is targeted-checked; Lua5 terminal/scalar/shape/null-operand repair is targeted-checked on available hosts; P1 grouped Dart regex6 is targeted-checked for complete literal priority; broader scanner owners remain open. Definedness23.2.10 is frozen; Perl generic receiver/result implementation23.3.11.1 follows. Full signatures, comprehensive fluent/public/portable admission and Lua declared5.4 remain open; broad proof stays deferred under the director feature-first cadence.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.2.10` | `pending` | Assess/freeze generic definedness results and continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.11.1` | `pending` | Implement frozen Perl generic definedness receivers/results. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

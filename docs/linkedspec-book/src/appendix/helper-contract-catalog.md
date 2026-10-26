@@ -212,12 +212,12 @@ dispatch rule.
 > value (see [Runtime Semantics §5.5](runtime-semantics.md)). Each compact "over
 > `/<regex>/`, `<expr>` on `<input>` → `<output>`" line plugs into this shape: `value`
 > carries `/<regex>/`, its `I.return(<expr>)` computes the result, and `<output>` is the
-> parser's array. Predicate helper results in these examples surface in the reference
+> parser's array. String predicate results in these examples surface in the reference
 > boolean shape (`1` for true, `0` for false); primitive literal `true`/`false` values
 > are typed JSON booleans. An undefined result surfaces as a `null` element. The value-returning predicates
 > (`matches`, `starts_with`, `ends_with`, `contains_substr`) may be returned directly. The definedness predicates
 > (`is_defined`, `is_undefined`) are portable in `if (...)` conditions and in current Perl/Rust ActionIR AST value
-> contexts such as `with() { return(is_undefined(value)) }`.
+> contexts such as `with() { return(is_undefined(value)) }`; current Perl definedness false remains empty text, as qualified in its entries below.
 
 ### `container[key]`
 - **Signature**: `container: array|hash[key: int|string]`
@@ -296,8 +296,8 @@ dispatch rule.
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is not undef. Accepts any expression type.
 - **Edge cases**: Empty string, `0`, and empty arrays are defined.
-- **Usage**: condition-only — `is_defined(...)` is a flow predicate, used inside an
-  `if (...)` / `elseif (...)` test, not as a `return(...)` value.
+- **Usage**: Supports condition, returned and nested expression forms on current Perl; `cat(is_defined("abc"),"!")` returns `"1!"`.
+  Perl false is empty text: `cat(is_defined(undef),"!")` returns `"!"`; a following `coalesce_nonempty("late")` selects `"late"`. Ordinary `value.is_defined()` receiver registration is a tracked gap; use the free helper form.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -311,7 +311,7 @@ dispatch rule.
 - **Signature**: `is_undefined(value: expr)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value is undef. Logical inverse of `is_defined`.
-- **Usage**: condition-only, like `is_defined` (use inside `if (...)`).
+- **Usage**: Condition, returned and nested expression forms work on current Perl: `cat(is_undefined(undef),"!")` returns `"1!"`. Ordinary `value.is_undefined()` receiver registration is a tracked gap. Preserve actual truth/text kinds; other-backend/domain admission is assessed separately.
 - **Example**: over `/(\w+)/`, `if (is_undefined(array(entry_group(0))[9])) { return("missing") } else { return("present") }` on `hi` → `["missing"]` (index 9 is out of range, so the read is undef).
 
 ### `trim(s)`

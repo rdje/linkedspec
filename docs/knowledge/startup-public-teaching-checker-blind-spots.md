@@ -12,19 +12,17 @@ answers:
   - "why do stale cursor staged semantic and gap paragraphs survive public checks"
   - "does document input need to look like a spec source"
   - "are definedness helpers condition only in Perl return contexts"
+  - "why do Perl is_defined is_undefined receiver chains reach raw host calls"
+  - "why does false Perl definedness select coalesce_nonempty fallback"
   - "does exit_now terminate the Perl host process"
   - "does cat treat a null argument as empty text"
-date: 2026-09-06
+date: 2026-10-26
 status: dated diagnostic evidence; repair state belongs to the owning task-tree
 tags: ["startup-reading","book","contracts","verification"]
 evidence: "SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.28. No implementation repair or whole-project signoff is claimed."
 reverify:
-  - "git diff baeb984e36a94a15951cd23d4c52def5064cdaca -- tools/check_logical_helper_contract.py tools/check_mutation_public_surface.py tools/check_staged_ast_enrichment_contract.py tools/check_semantic_introspection_contract.py tools/check_diagnostic_output_contract.py"
-  - "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py"
-  - "bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py"
-  - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
-  - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
-  - "bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py"
+  - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_definedness_results.pl"
+  - "Historical checker commands/repair protocols: this path at Gitdb751b4ea97a786f7205b75ea8547fa24808c1b0; broad current proof remains with individual owners."
 ---
 
 # Startup reading found concrete public teaching gaps behind passing checkers
@@ -40,10 +38,6 @@ Five public checkers passed while their governed teaching retained specific fals
 - `.28.4`: an included semantic page says the ledgers are now 3/9 and 2/6; the actual checker accepts it despite current 9/9 and 6/6 authority.
 - `.28.5`: returned and nested definedness work on Perl despite condition-only catalog entries. True/false results were 1/empty string; no portable encoding promise follows. cat with null or an array returns null; the empty-string twin produces concatenated text.
 - `.28.6`: exit_now raises a typed parse-control object while the host can continue; the catalog's process-exit sentence passes diagnostic public checks.
-
-Each child requires the real bad paragraph and controlled variants, honest historical scope, appropriate executable examples, and the necessary checker repair. Passing finite checks is recorded as their measured scope, not evidence that these paragraphs are correct.
-
-Sources: `tools/check_logical_helper_contract.py`, `tools/check_mutation_public_surface.py`, `tools/check_staged_ast_enrichment_contract.py`, `tools/check_semantic_introspection_contract.py`, `tools/check_diagnostic_output_contract.py`.
 
 ## Complete-book reading extends the measured inventory
 
@@ -134,3 +128,7 @@ No TOOLBOX, checker, contract, or public-book edit is part of this reading check
 
 Reverify with `bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py`
 and the exact public lifecycle matrix in [[perl-semantic-inline-header-lifecycle-loss]].
+
+## Current ordinary definedness assessment
+
+TYPE23.2.10 rechecks native/fresh producer1/empty-string and returned/nested use, correcting condition-only catalog entries. Free false renders"!" with cat and selects coalesce_nonempty fallback; preserve actual kinds. Fluent definedness remains unregistered in MethodLowering's String return-family map, producing raw DSL/host-helper or compile failure. Nested source/result control returns[1!,SC,changed]; no snapshot repair inferred. Contract/probe definedness-results.md/probe_definedness_results.pl own current facts; implementation23.3.11.1-.5 follows. Broad SESSION28.5 admission remains open.
