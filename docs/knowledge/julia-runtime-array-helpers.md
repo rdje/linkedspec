@@ -22,7 +22,7 @@ date: 2026-10-26
 status: bounded value/default guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
 evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/joined_string_receivers_test.jl\"); include(\"julia/test/default_selected_receivers_test.jl\")'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/index_result_receivers_test.jl\"); include(\"julia/test/default_selected_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -67,4 +67,4 @@ separate from scalar numeric magnitude preservation under .2.9.
 
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
-23.3 value/arity fixtures retain AbstractVector Count and one-delimiter joins. _evaluate_runtime_fluent_chain! includes defaults in scalar tracking until actual AbstractVector/AbstractDict output: direct Scalar sorted/sorted_values [] becomes null; container flow stays intact. Strict native/plan/fresh-emitted default/join checks pass; full admission open.
+23.3 value/arity fixtures retain AbstractVector Count and one-operand joins/index_of. _evaluate_runtime_fluent_chain! includes defaults/index_of in scalar tracking for any source until actual AbstractVector/AbstractDict output: Scalar/null sorted/sorted_values [] becomes null; container flow stays intact. Strict native/plan/fresh-emitted default/join checks pass; full admission open.

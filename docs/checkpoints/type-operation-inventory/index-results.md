@@ -99,3 +99,28 @@ null container consumers, extra-shape2 and four effects; final native/restored/
 generated-plan index and direct default checks pass with zero/null, numeric
 selector use, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis
 passes; helpers/equality/source/copy and full admission remain unchanged/open.
+
+## Bounded Julia implementation
+
+`.23.3.7.4` preserves numeric flow and adds source-independent index scalar guards
+plus one-needle preflight. Three-carrier RED shows extra2/four effects and a null
+index then sorted returning []; strict native/generated-plan/fresh-emitted index
+and direct default checks pass after repair, retaining numeric selector use,
+explicit bridges and N/SN/SNA snapshots. Helpers/equality/source/copy stay unchanged;
+Lua and full admission remain separate.
+
+The exact Rust CLI input is retained in rust-index-probe.spec, copied byte-for-byte
+from the executed input. Historical pre-repair engine base:58833111dd2fc8c62f00afc4733c1d1422f14bac.
+For a current public recheck, first build the current CLI with the published local
+Cargo wrapper, then run this from the repository root (no historical result is
+expected from a repaired current engine):
+
+```bash
+bash tools/run_cargo_local.sh build --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --bin linkedspec-rust
+bash tools/project_data_run.sh python3 - <<'INDEX_CLI'
+from pathlib import Path
+import subprocess
+source = Path('docs/checkpoints/type-operation-inventory/rust-index-probe.spec').read_text()
+subprocess.run(['rust/target/debug/linkedspec-rust', '--inline-spec', source, '--input', 'x'], check=True)
+INDEX_CLI
+```

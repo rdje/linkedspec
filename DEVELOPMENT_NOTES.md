@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.4 — guard integer and null search results
+
+Julia retains index numeric flow and adds source-independent scalar guarding plus one-needle preflight. Strict native/generated-plan/fresh-emitted index and direct default checks pass after null-to-Array/extra2/four-effect RED, preserving integer/null boundaries, numeric0 selector use, explicit bridges and N/SN/SNA snapshots. Package compilation, book and fast continuity checks pass; exact earlier Rust CLI input is retained without a new run. Lua assessment5 is next, with declared5.4/full admission separate and producer/equality/source/copy unchanged.
+
 ## 2026-10-26 — TYPE-REFERENCE-BOOK.1.2.23.3.7.3 — index guards cover null as well as integers
 
 Dart retains correct index numeric flow and adds scalar guarding independently of source kind plus one-needle preflight. Integer/null results reject container-only consumers with null; malformed calls stop before effects. Small native/restored/generated-plan index and direct selected-default checks pass after []/extra2/four-effect RED, retaining numeric0 selector writes, explicit bridges and N/SN/SNA snapshots. Fatal selected-file analysis/format, book and fast continuity checks pass. Julia assessment4 is next; producer/equality/source/copy and full admission stay unchanged/open.
