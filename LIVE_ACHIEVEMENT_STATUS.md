@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
+Julia defined-only default result18.4 targeted-checked; four bounded backends complete, safe Lua18.5 next.
 
 ## Latest Completed Slice
 
-Dart18.3 preserves independently confirmed lazy defined-only receiver selection and repairs actual scalar-result boundaries plus pre-effect zero-RHS shape guarding. New3/direct defaults3 native/restored/plan tests and format/fatal selected analysis pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/source-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no broad/standalone/portable admission. Julia18.4 next.
+Julia18.4 preserves independently confirmed defined-only lazy selection and repairs actual scalar-result/zero-RHS shape boundaries. Registered new36/direct defaults9 native/plan/fresh assertions pass with strict compilation after scalar[]/SA/malformed SC RED, retaining false identity/Number-not-Bool kinds/counters, copies/indices/SDC-SC-HashC/skipped errors/rejected-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no full matrix/portable admission or callback-identity repair. Safe Lua18.5 next.
 
 ## Next Action
 
-Activate Julia18.4 and independently assess public free/nested and frozen defined-only receiver source/result flow before production. Preserve lazy defined empty/zero/false/exhaustion, actual scalar/container/copy/index kinds, source-first snapshots and skipped runtime errors. Shared native/plan/fresh with strict Bool/Number distinctions and quick direct defaults/compile/docs/commit; no full matrix.
+Activate safe Lua18.5 and independently assess public free/nested and frozen defined-only receiver source/result flow before production. Preserve lazy defined empty/zero/false/exhaustion, actual scalar/container/copy/index kinds, source-first snapshots and skipped runtime errors. Shared native/plan/fresh plus quick direct defaults/source loads on PUC5.5.1/LuaJIT/docs/commit; no full runner/malformed native patterns/declared5.4/full admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.18.4` — Julia defined-only default result18.4 targeted-checked; four bounded backends complete, safe Lua18.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` — Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` — Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` — Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
@@ -29,7 +30,6 @@ Activate Julia18.4 and independently assess public free/nested and frozen define
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.4` — Julia scalar arithmetic guards targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.3` — Dart scalar arithmetic result guards targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.16.2` — Rust arithmetic result/shape/String-prefix flow implemented; eleven focused tests pass, Dart assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.16.1` — Perl arithmetic result flow and existing Hash default projection successors implemented; focused checks pass, Rust assessment next.
 
 ## History
 

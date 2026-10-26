@@ -17,7 +17,7 @@ answers:
   - "why does a Hash default sorted_values first uppercase return null"
   - "how do Array successors consume emitted default guard expressions"
 date: 2026-10-27
-status: bounded defaults checked; Perl/Rust/Dart defined-only receivers implemented
+status: bounded defaults checked; Perl/Rust/Dart/Julia defined-only receivers implemented
 tags: [rust, perl, helpers, defaults, projection, evaluation, startup-reading]
 evidence: "Defaults62.1/62.2/TYPE23.3.6; TYPE23.3.16.1 public Get/substitution/dump/native/fresh default_hash_projection regression."
 reverify:
@@ -73,7 +73,7 @@ retain strict kinds/copies/indices/lazy SDC-SC/skipped failures/source effects.
 The Hash consumer also reproduces free pick_keys block-key staging failure:
 legacy keys kept raw DSL in foreach. Lower actual key blocks through the existing
 typed block lowerer; native/fresh C/snapshot controls pass, ordinary key/free
-signatures stay. Authored retired arrows still reject. Rust/Dart progress follows below; Julia/Lua18.4-.5 and full domain/context/
+signatures stay. Authored retired arrows still reject. Rust/Dart/Julia progress follows below; Lua18.5 and full domain/context/
 portable admission remain open; see frozen defined contract.
 
 TYPE23.3.18.2 independently confirms free Rust producers, then receiver RED
@@ -92,3 +92,11 @@ preflight; actual List/Map release/free/named-context/format/callback policy
 stays. New3/direct3 native/restored/plan tests and format/fatal selected analysis
 pass, including selected/malformed fournull/emptyorder. Julia/Lua/full admission
 remain separate; no blanket named-context or standalone claim.
+
+TYPE23.3.18.4 independently confirms Julia producers and valid selection/lazy
+snapshots; all three routes expose scalar[]/SA and malformed SC. Add coalesce to
+common one-or-more preflight and may_produce_scalar, preserving actual container
+release/free/named-context/callback/format policy. Registered new36/direct9
+native/plan/fresh assertions pass with strict compilation, false identity and
+Number-not-Bool results/counters, shared SDC-SC-HashC/copies/indices/skipped errors
+and selected/malformed no-effects. Lua18.5/full admission remain separate.

@@ -5882,7 +5882,7 @@ function _evaluate_runtime_fluent_chain!(
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
         if (helper_name == "num_clamp" && length(call.args) != 2) ||
-            (helper_name in ("num_add", "num_mul") && isempty(call.args))
+            (helper_name in ("num_add", "num_mul", "coalesce") && isempty(call.args))
             return nothing
         end
         if helper_name in (
@@ -5923,7 +5923,7 @@ function _evaluate_runtime_fluent_chain!(
         # Scalar producers and defaults retain this boundary until an actual
         # container output permits later array/hash-only consumers.
         may_produce_scalar = helper_name in (
-            "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
+            "coalesce", "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
             "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le",

@@ -135,3 +135,15 @@ actual List/Map release and existing free/named-context/format/callback policy.
 New3/direct defaults3 native/restored/plan tests, format and fatal selected
 analysis pass. Extra selected/malformed controls retain fournull/emptyorder.
 No full matrix/standalone/portable admission; Julia18.4 independently assesses.
+
+## Bounded Julia implementation
+
+18.4 independently confirms producer-first strict native/plan/fresh controls.
+All three shared routes preserve valid selection/snapshots/copies/indices/lazy
+errors, but expose scalar[]/SA and malformed SC. Add coalesce to common
+one-or-more preflight and may_produce_scalar, preserving existing actual
+container release/free/named-context/format/callback policy. Registered new36
+and direct defaults9 assertions pass under strict compilation, including false
+identity and Number-not-Bool results/counters, shared SDC-SC-HashC/skipped errors
+and selected/malformed fournull/emptyorder. No full matrix/portable admission or
+callback identity repair; safe available Lua18.5 independently assesses next.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.18.4 — guard Julia defined-only default results
+
+Julia18.4 preserves independently confirmed defined-only lazy selection and repairs actual scalar-result/zero-RHS shape boundaries. Registered new36/direct defaults9 native/plan/fresh assertions pass with strict compilation after scalar[]/SA/malformed SC RED, retaining false identity/Number-not-Bool kinds/counters, copies/indices/SDC-SC-HashC/skipped errors/rejected-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no full matrix/portable admission or callback-identity repair. Safe Lua18.5 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.18.3 — guard Dart defined-only default results
 
 Dart18.3 preserves independently confirmed lazy defined-only receiver selection and repairs actual scalar-result boundaries plus pre-effect zero-RHS shape guarding. New3/direct defaults3 native/restored/plan tests and format/fatal selected analysis pass after scalar[]/SA/malformed SC RED, retaining exact kinds/copies/indices/SDC-SC-HashC/skipped failures/source-prefix effects and forbidden-operand suppression. Existing free/named-context/schema/callback policy stays. Shared/frozen/book/fact/task/live align; no broad/standalone/portable admission. Julia18.4 next.

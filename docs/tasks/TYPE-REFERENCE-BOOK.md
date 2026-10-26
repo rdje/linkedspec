@@ -3869,7 +3869,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Qualitative contradiction intake only; any new historical census or measured repair proof is declared before publication.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18`
-  Status: `active` / Perl/Rust/Dart targeted-checked; Julia/Lua implementations pending
+  Status: `active` / Perl/Rust/Dart/Julia targeted-checked; Lua implementation pending
   Goal: Add bounded ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.2.18 frozen defined-default-results.md.
   Children: `.23.3.18.1`, `.23.3.18.2`, `.23.3.18.3`, `.23.3.18.4`, `.23.3.18.5`.
@@ -3964,7 +3964,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.3 - guard Dart defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary defined-only coalesce receivers and actual selected-result continuations.
   Dependencies: .23.3.18.3.
   Acceptance: Follow defined-default-results.md; preserve defined empty/zero/false, null exhaustion, source-first lazy once-only selection, actual scalar/container/copy/selector kinds and skipped runtime failures. One-or-more receiver fallbacks and scalar boundaries reject before forbidden effects. Public producer-first native/generated RED/GREEN plus small direct defaults/compile checks/docs/commit; no free signature/domain normalization or full admission.
@@ -3972,6 +3972,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and shared result/effect/kind/shape controls, small direct default regression, source compilation and book/continuity checks.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `3f1a386d0c9b48268b02b07e51aa68728b5a80fa`; Dart defined-default results committed, brief0/tree clean.
+  Owned paths: Julia independently confirmed defined-only receiver actual-result/scalar/shape flow and retained native/plan/fresh public producer/shared/selected regression with strict Bool/Number distinctions, runner registration and scoped book/fact/task/live docs. Preserve free signatures/domains/callbacks/named-context/serialized formats.
+  Verification tier: `focused`
+  Focused checks: Producer-first public native/plan/fresh and shared receiver RED/GREEN, direct selected/nonempty defaults, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Independent intake: Producer-first strict native/plan/fresh controls pass12 assertions before code. Shared all three routes preserve selection/snapshots/copies/indices/skipped errors but expose rejected/after_text [] with SA and malformed SC. Selected controls[[],[],null,1!,SC] on all three. _evaluate_runtime_fluent_chain! lacks coalesce in may_produce_scalar and one-or-more preflight; existing _runtime_coalesce_accepts/lazy receiver path already works. No producer/free repair inferred.
+
+  Completion: Add coalesce to common one-or-more receiver preflight and may_produce_scalar. Reuse already-correct lazy defined-only selection, actual container release and ordinary copy/Hash-key/source flow. Register the retained strict native/plan/fresh producer/shared/selected test.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent strict native/plan/fresh producer-first12 pass. Shared all three routes expose rejected/after_text [] and SA, malformed SC; selected controls give[[],[],null,1!,SC]. Existing actual values/SDC-SC-HashC/copies/Number indices/skipped failures already hold.
+  - [x] ROOT CAUSE (WHY + WHERE): _evaluate_runtime_fluent_chain! lacks coalesce in common shape preflight/may_produce_scalar, permitting scalar container normalization/operand effects and zero-RHS source effects. Existing lazy _runtime_coalesce_accepts/receiver/copy policy is correct; no producer defect inferred.
+  - [x] FIX: New counterpart scalar-result tracking until AbstractVector/AbstractDict output releases the boundary and zero-RHS rejection before source/consumer effects. No parser/schema/free signature/domain/numeric/callback/named-context normalization; register the test in runtests.
+  - [x] ADDRESSED (verified): New36 native/plan/fresh assertions pass shared exact values/bridges/source families, strict false identity and Number-not-Bool counters/results, empty containers/exhaustion, SDC/SC/HashC snapshots/copies/indices/skipped runtime errors, rejected-prefix effects and forbidden operand suppression. Selected/malformed controls yield fournull/emptyorder.
+  - [x] NO REGRESSION: Direct selected/nonempty defaults9 assertions also pass,45 total with strict compilation. No full suite/matrix/complete portable admission, callback-identity or blanket named-context repair is claimed.
+  - [x] LOCKSTEP: Retained test/runner, frozen contract/current qualified catalog/guide and canonical default fact/map plus task/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua18.5 independently assesses next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.4 - guard Julia defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5`
   Status: `pending`
@@ -3997,11 +4016,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1/Rust18.2/Dart18.3 are targeted-checked and Julia18.4 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; Perl18.1/Rust18.2/Dart18.3/Julia18.4 are targeted-checked and safe Lua18.5 next owns independent bounded receiver/result implementation. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.4` | `pending` | Independently assess and implement frozen Julia defined-only coalesce receiver/result flow. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.18.5` | `pending` | Independently assess and implement frozen defined-only coalesce receiver/result flow on safe available Lua hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
