@@ -45,6 +45,7 @@ use crate::{
     RuntimeSemanticObservationSink,
 };
 use linkedspec_core::ast::RuleMode;
+use linkedspec_core::callable_contract::{CallableSurface, builtin_contract};
 use linkedspec_core::compiler::{
     validate_compiled_regex_slot_identities, validate_nested_write_nodes,
     validate_receiver_mutation_nodes,
@@ -7702,12 +7703,28 @@ impl Engine {
                 if matches!(name.as_str(), "if" | "switch") {
                     return args.len() >= 2;
                 }
+                // Only metadata-approved immediate contextual with bodies join
+                // ordinary selected-value guards. Explicit/bound final callbacks
+                // retain their existing first-consumer policy.
+                if name == "with" {
+                    let Some(before_count) = args.len().checked_sub(1) else {
+                        return false;
+                    };
+                    return args
+                        .last()
+                        .is_some_and(|arg| matches!(arg.value(), Expr::CodeblockArgument(_)))
+                        && builtin_contract(CallableSurface::Helper, name).is_some_and(
+                            |contract| {
+                                (contract.min_before_codeblock..=contract.max_before_codeblock)
+                                    .contains(&before_count)
+                            },
+                        );
+                }
                 if matches!(
                     name.as_str(),
                     "flat"
                         | "flat_array"
                         | "flat_hash"
-                        | "with"
                         | "walk_leaves"
                         | "map_leaves"
                         | "reduce_leaves"

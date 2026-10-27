@@ -6,11 +6,13 @@ answers:
   - "why does receiver with Hash indexing work but helper with indexing fail"
   - "which task owns direct with result bracket reads"
   - "does immediate with selection admit deferred callback reads"
+  - "why does Rust run Array operands after selecting a scalar from with"
+  - "does Rust unknown with source warn or reject before callback activity"
 date: 2026-10-27
-status: bounded Perl32.1 repaired; independent other backends/full admission next
-tags: [perl, with, selection, fluent, scope, computed]
+status: bounded Perl32.1/Rust32.2 repaired; remaining backends/full admission next
+tags: [perl, rust, with, selection, fluent, scope, computed]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.9; activationad752f204ea99e928c757184d8e58a130111cba2; with-result-selection-intake.json.gz retains eight public source pairs and exact raw channels."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection"
 ---
 
 At the recorded clean base, direct helper-with Array/Hash/no-value/parenthesized
@@ -35,10 +37,10 @@ Preserve existing receiver forms and delayed/bound/opaque/registered callback
 read/vocabulary/raw-status boundaries. Explicit mutation, selector-coercion,
 unknown-body and pure-function parser-state fences remain separately governed.
 
-The prospective fourteen-coordinate shared fixture is normative, not executed
-feature proof. Independent32.1-.5 implementations start with their own baseline;
-no other backend failure or full context/portable/generated admission is inferred.
-Perl32.1 is next. Full23.4, excluded deferred readiness31.6.4.4, canonical fixture
+The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust bounded
+execution is below; remaining backend children start with their own baseline.
+No other backend failure or full context/portable/generated admission is inferred.
+Full23.4, excluded deferred readiness31.6.4.4, canonical fixture
 registration23.4.1, pressure and declared-host proof remain open owners.
 
 The first refinement's merged stderr warning interrupts a buffered JSON row at
@@ -82,3 +84,23 @@ claimed. A guard initially mistook a multiline caller argument line4477 for the
 callee line4476 and is corrected after inspection. A premature diagnostic consumer
 produces empty output and gets no semantic credit; the completed two-row consumer
 is guarded. These are instrument/input-provenance records, not product RED counts.
+
+## Current bounded Rust32.2
+
+Unlike Perl's source/precheck gap, Rust already parses/evaluates immediate with
+brackets and ordinary/registered callback-body reads. is_ordinary_computed_read
+excluded all helper with sources, omitting actual-kind guards after selection.
+The private classifier now accepts only normalized CodeblockArgument and existing
+builtin helper metadata arity, after registered-function precedence. Explicit/bound
+final callbacks keep their legacy selected count0/.take operand policies. Current
+reader, parser, normalization, callback vocabulary and schemas remain unchanged.
+
+Refined unchanged-production5pass/1RED precedes candidate6pass over native/restored
+CompiledSpec/generated-plan. Shared14 values/order/scopes pass, and one exact legacy
+bound-call computed-read compatibility passes. Initial unknown-source rejection
+expectation was wrong: rust-callable-codeblock-dynamic-invocation and the engine
+ordinary-unknown unit already document warning/undef outside active callbacks.
+The ordinary with value operand runs before callback activity; all routes retain
+String1, while missing() inside the active body diagnoses. No unknown-call repair
+or extra semantic RED is claimed. Packet with-result-selection-rust-intake.json.gz
+retains actual source inputs/refinements/channels. Dart32.3 next; full23.4 separate.

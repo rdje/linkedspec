@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
+Rust selected immediate with-result kind guards repaired/targeted-checked; independent Dart32.3 next.
 
 ## Latest Completed Slice
 
-Perl immediate contextual with-result bracket composition32.1 is implemented through one scoped metadata/count/kind source role and the corresponding unknown-call precheck. The global known-value-name table, parser deferred fences, typed reader/segments, body owner and formats stay unchanged. Independent legacy-role baseline and parser9/15 RED precede production; first source-only candidate10/11 and three specific chained-fence RED isolate the remaining consumer precheck through public traces. Final11 groups/shared14 strict native/fresh values and one valid helper source raw0/ready1 pass: signed/nested/default/kind bridges, A-M once/order, missing-selector effects, source rebind snapshot, scoped restoration, ordinary nested/pure bodies and specific entry_len/missing/missing_source diagnoses. Explicit/registered callbacks keep typed raw_perl/raw1/unready; bound/malformed roles retain old compile/raw channels. Final canonical loader routing is checked with cold post-chdir/incoming-error,15 parser assertions and final chain traces. Book/target/packet/current causal card/map and roadmap/task/live/resume align; canonical registration23.4.1 owns the new fixture. Initial source/test recovery and premature-consumer/multiline-caller guard corrections are disclosed, with no fake product RED or historical hash claim. Independent Rust32.2 next; no full suite/matrix/admission/push.
+Rust immediate with-result selection32.2 now keeps selected actual-kind guards for metadata-approved contextual helper sources. Independent parser/body reads already work; shared14 isolates the excluded-source guard: scalar .take returns[] and runs bad. Refined baseline5pass/1RED precedes candidate6pass native/restored CompiledSpec/generated-plan, shared14 exact kinds/A-M order/scopes/snapshots/missing bridges; one exact legacy bound-call computed-read check passes. Explicit/bound final sources keep existing count0/operand effects, callback-body reads remain valid, pure-function entry_len/body unknown and malformed arity keep specific errors. Initial unknown-source rejection expectation is corrected from the canonical warning/undef policy before callback activity, with no additional product RED or unknown semantic change. Scoped classifier only; parser/reader/schema/body vocabulary stay unchanged. Rustfmt/compile and book/target/retained packet/card/map/task/live/resume align. Dart32.3 next; no full suite/matrix/standalone emitted package/admission/push.
 
 ## Next Action
 
-Activate independent Rust immediate-with selection32.2 from this clean Perl boundary. Read frozen with-result-selection.md/shared14 fixture and current Rust computed/with/callable contracts. Establish actual native/restored/plan source/parser/kind/scope/error and explicit/bound/registered/unknown/malformed role controls before production; do not infer the Perl defect. Implement only a confirmed immediate contextual helper source/consumer gap through current typed owners, retaining legacy callable/read/coercion/unknown/function-state boundaries and schema. Compile/quick focused checks/docs/book/commit; then independent Dart32.3/Julia32.4/safe Lua32.5. Broad23.4/readiness/registration/pressure/declared-host owners stay separate; no full suite/matrix/push.
+Activate independent Dart immediate-with selection32.3 from this clean Rust boundary. Read frozen target/shared14 fixture and current Dart computed/with/callable contracts. Establish actual native/restored SpecFile-to-recompile/generated-plan/fresh routes and source/kind/scope/error/explicit/bound/body/malformed controls before production; preserve each backend current boundaries and unknown policy rather than importing Perl or Rust assumptions. Implement only confirmed bounded gap through typed owners, compile/quick focused checks/docs/book/commit; then Julia32.4/safe Lua32.5. Broad23.4/readiness/registration/pressure/declared-host owners remain separate; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.32.2` — Rust selected immediate with-result kind guards repaired/targeted-checked; independent Dart32.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.1` — Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
@@ -29,7 +30,6 @@ Activate independent Rust immediate-with selection32.2 from this clean Perl boun
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` — Dart with-result guards repaired/targeted-checked; independent Julia31.4 next; identity31.6 stays P1.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1` — Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
 
 ## History
 

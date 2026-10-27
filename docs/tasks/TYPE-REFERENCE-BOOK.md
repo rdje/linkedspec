@@ -7008,14 +7008,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.1 - compose immediate Perl with results through typed bracket reads`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently implement/check Rust ordinary immediate helper-with result selection.
   Authority: Frozen with-result-selection.md/shared fixture and current backend computed/with/callable contracts; do not infer another backend's failure.
   Acceptance: Establish a small actual baseline before production. Add only canonical metadata-approved immediate contextual helper-with sources with valid zero/one value arity and attached/parenthesized forms, preserving existing receiver-with reads. Use current value_access/segments/kind/error/source/scope/snapshot owners without schema changes. Check typed shared outputs, source/selector/consumer order and scope, specific pure-function/unknown-body diagnostics, legacy callable/deferred/registered contextual fences and malformed with roles. Split an independently confirmed prerequisite before production; already-compatible behavior gets focused regression without invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New bounded native/reconstructed/generated/fresh routes supported by this backend, nearest with/computed/callback boundaries, compile/format/normal registration/book/history/continuity. Safe Lua uses only available PUC5.5.1/LuaJIT and explicit source loads, no unsafe/full runner. No full suite/matrix.
-  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; declared host and canonical fixture registration remain separately owned.
-  Planned claim verification: none: Prospective finite authored feature/preservation controls; no population measurement.
+  Verification tier: `focused`
+  Focused checks: cargo test new with_result_selection target: independent refined5pass/1RED, candidate6pass on native/restored CompiledSpec/generated-plan. One exact legacy bound-call selected-read compatibility test passes. Rustfmt/compile/book/history/map/fast continuity; no full suite/matrix or standalone emitted package.
+  Canonical trigger: Independent32.3-.5 next; full23.4/canonical new Perl registration23.4.1/excluded deferred readiness31.6.4.4/final clean push after feature coverage remain separate.
+  Claim verification: none: Finite authored feature/preservation assertions; no population or completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent shared14 all three routes already support helper attached/parenthesized/no-value/nested/signed reads, but selected scalar .take evaluates bad and returns Array[] with ABCDEFGHIbadJKLM. Refined unchanged-production baseline is5pass/1RED; freeze exact explicit/bound/body/malformed/error controls before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: engine.rs is_ordinary_computed_read excludes every helper with call, so eval_fluent_chain does not activate existing selected actual-kind guards. Parser and normalized CodeblockArgument/value_access already work. Initial unknown-source rejection expectation is disproved by canonical rust-callable-codeblock-dynamic-invocation and engine ordinary-unknown unit: operand evaluation precedes callback activity and warns/returns undef. It is an instrument expectation correction, not a second product defect.
+  - [x] **FIX**: Admit only helper with whose normalized final operand is CodeblockArgument and whose value count matches builtin_contract Helper metadata, after existing registered-function precedence. Reuse current selected kind guard and typed reader; preserve explicit/bound final callback source classification and all other context-helper exclusions.
+  - [x] **ADDRESSED (verified)**: New6 groups pass all shared14 coordinates on native/restored/plan: scalar guard skips bad, Array/Hash/String/Number bridges, signed/nested/default/missing reads, A-M order, source rebind snapshot, outer restoration and nested/pure scopes. Specific pure-function entry_len and active-body missing-helper diagnostics retain their existing owner.
+  - [x] **NO REGRESSION**: Explicit/bound final reads keep legacy count0 and .take effect/B; explicit/registered callback-body reads already work and remain healthy. Malformed contextual arity retains compile diagnosis. Unknown ordinary value operand keeps warning/undef and String1 result on all routes. One exact computed_selection bound-call result compatibility test passes. No parser, AST/schema, callback vocabulary, generic unknown dispatch, selector/coercion/write/copy-depth or global context-source expansion.
+  - [x] **LOCKSTEP**: Target/retained baseline-candidate packet/current causal card/map/book and roadmap/task/live/resume distinguish Rust's guard omission from Perl's source/precheck gap. Initial wrong unknown-source expectation and observation-only test are disclosed; refined assertion RED receives the semantic credit. New Rust test is normally auto-discovered. Dart32.3 follows; full source/context/portable/generated admission remains23.4.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.2 - guard selected immediate Rust with results by their actual kind`.
+
+  Landing resolution2026-10-28: 2026-10-28 director explicitly authorized git commit --no-verify for the prepared Rust32.2 slice and subsequent focused feature commits until the scheduled document-pressure repair, retaining manual focused checks and full gates before admission/push. Normal commit session10761 completed exit1: eight doctrine checks pass; TASK-TREE-METADATA and README-STABILITY fail on the already-owned pressure debt. Original automatic-review rejection and observed partial/final hook report are retained in the Rust packet. This explicit authorization supersedes local hook-bypass restrictions for the stated feature phase; it does not waive pressure repair or canonical admission. No background job remains.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.3`
   Status: `pending`
@@ -7053,7 +7063,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.2` | `pending` | Independently implement/check Rust immediate helper-with bracket selection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.3` | `pending` | Independently implement/check Dart immediate helper-with bracket selection. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

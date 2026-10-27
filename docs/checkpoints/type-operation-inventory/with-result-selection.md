@@ -1,10 +1,10 @@
 # Ordinary immediate with-result bracket reads
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.9; implementation family23.3.32.
-Status: bounded Perl32.1 implemented/targeted-checked; other backend children independently follow; full23.4 remains open.
+Status: bounded Perl32.1/Rust32.2 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
 
 The existing with helper returns its immediate contextual body's actual value.
-On current Perl, a receiver-with result already supports direct Array/Hash reads;
+At the original Perl intake, receiver-with already supports direct Array/Hash reads;
 helper spelling needs a working binding or method endpoint instead. This feature
 adds the missing helper-result source to existing typed postfix reads. It is
 separate from31's repaired method continuations and does not reinterpret deferred
@@ -94,3 +94,23 @@ loader uses OwnerDispatch; cold post-chdir/incoming-error,15 parser assertions a
 final public chain traces pass afterward. Packet with-result-selection-perl-
 intake.json.gz retains sources/channels and explicit initial-input recovery/setup
 provenance. No full suite/matrix/source/context admission; Rust32.2 is next.
+
+## Bounded Rust implementation32.2
+
+Independent Rust parser/source handling already supports attached/parenthesized/
+no-value contextual with-result brackets and existing callback-body reads. Shared14
+instead exposes a selected-scalar consumer guard omission: .take executes bad and
+returns Array[]; ordinary-computed-read classification excludes every helper with.
+Only normalized contextual CodeblockArgument with metadata-approved helper arity
+now joins current actual-kind guards, after registered-function precedence. Explicit/
+bound final callbacks keep their legacy first-consumer policies; no parser rewrite.
+
+Refined baseline5pass/1RED and candidate6pass cover native/restored CompiledSpec/
+generated-plan routes. Shared14 now yields null and A-M without bad; exact legacy
+bound-read compatibility also passes. Unknown ordinary source operands retain the
+canonical warning/undef behavior before callback activity, unlike strict unknown
+helpers inside active bodies. An initial test incorrectly expected rejection and
+is corrected before production, with no extra product RED. Callback-body reads,
+pure-function entry_len and malformed arity boundaries remain. Exact producer/
+source/log packet: with-result-selection-rust-intake.json.gz. No standalone emitted
+package/full suite/matrix; Dart32.3 independently follows, full23.4 stays open.
