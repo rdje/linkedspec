@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
+Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 
 ## Latest Completed Slice
 
-Perl callback snapshot31.6.4.3 is repaired in compiled helper/receiver lowering and the deferred evaluator: value/source first, final explicit callback resolved once before scoped value. Public Get/dump/substitution independently fail four caller-value cases with a healthy cb control. Original target also has one mistaken host-slot-deletion assertion; the existing presence/undefined-slot ABI is confirmed and the refined16-assertion cleanup control passes before production, without product RED credit. Candidate snapshot6/deferred-with11 and selected Hash2/cycle2 groups pass native/fresh, including source-updated callbacks, exact SCBSCBB effects, validation/body error restoration and unrelated effects. Runtime/lowerer/test syntax pass; contextual blocks, origin labels, ordinary result guards, signature/schema/copy/deferred vocabulary stay unchanged. Book/target/packet/current causal card/map/roadmap/task/live/resume align; new fixture remains canonically owned23.4.1. Immediate P1 callback prerequisites are complete; next feature assessment23.1.9 follows. Excluded deferred-helper readiness .4.4, broad context/full23.4 and pressure/declared-host admission remain open. No full suite/matrix/push.
+Assessment23.1.9 freezes ordinary immediate contextual helper-with result bracket composition32 from eight public Perl source pairs. Helper attached Array/Hash/no-value and parenthesized contextual reads fail native/fresh compilation with raw1/unready, while receiver Array/Hash/named/method controls preserve exact kinds, W once and outer value with raw0/ready1. AST/substitution isolate static helper source admission: helper receiver stays raw while completed receiver-with uses typed value_access; body production and current reader are healthy. Reuse metadata-approved contextual with roles and existing readers, retaining deferred/bound/opaque/registered callback, source/error, selector/coercion/write/copy boundaries. The independent prospective oracle is RED4 helper gaps/4 controls. A mixed stdout/stderr refinement corrupts buffered JSON; exact boundary is inspected, producer flushes and the three-source replay separates streams, without extra product RED credit. Frozen target/shared14-coordinate fixture, readonly syntax-checked probe, retained raw packet/new causal card/map/current Perl book workaround and roadmap/task/live/resume align. A separate no-value producer confirms existing Perl Number1, withdrawing an unexecuted true hypothesis; final shared fixture uses truth-selected String empty to preserve predicate-kind policy. Production unchanged; fixture execution/other backend support/full admission are not claimed. Perl32.1 next, then independent32.2-.5; broad23.4/readiness/registration/pressure/declared-host owners remain separate. No full suite/matrix/push.
 
 ## Next Action
 
-Activate next bounded feature assessment23.1.9 from this clean callback-snapshot boundary. Read canonical operation/source/signature inventory, completed30/31 targets and relevant book. Select the next meaningful ordinary fluent family or inter-type transition using a few public distinctions only for unresolved facts, preserving existing callback/deferred/parser/unknown-source/legacy root/first-consumer/write/copy policies. Freeze target and independent backend/prerequisite owners before production; do not infer a gap, broad completeness or admission. Focused syntax/quick checks/docs/book/commit then implementation. Excluded deferred readiness31.6.4.4 stays before broad23.4/canonical registration/pressure/final clean push; no full suite/matrix/push.
+Activate Perl immediate-with result selection32.1 from this clean frozen-target boundary. Read with-result-selection.md/shared fixture, canonical source-gap/computed/with/callable records and current parser/source-role owners. Establish focused actual behavior and legacy deferred/bound/registered callback/with-role diagnostics before production; admit only metadata-approved immediate contextual helper-with sources with existing zero/one value arity, not arbitrary control/callback values. Reuse typed value_access/kinds/segments/effect/snapshot/scope and exact source/error owners, preserving receiver-with reads and specific function-state fences. Compile/quick native/fresh/metadata plus nearest checks/docs/book/commit; independently assess Rust/Dart/Julia/safe Lua next. No full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
@@ -29,7 +30,6 @@ Activate next bounded feature assessment23.1.9 from this clean callback-snapshot
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
 
 ## History
 
