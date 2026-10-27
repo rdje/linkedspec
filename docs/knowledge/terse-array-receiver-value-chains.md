@@ -49,6 +49,6 @@ ADR0006/0007/catalog define unified container copying; they do not explicitly
 admit generic scalar/null value copying. Ordinary Perl scalar copies return[],
 while logical-result copies reject to null via the result-family boundary.
 Dart/Julia/Lua preserve scalar values. No uniform invalid-input rule follows from
-these facts. Director choice4.2.2 is pending: recommended generic scalar/null
-value-copy extension (Perl first), or preserve the container-only reference.
-No runtime/domain change adopted; parent4.2 remains open for verified repairs.
+these facts. The director approved4.2.2 on October27: preserve Bool/Number/String/null
+through copy, retaining existing container-copy depths. Perl-first implementation
+is next after deferred-boundary repair; parent4.2 stays open for verified repairs.

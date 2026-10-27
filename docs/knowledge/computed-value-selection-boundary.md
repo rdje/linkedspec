@@ -12,11 +12,16 @@ answers:
   - how do computed receiver and selector writes stay function local
   - why are direct computed call results separate from fluent literal selections
   - can value_access recognition change legacy callable raw status
+  - why does a deferred computed read report ready but fail execution
+  - how does Perl preserve deferred literal AST vocabulary
 date: 2026-10-27
 status: Perl24.1.1 noncall sources checked; direct calls24.1.2 and full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_noncall_contract.t t/computed_selection_callable_compat.t t/actionir_ast_parser.t"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_noncall_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
 ---
 
 At d98e139d7, named signed/typed selected continuations work on public Perl
@@ -55,3 +60,13 @@ Three parser source-layout/sentinel assertions were stale after String19.1
 shows healthy discard and malformed substr-null behavior. Assertions now execute
 semantic values. An initial -I-only overlay was invalidated by actual module paths,
 then corrected explicitly. This repair is closed with24.1.1; full admission stays open.
+
+24.1.2.0 repairs introduced explicit deferred-literal drift: global recognition
+changed the executor's raw_perl failure to value_access and raw1/ready0 to0/1.
+A scoped literal-body grammar fence restores prior parsing, error fields and
+readiness; ordinary and inline reads remain supported. New regression PASS22,
+direct callable PASS5 and syntax pass, including Unicode spans and restoration
+after parse failure. Packet/producer: computed-deferred-boundary.json and
+probe_computed_deferred_boundary.pl. Initial launcher postlude failure is retained;
+corrected distinguishing replay exits0. No deferred operation or waiver admitted.
+Approved scalar/null copy4.2.2 is next; direct computed calls remain queued.

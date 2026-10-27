@@ -1,0 +1,160 @@
+{
+  "baseline_module_sha256": {
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "16f8a9a8a04cf68a91d8a426f86e02ab7fbe808db2a1597fa2399075621fb30d",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "d314bd4d7748b05e0d15b69cf0c70920f0c77b2cbac83a385ec9fb2686668c8a",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "15f45627efe70f9040ea44711a408e3ac7721b29901fc0969a7505b37ef36375"
+  },
+  "baseline_producers_commit": "b4afbe7bc2897e90b898f844e4dfacd2da5a1425",
+  "baseline_verified": [
+    {
+      "compile_error": "",
+      "error": {
+        "detail": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "raw_perl"
+        },
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "explicit_deferred",
+      "raw": 1,
+      "ready": 0,
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": {
+        "code": "generated_execution_failed",
+        "detail": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "raw_perl"
+        },
+        "handler_family": "default",
+        "rule_label": "Top",
+        "source_identity": "computed-deferred-boundary.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "label": "explicit_deferred",
+      "loaded": 1,
+      "route": "fresh",
+      "value": null
+    }
+  ],
+  "candidate_commit": "26c8f5daea5b2d0091e77a36bfbde83d7552b38c",
+  "candidate_intake": [
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "ordinary",
+      "raw": 0,
+      "ready": 1,
+      "route": "native",
+      "thrown": "",
+      "value": "b"
+    },
+    {
+      "error": "",
+      "label": "ordinary",
+      "loaded": 1,
+      "route": "fresh",
+      "value": "b"
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "value_access"
+        },
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "explicit_deferred",
+      "raw": 0,
+      "ready": 1,
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": {
+        "code": "generated_execution_failed",
+        "detail": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "value_access"
+        },
+        "handler_family": "default",
+        "rule_label": "Top",
+        "source_identity": "computed-deferred-boundary.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "label": "explicit_deferred",
+      "loaded": 1,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "contextual_deferred",
+      "raw": 0,
+      "ready": 1,
+      "route": "native",
+      "thrown": "",
+      "value": "b"
+    },
+    {
+      "error": "",
+      "label": "contextual_deferred",
+      "loaded": 1,
+      "route": "fresh",
+      "value": "b"
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "deferred_named_control",
+      "raw": 0,
+      "ready": 1,
+      "route": "native",
+      "thrown": "",
+      "value": "b"
+    },
+    {
+      "error": "",
+      "label": "deferred_named_control",
+      "loaded": 1,
+      "route": "fresh",
+      "value": "b"
+    }
+  ],
+  "instrument_notes": [
+    "Only Parser/MethodLowering/ValueExpr are preloaded from the baseline; current facades remain. No full baseline checkout claim.",
+    "Original baseline launcher completed eight rows but require lacked a true file return; repaired final1 and explicit_deferred replay exited0.",
+    "contextual_deferred is the original probe label for an inline with-block control; it does not establish equivalence with the explicit deferred literal executor."
+  ],
+  "original_candidate_probe_source": "use strict;\nuse warnings;\nuse JSON::PP ();\nuse Scalar::Util qw(reftype);\nuse LinkedSpec ();\n$| = 1;\n\nsub error_snapshot {\n my ($error) = @_;\n return $error unless ref($error);\n my $kind = reftype($error) // '';\n return { map { $_ => error_snapshot($error->{$_}) } keys %$error } if $kind eq 'HASH';\n return [map { error_snapshot($_) } @$error] if $kind eq 'ARRAY';\n return \"$error\";\n}\nmy @cases = (\n [ordinary => q{return({[\"a\",\"b\"][-1]})}],\n [explicit_deferred => q{thunk={|| return([\"a\",\"b\"][-1]) };return(thunk())}],\n [contextual_deferred => q{return([\"a\",\"b\"].with() {return([\"a\",\"b\"][-1])})}],\n [deferred_named_control => q{items=[\"a\",\"b\"];thunk={|| return(items[-1]) };return(thunk())}],\n);\nmy $sequence = 0;\nfor my $case (@cases) {\n my ($label,$body) = @$case;\n next if @ARGV && $label ne $ARGV[0];\n my $source = 'Top:: I {' . $body . '}';\n my (%context,$dump);\n my $parser = eval { LinkedSpec::Get(\\$source, runtime_ctx_ref=>\\%context,\n   dump_parser_source=>1, parser_source_ref=>\\$dump) };\n my $compile_error = error_snapshot($@);\n my ($value,$thrown);\n if (ref($parser) eq 'CODE') {\n  my $input='x';\n  $value=eval { $parser->(\\$input) };\n  $thrown=error_snapshot($@);\n }\n my $descriptor = eval { LinkedSpec::Get(\\$source,return_descriptor=>1) };\n my $metadata = ref($descriptor) eq 'HASH' ? $descriptor->{spec}{Top}{meta}{action_rewriter} : {};\n print JSON::PP->new->canonical->allow_nonref->encode({route=>'native',label=>$label,\n   value=>$value,error=>error_snapshot($context{last_error}),thrown=>$thrown,compile_error=>$compile_error,raw=>$metadata->{raw_perl_dependency_count},ready=>$metadata->{language_agnostic_action_ir_ready}}),\"\\n\";\n if ($label ne \"containers\") {\n  print 'LOWERED ',LinkedSpec::call_spec_handler_subst('Top',$body),\"\\n\";\n }\n my $emitted=eval { LinkedSpec::emit_generated_source(\\$source,source_identity=>'computed-deferred-boundary.spec') };\n my $emission_error=$@;\n my $package='LinkedSpec::ComputedDeferredBoundary'.++$sequence;\n my $loaded=defined($emitted)?eval \"package $package; $emitted; 1\":0;\n my $error=error_snapshot($emission_error || $@);\n my $fresh;\n if ($loaded) {\n  my $input='x';\n  no strict 'refs';\n  $fresh=eval { &{$package.'::Execute'}(\\$input) };\n  $error=error_snapshot($@);\n }\n print JSON::PP->new->canonical->allow_nonref->encode({route=>'fresh',label=>$label,\n   value=>$fresh,loaded=>$loaded?1:0,error=>$error}),\"\\n\";\n}\n",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.0",
+  "producer": "docs/checkpoints/type-operation-inventory/probe_computed_deferred_boundary.pl"
+}

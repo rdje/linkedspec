@@ -468,7 +468,7 @@ return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 
 Use `binding[index]` or nested access for a working Array/Hash binding; older path helpers are retirement-bound.
 
-Perl also supports brackets on fluent results, Array/Hash literals and immediate blocks. The source evaluates once, selectors run left-to-right, and the selected value keeps its type for compatible methods. Reads do not create storage; missing/out-of-range entries yield undef. Direct helper/function-call results, other backend source shapes and complete portable/context admission are being assessed.
+Perl also supports brackets on fluent results, Array/Hash literals and immediate blocks. The source evaluates once, selectors run left-to-right, and the selected value keeps its type for compatible methods. Reads do not create storage; missing/out-of-range entries yield undef. Explicit deferred literals retain their previous grammar and diagnostics. Direct helper/function-call results, other backend source shapes and complete portable/context admission are being assessed.
 
 ```text
 "a,b,c".split(",")[-2].uppercase()                  # "B"

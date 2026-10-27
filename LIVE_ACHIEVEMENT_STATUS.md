@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
+Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
 
 ## Latest Completed Slice
 
-Perl typed value_access now supports fluent/literal/immediate-block reads and bracket-method alternation through shared guarded rvalue emission, preserving selected kinds, signed positions, snapshots/ordered effects and function-local source/selector writes. Direct-call sources remain on their prior paths: candidate recognition changed frozen callable float/string counts0 to2/null and raw markers1 to0. Excluding direct calls restores all four frozen values1/2/0/0 and raw1; retained intake/original producer records the distinction. Parent24.1 stays open;24.1.2 owns safe pure/helper/function call indexing before full Perl target/Rust handoff. Bounded strict native/fresh noncall test PASS36, frozen callable compatibility PASS5 top-level and parser component PASS24; direct selected-scalar/container/indexed-book PASS36, module syntax and representative zero-fallback readiness pass. Three old parser assertions independently fail with clean-base producers; ea6f82c2a/current String contract justify semantic-oracle repairs, component GREEN. Book/contract/fixtures/fact/map/roadmap/task/live pointer align. No complete computed-call, callback/grouping/lvalue/copy/deferred/context/portable or canonical admission claim; copy choice4.2.2 remains pending.
+Explicit deferred literals inherited new value_access parsing from ordinary computed reads, changing unsupported_codeblock_actionir kind raw_perl to value_access and incorrectly promoting raw1/ready0 to raw0/ready1. Immutable pre-feature producer replay confirms the old boundary; the original launcher postlude failure is disclosed and the distinguishing replay exits0. Scope the existing deferred-literal body parse and disable only new computed-access recognition there. No deferred executor or readiness waiver changes. New regression distinguishes raw/readiness/AST RED, then PASS22 native/fresh/error-field/readiness/Unicode-span/scope-restoration controls; ordinary and inline reads plus named deferred reads stay healthy, including restoration after parse failure. Direct frozen callable compatibility PASS5; Parser/probe syntax and diff pass. Keep structured blessed error fields rather than comparing them with an unblessed Hash oracle. Book/contract/facts/map/task/live pointer align. Director approved preserving Bool/Number/String/null through copy(value)/value.copy(), retaining container depth; adoption/Perl-first owner4.2.2 is next after this clean commit. Direct computed calls remain queued; no new deferred/context/portable or canonical admission claim.
 
 ## Next Action
 
-Activate Perl direct computed-call child24.1.2 before Rust24.2. Preserve all four frozen callable-result values/readers/coercions/count-on-missing/raw1 while adding statically owned pure/helper/typed-function call indexing. Read canonical callable provenance, result reader and raw-dependency classification owners before changes; full computed_selection_values fixture remains required. Split safe implementation children before edits if needed. No callback/metadata/copy/deferred or format promotion; copy-domain4.2.2 awaits director decision. Focused native/fresh/descriptor/compile/docs/commit only.
+Activate approved scalar/null copy extension4.2.2: record the October27 director decision as the target, own bounded Perl-first and backend implementation children before edits, preserve each existing container-copy depth and callable-origin/arity/source/snapshot boundaries. copy(value) and value.copy() preserve Bool/Number/String/null. Use focused compile/quick direct checks/docs/commit per child; no new permission request. Computed direct calls24.1.2 remain queued and must later preserve frozen callable reader/count/raw1 behavior; complete admission/pressure/canonical work remains separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.0` — Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1` — Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
@@ -29,7 +30,6 @@ Activate Perl direct computed-call child24.1.2 before Rust24.2. Preserve all fou
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.2` — Rust22.2 tagged-record producer and String-to-Array bridge are implemented/targeted-checked; Dart22.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` — Perl22.1 producer and receiver bridge are repaired/targeted-checked; independent Rust22.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 
 ## History
 

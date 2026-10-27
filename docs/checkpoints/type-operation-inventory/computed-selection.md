@@ -109,3 +109,19 @@ the current String contract justify executed semantic oracles. Retained public
 probe_parser_expectation_baseline.pl/JSON reconstructs the three original modules.
 The first -I-only overlay was rejected when bootstrap selected working modules;
 explicit require/standard %INC aliases establish the historical baseline.
+
+## Explicit deferred-body repair and next activity
+
+24.1.2.0 finds global recognition also changes explicit deferred literal AST,
+readiness and error kind, although its executor does not support value_access.
+The pre-feature/current packet and exact source are computed-deferred-boundary.json.
+Only the three recorded baseline producers are preloaded; no full-checkout claim.
+The original launcher's false require return is disclosed; corrected explicit
+replay exits0. A scoped body-parse fence restores original deferred grammar,
+raw1/ready0 and unsupported_codeblock_actionir/raw_perl. Regression PASS22 and
+direct callable compatibility PASS5 preserve ordinary/inline/named controls and
+success/error scope restoration. No new deferred execution or waiver is added.
+
+The director now approves scalar/null value-copy extension4.2.2, retaining current
+container-copy depths. It follows this repair's clean commit; direct-call24.1.2
+remains queued with its complete ordinary target and legacy constraints intact.

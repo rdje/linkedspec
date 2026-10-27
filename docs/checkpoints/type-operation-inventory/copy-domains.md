@@ -1,7 +1,7 @@
 # Copy-domain authority intake
 
 Owner: TYPE-REFERENCE-BOOK.1.2.1.4.2.1; decision/repair owner1.2.1.4.2.2.
-Status: current behavior established; scalar-domain decision requested, not adopted.
+Status: historical behavior intake; director approved scalar/null value-copy extension on October27, implementation owner4.2.2.
 
 ## Authority
 
@@ -60,7 +60,10 @@ function/receiver behavior with the existing Perl source-family boundaries. This
 narrows Dart/Julia/Lua behavior and needs explicit compatibility updates; do not
 pretend the reference currently has one uniform scalar failure value.
 
-The decision was requested from the director. Neither option is adopted yet.
+At this intake the decision was requested and neither option had been adopted.
+On October27 the director selected the recommended scalar/null value-preserving
+extension, retaining existing container-copy depth rules. This is the authority
+for4.2.2; the historical reference observations above remain unchanged.
 TYPE1.2.1.4.2.2 owns the response and bounded implementation children; parent4.2
 stays open until the selected behavior is fixed/verified, not documentation-only.
 Other ordinary feature work may proceed from a clean commit while this decision

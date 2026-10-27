@@ -26,6 +26,7 @@ use Scalar::Util ();
 # A caller must later join an actual construction to an explicit input frame;
 # public source/source_span fields and equal copies cannot make that selection.
 our ($_construction_scope, $_construction_recorder, $_construction_input, $_provided_parse_input);
+our $_parsing_deferred_literal_body;
 
 sub _same_construction_reference {
  my ($left, $right) = @_;
@@ -911,6 +912,8 @@ sub _parse_codeblock_literal_expr {
  my $body_start = $start + $signature_end + 1;
  my $body_end = $end - 1;
  my $body_source = substr($source_text, $signature_end + 1, length($source_text) - $signature_end - 2);
+ # The deferred executor retains its existing expression vocabulary.
+ local $_parsing_deferred_literal_body = 1;
  my $body_ast = parse_action_block($body_source, { base_start => $body_start });
  return LinkedSpec::ActionIR::AST::node(
   'codeblock_literal',
@@ -1584,6 +1587,7 @@ sub _parse_receiver_mutation_expr {
 
 sub _parse_value_access_expr {
  my ($text, $start, $end) = @_;
+ return undef if $_parsing_deferred_literal_body;
  return undef unless substr($text, -1, 1) eq ']';
  my $state = _new_scan_state();
  for (my $idx = 0; $idx < length($text); ++$idx) {
