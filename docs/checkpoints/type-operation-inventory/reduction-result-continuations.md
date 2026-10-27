@@ -147,3 +147,26 @@ reductions, scoped SI(L*)C and clean SIL/SILC/opposite-family rejection. Direct
 Array/Hash root/path controls and strict compilation pass. Julia's compile-time
 malformed errors join1.2.1.4.1 scheduling. Full signature/context/portable and
 deferred/bang admission remain separate; safe Lua21.5 independently follows.
+
+## Safe Lua21.5 bounded implementation
+
+Both available hosts independently pass direct producers/traversal/root-skip
+controls. Shared continuation RED fails at copied binding kind; minimal effect
+control gives[null,SILL,1,[9]]. Remove the terminal fence, retain actual reduction
+kind for Array/Hash-only admission before operands and mark possible scalar
+results, released by actual containers. Keep dedicated traversal/callback bodies.
+
+A separate P1 source-before-invalid-signature defect is directly observed through
+public diagnostic_sink: malformed zero/two initials emit a source event before
+the existing runtime arity error on native/plan/fresh. Preflight now invokes the
+same final-codeblock metadata validation before source evaluation, preserving
+error class/text/runtime phase and generated wrappers while suppressing effects.
+Malformed error policy joins1.2.1.4.1; no compiler/signature normalization here.
+
+Strict shared JSON and six valid groups plus malformed controls/source loads pass
+native/plan/fresh on PUC5.5.1/LuaJIT after RED, including exact kinds/typed indices/
+copies/immediate-repeat-coalesced traversal/scoped SI(L*)C and clean SIL/SILC
+rejection. No new module locals/full runner/native malformed patterns/declared5.4
+or context/portable admission. All bounded21 backend children are targeted-checked;
+remaining ordinary feature selection23.1.2 continues. Document pressure repair
+1.2.20.1 remains mandatory before admission/push under the existing schedule.

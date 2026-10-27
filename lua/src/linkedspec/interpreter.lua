@@ -3432,6 +3432,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   edge_state
 )
   local scalar_result = type(value) == "boolean"
+  local reduction_result = false
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3441,6 +3442,16 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       source_span = call.source_span,
     }
     local canonical_name = action_contracts.canonical_action_helper_name(call.method)
+    -- Reduced values may switch container family; check before operands.
+    if reduction_result then
+      local kind = json.kind(value)
+      local array_only = PURE_ARRAY_HELPERS[canonical_name] or
+        canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
+        (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name))
+      if (array_only and kind ~= "array") or (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray") then
+        return json.null
+      end
+    end
     -- Reducers yield scalars; array/hash-only consumers remain invalid until
     -- a compatible helper produces a container. Case maps live with string helpers.
     if scalar_result and (PURE_ARRAY_HELPERS[canonical_name] or PURE_HASH_HELPERS[canonical_name] or
@@ -3463,7 +3474,10 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
           accumulator,
           edge_state
         )
-        if canonical_name == "reduce_leaves" and index < #calls then return json.null end
+        if canonical_name == "reduce_leaves" then
+          scalar_result = true
+          reduction_result = true
+        end
       end
     elseif ARRAY_END_MUTATIONS[canonical_name] then
       local target = index == 1 and target_receiver and binding_target_descriptor(target_receiver) or nil
@@ -3917,6 +3931,9 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
       local argument_count = #(call.args or {})
+      if name == "reduce_leaves" then
+        final_codeblock_argument(name, "receiver", call.args)
+      end
       if ((name == "num_clamp" or name == "replace_substr") and argument_count ~= 2) or
           ((name == "num_add" or name == "num_mul" or name == "coalesce" or name == "cat") and argument_count == 0) or
           (name == "substr" and (argument_count < 1 or argument_count > 2)) then

@@ -9593,6 +9593,10 @@ test("substring optional argument reference", function()
   dofile("lua/test/substring_optional_arguments_test.lua")
 end)
 
+test("reduction accumulator result continuations", function()
+  dofile("lua/test/reduction_result_receivers_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

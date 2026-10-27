@@ -903,7 +903,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `pending` / P2 invalid-callback diagnostic parity
   Goal: Reconcile malformed reduction callback arity failure phase/diagnostics against admitted callable metadata and canonical parity.
   Discovered by: Rust21.2 independent producer/shared intake; no valid-input producer defect.
-  Reproduction: [1].reduce_leaves() {return(value)} and reduce_leaves(0,1) with a later consumer return null/no effects through Perl Get/fresh (permanent t/reduction_result_receiver_contract.t), while Rust Core, Dart and Julia compile report callable_contract_arity_mismatch before execution (their reduction_result_receivers tests). The initial shared fixture is therefore rejected before valid result checks.
+  Reproduction: [1].reduce_leaves() {return(value)} and reduce_leaves(0,1) with a later consumer return null/no effects through Perl Get/fresh (permanent t/reduction_result_receiver_contract.t), while Rust Core, Dart and Julia compile report callable_contract_arity_mismatch before execution (their reduction_result_receivers tests). Lua compiles those shapes but native/plan/fresh raises its existing RuntimeInterpreterException arity text (generated wrappers add their execution prefix), now before source effects after21.5. The shared valid-value fixture therefore excludes malformed signatures and local tests preserve each current policy.
   Impact / ownership: ADR0023 requires equivalent accepted-input/results/diagnostics; existing malformed-program timing/error identity differs despite both skipping effects. Keep this distinction explicit rather than treating source rejection as a runtime value. No signature/policy normalization inside the valid reduction-result feature.
   Schedule: Reconcile canonical ADR0030/0031/0032 and final-codeblock registry/neutral cases immediately after ordinary fluent feature coverage, before signature1.2.1.4/23.4 parity admission/final push. Own the necessary bounded backend fixes and typed diagnostic regressions there; broad matrices remain deferred.
   Acceptance: Select the existing canonical signature/diagnostic authority, independently distinguish both malformed shapes on all active routes/backends, preserve no-effects and valid reduction behavior, repair actual phase/diagnostic drift and update public error guidance. No universal invalid-program policy inferred from a few samples.
@@ -929,7 +929,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`.
+  Children: `.23.1.1`, `.23.1.2`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -961,6 +961,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Production unchanged; retained probe syntax and public healthy source/null/empty/Bool/Array/Hash/numeric/String controls pass native/fresh. Book demonstrates the already working nested consumer workaround; no full gate/context/deferred/standalone/portable admission.
   - [x] LOCKSTEP: Frozen contract/probe and canonical traversal fact/map, current book terminal guidance, TYPE/SESSION/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. Perl21.1 first; comprehensive23.1 matrix remains open.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.1 - select reduction result continuations`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.2`
+  Status: `pending`
+  Goal: Select the next ordinary fluent feature after bounded data-result and reduction families through21.
+  Dependencies: .23.3.21.5.
+  Acceptance: Reconcile remaining String/Array/Hash-producing helper and wrapper roles from retained helpers.md, canonical contracts/book and current fact cards against implemented useful methods. Resolver categories are not input types or method admission. Select a small meaningful missing family/transition from the actual contracts, use public producer/result distinctions only if needed, and own/freeze its implementation before production. Do not promote constructor/list-splice, control, parser-state, callback/deferred or mutation-only roles by spelling alone. No exhaustive coverage claim or full matrix; keep error-signature/pressure/admission owners explicit and feature-first focused cadence.
+  Planned verification tier: focused
+  Planned focused checks: Targeted canonical role/domain/method records and small public distinctions needed for next selection, current book/normal continuity.
+  Planned canonical trigger: Full signature/context/portable/doctrine admission and final clean push remain separate.
+  Planned claim verification: none: bounded normative feature selection and authored distinctions, no aggregate completeness/population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
@@ -4400,7 +4410,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.3 - align Lua substring optional arguments`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.21`
-  Status: `active` / frozen reduction accumulator result feature
+  Status: `active` / all bounded result implementations targeted-checked; full admission separate
   Goal: Extend ordinary reduce_leaves(initial) immediate receiver blocks with compatible consumers of the actual accumulator kind.
   Dependencies: .23.1.1 reduction-result-continuations.md.
   Children: `.23.3.21.1` Perl, `.23.3.21.2` Rust, `.23.3.21.3` Dart, `.23.3.21.4` Julia, `.23.3.21.5` safe Lua.
@@ -4534,7 +4544,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Broader gate disclosure: Resulting-tree README pressure checker exits1 after document mutation self-tests; raw failures/actual staged patch/base and HEAD/index delta evidence are preserved in document-pressure-intake.*. All runtime43 strict tests, source compile, book render and ordinary memory/cadence/diagnosis checks pass. Existing20 schedule expressly defers policy maintenance until feature coverage. Continue Lua21.5;1.2.20.1 remains mandatory before admission/push, with no broad-gate PASS claim. Current CHANGES date/writer recurrence is corrected; historical heading/collection repairs stay owned.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.21.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Lua reduction accumulator result continuations.
   Dependencies: .23.3.21.4.
   Acceptance: Follow reduction-result-continuations.md; producer-first native/generated controls for Number/String/Bool/null/Array/Hash and empty initial kinds, compatible scalar/generic/container selection, source capture/eager initial/callback order/scoped restoration, clean wrong-family rejection and malformed no-effects. Small changed/direct traversal/compile checks/docs/commit per backend. Preserve root-kind traversal/callback errors/free domains and separate full admission.
@@ -4543,13 +4553,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: None for bounded feature implementation under director feature-first cadence; full domain/context/portable admission/final clean push separate.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
 
+  Activation: clean `b871c827b492d46d2b71000aeeac38177e613eb4`; Julia result guards43 strict checks committed with broader document-pressure FAIL accurately retained/owned1.2.20.1 before admission, brief0/tree clean.
+  Owned paths: Lua independent safe reduction producer/result/immediate traversal/effect/shape assessment and justified small runtime repair; retained malformed-phase probe, strict shared-valid/local-invalid native/plan/fresh test/runner registration, source loads and current book/frozen/Lua/traversal facts/task/live continuity. Preserve false/module-local ceiling/root/callback/copy/scope/order/global converters/current malformed policy. Only safe PUC5.5.1/LuaJIT; no full runner/native malformed patterns/declared5.4 claim.
+  Verification tier: `focused`
+  Focused checks: Independent both-host producer-first native/plan/fresh strict JSON shared/direct traversal/actual-kind/opposite-family/order/invalid-root/local malformed RED/GREEN, interpreter/runner loads, book/history/staged memory/cadence/diagnosis. Full document pressure repair remains1.2.20.1 under existing post-feature schedule, no repeated broad gate or PASS claim.
+  Canonical trigger: None for frozen ordinary feature under director feature-first cadence; full signature/context/portable/declared5.4 admission/final push separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement or broad doctrine admission.
+
+  Independent malformed intake: Both safe hosts compile malformed zero/two-initial cases, then native/plan/fresh raise the existing RuntimeInterpreterException helper-arity message (generated routes retain their wrapper prefix). A public diagnostic_sink probe independently captures REDUCTION_ARITY_SOURCE_EFFECT before the zero-initial error on every route. Own this P1 source-before-invalid-signature effect defect here: the fluent preflight omits registered reduction arity and only validates inside evaluate_fluent_calls after receiver evaluation. Invoke existing metadata validation before receiver effects, preserving error class/text/runtime phase; full error parity still belongs1.2.1.4.1. No native malformed patterns are used.
+
+  Independent valid-input RED: Both hosts pass admitted accumulator producers, Array/Hash walk/map/plain traversal and invalid-root skipping on native/plan/fresh. Shared fixture fails at copied binding kind after terminal null; minimal valid order gives[null,SILL,1,[9]] instead of[3!,SILLC,1,null]. Local malformed permanent controls preserve existing runtime error text but observe arity-source before both zero/two-initial failures on every route. Opposite-container tests currently pass only because the terminal fence skips all consumers; retain them through the feature implementation.
+
+  Completion: Remove the nonfinal reduction fence, retain actual reduction-derived kind for container-only consumer guards and preserve scalar-result metadata through compatible bridges. Existing immediate traversal/callback bodies stay. The fluent preflight now calls existing reduction final-codeblock metadata validation before source evaluation, preserving runtime arity messages while fixing source effects. No new module locals.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Both hosts independently pass producer/root/path/direct traversal and invalid-root controls. Native/plan/fresh shared fails copied binding kind after terminal null; valid order RED[null,SILL,1,[9]] confirms consumer skipped. Public diagnostic_sink and permanent zero/two-initial controls capture source events before existing arity errors on every route. No malformed native regex is used.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.lua evaluate_fluent_calls terminates after nonfinal reduce_leaves and lacks actual reduction result kind/scalar metadata. Its registered arity validation runs only there, after evaluate_expr has evaluated the receiver; ordinary fluent preflight omits reduction final-codeblock validation.
+  - [x] FIX: Continue using actual accumulator, guard Array/Hash-only consumers before operands, mark reduction scalar possibilities with actual-container release and invoke existing reduce metadata validation in preflight before source. Keep callback/root/initial/copy/scope/order/global numeric/Unicode/serialization/mutation paths and existing runtime error class/text/wrappers unchanged.
+  - [x] ADDRESSED (verified): Strict canonical JSON shared/native-plan-fresh plus local controls pass both PUC5.5.1/LuaJIT. Exact Number/String/false/null/Array/Hash/empty kinds, typed index0/copies, numeric/default/selection and immediate/coalesced/repeated traversals, scoped SI(L*)C and scalar/prefix/opposite-family rejection retain permitted effects and skip operands. Diagnostic sinks now stay empty for both malformed initial counts while exact arity errors remain.
+  - [x] NO REGRESSION: Admitted Array/Hash walk/map/plain reduction/root-kind/sorted-key/index paths and direct invalid-root/source snapshot controls pass. Interpreter/runner source loads pass on both hosts without adding module locals. Only safe named fixtures run; no full runner/unsafe native patterns/declared5.4, full context or portable admission.
+  - [x] LOCKSTEP: Safe runner registration/permanent test/probe, frozen progress/current book all-five bounded support and error-phase qualifications, Lua/traversal facts/map and TYPE/SESSION/live/resume align. Lua runtime errors join1.2.1.4.1 diagnostic parity; broad document-pressure FAIL remains owned1.2.20.1 before admission/push, no repeated global-gate PASS claim. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. All bounded21 backend children targeted-checked; next remaining ordinary fluent selection23.1.2.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.21.5 - compose Lua reduction accumulator results`.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; Perl21.1/Rust21.2/Dart21.3/Julia21.4 are implemented/targeted-checked and safe Lua21.5 independently assesses next, with separate portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Next remaining ordinary fluent selection23.1.2; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` | `pending` | Independent safe Lua reduction accumulator result assessment/implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.2` | `pending` | Select next ordinary fluent-method gap from remaining helper domains/roles. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

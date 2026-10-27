@@ -2,6 +2,8 @@
 id: array-tree-traversal-contract
 title: "Array and Hash traversal preserve callback scope and actual reduction result kinds"
 answers:
+  - "why does Lua reduce_leaves stop before later methods"
+  - "why does malformed Lua reduction arity emit source output before failing"
   - "why does Julia reduce_leaves take evaluate an incompatible operand"
   - "why does Dart reduce_leaves take evaluate an incompatible operand"
   - "why does Rust evaluate a reduction initial for a scalar or null root"
@@ -21,6 +23,7 @@ status: current
 tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, rust, oracle, SPEC-FORMAT-TERSE]
 evidence: "SPEC13 root traversal; TYPE23.1.1 frozen result feature and Perl21.1/Rust21.2 focused RED/GREEN. Exact prior full record/July milestones at Git2eb98f833f712bfeb78d0cdb416060e1905ff72c for this path."
 reverify:
+  - "bash tools/run_lua_project_data.sh puc lua/test/reduction_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/reduction_result_receivers_test.lua"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/reduction_result_receivers_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/reduction_result_receivers_test.dart"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
@@ -130,3 +133,15 @@ and compilation pass, including Number-not-Bool/false/counters, shared kinds/
 indices/copies/immediate-repeat-coalesced reductions, SI(L*)C/scope and clean
 SIL/SILC rejection. Callback/root/initial/converter bodies stay. Julia static
 malformed errors join1.2.1.4.1; safe Lua21.5 is next before broader admission.
+
+Safe Lua21.5 independently confirms producers/root/path behavior, then removes
+its nonfinal reduction fence and adds actual kind/scalar consumer guards, keeping
+callback/root/initial/copy/converter bodies unchanged. Public diagnostic_sink
+proves malformed zero/two initials emit source events before runtime arity errors.
+Call the existing reduction final-codeblock validator before source evaluation:
+exact errors/wrappers remain, source/initial/callback/consumer events now stay empty.
+Strict shared/direct/malformed/source-load checks pass native/plan/fresh on safe
+PUC5.5.1/LuaJIT, preserving kinds/typed indices/copies/immediate-repeat-coalesced
+traversals/scoped SI(L*)C and clean SIL/SILC rejection, without new module locals.
+All five bounded21 children are targeted-checked; error policy1.2.1.4.1/document
+pressure1.2.20.1/declared5.4/full context and portable admission stay open.

@@ -41,3 +41,9 @@ start; new free/receiver regression passes both hosts. Source/probe/fixture:
 scalar_string_results_test.lua/probe_scalar_string_lua.lua and the frozen
 scalar-string-results.md. No full runner/malformed native patterns/declared5.4,
 magnitude matrix, whole-family or portable admission from this bounded proof.
+
+Reduction21.5 keeps actual accumulator results and guards incompatible consumer
+operands; it also validates malformed reduction arity before source effects using
+the existing runtime metadata/error text. Safe PUC5.5.1/LuaJIT strict native/plan/
+fresh shared/direct/malformed/source-load checks pass; no new module locals or
+unsafe full runner. Canonical details: [[array-tree-traversal-contract]].
