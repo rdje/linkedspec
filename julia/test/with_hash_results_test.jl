@@ -39,6 +39,24 @@ function with_result_action(action)
     return "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {$action}\n"
 end
 @testset "Julia ordinary with results" begin
+    @testset "Distinct nested returned Hash scopes" begin
+        source = with_result_action(raw"""
+value="outer";order="";
+result="outside".with(){inner="inside".with(){order=cat(order,"I");return({"k":[value]})}.sorted_values().first().first();order=cat(order,"O");return({"k":[value,inner]});}.sorted_values().first();
+return([result,value,order]);
+""")
+        for (route, operation) in with_result_routes(source, "name=Alpha")
+            result = try
+                operation()
+            catch failure
+                println("NESTED_HASH_ERROR ", route, " ", sprint(showerror, failure))
+                @test false
+                continue
+            end
+            @test strict_with_result_equal(result, Any[Any[Any["outside","inside"],"outer","IO"]])
+        end
+    end
+
     @testset "Unchanged frozen Hash target" begin
         root = dirname(dirname(@__DIR__))
         source = read(joinpath(root, "tests", "fixtures", "with_hash_result_values.spec"), String)

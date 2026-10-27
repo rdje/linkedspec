@@ -62,3 +62,14 @@ restored fields and plan text, format/fatal selected analysis clean. The initial
 writer assertion occurred before runtime write; unchanged replay is not candidate
 semantic RED. Existing Dart2.10 broader carrier/trace/public/context closeout stays
 open; independent Julia31.6.3 and remaining scoped controls follow.
+
+Julia31.6.3 independently records identity73 PASS/36 RED assertions and separate
+nested Hash12 PASS/3 RED before production. Private invocation frames retain owned
+callback records and optional bound names, keeping all anonymous bodies active for
+error routing. Callback-specific record equality distinguishes Bool from Number;
+general equality and pre-scope callback resolution remain unchanged. Candidate
+identity127/with15/input-cursor12 assertions pass native/plan/fresh Module with
+depwarn=error, typed fields and named/anonymous three-store failure cleanup. Exact
+producer/channels: callback-identity-julia-intake.json.gz. Existing Julia2.8.2 keeps
+reconstructed/isolated emitted/trace/public/context closeout open. Remaining scoped
+Perl/Lua31.6.4 follows before unrelated selection/parent admission.

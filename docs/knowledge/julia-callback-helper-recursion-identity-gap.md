@@ -1,19 +1,25 @@
 ---
 id: julia-callback-helper-recursion-identity-gap
-title: Julia uses helper names as callback recursion identities
+title: Julia callback identity separates inert records and bindings from helper labels
 answers:
   - "why does nested Julia with report codeblock recursion"
   - "can Julia nest distinct map_leaves callbacks"
   - "does Julia preserve bound callback identity through with"
   - "which task owns Julia helper callback recursion identity"
-date: 2026-09-11
-status: confirmed-open
+date: 2026-10-27
+status: bounded TYPE31.6.3 repaired; JULIA startup2.8.2 broad closeout remains open
 tags: [julia, callable, codeblock, callback, recursion, startup, defect]
-evidence: "JULIA-STARTUP-READING.1.16; activation bfd68cd6ec4dc3a8801ea51e12f2d666f735b275; Interpreter4750/4776,5141/6039,6080; nine native/SpecFile-JSON controls,84 assertions; gated repair .2.8"
-reverify: "Run the managed JULIA_CALLBACK_IDENTITY16 fence below; assertions describe the pre-repair behavior."
+evidence: "Historical2026-09-11 JULIA-STARTUP-READING.1.16; activation bfd68cd6ec4dc3a8801ea51e12f2d666f735b275; Interpreter4750/4776,5141/6039,6080; nine native/SpecFile-JSON controls,84 assertions; gated repair .2.8"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/callback_identity_test.jl\"); include(\"julia/test/with_hash_results_test.jl\")'"
 ---
 
 # Helper names are not callback identities
+
+October27 TYPE31.6.3 implements the bounded repair; existing Julia2.8.2 retains
+broader carrier/trace/public/context closeout. The original dated observations and
+replay below remain historical evidence, not current expected behavior.
+
+## Historical intake — September11 before repair
 
 Julia's shared codeblock executor checks and pushes its supplied `name` in
 `context.active_codeblocks`. Direct bound calls supply the variable name, but
@@ -53,7 +59,7 @@ Julia .2.8.1/.2.8.2 own identity repair and supported-route/public proof after s
 anonymous-versus-bound distinction in dated Lua evidence. No new Lua run or other
 backend conclusion is claimed. The map_leaves! receiver mutation guard is separate.
 
-## Exact replay
+## Historical exact replay
 
 ```bash
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_CALLBACK_IDENTITY16'
@@ -97,3 +103,24 @@ names=Dict("nested_helper_with"=>"with","nested_receiver_with"=>"with","nested_m
 end
 JULIA_CALLBACK_IDENTITY16
 ```
+
+## Current bounded repair — October27
+
+Independent identity controls observe73 PASS/36 RED assertions across native/plan/
+fresh Module, with separate nested Hash12 PASS/3 RED. The shared executor now keeps
+private invocation records containing diagnostic name, optional bound name and an
+owned copy of inert callback data. Active record equality or the existing bound-name
+fence detects real cycles, including opaque coalesce(cb,cb) final values. Helper
+labels alone no longer reject distinct callbacks. All frames remain active for
+unknown-helper routing; existing finally cleanup and callback argument order stay.
+General runtime equality, callback serialization and environment capture do not move.
+
+Candidate identity127/with15/input-cursor12 assertions pass with depwarn=error.
+They cover contextual/explicit/tree/Hash nesting, native typed code/stage/name/cycle/
+handler_source_label fields, generated text, direct/mutual/helper/receiver/opaque
+cycles and caller callback named value. Private named/anonymous failed-body controls
+restore scalar/array/hash parameter stores, retain unrelated effects and empty the
+active frame stack. Normal runner registers callback_identity_test.jl. Exact source
+producer/channels: callback-identity-julia-intake.json.gz. Reconstructed-SpecFile,
+isolated emitted direct/traced and broad context/public proof remain2.8.2/full23.4;
+remaining scoped Perl/Lua31.6.4 precedes unrelated selection/parent admission.

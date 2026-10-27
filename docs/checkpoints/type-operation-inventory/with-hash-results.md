@@ -1,7 +1,7 @@
 # Ordinary eager with returned-Hash continuations
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.31; intake31.0; independent backend children31.1-.5.
-Status: All bounded non-nested with-result backend children repaired/targeted-checked on recorded hosts. Rust31.6.1/Dart31.6.2 nested identity is implemented; independent Julia identity and full admission remain open.
+Status: All bounded non-nested with-result backend children repaired/targeted-checked on recorded hosts. Rust31.6.1/Dart31.6.2/Julia31.6.3 nested identity is implemented; remaining scoped controls and full admission stay open.
 
 Existing helper `with(value){body}` and receiver `source.with(){body}` execute
 immediately, bind scoped `value`, return the block result and restore the outer
@@ -110,3 +110,8 @@ Dart31.6.2 now passes the exact distinct nested Hash outside/inside/outer/IO con
 with identity/contextual/explicit/tree and typed-cycle/error controls. Bounded
 identity8/with5 plus existing mutual/named-value-scope2 pass; full startup/emitted/
 trace/alias/context admission stays with existing owner2.10/full23.4. Julia follows.
+
+Julia31.6.3 now passes the distinct nested Hash outside/inside/outer/IO control
+through native/plan/fresh Module. Identity127/with15/input-cursor12 assertions pass
+with typed cycle fields and named/anonymous failed-callback cleanup. The earlier
+nested12 PASS/3 RED is retained independently; broader2.8.2/full23.4 stays open.

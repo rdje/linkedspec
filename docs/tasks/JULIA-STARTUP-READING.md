@@ -6,7 +6,7 @@
 - Status: `active` / reading complete; repairs open; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
-- Last updated: `2026-09-12`
+- Last updated: `2026-10-27`
 - Owner: repo-local workflow
 - Decomposition owner: `SESSION-STARTUP-READING.3.5.0`
 
@@ -1147,22 +1147,28 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.2.8`
-  Status: `pending`
+  Status: `in_progress` — bounded runtime implementation completed by TYPE31.6.3; broader closeout remains open.
   Goal: Keep callback recursion identity separate from helper names.
   Dependencies: Startup .3/.4/.5; .1.16 diagnostic intake.
-  Evidence: Interpreter4750/4776 uses supplied name as active-codeblock identity; helper/receiver with passes with at5141/6039, and tree callbacks carry method at6080. Four distinct nested callback cases falsely reject; bound cb recursion through with reports with→with instead of cb→cb. Nine native/SpecFile-JSON controls pass84 assertions.
+  Historical evidence2026-09-11: Interpreter4750/4776 used supplied name as active-codeblock identity; helper/receiver with passes with at5141/6039, and tree callbacks carry method at6080. Four distinct nested callback cases falsely reject; bound cb recursion through with reports with→with instead of cb→cb. Nine native/SpecFile-JSON controls pass84 assertions.
   Children: .2.8.1 callback identity repair; .2.8.2 supported-route and public recurrence.
   Acceptance: Distinct anonymous callbacks may nest without false recursion; a callback passed by variable retains its binding identity and true direct/mutual/helper-mediated recursion remains bounded with exact ordered diagnostics. Preserve dynamic scope, three-store restoration and separate map_leaves! receiver-write identities. Dart .2.10 is a separate backend owner; dated Lua behavior is comparison evidence only.
-  Verification: `pending` repair; docs/knowledge/julia-callback-helper-recursion-identity-gap.md owns exact replay and limitations.
-  Commit: `pending`
+  Verification: bounded implementation/targeted checks complete under TYPE31.6.3; broader closeout stays2.8.2. Canonical card distinguishes historical replay from current proof.
+  Commit: bounded implementation subject below; broader startup closeout remains open.
+
+  Bounded update2026-10-27: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 implements private data/name-aware callback invocation frames. Independent identity73 PASS/36 RED and nested Hash12 PASS/3 RED precede production. Candidate identity127/with15/input-cursor12 assertions pass native/plan/fresh Module with depwarn=error, typed cycle/unknown fields and named/anonymous three-store failure cleanup. Callback argument order, general equality and serialized literal fields stay unchanged. Exact producer/channels: docs/checkpoints/type-operation-inventory/callback-identity-julia-intake.json.gz. Director-focused feature work proceeds without a new full-reading audit; startup prerequisites still govern full closeout. Reconstructed carrier, isolated emitted direct/traced/public and broader alias/context admission remain2.8.2/full23.4; no parent closeout claim.
+  Bounded commit subject: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 - preserve Julia callback identity through helper dispatch; derive identity from Git.
 
 - ID: `JULIA-STARTUP-READING.2.8.1`
-  Status: `pending`
+  Status: `in_progress` — bounded runtime implementation completed by TYPE31.6.3; broader closeout remains open.
   Goal: Repair helper/receiver/tree callback identities at the shared executor seam.
   Dependencies: Startup .3/.4/.5; .1.16 committed; relevant source fully read.
   Acceptance: Inventory anonymous, contextual, literal and bound-variable callback origins; preserve the originating binding identity through helper dispatch without assigning helper names to anonymous values. Add RED/GREEN same-helper/mixed-helper nesting and true direct/mutual/helper-mediated recursion controls, including copied/restored scopes after failure. Do not weaken recursion protection or receiver mutation guards.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: bounded implementation/targeted checks complete under TYPE31.6.3; broader closeout stays2.8.2.
+  Commit: bounded implementation subject below; broader startup closeout remains open.
+
+  Bounded update2026-10-27: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 implements private data/name-aware callback invocation frames. Independent identity73 PASS/36 RED and nested Hash12 PASS/3 RED precede production. Candidate identity127/with15/input-cursor12 assertions pass native/plan/fresh Module with depwarn=error, typed cycle/unknown fields and named/anonymous three-store failure cleanup. Callback argument order, general equality and serialized literal fields stay unchanged. Exact producer/channels: docs/checkpoints/type-operation-inventory/callback-identity-julia-intake.json.gz. Director-focused feature work proceeds without a new full-reading audit; startup prerequisites still govern full closeout. Reconstructed carrier, isolated emitted direct/traced/public and broader alias/context admission remain2.8.2/full23.4; no parent closeout claim.
+  Bounded commit subject: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 - preserve Julia callback identity through helper dispatch; derive identity from Git.
 
 - ID: `JULIA-STARTUP-READING.2.8.2`
   Status: `pending`

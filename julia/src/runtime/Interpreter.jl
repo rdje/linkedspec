@@ -414,6 +414,12 @@ mutable struct _RuntimeRecognitionFrame
     observation_scope::Union{Nothing,_RuntimeRecursiveObservationScope}
 end
 
+struct _RuntimeCodeblockInvocation
+    name::String
+    binding_name::Union{Nothing,String}
+    record::Dict{String,Any}
+end
+
 mutable struct _RuntimeExecutionContext
     input::String
     source_authority::SourceLocation.SourceAuthority
@@ -439,7 +445,7 @@ mutable struct _RuntimeExecutionContext
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
     active_user_functions::Vector{String}
     user_function_body_cache::Dict{Int,ActionBlock}
-    active_codeblocks::Vector{String}
+    active_codeblocks::Vector{_RuntimeCodeblockInvocation}
     codeblock_body_cache::Dict{String,ActionBlock}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
@@ -492,7 +498,7 @@ function _RuntimeExecutionContext(
         Dict{String,_RuntimeRuleLocalBinding}[],
         String[],
         Dict{Int,ActionBlock}(),
-        String[],
+        _RuntimeCodeblockInvocation[],
         Dict{String,ActionBlock}(),
         RuntimeLifecycleEvent[],
         String(top_rule),
@@ -1498,6 +1504,7 @@ struct _RuntimeCodeblockValue
     max_arity::Union{Nothing,Int}
     source_text::String
     body_source::String
+    record::Dict{String,Any}
 end
 
 struct _RuntimeRuleResult
@@ -4694,6 +4701,7 @@ function _evaluate_runtime_call!(
             context,
             rule_label,
             current_edge,
+            binding_name = call.name,
         )
     elseif !is_known_action_ir_call_name(call.name) && !isempty(context.active_codeblocks)
         detail = "unknown_helper name=$(repr(call.name)) rule_label=$(repr(rule_label))"
@@ -4717,6 +4725,29 @@ function _evaluate_runtime_call!(
     ))
 end
 
+# Compare only inert callback data. Julia's general numeric equality equates
+# Bool and Number values, which must remain distinct in serialized records.
+function _same_runtime_codeblock_record(left, right)
+    left === right && return true
+    if left isa Bool || right isa Bool
+        return false
+    elseif left isa AbstractDict && right isa AbstractDict
+        return length(left) == length(right) && all(
+            haskey(right, key) && _same_runtime_codeblock_record(value, right[key])
+            for (key, value) in left
+        )
+    elseif left isa AbstractVector && right isa AbstractVector
+        return length(left) == length(right) && all(
+            _same_runtime_codeblock_record(a, b) for (a, b) in zip(left, right)
+        )
+    elseif left isa AbstractString && right isa AbstractString
+        return left == right
+    elseif left isa Number && right isa Number
+        return left == right
+    end
+    return false
+end
+
 function _execute_runtime_codeblock_value!(
     engine::LinkedSpecRuntimeEngine,
     name::String,
@@ -4727,6 +4758,7 @@ function _execute_runtime_codeblock_value!(
     current_edge,
     ;
     evaluated_values = nothing,
+    binding_name::Union{Nothing,String} = name,
 )
     values = Any[]
     if evaluated_values === nothing
@@ -4769,10 +4801,15 @@ function _execute_runtime_codeblock_value!(
         ))
     end
 
-    active_index = findfirst(==(name), context.active_codeblocks)
+    active_index = findfirst(context.active_codeblocks) do invocation
+        (binding_name !== nothing && invocation.binding_name == binding_name) ||
+            _same_runtime_codeblock_record(invocation.record, codeblock.record)
+    end
     if active_index !== nothing
-        cycle = String[context.active_codeblocks[active_index:end]..., name]
-        detail = "codeblock_recursion_unsupported callable_name=$(repr(name)) " *
+        identity_name = context.active_codeblocks[active_index].name
+        cycle = String[invocation.name for invocation in context.active_codeblocks[active_index:end]]
+        push!(cycle, identity_name)
+        detail = "codeblock_recursion_unsupported callable_name=$(repr(identity_name)) " *
                  "cycle=$(repr(cycle)) rule_label=$(repr(rule_label))"
         throw(RuntimeInterpreterException(
             detail;
@@ -4783,10 +4820,10 @@ function _execute_runtime_codeblock_value!(
                 summary = "Julia callable codeblock invocation failed",
                 detail = detail,
                 code = "codeblock_recursion_unsupported",
-                callable_name = name,
+                callable_name = identity_name,
                 cycle = cycle,
                 rule_label = rule_label,
-                handler_source_label = "julia_runtime:codeblock:$name",
+                handler_source_label = "julia_runtime:codeblock:$identity_name",
             ),
         ))
     end
@@ -4795,7 +4832,11 @@ function _execute_runtime_codeblock_value!(
         parse_action_block(codeblock.body_source)
     end
     bindings = _RuntimeScopedBinding[]
-    push!(context.active_codeblocks, name)
+    push!(context.active_codeblocks, _RuntimeCodeblockInvocation(
+        binding_name === nothing ? name : binding_name,
+        binding_name,
+        codeblock.record,
+    ))
     try
         for (index, parameter) in enumerate(codeblock.positional_params)
             push!(bindings, _enter_runtime_scoped_scalar!(
@@ -5168,6 +5209,7 @@ function _call_runtime_with_codeblock!(engine, call, context, rule_label, curren
             current_edge,
             evaluated_values = callback_expr isa ActionCodeblockArgumentExpr ?
                                Any[] : Any[_runtime_copy(scoped_value)],
+            binding_name = callback_expr isa ActionVariableExpr ? callback_expr.name : nothing,
         )
     finally
         _exit_runtime_scoped_binding!(context, binding)
@@ -5672,6 +5714,7 @@ struct _RuntimeTreeCodeblockCallback
     name::String
     value::_RuntimeCodeblockValue
     pass_leaf_value::Bool
+    binding_name::Union{Nothing,String}
 end
 
 function _evaluate_runtime_receiver_mutation_chain!(
@@ -6178,6 +6221,7 @@ function _call_runtime_receiver_with_codeblock!(
             current_edge,
             evaluated_values = callback_expr isa ActionCodeblockArgumentExpr ?
                                Any[] : Any[_runtime_copy(receiver)],
+            binding_name = callback_expr isa ActionVariableExpr ? callback_expr.name : nothing,
         )
     finally
         _exit_runtime_scoped_binding!(context, binding)
@@ -6221,6 +6265,7 @@ function _call_runtime_tree_traversal_codeblock!(
             rule_label,
         ),
         !(callback_expr isa ActionCodeblockArgumentExpr),
+        callback_expr isa ActionVariableExpr ? callback_expr.name : nothing,
     )
 
     if receiver isa AbstractDict
@@ -6480,6 +6525,7 @@ function _evaluate_runtime_tree_leaf!(
             current_edge,
             evaluated_values = callback.pass_leaf_value ?
                                Any[_runtime_copy(value)] : Any[],
+            binding_name = callback.binding_name,
         )
     finally
         for binding in Iterators.reverse(bindings)
@@ -8513,6 +8559,7 @@ function _decode_runtime_codeblock(value)
         max_arity,
         String(value["source_text"]),
         String(value["body_source"]),
+        _runtime_copy(value),
     )
 end
 

@@ -6764,7 +6764,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2 - distinguish Dart callback invocations from helper labels`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 before unrelated selection/parent31 admission.
   Goal: Implement bounded Julia helper callback identity prerequisite under existing JULIA-STARTUP-READING.2.8.
   Authority: ADR0031/current callable contract, callback-invocation-identity.md and existing backend canonical identity record. Existing startup broad/public/context signoff remains separately owned; this leaf does not depend on a new full-reading audit.
@@ -6773,6 +6773,20 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small finite native/reconstructed/generated/source success/error controls, direct dependent with/cleanup/typed-cycle checks, compile/format/normal registration/book/history/continuity; no full suite/matrix.
   Planned canonical trigger: Existing startup parent and full source/domain/context/backend23.4/final clean push after feature coverage; no broad parent closeout in this bounded leaf.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+  Activation: cleandd698224fe773d1beda650ecb6c141f424eefa18; Dart31.6.2 committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: Independent identity baseline73 PASS/36 RED assertions, separate nested Hash12 PASS/3 RED. Candidate identity127/with15/input-cursor12 pass native/plan/fresh Module with depwarn=error; named/anonymous three-store failure cleanup included. Normal registration/book/history/fast continuity; no full suite/matrix/package.
+  Canonical trigger: Existing JULIA-STARTUP-READING.2.8.2 broader reconstructed/isolated emitted/trace/public closeout remains open; full23.4/final clean push after feature coverage.
+  Claim verification: none: Finite authored identity, diagnostic and scope controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Native/plan/fresh independently reject distinct contextual/explicit/tree and nested Hash callbacks, and give with→with for bound helper/receiver/opaque cycles. Baseline identity73 assertions pass/36 fail; separate Hash12 pass/3 fail. Anonymous unknown errors, direct/mutual cycles and caller callback named value are healthy controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter shared executor keys active_codeblocks by supplied helper name; its decoded callback view omits the complete inert record required to recognize existing opaque final values. Callback resolution already precedes scoped value and remains there.
+  - [x] **FIX**: Private invocation frames retain optional bound names, diagnostic names and owned callback records. Match callback records or the existing bound-name fence, propagate variable names through helper/receiver/tree/direct dispatch and close cycles with matched identity. Keep every anonymous invocation active for unknown-helper routing and existing finally cleanup; record comparison distinguishes Bool/Number without changing general equality.
+  - [x] **ADDRESSED (verified)**: Identity127 and with15 assertions pass across native/plan/fresh Module, including explicit/contextual/tree/Hash nesting, restored outer/temporary parameters, helper/receiver/coalesce cb→cb and direct/mutual order. Native typed code/stage/name/cycle/handler_source_label fields agree with generated error text; named/anonymous failed bodies restore scalar/array/hash stores, retain unrelated effects and empty active frames.
+  - [x] **NO REGRESSION**: Input/cursor12 assertions pass with compilation and depwarn=error. Existing pre-scope callback argument evaluation, active bound-name fence, source caches, three-store finally cleanup and receiver mutation ownership remain. No new helper/dependency/AST/serialized/capture/deferred/computed/unknown-call rights; broader carrier/trace/context admission is separate.
+  - [x] **LOCKSTEP**: Book removes the repaired Julia caveat; target/retained producer and channels/current canonical card/map/roadmap/task/live/resume align. Normal runner includes the new test. Existing Julia2.8/.2.8.1 record bounded implementation while2.8.2 keeps broad closeout open; remaining scoped31.6.4 follows before unrelated selection/parent admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 - preserve Julia callback identity through helper dispatch`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4`
   Status: `pending`
@@ -6817,7 +6831,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` | `pending` | Repair bounded Julia callback identity, then remaining scoped controls. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4` | `pending` | Independently reconcile remaining Perl/Lua callback identity boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
