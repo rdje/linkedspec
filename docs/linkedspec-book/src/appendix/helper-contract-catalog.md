@@ -1757,7 +1757,7 @@ These helpers read from the **current match** — the regex capture that trigger
 
 ### `entry_groups()`
 - **Signature**: `entry_groups()`
-- **Returns**: array (flat list of all captured groups, compacted — see `entry_group(index)`). Ordinary Perl/Rust/Dart/Julia actions can select directly: `entry_groups()[-1].uppercase()` returns the final capture as uppercase text. A binding such as `groups=entry_groups(); groups[-1].uppercase()` and `copy(entry_groups())[-1].uppercase()` remain equivalent read forms; Perl's explicit/registered deferred callbacks keep their supported named-reader vocabulary.
+- **Returns**: array (flat list of all captured groups, compacted — see `entry_group(index)`). Ordinary Perl/Rust/Dart/Julia/Lua actions can select directly: `entry_groups()[-1].uppercase()` returns the final capture as uppercase text. Lua checks use available PUC5.5.1/LuaJIT; declared5.4 proof remains open. A binding such as `groups=entry_groups(); groups[-1].uppercase()` and `copy(entry_groups())[-1].uppercase()` remain equivalent read forms; Perl's explicit/registered deferred callbacks keep their supported named-reader vocabulary.
 
 ### `entry_named(name)`
 - **Signature**: `entry_named(name: string)`
@@ -1772,7 +1772,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `entry_map()`
 - **Signature**: `entry_map()`
 - **Returns**: hash
-- **Behavior**: All named capture groups as a hash (name → value). Ordinary Perl/Rust/Dart/Julia actions can use `entry_map()["head"].uppercase()` directly, or bind/copy the collection first. Quoted missing keys yield undef; compatible defaults and Array/Hash/String continuations use the selected value's actual kind. Accepted aliases follow the same source rule.
+- **Behavior**: All named capture groups as a hash (name → value). Ordinary Perl/Rust/Dart/Julia/Lua actions can use `entry_map()["head"].uppercase()` directly, or bind/copy the collection first. Quoted missing keys yield undef; compatible defaults and Array/Hash/String continuations use the selected value's actual kind. Accepted aliases follow the same source rule.
 - **Compatibility**: `entry_named_map()` remains an accepted source-boundary compatibility alias; prefer `entry_map()`.
 
 ### `entry_len()`

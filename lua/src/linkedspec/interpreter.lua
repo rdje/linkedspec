@@ -3435,7 +3435,8 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     if ARRAY_SPLICE_HELPERS[name] then return false end
     return not not (is_pure_string_helper(name) or PURE_ARRAY_HELPERS[name] or PURE_HASH_HELPERS[name] or
       LOGICAL_HELPERS[name] or scalar_numeric.supports(name) or scalar_numeric.supports_reducer(name) or
-      name == "array" or name == "hash" or name == "copy" or name == "coalesce" or name == "coalesce_nonempty")
+      name == "array" or name == "hash" or name == "copy" or name == "coalesce" or name == "coalesce_nonempty" or
+      name == "entry_groups" or name == "entry_map" or name == "match_groups" or name == "match_map")
   end
   if receiver.kind == "value_access" then
     return typed_source.receiver_mutation.is_ordinary_computed_read(engine, receiver)

@@ -1,7 +1,7 @@
 # Read-only capture collection result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.5; implementation family23.3.25.
-Status: frozen bounded ordinary target; Perl25.1/Rust25.2/Dart25.3/Julia25.4 implemented/targeted-checked, safe Lua25.5 next; complete admission remains23.4.
+Status: frozen bounded ordinary target; all five bounded backend children implemented/targeted-checked on recorded hosts; Lua uses available PUC5.5.1/LuaJIT; complete admission remains23.4.
 
 ## Existing authority and scope
 
@@ -119,3 +119,14 @@ capture sources reuse existing alias normalization and actual-kind guarding
 through with/bridges. New strict capture12 and direct computed25 pass native,
 generated plan and freshly loaded emitted module. Named capture stores, readers,
 parser, compiled representation and deferred vocabulary remain unchanged.
+
+
+## Bounded safe Lua implementation
+
+Lua25.5 adds four canonical names only to the existing private classifier table;
+accepted aliases and actual-kind guards already exist. Each actual PUC5.5.1/
+LuaJIT2.1.1788460057 host resolves nine failed route comparisons while retaining
+three healthy String/compaction controls. Four capture groups and six direct
+computed groups pass native/plan/fresh; luac/loadfile pass without new chunk locals.
+No unsafe patterns/full runner/declared5.4 claim. All bounded25 children complete;
+next-feature selection23.1.6 follows, with full admission23.4 separately owned.

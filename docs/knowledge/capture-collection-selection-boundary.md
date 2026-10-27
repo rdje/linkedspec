@@ -11,11 +11,13 @@ answers:
   - why does Rust capture selection evaluate incompatible method operands
   - how do Dart named-map aliases receive capture result kind guards
   - how does Julia guard capture collection selection through with
+  - how does Lua guard capture results without adding module locals
 date: 2026-10-27
-status: bounded Perl25.1/Rust25.2/Dart25.3/Julia25.4 implemented; safe Lua25.5 next
+status: all five bounded backend children implemented on recorded hosts; full admission remains23.4
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
+  - "bash tools/run_lua_project_data.sh puc lua/test/capture_collection_selection_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/capture_collection_selection_test.lua"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/capture_collection_selection_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/capture_collection_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_collection_selection"
@@ -111,3 +113,14 @@ direct computed25 pass with strict recursive Bool/Number/String/null/container
 comparison. Shared target, aliases/operand skips, compaction/static names and
 bound/context/flat count controls agree; no parser/getter/read/compiled/executor
 field change. Safe Lua25.5 follows; full admission stays23.4.
+
+
+Safe Lua25.5 independently observes9 RED route comparisons/3 healthy text controls
+per actual PUC5.5.1/LuaJIT2.1.1788460057 host. Four canonical names join only the
+existing typed_source.receiver_mutation classifier, adding no module-level local.
+Alias normalization and persistent actual-kind guards already exist. Four capture
+and six direct computed groups pass native/plan/fresh on each host, including
+strict JSON kinds, shared/with/alias/compaction/static names and bound/context/flat
+count preservation. luac/loadfile pass; no unsafe pattern/full runner/declared5.4
+or schema/executor change. All bounded25 backend children complete; remaining
+feature selection23.1.6 follows. Complete admission stays23.4.
