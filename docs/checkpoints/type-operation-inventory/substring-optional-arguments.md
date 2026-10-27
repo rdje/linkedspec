@@ -67,3 +67,13 @@ shared9/legacy3 plus direct String54 strict native/plan/fresh assertions pass
 after three value REDs, preserving Number-not-Bool counters, SIWC/eager SIL,
 Unicode, identity/shape/rejection and both named mutation aliases. No global
 converter/free-arity or unsafe large-slice2.10 change; safe Lua20.3 is next.
+
+## Safe Lua20.3 targeted repair
+
+Ordinary null-width guard and branch-local Boolean1/0 offset function now match
+the shared reference; global runtime_integer and legacy arities stay unchanged.
+Shared/legacy native-plan-fresh and direct eight String groups/source loads pass
+strict canonical JSON on PUC5.5.1/LuaJIT after independent RED. Eager SIWC/SIL,
+Unicode, identity/shape/rejection, mutation and prior large-end clipping remain.
+All three bounded20 repairs are targeted-checked. Full signature/context/portable
+admission and declared5.4 remain separate; no malformed native patterns/full runner.

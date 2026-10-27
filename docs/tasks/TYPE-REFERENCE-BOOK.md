@@ -902,10 +902,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned tier: Select per child; new public methods/contracts and final admission require canonical proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
-  Status: `pending`
+  Status: `active` / bounded remaining-feature selection child; full matrix open
+  Children: `.23.1.1`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.1`
+  Status: `pending`
+  Goal: Select the next missing ordinary fluent family from canonical helper/role inventory after bounded result families1-20.
+  Dependencies: .23.3.20.3.
+  Acceptance: Read retained spelling/role/source inventory and the relevant current contract/book, reconcile remaining operation families with committed bounded result work, choose a small roadmap-aligned feature and create its owning leaf before production. Use public tooling only for missing distinctions; no full suite/matrix/coverage measurement or assumption that every helper needs a method. Preserve deferred/context/control exclusions and prior open defect ownership. Feature-first focused checks/docs/commit.
+  Planned verification tier: focused
+  Planned focused checks: Targeted canonical inventory/contracts/book and any small distinguishing public observation necessary for selection; normal continuity.
+  Planned canonical trigger: Full input-domain/context/portable admission and final clean push remain separate.
+  Planned claim verification: none: bounded feature selection, no aggregate completeness/population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
@@ -4255,7 +4266,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
-  Status: `active` / frozen optional substring argument repairs
+  Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
   Dependencies: .23.2.20 substring-optional-arguments.md.
   Children: `.23.3.20.1` Dart, `.23.3.20.2` Julia, `.23.3.20.3` safe Lua.
@@ -4316,7 +4327,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.2 - distinguish Julia null substring width`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair Lua ordinary substring optional argument parity.
   Dependencies: .23.3.20.2.
   Acceptance: Follow substring-optional-arguments.md and shared reference fixture. Null width and Boolean start/width conversion, preserving false and module-local ceiling; safe PUC5.5.1/LuaJIT native/plan/fresh only. No full runner/malformed native patterns/declared5.4 claim. Independent RED/GREEN, direct scalar String/mutation and small compile checks; sync book/facts/task/live and commit before next backend. Full signature/context/portable admission remains23.4.
@@ -4325,13 +4336,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: None for bounded existing-ADR0006/0023 reference repair under director feature-first cadence; full admission/final clean push separate.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
 
+  Activation: clean `2a4a655634c0a1971e6d70a42fac476414da8d85`; Julia null-width repair committed, brief0/tree clean.
+  Owned paths: Lua ordinary substr branch explicit-null width/local Boolean arguments, strict shared/native-plan-fresh safe test/runner registration and direct String expectation update; frozen ledger/book/Lua/optional-argument facts/task/live continuity. Preserve module-local ceiling/global runtime_integer/free unary-extra arities/regex mutation/clipped intervals. Only safe available PUC5.5.1/LuaJIT; no malformed patterns/full runner/declared5.4.
+  Verification tier: `focused`
+  Focused checks: Independent both-host new shared/legacy arity RED/GREEN native/plan/fresh, direct scalar String Unicode/kinds/effects/mutation/large-end regression and interpreter/runner source loads, book/history/staged continuity guards.
+  Canonical trigger: None for bounded existing ADR0006/0023 reference repair under director feature-first cadence; declared5.4/full signature/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Completion: Ordinary explicit-null width guard and branch-local Boolean1/0 offset conversion now match the frozen reference on both safe hosts. Preserve global runtime_integer, unary/extra-arity behavior, clipped intervals and dedicated mutation; no added module locals. Register the safe shared reference test.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Independent strict shared test on both PUC5.5.1/LuaJIT observes native null-width bc/bc, Boolean starts abc/abc and widths empty/empty, null effects abc!/SIWC and defined effects !/SIWC. Legacy free unary/extra arities already pass native/plan/fresh; assessment20 separately retained all three-route RED observations.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.lua pure substr branch maps provided json.null width to omission and delegates Boolean offsets to rejecting runtime_integer. Existing eager values/source capture and safe clipped interval already work.
+  - [x] FIX: Three-argument null-width guard and ordinary-arity local offset function with explicit Boolean true1/false0 returns. Keep runtime_integer/free extra arities/character slicing/mutation/module locals unchanged; update older qualified slice expectations and safe runner registration.
+  - [x] ADDRESSED (verified): Shared reference and legacy arity groups pass strict canonical JSON native/plan/fresh on both hosts after independent RED. Omitted/null/Boolean/integer/text/fraction/negative/source-start-null controls and SIWC captured source/one call now agree with the fixed Perl/Rust/Dart/Julia reference.
+  - [x] NO REGRESSION: Direct eight scalar String groups pass both hosts, retaining Unicode, identity/typed indices, source roots/bridges, eager SIL/SONC, rejection/12 malformed effects, dedicated mutation aliases and prior PUC large-end clipping. Interpreter/runner load checks pass; no malformed native patterns/full runner/declared5.4 or portable admission.
+  - [x] LOCKSTEP: Registered fixture/frozen ledger/current book examples, Lua/optional-argument/String facts/map and TYPE/SESSION/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. All bounded20 repairs are targeted-checked; return to remaining fluent feature selection23.1.1, with full signature/61.3/23.4 separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.3 - align Lua substring optional arguments`.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1 and Julia20.2 are repaired/targeted-checked, with safe Lua20.3 next before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; next remaining fluent feature selection23.1.1 preserves separate portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` | `pending` | Safe Lua ordinary substring explicit-null width and Boolean arguments. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.1` | `pending` | Select next missing fluent family from retained helper/role inventory and completed bounded result work. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

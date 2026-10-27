@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.20.3 — align Lua substring optional arguments
+
+Safe Lua20.3 distinguishes ordinary explicit-null width and converts Boolean start/width locally to1/0, preserving global runtime_integer, false, legacy unary/extra arities, module locals and clipped character intervals. Independent PUC5.5.1/LuaJIT shared RED becomes GREEN; shared/legacy native-plan-fresh plus direct eight String groups/source loads pass strict canonical JSON. Omitted/null/Bool/integer/text/fraction/negative controls, SIWC captured one-source effects, eager SIL/SONC, Unicode, identity/typed indices/bridges, rejection/12 malformed controls, both mutation aliases and PUC large-end regression remain correct. All bounded20 reference/repairs are targeted-checked. Book/ledger/facts/map/TYPE/SESSION/live/resume align; book/history/diff/staged continuity guards pass. No full runner/malformed native patterns/declared5.4 or portable admission; remaining feature selection23.1.1 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.20.2 — distinguish Julia null substring width
 
 Julia20.2 adds only an ordinary three-argument explicit-null width guard; existing Boolean1/0 and global conversion remain unchanged. Shared native/plan/fresh three value REDs become GREEN with registered shared9/legacy3 plus direct scalar String54 assertions (66 combined), strict compilation and Number-not-Bool counters. Omitted/null/Bool/integer/text/fraction/negative/source-start-null controls, SIWC captured source/SIL, Unicode, identities/typed indices/bridges, rejection/12 malformed effects and named mutation aliases remain correct. Free unary/extra-arity controls pass; no unsafe large-slice2.10 repair or portable admission. Book/ledger/facts/map/TYPE/SESSION/live/resume and book/history/diff/staged continuity guards align. Safe Lua20.3 next.

@@ -1665,12 +1665,22 @@ local function evaluate_pure_string_helper(engine, name, values)
   elseif name == "starts_with" then
     return string_predicate(values, function(value, prefix) return value:sub(1, #prefix) == prefix end)
   elseif name == "substr" then
-    if #values < 2 or values[1] == json.null or values[2] == json.null then return json.null end
+    if #values < 2 or values[1] == json.null or values[2] == json.null or
+        (#values == 3 and values[3] == json.null) then return json.null end
     local value = scalar_string(values[1], false)
     if value == nil then return json.null end
-    local start = math.max(0, runtime_integer(values[2]) or 0)
+    local ordinary_arity = #values == 2 or #values == 3
+    local function offset(operand)
+      -- Keep Boolean integer compatibility local to ordinary slice arguments.
+      if ordinary_arity and type(operand) == "boolean" then
+        if operand then return 1 end
+        return 0
+      end
+      return math.max(0, runtime_integer(operand) or 0)
+    end
+    local start = offset(values[2])
     local width
-    if #values >= 3 and values[3] ~= json.null then width = math.max(0, runtime_integer(values[3]) or 0) end
+    if #values >= 3 and values[3] ~= json.null then width = offset(values[3]) end
     local char_count = value_length(value)
     if start >= char_count then return "" end
     local start_byte = matching.char_offset_to_byte_offset(value, start)

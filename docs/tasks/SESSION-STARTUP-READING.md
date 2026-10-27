@@ -24,7 +24,8 @@ Current feature selection (October27): derive HEAD and the exact active leaf fro
 MEMORY.md and TYPE-REFERENCE-BOOK's Current Frontier. Bounded scalar61.1/.2,
 default62.1/.2 and TYPE selected/result families through scalar String23.3.19
 are implemented/targeted-checked on their recorded routes/hosts. Optional substring
-argument target23.2.20 is frozen; Dart20.1/Julia20.2 are targeted-checked; safe Lua follows.
+argument target23.2.20 and all three repairs20.1-.3 are targeted-checked. Remaining
+fluent feature selection continues under TYPE23.1.1.
 Broad61.3/62.3/.4, declared Lua5.4, full domain/context/portable23.4 and the separate
 reading audit remain open under their own acceptance. Feature-first ordinary
 checks remain focused; no full reading audit is a prerequisite for these repairs.
@@ -35,7 +36,7 @@ TYPE23.2.20 owns this bounded continuity correction, not a startup-tree pivot.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` | `pending` | Safe Lua ordinary substring explicit-null width and Boolean argument parity. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.1` | `pending` | Select next missing fluent family from retained inventory; broad admission remains separate. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

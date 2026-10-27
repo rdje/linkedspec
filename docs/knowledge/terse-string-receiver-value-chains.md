@@ -14,7 +14,7 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
 date: 2026-10-27
-status: five bounded scalar String19 and predicate backends targeted-checked; domain20/full admission open
+status: five bounded scalar String19 and predicate backends targeted-checked; bounded argument20 repairs targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
 reverify:
@@ -85,4 +85,4 @@ substring wrap is reproduced/fixed by clipping before addition. Strict native/
 plan/fresh eight-group/shared/direct-default/source checks pass both hosts.
 Details: [[lua-string-helper-parity-closeout]]. Width-omitted/Bool0 conventions
 join20; all five bounded String implementations are targeted-checked, with
-input-domain20 frozen from existing Perl-reference authority before portable admission. See [[substring-optional-arguments]]; Dart20.1/Julia20.2/safe Lua20.3 own the concrete local repairs.
+input-domain20 frozen from existing Perl-reference authority before portable admission. See [[substring-optional-arguments]]; Dart20.1/Julia20.2/safe Lua20.3 now pass their concrete local repair checks, with full admission separate.

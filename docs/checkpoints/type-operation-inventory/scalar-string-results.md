@@ -206,4 +206,4 @@ control, exact shared kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejecti
 12 malformed effects and both mutation aliases. No full runner/malformed native
 patterns/declared5.4/magnitude matrix or complete portable admission. Both hosts
 preserve null-width-as-omitted/Bool-invalid0 under20. All five bounded String
-implementations are targeted-checked; input-domain reconciliation20 is next.
+implementations are targeted-checked. Optional-argument20 resolves existing Perl-reference authority, and Dart20.1/Julia20.2/safe Lua20.3 repairs now pass their separate targeted checks; see substring-optional-arguments.md. Full admission remains separate.
