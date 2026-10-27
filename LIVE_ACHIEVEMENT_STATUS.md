@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Inline conditional bracket target26 frozen; P1 first/elseif eager-condition lowering26.0 next.
+Inline condition typed-value and child AST lowering repaired; Perl conditional brackets26.1 next.
 
 ## Latest Completed Slice
 
-Selected bounded ordinary inline conditional result selection26 under ADR0007/current value/read authority, with independent backend owners and a shared future target. Four simple producer/named/direct container/scalar method controls pass native/fresh raw0/unresolved0/ready1; direct if/switch brackets fail compilation/raw2/unready. Public AST distinguishes Call producers from raw suffixes. A separate P1 is diagnosed and owned: eager first/elseif condition blocks remain raw DSL inside truthy and fail native/fresh compilation despite raw0/ready1. Named-condition CT, branch-only T and switch-subject ST counterfactuals pass; actual substitution identifies the two legacy condition-lowering sites. Prerequisite26.0 repairs the producer before Perl26.1 expansion. Production unchanged; retained source/input/oracle/error packets, probe syntax/JSON, qualified current book, target/fact/map and history/fast staged continuity/diff align. Preserve lazy roles, actual kinds, statement/deferred/control/copy/write/schema bounds; full23.4, pressure, Perl registration and declared Lua5.4 remain separate; no push.
+Inline if/elseif conditions now use existing typed value lowering before unchanged RuntimeLogical truth testing. This fixes eager block compilation and is_defined(false) being mislowered as a variable. Initial focused regression fails5/8 groups; public standalone/named predicates isolate the wrong conditional result. A retained two-site candidate exposes inherited AST compatibility fencing on child early-return blocks; copying child dependencies and clearing only that fence restores existing typed local returns/terminal assignments without mutating parent/sibling flags. Final10 native/fresh/metadata groups pass: CT/ET/T/ST, lazy ABCD/local returns, function-local slots, typed predicates/logical/numeric/nested conditionals and old direct methods, with raw0/unresolved0/ready1 satisfied by working generation. Source/probe/test syntax, current book/target/fact/map and history/fast staged continuity/diff pass. Exact candidate packet/compressed source delta retain their actual epoch. No parser/schema/executor/statement/deferred expansion. Perl bracket selection26.1 follows; full23.4/pressure/Perl registration/declared Lua5.4 stay separate; no push.
 
 ## Next Action
 
-Activate P1 producer26.0 from this clean conditional intake. Repair only existing inline if/elseif eager condition lowering using the current value/block owner, retaining RuntimeLogical truthiness, once-only/lazy order, local returns/function scope and existing diagnostics. Confirm named/branch/switch controls and small native/fresh/descriptor conditions RED/GREEN; compile/docs/commit before conditional bracket source expansion26.1. No global statement/control/deferred grammar, readiness waiver or schema change. Full admission/pressure/Perl registration/declared Lua5.4 remain separate; no push.
+Activate Perl conditional result selection26.1 from this clean producer repair. Use frozen conditional-selection target/shared fixture and actual inline value-call role/signature authority; existing direct methods already work. Admit only ordinary if/switch read sources through the existing parser/classifier/read builder, preserving lazy condition/subject/payload order, signed/key reads, snapshots, actual-kind guards and callback/marker/context/bound/flat/write/copy/schema policies. Run small native/fresh/descriptor distinctions and compile/docs/commit before Rust26.2; no broad suite/admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.26.0` — Inline condition typed-value and child AST lowering repaired; Perl conditional brackets26.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.6` — Inline conditional bracket target26 frozen; P1 first/elseif eager-condition lowering26.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.5` — Safe Lua capture guards implemented on available hosts; all bounded25 children complete; next-feature selection23.1.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
@@ -29,7 +30,6 @@ Activate P1 producer26.0 from this clean conditional intake. Repair only existin
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.2` — Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.1` — Perl computed data-helper reads implemented/targeted-checked; full target still requires registered-function source24.1.2.2. Existing callable/deferred boundaries retained.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.5` — All bounded approved value-copy backend children complete; safe Lua copy guards pass on PUC5.5.1/LuaJIT. Resume owned direct computed-call selection24.1.2.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.4` — Julia copy4 retains healthy primitive production and guards actual copied-result consumers; focused native/plan/fresh checks pass. Safe Lua5 is next.
 
 ## History
 

@@ -1,0 +1,134 @@
+{
+   "cases" : [
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            false,
+            "A"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               false,
+               "A"
+            ]
+         },
+         "id" : "named_early_return",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               false,
+               "A"
+            ]
+         },
+         "source" : "Top:: I {order=\"\";flag={order=cat(order,\"A\");return(false);order=\"bad\"};return([flag,order])}",
+         "substitution" : "$order = \"\";$flag = do { my $__ls_block_done = 0; my $__ls_block_value; unless ($__ls_block_done) { $order = do { my @__ls_cat_parts = ($order, \"A\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; }; unless ($__ls_block_done) { $__ls_block_value = do { require JSON::PP; JSON::PP::false }; $__ls_block_done = 1; }; unless ($__ls_block_done) { $__ls_block_value = do { $order = \"bad\"; $order }; $__ls_block_done = 1; }; $__ls_block_value };return [do { my @__ls_evaluated_values = ($flag); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "ok",
+            "A"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "Can't modify constant item in scalar assignment at (eval 14037) line 51, at EOF\nsyntax error at (eval 14037) line 51, near \";return\"\nsyntax error at (eval 14037) line 51, at EOF\nsyntax error at (eval 14037) line 51, near \"}) \"\nsyntax error at (eval 14037) line 51, near \"} else\"\nsyntax error at (eval 14037) line 51, near \") }\"\nsyntax error at (eval 14037) line 52, near \";\n }\"\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "condition_early_return",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \";return\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"}) \"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"} else\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 25, near \";\n}\"\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {order=\"\";result=if({order=cat(order,\"A\");return(false);order=\"bad\"},\"bad\",\"ok\");return([result,order])}",
+         "substitution" : "$order = \"\";$result = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy({order=cat(order,\"A\");return do { require JSON::PP; JSON::PP::false };order=\"bad\"}) }) { $__ls_if_value = \"bad\"; } else { $__ls_if_value = \"ok\"; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($result); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "ok",
+            "D"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "Can't modify constant item in scalar assignment at (eval 14578) line 51, at EOF\nsyntax error at (eval 14578) line 51, near \";return\"\nsyntax error at (eval 14578) line 51, near \"} else\"\nsyntax error at (eval 14578) line 51, near \"} $__ls_if_value \"\nsyntax error at (eval 14578) line 51, near \"; $__ls_binding_presence\"\nsyntax error at (eval 14578) line 51, near \") }\"\nsyntax error at (eval 14578) line 52, near \";\n }\"\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "payload_early_return",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \";return\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"} else\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"} $__ls_if_value \"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 25, near \";\n}\"\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {order=\"\";result=if(true,{order=cat(order,\"D\");return(\"ok\");order=\"bad\"},\"bad\");return([result,order])}",
+         "substitution" : "$order = \"\";$result = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(do { require JSON::PP; JSON::PP::true }) }) { $__ls_if_value = {order=cat(order,\"D\");return \"ok\";order=\"bad\"}; } else { $__ls_if_value = \"bad\"; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($result); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "ok",
+            "ABCD"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "Can't modify constant item in scalar assignment at (eval 15164) line 51, at EOF\nsyntax error at (eval 15164) line 51, near \";return\"\nsyntax error at (eval 15164) line 51, at EOF\nsyntax error at (eval 15164) line 51, near \"}) \"\nsyntax error at (eval 15164) line 51, near \"} elsif\"\nsyntax error at (eval 15164) line 51, near \") }\"\nsyntax error at (eval 15164) line 51, near \") }\"\nsyntax error at (eval 15164) line 51, near \"\"bad\"}\"\nCan't redeclare \"my\" in \"my\" at (eval 15164) line 51, near \"; my\"\nsyntax error at (eval 15164) line 51, near \"undef }\"\n(eval 15164) has too many errors.\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "ordered_early_returns",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \";return\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"}) \"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"} elsif\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"\"bad\"}\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 24, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"undef }\"\nLinkedSpec::generated_handler:Top:<none> has too many errors.\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {order=\"\";result=if({order=cat(order,\"A\");return(false);order=\"bad\"},\"bad\",elseif({order=cat(order,\"B\");false},\"bad\"),elseif({order=cat(order,\"C\");true},{order=cat(order,\"D\");return(\"ok\");order=\"bad\"}),else({order=cat(order,\"E\");\"bad\"}));return([result,order])}",
+         "substitution" : "$order = \"\";$result = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy({order=cat(order,\"A\");return do { require JSON::PP; JSON::PP::false };order=\"bad\"}) }) { $__ls_if_value = \"bad\"; } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(do { $order = do { my @__ls_cat_parts = ($order, \"B\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::false } }) }) { $__ls_if_value = \"bad\"; } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(do { $order = do { my @__ls_cat_parts = ($order, \"C\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } }) }) { $__ls_if_value = {order=cat(order,\"D\");return \"ok\";order=\"bad\"}; } else { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"E\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"bad\" }; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($result); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      }
+   ],
+   "scope" : "four authored early-return controls at the two-condition-site candidate; no population claim"
+}

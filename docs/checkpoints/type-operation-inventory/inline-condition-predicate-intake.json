@@ -1,0 +1,62 @@
+{
+   "cases" : [
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            1,
+            "defined"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               1,
+               "bad"
+            ]
+         },
+         "id" : "predicate_value_vs_condition",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               1,
+               "bad"
+            ]
+         },
+         "source" : "Top:: I {return([is_defined(false),if(is_defined(false),\"defined\",\"bad\")])}",
+         "substitution" : "return [do { my @__ls_evaluated_values = (defined(do { require JSON::PP; JSON::PP::false })); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(defined($false)) }) { $__ls_if_value = \"defined\"; } else { $__ls_if_value = \"bad\"; } $__ls_if_value }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : "defined",
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : "defined"
+         },
+         "id" : "named_predicate_condition",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : "defined"
+         },
+         "source" : "Top:: I {present=is_defined(false);return(if(present,\"defined\",\"bad\"))}",
+         "substitution" : "$present = defined(do { require JSON::PP; JSON::PP::false });return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy($present) }) { $__ls_if_value = \"defined\"; } else { $__ls_if_value = \"bad\"; } $__ls_if_value }"
+      }
+   ],
+   "scope" : "two authored definedness value/condition counterfactuals; no population claim"
+}

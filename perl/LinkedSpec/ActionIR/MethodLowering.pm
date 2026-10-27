@@ -477,7 +477,11 @@ sub _emit_split_value_expr {
 
 sub _lower_inline_value_branch_payload_expr {
  my ($expr, $deps) = @_;
- my $payload_expr = _lower_return_payload_expr($expr, $deps);
+ # A parent's same-expression recursion fence must not suppress typed lowering
+ # of a smaller child operand, including its block-local early returns.
+ my $value_deps = ref($deps) eq 'HASH' ? { %$deps } : {};
+ delete $value_deps->{__actionir_ast_value_lowering_compat_bridge};
+ my $payload_expr = _lower_return_payload_expr($expr, $value_deps);
  return undef unless defined($payload_expr) && length($payload_expr);
  return $payload_expr
 }
@@ -518,13 +522,14 @@ sub _lower_inline_if_value_expr {
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
 
  return undef unless ref($method_call) eq 'HASH' && ($method_call->{method} // '') eq 'if';
  my $effective_args = $method_call->{args} || [];
  return undef unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 2;
 
- my $cond_expr = $lower_flow_composite_expr->($effective_args->[0]);
+ # Conditions are value expressions too: lower typed literals and eager blocks
+ # through the same owner as payloads before testing their truthiness.
+ my $cond_expr = _lower_inline_value_branch_payload_expr($effective_args->[0], $deps);
  return undef unless defined($cond_expr) && length($cond_expr);
  $cond_expr = _runtime_typed_truthiness_expr($cond_expr);
  my $then_expr = _lower_inline_value_branch_payload_expr($effective_args->[1], $deps);
@@ -541,7 +546,7 @@ sub _lower_inline_if_value_expr {
    return undef if $else_seen;
    my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 2, 2);
    return undef unless $branch_args;
-   my $branch_cond = $lower_flow_composite_expr->($branch_args->[0]);
+   my $branch_cond = _lower_inline_value_branch_payload_expr($branch_args->[0], $deps);
    return undef unless defined($branch_cond) && length($branch_cond);
    $branch_cond = _runtime_typed_truthiness_expr($branch_cond);
    my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[1], $deps);

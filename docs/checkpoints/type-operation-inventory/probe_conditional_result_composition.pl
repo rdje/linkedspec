@@ -10,8 +10,8 @@ use LinkedSpec::ActionIR::AST::Parser ();
 my $root = getcwd();
 my $sequence = 0;
 my $mode = shift(@ARGV) // '';
-die "expected --condition-controls or --ast-controls\n"
- unless $mode eq '' || $mode eq '--condition-controls' || $mode eq '--ast-controls';
+die "expected --condition-controls, --predicate-controls, --return-controls or --ast-controls\n"
+ unless $mode eq '' || $mode eq '--condition-controls' || $mode eq '--predicate-controls' || $mode eq '--return-controls' || $mode eq '--ast-controls';
 my $condition_controls = $mode eq '--condition-controls';
 if ($mode eq '--ast-controls') {
  my @sources = ('if(true,["a","b"],["bad"])',
@@ -56,6 +56,22 @@ my @cases = (
  ['switch_subject', q{order="";selected=switch({order=cat(order,"S");"k"},case("k",{order=cat(order,"T");["a","b"]}),default({order=cat(order,"F");["bad"]}));return([selected,order])},
   [['a','b'],'ST']],
 ) if $condition_controls;
+@cases = (
+ ['predicate_value_vs_condition', q{return([is_defined(false),if(is_defined(false),"defined","bad")])},
+  [1,'defined']],
+ ['named_predicate_condition', q{present=is_defined(false);return(if(present,"defined","bad"))},
+  'defined'],
+) if $mode eq '--predicate-controls';
+@cases = (
+ ['named_early_return', q{order="";flag={order=cat(order,"A");return(false);order="bad"};return([flag,order])},
+  [JSON::PP::false,'A']],
+ ['condition_early_return', q{order="";result=if({order=cat(order,"A");return(false);order="bad"},"bad","ok");return([result,order])},
+  ['ok','A']],
+ ['payload_early_return', q{order="";result=if(true,{order=cat(order,"D");return("ok");order="bad"},"bad");return([result,order])},
+  ['ok','D']],
+ ['ordered_early_returns', q{order="";result=if({order=cat(order,"A");return(false);order="bad"},"bad",elseif({order=cat(order,"B");false},"bad"),elseif({order=cat(order,"C");true},{order=cat(order,"D");return("ok");order="bad"}),else({order=cat(order,"E");"bad"}));return([result,order])},
+  ['ok','ABCD']],
+) if $mode eq '--return-controls';
 my @rows;
 for my $case (@cases) {
  my ($id,$action,$expected) = @$case;
@@ -94,5 +110,7 @@ for my $case (@cases) {
  };
 }
 print JSON::PP->new->canonical->utf8->encode({scope=>
- $condition_controls ? 'four authored inline condition, payload and subject controls; no population claim'
+ $mode eq '--return-controls' ? 'four authored early-return counterfactuals; no population claim'
+ : $mode eq '--predicate-controls' ? 'two authored definedness value/condition counterfactuals; no population claim'
+ : $condition_controls ? 'four authored inline condition, payload and subject controls; no population claim'
  : 'six authored ordinary inline-control producer and composition distinctions; no population claim',cases=>\@rows}),"\n";

@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 precedes Perl26.1.
+Status: frozen ordinary target; prerequisite26.0 repaired, Perl26.1 bracket expansion next.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -56,3 +56,15 @@ has the same compile failure/false-ready metadata as the initial condition.
 Prerequisite26.0 owns this P1 producer repair before bracket expansion. Reuse the
 existing value/block lowering while preserving typed truthiness and lazy order;
 do not weaken readiness or change global statement/deferred control policy.
+
+
+## Producer prerequisite repaired
+
+26.0 routes initial/elseif conditions through the current value owner before typed
+truth testing, fixing eager blocks and Bool literal predicates. Its inline child
+operand wrapper clears only the inherited same-expression AST compatibility fence
+on a dependency copy. This preserves typed block-local returns/terminal assignment
+while leaving parent/sibling flags unchanged. Working native/fresh values now agree
+with existing ready metadata. Predicate and two-site-candidate early-return packets
+retain the distinct failures/counterfactuals; the candidate patch binds its epoch.
+No conditional bracket syntax is admitted by this producer repair.
