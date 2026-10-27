@@ -116,3 +116,16 @@ and/or and zero-RHS not preflight. Registered native/plan/fresh strict test PASS
 plus direct logical-result PASS100 and strict compilation; no producer/free/copy/
 callback/model change. Julia retains Bool copies like Dart. Safe Lua23.5 next;
 copy-domain owner1.2.1.4.2 follows this family before coverage/admission closes.
+
+## Bounded safe Lua implementation
+
+23.3.23.5 finds healthy free producer/copy/error controls but fluent calls drop
+the receiver. The existing eager logical evaluator now stages a false-safe copied
+receiver and counts all operands; fluent dispatch reuses it and ordinary logical
+shapes preflight before effects. Both safe PUC5.5.1/LuaJIT hosts pass eight strict
+JSON native/plan/fresh groups plus two source-error cases and direct logical-result
+checks. Source/runner load checks pass without new module locals or unsafe native
+patterns/full runner. Existing scalar copies remain value-preserving. All five
+bounded logical backend children are targeted-checked; scalar-copy1.2.1.4.2 follows,
+with full method/domain/context/portable admission/canonical/parity/pressure and
+declared Lua5.4 prerequisites separate.

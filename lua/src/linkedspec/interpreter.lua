@@ -1273,15 +1273,17 @@ local function evaluate_runtime_logical(
   expr,
   ctx,
   accumulator,
-  edge_state
+  edge_state,
+  receiver
 )
+  local actual_arity = #expr.args + (receiver ~= nil and 1 or 0)
   local expected = name == "not" and
     "exactly 1 positional argument" or "at least 1 positional argument"
   local valid
   if name == "not" then
-    valid = #expr.args == 1
+    valid = actual_arity == 1
   else
-    valid = #expr.args >= 1
+    valid = actual_arity >= 1
   end
   for _, argument in ipairs(expr.args) do
     if argument.argument_kind ~= "positional" then valid = false end
@@ -1289,12 +1291,12 @@ local function evaluate_runtime_logical(
   if not valid then
     local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
     local detail = "helper_arity_mismatch: helper_name=" .. name ..
-      " actual_arity=" .. #expr.args .. " expected_arity=" .. expected ..
+      " actual_arity=" .. actual_arity .. " expected_arity=" .. expected ..
       " in rule " .. tostring(rule_label)
     fail(detail, {
       code = "helper_arity_mismatch",
       helper_name = name,
-      actual_arity = #expr.args,
+      actual_arity = actual_arity,
       expected_arity = expected,
       diagnostic = runtime_diagnostic(engine, {
         stage = "helper_arity_mismatch",
@@ -1304,13 +1306,14 @@ local function evaluate_runtime_logical(
         rule_label = rule_label,
         code = "helper_arity_mismatch",
         helper_name = name,
-        actual_arity = #expr.args,
+        actual_arity = actual_arity,
         expected_arity = expected,
       }),
     })
   end
 
   local values = {}
+  if receiver ~= nil then values[1] = copy_value(receiver) end
   for _, arg in ipairs(expr.args) do
     values[#values + 1] = evaluate_expr(engine, argument_expr(arg), ctx, accumulator, edge_state)
   end
@@ -3518,6 +3521,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       scalar_result = true
     elseif canonical_name == "copy" and #call.args == 0 then
       value = copy_value(value)
+    elseif LOGICAL_HELPERS[canonical_name] then
+      value = evaluate_runtime_logical(engine, canonical_name, call_expr, ctx, accumulator, edge_state, value)
     elseif is_pure_string_helper(canonical_name) then
       value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "is_empty" or canonical_name == "is_nonempty" or
@@ -3933,6 +3938,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       local argument_count = #(call.args or {})
       if name == "reduce_leaves" then
         final_codeblock_argument(name, "receiver", call.args)
+      end
+      if LOGICAL_HELPERS[name] then
+        if (name == "not" and argument_count ~= 0) or
+            (name ~= "not" and argument_count == 0) then return json.null end
+        for _, argument in ipairs(call.args) do
+          if argument.argument_kind ~= "positional" then return json.null end
+        end
       end
       if ((name == "num_clamp" or name == "replace_substr") and argument_count ~= 2) or
           ((name == "num_add" or name == "num_mul" or name == "coalesce" or name == "cat") and argument_count == 0) or

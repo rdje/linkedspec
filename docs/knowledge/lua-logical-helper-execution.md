@@ -2,6 +2,8 @@
 id: lua-logical-helper-execution
 title: Lua logical helpers and lazy controls share the neutral typed truth seam
 answers:
+  - does Lua support logical receiver methods
+  - why does Lua receiver not report zero arguments
   - does Lua execute and or not
   - are Lua logical helpers eager or short circuit
   - what do empty Lua and or not return
@@ -10,11 +12,11 @@ answers:
   - what arity do Lua and or not accept
   - why is the Lua logical arity guard inlined
   - does Lua logical parity pass on PUC Lua and LuaJIT
-date: 2026-10-26
+date: 2026-10-27
 status: focused current available hosts; full declared5.4 admission separate
 tags: [lua, runtime, helpers, logical, truthiness, LUA-BACKEND-PARITY]
-evidence: "TYPE23.3.17.5 safe public producer/source-error/shared/rejected-effect/actual-Bool/direct neutral/default native-plan-fresh focused checks. Prior July5.2.6 complete role/ABI/gate proof and arity-inline history at Git1b92335386b2bbe929646e66623a722b4351cba2 for this path."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/logical_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/logical_result_receivers_test.lua"
+evidence: "TYPE23.3.23.5 receiver staging/shape and strict safe native-plan-fresh/direct checks; TYPE23.3.17.5 safe public producer/source-error/shared/rejected-effect/actual-Bool/direct neutral/default native-plan-fresh focused checks. Prior July5.2.6 complete role/ABI/gate proof and arity-inline history at Git1b92335386b2bbe929646e66623a722b4351cba2 for this path."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/logical_receiver_methods_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/logical_receiver_methods_test.lua"
 
 ---
 
@@ -49,3 +51,13 @@ prefixes/no-consumer-operand, selected/block/literal Bool boundaries, three
 actual neutral fixtures and direct defaults. Source/runner load checks pass.
 No malformed native pattern/full runner, declared5.4 or complete portable
 admission; [[lua-native-readme-and-action-ast-reading]] owns the exclusion.
+
+Ordinary logical23.5 adds generic value.and(rhs,...)/or(rhs,...)/not(). The old
+fluent fallback omitted receiver and not raised actual_arity0. Existing evaluator
+now stages a copied source (false counts as present), then all RHS before typed
+composition; free calls retain original arity/errors. Positional and/or one-plus
+RHS/not zero preflight rejects malformed ordinary calls before effects. Eight
+strict JSON groups and two source-error cases pass all three routes on both safe
+hosts; direct result and loadfile checks pass. Actual Bool guards/scopes and
+value-preserving scalar copy remain. Full method/portable/declared5.4 admission
+stays separate; scalar-copy domain reconciliation is TYPE1.2.1.4.2 next.

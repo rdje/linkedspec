@@ -9579,6 +9579,7 @@ end)
 
 test("logical Boolean result receiver continuations", function()
   dofile("lua/test/logical_result_receivers_test.lua")
+  dofile("lua/test/logical_receiver_methods_test.lua")
 end)
 
 test("defined-only default receiver continuations", function()

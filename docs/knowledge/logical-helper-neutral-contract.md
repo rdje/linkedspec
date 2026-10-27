@@ -159,3 +159,10 @@ effects; add and/or one-plus RHS/not zero before effects. Registered new strict
 native/plan/fresh PASS109 plus direct result PASS100 and strict compilation retain
 snapshots, true Bool/Number counters, source diagnostics and with/value copies.
 Only Perl/Rust/Dart/Julia method support is established; safe Lua23.5 follows.
+
+Safe Lua23.3.23.5 reuses its eager typed evaluator with a copied receiver/total
+arity and adds ordinary positional shape preflight. Eight strict JSON groups and
+two source-error cases pass native/plan/fresh on PUC5.5.1/LuaJIT, plus direct
+logical-result/load checks. Free truth/errors and scalar copies remain. All five
+bounded method implementations are targeted-checked; copy-domain1.2.1.4.2 follows
+before coverage/admission closure. Declared5.4/full method admission remain open.
