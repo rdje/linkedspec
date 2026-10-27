@@ -5,13 +5,14 @@ answers:
   - can a Rust pure function read caller captures or input_text
   - can a Dart pure function read caller captures or input_text
   - can a Julia pure function read caller captures or input_text
+  - which Lua hosts verify parser-state function rejection
   - why does swapping function locals not isolate parser state
   - where is the Perl Rust pure function parser-state boundary enforced
   - does a function name starting entry or capture get rejected
   - can a pure function receive an entry_group value explicitly
   - which backends have the repaired parser-state function fence
 date: 2026-10-27
-status: bounded Perl Rust Dart Julia repaired; independent safe Lua and full context admission open
+status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
 tags: [functions, purity, parser-state, perl, rust]
 evidence: "TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets."
 reverify:
@@ -66,3 +67,15 @@ existing RuntimeInterpreterException. All48 new and direct input12/capture12 pas
 under depwarn=error; normal runner registration is present. The Julia intake
 packet retains actual per-route values/errors; null-valued context reads are not
 claimed non-null leaks. Safe Lua and complete context admission remain open.
+
+Safe Lua29.2.5 independently reproduces missing rejection for15 authored controls
+on native/plan/fresh per available PUC5.5.1/LuaJIT2.1.1788460057 host, with3 healthy
+pure positives. Initial save_cursor(point) is corrected to current zero-arg form
+before final unchanged-production RED; exact original/refined source/hosts/logs
+are retained. A cache field on existing typed_source derives known names from
+projection/alias catalogs; evaluate_call rejects active-function calls before
+operands with existing errors/helper_name, adding no persistent chunk locals.
+All controls plus direct input/capture/source-arity checks pass on both hosts;
+normal registration and luac/loadfile full-runner syntax only pass. Declared5.4
+remains separately owned. All five bounded catalogued-helper children are done;
+29.2.6 next assesses noncatalogued call/gap/indirect roles before parent closure.

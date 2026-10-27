@@ -1,6 +1,6 @@
 # Pure-function parser-state boundaries
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust/Dart/Julia children29.2.1-.4 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; All five bounded children29.2.1-.5 repaired/targeted-checked on recorded hosts.
 
 Accepted authority is SPEC-FORMAT-TERSE.4.2.3 and its existing Phase0 entry_text
 negative: pure function bodies cannot implicitly read caller parser state. This
@@ -70,5 +70,23 @@ SourceLocation projection/compatibility catalogs, then rejects active-function
 call entry before operands via existing RuntimeInterpreterException. All48 new
 assertions plus input12/capture12 pass under depwarn=error, with normal test
 registration and module load/compile. Explicit caller values/locals/pure helpers/
-prefix names/getters remain valid. Independent safe Lua29.2.5 is next; full context,
+prefix names/getters remain valid. Safe Lua assessment was selected after Julia; full context,
 private dispatch/deferred/portable admission remains open.
+
+Safe Lua29.2.5 independently records missing purity rejection for15 authored
+source/helper controls on native/plan/fresh with3 healthy pure positives per
+available PUC5.5.1/LuaJIT2.1.1788460057 host. Initial save_cursor(point) is a source
+arity error, not an initial state escape; it is corrected to save_cursor() before
+final unchanged-production RED. The Lua packet retains original/refined source,
+commands/hosts/logs. A new cache field on existing typed_source derives names from
+current projection/alias catalogs; evaluate_call checks the active function stack
+before operands/dispatch through existing runtime errors/helper_name. No new
+persistent chunk locals, duplicate list, artifact dependency or schema. All
+negative/pure controls and direct input4/capture4/source-arity controls pass on both
+hosts; luac/loadfile include full-runner syntax only. Ordinary getters and explicit
+caller values/locals/pure helpers/prefix names remain valid. Declared5.4 stays open.
+
+Current next action: noncatalogued parser-context intake29.2.6 independently checks
+call(rule), gap readers and relevant indirect ownership before parent closure or
+next feature selection. Five bounded catalogued-helper repairs do not establish
+full parser-state/function/deferred/portable admission;23.4 retains that owner.

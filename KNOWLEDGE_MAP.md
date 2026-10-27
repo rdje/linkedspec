@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1358** facts · **10758** question keys.
+> **1358** facts · **10759** question keys.
 
 ## Questions → fact
 
@@ -8594,6 +8594,7 @@
 - "which Lua generated v1 APIs were removed" -> [lua-generated-source-v2-rule-local-cursor](docs/knowledge/lua-generated-source-v2-rule-local-cursor.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n 'linkedspec-generated-source-v2|validate_generated_source_contract_v2|generated_family_execution_policy|emit_lua_source_v2' lua/src/linkedspec lua/test/rule_local_cursor_generated_source_test.lua`
 - "which Lua harray helpers remain after closeout" -> [lua-runtime-harray-helper-closeout](docs/knowledge/lua-runtime-harray-helper-closeout.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && perl tools/check_capability_conformance.pl && rg -n 'local HASH_HELPERS|local PURE_HASH_HELPERS|evaluate_hash_helper|execute_hash_set_key_statement' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "which Lua harray transform helpers execute" -> [lua-runtime-harray-transforms](docs/knowledge/lua-runtime-harray-transforms.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
+- "which Lua hosts verify parser-state function rejection" -> [user-function-parser-state-boundary](docs/knowledge/user-function-parser-state-boundary.md) · 2026-10-27 · reverify: [2 entries](#user-function-parser-state-boundary)
 - "which Lua language failures become failed compilation outcomes" -> [lua-semantic-source-outcome-plan](docs/knowledge/lua-semantic-source-outcome-plan.md) · 2026-07-25 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'FUTURE-PARITY-BACKLOG.10.7.2|semantic_index|source_detail_ceiling|semantic_source_' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md lua/src lua/test`
 - "which Lua leaf adds runtime trace events" -> [lua-runtime-diagnostics-trace-split](docs/knowledge/lua-runtime-diagnostics-trace-split.md) · 2026-07-15 · reverify: `rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md`
 - "which Lua leaf adds structured runtime diagnostics" -> [lua-runtime-diagnostics-trace-split](docs/knowledge/lua-runtime-diagnostics-trace-split.md) · 2026-07-15 · reverify: `rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md`
@@ -21497,8 +21498,8 @@ _LinkedSpec compatibility is temporary and variables have one duck-typed value b
 
 ### user-function-parser-state-boundary
 _Pure functions reject known parser-state helpers while accepting explicit caller values_
-- **answers:** can a Rust pure function read caller captures or input_text | can a Dart pure function read caller captures or input_text | can a Julia pure function read caller captures or input_text | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
-- **date:** 2026-10-27 · **status:** bounded Perl Rust Dart Julia repaired; independent safe Lua and full context admission open
+- **answers:** can a Rust pure function read caller captures or input_text | can a Dart pure function read caller captures or input_text | can a Julia pure function read caller captures or input_text | which Lua hosts verify parser-state function rejection | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
+- **date:** 2026-10-27 · **status:** all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
 - **evidence:** `TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t` · `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test user_function_parser_state_boundary`
 - **source:** [`docs/knowledge/user-function-parser-state-boundary.md`](docs/knowledge/user-function-parser-state-boundary.md)

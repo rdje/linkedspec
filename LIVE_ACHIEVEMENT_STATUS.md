@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
+All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 
 ## Latest Completed Slice
 
-Julia independently records45 missing-purity failures across15 authored parser-helper/source controls on native/plan/fresh, with3 healthy explicit-value positives. Interpreter derives a private cached Set from existing SourceLocation projection/compatibility catalogs and rejects active-function calls before operands/statement handling through RuntimeInterpreterException. Null-valued context readers lack rejection but are not labeled non-null leaks. All48 new assertions plus direct input12/capture12 pass under depwarn=error, including module load/compile; new test is registered normally. Explicit caller captures/local assignment/nested pure helpers/prefix-named functions and ordinary getters remain exact. No duplicate list/new API/helper/IR/schema or serialization change. Retained source/log, book/target/fact/map/roadmap/task/live/resume align. Independent safe Lua29.2.5 follows; full source/function/context/portable23.4, pressure and declared-host owners remain separate; no push.
+Safe Lua independently reproduces missing purity rejection for15 authored controls on native/plan/fresh per confirmed PUC5.5.1/LuaJIT2.1.1788460057 host, with3 healthy pure positives. Initial save_cursor(point) is a source-arity error, corrected to valid zero-arg form before final unchanged-production RED; exact original/refined evidence/host identities are retained. Existing typed_source gains a catalog-derived cache field; evaluate_call rejects active-function known helper names before operands/dispatch via current errors/helper_name. No persistent chunk locals, duplicate list, API/helper/IR/schema or serialization change. All negative/pure controls plus direct input4/capture4/source-arity checks pass on both hosts; luac/loadfile changed module/test/full-runner syntax and normal registration pass. Explicit caller data/local assignment/nested pure helpers/prefix names/getters hold. Qualified book/target/fact/map/roadmap/task/live/resume align. All five bounded catalogued-helper children complete; noncatalogued parser-context intake29.2.6 follows. Full23.4/declared5.4/pressure/Perl registration stay separate; no push.
 
 ## Next Action
 
-Activate safe Lua function-state boundary29.2.5 from this clean Julia boundary. Read canonical function/helper/context owners and current interpreter stack; independently probe small readonly capture/input/group and pure explicit-argument controls on confirmed available PUC/LuaJIT hosts before production. Repair only confirmed existing-contract escapes via current private table/catalog owners, with no new chunk locals or unsafe pattern/full runner. Preserve ordinary getters/local data/prefix names/callback/serialization/arity rules. Compile/quick targeted check/book/docs/commit; then select remaining function/context or feature work from clean frontier. No exhaustive matrix/full suite/admission/push; declared5.4/pressure/Perl registration owners remain separate.
+Activate remaining parser-context intake29.2.6 from this clean Lua boundary. Check Knowledge Map and canonical call(rule)/gap/function/indirect contracts; use a few public controlled positive and forbidden-function source probes to distinguish actual parser-state access/rejection, unavailable context and ordinary action rights. Split and own confirmed independent backend/context repairs before production; do not infer failure or permission from names or prior catalog results. Compile/quick focused checks/docs/commit per safe slice, then resume feature selection when existing-contract gaps are resolved. No exhaustive matrix/full suite/admission/push; declared5.4/pressure/Perl registration owners stay separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` — All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` — Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` — Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` — Perl/Rust catalogued function-state boundaries repaired; independent Dart assessment next.
@@ -29,7 +30,6 @@ Activate safe Lua function-state boundary29.2.5 from this clean Julia boundary. 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.5` — All five bounded conditional-result backends implemented/targeted-checked; next-feature selection23.1.7 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.4` — Julia canonical inline conditional guards implemented/targeted-checked; safe Lua26.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.3` — Dart canonical inline conditional result guards implemented/targeted-checked; Julia26.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.26.2` — Rust inline conditional result guards implemented/targeted-checked; independent Dart26.3 next.
 
 ## History
 

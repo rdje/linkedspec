@@ -19,7 +19,17 @@ local typed_source = {
   staged = require("linkedspec.staged_parse_job"),
   staged_enrichment = require("linkedspec.staged_ast_enrichment"),
   receiver_mutation = {},
+  parser_state_helpers = {},
 }
+
+-- Source-boundary catalogs own these helper names, not user-function prefixes.
+-- Loop temporaries expire here; no additional persistent chunk locals.
+for _, rows in pairs(typed_source.runtime.projection_rows()) do
+  for _, row in ipairs(rows) do typed_source.parser_state_helpers[row[1]] = true end
+end
+for _, row in ipairs(typed_source.runtime.compatibility_aliases()) do
+  typed_source.parser_state_helpers[row[1]] = true
+end
 
 local ERROR_MT = {
   __runtime_interpreter_type = "RuntimeInterpreterException",
@@ -3141,6 +3151,11 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     fail("unsupported runtime helper '" .. expr.name .. "'", { helper_name = expr.name })
   end
   local name = action_contracts.canonical_action_helper_name(expr.name)
+  if #ctx.active_user_functions > 0 and typed_source.parser_state_helpers[name] then
+    fail("parser-state helper '" .. expr.name .. "' is not supported in user functions", {
+      helper_name = expr.name,
+    })
+  end
   if name == "entry_slot" or name == "gap_span" or name == "gap_text" or name == "gap_kind" then
     local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
     local positional_only = true
