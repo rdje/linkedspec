@@ -6471,7 +6471,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.3 - retain Dart entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/implement Julia readonly entry/match Number result composition under frozen30.
   Dependencies: Selection23.1.8, existing getter/Number/default contracts and30 target; previous backend child where applicable.
   Acceptance: Establish actual behavior through small producer/default/normalized-result/preservation controls before production. Use existing getter/render/value owners, preserving exact semantic source/signature/projection/error/alias behavior and first-consumer/root policies. Keep malformed/backend differences explicit, function-state fences and callback/serialization rights. Split larger independent gaps before writes; no failure inferred from another backend.
@@ -6479,6 +6479,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen fixture and a few native/current reconstructed/generated direct/preservation controls, relevant compile/format/source/getter/function checks as warranted, book/history/continuity. Safe Lua only available hosts/no unsafe patterns/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement separately owned.
   Planned claim verification: none: Prospective deterministic finite authored feature checks; no population measurement.
+
+  Activation: cleanddd1b4b68118b84b7c3da4c0b1fbf0bd8919b642; Dart30.3 committed/tree clean/brief0.
+  Owned paths: New Julia regression/normal runner include/retained independent legacy observations; scoped book/target/fact/map/roadmap/task/live/resume. Runtime unchanged because it already implements the frozen target.
+  Verification tier: `focused`
+  Focused checks: Twelve native/plan/fresh comparisons across four groups with strict recursive Bool-versus-Number values; --depwarn=error compile, book/history/fast continuity/diff. No full runner/suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; no admission from bounded existing-behavior proof.
+  Claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Unchanged Julia passes frozen Number target, absent-match fallback and specific function fence. Independently observe all-route legacy direct set_key5/take[]/normalized-null/order-empty before freezing the exact oracle. Retain initial observational test/log/refinement; no borrowed behavior or product RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing Interpreter already evaluates Number getter values before compatible default/math/text methods. Perl's source-lowering defect does not establish a Julia defect; current scalar-root compatibility remains separately preserved.
+  - [x] **FIX**: Keep runtime untouched; retain a normally registered regression with independently established legacy results and recursive kind-sensitive comparison.
+  - [x] **ADDRESSED (verified)**: Twelve native/plan/fresh comparisons pass across frozen getter/coordinate/kind/zero/lazy/String-flow, allowed C/skipped AKV, absent F once/yields8, legacy direct setter5/take[] versus normalized null, and specific pure-function getter rejection.
+  - [x] **NO REGRESSION**: --depwarn=error compilation succeeds. No getter/source/coordinate/alias/arity/error/root/callback/runtime/AST/serialized field changes. Full invalid-domain and cross-backend parity remain23.4, not implied by this finite target.
+  - [x] **LOCKSTEP**: Qualified book/target/retained independent intake/fact/map and roadmap/task/live/resume align; normal Julia runner include registered. Safe Lua30.5 next; with-Hash31/stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.4 - retain Julia entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.5`
   Status: `pending`
@@ -6508,7 +6523,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` | `pending` | Independently assess Julia entry/match Number reader composition; with Hash31 follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` | `pending` | Independently assess safe Lua entry/match Number reader composition; with Hash31 follows. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

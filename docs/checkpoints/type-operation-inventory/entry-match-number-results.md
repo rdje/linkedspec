@@ -1,7 +1,7 @@
 # Entry and match Number reader result composition
 
 Selection owner: TYPE-REFERENCE-BOOK.1.2.23.1.8; implementation family23.3.30.
-Status: Perl30.1 implemented and Rust30.2/Dart30.3 already-compatible/targeted-checked; independent other backend children follow.
+Status: Perl30.1 implemented and Rust30.2/Dart30.3/Julia30.4 already-compatible/targeted-checked; independent other backend children follow.
 
 Existing zero-argument entry/match length and position readers return Numbers or
 null under the current typed source-location contract. Ordinary compatible value
@@ -88,3 +88,10 @@ and format/fatal selected analysis pass; the explicit empty-List test type repai
 an initial analysis warning without runtime changes. Exact observation source/log
 and refinement are retained. No producer/result/shape/root/callback/serialization
 policy changes; independent Julia30.4 follows and full admission stays separate.
+
+Julia30.4 independently already passes the target, missing-match fallback and
+specific function fence. Direct setter5/take[]/normalized-null/order-empty is
+observed on native/plan/fresh before the final oracle. Twelve comparisons across
+four groups pass with recursive Bool-versus-Number checks and --depwarn=error;
+normal runner registration is added. Exact initial observation source/log and
+refinement are retained. Runtime unchanged; safe Lua30.5 independently follows.
