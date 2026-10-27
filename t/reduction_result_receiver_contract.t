@@ -37,5 +37,6 @@ check_consumers('admitted traversal',q{Top:: I { original=[1,[2]];seen=[];walked
  [[1,[2]],[1,[2]],[2,[3]],['0','1/0'],{b=>{y=>2},a=>1,arr=>[9]},['a','arr','b/y'],3]);
 check_consumers('reduction result',slurp('tests/fixtures/reduction_result_receiver_values.spec'),
  $json->decode(slurp('tests/fixtures/reduction_result_receiver_values.json')));
+check_consumers('malformed reduction shapes',q{Top:: I { order="";bad0={order=cat(order,"S");[1]}.reduce_leaves() {order=cat(order,"L");return(value)}.cat({order=cat(order,"C");"!"});bad2={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0},{order=cat(order,"X");1}) {order=cat(order,"L");return(value)}.coalesce({order=cat(order,"C");"fallback"});malformed=[bad0,bad2,order];return(malformed); }},[undef,undef,'']);
 done_testing() unless caller;
 1;

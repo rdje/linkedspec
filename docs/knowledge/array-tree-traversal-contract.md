@@ -1,7 +1,9 @@
 ---
 id: array-tree-traversal-contract
-title: "SPEC-FORMAT-TERSE.13.1 accepted array-tree receiver block traversal before implementation."
+title: "Array and Hash traversal preserve callback scope and actual reduction result kinds"
 answers:
+  - "why does Rust evaluate a reduction initial for a scalar or null root"
+  - "does Rust reduce_leaves preserve malformed callback arity errors"
   - "can reduce_leaves result continue into numeric Array or Hash methods"
   - "which task extends terminal reduction accumulator results"
   - "what did SPEC-FORMAT-TERSE.13 decide"
@@ -15,8 +17,10 @@ answers:
 date: 2026-10-27
 status: current
 tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, rust, oracle, SPEC-FORMAT-TERSE]
-evidence: "SPEC-FORMAT-TERSE.13.1 reactivated and split array-tree traversal before parser/runtime code. The accepted MVP reuses the immediate receiver block method names `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers. Array roots and nested arrays are traversal nodes; scalar and hash values are leaves; hashes are not traversed recursively. Traversal is depth-first in zero-based index order. Callback bindings are scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. SPEC-FORMAT-TERSE.13.2 landed the Perl reference implementation and phase0 `1..1028`; SPEC-FORMAT-TERSE.13.3 landed Rust parser/runtime parity plus the Perl-backed oracle fixture `terse_13_3_array_tree_traversal_receiver_blocks`, raising the checked-in manifest to 97 fixtures. SPEC-FORMAT-TERSE.13.4 closed final docs/KM/no-drift alignment, so `.13` is closed/exhausted."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
+evidence: "SPEC13 root traversal; TYPE23.1.1 frozen result feature and Perl21.1/Rust21.2 focused RED/GREEN. Exact prior full record/July milestones at Git2eb98f833f712bfeb78d0cdb416060e1905ff72c for this path."
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test reduction_result_receivers"
 ---
 
 # Array-Tree Traversal Contract
@@ -88,3 +92,19 @@ pre-route reduction/map brace compilation fails native/fresh; final shared
 and a coalesced container reducing. Twelve final assertions pass native/fresh
 with these additional fields. This adds ordinary composition, not deferred/bang
 callback policy.
+
+Rust21.2 independently confirms producers, then removes the nonfinal reduction
+fence in eval_receiver_with_trailing_block_chain. Container-only consumers check
+actual reduced kind before operands; existing callback/dynamic routing stays.
+Six native/restored/in-process plan tests pass shared data/immediate traversals/
+coalesced-repeat reductions/kinds/typed indices/copies/scoped SI(L*)C and rejected
+SIL/SILC. A separate old invalid-root defect is reproduced as SII instead of S:
+eval_tree_receiver_trailing_block_call initializes before root matching. Guard
+invalid reduce roots after shape validation and before initial/callback; direct/
+chained checks pass. Offline compile/rustfmt and admitted walk/map/root/path pass.
+
+Shared fixture now contains valid shapes only: Rust Core compile retains typed
+zero/two-initial arity errors, while local Perl controls retain null/no-effects
+(eighteen reference checks pass). Error phase/identity parity is owned and
+scheduled1.2.1.4.1 before admission. No standalone/deferred/context/bang or full
+portable claim; Dart21.3 independently follows.

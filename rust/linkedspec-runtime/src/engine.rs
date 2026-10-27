@@ -6594,6 +6594,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let mut current = self.eval_expr(receiver, ctx, rule_label)?;
+        let mut reduced_value = false;
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
@@ -6601,10 +6602,26 @@ impl Engine {
             {
                 current =
                     self.eval_receiver_with_trailing_block_call(current, call, ctx, rule_label)?;
-                if call.method == "reduce_leaves" && index + 1 != calls.len() {
+                reduced_value |= call.method == "reduce_leaves";
+                continue;
+            }
+
+            // A reduction returns any value kind. Reject incompatible container
+            // consumers before evaluating their operands, preserving the prefix.
+            if reduced_value
+                && call.method != "copy"
+                && !Self::is_generic_receiver_predicate(&call.method)
+            {
+                let method = call.method.as_str();
+                let array_only = Self::is_array_receiver_value_chain_method(method)
+                    && !Self::is_string_receiver_value_chain_method(method)
+                    && !(matches!(method, "min" | "max") && !call.args.is_empty());
+                let hash_only = Self::is_hash_receiver_value_chain_method(method);
+                if (array_only && !matches!(current, RuntimeValue::Array(_)))
+                    || (hash_only && !matches!(current, RuntimeValue::Hash(_)))
+                {
                     return Ok(RuntimeValue::Undef);
                 }
-                continue;
             }
 
             let next_call = calls.get(index + 1);
@@ -6679,6 +6696,12 @@ impl Engine {
             }
             "walk_leaves" | "map_leaves" | "reduce_leaves" => {}
             _ => return Ok(RuntimeValue::Undef),
+        }
+
+        if method == "reduce_leaves"
+            && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_))
+        {
+            return Ok(RuntimeValue::Undef);
         }
 
         let initial_acc = if method == "reduce_leaves" {

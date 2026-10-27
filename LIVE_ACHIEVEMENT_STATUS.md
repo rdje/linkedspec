@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
+Rust reduction accumulator result flow21.2 implemented/targeted-checked with invalid-root effect repair; Dart21.3 independently follows. Malformed diagnostic parity remains owned before admission.
 
 ## Latest Completed Slice
 
-Perl21.1 composes reduce_leaves actual scalar/null/Array/Hash accumulators through the existing dynamic result bridge and dedicated traversal, including immediate map/reduce consumers. Producer/root/initial/callback bodies remain unchanged. Twelve final shared/direct native-fresh checks plus syntax pass after RED: exact kinds/typed index0, copies, numeric/default/container consumers, Array/Hash accumulator maps, repeated pipeline reduction and coalesced-container reduction, named/reversed roots, SI(L*)C snapshots/scoped restoration, invalid-root skipping and malformed no-effects. First implementation dropped rejection prefix; public Toolbox confirms undef, bind-once guard restores SILC while skipping operand A. Missing immediate traversal route is independently reproduced as callback brace compilation failure, then delegated to the existing lowerer. Book/frozen ledger/fact/map/TYPE/SESSION/live/resume align; explicit Perl registration23.4.1 remains queued. Required engineering-note rollover preserves exact segment4954; book/history/diff/staged continuity guards pass. No full gate/deferred/bang/context/portable admission; Rust21.2 independently next.
+Rust21.2 preserves actual reduce_leaves results through the existing immediate callback/dynamic dispatcher and guards container-only consumers by actual returned kind before operands. Six focused native/restored/in-process plan tests pass after producer-first RED: shared Number/String/Bool/null/Array/Hash/empty kinds, typed index0/copies, numeric/default/selection and immediate/coalesced/repeated traversal results, SI(L*)C snapshots/scoped restoration and SIL/SILC rejection without A. An older invalid scalar/null-root initial-effect bug is independently reproduced as SII versus S, then fixed by a reduce-only root guard after shape validation; direct/chained checks pass. Existing admitted walk/map/root/path behavior and typed compile-time malformed-arity errors remain; offline compilation/selected rustfmt pass. Shared fixture is valid-only; local Perl malformed controls preserve its null/no-effects and all eighteen reference checks pass. Invalid-arity phase/diagnostic parity is owned/scheduled1.2.1.4.1 before admission. Book/frozen/fact/map/TYPE/SESSION/live/resume and book/history/diff/staged continuity align. No full gate/standalone/deferred/context/bang or portable admission; Dart21.3 independently next.
 
 ## Next Action
 
-Independently assess/implement Rust21.2 reduce_leaves actual accumulator result flow from reduction-result-continuations.md and shared fixture. Public producer-first native/restored/plan distinctions before production; preserve dedicated root/callback/copy/scope/order/shape and runtime domains. Small changed/direct traversal/compile checks/docs/commit, then Dart21.3. No full suite/matrix/standalone admission.
+Independently assess/implement Dart21.3 reduction accumulator result flow from reduction-result-continuations.md/shared valid fixture. Preserve current malformed callback error policy; local controls are separate, parity gap1.2.1.4.1 scheduled. Producer-first native/restored/plan, source/callback/copy/scope/order/actual-kind guards and small direct traversal/compile checks/docs/commit, then Julia21.4. No full suite/matrix/context expansion.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.21.2` — Rust reduction accumulator result flow21.2 implemented/targeted-checked with invalid-root effect repair; Dart21.3 independently follows. Malformed diagnostic parity remains owned before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.1` — Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` — All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
@@ -29,7 +30,6 @@ Independently assess/implement Rust21.2 reduce_leaves actual accumulator result 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.5` — Lua defined-only default result18.5 targeted-checked; all five bounded backends complete, pure String result assessment19 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.4` — Julia defined-only default result18.4 targeted-checked; four bounded backends complete, safe Lua18.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` — Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` — Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
 
 ## History
 

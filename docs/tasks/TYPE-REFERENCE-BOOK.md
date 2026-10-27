@@ -879,10 +879,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.4`
   Status: `pending`
+  Children: `.1.2.1.4.1`.
   Goal: Reconcile the syntax/helper/receiver inventories against current authority roles, then select bounded implementation gaps under23. Broad semantic validation remains deferred until feature coverage.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.3`
   Planned tier: `focused`; no full suite for inventory closeout under the current director policy.
   Claim verification: none: Not yet activated; declare any aggregate population measurement before publication.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.1`
+  Status: `pending` / P2 invalid-callback diagnostic parity
+  Goal: Reconcile malformed reduction callback arity failure phase/diagnostics against admitted callable metadata and canonical parity.
+  Discovered by: Rust21.2 independent producer/shared intake; no valid-input producer defect.
+  Reproduction: [1].reduce_leaves() {return(value)} and reduce_leaves(0,1) with a later consumer return null/no effects through Perl Get/fresh (permanent t/reduction_result_receiver_contract.t), while Rust Core compile reports callable_contract_arity_mismatch before execution (reduction_result_receivers.rs). The initial shared fixture is therefore rejected before valid result checks.
+  Impact / ownership: ADR0023 requires equivalent accepted-input/results/diagnostics; existing malformed-program timing/error identity differs despite both skipping effects. Keep this distinction explicit rather than treating source rejection as a runtime value. No signature/policy normalization inside the valid reduction-result feature.
+  Schedule: Reconcile canonical ADR0030/0031/0032 and final-codeblock registry/neutral cases immediately after ordinary fluent feature coverage, before signature1.2.1.4/23.4 parity admission/final push. Own the necessary bounded backend fixes and typed diagnostic regressions there; broad matrices remain deferred.
+  Acceptance: Select the existing canonical signature/diagnostic authority, independently distinguish both malformed shapes on all active routes/backends, preserve no-effects and valid reduction behavior, repair actual phase/diagnostic drift and update public error guidance. No universal invalid-program policy inferred from a few samples.
+  Planned verification tier: Select at activation for any governed diagnostic contract movement.
+  Planned claim verification: none: Owned deterministic invalid-program parity gap, no aggregate completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
@@ -4413,7 +4425,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Continuity maintenance: Required engineering-notes rollover archives exact prior records as segment4954/3557559e9da5; current bounded history check passes without changing immutable older segments.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.21.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Rust reduction accumulator result continuations.
   Dependencies: .23.3.21.1.
   Acceptance: Follow reduction-result-continuations.md; producer-first native/generated controls for Number/String/Bool/null/Array/Hash and empty initial kinds, compatible scalar/generic/container selection, source capture/eager initial/callback order/scoped restoration, clean wrong-family rejection and malformed no-effects. Small changed/direct traversal/compile checks/docs/commit per backend. Preserve root-kind traversal/callback errors/free domains and separate full admission.
@@ -4421,6 +4433,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Independent public producer/result/effect/shape RED/GREEN and direct traversal/source compilation, selected formatting/analysis, book/history/staged continuity guards. Lua safe PUC5.5.1/LuaJIT only; no malformed native patterns/full runner/declared5.4 claim.
   Planned canonical trigger: None for bounded feature implementation under director feature-first cadence; full domain/context/portable admission/final clean push separate.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Activation: clean `2eb98f833f712bfeb78d0cdb416060e1905ff72c`; Perl reduction actual-result/immediate traversal feature committed, brief0/tree clean.
+  Owned paths: Rust independent ordinary reduction producer/result/shape and callback traversal assessment/repair through native/restored/in-process generated plan, new shared/direct traversal test and any small body fixes justified by concrete observations; current book/frozen/canonical fact/task/live continuity. Preserve root-kind walk/reduce/callback scope/copy/order/errors/global conversion/serialized schema and no standalone/context/deferred admission.
+  Verification tier: `focused`
+  Focused checks: Public producer-first native/restored/plan RED/GREEN, shared exact result/immediate traversal/shape/rejection/copy/scope snapshots plus direct admitted walk/map/plain reduction, offline compilation/selected rustfmt and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary feature under director feature-first cadence; full signature/context/standalone/portable admission/final push separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Independent intake: Existing accumulator producer and Array/Hash walk/map/plain-reduce tests pass native/restored/plan before production. Shared test instead stops at compile with callable_contract_arity_mismatch for malformed zero-initial reduction; Core compile enforces the admitted final-codeblock signature. Preserve that existing compile-time policy rather than forcing Perl's runtime-null form. Own separating malformed controls from the valid shared fixture, retaining them in backend-specific permanent tests (including moving Perl shape checks so no proof is lost), then observe real continuation RED. No signature/diagnostic schema change.
+
+  Actual continuation RED: After separating malformed signatures, shared execution reaches copied=null then reports binding_kind_mismatch at its append. A minimal valid effect control independently gives[null,SILL,1,[9]] instead of[3!,SILLC,1,null]. engine eval_receiver_with_trailing_block_chain explicitly terminates after nonfinal reduce_leaves. Reuse its existing immediate callback/dynamic dispatch while retaining actual-kind container guards before incompatible consumer operands. Malformed callback timing/diagnostic discrepancy is separately owned/scheduled by1.2.1.4.1 before admission; preserve current errors in this feature.
+
+  Owned P1 producer defect: First result-flow implementation passes every valid shared result/kind/traversal/copy/scope/effect/rejection field, but invalid_effects order is SIC rather than SC. Runtime eval_tree_receiver_trailing_block_call evaluates the initial and constructs/requires the callback before matching current root kind. An invalid scalar root therefore runs initial side effects despite the existing invalid-root skip contract. Reproduce non-chained scalar/null controls independently, then guard invalid root after shape validation but before initial/callback evaluation; fix now as a frozen-contract prerequisite, retaining malformed diagnostics and valid traversal behavior.
+
+  Completion: Existing trailing-block chain retains the actual reduction value instead of terminal fencing. Once a reduction has run, later container-only consumers check actual kind before operands, with generic/copy/scalar and scalar min/max overloads preserved. Dedicated immediate map/reduce/with dispatch and callback bodies remain unchanged. A reduction-only invalid-root guard after shape validation now precedes initial/callback evaluation.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Existing producer and admitted traversal controls pass native/restored/plan. Initial shared fixture exposes preserved Core compile-time callback arity errors; valid-only shared then reaches terminal null and copied binding-kind failure. Minimal order RED[null,SILL,1,[9]] independently confirms skipped consumer. First implementation fixes every valid result/shape/copy/scope/traversal field except invalid-root order SIC; standalone scalar/null RED is[null,null,SII] instead of[null,null,S].
+  - [x] ROOT CAUSE (WHY + WHERE): engine eval_receiver_with_trailing_block_chain fences every nonfinal reduction; generic dynamic helper routing lacks actual-kind container admission after that result. eval_tree_receiver_trailing_block_call evaluates reduction initial/callback before matching root kind, contrary to the existing invalid-root skip rule. Core callable_contract separately enforces one initial before final codeblock; preserve those errors under ADR0030/0032, with parity repair owned1.2.1.4.1.
+  - [x] FIX: Remove reduction fence, guard incompatible container-only consumers by the actual reduction-derived value before operands, and reject invalid reduction roots before initial/callback evaluation while retaining shape precedence. Existing immediate traversal/callback/copy/order/schema/global converters remain. Separate malformed controls into local permanent backend tests rather than weakening signature validation.
+  - [x] ADDRESSED (verified): Six focused Rust tests pass native/CompiledSpec-JSON-restored/in-process plan for producer kinds, valid shared Number/String/Bool/null/Array/Hash/empty results, immediate Array/Hash maps/repeated/coalesced reductions, numeric/default/selection/typed index0, copies, SI(L*)C snapshots/scoped restoration and SIL/SILC rejection without A. Scalar/null roots skip initial/callback on direct/chained routes. Existing compile-time zero/two-initial errors remain.
+  - [x] NO REGRESSION: Admitted Array/Hash walk/map/plain reduction/root-kind/path-order controls pass all three routes, offline compilation and selected rustfmt pass. Shared-fixture separation preserves Perl shape coverage in a local group; its eighteen native/fresh reference checks pass. No full suite/corpus/gate, standalone/deferred/context/bang or portable admission.
+  - [x] LOCKSTEP: Shared valid fixture/local malformed tests/frozen progress, current book examples/qualifiers, canonical traversal fact/map and TYPE/SESSION/live/resume align; invalid-arity phase/diagnostic parity is explicitly scheduled1.2.1.4.1 before admission. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Dart21.3 independently follows.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.21.2 - compose Rust reduction accumulator results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.21.3`
   Status: `pending`
@@ -4454,11 +4489,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; Perl21.1 is implemented/targeted-checked and Rust21.2 independently assesses next, with separate portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; Perl21.1/Rust21.2 are implemented/targeted-checked and Dart21.3 independently assesses next, with separate portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.21.2` | `pending` | Independent Rust reduction accumulator result assessment/implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` | `pending` | Independent Dart reduction accumulator result assessment/implementation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

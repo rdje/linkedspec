@@ -16,8 +16,7 @@ Top:: I {
  order="";invalid={order=cat(order,"S");"x"}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(value)}.coalesce({order=cat(order,"C");"fallback"}).uppercase();invalid_effects=[invalid,order];
  order="";rejected={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(acc.add(value))}.take({order=cat(order,"A");1});rejected_effects=[rejected,order];
  order="";prefix={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(acc.add(value))}.cat({order=cat(order,"C");"!"}).take({order=cat(order,"A");1});prefix_effects=[prefix,order];
- order="";bad0={order=cat(order,"S");[1]}.reduce_leaves() {order=cat(order,"L");return(value)}.cat({order=cat(order,"C");"!"});bad2={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0},{order=cat(order,"X");1}) {order=cat(order,"L");return(value)}.coalesce({order=cat(order,"C");"fallback"});malformed=[bad0,bad2,order];
  initial=["a"];copied=[1].reduce_leaves(initial) {return(acc)}.copy();copied+="b";copies=[initial,copied];
  slots=["zero","one"];slots[[].reduce_leaves(0) {return(value)}]="updated";
- return({"traversals":traversals,"numbers":numbers,"texts":texts,"arrays":arrays,"hashes":hashes,"booleans":booleans,"recovery":recovery,"empty":empty,"named":named,"pipeline":pipeline,"effects":effects,"scope":scope,"invalid_effects":invalid_effects,"rejected_effects":rejected_effects,"prefix_effects":prefix_effects,"malformed":malformed,"copies":copies,"slots":slots});
+ return({"traversals":traversals,"numbers":numbers,"texts":texts,"arrays":arrays,"hashes":hashes,"booleans":booleans,"recovery":recovery,"empty":empty,"named":named,"pipeline":pipeline,"effects":effects,"scope":scope,"invalid_effects":invalid_effects,"rejected_effects":rejected_effects,"prefix_effects":prefix_effects,"copies":copies,"slots":slots});
 }

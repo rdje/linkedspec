@@ -5,6 +5,6 @@
  "named":"3!","pipeline":4,"effects":["3outer","SILLC",1,null],
  "scope":["outer","outer-acc",["outer"],99,88,"outer"],
  "invalid_effects":["FALLBACK","SC"],"rejected_effects":[null,"SIL"],
- "prefix_effects":[null,"SILC"],"malformed":[null,null,""],
+ "prefix_effects":[null,"SILC"],
  "copies":[["a"],["a","b"]],"slots":["updated","one"]
 }

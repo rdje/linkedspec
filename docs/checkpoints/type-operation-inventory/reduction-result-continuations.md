@@ -89,3 +89,28 @@ brace compilation; the bridge had excluded traversal blocks. The shared field
 pipeline, and reduction from a coalesced container. The final twelve-assertion
 fixture passes native/fresh with those added transitions; no deferred/bang policy
 change or independent backend admission is inferred.
+
+## Rust21.2 bounded implementation and shared fixture boundary
+
+Existing producer/direct traversal controls pass native/restored/in-process plan.
+Core compile rejects malformed zero/two initials as callable_contract_arity_mismatch
+before execution; preserve that admitted signature behavior. Shared fixture now
+contains valid shapes only. Local permanent malformed controls retain both Rust
+compiler rejection and Perl null/no-effects; reference Perl eighteen checks pass.
+Their phase/diagnostic parity discrepancy is owned1.2.1.4.1 after ordinary feature
+coverage and before signature/23.4 admission, not normalized in this result feature.
+
+Valid continuation RED is terminal null/binding-kind failure; a small effect case
+gives[null,SILL,1,[9]]. Remove the terminal fence, keeping dedicated callback and
+dynamic dispatch, then check actual reduction-derived kind before container-only
+consumer operands. The shared fixture then isolates an older producer defect:
+invalid scalar-root initial still runs (SIC); independent scalar/null controls
+give SII instead of S. A reduce-only invalid-root guard after shape validation
+and before initial/callback evaluation fixes that existing contract violation.
+
+Six focused Rust tests pass native/restored/in-process plan after RED, including
+exact shared results/kinds/typed index0/copies, immediate traversals/coalesced and
+repeated reductions, snapshots/scope/effect rejection, direct root/path controls
+and preserved compile-time malformed errors. Offline compile/selected rustfmt pass.
+No serialized-schema/global conversion/callback body, standalone/deferred/context/
+bang policy or full admission change; Dart21.3 independently follows.
