@@ -6521,7 +6521,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.5 - retain safe Lua entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31`
-  Status: `pending`
+  Status: `in_progress` / activation912c803435887fd7671cd1cd9417ae63d97fb6d0
   Priority: P1 immediately after bounded30, before next unrelated feature/admission.
   Goal: Repair compatible Hash-result method continuations after ordinary eager with blocks across supported existing source roles.
   Reproduction: At cleanc0bf78088, literal String, named String and entry_text().with(){return({"n":[false]})}.sorted_values().first().first() return null with unresolved sorted_values/raw0/unready, while block Array output and input/cursor-owned with examples work. This is independently reproduced for literal/bound roots and is not blamed on the Number getter producer.
@@ -6532,13 +6532,90 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual contract/schema/context-permission changes separately owned.
   Planned claim verification: none: Prospective deterministic finite authored repair controls; no population measurement.
 
+  Frozen authority: docs/checkpoints/type-operation-inventory/with-hash-results.md, shared with_hash_result_values fixture and public finite intake31.0. Children31.1-.5 independently establish backend behavior before production.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.0`
+  Status: `completed`
+  Goal: Diagnose and freeze the bounded ordinary eager with returned-Hash continuation repair before backend production changes.
+  Scope: Current accepted immediate helper/receiver with value/scope contracts, public native/fresh/descriptor/substitution/AST distinctions for literal/bound/capture roots and healthy Array/scalar/scope controls; no deferred or callback permission expansion.
+  Planned verification tier: focused
+  Planned focused checks: Small public authored distinctions, source/fixture syntax, book/history/fast continuity. No full suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored diagnosis/target; no population/completeness measurement.
+
+  Activation: clean912c803435887fd7671cd1cd9417ae63d97fb6d0; safe Lua30.5 committed/tree clean/brief0.
+  Owned paths: Public with-result probe/retained finite source/AST/channels, frozen target/shared fixtures, independent backend owners and scoped book/fact/map/roadmap/task/live/resume. No production changes.
+  Verification tier: `focused`
+  Focused checks: Five failing with-Hash source twins, healthy terminal Hash/scope and Array/Number/Bool/null controls, distinguishing coalesce(null) dispatch twin; producer syntax/frozen descriptor/JSON/book/history/fast continuity. No full suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema movement independently owned.
+  Claim verification: none: Finite authored target/diagnostic distinctions; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: LinkedSpec::Get/return_descriptor/emit_generated_source/call_spec_handler_subst and public AST show literal/bound/capture/helper/prefixed Hash continuations return null with unresolved sorted_values/raw0/unready. Retain actual source/channels. Terminal Hash W/outer restoration and Array/Number/Bool/null controls are healthy; a no-op coalesce(null) twin yields false/ready.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering lower_ast_fluent_chain_node preserves typed receiver-with nodes only for input/cursor origins, rebuilding generic receiver source. Helper with is absent from the ordinary actual-result predicate, so Hash continuation falls back through source-based helper lowering rather than emitted default-result dispatch. AST retains body/with/calls, and the default twin distinguishes this route from Hash production or scoped execution failure.
+  - [x] **FIX**: Freeze bounded ordinary eager helper/receiver Hash result composition, scope/effect/kind preservation and specific function diagnostics; split five independent backend children before production. No parser/deferred/callback/unknown-call rights or new schema fields.
+  - [x] **ADDRESSED (verified)**: Readable eight-case producer and retained original seven-case/eighth-twin channels preserve the actual distinctions. Shared source descriptor parses and exact expected JSON keeps false distinct from Number. Selection is complete; implementation remains in owned children.
+  - [x] **NO REGRESSION**: No production behavior changed. Existing Array/scalar/null and terminal Hash scope controls pass native/fresh; full invalid-domain/context/backend parity remains23.4. Legacy first-consumer policies outside with are unchanged.
+  - [x] **LOCKSTEP**: Frozen target/fixture/public caveat/causal fact/map and roadmap/task/live/resume align. Perl31.1 next, then independent Rust/Dart/Julia/safe Lua; stale example/pressure/Perl registration/declared5.4/full23.4 remain owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.0 - freeze ordinary eager with Hash result continuation repair`.
+  Required live-history rollover: CHANGES segment4953 preserves clean912c803435 lines119-201 (83lines/26901bytes), source blob ef9138177b5f954cbf6c82d70e9dc41d88ba9c98 and SHA256 c515411259af9be85becc6656b44d127c6fd74bbe96ef1b0bcb275c5d160016c; exact Git suffix/bytes/digest verified. Older immutable segments unchanged.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.1`
+  Status: `pending`
+  Goal: Independently assess/repair Perl ordinary eager with returned-Hash continuations.
+  Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
+  Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
+  Planned verification tier: focused
+  Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2`
+  Status: `pending`
+  Goal: Independently assess/repair Rust ordinary eager with returned-Hash continuations.
+  Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
+  Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
+  Planned verification tier: focused
+  Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.3`
+  Status: `pending`
+  Goal: Independently assess/repair Dart ordinary eager with returned-Hash continuations.
+  Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
+  Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
+  Planned verification tier: focused
+  Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.4`
+  Status: `pending`
+  Goal: Independently assess/repair Julia ordinary eager with returned-Hash continuations.
+  Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
+  Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
+  Planned verification tier: focused
+  Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.5`
+  Status: `pending`
+  Goal: Independently assess/repair safe Lua ordinary eager with returned-Hash continuations.
+  Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
+  Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
+  Planned verification tier: focused
+  Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31` | `pending` | Diagnose and repair ordinary eager with returned-Hash continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` | `pending` | Repair Perl ordinary eager with returned-Hash continuations under frozen31. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
