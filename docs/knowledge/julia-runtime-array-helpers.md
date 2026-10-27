@@ -9,6 +9,8 @@ answers:
   - why does Julia count reject nonarrays and extra receiver arguments
   - can Julia first and last continue through selected scalar and container methods
   - which task owns Julia receiver copy arity validation
+  - why do Julia copied Numbers and containers run incompatible operands
+  - how does Julia preserve copied result kinds through fluent bridges
   - do Julia standalone split_each filter_match and uniq update arrays
   - does Julia split_tagged_records accept String helper results and preserve typed fields
   - does Julia runtime support array receiver chains
@@ -25,7 +27,9 @@ date: 2026-10-27
 status: bounded value/predicate guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
 evidence: "TYPE22.4 separates tagged-record String input from Array output and preflights min-two operands with strict native/plan/fresh controls. Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/emptiness_result_receivers_test.jl\"); include(\"julia/test/has_key_result_receivers_test.jl\"); include(\"julia/test/tagged_record_receivers_test.jl\")'"
+reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/emptiness_result_receivers_test.jl\"); include(\"julia/test/has_key_result_receivers_test.jl\"); include(\"julia/test/tagged_record_receivers_test.jl\")'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/value_copy_test.jl\");include(\"julia/test/receiver_copy_arity_test.jl\");include(\"julia/test/logical_receiver_methods_test.jl\");include(\"julia/test/selected_value_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -78,3 +82,17 @@ separate from scalar numeric magnitude preservation under .2.9.
 Historical September11 reading/replay chronology, exact commands, source ranges and assertion totals remain byte-recoverable in this file at Git bdeae4121aaad3659f5c117e08f66e1dc3cdb931. Those broad historical replays are not startup or ordinary-feature commands; use the current focused reverify above.
 
 23.3 guards retain AbstractVector Count; join/index/has_key/contains take one operand, emptiness zero. Defaults/index/has_key/contains/emptiness stay scalar until actual AbstractVector/AbstractDict output; generic emptiness consumers stay allowed.23.3.9.4 retains Bool flow/source/copy/1!/SA, fixing container[]/bad1!/0!/four effects; strict native/plan/fresh/direct has_key and compilation pass. Full admission open.
+
+October27 ADR0138 copy rollout4.2.2.4 preserves already-healthy primitive
+producers and recursive copies. Native/plan/fresh-source shared intake returns
+null/0/SRKV and wrong-container[]/[1]/AKV; shape/legacy controls pass. The fluent
+chain initializes copied_result for a direct free-copy receiver and retains it
+after copy links. Existing reduction-kind guarding now also checks copied results
+before incompatible Array/Hash operands, retaining scalar/default/container
+bridges. No other receiver/producer policy is normalized. value_copy_test.jl
+uses recursive strict kind comparison (Bool identity; Number excludes Bool),
+passes12 assertions from6 RED/6 controls and is registered in runtests.jl.
+Direct receiver arity/logical/selected tests yield127 focused assertions total,
+including original source errors and Bool-copy compatibility; strict compilation
+passes. No old expectation, helper/deferred vocabulary, depth, callable/context
+or serialized format change; full admission remains separate and safe Lua5 follows.

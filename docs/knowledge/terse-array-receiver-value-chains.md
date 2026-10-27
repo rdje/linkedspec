@@ -94,3 +94,9 @@ actual-kind guards after independent native/restored/plan SRKV/AKV RED. Shared
 values and direct copy/logical/selected controls pass without oracle changes;
 [[dart-runtime-array-helpers]] owns the bounded mechanism. Julia/safe Lua remain
 next; no complete context/portable/canonical copy admission.
+
+Julia4.2.2.4 likewise preserves primitive producers and guards actual copied
+results after independent native/plan/fresh SRKV/AKV RED. Strict Bool-versus-Number
+value-copy and direct copy/logical/selected checks pass; the new test is registered.
+[[julia-runtime-array-helpers]] owns the bounded mechanism. Safe Lua5 is next;
+complete context/portable/canonical admission remains separate.

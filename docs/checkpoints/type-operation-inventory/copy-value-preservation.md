@@ -65,7 +65,7 @@ num_add(1,2).copy().add(1)                  # 4
 3. Perl context1.3 preserved/targeted-checked: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
    callable-origin/depth changes. Close as preserved if already healthy.
-4. Rust2/Dart3 implemented/targeted-checked; Julia4/safe Lua5 independently assess function/method/scalar-result
+4. Rust2/Dart3/Julia4 implemented/targeted-checked; safe Lua5 independently assesses function/method/scalar-result
    and scope/shape/snapshot controls before changes. Lua uses only safe named
    PUC5.5.1/LuaJIT fixtures; declared5.4/full runner remain separate.
 
@@ -101,3 +101,12 @@ copy receivers and persists from receiver copy links; the existing guard checks
 actual kind before later container-only operands. Shared values/shape/legacy
 controls and direct arity/logical/selected tests pass without old oracle changes.
 No producer, malformed free-call, container depth, callable or wire-format change.
+
+Julia4 retains healthy primitive-copy production and recursive copying. Native,
+plan and fresh-source intake exposes the same copied Number/Hash/Array consumer
+guard failures (null/0/SRKV;[]/[1]/AKV) with a recursive oracle that distinguishes
+Bool from Number. Direct free-copy receivers initialize copied_result, and method
+copy links retain it; existing actual-kind guards now skip incompatible operands.
+Shared values/shape/legacy and direct arity/logical/selected controls pass without
+old oracle changes. Register value_copy_test.jl in the normal runner; full runner
+and complete source/context/portable admission remain deferred.

@@ -5924,10 +5924,13 @@ function _evaluate_runtime_fluent_chain!(
     )
     scalar_result = value isa Bool
     reduction_result = false
+    copied_result = chain.receiver isa ActionCallExpr &&
+        canonical_action_helper_name(chain.receiver.name) == "copy"
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
-        # Reduction results may change container family; check before operands.
-        if reduction_result && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
+        # Copied and reduced results keep their actual kind through bridges.
+        # Check container-only consumers before evaluating their operands.
+        if (reduction_result || copied_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
@@ -5985,6 +5988,7 @@ function _evaluate_runtime_fluent_chain!(
             current_edge,
         )
         reduction_result = reduction_result || helper_name == "reduce_leaves"
+        copied_result = copied_result || helper_name == "copy"
         scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict))
     end

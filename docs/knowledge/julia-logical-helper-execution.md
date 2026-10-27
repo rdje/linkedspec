@@ -70,3 +70,8 @@ plan/fresh test PASS109 plus direct logical result PASS100 and strict compilatio
 No free producer/truth/arity/callback/deferred/copy/serialized model changes;
 Bool value copies stay true/false. Copy-domain1.2.1.4.2 and full method/context/
 portable admission remain separate; safe Lua23.5 independently follows.
+
+ADR0138 copy rollout4.2.2.4 preserves these healthy Bool-copy producers and
+adds only copied-result actual-kind guards. Native/plan/fresh copy/logical/selected
+checks pass with no old oracle changes; [[julia-runtime-array-helpers]] owns the
+bounded mechanism. Full context/portable admission remains separate.
