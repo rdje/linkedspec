@@ -16,11 +16,11 @@ answers:
   - does Dart runtime support push_back statement only
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
-date: 2026-10-26
+date: 2026-10-27
 status: scalar/default/index/predicate guards; ordering/slice/admission open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
-evidence: "Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart"
+evidence: "TYPE22.3 repairs tagged-record String-input/Array-output guards, receiver regex/minimum shape with native/restored/plan checks. Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart test/tagged_record_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -36,8 +36,15 @@ Array methods cover count/select/order/membership,
 `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed`,
 `contains`, `index_of`, `trim_each`, `filter_nonempty`, `lowercase_each`,
 `uppercase_each`, `uniq`, `filter_match`, `split_each`, `flat_array`,
-`concat_arrays`, `split_tagged_records`, delimiter-first `join_values`, and
+`concat_arrays`, delimiter-first `join_values`, and
 array numeric reducers such as `array(2, 4, 6).sum()` / `.avg()`.
+
+`split_tagged_records` is an Array-producing text helper. Its dispatcher family
+must not require Array input: named/derived String receivers consume delimiter,
+tag and optional fields. TYPE22.3 excludes it from actual Array-only guards,
+preserves regex delimiter flags and requires two RHS operands before effects.
+Producer/typed field/snapshot/copy/free-invalid behavior remains; the five focused
+native/restored/plan groups live in dart/test/tagged_record_receivers_test.dart.
 
 `split(target, source, delimiter)` replaces the named array; the old exact array(target) selector is removed.
 Regex delimiters and regex filters use Dart `RegExp` over the stored regex

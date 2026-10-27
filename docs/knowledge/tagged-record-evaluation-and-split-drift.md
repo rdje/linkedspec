@@ -13,7 +13,7 @@ answers:
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
 date: 2026-10-27
-status: bounded Perl and Rust tagged-record producer/receiver implemented; full split-domain admission remains owned
+status: bounded Perl/Rust/Dart tagged-record producer/receiver implemented; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
 evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; Rust22.2 adds the missing producer/bridge; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
 reverify: "For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated."
@@ -46,6 +46,20 @@ SDTFCE, prior fields/copy, empty/trailing/regex and short free-call preservation
 four direct scalar String tests pass. Reverify with tools/run_cargo_local.sh test
 --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime
 --test tagged_record_receivers. Full SESSION33 admission remains separate.
+
+## Dart bounded receiver repair, October27
+
+TYPE22.3 producer-first native/restored/plan controls already retain eager fields,
+current pure-split boundaries and row copy independence. Named String receivers
+were read as Arrays, trim-prefix was rejected by Array-only guards, regex operands
+lost pattern interpretation, and malformed calls ran SSDC effects. Dispatcher
+output-family membership is not an input-role guard. The derived unmodifiable
+Array-only set now excludes tagged records; dedicated receiver delimiter wrapping
+and min-two-RHS preflight fix these paths without changing the producer. Five
+new tagged tests and seven direct String tests pass with format/fatal analysis.
+Reverify from dart: bash ../tools/run_dart_project_data.sh test
+test/tagged_record_receivers_test.dart. Short free calls still return empty Arrays
+and evaluate operands; full SESSION33 split-domain/context admission remains open.
 
 ## Historical producer and cross-runtime split observations
 

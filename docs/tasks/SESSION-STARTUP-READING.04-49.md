@@ -635,6 +635,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
 
   October27 partial repair TYPE22.2: Rust public intake found no tagged-record producer (unknown helper/null). The existing helper now uses pure split, captured text tag/typed fields and fresh rows; String-to-Array routing/min-two-RHS preflight added. Five native/restored/in-process-plan tests and four direct String tests PASS with snapshots/copies/current empty/trailing/regex boundaries. Other backend assessments and full33 domain/context admission remain open.
 
+  October27 partial repair TYPE22.3: Dart producer/eager/copy controls were healthy. Receiver result-family classification wrongly required Array input, regex operands lacked wrapping and malformed shapes evaluated SSDC. Exclude text producer from Array-only set, preserve pattern evaluation and preflight min-two RHS. Five tagged plus seven direct String groups PASS native/restored/plan; full33 boundaries/context/admission and other backend assessments remain open.
+
 
 - ID: `SESSION-STARTUP-READING.34`
   Status: `pending`

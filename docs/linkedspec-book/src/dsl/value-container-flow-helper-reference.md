@@ -1442,8 +1442,8 @@ For `identifier_list = "a, b"`, `subtype_indication = "integer"`, `signal_kind =
 
 The outer array holds all records; each inner array is one record, with no extra wrapper. Ordinary helper arguments (source, delimiter, tag and carried fields) evaluate once left-to-right before record construction, even if no records result; earlier values survive later rebinding.
 The scalar receiver equivalent is `"a,b".split_tagged_records(",", "?item:").count()` → `2`, with text as input and an Array result that can feed selection and other Array methods.
-Perl and Rust support the scalar bridge and retain their pure splitters’ trailing items: `" a,b ".trim().split_tagged_records(",","row").last().last().uppercase()` gives `"B"`. Carried Number/Bool/null/Array/Hash values retain their kinds and can feed compatible selected-value methods; malformed receiver calls with fewer than delimiter/tag reject before effects.
-The bounded Perl/Rust eager helper/scalar bridge is targeted-checked; other runtime assessments follow. Complete cross-backend empty-source/empty-delimiter/zero-width/variable-regex and contextual admission remain separate; do not infer a universal split policy from this example.
+Perl, Rust and Dart support the scalar bridge and retain their pure splitters’ trailing items: `" a,b ".trim().split_tagged_records(",","row").last().last().uppercase()` gives `"B"`. Carried Number/Bool/null/Array/Hash values retain their kinds and can feed compatible selected-value methods; malformed receiver calls with fewer than delimiter/tag reject before effects.
+The bounded Perl/Rust/Dart eager helper/scalar bridge is targeted-checked; other runtime assessments follow. Complete cross-backend empty-source/empty-delimiter/zero-width/variable-regex and contextual admission remain separate; do not infer a universal split policy from this example.
 
 ## Boolean composition
 

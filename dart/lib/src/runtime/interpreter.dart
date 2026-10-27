@@ -3717,6 +3717,9 @@ final class LinkedSpecRuntimeEngine {
               helper == 'cat') {
             return call.args.isEmpty;
           }
+          if (helper == 'split_tagged_records') {
+            return call.args.length < 2;
+          }
           if (helper == 'substr') {
             return call.args.isEmpty || call.args.length > 2;
           }
@@ -5243,6 +5246,25 @@ final class LinkedSpecRuntimeEngine {
           currentEdge,
           requireNonempty: true,
         );
+      case 'split_tagged_records':
+        if (call.args.length < 2) {
+          return null;
+        }
+        return _callSplitTaggedRecords([
+          receiver,
+          _evaluatePatternArgument(
+            call.args.first.value,
+            context,
+            ruleLabel,
+            currentEdge,
+          ),
+          ..._evaluateArgumentValues(
+            call.args.skip(1).toList(growable: false),
+            context,
+            ruleLabel,
+            currentEdge,
+          ),
+        ]);
       case 'split':
         return _callSplitWithReceiver(
           receiver,
@@ -7033,13 +7055,15 @@ const _treeTraversalHelperNames = <String>{
   'reduce_leaves',
 };
 
-const _arrayOnlyReceiverHelpers = <String>{
-  ..._runtimeArrayHelperNames,
+// Helper dispatch families describe results; tagged records consume text.
+final _arrayOnlyReceiverHelpers = Set<String>.unmodifiable({
+  for (final helper in _runtimeArrayHelperNames)
+    if (helper != 'split_tagged_records') helper,
   'num_avg',
   'num_median',
   'num_range',
   'num_sum',
-};
+});
 
 const _arrayPreferredReceiverHelpers = <String>{
   'is_empty',

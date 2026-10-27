@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust22.2 tagged-record producer and String-to-Array bridge are implemented/targeted-checked; Dart22.3 is next.
+Dart22.3 tagged-record receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 is next.
 
 ## Latest Completed Slice
 
-Rust public producer-first/shared intake exposes a missing split_tagged_records arm: unknown-helper warnings/null despite already-eager source/delimiter/tag/field effects. Implement the existing documented producer with split_string_for_arg, text tag and cloned captured fields, preserving current literal/regex/empty/trailing split policy. Add String-to-Array receiver classification and min-two-RHS preflight before effects. Five authored tests PASS on native/restored/in-process generated plan: basic/empty/trailing typed fields, shared named/literal/trim/selected scalar/Array/Hash chains, SDTFCE snapshots, independent carried rows, malformed receiver no effects and short free-call null/eager operands. Four direct scalar String tests, offline compilation and rustfmt pass. Book/frozen contract/tagged fact/SESSION33 partial progress/index/map/history/live pointer align; Dart22.3 follows. SESSION33 full split-domain/context/portable admission, fixture registration23.4.1, error parity1.2.1.4.1 and pressure20.1 remain separate; no full CI/standalone generated crate/global pressure PASS claim.
+Dart producer-first native/restored/plan controls already retain eager typed fields, pure split boundaries and independent row copies. Shared receiver intake fails named/derived sources and regex splitting; malformed calls give0/[] with SSDC effects. Its result-family Array registration is incorrectly reused as an input-role guard, while generic receiver arguments omit pattern wrapping and minimum arity. Exclude the text producer from Array-only guards, retain an unmodifiable derived set, add dedicated receiver pattern evaluation and min-two-RHS preflight. Five new tagged-record plus seven direct String tests PASS12 across native/restored/plan; focused format/fatal analysis pass. Source/delimiter/tag/field/consumer snapshots, Bool/null/Number/Array/Hash continuations, earlier carried values/copies and short free-call empty-array/eager behavior stay. Book/frozen contract/tagged/Dart facts/SESSION33 partial progress/index/map/history/live continuity align; Julia22.4 next. Full split-domain/context/portable admission, canonical registration/error parity/pressure repairs remain separate; no full-CI/global pressure PASS claim.
 
 ## Next Action
 
-Independently assess Dart22.3 tagged-record producer/String-to-Array receiver against tagged-record-string-bridge.md and shared valid fixture before repairs. Preserve current tag/value conversions, eager snapshots/copy, backend pure-split/free invalid behavior and ordinary malformed method policy. Focused native/restored/plan producer/receiver/order/shape/compile/format/analysis/docs/commit, then Julia22.4; broad SESSION33 admission/parity/pressure remain separately owned.
+Independently assess Julia22.4 tagged-record producer and String-to-Array receiver using tagged-record-string-bridge.md/shared valid fixture before repair. Preserve current conversion/pure-split/free malformed policies, eager snapshots/kinds/copy and ordinary min-two-RHS-before-effects. Strict native/plan/fresh producer/shared/order/shape/direct String/compile checks plus docs/commit, then safe Lua22.5. SESSION33 broad admission, parity1.2.1.4.1 and pressure20.1 stay separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.22.3` — Dart22.3 tagged-record receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.2` — Rust22.2 tagged-record producer and String-to-Array bridge are implemented/targeted-checked; Dart22.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` — Perl22.1 producer and receiver bridge are repaired/targeted-checked; independent Rust22.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
@@ -29,7 +30,6 @@ Independently assess Dart22.3 tagged-record producer/String-to-Array receiver ag
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` — Dart optional substring argument repair20.1 targeted-checked; Julia20.2 then safe Lua20.3 follow. Complete signature/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.20` — Optional substring20 target frozen; Dart20.1, Julia20.2 and safe Lua20.3 repairs selected from existing Perl-reference policy. Broad admission remains separate.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.5` — Lua scalar String result19.5/identity/null operands and PUC large-end bounds repaired/targeted-checked; all five bounded backends complete, input-domain assessment20 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` — Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
 
 ## History
 

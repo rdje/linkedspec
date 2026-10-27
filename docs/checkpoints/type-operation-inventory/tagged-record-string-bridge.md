@@ -104,3 +104,11 @@ Five native/restored/in-process-plan tests and four direct scalar String tests p
 shared valid chains, SDTFCE, copied/prior carried values, empty/trailing/regex and
 short free eager null controls. Existing Rust pure-split boundaries remain; no
 standalone generated crate or full SESSION33 matrix/admission claim. Dart22.3 next.
+
+## Dart22.3 partial completion
+
+Producer/eager/copy/short-free native/restored/plan controls already pass. Fix
+receiver Array-input role confusion (result dispatcher membership is insufficient),
+regex pattern evaluation and min-two-RHS no-effects preflight. Five new tagged
+and seven direct String tests pass plus format/fatal analysis. Preserve existing
+split/conversion/copy/free short-call behavior; Julia22.4 next, full33 admission open.
