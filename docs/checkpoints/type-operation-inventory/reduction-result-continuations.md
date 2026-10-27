@@ -114,3 +114,20 @@ repeated reductions, snapshots/scope/effect rejection, direct root/path controls
 and preserved compile-time malformed errors. Offline compile/selected rustfmt pass.
 No serialized-schema/global conversion/callback body, standalone/deferred/context/
 bang policy or full admission change; Dart21.3 independently follows.
+
+## Dart21.3 bounded implementation
+
+Producer/value/immediate traversal/copy/scope/source-order and invalid-root tests
+already work independently on native/restored/plan. Shared RED is direct scalar
+rejection []/SILA; independent Array-to-Hash and Hash-to-Array consumers give
+[]/SILKV and []/SILA. The dynamic loop omits reduction scalar-result metadata and
+knows scalar status without reduction-derived container-family guards. Add that
+metadata and actual kind checks before incompatible operands, preserving all
+existing traversal/root/initial/callback/copy/global conversion bodies.
+
+Seven focused tests plus format/fatal selected analysis pass after RED, retaining
+shared exact kinds/typed indices/immediate/repeated/coalesced traversals/copies/
+scoped SI(L*)C; rejected scalar/prefix/opposite-family cases retain SIL/SILC and
+skip operands. Valid root/path/direct producer controls stay passing. Dart static
+malformed errors match Rust's phase and remain within1.2.1.4.1 parity scheduling.
+No full context/deferred/bang/signature/portable admission; Julia21.4 follows.

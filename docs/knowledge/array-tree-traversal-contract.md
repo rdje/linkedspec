@@ -2,6 +2,7 @@
 id: array-tree-traversal-contract
 title: "Array and Hash traversal preserve callback scope and actual reduction result kinds"
 answers:
+  - "why does Dart reduce_leaves take evaluate an incompatible operand"
   - "why does Rust evaluate a reduction initial for a scalar or null root"
   - "does Rust reduce_leaves preserve malformed callback arity errors"
   - "can reduce_leaves result continue into numeric Array or Hash methods"
@@ -19,6 +20,7 @@ status: current
 tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, rust, oracle, SPEC-FORMAT-TERSE]
 evidence: "SPEC13 root traversal; TYPE23.1.1 frozen result feature and Perl21.1/Rust21.2 focused RED/GREEN. Exact prior full record/July milestones at Git2eb98f833f712bfeb78d0cdb416060e1905ff72c for this path."
 reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/reduction_result_receivers_test.dart"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test reduction_result_receivers"
 ---
@@ -108,3 +110,12 @@ zero/two-initial arity errors, while local Perl controls retain null/no-effects
 (eighteen reference checks pass). Error phase/identity parity is owned and
 scheduled1.2.1.4.1 before admission. No standalone/deferred/context/bang or full
 portable claim; Dart21.3 independently follows.
+
+Dart21.3 independently confirms producers, immediate/repeated/coalesced traversals,
+source/scoped snapshots and invalid-root skipping before production. RED is
+Number.take []/SILA and opposite-container-family []/SILKV/[]/SILA. Add reduction
+scalar metadata and actual Array/Hash-only admission before consumer operands;
+seven native/restored/plan tests plus format/fatal analysis pass with shared
+kinds/indices/copies/scope/order and clean SIL/SILC rejection. Traversal bodies/
+root/initial/global conversion stay unchanged. Static malformed compile errors
+join1.2.1.4.1 parity owner; Julia21.4 and safe Lua21.5 remain independent next.

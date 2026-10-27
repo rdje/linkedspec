@@ -26,7 +26,7 @@ default62.1/.2 and TYPE selected/result families through scalar String23.3.19
 are implemented/targeted-checked on their recorded routes/hosts. Optional substring
 argument target23.2.20 and all three repairs20.1-.3 are targeted-checked. Remaining
 fluent selection23.1.1 freezes reduction result continuations21; Perl21.1 is
-targeted-checked along with Rust21.2; Dart21.3 independently assesses next.
+targeted-checked along with Rust21.2/Dart21.3; Julia21.4 independently assesses next.
 Broad61.3/62.3/.4, declared Lua5.4, full domain/context/portable23.4 and the separate
 reading audit remain open under their own acceptance. Feature-first ordinary
 checks remain focused; no full reading audit is a prerequisite for these repairs.
@@ -37,7 +37,7 @@ TYPE23.2.20 owns this bounded continuity correction, not a startup-tree pivot.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` | `pending` | Independent Dart reduction accumulator result assessment; other backends follow separately. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` | `pending` | Independent Julia reduction accumulator result assessment; safe Lua follows separately. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

@@ -5129,8 +5129,18 @@ final class LinkedSpecRuntimeEngine {
     required _CurrentActionEdge? currentEdge,
   }) {
     var scalarResult = value is bool;
+    var reductionResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
+      // Reduced values may switch container family. Check before operands.
+      if (reductionResult &&
+          helper != 'copy' &&
+          helper != 'is_empty' &&
+          helper != 'is_nonempty' &&
+          ((_arrayOnlyReceiverHelpers.contains(helper) && value is! List) ||
+              (_hashOnlyReceiverHelpers.contains(helper) && value is! Map))) {
+        return null;
+      }
       // Scalar results retain this boundary; generic emptiness predicates
       // accept every value kind.
       if (scalarResult &&
@@ -5144,6 +5154,7 @@ final class LinkedSpecRuntimeEngine {
       // container output permits later array/hash-only consumers.
       final mayProduceScalar =
           _scalarStringResultHelperNames.contains(helper) ||
+          helper == 'reduce_leaves' ||
           helper == 'coalesce' ||
           helper == 'coalesce_nonempty' ||
           helper == 'contains' ||
@@ -5175,6 +5186,7 @@ final class LinkedSpecRuntimeEngine {
         ruleLabel,
         currentEdge: currentEdge,
       );
+      reductionResult = reductionResult || helper == 'reduce_leaves';
       scalarResult =
           value is bool ||
           ((scalarResult || mayProduceScalar) &&

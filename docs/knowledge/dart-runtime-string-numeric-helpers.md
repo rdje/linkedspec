@@ -66,3 +66,8 @@ New2/direct String7 tests and format/fatal analysis pass after RED on native/
 restored/plan, preserving SIWC snapshots, Unicode, identities, mutation aliases
 and legacy unary/extra-arity behavior. Global _intValue stays unchanged; details
 at [[substring-optional-arguments]]. No large-slice2.14 or full admission follows.
+
+Reduction21.3 reuses the existing dynamic loop, adding scalar result metadata and
+actual container-family guards before incompatible operands. Seven native/
+restored/plan/direct tests and format/fatal analysis pass; callbacks/source/root
+policies remain. Canonical details: [[array-tree-traversal-contract]].
