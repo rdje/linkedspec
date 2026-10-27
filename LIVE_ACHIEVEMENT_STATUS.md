@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart with-result guards repaired/targeted-checked; independent Julia31.4 next; identity31.6 stays P1.
+Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
 
 ## Latest Completed Slice
 
-Dart independently already passes frozen with-Hash/pure-function/indexed state-fence controls. First-native helper/receiver scalar guard output3/[]/3/[] and SWKVANJLT confirms missing actual-kind boundaries. Existing guarded-source/result flags now include with; four native/restored-SpecFile/plan tests pass frozen values/kinds/ABCDE/outer, null consumers/skipped AKVJLT/SWN, Array/Bool/default8/scope, pure-function OK and specific indexed entry_len rejection. Direct input-with one case, format/fatal selected analysis pass; runtime comment clarified afterward without semantic change. No frame/parser/AST/schema/deferred/unknown-call or outside-with root policy changes. Exact independent RED/source retained. Book/target/fact/map/roadmap/task/live/resume align; normal discovery needs no runner edit. Known nested Dart identity remains existing2.10 under priority31.6 after bounded children and before unrelated selection/parent admission. Independent Julia31.4 next; no suite/matrix/nested/full admission/push.
+Julia independently confirms helper/receiver scalar guard3 RED and9 healthy frozen Hash/pure-function/indexed-state controls on native/plan/fresh. Existing guarded-source/result flags gain with; new12 comparisons and direct input-cursor12 pass with strict recursive Bool/Number equality, --depwarn=error compile and normal registration. Frozen values/kinds/ABCDE/outer, null consumers/skipped AKVJLT/SWN, Array/Bool/default8/scope, pure-function OK and specific indexed entry_len rejection hold. No frame/parser/AST/schema/deferred/unknown-call or outside-with root changes. Exact RED/source retained; known SESSION7 setpgid prelude is distinct from actual tests. Book/target/fact/map/roadmap/task/live/resume align. Known nested Julia2.8 identity stays priority31.6 after bounded children and before unrelated selection/parent admission. Safe Lua31.5 next; no full runner/suite/matrix/nested/full admission/push.
 
 ## Next Action
 
-Activate independent Julia with-result31.4 from this clean Dart boundary. Read frozen target/current with/value/Hash/source and known JULIA-STARTUP-READING.2.8 identity owner. Independently run frozen/non-nested actual-kind/scalar/scope/function controls before production; retain known nested identity under priority31.6 without broadening this slice or calling it covered. Repair only confirmed value/guard gaps through current owners, preserve all error/arity/root/callback/deferred/unknown-call/schema boundaries. Compile/quick native/plan/fresh/normal-registration/docs/book/commit, then safe Lua31.5. Close priority31.6 after bounded backend children before unrelated selection or parent admission; no exhaustive suite/matrix/push.
+Activate independent safe Lua with-result31.5 from this clean Julia boundary. Read frozen target/current with/value/Hash/source/identity owners and safe-host restrictions. Independently run frozen/non-nested actual-kind/scalar/scope/function controls on available PUC/LuaJIT before production; do not infer a failure from other backends. Preserve current kind/error/arity/root/callback/deferred/unknown-call/schema rights; no persistent chunk locals/unsafe patterns/full runner. Compile/quick native/plan/fresh and direct input-with controls/normal registration/docs/book/commit. Then priority31.6 identity authority and owned Rust/Dart/Julia repairs before unrelated selection/parent admission; no exhaustive suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` — Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` — Dart with-result guards repaired/targeted-checked; independent Julia31.4 next; identity31.6 stays P1.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1` — Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
@@ -29,7 +30,6 @@ Activate independent Julia with-result31.4 from this clean Dart boundary. Read f
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` — Perl/Rust/Dart noncatalogued parser-context boundaries repaired; independent Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2` — Perl/Rust noncatalogued parser-context boundaries repaired; independent Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1` — Perl noncatalogued parser-call/gap function boundary repaired; independent Rust next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` — All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 
 ## History
 

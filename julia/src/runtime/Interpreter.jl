@@ -5945,10 +5945,10 @@ function _evaluate_runtime_fluent_chain!(
     reduction_result = false
     kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
-        (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) == "copy")
+        (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
-        # Copied, computed and reduced results keep actual kinds through bridges.
+        # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && (
@@ -6008,7 +6008,7 @@ function _evaluate_runtime_fluent_chain!(
             current_edge,
         )
         reduction_result = reduction_result || helper_name == "reduce_leaves"
-        kind_guarded_result = kind_guarded_result || helper_name == "copy"
+        kind_guarded_result = kind_guarded_result || helper_name in ("copy", "with")
         scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict))
     end

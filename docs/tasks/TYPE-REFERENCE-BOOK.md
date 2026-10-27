@@ -6647,7 +6647,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.3 - guard actual values returned by ordinary Dart with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/repair Julia ordinary eager with returned-Hash continuations.
   Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
   Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
@@ -6655,6 +6655,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+  Activation: clean451709ecd872fcf9e7fd9352f8841ef0ecb23d8d; Dart31.3 committed/tree clean/brief0.
+  Scope refinement: Known nested callback identity remains JULIA-STARTUP-READING.2.8 under priority31.6 before unrelated selection/parent admission; no nested closeout here.
+  Verification tier: `focused`
+  Focused checks: New native/plan/fresh12 comparisons after independently observed3 RED/9 healthy; direct input-cursor12, strict recursive Bool/Number comparison, --depwarn=error compile/normal registration, book/history/fast continuity. No full runner/suite/matrix.
+  Canonical trigger: Parent31 requires callback identity31.6; full source/domain/context/backend23.4 and final clean push after feature coverage.
+  Claim verification: none: Finite authored repair/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Frozen Hash/pure-function/indexed-state9 comparisons pass; helper/receiver scalar3/[]/3/[] and SWKVANJLT fail all three routes. Exact original test/log retained. Known SESSION7 launcher setpgid prelude did not prevent actual9pass/3fail execution; no new runtime classification from that prelude.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter fluent dispatch omits helper-with from kind_guarded_result and does not retain that boundary after receiver with. Existing scalar-root compatibility then evaluates incompatible container operands rather than current actual-kind guards.
+  - [x] **FIX**: Include with alongside copy in existing guarded source/result flags, leaving scoped frame/callback/value/helper/error owners unchanged. Add normal runner include; no new parser/AST/schema/deferred permissions.
+  - [x] **ADDRESSED (verified)**: New12 native/plan/fresh comparisons pass frozen false/a-b/Y/a,z/2/ABCDE/outer, helper/receiver null consumers/skipped AKVJLT/SWN, healthy Array/Bool/default8/scope, pure-function OK and specific indexed entry_len rejection with strict Bool/Number equality.
+  - [x] **NO REGRESSION**: Direct input-cursor12 and --depwarn=error compilation pass. No outside-with root, copy depth, arity/error, callback/deferred/unknown-call or serialized changes. Existing nested identity stays explicitly open with its priority owner; no full runner or domain/context admission.
+  - [x] **LOCKSTEP**: Qualified book/target/retained independent RED/fact/map and roadmap/task/live/resume align; normal Julia test discovery registered. Safe Lua31.5 next, then priority31.6 before unrelated selection/parent admission; other prerequisites remain owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.4 - guard actual values returned by ordinary Julia with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.5`
   Status: `pending`
@@ -6695,7 +6710,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` | `pending` | Independently assess Julia with-result composition; identity31.6 follows bounded children. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.5` | `pending` | Independently assess safe Lua with-result composition; identity31.6 follows. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1361** facts · **10791** question keys.
+> **1361** facts · **10792** question keys.
 
 ## Questions → fact
 
@@ -9942,6 +9942,7 @@
 - "why do Julia replacement and affix identities lose Number or Boolean kind" -> [julia-runtime-string-numeric-helpers](docs/knowledge/julia-runtime-string-numeric-helpers.md) · 2026-10-27 · reverify: [2 entries](#julia-runtime-string-numeric-helpers)
 - "why do Julia root selection fixtures return from I instead of E" -> [julia-root-rule-selection-admission](docs/knowledge/julia-root-rule-selection-admission.md) · 2026-07-18 · reverify: `bash tools/run_julia_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
 - "why do Julia string predicates need scalar arity and null operand guards" -> [julia-runtime-string-numeric-helpers](docs/knowledge/julia-runtime-string-numeric-helpers.md) · 2026-10-27 · reverify: [2 entries](#julia-runtime-string-numeric-helpers)
+- "why do Julia with scalar results evaluate incompatible container operands" -> [ordinary-with-hash-result-continuation](docs/knowledge/ordinary-with-hash-result-continuation.md) · 2026-10-27 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - "why do Lua HLink EBNF and SimEnv execute child rules twice" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
 - "why do Lua and Perl disagree on same-line action match ownership" -> [lua-semantic-projector-reading-and-source-ownership-gaps](docs/knowledge/lua-semantic-projector-reading-and-source-ownership-gaps.md) · 2026-09-13 · reverify: [3 entries](#lua-semantic-projector-reading-and-source-ownership-gaps)
 - "why do Lua copied Numbers and containers run incompatible operands" -> [lua-receiver-copy-value-preservation](docs/knowledge/lua-receiver-copy-value-preservation.md) · 2026-10-27 · reverify: [2 entries](#lua-receiver-copy-value-preservation)
@@ -16514,8 +16515,8 @@ _Native parser acceleration is optional, measured, and derived from the dynamic 
 
 ### ordinary-with-hash-result-continuation
 _Ordinary eager with Hash results need typed continuation dispatch_
-- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands | why do Dart with scalar results evaluate incompatible container operands
-- **date:** 2026-10-27 · **status:** Perl31.1 and Rust31.2.1/Dart31.3 guards repaired; nested identity31.6/full admission separate
+- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands | why do Dart with scalar results evaluate incompatible container operands | why do Julia with scalar results evaluate incompatible container operands
+- **date:** 2026-10-27 · **status:** Perl31.1 and Rust31.2.1/Dart31.3/Julia31.4 guards repaired; nested identity31.6/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - **source:** [`docs/knowledge/ordinary-with-hash-result-continuation.md`](docs/knowledge/ordinary-with-hash-result-continuation.md)

@@ -11,8 +11,9 @@ answers:
   - why does signed selection after with still report unsupported with
   - why do Rust with scalar results evaluate incompatible container operands
   - why do Dart with scalar results evaluate incompatible container operands
+  - why do Julia with scalar results evaluate incompatible container operands
 date: 2026-10-27
-status: Perl31.1 and Rust31.2.1/Dart31.3 guards repaired; nested identity31.6/full admission separate
+status: Perl31.1 and Rust31.2.1/Dart31.3/Julia31.4 guards repaired; nested identity31.6/full admission separate
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -68,3 +69,11 @@ pass. Current guarded-source/result flags gain with; four native/restored/plan
 tests and direct input-with pass with format/fatal analysis clean. No frame/parser/
 schema changes. Known [[dart-callback-helper-recursion-identity-gap]] remains its
 existing owner under priority31.6; no new nested failure or admission inferred.
+
+Julia31.4 independently observes3 scalar guard RED/9 healthy comparisons across
+native/plan/fresh. Existing source/result flags gain with; new12 plus direct input-
+cursor12 pass with strict Bool/Number comparison, --depwarn=error and normal
+registration. Exact source/log retained; known launcher SESSION7 prelude did not
+prevent actual tests. No frame/parser/schema changes. Existing
+[[julia-callback-helper-recursion-identity-gap]] remains its owner under priority
+31.6; no new nested failure or admission inferred. Safe Lua follows.
