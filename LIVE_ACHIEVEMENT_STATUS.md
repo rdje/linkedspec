@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart canonical capture-source guards implemented/targeted-checked; independent Julia25.4 next.
+Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
 
 ## Latest Completed Slice
 
-Dart now applies existing actual-kind guards to direct capture collection selections. Its static classifier adds four canonical source names; existing alias normalization covers both named-map spellings, with kindGuardedResult retained through with/bridges. Independent RED observes3 failing/1 healthy cases across native/restoredSpec/generated plan. All4 capture and7 direct computed tests pass, including unchanged shared target/input, alias/with rejected-operand skips, String zero/empty/compaction/static names, absent capture guards and unchanged bound/context/flat counts. Changed-file format and fatal analyze pass. No parser/getter/read/schema/executor change; qualified book/catalog, target/fact/map and history/fast staged continuity/diff align. Independent Julia25.4 follows; full admission23.4, pressure, required Perl registration and declared Lua5.4/native-formatting owners remain separate; no push.
+Julia now applies existing actual-kind guards to direct capture collection results using four canonical static source names and current alias normalization. Independent RED records9 failing route assertions/3 healthy capture-text controls. New registered capture12 and direct computed25 pass native/generated-plan/fresh emitted modules with strict recursive Bool/Number/String/null/container comparison. Unchanged shared target/input, aliases/with operand skips, String zero/empty/compaction/static names and missing captures preserve expected values; bound/context/flat count policies stay unchanged. --depwarn=error compilation, qualified book/catalog, target/fact/map and history/fast staged continuity/diff pass. No parser/getter/read/compiled/schema/executor vocabulary change. Safe Lua25.5 follows; full admission23.4, pressure, required Perl registration and declared Lua5.4/native-formatting owners remain separate; no push.
 
 ## Next Action
 
-Activate independent Julia capture selection25.4 from this clean Dart boundary. Read canonical Julia capture/result and computed-source guard owners; use frozen shared name=Alpha plus small alias/with/missing/String-kind/static-name/native/plan/fresh controls with strict Bool/Number identity. Reuse existing static helper ownership/readers; preserve entry/local/compaction/context/bound/flat/deferred/write policies. Compile/targeted/docs/commit before safe Lua25.5. No full suite/matrix/admission/push; pressure/required Perl registration/declared Lua5.4 stay separate.
+Activate safe Lua capture selection25.5 from this clean Julia boundary. Read current canonical capture helper aliases and the existing private computed-source guard table; verify actual safe PUC5.5.1/LuaJIT identities. Use unchanged shared name=Alpha plus finite alias/with/String/missing/static/bound/context/flat native/plan/fresh controls, preserving the module-local ceiling. Only existing-table edits, no unsafe patterns/full runner; luac/loadfile and targeted checks/docs/commit. Then select the next roadmap-aligned feature. Full admission/pressure/required Perl registration/declared Lua5.4 stay separate; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.3` — Dart canonical capture-source guards implemented/targeted-checked; independent Julia25.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.2` — Rust static capture-source actual-kind guards implemented/targeted-checked; independent Dart25.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.1` — Perl readonly capture collection selection implemented with existing reader/guards; independent Rust25.2 next.
@@ -29,7 +30,6 @@ Activate independent Julia capture selection25.4 from this clean Dart boundary. 
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.4` — Julia copy4 retains healthy primitive production and guards actual copied-result consumers; focused native/plan/fresh checks pass. Safe Lua5 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.3` — Dart copy3 retains healthy primitive production and guards actual copied-result consumers; focused native/restored/plan checks pass. Julia4 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.2` — Rust copy2 preserves primitive values and actual-kind consumers; strict native/restored/plan and direct focused tests pass. Dart3 is next.
-- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.3` — Perl existing interpreted free copy1.3 is preserved/targeted-checked; all bounded Perl copy children complete. Independent Rust2 is next.
 
 ## History
 

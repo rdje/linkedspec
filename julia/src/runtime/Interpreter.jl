@@ -6004,7 +6004,8 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         helper = canonical_action_helper_name(receiver.name)
         helper in ("flat", "flat_array", "flat_hash") && return false
         return helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
-            helper in _RUNTIME_HASH_HELPER_NAMES || helper in ("array", "hash", "copy", "coalesce", "coalesce_nonempty")
+            helper in _RUNTIME_HASH_HELPER_NAMES || helper in ("array", "hash", "copy", "coalesce", "coalesce_nonempty",
+                "entry_groups", "entry_map", "match_groups", "match_map")
     end
     receiver isa ActionValueAccessExpr && return _runtime_is_ordinary_computed_read(engine, receiver)
     return true

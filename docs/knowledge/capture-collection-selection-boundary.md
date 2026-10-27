@@ -10,11 +10,13 @@ answers:
   - which task repairs contextual callback computed read readiness
   - why does Rust capture selection evaluate incompatible method operands
   - how do Dart named-map aliases receive capture result kind guards
+  - how does Julia guard capture collection selection through with
 date: 2026-10-27
-status: bounded Perl25.1/Rust25.2/Dart25.3 implemented; independent Julia25.4 next
+status: bounded Perl25.1/Rust25.2/Dart25.3/Julia25.4 implemented; safe Lua25.5 next
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/capture_collection_selection_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/capture_collection_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_collection_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/capture_collection_selection.t"
@@ -98,3 +100,14 @@ persists through with and bridges. New4 and direct computed7 pass all routes;
 String zero/empty/compaction/static names and bound/context/flat count controls
 stay unchanged. Format/fatal analyze pass; no parser/getter/read/codec or deferred
 vocabulary change. Independent Julia25.4 follows; full admission remains23.4.
+
+
+Julia25.4 independently records9 RED route assertions/3 healthy String-kind
+controls across native/plan/fresh modules. Existing boxed capture getters and
+readers preserve the values, but _runtime_is_ordinary_computed_read excludes the
+four canonical capture names. Adding those names reuses alias normalization and
+persistent actual-kind guards through with/bridges. New registered capture12 and
+direct computed25 pass with strict recursive Bool/Number/String/null/container
+comparison. Shared target, aliases/operand skips, compaction/static names and
+bound/context/flat count controls agree; no parser/getter/read/compiled/executor
+field change. Safe Lua25.5 follows; full admission stays23.4.

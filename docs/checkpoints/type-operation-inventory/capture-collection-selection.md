@@ -1,7 +1,7 @@
 # Read-only capture collection result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.5; implementation family23.3.25.
-Status: frozen bounded ordinary target; Perl25.1/Rust25.2/Dart25.3 implemented/targeted-checked, independent Julia25.4 next; complete admission remains23.4.
+Status: frozen bounded ordinary target; Perl25.1/Rust25.2/Dart25.3/Julia25.4 implemented/targeted-checked, safe Lua25.5 next; complete admission remains23.4.
 
 ## Existing authority and scope
 
@@ -110,3 +110,12 @@ existing canonical alias owner supplies both named-map aliases. Persistent
 actual-kind guards then cover wrong consumers and with/bridges. Four capture
 cases and seven direct computed cases pass native/restoredSpec/generated plan;
 format/fatal analyze pass. No schema, getter or standalone source admission.
+
+
+## Bounded Julia implementation
+
+Julia25.4 independently confirms the same classifier boundary. Four canonical
+capture sources reuse existing alias normalization and actual-kind guarding
+through with/bridges. New strict capture12 and direct computed25 pass native,
+generated plan and freshly loaded emitted module. Named capture stores, readers,
+parser, compiled representation and deferred vocabulary remain unchanged.
