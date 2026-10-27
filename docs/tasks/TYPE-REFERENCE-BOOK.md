@@ -6769,15 +6769,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Prospective finite authored remaining-boundary controls; no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 immediately after Rust31.6.1, before Dart31.6.2 and unrelated selection/admission.
   Goal: Independently verify Rust final-callback evaluation before the helper installs its scoped value binding; repair only a confirmed gap.
-  Source question: Helper/receiver with currently resolve their final callback inside the scoped-value frame. A callback supplied through the caller binding named value may therefore be shadowed. This is a source-backed hypothesis, not yet an observed runtime defect; identity31.6.1 does not alter evaluation order or claim this case.
+  Source question: Helper/receiver with currently resolve their final callback inside the scoped-value frame. A callback supplied through the caller binding named value may therefore be shadowed. Originally queued as a hypothesis; the independent controls below confirm it. Identity31.6.1 did not alter evaluation order or claim this case.
   Acceptance: Consult current callable argument/snapshot/scope authority and use a small public source such as value={|item|return(item)};return(with("ok",value)), plus receiver and ordinary cb-name twins, before classification/production. If confirmed, resolve final callback once after ordinary value/receiver evaluation but before installing scoped value, preserving arity/error order, literal/contextual/opaque permissions and failure cleanup. No new callback/source/AST/schema rights. Complete bounded repair/compile/check/docs/commit before Dart identity continues.
   Planned verification tier: focused
   Planned focused checks: A few finite public callback-name/source-order/scope twins and direct dependent identity/with checks; compile/rustfmt/book/history/continuity. No suite/matrix.
   Planned canonical trigger: Actual context/schema contract movement separately owned; full23.4 and final clean push after feature coverage.
   Planned claim verification: none: Prospective finite source-order diagnosis/repair, no population measurement.
+
+  Before-production finding at cleanceb4382a4: Five finite public tests compile/run; ordinary cb-name/source-order/outer-value control passes all routes, while four first-native value-name/helper/receiver/opaque/first-source-mutation cases raise final_argument_not_codeblock with scalar kind. Exact source/RED retained. Engine helper/receiver evaluate the final argument only after enter_scoped_scalar_binding("value", ...); resolve and validate that argument once after the first value/receiver evaluates but before scope entry. This is now an observed source-order defect, independent of completed identity31.6.1.
+
+  Activation: cleanceb4382a4fdc190453eff0be3ad46e0f6de0c86e; identity31.6.1 committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: Five native/restored/plan source tests after4 first-native RED/1 healthy; direct callback-identity8/with-result5, one argument/body failure-cleanup unit, offline compile/rustfmt/book/history/fast continuity. No suite/matrix/package.
+  Canonical trigger: Remaining coordinator31.6/backends before unrelated selection/parent admission; full source/domain/context/backend23.4 and final clean push after feature coverage.
+  Claim verification: none: Finite authored source-order/scope controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Four value-named helper/receiver/opaque/source-mutation cases reject valid callbacks as scalar at first native assertion; ordinary cb-name/source-order/outer-value control passes all routes. Exact baseline/source retained; provisional source question is now confirmed.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine helper and receiver with enter scoped value before evaluating the final callback expression, shadowing a caller callback in the same binding and incorrectly running ordinary argument effects inside that temporary frame.
+  - [x] **FIX**: Evaluate ordinary value/receiver first, resolve and validate final callback once in caller context, then enter scoped value and invoke. Keep unconditional restoration after invocation; no environment capture, helper/signature/AST/schema or deferred rights added.
+  - [x] **ADDRESSED (verified)**: All five source tests pass native/restored/plan: helper/receiver value-name callbacks yield ok!/again!, opaque effects are SCB then SCBB, first-argument callback replacement yields new:ok/new:again, and ordinary cb retains SC/outer.
+  - [x] **NO REGRESSION**: Identity8/with-result5 pass. Failure unit retains caller argument assignment after validation failure, restores scoped value after a body error, removes temporary item and clears callback activity. Offline compile/rustfmt clean; no arity/error vocabulary/parser/serialized/captured-environment changes.
+  - [x] **LOCKSTEP**: Working named-value example/evaluation order, target/retained RED/new causal fact/map and roadmap/task/live/resume align. Independent Dart31.6.2 next, then Julia31.6.3 and remaining scoped31.6.4 before unrelated selection/parent admission; broad proof stays23.4.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5 - resolve Rust final callbacks before scoped value rebinding`.
 
 ## Current Frontier
 
@@ -6785,7 +6801,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` | `pending` | Verify adjacent Rust final-callback snapshot before scoped value; then Dart identity. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` | `pending` | Repair bounded Dart callback identity, then Julia and remaining scoped controls. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

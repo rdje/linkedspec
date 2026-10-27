@@ -6709,25 +6709,23 @@ impl Engine {
             callback_expr,
             linkedspec_core::expr::Expr::CodeblockArgument(_)
         );
+        // Final arguments observe caller bindings before scoped value shadows them.
+        let callback = self.eval_expr(callback_expr, ctx, rule_label)?;
+        let callback = self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
         let binding = ctx.enter_scoped_scalar_binding("value", current.clone());
-        let result = (|| {
-            let callback = self.eval_expr(callback_expr, ctx, rule_label)?;
-            let callback =
-                self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
-            let args = if pass_receiver {
-                vec![current]
-            } else {
-                Vec::new()
-            };
-            self.execute_codeblock_value(
-                "with",
-                bare_variable_target_arg(&call.args[0]),
-                &callback,
-                &args,
-                ctx,
-                rule_label,
-            )
-        })();
+        let args = if pass_receiver {
+            vec![current]
+        } else {
+            Vec::new()
+        };
+        let result = self.execute_codeblock_value(
+            "with",
+            bare_variable_target_arg(&call.args[0]),
+            &callback,
+            &args,
+            ctx,
+            rule_label,
+        );
         ctx.exit_scoped_variable_binding(binding);
         result
     }
@@ -8392,25 +8390,23 @@ impl Engine {
             block_arg.value(),
             linkedspec_core::expr::Expr::CodeblockArgument(_)
         );
+        // Evaluate the value argument first, then snapshot the callback in the caller.
+        let callback = self.eval_expr(block_arg.value(), ctx, rule_label)?;
+        let callback = self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
         let binding = ctx.enter_scoped_scalar_binding("value", scoped_value.clone());
-        let result = (|| {
-            let callback = self.eval_expr(block_arg.value(), ctx, rule_label)?;
-            let callback =
-                self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
-            let args = if pass_scoped_value {
-                vec![scoped_value]
-            } else {
-                Vec::new()
-            };
-            self.execute_codeblock_value(
-                "with",
-                bare_variable_target_arg(block_arg),
-                &callback,
-                &args,
-                ctx,
-                rule_label,
-            )
-        })();
+        let args = if pass_scoped_value {
+            vec![scoped_value]
+        } else {
+            Vec::new()
+        };
+        let result = self.execute_codeblock_value(
+            "with",
+            bare_variable_target_arg(block_arg),
+            &callback,
+            &args,
+            ctx,
+            rule_label,
+        );
         ctx.exit_scoped_variable_binding(binding);
         result
     }
@@ -13046,6 +13042,42 @@ Boundary: /END/
             ctx.get_scalar("value"),
             RuntimeValue::Scalar("outer".into())
         );
+        assert!(!ctx.has_active_codeblock());
+    }
+
+    #[test]
+    fn with_callback_snapshot_preserves_argument_effects_and_failed_body_scope() {
+        let engine = nested_write_test_engine();
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_scalar("value", RuntimeValue::Scalar("outer".into()));
+        let argument_failure = CodeBlock::parse(r#"with("scoped", set(value,"changed"))"#).unwrap();
+        let Expr::Call { args, .. } = &argument_failure.statements[0].expr else {
+            panic!("expected helper with call");
+        };
+        let error = engine
+            .eval_with_trailing_block(args, &mut ctx, "Top")
+            .unwrap_err();
+        assert!(error.contains("final_argument_not_codeblock"), "{error}");
+        assert_eq!(
+            ctx.get_scalar("value"),
+            RuntimeValue::Scalar("changed".into())
+        );
+        assert!(!ctx.has_active_codeblock());
+
+        let body_failure =
+            CodeBlock::parse(r#"with("scoped", {|item| value="body";missing()})"#).unwrap();
+        let Expr::Call { args, .. } = &body_failure.statements[0].expr else {
+            panic!("expected helper with call");
+        };
+        let error = engine
+            .eval_with_trailing_block(args, &mut ctx, "Top")
+            .unwrap_err();
+        assert!(error.contains("unknown_helper"), "{error}");
+        assert_eq!(
+            ctx.get_scalar("value"),
+            RuntimeValue::Scalar("changed".into())
+        );
+        assert!(!ctx.has_bare_binding("item"));
         assert!(!ctx.has_active_codeblock());
     }
 

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
+Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
 
 ## Latest Completed Slice
 
-Rust callback identity prerequisite31.6.1 is repaired after independent5 first-native RED/2 healthy tests. Private invocation frames retain diagnostic label, optional bound name and inert callback record; current bound-name fences remain, callback-record matching retains opaque-value cycle safety, and anonymous activity still governs unknown-helper errors. Helper/receiver/tree dispatch preserves bound identity, cycles close with the matched name and frames pop after success/failure. Callback7+with5 pass native/restored/plan, including restored nested Hash outside/inside/outer/IO, distinct with/map, bound/helper/receiver/coalesce cb→cb, direct/mutual order and anonymous unknown errors. Added structured native/restored diagnostic1, expanded anonymous/bound cleanup unit1 and existing mutual1 pass with offline compile/rustfmt. No parser/helper/IR/schema/capture/deferred/unknown-call rights change. Exact baseline/candidate/source/limits retained; book/target/causal facts/map/roadmap/task/live/resume align. Adjacent Rust callback-snapshot31.6.5 source-order question is next, without an unverified defect claim; Dart31.6.2/Julia31.6.3/remaining31.6.4 then precede unrelated selection/parent admission. Broader alias/context/backend proof stays23.4; no push.
+Adjacent Rust31.6.5 confirms four first-native final-callback shadowing failures and one healthy ordinary cb-name control. Helper/receiver with now evaluate value/source first, resolve and validate the final callback once in caller context, then install scoped value and invoke. Five native/restored/plan tests pass named-value ok!/again!, opaque SCB/SCBB, source replacement new:ok/new:again and cb/SC/outer. Direct identity8/with-result5 and one argument/body failure-cleanup unit pass: caller argument effects persist on validation failure, failed body value restores, temporary item disappears and activity clears. Offline compile/rustfmt clean; no new helper/signature/parser/AST/schema/capture/deferred/unknown-call rights or error vocabulary. Exact independent RED/source retained. Book/target/new causal fact/map/roadmap/task/live/resume align. Independent Dart31.6.2 resumes, then Julia31.6.3 and remaining31.6.4 before unrelated selection/parent admission; full23.4 stays separate; no push.
 
 ## Next Action
 
-Activate adjacent Rust callback-snapshot31.6.5 from this clean identity boundary. Read current argument evaluation/scope authority and verify with a few public helper/receiver/cb-name twins whether a final callback in caller binding value is shadowed by scoped value. This is a source-backed question, not yet a runtime defect; no evaluation-order fix is claimed by31.6.1. Repair only a confirmed gap through current with owners, preserve exact arity/error/side-effect/cleanup and callback/source/schema rights, compile/quick checks/docs/book/commit. Then bounded Dart31.6.2, Julia31.6.3 and remaining31.6.4 before unrelated selection/parent admission; no suite/matrix/push.
+Activate bounded Dart callback identity31.6.2 from this clean Rust snapshot boundary. Read coordinator/target, ADR0031/current callable contract, DART-STARTUP-READING.2.10 and backend canonical identity record. Independently establish distinct nested with/tree, bound helper/receiver/opaque cycle identity, direct/mutual/unknown-body and scope cleanup using finite public controls before production. Preserve anonymous error activity, existing bound-name fences, callback argument order/snapshots and current typed callback data; no schema/capture/deferred/computed/unknown-call rights. Compile/quick native/restored/plan/format/analyze/direct-dependent checks/docs/book/commit; broader startup admission stays separate. Then Julia31.6.3 and remaining31.6.4 before unrelated selection/parent admission; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` — Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.5` — All bounded non-nested with-result children targeted-checked; priority Rust/Dart/Julia identity31.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` — Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
@@ -29,7 +30,6 @@ Activate adjacent Rust callback-snapshot31.6.5 from this clean identity boundary
 - `TYPE-REFERENCE-BOOK.1.2.23.1.8` — Frozen Number reader composition30 selected; independent with-Hash continuation31 owned after30.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5` — All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4` — Perl/Rust/Dart/Julia noncatalogued parser-context repairs complete; safe Lua next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` — Perl/Rust/Dart noncatalogued parser-context boundaries repaired; independent Julia next.
 
 ## History
 

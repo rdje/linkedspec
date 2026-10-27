@@ -49,3 +49,9 @@ is callback-identity-rust-intake.json.gz; current bounded authority is
 callback-invocation-identity.md. Independent Dart31.6.2/Julia31.6.3 and remaining
 scoped31.6.4 follow before unrelated selection/parent admission; full alias/context/
 backend identity is not inferred from these finite controls.
+
+Adjacent source-order31.6.5 separately repairs callback values in a caller binding
+named value. See [[rust-with-final-callback-snapshot]]: value/source evaluates first,
+final callback resolves once before temporary value rebinding, and argument/body
+failure effects keep their correct scopes. Identity/source/with controls pass;
+no environment capture or compiled-field change.

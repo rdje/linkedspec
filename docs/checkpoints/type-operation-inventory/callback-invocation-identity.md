@@ -43,3 +43,12 @@ startup/public/context signoff. Their bounded feature prerequisites move under
 remaining Perl/Lua helper-mediated and explicit-nesting boundary before parent
 admission; no failure is inferred for either. Full callback/source/domain/context/
 portable/generated admission remains23.4 after feature coverage.
+
+Adjacent Rust31.6.5 independently confirms final callback shadowing when the caller
+binding is named value. Four first-native failures and one healthy cb-name control
+are retained. Helper/receiver now evaluate their value/source first, then final
+callback once in caller context, before scoped value. Five source tests, identity8,
+with-result5 and one argument/body failure-cleanup unit pass. Argument effects
+persist on validation failure; body-local value and temporary parameters restore
+on failure. No captured environment/schema/arity/error vocabulary changes. See
+rust-with-final-callback-snapshot.md; independent Dart31.6.2 resumes next.
