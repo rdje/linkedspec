@@ -6014,9 +6014,12 @@ impl Engine {
                     return self
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
-                if matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "copy") {
+                if self.is_ordinary_computed_read(receiver)
+                    || matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "copy")
+                {
                     let current = self.eval_expr(receiver, ctx, rule_label)?;
-                    return self.eval_copied_receiver_value_chain(current, calls, ctx, rule_label);
+                    return self
+                        .eval_kind_guarded_receiver_value_chain(current, calls, ctx, rule_label);
                 }
                 if calls
                     .first()
@@ -6569,7 +6572,8 @@ impl Engine {
         let mut current = self.eval_expr(receiver, ctx, rule_label)?;
         let mut reduced_value = false;
         let mut logical_prefix = false;
-        let mut copied_value = matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let mut kind_guarded_value = self.is_ordinary_computed_read(receiver)
+            || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
@@ -6581,9 +6585,9 @@ impl Engine {
                 continue;
             }
 
-            // Guard actual kinds after reductions and logical methods before
-            // evaluating incompatible container operands, preserving the prefix.
-            if (reduced_value || logical_prefix || copied_value)
+            // Guard actual selected/copied kinds and scalar producers before
+            // incompatible container operands, preserving the completed prefix.
+            if (reduced_value || logical_prefix || kind_guarded_value)
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -6607,7 +6611,7 @@ impl Engine {
                 rule_label,
             )?;
             logical_prefix |= matches!(call.method.as_str(), "and" | "or" | "not");
-            copied_value |= call.method == "copy";
+            kind_guarded_value |= call.method == "copy";
         }
 
         Ok(current)
@@ -7539,7 +7543,7 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         for (index, call) in calls.iter().enumerate() {
             if call.method == "copy" {
-                return self.eval_copied_receiver_value_chain(
+                return self.eval_kind_guarded_receiver_value_chain(
                     current,
                     &calls[index..],
                     ctx,
@@ -7568,10 +7572,46 @@ impl Engine {
         Ok(current)
     }
 
-    // Copy preserves the source kind. Its continuations must validate that
-    // actual kind before evaluating container-only operands, including after
+    // Static source ownership keeps legacy bound-call result guards intact.
+    // Do not infer callable ownership from the returned value or a binding.
+    fn is_ordinary_computed_read(&self, expr: &Expr) -> bool {
+        let Expr::ValueAccess { receiver, .. } = expr else {
+            return false;
+        };
+        match receiver.as_ref() {
+            Expr::Call { name, .. } => {
+                if self.spec.find_function(name).is_some() {
+                    return true;
+                }
+                if matches!(
+                    name.as_str(),
+                    "flat"
+                        | "flat_array"
+                        | "flat_hash"
+                        | "with"
+                        | "walk_leaves"
+                        | "map_leaves"
+                        | "reduce_leaves"
+                ) {
+                    return false;
+                }
+                Self::is_array_receiver_value_chain_method(name)
+                    || Self::is_hash_receiver_value_chain_method(name)
+                    || Self::is_string_receiver_value_chain_method(name)
+                    || Self::is_generic_receiver_value_method(name)
+                    || Self::numeric_word_helper_name(name.strip_prefix("num_").unwrap_or(name))
+                        .is_some()
+                    || matches!(name.as_str(), "array" | "hash")
+            }
+            Expr::ValueAccess { .. } => self.is_ordinary_computed_read(receiver),
+            _ => true,
+        }
+    }
+
+    // Selected and copied results retain their actual kind. Validate it before
+    // evaluating container-only operands, including after
     // a later scalar/default/container bridge changes the value again.
-    fn eval_copied_receiver_value_chain(
+    fn eval_kind_guarded_receiver_value_chain(
         &self,
         mut current: RuntimeValue,
         calls: &[linkedspec_core::expr::FluentCall],

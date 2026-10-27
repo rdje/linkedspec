@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
+Rust computed selection implemented/targeted-checked with preserved bound-call counts; Dart24.3 next.
 
 ## Latest Completed Slice
 
-Perl computed reads now recognize static registered function results through the actual scoped compilation registry, preserving helper precedence and unrelated bound-callable readers. Private contextual function-body views align declaration/presence/mutation analyses, emission and runtime private-name inventory while retaining original staged AST/jobs/source spans. The prototype scope leak and contextual deferred false readiness are repaired; existing final-codeblock signature/count contracts fence new registered-name recognition in callback bodies. Native/fresh unchanged full target plus strict scope/snapshot/kind/rest/ownership/error/registry/private-name/Unicode/staged-immutability controls PASS76, after original feature RED20/44 and prototype scope/context RED10/62. Direct helper/noncall/deferred/frozen callable tests PASS106, preserving four values1/2/0/0/raw1. Full target descriptor raw0/unresolved0/ready1 and public scope probe [b,9] agree; generated source declares the selector local. Changed module syntax/book/history/fast staged continuity pass. Bounded Perl24.1 children are complete; independently assess Rust24.2 next. No new AST/schema field, deferred executor vocabulary, metadata waiver or callable coercion change. Full source/context/portable/canonical admission23.4, required Perl registrations23.4.1, pressure repair and declared Lua5.4 remain separate; no push.
+Rust now parses brackets after Array/Hash/eager-block literals and completed fluent segments using the existing ValueAccess/AccessSegment reader, then resumes fluent parsing. Ordinary computed continuations reuse actual-kind guards, including with/traversal, before incompatible container operands. Static registered-definition and semantic data-method/numeric-alias ownership preserves direct unknown bound-call reader/result policies. Original feature RED4/5 is resolved; a separate exact pre-feature engine replay retains bound missing-entry counts0, the broad candidate produces null (RED1/1), and the narrowed candidate restores0 without changing the oracle. New strict native/restored-CompiledSpec/generated-plan regression PASS6 covers the unchanged full target, primitive/container kinds, signed positions, source snapshots/SIC/IJ effects, function scopes, repeated bridges, with guards, callable preservation and Unicode regex-split/index/String composition. Final direct selected/copy checks PASS7; four direct signed-reader tests also pass with the standalone emitted-crate build excluded. Changed Rust compile/format, book/history and fast staged continuity pass. No new AST/serialized field, evaluator operation, named lookup, grouped/write or bound-call coercion change. Bounded Perl/Rust children are complete; Dart24.3 next. Full source/context/portable/generated-source/canonical admission23.4, Perl registrations, pressure repair and declared Lua5.4 remain separate; no push.
 
 ## Next Action
 
-Activate Rust computed-selection24.2 from the clean completed Perl boundary; read canonical value_access/source/selector/receiver ownership and Rust guide/tests, run the unchanged shared target on native/restored/generated routes, then implement only the next bounded gap. Preserve signed/kind/effect/named/callable/deferred/grouping/lvalue/copy/format boundaries. Small compile/direct checks/docs/commit, then Dart24.3. Full source/context/portable/canonical admission, pressure repair, required Perl registrations and Lua5.4 stay separate; no push.
+Activate Dart computed-selection24.3 from the clean Rust feature boundary; inspect canonical value-access/source/selector/receiver owners and local test conventions, execute the unchanged shared target on native and fresh/restored routes, then implement only its bounded source/guard gaps. Preserve actual kinds, once-only effects, signed/named/callable/deferred/grouping/lvalue/copy/format boundaries. Small compile/direct checks/docs/commit, then Julia24.4. Full admission/pressure/Perl registration/Lua5.4 remain separate; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.24.2` — Rust computed selection implemented/targeted-checked with preserved bound-call counts; Dart24.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.2` — Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.1` — Perl computed data-helper reads implemented/targeted-checked; full target still requires registered-function source24.1.2.2. Existing callable/deferred boundaries retained.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.5` — All bounded approved value-copy backend children complete; safe Lua copy guards pass on PUC5.5.1/LuaJIT. Resume owned direct computed-call selection24.1.2.1 next.
@@ -29,7 +30,6 @@ Activate Rust computed-selection24.2 from the clean completed Perl boundary; rea
 - `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.5` — Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.23.4` — Julia23.4 logical receiver shapes are repaired/targeted-checked; safe Lua23.5 next, then scalar-copy domain owner1.2.1.4.2.
 
 ## History
 

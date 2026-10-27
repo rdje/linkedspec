@@ -2695,11 +2695,13 @@ impl<'a> Parser<'a> {
             }
             '[' => {
                 let expr = self.parse_array_literal()?;
+                let expr = self.parse_postfix_value_access(expr)?;
                 self.parse_fluent_chain(expr)
             }
             ':' => self.parse_retired_colon_scalar_slot(),
             '{' => {
                 let expr = self.parse_brace_expr()?;
+                let expr = self.parse_postfix_value_access(expr)?;
                 self.parse_fluent_chain(expr)
             }
             '(' => self.parse_parenthesized_expr(),
@@ -3525,10 +3527,15 @@ impl<'a> Parser<'a> {
             calls.push(FluentCall { method, args });
             self.skip_inline_whitespace();
         }
-        Ok(Expr::FluentChain {
+        let expr = Expr::FluentChain {
             receiver: Box::new(receiver),
             calls,
-        })
+        };
+        if self.peek() == Some('[') {
+            let expr = self.parse_postfix_value_access(expr)?;
+            return self.parse_fluent_chain(expr);
+        }
+        Ok(expr)
     }
 
     fn bare_fluent_method_is_terminal(&self) -> bool {

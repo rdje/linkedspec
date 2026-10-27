@@ -18,8 +18,10 @@ answers:
   - does Perl direct registered function indexing work after helper selection
   - why do registered result selectors leak function local variables
   - how are contextual callback bodies kept outside registered computed reads
+  - why does Rust reject brackets after a split result or array literal
+  - how do Rust computed result guards preserve old bound call counts
 date: 2026-10-27
-status: Perl bounded noncall/helper/registered sources checked; independent backend/full admission open
+status: Perl and Rust bounded computed sources checked; Dart/Julia/Lua/full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
@@ -28,6 +30,7 @@ reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_functions.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test computed_selection"
 ---
 
 At d98e139d7, named signed/typed selected continuations work on public Perl
@@ -112,3 +115,17 @@ keep raw_perl errors/raw1/unready. Native/fresh full target and finite scope/kin
 snapshot/rest/private-name/registry/error controls pass76. No new deferred
 operation, serialized field, bound-callable reader or metadata waiver. Full
 source/context/portable admission remains23.4; independently assess Rust24.2 next.
+
+Rust24.2 finds literal/fluent postfix parsing absent despite existing call/grouped
+ValueAccess support. Expr::parse_postfix_value_access now composes at Array/Hash/
+eager-block and completed fluent boundaries, then resumes fluent parsing. Existing
+eval_access_value already preserves snapshots/ordered selectors. Continuations
+reuse the copied-result kind guard, including with/traversal's persistent flag.
+Static registered definitions and semantic data-method/numeric alias owners fence
+ordinary direct calls; uninterrupted unknown bound-call paths keep their older
+dispatcher. A broad candidate changed missing-entry counts0 to null; original
+3808c4d94 engine replay (candidate parser, unchanged supported source) and candidate
+RED establish that boundary. No full-checkout replay or runtime-value classifier.
+Native/restored/generated-plan checks retain the full fixture, kinds/effects/
+scopes/bridges/with/callable controls and Unicode regex composition. No new AST
+field, evaluator operation or standalone emitted-source admission; Dart24.3 follows.

@@ -166,3 +166,25 @@ controls pass. Existing signature/recursion diagnostics and four bound-callable
 values1/2/0/0/raw1 remain. This completes the bounded Perl implementation children;
 full source/context/portable admission and required Perl registration remain23.4.
 Rust24.2 must be assessed independently before claiming its computed-source support.
+
+## Bounded Rust implementation
+
+24.2 extends the existing postfix reader to Array/Hash/eager-block literals and
+completed fluent segments, resuming fluent parsing after a selected result. Call
+and grouped postfix forms already existed; named reads retain their lookup order.
+The existing ValueAccess evaluator snapshots the receiver before selectors and
+still evaluates later selectors on a missing path. No AST/serialized fields change.
+
+Ordinary computed-result continuations reuse the copied-result actual-kind guard,
+including the with/traversal path. Static registered-function and semantic data-
+helper ownership distinguishes direct unknown bound calls; their old read/result
+policies remain. The first candidate changed bound missing-entry counts0 to null.
+Exact pre-feature engine replay and candidate RED retain that distinction; no
+runtime-value classification or oracle weakening is used to repair it.
+
+Native/restored-CompiledSpec/generated-plan tests cover the unchanged full target,
+strict kinds, signed positions, snapshots/SIC/IJ effects, repeated bridges, function
+scopes, with guards, old bound-call results and Unicode regex-split/index/String
+composition. Direct selected/copy/signed-reader controls pass; the independently
+compiled emitted-crate test is excluded from this ordinary feature check. Complete
+source/context/portable/generated-source admission remains23.4. Dart24.3 is next.
