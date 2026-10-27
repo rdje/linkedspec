@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1361** facts · **10792** question keys.
+> **1361** facts · **10793** question keys.
 
 ## Questions → fact
 
@@ -9955,6 +9955,7 @@
 - "why do Lua replacement and affix identities lose Number or Boolean kind" -> [lua-string-helper-parity-closeout](docs/knowledge/lua-string-helper-parity-closeout.md) · 2026-10-27 · reverify: [2 entries](#lua-string-helper-parity-closeout)
 - "why do Lua root selection fixtures use I instead of E" -> [lua-root-rule-selection-core](docs/knowledge/lua-root-rule-selection-core.md) · 2026-07-18 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
 - "why do Lua root selection fixtures use lifecycle I instead of E" -> [lua-root-rule-selection-admission](docs/knowledge/lua-root-rule-selection-admission.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
+- "why do Lua with scalar results evaluate incompatible container operands" -> [ordinary-with-hash-result-continuation](docs/knowledge/ordinary-with-hash-result-continuation.md) · 2026-10-27 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - "why do Perl and Dart Julia function descriptor records differ" -> [outward-function-descriptor-record-shape-drift](docs/knowledge/outward-function-descriptor-record-shape-drift.md) · 2026-07-11 · reverify: `rg -n 'source_text|kind.*user_function_definition|version|index|body_payload|body_parse_job|body_ast' perl/LinkedSpec/CompilerState.pm dart/lib/src/action/function_registry.dart dart/lib/src/ast/spec_ast.dart julia/src/action/FunctionRegistry.jl julia/src/spec/Ast.jl rust/linkedspec-core/src/descriptor.rs docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "why do Perl and Rust coalesce disagree on empty aggregates" -> [rust-coalesce-evaluation-drift](docs/knowledge/rust-coalesce-evaluation-drift.md) · 2026-10-27 · reverify: [5 entries](#rust-coalesce-evaluation-drift)
 - "why do Perl array filters turn numeric entries into string selectors" -> [action-regex-operands-and-runtime-kinds](docs/knowledge/action-regex-operands-and-runtime-kinds.md) · 2026-10-26 · reverify: [2 entries](#action-regex-operands-and-runtime-kinds)
@@ -16515,8 +16516,8 @@ _Native parser acceleration is optional, measured, and derived from the dynamic 
 
 ### ordinary-with-hash-result-continuation
 _Ordinary eager with Hash results need typed continuation dispatch_
-- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands | why do Dart with scalar results evaluate incompatible container operands | why do Julia with scalar results evaluate incompatible container operands
-- **date:** 2026-10-27 · **status:** Perl31.1 and Rust31.2.1/Dart31.3/Julia31.4 guards repaired; nested identity31.6/full admission separate
+- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands | why do Dart with scalar results evaluate incompatible container operands | why do Julia with scalar results evaluate incompatible container operands | why do Lua with scalar results evaluate incompatible container operands
+- **date:** 2026-10-27 · **status:** all bounded non-nested result children repaired on recorded hosts; priority identity31.6/full admission open
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - **source:** [`docs/knowledge/ordinary-with-hash-result-continuation.md`](docs/knowledge/ordinary-with-hash-result-continuation.md)

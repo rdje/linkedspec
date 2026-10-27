@@ -12,8 +12,9 @@ answers:
   - why do Rust with scalar results evaluate incompatible container operands
   - why do Dart with scalar results evaluate incompatible container operands
   - why do Julia with scalar results evaluate incompatible container operands
+  - why do Lua with scalar results evaluate incompatible container operands
 date: 2026-10-27
-status: Perl31.1 and Rust31.2.1/Dart31.3/Julia31.4 guards repaired; nested identity31.6/full admission separate
+status: all bounded non-nested result children repaired on recorded hosts; priority identity31.6/full admission open
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -77,3 +78,12 @@ registration. Exact source/log retained; known launcher SESSION7 prelude did not
 prevent actual tests. No frame/parser/schema changes. Existing
 [[julia-callback-helper-recursion-identity-gap]] remains its owner under priority
 31.6; no new nested failure or admission inferred. Safe Lua follows.
+
+Safe Lua31.5 independently observes3 scalar guard RED/12 healthy comparisons per
+available PUC5.5.1/LuaJIT2.1.1788460057 host. Current source/result flags gain with;
+new15 and input18 comparisons pass per host, including distinct nested callbacks
+with outside/inside/outer/IO restoration. luac/loadfile syntax and normal
+registration complete; no new persistent interpreter locals/frame/parser/schema
+changes. Exact host/source/RED retained. All bounded non-nested result children
+are targeted-checked; priority Rust31.6.1 and existing Dart/Julia identity owners
+follow before unrelated selection/parent admission. Declared5.4 remains separate.

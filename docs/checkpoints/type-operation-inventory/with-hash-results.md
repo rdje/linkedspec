@@ -1,7 +1,7 @@
 # Ordinary eager with returned-Hash continuations
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.31; intake31.0; independent backend children31.1-.5.
-Status: Perl31.1 repaired; Rust31.2.1/Dart31.3/Julia31.4 actual-kind guards repaired/targeted-checked with priority nested identity31.6 open. Independent other backends/full admission follow.
+Status: All bounded non-nested with-result backend children repaired/targeted-checked on recorded hosts. Priority Rust/Dart/Julia nested identity31.6 and full admission remain open.
 
 Existing helper `with(value){body}` and receiver `source.with(){body}` execute
 immediately, bind scoped `value`, return the block result and restore the outer
@@ -87,3 +87,12 @@ checks, --depwarn=error and normal registration. Source/log retained; known laun
 SESSION7 prelude is distinct from actual successful test execution. No frame/parser/
 schema changes. Known Julia2.8 nested identity remains priority31.6, not freshly
 assessed or covered; safe Lua31.5 follows before priority identity repairs.
+
+Safe Lua31.5 independently observes3 scalar guard RED/12 healthy frozen Hash/pure/
+distinct nested/indexed-state comparisons per available PUC5.5.1/LuaJIT2.1.1788460057
+host. Existing guarded-source/result flags gain with; new15 plus direct input18
+pass per host. luac/loadfile module/test/full-runner syntax only and normal
+registration complete; no persistent chunk locals/frame/parser/schema changes.
+Host/source/RED retained. All bounded non-nested result children are targeted-
+checked on recorded hosts; priority Rust31.6.1 and existing Dart/Julia identity
+owners follow before unrelated selection/parent admission. Declared5.4 separate.

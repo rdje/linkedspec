@@ -3488,7 +3488,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   local kind_guarded_result = typed_source.receiver_mutation.is_ordinary_computed_read(engine, target_receiver) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
-      action_contracts.canonical_action_helper_name(target_receiver.name) == "copy")
+      (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
+        action_contracts.canonical_action_helper_name(target_receiver.name) == "with"))
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3620,7 +3621,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     else
       value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
     end
-    kind_guarded_result = kind_guarded_result or canonical_name == "copy"
+    kind_guarded_result = kind_guarded_result or canonical_name == "copy" or canonical_name == "with"
     local result_kind = json.kind(value)
     scalar_result = (scalar_result or type(value) == "boolean") and
       result_kind ~= "array" and result_kind ~= "harray"
