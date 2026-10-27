@@ -7046,14 +7046,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.3 - guard selected immediate Dart with results by their actual kind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently implement/check Julia ordinary immediate helper-with result selection.
   Authority: Frozen with-result-selection.md/shared fixture and current backend computed/with/callable contracts; do not infer another backend's failure.
   Acceptance: Establish a small actual baseline before production. Add only canonical metadata-approved immediate contextual helper-with sources with valid zero/one value arity and attached/parenthesized forms, preserving existing receiver-with reads. Use current value_access/segments/kind/error/source/scope/snapshot owners without schema changes. Check typed shared outputs, source/selector/consumer order and scope, specific pure-function/unknown-body diagnostics, legacy callable/deferred/registered contextual fences and malformed with roles. Split an independently confirmed prerequisite before production; already-compatible behavior gets focused regression without invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New bounded native/reconstructed/generated/fresh routes supported by this backend, nearest with/computed/callback boundaries, compile/format/normal registration/book/history/continuity. Safe Lua uses only available PUC5.5.1/LuaJIT and explicit source loads, no unsafe/full runner. No full suite/matrix.
-  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; declared host and canonical fixture registration remain separately owned.
-  Planned claim verification: none: Prospective finite authored feature/preservation controls; no population measurement.
+  Verification tier: `focused`
+  Focused checks: New Julia target frozen28pass/3RED -> candidate31pass on native/generated-plan/fresh Module, strict Bool/Number, depwarn=error and normal runner registration. Includes exact legacy bound-call selected policy. Compile/book/map/history/manual continuity; no full runner/matrix or isolated emitted package.
+  Canonical trigger: Independent safe Lua32.5 next; full23.4/new Perl registration23.4.1/excluded deferred readiness31.6.4.4/document-pressure repair20.1/final clean push after feature coverage remain separate.
+  Claim verification: none: Finite authored feature/preservation assertions; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent shared14 native/plan/fresh all support immediate bracket reads but selected scalar .take yields Array[] and runs bad, giving ABCDEFGHIbadJKLM. Role intake establishes existing callback/scope/error/malformed rights; exact frozen31 assertions give28pass/3RED before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter.jl _runtime_is_ordinary_computed_read omits helper-with selected sources, leaving existing _evaluate_runtime_fluent_chain actual-kind guards inactive. Contextual normalization/parser/reader already work. Ordinary unknown source reports unsupported runtime helper; active body reports unknown_helper, so preserve those distinct existing diagnostic owners.
+  - [x] **FIX**: Admit only canonical helper with whose final normalized value is ActionCodeblockArgumentExpr and ordinary value count matches _builtin_final_codeblock_contract Helper metadata, after registered-function precedence. Reuse current actual-kind guards; explicit/bound finals keep their legacy selected-method behavior. Add the new fixture to normal runtests includes.
+  - [x] **ADDRESSED (verified)**: All31 assertions pass native/plan/fresh Module with depwarn=error: shared14 strict kinds, signed/nested/default/bridges, skipped bad operand, A-M order, missing-path selector effects, source rebind snapshot and outer restoration. Nested/pure scopes and existing explicit/registered callback-body reads remain healthy.
+  - [x] **NO REGRESSION**: Explicit/bound finals retain count0/.take effect/B; legacy bound-call selected result remains false/TAIL/0/0. Malformed arity retains code/with/got2, ordinary unknown source retains unsupported-helper and active body retains unknown_helper/name; function-state entry_len remains specific. No parser/schema/body/vocabulary/unknown/coercion/write/copy-depth expansion. Known SESSION7 launcher setpgid prelude did not prevent actual final passing job; no process-lifecycle conclusion follows.
+  - [x] **LOCKSTEP**: Target/packet/current causal card/map/book and roadmap/task/live/resume distinguish actual Julia source/guard/error behavior and finite assertion scope. Native/plan/fresh Module is not isolated package proof. Normal test registration and director-authorized focused commit workflow retained; safe Lua32.5 next, full23.4 separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.4 - guard selected immediate Julia with results by their actual kind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.5`
   Status: `pending`
@@ -7071,7 +7079,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.4` | `pending` | Independently implement/check Julia immediate helper-with bracket selection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` | `pending` | Independently implement/check safe Lua immediate helper-with bracket selection. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

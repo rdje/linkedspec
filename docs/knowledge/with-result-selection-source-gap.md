@@ -8,12 +8,17 @@ answers:
   - "does immediate with selection admit deferred callback reads"
   - "why does Rust run Array operands after selecting a scalar from with"
   - "why does Dart run Array operands after selecting a scalar from with"
+  - "why does Julia run Array operands after selecting a scalar from with"
   - "does Rust unknown with source warn or reject before callback activity"
 date: 2026-10-28
-status: bounded Perl32.1/Rust32.2/Dart32.3 repaired; remaining backends/full admission next
-tags: [perl, rust, dart, with, selection, fluent, scope, computed]
+status: bounded Perl32.1/Rust32.2/Dart32.3/Julia32.4 repaired; remaining backends/full admission next
+tags: [perl, rust, dart, julia, with, selection, fluent, scope, computed]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.9; activationad752f204ea99e928c757184d8e58a130111cba2; with-result-selection-intake.json.gz retains eight public source pairs and exact raw channels."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection; cd dart && bash ../tools/run_dart_project_data.sh test test/with_result_selection_test.dart"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection"
+  - "(cd dart && bash ../tools/run_dart_project_data.sh test test/with_result_selection_test.dart)"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/with_result_selection_test.jl\")'"
 ---
 
 At the recorded clean base, direct helper-with Array/Hash/no-value/parenthesized
@@ -38,7 +43,7 @@ Preserve existing receiver forms and delayed/bound/opaque/registered callback
 read/vocabulary/raw-status boundaries. Explicit mutation, selector-coercion,
 unknown-body and pure-function parser-state fences remain separately governed.
 
-The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust/Dart bounded
+The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust/Dart/Julia bounded
 execution is below; remaining backend children start with their own baseline.
 No other backend failure or full context/portable/generated admission is inferred.
 Full23.4, excluded deferred readiness31.6.4.4, canonical fixture
@@ -121,3 +126,18 @@ arity and scopes/order/snapshots/missing bridges are preserved. No parser/reader
 schema/vocabulary expansion. Packet with-result-selection-dart-intake.json.gz keeps
 sources/channels and discloses the failed wrong-cwd setup separately from RED.
 Julia32.4 next; full23.4 separate.
+
+## Current bounded Julia32.4
+
+Julia already parses/evaluates immediate helper-with brackets and callback-body
+reads. Its ordinary-computed-read classifier omits this source, disabling selected
+actual-kind guards. Only canonical helper spelling, normalized contextual argument
+and builtin helper metadata arity now join the current guard, after registered
+function precedence. Explicit/bound finals retain count0/.take effects. Frozen
+28pass/3RED -> candidate31pass native/plan/fresh Module with strict Bool/Number,
+depwarn=error and normal runner registration. Shared14 order/scopes/snapshot/missing
+bridges and legacy bound-read policy pass. Ordinary unknown source still reports
+unsupported runtime helper; active body reports unknown_helper; function-state and
+malformed arity remain specific. No parser/reader/schema/body-rights expansion.
+Packet with-result-selection-julia-intake.json.gz retains actual source/channels and
+known SESSION7 launcher-prelude limits. Safe Lua32.5 next; full23.4 separate.

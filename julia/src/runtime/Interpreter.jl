@@ -6080,6 +6080,15 @@ function _runtime_is_ordinary_computed_read(engine, expression)
             return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
                 !receiver.trailing_block_arg && length(receiver.args) >= 2
         end
+        # Only metadata-approved immediate contextual helper bodies join selected
+        # actual-kind guards. Explicit/bound final callbacks retain their policy.
+        if helper == "with"
+            contract = _builtin_final_codeblock_contract(CallableHelperSurface, helper)
+            return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
+                !isempty(receiver.args) && last(receiver.args).value isa ActionCodeblockArgumentExpr &&
+                contract !== nothing &&
+                contract.min_before_codeblock <= length(receiver.args) - 1 <= contract.max_before_codeblock
+        end
         helper in ("flat", "flat_array", "flat_hash") && return false
         return helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
             helper in _RUNTIME_HASH_HELPER_NAMES || helper in ("array", "hash", "copy", "coalesce", "coalesce_nonempty",

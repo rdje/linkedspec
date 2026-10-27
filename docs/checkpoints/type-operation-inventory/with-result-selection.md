@@ -1,7 +1,7 @@
 # Ordinary immediate with-result bracket reads
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.9; implementation family23.3.32.
-Status: bounded Perl32.1/Rust32.2/Dart32.3 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
+Status: bounded Perl32.1/Rust32.2/Dart32.3/Julia32.4 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
 
 The existing with helper returns its immediate contextual body's actual value.
 At the original Perl intake, receiver-with already supports direct Array/Hash reads;
@@ -132,3 +132,21 @@ reader/schema/vocabulary/coercion/write/copy-depth expansion. Retained packet:
 with-result-selection-dart-intake.json.gz. Initial wrong-cwd file creation failed
 before writing and receives no product RED credit; actual source baseline follows
 corrected setup. No standalone package/full suite/matrix; Julia32.4 next.
+
+## Bounded Julia implementation32.4
+
+Independent source/parser/body reads already work. Shared14 native/plan/fresh Module
+instead reveals scalar-selected .take evaluates bad/yields[]. The ordinary computed
+read classifier omits helper with. Canonical spelling, final normalized contextual
+ActionCodeblockArgumentExpr and existing builtin helper metadata arity now join
+current actual-kind guards after registered-function precedence. Explicit/bound
+final sources keep legacy selected methods; existing callback-body reads remain.
+
+Frozen28pass/3RED -> candidate31pass with strict Bool/Number and depwarn=error;
+normal runtests include added. Shared14 and legacy bound-call/scopes/error controls
+pass. Unknown ordinary source retains unsupported-runtime-helper, active body
+retains unknown_helper, and pure-function entry_len/malformed arity remain specific.
+No parser/reader/schema/body/coercion/write/copy-depth change. Known SESSION7
+setpgid prelude accompanies an actual completed passing candidate, without a new
+process-lifecycle claim. Exact packet: with-result-selection-julia-intake.json.gz.
+No reconstructed CompiledSpec/isolated package/full runner/matrix; safe Lua32.5 next.
