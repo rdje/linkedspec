@@ -3717,6 +3717,10 @@ final class LinkedSpecRuntimeEngine {
               helper == 'cat') {
             return call.args.isEmpty;
           }
+          if (helper == 'and' || helper == 'or' || helper == 'not') {
+            return call.args.any((arg) => arg is! ActionPositionalArgument) ||
+                (helper == 'not' ? call.args.isNotEmpty : call.args.isEmpty);
+          }
           if (helper == 'split_tagged_records') {
             return call.args.length < 2;
           }
@@ -4701,11 +4705,17 @@ final class LinkedSpecRuntimeEngine {
         context.retv = child.value;
         return child.value;
       case 'and':
-        return _callLogicalAnd(positionalArgs, context, ruleLabel, currentEdge);
+        return _callLogicalAnd(
+          _evaluateValues(positionalArgs, context, ruleLabel, currentEdge),
+        );
       case 'or':
-        return _callLogicalOr(positionalArgs, context, ruleLabel, currentEdge);
+        return _callLogicalOr(
+          _evaluateValues(positionalArgs, context, ruleLabel, currentEdge),
+        );
       case 'not':
-        return _callLogicalNot(positionalArgs, context, ruleLabel, currentEdge);
+        return _callLogicalNot(
+          _evaluateValues(positionalArgs, context, ruleLabel, currentEdge),
+        );
       case 'print':
       case 'say':
         final values = _evaluateValues(
@@ -5226,6 +5236,23 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     switch (helperName) {
+      case 'and':
+      case 'or':
+      case 'not':
+        final values = <Object?>[
+          _copyValue(receiver),
+          ..._evaluateArgumentValues(
+            call.args,
+            context,
+            ruleLabel,
+            currentEdge,
+          ),
+        ];
+        return switch (helperName) {
+          'and' => _callLogicalAnd(values),
+          'or' => _callLogicalOr(values),
+          _ => _callLogicalNot(values),
+        };
       case 'copy':
         return _copyValue(receiver);
       case 'coalesce':
@@ -6733,13 +6760,7 @@ final class LinkedSpecRuntimeEngine {
     return captured;
   }
 
-  bool _callLogicalAnd(
-    List<ActionExpr> args,
-    _RuntimeExecutionContext context,
-    String ruleLabel,
-    _CurrentActionEdge? currentEdge,
-  ) {
-    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+  bool _callLogicalAnd(List<Object?> values) {
     var result = true;
     for (final value in values) {
       if (!runtimeLogicalTruth(value)) {
@@ -6749,13 +6770,7 @@ final class LinkedSpecRuntimeEngine {
     return result;
   }
 
-  bool _callLogicalOr(
-    List<ActionExpr> args,
-    _RuntimeExecutionContext context,
-    String ruleLabel,
-    _CurrentActionEdge? currentEdge,
-  ) {
-    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+  bool _callLogicalOr(List<Object?> values) {
     var result = false;
     for (final value in values) {
       if (runtimeLogicalTruth(value)) {
@@ -6765,13 +6780,7 @@ final class LinkedSpecRuntimeEngine {
     return result;
   }
 
-  bool _callLogicalNot(
-    List<ActionExpr> args,
-    _RuntimeExecutionContext context,
-    String ruleLabel,
-    _CurrentActionEdge? currentEdge,
-  ) {
-    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+  bool _callLogicalNot(List<Object?> values) {
     return !runtimeLogicalTruth(values.single);
   }
 

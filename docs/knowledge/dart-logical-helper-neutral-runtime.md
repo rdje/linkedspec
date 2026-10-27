@@ -2,6 +2,8 @@
 id: dart-logical-helper-neutral-runtime
 title: Dart logical helpers and lazy controls share one typed truth and pre-effect arity boundary
 answers:
+  - "does Dart support and or not receiver methods"
+  - "do Dart logical receiver results preserve scalar value copies"
   - "where is Dart logical truthiness implemented"
   - "are Dart logical helpers eager or short circuit"
   - "does Dart validate logical helper arity before operand effects"
@@ -9,11 +11,11 @@ answers:
   - "which Dart generated roles prove the logical helper contract"
   - "what fields are in a Dart logical arity diagnostic"
   - "does Dart logical parity activate explicit codeblock literals"
-date: 2026-10-26
+date: 2026-10-27
 status: current
 tags: [dart, logical, truthiness, arity, runtime, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "TYPE23.3.17.3 public producer/shared/rejected-effect/actual-Bool/source-error native-restored-plan and direct neutral/default focused proof. Full prior July/September admission/reading/replay record at Git41b61a86bb51cdc872c71e3b6940f69bdec6f67d for this path."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/logical_result_receivers_test.dart test/default_selected_receivers_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/logical_result_receivers_test.dart test/default_selected_receivers_test.dart test/logical_receiver_methods_test.dart"
 
 ---
 
@@ -47,3 +49,17 @@ consumer-source observations are historical at the exact Git pointer above.
 
 Related: [[logical-helper-neutral-contract]], [[dart-helper-action-surface-bridge]],
 [[cross-backend-condition-truthiness-drift]], [[rust-logical-helper-neutral-runtime]].
+
+## Ordinary logical receiver methods, October27
+
+TYPE23.3 adds positional method-shape preflight and a logical receiver branch.
+Source snapshot precedes eager RHS; free and receiver calls share evaluated-value
+composition without changing runtimeLogicalTruth or free pre-effect validation.
+Existing actual-Bool/explicit-container/scope guards suffice. Nine new native/
+restored/plan tests plus nine direct logical-result tests pass with format/fatal
+analysis: SRTC/kinds/copies, malformed skip, SR/SRC, with restoration/recovery and
+typed source-error fields/tokens. Generic value copies preserve Bool (pre-change
+and(true).copy()/true.copy()/copy(false) are true/true/false); retain this local
+compatibility. TYPE1.2.1.4.2 resolves the differing backend scalar-copy domains
+and necessary repairs after family23, before full method/portable admission.
+No standalone emitted/context/deferred/callback/serialized-model expansion.

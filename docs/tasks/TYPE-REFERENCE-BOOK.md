@@ -893,7 +893,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.4`
   Status: `pending`
-  Children: `.1.2.1.4.1`.
+  Children: `.1.2.1.4.1`, `.1.2.1.4.2`.
   Goal: Reconcile the syntax/helper/receiver inventories against current authority roles, then select bounded implementation gaps under23. Broad semantic validation remains deferred until feature coverage.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.3`
   Planned tier: `focused`; no full suite for inventory closeout under the current director policy.
@@ -909,6 +909,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Select the existing canonical signature/diagnostic authority, independently distinguish both malformed shapes on all active routes/backends, preserve no-effects and valid reduction behavior, repair actual phase/diagnostic drift and update public error guidance. No universal invalid-program policy inferred from a few samples.
   Planned verification tier: Select at activation for any governed diagnostic contract movement.
   Planned claim verification: none: Owned deterministic invalid-program parity gap, no aggregate completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2`
+  Status: `pending` / P2 scalar/null copy domain and result parity
+  Goal: Resolve accepted scalar/null copy domains and repair the resulting portable copy/method gaps.
+  Discovered by: Dart23.3 producer-first compatibility control; existing copy facts/book already qualify backend domains and depths. Logical receiver work must preserve those policies while this owner resolves the public contract.
+  Reproduction: Rust logical_receiver_methods existing_with_prefix_keeps_scalar_copy_boundary_and_container_recovery and Dart logical_receiver_methods_test existing-with value-copy case use the same source: scalar="x".with() {return(false)}.not().copy(); return(scalar). Rust native/restored/plan yields null; Dart native/restored/plan yields real true. Independent Dart controls and(true).copy(), true.copy(), copy(false) give true/true/false before production changes. Scope restoration, typed Bool production and container copy recovery are healthy; the difference concerns accepted copy inputs/result guarding.
+  Impact / ownership: A generic fluent program cannot assume one portable scalar-copy result across current backends. Do not misclassify preserved Dart value copying as a new logical producer defect, silently bless portable skew or normalize free helpers inside the logical feature.
+  Schedule: Select immediately after ordinary logical23 backend coverage, before declaring remaining ordinary feature coverage exhausted and before1.2.1.4/23.4 admission/final push. Reconcile canonical copy/value/reference authority first, then own bounded backend feature/repair leaves and focused checks; broad matrices remain deferred.
+  Acceptance: Establish admitted function/receiver copy domains from current canonical contracts/book/Perl reference and retained compatibility records; choose a coherent target with explicit authority for any domain movement. Cover scalar Bool/Number/String/null and existing Array/Hash copies without losing source snapshots/kinds, arity-before-effects, mutability/detachment bounds or callable origin. Fix every accepted-domain mismatch (or consistently implement the explicitly reviewed unsupported-input boundary); documentation alone does not close this owner. Preserve dated prior compatibility evidence; no blind oracle refresh or unrelated depth-policy expansion.
+  Planned verification tier: Select at activation for actual public contract/domain movement under the director's feature-first cadence; complete canonical admission remains23.4.
+  Planned claim verification: none: deterministic authored compatibility/domain intake; no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
@@ -4853,7 +4864,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.23.2 - add Rust eager logical receiver methods`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement Dart ordinary logical receiver counterparts.
   Dependencies: .23.3.23.2.
   Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
@@ -4861,6 +4872,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
   Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Activation: clean `2d2407ae204d5c46be5b61476c0a55f45678859e`; Rust methods committed/tree clean/brief0.
+  Owned paths: Dart producer-first/shared/new shape/source-error/order/result regression and bounded shared logical composition/receiver preflight; existing-with scope/copy controls; current contract/book/Dart-neutral facts/roadmap/task/live continuity.
+  Verification tier: `focused`
+  Focused checks: Native/restored/plan producer/shared/malformed/prefix/existing-with-copy/source-error tests and direct logical result checks, source format/fatal analysis/book/history/staged guards.
+  Canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical selection/signature parity/pressure and declared-host prerequisites.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Dart public producer/source-error baseline PASS3; method/shared/shape/prefix/with cases FAIL5 with unsupported fluent and/not. Independent pre-change native/restored/plan and(true).copy()/true.copy()/copy(false) gives true/true/false, establishing local copy compatibility.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.dart _evaluateFluentCall has no logical method branch and ordinary preflight lacks its shapes. Existing free logical functions combine argument evaluation and Boolean composition; actual Bool/result guards are already healthy.
+  - [x] **FIX**: Preflight ordinary positional shapes, stage copied receiver then eager RHS and reuse the same evaluated-value logical composition as free calls. Keep free pre-effect validation/truth/eager loops and existing actual-result/container/copy/scope handling.
+  - [x] **ADDRESSED (verified)**: logical_receiver_methods_test PASS9 native/restored/plan tests including shared real Bool/kinds/SRTC/snapshots, malformed no-effects, valid SR/SRC prefixes, with restoration, value copy/Array-Hash recovery and exact native/generated source-error fields.
+  - [x] **NO REGRESSION**: logical_result_receivers_test PASS9 direct tests (combined18); format/fatal analysis/git diff --check pass. No free signature/error/truth/lazy/callback/deferred/mutation/serialized model change. Existing Dart scalar copy is retained; new domain reconciliation1.2.1.4.2 owns portable resolution before admission.
+  - [x] **LOCKSTEP**: New test/shared fixture/current book three-backend status/frozen target/Dart-neutral facts/map/roadmap/task/live pointer align. Julia23.4 next; full admission/canonical selection/error parity/pressure/declared-host work remain separately owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.23.3 - add Dart eager logical receiver methods`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.4`
   Status: `pending`
@@ -4884,11 +4911,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; independent Dart23.3 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; independent Julia23.4 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.23.3` | `pending` | Independently assess and implement Dart generic eager logical receiver methods. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.23.4` | `pending` | Independently assess and implement Julia generic eager logical receiver methods. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

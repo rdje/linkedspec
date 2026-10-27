@@ -2,6 +2,8 @@
 id: logical-helper-neutral-contract
 title: ADR 0043 fixes eager logical helpers over one typed truthiness policy
 answers:
+  - "why do logical Boolean copies differ between Dart and Rust"
+  - "which task reconciles scalar copy domains across backends"
   - "are and or not available as fluent receiver methods"
   - "why does true and receiver syntax fail in Perl"
   - "which task implements logical receiver counterparts"
@@ -139,3 +141,14 @@ rejects scalar copy and permits recovered Array/Hash copies; reduction-only copy
 policy is unchanged. Seven new native/restored/plan and four direct result tests
 pass, including typed free source-error fields/tokens and scoped snapshots.
 Only Perl/Rust method support is established here; Dart23.3 independently follows.
+
+Dart23.3.23.3 now implements ordinary logical methods by staging source/RHS and
+sharing evaluated-value Boolean composition with free calls. Ordinary positional
+shape preflight precedes effects; existing Bool/result/scope guards suffice.
+Nine new native/restored/plan plus nine direct logical tests and fatal analysis
+pass. Dart retains real Bool copies (independent pre-change controls true/true/
+false); the same with/logical scalar-copy case gives true here versus Rust null.
+Existing copy domains are backend-qualified, not normalized by this feature.
+TYPE1.2.1.4.2 owns accepted-domain authority review and necessary parity/feature
+repairs immediately after logical23, before ordinary coverage/admission closes.
+Only Perl/Rust/Dart method support is established here; Julia23.4 follows.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust23.2 eager logical receiver methods are implemented/targeted-checked; independent Dart23.3 is next.
+Dart23.3 eager logical receiver methods are implemented/targeted-checked; Julia23.4 next, with scalar-copy domain review owned after family23.
 
 ## Latest Completed Slice
 
-Rust adds and/or/not to generic receiver and Boolean-result roles, with one-plus RHS/zero-RHS shape preflight. Existing eager receiver argument staging and typed free producers preserve real Bool/truth/snapshots/errors. Intake passes producers/source errors but fails4 method cases; role fixes pass5/6, isolating an existing-with-prefix Boolean consumer gap. Track logical prefixes in that loop so incompatible container operands skip, scalar copy rejects and explicit Array/Hash recovery still copies; reduction-only copy policy stays unchanged. Seven new native/restored/in-process-plan tests and four direct logical-result tests pass, including shared kinds/SRTC, malformed skip, SR/SRC prefixes, restored scope, copy recovery and exact generated source-error tokens; offline compilation/rustfmt pass. Book/contract/Rust-neutral facts/map/roadmap/task/live pointer align; Dart23.3 next. Full method/domain/context/portable admission, canonical registration/parity/pressure/declared Lua5.4 remain separate; no standalone generated crate/full-CI/global pressure PASS claim.
+Dart producer/source-error intake passes3 and method cases fail5 as unsupported. Add ordinary positional and/or one-plus RHS/not zero preflight, capture source before eager RHS, and share evaluated-value composition between free and receiver calls. Existing truth/real-Bool/result guards retain snapshots, SRTC, malformed skip, SR/SRC prefixes and with restoration without new context machinery. Independent copy controls confirm Dart preserves Bool values; keep that compatibility instead of importing Rust scalar-copy rejection. Nine new native/restored/plan tests plus nine direct logical-result tests PASS18; format/fatal analysis pass. Free arity/errors/lazy policy and serialized model stay. Book/contract/Dart-neutral facts/map/roadmap/task/live pointer align; Julia23.4 next. Scalar/null copy-domain parity is explicitly owned P2 by1.2.1.4.2 immediately after family23; full method/domain/context/admission, canonical selection/parity/pressure/declared Lua5.4 remain separate, with no full-CI/global pressure PASS claim.
 
 ## Next Action
 
-Independently assess Dart23.3 logical receiver methods using logical-receiver-methods.md/shared valid fixture before repair. Generic typed source input/real Bool output, and/or one-plus RHS/not zero, eager snapshots/valid prefix, ordinary malformed skip and existing-with prefix/result boundary; preserve free typed errors/truth/lazy/conversion/copy/serialized model. Small native/restored/plan/direct logical/format/fatal analysis checks/docs/commit, then Julia23.4; full admission/parity/pressure remain separate.
+Independently assess Julia23.4 logical receiver methods using logical-receiver-methods.md/shared valid fixture before repair. Generic typed sources/real Bool, and/or one-plus positional RHS/not zero, eager snapshots/valid prefix/malformed skip and existing-with result/copy controls. Preserve Julia own copy domains, free helper truth/typed errors/lazy/callback/deferred/serialized model. Strict native/plan/fresh plus direct logical/source compilation checks/docs/commit, then safe Lua23.5; scalar-copy review1.2.1.4.2 follows family23 before admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.23.3` — Dart23.3 eager logical receiver methods are implemented/targeted-checked; Julia23.4 next, with scalar-copy domain review owned after family23.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.2` — Rust23.2 eager logical receiver methods are implemented/targeted-checked; independent Dart23.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.1` — Perl23.1 eager logical receiver methods are implemented/targeted-checked; independent Rust23.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.3` — Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
@@ -29,7 +30,6 @@ Independently assess Dart23.3 logical receiver methods using logical-receiver-me
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` — Dart reduction result consumer guards21.3 implemented/targeted-checked; Julia21.4 independently follows, then safe Lua. Full signature/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.2` — Rust reduction accumulator result flow21.2 implemented/targeted-checked with invalid-root effect repair; Dart21.3 independently follows. Malformed diagnostic parity remains owned before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.1` — Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
-- `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 
 ## History
 

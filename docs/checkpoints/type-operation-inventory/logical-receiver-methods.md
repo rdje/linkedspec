@@ -9,7 +9,7 @@ owned by this bounded comprehensive-method feature, with full admission23.4 late
 
 ## Frozen target
 
-- value.and(rhs, ...) and value.or(rhs, ...) require at least one authored RHS.
+- value.and(rhs, ...) and value.or(rhs, ...) require at least one authored positional RHS.
   They express binary/variadic composition. The existing free and(value)/or(value)
   one-argument Boolean projection stays unchanged; no empty receiver projection.
 - value.not() has zero authored operands and negates the receiver's typed truth.
@@ -93,3 +93,16 @@ Array/Hash copies. Existing reduction-only copy policy remains. Seven new native
 restored/plan plus four direct logical-result tests pass, with exact generated
 helper/count error tokens and rustfmt/offline compilation. No serialized model,
 free truth/error/lazy or callback admission changes; Dart23.3 independently follows.
+
+## Bounded Dart implementation
+
+23.3.23.3 preflights ordinary positional shapes, stages copied source then eager
+RHS and shares evaluated-value logical composition with unchanged free helpers.
+Existing actual-Bool/result/scope guards already suffice. New tests PASS9 native/
+restored/plan plus direct logical-result PASS9; format/fatal analysis pass. Preserve
+Dart Bool/value copies: pre-change and(true).copy()/true.copy()/copy(false) gives
+true/true/false; its with/logical copy result stays true while Rust's guarded scalar
+copy gives null. Current domains/depths are already backend-qualified in copy facts.
+This family does not silently choose a universal scalar-copy domain: P2
+TYPE1.2.1.4.2 must resolve authority and own required repairs immediately after
+family23, before coverage/admission closure. Julia23.4 independently follows.
