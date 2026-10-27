@@ -633,6 +633,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
 
   October27 partial repair TYPE22.1.2: Perl tagged-record String-to-Array receiver classification and min-two-RHS preflight now compose named/literal/trim/selected scalar/carried-container continuations with SDTFCE snapshots and no malformed-call effects. Shared valid/local shape native/fresh PASS12 plus producer/direct String PASS43; Rust22.2 and full33 domain/context/cross-runtime admission remain open.
 
+  October27 partial repair TYPE22.2: Rust public intake found no tagged-record producer (unknown helper/null). The existing helper now uses pure split, captured text tag/typed fields and fresh rows; String-to-Array routing/min-two-RHS preflight added. Five native/restored/in-process-plan tests and four direct String tests PASS with snapshots/copies/current empty/trailing/regex boundaries. Other backend assessments and full33 domain/context admission remain open.
+
 
 - ID: `SESSION-STARTUP-READING.34`
   Status: `pending`

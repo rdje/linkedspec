@@ -93,3 +93,14 @@ two RHS operands before effects. Native/fresh shared valid/local shape PASS12:
 named/literal/trim source, regex/trailing item, selected Number/Bool/null/Array/Hash
 continuation, numeric selector and SDTFCE snapshots. Direct producer/String PASS43.
 Independent Rust22.2 follows; this is not full SESSION33 split-domain admission.
+
+## Rust22.2 partial completion
+
+Public intake reveals the ordinary helper was missing (unknown-helper warning/null)
+while eager argument effects already work. The producer now constructs fresh rows
+from existing split_string_for_arg, text tag and cloned captured typed fields;
+String-to-Array classification and min-two-RHS preflight enable receiver chains.
+Five native/restored/in-process-plan tests and four direct scalar String tests pass:
+shared valid chains, SDTFCE, copied/prior carried values, empty/trailing/regex and
+short free eager null controls. Existing Rust pure-split boundaries remain; no
+standalone generated crate or full SESSION33 matrix/admission claim. Dart22.3 next.

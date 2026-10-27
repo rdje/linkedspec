@@ -4,6 +4,8 @@ title: "Measured tagged-record and pure-split boundaries disagree across runtime
 answers:
   - "why does Perl scalar split_tagged_records call an undefined host function"
   - "which task repairs the tagged-record String to Array bridge"
+  - "does Rust support the split_tagged_records producer and String receiver"
+  - "why did Rust return null for split_tagged_records"
   - "why does Perl split_tagged_records evaluate a field more than once"
   - "why do tagged records drop trailing empty items on Perl"
   - "which task owns tagged record evaluation and split parity"
@@ -11,9 +13,9 @@ answers:
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
 date: 2026-10-27
-status: bounded Perl eager producer and receiver repaired; full split-domain admission remains owned
+status: bounded Perl and Rust tagged-record producer/receiver implemented; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
-evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
+evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; Rust22.2 adds the missing producer/bridge; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
 reverify: "For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated."
 ---
 
@@ -30,6 +32,20 @@ fewer than two RHS operands before effects. Its shared valid/local shape native/
 regression passes12 assertions; Number/Bool/null/Array/Hash field continuations and
 SDTFCE source/operand/consumer order pass. SESSION33 retains full split-domain/cross-runtime/context admission.
 The old per-row/zero-field Perl results below describe the historical defect.
+
+## Rust bounded producer and bridge, October27
+
+TYPE22.2 public native intake returns null and unknown-helper warnings for the
+ordinary producer; engine.rs lacked the helper arm and String-to-Array role.
+It now uses existing split_string_for_arg items, a text tag and cloned captured
+fields to construct fresh record Arrays. Generic eager argument evaluation already
+retained source/delimiter/tag/field snapshots; no global conversion/split policy
+changes. Receiver calls need delimiter/tag before any effects. Five authored
+native/restored/in-process-plan tests pass, including shared selected-field chains,
+SDTFCE, prior fields/copy, empty/trailing/regex and short free-call preservation;
+four direct scalar String tests pass. Reverify with tools/run_cargo_local.sh test
+--manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime
+--test tagged_record_receivers. Full SESSION33 admission remains separate.
 
 ## Historical producer and cross-runtime split observations
 

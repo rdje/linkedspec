@@ -5971,6 +5971,7 @@ impl Engine {
                     }
                     "clamp" | "replace_substr" => call.args.len() != 2,
                     "substr" => !(1..=2).contains(&call.args.len()),
+                    "split_tagged_records" => call.args.len() < 2,
                     "add" | "mul" | "coalesce" | "cat" => call.args.is_empty(),
                     _ => false,
                 }) {
@@ -6405,7 +6406,7 @@ impl Engine {
     }
 
     fn is_string_receiver_array_returning_method(method: &str) -> bool {
-        matches!(method, "split")
+        matches!(method, "split" | "split_tagged_records")
     }
 
     fn is_string_receiver_terminal_method(method: &str) -> bool {
@@ -8870,6 +8871,27 @@ impl Engine {
                 } else {
                     Ok(RuntimeValue::Array(vec![]))
                 }
+            }
+            "split_tagged_records" => {
+                if args.len() < 3 {
+                    return Ok(RuntimeValue::Undef);
+                }
+                // Arguments are already owned, eager snapshots. Reuse pure
+                // split's literal/regex and boundary policy before making rows.
+                let source = args[0].to_str();
+                let items = split_string_for_arg(&source, raw_args, 1, &args[1])?;
+                let tag = RuntimeValue::Scalar(args[2].to_str());
+                let records = items
+                    .into_iter()
+                    .map(|item| {
+                        let mut record = Vec::with_capacity(args.len() - 1);
+                        record.push(tag.clone());
+                        record.push(item);
+                        record.extend_from_slice(&args[3..]);
+                        RuntimeValue::Array(record)
+                    })
+                    .collect();
+                Ok(RuntimeValue::Array(records))
             }
             "split_each" => {
                 if let Some(arr) = args.first() {
