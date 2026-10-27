@@ -1325,7 +1325,7 @@ table because its runtime behavior is to terminate the parser process.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
-- **Returns**: value of the selected branch in supported value positions. Ordinary Perl/Rust/Dart/Julia inline results support direct reads and compatible methods: `if(true,["a","b"],[])[-1].uppercase()` returns `"B"`; missing/no-fallback selections yield undef. Conditions/payloads retain their lazy order and kinds.
+- **Returns**: value of the selected branch in supported value positions. Ordinary Perl/Rust/Dart/Julia/Lua (available PUC5.5.1/LuaJIT) inline results support direct reads and compatible methods: `if(true,["a","b"],[])[-1].uppercase()` returns `"B"`; missing/no-fallback selections yield undef. Conditions/payloads retain their lazy order and kinds.
 - **Behavior**: Evaluates conditions left-to-right and evaluates only the selected branch payload. First true
   condition's branch is returned. If none match, the `else(...)` branch or plain third-argument fallback is
   returned. If no fallback matches, returns `undef`.
@@ -1359,7 +1359,7 @@ table because its runtime behavior is to terminate the parser process.
 
 ### `switch(expr, case(val, body), default(body))`
 - **Signature**: Inline composite form.
-- **Returns**: value of the first matching `case` body, or the `default` body when no case matches. Ordinary Perl/Rust/Dart/Julia inline results support direct reads: `switch("k",case("k",{"items":["a","b"]}))["items"][-1].uppercase()` returns `"B"`. The subject and selected source evaluate once; later selectors and methods retain their normal order and kind guards.
+- **Returns**: value of the first matching `case` body, or the `default` body when no case matches. Ordinary Perl/Rust/Dart/Julia/Lua (available PUC5.5.1/LuaJIT) inline results support direct reads: `switch("k",case("k",{"items":["a","b"]}))["items"][-1].uppercase()` returns `"B"`. The subject and selected source evaluate once; later selectors and methods retain their normal order and kind guards.
 - **Behavior**: Evaluates `expr` once, compares it to each `case(val)` in order, and evaluates only the
   selected branch payload. A bare switch subject such as `switch(kind, ...)` reads scalar `kind`; a bare case
   value such as `case(foo, body)` is a literal tag named `foo`, matching attached-switch case labels.

@@ -14,11 +14,14 @@ answers:
   - how does Rust distinguish inline conditional result guards from headers
   - why must Dart inline result guards inspect sourceMethod and trailingBlockArg
   - how does Julia retain inline conditional source role boundaries
+  - why do Lua inline conditional headers and aliases retain different source errors
 date: 2026-10-27
-status: producer26.0 repaired; bounded Perl26.1/Rust26.2/Dart26.3/Julia26.4 implemented; safe Lua26.5 next
+status: producer26.0 and all five bounded backend children implemented; full admission23.4 separate
 tags: [perl, actionir, control, selection, fluent, laziness]
 evidence: "TYPE23.1.6 finite public native/fresh/descriptor/substitution and AST intake at fcfb7dcdc; ADR0007/current inline-value authority."
 reverify:
+  - "bash tools/run_lua_project_data.sh puc lua/test/conditional_selection_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/conditional_selection_test.lua"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/conditional_selection_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/conditional_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test conditional_selection"
@@ -119,3 +122,16 @@ direct computed25 pass. Shared kinds/CTIM/snapshots/IJ/bridges and old header/
 i-alias/bound/flat counts remain. --depwarn=error compilation/registration pass;
 no parser/read/compiled format, truth/equality or deferred grammar change.
 Safe Lua26.5 follows; full admission stays23.4.
+
+
+Safe Lua26.5 independently observes nine RED execution comparisons per available
+host while lazy/local-return/parser/source-error controls already work. Its existing
+private classifier table now checks canonical name/source_method, payload arity and
+no trailing block, enabling existing actual-kind guards. Four execution groups pass
+native/plan/fresh on PUC5.5.1/LuaJIT2.1.1788460057; six native parser assertions and
+two source-error groups on those routes also pass, as do six direct computed groups.
+Unlike the other backend controls, Lua if(true)[0] retains helper_arity_mismatch
+(native typed fields, generated text), and i(...) retains unsupported-helper errors.
+Switch with only its subject retains count0. Bound/flat counts0 remain. No new
+chunk locals, parser/read/format/truth/equality/deferred policy or declared5.4 claim.
+All five bounded26 children are complete; full admission remains23.4.

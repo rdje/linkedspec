@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2/Dart26.3/Julia26.4 implemented/targeted-checked; safe Lua26.5 next.
+Status: frozen ordinary target; prerequisite26.0 and all five bounded backend children implemented/targeted-checked; full admission23.4 separate.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -106,3 +106,15 @@ name/source_method/arity/trailing_block_arg fields. Four execution cases pass
 native/plan/fresh modules and six native parser assertions retain role metadata;
 strict equality keeps Bool separate from Number. New18 and direct computed25 pass
 with --depwarn=error and normal registration. No parser/read/compiled format change.
+
+
+## Bounded safe Lua selection
+
+Lua26.5 extends its existing private classifier table with canonical name/source_method,
+payload arity and no trailing block. PUC5.5.1 and LuaJIT2.1.1788460057 pass four
+execution groups on native/plan/fresh, six native parser-role assertions and two
+source-error groups across those routes; six direct computed groups also pass.
+A one-operand switch retains count0, a one-operand if retains typed arity failure,
+and i retains unsupported-helper failure. These are existing Lua policies, not
+normalized to other backends. luac/loadfile pass with no new chunk locals or
+parser/read/format changes. Declared5.4/full admission remain separately owned.

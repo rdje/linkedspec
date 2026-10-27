@@ -3432,6 +3432,10 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     -- Static owners preserve legacy unknown bound-call result policies.
     if engine.compiled_spec.function_registry:has_name(receiver.name) then return true end
     local name = action_contracts.canonical_action_helper_name(receiver.name)
+    if name == "if" or name == "switch" then
+      return receiver.name == name and (receiver.source_method or receiver.name) == name and
+        not receiver.trailing_block_arg and #(receiver.args or {}) >= 2
+    end
     if ARRAY_SPLICE_HELPERS[name] then return false end
     return not not (is_pure_string_helper(name) or PURE_ARRAY_HELPERS[name] or PURE_HASH_HELPERS[name] or
       LOGICAL_HELPERS[name] or scalar_numeric.supports(name) or scalar_numeric.supports_reducer(name) or
