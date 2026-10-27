@@ -1501,10 +1501,15 @@ sub _user_function_registry_by_name {
 
 # Static data-helper ownership for ordinary computed reads. Reuse the same
 # known-name resolver that reserves helpers against registered functions, and
-# the semantic value families; trace labels are not a grammar contract.
+# the semantic value families; trace labels are not a grammar contract. Registered
+# functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
- my ($name) = @_;
+ my ($name, $registry) = @_;
  my $method = _actionir_ast_known_value_call_method($name);
+ if (!defined($method)
+     && defined(_user_function_definition_for_name({user_function_registry => $registry}, $name))) {
+  return $name;
+ }
  return undef unless defined($method);
  # These helpers expose list splices rather than one boxed source value.
  return undef if $method =~ /\Aflat(?:_array|_hash)?\z/o;
@@ -1527,6 +1532,34 @@ sub _user_function_definition_for_name {
  return undef unless ref($definition) eq 'HASH'
               && ($definition->{kind} // '') eq 'user_function_definition';
  return $definition
+}
+
+# Staged bodies precede the complete registry. Give analysis and emission the
+# same contextual parse without modifying that stored AST or its parse job.
+# Keep this separate from name lookup: the parser itself consults that lookup.
+sub _user_function_definition_for_lowering {
+ my ($deps, $definition) = @_;
+ return $definition unless ref($definition) eq 'HASH';
+ my $body = $definition->{body_ast};
+ return $definition unless ref($body) eq 'HASH'
+  && defined($body->{source}) && ref($body->{source_span}) eq 'HASH';
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST::Parser');
+ no warnings 'once';
+ local $LinkedSpec::ActionIR::AST::Parser::_registered_function_registry = $deps->{user_function_registry};
+ my $contextual_body = LinkedSpec::ActionIR::AST::Parser::parse_action_block(
+  $body->{source}, {base_start => $body->{source_span}{start}});
+ return {%$definition, body_ast => $contextual_body}
+}
+
+# A registered function's contextual final block runs in CodeblockRuntime.
+# Its existing vocabulary must not acquire ordinary registered-result reads.
+sub _actionir_ast_registered_codeblock_argument {
+ my ($registry, $name, $before_count) = @_;
+ my $definition = _user_function_definition_for_name({user_function_registry => $registry}, $name);
+ return 0 unless ref($definition) eq 'HASH';
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::CallableContract');
+ return LinkedSpec::CallableContract::accepts_argument_count(
+  LinkedSpec::CallableContract::user_function_contract($definition), $before_count)
 }
 
 sub _contextual_codeblock_contract {
@@ -1667,7 +1700,8 @@ sub _codeblock_runtime_invocation_expr {
  # Internal argument/context names must survive nested inlined function bodies.
  # Keep them outside the complete registry's authored local/parameter inventory.
  my %names = map { $_ => 1 } @{$deps->{bare_symbol_names} || []};
- foreach my $definition (values %$definitions) {
+ foreach my $stored_definition (values %$definitions) {
+  my $definition = _user_function_definition_for_lowering($deps, $stored_definition);
   my $signature = _user_function_call_signature($definition);
   next unless ref($signature) eq 'HASH';
   $names{$_} = 1 for @{$signature->{positional_params}};
@@ -3630,6 +3664,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    push @lowered_args, $arg_expr;
   }
 
+  $definition = _user_function_definition_for_lowering($deps, $definition);
   my $body_ast = $definition->{body_ast};
   my $statements = ref($body_ast) eq 'HASH' ? $body_ast->{statements} : undef;
   return _actionir_ast_unsupported_helper_expr($name)

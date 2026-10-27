@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl computed data-helper reads implemented/targeted-checked; full target still requires registered-function source24.1.2.2. Existing callable/deferred boundaries retained.
+Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
 
 ## Latest Completed Slice
 
-Perl computed selection now accepts statically governed ordinary data-helper calls through the existing known-name and semantic value-method/Numeric owners, plus data constructors/logical helpers. Parser lazily consults the purpose-specific owner with error preservation after the deferred fence; unknown/bound/custom registered calls, list splices and context/control/rule sources retain their existing paths. New native/fresh helper/regex/constructor/copy/kind/effect/scope/ownership/AST/source-error/readiness regression PASS43 after actual compile/AST RED; cold incoming error and retired array(items)[0] rejection remain. Frozen four callable values1/2/0/0/raw1 PASS5 top-level and direct noncall/deferred PASS58; changed module syntax/book/history/fast staged continuity pass. A separate unchanged full-target probe confirms entries() indexing still fails native handler/fresh-load compilation (raw1/unresolved0/ready0); registered-function24.1.2.2 owns that required class before parent Perl/Rust handoff. Known SESSION7 EPERM recurs in that completed diagnostic job, without a lifecycle/receipt claim. No AST/schema fields, oracle weakening, new deferred operation or bound-callable read/coercion/status change. Book/bounded contract/facts/map/roadmap/task/live align; full admission and mandatory new Perl registration23.4.1 remain separate.
+Perl computed reads now recognize static registered function results through the actual scoped compilation registry, preserving helper precedence and unrelated bound-callable readers. Private contextual function-body views align declaration/presence/mutation analyses, emission and runtime private-name inventory while retaining original staged AST/jobs/source spans. The prototype scope leak and contextual deferred false readiness are repaired; existing final-codeblock signature/count contracts fence new registered-name recognition in callback bodies. Native/fresh unchanged full target plus strict scope/snapshot/kind/rest/ownership/error/registry/private-name/Unicode/staged-immutability controls PASS76, after original feature RED20/44 and prototype scope/context RED10/62. Direct helper/noncall/deferred/frozen callable tests PASS106, preserving four values1/2/0/0/raw1. Full target descriptor raw0/unresolved0/ready1 and public scope probe [b,9] agree; generated source declares the selector local. Changed module syntax/book/history/fast staged continuity pass. Bounded Perl24.1 children are complete; independently assess Rust24.2 next. No new AST/schema field, deferred executor vocabulary, metadata waiver or callable coercion change. Full source/context/portable/canonical admission23.4, required Perl registrations23.4.1, pressure repair and declared Lua5.4 remain separate; no push.
 
 ## Next Action
 
-Activate registered-function computed selection24.1.2.2 from this clean helper commit. Full unchanged fixture still fails compilation at entries() suffix, raw1/unresolved0/ready0; inspect canonical registry/context/parser/raw-source/provenance plumbing before changes and split again if it exceeds a bounded feature. Enable only statically registered result sources without runtime-value callable classification or leaked registry scope. Preserve signatures/recursion/source/kinds/scoped effects, exact four callable values/raw1, deferred fence and helper/noncall controls; retain full target oracle. Small native/fresh/direct/syntax checks/docs/commit, then complete Perl parent and independently assess Rust24.2. Full source/context/portable/canonical admission/pressure/Perl registration/Lua5.4 remain separate; no push.
+Activate Rust computed-selection24.2 from the clean completed Perl boundary; read canonical value_access/source/selector/receiver ownership and Rust guide/tests, run the unchanged shared target on native/restored/generated routes, then implement only the next bounded gap. Preserve signed/kind/effect/named/callable/deferred/grouping/lvalue/copy/format boundaries. Small compile/direct checks/docs/commit, then Dart24.3. Full source/context/portable/canonical admission, pressure repair, required Perl registrations and Lua5.4 stay separate; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.2` — Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.1` — Perl computed data-helper reads implemented/targeted-checked; full target still requires registered-function source24.1.2.2. Existing callable/deferred boundaries retained.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.5` — All bounded approved value-copy backend children complete; safe Lua copy guards pass on PUC5.5.1/LuaJIT. Resume owned direct computed-call selection24.1.2.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.4` — Julia copy4 retains healthy primitive production and guards actual copied-result consumers; focused native/plan/fresh checks pass. Safe Lua5 is next.
@@ -29,7 +30,6 @@ Activate registered-function computed selection24.1.2.2 from this clean helper c
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.5` — Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.4` — Julia23.4 logical receiver shapes are repaired/targeted-checked; safe Lua23.5 next, then scalar-copy domain owner1.2.1.4.2.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.23.3` — Dart23.3 eager logical receiver methods are implemented/targeted-checked; Julia23.4 next, with scalar-copy domain review owned after family23.
 
 ## History
 

@@ -16,13 +16,16 @@ answers:
   - how does Perl preserve deferred literal AST vocabulary
   - how does Perl distinguish computed data helpers from bound callables
   - does Perl direct registered function indexing work after helper selection
+  - why do registered result selectors leak function local variables
+  - how are contextual callback bodies kept outside registered computed reads
 date: 2026-10-27
-status: Perl noncall and governed data-helper sources checked; registered calls/full admission open
+status: Perl bounded noncall/helper/registered sources checked; independent backend/full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_noncall_contract.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_helper_calls.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_functions.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
 ---
@@ -90,3 +93,22 @@ registered entries() selection, raw1/unresolved0/ready0;24.1.2.2 owns that requi
 source class before complete Perl/Rust handoff. Full source/context/portable
 admission remains23.4. Known SESSION7 EPERM recurs in the full diagnostic job;
 its eventual complete output is consumed, without any lifecycle/receipt claim.
+
+24.1.2.2 completes bounded registered result sources through an explicitly scoped
+Parser registry mirrored from EmitContext's compilation frame. Static helper
+ownership remains first; pure definition lookup never parses a body. Staged
+function ASTs precede the full registry: lowering alone reparsed a new read while
+local/presence/mutation analyses saw raw source, leaking selector assignments.
+A private contextual body view now feeds those analyses, emission and runtime
+function-table private-name inventory without modifying stored definitions/jobs.
+The original source/span is retained, including Unicode scalar offsets.
+
+The new registry context also promoted final contextual callback reads to an
+unsupported value_access with raw0/ready1. CallableContract's existing registered
+signature/count contract now excludes new registered-name recognition only in
+that deferred final-block role; explicit literals retain their fence, ordinary
+argument/inline blocks retain composition. Attached and parenthesized callbacks
+keep raw_perl errors/raw1/unready. Native/fresh full target and finite scope/kind/
+snapshot/rest/private-name/registry/error controls pass76. No new deferred
+operation, serialized field, bound-callable reader or metadata waiver. Full
+source/context/portable admission remains23.4; independently assess Rust24.2 next.

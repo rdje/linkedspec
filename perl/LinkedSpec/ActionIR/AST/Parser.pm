@@ -27,6 +27,7 @@ use Scalar::Util ();
 # public source/source_span fields and equal copies cannot make that selection.
 our ($_construction_scope, $_construction_recorder, $_construction_input, $_provided_parse_input);
 our $_parsing_deferred_literal_body;
+our $_registered_function_registry;
 
 sub _same_construction_reference {
  my ($left, $right) = @_;
@@ -574,12 +575,17 @@ sub _parse_trailing_block_call_expr {
  my $open_idx = index($head_trimmed, '(');
  return undef if $open_idx < 0;
  my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method});
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method}, undef, 1);
 
  my $block_start = $start + $attached->{open_idx};
  my $block_end = $start + $attached->{close_idx} + 1;
  my $block_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
- my $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
+ my $block;
+ {
+  local $_registered_function_registry = _registered_codeblock_argument($call->{method}, scalar @args)
+   ? undef : $_registered_function_registry;
+  $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
+ }
  push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
 
  return _node(
@@ -825,8 +831,18 @@ sub _skip_switch_branch_separators {
  return $pos
 }
 
+sub _registered_codeblock_argument {
+ my ($name, $before_count) = @_;
+ return 0 unless ref($_registered_function_registry) eq 'HASH';
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
+  return LinkedSpec::ActionIR::MethodLowering::_actionir_ast_registered_codeblock_argument(
+   $_registered_function_registry, $name, $before_count);
+ })
+}
+
 sub _parse_arg_exprs {
- my ($payload, $payload_start, $method, $input) = @_;
+ my ($payload, $payload_start, $method, $input, $has_attached_block) = @_;
  my ($parts, $frames);
  if (_valid_parser_input($input) && $input->{raw} eq $payload) {
   _require_method_expr_pkg() unless LinkedSpec::ActionIR::MethodExpr->can('_split_csv_with_source_frames');
@@ -855,7 +871,15 @@ sub _parse_arg_exprs {
   # A recognized pattern owns the argument before fluent-dot parsing begins.
   my $literal = $pattern_starts{$arg_offset}
    ? _parse_literal_expr($arg, $start, $start + length($arg)) : undef;
-  push @args, $literal // parse_action_expr($arg, { base_start => $start });
+  my $node = $literal // parse_action_expr($arg, { base_start => $start });
+  if (!$has_attached_block && $index == @$parts && ($node->{kind} // '') eq 'block_value'
+      && _registered_codeblock_argument($method, @$parts - 1)) {
+   # Identify the block through the ordinary grammar first; Hash values and
+   # expressions producing a callback are still ordinary evaluated arguments.
+   local $_registered_function_registry;
+   $node = parse_action_expr($arg, {base_start => $start});
+  }
+  push @args, $node;
   $cursor = $arg_offset + length($arg);
  }
  return @args
@@ -1599,11 +1623,12 @@ sub _parse_value_access_expr {
     my ($prefix, $prefix_start, $prefix_end) = _trim_with_offsets(substr($text, 0, $idx), $start);
     my $receiver = _parse_expr($prefix, $prefix_start, $prefix_end);
     # Unknown/bound calls retain their reader/coercion/raw-status path. Only
-    # statically governed data helpers can join the ordinary typed reader here.
+    # governed helpers or functions in this compilation's registry join it.
     my $data_call = ($receiver->{kind} // '') eq 'call'
      && LinkedSpec::OwnerDispatch::call_preserving_err(sub {
       LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
-      return LinkedSpec::ActionIR::MethodLowering::_actionir_ast_computed_data_call_method($receiver->{name});
+      return LinkedSpec::ActionIR::MethodLowering::_actionir_ast_computed_data_call_method(
+       $receiver->{name}, $_registered_function_registry);
      });
     if ($data_call || ($receiver->{kind} // '') =~ /\A(?:fluent_chain|array_literal|hash_literal|block_value|value_access)\z/o) {
      return _node('value_access', $text, $start, $end,

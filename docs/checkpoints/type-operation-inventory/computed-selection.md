@@ -142,3 +142,27 @@ A cold parser preserves its incoming error. Complete computed_selection_values
 still fails native handler/fresh-load compilation at registered entries() indexing,
 raw1/unresolved0/ready0;24.1.2.2 owns that required source class before Perl/Rust
 handoff. No full-target oracle, callable value/marker or deferred boundary is weakened.
+
+## Bounded registered-function implementation
+
+24.1.2.2 resolves otherwise unknown call names only against the actual compilation
+registry. EmitContext's existing scoped registry frame now also covers Parser's
+declaration, lowering and raw-dependency parses, with restoration on every exit.
+Function definitions retain their original staged AST/job/payload. A private
+lowering view reparses the body at its original source span under that registry;
+declarations, presence/mutation targets, emission and deferred-dispatch private-name
+inventory consume this contextual view. Pure name lookup never parses bodies.
+
+The prototype leaked selector writes from a previously raw function body and
+promoted contextual deferred reads to value_access/raw0/ready1. Both are repaired:
+function-local writes stay local and existing final-codeblock signatures/counts
+fence new registered-name recognition in attached/parenthesized callback bodies.
+Explicit literals retain their earlier fence. Ordinary argument/inline blocks
+still compose; no deferred executor operation or AST/schema field is added.
+
+Native/fresh full target, scoped snapshots/kinds/rest, static-name precedence,
+registry/error restoration, private-name collision and source-span/unchanged-staged
+controls pass. Existing signature/recursion diagnostics and four bound-callable
+values1/2/0/0/raw1 remain. This completes the bounded Perl implementation children;
+full source/context/portable admission and required Perl registration remain23.4.
+Rust24.2 must be assessed independently before claiming its computed-source support.

@@ -2618,6 +2618,12 @@ sub build_rule_ir_emit_context {
  local $__ls_current_function_registry = ref($rule_ir->{function_registry}) eq 'HASH'
   ? $rule_ir->{function_registry}
   : undef;
+ # All parsers in this compilation frame, including readiness/declaration
+ # visitors, share the actual registry. Explicit undef clears outer names for
+ # rules without functions; local restores the caller on every exit. No eager
+ # Parser load or runtime environment is captured by this context reference.
+ no warnings 'once';
+ local $LinkedSpec::ActionIR::AST::Parser::_registered_function_registry = $__ls_current_function_registry;
  local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
  my $write_targets = _collect_action_write_target_sets($rule_ir);
  my %presence_targets = (

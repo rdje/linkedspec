@@ -468,12 +468,13 @@ return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 
 Use `binding[index]` or nested access for a working Array/Hash binding; older path helpers are retirement-bound.
 
-Perl supports brackets on fluent results, Array/Hash literals, immediate blocks and statically governed data-helper calls. String/Array/Hash value-method helpers, numeric/logical helpers and Array/Hash constructors reuse their existing source/signature rules. The source evaluates once, selectors run left-to-right, and selected values retain their kinds for compatible methods; `copy([false])[0]` remains false. Reads do not create storage; missing/out-of-range/wrong-kind entries yield undef. Explicit deferred literals keep their previous grammar and diagnostics. Registered function-result indexing is still being integrated; unknown bound calls retain their existing reader and status. List splices, context/control/rule helpers, grouping/writes and complete source/context/portable admission remain separate.
+Perl supports brackets on fluent results, Array/Hash literals, immediate blocks, statically governed data-helper calls and registered function results. String/Array/Hash value-method helpers, numeric/logical helpers and Array/Hash constructors reuse their existing source/signature rules. The source evaluates once, selectors run left-to-right, and selected values retain their kinds for compatible methods; `copy([false])[0]` remains false. Reads do not create storage; missing/out-of-range/wrong-kind entries yield undef. Selector assignments inside a function stay local. Explicit deferred literals and registered contextual final blocks keep their previous call-result grammar and diagnostics; unregistered bound calls retain their existing reader and status. List splices, context/control/rule helpers, grouping/writes and complete source/context/portable admission remain separate.
 
 ```text
 split("aXb",/[x]/i)[1].uppercase()                # "B"
 hash("items",["a","b"])["items"][-1].uppercase()    # "B"
-[[3,1]][0].sorted().last().add(1)                  # 4
+fn entries() {return([" a "," b "])}
+Top:: I {return(entries()[-1].trim().uppercase())} # "B" for input x
 ```
 
 Example:
