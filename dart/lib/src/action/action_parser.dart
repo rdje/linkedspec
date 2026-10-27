@@ -137,6 +137,11 @@ final class _ActionParser {
       return receiverMutation;
     }
 
+    final valueAccess = _parseValueAccess(text, start);
+    if (valueAccess != null) {
+      return valueAccess;
+    }
+
     final chain = _parseFluentChain(text, start);
     if (chain != null) {
       return chain;
@@ -164,11 +169,6 @@ final class _ActionParser {
     final control = _parseControlFlow(text, start);
     if (control != null) {
       return control;
-    }
-
-    final valueAccess = _parseCallResultAccess(text, start);
-    if (valueAccess != null) {
-      return valueAccess;
     }
 
     final call = _parseCall(text, start);
@@ -792,37 +792,42 @@ final class _ActionParser {
     }
   }
 
-  ActionValueAccessExpr? _parseCallResultAccess(String text, int start) {
-    final open = _findTopLevelOpenParen(text);
-    if (open == null) {
-      return null;
+  ActionValueAccessExpr? _parseValueAccess(String text, int start) {
+    final state = _ScanState();
+    for (var index = 0; index < text.length; index += 1) {
+      final ch = text[index];
+      if (index > 0 &&
+          state.quote == null &&
+          !state.inRegex &&
+          state.isTopLevel &&
+          ch == '[') {
+        final prefix = _trimWithOffsets(text.substring(0, index), start);
+        // Keep grouped-postfix reconciliation with its existing owner.
+        if (!prefix.text.startsWith('(')) {
+          final receiver =
+              _parseCall(prefix.text, prefix.start) ??
+              _child(prefix.text, prefix.start).parseExpression();
+          if (receiver is ActionCallExpr ||
+              receiver is ActionFluentChainExpr ||
+              receiver is ActionArrayLiteralExpr ||
+              receiver is ActionHashLiteralExpr ||
+              receiver is ActionBlockValueExpr ||
+              receiver is ActionValueAccessExpr) {
+            final segments = _parseAccessSegments(text, index, start);
+            if (segments != null && segments.isNotEmpty) {
+              return ActionValueAccessExpr(
+                source: text,
+                sourceSpan: _span(start, start + text.length),
+                receiver: receiver,
+                segments: segments,
+              );
+            }
+          }
+        }
+      }
+      _consumeScanChar(state, text, index, ch);
     }
-    final close = _findMatchingDelimiter(text, open, '(', ')');
-    if (close == null) {
-      return null;
-    }
-    var accessStart = close + 1;
-    while (accessStart < text.length && text[accessStart].trim().isEmpty) {
-      accessStart += 1;
-    }
-    if (accessStart == text.length || text[accessStart] != '[') {
-      return null;
-    }
-    final receiverSource = text.substring(0, close + 1);
-    final receiver = _parseCall(receiverSource, start);
-    if (receiver == null) {
-      return null;
-    }
-    final segments = _parseAccessSegments(text, accessStart, start);
-    if (segments == null || segments.isEmpty) {
-      return null;
-    }
-    return ActionValueAccessExpr(
-      source: text,
-      sourceSpan: _span(start, start + text.length),
-      receiver: receiver,
-      segments: segments,
-    );
+    return null;
   }
 
   ActionExpr? _parseVariableOrAccess(String text, int start) {
@@ -1144,14 +1149,11 @@ final class _ActionParser {
     if (segments.length <= 1) {
       return null;
     }
-    final receiverSegment = segments.first;
-    final receiver = _child(receiverSegment.text, start + receiverSegment.start)
-        ._parseExprWithoutChain(
-          receiverSegment.text,
-          start + receiverSegment.start,
-        );
-    final calls = <ActionFluentCall>[];
-    for (var index = 1; index < segments.length; index += 1) {
+    var receiverEnd = segments.first.end;
+    final reversedCalls = <ActionFluentCall>[];
+    // Keep every contiguous method in one chain for existing arity preflight.
+    // A segment ending in brackets belongs to the recursively parsed receiver.
+    for (var index = segments.length - 1; index >= 1; index -= 1) {
       final segment = segments[index];
       final call = _parseFluentCallSegment(
         segment.text,
@@ -1160,19 +1162,32 @@ final class _ActionParser {
         allowBareIdentifier: index == segments.length - 1,
       );
       if (call == null) {
-        return ActionRawExpr(
-          source: text,
-          sourceSpan: _span(start, start + text.length),
-          reason: 'invalid_fluent_chain',
-        );
+        receiverEnd = segment.end;
+        break;
       }
-      calls.add(call);
+      reversedCalls.add(call);
+    }
+    if (reversedCalls.isEmpty) {
+      return ActionRawExpr(
+        source: text,
+        sourceSpan: _span(start, start + text.length),
+        reason: 'invalid_fluent_chain',
+      );
+    }
+    final prefix = _trimWithOffsets(text.substring(0, receiverEnd), start);
+    final receiver = _child(prefix.text, prefix.start).parseExpression();
+    if (receiver is ActionRawExpr && receiverEnd != segments.first.end) {
+      return ActionRawExpr(
+        source: text,
+        sourceSpan: _span(start, start + text.length),
+        reason: 'invalid_fluent_chain',
+      );
     }
     return ActionFluentChainExpr(
       source: text,
       sourceSpan: _span(start, start + text.length),
       receiver: receiver,
-      calls: calls,
+      calls: reversedCalls.reversed.toList(),
     );
   }
 

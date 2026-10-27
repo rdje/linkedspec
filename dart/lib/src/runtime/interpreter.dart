@@ -3828,9 +3828,10 @@ final class LinkedSpecRuntimeEngine {
           context,
           ruleLabel,
           currentEdge: currentEdge,
-          copiedResult:
-              receiver is ActionCallExpr &&
-              canonicalActionHelperName(receiver.name) == 'copy',
+          kindGuardedResult:
+              _isOrdinaryComputedRead(receiver) ||
+              (receiver is ActionCallExpr &&
+                  canonicalActionHelperName(receiver.name) == 'copy'),
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -5137,21 +5138,44 @@ final class LinkedSpecRuntimeEngine {
     }
   }
 
+  bool _isOrdinaryComputedRead(ActionExpr expression) {
+    // Static owners preserve legacy unknown bound-call result policies.
+    if (expression is! ActionValueAccessExpr) {
+      return false;
+    }
+    final receiver = expression.receiver;
+    if (receiver is ActionCallExpr) {
+      if (compiledSpec.functionRegistry.hasName(receiver.name)) {
+        return true;
+      }
+      final helper = canonicalActionHelperName(receiver.name);
+      if (const {'flat', 'flat_array', 'flat_hash'}.contains(helper)) {
+        return false;
+      }
+      return _runtimeReceiverHelperNames.contains(helper) ||
+          const {'array', 'hash', 'copy', 'and', 'or', 'not'}.contains(helper);
+    }
+    if (receiver is ActionValueAccessExpr) {
+      return _isOrdinaryComputedRead(receiver);
+    }
+    return true;
+  }
+
   Object? _evaluateFluentCallsWithValue(
     Object? value,
     Iterable<ActionFluentCall> calls,
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
-    bool copiedResult = false,
+    bool kindGuardedResult = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Reduced and copied values retain their actual kind through bridges.
+      // Reduced, copied and computed values retain actual kinds through bridges.
       // Validate container-only consumers before evaluating their operands.
-      if ((reductionResult || copiedResult) &&
+      if ((reductionResult || kindGuardedResult) &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
@@ -5205,7 +5229,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       reductionResult = reductionResult || helper == 'reduce_leaves';
-      copiedResult = copiedResult || helper == 'copy';
+      kindGuardedResult = kindGuardedResult || helper == 'copy';
       scalarResult =
           value is bool ||
           ((scalarResult || mayProduceScalar) &&

@@ -20,8 +20,10 @@ answers:
   - how are contextual callback bodies kept outside registered computed reads
   - why does Rust reject brackets after a split result or array literal
   - how do Rust computed result guards preserve old bound call counts
+  - why does Dart split result indexing become an invalid fluent chain
+  - how does Dart avoid recursion when a fluent suffix is invalid
 date: 2026-10-27
-status: Perl and Rust bounded computed sources checked; Dart/Julia/Lua/full admission open
+status: Perl/Rust/Dart bounded computed sources checked; Julia/Lua/full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
@@ -31,6 +33,7 @@ reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test computed_selection"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/computed_selection_test.dart"
 ---
 
 At d98e139d7, named signed/typed selected continuations work on public Perl
@@ -129,3 +132,15 @@ RED establish that boundary. No full-checkout replay or runtime-value classifier
 Native/restored/generated-plan checks retain the full fixture, kinds/effects/
 scopes/bridges/with/callable controls and Unicode regex composition. No new AST
 field, evaluator operation or standalone emitted-source admission; Dart24.3 follows.
+
+Dart24.3 likewise had only direct-call access and required each fluent segment to
+be a complete call. Its existing delimiter/access-segment owners now parse supported
+computed prefixes; maximal contiguous method suffixes retain preflight and recurse
+into shorter receiver sources. Empty invalid suffixes must reject before recursion:
+the initial candidate's Stack Overflow is reproduced and fixed. Named/grouped
+owners, ordinary raw receiver ASTs and existing source/span modes remain. The nested
+reader already owns snapshots/ordered selectors. Static registry/canonical receiver-
+helper ownership extends copied-result kind guards to ordinary computed reads,
+preserving unknown bound counts0/0. Full shared native/restored/plan and finite
+scope/effect/with/kind/regex/parser controls pass; no new serialized/evaluator field
+or standalone admission. Independent Julia24.4 is next; full admission remains23.4.

@@ -188,3 +188,25 @@ scopes, with guards, old bound-call results and Unicode regex-split/index/String
 composition. Direct selected/copy/signed-reader controls pass; the independently
 compiled emitted-crate test is excluded from this ordinary feature check. Complete
 source/context/portable/generated-source admission remains23.4. Dart24.3 is next.
+
+## Bounded Dart implementation
+
+24.3 replaces the call-only postfix recognizer with the existing delimiter scanner
+and access-segment owner for supported Call/fluent/Array/Hash/immediate-block
+prefixes. Fluent parsing retains the maximal contiguous suffix in one chain and
+recursively parses its computed receiver. Existing arity preflight, named/grouped
+owners, ordinary raw receivers and source/span modes remain. An introduced empty-
+suffix recursion is reproduced as Stack Overflow and repaired by rejecting that
+suffix before recursively parsing a receiver.
+
+The existing nested reader retains source snapshots and ordered selectors. Its
+continuations reuse copied-result actual-kind guards through scoped with and
+later bridges. Static canonical receiver-helper sets and registered function
+ownership leave direct unknown bound-call policies unchanged; no return-value
+classification, serialized field or evaluator operation is added.
+
+Native/restored-SpecFile/generated-plan full target and finite kind/effect/scope/
+regex/Unicode/with/bound-call/parser controls pass. Existing data-call wrong-kind
+results [null,[1],KV] become [null,null,empty] before rejected operands. Direct
+selected/copy/parser/signed-reader checks, format and fatal analysis pass. Julia24.4
+follows; full source/context/portable/standalone emitted admission remains23.4.
