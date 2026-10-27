@@ -11,10 +11,12 @@ answers:
   - "when does Lua resolve a final callback relative to scoped value"
   - "why are nested Lua with callbacks not codeblock recursion"
   - "does Lua detect recursion when a bound callback is passed through with"
+  - "can opaque Lua callback values escape recursion tracking"
+  - "why does an anonymous Lua callback lose unknown helper diagnostics"
   - "how are Lua emitted callable temporary files stored and cleaned"
   - "how many Lua temporary allocation owners exist"
-date: 2026-08-01
-status: current
+date: 2026-10-27
+status: named/emitted record evidence retained; opaque identity and anonymous errors open TYPE31.6.4.1
 tags: [lua, luajit, callable, codeblock, generated-source, serialization, storage, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.3 proves the unchanged typed callable record and runtime detail through native compilation, canonical effective-SpecFile JSON reconstruction, generated-plan execution, and independently loaded emitted modules on PUC Lua and LuaJIT. One executor handles bound and built-in final callbacks; anonymous callbacks omit helper-name recursion tracking, while callbacks passed by variable retain that binding identity and dynamic direct/mutual/helper-mediated recursion remains ordered. The focused consumer passes 449 assertions per ABI, complete Lua passes 177 TAP groups per ABI with CLI 66x2 and corpus 105/105, and the storage oracle registers the consumer as exact Lua owner 17. Neutral+20, signatures 3/9/7, capability 80/0/0, Knowledge Map 779/6,322, mdBook 79/14,048 KiB, all doctrines, and canonical Phase 0 1,031/1,031 in 809 seconds plus the four-backend callable matrix complete signoff."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh"
@@ -49,3 +51,24 @@ zero residue.
 Related facts: [[lua-callable-codeblock-dynamic-invocation]], [[lua-callable-codeblock-literal-state]],
 [[lua-generated-source-emitter-core]], [[lua-generated-source-fresh-process-isolation]],
 [[project-data-ssd-storage-locality]], [[callable-codeblock-four-backend-recurring-gate]].
+
+## October27 bounded extension — opaque values and anonymous activity
+
+TYPE31.6.4.0 independently preserves named helper/receiver/direct cycle rejection,
+contextual/explicit nesting and caller callback named value on available PUC5.5.1/
+LuaJIT2.1.1788460057. It also confirms opaque coalesce(cb,cb) callback reentry
+escapes tracking and returns the finite fallback after four entries on native/
+SpecFile-restored/plan/fresh routes. Anonymous with body missing() reports general
+runtime_execution instead of callable unknown_helper. execute_values tracks only
+nonfalse variable-name recursion_identity and omits anonymous frames; evaluate_call
+uses that same activity to select callable error routing.
+
+P1 TYPE31.6.4.1 owns both defects immediately before the Perl label/snapshot repairs
+and unrelated selection/parent31 admission. Preserve all invocation activity,
+existing named fences and inert callback identity without adding helper labels to
+recursion keys, environments or serialized fields. Exact producer/channels and the
+intentional finite oracle RED: callback-identity-remaining-intake.json.gz. Initial
+plain-table row serialization failure is probe setup, corrected using json.harray;
+it is not a runtime defect. Earlier broad recorded counts remain historical and do
+not cover these newly distinguished values. No new full runner/declared5.4/trace/
+context admission is claimed.

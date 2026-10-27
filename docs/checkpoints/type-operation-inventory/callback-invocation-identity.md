@@ -73,3 +73,15 @@ depwarn=error, typed fields and named/anonymous three-store failure cleanup. Exa
 producer/channels: callback-identity-julia-intake.json.gz. Existing Julia2.8.2 keeps
 reconstructed/isolated emitted/trace/public/context closeout open. Remaining scoped
 Perl/Lua31.6.4 follows before unrelated selection/parent admission.
+
+Remaining intake31.6.4.0 independently confirms Lua opaque coalesce callbacks
+escape active-cycle tracking and anonymous callback missing() loses typed callable
+routing on available PUC5.5.1/LuaJIT2.1.1788460057, across native/restored/plan/fresh.
+Perl preserves distinct nesting/origin detection but closes helper/receiver/accepted
+opaque-if cycles as cb→with; caller callback named value fails ordinary/deferred
+validation after premature scoped shadowing. Free deferred coalesce is excluded,
+with a separate false-readiness guard owner. Packet callback-identity-remaining-
+intake.json.gz retains sources/raw channels and independent oracle RED52 healthy/
+22 mismatches, including explicit setup and fresh-Perl error-reference limits.
+P1 repairs .4.1 Lua, .4.2 Perl labels and .4.3 Perl snapshots precede unrelated
+selection/parent31 admission; P2 excluded-helper readiness .4.4 precedes full23.4.

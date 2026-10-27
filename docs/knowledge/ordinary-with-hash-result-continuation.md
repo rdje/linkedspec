@@ -108,3 +108,10 @@ Hash/scope/effect control. Identity127/with15/input-cursor12 assertions pass on 
 recorded native/plan/fresh Module routes; named/anonymous failure cleanup and typed
 fields are included. See [[julia-callback-helper-recursion-identity-gap]] for retained
 independent RED and broad2.8.2/full23.4 limits. Remaining scoped31.6.4 follows.
+
+Remaining scoped intake31.6.4.0 confirms separate Lua opaque identity/anonymous
+error activity and Perl origin-label/caller-value snapshot defects. Named Lua and
+distinct nesting controls remain healthy. P1 .4.1-.3 own immediate repairs before
+unrelated selection; excluded deferred coalesce readiness .4.4 is P2 before full
+context23.4. See [[perl-with-callback-identity-and-snapshot]] and the updated Lua
+identity card; no result-family or deferred-vocabulary expansion is inferred.

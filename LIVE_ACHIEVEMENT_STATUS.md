@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
+Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 
 ## Latest Completed Slice
 
-Julia bounded callback identity31.6.3 is repaired after independent identity73 PASS/36 RED assertions and separate nested Hash12 PASS/3 RED. Private invocation frames retain optional bound names and owned inert callback records; record equality or the existing bound-name fence detects true cycles without helper-label collisions. All anonymous frames remain active for unknown-helper routing; existing argument order, finally cleanup, general equality and serialized literals stay unchanged. Candidate identity127/with15/input-cursor12 assertions pass native/plan/fresh Module with depwarn=error, typed code/stage/name/cycle/handler label fields, contextual/explicit/tree/Hash nesting, caller callback named value, and named/anonymous three-store failure restoration with unrelated effects preserved. Normal runner/book/target/retained producer and channels/canonical card/map/roadmap/task/live/resume align. Existing Julia2.8/.2.8.1 record bounded implementation; reconstructed carrier/isolated emitted/trace/public/context closeout stays2.8.2/full23.4. Remaining scoped Perl/Lua31.6.4 follows before unrelated selection/parent admission; no full suite/matrix/push.
+Independent remaining callback intake31.6.4.0 retains finite public sources and native/metadata/fresh or native/restored/plan/fresh channels at clean71055d22e. Lua opaque callback cycles escape tracking and anonymous missing helpers lose typed callback routing on both available safe hosts. Perl origin matches close cycles cb→with, and caller callback named value is shadowed before validation in ordinary/deferred compositions. Distinct nesting and existing direct/named controls are healthy. The expected-outcome oracle intentionally exits1 with52 healthy/22 mismatches; initial Lua untagged-row encoding is a corrected probe setup error, and Perl fresh HASH-reference text does not establish typed generated fields. P1 owners31.6.4.1 Lua identity/activity, .2 Perl cycle labels and .3 Perl snapshots precede unrelated selection/parent31 admission. P2 .4 guards excluded deferred-helper readiness before full23.4 without adding deferred coalesce rights. No production edit/full suite/matrix/admission. Book/target/packet/new Perl causal card/current Lua card/map and roadmap/task/live/resume align; Lua .4.1 next.
 
 ## Next Action
 
-Activate remaining scoped callback identity31.6.4 from the clean Julia boundary. Consult current Perl/Lua canonical identity owners and the bounded target before deriving facts. Independently check finite bound/opaque helper cycles, distinct explicit/contextual nesting, exact diagnostic/readiness/scope channels on available safe hosts; do not infer another backend defect. Own/split a confirmed gap before production, otherwise retain scoped success and resume roadmap feature selection. Existing callback/deferred/unknown-source/serialized boundaries and broad23.4 admission remain separate; focused compile/check/docs/commit, no full suite/matrix/push.
+Activate P1 safe Lua callback identity/activity31.6.4.1 from this clean intake boundary. Use retained independent opaque-cycle/anonymous-error failures and current Lua canonical record; implement private callback-aware invocation activity preserving existing named fences, copied inert values, argument order and scoped cleanup without new module-local pressure/schema/helpers/environments. Run small baseline/GREEN identity/typed/scope controls and direct with checks on available PUC5.5.1/LuaJIT, source/runner syntax and normal registration/docs/book/commit. Then Perl origin labels .4.2 and callback snapshot .4.3 before unrelated selection/parent31 admission. Excluded deferred readiness .4.4 stays before broad23.4, no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
@@ -29,7 +30,6 @@ Activate remaining scoped callback identity31.6.4 from the clean Julia boundary.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` — Perl Number repair and existing Rust/Dart compatibility targeted-checked; Julia30.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` — Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.1` — Perl entry/match Number reader composition implemented; independent Rust30.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.1.8` — Frozen Number reader composition30 selected; independent with-Hash continuation31 owned after30.
 
 ## History
 

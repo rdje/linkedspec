@@ -4355,6 +4355,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Mandatory admission prerequisites: Resolve document-pressure/freshness intake1.2.20.1 and invalid-callback phase/diagnostic parity1.2.1.4.1, alongside explicit Perl registration23.4.1 and all existing backend/context prerequisites. Ordinary feature checks and known baseline gate failures do not constitute canonical admission.
 
+  Admission prerequisite2026-10-27: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.4 must reconcile deferred-helper readiness (coalesce recognized statically but unknown in the current CodeblockRuntime vocabulary) without inheriting eager receiver18's excluded Codeblock/deferred domain. Immediate identity/snapshot .4.1-.3 remain ahead of unrelated feature selection.
+
 - ID: `TYPE-REFERENCE-BOOK.1.3`
   Status: `pending`
   Goal: Independently review the complete inventory and choose bounded canonical per-type sections and example requirements.
@@ -6789,7 +6791,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3 - preserve Julia callback identity through helper dispatch`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4`
-  Status: `pending`
+  Status: `in_progress` / activation71055d22ecc0ccc16d079fad1a18e1d9f247f4d0
   Priority: P1 after bounded Rust/Dart/Julia repairs, before unrelated selection/parent31 admission.
   Goal: Independently reconcile remaining Perl/Lua helper-mediated callback cycle and explicit-nesting controls.
   Acceptance: Consult current authority/canonical identity owners before deriving facts. Use only a few finite public controls for bound/opaque final callback values and distinct explicit/contextual nesting; retain exact error/readiness/scope channels and do not infer a defect from another backend. If a gap is confirmed, log/own/split bounded repairs before production. Existing callback/deferred/unknown-source/compiled-field boundaries stay unchanged; no whole identity/context admission.
@@ -6797,6 +6799,79 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small finite authored public diagnostic/scope distinctions and relevant syntax/compile/book/history/continuity; available safe Lua hosts only, no unsafe/full runner/matrix.
   Planned canonical trigger: Actual broader contract/schema/context change separately owned; full23.4 and final clean push after feature coverage.
   Planned claim verification: none: Prospective finite authored remaining-boundary controls; no population measurement.
+
+  Independent intake2026-10-27: Distinct contextual/explicit nesting works in Perl and both available Lua hosts. Lua opaque coalesce(cb,cb) loses active identity and reaches finite fallback escaped; anonymous missing() loses callable-specific diagnostics. Perl helper/receiver cycle closes cb→with despite matching the originating record; callback stored in caller value fails validation because with shadows value before evaluating the callback. Deferred free coalesce is outside this bounded callback vocabulary and fails unknown_helper despite ready metadata; do not admit it as part of identity repair. Split owners below before production; the current canonical Lua card proves named callbacks, not opaque values.
+  Children: .4.0 finite intake/ownership; .4.1 safe Lua active identity and anonymous error activity; .4.2 Perl origin-matched cycle label; .4.3 Perl callback snapshot; .4.4 deferred helper readiness before broad admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0`
+  Status: `completed`
+  Goal: Retain independent Perl/Lua intake and schedule each confirmed repair without widening deferred vocabulary.
+  Acceptance: Preserve exact finite sources and native/metadata/fresh or native/restored/plan/fresh channels; distinguish setup errors from product results, accepted opaque if from excluded deferred coalesce, and current historical Lua claims from untested cases. Record root causes/repair sequence, keep feature-focused checks and commit before implementation.
+  Planned verification tier: focused
+  Planned focused checks: Finite independent expected-value/error oracle, producer syntax, book/history/fast continuity; no full suite/matrix.
+  Planned canonical trigger: Full23.4 and final clean push after feature coverage; child repairs precede parent31 admission.
+  Planned claim verification: none: Finite authored source/diagnostic controls; no population measurement.
+
+  Verification tier: `focused`
+  Focused checks: Public Perl Get/native typed detail/Top readiness/fresh channels; Lua native/SpecFile-restored/plan/fresh on available PUC5.5.1/LuaJIT2.1.1788460057. Independent expected-outcome oracle intentionally RED52 healthy/22 mismatches; actual mechanisms inspected. Producer syntax/book/history/fast continuity; no production/full suite/matrix.
+  Canonical trigger: Child repairs .4.1-.3 before unrelated selection/parent31 admission; excluded deferred readiness .4.4 before full context23.4/final clean push.
+  Claim verification: none: Finite authored expected-value/error controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Both safe Lua hosts return finite escaped for opaque callback cycles and general runtime errors for anonymous missing helpers. Perl native helper/receiver/accepted opaque-if cycles close cb→with; ordinary/deferred caller callback named value fails validation. Deferred coalesce remains unsupported despite raw0/ready1 metadata. Exact sources/channels and intentional oracle RED are retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Lua execute_values omits opaque/anonymous invocation activity and evaluate_call routes unknown errors by that activity. Perl invoke recognizes original records but closes cycles using incoming helper label; _eval_with_callback shadows value before callback resolution. Static eager helper recognition also exceeds the deferred evaluator vocabulary.
+  - [x] **FIX**: Create bounded P1 owners .4.1 Lua identity/error activity, .4.2 Perl origin-matched cycle labels and .4.3 Perl callback snapshots in that order before unrelated features/admission. P2 .4.4 reconciles excluded-helper readiness before full23.4; it does not silently expand deferred coalesce or delay immediate repairs. No production edit in this intake.
+  - [x] **ADDRESSED (verified)**: Intake/ownership is complete, defects stay open with exact reproduction/root cause/impact/priority/acceptance. Independent oracle inspects64 Lua route outcomes and10 Perl native checks, with52 healthy and22 mismatches. Fresh Perl HASH-reference text is retained with explicit limits; typed generated fields remain a repair-check obligation.
+  - [x] **NO REGRESSION**: Distinct contextual/explicit nesting, bound Lua helper/receiver/direct cycles, Lua caller callback named value and Perl direct cycle/unready unknown-source controls remain healthy. Initial Lua plain-table serialization failure is a probe setup error; corrected tagged rows expose actual runtime behavior. No runtime/helper/schema/dependency/format/claim-admission changes.
+  - [x] **LOCKSTEP**: Book qualifies remaining callback boundaries, target/packet/new Perl causal card/current Lua card/map and roadmap/task/live/resume align. Lua .4.1 is next; broader startup/context owners remain separate and full verification stays deferred.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0 - own remaining Perl and Lua callback boundary repairs`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1`
+  Status: `pending`
+  Priority: P1 immediately after .4.0, before Perl repairs/unrelated selection/parent31 admission.
+  Goal: Preserve safe Lua opaque callback cycle identity and anonymous callback error activity.
+  Reproduction: cb directly invokes with(v,coalesce(cb,cb)); fallback after four entries returns escaped on native/restored/plan/fresh in available PUC5.5.1/LuaJIT2.1.1788460057. Anonymous with body missing() reports general runtime_execution instead of unknown_helper/callable_codeblock_invocation. Bound helper/receiver/direct cycles and contextual/explicit nesting are healthy controls.
+  Root cause: callable_codeblock.execute_values tracks only nonfalse recursion_identity variable names, skips anonymous activity entirely, and evaluate_call uses that same activity for typed unknown-helper routing.
+  Acceptance: Keep all callback frames active, preserve existing variable-name fences and recognize the same inert callback through existing opaque values without helper-label collisions. Retain exact typed fields, argument order, temporary store restoration and source caches/receiver mutation ownership; no serialized schema, environment capture, dependency, helper or general equality policy change. Use safe explicit tests on available hosts; no full runner/unsafe malformed pattern.
+  Planned verification tier: focused
+  Planned focused checks: Small RED/GREEN identity/unknown/cleanup controls and direct with-result checks, source/runner syntax, normal registration/book/history/continuity.
+  Planned canonical trigger: Declared5.4 and broad source/carrier/trace/context admission remain separate; full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored behavior controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2`
+  Status: `pending`
+  Priority: P1 after .4.1, before unrelated selection/parent31 admission.
+  Goal: Close Perl helper-mediated recursion cycles with the matched original callback identity.
+  Reproduction: Direct cb→cb is correct; cb reentry through helper/receiver with reports cb→with. Distinct contextual/explicit callbacks remain healthy. Opaque if(true,cb,cb) independently verifies the accepted callback-value route; free deferred coalesce is separately excluded.
+  Root cause: CodeblockRuntime::invoke matches actual _codeblock_origin, but builds the cycle with the incoming helper identity rather than the matched active origin's name.
+  Acceptance: Retain origin side table and eight-field data, distinguish independent equal literals from copied aliases, close cycle using matched identity and preserve scope/body/error behavior; no generic structural equality or new deferred/helper rights. Verify native typed detail and actual fresh generated error payload rather than stringifying a HASH reference.
+  Planned verification tier: focused
+  Planned focused checks: Small helper/receiver/accepted opaque/direct/mutual cycle and distinct nesting controls, syntax/book/history/continuity.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; normal Perl canonical registration stays23.4.1.
+  Planned claim verification: none: Finite authored diagnostic controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3`
+  Status: `pending`
+  Priority: P1 after .4.2, before unrelated selection/parent31 admission.
+  Goal: Resolve Perl final with callbacks in caller context before installing scoped value.
+  Reproduction: Callback stored in value fails final_argument_not_codeblock in ordinary helper/receiver and deferred runner composition; corresponding cb-name and Lua controls work.
+  Root cause: CodeblockRuntime::_eval_with_callback localizes value/presence before evaluating and validating the explicit final callback; ordinary lowering reaches the same wrong snapshot when the supplied callback is named value.
+  Acceptance: Evaluate source/value first then callback once, validate before scoped value, preserve parameter/presence/slot identity and unrelated effects across validation/body failures. Do not change contextual block behavior, arities, declared vocabulary, origin tracking or generated fields.
+  Planned verification tier: focused
+  Planned focused checks: Small independent helper/receiver/caller-value/deferred/order/failure controls and current with tests, syntax/book/history/continuity.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; canonical fixture registration stays23.4.1.
+  Planned claim verification: none: Finite authored snapshot/cleanup controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.4`
+  Status: `pending`
+  Priority: P2 before full source/context23.4 admission, after bounded feature prerequisites; does not delay the immediate identity/snapshot implementation sequence.
+  Goal: Reconcile readiness for statically known helpers excluded from the current deferred Perl evaluator.
+  Reproduction: cb body with(v,coalesce(cb,cb)) has raw0/ready1/unresolved[] but runtime unknown_helper/name coalesce. Existing bounded default18 expressly adds no Codeblock/deferred domain, so do not silently widen it here.
+  Root cause: Ordinary static helper recognition exceeds CodeblockRuntime's accepted deferred helper vocabulary at the body boundary.
+  Acceptance: Own an exact callback-context metadata/diagnostic guard or a separately authorized vocabulary feature; preserve supported if/with/copy and current eager coalesce behavior, unknown-source fences and source-specific errors. No ready claim for a known nonexecutable body. Coordinate existing full method/context23.4 and deferred vocabulary owners before selecting the repair.
+  Planned verification tier: focused
+  Planned focused checks: Exact metadata/runtime distinction and nearest supported eager/deferred controls, syntax/book/history/continuity.
+  Planned canonical trigger: Full23.4/final clean push requires this guard or an explicitly owned authorized vocabulary implementation.
+  Planned claim verification: none: Finite authored metadata/execution mismatch; no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5`
   Status: `completed`
@@ -6831,7 +6906,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4` | `pending` | Independently reconcile remaining Perl/Lua callback identity boundaries. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` | `pending` | Repair safe Lua opaque callback identity and anonymous error activity. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
