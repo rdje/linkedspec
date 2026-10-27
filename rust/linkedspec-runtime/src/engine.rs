@@ -7579,9 +7579,14 @@ impl Engine {
             return false;
         };
         match receiver.as_ref() {
-            Expr::Call { name, .. } => {
+            Expr::Call { name, args } => {
                 if self.spec.find_function(name).is_some() {
                     return true;
+                }
+                // Inline value calls have payload operands; one-operand
+                // statement headers retain their legacy result policies.
+                if matches!(name.as_str(), "if" | "switch") {
+                    return args.len() >= 2;
                 }
                 if matches!(
                     name.as_str(),

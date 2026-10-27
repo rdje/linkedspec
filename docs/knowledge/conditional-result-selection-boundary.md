@@ -11,11 +11,13 @@ answers:
   - why did is_defined false select the wrong inline condition branch
   - why did a named early-return block work while an inline payload failed
   - why does a one-argument switch remain outside computed read sources
+  - how does Rust distinguish inline conditional result guards from headers
 date: 2026-10-27
-status: producer26.0 repaired; bounded Perl26.1 implemented; independent Rust26.2 next
+status: producer26.0 repaired; bounded Perl26.1/Rust26.2 implemented; independent Dart26.3 next
 tags: [perl, actionir, control, selection, fluent, laziness]
 evidence: "TYPE23.1.6 finite public native/fresh/descriptor/substitution and AST intake at fcfb7dcdc; ADR0007/current inline-value authority."
 reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test conditional_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/conditional_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inline_condition_value_blocks.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_conditional_result_composition.pl"
@@ -80,3 +82,14 @@ Explicit and both contextual callbacks retain raw AST; actual callback execution
 keeps raw_perl rejection/raw1/unready. Ordinary metadata is raw0/unresolved0/ready1.
 No parser node/schema/read-builder/executor field or wider control role is added.
 Independent Rust26.2 follows; full admission stays23.4.
+
+
+Rust26.2 independently observes3 failed cases/1 healthy lazy/local-return case
+across native/restored CompiledSpec/plan. Its parser, lazy dispatcher and reader
+already work; the static computed-result classifier excludes if/switch sources.
+Recognizing those canonical Call names only with payload arity enables existing
+actual-kind/with guards. Four new and six direct computed tests pass. Shared
+kinds/CTIM/snapshots/IJ/bridges, CETM/local returns and old header/bound/flat counts
+remain; wrong-kind operands skip and missing inline counts become null. No parser,
+reader, serde, equality or deferred vocabulary change. Dart26.3 follows; full
+source/context/portable/generated admission stays23.4.

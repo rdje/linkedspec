@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1 implemented/targeted-checked; independent Rust26.2 next.
+Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2 implemented/targeted-checked; independent Dart26.3 next.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -78,3 +78,12 @@ join the existing read path. Single-operand control_if/control_switch headers,
 marker aliases and unrelated control names stay excluded. The shared fixture and
 finite function-local/missing/Unicode/error/deferred/native/fresh/metadata controls
 pass43 after12/43 RED. No new read builder/getter/schema/executor operation.
+
+
+## Bounded Rust selection
+
+Rust26.2 already parses/read-selects conditional calls and preserves lazy payloads.
+Its existing static result guard now recognizes only if/switch Calls with payload
+operands. One-operand headers retain their old count policy. Four new cases and
+six direct computed cases pass native/restored CompiledSpec/generated plan;
+with/kind/missing guards are repaired without parser/read/serde/equality changes.
