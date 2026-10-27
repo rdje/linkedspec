@@ -19,7 +19,10 @@ local typed_source = {
   staged = require("linkedspec.staged_parse_job"),
   staged_enrichment = require("linkedspec.staged_ast_enrichment"),
   receiver_mutation = {},
-  parser_state_helpers = {},
+  parser_state_helpers = {
+    -- Current public parser-context roles outside source-location projections.
+    call = true, entry_slot = true, gap_span = true, gap_text = true, gap_kind = true,
+  },
 }
 
 -- Source-boundary catalogs own these helper names, not user-function prefixes.

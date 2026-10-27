@@ -1,6 +1,6 @@
 # Parser calls and public gap readers in pure functions
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust/Dart/Julia children.1-.4 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; All five bounded children.1-.5 repaired/targeted-checked on recorded hosts.
 
 call(rule) performs parser work; entry_slot/gap_span/gap_text/gap_kind are current
 public source_read helpers under ADR0079. Their absence from source-location
@@ -68,3 +68,16 @@ function-state assertions pass under depwarn=error/module load/compile; a recurs
 Number-versus-Bool oracle guards position/slot kinds. Normal runner registration
 is added. Ordinary parser/gap/slot/provenance values remain explicit arguments;
 no new API/schema. Independent safe Lua child.5 is next; example.6 remains separate.
+
+Safe Lua child.5 independently reproduces six function-source failures on native/
+plan/fresh (18 negatives) and9 healthy explicit-caller controls per confirmed
+PUC5.5.1/LuaJIT2.1.1788460057 host. Actual data/null List versus real Item slot limits
+are retained in the Lua packet/producer. Existing private table gains five literal
+members and reuses its guard/error/helper_name, with no persistent chunk locals.
+All new and prior function-state controls pass on both hosts; luac/loadfile include
+full-runner syntax only, with normal registration. Ordinary parser/gap/slot values
+and kinds remain explicit arguments. Declared5.4 stays separately owned.
+
+All five bounded context repairs are complete. Feature selection23.1.8 is next;
+stale neutral example child.6 remains P1 before admission/push after feature and
+prerequisite work. No complete function/source/deferred/portable admission follows.

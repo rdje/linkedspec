@@ -15,10 +15,11 @@ answers:
   - can a Rust pure function call a parser rule or read gap_text
   - can a Dart pure function call a parser rule or read gap_text
   - can a Julia pure function call a parser rule or read gap_text
+  - can a Lua pure function call a parser rule or read gap_text
   - why are call and gap accessors outside the projection catalog still forbidden
 date: 2026-10-27
-status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
-tags: [functions, purity, parser-state, perl, rust]
+status: all five bounded catalogued and call/gap helper repairs complete on recorded hosts; full contexts/example/admission open
+tags: [functions, purity, parser-state, perl, rust, dart, julia, lua]
 evidence: "TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t t/user_function_parser_context_boundary.t"
@@ -122,3 +123,13 @@ guard/RuntimeInterpreterException is reused. All27 new and48 prior assertions pa
 under depwarn=error/module load, with strict Number-versus-Bool provenance oracle
 and normal registration. The Julia packet retains actual values and null List-slot
 versus real child-slot limits. Independent safe Lua.5 and example.6 remain open.
+
+Noncatalogued safe Lua context29.2.6.5 independently reproduces all six function
+sources on native/plan/fresh per available PUC5.5.1/LuaJIT2.1.1788460057 host, with
+explicit-caller positives healthy. Existing private table adds five literal roles,
+reusing its guard/error/helper_name with no persistent chunk locals. New/prior
+controls and luac/loadfile/normal registration pass on both hosts; declared5.4 stays
+open. All five bounded catalogued and call/gap repairs are complete, with retained
+host-qualified source/RED/limits. Feature selection23.1.8 resumes; stale example.6
+is P1 before admission/push after feature/prerequisite work. Full function/source/
+deferred/context/portable admission remains23.4, not inferred from these controls.

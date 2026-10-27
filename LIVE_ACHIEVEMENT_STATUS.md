@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust/Dart/Julia noncatalogued parser-context repairs complete; safe Lua next.
+All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
 
 ## Latest Completed Slice
 
-Julia independently records18 missing-purity failures across six authored function sources on native/plan/fresh, with9 healthy explicit-caller assertions. The private parser-state name Set adds only call/entry_slot/gap_span/gap_text/gap_kind, reusing current pre-operand guard and RuntimeInterpreterException. All27 new plus48 prior function-state assertions pass under depwarn=error/module load/compile; strict Number-versus-Bool comparisons preserve position/slot kinds and the new test is registered normally. Ordinary parser results/gap values/slot provenance remain exact explicit arguments. Retained source/log distinguishes null List context from real incoming child slots. No new API/helper/IR/schema/serialization path. Book/target/fact/map/roadmap/task/live/resume align; independent safe Lua29.2.6.5 follows. Stale neutral example.6, pressure/Perl registration/declared5.4/full23.4 remain separate; no push.
+Safe Lua independently reproduces six authored function sources on native/plan/fresh per confirmed PUC5.5.1/LuaJIT2.1.1788460057 host, with18 missing-purity negatives and9 healthy explicit-caller controls each. Existing private parser-state table adds only call/entry_slot/gap_span/gap_text/gap_kind, reusing current guard/error/helper_name without persistent chunk locals. All new and prior function-state controls pass on both hosts; luac/loadfile changed module/test/full-runner syntax and normal registration pass. Ordinary parser results/gap values/slot provenance retain exact kinds as explicit arguments; null List context is distinct from real incoming slots. No new API/helper/IR/schema/serialization path. Qualified book/executable caller example, retained host/evidence/target/fact/map/roadmap/task/live/resume align. All five bounded noncatalogued repairs complete; feature selection23.1.8 is next. Stale neutral example29.2.6.6 remains P1 before admission/push after feature/prerequisite work; pressure/Perl registration/declared5.4/full23.4 stay separate; no push.
 
 ## Next Action
 
-Activate safe Lua parser-context child29.2.6.5 from this clean Julia boundary. Read current public call/gap/function contracts and interpreter ownership; independently test controlled ordinary versus function parser-call/gap/slot access on confirmed available hosts before production. Use documented default-loop finalization and correct backend signatures; distinguish null/unavailable contexts from rejection. Repair confirmed roles through current private table/active-function guard with no new persistent chunk locals, preserving ordinary child-cache/gap values/explicit arguments/callback/arity/serialization. Compile/quick checks/book/docs/commit, then select roadmap-aligned feature work while canonical example/admission owners remain scheduled. No unsafe patterns/full runner/full suite/matrix/admission/push; stale example.6, pressure/Perl registration/declared5.4 remain owned.
+Activate feature selection23.1.8 from this clean Lua boundary. Read canonical remaining operation/source/signature inventory, completed targets and relevant book/Knowledge Map. Assess useful readonly entry/match scalar reader flow and other remaining data/result transitions with a few public distinctions only where unresolved; do not assume missing methods or infer completeness from names. Freeze the next justified bounded feature and independent owners before production, preserving callback/parser/deferred/control/list-splice/mutation/copy/error and legacy special-source policies. Compile/quick checks/docs/commit, then implement per leaf. No exhaustive matrix/full suite/admission/push; stale neutral-example29.2.6.6 and pressure/Perl registration/declared5.4/full23.4 remain scheduled.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5` — All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4` — Perl/Rust/Dart/Julia noncatalogued parser-context repairs complete; safe Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` — Perl/Rust/Dart noncatalogued parser-context boundaries repaired; independent Julia next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2` — Perl/Rust noncatalogued parser-context boundaries repaired; independent Dart next.
@@ -29,7 +30,6 @@ Activate safe Lua parser-context child29.2.6.5 from this clean Julia boundary. R
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.3` — Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.2` — Rust readonly input/cursor result guards implemented/targeted-checked; independent Dart27.3 follows.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.27.1` — Perl input/cursor reader values implemented/targeted-checked; independent Rust27.2 follows.
 
 ## History
 
