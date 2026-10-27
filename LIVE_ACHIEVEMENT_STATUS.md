@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded tagged-record22 implementations are targeted-checked; remaining ordinary feature selection23.1.3 is next.
+Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
 
 ## Latest Completed Slice
 
-Safe PUC5.5.1/LuaJIT producer-first native/plan/fresh controls retain eager typed fields, pure split boundaries, named/literal/regex chains and independent row copies. Both hosts reproduce derived trim-prefix null versus3 and malformed0/[]/SSDC. Their scalar/reduction guards confuse Array result-family membership with input role; minimum receiver arity is absent. Share one function-local actual Array-input predicate excluding tagged records across those guards and preflight delimiter/tag before effects. Five new tagged groups plus direct scalar String fixture pass both hosts on all three routes; interpreter/runner loadfile checks pass with no new module locals. Healthy producer/regex/copy/conversion/free short-call empty-Array/eager policies stay. Book/frozen contract/tagged/Lua facts/SESSION33 partial progress/index/map/history/live continuity align. All five bounded22 children are targeted-checked; owned next selection23.1.3 follows. Full split-domain/context/portable admission, canonical registration/error parity/pressure and declared Lua5.4 remain separate; no full runner/unsafe regex/full-CI/global pressure PASS claim.
+Select the meaningful .and/.or/.not receiver family explicitly excluded by earlier logical result17, under the comprehensive-method roadmap. Freeze logical-receiver-methods.md: and/or require at least one RHS, not takes none; reuse existing generic typed truthiness, eager once-only source/RHS snapshots and real Bool results with compatible continuations. Free unary projections/typed arity errors, lazy controls, callable/deferred/context/mutation/serialization boundaries stay unchanged. Public Perl native/fresh producer vector[false,true,true,false,true,true,false,true,false] retains exact Bool kinds, while well-shaped methods/typed/eager/snapshot/shape cases leak raw DSL and fail compilation; longer not/coalesce leaks an undefined host coalesce because its prefix was never lowered. Retained public substitution identifies missing receiver admission, not a free-helper producer defect. Schedule five independent bounded backend leaves23.3.23.1-.5 before production; no other backend failure inferred. Probe syntax/producer checks, book/roadmap/neutral fact/map/history/live continuity align. Full method/domain/context/portable admission, canonical registration/error parity/pressure and declared Lua5.4 remain separately owned; no full-CI/global pressure PASS claim. Associated continuity repair replaces a stale duplicated startup cross-tree leaf with authoritative MEMORY/TYPE routing and restores pending own-child33.1; focused startup schema validator is RED then GREEN, while broad pressure20.1 stays open.
 
 ## Next Action
 
-Activate selection23.1.3 from clean HEAD: reconcile remaining meaningful helper/wrapper/ordinary receiver roles and deferred ordinary exclusions from helpers.md, current canonical facts/contracts/book against bounded families1-22. Select one useful missing transition/family, confirm with a small public producer-first distinction, freeze its scope and own backend leaves before production. Do not detour into broad matrices/full CI/pressure repair yet; keep SESSION33 admission/parity/pressure owners intact.
+Implement Perl23.3.23.1 ordinary logical receiver counterparts from logical-receiver-methods.md, reusing typed RuntimeLogical producers/result dispatch. Generic typed source inputs; and/or at least one RHS, not zero RHS; eager snapshots/real Bool/valid-prefix effects and pre-effect ordinary malformed-shape policy. Preserve free typed errors/truth/lazy controls and no deferred/context admission. Retain independent native/fresh regression, small direct helper/compile checks, docs/commit; then independently assess Rust23.2.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.3` — Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.5` — All five bounded tagged-record22 implementations are targeted-checked; remaining ordinary feature selection23.1.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.4` — Julia22.4 tagged-record receiver roles/minimum shape repaired/targeted-checked; safe Lua22.5 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.3` — Dart22.3 tagged-record receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 is next.
@@ -29,7 +30,6 @@ Activate selection23.1.3 from clean HEAD: reconcile remaining meaningful helper/
 - `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` — All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` — Julia optional substring argument repair20.2 targeted-checked; safe Lua20.3 follows. Complete signature/context/portable admission remains open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` — Dart optional substring argument repair20.1 targeted-checked; Julia20.2 then safe Lua20.3 follow. Complete signature/context/portable admission remains open.
 
 ## History
 

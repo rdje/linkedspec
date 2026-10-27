@@ -1447,7 +1447,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 
 ## Boolean composition
 
-Boolean helpers make branch conditions portable and analyzable.
+Boolean helpers make branch conditions portable and analyzable. Ordinary receiver counterparts `.and(rhs,...)`, `.or(rhs,...)`, and `.not()` are planned as a separate feature; use the free helper calls below while backend implementation proceeds.
 
 | Helper | Meaning |
 | --- | --- |

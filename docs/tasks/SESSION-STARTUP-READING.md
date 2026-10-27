@@ -20,26 +20,25 @@
 
 ## Current Frontier
 
-Current feature selection (October27): derive HEAD and the exact active leaf from
-MEMORY.md and TYPE-REFERENCE-BOOK's Current Frontier. Bounded scalar61.1/.2,
-default62.1/.2 and TYPE selected/result families through scalar String23.3.19
-are implemented/targeted-checked on their recorded routes/hosts. Optional substring
-argument target23.2.20 and all three repairs20.1-.3 are targeted-checked. Remaining
-fluent selection23.1.1 freezes reduction result continuations21; Perl21.1 is
-targeted-checked along with Rust21.2/Dart21.3/Julia21.4/safe Lua21.5; remaining ordinary
-fluent selection23.1.2 freezes tagged-record text-to-Array22; Perl eager producer
-prerequisite22.1.1 is next, with broader33 review/admission still separate.
-Broad61.3/62.3/.4, declared Lua5.4, full domain/context/portable23.4 and the separate
-reading audit remain open under their own acceptance. Feature-first ordinary
-checks remain focused; no full reading audit is a prerequisite for these repairs.
+Current feature ownership is TYPE-REFERENCE-BOOK.1.2.23. Derive HEAD from Git,
+then resolve the exact active feature leaf and next action through MEMORY.md and
+TYPE-REFERENCE-BOOK's Current Frontier. Those are the authoritative live feature
+pointers; this startup root does not duplicate their changing leaf/status.
+Broad61.3/62.3/.4, full domain/context/portable23.4, declared Lua5.4 and the separate
+reading audit remain under their own acceptance. Ordinary feature checks remain
+focused; no full reading audit is a prerequisite for those repairs.
 
 The prior accumulated frontier and numeric return instructions are historical,
 preserved exactly for this path at Git b73b56c36075e79472adbb822d6cdb5bb34a01e0.
-TYPE23.2.20 owns this bounded continuity correction, not a startup-tree pivot.
+TYPE23.1.3 repairs duplicated feature-pointer drift and restores this root's
+ADR0125 stable-child/status requirement; this is not a startup-tree pivot.
+
+The startup-specific queued work below stays deferred until feature coverage;
+the overall next feature action comes only from the authoritative pointers above.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` | `pending` | Perl tagged-record ordinary eager argument/split reuse prerequisite before receiver bridge. |
+| 1 | `SESSION-STARTUP-READING.33.1` | `pending` | Full tagged-record/pure-split boundary review after ordinary feature coverage; partial TYPE22 repairs remain recorded in33.2. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

@@ -3,11 +3,13 @@ id: targeted-session-startup
 title: Session startup recovers the next task quickly and uses scoped reading before fixes
 answers:
   - must the whole codebase be read before ordinary bug fixes
+  - where is the authoritative active feature leaf during startup
+  - why does the startup root list a pending startup task instead of the active feature
   - how fast should session ramp up be
   - where is the director-approved targeted startup rule
   - why is the full reading audit no longer the active prerequisite
   - which three bug reports should be fixed next
-date: 2026-09-23
+date: 2026-10-27
 status: director-approved targeted startup; SEMULITH report register recovered under startup .85
 tags: [startup, continuity, reading, task-tree]
 evidence: "The director approved targeted reading and fast ramp-up after conformance .1.89, committed cb47fde46. SESSION-STARTUP-READING.84 implements ADR0123 without changing source, gates or prior audit coverage."
@@ -18,6 +20,8 @@ Target2–5 minutes for context/Git/task recovery, followed by task-specific inv
 Read affected requirements, code paths, contracts, tests and relevant book sections before
 changing them. Use canonical Knowledge facts; reverify changed or contradictory evidence.
 Expand for real dependencies and surface a concrete blocker if startup exceeds its target.
+
+## September23 report recovery (historical)
 
 The exhaustive audit remains separately tracked and incomplete. ADR0123 supersedes its
 blanket blocking condition in older plans, while real technical dependencies, relevant
@@ -30,3 +34,16 @@ before .83.2.2 delivers the versioned grammar with six-runtime proof. SEXPR-DOCU
 [[archogen-rust-lispish-integration]] for the exact register and evidence.
 
 Related: [[startup-codebase-reading-inventory]], [[memory-handoff-task-status-consistency]].
+
+## October27 feature handoff routing
+
+During TYPE feature delivery, the exact active feature leaf/next action belong to
+MEMORY.md and the owning TYPE tree's Current Frontier. SESSION's root routes to
+those authoritative pointers instead of duplicating a changing cross-tree row.
+Its table must still name an actual stable SESSION child with the matching part
+status under ADR0125 (see [[startup-task-partition-plan]]). A queued pending33.1
+row is separate from the active feature and does not pivot work to broad review.
+TYPE23.1.3 fixes a stale pending Perl22.1.1 row and observed startup-validator
+missing-child failure by restoring that structure. Reverify this bounded rule with
+perl scripts/check_startup_task_partitions.pl and the current MEMORY/TYPE pointers;
+full startup audit and broader pressure/admission work remain separately owned.

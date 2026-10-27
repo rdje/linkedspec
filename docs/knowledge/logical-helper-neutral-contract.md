@@ -2,6 +2,9 @@
 id: logical-helper-neutral-contract
 title: ADR 0043 fixes eager logical helpers over one typed truthiness policy
 answers:
+  - "are and or not available as fluent receiver methods"
+  - "why does true and receiver syntax fail in Perl"
+  - "which task implements logical receiver counterparts"
   - "what is LinkedSpec logical truthiness"
   - "is string zero true in LinkedSpec"
   - "is string false true in LinkedSpec"
@@ -12,7 +15,7 @@ answers:
   - "does testing a codeblock invoke it"
   - "which ADR defines LinkedSpec logical helpers"
   - "does the logical contract activate codeblock literals"
-date: 2026-10-26
+date: 2026-10-27
 status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 26 semantic/topology/public drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 consume and lock the unchanged target. Rollout is 8 complete / 0 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
@@ -94,3 +97,22 @@ Strict native/plan/fresh producer/source-error/shared/rejected-effect/selection
 and direct neutral/default checks pass; LR/LRC/S and skipped consumer operands
 hold without new module locals or helper/truth policies. All five bounded
 implementations are targeted-checked; declared5.4/full admission remain open.
+
+## October27 ordinary logical method target
+
+TYPE23.1.3 selects useful .and/.or/.not receiver counterparts excluded by result17.
+logical-receiver-methods.md freezes generic typed inputs/real Bool output: and/or
+require one authored RHS or more, not takes none. Source and all valid RHS run
+once eagerly left-to-right with snapshots, then compatible consumers. Free unary
+projections, typed helper errors, truthiness/lazy controls and callable/deferred/
+context/mutation/serialization admission stay unchanged; no neutral JSON rewrite.
+Public probe_logical_receivers.pl confirms native/fresh free producers retain
+exact Bool kinds while methods leak raw DSL/host compilation and an unlowered
+not/coalesce prefix calls an undefined host helper. MethodLowering lacks input
+method admission; this is not a free logical/coalesce producer-domain failure.
+Perl23.3.23.1 then independent other backends own implementation; do not infer
+support or failure elsewhere. Full new-method/domain/context/portable admission
+remains23.4 after feature coverage with canonical registration/parity/pressure.
+Reverify this bounded intake with the project-data Perl wrapper and
+-Iperl docs/checkpoints/type-operation-inventory/probe_logical_receivers.pl;
+the existing full neutral reverify above remains for later canonical admission.

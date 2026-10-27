@@ -8,6 +8,8 @@ October19 artifact review: REPO-HYGIENE.19 retains metadata and public compiler-
 
 # ROADMAP
 
+October27 current fluent implementation: bounded result families1-22 are targeted-checked on recorded backend routes/hosts, including eager tagged-record String-to-Array flow. TYPE-REFERENCE-BOOK.1.2.23.1.3 freezes ordinary .and/.or/.not counterparts under23.3.23, with existing typed eager truth/free signatures unchanged; Perl first, then independent Rust/Dart/Julia/safe Lua. Full method/domain/context/portable admission, canonical registration, diagnostic parity and document pressure repairs remain after feature coverage; declared Lua5.4 stays separately owned.
+
 October25 current PNT boundary: Deferred with16 now executes metadata-approved helper/receiver forms with scoped value/presence and caller restoration. Syntax and a small ordinary/deferred/native/fresh regression pass; grouped assignment19 is next. Signed backend implementations and deferred last14 are in. Director policy remains implement, compile, quick targeted check, commit, continue toward100% feature coverage; broad suites/exhaustive proof/global registry scans and maintenance remain deferred.
 
 October24 type-reference work: Deferred-write12, signed intake17.0, CLI17.8, neutral target17.1, Perl17.2, literal-kind22, Rust17.3, numeric55.1 and Dart17.4 are complete. Julia/Lua and admission17.5–7, deferred last14/with16, grouped assignment19, raw-regex21 and policy20 precede complete operation/spelling inventory1.2.1, mapping1.2.2 and layout1.3. Full per-type references and structured-format campaign admission remain unclaimed.

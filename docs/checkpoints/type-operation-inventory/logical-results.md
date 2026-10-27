@@ -161,3 +161,8 @@ implementations are targeted-checked; no full runner/malformed native patterns,
 declared5.4 or complete domain/context/portable admission. Next helper-spine
 assessment23.2.18 owns defined-only coalesce receiver/result breadth, retaining
 this contract and older nonempty-default exclusions until a separate freeze.
+
+October27 selection23.1.3 separately freezes logical-receiver-methods.md and owns
+new .and/.or/.not counterparts under23.3.23. This does not retroactively expand
+family17 or change free truth/eager/arity/error/result rules; new method/full
+context/portable admission stays separately scheduled.

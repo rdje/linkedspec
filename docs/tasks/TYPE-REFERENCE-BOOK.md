@@ -919,7 +919,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Retain exact current entries/anchors/includes/examples/backend qualifications for every inventory item, mark precise depth/navigation gaps, preserve old anchors and schedule bounded family work. Close .1.2 only after all inventory children agree; independent layout review .1.3 follows. No exhaustive public-reference coverage claim from an inventory closeout.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23`
-  Status: `active` / selected first/last transition; complete family matrix remains open
+  Status: `active` / bounded ordinary families1-22 targeted-checked; logical counterparts selected
   Goal: Establish comprehensive fluent method families for every supported type and complete inter-type chaining.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.1`, `TYPE-REFERENCE-BOOK.1.2.23.2`, `TYPE-REFERENCE-BOOK.1.2.23.3`, `TYPE-REFERENCE-BOOK.1.2.23.4`.
@@ -991,7 +991,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.2 - freeze tagged-record String bridge repairs`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Select the next meaningful ordinary fluent family/transition after bounded data-result, reduction and tagged-record families1-22.
   Dependencies: .23.3.22.5.
   Acceptance: Reconcile retained helper/wrapper/receiver roles, current canonical facts/contracts/book and ordinary exclusions against implemented bounded families. Choose a useful missing operation/transition without treating resolver output category as input type, reviving compatibility spellings or inventing meaningless symmetry. Small independent public producer-first distinction as needed; freeze one safe target and schedule backend leaves before production. Full type/context/domain matrix/admission, error parity and pressure maintenance stay separately owned.
@@ -999,6 +999,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Targeted canonical inventory/contracts/book and small distinguishing public observation, syntax/book/history/staged continuity. No full suite/population census or historical replay campaign.
   Planned canonical trigger: Full domain/context/portable admission and final clean push remain separate under director feature-first cadence.
   Planned claim verification: none: normative bounded feature selection and authored examples; no population/completeness measurement.
+
+  Activation: clean `27dba179f410218b487f147adf31fac1b6ea54fe`; all bounded tagged-record children committed/tree clean/brief0.
+  Selection candidate: The retained logical-results.md explicitly excludes .and/.or/.not counterparts while preserving eager free helpers under ADR0043. Assess useful ordinary receiver counterparts as a distinct Boolean/generic truthiness family; do not change source helper arity/eagerness/result kinds or absorb lazy controls/callback admission.
+  Owned paths: Small public Perl producer/native/fresh receiver/typed-truth/eager/snapshot/shape distinctions, frozen bounded logical-method target and backend scheduling if justified, affected logical facts/current book/live continuity. Production follows separate owned leaves.
+  Verification tier: `focused`
+  Focused checks: ADR0043 and neutral logical-helper policy/helper cases, canonical role inventory/current book, small public Get/runtime_ctx_ref/substitution/native/fresh distinction and syntax/book/history/staged continuity. No broad matrix/history campaign.
+  Canonical trigger: New method/domain/context/portable admission and final canonical push remain23.4 after feature coverage, including signature parity/canonical registration/pressure repair. Director small-check implementation cadence governs ordinary leaves.
+  Claim verification: none: normative bounded feature selection and deterministic authored controls; no population/completeness measurement.
+
+  Frozen target: logical-receiver-methods.md deliberately adds useful .and(rhs,...)/.or(rhs,...) and .not() counterparts as generic truth operations. Method and/or minimum one authored RHS expresses composition; unchanged free and(value)/or(value) retain unary Boolean projection. Real Bool, eager typed truth, snapshots, actual-result transitions and current ordinary malformed/no-effects policy; no new lazy/deferred/callable/context/bang vocabulary. Family23.3.23 owns independent backend implementations before writes.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Public LinkedSpec::Get/runtime_ctx_ref/native and fresh emitted controls confirm real Bool free producers; well-shaped logical input methods leak .and/.or/.not raw DSL and fail. Longer not/coalesce loads but fails through an undefined host coalesce. Substitution retains the exact unsupported prefixes.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing MethodLowering receiver admission/family tables omit ordinary logical input methods, while typed free logical ownership is healthy. Result17 expressly excluded counterparts; resolver control registration does not admit a receiver or imply lazy semantics.
+  - [x] **FIX**: Freeze logical-receiver-methods.md generic input/Bool output/eager shape/snapshot/result rules and schedule Perl/Rust/Dart/Julia/safe Lua23.1-.5. Preserve free helper contract/typed diagnostics and lazy control domains.
+  - [x] **ADDRESSED (verified)**: Diagnostic native/fresh producer exact JSON/kinds and well-shaped receiver rejection assertions PASS; retained producer/method/typed/order/snapshot/shape source evidence supports independent targets. New methods remain planned until backend implementation; no false support claim.
+  - [x] **NO REGRESSION**: Production unchanged; probe perl -c and healthy public free producers pass. No neutral logical-helper JSON, registry, truth, conversion, serialization or old oracle data modified; full matrix/admission stays separate.
+  - [x] **LOCKSTEP**: Frozen contract/public probe/current book planned-only qualifier/roadmap/neutral logical fact/map/task/live pointer align. Child leaves own all production; known canonical registration/error parity/pressure and declared Lua5.4 prerequisites remain scheduled.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.3 - freeze eager logical receiver counterparts`.
+
+  Associated continuity defect owned/resolved: SESSION root still named completed Perl22.1.1 as pending; its only cross-tree table row also failed the existing startup stable-child/status schema. Focused perl scripts/check_startup_task_partitions.pl observes RED root frontier lacks a stable child/status row. This root duplicated changing TYPE status even though MEMORY/TYPE are authoritative; restore own pending33.1 status row (confirmed in mutable part), route the changing feature leaf solely through MEMORY/TYPE and retain dated prior bytes. Partition snapshot refreshed and the same focused validator GREEN after RED; no broad containment/CI detour or immutable history edit. Canonical targeted-session-startup fact records the stable routing rule.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
@@ -1550,7 +1570,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`, `.23.3.23`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -4773,13 +4793,70 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Safe runner registration/current book/frozen contract/tagged and Lua facts/SESSION33 partial progress/refreshed index/map/history/live pointer align. New ordinary selection23.1.3 is owned before handoff; full domain/admission/parity/pressure/declared5.4 remain separate.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.22.5 - repair Lua tagged-record receiver roles`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23`
+  Status: `active` / frozen new ordinary logical receiver counterparts
+  Goal: Add meaningful .and/.or/.not method counterparts using existing eager typed logical helpers.
+  Dependencies: .23.1.3 logical-receiver-methods.md; ADR0043/free logical-helper-v1 unchanged.
+  Children: `.23.3.23.1` Perl, `.23.3.23.2` Rust, `.23.3.23.3` Dart, `.23.3.23.4` Julia, `.23.3.23.5` safe Lua.
+  Acceptance: Generic typed inputs, real Bool output; and/or one-or-more RHS, not zero; once-only eager source/RHS snapshots then compatible consumers, malformed ordinary shapes before effects, valid prefix effects before kind rejection. Preserve free truth/arity/errors/lazy controls and existing copy/conversion/context/deferred/callable/mutation/serialization boundaries. Independent producer-first checks per backend; full public method/domain/context/portable admission remains23.4 after feature coverage.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.1`
+  Status: `pending`
+  Goal: Independently assess and implement Perl ordinary logical receiver counterparts.
+  Dependencies: .23.1.3.
+  Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
+  Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
+  Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.2`
+  Status: `pending`
+  Goal: Independently assess and implement Rust ordinary logical receiver counterparts.
+  Dependencies: .23.3.23.1.
+  Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
+  Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
+  Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.3`
+  Status: `pending`
+  Goal: Independently assess and implement Dart ordinary logical receiver counterparts.
+  Dependencies: .23.3.23.2.
+  Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
+  Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
+  Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.4`
+  Status: `pending`
+  Goal: Independently assess and implement Julia ordinary logical receiver counterparts.
+  Dependencies: .23.3.23.3.
+  Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
+  Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
+  Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.23.5`
+  Status: `pending`
+  Goal: Independently assess and implement safe Lua ordinary logical receiver counterparts.
+  Dependencies: .23.3.23.4.
+  Acceptance: Follow logical-receiver-methods.md. Reuse typed eager producers with source/RHS LTR snapshots, and/or one-plus RHS/not zero, real Bool/false/default/scalar/numeric-rejection/explicit container bridges and actual result kind. Generic existing value domains, pre-effect ordinary malformed method policy, valid prefix effects before incompatible consumers; unchanged free typed errors/truth/lazy/copy/callable/deferred/context/mutation/schema. Small native/generated/direct helper/compile checks/docs/commit, no inferred backend failure. Lua only safe named PUC5.5.1/LuaJIT fixtures/loadfile; no full runner/unsafe patterns/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first/new method typed value/order/snapshot/shape/result RED/GREEN and direct free logical/lazy/source-error/compile/format/analysis controls; current book/history/staged continuity. No full matrix or canonical registry scan.
+  Planned canonical trigger: New method/domain/context/portable admission and final push after feature coverage under23.4, including canonical registration/signature parity/pressure repair and Lua declared-host prerequisites.
+  Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; remaining ordinary selection23.1.3 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.3` | `pending` | Select the next useful ordinary fluent family after bounded tagged-record22 coverage. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.23.1` | `pending` | Implement frozen generic logical receiver counterparts on Perl before independent backends. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
