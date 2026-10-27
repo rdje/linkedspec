@@ -14,6 +14,7 @@ answers:
   - can a Perl pure function call a parser rule or read gap_text
   - can a Rust pure function call a parser rule or read gap_text
   - can a Dart pure function call a parser rule or read gap_text
+  - can a Julia pure function call a parser rule or read gap_text
   - why are call and gap accessors outside the projection catalog still forbidden
 date: 2026-10-27
 status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
@@ -113,3 +114,11 @@ without a prefix or runtime-value permission inference. New4/prior4 tests pass
 native/restored-SpecFile/plan, with clean format/fatal selected analysis. Exact
 Dart packet discloses first-case RED limits. Independent Julia/safe Lua contexts
 and stale neutral example.6/full context admission remain open.
+
+Noncatalogued Julia context29.2.6.4 independently records18 missing-purity failures
+on six native/plan/fresh source controls, with9 healthy caller-value assertions.
+The private name Set gains the same five current roles; the existing pre-operand
+guard/RuntimeInterpreterException is reused. All27 new and48 prior assertions pass
+under depwarn=error/module load, with strict Number-versus-Bool provenance oracle
+and normal registration. The Julia packet retains actual values and null List-slot
+versus real child-slot limits. Independent safe Lua.5 and example.6 remain open.

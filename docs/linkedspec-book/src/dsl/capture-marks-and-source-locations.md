@@ -799,7 +799,7 @@ above on native and freshly emitted Perl, including empty input and the Unicode 
 Static diagnostics reject invalid or duplicate slot names, unknown/out-of-range/malformed selectors, duplicate
 or ineligible `@capture_gaps`, and conflicts with anonymous legacy markers. Reading a gap accessor outside its
 candidate or terminal phase raises `gap_capture_context_unavailable` with rule, source, invocation, phase, and
-accessor context. A backwards child exit raises the existing source-location cursor-regression diagnostic. Ordinary Perl, Rust and Dart reject the four public gap/slot readers in pure function bodies, including a slot read from inside a child function: Perl reports unsupported/unready metadata, and Rust/Dart raise a parser-state-helper runtime error. Pass values explicitly from the ordinary parser action, for example `format(gap_text(), gap_kind())` with `fn format(text,kind){return([text.uppercase(),kind])}`; ordinary `entry_slot()` values and detached `gap_span()` records can likewise be arguments.
+accessor context. A backwards child exit raises the existing source-location cursor-regression diagnostic. Ordinary Perl, Rust, Dart and Julia reject the four public gap/slot readers in pure function bodies, including a slot read from inside a child function: Perl reports unsupported/unready metadata, and Rust/Dart/Julia raise an unsupported parser-state helper error at runtime. Pass values explicitly from the ordinary parser action, for example `format(gap_text(), gap_kind())` with `fn format(text,kind){return([text.uppercase(),kind])}`; ordinary `entry_slot()` values and detached `gap_span()` records can likewise be arguments.
 
 Migration is intentionally non-aliasing:
 

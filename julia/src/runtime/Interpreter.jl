@@ -4013,6 +4013,8 @@ const _RUNTIME_PARSER_STATE_HELPER_NAMES = let names = Set{String}()
     for row in SourceLocation.compatibility_aliases()
         push!(names, String(first(row)))
     end
+    # Current public parser-context roles outside source-location projections.
+    union!(names, ("call", "entry_slot", "gap_span", "gap_text", "gap_kind"))
     names
 end
 

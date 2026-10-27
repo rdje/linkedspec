@@ -6288,7 +6288,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3 - reject parser calls and gap readers in pure Dart functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 existing pure-function contract repair.
   Goal: Independently establish and repair Julia call(rule)/public gap-reader parser-state access inside pure functions.
   Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
@@ -6296,6 +6296,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
   Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+  Before-production finding: At clean754eca84e, unchanged Julia controls have18 missing-purity failures over6 authored sources on native/plan/fresh and9 healthy explicit-caller assertions. Actual child/gap/slot values and errors are retained; enclosing List entry_slot is null and is not labeled non-null data access, while a separate child control supplies real incoming slot provenance. Extend only the five established public parser-context roles in the current private name Set/active-function guard; ordinary parser values/callback/arity/serialization rights retain owners.
+
+  Activation: clean754eca84e3150a2983fd7c2f9558cca89753ddf9; Dart context29.2.6.3 committed/tree clean/brief0.
+  Owned paths: Existing Interpreter private parser-state name Set adds five public context roles; new test/normal registration/retained RED; scoped book/target/fact/map/roadmap/task/live/resume.
+  Verification tier: `focused`
+  Focused checks: New four groups27 assertions native/plan/fresh after RED18/healthy9; prior function-state48, all75 pass under depwarn=error/module load/compile. Strict Number versus Bool oracle, book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/function/context/portable23.4 and final clean push; stale neutral example29.2.6.6 remains separately canonical after prerequisites.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Julia independently lacks purity rejection for six authored function sources on native/plan/fresh, with18 negative failures and9 healthy explicit-caller assertions. Actual child/gap values and real incoming Item slots are recorded; List entry_slot is null and is not called non-null access. Exact source/log retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: The existing active-function guard derives names from source-location projections/aliases and omits call plus four current public gap/slot source_read helpers; normal helper dispatch still invokes or reads parser state within functions.
+  - [x] **FIX**: Union exactly call, entry_slot, gap_span, gap_text and gap_kind into the current private name Set; reuse existing pre-operand function guard and RuntimeInterpreterException. No new runtime path/API/parser/helper/IR/schema or artifact dependency.
+  - [x] **ADDRESSED (verified)**: All27 new assertions pass native/plan/fresh: child calls, four gap/slot spellings and real incoming child slot reads reject in pure bodies; ordinary parser results/gap text/kind/span and slot provenance remain exact explicit arguments. Recursive kind oracle distinguishes Number from Bool in position/slot records.
+  - [x] **NO REGRESSION**: Prior function-state48 also pass, all75 under depwarn=error including module load/compile. Normal runner registers the new test without full execution. Ordinary child-cache/gap/source/slot/lifecycle/arity/callback/local-data and serialization policies retain owners; no exhaustive/other-backend admission.
+  - [x] **LOCKSTEP**: Scoped book backend/error distinctions, target/retained RED/canonical fact/map and roadmap/task/live/resume align. Independent safe Lua follows; stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4 - reject parser calls and gap readers in pure Julia functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5`
   Status: `pending`
@@ -6325,7 +6342,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4` | `pending` | Independently assess Julia rule-call and public gap-reader function boundaries. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5` | `pending` | Independently assess safe Lua rule-call and public gap-reader function boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

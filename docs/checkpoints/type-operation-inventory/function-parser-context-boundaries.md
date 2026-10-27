@@ -1,6 +1,6 @@
 # Parser calls and public gap readers in pure functions
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust/Dart children.1-.3 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust/Dart/Julia children.1-.4 repaired/targeted-checked.
 
 call(rule) performs parser work; entry_slot/gap_span/gap_text/gap_kind are current
 public source_read helpers under ADR0079. Their absence from source-location
@@ -58,3 +58,13 @@ precedes bound-codeblock fallback, so the source role remains unchanged. Four
 new native/restored-SpecFile/plan and four prior function-state tests pass, total8;
 format/fatal selected analysis clean. Ordinary child/gap/slot/provenance values
 remain explicit arguments. Independent Julia child.4 follows; no new API/schema.
+
+Julia child.4 independently records18 missing-purity failures across six function
+sources on native/plan/fresh and9 healthy explicit-caller assertions. Actual data
+and the null List-slot versus real Item-slot distinction are retained in the Julia
+packet and tracked producer. The private name Set adds exactly five current roles,
+reusing its pre-operand guard/RuntimeInterpreterException. All27 new and48 prior
+function-state assertions pass under depwarn=error/module load/compile; a recursive
+Number-versus-Bool oracle guards position/slot kinds. Normal runner registration
+is added. Ordinary parser/gap/slot/provenance values remain explicit arguments;
+no new API/schema. Independent safe Lua child.5 is next; example.6 remains separate.
