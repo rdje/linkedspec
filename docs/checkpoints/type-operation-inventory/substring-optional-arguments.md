@@ -58,3 +58,12 @@ pass after RED, including SIWC/source snapshots, Unicode, identity/rejection/sha
 and both named mutation aliases. Legacy unary/extra-argument controls stay passing;
 global int/numeric/selector and large-slice2.14 remain unchanged/separately owned.
 Julia20.2 and safe Lua20.3 still need their recorded local repairs.
+
+## Julia20.2 targeted repair
+
+Ordinary three-argument explicit-null guard fixes the already isolated width
+collapse; Boolean conversion already agrees and remains unchanged. Registered
+shared9/legacy3 plus direct String54 strict native/plan/fresh assertions pass
+after three value REDs, preserving Number-not-Bool counters, SIWC/eager SIL,
+Unicode, identity/shape/rejection and both named mutation aliases. No global
+converter/free-arity or unsafe large-slice2.10 change; safe Lua20.3 is next.

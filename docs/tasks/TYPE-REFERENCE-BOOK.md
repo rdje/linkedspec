@@ -4289,7 +4289,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.1 - align Dart substring optional arguments`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair Julia ordinary substring optional argument parity.
   Dependencies: .23.3.20.1.
   Acceptance: Follow substring-optional-arguments.md and shared reference fixture. Null width distinction only; Boolean conversion already correct; strict native/plan/fresh. Independent RED/GREEN, direct scalar String/mutation and small compile checks; sync book/facts/task/live and commit before next backend. Full signature/context/portable admission remains23.4.
@@ -4297,6 +4297,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Shared argument/effect fixture, direct scalar String controls and selected compilation/format, current book/history/staged continuity guards.
   Planned canonical trigger: None for bounded existing-ADR0006/0023 reference repair under director feature-first cadence; full admission/final clean push separate.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Activation: clean `557efd381a16033fab2b5090d0104d2cf46a1f74`; Dart argument repair committed, brief0/tree clean.
+  Owned paths: Julia ordinary _call_runtime_substr explicit-null width guard, strict shared/native-plan-fresh test/registration and direct scalar String expectation update; frozen ledger/book/Julia/optional-argument facts/task/live continuity. Existing Boolean argument conversion already correct; no global converter/free arity/selector/mutation or unsafe large-slice2.10 repair.
+  Verification tier: `focused`
+  Focused checks: New shared native/plan/fresh RED/GREEN with strict counter kinds and legacy arity controls, direct scalar String including Unicode/eager effects/named mutation, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for bounded existing ADR0006/0023 reference repair under director feature-first cadence; full signature/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Completion: Ordinary three-argument _call_runtime_substr now returns nothing for explicit null width before the unchanged character slicing body. Existing omitted width, Boolean1/0/global converter and unary/extra-arity paths are preserved; register the shared focused test.
+  Verification:
+  - [x] REPRODUCE / ISSUE: New strict native/plan/fresh shared reference has three observed value failures: null_width becomes bc/bc and null_effects bc! instead of null. Six counter-kind assertions and three legacy arity controls already pass; Boolean starts/widths and defined-width b!/SIWC are healthy.
+  - [x] ROOT CAUSE (WHY + WHERE): Interpreter.jl _call_runtime_substr's optional width conditional maps explicitly provided nothing to absence. _runtime_int already accepts Bool via Integer, so no converter repair is necessary.
+  - [x] FIX: Add only ordinary three-argument explicit-null guard, update older qualified test expectations/names and register new shared fixture test. Keep all conversion/selector/free-arity/mutation/Unicode and large-slice2.10 behavior unchanged.
+  - [x] ADDRESSED (verified): Shared9 and legacy3 strict assertions pass native/plan/fresh after RED. Omitted/null/Bool/integer/text/fraction/negative/source-start-null distinctions and SIWC captured one-source effects now match reference, with counter Number-not-Bool checks.
+  - [x] NO REGRESSION: Direct scalar String54 assertions also pass (66 combined), retaining identities/typed indices, Unicode, source roots/bridges, eager SIL/SONC, rejection/12 malformed no-effects and both named regex mutation aliases. Strict compilation passes; no full suite, unsafe large-slice2.10 or portable admission.
+  - [x] LOCKSTEP: Registered fixture/frozen ledger/current book progress, Julia/optional argument facts/map and TYPE/SESSION/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua20.3 follows; signature/61.3/23.4 remain open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.2 - distinguish Julia null substring width`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20.3`
   Status: `pending`
@@ -4310,11 +4327,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1 is repaired/targeted-checked, with Julia20.2 and safe Lua20.3 next before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1 and Julia20.2 are repaired/targeted-checked, with safe Lua20.3 next before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` | `pending` | Julia ordinary substring explicit-null width parity; Boolean conversion already matches. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` | `pending` | Safe Lua ordinary substring explicit-null width and Boolean arguments. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

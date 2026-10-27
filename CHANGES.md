@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.20.2 — distinguish Julia null substring width
+
+Julia20.2 adds only an ordinary three-argument explicit-null width guard; existing Boolean1/0 and global conversion remain unchanged. Shared native/plan/fresh three value REDs become GREEN with registered shared9/legacy3 plus direct scalar String54 assertions (66 combined), strict compilation and Number-not-Bool counters. Omitted/null/Bool/integer/text/fraction/negative/source-start-null controls, SIWC captured source/SIL, Unicode, identities/typed indices/bridges, rejection/12 malformed effects and named mutation aliases remain correct. Free unary/extra-arity controls pass; no unsafe large-slice2.10 repair or portable admission. Book/ledger/facts/map/TYPE/SESSION/live/resume and book/history/diff/staged continuity guards align. Safe Lua20.3 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.20.1 — align Dart substring optional arguments
 
 Dart20.1 distinguishes ordinary explicit-null width and locally converts Boolean start/width to1/0 under existing Perl-reference ADR0006/0023. Shared reference RED becomes GREEN on native/restored/plan; new2/direct String7 tests (nine total) plus format/fatal selected analysis pass. Omitted/integer/text/fraction/negative/null controls, SIWC one-source snapshots, Unicode, identity kinds/typed indices/bridges, rejected effects/12 malformed controls and both mutation aliases remain correct. Legacy unary/extra-arity controls stay passing and global _intValue unchanged. Book/frozen ledger/canonical facts/map/TYPE/SESSION/live/resume align; book/history/diff/staged continuity guards pass, no full gate or large-slice2.14/portable admission. Julia20.2 next.

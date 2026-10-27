@@ -18,7 +18,7 @@ end
     check_scalar_string_consumers(raw"""Top:: I { source="a-b";order="";value=replace_substr({order=cat(order,"S");source},{order=cat(order,"O");source="changed";"-"},{order=cat(order,"N");"_"});return([[trim(" a "),lowercase("AB"),uppercase("ab"),replace_substr("a-b","-","_"),rm_prefix("pre_a","pre_"),rm_suffix("a_end","_end"),substr("abc",1),cat("a","b")],[lowercase("ΟΣ"),uppercase("Straße ﬃ"),substr("a🙂b",1,1)],cat(undef,"x"),value,order,source]); }""", JSON3.read(raw"""[["a","ab","AB","a_b","a","a","bc","ab"],["ος","STRASSE FFI","🙂"],null,"a_b","SON","changed"]""", Any))
 end
 
-@testset "Scalar String kinds boundaries and qualified slices" begin
+@testset "Scalar String kinds boundaries and reference slices" begin
     @testset "Identity kinds and explicit null operands" begin
         check_scalar_string_consumers(raw"""Top:: I { return([replace_substr(0,"","X"),rm_prefix(0,"x"),rm_suffix(0,"x"),rm_prefix(false,"x"),rm_suffix(false,"x"),rm_prefix("0","x"),replace_substr("abc",undef,"x"),replace_substr("abc","a",undef),rm_prefix("abc",undef),rm_suffix("abc",undef)]); }""", Any[0,0,0,false,false,"0",nothing,nothing,nothing,nothing]; verify=actual->begin
             @test all(value isa Number && !(value isa Bool) for value in actual[1:3])
@@ -48,8 +48,8 @@ end
             @test actual["calls"] isa Number && !(actual["calls"] isa Bool)
         end)
     end
-    @testset "Qualified substring input domains" begin
-        check_scalar_string_consumers(raw"""Top:: I { order="";source=substr({order=cat(order,"S");undef},{order=cat(order,"I");0},{order=cat(order,"L");1});start=substr("abc",undef);return([source,start,undef.substr(0),"abc".substr(undef),substr("abc",0,undef),order,substr("abc",1.5),substr("abc",-1,1),substr("abc",0,1.5),substr("abc",0,-1),substr("abc",true)]); }""", Any[nothing,nothing,nothing,nothing,"abc","SIL","abc","a","","","bc"])
+    @testset "Reference substring arguments" begin
+        check_scalar_string_consumers(raw"""Top:: I { order="";source=substr({order=cat(order,"S");undef},{order=cat(order,"I");0},{order=cat(order,"L");1});start=substr("abc",undef);return([source,start,undef.substr(0),"abc".substr(undef),substr("abc",0,undef),order,substr("abc",1.5),substr("abc",-1,1),substr("abc",0,1.5),substr("abc",0,-1),substr("abc",true)]); }""", Any[nothing,nothing,nothing,nothing,nothing,"SIL","abc","a","","","bc"])
     end
     @testset "Dedicated named-target regex mutation" begin
         check_scalar_string_consumers(raw"""Top:: I { text="aba";substr(text,/a/,"x","g");other="aba";regex_subst(other,/a/,"y","");return([text,other]); }""", Any["xbx","yba"])

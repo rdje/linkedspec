@@ -7,10 +7,11 @@ answers:
   - which policy owns substring optional argument parity
   - why do Dart Julia and Lua substring null widths differ from Perl
 date: 2026-10-27
-status: Dart targeted-checked; Julia and safe Lua repairs pending
+status: Dart and Julia targeted-checked; safe Lua repair pending
 tags: [substring, scalar, parity, optional-arguments]
 evidence: "TYPE23.2.20; substring-optional-arguments.md and shared authored fixture; Perl native/fresh, Rust native/restored/plan reference; independent Dart/Julia/safe Lua distinctions."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/substring_optional_arguments_test.jl\");include(\"julia/test/scalar_string_results_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/substring_optional_arguments_test.dart test/scalar_string_results_test.dart"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_substring_arguments.pl"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test substring_optional_arguments"
@@ -34,3 +35,7 @@ Dart20.1 guards ordinary explicit-null width and locally converts Bool1/0. Share
 native/restored/plan and direct String nine tests plus format/fatal analysis pass
 after RED, preserving SIWC snapshots, Unicode, mutation and legacy arity controls.
 Global _intValue is unchanged. Julia20.2/safe Lua20.3 are next.
+
+Julia20.2 adds only the ordinary explicit-null width guard. Registered shared9/
+legacy3/direct String54 strict native/plan/fresh assertions pass after three
+value REDs. Boolean/global conversions remain unchanged; safe Lua20.3 is next.

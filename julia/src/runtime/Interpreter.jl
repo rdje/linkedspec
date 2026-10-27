@@ -7161,7 +7161,8 @@ function _call_runtime_remove_edge(values, prefix::Bool)
 end
 
 function _call_runtime_substr(values)
-    if length(values) < 2 || values[1] === nothing || values[2] === nothing
+    if length(values) < 2 || values[1] === nothing || values[2] === nothing ||
+       (length(values) == 3 && values[3] === nothing)
         return nothing
     end
     value = _runtime_scalar_string(values[1])
