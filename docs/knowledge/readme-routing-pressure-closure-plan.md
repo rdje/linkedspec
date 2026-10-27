@@ -13,8 +13,8 @@ answers:
   - what implements README route closure
   - "does the Knowledge directory README count toward its file limit"
   - "does Knowledge Map generation use stderr on success"
-date: 2026-08-09
-status: implemented and independently recomposed; routing-pressure revision closed
+date: 2026-10-27
+status: original revision closed; October27 baseline pressure repair owned before admission
 tags: [readme, documentation, routing, pressure, lifecycle, doctrine, containment, debt]
 evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision and freezes 62 routes over 20 surfaces plus 32 mutation classes. Implementation .4.1 adds the 83-line strict JSONL registry and a core-Perl resulting-tree checker; focused report passes 44 reader + 18 author routes, all 20 measured/classified surfaces, and 32/32 mutations. README remains 105 lines and shrinks 5,072->5,057 bytes after removing only stale test_input/. Clean 7c2ff407 debt baselines remain immutable; finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners alone may grow them. Implementation signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds. Unchanged .4.2 proves seven owner hashes from clean 5c570719 and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in 673 seconds, closing .4."
 last_verified: 2026-08-09
@@ -56,3 +56,16 @@ The map generator sends its normal successful-write notice to stderr and exits0.
 Validate its exit and expected notice instead of requiring empty stderr. The
 October24 source/actual-channel qualification is retained in
 `docs/checkpoints/signed-array-contract-admission/knowledge-generation.json.gz`.
+
+October27 TYPE21.4's first broader pressure check fails on cumulative history,
+Knowledge and task collection controls, plus non-dated CHANGES freshness. Actual
+failed staged index/base/producer/output and controlled HEAD deltas are retained
+in docs/checkpoints/type-operation-inventory/document-pressure-intake.*. The slice
+adds no archive/card files; prior HEAD already carries the failing baseline and
+non-dated headings. Current Julia runtime43 checks/render pass independently.
+TYPE1.2.20.1 owns all repair lanes under the existing post-feature containment
+schedule, mandatory before full admission/push. Do not infer a canonical receipt
+from focused feature checks or refresh budgets to admit this state. New CHANGES
+headings must include an ISO date; current heading/local writer recurrence is
+corrected, with historical repair still owned. Original August acceptance stays
+historical, not a new healthy epoch.

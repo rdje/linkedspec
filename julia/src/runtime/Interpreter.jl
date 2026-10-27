@@ -5910,8 +5910,19 @@ function _evaluate_runtime_fluent_chain!(
         current_edge,
     )
     scalar_result = value isa Bool
+    reduction_result = false
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
+        # Reduction results may change container family; check before operands.
+        if reduction_result && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
+            (!(value isa AbstractVector) && (
+                helper_name in _RUNTIME_ARRAY_HELPER_NAMES ||
+                helper_name in ("num_sum", "num_avg", "num_median", "num_range")
+            )) ||
+            (!(value isa AbstractDict) && helper_name in _RUNTIME_HASH_HELPER_NAMES)
+        )
+            return nothing
+        end
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
         if scalar_result && !(helper_name in ("is_empty", "is_nonempty")) && (
@@ -5925,7 +5936,7 @@ function _evaluate_runtime_fluent_chain!(
         # container output permits later array/hash-only consumers.
         may_produce_scalar = helper_name in (
             "trim", "lowercase", "uppercase", "replace_substr", "rm_prefix", "rm_suffix", "substr", "cat",
-            "coalesce", "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
+            "reduce_leaves", "coalesce", "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
             "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le",
@@ -5960,6 +5971,7 @@ function _evaluate_runtime_fluent_chain!(
             rule_label,
             current_edge,
         )
+        reduction_result = reduction_result || helper_name == "reduce_leaves"
         scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict))
     end

@@ -72,3 +72,9 @@ width guard. Registered shared9/legacy3/direct String54 strict assertions pass
 after three native/plan/fresh REDs, preserving SIWC/source snapshots and mutation.
 See [[substring-optional-arguments]]. No global int/numeric/selector/Unicode/
 callback/schema, large-slice2.10 repair or full admission follows.
+
+Reduction21.4 adds scalar metadata and actual container-family consumer guards
+to the existing dynamic loop; callback/root/initial bodies stay. Registered
+forty-three strict native/plan/fresh assertions and compilation pass, with
+Number-not-Bool/false/counters and clean rejected-operand effects. Canonical
+result/command details: [[array-tree-traversal-contract]].

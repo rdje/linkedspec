@@ -21,7 +21,7 @@ This is the canonical regression gate for local development. For snippet-level l
 ## Verification tiers
 
 During the director’s feature-completion phase, compile and run a quick targeted check, commit, then implement the next feature.
-Broad suites, exhaustive proof and global registry scans are deferred until feature coverage is complete; the baseline automated tiers remain:
+Broad suites, exhaustive proof and global registry scans are deferred until feature coverage is complete. The current document-pressure/freshness failures are retained under `TYPE-REFERENCE-BOOK.1.2.20.1` and must be repaired before canonical admission or push; focused feature checks are not a full-doctrine receipt. The baseline automated tiers remain:
 
 - A **focused commit** runs the tests for the changed behavior, its direct dependents, the relevant backend or
   component gate, all repository doctrines, documentation-history pressure checks, and diff hygiene. Book changes

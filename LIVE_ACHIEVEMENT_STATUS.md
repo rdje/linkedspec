@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart reduction result consumer guards21.3 implemented/targeted-checked; Julia21.4 independently follows, then safe Lua. Full signature/context/portable admission remains open.
+Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
 
 ## Latest Completed Slice
 
-Dart21.3 independently confirms existing reduction values/immediate traversals/producers/root skipping, then repairs scalar result metadata and actual Array/Hash-only consumer admission before operands. Seven focused native/restored/plan tests plus format/fatal selected analysis pass after Number.take []/SILA and opposite-family []/SILKV/[]/SILA RED. Shared Number/String/Bool/null/Array/Hash/empty kinds, typed index0/copies, numeric/default/selection and immediate/coalesced/repeated reductions, scoped SI(L*)C snapshots remain; scalar/prefix/opposite-family rejection now retains SIL/SILC and skips operands. Existing Array/Hash walk/map/plain reduction/root/path order and compile-time malformed errors stay. Traversal/root/initial/callback/serialization/global converters unchanged. Book/frozen/Dart/traversal facts/map/TYPE/SESSION/live/resume and book/history/diff/staged continuity align; invalid diagnostic parity1.2.1.4.1 includes Dart before admission. No full gate/context/deferred/bang/portable admission; Julia21.4 independently next.
+Julia21.4 independently confirms strict producers/valid dynamic reduction and traversal/root-skip behavior, then adds reduction scalar metadata and actual Array/Hash-only consumer guards before operands. Registered forty-three strict native/plan/fresh assertions and compilation pass after Any[]/SILA scalar and []/SILKV/[]/SILA opposite-family RED. Number-not-Bool/false/counter identity, shared kinds/typed index0/copies, numeric/default/selection and immediate/coalesced/repeated reductions, scoped SI(L*)C remain; rejected scalar/prefix/opposite-family consumers retain SIL/SILC and skip operands. Existing Array/Hash walk/map/plain reduction/root/path order and static malformed errors stay. Callback/root/initial/converter/serialization bodies unchanged. Book/frozen/Julia/traversal facts/map/TYPE/SESSION/live/resume and book/history/diff/staged memory/cadence/diagnosis align; error-phase parity1.2.1.4.1 includes Julia before admission. No full gate/deferred/context/bang/portable admission; safe Lua21.5 independently next. Broader document-pressure/freshness gate FAIL is preserved with its exact staged source/producer/output; pre-existing history/Knowledge/task capacity and heading debt is owned1.2.20.1 before admission/push, following existing post-feature containment scheduling. Current CHANGES date/writer recurrence fixed; no canonical receipt is claimed.
 
 ## Next Action
 
-Independently assess/implement Julia21.4 reduction accumulator result flow from reduction-result-continuations.md/shared valid fixture. Preserve current malformed callback policy with local controls, strict Number-not-Bool and source/callback/copy/scope/order/actual-kind boundaries. Native/plan/fresh producer-first and small direct traversal/compile checks/docs/commit, then safe Lua21.5. No full suite/matrix/deferred/context expansion.
+Independently assess/implement safe Lua21.5 reduction accumulator result flow from reduction-result-continuations.md/shared valid fixture. Preserve false/module-local ceiling/root/callback/copy/scope/order/global conversion and current malformed policy (parity1.2.1.4.1). Producer-first native/plan/fresh on PUC5.5.1/LuaJIT, small direct traversal/source loads/docs/commit. No malformed native patterns/full runner/declared5.4 or full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` — Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` — Dart reduction result consumer guards21.3 implemented/targeted-checked; Julia21.4 independently follows, then safe Lua. Full signature/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.2` — Rust reduction accumulator result flow21.2 implemented/targeted-checked with invalid-root effect repair; Dart21.3 independently follows. Malformed diagnostic parity remains owned before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.1` — Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
@@ -29,7 +30,6 @@ Independently assess/implement Julia21.4 reduction accumulator result flow from 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.19` — Scalar String-helper result contract19 frozen; stale cat null teaching corrected, Perl19.1 owns flow and affix identity kind repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.5` — Lua defined-only default result18.5 targeted-checked; all five bounded backends complete, pure String result assessment19 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.18.4` — Julia defined-only default result18.4 targeted-checked; four bounded backends complete, safe Lua18.5 next.
 
 ## History
 

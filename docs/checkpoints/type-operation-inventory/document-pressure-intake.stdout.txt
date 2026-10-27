@@ -1,0 +1,47 @@
+[readme-routing] FAIL: surface change_history exceeds control: files 56/52
+[readme-routing] FAIL: surface change_history member exceeds control: lines 55/51
+[readme-routing] FAIL: surface change_history member exceeds control: bytes 31438/29134
+[readme-routing] FAIL: surface change_history freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: change_history current hot shard has a non-dated change heading
+
+[readme-routing] FAIL: surface engineering_notes exceeds control: files 54/49
+[readme-routing] FAIL: surface engineering_notes exceeds control: aggregate lines 30329/30024
+[readme-routing] FAIL: surface engineering_notes exceeds control: aggregate bytes 3491070/3407872
+[readme-routing] FAIL: surface engineering_notes member exceeds control: lines 53/48
+[readme-routing] FAIL: surface engineering_notes member exceeds control: bytes 32140/29080
+[readme-routing] FAIL: surface engineering_notes freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: change_history current hot shard has a non-dated change heading
+
+[readme-routing] FAIL: surface knowledge_cards exceeds control: files 1353/1350
+[readme-routing] FAIL: surface knowledge_cards exceeds control: aggregate bytes 8409056/8388608
+[readme-routing] FAIL: surface live_status freshness verifier failed (document_history): [document-history] mutation self-tests: 34/34 pass
+[document-history] FAIL: change_history current hot shard has a non-dated change heading
+
+[readme-routing] FAIL: surface task_evidence exceeds control: aggregate bytes 13170566/12582912
+[readme-routing] FAIL: surface task_evidence freshness verifier failed (task_tree_metadata): [task-tree-partitions] mutation self-tests: 37/37 pass
+[task-tree-partitions] FAIL: task collection exceeds 12,582,912 bytes
+
+[readme-routing] FAIL: surface task_index freshness verifier failed (task_tree_metadata): [task-tree-partitions] mutation self-tests: 37/37 pass
+[task-tree-partitions] FAIL: task collection exceeds 12,582,912 bytes
+
+[readme-routing] governed author-overflow destinations:
+[readme-routing] route_hint=AGENTS.md
+[readme-routing] route_hint=ARCHITECTURE_STATE.md
+[readme-routing] route_hint=CHANGES.md
+[readme-routing] route_hint=COMMIT.md
+[readme-routing] route_hint=LIVE_ACHIEVEMENT_STATUS.md
+[readme-routing] route_hint=MEMORY.md
+[readme-routing] route_hint=ROADMAP.md
+[readme-routing] route_hint=ROADMAP_V2.md
+[readme-routing] route_hint=SESSION_BOOTSTRAP.md
+[readme-routing] route_hint=TOOLBOX.md
+[readme-routing] route_hint=USER_GUIDE.md
+[readme-routing] route_hint=docs/TASK_TREE.md
+[readme-routing] route_hint=docs/decisions/
+[readme-routing] route_hint=docs/knowledge/
+[readme-routing] route_hint=docs/linkedspec-book/
+[readme-routing] route_hint=docs/linkedspec-book/src/development/local-ci-and-regression.md
+[readme-routing] route_hint=docs/tasks/
+[readme-routing] route_hint=git history
+[readme-routing] routing-pressure doctrine FAILED; repair the owning surface or route under README_POLICY.md
+[readme-stability] FAIL: routed-destination closure or pressure control failed

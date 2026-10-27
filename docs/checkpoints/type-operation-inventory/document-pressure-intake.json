@@ -1,0 +1,55 @@
+{
+  "base_commit": "0b9046522682d308b26d7935e09b0a279a7ab291",
+  "source_mode": "staged index before intake/date correction",
+  "command": "bash tools/project_data_run.sh bash scripts/check_readme_stability.sh",
+  "exit_code": 1,
+  "patch_path": "document-pressure-intake.index.patch.gz",
+  "patch_sha256": "680dec63d10ea9ad4a86a2f4aa6e30fb674aa080ce38bdf579109190aeab2118",
+  "compressed_patch_sha256": "8491d79551d2175b26bd4cc4fce195855f0bde1f411b5a5150b51a9de42d1e72",
+  "stdout_path": "document-pressure-intake.stdout.txt",
+  "stdout_sha256": "bc765eed6dcc5c12d59e4223ac70f66d01cb69808e928f86d5d113f92da5aa8c",
+  "unchanged_producer_inputs": {
+    "scripts/check_readme_stability.sh": {
+      "sha256": "0c1b9183fd8a4ad9acddc6ac58d2d76c55d054817783429a0992c1116c8bf6ed",
+      "git_blob": "6ea96cbe65eb7b064244af85fe268a75a735f31a"
+    },
+    "scripts/check_readme_routing_pressure.pl": {
+      "sha256": "25ebece68759906143b68e4dd7e13bc094e186c2309e1778f7f8ef315cc06106",
+      "git_blob": "a4508036c0ce29e11c2f1e625d9c124ef3da68d3"
+    },
+    "doctrine/readme_stability/routes.jsonl": {
+      "sha256": "0a1038f328275da73d2ad1389384f5593c4ce29051c1770fb0f1dfd254f1222a",
+      "git_blob": "b968732207c3263779916625ff1cb357f98f9c36"
+    }
+  },
+  "head_to_index_relevant_deltas": [
+    {
+      "path": "docs/knowledge/array-tree-traversal-contract.md",
+      "head_bytes": 7523,
+      "index_bytes": 8442,
+      "delta": 919
+    },
+    {
+      "path": "docs/knowledge/julia-runtime-string-numeric-helpers.md",
+      "head_bytes": 5076,
+      "index_bytes": 5443,
+      "delta": 367
+    },
+    {
+      "path": "docs/tasks/SESSION-STARTUP-READING.md",
+      "head_bytes": 5051,
+      "index_bytes": 5057,
+      "delta": 6
+    },
+    {
+      "path": "docs/tasks/TYPE-REFERENCE-BOOK.md",
+      "head_bytes": 812480,
+      "index_bytes": 816862,
+      "delta": 4382
+    }
+  ],
+  "no_added_archive_or_card_files": true,
+  "head_has_non_dated_changes": true,
+  "repair_owner": "TYPE-REFERENCE-BOOK.1.2.20.1",
+  "admission_claim": false
+}

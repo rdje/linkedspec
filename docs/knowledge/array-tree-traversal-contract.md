@@ -2,6 +2,7 @@
 id: array-tree-traversal-contract
 title: "Array and Hash traversal preserve callback scope and actual reduction result kinds"
 answers:
+  - "why does Julia reduce_leaves take evaluate an incompatible operand"
   - "why does Dart reduce_leaves take evaluate an incompatible operand"
   - "why does Rust evaluate a reduction initial for a scalar or null root"
   - "does Rust reduce_leaves preserve malformed callback arity errors"
@@ -20,6 +21,7 @@ status: current
 tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, rust, oracle, SPEC-FORMAT-TERSE]
 evidence: "SPEC13 root traversal; TYPE23.1.1 frozen result feature and Perl21.1/Rust21.2 focused RED/GREEN. Exact prior full record/July milestones at Git2eb98f833f712bfeb78d0cdb416060e1905ff72c for this path."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/reduction_result_receivers_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/reduction_result_receivers_test.dart"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test reduction_result_receivers"
@@ -119,3 +121,12 @@ seven native/restored/plan tests plus format/fatal analysis pass with shared
 kinds/indices/copies/scope/order and clean SIL/SILC rejection. Traversal bodies/
 root/initial/global conversion stay unchanged. Static malformed compile errors
 join1.2.1.4.1 parity owner; Julia21.4 and safe Lua21.5 remain independent next.
+
+Julia21.4 independently confirms strict producers and valid dynamic traversal/
+result/source/scoped/root-skip behavior. Scalar-rejection Any[]/SILA and opposite
+[]/SILKV/[]/SILA RED come from missing reduction scalar metadata/container-kind
+guards. Add those only; registered forty-three strict native/plan/fresh assertions
+and compilation pass, including Number-not-Bool/false/counters, shared kinds/
+indices/copies/immediate-repeat-coalesced reductions, SI(L*)C/scope and clean
+SIL/SILC rejection. Callback/root/initial/converter bodies stay. Julia static
+malformed errors join1.2.1.4.1; safe Lua21.5 is next before broader admission.

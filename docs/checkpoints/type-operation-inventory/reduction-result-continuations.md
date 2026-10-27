@@ -131,3 +131,19 @@ scoped SI(L*)C; rejected scalar/prefix/opposite-family cases retain SIL/SILC and
 skip operands. Valid root/path/direct producer controls stay passing. Dart static
 malformed errors match Rust's phase and remain within1.2.1.4.1 parity scheduling.
 No full context/deferred/bang/signature/portable admission; Julia21.4 follows.
+
+## Julia21.4 bounded implementation
+
+Independent strict producer/scope/source-order/root-skipping/traversal and static
+malformed controls already work native/plan/fresh. Shared RED is scalar take
+Any[]/SILA; opposite container kinds give []/SILKV and []/SILA. Add reduction
+may-produce-scalar metadata and actual Array/Hash-only consumer admission before
+operands, including existing Array-only numeric reducers. Keep dedicated traversal
+and callback/root/initial/copy/global conversion bodies unchanged.
+
+Registered forty-three strict assertions pass after RED, retaining Number-not-
+Bool/false/counter identity, typed indices/copies, immediate/repeated/coalesced
+reductions, scoped SI(L*)C and clean SIL/SILC/opposite-family rejection. Direct
+Array/Hash root/path controls and strict compilation pass. Julia's compile-time
+malformed errors join1.2.1.4.1 scheduling. Full signature/context/portable and
+deferred/bang admission remain separate; safe Lua21.5 independently follows.
