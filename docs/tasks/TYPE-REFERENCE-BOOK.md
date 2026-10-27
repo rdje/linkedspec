@@ -4262,7 +4262,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Preserve omitted versus explicit null, helper-specific Boolean1/0, source capture/eager SIWC, integer/fractional/negative/Unicode rules and dedicated mutation paths. Do not change global numeric converters/selectors/free arities or assert complete portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair Dart ordinary substring optional argument parity.
   Dependencies: .23.2.20.
   Acceptance: Follow substring-optional-arguments.md and shared reference fixture. Null width and Boolean start/width conversion; native/restored/plan. Independent RED/GREEN, direct scalar String/mutation and small compile checks; sync book/facts/task/live and commit before next backend. Full signature/context/portable admission remains23.4.
@@ -4270,6 +4270,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Shared argument/effect fixture, direct scalar String controls and selected compilation/format, current book/history/staged continuity guards.
   Planned canonical trigger: None for bounded existing-ADR0006/0023 reference repair under director feature-first cadence; full admission/final clean push separate.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Activation: clean `2bb2643d49498a7803466808502ad3d276d51de6`; frozen optional argument target committed, brief0/tree clean.
+  Owned paths: Dart ordinary _callSubstr null-width/Boolean argument distinction, shared reference and direct scalar String tests/retained diagnostic; scoped frozen ledger/book/canonical facts/task/live continuity. Preserve global _intValue, free unary/extra-arity and dedicated mutation behavior.
+  Verification tier: `focused`
+  Focused checks: New shared native/restored/plan RED/GREEN, direct scalar String including named mutation/Unicode/eager effects and legacy arity controls, selected format/fatal analysis, book/history/staged continuity guards.
+  Canonical trigger: None for bounded existing ADR0006/0023 reference repair under director feature-first cadence; full signature/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Completion: _callSubstr distinguishes a provided null width at ordinary three-argument arity and locally converts Bool slice arguments to1/0 only for supported ordinary two/three-argument forms. Global _intValue, numeric/selector conversion and existing unary/extra-argument behavior remain unchanged.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Shared reference test RED gives bc for null widths, abc/empty for true starts/widths and [abc!,SIWC,1,null]/[!,SIWC,1,null] rather than reference null/b!. Independent native/restored/plan observations were retained in20; legacy unary/extra-argument preservation test already passes before production.
+  - [x] ROOT CAUSE (WHY + WHERE): interpreter.dart _callSubstr maps a provided null width to omitted and delegates Bool arguments to rejecting global _intValue. Eager operand staging/source capture already works, so repair the helper body only.
+  - [x] FIX: Ordinary explicit-null width guard plus local Bool1/0 offset branch; preserve fractional/negative normalization and all other call arities. Update the older qualified substring expectations to the frozen reference; no global converter/selector or mutation change.
+  - [x] ADDRESSED (verified): New shared fixture passes native/restored/plan with omitted/null/Bool/integer/text/fraction/negative/source-start-null distinctions and captured SIWC/one-source effects. Explicit legacy free unary/extra-arity controls remain passing; defined-width chain gives b!, present-null chain null.
+  - [x] NO REGRESSION: New2/direct scalar String7 tests pass (nine total), preserving Unicode, identity kinds/typed Array indices, source roots/bridges, eager SIL/SONC/rejected prefix effects,12 malformed no-effects and both named regex mutation aliases. Selected runtime/tests format and fatal analysis pass. No full gate/large-slice2.14 repair or portable admission.
+  - [x] LOCKSTEP: Frozen ledger/current book progress, canonical optional-argument/Dart facts/map and TYPE/SESSION/live/resume align; book/history/diff/final staged memory/cadence/diagnosis checked before commit. Julia20.2 next, safe Lua20.3 follows; broader signature/61.3/23.4 remain open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.20.1 - align Dart substring optional arguments`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20.2`
   Status: `pending`
@@ -4293,11 +4310,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; concrete Dart20.1, Julia20.2 and safe Lua20.3 repairs follow before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1 is repaired/targeted-checked, with Julia20.2 and safe Lua20.3 next before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` | `pending` | Dart ordinary substring explicit-null width and Boolean argument parity. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` | `pending` | Julia ordinary substring explicit-null width parity; Boolean conversion already matches. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

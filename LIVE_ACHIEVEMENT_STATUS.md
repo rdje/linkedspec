@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Optional substring20 target frozen; Dart20.1, Julia20.2 and safe Lua20.3 repairs selected from existing Perl-reference policy. Broad admission remains separate.
+Dart optional substring argument repair20.1 targeted-checked; Julia20.2 then safe Lua20.3 follow. Complete signature/context/portable admission remains open.
 
 ## Latest Completed Slice
 
-Assessment20 resolves omitted/null/Boolean slice argument parity from ADR0006 Perl oracle and ADR0023 equivalent accepted-input/results; ADR0029 strict Bool rejection remains arithmetic-specific. Shared authored fixture passes Perl native/fresh and Rust native/restored/in-process plan. Independent Dart/Julia/safe PUC5.5.1/LuaJIT native/generated distinctions retain null-width, Boolean1/0 and SIWC snapshot differences; production unchanged. Three local repairs20.1-.3 are scheduled; canonical fact/map and current book qualifiers align. SESSION root stale predicate/numeric frontier is boundedly corrected with exact prior Git preservation; broad61.3/23.4 remain open. Dart diagnostic format/fatal analysis, probe syntax, book/history/diff/staged continuity checks pass; no full gate.
+Dart20.1 distinguishes ordinary explicit-null width and locally converts Boolean start/width to1/0 under existing Perl-reference ADR0006/0023. Shared reference RED becomes GREEN on native/restored/plan; new2/direct String7 tests (nine total) plus format/fatal selected analysis pass. Omitted/integer/text/fraction/negative/null controls, SIWC one-source snapshots, Unicode, identity kinds/typed indices/bridges, rejected effects/12 malformed controls and both mutation aliases remain correct. Legacy unary/extra-arity controls stay passing and global _intValue unchanged. Book/frozen ledger/canonical facts/map/TYPE/SESSION/live/resume align; book/history/diff/staged continuity guards pass, no full gate or large-slice2.14/portable admission. Julia20.2 next.
 
 ## Next Action
 
-Implement Dart20.1 ordinary substring explicit-null width and helper-specific Boolean start/width parity from frozen substring-optional-arguments.md. Existing independent native/restored/plan RED is retained; add small shared/direct String/mutation regression and format/compile checks, sync book/facts/task/live, commit then Julia20.2/safe Lua20.3. No global converter/selector/free-arity change or full matrix.
+Implement Julia20.2 ordinary explicit-null substring width from frozen substring-optional-arguments.md. Boolean arguments already match; preserve global converters/free arities/mutation, add shared strict native/plan/fresh RED/GREEN plus small direct String/compile checks, sync docs and commit then safe Lua20.3. No full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` — Dart optional substring argument repair20.1 targeted-checked; Julia20.2 then safe Lua20.3 follow. Complete signature/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.20` — Optional substring20 target frozen; Dart20.1, Julia20.2 and safe Lua20.3 repairs selected from existing Perl-reference policy. Broad admission remains separate.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.5` — Lua scalar String result19.5/identity/null operands and PUC large-end bounds repaired/targeted-checked; all five bounded backends complete, input-domain assessment20 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` — Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
@@ -29,7 +30,6 @@ Implement Dart20.1 ordinary substring explicit-null width and helper-specific Bo
 - `TYPE-REFERENCE-BOOK.1.2.23.2.18` — Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.5` — All five bounded logical result implementations targeted-checked; defined-only coalesce receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` — Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
 
 ## History
 

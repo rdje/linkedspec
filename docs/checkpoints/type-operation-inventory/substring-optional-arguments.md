@@ -49,3 +49,12 @@ probe_scalar_string_julia.jl arguments, probe_scalar_string_lua.lua arguments.
 Rust test substring_optional_arguments is a passing reference regression. Actual
 production remains unchanged in this assessment; separate backend leaves retain
 RED/GREEN and direct String/mutation checks. No universal conversion rule follows.
+
+## Dart20.1 targeted repair
+
+Local ordinary-arity null guard/Boolean conversion now matches the shared oracle
+on native/restored/plan. New2/direct String7 tests, selected format/fatal analysis
+pass after RED, including SIWC/source snapshots, Unicode, identity/rejection/shape
+and both named mutation aliases. Legacy unary/extra-argument controls stay passing;
+global int/numeric/selector and large-slice2.14 remain unchanged/separately owned.
+Julia20.2 and safe Lua20.3 still need their recorded local repairs.

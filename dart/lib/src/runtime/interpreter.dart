@@ -7578,14 +7578,22 @@ Object? _callRemoveEdge(List<Object?> values, {required bool prefix}) {
 }
 
 Object? _callSubstr(List<Object?> values) {
-  if (values.length < 2 || values.first == null || values[1] == null) {
+  if (values.length < 2 ||
+      values.first == null ||
+      values[1] == null ||
+      (values.length == 3 && values[2] == null)) {
     return null;
   }
   final value = _scalarString(values[0]);
   if (value == null) {
     return null;
   }
+  final ordinaryArity = values.length == 2 || values.length == 3;
   int offset(Object? value) {
+    // Slice arguments retain Perl's Boolean integer compatibility locally.
+    if (ordinaryArity && value is bool) {
+      return value ? 1 : 0;
+    }
     if (value is num && !_isInteger(value)) {
       return 0;
     }

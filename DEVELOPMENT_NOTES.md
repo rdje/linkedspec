@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.20.1 — align Dart substring optional arguments
+
+Dart20.1 distinguishes ordinary explicit-null width and locally converts Boolean start/width to1/0 under existing Perl-reference ADR0006/0023. Shared reference RED becomes GREEN on native/restored/plan; new2/direct String7 tests (nine total) plus format/fatal selected analysis pass. Omitted/integer/text/fraction/negative/null controls, SIWC one-source snapshots, Unicode, identity kinds/typed indices/bridges, rejected effects/12 malformed controls and both mutation aliases remain correct. Legacy unary/extra-arity controls stay passing and global _intValue unchanged. Book/frozen ledger/canonical facts/map/TYPE/SESSION/live/resume align; book/history/diff/staged continuity guards pass, no full gate or large-slice2.14/portable admission. Julia20.2 next.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.2.20 — reconcile ordinary substring argument parity
 
 Assessment20 resolves omitted/null/Boolean slice argument parity from ADR0006 Perl oracle and ADR0023 equivalent accepted-input/results; ADR0029 strict Bool rejection remains arithmetic-specific. Shared authored fixture passes Perl native/fresh and Rust native/restored/in-process plan. Independent Dart/Julia/safe PUC5.5.1/LuaJIT native/generated distinctions retain null-width, Boolean1/0 and SIWC snapshot differences; production unchanged. Three local repairs20.1-.3 are scheduled; canonical fact/map and current book qualifiers align. SESSION root stale predicate/numeric frontier is boundedly corrected with exact prior Git preservation; broad61.3/23.4 remain open. Dart diagnostic format/fatal analysis, probe syntax, book/history/diff/staged continuity checks pass; no full gate.

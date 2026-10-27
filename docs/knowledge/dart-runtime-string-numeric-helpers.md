@@ -16,7 +16,7 @@ status: current
 tags: [dart, runtime, helpers, string, numeric, DART-BACKEND-PARITY]
 evidence: "String/numeric4.3.2; definedness11.3, numeric comparison15.3/arithmetic16.3 and scalar String19.3 focused proof. Prior full fact/11.3 detail and historical-list pointer at Git82635ca70466e0d475c31597c378a1bb2c7c2248."
 reverify:
-  - "cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_string_results_test.dart test/default_selected_receivers_test.dart"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/substring_optional_arguments_test.dart test/scalar_string_results_test.dart"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_arithmetic_results_test.dart test/numeric_comparison_results_test.dart"
 ---
 
@@ -60,7 +60,9 @@ add eight-method scalar/shape metadata and normalize fractional offsets locally.
 Seven new/direct defaults3 native/restored/plan tests plus format/fatal analysis
 pass, preserving typed Array/Hash keys, Unicode, SONC-SC-selectedS/eager null
 snapshots/rejection/12 malformed no-effects and both named mutation aliases.
-Dart provided-null width still means omitted; Boolean offset remains invalid0.
-These differ from Perl/Rust compatibility; P2 TYPE23.2.20 reconciles domains after
-19.5 before portable admission. No global int/numeric/selector/Unicode/callback/
-regex/named-context or large-slice2.14 repair is implied.
+TYPE23.2.20 freezes existing Perl-reference slice semantics. Dart20.1 now guards
+ordinary provided-null width and locally converts Boolean start/width to1/0.
+New2/direct String7 tests and format/fatal analysis pass after RED on native/
+restored/plan, preserving SIWC snapshots, Unicode, identities, mutation aliases
+and legacy unary/extra-arity behavior. Global _intValue stays unchanged; details
+at [[substring-optional-arguments]]. No large-slice2.14 or full admission follows.

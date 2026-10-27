@@ -83,11 +83,11 @@ void main() {
     },
   );
   test(
-    'substring guards preserve eager operands and Dart input-domain conventions',
+    'substring guards preserve eager operands and reference argument semantics',
     () {
       assertConsumers(
         r'''Top:: I { order="";source=substr({order=cat(order,"S");undef},{order=cat(order,"I");0},{order=cat(order,"L");1});start=substr("abc",undef);return([source,start,undef.substr(0),"abc".substr(undef),substr("abc",0,undef),order,substr("abc",1.5),substr("abc",-1,1),substr("abc",0,1.5),substr("abc",0,-1),substr("abc",true)]); }''',
-        [null, null, null, null, 'abc', 'SIL', 'abc', 'a', '', '', 'abc'],
+        [null, null, null, null, null, 'SIL', 'abc', 'a', '', '', 'bc'],
       );
     },
   );
