@@ -33,6 +33,7 @@ reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_helper_calls.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_functions.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_contextual_boundary.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test computed_selection"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/computed_selection_test.dart"
@@ -173,7 +174,13 @@ and declared-host/native-formatting repair owners remain open.
 Follow-up23.1.5 finds helper/noncall computed reads still leak through registered
 contextual final blocks: explicit literals retain raw_perl/raw1/unready, while
 attached/parenthesized equivalents carry unsupported value_access/raw0/ready1.
-The earlier role fence removes registered names only. P1 prerequisite25.0 owns
-restoring the complete existing deferred read vocabulary before readonly capture
-source expansion; bounded ordinary support is not full callback admission.
+The earlier role fence removes registered names only. Prerequisite25.0 now also
+localizes the existing deferred-literal grammar flag in the exact registered
+final-slot signature/count role: attached bodies and parenthesized block reparses
+retain raw_perl/raw1/unready. Builtin immediate blocks and ordinary arguments keep
+their compiled grammar; scopes restore after success and parse failure. The
+retained native/fresh/descriptor/Unicode controls distinguish these cases without
+adding an executor operation. Pure-function callbacks still see invocation-local
+parameters, not implicit rule captures. Bounded ordinary support is not full
+callback admission; readonly capture source expansion25.1 follows.
 See [[capture-collection-selection-boundary]] for the public six-form distinction.

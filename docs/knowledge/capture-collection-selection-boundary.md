@@ -9,7 +9,7 @@ answers:
   - is entry_named_map still an accepted source compatibility alias
   - which task repairs contextual callback computed read readiness
 date: 2026-10-27
-status: target25 selected; contextual preservation25.0 precedes implementation
+status: target25 selected; contextual preservation25.0 repaired; Perl25.1 next
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
@@ -42,7 +42,10 @@ recognition in that role; helper/noncall admission remains active before
 CallableContract transports the AST to CodeblockRuntime.25.0 must preserve the
 explicit-literal vocabulary using actual final-slot signature/count ownership;
 immediate/inline helpers retain their broader compiled bodies. No new deferred
-operation is selected. See [[perl-generic-final-codeblock-normalization]] and
+operation is selected.25.0 restores that boundary by localizing the existing
+deferred grammar flag only in the recognized registered final callback role;
+ordinary arguments and builtin inline blocks remain compiled. Its retained
+native/fresh/metadata/span/scope controls pass. See [[perl-generic-final-codeblock-normalization]] and
 [[computed-value-selection-boundary]].
 
 Frozen target/input/oracle, retained intake and scheduled children are in

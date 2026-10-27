@@ -15,7 +15,7 @@ answers:
   - "why can Perl call value inside with"
   - "how does Perl with restore callable bindings"
   - "does calling a non callable with value report a typed error"
-date: 2026-10-25
+date: 2026-10-27
 status: current
 tags: [perl, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
 evidence: "Original generic normalization and dated closeout evidence remain in this same card at accepted Git 2fca7d8489038c226fe0454a105f12a2af696a1f. TYPE-REFERENCE-BOOK.1.2.4 owns immediate scopes;16 adds metadata-governed deferred with."
@@ -52,3 +52,14 @@ This finite Perl repair does not admit exhaustive methods or another backend.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[perl-final-codeblock-signature-declaration-gap]].
+
+October27 preservation25.0: registered final contextual callbacks use the same
+deferred computed-read grammar as explicit literals. Parser's signature/count
+owner localizes the existing deferred-body flag when parsing an attached body or
+reparsing a final parenthesized block. Registry-only fencing was insufficient:
+helper/noncall reads otherwise became unsupported value_access with ready1/raw0.
+All three forms now retain the explicit raw_perl rejection and raw1/unready.
+Ordinary arguments and builtin immediate blocks keep their broader compiled
+grammar; named readers, exact Unicode spans and success/failure scope restoration
+are preserved. Run t/computed_selection_contextual_boundary.t for the finite
+native/fresh/descriptor distinction. No AST field or executor vocabulary is added.

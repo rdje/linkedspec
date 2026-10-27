@@ -582,8 +582,11 @@ sub _parse_trailing_block_call_expr {
  my $block_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
  my $block;
  {
-  local $_registered_function_registry = _registered_codeblock_argument($call->{method}, scalar @args)
-   ? undef : $_registered_function_registry;
+  my $deferred = _registered_codeblock_argument($call->{method}, scalar @args);
+  # Registered final callbacks use CodeblockRuntime, like explicit literals.
+  # Immediate builtin blocks retain their ordinary compiled-body grammar.
+  local $_parsing_deferred_literal_body = $deferred || $_parsing_deferred_literal_body;
+  local $_registered_function_registry = $deferred ? undef : $_registered_function_registry;
   $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
  }
  push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
@@ -877,6 +880,7 @@ sub _parse_arg_exprs {
    # Identify the block through the ordinary grammar first; Hash values and
    # expressions producing a callback are still ordinary evaluated arguments.
    local $_registered_function_registry;
+   local $_parsing_deferred_literal_body = 1;
    $node = parse_action_expr($arg, {base_start => $start});
   }
   push @args, $node;
