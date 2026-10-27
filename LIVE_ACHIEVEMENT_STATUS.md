@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
+Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
 
 ## Latest Completed Slice
 
-Selection23.1.2 freezes documented split_tagged_records text-to-Array bridge and a Perl producer prerequisite. Public native/fresh basic records/carry-copy controls work; literal/named receivers leak raw dot DSL and call an undefined host helper, while trim-prefix gives null. Current SESSION33 defect is independently reproduced: a,b, carried increment yields rows a/1,b/2/counter2 beside pure split retaining trailing empty, empty source counter0, and eager tag/delimiter blocks leak DSL and fail. Freeze ordinary eager source-delimiter-tag-field snapshots and own pure-split reuse22.1.1 before receiver22.1.2; independent Rust/Dart/Julia/safe Lua22.2-.5 follow. Preserve current conversion/split-domain policies; old33 full six-runtime empty/zero-width/Unicode/variable-regex admission stays open. Book qualifies current Perl gaps and corrects stale Rust null-repair wording. Probe syntax/healthy native-fresh controls, book/history/index/diff/memory/cadence/diagnosis align; no production/full matrix/global pressure PASS claim. Existing pressure20.1 remains mandatory before admission/push.
+Perl tagged records now stage source, dynamic delimiter, tag and carried fields once left-to-right before splitting, including empty results; earlier snapshots survive later rebinding. MethodLowering shares one pure-split emitter with the ordinary split helper, retaining trailing items, literal quoting and regex flags without global boundary normalization. Legacy tag atoms and actual carried kinds/DSL copy bounds remain. The independent producer regression first fails9 assertions/28 (raw eager blocks cannot compile), then passes36 native/fresh checks including dynamic delimiter, SDTF, empty/trailing, numeric tag atom, Bool/null/Array/Hash fields and later-field rebinding. Source syntax and direct pure-split controls pass. Current book/SESSION33 partial progress/fact/index/map/history/continuity align; receiver22.1.2 follows. Full split-domain/context/portable admission, fixture registration23.4.1, signature parity1.2.1.4.1 and existing document-pressure20.1 remain separately owned; no full-CI/global pressure PASS claim.
 
 ## Next Action
 
-Implement Perl22.1.1 documented tagged-record eager argument snapshots/dynamic operand lowering and reuse of its existing pure split, from tagged-record-string-bridge.md and retained native/fresh controls. Keep current conversions/backend split-domain policy, typed carried values/copy and free signatures. Focused helper/split/compile tests/docs/commit before receiver22.1.2; SESSION33 full boundary matrix/admission stays deferred. Pressure20.1/error-signature1.2.1.4.1 remain before admission.
+Implement Perl22.1.2 scalar/String-result split_tagged_records receiver bridge from tagged-record-string-bridge.md using the now-repaired eager producer. Minimum two RHS before effects; text input and Array output through selection/scalar/carried-container continuations. Focused native/fresh receiver/order/shape/direct producer/compile checks, docs and commit; then independently assess Rust22.2. SESSION33 broad split-domain admission, error parity and pressure repairs remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` — All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` — Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
@@ -29,7 +30,6 @@ Implement Perl22.1.1 documented tagged-record eager argument snapshots/dynamic o
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` — Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` — Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` — Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
 
 ## History
 

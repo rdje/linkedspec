@@ -465,6 +465,16 @@ sub _normalize_method_tag_expr {
  return $tag
 }
 
+# Both text split helpers use the same host boundary policy. Inputs here are
+# already-lowered Perl expressions; regex literals retain their authored flags.
+sub _emit_split_value_expr {
+ my ($source_expr, $delimiter_expr, $is_regex_literal) = @_;
+ if ($is_regex_literal) {
+  return 'do { my $__ls_split_value = '.$source_expr.'; defined($__ls_split_value) ? [split '.$delimiter_expr.', $__ls_split_value, -1] : [] }';
+ }
+ return 'do { my $__ls_split_value = '.$source_expr.'; my $__ls_split_delimiter = '.$delimiter_expr.'; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\Q$__ls_split_delimiter\E/, $__ls_split_value, -1] : [] }';
+}
+
 sub _lower_inline_value_branch_payload_expr {
  my ($expr, $deps) = @_;
  my $payload_expr = _lower_return_payload_expr($expr, $deps);
@@ -6738,40 +6748,54 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   my $delimiter_trimmed = $trim_action_ir_value->($split_args->[1]);
   return undef unless defined($delimiter_trimmed) && length($delimiter_trimmed);
   if ($delimiter_trimmed =~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
-   return 'do { my $__ls_split_value = '.$source_expr.'; defined($__ls_split_value) ? [split '.$delimiter_trimmed.', $__ls_split_value, -1] : [] }';
+   return _emit_split_value_expr($source_expr, $delimiter_trimmed, 1);
   }
 
   my $delimiter_expr = _lower_method_value_expr($split_args->[1], $deps);
   $delimiter_expr = $delimiter_trimmed unless defined($delimiter_expr) && length($delimiter_expr);
-  return 'do { my $__ls_split_value = '.$source_expr.'; my $__ls_split_delimiter = '.$delimiter_expr.'; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\Q$__ls_split_delimiter\E/, $__ls_split_value, -1] : [] }';
+  return _emit_split_value_expr($source_expr, $delimiter_expr, 0);
  }
  if ($method_call && $method_call->{method} eq 'split_tagged_records') {
   my $record_args = $method_call->{args} || [];
   return undef unless ref($record_args) eq 'ARRAY' && @$record_args >= 3;
 
   my $source_expr = _lower_method_value_expr($record_args->[0], $deps);
-  $source_expr = $trim_action_ir_value->($record_args->[0]) unless defined($source_expr) && length($source_expr);
   return undef unless defined($source_expr) && length($source_expr);
+  my @setup = ('my $__ls_records_source = '.$source_expr.';');
 
-  my $delimiter_expr = $trim_action_ir_value->($record_args->[1]);
-  return undef unless defined($delimiter_expr) && length($delimiter_expr);
-  if ($delimiter_expr !~ m{^/(?:\\.|[^/])*/[a-z]*$}io) {
-   my $literal = $strip_literal_delimiters->($delimiter_expr);
-   return undef unless defined $literal;
-   $delimiter_expr = '/'.quotemeta($literal).'/';
+  my $delimiter_source = $trim_action_ir_value->($record_args->[1]);
+  return undef unless defined($delimiter_source) && length($delimiter_source);
+  my $is_regex_literal = $delimiter_source =~ m{^/(?:\\.|[^/])*/[a-z]*$}io;
+  my $delimiter_expr = $delimiter_source;
+  unless ($is_regex_literal) {
+   my $lowered_delimiter = _lower_method_value_expr($delimiter_source, $deps);
+   return undef unless defined($lowered_delimiter) && length($lowered_delimiter);
+   push @setup, 'my $__ls_records_delimiter = '.$lowered_delimiter.';';
+   $delimiter_expr = '$__ls_records_delimiter';
   }
 
-  my $tag_expr = _normalize_method_tag_expr($record_args->[2], $deps);
+  # Preserve legacy tag atoms (including numeric atoms) as strings. Other tag
+  # expressions are ordinary eager values and must go through DSL lowering.
+  my $tag_source = $trim_action_ir_value->($record_args->[2]);
+  return undef unless defined($tag_source) && length($tag_source);
+  my $tag_expr = $tag_source =~ /^\w+$/o
+   ? _normalize_method_tag_expr($tag_source, $deps)
+   : _lower_method_value_expr($tag_source, $deps);
   return undef unless defined($tag_expr) && length($tag_expr);
+  push @setup, 'my $__ls_records_tag = '.$tag_expr.';';
 
-  my @payload = ($tag_expr, '$_');
-  foreach my $arg (@{$record_args}[3 .. $#$record_args]) {
-   my $field_expr = _lower_method_value_expr($arg, $deps);
-   $field_expr = $trim_action_ir_value->($arg) unless defined($field_expr) && length($field_expr);
+  my @fields;
+  foreach my $index (3 .. $#$record_args) {
+   my $field_expr = _lower_method_value_expr($record_args->[$index], $deps);
    return undef unless defined($field_expr) && length($field_expr);
-   push @payload, $field_expr;
+   my $field_name = '$__ls_records_field_'.$index;
+   push @setup, 'my '.$field_name.' = '.$field_expr.';';
+   push @fields, $field_name;
   }
-  return '[map { ['.join(', ', @payload).'] } split '.$delimiter_expr.', '.$source_expr.']';
+  my $items_expr = _emit_split_value_expr('$__ls_records_source', $delimiter_expr, $is_regex_literal);
+  my @payload = ('$__ls_records_tag', '$_', @fields);
+  return 'do { '.join(' ', @setup).' my $__ls_records_items = '.$items_expr.'; '
+   .'[map { ['.join(', ', @payload).'] } @{$__ls_records_items}] }';
  }
  if ($method_call && $method_call->{method} eq 'sorted') {
   my $sorted_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

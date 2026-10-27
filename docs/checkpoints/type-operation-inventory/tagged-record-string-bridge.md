@@ -74,3 +74,13 @@ producers/receivers before changes. SESSION33.1/.2 remain open for full six-runt
 empty/zero-width/variable-regex/domain/admission work under the director's
 post-feature broad-validation cadence. Error-phase1.2.1.4.1, document pressure20.1,
 full context/portable admission and declared Lua5.4 also stay separately owned.
+
+## Perl producer22.1.1 partial completion
+
+The producer now stages lowered source/dynamic delimiter/tag/fields before mapping;
+ordinary split and tagged construction share _emit_split_value_expr. Authored
+native/fresh producer regression PASS36 after RED, preserving regex flags, dynamic
+literal quoting, legacy tag atoms, kinds/DSL copy bounds and earlier snapshots.
+Empty source still gives zero records under Perl pure split but fields run once;
+a,b, now has three records with the same captured field. No global split policy
+or SDK deep-copy promise changes. Scalar receiver22.1.2 remains the next unit.

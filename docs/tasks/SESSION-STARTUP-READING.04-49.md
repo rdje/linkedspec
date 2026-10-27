@@ -629,6 +629,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Commit: `pending`
 
   October27 bounded feature intake: TYPE-REFERENCE-BOOK.1.2.23.1.2 independently reproduces current Perl native/fresh per-row carried increments, missing trailing item and zero empty-source argument effects, plus broken documented scalar receiver/raw eager tag/delimiter DSL. tagged-record-string-bridge.md freezes a bounded ordinary eager-argument/pure-split-reuse prerequisite under TYPE22.1.1, then positive receiver/Array transitions22.1.2-.5. This does not close33.1/.2 or decide the full six-runtime empty/zero-width/Unicode/variable-regex/input-policy matrix; that broader review/admission remains after feature coverage under the latest director cadence. Record actual accepted partial fixes here when verified; no silent oracle re-blessing.
+  October27 partial repair TYPE22.1.1: Perl helper now stages ordinary source/dynamic delimiter/tag/carried expressions once left-to-right even for zero split items; one shared pure-split emitter retains its existing boundaries/flags. Native/fresh producer regression PASS36 including earlier snapshots, literal/dynamic/regex delimiters, trailing empty, field kinds/DSL copy bounds. Receiver22.1.2 and full33 boundary/context/cross-runtime admission remain open; no global pure-split normalization.
+
 
 - ID: `SESSION-STARTUP-READING.34`
   Status: `pending`

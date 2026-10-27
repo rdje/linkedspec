@@ -4333,7 +4333,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t and t/reduction_result_receiver_contract.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t and t/tagged_record_producer_contract.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -4600,13 +4600,13 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Preserve existing helper domains and current backend pure-split policies, argument snapshots/kinds/copy and normal method min-two-RHS shape. Named/literal/derived String sources feed record Arrays then compatible Array/selected scalar/container methods. Independent native/generated producer-first checks before repair; no full boundary/context/portable admission or source-category method promotion.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.22.1`
-  Status: `pending` / Perl split into producer then receiver units
+  Status: `active` / eager producer completed; receiver next
   Children: `.23.3.22.1.1`, `.23.3.22.1.2`.
   Goal: Repair the current documented Perl eager helper prerequisite before its scalar receiver bridge.
   Dependencies: .23.1.2.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair Perl tagged-record ordinary eager argument snapshots and pure-split reuse.
   Dependencies: .23.1.2.
   Acceptance: Follow tagged-record-string-bridge.md. Retain actual field/record kinds, source-delimiter-tag-field/consumer order and snapshots/copy, existing helper conversions/pure-split policies and free signatures. Producer22.1.1 repairs once-only/dynamic operand lowering and tagged reuse of the already-admitted split without global boundary normalization; subsequent receiver leaves enforce actual text input/Array output, minimum two RHS and compatible continuation through selected fields. Independent native/generated RED/GREEN, small direct split/record/compile checks/docs/commit. Old33 broad admission remains open.
@@ -4614,6 +4614,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Authored producer/receiver/result/order/copy/minimum-shape controls and direct existing split/record compatibility, selected compile/format/book/history/staged continuity. Julia strict Number-not-Bool; Lua only safe PUC5.5.1/LuaJIT with no unsafe patterns/full runner/declared5.4 claim.
   Planned canonical trigger: Full split-domain/context/portable admission and final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
+
+  Activation: clean `267cbeae940f89d73671b3564e6d7b307037e19c`; Git tree clean and git_message_brief.txt zero bytes.
+  Owned paths: Perl MethodLowering ordinary split/tagged producer; new focused t/tagged_record_producer_contract.t; existing tagged-record fact/contract, SESSION33 mutable progress/index, current book/live continuity.
+  Verification tier: `focused`
+  Focused checks: Authored native/fresh eager-order/snapshot/empty/trailing/regex/dynamic-delimiter/kind/copy regression plus direct pure split preservation and Perl syntax; book/history/map/staged continuity.
+  Canonical trigger: Full SESSION33 domain/context matrix, signature parity1.2.1.4.1 and pressure20.1 repairs before later admission/push.
+  Claim verification: none: deterministic authored examples and producer regression; no aggregate measurement or portable completeness claim.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Public LinkedSpec::Get/runtime_ctx_ref/fresh emitted regression observes per-row increments, zero empty-result effects, missing trailing items, variable delimiter treated literally and raw tag/delimiter DSL; initial prove reports9 failures/28.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering split_tagged_records emitted carried expressions inside map, used a separate split without -1 and normalized tag/delimiter text without lowering eager blocks. Dump/substitution demonstrates the exact emitted mechanism.
+  - [x] **FIX**: Stage all ordinary operands in host temporaries before record construction; lower dynamic delimiter/tag expressions while retaining tag atoms; share _emit_split_value_expr with ordinary split. Preserve existing value/DSL copy bounds.
+  - [x] **ADDRESSED (verified)**: prove -q -Iperl t/tagged_record_producer_contract.t PASS36 native/fresh assertions, including SDTF and prior-field/source/delimiter/tag snapshots, empty/trailing/regex/dynamic controls.
+  - [x] **NO REGRESSION**: Direct pure split, tag atom/number coercion, actual Bool/null/Array/Hash fields and source/row DSL copy controls PASS; MethodLowering perl -c PASS. No receiver/global-domain/schema changes.
+  - [x] **LOCKSTEP**: Book/current fact/frozen contract/SESSION33 partial progress and refreshed index/live memory/history/map align; new fixture included in23.4.1 registration owner. Broad admission and known pressure20.1 remain separately disclosed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1 - stage eager Perl tagged-record arguments`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2`
   Status: `pending`
@@ -4667,11 +4683,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1 is repaired/targeted-checked; receiver22.1.2 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` | `pending` | Perl tagged-record eager argument snapshots/pure-split reuse before receiver bridge. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` | `pending` | Perl String-to-tagged-record Array receiver composition after eager producer repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

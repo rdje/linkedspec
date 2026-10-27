@@ -1440,9 +1440,9 @@ For `identifier_list = "a, b"`, `subtype_indication = "integer"`, `signal_kind =
 ]
 ```
 
-The outer array holds all records; each inner array is one record, with no extra wrapper. The intended ordinary helper rule evaluates source, delimiter, tag and carried fields once, then copies carried values into each record.
+The outer array holds all records; each inner array is one record, with no extra wrapper. Ordinary helper arguments (source, delimiter, tag and carried fields) evaluate once left-to-right before record construction, even if no records result; earlier values survive later rebinding.
 The scalar receiver equivalent is `"a,b".split_tagged_records(",", "?item:").count()` → `2`, with text as input and an Array result that can feed selection and other Array methods.
-Current Perl has tracked gaps: it reevaluates carried expressions per emitted row, drops trailing tagged items retained by its pure splitter, and some documented receiver chains fail. Its eager delimiter/tag blocks also need repair; constant helper examples above retain their shown shape.
+Perl now retains its pure splitter’s trailing items and lowers eager delimiter/tag blocks; carried Bool/null/Array/Hash kinds and existing DSL copy behavior are preserved. The documented Perl scalar receiver chain still has a tracked repair; use the ordinary helper meanwhile.
 The ordinary eager helper/scalar bridge repair is in progress. Complete cross-backend empty-source/empty-delimiter/zero-width/variable-regex and contextual admission remain separate; do not infer a universal split policy from this example.
 
 ## Boolean composition
