@@ -107,3 +107,19 @@ fn indexed_with_body_keeps_specific_function_fence() {
         );
     }
 }
+
+#[test]
+fn nested_hash_results_keep_inner_and_outer_value_scopes() {
+    check(
+        &action(
+            r#"
+value="outer";order="";
+result="outside".with(){inner="inside".with(){order=cat(order,"I");return({"k":[value]})}.sorted_values().first().first();order=cat(order,"O");return({"k":[value,inner]});}.sorted_values().first();
+return([result,value,order]);
+"#,
+        ),
+        "name=Alpha",
+        json!([[["outside", "inside"], "outer", "IO"]]),
+        true,
+    );
+}

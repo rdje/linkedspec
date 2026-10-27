@@ -6594,7 +6594,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
 
-  Refinement: Bounded guard31.2.1 complete; distinct nested same-helper failure is separately owned P1 by31.6.1 before unrelated selection/parent admission. This parent remains open; no nested scope closeout claimed.
+  Refinement: Bounded guard31.2.1 complete; distinct nested same-helper failure is separately owned P1 by31.6.1 before unrelated selection/parent admission. Rust nested prerequisite31.6.1 is now implemented/targeted-checked; broader parent/full23.4 admission remains separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1`
   Status: `completed`
@@ -6696,7 +6696,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.5 - guard actual values returned by ordinary Lua with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6`
-  Status: `pending`
+  Status: `in_progress`
   Priority: P1 after bounded backend with-result children31.1-.5, before unrelated feature selection or with-family/full admission.
   Goal: Close nested immediate with callback identity prerequisites without confusing helper names with callable identities.
   Dependencies: Newly reproduced Rust31.6.1; existing DART-STARTUP-READING.2.10 and JULIA-STARTUP-READING.2.8 own analogous same-helper false recursion/helper-mediated identity defects. Independent evidence required; no other backend defect inferred.
@@ -6706,8 +6706,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Parent/full source/domain/context/backend admission23.4 and final clean push; actual identity contract/schema movement separately owned.
   Planned claim verification: none: Prospective finite identity/cleanup repair; no population measurement.
 
+  Bounded authority: docs/checkpoints/type-operation-inventory/callback-invocation-identity.md. Rust31.6.1 implemented; independent Dart31.6.2/Julia31.6.3 precede remaining scoped31.6.4. Broad existing startup/full23.4 admission remains separate.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 under31.6 before parent31 admission and unrelated feature selection.
   Goal: Repair Rust false same-helper callback recursion and reconcile actual callable identity tracking.
   Reproduction: At clean0f7ccfe81, outer "outside".with(){inner="inside".with(){order=cat(order,"I");return({"k":[value]})}.sorted_values().first().first();order=cat(order,"O");return({"k":[value,inner]});}.sorted_values().first() rejects as codeblock_recursion_unsupported/callable_name with/cycle [with,with], rather than distinct callbacks yielding [outside,inside]. Exact producer and first-native failure are retained by31.2.1; no other route RED inferred from the first panic.
@@ -6718,13 +6720,72 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Parent/full domain/context/backend admission23.4 and final clean push; actual identity contract/schema movement separately owned.
   Planned claim verification: none: Finite authored identity repair controls, not population measurement.
 
+  Authority intake: ADR0031 and callable-codeblock v1 retain inert eight-field codeblock data, dynamic caller context, local returns and typed active-cycle rejection; no captured environment or new serialized identity. Lua canonical identity record distinguishes anonymous callbacks from bound variable names. Rust CodeblockValue is cloneable immutable typed literal data with structural PartialEq. RuntimeContext active stack also controls unknown-helper diagnostics, so anonymous invocations must retain activity frames even when helper names stop being recursion keys. Existing bound-name recursion fences must remain; add callback-record matching to retain aliased/opaque same-value cycle safety rather than merely omitting anonymous tracking. First reproduce distinct/mixed/named/opaque/unknown-body controls with finite recursion fallbacks before production; do not infer complete callback identity admission.
+
+  Activation: cleanf101d6def2fcc5be23f46c2d88fe715c91923595; Lua31.5 committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: New callback7 after5 first-native RED/2 healthy tests, existing with-result5 including restored nested source; added structured native/restored diagnostic1, expanded bound/anonymous failure-cleanup unit1 and existing mutual-cycle1. Offline compile/rustfmt/book/history/fast continuity; no full suite/matrix/package.
+  Canonical trigger: Coordinator31.6 requires independent Dart/Julia and remaining scoped identity controls before unrelated selection/parent admission; full source/domain/context/backend23.4 and final clean push after feature coverage.
+  Claim verification: none: Finite authored identity/diagnostic/cleanup controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: New7 tests independently observe five first-native failures: distinct with/tree callbacks falsely collide, and helper/receiver/opaque bound cycles report with instead of cb. Anonymous unknown-helper and direct/mutual controls pass all routes. Original exact nested Hash source is restored to normal test discovery; sources/channels and finite fallback controls retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine passes helper labels to RuntimeContext's String-name recursion stack. The same stack also governs unknown-helper error routing, so dropping anonymous activity is insufficient. Copied inert CodeblockValue records and existing bound names are available without changing the eight-field compiled schema.
+  - [x] **FIX**: Store private invocation frames with diagnostic label, optional bound name and callback record. Keep the bound-name fence, match active callback data for opaque values, close cycles using the matched identity and pop frames in invocation order. Helper/receiver/tree dispatch preserves bound callback names; anonymous frames remain active for diagnostics. No new AST/schema/public helper or capture environment.
+  - [x] **ADDRESSED (verified)**: Callback7 and with-result5 pass native/restored/plan, including distinct nested with/map, exact Hash outside/inside/outer/IO, helper/receiver/coalesce cb→cb, direct reader cycle and ordered a→b→a, plus anonymous missing-helper errors. Added typed diagnostic check confirms code/stage/callable cb/cycle cb→cb on native/restored.
+  - [x] **NO REGRESSION**: Expanded bound/anonymous cleanup unit and prior typed mutual-cycle case pass; outer parameter value restores and activity empties after body failure. Offline compile/rustfmt clean; no arity/argument order/root/deferred/computed/unknown-call/parser/compiled fields change. No exhaustive alias/context/backend identity admission is inferred.
+  - [x] **LOCKSTEP**: Rust nested caveat replaced with working scoped example; target/retained evidence/updated causal cards/map and roadmap/task/live/resume align. Rust guard plus nested prerequisite are implemented; full parent remains admission-owned. Adjacent Rust snapshot31.6.5 question precedes independent Dart31.6.2, Julia31.6.3 and remaining scoped31.6.4 before unrelated selection/parent admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1 - distinguish Rust callback invocations from helper labels`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2`
+  Status: `pending`
+  Priority: P1 before unrelated selection/parent31 admission.
+  Goal: Implement bounded Dart helper callback identity prerequisite under existing DART-STARTUP-READING.2.10.
+  Authority: ADR0031/current callable contract, callback-invocation-identity.md and existing backend canonical identity record. Existing startup broad/public/context signoff remains separately owned; this leaf does not depend on a new full-reading audit.
+  Acceptance: Independently establish distinct nested with/tree, bound helper/receiver/opaque real-cycle identity, existing direct/mutual/unknown-body and scope/error cleanup. Preserve active anonymous error routing, current bound-name fences, copied typed data and exact legitimate diagnostic fields without helper-name collisions. No new helper/parser/AST/serialized/capture/deferred/computed/unknown-call rights. Use current owners and split any newly established independent gap before production.
+  Planned verification tier: focused
+  Planned focused checks: Small finite native/reconstructed/generated/source success/error controls, direct dependent with/cleanup/typed-cycle checks, compile/format/normal registration/book/history/continuity; no full suite/matrix.
+  Planned canonical trigger: Existing startup parent and full source/domain/context/backend23.4/final clean push after feature coverage; no broad parent closeout in this bounded leaf.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3`
+  Status: `pending`
+  Priority: P1 before unrelated selection/parent31 admission.
+  Goal: Implement bounded Julia helper callback identity prerequisite under existing JULIA-STARTUP-READING.2.8.
+  Authority: ADR0031/current callable contract, callback-invocation-identity.md and existing backend canonical identity record. Existing startup broad/public/context signoff remains separately owned; this leaf does not depend on a new full-reading audit.
+  Acceptance: Independently establish distinct nested with/tree, bound helper/receiver/opaque real-cycle identity, existing direct/mutual/unknown-body and scope/error cleanup. Preserve active anonymous error routing, current bound-name fences, copied typed data and exact legitimate diagnostic fields without helper-name collisions. No new helper/parser/AST/serialized/capture/deferred/computed/unknown-call rights. Use current owners and split any newly established independent gap before production.
+  Planned verification tier: focused
+  Planned focused checks: Small finite native/reconstructed/generated/source success/error controls, direct dependent with/cleanup/typed-cycle checks, compile/format/normal registration/book/history/continuity; no full suite/matrix.
+  Planned canonical trigger: Existing startup parent and full source/domain/context/backend23.4/final clean push after feature coverage; no broad parent closeout in this bounded leaf.
+  Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4`
+  Status: `pending`
+  Priority: P1 after bounded Rust/Dart/Julia repairs, before unrelated selection/parent31 admission.
+  Goal: Independently reconcile remaining Perl/Lua helper-mediated callback cycle and explicit-nesting controls.
+  Acceptance: Consult current authority/canonical identity owners before deriving facts. Use only a few finite public controls for bound/opaque final callback values and distinct explicit/contextual nesting; retain exact error/readiness/scope channels and do not infer a defect from another backend. If a gap is confirmed, log/own/split bounded repairs before production. Existing callback/deferred/unknown-source/compiled-field boundaries stay unchanged; no whole identity/context admission.
+  Planned verification tier: focused
+  Planned focused checks: Small finite authored public diagnostic/scope distinctions and relevant syntax/compile/book/history/continuity; available safe Lua hosts only, no unsafe/full runner/matrix.
+  Planned canonical trigger: Actual broader contract/schema/context change separately owned; full23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Prospective finite authored remaining-boundary controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5`
+  Status: `pending`
+  Priority: P1 immediately after Rust31.6.1, before Dart31.6.2 and unrelated selection/admission.
+  Goal: Independently verify Rust final-callback evaluation before the helper installs its scoped value binding; repair only a confirmed gap.
+  Source question: Helper/receiver with currently resolve their final callback inside the scoped-value frame. A callback supplied through the caller binding named value may therefore be shadowed. This is a source-backed hypothesis, not yet an observed runtime defect; identity31.6.1 does not alter evaluation order or claim this case.
+  Acceptance: Consult current callable argument/snapshot/scope authority and use a small public source such as value={|item|return(item)};return(with("ok",value)), plus receiver and ordinary cb-name twins, before classification/production. If confirmed, resolve final callback once after ordinary value/receiver evaluation but before installing scoped value, preserving arity/error order, literal/contextual/opaque permissions and failure cleanup. No new callback/source/AST/schema rights. Complete bounded repair/compile/check/docs/commit before Dart identity continues.
+  Planned verification tier: focused
+  Planned focused checks: A few finite public callback-name/source-order/scope twins and direct dependent identity/with checks; compile/rustfmt/book/history/continuity. No suite/matrix.
+  Planned canonical trigger: Actual context/schema contract movement separately owned; full23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Prospective finite source-order diagnosis/repair, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` | `pending` | Repair Rust callback identity after authority reconciliation; Dart/Julia identity follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` | `pending` | Verify adjacent Rust final-callback snapshot before scoped value; then Dart identity. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

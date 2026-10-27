@@ -1,7 +1,7 @@
 # Ordinary eager with returned-Hash continuations
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.31; intake31.0; independent backend children31.1-.5.
-Status: All bounded non-nested with-result backend children repaired/targeted-checked on recorded hosts. Priority Rust/Dart/Julia nested identity31.6 and full admission remain open.
+Status: All bounded non-nested with-result backend children repaired/targeted-checked on recorded hosts. Rust nested identity31.6.1 is implemented; independent Dart/Julia identity and full admission remain open.
 
 Existing helper `with(value){body}` and receiver `source.with(){body}` execute
 immediately, bind scoped `value`, return the block result and restore the outer
@@ -96,3 +96,12 @@ registration complete; no persistent chunk locals/frame/parser/schema changes.
 Host/source/RED retained. All bounded non-nested result children are targeted-
 checked on recorded hosts; priority Rust31.6.1 and existing Dart/Julia identity
 owners follow before unrelated selection/parent admission. Declared5.4 separate.
+
+Rust31.6.1 restores the exact nested Hash source to normal discovery and repairs
+private callback frames across helper/receiver/tree dispatch. Distinct nested
+bodies run, bound and opaque cb cycles retain cb→cb, direct/mutual cycles and
+anonymous error activity remain, and failed parameter/activity frames clean up.
+Callback7+with5 plus added structured/cleanup/mutual checks pass, with no compiled
+field or deferred permission changes. Bounded identity target/packet disclose
+original5 first-native RED/2 healthy and final scopes. Independent Dart/Julia
+and remaining Perl/Lua controls follow31.6 before unrelated selection/admission.

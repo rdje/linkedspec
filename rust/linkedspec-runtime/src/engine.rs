@@ -71,6 +71,7 @@ const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
 #[derive(Debug, Clone)]
 struct TreeCodeblockCallback {
     name: String,
+    binding_name: Option<String>,
     value: CodeblockValue,
     pass_leaf_value: bool,
 }
@@ -6196,12 +6197,13 @@ impl Engine {
             )));
         }
 
-        Some(self.execute_codeblock_value(name, &codeblock, args, ctx, rule_label))
+        Some(self.execute_codeblock_value(name, Some(name), &codeblock, args, ctx, rule_label))
     }
 
     fn execute_codeblock_value(
         &self,
         name: &str,
+        binding_name: Option<&str>,
         codeblock: &CodeblockValue,
         args: &[RuntimeValue],
         ctx: &mut RuntimeContext,
@@ -6234,16 +6236,16 @@ impl Engine {
             ));
         }
 
-        if let Err(cycle) = ctx.enter_codeblock(name) {
+        if let Err((identity, cycle)) = ctx.enter_codeblock(name, binding_name, codeblock) {
             ctx.capture_callable_codeblock_failure(
                 rule_label,
                 CallableCodeblockFailure::Recursion {
-                    callable_name: name.to_string(),
+                    callable_name: identity.clone(),
                     cycle: cycle.clone(),
                 },
             );
             return Err(format!(
-                "codeblock_recursion_unsupported callable_name={name:?} cycle={cycle:?} rule_label={rule_label:?}"
+                "codeblock_recursion_unsupported callable_name={identity:?} cycle={cycle:?} rule_label={rule_label:?}"
             ));
         }
 
@@ -6266,7 +6268,7 @@ impl Engine {
         for binding in bindings.into_iter().rev() {
             ctx.exit_scoped_variable_binding(binding);
         }
-        ctx.exit_codeblock(name);
+        ctx.exit_codeblock();
         result.map_err(|error| format!("codeblock '{name}': {error}"))
     }
 
@@ -6717,7 +6719,14 @@ impl Engine {
             } else {
                 Vec::new()
             };
-            self.execute_codeblock_value("with", &callback, &args, ctx, rule_label)
+            self.execute_codeblock_value(
+                "with",
+                bare_variable_target_arg(&call.args[0]),
+                &callback,
+                &args,
+                ctx,
+                rule_label,
+            )
         })();
         ctx.exit_scoped_variable_binding(binding);
         result
@@ -6765,6 +6774,7 @@ impl Engine {
         let callback = self.eval_expr(block_arg.value(), ctx, rule_label)?;
         let callback = TreeCodeblockCallback {
             name: method.to_string(),
+            binding_name: bare_variable_target_arg(block_arg).map(str::to_string),
             value: self.require_final_codeblock_value(method, &callback, ctx, rule_label)?,
             pass_leaf_value,
         };
@@ -7193,8 +7203,14 @@ impl Engine {
         } else {
             Vec::new()
         };
-        let result =
-            self.execute_codeblock_value(&callback.name, &callback.value, &args, ctx, rule_label);
+        let result = self.execute_codeblock_value(
+            &callback.name,
+            callback.binding_name.as_deref(),
+            &callback.value,
+            &args,
+            ctx,
+            rule_label,
+        );
         while let Some(binding) = bindings.pop() {
             ctx.exit_scoped_variable_binding(binding);
         }
@@ -7333,8 +7349,14 @@ impl Engine {
         } else {
             Vec::new()
         };
-        let result =
-            self.execute_codeblock_value(&callback.name, &callback.value, &args, ctx, rule_label);
+        let result = self.execute_codeblock_value(
+            &callback.name,
+            callback.binding_name.as_deref(),
+            &callback.value,
+            &args,
+            ctx,
+            rule_label,
+        );
         while let Some(binding) = bindings.pop() {
             ctx.exit_scoped_variable_binding(binding);
         }
@@ -8380,7 +8402,14 @@ impl Engine {
             } else {
                 Vec::new()
             };
-            self.execute_codeblock_value("with", &callback, &args, ctx, rule_label)
+            self.execute_codeblock_value(
+                "with",
+                bare_variable_target_arg(block_arg),
+                &callback,
+                &args,
+                ctx,
+                rule_label,
+            )
         })();
         ctx.exit_scoped_variable_binding(binding);
         result
@@ -12997,6 +13026,20 @@ Boundary: /END/
         let error = engine
             .execute_bound_codeblock_call("cb", &raw_args, &evaluated, &mut ctx, "Top")
             .expect("bound callable")
+            .unwrap_err();
+        assert!(error.contains("unknown_helper"), "{error}");
+        assert_eq!(
+            ctx.get_scalar("value"),
+            RuntimeValue::Scalar("outer".into())
+        );
+        assert!(!ctx.has_active_codeblock());
+
+        // Anonymous helper callbacks retain error context and cleanup as well.
+        let RuntimeValue::Codeblock(codeblock) = ctx.get_bare_value("cb") else {
+            panic!("expected preserved callback binding");
+        };
+        let error = engine
+            .execute_codeblock_value("with", None, &codeblock, &evaluated, &mut ctx, "Top")
             .unwrap_err();
         assert!(error.contains("unknown_helper"), "{error}");
         assert_eq!(

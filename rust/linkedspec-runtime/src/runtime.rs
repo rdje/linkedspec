@@ -10,7 +10,9 @@ use crate::{
 };
 use linkedspec_core::expr::ExpressionSpan;
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
-use linkedspec_core::types::{AcodeEntry, AuthoredRegexSelector, RegexSelectorKind, RuntimeValue};
+use linkedspec_core::types::{
+    AcodeEntry, AuthoredRegexSelector, CodeblockValue, RegexSelectorKind, RuntimeValue,
+};
 use serde_json::{Value, json};
 use std::sync::Arc;
 
@@ -198,6 +200,13 @@ struct RecursiveObservationScope {
     awaiting_entry: bool,
 }
 
+#[derive(Debug, Clone)]
+struct ActiveCodeblockInvocation {
+    name: String,
+    binding_name: Option<String>,
+    value: CodeblockValue,
+}
+
 /// Runtime context for a single rule invocation.
 #[derive(Debug, Clone)]
 pub struct RuntimeContext {
@@ -299,9 +308,9 @@ pub struct RuntimeContext {
     /// Active user-function call stack. User functions are pure MVP value
     /// helpers; recursion is unsupported and must diagnose instead of recursing.
     user_functions_active: Vec<String>,
-    /// Active dynamic codeblock-variable calls. The ordered names retain
-    /// enough identity to reject direct and mutual cycles deterministically.
-    codeblocks_active: Vec<String>,
+    /// All callback invocations remain active for diagnostics. Bound names and
+    /// inert callback records identify cycles; helper labels alone do not.
+    codeblocks_active: Vec<ActiveCodeblockInvocation>,
     /// Scoped child return overrides for action-edge blocks. Perl lowers
     /// `call(child)` inside `-> child { ... }` to the already-dispatched edge
     /// match; this stack lets Rust expose that same value without re-searching.
@@ -2524,28 +2533,36 @@ impl RuntimeContext {
         }
     }
 
-    pub(crate) fn enter_codeblock(&mut self, name: &str) -> Result<(), Vec<String>> {
-        if let Some(index) = self
-            .codeblocks_active
-            .iter()
-            .position(|active| active == name)
-        {
-            let mut cycle = self.codeblocks_active[index..].to_vec();
-            cycle.push(name.to_string());
-            return Err(cycle);
+    pub(crate) fn enter_codeblock(
+        &mut self,
+        name: &str,
+        binding_name: Option<&str>,
+        value: &CodeblockValue,
+    ) -> Result<(), (String, Vec<String>)> {
+        // Keep the named-call fence and recognize copied callback records when
+        // a helper expression obscures the original binding.
+        if let Some(index) = self.codeblocks_active.iter().position(|active| {
+            active.value == *value
+                || binding_name.is_some_and(|name| active.binding_name.as_deref() == Some(name))
+        }) {
+            let identity = self.codeblocks_active[index].name.clone();
+            let mut cycle = self.codeblocks_active[index..]
+                .iter()
+                .map(|active| active.name.clone())
+                .collect::<Vec<_>>();
+            cycle.push(identity.clone());
+            return Err((identity, cycle));
         }
-        self.codeblocks_active.push(name.to_string());
+        self.codeblocks_active.push(ActiveCodeblockInvocation {
+            name: binding_name.unwrap_or(name).to_string(),
+            binding_name: binding_name.map(str::to_string),
+            value: value.clone(),
+        });
         Ok(())
     }
 
-    pub(crate) fn exit_codeblock(&mut self, name: &str) {
-        if let Some(index) = self
-            .codeblocks_active
-            .iter()
-            .rposition(|active| active == name)
-        {
-            self.codeblocks_active.remove(index);
-        }
+    pub(crate) fn exit_codeblock(&mut self) {
+        self.codeblocks_active.pop();
     }
 
     pub(crate) fn has_active_codeblock(&self) -> bool {
