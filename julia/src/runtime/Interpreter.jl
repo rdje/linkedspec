@@ -5881,22 +5881,23 @@ function _evaluate_runtime_fluent_chain!(
     # scalar min/max overloads retain their ordinary operands.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
-        if (helper_name == "num_clamp" && length(call.args) != 2) ||
-            (helper_name in ("num_add", "num_mul", "coalesce") && isempty(call.args))
+        if (helper_name in ("num_clamp", "replace_substr") && length(call.args) != 2) ||
+            (helper_name in ("num_add", "num_mul", "coalesce", "cat") && isempty(call.args)) ||
+            (helper_name == "substr" && !(1 <= length(call.args) <= 2))
             return nothing
         end
         if helper_name in (
             "join_values", "contains", "index_of", "has_key", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
             "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le",
-            "num_sub", "num_div", "num_mod",
+            "num_sub", "num_div", "num_mod", "rm_prefix", "rm_suffix",
         ) && length(call.args) != 1
             return nothing
         end
         if helper_name in (
             "first", "last", "copy", "count", "count_keys", "length", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "num_sum", "num_avg", "num_median", "num_range",
-            "num_abs", "num_floor", "num_ceil", "num_round",
+            "num_abs", "num_floor", "num_ceil", "num_round", "trim", "lowercase", "uppercase",
         ) && !isempty(call.args)
             return nothing
         end
@@ -5923,6 +5924,7 @@ function _evaluate_runtime_fluent_chain!(
         # Scalar producers and defaults retain this boundary until an actual
         # container output permits later array/hash-only consumers.
         may_produce_scalar = helper_name in (
+            "trim", "lowercase", "uppercase", "replace_substr", "rm_prefix", "rm_suffix", "substr", "cat",
             "coalesce", "coalesce_nonempty", "contains", "index_of", "has_key", "is_empty", "is_nonempty",
             "is_defined", "is_undefined", "starts_with", "ends_with", "contains_substr", "matches",
             "str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le",
@@ -7121,34 +7123,41 @@ function _call_runtime_matches(values)
 end
 
 function _call_runtime_replace_substr(values)
-    if length(values) < 3
+    if length(values) < 3 || values[2] === nothing || values[3] === nothing
         return nothing
     end
-    value = _runtime_scalar_string(values[1])
+    original = values[1]
+    value = _runtime_scalar_string(original)
     old_value = _runtime_scalar_string(values[2]; null_as_empty = true)
     new_value = _runtime_scalar_string(values[3]; null_as_empty = true)
     if value === nothing || old_value === nothing || new_value === nothing
         return nothing
     elseif isempty(old_value)
-        return value
+        return original isa Number ? original : value
     end
     return replace(value, old_value => new_value)
 end
 
 function _call_runtime_remove_edge(values, prefix::Bool)
-    if length(values) < 2
+    if length(values) < 2 || values[2] === nothing
         return nothing
     end
-    value = _runtime_scalar_string(values[1])
+    original = values[1]
+    value = _runtime_scalar_string(original)
     edge = _runtime_scalar_string(values[2]; null_as_empty = true)
     if value === nothing || edge === nothing
         return nothing
+    end
+    # Number includes Bool here; other converted carriers retain their text.
+    unchanged = original isa Number ? original : value
+    if isempty(edge)
+        return unchanged
     elseif prefix && startswith(value, edge)
         return chop(value; head = length(edge), tail = 0)
     elseif !prefix && endswith(value, edge)
         return chop(value; head = 0, tail = length(edge))
     end
-    return value
+    return unchanged
 end
 
 function _call_runtime_substr(values)

@@ -14,7 +14,7 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
 date: 2026-10-27
-status: Perl/Rust/Dart scalar String19 and five-backend predicates targeted-checked; full admission open
+status: four scalar String19 backends and five-backend predicates targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
 reverify:
@@ -71,3 +71,10 @@ shared kinds/indices/Unicode/snapshots/rejection and mutation controls. Existing
 Dart null-width-as-omitted/Bool-invalid0 differ from Perl/Rust; preserve them in
 this result slice and reconcile under P2 TYPE23.2.20 before portable admission.
 Details: [[dart-runtime-string-numeric-helpers]]. Julia19.4 independently follows.
+
+TYPE23.3.19.4 independently repairs Julia original Number/Bool identities,
+explicit null operands and eight-method scalar/shape metadata. Registered
+new54/direct9 strict native/plan/fresh assertions pass, retaining exact kinds/
+indices/Unicode/snapshots/rejection and mutation controls. Existing null-width-
+as-omitted/Bool1 differs from Dart/Perl/Rust combinations and stays under20.
+Details: [[julia-runtime-string-numeric-helpers]]. Safe Lua19.5 follows.

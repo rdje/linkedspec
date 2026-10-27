@@ -1426,7 +1426,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `pending` / P2 argument-domain reconciliation before portable admission
   Goal: Reconcile explicitly supplied null optional substring width and Boolean offset policies across supported backends without inferring domains from return-value samples.
   Dependencies: Scalar String implementation19.1-.5; signature/domain owners1.2.1.4 and SESSION-STARTUP-READING61.3 remain authoritative.
-  Reproduction: Retained probe_scalar_string_results.pl substring_bounds gives Perl native/fresh null for substr("abc",0,undef) and bc for substr("abc",true); repaired Rust controls agree. Dart scalar_string_results_test.dart independently returns abc for both, treating null width as omitted and Bool as invalid offset0. The catalog currently qualifies the provided-null width behavior to Perl/Rust; no complete portable optional-argument domain is admitted.
+  Reproduction: Retained probe_scalar_string_results.pl substring_bounds gives Perl native/fresh null for substr("abc",0,undef) and bc for substr("abc",true); repaired Rust controls agree. Dart scalar_string_results_test.dart independently returns abc for both, treating null width as omitted and Bool as invalid offset0. Julia probe_scalar_string_julia.jl/native-plan-fresh tests instead preserve null-width-as-omitted (abc) and Bool-offset1 (bc). The catalog currently qualifies the provided-null width behavior to Perl/Rust; no complete portable optional-argument domain is admitted.
   Impact / ownership: A cross-backend caller cannot infer these optional/null/Boolean input policies from ordinary String result parity. Own exact signature/omitted-versus-null/domain authority and any resulting bounded repairs here; preserve current qualified compatibility until policy is frozen, with no silent promotion during result work.
   Schedule: Assess immediately after19.1-.5 feature implementations and before23.4/full signature/portable admission; schedule concrete backend fixes from the selected authority before changing behavior.
   Acceptance: Independently distinguish omitted width, explicit null width, null source/start, Boolean/integer/fractional offsets and existing scalar text carriers on native/generated routes. Reconcile primary records/contracts/book with explicit per-backend domain rows, then freeze needed changes and own implementation children. No full matrix or unsupported universal domain claim from a few examples; broad61.3 remains open until its own admission.
@@ -4066,7 +4066,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.18.5 - guard Lua defined-only default results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19`
-  Status: `active` / Perl/Rust/Dart scalar String-helper flow targeted-checked; Julia/Lua pending
+  Status: `active` / Perl/Rust/Dart/Julia scalar String-helper flow targeted-checked; Lua pending
   Goal: Complete bounded actual scalar String-helper results, identity kinds and clean scalar/shape boundaries.
   Dependencies: .23.2.19 frozen scalar-string-results.md.
   Children: `.23.3.19.1`, `.23.3.19.2`, `.23.3.19.3`, `.23.3.19.4`, `.23.3.19.5`.
@@ -4163,7 +4163,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.3 - preserve Dart scalar String result kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and implement/confirm Julia ordinary scalar String-helper result flow and boundaries.
   Dependencies: .23.3.19.3.
   Acceptance: Follow scalar-string-results.md; preserve eight helper domains/null/empty/Unicode/strict cat policies, actual identity Number/Boolean/String kinds, source-first once-only operands/snapshots and scalar/generic/numeric/explicit Array bridges. Clean incompatible-consumer and malformed-shape boundaries retain permitted effects and skip forbidden ones. Public producer-first native/generated RED/GREEN plus small direct String/compile checks/docs/commit; no free signature/selector/callback normalization or full admission.
@@ -4171,6 +4171,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Public producer-first native/generated and retained result/effect/kind/shape controls, small direct String regression/source compilation/book/continuity.
   Planned canonical trigger: Full admission/final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Activation: clean `ebe047c11996a5f87c16777d4538cd8e022e79e7`; Dart scalar String fixes/qualified domain20 schedule committed, brief0/tree clean.
+  Owned paths: Julia independently confirmed scalar String-helper producer/result/scalar/shape and qualified slice flow, retained public native/plan/fresh diagnostic and strict result/identity/selector/slice/mutation regression, runner and scoped book/facts/task/live docs. Preserve free domains/Unicode/strict cat/callbacks/formats and observed width/Bool conventions pending20; no inferred backend failures.
+  Verification tier: `focused`
+  Focused checks: Public producer-first native/plan/fresh and strict shared/kind/shape RED/GREEN, direct selected/default checks as warranted, strict compilation and book/history/staged continuity guards.
+  Canonical trigger: None for frozen bounded ordinary implementation under director feature-first cadence; full domain/context/portable admission/final push separate.
+  Claim verification: none: deterministic authored regressions/preservation controls, no population/completeness measurement.
+
+  Independent intake: Retained public probe observes all native/plan/fresh routes before code: identities are six String0 then abc/bc/abc/abc, numeric selector producers/shared abort with typed harray-vs-array, boundaries give[[],SCA,null,SAC]. Substring source/start null and fractional normalization already work; provided-null width is omitted, Bool offset keeps1 (abc/SIL/abc/a/empty/empty/bc). Both mutation aliases pass. Own identity/null operand/scalar/shape repairs here; preserve those qualified slice conventions under20 and existing large-slice2.10 owner. Add a healthy basic String/Unicode/SON control before implementation; do not infer unreturned shared fields.
+
+  Completion: Preserve Number/Boolean original identities in empty-old replacement/empty-unmatched affix removal while other scalarized carriers retain text; guard explicit null operands without changing non-null scalarization. Add eight-method scalar-result tuple and precise receiver preflight. Fractional/null source/start slicing already works; preserve provided-null-width-as-omitted and Bool-offset1 conventions under scheduled20, with no substring/global int change.
+  Verification:
+  - [x] REPRODUCE / ISSUE: Public native/plan/fresh probe independently returns textified identity/null data, typed selector errors on producer/shared and boundary[[],SCA,null,SAC]. Healthy basic String/Unicode/strict-null/SON tests pass3 before code. Strict RED captures15 failures/two producer errors; bounds/mutation routes already work and their data is not inferred from Dart.
+  - [x] ROOT CAUSE (WHY + WHERE): _call_runtime_replace_substr/_call_runtime_remove_edge return coerced text and null_as_empty masks explicit null operands. Common _evaluate_runtime_fluent_chain! omits eight methods in scalar tuple/shapes. Ordinary substring already normalizes fractions/null source/start, with its own qualified optional-width/Bool conventions.
+  - [x] FIX: Supported scalar originals on identity (Number includes Bool; strict tests distinguish them), positional null guards retaining other conversion compatibility, eight-method scalar/ordinary shape tuples and runner registration. No global numeric/int/selector/Unicode/free signature/regex/callback/named-context/schema change; dedicated mutation routes stay.
+  - [x] ADDRESSED (verified): Registered new54 native/plan/fresh assertions pass all seven groups: healthy/identity/null producers, boundary effects, typed free/fluent/named selector producers, shared eight helper values/bridges/empty/null/Unicode/roots, strict Number-not-Bool/false identity/counters and matched String keys, SONC-SC-selectedS snapshots/eager null operands, rejection/12 malformed no-effects, qualified slice domains/SIL and both mutation aliases.
+  - [x] NO REGRESSION: Direct selected/nonempty defaults9 pass too,63 assertions with strict compilation. Retained diagnostic basic case executes on all three routes after cleanup of its unused parameter. Existing callback identity2.8/large-number2.9/unsafe large-slice2.10 remain separate; no full suite/matrix/portable admission or blanket producer-domain closure.
+  - [x] LOCKSTEP: Retained public probe/test/runner, frozen/current qualified catalog/guide and canonical Julia/String/null facts/map plus task/live/resume align. Domain20 now records Julia width-omitted/Bool1 separately from Dart width-omitted/Bool0 and Perl/Rust null-width/Bool1; mandatory schedule stays after19.5 before admission. Book/history/diff/final staged memory/cadence/diagnosis checked before commit. Safe Lua19.5 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.4 - preserve Julia scalar String result kinds`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.19.5`
   Status: `pending`
@@ -4196,11 +4215,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1/Rust19.2/Dart19.3 scalar/shape flow and recorded producer/slice repairs are targeted-checked; Julia19.4 is next before safe Lua19.5. Input-domain reconciliation20 follows19.5 before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; Perl19.1/Rust19.2/Dart19.3/Julia19.4 scalar/shape flow and recorded producer/slice repairs are targeted-checked; safe Lua19.5 is next. Input-domain reconciliation20 follows19.5 before portable admission. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` | `pending` | Independently assess and implement frozen Julia scalar String-helper flow and qualified slice boundaries. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.19.5` | `pending` | Independently assess and implement frozen scalar String-helper flow and qualified domains on safe Lua hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

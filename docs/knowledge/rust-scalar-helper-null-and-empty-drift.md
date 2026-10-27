@@ -131,3 +131,9 @@ null-width-as-omitted/Bool-invalid0 conventions remain qualified, owned by P2
 TYPE23.2.20 before portable admission. Ten focused native/restored/plan tests/
 format/fatal analysis pass; [[dart-runtime-string-numeric-helpers]] has current
 implementation detail. This does not close broad61.3 or large-slice2.14.
+
+Julia19.4 independently repairs textified scalar identities and explicit null
+replacement/affix operands, retaining healthy source/start/fraction slices.
+Its null-width-as-omitted/Bool1 conventions join the qualified20 inventory;
+[[julia-runtime-string-numeric-helpers]] records63 strict native/plan/fresh/direct
+assertions. Broad61.3 and Julia large-slice2.10 remain separate.

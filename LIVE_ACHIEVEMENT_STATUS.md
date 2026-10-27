@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
+Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
 
 ## Latest Completed Slice
 
-Dart19.3 repairs independently observed textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape and local fractional-offset guards. New7/direct defaults3 native/restored/plan tests and format/fatal analysis pass after identity-index/[]-SCA-SAC/fraction RED, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null operands/rejection/12 malformed no-effects and both mutation aliases. Existing null-width-as-omitted/Bool-invalid0 conventions stay qualified; P2 assessment20 owns mandatory reconciliation after19.5 before portable admission. Book/frozen/facts/task/live align; no global domain/numeric/selector/Unicode/callback or large-slice2.14 change. Julia19.4 next.
+Julia19.4 independently repairs textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape metadata. Registered new54/direct defaults9 native/plan/fresh strict assertions pass after identity-index/[]-SCA-SAC RED, retaining actual kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and both mutation aliases. Fractional/source-start-null slicing already works; existing width-omitted/Bool1 conventions stay qualified under mandatory20 reconciliation. Retained diagnostic basic routes compile/execute; book/frozen/facts/task/live align. No global int/numeric/selector/Unicode/callback/schema or large-slice2.10 change. Safe Lua19.5 next.
 
 ## Next Action
 
-Activate Julia19.4 and independently assess public healthy/identity/null scalar String producers, frozen result/scalar/shape flow and qualified substring domains before production. Preserve eight helper domains/Unicode/strict cat/actual identity kinds/eager snapshots/dedicated mutation; observe null/fraction/optional-width/Bool policies without inferring portability. Shared native/plan/fresh with strict Bool/Number and quick direct String/default/compile/docs/commit; no full matrix. P2 domain20 follows19.5 before admission.
+Activate safe Lua19.5 and independently assess public scalar String healthy/identity/null producers, frozen result/scalar/shape flow and qualified slice domains before production. Preserve eight helper domains/Unicode/strict cat/actual identity kinds/eager snapshots/dedicated mutation; observe width/Bool policy without inheriting another backend. Shared native/plan/fresh plus quick direct defaults/source loads on PUC5.5.1/LuaJIT/docs/commit; no full runner/malformed native patterns/declared5.4/full admission. P2 domain20 follows19.5.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` — Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` — Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` — Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
@@ -29,7 +30,6 @@ Activate Julia19.4 and independently assess public healthy/identity/null scalar 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` — Perl logical Boolean result flow and typed source error repairs targeted-checked; Rust independent assessment next.
 
 ## History
 

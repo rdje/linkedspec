@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.19.4 — preserve Julia scalar String result kinds
+
+Julia19.4 independently repairs textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape metadata. Registered new54/direct defaults9 native/plan/fresh strict assertions pass after identity-index/[]-SCA-SAC RED, retaining actual kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and both mutation aliases. Fractional/source-start-null slicing already works; existing width-omitted/Bool1 conventions stay qualified under mandatory20 reconciliation. Retained diagnostic basic routes compile/execute; book/frozen/facts/task/live align. No global int/numeric/selector/Unicode/callback/schema or large-slice2.10 change. Safe Lua19.5 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.19.3 — preserve Dart scalar String result kinds
 
 Dart19.3 repairs independently observed textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape and local fractional-offset guards. New7/direct defaults3 native/restored/plan tests and format/fatal analysis pass after identity-index/[]-SCA-SAC/fraction RED, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null operands/rejection/12 malformed no-effects and both mutation aliases. Existing null-width-as-omitted/Bool-invalid0 conventions stay qualified; P2 assessment20 owns mandatory reconciliation after19.5 before portable admission. Book/frozen/facts/task/live align; no global domain/numeric/selector/Unicode/callback or large-slice2.14 change. Julia19.4 next.

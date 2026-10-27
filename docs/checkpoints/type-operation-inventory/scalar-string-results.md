@@ -168,3 +168,22 @@ eager null operands/rejection/skipped operands/12 malformed controls, independen
 SIL/fraction/negative/current domains and both mutation aliases pass. Existing
 large-slice end overflow2.14 remains separate, with no broad/standalone admission.
 Julia19.4 independently assesses next.
+
+## Bounded Julia implementation
+
+19.4's independent public native/plan/fresh probe isolates textified identities,
+null-as-empty operands, typed index failures and[]/SCA/malformed SAC. Healthy
+basic String/Unicode/strict-null/SON controls pass before production. Preserve
+Number/Boolean originals on identity (other converted carriers stay text), guard
+explicit null operands and add eight-method scalar/shape tuples. No global int/
+numeric/selector/Unicode/free/regex/callback/named-context/schema normalization.
+
+Fractional/null source/start slicing already works; Julia provided-null width
+means omitted and Bool offset remains1. Preserve these conventions under20,
+which now records Julia separately from Dart and Perl/Rust before admission.
+Registered new54/direct defaults9 native/plan/fresh assertions pass with strict
+compilation, Number-not-Bool/false identity, exact shared kinds/indices/Unicode/
+SONC-SC-selectedS/eager null/rejection/12 malformed controls, qualified SIL and
+both mutation aliases. Retained diagnostic basic source loads/executes on all
+three routes. No full matrix/portable admission or callback2.8/large-number2.9/
+unsafe large-slice2.10 repair. Safe available Lua19.5 independently assesses next.

@@ -318,7 +318,7 @@ dispatch rule.
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes leading and trailing whitespace. Returns undef if input is undef.
-- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`. Ordinary Perl/Rust/Dart scalar String-helper results now feed compatible scalar/generic/numeric methods; `" a,b ".trim().split(",").last().uppercase()` gives `"B"`, while a scalar result followed by a container-only consumer returns undef without evaluating that consumer's operands. Malformed ordinary shapes reject before source effects; source/prefix effects before a valid incompatible tail remain. Julia/Lua implementation and full admission remain separate.
+- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`. Ordinary Perl/Rust/Dart/Julia scalar String-helper results now feed compatible scalar/generic/numeric methods; `" a,b ".trim().split(",").last().uppercase()` gives `"B"`, while a scalar result followed by a container-only consumer returns undef without evaluating that consumer's operands. Malformed ordinary shapes reject before source effects; source/prefix effects before a valid incompatible tail remain. Safe available Lua implementation and full admission remain separate.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -385,13 +385,13 @@ dispatch rule.
 ### `rm_prefix(s, prefix)`
 - **Signature**: `rm_prefix(value: scalar, prefix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef. Perl native/fresh and Rust/Dart native/restored/plan typed Array-index controls preserve numeric identity: `items=["zero"]; items[0.rm_prefix("x")]="updated"` updates entry zero. Matched removals produce text and a String `"0"` stays a String key.
+- **Behavior**: Removes the prefix from the value if present. Returns the original value and kind if the prefix is empty or does not match (`rm_prefix(0, "")` and `rm_prefix(0, "x")` → numeric `0`). Returns undef if value or prefix is undef. Perl native/fresh and Rust/Dart native/restored/plan and Julia native/plan/fresh typed Array-index controls preserve numeric identity: `items=["zero"]; items[0.rm_prefix("x")]="updated"` updates entry zero. Matched removals produce text and a String `"0"` stays a String key.
 - **Example**: over `/(\S+)/`, `rm_prefix(entry_group(0), "lib")` on `libparser` → `["parser"]`.
 
 ### `rm_suffix(s, suffix)`
 - **Signature**: `rm_suffix(value: scalar, suffix: scalar)`
 - **Returns**: scalar
-- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef. Perl native/fresh and Rust/Dart native/restored/plan typed Array-index controls also preserve unmatched numeric suffix identities, while matched removals return text.
+- **Behavior**: Removes the suffix from the value if present. Returns the original value and kind if the suffix is empty or does not match (`rm_suffix(0, "")` and `rm_suffix(0, "x")` → numeric `0`). Returns undef if value or suffix is undef. Perl native/fresh and Rust/Dart native/restored/plan and Julia native/plan/fresh typed Array-index controls also preserve unmatched numeric suffix identities, while matched removals return text.
 - **Example**: over `/(\S+)/`, `rm_suffix(entry_group(0), ".spec")` on `parser.spec` → `["parser"]`.
 
 ### `substr(s, start, length?)`
@@ -400,7 +400,7 @@ dispatch rule.
 - **Behavior**: Returns a substring of `value` starting at zero-based `start`. When `length` is supplied,
   returns at most that many characters; when omitted, returns from `start` through the end.
 - **Edge cases**: Returns undef if `value` or `start` is undef. Perl/Rust also return undef for an explicitly supplied undef length; an omitted length still selects through the end. Negative or non-integer `start` is normalized
-  to `0`; negative or non-integer `length` is normalized to `0`. Rust native/restored/plan controls retain eager operand order and these null/fractional boundaries; dedicated named-target regex mutation stays separate. Dart also normalizes fractional numeric offsets to zero, while preserving its current explicit-null-width-as-omitted and Boolean-offset-as-invalid-zero conventions. Those input domains differ from Perl/Rust and remain scheduled for reconciliation before portable admission; large-slice overflow remains separately tracked. Other backend domain/admission checks remain open.
+  to `0`; negative or non-integer `length` is normalized to `0`. Rust native/restored/plan controls retain eager operand order and these null/fractional boundaries; dedicated named-target regex mutation stays separate. Dart also normalizes fractional numeric offsets to zero, while preserving its current explicit-null-width-as-omitted and Boolean-offset-as-invalid-zero conventions. Julia also treats an explicit null width as omitted, but retains its current Boolean offset1. These input domains differ across backends and remain scheduled for reconciliation before portable admission; large-slice overflow remains separately tracked. Other backend domain/admission checks remain open.
 - **Example**: over `/(\S+)/`, `substr(entry_group(0), 1, 3)` on `abcdef` → `["bcd"]`.
 
 ### `substr(target, pattern, replacement, flags)` / `regex_subst(...)`

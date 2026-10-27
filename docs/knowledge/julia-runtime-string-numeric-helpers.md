@@ -2,6 +2,8 @@
 id: julia-runtime-string-numeric-helpers
 title: Julia runtime executes current string/scalar and numeric helpers through one canonical dispatcher
 answers:
+  - why do Julia replacement and affix identities lose Number or Boolean kind
+  - does Julia treat an explicit null substring width as omitted
   - why do Julia definedness result checks assert Bool identity
   - why do Julia string predicates need scalar arity and null operand guards
   - does Julia runtime support trim lowercase substr split
@@ -12,11 +14,13 @@ answers:
   - does Julia runtime return nothing for invalid numeric input
   - does Julia runtime support string receiver chains
   - does Julia runtime support number receiver chains
-date: 2026-10-26
+date: 2026-10-27
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
-evidence: "String/numeric4.3.2; comparison15.4/arithmetic16.4 focused proof. Prior full fact/guard and dated replay details at Gitbec537d5b05ebfdd7750930bfb13ca1588a4da5e."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/scalar_arithmetic_results_test.jl\"); include(\"julia/test/numeric_comparison_results_test.jl\")'"
+evidence: "String/numeric4.3.2; comparison15.4/arithmetic16.4/scalar String19.4 focused proof. Prior full fact/guard and dated replay details at Gitbec537d5b05ebfdd7750930bfb13ca1588a4da5e."
+reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/scalar_string_results_test.jl\");include(\"julia/test/default_selected_receivers_test.jl\")'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; include(\"julia/test/scalar_arithmetic_results_test.jl\"); include(\"julia/test/numeric_comparison_results_test.jl\")'"
 ---
 
 Interpreter.jl canonical_action_helper_name shares pure implementations across
@@ -54,3 +58,14 @@ this slice closes no separate regex/domain repair.
 
 Related: [[julia-runtime-array-helpers]], [[julia-runtime-core-value-capture-helpers]],
 [[terse-number-receiver-value-chains]], [[terse-string-comparison-bridge-contract]].
+
+Scalar String19.4 independently observes coerced identities/nullAsEmpty and
+scalar[]/SCA/malformed SAC on native/plan/fresh. Preserve Number originals
+(including Bool identity), guard explicit null replacement/affix operands and
+add eight-method scalar/shape tuples; other converted carriers keep text.
+Registered new54/direct defaults9 strict assertions pass, including Number-not-
+Bool/false/counters, typed selectors/matched keys/Unicode, SONC-SC-selectedS/
+eager null/rejection/12 malformed effects and both mutation aliases. Slice null
+source/start/fractions already work; null width remains omitted and Bool offset1.
+P2 TYPE23.2.20 reconciles these domains after19.5 before portable admission.
+No global numeric/int/selector/Unicode/callback/schema or large-slice2.10 change.
