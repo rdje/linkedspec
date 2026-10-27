@@ -56,7 +56,7 @@ num_add(1,2).copy().add(1)                  # 4
 
 ## Bounded rollout
 
-1. Perl producer1.1: typed function copy preserves primitive values without
+1. Perl producer1.1 implemented/targeted-checked: typed function copy preserves primitive values without
    weakening Array/Hash snapshots, legacy rule storage, argument/source errors or
    actual-kind result consumers. Keep old observations; new target distinguishes
    primitive identity from old[]/null. Receiver rollout follows separately.

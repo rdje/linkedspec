@@ -1296,6 +1296,17 @@ sub _materialize_list_operand_expr {
  return 'do { my @__ls_evaluated_values = ('.$expr.'); @__ls_evaluated_values }'
 }
 
+# Ordinary copy detaches only the outer container. Primitive values retain
+# their host scalar flags; inspecting their text here would change selector kinds.
+sub _value_copy_expr {
+ my ($expr) = @_;
+ return 'do { my $__ls_copy_value = '.$expr.'; '
+  .'ref($__ls_copy_value) eq \'ARRAY\' ? [@{$__ls_copy_value}] : '
+  .'ref($__ls_copy_value) eq \'HASH\' ? { %{$__ls_copy_value} } : '
+  .'!ref($__ls_copy_value) ? $__ls_copy_value : '
+  .'do { require JSON::PP; JSON::PP::is_bool($__ls_copy_value) ? $__ls_copy_value : [] } }';
+}
+
 sub _uniform_binding_array_push_expr {
  my ($target, $value_expr) = @_;
  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -4595,6 +4606,18 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
   }
 
+  if ($method eq 'copy' && @$args == 1 && ref($args->[0]) eq 'HASH'
+      && ($args->[0]{kind} // '') ne 'variable'
+      && !(($args->[0]{kind} // '') eq 'call'
+           && ($args->[0]{name} // '') =~ /\Aflat(?:_array|_hash)?\z/o)) {
+   # Typed literals and computed producers must not be reconstructed as bare
+   # compatibility names (notably true/undef and numeric rule-array spellings).
+   # Variables retain the legacy kind-provider/storage path; flat keeps its
+   # existing list materialization rather than being scalarized here.
+   my $value = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+   return _value_copy_expr($value) if defined($value) && length($value);
+  }
+
   if ($method eq 'hash'
       && !(@$args == 1 && ref($args->[0]) eq 'HASH' && ($args->[0]{kind} // '') eq 'variable')) {
    # Constructor values must stay on the typed AST path. Reconstructing DSL
@@ -5016,7 +5039,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
    if ($method eq 'copy') {
     return undef if @$source_args;
-    return ['copy('.$current_expr.')', 'selected'];
+    return ['copy('.$current_expr.')', 'default_result'];
    }
    # min/max without extra operands are array reducers; scalar forms take
    # another operand. Other array methods have an unambiguous helper shape.
@@ -5188,7 +5211,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
    && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
   my $emitted_result_chain = $defined_default_chain || $scalar_string_chain
-   || ($receiver->{kind} // '') eq 'value_access';
+   || ($receiver->{kind} // '') eq 'value_access'
+   || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
     ? $lower_ast_logical_call_node->($receiver)
@@ -7254,9 +7278,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   if ((!defined($remembered_kind) || $remembered_kind eq 'scalar')
       && $container_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
    my $name = $1;
-   return 'do { my $__ls_copy_value = $'.$name.'; '
-    .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'ARRAY\') ? [@{$__ls_copy_value}] : '
-    .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'HASH\') ? { %{$__ls_copy_value} } : [] }';
+   return _value_copy_expr('$'.$name);
   }
   if ($container_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
    my $name = $1;
@@ -7290,9 +7312,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   my $lowered_container = _lower_method_value_expr($container_expr, $deps);
   return undef unless defined($lowered_container) && length($lowered_container);
-  return 'do { my $__ls_copy_value = '.$lowered_container.'; '
-   .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'ARRAY\') ? [@{$__ls_copy_value}] : '
-   .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'HASH\') ? { %{$__ls_copy_value} } : [] }';
+  return _value_copy_expr($lowered_container);
  }
  my $pipeline_expr = $lower_array_pipeline_expr->(
   $trimmed,

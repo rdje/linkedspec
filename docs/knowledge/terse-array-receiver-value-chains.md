@@ -52,8 +52,10 @@ admit generic scalar/null value copying. Ordinary Perl scalar copies return[],
 while logical-result copies reject to null via the result-family boundary.
 Dart/Julia/Lua preserve scalar values. No uniform invalid-input rule follows from
 these facts. The director approved4.2.2 on October27: preserve Bool/Number/String/null
-through copy, retaining existing container-copy depths. Perl-first implementation
-is next after deferred-boundary repair; parent4.2 stays open for verified repairs.
+through copy, retaining existing container-copy depths. Perl ordinary function implementation4.2.2.1.1 now preserves primitives and
+actual-kind consumers; generic receiver/context and independent backends follow.
+The prior scalar fallback observations above remain historical; see
+[[perl-scalar-bound-receiver-copy]] for the current bounded producer.
 
 ADR0138 records the explicit October27 scalar/null value-copy target. Bool,
 Number, String and null preserve kind/value through function/receiver copy;

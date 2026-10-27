@@ -8,6 +8,7 @@ answers:
   - "does Perl receiver copy share nested references"
   - "does scalar receiver copy consume typed AST fields"
   - "where is the scalar bound receiver copy repair verified"
+  - "does ordinary Perl function copy preserve primitive values and selector kinds"
 date: 2026-10-10
 status: accepted public repair at770cffcc; original proof requires its accepted Git input state
 tags: [perl, actionir, ast, copy, containers, receivers]
@@ -38,3 +39,18 @@ retain their controls. The separate legacy hash kind callback repair has bounded
 proof in `docs/knowledge/perl-legacy-hash-kind-callback.md`; required receiver capture and independent factory/private/
 mapped admissions remain open. This proof covers the scalar-bound single-step
 population and does not establish other receiver populations.
+
+October27 ADR0138 supersedes only the old scalar fallback in current ordinary
+function copying (TYPE1.2.1.4.2.2.1.1). Typed non-variable operands lower directly
+from their AST; variables retain the existing legacy storage/kind-provider path.
+The shared ordinary emitter shallow-copies Array/Hash, preserves non-reference
+scalars/null and JSON Boolean values, and retains the opaque-reference fallback.
+It does not inspect scalar text, so Number0 and String0 remain distinguishable
+by BindingRuntime typed writes before JSON. Function-copy continuations use
+actual-kind default-result dispatch, including repeated copy and skipped wrong
+container operands. t/value_copy_function.t covers native/fresh values, kinds,
+once-only snapshots/errors, function locals and outer-distinct/nested-shared
+containers; t/actionir_receiver_scalar_copy.t retains the legacy callback and
+exact rule-storage controls with only text/zero expectations advanced. Historical
+accepted captures above remain exact; generic receiver and interpreted-context
+rollout are separate children1.2/1.3, and complete admission remains23.4.

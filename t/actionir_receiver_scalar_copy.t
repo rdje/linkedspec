@@ -10,7 +10,7 @@ my @names = qw(original-hash receiver-hash function-hash original-array receiver
  function-array original-empty-hash receiver-empty-hash original-empty-array
  receiver-empty-array multi-step-hash-count multi-step-array-count text-copy zero-copy);
 my $hash = {k => 'v', nested => [1, 2]};
-my @expected = ($hash, $hash, $hash, [1, 2], [1, 2], [1, 2], {}, {}, [], [], 2, 2, [], []);
+my @expected = ($hash, $hash, $hash, [1, 2], [1, 2], [1, 2], {}, {}, [], [], 2, 2, 'abc', 0);
 for my $route (qw(live standalone)) {
  is(ref($observed->{$route}), 'ARRAY', "$route result is an array");
  is(scalar(@{$observed->{$route}}), scalar(@names), "$route complete case population");

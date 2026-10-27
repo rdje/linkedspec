@@ -27,7 +27,7 @@ my $body = <<'BODY';
 BODY
 my $source = "fn choose(values) { return(values.first().sorted().last().add(1)) }\nfn clone_first(values) { return(values.first().copy()) }\nTop:: I { $body }";
 my $expected = [7,'B','b',[1,3],'C',6,4,[3,1],{a=>1,b=>2},{a=>1,b=>2},'SV',1,
-    [],[],[],1,2,7,'B',[[3,1],[2]],[[3,1],[2]],[{a=>1,b=>2}],[{a=>1,b=>2}]];
+    [],[],undef,1,2,7,'B',[[3,1],[2]],[[3,1],[2]],[{a=>1,b=>2}],[{a=>1,b=>2}]];
 my $json = JSON::PP->new->canonical;
 my %context;
 my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);

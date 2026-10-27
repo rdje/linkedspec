@@ -449,7 +449,7 @@ The returned value is:
 [{"k":"v","nested":[1,2]}, {}, [1,2]]
 ```
 
-The copy creates a new outer container. Nested array and hash references remain shared with the original, matching Perl's function-form `copy(name)` semantics. Changing an outer entry of the snapshot therefore leaves the original outer container alone; changing a shared nested container can affect both. Ordinary text and numeric values produce an empty array through either spelling; logical-result receiver chains reject scalar copy to null.
+The copy creates a new outer container. Nested array and hash references remain shared with the original, matching Perl's function-form `copy(name)` semantics. Changing an outer entry of the snapshot therefore leaves the original outer container alone; changing a shared nested container can affect both. Ordinary Perl `copy(value)` now preserves Bool, Number, String and null: `copy(false)` stays false, `copy(0)` stays numeric zero, `copy("0")` stays text and `copy(undef)` stays null. A missing binding supplies null. The source runs once; `copy(false).cat("!")` yields `"0!"`, while `copy(false).take(effect)` yields null without running `effect`. Copy is not a conversion. Single bound-variable `.copy()` uses the same producer; generic receiver and interpreted-context rollout remain separate.
 
 Examples:
 

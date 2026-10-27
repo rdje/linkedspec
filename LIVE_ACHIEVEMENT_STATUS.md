@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
+Perl function copy1.1 preserves primitive kinds, once-only snapshots and actual-kind consumers; ordinary container/legacy controls retained. Generic receiver1.2 is next.
 
 ## Latest Completed Slice
 
-ADR0138 records the director-approved implementation target: copy(expr) and expr.copy() preserve accepted Bool/Number/String/null values and kinds, with once-only source/snapshot/error behavior and actual-kind continuations. Retain existing container-copy depth/detachment by backend/context, receiver malformed-shape preflight, free malformed-signature policies and callable-origin rights. No implicit conversion, new helper/type/deferred vocabulary or current capability admission is claimed. Freeze copy-value-preservation.md and own bounded Perl producer/receiver/interpreted-context children, then independent Rust/Dart/Julia/safe Lua checks before changes. Historical copy-domain observations remain exact; old scalar fallbacks/result guards may change only under explicit user authority. Planned-only book qualifiers, copy fact/map/roadmap/task/live continuity align. This is design adoption with document/book/history/continuity checks; runtime RED/GREEN belongs to implementation children, full source/context/portable/canonical admission remains23.4. Required engineering-history rollover is included losslessly; Perl producer4.2.2.1.1 is next.
+Approved ADR0138 primitive copying now uses the typed Perl function producer and preserves Bool/Number/String/null kinds without text inspection. Variables keep legacy storage/kind-provider routing; containers keep ordinary outer detachment and shared nested references. Free-copy and repeated-copy continuations guard the actual returned kind, preserving source-once snapshots and skipping incompatible consumer operands. New native/fresh function-copy tests and the existing bound-copy/legacy suite pass499, with only approved text/zero expectations advanced; direct selected/scalar/logical controls and syntax pass, including the explicit null expectation for a missing selected copy. Original helper-source errors, retired selectors, typed Number/String writes and function-local isolation retain their controls. Book/catalog, current copy facts/map, roadmap/task/live continuity align; generic receiver1.2 and interpreted context1.3 precede independent backends. No full CI, canonical-coverage, callable/deferred-domain or complete portable admission claim; mandatory new-test registration remains23.4.1.
 
 ## Next Action
 
-Activate Perl value-copy producer4.2.2.1.1 against ADR0138/copy-value-preservation.md. Inspect existing typed copy/argument materialization/legacy rule storage and result-kind routes; observe public free producers before changes. Preserve Bool/Number/String/null including pre-JSON kind distinctions, source-once/snapshots/errors and container depths, actual-result consumers/guarded operands, arity and callable/deferred boundaries. Small native/fresh producer/direct checks, syntax/docs/commit; generic receiver1.2 and already-supported interpreted context1.3 follow, then independent backends. No full CI/matrix or direct computed-call pivot.
+Activate ordinary Perl receiver copy1.2 from the clean producer commit. Assess named/literal/selected/block/function/prior scalar-result/scoped sources and repeated actual-kind continuations before changes; retain arity-before-effects, source errors, container depth and callable/deferred bounds. Implement/compile/quick native-fresh/direct check/docs/commit, then existing interpreted context1.3 and independent backends. Direct computed-call24.1.2 and full verification remain queued.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.1` — Perl function copy1.1 preserves primitive kinds, once-only snapshots and actual-kind consumers; ordinary container/legacy controls retained. Generic receiver1.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0` — Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.0` — Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1` — Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
@@ -29,7 +30,6 @@ Activate Perl value-copy producer4.2.2.1.1 against ADR0138/copy-value-preservati
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.4` — Julia22.4 tagged-record receiver roles/minimum shape repaired/targeted-checked; safe Lua22.5 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.3` — Dart22.3 tagged-record receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.2` — Rust22.2 tagged-record producer and String-to-Array bridge are implemented/targeted-checked; Dart22.3 is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` — Perl22.1 producer and receiver bridge are repaired/targeted-checked; independent Rust22.2 is next.
 
 ## History
 
