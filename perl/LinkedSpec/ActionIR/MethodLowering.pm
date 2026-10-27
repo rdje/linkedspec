@@ -736,6 +736,8 @@ sub _lower_ast_block_side_effect_statement {
  return undef unless ref($node) eq 'HASH';
 
  my $kind = $node->{kind} // '';
+ return _actionir_ast_unsupported_helper_expr($node->{name})
+  if $kind eq 'call' && _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
  foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index', 'assign_nested_access') {
   next unless $kind eq $candidate_kind;
   my $lowered = _lower_ast_assignment_operator_statement($node, $deps, $candidate_kind);
@@ -1566,6 +1568,14 @@ sub _user_function_body_is_active {
  my ($deps) = @_;
  return ref($deps) eq 'HASH' && ref($deps->{__user_function_call_stack}) eq 'ARRAY'
   && @{$deps->{__user_function_call_stack}};
+}
+
+sub _parser_state_helper_is_forbidden_in_function {
+ my ($method, $deps) = @_;
+ return 0 unless _user_function_body_is_active($deps);
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', 'is_parser_state_helper', $method,
+ );
 }
 
 sub _lower_static_named_capture_call_expr {
@@ -4607,6 +4617,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
 	 my ($node, $opts) = @_;
 	 $opts = {} unless ref($opts) eq 'HASH';
 	 return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+	 return _actionir_ast_unsupported_helper_expr($node->{name})
+	  if _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
 	 my $named_capture = _lower_static_named_capture_call_expr($node, $deps);
 	 return $named_capture if defined($named_capture) && length($named_capture);
 	 my $args = $node->{args} || [];
@@ -6071,6 +6083,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
  }
  my $method_call = $parse_method_function_expr->($trimmed);
+ return _actionir_ast_unsupported_helper_expr($method_call->{method})
+  if $method_call && _parser_state_helper_is_forbidden_in_function($method_call->{method}, $deps);
  if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {
   my $logical_node = _parse_method_value_ast_expr($trimmed, $deps);
   my $logical_expr = $lower_ast_logical_call_node->($logical_node);
@@ -6157,10 +6171,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
  }
  if ($method_call && $method_call->{method} =~ /\A(?:entry|match)_(?:named|has)\z/o) {
   return _lower_static_named_capture_call_expr(_parse_method_value_ast_expr($trimmed, $deps), $deps);
- }
- if ($method_call && _user_function_body_is_active($deps)
-  && $method_call->{method} =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col|slice)|cursor_(?:pos|line|col|rest|rest_len))\z/o) {
-  return _actionir_ast_unsupported_helper_expr($method_call->{method});
  }
  if ($method_call && $method_call->{method} eq 'input_slice') {
   my $input_slice_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

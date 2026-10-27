@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
+Perl catalogued function-state boundary repaired; independent Rust assessment next.
 
 ## Latest Completed Slice
 
-Perl now lowers existing static bare/quoted entry/local named/has capture reads through shared native primitive rendering. Bare identity ignores working-variable shadowing; String0/empty/missing/punctuation/dollar data, numeric presence, compatible defaults/text and explicit function arguments pass. Unsupported shapes skip operands and remain explicitly unready. Four known helpers join paired VALUE_DROP lists, repairing discarded quoted calls without new IR/schema/source-membership rights. A separate public input_text function returned caller x with ready metadata before repair; current active-function lowering fences the four named and eleven input/cursor readers under the accepted parser-state ban. Mixed named probes fail/unready and are not successful scope controls; exact producers/emission/preludes are retained. Five new native/fresh/metadata groups plus getter4/statement-provenance16 pass after RED; module/test syntax and book/target/fact/map/history/fast continuity align. Valid ordinary metadata is raw0/unresolved0/ready1; all15 forbidden readers diagnose/unready. Remaining function-family/context assessment29.2 follows; full23.4/pressure/required Perl registration/declared5.4 stay separate; no push.
+Perl readonly intake and refined unchanged-production RED confirm caller capture collections/groups escape the accepted pure-function fence, including nested/discarded calls. Contracts now derives a cached parser-state predicate from existing code-owned source projection rows and explicit compatibility aliases; MethodLowering checks active function context before typed/legacy value and statement emission. Existing markers diagnose/unready with raw0 and no caller capture data. Pure helpers, explicit caller arguments, local assignment, ordinary getters and prefix-named user functions remain ready. Four new native/fresh/metadata groups plus named-capture5/source-location4 pass after RED, total13 groups; changed module/test syntax passes. Descriptor-only state-write controls never execute. Initial one-line adjacent function definitions are corrected as an instrument issue before final RED, with exact sources/channels retained. Book/target/canonical fact/map/roadmap/task/live/resume and future Perl registration align. Independent Rust29.2.2 follows; full source/function/context/portable admission23.4, pressure and declared-host owners remain separate; no push.
 
 ## Next Action
 
-Activate remaining pure-function parser-state boundary assessment29.2 from this clean static-name boundary. Read accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative and current semantic helper/context authority; assess remaining capture/group/map/mark/cursor/control classes through small public positive/negative controls, checking Knowledge Map first. Do not infer failure or permission from name lists. Split independent implementation/backend/context owners before production, fix confirmed escapes under existing purity authority and preserve pure value helpers/explicit arguments/getter semantics/callback rights. Compile/quick checks/docs/commit per safe slice. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
+Activate Rust function-state boundary29.2.2 from this clean Perl boundary. Read canonical function/helper/context owners and existing runtime function stack; independently probe a few readonly capture/input/group readers plus pure/explicit-argument controls before production. Repair only confirmed existing-contract escapes through current compiler/runtime owners, preserving ordinary getters, local data operations and prefix-named functions. Compile/quick targeted check/book/docs/commit, then Dart29.2.3. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1` — Perl catalogued function-state boundary repaired; independent Rust assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.1` — Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.28.1` — Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
@@ -29,7 +30,6 @@ Activate remaining pure-function parser-state boundary assessment29.2 from this 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.1` — Perl inline conditional result selection implemented/targeted-checked; independent Rust26.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.0` — Inline condition typed-value and child AST lowering repaired; Perl conditional brackets26.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.6` — Inline conditional bracket target26 frozen; P1 first/elseif eager-condition lowering26.0 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.25.5` — Safe Lua capture guards implemented on available hosts; all bounded25 children complete; next-feature selection23.1.6 next.
 
 ## History
 

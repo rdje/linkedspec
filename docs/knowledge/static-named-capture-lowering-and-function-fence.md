@@ -11,12 +11,14 @@ answers:
   - can a pure function read input_text or named captures
   - how can a pure function normalize a capture without reading parser state
   - which task owns remaining function parser-state helper boundaries
+  - why can a Perl pure function read caller entry_groups or match_map
+  - does the pure function fence reject entry_custom prefix names
 date: 2026-10-27
-status: bounded Perl static names/current15-reader function fence repaired; remaining family/context assessment29.2 next
+status: bounded Perl static names and catalogued function-state fence repaired; other backends/context admission separate
 tags: [perl, capture, names, functions, purity, lowering, readiness]
 evidence: "TYPE29.1 retained ordinary quoted intake and exact four unchanged4ecd1e6dc function producers/emission; five new native/fresh/metadata groups plus source-location4/statement-provenance16."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/named_capture_literal_names.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/named_capture_literal_names.t t/user_function_parser_state_boundary.t"
 ---
 
 Bare Contracts callbacks recognize only word names; quoted known calls therefore
@@ -49,3 +51,18 @@ statement-provenance16 also pass. Valid ordinary metadata is raw0/unresolved0/re
 invalid shapes skip effects/stay unready and all15 function readers diagnose.
 No capture/cursor mutation, copy-depth, source-coordinate or compiled-format policy
 changes. Full source/domain/function/context admission remains23.4.
+
+October27 follow-up29.2.1: three readonly public controls return caller capture
+values with ready metadata at clean24e943f, and refined native/fresh controls
+confirm eight collection/group spellings plus nested/discarded calls escape the
+accepted fence. Contracts now derives a cached parser-state-name predicate from
+its code-owned typed source projection rows plus seven compatibility aliases.
+MethodLowering checks it under the active function stack at typed/legacy value
+and AST statement entrypoints, before operands or native getter emission. No
+prefix-based ban: entry_custom/capture_custom user functions, pure helpers, local
+assignments and explicit caller capture arguments remain ready. Four new groups,
+existing named-capture five and source-location contract four pass. Descriptor-only
+mark/capture/cursor controls execute no state write. Initial adjacent definitions
+on one line fail validation and are corrected before the retained unchanged-source
+RED. function-state-perl-intake.json.gz and function-state-boundaries.md own exact
+evidence and limits; independent backends and full context admission remain open.

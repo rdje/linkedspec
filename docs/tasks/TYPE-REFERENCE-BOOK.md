@@ -4712,7 +4712,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -6044,7 +6044,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.1 - lower static capture names and retain function fences`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2`
-  Status: `pending` / P1 remaining function parser-state boundary assessment; scheduled immediately after29.1
+  Status: `in_progress` / independent backend children before full admission
   Goal: Reconcile remaining parser-state helper classes with the accepted pure-function ban and repair any independently reproduced escape.
   Dependencies:29.1 current named/input reader fence, SPEC-FORMAT-TERSE.4.2.3/Phase0 negative and current callable/function contracts.
   Reproduction / impact:29.1's isolated public input_text function returns caller input x with ready metadata before repair; its scoped repair covers only four named and eleven input/cursor readers. Existing other capture/group/map/mark/cursor/control classes and direct/registered/deferred paths need explicit boundary assessment; do not infer either admission or failure from a helper-name inventory.
@@ -6053,6 +6053,74 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small source-role/function/callback distinctions, changed compile and direct negative/positive regressions, docs/history/continuity; no full suite/matrix.
   Planned canonical trigger: Full function/source/context/portable admission and final clean push after feature coverage; actual contract/format/infrastructure movement requires separate ownership.
   Planned claim verification: none: Prospective deterministic boundary assessment; declare any actual measurement at activation.
+  Children:29.2.1 Perl;29.2.2 Rust;29.2.3 Dart;29.2.4 Julia;29.2.5 safe Lua. Split additional contexts only after an actual public distinction.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1`
+  Status: `completed`
+  Goal: Independently assess and repair Perl generic parser-state helper calls inside pure function bodies.
+  Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
+  Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
+  Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+  Before-production finding: The seven-case public intake at clean24e943f confirms entry_groups, match_map and entry_group return caller captures with raw0/unresolved0/ready1. The first authored regression separately confirms all eight collection/group spellings return caller values on native/fresh instead of null/unready. Existing capture_slice/mark_pos/entry_text controls already reject; uppercase remains ready/OK. The nested control initially fails source validation before execution and is being corrected as an instrument issue, not credited as a runtime defect. Canonical typed_source_projection_rows and existing compatibility aliases own the known parser-state name boundary; use it under an active function stack before typed/legacy value or statement lowering. No prefix-based function ban.
+
+  Activation: clean24e943f444595a56f2602e64fbeb7bf3a2e2c5cd; static names29.1 committed/tree clean/brief0.
+  Owned paths: Contracts parser-state source-role predicate; MethodLowering active-function typed/legacy value and statement entrypoints; new regression/retained intake; scoped book/target/canonical fact/map/roadmap/task/live/resume. No helper/parser/IR/compiled-format change.
+  Verification tier: `focused`
+  Focused checks: Four new function-boundary groups, existing named-capture five and source-location contract four pass after refined unchanged-production RED; changed module/test syntax, book/history and fast staged continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/function/context/portable/generated admission23.4 and final clean push after feature coverage; independent Rust/Dart/Julia/safe Lua children follow.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Public intake confirms three readonly helpers return caller captures with ready metadata; the refined authored regression confirms all eight collection/group spellings and nested/discarded calls bypass the accepted pure-function parser-state boundary. Initial adjacent definitions on one physical line fail validation and are corrected before the retained final unchanged-production RED; that source-layout issue is not credited as a runtime defect. Pure explicit-argument controls already pass.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering directly emits capture collection/group getters without checking the active function stack; fresh function-local working storage does not isolate parser registers. Earlier special reader fences cover only selected helpers. The existing typed_source_projection_rows catalog already owns parser-state source roles, with explicit compatibility aliases.
+  - [x] **FIX**: Add a cached Contracts predicate derived from the code-owned source-role rows and existing seven compatibility spellings. Check it under an active function stack before typed value, legacy value and AST statement lowering; emit existing unsupported-helper markers before operands/native getter emission. Replace the redundant special input-reader fence. Registered prefix-named functions remain ordinary values, without a broad prefix ban or artifact-file dependency.
+  - [x] **ADDRESSED (verified)**: New four groups pass. Eight collection/group spellings yield no caller data on native/fresh and explicitly diagnose/unready with raw0; nested/discarded calls retain the fence. Descriptor-only capture/mark/cursor controls name each forbidden helper without executing a state write. Explicit caller capture arguments, nested pure String helpers, function-local assignment, ordinary getters and prefix-named user functions remain ready and exact on native/fresh.
+  - [x] **NO REGRESSION**: Existing static-name/function reader five groups and source-location contract four pass, total13 top-level groups across three files. Changed modules/test compile. Source getter/frame semantics, parser signatures/arity, helper registry, callback vocabulary/rights, recursion and compiled data remain unchanged. Rule-dispatch/private context helpers and exhaustive source/context admission are not inferred from catalog membership or this finite proof.
+  - [x] **LOCKSTEP**: Book teaches explicit caller values and the ordinary Perl catalogued reader fence; target and retained source/RED evidence, canonical fact/map, roadmap/task/live/resume and future explicit Perl registration owner align. Independent Rust child follows; full23.4/pressure/declared-host owners remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1 - fence catalogued parser state in pure functions`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2`
+  Status: `pending`
+  Goal: Independently assess and repair Rust generic parser-state helper calls inside pure function bodies.
+  Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
+  Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
+  Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3`
+  Status: `pending`
+  Goal: Independently assess and repair Dart generic parser-state helper calls inside pure function bodies.
+  Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
+  Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
+  Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4`
+  Status: `pending`
+  Goal: Independently assess and repair Julia generic parser-state helper calls inside pure function bodies.
+  Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
+  Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
+  Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5`
+  Status: `pending`
+  Goal: Independently assess and repair safe Lua generic parser-state helper calls inside pure function bodies.
+  Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
+  Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
+  Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
 
 ## Current Frontier
 
@@ -6060,7 +6128,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2` | `pending` | Assess remaining pure-function parser-state helper boundaries and repair confirmed escapes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` | `pending` | Independently assess Rust parser-state helper boundaries in pure functions. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

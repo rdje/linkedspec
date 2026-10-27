@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1357** facts · **10748** question keys.
+> **1357** facts · **10750** question keys.
 
 ## Questions → fact
 
@@ -3564,6 +3564,7 @@
 - "does the process oracle allow explicit caller input" -> [project-data-process-locality-proof](docs/knowledge/project-data-process-locality-proof.md) · 2026-07-27 · reverify: `bash -n tools/test_project_data_process_locality.sh tools/run_dart_project_data.sh tools/build_lua_native.sh && bash tools/test_project_data_process_locality.sh && bash scripts/check_project_data_storage_locality.sh`
 - "does the progressive neutral checker validate Knowledge card freshness" -> [julia-progressive-span-dispatch-recomposition](docs/knowledge/julia-progressive-span-dispatch-recomposition.md) · 2026-08-25 · reverify: [4 entries](#julia-progressive-span-dispatch-recomposition)
 - "does the public sequence guard cover capability_conformance README" -> [recognition-transaction-capability-guide-drift](docs/knowledge/recognition-transaction-capability-guide-drift.md) · 2026-08-10 · reverify: `bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && ! rg -n 'Rollout is neutral 1/9 complete|forms remain future and unavailable in every backend' capability_conformance/README.md && rg -n 'CAPABILITY_GUIDE_CONTRACT|CAPABILITY_GUIDE_MUTATION_COUNT' tools/check_recognition_transaction_contract.py`
+- "does the pure function fence reject entry_custom prefix names" -> [static-named-capture-lowering-and-function-fence](docs/knowledge/static-named-capture-lowering-and-function-fence.md) · 2026-10-27 · reverify: [1 entry](#static-named-capture-lowering-and-function-fence)
 - "does the quoted boundary repair publish source sidecars" -> [perl-quoted-boundary-labels](docs/knowledge/perl-quoted-boundary-labels.md) · 2026-10-06 · reverify: [2 entries](#perl-quoted-boundary-labels)
 - "does the recurring callable-codeblock gate include Lua" -> [callable-codeblock-four-backend-recurring-gate](docs/knowledge/callable-codeblock-four-backend-recurring-gate.md) · 2026-08-01 · reverify: `bash tools/check_callable_codeblock_five_backend.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/test_project_data_workflow_routing.sh && perl tools/check_capability_conformance.pl`
 - "does the recursion guard affect legitimate consume-before-recurse recursion" -> [top-rule-recursion-forward-progress-guard](docs/knowledge/top-rule-recursion-forward-progress-guard.md) · 2026-08-09 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`
@@ -9633,6 +9634,7 @@
 - "why can Rust typed source projection not preserve all alias behavior unchanged" -> [rust-typed-source-compatibility-alias-gap](docs/knowledge/rust-typed-source-compatibility-alias-gap.md) · 2026-09-07 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_boundary_compatibility_aliases; bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`
 - "why can a Dart recognized child write a binding before rollback" -> [dart-recognition-effect-integration-gap](docs/knowledge/dart-recognition-effect-integration-gap.md) · 2026-09-09 · reverify: [3 entries](#dart-recognition-effect-integration-gap)
 - "why can a Julia recognized child write a binding before rollback" -> [julia-recognition-effect-integration-gap](docs/knowledge/julia-recognition-effect-integration-gap.md) · 2026-09-11 · reverify: [3 entries](#julia-recognition-effect-integration-gap)
+- "why can a Perl pure function read caller entry_groups or match_map" -> [static-named-capture-lowering-and-function-fence](docs/knowledge/static-named-capture-lowering-and-function-fence.md) · 2026-10-27 · reverify: [1 entry](#static-named-capture-lowering-and-function-fence)
 - "why can a bare dart test make the repository wrapper wait before test discovery" -> [dart-project-data-ssd-storage](docs/knowledge/dart-project-data-ssd-storage.md) · 2026-09-02 · reverify: `bash tools/test_dart_project_data_storage.sh && bash tools/run_dart_local.sh && bash tools/run_dart_project_data.sh pub get -C dart --offline`
 - "why can a large Dart CLI trace level throw StateError" -> [dart-primary-cli-trace-overflow](docs/knowledge/dart-primary-cli-trace-overflow.md) · 2026-09-09 · reverify: [2 entries](#dart-primary-cli-trace-overflow)
 - "why can a later PNT update erase a public no-drift marker" -> [task-tree-capability-markers-not-frontier](docs/knowledge/task-tree-capability-markers-not-frontier.md) · 2026-07-18 · reverify: `bash scripts/check_task_tree_metadata.sh; bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py; perl tools/check_capability_conformance.pl`
@@ -20455,10 +20457,10 @@ _Startup task partition plan preserves every source byte under unchanged collect
 
 ### static-named-capture-lowering-and-function-fence
 _Static capture-name getters lower through typed values and retain the pure-function parser-state fence_
-- **answers:** does Perl accept quoted entry_named or match_has names | does a bare capture name read a working variable | why does quoted match_has report ready but call an undefined host helper | are computed capture-name expressions supported on ordinary Perl | do empty and zero named captures retain String kinds | can discarded named capture calls use VALUE_DROP | can a pure function read input_text or named captures | how can a pure function normalize a capture without reading parser state | which task owns remaining function parser-state helper boundaries
-- **date:** 2026-10-27 · **status:** bounded Perl static names/current15-reader function fence repaired; remaining family/context assessment29.2 next
+- **answers:** does Perl accept quoted entry_named or match_has names | does a bare capture name read a working variable | why does quoted match_has report ready but call an undefined host helper | are computed capture-name expressions supported on ordinary Perl | do empty and zero named captures retain String kinds | can discarded named capture calls use VALUE_DROP | can a pure function read input_text or named captures | how can a pure function normalize a capture without reading parser state | which task owns remaining function parser-state helper boundaries | why can a Perl pure function read caller entry_groups or match_map | does the pure function fence reject entry_custom prefix names
+- **date:** 2026-10-27 · **status:** bounded Perl static names and catalogued function-state fence repaired; other backends/context admission separate
 - **evidence:** `TYPE29.1 retained ordinary quoted intake and exact four unchanged4ecd1e6dc function producers/emission; five new native/fresh/metadata groups plus source-location4/statement-provenance16.`
-- **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/named_capture_literal_names.t`
+- **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/named_capture_literal_names.t t/user_function_parser_state_boundary.t`
 - **source:** [`docs/knowledge/static-named-capture-lowering-and-function-fence.md`](docs/knowledge/static-named-capture-lowering-and-function-fence.md)
 
 ### structural-progressive-staged-authoring-doctrine

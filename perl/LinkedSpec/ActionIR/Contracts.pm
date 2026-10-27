@@ -453,6 +453,21 @@ sub typed_source_projection_rows {
  }
 }
 
+# The source-location catalog owns these parser-state roles. Keep compatibility
+# spellings explicit rather than treating every similarly prefixed function as
+# a built-in. This predicate has no runtime artifact/catalog-file dependency.
+sub is_parser_state_helper {
+ my ($name) = @_;
+ state $names = {
+  map { $_ => 1 } (
+   (map { map { $_->[0] } @$_ } values %{typed_source_projection_rows()}),
+   qw(capture_from_rule_start capture_len_from_rule_start capture_rest_length
+      capture_slice_here capture_slice_length entry_named_map match_named_map),
+  )
+ };
+ return defined($name) && exists $names->{$name};
+}
+
 #------------------------------------------------------------------------------
 # Function: _build_call_and_dispatch_contracts
 # Purpose : Contracts that dispatch/call parser handlers and push results.
