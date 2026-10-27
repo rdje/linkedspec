@@ -78,7 +78,7 @@ that grows beyond a safe slice. Then24.2 Rust,24.3 Dart,24.4 Julia,24.5 safe Lua
 independently assess source/literal/block/interleaving support and repair bounded
 gaps. Strict native/generated routes and direct selected/signed controls suffice
 per ordinary child; complete source-domain/context/portable/canonical admission
-remains23.4 after feature coverage. Existing copy-domain decision4.2.2 stays pending.
+remains23.4 after feature coverage. The approved copy-domain rollout4.2.2 is complete in bounded backend children; complete admission remains23.4.
 
 ## Bounded Perl noncall implementation and direct-call prerequisite
 
@@ -122,6 +122,23 @@ raw1/ready0 and unsupported_codeblock_actionir/raw_perl. Regression PASS22 and
 direct callable compatibility PASS5 preserve ordinary/inline/named controls and
 success/error scope restoration. No new deferred execution or waiver is added.
 
-The director now approves scalar/null value-copy extension4.2.2, retaining current
-container-copy depths. It follows this repair's clean commit; direct-call24.1.2
-remains queued with its complete ordinary target and legacy constraints intact.
+The director-approved scalar/null copy rollout4.2.2 is now complete in bounded
+Perl/Rust/Dart/Julia/safe Lua children. Direct-call selection24.1.2 resumes with
+its complete ordinary target and legacy constraints intact.
+
+## Bounded ordinary data-helper call implementation
+
+24.1.2.1 adds direct data-helper computed receivers through the known helper-name
+resolver and semantic value-method/Numeric families, plus data constructors and
+logical helpers. Unknown/bound and registered custom names stay on their existing
+path; list splices and context/control/rule names are excluded. The deferred-body
+fence remains first. Typed helper receivers reuse the existing value_access reader
+and source/selector/result visitors, with no AST/format fields added. See
+computed-helper-calls.md for the precise bounded source decision.
+
+Native/fresh helper/scoped/ownership/AST/source-error/readiness checks pass43;
+frozen callable controls pass5 top-level and noncall/deferred controls pass58.
+A cold parser preserves its incoming error. Complete computed_selection_values
+still fails native handler/fresh-load compilation at registered entries() indexing,
+raw1/unresolved0/ready0;24.1.2.2 owns that required source class before Perl/Rust
+handoff. No full-target oracle, callable value/marker or deferred boundary is weakened.

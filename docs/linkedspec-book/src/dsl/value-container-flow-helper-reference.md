@@ -468,11 +468,11 @@ return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 
 Use `binding[index]` or nested access for a working Array/Hash binding; older path helpers are retirement-bound.
 
-Perl also supports brackets on fluent results, Array/Hash literals and immediate blocks. The source evaluates once, selectors run left-to-right, and the selected value keeps its type for compatible methods. Reads do not create storage; missing/out-of-range entries yield undef. Explicit deferred literals retain their previous grammar and diagnostics. Direct helper/function-call results, other backend source shapes and complete portable/context admission are being assessed.
+Perl supports brackets on fluent results, Array/Hash literals, immediate blocks and statically governed data-helper calls. String/Array/Hash value-method helpers, numeric/logical helpers and Array/Hash constructors reuse their existing source/signature rules. The source evaluates once, selectors run left-to-right, and selected values retain their kinds for compatible methods; `copy([false])[0]` remains false. Reads do not create storage; missing/out-of-range/wrong-kind entries yield undef. Explicit deferred literals keep their previous grammar and diagnostics. Registered function-result indexing is still being integrated; unknown bound calls retain their existing reader and status. List splices, context/control/rule helpers, grouping/writes and complete source/context/portable admission remain separate.
 
 ```text
-"a,b,c".split(",")[-2].uppercase()                  # "B"
-{"items":["a","b"]}["items"][-1].uppercase()       # "B"
+split("aXb",/[x]/i)[1].uppercase()                # "B"
+hash("items",["a","b"])["items"][-1].uppercase()    # "B"
 [[3,1]][0].sorted().last().add(1)                  # 4
 ```
 

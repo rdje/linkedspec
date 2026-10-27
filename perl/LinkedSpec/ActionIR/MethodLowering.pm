@@ -1499,6 +1499,25 @@ sub _user_function_registry_by_name {
  return ref($registry->{by_name}) eq 'HASH' ? $registry->{by_name} : undef
 }
 
+# Static data-helper ownership for ordinary computed reads. Reuse the same
+# known-name resolver that reserves helpers against registered functions, and
+# the semantic value families; trace labels are not a grammar contract.
+sub _actionir_ast_computed_data_call_method {
+ my ($name) = @_;
+ my $method = _actionir_ast_known_value_call_method($name);
+ return undef unless defined($method);
+ # These helpers expose list splices rather than one boxed source value.
+ return undef if $method =~ /\Aflat(?:_array|_hash)?\z/o;
+ return undef if _is_tree_traversal_receiver_method($method);
+ return $method if $method =~ /\A(?:array|hash|and|or|not)\z/o
+  || _is_string_receiver_value_chain_method($method)
+  || _is_array_receiver_value_chain_method($method)
+  || _is_hash_receiver_value_chain_method($method)
+  || defined(LinkedSpec::Numeric::scalar_helper_name($method))
+  || defined(LinkedSpec::Numeric::array_helper_name($method));
+ return undef
+}
+
 sub _user_function_definition_for_name {
  my ($deps, $name) = @_;
  return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;

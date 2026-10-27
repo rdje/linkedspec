@@ -14,12 +14,15 @@ answers:
   - can value_access recognition change legacy callable raw status
   - why does a deferred computed read report ready but fail execution
   - how does Perl preserve deferred literal AST vocabulary
+  - how does Perl distinguish computed data helpers from bound callables
+  - does Perl direct registered function indexing work after helper selection
 date: 2026-10-27
-status: Perl24.1.1 noncall sources checked; direct calls24.1.2 and full admission open
+status: Perl noncall and governed data-helper sources checked; registered calls/full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_noncall_contract.t"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_helper_calls.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_deferred_boundary.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
 ---
@@ -69,4 +72,21 @@ direct callable PASS5 and syntax pass, including Unicode spans and restoration
 after parse failure. Packet/producer: computed-deferred-boundary.json and
 probe_computed_deferred_boundary.pl. Initial launcher postlude failure is retained;
 corrected distinguishing replay exits0. No deferred operation or waiver admitted.
-Approved scalar/null copy4.2.2 is next; direct computed calls remain queued.
+Approved bounded scalar/null copy4.2.2 is complete; direct computed calls resume.
+
+24.1.2.1 adds statically governed ordinary data-helper Call receivers. The
+purpose-specific MethodLowering resolver first canonicalizes through the known
+helper-name owner (also used by function-name collision validation), then reuses
+semantic String/Array/Hash value methods and Numeric helper families plus data
+constructors/logical helpers. Trace-only family labels and runtime values are not
+grammar authority. Flat list splices and context/control/rule/unknown names remain
+excluded; Parser consults the owner lazily with OwnerDispatch error preservation
+only after its deferred-body fence. No new AST fields or metadata waiver.
+Native/fresh helper/ownership/scope/source-error/AST/readiness test PASS43, cold
+parser incoming-error preservation, frozen four callable values1/2/0/0/raw1 and
+direct noncall/deferred PASS58 retain their controls. New simple helpers are
+raw0/unresolved0/ready1. The unchanged full target still fails compilation at
+registered entries() selection, raw1/unresolved0/ready0;24.1.2.2 owns that required
+source class before complete Perl/Rust handoff. Full source/context/portable
+admission remains23.4. Known SESSION7 EPERM recurs in the full diagnostic job;
+its eventual complete output is consumed, without any lifecycle/receipt claim.

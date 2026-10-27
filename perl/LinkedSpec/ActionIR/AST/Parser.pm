@@ -1598,8 +1598,14 @@ sub _parse_value_access_expr {
    if (ref($segments) eq 'ARRAY' && @$segments) {
     my ($prefix, $prefix_start, $prefix_end) = _trim_with_offsets(substr($text, 0, $idx), $start);
     my $receiver = _parse_expr($prefix, $prefix_start, $prefix_end);
-    # Keep named, direct-call and grouped reads on their existing paths.
-    if (($receiver->{kind} // '') =~ /\A(?:fluent_chain|array_literal|hash_literal|block_value|value_access)\z/o) {
+    # Unknown/bound calls retain their reader/coercion/raw-status path. Only
+    # statically governed data helpers can join the ordinary typed reader here.
+    my $data_call = ($receiver->{kind} // '') eq 'call'
+     && LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+      LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
+      return LinkedSpec::ActionIR::MethodLowering::_actionir_ast_computed_data_call_method($receiver->{name});
+     });
+    if ($data_call || ($receiver->{kind} // '') =~ /\A(?:fluent_chain|array_literal|hash_literal|block_value|value_access)\z/o) {
      return _node('value_access', $text, $start, $end,
       receiver => $receiver, segments => $segments);
     }
