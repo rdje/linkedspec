@@ -674,6 +674,33 @@ sub _build_return_contracts {
  ])
 }
 
+# Existing native getter expressions are also value operands before fluent
+# defaults/math are emitted. Keep projection labels and absence fallbacks exact.
+sub _readonly_entry_match_number_value_expr {
+ my ($method) = @_;
+ state $expressions = {
+  entry_len => q{do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_len") : length($IMATCH) }},
+  entry_start_pos => q{do { LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_start_pos") }},
+  entry_end_pos => q{do { LinkedSpec::SourceLocation::Runtime::position_offset($info, $STRING, $IPOS, "entry_end_pos") }},
+  entry_line => q{do { LinkedSpec::SourceLocation::Runtime::span_start_line($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_line") }},
+  entry_start_line => q{do { LinkedSpec::SourceLocation::Runtime::span_start_line($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_start_line") }},
+  entry_end_line => q{do { LinkedSpec::SourceLocation::Runtime::position_line($info, $STRING, $IPOS, "entry_end_line") }},
+  entry_col => q{do { LinkedSpec::SourceLocation::Runtime::span_start_column($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_col") }},
+  entry_start_col => q{do { LinkedSpec::SourceLocation::Runtime::span_start_column($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_start_col") }},
+  entry_end_col => q{do { my $__ls_entry_end_col = LinkedSpec::SourceLocation::Runtime::position_column($info, $STRING, $IPOS, "entry_end_col"); defined($__ls_entry_end_col) ? $__ls_entry_end_col : 0 }},
+  match_len => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_len") : undef }},
+  match_start_pos => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_start_pos") : undef }},
+  match_end_pos => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_offset($info, $STRING, $LSPOS, "match_end_pos") : undef }},
+  match_line => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_line($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_line") : 1 }},
+  match_start_line => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_line($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_start_line") : 1 }},
+  match_end_line => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_line($info, $STRING, $LSPOS, "match_end_line") : 1 }},
+  match_col => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_column($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_col") : 1 }},
+  match_start_col => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_column($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_start_col") : 1 }},
+  match_end_col => q{do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_column($info, $STRING, $LSPOS, "match_end_col") : 1 }},
+ };
+ return $expressions->{$method};
+}
+
 #------------------------------------------------------------------------------
 # Function: _readonly_input_cursor_value_expr
 # Purpose : One emitted getter body for typed and contract-based composition.
@@ -1770,7 +1797,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_line") }/g;
+    $code =~ s/\bentry_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_line')/ge;
     return $code
    },
   },
@@ -1781,7 +1808,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_line") }/g;
+    $code =~ s/\bentry_start_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_start_line')/ge;
     return $code
    },
   },
@@ -1792,7 +1819,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_col") }/g;
+    $code =~ s/\bentry_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_col')/ge;
     return $code
    },
   },
@@ -1803,7 +1830,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_col") }/g;
+    $code =~ s/\bentry_start_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_start_col')/ge;
     return $code
    },
   },
@@ -1814,7 +1841,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_len\s*\(\s*\)/do { defined(\$IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_length(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_len") : length(\$IMATCH) }/g;
+    $code =~ s/\bentry_len\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_len')/ge;
     return $code
    },
   },
@@ -1825,7 +1852,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_pos") }/g;
+    $code =~ s/\bentry_start_pos\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_start_pos')/ge;
     return $code
    },
   },
@@ -1836,7 +1863,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, \$IPOS, "entry_end_pos") }/g;
+    $code =~ s/\bentry_end_pos\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_end_pos')/ge;
     return $code
    },
   },
@@ -1847,7 +1874,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, \$IPOS, "entry_end_line") }/g;
+    $code =~ s/\bentry_end_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_end_line')/ge;
     return $code
    },
   },
@@ -1858,7 +1885,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_col\s*\(\s*\)/do { my \$__ls_entry_end_col = LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, \$IPOS, "entry_end_col"); defined(\$__ls_entry_end_col) ? \$__ls_entry_end_col : 0 }/g;
+    $code =~ s/\bentry_end_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('entry_end_col')/ge;
     return $code
    },
   },
@@ -1869,7 +1896,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_pos\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_pos") : undef }/g;
+    $code =~ s/\bmatch_start_pos\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_start_pos')/ge;
     return $code
    },
   },
@@ -1965,7 +1992,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_len\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_len") : undef }/g;
+    $code =~ s/\bmatch_len\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_len')/ge;
     return $code
    },
   },
@@ -1976,7 +2003,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_pos\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, \$LSPOS, "match_end_pos") : undef }/g;
+    $code =~ s/\bmatch_end_pos\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_end_pos')/ge;
     return $code
    },
   },
@@ -1987,7 +2014,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_line\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, \$LSPOS, "match_end_line") : 1 }/g;
+    $code =~ s/\bmatch_end_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_end_line')/ge;
     return $code
    },
   },
@@ -1998,7 +2025,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_col\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, \$LSPOS, "match_end_col") : 1 }/g;
+    $code =~ s/\bmatch_end_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_end_col')/ge;
     return $code
    },
   },
@@ -2009,7 +2036,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_line\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_line") : 1 }/g;
+    $code =~ s/\bmatch_start_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_start_line')/ge;
     return $code
    },
   },
@@ -2020,7 +2047,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_line\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_line") : 1 }/g;
+    $code =~ s/\bmatch_line\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_line')/ge;
     return $code
    },
   },
@@ -2031,7 +2058,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_col\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_col") : 1 }/g;
+    $code =~ s/\bmatch_start_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_start_col')/ge;
     return $code
    },
   },
@@ -2042,7 +2069,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_col\s*\(\s*\)/do { defined(\$LMATCH) && defined(\$LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_col") : 1 }/g;
+    $code =~ s/\bmatch_col\s*\(\s*\)/_readonly_entry_match_number_value_expr('match_col')/ge;
     return $code
    },
   },

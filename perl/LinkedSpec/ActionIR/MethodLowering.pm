@@ -6085,6 +6085,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $method_call = $parse_method_function_expr->($trimmed);
  return _actionir_ast_unsupported_helper_expr($method_call->{method})
   if $method_call && _parser_state_helper_is_forbidden_in_function($method_call->{method}, $deps);
+ if ($method_call && $trimmed =~ /\A(?:entry|match)_(?:len|line|col|start_(?:pos|line|col)|end_(?:pos|line|col))\s*\(\s*\)\z/o) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_entry_match_number_value_expr',
+   $method_call->{method},
+  );
+ }
  if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {
   my $logical_node = _parse_method_value_ast_expr($trimmed, $deps);
   my $logical_expr = $lower_ast_logical_call_node->($logical_node);

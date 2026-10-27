@@ -12762,7 +12762,7 @@ _Entry/local capture examples use a seeking child after parent entry consumption
 ### entry-match-number-result-boundary
 _Entry and match Number readers need scalar value lowering before fluent defaults_
 - **answers:** why does entry_len coalesce call an undefined host function | why does match_end_col sub fail as an anonymous subroutine declaration | can entry and match position readers compose with numeric defaults directly | which task owns entry match Number reader method flow | does with returned Hash sorted_values fail only for a numeric getter | which task owns generic eager with Hash result continuation | should Number reader repair change legacy first consumer root policies
-- **date:** 2026-10-27 · **status:** frozen prospective Number30; Perl30.1 next; independent with-Hash31 after30
+- **date:** 2026-10-27 · **status:** bounded Perl Number30.1 repaired; independent other backends and with-Hash31 follow
 - **evidence:** `TYPE23.1.8 retains six original/five refined public native/fresh/Value metadata/substitution cases at cleanc0bf78088; source/target/shared prospective fixture and independently owned30/31.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_entry_match_scalar_flow.pl numeric_entry_len numeric_match_end_col named_number_control text_defaults`
 - **source:** [`docs/knowledge/entry-match-number-result-boundary.md`](docs/knowledge/entry-match-number-result-boundary.md)

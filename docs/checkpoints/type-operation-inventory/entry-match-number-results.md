@@ -1,7 +1,7 @@
 # Entry and match Number reader result composition
 
 Selection owner: TYPE-REFERENCE-BOOK.1.2.23.1.8; implementation family23.3.30.
-Status: frozen prospective target; independent backend children precede production.
+Status: bounded Perl30.1 implemented/targeted-checked; independent other backend children follow.
 
 Existing zero-argument entry/match length and position readers return Numbers or
 null under the current typed source-location contract. Ordinary compatible value
@@ -58,3 +58,15 @@ No aggregate completeness, unsupported-domain, Unicode or full portable admissio
 is inferred from this fixed input. Each backend independently runs producer and
 frozen/direct controls, implements only confirmed gaps, compiles/quick-checks/docs/
 commits; full source/domain/context/portable/generated23.4 remains separate.
+
+Perl30.1 shares the exact existing native replacement expressions with early value
+lowering for ordinary zero-argument frozen getters. Native callback regex/order/
+metadata and source/projection/absence/error/alias output stay unchanged; no new
+root result flags or with-family handling. Four new native/fresh/metadata groups
+pass after RED2/healthy2, plus source-location contract4 and module/test syntax.
+The original expression table is retained and exact shared-table parity checked.
+All frozen getters, expected offsets/columns, zero/lazy fallback, missing-match
+fallback once, numeric/text and existing String/regex/signed flow hold; normalized
+prefixes skip A/K/V and execute C once. Legacy first-consumer Hash/[] and specific
+function-state fences remain distinct. Rust30.2 independently follows; with-Hash31
+and full source/domain/context/portable admission remain separate.

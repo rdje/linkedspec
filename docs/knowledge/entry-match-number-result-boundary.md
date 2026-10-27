@@ -10,7 +10,7 @@ answers:
   - which task owns generic eager with Hash result continuation
   - should Number reader repair change legacy first consumer root policies
 date: 2026-10-27
-status: frozen prospective Number30; Perl30.1 next; independent with-Hash31 after30
+status: bounded Perl Number30.1 repaired; independent other backends and with-Hash31 follow
 tags: [perl, fluent, source-location, entry, match, number, with]
 evidence: "TYPE23.1.8 retains six original/five refined public native/fresh/Value metadata/substitution cases at cleanc0bf78088; source/target/shared prospective fixture and independently owned30/31."
 reverify:
@@ -42,3 +42,14 @@ fixture/spec and independent expected scalar offsets/columns define prospective
 behavior, not current execution or complete domain/context/backend admission.
 Perl30.1 follows; other backend failures are not inferred.31 is P1 after30, while
 full23.4/stale neutral example29.2.6.6 and other admission owners stay separate.
+
+Perl30.1 now shares the original native getter expression strings between current
+Contracts callbacks and early zero-argument method-value lowering, after the
+existing function-state guard. No new root kind flags or with-family code. Four
+new native/fresh/metadata groups RED2/healthy2 become GREEN4, plus typed source
+contract4 and module/test syntax. Original strings are retained and byte-identical
+in the shared table; source/projection/absence/error/aliases and native callback
+regex/order/metadata remain. Frozen getters/offsets/columns, zero/lazy/missing
+fallback, numeric/text/String inter-type flow and C-versus-skipped-AKV hold. Legacy
+root Hash/[] and specific function diagnostics stay unchanged. Independent Rust
+follows; with-Hash31/full context/portable admission remain separate.
