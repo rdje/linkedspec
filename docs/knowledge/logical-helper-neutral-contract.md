@@ -131,3 +131,11 @@ and0/not2 retain typed errors and zero evaluated operands through new methods.
 Only Perl method support is established here; Rust23.2 independently follows.
 The full neutral command above is broader existing-helper admission, separate
 from this new method fixture and later canonical registration23.4.1.
+
+Rust23.3.23.2 implements the same ordinary methods via generic/scalar-result roles
+and preflight, reusing existing eager source/RHS staging and typed logical helpers.
+The existing-with loop now guards logical result kinds before container operands,
+rejects scalar copy and permits recovered Array/Hash copies; reduction-only copy
+policy is unchanged. Seven new native/restored/plan and four direct result tests
+pass, including typed free source-error fields/tokens and scoped snapshots.
+Only Perl/Rust method support is established here; Dart23.3 independently follows.

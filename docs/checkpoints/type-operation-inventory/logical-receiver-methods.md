@@ -81,3 +81,15 @@ numeric rejection/explicit Array recovery, source containers and malformed
 no-effects remain. Free invalid sources retain typed helper/count/zero-evaluation
 errors through the new methods. Rust23.2 independently assesses next; full new
 method/domain/context/portable admission/canonical registration remains separate.
+
+## Bounded Rust implementation
+
+23.3.23.2 admits generic receiver/scalar-result roles and method shape preflight,
+reusing eager receiver_call_args and typed producers. Producer/source errors are
+healthy before changes. After those roles, an existing-with prefix yields the
+correct Bool/restored scope but its Array consumer still runs; the scoped loop
+now guards logical-prefix actual kinds and scalar copy while permitting recovered
+Array/Hash copies. Existing reduction-only copy policy remains. Seven new native/
+restored/plan plus four direct logical-result tests pass, with exact generated
+helper/count error tokens and rustfmt/offline compilation. No serialized model,
+free truth/error/lazy or callback admission changes; Dart23.3 independently follows.

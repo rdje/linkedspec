@@ -5962,7 +5962,7 @@ impl Engine {
                     "first" | "last" | "copy" | "count" | "count_keys" | "length" | "sum"
                     | "avg" | "median" | "range" | "is_empty" | "is_nonempty" | "is_defined"
                     | "is_undefined" | "abs" | "floor" | "ceil" | "round" | "trim"
-                    | "lowercase" | "uppercase" => !call.args.is_empty(),
+                    | "lowercase" | "uppercase" | "not" => !call.args.is_empty(),
                     "join_values" | "contains" | "index_of" | "has_key" | "starts_with"
                     | "ends_with" | "contains_substr" | "matches" | "str_eq" | "str_ne"
                     | "str_gt" | "str_ge" | "str_lt" | "str_le" | "eq" | "ne" | "gt" | "ge"
@@ -5972,7 +5972,7 @@ impl Engine {
                     "clamp" | "replace_substr" => call.args.len() != 2,
                     "substr" => !(1..=2).contains(&call.args.len()),
                     "split_tagged_records" => call.args.len() < 2,
-                    "add" | "mul" | "coalesce" | "cat" => call.args.is_empty(),
+                    "add" | "mul" | "coalesce" | "cat" | "and" | "or" => call.args.is_empty(),
                     _ => false,
                 }) {
                     return Ok(RuntimeValue::Undef);
@@ -6596,6 +6596,7 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         let mut current = self.eval_expr(receiver, ctx, rule_label)?;
         let mut reduced_value = false;
+        let mut logical_prefix = false;
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
@@ -6607,9 +6608,17 @@ impl Engine {
                 continue;
             }
 
-            // A reduction returns any value kind. Reject incompatible container
-            // consumers before evaluating their operands, preserving the prefix.
-            if reduced_value
+            // Logical scalar results need an explicit container bridge for copy.
+            // Preserve the existing reduction-only copy policy.
+            if logical_prefix
+                && call.method == "copy"
+                && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_))
+            {
+                return Ok(RuntimeValue::Undef);
+            }
+            // Guard actual kinds after reductions and logical methods before
+            // evaluating incompatible container operands, preserving the prefix.
+            if (reduced_value || logical_prefix)
                 && call.method != "copy"
                 && !Self::is_generic_receiver_predicate(&call.method)
             {
@@ -6634,6 +6643,7 @@ impl Engine {
                 ctx,
                 rule_label,
             )?;
+            logical_prefix |= matches!(call.method.as_str(), "and" | "or" | "not");
         }
 
         Ok(current)
@@ -7515,14 +7525,17 @@ impl Engine {
     fn is_generic_receiver_predicate(method: &str) -> bool {
         matches!(
             method,
-            "is_empty" | "is_nonempty" | "is_defined" | "is_undefined"
+            "is_empty" | "is_nonempty" | "is_defined" | "is_undefined" | "and" | "or" | "not"
         )
     }
 
     fn is_scalar_result_receiver_method(method: &str) -> bool {
         matches!(
             method,
-            "sum"
+            "and"
+                | "or"
+                | "not"
+                | "sum"
                 | "avg"
                 | "median"
                 | "range"
