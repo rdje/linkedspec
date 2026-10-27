@@ -943,7 +943,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.1.4.2.1 - reconcile copy-domain authority and reference`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2`
-  Status: `pending` / director-approved value-preserving scalar/null extension
+  Status: `active` / director-approved value-preserving scalar/null extension
   Goal: Adopt the director's scalar/null copy choice, then own bounded reference/backend repairs to completion.
   Dependencies:4.2.1 copy-domains.md and the October27 director approval of the value-preserving extension.
   Acceptance: Adopt the approved value-preserving Bool/Number/String/null extension; advance Perl first then Rust and independently check Dart/Julia/safe Lua. The container-only alternative was not selected. Preserve container depth/detachment/arity/snapshots/callable origin; own exact bounded children before production changes and retain prior observations. Documentation alone does not close parent4.2; broad admission23.4 remains later.
@@ -951,6 +951,105 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Deterministic contract decision and bounded feature repairs, not a completeness measurement.
 
   Director decision (October27): Extend copy(value) and value.copy() to preserve Bool, Number, String and null; retain existing container-copy depth rules. This is explicit authority for the recommended language extension; do not ask again or choose the container-only alternative. Finish the in-flight deferred-body compatibility repair and commit it cleanly, then adopt this target and implement Perl first followed by owned backend children. Direct computed-call work stays queued while copy-domain work proceeds.
+  Children:4.2.2.0 implementation-target adoption;4.2.2.1 Perl (producer1.1, receiver1.2, existing interpreted-copy context1.3 if admitted);4.2.2.2 Rust;4.2.2.3 Dart;4.2.2.4 Julia;4.2.2.5 safe Lua. Full canonical admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0`
+  Status: `completed`
+  Goal: Record the director-approved scalar/null value-copy implementation target and own bounded rollout before code.
+  Dependencies:4.2.1 retained authority/reference observations; October27 explicit director choice.
+  Activation: clean `c2b1142c7221d47670efc14527f6e3d7f21f99f3`; deferred-boundary repair committed/tree clean/brief0.
+  Owned paths: ADR0138/index and copy-value preservation target; planned-only public reference qualification, copy fact/map/roadmap/task/live continuity and required bounded engineering-history rollover. No runtime/current capability or frozen neutral JSON movement in this design leaf.
+  Verification tier: `focused`
+  Focused checks: Exact director decision/ADR0006/0007 and retained copy-domain facts, existing signatures/guards/depths; clear target/current implementation distinction, small document/history/map/book/continuity checks only. No invented runtime PASS or broad gate.
+  Canonical trigger: Full public/portable/context/canonical admission23.4 after reference/backend implementation; this leaf records the approved future implementation target and does not admit an existing backend capability.
+  Claim verification: none: Normative director-approved target and bounded implementation ownership, no new runtime/population/completeness measurement.
+  Acceptance: copy(expr) and expr.copy() preserve accepted Bool/Number/String/null values/kinds, evaluate the source once, and continue by actual returned kind. Retain current container depths, no implicit numeric/Boolean/text conversion, callable-origin rights, binding/noncreation, source errors, existing free malformed signatures and receiver arity-before-effects. Scope existing interpreted copy contexts independently; do not add new deferred vocabulary. Perl first; keep past observations and superseded scalar fallback evidence historical and own old expectation changes under explicit approval.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Retained4.2.1 public reference and backend controls distinguish ordinary Perl/Rust scalar fallback/rejection from Dart/Julia/Lua value preservation; the director explicitly selects generic primitive value copy, resolving the authority question.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing copy authority unified containers without an admitted scalar target; result-family guards and producer domains differ. ADR0138 supplies explicit extension authority without inferring a policy from backend majority or changing historical observations.
+  - [x] **FIX**: Freeze scalar/null value-copy implementation target and own Perl producer/receiver/interpreted-context plus independent backend leaves before code. Retain container/context depths, actual kind, no conversion, source/error/arity/provenance and existing vocabulary boundaries.
+  - [x] **ADDRESSED (verified)**: Target/ADR/director choice and canonical reference/signature/depth sources agree; planned-only book status and task rollout are checked. No runtime implementation/parity/completeness result is invented for this design leaf.
+  - [x] **NO REGRESSION**: No runtime/current capability/frozen neutral JSON or old measured artifact changes. Bounded engineering-history rollover preserves exact committed records; map/book/history/continuity/diff checks complete before landing. Full canonical admission remains separate.
+  - [x] **LOCKSTEP**: ADR/index/frozen target/planned public book/copy fact/map/roadmap/task/live pointer align. Perl4.2.2.1.1 is next, followed by receiver/context and independent backends. Direct computed calls remain owned/queued; no new approval request is needed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0 - adopt scalar and null value-copy target`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1`
+  Status: `pending`
+  Goal: Implement the approved primitive value-copy target on Perl without changing container/context/provenance bounds.
+  Dependencies:4.2.2.0 ADR0138/frozen target.
+  Children:4.2.2.1.1 ordinary producer/results;4.2.2.1.2 ordinary receiver/results;4.2.2.1.3 already-supported interpreted copy preservation/repair.
+  Acceptance: All three bounded children verify and commit before Rust rollout. Preserve historical observations and update only scalar/null expectations explicitly superseded by the director's decision. Full source/context/portable/canonical admission remains23.4.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.1`
+  Status: `pending`
+  Goal: Make ordinary Perl function copy preserve primitive values and actual-kind result continuations.
+  Dependencies:4.2.2.0.
+  Acceptance: Typed one-argument producer preserves Bool/Number/String/null, source-once/order/snapshots and errors; Number0 versus String0 remains independently distinguishable before serialization. Existing Array/Hash ordinary depth, rule accumulator/legacy storage, valid expression materialization and retired-source boundaries remain. A copied scalar result cannot acquire Array semantics or run incompatible consumer operands. Preserve malformed free signature policy; generic receiver rollout is next1.2. Own any necessary actual-result classifier changes in this producer slice, splitting before edits if too large.
+  Planned verification tier: focused
+  Planned focused checks: Independent producer-first scalar/null/control RED/GREEN on native/fresh, actual-kind/source/error/container controls and direct copy/result tests, source syntax/book/history/continuity only.
+  Planned canonical trigger: Complete source/context/portable/contract admission23.4 after all feature children and final clean push.
+  Planned claim verification: none: Deterministic authored feature/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.2`
+  Status: `pending`
+  Goal: Complete ordinary Perl value.copy() primitive/result-flow counterparts after the typed producer.
+  Dependencies:4.2.2.1.1.
+  Acceptance: Named/literal/selected/block/function/prior scalar-result and scoped flows preserve copied primitive kind/value; repeated copy and compatible scalar/default/container-recovery continuations work by actual kind. Wrong container consumers skip their operands after valid source/prefix effects. Zero authored operands and pre-effect malformed shapes remain; preserve container depths and legacy callable/scoped provenance. Update old fallback/rejection expectations only with ADR0138 authority.
+  Planned verification tier: focused
+  Planned focused checks: Strict native/fresh finite copy-result/method/scope/shape/error/source-kind controls and direct existing copy/scalar-result regressions, syntax/book/history/continuity.
+  Planned canonical trigger: Full context/source/portable/canonical admission23.4 after feature coverage.
+  Planned claim verification: none: Deterministic finite feature/regression controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.3`
+  Status: `pending`
+  Goal: Independently assess already-supported Perl interpreted copy paths against the approved scalar target.
+  Dependencies:4.2.2.1.2.
+  Acceptance: Public producer-first literal/callable invocation controls establish existing free/receiver copy vocabulary before changes. CodeblockRuntime already routes free copy through _copy_value; do not infer a defect or ordinary shallow-depth promise from that source pointer. Preserve current invocation/origin/context/depth behavior and malformed signatures. Fix only actual scalar/result drift; add no new deferred vocabulary. Close as preserved if existing supported paths are healthy; full contexts remain23.4.
+  Planned verification tier: focused
+  Planned focused checks: Named safe native/fresh copy/input/result/source/malformed/origin controls and relevant component checks only; no full callable/write matrix.
+  Planned canonical trigger: Complete copy/context/portable admission23.4 after feature coverage.
+  Planned claim verification: none: Deterministic finite preservation/repair controls, no completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.2`
+  Status: `pending`
+  Goal: Independently assess and complete Rust scalar/null value-copy function and receiver behavior.
+  Dependencies:4.2.2.1; ADR0138/copy-value-preservation.md.
+  Acceptance: Preserve Bool/Number/String/null kinds, named/literal/selected/block/function/prior-result/scoped flows, source-once/snapshots and compatible continuations. Reject incompatible container consumers before operands after valid prefix effects. Keep receiver shapes, free malformed-signature behavior, current container depth/detachment and callable-origin/context/serialization bounds. Observe own producer/method behavior before changes; update old scalar expectations only under explicit approved target. Safe Lua uses only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Strict finite native/generated kind/value/order/shape/result RED/GREEN where needed and direct copy/scalar-result compatibility plus changed compile/format checks; book/history/continuity only.
+  Planned canonical trigger: Complete source/context/portable/copy admission23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Deterministic authored feature/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.3`
+  Status: `pending`
+  Goal: Independently assess and complete Dart scalar/null value-copy function and receiver behavior.
+  Dependencies:4.2.2.2; ADR0138/copy-value-preservation.md.
+  Acceptance: Preserve Bool/Number/String/null kinds, named/literal/selected/block/function/prior-result/scoped flows, source-once/snapshots and compatible continuations. Reject incompatible container consumers before operands after valid prefix effects. Keep receiver shapes, free malformed-signature behavior, current container depth/detachment and callable-origin/context/serialization bounds. Observe own producer/method behavior before changes; update old scalar expectations only under explicit approved target. Safe Lua uses only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Strict finite native/generated kind/value/order/shape/result RED/GREEN where needed and direct copy/scalar-result compatibility plus changed compile/format checks; book/history/continuity only.
+  Planned canonical trigger: Complete source/context/portable/copy admission23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Deterministic authored feature/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.4`
+  Status: `pending`
+  Goal: Independently assess and complete Julia scalar/null value-copy function and receiver behavior.
+  Dependencies:4.2.2.3; ADR0138/copy-value-preservation.md.
+  Acceptance: Preserve Bool/Number/String/null kinds, named/literal/selected/block/function/prior-result/scoped flows, source-once/snapshots and compatible continuations. Reject incompatible container consumers before operands after valid prefix effects. Keep receiver shapes, free malformed-signature behavior, current container depth/detachment and callable-origin/context/serialization bounds. Observe own producer/method behavior before changes; update old scalar expectations only under explicit approved target. Safe Lua uses only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Strict finite native/generated kind/value/order/shape/result RED/GREEN where needed and direct copy/scalar-result compatibility plus changed compile/format checks; book/history/continuity only.
+  Planned canonical trigger: Complete source/context/portable/copy admission23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Deterministic authored feature/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.5`
+  Status: `pending`
+  Goal: Independently assess and complete safe Lua scalar/null value-copy function and receiver behavior.
+  Dependencies:4.2.2.4; ADR0138/copy-value-preservation.md.
+  Acceptance: Preserve Bool/Number/String/null kinds, named/literal/selected/block/function/prior-result/scoped flows, source-once/snapshots and compatible continuations. Reject incompatible container consumers before operands after valid prefix effects. Keep receiver shapes, free malformed-signature behavior, current container depth/detachment and callable-origin/context/serialization bounds. Observe own producer/method behavior before changes; update old scalar expectations only under explicit approved target. Safe Lua uses only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Strict finite native/generated kind/value/order/shape/result RED/GREEN where needed and direct copy/scalar-result compatibility plus changed compile/format checks; book/history/continuity only.
+  Planned canonical trigger: Complete source/context/portable/copy admission23.4 and final clean push after feature coverage.
+  Planned claim verification: none: Deterministic authored feature/preservation controls, no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.4`
   Status: `completed`
@@ -5120,11 +5219,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; adoption/implementation4.2.2 is next after explicit deferred-body repair24.1.2.0; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries before parent24.1/Rust24.2 handoff; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is next; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries before parent24.1/Rust24.2 handoff; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.4.2.2` | `pending` | Adopt the approved scalar/null value-copy target and implement Perl first. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.1` | `pending` | Implement ordinary Perl primitive copy producer/results under ADR0138 before receiver/backend rollout. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

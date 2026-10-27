@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
+Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
 
 ## Latest Completed Slice
 
-Explicit deferred literals inherited new value_access parsing from ordinary computed reads, changing unsupported_codeblock_actionir kind raw_perl to value_access and incorrectly promoting raw1/ready0 to raw0/ready1. Immutable pre-feature producer replay confirms the old boundary; the original launcher postlude failure is disclosed and the distinguishing replay exits0. Scope the existing deferred-literal body parse and disable only new computed-access recognition there. No deferred executor or readiness waiver changes. New regression distinguishes raw/readiness/AST RED, then PASS22 native/fresh/error-field/readiness/Unicode-span/scope-restoration controls; ordinary and inline reads plus named deferred reads stay healthy, including restoration after parse failure. Direct frozen callable compatibility PASS5; Parser/probe syntax and diff pass. Keep structured blessed error fields rather than comparing them with an unblessed Hash oracle. Book/contract/facts/map/task/live pointer align. Director approved preserving Bool/Number/String/null through copy(value)/value.copy(), retaining container depth; adoption/Perl-first owner4.2.2 is next after this clean commit. Direct computed calls remain queued; no new deferred/context/portable or canonical admission claim.
+ADR0138 records the director-approved implementation target: copy(expr) and expr.copy() preserve accepted Bool/Number/String/null values and kinds, with once-only source/snapshot/error behavior and actual-kind continuations. Retain existing container-copy depth/detachment by backend/context, receiver malformed-shape preflight, free malformed-signature policies and callable-origin rights. No implicit conversion, new helper/type/deferred vocabulary or current capability admission is claimed. Freeze copy-value-preservation.md and own bounded Perl producer/receiver/interpreted-context children, then independent Rust/Dart/Julia/safe Lua checks before changes. Historical copy-domain observations remain exact; old scalar fallbacks/result guards may change only under explicit user authority. Planned-only book qualifiers, copy fact/map/roadmap/task/live continuity align. This is design adoption with document/book/history/continuity checks; runtime RED/GREEN belongs to implementation children, full source/context/portable/canonical admission remains23.4. Required engineering-history rollover is included losslessly; Perl producer4.2.2.1.1 is next.
 
 ## Next Action
 
-Activate approved scalar/null copy extension4.2.2: record the October27 director decision as the target, own bounded Perl-first and backend implementation children before edits, preserve each existing container-copy depth and callable-origin/arity/source/snapshot boundaries. copy(value) and value.copy() preserve Bool/Number/String/null. Use focused compile/quick direct checks/docs/commit per child; no new permission request. Computed direct calls24.1.2 remain queued and must later preserve frozen callable reader/count/raw1 behavior; complete admission/pressure/canonical work remains separate.
+Activate Perl value-copy producer4.2.2.1.1 against ADR0138/copy-value-preservation.md. Inspect existing typed copy/argument materialization/legacy rule storage and result-kind routes; observe public free producers before changes. Preserve Bool/Number/String/null including pre-JSON kind distinctions, source-once/snapshots/errors and container depths, actual-result consumers/guarded operands, arity and callable/deferred boundaries. Small native/fresh producer/direct checks, syntax/docs/commit; generic receiver1.2 and already-supported interpreted context1.3 follow, then independent backends. No full CI/matrix or direct computed-call pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0` — Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.0` — Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1` — Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
@@ -29,7 +30,6 @@ Activate approved scalar/null copy extension4.2.2: record the October27 director
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.3` — Dart22.3 tagged-record receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.2` — Rust22.2 tagged-record producer and String-to-Array bridge are implemented/targeted-checked; Dart22.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` — Perl22.1 producer and receiver bridge are repaired/targeted-checked; independent Rust22.2 is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
 
 ## History
 

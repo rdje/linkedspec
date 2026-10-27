@@ -169,6 +169,7 @@ changed* lives in git (layer D), not here.
 | [0135](0135-finite-engineering-notes-member.md) | One finite engineering-history member and exact manifest/decision overhead | 2026-10-17 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 | [0136](0136-finite-continuity-capacity.md) | One finite change-history member and note envelope | 2026-10-19 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
 | [0137](0137-finite-selection-history-members.md) | Two measured history members for count/first continuity | 2026-10-21 | accepted engineering maintenance; canonical admission required | history, capacity, verification |
+| [0138](0138-scalar-null-value-copy.md) | Preserve scalar/null values through function and receiver copy; retain container depths | 2026-10-27 | accepted implementation target; rollout/admission open | language, copy, scalar, compatibility |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

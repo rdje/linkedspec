@@ -1447,7 +1447,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 
 ## Boolean composition
 
-Boolean helpers make branch conditions portable and analyzable. Perl, Rust, Dart, Julia and safe Lua hosts (PUC5.5.1/LuaJIT) support `value.and(rhs,...)` and `value.or(rhs,...)` with at least one RHS, plus `value.not()` with none, using the same eager typed truth and real Boolean results: `false.or(true).not().coalesce("late").cat("!")` gives `"0!"`. Full method/domain/context admission and declared Lua5.4 proof remain separate; the free helper forms below retain their existing contracts. Current scalar-copy domains differ: Dart, Julia and Lua preserve Boolean value copies, while Rust rejects copying a logical scalar result; portable copy-domain alignment is tracked separately.
+Boolean helpers make branch conditions portable and analyzable. Perl, Rust, Dart, Julia and safe Lua hosts (PUC5.5.1/LuaJIT) support `value.and(rhs,...)` and `value.or(rhs,...)` with at least one RHS, plus `value.not()` with none, using the same eager typed truth and real Boolean results: `false.or(true).not().coalesce("late").cat("!")` gives `"0!"`. Full method/domain/context admission and declared Lua5.4 proof remain separate; the free helper forms below retain their existing contracts. Current scalar-copy domains differ: Dart, Julia and Lua preserve Boolean value copies, while Rust rejects copying a logical scalar result; the approved scalar/null value-preserving target is being implemented with existing container-copy depths retained.
 
 | Helper | Meaning |
 | --- | --- |

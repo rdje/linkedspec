@@ -68,3 +68,9 @@ TYPE1.2.1.4.2.2 owns the response and bounded implementation children; parent4.2
 stays open until the selected behavior is fixed/verified, not documentation-only.
 Other ordinary feature work may proceed from a clean commit while this decision
 is pending; do not change copy domains in another family.
+
+ADR0138 now adopts the approved implementation target; copy-value-preservation.md
+owns its exact value/shape/effect/context boundaries. Perl ordinary producer,
+receiver and existing interpreted-copy checks are separate owned children, then
+independent backend rollout. Current fallback observations are not refreshed to
+match the target; actual implementation/current public support follows per leaf.

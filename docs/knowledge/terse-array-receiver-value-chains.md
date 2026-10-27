@@ -13,6 +13,8 @@ answers:
   - "does Rust receiver copy reject extra arguments before effects"
   - "does Rust receiver copy preserve scalar or missing values"
   - "what authority admits scalar null copying"
+  - "what does ADR0138 decide about copy"
+  - "does scalar value copying change container depth"
   - "why does Perl logical result copy return null instead of empty array"
   - "which decision owns portable scalar copy behavior"
   - "can first or last continue through selected string methods"
@@ -52,3 +54,12 @@ Dart/Julia/Lua preserve scalar values. No uniform invalid-input rule follows fro
 these facts. The director approved4.2.2 on October27: preserve Bool/Number/String/null
 through copy, retaining existing container-copy depths. Perl-first implementation
 is next after deferred-boundary repair; parent4.2 stays open for verified repairs.
+
+ADR0138 records the explicit October27 scalar/null value-copy target. Bool,
+Number, String and null preserve kind/value through function/receiver copy;
+existing container depth is retained by backend/context. This is an approved
+implementation target, not an assertion of current complete parity. Perl
+producer/receiver/interpreted-context children precede independent Rust/Dart/
+Julia/safe Lua rollout. Copy-value-preservation.md is the bounded source and
+actual-kind/effect/shape boundary. Full context/portable/canonical admission
+remains23.4; direct computed-call selection stays queued.
