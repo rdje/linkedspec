@@ -22,8 +22,9 @@ answers:
   - how do Rust computed result guards preserve old bound call counts
   - why does Dart split result indexing become an invalid fluent chain
   - how does Dart avoid recursion when a fluent suffix is invalid
+  - why does Julia split result indexing remain a raw action
 date: 2026-10-27
-status: Perl/Rust/Dart bounded computed sources checked; Julia/Lua/full admission open
+status: Perl/Rust/Dart/Julia bounded computed sources checked; Lua/full admission open
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
@@ -34,6 +35,7 @@ reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/computed_selection_callable_compat.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test computed_selection"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/computed_selection_test.dart"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/computed_selection_test.jl\")'"
 ---
 
 At d98e139d7, named signed/typed selected continuations work on public Perl
@@ -144,3 +146,13 @@ helper ownership extends copied-result kind guards to ordinary computed reads,
 preserving unknown bound counts0/0. Full shared native/restored/plan and finite
 scope/effect/with/kind/regex/parser controls pass; no new serialized/evaluator field
 or standalone admission. Independent Julia24.4 is next; full admission remains23.4.
+
+Julia24.4 independently observes15 failing native/plan/fresh assertions and3
+unchanged bound controls at its call-only postfix/fluent boundary. Its own
+character-indexed scanner/access segments now support computed prefixes and
+shorter-receiver fluent suffix recursion, rejecting empty suffixes before recursion.
+Direct call/raw receiver/named/grouped/scalar-span controls remain. Registry and
+semantic pure/Array/Hash helper sets extend copied-result kind guards through with
+and bridges; unknown bound counts0/0 remain. New registered regression passes25
+and direct selected/copy/signed checks50, without serialized/evaluator movement.
+Safe Lua24.5 is next; complete source/context/portable admission stays23.4.

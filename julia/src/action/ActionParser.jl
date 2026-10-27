@@ -161,6 +161,11 @@ function _action_parse_expr(text::String, start::Int)
         return receiver_mutation
     end
 
+    value_access = _action_parse_value_access(text, start)
+    if value_access !== nothing
+        return value_access
+    end
+
     chain = _action_parse_fluent_chain(text, start)
     if chain !== nothing
         return chain
@@ -419,11 +424,6 @@ function _action_parse_expr_without_chain(text::String, start::Int)
         return control
     end
 
-    value_access = _action_parse_call_result_access(text, start)
-    if value_access !== nothing
-        return value_access
-    end
-
     call = _action_parse_call(text, start)
     if call !== nothing
         return call
@@ -441,38 +441,37 @@ function _action_parse_expr_without_chain(text::String, start::Int)
     )
 end
 
-function _action_parse_call_result_access(text::String, start::Int)
-    open = _action_find_top_level_open_paren(text)
-    if open === nothing
-        return nothing
-    end
-    close = _action_find_matching_delimiter(text, open, '(', ')')
-    if close === nothing
-        return nothing
-    end
+function _action_parse_value_access(text::String, start::Int)
+    state = _ActionScanState()
     chars = collect(text)
-    access_start = close + 1
-    while access_start < length(chars) && isspace(chars[access_start + 1])
-        access_start += 1
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if index > 0 && state.quote_char === nothing && !state.in_regex &&
+            _action_is_top_level(state) && ch == '['
+            prefix = _action_trim_with_offsets(_action_slice(text, 0, index), start)
+            # Grouped postfix reconciliation retains its existing owner.
+            if !startswith(prefix.text, "(")
+                receiver = _action_parse_call(prefix.text, prefix.start)
+                if receiver === nothing
+                    receiver = parse_action_expression(prefix.text, prefix.start)
+                end
+                if receiver isa Union{ActionCallExpr,ActionFluentChainExpr,ActionArrayLiteralExpr,
+                    ActionHashLiteralExpr,ActionBlockValueExpr,ActionValueAccessExpr}
+                    segments = _action_parse_access_segments(text, index, start)
+                    if segments !== nothing && !isempty(segments)
+                        return ActionValueAccessExpr(
+                            source = text,
+                            source_span = ActionSourceSpan(start, start + _action_len(text)),
+                            receiver = receiver,
+                            segments = segments,
+                        )
+                    end
+                end
+            end
+        end
+        _action_consume_scan_char!(state, text, index, ch)
     end
-    if access_start == length(chars) || chars[access_start + 1] != '['
-        return nothing
-    end
-    receiver_source = _action_slice(text, 0, close + 1)
-    receiver = _action_parse_call(receiver_source, start)
-    if receiver === nothing
-        return nothing
-    end
-    segments = _action_parse_access_segments(text, access_start, start)
-    if segments === nothing || isempty(segments)
-        return nothing
-    end
-    return ActionValueAccessExpr(
-        source = text,
-        source_span = ActionSourceSpan(start, start + _action_len(text)),
-        receiver = receiver,
-        segments = segments,
-    )
+    return nothing
 end
 
 function _action_parse_grouped(text::String, start::Int)
@@ -1619,10 +1618,10 @@ function _action_parse_fluent_chain(text::String, start::Int)
     if length(segments) <= 1
         return nothing
     end
-    receiver_segment = first(segments)
-    receiver = _action_parse_expr_without_chain(receiver_segment.text, start + receiver_segment.start)
-    calls = ActionFluentCall[]
-    for index in 2:length(segments)
+    receiver_stop = first(segments).stop
+    reversed_calls = ActionFluentCall[]
+    # Retain contiguous calls together for existing receiver-arity preflight.
+    for index in length(segments):-1:2
         segment = segments[index]
         call = _action_parse_fluent_call_segment(
             segment.text,
@@ -1631,19 +1630,32 @@ function _action_parse_fluent_chain(text::String, start::Int)
             allow_bare_identifier = index == length(segments),
         )
         if call === nothing
-            return ActionRawExpr(
-                source = text,
-                source_span = ActionSourceSpan(start, start + _action_len(text)),
-                reason = "invalid_fluent_chain",
-            )
+            receiver_stop = segment.stop
+            break
         end
-        push!(calls, call)
+        push!(reversed_calls, call)
+    end
+    if isempty(reversed_calls)
+        return ActionRawExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            reason = "invalid_fluent_chain",
+        )
+    end
+    prefix = _action_trim_with_offsets(_action_slice(text, 0, receiver_stop), start)
+    receiver = parse_action_expression(prefix.text, prefix.start)
+    if receiver isa ActionRawExpr && receiver_stop != first(segments).stop
+        return ActionRawExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            reason = "invalid_fluent_chain",
+        )
     end
     return ActionFluentChainExpr(
         source = text,
         source_span = ActionSourceSpan(start, start + _action_len(text)),
         receiver = receiver,
-        calls = calls,
+        calls = reverse(reversed_calls),
     )
 end
 

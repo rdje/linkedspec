@@ -210,3 +210,20 @@ regex/Unicode/with/bound-call/parser controls pass. Existing data-call wrong-kin
 results [null,[1],KV] become [null,null,empty] before rejected operands. Direct
 selected/copy/parser/signed-reader checks, format and fatal analysis pass. Julia24.4
 follows; full source/context/portable/standalone emitted admission remains23.4.
+
+## Bounded Julia implementation
+
+24.4 independently reproduces the same unsupported computed-source forms and
+data-call wrong-kind operand effects:15 strict native/plan/fresh failures and3
+bound-call controls. Julia's character-indexed scanner/access-segment owner now
+accepts supported computed prefixes; maximal contiguous fluent suffixes recurse
+into shorter receivers, with an empty-suffix rejection before recursion. Direct
+call precedence, normal raw receivers, named/grouped owners and scalar spans stay.
+
+Static registry and semantic pure/Array/Hash helper sets extend the existing
+copied-result actual-kind guard through with and later bridges. The nested reader
+continues to own source snapshots/ordered selectors. Unknown bound-call counts0/0
+stay; no value-based callable classification or serialized/evaluator field is added.
+New registered regression passes25, including the unchanged full target, strict
+kinds/effects/signed/function/with/regex/Unicode/parser controls. Direct selected/
+copy/signed tests pass50. Safe Lua24.5 follows; full admission remains23.4.

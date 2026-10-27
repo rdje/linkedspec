@@ -5924,13 +5924,13 @@ function _evaluate_runtime_fluent_chain!(
     )
     scalar_result = value isa Bool
     reduction_result = false
-    copied_result = chain.receiver isa ActionCallExpr &&
-        canonical_action_helper_name(chain.receiver.name) == "copy"
+    kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
+        (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) == "copy")
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
-        # Copied and reduced results keep their actual kind through bridges.
+        # Copied, computed and reduced results keep actual kinds through bridges.
         # Check container-only consumers before evaluating their operands.
-        if (reduction_result || copied_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
+        if (reduction_result || kind_guarded_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
@@ -5988,11 +5988,26 @@ function _evaluate_runtime_fluent_chain!(
             current_edge,
         )
         reduction_result = reduction_result || helper_name == "reduce_leaves"
-        copied_result = copied_result || helper_name == "copy"
+        kind_guarded_result = kind_guarded_result || helper_name == "copy"
         scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict))
     end
     return value
+end
+
+function _runtime_is_ordinary_computed_read(engine, expression)
+    expression isa ActionValueAccessExpr || return false
+    receiver = expression.receiver
+    if receiver isa ActionCallExpr
+        # Static ownership preserves unknown bound-call result policies.
+        has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
+        helper = canonical_action_helper_name(receiver.name)
+        helper in ("flat", "flat_array", "flat_hash") && return false
+        return helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
+            helper in _RUNTIME_HASH_HELPER_NAMES || helper in ("array", "hash", "copy", "coalesce", "coalesce_nonempty")
+    end
+    receiver isa ActionValueAccessExpr && return _runtime_is_ordinary_computed_read(engine, receiver)
+    return true
 end
 
 function _evaluate_runtime_fluent_value_call!(
