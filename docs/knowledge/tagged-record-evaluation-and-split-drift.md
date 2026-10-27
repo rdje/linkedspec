@@ -2,13 +2,15 @@
 id: tagged-record-evaluation-and-split-drift
 title: "Measured tagged-record and pure-split boundaries disagree across runtimes"
 answers:
+  - "why does Perl scalar split_tagged_records call an undefined host function"
+  - "which task repairs the tagged-record String to Array bridge"
   - "why does Perl split_tagged_records evaluate a field more than once"
   - "why do tagged records drop trailing empty items on Perl"
   - "which task owns tagged record evaluation and split parity"
   - "do Perl and Lua split agree on an empty source"
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
-date: 2026-09-07
+date: 2026-10-27
 status: confirmed measured divergence; contract review and repair are owned by SESSION-STARTUP-READING.33
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
 evidence: "SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
@@ -147,3 +149,17 @@ for identity,text,delimiter in cases:
   print(json.dumps(dict(case=identity,route=route,spec=source,exit=result.returncode,stdout=result.stdout,stderr=result.stderr),ensure_ascii=False),flush=True)
 SPLIT_BOUNDARIES
 ```
+
+October27 TYPE23.1.2 public native/fresh controls still reproduce per-row fields,
+missing tagged trailing items and counter0 for empty source. Basic records and
+later DSL carried-copy independence already work. Literal/named scalar receiver
+tails call an undefined host helper; trim-prefix stops at null. Substitution
+retains raw dot DSL, embeds fields in map and omits pure split's -1; dynamic
+delimiter/tag expression blocks also leak raw DSL. tagged-record-string-bridge.md
+freezes ordinary eager argument/pure-split-reuse prerequisite22.1.1, then receiver
+repair22.1.2 and independent other backends22.2-.5. This follows the existing
+helper's documented eager semantics, preserves each backend's pure-split policies
+and conversion domains, and does not close SESSION33's full six-runtime/empty/
+zero-width/variable-regex/context admission. Current primary teaching is qualified
+until repair, not silently declared portable. New retained probe:
+`bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_tagged_record_results.pl`.

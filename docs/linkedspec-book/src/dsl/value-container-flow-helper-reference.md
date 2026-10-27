@@ -1415,7 +1415,7 @@ return([out, fields]);
 
 This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds in both value/receiver and standalone writeback forms: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
 
-Ordinary selection on Perl, Rust, Dart, Julia and Lua can bridge back to scalar methods: `parts=[" A "," B "]; return(parts.last().trim().lowercase())` returns `"b"` and preserves `parts`. Similarly, `return([2,3].last().mul(4).sub(1))` returns `11`. Function parameters and computed sources use the same boundary, evaluated once; `[].first().trim()` returns `undef`. Selected containers continue too: `[[3,1],[2]].first().copy().sorted().last().add(4)` returns `7`; `[{"b":2,"a":1}].first().copy().sorted_keys().last().uppercase()` returns `"B"`. Copy and pure transforms preserve their source containers. Lua checks use available PUC5.5.1/LuaJIT; the declared PUC5.4 proof and complete fluent-family admission remain tracked separately; known Rust scalar-null helper repairs61.1/.61.2 remain open beyond the fixed trim case. Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
+Ordinary selection on Perl, Rust, Dart, Julia and Lua can bridge back to scalar methods: `parts=[" A "," B "]; return(parts.last().trim().lowercase())` returns `"b"` and preserves `parts`. Similarly, `return([2,3].last().mul(4).sub(1))` returns `11`. Function parameters and computed sources use the same boundary, evaluated once; `[].first().trim()` returns `undef`. Selected containers continue too: `[[3,1],[2]].first().copy().sorted().last().add(4)` returns `7`; `[{"b":2,"a":1}].first().copy().sorted_keys().last().uppercase()` returns `"B"`. Copy and pure transforms preserve their source containers. Lua checks use available PUC5.5.1/LuaJIT; the declared PUC5.4 proof and complete fluent-family admission remain tracked separately. Bounded Rust source/null-operand repairs are implemented; complete scalar-helper domain/context admission remains separate. Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 
 Use `split_tagged_records(...)` when a comma-separated identifier list should become repeated tagged payload rows:
 
@@ -1440,10 +1440,10 @@ For `identifier_list = "a, b"`, `subtype_indication = "integer"`, `signal_kind =
 ]
 ```
 
-The outer array holds all records; each inner array is one record, with no extra wrapper. Source, tag, and carried
-fields are evaluated once, then carried arrays or harrays are copied into every record. A scalar receiver supplies
-the source, so `"a,b".split_tagged_records(",", "?item:").count()` returns `2`. This lowers to the traditional
-`map { [tag, item, ...] } split ...` shape while keeping the authoring surface helper-based.
+The outer array holds all records; each inner array is one record, with no extra wrapper. The intended ordinary helper rule evaluates source, delimiter, tag and carried fields once, then copies carried values into each record.
+The scalar receiver equivalent is `"a,b".split_tagged_records(",", "?item:").count()` → `2`, with text as input and an Array result that can feed selection and other Array methods.
+Current Perl has tracked gaps: it reevaluates carried expressions per emitted row, drops trailing tagged items retained by its pure splitter, and some documented receiver chains fail. Its eager delimiter/tag blocks also need repair; constant helper examples above retain their shown shape.
+The ordinary eager helper/scalar bridge repair is in progress. Complete cross-backend empty-source/empty-delimiter/zero-width/variable-regex and contextual admission remain separate; do not infer a universal split policy from this example.
 
 ## Boolean composition
 

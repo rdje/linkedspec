@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
+Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 
 ## Latest Completed Slice
 
-Safe Lua21.5 keeps actual reduce_leaves results with scalar/actual container-kind guards before incompatible operands and reuses dedicated traversal/callback paths. Both PUC5.5.1/LuaJIT independently pass strict shared native/plan/fresh and direct producer/root/path/order/invalid-root/opposite-family/source-load controls after terminal-null/binding-kind/SILL RED. Exact kinds/typed index0/copies, numeric/default/selection, immediate/coalesced/repeated traversals, scoped SI(L*)C and clean SIL/SILC rejection hold. Public diagnostic_sink proves malformed zero/two-initial source effects before existing errors; preflight now invokes the same metadata validation before source, preserving runtime text/wrappers with no effects. No new module locals/global converters/serialization/callback-body change. All five bounded21 implementations are targeted-checked; error-phase parity1.2.1.4.1 and broader document-pressure FAIL1.2.20.1 stay owned before admission/push. Book/frozen/Lua/traversal facts/map/TYPE/SESSION/live/resume and focused book/history/diff/memory/cadence/diagnosis align. No full runner/unsafe native patterns/declared5.4/context/portable admission; ordinary selection23.1.2 next.
+Selection23.1.2 freezes documented split_tagged_records text-to-Array bridge and a Perl producer prerequisite. Public native/fresh basic records/carry-copy controls work; literal/named receivers leak raw dot DSL and call an undefined host helper, while trim-prefix gives null. Current SESSION33 defect is independently reproduced: a,b, carried increment yields rows a/1,b/2/counter2 beside pure split retaining trailing empty, empty source counter0, and eager tag/delimiter blocks leak DSL and fail. Freeze ordinary eager source-delimiter-tag-field snapshots and own pure-split reuse22.1.1 before receiver22.1.2; independent Rust/Dart/Julia/safe Lua22.2-.5 follow. Preserve current conversion/split-domain policies; old33 full six-runtime empty/zero-width/Unicode/variable-regex admission stays open. Book qualifies current Perl gaps and corrects stale Rust null-repair wording. Probe syntax/healthy native-fresh controls, book/history/index/diff/memory/cadence/diagnosis align; no production/full matrix/global pressure PASS claim. Existing pressure20.1 remains mandatory before admission/push.
 
 ## Next Action
 
-Select the next ordinary fluent feature under23.1.2 from remaining String/Array/Hash helper domains/wrapper roles and current contracts/book/facts, then own/freeze any concrete missing family before production. Small public distinctions only as needed; no full matrix or promotion by resolver category. Error-signature1.2.1.4.1 and document-pressure1.2.20.1 remain mandatory before admission/push.
+Implement Perl22.1.1 documented tagged-record eager argument snapshots/dynamic operand lowering and reuse of its existing pure split, from tagged-record-string-bridge.md and retained native/fresh controls. Keep current conversions/backend split-domain policy, typed carried values/copy and free signatures. Focused helper/split/compile tests/docs/commit before receiver22.1.2; SESSION33 full boundary matrix/admission stays deferred. Pressure20.1/error-signature1.2.1.4.1 remain before admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` — All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` — Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` — Dart reduction result consumer guards21.3 implemented/targeted-checked; Julia21.4 independently follows, then safe Lua. Full signature/context/portable admission remains open.
@@ -29,7 +30,6 @@ Select the next ordinary fluent feature under23.1.2 from remaining String/Array/
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` — Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` — Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.19` — Scalar String-helper result contract19 frozen; stale cat null teaching corrected, Perl19.1 owns flow and affix identity kind repair next.
 
 ## History
 

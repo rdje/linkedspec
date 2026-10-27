@@ -27,7 +27,8 @@ are implemented/targeted-checked on their recorded routes/hosts. Optional substr
 argument target23.2.20 and all three repairs20.1-.3 are targeted-checked. Remaining
 fluent selection23.1.1 freezes reduction result continuations21; Perl21.1 is
 targeted-checked along with Rust21.2/Dart21.3/Julia21.4/safe Lua21.5; remaining ordinary
-fluent feature selection23.1.2 continues.
+fluent selection23.1.2 freezes tagged-record text-to-Array22; Perl eager producer
+prerequisite22.1.1 is next, with broader33 review/admission still separate.
 Broad61.3/62.3/.4, declared Lua5.4, full domain/context/portable23.4 and the separate
 reading audit remain open under their own acceptance. Feature-first ordinary
 checks remain focused; no full reading audit is a prerequisite for these repairs.
@@ -38,7 +39,7 @@ TYPE23.2.20 owns this bounded continuity correction, not a startup-tree pivot.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.2` | `pending` | Select next ordinary fluent-method gap from retained helper domains/roles. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` | `pending` | Perl tagged-record ordinary eager argument/split reuse prerequisite before receiver bridge. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.
