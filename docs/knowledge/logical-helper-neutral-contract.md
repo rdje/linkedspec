@@ -20,7 +20,9 @@ status: accepted-target
 tags: [logical, truthiness, arity, actionir, codeblock, generated-source, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.1 adopts ADR 0043 and linkedspec-logical-helper-v1. The independent checker validates 17 truthiness rows, ten helper cases, three eager effect scenarios, receiver and lazy-control contrast, four invalid arities, deterministic embedded fixtures, exact projection obligations, and 26 semantic/topology/public drift mutations. Perl .5.2.2, Rust .5.2.3, Dart .5.2.4, Julia .5.2.5, dual-ABI Lua .5.2.6, generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 consume and lock the unchanged target. Rollout is 8 complete / 0 pending. The explicit-codeblock row remains model/backend-unit evidence and does not activate FUTURE-PARITY-BACKLOG.11 syntax."
 evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 makes the backend-handoff wording explicitly historical and forbids the two former present-tense `.5.2`-pending statements. Current governance is 19 documents / 14 stale-current denials / 26 mutations at rollout 8 complete / 0 pending; helper semantics, truthiness, arity, evaluation, runtime, and generated behavior remain unchanged."
-reverify: "bash tools/check_logical_helper_five_backend.sh"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/logical_receiver_method_contract.t"
+  - "bash tools/check_logical_helper_five_backend.sh"
 ---
 
 The adopted target treats `and`, `or`, and `not` as ordinary boolean value helpers. `and` and `or` accept at
@@ -116,3 +118,16 @@ remains23.4 after feature coverage with canonical registration/parity/pressure.
 Reverify this bounded intake with the project-data Perl wrapper and
 -Iperl docs/checkpoints/type-operation-inventory/probe_logical_receivers.pl;
 the existing full neutral reverify above remains for later canonical admission.
+
+Perl23.3.23.1 now implements the ordinary logical methods. Preflight requires
+and/or one-plus RHS and not zero; only logical links fold into typed call AST,
+with source/prefix/operands preserved. RuntimeLogical and existing actual-Bool
+consumer dispatch own evaluation/truth/results, avoiding String/Array input
+classification and emitted-host DSL reparsing. New native/fresh PASS20 top-level
+tests include source-error subtests; existing result/rejected-prefix checks PASS24
+plus syntax. Real Bool/kinds, SRTC, snapshots/container sources, false/default,
+numeric rejection/Array recovery and ordinary malformed skip pass. Invalid free
+and0/not2 retain typed errors and zero evaluated operands through new methods.
+Only Perl method support is established here; Rust23.2 independently follows.
+The full neutral command above is broader existing-helper admission, separate
+from this new method fixture and later canonical registration23.4.1.

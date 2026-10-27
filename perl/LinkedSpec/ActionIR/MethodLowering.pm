@@ -4702,6 +4702,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method eq 'coalesce' && !@$aggregate_args;
    return 'undef' if $method eq 'split_tagged_records' && @$aggregate_args < 2;
+   return 'undef' if ($method eq 'and' || $method eq 'or') && !@$aggregate_args;
+   return 'undef' if $method eq 'not' && @$aggregate_args;
    if (_is_scalar_string_receiver_value_chain_method($method)) {
     return 'undef' unless defined($ast_value_only_call_method->($method, 1 + @$aggregate_args));
    }
@@ -4717,6 +4719,40 @@ my $lower_numeric_array_reducer_source_expr = sub {
    next if ($method eq 'min' || $method eq 'max') && !@$args;
    my $helper = _number_receiver_method_helper_name($method);
    return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
+  }
+
+  # Logical receiver methods consume generic typed values. Fold their prefixes
+  # and operands into existing eager call AST; result lowering then retains
+  # Boolean identity and supported continuations.
+  if (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/ } @$calls) {
+   my $value_node = $receiver;
+   my @prefix_calls;
+   foreach my $call (@$calls) {
+    my $method = $call->{method} // '';
+    unless ($method =~ /\A(?:and|or|not)\z/) {
+     push @prefix_calls, $call;
+     next;
+    }
+    if (@prefix_calls) {
+     $value_node = {
+      kind => 'fluent_chain', receiver => $value_node,
+      calls => [@prefix_calls], source_span => $node->{source_span},
+     };
+     @prefix_calls = ();
+    }
+    $value_node = {
+     kind => 'call', name => $method,
+     args => [$value_node, @{$call->{args} || []}],
+     source_span => $call->{source_span},
+    };
+   }
+   if (@prefix_calls) {
+    $value_node = {
+     kind => 'fluent_chain', receiver => $value_node,
+     calls => [@prefix_calls], source_span => $node->{source_span},
+    };
+   }
+   return $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
   }
 
   my $logical_receiver = ($receiver->{kind} // '') eq 'call'

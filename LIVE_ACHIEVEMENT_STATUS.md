@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
+Perl23.1 eager logical receiver methods are implemented/targeted-checked; independent Rust23.2 is next.
 
 ## Latest Completed Slice
 
-Select the meaningful .and/.or/.not receiver family explicitly excluded by earlier logical result17, under the comprehensive-method roadmap. Freeze logical-receiver-methods.md: and/or require at least one RHS, not takes none; reuse existing generic typed truthiness, eager once-only source/RHS snapshots and real Bool results with compatible continuations. Free unary projections/typed arity errors, lazy controls, callable/deferred/context/mutation/serialization boundaries stay unchanged. Public Perl native/fresh producer vector[false,true,true,false,true,true,false,true,false] retains exact Bool kinds, while well-shaped methods/typed/eager/snapshot/shape cases leak raw DSL and fail compilation; longer not/coalesce leaks an undefined host coalesce because its prefix was never lowered. Retained public substitution identifies missing receiver admission, not a free-helper producer defect. Schedule five independent bounded backend leaves23.3.23.1-.5 before production; no other backend failure inferred. Probe syntax/producer checks, book/roadmap/neutral fact/map/history/live continuity align. Full method/domain/context/portable admission, canonical registration/error parity/pressure and declared Lua5.4 remain separately owned; no full-CI/global pressure PASS claim. Associated continuity repair replaces a stale duplicated startup cross-tree leaf with authoritative MEMORY/TYPE routing and restores pending own-child33.1; focused startup schema validator is RED then GREEN, while broad pressure20.1 stays open.
+Perl now supports generic value.and(rhs,...)/or(rhs,...) with at least one RHS and value.not() with none. MethodLowering validates shapes before effects, then folds only these links into existing typed logical call nodes, retaining source/prefix/RHS AST and reusing RuntimeLogical truth/eager/real-Bool ownership and actual-result continuation. No String/Array input category or host logical operator is introduced. New native/fresh regression first fails9/12, then passes20 top-level tests including typed source-error subtests: real Bool truth across existing kinds, named/selected/function/prior-result sources, multi-method chains, false/default retention, strict numeric-null/Array recovery, SRTC/eager snapshots, copied source containers, malformed no-effects and valid prefix before incompatible consumers. Original free malformed helpers retain typed helper_arity_mismatch/zero evaluated operands through the new methods. Existing logical result/rejected-consumer regressions PASS24 and module syntax passes. Book/frozen contract/neutral fact/map/roadmap/task/live continuity align; explicit fixture registration23.4.1 owns the new Perl test. Rust23.2 follows; full method/domain/context/portable admission, parity/pressure/declared Lua5.4 remain separate; no full-CI/global pressure PASS claim.
 
 ## Next Action
 
-Implement Perl23.3.23.1 ordinary logical receiver counterparts from logical-receiver-methods.md, reusing typed RuntimeLogical producers/result dispatch. Generic typed source inputs; and/or at least one RHS, not zero RHS; eager snapshots/real Bool/valid-prefix effects and pre-effect ordinary malformed-shape policy. Preserve free typed errors/truth/lazy controls and no deferred/context admission. Retain independent native/fresh regression, small direct helper/compile checks, docs/commit; then independently assess Rust23.2.
+Independently assess Rust23.3.23.2 logical receiver counterparts using logical-receiver-methods.md and shared valid fixture before repair. Generic typed source input/real Bool output, and/or one-plus RHS/not zero, eager snapshots/valid-prefix effects and pre-effect ordinary malformed shape; preserve free helper typed errors/truth/lazy/conversion/copy/serialized model. Focused native/restored/plan plus direct logical/compile/rustfmt checks/docs/commit, then Dart23.3. Broad admission/parity/pressure remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.23.1` — Perl23.1 eager logical receiver methods are implemented/targeted-checked; independent Rust23.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.3` — Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.5` — All five bounded tagged-record22 implementations are targeted-checked; remaining ordinary feature selection23.1.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.4` — Julia22.4 tagged-record receiver roles/minimum shape repaired/targeted-checked; safe Lua22.5 is next.
@@ -29,7 +30,6 @@ Implement Perl23.3.23.1 ordinary logical receiver counterparts from logical-rece
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.1` — Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` — All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` — Julia optional substring argument repair20.2 targeted-checked; safe Lua20.3 follows. Complete signature/context/portable admission remains open.
 
 ## History
 

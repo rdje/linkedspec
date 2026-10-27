@@ -68,3 +68,16 @@ Rust23.2, Dart23.3, Julia23.4 and safe Lua23.5 independently assess before chang
 Only ordinary feature checks/compile/docs/commit per child; full signature/context/
 portable admission, canonical registration/error parity/pressure repair and declared
 Lua5.4 remain separate. Do not infer other backend failures from this Perl intake.
+
+## Bounded Perl implementation
+
+23.3.23.1 validates ordinary shapes before effects and folds new logical links
+into existing typed call AST, preserving source/prefix/RHS nodes. Generic kinds
+reach RuntimeLogical directly; Boolean result consumers reuse existing lowering.
+Shared/local native/fresh PASS20 top-level tests including typed source-error
+subtests, after observed raw-DSL RED. Existing logical result/rejected-prefix
+checks PASS24 and source syntax passes. SRTC snapshots, real Bool/false/default,
+numeric rejection/explicit Array recovery, source containers and malformed
+no-effects remain. Free invalid sources retain typed helper/count/zero-evaluation
+errors through the new methods. Rust23.2 independently assesses next; full new
+method/domain/context/portable admission/canonical registration remains separate.

@@ -1,0 +1,46 @@
+[
+  [
+    false,
+    true,
+    true,
+    false,
+    true
+  ],
+  [
+    false,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true
+  ],
+  false,
+  true,
+  true,
+  "0!",
+  "X",
+  "B",
+  [
+    "0!",
+    "SRTC",
+    1,
+    true
+  ],
+  [
+    "1!",
+    "SRTC"
+  ],
+  [
+    false,
+    "0"
+  ],
+  [
+    true,
+    [],
+    false,
+    {
+      "ready": false
+    }
+  ]
+]
