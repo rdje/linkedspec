@@ -2991,6 +2991,25 @@ function callable_codeblock.body(value)
   return value.body_ast or value.block
 end
 
+-- Compare only the owned, inert callback projection. General runtime value
+-- equality and serialized callback fields keep their existing contracts.
+function callable_codeblock.same_record(left, right)
+  if left == right then return true end
+  if type(left) ~= "table" or type(right) ~= "table" or
+      json.kind(left) ~= json.kind(right) then
+    return false
+  end
+  local count = 0
+  for key, value in pairs(left) do
+    if right[key] == nil or not callable_codeblock.same_record(value, right[key]) then
+      return false
+    end
+    count = count + 1
+  end
+  for _ in pairs(right) do count = count - 1 end
+  return count == 0
+end
+
 function callable_codeblock.execute_values(
   engine,
   name,
@@ -3034,28 +3053,30 @@ function callable_codeblock.execute_values(
 
   local active_name
   if recursion_identity ~= false then active_name = recursion_identity or name end
+  local record = action_ast.to_json(value)
   local active_index
-  if active_name ~= nil then
-    for index, candidate in ipairs(ctx.active_codeblocks) do
-      if candidate == active_name then
-        active_index = index
-        break
-      end
+  for index, candidate in ipairs(ctx.active_codeblocks) do
+    if (active_name ~= nil and candidate.binding_name == active_name) or
+        callable_codeblock.same_record(candidate.record, record) then
+      active_index = index
+      break
     end
   end
   if active_index ~= nil then
+    local identity_name = ctx.active_codeblocks[active_index].name
     local cycle = json.array()
     for index = active_index, #ctx.active_codeblocks do
-      cycle[#cycle + 1] = ctx.active_codeblocks[index]
+      cycle[#cycle + 1] = ctx.active_codeblocks[index].name
     end
-    cycle[#cycle + 1] = active_name
-    local detail = "codeblock_recursion_unsupported callable_name=" .. json.encode(active_name) ..
+    cycle[#cycle + 1] = identity_name
+    local detail = "codeblock_recursion_unsupported callable_name=" .. json.encode(identity_name) ..
       " cycle=" .. json.encode(cycle) ..
       " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
     callable_codeblock.raise_failure(engine, ctx, name, detail, {
       code = "codeblock_recursion_unsupported",
-      callable_name = active_name,
+      callable_name = identity_name,
       cycle = cycle,
+      handler_source_label = "lua_runtime:codeblock:" .. identity_name,
     })
   end
 
@@ -3077,13 +3098,19 @@ function callable_codeblock.execute_values(
     })
   end
 
-  if active_name ~= nil then ctx.active_codeblocks[#ctx.active_codeblocks + 1] = active_name end
+  -- Anonymous frames remain active for callable-specific error routing, while
+  -- only actual bound names participate in the existing name fence.
+  ctx.active_codeblocks[#ctx.active_codeblocks + 1] = {
+    name = active_name or name,
+    binding_name = active_name,
+    record = record,
+  }
   local executed, result = pcall(function()
     return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
       return evaluate_block_value(engine, body, ctx, json.array(), nil)
     end)
   end)
-  if active_name ~= nil then ctx.active_codeblocks[#ctx.active_codeblocks] = nil end
+  ctx.active_codeblocks[#ctx.active_codeblocks] = nil
   if not executed then error(result, 0) end
   return copy_value(result)
 end

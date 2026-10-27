@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
+Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 
 ## Latest Completed Slice
 
-Independent remaining callback intake31.6.4.0 retains finite public sources and native/metadata/fresh or native/restored/plan/fresh channels at clean71055d22e. Lua opaque callback cycles escape tracking and anonymous missing helpers lose typed callback routing on both available safe hosts. Perl origin matches close cycles cb→with, and caller callback named value is shadowed before validation in ordinary/deferred compositions. Distinct nesting and existing direct/named controls are healthy. The expected-outcome oracle intentionally exits1 with52 healthy/22 mismatches; initial Lua untagged-row encoding is a corrected probe setup error, and Perl fresh HASH-reference text does not establish typed generated fields. P1 owners31.6.4.1 Lua identity/activity, .2 Perl cycle labels and .3 Perl snapshots precede unrelated selection/parent31 admission. P2 .4 guards excluded deferred-helper readiness before full23.4 without adding deferred coalesce rights. No production edit/full suite/matrix/admission. Book/target/packet/new Perl causal card/current Lua card/map and roadmap/task/live/resume align; Lua .4.1 next.
+Safe Lua callback identity/activity31.6.4.1 is implemented after retained independent both-host opaque-cycle/anonymous-error failures and a new focused PUC RED target including bound-cycle handler labels. Private invocation frames retain owned inert callback projections, optional bound names and diagnostic names; existing bound-name fences remain, data comparison recognizes opaque callback reentry, and all anonymous frames stay active for typed unknown-helper routing. Matched identity closes cycles/source labels; existing pcall always removes frames and scoped binding restoration stays unchanged. Comparison lives on the existing table, without new persistent chunk locals, generic equality, schema, helper, dependency or environment rights. Identity174 assertions per available PUC5.5.1/LuaJIT2.1.1788460057 and ordinary with five sources/three routes per host pass native/restored/plan/fresh Module, typed fields/error detail, nesting and caller-value scopes. Six shared scoped-binding failure controls pass; private interpreter frame state is not directly inspected. Normal registration/source loads/book/target/packet/canonical Lua card/map and roadmap/task/live/resume align. Perl origin labels .4.2 then callback snapshots .4.3 follow; deferred readiness .4.4 remains before full23.4. No full runner/declared5.4/matrix/trace/admission/push.
 
 ## Next Action
 
-Activate P1 safe Lua callback identity/activity31.6.4.1 from this clean intake boundary. Use retained independent opaque-cycle/anonymous-error failures and current Lua canonical record; implement private callback-aware invocation activity preserving existing named fences, copied inert values, argument order and scoped cleanup without new module-local pressure/schema/helpers/environments. Run small baseline/GREEN identity/typed/scope controls and direct with checks on available PUC5.5.1/LuaJIT, source/runner syntax and normal registration/docs/book/commit. Then Perl origin labels .4.2 and callback snapshot .4.3 before unrelated selection/parent31 admission. Excluded deferred readiness .4.4 stays before broad23.4, no full suite/matrix/push.
+Activate Perl origin-matched cycle label31.6.4.2 from this clean Lua boundary. Use canonical Perl identity record and retained helper/receiver/accepted opaque-if cb→with failures; preserve actual _codeblock_origin side table and independent equal-literal distinction. Close cycles with the matched active origin name, retaining parameter/presence/body/unknown/deferred vocabulary behavior. Use small direct/mutual/distinct/helper/receiver/opaque controls, actual native and fresh generated typed payloads plus syntax/docs/book/commit. Then Perl callback snapshot .4.3 before unrelated selection/parent31 admission; excluded deferred readiness .4.4 stays before broad23.4, no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
@@ -29,7 +30,6 @@ Activate P1 safe Lua callback identity/activity31.6.4.1 from this clean intake b
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` — Perl Number repair and existing Rust/Dart compatibility targeted-checked; Julia30.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` — Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.30.1` — Perl entry/match Number reader composition implemented; independent Rust30.2 next.
 
 ## History
 

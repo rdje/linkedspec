@@ -41,3 +41,7 @@ The intake's finite combined oracle is intentionally RED (52 healthy/22 mismatch
 across the specified Perl/Lua checks), not feature/admission signoff. P1 Lua .4.1,
 Perl .4.2 and .4.3 precede unrelated selection/parent31 admission; .4.4 is P2 before
 full context23.4. All source/artifact/trace/alias/domain admission remains separate.
+
+Lua predecessor31.6.4.1 is now implemented and targeted-checked on the recorded
+available hosts/routes; its canonical Lua card retains exact evidence and limits.
+Perl .4.2/.3 remain open and are the next immediate implementation sequence.

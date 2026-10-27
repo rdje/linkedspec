@@ -6826,7 +6826,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0 - own remaining Perl and Lua callback boundary repairs`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 immediately after .4.0, before Perl repairs/unrelated selection/parent31 admission.
   Goal: Preserve safe Lua opaque callback cycle identity and anonymous callback error activity.
   Reproduction: cb directly invokes with(v,coalesce(cb,cb)); fallback after four entries returns escaped on native/restored/plan/fresh in available PUC5.5.1/LuaJIT2.1.1788460057. Anonymous with body missing() reports general runtime_execution instead of unknown_helper/callable_codeblock_invocation. Bound helper/receiver/direct cycles and contextual/explicit nesting are healthy controls.
@@ -6836,6 +6836,20 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small RED/GREEN identity/unknown/cleanup controls and direct with-result checks, source/runner syntax, normal registration/book/history/continuity.
   Planned canonical trigger: Declared5.4 and broad source/carrier/trace/context admission remain separate; full23.4/final clean push after feature coverage.
   Planned claim verification: none: Finite authored behavior controls; no population measurement.
+
+  Activation: clean6d9afa09197d29ef21a30f621415f75e318e3f47; independent remaining intake committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: Prior both-host independent intake plus new focused PUC target RED on opaque/anonymous failures and bound cycle handler labels. Candidate174 assertions per available PUC5.5.1/LuaJIT2.1.1788460057, ordinary with five sources/three routes per host, interpreter/runner loads, normal registration/book/history/fast continuity; no full suite/matrix.
+  Canonical trigger: Declared5.4, isolated emitted/trace and complete source/domain/context admission remain separate; full23.4/final clean push after feature coverage.
+  Claim verification: none: Finite authored identity/error/scoped-binding controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Prior independent both-host opaque callback reentry returns finite escaped, while anonymous missing() loses callable error code/stage. New focused PUC target independently fails those distinctions and reports helper labels for four bound-cycle handler-source fields. Exact sources/channels are retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: callable_codeblock.execute_values tracks only optional bound names, omitting opaque/anonymous frames; evaluate_call relies on that same activity for unknown-helper routing. Existing guard source labels use the incoming helper role instead of matched callback identity.
+  - [x] **FIX**: Retain all private invocation frames with diagnostic name, optional bound name and owned inert action_ast.to_json projection. Preserve bound-name fences, compare callback projections only for identity, close cycles/source labels with the matched frame and unconditionally remove frames after the existing pcall. Store the comparison function on the existing callable_codeblock table, adding no persistent chunk locals or public/serialized fields.
+  - [x] **ADDRESSED (verified)**: Identity174 assertions pass per available host across native/SpecFile-restored/plan/fresh Module: opaque/helper/receiver/direct/mutual cycles, typed code/stage/name/cycle/handler label and generated inner detail, anonymous unknown errors, contextual/explicit/tree nesting and caller callback named value. Six shared scoped-binding failure assertions restore scalar/Array/Hash/binding identity and retain unrelated effects.
+  - [x] **NO REGRESSION**: Existing ordinary with five sources/three routes pass per host, including exact nested Hash/scope/effects and specific function-state fence. Pre-scope callback resolution, body/arity checks and scoped-frame pcall restoration remain; all-frame removal is unconditional on success/failure. No claim of private interpreter frame inspection, new generic equality, captures, helpers, dependencies, schema or declared5.4/full-runner admission.
+  - [x] **LOCKSTEP**: Normal runner registers the focused target; book removes the repaired Lua caveat, canonical Lua record/target/retained evidence/map and roadmap/task/live/resume agree. Perl cycle labels .4.2 then callback snapshots .4.3 follow before unrelated selection/parent31 admission; deferred readiness .4.4 stays before broad23.4.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1 - retain Lua callback activity and opaque recursion identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2`
   Status: `pending`
@@ -6906,7 +6920,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` | `pending` | Repair safe Lua opaque callback identity and anonymous error activity. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` | `pending` | Repair Perl cycle labels using the matched original callback identity. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

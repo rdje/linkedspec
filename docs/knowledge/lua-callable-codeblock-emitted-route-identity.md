@@ -16,10 +16,10 @@ answers:
   - "how are Lua emitted callable temporary files stored and cleaned"
   - "how many Lua temporary allocation owners exist"
 date: 2026-10-27
-status: named/emitted record evidence retained; opaque identity and anonymous errors open TYPE31.6.4.1
+status: bounded opaque identity and anonymous errors repaired TYPE31.6.4.1; broader admission separate
 tags: [lua, luajit, callable, codeblock, generated-source, serialization, storage, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.8.3 proves the unchanged typed callable record and runtime detail through native compilation, canonical effective-SpecFile JSON reconstruction, generated-plan execution, and independently loaded emitted modules on PUC Lua and LuaJIT. One executor handles bound and built-in final callbacks; anonymous callbacks omit helper-name recursion tracking, while callbacks passed by variable retain that binding identity and dynamic direct/mutual/helper-mediated recursion remains ordered. The focused consumer passes 449 assertions per ABI, complete Lua passes 177 TAP groups per ABI with CLI 66x2 and corpus 105/105, and the storage oracle registers the consumer as exact Lua owner 17. Neutral+20, signatures 3/9/7, capability 80/0/0, Knowledge Map 779/6,322, mdBook 79/14,048 KiB, all doctrines, and canonical Phase 0 1,031/1,031 in 809 seconds plus the four-backend callable matrix complete signoff."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh"
+evidence: "Historical2026-08-01 FUTURE-PARITY-BACKLOG.11.8.3 proves the unchanged typed callable record and runtime detail through native compilation, canonical effective-SpecFile JSON reconstruction, generated-plan execution, and independently loaded emitted modules on PUC Lua and LuaJIT. One executor handles bound and built-in final callbacks; anonymous callbacks omit helper-name recursion tracking, while callbacks passed by variable retain that binding identity and dynamic direct/mutual/helper-mediated recursion remains ordered. The focused consumer passes 449 assertions per ABI, complete Lua passes 177 TAP groups per ABI with CLI 66x2 and corpus 105/105, and the storage oracle registers the consumer as exact Lua owner 17. Neutral+20, signatures 3/9/7, capability 80/0/0, Knowledge Map 779/6,322, mdBook 79/14,048 KiB, all doctrines, and canonical Phase 0 1,031/1,031 in 809 seconds plus the four-backend callable matrix complete signoff."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/callback_identity_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callback_identity_test.lua && bash tools/run_lua_project_data.sh puc lua/test/with_hash_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/with_hash_results_test.lua"
 ---
 
 # Lua Callable-Codeblock Emitted Route Identity
@@ -52,7 +52,7 @@ Related facts: [[lua-callable-codeblock-dynamic-invocation]], [[lua-callable-cod
 [[lua-generated-source-emitter-core]], [[lua-generated-source-fresh-process-isolation]],
 [[project-data-ssd-storage-locality]], [[callable-codeblock-four-backend-recurring-gate]].
 
-## October27 bounded extension — opaque values and anonymous activity
+## Historical October27 intake before the bounded repair
 
 TYPE31.6.4.0 independently preserves named helper/receiver/direct cycle rejection,
 contextual/explicit nesting and caller callback named value on available PUC5.5.1/
@@ -72,3 +72,30 @@ plain-table row serialization failure is probe setup, corrected using json.harra
 it is not a runtime defect. Earlier broad recorded counts remain historical and do
 not cover these newly distinguished values. No new full runner/declared5.4/trace/
 context admission is claimed.
+
+## Current bounded repair — TYPE31.6.4.1
+
+All private invocation frames now retain diagnostic name, optional bound name and
+an owned inert action_ast.to_json callback projection. Preserve the current bound-
+name fence and compare only callback projections to recognize an opaque existing
+value. Every invocation remains active for unknown-helper routing and is removed
+after the existing protected scoped-frame call on success/failure. Matched callback
+identity supplies ordered cycle closure and handler-source label; incoming helper
+role remains available in its existing helper field. General runtime equality,
+argument order, source body caches, eight literal fields and environments do not move.
+The comparison lives on the existing callable_codeblock table, avoiding persistent
+chunk-local pressure.
+
+The focused PUC target independently reproduces opaque/anonymous and bound-cycle
+source-label failures before production. Candidate174 assertions per available
+PUC5.5.1/LuaJIT2.1.1788460057 and ordinary with five sources/three routes per host
+pass. They check native/restored typed fields, plan/fresh inner error identity,
+distinct contextual/explicit/tree nesting, caller callback named value and true
+helper/receiver/opaque/direct/mutual cycles. Six shared scoped-binding failure
+assertions restore scalar/Array/Hash/binding identity and retain unrelated effects;
+private interpreter frame state is not directly inspected by this target. Normal
+runner registers it; source loads confirm both interpreter/runner syntax. Exact
+producer/channels: callback-identity-lua-intake.json.gz; the prior intake packet
+retains both-host independent raw outcomes. No full runner/declared5.4/isolated-
+process emitted/trace or complete alias/context admission is claimed. Perl cycle
+labels .4.2 and callback snapshots .4.3 follow before unrelated selection/admission.

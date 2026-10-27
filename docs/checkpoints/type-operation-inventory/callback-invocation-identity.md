@@ -85,3 +85,14 @@ intake.json.gz retains sources/raw channels and independent oracle RED52 healthy
 22 mismatches, including explicit setup and fresh-Perl error-reference limits.
 P1 repairs .4.1 Lua, .4.2 Perl labels and .4.3 Perl snapshots precede unrelated
 selection/parent31 admission; P2 excluded-helper readiness .4.4 precedes full23.4.
+
+Safe Lua31.6.4.1 now retains every private invocation with an owned inert callback
+projection and optional bound name, preserving named fences without helper-label
+collisions. Opaque cycles and anonymous unknown errors are repaired; matched
+identity also supplies handler-source labels. Identity174 assertions per available
+PUC5.5.1/LuaJIT and ordinary with five sources/three routes per host pass, including
+six shared scoped-binding failure assertions (not private interpreter frame
+inspection). Normal registration/source loads pass; no full runner/declared5.4/
+trace/context signoff. Packet callback-identity-lua-intake.json.gz retains the new
+focused RED/GREEN; prior intake remains historical. Perl .4.2 labels then .4.3
+snapshots are next before unrelated selection/parent admission.

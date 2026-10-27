@@ -115,3 +115,8 @@ distinct nesting controls remain healthy. P1 .4.1-.3 own immediate repairs befor
 unrelated selection; excluded deferred coalesce readiness .4.4 is P2 before full
 context23.4. See [[perl-with-callback-identity-and-snapshot]] and the updated Lua
 identity card; no result-family or deferred-vocabulary expansion is inferred.
+
+Lua31.6.4.1 now repairs opaque callback identity/anonymous error activity through
+private data/name-aware invocation frames. Identity174 assertions and ordinary
+with five sources/three routes per available host pass; recorded host/route limits
+remain. Perl label .4.2 and snapshot .4.3 are next; no full parent admission.
