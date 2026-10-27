@@ -125,3 +125,9 @@ Perl31.6.4.2 now closes matched-origin helper/receiver/accepted opaque-if cycles
 with the correct callback label. Focused8 subtests pass native/fresh typed payloads
 and copied-vs-independent origins; snapshot .4.3 is next. Existing excluded-helper
 readiness .4.4/full23.4 and canonical registration23.4.1 remain separate.
+
+Perl31.6.4.3 repairs final callback selection before scoped value in ordinary and
+deferred paths. Snapshot6/deferred-with11/selected Hash2/cycle2 groups pass native/
+fresh with once/order/error restoration controls. Immediate P1 prerequisites are
+implemented; assessment23.1.9 follows while excluded readiness .4.4/broad23.4 stay
+open. See [[perl-with-callback-identity-and-snapshot]] for exact evidence/limits.

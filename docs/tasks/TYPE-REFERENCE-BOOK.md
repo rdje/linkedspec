@@ -1303,9 +1303,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Scoped current Perl binding workaround/with caveat in the book, target/fixture/producers and existing/root fact routes align. Root task status and obsolete current input-card next pointers are corrected. Number implementation30.1 is next, with31 and stale neutral-example29.2.6.6/full23.4/pressure/Perl registration/declared5.4 explicitly scheduled.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.8 - select entry and match Number result composition`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.9`
+  Status: `pending`
+  Goal: Select the next useful bounded fluent family/inter-type transition after Number30, with-result31 and their immediate callback prerequisites.
+  Dependencies: Current canonical operation/source/signature inventory, completed bounded feature children and relevant book; broad context/portable admission, document pressure and excluded deferred readiness31.6.4.4 stay separately scheduled.
+  Acceptance: Reconcile implemented coverage with remaining meaningful methods/result transitions, consult Knowledge Map/canonical owners before deriving facts, and use only small public distinctions for uncertain facts. Freeze the next bounded target and independent implementation/prerequisite owners before production; do not assume a gap or infer completeness. Preserve existing deferred/callback/control/parser/unknown-source/first-consumer/root/mutation/copy boundaries. No maintenance/full-matrix pivot while useful features remain.
+  Planned verification tier: focused
+  Planned focused checks: Relevant inventory/contracts/book, a few finite source/actual-result distinctions if needed, producer syntax/fixture JSON/book/history/continuity; no full suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; actual public contract/schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored feature selection; no population measurement.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -4741,7 +4751,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. Noncatalogued parser-context fence adds t/user_function_parser_context_boundary.t. Number reader composition adds t/entry_match_number_result_continuations.t. Ordinary eager with Hash composition adds t/with_hash_result_continuations.t. Callback origin-label repair adds t/callback_identity.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. Noncatalogued parser-context fence adds t/user_function_parser_context_boundary.t. Number reader composition adds t/entry_match_number_result_continuations.t. Ordinary eager with Hash composition adds t/with_hash_result_continuations.t. Callback origin-label repair adds t/callback_identity.t. Callback snapshot repair adds t/with_callback_snapshot.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -6878,7 +6888,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2 - close Perl callback cycles with the matched origin name`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 after .4.2, before unrelated selection/parent31 admission.
   Goal: Resolve Perl final with callbacks in caller context before installing scoped value.
   Reproduction: Callback stored in value fails final_argument_not_codeblock in ordinary helper/receiver and deferred runner composition; corresponding cb-name and Lua controls work.
@@ -6888,6 +6898,20 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small independent helper/receiver/caller-value/deferred/order/failure controls and current with tests, syntax/book/history/continuity.
   Planned canonical trigger: Full23.4/final clean push after feature coverage; canonical fixture registration stays23.4.1.
   Planned claim verification: none: Finite authored snapshot/cleanup controls; no population measurement.
+
+  Activation: clean64023635630bf3bc776d17f2e2c6a1a3bc361e3c; Perl origin labels committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: Public native/dump/substitution ordinary/deferred helper/receiver4 failures and healthy cb control. New target original5/6 groups fail, including one corrected host-slot assumption; refined cleanup passes16 assertions before production. Candidate snapshot6/deferred-with11 groups and selected returned-Hash2/origin-cycle2 groups pass native/fresh; runtime/lowerer/test syntax/book/history/fast continuity. No full suite/matrix.
+  Canonical trigger: Explicit Perl registration23.4.1, excluded deferred-helper readiness31.6.4.4 and full23.4/final clean push after feature coverage; no parent/context admission here.
+  Claim verification: none: Finite authored snapshot/order/cleanup controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Public ordinary/deferred helper and receiver cases report final_argument_not_codeblock/value_kind scalar when caller callback is named value; cb-name control works. Dump/substitution show scoped my $value before require_codeblock_value($value). New target has four feature groups RED plus one incorrect host-slot-deletion assertion; corrected existing presence/undefined-slot control is GREEN before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering emits the scoped value declaration before evaluating the explicit callback; CodeblockRuntime::_eval_with_callback localizes value/presence before resolving it. This substitutes the supplied source value for the caller callback in both execution paths.
+  - [x] **FIX**: Compiled ordinary helper/receiver lowering evaluates source first, stores the explicit callback once, then declares scoped value and invokes. The deferred evaluator validates the explicit callback before localizing value/presence; contextual body handling stays on its existing path. No signature/schema/vocabulary/environment change.
+  - [x] **ADDRESSED (verified)**: Snapshot6/deferred-with11 groups pass, including separate helper/receiver caller-value cases, deferred composition, healthy cb control, source-updated callback and exact SCBSCBB evaluation order. Sixteen low-level failure assertions preserve argument effects on validation failure, restore caller value/slot/presence on body failure, retain unrelated effects and restore parameter absence by its existing ABI.
+  - [x] **NO REGRESSION**: Selected frozen/nested returned-Hash2 and helper/accepted opaque-if cycle2 groups pass native/fresh; runtime/lowerer/test syntax clean. Origin matching/labels, contextual blocks, ordinary result continuation guards, arity, copy and caller dynamic context stay unchanged. A retained undefined host parameter slot is distinguished from DSL presence; no false slot-deletion defect is claimed.
+  - [x] **LOCKSTEP**: Book removes the repaired caller-value caveat and documents Perl callback selection order. Target/retained setup and raw producer channels/current causal card/map and roadmap/task/live/resume agree; canonical registration23.4.1 owns the new fixture. P1 callback prerequisites are complete; next bounded feature assessment23.1.9 follows. Excluded readiness .4.4 and broad parent/context admission remain open.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3 - snapshot Perl with callbacks before scoped value binding`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.4`
   Status: `pending`
@@ -6934,7 +6958,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` | `pending` | Resolve Perl final callbacks before scoped value shadowing. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.9` | `pending` | Select the next useful ordinary fluent family/inter-type transition. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

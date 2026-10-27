@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
+Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
 
 ## Latest Completed Slice
 
-Perl callback cycle labels31.6.4.2 are repaired with one guard-line change: append the matched active origin name instead of the incoming helper/alias label. Actual _codeblock_origin matching, copy inheritance and independent equal-record distinction remain unchanged. New finite callback_identity.t independently fails4/8 subtests before production and passes8/8 after; native typed code/cycle and actual fresh generated wrapper type/code/stage/source identity/original detail are checked. Helper/receiver/accepted opaque-if cycles close cb→cb and copied aliases close outer→outer, while direct/mutual order and distinct contextual/explicit nesting remain healthy. An equal independent literal may execute while the original is active; eight serialized fields remain. Runtime/test syntax and book/history/fast continuity pass; no helper/deferred/schema/environment/snapshot/metadata change. Book/target/packet/current causal card/map and roadmap/task/live/resume align; new fixture is owned by canonical registration23.4.1. Perl snapshot .4.3 follows before unrelated selection/parent31 admission; excluded readiness .4.4 remains before full23.4. No full suite/matrix/push.
+Perl callback snapshot31.6.4.3 is repaired in compiled helper/receiver lowering and the deferred evaluator: value/source first, final explicit callback resolved once before scoped value. Public Get/dump/substitution independently fail four caller-value cases with a healthy cb control. Original target also has one mistaken host-slot-deletion assertion; the existing presence/undefined-slot ABI is confirmed and the refined16-assertion cleanup control passes before production, without product RED credit. Candidate snapshot6/deferred-with11 and selected Hash2/cycle2 groups pass native/fresh, including source-updated callbacks, exact SCBSCBB effects, validation/body error restoration and unrelated effects. Runtime/lowerer/test syntax pass; contextual blocks, origin labels, ordinary result guards, signature/schema/copy/deferred vocabulary stay unchanged. Book/target/packet/current causal card/map/roadmap/task/live/resume align; new fixture remains canonically owned23.4.1. Immediate P1 callback prerequisites are complete; next feature assessment23.1.9 follows. Excluded deferred-helper readiness .4.4, broad context/full23.4 and pressure/declared-host admission remain open. No full suite/matrix/push.
 
 ## Next Action
 
-Activate Perl callback snapshot31.6.4.3 from this clean origin-label boundary. Use retained ordinary/deferred caller callback named value failure and current canonical card. Reproduce helper and receiver separately with actual native/fresh typed payloads, healthy cb-name control, source/callback ordering and validation/body failure cleanup. Resolve the final explicit callback once in caller context after value/source but before scoped value, preserving contextual block behavior, origin labels, argument arity, slot/presence identity, unrelated effects and deferred vocabulary. Run small focused compile/check/docs/book/commit, then resume roadmap features while excluded deferred readiness .4.4 stays before broad23.4. No full suite/matrix/push.
+Activate next bounded feature assessment23.1.9 from this clean callback-snapshot boundary. Read canonical operation/source/signature inventory, completed30/31 targets and relevant book. Select the next meaningful ordinary fluent family or inter-type transition using a few public distinctions only for unresolved facts, preserving existing callback/deferred/parser/unknown-source/legacy root/first-consumer/write/copy policies. Freeze target and independent backend/prerequisite owners before production; do not infer a gap, broad completeness or admission. Focused syntax/quick checks/docs/book/commit then implementation. Excluded deferred readiness31.6.4.4 stays before broad23.4/canonical registration/pressure/final clean push; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
@@ -29,7 +30,6 @@ Activate Perl callback snapshot31.6.4.3 from this clean origin-label boundary. U
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` — Perl Number repair and existing Rust/Dart compatibility targeted-checked; Julia30.4 next.
 
 ## History
 

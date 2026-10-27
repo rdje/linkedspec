@@ -105,3 +105,13 @@ checks. Helper/receiver/accepted opaque-if and copied aliases now close correctl
 direct/mutual cycles and distinct nesting remain healthy. Packet callback-identity-
 perl-labels-intake.json.gz retains exact sources/channels. Snapshot .4.3 next;
 excluded readiness .4.4 before broad23.4. No vocabulary/environment/schema change.
+
+Perl31.6.4.3 now resolves final explicit callbacks after the value/source and before
+scoped value in compiled ordinary lowering and the deferred evaluator. Public
+helper/receiver failures are independently reproduced; snapshot6/deferred-with11
+and selected Hash2/cycle2 groups pass native/fresh with exact once/order/scope
+controls. The initial cleanup test's host-slot-deletion assumption is corrected
+against the existing presence/undefined-slot ABI before production, with no extra
+product RED credit. Packet callback-snapshot-perl-intake.json.gz retains all raw
+channels. Immediate P1 callback prerequisites are complete; next feature assessment
+23.1.9 follows, excluded readiness .4.4 and full context23.4 remain open.

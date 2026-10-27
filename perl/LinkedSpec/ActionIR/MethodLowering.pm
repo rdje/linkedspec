@@ -4482,10 +4482,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   my $invoke_args = $block_kind ne 'codeblock_argument' && @$args == 2
    ? '[$__ls_with_value]' : '[]';
-  return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
+  return 'do { my $__ls_with_value = '.$value_expr.'; '
+   .'require LinkedSpec::CodeblockRuntime; my $__ls_with_callback = '.$record_expr.'; '
+   .'my $value = $__ls_with_value; '
    .$shadow_value
-   .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
-   .$record_expr.', '.$invoke_args.', '.$bindings.', "with", undef, '
+   .'LinkedSpec::CodeblockRuntime::invoke('
+   .'$__ls_with_callback, '.$invoke_args.', '.$bindings.', "with", undef, '
    ._codeblock_runtime_invocation_expr($deps).', '._codeblock_runtime_presence_expr(_with_value_body_deps($deps)).') }'
  };
  $lower_ast_value_node = sub {

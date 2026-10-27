@@ -349,15 +349,17 @@ sub _with_callback_node {
 
 sub _eval_with_callback {
  my ($value, $callback, $pass_value, $ctx) = @_;
+ my $contextual = ($callback->{kind} // '') eq 'codeblock_argument';
+ my $record;
+ $record = require_codeblock_value(_eval_expr($callback, $ctx)) unless $contextual;
  # Shadow slots, not their contents: callers and their presence flags survive
  # nested scopes and exceptions, while other working-name effects remain live.
  my $present = 1;
  local $ctx->{bindings}{value} = \$value;
  local $ctx->{presence}{value} = \$present;
- if (($callback->{kind} // '') eq 'codeblock_argument') {
+ if ($contextual) {
   return _execute_body($callback->{body_ast}, $ctx)
  }
- my $record = require_codeblock_value(_eval_expr($callback, $ctx));
  return invoke($record, $pass_value ? [$value] : [], $ctx->{bindings}, 'with',
   undef, $ctx->{invocation}, $ctx->{presence})
 }
