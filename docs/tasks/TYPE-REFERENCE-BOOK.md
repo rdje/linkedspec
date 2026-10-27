@@ -4712,7 +4712,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
-  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
+  Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. Noncatalogued parser-context fence adds t/user_function_parser_context_boundary.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
   Schedule: Mandatory after feature coverage, before23.4 admission and before final clean push; no full-CI/policy detour during ordinary implementation.
   Acceptance: Inventory current feature fixtures and all producer/artifact inputs; add exact tracked-presence/syntax/execution selection through the published canonical runner/historical-inverse contract. Distinguish direct/indirect coverage; retain targeted selector RED/GREEN and actual full canonical receipt for exact staged candidate. Update runner docs/fact/card/current task records and commit as an infrastructure leaf before push.
   Planned verification tier: canonical; declare claim/inputs and focused selection at activation.
@@ -6191,15 +6191,99 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5 - enforce pure Lua function parser-state boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6`
-  Status: `pending`
+  Status: `in_progress` / activation7b915ba548a703b5f2f5b13e722e67f3de48dd19
   Priority: P1 before closing29.2 or selecting the next feature.
   Goal: Resolve remaining parser-state helper roles outside source-location catalogs through small public function-context controls.
-  Dependencies: Five bounded catalogued-helper children29.2.1-.5, accepted pure-function authority and current rule-dispatch/private gap/callable contracts.
+  Dependencies: Five bounded catalogued-helper children29.2.1-.5, accepted pure-function authority and current rule-dispatch/current public gap-call/private invocation-state contracts.
   Acceptance: Check Knowledge Map and canonical contracts for call(rule), inter-match gap readers and relevant indirect call ownership. Use a few public readonly/controlled positive and forbidden-function probes; null/unavailable contexts are distinct from successful purity rejection. Do not infer behavior from names, catalogs, other backends or a partial result. Split confirmed independent repairs/backend/context owners before production; preserve explicit caller values, ordinary parser actions and callback/serialization/arity rights. No exhaustive source/domain matrix or new public permission.
   Planned verification tier: focused
   Planned focused checks: Small distinguishing source-role/function controls through public tools, relevant compile/direct test and docs/history/continuity; no whole suite/matrix.
   Planned canonical trigger: Full function/source/context/portable admission23.4 and final clean push after feature coverage; actual contract/schema/infrastructure movement separately owned.
   Planned claim verification: none: Prospective finite authored boundary intake; declare any actual measurement at activation.
+
+  Owned intake finding before production: At clean7b915ba54, ordinary call(Child) and a pure-function call both return child with raw0/unresolved0/ready1; pure function parser dispatch violates accepted authority. Four public gap accessors are current source_read calls under ADR0079, not staged-private APIs. The initial simplified gap/hash/call program returns null rows for ordinary and function variants with ready metadata, so it is not credited as successful gap-value/frame evidence. Isolate this surprising ordinary control through public substitution/emitted-source/direct twins before attributing or repairing; own any reproduced defect under a separate context child and preserve original source/channels. No production change yet.
+
+  Refined mechanism: Public substitution/emitted-source twins show normal hash/call composition works; the initial gap header List::OR uses rep_acode's miss-min-satisfied path, installs EX and returns its null-valued collector before LX/E. Existing perl-lossless-segmentation-readiness and the current book already document the default-loop List::/LX correction. The neutral contract executable_example retains the old OR/LX source; this is a stale example defect, not a new runtime lifecycle bug. Default-loop refined intake now returns ordinary gap text empty/comma, and pure functions still return caller gap text/kinds/spans with raw0/unresolved0/ready1. entry_slot at the enclosing List returns null in both contexts and is not credited as non-null access; still require explicit function rejection under its public source_read role. Ordinary call and function call both return child. Original/refined source/channels/substitution/emission are retained.
+  Children: .1 Perl repair/current; .2 Rust; .3 Dart; .4 Julia; .5 safe Lua; .6 stale neutral gap example repair before admission.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1`
+  Status: `completed`
+  Priority: P1 existing pure-function contract repair.
+  Goal: Independently establish and repair Perl call(rule)/public gap-reader parser-state access inside pure functions.
+  Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
+  Planned verification tier: focused
+  Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
+  Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
+  Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+  Before-production RED: Six new native/fresh/metadata groups at clean7b915ba54 have three forbidden-function failures and three healthy explicit caller controls. Functions actually dispatch Child, read gap text/kind/span and read a non-null incoming Item slot with raw0/unresolved0/ready1; the latter removes the initial null List-slot ambiguity. Ordinary child calls/gap/slot reads passed as explicit pure-function arguments already work. Add only the five established noncatalogued parser-state roles to the existing Contracts predicate; current typed/legacy/statement function guards already own rejection.
+
+  Activation: clean7b915ba548a703b5f2f5b13e722e67f3de48dd19; safe Lua catalogued fence29.2.5 committed/tree clean/brief0.
+  Owned paths: Contracts existing parser-state predicate adds five noncatalogued public roles; new regression/retained probes and evidence, scoped call/gap book/target/existing fact cards/map/roadmap/task/live/resume. No new MethodLowering path or runtime/context/IR/schema change.
+  Verification tier: `focused`
+  Focused checks: New six native/fresh/metadata groups after RED3/healthy3; existing catalogued function-boundary four, total10 groups pass; module/test syntax, book/history/fast continuity/diff. No full gap suite/matrix.
+  Canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; stale neutral example29.2.6.6 has its own canonical boundary after prerequisites.
+  Claim verification: none: Deterministic finite authored defect/preservation and source-mechanism controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Functions dispatch Child and read caller gap text/kind/span with raw0/unresolved0/ready1. A dedicated child function reads the full incoming slot record, removing initial List-slot null ambiguity. Six new native/fresh/metadata groups have three forbidden failures and three healthy explicit caller controls before production. Original OR/LX intake is not credited as successful gap-value evidence.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: The existing catalog-derived Contracts predicate excludes call and the four public gap source_read accessors, which live outside source-location projection rows. Existing MethodLowering function guards therefore pass their direct native lowering. The initial null-row ordinary control separately follows the already-known explicit repetition EX collector path before LX/E; book/readiness already document default-loop List::/LX.
+  - [x] **FIX**: Add exactly call, entry_slot, gap_span, gap_text and gap_kind to the existing semantic predicate, reusing current typed/legacy/statement active-function guards and unsupported markers. Correct only the diagnostic probe's mode to documented default-loop behavior, retaining originals; schedule the stale neutral OR/LX example as independent canonical repair29.2.6.6 before admission.
+  - [x] **ADDRESSED (verified)**: All six new groups pass native/fresh. Forbidden calls return no child/parser data and name all relevant unresolved helpers with raw0/unready metadata. Ordinary parser calls/gap text/kind/span and incoming child slots passed explicitly to pure functions retain exact values/provenance; selected child dispatch works and String continuation is preserved.
+  - [x] **NO REGRESSION**: Existing catalogued function-boundary four groups also pass, total10; changed module/test syntax passes. Actual gap/source/slot/cursor/lifecycle/child-cache/arity/callback/local-data semantics and serialization retain owners. No runtime normalization, public permission, new helper/IR/diagnostic/compiled format or full source-context admission. Independent backends require their own evidence.
+  - [x] **LOCKSTEP**: Scoped call/gap book examples, target/retained original/refined mechanisms, existing function and lossless fact cards/map, roadmap/task/live/resume and future explicit Perl registration align. Rust29.2.6.2 follows; stale example29.2.6.6/pressure/declared-host/full23.4 remain owned.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1 - fence parser calls and gap readers in pure Perl functions`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2`
+  Status: `pending`
+  Priority: P1 existing pure-function contract repair.
+  Goal: Independently establish and repair Rust call(rule)/public gap-reader parser-state access inside pure functions.
+  Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
+  Planned verification tier: focused
+  Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
+  Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
+  Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3`
+  Status: `pending`
+  Priority: P1 existing pure-function contract repair.
+  Goal: Independently establish and repair Dart call(rule)/public gap-reader parser-state access inside pure functions.
+  Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
+  Planned verification tier: focused
+  Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
+  Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
+  Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4`
+  Status: `pending`
+  Priority: P1 existing pure-function contract repair.
+  Goal: Independently establish and repair Julia call(rule)/public gap-reader parser-state access inside pure functions.
+  Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
+  Planned verification tier: focused
+  Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
+  Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
+  Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5`
+  Status: `pending`
+  Priority: P1 existing pure-function contract repair.
+  Goal: Independently establish and repair safe Lua call(rule)/public gap-reader parser-state access inside pure functions.
+  Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
+  Planned verification tier: focused
+  Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
+  Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
+  Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.6`
+  Status: `pending`
+  Priority: P1 before admission/push, after feature implementation.
+  Goal: Repair the stale neutral public gap executable example and bind its execution to the already-correct documented default-loop finalizer.
+  Reproduction: capability_conformance/inter_match_gap_capture_contract.json public_contract.executable_example.spec_source still uses List::OR with LX/E finalizers. Public default input a,b yields null-valued collector rows instead of authored Hash rows; emitted rep_acode shows EX termination before LX/E. The current book and perl-lossless-segmentation-readiness already use/document List:: with LX and retain the old-mode mutant.
+  Impact: A maintained executable-example source contradicts its corrected public manual and ordinary output despite current ready metadata; broad governance counts do not prove this example executes as described.
+  Acceptance: Reconcile exact contract/checker example ownership with current book/readiness source using the established lifecycle semantics, preserving runtime behavior and historical evidence. Execute exact current example/input/expected values on required public routes and add a distinguishing old-header RED. No parent full-admission claim from a string marker; satisfy designated canonical boundary after pressure/prerequisite owners.
+  Planned verification tier: canonical
+  Planned focused checks: Exact example/source/readiness distinction and relevant neutral/public checks plus book/history/continuity.
+  Planned canonical trigger: Changes governed contract/checker example authority; exact staged candidate and final clean push.
+  Planned claim verification: none: Prospective finite authored example repair; declare any actual measurement at activation.
 
 ## Current Frontier
 
@@ -6207,7 +6291,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6` | `pending` | Assess remaining parser-context helpers outside source-location catalogs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2` | `pending` | Independently assess Rust rule-call and public gap-reader function boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

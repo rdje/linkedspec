@@ -463,6 +463,8 @@ sub is_parser_state_helper {
    (map { map { $_->[0] } @$_ } values %{typed_source_projection_rows()}),
    qw(capture_from_rule_start capture_len_from_rule_start capture_rest_length
       capture_slice_here capture_slice_length entry_named_map match_named_map),
+   # Public parser-context roles outside the source-location projections.
+   qw(call entry_slot gap_span gap_text gap_kind),
   )
  };
  return defined($name) && exists $names->{$name};

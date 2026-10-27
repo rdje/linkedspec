@@ -86,7 +86,5 @@ negative/pure controls and direct input4/capture4/source-arity controls pass on 
 hosts; luac/loadfile include full-runner syntax only. Ordinary getters and explicit
 caller values/locals/pure helpers/prefix names remain valid. Declared5.4 stays open.
 
-Current next action: noncatalogued parser-context intake29.2.6 independently checks
-call(rule), gap readers and relevant indirect ownership before parent closure or
-next feature selection. Five bounded catalogued-helper repairs do not establish
+Current continuation: noncatalogued parser-context29.2.6 confirms and repairs Perl call/gap access in child.1; independent Rust child.2 is next. See function-parser-context-boundaries.md for exact authority, source-mode refinement, stale neutral-example owner and limits. Five bounded catalogued-helper repairs do not establish
 full parser-state/function/deferred/portable admission;23.4 retains that owner.

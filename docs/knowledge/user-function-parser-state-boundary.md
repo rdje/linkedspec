@@ -11,6 +11,8 @@ answers:
   - does a function name starting entry or capture get rejected
   - can a pure function receive an entry_group value explicitly
   - which backends have the repaired parser-state function fence
+  - can a Perl pure function call a parser rule or read gap_text
+  - why are call and gap accessors outside the projection catalog still forbidden
 date: 2026-10-27
 status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
 tags: [functions, purity, parser-state, perl, rust]
@@ -79,3 +81,14 @@ All controls plus direct input/capture/source-arity checks pass on both hosts;
 normal registration and luac/loadfile full-runner syntax only pass. Declared5.4
 remains separately owned. All five bounded catalogued-helper children are done;
 29.2.6 next assesses noncatalogued call/gap/indirect roles before parent closure.
+
+Noncatalogued parser-context29.2.6.1: Perl independently dispatches Child and reads
+caller gap text/kind/span/incoming child slot in pure functions with ready metadata.
+The five current parser-context roles call/entry_slot/gap_span/gap_text/gap_kind are
+now explicit members of the existing Contracts predicate, reusing MethodLowering
+guards/markers with raw0/unready diagnostics and no parser data. New six native/fresh
+groups RED3/healthy3 become GREEN6, plus prior function-boundary4. Ordinary parser
+results and gap/slot values remain valid explicit arguments. Other backends require
+independent repair assessment. function-parser-context-boundaries.md and its Perl
+intake own exact source/RED and known OR/LX instrument refinement; the stale neutral
+executable example is separately owned29.2.6.6 before admission.
