@@ -6002,6 +6002,10 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         # Static ownership preserves unknown bound-call result policies.
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
+        if helper in ("if", "switch")
+            return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
+                !receiver.trailing_block_arg && length(receiver.args) >= 2
+        end
         helper in ("flat", "flat_array", "flat_hash") && return false
         return helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
             helper in _RUNTIME_HASH_HELPER_NAMES || helper in ("array", "hash", "copy", "coalesce", "coalesce_nonempty",

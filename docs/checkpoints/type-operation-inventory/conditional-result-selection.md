@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2/Dart26.3 implemented/targeted-checked; independent Julia26.4 next.
+Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2/Dart26.3/Julia26.4 implemented/targeted-checked; safe Lua26.5 next.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -97,3 +97,12 @@ parser and lazy/read owners remain; i/when normalization does not broaden this
 source role. Four execution cases pass native/restoredSpec/plan with unchanged legacy counts;
 a native parser group checks header/alias/attached fields, and seven direct
 computed cases also pass. Format/fatal analyze pass; no parser/reader/codec movement.
+
+
+## Bounded Julia selection
+
+Julia26.4 independently repairs the same static role boundary using existing
+name/source_method/arity/trailing_block_arg fields. Four execution cases pass
+native/plan/fresh modules and six native parser assertions retain role metadata;
+strict equality keeps Bool separate from Number. New18 and direct computed25 pass
+with --depwarn=error and normal registration. No parser/read/compiled format change.

@@ -13,11 +13,13 @@ answers:
   - why does a one-argument switch remain outside computed read sources
   - how does Rust distinguish inline conditional result guards from headers
   - why must Dart inline result guards inspect sourceMethod and trailingBlockArg
+  - how does Julia retain inline conditional source role boundaries
 date: 2026-10-27
-status: producer26.0 repaired; bounded Perl26.1/Rust26.2/Dart26.3 implemented; independent Julia26.4 next
+status: producer26.0 repaired; bounded Perl26.1/Rust26.2/Dart26.3/Julia26.4 implemented; safe Lua26.5 next
 tags: [perl, actionir, control, selection, fluent, laziness]
 evidence: "TYPE23.1.6 finite public native/fresh/descriptor/substitution and AST intake at fcfb7dcdc; ADR0007/current inline-value authority."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/conditional_selection_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/conditional_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test conditional_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/conditional_selection.t"
@@ -106,3 +108,14 @@ with operand skips and CETM/local returns pass; headers/i-alias/bound/flat count
 and parsed role fields stay unchanged. Format/fatal analyze pass; no parser/read/
 codec/truth/equality or deferred vocabulary change. Julia26.4 follows; full
 admission stays23.4.
+
+
+Julia26.4 independently records9 RED route comparisons/9 healthy controls: lazy
+CETM/local returns and six native parser fields already work. Static canonical
+name/source_method, payload arity and no trailing_block_arg now enable existing
+actual-kind guards. Four execution cases pass native/plan/fresh, plus six native
+role assertions; strict recursive Bool/Number/String/null/container equality and
+direct computed25 pass. Shared kinds/CTIM/snapshots/IJ/bridges and old header/
+i-alias/bound/flat counts remain. --depwarn=error compilation/registration pass;
+no parser/read/compiled format, truth/equality or deferred grammar change.
+Safe Lua26.5 follows; full admission stays23.4.
