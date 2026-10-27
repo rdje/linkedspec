@@ -10,11 +10,13 @@ answers:
   - why does quoted match_has fail while a bare capture name works
   - did the first context scalar probe inspect the correct rule metadata
   - how does Rust guard direct input reader results and preserve malformed call policies
+  - do Dart input reader guards preserve malformed call count policies
 date: 2026-10-27
-status: bounded Perl27.1/Rust27.2 implemented; independent Dart27.3 next; compiler/policy28.1 and capture-name29.1 owned
+status: bounded Perl27.1/Rust27.2/Dart27.3 implemented; independent Julia27.4 next; compiler/policy28.1 and capture-name29.1 owned
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/input_cursor_results_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test input_cursor_results"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/input_cursor_result_continuations.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_context_scalar_results.pl named_input_cursor_defaults direct_input_cursor_defaults input_cursor_consumer_rejection"
@@ -80,3 +82,16 @@ selectors, actual returned with kinds and scope are preserved; operands skip.
 Malformed input_text-extra/missing-input_slice counts10/0 and bound/flat counts0
 remain. No getter/parser/source-coordinate/bounds/serde/free-arity/callback policy
 change. Offline compile/rustfmt pass; Dart27.3 independently follows.
+
+
+Dart27.3 independently observes three RED result cases and one healthy source/
+default/named/snapshot case. Existing getters/coordinates/with returned kinds work;
+only the static source flag is absent. Ten zero-argument readers plus two-argument
+input_slice, matching sourceMethod/name and no trailing block, now enable the
+existing kindGuardedResult through with/bridges. Four execution cases pass native/
+restoredSpec/plan and computed seven also pass, plus format/fatal analysis. Shared
+SWC/positions/kinds/lazy/split/signed data, Number indices, returned with Array/
+Hash/Bool and outer scope hold; consumer operands skip. Dart malformed reader
+counts0/0 and bound/flat counts0 remain; the initial borrowed Rust malformed
+oracle was corrected before final unchanged-production RED. No getter/parser/
+source coordinate/bounds/codec/free/callback policy change; Julia27.4 follows.

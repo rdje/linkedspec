@@ -1,7 +1,7 @@
 # Read-only input and cursor scalar result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.7; implementation family23.3.27.
-Status: bounded Perl27.1/Rust27.2 implemented/targeted-checked; independent Dart27.3 next.
+Status: bounded Perl27.1/Rust27.2/Dart27.3 implemented/targeted-checked; independent Julia27.4 next.
 
 The existing scalar readers input_text, input_len, input_end_pos, input_end_line,
 input_end_col, input_slice, cursor_pos, cursor_line, cursor_col, cursor_rest and
@@ -102,3 +102,16 @@ computed cases also pass. Shared positions/kinds/SWC/lazy/split/signed flow and
 with returned Array/Hash/Bool/scope hold; incompatible operands skip. Old malformed
 extra/missing-reader counts10/0 and bound/flat counts0 remain. Offline compile/
 rustfmt pass; no parser/reader/coordinate/bounds/serde/callback policy change.
+
+
+## Bounded Dart implementation
+
+27.3 independently observes three RED result cases and a healthy source/default/
+named/snapshot case. Existing getters and with-return kinds work. Its static
+name/sourceMethod/no-trailing/ordinary-arity predicate now enables the existing
+kindGuardedResult flag, which persists through with/bridges. Four execution cases
+pass native/restoredSpec/plan; seven computed cases also pass. Shared all-spelling
+SWC/positions/kinds/lazy/split/signed data, Number indices and actual returned with
+kinds/outer restoration hold. Malformed reader counts0/0 and bound/flat counts0
+stay unchanged, without borrowing Rust's10/0 oracle. Format/fatal analysis pass;
+no parser/getter/source coordinate/bounds/codec/free/callback policy change.

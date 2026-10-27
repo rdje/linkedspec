@@ -3830,6 +3830,7 @@ final class LinkedSpecRuntimeEngine {
           currentEdge: currentEdge,
           kindGuardedResult:
               _isOrdinaryComputedRead(receiver) ||
+              _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   canonicalActionHelperName(receiver.name) == 'copy'),
         );
@@ -5136,6 +5137,30 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
     }
+  }
+
+  bool _isInputCursorValueSource(ActionExpr expression) {
+    if (expression is! ActionCallExpr ||
+        expression.trailingBlockArg ||
+        (expression.sourceMethod ?? expression.name) != expression.name) {
+      return false;
+    }
+    if (expression.name == 'input_slice') {
+      return expression.args.length == 2;
+    }
+    return expression.args.isEmpty &&
+        const {
+          'input_text',
+          'input_len',
+          'input_end_pos',
+          'input_end_line',
+          'input_end_col',
+          'cursor_pos',
+          'cursor_line',
+          'cursor_col',
+          'cursor_rest',
+          'cursor_rest_len',
+        }.contains(expression.name);
   }
 
   bool _isOrdinaryComputedRead(ActionExpr expression) {
