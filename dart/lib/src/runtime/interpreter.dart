@@ -19,6 +19,16 @@ import 'staged_ast_enrichment.dart';
 import 'staged_parse_job.dart';
 import 'unicode_case_mapping.dart';
 
+// Source-boundary roles own these names; arbitrary user-function prefixes do
+// not grant or deny parser-state access. Build once from the existing catalog.
+final _parserStateHelperNames = <String>{
+  for (final rows in sourceLocationProjectionRows().values)
+    for (final row in rows as List<Object?>)
+      (row as List<Object?>).first as String,
+  for (final row in sourceLocationCompatibilityAliases())
+    (row as List<Object?>).first as String,
+};
+
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
 final _leadingCommentLine = RegExp(r'[ \t]*#[^\n]*(?:\n|$)');
 
@@ -4088,6 +4098,12 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
+    if (context.activeUserFunctions.isNotEmpty &&
+        _parserStateHelperNames.contains(helperName)) {
+      throw RuntimeInterpreterException(
+        "parser-state helper '${call.name}' is not supported in user functions",
+      );
+    }
     _validateDiagnosticOutputArity(call, helperName, context, ruleLabel);
     if (helperName == 'with') {
       return _callWithCodeblock(call, context, ruleLabel, currentEdge);

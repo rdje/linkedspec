@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1358** facts · **10756** question keys.
+> **1358** facts · **10757** question keys.
 
 ## Questions → fact
 
@@ -542,6 +542,7 @@
 - "can a Dart child retain nested dispatch authority" -> [dart-progressive-span-dispatch-authority](docs/knowledge/dart-progressive-span-dispatch-authority.md) · 2026-08-17 · reverify: [4 entries](#dart-progressive-span-dispatch-authority)
 - "can a Dart codeblock result feed key access or a receiver chain" -> [dart-callable-codeblock-dynamic-invocation](docs/knowledge/dart-callable-codeblock-dynamic-invocation.md) · 2026-07-30 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && (cd dart && bash ../tools/run_dart_project_data.sh test test/callable_codeblock_literal_contract_test.dart test/action_ast_parser_test.dart test/variadic_user_function_contract_test.dart) && bash tools/run_dart_local.sh`
 - "can a Dart progressive child dispatch after its remaining budget reaches zero" -> [dart-progressive-nested-authority-gap](docs/knowledge/dart-progressive-nested-authority-gap.md) · 2026-09-09 · reverify: `Run DART_PROGRESSIVE_LIMITS, the managed Dart command and DART_PROGRESSIVE_LIMITS_VERIFY below; these assert observed pre-repair behavior, not desired acceptance.`
+- "can a Dart pure function read caller captures or input_text" -> [user-function-parser-state-boundary](docs/knowledge/user-function-parser-state-boundary.md) · 2026-10-27 · reverify: [2 entries](#user-function-parser-state-boundary)
 - "can a Dart staged execution state be retried after an error" -> [dart-staged-ast-enrichment-current-depth-authority](docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md) · 2026-08-26 · reverify: [4 entries](#dart-staged-ast-enrichment-current-depth-authority)
 - "can a Dart variadic user function have a null rest parameter" -> [dart-callable-codeblock-literal-state](docs/knowledge/dart-callable-codeblock-literal-state.md) · 2026-07-30 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && (cd dart && bash ../tools/run_dart_project_data.sh test test/callable_codeblock_literal_contract_test.dart) && bash tools/run_dart_local.sh`
 - "can a Git commit contain its own hash in MEMORY.md" -> [memory-commit-pointer-self-hash-and-activation-boundary](docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md) · 2026-07-30 · reverify: `bash tools/test_memory_commit_pointer.sh && scripts/check_memory_commit_pointer.sh --phase auto && git rev-list --count --merges HEAD && git show HEAD:MEMORY.md && git show HEAD^1:MEMORY.md`
@@ -21495,8 +21496,8 @@ _LinkedSpec compatibility is temporary and variables have one duck-typed value b
 
 ### user-function-parser-state-boundary
 _Pure functions reject known parser-state helpers while accepting explicit caller values_
-- **answers:** can a Rust pure function read caller captures or input_text | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
-- **date:** 2026-10-27 · **status:** bounded Perl Rust repaired; independent Dart Julia safe Lua and full context admission open
+- **answers:** can a Rust pure function read caller captures or input_text | can a Dart pure function read caller captures or input_text | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
+- **date:** 2026-10-27 · **status:** bounded Perl Rust Dart repaired; independent Julia safe Lua and full context admission open
 - **evidence:** `TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t` · `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test user_function_parser_state_boundary`
 - **source:** [`docs/knowledge/user-function-parser-state-boundary.md`](docs/knowledge/user-function-parser-state-boundary.md)

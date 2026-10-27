@@ -1,6 +1,6 @@
 # Pure-function parser-state boundaries
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust children29.2.1-.2 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust/Dart children29.2.1-.3 repaired/targeted-checked.
 
 Accepted authority is SPEC-FORMAT-TERSE.4.2.3 and its existing Phase0 entry_text
 negative: pure function bodies cannot implicitly read caller parser state. This
@@ -50,3 +50,14 @@ nested/discarded calls and healthy explicit values/locals/prefix names. Capture4
 and input/cursor4 direct compatibility tests also pass; rustfmt/offline compile
 pass. No new compiled field, helper, diagnostic schema or full-context admission.
 Independent Dart29.2.3 follows, then Julia/safe Lua.
+
+Dart29.2.3 independently reproduces the same three first-native negative failures
+with a healthy pure explicit-value control at cleanb697a8979. The tracked test and
+function-state-dart-intake.json.gz retain exact producer/log and first-case limits.
+Interpreter derives a private cached known-name set from its existing source
+projection/compatibility catalogs, then rejects active-function helper calls before
+operands/statement dispatch through existing RuntimeInterpreterException. No new
+API/schema/helper or duplicated list. Four new native/restored-SpecFile/plan groups
+and direct capture4/input4 pass, total12; format/fatal selected analysis are clean.
+Explicit caller values/locals/pure helpers/prefix names/getters remain valid.
+Independent Julia29.2.4 follows; full context/portable admission remains open.

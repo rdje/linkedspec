@@ -6110,7 +6110,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2 - reject parser-state helpers in pure Rust functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and repair Dart generic parser-state helper calls inside pure function bodies.
   Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
   Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
@@ -6118,6 +6118,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
   Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
   Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+  Before-production finding: At cleanb697a8979, the unchanged new Dart regression has three first-native negative failures/one healthy pure explicit-argument group: entry_groups returns name, input_text returns name=Alpha, and nested/discarded state reads return name. Each group stops at its first failed route/case; other cases/routes are not historical RED. Interpreter's existing activeUserFunctions only guards recursion/local stores. Existing sourceLocationProjectionRows/sourceLocationCompatibilityAliases own semantic parser-state names; derive a private cached set and reject in _evaluateCall before operands or statement lowering.
+
+  Activation: cleanb697a89792b1783cd90170f0a40324574f229bbc; Rust29.2.2 committed/tree clean/brief0.
+  Owned paths: Interpreter private semantic-name cache and active-function call guard; new automatically discovered test/retained RED; scoped book/target/fact/map/roadmap/task/live/resume.
+  Verification tier: `focused`
+  Focused checks: New four groups native/restored-SpecFile/plan after RED3/healthy1; direct capture4/input4, total12 tests; format and fatal selected analysis clean, book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/function/context/portable admission23.4 and final clean push after feature coverage; independent Julia/safe Lua children follow.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent Dart RED returns caller entry_groups/full input_text/nested captures in three first-native negative controls; pure explicit-argument group passes. Each group stops at its first failed route/case; later loop cases/routes are not historical RED. Exact log and tracked producer retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter swaps variable stores and tracks activeUserFunctions but _evaluateCall still reads live parser registers without checking function context. Local variable isolation does not isolate parser state.
+  - [x] **FIX**: Derive a private cached known-name set from existing sourceLocationProjectionRows and compatibility aliases. In _evaluateCall, check activeUserFunctions and canonical helper name before operands/statement dispatch; throw existing RuntimeInterpreterException with the forbidden name. No duplicate semantic list, runtime artifact input or broad prefix ban.
+  - [x] **ADDRESSED (verified)**: Four new groups pass native/restored-SpecFile/plan: eight collection/group spellings and representative input/position/mark/capture/cursor helpers reject, nested/discarded reads reject, and explicit caller values/local assignment/nested pure String helpers/prefix-named functions and ordinary getter continuations remain exact.
+  - [x] **NO REGRESSION**: Capture4/input4 direct tests pass, total12; formatting/fatal selected analysis clean. Parser/getter/frame/bounds/callback/local-data/arity/registry and serialization policies retain existing owners; no new API, helper, IR or diagnostic/compiled schema. Full contexts and private rule-dispatch admission remain separate.
+  - [x] **LOCKSTEP**: Book's backend/error boundary, target/retained evidence/canonical fact/map and roadmap/task/live/resume align. Standard Dart test discovery needs no runner edit. Independent Julia follows; full23.4/pressure/declared-host owners stay separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3 - guard pure Dart functions against parser-state helpers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4`
   Status: `pending`
@@ -6145,7 +6162,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` | `pending` | Independently assess Dart parser-state helper boundaries in pure functions. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` | `pending` | Independently assess Julia parser-state helper boundaries in pure functions. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

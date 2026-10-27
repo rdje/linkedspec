@@ -3,13 +3,14 @@ id: user-function-parser-state-boundary
 title: Pure functions reject known parser-state helpers while accepting explicit caller values
 answers:
   - can a Rust pure function read caller captures or input_text
+  - can a Dart pure function read caller captures or input_text
   - why does swapping function locals not isolate parser state
   - where is the Perl Rust pure function parser-state boundary enforced
   - does a function name starting entry or capture get rejected
   - can a pure function receive an entry_group value explicitly
   - which backends have the repaired parser-state function fence
 date: 2026-10-27
-status: bounded Perl Rust repaired; independent Dart Julia safe Lua and full context admission open
+status: bounded Perl Rust Dart repaired; independent Julia safe Lua and full context admission open
 tags: [functions, purity, parser-state, perl, rust]
 evidence: "TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets."
 reverify:
@@ -45,3 +46,13 @@ docs/checkpoints/type-operation-inventory. Rust's three negative groups stop at
 their first native route/case; later loop cases and restored/generated routes are
 GREEN controls, not historical RED claims. Independent Dart/Julia/safe Lua and
 rule-dispatch/private context/deferred/full admission remain owned29.2/23.4.
+
+Dart29.2.3 independently observes three first-native negative successes contrary
+to the ban; the pure-value group already passes. Interpreter now caches the known
+names from existing sourceLocationProjectionRows/compatibility aliases and checks
+activeUserFunctions at _evaluateCall entry before operands/statement handling.
+Existing RuntimeInterpreterException names the forbidden helper; no new API/schema
+or duplicate source list. Four new native/restored-SpecFile/plan groups plus direct
+capture4/input4 pass, total12; selected fatal analysis/format clean. The exact
+tracked test and Dart intake packet retain RED first-case limits. Julia/safe Lua
+and complete context admission remain open.
