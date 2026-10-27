@@ -7,13 +7,16 @@ answers:
   - "why does deferred Perl coalesce fail despite ready metadata"
   - "which task owns remaining Perl callback identity and snapshot repairs"
 date: 2026-10-27
-status: confirmed-open; P1 TYPE31.6.4.2/.3, P2 readiness .4 before context admission
+status: origin labels repaired TYPE31.6.4.2; snapshot .3 and readiness .4 open
 tags: [perl, callback, with, recursion, scope, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0; activation71055d22ecc0ccc16d079fad1a18e1d9f247f4d0; callback-identity-remaining-intake.json.gz retains public probes/oracle/raw channels."
-reverify: "Historical intake sources and oracle are in the tracked packet; replay baseline only at activation71055d22e. Current repair owners .4.2/.3/.4 must supply focused readonly checks before closure."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/callback_identity.t; snapshot .4.3 and readiness .4.4 remain separately open."
 ---
 
 # Origin labels and callback resolution are separate repairs
+
+The intake below is historical before the bounded label repair; current .4.2
+implementation is recorded after it. Snapshot .4.3/readiness .4.4 remain open.
 
 Public Get/native typed detail independently gives cb→with for helper/receiver
 and accepted opaque if(true,cb,cb) reentry. Direct cb→cb remains correct; distinct
@@ -45,3 +48,19 @@ full context23.4. All source/artifact/trace/alias/domain admission remains separ
 Lua predecessor31.6.4.1 is now implemented and targeted-checked on the recorded
 available hosts/routes; its canonical Lua card retains exact evidence and limits.
 Perl .4.2/.3 remain open and are the next immediate implementation sequence.
+
+## Current bounded origin-label repair — TYPE31.6.4.2
+
+The single invoke guard-line edit appends the matched active origin name, preserving
+actual _codeblock_origin matching and independent equal-record separation. The new
+finite target fails4/8 subtests before production and passes8/8 after. Native and
+actual fresh generated typed code/cycle agree; generated wrapper type/code/stage/
+source identity are checked before unwrapping its original detail. Helper/receiver/
+accepted opaque-if cycles close cb→cb, and a copied alias closes outer→outer.
+Direct/mutual order and distinct contextual/explicit nesting remain correct. Actual
+copy identity and independent equal records are distinguished; the independent
+literal executes while the original is active, retaining eight serialized fields.
+Runtime/test syntax pass. Exact producer/channels: callback-identity-perl-labels-
+intake.json.gz. Snapshot .4.3 is next before unrelated selection/parent31 admission;
+excluded helper readiness .4.4 stays before full23.4. No helper/deferred/schema/
+environment or general equality rights change; canonical registration stays23.4.1.

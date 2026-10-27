@@ -120,3 +120,8 @@ Lua31.6.4.1 now repairs opaque callback identity/anonymous error activity throug
 private data/name-aware invocation frames. Identity174 assertions and ordinary
 with five sources/three routes per available host pass; recorded host/route limits
 remain. Perl label .4.2 and snapshot .4.3 are next; no full parent admission.
+
+Perl31.6.4.2 now closes matched-origin helper/receiver/accepted opaque-if cycles
+with the correct callback label. Focused8 subtests pass native/fresh typed payloads
+and copied-vs-independent origins; snapshot .4.3 is next. Existing excluded-helper
+readiness .4.4/full23.4 and canonical registration23.4.1 remain separate.

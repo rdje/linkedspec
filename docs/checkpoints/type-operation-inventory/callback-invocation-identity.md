@@ -96,3 +96,12 @@ inspection). Normal registration/source loads pass; no full runner/declared5.4/
 trace/context signoff. Packet callback-identity-lua-intake.json.gz retains the new
 focused RED/GREEN; prior intake remains historical. Perl .4.2 labels then .4.3
 snapshots are next before unrelated selection/parent admission.
+
+Perl31.6.4.2 closes cycles with the matched active origin's name through one guard-
+line edit; actual opaque origins and independent equal-literal distinction stay.
+New callback_identity.t fails4/8 subtests before production, passes8/8 after, with
+native typed detail and actual fresh generated wrapper/source/original-detail
+checks. Helper/receiver/accepted opaque-if and copied aliases now close correctly;
+direct/mutual cycles and distinct nesting remain healthy. Packet callback-identity-
+perl-labels-intake.json.gz retains exact sources/channels. Snapshot .4.3 next;
+excluded readiness .4.4 before broad23.4. No vocabulary/environment/schema change.

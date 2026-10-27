@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
+Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 
 ## Latest Completed Slice
 
-Safe Lua callback identity/activity31.6.4.1 is implemented after retained independent both-host opaque-cycle/anonymous-error failures and a new focused PUC RED target including bound-cycle handler labels. Private invocation frames retain owned inert callback projections, optional bound names and diagnostic names; existing bound-name fences remain, data comparison recognizes opaque callback reentry, and all anonymous frames stay active for typed unknown-helper routing. Matched identity closes cycles/source labels; existing pcall always removes frames and scoped binding restoration stays unchanged. Comparison lives on the existing table, without new persistent chunk locals, generic equality, schema, helper, dependency or environment rights. Identity174 assertions per available PUC5.5.1/LuaJIT2.1.1788460057 and ordinary with five sources/three routes per host pass native/restored/plan/fresh Module, typed fields/error detail, nesting and caller-value scopes. Six shared scoped-binding failure controls pass; private interpreter frame state is not directly inspected. Normal registration/source loads/book/target/packet/canonical Lua card/map and roadmap/task/live/resume align. Perl origin labels .4.2 then callback snapshots .4.3 follow; deferred readiness .4.4 remains before full23.4. No full runner/declared5.4/matrix/trace/admission/push.
+Perl callback cycle labels31.6.4.2 are repaired with one guard-line change: append the matched active origin name instead of the incoming helper/alias label. Actual _codeblock_origin matching, copy inheritance and independent equal-record distinction remain unchanged. New finite callback_identity.t independently fails4/8 subtests before production and passes8/8 after; native typed code/cycle and actual fresh generated wrapper type/code/stage/source identity/original detail are checked. Helper/receiver/accepted opaque-if cycles close cb→cb and copied aliases close outer→outer, while direct/mutual order and distinct contextual/explicit nesting remain healthy. An equal independent literal may execute while the original is active; eight serialized fields remain. Runtime/test syntax and book/history/fast continuity pass; no helper/deferred/schema/environment/snapshot/metadata change. Book/target/packet/current causal card/map and roadmap/task/live/resume align; new fixture is owned by canonical registration23.4.1. Perl snapshot .4.3 follows before unrelated selection/parent31 admission; excluded readiness .4.4 remains before full23.4. No full suite/matrix/push.
 
 ## Next Action
 
-Activate Perl origin-matched cycle label31.6.4.2 from this clean Lua boundary. Use canonical Perl identity record and retained helper/receiver/accepted opaque-if cb→with failures; preserve actual _codeblock_origin side table and independent equal-literal distinction. Close cycles with the matched active origin name, retaining parameter/presence/body/unknown/deferred vocabulary behavior. Use small direct/mutual/distinct/helper/receiver/opaque controls, actual native and fresh generated typed payloads plus syntax/docs/book/commit. Then Perl callback snapshot .4.3 before unrelated selection/parent31 admission; excluded deferred readiness .4.4 stays before broad23.4, no full suite/matrix/push.
+Activate Perl callback snapshot31.6.4.3 from this clean origin-label boundary. Use retained ordinary/deferred caller callback named value failure and current canonical card. Reproduce helper and receiver separately with actual native/fresh typed payloads, healthy cb-name control, source/callback ordering and validation/body failure cleanup. Resolve the final explicit callback once in caller context after value/source but before scoped value, preserving contextual block behavior, origin labels, argument arity, slot/presence identity, unrelated effects and deferred vocabulary. Run small focused compile/check/docs/book/commit, then resume roadmap features while excluded deferred readiness .4.4 stays before broad23.4. No full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
@@ -29,7 +30,6 @@ Activate Perl origin-matched cycle label31.6.4.2 from this clean Lua boundary. U
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` — Perl Number repair and existing Rust/Dart compatibility targeted-checked; Julia30.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` — Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
 
 ## History
 

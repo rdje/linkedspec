@@ -1018,7 +1018,7 @@ sub invoke {
   my $same = ref($active_records->[$idx]) ? refaddr($active_records->[$idx]) == refaddr($record_origin)
    : defined($active[$idx]) && $active[$idx] eq $identity;
   next unless $same;
-  _error('codeblock_recursion_unsupported', cycle => [@active[$idx .. $#active], $identity])
+  _error('codeblock_recursion_unsupported', cycle => [@active[$idx .. $#active], $active[$idx]])
  }
  my @record_keys = (map { $active_records->[$_] } 0 .. $#active);
  push @record_keys, $record_origin;
