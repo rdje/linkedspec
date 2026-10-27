@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
+Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 
 ## Latest Completed Slice
 
-Safe PUC5.5.1/LuaJIT producer/copy/source-error controls pass before changes; new methods omit the receiver and not reports actual_arity0. Extend the existing eager logical evaluator with a false-safe copied receiver and total operand count; route fluent logical calls there and preflight positional and/or one-plus RHS/not zero before effects. Both safe hosts pass eight strict JSON native/plan/fresh value groups plus two typed source-error cases, and direct logical-result controls; interpreter/runner loadfile checks pass. Real Bool/false/defaults, eager SRTC snapshots, source kinds, scoped prefix effects, consumer rejection and existing scalar/container copy domains remain. Register the safe test; current book/contract/Lua-neutral facts/map/roadmap/task/live pointer align. All five bounded logical backends are targeted-checked; scalar/null copy-domain1.2.1.4.2 is next. Full method/domain/context/portable admission, canonical selection/parity/pressure and declared Lua5.4 remain separate; no full runner/full-CI/global pressure PASS claim.
+Public Perl Get/fresh probe retains eight authored cases and exact observations at clean73735f4fb: ordinary/free/named/literal/selected scalar-null copies return[], logical-result and with/not copies return null, valid source effects run SR once, malformed receiver operands skip effects, and container kinds/false/null remain. Substitution identifies intentional aggregate fallback[] versus logical-result terminal rejection; this is not a lost Bool producer. ADR0006/0007/current catalog establish container copying and qualified backend differences, without admitting generic scalar copies. Director choice requested: recommended value-preserving scalar/null extension with Perl first, or container-only behavior aligned to the existing reference. No domain/production/expected-result change is adopted. Decision/repair1.2.1.4.2.2 stays open with bounded implementation obligations; documentation alone does not close parent4.2. Correct current book qualification, route canonical fact/map and retain probe/observations. Focused probe syntax/routes/book/history/continuity only; broader admission remains separate.
 
 ## Next Action
 
-Activate scalar/null copy-domain review1.2.1.4.2 immediately after logical family23. Read canonical copy/value/book/Perl reference and retained compatibility records, resolve accepted free/receiver domains and own bounded backend repairs. Preserve Array/Hash depth/detachment, source kinds/snapshots, arity-before-effects and callable origin; no blind oracle refresh. Feature-first focused checks/docs/commit per bounded child; broad admission/canonical/pressure/declared-host work remains separate.
+Select the next independent ordinary feature under23.1.4 while scalar/null copy decision1.2.1.4.2.2 awaits the director. Read current inventory/contracts and public reference before owning a bounded implementation family. Do not change copy domains without the requested decision; return to4.2.2 when it arrives. Focused compile/quick checks/docs/commit only; broad admission/canonical/pressure work remains deferred.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.5` — Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.4` — Julia23.4 logical receiver shapes are repaired/targeted-checked; safe Lua23.5 next, then scalar-copy domain owner1.2.1.4.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.3` — Dart23.3 eager logical receiver methods are implemented/targeted-checked; Julia23.4 next, with scalar-copy domain review owned after family23.
@@ -29,7 +30,6 @@ Activate scalar/null copy-domain review1.2.1.4.2 immediately after logical famil
 - `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` — All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` — Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.21.3` — Dart reduction result consumer guards21.3 implemented/targeted-checked; Julia21.4 independently follows, then safe Lua. Full signature/context/portable admission remains open.
 
 ## History
 

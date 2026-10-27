@@ -1,0 +1,231 @@
+{
+  "base_commit": "73735f4fb01747348cd6d136aee7d4bd8c552aa7",
+  "observations": [
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "free_scalars",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "error": "",
+      "label": "free_scalars",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "named_scalars",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "error": "",
+      "label": "named_scalars",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "literal_scalars",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "error": "",
+      "label": "literal_scalars",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "result_scalars",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        null,
+        null,
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "error": "",
+      "label": "result_scalars",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        null,
+        null,
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "logical_with",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "",
+      "label": "logical_with",
+      "loaded": 1,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "containers",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        [
+          1,
+          false,
+          null
+        ],
+        [
+          1,
+          false,
+          null
+        ],
+        {
+          "key": false
+        },
+        {
+          "key": false
+        },
+        [],
+        {}
+      ]
+    },
+    {
+      "error": "",
+      "label": "containers",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        [
+          1,
+          false,
+          null
+        ],
+        [
+          1,
+          false,
+          null
+        ],
+        {
+          "key": false
+        },
+        {
+          "key": false
+        },
+        [],
+        {}
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "effects",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        [],
+        [],
+        "SR"
+      ]
+    },
+    {
+      "error": "",
+      "label": "effects",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        [],
+        [],
+        "SR"
+      ]
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "shape",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        null,
+        ""
+      ]
+    },
+    {
+      "error": "",
+      "label": "shape",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        null,
+        ""
+      ]
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.1.4.2.1",
+  "producer": "docs/checkpoints/type-operation-inventory/probe_copy_domains.pl"
+}

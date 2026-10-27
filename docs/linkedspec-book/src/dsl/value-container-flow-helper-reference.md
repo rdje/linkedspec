@@ -454,8 +454,8 @@ The returned value is:
 The copy creates a new outer container. Nested array and hash references remain
 shared with the original, matching Perl's function-form `copy(name)` semantics.
 Changing an outer entry of the snapshot therefore leaves the original outer
-container alone; changing a shared nested container can affect both. Text and
-numeric values produce an empty array through either spelling.
+container alone; changing a shared nested container can affect both. Ordinary text and
+numeric values produce an empty array through either spelling; logical-result receiver chains reject scalar copy to null.
 
 Examples:
 

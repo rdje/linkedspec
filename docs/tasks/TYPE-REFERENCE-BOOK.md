@@ -911,7 +911,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Owned deterministic invalid-program parity gap, no aggregate completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2`
-  Status: `pending` / P2 scalar/null copy domain and result parity
+  Status: `active` / P2 scalar/null copy domain and result parity
   Goal: Resolve accepted scalar/null copy domains and repair the resulting portable copy/method gaps.
   Discovered by: Dart23.3 producer-first compatibility control; existing copy facts/book already qualify backend domains and depths. Logical receiver work must preserve those policies while this owner resolves the public contract.
   Reproduction: Rust logical_receiver_methods existing_with_prefix_keeps_scalar_copy_boundary_and_container_recovery and Dart logical_receiver_methods_test existing-with value-copy case use the same source: scalar="x".with() {return(false)}.not().copy(); return(scalar). Rust native/restored/plan yields null; Dart native/restored/plan yields real true. Independent Dart controls and(true).copy(), true.copy(), copy(false) give true/true/false before production changes. Scope restoration, typed Bool production and container copy recovery are healthy; the difference concerns accepted copy inputs/result guarding.
@@ -920,6 +920,45 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Establish admitted function/receiver copy domains from current canonical contracts/book/Perl reference and retained compatibility records; choose a coherent target with explicit authority for any domain movement. Cover scalar Bool/Number/String/null and existing Array/Hash copies without losing source snapshots/kinds, arity-before-effects, mutability/detachment bounds or callable origin. Fix every accepted-domain mismatch (or consistently implement the explicitly reviewed unsupported-input boundary); documentation alone does not close this owner. Preserve dated prior compatibility evidence; no blind oracle refresh or unrelated depth-policy expansion.
   Planned verification tier: Select at activation for actual public contract/domain movement under the director's feature-first cadence; complete canonical admission remains23.4.
   Planned claim verification: none: deterministic authored compatibility/domain intake; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.1`
+  Status: `completed`
+  Goal: Reconcile scalar/null copy authority and current reference behavior before bounded parity repairs.
+  Parent: TYPE-REFERENCE-BOOK.1.2.1.4.2; authority ADR0006/0007, current book, canonical copy facts and public Perl reference.
+  Activation: clean `73735f4fb01747348cd6d136aee7d4bd8c552aa7`; Lua logical feature committed/tree clean/brief0.
+  Owned paths: Deterministic public Perl copy-domain probe/retained focused contract intake, task/roadmap/current book/facts/map/live continuity. No production/domain change in this assessment.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution/fresh emitted execution of scalar/null/free/receiver/prefix/selected copy and container controls; inspect explicit contract authorities before selecting repair children. Compile authored probe, render changed book, bounded history and staged continuity checks. No broad matrix/full CI.
+  Canonical trigger: Actual public domain/contract movement requires explicit authority and designated admission; complete portable copy/method admission remains23.4 after feature coverage.
+  Claim verification: none: Deterministic authored contract/reproduction intake, no completeness/population measurement.
+  Acceptance: Distinguish supported container inputs from scalar/null fallbacks, avoid deriving target from backend majority, preserve existing nested/detachment/arity/callable boundaries, retain exact prior evidence, own bounded fixes rather than documentation-only closure. Any genuinely conflicting policy or required language-evolution decision is surfaced with concrete alternatives.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Eight authored public Get/fresh cases reproduce ordinary scalar/null[] versus logical-result null and retain container kinds/false/null, source SR and malformed no-effects. Exact observations and producer are tracked.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public substitution shows aggregate copy explicit[] fallback while MethodLowering logical-result chains emit terminal rejection/undef. Full Get/fresh establishes with behavior; isolated substitution does not reconstruct its scope.
+  - [x] **FIX**: Reconcile existing container-only authority and current backend qualifications; correct the book's overbroad scalar[] wording to distinguish logical-result rejection. Request the genuine scalar-domain decision before changing reference semantics; own decision/repair child4.2.2 and preserve parent open.
+  - [x] **ADDRESSED (verified)**: Native/fresh observations agree without compile/runtime errors; probe syntax passes. No target selected from backend majority or blind expectation refresh. Recommended generic value copy versus explicit container-only compatibility path is concrete and durable.
+  - [x] **NO REGRESSION**: No runtime/grammar/schema/expected-result/domain change; source/arity/container/copy-depth/callable boundaries retained. Book/history/continuity/diff checks run before landing.
+  - [x] **LOCKSTEP**: Retained intake/observations/probe/current book/array-copy fact/map/roadmap/task/live pointer align. Parent4.2 stays open for verified implementation; next independent selection23.1.4 is owned while director choice is pending.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.1.4.2.1 - reconcile copy-domain authority and reference`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.2.2`
+  Status: `pending` / director scalar-domain decision
+  Goal: Adopt the director's scalar/null copy choice, then own bounded reference/backend repairs to completion.
+  Dependencies:4.2.1 copy-domains.md and director response. No option is adopted yet.
+  Acceptance: Recommended value-preserving scalar/null extension advances Perl first then Rust and independently checks Dart/Julia/safe Lua. Alternative container-only behavior aligns unsupported source-family outcomes to the reference. Preserve container depth/detachment/arity/snapshots/callable origin; own exact bounded children before production changes and retain prior observations. Documentation alone does not close parent4.2; broad admission23.4 remains later.
+  Planned verification tier: Select for adopted contract movement under current director cadence; canonical admission before push remains mandatory.
+  Planned claim verification: none: Deterministic contract decision and bounded feature repairs, not a completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.4`
+  Status: `pending`
+  Goal: Select the next independent ordinary fluent feature while copy-domain4.2.2 awaits the director.
+  Dependencies: Logical family23 all five bounded children targeted-checked; copy authority intake4.2.1 complete.
+  Acceptance: Use current helper/signature/receiver inventory and canonical facts; assess public reference before inferring a missing feature or backend defect. Own a bounded family/producer repair and frozen target before changes. Do not change scalar-copy domains without the requested decision. Preserve feature-first focused checks/docs/commit cadence; full admission/context/matrices remain separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact public producer/receiver probes and changed documentation/continuity only; no full CI or registry audit.
+  Planned canonical trigger: Actual contract movement/full family admission and final clean push after ordinary feature coverage.
+  Planned claim verification: none: Deterministic feature selection, no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
@@ -4943,11 +4982,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy-domain1.2.1.4.2 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; director decision/repair4.2.2 stays pending while independent selection23.1.4 follows; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.1.4.2` | `pending` | Resolve scalar/null copy domains and own required backend repairs after logical family23. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.4` | `pending` | Select independent feature while scalar-copy decision4.2.2 is pending. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

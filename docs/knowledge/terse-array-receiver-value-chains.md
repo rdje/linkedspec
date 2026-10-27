@@ -12,6 +12,9 @@ answers:
   - "why does a chained count_keys addition reach a host call on Perl"
   - "does Rust receiver copy reject extra arguments before effects"
   - "does Rust receiver copy preserve scalar or missing values"
+  - "what authority admits scalar null copying"
+  - "why does Perl logical result copy return null instead of empty array"
+  - "which decision owns portable scalar copy behavior"
   - "can first or last continue through selected string methods"
   - "can copy preserve selected array or harray values"
   - "why do Rust standalone split_each filter_match and uniq update arrays"
@@ -23,7 +26,7 @@ answers:
   - "does items.join_values keep delimiter first"
   - "are push_back and pop_back value-returning after SPEC-FORMAT-TERSE.2.3.5.1"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.1"
-date: 2026-10-26
+date: 2026-10-27
 status: bounded generic/scalar flow checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, array, actionir, rust-parity, oracle, mdbook]
 evidence: "Pure/end/transform contracts; selected/scalar rollout23.3; index contract23.2.6 and bounded23.3.7.1-.5."
@@ -39,3 +42,13 @@ Selected23.3.1 and count/length/join/index23.3.3/.5/.7 retain actual kinds, comp
 Rust emptiness23.3.9.2 retains Bool/RuntimeValue::is_nonempty and generic actual-kind initial/prefix/selected/copy dispatch. Static Array inference made copied Hash1! versus0!. Native/restored/plan/direct checks pass after null/S/four-effect/copied-Hash RED, preserving scalar/bridge/generic boundaries and1!/SA snapshots. Other-backend facts remain linked from the archived prior version; no full admission.
 
 Rust definedness23.3.11.2 extends generic/scalar/zero-operand lists. Core returned true/false/undef before parse_fluent_chain; literals now use that existing postfix parser with word checks unchanged. Compile RED at false.is_defined and runtime null/four-effect RED become passing native/restored/plan shared, actual Bool/text/default/literal and direct String checks. Bool false renders0! and survives coalesce_nonempty; preserve Perl's distinct empty text. Source/copy and1!/SC/once-only stay correct; no AST/schema/type expansion. Other backend/admission progress is task-owned.
+
+Copy authority intake TYPE1.2.1.4.2.1 retains current public Get/fresh scalar,
+null, logical-result and container cases in copy-domains.md and its observations.
+ADR0006/0007/catalog define unified container copying; they do not explicitly
+admit generic scalar/null value copying. Ordinary Perl scalar copies return[],
+while logical-result copies reject to null via the result-family boundary.
+Dart/Julia/Lua preserve scalar values. No uniform invalid-input rule follows from
+these facts. Director choice4.2.2 is pending: recommended generic scalar/null
+value-copy extension (Perl first), or preserve the container-only reference.
+No runtime/domain change adopted; parent4.2 remains open for verified repairs.
