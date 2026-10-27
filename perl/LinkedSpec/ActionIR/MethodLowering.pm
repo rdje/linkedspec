@@ -4760,6 +4760,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'split_tagged_records' && @$aggregate_args < 2;
    return 'undef' if ($method eq 'and' || $method eq 'or') && !@$aggregate_args;
    return 'undef' if $method eq 'not' && @$aggregate_args;
+   return _actionir_ast_unsupported_helper_expr('copy') if $method eq 'copy' && @$aggregate_args;
    if (_is_scalar_string_receiver_value_chain_method($method)) {
     return 'undef' unless defined($ast_value_only_call_method->($method, 1 + @$aggregate_args));
    }
@@ -4777,15 +4778,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
   }
 
-  # Logical receiver methods consume generic typed values. Fold their prefixes
-  # and operands into existing eager call AST; result lowering then retains
-  # Boolean identity and supported continuations.
-  if (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/ } @$calls) {
+  # Logical and copy receivers consume generic typed values. Fold prefixes
+  # into the same typed function producers so primitive kinds, source snapshots
+  # and actual-result continuations do not depend on a guessed receiver family.
+  if (grep { ($_->{method} // '') =~ /\A(?:and|or|not|copy)\z/ } @$calls) {
    my $value_node = $receiver;
    my @prefix_calls;
    foreach my $call (@$calls) {
     my $method = $call->{method} // '';
-    unless ($method =~ /\A(?:and|or|not)\z/) {
+    unless ($method =~ /\A(?:and|or|not|copy)\z/) {
      push @prefix_calls, $call;
      next;
     }
@@ -5051,6 +5052,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless ref($args) eq 'ARRAY';
    my $hash_family = _hash_receiver_value_chain_return_family($method);
    if (defined($hash_family) && !_is_tree_traversal_receiver_method($method)) {
+    # The compatibility key lowerer cannot interpret authored block values.
+    # Finish this typed key before embedding it, even when an outer kind guard
+    # will skip it at runtime; unreachable invalid host syntax still cannot compile.
+    if ($method eq 'set_key' && @$source_args == 2
+        && ($source_args->[0]{kind} // '') eq 'block_value') {
+     my $key = $lower_ast_value_node->($source_args->[0], { bare_scalar_read => 1 });
+     return undef unless defined($key) && length($key);
+     $args->[0] = $key;
+    }
     my $helper = $method eq 'flat_hash' ? 'copy' : $method;
     my $expression = $helper.'('.join(', ', ($current_expr, @$args)).')';
     return [$expression, $hash_family eq 'hash' ? 'selected' : $hash_family];

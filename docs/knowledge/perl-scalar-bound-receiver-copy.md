@@ -54,3 +54,21 @@ containers; t/actionir_receiver_scalar_copy.t retains the legacy callback and
 exact rule-storage controls with only text/zero expectations advanced. Historical
 accepted captures above remain exact; generic receiver and interpreted-context
 rollout are separate children1.2/1.3, and complete admission remains23.4.
+
+Ordinary receiver extension1.2 folds each zero-operand copy link (alongside the
+existing logical fold) into the typed function-call AST. Prefixes remain typed,
+so logical/arithmetic/String/selected/with/function-local results preserve their
+actual values instead of acquiring Array inference or scalar-result rejection.
+Variable sources still use the producer's legacy kind/storage path; the existing
+private callback tests and exact return[@Top] control are unchanged. Extra copy
+operands reject in the root shape preflight before source/operand effects, keeping
+the existing unsupported-copy sentinel. The new t/value_copy_receiver.t exercises
+native/fresh primitive kinds, repeated/default recovery, scoped and with results,
+SR guard effects,0!/7/2 snapshots, Number selector writes and original and() errors.
+A public generated-source failure also exposed selected-chain set_key block keys
+being emitted as authored DSL inside a Perl hash index. That typed block key is
+now lowered before the compatibility key helper; wrong-Hash operands stay skipped
+and a compatible Hash block key runs once. No change to free-key vocabulary,
+operand execution order, container depth, callable origins or deferred grammar.
+Existing interpreted paths1.3 require independent assessment; canonical admission23.4
+and explicit new Perl fixture registration remain open.

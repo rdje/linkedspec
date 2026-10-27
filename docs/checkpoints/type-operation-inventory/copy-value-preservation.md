@@ -60,7 +60,7 @@ num_add(1,2).copy().add(1)                  # 4
    weakening Array/Hash snapshots, legacy rule storage, argument/source errors or
    actual-kind result consumers. Keep old observations; new target distinguishes
    primitive identity from old[]/null. Receiver rollout follows separately.
-2. Perl receiver1.2: generic copy role across primitive/result/scoped continuations;
+2. Perl receiver1.2 implemented/targeted-checked: generic copy role across primitive/result/scoped continuations;
    malformed-method preflight remains. Existing container consumers/depths stay.
 3. Perl context1.3: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
