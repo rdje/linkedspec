@@ -146,3 +146,25 @@ New4/direct null-predicate-default3 native/restored/in-process plan tests pass,
 seven focused tests plus offline compile/rustfmt/probe syntax. Independent SIL
 and both named-target mutation controls pass; no standalone/full admission.
 Dart19.3 independently assesses results and these concrete slice boundaries.
+
+## Bounded Dart implementation
+
+19.3 independently confirms healthy String/Unicode/strict-null/SON producers,
+then isolates original-kind failures: replacement/affix identities return text,
+explicit null operands become empty, and typed Number indices fail. Receiver
+RED has[]/SCA/malformed SAC; fractional Number offsets truncate. Preserve source
+Number/Boolean identities while retaining text for other scalarized carriers,
+guard explicit null operands, add eight-method scalar/shape metadata and local
+fractional normalization. Non-null scalarization admission/global numeric/int/
+selector/Unicode/callback/named-context/format policies stay unchanged.
+
+Dart already treats provided-null width as omitted and Boolean offsets as
+invalid0, unlike recorded Perl/Rust compatibility. Preserve these intentional
+conventions here; P2 assessment20 independently reconciles domains immediately
+after19.5 and before portable admission. No universal width/Bool promise follows.
+Seven new plus three direct default tests, native/restored/plan, format and fatal
+selected analysis pass. Shared exact kinds/indices/Unicode/SONC-SC-selectedS/
+eager null operands/rejection/skipped operands/12 malformed controls, independent
+SIL/fraction/negative/current domains and both mutation aliases pass. Existing
+large-slice end overflow2.14 remains separate, with no broad/standalone admission.
+Julia19.4 independently assesses next.

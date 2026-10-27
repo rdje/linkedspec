@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
+Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
 
 ## Latest Completed Slice
 
-Rust19.2 preserves independently healthy producers and adds eight scalar-result/precise receiver-shape metadata through existing dispatch. Shared/native/restored/plan GREEN suppresses SCA/selectedSA/[] and malformed effects while retaining kinds/indices/Unicode/SONC-SC snapshots. Independent ordinary substr null/fraction defects match retained primary Perl bounds after local guards/whole offsets, preserving Boolean/omitted-width/free unary-extra behavior and dedicated mutation aliases. New4/direct null-predicate-default3 tests pass with offline compile/rustfmt/probe syntax. Book/frozen/facts/task/live align; no global numeric/free/domain/Unicode/callback or standalone/portable admission. Dart19.3 next.
+Dart19.3 repairs independently observed textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape and local fractional-offset guards. New7/direct defaults3 native/restored/plan tests and format/fatal analysis pass after identity-index/[]-SCA-SAC/fraction RED, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null operands/rejection/12 malformed no-effects and both mutation aliases. Existing null-width-as-omitted/Bool-invalid0 conventions stay qualified; P2 assessment20 owns mandatory reconciliation after19.5 before portable admission. Book/frozen/facts/task/live align; no global domain/numeric/selector/Unicode/callback or large-slice2.14 change. Julia19.4 next.
 
 ## Next Action
 
-Activate Dart19.3 and independently assess public free/nested scalar String producers, frozen result/identity/scalar/shape flow and observed substring boundaries before production. Preserve eight helper domains/Unicode/strict cat/identity kinds, eager snapshots and dedicated mutation/free arity; include null/fraction/negative/provided-width controls against retained primary facts. Shared native/restored/plan plus quick direct String/default/compile/docs/commit; no full matrix.
+Activate Julia19.4 and independently assess public healthy/identity/null scalar String producers, frozen result/scalar/shape flow and qualified substring domains before production. Preserve eight helper domains/Unicode/strict cat/actual identity kinds/eager snapshots/dedicated mutation; observe null/fraction/optional-width/Bool policies without inferring portability. Shared native/plan/fresh with strict Bool/Number and quick direct String/default/compile/docs/commit; no full matrix. P2 domain20 follows19.5 before admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` — Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.2` — Rust scalar String result19.2 and ordinary slice null/fraction boundaries repaired/targeted-checked; Dart19.3 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.1` — Perl scalar String result19.1 and affix identity kinds repaired/targeted-checked; Rust19.2 independently assesses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.2.19` — Scalar String-helper result contract19 frozen; stale cat null teaching corrected, Perl19.1 owns flow and affix identity kind repair next.
@@ -29,7 +30,6 @@ Activate Dart19.3 and independently assess public free/nested scalar String prod
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.2` — Rust logical Boolean scalar boundary targeted-checked; immediate owned Perl rejection-effect repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.1` — Perl logical Boolean result flow and typed source error repairs targeted-checked; Rust independent assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.17` — Logical Boolean result contract frozen; confirmed Perl bridge/scalar/diagnostic repairs next.
 
 ## History
 

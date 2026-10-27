@@ -3708,13 +3708,17 @@ final class LinkedSpecRuntimeEngine {
         // keeping valid value chains dynamic.
         if (calls.any((call) {
           final helper = canonicalActionHelperName(call.method);
-          if (helper == 'num_clamp') {
+          if (helper == 'num_clamp' || helper == 'replace_substr') {
             return call.args.length != 2;
           }
           if (helper == 'num_add' ||
               helper == 'num_mul' ||
-              helper == 'coalesce') {
+              helper == 'coalesce' ||
+              helper == 'cat') {
             return call.args.isEmpty;
+          }
+          if (helper == 'substr') {
+            return call.args.isEmpty || call.args.length > 2;
           }
           if (helper == 'join_values' ||
               helper == 'contains' ||
@@ -3723,6 +3727,8 @@ final class LinkedSpecRuntimeEngine {
               helper == 'starts_with' ||
               helper == 'ends_with' ||
               helper == 'contains_substr' ||
+              helper == 'rm_prefix' ||
+              helper == 'rm_suffix' ||
               helper == 'matches' ||
               helper == 'str_eq' ||
               helper == 'str_ne' ||
@@ -3742,6 +3748,9 @@ final class LinkedSpecRuntimeEngine {
                   helper == 'count' ||
                   helper == 'count_keys' ||
                   helper == 'length' ||
+                  helper == 'trim' ||
+                  helper == 'lowercase' ||
+                  helper == 'uppercase' ||
                   helper == 'is_empty' ||
                   helper == 'is_nonempty' ||
                   helper == 'is_defined' ||
@@ -5134,6 +5143,7 @@ final class LinkedSpecRuntimeEngine {
       // Scalar producers and defaults retain this boundary until an actual
       // container output permits later array/hash-only consumers.
       final mayProduceScalar =
+          _scalarStringResultHelperNames.contains(helper) ||
           helper == 'coalesce' ||
           helper == 'coalesce_nonempty' ||
           helper == 'contains' ||
@@ -6921,6 +6931,17 @@ const _runtimePureHelperNames = <String>{
   'uppercase',
 };
 
+const _scalarStringResultHelperNames = <String>{
+  'trim',
+  'lowercase',
+  'uppercase',
+  'replace_substr',
+  'rm_prefix',
+  'rm_suffix',
+  'substr',
+  'cat',
+};
+
 const _numericComparisonHelperNames = <String>{
   'num_eq',
   'num_ne',
@@ -7518,36 +7539,42 @@ Object? _callMatches(List<Object?> values) {
 }
 
 Object? _callReplaceSubstr(List<Object?> values) {
-  if (values.length < 3) {
+  if (values.length < 3 || values.take(3).any((value) => value == null)) {
     return null;
   }
-  final value = _scalarString(values[0]);
+  final original = values[0];
+  final value = _scalarString(original);
   final oldValue = _scalarString(values[1], nullAsEmpty: true);
   final newValue = _scalarString(values[2], nullAsEmpty: true);
   if (value == null || oldValue == null || newValue == null) {
     return null;
   }
   if (oldValue.isEmpty) {
-    return value;
+    return original is num || original is bool ? original : value;
   }
   return value.replaceAll(oldValue, newValue);
 }
 
 Object? _callRemoveEdge(List<Object?> values, {required bool prefix}) {
-  if (values.length < 2) {
+  if (values.length < 2 || values[0] == null || values[1] == null) {
     return null;
   }
-  final value = _scalarString(values[0]);
+  final original = values[0];
+  final value = _scalarString(original);
   final edge = _scalarString(values[1], nullAsEmpty: true);
   if (value == null || edge == null) {
     return null;
   }
+  final unchanged = original is num || original is bool ? original : value;
+  if (edge.isEmpty) {
+    return unchanged;
+  }
   if (prefix) {
-    return value.startsWith(edge) ? value.substring(edge.length) : value;
+    return value.startsWith(edge) ? value.substring(edge.length) : unchanged;
   }
   return value.endsWith(edge)
       ? value.substring(0, value.length - edge.length)
-      : value;
+      : unchanged;
 }
 
 Object? _callSubstr(List<Object?> values) {
@@ -7558,9 +7585,16 @@ Object? _callSubstr(List<Object?> values) {
   if (value == null) {
     return null;
   }
-  final start = math.max(0, _intValue(values[1]) ?? 0);
+  int offset(Object? value) {
+    if (value is num && !_isInteger(value)) {
+      return 0;
+    }
+    return math.max(0, _intValue(value) ?? 0);
+  }
+
+  final start = offset(values[1]);
   final length = values.length >= 3 && values[2] != null
-      ? math.max(0, _intValue(values[2]) ?? 0)
+      ? offset(values[2])
       : null;
   return _charSubstring(value, start, length);
 }

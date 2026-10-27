@@ -2,6 +2,8 @@
 id: dart-runtime-string-numeric-helpers
 title: Dart runtime executes current string/scalar and numeric helper families
 answers:
+  - why do Dart rm_prefix and rm_suffix numeric identities fail typed Array indices
+  - does Dart treat an explicit null substring width as omitted
   - why do Dart definedness results need scalar and zero operand guards
   - does Dart runtime support trim lowercase substr split
   - does Dart runtime support string receiver chains
@@ -9,11 +11,13 @@ answers:
   - does Dart runtime support numeric aliases and symbol callees
   - does Dart runtime support number receiver chains
   - does Dart runtime support str_eq string comparisons
-date: 2026-10-26
+date: 2026-10-27
 status: current
 tags: [dart, runtime, helpers, string, numeric, DART-BACKEND-PARITY]
-evidence: "String/numeric4.3.2; definedness11.3 and numeric comparison15.3/arithmetic16.3 focused proof. Prior full fact/11.3 detail and historical-list pointer at Git82635ca70466e0d475c31597c378a1bb2c7c2248."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_arithmetic_results_test.dart test/numeric_comparison_results_test.dart"
+evidence: "String/numeric4.3.2; definedness11.3, numeric comparison15.3/arithmetic16.3 and scalar String19.3 focused proof. Prior full fact/11.3 detail and historical-list pointer at Git82635ca70466e0d475c31597c378a1bb2c7c2248."
+reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_string_results_test.dart test/default_selected_receivers_test.dart"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_arithmetic_results_test.dart test/numeric_comparison_results_test.dart"
 ---
 
 Dart's interpreter.dart canonicalActionHelperName dispatch shares implementations across helper/receiver/word/symbol forms. Pure strings cover cat, trim/case/length/substr, literal/regex predicates, replacement/removal/split, coalescing and generic definedness/emptiness; lexical str_* remain distinct. Numeric arithmetic/rounding/reducer/clamp/comparison aliases use the same dispatcher. Compatible raw.trim().lowercase() and score.abs().ceil() compose. Array/Hash breadth: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]]. Detailed historical lists/commands/related pointers remain at the Git record above.
@@ -48,3 +52,15 @@ str_* compareTo uses UTF-16 order, making U+10000 precede U+E000, opposite Perl.
 start+length before clipping; [[dart-slice-end-overflow]] owns six array/string cases under
 .2.14. The 111 selected tests and neutral numeric 55/18 pass; new emitted defect results
 and completed repairs are not inferred.
+
+Scalar String19.3 isolates coerced text identities/nullAsEmpty operand failures
+before receiver changes. Preserve Number/Boolean originals on empty-old/affix
+identity (other scalarized carriers retain text), guard explicit null operands,
+add eight-method scalar/shape metadata and normalize fractional offsets locally.
+Seven new/direct defaults3 native/restored/plan tests plus format/fatal analysis
+pass, preserving typed Array/Hash keys, Unicode, SONC-SC-selectedS/eager null
+snapshots/rejection/12 malformed no-effects and both named mutation aliases.
+Dart provided-null width still means omitted; Boolean offset remains invalid0.
+These differ from Perl/Rust compatibility; P2 TYPE23.2.20 reconciles domains after
+19.5 before portable admission. No global int/numeric/selector/Unicode/callback/
+regex/named-context or large-slice2.14 repair is implied.

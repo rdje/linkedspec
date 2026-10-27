@@ -124,3 +124,10 @@ arity behavior stays; no global numeric/domain/Unicode policy change. New4/
 direct3 native/restored/in-process plan tests pass with offline compile/rustfmt,
 including eager SIL, null/fraction/negative/Boolean controls and both named-
 target mutation aliases. Other backend/full61.3 admission remains separate.
+
+Dart19.3 independently fixes identity-kind/explicit null replacement-affix
+operands and fractional offsets; source/start null already worked. Its deliberate
+null-width-as-omitted/Bool-invalid0 conventions remain qualified, owned by P2
+TYPE23.2.20 before portable admission. Ten focused native/restored/plan tests/
+format/fatal analysis pass; [[dart-runtime-string-numeric-helpers]] has current
+implementation detail. This does not close broad61.3 or large-slice2.14.

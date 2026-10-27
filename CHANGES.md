@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## TYPE-REFERENCE-BOOK.1.2.23.3.19.3 — preserve Dart scalar String result kinds
+
+Dart19.3 repairs independently observed textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape and local fractional-offset guards. New7/direct defaults3 native/restored/plan tests and format/fatal analysis pass after identity-index/[]-SCA-SAC/fraction RED, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null operands/rejection/12 malformed no-effects and both mutation aliases. Existing null-width-as-omitted/Bool-invalid0 conventions stay qualified; P2 assessment20 owns mandatory reconciliation after19.5 before portable admission. Book/frozen/facts/task/live align; no global domain/numeric/selector/Unicode/callback or large-slice2.14 change. Julia19.4 next.
+
 ## TYPE-REFERENCE-BOOK.1.2.23.3.19.2 — guard Rust scalar String results and slices
 
 Rust19.2 preserves independently healthy producers and adds eight scalar-result/precise receiver-shape metadata through existing dispatch. Shared/native/restored/plan GREEN suppresses SCA/selectedSA/[] and malformed effects while retaining kinds/indices/Unicode/SONC-SC snapshots. Independent ordinary substr null/fraction defects match retained primary Perl bounds after local guards/whole offsets, preserving Boolean/omitted-width/free unary-extra behavior and dedicated mutation aliases. New4/direct null-predicate-default3 tests pass with offline compile/rustfmt/probe syntax. Book/frozen/facts/task/live align; no global numeric/free/domain/Unicode/callback or standalone/portable admission. Dart19.3 next.
