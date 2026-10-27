@@ -9,11 +9,13 @@ answers:
   - why can a scalar set_key block produce invalid Perl despite ready metadata
   - why does quoted match_has fail while a bare capture name works
   - did the first context scalar probe inspect the correct rule metadata
+  - how does Rust guard direct input reader results and preserve malformed call policies
 date: 2026-10-27
-status: bounded Perl27.1 implemented; independent Rust27.2 next; compiler/policy28.1 and capture-name29.1 owned
+status: bounded Perl27.1/Rust27.2 implemented; independent Dart27.3 next; compiler/policy28.1 and capture-name29.1 owned
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test input_cursor_results"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/input_cursor_result_continuations.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_context_scalar_results.pl named_input_cursor_defaults direct_input_cursor_defaults input_cursor_consumer_rejection"
 ---
@@ -64,3 +66,17 @@ String split/signed/String transitions, typed Number index and operand skips hol
 Direct defaults13 and source-location contract4 pass. No cursor/bounds/projection,
 callback/control/free/named legacy policy or generated field changes. Rust27.2
 independently follows; full23.4/28.1/29.1/registration/pressure owners remain.
+
+
+Rust27.2 independently records three failing result cases and a healthy source/
+default/named/snapshot case. All routes already preserve reader values/coordinates,
+lazy defaults and with's returned container/Bool kinds and outer restoration.
+Missing static source ownership bypasses existing actual-kind guards in ordinary
+and trailing-block dispatch. One predicate for ten zero-argument readers and
+two-argument input_slice now enables those guards at both entrypoints. Four new
+cases pass native/restored CompiledSpec/plan with Top/Value rows; computed six
+also pass. Shared all-spelling SWC/positions/kinds/lazy/split/signed values, Number
+selectors, actual returned with kinds and scope are preserved; operands skip.
+Malformed input_text-extra/missing-input_slice counts10/0 and bound/flat counts0
+remain. No getter/parser/source-coordinate/bounds/serde/free-arity/callback policy
+change. Offline compile/rustfmt pass; Dart27.3 independently follows.

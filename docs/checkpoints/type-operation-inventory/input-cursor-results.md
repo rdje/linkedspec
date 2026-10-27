@@ -1,7 +1,7 @@
 # Read-only input and cursor scalar result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.7; implementation family23.3.27.
-Status: bounded Perl27.1 implemented/targeted-checked; independent Rust27.2 next.
+Status: bounded Perl27.1/Rust27.2 implemented/targeted-checked; independent Dart27.3 next.
 
 The existing scalar readers input_text, input_len, input_end_pos, input_end_line,
 input_end_col, input_slice, cursor_pos, cursor_line, cursor_col, cursor_rest and
@@ -89,3 +89,16 @@ Direct defaults13 and source-location contract4 pass, as do module/test syntax.
 The retained with-result packet labels its first getter/direct-guard candidate
 epoch and supplies the actual AST/substitution producer, then the repaired output.
 Other backend failures are not inferred. Full admission and28.1/29.1 stay open.
+
+
+## Bounded Rust implementation
+
+27.2 independently observes three RED result cases and a healthy source/default/
+named/snapshot control. Existing producers and with's actual returned kinds work.
+A static ten-zero-argument/two-argument-input_slice predicate now enables the
+existing actual-kind guards at ordinary and trailing-block dispatch entrypoints.
+Four cases pass native/restored CompiledSpec/plan with Top/Value rows; six direct
+computed cases also pass. Shared positions/kinds/SWC/lazy/split/signed flow and
+with returned Array/Hash/Bool/scope hold; incompatible operands skip. Old malformed
+extra/missing-reader counts10/0 and bound/flat counts0 remain. Offline compile/
+rustfmt pass; no parser/reader/coordinate/bounds/serde/callback policy change.

@@ -6015,6 +6015,7 @@ impl Engine {
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
                 if self.is_ordinary_computed_read(receiver)
+                    || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "copy")
                 {
                     let current = self.eval_expr(receiver, ctx, rule_label)?;
@@ -6573,6 +6574,7 @@ impl Engine {
         let mut reduced_value = false;
         let mut logical_prefix = false;
         let mut kind_guarded_value = self.is_ordinary_computed_read(receiver)
+            || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
         for (index, call) in calls.iter().enumerate() {
@@ -7570,6 +7572,31 @@ impl Engine {
                 && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
         }
         Ok(current)
+    }
+
+    // Only ordinary reader signatures enable result guards. Existing malformed
+    // free calls retain their own producer and legacy continuation policies.
+    fn is_input_cursor_value_source(expr: &Expr) -> bool {
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        if name == "input_slice" {
+            return args.len() == 2;
+        }
+        args.is_empty()
+            && matches!(
+                name.as_str(),
+                "input_text"
+                    | "input_len"
+                    | "input_end_pos"
+                    | "input_end_line"
+                    | "input_end_col"
+                    | "cursor_pos"
+                    | "cursor_line"
+                    | "cursor_col"
+                    | "cursor_rest"
+                    | "cursor_rest_len"
+            )
     }
 
     // Static source ownership keeps legacy bound-call result guards intact.
