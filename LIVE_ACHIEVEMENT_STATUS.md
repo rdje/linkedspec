@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
+Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
 
 ## Latest Completed Slice
 
-Perl ordinary eager with results now retain normalized helper AST and existing actual-kind method dispatch. Five new native/fresh/metadata groups start RED; first candidate repairs scalar guards/scope, nested IO, pure-function OK and specific state fence plus deferred-with11, but signed Hash selection still reports unsupported with. Public AST/substitution method-selection Y/ready versus signed/unready twins identify nested unknown precheck; metadata-normalizing that specific immediate with delegates body/helper validation to its typed owner. Final frozen false/a-b/Y/a,z/2/ABCDE/outer native/fresh/raw0/unresolved0/ready1 and strengthened indexed entry_len function fence pass. Input-reader with-only10 passes; earlier unchanged passing controls are retained without repeating the costly combined run. Specific unknown-source metadata retains raw0/unready/missing_source (three assertions), without executing that unsupported source. No parser/helper/type/IR/schema/deferred/callback/unknown-call rights or full timing/domain/context admission. Working book examples/target/retained RED+candidate/fact/map/roadmap/task/live/resume align; Perl fixture final registration owned23.4.1. Independent Rust31.2 next; other prerequisite/admission owners stay separate; no push.
+Rust independently already passes frozen with-Hash flow, pure-function scope and indexed specific entry_len fence. Original/refined scalar controls expose helper/receiver3/[] and SWKVANJLT, so Engine now routes helper-with through current guarded values and marks returned receiver-with values kind-guarded before incompatible operands. Four final native/restored/plan tests pass, preserving false/a-b/Y/a,z/2/ABCDE/outer, null helper/receiver consumers/skipped AKVJLT/SWN, Array/Bool/default8/scope and function diagnostics; direct input-with one case and offline compile/rustfmt pass. No parser/frame/callback/IR/schema or outside-with legacy policy changes. Original nested test separately exposes false with→with recursion from active helper-name tracking; exact first-native RED/source retained and P1-owned31.6.1 alongside existing Dart/Julia identity owners after bounded backend children, before unrelated selection/parent admission. No nested/full with admission; parent31.2 stays open. Book/target/retained evidence/new causal fact/map/roadmap/task/live/resume align. Independent Dart31.3 next; other prerequisites remain owned; no push.
 
 ## Next Action
 
-Activate independent Rust with-Hash31.2 from this clean Perl boundary. Read frozen target/shared fixture and current with/Hash/value/source/callback/function owners. Independently run frozen/terminal/default-dispatch/scalar/scope/function controls; do not infer a runtime defect from Perl. Preserve exact current legacy/error/arity/root/unknown/callback/deferred/serialization rights; repair only a confirmed gap through existing owners. Compile/quick native/restored/plan/format controls/docs/book/commit, then Dart31.3. No exhaustive suite/matrix/admission/push; stale example/pressure/Perl registration/declared5.4/full23.4 remain scheduled.
+Activate independent Dart with-result31.3 from this clean Rust guard boundary. Read frozen target/current with/value/Hash/source and known DART-STARTUP-READING.2.10 identity owner. Independently check frozen/non-nested actual kinds/scalar/scope/function boundaries before production, retaining any known nested failure with its existing P1 identity owner under31.6 rather than widening this slice or calling it covered. Repair only confirmed value/guard gaps through current owners; compile/quick native/restored/plan/format/analyze/docs/book/commit, then Julia31.4. After bounded backend children, close priority31.6 before unrelated feature selection or parent admission. No exhaustive suite/matrix/admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1` — Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
@@ -29,7 +30,6 @@ Activate independent Rust with-Hash31.2 from this clean Perl boundary. Read froz
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1` — Perl noncatalogued parser-call/gap function boundary repaired; independent Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` — All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` — Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` — Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
 
 ## History
 

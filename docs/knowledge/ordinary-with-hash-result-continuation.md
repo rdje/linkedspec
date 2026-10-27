@@ -9,8 +9,9 @@ answers:
   - which task owns ordinary with returned Hash method composition
   - should generic with repair widen deferred or unknown call rights
   - why does signed selection after with still report unsupported with
+  - why do Rust with scalar results evaluate incompatible container operands
 date: 2026-10-27
-status: Perl31.1 repaired; independent backend children follow; full admission separate
+status: Perl31.1 and Rust guard31.2.1 repaired; nested identity31.6 and full admission separate
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -50,3 +51,12 @@ Final frozen/native/fresh/metadata and strengthened fence checks pass; earlier
 scalar/nested/pure/deferred11 and input-with10 controls are retained. No parser,
 schema or deferred/unknown-call rights. Evidence packet discloses candidate/final
 scope and no full suite, performance or context admission. Rust31.2 follows.
+
+Rust31.2 independently already passes frozen Hash flow, pure-function scope and
+specific indexed reader rejection. Generic helper/receiver with results miss the
+existing actual-kind boundaries; scalar3/[] and SWKVANJLT distinguish that defect.
+31.2.1 adds helper-with to guarded sources and marks returned receiver-with values
+guarded. Four final native/restored/plan tests and direct input-with pass; scope
+and callback machinery remain unchanged. Distinct nested with also fails through
+active helper-name collision; [[rust-with-callback-name-collision]] and31.6.1 own
+that P1 repair before unrelated selection/parent admission. No full/nested claim.

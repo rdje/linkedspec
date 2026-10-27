@@ -6021,7 +6021,7 @@ impl Engine {
                 }
                 if self.is_ordinary_computed_read(receiver)
                     || Self::is_input_cursor_value_source(receiver)
-                    || matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "copy")
+                    || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
                     let current = self.eval_expr(receiver, ctx, rule_label)?;
                     return self
@@ -6649,6 +6649,8 @@ impl Engine {
                 current =
                     self.eval_receiver_with_trailing_block_call(current, call, ctx, rule_label)?;
                 reduced_value |= call.method == "reduce_leaves";
+                // An immediate with yields a new value, independent of its source kind.
+                kind_guarded_value |= call.method == "with";
                 continue;
             }
 

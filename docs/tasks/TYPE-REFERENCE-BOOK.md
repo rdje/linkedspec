@@ -6585,7 +6585,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.1 - compose ordinary eager with results through typed methods`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2`
-  Status: `pending`
+  Status: `in_progress` / activation0f7ccfe81ea192d1be0e002a860029c504e87d4b
   Goal: Independently assess/repair Rust ordinary eager with returned-Hash continuations.
   Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
   Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
@@ -6593,6 +6593,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+  Refinement: Bounded guard31.2.1 complete; distinct nested same-helper failure is separately owned P1 by31.6.1 before unrelated selection/parent admission. This parent remains open; no nested scope closeout claimed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1`
+  Status: `completed`
+  Goal: Repair independently confirmed Rust actual-kind guards after ordinary immediate with results; retain already-healthy frozen Hash/pure-function/fence controls.
+  Evidence: First five-case native/restored/plan test builds/runs. Frozen Hash target and pure-function/fence pass. First-native scalar result is3/[] with SWKVAN instead of null/null/SWN. Separate nested control raises codeblock_recursion_unsupported with cycle with→with, owned31.6.1 before parent admission.
+  Scope: Existing receiver-with and generic helper-with actual-kind dispatch; source/body once, scalar/Array/Bool/null/default/scope and existing root/error/arity/deferred/schema boundaries. Independently refine helper-form wrong-consumer controls before production; no recursion repair in this bounded leaf.
+  Planned verification tier: focused
+  Planned focused checks: New focused with-result tests/direct dependent input-with case, offline compile/rustfmt/book/history/continuity. Retain exact nested reproduction outside the passing guard fixture with a scheduled priority repair; no nested admission or suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; parent31 waits for nested identity repair31.6.
+  Planned claim verification: none: Finite authored repair controls; no population measurement.
+
+  Activation: clean0f7ccfe81ea192d1be0e002a860029c504e87d4b; Perl31.1 committed/tree clean/brief0.
+  Owned paths: Existing Engine with-result kind guard entrypoints; new auto-discovered regression/retained original and refined RED/nested reproduction, new identity fact/priority repair owners and scoped book/target/fact/map/roadmap/task/live/resume. Runtime identity not changed here.
+  Verification tier: `focused`
+  Focused checks: Four native/restored-CompiledSpec/plan tests after refined guard RED; direct input-reader with-only one case, offline compile/rustfmt/book/history/fast continuity. Original nested first-native failure retained separately for31.6.1, with no nested coverage or whole-suite admission.
+  Canonical trigger: Parent31 waits for priority callback identity31.6; full source/domain/context/portable/generated23.4 and final clean push after feature coverage.
+  Claim verification: none: Finite authored guard repair/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Original frozen Hash/pure-function/indexed-state-fence tests pass. Scalar guard source instead returns3/[] and SWKVAN; refined helper/receiver twins independently return3/[]/3/[] and SWKVANJLT at first-native assertion. A distinct nested with fails as with→with recursion and is retained/owned separately31.6.1.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine general fluent dispatch omits helper-with from actual-kind source guards; receiver-with dispatch executes the block without retaining a new actual-kind boundary. Existing dynamic consumers therefore inherit scalar-root compatibility and evaluate operands. Independent RuntimeContext active helper-name collision explains nested failure, outside this guard repair.
+  - [x] **FIX**: Include helper with in existing kind-guarded value dispatch and mark a successfully returned receiver with value as kind-guarded. Keep frame/identity/callback execution unchanged; use current method guards before operands, without new parser/AST/schema/helper/type permissions.
+  - [x] **ADDRESSED (verified)**: Four final tests pass native/restored/plan: unchanged false/a-b/Y/a,z/2/ABCDE/outer target, helper/receiver wrong-consumer nulls with SWN and skipped AKVJLT, healthy Array/Bool/default8/scope, pure-function OK and indexed specific entry_len rejection.
+  - [x] **NO REGRESSION**: Input-reader with-only case passes; offline compile/rustfmt clean. No root policy outside with results, helper signatures, error/arity, scope frames, callback/deferred/unknown-call or serialized field changes. Exact nested control is scheduled P1, not recast as passing or ignored in the ordinary suite.
+  - [x] **LOCKSTEP**: Book qualifies Rust support with its nested limitation; target/retained RED/nested identity fact/map and roadmap/task/live/resume align. Parent31.2/full31 remain open for31.6.1. Independent Dart31.3 next; existing Dart/Julia identity owners and other prerequisites stay scheduled before unrelated selection/admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1 - guard actual values returned by ordinary Rust with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.3`
   Status: `pending`
@@ -6624,13 +6651,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6`
+  Status: `pending`
+  Priority: P1 after bounded backend with-result children31.1-.5, before unrelated feature selection or with-family/full admission.
+  Goal: Close nested immediate with callback identity prerequisites without confusing helper names with callable identities.
+  Dependencies: Newly reproduced Rust31.6.1; existing DART-STARTUP-READING.2.10 and JULIA-STARTUP-READING.2.8 own analogous same-helper false recursion/helper-mediated identity defects. Independent evidence required; no other backend defect inferred.
+  Acceptance: Distinct nested contextual callbacks run with correct inner/outer value restoration; real direct/mutual/helper-mediated recursion retains contracted rejection, identity, cycle/error fields and cleanup. Reconcile canonical callback identity authority before production and split safe backend repairs. No new callback/deferred grammar, implicit capture or serialized fields; parent31 cannot claim nested/full admission while these dependencies remain.
+  Planned verification tier: focused
+  Planned focused checks: Small distinguishing distinct-versus-same callback, ordinary/mixed/nested source/scope/failure controls on relevant public routes, compile/book/history/continuity. No full suite/matrix.
+  Planned canonical trigger: Parent/full source/domain/context/backend admission23.4 and final clean push; actual identity contract/schema movement separately owned.
+  Planned claim verification: none: Prospective finite identity/cleanup repair; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1`
+  Status: `pending`
+  Priority: P1 under31.6 before parent31 admission and unrelated feature selection.
+  Goal: Repair Rust false same-helper callback recursion and reconcile actual callable identity tracking.
+  Reproduction: At clean0f7ccfe81, outer "outside".with(){inner="inside".with(){order=cat(order,"I");return({"k":[value]})}.sorted_values().first().first();order=cat(order,"O");return({"k":[value,inner]});}.sorted_values().first() rejects as codeblock_recursion_unsupported/callable_name with/cycle [with,with], rather than distinct callbacks yielding [outside,inside]. Exact producer and first-native failure are retained by31.2.1; no other route RED inferred from the first panic.
+  Impact / root: Engine execute_codeblock_value calls RuntimeContext enter_codeblock(name), whose active stack compares helper invocation names. Two distinct contextual callbacks both called through with collide. Existing direct-cycle authority still requires real recursion rejection; simply disabling the guard is not a fix.
+  Acceptance: Read identity authority/current RuntimeValue/callback/active-stack owners before implementation. Distinguish distinct nested contextual bodies from the same bound callable passed through helpers, preserve direct/mutual cycles/diagnostics and cleanup/restoration, then restore the exact nested regression to ordinary Rust discovery. Keep public compiled schema/deferred rights unchanged or separately freeze any necessary contract movement.
+  Planned verification tier: focused
+  Planned focused checks: Retained nested RED plus a few independent identity/direct/mutual/helper/cleanup/native/restored/plan controls, offline compile/rustfmt/book/history/continuity. No suite/matrix.
+  Planned canonical trigger: Parent/full domain/context/backend admission23.4 and final clean push; actual identity contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored identity repair controls, not population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.2` | `pending` | Independently assess Rust ordinary eager with returned-Hash continuations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` | `pending` | Independently assess Dart with-result composition; identity31.6 follows bounded children. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
