@@ -10,9 +10,10 @@ answers:
   - which task owns generic eager with Hash result continuation
   - should Number reader repair change legacy first consumer root policies
   - does Rust already compose entry match Number reader defaults
+  - does Dart already compose entry match Number reader defaults
   - does Rust direct scalar set_key keep the same result as Perl
 date: 2026-10-27
-status: Perl30.1 repaired; Rust30.2 already compatible; independent other backends and with-Hash31 follow
+status: Perl30.1 repaired; Rust30.2/Dart30.3 already compatible; independent other backends and with-Hash31 follow
 tags: [perl, fluent, source-location, entry, match, number, with]
 evidence: "TYPE23.1.8 retains six original/five refined public native/fresh/Value metadata/substitution cases at cleanc0bf78088; source/target/shared prospective fixture and independently owned30/31."
 reverify:
@@ -63,3 +64,10 @@ Perl's oracle, then corrected it against unchanged Rust, retaining exact first
 source/log/refinement. Four native/restored/plan tests plus rustfmt/offline compile
 pass; runtime unchanged. This preserves existing root policies and makes no full
 invalid-domain or backend-parity admission. Independent Dart follows;31 stays P1.
+
+Dart30.3 independently already implements the target. Its all-route legacy
+setter5/take[]/normalized-null behavior is observed before freezing the test oracle;
+no runtime change or product RED. Four native/restored/plan tests and format/fatal
+selected analysis pass; an explicit empty-List type fixes only the new test's
+inference warning. Original observations/refinement are retained. Julia follows;
+with-Hash31/full domain/context/backend admission remain separate.

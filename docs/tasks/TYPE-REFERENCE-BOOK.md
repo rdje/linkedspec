@@ -6444,7 +6444,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.2 - retain Rust entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/implement Dart readonly entry/match Number result composition under frozen30.
   Dependencies: Selection23.1.8, existing getter/Number/default contracts and30 target; previous backend child where applicable.
   Acceptance: Establish actual behavior through small producer/default/normalized-result/preservation controls before production. Use existing getter/render/value owners, preserving exact semantic source/signature/projection/error/alias behavior and first-consumer/root policies. Keep malformed/backend differences explicit, function-state fences and callback/serialization rights. Split larger independent gaps before writes; no failure inferred from another backend.
@@ -6452,6 +6452,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen fixture and a few native/current reconstructed/generated direct/preservation controls, relevant compile/format/source/getter/function checks as warranted, book/history/continuity. Safe Lua only available hosts/no unsafe patterns/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement separately owned.
   Planned claim verification: none: Prospective deterministic finite authored feature checks; no population measurement.
+
+  Independent intake: At clean9d48b54ca, Dart already passes frozen Number getter/default/math/text/normalized controls, absent-match F fallback and specific function fence on native/restored-SpecFile/plan. Observe legacy output independently before freezing an oracle: direct scalar set_key returns Number5, take[], normalized null/order empty on all routes. Finalize that exact preservation regression without runtime changes; initial observation source/log retained. No product RED or uniform invalid-domain admission.
+
+  Activation: clean9d48b54cafe2a6e9fad69289c8372c14965aa10c; Rust30.2 committed/tree clean/brief0.
+  Owned paths: New Dart regression/retained independent legacy observations and test-type refinement; scoped book/target/fact/map/roadmap/task/live/resume. Runtime unchanged because it already implements the frozen target.
+  Verification tier: `focused`
+  Focused checks: Four native/restored-SpecFile/plan tests, format/fatal selected analysis clean; initial empty-list inference warning corrected in test only. Book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; no admission from bounded existing-behavior proof.
+  Claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Unchanged Dart passes frozen Number target, absent-match fallback and function fence. Independently observe all-route legacy direct set_key5/take[]/normalized-null/order-empty before freezing its oracle. No borrowed expected behavior or product RED. Retain source/log and initial test-only empty-list inference warning/refinement.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing Interpreter already evaluates Number getter values before compatible default/math/text methods. Perl's early source-lowering defect does not establish a Dart defect; current scalar-root compatibility also differs from Perl and remains intentional preservation here.
+  - [x] **FIX**: Keep runtime untouched; retain an automatically discovered regression with the independently established backend legacy oracle. Give the empty List literal an explicit Object? element type to satisfy strict analysis.
+  - [x] **ADDRESSED (verified)**: Four tests pass native/restored/plan, covering frozen getters/offsets/columns/kinds/zero/lazy/String flow, C and skipped-AKV, absent F once/yields8, legacy direct setter5/take[] versus normalized null, and specific pure-function getter rejection.
+  - [x] **NO REGRESSION**: Format/fatal selected analysis clean. No getter/source/coordinate/alias/arity/error/root/callback/runtime/AST/serialized field changes. Full invalid-domain and cross-backend parity remain23.4, not implied by the finite target.
+  - [x] **LOCKSTEP**: Qualified book/target/retained independent intake/fact/map and roadmap/task/live/resume align; ordinary Dart discovery needs no runner edit. Julia30.4 next; with-Hash31/stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.3 - retain Dart entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.4`
   Status: `pending`
@@ -6491,7 +6508,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` | `pending` | Independently assess Dart entry/match Number reader composition; with Hash31 follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` | `pending` | Independently assess Julia entry/match Number reader composition; with Hash31 follows. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
