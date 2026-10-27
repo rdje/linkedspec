@@ -85,4 +85,4 @@ substring wrap is reproduced/fixed by clipping before addition. Strict native/
 plan/fresh eight-group/shared/direct-default/source checks pass both hosts.
 Details: [[lua-string-helper-parity-closeout]]. Width-omitted/Bool0 conventions
 join20; all five bounded String implementations are targeted-checked, with
-input-domain20 next before complete portable admission.
+input-domain20 frozen from existing Perl-reference authority before portable admission. See [[substring-optional-arguments]]; Dart20.1/Julia20.2/safe Lua20.3 own the concrete local repairs.

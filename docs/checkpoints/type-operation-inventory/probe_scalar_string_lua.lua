@@ -17,6 +17,8 @@ local cases = {
 }
 local file = assert(io.open("tests/fixtures/scalar_string_result_receiver_values.spec","r"))
 cases[#cases+1] = {"shared",file:read("*a")};file:close()
+local arguments_file = assert(io.open("tests/fixtures/substring_optional_argument_values.spec","r"))
+cases[#cases+1] = {"arguments",arguments_file:read("*a")};arguments_file:close()
 for _, row in ipairs(cases) do
   local selected = #arg == 0
   for _, name in ipairs(arg) do if name == row[1] then selected=true end end

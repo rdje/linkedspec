@@ -17,6 +17,7 @@ cases = [
     ("boundaries", raw"""Top:: I { order="";value={order=cat(order,"S");" a "}.trim().cat({order=cat(order,"C");"!"}).take({order=cat(order,"A");1});bad_order="";bad={bad_order=cat(bad_order,"S");"a"}.replace_substr({bad_order=cat(bad_order,"A");"x"}).cat({bad_order=cat(bad_order,"C");"!"});return([value,order,bad,bad_order]); }"""),
 ]
 root = normpath(joinpath(@__DIR__, "..", "..", ".."))
+push!(cases, ("arguments", read(joinpath(root, "tests", "fixtures", "substring_optional_argument_values.spec"), String)))
 push!(cases, ("shared", read(joinpath(root, "tests", "fixtures", "scalar_string_result_receiver_values.spec"), String)))
 for (label, source) in cases
     !isempty(ARGS) && !(label in ARGS) && continue

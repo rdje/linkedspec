@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-10-26`
+- Last updated: `2026-10-27`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 - Partition authority: `docs/decisions/0125-startup-task-partitions.md`
@@ -20,16 +20,22 @@
 
 ## Current Frontier
 
-Current feature selection (October26): Scalar61.1/.61.2, bounded selected/copy rollout and ordinary Rust coalesce62.1 are implemented/targeted-checked. Ordinary nonempty62.2.1 is also implemented/targeted-checked; documented Rust receiver62.2.2 is implemented too. Discovered Perl exhausted-tail/numeric-selection62.2.3 is repaired too. TYPE23.2.2 count/count_keys/length result contract is frozen; Perl23.3.3.1 implementation is targeted-checked and Rust23.3.3.2 is implemented too; Dart23.3.3.3 is implemented/targeted-checked; Julia23.3.3.4 is implemented/targeted-checked; Lua23.3.3.5 is implemented/targeted-checked on available PUC5.5.1/LuaJIT; aggregate numeric result contract23.2.3 is frozen and Perl23.3.4.1 is implemented/targeted-checked; Rust23.3.4.2 is implemented/targeted-checked; Dart23.3.4.3 is implemented/targeted-checked; Julia23.3.4.4 is implemented/targeted-checked; Lua23.3.4.5 is implemented/targeted-checked on available PUC5.5.1/LuaJIT; join-result contract23.2.4 is frozen; Perl23.3.5.1 is implemented/targeted-checked; Rust23.3.5.2 is implemented/targeted-checked; Dart23.3.5.3 is implemented/targeted-checked; Julia23.3.5.4 is implemented/targeted-checked; Lua23.3.5.5 is implemented/targeted-checked on available PUC5.5.1/LuaJIT. Lua mutable-split false delimiter2.9.1.1 is repaired/targeted-checked on available hosts; container-default23.2.5 is frozen; Perl flow23.3.6.1.1 and literal repair1.2 are implemented/targeted-checked; Rust default flow2 is repaired/targeted-checked; Dart scalar default boundaries3 are repaired/targeted-checked; Julia scalar default boundaries4 are repaired/targeted-checked; Lua scalar default boundaries5 are repaired/targeted-checked on available hosts; index_of contract23.2.6 is frozen and Perl implementation23.3.7.1 is targeted-checked; Rust index implementation2 is targeted-checked; Dart index boundaries3 are targeted-checked; Julia index boundaries4 are targeted-checked; Lua index boundaries5 are targeted-checked on available hosts; has_key23.2.7 is frozen; Perl key-block23.3.8.1.1 and result flow1.2 are repaired/targeted-checked; Rust2 result/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on available hosts; bounded has_key rollout is targeted-checked. is_empty/is_nonempty23.2.8 is frozen; bounded ordinary Perl producer23.3.9.1.1 is repaired/targeted-checked; result flow1.2 is repaired/targeted-checked too; Rust2 generic result/source/shape repair is targeted-checked; Dart3 scalar/shape repair is targeted-checked; Julia4 scalar/shape repair is targeted-checked; Lua5 result/shape repair is targeted-checked on installed hosts; bounded emptiness rollout is targeted-checked. String predicate23.2.9 is frozen; Perl handoff23.3.10.1 is implemented/targeted-checked; Rust2 result/shape and literal-flag repairs are targeted-checked; Dart3 assessment is next, with broader16 conditions/literal-consumer ownership retained. Broad61.3/62.3/.62.4, full suites/global scans and numeric/text maintenance remain deferred under director instruction. Older numeric handoff below is historical.
+Current feature selection (October27): derive HEAD and the exact active leaf from
+MEMORY.md and TYPE-REFERENCE-BOOK's Current Frontier. Bounded scalar61.1/.2,
+default62.1/.2 and TYPE selected/result families through scalar String23.3.19
+are implemented/targeted-checked on their recorded routes/hosts. Optional substring
+argument target23.2.20 is frozen; three local backend repairs follow below.
+Broad61.3/62.3/.4, declared Lua5.4, full domain/context/portable23.4 and the separate
+reading audit remain open under their own acceptance. Feature-first ordinary
+checks remain focused; no full reading audit is a prerequisite for these repairs.
 
-Numeric `.55.1` is verified from activation f0d974aa1; its exact canonical receipt
-and normal hooks govern landing. Return to `TYPE-REFERENCE-BOOK.1.2.17.4` only
-after the clean numeric commit. Portable text policy remains `.55.2`; `.55.3`
-owns the broader numeric closeout. Other startup repairs retain their schedule.
+The prior accumulated frontier and numeric return instructions are historical,
+preserved exactly for this path at Git b73b56c36075e79472adbb822d6cdb5bb34a01e0.
+TYPE23.2.20 owns this bounded continuity correction, not a startup-tree pivot.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.10.3` | `pending` | Independent Dart String predicate result/source/shape assessment; broader16 stays open. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` | `pending` | Dart ordinary substring explicit-null width and Boolean argument parity; Julia20.2/safe Lua20.3 follow. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

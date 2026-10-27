@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua scalar String result19.5/identity/null operands and PUC large-end bounds repaired/targeted-checked; all five bounded backends complete, input-domain assessment20 next.
+Optional substring20 target frozen; Dart20.1, Julia20.2 and safe Lua20.3 repairs selected from existing Perl-reference policy. Broad admission remains separate.
 
 ## Latest Completed Slice
 
-Lua19.5 independently repairs primitive Number/Boolean identities and explicit null replacement/affix operands plus eight-method scalar/shape guards, with no new module locals. Safe PUC5.5.1/LuaJIT strict canonical JSON native/plan/fresh eight-group/shared/direct-default/source checks pass, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and mutation aliases. A concrete PUC large-width end wrap is reproduced and fixed by clipping before addition; free/receiver regression passes both hosts. Existing width-omitted/Bool0 stays under20. All five bounded String implementations are targeted-checked; book/frozen/facts/task/live align. Declared5.4/full domain/context/portable admission separate; input-domain20 next.
+Assessment20 resolves omitted/null/Boolean slice argument parity from ADR0006 Perl oracle and ADR0023 equivalent accepted-input/results; ADR0029 strict Bool rejection remains arithmetic-specific. Shared authored fixture passes Perl native/fresh and Rust native/restored/in-process plan. Independent Dart/Julia/safe PUC5.5.1/LuaJIT native/generated distinctions retain null-width, Boolean1/0 and SIWC snapshot differences; production unchanged. Three local repairs20.1-.3 are scheduled; canonical fact/map and current book qualifiers align. SESSION root stale predicate/numeric frontier is boundedly corrected with exact prior Git preservation; broad61.3/23.4 remain open. Dart diagnostic format/fatal analysis, probe syntax, book/history/diff/staged continuity checks pass; no full gate.
 
 ## Next Action
 
-Assess20 optional slice-width/Boolean-offset input domains from canonical signatures/domain owners1.2.1.4/SESSION61.3, current book and retained primary/backend facts before production. Distinguish omission/null/Bool from valid integer/fractional normalization; preserve current qualified conventions until authority is frozen. Public native/generated bounded distinctions only as needed, then own any concrete repairs before portable admission. Small docs/continuity/commit; no full matrix or inferred universal policy.
+Implement Dart20.1 ordinary substring explicit-null width and helper-specific Boolean start/width parity from frozen substring-optional-arguments.md. Existing independent native/restored/plan RED is retained; add small shared/direct String/mutation regression and format/compile checks, sync book/facts/task/live, commit then Julia20.2/safe Lua20.3. No global converter/selector/free-arity change or full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.2.20` — Optional substring20 target frozen; Dart20.1, Julia20.2 and safe Lua20.3 repairs selected from existing Perl-reference policy. Broad admission remains separate.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.5` — Lua scalar String result19.5/identity/null operands and PUC large-end bounds repaired/targeted-checked; all five bounded backends complete, input-domain assessment20 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.4` — Julia scalar String result19.4/identity/null operands repaired and targeted-checked; four bounded backends complete, safe Lua19.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.19.3` — Dart scalar String result19.3/identity/null operands repaired and targeted-checked; Julia19.4 next, explicit slice-domain reconciliation20 scheduled before admission.
@@ -29,7 +30,6 @@ Assess20 optional slice-width/Boolean-offset input domains from canonical signat
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.5` — All five bounded logical result implementations targeted-checked; defined-only coalesce receiver assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.4` — Julia logical Boolean boundaries targeted-checked; safe Lua independent implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.17.3` — Dart logical Boolean boundaries targeted-checked; Julia independent implementation next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.17.1.1` — Perl rejected-consumer source-effect regression fixed and targeted-checked; Dart logical result assessment next.
 
 ## History
 

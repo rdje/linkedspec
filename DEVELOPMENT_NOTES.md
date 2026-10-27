@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.2.20 — reconcile ordinary substring argument parity
+
+Assessment20 resolves omitted/null/Boolean slice argument parity from ADR0006 Perl oracle and ADR0023 equivalent accepted-input/results; ADR0029 strict Bool rejection remains arithmetic-specific. Shared authored fixture passes Perl native/fresh and Rust native/restored/in-process plan. Independent Dart/Julia/safe PUC5.5.1/LuaJIT native/generated distinctions retain null-width, Boolean1/0 and SIWC snapshot differences; production unchanged. Three local repairs20.1-.3 are scheduled; canonical fact/map and current book qualifiers align. SESSION root stale predicate/numeric frontier is boundedly corrected with exact prior Git preservation; broad61.3/23.4 remain open. Dart diagnostic format/fatal analysis, probe syntax, book/history/diff/staged continuity checks pass; no full gate.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.19.5 — preserve Lua scalar String kinds and slice bounds
 
 Lua19.5 independently repairs primitive Number/Boolean identities and explicit null replacement/affix operands plus eight-method scalar/shape guards, with no new module locals. Safe PUC5.5.1/LuaJIT strict canonical JSON native/plan/fresh eight-group/shared/direct-default/source checks pass, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and mutation aliases. A concrete PUC large-width end wrap is reproduced and fixed by clipping before addition; free/receiver regression passes both hosts. Existing width-omitted/Bool0 stays under20. All five bounded String implementations are targeted-checked; book/frozen/facts/task/live align. Declared5.4/full domain/context/portable admission separate; input-domain20 next.

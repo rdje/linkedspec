@@ -1,0 +1,10 @@
+{
+  "omitted": ["bc", "bc"],
+  "null_width": [null, null],
+  "boolean_starts": ["bc", "abc", "bc", "abc"],
+  "boolean_widths": ["a", "", "a", ""],
+  "integer_controls": ["bc", "bc", "abc", "abc", ""],
+  "null_controls": [null, null, null],
+  "null_effects": [null, "SIWC", 1, null],
+  "defined_effects": ["b!", "SIWC", 1, null]
+}

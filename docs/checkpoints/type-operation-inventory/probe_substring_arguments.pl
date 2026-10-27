@@ -1,0 +1,27 @@
+use strict;
+use warnings;
+use JSON::PP ();
+use LinkedSpec ();
+
+my $path = 'tests/fixtures/substring_optional_argument_values.spec';
+open my $file, '<', $path or die "$path: $!";
+my $source = do { local $/; <$file> };
+close $file or die "$path: $!";
+my $json = JSON::PP->new->canonical;
+open my $expected_file, '<', 'tests/fixtures/substring_optional_argument_values.json' or die $!;
+my $expected = $json->decode(do { local $/; <$expected_file> });
+close $expected_file or die $!;
+my %context;
+my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+my $input = 'x';
+my $value = $parser->(\$input);
+die $context{last_error}{summary} if $context{last_error};
+die "native reference mismatch" unless $json->encode($value) eq $json->encode($expected);
+print $json->encode({route=>'native',value=>$value}), "\n";
+my $emitted = LinkedSpec::emit_generated_source(\$source, source_identity=>$path);
+my $loaded = eval "package LinkedSpec::SubstringArgumentsProbe; $emitted; 1";
+die $@ unless $loaded;
+my $fresh_input = 'x';
+my $fresh = LinkedSpec::SubstringArgumentsProbe::Execute(\$fresh_input);
+die "fresh reference mismatch" unless $json->encode($fresh) eq $json->encode($expected);
+print $json->encode({route=>'fresh',value=>$fresh}), "\n";
