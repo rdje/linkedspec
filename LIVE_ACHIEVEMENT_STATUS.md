@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
+Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
 
 ## Latest Completed Slice
 
-Repaired existing Perl set_key eager key blocks and operand snapshots without changing frozen scalar-root fallback policy. Public source/native counterfactuals distinguish invalid key-block compilation/false-ready metadata from a separate before-to-after key alias defect. Semantic block keys reuse existing child value/block lowering/local returns; pure/fallback emission stages key then value and native uniform-binding index emission materializes the earlier key. Original helper invocation/return passthrough is retained. Three new native/fresh/Top-metadata groups and direct required539/cold17 pass, covering four key-block roles/KVKVKVKV, pure source/key snapshots, statement/String-key operator writes, legacy []/Hash versus normalized guards, callback order/identity/diagnostics/reference/falsy results. Initial candidate reference wrapping is disclosed with exact patch/test/log before correction; fallback-only source oracles reflect staging. Module syntax, worked book/catalog, target/current facts/map and history/fast continuity align. Capture-name29.1 follows; full23.4/pressure/required Perl registration/declared5.4 and broader SESSION17 host-slot owners stay separate; no push.
+Perl now lowers existing static bare/quoted entry/local named/has capture reads through shared native primitive rendering. Bare identity ignores working-variable shadowing; String0/empty/missing/punctuation/dollar data, numeric presence, compatible defaults/text and explicit function arguments pass. Unsupported shapes skip operands and remain explicitly unready. Four known helpers join paired VALUE_DROP lists, repairing discarded quoted calls without new IR/schema/source-membership rights. A separate public input_text function returned caller x with ready metadata before repair; current active-function lowering fences the four named and eleven input/cursor readers under the accepted parser-state ban. Mixed named probes fail/unready and are not successful scope controls; exact producers/emission/preludes are retained. Five new native/fresh/metadata groups plus getter4/statement-provenance16 pass after RED; module/test syntax and book/target/fact/map/history/fast continuity align. Valid ordinary metadata is raw0/unresolved0/ready1; all15 forbidden readers diagnose/unready. Remaining function-family/context assessment29.2 follows; full23.4/pressure/required Perl registration/declared5.4 stay separate; no push.
 
 ## Next Action
 
-Activate capture-name29.1 from this clean key-operand boundary. Read current static entry/match named/has syntax, typed source-location/formal/book contracts and retained bare/quoted observations. Resolve identifier versus String-literal authority without inferring dynamic-name rights; repair supported lowering or explicit rejection/readiness so no known call reaches an undefined host helper. Preserve bare capture identity/local-entry absence/kinds/source errors and existing callback/function contexts. Small native/fresh/metadata/name-shape RED/GREEN, compile/docs/commit before further feature selection. No full matrix/admission/push; pressure/required Perl registration/declared-host owners remain separate.
+Activate remaining pure-function parser-state boundary assessment29.2 from this clean static-name boundary. Read accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative and current semantic helper/context authority; assess remaining capture/group/map/mark/cursor/control classes through small public positive/negative controls, checking Knowledge Map first. Do not infer failure or permission from name lists. Split independent implementation/backend/context owners before production, fix confirmed escapes under existing purity authority and preserve pure value helpers/explicit arguments/getter semantics/callback rights. Compile/quick checks/docs/commit per safe slice. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.1` — Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.28.1` — Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
@@ -29,7 +30,6 @@ Activate capture-name29.1 from this clean key-operand boundary. Read current sta
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.0` — Inline condition typed-value and child AST lowering repaired; Perl conditional brackets26.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.6` — Inline conditional bracket target26 frozen; P1 first/elseif eager-condition lowering26.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.5` — Safe Lua capture guards implemented on available hosts; all bounded25 children complete; next-feature selection23.1.6 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
 
 ## History
 

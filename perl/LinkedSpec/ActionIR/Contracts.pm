@@ -681,6 +681,17 @@ sub _readonly_input_cursor_value_expr {
  return $values{$method}
 }
 
+sub _static_named_capture_value_expr {
+ my ($method, $key_expr) = @_;
+ return undef unless defined($method) && $method =~ /\A(entry|match)_(named|has)\z/o;
+ return undef unless defined($key_expr) && length($key_expr);
+ my ($scope, $operation) = ($1, $2);
+ my $slot = ($scope eq 'entry' ? '$IMATCH_HASH' : '$LMATCH_HASH').'{'.$key_expr.'}';
+ return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists '.$slot.') }'
+  if $operation eq 'has';
+ return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists '.$slot.' ? '.$slot.' : undef) }'
+}
+
 # Contracts that normalize capture and cursor-control helpers.
 sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
@@ -1694,10 +1705,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_named\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bentry_named\s*\(\s*(?<name>\w+)\s*\)
-    }{
-     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists $IMATCH_HASH{\''.$+{name}.'\'} ? $IMATCH_HASH{\''.$+{name}.'\'} : undef) }'
+    $code =~ s{\bentry_named\s*\(\s*(?<name>\w+)\s*\)}{
+     _static_named_capture_value_expr('entry_named', "'".$+{name}."'")
     }gex;
     return $code
    },
@@ -1709,10 +1718,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_has\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bentry_has\s*\(\s*(?<name>\w+)\s*\)
-    }{
-     'do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $IMATCH_HASH{\''.$+{name}.'\'}) }'
+    $code =~ s{\bentry_has\s*\(\s*(?<name>\w+)\s*\)}{
+     _static_named_capture_value_expr('entry_has', "'".$+{name}."'")
     }gex;
     return $code
    },
@@ -1893,10 +1900,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_named\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bmatch_named\s*\(\s*(?<name>\w+)\s*\)
-    }{
-     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef) }'
+    $code =~ s{\bmatch_named\s*\(\s*(?<name>\w+)\s*\)}{
+     _static_named_capture_value_expr('match_named', "'".$+{name}."'")
     }gex;
     return $code
    },
@@ -1908,10 +1913,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_has\s*\(\s*\w+\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bmatch_has\s*\(\s*(?<name>\w+)\s*\)
-    }{
-     'do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $LMATCH_HASH{\''.$+{name}.'\'}) }'
+    $code =~ s{\bmatch_has\s*\(\s*(?<name>\w+)\s*\)}{
+     _static_named_capture_value_expr('match_has', "'".$+{name}."'")
     }gex;
     return $code
    },
@@ -2311,7 +2314,7 @@ sub _build_array_pipeline_contracts {
 #------------------------------------------------------------------------------
 sub _build_dropped_value_contracts {
  my ($d) = @_;
- my $value_call_re = qr/(?:and|or|not|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $value_call_re = qr/(?:and|or|not|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_named|entry_has|match_named|match_has|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
  my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
  my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;

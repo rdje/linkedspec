@@ -1762,12 +1762,12 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `entry_named(name)`
 - **Signature**: `entry_named(name: string)`
 - **Returns**: scalar or undef
-- **Behavior**: Named capture group. Returns undef if the group does not exist.
+- **Behavior**: Named capture group. Returns undef if the group does not exist. In ordinary Perl, `entry_named(head)` and `entry_named("head")` identify the same static capture; a working binding named `head` does not change that name. Single/double quoted names and discarded calls are supported. Unknown names return undef; participating empty/`"0"` captures remain Strings. Computed-name expressions and wrong arities remain unsupported/unready. Pure functions receive capture values as explicit arguments, for example `fn upper(text){return(text.uppercase())}` with `upper(entry_named("head"))`; they cannot invoke these parser-state readers in their bodies.
 
 ### `entry_has(name)`
 - **Signature**: `entry_has(name: string)`
 - **Returns**: integer `1` or `0`
-- **Behavior**: Returns `1` if the named capture group exists in the entry match, else `0`.
+- **Behavior**: Returns `1` if the named capture group exists in the entry match, else `0`. Ordinary Perl accepts static bare or quoted names, including `entry_has("head")`; a participating empty capture exists. `match_named`/`match_has` use the same name syntax for the current local match. Invalid name shapes are distinct from a valid unknown name: they remain unsupported/unready rather than reporting an ordinary missing capture.
 
 ### `entry_map()`
 - **Signature**: `entry_map()`

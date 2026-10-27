@@ -14,7 +14,7 @@ answers:
   - how do Julia input reader results retain actual kinds through with
   - why do malformed Lua input readers retain typed arity errors
 date: 2026-10-27
-status: all five bounded27 implementations and key-operand28.1 complete; capture-name29.1 next; full admission separate
+status: bounded27/28.1/29.1 repairs complete; remaining function boundary29.2 next; full admission separate
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
@@ -135,3 +135,12 @@ source/key/value staging, including a real before-to-after key snapshot defect;
 working native/fresh metadata and required/cold helper passthrough controls pass.
 Current mechanism/target belongs to terse-hash-receiver-value-chains.md and
 set-key-operands.md. Capture-name29.1 remains next before admission.
+
+
+29.1 completes ordinary static bare/quoted named capture lowering and explicit
+unsupported shapes. It also confirms an input_text pure function could read caller
+x with ready metadata; the accepted parser-state ban now fences the four named and
+eleven input/cursor readers touched here, retaining explicit caller arguments.
+Mixed named function probes fail/unready and are not successful frame controls.
+Current details belong to static-named-capture-lowering-and-function-fence.md;
+remaining family/context purity is independently owned29.2 before admission.

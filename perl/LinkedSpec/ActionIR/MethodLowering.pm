@@ -1562,6 +1562,37 @@ sub _ordinary_input_cursor_result_source {
  return @{$call->{args}} == 0 && $name =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col)|cursor_(?:pos|line|col|rest|rest_len))\z/o;
 }
 
+sub _user_function_body_is_active {
+ my ($deps) = @_;
+ return ref($deps) eq 'HASH' && ref($deps->{__user_function_call_stack}) eq 'ARRAY'
+  && @{$deps->{__user_function_call_stack}};
+}
+
+sub _lower_static_named_capture_call_expr {
+ my ($node, $deps) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+ my $method = $node->{name} // '';
+ return undef unless $method =~ /\A(?:entry|match)_(?:named|has)\z/o;
+ return _actionir_ast_unsupported_helper_expr($method)
+  if _user_function_body_is_active($deps) || $node->{trailing_block_arg}
+   || ref($node->{args}) ne 'ARRAY' || @{$node->{args}} != 1;
+ my $argument = $node->{args}[0];
+ my $name;
+ if (ref($argument) eq 'HASH' && ($argument->{kind} // '') eq 'string') {
+  $name = $argument->{value};
+ } elsif (ref($argument) eq 'HASH' && defined($argument->{source})
+   && $argument->{source} =~ /\A\w+\z/o) {
+  # Bare names identify captures; they do not read a working binding.
+  $name = $argument->{source};
+ }
+ return _actionir_ast_unsupported_helper_expr($method) unless defined $name;
+ my $key_expr = _actionir_ast_quote_string_source($name, "'");
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_static_named_capture_value_expr',
+  $method, $key_expr,
+ );
+}
+
 sub _user_function_definition_for_name {
  my ($deps, $name) = @_;
  return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -4576,6 +4607,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
 	 my ($node, $opts) = @_;
 	 $opts = {} unless ref($opts) eq 'HASH';
 	 return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+	 my $named_capture = _lower_static_named_capture_call_expr($node, $deps);
+	 return $named_capture if defined($named_capture) && length($named_capture);
 	 my $args = $node->{args} || [];
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
@@ -6121,6 +6154,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $rule_label = ref($deps) eq 'HASH' ? ($deps->{rule_label} // '') : '';
   return 'LinkedSpec::InterMatchGapRuntime::'.$helper
    .'($descr, $STRING, '._runtime_logical_string_literal($rule_label).')';
+ }
+ if ($method_call && $method_call->{method} =~ /\A(?:entry|match)_(?:named|has)\z/o) {
+  return _lower_static_named_capture_call_expr(_parse_method_value_ast_expr($trimmed, $deps), $deps);
+ }
+ if ($method_call && _user_function_body_is_active($deps)
+  && $method_call->{method} =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col|slice)|cursor_(?:pos|line|col|rest|rest_len))\z/o) {
+  return _actionir_ast_unsupported_helper_expr($method_call->{method});
  }
  if ($method_call && $method_call->{method} eq 'input_slice') {
   my $input_slice_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

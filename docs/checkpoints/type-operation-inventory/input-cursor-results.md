@@ -47,7 +47,7 @@ preludes. Native child handler failures may appear in stdout while the outer rul
 returns [null]; independently loaded generated failures distinguish those from a
 successful null result. Existing SESSION7 setpgid EPERM is disclosed, not resolved.
 
-## Other discoveries remain owned
+## Other discoveries at intake
 
 Quoted match_has/entry_has names leave host calls and ready metadata, whereas the
 canonical bare-name spelling works.29.1 owns the static capture-name syntax and
@@ -143,3 +143,15 @@ kinds/lazy/split/signed data, Number indices and actual returned with kinds/scop
 hold; operands skip and scalar counts yield null, bound/flat counts0 remain.
 No getter/parser/source coordinate/bounds/format/callback policy change. All five
 bounded27 children complete;28.1/29.1/declared5.4/full admission stay separately owned.
+
+
+## Current follow-up resolution
+
+28.1 preserves the canonical legacy first-consumer fallbacks and repairs eager
+set_key key/value lowering and snapshots; see set-key-operands.md.29.1 repairs
+ordinary static bare/quoted named capture reads and honest unsupported diagnostics;
+see named-capture-static-names.md. Its confirmed input_text function read violates
+the accepted parser-state ban, so the current four named/eleven input readers now
+retain that fence. Remaining helper-family/context assessment29.2 follows before
+admission. The earlier discovery descriptions above are dated intake, not open
+implementation status for28.1/29.1.
