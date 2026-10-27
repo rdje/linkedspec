@@ -1,0 +1,47 @@
+{
+   "cases" : [
+      {
+         "expected" : [
+            [
+               [
+                  "name"
+               ],
+               {
+                  "head" : "name"
+               },
+               [
+                  "Alpha"
+               ],
+               {
+                  "value" : "Alpha"
+               }
+            ]
+         ],
+         "fresh" : {
+            "error" : null,
+            "loaded" : true,
+            "value" : [
+               null
+            ]
+         },
+         "id" : "producers",
+         "input" : "name=Alpha",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               null
+            ]
+         },
+         "source" : "Top::\n -> Value .push\n LX {return(copy(Top))}\n\nValue:AND\n /(?<head>name)/\n /\\s*=\\s*/\n /(?<value>[A-Za-z_]+)/\n -> Value[1] {separator=match_text()}\n -> Value[2] {return([entry_groups(),entry_map(),match_groups(),match_map()])}\n",
+         "substitution" : "return [do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@IMATCH_LIST]) }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{%IMATCH_HASH}) }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@LMATCH_LIST]) }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{%LMATCH_HASH}) }); @__ls_evaluated_values }]",
+         "substitution_error" : null
+      }
+   ],
+   "scope" : "authored capture-collection source distinctions; no population claim",
+   "variant" : "and"
+}

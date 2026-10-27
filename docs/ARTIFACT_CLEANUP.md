@@ -1,4 +1,4 @@
 # Latest artifact cleanup
 
-- Date: 2026-10-25T19:15:33.371177+00:00
-- Summary: REPO-HYGIENE.23 reclaimed112969338880 allocated Rust bytes after a fresh offline build/four public examples and removed119213043712 allocated history-fixture bytes after lossless custody/restored-reader proof, retaining55259061 archive bytes; caches, protected repositories, Git history and unresolved evidence remain. Owned fixture repair24 follows feature admission17.7; Julia17.5 resumes directly.
+- Date: 2026-10-27T11:55:33.267350+00:00
+- Summary: TYPE-REFERENCE-BOOK.1.2.23.1.5 losslessly compressed its completed capture-collection bootstrap debug trace, verified decompressed SHA-256 equality before removing only the raw duplicate, and retained the compressed trace locally. No broad cleanup; existing deferred artifact repair24 remains owned.

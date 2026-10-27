@@ -169,3 +169,11 @@ on actual PUC5.5.1/LuaJIT2.1.1788460057. Unknown bound counts0/0 stay. luac/load
 pass; no unsafe pattern/full runner/declared5.4 or new schema/evaluator claim.
 All bounded backend children complete;23.1.5 selects the next feature, full23.4
 and declared-host/native-formatting repair owners remain open.
+
+Follow-up23.1.5 finds helper/noncall computed reads still leak through registered
+contextual final blocks: explicit literals retain raw_perl/raw1/unready, while
+attached/parenthesized equivalents carry unsupported value_access/raw0/ready1.
+The earlier role fence removes registered names only. P1 prerequisite25.0 owns
+restoring the complete existing deferred read vocabulary before readonly capture
+source expansion; bounded ordinary support is not full callback admission.
+See [[capture-collection-selection-boundary]] for the public six-form distinction.

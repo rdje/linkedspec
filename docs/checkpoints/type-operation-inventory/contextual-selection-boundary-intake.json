@@ -1,0 +1,89 @@
+{
+   "cases" : [
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "raw_perl"
+         },
+         "form" : "literal",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 0,
+            "raw_perl_dependency_count" : 1,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply({|| return(split(\"a,b\",\",\")[0])}))}",
+         "value" : null
+      },
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "value_access"
+         },
+         "form" : "attached",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply() {return(split(\"a,b\",\",\")[0])})}",
+         "value" : null
+      },
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "value_access"
+         },
+         "form" : "parenthesized",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply({return(split(\"a,b\",\",\")[0])}))}",
+         "value" : null
+      },
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "raw_perl"
+         },
+         "form" : "literal",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 0,
+            "raw_perl_dependency_count" : 1,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply({|| return([\"a\",\"b\"][0])}))}",
+         "value" : null
+      },
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "value_access"
+         },
+         "form" : "attached",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply() {return([\"a\",\"b\"][0])})}",
+         "value" : null
+      },
+      {
+         "detail" : {
+            "code" : "unsupported_codeblock_actionir",
+            "kind" : "value_access"
+         },
+         "form" : "parenthesized",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "source" : "fn apply(callback: codeblock) {return(callback())}\nTop:: I {return(apply({return([\"a\",\"b\"][0])}))}",
+         "value" : null
+      }
+   ],
+   "scope" : "two existing final-body expressions in three admitted callback spellings; no population claim"
+}

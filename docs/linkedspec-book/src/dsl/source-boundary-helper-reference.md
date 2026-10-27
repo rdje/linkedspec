@@ -562,7 +562,7 @@ Top::
  -> Name .push
  LX { return(copy(Top)) }
 
-Name:AND
+Name:
  /(?<head>name)/
  /\s*=\s*/
  /(?<value>[A-Za-z_]+)/
@@ -582,7 +582,7 @@ Name:AND
  }
 ```
 
-Read it this way:
+The parent has already consumed the entry slot; the default child seeks its local matches:
 
 - `entry_*` sees the captured first slot `name` from the match that brought `Name` into the current context.
 - `match_*` sees the current local `Name` match, here the final slot `Alpha` when the input is `name=Alpha`.

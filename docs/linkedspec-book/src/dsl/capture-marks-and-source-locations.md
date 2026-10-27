@@ -1357,14 +1357,14 @@ Use `match_*` when the action wants the local match currently being processed, n
 
 For a simple single-regex rule, the match that *entered* the rule and the rule's *local* match are the same span, so `entry_*` and `match_*` agree — use whichever reads best.
 
-They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it. Consider a top dispatcher that enters an ordered child through the first slot (`name`) and returns from a later local slot (`Alpha`):
+They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it. Consider a top dispatcher that enters a seeking child through the first slot (`name`) and returns from a later local slot (`Alpha`):
 
 ```text
 Top::
  -> Name .push
  LX { return(copy(Top)) }
 
-Name:AND
+Name:
  /(?<head>name)/
  /\s*=\s*/
  /(?<value>[A-Za-z_]+)/

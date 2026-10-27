@@ -1702,7 +1702,7 @@ new start for `right`, and the closing-bracket action records the final right ed
 These helpers read from the **current match** — the regex capture that triggered the current code block.
 
 > **Worked example: entry versus local match.** A no-regex top dispatcher enters an
-> ordered child rule through the first slot (`name`) and the child returns from a
+> seeking child rule through the first slot (`name`) and the child returns from a
 > later local slot (`Alpha`):
 >
 > ```text
@@ -1710,7 +1710,7 @@ These helpers read from the **current match** — the regex capture that trigger
 >  -> value .push
 >  LX { return(copy(demo)) }
 >
-> value:AND
+> value:
 >  /(?<head>name)/
 >  /\s*=\s*/
 >  /(?<value>[A-Za-z_]+)/
@@ -1757,7 +1757,7 @@ These helpers read from the **current match** — the regex capture that trigger
 
 ### `entry_groups()`
 - **Signature**: `entry_groups()`
-- **Returns**: array (flat list of all captured groups, compacted — see `entry_group(index)`)
+- **Returns**: array (flat list of all captured groups, compacted — see `entry_group(index)`). Current Perl bracket composition uses a binding, such as `groups=entry_groups(); groups[-1].uppercase()`, or `copy(entry_groups())[-1].uppercase()`; direct capture-helper postfix reads are being added.
 
 ### `entry_named(name)`
 - **Signature**: `entry_named(name: string)`
@@ -1772,8 +1772,8 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `entry_map()`
 - **Signature**: `entry_map()`
 - **Returns**: hash
-- **Behavior**: All named capture groups as a hash (name → value).
-- **Compatibility**: `entry_named_map()` is a retired alias.
+- **Behavior**: All named capture groups as a hash (name → value). Current Perl bracket composition uses `captures=entry_map(); captures["head"].uppercase()` or `copy(entry_map())["head"].uppercase()`; direct capture-helper postfix reads are being added.
+- **Compatibility**: `entry_named_map()` remains an accepted source-boundary compatibility alias; prefer `entry_map()`.
 
 ### `entry_len()`
 - **Signature**: `entry_len()`
