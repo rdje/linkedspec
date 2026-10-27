@@ -2263,6 +2263,14 @@ sub _actionir_ast_first_unknown_value_call_name {
   foreach my $call (@{$node->{calls} || []}) {
    next unless ref($call) eq 'HASH';
    my $method = $call->{method};
+   if (($method // '') eq 'with') {
+    # A nested computed read still owns its immediate contextual block.
+    # Let the same typed with lowerer validate the body and its helper names.
+    my $normalized = _normalize_contextual_codeblock_call_node($deps, 'receiver', $call, $method);
+    return $method if defined($normalized->{error})
+     || !$normalized->{node}{receiver_trailing_block_arg};
+    next;
+   }
    return $method
     unless _is_array_receiver_value_chain_method($method)
         || _is_hash_receiver_value_chain_method($method)
@@ -5018,10 +5026,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} && !_is_tree_traversal_receiver_method($_->{method} // '') } @$calls) {
-   # Retain this statically owned reader origin through with. Rebuilding host
-   # source loses that origin before the following actual-kind guard runs.
-   if (_ordinary_input_cursor_result_source($receiver)
-    && !(grep { $_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with' } @$calls)) {
+   # Keep normalized with bodies and their returned values in the typed path.
+   # Rebuilding source loses result ownership before Hash continuations lower.
+   if (!(grep { $_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with' } @$calls)) {
     my $value_node = $receiver;
     my @prefix;
     foreach my $call (@$calls) {
@@ -5389,6 +5396,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
    && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
   my $emitted_result_chain = $defined_default_chain || $scalar_string_chain
+   || $receiver_is_with_trailing_block
    || ($receiver->{kind} // '') eq 'value_access'
    || _ordinary_input_cursor_result_source($receiver)
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
+Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 
 ## Latest Completed Slice
 
-P1 ordinary eager with-Hash31 is diagnosed/frozen before production. Five literal/bound/capture/helper/prefixed source twins fail native/fresh with unresolved sorted_values/raw0/unready, while terminal Hash returns correctly with W/outer restoration and Array/Number/Bool/null continuations pass. A separately run no-op coalesce(null) twin yields false/ready, distinguishing missing continuation dispatch from Hash production/scoped execution. Public AST retains with/body/calls; MethodLowering generic receiver source rebuild and missing helper-with actual-result dispatch explain the route. Readable producer, exact source/AST/channels/refinement retained. Frozen shared target covers actual Hash/Array/Bool/String/Number results, effects once/order and outer restoration, with explicit function diagnostic and existing boundary preservation. Independent backend children31.1-.5 own implementation, Perl next; no production/context/API/schema/deferred rights or full admission claim. Source descriptor/JSON/producer syntax/book/history/fast continuity pass; pressure/stale example/Perl registration/declared5.4/full23.4 remain owned; no push.
+Perl ordinary eager with results now retain normalized helper AST and existing actual-kind method dispatch. Five new native/fresh/metadata groups start RED; first candidate repairs scalar guards/scope, nested IO, pure-function OK and specific state fence plus deferred-with11, but signed Hash selection still reports unsupported with. Public AST/substitution method-selection Y/ready versus signed/unready twins identify nested unknown precheck; metadata-normalizing that specific immediate with delegates body/helper validation to its typed owner. Final frozen false/a-b/Y/a,z/2/ABCDE/outer native/fresh/raw0/unresolved0/ready1 and strengthened indexed entry_len function fence pass. Input-reader with-only10 passes; earlier unchanged passing controls are retained without repeating the costly combined run. Specific unknown-source metadata retains raw0/unready/missing_source (three assertions), without executing that unsupported source. No parser/helper/type/IR/schema/deferred/callback/unknown-call rights or full timing/domain/context admission. Working book examples/target/retained RED+candidate/fact/map/roadmap/task/live/resume align; Perl fixture final registration owned23.4.1. Independent Rust31.2 next; other prerequisite/admission owners stay separate; no push.
 
 ## Next Action
 
-Activate Perl31.1 from this clean with-Hash intake boundary. Read frozen target/shared fixture/causal fact/current with+typed value+Hash owners. Add a small native/fresh/Value-metadata RED for frozen Hash result flow and scalar/scope/nested/function diagnostic preservation. Repair generic ordinary normalized helper/receiver with through existing typed actual-result dispatch, preserving exact caller/parser/function scopes and early arity/error/root/callback/deferred/unknown-bound-call/schema rules. Compile/quick new and direct with/input-reader controls, docs/book/commit; then independently Rust31.2. No exhaustive suite/matrix/admission/push; other owners remain scheduled.
+Activate independent Rust with-Hash31.2 from this clean Perl boundary. Read frozen target/shared fixture and current with/Hash/value/source/callback/function owners. Independently run frozen/terminal/default-dispatch/scalar/scope/function controls; do not infer a runtime defect from Perl. Preserve exact current legacy/error/arity/root/unknown/callback/deferred/serialization rights; repair only a confirmed gap through existing owners. Compile/quick native/restored/plan/format controls/docs/book/commit, then Dart31.3. No exhaustive suite/matrix/admission/push; stale example/pressure/Perl registration/declared5.4/full23.4 remain scheduled.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
@@ -29,7 +30,6 @@ Activate Perl31.1 from this clean with-Hash intake boundary. Read frozen target/
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` — All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` — Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` — Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` — Perl/Rust catalogued function-state boundaries repaired; independent Dart assessment next.
 
 ## History
 

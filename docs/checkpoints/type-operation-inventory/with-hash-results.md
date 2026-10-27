@@ -1,7 +1,7 @@
 # Ordinary eager with returned-Hash continuations
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.31; intake31.0; independent backend children31.1-.5.
-Status: Frozen bounded target; no implementation or full admission claim.
+Status: Perl31.1 repaired/targeted-checked; independent other backend children follow. Full admission separate.
 
 Existing helper `with(value){body}` and receiver `source.with(){body}` execute
 immediately, bind scoped `value`, return the block result and restore the outer
@@ -50,3 +50,14 @@ The independently run coalesce(null) twin yields false on native/fresh with
 raw0/unresolved0/ready1, distinguishing missing result dispatch from a failing
 Hash body or sorted_values primitive. Full source/domain/context/portable/generated
 admission stays23.4.
+
+Perl31.1 folds ordinary normalized receiver with through existing helper AST and
+includes helper-with in actual default-result dispatch. The first candidate repairs
+four new groups and deferred-with11 but signed selection retains unsupported with.
+Public method/selected AST twins isolate the nested first-unknown precheck; it now
+recognizes only metadata-normalized immediate receiver with, leaving typed body
+validation/diagnostics with the existing owner. Frozen/native/fresh/ready and an
+indexed specific function fence pass after refinement; input-with-only10 also
+passes. Earlier scalar/nested/pure controls are retained; the costly combined run
+is not repeated without a changed-route reason. No parser/helper/type/AST/schema
+or deferred/callback permission changes. Independent Rust31.2 follows.

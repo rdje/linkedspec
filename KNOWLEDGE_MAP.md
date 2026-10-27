@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1360** facts · **10784** question keys.
+> **1360** facts · **10785** question keys.
 
 ## Questions → fact
 
@@ -10467,6 +10467,7 @@
 - "why does semantic call_signature_accepts accept the wrong argument count" -> [semantic-call-signature-and-container-projection-gaps](docs/knowledge/semantic-call-signature-and-container-projection-gaps.md) · 2026-09-07 · reverify: [3 entries](#semantic-call-signature-and-container-projection-gaps)
 - "why does semantic introspection need a normalized model separate from the descriptor" -> [outward-descriptor-is-not-semantic-wire-model](docs/knowledge/outward-descriptor-is-not-semantic-wire-model.md) · 2026-07-20 · reverify: `rg -n 'dependency_regex_map|handler' capability_conformance/outward_descriptor_contract.json perl/LinkedSpec/CompilerState.pm rust/linkedspec-core/src/descriptor.rs dart/lib/src/compiler/compiled_spec.dart julia/src/compiler/CompiledSpec.jl lua/src/linkedspec/compiled_spec.lua && rg -n 'not the semantic schema|compiled regex objects' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md`
 - "why does set inside a grouped pattern remain executable in an x,y callable" -> [perl-callable-grouped-pattern-membership](docs/knowledge/perl-callable-grouped-pattern-membership.md) · 2026-10-08 · reverify: [3 entries](#perl-callable-grouped-pattern-membership)
+- "why does signed selection after with still report unsupported with" -> [ordinary-with-hash-result-continuation](docs/knowledge/ordinary-with-hash-result-continuation.md) · 2026-10-27 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - "why does slash arithmetic report an unterminated regex" -> [rust-symbol-call-newline-boundary](docs/knowledge/rust-symbol-call-newline-boundary.md) · 2026-09-24 · reverify: `Run the public CLI probes below through tools/project_data_run.sh. Non-slash proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core -p linkedspec-runtime --test symbol_statement_boundaries; Emitted proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test map_leaves_mutation_contract. Division proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test division_statement_boundaries.`
 - "why does slice panic at engine.rs 9776" -> [rust-array-slice-boundary-panics](docs/knowledge/rust-array-slice-boundary-panics.md) · 2026-09-07 · reverify: `rg -n 'let end = .start . n.|items\\[start\\.\\.end\\]|__ls_slice_len >' rust/linkedspec-runtime/src/engine.rs perl/LinkedSpec/ActionIR/MethodLowering.pm`
 - "why does spec.spec use negative lookbehind" -> [spec-regex-feature-contract](docs/knowledge/spec-regex-feature-contract.md) · 2026-09-07
@@ -16507,8 +16508,8 @@ _Native parser acceleration is optional, measured, and derived from the dynamic 
 
 ### ordinary-with-hash-result-continuation
 _Ordinary eager with Hash results need typed continuation dispatch_
-- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights
-- **date:** 2026-10-27 · **status:** bounded target31 frozen; independent backend repairs follow
+- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with
+- **date:** 2026-10-27 · **status:** Perl31.1 repaired; independent backend children follow; full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - **source:** [`docs/knowledge/ordinary-with-hash-result-continuation.md`](docs/knowledge/ordinary-with-hash-result-continuation.md)

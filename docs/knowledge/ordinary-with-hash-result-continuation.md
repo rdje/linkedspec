@@ -8,8 +8,9 @@ answers:
   - why does coalesce null repair a with Hash continuation
   - which task owns ordinary with returned Hash method composition
   - should generic with repair widen deferred or unknown call rights
+  - why does signed selection after with still report unsupported with
 date: 2026-10-27
-status: bounded target31 frozen; independent backend repairs follow
+status: Perl31.1 repaired; independent backend children follow; full admission separate
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -37,3 +38,15 @@ nested scopes, specific parser-state diagnostics inside pure-function with bodie
 and existing arity/error/root/copy/list-splice/mutation/deferred/callback/unknown
 call rights. No new helper/type/signature/AST/schema field. Full source/domain/
 context/backend admission stays23.4 after bounded independent children31.1-.5.
+
+Perl31.1 retains normalized with helper AST and routes returned values through
+existing default-result guards. The first candidate leaves only the frozen signed
+selector failing: outer value_access unknown-call inspection treats its inner
+immediate with as an unknown data method. Method-selection twin yields Y/ready;
+signed twin reports with/unready. Metadata-normalizing that specific receiver
+with before the unknown precheck leaves body/helper validation with its typed
+owner, including a specific entry_len function diagnostic under indexed output.
+Final frozen/native/fresh/metadata and strengthened fence checks pass; earlier
+scalar/nested/pure/deferred11 and input-with10 controls are retained. No parser,
+schema or deferred/unknown-call rights. Evidence packet discloses candidate/final
+scope and no full suite, performance or context admission. Rust31.2 follows.
