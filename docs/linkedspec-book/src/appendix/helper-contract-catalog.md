@@ -715,7 +715,7 @@ dispatch rule.
   initial. Empty arrays run no callbacks; `reduce_leaves(initial)` returns the initial accumulator. `walk_leaves()` and
   `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
   initial accumulator expression. `walk_leaves()` and `map_leaves()` can feed later compatible array receiver links
-  such as `.count()`. `reduce_leaves(...)` is terminal.
+  such as `.count()`. `reduce_leaves(...)` is currently terminal; nest its value in an outer helper, for example `num_add(items.reduce_leaves(0) { return(acc.add(value)) }, 1)`.
 - **Examples**:
   - After `set(items, ["a", ["b", "c"]])`,
     `return(items.map_leaves() { return(cat(join_values("/", path), "=", value)) })`
@@ -1080,7 +1080,7 @@ dispatch rule.
 - **Edge cases**: A non-hash receiver yields `undef` and does not execute the callback. `walk_leaves()` and
   `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
   initial accumulator expression. `walk_leaves()` and `map_leaves()` return hash values and can feed later hash
-  receiver links such as `.count_keys()`. `reduce_leaves(...)` is terminal. These are immediate receiver block
+  receiver links such as `.count_keys()`. `reduce_leaves(...)` is currently terminal; save its result in a binding before calling another method. These are immediate receiver block
   methods, not closures or delayed callbacks.
 - **Examples**:
   - After `set(meta, { "b" : { "y" : "B" }, "a" : "A" })`,

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
+Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 
 ## Latest Completed Slice
 
-Safe Lua20.3 distinguishes ordinary explicit-null width and converts Boolean start/width locally to1/0, preserving global runtime_integer, false, legacy unary/extra arities, module locals and clipped character intervals. Independent PUC5.5.1/LuaJIT shared RED becomes GREEN; shared/legacy native-plan-fresh plus direct eight String groups/source loads pass strict canonical JSON. Omitted/null/Bool/integer/text/fraction/negative controls, SIWC captured one-source effects, eager SIL/SONC, Unicode, identity/typed indices/bridges, rejection/12 malformed controls, both mutation aliases and PUC large-end regression remain correct. All bounded20 reference/repairs are targeted-checked. Book/ledger/facts/map/TYPE/SESSION/live/resume align; book/history/diff/staged continuity guards pass. No full runner/malformed native patterns/declared5.4 or portable admission; remaining feature selection23.1.1 next.
+Selection23.1.1 freezes reduce_leaves accumulator result continuations from canonical helper/role and tree traversal contracts. Perl native/fresh producers retain Number/String/Array/Hash/false/null/empty initial and nested num_add gives7; appended numeric/Array/Hash links return null through explicit terminal classification. Public AST retains callback/add while substitution is return undef. Healthy source capture is[3,SILL,1,[9]], appended cat skips all effects, scalar root skips initial/callback and malformed zero/two initials skip all effects. Appended coalesce bypass leaks raw DSL and is owned within upcoming Perl21.1 result dispatch. Producer/callback/root/copy/order/shape contracts remain; five independent backend leaves21.1-.5 scheduled. Production unchanged, current book keeps terminal guidance with working nested workaround. Probe syntax/book/history/diff/staged continuity guards pass; no coverage/full matrix/admission claim.
 
 ## Next Action
 
-Select next missing ordinary fluent family from retained helper spelling/role inventory and completed bounded result families under23.1.1. Read canonical contract/book, choose a small feature, own it before production and commit focused assessment/implementation. No assumed defect or full suite/matrix; preserve deferred/context/control exclusions and separate23.4 admission.
+Implement Perl21.1 actual reduction accumulator result continuations from frozen reduction-result-continuations.md. Retained public producer/nested/current-terminal/effect/shape controls precede production; preserve dedicated Array/Hash traversal/callback/copy/scope/order and clean wrong-family boundaries. Add small native/fresh result/direct traversal checks, sync docs and commit then Rust21.2. No new free helper/deferred/context expansion or full matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` — All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` — Julia optional substring argument repair20.2 targeted-checked; safe Lua20.3 follows. Complete signature/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.1` — Dart optional substring argument repair20.1 targeted-checked; Julia20.2 then safe Lua20.3 follow. Complete signature/context/portable admission remains open.
@@ -29,7 +30,6 @@ Select next missing ordinary fluent family from retained helper spelling/role in
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` — Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` — Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` — Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.2.18` — Defined-only coalesce receiver/result contract18 frozen; Perl18.1 next under feature-first focused cadence.
 
 ## History
 
