@@ -9585,6 +9585,10 @@ test("defined-only default receiver continuations", function()
   dofile("lua/test/defined_default_receivers_test.lua")
 end)
 
+test("scalar String result receiver continuations", function()
+  dofile("lua/test/scalar_string_results_test.lua")
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

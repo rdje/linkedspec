@@ -187,3 +187,23 @@ SONC-SC-selectedS/eager null/rejection/12 malformed controls, qualified SIL and
 both mutation aliases. Retained diagnostic basic source loads/executes on all
 three routes. No full matrix/portable admission or callback2.8/large-number2.9/
 unsafe large-slice2.10 repair. Safe available Lua19.5 independently assesses next.
+
+## Bounded Lua implementation
+
+19.5 independently confirms healthy producers on safe PUC5.5.1/LuaJIT, then
+isolates textified identities/null operands/typed index errors and[]/SCA/SAC on
+all native/plan/fresh routes. Preserve primitive Number/Boolean identities with
+explicit false-safe returns, guard explicit null operands and extend existing
+scalar/shape lists without new module locals. Other scalarization/free/Unicode/
+selector/regex/callback/format policy remains unchanged.
+
+The same slice body has a concrete PUC arithmetic defect: large_end returns
+[abc,empty,empty], while LuaJIT returns[abc,bc,bc]. Clip width to remaining
+characters before addition and early-return for an out-of-range start. Strict
+canonical JSON across eight retained groups plus direct default/source loads
+passes both hosts/native-plan-fresh, including the new free/receiver large-end
+control, exact shared kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/
+12 malformed effects and both mutation aliases. No full runner/malformed native
+patterns/declared5.4/magnitude matrix or complete portable admission. Both hosts
+preserve null-width-as-omitted/Bool-invalid0 under20. All five bounded String
+implementations are targeted-checked; input-domain reconciliation20 is next.

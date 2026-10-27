@@ -14,7 +14,7 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
 date: 2026-10-27
-status: four scalar String19 backends and five-backend predicates targeted-checked; full admission open
+status: five bounded scalar String19 and predicate backends targeted-checked; domain20/full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
 reverify:
@@ -78,3 +78,11 @@ new54/direct9 strict native/plan/fresh assertions pass, retaining exact kinds/
 indices/Unicode/snapshots/rejection and mutation controls. Existing null-width-
 as-omitted/Bool1 differs from Dart/Perl/Rust combinations and stays under20.
 Details: [[julia-runtime-string-numeric-helpers]]. Safe Lua19.5 follows.
+
+TYPE23.3.19.5 independently repairs Lua identities/null operands/scalar/shape
+flow on safe PUC5.5.1/LuaJIT, preserving false without and/or loss. PUC large-end
+substring wrap is reproduced/fixed by clipping before addition. Strict native/
+plan/fresh eight-group/shared/direct-default/source checks pass both hosts.
+Details: [[lua-string-helper-parity-closeout]]. Width-omitted/Bool0 conventions
+join20; all five bounded String implementations are targeted-checked, with
+input-domain20 next before complete portable admission.

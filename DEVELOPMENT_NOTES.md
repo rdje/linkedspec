@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.19.5 — preserve Lua scalar String kinds and slice bounds
+
+Lua19.5 independently repairs primitive Number/Boolean identities and explicit null replacement/affix operands plus eight-method scalar/shape guards, with no new module locals. Safe PUC5.5.1/LuaJIT strict canonical JSON native/plan/fresh eight-group/shared/direct-default/source checks pass, retaining kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and mutation aliases. A concrete PUC large-width end wrap is reproduced and fixed by clipping before addition; free/receiver regression passes both hosts. Existing width-omitted/Bool0 stays under20. All five bounded String implementations are targeted-checked; book/frozen/facts/task/live align. Declared5.4/full domain/context/portable admission separate; input-domain20 next.
+
 ## 2026-10-27 — TYPE-REFERENCE-BOOK.1.2.23.3.19.4 — preserve Julia scalar String result kinds
 
 Julia19.4 independently repairs textified Number/Boolean identities and explicit null replacement/affix operands, plus eight-method scalar/shape metadata. Registered new54/direct defaults9 native/plan/fresh strict assertions pass after identity-index/[]-SCA-SAC RED, retaining actual kinds/indices/Unicode/SONC-SC-selectedS/eager null/rejection/12 malformed controls and both mutation aliases. Fractional/source-start-null slicing already works; existing width-omitted/Bool1 conventions stay qualified under mandatory20 reconciliation. Retained diagnostic basic routes compile/execute; book/frozen/facts/task/live align. No global int/numeric/selector/Unicode/callback/schema or large-slice2.10 change. Safe Lua19.5 next.

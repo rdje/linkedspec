@@ -1641,22 +1641,27 @@ local function evaluate_pure_string_helper(engine, name, values)
     local delimiter = scalar_string(values[2], true)
     return delimiter == nil and json.array() or split_literal(value, delimiter)
   elseif name == "replace_substr" then
-    if #values < 3 then return json.null end
+    if #values < 3 or values[2] == json.null or values[3] == json.null then return json.null end
     local value = scalar_string(values[1], false)
     local old_value = scalar_string(values[2], true)
     local new_value = scalar_string(values[3], true)
     if value == nil or old_value == nil or new_value == nil then return json.null end
+    if old_value == "" then
+      if type(values[1]) == "number" or type(values[1]) == "boolean" then return values[1] end
+      return value
+    end
     return replace_literal(value, old_value, new_value)
   elseif name == "rm_prefix" or name == "rm_suffix" then
-    if #values < 2 then return json.null end
+    if #values < 2 or values[2] == json.null then return json.null end
     local value = scalar_string(values[1], false)
     local edge = scalar_string(values[2], true)
     if value == nil or edge == nil then return json.null end
+    local unchanged = value
+    if type(values[1]) == "number" or type(values[1]) == "boolean" then unchanged = values[1] end
+    if edge == "" then return unchanged end
     if name == "rm_prefix" and value:sub(1, #edge) == edge then return value:sub(#edge + 1) end
-    if name == "rm_suffix" and (edge == "" or value:sub(-#edge) == edge) then
-      return edge == "" and value or value:sub(1, #value - #edge)
-    end
-    return value
+    if name == "rm_suffix" and value:sub(-#edge) == edge then return value:sub(1, #value - #edge) end
+    return unchanged
   elseif name == "starts_with" then
     return string_predicate(values, function(value, prefix) return value:sub(1, #prefix) == prefix end)
   elseif name == "substr" then
@@ -1666,8 +1671,15 @@ local function evaluate_pure_string_helper(engine, name, values)
     local start = math.max(0, runtime_integer(values[2]) or 0)
     local width
     if #values >= 3 and values[3] ~= json.null then width = math.max(0, runtime_integer(values[3]) or 0) end
+    local char_count = value_length(value)
+    if start >= char_count then return "" end
     local start_byte = matching.char_offset_to_byte_offset(value, start)
-    local end_byte = width and matching.char_offset_to_byte_offset(value, start + width) or #value
+    local end_byte = #value
+    if width ~= nil then
+      -- Clip before addition so a large valid PUC integer cannot wrap.
+      local stop = start + math.min(width, char_count - start)
+      end_byte = matching.char_offset_to_byte_offset(value, stop)
+    end
     return value:sub(start_byte + 1, end_byte)
   elseif name == "trim" then
     local value = scalar_string(first_or_null(values), false)
@@ -3486,6 +3498,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
       if canonical_name == "is_empty" or canonical_name == "is_nonempty" or
           canonical_name == "is_defined" or canonical_name == "is_undefined" or
+          canonical_name == "trim" or canonical_name == "lowercase" or canonical_name == "uppercase" or
+          canonical_name == "replace_substr" or canonical_name == "rm_prefix" or canonical_name == "rm_suffix" or
+          canonical_name == "substr" or canonical_name == "cat" or
           canonical_name == "starts_with" or canonical_name == "ends_with" or
           canonical_name == "contains_substr" or canonical_name == "matches" or
           is_string_comparison(canonical_name) then scalar_result = true end
@@ -3892,16 +3907,19 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     for _, call in ipairs(expr.calls or {}) do
       local name = action_contracts.canonical_action_helper_name(call.method)
       local argument_count = #(call.args or {})
-      if (name == "num_clamp" and argument_count ~= 2) or
-          ((name == "num_add" or name == "num_mul" or name == "coalesce") and argument_count == 0) then
+      if ((name == "num_clamp" or name == "replace_substr") and argument_count ~= 2) or
+          ((name == "num_add" or name == "num_mul" or name == "coalesce" or name == "cat") and argument_count == 0) or
+          (name == "substr" and (argument_count < 1 or argument_count > 2)) then
         return json.null
       end
       if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or
           name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches" or
+          name == "rm_prefix" or name == "rm_suffix" or
           is_string_comparison(name) or scalar_numeric.is_comparison(name) or
           name == "num_sub" or name == "num_div" or name == "num_mod") and
           argument_count ~= 1 then return json.null end
       if (name == "first" or name == "last" or name == "copy" or
+          name == "trim" or name == "lowercase" or name == "uppercase" or
           name == "count" or name == "count_keys" or name == "length" or
           name == "is_empty" or name == "is_nonempty" or name == "is_defined" or name == "is_undefined" or
           name == "num_sum" or name == "num_avg" or name == "num_median" or name == "num_range" or

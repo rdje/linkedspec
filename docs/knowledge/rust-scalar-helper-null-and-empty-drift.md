@@ -137,3 +137,9 @@ replacement/affix operands, retaining healthy source/start/fraction slices.
 Its null-width-as-omitted/Bool1 conventions join the qualified20 inventory;
 [[julia-runtime-string-numeric-helpers]] records63 strict native/plan/fresh/direct
 assertions. Broad61.3 and Julia large-slice2.10 remain separate.
+
+Lua19.5 independently fixes identity/null operand/scalar/shape gaps on both safe
+hosts, and a PUC large-end substring wrap by clipping before addition. Strict
+native/plan/fresh/shared/direct checks pass; qualified width-omitted/Bool0 stays
+under20. [[lua-string-helper-parity-closeout]] retains current details without
+closing full61.3, declared5.4 or other backends' large-slice owners.
