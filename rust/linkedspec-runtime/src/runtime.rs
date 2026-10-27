@@ -2498,6 +2498,10 @@ impl RuntimeContext {
             });
     }
 
+    pub(crate) fn in_user_function(&self) -> bool {
+        !self.user_functions_active.is_empty()
+    }
+
     pub(crate) fn enter_user_function(&mut self, name: &str) -> bool {
         if self
             .user_functions_active

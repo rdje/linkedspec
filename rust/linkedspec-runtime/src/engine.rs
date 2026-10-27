@@ -5715,6 +5715,11 @@ impl Engine {
         self.assert_receiver_write_expr(expr, ctx)?;
         match expr {
             Expr::Call { name, args } => {
+                if ctx.in_user_function() && Self::is_parser_state_helper(name) {
+                    return Err(format!(
+                        "parser-state helper '{name}' is not supported in user functions"
+                    ));
+                }
                 if name == "dispatch_span" {
                     return Err(
                         "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
@@ -6463,6 +6468,63 @@ impl Engine {
             "le" => Some("num_le"),
             _ => None,
         }
+    }
+
+    // Match existing parser-state helper roles, not arbitrary name prefixes.
+    // Arguments are still caller expressions until execute_user_function enters
+    // its local scope; explicit reader values therefore remain valid arguments.
+    fn is_parser_state_helper(name: &str) -> bool {
+        Self::is_mark_capture_helper(name)
+            || matches!(
+                name,
+                "entry_col"
+                    | "entry_end_col"
+                    | "entry_end_line"
+                    | "entry_end_pos"
+                    | "entry_group"
+                    | "entry_groups"
+                    | "entry_has"
+                    | "entry_len"
+                    | "entry_line"
+                    | "entry_map"
+                    | "entry_named"
+                    | "entry_named_map"
+                    | "entry_start_col"
+                    | "entry_start_line"
+                    | "entry_start_pos"
+                    | "entry_text"
+                    | "match_col"
+                    | "match_end_col"
+                    | "match_end_line"
+                    | "match_end_pos"
+                    | "match_group"
+                    | "match_groups"
+                    | "match_has"
+                    | "match_len"
+                    | "match_line"
+                    | "match_map"
+                    | "match_named"
+                    | "match_named_map"
+                    | "match_start_col"
+                    | "match_start_line"
+                    | "match_start_pos"
+                    | "match_text"
+                    | "input_text"
+                    | "input_len"
+                    | "input_end_pos"
+                    | "input_end_line"
+                    | "input_end_col"
+                    | "input_slice"
+                    | "cursor_pos"
+                    | "cursor_line"
+                    | "cursor_col"
+                    | "cursor_rest"
+                    | "cursor_rest_len"
+                    | "save_cursor"
+                    | "restore_cursor"
+                    | "rewind_entry_start"
+                    | "rewind_match_start"
+            )
     }
 
     fn is_mark_capture_helper(name: &str) -> bool {

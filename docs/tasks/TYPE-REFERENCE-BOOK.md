@@ -6083,7 +6083,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1 - fence catalogued parser state in pure functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and repair Rust generic parser-state helper calls inside pure function bodies.
   Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
   Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
@@ -6091,6 +6091,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
   Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
   Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+  Before-production finding: Unchanged1bb93dc8c public runtime regression has three failed groups/one healthy pure-argument group: native entry_groups returns caller name, input_text returns name=Alpha, and a nested function after discarded match_map returns name. Each negative group stops at its first failed route/case; do not claim all loop cases or restored/plan RED. Existing RuntimeContext active-function stack only guards recursion; local-store swapping does not isolate parser registers. Guard statically known existing parser-state calls before eager operands, reusing the current mark/capture semantic list and explicit source/position/cursor compatibility names.
+
+  Activation: clean1bb93dc8c1b1378805672569c175315629207af3; Perl29.2.1 committed/tree clean/brief0.
+  Owned paths: RuntimeContext active-function query and Engine eager-call guard/existing parser-state helper-role predicate; new automatic integration test/retained RED; scoped book/target/fact/map/roadmap/task/live/resume. No parser/registry/IR/compiled-data field change.
+  Verification tier: `focused`
+  Focused checks: Four new native/restored-CompiledSpec/generated-plan groups pass after three first-control RED groups/one healthy positive; direct capture collection four and input/cursor four pass, total12 tests. Rustfmt/offline compile, book/history and fast staged continuity/diff. No full suite/matrix/standalone crate.
+  Canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; independent Dart/Julia/safe Lua children follow.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Rust independently returns caller captures for entry_groups, full input for input_text and caller captures through a nested function after discarded match_map. Three new negative groups fail at their first native route/case; pure explicit-argument group passes. The retained exact RED log does not imply RED for later loop cases or restored/generated routes.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: RuntimeContext tracks active functions for recursion and swaps only local variable stores. Engine helper evaluation continues to read the same parser registers and has no active-function parser-state role guard before eager operands.
+  - [x] **FIX**: Expose a crate-local active-function query and reject known parser-state helper calls at the Engine expression-call entry before arity/operand evaluation. Reuse existing mark/capture helper membership plus explicit existing source/position/cursor spellings and aliases. Preserve exact known-name ownership rather than banning prefixes; explicit caller reader arguments evaluate before the callee enters its local function scope.
+  - [x] **ADDRESSED (verified)**: Four new groups pass native/restored/generated-plan: eight collection/group spellings reject, representative input/position/mark/capture/cursor roles reject, nested/discarded reads reject, and explicit capture arguments/local assignment/nested pure helpers/prefix-named functions and ordinary getter continuations retain exact values/kinds. Existing function error propagation carries a descriptive unsupported parser-state helper failure; no new diagnostic or compiled schema.
+  - [x] **NO REGRESSION**: Direct capture collection four and input/cursor four pass; all selected12 tests pass with offline compile and rustfmt. Getter source/bounds/frame behavior, argument/callback rights, local data operations, arity/recursion and serialization remain under existing owners. Rule-dispatch/private context helpers and exhaustive function/context/portable admission are not implied.
+  - [x] **LOCKSTEP**: Book distinguishes Perl lowering diagnostics from Rust runtime errors and teaches explicit caller data. Target/retained RED/canonical fact/map, roadmap/task/live/resume align; automatic Rust integration discovery needs no runner edit. Independent Dart follows; full23.4/pressure/declared-host owners stay separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2 - reject parser-state helpers in pure Rust functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3`
   Status: `pending`
@@ -6128,7 +6145,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` | `pending` | Independently assess Rust parser-state helper boundaries in pure functions. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` | `pending` | Independently assess Dart parser-state helper boundaries in pure functions. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

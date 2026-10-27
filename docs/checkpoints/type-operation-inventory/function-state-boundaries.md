@@ -1,6 +1,6 @@
 # Pure-function parser-state boundaries
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl child29.2.1 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust children29.2.1-.2 repaired/targeted-checked.
 
 Accepted authority is SPEC-FORMAT-TERSE.4.2.3 and its existing Phase0 entry_text
 negative: pure function bodies cannot implicitly read caller parser state. This
@@ -34,3 +34,19 @@ Next: Rust29.2.2 independently establishes its behavior before any implementatio
 Dart/Julia/safe Lua have separate children. Rule-dispatch/private context helpers,
 deferred callbacks and exhaustive admission remain separately assessed under29.2
 and23.4; this catalog fence does not establish their behavior.
+
+Rust29.2.2 independently observes native caller name/full input/nested name in
+three first-control RED groups; the pure explicit-argument group already passes.
+Each negative group stops on its first native assertion, so later helper cases
+and restored/plan routes are not claimed RED. function-state-rust-intake.json.gz
+retains that actual source command/log; the producer is the tracked Rust test.
+RuntimeContext's existing active-function stack now supplies a crate-local query.
+Engine rejects existing parser-state helper names before eager call arguments,
+using current mark/capture membership plus explicit source/position/cursor names
+and aliases. Fresh local variable stores alone never isolated parser registers.
+Four new groups pass native/restored CompiledSpec/generated plan, including eight
+collection/group helpers, representative input/position/mark/capture/cursor roles,
+nested/discarded calls and healthy explicit values/locals/prefix names. Capture4
+and input/cursor4 direct compatibility tests also pass; rustfmt/offline compile
+pass. No new compiled field, helper, diagnostic schema or full-context admission.
+Independent Dart29.2.3 follows, then Julia/safe Lua.
